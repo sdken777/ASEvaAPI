@@ -1,0 +1,27 @@
+{
+   "version": "0.2.0",
+   "configurations": [
+        {
+            "name": "发布运行",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "发布构建",
+            "program": "${workspaceFolder}/../binx/ASEvaAPIGtkTest",
+            "args": [],
+            "cwd": "${workspaceFolder}/../binx/",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "调试运行",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "调试构建",
+            "program": "${workspaceFolder}/../binx/debug/ASEvaAPIGtkTest",
+            "args": [],
+            "cwd": "${workspaceFolder}/../binx/debug/",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+    ]
+}

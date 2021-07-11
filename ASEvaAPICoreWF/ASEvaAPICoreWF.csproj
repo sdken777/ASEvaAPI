@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>ASEva.CoreWF</RootNamespace>
+    <Configurations>Release</Configurations>
+    <UseWindowsForms>True</UseWindowsForms>
+    <Version>0.0.0.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\bin64</OutputPath>
+    <DocumentationFile>..\bin64\ASEvaAPICoreWF.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ASEvaAPI\ASEvaAPIWindows.csproj" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /Y $(TargetPath) $(TargetDir)..\" />
+  </Target>
+
+</Project>

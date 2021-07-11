@@ -1,0 +1,48 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "原始发布构建",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ASEvaAPILinux.csproj",
+                "-c",
+                "Release",
+                "-o",
+                "${workspaceFolder}/../binx",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "发布文件整理",
+            "command": "rm",
+            "type": "shell",
+            "args": [
+                "-vf",
+                "${workspaceFolder}/../binx/ASEvaAPI.pdb",
+                "${workspaceFolder}/../binx/ASEvaAPI.deps.json"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "发布构建",
+            "command": "cp",
+            "type": "shell",
+            "args": [
+                "-vf",
+                "${workspaceFolder}/../binx/ASEvaAPI.*",
+                "${workspaceFolder}/../bin64/"
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "原始发布构建",
+                "发布文件整理",
+            ],
+            "problemMatcher": []
+        },
+    ]
+}

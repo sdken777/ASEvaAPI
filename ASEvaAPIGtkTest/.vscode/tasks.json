@@ -1,0 +1,75 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "清理",
+            "command": "rm",
+            "type": "shell",
+            "args": [
+                "-r",
+                "${workspaceFolder}/obj",
+                "${workspaceFolder}/bin"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "原始发布构建",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ASEvaAPIGtkTestGtk.csproj",
+                "-c",
+                "Release",
+                "-o",
+                "${workspaceFolder}/../binx",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "原始调试构建",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ASEvaAPIGtkTestGtk.csproj",
+                "-o",
+                "${workspaceFolder}/../binx/debug",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "发布构建",
+            "command": "rm",
+            "type": "shell",
+            "args": [
+                "-vf",
+                "${workspaceFolder}/../binx/ASEvaAPIGtkTest.pdb",
+                "${workspaceFolder}/../binx/ASEvaAPIGtkTest.deps.json",
+                "${workspaceFolder}/../binx/ASEvaAPIGtkTest.runtimeconfig.dev.json"
+            ],
+            "dependsOn": [
+                "原始发布构建"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "调试构建",
+            "command": "rm",
+            "type": "shell",
+            "args": [
+                "-vf",
+                "${workspaceFolder}/../binx/debug/ASEvaAPIGtkTest.deps.json",
+                "${workspaceFolder}/../binx/debug/ASEvaAPIGtkTest.runtimeconfig.dev.json"
+            ],
+            "dependsOn": [
+                "原始调试构建"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

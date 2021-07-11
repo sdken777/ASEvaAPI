@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace ASEva
+{
+    /// <summary>
+    /// (api:app=2.0.0) C++组件定义的基类
+    /// </summary>
+    public class NativeClass
+    {
+        /// <summary>
+        /// [必须实现] 获取C++组件的名称时被调用
+        /// </summary>
+        /// <returns>C++组件名称表，键'en'表示英文，'ch'表示中文</returns>
+        public virtual Dictionary<String, String> GetNativeName() { return null; }
+
+        /// <summary>
+        /// [必须实现] 获取C++组件的类别ID时被调用
+        /// </summary>
+        /// <returns>C++组件类别ID</returns>
+        public virtual String GetNativeClassID() { return null; }
+
+        /// <summary>
+        /// [必须实现] 获取C++模块的类型ID时被调用
+        /// </summary>
+        /// <returns>C++模块类型ID，需要与插件info.txt中的type字段一致</returns>
+        public virtual String GetNativePluginType() { return null; }
+
+        /// <summary>
+        /// [可选实现] 创建配置对象时被调用。若不实现则仅包含一个默认的启用/禁用标志位
+        /// </summary>
+        /// <returns>配置对象</returns>
+        public virtual ModuleConfig CreateConfig() { return null; }
+
+        /// <summary>
+        /// [可选实现] 查询是否包含硬件设备连接功能时被调用
+        /// </summary>
+        /// <returns>是否包含硬件设备连接功能，默认为false</returns>
+        public virtual bool ContainsDeviceConnection() { return false; }
+    }
+}

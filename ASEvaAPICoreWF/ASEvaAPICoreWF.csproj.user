@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="ConfigPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="BaseGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="ChannelSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="CircleIndicator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="ComboSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="DeviceCoordView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="DoubleBufferListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="HistLineGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="ImageShow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="LabelTableGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="MatrixTableGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="NameEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="ScatterPointsGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="TimelineIndicator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="TimelineIndicatorV.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="ValueGraph.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="WindowPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

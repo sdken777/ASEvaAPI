@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>ASEva.Eto</RootNamespace>
+    <AssemblyName>ASEvaAPIEto</AssemblyName>
+    <Configurations>Release</Configurations>
+    <Version>0.0.0.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\bin64</OutputPath>
+    <DocumentationFile>..\bin64\ASEvaAPIEto.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /Y $(TargetPath) $(TargetDir)..\&#xD;&#xA;xcopy /Y $(SolutionDir)bin64\$(TargetName).dll $(SolutionDir)binx\&#xD;&#xA;xcopy /Y $(SolutionDir)bin64\$(TargetName).xml $(SolutionDir)binx\&#xD;&#xA;xcopy /Y $(SolutionDir)bin64\$(TargetName).dll $(SolutionDir)binx\debug\&#xD;&#xA;xcopy /Y $(SolutionDir)bin64\$(TargetName).xml $(SolutionDir)binx\debug\" />
+  </Target>
+
+  <ItemGroup>
+    <Reference Include="ASEvaAPI">
+      <HintPath>..\bin64\ASEvaAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto">
+      <HintPath>..\bin64\Eto.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

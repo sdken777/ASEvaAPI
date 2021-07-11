@@ -1,0 +1,35 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "原始发布构建",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/ASEvaAPIGtk.csproj",
+                "-c",
+                "Release",
+                "-o",
+                "${workspaceFolder}/../binx",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "发布构建",
+            "command": "rm",
+            "type": "shell",
+            "args": [
+                "-vf",
+                "${workspaceFolder}/../binx/ASEvaAPIGtk.pdb",
+                "${workspaceFolder}/../binx/ASEvaAPIGtk.deps.json"
+            ],
+            "dependsOn": [
+                "原始发布构建"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

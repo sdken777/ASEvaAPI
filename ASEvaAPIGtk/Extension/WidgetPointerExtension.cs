@@ -1,0 +1,20 @@
+using System;
+using Gtk;
+
+namespace ASEva.Gtk
+{
+    #pragma warning disable CS0612
+
+    /// <summary>
+    /// (api:gtk=1.0.0) 获取鼠标在控件内坐标的扩展方法
+    /// </summary>
+    public static class WidgetPointerExtension
+    {
+        public static IntPoint GetPointer(this Widget widget)
+        {
+            int x, y;
+            widget.GetPointer(out x, out y);
+            return new IntPoint(x, y);
+        }
+    }
+}
