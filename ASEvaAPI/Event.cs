@@ -18,6 +18,11 @@ namespace ASEva
         public DateTime Base { get; set; }
 
         /// <summary>
+        /// (api:app=2.0.5) 在所属session中的相对时间戳
+        /// </summary>
+        public double? Offset { get; set; }
+
+        /// <summary>
         /// 事件发生时刻（本地时间，精确至毫秒）
         /// </summary>
         public DateTime TimeStampLocal { get; set; }

@@ -849,7 +849,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.0.4
+            version=2.0.5
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -1229,6 +1229,11 @@
         <member name="P:ASEva.EventData.Base">
             <summary>
             所属session ID
+            </summary>
+        </member>
+        <member name="P:ASEva.EventData.Offset">
+            <summary>
+            (api:app=2.0.5) 在所属session中的相对时间戳
             </summary>
         </member>
         <member name="P:ASEva.EventData.TimeStampLocal">
