@@ -547,5 +547,10 @@ namespace ASEva
         {
             return null;
         }
+
+        public double GetCPUTime()
+        {
+            return 0;
+        }
     }
 }

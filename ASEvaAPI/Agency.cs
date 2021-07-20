@@ -123,6 +123,7 @@ namespace ASEva
         AudioDriverInfo[] GetAudioDrivers();
         AudioDeviceInfo[] GetAudioRecordDevices(String driverID);
         AudioDeviceInfo[] GetAudioReplayDevices(String driverID);
+        double GetCPUTime();
     }
 
     /// <summary>
@@ -1491,6 +1492,15 @@ namespace ASEva
         public static AudioDeviceInfo[] GetAudioReplayDevices(String driverID)
         {
             return HandlerLocal.GetAudioReplayDevices(driverID);
+        }
+        
+        /// <summary>
+        /// (api:app=2.0.6) 获取CPU时间
+        /// </summary>
+        /// <returns>CPU时间，单位秒，返回0表示无效</returns>
+        public static double GetCPUTime()
+        {
+            return HandlerLocal.GetCPUTime();
         }
     }
 }
