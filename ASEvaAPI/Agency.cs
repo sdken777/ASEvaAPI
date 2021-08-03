@@ -10,8 +10,10 @@ namespace ASEva
         String GetConfigFilesRoot();
         String GetAppFilesRoot();
         String GetTempFilesRoot();
-        Dictionary<String, String> GetGlobalVariableTable();
-        Dictionary<String, String> GetGlobalParameterTable();
+        void SetGlobalVariable(String key, String value);
+        String GetGlobalVariable(String key, String defaultValue);
+        void SetGlobalParameter(String key, String value);
+        String GetGlobalParameter(String key, String defaultValue);
         String GetGlobalPath(String key);
         void Print(String text);
         void Log(String text, LogLevel level);
@@ -28,14 +30,16 @@ namespace ASEva
         DateTime? GetTimestampUTC(DateTime session, double timeOffset);
         double GetTimeRatioToLocal(DateTime session);
         double GetTimeRatioToUTC(DateTime session);
-        void UpdateSignalRef(String signalID, bool isRemove);
+        void AddSignalReference(String signalID);
+        void RemoveSignalReference(String signalID);
         bool DeleteToRecycleBin(String path);
-        bool IsMessageValid(String messageID);
-        bool IsSignalValid(String signalID);
+        bool IsMessageValid(String messageID, bool optional);
+        bool IsSignalValid(String signalID, bool optional);
         BusMessageInfo GetBusMessageInfo(String busMessageID);
         BusSignalInfo GetBusSignalInfo(String busSignalID);
         BusProtocolFileState GetBusProtocolFileState(BusProtocolFileID fileID);
         String GetChannelAliasName(String key);
+        bool IsInputChannelAvailable(String protocol);
     }
 
     public interface AgencyHandlerLocal
@@ -45,9 +49,12 @@ namespace ASEva
         void SendRawData(String protocol, double[] values, byte[] binary);
         void SendManualTrigger(int channel);
         String GetDataPath();
+        String GetGlobalPublicDataPath();
         String[] GetGenerationList();
         DateTime[] GetSessionList();
         DateTime[] GetFilteredSessionList();
+        String GetSessionPath(DateTime session);
+        String GetSessionPublicDataPath(DateTime session);
         String GetGenerationPath(DateTime session, String generation);
         DateTime[] GetFinishedSessions(String generation);
         void RefreshGenerations();
@@ -64,12 +71,12 @@ namespace ASEva
         ulong GetMemoryCapacity();
         bool IsInternetConnected();
         void CallWebApi(String request, WebApiContext context);
+        void CallWebApiPost(String request, byte[] body, WebApiContext context);
         void CallWebApiPost(String request, byte[] body, WebPostContentType type, WebApiContext context);
         String[] GetManualTriggerNames();
+        String GetManualTriggerName(int index);
         void SetManualTriggerName(int index, String name);
-        bool RunNativeStandaloneTask(String title, String nativeType, String taskName, String config, out String returnValue);
-        bool RunStandaloneTask(String title, Task task, String config);
-        TaskClass GetTaskClass(object caller, String taskClassID);
+        TaskResult RunStandaloneTask(object caller, String taskClassID, String config, out String returnValue);
         void SetGlobalPath(String key, String path);
         BusFileInfo[] GetBusProtocolFilesInfo();
         int? GetBusProtocolFileChannel(String fileID);
@@ -81,18 +88,20 @@ namespace ASEva
         EventInfo GetEventInfo(object eventHandle);
         void RemoveEvent(object eventHandle);
         void SetEventComment(object eventHandle, String comment);
-        bool SwitchMode(String controllerID, ApplicationMode mode);
-        bool StartSession(String controllerID, bool withRecord, double startTimeline, double? interestTarget);
-        bool Stopsession(String controllerID);
+        void StartReplay(double startTimeline, double? interestTarget);
+        bool StartOnline(String controllerName, bool previewOnly);
+        void StopRunning();
+        bool StopRunning(String controllerID);
         double? GetSessionTimeline(DateTime session);
         double? GetSessionLength(DateTime session);
         double GetFilteredSessionListTotalLength();
-        int[] GetGraphIDList(String title);
+        int[] GetGraphIDList();
+        int? GetGraphIDWithTitle(String title);
         String GetGraphTitle(int id);
         String GetSignalName(String signalID, bool fullName);
         bool IsVideoDataAvailable(int channel, uint? tolerance);
         Samples.SpecialCameraType GetVideoSpecialType(int channel);
-        Sample GetVirtualSampleOfTimeline(double timeline);
+        TimeWithSession ConvertTimeIntoSession(double timeline);
         String[] GetSceneIDList();
         Dictionary<String, SceneTitle> GetSceneTitleTable();
         Dictionary<String, bool> GetChannelStatusTable(uint? tolerance);
@@ -192,8 +201,7 @@ namespace ASEva
         /// <returns>语言ID，如en表示英文，ch表示中文等</returns>
         public static String GetAppLanguage()
         {
-            var lang = HandlerGlobal.GetAppLanguage();
-            return lang == null ? "en" : lang;
+            return HandlerGlobal.GetAppLanguage();
         }
 
         /// <summary>
@@ -257,12 +265,7 @@ namespace ASEva
         /// <returns>Session数据的根路径，若不存在返回null</returns>
         public static String GetSessionPath(DateTime session)
         {
-            var dataPath = HandlerLocal.GetDataPath();
-            if (dataPath == null) return null;
-
-            var path = dataPath + Path.DirectorySeparatorChar + session.ToString("yyyyMMdd-HH-mm-ss");
-            if (Directory.Exists(path)) return path;
-            else return null;
+            return HandlerLocal.GetSessionPath(session);
         }
 
         /// <summary>
@@ -272,9 +275,7 @@ namespace ASEva
         /// <returns>Session公共数据的根路径，若不存在返回null</returns>
         public static String GetSessionPublicDataPath(DateTime session)
         {
-            var sessionPath = Agency.GetSessionPath(session);
-            if (sessionPath == null) return null;
-            else return sessionPath + Path.DirectorySeparatorChar + "public";
+            return HandlerLocal.GetSessionPublicDataPath(session);
         }
 
         /// <summary>
@@ -401,8 +402,7 @@ namespace ASEva
         /// <returns>当前全局公共数据目录的路径，若未设置返回null</returns>
         public static String GetGlobalPublicDataPath()
         {
-            var dataPath = HandlerLocal.GetDataPath();
-            return dataPath == null ? null : (dataPath + Path.DirectorySeparatorChar + "public");
+            return HandlerLocal.GetGlobalPublicDataPath();
         }
 
         /// <summary>
@@ -438,14 +438,6 @@ namespace ASEva
         /// <param name="message"> 想要发送的报文信息</param>
         public static void SendBusMessage(BusMessage message)
         {
-            if (message.Channel == 0 || message.Channel > 16) return;
-            if (message.Data == null || message.Data.Length == 0) return;
-
-            if (message.MillisecondInterval != null && message.MillisecondInterval.Value < 10)
-            {
-                message.MillisecondInterval = 10;
-            }
-
             HandlerLocal.SendBusMessage(message);
         }
 
@@ -456,13 +448,6 @@ namespace ASEva
         /// <param name="interval">报文发送周期，单位毫秒（至少为10），若设为null则只发送一次</param>
         public static void SendBusMessage(String messageID, uint? interval)
         {
-            if (messageID == null || messageID.Length == 0) return;
-
-            if (interval != null && interval.Value < 10)
-            {
-                interval = 10;
-            }
-
             HandlerLocal.SendBusMessage(messageID, interval);
         }
 
@@ -474,8 +459,6 @@ namespace ASEva
         /// <param name="binary">二进制数据</param>
         public static void SendRawData(String protocol, double[] values, byte[] binary)
         {
-            if (HandlerGlobal.GetAppMode() != ApplicationMode.Online) return;
-
             HandlerLocal.SendRawData(protocol, values, binary);
         }
 
@@ -485,7 +468,6 @@ namespace ASEva
         /// <param name="channel">手动触发器通道，0~15</param>
         public static void SendManualTrigger(int channel)
         {
-            if (channel < 0 || channel >= 16) return;
             HandlerLocal.SendManualTrigger(channel);
         }
 
@@ -535,8 +517,6 @@ namespace ASEva
         /// <param name="text">想要打印的文本</param>
         public static void Print(String text)
         {
-            if (text == null) text = "(null)";
-            else if (text.Length == 0) text = "(empty)";
             HandlerGlobal.Print(text);
         }
 
@@ -547,7 +527,6 @@ namespace ASEva
         /// <param name="level">清单信息级别</param>
         public static void Log(String text, LogLevel level)
         {
-            if (text == null || text.Length == 0) return;
             HandlerGlobal.Log(text, level);
         }
 
@@ -559,8 +538,7 @@ namespace ASEva
         /// <returns>是否有效</returns>
         public static bool IsMessageValid(String messageID, bool optional)
         {
-            if (messageID == null) return optional;
-            else return HandlerGlobal.IsMessageValid(messageID);
+            return HandlerGlobal.IsMessageValid(messageID, optional);
         }
 
         /// <summary>
@@ -571,8 +549,7 @@ namespace ASEva
         /// <returns>是否有效</returns>
         public static bool IsSignalValid(String signalID, bool optional)
         {
-            if (signalID == null) return optional;
-            else return HandlerGlobal.IsSignalValid(signalID);
+            return HandlerGlobal.IsSignalValid(signalID, optional);
         }
 
         /// <summary>
@@ -582,7 +559,6 @@ namespace ASEva
         /// <returns>信号列表，若该报文不存在则返回null</returns>
         public static String[] GetSignalNamesOfBusMessage(String messageID)
         {
-            if (messageID == null || messageID.Length == 0) return null;
             return HandlerLocal.GetSignalNamesOfBusMessage(messageID);
         }
 
@@ -622,7 +598,7 @@ namespace ASEva
         /// <param name="context">调用上下文。由于本函数为非阻塞，在结束后需要通过该对象在未来时刻获取调用状态和响应字符串</param>
         public static void CallWebApiPost(String request, byte[] body, WebApiContext context)
         {
-            HandlerLocal.CallWebApiPost(request, body, WebPostContentType.WWWFormUrlEncoded, context);
+            HandlerLocal.CallWebApiPost(request, body, context);
         }
 
         /// <summary>
@@ -654,7 +630,7 @@ namespace ASEva
         /// <returns>该通道是否可用</returns>
         public static bool IsInputChannelAvailable(String protocol)
         {
-            return HandlerGlobal.GetChannelAliasName(protocol) != null;
+            return HandlerGlobal.IsInputChannelAvailable(protocol);
         }
 
         /// <summary>
@@ -683,8 +659,7 @@ namespace ASEva
         /// <returns>手动触发器通道的名称，若序号超出范围则返回null</returns>
         public static String GetManualTriggerName(int index)
         {
-            var names = HandlerLocal.GetManualTriggerNames();
-            return index < 0 || index >= names.Length ? null : names[index];
+            return HandlerLocal.GetManualTriggerName(index);
         }
 
         /// <summary>
@@ -694,8 +669,6 @@ namespace ASEva
         /// <param name="name">手动触发器通道的名称，若值为空则忽略</param>
         public static void SetManualTriggerName(int index, String name)
         {
-            if (index < 0 || index >= 16) return;
-            if (name == null || name.Length == 0) return;
             HandlerLocal.SetManualTriggerName(index, name);
         }
 
@@ -705,7 +678,7 @@ namespace ASEva
         /// <param name="signalID">信号ID</param>
         public static void AddSignalReference(String signalID)
         {
-            HandlerGlobal.UpdateSignalRef(signalID, false);
+            HandlerGlobal.AddSignalReference(signalID);
         }
 
         /// <summary>
@@ -714,7 +687,7 @@ namespace ASEva
         /// <param name="signalID">信号ID</param>
         public static void RemoveSignalReference(String signalID)
         {
-            HandlerGlobal.UpdateSignalRef(signalID, true);
+            HandlerGlobal.RemoveSignalReference(signalID);
         }
 
         /// <summary>
@@ -727,63 +700,7 @@ namespace ASEva
         /// <returns>任务运行结果</returns>
         public static TaskResult RunStandaloneTask(object caller, String taskClassID, String config, out String returnValue)
         {
-            returnValue = null;
-            if (HandlerGlobal.GetAppStatus() != ApplicationStatus.Idle) return TaskResult.NotIdle;
-
-            if (taskClassID == null || taskClassID.Length == 0) return TaskResult.TaskClassNotFound;
-
-            var taskClass = HandlerLocal.GetTaskClass(caller, taskClassID);
-            if (taskClass == null) return TaskResult.TaskClassNotFound;
-
-            bool isNative = false;
-            String title = null;
-            try
-            {
-                isNative = taskClass.IsNativeTask();
-                var titles = taskClass.GetTaskTitle();
-                var langID = HandlerGlobal.GetAppLanguage();
-                if (langID == null) langID = "en";
-                if (titles.ContainsKey(langID)) title = titles[langID];
-                else if (titles.ContainsKey("en")) title = titles["en"];
-            }
-            catch (Exception) { return TaskResult.TaskInitFailed; }
-            if (title == null || title.Length == 0) return TaskResult.TaskInitFailed;
-
-            if (isNative)
-            {
-                String nativeType = null;
-                String taskName = null;
-                try
-                {
-                    nativeType = taskClass.GetNativePluginType();
-                    taskName = taskClass.GetNativeTaskName();
-                }
-                catch (Exception) { return TaskResult.TaskInitFailed; }
-                if (nativeType == null || nativeType.Length == 0 ||
-                    taskName == null || taskName.Length == 0) return TaskResult.TaskInitFailed;
-
-                return HandlerLocal.RunNativeStandaloneTask(title, nativeType, taskName, config, out returnValue) ? TaskResult.RunOK : TaskResult.RunFailed;
-            }
-            else
-            {
-                Task task;
-                try
-                {
-                    task = taskClass.CreateTask();
-                }
-                catch (Exception) { return TaskResult.TaskInitFailed; }
-                if (task == null) return TaskResult.TaskInitFailed;
-
-                var result = HandlerLocal.RunStandaloneTask(title, task, config) ? TaskResult.RunOK : TaskResult.RunFailed;
-
-                try
-                {
-                    returnValue = task.GetReturnValue();
-                }
-                catch (Exception) { }
-
-                return result;
-            }
+            return HandlerLocal.RunStandaloneTask(caller, taskClassID, config, out returnValue);
         }
 
         /// <summary>
@@ -821,13 +738,7 @@ namespace ASEva
         /// <param name="value">全局变量value，若为null则忽略</param>
         public static void SetGlobalVariable(String key, String value)
         {
-            if (key == null || key.Length == 0) return;
-            if (value == null) return;
-            var table = HandlerGlobal.GetGlobalVariableTable();
-            lock (table)
-            {
-                table[key] = value;
-            }
+            HandlerGlobal.SetGlobalVariable(key, value);
         }
 
         /// <summary>
@@ -838,13 +749,7 @@ namespace ASEva
         /// <returns>全局变量value</returns>
         public static String GetGlobalVariable(String key, String defaultValue)
         {
-            if (key == null || key.Length == 0) return defaultValue;
-            var table = HandlerGlobal.GetGlobalVariableTable();
-            lock (table)
-            {
-                if (!table.ContainsKey(key)) return defaultValue;
-                else return table[key];
-            }
+            return HandlerGlobal.GetGlobalVariable(key, defaultValue);
         }
 
         /// <summary>
@@ -854,13 +759,7 @@ namespace ASEva
         /// <param name="value">全局参数value，若为null则忽略</param>
         public static void SetGlobalParameter(String key, String value)
         {
-            if (key == null || key.Length == 0) return;
-            if (value == null) return;
-            var table = HandlerGlobal.GetGlobalParameterTable();
-            lock (table)
-            {
-                table[key] = value;
-            }
+            HandlerGlobal.SetGlobalParameter(key, value);
         }
 
         /// <summary>
@@ -871,13 +770,7 @@ namespace ASEva
         /// <returns>全局参数value</returns>
         public static String GetGlobalParameter(String key, String defaultValue)
         {
-            if (key == null || key.Length == 0) return defaultValue;
-            var table = HandlerGlobal.GetGlobalParameterTable();
-            lock (table)
-            {
-                if (!table.ContainsKey(key)) return defaultValue;
-                else return table[key];
-            }
+            return HandlerGlobal.GetGlobalParameter(key, defaultValue);
         }
 
         /// <summary>
@@ -887,7 +780,6 @@ namespace ASEva
         /// <returns>以分号分割的全局路径value（仅返回存在的部分），若key为null、""则返回null</returns>
         public static String GetGlobalPath(String key)
         {
-            if (key == null || key.Length == 0) return null;
             return HandlerGlobal.GetGlobalPath(key);
         }
 
@@ -898,7 +790,6 @@ namespace ASEva
         /// <param name="path">以分号分割的全局路径value，不存在的部分将被忽略</param>
         public static void SetGlobalPath(String key, String path)
         {
-            if (key == null || key.Length == 0) return;
             HandlerLocal.SetGlobalPath(key, path);
         }
 
@@ -1017,10 +908,7 @@ namespace ASEva
         /// <param name="interestTarget">目标兴趣点，单位秒（空表示不设置兴趣点）</param>
         public static void StartReplay(double startTimeline, double? interestTarget)
         {
-            if (HandlerLocal.SwitchMode(null, ApplicationMode.Replay))
-            {
-                HandlerLocal.StartSession(null, false, startTimeline, interestTarget);
-            }
+            HandlerLocal.StartReplay(startTimeline, interestTarget);
         }
 
         /// <summary>
@@ -1031,11 +919,7 @@ namespace ASEva
         /// <returns>是否成功</returns>
         public static bool StartOnline(String controllerName, bool previewOnly)
         {
-            if (HandlerLocal.SwitchMode(controllerName, ApplicationMode.Online))
-            {
-                return HandlerLocal.StartSession(controllerName, !previewOnly, 0, null);
-            }
-            else return false;
+            return HandlerLocal.StartOnline(controllerName, previewOnly);
         }
 
         /// <summary>
@@ -1043,7 +927,7 @@ namespace ASEva
         /// </summary>
         public static void StopRunning()
         {
-            HandlerLocal.Stopsession(null);
+            HandlerLocal.StopRunning();
         }
 
         /// <summary>
@@ -1053,7 +937,7 @@ namespace ASEva
         /// <returns>是否成功</returns>
         public static bool StopRunning(String controllerName)
         {
-            return HandlerLocal.Stopsession(controllerName);
+            return HandlerLocal.StopRunning(controllerName);
         }
 
         /// <summary>
@@ -1082,7 +966,7 @@ namespace ASEva
         /// <returns>图表报告ID列表</returns>
         public static int[] GetGraphIDList()
         {
-            return HandlerLocal.GetGraphIDList(null);
+            return HandlerLocal.GetGraphIDList();
         }
 
         /// <summary>
@@ -1092,9 +976,7 @@ namespace ASEva
         /// <returns>图表报告ID</returns>
         public static int? GetGraphIDWithTitle(String title)
         {
-            if (String.IsNullOrEmpty(title)) return null;
-            var list = HandlerLocal.GetGraphIDList(title);
-            return list == null || list.Length != 1 ? null : (int?)list[0];
+            return HandlerLocal.GetGraphIDWithTitle(title);
         }
 
         /// <summary>
@@ -1156,14 +1038,7 @@ namespace ASEva
         /// <returns>在session中的时间，若超出范围则返回null</returns>
         public static TimeWithSession ConvertTimeIntoSession(double timeline)
         {
-            var vs = HandlerLocal.GetVirtualSampleOfTimeline(timeline);
-            if (vs == null) return null;
-
-            return new TimeWithSession()
-            {
-                Time = vs.Offset,
-                Session = vs.Base,
-            };
+            return  HandlerLocal.ConvertTimeIntoSession(timeline);
         }
 
         /// <summary>

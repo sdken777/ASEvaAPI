@@ -21,16 +21,6 @@ namespace ASEva
             return null;
         }
 
-        public Dictionary<string, string> GetGlobalVariableTable()
-        {
-            return null;
-        }
-
-        public Dictionary<string, string> GetGlobalParameterTable()
-        {
-            return null;
-        }
-
         public string GetGlobalPath(string key)
         {
             return null;
@@ -108,21 +98,17 @@ namespace ASEva
             return 0;
         }
 
-        public void UpdateSignalRef(string signalID, bool isRemove)
-        {
-        }
-
         public bool DeleteToRecycleBin(string path)
         {
             return false;
         }
 
-        public bool IsMessageValid(string messageID)
+        public bool IsMessageValid(string messageID, bool optional)
         {
             return false;
         }
 
-        public bool IsSignalValid(string signalID)
+        public bool IsSignalValid(string signalID, bool optional)
         {
             return false;
         }
@@ -145,6 +131,39 @@ namespace ASEva
         public string GetChannelAliasName(string key)
         {
             return null;
+        }
+
+        public void SetGlobalVariable(String key, String value)
+        {
+
+        }
+
+        public String GetGlobalVariable(String key, String defaultValue)
+        {
+            return null;
+        }
+
+        public void SetGlobalParameter(String key, String value)
+        {
+
+        }
+
+        public String GetGlobalParameter(String key, String defaultValue)
+        {
+            return null;
+        }
+
+        public void AddSignalReference(String signalID)
+        {
+        }
+
+        public void RemoveSignalReference(String signalID)
+        {
+        }
+
+        public bool IsInputChannelAvailable(String protocol)
+        {
+            return false;
         }
     }
 
@@ -241,26 +260,6 @@ namespace ASEva
         {
         }
 
-        public void UpdateSignalRef(string signalID, bool isRemove)
-        {
-        }
-
-        public bool RunNativeStandaloneTask(string title, string nativeType, string taskName, string config, out string returnValue)
-        {
-            returnValue = null;
-            return false;
-        }
-
-        public bool RunStandaloneTask(string title, Task task, string config)
-        {
-            return false;
-        }
-
-        public TaskClass GetTaskClass(object caller, string taskClassID)
-        {
-            return null;
-        }
-
         public DateTime[] GetFilteredSessionList()
         {
             return null;
@@ -318,21 +317,6 @@ namespace ASEva
         {
         }
 
-        public bool SwitchMode(String controllerID, ApplicationMode mode)
-        {
-            return false;
-        }
-
-        public bool StartSession(String controllerID, bool withRecord, double startTimeline, double? interestTarget)
-        {
-            return false;
-        }
-
-        public bool Stopsession(String controllerID)
-        {
-            return false;
-        }
-
         public double? GetSessionTimeline(DateTime session)
         {
             return null;
@@ -343,7 +327,7 @@ namespace ASEva
             return null;
         }
 
-        public int[] GetGraphIDList(string title)
+        public int[] GetGraphIDList()
         {
             return null;
         }
@@ -361,11 +345,6 @@ namespace ASEva
         public bool IsVideoDataAvailable(int channel, uint? tolerance)
         {
             return false;
-        }
-
-        public Sample GetVirtualSampleOfTimeline(double timeline)
-        {
-            return null;
         }
 
         public BusMessageInfo GetBusMessageInfo(int channel, uint localID)
@@ -396,6 +375,10 @@ namespace ASEva
         public string GetCurrentSessionGUID()
         {
             return null;
+        }
+
+        public void CallWebApiPost(String request, byte[] body, WebApiContext context)
+        {
         }
 
         public void CallWebApiPost(string request, byte[] body, WebPostContentType type, WebApiContext context)
@@ -551,6 +534,60 @@ namespace ASEva
         public double GetCPUTime()
         {
             return 0;
+        }
+
+        public String GetSessionPath(DateTime session)
+        {
+            return null;
+        }
+
+        public String GetSessionPublicDataPath(DateTime session)
+        {
+            return null;
+        }
+
+        public String GetGlobalPublicDataPath()
+        {
+            return null;
+        }
+
+        public String GetManualTriggerName(int index)
+        {
+            return null;
+        }
+
+        public TaskResult RunStandaloneTask(object caller, String taskClassID, String config, out String returnValue)
+        {
+            returnValue = null;
+            return TaskResult.TaskInitFailed;
+        }
+
+        public void StartReplay(double startTimeline, double? interestTarget)
+        {
+        }
+
+        public bool StartOnline(String controllerName, bool previewOnly)
+        {
+            return false;
+        }
+
+        public void StopRunning()
+        {
+        }
+
+        public bool StopRunning(String controllerID)
+        {
+            return false;
+        }
+
+        public int? GetGraphIDWithTitle(String title)
+        {
+            return null;
+        }
+
+        public TimeWithSession ConvertTimeIntoSession(double timeline)
+        {
+            return null;
         }
     }
 }
