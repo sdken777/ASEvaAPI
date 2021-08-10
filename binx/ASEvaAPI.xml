@@ -855,7 +855,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.0.7
+            version=2.0.8
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4217,6 +4217,13 @@
             </summary>
             <param name="name">资源名称</param>
             <returns>资源数据，若找不到资源则返回null</returns>
+        </member>
+        <member name="M:ASEva.Utility.ResourceLoader.LoadText(System.String)">
+            <summary>
+            (api:app=2.0.8) 按指定名称读取资源，并转为文本
+            </summary>
+            <param name="name">资源名称</param>
+            <returns>文本数据，若找不到资源则返回null</returns>
         </member>
         <member name="T:ASEva.Utility.SampleCsvLoader">
             <summary>
