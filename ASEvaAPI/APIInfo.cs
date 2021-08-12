@@ -7,7 +7,7 @@
  * \n
  * 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph \n
  * \n
- * 本文档对应API版本：2.0.8
+ * 本文档对应API版本：2.0.9
  */
 
 using System;
@@ -16,7 +16,7 @@ using System.Reflection;
 namespace ASEva
 {
     /// <summary>
-    /// version=2.0.8
+    /// version=2.0.9
     /// </summary>
     public class APIInfo
     {
@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 0, 8, 0); // 新增ResourceLoader.LoadText
+            return new Version(2, 0, 9, 0); // 新增PointCloudSample.ByteValues/ShortValues/FloatValues
         }
 
         /// <summary>
