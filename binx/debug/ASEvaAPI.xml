@@ -847,9 +847,15 @@
             <param name="driverID">音频驱动ID</param>
             <returns>音频回放设备信息列表，若无该驱动或驱动下无回放设备则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetCPUTime">
+            <summary>
+            (api:app=2.0.6) 获取CPU时间
+            </summary>
+            <returns>CPU时间，单位秒，返回0表示无效</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.0.5
+            version=2.0.9
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -869,14 +875,38 @@
             (api:app=2.0.0) 在音频采集到数据后调用此接口
             </summary>
         </member>
+        <member name="M:ASEva.WaveReceiver.OnData(System.Int16[],System.Double)">
+            <summary>
+            数据回调函数
+            </summary>
+            <param name="samples">音频样本数据</param>
+            <param name="cpuSyncTime">样本数据的CPU时间，单位秒，可通过 ASEva.Agency.GetCPUTime 获得</param>
+        </member>
         <member name="T:ASEva.WaveProvider">
             <summary>
             (api:app=2.0.0) 在音频回放需要数据时调用此接口
             </summary>
         </member>
+        <member name="M:ASEva.WaveProvider.GetData(System.Int32)">
+            <summary>
+            数据回调函数
+            </summary>
+            <param name="sampleCount">需要的样本数</param>
+            <returns>返回音频数据样本</returns>
+        </member>
         <member name="T:ASEva.AudioDeviceInfo">
             <summary>
             (api:app=2.0.0) 音频设备信息
+            </summary>
+        </member>
+        <member name="P:ASEva.AudioDeviceInfo.DeviceID">
+            <summary>
+            设备ID
+            </summary>
+        </member>
+        <member name="P:ASEva.AudioDeviceInfo.DeviceName">
+            <summary>
+            设备名称
             </summary>
         </member>
         <member name="T:ASEva.AudioRecorder">
@@ -884,14 +914,64 @@
             (api:app=2.0.0) 音频采集设备接口
             </summary>
         </member>
+        <member name="M:ASEva.AudioRecorder.GetRecordDevices">
+            <summary>
+            获取设备列表
+            </summary>
+            <returns>设备列表</returns>
+        </member>
+        <member name="M:ASEva.AudioRecorder.StartRecordDevice(System.String,ASEva.WaveReceiver)">
+            <summary>
+            启动音频采集设备
+            </summary>
+            <param name="deviceID">设备ID</param>
+            <param name="receiver">回调接口</param>
+            <returns>设备对象，若启动失败返回null</returns>
+        </member>
+        <member name="M:ASEva.AudioRecorder.StopRecordDevice(System.Object)">
+            <summary>
+            停止音频采集设备
+            </summary>
+            <param name="device">设备对象</param>
+        </member>
         <member name="T:ASEva.AudioReplayer">
             <summary>
             (api:app=2.0.0) 音频回放设备接口
             </summary>
         </member>
+        <member name="M:ASEva.AudioReplayer.GetReplayDevices">
+            <summary>
+            获取设备列表
+            </summary>
+            <returns>设备列表</returns>
+        </member>
+        <member name="M:ASEva.AudioReplayer.StartReplayDevice(System.String,ASEva.WaveProvider)">
+            <summary>
+            启动音频回放设备
+            </summary>
+            <param name="deviceID">设备ID</param>
+            <param name="provider">回调接口</param>
+            <returns>设备对象，若启动失败返回null</returns>
+        </member>
+        <member name="M:ASEva.AudioReplayer.StopReplayDevice(System.Object)">
+            <summary>
+            停止音频回放设备
+            </summary>
+            <param name="device">设备对象</param>
+        </member>
         <member name="T:ASEva.AudioDriverInfo">
             <summary>
             (api:app=2.0.0) 音频驱动信息
+            </summary>
+        </member>
+        <member name="P:ASEva.AudioDriverInfo.DriverID">
+            <summary>
+            设备ID
+            </summary>
+        </member>
+        <member name="P:ASEva.AudioDriverInfo.DriverName">
+            <summary>
+            设备名称
             </summary>
         </member>
         <member name="T:ASEva.ColorRGBA">
@@ -2799,6 +2879,21 @@
             数组长度N，值为镜面ID
             </summary>
         </member>
+        <member name="P:ASEva.Samples.PointCloudSample.ByteValues">
+            <summary>
+            (api:app=2.0.9) byte字段数组的表，键为字段ID（具体请参考点云数据格式文档），值为长度为N的数组，存放该字段ID对应byte数值
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.PointCloudSample.ShortValues">
+            <summary>
+            (api:app=2.0.9) short字段数组的表，键为字段ID（具体请参考点云数据格式文档），值为长度为N的数组，存放该字段ID对应short数值
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.PointCloudSample.FloatValues">
+            <summary>
+            (api:app=2.0.9) float字段数组的表，键为字段ID（具体请参考点云数据格式文档），值为长度为N的数组，存放该字段ID对应float数值
+            </summary>
+        </member>
         <member name="T:ASEva.Samples.SignalSample">
             <summary>
             (api:app=2.0.0) 数据处理组件输出的信号样本
@@ -4137,6 +4232,13 @@
             </summary>
             <param name="name">资源名称</param>
             <returns>资源数据，若找不到资源则返回null</returns>
+        </member>
+        <member name="M:ASEva.Utility.ResourceLoader.LoadText(System.String)">
+            <summary>
+            (api:app=2.0.8) 按指定名称读取资源，并转为文本
+            </summary>
+            <param name="name">资源名称</param>
+            <returns>文本数据，若找不到资源则返回null</returns>
         </member>
         <member name="T:ASEva.Utility.SampleCsvLoader">
             <summary>

@@ -71,7 +71,7 @@ namespace ASEva.Utility
         {
             try
             {
-                var stream = new FileStream(file, FileMode.Open);
+                var stream = new FileStream(file, FileMode.Open, FileAccess.Read);
                 var serializer = new XmlSerializer(objectType);
                 var data = serializer.Deserialize(stream);
                 stream.Close();
@@ -140,7 +140,7 @@ namespace ASEva.Utility
         {
             try
             {
-                var stream = new FileStream(file, FileMode.Open);
+                var stream = new FileStream(file, FileMode.Open, FileAccess.Read);
                 var serializer = new DataContractJsonSerializer(objectType);
                 var data = serializer.ReadObject(stream);
                 stream.Close();

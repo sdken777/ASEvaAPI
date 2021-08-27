@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 0, 9, 0); // 新增PointCloudSample.ByteValues/ShortValues/FloatValues
+            return new Version(2, 0, 9, 1); // 修正FileStream读取文件权限
         }
 
         /// <summary>

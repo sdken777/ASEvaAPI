@@ -19,7 +19,7 @@ namespace ASEva.Utility
         {
             try
             {
-                var file = new FileStream(fileName, FileMode.Open);
+                var file = new FileStream(fileName, FileMode.Open, FileAccess.Read);
                 var md5 = new MD5CryptoServiceProvider();
                 var retVal = md5.ComputeHash(file);
                 file.Close();
