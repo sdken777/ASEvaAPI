@@ -2,45 +2,117 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "原始发布构建",
-            "command": "dotnet",
             "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/ASEvaAPILinux.csproj",
-                "-c",
-                "Release",
-                "-o",
-                "${workspaceFolder}/../binx",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "发布文件整理",
+            "label": "(internal)清理",
             "command": "rm",
-            "type": "shell",
             "args": [
-                "-vf",
-                "${workspaceFolder}/../binx/ASEvaAPI.pdb",
-                "${workspaceFolder}/../binx/ASEvaAPI.deps.json"
+                "-rf",
+                "./obj",
+                "./bin"
             ],
             "problemMatcher": []
         },
         {
-            "label": "发布构建",
-            "command": "cp",
-            "type": "shell",
+            "type": "process",
+            "label": "(internal)发布构建",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPI.csproj",
+                "-c",
+                "Release",
+                "-o",
+                "../bin64",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process",
+            "label": "(internal)移除发布构建冗余文件",
+            "command": "rm",
             "args": [
                 "-vf",
-                "${workspaceFolder}/../binx/ASEvaAPI.*",
-                "${workspaceFolder}/../bin64/"
+                "../bin64/ASEvaAPI.pdb",
+                "../bin64/ASEvaAPI.deps.json"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)跨平台创建bin文件夹",
+            "command": "mkdir",
+            "args": [
+                "-p",
+                "../binx",
+                "../binxa"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)跨平台拷贝dll至binx",
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../bin64/ASEvaAPI.dll",
+                "../binx/"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)跨平台拷贝dll至binxa",
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../bin64/ASEvaAPI.dll",
+                "../binxa/"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)跨平台拷贝xml至binx",
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../bin64/ASEvaAPI.xml",
+                "../binx/"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)跨平台拷贝xml至binxa",
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../bin64/ASEvaAPI.xml",
+                "../binxa/"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "发布构建并跨平台拷贝",
+            "command": "echo",
+            "args": [
+                "Done.",
             ],
             "dependsOrder": "sequence",
             "dependsOn": [
-                "原始发布构建",
-                "发布文件整理",
+                "(internal)发布构建",
+                "(internal)移除发布构建冗余文件",
+                "(internal)跨平台创建bin文件夹",
+                "(internal)跨平台拷贝dll至binx",
+                "(internal)跨平台拷贝dll至binxa",
+                "(internal)跨平台拷贝xml至binx",
+                "(internal)跨平台拷贝xml至binxa",
             ],
             "problemMatcher": []
         },

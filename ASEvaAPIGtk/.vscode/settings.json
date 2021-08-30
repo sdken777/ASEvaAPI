@@ -3,7 +3,6 @@
         "obj": true,
         "bin*": true,
         "Properties": true,
-        "*Winform*": true,
         "*.ico": true,
-    }
+    },
 }

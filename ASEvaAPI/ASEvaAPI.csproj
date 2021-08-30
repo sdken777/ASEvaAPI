@@ -5,12 +5,9 @@
     <AssemblyName>ASEvaAPI</AssemblyName>
     <Version>0.0.0.0</Version>
     <NoWarn>1701;1702;1591</NoWarn>
+    <DocumentationFile>..\bin64\ASEvaAPI.xml</DocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>..\binx\ASEvaAPI.xml</DocumentationFile>
-  </PropertyGroup>
-  
   <ItemGroup>
     <PackageReference Include="System.Resources.Extensions" Version="5.0" />
   </ItemGroup>

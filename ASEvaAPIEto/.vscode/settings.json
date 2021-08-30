@@ -4,6 +4,5 @@
         "bin*": true,
         "Properties": true,
         "*.ico": true,
-        "*Windows.*": true,
     },
 }

@@ -2,34 +2,94 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "原始发布构建",
-            "command": "dotnet",
             "type": "process",
+            "label": "(internal)清理",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "./obj",
+                "./bin"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)发布构建",
+            "command": "dotnet",
             "args": [
                 "build",
-                "${workspaceFolder}/ASEvaAPIGtk.csproj",
+                "./ASEvaAPIGtk.csproj",
                 "-c",
                 "Release",
                 "-o",
-                "${workspaceFolder}/../binx",
+                "../binx",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
             ],
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "发布构建",
+            "type": "process",
+            "label": "(internal)移除发布构建冗余文件",
             "command": "rm",
-            "type": "shell",
             "args": [
                 "-vf",
-                "${workspaceFolder}/../binx/ASEvaAPIGtk.pdb",
-                "${workspaceFolder}/../binx/ASEvaAPIGtk.deps.json"
-            ],
-            "dependsOn": [
-                "原始发布构建"
+                "../binx/ASEvaAPIGtk.pdb",
+                "../binx/ASEvaAPIGtk.deps.json"
             ],
             "problemMatcher": []
-        }
+        },
+        {
+            "type": "process",
+            "label": "(internal)跨平台创建bin文件夹",
+            "command": "mkdir",
+            "args": [
+                "-p",
+                "../binxa"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)跨平台拷贝dll至binxa",
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../binx/ASEvaAPIGtk.dll",
+                "../binxa/"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)跨平台拷贝xml至binxa",
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../binx/ASEvaAPIGtk.xml",
+                "../binxa/"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "发布构建并跨平台拷贝",
+            "command": "echo",
+            "args": [
+                "Done.",
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "(internal)发布构建",
+                "(internal)移除发布构建冗余文件",
+                "(internal)跨平台创建bin文件夹",
+                "(internal)跨平台拷贝dll至binxa",
+                "(internal)跨平台拷贝xml至binxa",
+            ],
+            "problemMatcher": []
+        },
     ]
 }
