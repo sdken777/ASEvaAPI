@@ -4516,6 +4516,28 @@
             (api:app=2.1.0) 多语言文本资源
             </summary>
         </member>
+        <member name="M:ASEva.Utility.TextResource.Load(System.String,System.String)">
+            <summary>
+            加载多语言文本资源
+            </summary>
+            <param name="xmlFileName">资源文件名</param>
+            <param name="languageCode">语言代号，en表示英文，ch表示中文，null则通过 ASEva.Agency.GetAppLanguage 获取</param>
+            <returns>多语言文本资源对象</returns>
+        </member>
+        <member name="P:ASEva.Utility.TextResource.Item(System.String)">
+            <summary>
+            获取指定ID对应的文本
+            </summary>
+            <value>指定ID对应的文本</value>
+        </member>
+        <member name="M:ASEva.Utility.TextResource.Format(System.String,System.Object[])">
+            <summary>
+            以指定ID对应的文本作为格式描述，输出文本
+            </summary>
+            <param name="id">指定ID</param>
+            <param name="args">格式描述中的参数值</param>
+            <returns>输出文本</returns>
+        </member>
         <member name="T:ASEva.Utility.TimeoutWebClient">
             <summary>
             (api:app=2.0.0) 带Timeout属性的WebClient

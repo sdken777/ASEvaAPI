@@ -12,7 +12,13 @@ namespace ASEva.Utility
     /// </summary>
     public class TextResource
     {
-        public static TextResource Load(String xmlFileName)
+        /// <summary>
+        /// 加载多语言文本资源
+        /// </summary>
+        /// <param name="xmlFileName">资源文件名</param>
+        /// <param name="languageCode">语言代号，en表示英文，ch表示中文，null则通过 ASEva.Agency.GetAppLanguage 获取</param>
+        /// <returns>多语言文本资源对象</returns>
+        public static TextResource Load(String xmlFileName, String languageCode = null)
         {
             var instream = Assembly.GetCallingAssembly().GetManifestResourceStream(xmlFileName);
             if (instream == null) return null;
@@ -26,7 +32,7 @@ namespace ASEva.Utility
 
             var langCodes = new List<String>();
 
-            var lang = Agency.GetAppLanguage();
+            var lang = String.IsNullOrEmpty(languageCode) ? Agency.GetAppLanguage() : languageCode;
             if (lang == null || lang == "en")
             {
                 langCodes.Add("en");
@@ -72,6 +78,10 @@ namespace ASEva.Utility
             dict = new Dictionary<string, string>();
         }
 
+        /// <summary>
+        /// 获取指定ID对应的文本
+        /// </summary>
+        /// <value>指定ID对应的文本</value>
         public String this[String id]
         {
             get
@@ -81,6 +91,12 @@ namespace ASEva.Utility
             }
         }
 
+        /// <summary>
+        /// 以指定ID对应的文本作为格式描述，输出文本
+        /// </summary>
+        /// <param name="id">指定ID</param>
+        /// <param name="args">格式描述中的参数值</param>
+        /// <returns>输出文本</returns>
         public String Format(String id, params object[] args)
         {
             if (dict.ContainsKey(id))

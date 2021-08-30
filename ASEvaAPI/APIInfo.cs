@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 0, 0); // 新增TextResource
+            return new Version(2, 1, 0, 1); // TextResource.Load可指定语言，并添加注释
         }
 
         /// <summary>
