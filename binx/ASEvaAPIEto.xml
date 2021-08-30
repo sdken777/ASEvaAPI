@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.Eto.APIInfo">
             <summary>
-            version=1.0.0
+            version=1.1.0
             </summary>
         </member>
         <member name="M:ASEva.Eto.APIInfo.GetAPIVersion">
@@ -146,6 +146,11 @@
         <member name="P:ASEva.Eto.SizerExtensions.PixelScale">
             <summary>
             像素单位比例，用于优化在非默认DPI下的显示（一般情况下无需设置）
+            </summary>
+        </member>
+        <member name="T:ASEva.Eto.ImageResourceLoader">
+            <summary>
+            (api:eto=1.1.0) 图像资源加载
             </summary>
         </member>
         <member name="T:ASEva.Eto.WindowPanel">

@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Resources.Extensions" Version="5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="ASEvaAPI">
       <HintPath>..\bin64\ASEvaAPI.dll</HintPath>
     </Reference>

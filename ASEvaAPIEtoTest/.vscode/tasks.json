@@ -1,0 +1,238 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "process",
+            "label": "(internal)清理",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "./obj",
+                "./bin"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)发布构建(X86-Windows)",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIEtoTest.csproj",
+                "-c",
+                "Release",
+                "-o",
+                "../bin64",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process",
+            "label": "(internal)发布构建(X86-Linux)",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIEtoTest.csproj",
+                "-c",
+                "Release",
+                "-o",
+                "../binx",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process",
+            "label": "(internal)发布构建(Arm-Linux)",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIEtoTest.csproj",
+                "-c",
+                "Release",
+                "-o",
+                "../binxa",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process",
+            "label": "(internal)移除发布构建冗余文件(X86-Windows)",
+            "command": "rm",
+            "args": [
+                "-vf",
+                "../bin64/ASEvaAPIEtoTest.pdb",
+                "../bin64/ASEvaAPIEtoTest.deps.json",
+                "../bin64/ASEvaAPIEtoTest.runtimeconfig.dev.json",
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)移除发布构建冗余文件(X86-Linux)",
+            "command": "rm",
+            "args": [
+                "-vf",
+                "../binx/ASEvaAPIEtoTest.pdb",
+                "../binx/ASEvaAPIEtoTest.deps.json",
+                "../binx/ASEvaAPIEtoTest.runtimeconfig.dev.json",
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)移除发布构建冗余文件(Arm-Linux)",
+            "command": "rm",
+            "args": [
+                "-vf",
+                "../binxa/ASEvaAPIEtoTest.pdb",
+                "../binxa/ASEvaAPIEtoTest.deps.json",
+                "../binxa/ASEvaAPIEtoTest.runtimeconfig.dev.json",
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)跨平台创建bin文件夹",
+            "command": "mkdir",
+            "args": [
+                "-p",
+                "../bin64",
+                "../binx",
+                "../binxa"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)跨平台拷贝dll至binx(X86-Windows)",
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../bin64/ASEvaAPIEtoTest.dll",
+                "../binx/"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)跨平台拷贝dll至binxa(X86-Windows)",
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../bin64/ASEvaAPIEtoTest.dll",
+                "../binxa/"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)跨平台拷贝dll至bin64(X86-Linux)",
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../binx/ASEvaAPIEtoTest.dll",
+                "../bin64/"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)跨平台拷贝dll至binxa(X86-Linux)",
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../binx/ASEvaAPIEtoTest.dll",
+                "../binxa/"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)跨平台拷贝dll至bin64(Arm-Linux)",
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../binxa/ASEvaAPIEtoTest.dll",
+                "../bin64/"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)跨平台拷贝dll至binx(Arm-Linux)",
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../binxa/ASEvaAPIEtoTest.dll",
+                "../binx/"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "发布构建(X86-Windows)并跨平台拷贝",
+            "command": "echo",
+            "args": [
+                "Done.",
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "(internal)发布构建(X86-Windows)",
+                "(internal)移除发布构建冗余文件(X86-Windows)",
+                "(internal)跨平台创建bin文件夹",
+                "(internal)跨平台拷贝dll至binx(X86-Windows)",
+                "(internal)跨平台拷贝dll至binxa(X86-Windows)",
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "发布构建(X86-Linux)并跨平台拷贝",
+            "command": "echo",
+            "args": [
+                "Done.",
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "(internal)发布构建(X86-Linux)",
+                "(internal)移除发布构建冗余文件(X86-Linux)",
+                "(internal)跨平台创建bin文件夹",
+                "(internal)跨平台拷贝dll至bin64(X86-Linux)",
+                "(internal)跨平台拷贝dll至binxa(X86-Linux)",
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "发布构建(Arm-Linux)并跨平台拷贝",
+            "command": "echo",
+            "args": [
+                "Done.",
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "(internal)发布构建(Arm-Linux)",
+                "(internal)移除发布构建冗余文件(Arm-Linux)",
+                "(internal)跨平台创建bin文件夹",
+                "(internal)跨平台拷贝dll至bin64(Arm-Linux)",
+                "(internal)跨平台拷贝dll至binx(Arm-Linux)",
+            ],
+            "problemMatcher": []
+        },
+    ]
+}

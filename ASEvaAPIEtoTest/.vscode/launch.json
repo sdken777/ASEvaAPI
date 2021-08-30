@@ -1,0 +1,38 @@
+{
+   "version": "0.2.0",
+   "configurations": [
+        {
+            "name": "发布运行(X86-Windows)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "发布构建(X86-Windows)并跨平台拷贝",
+            "program": "${workspaceFolder}/../bin64/ASEvaAPIEtoTest",
+            "args": [],
+            "cwd": "${workspaceFolder}/../bin64/",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "发布运行(X86-Linux)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "发布构建(X86-Linux)并跨平台拷贝",
+            "program": "${workspaceFolder}/../binx/ASEvaAPIEtoTest",
+            "args": [],
+            "cwd": "${workspaceFolder}/../binx/",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "发布运行(Arm-Linux)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "发布构建(Arm-Linux)并跨平台拷贝",
+            "program": "${workspaceFolder}/../binxa/ASEvaAPIEtoTest",
+            "args": [],
+            "cwd": "${workspaceFolder}/../binxa/",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+    ]
+}

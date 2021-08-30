@@ -21,6 +21,8 @@ namespace ASEva.Utility
 
             var data = new byte[instream.Length];
             instream.Read(data, 0, data.Length);
+            instream.Close();
+
             return data;
         }
 

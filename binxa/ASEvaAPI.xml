@@ -855,7 +855,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.0.9
+            version=2.1.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4509,6 +4509,11 @@
         <member name="T:ASEva.Utility.StringParsing">
             <summary>
             (api:app=2.0.0) 字符串与数据相互转换
+            </summary>
+        </member>
+        <member name="T:ASEva.Utility.TextResource">
+            <summary>
+            (api:app=2.1.0) 多语言文本资源
             </summary>
         </member>
         <member name="T:ASEva.Utility.TimeoutWebClient">

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <t id="plain-text">
+        <en>abc</en>
+        <ch>阿萨德</ch>
+    </t>
+    <t id="format-text">
+        <en>abc:{0:D}</en>
+        <ch>阿萨德:{0:D}</ch>
+    </t>
+</root>

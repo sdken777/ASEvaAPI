@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于Eto.Forms的部分。详见 ASEva.Eto \n
- * 本文档对应API版本：1.0.0
+ * 本文档对应API版本：1.1.0
  */
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace ASEva.Eto
 {
     /// <summary>
-    /// version=1.0.0
+    /// version=1.1.0
     /// </summary>
     public class APIInfo
     {
@@ -18,7 +18,7 @@ namespace ASEva.Eto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 0, 0, 2); // AddControl输入GroupBox时先调用SetTitleFontToContent
+            return new Version(1, 1, 0, 0); // 新增ImageResourceLoader
         }
     }
 }

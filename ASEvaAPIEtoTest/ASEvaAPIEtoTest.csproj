@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>ASEvaAPIEtoTest</RootNamespace>
+    <AssemblyName>ASEvaAPIEtoTest</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\*.*" />
+    <EmbeddedResource Include="Resources\*.*">
+      <LogicalName>%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ASEvaAPI">
+      <HintPath>..\bin64\ASEvaAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="ASEvaAPIEto">
+      <HintPath>..\bin64\ASEvaAPIEto.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto">
+      <HintPath>..\bin64\Eto.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  
+</Project>
