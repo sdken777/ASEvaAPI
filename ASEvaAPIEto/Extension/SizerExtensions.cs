@@ -10,62 +10,104 @@ namespace ASEva.Eto
     public static class SizerExtensions
     {
         /// <summary>
-        /// 转换像素值（单值）
+        /// (api:eto=1.1.1) 转换像素值（单值）
         /// </summary>
-        /// <param name="panel">自定义控件</param>
+        /// <param name="control">控件</param>
         /// <param name="size">默认DPI下的像素值</param>
         /// <returns>任意DPI下的像素值</returns>
-        public static int Sizer(this Panel panel, int size)
+        public static int Sizer(this Control control, int size)
         {
+            initPixelScale();
+            int outSize = size;
             var scale = PixelScale;
-            if (scale <= 0) return size;
-            else return (int)(size * scale);
+            if (scale > 0) outSize = (int)(size * scale);
+            return Math.Max(1, outSize);
         }
 
         /// <summary>
-        /// 转换像素值（二维）
+        /// (api:eto=1.1.1) 转换像素值（二维）
         /// </summary>
-        /// <param name="panel">自定义控件</param>
+        /// <param name="control">控件</param>
         /// <param name="width">默认DPI下的宽度像素值</param>
         /// <param name="height">默认DPI下的高度像素值</param>
         /// <returns>任意DPI下的像素尺寸</returns>
-        public static Size Sizer(this Panel panel, int width, int height)
+        public static Size Sizer(this Control control, int width, int height)
         {
+            initPixelScale();
+            int outWidth = width;
+            int outHeight = height;
             var scale = PixelScale;
-            if (scale <= 0) return new Size(width, height);
-            else return new Size((int)(width * scale), (int)(height * scale));
+            if (scale > 0)
+            {
+                outWidth = (int)(width * scale);
+                outHeight = (int)(height * scale);
+            }
+            return new Size(Math.Max(1, outWidth), Math.Max(1, outHeight));
         }
 
         /// <summary>
-        /// 转换像素值（单值）
+        /// (api:eto=1.1.1) 设置控件宽度
         /// </summary>
-        /// <param name="dialog">对话框</param>
-        /// <param name="size">默认DPI下的像素值</param>
-        /// <returns>任意DPI下的像素值</returns>
-        public static int Sizer(this Dialog dialog, int size)
+        /// <param name="control">控件</param>
+        /// <param name="width">设置宽度</param>
+        public static void SetLogicalWidth(this Control control, int width)
         {
+            initPixelScale();
+            int setWidth = width;
             var scale = PixelScale;
-            if (scale <= 0) return size;
-            else return (int)(size * scale);
+            if (scale > 0) setWidth = (int)(width * scale);
+            control.Width = Math.Max(1, setWidth);
         }
 
         /// <summary>
-        /// 转换像素值（二维）
+        /// (api:eto=1.1.1) 设置控件高度
         /// </summary>
-        /// <param name="dialog">对话框</param>
-        /// <param name="width">默认DPI下的宽度像素值</param>
-        /// <param name="height">默认DPI下的高度像素值</param>
-        /// <returns>任意DPI下的像素尺寸</returns>
-        public static Size Sizer(this Dialog dialog, int width, int height)
+        /// <param name="control">控件</param>
+        /// <param name="height">设置高度</param>
+        public static void SetLogicalHeight(this Control control, int height)
         {
+            initPixelScale();
+            int setHeight = height;
             var scale = PixelScale;
-            if (scale <= 0) return new Size(width, height);
-            else return new Size((int)(width * scale), (int)(height * scale));
+            if (scale > 0) setHeight = (int)(height * scale);
+            control.Height = Math.Max(1, setHeight);
+        }
+
+        /// <summary>
+        /// (api:eto=1.1.1) 设置控件尺寸
+        /// </summary>
+        /// <param name="control">控件</param>
+        /// <param name="width">设置宽度</param>
+        /// /// <param name="height">设置高度</param>
+        public static void SetLogicalSize(this Control control, int width, int height)
+        {
+            initPixelScale();
+            int setWidth = width;
+            int setHeight = height;
+            var scale = PixelScale;
+            if (scale > 0)
+            {
+                setWidth = (int)(width * scale);
+                setHeight = (int)(height * scale);
+            }
+            control.Size = new Size(Math.Max(1, setWidth), Math.Max(1, setHeight));
         }
 
         /// <summary>
         /// 像素单位比例，用于优化在非默认DPI下的显示（一般情况下无需设置）
         /// </summary>
         public static float PixelScale { get; set; }
+
+        private static void initPixelScale()
+        {
+            if (PixelScale != 0) return;
+
+            if (ASEva.APIInfo.GetRunningOS() == "windows")
+            {
+                var screen = Screen.PrimaryScreen;
+                PixelScale = screen.RealScale;
+            }
+            else PixelScale = 1;
+        }
     }
 }

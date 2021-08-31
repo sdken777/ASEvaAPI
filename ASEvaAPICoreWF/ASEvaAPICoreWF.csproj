@@ -12,6 +12,15 @@
     <Reference Include="ASEvaAPI">
       <HintPath>..\bin64\ASEvaAPI.dll</HintPath>
     </Reference>
+    <Reference Include="ASEvaAPIEto">
+      <HintPath>..\bin64\ASEvaAPIEto.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto">
+      <HintPath>..\bin64\Eto.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto.WinForms">
+      <HintPath>..\bin64\Eto.WinForms.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

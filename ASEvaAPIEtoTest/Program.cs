@@ -1,5 +1,5 @@
 using System;
-using ASEva.Utility;
+using ASEva.Eto;
 
 namespace ASEvaAPIEtoTest
 {
@@ -8,13 +8,8 @@ namespace ASEvaAPIEtoTest
         [STAThread]
         public static void Main(string[] args)
         {
-            var t = TextResource.Load("test.xml", "en");
-            Console.WriteLine(t["plain-text"]);
-            Console.WriteLine(t.Format("format-text", 777));
-
-            t = TextResource.Load("test.xml", "ch");
-            Console.WriteLine(t["plain-text"]);
-            Console.WriteLine(t.Format("format-text", 777));
+            App.Init();
+            App.Run(new TestWindow("ch"/* 改为"en"显示英文 */));
         }
     }
 }

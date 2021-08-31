@@ -1,11 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <t id="plain-text">
-        <en>abc</en>
-        <ch>阿萨德</ch>
+    <t id="title">
+        <en>Test Window</en>
+        <ch>测试窗口</ch>
     </t>
-    <t id="format-text">
-        <en>abc:{0:D}</en>
-        <ch>阿萨德:{0:D}</ch>
+    <t id="reserved">
+        <en>Reserved</en>
+        <ch>保留</ch>
+    </t>
+    <t id="empty">
+        <en>Empty</en>
+        <ch>空</ch>
+    </t>
+    <t id="basic-group-title">
+        <en>Basic Controls</en>
+        <ch>基本控件</ch>
+    </t>
+    <t id="basic-label-stack">
+        <en>Row{0:D}:</en>
+        <ch>第{0:D}行：</ch>
+    </t>
+    <t id="basic-checkbox">
+        <en>Check Box</en>
+        <ch>多选框</ch>
+    </t>
+    <t id="basic-radiobutton">
+        <en>Radio Button {0:D}</en>
+        <ch>单选框{0:D}</ch>
+    </t>
+    <t id="basic-linkbutton">
+        <en>Link Button</en>
+        <ch>链接式按钮</ch>
+    </t>
+    <t id="basic-button">
+        <en>Button</en>
+        <ch>按钮</ch>
+    </t>
+    <t id="basic-combobox">
+        <en>Option {0:D}</en>
+        <ch>选项{0:D}</ch>
+    </t>
+    <t id="basic-list-item">
+        <en>List Option {0:D}</en>
+        <ch>列表项{0:D}</ch>
+    </t>
+    <t id="basic-tabpage-title">
+        <en>Tabpage {0:D}</en>
+        <ch>标签页{0:D}</ch>
+    </t>
+    <t id="basic-grid-key-title">
+        <en>Key</en>
+        <ch>键</ch>
+    </t>
+    <t id="basic-grid-value-title">
+        <en>Value</en>
+        <ch>值</ch>
     </t>
 </root>

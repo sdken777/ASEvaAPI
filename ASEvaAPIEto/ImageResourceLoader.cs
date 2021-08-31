@@ -9,7 +9,7 @@ namespace ASEva.Eto
     /// </summary>
     public class ImageResourceLoader
     {
-        public Bitmap Load(String fileName)
+        public static Bitmap Load(String fileName)
         {
             var instream = Assembly.GetCallingAssembly().GetManifestResourceStream(fileName);
             if (instream == null) return null;

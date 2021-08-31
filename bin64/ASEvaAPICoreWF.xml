@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.CoreWF.APIInfo">
             <summary>
-            version=1.0.0
+            version=1.1.0
             </summary>
         </member>
         <member name="M:ASEva.CoreWF.APIInfo.GetAPIVersion">

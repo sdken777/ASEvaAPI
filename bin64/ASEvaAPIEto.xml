@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.Eto.APIInfo">
             <summary>
-            version=1.1.0
+            version=1.1.1
             </summary>
         </member>
         <member name="M:ASEva.Eto.APIInfo.GetAPIVersion">
@@ -14,6 +14,11 @@
             (api:eto=1.0.0) 获取API版本
             </summary>
             <returns>API版本</returns>
+        </member>
+        <member name="T:ASEva.Eto.App">
+            <summary>
+            (api:eto=1.1.1) Eto应用程序初始化与运行
+            </summary>
         </member>
         <member name="T:ASEva.Eto.ConfigPanel">
             <summary>
@@ -46,23 +51,9 @@
             <summary>
             (api:eto=1.0.0) 方便添加控件的扩展
             </summary>
-        </member>
-        <member name="M:ASEva.Eto.AddControlExtensions.AddLabel(Eto.Forms.StackLayout,System.String,System.Boolean)">
             <summary>
-            添加文字至堆叠布局
+            (api:eto=1.0.0) 方便添加控件的扩展
             </summary>
-            <param name="stackLayout">堆叠布局</param>
-            <param name="text">文字</param>
-            <param name="expand">是否延布局方向撑满</param>
-            <returns>创建的文字标签对象</returns>
-        </member>
-        <member name="M:ASEva.Eto.AddControlExtensions.AddControl(Eto.Forms.StackLayout,Eto.Forms.Control,System.Boolean)">
-            <summary>
-            添加控件至堆叠布局
-            </summary>
-            <param name="stackLayout">堆叠布局</param>
-            <param name="control">控件</param>
-            <param name="expand">是否延布局方向撑满</param>
         </member>
         <member name="M:ASEva.Eto.AddControlExtensions.AddSpace(Eto.Forms.StackLayout)">
             <summary>
@@ -70,22 +61,134 @@
             </summary>
             <param name="stackLayout">堆叠布局</param>
         </member>
-        <member name="M:ASEva.Eto.AddControlExtensions.AddLabel(Eto.Forms.TableRow,System.String,System.Boolean)">
+        <member name="M:ASEva.Eto.AddControlExtensions.AddLabel(Eto.Forms.StackLayout,System.String,System.Boolean)">
             <summary>
-            添加文字至表布局的行
+            添加文字标签至堆叠布局
             </summary>
-            <param name="tableRow">表布局的行</param>
+            <param name="stackLayout">堆叠布局</param>
             <param name="text">文字</param>
-            <param name="expand">是否横向撑满</param>
+            <param name="expand">是否延布局方向撑满</param>
             <returns>创建的文字标签对象</returns>
         </member>
-        <member name="M:ASEva.Eto.AddControlExtensions.AddControl(Eto.Forms.TableRow,Eto.Forms.Control,System.Boolean)">
+        <member name="M:ASEva.Eto.AddControlExtensions.AddLabel(Eto.Forms.StackLayout,System.String,Eto.Forms.TextAlignment,System.Boolean,System.Int32,System.Int32)">
             <summary>
-            添加控件至表布局的行
+            (api:eto=1.1.1) 添加文字标签至堆叠布局
             </summary>
-            <param name="tableRow">表布局的行</param>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="text">文字</param>
+            <param name="alignment">文字对齐</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <returns>创建的文字标签对象</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddButton(Eto.Forms.StackLayout,System.String,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加按键至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="text">文字</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <returns>创建的按键对象</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddLinkButton(Eto.Forms.StackLayout,System.String,System.Boolean)">
+            <summary>
+            (api:eto=1.1.1) 添加链接式按键至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="text">文字</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <returns>创建的链接式按键对象</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddCheckBox(Eto.Forms.StackLayout,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            (api:eto=1.1.1) 添加多选框至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="text">文字</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="isChecked">初始状态是否勾选</param>
+            <returns>创建的多选框对象</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddRadioButtonList(Eto.Forms.StackLayout,System.String[],System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加单选框组至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="texts">各单选框的文字</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="selectedIndex">初始的选中单选框序号</param>
+            <param name="logicalSpacing">单选框间的间隙</param>
+            <returns>创建的单选框组对象</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddComboBox(Eto.Forms.StackLayout,System.String[],System.Boolean,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加组合框至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="texts">组合框各选项的文字</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="selectedIndex">初始的选项序号</param>
+            <returns>创建的组合框对象</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddGroupBox(Eto.Forms.StackLayout,System.String,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加分组框至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="title">标题</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <returns>创建的分组框对象</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddControl(Eto.Forms.StackLayout,Eto.Forms.Control,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加控件至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
             <param name="control">控件</param>
-            <param name="expand">是否横向撑满</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddRowStackLayout(Eto.Forms.StackLayout,System.Boolean,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加行堆叠布局至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalSpacing">行堆叠布局中各控件的间隙</param>
+            <returns>创建的行堆叠布局</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddColumnStackLayout(Eto.Forms.StackLayout,System.Boolean,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加列堆叠布局至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalSpacing">列堆叠布局中各控件的间隙</param>
+            <returns>创建的列堆叠布局</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddTableLayout(Eto.Forms.StackLayout,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加表布局至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalSpacingX">表布局中各控件的横向间隙</param>
+            <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
+            <returns>创建的表布局</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddRow(Eto.Forms.TableLayout,System.Boolean)">
+            <summary>
+            (api:eto=1.1.1) 表布局添加一行
+            </summary>
+            <param name="tableLayout">表布局</param>
+            <param name="expandHeight">是否纵向撑满</param>
+            <returns>表布局的行</returns>
         </member>
         <member name="M:ASEva.Eto.AddControlExtensions.AddSpace(Eto.Forms.TableRow)">
             <summary>
@@ -93,55 +196,221 @@
             </summary>
             <param name="tableRow">表布局的行</param>
         </member>
-        <member name="T:ASEva.Eto.CompatibilityExtensions">
+        <member name="M:ASEva.Eto.AddControlExtensions.AddLabel(Eto.Forms.TableRow,System.String,System.Boolean)">
             <summary>
-            (api:eto=1.0.0) 解决兼容性问题的扩展
+            添加文字标签至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="text">文字</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <returns>创建的文字标签对象</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddLabel(Eto.Forms.TableRow,System.String,Eto.Forms.TextAlignment,System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加文字标签至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="text">文字</param>
+            <param name="alignment">文字对齐</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <returns>创建的文字标签对象</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddButton(Eto.Forms.TableRow,System.String,System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加按键至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="text">文字</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <returns>创建的按键对象</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddLinkButton(Eto.Forms.TableRow,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            (api:eto=1.1.1) 添加链接式按键至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="text">文字</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <returns>创建的链接式按键对象</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddCheckBox(Eto.Forms.TableRow,System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            (api:eto=1.1.1) 添加多选框至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="text">文字</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="isChecked">初始状态是否勾选</param>
+            <returns>创建的多选框对象</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddRadioButtonList(Eto.Forms.TableRow,System.String[],System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加单选框组至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="texts">各单选框的文字</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="selectedIndex">初始的选中单选框序号</param>
+            <param name="logicalSpacing">单选框间的间隙</param>
+            <returns>创建的单选框组对象</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddComboBox(Eto.Forms.TableRow,System.String[],System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加组合框至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="texts">组合框各选项的文字</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="selectedIndex">初始的选项序号</param>
+            <returns>创建的组合框对象</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddGroupBox(Eto.Forms.TableRow,System.String,System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加分组框至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="title">标题</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <returns>创建的分组框对象</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddControl(Eto.Forms.TableRow,Eto.Forms.Control,System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加控件至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="control">控件</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddRowStackLayout(Eto.Forms.TableRow,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加行堆叠布局至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="logicalSpacing">行堆叠布局中各控件的间隙</param>
+            <returns>创建的行堆叠布局</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddColumnStackLayout(Eto.Forms.TableRow,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加列堆叠布局至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="logicalSpacing">列堆叠布局中各控件的间隙</param>
+            <returns>创建的列堆叠布局</returns>
+        </member>
+        <member name="M:ASEva.Eto.AddControlExtensions.AddTableLayout(Eto.Forms.TableRow,System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 添加表布局至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="logicalSpacingX">表布局中各控件的横向间隙</param>
+            <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
+            <returns>创建的表布局</returns>
+        </member>
+        <member name="T:ASEva.Eto.SetContentExtensions">
+            <summary>
+            (api:eto=1.1.1) 方便设置面板Content的扩展 
             </summary>
         </member>
-        <member name="M:ASEva.Eto.CompatibilityExtensions.SetTitleFontToContent(Eto.Forms.GroupBox)">
+        <member name="M:ASEva.Eto.SetContentExtensions.SetContentAsRowStackLayout(Eto.Forms.Panel,System.Int32,System.Int32)">
             <summary>
-            修正组合框内部字体问题
+            设置行堆叠布局至面板Content
             </summary>
-            <param name="groupBox">组合框</param>
+            <param name="panel">面板</param>
+            <param name="logicalPadding">行堆叠布局的边缘空隙</param>
+            <param name="logicalSpacing">行堆叠布局中各控件的间隙</param>
+            <returns>创建的行堆叠布局</returns>
+        </member>
+        <member name="M:ASEva.Eto.SetContentExtensions.SetContentAsColumnStackLayout(Eto.Forms.Panel,System.Int32,System.Int32)">
+            <summary>
+            设置列堆叠布局至面板Content
+            </summary>
+            <param name="panel">面板</param>
+            <param name="logicalPadding">列堆叠布局的边缘空隙</param>
+            <param name="logicalSpacing">列堆叠布局中各控件的间隙</param>
+            <returns>创建的列堆叠布局</returns>
+        </member>
+        <member name="M:ASEva.Eto.SetContentExtensions.SetContentAsTableLayout(Eto.Forms.Panel,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            设置表布局至面板Content
+            </summary>
+            <param name="panel">面板</param>
+            <param name="logicalPadding">表布局的边缘空隙</param>
+            <param name="logicalSpacingX">表布局中各控件的横向间隙</param>
+            <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
+            <returns>创建的表布局</returns>
+        </member>
+        <member name="M:ASEva.Eto.SetContentExtensions.SetContentAsPixelLayout(Eto.Forms.Panel)">
+            <summary>
+            设置像素布局至面板Content
+            </summary>
+            <param name="panel">面板</param>
+            <returns>创建的像素布局</returns>
         </member>
         <member name="T:ASEva.Eto.SizerExtensions">
             <summary>
             (api:eto=1.0.0) 提供非默认DPI尺寸转换的扩展
             </summary>
         </member>
-        <member name="M:ASEva.Eto.SizerExtensions.Sizer(Eto.Forms.Panel,System.Int32)">
+        <member name="M:ASEva.Eto.SizerExtensions.Sizer(Eto.Forms.Control,System.Int32)">
             <summary>
-            转换像素值（单值）
+            (api:eto=1.1.1) 转换像素值（单值）
             </summary>
-            <param name="panel">自定义控件</param>
+            <param name="control">控件</param>
             <param name="size">默认DPI下的像素值</param>
             <returns>任意DPI下的像素值</returns>
         </member>
-        <member name="M:ASEva.Eto.SizerExtensions.Sizer(Eto.Forms.Panel,System.Int32,System.Int32)">
+        <member name="M:ASEva.Eto.SizerExtensions.Sizer(Eto.Forms.Control,System.Int32,System.Int32)">
             <summary>
-            转换像素值（二维）
+            (api:eto=1.1.1) 转换像素值（二维）
             </summary>
-            <param name="panel">自定义控件</param>
+            <param name="control">控件</param>
             <param name="width">默认DPI下的宽度像素值</param>
             <param name="height">默认DPI下的高度像素值</param>
             <returns>任意DPI下的像素尺寸</returns>
         </member>
-        <member name="M:ASEva.Eto.SizerExtensions.Sizer(Eto.Forms.Dialog,System.Int32)">
+        <member name="M:ASEva.Eto.SizerExtensions.SetLogicalWidth(Eto.Forms.Control,System.Int32)">
             <summary>
-            转换像素值（单值）
+            (api:eto=1.1.1) 设置控件宽度
             </summary>
-            <param name="dialog">对话框</param>
-            <param name="size">默认DPI下的像素值</param>
-            <returns>任意DPI下的像素值</returns>
+            <param name="control">控件</param>
+            <param name="width">设置宽度</param>
         </member>
-        <member name="M:ASEva.Eto.SizerExtensions.Sizer(Eto.Forms.Dialog,System.Int32,System.Int32)">
+        <member name="M:ASEva.Eto.SizerExtensions.SetLogicalHeight(Eto.Forms.Control,System.Int32)">
             <summary>
-            转换像素值（二维）
+            (api:eto=1.1.1) 设置控件高度
             </summary>
-            <param name="dialog">对话框</param>
-            <param name="width">默认DPI下的宽度像素值</param>
-            <param name="height">默认DPI下的高度像素值</param>
-            <returns>任意DPI下的像素尺寸</returns>
+            <param name="control">控件</param>
+            <param name="height">设置高度</param>
+        </member>
+        <member name="M:ASEva.Eto.SizerExtensions.SetLogicalSize(Eto.Forms.Control,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=1.1.1) 设置控件尺寸
+            </summary>
+            <param name="control">控件</param>
+            <param name="width">设置宽度</param>
+            /// <param name="height">设置高度</param>
         </member>
         <member name="P:ASEva.Eto.SizerExtensions.PixelScale">
             <summary>

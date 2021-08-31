@@ -24,5 +24,14 @@
     <Reference Include="ASEvaAPI">
       <HintPath>..\binx\ASEvaAPI.dll</HintPath>
     </Reference>
+    <Reference Include="ASEvaAPIEto">
+      <HintPath>..\binx\ASEvaAPIEto.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto">
+      <HintPath>..\binx\Eto.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto.Gtk">
+      <HintPath>..\binx\Eto.Gtk.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
