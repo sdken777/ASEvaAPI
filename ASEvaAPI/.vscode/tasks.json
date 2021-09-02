@@ -116,5 +116,56 @@
             ],
             "problemMatcher": []
         },
+        {
+            "type": "process",
+            "label": "调试构建(X86-Windows)",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPI.csproj",
+                "-o",
+                "../bin64/debug",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process",
+            "label": "调试构建(X86-Linux)",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPI.csproj",
+                "-o",
+                "../binx/debug",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process",
+            "label": "调试构建(Arm-Linux)",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPI.csproj",
+                "-o",
+                "../binxa/debug",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
+            ],
+            "problemMatcher": "$msCompile"
+        },
     ]
 }

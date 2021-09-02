@@ -34,5 +34,38 @@
             "console": "internalConsole",
             "stopAtEntry": false
         },
+        {
+            "name": "调试运行(X86-Windows)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "调试构建(X86-Windows)并移除冗余文件",
+            "program": "${workspaceFolder}/../bin64/debug/ASEvaAPIEtoTest",
+            "args": [],
+            "cwd": "${workspaceFolder}/../bin64/debug/",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "调试运行(X86-Linux)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "调试构建(X86-Linux)并移除冗余文件",
+            "program": "${workspaceFolder}/../binx/debug/ASEvaAPIEtoTest",
+            "args": [],
+            "cwd": "${workspaceFolder}/../binx/debug/",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "调试运行(Arm-Linux)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "调试构建(Arm-Linux)并移除冗余文件",
+            "program": "${workspaceFolder}/../binxa/debug/ASEvaAPIEtoTest",
+            "args": [],
+            "cwd": "${workspaceFolder}/../binxa/debug/",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
     ]
 }

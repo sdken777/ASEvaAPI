@@ -23,6 +23,7 @@
                 "Release",
                 "-o",
                 "../bin64",
+                "/property:UseWindowsForms=true",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -231,6 +232,103 @@
                 "(internal)跨平台创建bin文件夹",
                 "(internal)跨平台拷贝dll至bin64(Arm-Linux)",
                 "(internal)跨平台拷贝dll至binx(Arm-Linux)",
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)调试构建(X86-Windows)",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIEtoTest.csproj",
+                "-o",
+                "../bin64/debug",
+                "/property:UseWindowsForms=true",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process",
+            "label": "(internal)调试构建(X86-Linux)",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIEtoTest.csproj",
+                "-o",
+                "../binx/debug",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process",
+            "label": "(internal)调试构建(Arm-Linux)",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIEtoTest.csproj",
+                "-o",
+                "../binxa/debug",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process",
+            "label": "调试构建(X86-Windows)并移除冗余文件",
+            "command": "rm",
+            "args": [
+                "-vf",
+                "../bin64/debug/ASEvaAPIEtoTest.pdb",
+                "../bin64/debug/ASEvaAPIEtoTest.deps.json",
+                "../bin64/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
+            ],
+            "dependsOn": [
+                "(internal)调试构建(X86-Windows)"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "调试构建(X86-Linux)并移除冗余文件",
+            "command": "rm",
+            "args": [
+                "-vf",
+                "../binx/debug/ASEvaAPIEtoTest.pdb",
+                "../binx/debug/ASEvaAPIEtoTest.deps.json",
+                "../binx/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
+            ],
+            "dependsOn": [
+                "(internal)调试构建(X86-Linux)"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "调试构建(Arm-Linux)并移除冗余文件",
+            "command": "rm",
+            "args": [
+                "-vf",
+                "../binxa/debug/ASEvaAPIEtoTest.pdb",
+                "../binxa/debug/ASEvaAPIEtoTest.deps.json",
+                "../binxa/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
+            ],
+            "dependsOn": [
+                "(internal)调试构建(Arm-Linux)"
             ],
             "problemMatcher": []
         },

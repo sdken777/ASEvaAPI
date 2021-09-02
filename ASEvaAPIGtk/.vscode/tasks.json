@@ -91,5 +91,39 @@
             ],
             "problemMatcher": []
         },
+        {
+            "type": "process",
+            "label": "调试构建(X86-Linux)",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIGtk.csproj",
+                "-o",
+                "../binx/debug",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process",
+            "label": "调试构建(Arm-Linux)",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIGtk.csproj",
+                "-o",
+                "../binxa/debug",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
+            ],
+            "problemMatcher": "$msCompile"
+        },
     ]
 }

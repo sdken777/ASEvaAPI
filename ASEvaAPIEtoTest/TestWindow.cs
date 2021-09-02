@@ -36,7 +36,7 @@ namespace ASEvaAPIEtoTest
             layoutStack1.AddLabel(t.Format("basic-label-stack", 1));
             layoutStack1.AddCheckBox(t["basic-checkbox"]);
             layoutStack1.AddRadioButtonList(new string[] { t.Format("basic-radiobutton", 1), t.Format("basic-radiobutton", 2) });
-            layoutStack1.AddLinkButton(t["basic-linkbutton"]);
+            layoutStack1.AddLinkButton(t["basic-linkbutton"]); // TODO: Gtk-Ubuntu2004-X86(高亮异常)
 
             var layoutStack2 = layoutMain.AddColumnStackLayout();
             layoutStack2.AddLabel(t.Format("basic-label-stack", 2));
@@ -48,7 +48,7 @@ namespace ASEvaAPIEtoTest
             layoutStack3.AddLabel(t.Format("basic-label-stack", 3));
             layoutStack3.AddControl(new TextBox(), true);
             layoutStack3.AddControl(new SearchBox()); // TODO: CoreWF(图标/清除)
-            layoutStack3.AddControl(new NumericStepper { MinValue = 0, MaxValue = 100 } );
+            layoutStack3.AddControl(new NumericStepper { MinValue = 0, MaxValue = 100 } ); // TODO: Gtk-Ubuntu2104-Raspi(set_Value异常)
 
             var layoutStack4 = layoutMain.AddColumnStackLayout();
             layoutStack4.AddLabel(t.Format("basic-label-stack", 4));
