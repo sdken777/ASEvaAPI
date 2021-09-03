@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace ASEva.CoreWF
+namespace ASEva.UICoreWF
 {
 	/// <summary>
-	/// (api:corewf=1.0.0) FlowLayoutPanel封装
+	/// (api:corewf=2.0.0) FlowLayoutPanel封装
 	/// </summary>
 	public class FlowPanelManager
 	{

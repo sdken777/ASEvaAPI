@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ASEva.CoreWF
+namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// (api:corewf=1.0.0) 配置界面控件，用于实现可视化配置
+    /// (api:corewf=2.0.0) 配置界面控件，用于实现可视化配置
     /// </summary>
     public class ConfigPanel : UserControl
     {

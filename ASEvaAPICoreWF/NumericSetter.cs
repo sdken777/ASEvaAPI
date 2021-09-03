@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ASEva.CoreWF
+namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// (api:corewf=1.0.0) NumericUpDown控件设置值
+    /// (api:corewf=2.0.0) NumericUpDown控件设置值
     /// </summary>
     public class NumericSetter
     {

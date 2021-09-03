@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ASEva.CoreWF
+namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// (api:corewf=1.0.0) 窗口控件，用于实现窗口组件的实际功能
+    /// (api:corewf=2.0.0) 窗口控件，用于实现窗口组件的实际功能
     /// </summary>
     public class WindowPanel : UserControl
     {

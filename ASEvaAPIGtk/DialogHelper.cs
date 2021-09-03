@@ -5,10 +5,10 @@ using System.Linq;
 using ASEva;
 using Gtk;
 
-namespace ASEva.Gtk
+namespace ASEva.UIGtk
 {
     /// <summary>
-    /// (api:gtk=1.0.0) 对话框辅助类
+    /// (api:gtk=2.0.0) 对话框辅助类
     /// </summary>
     public class DialogHelper
     {

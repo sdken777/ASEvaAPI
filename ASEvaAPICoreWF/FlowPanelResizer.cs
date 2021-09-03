@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ASEva.CoreWF
+namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// (api:corewf=1.0.0) FlowLayoutPanel子控件宽度自适应
+    /// (api:corewf=2.0.0) FlowLayoutPanel子控件宽度自适应
     /// </summary>
     public class FlowPanelResizer
     {

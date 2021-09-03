@@ -1,4 +1,4 @@
-﻿namespace ASEva.CoreWF
+﻿namespace ASEva.UICoreWF
 {
     partial class ComboSelector
     {

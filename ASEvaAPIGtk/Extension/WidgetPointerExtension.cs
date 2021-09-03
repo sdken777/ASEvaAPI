@@ -1,12 +1,12 @@
 using System;
 using Gtk;
 
-namespace ASEva.Gtk
+namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612
 
     /// <summary>
-    /// (api:gtk=1.0.0) 获取鼠标在控件内坐标的扩展方法
+    /// (api:gtk=2.0.0) 获取鼠标在控件内坐标的扩展方法
     /// </summary>
     public static class WidgetPointerExtension
     {

@@ -3,7 +3,7 @@ using System.Reflection;
 using System.IO;
 using Eto.Forms;
 
-namespace ASEva.Eto
+namespace ASEva.UIEto
 {
     public interface AppHandler
     {
@@ -12,7 +12,7 @@ namespace ASEva.Eto
     }
 
     /// <summary>
-    /// (api:eto=1.1.1) Eto应用程序初始化与运行
+    /// (api:eto=2.0.0) Eto应用程序初始化与运行
     /// </summary>
     public class App
     {
@@ -35,7 +35,7 @@ namespace ASEva.Eto
                         if (assembly != null)
                         {
                             var uiType = Path.GetFileNameWithoutExtension(filePath).Substring(8);
-                            var handlerCreator = assembly.GetType("ASEva." + uiType + ".AppHandlerCreator");
+                            var handlerCreator = assembly.GetType("ASEva.UI" + uiType + ".AppHandlerCreator");
                             if (handlerCreator != null)
                             {
                                 handler = (AppHandler)handlerCreator.InvokeMember("Create", BindingFlags.Default | BindingFlags.InvokeMethod, null, null, new object[] { });

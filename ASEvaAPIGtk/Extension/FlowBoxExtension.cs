@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using Gtk;
 
-namespace ASEva.Gtk
+namespace ASEva.UIGtk
 {
     /// <summary>
-    /// (api:gtk=1.0.0) Flow框扩展方法
+    /// (api:gtk=2.0.0) Flow框扩展方法
     /// </summary>
     public static class FlowBoxExtension
     {

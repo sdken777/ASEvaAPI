@@ -2,10 +2,10 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace ASEva.CoreWF
+namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// (api:corewf=1.0.0) 图像显示窗口
+    /// (api:corewf=2.0.0) 图像显示窗口
     /// </summary>
     public partial class ImageShow : Form
     {

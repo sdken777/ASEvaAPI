@@ -1,16 +1,16 @@
 using System;
 using System.Linq;
 using Gtk;
-using ASEva.Gtk;
+using ASEva.UIGtk;
 using ASEva.Graph;
 using UI = Gtk.Builder.ObjectAttribute;
 
-namespace ASEva.Gtk
+namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612, CS0649
 
     /// <summary>
-    /// (api:gtk=1.0.0) 散点图数据可视化窗口
+    /// (api:gtk=2.0.0) 散点图数据可视化窗口
     /// </summary>
     public class ScatterPointsGraph : BaseGraph
     {

@@ -4,10 +4,10 @@ using System.Reflection;
 using GLib;
 using ASEva;
 
-namespace ASEva.Gtk
+namespace ASEva.UIGtk
 {
     /// <summary>
-    /// (api:gtk=1.0.0) 计时器
+    /// (api:gtk=2.0.0) 计时器
     /// </summary>
     public class Timer
     {

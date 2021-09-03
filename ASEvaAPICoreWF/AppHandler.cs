@@ -1,8 +1,8 @@
 using System;
-using ASEva.Eto;
+using ASEva.UIEto;
 using Eto.Forms;
 
-namespace ASEva.CoreWF
+namespace ASEva.UICoreWF
 {
     public class AppHandlerCreator
     {
@@ -19,7 +19,7 @@ namespace ASEva.CoreWF
             System.Windows.Forms.Application.SetHighDpiMode(System.Windows.Forms.HighDpiMode.SystemAware);
 
             var platform = new global::Eto.WinForms.Platform();
-            platform.Add<GroupBox.IHandler>(() => new ASEvaCoreWFHandler.GroupBoxHandler());
+            platform.Add<GroupBox.IHandler>(() => new GroupBoxHandler());
 
             var app = new Application(platform);
             return app;

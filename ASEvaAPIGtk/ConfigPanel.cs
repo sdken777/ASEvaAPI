@@ -1,12 +1,12 @@
 ﻿using System;
 using Gtk;
 
-namespace ASEva.Gtk
+namespace ASEva.UIGtk
 {
     #pragma warning disable CS1591
 
     /// <summary>
-    /// (api:gtk=1.0.0) 配置界面控件，用于实现可视化配置
+    /// (api:gtk=2.0.0) 配置界面控件，用于实现可视化配置
     /// </summary>
     public class ConfigPanel : Box
     {

@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using Gtk;
 
-namespace ASEva.Gtk
+namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612, CS0649
 
     /// <summary>
-    /// (api:gtk=1.0.0) 图表显示控件基类
+    /// (api:gtk=2.0.0) 图表显示控件基类
     /// </summary>
     public class BaseGraph : Box
     {

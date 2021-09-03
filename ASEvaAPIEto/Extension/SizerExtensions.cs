@@ -2,15 +2,15 @@
 using Eto.Forms;
 using Eto.Drawing;
 
-namespace ASEva.Eto
+namespace ASEva.UIEto
 {
     /// <summary>
-    /// (api:eto=1.0.0) 提供非默认DPI尺寸转换的扩展
+    /// (api:eto=2.0.0) 提供非默认DPI尺寸转换的扩展
     /// </summary>
     public static class SizerExtensions
     {
         /// <summary>
-        /// (api:eto=1.1.1) 转换像素值（单值）
+        /// 转换像素值（单值）
         /// </summary>
         /// <param name="control">控件</param>
         /// <param name="size">默认DPI下的像素值</param>
@@ -25,7 +25,7 @@ namespace ASEva.Eto
         }
 
         /// <summary>
-        /// (api:eto=1.1.1) 转换像素值（二维）
+        /// 转换像素值（二维）
         /// </summary>
         /// <param name="control">控件</param>
         /// <param name="width">默认DPI下的宽度像素值</param>
@@ -46,7 +46,7 @@ namespace ASEva.Eto
         }
 
         /// <summary>
-        /// (api:eto=1.1.1) 设置控件宽度
+        /// 设置控件宽度
         /// </summary>
         /// <param name="control">控件</param>
         /// <param name="width">设置宽度</param>
@@ -60,7 +60,7 @@ namespace ASEva.Eto
         }
 
         /// <summary>
-        /// (api:eto=1.1.1) 设置控件高度
+        /// 设置控件高度
         /// </summary>
         /// <param name="control">控件</param>
         /// <param name="height">设置高度</param>
@@ -74,7 +74,7 @@ namespace ASEva.Eto
         }
 
         /// <summary>
-        /// (api:eto=1.1.1) 设置控件尺寸
+        /// 设置控件尺寸
         /// </summary>
         /// <param name="control">控件</param>
         /// <param name="width">设置宽度</param>

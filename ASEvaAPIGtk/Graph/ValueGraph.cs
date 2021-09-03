@@ -4,12 +4,12 @@ using ASEva.Graph;
 using UI = Gtk.Builder.ObjectAttribute;
 using Gdk;
 
-namespace ASEva.Gtk
+namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612, CS0649
 
     /// <summary>
-    /// (api:gtk=1.0.0) 单值数据可视化窗口
+    /// (api:gtk=2.0.0) 单值数据可视化窗口
     /// </summary>
     public class ValueGraph : BaseGraph
     {

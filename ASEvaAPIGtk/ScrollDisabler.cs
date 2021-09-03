@@ -2,10 +2,10 @@ using System;
 using GLib;
 using Gtk;
 
-namespace ASEva.Gtk
+namespace ASEva.UIGtk
 {
     /// <summary>
-    /// (api:gtk=1.0.0) 用于禁用控件的鼠标滚动
+    /// (api:gtk=2.0.0) 用于禁用控件的鼠标滚动
     /// </summary>
     public class ScrollDisabler
     {

@@ -4,39 +4,39 @@
         <name>ASEvaAPICoreWF</name>
     </assembly>
     <members>
-        <member name="T:ASEva.CoreWF.APIInfo">
+        <member name="T:ASEva.UICoreWF.APIInfo">
             <summary>
-            version=1.1.0
+            version=2.0.0
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.APIInfo.GetAPIVersion">
+        <member name="M:ASEva.UICoreWF.APIInfo.GetAPIVersion">
             <summary>
-            (api:corewf=1.0.0) 获取API版本
+            (api:corewf=2.0.0) 获取API版本
             </summary>
             <returns>API版本</returns>
         </member>
-        <member name="T:ASEva.CoreWF.BaseGraph">
+        <member name="T:ASEva.UICoreWF.BaseGraph">
             <summary>
-            (api:corewf=1.0.0) 图表显示控件基类
+            (api:corewf=2.0.0) 图表显示控件基类
             </summary>
         </member>
-        <member name="P:ASEva.CoreWF.BaseGraph.Data">
+        <member name="P:ASEva.UICoreWF.BaseGraph.Data">
             <summary>
             图表数据
             </summary>
         </member>
-        <member name="E:ASEva.CoreWF.BaseGraph.GraphSelected">
+        <member name="E:ASEva.UICoreWF.BaseGraph.GraphSelected">
             <summary>
             图表控件被选择事件
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.BaseGraph.SetSize(System.Int32)">
+        <member name="M:ASEva.UICoreWF.BaseGraph.SetSize(System.Int32)">
             <summary>
             设置图表控件大小
             </summary>
             <param name="scale">控件大小，1为最小，8为最大</param>
         </member>
-        <member name="M:ASEva.CoreWF.BaseGraph.CreateGraphControl(ASEva.GraphDefinition,System.Int32)">
+        <member name="M:ASEva.UICoreWF.BaseGraph.CreateGraphControl(ASEva.GraphDefinition,System.Int32)">
             <summary>
             创建图表控件
             </summary>
@@ -44,442 +44,442 @@
             <param name="scale">控件大小，1为最小，8为最大</param>
             <returns>新创建的图表控件</returns>
         </member>
-        <member name="M:ASEva.CoreWF.BaseGraph.RegisterGraphControl(System.Int32,System.Type)">
+        <member name="M:ASEva.UICoreWF.BaseGraph.RegisterGraphControl(System.Int32,System.Type)">
             <summary>
             注册指定ID的图表使用自定义可视化控件
             </summary>
             <param name="graphDefinitionID">图表定义ID</param>
             <param name="controlType">控件类型，必须为 ASEva.UI.BaseGraph 的子类</param>
         </member>
-        <member name="M:ASEva.CoreWF.BaseGraph.IsHeightFixed">
+        <member name="M:ASEva.UICoreWF.BaseGraph.IsHeightFixed">
             <summary>
             控件高度是否固定
             </summary>
             <returns>控件高度是否固定</returns>
         </member>
-        <member name="M:ASEva.CoreWF.BaseGraph.UpdateUIWithData">
+        <member name="M:ASEva.UICoreWF.BaseGraph.UpdateUIWithData">
             <summary>
             控件显示更新
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.BaseGraph.HandleGraphSelected">
+        <member name="M:ASEva.UICoreWF.BaseGraph.HandleGraphSelected">
             <summary>
             选择图表控件
             </summary>
         </member>
-        <member name="F:ASEva.CoreWF.BaseGraph.components">
+        <member name="F:ASEva.UICoreWF.BaseGraph.components">
             <summary> 
             必需的设计器变量。
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.BaseGraph.Dispose(System.Boolean)">
+        <member name="M:ASEva.UICoreWF.BaseGraph.Dispose(System.Boolean)">
             <summary> 
             清理所有正在使用的资源。
             </summary>
             <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         </member>
-        <member name="M:ASEva.CoreWF.BaseGraph.InitializeComponent">
+        <member name="M:ASEva.UICoreWF.BaseGraph.InitializeComponent">
             <summary> 
             设计器支持所需的方法 - 不要
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.ChannelSelector">
+        <member name="T:ASEva.UICoreWF.ChannelSelector">
             <summary>
-            (api:corewf=1.0.0) 通道选择器
+            (api:corewf=2.0.0) 通道选择器
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.ChannelSelector.SetChannelAvailables(System.Boolean[])">
+        <member name="M:ASEva.UICoreWF.ChannelSelector.SetChannelAvailables(System.Boolean[])">
             <summary>
             设置各通道数据是否有效
             </summary>
         </member>
-        <member name="P:ASEva.CoreWF.ChannelSelector.ChannelCount">
+        <member name="P:ASEva.UICoreWF.ChannelSelector.ChannelCount">
             <summary>
             通道数量
             </summary>
         </member>
-        <member name="P:ASEva.CoreWF.ChannelSelector.TargetChannel">
+        <member name="P:ASEva.UICoreWF.ChannelSelector.TargetChannel">
             <summary>
             选中通道
             </summary>
         </member>
-        <member name="P:ASEva.CoreWF.ChannelSelector.ChannelProtocol">
+        <member name="P:ASEva.UICoreWF.ChannelSelector.ChannelProtocol">
             <summary>
             通道协议，不需要加'@x' 
             </summary>
         </member>
-        <member name="F:ASEva.CoreWF.ChannelSelector.components">
+        <member name="F:ASEva.UICoreWF.ChannelSelector.components">
             <summary> 
             必需的设计器变量。
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.ChannelSelector.Dispose(System.Boolean)">
+        <member name="M:ASEva.UICoreWF.ChannelSelector.Dispose(System.Boolean)">
             <summary> 
             清理所有正在使用的资源。
             </summary>
             <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         </member>
-        <member name="M:ASEva.CoreWF.ChannelSelector.InitializeComponent">
+        <member name="M:ASEva.UICoreWF.ChannelSelector.InitializeComponent">
             <summary> 
             设计器支持所需的方法 - 不要
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.CircleIndicator">
+        <member name="T:ASEva.UICoreWF.CircleIndicator">
             <summary>
-            (api:corewf=1.0.0) 圆形指示器
+            (api:corewf=2.0.0) 圆形指示器
             </summary>
         </member>
-        <member name="F:ASEva.CoreWF.CircleIndicator.components">
+        <member name="F:ASEva.UICoreWF.CircleIndicator.components">
             <summary> 
             必需的设计器变量。
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.CircleIndicator.Dispose(System.Boolean)">
+        <member name="M:ASEva.UICoreWF.CircleIndicator.Dispose(System.Boolean)">
             <summary> 
             清理所有正在使用的资源。
             </summary>
             <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         </member>
-        <member name="M:ASEva.CoreWF.CircleIndicator.InitializeComponent">
+        <member name="M:ASEva.UICoreWF.CircleIndicator.InitializeComponent">
             <summary> 
             设计器支持所需的方法 - 不要
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.ColorConv">
+        <member name="T:ASEva.UICoreWF.ColorConv">
             <summary>
-            (api:corewf=1.0.0) 颜色类型转换
+            (api:corewf=2.0.0) 颜色类型转换
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.ComboSelector">
+        <member name="T:ASEva.UICoreWF.ComboSelector">
             <summary>
-            (api:corewf=1.0.0) 基于组合框的通道选择器，集成输入通道别名和有效性显示
+            (api:corewf=2.0.0) 基于组合框的通道选择器，集成输入通道别名和有效性显示
             </summary>
         </member>
-        <member name="F:ASEva.CoreWF.ComboSelector.components">
+        <member name="F:ASEva.UICoreWF.ComboSelector.components">
             <summary> 
             必需的设计器变量。
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.ComboSelector.Dispose(System.Boolean)">
+        <member name="M:ASEva.UICoreWF.ComboSelector.Dispose(System.Boolean)">
             <summary> 
             清理所有正在使用的资源。
             </summary>
             <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         </member>
-        <member name="M:ASEva.CoreWF.ComboSelector.InitializeComponent">
+        <member name="M:ASEva.UICoreWF.ComboSelector.InitializeComponent">
             <summary> 
             设计器支持所需的方法 - 不要
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.ConfigPanel">
+        <member name="T:ASEva.UICoreWF.ConfigPanel">
             <summary>
-            (api:corewf=1.0.0) 配置界面控件，用于实现可视化配置
+            (api:corewf=2.0.0) 配置界面控件，用于实现可视化配置
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.ConfigPanel.OnInit(System.String)">
+        <member name="M:ASEva.UICoreWF.ConfigPanel.OnInit(System.String)">
             <summary>
             [可选实现] 在配置界面控件初始化时被调用
             </summary>
             <param name="config">配置字符串</param>
         </member>
-        <member name="M:ASEva.CoreWF.ConfigPanel.OnRelease">
+        <member name="M:ASEva.UICoreWF.ConfigPanel.OnRelease">
             <summary>
             [可选实现] 在配置界面控件销毁前被调用
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.ConfigPanel.OnUpdateUI">
+        <member name="M:ASEva.UICoreWF.ConfigPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.DeviceCoordView">
+        <member name="T:ASEva.UICoreWF.DeviceCoordView">
             <summary>
-            (api:corewf=1.0.0) 传感器坐标系及位置等的可视化控件
+            (api:corewf=2.0.0) 传感器坐标系及位置等的可视化控件
             </summary>
         </member>
-        <member name="F:ASEva.CoreWF.DeviceCoordView.components">
+        <member name="F:ASEva.UICoreWF.DeviceCoordView.components">
             <summary> 
             必需的设计器变量。
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.DeviceCoordView.Dispose(System.Boolean)">
+        <member name="M:ASEva.UICoreWF.DeviceCoordView.Dispose(System.Boolean)">
             <summary> 
             清理所有正在使用的资源。
             </summary>
             <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         </member>
-        <member name="M:ASEva.CoreWF.DeviceCoordView.InitializeComponent">
+        <member name="M:ASEva.UICoreWF.DeviceCoordView.InitializeComponent">
             <summary> 
             设计器支持所需的方法 - 不要
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.DoubleBufferListView">
+        <member name="T:ASEva.UICoreWF.DoubleBufferListView">
             <summary>
-            (api:corewf=1.0.0) 双缓存ListView
+            (api:corewf=2.0.0) 双缓存ListView
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.FlowPanelManager">
+        <member name="T:ASEva.UICoreWF.FlowPanelManager">
             <summary>
-            (api:corewf=1.0.0) FlowLayoutPanel封装
+            (api:corewf=2.0.0) FlowLayoutPanel封装
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.FlowPanelResizer">
+        <member name="T:ASEva.UICoreWF.FlowPanelResizer">
             <summary>
-            (api:corewf=1.0.0) FlowLayoutPanel子控件宽度自适应
+            (api:corewf=2.0.0) FlowLayoutPanel子控件宽度自适应
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.HistLineGraph">
+        <member name="T:ASEva.UICoreWF.HistLineGraph">
             <summary>
-            (api:corewf=1.0.0) 柱状折线图可视化控件
+            (api:corewf=2.0.0) 柱状折线图可视化控件
             </summary>
         </member>
-        <member name="F:ASEva.CoreWF.HistLineGraph.components">
+        <member name="F:ASEva.UICoreWF.HistLineGraph.components">
             <summary> 
             必需的设计器变量。
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.HistLineGraph.Dispose(System.Boolean)">
+        <member name="M:ASEva.UICoreWF.HistLineGraph.Dispose(System.Boolean)">
             <summary> 
             清理所有正在使用的资源。
             </summary>
             <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         </member>
-        <member name="M:ASEva.CoreWF.HistLineGraph.InitializeComponent">
+        <member name="M:ASEva.UICoreWF.HistLineGraph.InitializeComponent">
             <summary> 
             设计器支持所需的方法 - 不要
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.ImageShow">
+        <member name="T:ASEva.UICoreWF.ImageShow">
             <summary>
-            (api:corewf=1.0.0) 图像显示窗口
+            (api:corewf=2.0.0) 图像显示窗口
             </summary>
         </member>
-        <member name="F:ASEva.CoreWF.ImageShow.components">
+        <member name="F:ASEva.UICoreWF.ImageShow.components">
             <summary>
             Required designer variable.
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.ImageShow.Dispose(System.Boolean)">
+        <member name="M:ASEva.UICoreWF.ImageShow.Dispose(System.Boolean)">
             <summary>
             Clean up any resources being used.
             </summary>
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:ASEva.CoreWF.ImageShow.InitializeComponent">
+        <member name="M:ASEva.UICoreWF.ImageShow.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.LabelTableGraph">
+        <member name="T:ASEva.UICoreWF.LabelTableGraph">
             <summary>
-            (api:corewf=1.0.0) 标签热力图数据可视化窗口
+            (api:corewf=2.0.0) 标签热力图数据可视化窗口
             </summary>
         </member>
-        <member name="F:ASEva.CoreWF.LabelTableGraph.components">
+        <member name="F:ASEva.UICoreWF.LabelTableGraph.components">
             <summary> 
             必需的设计器变量。
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.LabelTableGraph.Dispose(System.Boolean)">
+        <member name="M:ASEva.UICoreWF.LabelTableGraph.Dispose(System.Boolean)">
             <summary> 
             清理所有正在使用的资源。
             </summary>
             <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         </member>
-        <member name="M:ASEva.CoreWF.LabelTableGraph.InitializeComponent">
+        <member name="M:ASEva.UICoreWF.LabelTableGraph.InitializeComponent">
             <summary> 
             设计器支持所需的方法 - 不要修改
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.MatrixTableGraph">
+        <member name="T:ASEva.UICoreWF.MatrixTableGraph">
             <summary>
-            (api:corewf=1.0.0) 矩阵热力图数据可视化窗口
+            (api:corewf=2.0.0) 矩阵热力图数据可视化窗口
             </summary>
         </member>
-        <member name="F:ASEva.CoreWF.MatrixTableGraph.components">
+        <member name="F:ASEva.UICoreWF.MatrixTableGraph.components">
             <summary> 
             必需的设计器变量。
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.MatrixTableGraph.Dispose(System.Boolean)">
+        <member name="M:ASEva.UICoreWF.MatrixTableGraph.Dispose(System.Boolean)">
             <summary> 
             清理所有正在使用的资源。
             </summary>
             <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         </member>
-        <member name="M:ASEva.CoreWF.MatrixTableGraph.InitializeComponent">
+        <member name="M:ASEva.UICoreWF.MatrixTableGraph.InitializeComponent">
             <summary> 
             设计器支持所需的方法 - 不要修改
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.NameEditor">
+        <member name="T:ASEva.UICoreWF.NameEditor">
             <summary>
-            (api:corewf=1.0.0) 名称编辑控件
+            (api:corewf=2.0.0) 名称编辑控件
             </summary>
         </member>
-        <member name="F:ASEva.CoreWF.NameEditor.components">
+        <member name="F:ASEva.UICoreWF.NameEditor.components">
             <summary> 
             必需的设计器变量。
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.NameEditor.Dispose(System.Boolean)">
+        <member name="M:ASEva.UICoreWF.NameEditor.Dispose(System.Boolean)">
             <summary> 
             清理所有正在使用的资源。
             </summary>
             <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         </member>
-        <member name="M:ASEva.CoreWF.NameEditor.InitializeComponent">
+        <member name="M:ASEva.UICoreWF.NameEditor.InitializeComponent">
             <summary> 
             设计器支持所需的方法 - 不要
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.NumericSetter">
+        <member name="T:ASEva.UICoreWF.NumericSetter">
             <summary>
-            (api:corewf=1.0.0) NumericUpDown控件设置值
+            (api:corewf=2.0.0) NumericUpDown控件设置值
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.ScatterPointsGraph">
+        <member name="T:ASEva.UICoreWF.ScatterPointsGraph">
             <summary>
-            (api:corewf=1.0.0) 散点图数据可视化窗口
+            (api:corewf=2.0.0) 散点图数据可视化窗口
             </summary>
         </member>
-        <member name="F:ASEva.CoreWF.ScatterPointsGraph.components">
+        <member name="F:ASEva.UICoreWF.ScatterPointsGraph.components">
             <summary> 
             必需的设计器变量。
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.ScatterPointsGraph.Dispose(System.Boolean)">
+        <member name="M:ASEva.UICoreWF.ScatterPointsGraph.Dispose(System.Boolean)">
             <summary> 
             清理所有正在使用的资源。
             </summary>
             <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         </member>
-        <member name="M:ASEva.CoreWF.ScatterPointsGraph.InitializeComponent">
+        <member name="M:ASEva.UICoreWF.ScatterPointsGraph.InitializeComponent">
             <summary> 
             设计器支持所需的方法 - 不要修改
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.TimelineIndicator">
+        <member name="T:ASEva.UICoreWF.TimelineIndicator">
             <summary>
-            (api:corewf=1.0.0) 时间线显示控件（横向）
+            (api:corewf=2.0.0) 时间线显示控件（横向）
             </summary>
         </member>
-        <member name="F:ASEva.CoreWF.TimelineIndicator.components">
+        <member name="F:ASEva.UICoreWF.TimelineIndicator.components">
             <summary> 
             必需的设计器变量。
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.TimelineIndicator.Dispose(System.Boolean)">
+        <member name="M:ASEva.UICoreWF.TimelineIndicator.Dispose(System.Boolean)">
             <summary> 
             清理所有正在使用的资源。
             </summary>
             <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         </member>
-        <member name="M:ASEva.CoreWF.TimelineIndicator.InitializeComponent">
+        <member name="M:ASEva.UICoreWF.TimelineIndicator.InitializeComponent">
             <summary> 
             设计器支持所需的方法 - 不要
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.TimelineIndicatorV">
+        <member name="T:ASEva.UICoreWF.TimelineIndicatorV">
             <summary>
-            (api:corewf=1.0.0) 时间线显示控件（纵向）
+            (api:corewf=2.0.0) 时间线显示控件（纵向）
             </summary>
         </member>
-        <member name="F:ASEva.CoreWF.TimelineIndicatorV.components">
+        <member name="F:ASEva.UICoreWF.TimelineIndicatorV.components">
             <summary> 
             必需的设计器变量。
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.TimelineIndicatorV.Dispose(System.Boolean)">
+        <member name="M:ASEva.UICoreWF.TimelineIndicatorV.Dispose(System.Boolean)">
             <summary> 
             清理所有正在使用的资源。
             </summary>
             <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         </member>
-        <member name="M:ASEva.CoreWF.TimelineIndicatorV.InitializeComponent">
+        <member name="M:ASEva.UICoreWF.TimelineIndicatorV.InitializeComponent">
             <summary> 
             设计器支持所需的方法 - 不要
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.ValueGraph">
+        <member name="T:ASEva.UICoreWF.ValueGraph">
             <summary>
-            (api:corewf=1.0.0) 单值数据可视化窗口
+            (api:corewf=2.0.0) 单值数据可视化窗口
             </summary>
         </member>
-        <member name="F:ASEva.CoreWF.ValueGraph.components">
+        <member name="F:ASEva.UICoreWF.ValueGraph.components">
             <summary> 
             必需的设计器变量。
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.ValueGraph.Dispose(System.Boolean)">
+        <member name="M:ASEva.UICoreWF.ValueGraph.Dispose(System.Boolean)">
             <summary> 
             清理所有正在使用的资源。
             </summary>
             <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
         </member>
-        <member name="M:ASEva.CoreWF.ValueGraph.InitializeComponent">
+        <member name="M:ASEva.UICoreWF.ValueGraph.InitializeComponent">
             <summary> 
             设计器支持所需的方法 - 不要
             使用代码编辑器修改此方法的内容。
             </summary>
         </member>
-        <member name="T:ASEva.CoreWF.WindowPanel">
+        <member name="T:ASEva.UICoreWF.WindowPanel">
             <summary>
-            (api:corewf=1.0.0) 窗口控件，用于实现窗口组件的实际功能
+            (api:corewf=2.0.0) 窗口控件，用于实现窗口组件的实际功能
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.WindowPanel.OnInit(System.String)">
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnInit(System.String)">
             <summary>
             [可选实现] 在配置界面控件初始化时被调用
             </summary>
             <param name="config">配置字符串</param>
         </member>
-        <member name="M:ASEva.CoreWF.WindowPanel.OnGetConfig">
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnGetConfig">
             <summary>
             [可选实现] 获取配置字符串时被调用
             </summary>
             <returns>配置字符串</returns>
         </member>
-        <member name="M:ASEva.CoreWF.WindowPanel.OnInputData(System.Object)">
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnInputData(System.Object)">
             <summary>
             [可选实现] 在获得新数据时被调用。如果存在样本缓存，则需要在添加至缓存后使用 ASEva.Sample.ClipWithBufferBegin 将缓存范围外数据移除。另外，由于窗口隐藏时将不会调用 ASEva.WindowPanel.OnUpdateUI ，所以可以在此函数中的data为 ASEva.Samples.ManualTriggerSample 时进行后台处理（ManualTriggerSample频率为50Hz）
             </summary>
             <param name="data">新数据，包括通用样本 ASEva.GeneralSample , 手动触发器样本 ASEva.Samples.ManualTriggerSample , 音频帧样本 ASEva.Samples.AudioFrameSample , 点云帧样本 ASEva.Samples.PointCloudSample , 总线数据 ASEva.Samples.BusDataPack , 信号数据 ASEva.Samples.SignalsData , 事件数据 ASEva.EventData , 场景片段描述 ASEva.SceneData 等类型</param>
         </member>
-        <member name="M:ASEva.CoreWF.WindowPanel.OnResetData">
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnResetData">
             <summary>
             [可选实现] 在需要重置数据缓存时被调用
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.WindowPanel.OnStartSession">
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnStartSession">
             <summary>
             [可选实现] 在每轮开始时被调用
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.WindowPanel.OnStopSession">
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnStopSession">
             <summary>
             [可选实现] 在每轮结束时被调用
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.WindowPanel.OnUpdateUI">
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用。所有与界面相关的更新应全部放在此函数内实现。需要注意，窗口隐藏时将不会调用此函数
             </summary>
         </member>
-        <member name="M:ASEva.CoreWF.WindowPanel.OnRelease">
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnRelease">
             <summary>
             [可选实现] 在窗口控件销毁前被调用
             </summary>

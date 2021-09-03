@@ -2,10 +2,10 @@
 using ASEva;
 using Gdk;
 
-namespace ASEva.Gtk
+namespace ASEva.UIGtk
 {
     /// <summary>
-    /// (api:gtk=1.0.0) 颜色类型转换
+    /// (api:gtk=2.0.0) 颜色类型转换
     /// </summary>
     public class ColorConv
     {

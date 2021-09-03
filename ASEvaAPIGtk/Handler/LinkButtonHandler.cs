@@ -3,9 +3,9 @@ using Eto.Forms;
 using Eto.Drawing;
 using Eto.GtkSharp.Forms;
 
-namespace ASEvaGtkHandler
+namespace ASEva.UIGtk
 {
-	class LinkButtonHandler : GtkControl<ASEva.Gtk.LinkItem, LinkButton, LinkButton.ICallback>, LinkButton.IHandler
+	class LinkButtonHandler : GtkControl<LinkItem, LinkButton, LinkButton.ICallback>, LinkButton.IHandler
 	{
 		public override Gtk.Widget ContainerControl
 		{
@@ -14,7 +14,7 @@ namespace ASEvaGtkHandler
 
 		public LinkButtonHandler()
 		{
-			Control = new ASEva.Gtk.LinkItem();
+			Control = new LinkItem();
 		}
 
 		public Color TextColor

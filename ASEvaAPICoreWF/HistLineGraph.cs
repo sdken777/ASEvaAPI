@@ -5,10 +5,10 @@ using System.Linq;
 using System.Windows.Forms;
 using ASEva.Graph;
 
-namespace ASEva.CoreWF
+namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// (api:corewf=1.0.0) 柱状折线图可视化控件
+    /// (api:corewf=2.0.0) 柱状折线图可视化控件
     /// </summary>
 	public partial class HistLineGraph : BaseGraph
 	{

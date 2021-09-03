@@ -2,10 +2,10 @@ using System;
 using System.Reflection;
 using Eto.Drawing;
 
-namespace ASEva.Eto
+namespace ASEva.UIEto
 {
     /// <summary>
-    /// (api:eto=1.1.0) 图像资源加载
+    /// (api:eto=2.0.0) 图像资源加载
     /// </summary>
     public class ImageResourceLoader
     {

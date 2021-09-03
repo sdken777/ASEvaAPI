@@ -2,10 +2,10 @@ using System;
 using Eto.Forms;
 using Eto.Drawing;
 
-namespace ASEva.Eto
+namespace ASEva.UIEto
 {
     /// <summary>
-    /// (api:eto=1.1.1) 方便设置面板Content的扩展 
+    /// (api:eto=2.0.0) 方便设置面板Content的扩展 
     /// </summary>
     public static class SetContentExtensions
     {

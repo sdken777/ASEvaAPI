@@ -2,12 +2,12 @@
 using Gtk;
 using ASEva;
 
-namespace ASEva.Gtk
+namespace ASEva.UIGtk
 {
     #pragma warning disable CS1591
     
     /// <summary>
-    /// (api:gtk=1.0.0) 窗口控件，用于实现窗口组件的实际功能
+    /// (api:gtk=2.0.0) 窗口控件，用于实现窗口组件的实际功能
     /// </summary>
     public class WindowPanel : Box
     {

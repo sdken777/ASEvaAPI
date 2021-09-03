@@ -2,10 +2,10 @@
 using Eto.Forms;
 using Eto.Drawing;
 
-namespace ASEva.Eto
+namespace ASEva.UIEto
 {
     /// <summary>
-    /// (api:eto=1.0.0) 方便添加控件的扩展
+    /// (api:eto=2.0.0) 方便添加控件的扩展
     /// </summary>
     public static partial class AddControlExtensions
     {
@@ -41,7 +41,7 @@ namespace ASEva.Eto
         }
 
         /// <summary>
-        /// (api:eto=1.1.1) 添加文字标签至堆叠布局
+        /// 添加文字标签至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="text">文字</param>
@@ -74,7 +74,7 @@ namespace ASEva.Eto
         }
 
         /// <summary>
-        /// (api:eto=1.1.1) 添加按键至堆叠布局
+        /// 添加按键至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="text">文字</param>
@@ -106,7 +106,7 @@ namespace ASEva.Eto
         }
 
         /// <summary>
-        /// (api:eto=1.1.1) 添加链接式按键至堆叠布局
+        /// 添加链接式按键至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="text">文字</param>
@@ -128,7 +128,7 @@ namespace ASEva.Eto
         }
 
         /// <summary>
-        /// (api:eto=1.1.1) 添加多选框至堆叠布局
+        /// 添加多选框至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="text">文字</param>
@@ -151,7 +151,7 @@ namespace ASEva.Eto
         }
 
         /// <summary>
-        /// (api:eto=1.1.1) 添加单选框组至堆叠布局
+        /// 添加单选框组至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="texts">各单选框的文字</param>
@@ -191,7 +191,7 @@ namespace ASEva.Eto
         }
 
         /// <summary>
-        /// (api:eto=1.1.1) 添加组合框至堆叠布局
+        /// 添加组合框至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="texts">组合框各选项的文字</param>
@@ -229,7 +229,7 @@ namespace ASEva.Eto
         }
 
         /// <summary>
-        /// (api:eto=1.1.1) 添加分组框至堆叠布局
+        /// 添加分组框至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="title">标题</param>
@@ -261,7 +261,7 @@ namespace ASEva.Eto
         }
 
         /// <summary>
-        /// (api:eto=1.1.1) 添加控件至堆叠布局
+        /// 添加控件至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="control">控件</param>
@@ -290,7 +290,7 @@ namespace ASEva.Eto
         }
 
         /// <summary>
-        /// (api:eto=1.1.1) 添加行堆叠布局至堆叠布局
+        /// 添加行堆叠布局至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="expand">是否延布局方向撑满</param>
@@ -312,7 +312,7 @@ namespace ASEva.Eto
         }
 
         /// <summary>
-        /// (api:eto=1.1.1) 添加列堆叠布局至堆叠布局
+        /// 添加列堆叠布局至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="expand">是否延布局方向撑满</param>
@@ -334,7 +334,7 @@ namespace ASEva.Eto
         }
 
         /// <summary>
-        /// (api:eto=1.1.1) 添加表布局至堆叠布局
+        /// 添加表布局至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="expand">是否延布局方向撑满</param>

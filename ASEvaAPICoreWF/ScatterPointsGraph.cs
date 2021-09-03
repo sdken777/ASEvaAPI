@@ -5,10 +5,10 @@ using System.Linq;
 using System.Windows.Forms;
 using ASEva.Graph;
 
-namespace ASEva.CoreWF
+namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// (api:corewf=1.0.0) 散点图数据可视化窗口
+    /// (api:corewf=2.0.0) 散点图数据可视化窗口
     /// </summary>
     public partial class ScatterPointsGraph : BaseGraph
     {

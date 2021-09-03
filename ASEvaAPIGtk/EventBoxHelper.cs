@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using Gdk;
 using Gtk;
 
-namespace ASEva.Gtk
+namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612
 
     /// <summary>
-    /// (api:gtk=1.0.0) 事件框辅助类
+    /// (api:gtk=2.0.0) 事件框辅助类
     /// </summary>
     public class EventBoxHelper
     {

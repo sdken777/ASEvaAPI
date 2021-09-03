@@ -1,8 +1,8 @@
 using System;
-using ASEva.Eto;
+using ASEva.UIEto;
 using Eto.Forms;
 
-namespace ASEva.Gtk
+namespace ASEva.UIGtk
 {
     public class AppHandlerCreator
     {
@@ -17,7 +17,7 @@ namespace ASEva.Gtk
         public Application CreateApp()
         {
             var platform = new global::Eto.GtkSharp.Platform();
-            platform.Add<LinkButton.IHandler>(() => new ASEvaGtkHandler.LinkButtonHandler());
+            platform.Add<LinkButton.IHandler>(() => new LinkButtonHandler());
 
             var app = new Application(platform);
             return app;

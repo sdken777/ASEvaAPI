@@ -2,10 +2,10 @@
 using System.Drawing;
 using ASEva.Graph;
 
-namespace ASEva.CoreWF
+namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// (api:corewf=1.0.0) 单值数据可视化窗口
+    /// (api:corewf=2.0.0) 单值数据可视化窗口
     /// </summary>
     public partial class ValueGraph : BaseGraph
     {

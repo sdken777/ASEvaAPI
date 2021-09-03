@@ -2,10 +2,10 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace ASEva.CoreWF
+namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// (api:corewf=1.0.0) 时间线显示控件（纵向）
+    /// (api:corewf=2.0.0) 时间线显示控件（纵向）
     /// </summary>
     public partial class TimelineIndicatorV : UserControl
     {

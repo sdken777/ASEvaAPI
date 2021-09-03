@@ -2,16 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Gtk;
-using ASEva.Gtk;
+using ASEva.UIGtk;
 using ASEva.Graph;
 using UI = Gtk.Builder.ObjectAttribute;
 
-namespace ASEva.Gtk
+namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612, CS0649
 
     /// <summary>
-    /// (api:gtk=1.0.0) 柱状折线图可视化控件
+    /// (api:gtk=2.0.0) 柱状折线图可视化控件
     /// </summary>
     public class HistLineGraph : BaseGraph
     {

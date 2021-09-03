@@ -1,10 +1,10 @@
 ﻿using System;
 using Eto.Forms;
 
-namespace ASEva.Eto
+namespace ASEva.UIEto
 {
     /// <summary>
-    /// (api:eto=1.0.0) 配置界面控件，用于实现可视化配置
+    /// (api:eto=2.0.0) 配置界面控件，用于实现可视化配置
     /// </summary>
     public class ConfigPanel : Panel
     {

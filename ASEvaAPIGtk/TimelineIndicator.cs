@@ -2,12 +2,12 @@ using System;
 using Gtk;
 using UI = Gtk.Builder.ObjectAttribute;
 
-namespace ASEva.Gtk
+namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612, CS0649
 
     /// <summary>
-    /// (api:gtk=1.0.0) 时间线显示控件
+    /// (api:gtk=2.0.0) 时间线显示控件
     /// </summary>
     public class TimelineIndicator : Box
     {

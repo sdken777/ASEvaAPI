@@ -1,10 +1,10 @@
 ﻿using System;
 using Eto.Forms;
 
-namespace ASEva.Eto
+namespace ASEva.UIEto
 {
     /// <summary>
-    /// (api:eto=1.0.0) 窗口控件，用于实现窗口组件的实际功能
+    /// (api:eto=2.0.0) 窗口控件，用于实现窗口组件的实际功能
     /// </summary>
     public class WindowPanel : Panel
     {

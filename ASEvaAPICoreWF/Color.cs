@@ -2,10 +2,10 @@
 using System.Drawing;
 using ASEva;
 
-namespace ASEva.CoreWF
+namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// (api:corewf=1.0.0) 颜色类型转换
+    /// (api:corewf=2.0.0) 颜色类型转换
     /// </summary>
     public class ColorConv
     {

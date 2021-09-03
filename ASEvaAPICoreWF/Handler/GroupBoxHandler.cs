@@ -4,7 +4,7 @@ using Eto.Forms;
 using Eto.Drawing;
 using Eto.WinForms.Forms;
 
-namespace ASEvaCoreWFHandler
+namespace ASEva.UICoreWF
 {
 	public class GroupBoxHandler : WindowsPanel<GroupBoxHandler.EtoGroupBox, GroupBox, GroupBox.ICallback>, GroupBox.IHandler
 	{

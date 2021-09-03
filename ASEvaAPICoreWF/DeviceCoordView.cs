@@ -2,10 +2,10 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace ASEva.CoreWF
+namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// (api:corewf=1.0.0) 传感器坐标系及位置等的可视化控件
+    /// (api:corewf=2.0.0) 传感器坐标系及位置等的可视化控件
     /// </summary>
     public partial class DeviceCoordView : UserControl
     {

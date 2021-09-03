@@ -2,10 +2,10 @@ using System;
 using Gdk;
 using Cairo;
 
-namespace ASEva.Gtk
+namespace ASEva.UIGtk
 {
     /// <summary>
-    /// (api:gtk=1.0.0) ASEva.Samples.VideoFrameSample 中的图像对象
+    /// (api:gtk=2.0.0) ASEva.Samples.VideoFrameSample 中的图像对象
     /// </summary>
     public class VideoFrameSampleImage
     {

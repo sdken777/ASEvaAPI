@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ASEva.CoreWF
+namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// (api:corewf=1.0.0) 基于组合框的通道选择器，集成输入通道别名和有效性显示
+    /// (api:corewf=2.0.0) 基于组合框的通道选择器，集成输入通道别名和有效性显示
     /// </summary>
     public partial class ComboSelector : UserControl
     {

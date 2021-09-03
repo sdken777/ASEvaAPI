@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace ASEva.CoreWF
+namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// (api:corewf=1.0.0) 图表显示控件基类
+    /// (api:corewf=2.0.0) 图表显示控件基类
     /// </summary>
     public partial class BaseGraph : UserControl
     {

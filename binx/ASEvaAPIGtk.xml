@@ -4,115 +4,115 @@
         <name>ASEvaAPIGtk</name>
     </assembly>
     <members>
-        <member name="T:ASEva.Gtk.APIInfo">
+        <member name="T:ASEva.UIGtk.APIInfo">
             <summary>
-            version=1.1.0
+            version=2.0.0
             </summary>
         </member>
-        <member name="M:ASEva.Gtk.APIInfo.GetAPIVersion">
+        <member name="M:ASEva.UIGtk.APIInfo.GetAPIVersion">
             <summary>
-            (api:gtk=1.0.0) 获取API版本
+            (api:gtk=2.0.0) 获取API版本
             </summary>
             <returns>API版本</returns>
         </member>
-        <member name="T:ASEva.Gtk.ColorConv">
+        <member name="T:ASEva.UIGtk.ColorConv">
             <summary>
-            (api:gtk=1.0.0) 颜色类型转换
+            (api:gtk=2.0.0) 颜色类型转换
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.ConfigPanel">
+        <member name="T:ASEva.UIGtk.ConfigPanel">
             <summary>
-            (api:gtk=1.0.0) 配置界面控件，用于实现可视化配置
+            (api:gtk=2.0.0) 配置界面控件，用于实现可视化配置
             </summary>
         </member>
-        <member name="M:ASEva.Gtk.ConfigPanel.OnInit(System.String)">
+        <member name="M:ASEva.UIGtk.ConfigPanel.OnInit(System.String)">
             <summary>
             [可选实现] 在配置界面控件初始化时被调用
             </summary>
             <param name="config">配置字符串</param>
         </member>
-        <member name="M:ASEva.Gtk.ConfigPanel.OnRelease">
+        <member name="M:ASEva.UIGtk.ConfigPanel.OnRelease">
             <summary>
             [可选实现] 在配置界面控件销毁前被调用
             </summary>
         </member>
-        <member name="M:ASEva.Gtk.ConfigPanel.OnUpdateUI">
+        <member name="M:ASEva.UIGtk.ConfigPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.DialogHelper">
+        <member name="T:ASEva.UIGtk.DialogHelper">
             <summary>
-            (api:gtk=1.0.0) 对话框辅助类
+            (api:gtk=2.0.0) 对话框辅助类
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.EventBoxHelper">
+        <member name="T:ASEva.UIGtk.EventBoxHelper">
             <summary>
-            (api:gtk=1.0.0) 事件框辅助类
+            (api:gtk=2.0.0) 事件框辅助类
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.CairoContextExtension">
+        <member name="T:ASEva.UIGtk.CairoContextExtension">
             <summary>
-            (api:gtk=1.0.0) Cairo绘图工具扩展方法
+            (api:gtk=2.0.0) Cairo绘图工具扩展方法
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.ComboBoxTextExtension">
+        <member name="T:ASEva.UIGtk.ComboBoxTextExtension">
             <summary>
-            (api:gtk=1.0.0) 组合框扩展方法
+            (api:gtk=2.0.0) 组合框扩展方法
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.FlowBoxExtension">
+        <member name="T:ASEva.UIGtk.FlowBoxExtension">
             <summary>
-            (api:gtk=1.0.0) Flow框扩展方法
+            (api:gtk=2.0.0) Flow框扩展方法
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.ListBoxExtension">
+        <member name="T:ASEva.UIGtk.ListBoxExtension">
             <summary>
-            (api:gtk=1.0.0) 列表框扩展方法
+            (api:gtk=2.0.0) 列表框扩展方法
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.ListStoreExtension">
+        <member name="T:ASEva.UIGtk.ListStoreExtension">
             <summary>
-            (api:gtk=1.0.0) 表数据模型扩展方法
+            (api:gtk=2.0.0) 表数据模型扩展方法
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.TreeViewExtension">
+        <member name="T:ASEva.UIGtk.TreeViewExtension">
             <summary>
-            (api:gtk=1.0.0) 树和表视图框扩展方法
+            (api:gtk=2.0.0) 树和表视图框扩展方法
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.WidgetColorExtension">
+        <member name="T:ASEva.UIGtk.WidgetColorExtension">
             <summary>
-            (api:gtk=1.0.0) 控件颜色设置扩展方法
+            (api:gtk=2.0.0) 控件颜色设置扩展方法
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.WidgetPointerExtension">
+        <member name="T:ASEva.UIGtk.WidgetPointerExtension">
             <summary>
-            (api:gtk=1.0.0) 获取鼠标在控件内坐标的扩展方法
+            (api:gtk=2.0.0) 获取鼠标在控件内坐标的扩展方法
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.BaseGraph">
+        <member name="T:ASEva.UIGtk.BaseGraph">
             <summary>
-            (api:gtk=1.0.0) 图表显示控件基类
+            (api:gtk=2.0.0) 图表显示控件基类
             </summary>
         </member>
-        <member name="P:ASEva.Gtk.BaseGraph.Data">
+        <member name="P:ASEva.UIGtk.BaseGraph.Data">
             <summary>
             图表数据
             </summary>
         </member>
-        <member name="E:ASEva.Gtk.BaseGraph.GraphSelected">
+        <member name="E:ASEva.UIGtk.BaseGraph.GraphSelected">
             <summary>
             图表控件被选择事件
             </summary>
         </member>
-        <member name="M:ASEva.Gtk.BaseGraph.SetSize(System.Int32)">
+        <member name="M:ASEva.UIGtk.BaseGraph.SetSize(System.Int32)">
             <summary>
             设置图表控件大小
             </summary>
             <param name="scale">控件大小，1为最小，8为最大</param>
         </member>
-        <member name="M:ASEva.Gtk.BaseGraph.CreateGraphControl(ASEva.GraphDefinition,System.Int32)">
+        <member name="M:ASEva.UIGtk.BaseGraph.CreateGraphControl(ASEva.GraphDefinition,System.Int32)">
             <summary>
             创建图表控件
             </summary>
@@ -120,144 +120,144 @@
             <param name="scale">控件大小，1为最小，8为最大</param>
             <returns>新创建的图表控件</returns>
         </member>
-        <member name="M:ASEva.Gtk.BaseGraph.RegisterGraphControl(System.Int32,System.Type)">
+        <member name="M:ASEva.UIGtk.BaseGraph.RegisterGraphControl(System.Int32,System.Type)">
             <summary>
             注册指定ID的图表使用自定义可视化控件
             </summary>
             <param name="graphDefinitionID">图表定义ID</param>
             <param name="controlType">控件类型，必须为 ASEva.UI.BaseGraph 的子类</param>
         </member>
-        <member name="M:ASEva.Gtk.BaseGraph.IsHeightFixed">
+        <member name="M:ASEva.UIGtk.BaseGraph.IsHeightFixed">
             <summary>
             控件高度是否固定
             </summary>
             <returns>控件高度是否固定</returns>
         </member>
-        <member name="M:ASEva.Gtk.BaseGraph.UpdateUIWithData">
+        <member name="M:ASEva.UIGtk.BaseGraph.UpdateUIWithData">
             <summary>
             控件显示更新
             </summary>
         </member>
-        <member name="M:ASEva.Gtk.BaseGraph.HandleGraphSelected">
+        <member name="M:ASEva.UIGtk.BaseGraph.HandleGraphSelected">
             <summary>
             选择图表控件
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.HistLineGraph">
+        <member name="T:ASEva.UIGtk.HistLineGraph">
             <summary>
-            (api:gtk=1.0.0) 柱状折线图可视化控件
+            (api:gtk=2.0.0) 柱状折线图可视化控件
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.LabelTableGraph">
+        <member name="T:ASEva.UIGtk.LabelTableGraph">
             <summary>
-            (api:gtk=1.0.0) 标签热力图数据可视化窗口
+            (api:gtk=2.0.0) 标签热力图数据可视化窗口
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.MatrixTableGraph">
+        <member name="T:ASEva.UIGtk.MatrixTableGraph">
             <summary>
-            (api:gtk=1.0.0) 矩阵热力图数据可视化窗口
+            (api:gtk=2.0.0) 矩阵热力图数据可视化窗口
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.ScatterPointsGraph">
+        <member name="T:ASEva.UIGtk.ScatterPointsGraph">
             <summary>
-            (api:gtk=1.0.0) 散点图数据可视化窗口
+            (api:gtk=2.0.0) 散点图数据可视化窗口
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.ValueGraph">
+        <member name="T:ASEva.UIGtk.ValueGraph">
             <summary>
-            (api:gtk=1.0.0) 单值数据可视化窗口
+            (api:gtk=2.0.0) 单值数据可视化窗口
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.LinkItem">
+        <member name="T:ASEva.UIGtk.LinkItem">
             <summary>
-            (api:gtk=1.0.0) 带下划线的蓝色文字
+            (api:gtk=2.0.0) 带下划线的蓝色文字
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.ScrollDisabler">
+        <member name="T:ASEva.UIGtk.ScrollDisabler">
             <summary>
-            (api:gtk=1.0.0) 用于禁用控件的鼠标滚动
+            (api:gtk=2.0.0) 用于禁用控件的鼠标滚动
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.SwitchHelper">
+        <member name="T:ASEva.UIGtk.SwitchHelper">
             <summary>
-            (api:gtk=1.0.0) 开关框辅助类
+            (api:gtk=2.0.0) 开关框辅助类
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.TimelineIndicator">
+        <member name="T:ASEva.UIGtk.TimelineIndicator">
             <summary>
-            (api:gtk=1.0.0) 时间线显示控件
+            (api:gtk=2.0.0) 时间线显示控件
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.Timer">
+        <member name="T:ASEva.UIGtk.Timer">
             <summary>
-            (api:gtk=1.0.0) 计时器
+            (api:gtk=2.0.0) 计时器
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.VideoFrameSampleImage">
+        <member name="T:ASEva.UIGtk.VideoFrameSampleImage">
             <summary>
-            (api:gtk=1.0.0) ASEva.Samples.VideoFrameSample 中的图像对象
+            (api:gtk=2.0.0) ASEva.Samples.VideoFrameSample 中的图像对象
             </summary>
         </member>
-        <member name="M:ASEva.Gtk.VideoFrameSampleImage.ToPixbuf">
+        <member name="M:ASEva.UIGtk.VideoFrameSampleImage.ToPixbuf">
             <summary>
             转换为Gdk.Pixbuf对象
             </summary>
         </member>
-        <member name="M:ASEva.Gtk.VideoFrameSampleImage.ToImageSurface">
+        <member name="M:ASEva.UIGtk.VideoFrameSampleImage.ToImageSurface">
             <summary>
             转换为Cairo.ImageSurface对象，使用完毕后需调用Dispose方法进行释放
             </summary>
         </member>
-        <member name="T:ASEva.Gtk.WindowPanel">
+        <member name="T:ASEva.UIGtk.WindowPanel">
             <summary>
-            (api:gtk=1.0.0) 窗口控件，用于实现窗口组件的实际功能
+            (api:gtk=2.0.0) 窗口控件，用于实现窗口组件的实际功能
             </summary>
         </member>
-        <member name="M:ASEva.Gtk.WindowPanel.OnGetDefaultSize">
+        <member name="M:ASEva.UIGtk.WindowPanel.OnGetDefaultSize">
             <summary>
             [可选实现] 获取默认大小时被调用（若不实现默认大小即为最小尺寸）
             </summary>
             <returns>默认大小</returns>
         </member>
-        <member name="M:ASEva.Gtk.WindowPanel.OnInit(System.String)">
+        <member name="M:ASEva.UIGtk.WindowPanel.OnInit(System.String)">
             <summary>
             [可选实现] 在配置界面控件初始化时被调用
             </summary>
             <param name="config">配置字符串</param>
         </member>
-        <member name="M:ASEva.Gtk.WindowPanel.OnGetConfig">
+        <member name="M:ASEva.UIGtk.WindowPanel.OnGetConfig">
             <summary>
             [可选实现] 获取配置字符串时被调用
             </summary>
             <returns>配置字符串</returns>
         </member>
-        <member name="M:ASEva.Gtk.WindowPanel.OnInputData(System.Object)">
+        <member name="M:ASEva.UIGtk.WindowPanel.OnInputData(System.Object)">
             <summary>
             [可选实现] 在获得新数据时被调用。如果存在样本缓存，则需要在添加至缓存后使用 ASEva.Sample.ClipWithBufferBegin 将缓存范围外数据移除。另外，由于窗口隐藏时将不会调用 ASEva.WindowPanel.OnUpdateUI ，所以可以在此函数中的data为 ASEva.Samples.ManualTriggerSample 时进行后台处理（ManualTriggerSample频率为50Hz）
             </summary>
             <param name="data">新数据，包括通用样本 ASEva.GeneralSample , 手动触发器样本 ASEva.Samples.ManualTriggerSample , 音频帧样本 ASEva.Samples.AudioFrameSample , 点云帧样本 ASEva.Samples.PointCloudSample , 总线数据 ASEva.Samples.BusDataPack , 信号数据 ASEva.Samples.SignalsData , 事件数据 ASEva.EventData , 场景片段描述 ASEva.SceneData 等类型</param>
         </member>
-        <member name="M:ASEva.Gtk.WindowPanel.OnResetData">
+        <member name="M:ASEva.UIGtk.WindowPanel.OnResetData">
             <summary>
             [可选实现] 在需要重置数据缓存时被调用
             </summary>
         </member>
-        <member name="M:ASEva.Gtk.WindowPanel.OnStartSession">
+        <member name="M:ASEva.UIGtk.WindowPanel.OnStartSession">
             <summary>
             [可选实现] 在每轮开始时被调用
             </summary>
         </member>
-        <member name="M:ASEva.Gtk.WindowPanel.OnStopSession">
+        <member name="M:ASEva.UIGtk.WindowPanel.OnStopSession">
             <summary>
             [可选实现] 在每轮结束时被调用
             </summary>
         </member>
-        <member name="M:ASEva.Gtk.WindowPanel.OnUpdateUI">
+        <member name="M:ASEva.UIGtk.WindowPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用。所有与界面相关的更新应全部放在此函数内实现。需要注意，窗口隐藏时将不会调用此函数
             </summary>
         </member>
-        <member name="M:ASEva.Gtk.WindowPanel.OnRelease">
+        <member name="M:ASEva.UIGtk.WindowPanel.OnRelease">
             <summary>
             [可选实现] 在窗口控件销毁前被调用
             </summary>
