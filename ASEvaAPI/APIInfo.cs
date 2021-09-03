@@ -7,16 +7,16 @@
  * \n
  * 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph \n
  * \n
- * 本文档对应API版本：2.1.0
+ * 本文档对应API版本：2.1.1
  */
 
 using System;
-using System.Reflection;
+using System.Diagnostics;
 
 namespace ASEva
 {
     /// <summary>
-    /// version=2.1.0
+    /// version=2.1.1
     /// </summary>
     public class APIInfo
     {
@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 0, 1); // TextResource.Load可指定语言，并添加注释
+            return new Version(2, 1, 1, 0); // GetRunningOS支持识别linuxarm和macos
         }
 
         /// <summary>
@@ -35,18 +35,50 @@ namespace ASEva
         /// <returns>"windows"或"linux"，若无法识别返回null</returns>
         public static String GetRunningOS()
         {
-            switch (Environment.OSVersion.Platform)
+            if (osCode == null)
             {
-                case PlatformID.Win32NT:
-                case PlatformID.Win32S:
-                case PlatformID.Win32Windows:
-                case PlatformID.WinCE:
-                    return "windows";
-                case PlatformID.Unix:
-                    return "linux";
-                default:
-                    return null;
+                osCode = "unknown";
+                switch (Environment.OSVersion.Platform)
+                {
+                    case PlatformID.Win32NT:
+                    case PlatformID.Win32S:
+                    case PlatformID.Win32Windows:
+                    case PlatformID.WinCE:
+                        osCode = "windows";
+                        break;
+                    case PlatformID.Unix:
+                        {
+                            var pi = new ProcessStartInfo();
+                            pi.FileName = "uname";
+                            pi.Arguments = "-sm";
+                            pi.RedirectStandardOutput = true;
+                            var proc = Process.Start(pi);
+                            var s = proc.StandardOutput.ReadToEnd();
+                            proc.WaitForExit();
+
+                            var comps = s.Split(' ');
+                            if (comps.Length != 2) break;
+
+                            var osName = comps[0].ToLower();
+                            var archName = comps[1].ToLower().TrimEnd('\r', '\n');
+                            if (osName == "linux")
+                            {
+                                if (archName == "x86_64") osCode = "linux";
+                                else if (archName == "aarch64") osCode = "linuxarm";
+                            }
+                            else if (osName == "darwin")
+                            {
+                                if (archName == "x86_64") osCode = "macos";
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
             }
+            return osCode;
         }
+
+        private static String osCode = null;
     }
 }

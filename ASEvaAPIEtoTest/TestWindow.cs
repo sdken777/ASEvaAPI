@@ -14,7 +14,7 @@ namespace ASEvaAPIEtoTest
             t = TextResource.Load("test.xml", languageCode);
 
             Size = MinimumSize = this.Sizer(1000, 600);
-            Title = t["title"];
+            Title = t["title"] + " (OS:" + ASEva.APIInfo.GetRunningOS() + ")";
 
             var layout = this.SetContentAsTableLayout();
             var rowFirst = layout.AddRow(true);
