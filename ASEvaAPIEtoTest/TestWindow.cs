@@ -42,7 +42,7 @@ namespace ASEvaAPIEtoTest
             layoutStack2.AddLabel(t.Format("basic-label-stack", 2));
             layoutStack2.AddComboBox(new string[] { t.Format("basic-combobox", 1), t.Format("basic-combobox", 2) }, true);
             layoutStack2.AddButton(t["basic-button"]);
-            layoutStack2.AddControl(new ColorPicker { Value = Colors.Red } ); // TODO: Gtk(无法退出)
+            layoutStack2.AddControl(new ColorPicker { Value = Colors.Red } ); // TODO: CoreWF(高DPI尺寸问题) Gtk(无法退出)
 
             var layoutStack3 = layoutMain.AddColumnStackLayout();
             layoutStack3.AddLabel(t.Format("basic-label-stack", 3));
@@ -57,7 +57,7 @@ namespace ASEvaAPIEtoTest
             slider.ValueChanged += delegate { progressBar.Value = slider.Value; };
 
             var rowFinal = layoutMain.AddTableLayout(true).AddRow();
-            rowFinal.AddControl(new TextArea { Text = t["empty"] }, true, true);
+            rowFinal.AddControl(new TextArea { Text = t["empty"] }, false, true, 200); // TODO: CoreWF(宽度设置无效)
             var tabControl = rowFinal.AddControl(new TabControl(), false, true) as TabControl;
             var splitter = rowFinal.AddControl(new Splitter { Position = 100 }, true, true) as Splitter;
  

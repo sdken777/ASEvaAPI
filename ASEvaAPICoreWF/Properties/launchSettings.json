@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ASEvaAPICoreWF": {
+      "commandName": "Executable",
+      "executablePath": "..\\ASEvaAPIEtoTest.exe"
+    }
+  }
+}

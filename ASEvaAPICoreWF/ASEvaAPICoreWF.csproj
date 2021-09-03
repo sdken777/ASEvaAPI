@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>ASEva.CoreWF</RootNamespace>
-    <Configurations>Release</Configurations>
+    <Configurations>Release;Debug</Configurations>
     <UseWindowsForms>True</UseWindowsForms>
     <Version>0.0.0.0</Version>
   </PropertyGroup>
@@ -27,6 +27,17 @@
     <OutputPath>..\bin64</OutputPath>
     <DocumentationFile>..\bin64\ASEvaAPICoreWF.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\bin64\debug\</OutputPath>
+    <DocumentationFile>..\bin64\debug\ASEvaAPICoreWF.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
