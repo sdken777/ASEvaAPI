@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于Eto.Forms的部分。详见 ASEva.UIEto \n
- * 本文档对应API版本：2.0.0
+ * 本文档对应API版本：2.0.1
  */
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace ASEva.UIEto
 {
     /// <summary>
-    /// version=2.0.0
+    /// version=2.0.1
     /// </summary>
     public class APIInfo
     {
@@ -18,7 +18,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 0, 0, 0); // 命名空间改为ASEva.UIEto
+            return new Version(2, 0, 1, 0); // App.Init根据os code加载dll
         }
     }
 }

@@ -18,19 +18,33 @@ namespace ASEvaAPIEtoTest
 
             var layout = this.SetContentAsTableLayout();
             var rowFirst = layout.AddRow(true);
+            var rowSecond = layout.AddRow();
+
             var groupBasic = rowFirst.AddGroupBox(t["basic-group-title"], true, true);
-            InitGroupBoxBasic(groupBasic);
+            InitBasicGroupBox(groupBasic);
 
             rowFirst.AddGroupBox(t["reserved"], false, true, 200, 100);
-
-            var rowSecond = layout.AddRow();
             rowSecond.AddGroupBox(t["reserved"], false, true, 200, 100);
             rowSecond.AddGroupBox(t["reserved"], false, true, 200, 100);
         }
 
-        private void InitGroupBoxBasic(GroupBox groupBox)
+        private void InitBasicGroupBox(GroupBox groupBox)
         {
-            var layoutMain = groupBox.SetContentAsRowStackLayout();
+            var layout = groupBox.SetContentAsRowStackLayout();
+            var tabControl = layout.AddControl(new TabControl(), true) as TabControl;
+
+            var tabPage1 = new TabPage { Text = t.Format("basic-tabpage-title", 1) };
+            tabControl.Pages.Add(tabPage1);
+            InitBasicTagPage1(tabPage1);
+
+            var tabPage2 = new TabPage { Text = t.Format("basic-tabpage-title", 2) };
+            tabControl.Pages.Add(tabPage2);
+            InitBasicTagPage2(tabPage2);
+        }
+
+        private void InitBasicTagPage1(TabPage tabPage)
+        {
+            var layoutMain = tabPage.SetContentAsRowStackLayout();
 
             var layoutStack1 = layoutMain.AddColumnStackLayout();
             layoutStack1.AddLabel(t.Format("basic-label-stack", 1));
@@ -55,11 +69,14 @@ namespace ASEvaAPIEtoTest
             var slider = layoutStack4.AddControl(new Slider { MinValue = 0, MaxValue = 100, TickFrequency = 10 }, true, 0, 40) as Slider;
             var progressBar = layoutStack4.AddControl(new ProgressBar()) as ProgressBar;
             slider.ValueChanged += delegate { progressBar.Value = slider.Value; };
+        }
 
-            var rowFinal = layoutMain.AddTableLayout(true).AddRow();
-            rowFinal.AddControl(new TextArea { Text = t["empty"] }, false, true, 200); // TODO: CoreWF(宽度设置无效)
-            var tabControl = rowFinal.AddControl(new TabControl(), false, true) as TabControl;
-            var splitter = rowFinal.AddControl(new Splitter { Position = 100 }, true, true) as Splitter;
+        private void InitBasicTagPage2(TabPage tabPage)
+        {
+            var rowMain = tabPage.SetContentAsTableLayout().AddRow(true);
+
+            rowMain.AddControl(new TextArea { Text = t["empty"] }, false, true, 200); // TODO: CoreWF(宽度设置无效)
+            var splitter = rowMain.AddControl(new Splitter { Position = 100 }, true, true) as Splitter;
  
             var listBox = new ListBox();
             listBox.Items.Add(t.Format("basic-list-item", 1));
@@ -70,14 +87,6 @@ namespace ASEvaAPIEtoTest
             var scrollBox = new Scrollable();
             scrollBox.SetContentAsRowStackLayout().AddControl(new ImageView { Image = ImageResourceLoader.Load("picture.png") });
             splitter.Panel2 = scrollBox;
-
-            var tabPage1 = new TabPage { Text = t.Format("basic-tabpage-title", 1) };
-            tabPage1.SetContentAsRowStackLayout().AddControl(new TextBox());
-            tabControl.Pages.Add(tabPage1);
-
-            var tabPage2 = new TabPage { Text = t.Format("basic-tabpage-title", 2) };
-            tabPage2.SetContentAsRowStackLayout().AddControl(new SearchBox());
-            tabControl.Pages.Add(tabPage2);
         }
 
         private TextResource t;

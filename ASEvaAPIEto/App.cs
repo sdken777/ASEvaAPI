@@ -20,13 +20,28 @@ namespace ASEva.UIEto
         {
             if (handler == null)
             {
-                var workPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                foreach (var filePath in Directory.GetFiles(workPath))
+                String dllFileName = null;
+                String uiNamespace =  null;
+                switch (ASEva.APIInfo.GetRunningOS())
                 {
-                    var fileName = Path.GetFileName(filePath);
-                    if (fileName.StartsWith("ASEvaAPI") && fileName.EndsWith(".dll"))
+                case "windows":
+                    dllFileName = "ASEvaAPICoreWF.dll";
+                    uiNamespace = "UICoreWF";
+                    break;
+                case "linux":
+                case "linuxarm":
+                    dllFileName = "ASEvaAPIGtk.dll";
+                    uiNamespace = "UIGtk";
+                    break;
+                }
+
+                if (dllFileName != null)
+                {
+                    var workPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    var dllFilePath = workPath + Path.DirectorySeparatorChar + dllFileName;
+                    if (File.Exists(dllFilePath))
                     {
-                        var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+                        var stream = new FileStream(dllFilePath, FileMode.Open, FileAccess.Read);
                         var fileBinary = new byte[stream.Length];
                         stream.Read(fileBinary, 0, (int)stream.Length);
                         stream.Close();
@@ -34,8 +49,7 @@ namespace ASEva.UIEto
                         var assembly = Assembly.Load(fileBinary);
                         if (assembly != null)
                         {
-                            var uiType = Path.GetFileNameWithoutExtension(filePath).Substring(8);
-                            var handlerCreator = assembly.GetType("ASEva.UI" + uiType + ".AppHandlerCreator");
+                            var handlerCreator = assembly.GetType("ASEva." + uiNamespace + ".AppHandlerCreator");
                             if (handlerCreator != null)
                             {
                                 handler = (AppHandler)handlerCreator.InvokeMember("Create", BindingFlags.Default | BindingFlags.InvokeMethod, null, null, new object[] { });
