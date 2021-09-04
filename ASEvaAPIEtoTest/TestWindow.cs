@@ -62,7 +62,7 @@ namespace ASEvaAPIEtoTest
             layoutStack3.AddLabel(t.Format("basic-label-stack", 3));
             layoutStack3.AddControl(new TextBox(), true);
             layoutStack3.AddControl(new SearchBox()); // TODO: CoreWF(图标/清除)
-            layoutStack3.AddControl(new NumericStepper { MinValue = 0, MaxValue = 100 } ); // TODO: Gtk-Ubuntu2104-Raspi(set_Value异常)
+            layoutStack3.AddControl(new NumericStepper { MinValue = 0, MaxValue = 100 } );
 
             var layoutStack4 = layoutMain.AddColumnStackLayout();
             layoutStack4.AddLabel(t.Format("basic-label-stack", 4));

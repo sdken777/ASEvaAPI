@@ -18,6 +18,7 @@ namespace ASEva.UIGtk
         {
             var platform = new global::Eto.GtkSharp.Platform();
             platform.Add<LinkButton.IHandler>(() => new LinkButtonHandler());
+            platform.Add<NumericStepper.IHandler>(() => new NumericStepperHandler());
 
             var app = new Application(platform);
             return app;
