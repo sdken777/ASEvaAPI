@@ -12,12 +12,24 @@
         <en>Empty</en>
         <ch>空</ch>
     </t>
+    <t id="menu-button">
+        <en>Message box</en>
+        <ch>消息框</ch>
+    </t>
+    <t id="menu-check">
+        <en>Check item {0}</en>
+        <ch>多选项{0}</ch>
+    </t>
+    <t id="menu-radio">
+        <en>Radio item {0}</en>
+        <ch>单选项{0}</ch>
+    </t>
     <t id="basic-group-title">
         <en>Basic Controls</en>
         <ch>基本控件</ch>
     </t>
-    <t id="basic-label-stack">
-        <en>Row{0:D}:</en>
+    <t id="basic-label-row">
+        <en>Row-{0:D}:</en>
         <ch>第{0:D}行：</ch>
     </t>
     <t id="basic-checkbox">
@@ -41,16 +53,16 @@
         <ch>按钮</ch>
     </t>
     <t id="basic-combobox">
-        <en>Option {0:D}</en>
-        <ch>选项{0:D}</ch>
+        <en>Option {0}</en>
+        <ch>选项{0}</ch>
     </t>
     <t id="basic-list-item">
-        <en>List Option {0:D}</en>
-        <ch>列表项{0:D}</ch>
+        <en>List Option {0}</en>
+        <ch>列表项{0}</ch>
     </t>
     <t id="basic-tabpage-title">
-        <en>Tabpage {0:D}</en>
-        <ch>标签页{0:D}</ch>
+        <en>Tabpage {0}</en>
+        <ch>标签页{0}</ch>
     </t>
     <t id="basic-grid-key-title">
         <en>Key</en>
@@ -59,5 +71,13 @@
     <t id="basic-grid-value-title">
         <en>Value</en>
         <ch>值</ch>
+    </t>
+    <t id="basic-grid-add-row">
+        <en>Add row</en>
+        <ch>添加行</ch>
+    </t>
+    <t id="basic-grid-remove-row">
+        <en>Remove row</en>
+        <ch>移除行</ch>
     </t>
 </root>

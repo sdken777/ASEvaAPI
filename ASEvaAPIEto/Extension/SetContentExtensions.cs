@@ -19,6 +19,7 @@ namespace ASEva.UIEto
         /// <returns>创建的横向堆叠布局</returns>
         public static StackLayout SetContentAsRowLayout(this Panel panel, int logicalPadding = 8, int logicalSpacing = 8, VerticalAlignment alignment = VerticalAlignment.Center)
         {
+            if (panel.Content != null) return null;
             var layout = new StackLayout { Orientation = Orientation.Horizontal, VerticalContentAlignment = alignment };
             layout.Padding = layout.Sizer(logicalPadding);
             layout.Spacing = layout.Sizer(logicalSpacing);
@@ -36,6 +37,7 @@ namespace ASEva.UIEto
         /// <returns>创建的纵向堆叠布局</returns>
         public static StackLayout SetContentAsColumnLayout(this Panel panel, int logicalPadding = 8, int logicalSpacing = 8, HorizontalAlignment alignment = HorizontalAlignment.Stretch)
         {
+            if (panel.Content != null) return null;
             var layout = new StackLayout { Orientation = Orientation.Vertical, HorizontalContentAlignment = alignment };
             layout.Padding = layout.Sizer(logicalPadding);
             layout.Spacing = layout.Sizer(logicalSpacing);
@@ -53,6 +55,7 @@ namespace ASEva.UIEto
         /// <returns>创建的表布局</returns>
         public static TableLayout SetContentAsTableLayout(this Panel panel, int logicalPadding = 8, int logicalSpacingX = 8, int logicalSpacingY = 8)
         {
+            if (panel.Content != null) return null;
             var layout = new TableLayout();
             layout.Padding = layout.Sizer(logicalPadding);
             layout.Spacing = new Size(layout.Sizer(logicalSpacingX), layout.Sizer(logicalSpacingY));
@@ -67,6 +70,7 @@ namespace ASEva.UIEto
         /// <returns>创建的像素布局</returns>
         public static PixelLayout SetContentAsPixelLayout(this Panel panel)
         {
+            if (panel.Content != null) return null;
             var layout = new PixelLayout();
             panel.Content = layout;
             return layout;

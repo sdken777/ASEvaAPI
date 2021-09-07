@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于Eto.Forms的部分。详见 ASEva.UIEto \n
- * 本文档对应API版本：2.0.2
+ * 本文档对应API版本：2.0.3
  */
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace ASEva.UIEto
 {
     /// <summary>
-    /// version=2.0.2
+    /// version=2.0.3
     /// </summary>
     public class APIInfo
     {
@@ -18,7 +18,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 0, 2, 0); // RowStackLayout和ColumnStackLayout意义反转，且略写Stack。StackLayout初始化增加alignment参数。AddControlExtensions细分为StackLayoutExtensions和TableLayoutExtensions。新增TabControlExtensions和SplitterExtensions。移除ImageResourceLoader（可通过Bitmap.FromResource加载）
+            return new Version(2, 0, 3, 0); // 添加TextTableView。添加ContextMenuExtensions
         }
     }
 }

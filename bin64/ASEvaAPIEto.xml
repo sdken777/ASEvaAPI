@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.0.2
+            version=2.0.3
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -46,6 +46,42 @@
             <summary>
             [可选实现] 在需要更新界面时被调用
             </summary>
+        </member>
+        <member name="T:ASEva.UIEto.ContextMenuExtensions">
+            <summary>
+            (api:eto=2.0.3) 方便操作右键菜单的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddSeparator(Eto.Forms.ContextMenu)">
+            <summary>
+            添加分割线
+            </summary>
+            <param name="menu">右键菜单</param>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddButtonItem(Eto.Forms.ContextMenu,System.String,Eto.Drawing.Bitmap)">
+            <summary>
+            添加按键项
+            </summary>
+            <param name="menu">右键菜单</param>
+            <param name="text">菜单项文字</param>
+            <param name="image">菜单项文字前的图标，默认为null</param>
+            <returns></returns>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddCheckItem(Eto.Forms.ContextMenu,System.String)">
+            <summary>
+            添加多选项
+            </summary>
+            <param name="menu">右键菜单</param>
+            <param name="text">菜单项文字</param>
+            <returns>多选项对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddRadioItems(Eto.Forms.ContextMenu,System.String[])">
+            <summary>
+            添加一组单选项
+            </summary>
+            <param name="menu">右键菜单</param>
+            <param name="texts">各菜单项文字</param>
+            <returns>一组单选项对象</returns>
         </member>
         <member name="T:ASEva.UIEto.SetContentExtensions">
             <summary>
@@ -479,6 +515,47 @@
             <param name="logicalSpacingX">表布局中各控件的横向间隙</param>
             <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
             <returns>创建的表布局</returns>
+        </member>
+        <member name="T:ASEva.UIEto.TextTableView">
+            <summary>
+            (api:eto=2.0.3) 纯文字的表格控件
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.AddColumn(System.String,System.Int32,System.Boolean)">
+            <summary>
+            添加一列（需要在添加行之前进行）
+            </summary>
+            <param name="title">列标题</param>
+            <param name="logicalWidth">列宽度</param>
+            <param name="editable">是否可编辑该列文字</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.AddRow(System.String[])">
+            <summary>
+            添加一行
+            </summary>
+            <param name="values">该行的初始文字，设为null则默认为空</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.RemoveRow(System.Int32)">
+            <summary>
+            移除一行
+            </summary>
+            <param name="rowIndex">行序号</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.GetValue(System.Int32,System.Int32)">
+            <summary>
+            获取某格文字
+            </summary>
+            <param name="rowIndex">行序号</param>
+            <param name="columnIndex">列序号</param>
+            <returns>该格文字</returns>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.SetValue(System.Int32,System.Int32,System.String)">
+            <summary>
+            设置某格文字
+            </summary>
+            <param name="rowIndex">行序号</param>
+            <param name="columnIndex">列序号</param>
+            <param name="val">该格文字</param>
         </member>
         <member name="T:ASEva.UIEto.WindowPanel">
             <summary>
