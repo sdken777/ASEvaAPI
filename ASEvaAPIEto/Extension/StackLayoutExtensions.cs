@@ -5,9 +5,9 @@ using Eto.Drawing;
 namespace ASEva.UIEto
 {
     /// <summary>
-    /// (api:eto=2.0.0) 方便添加控件的扩展
+    /// (api:eto=2.0.2) 方便操作堆叠布局的扩展
     /// </summary>
-    public static partial class AddControlExtensions
+    public static partial class StackLayoutExtensions
     {
         /// <summary>
         /// 添加空间延布局方向撑满
@@ -29,14 +29,7 @@ namespace ASEva.UIEto
         {
             if (text == null) text = "";
             var label = new Label { Text = text, Wrap = WrapMode.None };
-            if (stackLayout.Orientation == Orientation.Vertical)
-            {
-                stackLayout.Items.Add(new StackLayoutItem(label, HorizontalAlignment.Stretch, expand));
-            }
-            else
-            {
-                stackLayout.Items.Add(new StackLayoutItem(label, VerticalAlignment.Center, expand));
-            }
+            stackLayout.Items.Add(new StackLayoutItem(label, expand));
             return label;
         }
 
@@ -54,27 +47,14 @@ namespace ASEva.UIEto
         {
             if (text == null) text = "";
             var label = new Label { Text = text, Wrap = WrapMode.None, TextAlignment = alignment, VerticalAlignment = VerticalAlignment.Center };
-            if (logicalWidth > 0)
-            {
-                label.SetLogicalWidth(logicalWidth);
-            }
-            if (logicalHeight > 0)
-            {
-                label.SetLogicalHeight(logicalHeight);
-            }
-            if (stackLayout.Orientation == Orientation.Vertical)
-            {
-                stackLayout.Items.Add(new StackLayoutItem(label, HorizontalAlignment.Stretch, expand));
-            }
-            else
-            {
-                stackLayout.Items.Add(new StackLayoutItem(label, VerticalAlignment.Center, expand));
-            }
+            if (logicalWidth > 0) label.SetLogicalWidth(logicalWidth);
+            if (logicalHeight > 0) label.SetLogicalHeight(logicalHeight);
+            stackLayout.Items.Add(new StackLayoutItem(label, expand));
             return label;
         }
 
         /// <summary>
-        /// 添加按键至堆叠布局
+        /// 添加文字按键至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="text">文字</param>
@@ -86,22 +66,28 @@ namespace ASEva.UIEto
         {
             if (text == null) text = "";
             var button = new Button { Text = text };
-            if (logicalWidth > 0)
-            {
-                button.SetLogicalWidth(logicalWidth);
-            }
-            if (logicalHeight > 0)
-            {
-                button.SetLogicalHeight(logicalHeight);
-            }
-            if (stackLayout.Orientation == Orientation.Vertical)
-            {
-                stackLayout.Items.Add(new StackLayoutItem(button, HorizontalAlignment.Stretch, expand));
-            }
-            else
-            {
-                stackLayout.Items.Add(new StackLayoutItem(button, VerticalAlignment.Center, expand));
-            }
+            if (logicalWidth > 0) button.SetLogicalWidth(logicalWidth);
+            if (logicalHeight > 0) button.SetLogicalHeight(logicalHeight);
+            stackLayout.Items.Add(new StackLayoutItem(button, expand));
+            return button;
+        }
+        /// <summary>
+        /// 添加图像按键至堆叠布局
+        /// </summary>
+        /// <param name="stackLayout">堆叠布局</param>
+        /// <param name="image">图像</param>
+        /// <param name="expand">是否延布局方向撑满</param>
+        /// <param name="logicalWidth">初始宽度，0表示不设置</param>
+        /// <param name="logicalHeight">初始高度，0表示不设置</param>
+        /// <returns>创建的按键对象</returns>
+        public static Button AddButton(this StackLayout stackLayout, Bitmap image, bool expand = false, int logicalWidth = 0, int logicalHeight = 0)
+        {
+            var button = new Button();
+            if (image != null) button.Image = image;
+            else button.Text = "";
+            if (logicalWidth > 0) button.SetLogicalWidth(logicalWidth);
+            if (logicalHeight > 0) button.SetLogicalHeight(logicalHeight);
+            stackLayout.Items.Add(new StackLayoutItem(button, expand));
             return button;
         }
 
@@ -116,14 +102,7 @@ namespace ASEva.UIEto
         {
             if (text == null) text = "";
             var button = new LinkButton { Text = text };
-            if (stackLayout.Orientation == Orientation.Vertical)
-            {
-                stackLayout.Items.Add(new StackLayoutItem(button, HorizontalAlignment.Stretch, expand));
-            }
-            else
-            {
-                stackLayout.Items.Add(new StackLayoutItem(button, VerticalAlignment.Center, expand));
-            }
+            stackLayout.Items.Add(new StackLayoutItem(button, expand));
             return button;
         }
 
@@ -139,14 +118,7 @@ namespace ASEva.UIEto
         {
             if (text == null) text = "";
             var checkBox = new CheckBox { Text = text, Checked = isChecked };
-            if (stackLayout.Orientation == Orientation.Vertical)
-            {
-                stackLayout.Items.Add(new StackLayoutItem(checkBox, HorizontalAlignment.Stretch, expand));
-            }
-            else
-            {
-                stackLayout.Items.Add(new StackLayoutItem(checkBox, VerticalAlignment.Center, expand));
-            }
+            stackLayout.Items.Add(new StackLayoutItem(checkBox, expand));
             return checkBox;
         }
 
@@ -165,28 +137,12 @@ namespace ASEva.UIEto
 
             var radioButtonList = new RadioButtonList();
             radioButtonList.Spacing = new Size(radioButtonList.Sizer(logicalSpacing), radioButtonList.Sizer(logicalSpacing));
-            foreach (var text in texts)
-            {
-                radioButtonList.Items.Add(text);
-            }
+            foreach (var text in texts) radioButtonList.Items.Add(text);
 
-            if (selectedIndex >= 0 && selectedIndex < texts.Length)
-            {
-                radioButtonList.SelectedIndex = selectedIndex;
-            }
-            else
-            {
-                radioButtonList.SelectedIndex = 0;
-            }
+            if (selectedIndex >= 0 && selectedIndex < texts.Length) radioButtonList.SelectedIndex = selectedIndex;
+            else radioButtonList.SelectedIndex = 0;
 
-            if (stackLayout.Orientation == Orientation.Vertical)
-            {
-                stackLayout.Items.Add(new StackLayoutItem(radioButtonList, HorizontalAlignment.Stretch, expand));
-            }
-            else
-            {
-                stackLayout.Items.Add(new StackLayoutItem(radioButtonList, VerticalAlignment.Center, expand));
-            }
+            stackLayout.Items.Add(new StackLayoutItem(radioButtonList, expand));
             return radioButtonList;
         }
 
@@ -203,28 +159,12 @@ namespace ASEva.UIEto
             if (texts == null || texts.Length == 0) return null;
 
             var comboBox = new ComboBox { ReadOnly = true };
-            foreach (var text in texts)
-            {
-                comboBox.Items.Add(text);
-            }
+            foreach (var text in texts) comboBox.Items.Add(text);
 
-            if (selectedIndex >= 0 && selectedIndex < texts.Length)
-            {
-                comboBox.SelectedIndex = selectedIndex;
-            }
-            else
-            {
-                comboBox.SelectedIndex = 0;
-            }
+            if (selectedIndex >= 0 && selectedIndex < texts.Length) comboBox.SelectedIndex = selectedIndex;
+            else comboBox.SelectedIndex = 0;
 
-            if (stackLayout.Orientation == Orientation.Vertical)
-            {
-                stackLayout.Items.Add(new StackLayoutItem(comboBox, HorizontalAlignment.Stretch, expand));
-            }
-            else
-            {
-                stackLayout.Items.Add(new StackLayoutItem(comboBox, VerticalAlignment.Center, expand));
-            }
+            stackLayout.Items.Add(new StackLayoutItem(comboBox, expand));
             return comboBox;
         }
 
@@ -241,22 +181,9 @@ namespace ASEva.UIEto
         {
             if (title == null) title = "";
             var groupBox = new GroupBox { Text = title };
-            if (logicalWidth > 0)
-            {
-                groupBox.SetLogicalWidth(logicalWidth);
-            }
-            if (logicalHeight > 0)
-            {
-                groupBox.SetLogicalHeight(logicalHeight);
-            }
-            if (stackLayout.Orientation == Orientation.Vertical)
-            {
-                stackLayout.Items.Add(new StackLayoutItem(groupBox, HorizontalAlignment.Stretch, expand));
-            }
-            else
-            {
-                stackLayout.Items.Add(new StackLayoutItem(groupBox, VerticalAlignment.Center, expand));
-            }
+            if (logicalWidth > 0) groupBox.SetLogicalWidth(logicalWidth);
+            if (logicalHeight > 0) groupBox.SetLogicalHeight(logicalHeight);
+            stackLayout.Items.Add(new StackLayoutItem(groupBox, expand));
             return groupBox;
         }
 
@@ -270,66 +197,41 @@ namespace ASEva.UIEto
         /// <param name="logicalHeight">初始高度，0表示不设置</param>
         public static Control AddControl(this StackLayout stackLayout, Control control, bool expand = false, int logicalWidth = 0, int logicalHeight = 0)
         {
-            if (logicalWidth > 0)
-            {
-                control.SetLogicalWidth(logicalWidth);
-            }
-            if (logicalHeight > 0)
-            {
-                control.SetLogicalHeight(logicalHeight);
-            }
-            if (stackLayout.Orientation == Orientation.Vertical)
-            {
-                stackLayout.Items.Add(new StackLayoutItem(control, HorizontalAlignment.Stretch, expand));
-            }
-            else
-            {
-                stackLayout.Items.Add(new StackLayoutItem(control, VerticalAlignment.Center, expand));
-            }
+            if (logicalWidth > 0) control.SetLogicalWidth(logicalWidth);
+            if (logicalHeight > 0) control.SetLogicalHeight(logicalHeight);
+            stackLayout.Items.Add(new StackLayoutItem(control, expand));
             return control;
         }
 
         /// <summary>
-        /// 添加行堆叠布局至堆叠布局
+        /// 添加横向堆叠布局至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="expand">是否延布局方向撑满</param>
-        /// <param name="logicalSpacing">行堆叠布局中各控件的间隙</param>
-        /// <returns>创建的行堆叠布局</returns>
-        public static StackLayout AddRowStackLayout(this StackLayout stackLayout, bool expand = false, int logicalSpacing = 8)
+        /// <param name="logicalSpacing">横向堆叠布局中各控件的间隙</param>
+        /// <param name="alignment">横向堆叠布局中各控件的纵向对齐方式</param>
+        /// <returns>创建的横向堆叠布局</returns>
+        public static StackLayout AddRowLayout(this StackLayout stackLayout, bool expand = false, int logicalSpacing = 8, VerticalAlignment alignment = VerticalAlignment.Center)
         {
-            var layout = new StackLayout { Orientation = Orientation.Vertical };
+            var layout = new StackLayout { Orientation = Orientation.Horizontal, VerticalContentAlignment = alignment };
             layout.Spacing = layout.Sizer(logicalSpacing);
-            if (stackLayout.Orientation == Orientation.Vertical)
-            {
-                stackLayout.Items.Add(new StackLayoutItem(layout, HorizontalAlignment.Stretch, expand));
-            }
-            else
-            {
-                stackLayout.Items.Add(new StackLayoutItem(layout, VerticalAlignment.Center, expand));
-            }
+            stackLayout.Items.Add(new StackLayoutItem(layout, expand));
             return layout;
         }
 
         /// <summary>
-        /// 添加列堆叠布局至堆叠布局
+        /// 添加纵向堆叠布局至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="expand">是否延布局方向撑满</param>
-        /// <param name="logicalSpacing">列堆叠布局中各控件的间隙</param>
-        /// <returns>创建的列堆叠布局</returns>
-        public static StackLayout AddColumnStackLayout(this StackLayout stackLayout, bool expand = false, int logicalSpacing = 8)
+        /// <param name="logicalSpacing">纵向堆叠布局中各控件的间隙</param>
+        /// <param name="alignment">纵向堆叠布局中各控件的横向对齐方式</param>
+        /// <returns>创建的纵向堆叠布局</returns>
+        public static StackLayout AddColumnLayout(this StackLayout stackLayout, bool expand = false, int logicalSpacing = 8, HorizontalAlignment alignment = HorizontalAlignment.Stretch)
         {
-            var layout = new StackLayout { Orientation = Orientation.Horizontal };
+            var layout = new StackLayout { Orientation = Orientation.Vertical, HorizontalContentAlignment = alignment };
             layout.Spacing = layout.Sizer(logicalSpacing);
-            if (stackLayout.Orientation == Orientation.Vertical)
-            {
-                stackLayout.Items.Add(new StackLayoutItem(layout, HorizontalAlignment.Stretch, expand));
-            }
-            else
-            {
-                stackLayout.Items.Add(new StackLayoutItem(layout, VerticalAlignment.Center, expand));
-            }
+            stackLayout.Items.Add(new StackLayoutItem(layout, expand));
             return layout;
         }
 
@@ -345,14 +247,7 @@ namespace ASEva.UIEto
         {
             var layout = new TableLayout();
             layout.Spacing = new Size(layout.Sizer(logicalSpacingX), layout.Sizer(logicalSpacingY));
-            if (stackLayout.Orientation == Orientation.Vertical)
-            {
-                stackLayout.Items.Add(new StackLayoutItem(layout, HorizontalAlignment.Stretch, expand));
-            }
-            else
-            {
-                stackLayout.Items.Add(new StackLayoutItem(layout, VerticalAlignment.Center, expand));
-            }
+            stackLayout.Items.Add(new StackLayoutItem(layout, expand));
             return layout;
         }
     }

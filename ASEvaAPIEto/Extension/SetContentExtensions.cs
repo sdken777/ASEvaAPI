@@ -10,15 +10,16 @@ namespace ASEva.UIEto
     public static class SetContentExtensions
     {
         /// <summary>
-        /// 设置行堆叠布局至面板Content
+        /// 设置横向堆叠布局至面板Content
         /// </summary>
         /// <param name="panel">面板</param>
-        /// <param name="logicalPadding">行堆叠布局的边缘空隙</param>
-        /// <param name="logicalSpacing">行堆叠布局中各控件的间隙</param>
-        /// <returns>创建的行堆叠布局</returns>
-        public static StackLayout SetContentAsRowStackLayout(this Panel panel, int logicalPadding = 8, int logicalSpacing = 8)
+        /// <param name="logicalPadding">横向堆叠布局的边缘空隙</param>
+        /// <param name="logicalSpacing">横向堆叠布局中各控件的间隙</param>
+        /// <param name="alignment">横向堆叠布局中各控件的纵向对齐方式</param>
+        /// <returns>创建的横向堆叠布局</returns>
+        public static StackLayout SetContentAsRowLayout(this Panel panel, int logicalPadding = 8, int logicalSpacing = 8, VerticalAlignment alignment = VerticalAlignment.Center)
         {
-            var layout = new StackLayout { Orientation = Orientation.Vertical };
+            var layout = new StackLayout { Orientation = Orientation.Horizontal, VerticalContentAlignment = alignment };
             layout.Padding = layout.Sizer(logicalPadding);
             layout.Spacing = layout.Sizer(logicalSpacing);
             panel.Content = layout;
@@ -26,15 +27,16 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
-        /// 设置列堆叠布局至面板Content
+        /// 设置纵向堆叠布局至面板Content
         /// </summary>
         /// <param name="panel">面板</param>
-        /// <param name="logicalPadding">列堆叠布局的边缘空隙</param>
-        /// <param name="logicalSpacing">列堆叠布局中各控件的间隙</param>
-        /// <returns>创建的列堆叠布局</returns>
-        public static StackLayout SetContentAsColumnStackLayout(this Panel panel, int logicalPadding = 8, int logicalSpacing = 8)
+        /// <param name="logicalPadding">纵向堆叠布局的边缘空隙</param>
+        /// <param name="logicalSpacing">纵向堆叠布局中各控件的间隙</param>
+        /// <param name="alignment">纵向堆叠布局中各控件的横向对齐方式</param>
+        /// <returns>创建的纵向堆叠布局</returns>
+        public static StackLayout SetContentAsColumnLayout(this Panel panel, int logicalPadding = 8, int logicalSpacing = 8, HorizontalAlignment alignment = HorizontalAlignment.Stretch)
         {
-            var layout = new StackLayout { Orientation = Orientation.Horizontal };
+            var layout = new StackLayout { Orientation = Orientation.Vertical, HorizontalContentAlignment = alignment };
             layout.Padding = layout.Sizer(logicalPadding);
             layout.Spacing = layout.Sizer(logicalSpacing);
             panel.Content = layout;

@@ -5,9 +5,9 @@ using Eto.Drawing;
 namespace ASEva.UIEto
 {
     /// <summary>
-    /// (api:eto=2.0.0) 方便添加控件的扩展
+    /// (api:eto=2.0.2) 方便操作表布局的扩展
     /// </summary>
-    public static partial class AddControlExtensions
+    public static partial class TableLayoutExtensions
     {
         /// <summary>
         /// 表布局添加一行
@@ -47,7 +47,6 @@ namespace ASEva.UIEto
             stackLayout.Items.Add(new StackLayoutItem(label, VerticalAlignment.Center, true));
 
             tableRow.Cells.Add(new TableCell(stackLayout, expandWidth));
-
             return label;
         }
 
@@ -66,25 +65,18 @@ namespace ASEva.UIEto
         {
             if (text == null) text = "";
             var label = new Label { Text = text, Wrap = WrapMode.None, TextAlignment = alignment, VerticalAlignment = VerticalAlignment.Center };
-            if (logicalWidth > 0)
-            {
-                label.SetLogicalWidth(logicalWidth);
-            }
-            if (logicalHeight > 0)
-            {
-                label.SetLogicalHeight(logicalHeight);
-            }
+            if (logicalWidth > 0) label.SetLogicalWidth(logicalWidth);
+            if (logicalHeight > 0) label.SetLogicalHeight(logicalHeight);
 
             var stackLayout = new StackLayout() { Orientation = Orientation.Horizontal };
             stackLayout.Items.Add(new StackLayoutItem(label, fillHeight ? VerticalAlignment.Stretch : VerticalAlignment.Center, true));
 
             tableRow.Cells.Add(new TableCell(stackLayout, expandWidth));
-
             return label;
         }
 
         /// <summary>
-        /// 添加按键至表布局的行
+        /// 添加文字按键至表布局的行
         /// </summary>
         /// <param name="tableRow">表布局的行</param>
         /// <param name="text">文字</param>
@@ -97,20 +89,38 @@ namespace ASEva.UIEto
         {
             if (text == null) text = "";
             var button = new Button { Text = text };
-            if (logicalWidth > 0)
-            {
-                button.SetLogicalWidth(logicalWidth);
-            }
-            if (logicalHeight > 0)
-            {
-                button.SetLogicalHeight(logicalHeight);
-            }
+            if (logicalWidth > 0) button.SetLogicalWidth(logicalWidth);
+            if (logicalHeight > 0) button.SetLogicalHeight(logicalHeight);
 
             var stackLayout = new StackLayout() { Orientation = Orientation.Horizontal };
             stackLayout.Items.Add(new StackLayoutItem(button, fillHeight ? VerticalAlignment.Stretch : VerticalAlignment.Center, true));
 
             tableRow.Cells.Add(new TableCell(stackLayout, expandWidth));
+            return button;
+        }
 
+        /// <summary>
+        /// 添加图像按键至表布局的行
+        /// </summary>
+        /// <param name="tableRow">表布局的行</param>
+        /// <param name="image">图像</param>
+        /// <param name="expandWidth">是否横向撑满</param>
+        /// <param name="fillHeight">是否纵向填满</param>
+        /// <param name="logicalWidth">初始宽度，0表示不设置</param>
+        /// <param name="logicalHeight">初始高度，0表示不设置</param>
+        /// <returns>创建的按键对象</returns>
+        public static Button AddButton(this TableRow tableRow, Bitmap image, bool expandWidth = false, bool fillHeight = false, int logicalWidth = 0, int logicalHeight = 0)
+        {
+            var button = new Button();
+            if (image != null) button.Image = image;
+            else button.Text = "";
+            if (logicalWidth > 0) button.SetLogicalWidth(logicalWidth);
+            if (logicalHeight > 0) button.SetLogicalHeight(logicalHeight);
+
+            var stackLayout = new StackLayout() { Orientation = Orientation.Horizontal };
+            stackLayout.Items.Add(new StackLayoutItem(button, fillHeight ? VerticalAlignment.Stretch : VerticalAlignment.Center, true));
+
+            tableRow.Cells.Add(new TableCell(stackLayout, expandWidth));
             return button;
         }
 
@@ -131,7 +141,6 @@ namespace ASEva.UIEto
             stackLayout.Items.Add(new StackLayoutItem(button, fillHeight ? VerticalAlignment.Stretch : VerticalAlignment.Center, true));
 
             tableRow.Cells.Add(new TableCell(stackLayout, expandWidth));
-
             return button;
         }
 
@@ -153,7 +162,6 @@ namespace ASEva.UIEto
             stackLayout.Items.Add(new StackLayoutItem(checkBox, fillHeight ? VerticalAlignment.Stretch : VerticalAlignment.Center, true));
 
             tableRow.Cells.Add(new TableCell(stackLayout, expandWidth));
-
             return checkBox;
         }
 
@@ -173,25 +181,14 @@ namespace ASEva.UIEto
 
             var radioButtonList = new RadioButtonList();
             radioButtonList.Spacing = new Size(radioButtonList.Sizer(logicalSpacing), radioButtonList.Sizer(logicalSpacing));
-            foreach (var text in texts)
-            {
-                radioButtonList.Items.Add(text);
-            }
-
-            if (selectedIndex >= 0 && selectedIndex < texts.Length)
-            {
-                radioButtonList.SelectedIndex = selectedIndex;
-            }
-            else
-            {
-                radioButtonList.SelectedIndex = 0;
-            }
+            foreach (var text in texts) radioButtonList.Items.Add(text);
+            if (selectedIndex >= 0 && selectedIndex < texts.Length) radioButtonList.SelectedIndex = selectedIndex;
+            else radioButtonList.SelectedIndex = 0;
 
             var stackLayout = new StackLayout() { Orientation = Orientation.Horizontal };
             stackLayout.Items.Add(new StackLayoutItem(radioButtonList, fillHeight ? VerticalAlignment.Stretch : VerticalAlignment.Center, true));
 
             tableRow.Cells.Add(new TableCell(stackLayout, expandWidth));
-
             return radioButtonList;
         }
 
@@ -209,25 +206,14 @@ namespace ASEva.UIEto
             if (texts == null || texts.Length == 0) return null;
 
             var comboBox = new ComboBox { ReadOnly = true };
-            foreach (var text in texts)
-            {
-                comboBox.Items.Add(text);
-            }
-
-            if (selectedIndex >= 0 && selectedIndex < texts.Length)
-            {
-                comboBox.SelectedIndex = selectedIndex;
-            }
-            else
-            {
-                comboBox.SelectedIndex = 0;
-            }
+            foreach (var text in texts) comboBox.Items.Add(text);
+            if (selectedIndex >= 0 && selectedIndex < texts.Length) comboBox.SelectedIndex = selectedIndex;
+            else comboBox.SelectedIndex = 0;
 
             var stackLayout = new StackLayout() { Orientation = Orientation.Horizontal };
             stackLayout.Items.Add(new StackLayoutItem(comboBox, fillHeight ? VerticalAlignment.Stretch : VerticalAlignment.Center, true));
 
             tableRow.Cells.Add(new TableCell(stackLayout, expandWidth));
-
             return comboBox;
         }
 
@@ -245,20 +231,13 @@ namespace ASEva.UIEto
         {
             if (title == null) title = "";
             var groupBox = new GroupBox { Text = title };
-            if (logicalWidth > 0)
-            {
-                groupBox.SetLogicalWidth(logicalWidth);
-            }
-            if (logicalHeight > 0)
-            {
-                groupBox.SetLogicalHeight(logicalHeight);
-            }
+            if (logicalWidth > 0) groupBox.SetLogicalWidth(logicalWidth);
+            if (logicalHeight > 0) groupBox.SetLogicalHeight(logicalHeight);
 
             var stackLayout = new StackLayout() { Orientation = Orientation.Horizontal };
             stackLayout.Items.Add(new StackLayoutItem(groupBox, fillHeight ? VerticalAlignment.Stretch : VerticalAlignment.Center, true));
 
             tableRow.Cells.Add(new TableCell(stackLayout, expandWidth));
-
             return groupBox;
         }
 
@@ -273,62 +252,55 @@ namespace ASEva.UIEto
         /// <param name="logicalHeight">初始高度，0表示不设置</param>
         public static Control AddControl(this TableRow tableRow, Control control, bool expandWidth = false, bool fillHeight = false, int logicalWidth = 0, int logicalHeight = 0)
         {
-            if (logicalWidth > 0)
-            {
-                control.SetLogicalWidth(logicalWidth);
-            }
-            if (logicalHeight > 0)
-            {
-                control.SetLogicalHeight(logicalHeight);
-            }
+            if (logicalWidth > 0) control.SetLogicalWidth(logicalWidth);
+            if (logicalHeight > 0) control.SetLogicalHeight(logicalHeight);
 
             var stackLayout = new StackLayout() { Orientation = Orientation.Horizontal };
             stackLayout.Items.Add(new StackLayoutItem(control, fillHeight ? VerticalAlignment.Stretch : VerticalAlignment.Center, true));
 
             tableRow.Cells.Add(new TableCell(stackLayout, expandWidth));
-
             return control;
         }
 
         /// <summary>
-        /// 添加行堆叠布局至表布局的行
+        /// 添加横向堆叠布局至表布局的行
         /// </summary>
         /// <param name="tableRow">表布局的行</param>
         /// <param name="expandWidth">是否横向撑满</param>
         /// <param name="fillHeight">是否纵向填满</param>
-        /// <param name="logicalSpacing">行堆叠布局中各控件的间隙</param>
-        /// <returns>创建的行堆叠布局</returns>
-        public static StackLayout AddRowStackLayout(this TableRow tableRow, bool expandWidth = false, bool fillHeight = false, int logicalSpacing = 8)
+        /// <param name="logicalSpacing">横向堆叠布局中各控件的间隙</param>
+        /// <param name="alignment">横向堆叠布局中各控件的纵向对齐方式</param>
+        /// <returns>创建的横向堆叠布局</returns>
+        public static StackLayout AddRowLayout(this TableRow tableRow, bool expandWidth = false, bool fillHeight = false, int logicalSpacing = 8, VerticalAlignment alignment = VerticalAlignment.Center)
         {
-            var layout = new StackLayout { Orientation = Orientation.Vertical };
+            var layout = new StackLayout { Orientation = Orientation.Horizontal, VerticalContentAlignment = alignment };
             layout.Spacing = layout.Sizer(logicalSpacing);
 
             var stackLayout = new StackLayout() { Orientation = Orientation.Horizontal };
             stackLayout.Items.Add(new StackLayoutItem(layout, fillHeight ? VerticalAlignment.Stretch : VerticalAlignment.Center, true));
 
             tableRow.Cells.Add(new TableCell(stackLayout, expandWidth));
-
             return layout;
         }
 
         /// <summary>
-        /// 添加列堆叠布局至表布局的行
+        /// 添加纵向堆叠布局至表布局的行
         /// </summary>
         /// <param name="tableRow">表布局的行</param>
         /// <param name="expandWidth">是否横向撑满</param>
         /// <param name="fillHeight">是否纵向填满</param>
-        /// <param name="logicalSpacing">列堆叠布局中各控件的间隙</param>
-        /// <returns>创建的列堆叠布局</returns>
-        public static StackLayout AddColumnStackLayout(this TableRow tableRow, bool expandWidth = false, bool fillHeight = false, int logicalSpacing = 8)
+        /// <param name="logicalSpacing">纵向堆叠布局中各控件的间隙</param>
+        /// <param name="alignment">纵向堆叠布局中各控件的横向对齐方式</param>
+        /// <returns>创建的纵向堆叠布局</returns>
+        public static StackLayout AddColumnLayout(this TableRow tableRow, bool expandWidth = false, bool fillHeight = false, int logicalSpacing = 8, HorizontalAlignment alignment = HorizontalAlignment.Stretch)
         {
-            var layout = new StackLayout { Orientation = Orientation.Horizontal };
+            var layout = new StackLayout { Orientation = Orientation.Vertical, HorizontalContentAlignment = alignment };
             layout.Spacing = layout.Sizer(logicalSpacing);
 
             var stackLayout = new StackLayout() { Orientation = Orientation.Horizontal };
             stackLayout.Items.Add(new StackLayoutItem(layout, fillHeight ? VerticalAlignment.Stretch : VerticalAlignment.Center, true));
 
             tableRow.Cells.Add(new TableCell(stackLayout, expandWidth));
-
             return layout;
         }
 
@@ -350,7 +322,6 @@ namespace ASEva.UIEto
             stackLayout.Items.Add(new StackLayoutItem(layout, fillHeight ? VerticalAlignment.Stretch : VerticalAlignment.Center, true));
 
             tableRow.Cells.Add(new TableCell(stackLayout, expandWidth));
-
             return layout;
         }
     }

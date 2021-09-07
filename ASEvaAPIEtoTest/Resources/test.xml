@@ -21,16 +21,20 @@
         <ch>第{0:D}行：</ch>
     </t>
     <t id="basic-checkbox">
-        <en>Check Box</en>
-        <ch>多选框</ch>
+        <en>Save file</en>
+        <ch>保存文件</ch>
     </t>
-    <t id="basic-radiobutton">
-        <en>Radio Button {0:D}</en>
-        <ch>单选框{0:D}</ch>
+    <t id="basic-radiobutton-file">
+        <en>File</en>
+        <ch>文件</ch>
+    </t>
+    <t id="basic-radiobutton-dir">
+        <en>Directory</en>
+        <ch>文件夹</ch>
     </t>
     <t id="basic-linkbutton">
-        <en>Link Button</en>
-        <ch>链接式按钮</ch>
+        <en>Browse</en>
+        <ch>浏览</ch>
     </t>
     <t id="basic-button">
         <en>Button</en>
