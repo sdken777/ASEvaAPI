@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIGtk.APIInfo">
             <summary>
-            version=2.0.1
+            version=2.0.3
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.APIInfo.GetAPIVersion">
