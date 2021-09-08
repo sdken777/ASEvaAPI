@@ -1,5 +1,6 @@
 using System;
 using ASEva.UIEto;
+using Eto.Drawing;
 using Eto.Forms;
 
 namespace ASEva.UIGtk
@@ -22,6 +23,11 @@ namespace ASEva.UIGtk
 
             var app = new Application(platform);
             return app;
+        }
+
+        public Font CreateDefaultFont(string languageCode)
+        {
+            return SystemFonts.Default(11);
         }
 
         public void RunApp(Application application, Form window)

@@ -14,7 +14,7 @@ namespace ASEvaAPIEtoTest
             t = TextResource.Load("test.xml", languageCode);
 
             Icon = Icon.FromResource("icon.png");
-            Size = MinimumSize = this.Sizer(1000, 600);
+            Size = MinimumSize = this.Sizer(1100, 600);
             Title = t["title"] + " (OS:" + ASEva.APIInfo.GetRunningOS() + ")";
 
             ContextMenu = new ContextMenu();
@@ -83,9 +83,7 @@ namespace ASEvaAPIEtoTest
             var layoutRow2 = layout.AddRowLayout();
             layoutRow2.AddLabel(t.Format("basic-label-row", 2));
             layoutRow2.AddComboBox(new string[] { t.Format("basic-combobox", "A"), t.Format("basic-combobox", "B") }, true);
-            layoutRow2.AddButton(t["basic-button"]);
-            layoutRow2.AddButton(Bitmap.FromResource("button.png")); // TODO: CoreWF(高DPI尺寸问题)
-            layoutRow2.AddControl(new ColorPicker { Value = Colors.Red } ); // TODO: CoreWF(高DPI尺寸问题) Gtk(无法退出)
+            layoutRow2.AddControl(new DateTimePicker(), true);
 
             var layoutRow3 = layout.AddRowLayout();
             layoutRow3.AddLabel(t.Format("basic-label-row", 3));
@@ -101,7 +99,9 @@ namespace ASEvaAPIEtoTest
 
             var layoutRow5 = layout.AddRowLayout();
             layoutRow5.AddLabel(t.Format("basic-label-row", 5));
-            layoutRow5.AddControl(new DateTimePicker(), true);
+            layoutRow5.AddButton(t["basic-button"]);
+            layoutRow5.AddButton(Bitmap.FromResource("button.png")); // TODO: CoreWF(高DPI尺寸问题)
+            layoutRow5.AddControl(new ColorPicker { Value = Colors.Red } ); // TODO: CoreWF(高DPI尺寸问题) Gtk(无法退出)
         }
 
         private void InitBasicTagPage2(TabPage tabPage)
@@ -149,7 +149,7 @@ namespace ASEvaAPIEtoTest
         {
             var layout = groupBox.SetContentAsColumnLayout();
             var layoutRow = layout.AddRowLayout();
-            var webView = layout.AddControl(new WebView(), true, 400, 200) as WebView;
+            var webView = layout.AddControl(new WebView(), true, 500, 200) as WebView;
 
             layoutRow.AddButton(t["web-go-back"]).Click += delegate { webView.GoBack(); };
             layoutRow.AddButton(t["web-go-forward"]).Click += delegate { webView.GoForward(); };
@@ -173,7 +173,7 @@ namespace ASEvaAPIEtoTest
         {
             var layoutRow = groupBox.SetContentAsRowLayout(8, 8, VerticalAlignment.Stretch);
 
-            var layoutOverlay = layoutRow.AddControl(new OverlayLayout(), false, 200) as OverlayLayout;
+            var layoutOverlay = layoutRow.AddControl(new OverlayLayout(), false, 200, 200) as OverlayLayout; // TODO: Gtk(缩放/最大化尺寸问题)
             var drawable = layoutOverlay.AddControl(new Drawable(), 0, 0, 0, 0) as Drawable;
             layoutOverlay.AddControl(new Button { Text = "A"}, 10, null, 10, null);
             layoutOverlay.AddControl(new Button { Text = "B"}, 10, null, null, 10);
