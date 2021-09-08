@@ -80,4 +80,32 @@
         <en>Remove row</en>
         <ch>移除行</ch>
     </t>
+    <t id="web-group-title">
+        <en>Web View</en>
+        <ch>网页浏览</ch>
+    </t>
+    <t id="web-go-back">
+        <en>Back</en>
+        <ch>返回</ch>
+    </t>
+    <t id="web-go-forward">
+        <en>Forward</en>
+        <ch>前进</ch>
+    </t>
+    <t id="web-go-url">
+        <en>Go</en>
+        <ch>打开</ch>
+    </t>
+    <t id="web-call-script">
+        <en>Call script</en>
+        <ch>调用脚本</ch>
+    </t>
+    <t id="draw-group-title">
+        <en>Drawing</en>
+        <ch>绘图</ch>
+    </t>
+    <t id="draw-text">
+        <en>Hello World</en>
+        <ch>天气不错</ch>
+    </t>
 </root>

@@ -10,6 +10,7 @@ namespace ASEvaAPIEtoTest
     {
         public TestWindow(String languageCode)
         {
+            lang = languageCode;
             t = TextResource.Load("test.xml", languageCode);
 
             Icon = Icon.FromResource("icon.png");
@@ -26,14 +27,18 @@ namespace ASEvaAPIEtoTest
             var groupBasic = rowFirst.AddGroupBox(t["basic-group-title"], true, true);
             InitBasicGroupBox(groupBasic);
 
-            rowFirst.AddGroupBox(t["reserved"], true, true, 200, 100);
-            rowSecond.AddGroupBox(t["reserved"], true, true, 200, 100);
+            var groupWeb = rowFirst.AddGroupBox(t["web-group-title"], true, true);
+            InitWebGroupBox(groupWeb);
+
+            var groupDraw = rowSecond.AddGroupBox(t["draw-group-title"], true, true);
+            InitDrawGroupBox(groupDraw);
+
             rowSecond.AddGroupBox(t["reserved"], true, true, 200, 100);
         }
 
         private void InitContextMenu(ContextMenu menu)
         {
-            menu.AddButtonItem(t["menu-button"], Bitmap.FromResource("menu-button.png")).Click += delegate { MessageBox.Show(t["title"], ""); };
+            menu.AddButtonItem(t["menu-button"], Icon.FromResource("menu-button.png")).Click += delegate { MessageBox.Show(t["title"], ""); };
             menu.AddSeparator();
             menu.AddCheckItem(t.Format("menu-check", "A"));
             menu.AddCheckItem(t.Format("menu-check", "B"));
@@ -64,7 +69,7 @@ namespace ASEvaAPIEtoTest
             var checkBox = layoutRow1.AddCheckBox(t["basic-checkbox"]);
             var radioButtonList = layoutRow1.AddRadioButtonList(new string[] { t["basic-radiobutton-file"], t["basic-radiobutton-dir"] });
             layoutRow1.AddSpace();
-            var linkButton = layoutRow1.AddLinkButton(t["basic-linkbutton"]); // TODO: Gtk-Ubuntu2004-X86(高亮异常)
+            var linkButton = layoutRow1.AddLinkButton(t["basic-linkbutton"]);
             linkButton.Click += delegate
             {
                 if (radioButtonList.SelectedIndex == 0)
@@ -79,7 +84,7 @@ namespace ASEvaAPIEtoTest
             layoutRow2.AddLabel(t.Format("basic-label-row", 2));
             layoutRow2.AddComboBox(new string[] { t.Format("basic-combobox", "A"), t.Format("basic-combobox", "B") }, true);
             layoutRow2.AddButton(t["basic-button"]);
-            layoutRow2.AddButton(Bitmap.FromResource("button.png"));
+            layoutRow2.AddButton(Bitmap.FromResource("button.png")); // TODO: CoreWF(高DPI尺寸问题)
             layoutRow2.AddControl(new ColorPicker { Value = Colors.Red } ); // TODO: CoreWF(高DPI尺寸问题) Gtk(无法退出)
 
             var layoutRow3 = layout.AddRowLayout();
@@ -140,6 +145,60 @@ namespace ASEvaAPIEtoTest
             linkButtonRemove.Click += delegate { tableView.RemoveRow(tableView.SelectedRow); };
         }
 
+        private void InitWebGroupBox(GroupBox groupBox)
+        {
+            var layout = groupBox.SetContentAsColumnLayout();
+            var layoutRow = layout.AddRowLayout();
+            var webView = layout.AddControl(new WebView(), true, 400, 200) as WebView;
+
+            layoutRow.AddButton(t["web-go-back"]).Click += delegate { webView.GoBack(); };
+            layoutRow.AddButton(t["web-go-forward"]).Click += delegate { webView.GoForward(); };
+            var textBox = layoutRow.AddControl(new TextBox(), true) as TextBox;
+            layoutRow.AddButton(t["web-go-url"]).Click += delegate
+            {
+                if (!String.IsNullOrEmpty(textBox.Text))
+                {
+                    webView.Url = new Uri(textBox.Text.StartsWith("http") ? textBox.Text : ("http://" + textBox.Text));
+                }
+            };
+            layoutRow.AddButton(t["web-call-script"]).Click += delegate
+            {
+                webView.ExecuteScriptAsync("callScript()");
+            };
+
+            webView.LoadHtml(ResourceLoader.LoadText("index.html")); // TODO: CoreWF(WebView2)，Gtk(WebKit2)
+        }
+
+        private void InitDrawGroupBox(GroupBox groupBox)
+        {
+            var layoutRow = groupBox.SetContentAsRowLayout(8, 8, VerticalAlignment.Stretch);
+
+            var layoutOverlay = layoutRow.AddControl(new OverlayLayout(), false, 200) as OverlayLayout;
+            var drawable = layoutOverlay.AddControl(new Drawable(), 0, 0, 0, 0) as Drawable;
+            layoutOverlay.AddControl(new Button { Text = "A"}, 10, null, 10, null);
+            layoutOverlay.AddControl(new Button { Text = "B"}, 10, null, null, 10);
+            layoutOverlay.AddControl(new Button { Text = "C"}, null, 10, 10, null);
+            layoutOverlay.AddControl(new Button { Text = "D"}, null, 10, null, 10);
+
+            drawable.Paint += drawable_Paint;
+        }
+
+        private void drawable_Paint(object o, PaintEventArgs a)
+        {
+            var g = a.Graphics;
+            g.SetScaleForLogical();
+
+            g.Clear(Colors.White);
+            g.DrawLine(Colors.Black, 10, 100, 190, 100);
+            g.DrawLine(Colors.Black, 10, 120, 190, 120);
+            g.DrawLine(Colors.Black, 100, 10, 100, 190);
+            g.DrawLine(new Pen(Colors.Red, 20), 20, 110, 90, 110);
+            g.DrawText(g.ScaledDefaultFont(lang), Colors.Black, 100, 100, t["draw-text"]);
+            g.DrawImage(Icon.FromResource("camera.png"), 80, 80);
+            g.FillPie(Color.FromArgb(0, 128, 0, 128), 10, 10, 180, 180, -90, 270);
+        }
+
+        private String lang;
         private TextResource t;
     }
 }

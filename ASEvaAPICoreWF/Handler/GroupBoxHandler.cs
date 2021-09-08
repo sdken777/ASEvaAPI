@@ -20,9 +20,6 @@ namespace ASEva.UICoreWF
 
 		public GroupBoxHandler()
 		{
-			var fontHandler = new Eto.WinForms.Drawing.FontHandler();
-			var font = fontHandler.GetFont();
-
 			Control = new EtoGroupBox
 			{
 				AutoSize = true,
@@ -30,7 +27,7 @@ namespace ASEva.UICoreWF
 			};
 			content = new swf.Panel
 			{
-				Font = font,
+				Font = null,
 				Dock = swf.DockStyle.Fill,
 				ForeColor = sd.SystemColors.ControlText,
 				AutoSize = true,

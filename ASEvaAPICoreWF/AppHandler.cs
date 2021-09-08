@@ -1,6 +1,8 @@
 using System;
 using ASEva.UIEto;
 using Eto.Forms;
+using Eto.Drawing;
+using Eto.WinForms;
 
 namespace ASEva.UICoreWF
 {
@@ -23,6 +25,13 @@ namespace ASEva.UICoreWF
 
             var app = new Application(platform);
             return app;
+        }
+
+        public Font CreateDefaultFont(String languageCode)
+        {
+            var testPanel = new System.Windows.Forms.Panel();
+            var font = testPanel.Font;
+            return new Font(font.FontFamily.ToEto(), font.Size);
         }
 
         public void RunApp(Application application, Form window)

@@ -7,7 +7,7 @@ namespace ASEva.UIEto
     /// <summary>
     /// (api:eto=2.0.2) 方便操作表布局的扩展
     /// </summary>
-    public static partial class TableLayoutExtensions
+    public static class TableLayoutExtensions
     {
         /// <summary>
         /// 表布局添加一行
@@ -100,7 +100,7 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
-        /// 添加图像按键至表布局的行
+        /// (api:eto=2.0.4) 添加图像按键至表布局的行
         /// </summary>
         /// <param name="tableRow">表布局的行</param>
         /// <param name="image">图像</param>
@@ -109,7 +109,7 @@ namespace ASEva.UIEto
         /// <param name="logicalWidth">初始宽度，0表示不设置</param>
         /// <param name="logicalHeight">初始高度，0表示不设置</param>
         /// <returns>创建的按键对象</returns>
-        public static Button AddButton(this TableRow tableRow, Bitmap image, bool expandWidth = false, bool fillHeight = false, int logicalWidth = 0, int logicalHeight = 0)
+        public static Button AddButton(this TableRow tableRow, Image image, bool expandWidth = false, bool fillHeight = false, int logicalWidth = 0, int logicalHeight = 0)
         {
             var button = new Button();
             if (image != null) button.Image = image;

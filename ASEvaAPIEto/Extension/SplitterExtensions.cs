@@ -7,7 +7,7 @@ namespace ASEva.UIEto
     /// <summary>
     /// (api:eto=2.0.2) 方便操作分屏控件的扩展
     /// </summary>
-    public static partial class SplitterExtensions
+    public static class SplitterExtensions
     {
         /// <summary>
         /// 设置面板1

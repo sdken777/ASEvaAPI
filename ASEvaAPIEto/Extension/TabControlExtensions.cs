@@ -7,7 +7,7 @@ namespace ASEva.UIEto
     /// <summary>
     /// (api:eto=2.0.2) 方便操作选项卡控件的扩展
     /// </summary>
-    public static partial class TabControlExtensions
+    public static class TabControlExtensions
     {
         /// <summary>
         /// 添加页至选项卡控件

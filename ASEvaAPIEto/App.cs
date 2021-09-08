@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using System.IO;
 using Eto.Forms;
+using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
@@ -9,13 +10,18 @@ namespace ASEva.UIEto
     {
         Application CreateApp();
         void RunApp(Application application, Form window);
+        Font CreateDefaultFont(String languageCode);
     }
 
     /// <summary>
-    /// (api:eto=2.0.0) Eto应用程序初始化与运行
+    /// (api:eto=2.0.0) Eto应用程序
     /// </summary>
     public class App
     {
+        /// <summary>
+        /// 应用程序初始化
+        /// </summary>
+        /// <returns>是否成功</returns>
         public static bool Init()
         {
             if (handler == null)
@@ -67,6 +73,10 @@ namespace ASEva.UIEto
             return application != null;
         }
 
+        /// <summary>
+        /// 运行应用程序
+        /// </summary>
+        /// <param name="window">主窗口</param>
         public static void Run(Form window)
         {
             if (application != null)
@@ -75,12 +85,32 @@ namespace ASEva.UIEto
             }
         }
 
+        /// <summary>
+        /// 应用程序对象
+        /// </summary>
         public static Application Instance
         {
             get { return application; }
         }
 
+        /// <summary>
+        /// (api:eto=2.0.4) 获取默认字体
+        /// </summary>
+        /// <param name="languageCode">语言代号，en表示英文，ch表示中文，null则通过 ASEva.Agency.GetAppLanguage 获取</param>
+        /// <returns>默认字体</returns>
+        public static Font DefaultFont(String languageCode = null)
+        {
+            if (handler != null && defaultFont == null)
+            {
+                if (String.IsNullOrEmpty(languageCode)) languageCode = Agency.GetAppLanguage();
+                if (String.IsNullOrEmpty(languageCode)) languageCode = "en";
+                defaultFont = handler.CreateDefaultFont(languageCode);
+            }
+            return defaultFont;
+        }
+
         private static AppHandler handler;
         private static Application application;
+        private static Font defaultFont;
     }
 }

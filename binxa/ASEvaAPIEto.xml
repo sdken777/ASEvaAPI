@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.0.3
+            version=2.0.4
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -17,8 +17,32 @@
         </member>
         <member name="T:ASEva.UIEto.App">
             <summary>
-            (api:eto=2.0.0) Eto应用程序初始化与运行
+            (api:eto=2.0.0) Eto应用程序
             </summary>
+        </member>
+        <member name="M:ASEva.UIEto.App.Init">
+            <summary>
+            应用程序初始化
+            </summary>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.Run(Eto.Forms.Form)">
+            <summary>
+            运行应用程序
+            </summary>
+            <param name="window">主窗口</param>
+        </member>
+        <member name="P:ASEva.UIEto.App.Instance">
+            <summary>
+            应用程序对象
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.App.DefaultFont(System.String)">
+            <summary>
+            (api:eto=2.0.4) 获取默认字体
+            </summary>
+            <param name="languageCode">语言代号，en表示英文，ch表示中文，null则通过 ASEva.Agency.GetAppLanguage 获取</param>
+            <returns>默认字体</returns>
         </member>
         <member name="T:ASEva.UIEto.ConfigPanel">
             <summary>
@@ -58,9 +82,9 @@
             </summary>
             <param name="menu">右键菜单</param>
         </member>
-        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddButtonItem(Eto.Forms.ContextMenu,System.String,Eto.Drawing.Bitmap)">
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddButtonItem(Eto.Forms.ContextMenu,System.String,Eto.Drawing.Image)">
             <summary>
-            添加按键项
+            (api:eto=2.0.4) 添加按键项
             </summary>
             <param name="menu">右键菜单</param>
             <param name="text">菜单项文字</param>
@@ -82,6 +106,33 @@
             <param name="menu">右键菜单</param>
             <param name="texts">各菜单项文字</param>
             <returns>一组单选项对象</returns>
+        </member>
+        <member name="T:ASEva.UIEto.GraphicsExtensions">
+            <summary>
+            (api:eto=2.0.4) 方便操作图形对象的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.GraphicsExtensions.SetScaleForLogical(Eto.Drawing.Graphics)">
+            <summary>
+            设置绘图尺度，令所有相关绘制函数的输入尺寸都为logical尺寸
+            </summary>
+            <param name="g">图形对象</param>
+        </member>
+        <member name="M:ASEva.UIEto.GraphicsExtensions.ScaledFont(Eto.Drawing.Graphics,Eto.Drawing.Font)">
+            <summary>
+            调用SetScaleForLogical后，绘制文字需要使用此函数返回的字体
+            </summary>
+            <param name="g">图形对象</param>
+            <param name="f">原字体</param>
+            <returns>可用于绘制的字体</returns>
+        </member>
+        <member name="M:ASEva.UIEto.GraphicsExtensions.ScaledDefaultFont(Eto.Drawing.Graphics,System.String)">
+            <summary>
+            调用SetScaleForLogical后，以默认字体绘制需要使用此函数返回的字体
+            </summary>
+            <param name="g">图形对象</param>
+            <param name="languageCode">语言代号，en表示英文，ch表示中文，null则通过 ASEva.Agency.GetAppLanguage 获取</param>
+            <returns>可用于绘制的默认字体</returns>
         </member>
         <member name="T:ASEva.UIEto.SetContentExtensions">
             <summary>
@@ -236,9 +287,9 @@
             <param name="logicalHeight">初始高度，0表示不设置</param>
             <returns>创建的按键对象</returns>
         </member>
-        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddButton(Eto.Forms.StackLayout,Eto.Drawing.Bitmap,System.Boolean,System.Int32,System.Int32)">
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddButton(Eto.Forms.StackLayout,Eto.Drawing.Image,System.Boolean,System.Int32,System.Int32)">
             <summary>
-            添加图像按键至堆叠布局
+            (api:eto=2.0.4) 添加图像按键至堆叠布局
             </summary>
             <param name="stackLayout">堆叠布局</param>
             <param name="image">图像</param>
@@ -404,9 +455,9 @@
             <param name="logicalHeight">初始高度，0表示不设置</param>
             <returns>创建的按键对象</returns>
         </member>
-        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddButton(Eto.Forms.TableRow,Eto.Drawing.Bitmap,System.Boolean,System.Boolean,System.Int32,System.Int32)">
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddButton(Eto.Forms.TableRow,Eto.Drawing.Image,System.Boolean,System.Boolean,System.Int32,System.Int32)">
             <summary>
-            添加图像按键至表布局的行
+            (api:eto=2.0.4) 添加图像按键至表布局的行
             </summary>
             <param name="tableRow">表布局的行</param>
             <param name="image">图像</param>
@@ -515,6 +566,34 @@
             <param name="logicalSpacingX">表布局中各控件的横向间隙</param>
             <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
             <returns>创建的表布局</returns>
+        </member>
+        <member name="T:ASEva.UIEto.OverlayLayout">
+            <summary>
+            (api:eto=2.0.4) 可覆盖的布局
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.OverlayLayout.AddControl(Eto.Forms.Control,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            添加控件
+            </summary>
+            <param name="control">控件</param>
+            <param name="topLogicalPadding">控件与顶部间隔，null表示不关联</param>
+            <param name="bottomLogicalPadding">控件与底部间隔，null表示不关联</param>
+            <param name="leftLogicalPadding">控件与左侧间隔，null表示不关联</param>
+            <param name="rightLogicalPadding">控件与右侧间隔，null表示不关联</param>
+            <returns>新添加的控件</returns>
+        </member>
+        <member name="M:ASEva.UIEto.OverlayLayout.RemoveControl(Eto.Forms.Control)">
+            <summary>
+            移除控件
+            </summary>
+            <param name="control">控件</param>
+        </member>
+        <member name="M:ASEva.UIEto.OverlayLayout.UpdatePosition(Eto.Forms.Control)">
+            <summary>
+            更新控件位置（一般在手动修改控件大小后调用）
+            </summary>
+            <param name="control">控件</param>
         </member>
         <member name="T:ASEva.UIEto.TextTableView">
             <summary>

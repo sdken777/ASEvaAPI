@@ -20,13 +20,13 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
-        /// 添加按键项
+        /// (api:eto=2.0.4) 添加按键项
         /// </summary>
         /// <param name="menu">右键菜单</param>
         /// <param name="text">菜单项文字</param>
         /// <param name="image">菜单项文字前的图标，默认为null</param>
         /// <returns></returns>
-        public static ButtonMenuItem AddButtonItem(this ContextMenu menu, String text, Bitmap image = null)
+        public static ButtonMenuItem AddButtonItem(this ContextMenu menu, String text, Image image = null)
         {
             if (text == null) text = "";
             var item = new ButtonMenuItem { Text = text };
