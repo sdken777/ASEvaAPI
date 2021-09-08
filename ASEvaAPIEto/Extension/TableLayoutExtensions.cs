@@ -112,7 +112,16 @@ namespace ASEva.UIEto
         public static Button AddButton(this TableRow tableRow, Image image, bool expandWidth = false, bool fillHeight = false, int logicalWidth = 0, int logicalHeight = 0)
         {
             var button = new Button();
-            if (image != null) button.Image = image;
+            if (image != null)
+            {
+                if (SizerExtensions.PixelScale == 1) button.Image = image;
+                else
+                {
+                    var w = Math.Max(1, (int)(image.Width * SizerExtensions.PixelScale));
+                    var h = Math.Max(1, (int)(image.Height * SizerExtensions.PixelScale));
+                    button.Image = new Bitmap(image, w, h, ImageInterpolation.High);
+                }
+            }
             else button.Text = "";
             if (logicalWidth > 0) button.SetLogicalWidth(logicalWidth);
             if (logicalHeight > 0) button.SetLogicalHeight(logicalHeight);

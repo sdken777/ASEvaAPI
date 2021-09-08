@@ -9,7 +9,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Resources.Extensions" Version="5.0" />
+    <Reference Include="System.Resources.Extensions">
+      <HintPath>..\bin64\System.Resources.Extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

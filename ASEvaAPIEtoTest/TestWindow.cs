@@ -100,8 +100,8 @@ namespace ASEvaAPIEtoTest
             var layoutRow5 = layout.AddRowLayout();
             layoutRow5.AddLabel(t.Format("basic-label-row", 5));
             layoutRow5.AddButton(t["basic-button"]);
-            layoutRow5.AddButton(Bitmap.FromResource("button.png")); // TODO: CoreWF(高DPI尺寸问题)
-            layoutRow5.AddControl(new ColorPicker { Value = Colors.Red } ); // TODO: CoreWF(高DPI尺寸问题)
+            layoutRow5.AddButton(Icon.FromResource("button.png"));
+            layoutRow5.AddControl(new ColorPicker { Value = Colors.Red } );
         }
 
         private void InitBasicTagPage2(TabPage tabPage)
@@ -139,7 +139,7 @@ namespace ASEvaAPIEtoTest
 
             var tableView = layoutGridView.AddControl(new TextTableView(), true) as TextTableView;
             tableView.AddColumn(t["basic-grid-key-title"], 100);
-            tableView.AddColumn(t["basic-grid-value-title"], 150);
+            tableView.AddColumn(t["basic-grid-value-title"], 200);
 
             linkButtonAdd.Click += delegate { tableView.AddRow(); };
             linkButtonRemove.Click += delegate { tableView.RemoveRow(tableView.SelectedRow); };

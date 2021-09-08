@@ -8,20 +8,11 @@
     ".NETCoreApp,Version=v3.1": {
       "ASEvaAPIEto/0.0.0.0": {
         "dependencies": {
-          "System.Resources.Extensions": "5.0.0",
           "ASEvaAPI": "0.0.0.0",
           "Eto": "2.5.0.0"
         },
         "runtime": {
           "ASEvaAPIEto.dll": {}
-        }
-      },
-      "System.Resources.Extensions/5.0.0": {
-        "runtime": {
-          "lib/netstandard2.0/System.Resources.Extensions.dll": {
-            "assemblyVersion": "5.0.0.0",
-            "fileVersion": "5.0.20.51904"
-          }
         }
       },
       "ASEvaAPI/0.0.0.0": {
@@ -47,13 +38,6 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
-    },
-    "System.Resources.Extensions/5.0.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-KBiqY/+W6hWVwucHBHO76JkgBGyawlxCcP946MhK8dNjalaBgZkyHaux8ko58PENTqQHHjoDa7cfIkAchfJPPA==",
-      "path": "system.resources.extensions/5.0.0",
-      "hashPath": "system.resources.extensions.5.0.0.nupkg.sha512"
     },
     "ASEvaAPI/0.0.0.0": {
       "type": "reference",

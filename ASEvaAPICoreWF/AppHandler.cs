@@ -22,6 +22,8 @@ namespace ASEva.UICoreWF
 
             var platform = new global::Eto.WinForms.Platform();
             platform.Add<GroupBox.IHandler>(() => new GroupBoxHandler());
+            platform.Add<ProgressBar.IHandler>(() => new ProgressBarHandler());
+            platform.Add<ColorPicker.IHandler>(() => new ColorPickerHandler());
 
             var app = new Application(platform);
             return app;
