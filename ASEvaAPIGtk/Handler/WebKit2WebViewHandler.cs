@@ -122,7 +122,8 @@ namespace ASEva.UIGtk
 				return;
 			
 			var request = NativeMethods.webkit_navigation_policy_decision_get_request(decision.Handle);
-			var uri = new Uri(NativeMethods.webkit_uri_request_get_uri(request));
+			var uriString = NativeMethods.webkit_uri_request_get_uri(request);
+			var uri = String.IsNullOrEmpty(uriString) ? null : new Uri(uriString);
 
 			switch (type)
 			{

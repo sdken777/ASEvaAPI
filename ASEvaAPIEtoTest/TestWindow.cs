@@ -69,7 +69,7 @@ namespace ASEvaAPIEtoTest
             var radioButtonList = layoutRow1.AddRadioButtonList(new string[] { t["basic-radiobutton-file"], t["basic-radiobutton-dir"] });
             layoutRow1.AddSpace();
             var linkButton = layoutRow1.AddLinkButton(t["basic-linkbutton"]);
-            linkButton.Click += delegate
+            linkButton.Click += delegate // TODO: Gtk-Ubuntu1604-PX2(打开对话框异常)
             {
                 if (radioButtonList.SelectedIndex == 0)
                 {
@@ -162,17 +162,17 @@ namespace ASEvaAPIEtoTest
             };
             layoutRow.AddButton(t["web-call-script"]).Click += delegate
             {
-                webView.ExecuteScriptAsync("callScript()");
+                webView.ExecuteScriptAsync("callScript()"); // TODO: Gtk-Ubuntu1604-PX2(无反应)
             };
 
-            webView.LoadHtml(ResourceLoader.LoadText("index.html")); // TODO: Gtk(WebKit2)
+            webView.LoadHtml(ResourceLoader.LoadText("index.html"));
         }
 
         private void InitDrawGroupBox(GroupBox groupBox)
         {
             var layoutRow = groupBox.SetContentAsRowLayout(8, 8, VerticalAlignment.Stretch);
 
-            var layoutOverlay = layoutRow.AddControl(new OverlayLayout(), false, 200, 200) as OverlayLayout; // TODO: Gtk(缩放/最大化尺寸问题)
+            var layoutOverlay = layoutRow.AddControl(new OverlayLayout(), false, 200, 200) as OverlayLayout;
             var drawable = layoutOverlay.AddControl(new Drawable(), 0, 0, 0, 0) as Drawable;
             layoutOverlay.AddControl(new Button { Text = "A"}, 10, null, 10, null);
             layoutOverlay.AddControl(new Button { Text = "B"}, 10, null, null, 10);

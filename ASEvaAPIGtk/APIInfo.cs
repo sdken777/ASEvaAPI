@@ -18,7 +18,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 0, 5, 0); // 添加WebKit2WebViewHandler。添加PixelLayoutHandler
+            return new Version(2, 0, 5, 1); // 修复WebViewHandler在NM3下DecidePolicy异常
         }
     }
 }
