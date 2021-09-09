@@ -21,6 +21,12 @@
     <Reference Include="Eto.WinForms">
       <HintPath>..\bin64\Eto.WinForms.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Core">
+      <HintPath>..\bin64\Microsoft.Web.WebView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.WinForms">
+      <HintPath>..\bin64\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

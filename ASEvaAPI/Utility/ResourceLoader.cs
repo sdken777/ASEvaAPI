@@ -33,8 +33,12 @@ namespace ASEva.Utility
         /// <returns>文本数据，若找不到资源则返回null</returns>
         public static String LoadText(String name)
         {
-            var data = Load(name);
-            if (data == null) return null;
+            var instream = Assembly.GetCallingAssembly().GetManifestResourceStream(name);
+            if (instream == null) return null;
+
+            var data = new byte[instream.Length];
+            instream.Read(data, 0, data.Length);
+            instream.Close();
 
             return Encoding.UTF8.GetString(data);
         }

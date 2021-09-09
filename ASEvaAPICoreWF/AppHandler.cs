@@ -20,11 +20,14 @@ namespace ASEva.UICoreWF
         {
             System.Windows.Forms.Application.SetHighDpiMode(System.Windows.Forms.HighDpiMode.SystemAware);
 
+            WebView2Handler.InitCoreWebView2Environment();
+
             var platform = new global::Eto.WinForms.Platform();
             platform.Add<GroupBox.IHandler>(() => new GroupBoxHandler());
             platform.Add<ProgressBar.IHandler>(() => new ProgressBarHandler());
             platform.Add<ColorPicker.IHandler>(() => new ColorPickerHandler());
             platform.Add<SearchBox.IHandler>(() => new SearchBoxHandler());
+            platform.Add<WebView.IHandler>(() => new WebView2Handler());
 
             var app = new Application(platform);
             return app;

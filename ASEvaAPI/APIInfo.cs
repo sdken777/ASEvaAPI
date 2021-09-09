@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 1, 0); // GetRunningOS支持识别linuxarm和macos
+            return new Version(2, 1, 1, 1); // 修正ResourceLoader.LoadText
         }
 
         /// <summary>

@@ -165,7 +165,7 @@ namespace ASEvaAPIEtoTest
                 webView.ExecuteScriptAsync("callScript()");
             };
 
-            webView.LoadHtml(ResourceLoader.LoadText("index.html")); // TODO: CoreWF(WebView2)，Gtk(WebKit2)
+            webView.LoadHtml(ResourceLoader.LoadText("index.html")); // TODO: Gtk(WebKit2)
         }
 
         private void InitDrawGroupBox(GroupBox groupBox)
