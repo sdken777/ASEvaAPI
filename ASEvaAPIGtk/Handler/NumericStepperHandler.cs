@@ -38,10 +38,8 @@ namespace ASEva.UIGtk
 		{
 			base.Initialize();
 			Control.ValueChanged += Connector.HandleValueChanged;
-
-			// [ERROR] Cause Gtk-Ubuntu2104-Raspi exception
-			// Control.Input += Connector.HandleInput;
-			// Control.Output += Connector.HandleOutput;
+			Control.Input += Connector.HandleInput;
+			Control.Output += Connector.HandleOutput;
 		}
 
 		protected new NumericStepperConnector Connector { get { return (NumericStepperConnector)base.Connector; } }
@@ -68,7 +66,7 @@ namespace ASEva.UIGtk
 
 			bool NumberStringsMatch(string num1, string num2) => string.Compare(TrimNumericString(num1), TrimNumericString(num2), Handler.CultureInfo, CompareOptions.IgnoreCase) == 0;
 
-			[GLib.ConnectBefore]
+			// [GLib.ConnectBefore]
 			public void HandleInput(object o, InputArgs args)
 			{
 				var h = Handler;
@@ -93,7 +91,7 @@ namespace ASEva.UIGtk
 				args.RetVal = 0;
 			}
 
-			[GLib.ConnectBefore]
+			// [GLib.ConnectBefore]
 			public void HandleOutput(object o, OutputArgs args)
 			{
 				var h = Handler;

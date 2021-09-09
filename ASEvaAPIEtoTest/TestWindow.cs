@@ -69,7 +69,7 @@ namespace ASEvaAPIEtoTest
             var radioButtonList = layoutRow1.AddRadioButtonList(new string[] { t["basic-radiobutton-file"], t["basic-radiobutton-dir"] });
             layoutRow1.AddSpace();
             var linkButton = layoutRow1.AddLinkButton(t["basic-linkbutton"]);
-            linkButton.Click += delegate // TODO: Gtk-Ubuntu1604-PX2(打开对话框异常)
+            linkButton.Click += delegate // TODO: Gtk-Ubuntu-Arm(打开对话框异常, g_filename_from_utf8失败)
             {
                 if (radioButtonList.SelectedIndex == 0)
                 {
@@ -82,7 +82,7 @@ namespace ASEvaAPIEtoTest
             var layoutRow2 = layout.AddRowLayout();
             layoutRow2.AddLabel(t.Format("basic-label-row", 2));
             layoutRow2.AddComboBox(new string[] { t.Format("basic-combobox", "A"), t.Format("basic-combobox", "B") }, true);
-            layoutRow2.AddControl(new DateTimePicker(), true);
+            layoutRow2.AddControl(new DateTimePicker(), true); // TODO: Gtk-Ubuntu2104-Raspi(无法显示弹窗)
 
             var layoutRow3 = layout.AddRowLayout();
             layoutRow3.AddLabel(t.Format("basic-label-row", 3));
