@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.0.5
+            version=2.0.6
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -37,11 +37,11 @@
             应用程序对象
             </summary>
         </member>
-        <member name="M:ASEva.UIEto.App.DefaultFont(System.String)">
+        <member name="M:ASEva.UIEto.App.DefaultFont(System.Single)">
             <summary>
-            (api:eto=2.0.4) 获取默认字体
+            (api:eto=2.0.6) 获取默认字体
             </summary>
-            <param name="languageCode">语言代号，en表示英文，ch表示中文，null则通过 ASEva.Agency.GetAppLanguage 获取</param>
+            <param name="sizeRatio">相对字体默认大小的比例，默认为1</param>
             <returns>默认字体</returns>
         </member>
         <member name="T:ASEva.UIEto.ConfigPanel">
@@ -126,12 +126,12 @@
             <param name="f">原字体</param>
             <returns>可用于绘制的字体</returns>
         </member>
-        <member name="M:ASEva.UIEto.GraphicsExtensions.ScaledDefaultFont(Eto.Drawing.Graphics,System.String)">
+        <member name="M:ASEva.UIEto.GraphicsExtensions.ScaledDefaultFont(Eto.Drawing.Graphics,System.Single)">
             <summary>
-            调用SetScaleForLogical后，以默认字体绘制需要使用此函数返回的字体
+            (api:eto=2.0.6) 调用SetScaleForLogical后，以默认字体绘制需要使用此函数返回的字体
             </summary>
             <param name="g">图形对象</param>
-            <param name="languageCode">语言代号，en表示英文，ch表示中文，null则通过 ASEva.Agency.GetAppLanguage 获取</param>
+            <param name="sizeRatio">相对字体默认大小的比例，默认为1</param>
             <returns>可用于绘制的默认字体</returns>
         </member>
         <member name="T:ASEva.UIEto.SetContentExtensions">

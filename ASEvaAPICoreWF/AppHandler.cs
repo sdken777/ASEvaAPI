@@ -29,7 +29,7 @@ namespace ASEva.UICoreWF
             return app;
         }
 
-        public Font CreateDefaultFont(String languageCode)
+        public Font CreateDefaultFont()
         {
             var testPanel = new System.Windows.Forms.Panel();
             var font = testPanel.Font;

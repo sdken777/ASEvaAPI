@@ -10,7 +10,7 @@ namespace ASEva.UIEto
     {
         Application CreateApp();
         void RunApp(Application application, Form window);
-        Font CreateDefaultFont(String languageCode);
+        Font CreateDefaultFont();
     }
 
     /// <summary>
@@ -94,19 +94,18 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
-        /// (api:eto=2.0.4) 获取默认字体
+        /// (api:eto=2.0.6) 获取默认字体
         /// </summary>
-        /// <param name="languageCode">语言代号，en表示英文，ch表示中文，null则通过 ASEva.Agency.GetAppLanguage 获取</param>
+        /// <param name="sizeRatio">相对字体默认大小的比例，默认为1</param>
         /// <returns>默认字体</returns>
-        public static Font DefaultFont(String languageCode = null)
+        public static Font DefaultFont(float sizeRatio = 1)
         {
             if (handler != null && defaultFont == null)
             {
-                if (String.IsNullOrEmpty(languageCode)) languageCode = Agency.GetAppLanguage();
-                if (String.IsNullOrEmpty(languageCode)) languageCode = "en";
-                defaultFont = handler.CreateDefaultFont(languageCode);
+                defaultFont = handler.CreateDefaultFont();
             }
-            return defaultFont;
+            sizeRatio = Math.Max(0.01f, sizeRatio);
+            return new Font(defaultFont.Family, defaultFont.Size * sizeRatio, defaultFont.FontStyle, defaultFont.FontDecoration);
         }
 
         private static AppHandler handler;

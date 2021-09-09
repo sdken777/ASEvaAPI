@@ -26,7 +26,7 @@ namespace ASEva.UIGtk
             return app;
         }
 
-        public Font CreateDefaultFont(string languageCode)
+        public Font CreateDefaultFont()
         {
             return SystemFonts.Default(11);
         }

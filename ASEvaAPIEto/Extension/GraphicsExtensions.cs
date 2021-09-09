@@ -36,14 +36,14 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
-        /// 调用SetScaleForLogical后，以默认字体绘制需要使用此函数返回的字体
+        /// (api:eto=2.0.6) 调用SetScaleForLogical后，以默认字体绘制需要使用此函数返回的字体
         /// </summary>
         /// <param name="g">图形对象</param>
-        /// <param name="languageCode">语言代号，en表示英文，ch表示中文，null则通过 ASEva.Agency.GetAppLanguage 获取</param>
+        /// <param name="sizeRatio">相对字体默认大小的比例，默认为1</param>
         /// <returns>可用于绘制的默认字体</returns>
-        public static Font ScaledDefaultFont(this Graphics g, String languageCode = null)
+        public static Font ScaledDefaultFont(this Graphics g, float sizeRatio = 1)
         {
-            var f = App.DefaultFont(languageCode);
+            var f = App.DefaultFont(sizeRatio);
             if (ASEva.APIInfo.GetRunningOS() == "windows")
             {
                 if (SizerExtensions.PixelScale == 1) return f;

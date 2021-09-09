@@ -10,7 +10,6 @@ namespace ASEvaAPIEtoTest
     {
         public TestWindow(String languageCode)
         {
-            lang = languageCode;
             t = TextResource.Load("test.xml", languageCode);
 
             Icon = Icon.FromResource("icon.png");
@@ -193,12 +192,11 @@ namespace ASEvaAPIEtoTest
             g.DrawLine(Colors.Black, 10, 120, 190, 120);
             g.DrawLine(Colors.Black, 100, 10, 100, 190);
             g.DrawLine(new Pen(Colors.Red, 20), 20, 110, 90, 110);
-            g.DrawText(g.ScaledDefaultFont(lang), Colors.Black, 100, 100, t["draw-text"]);
+            g.DrawText(g.ScaledDefaultFont(), Colors.Black, 100, 100, t["draw-text"]);
             g.DrawImage(Icon.FromResource("camera.png"), 80, 80);
             g.FillPie(Color.FromArgb(0, 128, 0, 128), 10, 10, 180, 180, -90, 270);
         }
 
-        private String lang;
         private TextResource t;
     }
 }
