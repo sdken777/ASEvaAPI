@@ -87,7 +87,7 @@ namespace ASEvaAPIEtoTest
             var layoutRow3 = layout.AddRowLayout();
             layoutRow3.AddLabel(t.Format("basic-label-row", 3));
             layoutRow3.AddControl(new TextBox(), true);
-            layoutRow3.AddControl(new SearchBox()); // TODO: CoreWF(图标/清除)
+            layoutRow3.AddControl(new SearchBox());
             layoutRow3.AddControl(new NumericStepper { MinValue = 0, MaxValue = 100 } );
 
             var layoutRow4 = layout.AddRowLayout();

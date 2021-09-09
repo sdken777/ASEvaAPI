@@ -24,6 +24,7 @@ namespace ASEva.UICoreWF
             platform.Add<GroupBox.IHandler>(() => new GroupBoxHandler());
             platform.Add<ProgressBar.IHandler>(() => new ProgressBarHandler());
             platform.Add<ColorPicker.IHandler>(() => new ColorPickerHandler());
+            platform.Add<SearchBox.IHandler>(() => new SearchBoxHandler());
 
             var app = new Application(platform);
             return app;
