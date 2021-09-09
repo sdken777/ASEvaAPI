@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于Gtk#的部分。详见 ASEva.UIGtk \n
- * 本文档对应API版本：2.0.4
+ * 本文档对应API版本：2.0.5
  */
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace ASEva.UIGtk
 {
     /// <summary>
-    /// version=2.0.4
+    /// version=2.0.5
     /// </summary>
     public class APIInfo
     {
@@ -18,7 +18,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 0, 4, 0); // AppHandler.CreateDefaultFont更改
+            return new Version(2, 0, 5, 0); // 添加WebKit2WebViewHandler。添加PixelLayoutHandler
         }
     }
 }

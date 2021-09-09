@@ -17,10 +17,14 @@ namespace ASEva.UIGtk
     {
         public Application CreateApp()
         {
+            NativeMethods.DetectNM3();
+
             var platform = new global::Eto.GtkSharp.Platform();
             platform.Add<LinkButton.IHandler>(() => new LinkButtonHandler());
             platform.Add<NumericStepper.IHandler>(() => new NumericStepperHandler());
             platform.Add<ColorPicker.IHandler>(() => new ColorPickerHandler());
+            platform.Add<WebView.IHandler>(() => new WebViewHandler());
+            platform.Add<PixelLayout.IHandler>(() => new PixelLayoutHandler());
 
             var app = new Application(platform);
             return app;
@@ -33,7 +37,6 @@ namespace ASEva.UIGtk
 
         public void RunApp(Application application, Form window)
         {
-            SizerExtensions.PixelScale = 1;
             application.Run(window);
         }
     }
