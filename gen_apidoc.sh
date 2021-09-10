@@ -1,6 +1,8 @@
+CUR_DIR=$(dirname "$0")
+
 mkdir -vp ~/Desktop/D01006_ASEvaAPIDoc
 
-cd doc
+cd $CUR_DIR/doc
 
 doxygen Doxyfile-ASEvaAPI
 cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/Common/
