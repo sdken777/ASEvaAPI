@@ -23,6 +23,7 @@
                 "Release",
                 "-o",
                 "../bin64",
+                "/property:ApplicationIcon=Resources/icon.ico",
                 "/property:UseWindowsForms=true",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
