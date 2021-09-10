@@ -105,6 +105,15 @@ namespace ASEva.UIGtk
 
 			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
 			public extern static IntPtr webkit_uri_request_get_uri(IntPtr request);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static bool webkit_response_policy_decision_is_mime_type_supported(IntPtr decision);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static void webkit_policy_decision_download(IntPtr decision);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static IntPtr webkit_response_policy_decision_get_request(IntPtr decision);
 		}
 
 		static class NM4
@@ -173,6 +182,15 @@ namespace ASEva.UIGtk
 
 			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
 			public extern static IntPtr webkit_uri_request_get_uri(IntPtr request);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static bool webkit_response_policy_decision_is_mime_type_supported(IntPtr decision);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static void webkit_policy_decision_download(IntPtr decision);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static IntPtr webkit_response_policy_decision_get_request(IntPtr decision);
 		}
 
 		public static string GetString(IntPtr handle)
@@ -215,104 +233,122 @@ namespace ASEva.UIGtk
 
 		public static string webkit_web_view_get_title(IntPtr web_view)
 		{
-			if (useNM3) return null;
+			if (useNM3) return GetString(NM3.webkit_web_view_get_title(web_view));
 			else return GetString(NM4.webkit_web_view_get_title(web_view));
 		}
 
 		public static void webkit_web_view_reload(IntPtr web_view)
 		{
-			if (useNM3) {}
+			if (useNM3) NM3.webkit_web_view_reload(web_view);
 			else NM4.webkit_web_view_reload(web_view);
 		}
 
 		public static void webkit_web_view_stop_loading(IntPtr web_view)
 		{
-			if (useNM3) {}
+			if (useNM3) NM3.webkit_web_view_stop_loading(web_view);
 			else NM4.webkit_web_view_stop_loading(web_view);
 		}
 
 		public static bool webkit_web_view_can_go_back(IntPtr web_view)
 		{
-			if (useNM3) return false;
+			if (useNM3) return NM3.webkit_web_view_can_go_back(web_view);
 			else return NM4.webkit_web_view_can_go_back(web_view);
 		}
 
 		public static void webkit_web_view_go_back(IntPtr web_view)
 		{
-			if (useNM3) {}
+			if (useNM3) NM3.webkit_web_view_go_back(web_view);
 			else NM4.webkit_web_view_go_back(web_view);
 		}
 
 		public static bool webkit_web_view_can_go_forward(IntPtr web_view)
 		{
-			if (useNM3) return false;
+			if (useNM3) return NM3.webkit_web_view_can_go_forward(web_view);
 			else return NM4.webkit_web_view_can_go_forward(web_view);
 		}
 
 		public static void webkit_web_view_go_forward(IntPtr web_view)
 		{
-			if (useNM3) {}
+			if (useNM3) NM3.webkit_web_view_go_forward(web_view);
 			else NM4.webkit_web_view_go_forward(web_view);
 		}
 
 		public static void webkit_web_view_run_javascript(IntPtr web_view, string script, IntPtr cancellable, Delegate callback, IntPtr user_data)
 		{
-			if (useNM3) {}
+			if (useNM3) NM3.webkit_web_view_run_javascript(web_view, script, cancellable, callback, user_data);
 			else NM4.webkit_web_view_run_javascript(web_view, script, cancellable, callback, user_data);
 		}
 
 		public static IntPtr webkit_web_view_run_javascript_finish(IntPtr web_view, IntPtr result, IntPtr error)
 		{
-			if (useNM3) return IntPtr.Zero;
+			if (useNM3) return NM3.webkit_web_view_run_javascript_finish(web_view, result, error);
 			else return NM4.webkit_web_view_run_javascript_finish(web_view, result, error);
 		}
 
 		public static IntPtr webkit_javascript_result_get_global_context(IntPtr js_result)
 		{
-			if (useNM3) return IntPtr.Zero;
+			if (useNM3) return NM3.webkit_javascript_result_get_global_context(js_result);
 			else return NM4.webkit_javascript_result_get_global_context(js_result);
 		}
 
 		public static IntPtr webkit_javascript_result_get_value(IntPtr js_result)
 		{
-			if (useNM3) return IntPtr.Zero;
+			if (useNM3) return NM3.webkit_javascript_result_get_value(js_result);
 			else return NM4.webkit_javascript_result_get_value(js_result);
 		}
 
 		public static IntPtr JSValueToStringCopy(IntPtr context, IntPtr value, IntPtr idk)
 		{
-			if (useNM3) return IntPtr.Zero;
+			if (useNM3) return NM3.JSValueToStringCopy(context, value, idk);
 			else return NM4.JSValueToStringCopy(context, value, idk);
 		}
 
 		public static int JSStringGetMaximumUTF8CStringSize(IntPtr js_str_value)
 		{
-			if (useNM3) return 0;
+			if (useNM3) return NM3.JSStringGetMaximumUTF8CStringSize(js_str_value);
 			else return NM4.JSStringGetMaximumUTF8CStringSize(js_str_value);
 		}
 
 		public static void JSStringGetUTF8CString(IntPtr js_str_value, IntPtr str_value, int str_length)
 		{
-			if (useNM3) {}
+			if (useNM3) NM3.JSStringGetUTF8CString(js_str_value, str_value, str_length);
 			else NM4.JSStringGetUTF8CString(js_str_value, str_value, str_length);
 		}
 
 		public static void JSStringRelease(IntPtr js_str_value)
 		{
-			if (useNM3) {}
+			if (useNM3) NM3.JSStringRelease(js_str_value);
 			else NM4.JSStringRelease(js_str_value);
 		}
 
 		public static IntPtr webkit_navigation_policy_decision_get_request(IntPtr decision)
 		{
-			if (useNM3) return IntPtr.Zero;
+			if (useNM3) return NM3.webkit_navigation_policy_decision_get_request(decision);
 			else return NM4.webkit_navigation_policy_decision_get_request(decision);
 		}
 
 		public static string webkit_uri_request_get_uri(IntPtr request)
 		{
-			if (useNM3) return null;
+			if (useNM3) return GetString(NM3.webkit_uri_request_get_uri(request));
 			else return GetString(NM4.webkit_uri_request_get_uri(request));
+		}
+
+		public static bool webkit_response_policy_decision_is_mime_type_supported(IntPtr decision)
+		{
+			if (useNM3) return NM3.webkit_response_policy_decision_is_mime_type_supported(decision);
+			else return NM4.webkit_response_policy_decision_is_mime_type_supported(decision);
+		}
+
+		public static void webkit_policy_decision_download(IntPtr decision)
+		{
+			if (useNM3) NM3.webkit_policy_decision_download(decision);
+			else NM4.webkit_policy_decision_download(decision);
+		}
+
+		public static IntPtr webkit_response_policy_decision_get_request(IntPtr decision)
+		{
+			if (useNM3) return NM3.webkit_response_policy_decision_get_request(decision);
+			else return NM4.webkit_response_policy_decision_get_request(decision);
 		}
 	}
 }

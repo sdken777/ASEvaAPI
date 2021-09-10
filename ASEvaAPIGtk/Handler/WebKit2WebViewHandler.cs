@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
+using System.Diagnostics;
 using Eto.Forms;
 using Eto.GtkSharp;
 using Eto.GtkSharp.Forms;
@@ -118,29 +120,68 @@ namespace ASEva.UIGtk
 			var decision = (GLib.Object)args.Args[0];
 			var type = (int)args.Args[1];
 
-			if (type != 0 && type != 1)
-				return;
-			
-			var request = NativeMethods.webkit_navigation_policy_decision_get_request(decision.Handle);
-			var uriString = NativeMethods.webkit_uri_request_get_uri(request);
-			var uri = String.IsNullOrEmpty(uriString) ? null : new Uri(uriString);
-
-			switch (type)
+			if (type == 0) // WEBKIT_POLICY_DECISION_TYPE_NAVIGATION_ACTION
 			{
-				case 0: // WEBKIT_POLICY_DECISION_TYPE_NAVIGATION_ACTION
-					var loadingArgs = new WebViewLoadingEventArgs(uri, true);
-					documentLoading?.Invoke(this, loadingArgs);
-					args.RetVal = loadingArgs.Cancel;
-					break;
-				case 1: // WEBKIT_POLICY_DECISION_TYPE_NEW_WINDOW_ACTION
-					var newWindowArgs = new WebViewNewWindowEventArgs(uri, "");
-					openNewWindow?.Invoke(this, newWindowArgs);
-					args.RetVal = newWindowArgs.Cancel;
-					break;
+				var request = NativeMethods.webkit_navigation_policy_decision_get_request(decision.Handle);
+				var uriString = NativeMethods.webkit_uri_request_get_uri(request);
+				var uri = String.IsNullOrEmpty(uriString) ? null : new Uri(uriString);
+
+				var loadingArgs = new WebViewLoadingEventArgs(uri, true);
+				documentLoading?.Invoke(this, loadingArgs);
+				args.RetVal = loadingArgs.Cancel;
+			}
+			else if (type == 1) // WEBKIT_POLICY_DECISION_TYPE_NEW_WINDOW_ACTION
+			{
+				var request = NativeMethods.webkit_navigation_policy_decision_get_request(decision.Handle);
+				var uriString = NativeMethods.webkit_uri_request_get_uri(request);
+				var uri = String.IsNullOrEmpty(uriString) ? null : new Uri(uriString);
+
+				var newWindowArgs = new WebViewNewWindowEventArgs(uri, "");
+				openNewWindow?.Invoke(this, newWindowArgs);
+				args.RetVal = newWindowArgs.Cancel;
+			}
+			else if (type == 2)
+			{
+				var request = NativeMethods.webkit_response_policy_decision_get_request(decision.Handle);
+				var uriString = NativeMethods.webkit_uri_request_get_uri(request);
+				var mimeSupport = NativeMethods.webkit_response_policy_decision_is_mime_type_supported(decision.Handle);
+
+				if (!mimeSupport && !String.IsNullOrEmpty(uriString))
+				{
+					GLib.Timeout.Add(1, timer_Timeout);
+					NativeMethods.webkit_policy_decision_download(decision.Handle);
+					args.RetVal = true;
+					return;
+				}
 			}
 		}
 
-		public override void AttachEvent(string id)
+        private bool timer_Timeout()
+        {
+			var userDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+			var downloadDirName = new String[] {"Downloads", "Download", "下载"};
+			String targetDir = null;
+			foreach (var dirName in downloadDirName)
+			{
+				var downloadDir = userDir + "/" + dirName;
+				if (Directory.Exists(downloadDir)) targetDir = downloadDir;
+			}
+			if (targetDir != null)
+			{
+				try
+				{
+					var startInfo = new ProcessStartInfo();
+					startInfo.FileName = targetDir;
+					startInfo.WorkingDirectory = targetDir;
+					startInfo.UseShellExecute = true;
+					Process.Start(startInfo);
+				}
+				catch (Exception) { }
+			}
+            return false;
+        }
+
+        public override void AttachEvent(string id)
 		{
 			switch (id)
 			{
