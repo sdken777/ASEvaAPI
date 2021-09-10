@@ -1,6 +1,12 @@
 CUR_DIR=$(dirname "$0")
 CUR_DATE=`date +%Y%m%d`
-TARGET_DIR=~/Desktop/$CUR_DATE-EtoSDK
+
+if [ -z "$1" ]; then
+    TARGET_DIR=~/Desktop/$CUR_DATE-EtoSDK
+    GEN_DESKTOP_ZIP=yes
+else
+    TARGET_DIR="$1"
+fi
 
 mkdir -vp $TARGET_DIR/bin64
 cp -vf $CUR_DIR/bin64/ASEvaAPI.* $TARGET_DIR/bin64/
@@ -44,8 +50,10 @@ cp -vf $CUR_DIR/binxa/ASEvaAPIGtk.* $TARGET_DIR/binxa/debug/
 cp -vf $CUR_DIR/3party/common/* $TARGET_DIR/binxa/debug/
 cp -vf $CUR_DIR/3party/linux/* $TARGET_DIR/binxa/debug/
 
-cd ~/Desktop
-zip -r $CUR_DATE-EtoSDK.zip ./$CUR_DATE-EtoSDK/
-rm -r ./$CUR_DATE-EtoSDK/
+if [ ! -z $GEN_DESKTOP_ZIP ]; then
+    cd ~/Desktop
+    zip -r $CUR_DATE-EtoSDK.zip ./$CUR_DATE-EtoSDK/
+    rm -r ./$CUR_DATE-EtoSDK/
+fi
 
 sleep 3
