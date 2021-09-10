@@ -162,7 +162,7 @@ namespace ASEvaAPIEtoTest
             };
             layoutRow.AddButton(t["web-call-script"]).Click += delegate
             {
-                webView.ExecuteScriptAsync("callScript()"); // TODO: Gtk-Ubuntu1604-PX2(无反应)
+                webView.ExecuteScriptAsync("callScript()");
             };
 
             webView.LoadHtml(ResourceLoader.LoadText("index.html"));

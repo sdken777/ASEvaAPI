@@ -146,7 +146,7 @@ namespace ASEva
         ChannelL = 11,
 
         /// <summary>
-        /// 特殊摄像头：前向
+        /// 特殊摄像头：前向（标准模型）
         /// </summary>
         SpecialFront = 100,
 
@@ -169,6 +169,11 @@ namespace ASEva
         /// 特殊摄像头：右侧盲区
         /// </summary>
         SpecialRightBS = 104,
+
+        /// <summary>
+        /// (api:app=2.1.2) 特殊摄像头：前向（鱼眼模型）
+        /// </summary>
+        SpecialFisheyeFront = 105,
     }
 
     /// <summary>

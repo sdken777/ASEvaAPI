@@ -23,12 +23,12 @@ namespace ASEva.Samples
         public SpecialCameraType SpecialCameraType { get; set; }
 
         /// <summary>
-        /// 特殊摄像头信息，可以为 ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta
+        /// 特殊摄像头信息，可以为 ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta
         /// </summary>
         public object SpecialCameraInfo { get; set; }
 
         /// <summary>
-        /// 横向视场角
+        /// 标准针孔模型下的横向视场角（未消歪曲时为空）
         /// </summary>
         public double? HorizontalFov { get; set; }
 

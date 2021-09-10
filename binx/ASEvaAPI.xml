@@ -855,7 +855,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.1.1
+            version=2.1.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -1116,7 +1116,7 @@
         </member>
         <member name="F:ASEva.UsingVideoChannel.SpecialFront">
             <summary>
-            特殊摄像头：前向
+            特殊摄像头：前向（标准模型）
             </summary>
         </member>
         <member name="F:ASEva.UsingVideoChannel.SpecialLeftLine">
@@ -1137,6 +1137,11 @@
         <member name="F:ASEva.UsingVideoChannel.SpecialRightBS">
             <summary>
             特殊摄像头：右侧盲区
+            </summary>
+        </member>
+        <member name="F:ASEva.UsingVideoChannel.SpecialFisheyeFront">
+            <summary>
+            (api:app=2.1.2) 特殊摄像头：前向（鱼眼模型）
             </summary>
         </member>
         <member name="T:ASEva.SignalPackConfigElem">
@@ -2968,32 +2973,32 @@
         </member>
         <member name="F:ASEva.Samples.SpecialCameraType.Normal">
             <summary>
-            无特殊类型
+            无位置摄像头（标准模型），使用 DefaultCameraMeta
             </summary>
         </member>
         <member name="F:ASEva.Samples.SpecialCameraType.FrontCamera">
             <summary>
-            前向摄像头
+            前向摄像头（标准模型），使用 GenericCameraMeta
             </summary>
         </member>
         <member name="F:ASEva.Samples.SpecialCameraType.LeftLaneCamera">
             <summary>
-            垂直面向左车道线摄像头
+            垂直面向左车道线摄像头（标准模型），使用 LaneLineCameraMeta
             </summary>
         </member>
         <member name="F:ASEva.Samples.SpecialCameraType.RightLaneCamera">
             <summary>
-            垂直面向右车道线摄像头
+            垂直面向右车道线摄像头（标准模型），使用 LaneLineCameraMeta
             </summary>
         </member>
         <member name="F:ASEva.Samples.SpecialCameraType.LeftBlindSpotCamera">
             <summary>
-            面向左盲区摄像头
+            面向左盲区摄像头（标准模型），使用 BlindSpotCameraMeta
             </summary>
         </member>
         <member name="F:ASEva.Samples.SpecialCameraType.RightBlindSpotCamera">
             <summary>
-            面向右盲区摄像头
+            面向右盲区摄像头（标准模型），使用 BlindSpotCameraMeta
             </summary>
         </member>
         <member name="F:ASEva.Samples.SpecialCameraType.AnyCamera">
@@ -3001,9 +3006,24 @@
             任意位置摄像头
             </summary>
         </member>
+        <member name="F:ASEva.Samples.SpecialCameraType.NormalFisheyeCamera">
+            <summary>
+            (api:app=2.1.2) 无位置摄像头（鱼眼模型），使用 FisheyeCameraMeta
+            </summary>
+        </member>
+        <member name="F:ASEva.Samples.SpecialCameraType.FrontFisheyeCamera">
+            <summary>
+            (api:app=2.1.2) 前向摄像头（鱼眼模型），使用 FisheyeCameraMeta
+            </summary>
+        </member>
+        <member name="F:ASEva.Samples.SpecialCameraType.AnyFisheyeCamera">
+            <summary>
+            (api:app=2.1.2) 任意位置摄像头（鱼眼模型），使用 FisheyeCameraMeta
+            </summary>
+        </member>
         <member name="T:ASEva.Samples.CommonCameraMeta">
             <summary>
-            (api:app=2.0.0) 摄像头信息共通部分
+            (api:app=2.0.0) 摄像头信息共通部分（标准模型）
             </summary>
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.Inverted">
@@ -3023,7 +3043,7 @@
         </member>
         <member name="T:ASEva.Samples.DefaultCameraMeta">
             <summary>
-            (api:app=2.0.0) 默认摄像头关联信息
+            (api:app=2.0.0) 默认摄像头关联信息（标准模型）
             </summary>
         </member>
         <member name="P:ASEva.Samples.DefaultCameraMeta.Common">
@@ -3033,7 +3053,7 @@
         </member>
         <member name="T:ASEva.Samples.GenericCameraMeta">
             <summary>
-            (api:app=2.0.0) 泛用参数摄像头关联信息
+            (api:app=2.0.0) 泛用参数摄像头关联信息（标准模型）
             </summary>
         </member>
         <member name="P:ASEva.Samples.GenericCameraMeta.Common">
@@ -3103,7 +3123,7 @@
         </member>
         <member name="T:ASEva.Samples.LaneLineCameraMeta">
             <summary>
-            (api:app=2.0.0) 车道线摄像头关联信息
+            (api:app=2.0.0) 车道线摄像头关联信息（标准模型）
             </summary>
         </member>
         <member name="P:ASEva.Samples.LaneLineCameraMeta.IsRightSide">
@@ -3123,7 +3143,7 @@
         </member>
         <member name="T:ASEva.Samples.BlindSpotCameraMeta">
             <summary>
-            (api:app=2.0.0) 盲区摄像头关联信息
+            (api:app=2.0.0) 盲区摄像头关联信息（标准模型）
             </summary>
         </member>
         <member name="P:ASEva.Samples.BlindSpotCameraMeta.IsRightSide">
@@ -3134,6 +3154,91 @@
         <member name="P:ASEva.Samples.BlindSpotCameraMeta.Common">
             <summary>
             共通部分
+            </summary>
+        </member>
+        <member name="T:ASEva.Samples.FisheyeCameraMeta">
+            <summary>
+            (api:app=2.1.2) 鱼眼摄像头关联信息（鱼眼模型）
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.Inverted">
+            <summary>
+            是否作了翻转
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.VFlipped">
+            <summary>
+            是否作了镜像
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.Undistorted">
+            <summary>
+            是否作了消歪曲
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.HasExtrinsicsInfo">
+            <summary>
+            是否含有外参信息
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.PositionX">
+            <summary>
+            位置坐标X轴分量 [m]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.PositionY">
+            <summary>
+            位置坐标Y轴分量 [m]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.PositionZ">
+            <summary>
+            位置坐标Z轴分量 [m]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.YawRectified">
+            <summary>
+            是否作了横摆对正
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.OriginYaw">
+            <summary>
+            原横摆角 [°]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.RectifiedYaw">
+            <summary>
+            对正后的横摆角 [°]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.PitchRectified">
+            <summary>
+            是否作了俯仰对正
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.OriginPitch">
+            <summary>
+            原俯仰角 [°]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.RollRectified">
+            <summary>
+            是否作了横滚对正
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.OriginRoll">
+            <summary>
+            原横滚角 [°]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.ShakeYaw">
+            <summary>
+            抖动偏置横摆角（仅部分摄像头有效）
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.ShakePitch">
+            <summary>
+            抖动偏置俯仰角（仅部分摄像头有效）
             </summary>
         </member>
         <member name="T:ASEva.Samples.VideoFrameSample">
@@ -3158,12 +3263,12 @@
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.SpecialCameraInfo">
             <summary>
-            特殊摄像头信息，可以为 ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta
+            特殊摄像头信息，可以为 ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta
             </summary>
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.HorizontalFov">
             <summary>
-            横向视场角
+            标准针孔模型下的横向视场角（未消歪曲时为空）
             </summary>
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.Scaled">
