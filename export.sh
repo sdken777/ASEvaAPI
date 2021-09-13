@@ -5,15 +5,15 @@ CUR_DATE=`date +%Y%m%d`
 
 EXPORT_DEVELOPER=y
 EXPORT_RUNTIME_DEBUG=y
-if [ "$1" == "" ]; then
+if [ "$1" = "" ]; then
     TARGET_DIR=~/Desktop/$CUR_DATE-$TARGET_NAME
     GEN_DESKTOP_ZIP=y
 else
     TARGET_DIR="$1"
-    if [ "$2" == "runtime-with-debug" ]; then
+    if [ "$2" = "runtime-with-debug" ]; then
         EXPORT_DEVELOPER=n
     fi
-    if [ "$2" == "runtime-without-debug" ]; then
+    if [ "$2" = "runtime-without-debug" ]; then
         EXPORT_DEVELOPER=n
         EXPORT_RUNTIME_DEBUG=n
     fi
@@ -40,7 +40,7 @@ cp -vf $CUR_DIR/binxa/ASEvaAPIGtk.dll $TARGET_DIR/binxa/
 cp -vf $CUR_DIR/3party/common/* $TARGET_DIR/binxa/
 cp -vf $CUR_DIR/3party/linux/* $TARGET_DIR/binxa/
 
-if [ "$EXPORT_DEVELOPER" == "y" ]; then
+if [ "$EXPORT_DEVELOPER" = "y" ]; then
     cp -vf $CUR_DIR/bin64/ASEvaAPI.xml $TARGET_DIR/bin64/
     cp -vf $CUR_DIR/bin64/ASEvaAPIEto.xml $TARGET_DIR/bin64/
     cp -vf $CUR_DIR/bin64/ASEvaAPICoreWF.xml $TARGET_DIR/bin64/
@@ -54,7 +54,7 @@ if [ "$EXPORT_DEVELOPER" == "y" ]; then
     cp -vf $CUR_DIR/binx/ASEvaAPIGtk.xml $TARGET_DIR/binx/
 fi
 
-if [ "$EXPORT_RUNTIME_DEBUG" == "y" ]; then
+if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
     mkdir -vp $TARGET_DIR/bin64/debug
     cp -vf $CUR_DIR/bin64/ASEvaAPI.dll $TARGET_DIR/bin64/debug/
     cp -vf $CUR_DIR/bin64/ASEvaAPIEto.dll $TARGET_DIR/bin64/debug/
@@ -77,7 +77,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" == "y" ]; then
     cp -vf $CUR_DIR/3party/linux/* $TARGET_DIR/binxa/debug/
 fi
 
-if [ "$GEN_DESKTOP_ZIP" == "y" ]; then
+if [ "$GEN_DESKTOP_ZIP" = "y" ]; then
     cd ~/Desktop
     zip -r $CUR_DATE-$TARGET_NAME.zip ./$CUR_DATE-$TARGET_NAME/
     rm -r ./$CUR_DATE-$TARGET_NAME/
