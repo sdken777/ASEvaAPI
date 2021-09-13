@@ -1,10 +1,12 @@
+TARGET_NAME=EtoSDK
+
 CUR_DIR=$(dirname "$0")
 CUR_DATE=`date +%Y%m%d`
 
 EXPORT_DEVELOPER=y
 EXPORT_RUNTIME_DEBUG=y
 if [ "$1" == "" ]; then
-    TARGET_DIR=~/Desktop/$CUR_DATE-EtoSDK
+    TARGET_DIR=~/Desktop/$CUR_DATE-$TARGET_NAME
     GEN_DESKTOP_ZIP=y
 else
     TARGET_DIR="$1"
@@ -75,10 +77,10 @@ if [ "$EXPORT_RUNTIME_DEBUG" == "y" ]; then
     cp -vf $CUR_DIR/3party/linux/* $TARGET_DIR/binxa/debug/
 fi
 
-if [ ! -z $GEN_DESKTOP_ZIP ]; then
+if [ "$GEN_DESKTOP_ZIP" == "y" ]; then
     cd ~/Desktop
-    zip -r $CUR_DATE-EtoSDK.zip ./$CUR_DATE-EtoSDK/
-    rm -r ./$CUR_DATE-EtoSDK/
+    zip -r $CUR_DATE-$TARGET_NAME.zip ./$CUR_DATE-$TARGET_NAME/
+    rm -r ./$CUR_DATE-$TARGET_NAME/
 fi
 
 sleep 3
