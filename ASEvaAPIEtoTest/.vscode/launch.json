@@ -2,10 +2,10 @@
    "version": "0.2.0",
    "configurations": [
         {
-            "name": "发布运行(X86-Windows)",
+            "name": "发布运行(X86-Windows主机)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "发布构建(X86-Windows)并跨平台拷贝",
+            "preLaunchTask": "发布构建(X86-Windows主机/全平台目标)",
             "program": "${workspaceFolder}/../bin64/ASEvaAPIEtoTest",
             "args": [],
             "cwd": "${workspaceFolder}/../bin64/",
@@ -13,10 +13,10 @@
             "stopAtEntry": false
         },
         {
-            "name": "发布运行(X86-Linux)",
+            "name": "发布运行(X86-Linux主机)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "发布构建(X86-Linux)并跨平台拷贝",
+            "preLaunchTask": "发布构建(X86-Linux主机/全平台目标)",
             "program": "${workspaceFolder}/../binx/ASEvaAPIEtoTest",
             "args": [],
             "cwd": "${workspaceFolder}/../binx/",
@@ -24,10 +24,10 @@
             "stopAtEntry": false
         },
         {
-            "name": "发布运行(Arm-Linux)",
+            "name": "发布运行(Arm-Linux主机)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "发布构建(Arm-Linux)并跨平台拷贝",
+            "preLaunchTask": "发布构建(Arm-Linux主机/全平台目标)",
             "program": "${workspaceFolder}/../binxa/ASEvaAPIEtoTest",
             "args": [],
             "cwd": "${workspaceFolder}/../binxa/",
@@ -35,10 +35,10 @@
             "stopAtEntry": false
         },
         {
-            "name": "调试运行(X86-Windows)",
+            "name": "调试运行(X86-Windows主机)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "调试构建(X86-Windows)并移除冗余文件",
+            "preLaunchTask": "调试构建并移除冗余文件(X86-Windows主机/X86-Windows目标)",
             "program": "${workspaceFolder}/../bin64/debug/ASEvaAPIEtoTest",
             "args": [],
             "cwd": "${workspaceFolder}/../bin64/debug/",
@@ -46,10 +46,10 @@
             "stopAtEntry": false
         },
         {
-            "name": "调试运行(X86-Linux)",
+            "name": "调试运行(X86-Linux主机)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "调试构建(X86-Linux)并移除冗余文件",
+            "preLaunchTask": "调试构建并移除冗余文件(X86-Linux主机/X86-Ubuntu1804目标)",
             "program": "${workspaceFolder}/../binx/debug/ASEvaAPIEtoTest",
             "args": [],
             "cwd": "${workspaceFolder}/../binx/debug/",
@@ -57,10 +57,10 @@
             "stopAtEntry": false
         },
         {
-            "name": "调试运行(Arm-Linux)",
+            "name": "调试运行(Arm-Linux主机)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "调试构建(Arm-Linux)并移除冗余文件",
+            "preLaunchTask": "调试构建并移除冗余文件(Arm-Linux主机/Arm-Ubuntu1604目标)",
             "program": "${workspaceFolder}/../binxa/debug/ASEvaAPIEtoTest",
             "args": [],
             "cwd": "${workspaceFolder}/../binxa/debug/",

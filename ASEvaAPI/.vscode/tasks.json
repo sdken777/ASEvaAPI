@@ -14,7 +14,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)发布构建",
+            "label": "(internal)发布构建(X86-Windows目标)",
             "command": "dotnet",
             "args": [
                 "build",
@@ -33,7 +33,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)移除发布构建冗余文件",
+            "label": "(internal)移除发布构建冗余文件(X86-Windows目标)",
             "command": "rm",
             "args": [
                 "-vf",
@@ -44,7 +44,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)跨平台创建bin文件夹",
+            "label": "(internal)创建bin文件夹",
             "command": "mkdir",
             "args": [
                 "-p",
@@ -55,7 +55,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)跨平台拷贝dll至binx",
+            "label": "(internal)拷贝dll至bin(X86-Windows至X86-Ubuntu1804目标)",
             "command": "cp",
             "args": [
                 "-vf",
@@ -66,7 +66,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)跨平台拷贝dll至binxa",
+            "label": "(internal)拷贝dll至bin(X86-Windows至Arm-Ubuntu1604目标)",
             "command": "cp",
             "args": [
                 "-vf",
@@ -77,7 +77,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)跨平台拷贝xml至binx",
+            "label": "(internal)拷贝xml至bin(X86-Windows至X86-Ubuntu1804目标)",
             "command": "cp",
             "args": [
                 "-vf",
@@ -88,7 +88,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)跨平台拷贝xml至binxa",
+            "label": "(internal)拷贝xml至bin(X86-Windows至Arm-Ubuntu1604目标)",
             "command": "cp",
             "args": [
                 "-vf",
@@ -99,26 +99,26 @@
         },
         {
             "type": "process",
-            "label": "发布构建并跨平台拷贝",
+            "label": "发布构建(全平台目标)",
             "command": "echo",
             "args": [
                 "Done.",
             ],
             "dependsOrder": "sequence",
             "dependsOn": [
-                "(internal)发布构建",
-                "(internal)移除发布构建冗余文件",
-                "(internal)跨平台创建bin文件夹",
-                "(internal)跨平台拷贝dll至binx",
-                "(internal)跨平台拷贝dll至binxa",
-                "(internal)跨平台拷贝xml至binx",
-                "(internal)跨平台拷贝xml至binxa",
+                "(internal)发布构建(X86-Windows目标)",
+                "(internal)移除发布构建冗余文件(X86-Windows目标)",
+                "(internal)创建bin文件夹",
+                "(internal)拷贝dll至bin(X86-Windows至X86-Ubuntu1804目标)",
+                "(internal)拷贝dll至bin(X86-Windows至Arm-Ubuntu1604目标)",
+                "(internal)拷贝xml至bin(X86-Windows至X86-Ubuntu1804目标)",
+                "(internal)拷贝xml至bin(X86-Windows至Arm-Ubuntu1604目标)",
             ],
             "problemMatcher": []
         },
         {
             "type": "process",
-            "label": "调试构建(X86-Windows)",
+            "label": "调试构建(X86-Windows目标)",
             "command": "dotnet",
             "args": [
                 "build",
@@ -135,7 +135,7 @@
         },
         {
             "type": "process",
-            "label": "调试构建(X86-Linux)",
+            "label": "调试构建(X86-Ubuntu1804目标)",
             "command": "dotnet",
             "args": [
                 "build",
@@ -152,7 +152,7 @@
         },
         {
             "type": "process",
-            "label": "调试构建(Arm-Linux)",
+            "label": "调试构建(Arm-Ubuntu1604目标)",
             "command": "dotnet",
             "args": [
                 "build",

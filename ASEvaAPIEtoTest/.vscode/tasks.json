@@ -14,7 +14,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)发布构建(X86-Windows)",
+            "label": "(internal)发布构建(X86-Windows主机/X86-Windows目标)",
             "command": "dotnet",
             "args": [
                 "build",
@@ -35,7 +35,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)发布构建(X86-Linux)",
+            "label": "(internal)发布构建(X86-Linux主机/X86-Ubuntu1804目标)",
             "command": "dotnet",
             "args": [
                 "build",
@@ -54,7 +54,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)发布构建(Arm-Linux)",
+            "label": "(internal)发布构建(Arm-Linux主机/Arm-Ubuntu1604目标)",
             "command": "dotnet",
             "args": [
                 "build",
@@ -73,7 +73,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)移除发布构建冗余文件(X86-Windows)",
+            "label": "(internal)移除发布构建冗余文件(X86-Windows目标)",
             "command": "rm",
             "args": [
                 "-vf",
@@ -85,7 +85,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)移除发布构建冗余文件(X86-Linux)",
+            "label": "(internal)移除发布构建冗余文件(X86-Ubuntu1804目标)",
             "command": "rm",
             "args": [
                 "-vf",
@@ -97,7 +97,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)移除发布构建冗余文件(Arm-Linux)",
+            "label": "(internal)移除发布构建冗余文件(Arm-Ubuntu1604目标)",
             "command": "rm",
             "args": [
                 "-vf",
@@ -109,7 +109,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)跨平台创建bin文件夹",
+            "label": "(internal)创建bin文件夹",
             "command": "mkdir",
             "args": [
                 "-p",
@@ -121,7 +121,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)跨平台拷贝dll至binx(X86-Windows)",
+            "label": "(internal)拷贝dll至bin(X86-Windows至X86-Ubuntu1804目标)",
             "command": "cp",
             "args": [
                 "-vf",
@@ -132,7 +132,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)跨平台拷贝dll至binxa(X86-Windows)",
+            "label": "(internal)拷贝dll至bin(X86-Windows至Arm-Ubuntu1604目标)",
             "command": "cp",
             "args": [
                 "-vf",
@@ -143,7 +143,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)跨平台拷贝dll至bin64(X86-Linux)",
+            "label": "(internal)拷贝dll至bin(X86-Ubuntu1804至X86-Windows目标)",
             "command": "cp",
             "args": [
                 "-vf",
@@ -154,7 +154,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)跨平台拷贝dll至binxa(X86-Linux)",
+            "label": "(internal)拷贝dll至bin(X86-Ubuntu1804至Arm-Ubuntu1604目标)",
             "command": "cp",
             "args": [
                 "-vf",
@@ -165,7 +165,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)跨平台拷贝dll至bin64(Arm-Linux)",
+            "label": "(internal)拷贝dll至bin(Arm-Ubuntu1604至X86-Windows目标)",
             "command": "cp",
             "args": [
                 "-vf",
@@ -176,7 +176,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)跨平台拷贝dll至binx(Arm-Linux)",
+            "label": "(internal)拷贝dll至bin(Arm-Ubuntu1604至X86-Ubuntu1804目标)",
             "command": "cp",
             "args": [
                 "-vf",
@@ -187,58 +187,58 @@
         },
         {
             "type": "process",
-            "label": "发布构建(X86-Windows)并跨平台拷贝",
+            "label": "发布构建(X86-Windows主机/全平台目标)",
             "command": "echo",
             "args": [
                 "Done.",
             ],
             "dependsOrder": "sequence",
             "dependsOn": [
-                "(internal)发布构建(X86-Windows)",
-                "(internal)移除发布构建冗余文件(X86-Windows)",
-                "(internal)跨平台创建bin文件夹",
-                "(internal)跨平台拷贝dll至binx(X86-Windows)",
-                "(internal)跨平台拷贝dll至binxa(X86-Windows)",
+                "(internal)发布构建(X86-Windows主机/X86-Windows目标)",
+                "(internal)移除发布构建冗余文件(X86-Windows目标)",
+                "(internal)创建bin文件夹",
+                "(internal)拷贝dll至bin(X86-Windows至X86-Ubuntu1804目标)",
+                "(internal)拷贝dll至bin(X86-Windows至Arm-Ubuntu1604目标)",
             ],
             "problemMatcher": []
         },
         {
             "type": "process",
-            "label": "发布构建(X86-Linux)并跨平台拷贝",
+            "label": "发布构建(X86-Linux主机/全平台目标)",
             "command": "echo",
             "args": [
                 "Done.",
             ],
             "dependsOrder": "sequence",
             "dependsOn": [
-                "(internal)发布构建(X86-Linux)",
-                "(internal)移除发布构建冗余文件(X86-Linux)",
-                "(internal)跨平台创建bin文件夹",
-                "(internal)跨平台拷贝dll至bin64(X86-Linux)",
-                "(internal)跨平台拷贝dll至binxa(X86-Linux)",
+                "(internal)发布构建(X86-Linux主机/X86-Ubuntu1804目标)",
+                "(internal)移除发布构建冗余文件(X86-Ubuntu1804目标)",
+                "(internal)创建bin文件夹",
+                "(internal)拷贝dll至bin(X86-Ubuntu1804至X86-Windows目标)",
+                "(internal)拷贝dll至bin(X86-Ubuntu1804至Arm-Ubuntu1604目标)",
             ],
             "problemMatcher": []
         },
         {
             "type": "process",
-            "label": "发布构建(Arm-Linux)并跨平台拷贝",
+            "label": "发布构建(Arm-Linux主机/全平台目标)",
             "command": "echo",
             "args": [
                 "Done.",
             ],
             "dependsOrder": "sequence",
             "dependsOn": [
-                "(internal)发布构建(Arm-Linux)",
-                "(internal)移除发布构建冗余文件(Arm-Linux)",
-                "(internal)跨平台创建bin文件夹",
-                "(internal)跨平台拷贝dll至bin64(Arm-Linux)",
-                "(internal)跨平台拷贝dll至binx(Arm-Linux)",
+                "(internal)发布构建(Arm-Linux主机/Arm-Ubuntu1604目标)",
+                "(internal)移除发布构建冗余文件(Arm-Ubuntu1604目标)",
+                "(internal)创建bin文件夹",
+                "(internal)拷贝dll至bin(Arm-Ubuntu1604至X86-Windows目标)",
+                "(internal)拷贝dll至bin(Arm-Ubuntu1604至X86-Ubuntu1804目标)",
             ],
             "problemMatcher": []
         },
         {
             "type": "process",
-            "label": "(internal)调试构建(X86-Windows)",
+            "label": "(internal)调试构建(X86-Windows主机/X86-Windows目标)",
             "command": "dotnet",
             "args": [
                 "build",
@@ -256,7 +256,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)调试构建(X86-Linux)",
+            "label": "(internal)调试构建(X86-Linux主机/X86-Ubuntu1804目标)",
             "command": "dotnet",
             "args": [
                 "build",
@@ -273,7 +273,7 @@
         },
         {
             "type": "process",
-            "label": "(internal)调试构建(Arm-Linux)",
+            "label": "(internal)调试构建(Arm-Linux主机/Arm-Ubuntu1604目标)",
             "command": "dotnet",
             "args": [
                 "build",
@@ -290,7 +290,7 @@
         },
         {
             "type": "process",
-            "label": "调试构建(X86-Windows)并移除冗余文件",
+            "label": "调试构建并移除冗余文件(X86-Windows主机/X86-Windows目标)",
             "command": "rm",
             "args": [
                 "-vf",
@@ -299,13 +299,13 @@
                 "../bin64/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
             ],
             "dependsOn": [
-                "(internal)调试构建(X86-Windows)"
+                "(internal)调试构建(X86-Windows主机/X86-Windows目标)"
             ],
             "problemMatcher": []
         },
         {
             "type": "process",
-            "label": "调试构建(X86-Linux)并移除冗余文件",
+            "label": "调试构建并移除冗余文件(X86-Linux主机/X86-Ubuntu1804目标)",
             "command": "rm",
             "args": [
                 "-vf",
@@ -314,13 +314,13 @@
                 "../binx/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
             ],
             "dependsOn": [
-                "(internal)调试构建(X86-Linux)"
+                "(internal)调试构建(X86-Linux主机/X86-Ubuntu1804目标)"
             ],
             "problemMatcher": []
         },
         {
             "type": "process",
-            "label": "调试构建(Arm-Linux)并移除冗余文件",
+            "label": "调试构建并移除冗余文件(Arm-Linux主机/Arm-Ubuntu1604目标)",
             "command": "rm",
             "args": [
                 "-vf",
@@ -329,7 +329,7 @@
                 "../binxa/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
             ],
             "dependsOn": [
-                "(internal)调试构建(Arm-Linux)"
+                "(internal)调试构建(Arm-Linux主机/Arm-Ubuntu1604目标)"
             ],
             "problemMatcher": []
         },
