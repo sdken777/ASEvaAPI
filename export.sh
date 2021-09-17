@@ -66,16 +66,16 @@ if [ "$EXPORT_DEVELOPER" = "y" ]; then
         cp -vf $CUR_DIR/bin64/ASEvaAPICoreWF.xml $TARGET_DIR/bin64/
     fi
 
-    cp -vf $CUR_DIR/bin64/ASEvaAPI.xml $TARGET_DIR/bin64/debug/
-    if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
-        cp -vf $CUR_DIR/bin64/ASEvaAPIEto.xml $TARGET_DIR/bin64/debug/
-        cp -vf $CUR_DIR/bin64/ASEvaAPICoreWF.xml $TARGET_DIR/bin64/debug/
-    fi
-
     cp -vf $CUR_DIR/binx/ASEvaAPI.xml $TARGET_DIR/binx/
     if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
         cp -vf $CUR_DIR/binx/ASEvaAPIEto.xml $TARGET_DIR/binx/
         cp -vf $CUR_DIR/binx/ASEvaAPIGtk.xml $TARGET_DIR/binx/
+    fi
+
+    cp -vf $CUR_DIR/binxa/ASEvaAPI.xml $TARGET_DIR/binxa/
+    if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
+        cp -vf $CUR_DIR/binxa/ASEvaAPIEto.xml $TARGET_DIR/binxa/
+        cp -vf $CUR_DIR/binxa/ASEvaAPIGtk.xml $TARGET_DIR/binxa/
     fi
 fi
 
