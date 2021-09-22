@@ -18,7 +18,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 0, 6, 1); // 修复WebKit2WebViewHandler若干问题
+            return new Version(2, 0, 6, 2); // LinkItem改为靠左对齐
         }
     }
 }
