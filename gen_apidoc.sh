@@ -20,4 +20,5 @@ cd ~/Desktop
 zip -r D01006_ASEvaAPIDoc.zip ./D01006_ASEvaAPIDoc/
 rm -r ./D01006_ASEvaAPIDoc/
 
-sleep 3
+echo "Done. (ASEvaAPI/gen_apidoc.sh)"
+sleep 1

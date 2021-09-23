@@ -9,4 +9,5 @@ chmod -v +x $CUR_DIR/binx/ASEvaAPIEtoTest
 
 chmod -v +x $CUR_DIR/binxa/ASEvaAPIEtoTest
 
-sleep 3
+echo "Done. (ASEvaAPI/init_exe.sh)"
+sleep 1

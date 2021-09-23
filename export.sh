@@ -117,4 +117,5 @@ if [ "$GEN_DESKTOP_ZIP" = "y" ]; then
     rm -r ./$CUR_DATE-$TARGET_NAME/
 fi
 
-sleep 3
+echo "Done. (ASEvaAPI/export.sh)"
+sleep 1
