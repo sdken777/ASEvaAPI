@@ -60,22 +60,34 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
 fi
 
 if [ "$EXPORT_DEVELOPER" = "y" ]; then
+    mkdir -vp $TARGET_DIR/bin64/debug
     cp -vf $CUR_DIR/bin64/ASEvaAPI.xml $TARGET_DIR/bin64/
+    cp -vf $CUR_DIR/bin64/ASEvaAPI.xml $TARGET_DIR/bin64/debug/
     if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
         cp -vf $CUR_DIR/bin64/ASEvaAPIEto.xml $TARGET_DIR/bin64/
+        cp -vf $CUR_DIR/bin64/ASEvaAPIEto.xml $TARGET_DIR/bin64/debug/
         cp -vf $CUR_DIR/bin64/ASEvaAPICoreWF.xml $TARGET_DIR/bin64/
+        cp -vf $CUR_DIR/bin64/ASEvaAPICoreWF.xml $TARGET_DIR/bin64/debug/
     fi
 
+    mkdir -vp $TARGET_DIR/binx/debug
     cp -vf $CUR_DIR/binx/ASEvaAPI.xml $TARGET_DIR/binx/
+    cp -vf $CUR_DIR/binx/ASEvaAPI.xml $TARGET_DIR/binx/debug/
     if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
         cp -vf $CUR_DIR/binx/ASEvaAPIEto.xml $TARGET_DIR/binx/
+        cp -vf $CUR_DIR/binx/ASEvaAPIEto.xml $TARGET_DIR/binx/debug/
         cp -vf $CUR_DIR/binx/ASEvaAPIGtk.xml $TARGET_DIR/binx/
+        cp -vf $CUR_DIR/binx/ASEvaAPIGtk.xml $TARGET_DIR/binx/debug/
     fi
 
+    mkdir -vp $TARGET_DIR/binxa/debug
     cp -vf $CUR_DIR/binxa/ASEvaAPI.xml $TARGET_DIR/binxa/
+    cp -vf $CUR_DIR/binxa/ASEvaAPI.xml $TARGET_DIR/binxa/debug/
     if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
         cp -vf $CUR_DIR/binxa/ASEvaAPIEto.xml $TARGET_DIR/binxa/
+        cp -vf $CUR_DIR/binxa/ASEvaAPIEto.xml $TARGET_DIR/binxa/debug/
         cp -vf $CUR_DIR/binxa/ASEvaAPIGtk.xml $TARGET_DIR/binxa/
+        cp -vf $CUR_DIR/binxa/ASEvaAPIGtk.xml $TARGET_DIR/binxa/debug/
     fi
 fi
 
