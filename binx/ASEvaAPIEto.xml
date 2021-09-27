@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.0.6
+            version=2.0.7
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -26,11 +26,30 @@
             </summary>
             <returns>是否成功</returns>
         </member>
+        <member name="M:ASEva.UIEto.App.Init(System.String)">
+            <summary>
+            (api:eto=2.0.7) 以指定UI框架初始化应用程序
+            </summary>
+            <param name="uiCode">UI框架代号</param>
+            <returns>是否成功</returns>
+        </member>
         <member name="M:ASEva.UIEto.App.Run(Eto.Forms.Form)">
             <summary>
             运行应用程序
             </summary>
             <param name="window">主窗口</param>
+        </member>
+        <member name="M:ASEva.UIEto.App.GetRunningOS">
+            <summary>
+            (api:eto=2.0.7) 返回当前运行的OS代号，与 ASEva.APIInfo.GetRunningOS 结果一致
+            </summary>
+            <returns>OS代号，若无法识别返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.GetRunningUI">
+            <summary>
+            (api:eto=2.0.7) 返回当前运行的UI框架代号
+            </summary>
+            <returns>UI框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回null</returns>
         </member>
         <member name="P:ASEva.UIEto.App.Instance">
             <summary>

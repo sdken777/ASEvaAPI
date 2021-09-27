@@ -30,9 +30,9 @@ namespace ASEva
         }
 
         /// <summary>
-        /// (api:app=2.0.0) 返回当前运行的OS
+        /// (api:app=2.0.0) 返回当前运行的OS代号
         /// </summary>
-        /// <returns>"windows"或"linux"，若无法识别返回null</returns>
+        /// <returns>OS代号，若无法识别返回null</returns>
         public static String GetRunningOS()
         {
             if (osCode == null)

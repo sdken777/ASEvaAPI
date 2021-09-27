@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using System.IO;
+using System.Linq;
 using Eto.Forms;
 using Eto.Drawing;
 
@@ -24,18 +25,117 @@ namespace ASEva.UIEto
         /// <returns>是否成功</returns>
         public static bool Init()
         {
+            if (!initAppInvoked)
+            {
+                var availableUICodes = getAvailableUICodes();
+                if (availableUICodes == null) return false;
+                initApp(availableUICodes[0]);
+            }
+            return application != null;
+        }
+
+        /// <summary>
+        /// (api:eto=2.0.7) 以指定UI框架初始化应用程序
+        /// </summary>
+        /// <param name="uiCode">UI框架代号</param>
+        /// <returns>是否成功</returns>
+        public static bool Init(String uiCode)
+        {
+            if (String.IsNullOrEmpty(uiCode)) return false;
+            if (!initAppInvoked)
+            {
+                var availableUICodes = getAvailableUICodes();
+                if (availableUICodes == null || !availableUICodes.Contains(uiCode)) return false;
+                initApp(uiCode);
+            }
+            return application != null;
+        }
+
+        /// <summary>
+        /// 运行应用程序
+        /// </summary>
+        /// <param name="window">主窗口</param>
+        public static void Run(Form window)
+        {
+            if (application != null)
+            {
+                application.Run(window);
+            }
+        }
+
+        /// <summary>
+        /// (api:eto=2.0.7) 返回当前运行的OS代号，与 ASEva.APIInfo.GetRunningOS 结果一致
+        /// </summary>
+        /// <returns>OS代号，若无法识别返回null</returns>
+        public static String GetRunningOS()
+        {
+            return ASEva.APIInfo.GetRunningOS();
+        }
+
+        /// <summary>
+        /// (api:eto=2.0.7) 返回当前运行的UI框架代号
+        /// </summary>
+        /// <returns>UI框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回null</returns>
+        public static String GetRunningUI()
+        {
+            return runningUI;
+        }
+
+        /// <summary>
+        /// 应用程序对象
+        /// </summary>
+        public static Application Instance
+        {
+            get { return application; }
+        }
+
+        /// <summary>
+        /// (api:eto=2.0.6) 获取默认字体
+        /// </summary>
+        /// <param name="sizeRatio">相对字体默认大小的比例，默认为1</param>
+        /// <returns>默认字体</returns>
+        public static Font DefaultFont(float sizeRatio = 1)
+        {
+            if (handler != null && defaultFont == null)
+            {
+                defaultFont = handler.CreateDefaultFont();
+            }
+            sizeRatio = Math.Max(0.01f, sizeRatio);
+            return new Font(defaultFont.Family, defaultFont.Size * sizeRatio, defaultFont.FontStyle, defaultFont.FontDecoration);
+        }
+
+        private static String[] getAvailableUICodes()
+        {
+            var osCode = GetRunningOS();
+            if (osCode == null) return null;
+
+            switch (osCode)
+            {
+            case "windows":
+                return new String[] { "corewf" };
+            case "linux":
+            case "linuxarm":
+                return new String[] { "gtk" };
+            default:
+                return null;
+            }
+        }
+
+        private static void initApp(String uiCode)
+        {
+            initAppInvoked = true;
+
             if (handler == null)
             {
                 String dllFileName = null;
                 String uiNamespace =  null;
-                switch (ASEva.APIInfo.GetRunningOS())
+                switch (uiCode)
                 {
-                case "windows":
+                case "corewf":
                     dllFileName = "ASEvaAPICoreWF.dll";
                     uiNamespace = "UICoreWF";
                     break;
-                case "linux":
-                case "linuxarm":
+                case "gtk":
                     dllFileName = "ASEvaAPIGtk.dll";
                     uiNamespace = "UIGtk";
                     break;
@@ -68,48 +168,14 @@ namespace ASEva.UIEto
             if (handler != null && application == null)
             {
                 application = handler.CreateApp();
+                if (application != null) runningUI = uiCode;
             }
-
-            return application != null;
-        }
-
-        /// <summary>
-        /// 运行应用程序
-        /// </summary>
-        /// <param name="window">主窗口</param>
-        public static void Run(Form window)
-        {
-            if (application != null)
-            {
-                application.Run(window);
-            }
-        }
-
-        /// <summary>
-        /// 应用程序对象
-        /// </summary>
-        public static Application Instance
-        {
-            get { return application; }
-        }
-
-        /// <summary>
-        /// (api:eto=2.0.6) 获取默认字体
-        /// </summary>
-        /// <param name="sizeRatio">相对字体默认大小的比例，默认为1</param>
-        /// <returns>默认字体</returns>
-        public static Font DefaultFont(float sizeRatio = 1)
-        {
-            if (handler != null && defaultFont == null)
-            {
-                defaultFont = handler.CreateDefaultFont();
-            }
-            sizeRatio = Math.Max(0.01f, sizeRatio);
-            return new Font(defaultFont.Family, defaultFont.Size * sizeRatio, defaultFont.FontStyle, defaultFont.FontDecoration);
         }
 
         private static AppHandler handler;
         private static Application application;
+        private static String runningUI;
         private static Font defaultFont;
+        private static bool initAppInvoked;
     }
 }
