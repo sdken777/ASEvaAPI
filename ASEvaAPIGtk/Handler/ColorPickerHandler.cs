@@ -7,7 +7,7 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIEto
 {
-	public class ColorPickerHandler : GtkControl<Gtk.Button, ColorPicker, ColorPicker.ICallback>, ColorPicker.IHandler
+	class ColorPickerHandler : GtkControl<Gtk.Button, ColorPicker, ColorPicker.ICallback>, ColorPicker.IHandler
 	{
 		public ColorPickerHandler()
 		{

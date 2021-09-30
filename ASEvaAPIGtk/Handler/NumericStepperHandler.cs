@@ -10,7 +10,7 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
-	public class NumericStepperHandler : GtkControl<Gtk.SpinButton, NumericStepper, NumericStepper.ICallback>, NumericStepper.IHandler
+	class NumericStepperHandler : GtkControl<Gtk.SpinButton, NumericStepper, NumericStepper.ICallback>, NumericStepper.IHandler
 	{
 		public NumericStepperHandler()
 		{

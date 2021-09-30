@@ -18,7 +18,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 0, 6, 2); // LinkItem改为靠左对齐
+            return new Version(2, 0, 6, 3); // 增加Redirection.RedirectMarshaller，解决arm下启动文件对话框问题
         }
     }
 }

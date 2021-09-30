@@ -7,7 +7,7 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
-	public class DrawableHandler : GtkPanel<Gtk.EventBox, Drawable, Drawable.ICallback>, Drawable.IHandler
+	class DrawableHandler : GtkPanel<Gtk.EventBox, Drawable, Drawable.ICallback>, Drawable.IHandler
 	{
 		Gtk.VBox content;
 

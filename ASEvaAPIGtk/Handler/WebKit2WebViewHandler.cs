@@ -12,7 +12,7 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
-	public class WebViewHandler : GtkControl<Gtk.Widget, WebView, WebView.ICallback>, WebView.IHandler
+	class WebViewHandler : GtkControl<Gtk.Widget, WebView, WebView.ICallback>, WebView.IHandler
 	{
 		public bool BrowserContextMenuEnabled { get; set; }
 

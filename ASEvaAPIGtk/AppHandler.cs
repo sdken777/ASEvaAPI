@@ -17,7 +17,11 @@ namespace ASEva.UIGtk
     {
         public Application CreateApp()
         {
-            NativeMethods.DetectNM3();
+            if (ASEva.APIInfo.GetRunningOS() == "linuxarm")
+            {
+                NativeMethods.DetectNM3();
+                Redirection.RedirectMarshaller();
+            }
 
             var platform = new global::Eto.GtkSharp.Platform();
             platform.Add<LinkButton.IHandler>(() => new LinkButtonHandler());

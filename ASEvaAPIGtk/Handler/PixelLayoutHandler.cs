@@ -6,7 +6,7 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
-	public class PixelLayoutHandler : GtkContainer<Gtk.ScrolledWindow, PixelLayout, PixelLayout.ICallback>, PixelLayout.IHandler
+	class PixelLayoutHandler : GtkContainer<Gtk.ScrolledWindow, PixelLayout, PixelLayout.ICallback>, PixelLayout.IHandler
 	{
 		public PixelLayoutHandler()
 		{
