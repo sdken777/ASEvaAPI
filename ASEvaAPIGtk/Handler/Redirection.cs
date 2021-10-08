@@ -46,7 +46,7 @@ namespace ASEva.UIEto
             var menu = new Gtk.Menu(menuPtr);
 
             var evRaw = evPtr == IntPtr.Zero ? Gtk.Global.CurrentEvent : new Gdk.Event(evPtr);
-            if (evRaw.Type != Gdk.EventType.ButtonPress) return;
+            if (evRaw.Type != Gdk.EventType.ButtonPress && evRaw.Type != Gdk.EventType.ButtonRelease) return;
 
             var ev = new Gdk.EventButton(evRaw.Handle);
             if (ev.Window == null || ev.Device == null) return;
