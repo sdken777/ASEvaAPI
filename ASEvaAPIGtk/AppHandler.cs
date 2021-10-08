@@ -21,6 +21,7 @@ namespace ASEva.UIGtk
             {
                 NativeMethods.DetectNM3();
                 Redirection.RedirectMarshaller();
+                Redirection.RedirectMenu();
             }
 
             var platform = new global::Eto.GtkSharp.Platform();
