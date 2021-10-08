@@ -24,6 +24,10 @@
         <en>Radio item {0}</en>
         <ch>单选项{0}</ch>
     </t>
+    <t id="basic-menu-notice">
+        <en>Context menu is available</en>
+        <ch>右键菜单可用</ch>
+    </t>
     <t id="basic-group-title">
         <en>Basic Controls</en>
         <ch>基本控件</ch>

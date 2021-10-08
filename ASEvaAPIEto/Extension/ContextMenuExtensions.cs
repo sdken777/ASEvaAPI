@@ -11,6 +11,26 @@ namespace ASEva.UIEto
     public static class ContextMenuExtensions
     {
         /// <summary>
+        /// (api:eto=2.0.8) 设置面板右键菜单
+        /// </summary>
+        /// <param name="panel">面板</param>
+        /// <returns>右键菜单对象，若已存在则返回null</returns>
+        public static ContextMenu SetContextMenuAsNew(this Panel panel)
+        {
+            if (panel.ContextMenu != null) return null;
+            var menu = new ContextMenu();
+            panel.ContextMenu = menu;
+            if (App.GetRunningUI() == "gtk")
+            {
+                panel.MouseDown += (o, args) =>
+                {
+                    if (args.Buttons.HasFlag(MouseButtons.Alternate)) menu.Show();
+                };
+            }
+            return menu;
+        }
+
+        /// <summary>
         /// 添加分割线
         /// </summary>
         /// <param name="menu">右键菜单</param>

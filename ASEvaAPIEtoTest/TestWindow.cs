@@ -13,11 +13,11 @@ namespace ASEvaAPIEtoTest
             t = TextResource.Load("test.xml", languageCode);
 
             Icon = Icon.FromResource("icon.png");
-            Size = MinimumSize = this.Sizer(1100, 600);
+            Size = MinimumSize = this.Sizer(1200, 700);
             Title = t["title"] + " (OS:" + ASEva.APIInfo.GetRunningOS() + ")";
 
-            ContextMenu = new ContextMenu();
-            InitContextMenu(ContextMenu);
+            var contextMenu = this.SetContextMenuAsNew();
+            InitContextMenu(contextMenu);
 
             var layout = this.SetContentAsTableLayout();
             var rowFirst = layout.AddRow(true);
@@ -62,6 +62,8 @@ namespace ASEvaAPIEtoTest
         private void InitBasicTagPage1(TabPage tabPage)
         {
             var layout = tabPage.SetContentAsColumnLayout();
+
+            layout.AddLabel(t["basic-menu-notice"]);
 
             var layoutRow1 = layout.AddRowLayout();
             layoutRow1.AddLabel(t.Format("basic-label-row", 1));

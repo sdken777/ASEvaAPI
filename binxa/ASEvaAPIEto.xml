@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.0.7
+            version=2.0.8
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -94,6 +94,13 @@
             <summary>
             (api:eto=2.0.3) 方便操作右键菜单的扩展
             </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.SetContextMenuAsNew(Eto.Forms.Panel)">
+            <summary>
+            (api:eto=2.0.8) 设置面板右键菜单
+            </summary>
+            <param name="panel">面板</param>
+            <returns>右键菜单对象，若已存在则返回null</returns>
         </member>
         <member name="M:ASEva.UIEto.ContextMenuExtensions.AddSeparator(Eto.Forms.ContextMenu)">
             <summary>
