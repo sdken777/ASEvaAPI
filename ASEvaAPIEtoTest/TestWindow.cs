@@ -69,7 +69,7 @@ namespace ASEvaAPIEtoTest
             var radioButtonList = layoutRow1.AddRadioButtonList(new string[] { t["basic-radiobutton-file"], t["basic-radiobutton-dir"] });
             layoutRow1.AddSpace();
             var linkButton = layoutRow1.AddLinkButton(t["basic-linkbutton"]);
-            linkButton.Click += delegate // TODO: Gtk-Ubuntu-Arm(打开对话框异常, g_filename_from_utf8失败)
+            linkButton.Click += delegate
             {
                 if (radioButtonList.SelectedIndex == 0)
                 {
