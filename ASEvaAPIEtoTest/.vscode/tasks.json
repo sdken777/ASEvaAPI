@@ -23,6 +23,7 @@
                 "Release",
                 "-o",
                 "../bin64",
+                "/property:OutputType=WinExe",
                 "/property:ApplicationIcon=Resources/icon.ico",
                 "/property:UseWindowsForms=true",
                 "/property:GenerateFullPaths=true",
@@ -44,6 +45,7 @@
                 "Release",
                 "-o",
                 "../binx",
+                "/property:OutputType=Exe",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -63,6 +65,7 @@
                 "Release",
                 "-o",
                 "../binxa",
+                "/property:OutputType=Exe",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -245,6 +248,7 @@
                 "./ASEvaAPIEtoTest.csproj",
                 "-o",
                 "../bin64/debug",
+                "/property:OutputType=WinExe",
                 "/property:UseWindowsForms=true",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
@@ -263,6 +267,7 @@
                 "./ASEvaAPIEtoTest.csproj",
                 "-o",
                 "../binx/debug",
+                "/property:OutputType=Exe",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -280,6 +285,7 @@
                 "./ASEvaAPIEtoTest.csproj",
                 "-o",
                 "../binxa/debug",
+                "/property:OutputType=Exe",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
