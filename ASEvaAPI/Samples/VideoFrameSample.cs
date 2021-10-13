@@ -13,7 +13,7 @@ namespace ASEva.Samples
         public object Image { get; set; }
 
         /// <summary>
-        /// 视频帧所属通道（0~11）
+        /// 视频帧所属通道（0~23）
         /// </summary>
         public int ChannelIndex { get; set; }
 

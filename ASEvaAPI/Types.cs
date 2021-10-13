@@ -840,13 +840,13 @@ namespace ASEva
         /// <summary>
         /// 按指定参数获取时间轴上最近的视频帧
         /// </summary>
-        /// <param name="channel">视频通道，0~11</param>
+        /// <param name="channel">视频通道，0~23</param>
         /// <param name="timeline">获取视频帧的目标时间，单位秒</param>
         /// <param name="maxGap">容许的最大间隔，单位秒</param>
         /// <param name="targetSize">输出图像的尺寸</param>
         /// <param name="hires">是否优先输出高清图像，否则固定输出不大于VGA分辨率的图像</param>
         /// <param name="scale">缩放设置，若按整幅输出则设为null</param>
         /// <returns>图像帧</returns>
-        VideoFrameSample GetVideoFrame(int channel/* 0~11 */, double timeline, double maxGap, IntSize targetSize, bool hires, VideoFrameGetScale scale);
+        VideoFrameSample GetVideoFrame(int channel, double timeline, double maxGap, IntSize targetSize, bool hires, VideoFrameGetScale scale);
     }
 }

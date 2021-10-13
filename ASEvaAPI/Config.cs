@@ -146,6 +146,66 @@ namespace ASEva
         ChannelL = 11,
 
         /// <summary>
+        /// (api:app=2.1.3) 通道M
+        /// </summary>
+        ChannelM = 12,
+
+        /// <summary>
+        /// (api:app=2.1.3) 通道N
+        /// </summary>
+        ChannelN = 13,
+
+        /// <summary>
+        /// (api:app=2.1.3) 通道O
+        /// </summary>
+        ChannelO = 14,
+
+        /// <summary>
+        /// (api:app=2.1.3) 通道P
+        /// </summary>
+        ChannelP = 15,
+
+        /// <summary>
+        /// (api:app=2.1.3) 通道Q
+        /// </summary>
+        ChannelQ = 16,
+
+        /// <summary>
+        /// (api:app=2.1.3) 通道R
+        /// </summary>
+        ChannelR = 17,
+
+        /// <summary>
+        /// (api:app=2.1.3) 通道S
+        /// </summary>
+        ChannelS = 18,
+
+        /// <summary>
+        /// (api:app=2.1.3) 通道T
+        /// </summary>
+        ChannelT = 19,
+
+        /// <summary>
+        /// (api:app=2.1.3) 通道U
+        /// </summary>
+        ChannelU = 20,
+
+        /// <summary>
+        /// (api:app=2.1.3) 通道V
+        /// </summary>
+        ChannelV = 21,
+
+        /// <summary>
+        /// (api:app=2.1.3) 通道W
+        /// </summary>
+        ChannelW = 22,
+
+        /// <summary>
+        /// (api:app=2.1.3) 通道X
+        /// </summary>
+        ChannelX = 23,
+
+        /// <summary>
         /// 特殊摄像头：前向（标准模型）
         /// </summary>
         SpecialFront = 100,

@@ -1013,7 +1013,7 @@ namespace ASEva
         /// <summary>
         /// 查看指定视频通道是否有数据可供显示
         /// </summary>
-        /// <param name="channel">视频通道，0~11</param>
+        /// <param name="channel">视频通道，0~23</param>
         /// <param name="tolerance">可容忍最近多少毫秒（现实时间）无数据</param>
         /// <returns>是否有数据可供显示</returns>
         public static bool IsVideoDataAvailable(int channel, uint? tolerance)
@@ -1024,7 +1024,7 @@ namespace ASEva
         /// <summary>
         /// 获取视频通道的特殊摄像头类型
         /// </summary>
-        /// <param name="channel">视频通道，0~11</param>
+        /// <param name="channel">视频通道，0~23</param>
         /// <returns>特殊摄像头类型</returns>
         public static Samples.SpecialCameraType GetVideoSpecialType(int channel)
         {
