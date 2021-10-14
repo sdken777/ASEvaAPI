@@ -18,7 +18,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 0, 8, 0); // 新增ContextMenuExtensions.SetContextMenuAsNew
+            return new Version(2, 0, 8, 1); // AddComboBox输入texts可为空
         }
     }
 }

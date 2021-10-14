@@ -359,7 +359,7 @@
             添加组合框至堆叠布局
             </summary>
             <param name="stackLayout">堆叠布局</param>
-            <param name="texts">组合框各选项的文字</param>
+            <param name="texts">组合框各选项的文字，可为空</param>
             <param name="expand">是否延布局方向撑满</param>
             <param name="selectedIndex">初始的选项序号</param>
             <returns>创建的组合框对象</returns>
@@ -531,7 +531,7 @@
             添加组合框至表布局的行
             </summary>
             <param name="tableRow">表布局的行</param>
-            <param name="texts">组合框各选项的文字</param>
+            <param name="texts">组合框各选项的文字，可为空</param>
             <param name="expandWidth">是否横向撑满</param>
             <param name="fillHeight">是否纵向填满</param>
             <param name="selectedIndex">初始的选项序号</param>

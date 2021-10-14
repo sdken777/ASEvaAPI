@@ -205,19 +205,20 @@ namespace ASEva.UIEto
         /// 添加组合框至表布局的行
         /// </summary>
         /// <param name="tableRow">表布局的行</param>
-        /// <param name="texts">组合框各选项的文字</param>
+        /// <param name="texts">组合框各选项的文字，可为空</param>
         /// <param name="expandWidth">是否横向撑满</param>
         /// <param name="fillHeight">是否纵向填满</param>
         /// <param name="selectedIndex">初始的选项序号</param>
         /// <returns>创建的组合框对象</returns>
         public static ComboBox AddComboBox(this TableRow tableRow, String[] texts, bool expandWidth = false, bool fillHeight = false, int selectedIndex = 0)
         {
-            if (texts == null || texts.Length == 0) return null;
+            if (texts == null) texts = new String[0];
 
             var comboBox = new ComboBox { ReadOnly = true };
             foreach (var text in texts) comboBox.Items.Add(text);
+            
             if (selectedIndex >= 0 && selectedIndex < texts.Length) comboBox.SelectedIndex = selectedIndex;
-            else comboBox.SelectedIndex = 0;
+            else if (texts.Length > 0) comboBox.SelectedIndex = 0;
 
             var stackLayout = new StackLayout() { Orientation = Orientation.Horizontal };
             stackLayout.Items.Add(new StackLayoutItem(comboBox, fillHeight ? VerticalAlignment.Stretch : VerticalAlignment.Center, true));

@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.0.7
+            version=2.0.8
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -94,6 +94,13 @@
             <summary>
             (api:eto=2.0.3) 方便操作右键菜单的扩展
             </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.SetContextMenuAsNew(Eto.Forms.Panel)">
+            <summary>
+            (api:eto=2.0.8) 设置面板右键菜单
+            </summary>
+            <param name="panel">面板</param>
+            <returns>右键菜单对象，若已存在则返回null</returns>
         </member>
         <member name="M:ASEva.UIEto.ContextMenuExtensions.AddSeparator(Eto.Forms.ContextMenu)">
             <summary>
@@ -352,7 +359,7 @@
             添加组合框至堆叠布局
             </summary>
             <param name="stackLayout">堆叠布局</param>
-            <param name="texts">组合框各选项的文字</param>
+            <param name="texts">组合框各选项的文字，可为空</param>
             <param name="expand">是否延布局方向撑满</param>
             <param name="selectedIndex">初始的选项序号</param>
             <returns>创建的组合框对象</returns>
@@ -524,7 +531,7 @@
             添加组合框至表布局的行
             </summary>
             <param name="tableRow">表布局的行</param>
-            <param name="texts">组合框各选项的文字</param>
+            <param name="texts">组合框各选项的文字，可为空</param>
             <param name="expandWidth">是否横向撑满</param>
             <param name="fillHeight">是否纵向填满</param>
             <param name="selectedIndex">初始的选项序号</param>
