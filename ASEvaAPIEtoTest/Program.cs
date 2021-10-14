@@ -9,7 +9,14 @@ namespace ASEvaAPIEtoTest
         public static void Main(string[] args)
         {
             App.Init();
-            App.Run(new TestWindow("ch"/* 改为"en"显示英文 */));
+
+            var startup = new Startup();
+            startup.MoveToCenter();
+            startup.ShowModal();
+
+            var window = new TestWindow(startup.LanguageCode);
+            window.MoveToCenter();
+            App.Run(window);
         }
     }
 }

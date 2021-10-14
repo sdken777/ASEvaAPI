@@ -107,7 +107,7 @@ namespace ASEvaAPIEtoTest
 
         private void InitBasicTagPage2(TabPage tabPage)
         {
-            var splitter = tabPage.SetContentAsColumnLayout().AddControl(new Splitter { Position = this.Sizer(100) }, true) as Splitter;
+            var splitter = tabPage.SetContentAsColumnLayout().AddControl(new Splitter { Position = this.Sizer(200) }, true) as Splitter;
 
             var layout = splitter.SetPanel1().SetContentAsColumnLayout(0);
             

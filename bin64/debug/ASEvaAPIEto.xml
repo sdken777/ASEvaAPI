@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.0.8
+            version=2.0.9
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -592,6 +592,17 @@
             <param name="logicalSpacingX">表布局中各控件的横向间隙</param>
             <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
             <returns>创建的表布局</returns>
+        </member>
+        <member name="T:ASEva.UIEto.WindowExtensions">
+            <summary>
+            (api:eto=2.0.9) 方便操作窗口的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.WindowExtensions.MoveToCenter(Eto.Forms.Window)">
+            <summary>
+            将窗口移动至屏幕中央
+            </summary>
+            <param name="window">窗口</param>
         </member>
         <member name="T:ASEva.UIEto.OverlayLayout">
             <summary>

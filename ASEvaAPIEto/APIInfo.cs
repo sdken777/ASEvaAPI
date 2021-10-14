@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于Eto.Forms的部分。详见 ASEva.UIEto \n
- * 本文档对应API版本：2.0.8
+ * 本文档对应API版本：2.0.9
  */
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace ASEva.UIEto
 {
     /// <summary>
-    /// version=2.0.8
+    /// version=2.0.9
     /// </summary>
     public class APIInfo
     {
@@ -18,7 +18,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 0, 8, 1); // AddComboBox输入texts可为空
+            return new Version(2, 0, 9, 0); // 新增WindowExtensions
         }
     }
 }

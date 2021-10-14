@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.0.8
+            version=2.0.9
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -359,7 +359,7 @@
             添加组合框至堆叠布局
             </summary>
             <param name="stackLayout">堆叠布局</param>
-            <param name="texts">组合框各选项的文字</param>
+            <param name="texts">组合框各选项的文字，可为空</param>
             <param name="expand">是否延布局方向撑满</param>
             <param name="selectedIndex">初始的选项序号</param>
             <returns>创建的组合框对象</returns>
@@ -531,7 +531,7 @@
             添加组合框至表布局的行
             </summary>
             <param name="tableRow">表布局的行</param>
-            <param name="texts">组合框各选项的文字</param>
+            <param name="texts">组合框各选项的文字，可为空</param>
             <param name="expandWidth">是否横向撑满</param>
             <param name="fillHeight">是否纵向填满</param>
             <param name="selectedIndex">初始的选项序号</param>
@@ -592,6 +592,18 @@
             <param name="logicalSpacingX">表布局中各控件的横向间隙</param>
             <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
             <returns>创建的表布局</returns>
+        </member>
+        <member name="T:ASEva.UIEto.WindowExtensions">
+            <summary>
+            (api:eto=2.0.9) 方便操作窗口的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.WindowExtensions.MoveToCenter(Eto.Forms.Window,Eto.Forms.Screen)">
+            <summary>
+            将窗口移动至屏幕中央
+            </summary>
+            <param name="window">窗口</param>
+            <param name="screen">目标屏幕，空表示主屏幕</param>
         </member>
         <member name="T:ASEva.UIEto.OverlayLayout">
             <summary>
