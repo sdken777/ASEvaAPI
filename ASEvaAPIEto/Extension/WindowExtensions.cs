@@ -16,9 +16,18 @@ namespace ASEva.UIEto
         /// <param name="screen">目标屏幕，空表示主屏幕</param>
         public static void MoveToCenter(this Window window, Screen screen = null)
         {
+            RectangleF? bound = null;
             if (screen == null) screen = Screen.PrimaryScreen;
-            var bound = screen.Bounds;
-            window.Location = new Point((int)bound.X + Math.Max(0, (int)((bound.Width - window.Width) / 2)), (int)bound.Y + Math.Max(0, (int)((bound.Height - window.Height) / 2)));
+            if (screen != null)
+            {
+                try { bound = screen.Bounds; }
+                catch (Exception) {}
+            }
+            if (bound == null)
+            {
+                bound = new RectangleF(0, 0, 1280, 720);
+            }
+            window.Location = new Point((int)bound.Value.X + Math.Max(0, (int)((bound.Value.Width - window.Width) / 2)), (int)bound.Value.Y + Math.Max(0, (int)((bound.Value.Height - window.Height) / 2)));
         }
     }
 }

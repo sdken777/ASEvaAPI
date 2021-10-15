@@ -18,7 +18,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 0, 6, 6); // gtk_menu_popup_at_pointer考虑ButtonRelease情况
+            return new Version(2, 0, 6, 7); // 添加ScreensHandler
         }
     }
 }

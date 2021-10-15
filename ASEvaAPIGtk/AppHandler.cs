@@ -31,6 +31,7 @@ namespace ASEva.UIGtk
             platform.Add<WebView.IHandler>(() => new WebViewHandler());
             platform.Add<PixelLayout.IHandler>(() => new PixelLayoutHandler());
             platform.Add<Drawable.IHandler>(() => new DrawableHandler());
+            platform.Add<Screen.IScreensHandler>(() => new ScreensHandler());
 
             var app = new Application(platform);
             return app;

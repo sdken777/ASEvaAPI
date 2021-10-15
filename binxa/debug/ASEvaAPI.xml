@@ -597,7 +597,7 @@
             <summary>
             查看指定视频通道是否有数据可供显示
             </summary>
-            <param name="channel">视频通道，0~11</param>
+            <param name="channel">视频通道，0~23</param>
             <param name="tolerance">可容忍最近多少毫秒（现实时间）无数据</param>
             <returns>是否有数据可供显示</returns>
         </member>
@@ -605,7 +605,7 @@
             <summary>
             获取视频通道的特殊摄像头类型
             </summary>
-            <param name="channel">视频通道，0~11</param>
+            <param name="channel">视频通道，0~23</param>
             <returns>特殊摄像头类型</returns>
         </member>
         <member name="M:ASEva.Agency.ConvertTimeIntoSession(System.Double)">
@@ -855,7 +855,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.1.2
+            version=2.1.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -866,9 +866,9 @@
         </member>
         <member name="M:ASEva.APIInfo.GetRunningOS">
             <summary>
-            (api:app=2.0.0) 返回当前运行的OS
+            (api:app=2.0.0) 返回当前运行的OS代号
             </summary>
-            <returns>"windows"或"linux"，若无法识别返回null</returns>
+            <returns>OS代号，若无法识别返回null</returns>
         </member>
         <member name="T:ASEva.WaveReceiver">
             <summary>
@@ -1112,6 +1112,66 @@
         <member name="F:ASEva.UsingVideoChannel.ChannelL">
             <summary>
             通道L
+            </summary>
+        </member>
+        <member name="F:ASEva.UsingVideoChannel.ChannelM">
+            <summary>
+            (api:app=2.1.3) 通道M
+            </summary>
+        </member>
+        <member name="F:ASEva.UsingVideoChannel.ChannelN">
+            <summary>
+            (api:app=2.1.3) 通道N
+            </summary>
+        </member>
+        <member name="F:ASEva.UsingVideoChannel.ChannelO">
+            <summary>
+            (api:app=2.1.3) 通道O
+            </summary>
+        </member>
+        <member name="F:ASEva.UsingVideoChannel.ChannelP">
+            <summary>
+            (api:app=2.1.3) 通道P
+            </summary>
+        </member>
+        <member name="F:ASEva.UsingVideoChannel.ChannelQ">
+            <summary>
+            (api:app=2.1.3) 通道Q
+            </summary>
+        </member>
+        <member name="F:ASEva.UsingVideoChannel.ChannelR">
+            <summary>
+            (api:app=2.1.3) 通道R
+            </summary>
+        </member>
+        <member name="F:ASEva.UsingVideoChannel.ChannelS">
+            <summary>
+            (api:app=2.1.3) 通道S
+            </summary>
+        </member>
+        <member name="F:ASEva.UsingVideoChannel.ChannelT">
+            <summary>
+            (api:app=2.1.3) 通道T
+            </summary>
+        </member>
+        <member name="F:ASEva.UsingVideoChannel.ChannelU">
+            <summary>
+            (api:app=2.1.3) 通道U
+            </summary>
+        </member>
+        <member name="F:ASEva.UsingVideoChannel.ChannelV">
+            <summary>
+            (api:app=2.1.3) 通道V
+            </summary>
+        </member>
+        <member name="F:ASEva.UsingVideoChannel.ChannelW">
+            <summary>
+            (api:app=2.1.3) 通道W
+            </summary>
+        </member>
+        <member name="F:ASEva.UsingVideoChannel.ChannelX">
+            <summary>
+            (api:app=2.1.3) 通道X
             </summary>
         </member>
         <member name="F:ASEva.UsingVideoChannel.SpecialFront">
@@ -3253,7 +3313,7 @@
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.ChannelIndex">
             <summary>
-            视频帧所属通道（0~11）
+            视频帧所属通道（0~23）
             </summary>
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.SpecialCameraType">
@@ -4018,7 +4078,7 @@
             <summary>
             按指定参数获取时间轴上最近的视频帧
             </summary>
-            <param name="channel">视频通道，0~11</param>
+            <param name="channel">视频通道，0~23</param>
             <param name="timeline">获取视频帧的目标时间，单位秒</param>
             <param name="maxGap">容许的最大间隔，单位秒</param>
             <param name="targetSize">输出图像的尺寸</param>

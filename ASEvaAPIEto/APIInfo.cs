@@ -18,7 +18,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 0, 10, 0); // 新增TextTableView.GetRowCount, RemoveAllRows
+            return new Version(2, 0, 10, 1); // 针对无法获取屏幕范围的情况
         }
     }
 }
