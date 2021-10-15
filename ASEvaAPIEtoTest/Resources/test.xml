@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<root>
+<text_resource>
     <t id="title">
         <en>Test Window</en>
         <ch>测试窗口</ch>
@@ -112,4 +112,4 @@
         <en>Hello World</en>
         <ch>天气不错</ch>
     </t>
-</root>
+</text_resource>

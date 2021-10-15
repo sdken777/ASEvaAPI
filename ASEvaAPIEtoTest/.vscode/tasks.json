@@ -339,5 +339,26 @@
             ],
             "problemMatcher": []
         },
+        {
+            "type": "process",
+            "label": "运行文本资源编辑器(X86-Windows主机)",
+            "command": "../bin64/TextResourceEditor.exe",
+            "args": [],
+            "problemMatcher": [],
+        },
+        {
+            "type": "process",
+            "label": "运行文本资源编辑器(X86-Linux主机)",
+            "command": "../binx/TextResourceEditor",
+            "args": [],
+            "problemMatcher": [],
+        },
+        {
+            "type": "process",
+            "label": "运行文本资源编辑器(Arm-Linux主机)",
+            "command": "../binxa/TextResourceEditor",
+            "args": [],
+            "problemMatcher": [],
+        },
     ]
 }
