@@ -29,6 +29,17 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
+        /// (api:eto=2.0.10) 获取行数
+        /// </summary>
+        /// <returns>行数</returns>
+        public int GetRowCount()
+        {
+            if (DataStore == null) return 0;
+            if (!(DataStore is List<GridItem>)) return 0;
+            return (DataStore as List<GridItem>).Count;
+        }
+
+        /// <summary>
         /// 添加一行
         /// </summary>
         /// <param name="values">该行的初始文字，设为null则默认为空</param>
@@ -62,10 +73,25 @@ namespace ASEva.UIEto
         /// <param name="rowIndex">行序号</param>
         public void RemoveRow(int rowIndex)
         {
+            if (DataStore == null) return;
             if (!(DataStore is List<GridItem>)) return;
 
             var list = DataStore as List<GridItem>;
             if (rowIndex >= 0 && rowIndex < list.Count) list.RemoveAt(rowIndex);
+
+            DataStore = list;
+        }
+
+        /// <summary>
+        /// (api:eto=2.0.10) 移除所有行
+        /// </summary>
+        public void RemoveAllRows()
+        {
+            if (DataStore == null) return;
+            if (!(DataStore is List<GridItem>)) return;
+
+            var list = DataStore as List<GridItem>;
+            list.Clear();
 
             DataStore = list;
         }

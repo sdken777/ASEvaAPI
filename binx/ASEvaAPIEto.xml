@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.0.9
+            version=2.0.10
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -646,6 +646,12 @@
             <param name="logicalWidth">列宽度</param>
             <param name="editable">是否可编辑该列文字</param>
         </member>
+        <member name="M:ASEva.UIEto.TextTableView.GetRowCount">
+            <summary>
+            (api:eto=2.0.10) 获取行数
+            </summary>
+            <returns>行数</returns>
+        </member>
         <member name="M:ASEva.UIEto.TextTableView.AddRow(System.String[])">
             <summary>
             添加一行
@@ -657,6 +663,11 @@
             移除一行
             </summary>
             <param name="rowIndex">行序号</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.RemoveAllRows">
+            <summary>
+            (api:eto=2.0.10) 移除所有行
+            </summary>
         </member>
         <member name="M:ASEva.UIEto.TextTableView.GetValue(System.Int32,System.Int32)">
             <summary>
