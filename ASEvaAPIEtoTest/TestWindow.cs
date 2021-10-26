@@ -84,7 +84,7 @@ namespace ASEvaAPIEtoTest
             var layoutRow2 = layout.AddRowLayout();
             layoutRow2.AddLabel(t.Format("basic-label-row", 2));
             layoutRow2.AddComboBox(new string[] { t.Format("basic-combobox", "A"), t.Format("basic-combobox", "B") }, true);
-            layoutRow2.AddControl(new DateTimePicker(), true); // TODO: Gtk-Ubuntu2104-Raspi(无法显示弹窗)
+            layoutRow2.AddControl(new DateTimePicker(), true);
 
             var layoutRow3 = layout.AddRowLayout();
             layoutRow3.AddLabel(t.Format("basic-label-row", 3));

@@ -855,7 +855,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.1.3
+            version=2.2.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -2441,6 +2441,12 @@
             [可选实现] 查询是否包含硬件设备连接功能时被调用
             </summary>
             <returns>是否包含硬件设备连接功能，默认为false</returns>
+        </member>
+        <member name="M:ASEva.NativeClass.GetFileIONames">
+            <summary>
+            (api:app=2.2.0) 获取文件读写相关名称的集合
+            </summary>
+            <returns>文件读写相关名称的集合，默认为null，即不提供文件读写功能</returns>
         </member>
         <member name="T:ASEva.Plugin">
             <summary>
@@ -4085,6 +4091,31 @@
             <param name="hires">是否优先输出高清图像，否则固定输出不大于VGA分辨率的图像</param>
             <param name="scale">缩放设置，若按整幅输出则设为null</param>
             <returns>图像帧</returns>
+        </member>
+        <member name="T:ASEva.FileIONames">
+            <summary>
+            (api:app=2.2.0) 文件读写相关名称的集合
+            </summary>
+        </member>
+        <member name="P:ASEva.FileIONames.ReaderNames">
+            <summary>
+            文件读取器的名称列表
+            </summary>
+        </member>
+        <member name="P:ASEva.FileIONames.WriterNames">
+            <summary>
+            文件写入器的名称列表
+            </summary>
+        </member>
+        <member name="P:ASEva.FileIONames.PickerNames">
+            <summary>
+            文件数据截取器的名称列表
+            </summary>
+        </member>
+        <member name="P:ASEva.FileIONames.ComboPickers">
+            <summary>
+            通过文件读取器和写入器组合的方式形成的数据截取器列表，键为读取器名称，值为写入器名称
+            </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">
             <summary>

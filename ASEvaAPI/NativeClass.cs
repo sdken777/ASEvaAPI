@@ -37,5 +37,11 @@ namespace ASEva
         /// </summary>
         /// <returns>是否包含硬件设备连接功能，默认为false</returns>
         public virtual bool ContainsDeviceConnection() { return false; }
+
+        /// <summary>
+        /// (api:app=2.2.0) 获取文件读写相关名称的集合
+        /// </summary>
+        /// <returns>文件读写相关名称的集合，默认为null，即不提供文件读写功能</returns>
+        public virtual FileIONames GetFileIONames() { return null; }
     }
 }

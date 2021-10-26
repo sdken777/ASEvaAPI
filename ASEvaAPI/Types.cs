@@ -849,4 +849,30 @@ namespace ASEva
         /// <returns>图像帧</returns>
         VideoFrameSample GetVideoFrame(int channel, double timeline, double maxGap, IntSize targetSize, bool hires, VideoFrameGetScale scale);
     }
+
+    /// <summary>
+    /// (api:app=2.2.0) 文件读写相关名称的集合
+    /// </summary>
+    public class FileIONames
+    {
+        /// <summary>
+        /// 文件读取器的名称列表
+        /// </summary>
+        public String[] ReaderNames { get; set; }
+
+        /// <summary>
+        /// 文件写入器的名称列表
+        /// </summary>
+        public String[] WriterNames { get; set; }
+
+        /// <summary>
+        /// 文件数据截取器的名称列表
+        /// </summary>
+        public String[] PickerNames { get; set; }
+
+        /// <summary>
+        /// 通过文件读取器和写入器组合的方式形成的数据截取器列表，键为读取器名称，值为写入器名称
+        /// </summary>
+        public Dictionary<String, String> ComboPickers { get; set; }
+    }
 }
