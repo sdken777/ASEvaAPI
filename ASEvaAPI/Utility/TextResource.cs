@@ -27,6 +27,15 @@ namespace ASEva.Utility
             instream.Read(data, 0, data.Length);
             instream.Close();
 
+            if (data == null || data.Length <= 3) return null;
+
+            if (data[0] == 0xEF && data[1] == 0xBB && data[2] == 0xBF)
+            {
+                var buf = new byte[data.Length - 3];
+                Array.Copy(data, 3, buf, 0, buf.Length);
+                data = buf;
+            }
+
             var xmlString = Encoding.UTF8.GetString(data);
             if (xmlString == null) return null;
 
@@ -46,7 +55,8 @@ namespace ASEva.Utility
             else return null;
 
             var xml = new XmlDocument();
-            xml.LoadXml(xmlString);
+            try { xml.LoadXml(xmlString); }
+            catch (Exception) { return null; }
 
             var output = new TextResource();
             foreach (XmlElement elem in xml.DocumentElement.GetElementsByTagName("t"))

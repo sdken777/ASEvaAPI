@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 0, 0); // 增加FileIONames和NativeClass.GetFileIONames
+            return new Version(2, 2, 0, 1); // 修复ResourceLoader和TextResource未处理utf8 BOM的问题
         }
 
         /// <summary>

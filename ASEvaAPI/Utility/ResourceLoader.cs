@@ -27,7 +27,7 @@ namespace ASEva.Utility
         }
 
         /// <summary>
-        /// (api:app=2.0.8) 按指定名称读取资源，并转为文本
+        /// (api:app=2.0.8) 按指定名称读取资源（UTF-8文本），并转为文本
         /// </summary>
         /// <param name="name">资源名称</param>
         /// <returns>文本数据，若找不到资源则返回null</returns>
@@ -39,6 +39,13 @@ namespace ASEva.Utility
             var data = new byte[instream.Length];
             instream.Read(data, 0, data.Length);
             instream.Close();
+
+            if (data[0] == 0xEF && data[1] == 0xBB && data[2] == 0xBF)
+            {
+                var buf = new byte[data.Length - 3];
+                Array.Copy(data, 3, buf, 0, buf.Length);
+                data = buf;
+            }
 
             return Encoding.UTF8.GetString(data);
         }
