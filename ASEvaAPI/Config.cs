@@ -350,6 +350,12 @@ namespace ASEva
         public virtual List<UsingVideoChannel> GetUsingVideoChannels() { return null; }
 
         /// <summary>
+        /// (api:app=2.2.1) [可选实现] 获取文件写入需要的所有数据类型
+        /// </summary>
+        /// <returns>文件写入需要的所有数据类型</returns>
+        public virtual List<RecordDataType> GetRecordDataTypes() { return null; }
+
+        /// <summary>
         /// [可选实现] 用户一键禁用功能时被调用
         /// </summary>
         public virtual void DisableAll() { }

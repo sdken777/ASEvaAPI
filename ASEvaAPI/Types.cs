@@ -875,4 +875,43 @@ namespace ASEva
         /// </summary>
         public Dictionary<String, String> ComboPickers { get; set; }
     }
+
+    /// <summary>
+    /// (api:app=2.2.1) 文件写入需要的数据类型
+    /// </summary>
+    public enum RecordDataType
+    {
+        /// <summary>
+        /// 无效值
+        /// </summary>
+        Invalid = 0,
+        /// <summary>
+        /// 总线原始数据
+        /// </summary>
+        BusRawData = 1,
+        /// <summary>
+        /// 总线协议报文数据
+        /// </summary>
+        BusMessages = 2,
+        /// <summary>
+        /// 视频原始数据
+        /// </summary>
+        VideoRawData = 3,
+        /// <summary>
+        /// 用于数据处理的视频数据
+        /// </summary>
+        VideoProcData = 4,
+        /// <summary>
+        /// 信号数据
+        /// </summary>
+        Signals = 5,
+        /// <summary>
+        /// 样本数据
+        /// </summary>
+        Samples = 6,
+        /// <summary>
+        /// 矩阵数据
+        /// </summary>
+        Matrices = 7,
+    }
 }

@@ -855,7 +855,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.2.0
+            version=2.2.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -1290,6 +1290,12 @@
             [可选实现] 获取所有使用的视频通道时被调用
             </summary>
             <returns>所有使用的视频通道</returns>
+        </member>
+        <member name="M:ASEva.ModuleConfig.GetRecordDataTypes">
+            <summary>
+            (api:app=2.2.1) [可选实现] 获取文件写入需要的所有数据类型
+            </summary>
+            <returns>文件写入需要的所有数据类型</returns>
         </member>
         <member name="M:ASEva.ModuleConfig.DisableAll">
             <summary>
@@ -4115,6 +4121,51 @@
         <member name="P:ASEva.FileIONames.ComboPickers">
             <summary>
             通过文件读取器和写入器组合的方式形成的数据截取器列表，键为读取器名称，值为写入器名称
+            </summary>
+        </member>
+        <member name="T:ASEva.RecordDataType">
+            <summary>
+            (api:app=2.2.1) 文件写入需要的数据类型
+            </summary>
+        </member>
+        <member name="F:ASEva.RecordDataType.Invalid">
+            <summary>
+            无效值
+            </summary>
+        </member>
+        <member name="F:ASEva.RecordDataType.BusRawData">
+            <summary>
+            总线原始数据
+            </summary>
+        </member>
+        <member name="F:ASEva.RecordDataType.BusMessages">
+            <summary>
+            总线协议报文数据
+            </summary>
+        </member>
+        <member name="F:ASEva.RecordDataType.VideoRawData">
+            <summary>
+            视频原始数据
+            </summary>
+        </member>
+        <member name="F:ASEva.RecordDataType.VideoProcData">
+            <summary>
+            用于数据处理的视频数据
+            </summary>
+        </member>
+        <member name="F:ASEva.RecordDataType.Signals">
+            <summary>
+            信号数据
+            </summary>
+        </member>
+        <member name="F:ASEva.RecordDataType.Samples">
+            <summary>
+            样本数据
+            </summary>
+        </member>
+        <member name="F:ASEva.RecordDataType.Matrices">
+            <summary>
+            矩阵数据
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">
