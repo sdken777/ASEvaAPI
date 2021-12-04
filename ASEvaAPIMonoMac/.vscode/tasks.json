@@ -1,0 +1,93 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "process",
+            "label": "(internal)清理",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "./obj",
+                "./bin"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)发布构建(X86-MacOS1010目标)",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIMonoMac.csproj",
+                "-c",
+                "Release",
+                "-o",
+                "../binm",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process",
+            "label": "(internal)移除发布构建冗余文件(X86-MacOS1010目标)",
+            "command": "rm",
+            "args": [
+                "-vf",
+                "../binm/ASEvaAPIMonoMac.pdb",
+                "../binm/ASEvaAPIMonoMac.deps.json"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "发布构建(X86-MacOS1010目标)",
+            "command": "echo",
+            "args": [
+                "Done.",
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "(internal)发布构建(X86-MacOS1010目标)",
+                "(internal)移除发布构建冗余文件(X86-MacOS1010目标)",
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "调试构建(X86-MacOS1010目标)",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIMonoMac.csproj",
+                "-o",
+                "../binm/debug",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process",
+            "label": "调试构建并生成app包(X86-MacOS主机/X86-MacOS1010目标)",
+            "command": "../binm/app-maker",
+            "args": [
+                "${workspaceFolder}/../binm/debug",
+                "${workspaceFolder}/../ASEvaAPIEtoTest/Resources/icon.icns",
+                "${workspaceFolder}/../binm/debug/ASEvaAPIEtoTest.app",
+                "ASEvaAPIEtoTest",
+                "icon.icns",
+            ],
+            "dependsOn": [
+                "调试构建(X86-MacOS1010目标)"
+            ],
+            "problemMatcher": []
+        },
+    ]
+}

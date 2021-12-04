@@ -49,38 +49,18 @@
             "args": [
                 "-p",
                 "../binx",
-                "../binxa"
+                "../binxa",
+                "../binm"
             ],
             "problemMatcher": []
         },
         {
             "type": "process",
-            "label": "(internal)拷贝dll至bin(X86-Windows至X86-Ubuntu1804目标)",
+            "label": "(internal)拷贝dll等至bin(X86-Windows至X86-Ubuntu1804目标)",
             "command": "cp",
             "args": [
                 "-vf",
                 "../bin64/ASEvaAPI.dll",
-                "../binx/"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)拷贝dll至bin(X86-Windows至Arm-Ubuntu1604目标)",
-            "command": "cp",
-            "args": [
-                "-vf",
-                "../bin64/ASEvaAPI.dll",
-                "../binxa/"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)拷贝xml至bin(X86-Windows至X86-Ubuntu1804目标)",
-            "command": "cp",
-            "args": [
-                "-vf",
                 "../bin64/ASEvaAPI.xml",
                 "../binx/"
             ],
@@ -88,12 +68,25 @@
         },
         {
             "type": "process",
-            "label": "(internal)拷贝xml至bin(X86-Windows至Arm-Ubuntu1604目标)",
+            "label": "(internal)拷贝dll等至bin(X86-Windows至Arm-Ubuntu1604目标)",
             "command": "cp",
             "args": [
                 "-vf",
+                "../bin64/ASEvaAPI.dll",
                 "../bin64/ASEvaAPI.xml",
                 "../binxa/"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)拷贝dll等至bin(X86-Windows至X86-MacOS1010目标)",
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../bin64/ASEvaAPI.dll",
+                "../bin64/ASEvaAPI.xml",
+                "../binm/"
             ],
             "problemMatcher": []
         },
@@ -109,10 +102,9 @@
                 "(internal)发布构建(X86-Windows目标)",
                 "(internal)移除发布构建冗余文件(X86-Windows目标)",
                 "(internal)创建bin文件夹",
-                "(internal)拷贝dll至bin(X86-Windows至X86-Ubuntu1804目标)",
-                "(internal)拷贝dll至bin(X86-Windows至Arm-Ubuntu1604目标)",
-                "(internal)拷贝xml至bin(X86-Windows至X86-Ubuntu1804目标)",
-                "(internal)拷贝xml至bin(X86-Windows至Arm-Ubuntu1604目标)",
+                "(internal)拷贝dll等至bin(X86-Windows至X86-Ubuntu1804目标)",
+                "(internal)拷贝dll等至bin(X86-Windows至Arm-Ubuntu1604目标)",
+                "(internal)拷贝dll等至bin(X86-Windows至X86-MacOS1010目标)",
             ],
             "problemMatcher": []
         },
@@ -159,6 +151,23 @@
                 "./ASEvaAPI.csproj",
                 "-o",
                 "../binxa/debug",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process",
+            "label": "调试构建(X86-MacOS1010目标)",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPI.csproj",
+                "-o",
+                "../binm/debug",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

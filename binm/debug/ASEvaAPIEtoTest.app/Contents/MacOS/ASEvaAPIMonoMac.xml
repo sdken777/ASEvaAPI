@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ASEvaAPIMonoMac</name>
+    </assembly>
+    <members>
+        <member name="T:ASEva.UIGtk.APIInfo">
+            <summary>
+            version=1.0.0
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.APIInfo.GetAPIVersion">
+            <summary>
+            (api:monomac=1.0.0) 获取API版本
+            </summary>
+            <returns>API版本</returns>
+        </member>
+    </members>
+</doc>

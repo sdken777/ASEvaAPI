@@ -34,5 +34,16 @@
             "console": "internalConsole",
             "stopAtEntry": false
         },
+        {
+            "name": "调试运行(X86-MacOS主机)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "调试构建并生成app包(X86-MacOS主机/X86-MacOS1010目标)",
+            "program": "${workspaceFolder}/../binm/debug/ASEvaAPIEtoTest.app/Contents/MacOS/ASEvaAPIEtoTest",
+            "args": [],
+            "cwd": "${workspaceFolder}/../binm/debug/ASEvaAPIEtoTest.app/Contents/MacOS/",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
     ]
 }

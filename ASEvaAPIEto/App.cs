@@ -104,6 +104,31 @@ namespace ASEva.UIEto
             return new Font(defaultFont.Family, defaultFont.Size * sizeRatio, defaultFont.FontStyle, defaultFont.FontDecoration);
         }
 
+        /// <summary>
+        /// (api:eto=2.1.0) 获取应用程序的工作路径
+        /// </summary>
+        /// <value>工作路径</value>
+        public static String WorkPath
+        {
+            get
+            {
+                var workDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                if (Path.GetFileName(workDir) == "MacOS")
+                {
+                    var parentDir1 = Path.GetDirectoryName(workDir);
+                    if (Path.GetFileName(parentDir1) == "Contents")
+                    {
+                        var parentDir2 = Path.GetDirectoryName(parentDir1);
+                        if (Path.GetExtension(parentDir2) == ".app")
+                        {
+                            workDir = Path.GetDirectoryName(parentDir2);
+                        }
+                    }
+                }
+                return workDir;
+            }
+        }
+
         private static String[] getAvailableUICodes()
         {
             var osCode = GetRunningOS();
@@ -116,6 +141,8 @@ namespace ASEva.UIEto
             case "linux":
             case "linuxarm":
                 return new String[] { "gtk" };
+            case "macos":
+                return new String[] { "monomac" };
             default:
                 return null;
             }
@@ -138,6 +165,10 @@ namespace ASEva.UIEto
                 case "gtk":
                     dllFileName = "ASEvaAPIGtk.dll";
                     uiNamespace = "UIGtk";
+                    break;
+                case "monomac":
+                    dllFileName = "ASEvaAPIMonoMac.dll";
+                    uiNamespace = "UIMonoMac";
                     break;
                 }
 

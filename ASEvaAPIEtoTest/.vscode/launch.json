@@ -35,6 +35,17 @@
             "stopAtEntry": false
         },
         {
+            "name": "发布运行(X86-MacOS主机)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "发布构建并生成app包(X86-MacOS主机/全平台目标)",
+            "program": "${workspaceFolder}/../binm/ASEvaAPIEtoTest.app/Contents/MacOS/ASEvaAPIEtoTest",
+            "args": [],
+            "cwd": "${workspaceFolder}/../binm/ASEvaAPIEtoTest.app/Contents/MacOS/",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": "调试运行(X86-Windows主机)",
             "type": "coreclr",
             "request": "launch",
@@ -64,6 +75,17 @@
             "program": "${workspaceFolder}/../binxa/debug/ASEvaAPIEtoTest",
             "args": [],
             "cwd": "${workspaceFolder}/../binxa/debug/",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "调试运行(X86-MacOS主机)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "调试构建并生成app包(X86-MacOS主机/X86-MacOS1010目标)",
+            "program": "${workspaceFolder}/../binm/debug/ASEvaAPIEtoTest.app/Contents/MacOS/ASEvaAPIEtoTest",
+            "args": [],
+            "cwd": "${workspaceFolder}/../binm/debug/ASEvaAPIEtoTest.app/Contents/MacOS/",
             "console": "internalConsole",
             "stopAtEntry": false
         },

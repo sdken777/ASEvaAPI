@@ -49,38 +49,18 @@
             "args": [
                 "-p",
                 "../binx",
-                "../binxa"
+                "../binxa",
+                "../binm",
             ],
             "problemMatcher": []
         },
         {
             "type": "process",
-            "label": "(internal)拷贝dll至bin(X86-Windows至X86-Ubuntu1804目标)",
+            "label": "(internal)拷贝dll等至bin(X86-Windows至X86-Ubuntu1804目标)",
             "command": "cp",
             "args": [
                 "-vf",
                 "../bin64/ASEvaAPIEto.dll",
-                "../binx/"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)拷贝dll至bin(X86-Windows至Arm-Ubuntu1604目标)",
-            "command": "cp",
-            "args": [
-                "-vf",
-                "../bin64/ASEvaAPIEto.dll",
-                "../binxa/"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)拷贝xml至bin(X86-Windows至X86-Ubuntu1804目标)",
-            "command": "cp",
-            "args": [
-                "-vf",
                 "../bin64/ASEvaAPIEto.xml",
                 "../binx/"
             ],
@@ -88,12 +68,25 @@
         },
         {
             "type": "process",
-            "label": "(internal)拷贝xml至bin(X86-Windows至Arm-Ubuntu1604目标)",
+            "label": "(internal)拷贝dll等至bin(X86-Windows至Arm-Ubuntu1604目标)",
             "command": "cp",
             "args": [
                 "-vf",
+                "../bin64/ASEvaAPIEto.dll",
                 "../bin64/ASEvaAPIEto.xml",
                 "../binxa/"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(internal)拷贝dll等至bin(X86-Windows至X86-MacOS1010目标)",
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../bin64/ASEvaAPIEto.dll",
+                "../bin64/ASEvaAPIEto.xml",
+                "../binm/"
             ],
             "problemMatcher": []
         },
@@ -109,10 +102,9 @@
                 "(internal)发布构建(X86-Windows目标)",
                 "(internal)移除发布构建冗余文件(X86-Windows目标)",
                 "(internal)创建bin文件夹",
-                "(internal)拷贝dll至bin(X86-Windows至X86-Ubuntu1804目标)",
-                "(internal)拷贝dll至bin(X86-Windows至Arm-Ubuntu1604目标)",
-                "(internal)拷贝xml至bin(X86-Windows至X86-Ubuntu1804目标)",
-                "(internal)拷贝xml至bin(X86-Windows至Arm-Ubuntu1604目标)",
+                "(internal)拷贝dll等至bin(X86-Windows至X86-Ubuntu1804目标)",
+                "(internal)拷贝dll等至bin(X86-Windows至Arm-Ubuntu1604目标)",
+                "(internal)拷贝dll等至bin(X86-Windows至X86-MacOS1010目标)",
             ],
             "problemMatcher": []
         },
@@ -166,6 +158,39 @@
                 "(internal)清理"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process",
+            "label": "调试构建(X86-MacOS1010目标)",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIEto.csproj",
+                "-o",
+                "../binm/debug",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "dependsOn": [
+                "(internal)清理"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process",
+            "label": "调试构建并生成app包(X86-MacOS主机/X86-MacOS1010目标)",
+            "command": "../binm/app-maker",
+            "args": [
+                "${workspaceFolder}/../binm/debug",
+                "${workspaceFolder}/../ASEvaAPIEtoTest/Resources/icon.icns",
+                "${workspaceFolder}/../binm/debug/ASEvaAPIEtoTest.app",
+                "ASEvaAPIEtoTest",
+                "icon.icns",
+            ],
+            "dependsOn": [
+                "调试构建(X86-MacOS1010目标)"
+            ],
+            "problemMatcher": []
         },
     ]
 }

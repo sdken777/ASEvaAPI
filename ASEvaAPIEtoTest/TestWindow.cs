@@ -37,7 +37,7 @@ namespace ASEvaAPIEtoTest
 
         private void InitContextMenu(ContextMenu menu)
         {
-            menu.AddButtonItem(t["menu-button"], Icon.FromResource("menu-button.png")).Click += delegate { MessageBox.Show(t["title"], ""); };
+            menu.AddButtonItem(t["menu-button"], Icon.FromResource("menu-button.png")).Click += delegate { MessageBox.Show(App.WorkPath, ""); };
             menu.AddSeparator();
             menu.AddCheckItem(t.Format("menu-check", "A"));
             menu.AddCheckItem(t.Format("menu-check", "B"));

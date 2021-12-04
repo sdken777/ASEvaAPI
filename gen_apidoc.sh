@@ -7,14 +7,17 @@ cd "$CUR_DIR"/doc
 doxygen Doxyfile-ASEvaAPI
 cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/Common/
 
+doxygen Doxyfile-ASEvaAPIEto
+cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/Eto/
+
 doxygen Doxyfile-ASEvaAPICoreWF
 cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/CoreWF/
 
 doxygen Doxyfile-ASEvaAPIGtk
 cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/Gtk/
 
-doxygen Doxyfile-ASEvaAPIEto
-cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/Eto/
+doxygen Doxyfile-ASEvaAPIMonoMac
+cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/MonoMac/
 
 cd ~/Desktop
 zip -r D01006_ASEvaAPIDoc.zip ./D01006_ASEvaAPIDoc/
