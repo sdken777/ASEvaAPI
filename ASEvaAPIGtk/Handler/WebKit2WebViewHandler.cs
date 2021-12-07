@@ -228,7 +228,7 @@ namespace ASEva.UIGtk
 			jscs.Enqueue(tcs);
 
 			if (theDelegate == null) theDelegate = (Delegate)(FinishScriptExecutionDelegate)FinishScriptExecution;
-			NativeMethods.webkit_web_view_run_javascript(Control.Handle, $"function _fn() {{{script}}} _fn();", IntPtr.Zero, (FinishScriptExecutionDelegate)FinishScriptExecution, IntPtr.Zero);
+			NativeMethods.webkit_web_view_run_javascript(Control.Handle, $"function _fn() {{{script}}} _fn();", IntPtr.Zero, (FinishScriptExecutionDelegate)theDelegate, IntPtr.Zero);
 
 			return tcs.Task;
 		}
@@ -252,6 +252,7 @@ namespace ASEva.UIGtk
 
 				Marshal.FreeHGlobal(utfvalue);
 				NativeMethods.JSStringRelease(strvalue);
+				NativeMethods.webkit_javascript_result_unref(jsresult);
 				tcs?.SetResult(jsreturn);
 			}
 			else

@@ -114,6 +114,9 @@ namespace ASEva.UIGtk
 
 			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
 			public extern static IntPtr webkit_response_policy_decision_get_request(IntPtr decision);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static void webkit_javascript_result_unref(IntPtr result);
 		}
 
 		static class NM4
@@ -191,6 +194,9 @@ namespace ASEva.UIGtk
 
 			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
 			public extern static IntPtr webkit_response_policy_decision_get_request(IntPtr decision);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static void webkit_javascript_result_unref(IntPtr result);
 		}
 
 		public static string GetString(IntPtr handle)
@@ -349,6 +355,12 @@ namespace ASEva.UIGtk
 		{
 			if (useNM3) return NM3.webkit_response_policy_decision_get_request(decision);
 			else return NM4.webkit_response_policy_decision_get_request(decision);
+		}
+
+		public static void webkit_javascript_result_unref(IntPtr result)
+		{
+			if (useNM3) NM3.webkit_javascript_result_unref(result);
+			else NM4.webkit_javascript_result_unref(result);
 		}
 	}
 }
