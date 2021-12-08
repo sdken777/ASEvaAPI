@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using ASEva.Graph;
+using ASEva.Utility;
 
 namespace ASEva.UICoreWF
 {
@@ -30,7 +31,11 @@ namespace ASEva.UICoreWF
             if (Data == null || !(Data is LabelTableData)) return;
 
             // 数据显示
-            pictureBox1.Refresh();
+            if (DrawBeat.CallerBegin(pictureBox1))
+            {
+                pictureBox1.Refresh();
+                DrawBeat.CallerEnd(pictureBox1);
+            }
 
             // 标题显示
             label1.Text = Data == null ? "" : Data.Definition.MainTitle;
@@ -50,12 +55,20 @@ namespace ASEva.UICoreWF
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-            pic_drawAxis(sender, e);
-            pic_drawBarGraph(sender, e);
-            pic_drawHeatMap(sender, e);
-            pic_drawAnnotation(sender, e);
-            pic_drawGuide(sender, e);
+            DrawBeat.CallbackBegin(pictureBox1, "ASEva.UICoreWF.LabelTableGraph");
+
+            try
+            {
+                e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+                pic_drawAxis(sender, e);
+                pic_drawBarGraph(sender, e);
+                pic_drawHeatMap(sender, e);
+                pic_drawAnnotation(sender, e);
+                pic_drawGuide(sender, e);
+            }
+            catch (Exception) { }
+
+            DrawBeat.CallbackEnd(pictureBox1);
         }
 
         private void pic_drawAxis(object sender, PaintEventArgs e)

@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using ASEva.Graph;
+using ASEva.Utility;
 
 namespace ASEva.UICoreWF
 {
@@ -33,7 +34,11 @@ namespace ASEva.UICoreWF
             if (Data == null || !(Data is ScatterPointsData)) return;
 
             // 数据和验证条件显示
-            pictureBox2.Refresh();
+            if (DrawBeat.CallerBegin(pictureBox2))
+            {
+                pictureBox2.Refresh();
+                DrawBeat.CallerEnd(pictureBox2);
+            }
 
             // 标题显示
             label1.Text = Data == null ? "" : Data.Definition.MainTitle;
@@ -71,12 +76,20 @@ namespace ASEva.UICoreWF
 
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
         {
-            pic_drawPoint(sender, e);
-            pic_drawBarGraph(sender, e);
-            pic_drawAxis(sender, e);
-            pic_drawValidation(sender, e);
-            pic_drawAnnotation(sender, e);
-            pic_drawGuide(sender, e);
+            DrawBeat.CallbackBegin(pictureBox2, "ASEva.UICoreWF.ScatterPointsGraph");
+
+            try
+            {
+                pic_drawPoint(sender, e);
+                pic_drawBarGraph(sender, e);
+                pic_drawAxis(sender, e);
+                pic_drawValidation(sender, e);
+                pic_drawAnnotation(sender, e);
+                pic_drawGuide(sender, e);
+            }
+            catch (Exception) { }
+
+            DrawBeat.CallbackEnd(pictureBox2);
         }
 
         private void pic_drawValidation(object sender, PaintEventArgs e)

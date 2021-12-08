@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using ASEva.Utility;
 
 namespace ASEva.UICoreWF
 {
@@ -24,7 +25,9 @@ namespace ASEva.UICoreWF
         {
             for (int i = 0; i < availables.Length; i++) channelAvailables[i] = availables[i];
             for (int i = availables.Length; i < 12; i++) channelAvailables[i] = false;
+            DrawBeat.CallerBegin(this);
             this.Refresh();
+            DrawBeat.CallerEnd(this);
         }
 
         /// <summary>
@@ -37,7 +40,9 @@ namespace ASEva.UICoreWF
             {
                 channelCount = Math.Max(1, Math.Min(12, value));
                 if (targetChannel >= channelCount) targetChannel = 0;
+                DrawBeat.CallerBegin(this);
                 this.Refresh();
+                DrawBeat.CallerEnd(this);
             }
         }
 
@@ -51,7 +56,9 @@ namespace ASEva.UICoreWF
             {
                 if (value < 0 || value >= channelCount) return;
                 targetChannel = value;
+                DrawBeat.CallerBegin(this);
                 this.Refresh();
+                DrawBeat.CallerEnd(this);
             }
         }
 
@@ -86,36 +93,44 @@ namespace ASEva.UICoreWF
 
         private void ChannelSelector_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+            DrawBeat.CallbackBegin(this, "ASEva.UICoreWF.ChannelSelector");
 
-            var silverBrush = new SolidBrush(Color.Silver);
-            var grayBrush = new SolidBrush(Color.Gray);
-            var paleGreenBrush = new SolidBrush(Color.PaleGreen);
-            var limeGreenBrush = new SolidBrush(Color.LimeGreen);
-            var fontBrush = new SolidBrush(Color.Black);
-            var font = new Font("微软雅黑", 10.5f);
-
-            var dpiRatio = (float)DeviceDpi / 96;
-
-            for (int i = 0; i < channelCount; i++)
+            try
             {
-                Brush brush = null;
-                if (channelAvailables[i])
-                {
-                    if (targetChannel == i) brush = paleGreenBrush;
-                    else brush = limeGreenBrush;
-                }
-                else
-                {
-                    if (targetChannel == i) brush = silverBrush;
-                    else brush = grayBrush;
-                }
+                e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 
-                e.Graphics.FillRectangle(brush, gridSize * i, 0, gridSize, gridSize);
+                var silverBrush = new SolidBrush(Color.Silver);
+                var grayBrush = new SolidBrush(Color.Gray);
+                var paleGreenBrush = new SolidBrush(Color.PaleGreen);
+                var limeGreenBrush = new SolidBrush(Color.LimeGreen);
+                var fontBrush = new SolidBrush(Color.Black);
+                var font = new Font("微软雅黑", 10.5f);
 
-                var text = ((char)('A' + i)).ToString();
-                e.Graphics.DrawString(text, font, fontBrush, gridSize * i + gridSize / 2 - 0.5f - e.Graphics.MeasureString(text, font).Width * 0.5f, dpiRatio * 2.0f);
+                var dpiRatio = (float)DeviceDpi / 96;
+
+                for (int i = 0; i < channelCount; i++)
+                {
+                    Brush brush = null;
+                    if (channelAvailables[i])
+                    {
+                        if (targetChannel == i) brush = paleGreenBrush;
+                        else brush = limeGreenBrush;
+                    }
+                    else
+                    {
+                        if (targetChannel == i) brush = silverBrush;
+                        else brush = grayBrush;
+                    }
+
+                    e.Graphics.FillRectangle(brush, gridSize * i, 0, gridSize, gridSize);
+
+                    var text = ((char)('A' + i)).ToString();
+                    e.Graphics.DrawString(text, font, fontBrush, gridSize * i + gridSize / 2 - 0.5f - e.Graphics.MeasureString(text, font).Width * 0.5f, dpiRatio * 2.0f);
+                }
             }
+            catch (Exception) { }
+
+            DrawBeat.CallbackEnd(this);
         }
 
         private void ChannelSelector_MouseMove(object sender, MouseEventArgs e)

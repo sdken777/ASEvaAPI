@@ -68,11 +68,8 @@ namespace ASEva.Utility
         /// <param name="category">类别，设为空表示不归类</param>
         public static void CallbackBegin(int id, String category)
         {
-            if (!ctxs.ContainsKey(id))
-            {
-                ctxs[id] = new DrawBeatContext();
-                ctxs[id].Category = category == null ? "" : category;
-            }
+            if (!ctxs.ContainsKey(id)) ctxs[id] = new DrawBeatContext();
+            ctxs[id].Category = category == null ? "" : category;
             if (ctxs[id].CallbackBeginTime == null) ctxs[id].CallbackBeginTime = DateTime.Now;
         }
 

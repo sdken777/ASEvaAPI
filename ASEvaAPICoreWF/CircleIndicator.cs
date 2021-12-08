@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using ASEva.Utility;
 
 namespace ASEva.UICoreWF
 {
@@ -16,7 +17,9 @@ namespace ASEva.UICoreWF
             set
             {
                 borderColor = value;
-                this.Refresh();
+                DrawBeat.CallerBegin(pictureBox1);
+                pictureBox1.Refresh();
+                DrawBeat.CallerEnd(pictureBox1);
             }
         }
 
@@ -27,7 +30,9 @@ namespace ASEva.UICoreWF
             set
             {
                 indicatorColor = value;
-                this.Refresh();
+                DrawBeat.CallerBegin(pictureBox1);
+                pictureBox1.Refresh();
+                DrawBeat.CallerEnd(pictureBox1);
             }
         }
 
@@ -36,7 +41,9 @@ namespace ASEva.UICoreWF
             InitializeComponent();
             borderColor = Color.White;
             indicatorColor = Color.Black;
-            this.Refresh();
+            DrawBeat.CallerBegin(pictureBox1);
+            pictureBox1.Refresh();
+            DrawBeat.CallerEnd(pictureBox1);
         }
 
         public delegate void CircleIndicatorHandler(object sender);
@@ -44,15 +51,23 @@ namespace ASEva.UICoreWF
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            var dpiRatio = (float)DeviceDpi / 96;
+            DrawBeat.CallbackBegin(pictureBox1, "ASEva.UICoreWF.CircleIndicator");
 
-            var sizeLarge = Math.Min(this.Width, this.Height) - 2;
-            int sizeBorder = (int)(dpiRatio * 2);
-            var sizeSmall = sizeLarge - sizeBorder * 2;
+            try
+            {
+                var dpiRatio = (float)DeviceDpi / 96;
 
-            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            e.Graphics.FillEllipse(new SolidBrush(BorderColor), new Rectangle(1, 1, sizeLarge, sizeLarge));
-            e.Graphics.FillEllipse(new SolidBrush(IndicatorColor), new Rectangle(1 + sizeBorder, 1 + sizeBorder, sizeSmall, sizeSmall));
+                var sizeLarge = Math.Min(this.Width, this.Height) - 2;
+                int sizeBorder = (int)(dpiRatio * 2);
+                var sizeSmall = sizeLarge - sizeBorder * 2;
+
+                e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                e.Graphics.FillEllipse(new SolidBrush(BorderColor), new Rectangle(1, 1, sizeLarge, sizeLarge));
+                e.Graphics.FillEllipse(new SolidBrush(IndicatorColor), new Rectangle(1 + sizeBorder, 1 + sizeBorder, sizeSmall, sizeSmall));
+            }
+            catch (Exception) { }
+
+            DrawBeat.CallbackEnd(pictureBox1);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

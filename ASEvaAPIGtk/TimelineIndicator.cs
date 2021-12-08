@@ -1,5 +1,6 @@
 using System;
 using Gtk;
+using ASEva.Utility;
 using UI = Gtk.Builder.ObjectAttribute;
 
 namespace ASEva.UIGtk
@@ -24,11 +25,9 @@ namespace ASEva.UIGtk
             set
             {
                 lower = value;
-                if (!drawQueued)
-                {
-                    draw.QueueDraw();
-                    drawQueued = true;
-                }
+                DrawBeat.CallerBegin(draw);
+                draw.QueueDraw();
+                DrawBeat.CallerEnd(draw);
             }
         }
 
@@ -38,11 +37,9 @@ namespace ASEva.UIGtk
             set
             {
                 upper = value;
-                if (!drawQueued)
-                {
-                    draw.QueueDraw();
-                    drawQueued = true;
-                }
+                DrawBeat.CallerBegin(draw);
+                draw.QueueDraw();
+                DrawBeat.CallerEnd(draw);
             }
         }
 
@@ -52,11 +49,9 @@ namespace ASEva.UIGtk
             set
             {
                 val = value;
-                if (!drawQueued)
-                {
-                    draw.QueueDraw();
-                    drawQueued = true;
-                }
+                DrawBeat.CallerBegin(draw);
+                draw.QueueDraw();
+                DrawBeat.CallerEnd(draw);
             }
         }
 
@@ -67,6 +62,8 @@ namespace ASEva.UIGtk
 
         private void draw_Drawn(object o, DrawnArgs args)
         {
+            DrawBeat.CallbackBegin(draw, "ASEva.UIGtk.TimelineIndicator");
+
             var cc = args.Cr;
             cc.LineWidth = 1;
 
@@ -103,9 +100,10 @@ namespace ASEva.UIGtk
                 cc.Stroke();
             }
             catch (Exception) {}
+
+            DrawBeat.CallbackEnd(draw);
         }
 
         private double? lower, upper, val;
-        private bool drawQueued = false;
     }
 }

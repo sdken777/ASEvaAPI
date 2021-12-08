@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 2, 0); // 新增DrawBeat
+            return new Version(2, 2, 2, 1); // 修正DrawBeat.CallbackBegin
         }
 
         /// <summary>

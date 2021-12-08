@@ -1,5 +1,6 @@
 using System;
 using Gtk;
+using ASEva.Utility;
 using ASEva.UIGtk;
 using ASEva.Graph;
 using UI = Gtk.Builder.ObjectAttribute;
@@ -42,7 +43,11 @@ namespace ASEva.UIGtk
             if (Data == null || !(Data is MatrixTableData)) return;
 
             // 数据和验证条件显示
-            draw.QueueDraw();
+            if (DrawBeat.CallerBegin(draw))
+            {
+                draw.QueueDraw();
+                DrawBeat.CallerEnd(draw);
+            }
 
             if (Data.Definition.Validation == null)
             {
@@ -154,228 +159,238 @@ namespace ASEva.UIGtk
 
         private void draw_Drawn(object o, DrawnArgs args)
         {
-            var cc = args.Cr;
-            cc.LineWidth = 1;
-            cc.SelectFontFace(CairoContextExtension.NotoFontName, Cairo.FontSlant.Normal, Cairo.FontWeight.Normal);
+            DrawBeat.CallbackBegin(draw, "ASEva.UIGtk.MatrixTableGraph");
 
-            cc.Translate(0, 2);
-
-            var width = draw.AllocatedWidth;
-            var height = draw.AllocatedHeight - 2;
-            var originPoint = new FloatPoint((float)width / 4, (float)height / 3 * 2);
-
-            var D = Data as MatrixTableData;
-            var xTitle = D.GetXTitle();
-            var yTitle = D.GetYTitle();
-            var xrange = D.GetXRange();
-            var yrange = D.GetYRange();
-            var xHeights = D.GetXHistValues();
-            var yHeights = D.GetYHistValues();
-            var values = D.GetValues();
-            var valueRange = D.GetValueRefRange();
-            var isPercentage = D.GetMode() == MatrixTableMode.Percentage;
-
-            var intervalX = (width - originPoint.X) / xrange.Count;
-            var intervalY = originPoint.Y / yrange.Count;
-            var xRangeLower = xrange.Base;
-            var xRangeUpper = xRangeLower + xrange.Count * xrange.Step;
-            var yRangeLower = yrange.Base;
-            var yRangeUpper = yRangeLower + yrange.Count * yrange.Step;
-
-            //X轴柱状图生成
-            cc.SetFontSize(10);
-            
-            double maxHeightx = 0;
-            foreach (var val in xHeights) maxHeightx = Math.Max(maxHeightx, Math.Abs(val));
-            
-            if (maxHeightx > 0)
+            try
             {
-                for (int i = 0; i < xHeights.Length; i++)
+                var cc = args.Cr;
+                cc.LineWidth = 1;
+                cc.SelectFontFace(CairoContextExtension.NotoFontName, Cairo.FontSlant.Normal, Cairo.FontWeight.Normal);
+
+                cc.Translate(0, 2);
+
+                var width = draw.AllocatedWidth;
+                var height = draw.AllocatedHeight - 2;
+                var originPoint = new FloatPoint((float)width / 4, (float)height / 3 * 2);
+
+                var D = Data as MatrixTableData;
+                var xTitle = D.GetXTitle();
+                var yTitle = D.GetYTitle();
+                var xrange = D.GetXRange();
+                var yrange = D.GetYRange();
+                var xHeights = D.GetXHistValues();
+                var yHeights = D.GetYHistValues();
+                var values = D.GetValues();
+                var valueRange = D.GetValueRefRange();
+                var isPercentage = D.GetMode() == MatrixTableMode.Percentage;
+
+                var intervalX = (width - originPoint.X) / xrange.Count;
+                var intervalY = originPoint.Y / yrange.Count;
+                var xRangeLower = xrange.Base;
+                var xRangeUpper = xRangeLower + xrange.Count * xrange.Step;
+                var yRangeLower = yrange.Base;
+                var yRangeUpper = yRangeLower + yrange.Count * yrange.Step;
+
+                //X轴柱状图生成
+                cc.SetFontSize(10);
+                
+                double maxHeightx = 0;
+                foreach (var val in xHeights) maxHeightx = Math.Max(maxHeightx, Math.Abs(val));
+                
+                if (maxHeightx > 0)
                 {
-                    cc.SetSourceColor(xHeights[i] >= 0 ? ColorRGBA.DodgerBlue : ColorRGBA.MediumPurple);
-					cc.FillRectangle(i * intervalX + originPoint.X, originPoint.Y + 15, intervalX + 1, (float)Math.Abs(xHeights[i]) / (float)maxHeightx * (height - originPoint.Y - 15));
-                }
-            }
-
-            //Y轴柱状图生成
-            double maxHeighty = 0;
-            foreach (var val in yHeights) maxHeighty = Math.Max(maxHeighty, Math.Abs(val));
-            
-            if (maxHeighty > 0)
-            {
-                for (int i = 0; i < yHeights.Length; i++)
-                {
-                    cc.SetSourceColor(yHeights[i] >= 0 ? ColorRGBA.DodgerBlue : ColorRGBA.MediumPurple);
-					cc.FillRectangle(originPoint.X - 15 - (originPoint.X - 15) * ((float)Math.Abs(yHeights[i]) / (float)maxHeighty), originPoint.Y - (i + 1) * intervalY, (originPoint.X - 15) * ((float)Math.Abs(yHeights[i]) / (float)maxHeighty), intervalY + 1);
-                }
-            }
-
-            // 热力图
-            for (int i = 0; i < xrange.Count; i++)
-            {
-                var x = i * intervalX;
-                for (int j = 0; j < yrange.Count; j++)
-                {
-                    var y = (j + 1) * intervalY;
-                    cc.SetSourceColor(getColorByValue(valueRange.upper, valueRange.lower, values[i,j]));
-                    cc.FillRectangle(x + originPoint.X, originPoint.Y - y, intervalX + 1, intervalY + 1);
-                }
-            }
-
-            //画坐标轴
-            var pointx1 = new FloatPoint(0, originPoint.Y);
-            var pointx2 = new FloatPoint(width, originPoint.Y);
-            var pointy1 = new FloatPoint(originPoint.X, 0);
-            var pointy2 = new FloatPoint(originPoint.X, height);
-
-            cc.SetSourceColor(ColorRGBA.Black);
-            cc.DrawLine(pointx1, pointx2);
-            cc.DrawLine(pointy1, pointy2);
-
-            cc.SetSourceColor(ColorRGBA.Gray);
-            cc.DrawLine(originPoint.X, originPoint.Y + 15, width - 1, originPoint.Y + 15);
-            cc.DrawLine(originPoint.X - 15, originPoint.Y, originPoint.X - 15, 0);
-
-            var xTitleWidth = cc.TextExtents(xTitle).Width;
-            var yTitleWidth = cc.TextExtents(yTitle).Width;
-
-            cc.SetSourceColor(ColorRGBA.DodgerBlue);
-            cc.MoveTo((width + originPoint.X - xTitleWidth) / 2, originPoint.Y + 11);
-            cc.ShowText(xTitle);
-
-            cc.MoveTo(originPoint.X - 11, (originPoint.Y - yTitleWidth) / 2);
-            cc.Rotate(0.5 * Math.PI);
-            cc.ShowText(yTitle);
-            cc.Rotate(-0.5 * Math.PI);
-
-            cc.SetSourceColor(ColorRGBA.Black);
-
-            cc.DrawLine(width - 0.5f, originPoint.Y, width - 0.5f, originPoint.Y + 2);
-            cc.DrawLine(originPoint.X, 0.5f, originPoint.X - 2, 0.5f);
-
-            cc.MoveTo(width - cc.TextExtents(xRangeUpper.ToString()).Width - 4, originPoint.Y + 11);
-            cc.ShowText(xRangeUpper.ToString());
-
-            cc.MoveTo(originPoint.X + 4, originPoint.Y + 11);
-            cc.ShowText(xRangeLower.ToString());
-
-            cc.MoveTo(originPoint.X - 11, 4);
-            cc.Rotate(0.5 * Math.PI);
-            cc.ShowText(yRangeUpper.ToString());
-            cc.Rotate(-0.5 * Math.PI);
-
-            cc.MoveTo(originPoint.X - 11, originPoint.Y - cc.TextExtents(yRangeLower.ToString()).Width - 4);
-            cc.Rotate(0.5 * Math.PI);
-            cc.ShowText(yRangeLower.ToString());
-            cc.Rotate(-0.5 * Math.PI);
-
-            // 验证框
-            if (Data.Definition.Validation != null)
-            {
-                ColorRGBA color = ColorRGBA.Black;
-                FloatPoint[] genericOutline = null;
-                if (Data.Definition.Validation is OutlineInsideValidation)
-                {
-                    var vd = Data.Definition.Validation as OutlineInsideValidation;
-                    color = ColorRGBA.LimeGreen;
-                    genericOutline = vd.GetOutline();
-                }
-                else if (Data.Definition.Validation is OutlineOutsideValidation)
-                {
-                    var vd = Data.Definition.Validation as OutlineOutsideValidation;
-                    color = ColorRGBA.Red;
-                    genericOutline = vd.GetOutline();
-                }
-
-                if (genericOutline != null)
-                {
-                    var outline = new FloatPoint[genericOutline.Length];
-                    for (int i = 0; i < outline.Length; i++) outline[i] = new FloatPoint(genericOutline[i].X, genericOutline[i].Y);
-
-                    for (int i = 0; i < outline.Length; i++)
+                    for (int i = 0; i < xHeights.Length; i++)
                     {
-                        var x = (float)((outline[i].X - xRangeLower) / (xRangeUpper - xRangeLower) * ((float)width - originPoint.X) + originPoint.X);
-                        var y = (float)((yRangeUpper - outline[i].Y) / (yRangeUpper - yRangeLower) * originPoint.Y);
-                        outline[i] = new FloatPoint(x, y);
+                        cc.SetSourceColor(xHeights[i] >= 0 ? ColorRGBA.DodgerBlue : ColorRGBA.MediumPurple);
+                        cc.FillRectangle(i * intervalX + originPoint.X, originPoint.Y + 15, intervalX + 1, (float)Math.Abs(xHeights[i]) / (float)maxHeightx * (height - originPoint.Y - 15));
+                    }
+                }
+
+                //Y轴柱状图生成
+                double maxHeighty = 0;
+                foreach (var val in yHeights) maxHeighty = Math.Max(maxHeighty, Math.Abs(val));
+                
+                if (maxHeighty > 0)
+                {
+                    for (int i = 0; i < yHeights.Length; i++)
+                    {
+                        cc.SetSourceColor(yHeights[i] >= 0 ? ColorRGBA.DodgerBlue : ColorRGBA.MediumPurple);
+                        cc.FillRectangle(originPoint.X - 15 - (originPoint.X - 15) * ((float)Math.Abs(yHeights[i]) / (float)maxHeighty), originPoint.Y - (i + 1) * intervalY, (originPoint.X - 15) * ((float)Math.Abs(yHeights[i]) / (float)maxHeighty), intervalY + 1);
+                    }
+                }
+
+                // 热力图
+                for (int i = 0; i < xrange.Count; i++)
+                {
+                    var x = i * intervalX;
+                    for (int j = 0; j < yrange.Count; j++)
+                    {
+                        var y = (j + 1) * intervalY;
+                        cc.SetSourceColor(getColorByValue(valueRange.upper, valueRange.lower, values[i,j]));
+                        cc.FillRectangle(x + originPoint.X, originPoint.Y - y, intervalX + 1, intervalY + 1);
+                    }
+                }
+
+                //画坐标轴
+                var pointx1 = new FloatPoint(0, originPoint.Y);
+                var pointx2 = new FloatPoint(width, originPoint.Y);
+                var pointy1 = new FloatPoint(originPoint.X, 0);
+                var pointy2 = new FloatPoint(originPoint.X, height);
+
+                cc.SetSourceColor(ColorRGBA.Black);
+                cc.DrawLine(pointx1, pointx2);
+                cc.DrawLine(pointy1, pointy2);
+
+                cc.SetSourceColor(ColorRGBA.Gray);
+                cc.DrawLine(originPoint.X, originPoint.Y + 15, width - 1, originPoint.Y + 15);
+                cc.DrawLine(originPoint.X - 15, originPoint.Y, originPoint.X - 15, 0);
+
+                var xTitleWidth = cc.TextExtents(xTitle).Width;
+                var yTitleWidth = cc.TextExtents(yTitle).Width;
+
+                cc.SetSourceColor(ColorRGBA.DodgerBlue);
+                cc.MoveTo((width + originPoint.X - xTitleWidth) / 2, originPoint.Y + 11);
+                cc.ShowText(xTitle);
+
+                cc.MoveTo(originPoint.X - 11, (originPoint.Y - yTitleWidth) / 2);
+                cc.Rotate(0.5 * Math.PI);
+                cc.ShowText(yTitle);
+                cc.Rotate(-0.5 * Math.PI);
+
+                cc.SetSourceColor(ColorRGBA.Black);
+
+                cc.DrawLine(width - 0.5f, originPoint.Y, width - 0.5f, originPoint.Y + 2);
+                cc.DrawLine(originPoint.X, 0.5f, originPoint.X - 2, 0.5f);
+
+                cc.MoveTo(width - cc.TextExtents(xRangeUpper.ToString()).Width - 4, originPoint.Y + 11);
+                cc.ShowText(xRangeUpper.ToString());
+
+                cc.MoveTo(originPoint.X + 4, originPoint.Y + 11);
+                cc.ShowText(xRangeLower.ToString());
+
+                cc.MoveTo(originPoint.X - 11, 4);
+                cc.Rotate(0.5 * Math.PI);
+                cc.ShowText(yRangeUpper.ToString());
+                cc.Rotate(-0.5 * Math.PI);
+
+                cc.MoveTo(originPoint.X - 11, originPoint.Y - cc.TextExtents(yRangeLower.ToString()).Width - 4);
+                cc.Rotate(0.5 * Math.PI);
+                cc.ShowText(yRangeLower.ToString());
+                cc.Rotate(-0.5 * Math.PI);
+
+                // 验证框
+                if (Data.Definition.Validation != null)
+                {
+                    ColorRGBA color = ColorRGBA.Black;
+                    FloatPoint[] genericOutline = null;
+                    if (Data.Definition.Validation is OutlineInsideValidation)
+                    {
+                        var vd = Data.Definition.Validation as OutlineInsideValidation;
+                        color = ColorRGBA.LimeGreen;
+                        genericOutline = vd.GetOutline();
+                    }
+                    else if (Data.Definition.Validation is OutlineOutsideValidation)
+                    {
+                        var vd = Data.Definition.Validation as OutlineOutsideValidation;
+                        color = ColorRGBA.Red;
+                        genericOutline = vd.GetOutline();
                     }
 
-                    cc.SetSourceColor(color);
+                    if (genericOutline != null)
+                    {
+                        var outline = new FloatPoint[genericOutline.Length];
+                        for (int i = 0; i < outline.Length; i++) outline[i] = new FloatPoint(genericOutline[i].X, genericOutline[i].Y);
 
-                    cc.LineWidth = 2;
-                    cc.DrawPolygon(outline);
-                    cc.LineWidth = 1;
+                        for (int i = 0; i < outline.Length; i++)
+                        {
+                            var x = (float)((outline[i].X - xRangeLower) / (xRangeUpper - xRangeLower) * ((float)width - originPoint.X) + originPoint.X);
+                            var y = (float)((yRangeUpper - outline[i].Y) / (yRangeUpper - yRangeLower) * originPoint.Y);
+                            outline[i] = new FloatPoint(x, y);
+                        }
+
+                        cc.SetSourceColor(color);
+
+                        cc.LineWidth = 2;
+                        cc.DrawPolygon(outline);
+                        cc.LineWidth = 1;
+                    }
                 }
-            }
 
-            // 验证鼠标位置
-            var mouse = draw.GetPointer();
-            if (mouse.X < 0 || mouse.X >= width || mouse.Y < 0 || mouse.Y >= height) return;
-
-            // 标注信息
-            cc.SetFontSize(11);
-
-            if (mouse.X > originPoint.X && mouse.X < width - 1 && mouse.Y < originPoint.Y && mouse.Y > 0)
-            {
-                var Xindex = (int)Math.Floor((mouse.X - originPoint.X) / intervalX);
-                var Yindex = (int)Math.Floor((originPoint.Y - mouse.Y) / intervalY);
-                var text = isPercentage ? (values[Xindex, Yindex].ToString("F1") + "%") : (Math.Abs(values[Xindex, Yindex]) >= 0.1 ? values[Xindex, Yindex].ToString("F3") : values[Xindex, Yindex].ToString());
-                var fullText = "(" + Math.Round((xRangeUpper - xRangeLower) * (mouse.X - originPoint.X) / (width - 1 - originPoint.X) + xRangeLower, 3) + "," + Math.Round((yRangeUpper - yRangeLower) * (originPoint.Y - mouse.Y) / originPoint.Y + yRangeLower, 3) + " : " + text + ")";
-
-                var sizef = cc.TextExtents(fullText);
-                if (mouse.Y <= sizef.Height) cc.MoveTo(mouse.X - sizef.Width - 4, mouse.Y + sizef.Height - 2);
-                else cc.MoveTo(mouse.X - sizef.Width - 4, mouse.Y - 4);
-
-                cc.SetSourceColor(ColorRGBA.Red);
-                cc.ShowText(fullText);
-
-                cc.SetDash(new double[] {1, 1}, 0);
-                cc.SetSourceColor(ColorRGBA.DodgerBlue);
-
-                cc.DrawLine(originPoint.X, mouse.Y, width - 1, mouse.Y);
-                cc.DrawLine(mouse.X, 0, mouse.X, originPoint.Y);
-            }
-
-            for (int i = 0; i < xHeights.Length; i++)
-            {
-                var a = i * xrange.Step + xrange.Base;
-                var b = (i + 1) * xrange.Step + xrange.Base;
-                var ax = originPoint.X + i * intervalX;
-                var bx = originPoint.X + (i + 1) * intervalX;
-                if (mouse.Y > originPoint.Y && mouse.X >= ax && mouse.X < bx)
+                // 验证鼠标位置
+                var mouse = draw.GetPointer();
+                if (mouse.X < 0 || mouse.X >= width || mouse.Y < 0 || mouse.Y >= height) {}
+                else
                 {
-                    cc.SetSourceColor(ColorRGBA.Gray);
-                    cc.DrawRectangle(i * intervalX + originPoint.X, originPoint.Y + 15, intervalX - 1, height - originPoint.Y - 15 - 1);
+                    // 标注信息
+                    cc.SetFontSize(11);
 
-                    var text = isPercentage ? (xHeights[i].ToString("F1") + "%") : (Math.Abs(xHeights[i]) >= 0.1 ? xHeights[i].ToString("F3") : xHeights[i].ToString());
-                    var fullText = "(" + a + "~" + b + " : " + text + ")";
+                    if (mouse.X > originPoint.X && mouse.X < width - 1 && mouse.Y < originPoint.Y && mouse.Y > 0)
+                    {
+                        var Xindex = (int)Math.Floor((mouse.X - originPoint.X) / intervalX);
+                        var Yindex = (int)Math.Floor((originPoint.Y - mouse.Y) / intervalY);
+                        var text = isPercentage ? (values[Xindex, Yindex].ToString("F1") + "%") : (Math.Abs(values[Xindex, Yindex]) >= 0.1 ? values[Xindex, Yindex].ToString("F3") : values[Xindex, Yindex].ToString());
+                        var fullText = "(" + Math.Round((xRangeUpper - xRangeLower) * (mouse.X - originPoint.X) / (width - 1 - originPoint.X) + xRangeLower, 3) + "," + Math.Round((yRangeUpper - yRangeLower) * (originPoint.Y - mouse.Y) / originPoint.Y + yRangeLower, 3) + " : " + text + ")";
 
-                    var sizef = cc.TextExtents(fullText);
-                    cc.MoveTo(mouse.X - sizef.Width, originPoint.Y + 15 + sizef.Height);
-                    cc.SetSourceColor(ColorRGBA.Red);
-                    cc.ShowText(fullText);
+                        var sizef = cc.TextExtents(fullText);
+                        if (mouse.Y <= sizef.Height) cc.MoveTo(mouse.X - sizef.Width - 4, mouse.Y + sizef.Height - 2);
+                        else cc.MoveTo(mouse.X - sizef.Width - 4, mouse.Y - 4);
+
+                        cc.SetSourceColor(ColorRGBA.Red);
+                        cc.ShowText(fullText);
+
+                        cc.SetDash(new double[] {1, 1}, 0);
+                        cc.SetSourceColor(ColorRGBA.DodgerBlue);
+
+                        cc.DrawLine(originPoint.X, mouse.Y, width - 1, mouse.Y);
+                        cc.DrawLine(mouse.X, 0, mouse.X, originPoint.Y);
+                    }
+
+                    for (int i = 0; i < xHeights.Length; i++)
+                    {
+                        var a = i * xrange.Step + xrange.Base;
+                        var b = (i + 1) * xrange.Step + xrange.Base;
+                        var ax = originPoint.X + i * intervalX;
+                        var bx = originPoint.X + (i + 1) * intervalX;
+                        if (mouse.Y > originPoint.Y && mouse.X >= ax && mouse.X < bx)
+                        {
+                            cc.SetSourceColor(ColorRGBA.Gray);
+                            cc.DrawRectangle(i * intervalX + originPoint.X, originPoint.Y + 15, intervalX - 1, height - originPoint.Y - 15 - 1);
+
+                            var text = isPercentage ? (xHeights[i].ToString("F1") + "%") : (Math.Abs(xHeights[i]) >= 0.1 ? xHeights[i].ToString("F3") : xHeights[i].ToString());
+                            var fullText = "(" + a + "~" + b + " : " + text + ")";
+
+                            var sizef = cc.TextExtents(fullText);
+                            cc.MoveTo(mouse.X - sizef.Width, originPoint.Y + 15 + sizef.Height);
+                            cc.SetSourceColor(ColorRGBA.Red);
+                            cc.ShowText(fullText);
+                        }
+                    }
+
+                    for (int i = 0; i < yHeights.Length; i++)
+                    {
+                        var a = i * yrange.Step + yrange.Base;
+                        var b = (i + 1) * yrange.Step + yrange.Base;
+                        var ay = originPoint.Y - i * intervalY;
+                        var by = originPoint.Y - (i + 1) * intervalY;
+                        if (mouse.X < originPoint.X && mouse.X > 0 && mouse.Y >= by && mouse.Y < ay)
+                        {
+                            cc.SetSourceColor(ColorRGBA.Gray);
+                            cc.DrawRectangle(1, originPoint.Y - (i + 1) * intervalY, originPoint.X - 16, intervalY);
+
+                            var text = isPercentage ? (yHeights[i].ToString("F1") + "%") : (Math.Abs(yHeights[i]) >= 0.1 ? yHeights[i].ToString("F3") : yHeights[i].ToString());
+                            var fullText = "(" + a + "~" + b + " : " + text + ")";
+
+                            var sizef = cc.TextExtents(fullText);
+                            cc.MoveTo(mouse.X + 15, mouse.Y + sizef.Height);
+                            cc.SetSourceColor(ColorRGBA.Red);
+                            cc.ShowText(fullText);
+                        }
+                    }
                 }
             }
+            catch (Exception) {}
 
-            for (int i = 0; i < yHeights.Length; i++)
-            {
-                var a = i * yrange.Step + yrange.Base;
-                var b = (i + 1) * yrange.Step + yrange.Base;
-                var ay = originPoint.Y - i * intervalY;
-                var by = originPoint.Y - (i + 1) * intervalY;
-                if (mouse.X < originPoint.X && mouse.X > 0 && mouse.Y >= by && mouse.Y < ay)
-                {
-                    cc.SetSourceColor(ColorRGBA.Gray);
-                    cc.DrawRectangle(1, originPoint.Y - (i + 1) * intervalY, originPoint.X - 16, intervalY);
-
-                    var text = isPercentage ? (yHeights[i].ToString("F1") + "%") : (Math.Abs(yHeights[i]) >= 0.1 ? yHeights[i].ToString("F3") : yHeights[i].ToString());
-                    var fullText = "(" + a + "~" + b + " : " + text + ")";
-
-                    var sizef = cc.TextExtents(fullText);
-                    cc.MoveTo(mouse.X + 15, mouse.Y + sizef.Height);
-                    cc.SetSourceColor(ColorRGBA.Red);
-                    cc.ShowText(fullText);
-                }
-            }
+            DrawBeat.CallbackEnd(draw);
         }
     }
 }
