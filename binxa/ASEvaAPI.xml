@@ -855,7 +855,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.2.1
+            version=2.2.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4214,6 +4214,84 @@
             </summary>
             <param name="src">WGS坐标系坐标</param>
             <returns>GCJ坐标系坐标</returns>
+        </member>
+        <member name="T:ASEva.Utility.DrawBeat">
+            <summary>
+            (api:app=2.2.2) 绘图时间记录与反馈
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.CallerBegin(System.Int32)">
+            <summary>
+            在调用绘图前调用
+            </summary>
+            <param name="id">绘图对象ID</param>
+            <returns>是否可调用绘图</returns>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.CallerBegin(System.Object)">
+            <summary>
+            在调用绘图前调用
+            </summary>
+            <param name="target">绘图对象</param>
+            <returns>是否可调用绘图</returns>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.CallerEnd(System.Int32)">
+            <summary>
+            在调用绘图后调用
+            </summary>
+            <param name="id">绘图对象ID</param>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.CallerEnd(System.Object)">
+            <summary>
+            在调用绘图后调用
+            </summary>
+            <param name="target">绘图对象</param>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.CallbackBegin(System.Int32,System.String)">
+            <summary>
+            在绘图回调函数开始时调用
+            </summary>
+            <param name="id">绘图对象ID</param>
+            <param name="category">类别，设为空表示不归类</param>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.CallbackBegin(System.Object,System.String)">
+            <summary>
+            在绘图回调函数开始时调用
+            </summary>
+            <param name="target">绘图对象</param>
+            <param name="category">类别，设为空表示不归类</param>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.CallbackEnd(System.Int32)">
+            <summary>
+            在绘图毁掉函数结束前调用
+            </summary>
+            <param name="id">绘图对象ID</param>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.CallbackEnd(System.Object)">
+            <summary>
+            在绘图毁掉函数结束前调用
+            </summary>
+            <param name="target">绘图对象</param>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.DownSize">
+            <summary>
+            缩减上下文规模
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.GetRecentCallbackAverageTime">
+            <summary>
+            获取最近3秒回调函数运行平均时间
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.PopOutCallerCallbackTime">
+            <summary>
+            获取在caller外的回调函数运行时间，并清空缓存
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.SetDrawIntervals(System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            设置各绘图对象的绘制时间间隔
+            </summary>
         </member>
         <member name="T:ASEva.Utility.GenerationProcessStatus">
             <summary>
