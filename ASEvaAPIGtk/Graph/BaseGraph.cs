@@ -141,6 +141,11 @@ namespace ASEva.UIGtk
         public virtual void UpdateUIWithData() { }
 
         /// <summary>
+        /// (api:gtk=2.0.8) 释放相关资源
+        /// </summary>
+        public virtual void Close() { }
+
+        /// <summary>
         /// 选择图表控件
         /// </summary>
         protected void HandleGraphSelected()

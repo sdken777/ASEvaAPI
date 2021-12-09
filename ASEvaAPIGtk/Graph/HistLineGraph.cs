@@ -22,6 +22,7 @@ namespace ASEva.UIGtk
         [UI] EventBox eventBox;
 
         EventBoxHelper eventBoxHelper = new EventBoxHelper();
+		DrawSwap drawSwap;
 
         public HistLineGraph() : this(new Builder("HistLineGraph.glade"))
         {
@@ -29,9 +30,10 @@ namespace ASEva.UIGtk
 
             overlay.AddOverlay(labelValidation);
             eventBoxHelper.Add(eventBox);
+			drawSwap = new DrawSwap(draw, "ASEva.UIGtk.HistLineGraph");
 
             eventBoxHelper.LeftDown += eventBox_LeftDown;
-            draw.Drawn += draw_Drawn;
+            drawSwap.Paint += draw_Paint;
         }
 
         private HistLineGraph(Builder builder) : base(builder.GetObject("HistLineGraph").Handle)
@@ -39,16 +41,20 @@ namespace ASEva.UIGtk
             builder.Autoconnect(this);
         }
 
+        /// <summary>
+        /// (api:gtk=2.0.8) 释放相关资源
+        /// </summary>
+        public override void Close()
+		{
+			drawSwap.Close();
+		}
+
 		public override void UpdateUIWithData()
 		{
 			if (Data == null || !(Data is HistAndLineData)) return;
 
 			// 数据和验证条件显示
-			if (DrawBeat.CallerBegin(draw))
-			{
-				draw.QueueDraw();
-				DrawBeat.CallerEnd(draw);
-			}
+			drawSwap.Refresh();
 
 			// 标题显示
 			labelTitle.Text = Data == null ? "" : Data.Definition.MainTitle;
@@ -84,13 +90,10 @@ namespace ASEva.UIGtk
             HandleGraphSelected();
         }
 
-        private void draw_Drawn(object o, DrawnArgs args)
+        private void draw_Paint(DrawSwap swap, Cairo.Context cc)
         {
-			DrawBeat.CallbackBegin(draw, "ASEva.UIGtk.HistLineGraph");
-
 			try
 			{
-				var cc = args.Cr;
 				cc.LineWidth = 1;
 				cc.SelectFontFace("Noto Sans CJK SC", Cairo.FontSlant.Normal, Cairo.FontWeight.Normal);
 
@@ -466,8 +469,6 @@ namespace ASEva.UIGtk
 				}
 			}
 			catch (Exception) {}
-
-			DrawBeat.CallbackEnd(draw);
         }
     }
 }

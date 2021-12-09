@@ -21,6 +21,7 @@ namespace ASEva.UIGtk
         [UI] EventBox eventBox;
 
         EventBoxHelper eventBoxHelper = new EventBoxHelper();
+        DrawSwap drawSwap;
 
         public ScatterPointsGraph() : this(new Builder("ScatterPointsGraph.glade"))
         {
@@ -28,9 +29,10 @@ namespace ASEva.UIGtk
 
             overlay.AddOverlay(labelValidation);
             eventBoxHelper.Add(eventBox);
+            drawSwap = new DrawSwap(draw, "ASEva.UIGtk.ScatterPointsGraph");
 
             eventBoxHelper.LeftDown += eventBox_LeftDown;
-            draw.Drawn += draw_Drawn;
+            drawSwap.Paint += draw_Paint;
         }
 
         private ScatterPointsGraph(Builder builder) : base(builder.GetObject("ScatterPointsGraph").Handle)
@@ -38,16 +40,20 @@ namespace ASEva.UIGtk
             builder.Autoconnect(this);
         }
 
+        /// <summary>
+        /// (api:gtk=2.0.8) 释放相关资源
+        /// </summary>
+        public override void Close()
+		{
+			drawSwap.Close();
+		}
+
         public override void UpdateUIWithData()
         {
             if (Data == null || !(Data is ScatterPointsData)) return;
 
             // 数据和验证条件显示
-            if (DrawBeat.CallerBegin(draw))
-            {
-                draw.QueueDraw();
-                DrawBeat.CallerEnd(draw);
-            }
+            drawSwap.Refresh();
 
             // 标题显示
             labelTitle.Text = Data == null ? "" : Data.Definition.MainTitle;
@@ -88,13 +94,10 @@ namespace ASEva.UIGtk
             HandleGraphSelected();
         }
 
-        private void draw_Drawn(object o, DrawnArgs args)
+        private void draw_Paint(DrawSwap swap, Cairo.Context cc)
         {
-            DrawBeat.CallbackBegin(draw, "ASEva.UIGtk.ScatterPointsGraph");
-
             try
             {
-                var cc = args.Cr;
                 cc.LineWidth = 1;
                 cc.SelectFontFace(CairoContextExtension.NotoFontName, Cairo.FontSlant.Normal, Cairo.FontWeight.Normal);
 
@@ -397,8 +400,6 @@ namespace ASEva.UIGtk
                 }
             }
             catch (Exception) {}
-
-            DrawBeat.CallbackEnd(draw);
         }
     }
 }

@@ -20,6 +20,7 @@ namespace ASEva.UIGtk
         [UI] EventBox eventBox;
 
         EventBoxHelper eventBoxHelper = new EventBoxHelper();
+        DrawSwap drawSwap;
 
         public LabelTableGraph() : this(new Builder("LabelTableGraph.glade"))
         {
@@ -27,9 +28,10 @@ namespace ASEva.UIGtk
 
             overlay.AddOverlay(labelValidation);
             eventBoxHelper.Add(eventBox);
+            drawSwap = new DrawSwap(draw, "ASEva.UIGtk.LabelTableGraph");
 
             eventBoxHelper.LeftDown += eventBox_LeftDown;
-            draw.Drawn += draw_Drawn;
+            drawSwap.Paint += draw_Paint;
         }
 
         private LabelTableGraph(Builder builder) : base(builder.GetObject("LabelTableGraph").Handle)
@@ -37,16 +39,20 @@ namespace ASEva.UIGtk
             builder.Autoconnect(this);
         }
 
+        /// <summary>
+        /// (api:gtk=2.0.8) 释放相关资源
+        /// </summary>
+        public override void Close()
+		{
+			drawSwap.Close();
+		}
+
         public override void UpdateUIWithData()
         {
             if (Data == null || !(Data is LabelTableData)) return;
 
             // 数据显示
-            if (DrawBeat.CallerBegin(draw))
-            {
-                draw.QueueDraw();
-                DrawBeat.CallerEnd(draw);
-            }
+            drawSwap.Refresh();
 
             // 标题显示
             labelTitle.Text = Data == null ? "" : Data.Definition.MainTitle;
@@ -112,13 +118,10 @@ namespace ASEva.UIGtk
             HandleGraphSelected();
         }
 
-        private void draw_Drawn(object o, DrawnArgs args)
+        private void draw_Paint(DrawSwap swap, Cairo.Context cc)
         {
-            DrawBeat.CallbackBegin(draw, "ASEva.UIGtk.LabelTableGraph");
-
             try
             {
-                var cc = args.Cr;
                 cc.LineWidth = 1;
                 cc.SelectFontFace(CairoContextExtension.NotoFontName, Cairo.FontSlant.Normal, Cairo.FontWeight.Normal);
 
@@ -338,8 +341,6 @@ namespace ASEva.UIGtk
                 }
             }
             catch (Exception) {}
-
-            DrawBeat.CallbackEnd(draw);
         }
     }
 }

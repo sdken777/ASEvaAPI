@@ -21,6 +21,7 @@ namespace ASEva.UIGtk
         [UI] Box boxValidation;
 
         EventBoxHelper eventBoxHelper = new EventBoxHelper();
+        DrawSwap drawSwap;
 
         public MatrixTableGraph() : this(new Builder("MatrixTableGraph.glade"))
         {
@@ -28,9 +29,10 @@ namespace ASEva.UIGtk
 
             overlay.AddOverlay(boxValidation);
             eventBoxHelper.Add(eventBox);
+            drawSwap = new DrawSwap(draw, "ASEva.UIGtk.MatrixTableGraph");
 
             eventBoxHelper.LeftDown += eventBox_LeftDown;
-            draw.Drawn += draw_Drawn;
+            drawSwap.Paint += draw_Paint;
         }
 
         private MatrixTableGraph(Builder builder) : base(builder.GetObject("MatrixTableGraph").Handle)
@@ -38,16 +40,20 @@ namespace ASEva.UIGtk
             builder.Autoconnect(this);
         }
 
+        /// <summary>
+        /// (api:gtk=2.0.8) 释放相关资源
+        /// </summary>
+        public override void Close()
+		{
+			drawSwap.Close();
+		}
+
         public override void UpdateUIWithData()
         {
             if (Data == null || !(Data is MatrixTableData)) return;
 
             // 数据和验证条件显示
-            if (DrawBeat.CallerBegin(draw))
-            {
-                draw.QueueDraw();
-                DrawBeat.CallerEnd(draw);
-            }
+            drawSwap.Refresh();
 
             if (Data.Definition.Validation == null)
             {
@@ -157,13 +163,10 @@ namespace ASEva.UIGtk
             HandleGraphSelected();
         }
 
-        private void draw_Drawn(object o, DrawnArgs args)
+        private void draw_Paint(DrawSwap swap, Cairo.Context cc)
         {
-            DrawBeat.CallbackBegin(draw, "ASEva.UIGtk.MatrixTableGraph");
-
             try
             {
-                var cc = args.Cr;
                 cc.LineWidth = 1;
                 cc.SelectFontFace(CairoContextExtension.NotoFontName, Cairo.FontSlant.Normal, Cairo.FontWeight.Normal);
 
@@ -389,8 +392,6 @@ namespace ASEva.UIGtk
                 }
             }
             catch (Exception) {}
-
-            DrawBeat.CallbackEnd(draw);
         }
     }
 }

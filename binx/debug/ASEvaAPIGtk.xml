@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIGtk.APIInfo">
             <summary>
-            version=2.0.7
+            version=2.0.8
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.APIInfo.GetAPIVersion">
@@ -44,6 +44,28 @@
         <member name="T:ASEva.UIGtk.DialogHelper">
             <summary>
             (api:gtk=2.0.0) 对话框辅助类
+            </summary>
+        </member>
+        <member name="T:ASEva.UIGtk.DrawSwap">
+            <summary>
+            (api:gtk=2.0.8) 预绘制对象
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.DrawSwap.#ctor(Gtk.Widget,System.String)">
+            <summary>
+            创建预绘制对象
+            </summary>
+            <param name="widget">绘图对象</param>
+            <param name="category">类别，设为空表示不归类</param>
+        </member>
+        <member name="M:ASEva.UIGtk.DrawSwap.Refresh">
+            <summary>
+            刷新，其中会调用Paint
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.DrawSwap.Close">
+            <summary>
+            释放相关资源
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.EventBoxHelper">
@@ -138,6 +160,11 @@
             控件显示更新
             </summary>
         </member>
+        <member name="M:ASEva.UIGtk.BaseGraph.Close">
+            <summary>
+            (api:gtk=2.0.8) 释放相关资源
+            </summary>
+        </member>
         <member name="M:ASEva.UIGtk.BaseGraph.HandleGraphSelected">
             <summary>
             选择图表控件
@@ -148,9 +175,19 @@
             (api:gtk=2.0.0) 柱状折线图可视化控件
             </summary>
         </member>
+        <member name="M:ASEva.UIGtk.HistLineGraph.Close">
+            <summary>
+            (api:gtk=2.0.8) 释放相关资源
+            </summary>
+        </member>
         <member name="T:ASEva.UIGtk.LabelTableGraph">
             <summary>
             (api:gtk=2.0.0) 标签热力图数据可视化窗口
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.LabelTableGraph.Close">
+            <summary>
+            (api:gtk=2.0.8) 释放相关资源
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.MatrixTableGraph">
@@ -158,9 +195,19 @@
             (api:gtk=2.0.0) 矩阵热力图数据可视化窗口
             </summary>
         </member>
+        <member name="M:ASEva.UIGtk.MatrixTableGraph.Close">
+            <summary>
+            (api:gtk=2.0.8) 释放相关资源
+            </summary>
+        </member>
         <member name="T:ASEva.UIGtk.ScatterPointsGraph">
             <summary>
             (api:gtk=2.0.0) 散点图数据可视化窗口
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.ScatterPointsGraph.Close">
+            <summary>
+            (api:gtk=2.0.8) 释放相关资源
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.ValueGraph">
