@@ -517,9 +517,9 @@ namespace ASEva.Graph
                     {
                         for (int y = 0; y < yc; y++)
                         {
+                            if (Data[x, y * 2 + 1] + data.Data[x, y * 2 + 1] == 0) Data[x, y * 2] = 0;
+                            else Data[x, y * 2] = (Data[x, y * 2] * Data[x, y * 2 + 1] + data.Data[x, y * 2] * data.Data[x, y * 2 + 1]) / (Data[x, y * 2 + 1] + data.Data[x, y * 2 + 1]);
                             Data[x, y * 2 + 1] += data.Data[x, y * 2 + 1];
-                            if (Data[x, y * 2 + 1] == 0) Data[x, y * 2] = 0;
-                            else Data[x, y * 2] = (Data[x, y * 2] * Data[x, y * 2 + 1] + data.Data[x, y * 2] * data.Data[x, y * 2 + 1]) / Data[x, y * 2 + 1];
                         }
                     }
                     break;

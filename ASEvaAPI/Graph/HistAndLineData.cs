@@ -439,9 +439,9 @@ namespace ASEva.Graph
                 case HistLineMode.HitRatio:
                     for (int i = 0; i < rows; i++)
                     {
+                        if (Data[i, 1] + data.Data[i, 1] == 0) Data[i, 0] = 0;
+                        else Data[i, 0] = (Data[i, 0] * Data[i, 1] + data.Data[i, 0] * data.Data[i, 1]) / (Data[i, 1] + data.Data[i, 1]);
                         Data[i, 1] += data.Data[i, 1];
-                        if (Data[i, 1] == 0) Data[i, 0] = 0;
-                        else Data[i, 0] = (Data[i, 0] * Data[i, 1] + data.Data[i, 0] * data.Data[i, 1]) / Data[i, 1];
                     }
                     break;
                 case HistLineMode.Min:
@@ -519,9 +519,9 @@ namespace ASEva.Graph
                 case HistLineMode.AverAndMin:
                     for (int i = 0; i < rows; i++)
                     {
+                        if (Data[i, 1] + data.Data[i, 1] == 0) Data[i, 0] = 0;
+                        else Data[i, 0] = (Data[i, 0] * Data[i, 1] + data.Data[i, 0] * data.Data[i, 1]) / (Data[i, 1] + data.Data[i, 1]);
                         Data[i, 1] += data.Data[i, 1];
-                        if (Data[i, 1] == 0) Data[i, 0] = 0;
-                        else Data[i, 0] = (Data[i, 0] * Data[i, 1] + data.Data[i, 0] * data.Data[i, 1]) / Data[i, 1];
 
                         if (Data[i, 3] == 0 || (data.Data[i, 3] > 0 && data.Data[i, 2] < Data[i, 2]))
                         {
@@ -533,9 +533,9 @@ namespace ASEva.Graph
                 case HistLineMode.AverAndMax:
                     for (int i = 0; i < rows; i++)
                     {
+                        if (Data[i, 1] + data.Data[i, 1] == 0) Data[i, 0] = 0;
+                        else Data[i, 0] = (Data[i, 0] * Data[i, 1] + data.Data[i, 0] * data.Data[i, 1]) / (Data[i, 1] + data.Data[i, 1]);
                         Data[i, 1] += data.Data[i, 1];
-                        if (Data[i, 1] == 0) Data[i, 0] = 0;
-                        else Data[i, 0] = (Data[i, 0] * Data[i, 1] + data.Data[i, 0] * data.Data[i, 1]) / Data[i, 1];
 
                         if (Data[i, 3] == 0 || (data.Data[i, 3] > 0 && data.Data[i, 2] > Data[i, 2]))
                         {
@@ -547,13 +547,13 @@ namespace ASEva.Graph
                 case HistLineMode.AverAndAver:
                     for (int i = 0; i < rows; i++)
                     {
+                        if (Data[i, 1] + data.Data[i, 1] == 0) Data[i, 0] = 0;
+                        else Data[i, 0] = (Data[i, 0] * Data[i, 1] + data.Data[i, 0] * data.Data[i, 1]) / (Data[i, 1] + data.Data[i, 1]);
                         Data[i, 1] += data.Data[i, 1];
-                        if (Data[i, 1] == 0) Data[i, 0] = 0;
-                        else Data[i, 0] = (Data[i, 0] * Data[i, 1] + data.Data[i, 0] * data.Data[i, 1]) / Data[i, 1];
 
+                        if (Data[i, 3] + data.Data[i, 3] == 0) Data[i, 2] = 0;
+                        else Data[i, 2] = (Data[i, 2] * Data[i, 3] + data.Data[i, 2] * data.Data[i, 3]) / (Data[i, 3] + data.Data[i, 3]);
                         Data[i, 3] += data.Data[i, 3];
-                        if (Data[i, 3] == 0) Data[i, 2] = 0;
-                        else Data[i, 2] = (Data[i, 2] * Data[i, 3] + data.Data[i, 2] * data.Data[i, 3]) / Data[i, 3];
                     }
                     break;
                 case HistLineMode.AverAndDev:

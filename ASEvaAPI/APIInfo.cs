@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 2, 1); // 修正DrawBeat.CallbackBegin
+            return new Version(2, 2, 2, 2); // 修正HistAndLineData/MatrixTableData/LabelTableData.MergeWith中平均值计算问题
         }
 
         /// <summary>
