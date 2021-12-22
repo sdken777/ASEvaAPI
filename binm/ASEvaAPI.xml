@@ -853,9 +853,22 @@
             </summary>
             <returns>CPU时间，单位秒，返回0表示无效</returns>
         </member>
+        <member name="M:ASEva.Agency.GetEventTypeNames">
+            <summary>
+            (api:app=2.2.3) 获取事件类型名称列表（包括未启用的） 
+            </summary>
+            <returns>事件类型名称列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.ParseBusMessage(ASEva.Samples.BusMessageSample)">
+            <summary>
+            (api:app=2.2.3) 解析总线报文，获取信号值等信息
+            </summary>
+            <param name="busMessage">总线报文</param>
+            <returns>所有信号值及相关信息</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.2.2
+            version=2.2.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4166,6 +4179,31 @@
         <member name="F:ASEva.RecordDataType.Matrices">
             <summary>
             矩阵数据
+            </summary>
+        </member>
+        <member name="T:ASEva.BusSignalValue">
+            <summary>
+            (api:app=2.2.3) 解析总线报文得到的信号值及相关信息
+            </summary>
+        </member>
+        <member name="F:ASEva.BusSignalValue.signalName">
+            <summary>
+            信号名
+            </summary>
+        </member>
+        <member name="F:ASEva.BusSignalValue.value">
+            <summary>
+            信号值
+            </summary>
+        </member>
+        <member name="F:ASEva.BusSignalValue.unit">
+            <summary>
+            单位
+            </summary>
+        </member>
+        <member name="F:ASEva.BusSignalValue.enumValue">
+            <summary>
+            对应的枚举值（若存在枚举信息）
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">

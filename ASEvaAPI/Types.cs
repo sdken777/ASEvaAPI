@@ -914,4 +914,30 @@ namespace ASEva
         /// </summary>
         Matrices = 7,
     }
+
+    /// <summary>
+    /// (api:app=2.2.3) 解析总线报文得到的信号值及相关信息
+    /// </summary>
+    public struct BusSignalValue
+    {
+        /// <summary>
+        /// 信号名
+        /// </summary>
+        public String signalName;
+
+        /// <summary>
+        /// 信号值
+        /// </summary>
+        public double? value;
+
+        /// <summary>
+        /// 单位
+        /// </summary>
+        public String unit;
+
+        /// <summary>
+        /// 对应的枚举值（若存在枚举信息）
+        /// </summary>
+        public String enumValue;
+    }
 }

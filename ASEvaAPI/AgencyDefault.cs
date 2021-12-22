@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ASEva.Samples;
 using ASEva.Utility;
 
 namespace ASEva
@@ -164,6 +165,11 @@ namespace ASEva
         public bool IsInputChannelAvailable(String protocol)
         {
             return false;
+        }
+
+        public BusSignalValue[] ParseBusMessage(BusMessageSample busMessage)
+        {
+            return null;
         }
     }
 
@@ -586,6 +592,11 @@ namespace ASEva
         }
 
         public TimeWithSession ConvertTimeIntoSession(double timeline)
+        {
+            return null;
+        }
+
+        public String[] GetEventTypeNames()
         {
             return null;
         }

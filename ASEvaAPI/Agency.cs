@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using ASEva.Samples;
 using ASEva.Utility;
 
 namespace ASEva
@@ -40,6 +41,7 @@ namespace ASEva
         BusProtocolFileState GetBusProtocolFileState(BusProtocolFileID fileID);
         String GetChannelAliasName(String key);
         bool IsInputChannelAvailable(String protocol);
+        BusSignalValue[] ParseBusMessage(BusMessageSample busMessage);
     }
 
     public interface AgencyHandlerLocal
@@ -133,6 +135,7 @@ namespace ASEva
         AudioDeviceInfo[] GetAudioRecordDevices(String driverID);
         AudioDeviceInfo[] GetAudioReplayDevices(String driverID);
         double GetCPUTime();
+        String[] GetEventTypeNames();
     }
 
     /// <summary>
@@ -1376,6 +1379,25 @@ namespace ASEva
         public static double GetCPUTime()
         {
             return HandlerLocal.GetCPUTime();
+        }
+
+        /// <summary>
+        /// (api:app=2.2.3) 获取事件类型名称列表（包括未启用的） 
+        /// </summary>
+        /// <returns>事件类型名称列表</returns>
+        public static String[] GetEventTypeNames()
+        {
+            return HandlerLocal.GetEventTypeNames();
+        }
+
+        /// <summary>
+        /// (api:app=2.2.3) 解析总线报文，获取信号值等信息
+        /// </summary>
+        /// <param name="busMessage">总线报文</param>
+        /// <returns>所有信号值及相关信息</returns>
+        public static BusSignalValue[] ParseBusMessage(BusMessageSample busMessage)
+        {
+            return HandlerGlobal.ParseBusMessage(busMessage);
         }
     }
 }
