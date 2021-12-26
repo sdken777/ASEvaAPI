@@ -853,9 +853,22 @@
             </summary>
             <returns>CPU时间，单位秒，返回0表示无效</returns>
         </member>
+        <member name="M:ASEva.Agency.GetEventTypeNames">
+            <summary>
+            (api:app=2.2.3) 获取事件类型名称列表（包括未启用的） 
+            </summary>
+            <returns>事件类型名称列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.ParseBusMessage(ASEva.Samples.BusMessageSample)">
+            <summary>
+            (api:app=2.2.3) 解析总线报文，获取信号值等信息
+            </summary>
+            <param name="busMessage">总线报文</param>
+            <returns>所有信号值及相关信息</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.2.1
+            version=2.2.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4168,6 +4181,31 @@
             矩阵数据
             </summary>
         </member>
+        <member name="T:ASEva.BusSignalValue">
+            <summary>
+            (api:app=2.2.3) 解析总线报文得到的信号值及相关信息
+            </summary>
+        </member>
+        <member name="F:ASEva.BusSignalValue.signalName">
+            <summary>
+            信号名
+            </summary>
+        </member>
+        <member name="F:ASEva.BusSignalValue.value">
+            <summary>
+            信号值
+            </summary>
+        </member>
+        <member name="F:ASEva.BusSignalValue.unit">
+            <summary>
+            单位
+            </summary>
+        </member>
+        <member name="F:ASEva.BusSignalValue.enumValue">
+            <summary>
+            对应的枚举值（若存在枚举信息）
+            </summary>
+        </member>
         <member name="T:ASEva.Utility.AttributeParser">
             <summary>
             (api:app=2.0.0) XML属性解析
@@ -4214,6 +4252,84 @@
             </summary>
             <param name="src">WGS坐标系坐标</param>
             <returns>GCJ坐标系坐标</returns>
+        </member>
+        <member name="T:ASEva.Utility.DrawBeat">
+            <summary>
+            (api:app=2.2.2) 绘图时间记录与反馈
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.CallerBegin(System.Int32)">
+            <summary>
+            在调用绘图前调用
+            </summary>
+            <param name="id">绘图对象ID</param>
+            <returns>是否可调用绘图</returns>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.CallerBegin(System.Object)">
+            <summary>
+            在调用绘图前调用
+            </summary>
+            <param name="target">绘图对象</param>
+            <returns>是否可调用绘图</returns>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.CallerEnd(System.Int32)">
+            <summary>
+            在调用绘图后调用
+            </summary>
+            <param name="id">绘图对象ID</param>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.CallerEnd(System.Object)">
+            <summary>
+            在调用绘图后调用
+            </summary>
+            <param name="target">绘图对象</param>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.CallbackBegin(System.Int32,System.String)">
+            <summary>
+            在绘图回调函数开始时调用
+            </summary>
+            <param name="id">绘图对象ID</param>
+            <param name="category">类别，设为空表示不归类</param>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.CallbackBegin(System.Object,System.String)">
+            <summary>
+            在绘图回调函数开始时调用
+            </summary>
+            <param name="target">绘图对象</param>
+            <param name="category">类别，设为空表示不归类</param>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.CallbackEnd(System.Int32)">
+            <summary>
+            在绘图毁掉函数结束前调用
+            </summary>
+            <param name="id">绘图对象ID</param>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.CallbackEnd(System.Object)">
+            <summary>
+            在绘图毁掉函数结束前调用
+            </summary>
+            <param name="target">绘图对象</param>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.DownSize">
+            <summary>
+            缩减上下文规模
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.GetRecentCallbackAverageTime">
+            <summary>
+            获取最近3秒回调函数运行平均时间
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.PopOutCallerCallbackTime">
+            <summary>
+            获取在caller外的回调函数运行时间，并清空缓存
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.SetDrawIntervals(System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            设置各绘图对象的绘制时间间隔
+            </summary>
         </member>
         <member name="T:ASEva.Utility.GenerationProcessStatus">
             <summary>
