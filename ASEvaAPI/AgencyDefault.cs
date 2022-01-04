@@ -5,7 +5,7 @@ using ASEva.Utility;
 
 namespace ASEva
 {
-    class AgencyDefaultGlobal : AgencyHandlerGlobal
+    class AgencyDefault : AgencyHandler
     {
         public string GetConfigFilesRoot()
         {
@@ -171,10 +171,7 @@ namespace ASEva
         {
             return null;
         }
-    }
 
-    class AgencyDefaultLocal : AgencyHandlerLocal
-    {
         public void SendBusMessage(BusMessage msg)
         {
         }

@@ -6,7 +6,7 @@ using ASEva.Utility;
 
 namespace ASEva
 {
-    public interface AgencyHandlerGlobal
+    public interface AgencyHandler
     {
         String GetConfigFilesRoot();
         String GetAppFilesRoot();
@@ -42,10 +42,6 @@ namespace ASEva
         String GetChannelAliasName(String key);
         bool IsInputChannelAvailable(String protocol);
         BusSignalValue[] ParseBusMessage(BusMessageSample busMessage);
-    }
-
-    public interface AgencyHandlerLocal
-    {
         void SendBusMessage(BusMessage msg);
         void SendBusMessage(String messageID, uint? interval);
         void SendRawData(String protocol, double[] values, byte[] binary);
@@ -143,31 +139,17 @@ namespace ASEva
     /// </summary>
     public partial class Agency
     {
-        private static AgencyHandlerLocal handlerLocal = null;
-        public static AgencyHandlerLocal HandlerLocal
+        private static AgencyHandler hander = null;
+        public static AgencyHandler Handler
         {
             private get
             {
-                if (handlerLocal == null) handlerLocal = new AgencyDefaultLocal();
-                return handlerLocal;
+                if (hander == null) hander = new AgencyDefault();
+                return hander;
             }
             set
             {
-                if (value != null) handlerLocal = value;
-            }
-        }
-
-        private static AgencyHandlerGlobal handerGlobal = null;
-        public static AgencyHandlerGlobal HandlerGlobal
-        {
-            private get
-            {
-                if (handerGlobal == null) handerGlobal = new AgencyDefaultGlobal();
-                return handerGlobal;
-            }
-            set
-            {
-                if (value != null) handerGlobal = value;
+                if (value != null) hander = value;
             }
         }
 
@@ -177,7 +159,7 @@ namespace ASEva
         /// <returns>ASEva运行状态</returns>
         public static ApplicationStatus GetAppStatus()
         {
-            return HandlerGlobal.GetAppStatus();
+            return Handler.GetAppStatus();
         }
 
         /// <summary>
@@ -186,7 +168,7 @@ namespace ASEva
         /// <returns>ASEva运行模式</returns>
         public static ApplicationMode GetAppMode()
         {
-            return HandlerGlobal.GetAppMode();
+            return Handler.GetAppMode();
         }
 
         /// <summary>
@@ -195,7 +177,7 @@ namespace ASEva
         /// <returns>是否为在线采集或离线处理生成模式</returns>
         public static bool IsFileOutputEnabled()
         {
-            return HandlerGlobal.IsFileOutputEnabled();
+            return Handler.IsFileOutputEnabled();
         }
 
         /// <summary>
@@ -204,7 +186,7 @@ namespace ASEva
         /// <returns>语言ID，如en表示英文，ch表示中文等</returns>
         public static String GetAppLanguage()
         {
-            return HandlerGlobal.GetAppLanguage();
+            return Handler.GetAppLanguage();
         }
 
         /// <summary>
@@ -213,7 +195,7 @@ namespace ASEva
         /// <returns>在时间线上的兴趣点，单位秒</returns>
         public static double GetInterestTime()
         {
-            return HandlerLocal.GetInterestTime();
+            return Handler.GetInterestTime();
         }
 
         /// <summary>
@@ -222,7 +204,7 @@ namespace ASEva
         /// <returns>兴趣点的时间戳(包括年月日时分秒，毫秒)，若无数据则返回null</returns>
         public static DateTime? GetInterestTimestamp()
         {
-            return HandlerLocal.GetInterestTimestamp();
+            return Handler.GetInterestTimestamp();
         }
 
         /// <summary>
@@ -231,7 +213,7 @@ namespace ASEva
         /// <returns>数据缓存范围</returns>
         public static BufferRange GetBufferRange()
         {
-            return HandlerLocal.GetBufferRange();
+            return Handler.GetBufferRange();
         }
 
         /// <summary>
@@ -240,7 +222,7 @@ namespace ASEva
         /// <returns>Session ID列表，ID为数据起始的系统时间</returns>
         public static DateTime[] GetSessionList()
         {
-            return HandlerLocal.GetSessionList();
+            return Handler.GetSessionList();
         }
 
         /// <summary>
@@ -249,7 +231,7 @@ namespace ASEva
         /// <returns>Session ID列表，ID为数据起始的系统时间</returns>
         public static DateTime[] GetFilteredSessionList()
         {
-            return HandlerLocal.GetFilteredSessionList();
+            return Handler.GetFilteredSessionList();
         }
 
         /// <summary>
@@ -258,7 +240,7 @@ namespace ASEva
         /// <returns>Generation ID列表</returns>
         public static String[] GetGenerationList()
         {
-            return HandlerLocal.GetGenerationList();
+            return Handler.GetGenerationList();
         }
 
         /// <summary>
@@ -268,7 +250,7 @@ namespace ASEva
         /// <returns>Session数据的根路径，若不存在返回null</returns>
         public static String GetSessionPath(DateTime session)
         {
-            return HandlerLocal.GetSessionPath(session);
+            return Handler.GetSessionPath(session);
         }
 
         /// <summary>
@@ -278,7 +260,7 @@ namespace ASEva
         /// <returns>Session公共数据的根路径，若不存在返回null</returns>
         public static String GetSessionPublicDataPath(DateTime session)
         {
-            return HandlerLocal.GetSessionPublicDataPath(session);
+            return Handler.GetSessionPublicDataPath(session);
         }
 
         /// <summary>
@@ -289,7 +271,7 @@ namespace ASEva
         /// <returns>Generation数据的根路径，若不存在返回null</returns>
         public static String GetGenerationPath(DateTime session, String generation)
         {
-            return HandlerLocal.GetGenerationPath(session, generation);
+            return Handler.GetGenerationPath(session, generation);
         }
 
         /// <summary>
@@ -299,7 +281,7 @@ namespace ASEva
         /// <returns>处理完毕的session ID列表</returns>
         public static DateTime[] GetFinishedSessions(String generation)
         {
-            return HandlerLocal.GetFinishedSessions(generation);
+            return Handler.GetFinishedSessions(generation);
         }
 
         /// <summary>
@@ -307,7 +289,7 @@ namespace ASEva
         /// </summary>
         public static void RefreshGenerations()
         {
-            HandlerLocal.RefreshGenerations();
+            Handler.RefreshGenerations();
         }
 
         /// <summary>
@@ -316,7 +298,7 @@ namespace ASEva
         /// <returns>当前输入数据的generation ID，空表示输入数据为原始数据</returns>
         public static String GetCurrentDataGeneration()
         {
-            return HandlerLocal.GetCurrentDataGeneration();
+            return Handler.GetCurrentDataGeneration();
         }
 
         /// <summary>
@@ -325,7 +307,7 @@ namespace ASEva
         /// <returns>当前session的GUID，若未运行则返回null</returns>
         public static String GetCurrentSessionGUID()
         {
-            return HandlerLocal.GetCurrentSessionGUID();
+            return Handler.GetCurrentSessionGUID();
         }
 
         /// <summary>
@@ -335,7 +317,7 @@ namespace ASEva
         /// <returns>本地开始时间，若空表示无此信息</returns>
         public static DateTime? GetStartTimeLocal(DateTime session)
         {
-            return HandlerGlobal.GetStartTimeLocal(session);
+            return Handler.GetStartTimeLocal(session);
         }
 
         /// <summary>
@@ -345,7 +327,7 @@ namespace ASEva
         /// <returns>UTC开始时间，若空表示无此信息</returns>
         public static DateTime? GetStartTimeUTC(DateTime session)
         {
-            return HandlerGlobal.GetStartTimeUTC(session);
+            return Handler.GetStartTimeUTC(session);
         }
 
         /// <summary>
@@ -356,7 +338,7 @@ namespace ASEva
         /// <returns>本地时间戳</returns>
         public static DateTime? GetTimestampLocal(DateTime session, double timeOffset)
         {
-            return HandlerGlobal.GetTimestampLocal(session, timeOffset);
+            return Handler.GetTimestampLocal(session, timeOffset);
         }
 
         /// <summary>
@@ -367,7 +349,7 @@ namespace ASEva
         /// <returns>UTC时间戳</returns>
         public static DateTime? GetTimestampUTC(DateTime session, double timeOffset)
         {
-            return HandlerGlobal.GetTimestampUTC(session, timeOffset);
+            return Handler.GetTimestampUTC(session, timeOffset);
         }
 
         /// <summary>
@@ -377,7 +359,7 @@ namespace ASEva
         /// <returns>相对时间转为本地时间的时间比例</returns>
         public static double GetTimeRatioToLocal(DateTime session)
         {
-            return HandlerGlobal.GetTimeRatioToLocal(session);
+            return Handler.GetTimeRatioToLocal(session);
         }
 
         /// <summary>
@@ -387,7 +369,7 @@ namespace ASEva
         /// <returns>相对时间转为UTC时间的时间比例</returns>
         public static double GetTimeRatioToUTC(DateTime session)
         {
-            return HandlerGlobal.GetTimeRatioToUTC(session);
+            return Handler.GetTimeRatioToUTC(session);
         }
 
         /// <summary>
@@ -396,7 +378,7 @@ namespace ASEva
         /// <returns>当前数据目录的路径，若未设置返回null</returns>
         public static String GetDataPath()
         {
-            return HandlerLocal.GetDataPath();
+            return Handler.GetDataPath();
         }
 
         /// <summary>
@@ -405,7 +387,7 @@ namespace ASEva
         /// <returns>当前全局公共数据目录的路径，若未设置返回null</returns>
         public static String GetGlobalPublicDataPath()
         {
-            return HandlerLocal.GetGlobalPublicDataPath();
+            return Handler.GetGlobalPublicDataPath();
         }
 
         /// <summary>
@@ -414,7 +396,7 @@ namespace ASEva
         /// <returns>配置文件根目录路径</returns>
         public static String GetConfigFilesRoot()
         {
-            return HandlerGlobal.GetConfigFilesRoot();
+            return Handler.GetConfigFilesRoot();
         }
 
         /// <summary>
@@ -423,7 +405,7 @@ namespace ASEva
         /// <returns>应用数据和文档文件根目录路径</returns>
         public static String GetAppFilesRoot()
         {
-            return HandlerGlobal.GetAppFilesRoot();
+            return Handler.GetAppFilesRoot();
         }
 
         /// <summary>
@@ -432,7 +414,7 @@ namespace ASEva
         /// <returns>临时文件根目录路径</returns>
         public static String GetTempFilesRoot()
         {
-            return HandlerGlobal.GetTempFilesRoot();
+            return Handler.GetTempFilesRoot();
         }
 
         /// <summary>
@@ -441,7 +423,7 @@ namespace ASEva
         /// <param name="message"> 想要发送的报文信息</param>
         public static void SendBusMessage(BusMessage message)
         {
-            HandlerLocal.SendBusMessage(message);
+            Handler.SendBusMessage(message);
         }
 
         /// <summary>
@@ -451,7 +433,7 @@ namespace ASEva
         /// <param name="interval">报文发送周期，单位毫秒（至少为10），若设为null则只发送一次</param>
         public static void SendBusMessage(String messageID, uint? interval)
         {
-            HandlerLocal.SendBusMessage(messageID, interval);
+            Handler.SendBusMessage(messageID, interval);
         }
 
         /// <summary>
@@ -462,7 +444,7 @@ namespace ASEva
         /// <param name="binary">二进制数据</param>
         public static void SendRawData(String protocol, double[] values, byte[] binary)
         {
-            HandlerLocal.SendRawData(protocol, values, binary);
+            Handler.SendRawData(protocol, values, binary);
         }
 
         /// <summary>
@@ -471,7 +453,7 @@ namespace ASEva
         /// <param name="channel">手动触发器通道，0~15</param>
         public static void SendManualTrigger(int channel)
         {
-            HandlerLocal.SendManualTrigger(channel);
+            Handler.SendManualTrigger(channel);
         }
 
         /// <summary>
@@ -482,7 +464,7 @@ namespace ASEva
         /// <returns>图表对象，若不存在返回null</returns>
         public static GraphData GetGraphData(DateTime session, int id)
         {
-            return HandlerGlobal.GetGraphData(session, id);
+            return Handler.GetGraphData(session, id);
         }
 
         /// <summary>
@@ -491,7 +473,7 @@ namespace ASEva
         /// <param name="scene">想要添加的场景片段描述</param>
         public static void AddSceneData(SceneData scene)
         {
-            HandlerGlobal.AddSceneData(scene);
+            Handler.AddSceneData(scene);
         }
 
         /// <summary>
@@ -501,7 +483,7 @@ namespace ASEva
         /// <returns>返回设备状态</returns>
         public static GeneralDeviceStatus GetDeviceStatus(String type)
         {
-            return HandlerLocal.GetDeviceStatus(type);
+            return Handler.GetDeviceStatus(type);
         }
 
         /// <summary>
@@ -511,7 +493,7 @@ namespace ASEva
         /// <returns>各子设备的设备状态</returns>
         public static GeneralDeviceStatus[] GetChildDeviceStatus(String type)
         {
-            return HandlerLocal.GetChildDeviceStatus(type);
+            return Handler.GetChildDeviceStatus(type);
         }
 
         /// <summary>
@@ -520,7 +502,7 @@ namespace ASEva
         /// <param name="text">想要打印的文本</param>
         public static void Print(String text)
         {
-            HandlerGlobal.Print(text);
+            Handler.Print(text);
         }
 
         /// <summary>
@@ -530,7 +512,7 @@ namespace ASEva
         /// <param name="level">清单信息级别</param>
         public static void Log(String text, LogLevel level)
         {
-            HandlerGlobal.Log(text, level);
+            Handler.Log(text, level);
         }
 
         /// <summary>
@@ -541,7 +523,7 @@ namespace ASEva
         /// <returns>是否有效</returns>
         public static bool IsMessageValid(String messageID, bool optional)
         {
-            return HandlerGlobal.IsMessageValid(messageID, optional);
+            return Handler.IsMessageValid(messageID, optional);
         }
 
         /// <summary>
@@ -552,7 +534,7 @@ namespace ASEva
         /// <returns>是否有效</returns>
         public static bool IsSignalValid(String signalID, bool optional)
         {
-            return HandlerGlobal.IsSignalValid(signalID, optional);
+            return Handler.IsSignalValid(signalID, optional);
         }
 
         /// <summary>
@@ -562,7 +544,7 @@ namespace ASEva
         /// <returns>信号列表，若该报文不存在则返回null</returns>
         public static String[] GetSignalNamesOfBusMessage(String messageID)
         {
-            return HandlerLocal.GetSignalNamesOfBusMessage(messageID);
+            return Handler.GetSignalNamesOfBusMessage(messageID);
         }
 
         /// <summary>
@@ -571,7 +553,7 @@ namespace ASEva
         /// <returns>是否已连接互联网</returns>
         public static bool IsInternetConnected()
         {
-            return HandlerLocal.IsInternetConnected();
+            return Handler.IsInternetConnected();
         }
 
         /// <summary>
@@ -580,7 +562,7 @@ namespace ASEva
         /// <returns>内存容量，单位为字节，获取失败时返回0</returns>
         public static ulong GetMemoryCapacity()
         {
-            return HandlerLocal.GetMemoryCapacity();
+            return Handler.GetMemoryCapacity();
         }
 
         /// <summary>
@@ -590,7 +572,7 @@ namespace ASEva
         /// <param name="context">调用上下文。由于本函数为非阻塞，在结束后需要通过该对象在未来时刻获取调用状态和响应字符串</param>
         public static void CallWebApi(String request, WebApiContext context)
         {
-            HandlerLocal.CallWebApi(request, context);
+            Handler.CallWebApi(request, context);
         }
 
         /// <summary>
@@ -601,7 +583,7 @@ namespace ASEva
         /// <param name="context">调用上下文。由于本函数为非阻塞，在结束后需要通过该对象在未来时刻获取调用状态和响应字符串</param>
         public static void CallWebApiPost(String request, byte[] body, WebApiContext context)
         {
-            HandlerLocal.CallWebApiPost(request, body, context);
+            Handler.CallWebApiPost(request, body, context);
         }
 
         /// <summary>
@@ -613,7 +595,7 @@ namespace ASEva
         /// <param name="context">调用上下文。由于本函数为非阻塞，在结束后需要通过该对象在未来时刻获取调用状态和响应字符串</param>
         public static void CallWebApiPost(String request, byte[] body, WebPostContentType contentType, WebApiContext context)
         {
-            HandlerLocal.CallWebApiPost(request, body, contentType, context);
+            Handler.CallWebApiPost(request, body, contentType, context);
         }
 
         /// <summary>
@@ -623,7 +605,7 @@ namespace ASEva
         /// <returns>数据通道别名，若未找到返回null</returns>
         public static String GetChannelAliasName(String key)
         {
-            return HandlerGlobal.GetChannelAliasName(key);
+            return Handler.GetChannelAliasName(key);
         }
 
         /// <summary>
@@ -633,7 +615,7 @@ namespace ASEva
         /// <returns>该通道是否可用</returns>
         public static bool IsInputChannelAvailable(String protocol)
         {
-            return HandlerGlobal.IsInputChannelAvailable(protocol);
+            return Handler.IsInputChannelAvailable(protocol);
         }
 
         /// <summary>
@@ -643,7 +625,7 @@ namespace ASEva
         /// <returns>样本标题，null表示通道不存在或该样本通道无标题</returns>
         public static List<String> GetSampleTitle(String protocol)
         {
-            return HandlerGlobal.GetSampleTitle(protocol);
+            return Handler.GetSampleTitle(protocol);
         }
 
         /// <summary>
@@ -652,7 +634,7 @@ namespace ASEva
         /// <returns>名称列表</returns>
         public static String[] GetManualTriggerNames()
         {
-            return HandlerLocal.GetManualTriggerNames();
+            return Handler.GetManualTriggerNames();
         }
 
         /// <summary>
@@ -662,7 +644,7 @@ namespace ASEva
         /// <returns>手动触发器通道的名称，若序号超出范围则返回null</returns>
         public static String GetManualTriggerName(int index)
         {
-            return HandlerLocal.GetManualTriggerName(index);
+            return Handler.GetManualTriggerName(index);
         }
 
         /// <summary>
@@ -672,7 +654,7 @@ namespace ASEva
         /// <param name="name">手动触发器通道的名称，若值为空则忽略</param>
         public static void SetManualTriggerName(int index, String name)
         {
-            HandlerLocal.SetManualTriggerName(index, name);
+            Handler.SetManualTriggerName(index, name);
         }
 
         /// <summary>
@@ -681,7 +663,7 @@ namespace ASEva
         /// <param name="signalID">信号ID</param>
         public static void AddSignalReference(String signalID)
         {
-            HandlerGlobal.AddSignalReference(signalID);
+            Handler.AddSignalReference(signalID);
         }
 
         /// <summary>
@@ -690,7 +672,7 @@ namespace ASEva
         /// <param name="signalID">信号ID</param>
         public static void RemoveSignalReference(String signalID)
         {
-            HandlerGlobal.RemoveSignalReference(signalID);
+            Handler.RemoveSignalReference(signalID);
         }
 
         /// <summary>
@@ -703,7 +685,7 @@ namespace ASEva
         /// <returns>任务运行结果</returns>
         public static TaskResult RunStandaloneTask(object caller, String taskClassID, String config, out String returnValue)
         {
-            return HandlerLocal.RunStandaloneTask(caller, taskClassID, config, out returnValue);
+            return Handler.RunStandaloneTask(caller, taskClassID, config, out returnValue);
         }
 
         /// <summary>
@@ -712,7 +694,7 @@ namespace ASEva
         /// <param name="targetTimestamp">目标时间戳</param>
         public static void SetInterestTimestamp(DateTime targetTimestamp)
         {
-            HandlerLocal.SetInterestTimestamp(targetTimestamp);
+            Handler.SetInterestTimestamp(targetTimestamp);
         }
 
         /// <summary>
@@ -721,7 +703,7 @@ namespace ASEva
         /// <param name="targetTimeline">目标时间点</param>
         public static void SetInterestTime(double targetTimeline)
         {
-            HandlerLocal.SetInterestTime(targetTimeline);
+            Handler.SetInterestTime(targetTimeline);
         }
 
         /// <summary>
@@ -731,7 +713,7 @@ namespace ASEva
         /// <returns>是否成功</returns>
         public static bool DeleteToRecycleBin(String path)
         {
-            return HandlerGlobal.DeleteToRecycleBin(path);
+            return Handler.DeleteToRecycleBin(path);
         }
 
         /// <summary>
@@ -741,7 +723,7 @@ namespace ASEva
         /// <param name="value">全局变量value，若为null则忽略</param>
         public static void SetGlobalVariable(String key, String value)
         {
-            HandlerGlobal.SetGlobalVariable(key, value);
+            Handler.SetGlobalVariable(key, value);
         }
 
         /// <summary>
@@ -752,7 +734,7 @@ namespace ASEva
         /// <returns>全局变量value</returns>
         public static String GetGlobalVariable(String key, String defaultValue)
         {
-            return HandlerGlobal.GetGlobalVariable(key, defaultValue);
+            return Handler.GetGlobalVariable(key, defaultValue);
         }
 
         /// <summary>
@@ -762,7 +744,7 @@ namespace ASEva
         /// <param name="value">全局参数value，若为null则忽略</param>
         public static void SetGlobalParameter(String key, String value)
         {
-            HandlerGlobal.SetGlobalParameter(key, value);
+            Handler.SetGlobalParameter(key, value);
         }
 
         /// <summary>
@@ -773,7 +755,7 @@ namespace ASEva
         /// <returns>全局参数value</returns>
         public static String GetGlobalParameter(String key, String defaultValue)
         {
-            return HandlerGlobal.GetGlobalParameter(key, defaultValue);
+            return Handler.GetGlobalParameter(key, defaultValue);
         }
 
         /// <summary>
@@ -783,7 +765,7 @@ namespace ASEva
         /// <returns>以分号分割的全局路径value（仅返回存在的部分），若key为null、""则返回null</returns>
         public static String GetGlobalPath(String key)
         {
-            return HandlerGlobal.GetGlobalPath(key);
+            return Handler.GetGlobalPath(key);
         }
 
         /// <summary>
@@ -793,7 +775,7 @@ namespace ASEva
         /// <param name="path">以分号分割的全局路径value，不存在的部分将被忽略</param>
         public static void SetGlobalPath(String key, String path)
         {
-            HandlerLocal.SetGlobalPath(key, path);
+            Handler.SetGlobalPath(key, path);
         }
 
         /// <summary>
@@ -802,7 +784,7 @@ namespace ASEva
         /// <returns>总线协议文件信息列表</returns>
         public static BusFileInfo[] GetBusProtocolFilesInfo()
         {
-            return HandlerLocal.GetBusProtocolFilesInfo();
+            return Handler.GetBusProtocolFilesInfo();
         }
 
         /// <summary>
@@ -812,7 +794,7 @@ namespace ASEva
         /// <returns>总线通道（1~16），若未配置则返回null</returns>
         public static int? GetBusProtocolFileChannel(String fileID)
         {
-            return HandlerLocal.GetBusProtocolFileChannel(fileID);
+            return Handler.GetBusProtocolFileChannel(fileID);
         }
 
         /// <summary>
@@ -821,7 +803,7 @@ namespace ASEva
         /// <returns>信号ID列表</returns>
         public static String[] GetBusFloat32Signals()
         {
-            return HandlerLocal.GetBusFloat32Signals();
+            return Handler.GetBusFloat32Signals();
         }
 
         /// <summary>
@@ -832,7 +814,7 @@ namespace ASEva
         /// <returns>每秒帧率，0表示无效</returns>
         public static float GetBusMessageFPS(int channel, uint localID)
         {
-            return HandlerLocal.GetBusMessageFPS(channel, localID);
+            return Handler.GetBusMessageFPS(channel, localID);
         }
 
         /// <summary>
@@ -843,7 +825,7 @@ namespace ASEva
         /// <returns>总线报文信息，无信息则返回null</returns>
         public static BusMessageInfo GetBusMessageInfo(int channel, uint localID)
         {
-            return HandlerLocal.GetBusMessageInfo(channel, localID);
+            return Handler.GetBusMessageInfo(channel, localID);
         }
 
         /// <summary>
@@ -853,7 +835,7 @@ namespace ASEva
         /// <returns>总线报文的信息，报文不存在则返回null</returns>
         public static BusMessageInfo GetBusMessageInfo(String busMessageID)
         {
-            return HandlerGlobal.GetBusMessageInfo(busMessageID);
+            return Handler.GetBusMessageInfo(busMessageID);
         }
 
         /// <summary>
@@ -863,7 +845,7 @@ namespace ASEva
         /// <returns>是否已绑定</returns>
         public static bool IsBusMessageBinded(string busMessageID)
         {
-            return HandlerLocal.IsBusMessageBinded(busMessageID);
+            return Handler.IsBusMessageBinded(busMessageID);
         }
 
         /// <summary>
@@ -872,7 +854,7 @@ namespace ASEva
         /// <returns>事件对象列表</returns>
         public static object[] GetEventHandles()
         {
-            return HandlerLocal.GetEventHandles();
+            return Handler.GetEventHandles();
         }
 
         /// <summary>
@@ -882,7 +864,7 @@ namespace ASEva
         /// <returns>事件完整信息，null表示事件对象无效或信息不完整</returns>
         public static EventInfo GetEventInfo(object eventHandle)
         {
-            return HandlerLocal.GetEventInfo(eventHandle);
+            return Handler.GetEventInfo(eventHandle);
         }
 
         /// <summary>
@@ -891,7 +873,7 @@ namespace ASEva
         /// <param name="eventHandle">事件对象</param>
         public static void RemoveEvent(object eventHandle)
         {
-            HandlerLocal.RemoveEvent(eventHandle);
+            Handler.RemoveEvent(eventHandle);
         }
 
         /// <summary>
@@ -901,7 +883,7 @@ namespace ASEva
         /// <param name="comment">事件注释</param>
         public static void SetEventComment(object eventHandle, String comment)
         {
-            HandlerLocal.SetEventComment(eventHandle, comment);
+            Handler.SetEventComment(eventHandle, comment);
         }
 
         /// <summary>
@@ -911,7 +893,7 @@ namespace ASEva
         /// <param name="interestTarget">目标兴趣点，单位秒（空表示不设置兴趣点）</param>
         public static void StartReplay(double startTimeline, double? interestTarget)
         {
-            HandlerLocal.StartReplay(startTimeline, interestTarget);
+            Handler.StartReplay(startTimeline, interestTarget);
         }
 
         /// <summary>
@@ -922,7 +904,7 @@ namespace ASEva
         /// <returns>是否成功</returns>
         public static bool StartOnline(String controllerName, bool previewOnly)
         {
-            return HandlerLocal.StartOnline(controllerName, previewOnly);
+            return Handler.StartOnline(controllerName, previewOnly);
         }
 
         /// <summary>
@@ -930,7 +912,7 @@ namespace ASEva
         /// </summary>
         public static void StopRunning()
         {
-            HandlerLocal.StopRunning();
+            Handler.StopRunning();
         }
 
         /// <summary>
@@ -940,7 +922,7 @@ namespace ASEva
         /// <returns>是否成功</returns>
         public static bool StopRunning(String controllerName)
         {
-            return HandlerLocal.StopRunning(controllerName);
+            return Handler.StopRunning(controllerName);
         }
 
         /// <summary>
@@ -950,7 +932,7 @@ namespace ASEva
         /// <returns>时间点，session不存在则返回null</returns>
         public static double? GetSessionTimeline(DateTime session)
         {
-            return HandlerLocal.GetSessionTimeline(session);
+            return Handler.GetSessionTimeline(session);
         }
 
         /// <summary>
@@ -960,7 +942,7 @@ namespace ASEva
         /// <returns>Session长度，单位秒，session不存在则返回null</returns>
         public static double? GetSessionLength(DateTime session)
         {
-            return HandlerLocal.GetSessionLength(session);
+            return Handler.GetSessionLength(session);
         }
 
         /// <summary>
@@ -969,7 +951,7 @@ namespace ASEva
         /// <returns>图表报告ID列表</returns>
         public static int[] GetGraphIDList()
         {
-            return HandlerLocal.GetGraphIDList();
+            return Handler.GetGraphIDList();
         }
 
         /// <summary>
@@ -979,7 +961,7 @@ namespace ASEva
         /// <returns>图表报告ID</returns>
         public static int? GetGraphIDWithTitle(String title)
         {
-            return HandlerLocal.GetGraphIDWithTitle(title);
+            return Handler.GetGraphIDWithTitle(title);
         }
 
         /// <summary>
@@ -989,7 +971,7 @@ namespace ASEva
         /// <returns>图表报告标题，若不存在则返回null</returns>
         public static String GetGraphTitle(int id)
         {
-            return HandlerLocal.GetGraphTitle(id);
+            return Handler.GetGraphTitle(id);
         }
 
         /// <summary>
@@ -1000,7 +982,7 @@ namespace ASEva
         /// <returns>信号名称，若无该ID信号则返回null</returns>
         public static String GetSignalName(String signalID, bool fullName)
         {
-            return HandlerLocal.GetSignalName(signalID, fullName);
+            return Handler.GetSignalName(signalID, fullName);
         }
 
         /// <summary>
@@ -1010,7 +992,7 @@ namespace ASEva
         /// <returns>总线信号的信息，信号不存在或信号非总线信号则返回null</returns>
         public static BusSignalInfo GetBusSignalInfo(String busSignalID)
         {
-            return HandlerGlobal.GetBusSignalInfo(busSignalID);
+            return Handler.GetBusSignalInfo(busSignalID);
         }
 
         /// <summary>
@@ -1021,7 +1003,7 @@ namespace ASEva
         /// <returns>是否有数据可供显示</returns>
         public static bool IsVideoDataAvailable(int channel, uint? tolerance)
         {
-            return HandlerLocal.IsVideoDataAvailable(channel, tolerance);
+            return Handler.IsVideoDataAvailable(channel, tolerance);
         }
 
         /// <summary>
@@ -1031,7 +1013,7 @@ namespace ASEva
         /// <returns>特殊摄像头类型</returns>
         public static Samples.SpecialCameraType GetVideoSpecialType(int channel)
         {
-            return HandlerLocal.GetVideoSpecialType(channel);
+            return Handler.GetVideoSpecialType(channel);
         }
 
         /// <summary>
@@ -1041,7 +1023,7 @@ namespace ASEva
         /// <returns>在session中的时间，若超出范围则返回null</returns>
         public static TimeWithSession ConvertTimeIntoSession(double timeline)
         {
-            return  HandlerLocal.ConvertTimeIntoSession(timeline);
+            return  Handler.ConvertTimeIntoSession(timeline);
         }
 
         /// <summary>
@@ -1050,7 +1032,7 @@ namespace ASEva
         /// <returns>筛选后的所有session的时长总长</returns>
         public static double GetFilteredSessionListTotalLength()
         {
-            return HandlerLocal.GetFilteredSessionListTotalLength();
+            return Handler.GetFilteredSessionListTotalLength();
         }
 
         /// <summary>
@@ -1059,7 +1041,7 @@ namespace ASEva
         /// <returns>场景ID列表</returns>
         public static String[] GetSceneIDList()
         {
-            return HandlerLocal.GetSceneIDList();
+            return Handler.GetSceneIDList();
         }
 
         /// <summary>
@@ -1068,7 +1050,7 @@ namespace ASEva
         /// <returns>场景标题表</returns>
         public static Dictionary<String, SceneTitle> GetSceneTitleTable()
         {
-            return HandlerLocal.GetSceneTitleTable();
+            return Handler.GetSceneTitleTable();
         }
 
         /// <summary>
@@ -1078,7 +1060,7 @@ namespace ASEva
         /// <returns>返回各通道的数据状态，key为通道ID</returns>
         public static Dictionary<String, bool> GetChannelStatusTable(uint? tolerance)
         {
-            return HandlerLocal.GetChannelStatusTable(tolerance);
+            return Handler.GetChannelStatusTable(tolerance);
         }
 
         /// <summary>
@@ -1089,7 +1071,7 @@ namespace ASEva
         /// <returns>开启或关闭是否成功</returns>
         public static bool SetControlFlag(String controllerName, bool enabled)
         {
-            return HandlerLocal.SetControlFlag(controllerName, enabled);
+            return Handler.SetControlFlag(controllerName, enabled);
         }
 
         /// <summary>
@@ -1100,7 +1082,7 @@ namespace ASEva
         /// <returns>配置的字符串描述，null表示找不到类别ID对应的模块</returns>
         public static String GetModuleConfig(object caller, String moduleClassID)
         {
-            return HandlerLocal.GetModuleConfig(caller, moduleClassID);
+            return Handler.GetModuleConfig(caller, moduleClassID);
         }
 
         /// <summary>
@@ -1111,7 +1093,7 @@ namespace ASEva
         /// <param name="config">配置的字符串描述</param>
         public static void SetModuleConfig(object caller, String moduleClassID, String config)
         {
-            HandlerLocal.SetModuleConfig(caller, moduleClassID, config);
+            Handler.SetModuleConfig(caller, moduleClassID, config);
         }
 
         /// <summary>
@@ -1122,7 +1104,7 @@ namespace ASEva
         /// <returns>组件配置的状态，若找不到类别ID对应的模块则返回 ASEva.ConfigStatus.Disabled </returns>
         public static ConfigStatus GetModuleConfigStatus(object caller, String moduleClassID)
         {
-            return HandlerLocal.GetModuleConfigStatus(caller, moduleClassID);
+            return Handler.GetModuleConfigStatus(caller, moduleClassID);
         }
 
         /// <summary>
@@ -1133,7 +1115,7 @@ namespace ASEva
         /// <returns>各子功能配置的状态，若找不到类别ID对应的模块或无子功能配置则返回null</returns>
         public static ConfigStatus[] GetModuleChildConfigStatus(object caller, String moduleClassID)
         {
-            return HandlerLocal.GetModuleChildConfigStatus(caller, moduleClassID);
+            return Handler.GetModuleChildConfigStatus(caller, moduleClassID);
         }
 
         /// <summary>
@@ -1142,7 +1124,7 @@ namespace ASEva
         /// <returns>总线设备列表，键为设备ID，值为对应的设备信息</returns>
         public static Dictionary<BusDeviceID, BusDeviceInfo> GetBusDevices()
         {
-            return HandlerLocal.GetBusDevices();
+            return Handler.GetBusDevices();
         }
 
         /// <summary>
@@ -1151,7 +1133,7 @@ namespace ASEva
         /// <returns>视频设备列表，键为设备ID，值为对应的设备信息</returns>
         public static Dictionary<VideoDeviceID, VideoDeviceInfo> GetVideoDevices()
         {
-            return HandlerLocal.GetVideoDevices();
+            return Handler.GetVideoDevices();
         }
 
         /// <summary>
@@ -1161,7 +1143,7 @@ namespace ASEva
         /// <returns>文件状态</returns>
         public static BusProtocolFileState GetBusProtocolFileState(BusProtocolFileID fileID)
         {
-            return HandlerGlobal.GetBusProtocolFileState(fileID);
+            return Handler.GetBusProtocolFileState(fileID);
         }
 
         /// <summary>
@@ -1171,7 +1153,7 @@ namespace ASEva
         /// <returns>版本列表，键为C++模块的类型ID，值为版本字符串</returns>
         public static Dictionary<String, String> GetNativePluginVersions(String prefix)
         {
-            return HandlerLocal.GetNativePluginVersions(prefix);
+            return Handler.GetNativePluginVersions(prefix);
         }
 
         /// <summary>
@@ -1179,7 +1161,7 @@ namespace ASEva
         /// </summary>
         public static void ConfigOfflineMapPath()
         {
-            HandlerLocal.ConfigOfflineMapPath();
+            Handler.ConfigOfflineMapPath();
         }
 
         /// <summary>
@@ -1191,7 +1173,7 @@ namespace ASEva
         /// <returns>离线地图图像，空表示获取失败</returns>
         public static object GetOfflineMapImage(IntSize imageSize, LocPoint centerLocation, int zoom)
         {
-            return HandlerLocal.GetOfflineMapImage(imageSize, centerLocation, zoom);
+            return Handler.GetOfflineMapImage(imageSize, centerLocation, zoom);
         }
 
         /// <summary>
@@ -1203,7 +1185,7 @@ namespace ASEva
         /// <returns>该经纬度对应的像素坐标</returns>
         public static FloatPoint ConvertOfflineMapLocToPix(LocPoint origin, int zoom, LocPoint point)
         {
-            return HandlerLocal.ConvertOfflineMapLocToPix(origin, zoom, point);
+            return Handler.ConvertOfflineMapLocToPix(origin, zoom, point);
         }
 
         /// <summary>
@@ -1215,7 +1197,7 @@ namespace ASEva
         /// <returns>该像素坐标对应的经纬度坐标</returns>
         public static LocPoint ConvertOfflineMapPixToLoc(LocPoint origin, int zoom, FloatPoint pixel)
         {
-            return HandlerLocal.ConvertOfflineMapPixToLoc(origin, zoom, pixel);
+            return Handler.ConvertOfflineMapPixToLoc(origin, zoom, pixel);
         }
 
         /// <summary>
@@ -1228,7 +1210,7 @@ namespace ASEva
         /// <returns>返回信号配置，若删除则返回null</returns>
         public static SignalConfig SelectSignal(SignalConfig origin, bool withScale, bool withSignBit, String unit)
         {
-            return HandlerLocal.SelectSignal(origin, withScale, withSignBit, unit);
+            return Handler.SelectSignal(origin, withScale, withSignBit, unit);
         }
 
         /// <summary>
@@ -1238,7 +1220,7 @@ namespace ASEva
         /// <returns>返回总线报文配置，若删除则返回null</returns>
         public static String SelectBusMessage(String originMessageID)
         {
-            return HandlerLocal.SelectBusMessage(originMessageID);
+            return Handler.SelectBusMessage(originMessageID);
         }
 
         /// <summary>
@@ -1247,7 +1229,7 @@ namespace ASEva
         /// <returns>视频帧获取器</returns>
         public static VideoFrameGetter CreateVideoFrameGetter()
         {
-            return HandlerLocal.CreateVideoFrameGetter();
+            return Handler.CreateVideoFrameGetter();
         }
 
         /// <summary>
@@ -1257,7 +1239,7 @@ namespace ASEva
         /// <param name="existSignalIDList">既存的选中信号ID列表</param>
         public static void SelectSignals(SelectSignalHandler handler, List<String> existSignalIDList)
         {
-            HandlerLocal.SelectSignals(handler, existSignalIDList);
+            Handler.SelectSignals(handler, existSignalIDList);
         }
 
         /// <summary>
@@ -1267,7 +1249,7 @@ namespace ASEva
         /// <returns>新选择的总线信号ID</returns>
         public static List<String> SelectBusFloat32Signal(List<String> existSignalIDList)
         {
-            return HandlerLocal.SelectBusFloat32Signal(existSignalIDList);
+            return Handler.SelectBusFloat32Signal(existSignalIDList);
         }
 
         /// <summary>
@@ -1278,7 +1260,7 @@ namespace ASEva
         /// <param name="config">初始化配置</param>
         public static void OpenDialog(object caller, String dialogClassID, String config)
         {
-            HandlerLocal.OpenDialog(caller, dialogClassID, config);
+            Handler.OpenDialog(caller, dialogClassID, config);
         }
 
         /// <summary>
@@ -1290,7 +1272,7 @@ namespace ASEva
         /// <param name="newWorkspaceIfNeeded">如果当前工作空间位置不足，是否添加至新工作空间</param>
         public static void AddWindow(object caller, String windowClassID, String config, bool newWorkspaceIfNeeded)
         {
-            HandlerLocal.AddWindow(caller, windowClassID, config, newWorkspaceIfNeeded);
+            Handler.AddWindow(caller, windowClassID, config, newWorkspaceIfNeeded);
         }
 
         /// <summary>
@@ -1301,7 +1283,7 @@ namespace ASEva
         /// <param name="icon">图标，若null则不更改</param>
         public static void SetWindowTitle(object window, String title, object icon)
         {
-            HandlerLocal.SetWindowTitle(window, title, icon);
+            Handler.SetWindowTitle(window, title, icon);
         }
 
         /// <summary>
@@ -1311,7 +1293,7 @@ namespace ASEva
         /// <param name="icon">图标，若null则不更改</param>
         public static void SetCurrentDialogTitle(String title, object icon)
         {
-            HandlerLocal.SetCurrentDialogTitle(title, icon);
+            Handler.SetCurrentDialogTitle(title, icon);
         }
 
         /// <summary>
@@ -1321,7 +1303,7 @@ namespace ASEva
         /// <returns>新选择的总线协议文件</returns>
         public static BusProtocolFileID[] SelectBusProtocolFiles(BusProtocolFileID[] selected)
         {
-            return HandlerLocal.SelectBusProtocolFiles(selected);
+            return Handler.SelectBusProtocolFiles(selected);
         }
 
         /// <summary>
@@ -1329,7 +1311,7 @@ namespace ASEva
         /// </summary>
         public static void ConfigDataEncryption()
         {
-            HandlerLocal.ConfigDataEncryption();
+            Handler.ConfigDataEncryption();
         }
 
         /// <summary>
@@ -1340,7 +1322,7 @@ namespace ASEva
         /// <param name="replayer">回放接口，若无则设置额null</param>
         public static void RegisterAudioDriver(AudioDriverInfo driver, AudioRecorder recorder, AudioReplayer replayer)
         {
-            HandlerLocal.RegisterAudioDriver(driver, recorder, replayer);
+            Handler.RegisterAudioDriver(driver, recorder, replayer);
         }
 
         /// <summary>
@@ -1349,7 +1331,7 @@ namespace ASEva
         /// <returns>已注册的音频驱动信息列表，若未注册任何有效驱动则返回null</returns>
         public static AudioDriverInfo[] GetAudioDrivers()
         {
-            return HandlerLocal.GetAudioDrivers();
+            return Handler.GetAudioDrivers();
         }
 
         /// <summary>
@@ -1359,7 +1341,7 @@ namespace ASEva
         /// <returns>音频采集设备信息列表，若无该驱动或驱动下无采集设备则返回null</returns>
         public static AudioDeviceInfo[] GetAudioRecordDevices(String driverID)
         {
-            return HandlerLocal.GetAudioRecordDevices(driverID);
+            return Handler.GetAudioRecordDevices(driverID);
         }
 
         /// <summary>
@@ -1369,7 +1351,7 @@ namespace ASEva
         /// <returns>音频回放设备信息列表，若无该驱动或驱动下无回放设备则返回null</returns>
         public static AudioDeviceInfo[] GetAudioReplayDevices(String driverID)
         {
-            return HandlerLocal.GetAudioReplayDevices(driverID);
+            return Handler.GetAudioReplayDevices(driverID);
         }
         
         /// <summary>
@@ -1378,7 +1360,7 @@ namespace ASEva
         /// <returns>CPU时间，单位秒，返回0表示无效</returns>
         public static double GetCPUTime()
         {
-            return HandlerLocal.GetCPUTime();
+            return Handler.GetCPUTime();
         }
 
         /// <summary>
@@ -1387,7 +1369,7 @@ namespace ASEva
         /// <returns>事件类型名称列表</returns>
         public static String[] GetEventTypeNames()
         {
-            return HandlerLocal.GetEventTypeNames();
+            return Handler.GetEventTypeNames();
         }
 
         /// <summary>
@@ -1397,7 +1379,7 @@ namespace ASEva
         /// <returns>所有信号值及相关信息</returns>
         public static BusSignalValue[] ParseBusMessage(BusMessageSample busMessage)
         {
-            return HandlerGlobal.ParseBusMessage(busMessage);
+            return Handler.ParseBusMessage(busMessage);
         }
     }
 }

@@ -39,10 +39,16 @@ namespace ASEva
         public virtual NativeClass[] GetNativeClasses() { return null; }
 
         /// <summary>
-        /// [可选实现] 获取插件包含的所有独立任务组件的定义对象时调用
+        /// [可选实现] 获取插件包含的所有独立任务组件的定义对象时被调用
         /// </summary>
         /// <returns>独立任务组件定义对象的列表</returns>
         public virtual TaskClass[] GetTaskClasses() { return null; }
+
+        /// <summary>
+        /// (api:app=2.3.0) [可选实现] 获取插件包含的主流程时被调用
+        /// </summary>
+        /// <returns>主流程对象</returns>
+        public virtual MainWorkflow GetMainWorkflow() { return null; }
 
         /// <summary>
         /// [可选实现] 获取插件包需要使用的所有全局路径的键

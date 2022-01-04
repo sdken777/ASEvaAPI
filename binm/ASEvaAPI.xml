@@ -868,7 +868,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.2.3
+            version=2.3.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -2426,6 +2426,301 @@
             (api:app=2.0.0) 图表数据的范围区间内验证方式
             </summary>
         </member>
+        <member name="T:ASEva.MainWorkflow">
+            <summary>
+            (api:app=2.3.0) 主流程基类
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnInit(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            [可选实现] 初始化主流程
+            </summary>
+            <param name="parameters">初始化参数</param>
+            <returns>初始化是否成功</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnRun(ASEva.MainWorkflowLoopCallback)">
+            <summary>
+            [必须实现] 运行主流程，需要在其中主循环中确保执行了 ASEva.CoreCallback.OnLoop
+            </summary>
+            <param name="callback">框架软件回调接口</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnAppBasicInfo(ASEva.AppBasicInfo)">
+            <summary>
+            [可选实现] 通知应用程序的基本信息
+            </summary>
+            <param name="info">应用程序的基本信息</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnLicenseRequest(ASEva.LicenseRequestReason,System.String,ASEva.MainWorkflowLicenseCallback)">
+            <summary>
+            [可选实现] 许可证验证失败后发起新的请求
+            </summary>
+            <param name="reason">验证失败原因</param>
+            <param name="mac">机器码</param>
+            <param name="callback">框架软件的回调接口</param>
+            <returns>是否接受请求，如接受需稍后调用 ASEva.CoreCallback.OnRevalidateLicense </returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnCoreInitResult(ASEva.CoreInitResult,System.Boolean)">
+            <summary>
+            [可选实现] 通知框架软件的初始化结果
+            </summary>
+            <param name="result">框架软件的初始化结果</param>
+            <param name="revisionUpdated">是否更新了发行号</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnError(System.String)">
+            <summary>
+            [可选实现] 输出错误消息
+            </summary>
+            <param name="message">消息</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnNotice(System.String)">
+            <summary>
+            [可选实现] 输出一般消息
+            </summary>
+            <param name="message">消息</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnConfirm(System.String)">
+            <summary>
+            [可选实现] 输出确认消息，并返回是否确认
+            </summary>
+            <param name="message">消息</param>
+            <returns>是否确认</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnDebugMessage(System.String)">
+            <summary>
+            [可选实现] 输出调试用消息
+            </summary>
+            <param name="message">消息</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnGetAppLanguage">
+            <summary>
+            [可选实现] 获取语言
+            </summary>
+            <returns>语言代号，null或"en"表示英文，"ch"表示中文</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnCheckMultiInstance">
+            <summary>
+            [可选实现] 返回是否允许多个实例同时运行
+            </summary>
+            <returns>是否允许多个实例同时运行</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnSelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
+            <summary>
+            [可选实现] 选择总线协议文件
+            </summary>
+            <param name="selected">已选择的总线协议文件</param>
+            <returns>新选择的总线协议文件</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnSelectBusMessage(System.String)">
+            <summary>
+            [可选实现] 选择总线报文
+            </summary>
+            <param name="originMessageID">原报文ID</param>
+            <returns>新报文ID</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnSelectSignal(ASEva.SignalConfig,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            [可选实现] 选择信号
+            </summary>
+            <param name="origin">原信号配置</param>
+            <param name="withScale">是否需要配置scale</param>
+            <param name="withSignBit">是否需要配置符号位信号</param>
+            <param name="unit">单位</param>
+            <returns>新信号配置</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnSelectSignals(ASEva.SelectSignalHandler,System.Collections.Generic.List{System.String})">
+            <summary>
+            [可选实现] 一次性选择多个信号
+            </summary>
+            <param name="handler">新选择信号后的回调函数</param>
+            <param name="existSignalIDList">已选择的信号ID列表</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnSetCurrentDialogTitle(System.String,System.Object)">
+            <summary>
+            [可选实现] 设置当前对话框的标题和图标
+            </summary>
+            <param name="title">标题</param>
+            <param name="icon">图标</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnSetWindowTitle(System.Object,System.String,System.Object)">
+            <summary>
+            [可选实现] 设置窗口的标题和图标
+            </summary>
+            <param name="window">窗口</param>
+            <param name="title">标题</param>
+            <param name="icon">图标</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnResetData">
+            <summary>
+            [可选实现] 通知重置数据
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnInputData(System.Object)">
+            <summary>
+            [可选实现] 输入新数据
+            </summary>
+            <param name="data">新数据</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnStartSession">
+            <summary>
+            [可选实现] 通知正在开始session
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnStopSession">
+            <summary>
+            [可选实现] 通知正在结束session
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnEditRecordedSession(System.DateTime)">
+            <summary>
+            [可选实现] 编辑新采集的session信息
+            </summary>
+            <param name="recordSessionID">新采集的session ID</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnNewProject">
+            <summary>
+            [可选实现] 通知正在新建工程项目
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnLoadProject(System.Xml.XmlDocument)">
+            <summary>
+            [可选实现] 通知新加载的工程项目
+            </summary>
+            <param name="xml">工程项目xml</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnSaveProject(System.Xml.XmlDocument)">
+            <summary>
+            [可选实现] 通知正在保存工程项目
+            </summary>
+            <param name="xml">工程项目xml</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnCheckReady">
+            <summary>
+            [可选实现] 返回是否允许进行保存工程项目和开始session等操作
+            </summary>
+            <returns>是否允许进行保存工程项目和开始session等操作</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnExiting">
+            <summary>
+            [可选实现] 通知正在退出应用程序
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnExit">
+            <summary>
+            [必须实现] 退出主流程
+            </summary>
+        </member>
+        <member name="T:ASEva.AppBasicInfo">
+            <summary>
+            (api:app=2.3.0) 应用程序的基本信息
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.AppName">
+            <summary>
+            应用程序名称
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.AppIconPNG">
+            <summary>
+            应用程序的图标，为PNG文件二进制数据
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.AppVersion">
+            <summary>
+            应用程序版本
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.AppRevision">
+            <summary>
+            应用程序发行号，可为空（相同应用程序版本下的不同插件配置）
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.CoreVersion">
+            <summary>
+            框架软件的版本
+            </summary>
+        </member>
+        <member name="T:ASEva.LicenseRequestReason">
+            <summary>
+            (api:app=2.3.0) 许可证请求原因
+            </summary>
+        </member>
+        <member name="F:ASEva.LicenseRequestReason.InvalidLicense">
+            <summary>
+            未找到有效许可证
+            </summary>
+        </member>
+        <member name="F:ASEva.LicenseRequestReason.WrongMAC">
+            <summary>
+            当前许可证机器码错误
+            </summary>
+        </member>
+        <member name="F:ASEva.LicenseRequestReason.WrongVersion">
+            <summary>
+            当前许可证版本不支持
+            </summary>
+        </member>
+        <member name="F:ASEva.LicenseRequestReason.Expired">
+            <summary>
+            当前许可证已过期
+            </summary>
+        </member>
+        <member name="T:ASEva.CoreInitResult">
+            <summary>
+            (api:app=2.3.0) 框架软件的初始化结果
+            </summary>
+        </member>
+        <member name="F:ASEva.CoreInitResult.OK">
+            <summary>
+            成功
+            </summary>
+        </member>
+        <member name="F:ASEva.CoreInitResult.LoadLibraryFailed">
+            <summary>
+            加载库失败
+            </summary>
+        </member>
+        <member name="F:ASEva.CoreInitResult.InvalidComponent">
+            <summary>
+            含非法或失效组件
+            </summary>
+        </member>
+        <member name="F:ASEva.CoreInitResult.LicenseFailed">
+            <summary>
+            许可证验证失败
+            </summary>
+        </member>
+        <member name="F:ASEva.CoreInitResult.InstallComponentFailed">
+            <summary>
+            安装组件失败
+            </summary>
+        </member>
+        <member name="T:ASEva.MainWorkflowLoopCallback">
+            <summary>
+            (api:app=2.3.0) 在主流程中使用的主循环回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowLoopCallback.OnLoopUnblockable">
+            <summary>
+            执行框架软件的主循环函数（不阻塞部分）
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowLoopCallback.OnLoopBlockable">
+            <summary>
+            执行框架软件的主循环函数（可阻塞部分）
+            </summary>
+        </member>
+        <member name="T:ASEva.MainWorkflowLicenseCallback">
+            <summary>
+            (api:app=2.3.0) 在主流程中使用的许可证验证回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowLicenseCallback.OnRevalidateLicense(System.String,System.String)">
+            <summary>
+            重新验证许可证
+            </summary>
+            <param name="license">许可证的Base64字符串，设为null表示放弃验证</param>
+            <param name="pluginCode">插件码的Base64字符串</param>
+        </member>
         <member name="T:ASEva.NativeClass">
             <summary>
             (api:app=2.0.0) C++组件定义的基类
@@ -2504,9 +2799,15 @@
         </member>
         <member name="M:ASEva.Plugin.GetTaskClasses">
             <summary>
-            [可选实现] 获取插件包含的所有独立任务组件的定义对象时调用
+            [可选实现] 获取插件包含的所有独立任务组件的定义对象时被调用
             </summary>
             <returns>独立任务组件定义对象的列表</returns>
+        </member>
+        <member name="M:ASEva.Plugin.GetMainWorkflow">
+            <summary>
+            (api:app=2.3.0) [可选实现] 获取插件包含的主流程时被调用
+            </summary>
+            <returns>主流程对象</returns>
         </member>
         <member name="M:ASEva.Plugin.GetGlobalPathKeys">
             <summary>
