@@ -85,6 +85,26 @@ namespace ASEva.Samples
         public double K2 { get; set; }
         public double P1 { get; set; }
         public double P2 { get; set; }
+
+        /// <summary>
+        /// (api:app=2.2.4) K3
+        /// </summary>
+        public double K3 { get; set; }
+
+        /// <summary>
+        /// (api:app=2.2.4) K4
+        /// </summary>
+        public double K4 { get; set; }
+
+        /// <summary>
+        /// (api:app=2.2.4) K5
+        /// </summary>
+        public double K5 { get; set; }
+
+        /// <summary>
+        /// (api:app=2.2.4) K6
+        /// </summary>
+        public double K6 { get; set; }
     }
 
     /// <summary>
