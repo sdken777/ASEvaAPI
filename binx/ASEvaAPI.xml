@@ -868,7 +868,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.2.3
+            version=2.2.4
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3124,6 +3124,26 @@
         <member name="P:ASEva.Samples.CommonCameraMeta.Undistorted">
             <summary>
             是否作了消歪曲
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonCameraMeta.K3">
+            <summary>
+            (api:app=2.2.4) K3
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonCameraMeta.K4">
+            <summary>
+            (api:app=2.2.4) K4
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonCameraMeta.K5">
+            <summary>
+            (api:app=2.2.4) K5
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonCameraMeta.K6">
+            <summary>
+            (api:app=2.2.4) K6
             </summary>
         </member>
         <member name="T:ASEva.Samples.DefaultCameraMeta">
