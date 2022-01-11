@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 0, 1); // 新增CommonCameraMeta.K3, K4, K5, K6
+            return new Version(2, 3, 0, 2); // 调整MainWorkflow接口
         }
 
         /// <summary>

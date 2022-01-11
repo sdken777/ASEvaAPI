@@ -10,14 +10,14 @@ namespace ASEva
     public class MainWorkflow
     {
         /// <summary>
-        /// [可选实现] 初始化主流程
+        /// [可选实现][可含模态框] 初始化主流程
         /// </summary>
         /// <param name="parameters">初始化参数</param>
         /// <returns>初始化是否成功</returns>
         public virtual bool OnInit(Dictionary<String, String> parameters) { return true; }
 
         /// <summary>
-        /// [必须实现] 运行主流程，需要在其中主循环中确保执行了 ASEva.CoreCallback.OnLoop
+        /// [必须实现][可含模态框] 运行主流程，需要在其中主循环中确保执行了 ASEva.CoreCallback.OnLoop
         /// </summary>
         /// <param name="callback">框架软件回调接口</param>
         public virtual void OnRun(MainWorkflowLoopCallback callback) {}
@@ -29,7 +29,7 @@ namespace ASEva
         public virtual void OnAppBasicInfo(AppBasicInfo info) {}
 
         /// <summary>
-        /// [可选实现] 许可证验证失败后发起新的请求
+        /// [可选实现][可含模态框] 许可证验证失败后发起新的请求
         /// </summary>
         /// <param name="reason">验证失败原因</param>
         /// <param name="mac">机器码</param>
@@ -38,26 +38,26 @@ namespace ASEva
         public virtual bool OnLicenseRequest(LicenseRequestReason reason, String mac, MainWorkflowLicenseCallback callback) { return false; }
 
         /// <summary>
-        /// [可选实现] 通知框架软件的初始化结果
+        /// [可选实现][可含模态框] 通知框架软件的初始化结果
         /// </summary>
         /// <param name="result">框架软件的初始化结果</param>
         /// <param name="revisionUpdated">是否更新了发行号</param>
         public virtual void OnCoreInitResult(CoreInitResult result, bool revisionUpdated) {}
 
         /// <summary>
-        /// [可选实现] 输出错误消息
+        /// [可选实现][可含模态框] 输出错误消息
         /// </summary>
         /// <param name="message">消息</param>
         public virtual void OnError(String message) {}
 
         /// <summary>
-        /// [可选实现] 输出一般消息
+        /// [可选实现][可含模态框] 输出一般消息
         /// </summary>
         /// <param name="message">消息</param>
         public virtual void OnNotice(String message) {}
 
         /// <summary>
-        /// [可选实现] 输出确认消息，并返回是否确认
+        /// [可选实现][可含模态框] 输出确认消息，并返回是否确认
         /// </summary>
         /// <param name="message">消息</param>
         /// <returns>是否确认</returns>
@@ -82,21 +82,21 @@ namespace ASEva
         public virtual bool OnCheckMultiInstance() { return false; }
 
         /// <summary>
-        /// [可选实现] 选择总线协议文件
+        /// [可选实现][可含模态框] 选择总线协议文件
         /// </summary>
         /// <param name="selected">已选择的总线协议文件</param>
         /// <returns>新选择的总线协议文件</returns>
         public virtual BusProtocolFileID[] OnSelectBusProtocolFiles(BusProtocolFileID[] selected) { return null; }
 
         /// <summary>
-        /// [可选实现] 选择总线报文
+        /// [可选实现][可含模态框] 选择总线报文
         /// </summary>
         /// <param name="originMessageID">原报文ID</param>
         /// <returns>新报文ID</returns>
         public virtual String OnSelectBusMessage(String originMessageID) { return originMessageID; }
 
         /// <summary>
-        /// [可选实现] 选择信号
+        /// [可选实现][可含模态框] 选择信号
         /// </summary>
         /// <param name="origin">原信号配置</param>
         /// <param name="withScale">是否需要配置scale</param>
@@ -106,7 +106,7 @@ namespace ASEva
         public virtual SignalConfig OnSelectSignal(SignalConfig origin, bool withScale, bool withSignBit, String unit) { return origin; }
 
         /// <summary>
-        /// [可选实现] 一次性选择多个信号
+        /// [可选实现][可含模态框] 一次性选择多个信号
         /// </summary>
         /// <param name="handler">新选择信号后的回调函数</param>
         /// <param name="existSignalIDList">已选择的信号ID列表</param>
@@ -149,7 +149,7 @@ namespace ASEva
         public virtual void OnStopSession() { }
 
         /// <summary>
-        /// [可选实现] 编辑新采集的session信息
+        /// [可选实现][可含模态框] 编辑新采集的session信息
         /// </summary>
         /// <param name="recordSessionID">新采集的session ID</param>
         public virtual void OnEditRecordedSession(DateTime recordSessionID) { }
@@ -178,9 +178,11 @@ namespace ASEva
         public virtual bool OnCheckReady() { return false; }
 
         /// <summary>
-        /// [可选实现] 通知正在退出应用程序
+        /// [可选实现][可含模态框] 通知正在退出应用程序
         /// </summary>
-        public virtual void OnExiting() {}
+        /// <param name="force">是否为强制结束</param>
+        /// <returns>返回是否可退出，强制结束时将不起作用</returns>
+        public virtual bool OnExiting(bool force) { return true; }
 
         /// <summary>
         /// [必须实现] 退出主流程
@@ -282,14 +284,14 @@ namespace ASEva
     public interface MainWorkflowLoopCallback
     {
         /// <summary>
-        /// 执行框架软件的主循环函数（不阻塞部分）
+        /// 执行框架软件的主循环函数
         /// </summary>
-        void OnLoopUnblockable();
+        void OnLoop();
 
         /// <summary>
-        /// 执行框架软件的主循环函数（可阻塞部分）
+        /// 执行框架软件的模态框
         /// </summary>
-        void OnLoopBlockable();
+        void OnModal();
     }
 
     /// <summary>
