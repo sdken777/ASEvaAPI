@@ -132,6 +132,12 @@ namespace ASEva
         AudioDeviceInfo[] GetAudioReplayDevices(String driverID);
         double GetCPUTime();
         String[] GetEventTypeNames();
+        String[] GetRecentProjectPathes();
+        bool TerminateApp(bool force, bool autosave);
+        void PopupError(String msg);
+        void PopupNotice(String msg);
+        bool PopupConfirm(String msg);
+        void AddMainThreadCheckpoint(String location);
     }
 
     /// <summary>
@@ -678,7 +684,7 @@ namespace ASEva
         /// <summary>
         /// 运行一个独立处理任务，运行过程中将弹出进度条并禁用其他操作
         /// </summary>
-        /// <param name="caller">调用此API的UI类或控件</param>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="taskClassID">任务组件的类别ID</param>
         /// <param name="config">配置的字符串描述</param>
         /// <param name="returnValue">任务的返回值信息</param>
@@ -1077,7 +1083,7 @@ namespace ASEva
         /// <summary>
         /// 获取数据处理或C++模块组件配置的字符串描述
         /// </summary>
-        /// <param name="caller">调用此API的UI类或控件</param>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="moduleClassID">模块类别ID</param>
         /// <returns>配置的字符串描述，null表示找不到类别ID对应的模块</returns>
         public static String GetModuleConfig(object caller, String moduleClassID)
@@ -1088,7 +1094,7 @@ namespace ASEva
         /// <summary>
         /// 设置数据处理或C++模块组件配置的字符串描述
         /// </summary>
-        /// <param name="caller">调用此API的UI类或控件</param>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="moduleClassID">模块类别ID</param>
         /// <param name="config">配置的字符串描述</param>
         public static void SetModuleConfig(object caller, String moduleClassID, String config)
@@ -1099,7 +1105,7 @@ namespace ASEva
         /// <summary>
         /// 获取数据处理或C++模块组件配置的状态
         /// </summary>
-        /// <param name="caller">调用此API的UI类或控件</param>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="moduleClassID">模块类别ID</param>
         /// <returns>组件配置的状态，若找不到类别ID对应的模块则返回 ASEva.ConfigStatus.Disabled </returns>
         public static ConfigStatus GetModuleConfigStatus(object caller, String moduleClassID)
@@ -1110,7 +1116,7 @@ namespace ASEva
         /// <summary>
         /// 获取数据处理或C++模块组件各子功能配置的状态
         /// </summary>
-        /// <param name="caller">调用此API的UI类或控件</param>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="moduleClassID">模块类别ID</param>
         /// <returns>各子功能配置的状态，若找不到类别ID对应的模块或无子功能配置则返回null</returns>
         public static ConfigStatus[] GetModuleChildConfigStatus(object caller, String moduleClassID)
@@ -1255,7 +1261,7 @@ namespace ASEva
         /// <summary>
         /// 打开对话框
         /// </summary>
-        /// <param name="caller">调用此API的UI类或控件</param>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="dialogClassID">对话框组件ID</param>
         /// <param name="config">初始化配置</param>
         public static void OpenDialog(object caller, String dialogClassID, String config)
@@ -1266,7 +1272,7 @@ namespace ASEva
         /// <summary>
         /// 添加窗口至工作空间
         /// </summary>
-        /// <param name="caller">调用此API的UI类或控件</param>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="windowClassID">窗口组件ID</param>
         /// <param name="config">初始化配置</param>
         /// <param name="newWorkspaceIfNeeded">如果当前工作空间位置不足，是否添加至新工作空间</param>
@@ -1380,6 +1386,63 @@ namespace ASEva
         public static BusSignalValue[] ParseBusMessage(BusMessageSample busMessage)
         {
             return Handler.ParseBusMessage(busMessage);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取最近项目文件路径列表
+        /// </summary>
+        /// <returns>最近项目文件路径列表</returns>
+        public static String[] GetRecentProjectPathes()
+        {
+            return Handler.GetRecentProjectPathes();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 尝试终止应用程序
+        /// </summary>
+        /// <param name="force">是否强制终止</param>
+        /// <param name="autosave">是否保存当前工程至autosave</param>
+        /// <returns>是否成功终止</returns>
+        public static bool TerminateApp(bool force, bool autosave)
+        {
+            return Handler.TerminateApp(force, autosave);
+        }
+        
+        /// <summary>
+        /// (api:app=2.3.0) 弹出模态框显示错误信息
+        /// </summary>
+        /// <param name="msg">错误信息</param>
+        public static void PopupError(String msg)
+        {
+            Handler.PopupError(msg);
+        }
+        
+        /// <summary>
+        /// (api:app=2.3.0) 弹出模态框显示提示信息
+        /// </summary>
+        /// <param name="msg">提示信息</param>
+        public static void PopupNotice(String msg)
+        {
+            Handler.PopupNotice(msg);
+        }
+        
+        /// <summary>
+        /// (api:app=2.3.0) 弹出模态框显示确认信息
+        /// </summary>
+        /// <param name="msg">确认信息</param>
+        /// <returns>是否得到确认</returns>
+        public static bool PopupConfirm(String msg)
+        {
+            return Handler.PopupConfirm(msg);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 添加主线程检查点
+        /// </summary>
+        /// <param name="location">主线程检查点位置</param>
+        public static void AddMainThreadCheckpoint(String location)
+        {
+            Handler.AddMainThreadCheckpoint(location);
         }
     }
 }

@@ -597,5 +597,32 @@ namespace ASEva
         {
             return null;
         }
+
+        public string[] GetRecentProjectPathes()
+        {
+            return null;
+        }
+
+        public bool TerminateApp(bool force, bool autosave)
+        {
+            return false;
+        }
+
+        public void PopupError(string msg)
+        {
+        }
+
+        public void PopupNotice(string msg)
+        {
+        }
+
+        public bool PopupConfirm(string msg)
+        {
+            return false;
+        }
+
+        public void AddMainThreadCheckpoint(string location)
+        {
+        }
     }
 }
