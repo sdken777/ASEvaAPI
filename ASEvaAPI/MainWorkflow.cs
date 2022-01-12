@@ -12,9 +12,11 @@ namespace ASEva
         /// <summary>
         /// [可选实现][可含模态框] 初始化主流程
         /// </summary>
+        /// <param name="appID">应用程序ID</param>
         /// <param name="parameters">初始化参数</param>
+        /// <param name="uiCode">输出UI框架代号，若不使用UI则输出null</param>
         /// <returns>初始化是否成功</returns>
-        public virtual bool OnInit(Dictionary<String, String> parameters) { return true; }
+        public virtual bool OnInit(String appID, Dictionary<String, String> parameters, out String uiCode) { uiCode = null; return true; }
 
         /// <summary>
         /// [必须实现][可含模态框] 运行主流程，需要在其中主循环中确保执行了 ASEva.CoreCallback.OnLoop

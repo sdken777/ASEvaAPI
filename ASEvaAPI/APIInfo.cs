@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 0, 2); // 调整MainWorkflow接口
+            return new Version(2, 3, 0, 3); // MainWorkflow.OnInit增加参数appID，并输出uiCode
         }
 
         /// <summary>
