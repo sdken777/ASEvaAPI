@@ -624,5 +624,39 @@ namespace ASEva
         public void AddMainThreadCheckpoint(string location)
         {
         }
+
+        public bool NewProject(bool force)
+        {
+            return false;
+        }
+
+        public bool OpenProject(string projectFile)
+        {
+            return false;
+        }
+
+        public bool SaveCurrentProject(string projectFile)
+        {
+            return false;
+        }
+
+        public string GetCurrentProject()
+        {
+            return null;
+        }
+
+        public void PlayMp3(byte[] mp3FileData)
+        {
+        }
+
+        public bool StartProcess(string target)
+        {
+            return false;
+        }
+
+        public Dictionary<string, Version> GetVersionTable()
+        {
+            return null;
+        }
     }
 }

@@ -138,6 +138,13 @@ namespace ASEva
         void PopupNotice(String msg);
         bool PopupConfirm(String msg);
         void AddMainThreadCheckpoint(String location);
+        bool NewProject(bool force);
+        bool OpenProject(String projectFile);
+        bool SaveCurrentProject(String projectFile);
+        String GetCurrentProject();
+        void PlayMp3(byte[] mp3FileData);
+        bool StartProcess(String target);
+        Dictionary<String, Version> GetVersionTable();
     }
 
     /// <summary>
@@ -1443,6 +1450,73 @@ namespace ASEva
         public static void AddMainThreadCheckpoint(String location)
         {
             Handler.AddMainThreadCheckpoint(location);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 新建项目
+        /// </summary>
+        /// <param name="force">是否强制新建项目</param>
+        /// <returns>是否成功新建项目</returns>
+        public static bool NewProject(bool force)
+        {
+            return Handler.NewProject(force);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 打开新项目
+        /// </summary>
+        /// <param name="projectFile">项目文件路径，若设为null则从autosave读取</param>
+        /// <returns>是否成功打开项目</returns>
+        public static bool OpenProject(String projectFile)
+        {
+            return Handler.OpenProject(projectFile);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 保存当前项目
+        /// </summary>
+        /// <param name="projectFile">项目文件路径，null表示保存至当前项目文件</param>
+        /// <returns>是否成功保存项目</returns>
+        public static bool SaveCurrentProject(String projectFile)
+        {
+            return Handler.SaveCurrentProject(projectFile);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取当前项目文件
+        /// </summary>
+        /// <returns>当前项目文件，新项目或从autosave读取的项目都为null</returns>
+        public static String GetCurrentProject()
+        {
+            return Handler.GetCurrentProject();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 播放MP3音频
+        /// </summary>
+        /// <param name="mp3FileData">MP3音频文件数据</param>
+        public static void PlayMp3(byte[] mp3FileData)
+        {
+            Handler.PlayMp3(mp3FileData);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 启动进程以默认方式打开文件、文件夹或网址
+        /// </summary>
+        /// <param name="target">目标文件、文件夹或网址</param>
+        /// <returns>是否成功打开</returns>
+        public static bool StartProcess(String target)
+        {
+            return Handler.StartProcess(target);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取软件版本信息总表
+        /// </summary>
+        /// <returns>软件版本信息总表</returns>
+        public static Dictionary<String, Version> GetVersionTable()
+        {
+            return Handler.GetVersionTable();
         }
     }
 }
