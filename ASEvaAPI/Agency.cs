@@ -145,6 +145,11 @@ namespace ASEva
         void PlayMp3(byte[] mp3FileData);
         bool StartProcess(String target);
         Dictionary<String, Version> GetVersionTable();
+        String GetSystemStatus(SystemStatus status);
+        String GetSystemStatusDetails(SystemStatus status);
+        int[] GetLicensedFunctionIndices();
+        bool SwitchAppMode(String controllerName, ApplicationMode mode, int waitSecond);
+        void SetDataPath(String path);
     }
 
     /// <summary>
@@ -1517,6 +1522,56 @@ namespace ASEva
         public static Dictionary<String, Version> GetVersionTable()
         {
             return Handler.GetVersionTable();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取系统状态信息
+        /// </summary>
+        /// <param name="status">系统状态类别</param>
+        /// <returns>系统状态信息，若无有效信息则返回null</returns>
+        public static String GetSystemStatus(SystemStatus status)
+        {
+            return Handler.GetSystemStatus(status);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取系统状态详情
+        /// </summary>
+        /// <param name="status">系统状态类别</param>
+        /// <returns>系统状态详情，若无有效信息则返回null</returns>
+        public static String GetSystemStatusDetails(SystemStatus status)
+        {
+            return Handler.GetSystemStatusDetails(status);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取被许可的功能序号列表
+        /// </summary>
+        /// <returns>被许可的功能序号列表</returns>
+        public static int[] GetLicensedFunctionIndices()
+        {
+            return Handler.GetLicensedFunctionIndices();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 切换应用程序当前的运行模式
+        /// </summary>
+        /// <param name="controllerName">控制者名称，用于独占控制模式</param>
+        /// <param name="mode">目标运行模式</param>
+        /// <param name="waitSecond">超时，大于0有效，单位秒</param>
+        /// <returns>是否成功切换</returns>
+        public static bool SwitchAppMode(String controllerName, ApplicationMode mode, int waitSecond)
+        {
+            return Handler.SwitchAppMode(controllerName, mode, waitSecond);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 设置数据目录的路径
+        /// </summary>
+        /// <param name="path">数据目录的路径</param>
+        public static void SetDataPath(String path)
+        {
+            Handler.SetDataPath(path);
         }
     }
 }

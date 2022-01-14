@@ -658,5 +658,29 @@ namespace ASEva
         {
             return null;
         }
+
+        public string GetSystemStatus(SystemStatus status)
+        {
+            return null;
+        }
+
+        public string GetSystemStatusDetails(SystemStatus status)
+        {
+            return null;
+        }
+
+        public int[] GetLicensedFunctionIndices()
+        {
+            return null;
+        }
+
+        public bool SwitchAppMode(string controllerName, ApplicationMode mode, int waitSecond)
+        {
+            return false;
+        }
+
+        public void SetDataPath(string path)
+        {
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 0, 5); // 新增Agency.NewProject, OpenProject, SaveCurrentProject, GetCurrentProject。新增Agency.PlayMp3，StartProcess，GetVersionTable
+            return new Version(2, 3, 0, 6); // 新增SystemStatus，Agency.GetSystemStatus, GetSystemStatusDetails, GetLicensedFunctionIndices, SwitchAppMode, SetDataPath
         }
 
         /// <summary>

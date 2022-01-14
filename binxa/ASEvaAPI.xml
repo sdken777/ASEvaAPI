@@ -951,6 +951,41 @@
             </summary>
             <returns>软件版本信息总表</returns>
         </member>
+        <member name="M:ASEva.Agency.GetSystemStatus(ASEva.SystemStatus)">
+            <summary>
+            (api:app=2.3.0) 获取系统状态信息
+            </summary>
+            <param name="status">系统状态类别</param>
+            <returns>系统状态信息，若无有效信息则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetSystemStatusDetails(ASEva.SystemStatus)">
+            <summary>
+            (api:app=2.3.0) 获取系统状态详情
+            </summary>
+            <param name="status">系统状态类别</param>
+            <returns>系统状态详情，若无有效信息则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetLicensedFunctionIndices">
+            <summary>
+            (api:app=2.3.0) 获取被许可的功能序号列表
+            </summary>
+            <returns>被许可的功能序号列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.SwitchAppMode(System.String,ASEva.ApplicationMode,System.Int32)">
+            <summary>
+            (api:app=2.3.0) 切换应用程序当前的运行模式
+            </summary>
+            <param name="controllerName">控制者名称，用于独占控制模式</param>
+            <param name="mode">目标运行模式</param>
+            <param name="waitSecond">超时，大于0有效，单位秒</param>
+            <returns>是否成功切换</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetDataPath(System.String)">
+            <summary>
+            (api:app=2.3.0) 设置数据目录的路径
+            </summary>
+            <param name="path">数据目录的路径</param>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
             version=2.3.0
@@ -4614,6 +4649,181 @@
         <member name="F:ASEva.BusSignalValue.enumValue">
             <summary>
             对应的枚举值（若存在枚举信息）
+            </summary>
+        </member>
+        <member name="T:ASEva.SystemStatus">
+            <summary>
+            (api:app=2.3.0) 系统状态 
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.ActualReplaySpeed">
+            <summary>
+            实际回放速度（倍速）
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.TargetReplaySpeed">
+            <summary>
+            目标回放速度（倍速）
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.CurrentLoggerMessage">
+            <summary>
+            最新清单消息
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.DisplayLag">
+            <summary>
+            显示延迟，单位毫秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.ContinuousFileWriteQueue">
+            <summary>
+            连续数据或缓存数据写入队列长度，单位秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.EventFileWriteQueue">
+            <summary>
+            事件数据写入队列长度，单位秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.VideoProcessQueueCapacity">
+            <summary>
+            视频处理队列长度限制
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.VideoProcessQueue">
+            <summary>
+            视频处理队列长度
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.AudioVolume">
+            <summary>
+            音量（倍数）
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.CPUUsage">
+            <summary>
+            CPU使用率，单位百分比
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.CPUUsageRatio">
+            <summary>
+            CPU使用率的乘数
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.MemoryCapacity">
+            <summary>
+            内存总容量，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.MemoryFree">
+            <summary>
+            内存可用容量，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.MemoryWarningThreshold">
+            <summary>
+            内存可用容量的警告阈值，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.MemoryErrorThreshold">
+            <summary>
+            内存可用容量的最小阈值，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.StorageCapacity">
+            <summary>
+            当前数据目录所在磁盘的总容量，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.StorageFree">
+            <summary>
+            当前数据目录所在磁盘可用容量，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.StorageFreeHours">
+            <summary>
+            根据当前数据目录所在磁盘可用容量预估的时长，单位小时
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.StorageWarningThreshold">
+            <summary>
+            当前数据目录所在磁盘可用容量的警告阈值，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.StorageErrorThreshold">
+            <summary>
+            当前数据目录所在磁盘可用容量的最小阈值，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.WorkthreadHeartBeatTime">
+            <summary>
+            最近一次基础线程心跳时间，格式为yyyyMMddHHmmss.fff
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.WorkthreadCurrentLocation">
+            <summary>
+            基础线程当前运行位置
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.WorkthreadLoopTime">
+            <summary>
+            基础线程循环平均运行时间（最近），单位毫秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.ProcthreadHeartBeatTime">
+            <summary>
+            最近一次处理线程心跳时间，格式为yyyyMMddHHmmss.fff
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.ProcthreadCurrentLocation">
+            <summary>
+            处理线程当前运行位置
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.ProcthreadLoopTime">
+            <summary>
+            处理线程循环平均运行时间（最近），单位毫秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.MainthreadLoopTime">
+            <summary>
+            主线程循环平均运行时间（最近），单位毫秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.BusDataFlow">
+            <summary>
+            总线数据流量，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.BusDeviceReadTime">
+            <summary>
+            总线设备接收一帧数据的最大耗时，单位微秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.VideoDataFlow">
+            <summary>
+            视频数据流量，单位像素数
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.VideoDeviceReadTime">
+            <summary>
+            视频设备接收一帧数据的最大耗时，单位微秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.StartSessionTime">
+            <summary>
+            开始session耗时，单位毫秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.StopSessionTime">
+            <summary>
+            结束session耗时，单位毫秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.ReplayNeck">
+            <summary>
+            回放速度瓶颈
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">

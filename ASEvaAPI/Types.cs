@@ -940,4 +940,180 @@ namespace ASEva
         /// </summary>
         public String enumValue;
     }
+
+    /// <summary>
+    /// (api:app=2.3.0) 系统状态 
+    /// </summary>
+    public enum SystemStatus
+    {
+        /// <summary>
+        /// 实际回放速度（倍速）
+        /// </summary>
+        ActualReplaySpeed = 1,
+
+        /// <summary>
+        /// 目标回放速度（倍速）
+        /// </summary>
+        TargetReplaySpeed = 2,
+
+        /// <summary>
+        /// 最新清单消息
+        /// </summary>
+        CurrentLoggerMessage = 3,
+
+        /// <summary>
+        /// 显示延迟，单位毫秒
+        /// </summary>
+        DisplayLag = 4,
+
+        /// <summary>
+        /// 连续数据或缓存数据写入队列长度，单位秒
+        /// </summary>
+        ContinuousFileWriteQueue = 5,
+
+        /// <summary>
+        /// 事件数据写入队列长度，单位秒
+        /// </summary>
+        EventFileWriteQueue = 6,
+
+        /// <summary>
+        /// 视频处理队列长度限制
+        /// </summary>
+        VideoProcessQueueCapacity = 7,
+
+        /// <summary>
+        /// 视频处理队列长度
+        /// </summary>
+        VideoProcessQueue = 8,
+
+        /// <summary>
+        /// 音量（倍数）
+        /// </summary>
+        AudioVolume = 9,
+
+        /// <summary>
+        /// CPU使用率，单位百分比
+        /// </summary>
+        CPUUsage = 10,
+
+        /// <summary>
+        /// CPU使用率的乘数
+        /// </summary>
+        CPUUsageRatio = 11,
+
+        /// <summary>
+        /// 内存总容量，单位字节
+        /// </summary>
+        MemoryCapacity = 12,
+
+        /// <summary>
+        /// 内存可用容量，单位字节
+        /// </summary>
+        MemoryFree = 13,
+
+        /// <summary>
+        /// 内存可用容量的警告阈值，单位字节
+        /// </summary>
+        MemoryWarningThreshold = 14,
+
+        /// <summary>
+        /// 内存可用容量的最小阈值，单位字节
+        /// </summary>
+        MemoryErrorThreshold = 15,
+
+        /// <summary>
+        /// 当前数据目录所在磁盘的总容量，单位字节
+        /// </summary>
+        StorageCapacity = 16,
+
+        /// <summary>
+        /// 当前数据目录所在磁盘可用容量，单位字节
+        /// </summary>
+        StorageFree = 17,
+
+        /// <summary>
+        /// 根据当前数据目录所在磁盘可用容量预估的时长，单位小时
+        /// </summary>
+        StorageFreeHours = 18,
+
+        /// <summary>
+        /// 当前数据目录所在磁盘可用容量的警告阈值，单位字节
+        /// </summary>
+        StorageWarningThreshold = 19,
+
+        /// <summary>
+        /// 当前数据目录所在磁盘可用容量的最小阈值，单位字节
+        /// </summary>
+        StorageErrorThreshold = 20,
+
+        /// <summary>
+        /// 最近一次基础线程心跳时间，格式为yyyyMMddHHmmss.fff
+        /// </summary>
+        WorkthreadHeartBeatTime = 21,
+        
+        /// <summary>
+        /// 基础线程当前运行位置
+        /// </summary>
+        WorkthreadCurrentLocation = 22,
+
+        /// <summary>
+        /// 基础线程循环平均运行时间（最近），单位毫秒
+        /// </summary>
+        WorkthreadLoopTime = 23,
+
+        /// <summary>
+        /// 最近一次处理线程心跳时间，格式为yyyyMMddHHmmss.fff
+        /// </summary>
+        ProcthreadHeartBeatTime = 24,
+
+        /// <summary>
+        /// 处理线程当前运行位置
+        /// </summary>
+        ProcthreadCurrentLocation = 25,
+
+        /// <summary>
+        /// 处理线程循环平均运行时间（最近），单位毫秒
+        /// </summary>
+        ProcthreadLoopTime = 26,
+
+        /// <summary>
+        /// 主线程循环平均运行时间（最近），单位毫秒
+        /// </summary>
+        MainthreadLoopTime = 27,
+
+        /// <summary>
+        /// 总线数据流量，单位字节
+        /// </summary>
+        BusDataFlow = 28,
+
+        /// <summary>
+        /// 总线设备接收一帧数据的最大耗时，单位微秒
+        /// </summary>
+        BusDeviceReadTime = 29,
+
+        /// <summary>
+        /// 视频数据流量，单位像素数
+        /// </summary>
+        VideoDataFlow = 30,
+
+        /// <summary>
+        /// 视频设备接收一帧数据的最大耗时，单位微秒
+        /// </summary>
+        VideoDeviceReadTime = 31,
+
+        /// <summary>
+        /// 开始session耗时，单位毫秒
+        /// </summary>
+        StartSessionTime = 32,
+
+        /// <summary>
+        /// 结束session耗时，单位毫秒
+        /// </summary>
+        StopSessionTime = 33,
+
+        /// <summary>
+        /// 回放速度瓶颈
+        /// </summary>
+        ReplayNeck = 34,
+    }
 }
