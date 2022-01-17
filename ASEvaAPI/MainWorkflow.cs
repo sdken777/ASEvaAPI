@@ -289,11 +289,6 @@ namespace ASEva
         /// 执行框架软件的主循环函数
         /// </summary>
         void OnLoop();
-
-        /// <summary>
-        /// 执行框架软件的模态框
-        /// </summary>
-        void OnModal();
     }
 
     /// <summary>

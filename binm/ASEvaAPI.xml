@@ -2902,11 +2902,6 @@
             执行框架软件的主循环函数
             </summary>
         </member>
-        <member name="M:ASEva.MainWorkflowLoopCallback.OnModal">
-            <summary>
-            执行框架软件的模态框
-            </summary>
-        </member>
         <member name="T:ASEva.MainWorkflowLicenseCallback">
             <summary>
             (api:app=2.3.0) 在主流程中使用的许可证验证回调接口

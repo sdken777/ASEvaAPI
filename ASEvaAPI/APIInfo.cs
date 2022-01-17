@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 0, 7); // 新增CommonImage，WindowClassInfo, DialogClassInfo, ProcessorClassInfo, NativeClassInfo, TaskClassInfo, NativeLibraryType。新增Agency.GetWindowClassTable, GetDialogClassTable, GetProcessorClassTable, GetNativeClassTable, GetTaskClassTable, RegisterTransformWindowClass, RegisterTransformDialogClass, GetDialogRelatedModuleConfigStatus, DisableAllConfigs, GetGenerationSessions。新增VideoFrameSample.CommonImage
+            return new Version(2, 3, 0, 8); // 移除MainWorkflowLoopCallback.OnModal
         }
 
         /// <summary>
