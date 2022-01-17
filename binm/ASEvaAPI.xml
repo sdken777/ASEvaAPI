@@ -706,6 +706,13 @@
             <param name="prefix">组件前缀，如bus、video、proc、dev等</param>
             <returns>版本列表，键为C++模块的类型ID，值为版本字符串</returns>
         </member>
+        <member name="M:ASEva.Agency.GetNativePluginVersions(ASEva.NativeLibraryType)">
+            <summary>
+            (api:app=2.3.0) 获取C++插件模块版本列表
+            </summary>
+            <param name="type">C++库类别</param>
+            <returns>版本列表，键为C++模块的类型ID</returns>
+        </member>
         <member name="M:ASEva.Agency.ConfigOfflineMapPath">
             <summary>
             弹出对话框配置离线地图路径
@@ -985,6 +992,73 @@
             (api:app=2.3.0) 设置数据目录的路径
             </summary>
             <param name="path">数据目录的路径</param>
+        </member>
+        <member name="M:ASEva.Agency.GetWindowClassTable">
+            <summary>
+            (api:app=2.3.0) 获取窗口组件信息表
+            </summary>
+            <returns>窗口组件信息表，键为组件ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetDialogClassTable">
+            <summary>
+            (api:app=2.3.0) 获取对话框组件信息表
+            </summary>
+            <returns>对话框组件信息表，键为组件ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetProcessorClassTable">
+            <summary>
+            (api:app=2.3.0) 获取数据处理组件信息表
+            </summary>
+            <returns>数据处理组件信息表，键为组件ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetNativeClassTable">
+            <summary>
+            (api:app=2.3.0) 获取C++组件信息表
+            </summary>
+            <returns>C++组件信息表，键为组件ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetTaskClassTable">
+            <summary>
+            (api:app=2.3.0) 获取独立任务组件信息表
+            </summary>
+            <returns>独立任务组件信息表，键为组件ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.RegisterTransformWindowClass(System.String,System.String)">
+            <summary>
+            (api:app=2.3.0) 注册分化窗口组件
+            </summary>
+            <param name="windowClassID">原窗口组件ID</param>
+            <param name="config">用于分化的配置字符串</param>
+            <returns>分化后的窗口组件信息</returns>
+        </member>
+        <member name="M:ASEva.Agency.RegisterTransformDialogClass(System.String,System.String)">
+            <summary>
+            (api:app=2.3.0) 注册分化对话框组件
+            </summary>
+            <param name="dialogClassID">原对话框组件ID</param>
+            <param name="config">用于分化的配置字符串</param>
+            <returns>分化后的对话框组件信息</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetDialogRelatedModulesConfigStatus(System.String,System.String,ASEva.ConfigStatus[]@)">
+            <summary>
+            (api:app=2.3.0) 获取对话框相关模块配置状态
+            </summary>
+            <param name="dialogClassID">对话框组件ID</param>
+            <param name="transformID">分化ID</param>
+            <param name="childrenStatus">子配置状态</param>
+            <returns>配置状态</returns>
+        </member>
+        <member name="M:ASEva.Agency.DisableAllConfigs">
+            <summary>
+            (api:app=2.3.0) 禁用所有模块配置
+            </summary>
+        </member>
+        <member name="M:ASEva.Agency.GetGenerationSessions(System.String)">
+            <summary>
+            (api:app=2.3.0) 获取含有指定generation ID的所有session
+            </summary>
+            <param name="generationID">Generation ID</param>
+            <returns>Session ID列表</returns>
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
@@ -3771,14 +3845,40 @@
             抖动偏置俯仰角（仅部分摄像头有效）
             </summary>
         </member>
+        <member name="T:ASEva.Samples.CommonImage">
+            <summary>
+            (api:app=2.3.0) 通用图像数据
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonImage.Width">
+            <summary>
+            图像宽度
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonImage.Height">
+            <summary>
+            图像高度
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonImage.Data">
+            <summary>
+            图像数据，数组长度为宽度x高度x4，每个像素的存放顺序为BGRA
+            </summary>
+        </member>
         <member name="T:ASEva.Samples.VideoFrameSample">
             <summary>
             (api:app=2.0.0) 视频帧样本
             </summary>
         </member>
+        <member name="P:ASEva.Samples.VideoFrameSample.CommonImage">
+            <summary>
+            (api:app=2.3.0) 通用图像数据
+            </summary>
+            <value></value>
+        </member>
         <member name="P:ASEva.Samples.VideoFrameSample.Image">
             <summary>
-            获取视频帧的位图图像
+            获取视频帧的位图图像（平台特化对象）
             </summary>
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.ChannelIndex">
@@ -4824,6 +4924,186 @@
         <member name="F:ASEva.SystemStatus.ReplayNeck">
             <summary>
             回放速度瓶颈
+            </summary>
+        </member>
+        <member name="T:ASEva.WindowClassInfo">
+            <summary>
+            (api:app=2.3.0) 窗口组件信息
+            </summary>
+        </member>
+        <member name="P:ASEva.WindowClassInfo.OwnerPluginID">
+            <summary>
+            所属插件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.WindowClassInfo.ID">
+            <summary>
+            组件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.WindowClassInfo.TransformID">
+            <summary>
+            分化ID
+            </summary>
+        </member>
+        <member name="P:ASEva.WindowClassInfo.Title">
+            <summary>
+            窗口标题
+            </summary>
+        </member>
+        <member name="P:ASEva.WindowClassInfo.Icon">
+            <summary>
+            窗口图标，分辨率为16x16
+            </summary>
+        </member>
+        <member name="P:ASEva.WindowClassInfo.MultipleSupported">
+            <summary>
+            是否支持同时打开多个窗口
+            </summary>
+        </member>
+        <member name="P:ASEva.WindowClassInfo.TransformClasses">
+            <summary>
+            分化的窗口组件信息
+            </summary>
+        </member>
+        <member name="T:ASEva.DialogClassInfo">
+            <summary>
+            (api:app=2.3.0) 对话框组件信息
+            </summary>
+        </member>
+        <member name="P:ASEva.DialogClassInfo.OwnerPluginID">
+            <summary>
+            所属插件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.DialogClassInfo.ID">
+            <summary>
+            组件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.DialogClassInfo.TransformID">
+            <summary>
+            分化ID
+            </summary>
+        </member>
+        <member name="P:ASEva.DialogClassInfo.Title">
+            <summary>
+            对话框标题
+            </summary>
+        </member>
+        <member name="P:ASEva.DialogClassInfo.Icon">
+            <summary>
+            对话框图标，分辨率为16x16
+            </summary>
+        </member>
+        <member name="P:ASEva.DialogClassInfo.TransformClasses">
+            <summary>
+            分化的对话框组件信息
+            </summary>
+        </member>
+        <member name="T:ASEva.ProcessorClassInfo">
+            <summary>
+            (api:app=2.3.0) 数据处理组件信息
+            </summary>
+        </member>
+        <member name="P:ASEva.ProcessorClassInfo.OwnerPluginID">
+            <summary>
+            所属插件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.ProcessorClassInfo.ID">
+            <summary>
+            组件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.ProcessorClassInfo.Title">
+            <summary>
+            数据处理组件名称
+            </summary>
+        </member>
+        <member name="T:ASEva.NativeLibraryType">
+            <summary>
+            (api:app=2.3.0) C++库类别
+            </summary>
+        </member>
+        <member name="F:ASEva.NativeLibraryType.Native">
+            <summary>
+            一般原生库
+            </summary>
+        </member>
+        <member name="F:ASEva.NativeLibraryType.Bus">
+            <summary>
+            总线设备库
+            </summary>
+        </member>
+        <member name="F:ASEva.NativeLibraryType.Video">
+            <summary>
+            视频设备库
+            </summary>
+        </member>
+        <member name="F:ASEva.NativeLibraryType.Processor">
+            <summary>
+            数据处理库
+            </summary>
+        </member>
+        <member name="F:ASEva.NativeLibraryType.Device">
+            <summary>
+            一般设备库
+            </summary>
+        </member>
+        <member name="F:ASEva.NativeLibraryType.FileIO">
+            <summary>
+            文件读写库
+            </summary>
+        </member>
+        <member name="T:ASEva.NativeClassInfo">
+            <summary>
+            (api:app=2.3.0) C++组件信息
+            </summary>
+        </member>
+        <member name="P:ASEva.NativeClassInfo.OwnerPluginID">
+            <summary>
+            所属插件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.NativeClassInfo.ID">
+            <summary>
+            组件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.NativeClassInfo.Title">
+            <summary>
+            C++组件名称
+            </summary>
+        </member>
+        <member name="P:ASEva.NativeClassInfo.NativeType">
+            <summary>
+            对应的类型ID
+            </summary>
+        </member>
+        <member name="P:ASEva.NativeClassInfo.LibraryVersions">
+            <summary>
+            绑定的各C++库版本
+            </summary>
+        </member>
+        <member name="T:ASEva.TaskClassInfo">
+            <summary>
+            (api:app=2.3.0) 独立任务组件信息
+            </summary>
+        </member>
+        <member name="P:ASEva.TaskClassInfo.OwnerPluginID">
+            <summary>
+            所属插件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.TaskClassInfo.ID">
+            <summary>
+            组件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.TaskClassInfo.Title">
+            <summary>
+            独立任务组件名称
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">

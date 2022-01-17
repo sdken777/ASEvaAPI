@@ -682,5 +682,60 @@ namespace ASEva
         public void SetDataPath(string path)
         {
         }
+
+        public Dictionary<string, WindowClassInfo> GetWindowClassTable()
+        {
+            return null;
+        }
+
+        public Dictionary<string, DialogClassInfo> GetDialogClassTable()
+        {
+            return null;
+        }
+
+        public Dictionary<string, ProcessorClassInfo> GetProcessorClassTable()
+        {
+            return null;
+        }
+
+        public Dictionary<string, NativeClassInfo> GetNativeClassTable()
+        {
+            return null;
+        }
+
+        public Dictionary<string, TaskClassInfo> GetTaskClassTable()
+        {
+            return null;
+        }
+
+        public Dictionary<string, Version> GetNativePluginVersions(NativeLibraryType type)
+        {
+            return null;
+        }
+
+        public WindowClassInfo RegisterTransformWindowClass(string windowClassID, string config)
+        {
+            return null;
+        }
+
+        public DialogClassInfo RegisterTransformDialogClass(string dialogClassID, string config)
+        {
+            return null;
+        }
+
+        public ConfigStatus GetDialogRelatedModulesConfigStatus(string dialogClassID, string transformID, out ConfigStatus[] childrenStatus)
+        {
+            childrenStatus = null;
+            return ConfigStatus.Disabled;
+        }
+
+        public void DisableAllConfigs()
+        {
+        }
+
+        public DateTime[] GetGenerationSessions(string generationID)
+        {
+            return null;
+        }
     }
 }

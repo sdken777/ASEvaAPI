@@ -1116,4 +1116,190 @@ namespace ASEva
         /// </summary>
         ReplayNeck = 34,
     }
+
+    /// <summary>
+    /// (api:app=2.3.0) 窗口组件信息
+    /// </summary>
+    public class WindowClassInfo
+    {
+        /// <summary>
+        /// 所属插件ID
+        /// </summary>
+        public String OwnerPluginID { get; set; }
+
+        /// <summary>
+        /// 组件ID
+        /// </summary>
+        public String ID { get; set; }
+
+        /// <summary>
+        /// 分化ID
+        /// </summary>
+        public String TransformID { get; set; }
+
+        /// <summary>
+        /// 窗口标题
+        /// </summary>
+        public String Title { get; set; }
+
+        /// <summary>
+        /// 窗口图标，分辨率为16x16
+        /// </summary>
+        public CommonImage Icon { get; set; }
+
+        /// <summary>
+        /// 是否支持同时打开多个窗口
+        /// </summary>
+        public bool MultipleSupported { get; set; }
+
+        /// <summary>
+        /// 分化的窗口组件信息
+        /// </summary>
+        public Dictionary<String, WindowClassInfo> TransformClasses { get; set; }
+    }
+
+    /// <summary>
+    /// (api:app=2.3.0) 对话框组件信息
+    /// </summary>
+    public class DialogClassInfo
+    {
+        /// <summary>
+        /// 所属插件ID
+        /// </summary>
+        public String OwnerPluginID { get; set; }
+
+        /// <summary>
+        /// 组件ID
+        /// </summary>
+        public String ID { get; set; }
+
+        /// <summary>
+        /// 分化ID
+        /// </summary>
+        public String TransformID { get; set; }
+
+        /// <summary>
+        /// 对话框标题
+        /// </summary>
+        public String Title { get; set; }
+
+        /// <summary>
+        /// 对话框图标，分辨率为16x16
+        /// </summary>
+        public CommonImage Icon { get; set; }
+
+        /// <summary>
+        /// 分化的对话框组件信息
+        /// </summary>
+        public Dictionary<String, DialogClassInfo> TransformClasses { get; set; }
+    }
+
+    /// <summary>
+    /// (api:app=2.3.0) 数据处理组件信息
+    /// </summary>
+    public class ProcessorClassInfo
+    {
+        /// <summary>
+        /// 所属插件ID
+        /// </summary>
+        public String OwnerPluginID { get; set; }
+
+        /// <summary>
+        /// 组件ID
+        /// </summary>
+        public String ID { get; set; }
+
+        /// <summary>
+        /// 数据处理组件名称
+        /// </summary>
+        public String Title { get; set; }
+    }
+
+    /// <summary>
+    /// (api:app=2.3.0) C++库类别
+    /// </summary>
+    public enum NativeLibraryType
+    {
+        /// <summary>
+        /// 一般原生库
+        /// </summary>
+        Native = 1,
+
+        /// <summary>
+        /// 总线设备库
+        /// </summary>
+        Bus = 2,
+
+        /// <summary>
+        /// 视频设备库
+        /// </summary>
+        Video = 3,
+
+        /// <summary>
+        /// 数据处理库
+        /// </summary>
+        Processor = 4,
+
+        /// <summary>
+        /// 一般设备库
+        /// </summary>
+        Device = 5,
+
+        /// <summary>
+        /// 文件读写库
+        /// </summary>
+        FileIO = 6,
+    }
+
+    /// <summary>
+    /// (api:app=2.3.0) C++组件信息
+    /// </summary>
+    public class NativeClassInfo
+    {
+        /// <summary>
+        /// 所属插件ID
+        /// </summary>
+        public String OwnerPluginID { get; set; }
+
+        /// <summary>
+        /// 组件ID
+        /// </summary>
+        public String ID { get; set; }
+
+        /// <summary>
+        /// C++组件名称
+        /// </summary>
+        public String Title { get; set; }
+
+        /// <summary>
+        /// 对应的类型ID
+        /// </summary>
+        public String NativeType { get; set; }
+
+        /// <summary>
+        /// 绑定的各C++库版本
+        /// </summary>
+        public Dictionary<NativeLibraryType, Version> LibraryVersions { get; set; }
+    }
+
+    /// <summary>
+    /// (api:app=2.3.0) 独立任务组件信息
+    /// </summary>
+    public class TaskClassInfo
+    {
+        /// <summary>
+        /// 所属插件ID
+        /// </summary>
+        public String OwnerPluginID { get; set; }
+
+        /// <summary>
+        /// 组件ID
+        /// </summary>
+        public String ID { get; set; }
+
+        /// <summary>
+        /// 独立任务组件名称
+        /// </summary>
+        public String Title { get; set; }
+    }
 }

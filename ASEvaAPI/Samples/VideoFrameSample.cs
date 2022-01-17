@@ -3,12 +3,39 @@
 namespace ASEva.Samples
 {
     /// <summary>
+    /// (api:app=2.3.0) 通用图像数据
+    /// </summary>
+    public class CommonImage
+    {
+        /// <summary>
+        /// 图像宽度
+        /// </summary>
+        public int Width { get; set; }
+
+        /// <summary>
+        /// 图像高度
+        /// </summary>
+        public int Height { get; set; }
+
+        /// <summary>
+        /// 图像数据，数组长度为宽度x高度x4，每个像素的存放顺序为BGRA
+        /// </summary>
+        public byte[] Data { get; set; }
+    }
+
+    /// <summary>
     /// (api:app=2.0.0) 视频帧样本
     /// </summary>
     public class VideoFrameSample : Sample
     {
         /// <summary>
-        /// 获取视频帧的位图图像
+        /// (api:app=2.3.0) 通用图像数据
+        /// </summary>
+        /// <value></value>
+        public CommonImage CommonImage { get; set; }
+
+        /// <summary>
+        /// 获取视频帧的位图图像（平台特化对象）
         /// </summary>
         public object Image { get; set; }
 

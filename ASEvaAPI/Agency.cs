@@ -111,6 +111,7 @@ namespace ASEva
         Dictionary<BusDeviceID, BusDeviceInfo> GetBusDevices();
         Dictionary<VideoDeviceID, VideoDeviceInfo> GetVideoDevices();
         Dictionary<String, String> GetNativePluginVersions(String prefix);
+        Dictionary<String, Version> GetNativePluginVersions(NativeLibraryType type);
         VideoFrameGetter CreateVideoFrameGetter();
         object GetOfflineMapImage(IntSize imageSize, LocPoint centerLocation, int zoom);
         FloatPoint ConvertOfflineMapLocToPix(LocPoint origin, int zoom, LocPoint point);
@@ -150,6 +151,16 @@ namespace ASEva
         int[] GetLicensedFunctionIndices();
         bool SwitchAppMode(String controllerName, ApplicationMode mode, int waitSecond);
         void SetDataPath(String path);
+        Dictionary<String, WindowClassInfo> GetWindowClassTable();
+        Dictionary<String, DialogClassInfo> GetDialogClassTable();
+        Dictionary<String, ProcessorClassInfo> GetProcessorClassTable();
+        Dictionary<String, NativeClassInfo> GetNativeClassTable();
+        Dictionary<String, TaskClassInfo> GetTaskClassTable();
+        WindowClassInfo RegisterTransformWindowClass(String windowClassID, String config);
+        DialogClassInfo RegisterTransformDialogClass(String dialogClassID, String config);
+        ConfigStatus GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID, out ConfigStatus[] childrenStatus);
+        void DisableAllConfigs();
+        DateTime[] GetGenerationSessions(String generationID);
     }
 
     /// <summary>
@@ -1175,6 +1186,16 @@ namespace ASEva
         }
 
         /// <summary>
+        /// (api:app=2.3.0) 获取C++插件模块版本列表
+        /// </summary>
+        /// <param name="type">C++库类别</param>
+        /// <returns>版本列表，键为C++模块的类型ID</returns>
+        public static  Dictionary<String, Version> GetNativePluginVersions(NativeLibraryType type)
+        {
+            return Handler.GetNativePluginVersions(type);
+        }
+
+        /// <summary>
         /// 弹出对话框配置离线地图路径
         /// </summary>
         public static void ConfigOfflineMapPath()
@@ -1572,6 +1593,103 @@ namespace ASEva
         public static void SetDataPath(String path)
         {
             Handler.SetDataPath(path);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取窗口组件信息表
+        /// </summary>
+        /// <returns>窗口组件信息表，键为组件ID</returns>
+        public static Dictionary<String, WindowClassInfo> GetWindowClassTable()
+        {
+            return Handler.GetWindowClassTable();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取对话框组件信息表
+        /// </summary>
+        /// <returns>对话框组件信息表，键为组件ID</returns>
+        public static Dictionary<String, DialogClassInfo> GetDialogClassTable()
+        {
+            return Handler.GetDialogClassTable();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取数据处理组件信息表
+        /// </summary>
+        /// <returns>数据处理组件信息表，键为组件ID</returns>
+        public static Dictionary<String, ProcessorClassInfo> GetProcessorClassTable()
+        {
+            return Handler.GetProcessorClassTable();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取C++组件信息表
+        /// </summary>
+        /// <returns>C++组件信息表，键为组件ID</returns>
+        public static Dictionary<String, NativeClassInfo> GetNativeClassTable()
+        {
+            return Handler.GetNativeClassTable();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取独立任务组件信息表
+        /// </summary>
+        /// <returns>独立任务组件信息表，键为组件ID</returns>
+        public static Dictionary<String, TaskClassInfo> GetTaskClassTable()
+        {
+            return Handler.GetTaskClassTable();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 注册分化窗口组件
+        /// </summary>
+        /// <param name="windowClassID">原窗口组件ID</param>
+        /// <param name="config">用于分化的配置字符串</param>
+        /// <returns>分化后的窗口组件信息</returns>
+        public static WindowClassInfo RegisterTransformWindowClass(String windowClassID, String config)
+        {
+            return Handler.RegisterTransformWindowClass(windowClassID, config);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 注册分化对话框组件
+        /// </summary>
+        /// <param name="dialogClassID">原对话框组件ID</param>
+        /// <param name="config">用于分化的配置字符串</param>
+        /// <returns>分化后的对话框组件信息</returns>
+        public static DialogClassInfo RegisterTransformDialogClass(String dialogClassID, String config)
+        {
+            return Handler.RegisterTransformDialogClass(dialogClassID, config);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取对话框相关模块配置状态
+        /// </summary>
+        /// <param name="dialogClassID">对话框组件ID</param>
+        /// <param name="transformID">分化ID</param>
+        /// <param name="childrenStatus">子配置状态</param>
+        /// <returns>配置状态</returns>
+        public static ConfigStatus GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID, out ConfigStatus[] childrenStatus)
+        {
+            return Handler.GetDialogRelatedModulesConfigStatus(dialogClassID, transformID, out childrenStatus);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 禁用所有模块配置
+        /// </summary>
+        public static void DisableAllConfigs()
+        {
+            Handler.DisableAllConfigs();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取含有指定generation ID的所有session
+        /// </summary>
+        /// <param name="generationID">Generation ID</param>
+        /// <returns>Session ID列表</returns>
+        public static DateTime[] GetGenerationSessions(String generationID)
+        {
+            return Handler.GetGenerationSessions(generationID);
         }
     }
 }
