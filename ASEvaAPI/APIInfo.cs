@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 0, 10); // 新增Agency.Get/SetRaw/Bus/Video/AudioChannelDelayConfig, Get/SetChannelMonitoringFlag, GetBus/Video/Audio/RawChannelStatus, GetAvailableBus/Video/Raw/SampleChannels, GetBusPayloadPercentage, IsSampleChannelConflict, GetAllChannelMonitoringKeys, GetAllRawChannelDelayConfigs
+            return new Version(2, 3, 0, 11); // 新增Agency.StartOffline。扩展Agency.StartOnline/Offline/Replay, StopRunning
         }
 
         /// <summary>

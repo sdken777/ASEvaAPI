@@ -922,5 +922,25 @@ namespace ASEva
         {
             return false;
         }
+
+        public bool StartReplay(bool force, double startTimeline, double? interestTarget)
+        {
+            return false;
+        }
+
+        public bool StartOnline(bool force, bool previewOnly)
+        {
+            return false;
+        }
+
+        public bool StartOffline(bool force, bool previewOnly)
+        {
+            return false;
+        }
+
+        public bool StopRunning(bool force, bool editRecordedSession)
+        {
+            return false;
+        }
     }
 }

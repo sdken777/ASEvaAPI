@@ -87,9 +87,13 @@ namespace ASEva
         void RemoveEvent(object eventHandle);
         void SetEventComment(object eventHandle, String comment);
         void StartReplay(double startTimeline, double? interestTarget);
+        bool StartReplay(bool force, double startTimeline, double? interestTarget);
         bool StartOnline(String controllerName, bool previewOnly);
+        bool StartOnline(bool force, bool previewOnly);
+        bool StartOffline(bool force, bool previewOnly);
         void StopRunning();
         bool StopRunning(String controllerID);
+        bool StopRunning(bool force, bool editRecordedSession);
         double? GetSessionTimeline(DateTime session);
         double? GetSessionLength(DateTime session);
         double GetFilteredSessionListTotalLength();
@@ -992,6 +996,18 @@ namespace ASEva
         }
 
         /// <summary>
+        /// (api:app=2.3.0) 切换至回放模式并开始回放
+        /// </summary>
+        /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
+        /// <param name="startTimeline">回放开始时间，单位秒</param>
+        /// <param name="interestTarget">目标兴趣点，单位秒（空表示不设置兴趣点）</param>
+        /// <returns>是否成功</returns>
+        public static bool StartReplay(bool force, double startTimeline, double? interestTarget)
+        {
+            return Handler.StartReplay(force, startTimeline, interestTarget);
+        }
+
+        /// <summary>
         /// 切换至在线模式并开始预览或采集
         /// </summary>
         /// <param name="controllerName">控制者名称，用于独占控制模式</param>
@@ -1000,6 +1016,28 @@ namespace ASEva
         public static bool StartOnline(String controllerName, bool previewOnly)
         {
             return Handler.StartOnline(controllerName, previewOnly);
+        }
+
+        /// <summary>
+        /// 切换至在线模式并开始预览或采集
+        /// </summary>
+        /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
+        /// <param name="previewOnly">是否为预览</param>
+        /// <returns>是否成功</returns>
+        public static bool StartOnline(bool force, bool previewOnly)
+        {
+            return Handler.StartOnline(force, previewOnly);
+        }
+
+        /// <summary>
+        /// 切换至离线模式并开始预览或后处理
+        /// </summary>
+        /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
+        /// <param name="previewOnly">是否为预览</param>
+        /// <returns>是否成功</returns>
+        public static bool StartOffline(bool force, bool previewOnly)
+        {
+            return Handler.StartOffline(force, previewOnly);
         }
 
         /// <summary>
@@ -1018,6 +1056,17 @@ namespace ASEva
         public static bool StopRunning(String controllerName)
         {
             return Handler.StopRunning(controllerName);
+        }
+
+        /// <summary>
+        /// 停止采集、处理、回放
+        /// </summary>
+        /// <param name="force">是否强制结束</param>
+        /// <param name="editRecordedSession">成功停止后是否立即编辑session信息</param>
+        /// <returns>是否成功</returns>
+        public static bool StopRunning(bool force, bool editRecordedSession)
+        {
+            return Handler.StopRunning(force, editRecordedSession);
         }
 
         /// <summary>
