@@ -806,5 +806,121 @@ namespace ASEva
         {
             return null;
         }
+
+        public double GetRawChannelDelayConfig(string id)
+        {
+            return 0;
+        }
+
+        public double GetBusChannelDelayConfig(int channel)
+        {
+            return 0;
+        }
+
+        public double GetVideoChannelDelayConfig(int channel)
+        {
+            return 0;
+        }
+
+        public void SetRawChannelDelayConfig(string id, double delay)
+        {
+        }
+
+        public void SetBusChannelDelayConfig(int channel, double delay)
+        {
+        }
+
+        public void SetVideoChannelDelayConfig(int channel, double delay)
+        {
+        }
+
+        public bool GetChannelMonitoringFlag(string key)
+        {
+            return false;
+        }
+
+        public void SetChannelMonitoringFlag(string key, bool monitoring)
+        {
+        }
+
+        public bool GetBusChannelStatus(int channel, uint? toleranceMillisecond)
+        {
+            return false;
+        }
+
+        public bool GetVideoChannelStatus(int channel, uint? toleranceMillisecond, out List<double> interval, out List<double> delay)
+        {
+            interval = null;
+            delay = null;
+            return false;
+        }
+
+        public bool GetAudioChannelStatus(uint? toleranceMillisecond, out List<double> interval, out List<double> delay)
+        {
+            interval = null;
+            delay = null;
+            return false;
+        }
+
+        public bool GetRawChannelStatus(string protocol, uint? toleranceMillisecond)
+        {
+            return false;
+        }
+
+        public bool GetSampleChannelStatus(string protocol, uint? toleranceMillisecond, out List<double> interval, out List<double> delay)
+        {
+            interval = null;
+            delay = null;
+            return false;
+        }
+
+        public int[] GetAvailableBusChannels()
+        {
+            return null;
+        }
+
+        public int[] GetAvailableVideoChannels()
+        {
+            return null;
+        }
+
+        public string[] GetAvailableRawChannels()
+        {
+            return null;
+        }
+
+        public string[] GetAvailableSampleChannels()
+        {
+            return null;
+        }
+
+        public double? GetBusPayloadPercentage(int channel)
+        {
+            return null;
+        }
+
+        public double GetAudioChannelDelayConfig()
+        {
+            return 0;
+        }
+
+        public Dictionary<string, double> GetAllRawChannelDelayConfigs()
+        {
+            return null;
+        }
+
+        public void SetAudioChannelDelayConfig(double delay)
+        {
+        }
+
+        public string[] GetAllChannelMonitoringKeys()
+        {
+            return null;
+        }
+
+        public bool IsSampleChannelConflict(string protocol)
+        {
+            return false;
+        }
     }
 }

@@ -176,6 +176,29 @@ namespace ASEva
         void SetAudioVolume(double volume);
         void SetCPURateScale(int scale);
         String GetLicenseInfo();
+        double GetRawChannelDelayConfig(String id);
+        double GetBusChannelDelayConfig(int channel);
+        double GetVideoChannelDelayConfig(int channel);
+        double GetAudioChannelDelayConfig();
+        Dictionary<String, double> GetAllRawChannelDelayConfigs();
+        void SetRawChannelDelayConfig(String id, double delay);
+        void SetBusChannelDelayConfig(int channel, double delay);
+        void SetVideoChannelDelayConfig(int channel, double delay);
+        void SetAudioChannelDelayConfig(double delay);
+        bool GetChannelMonitoringFlag(String key);
+        void SetChannelMonitoringFlag(String key, bool monitoring);
+        String[] GetAllChannelMonitoringKeys();
+        bool GetBusChannelStatus(int channel, uint? toleranceMillisecond);
+        bool GetVideoChannelStatus(int channel, uint? toleranceMillisecond, out List<double> interval, out List<double> delay);
+        bool GetAudioChannelStatus(uint? toleranceMillisecond, out List<double> interval, out List<double> delay);
+        bool GetRawChannelStatus(String protocol, uint? toleranceMillisecond);
+        bool GetSampleChannelStatus(String protocol, uint? toleranceMillisecond, out List<double> interval, out List<double> delay);
+        int[] GetAvailableBusChannels();
+        int[] GetAvailableVideoChannels();
+        String[] GetAvailableRawChannels();
+        String[] GetAvailableSampleChannels();
+        double? GetBusPayloadPercentage(int channel);
+        bool IsSampleChannelConflict(String protocol);
     }
 
     /// <summary>
@@ -668,6 +691,16 @@ namespace ASEva
         public static String GetChannelAliasName(String key)
         {
             return Handler.GetChannelAliasName(key);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 检查样本数据通道是否冲突（有多个模块输出相同协议和通道的样本数据）
+        /// </summary>
+        /// <param name="protocol">样本通道协议，格式为"协议名@通道序号"，通道序号从0开始，协议名中带"v"字版本号的可向下兼容</param>
+        /// <returns>是否冲突</returns>
+        public static bool IsSampleChannelConflict(string protocol)
+        {
+            return Handler.IsSampleChannelConflict(protocol);
         }
 
         /// <summary>
@@ -1845,6 +1878,228 @@ namespace ASEva
         public static String GetLicenseInfo()
         {
             return Handler.GetLicenseInfo();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取原始数据通道延迟配置
+        /// </summary>
+        /// <param name="id">原始数据通道ID</param>
+        /// <returns>延迟配置，单位毫秒</returns>
+        public static double GetRawChannelDelayConfig(String id)
+        {
+            return Handler.GetRawChannelDelayConfig(id);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取总线数据通道延迟配置
+        /// </summary>
+        /// <param name="channel">总线通道，1~16</param>
+        /// <returns>延迟配置，单位毫秒</returns>
+        public static double GetBusChannelDelayConfig(int channel)
+        {
+            return Handler.GetBusChannelDelayConfig(channel);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取视频数据通道延迟配置
+        /// </summary>
+        /// <param name="channel">视频通道，0~23</param>
+        /// <returns>延迟配置，单位毫秒</returns>
+        public static double GetVideoChannelDelayConfig(int channel)
+        {
+            return Handler.GetVideoChannelDelayConfig(channel);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取音频数据通道延迟配置
+        /// </summary>
+        /// <returns>延迟配置，单位毫秒</returns>
+        public static double GetAudioChannelDelayConfig()
+        {
+            return Handler.GetAudioChannelDelayConfig();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取所有原始数据通道延迟配置
+        /// </summary>
+        /// <returns>所有原始数据通道的延迟配置，单位毫秒</returns>
+        public static Dictionary<string, double> GetAllRawChannelDelayConfigs()
+        {
+            return Handler.GetAllRawChannelDelayConfigs();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 设置原始数据通道延迟配置
+        /// </summary>
+        /// <param name="id">原始数据通道ID</param>
+        /// <param name="delay">延迟配置，单位毫秒</param>
+        public static void SetRawChannelDelayConfig(String id, double delay)
+        {
+            Handler.SetRawChannelDelayConfig(id, delay);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 设置总线数据通道延迟配置
+        /// </summary>
+        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="delay">延迟配置，单位毫秒</param>
+        public static void SetBusChannelDelayConfig(int channel, double delay)
+        {
+            Handler.SetBusChannelDelayConfig(channel, delay);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 设置视频数据通道延迟配置
+        /// </summary>
+        /// <param name="channel">视频通道，0~23</param>
+        /// <param name="delay">延迟配置，单位毫秒</param>
+        public static void SetVideoChannelDelayConfig(int channel, double delay)
+        {
+            Handler.SetVideoChannelDelayConfig(channel, delay);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 设置音频数据通道延迟配置
+        /// </summary>
+        /// <param name="delay">延迟配置，单位毫秒</param>
+        public static void SetAudioChannelDelayConfig(double delay)
+        {
+            Handler.SetAudioChannelDelayConfig(delay);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取指定通道的监控配置
+        /// </summary>
+        /// <param name="id">通道ID</param>
+        /// <returns>是否监控</returns>
+        public static bool GetChannelMonitoringFlag(String id)
+        {
+            return Handler.GetChannelMonitoringFlag(id);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 设置指定通道的监控配置
+        /// </summary>
+        /// <param name="id">通道ID</param>
+        /// <param name="monitoring">是否监控，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
+        public static void SetChannelMonitoringFlag(String id, bool monitoring)
+        {
+            Handler.SetChannelMonitoringFlag(id, monitoring);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取所有正在监控的通道ID
+        /// </summary>
+        /// <returns>正在监控的通道ID列表</returns>
+        public static string[] GetAllChannelMonitoringKeys()
+        {
+            return Handler.GetAllChannelMonitoringKeys();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取总线数据通道状态
+        /// </summary>
+        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="toleranceMillisecond">无数据的容忍时长</param>
+        /// <returns>是否有数据</returns>
+        public static bool GetBusChannelStatus(int channel/* 1~16 */, uint? toleranceMillisecond)
+        {
+            return Handler.GetBusChannelStatus(channel, toleranceMillisecond);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取视频数据通道状态
+        /// </summary>
+        /// <param name="channel">视频通道，0~23</param>
+        /// <param name="toleranceMillisecond">无数据的容忍时长</param>
+        /// <param name="interval">输出每帧数据之间的时间间隔曲线，单位秒</param>
+        /// <param name="delay">输出每帧数据的延迟曲线，单位秒</param>
+        /// <returns>是否有数据</returns>
+        public static bool GetVideoChannelStatus(int channel, uint? toleranceMillisecond, out List<double> interval, out List<double> delay)
+        {
+            return Handler.GetVideoChannelStatus(channel, toleranceMillisecond, out interval, out delay);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取音频数据通道状态
+        /// </summary>
+        /// <param name="toleranceMillisecond">无数据的容忍时长</param>
+        /// <param name="interval">输出每帧数据之间的时间间隔曲线，单位秒</param>
+        /// <param name="delay">输出每帧数据的延迟曲线，单位秒</param>
+        /// <returns>是否有数据</returns>
+        public static bool GetAudioChannelStatus(uint? toleranceMillisecond, out List<double> interval, out List<double> delay)
+        {
+            return Handler.GetAudioChannelStatus(toleranceMillisecond, out interval, out delay);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取原始数据通道状态
+        /// </summary>
+        /// <param name="protocol">原始数据通道ID</param>
+        /// <param name="toleranceMillisecond">无数据的容忍时长</param>
+        /// <returns>是否有数据</returns>
+        public static bool GetRawChannelStatus(String protocol, uint? toleranceMillisecond)
+        {
+            return Handler.GetRawChannelStatus(protocol, toleranceMillisecond);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取样本数据通道状态
+        /// </summary>
+        /// <param name="protocol">样本数据通道ID</param>
+        /// <param name="toleranceMillisecond">无数据的容忍时长</param>
+        /// <param name="interval">输出每帧数据之间的时间间隔曲线，单位秒</param>
+        /// <param name="delay">输出每帧数据的延迟曲线，单位秒</param>
+        /// <returns>是否有数据</returns>
+        public static bool GetSampleChannelStatus(String protocol, uint? toleranceMillisecond, out List<double> interval, out List<double> delay)
+        {
+            return Handler.GetSampleChannelStatus(protocol, toleranceMillisecond, out interval, out delay);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取所有有效的总线通道
+        /// </summary>
+        /// <returns>有效的总线通道列表，值为1~16</returns>
+        public static int[] GetAvailableBusChannels()
+        {
+            return Handler.GetAvailableBusChannels();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取所有有效的视频通道
+        /// </summary>
+        /// <returns>有效的视频通道列表，值为0~23</returns>
+        public static int[] GetAvailableVideoChannels()
+        {
+            return Handler.GetAvailableVideoChannels();   
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取所有有效的原始数据通道
+        /// </summary>
+        /// <returns>有效的原始数据通道列表，值为通道ID</returns>
+        public static String[] GetAvailableRawChannels()
+        {
+            return Handler.GetAvailableRawChannels();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取所有有效的样本数据通道
+        /// </summary>
+        /// <returns>有效的样本数据通道列表，值为通道ID</returns>
+        public static String[] GetAvailableSampleChannels()
+        {
+            return Handler.GetAvailableSampleChannels();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取指定总线通道的负载百分比
+        /// </summary>
+        /// <param name="channel">总线通道，1~16</param>
+        /// <returns>总线通道的负载百分比，若无效则返回null</returns>
+        public static double? GetBusPayloadPercentage(int channel)
+        {
+            return Handler.GetBusPayloadPercentage(channel);
         }
     }
 }

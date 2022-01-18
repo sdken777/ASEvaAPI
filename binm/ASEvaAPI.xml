@@ -335,6 +335,13 @@
             <param name="key">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始，协议名中带"v"字版本号的可向下兼容。视频协议名为video</param>
             <returns>数据通道别名，若未找到返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.IsSampleChannelConflict(System.String)">
+            <summary>
+            (api:app=2.3.0) 检查样本数据通道是否冲突（有多个模块输出相同协议和通道的样本数据）
+            </summary>
+            <param name="protocol">样本通道协议，格式为"协议名@通道序号"，通道序号从0开始，协议名中带"v"字版本号的可向下兼容</param>
+            <returns>是否冲突</returns>
+        </member>
         <member name="M:ASEva.Agency.IsInputChannelAvailable(System.String)">
             <summary>
             检查指定的输入样本通道是否可用
@@ -1154,6 +1161,162 @@
             (api:app=2.3.0) 获取许可证的详细信息
             </summary>
             <returns>许可证的详细信息</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetRawChannelDelayConfig(System.String)">
+            <summary>
+            (api:app=2.3.0) 获取原始数据通道延迟配置
+            </summary>
+            <param name="id">原始数据通道ID</param>
+            <returns>延迟配置，单位毫秒</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetBusChannelDelayConfig(System.Int32)">
+            <summary>
+            (api:app=2.3.0) 获取总线数据通道延迟配置
+            </summary>
+            <param name="channel">总线通道，1~16</param>
+            <returns>延迟配置，单位毫秒</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetVideoChannelDelayConfig(System.Int32)">
+            <summary>
+            (api:app=2.3.0) 获取视频数据通道延迟配置
+            </summary>
+            <param name="channel">视频通道，0~23</param>
+            <returns>延迟配置，单位毫秒</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetAudioChannelDelayConfig">
+            <summary>
+            (api:app=2.3.0) 获取音频数据通道延迟配置
+            </summary>
+            <returns>延迟配置，单位毫秒</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetAllRawChannelDelayConfigs">
+            <summary>
+            (api:app=2.3.0) 获取所有原始数据通道延迟配置
+            </summary>
+            <returns>所有原始数据通道的延迟配置，单位毫秒</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetRawChannelDelayConfig(System.String,System.Double)">
+            <summary>
+            (api:app=2.3.0) 设置原始数据通道延迟配置
+            </summary>
+            <param name="id">原始数据通道ID</param>
+            <param name="delay">延迟配置，单位毫秒</param>
+        </member>
+        <member name="M:ASEva.Agency.SetBusChannelDelayConfig(System.Int32,System.Double)">
+            <summary>
+            (api:app=2.3.0) 设置总线数据通道延迟配置
+            </summary>
+            <param name="channel">总线通道，1~16</param>
+            <param name="delay">延迟配置，单位毫秒</param>
+        </member>
+        <member name="M:ASEva.Agency.SetVideoChannelDelayConfig(System.Int32,System.Double)">
+            <summary>
+            (api:app=2.3.0) 设置视频数据通道延迟配置
+            </summary>
+            <param name="channel">视频通道，0~23</param>
+            <param name="delay">延迟配置，单位毫秒</param>
+        </member>
+        <member name="M:ASEva.Agency.SetAudioChannelDelayConfig(System.Double)">
+            <summary>
+            (api:app=2.3.0) 设置音频数据通道延迟配置
+            </summary>
+            <param name="delay">延迟配置，单位毫秒</param>
+        </member>
+        <member name="M:ASEva.Agency.GetChannelMonitoringFlag(System.String)">
+            <summary>
+            (api:app=2.3.0) 获取指定通道的监控配置
+            </summary>
+            <param name="id">通道ID</param>
+            <returns>是否监控</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetChannelMonitoringFlag(System.String,System.Boolean)">
+            <summary>
+            (api:app=2.3.0) 设置指定通道的监控配置
+            </summary>
+            <param name="id">通道ID</param>
+            <param name="monitoring">是否监控，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
+        </member>
+        <member name="M:ASEva.Agency.GetAllChannelMonitoringKeys">
+            <summary>
+            (api:app=2.3.0) 获取所有正在监控的通道ID
+            </summary>
+            <returns>正在监控的通道ID列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetBusChannelStatus(System.Int32,System.Nullable{System.UInt32})">
+            <summary>
+            (api:app=2.3.0) 获取总线数据通道状态
+            </summary>
+            <param name="channel">总线通道，1~16</param>
+            <param name="toleranceMillisecond">无数据的容忍时长</param>
+            <returns>是否有数据</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetVideoChannelStatus(System.Int32,System.Nullable{System.UInt32},System.Collections.Generic.List{System.Double}@,System.Collections.Generic.List{System.Double}@)">
+            <summary>
+            (api:app=2.3.0) 获取视频数据通道状态
+            </summary>
+            <param name="channel">视频通道，0~23</param>
+            <param name="toleranceMillisecond">无数据的容忍时长</param>
+            <param name="interval">输出每帧数据之间的时间间隔曲线，单位秒</param>
+            <param name="delay">输出每帧数据的延迟曲线，单位秒</param>
+            <returns>是否有数据</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetAudioChannelStatus(System.Nullable{System.UInt32},System.Collections.Generic.List{System.Double}@,System.Collections.Generic.List{System.Double}@)">
+            <summary>
+            (api:app=2.3.0) 获取音频数据通道状态
+            </summary>
+            <param name="toleranceMillisecond">无数据的容忍时长</param>
+            <param name="interval">输出每帧数据之间的时间间隔曲线，单位秒</param>
+            <param name="delay">输出每帧数据的延迟曲线，单位秒</param>
+            <returns>是否有数据</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetRawChannelStatus(System.String,System.Nullable{System.UInt32})">
+            <summary>
+            (api:app=2.3.0) 获取原始数据通道状态
+            </summary>
+            <param name="protocol">原始数据通道ID</param>
+            <param name="toleranceMillisecond">无数据的容忍时长</param>
+            <returns>是否有数据</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetSampleChannelStatus(System.String,System.Nullable{System.UInt32},System.Collections.Generic.List{System.Double}@,System.Collections.Generic.List{System.Double}@)">
+            <summary>
+            (api:app=2.3.0) 获取样本数据通道状态
+            </summary>
+            <param name="protocol">样本数据通道ID</param>
+            <param name="toleranceMillisecond">无数据的容忍时长</param>
+            <param name="interval">输出每帧数据之间的时间间隔曲线，单位秒</param>
+            <param name="delay">输出每帧数据的延迟曲线，单位秒</param>
+            <returns>是否有数据</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetAvailableBusChannels">
+            <summary>
+            (api:app=2.3.0) 获取所有有效的总线通道
+            </summary>
+            <returns>有效的总线通道列表，值为1~16</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetAvailableVideoChannels">
+            <summary>
+            (api:app=2.3.0) 获取所有有效的视频通道
+            </summary>
+            <returns>有效的视频通道列表，值为0~23</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetAvailableRawChannels">
+            <summary>
+            (api:app=2.3.0) 获取所有有效的原始数据通道
+            </summary>
+            <returns>有效的原始数据通道列表，值为通道ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetAvailableSampleChannels">
+            <summary>
+            (api:app=2.3.0) 获取所有有效的样本数据通道
+            </summary>
+            <returns>有效的样本数据通道列表，值为通道ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetBusPayloadPercentage(System.Int32)">
+            <summary>
+            (api:app=2.3.0) 获取指定总线通道的负载百分比
+            </summary>
+            <param name="channel">总线通道，1~16</param>
+            <returns>总线通道的负载百分比，若无效则返回null</returns>
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
