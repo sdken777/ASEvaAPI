@@ -1302,4 +1302,22 @@ namespace ASEva
         /// </summary>
         public String Title { get; set; }
     }
+
+    /// <summary>
+    /// (api:app=2.3.0) Session筛选标志位
+    /// </summary>
+    public class SessionFilterFlags
+    {
+        public bool SearchTrue { get; set; }
+        public bool CheckTrue { get; set; }
+    }
+
+    /// <summary>
+    /// (api:app=2.3.0) 详细的设备状态信息
+    /// </summary>
+    public class DeviceStatusDetail
+    {
+        public GeneralDeviceStatus Status { get; set; }
+        public String Description { get; set; }
+    }
 }

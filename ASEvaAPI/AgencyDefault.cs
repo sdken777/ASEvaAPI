@@ -737,5 +737,74 @@ namespace ASEva
         {
             return null;
         }
+
+        public double GetInterestTarget()
+        {
+            return 0;
+        }
+
+        public Dictionary<string, DeviceStatusDetail> GetAllDeviceStatus()
+        {
+            return null;
+        }
+
+        public void SetTargetReplaySpeed(double speed)
+        {
+        }
+
+        public void SetSessionSearchKeyword(string keyword)
+        {
+        }
+
+        public Dictionary<DateTime, SessionFilterFlags> GetSessionFilterTable()
+        {
+            return null;
+        }
+
+        public DateTime? GetCurrentOnlineSession()
+        {
+            return null;
+        }
+
+        public double GetSessionListTotalLength()
+        {
+            return 0;
+        }
+
+        public string GetSessionSearchKey()
+        {
+            return null;
+        }
+
+        public bool RemoveSession(DateTime session, bool force)
+        {
+            return false;
+        }
+
+        public void SetSessionChecker(DateTime session, bool check)
+        {
+        }
+
+        public void RemoveGeneration(DateTime session, string genID)
+        {
+        }
+
+        public string GetSessionComment(DateTime session)
+        {
+            return null;
+        }
+
+        public void SetAudioVolume(double volume)
+        {
+        }
+
+        public void SetCPURateScale(int scale)
+        {
+        }
+
+        public string GetLicenseInfo()
+        {
+            return null;
+        }
     }
 }

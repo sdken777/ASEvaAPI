@@ -161,6 +161,21 @@ namespace ASEva
         ConfigStatus GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID, out ConfigStatus[] childrenStatus);
         void DisableAllConfigs();
         DateTime[] GetGenerationSessions(String generationID);
+        double GetInterestTarget();
+        Dictionary<String, DeviceStatusDetail> GetAllDeviceStatus();
+        void SetTargetReplaySpeed(double speed);
+        void SetSessionSearchKeyword(String keyword);
+        Dictionary<DateTime, SessionFilterFlags> GetSessionFilterTable();
+        DateTime? GetCurrentOnlineSession();
+        double GetSessionListTotalLength();
+        String GetSessionSearchKey();
+        bool RemoveSession(DateTime session, bool force);
+        void SetSessionChecker(DateTime session, bool check);
+        void RemoveGeneration(DateTime session, String genID);
+        String GetSessionComment(DateTime session);
+        void SetAudioVolume(double volume);
+        void SetCPURateScale(int scale);
+        String GetLicenseInfo();
     }
 
     /// <summary>
@@ -234,6 +249,15 @@ namespace ASEva
         public static DateTime? GetInterestTimestamp()
         {
             return Handler.GetInterestTimestamp();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取兴趣时间点目标
+        /// </summary>
+        /// <returns>兴趣时间点目标，可能超出数据缓存范围</returns>
+        public static double GetInterestTarget()
+        {
+            return Handler.GetInterestTarget();
         }
 
         /// <summary>
@@ -513,6 +537,15 @@ namespace ASEva
         public static GeneralDeviceStatus GetDeviceStatus(String type)
         {
             return Handler.GetDeviceStatus(type);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取所有设备状态
+        /// </summary>
+        /// <returns>设备状态表，键为设备的类型ID，在插件的info.txt中以type字段描述</returns>
+        public static Dictionary<String, DeviceStatusDetail> GetAllDeviceStatus()
+        {
+            return Handler.GetAllDeviceStatus();
         }
 
         /// <summary>
@@ -1690,6 +1723,128 @@ namespace ASEva
         public static DateTime[] GetGenerationSessions(String generationID)
         {
             return Handler.GetGenerationSessions(generationID);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 设置目标回放速度
+        /// </summary>
+        /// <param name="speed">目标回放速度</param>
+        public static void SetTargetReplaySpeed(double speed)
+        {
+            Handler.SetTargetReplaySpeed(speed);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 设置session搜索关键字
+        /// </summary>
+        /// <param name="keyword">session搜索关键字</param>
+        public static void SetSessionSearchKeyword(String keyword)
+        {
+            Handler.SetSessionSearchKeyword(keyword);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取所有session的筛选标志位
+        /// </summary>
+        /// <returns>session的筛选标志位表</returns>
+        public static Dictionary<DateTime, SessionFilterFlags> GetSessionFilterTable()
+        {
+            return Handler.GetSessionFilterTable();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取在线模式下正在预览或采集的session
+        /// </summary>
+        /// <returns>在线模式下正在预览或采集的session，若非在线模式则返回null</returns>
+        public static DateTime? GetCurrentOnlineSession()
+        {
+            return Handler.GetCurrentOnlineSession();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取所有session的总时长
+        /// </summary>
+        /// <returns>所有session的总时长</returns>
+        public static double GetSessionListTotalLength()
+        {
+            return Handler.GetSessionListTotalLength();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取当前的session搜索关键字
+        /// </summary>
+        /// <returns></returns>
+        public static String GetSessionSearchKey()
+        {
+            return Handler.GetSessionSearchKey();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 移除session及相关文件至回收站
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <param name="force">是否强制移除</param>
+        /// <returns>是否成功移除</returns>
+        public static bool RemoveSession(DateTime session, bool force)
+        {
+            return Handler.RemoveSession(session, force);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 设置session是否框选
+        /// </summary>
+        /// <param name="session">session ID</param>
+        /// <param name="check">是否框选</param>
+        public static void SetSessionChecker(DateTime session, bool check)
+        {
+            Handler.SetSessionChecker(session, check);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 移除generation及相关文件至回收站
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <param name="genID">Generation ID</param>
+        public static void RemoveGeneration(DateTime session, String genID)
+        {
+            Handler.RemoveGeneration(session, genID);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取session的注释说明
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <returns>Session的注释说明</returns>
+        public static String GetSessionComment(DateTime session)
+        {
+            return Handler.GetSessionComment(session);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 设置音量
+        /// </summary>
+        /// <param name="volume">音量（倍数）</param>
+        public static void SetAudioVolume(double volume)
+        {
+            Handler.SetAudioVolume(volume);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 设置CPU使用率的乘数
+        /// </summary>
+        /// <param name="scale">CPU使用率的乘数</param>
+        public static void SetCPURateScale(int scale)
+        {
+            Handler.SetCPURateScale(scale);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取许可证的详细信息
+        /// </summary>
+        /// <returns>许可证的详细信息</returns>
+        public static String GetLicenseInfo()
+        {
+            return Handler.GetLicenseInfo();
         }
     }
 }

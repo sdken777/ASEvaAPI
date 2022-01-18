@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 0, 8); // 移除MainWorkflowLoopCallback.OnModal
+            return new Version(2, 3, 0, 9); // 新增Agency.GetInterestTarget, GetAllDeviceStatus, SetTargetReplaySpeed, SetSessionSearchKey, GetSessionFilterTable, GetCurrentOnlineSession, GetSessionListTotalLength, GetSessionSearchKey, SetReplayTarget, RemoveSession, SetSessionChecker, RemoveGeneration, GetSessionComment, SetAudioVolume, SetCPURateScale, GetLicenseInfo
         }
 
         /// <summary>

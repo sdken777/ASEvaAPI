@@ -45,6 +45,12 @@
             </summary>
             <returns>兴趣点的时间戳(包括年月日时分秒，毫秒)，若无数据则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetInterestTarget">
+            <summary>
+            (api:app=2.3.0) 获取兴趣时间点目标
+            </summary>
+            <returns>兴趣时间点目标，可能超出数据缓存范围</returns>
+        </member>
         <member name="M:ASEva.Agency.GetBufferRange">
             <summary>
             获取ASEva数据缓存范围
@@ -236,6 +242,12 @@
             </summary>
             <param name="type">设备的类型ID，在插件的info.txt中以type字段描述</param>
             <returns>返回设备状态</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetAllDeviceStatus">
+            <summary>
+            (api:app=2.3.0) 获取所有设备状态
+            </summary>
+            <returns>设备状态表，键为设备的类型ID，在插件的info.txt中以type字段描述</returns>
         </member>
         <member name="M:ASEva.Agency.GetChildDeviceStatus(System.String)">
             <summary>
@@ -1059,6 +1071,89 @@
             </summary>
             <param name="generationID">Generation ID</param>
             <returns>Session ID列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetTargetReplaySpeed(System.Double)">
+            <summary>
+            (api:app=2.3.0) 设置目标回放速度
+            </summary>
+            <param name="speed">目标回放速度</param>
+        </member>
+        <member name="M:ASEva.Agency.SetSessionSearchKeyword(System.String)">
+            <summary>
+            (api:app=2.3.0) 设置session搜索关键字
+            </summary>
+            <param name="keyword">session搜索关键字</param>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionFilterTable">
+            <summary>
+            (api:app=2.3.0) 获取所有session的筛选标志位
+            </summary>
+            <returns>session的筛选标志位表</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetCurrentOnlineSession">
+            <summary>
+            (api:app=2.3.0) 获取在线模式下正在预览或采集的session
+            </summary>
+            <returns>在线模式下正在预览或采集的session，若非在线模式则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionListTotalLength">
+            <summary>
+            (api:app=2.3.0) 获取所有session的总时长
+            </summary>
+            <returns>所有session的总时长</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionSearchKey">
+            <summary>
+            (api:app=2.3.0) 获取当前的session搜索关键字
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ASEva.Agency.RemoveSession(System.DateTime,System.Boolean)">
+            <summary>
+            (api:app=2.3.0) 移除session及相关文件至回收站
+            </summary>
+            <param name="session">Session ID</param>
+            <param name="force">是否强制移除</param>
+            <returns>是否成功移除</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetSessionChecker(System.DateTime,System.Boolean)">
+            <summary>
+            (api:app=2.3.0) 设置session是否框选
+            </summary>
+            <param name="session">session ID</param>
+            <param name="check">是否框选</param>
+        </member>
+        <member name="M:ASEva.Agency.RemoveGeneration(System.DateTime,System.String)">
+            <summary>
+            (api:app=2.3.0) 移除generation及相关文件至回收站
+            </summary>
+            <param name="session">Session ID</param>
+            <param name="genID">Generation ID</param>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionComment(System.DateTime)">
+            <summary>
+            (api:app=2.3.0) 获取session的注释说明
+            </summary>
+            <param name="session">Session ID</param>
+            <returns>Session的注释说明</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetAudioVolume(System.Double)">
+            <summary>
+            (api:app=2.3.0) 设置音量
+            </summary>
+            <param name="volume">音量（倍数）</param>
+        </member>
+        <member name="M:ASEva.Agency.SetCPURateScale(System.Int32)">
+            <summary>
+            (api:app=2.3.0) 设置CPU使用率的乘数
+            </summary>
+            <param name="scale">CPU使用率的乘数</param>
+        </member>
+        <member name="M:ASEva.Agency.GetLicenseInfo">
+            <summary>
+            (api:app=2.3.0) 获取许可证的详细信息
+            </summary>
+            <returns>许可证的详细信息</returns>
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
@@ -5099,6 +5194,16 @@
         <member name="P:ASEva.TaskClassInfo.Title">
             <summary>
             独立任务组件名称
+            </summary>
+        </member>
+        <member name="T:ASEva.SessionFilterFlags">
+            <summary>
+            (api:app=2.3.0) Session筛选标志位
+            </summary>
+        </member>
+        <member name="T:ASEva.DeviceStatusDetail">
+            <summary>
+            (api:app=2.3.0) 详细的设备状态信息
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">
