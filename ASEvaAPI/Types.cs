@@ -1320,4 +1320,17 @@ namespace ASEva
         public GeneralDeviceStatus Status { get; set; }
         public String Description { get; set; }
     }
+
+    /// <summary>
+    /// (api:app=2.3.0) 创建窗口对象或对话框对象的结果
+    /// </summary>
+    public enum CreatePanelResult
+    {
+        OK = 0,
+        InvalidCaller = 1,
+        ClassNotFound = 2,
+        CreateFailed = 3,
+        SystemBusy = 4,
+        AlreadyExist = 5,
+    }
 }

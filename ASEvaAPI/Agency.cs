@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using ASEva.Samples;
 using ASEva.Utility;
 
@@ -118,6 +117,7 @@ namespace ASEva
         Dictionary<String, Version> GetNativePluginVersions(NativeLibraryType type);
         VideoFrameGetter CreateVideoFrameGetter();
         object GetOfflineMapImage(IntSize imageSize, LocPoint centerLocation, int zoom);
+        CommonImage GetOfflineMapCommonImage(IntSize imageSize, LocPoint centerLocation, int zoom);
         FloatPoint ConvertOfflineMapLocToPix(LocPoint origin, int zoom, LocPoint point);
         Utility.LocPoint ConvertOfflineMapPixToLoc(LocPoint origin, int zoom, FloatPoint pixel);
         void SetWindowTitle(object window, String title, object icon);
@@ -203,6 +203,13 @@ namespace ASEva
         String[] GetAvailableSampleChannels();
         double? GetBusPayloadPercentage(int channel);
         bool IsSampleChannelConflict(String protocol);
+        CreatePanelResult CreateWindowPanel(object caller, String windowClassID, String transformID, out object panel, out WindowClassInfo info);
+        CreatePanelResult CreateConfigPanel(object caller, String dialogClassID, String transformID, out object panel, out DialogClassInfo info);
+        void UnregisterPanel(object panel);
+        CommonImage ConvertImageToCommon(object image);
+        object ConvertImageToPlatform(CommonImage image, bool eto, bool withAlpha);
+        WindowClassInfo GetWindowClassInfo(String windowClassID);
+        DialogClassInfo GetDialogClassInfo(String dialogClassID);
     }
 
     /// <summary>
@@ -1324,10 +1331,22 @@ namespace ASEva
         /// <param name="imageSize">指定图像大小</param>
         /// <param name="centerLocation">图像中心的经纬度</param>
         /// <param name="zoom">图像的尺度，0~24</param>
-        /// <returns>离线地图图像，空表示获取失败</returns>
+        /// <returns>离线地图图像（平台特化），空表示获取失败</returns>
         public static object GetOfflineMapImage(IntSize imageSize, LocPoint centerLocation, int zoom)
         {
             return Handler.GetOfflineMapImage(imageSize, centerLocation, zoom);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取离线地图图像
+        /// </summary>
+        /// <param name="imageSize">指定图像大小</param>
+        /// <param name="centerLocation">图像中心的经纬度</param>
+        /// <param name="zoom">图像的尺度，0~24</param>
+        /// <returns>离线地图图像（通用图像数据），空表示获取失败</returns>
+        public static CommonImage GetOfflineMapCommonImage(IntSize imageSize, LocPoint centerLocation, int zoom)
+        {
+            return Handler.GetOfflineMapCommonImage(imageSize, centerLocation, zoom);
         }
 
         /// <summary>
@@ -2149,6 +2168,85 @@ namespace ASEva
         public static double? GetBusPayloadPercentage(int channel)
         {
             return Handler.GetBusPayloadPercentage(channel);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 创建窗口对象
+        /// </summary>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="windowClassID">窗口组件ID</param>
+        /// <param name="transformID">分化ID，null表示不分化</param>
+        /// <param name="panel">新建的窗口对象，创建失败则为null</param>
+        /// <param name="info">新建窗口的组件信息，创建失败则为null</param>
+        /// <returns>创建结果，若成功则在释放窗口时需要调用 ASEva.Agency.UnregisterPanel </returns>
+        public static CreatePanelResult CreateWindowPanel(object caller, String windowClassID, String transformID, out object panel, out WindowClassInfo info)
+        {
+            return Handler.CreateWindowPanel(caller, windowClassID, transformID, out panel, out info);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 创建对话框对象
+        /// </summary>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="dialogClassID">对话框组件ID</param>
+        /// <param name="transformID">分化ID，null表示不分化</param>
+        /// <param name="panel">新建的对话框对象，创建失败则为null</param>
+        /// <param name="info">新建对话框的组件信息，创建失败则为null</param>
+        /// <returns>创建结果，若成功则在释放窗口时需要调用 ASEva.Agency.UnregisterPanel </returns>
+        public static CreatePanelResult CreateConfigPanel(object caller, String dialogClassID, String transformID, out object panel, out DialogClassInfo info)
+        {
+            return Handler.CreateConfigPanel(caller, dialogClassID, transformID, out panel, out info);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 注销窗口或对话框对象
+        /// </summary>
+        /// <param name="panel">窗口或对话框对象</param>
+        public static void UnregisterPanel(object panel)
+        {
+            Handler.UnregisterPanel(panel);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 转换平台特化图像对象至通用图像数据
+        /// </summary>
+        /// <param name="image">平台特化图像</param>
+        /// <returns>通用图像数据，转换失败则返回null</returns>
+        public static CommonImage ConvertImageToCommon(object image)
+        {
+            return Handler.ConvertImageToCommon(image);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 转换通用图像数据至平台特化图像
+        /// </summary>
+        /// <param name="image">通用图像数据</param>
+        /// <param name="eto">是否转换至Eto图像，否则转换为当前UI框架对应的图像对象</param>
+        /// <param name="withAlpha">是否带alpha通道</param>
+        /// <returns>平台特化图像，转换失败则返回null</returns>
+        public static object ConvertImageToPlatform(CommonImage image, bool eto, bool withAlpha)
+        {
+            return Handler.ConvertImageToPlatform(image, eto, withAlpha);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取窗口组件信息
+        /// </summary>
+        /// <param name="windowClassID">窗口组件ID</param>
+        /// <returns>窗口组件信息，若未找到返回null</returns>
+        public static WindowClassInfo GetWindowClassInfo(String windowClassID)
+        {
+            return Handler.GetWindowClassInfo(windowClassID);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取对话框组件信息
+        /// </summary>
+        /// <param name="dialogClassID">对话框组件ID</param>
+        /// <returns>对话框组件信息，若未找到返回null</returns>
+        public static DialogClassInfo GetDialogClassInfo(String dialogClassID)
+        {
+            return Handler.GetDialogClassInfo(dialogClassID);
         }
     }
 }

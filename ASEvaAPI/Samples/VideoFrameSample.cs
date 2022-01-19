@@ -37,7 +37,28 @@ namespace ASEva.Samples
         /// <summary>
         /// 获取视频帧的位图图像（平台特化对象）
         /// </summary>
-        public object Image { get; set; }
+        public object Image
+        {
+            get
+            {
+                if (platformImage == null && CommonImage != null) platformImage = Agency.ConvertImageToPlatform(CommonImage, false, false);
+                return platformImage;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    CommonImage = null;
+                    platformImage = null;
+                }
+                else
+                {
+                    CommonImage = Agency.ConvertImageToCommon(value);
+                    if (CommonImage == null) platformImage = null;
+                    else platformImage = Agency.ConvertImageToPlatform(CommonImage, false, false);
+                }
+            }
+        }
 
         /// <summary>
         /// 视频帧所属通道（0~23）
@@ -106,7 +127,7 @@ namespace ASEva.Samples
         public VideoFrameSample(object image, IntSize rawSize, int channelIndex, DateTime bas, double offset, double timeline)
             : base(bas, offset, timeline)
         {
-            Image = image;
+            CommonImage = Agency.ConvertImageToCommon(image);
             ChannelIndex = channelIndex;
             SpecialCameraType = SpecialCameraType.Normal;
             SpecialCameraInfo = null;
@@ -119,5 +140,33 @@ namespace ASEva.Samples
             ActualCenter = RawCenter;
             ActualScale = 1;
         }
+
+        /// <summary>
+        /// (api:app=2.3.0) 默认构造函数
+        /// </summary>
+        /// <param name="image">图像</param>
+        /// <param name="rawSize">图像的原始大小</param>
+        /// <param name="channelIndex">通道</param>
+        /// <param name="bas">Session ID</param>
+        /// <param name="offset">相对时间戳</param>
+        /// <param name="timeline">时间线</param>
+        public VideoFrameSample(CommonImage image, IntSize rawSize, int channelIndex, DateTime bas, double offset, double timeline)
+            : base(bas, offset, timeline)
+        {
+            CommonImage = image;
+            ChannelIndex = channelIndex;
+            SpecialCameraType = SpecialCameraType.Normal;
+            SpecialCameraInfo = null;
+            HorizontalFov = null;
+            Scaled = false;
+            RawResolution = rawSize;
+            RawCenter = new FloatPoint((float)(rawSize.Width - 1) * 0.5f, (float)(rawSize.Height - 1) * 0.5f);
+            RawScale = 1;
+            ActualResolution = RawResolution;
+            ActualCenter = RawCenter;
+            ActualScale = 1;
+        }
+
+        private object platformImage = null;
     }
 }

@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 0, 11); // 新增Agency.StartOffline。扩展Agency.StartOnline/Offline/Replay, StopRunning
+            return new Version(2, 3, 0, 12); // 新增MainWorkflow.OnOpenDialog/OnAddWindow。新增Agency.CreateWindowPanel, CreateConfigPanel，UnregisterPanel, ConvertImageToCommon/Platform, GetWindow/DialogClassInfo
         }
 
         /// <summary>

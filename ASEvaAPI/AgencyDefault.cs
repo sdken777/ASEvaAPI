@@ -942,5 +942,48 @@ namespace ASEva
         {
             return false;
         }
+
+        public CreatePanelResult CreateWindowPanel(object caller, string windowClassID, string transformID, out object panel, out WindowClassInfo info)
+        {
+            panel = null;
+            info = null;
+            return CreatePanelResult.CreateFailed;
+        }
+
+        public CreatePanelResult CreateConfigPanel(object caller, string dialogClassID, string transformID, out object panel, out DialogClassInfo info)
+        {
+            panel = null;
+            info = null;
+            return CreatePanelResult.CreateFailed;
+        }
+
+        public void UnregisterPanel(object panel)
+        {
+        }
+
+        public CommonImage GetOfflineMapCommonImage(IntSize imageSize, LocPoint centerLocation, int zoom)
+        {
+            return null;
+        }
+
+        public CommonImage ConvertImageToCommon(object image)
+        {
+            return null;
+        }
+
+        public object ConvertImageToPlatform(CommonImage image, bool eto, bool withAlpha)
+        {
+            return null;
+        }
+
+        public WindowClassInfo GetWindowClassInfo(string windowClassID)
+        {
+            return null;
+        }
+
+        public DialogClassInfo GetDialogClassInfo(string dialogClassID)
+        {
+            return null;
+        }
     }
 }

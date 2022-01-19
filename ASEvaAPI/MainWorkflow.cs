@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using ASEva.Samples;
 
 namespace ASEva
 {
@@ -115,19 +116,37 @@ namespace ASEva
         public virtual void OnSelectSignals(SelectSignalHandler handler, List<String> existSignalIDList) {}
 
         /// <summary>
+        /// [可选实现][可含模态框] 打开对话框
+        /// </summary>
+        /// <param name="dialog">对话框对象，继承ConfigPanel</param>
+        /// <param name="info">对话框组件信息</param>
+        /// <param name="config">对话框初始配置</param>
+        public virtual void OnOpenDialog(object dialog, DialogClassInfo info, String config) {}
+
+        /// <summary>
+        /// [可选实现] 添加窗口至工作空间
+        /// </summary>
+        /// <param name="window">窗口对象，继承WindowPanel</param>
+        /// <param name="info">窗口组件信息</param>
+        /// <param name="config">窗口初始配置</param>
+        /// <param name="newWorkspaceIfNeeded">工作空间无足够空间时，是否在新工作空间添加（若不支持工作空间，则无视此选项）</param>
+        /// <returns>是否成功添加，若成功添加，在释放窗口时需要调用 ASEva.Agency.UnregisterPanel </returns>
+        public virtual bool OnAddWindow(object window, WindowClassInfo info, String config, bool newWorkspaceIfNeeded) { return false; }
+
+        /// <summary>
         /// [可选实现] 设置当前对话框的标题和图标
         /// </summary>
         /// <param name="title">标题</param>
-        /// <param name="icon">图标</param>
-        public virtual void OnSetCurrentDialogTitle(String title, object icon) {}
+        /// <param name="icon">图标，分辨率为16x16</param>
+        public virtual void OnSetCurrentDialogTitle(String title, CommonImage icon) {}
 
         /// <summary>
         /// [可选实现] 设置窗口的标题和图标
         /// </summary>
-        /// <param name="window">窗口</param>
+        /// <param name="window">窗口对象，继承WindowPanel</param>
         /// <param name="title">标题</param>
-        /// <param name="icon">图标</param>
-        public virtual void OnSetWindowTitle(object window, String title, object icon) {}
+        /// <param name="icon">图标，分辨率为16x16</param>
+        public virtual void OnSetWindowTitle(object window, String title, CommonImage icon) {}
 
         /// <summary>
         /// [可选实现] 通知重置数据
