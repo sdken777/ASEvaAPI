@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using ASEva.Utility;
 
 namespace ASEva.Samples
 {
@@ -10,17 +12,108 @@ namespace ASEva.Samples
         /// <summary>
         /// 图像宽度
         /// </summary>
-        public int Width { get; set; }
+        public int Width { get { return width; } }
 
         /// <summary>
         /// 图像高度
         /// </summary>
-        public int Height { get; set; }
+        public int Height { get { return height; } }
 
         /// <summary>
         /// 图像数据，数组长度为宽度x高度x4，每个像素的存放顺序为BGRA
         /// </summary>
-        public byte[] Data { get; set; }
+        public byte[] Data { get { return data; } }
+
+        /// <summary>
+        /// 创建通用图像数据
+        /// </summary>
+        /// <param name="width">图像宽度</param>
+        /// <param name="height">图像高度</param>
+        /// <returns>通用图像数据</returns>
+        public static CommonImage Create(int width, int height)
+        {
+            if (width <= 0 || height <= 0 || width > 65536 || height > 65536) return null;
+
+            var image = new CommonImage();
+            image.width = width;
+            image.height = height;
+            image.data = new byte[width * height * 4];
+            return image;
+        }
+
+        /// <summary>
+        /// [依赖Agency] 从文件读取图像
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        /// <returns>通用图像数据</returns>
+        public static CommonImage LoadFile(String filePath)
+        {
+            if (!File.Exists(filePath)) return null;
+            
+            byte[] data = null;
+            FileStream file = null;
+            try
+            {
+                file = File.Open(filePath, FileMode.Open, FileAccess.Read);
+                data = new byte[file.Length];
+                int length = file.Read(data, 0, (int)file.Length);
+                if (length != file.Length) data = null;
+            }
+            catch (Exception) {}
+            if (file != null) file.Close();
+            if (data == null) return null;
+
+            return Agency.DecodeImage(data);
+        }
+
+        /// <summary>
+        /// [依赖Agency] 从资源读取图像
+        /// </summary>
+        /// <param name="resourceName">资源名称</param>
+        /// <returns>通用图像数据</returns>
+        public static CommonImage LoadResource(String resourceName)
+        {
+            var data = ResourceLoader.Load(resourceName);
+            if (data == null) return null;
+
+            return Agency.DecodeImage(data);
+        }
+
+        /// <summary>
+        /// [依赖Agency] 保存至文件
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        /// <returns>是否成功保存</returns>
+        public bool Save(String filePath)
+        {
+            var extension = Path.GetExtension(filePath).ToLower();
+            String format = null;
+            if (extension == ".jpeg" || extension == ".jpg") format = "jpg";
+            else if (extension == ".png") format = "png";
+            else return false;
+
+            var data = Agency.EncodeImage(this, format);
+            if (data == null) return false;
+
+            bool ok = false;
+            FileStream file = null;
+            try
+            {
+                file = File.Open(filePath, FileMode.Create, FileAccess.Write);
+                file.Write(data);
+                ok = true;
+            }
+            catch (Exception) {}
+            if (file != null) file.Close();
+
+            return ok;
+        }
+
+        private CommonImage()
+        {}
+
+        private int width, height;
+        private byte[] data;
     }
 
     /// <summary>
@@ -35,7 +128,7 @@ namespace ASEva.Samples
         public CommonImage CommonImage { get; set; }
 
         /// <summary>
-        /// 获取视频帧的位图图像（平台特化对象）
+        /// [依赖Agency] 获取视频帧的位图图像（平台特化对象）
         /// </summary>
         public object Image
         {
@@ -116,7 +209,7 @@ namespace ASEva.Samples
         public float ActualScale { get; set; }
 
         /// <summary>
-        /// 默认构造函数
+        /// [依赖Agency] 默认构造函数
         /// </summary>
         /// <param name="image">图像</param>
         /// <param name="rawSize">图像的原始大小</param>

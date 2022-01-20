@@ -116,6 +116,13 @@ namespace ASEva
         public virtual void OnSelectSignals(SelectSignalHandler handler, List<String> existSignalIDList) {}
 
         /// <summary>
+        /// [可选实现][可含模态框] 显示正在进行的独立任务
+        /// </summary>
+        /// <param name="title">独立任务标题</param>
+        /// <param name="callback">框架软件的回调接口</param>
+        public virtual void OnRunStandaloneTask(String title, MainWorkflowTaskCallback callback) {}
+
+        /// <summary>
         /// [可选实现][可含模态框] 打开对话框
         /// </summary>
         /// <param name="dialog">对话框对象，继承ConfigPanel</param>
@@ -321,5 +328,31 @@ namespace ASEva
         /// <param name="license">许可证的Base64字符串，设为null表示放弃验证</param>
         /// <param name="pluginCode">插件码的Base64字符串</param>
         void OnRevalidateLicense(String license, String pluginCode);
+    }
+
+    /// <summary>
+    /// (api:app=2.3.0) 在主流程中使用的获取独立任务状态回调接口
+    /// </summary>
+    public interface MainWorkflowTaskCallback
+    {
+        /// <summary>
+        /// 获取独立任务状态
+        /// </summary>
+        TaskState GetTaskState();
+
+        /// <summary>
+        /// 获取当前状态描述
+        /// </summary>
+        String GetTaskStateDescription();
+
+        /// <summary>
+        /// 获取任务进度，单位百分比
+        /// </summary>
+        double GetTaskProgress();
+
+        /// <summary>
+        /// 取消任务
+        /// </summary>
+        void CanelTask();
     }
 }

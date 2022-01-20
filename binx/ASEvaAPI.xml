@@ -1418,6 +1418,21 @@
             <param name="dialogClassID">对话框组件ID</param>
             <returns>对话框组件信息，若未找到返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.DecodeImage(System.Byte[])">
+            <summary>
+            (api:app=2.3.0) 解码图像数据
+            </summary>
+            <param name="imageData">JPG或PNG二进制数据</param>
+            <returns>解码后的通用图像数据，若失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.EncodeImage(ASEva.Samples.CommonImage,System.String)">
+            <summary>
+            (api:app=2.3.0) 编码图像数据
+            </summary>
+            <param name="image">通用图像数据</param>
+            <param name="format">编码格式，目前支持"jpg", "png"</param>
+            <returns>编码后的二进制数据，若失败则返回null</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
             version=2.3.0
@@ -3088,6 +3103,13 @@
             <param name="handler">新选择信号后的回调函数</param>
             <param name="existSignalIDList">已选择的信号ID列表</param>
         </member>
+        <member name="M:ASEva.MainWorkflow.OnRunStandaloneTask(System.String,ASEva.MainWorkflowTaskCallback)">
+            <summary>
+            [可选实现][可含模态框] 显示正在进行的独立任务
+            </summary>
+            <param name="title">独立任务标题</param>
+            <param name="callback">框架软件的回调接口</param>
+        </member>
         <member name="M:ASEva.MainWorkflow.OnOpenDialog(System.Object,ASEva.DialogClassInfo,System.String)">
             <summary>
             [可选实现][可含模态框] 打开对话框
@@ -3289,6 +3311,31 @@
             </summary>
             <param name="license">许可证的Base64字符串，设为null表示放弃验证</param>
             <param name="pluginCode">插件码的Base64字符串</param>
+        </member>
+        <member name="T:ASEva.MainWorkflowTaskCallback">
+            <summary>
+            (api:app=2.3.0) 在主流程中使用的获取独立任务状态回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowTaskCallback.GetTaskState">
+            <summary>
+            获取独立任务状态
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowTaskCallback.GetTaskStateDescription">
+            <summary>
+            获取当前状态描述
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowTaskCallback.GetTaskProgress">
+            <summary>
+            获取任务进度，单位百分比
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowTaskCallback.CanelTask">
+            <summary>
+            取消任务
+            </summary>
         </member>
         <member name="T:ASEva.NativeClass">
             <summary>
@@ -3545,12 +3592,12 @@
         </member>
         <member name="P:ASEva.Sample.TimestampLocal">
             <summary>
-            绝对时间戳（本地时间），含年月日时分秒，毫秒
+            [依赖Agency] 绝对时间戳（本地时间），含年月日时分秒，毫秒
             </summary>
         </member>
         <member name="P:ASEva.Sample.TimestampUTC">
             <summary>
-            绝对时间戳（UTC时间），含年月日时分秒，毫秒
+            [依赖Agency] 绝对时间戳（UTC时间），含年月日时分秒，毫秒
             </summary>
         </member>
         <member name="M:ASEva.Sample.#ctor">
@@ -4236,6 +4283,35 @@
             图像数据，数组长度为宽度x高度x4，每个像素的存放顺序为BGRA
             </summary>
         </member>
+        <member name="M:ASEva.Samples.CommonImage.Create(System.Int32,System.Int32)">
+            <summary>
+            创建通用图像数据
+            </summary>
+            <param name="width">图像宽度</param>
+            <param name="height">图像高度</param>
+            <returns>通用图像数据</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.LoadFile(System.String)">
+            <summary>
+            [依赖Agency] 从文件读取图像
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>通用图像数据</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.LoadResource(System.String)">
+            <summary>
+            [依赖Agency] 从资源读取图像
+            </summary>
+            <param name="resourceName">资源名称</param>
+            <returns>通用图像数据</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.Save(System.String)">
+            <summary>
+            [依赖Agency] 保存至文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>是否成功保存</returns>
+        </member>
         <member name="T:ASEva.Samples.VideoFrameSample">
             <summary>
             (api:app=2.0.0) 视频帧样本
@@ -4249,7 +4325,7 @@
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.Image">
             <summary>
-            获取视频帧的位图图像（平台特化对象）
+            [依赖Agency] 获取视频帧的位图图像（平台特化对象）
             </summary>
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.ChannelIndex">
@@ -4309,7 +4385,7 @@
         </member>
         <member name="M:ASEva.Samples.VideoFrameSample.#ctor(System.Object,ASEva.IntSize,System.Int32,System.DateTime,System.Double,System.Double)">
             <summary>
-            默认构造函数
+            [依赖Agency] 默认构造函数
             </summary>
             <param name="image">图像</param>
             <param name="rawSize">图像的原始大小</param>

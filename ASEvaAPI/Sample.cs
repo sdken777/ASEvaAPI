@@ -23,7 +23,7 @@ namespace ASEva
         public double Timeline { get; set; }
 
         /// <summary>
-        /// 绝对时间戳（本地时间），含年月日时分秒，毫秒
+        /// [依赖Agency] 绝对时间戳（本地时间），含年月日时分秒，毫秒
         /// </summary>
         public DateTime? TimestampLocal
         {
@@ -34,7 +34,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 绝对时间戳（UTC时间），含年月日时分秒，毫秒
+        /// [依赖Agency] 绝对时间戳（UTC时间），含年月日时分秒，毫秒
         /// </summary>
         public DateTime? TimestampUTC
         {

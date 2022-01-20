@@ -210,6 +210,8 @@ namespace ASEva
         object ConvertImageToPlatform(CommonImage image, bool eto, bool withAlpha);
         WindowClassInfo GetWindowClassInfo(String windowClassID);
         DialogClassInfo GetDialogClassInfo(String dialogClassID);
+        CommonImage DecodeImage(byte[] imageData);
+        byte[] EncodeImage(CommonImage image, String format);
     }
 
     /// <summary>
@@ -2247,6 +2249,27 @@ namespace ASEva
         public static DialogClassInfo GetDialogClassInfo(String dialogClassID)
         {
             return Handler.GetDialogClassInfo(dialogClassID);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 解码图像数据
+        /// </summary>
+        /// <param name="imageData">JPG或PNG二进制数据</param>
+        /// <returns>解码后的通用图像数据，若失败则返回null</returns>
+        public static CommonImage DecodeImage(byte[] imageData)
+        {
+            return Handler.DecodeImage(imageData);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 编码图像数据
+        /// </summary>
+        /// <param name="image">通用图像数据</param>
+        /// <param name="format">编码格式，目前支持"jpg", "png"</param>
+        /// <returns>编码后的二进制数据，若失败则返回null</returns>
+        public static byte[] EncodeImage(CommonImage image, String format)
+        {
+            return Handler.EncodeImage(image, format);
         }
     }
 }

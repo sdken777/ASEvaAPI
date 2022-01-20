@@ -985,5 +985,15 @@ namespace ASEva
         {
             return null;
         }
+
+        public CommonImage DecodeImage(byte[] imageData)
+        {
+            return null;
+        }
+
+        public byte[] EncodeImage(CommonImage image, string format)
+        {
+            return null;
+        }
     }
 }
