@@ -207,7 +207,7 @@ namespace ASEva
         CreatePanelResult CreateConfigPanel(object caller, String dialogClassID, String transformID, out object panel, out DialogClassInfo info);
         void UnregisterPanel(object panel);
         CommonImage ConvertImageToCommon(object image);
-        object ConvertImageToPlatform(CommonImage image, bool eto, bool withAlpha);
+        object ConvertImageToPlatform(CommonImage image, bool eto);
         WindowClassInfo GetWindowClassInfo(String windowClassID);
         DialogClassInfo GetDialogClassInfo(String dialogClassID);
         CommonImage DecodeImage(byte[] imageData);
@@ -2224,11 +2224,10 @@ namespace ASEva
         /// </summary>
         /// <param name="image">通用图像数据</param>
         /// <param name="eto">是否转换至Eto图像，否则转换为当前UI框架对应的图像对象</param>
-        /// <param name="withAlpha">是否带alpha通道</param>
         /// <returns>平台特化图像，转换失败则返回null</returns>
-        public static object ConvertImageToPlatform(CommonImage image, bool eto, bool withAlpha)
+        public static object ConvertImageToPlatform(CommonImage image, bool eto)
         {
-            return Handler.ConvertImageToPlatform(image, eto, withAlpha);
+            return Handler.ConvertImageToPlatform(image, eto);
         }
 
         /// <summary>

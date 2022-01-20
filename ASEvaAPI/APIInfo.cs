@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 0, 14); // CommonImage可不含Alpha通道
+            return new Version(2, 3, 0, 15); // 修正Agency.ConvertImageToPlatform接口
         }
 
         /// <summary>

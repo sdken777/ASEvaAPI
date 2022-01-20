@@ -971,7 +971,7 @@ namespace ASEva
             return null;
         }
 
-        public object ConvertImageToPlatform(CommonImage image, bool eto, bool withAlpha)
+        public object ConvertImageToPlatform(CommonImage image, bool eto)
         {
             return null;
         }

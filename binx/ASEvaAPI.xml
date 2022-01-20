@@ -1395,13 +1395,12 @@
             <param name="image">平台特化图像</param>
             <returns>通用图像数据，转换失败则返回null</returns>
         </member>
-        <member name="M:ASEva.Agency.ConvertImageToPlatform(ASEva.Samples.CommonImage,System.Boolean,System.Boolean)">
+        <member name="M:ASEva.Agency.ConvertImageToPlatform(ASEva.Samples.CommonImage,System.Boolean)">
             <summary>
             (api:app=2.3.0) 转换通用图像数据至平台特化图像
             </summary>
             <param name="image">通用图像数据</param>
             <param name="eto">是否转换至Eto图像，否则转换为当前UI框架对应的图像对象</param>
-            <param name="withAlpha">是否带alpha通道</param>
             <returns>平台特化图像，转换失败则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetWindowClassInfo(System.String)">
