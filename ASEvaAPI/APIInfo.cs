@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 0, 13); // 新增MainWorkflow.OnRunStandaloneTask。新增Agency.DecodeImage, EncodeImage。新增CommonImage.Create, Load, Save
+            return new Version(2, 3, 0, 14); // CommonImage可不含Alpha通道
         }
 
         /// <summary>

@@ -4278,17 +4278,28 @@
             图像高度
             </summary>
         </member>
-        <member name="P:ASEva.Samples.CommonImage.Data">
+        <member name="P:ASEva.Samples.CommonImage.WithAlpha">
             <summary>
-            图像数据，数组长度为宽度x高度x4，每个像素的存放顺序为BGRA
+            是否含有Alpha通道
             </summary>
         </member>
-        <member name="M:ASEva.Samples.CommonImage.Create(System.Int32,System.Int32)">
+        <member name="P:ASEva.Samples.CommonImage.RowBytes">
+            <summary>
+            每行数据字节数
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonImage.Data">
+            <summary>
+            图像数据，每个像素的存放顺序为BGR或BGRA
+            </summary>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.Create(System.Int32,System.Int32,System.Boolean)">
             <summary>
             创建通用图像数据
             </summary>
             <param name="width">图像宽度</param>
             <param name="height">图像高度</param>
+            <param name="withAlpha">是否带Alpha通道</param>
             <returns>通用图像数据</returns>
         </member>
         <member name="M:ASEva.Samples.CommonImage.LoadFile(System.String)">

@@ -20,7 +20,17 @@ namespace ASEva.Samples
         public int Height { get { return height; } }
 
         /// <summary>
-        /// 图像数据，数组长度为宽度x高度x4，每个像素的存放顺序为BGRA
+        /// 是否含有Alpha通道
+        /// </summary>
+        public bool WithAlpha { get { return withAlpha; } }
+
+        /// <summary>
+        /// 每行数据字节数
+        /// </summary>
+        public int RowBytes { get { return rowBytes; } }
+
+        /// <summary>
+        /// 图像数据，每个像素的存放顺序为BGR或BGRA
         /// </summary>
         public byte[] Data { get { return data; } }
 
@@ -29,15 +39,21 @@ namespace ASEva.Samples
         /// </summary>
         /// <param name="width">图像宽度</param>
         /// <param name="height">图像高度</param>
+        /// <param name="withAlpha">是否带Alpha通道</param>
         /// <returns>通用图像数据</returns>
-        public static CommonImage Create(int width, int height)
+        public static CommonImage Create(int width, int height, bool withAlpha)
         {
             if (width <= 0 || height <= 0 || width > 65536 || height > 65536) return null;
+
+            var rowBytesValid = width * (withAlpha ? 4 : 3);
+            var rowBytes = (((rowBytesValid - 1) >> 2) + 1) << 2;
 
             var image = new CommonImage();
             image.width = width;
             image.height = height;
-            image.data = new byte[width * height * 4];
+            image.withAlpha = withAlpha;
+            image.rowBytes = rowBytes;
+            image.data = new byte[rowBytes * height];
             return image;
         }
 
@@ -114,6 +130,8 @@ namespace ASEva.Samples
 
         private int width, height;
         private byte[] data;
+        private bool withAlpha;
+        private int rowBytes;
     }
 
     /// <summary>
