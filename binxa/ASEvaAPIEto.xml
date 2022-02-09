@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.1.0
+            version=2.2.0
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -610,6 +610,11 @@
             </summary>
             <param name="window">窗口</param>
             <param name="screen">目标屏幕，空表示主屏幕</param>
+        </member>
+        <member name="T:ASEva.UIEto.ImageConverter">
+            <summary>
+            (api:eto=2.2.0) 图像对象转换
+            </summary>
         </member>
         <member name="T:ASEva.UIEto.OverlayLayout">
             <summary>

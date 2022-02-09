@@ -1,0 +1,73 @@
+﻿using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
+using ASEva.Samples;
+
+namespace ASEva.UICoreWF
+{
+    /// <summary>
+    /// (api:corewf=2.1.0) 图像对象转换
+    /// </summary>
+    public class ImageConverter
+    {
+        public static object ConvertToBitmap(CommonImage image)
+        {
+            if (image == null) return null;
+
+            Bitmap bitmap = null;
+            if (image.WithAlpha)
+            {
+                bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppArgb);
+                var bitmapData = bitmap.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+                for (int i = 0; i < image.Height; i++)
+                {
+                    Marshal.Copy(image.Data, i * image.RowBytes, bitmapData.Scan0 + i * bitmapData.Stride, 4 * image.Width);
+                }
+                bitmap.UnlockBits(bitmapData);
+            }
+            else
+            {
+                bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format24bppRgb);
+                var bitmapData = bitmap.LockBits(new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+                for (int i = 0; i < image.Height; i++)
+                {
+                    Marshal.Copy(image.Data, i * image.RowBytes, bitmapData.Scan0 + i * bitmapData.Stride, 3 * image.Width);
+                }
+                bitmap.UnlockBits(bitmapData);
+            }
+            return bitmap;
+        }
+
+        public static CommonImage ConvertFromBitmap(object bitmapObject)
+        {
+            if (bitmapObject == null) return null;
+            if (!(bitmapObject is Bitmap)) return null;
+
+            var bitmap = bitmapObject as Bitmap;
+            if (bitmap.PixelFormat == PixelFormat.Format32bppArgb)
+            {
+                var image = CommonImage.Create(bitmap.Width, bitmap.Height, true);
+                var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+                for (int i = 0; i < image.Height; i++)
+                {
+                    Marshal.Copy(bitmapData.Scan0 + i * bitmapData.Stride, image.Data, i * image.RowBytes, 4 * image.Width);
+                }
+                bitmap.UnlockBits(bitmapData);
+                return image;
+            }
+            else if (bitmap.PixelFormat == PixelFormat.Format24bppRgb)
+            {
+                var image = CommonImage.Create(bitmap.Width, bitmap.Height, false);
+                var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                for (int i = 0; i < image.Height; i++)
+                {
+                    Marshal.Copy(bitmapData.Scan0 + i * bitmapData.Stride, image.Data, i * image.RowBytes, 3 * image.Width);
+                }
+                bitmap.UnlockBits(bitmapData);
+                return image;
+            }
+            else return null;
+        }
+    }
+}

@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIGtk.APIInfo">
             <summary>
-            version=2.0.8
+            version=2.1.0
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.APIInfo.GetAPIVersion">
@@ -215,6 +215,11 @@
             (api:gtk=2.0.0) 单值数据可视化窗口
             </summary>
         </member>
+        <member name="T:ASEva.UIGtk.ImageConverter">
+            <summary>
+            (api:gtk=2.1.0) 图像对象转换 
+            </summary>
+        </member>
         <member name="T:ASEva.UIGtk.LinkItem">
             <summary>
             (api:gtk=2.0.0) 带下划线的蓝色文字
@@ -243,6 +248,41 @@
         <member name="T:ASEva.UIGtk.VideoFrameSampleImage">
             <summary>
             (api:gtk=2.0.0) ASEva.Samples.VideoFrameSample 中的图像对象
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.VideoFrameSampleImage.#ctor(System.Int32,System.Int32)">
+            <summary>
+            按指定宽高创建无alpha通道的图像
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.VideoFrameSampleImage.FromCommonImage(ASEva.Samples.CommonImage)">
+            <summary>
+            (api:gtk=2.1.0) 绑定通用图像，共享数据
+            </summary>
+        </member>
+        <member name="P:ASEva.UIGtk.VideoFrameSampleImage.Width">
+            <summary>
+            图像宽度
+            </summary>
+        </member>
+        <member name="P:ASEva.UIGtk.VideoFrameSampleImage.Height">
+            <summary>
+            图像高度
+            </summary>
+        </member>
+        <member name="P:ASEva.UIGtk.VideoFrameSampleImage.RowBytes">
+            <summary>
+            一行数据的字节数
+            </summary>
+        </member>
+        <member name="P:ASEva.UIGtk.VideoFrameSampleImage.Data">
+            <summary>
+            图像数据
+            </summary>
+        </member>
+        <member name="P:ASEva.UIGtk.VideoFrameSampleImage.WithAlpha">
+            <summary>
+            (api:gtk=2.1.0) 是否含alpha通道
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.VideoFrameSampleImage.ToPixbuf">

@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UICoreWF.APIInfo">
             <summary>
-            version=2.0.6
+            version=2.1.0
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.APIInfo.GetAPIVersion">
@@ -270,6 +270,11 @@
             <summary> 
             设计器支持所需的方法 - 不要
             使用代码编辑器修改此方法的内容。
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.ImageConverter">
+            <summary>
+            (api:corewf=2.1.0) 图像对象转换
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.ImageShow">
