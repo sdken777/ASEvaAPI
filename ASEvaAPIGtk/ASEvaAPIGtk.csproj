@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="GtkSharp" Version="3.22.25.125" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="ASEvaAPI">
       <HintPath>..\binx\ASEvaAPI.dll</HintPath>
     </Reference>
@@ -32,6 +28,24 @@
     </Reference>
     <Reference Include="Eto.Gtk">
       <HintPath>..\binx\Eto.Gtk.dll</HintPath>
+    </Reference>
+    <Reference Include="GtkSharp">
+      <HintPath>..\binx\GtkSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GdkSharp">
+      <HintPath>..\binx\GdkSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GLibSharp">
+      <HintPath>..\binx\GLibSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GioSharp">
+      <HintPath>..\binx\GioSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="CairoSharp">
+      <HintPath>..\binx\CairoSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PangoSharp">
+      <HintPath>..\binx\PangoSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
