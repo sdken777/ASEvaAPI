@@ -3169,6 +3169,19 @@
             </summary>
             <param name="recordSessionID">新采集的session ID</param>
         </member>
+        <member name="M:ASEva.MainWorkflow.OnEditOfflineMapPath(System.String)">
+            <summary>
+            [可选实现][可含模态框] 编辑离线地图文件路径
+            </summary>
+            <param name="originPath">原始路径，若未设置则为null</param>
+            <returns>新路径，若未设置则为null</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnEditDataEncryption(ASEva.MainWorkflowEncryptionCallback)">
+            <summary>
+            [可选实现][可含模态框] 编辑数据加密选项
+            </summary>
+            <param name="callback">框架软件的回调接口</param>
+        </member>
         <member name="M:ASEva.MainWorkflow.OnNewProject">
             <summary>
             [可选实现] 通知正在新建工程项目
@@ -3335,6 +3348,24 @@
             <summary>
             取消任务
             </summary>
+        </member>
+        <member name="T:ASEva.MainWorkflowEncryptionCallback">
+            <summary>
+            (api:app=2.3.0) 在主流程中使用的配置数据加密选项的回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowEncryptionCallback.UnlockDataKey(System.String)">
+            <summary>
+            解锁
+            </summary>
+            <param name="key">旧密码，空表示使用默认密码</param>
+            <returns>是否成功解锁</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflowEncryptionCallback.UpdateDataKey(System.String)">
+            <summary>
+            更新密码
+            </summary>
+            <param name="key">新密码，空表示使用默认密码</param>
         </member>
         <member name="T:ASEva.NativeClass">
             <summary>

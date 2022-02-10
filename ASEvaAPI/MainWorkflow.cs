@@ -183,6 +183,19 @@ namespace ASEva
         public virtual void OnEditRecordedSession(DateTime recordSessionID) { }
 
         /// <summary>
+        /// [可选实现][可含模态框] 编辑离线地图文件路径
+        /// </summary>
+        /// <param name="originPath">原始路径，若未设置则为null</param>
+        /// <returns>新路径，若未设置则为null</returns>
+        public virtual String OnEditOfflineMapPath(String originPath) { return originPath; }
+
+        /// <summary>
+        /// [可选实现][可含模态框] 编辑数据加密选项
+        /// </summary>
+        /// <param name="callback">框架软件的回调接口</param>
+        public virtual void OnEditDataEncryption(MainWorkflowEncryptionCallback callback) {}
+
+        /// <summary>
         /// [可选实现] 通知正在新建工程项目
         /// </summary>
         public virtual void OnNewProject() {}
@@ -354,5 +367,24 @@ namespace ASEva
         /// 取消任务
         /// </summary>
         void CanelTask();
+    }
+
+    /// <summary>
+    /// (api:app=2.3.0) 在主流程中使用的配置数据加密选项的回调接口
+    /// </summary>
+    public interface MainWorkflowEncryptionCallback
+    {
+        /// <summary>
+        /// 解锁
+        /// </summary>
+        /// <param name="key">旧密码，空表示使用默认密码</param>
+        /// <returns>是否成功解锁</returns>
+        bool UnlockDataKey(String key);
+
+        /// <summary>
+        /// 更新密码
+        /// </summary>
+        /// <param name="key">新密码，空表示使用默认密码</param>
+        void UpdateDataKey(String key);
     }
 }

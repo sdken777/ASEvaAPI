@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 0, 16); // 修正CommonImage.LoadResource
+            return new Version(2, 3, 0, 17); // 新增MainWorkflow.OnEditOfflineMapPath, OnEditDataEncryption
         }
 
         /// <summary>
