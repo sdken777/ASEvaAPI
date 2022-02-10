@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using ASEva.Utility;
 
 namespace ASEva.Samples
@@ -89,8 +90,12 @@ namespace ASEva.Samples
         /// <returns>通用图像数据</returns>
         public static CommonImage LoadResource(String resourceName)
         {
-            var data = ResourceLoader.Load(resourceName);
-            if (data == null) return null;
+            var instream = Assembly.GetCallingAssembly().GetManifestResourceStream(resourceName);
+            if (instream == null || instream.Length == 0) return null;
+
+            var data = new byte[instream.Length];
+            instream.Read(data, 0, data.Length);
+            instream.Close();
 
             return Agency.DecodeImage(data);
         }
