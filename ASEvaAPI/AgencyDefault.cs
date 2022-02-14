@@ -995,5 +995,10 @@ namespace ASEva
         {
             return null;
         }
+
+        public SignalTreeNode[] GetSignalTree()
+        {
+            return null;
+        }
     }
 }

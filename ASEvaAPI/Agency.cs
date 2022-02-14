@@ -212,6 +212,7 @@ namespace ASEva
         DialogClassInfo GetDialogClassInfo(String dialogClassID);
         CommonImage DecodeImage(byte[] imageData);
         byte[] EncodeImage(CommonImage image, String format);
+        SignalTreeNode[] GetSignalTree();
     }
 
     /// <summary>
@@ -2269,6 +2270,15 @@ namespace ASEva
         public static byte[] EncodeImage(CommonImage image, String format)
         {
             return Handler.EncodeImage(image, format);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取信号树
+        /// </summary>
+        /// <returns>信号树根节点下的所有子节点</returns>
+        public static SignalTreeNode[] GetSignalTree()
+        {
+            return Handler.GetSignalTree();
         }
     }
 }

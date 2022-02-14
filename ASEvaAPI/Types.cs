@@ -1308,7 +1308,14 @@ namespace ASEva
     /// </summary>
     public class SessionFilterFlags
     {
+        /// <summary>
+        /// 符合搜索条件
+        /// </summary>
         public bool SearchTrue { get; set; }
+
+        /// <summary>
+        /// 已选中
+        /// </summary>
         public bool CheckTrue { get; set; }
     }
 
@@ -1317,7 +1324,14 @@ namespace ASEva
     /// </summary>
     public class DeviceStatusDetail
     {
+        /// <summary>
+        /// 设备状态
+        /// </summary>
         public GeneralDeviceStatus Status { get; set; }
+
+        /// <summary>
+        /// 状态详细描述
+        /// </summary>
         public String Description { get; set; }
     }
 
@@ -1326,11 +1340,106 @@ namespace ASEva
     /// </summary>
     public enum CreatePanelResult
     {
+        /// <summary>
+        /// 创建成功
+        /// </summary>
         OK = 0,
+
+        /// <summary>
+        /// 无效的调用者
+        /// </summary>
         InvalidCaller = 1,
+
+        /// <summary>
+        /// 未找到类型
+        /// </summary>
         ClassNotFound = 2,
+
+        /// <summary>
+        /// 创建失败
+        /// </summary>
         CreateFailed = 3,
+
+        /// <summary>
+        /// 系统繁忙
+        /// </summary>
         SystemBusy = 4,
+
+        /// <summary>
+        /// 窗口已存在（不支持多窗口）
+        /// </summary>
         AlreadyExist = 5,
+    }
+
+    /// <summary>
+    /// (api:app=2.3.0) 信号树节点类别
+    /// </summary>
+    public enum SignalTreeNodeType
+    {
+        /// <summary>
+        /// I级：信号大类
+        /// </summary>
+        Category = 11,
+
+        /// <summary>
+        /// I级：总线协议
+        /// </summary>
+        BusProtocol = 12,
+
+        /// <summary>
+        /// II级：信号小类
+        /// </summary>
+        Type = 21,
+
+        /// <summary>
+        /// II级：总线报文
+        /// </summary>
+        BusMessage = 22,
+
+        /// <summary>
+        /// III级：一般信号
+        /// </summary>
+        GeneralSignal = 31,
+
+        /// <summary>
+        /// III级：系统信号
+        /// </summary>
+        SystemSignal = 32,
+
+        /// <summary>
+        /// III级：一般总线信号
+        /// </summary>
+        NormalBusSignal = 33,
+
+        /// <summary>
+        /// III级：复用的总线信号
+        /// </summary>
+        MultiplexedBusSignal = 34,
+    }
+
+    /// <summary>
+    /// (api:app=2.3.0) 信号树节点
+    /// </summary>
+    public class SignalTreeNode
+    {
+        /// <summary>
+        /// 节点类别
+        /// </summary>
+        public SignalTreeNodeType Type { get; set; }
+
+        /// <summary>
+        /// 节点ID
+        /// </summary>
+        public String ID { get; set; }
+
+        /// <summary>
+        /// 节点名称
+        /// </summary>
+        public String Name { get; set; }
+
+        /// <summary>
+        /// 子节点
+        /// </summary>
+        public SignalTreeNode[] Children { get; set; }
     }
 }

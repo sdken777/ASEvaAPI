@@ -1432,6 +1432,12 @@
             <param name="format">编码格式，目前支持"jpg", "png"</param>
             <returns>编码后的二进制数据，若失败则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetSignalTree">
+            <summary>
+            (api:app=2.3.0) 获取信号树
+            </summary>
+            <returns>信号树根节点下的所有子节点</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
             version=2.3.0
@@ -5610,14 +5616,134 @@
             (api:app=2.3.0) Session筛选标志位
             </summary>
         </member>
+        <member name="P:ASEva.SessionFilterFlags.SearchTrue">
+            <summary>
+            符合搜索条件
+            </summary>
+        </member>
+        <member name="P:ASEva.SessionFilterFlags.CheckTrue">
+            <summary>
+            已选中
+            </summary>
+        </member>
         <member name="T:ASEva.DeviceStatusDetail">
             <summary>
             (api:app=2.3.0) 详细的设备状态信息
             </summary>
         </member>
+        <member name="P:ASEva.DeviceStatusDetail.Status">
+            <summary>
+            设备状态
+            </summary>
+        </member>
+        <member name="P:ASEva.DeviceStatusDetail.Description">
+            <summary>
+            状态详细描述
+            </summary>
+        </member>
         <member name="T:ASEva.CreatePanelResult">
             <summary>
             (api:app=2.3.0) 创建窗口对象或对话框对象的结果
+            </summary>
+        </member>
+        <member name="F:ASEva.CreatePanelResult.OK">
+            <summary>
+            创建成功
+            </summary>
+        </member>
+        <member name="F:ASEva.CreatePanelResult.InvalidCaller">
+            <summary>
+            无效的调用者
+            </summary>
+        </member>
+        <member name="F:ASEva.CreatePanelResult.ClassNotFound">
+            <summary>
+            未找到类型
+            </summary>
+        </member>
+        <member name="F:ASEva.CreatePanelResult.CreateFailed">
+            <summary>
+            创建失败
+            </summary>
+        </member>
+        <member name="F:ASEva.CreatePanelResult.SystemBusy">
+            <summary>
+            系统繁忙
+            </summary>
+        </member>
+        <member name="F:ASEva.CreatePanelResult.AlreadyExist">
+            <summary>
+            窗口已存在（不支持多窗口）
+            </summary>
+        </member>
+        <member name="T:ASEva.SignalTreeNodeType">
+            <summary>
+            (api:app=2.3.0) 信号树节点类别
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalTreeNodeType.Category">
+            <summary>
+            I级：信号大类
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalTreeNodeType.BusProtocol">
+            <summary>
+            I级：总线协议
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalTreeNodeType.Type">
+            <summary>
+            II级：信号小类
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalTreeNodeType.BusMessage">
+            <summary>
+            II级：总线报文
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalTreeNodeType.GeneralSignal">
+            <summary>
+            III级：一般信号
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalTreeNodeType.SystemSignal">
+            <summary>
+            III级：系统信号
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalTreeNodeType.NormalBusSignal">
+            <summary>
+            III级：一般总线信号
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalTreeNodeType.MultiplexedBusSignal">
+            <summary>
+            III级：复用的总线信号
+            </summary>
+        </member>
+        <member name="T:ASEva.SignalTreeNode">
+            <summary>
+            (api:app=2.3.0) 信号树节点
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalTreeNode.Type">
+            <summary>
+            节点类别
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalTreeNode.ID">
+            <summary>
+            节点ID
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalTreeNode.Name">
+            <summary>
+            节点名称
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalTreeNode.Children">
+            <summary>
+            子节点
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">
