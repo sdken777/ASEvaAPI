@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 0, 18); // 新增Agency.GetSignalTree
+            return new Version(2, 3, 0, 19); // 新增Agency.GetBusProtocolFileIDList, GetBusProtocolFilePath, UpdateBusProtocolFilePath, AddBusProtocolFile, RemoveBusProtocolFile
         }
 
         /// <summary>

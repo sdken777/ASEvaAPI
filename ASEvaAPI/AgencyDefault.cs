@@ -1000,5 +1000,30 @@ namespace ASEva
         {
             return null;
         }
+
+        public BusProtocolFileID[] GetBusProtocolFileIDList()
+        {
+            return null;
+        }
+
+        public string GetBusProtocolFilePath(BusProtocolFileID fileID)
+        {
+            return null;
+        }
+
+        public bool UpdateBusProtocolFilePath(BusProtocolFileID fileID, string filePath)
+        {
+            return false;
+        }
+
+        public bool AddBusProtocolFile(String filePath, out BusProtocolFileID fileID)
+        {
+            fileID = null;
+            return false;
+        }
+
+        public void RemoveBusProtocolFile(BusProtocolFileID fileID)
+        {
+        }
     }
 }

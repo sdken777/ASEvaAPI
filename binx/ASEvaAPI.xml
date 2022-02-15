@@ -744,12 +744,47 @@
             </summary>
             <returns>视频设备列表，键为设备ID，值为对应的设备信息</returns>
         </member>
+        <member name="M:ASEva.Agency.GetBusProtocolFileIDList">
+            <summary>
+            (api:app=2.3.0) 获取总线协议文件ID列表
+            </summary>
+            <returns>总线协议文件ID列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetBusProtocolFilePath(ASEva.BusProtocolFileID)">
+            <summary>
+            (api:app=2.3.0) 获取总线协议文件路径
+            </summary>
+            <param name="fileID">总线协议文件ID</param>
+            <returns>总线协议文件路径，若未找到返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.UpdateBusProtocolFilePath(ASEva.BusProtocolFileID,System.String)">
+            <summary>
+            (api:app=2.3.0) 更新总线协议文件路径
+            </summary>
+            <param name="fileID">总线协议文件ID</param>
+            <param name="filePath">新路径</param>
+            <returns>是否成功更新，false表示未找到文件或MD5不匹配</returns>
+        </member>
         <member name="M:ASEva.Agency.GetBusProtocolFileState(ASEva.BusProtocolFileID)">
             <summary>
             获取总线协议文件的状态
             </summary>
             <param name="fileID">总线协议文件ID</param>
             <returns>文件状态</returns>
+        </member>
+        <member name="M:ASEva.Agency.AddBusProtocolFile(System.String,ASEva.BusProtocolFileID@)">
+            <summary>
+            (api:app=2.3.0) 添加新的总线协议文件
+            </summary>
+            <param name="filePath">总线协议文件路径</param>
+            <param name="fileID">总线协议文件ID，若文件存在则输出该ID，否则输出null</param>
+            <returns>是否为新添加的总线协议文件ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.RemoveBusProtocolFile(ASEva.BusProtocolFileID)">
+            <summary>
+            (api:app=2.3.0) 移除总线协议文件
+            </summary>
+            <param name="fileID">总线协议文件ID</param>
         </member>
         <member name="M:ASEva.Agency.GetNativePluginVersions(System.String)">
             <summary>
