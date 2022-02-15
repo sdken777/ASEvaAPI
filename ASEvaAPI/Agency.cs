@@ -223,6 +223,8 @@ namespace ASEva
         SignalTreeNode[] GetSignalTree();
         String[] GetPluginPackIDList();
         PluginPackInfo GetPluginPackInfo(String packID);
+        bool InstallPlugin(String dirPath);
+        void UninstallPlugin(String packID);
     }
 
     /// <summary>
@@ -2396,6 +2398,25 @@ namespace ASEva
         public static PluginPackInfo GetPluginPackInfo(String packID)
         {
             return Handler.GetPluginPackInfo(packID);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 安装插件（安装完毕后也需要重启才生效）
+        /// </summary>
+        /// <param name="dirPath">插件包文件夹，或包含若干插件包的文件夹</param>
+        /// <returns>是否安装了插件</returns>
+        public static bool InstallPlugin(String dirPath)
+        {
+            return Handler.InstallPlugin(dirPath);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 卸载插件
+        /// </summary>
+        /// <param name="packID">插件包ID</param>
+        public static void UninstallPlugin(String packID)
+        {
+            Handler.UninstallPlugin(packID);
         }
     }
 }

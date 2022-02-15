@@ -1482,4 +1482,82 @@ namespace ASEva
         /// </summary>
         public String NativeLayerDetails { get; set; }
     }
+
+    /// <summary>
+    /// (api:app=2.3.0) 插件关联的库是否可安装的状态
+    /// </summary>
+    public enum InstallPluginLibraryStatus
+    {
+        /// <summary>
+        /// 可安装
+        /// </summary>
+        OK,
+
+        /// <summary>
+        /// 平台不支持（UI）
+        /// </summary>
+        PlatformUnsupported,
+
+        /// <summary>
+        /// 插件太新
+        /// </summary>
+        TooNew,
+
+        /// <summary>
+        /// 插件太旧
+        /// </summary>
+        TooOld,
+    }
+
+    /// <summary>
+    /// (api:app=2.3.0) 插件关联库的信息
+    /// </summary>
+    public class InstallPluginLibraryInfo
+    {
+        /// <summary>
+        /// 库ID
+        /// </summary>
+        public String LibraryID { get; set; }
+
+        /// <summary>
+        /// 名称
+        /// </summary>
+        public String Name { get; set; }
+
+        /// <summary>
+        /// 是否可安装的状态
+        /// </summary>
+        public InstallPluginLibraryStatus Status { get; set; }
+
+        /// <summary>
+        /// 插件版本
+        /// </summary>
+        public Version Version { get; set; }
+
+        /// <summary>
+        /// 已安装插件的版本，若未安装则为null
+        /// </summary>
+        public Version InstalledVersion { get; set; }
+    }
+
+    /// <summary>
+    /// (api:app=2.3.0) 插件关联驱动和环境的信息
+    /// </summary>
+    public class InstallPluginDriverInfo
+    {
+        /// <summary>
+        /// 驱动ID
+        /// </summary>
+        public String DriverID { get; set; }
+
+        /// <summary>
+        /// 名称
+        /// </summary>
+        public String Name { get; set; }
+
+        /// <summary>
+        /// 是否随付在安装包中
+        /// </summary>
+        public bool Attached { get; set; }
+    }
 }

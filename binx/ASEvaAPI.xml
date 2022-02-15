@@ -1512,6 +1512,19 @@
             <param name="packID">插件包ID</param>
             <returns>插件包信息，若无对应插件包则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.InstallPlugin(System.String)">
+            <summary>
+            (api:app=2.3.0) 安装插件（安装完毕后也需要重启才生效）
+            </summary>
+            <param name="dirPath">插件包文件夹，或包含若干插件包的文件夹</param>
+            <returns>是否安装了插件</returns>
+        </member>
+        <member name="M:ASEva.Agency.UninstallPlugin(System.String)">
+            <summary>
+            (api:app=2.3.0) 卸载插件
+            </summary>
+            <param name="packID">插件包ID</param>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
             version=2.3.0
@@ -3262,6 +3275,14 @@
             </summary>
             <param name="callback">框架软件的回调接口</param>
         </member>
+        <member name="M:ASEva.MainWorkflow.OnInstallPlugin(ASEva.InstallPluginLibraryInfo[],ASEva.InstallPluginDriverInfo[],ASEva.MainWorkflowInstallCallback)">
+            <summary>
+            [可选实现][可含模态框] 安装插件
+            </summary>
+            <param name="libs">插件关联的库信息列表</param>
+            <param name="drivers">插件关联的驱动和环境信息列表</param>
+            <param name="callback">框架软件的回调接口</param>
+        </member>
         <member name="M:ASEva.MainWorkflow.OnNewProject">
             <summary>
             [可选实现] 通知正在新建工程项目
@@ -3446,6 +3467,24 @@
             更新密码
             </summary>
             <param name="key">新密码，空表示使用默认密码</param>
+        </member>
+        <member name="T:ASEva.MainWorkflowInstallCallback">
+            <summary>
+            (api:app=2.3.0) 在主流程中使用的安装插件的回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowInstallCallback.InstallLibrary(System.String)">
+            <summary>
+            安装库文件
+            </summary>
+            <param name="libraryID">插件关联的库ID</param>
+        </member>
+        <member name="M:ASEva.MainWorkflowInstallCallback.PrepareDriver(System.String)">
+            <summary>
+            准备驱动和环境等的文件，并返回安装文件的运行路径
+            </summary>
+            <param name="driverID">插件关联的驱动ID</param>
+            <returns>安装文件的运行路径</returns>
         </member>
         <member name="T:ASEva.NativeClass">
             <summary>
@@ -5858,6 +5897,81 @@
         <member name="P:ASEva.PluginPackInfo.NativeLayerDetails">
             <summary>
             原生层详情
+            </summary>
+        </member>
+        <member name="T:ASEva.InstallPluginLibraryStatus">
+            <summary>
+            (api:app=2.3.0) 插件关联的库是否可安装的状态
+            </summary>
+        </member>
+        <member name="F:ASEva.InstallPluginLibraryStatus.OK">
+            <summary>
+            可安装
+            </summary>
+        </member>
+        <member name="F:ASEva.InstallPluginLibraryStatus.PlatformUnsupported">
+            <summary>
+            平台不支持（UI）
+            </summary>
+        </member>
+        <member name="F:ASEva.InstallPluginLibraryStatus.TooNew">
+            <summary>
+            插件太新
+            </summary>
+        </member>
+        <member name="F:ASEva.InstallPluginLibraryStatus.TooOld">
+            <summary>
+            插件太旧
+            </summary>
+        </member>
+        <member name="T:ASEva.InstallPluginLibraryInfo">
+            <summary>
+            (api:app=2.3.0) 插件关联库的信息
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginLibraryInfo.LibraryID">
+            <summary>
+            库ID
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginLibraryInfo.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginLibraryInfo.Status">
+            <summary>
+            是否可安装的状态
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginLibraryInfo.Version">
+            <summary>
+            插件版本
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginLibraryInfo.InstalledVersion">
+            <summary>
+            已安装插件的版本，若未安装则为null
+            </summary>
+        </member>
+        <member name="T:ASEva.InstallPluginDriverInfo">
+            <summary>
+            (api:app=2.3.0) 插件关联驱动和环境的信息
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginDriverInfo.DriverID">
+            <summary>
+            驱动ID
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginDriverInfo.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginDriverInfo.Attached">
+            <summary>
+            是否随付在安装包中
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">

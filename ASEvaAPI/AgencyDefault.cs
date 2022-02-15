@@ -1048,5 +1048,14 @@ namespace ASEva
         {
             return null;
         }
+
+        public bool InstallPlugin(string dirPath)
+        {
+            return false;
+        }
+
+        public void UninstallPlugin(string packID)
+        {
+        }
     }
 }

@@ -196,6 +196,14 @@ namespace ASEva
         public virtual void OnEditDataEncryption(MainWorkflowEncryptionCallback callback) {}
 
         /// <summary>
+        /// [可选实现][可含模态框] 安装插件
+        /// </summary>
+        /// <param name="libs">插件关联的库信息列表</param>
+        /// <param name="drivers">插件关联的驱动和环境信息列表</param>
+        /// <param name="callback">框架软件的回调接口</param>
+        public virtual void OnInstallPlugin(InstallPluginLibraryInfo[] libs, InstallPluginDriverInfo[] drivers, MainWorkflowInstallCallback callback) {}
+
+        /// <summary>
         /// [可选实现] 通知正在新建工程项目
         /// </summary>
         public virtual void OnNewProject() {}
@@ -386,5 +394,24 @@ namespace ASEva
         /// </summary>
         /// <param name="key">新密码，空表示使用默认密码</param>
         void UpdateDataKey(String key);
+    }
+
+    /// <summary>
+    /// (api:app=2.3.0) 在主流程中使用的安装插件的回调接口
+    /// </summary>
+    public interface MainWorkflowInstallCallback
+    {
+        /// <summary>
+        /// 安装库文件
+        /// </summary>
+        /// <param name="libraryID">插件关联的库ID</param>
+        void InstallLibrary(String libraryID);
+
+        /// <summary>
+        /// 准备驱动和环境等的文件，并返回安装文件的运行路径
+        /// </summary>
+        /// <param name="driverID">插件关联的驱动ID</param>
+        /// <returns>安装文件的运行路径</returns>
+        String PrepareDriver(String driverID);
     }
 }
