@@ -85,7 +85,7 @@ namespace ASEva
         String[] GetBusFloat32Signals();
         float GetBusMessageFPS(int channel, uint localID);
         BusMessageInfo GetBusMessageInfo(int channel, uint localID);
-        bool IsBusMessageBinded(String busMessageID);
+        bool IsBusMessageBound(String busMessageID);
         object[] GetEventHandles();
         EventInfo GetEventInfo(object eventHandle);
         void RemoveEvent(object eventHandle);
@@ -182,6 +182,9 @@ namespace ASEva
         void SetSessionChecker(DateTime session, bool check);
         void RemoveGeneration(DateTime session, String genID);
         String GetSessionComment(DateTime session);
+        void SetSessionComment(DateTime session, String comment);
+        Dictionary<String, String> GetSessionProperties(DateTime session);
+        void SetSessionProperties(DateTime session, Dictionary<String, String> properties);
         void SetAudioVolume(double volume);
         void SetCPURateScale(int scale);
         String GetLicenseInfo();
@@ -953,13 +956,21 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 获取总线报文是否已绑定发送
+        /// 已弃用，应使用 ASEva.Agency.IsBusMessageBound
+        /// </summary>
+        public static bool IsBusMessageBinded(string busMessageID)
+        {
+            return Handler.IsBusMessageBound(busMessageID);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取总线报文是否已绑定发送
         /// </summary>
         /// <param name="busMessageID">总线报文ID</param>
         /// <returns>是否已绑定</returns>
-        public static bool IsBusMessageBinded(string busMessageID)
+        public static bool IsBusMessageBound(string busMessageID)
         {
-            return Handler.IsBusMessageBinded(busMessageID);
+            return Handler.IsBusMessageBound(busMessageID);
         }
 
         /// <summary>
@@ -1977,6 +1988,36 @@ namespace ASEva
         public static String GetSessionComment(DateTime session)
         {
             return Handler.GetSessionComment(session);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 设置session的注释说明
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <param name="comment">Session的注释说明</param>
+        public static void SetSessionComment(DateTime session, String comment)
+        {
+            Handler.SetSessionComment(session, comment);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取session的属性表
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <returns>Session的属性表</returns>
+        public static Dictionary<String, String> GetSessionProperties(DateTime session)
+        {
+            return Handler.GetSessionProperties(session);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 设置session的属性表
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <param name="properties">Session的属性表</param>
+        public static void SetSessionProperties(DateTime session, Dictionary<String, String> properties)
+        {
+            Handler.SetSessionProperties(session, properties);
         }
 
         /// <summary>

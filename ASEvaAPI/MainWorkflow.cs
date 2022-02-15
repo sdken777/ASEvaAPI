@@ -366,7 +366,7 @@ namespace ASEva
         /// <summary>
         /// 取消任务
         /// </summary>
-        void CanelTask();
+        void CancelTask();
     }
 
     /// <summary>

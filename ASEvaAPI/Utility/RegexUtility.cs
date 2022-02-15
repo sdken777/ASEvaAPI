@@ -43,9 +43,17 @@ namespace ASEva.Utility
         }
 
         /// <summary>
-        /// 是否为非负数值字符串
+        /// 已弃用，应使用 ASEva.Utility.RegexUtil.IsNotNegative
         /// </summary>
         public static bool IsNotNagtive(string input)
+        {
+            return IsMatch(@"^\d+$", input);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 是否为非负数值字符串
+        /// </summary>
+        public static bool IsNotNegative(string input)
         {
             return IsMatch(@"^\d+$", input);
         }

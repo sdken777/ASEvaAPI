@@ -505,7 +505,12 @@
         </member>
         <member name="M:ASEva.Agency.IsBusMessageBinded(System.String)">
             <summary>
-            获取总线报文是否已绑定发送
+            已弃用，应使用 ASEva.Agency.IsBusMessageBound
+            </summary>
+        </member>
+        <member name="M:ASEva.Agency.IsBusMessageBound(System.String)">
+            <summary>
+            (api:app=2.3.0) 获取总线报文是否已绑定发送
             </summary>
             <param name="busMessageID">总线报文ID</param>
             <returns>是否已绑定</returns>
@@ -1220,6 +1225,27 @@
             </summary>
             <param name="session">Session ID</param>
             <returns>Session的注释说明</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetSessionComment(System.DateTime,System.String)">
+            <summary>
+            (api:app=2.3.0) 设置session的注释说明
+            </summary>
+            <param name="session">Session ID</param>
+            <param name="comment">Session的注释说明</param>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionProperties(System.DateTime)">
+            <summary>
+            (api:app=2.3.0) 获取session的属性表
+            </summary>
+            <param name="session">Session ID</param>
+            <returns>Session的属性表</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetSessionProperties(System.DateTime,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            (api:app=2.3.0) 设置session的属性表
+            </summary>
+            <param name="session">Session ID</param>
+            <param name="properties">Session的属性表</param>
         </member>
         <member name="M:ASEva.Agency.SetAudioVolume(System.Double)">
             <summary>
@@ -3385,7 +3411,7 @@
             获取任务进度，单位百分比
             </summary>
         </member>
-        <member name="M:ASEva.MainWorkflowTaskCallback.CanelTask">
+        <member name="M:ASEva.MainWorkflowTaskCallback.CancelTask">
             <summary>
             取消任务
             </summary>
@@ -4859,7 +4885,12 @@
         </member>
         <member name="F:ASEva.WebApiResult.Responsed">
             <summary>
-            成功得到响应
+            已弃用，应使用 ASEva.WebApiResult.Responded
+            </summary>
+        </member>
+        <member name="F:ASEva.WebApiResult.Responded">
+            <summary>
+            (api:app=2.3.0) 成功得到响应
             </summary>
         </member>
         <member name="T:ASEva.WebApiContext">
@@ -6116,7 +6147,12 @@
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsNotNagtive(System.String)">
             <summary>
-            是否为非负数值字符串
+            已弃用，应使用 ASEva.Utility.RegexUtil.IsNotNegative
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.RegexUtil.IsNotNegative(System.String)">
+            <summary>
+            (api:app=2.3.0) 是否为非负数值字符串
             </summary>
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsUint(System.String)">

@@ -344,15 +344,19 @@ namespace ASEva
         /// <summary>
         /// 互联网未连接导致失败
         /// </summary>
-        InternetNotConnected,
+        InternetNotConnected = 1,
         /// <summary>
         /// 超时，定义为超过3秒未收到回复，或超过5秒仍未实际发出请求
         /// </summary>
-        Timeout,
+        Timeout = 2,
         /// <summary>
-        /// 成功得到响应
+        /// 已弃用，应使用 ASEva.WebApiResult.Responded
         /// </summary>
-        Responsed,
+        Responsed = 3,
+        /// <summary>
+        /// (api:app=2.3.0) 成功得到响应
+        /// </summary>
+        Responded = 3,
     }
 
     /// <summary>

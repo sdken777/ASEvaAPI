@@ -7,8 +7,8 @@ namespace ASEva.Utility
     /// </summary>
     public struct MissFalseResult
     {
-        public bool missOccured;
-        public bool falseOccured;
+        public bool missOccurred;
+        public bool falseOccurred;
     }
 
     /// <summary>
@@ -36,7 +36,7 @@ namespace ASEva.Utility
         public MissFalseResult Update(bool testValue, bool groundTruth)
         {
             var result = new MissFalseResult();
-            result.falseOccured = result.missOccured = false;
+            result.falseOccurred = result.missOccurred = false;
 
             // test和GT值上升/下降沿提取
             bool testUp = false, testDown = false;
@@ -94,7 +94,7 @@ namespace ASEva.Utility
                 if (!hasTrueGroundTruth)
                 {
                     falseCount++;
-                    result.falseOccured = true;
+                    result.falseOccurred = true;
                 }
             }
 
@@ -103,7 +103,7 @@ namespace ASEva.Utility
                 if (!hasTrueTestValue)
                 {
                     missCount++;
-                    result.missOccured = true;
+                    result.missOccurred = true;
                 }
             }
 

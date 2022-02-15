@@ -297,7 +297,7 @@ namespace ASEva
             return 0;
         }
 
-        public bool IsBusMessageBinded(string busMessageID)
+        public bool IsBusMessageBound(string busMessageID)
         {
             return false;
         }
@@ -1023,6 +1023,19 @@ namespace ASEva
         }
 
         public void RemoveBusProtocolFile(BusProtocolFileID fileID)
+        {
+        }
+
+        public void SetSessionComment(DateTime session, string comment)
+        {
+        }
+
+        public Dictionary<string, string> GetSessionProperties(DateTime session)
+        {
+            return null;
+        }
+
+        public void SetSessionProperties(DateTime session, Dictionary<string, string> properties)
         {
         }
     }
