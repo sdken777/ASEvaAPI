@@ -1038,5 +1038,15 @@ namespace ASEva
         public void SetSessionProperties(DateTime session, Dictionary<string, string> properties)
         {
         }
+
+        public string[] GetPluginPackIDList()
+        {
+            return null;
+        }
+
+        public PluginPackInfo GetPluginPackInfo(string packID)
+        {
+            return null;
+        }
     }
 }

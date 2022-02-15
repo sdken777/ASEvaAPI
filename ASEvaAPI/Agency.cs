@@ -221,6 +221,8 @@ namespace ASEva
         CommonImage DecodeImage(byte[] imageData);
         byte[] EncodeImage(CommonImage image, String format);
         SignalTreeNode[] GetSignalTree();
+        String[] GetPluginPackIDList();
+        PluginPackInfo GetPluginPackInfo(String packID);
     }
 
     /// <summary>
@@ -2375,6 +2377,25 @@ namespace ASEva
         public static SignalTreeNode[] GetSignalTree()
         {
             return Handler.GetSignalTree();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取插件包ID列表
+        /// </summary>
+        /// <returns>插件包ID列表</returns>
+        public static String[] GetPluginPackIDList()
+        {
+            return Handler.GetPluginPackIDList();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取插件包信息
+        /// </summary>
+        /// <param name="packID">插件包ID</param>
+        /// <returns>插件包信息，若无对应插件包则返回null</returns>
+        public static PluginPackInfo GetPluginPackInfo(String packID)
+        {
+            return Handler.GetPluginPackInfo(packID);
         }
     }
 }

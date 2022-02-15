@@ -1446,4 +1446,40 @@ namespace ASEva
         /// </summary>
         public SignalTreeNode[] Children { get; set; }
     }
+
+    /// <summary>
+    /// (api:app=2.3.0) 插件包信息
+    /// </summary>
+    public class PluginPackInfo
+    {
+        /// <summary>
+        /// 插件包ID
+        /// </summary>
+        public String ID { get; set; }
+
+        /// <summary>
+        /// 插件包名称
+        /// </summary>
+        public String Name { get; set; }
+
+        /// <summary>
+        /// 插件包版本
+        /// </summary>
+        public Version Version { get; set; }
+
+        /// <summary>
+        /// 插件包简介
+        /// </summary>
+        public String Brief { get; set; }
+
+        /// <summary>
+        /// 应用层详情
+        /// </summary>
+        public String AppLayerDetails { get; set; }
+
+        /// <summary>
+        /// 原生层详情
+        /// </summary>
+        public String NativeLayerDetails { get; set; }
+    }
 }

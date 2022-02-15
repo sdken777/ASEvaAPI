@@ -1499,6 +1499,19 @@
             </summary>
             <returns>信号树根节点下的所有子节点</returns>
         </member>
+        <member name="M:ASEva.Agency.GetPluginPackIDList">
+            <summary>
+            (api:app=2.3.0) 获取插件包ID列表
+            </summary>
+            <returns>插件包ID列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetPluginPackInfo(System.String)">
+            <summary>
+            (api:app=2.3.0) 获取插件包信息
+            </summary>
+            <param name="packID">插件包ID</param>
+            <returns>插件包信息，若无对应插件包则返回null</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
             version=2.3.0
@@ -5810,6 +5823,41 @@
         <member name="P:ASEva.SignalTreeNode.Children">
             <summary>
             子节点
+            </summary>
+        </member>
+        <member name="T:ASEva.PluginPackInfo">
+            <summary>
+            (api:app=2.3.0) 插件包信息
+            </summary>
+        </member>
+        <member name="P:ASEva.PluginPackInfo.ID">
+            <summary>
+            插件包ID
+            </summary>
+        </member>
+        <member name="P:ASEva.PluginPackInfo.Name">
+            <summary>
+            插件包名称
+            </summary>
+        </member>
+        <member name="P:ASEva.PluginPackInfo.Version">
+            <summary>
+            插件包版本
+            </summary>
+        </member>
+        <member name="P:ASEva.PluginPackInfo.Brief">
+            <summary>
+            插件包简介
+            </summary>
+        </member>
+        <member name="P:ASEva.PluginPackInfo.AppLayerDetails">
+            <summary>
+            应用层详情
+            </summary>
+        </member>
+        <member name="P:ASEva.PluginPackInfo.NativeLayerDetails">
+            <summary>
+            原生层详情
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">
