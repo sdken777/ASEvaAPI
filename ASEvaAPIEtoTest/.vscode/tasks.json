@@ -281,13 +281,11 @@
         {
             "type": "process",
             "label": "发布构建并生成app包(X86-MacOS主机/全平台目标)",
-            "command": "../binm/app-maker",
+            "command": "dotnet",
             "args": [
-                "${workspaceFolder}/../binm",
-                "${workspaceFolder}/Resources/icon.icns",
-                "${workspaceFolder}/../binm/ASEvaAPIEtoTest.app",
-                "ASEvaAPIEtoTest",
-                "icon.icns",
+                "../bin/AppMaker.dll",
+                "${workspaceFolder}/macapp-ASEvaAPIEtoTest.xml",
+                "release",
             ],
             "dependsOrder": "sequence",
             "dependsOn": [
@@ -436,13 +434,11 @@
         {
             "type": "process",
             "label": "调试构建并生成app包(X86-MacOS主机/X86-MacOS1010目标)",
-            "command": "../binm/app-maker",
+            "command": "dotnet",
             "args": [
-                "${workspaceFolder}/../binm/debug",
-                "${workspaceFolder}/Resources/icon.icns",
-                "${workspaceFolder}/../binm/debug/ASEvaAPIEtoTest.app",
-                "ASEvaAPIEtoTest",
-                "icon.icns",
+                "../bin/AppMaker.dll",
+                "${workspaceFolder}/macapp-ASEvaAPIEtoTest.xml",
+                "debug",
             ],
             "dependsOrder": "sequence",
             "dependsOn": [
