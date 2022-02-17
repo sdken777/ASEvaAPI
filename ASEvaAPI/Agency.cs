@@ -225,6 +225,7 @@ namespace ASEva
         PluginPackInfo GetPluginPackInfo(String packID);
         bool InstallPlugin(String dirPath);
         void UninstallPlugin(String packID);
+        LogMessage[] GetLogMessages();
     }
 
     /// <summary>
@@ -2417,6 +2418,15 @@ namespace ASEva
         public static void UninstallPlugin(String packID)
         {
             Handler.UninstallPlugin(packID);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 获取所有清单信息
+        /// </summary>
+        /// <returns>清单信息列表</returns>
+        public static LogMessage[] GetLogMessages()
+        {
+            return Handler.GetLogMessages();
         }
     }
 }
