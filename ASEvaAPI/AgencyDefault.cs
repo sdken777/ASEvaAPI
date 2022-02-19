@@ -1057,5 +1057,10 @@ namespace ASEva
         public void UninstallPlugin(string packID)
         {
         }
+
+        public LogMessage[] GetLogMessages()
+        {
+            return null;
+        }
     }
 }

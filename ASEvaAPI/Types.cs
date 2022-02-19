@@ -1560,4 +1560,30 @@ namespace ASEva
         /// </summary>
         public bool Attached { get; set; }
     }
+
+    /// <summary>
+    /// (api:app=2.3.0) 清单信息
+    /// </summary>
+    public class LogMessage
+    {
+        /// <summary>
+        /// 清单信息级别
+        /// </summary>
+        public LogLevel Type { get; set; }
+
+        /// <summary>
+        /// 清单信息文本
+        /// </summary>
+        public String Text { get; set; }
+
+        /// <summary>
+        /// 清单信息时间
+        /// </summary>
+        public DateTime Time { get; set; }
+
+        /// <summary>
+        /// 清单信息重复次数
+        /// </summary>
+        public int RepeatedCount { get; set; }
+    }
 }
