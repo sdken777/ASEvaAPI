@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 0, 23); // 新增Agency.GetLogMessages
+            return new Version(2, 3, 0, 24); // 增加Agency.UninstallPlugin返回值
         }
 
         /// <summary>

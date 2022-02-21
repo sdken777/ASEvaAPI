@@ -1524,6 +1524,7 @@
             (api:app=2.3.0) 卸载插件
             </summary>
             <param name="packID">插件包ID</param>
+            <returns>是否卸载了插件</returns>
         </member>
         <member name="M:ASEva.Agency.GetLogMessages">
             <summary>

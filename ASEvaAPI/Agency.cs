@@ -224,7 +224,7 @@ namespace ASEva
         String[] GetPluginPackIDList();
         PluginPackInfo GetPluginPackInfo(String packID);
         bool InstallPlugin(String dirPath);
-        void UninstallPlugin(String packID);
+        bool UninstallPlugin(String packID);
         LogMessage[] GetLogMessages();
     }
 
@@ -2415,9 +2415,10 @@ namespace ASEva
         /// (api:app=2.3.0) 卸载插件
         /// </summary>
         /// <param name="packID">插件包ID</param>
-        public static void UninstallPlugin(String packID)
+        /// <returns>是否卸载了插件</returns>
+        public static bool UninstallPlugin(String packID)
         {
-            Handler.UninstallPlugin(packID);
+            return Handler.UninstallPlugin(packID);
         }
 
         /// <summary>

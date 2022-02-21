@@ -1054,8 +1054,9 @@ namespace ASEva
             return false;
         }
 
-        public void UninstallPlugin(string packID)
+        public bool UninstallPlugin(string packID)
         {
+            return false;
         }
 
         public LogMessage[] GetLogMessages()
