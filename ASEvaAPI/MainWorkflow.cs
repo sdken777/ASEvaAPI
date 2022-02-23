@@ -23,7 +23,8 @@ namespace ASEva
         /// [必须实现][可含模态框] 运行主流程，需要在其中主循环中确保执行了 ASEva.CoreCallback.OnLoop
         /// </summary>
         /// <param name="callback">框架软件回调接口</param>
-        public virtual void OnRun(MainWorkflowLoopCallback callback) {}
+        /// <param name="startupProject">初始项目文件路径</param>
+        public virtual void OnRun(MainWorkflowLoopCallback callback, String startupProject) {}
 
         /// <summary>
         /// [可选实现] 通知应用程序的基本信息

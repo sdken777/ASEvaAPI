@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 0, 24); // 增加Agency.UninstallPlugin返回值
+            return new Version(2, 3, 0, 25); // MainWorkflow.OnRun增加初始项目文件路径参数
         }
 
         /// <summary>

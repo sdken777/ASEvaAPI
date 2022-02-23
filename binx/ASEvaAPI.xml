@@ -3106,11 +3106,12 @@
             <param name="uiCode">输出UI框架代号，若不使用UI则输出null</param>
             <returns>初始化是否成功</returns>
         </member>
-        <member name="M:ASEva.MainWorkflow.OnRun(ASEva.MainWorkflowLoopCallback)">
+        <member name="M:ASEva.MainWorkflow.OnRun(ASEva.MainWorkflowLoopCallback,System.String)">
             <summary>
             [必须实现][可含模态框] 运行主流程，需要在其中主循环中确保执行了 ASEva.CoreCallback.OnLoop
             </summary>
             <param name="callback">框架软件回调接口</param>
+            <param name="startupProject">初始项目文件路径</param>
         </member>
         <member name="M:ASEva.MainWorkflow.OnAppBasicInfo(ASEva.AppBasicInfo)">
             <summary>

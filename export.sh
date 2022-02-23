@@ -100,8 +100,10 @@ if [ "$EXPORT_DEVELOPER" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/eto-doc/* $TARGET_DIR/binm/
         cp -vf "$CUR_DIR"/binm/ASEvaAPIEto.xml $TARGET_DIR/binm/
         cp -vf "$CUR_DIR"/binm/ASEvaAPIMonoMac.xml $TARGET_DIR/binm/
-        cp -vf "$CUR_DIR"/binm/app-maker $TARGET_DIR/binm/
     fi
+
+    mkdir -vp $TARGET_DIR/bin
+    cp -vf "$CUR_DIR"/bin/AppMaker.* $TARGET_DIR/bin/
 fi
 
 if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
