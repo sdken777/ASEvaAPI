@@ -222,9 +222,9 @@ namespace ASEva
         public virtual void OnSaveProject(XmlDocument xml) {}
 
         /// <summary>
-        /// [可选实现] 返回是否允许进行保存工程项目和开始session等操作
+        /// [可选实现] 返回主流程端是否允许进行保存工程项目和开始session等操作
         /// </summary>
-        /// <returns>是否允许进行保存工程项目和开始session等操作</returns>
+        /// <returns>主流程端是否允许进行保存工程项目和开始session等操作</returns>
         public virtual bool OnCheckReady() { return false; }
 
         /// <summary>

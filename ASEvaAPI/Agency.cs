@@ -226,6 +226,7 @@ namespace ASEva
         bool InstallPlugin(String dirPath);
         bool UninstallPlugin(String packID);
         LogMessage[] GetLogMessages();
+        bool IsReady();
     }
 
     /// <summary>
@@ -2428,6 +2429,15 @@ namespace ASEva
         public static LogMessage[] GetLogMessages()
         {
             return Handler.GetLogMessages();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.1) 返回是否允许进行保存工程项目和开始session等操作
+        /// </summary>
+        /// <returns>是否允许进行保存工程项目和开始session等操作</returns>
+        public static bool IsReady()
+        {
+            return Handler.IsReady();
         }
     }
 }

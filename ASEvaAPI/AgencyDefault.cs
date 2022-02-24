@@ -1063,5 +1063,10 @@ namespace ASEva
         {
             return null;
         }
+
+        public bool IsReady()
+        {
+            return false;
+        }
     }
 }

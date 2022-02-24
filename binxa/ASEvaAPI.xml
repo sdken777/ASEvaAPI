@@ -1532,9 +1532,15 @@
             </summary>
             <returns>清单信息列表</returns>
         </member>
+        <member name="M:ASEva.Agency.IsReady">
+            <summary>
+            (api:app=2.3.1) 返回是否允许进行保存工程项目和开始session等操作
+            </summary>
+            <returns>是否允许进行保存工程项目和开始session等操作</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.3.0
+            version=2.3.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3310,9 +3316,9 @@
         </member>
         <member name="M:ASEva.MainWorkflow.OnCheckReady">
             <summary>
-            [可选实现] 返回是否允许进行保存工程项目和开始session等操作
+            [可选实现] 返回主流程端是否允许进行保存工程项目和开始session等操作
             </summary>
-            <returns>是否允许进行保存工程项目和开始session等操作</returns>
+            <returns>主流程端是否允许进行保存工程项目和开始session等操作</returns>
         </member>
         <member name="M:ASEva.MainWorkflow.OnExiting(System.Boolean)">
             <summary>
