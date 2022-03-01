@@ -1540,7 +1540,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.3.1
+            version=2.3.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -1981,6 +1981,12 @@
             (api:app=2.2.1) [可选实现] 获取文件写入需要的所有数据类型
             </summary>
             <returns>文件写入需要的所有数据类型</returns>
+        </member>
+        <member name="M:ASEva.ModuleConfig.MayCauseLowSpeed">
+            <summary>
+            (api:app=2.3.2) [可选实现] 获取是否会合法的导致极低（甚至停滞）的回放速度
+            </summary>
+            <returns>是否会合法的导致极低（甚至停滞）的回放速度</returns>
         </member>
         <member name="M:ASEva.ModuleConfig.DisableAll">
             <summary>

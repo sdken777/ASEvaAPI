@@ -356,6 +356,12 @@ namespace ASEva
         public virtual List<RecordDataType> GetRecordDataTypes() { return null; }
 
         /// <summary>
+        /// (api:app=2.3.2) [可选实现] 获取是否会合法的导致极低（甚至停滞）的回放速度
+        /// </summary>
+        /// <returns>是否会合法的导致极低（甚至停滞）的回放速度</returns>
+        public virtual bool MayCauseLowSpeed() { return false; }
+
+        /// <summary>
         /// [可选实现] 用户一键禁用功能时被调用
         /// </summary>
         public virtual void DisableAll() { }
