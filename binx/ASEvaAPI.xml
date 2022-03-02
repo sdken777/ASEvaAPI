@@ -1540,7 +1540,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.3.2
+            version=2.3.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3165,6 +3165,13 @@
             </summary>
             <param name="message">消息</param>
             <returns>是否确认</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnLog(System.String,ASEva.LogLevel)">
+            <summary>
+            (api:app=2.3.3) [可选实现] 输出清单消息
+            </summary>
+            <param name="message"></param>
+            <param name="level"></param>
         </member>
         <member name="M:ASEva.MainWorkflow.OnDebugMessage(System.String)">
             <summary>

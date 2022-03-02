@@ -68,6 +68,13 @@ namespace ASEva
         public virtual bool OnConfirm(String message) { return true; }
 
         /// <summary>
+        /// (api:app=2.3.3) [可选实现] 输出清单消息
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="level"></param>
+        public virtual void OnLog(String message, LogLevel level) {}
+
+        /// <summary>
         /// [可选实现] 输出调试用消息
         /// </summary>
         /// <param name="message">消息</param>
