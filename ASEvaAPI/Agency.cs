@@ -227,6 +227,8 @@ namespace ASEva
         bool UninstallPlugin(String packID);
         LogMessage[] GetLogMessages();
         bool IsReady();
+        void DisablePlugin(String packID);
+        void EnablePlugin(String packID);
     }
 
     /// <summary>
@@ -2438,6 +2440,24 @@ namespace ASEva
         public static bool IsReady()
         {
             return Handler.IsReady();
+        }
+
+        /// <summary>
+        /// (api:app=2.3.4) 禁用插件
+        /// </summary>
+        /// <param name="packID">插件包ID</param>
+        public static void DisablePlugin(String packID)
+        {
+            Handler.DisablePlugin(packID);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.4) 启用插件（需要重启应用程序后生效）
+        /// </summary>
+        /// <param name="packID">插件包ID</param>
+        public static void EnablePlugin(String packID)
+        {
+            Handler.EnablePlugin(packID);
         }
     }
 }

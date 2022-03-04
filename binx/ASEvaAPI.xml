@@ -1538,9 +1538,21 @@
             </summary>
             <returns>是否允许进行保存工程项目和开始session等操作</returns>
         </member>
+        <member name="M:ASEva.Agency.DisablePlugin(System.String)">
+            <summary>
+            (api:app=2.3.4) 禁用插件
+            </summary>
+            <param name="packID">插件包ID</param>
+        </member>
+        <member name="M:ASEva.Agency.EnablePlugin(System.String)">
+            <summary>
+            (api:app=2.3.4) 启用插件（需要重启应用程序后生效）
+            </summary>
+            <param name="packID">插件包ID</param>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.3.3
+            version=2.3.4
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -5891,6 +5903,26 @@
             子节点
             </summary>
         </member>
+        <member name="T:ASEva.PluginPackStatus">
+            <summary>
+            (api:app=2.3.4) 插件包状态
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginPackStatus.Disabled">
+            <summary>
+            已禁用
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginPackStatus.Enabled">
+            <summary>
+            已启用
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginPackStatus.ToBeEnabled">
+            <summary>
+            应用程序重启后启用
+            </summary>
+        </member>
         <member name="T:ASEva.PluginPackInfo">
             <summary>
             (api:app=2.3.0) 插件包信息
@@ -5914,6 +5946,11 @@
         <member name="P:ASEva.PluginPackInfo.Brief">
             <summary>
             插件包简介
+            </summary>
+        </member>
+        <member name="P:ASEva.PluginPackInfo.Status">
+            <summary>
+            (api:app=2.3.4) 插件包状态
             </summary>
         </member>
         <member name="P:ASEva.PluginPackInfo.AppLayerDetails">

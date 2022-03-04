@@ -1448,6 +1448,27 @@ namespace ASEva
     }
 
     /// <summary>
+    /// (api:app=2.3.4) 插件包状态
+    /// </summary>
+    public enum PluginPackStatus
+    {
+        /// <summary>
+        /// 已禁用
+        /// </summary>
+        Disabled,
+
+        /// <summary>
+        /// 已启用
+        /// </summary>
+        Enabled,
+
+        /// <summary>
+        /// 应用程序重启后启用
+        /// </summary>
+        ToBeEnabled,
+    }
+
+    /// <summary>
     /// (api:app=2.3.0) 插件包信息
     /// </summary>
     public class PluginPackInfo
@@ -1471,6 +1492,11 @@ namespace ASEva
         /// 插件包简介
         /// </summary>
         public String Brief { get; set; }
+
+        /// <summary>
+        /// (api:app=2.3.4) 插件包状态
+        /// </summary>
+        public PluginPackStatus Status { get; set; }
 
         /// <summary>
         /// 应用层详情

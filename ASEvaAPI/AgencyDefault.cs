@@ -1068,5 +1068,13 @@ namespace ASEva
         {
             return false;
         }
+
+        public void DisablePlugin(string packID)
+        {
+        }
+
+        public void EnablePlugin(string packID)
+        {
+        }
     }
 }
