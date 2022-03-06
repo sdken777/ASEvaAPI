@@ -4,15 +4,15 @@ using Eto.WinForms.Forms.Controls;
 
 namespace ASEva.UICoreWF
 {
-	public class SearchBoxHandler : TextBoxHandler<SearchBoxWithIcon, TextBox, TextBox.ICallback>, SearchBox.IHandler
-	{
+	public class SearchBoxHandler : TextBoxHandler<EtoTextBox, TextBox, TextBox.ICallback>, SearchBox.IHandler
+    {
+		public override swf.TextBox SwfTextBox => Control;
+
+		public override EtoTextBox EtoTextBox => Control;
+
 		public SearchBoxHandler()
-        {
-			Control = new SearchBoxWithIcon();
-        }
-
-		public override swf.TextBox SwfTextBox => Control.TextBox;
-
-		public override EtoTextBox EtoTextBox => Control.TextBox;
+		{
+			Control = new EtoTextBox { PlaceholderText = "Search" };
+		}
 	}
 }

@@ -44,6 +44,10 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>..\bin64</OutputPath>
     <DocumentationFile>..\bin64\ASEvaAPICoreWF.xml</DocumentationFile>

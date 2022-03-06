@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 0, 0); // 新增ImageConverter
+            return new Version(2, 1, 0, 1); // 修正SearchBoxHandler
         }
     }
 }
