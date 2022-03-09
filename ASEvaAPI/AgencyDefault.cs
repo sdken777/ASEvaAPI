@@ -1076,5 +1076,51 @@ namespace ASEva
         public void EnablePlugin(string packID)
         {
         }
+
+        public string[] GetSubDataPathes()
+        {
+            return null;
+        }
+
+        public string[] GetDataLayers()
+        {
+            return null;
+        }
+
+        public string GetCurrentDataLayer()
+        {
+            return null;
+        }
+
+        public void SetCurrentDataLayer(String layer)
+        {
+        }
+
+        public void SetSubDataPath(int subIndex, string path)
+        {
+        }
+
+        public void AddDataLayer(string layer)
+        {
+        }
+
+        public void DeleteDataLayer(string layer)
+        {
+        }
+
+        public string GetSessionLayer(DateTime session)
+        {
+            return null;
+        }
+
+        public bool StartOnline(bool force, bool previewOnly, string sessionDirName)
+        {
+            return false;
+        }
+
+        public string GetSessionFolderName(DateTime session)
+        {
+            return null;
+        }
     }
 }

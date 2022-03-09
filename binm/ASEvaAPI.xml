@@ -59,13 +59,13 @@
         </member>
         <member name="M:ASEva.Agency.GetSessionList">
             <summary>
-            获取当前数据目录下的所有session
+            获取当前数据层级下的所有session
             </summary>
             <returns>Session ID列表，ID为数据起始的系统时间</returns>
         </member>
         <member name="M:ASEva.Agency.GetFilteredSessionList">
             <summary>
-            获取筛选后的所有session
+            获取当前数据层级下筛选后的所有session
             </summary>
             <returns>Session ID列表，ID为数据起始的系统时间</returns>
         </member>
@@ -80,14 +80,28 @@
             获取某个session数据在硬盘的根路径
             </summary>
             <param name="session">希望获取的session ID</param>
-            <returns>Session数据的根路径，若不存在返回null</returns>
+            <returns>Session数据的根路径，若不存在或不属于当前层级则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetSessionPublicDataPath(System.DateTime)">
             <summary>
             获取某个session的公共数据在硬盘的根路径
             </summary>
             <param name="session">希望获取的session ID</param>
-            <returns>Session公共数据的根路径，若不存在返回null</returns>
+            <returns>Session公共数据的根路径，若不存在或不属于当前层级则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionLayer(System.DateTime)">
+            <summary>
+            (api:app=2.4.0) 获取某个session所属数据层级
+            </summary>
+            <param name="session">Session ID</param>
+            <returns>数据层级，其中‘.’表示根路径下的session，'..'表示根路径即session</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionFolderName(System.DateTime)">
+            <summary>
+            (api:app=2.4.0) 获取某个session的文件夹名
+            </summary>
+            <param name="session">Session ID</param>
+            <returns>文件夹名</returns>
         </member>
         <member name="M:ASEva.Agency.GetGenerationPath(System.DateTime,System.String)">
             <summary>
@@ -95,18 +109,18 @@
             </summary>
             <param name="session">希望获取generation所属的session ID</param>
             <param name="generation">希望获取的generation ID</param>
-            <returns>Generation数据的根路径，若不存在返回null</returns>
+            <returns>Generation数据的根路径，若不存在或不属于当前层级则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetFinishedSessions(System.String)">
             <summary>
-            获取某个generation下所有处理完毕的session
+            获取当前层级下某个generation下所有处理完毕的session
             </summary>
             <param name="generation">目标generation</param>
             <returns>处理完毕的session ID列表</returns>
         </member>
         <member name="M:ASEva.Agency.RefreshGenerations">
             <summary>
-            刷新当前数据目录下所有generation
+            刷新当前层级下所有session的generation
             </summary>
         </member>
         <member name="M:ASEva.Agency.GetCurrentDataGeneration">
@@ -126,14 +140,14 @@
             获取某个session的本地开始时间（相对时间戳=0）
             </summary>
             <param name="session">希望获取本地开始时间的session ID</param>
-            <returns>本地开始时间，若空表示无此信息</returns>
+            <returns>本地开始时间，若空表示无此信息或session不在当前层级</returns>
         </member>
         <member name="M:ASEva.Agency.GetStartTimeUTC(System.DateTime)">
             <summary>
             获取某个session的UTC开始时间（相对时间戳=0）
             </summary>
             <param name="session">希望获取UTC开始时间的session ID</param>
-            <returns>UTC开始时间，若空表示无此信息</returns>
+            <returns>UTC开始时间，若空表示无此信息或session不在当前层级</returns>
         </member>
         <member name="M:ASEva.Agency.GetTimestampLocal(System.DateTime,System.Double)">
             <summary>
@@ -170,6 +184,49 @@
             获取当前数据目录的路径
             </summary>
             <returns>当前数据目录的路径，若未设置返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetSubDataPathes">
+            <summary>
+            (api:app=2.4.0) 获取所有子数据目录的路径
+            </summary>
+            <returns>所有子数据目录的路径，目录不存在则为null</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetSubDataPath(System.Int32,System.String)">
+            <summary>
+            (api:app=2.4.0) 设置子数据目录的路径
+            </summary>
+            <param name="subIndex">子数据目录序号，0~3</param>
+            <param name="path">子数据目录的路径</param>
+        </member>
+        <member name="M:ASEva.Agency.GetDataLayers">
+            <summary>
+            (api:app=2.4.0) 获取所有有效的数据层级
+            </summary>
+            <returns>数据层级列表，其中‘.’表示根路径下的session，'..'表示根路径即session</returns>
+        </member>
+        <member name="M:ASEva.Agency.AddDataLayer(System.String)">
+            <summary>
+            (api:app=2.4.0) 添加新的数据层级
+            </summary>
+            <param name="layer">数据层级</param>
+        </member>
+        <member name="M:ASEva.Agency.DeleteDataLayer(System.String)">
+            <summary>
+            (api:app=2.4.0) 移除数据层级，并删除所有文件至回收站
+            </summary>
+            <param name="layer">数据层级</param>
+        </member>
+        <member name="M:ASEva.Agency.GetCurrentDataLayer">
+            <summary>
+            (api:app=2.4.0) 获取当前的数据层级
+            </summary>
+            <returns>数据层级，其中null表示所有层级，‘.’表示根路径下的session，'..'表示根路径即session</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetCurrentDataLayer(System.String)">
+            <summary>
+            (api:app=2.4.0) 设置当前的数据层级
+            </summary>
+            <param name="layer">数据层级，其中null表示所有层级，‘.’表示根路径下的session，'..'表示根路径即session</param>
         </member>
         <member name="M:ASEva.Agency.GetGlobalPublicDataPath">
             <summary>
@@ -228,7 +285,7 @@
             </summary>
             <param name="session">想要获取图表的session ID</param>
             <param name="id">图表的ID，通过 ASEva.GraphDefinition.GetHashCode 获取</param>
-            <returns>图表对象，若不存在返回null</returns>
+            <returns>图表对象，若不存在或不属于当前层级则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.AddSceneData(ASEva.SceneData)">
             <summary>
@@ -573,6 +630,15 @@
             <param name="previewOnly">是否为预览</param>
             <returns>是否成功</returns>
         </member>
+        <member name="M:ASEva.Agency.StartOnline(System.Boolean,System.Boolean,System.String)">
+            <summary>
+            (api:app=2.4.0) 切换至在线模式并开始预览或采集
+            </summary>
+            <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
+            <param name="previewOnly">是否为预览</param>
+            <param name="sessionDirName">采集时，写入session数据的文件夹名（若已存在且强制开始时，则使用默认的日期格式）</param>
+            <returns>是否成功</returns>
+        </member>
         <member name="M:ASEva.Agency.StartOffline(System.Boolean,System.Boolean)">
             <summary>
             切换至离线模式并开始预览或后处理
@@ -606,14 +672,14 @@
             获取指定session开始时间对应的时间点
             </summary>
             <param name="session">Session ID</param>
-            <returns>时间点，session不存在则返回null</returns>
+            <returns>时间点，session不存在或不属于当前层级则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetSessionLength(System.DateTime)">
             <summary>
             获取指定session的长度
             </summary>
             <param name="session">Session ID</param>
-            <returns>Session长度，单位秒，session不存在则返回null</returns>
+            <returns>Session长度，单位秒，session不存在或不属于当前层级则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetGraphIDList">
             <summary>
@@ -674,7 +740,7 @@
         </member>
         <member name="M:ASEva.Agency.GetFilteredSessionListTotalLength">
             <summary>
-            获取筛选后的所有session的时长总长
+            获取当前层级下筛选后的所有session的时长总长
             </summary>
             <returns>筛选后的所有session的时长总长</returns>
         </member>
@@ -1156,7 +1222,7 @@
         </member>
         <member name="M:ASEva.Agency.GetGenerationSessions(System.String)">
             <summary>
-            (api:app=2.3.0) 获取含有指定generation ID的所有session
+            (api:app=2.3.0) 获取当前层级下含有指定generation ID的所有session
             </summary>
             <param name="generationID">Generation ID</param>
             <returns>Session ID列表</returns>
@@ -1187,7 +1253,7 @@
         </member>
         <member name="M:ASEva.Agency.GetSessionListTotalLength">
             <summary>
-            (api:app=2.3.0) 获取所有session的总时长
+            (api:app=2.3.0) 获取当前层级下所有session的总时长
             </summary>
             <returns>所有session的总时长</returns>
         </member>
@@ -1552,7 +1618,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.3.4
+            version=2.4.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3637,6 +3703,16 @@
         <member name="M:ASEva.Plugin.OnProjectSwitched">
             <summary>
             [可选实现] 在项目切换后（包括新建项目）被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.Plugin.OnDataPathSwitched">
+            <summary>
+            (api:app=2.4.0) 在数据根目录切换后被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.Plugin.OnDataLayerSwitched">
+            <summary>
+            (api:app=2.4.0) 在数据层级切换后被调用
             </summary>
         </member>
         <member name="M:ASEva.Plugin.OnSessionStarting">

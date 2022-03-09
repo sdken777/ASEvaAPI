@@ -51,14 +51,22 @@ namespace ASEva
         void SendRawData(String protocol, double[] values, byte[] binary);
         void SendManualTrigger(int channel);
         String GetDataPath();
+        String[] GetSubDataPathes();
+        String[] GetDataLayers();
         String GetGlobalPublicDataPath();
         String[] GetGenerationList();
         DateTime[] GetSessionList();
         DateTime[] GetFilteredSessionList();
         String GetSessionPath(DateTime session);
         String GetSessionPublicDataPath(DateTime session);
+        String GetSessionLayer(DateTime session);
+        String GetSessionFolderName(DateTime session);
         String GetGenerationPath(DateTime session, String generation);
         DateTime[] GetFinishedSessions(String generation);
+        void AddDataLayer(String layer);
+        void DeleteDataLayer(String layer);
+        String GetCurrentDataLayer();
+        void SetCurrentDataLayer(String layer);
         void RefreshGenerations();
         String GetCurrentDataGeneration();
         String GetCurrentSessionGUID();
@@ -94,6 +102,7 @@ namespace ASEva
         bool StartReplay(bool force, double startTimeline, double? interestTarget);
         bool StartOnline(String controllerName, bool previewOnly);
         bool StartOnline(bool force, bool previewOnly);
+        bool StartOnline(bool force, bool previewOnly, String sessionDirName);
         bool StartOffline(bool force, bool previewOnly);
         void StopRunning();
         bool StopRunning(String controllerID);
@@ -160,6 +169,7 @@ namespace ASEva
         int[] GetLicensedFunctionIndices();
         bool SwitchAppMode(String controllerName, ApplicationMode mode, int waitSecond);
         void SetDataPath(String path);
+        void SetSubDataPath(int subIndex, String path);
         Dictionary<String, WindowClassInfo> GetWindowClassTable();
         Dictionary<String, DialogClassInfo> GetDialogClassTable();
         Dictionary<String, ProcessorClassInfo> GetProcessorClassTable();
@@ -323,7 +333,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 获取当前数据目录下的所有session
+        /// 获取当前数据层级下的所有session
         /// </summary>
         /// <returns>Session ID列表，ID为数据起始的系统时间</returns>
         public static DateTime[] GetSessionList()
@@ -332,7 +342,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 获取筛选后的所有session
+        /// 获取当前数据层级下筛选后的所有session
         /// </summary>
         /// <returns>Session ID列表，ID为数据起始的系统时间</returns>
         public static DateTime[] GetFilteredSessionList()
@@ -353,7 +363,7 @@ namespace ASEva
         /// 获取某个session数据在硬盘的根路径
         /// </summary>
         /// <param name="session">希望获取的session ID</param>
-        /// <returns>Session数据的根路径，若不存在返回null</returns>
+        /// <returns>Session数据的根路径，若不存在或不属于当前层级则返回null</returns>
         public static String GetSessionPath(DateTime session)
         {
             return Handler.GetSessionPath(session);
@@ -363,10 +373,30 @@ namespace ASEva
         /// 获取某个session的公共数据在硬盘的根路径
         /// </summary>
         /// <param name="session">希望获取的session ID</param>
-        /// <returns>Session公共数据的根路径，若不存在返回null</returns>
+        /// <returns>Session公共数据的根路径，若不存在或不属于当前层级则返回null</returns>
         public static String GetSessionPublicDataPath(DateTime session)
         {
             return Handler.GetSessionPublicDataPath(session);
+        }
+
+        /// <summary>
+        /// (api:app=2.4.0) 获取某个session所属数据层级
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <returns>数据层级，其中‘.’表示根路径下的session，'..'表示根路径即session</returns>
+        public static String GetSessionLayer(DateTime session)
+        {
+            return Handler.GetSessionLayer(session);
+        }
+
+        /// <summary>
+        /// (api:app=2.4.0) 获取某个session的文件夹名
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <returns>文件夹名</returns>
+        public static String GetSessionFolderName(DateTime session)
+        {
+            return Handler.GetSessionFolderName(session);
         }
 
         /// <summary>
@@ -374,14 +404,14 @@ namespace ASEva
         /// </summary>
         /// <param name="session">希望获取generation所属的session ID</param>
         /// <param name="generation">希望获取的generation ID</param>
-        /// <returns>Generation数据的根路径，若不存在返回null</returns>
+        /// <returns>Generation数据的根路径，若不存在或不属于当前层级则返回null</returns>
         public static String GetGenerationPath(DateTime session, String generation)
         {
             return Handler.GetGenerationPath(session, generation);
         }
 
         /// <summary>
-        /// 获取某个generation下所有处理完毕的session
+        /// 获取当前层级下某个generation下所有处理完毕的session
         /// </summary>
         /// <param name="generation">目标generation</param>
         /// <returns>处理完毕的session ID列表</returns>
@@ -391,7 +421,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 刷新当前数据目录下所有generation
+        /// 刷新当前层级下所有session的generation
         /// </summary>
         public static void RefreshGenerations()
         {
@@ -420,7 +450,7 @@ namespace ASEva
         /// 获取某个session的本地开始时间（相对时间戳=0）
         /// </summary>
         /// <param name="session">希望获取本地开始时间的session ID</param>
-        /// <returns>本地开始时间，若空表示无此信息</returns>
+        /// <returns>本地开始时间，若空表示无此信息或session不在当前层级</returns>
         public static DateTime? GetStartTimeLocal(DateTime session)
         {
             return Handler.GetStartTimeLocal(session);
@@ -430,7 +460,7 @@ namespace ASEva
         /// 获取某个session的UTC开始时间（相对时间戳=0）
         /// </summary>
         /// <param name="session">希望获取UTC开始时间的session ID</param>
-        /// <returns>UTC开始时间，若空表示无此信息</returns>
+        /// <returns>UTC开始时间，若空表示无此信息或session不在当前层级</returns>
         public static DateTime? GetStartTimeUTC(DateTime session)
         {
             return Handler.GetStartTimeUTC(session);
@@ -485,6 +515,70 @@ namespace ASEva
         public static String GetDataPath()
         {
             return Handler.GetDataPath();
+        }
+
+        /// <summary>
+        /// (api:app=2.4.0) 获取所有子数据目录的路径
+        /// </summary>
+        /// <returns>所有子数据目录的路径，目录不存在则为null</returns>
+        public static String[] GetSubDataPathes()
+        {
+            return Handler.GetSubDataPathes();
+        }
+
+        /// <summary>
+        /// (api:app=2.4.0) 设置子数据目录的路径
+        /// </summary>
+        /// <param name="subIndex">子数据目录序号，0~3</param>
+        /// <param name="path">子数据目录的路径</param>
+        public static void SetSubDataPath(int subIndex, String path)
+        {
+            Handler.SetSubDataPath(subIndex, path);
+        }
+
+        /// <summary>
+        /// (api:app=2.4.0) 获取所有有效的数据层级
+        /// </summary>
+        /// <returns>数据层级列表，其中‘.’表示根路径下的session，'..'表示根路径即session</returns>
+        public static String[] GetDataLayers()
+        {
+            return Handler.GetDataLayers();
+        }
+
+        /// <summary>
+        /// (api:app=2.4.0) 添加新的数据层级
+        /// </summary>
+        /// <param name="layer">数据层级</param>
+        public static void AddDataLayer(String layer)
+        {
+            Handler.AddDataLayer(layer);
+        }
+
+        /// <summary>
+        /// (api:app=2.4.0) 移除数据层级，并删除所有文件至回收站
+        /// </summary>
+        /// <param name="layer">数据层级</param>
+        public static void DeleteDataLayer(String layer)
+        {
+            Handler.DeleteDataLayer(layer);
+        }
+
+        /// <summary>
+        /// (api:app=2.4.0) 获取当前的数据层级
+        /// </summary>
+        /// <returns>数据层级，其中null表示所有层级，‘.’表示根路径下的session，'..'表示根路径即session</returns>
+        public static String GetCurrentDataLayer()
+        {
+            return Handler.GetCurrentDataLayer();
+        }
+
+        /// <summary>
+        /// (api:app=2.4.0) 设置当前的数据层级
+        /// </summary>
+        /// <param name="layer">数据层级，其中null表示所有层级，‘.’表示根路径下的session，'..'表示根路径即session</param>
+        public static void SetCurrentDataLayer(String layer)
+        {
+            Handler.SetCurrentDataLayer(layer);
         }
 
         /// <summary>
@@ -567,7 +661,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">想要获取图表的session ID</param>
         /// <param name="id">图表的ID，通过 ASEva.GraphDefinition.GetHashCode 获取</param>
-        /// <returns>图表对象，若不存在返回null</returns>
+        /// <returns>图表对象，若不存在或不属于当前层级则返回null</returns>
         public static GraphData GetGraphData(DateTime session, int id)
         {
             return Handler.GetGraphData(session, id);
@@ -1064,6 +1158,18 @@ namespace ASEva
         }
 
         /// <summary>
+        /// (api:app=2.4.0) 切换至在线模式并开始预览或采集
+        /// </summary>
+        /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
+        /// <param name="previewOnly">是否为预览</param>
+        /// <param name="sessionDirName">采集时，写入session数据的文件夹名（若已存在且强制开始时，则使用默认的日期格式）</param>
+        /// <returns>是否成功</returns>
+        public static bool StartOnline(bool force, bool previewOnly, String sessionDirName)
+        {
+            return Handler.StartOnline(force, previewOnly, sessionDirName);
+        }
+
+        /// <summary>
         /// 切换至离线模式并开始预览或后处理
         /// </summary>
         /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
@@ -1107,7 +1213,7 @@ namespace ASEva
         /// 获取指定session开始时间对应的时间点
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>时间点，session不存在则返回null</returns>
+        /// <returns>时间点，session不存在或不属于当前层级则返回null</returns>
         public static double? GetSessionTimeline(DateTime session)
         {
             return Handler.GetSessionTimeline(session);
@@ -1117,7 +1223,7 @@ namespace ASEva
         /// 获取指定session的长度
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>Session长度，单位秒，session不存在则返回null</returns>
+        /// <returns>Session长度，单位秒，session不存在或不属于当前层级则返回null</returns>
         public static double? GetSessionLength(DateTime session)
         {
             return Handler.GetSessionLength(session);
@@ -1205,7 +1311,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 获取筛选后的所有session的时长总长
+        /// 获取当前层级下筛选后的所有session的时长总长
         /// </summary>
         /// <returns>筛选后的所有session的时长总长</returns>
         public static double GetFilteredSessionListTotalLength()
@@ -1894,7 +2000,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 获取含有指定generation ID的所有session
+        /// (api:app=2.3.0) 获取当前层级下含有指定generation ID的所有session
         /// </summary>
         /// <param name="generationID">Generation ID</param>
         /// <returns>Session ID列表</returns>
@@ -1940,7 +2046,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 获取所有session的总时长
+        /// (api:app=2.3.0) 获取当前层级下所有session的总时长
         /// </summary>
         /// <returns>所有session的总时长</returns>
         public static double GetSessionListTotalLength()

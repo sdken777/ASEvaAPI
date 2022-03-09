@@ -90,7 +90,7 @@ namespace ASEva.Utility
         /// <returns>返回创建的对象</returns>
         public static GenerationInfo Create(String filePath, String generationID, GenerationProcessStatus status, Dictionary<string, string> sampleAlias, Dictionary<string, Version> versions, Dictionary<DateTime, string> updateLogs)
         {
-            if (filePath == null || filePath.Length == 0 || generationID == null || generationID.Length == 0 || status == GenerationProcessStatus.Unknown) return null;
+            if (filePath == null || filePath.Length == 0 || generationID == null || generationID.Length == 0) return null;
 
             var info = new GenerationInfo();
             info.FilePath = filePath;

@@ -77,6 +77,16 @@ namespace ASEva
         public virtual void OnProjectSwitched() { }
 
         /// <summary>
+        /// (api:app=2.4.0) 在数据根目录切换后被调用
+        /// </summary>
+        public virtual void OnDataPathSwitched() { }
+
+        /// <summary>
+        /// (api:app=2.4.0) 在数据层级切换后被调用
+        /// </summary>
+        public virtual void OnDataLayerSwitched() { }
+
+        /// <summary>
         /// [可选实现] 在Session开始前被调用
         /// </summary>
         public virtual void OnSessionStarting() { }
