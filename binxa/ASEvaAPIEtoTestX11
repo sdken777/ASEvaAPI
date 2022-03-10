@@ -1,0 +1,7 @@
+#!/bin/sh
+
+APP_EXE=ASEvaAPIEtoTest
+
+CUR_DIR=$(dirname "$0")
+export GDK_BACKEND=x11
+exec "$CUR_DIR"/$APP_EXE $@
