@@ -1618,7 +1618,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.4.0
+            version=2.4.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4085,6 +4085,93 @@
             总线报文样本列表
             </summary>
         </member>
+        <member name="T:ASEva.Samples.CommonImage">
+            <summary>
+            (api:app=2.3.0) 通用图像数据
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonImage.Width">
+            <summary>
+            图像宽度
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonImage.Height">
+            <summary>
+            图像高度
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonImage.WithAlpha">
+            <summary>
+            是否含有Alpha通道
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonImage.RowBytes">
+            <summary>
+            每行数据字节数
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonImage.Data">
+            <summary>
+            图像数据，每个像素的存放顺序为BGR或BGRA
+            </summary>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.Create(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            创建通用图像数据
+            </summary>
+            <param name="width">图像宽度</param>
+            <param name="height">图像高度</param>
+            <param name="withAlpha">是否带Alpha通道</param>
+            <returns>通用图像数据</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.LoadFile(System.String)">
+            <summary>
+            从文件读取图像
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>通用图像数据</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.LoadResource(System.String)">
+            <summary>
+            从资源读取图像
+            </summary>
+            <param name="resourceName">资源名称</param>
+            <returns>通用图像数据</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.FromBinary(System.Byte[])">
+            <summary>
+            (api:app=2.4.1) 从图像二进制数据转换
+            </summary>
+            <param name="binary">图像二进制数据，如jpeg、png等</param>
+            <returns>通用图像数据</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.FromRgba32(SixLabors.ImageSharp.Image{SixLabors.ImageSharp.PixelFormats.Rgba32})">
+            <summary>
+            (api:app=2.4.1) 从ImageSharp的Rgba32图像数据转换
+            </summary>
+            <param name="image">ImageSharp的Rgba32图像对象</param>
+            <returns>通用图像数据</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.Save(System.String)">
+            <summary>
+            保存至文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>是否成功保存</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.ToBinary(System.String)">
+            <summary>
+            (api:app=2.4.1) 转为图像二进制数据
+            </summary>
+            <param name="format">编码格式，目前支持"jpg", "png"</param>
+            <returns>图像二进制数据</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.ToRgba32">
+            <summary>
+            (api:app=2.4.1) 转为ImageSharp的Rgba32图像
+            </summary>
+            <returns>ImageSharp的Rgba32图像对象</returns>
+        </member>
         <member name="T:ASEva.Samples.ManualTriggerSample">
             <summary>
             (api:app=2.0.0) 手动触发器样本
@@ -4526,66 +4613,6 @@
             <summary>
             抖动偏置俯仰角（仅部分摄像头有效）
             </summary>
-        </member>
-        <member name="T:ASEva.Samples.CommonImage">
-            <summary>
-            (api:app=2.3.0) 通用图像数据
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.CommonImage.Width">
-            <summary>
-            图像宽度
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.CommonImage.Height">
-            <summary>
-            图像高度
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.CommonImage.WithAlpha">
-            <summary>
-            是否含有Alpha通道
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.CommonImage.RowBytes">
-            <summary>
-            每行数据字节数
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.CommonImage.Data">
-            <summary>
-            图像数据，每个像素的存放顺序为BGR或BGRA
-            </summary>
-        </member>
-        <member name="M:ASEva.Samples.CommonImage.Create(System.Int32,System.Int32,System.Boolean)">
-            <summary>
-            创建通用图像数据
-            </summary>
-            <param name="width">图像宽度</param>
-            <param name="height">图像高度</param>
-            <param name="withAlpha">是否带Alpha通道</param>
-            <returns>通用图像数据</returns>
-        </member>
-        <member name="M:ASEva.Samples.CommonImage.LoadFile(System.String)">
-            <summary>
-            [依赖Agency] 从文件读取图像
-            </summary>
-            <param name="filePath">文件路径</param>
-            <returns>通用图像数据</returns>
-        </member>
-        <member name="M:ASEva.Samples.CommonImage.LoadResource(System.String)">
-            <summary>
-            [依赖Agency] 从资源读取图像
-            </summary>
-            <param name="resourceName">资源名称</param>
-            <returns>通用图像数据</returns>
-        </member>
-        <member name="M:ASEva.Samples.CommonImage.Save(System.String)">
-            <summary>
-            [依赖Agency] 保存至文件
-            </summary>
-            <param name="filePath">文件路径</param>
-            <returns>是否成功保存</returns>
         </member>
         <member name="T:ASEva.Samples.VideoFrameSample">
             <summary>

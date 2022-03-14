@@ -7,7 +7,7 @@
  * \n
  * 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph \n
  * \n
- * 本文档对应API版本：2.4.0
+ * 本文档对应API版本：2.4.1
  */
 
 using System;
@@ -16,7 +16,7 @@ using System.Diagnostics;
 namespace ASEva
 {
     /// <summary>
-    /// version=2.4.0
+    /// version=2.4.1
     /// </summary>
     public class APIInfo
     {
@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 0, 0); // 新增Agency.GetSubDataPathes, GetDataLayers, GetCurrentDataLayer, SetCurrentDataLayer, SetSubDataPath, AddDataLayer, DeleteDataLayer, GetSessionLayer, GetSessionFolderName。新增Plugin.OnDataPathSwitched, OnDataLayerSwitched。新增带session文件夹名参数的Agency.StartOnline
+            return new Version(2, 4, 1, 0); // 新增CommonImage.From/ToBinary, From/ToRgba32
         }
 
         /// <summary>
