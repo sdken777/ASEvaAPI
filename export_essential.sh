@@ -1,4 +1,4 @@
-TARGET_NAME=EtoSDK-Full
+TARGET_NAME=EtoSDK-Essential
 
 CUR_DIR=$(dirname "$0")
 CUR_DATE=`date +%Y%m%d`
@@ -49,26 +49,6 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binx/
 fi
 
-mkdir -vp $TARGET_DIR/binxa
-cp -vf "$CUR_DIR"/binxa/ASEvaAPI.dll $TARGET_DIR/binxa/
-cp -vf "$CUR_DIR"/3party/common/* $TARGET_DIR/binxa/
-if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
-    cp -vf "$CUR_DIR"/binxa/ASEvaAPIEto.dll $TARGET_DIR/binxa/
-    cp -vf "$CUR_DIR"/binxa/ASEvaAPIGtk.dll $TARGET_DIR/binxa/
-    cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binxa/
-    cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binxa/
-fi
-
-mkdir -vp $TARGET_DIR/binm
-cp -vf "$CUR_DIR"/binm/ASEvaAPI.dll $TARGET_DIR/binm/
-cp -vf "$CUR_DIR"/3party/common/* $TARGET_DIR/binm/
-if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
-    cp -vf "$CUR_DIR"/binm/ASEvaAPIEto.dll $TARGET_DIR/binm/
-    cp -vf "$CUR_DIR"/binm/ASEvaAPIMonoMac.dll $TARGET_DIR/binm/
-    cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binm/
-    cp -vf "$CUR_DIR"/3party/monomac/* $TARGET_DIR/binm/
-fi
-
 if [ "$EXPORT_DEVELOPER" = "y" ]; then
     mkdir -vp $TARGET_DIR/bin64/debug
     cp -vf "$CUR_DIR"/bin64/ASEvaAPI.xml $TARGET_DIR/bin64/
@@ -85,25 +65,6 @@ if [ "$EXPORT_DEVELOPER" = "y" ]; then
         cp -vf "$CUR_DIR"/binx/ASEvaAPIEto.xml $TARGET_DIR/binx/
         cp -vf "$CUR_DIR"/binx/ASEvaAPIGtk.xml $TARGET_DIR/binx/
     fi
-
-    mkdir -vp $TARGET_DIR/binxa/debug
-    cp -vf "$CUR_DIR"/binxa/ASEvaAPI.xml $TARGET_DIR/binxa/
-    if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
-        cp -vf "$CUR_DIR"/3party/eto-doc/* $TARGET_DIR/binxa/
-        cp -vf "$CUR_DIR"/binxa/ASEvaAPIEto.xml $TARGET_DIR/binxa/
-        cp -vf "$CUR_DIR"/binxa/ASEvaAPIGtk.xml $TARGET_DIR/binxa/
-    fi
-
-    mkdir -vp $TARGET_DIR/binm/debug
-    cp -vf "$CUR_DIR"/binm/ASEvaAPI.xml $TARGET_DIR/binm/
-    if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
-        cp -vf "$CUR_DIR"/3party/eto-doc/* $TARGET_DIR/binm/
-        cp -vf "$CUR_DIR"/binm/ASEvaAPIEto.xml $TARGET_DIR/binm/
-        cp -vf "$CUR_DIR"/binm/ASEvaAPIMonoMac.xml $TARGET_DIR/binm/
-    fi
-
-    mkdir -vp $TARGET_DIR/bin
-    cp -vf "$CUR_DIR"/bin/AppMaker.* $TARGET_DIR/bin/
 fi
 
 if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
@@ -126,26 +87,6 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binx/debug/
         cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binx/debug/
     fi
-
-    mkdir -vp $TARGET_DIR/binxa/debug
-    cp -vf "$CUR_DIR"/binxa/ASEvaAPI.dll $TARGET_DIR/binxa/debug/
-    cp -vf "$CUR_DIR"/3party/common/* $TARGET_DIR/binxa/debug/
-    if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
-        cp -vf "$CUR_DIR"/binxa/ASEvaAPIEto.dll $TARGET_DIR/binxa/debug/
-        cp -vf "$CUR_DIR"/binxa/ASEvaAPIGtk.dll $TARGET_DIR/binxa/debug/
-        cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binxa/debug/
-        cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binxa/debug/
-    fi
-
-    mkdir -vp $TARGET_DIR/binm/debug
-    cp -vf "$CUR_DIR"/binm/ASEvaAPI.dll $TARGET_DIR/binm/debug/
-    cp -vf "$CUR_DIR"/3party/common/* $TARGET_DIR/binm/debug/
-    if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
-        cp -vf "$CUR_DIR"/binm/ASEvaAPIEto.dll $TARGET_DIR/binm/debug/
-        cp -vf "$CUR_DIR"/binm/ASEvaAPIMonoMac.dll $TARGET_DIR/binm/debug/
-        cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binm/debug/
-        cp -vf "$CUR_DIR"/3party/monomac/* $TARGET_DIR/binm/debug/
-    fi
 fi
 
 if [ "$GEN_DESKTOP_ZIP" = "y" ]; then
@@ -154,5 +95,5 @@ if [ "$GEN_DESKTOP_ZIP" = "y" ]; then
     rm -r ./$CUR_DATE-$TARGET_NAME/
 fi
 
-echo "Done. (ASEvaAPI/export.sh)"
+echo "Done. (ASEvaAPI/export_essential.sh)"
 sleep 1
