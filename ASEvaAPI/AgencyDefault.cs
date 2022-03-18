@@ -1122,5 +1122,15 @@ namespace ASEva
         {
             return null;
         }
+
+        public GenerationProcessStatus? GetGenerationProcessStatus(DateTime session, string generation)
+        {
+            return null;
+        }
+
+        public string[] GetSessionGenerations(DateTime sessionID)
+        {
+            return null;
+        }
     }
 }

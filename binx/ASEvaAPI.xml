@@ -111,6 +111,14 @@
             <param name="generation">希望获取的generation ID</param>
             <returns>Generation数据的根路径，若不存在或不属于当前层级则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetGenerationProcessStatus(System.DateTime,System.String)">
+            <summary>
+            (api:app=2.4.2) 获取某个session中的某个generation的处理状态
+            </summary>
+            <param name="session">希望获取generation所属的session ID</param>
+            <param name="generation">希望获取的generation ID</param>
+            <returns>Generation的处理状态，若generation不存在则返回null</returns>
+        </member>
         <member name="M:ASEva.Agency.GetFinishedSessions(System.String)">
             <summary>
             获取当前层级下某个generation下所有处理完毕的session
@@ -1220,6 +1228,13 @@
             (api:app=2.3.0) 禁用所有模块配置
             </summary>
         </member>
+        <member name="M:ASEva.Agency.GetSessionGenerations(System.DateTime)">
+            <summary>
+            (api:app=2.4.2) 获取当前层级下指定session下的所有generation ID
+            </summary>
+            <param name="sessionID">Session ID</param>
+            <returns>Generation ID列表</returns>
+        </member>
         <member name="M:ASEva.Agency.GetGenerationSessions(System.String)">
             <summary>
             (api:app=2.3.0) 获取当前层级下含有指定generation ID的所有session
@@ -1618,7 +1633,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.4.1
+            version=2.4.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">

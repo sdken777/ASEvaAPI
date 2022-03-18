@@ -62,6 +62,7 @@ namespace ASEva
         String GetSessionLayer(DateTime session);
         String GetSessionFolderName(DateTime session);
         String GetGenerationPath(DateTime session, String generation);
+        GenerationProcessStatus? GetGenerationProcessStatus(DateTime session, String generation);
         DateTime[] GetFinishedSessions(String generation);
         void AddDataLayer(String layer);
         void DeleteDataLayer(String layer);
@@ -179,6 +180,7 @@ namespace ASEva
         DialogClassInfo RegisterTransformDialogClass(String dialogClassID, String config);
         ConfigStatus GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID, out ConfigStatus[] childrenStatus);
         void DisableAllConfigs();
+        String[] GetSessionGenerations(DateTime sessionID);
         DateTime[] GetGenerationSessions(String generationID);
         double GetInterestTarget();
         Dictionary<String, DeviceStatusDetail> GetAllDeviceStatus();
@@ -408,6 +410,17 @@ namespace ASEva
         public static String GetGenerationPath(DateTime session, String generation)
         {
             return Handler.GetGenerationPath(session, generation);
+        }
+
+        /// <summary>
+        /// (api:app=2.4.2) 获取某个session中的某个generation的处理状态
+        /// </summary>
+        /// <param name="session">希望获取generation所属的session ID</param>
+        /// <param name="generation">希望获取的generation ID</param>
+        /// <returns>Generation的处理状态，若generation不存在则返回null</returns>
+        public static GenerationProcessStatus? GetGenerationProcessStatus(DateTime session, String generation)
+        {
+            return Handler.GetGenerationProcessStatus(session, generation);
         }
 
         /// <summary>
@@ -1997,6 +2010,16 @@ namespace ASEva
         public static void DisableAllConfigs()
         {
             Handler.DisableAllConfigs();
+        }
+
+        /// <summary>
+        /// (api:app=2.4.2) 获取当前层级下指定session下的所有generation ID
+        /// </summary>
+        /// <param name="sessionID">Session ID</param>
+        /// <returns>Generation ID列表</returns>
+        public static String[] GetSessionGenerations(DateTime sessionID)
+        {
+            return Handler.GetSessionGenerations(sessionID);
         }
 
         /// <summary>
