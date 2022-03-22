@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 0, 0); // 新增ImageConverter。VideoFrameSampleImage支持alpha通道
+            return new Version(2, 1, 0, 1); // 修复LinkButtonHandler颜色设置
         }
     }
 }

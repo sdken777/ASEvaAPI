@@ -19,8 +19,16 @@ namespace ASEva.UIGtk
 
 		public Color TextColor
 		{
-			get { return Colors.Blue; }
-			set { }
+			get
+			{
+				var c = Control.ForeColor;
+				var k = 1.0f / 255;
+				return new Color(k * c.R, k * c.G, k * c.B, k * c.A);
+			}
+			set
+			{
+				Control.ForeColor = new ColorRGBA((byte)value.Rb, (byte)value.Gb, (byte)value.Bb, (byte)value.Ab);
+			}
 		}
 
 		public Color DisabledTextColor
