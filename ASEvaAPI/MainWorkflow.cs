@@ -232,7 +232,7 @@ namespace ASEva
         /// [可选实现] 返回主流程端是否允许进行保存工程项目和开始session等操作
         /// </summary>
         /// <returns>主流程端是否允许进行保存工程项目和开始session等操作</returns>
-        public virtual bool OnCheckReady() { return false; }
+        public virtual bool OnCheckReady() { return true; }
 
         /// <summary>
         /// [可选实现][可含模态框] 通知正在退出应用程序

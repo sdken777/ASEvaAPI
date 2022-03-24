@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 2, 0); // 新增Agency.GetSessionGenerations, GetGenerationProcessStatus
+            return new Version(2, 4, 2, 1); // MainWorkflow.OnCheckReady默认返回true
         }
 
         /// <summary>
