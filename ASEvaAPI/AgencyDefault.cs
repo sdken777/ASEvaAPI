@@ -1132,5 +1132,10 @@ namespace ASEva
         {
             return null;
         }
+
+        public bool StartOffline(bool force, bool previewOnly, string genDirName)
+        {
+            return false;
+        }
     }
 }

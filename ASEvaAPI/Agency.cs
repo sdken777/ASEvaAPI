@@ -105,6 +105,7 @@ namespace ASEva
         bool StartOnline(bool force, bool previewOnly);
         bool StartOnline(bool force, bool previewOnly, String sessionDirName);
         bool StartOffline(bool force, bool previewOnly);
+        bool StartOffline(bool force, bool previewOnly, String genDirName);
         void StopRunning();
         bool StopRunning(String controllerID);
         bool StopRunning(bool force, bool editRecordedSession);
@@ -1191,6 +1192,18 @@ namespace ASEva
         public static bool StartOffline(bool force, bool previewOnly)
         {
             return Handler.StartOffline(force, previewOnly);
+        }
+
+        /// <summary>
+        /// (api:app=2.4.3) 切换至离线模式并开始预览或后处理
+        /// </summary>
+        /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
+        /// <param name="previewOnly">是否为预览</param>
+        /// <param name="genDirName">后处理输出时，写入generation数据的文件夹名（若已存在且强制开始时，则使用默认的日期格式）</param>
+        /// <returns>是否成功</returns>
+        public static bool StartOffline(bool force, bool previewOnly, String genDirName)
+        {
+            return Handler.StartOffline(force, previewOnly, genDirName);
         }
 
         /// <summary>
