@@ -1137,5 +1137,10 @@ namespace ASEva
         {
             return false;
         }
+
+        public Dictionary<string, string> GetChannelAliasTable()
+        {
+            return null;
+        }
     }
 }

@@ -44,6 +44,7 @@ namespace ASEva
         bool AddBusProtocolFile(String filePath, out BusProtocolFileID fileID);
         void RemoveBusProtocolFile(BusProtocolFileID fileID);
         String GetChannelAliasName(String key);
+        Dictionary<String, String> GetChannelAliasTable();
         bool IsInputChannelAvailable(String protocol);
         BusSignalValue[] ParseBusMessage(BusMessageSample busMessage);
         void SendBusMessage(BusMessage msg);
@@ -829,6 +830,15 @@ namespace ASEva
         public static String GetChannelAliasName(String key)
         {
             return Handler.GetChannelAliasName(key);
+        }
+
+        /// <summary>
+        /// (api:app=2.4.4) 获取数据通道别名
+        /// </summary>
+        /// <returns>数据所有通道的别名表</returns>
+        public static Dictionary<String, String> GetChannelAliasTable()
+        {
+            return Handler.GetChannelAliasTable();
         }
 
         /// <summary>

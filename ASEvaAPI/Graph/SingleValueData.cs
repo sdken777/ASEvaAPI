@@ -42,7 +42,7 @@ namespace ASEva.Graph
         }
 
         /// <summary>
-        /// 设置值
+        /// 设置值（不推荐操作，将会导致合并结果异常）
         /// </summary>
         /// <param name="val">设置值</param>
         public void SetValue(double val)
