@@ -7,7 +7,7 @@
  * \n
  * 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph \n
  * \n
- * 本文档对应API版本：2.4.4
+ * 本文档对应API版本：2.5.0
  */
 
 using System;
@@ -16,7 +16,7 @@ using System.Diagnostics;
 namespace ASEva
 {
     /// <summary>
-    /// version=2.4.4
+    /// version=2.5.0
     /// </summary>
     public class APIInfo
     {
@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 4, 0); // 新增Agency.GetChannelAliasTable
+            return new Version(2, 5, 0, 0); // Agency.RegisterTransformWindow/DialogClass支持直接注册。新增Window/DialogClassInfo.TransformConfig。增加带分化ID参数的Agency.GetWindow/DialogClassInfo
         }
 
         /// <summary>

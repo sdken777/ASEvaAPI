@@ -1142,5 +1142,25 @@ namespace ASEva
         {
             return null;
         }
+
+        public WindowClassInfo RegisterTransformWindowClass(string windowClassID, WindowClass transformWindowClass, String defaultConfig)
+        {
+            return null;
+        }
+
+        public DialogClassInfo RegisterTransformDialogClass(string dialogClassID, DialogClass transformDialogClass, String defaultConfig)
+        {
+            return null;
+        }
+
+        public WindowClassInfo GetWindowClassInfo(string windowClassID, string transformID)
+        {
+            return null;
+        }
+
+        public DialogClassInfo GetDialogClassInfo(string dialogClassID, string transformID)
+        {
+            return null;
+        }
     }
 }

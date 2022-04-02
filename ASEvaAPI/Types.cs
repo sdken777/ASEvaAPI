@@ -1142,6 +1142,11 @@ namespace ASEva
         public String TransformID { get; set; }
 
         /// <summary>
+        /// (api:app=2.5.0) 注册分化窗口组件的配置字符串
+        /// </summary>
+        public String TransformConfig { get; set; }
+
+        /// <summary>
         /// 窗口标题
         /// </summary>
         public String Title { get; set; }
@@ -1181,6 +1186,11 @@ namespace ASEva
         /// 分化ID
         /// </summary>
         public String TransformID { get; set; }
+
+        /// <summary>
+        /// (api:app=2.5.0) 注册分化对话框组件的配置字符串
+        /// </summary>
+        public String TransformConfig { get; set; }
 
         /// <summary>
         /// 对话框标题

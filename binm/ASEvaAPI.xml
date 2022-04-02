@@ -1215,18 +1215,36 @@
         </member>
         <member name="M:ASEva.Agency.RegisterTransformWindowClass(System.String,System.String)">
             <summary>
-            (api:app=2.3.0) 注册分化窗口组件
+            (api:app=2.3.0) 通过配置注册分化窗口组件
             </summary>
             <param name="windowClassID">原窗口组件ID</param>
             <param name="config">用于分化的配置字符串</param>
             <returns>分化后的窗口组件信息</returns>
         </member>
+        <member name="M:ASEva.Agency.RegisterTransformWindowClass(System.String,ASEva.WindowClass,System.String)">
+            <summary>
+            (api:app=2.5.0) 直接注册分化窗口组件
+            </summary>
+            <param name="windowClassID">原窗口组件ID</param>
+            <param name="transformWindowClass">分化窗口组件类</param>
+            <param name="defaultConfig">默认的可用于分化的配置字符串</param>
+            <returns>分化后的窗口组件信息</returns>
+        </member>
         <member name="M:ASEva.Agency.RegisterTransformDialogClass(System.String,System.String)">
             <summary>
-            (api:app=2.3.0) 注册分化对话框组件
+            (api:app=2.3.0) 通过配置注册分化对话框组件
             </summary>
             <param name="dialogClassID">原对话框组件ID</param>
             <param name="config">用于分化的配置字符串</param>
+            <returns>分化后的对话框组件信息</returns>
+        </member>
+        <member name="M:ASEva.Agency.RegisterTransformDialogClass(System.String,ASEva.DialogClass,System.String)">
+            <summary>
+            (api:app=2.5.0) 直接注册分化对话框组件
+            </summary>
+            <param name="dialogClassID">原对话框组件ID</param>
+            <param name="transformDialogClass">分化对话框组件类</param>
+            <param name="defaultConfig">默认的可用于分化的配置字符串</param>
             <returns>分化后的对话框组件信息</returns>
         </member>
         <member name="M:ASEva.Agency.GetDialogRelatedModulesConfigStatus(System.String,System.String,ASEva.ConfigStatus[]@)">
@@ -1567,12 +1585,28 @@
             <param name="windowClassID">窗口组件ID</param>
             <returns>窗口组件信息，若未找到返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetWindowClassInfo(System.String,System.String)">
+            <summary>
+            (api:app=2.5.0) 获取分化窗口组件信息
+            </summary>
+            <param name="windowClassID">窗口组件ID</param>
+            <param name="transformID">分化ID</param>
+            <returns>分化窗口组件信息，若未找到返回null</returns>
+        </member>
         <member name="M:ASEva.Agency.GetDialogClassInfo(System.String)">
             <summary>
             (api:app=2.3.0) 获取对话框组件信息
             </summary>
             <param name="dialogClassID">对话框组件ID</param>
             <returns>对话框组件信息，若未找到返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetDialogClassInfo(System.String,System.String)">
+            <summary>
+            (api:app=2.5.0) 获取分化对话框组件信息
+            </summary>
+            <param name="dialogClassID">对话框组件ID</param>
+            <param name="transformID">分化ID</param>
+            <returns>分化对话框组件信息，若未找到返回null</returns>
         </member>
         <member name="M:ASEva.Agency.DecodeImage(System.Byte[])">
             <summary>
@@ -1648,7 +1682,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.4.4
+            version=2.5.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -5741,6 +5775,11 @@
             分化ID
             </summary>
         </member>
+        <member name="P:ASEva.WindowClassInfo.TransformConfig">
+            <summary>
+            (api:app=2.5.0) 注册分化窗口组件的配置字符串
+            </summary>
+        </member>
         <member name="P:ASEva.WindowClassInfo.Title">
             <summary>
             窗口标题
@@ -5779,6 +5818,11 @@
         <member name="P:ASEva.DialogClassInfo.TransformID">
             <summary>
             分化ID
+            </summary>
+        </member>
+        <member name="P:ASEva.DialogClassInfo.TransformConfig">
+            <summary>
+            (api:app=2.5.0) 注册分化对话框组件的配置字符串
             </summary>
         </member>
         <member name="P:ASEva.DialogClassInfo.Title">

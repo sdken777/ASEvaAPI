@@ -179,7 +179,9 @@ namespace ASEva
         Dictionary<String, NativeClassInfo> GetNativeClassTable();
         Dictionary<String, TaskClassInfo> GetTaskClassTable();
         WindowClassInfo RegisterTransformWindowClass(String windowClassID, String config);
+        WindowClassInfo RegisterTransformWindowClass(String windowClassID, WindowClass transformWindowClass, String defaultConfig);
         DialogClassInfo RegisterTransformDialogClass(String dialogClassID, String config);
+        DialogClassInfo RegisterTransformDialogClass(String dialogClassID, DialogClass transformDialogClass, String defaultConfig);
         ConfigStatus GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID, out ConfigStatus[] childrenStatus);
         void DisableAllConfigs();
         String[] GetSessionGenerations(DateTime sessionID);
@@ -231,7 +233,9 @@ namespace ASEva
         CommonImage ConvertImageToCommon(object image);
         object ConvertImageToPlatform(CommonImage image, bool eto);
         WindowClassInfo GetWindowClassInfo(String windowClassID);
+        WindowClassInfo GetWindowClassInfo(String windowClassID, String transformID);
         DialogClassInfo GetDialogClassInfo(String dialogClassID);
+        DialogClassInfo GetDialogClassInfo(String dialogClassID, String transformID);
         CommonImage DecodeImage(byte[] imageData);
         byte[] EncodeImage(CommonImage image, String format);
         SignalTreeNode[] GetSignalTree();
@@ -1994,7 +1998,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 注册分化窗口组件
+        /// (api:app=2.3.0) 通过配置注册分化窗口组件
         /// </summary>
         /// <param name="windowClassID">原窗口组件ID</param>
         /// <param name="config">用于分化的配置字符串</param>
@@ -2005,7 +2009,19 @@ namespace ASEva
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 注册分化对话框组件
+        /// (api:app=2.5.0) 直接注册分化窗口组件
+        /// </summary>
+        /// <param name="windowClassID">原窗口组件ID</param>
+        /// <param name="transformWindowClass">分化窗口组件类</param>
+        /// <param name="defaultConfig">默认的可用于分化的配置字符串</param>
+        /// <returns>分化后的窗口组件信息</returns>
+        public static WindowClassInfo RegisterTransformWindowClass(String windowClassID, WindowClass transformWindowClass, String defaultConfig)
+        {
+            return Handler.RegisterTransformWindowClass(windowClassID, transformWindowClass, defaultConfig);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 通过配置注册分化对话框组件
         /// </summary>
         /// <param name="dialogClassID">原对话框组件ID</param>
         /// <param name="config">用于分化的配置字符串</param>
@@ -2013,6 +2029,18 @@ namespace ASEva
         public static DialogClassInfo RegisterTransformDialogClass(String dialogClassID, String config)
         {
             return Handler.RegisterTransformDialogClass(dialogClassID, config);
+        }
+
+        /// <summary>
+        /// (api:app=2.5.0) 直接注册分化对话框组件
+        /// </summary>
+        /// <param name="dialogClassID">原对话框组件ID</param>
+        /// <param name="transformDialogClass">分化对话框组件类</param>
+        /// <param name="defaultConfig">默认的可用于分化的配置字符串</param>
+        /// <returns>分化后的对话框组件信息</returns>
+        public static DialogClassInfo RegisterTransformDialogClass(String dialogClassID, DialogClass transformDialogClass, String defaultConfig)
+        {
+            return Handler.RegisterTransformDialogClass(dialogClassID, transformDialogClass, defaultConfig);
         }
 
         /// <summary>
@@ -2498,6 +2526,17 @@ namespace ASEva
         }
 
         /// <summary>
+        /// (api:app=2.5.0) 获取分化窗口组件信息
+        /// </summary>
+        /// <param name="windowClassID">窗口组件ID</param>
+        /// <param name="transformID">分化ID</param>
+        /// <returns>分化窗口组件信息，若未找到返回null</returns>
+        public static WindowClassInfo GetWindowClassInfo(String windowClassID, String transformID)
+        {
+            return Handler.GetWindowClassInfo(windowClassID, transformID);
+        }
+
+        /// <summary>
         /// (api:app=2.3.0) 获取对话框组件信息
         /// </summary>
         /// <param name="dialogClassID">对话框组件ID</param>
@@ -2505,6 +2544,17 @@ namespace ASEva
         public static DialogClassInfo GetDialogClassInfo(String dialogClassID)
         {
             return Handler.GetDialogClassInfo(dialogClassID);
+        }
+
+        /// <summary>
+        /// (api:app=2.5.0) 获取分化对话框组件信息
+        /// </summary>
+        /// <param name="dialogClassID">对话框组件ID</param>
+        /// <param name="transformID">分化ID</param>
+        /// <returns>分化对话框组件信息，若未找到返回null</returns>
+        public static DialogClassInfo GetDialogClassInfo(String dialogClassID, String transformID)
+        {
+            return Handler.GetDialogClassInfo(dialogClassID, transformID);
         }
 
         /// <summary>
