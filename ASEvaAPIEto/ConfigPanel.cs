@@ -9,6 +9,12 @@ namespace ASEva.UIEto
     public class ConfigPanel : Panel
     {
         /// <summary>
+        /// (api:eto=2.2.1) [可选实现] 在初始化控件尺寸时被调用
+        /// </summary>
+        /// <param name="config">配置字符串</param>
+        public virtual void OnInitSize(String config) { }
+
+        /// <summary>
         /// [必须实现] 获取尺寸时被调用
         /// </summary>
         /// <returns>默认DPI下的尺寸，将被调整为至少200x50</returns>

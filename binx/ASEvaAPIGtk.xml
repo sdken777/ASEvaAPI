@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIGtk.APIInfo">
             <summary>
-            version=2.1.0
+            version=2.1.1
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.APIInfo.GetAPIVersion">
@@ -24,6 +24,12 @@
             <summary>
             (api:gtk=2.0.0) 配置界面控件，用于实现可视化配置
             </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.ConfigPanel.OnInitSize(System.String)">
+            <summary>
+            (api:gtk=2.1.1) [可选实现] 在初始化控件尺寸时被调用
+            </summary>
+            <param name="config">配置字符串</param>
         </member>
         <member name="M:ASEva.UIGtk.ConfigPanel.OnInit(System.String)">
             <summary>
@@ -299,6 +305,12 @@
             <summary>
             (api:gtk=2.0.0) 窗口控件，用于实现窗口组件的实际功能
             </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.WindowPanel.OnInitSize(System.String)">
+            <summary>
+            (api:gtk=2.1.1) [可选实现] 在初始化控件尺寸时被调用
+            </summary>
+            <param name="config">配置字符串</param>
         </member>
         <member name="M:ASEva.UIGtk.WindowPanel.OnGetDefaultSize">
             <summary>

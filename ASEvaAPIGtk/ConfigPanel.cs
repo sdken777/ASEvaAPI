@@ -14,6 +14,12 @@ namespace ASEva.UIGtk
         {}
 
         /// <summary>
+        /// (api:gtk=2.1.1) [可选实现] 在初始化控件尺寸时被调用
+        /// </summary>
+        /// <param name="config">配置字符串</param>
+        public virtual void OnInitSize(String config) { }
+
+        /// <summary>
         /// [可选实现] 在配置界面控件初始化时被调用
         /// </summary>
         /// <param name="config">配置字符串</param>
