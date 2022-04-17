@@ -2,8 +2,9 @@ using SWF = System.Windows.Forms;
 using Eto.Forms;
 using Eto.WinForms;
 using Eto.WinForms.Forms;
+using ASEva.UIEto;
 
-namespace ASEva.UIEto
+namespace ASEva.UICoreWF
 {
 	public class ProgressBarHandler : WindowsControl<SWF.ProgressBar, ProgressBar, ProgressBar.ICallback>, ProgressBar.IHandler
 	{

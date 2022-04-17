@@ -1,0 +1,59 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>ASEva.UIWpf</RootNamespace>
+    <Configurations>Release;Debug</Configurations>
+    <UseWPF>True</UseWPF>
+    <Version>0.0.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Resources\**" />
+    <EmbeddedResource Remove="Resources\**" />
+    <None Remove="Resources\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ASEvaAPI">
+      <HintPath>..\bin64\ASEvaAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="ASEvaAPIEto">
+      <HintPath>..\bin64\ASEvaAPIEto.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto">
+      <HintPath>..\bin64\Eto.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto.Wpf">
+      <HintPath>..\bin64\Eto.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Core">
+      <HintPath>..\bin64\Microsoft.Web.WebView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Wpf">
+      <HintPath>..\bin64\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\bin64</OutputPath>
+    <DocumentationFile>..\bin64\ASEvaAPIWpf.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\bin64\debug\</OutputPath>
+    <DocumentationFile>..\bin64\debug\ASEvaAPIWpf.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /Y $(TargetPath) $(TargetDir)..\" />
+  </Target>
+
+</Project>

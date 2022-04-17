@@ -102,7 +102,7 @@ namespace ASEva.UIEto
         {
             if (PixelScale != 0) return;
 
-            if (ASEva.APIInfo.GetRunningOS() == "windows")
+            if (ASEva.APIInfo.GetRunningOS() == "windows" && App.GetRunningUI() == "corewf")
             {
                 var screen = Screen.PrimaryScreen;
                 PixelScale = screen.RealScale;

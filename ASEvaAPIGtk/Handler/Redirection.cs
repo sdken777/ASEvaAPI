@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-namespace ASEva.UIEto
+namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612
     class Redirection

@@ -30,6 +30,14 @@
             "fileVersion": "2.5.7683.15038"
           }
         }
+      },
+      "SixLabors.ImageSharp/1.0.0.0": {
+        "runtime": {
+          "SixLabors.ImageSharp.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.4.0"
+          }
+        }
       }
     }
   },
@@ -45,6 +53,11 @@
       "sha512": ""
     },
     "Eto/2.5.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SixLabors.ImageSharp/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

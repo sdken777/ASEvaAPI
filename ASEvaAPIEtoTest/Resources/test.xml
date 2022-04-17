@@ -1,115 +1,131 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <text_resource>
-    <t id="title">
-        <en>Test Window</en>
-        <ch>测试窗口</ch>
-    </t>
-    <t id="reserved">
-        <en>Reserved</en>
-        <ch>保留</ch>
-    </t>
-    <t id="empty">
-        <en>Empty</en>
-        <ch>空</ch>
-    </t>
-    <t id="menu-button">
-        <en>Message box</en>
-        <ch>消息框</ch>
-    </t>
-    <t id="menu-check">
-        <en>Check item {0}</en>
-        <ch>多选项{0}</ch>
-    </t>
-    <t id="menu-radio">
-        <en>Radio item {0}</en>
-        <ch>单选项{0}</ch>
-    </t>
-    <t id="basic-menu-notice">
-        <en>Context menu is available</en>
-        <ch>右键菜单可用</ch>
-    </t>
-    <t id="basic-group-title">
-        <en>Basic Controls</en>
-        <ch>基本控件</ch>
-    </t>
-    <t id="basic-label-row">
-        <en>Row-{0:D}:</en>
-        <ch>第{0:D}行：</ch>
-    </t>
-    <t id="basic-checkbox">
-        <en>Save file</en>
-        <ch>保存文件</ch>
-    </t>
-    <t id="basic-radiobutton-file">
-        <en>File</en>
-        <ch>文件</ch>
-    </t>
-    <t id="basic-radiobutton-dir">
-        <en>Directory</en>
-        <ch>文件夹</ch>
-    </t>
-    <t id="basic-linkbutton">
-        <en>Browse</en>
-        <ch>浏览</ch>
-    </t>
-    <t id="basic-button">
-        <en>Button</en>
-        <ch>按钮</ch>
-    </t>
-    <t id="basic-combobox">
-        <en>Option {0}</en>
-        <ch>选项{0}</ch>
-    </t>
-    <t id="basic-list-item">
-        <en>List Option {0}</en>
-        <ch>列表项{0}</ch>
-    </t>
-    <t id="basic-tabpage-title">
-        <en>Tabpage {0}</en>
-        <ch>标签页{0}</ch>
-    </t>
-    <t id="basic-grid-key-title">
-        <en>Key</en>
-        <ch>键</ch>
-    </t>
-    <t id="basic-grid-value-title">
-        <en>Value</en>
-        <ch>值</ch>
-    </t>
-    <t id="basic-grid-add-row">
-        <en>Add row</en>
-        <ch>添加行</ch>
-    </t>
-    <t id="basic-grid-remove-row">
-        <en>Remove row</en>
-        <ch>移除行</ch>
-    </t>
-    <t id="web-group-title">
-        <en>Web View</en>
-        <ch>网页浏览</ch>
-    </t>
-    <t id="web-go-back">
-        <en>Back</en>
-        <ch>返回</ch>
-    </t>
-    <t id="web-go-forward">
-        <en>Forward</en>
-        <ch>前进</ch>
-    </t>
-    <t id="web-go-url">
-        <en>Go</en>
-        <ch>打开</ch>
-    </t>
-    <t id="web-call-script">
-        <en>Call script</en>
-        <ch>调用脚本</ch>
-    </t>
-    <t id="draw-group-title">
-        <en>Drawing</en>
-        <ch>绘图</ch>
-    </t>
-    <t id="draw-text">
-        <en>Hello World</en>
-        <ch>天气不错</ch>
-    </t>
+  <t id="title">
+    <en>Test Window</en>
+    <ch>测试窗口</ch>
+  </t>
+  <t id="reserved">
+    <en>Reserved</en>
+    <ch>保留</ch>
+  </t>
+  <t id="empty">
+    <en>Empty</en>
+    <ch>空</ch>
+  </t>
+  <t id="menu-button">
+    <en>Message box</en>
+    <ch>消息框</ch>
+  </t>
+  <t id="menu-check">
+    <en>Check item {0}</en>
+    <ch>多选项{0}</ch>
+  </t>
+  <t id="menu-radio">
+    <en>Radio item {0}</en>
+    <ch>单选项{0}</ch>
+  </t>
+  <t id="basic-menu-notice">
+    <en>Context menu is available</en>
+    <ch>右键菜单可用</ch>
+  </t>
+  <t id="basic-group-title">
+    <en>Basic Controls</en>
+    <ch>基本控件</ch>
+  </t>
+  <t id="basic-label-row">
+    <en>Row-{0:D}:</en>
+    <ch>第{0:D}行：</ch>
+  </t>
+  <t id="basic-checkbox">
+    <en>Save file</en>
+    <ch>保存文件</ch>
+  </t>
+  <t id="basic-radiobutton-file">
+    <en>File</en>
+    <ch>文件</ch>
+  </t>
+  <t id="basic-radiobutton-dir">
+    <en>Directory</en>
+    <ch>文件夹</ch>
+  </t>
+  <t id="basic-linkbutton">
+    <en>Browse</en>
+    <ch>浏览</ch>
+  </t>
+  <t id="basic-button">
+    <en>Button</en>
+    <ch>按钮</ch>
+  </t>
+  <t id="basic-combobox">
+    <en>Option {0}</en>
+    <ch>选项{0}</ch>
+  </t>
+  <t id="basic-list-item">
+    <en>List Option {0}</en>
+    <ch>列表项{0}</ch>
+  </t>
+  <t id="basic-tabpage-title">
+    <en>Tabpage {0}</en>
+    <ch>标签页{0}</ch>
+  </t>
+  <t id="basic-grid-key-title">
+    <en>Key</en>
+    <ch>键</ch>
+  </t>
+  <t id="basic-grid-value-title">
+    <en>Value</en>
+    <ch>值</ch>
+  </t>
+  <t id="basic-grid-add-row">
+    <en>Add row</en>
+    <ch>添加行</ch>
+  </t>
+  <t id="basic-grid-remove-row">
+    <en>Remove row</en>
+    <ch>移除行</ch>
+  </t>
+  <t id="web-group-title">
+    <en>Web View</en>
+    <ch>网页浏览</ch>
+  </t>
+  <t id="web-go-back">
+    <en>Back</en>
+    <ch>返回</ch>
+  </t>
+  <t id="web-go-forward">
+    <en>Forward</en>
+    <ch>前进</ch>
+  </t>
+  <t id="web-go-url">
+    <en>Go</en>
+    <ch>打开</ch>
+  </t>
+  <t id="web-call-script">
+    <en>Call script</en>
+    <ch>调用脚本</ch>
+  </t>
+  <t id="draw-group-title">
+    <en>Drawing</en>
+    <ch>绘图</ch>
+  </t>
+  <t id="draw-text">
+    <en>Hello World</en>
+    <ch>天气不错</ch>
+  </t>
+  <t id="basic-client-size">
+    <en>Client Size</en>
+    <ch>用户区域</ch>
+  </t>
+  <t id="basic-dialog-no-border">
+    <en>Dialog without border</en>
+    <ch>无边框对话框</ch>
+  </t>
+  <t id="basic-dialog-with-border">
+    <en>Dialog with border</en>
+    <ch>带边框对话框</ch>
+  </t>
+  <t id="basic-close">
+    <en>Close</en>
+    <ch>关闭</ch>
+  </t>
 </text_resource>

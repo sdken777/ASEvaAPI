@@ -92,6 +92,7 @@ namespace ASEva.UIEto
                     var h = Math.Max(1, (int)(image.Height * SizerExtensions.PixelScale));
                     button.Image = new Bitmap(image, w, h, ImageInterpolation.High);
                 }
+                button.ImagePosition = ButtonImagePosition.Above;
             }
             else button.Text = "";
             if (logicalWidth > 0) button.SetLogicalWidth(logicalWidth);

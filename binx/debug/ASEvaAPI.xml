@@ -111,6 +111,14 @@
             <param name="generation">希望获取的generation ID</param>
             <returns>Generation数据的根路径，若不存在或不属于当前层级则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetGenerationProcessStatus(System.DateTime,System.String)">
+            <summary>
+            (api:app=2.4.2) 获取某个session中的某个generation的处理状态
+            </summary>
+            <param name="session">希望获取generation所属的session ID</param>
+            <param name="generation">希望获取的generation ID</param>
+            <returns>Generation的处理状态，若generation不存在则返回null</returns>
+        </member>
         <member name="M:ASEva.Agency.GetFinishedSessions(System.String)">
             <summary>
             获取当前层级下某个generation下所有处理完毕的session
@@ -392,6 +400,12 @@
             <param name="key">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始，协议名中带"v"字版本号的可向下兼容。视频协议名为video</param>
             <returns>数据通道别名，若未找到返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetChannelAliasTable">
+            <summary>
+            (api:app=2.4.4) 获取数据通道别名
+            </summary>
+            <returns>数据所有通道的别名表</returns>
+        </member>
         <member name="M:ASEva.Agency.IsSampleChannelConflict(System.String)">
             <summary>
             (api:app=2.3.0) 检查样本数据通道是否冲突（有多个模块输出相同协议和通道的样本数据）
@@ -645,6 +659,15 @@
             </summary>
             <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
             <param name="previewOnly">是否为预览</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:ASEva.Agency.StartOffline(System.Boolean,System.Boolean,System.String)">
+            <summary>
+            (api:app=2.4.3) 切换至离线模式并开始预览或后处理
+            </summary>
+            <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
+            <param name="previewOnly">是否为预览</param>
+            <param name="genDirName">后处理输出时，写入generation数据的文件夹名（若已存在且强制开始时，则使用默认的日期格式）</param>
             <returns>是否成功</returns>
         </member>
         <member name="M:ASEva.Agency.StopRunning">
@@ -1192,18 +1215,36 @@
         </member>
         <member name="M:ASEva.Agency.RegisterTransformWindowClass(System.String,System.String)">
             <summary>
-            (api:app=2.3.0) 注册分化窗口组件
+            (api:app=2.3.0) 通过配置注册分化窗口组件
             </summary>
             <param name="windowClassID">原窗口组件ID</param>
             <param name="config">用于分化的配置字符串</param>
             <returns>分化后的窗口组件信息</returns>
         </member>
+        <member name="M:ASEva.Agency.RegisterTransformWindowClass(System.String,ASEva.WindowClass,System.String)">
+            <summary>
+            (api:app=2.5.0) 直接注册分化窗口组件
+            </summary>
+            <param name="windowClassID">原窗口组件ID</param>
+            <param name="transformWindowClass">分化窗口组件类</param>
+            <param name="defaultConfig">默认的可用于分化的配置字符串</param>
+            <returns>分化后的窗口组件信息</returns>
+        </member>
         <member name="M:ASEva.Agency.RegisterTransformDialogClass(System.String,System.String)">
             <summary>
-            (api:app=2.3.0) 注册分化对话框组件
+            (api:app=2.3.0) 通过配置注册分化对话框组件
             </summary>
             <param name="dialogClassID">原对话框组件ID</param>
             <param name="config">用于分化的配置字符串</param>
+            <returns>分化后的对话框组件信息</returns>
+        </member>
+        <member name="M:ASEva.Agency.RegisterTransformDialogClass(System.String,ASEva.DialogClass,System.String)">
+            <summary>
+            (api:app=2.5.0) 直接注册分化对话框组件
+            </summary>
+            <param name="dialogClassID">原对话框组件ID</param>
+            <param name="transformDialogClass">分化对话框组件类</param>
+            <param name="defaultConfig">默认的可用于分化的配置字符串</param>
             <returns>分化后的对话框组件信息</returns>
         </member>
         <member name="M:ASEva.Agency.GetDialogRelatedModulesConfigStatus(System.String,System.String,ASEva.ConfigStatus[]@)">
@@ -1219,6 +1260,13 @@
             <summary>
             (api:app=2.3.0) 禁用所有模块配置
             </summary>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionGenerations(System.DateTime)">
+            <summary>
+            (api:app=2.4.2) 获取当前层级下指定session下的所有generation ID
+            </summary>
+            <param name="sessionID">Session ID</param>
+            <returns>Generation ID列表</returns>
         </member>
         <member name="M:ASEva.Agency.GetGenerationSessions(System.String)">
             <summary>
@@ -1537,12 +1585,28 @@
             <param name="windowClassID">窗口组件ID</param>
             <returns>窗口组件信息，若未找到返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetWindowClassInfo(System.String,System.String)">
+            <summary>
+            (api:app=2.5.0) 获取分化窗口组件信息
+            </summary>
+            <param name="windowClassID">窗口组件ID</param>
+            <param name="transformID">分化ID</param>
+            <returns>分化窗口组件信息，若未找到返回null</returns>
+        </member>
         <member name="M:ASEva.Agency.GetDialogClassInfo(System.String)">
             <summary>
             (api:app=2.3.0) 获取对话框组件信息
             </summary>
             <param name="dialogClassID">对话框组件ID</param>
             <returns>对话框组件信息，若未找到返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetDialogClassInfo(System.String,System.String)">
+            <summary>
+            (api:app=2.5.0) 获取分化对话框组件信息
+            </summary>
+            <param name="dialogClassID">对话框组件ID</param>
+            <param name="transformID">分化ID</param>
+            <returns>分化对话框组件信息，若未找到返回null</returns>
         </member>
         <member name="M:ASEva.Agency.DecodeImage(System.Byte[])">
             <summary>
@@ -1618,7 +1682,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.4.1
+            version=2.5.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3151,7 +3215,7 @@
         </member>
         <member name="M:ASEva.Graph.SingleValueData.SetValue(System.Double)">
             <summary>
-            设置值
+            设置值（不推荐操作，将会导致合并结果异常）
             </summary>
             <param name="val">设置值</param>
         </member>
@@ -5711,6 +5775,11 @@
             分化ID
             </summary>
         </member>
+        <member name="P:ASEva.WindowClassInfo.TransformConfig">
+            <summary>
+            (api:app=2.5.0) 注册分化窗口组件的配置字符串
+            </summary>
+        </member>
         <member name="P:ASEva.WindowClassInfo.Title">
             <summary>
             窗口标题
@@ -5749,6 +5818,11 @@
         <member name="P:ASEva.DialogClassInfo.TransformID">
             <summary>
             分化ID
+            </summary>
+        </member>
+        <member name="P:ASEva.DialogClassInfo.TransformConfig">
+            <summary>
+            (api:app=2.5.0) 注册分化对话框组件的配置字符串
             </summary>
         </member>
         <member name="P:ASEva.DialogClassInfo.Title">

@@ -32,6 +32,7 @@ namespace ASEva.UIGtk
             platform.Add<PixelLayout.IHandler>(() => new PixelLayoutHandler());
             platform.Add<Drawable.IHandler>(() => new DrawableHandler());
             platform.Add<Screen.IScreensHandler>(() => new ScreensHandler());
+            platform.Add<Dialog.IHandler>(() => new DialogHandler());
 
             var app = new Application(platform);
             return app;
@@ -39,7 +40,7 @@ namespace ASEva.UIGtk
 
         public Font CreateDefaultFont()
         {
-            return SystemFonts.Default(11);
+            return SystemFonts.Default(9.5f);
         }
 
         public void RunApp(Application application, Form window)

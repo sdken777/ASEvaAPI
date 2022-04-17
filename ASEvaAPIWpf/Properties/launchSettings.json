@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "ASEvaAPIWpf": {
+      "commandName": "Executable",
+      "executablePath": "..\\ASEvaAPIEtoTest.exe",
+      "commandLineArgs": "wpf"
+    }
+  }
+}

@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 1, 0); // 增加WindowPanel/ConfigPanel.OnInitSize
+            return new Version(2, 1, 1, 1); // 修正组合框显示问题
         }
     }
 }

@@ -28,6 +28,7 @@ namespace ASEva.UICoreWF
             platform.Add<ColorPicker.IHandler>(() => new ColorPickerHandler());
             platform.Add<SearchBox.IHandler>(() => new SearchBoxHandler());
             platform.Add<WebView.IHandler>(() => new WebView2Handler());
+            platform.Add<ComboBox.IHandler>(() => new ComboBoxHandler());
 
             var app = new Application(platform);
             return app;

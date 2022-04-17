@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于Eto.Forms的部分。详见 ASEva.UIEto \n
- * 本文档对应API版本：2.2.1\n
+ * 本文档对应API版本：2.3.0\n
  * \n
  * Eto.Forms官方仓库: https://github.com/picoe/Eto \n
  * 镜像仓库: https://hub.fastgit.org/picoe/Eto \n
@@ -12,7 +12,7 @@ using System;
 namespace ASEva.UIEto
 {
     /// <summary>
-    /// version=2.2.1
+    /// version=2.3.0
     /// </summary>
     public class APIInfo
     {
@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 1, 0); // 增加WindowPanel/ConfigPanel.OnInitSize
+            return new Version(2, 3, 0, 0); // 支持WPF。修正图像按钮中的图像显示位置
         }
     }
 }

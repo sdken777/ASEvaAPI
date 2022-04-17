@@ -13,8 +13,9 @@ namespace ASEvaAPIEtoTest
             t = TextResource.Load("test.xml", languageCode);
 
             Icon = Icon.FromResource("icon.png");
-            Size = MinimumSize = this.Sizer(1200, 700);
-            Title = t["title"] + " (OS:" + ASEva.APIInfo.GetRunningOS() + ")";
+            MinimumSize = this.Sizer(1200, 700);
+            Size = this.Sizer(1300, 750);
+            Title = t["title"] + " (OS:" + ASEva.APIInfo.GetRunningOS() + " / UI:" + App.GetRunningUI() + ")";
 
             var contextMenu = this.SetContextMenuAsNew();
             InitContextMenu(contextMenu);
@@ -71,6 +72,7 @@ namespace ASEvaAPIEtoTest
             var radioButtonList = layoutRow1.AddRadioButtonList(new string[] { t["basic-radiobutton-file"], t["basic-radiobutton-dir"] });
             layoutRow1.AddSpace();
             var linkButton = layoutRow1.AddLinkButton(t["basic-linkbutton"]);
+            linkButton.TextColor = Colors.ForestGreen;
             linkButton.Click += delegate
             {
                 if (radioButtonList.SelectedIndex == 0)
@@ -103,6 +105,23 @@ namespace ASEvaAPIEtoTest
             layoutRow5.AddButton(t["basic-button"]);
             layoutRow5.AddButton(Icon.FromResource("button.png"));
             layoutRow5.AddControl(new ColorPicker { Value = Colors.Red } );
+
+            var layoutRow6 = layout.AddRowLayout();
+            layoutRow6.AddLabel(t.Format("basic-label-row", 6));
+            layoutRow6.AddLinkButton(t["basic-client-size"]).Click += (sender, args) =>
+            {
+                (sender as LinkButton).Text = ClientSize.Width + "x" + ClientSize.Height;
+            };
+            layoutRow6.AddLinkButton(t["basic-dialog-no-border"]).Click += delegate
+            {
+                var dialog = new TestDialog(false, t);
+                dialog.ShowModal();
+            };
+            layoutRow6.AddLinkButton(t["basic-dialog-with-border"]).Click += delegate
+            {
+                var dialog = new TestDialog(true, t);
+                dialog.ShowModal();
+            };
         }
 
         private void InitBasicTagPage2(TabPage tabPage)

@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.0.10
+            version=2.3.0
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -63,10 +63,22 @@
             <param name="sizeRatio">相对字体默认大小的比例，默认为1</param>
             <returns>默认字体</returns>
         </member>
+        <member name="P:ASEva.UIEto.App.WorkPath">
+            <summary>
+            (api:eto=2.1.0) 获取应用程序的工作路径
+            </summary>
+            <value>工作路径</value>
+        </member>
         <member name="T:ASEva.UIEto.ConfigPanel">
             <summary>
             (api:eto=2.0.0) 配置界面控件，用于实现可视化配置
             </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ConfigPanel.OnInitSize(System.String)">
+            <summary>
+            (api:eto=2.2.1) [可选实现] 在初始化控件尺寸时被调用
+            </summary>
+            <param name="config">配置字符串</param>
         </member>
         <member name="M:ASEva.UIEto.ConfigPanel.OnGetSize">
             <summary>
@@ -605,6 +617,11 @@
             <param name="window">窗口</param>
             <param name="screen">目标屏幕，空表示主屏幕</param>
         </member>
+        <member name="T:ASEva.UIEto.ImageConverter">
+            <summary>
+            (api:eto=2.2.0) 图像对象转换
+            </summary>
+        </member>
         <member name="T:ASEva.UIEto.OverlayLayout">
             <summary>
             (api:eto=2.0.4) 可覆盖的布局
@@ -689,6 +706,12 @@
             <summary>
             (api:eto=2.0.0) 窗口控件，用于实现窗口组件的实际功能
             </summary>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnInitSize(System.String)">
+            <summary>
+            (api:eto=2.2.1) [可选实现] 在初始化控件尺寸时被调用
+            </summary>
+            <param name="config">配置字符串</param>
         </member>
         <member name="M:ASEva.UIEto.WindowPanel.OnGetMinimumSize">
             <summary>

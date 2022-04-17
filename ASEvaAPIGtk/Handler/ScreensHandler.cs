@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Eto.Forms;
 using Eto.GtkSharp.Forms;
 
-namespace ASEva.UIEto
+namespace ASEva.UIGtk
 {
 	#pragma warning disable CS0612
 	class ScreensHandler : Screen.IScreensHandler

@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 1, 0); // 增加WindowPanel/ConfigPanel.OnInitSize
+            return new Version(2, 1, 1, 1); // 修正对话框设置Resizable无效问题
         }
     }
 }

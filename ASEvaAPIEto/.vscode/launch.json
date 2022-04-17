@@ -2,12 +2,23 @@
    "version": "0.2.0",
    "configurations": [
         {
-            "name": "调试运行(X86-Windows主机)",
+            "name": "调试运行CoreWF(X86-Windows主机)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "调试构建(X86-Windows目标)",
             "program": "${workspaceFolder}/../bin64/debug/ASEvaAPIEtoTest",
-            "args": [],
+            "args": ["corewf"],
+            "cwd": "${workspaceFolder}/../bin64/debug/",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "调试运行Wpf(X86-Windows主机)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "调试构建(X86-Windows目标)",
+            "program": "${workspaceFolder}/../bin64/debug/ASEvaAPIEtoTest",
+            "args": ["wpf"],
             "cwd": "${workspaceFolder}/../bin64/debug/",
             "console": "internalConsole",
             "stopAtEntry": false

@@ -9,8 +9,9 @@ using sd = System.Drawing;
 using Eto;
 using Eto.WinForms;
 using Eto.WinForms.Forms;
+using ASEva.UIEto;
 
-namespace ASEva.UIEto
+namespace ASEva.UICoreWF
 {
 	public class ColorPickerHandler : WindowsControl<swf.Button, ColorPicker, ColorPicker.ICallback>, ColorPicker.IHandler
 	{

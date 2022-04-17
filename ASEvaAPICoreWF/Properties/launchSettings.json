@@ -2,7 +2,8 @@
   "profiles": {
     "ASEvaAPICoreWF": {
       "commandName": "Executable",
-      "executablePath": "..\\ASEvaAPIEtoTest.exe"
+      "executablePath": "..\\ASEvaAPIEtoTest.exe",
+      "commandLineArgs": "corewf"
     }
   }
 }

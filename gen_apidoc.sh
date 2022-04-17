@@ -13,6 +13,9 @@ cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/Eto/
 doxygen Doxyfile-ASEvaAPICoreWF
 cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/CoreWF/
 
+doxygen Doxyfile-ASEvaAPIWpf
+cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/Wpf/
+
 doxygen Doxyfile-ASEvaAPIGtk
 cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/Gtk/
 

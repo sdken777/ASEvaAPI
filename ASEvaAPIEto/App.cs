@@ -41,7 +41,10 @@ namespace ASEva.UIEto
         /// <returns>是否成功</returns>
         public static bool Init(String uiCode)
         {
-            if (String.IsNullOrEmpty(uiCode)) return false;
+            if (String.IsNullOrEmpty(uiCode))
+            {
+                return Init();
+            }
             if (!initAppInvoked)
             {
                 var availableUICodes = getAvailableUICodes();
@@ -137,7 +140,7 @@ namespace ASEva.UIEto
             switch (osCode)
             {
             case "windows":
-                return new String[] { "corewf" };
+                return new String[] { "corewf", "wpf" };
             case "linux":
             case "linuxarm":
                 return new String[] { "gtk" };
@@ -161,6 +164,10 @@ namespace ASEva.UIEto
                 case "corewf":
                     dllFileName = "ASEvaAPICoreWF.dll";
                     uiNamespace = "UICoreWF";
+                    break;
+                case "wpf":
+                    dllFileName = "ASEvaAPIWpf.dll";
+                    uiNamespace = "UIWpf";
                     break;
                 case "gtk":
                     dllFileName = "ASEvaAPIGtk.dll";
