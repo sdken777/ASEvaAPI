@@ -13,9 +13,10 @@ namespace ASEvaAPIEtoTest
             t = TextResource.Load("test.xml", languageCode);
 
             Icon = Icon.FromResource("icon.png");
-            MinimumSize = this.Sizer(1200, 700);
-            Size = this.Sizer(1300, 750);
             Title = t["title"] + " (OS:" + ASEva.APIInfo.GetRunningOS() + " / UI:" + App.GetRunningUI() + ")";
+            this.SetClientSize(1300, 750);
+            this.SetMinimumClientSize(1200, 700);
+            Resizable = true;
 
             var contextMenu = this.SetContextMenuAsNew();
             InitContextMenu(contextMenu);

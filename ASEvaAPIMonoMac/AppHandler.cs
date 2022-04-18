@@ -33,6 +33,7 @@ namespace ASEva.UIMonoMac
             appHandler.AppDelegate = new AppDelegate();
 
             SetContentExtensions.DefaultMenuSetter = new SetDefaultMenuHandlerMonoMac();
+            SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerMonoMac();
 
             return app;
         }

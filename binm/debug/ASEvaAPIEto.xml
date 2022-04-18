@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.3.1
+            version=2.3.2
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -172,6 +172,27 @@
             <param name="sizeRatio">相对字体默认大小的比例，默认为1</param>
             <returns>可用于绘制的默认字体</returns>
         </member>
+        <member name="T:ASEva.UIEto.SetClientSizeExtensions">
+            <summary>
+            (api:eto=2.3.2) 方便设置窗口或对话框的用户区域
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SetClientSizeExtensions.SetClientSize(Eto.Forms.Window,System.Int32,System.Int32)">
+            <summary>
+            设置窗口或对话框的用户区域尺寸
+            </summary>
+            <param name="window">窗口或对话框对象</param>
+            <param name="logicalWidth">宽度</param>
+            <param name="logicalHeight">高度</param>
+        </member>
+        <member name="M:ASEva.UIEto.SetClientSizeExtensions.SetMinimumClientSize(Eto.Forms.Window,System.Int32,System.Int32)">
+            <summary>
+            设置窗口或对话框的用户区域的最小尺寸
+            </summary>
+            <param name="window">窗口或对话框对象</param>
+            <param name="logicalWidth">最小宽度</param>
+            <param name="logicalHeight">最小高度</param>
+        </member>
         <member name="T:ASEva.UIEto.SetContentExtensions">
             <summary>
             (api:eto=2.0.0) 方便设置面板Content的扩展 
@@ -256,7 +277,7 @@
             </summary>
             <param name="control">控件</param>
             <param name="width">设置宽度</param>
-            /// <param name="height">设置高度</param>
+            <param name="height">设置高度</param>
         </member>
         <member name="P:ASEva.UIEto.SizerExtensions.PixelScale">
             <summary>

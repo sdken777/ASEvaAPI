@@ -11,7 +11,9 @@ namespace ASEvaAPIEtoTest
         {
             WindowStyle = WindowStyle.None;
             Icon = Icon.FromResource("icon.png");
-            Size = MinimumSize = this.Sizer(350, 50);
+            this.SetMinimumClientSize(350, 50);
+            this.SetClientSize(350, 50);
+            Resizable = false;
 
             var layout = this.SetContentAsRowLayout();
             layout.AddLabel("Language: ");

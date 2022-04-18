@@ -27,7 +27,16 @@ namespace ASEva.UIEto
             {
                 bound = new RectangleF(0, 0, 1280, 720);
             }
-            window.Location = new Point((int)bound.Value.X + Math.Max(0, (int)((bound.Value.Width - window.Width) / 2)), (int)bound.Value.Y + Math.Max(0, (int)((bound.Value.Height - window.Height) / 2)));
+            
+            var width = window.Width;
+            var height = window.Height;
+            if (width <= 0 || height <= 0)
+            {
+                width = window.ClientSize.Width;
+                height = window.ClientSize.Height;
+            }
+
+            window.Location = new Point((int)bound.Value.X + Math.Max(0, (int)((bound.Value.Width - width) / 2)), (int)bound.Value.Y + Math.Max(0, (int)((bound.Value.Height - height) / 2)));
         }
     }
 }

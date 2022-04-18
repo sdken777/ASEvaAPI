@@ -78,7 +78,7 @@ namespace ASEva.UIEto
         /// </summary>
         /// <param name="control">控件</param>
         /// <param name="width">设置宽度</param>
-        /// /// <param name="height">设置高度</param>
+        /// <param name="height">设置高度</param>
         public static void SetLogicalSize(this Control control, int width, int height)
         {
             initPixelScale();
