@@ -128,4 +128,8 @@
     <en>Close</en>
     <ch>关闭</ch>
   </t>
+  <t id="basic-freeze-size">
+    <en>Freeze size</en>
+    <ch>固定尺寸</ch>
+  </t>
 </text_resource>

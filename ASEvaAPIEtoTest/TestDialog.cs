@@ -14,14 +14,21 @@ namespace ASEvaAPIEtoTest
             Icon = Icon.FromResource("icon.png");
             MinimumSize = this.Sizer(600, 300);
             Size = this.Sizer(800, 400);
+            Resizable = withBorder;
             Title = "";
 
             var layout = this.SetContentAsRowLayout();
-            layout.AddLinkButton(t["basic-client-size"]).Click += (sender, args) =>
+            layout.AddLinkButton(t["basic-client-size"], true).Click += (sender, args) =>
             {
                 (sender as LinkButton).Text = ClientSize.Width + "x" + ClientSize.Height;
             };
-            layout.AddSpace();
+            if (withBorder)
+            {
+                layout.AddButton(t["basic-freeze-size"]).Click += delegate
+                {
+                    Resizable = false;
+                };
+            }
             layout.AddButton(t["basic-close"]).Click += delegate
             {
                 this.Close();

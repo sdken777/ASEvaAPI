@@ -20,6 +20,7 @@ namespace ASEva.UIEto
         public static StackLayout SetContentAsRowLayout(this Panel panel, int logicalPadding = 8, int logicalSpacing = 8, VerticalAlignment alignment = VerticalAlignment.Center)
         {
             if (panel.Content != null) return null;
+            if (panel is Window && DefaultMenuSetter != null) DefaultMenuSetter.SetDefaultMenu(panel as Window);
             var layout = new StackLayout { Orientation = Orientation.Horizontal, VerticalContentAlignment = alignment };
             layout.Padding = layout.Sizer(logicalPadding);
             layout.Spacing = layout.Sizer(logicalSpacing);
@@ -38,6 +39,7 @@ namespace ASEva.UIEto
         public static StackLayout SetContentAsColumnLayout(this Panel panel, int logicalPadding = 8, int logicalSpacing = 8, HorizontalAlignment alignment = HorizontalAlignment.Stretch)
         {
             if (panel.Content != null) return null;
+            if (panel is Window && DefaultMenuSetter != null) DefaultMenuSetter.SetDefaultMenu(panel as Window);
             var layout = new StackLayout { Orientation = Orientation.Vertical, HorizontalContentAlignment = alignment };
             layout.Padding = layout.Sizer(logicalPadding);
             layout.Spacing = layout.Sizer(logicalSpacing);
@@ -56,6 +58,7 @@ namespace ASEva.UIEto
         public static TableLayout SetContentAsTableLayout(this Panel panel, int logicalPadding = 8, int logicalSpacingX = 8, int logicalSpacingY = 8)
         {
             if (panel.Content != null) return null;
+            if (panel is Window && DefaultMenuSetter != null) DefaultMenuSetter.SetDefaultMenu(panel as Window);
             var layout = new TableLayout();
             layout.Padding = layout.Sizer(logicalPadding);
             layout.Spacing = new Size(layout.Sizer(logicalSpacingX), layout.Sizer(logicalSpacingY));
@@ -71,9 +74,17 @@ namespace ASEva.UIEto
         public static PixelLayout SetContentAsPixelLayout(this Panel panel)
         {
             if (panel.Content != null) return null;
+            if (panel is Window && DefaultMenuSetter != null) DefaultMenuSetter.SetDefaultMenu(panel as Window);
             var layout = new PixelLayout();
             panel.Content = layout;
             return layout;
         }
+
+        public static SetDefaultMenuHandler DefaultMenuSetter { private get; set; }
+    }
+
+    public interface SetDefaultMenuHandler
+    {
+        void SetDefaultMenu(Window window);
     }
 }

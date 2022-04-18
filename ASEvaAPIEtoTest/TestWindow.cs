@@ -108,16 +108,16 @@ namespace ASEvaAPIEtoTest
 
             var layoutRow6 = layout.AddRowLayout();
             layoutRow6.AddLabel(t.Format("basic-label-row", 6));
-            layoutRow6.AddLinkButton(t["basic-client-size"]).Click += (sender, args) =>
+            layoutRow6.AddLinkButton(t["basic-client-size"], true).Click += (sender, args) =>
             {
                 (sender as LinkButton).Text = ClientSize.Width + "x" + ClientSize.Height;
             };
-            layoutRow6.AddLinkButton(t["basic-dialog-no-border"]).Click += delegate
+            layoutRow6.AddLinkButton(t["basic-dialog-no-border"], true).Click += delegate
             {
                 var dialog = new TestDialog(false, t);
                 dialog.ShowModal();
             };
-            layoutRow6.AddLinkButton(t["basic-dialog-with-border"]).Click += delegate
+            layoutRow6.AddLinkButton(t["basic-dialog-with-border"], true).Click += delegate
             {
                 var dialog = new TestDialog(true, t);
                 dialog.ShowModal();

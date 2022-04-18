@@ -31,6 +31,9 @@ namespace ASEva.UIMonoMac
             var app = new Application(platform);
             var appHandler = app.Handler as Eto.Mac.Forms.ApplicationHandler;
             appHandler.AppDelegate = new AppDelegate();
+
+            SetContentExtensions.DefaultMenuSetter = new SetDefaultMenuHandlerMonoMac();
+
             return app;
         }
 

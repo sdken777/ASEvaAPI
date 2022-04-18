@@ -45,6 +45,12 @@
             </summary>
             <returns>兴趣点的时间戳(包括年月日时分秒，毫秒)，若无数据则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetInterestTarget">
+            <summary>
+            (api:app=2.3.0) 获取兴趣时间点目标
+            </summary>
+            <returns>兴趣时间点目标，可能超出数据缓存范围</returns>
+        </member>
         <member name="M:ASEva.Agency.GetBufferRange">
             <summary>
             获取ASEva数据缓存范围
@@ -53,13 +59,13 @@
         </member>
         <member name="M:ASEva.Agency.GetSessionList">
             <summary>
-            获取当前数据目录下的所有session
+            获取当前数据层级下的所有session
             </summary>
             <returns>Session ID列表，ID为数据起始的系统时间</returns>
         </member>
         <member name="M:ASEva.Agency.GetFilteredSessionList">
             <summary>
-            获取筛选后的所有session
+            获取当前数据层级下筛选后的所有session
             </summary>
             <returns>Session ID列表，ID为数据起始的系统时间</returns>
         </member>
@@ -74,14 +80,28 @@
             获取某个session数据在硬盘的根路径
             </summary>
             <param name="session">希望获取的session ID</param>
-            <returns>Session数据的根路径，若不存在返回null</returns>
+            <returns>Session数据的根路径，若不存在或不属于当前层级则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetSessionPublicDataPath(System.DateTime)">
             <summary>
             获取某个session的公共数据在硬盘的根路径
             </summary>
             <param name="session">希望获取的session ID</param>
-            <returns>Session公共数据的根路径，若不存在返回null</returns>
+            <returns>Session公共数据的根路径，若不存在或不属于当前层级则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionLayer(System.DateTime)">
+            <summary>
+            (api:app=2.4.0) 获取某个session所属数据层级
+            </summary>
+            <param name="session">Session ID</param>
+            <returns>数据层级，其中‘.’表示根路径下的session，'..'表示根路径即session</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionFolderName(System.DateTime)">
+            <summary>
+            (api:app=2.4.0) 获取某个session的文件夹名
+            </summary>
+            <param name="session">Session ID</param>
+            <returns>文件夹名</returns>
         </member>
         <member name="M:ASEva.Agency.GetGenerationPath(System.DateTime,System.String)">
             <summary>
@@ -89,18 +109,26 @@
             </summary>
             <param name="session">希望获取generation所属的session ID</param>
             <param name="generation">希望获取的generation ID</param>
-            <returns>Generation数据的根路径，若不存在返回null</returns>
+            <returns>Generation数据的根路径，若不存在或不属于当前层级则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetGenerationProcessStatus(System.DateTime,System.String)">
+            <summary>
+            (api:app=2.4.2) 获取某个session中的某个generation的处理状态
+            </summary>
+            <param name="session">希望获取generation所属的session ID</param>
+            <param name="generation">希望获取的generation ID</param>
+            <returns>Generation的处理状态，若generation不存在则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetFinishedSessions(System.String)">
             <summary>
-            获取某个generation下所有处理完毕的session
+            获取当前层级下某个generation下所有处理完毕的session
             </summary>
             <param name="generation">目标generation</param>
             <returns>处理完毕的session ID列表</returns>
         </member>
         <member name="M:ASEva.Agency.RefreshGenerations">
             <summary>
-            刷新当前数据目录下所有generation
+            刷新当前层级下所有session的generation
             </summary>
         </member>
         <member name="M:ASEva.Agency.GetCurrentDataGeneration">
@@ -120,14 +148,14 @@
             获取某个session的本地开始时间（相对时间戳=0）
             </summary>
             <param name="session">希望获取本地开始时间的session ID</param>
-            <returns>本地开始时间，若空表示无此信息</returns>
+            <returns>本地开始时间，若空表示无此信息或session不在当前层级</returns>
         </member>
         <member name="M:ASEva.Agency.GetStartTimeUTC(System.DateTime)">
             <summary>
             获取某个session的UTC开始时间（相对时间戳=0）
             </summary>
             <param name="session">希望获取UTC开始时间的session ID</param>
-            <returns>UTC开始时间，若空表示无此信息</returns>
+            <returns>UTC开始时间，若空表示无此信息或session不在当前层级</returns>
         </member>
         <member name="M:ASEva.Agency.GetTimestampLocal(System.DateTime,System.Double)">
             <summary>
@@ -164,6 +192,49 @@
             获取当前数据目录的路径
             </summary>
             <returns>当前数据目录的路径，若未设置返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetSubDataPathes">
+            <summary>
+            (api:app=2.4.0) 获取所有子数据目录的路径
+            </summary>
+            <returns>所有子数据目录的路径，目录不存在则为null</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetSubDataPath(System.Int32,System.String)">
+            <summary>
+            (api:app=2.4.0) 设置子数据目录的路径
+            </summary>
+            <param name="subIndex">子数据目录序号，0~3</param>
+            <param name="path">子数据目录的路径</param>
+        </member>
+        <member name="M:ASEva.Agency.GetDataLayers">
+            <summary>
+            (api:app=2.4.0) 获取所有有效的数据层级
+            </summary>
+            <returns>数据层级列表，其中‘.’表示根路径下的session，'..'表示根路径即session</returns>
+        </member>
+        <member name="M:ASEva.Agency.AddDataLayer(System.String)">
+            <summary>
+            (api:app=2.4.0) 添加新的数据层级
+            </summary>
+            <param name="layer">数据层级</param>
+        </member>
+        <member name="M:ASEva.Agency.DeleteDataLayer(System.String)">
+            <summary>
+            (api:app=2.4.0) 移除数据层级，并删除所有文件至回收站
+            </summary>
+            <param name="layer">数据层级</param>
+        </member>
+        <member name="M:ASEva.Agency.GetCurrentDataLayer">
+            <summary>
+            (api:app=2.4.0) 获取当前的数据层级
+            </summary>
+            <returns>数据层级，其中null表示所有层级，‘.’表示根路径下的session，'..'表示根路径即session</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetCurrentDataLayer(System.String)">
+            <summary>
+            (api:app=2.4.0) 设置当前的数据层级
+            </summary>
+            <param name="layer">数据层级，其中null表示所有层级，‘.’表示根路径下的session，'..'表示根路径即session</param>
         </member>
         <member name="M:ASEva.Agency.GetGlobalPublicDataPath">
             <summary>
@@ -222,7 +293,7 @@
             </summary>
             <param name="session">想要获取图表的session ID</param>
             <param name="id">图表的ID，通过 ASEva.GraphDefinition.GetHashCode 获取</param>
-            <returns>图表对象，若不存在返回null</returns>
+            <returns>图表对象，若不存在或不属于当前层级则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.AddSceneData(ASEva.SceneData)">
             <summary>
@@ -236,6 +307,12 @@
             </summary>
             <param name="type">设备的类型ID，在插件的info.txt中以type字段描述</param>
             <returns>返回设备状态</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetAllDeviceStatus">
+            <summary>
+            (api:app=2.3.0) 获取所有设备状态
+            </summary>
+            <returns>设备状态表，键为设备的类型ID，在插件的info.txt中以type字段描述</returns>
         </member>
         <member name="M:ASEva.Agency.GetChildDeviceStatus(System.String)">
             <summary>
@@ -323,6 +400,19 @@
             <param name="key">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始，协议名中带"v"字版本号的可向下兼容。视频协议名为video</param>
             <returns>数据通道别名，若未找到返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetChannelAliasTable">
+            <summary>
+            (api:app=2.4.4) 获取数据通道别名
+            </summary>
+            <returns>数据所有通道的别名表</returns>
+        </member>
+        <member name="M:ASEva.Agency.IsSampleChannelConflict(System.String)">
+            <summary>
+            (api:app=2.3.0) 检查样本数据通道是否冲突（有多个模块输出相同协议和通道的样本数据）
+            </summary>
+            <param name="protocol">样本通道协议，格式为"协议名@通道序号"，通道序号从0开始，协议名中带"v"字版本号的可向下兼容</param>
+            <returns>是否冲突</returns>
+        </member>
         <member name="M:ASEva.Agency.IsInputChannelAvailable(System.String)">
             <summary>
             检查指定的输入样本通道是否可用
@@ -373,7 +463,7 @@
             <summary>
             运行一个独立处理任务，运行过程中将弹出进度条并禁用其他操作
             </summary>
-            <param name="caller">调用此API的UI类或控件</param>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
             <param name="taskClassID">任务组件的类别ID</param>
             <param name="config">配置的字符串描述</param>
             <param name="returnValue">任务的返回值信息</param>
@@ -486,7 +576,12 @@
         </member>
         <member name="M:ASEva.Agency.IsBusMessageBinded(System.String)">
             <summary>
-            获取总线报文是否已绑定发送
+            已弃用，应使用 ASEva.Agency.IsBusMessageBound
+            </summary>
+        </member>
+        <member name="M:ASEva.Agency.IsBusMessageBound(System.String)">
+            <summary>
+            (api:app=2.3.0) 获取总线报文是否已绑定发送
             </summary>
             <param name="busMessageID">总线报文ID</param>
             <returns>是否已绑定</returns>
@@ -524,12 +619,55 @@
             <param name="startTimeline">回放开始时间，单位秒</param>
             <param name="interestTarget">目标兴趣点，单位秒（空表示不设置兴趣点）</param>
         </member>
+        <member name="M:ASEva.Agency.StartReplay(System.Boolean,System.Double,System.Nullable{System.Double})">
+            <summary>
+            (api:app=2.3.0) 切换至回放模式并开始回放
+            </summary>
+            <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
+            <param name="startTimeline">回放开始时间，单位秒</param>
+            <param name="interestTarget">目标兴趣点，单位秒（空表示不设置兴趣点）</param>
+            <returns>是否成功</returns>
+        </member>
         <member name="M:ASEva.Agency.StartOnline(System.String,System.Boolean)">
             <summary>
             切换至在线模式并开始预览或采集
             </summary>
             <param name="controllerName">控制者名称，用于独占控制模式</param>
             <param name="previewOnly">是否为预览</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:ASEva.Agency.StartOnline(System.Boolean,System.Boolean)">
+            <summary>
+            切换至在线模式并开始预览或采集
+            </summary>
+            <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
+            <param name="previewOnly">是否为预览</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:ASEva.Agency.StartOnline(System.Boolean,System.Boolean,System.String)">
+            <summary>
+            (api:app=2.4.0) 切换至在线模式并开始预览或采集
+            </summary>
+            <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
+            <param name="previewOnly">是否为预览</param>
+            <param name="sessionDirName">采集时，写入session数据的文件夹名（若已存在且强制开始时，则使用默认的日期格式）</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:ASEva.Agency.StartOffline(System.Boolean,System.Boolean)">
+            <summary>
+            切换至离线模式并开始预览或后处理
+            </summary>
+            <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
+            <param name="previewOnly">是否为预览</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:ASEva.Agency.StartOffline(System.Boolean,System.Boolean,System.String)">
+            <summary>
+            (api:app=2.4.3) 切换至离线模式并开始预览或后处理
+            </summary>
+            <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
+            <param name="previewOnly">是否为预览</param>
+            <param name="genDirName">后处理输出时，写入generation数据的文件夹名（若已存在且强制开始时，则使用默认的日期格式）</param>
             <returns>是否成功</returns>
         </member>
         <member name="M:ASEva.Agency.StopRunning">
@@ -544,19 +682,27 @@
             <param name="controllerName">控制者名称，用于独占控制模式</param>
             <returns>是否成功</returns>
         </member>
+        <member name="M:ASEva.Agency.StopRunning(System.Boolean,System.Boolean)">
+            <summary>
+            停止采集、处理、回放
+            </summary>
+            <param name="force">是否强制结束</param>
+            <param name="editRecordedSession">成功停止后是否立即编辑session信息</param>
+            <returns>是否成功</returns>
+        </member>
         <member name="M:ASEva.Agency.GetSessionTimeline(System.DateTime)">
             <summary>
             获取指定session开始时间对应的时间点
             </summary>
             <param name="session">Session ID</param>
-            <returns>时间点，session不存在则返回null</returns>
+            <returns>时间点，session不存在或不属于当前层级则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetSessionLength(System.DateTime)">
             <summary>
             获取指定session的长度
             </summary>
             <param name="session">Session ID</param>
-            <returns>Session长度，单位秒，session不存在则返回null</returns>
+            <returns>Session长度，单位秒，session不存在或不属于当前层级则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetGraphIDList">
             <summary>
@@ -617,7 +763,7 @@
         </member>
         <member name="M:ASEva.Agency.GetFilteredSessionListTotalLength">
             <summary>
-            获取筛选后的所有session的时长总长
+            获取当前层级下筛选后的所有session的时长总长
             </summary>
             <returns>筛选后的所有session的时长总长</returns>
         </member>
@@ -652,7 +798,7 @@
             <summary>
             获取数据处理或C++模块组件配置的字符串描述
             </summary>
-            <param name="caller">调用此API的UI类或控件</param>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
             <param name="moduleClassID">模块类别ID</param>
             <returns>配置的字符串描述，null表示找不到类别ID对应的模块</returns>
         </member>
@@ -660,7 +806,7 @@
             <summary>
             设置数据处理或C++模块组件配置的字符串描述
             </summary>
-            <param name="caller">调用此API的UI类或控件</param>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
             <param name="moduleClassID">模块类别ID</param>
             <param name="config">配置的字符串描述</param>
         </member>
@@ -668,7 +814,7 @@
             <summary>
             获取数据处理或C++模块组件配置的状态
             </summary>
-            <param name="caller">调用此API的UI类或控件</param>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
             <param name="moduleClassID">模块类别ID</param>
             <returns>组件配置的状态，若找不到类别ID对应的模块则返回 ASEva.ConfigStatus.Disabled </returns>
         </member>
@@ -676,7 +822,7 @@
             <summary>
             获取数据处理或C++模块组件各子功能配置的状态
             </summary>
-            <param name="caller">调用此API的UI类或控件</param>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
             <param name="moduleClassID">模块类别ID</param>
             <returns>各子功能配置的状态，若找不到类别ID对应的模块或无子功能配置则返回null</returns>
         </member>
@@ -692,6 +838,27 @@
             </summary>
             <returns>视频设备列表，键为设备ID，值为对应的设备信息</returns>
         </member>
+        <member name="M:ASEva.Agency.GetBusProtocolFileIDList">
+            <summary>
+            (api:app=2.3.0) 获取总线协议文件ID列表
+            </summary>
+            <returns>总线协议文件ID列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetBusProtocolFilePath(ASEva.BusProtocolFileID)">
+            <summary>
+            (api:app=2.3.0) 获取总线协议文件路径
+            </summary>
+            <param name="fileID">总线协议文件ID</param>
+            <returns>总线协议文件路径，若未找到返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.UpdateBusProtocolFilePath(ASEva.BusProtocolFileID,System.String)">
+            <summary>
+            (api:app=2.3.0) 更新总线协议文件路径
+            </summary>
+            <param name="fileID">总线协议文件ID</param>
+            <param name="filePath">新路径</param>
+            <returns>是否成功更新，false表示未找到文件或MD5不匹配</returns>
+        </member>
         <member name="M:ASEva.Agency.GetBusProtocolFileState(ASEva.BusProtocolFileID)">
             <summary>
             获取总线协议文件的状态
@@ -699,12 +866,33 @@
             <param name="fileID">总线协议文件ID</param>
             <returns>文件状态</returns>
         </member>
+        <member name="M:ASEva.Agency.AddBusProtocolFile(System.String,ASEva.BusProtocolFileID@)">
+            <summary>
+            (api:app=2.3.0) 添加新的总线协议文件
+            </summary>
+            <param name="filePath">总线协议文件路径</param>
+            <param name="fileID">总线协议文件ID，若文件存在则输出该ID，否则输出null</param>
+            <returns>是否为新添加的总线协议文件ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.RemoveBusProtocolFile(ASEva.BusProtocolFileID)">
+            <summary>
+            (api:app=2.3.0) 移除总线协议文件
+            </summary>
+            <param name="fileID">总线协议文件ID</param>
+        </member>
         <member name="M:ASEva.Agency.GetNativePluginVersions(System.String)">
             <summary>
             获取C++插件模块版本列表
             </summary>
             <param name="prefix">组件前缀，如bus、video、proc、dev等</param>
             <returns>版本列表，键为C++模块的类型ID，值为版本字符串</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetNativePluginVersions(ASEva.NativeLibraryType)">
+            <summary>
+            (api:app=2.3.0) 获取C++插件模块版本列表
+            </summary>
+            <param name="type">C++库类别</param>
+            <returns>版本列表，键为C++模块的类型ID</returns>
         </member>
         <member name="M:ASEva.Agency.ConfigOfflineMapPath">
             <summary>
@@ -718,7 +906,16 @@
             <param name="imageSize">指定图像大小</param>
             <param name="centerLocation">图像中心的经纬度</param>
             <param name="zoom">图像的尺度，0~24</param>
-            <returns>离线地图图像，空表示获取失败</returns>
+            <returns>离线地图图像（平台特化），空表示获取失败</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetOfflineMapCommonImage(ASEva.IntSize,ASEva.Utility.LocPoint,System.Int32)">
+            <summary>
+            (api:app=2.3.0) 获取离线地图图像
+            </summary>
+            <param name="imageSize">指定图像大小</param>
+            <param name="centerLocation">图像中心的经纬度</param>
+            <param name="zoom">图像的尺度，0~24</param>
+            <returns>离线地图图像（通用图像数据），空表示获取失败</returns>
         </member>
         <member name="M:ASEva.Agency.ConvertOfflineMapLocToPix(ASEva.Utility.LocPoint,System.Int32,ASEva.Utility.LocPoint)">
             <summary>
@@ -779,7 +976,7 @@
             <summary>
             打开对话框
             </summary>
-            <param name="caller">调用此API的UI类或控件</param>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
             <param name="dialogClassID">对话框组件ID</param>
             <param name="config">初始化配置</param>
         </member>
@@ -787,7 +984,7 @@
             <summary>
             添加窗口至工作空间
             </summary>
-            <param name="caller">调用此API的UI类或控件</param>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
             <param name="windowClassID">窗口组件ID</param>
             <param name="config">初始化配置</param>
             <param name="newWorkspaceIfNeeded">如果当前工作空间位置不足，是否添加至新工作空间</param>
@@ -866,9 +1063,626 @@
             <param name="busMessage">总线报文</param>
             <returns>所有信号值及相关信息</returns>
         </member>
+        <member name="M:ASEva.Agency.GetRecentProjectPathes">
+            <summary>
+            (api:app=2.3.0) 获取最近项目文件路径列表
+            </summary>
+            <returns>最近项目文件路径列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.TerminateApp(System.Boolean,System.Boolean)">
+            <summary>
+            (api:app=2.3.0) 尝试终止应用程序
+            </summary>
+            <param name="force">是否强制终止</param>
+            <param name="autosave">是否保存当前工程至autosave</param>
+            <returns>是否成功终止</returns>
+        </member>
+        <member name="M:ASEva.Agency.PopupError(System.String)">
+            <summary>
+            (api:app=2.3.0) 弹出模态框显示错误信息
+            </summary>
+            <param name="msg">错误信息</param>
+        </member>
+        <member name="M:ASEva.Agency.PopupNotice(System.String)">
+            <summary>
+            (api:app=2.3.0) 弹出模态框显示提示信息
+            </summary>
+            <param name="msg">提示信息</param>
+        </member>
+        <member name="M:ASEva.Agency.PopupConfirm(System.String)">
+            <summary>
+            (api:app=2.3.0) 弹出模态框显示确认信息
+            </summary>
+            <param name="msg">确认信息</param>
+            <returns>是否得到确认</returns>
+        </member>
+        <member name="M:ASEva.Agency.AddMainThreadCheckpoint(System.String)">
+            <summary>
+            (api:app=2.3.0) 添加主线程检查点
+            </summary>
+            <param name="location">主线程检查点位置</param>
+        </member>
+        <member name="M:ASEva.Agency.NewProject(System.Boolean)">
+            <summary>
+            (api:app=2.3.0) 新建项目
+            </summary>
+            <param name="force">是否强制新建项目</param>
+            <returns>是否成功新建项目</returns>
+        </member>
+        <member name="M:ASEva.Agency.OpenProject(System.String)">
+            <summary>
+            (api:app=2.3.0) 打开新项目
+            </summary>
+            <param name="projectFile">项目文件路径，若设为null则从autosave读取</param>
+            <returns>是否成功打开项目</returns>
+        </member>
+        <member name="M:ASEva.Agency.SaveCurrentProject(System.String)">
+            <summary>
+            (api:app=2.3.0) 保存当前项目
+            </summary>
+            <param name="projectFile">项目文件路径，null表示保存至当前项目文件</param>
+            <returns>是否成功保存项目</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetCurrentProject">
+            <summary>
+            (api:app=2.3.0) 获取当前项目文件
+            </summary>
+            <returns>当前项目文件，新项目或从autosave读取的项目都为null</returns>
+        </member>
+        <member name="M:ASEva.Agency.PlayMp3(System.Byte[])">
+            <summary>
+            (api:app=2.3.0) 播放MP3音频
+            </summary>
+            <param name="mp3FileData">MP3音频文件数据</param>
+        </member>
+        <member name="M:ASEva.Agency.StartProcess(System.String)">
+            <summary>
+            (api:app=2.3.0) 启动进程以默认方式打开文件、文件夹或网址
+            </summary>
+            <param name="target">目标文件、文件夹或网址</param>
+            <returns>是否成功打开</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetVersionTable">
+            <summary>
+            (api:app=2.3.0) 获取软件版本信息总表
+            </summary>
+            <returns>软件版本信息总表</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetSystemStatus(ASEva.SystemStatus)">
+            <summary>
+            (api:app=2.3.0) 获取系统状态信息
+            </summary>
+            <param name="status">系统状态类别</param>
+            <returns>系统状态信息，若无有效信息则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetSystemStatusDetails(ASEva.SystemStatus)">
+            <summary>
+            (api:app=2.3.0) 获取系统状态详情
+            </summary>
+            <param name="status">系统状态类别</param>
+            <returns>系统状态详情，若无有效信息则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetLicensedFunctionIndices">
+            <summary>
+            (api:app=2.3.0) 获取被许可的功能序号列表
+            </summary>
+            <returns>被许可的功能序号列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.SwitchAppMode(System.String,ASEva.ApplicationMode,System.Int32)">
+            <summary>
+            (api:app=2.3.0) 切换应用程序当前的运行模式
+            </summary>
+            <param name="controllerName">控制者名称，用于独占控制模式</param>
+            <param name="mode">目标运行模式</param>
+            <param name="waitSecond">超时，大于0有效，单位秒</param>
+            <returns>是否成功切换</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetDataPath(System.String)">
+            <summary>
+            (api:app=2.3.0) 设置数据目录的路径
+            </summary>
+            <param name="path">数据目录的路径</param>
+        </member>
+        <member name="M:ASEva.Agency.GetWindowClassTable">
+            <summary>
+            (api:app=2.3.0) 获取窗口组件信息表
+            </summary>
+            <returns>窗口组件信息表，键为组件ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetDialogClassTable">
+            <summary>
+            (api:app=2.3.0) 获取对话框组件信息表
+            </summary>
+            <returns>对话框组件信息表，键为组件ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetProcessorClassTable">
+            <summary>
+            (api:app=2.3.0) 获取数据处理组件信息表
+            </summary>
+            <returns>数据处理组件信息表，键为组件ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetNativeClassTable">
+            <summary>
+            (api:app=2.3.0) 获取C++组件信息表
+            </summary>
+            <returns>C++组件信息表，键为组件ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetTaskClassTable">
+            <summary>
+            (api:app=2.3.0) 获取独立任务组件信息表
+            </summary>
+            <returns>独立任务组件信息表，键为组件ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.RegisterTransformWindowClass(System.String,System.String)">
+            <summary>
+            (api:app=2.3.0) 通过配置注册分化窗口组件
+            </summary>
+            <param name="windowClassID">原窗口组件ID</param>
+            <param name="config">用于分化的配置字符串</param>
+            <returns>分化后的窗口组件信息</returns>
+        </member>
+        <member name="M:ASEva.Agency.RegisterTransformWindowClass(System.String,ASEva.WindowClass,System.String)">
+            <summary>
+            (api:app=2.5.0) 直接注册分化窗口组件
+            </summary>
+            <param name="windowClassID">原窗口组件ID</param>
+            <param name="transformWindowClass">分化窗口组件类</param>
+            <param name="defaultConfig">默认的可用于分化的配置字符串</param>
+            <returns>分化后的窗口组件信息</returns>
+        </member>
+        <member name="M:ASEva.Agency.RegisterTransformDialogClass(System.String,System.String)">
+            <summary>
+            (api:app=2.3.0) 通过配置注册分化对话框组件
+            </summary>
+            <param name="dialogClassID">原对话框组件ID</param>
+            <param name="config">用于分化的配置字符串</param>
+            <returns>分化后的对话框组件信息</returns>
+        </member>
+        <member name="M:ASEva.Agency.RegisterTransformDialogClass(System.String,ASEva.DialogClass,System.String)">
+            <summary>
+            (api:app=2.5.0) 直接注册分化对话框组件
+            </summary>
+            <param name="dialogClassID">原对话框组件ID</param>
+            <param name="transformDialogClass">分化对话框组件类</param>
+            <param name="defaultConfig">默认的可用于分化的配置字符串</param>
+            <returns>分化后的对话框组件信息</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetDialogRelatedModulesConfigStatus(System.String,System.String,ASEva.ConfigStatus[]@)">
+            <summary>
+            (api:app=2.3.0) 获取对话框相关模块配置状态
+            </summary>
+            <param name="dialogClassID">对话框组件ID</param>
+            <param name="transformID">分化ID</param>
+            <param name="childrenStatus">子配置状态</param>
+            <returns>配置状态</returns>
+        </member>
+        <member name="M:ASEva.Agency.DisableAllConfigs">
+            <summary>
+            (api:app=2.3.0) 禁用所有模块配置
+            </summary>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionGenerations(System.DateTime)">
+            <summary>
+            (api:app=2.4.2) 获取当前层级下指定session下的所有generation ID
+            </summary>
+            <param name="sessionID">Session ID</param>
+            <returns>Generation ID列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetGenerationSessions(System.String)">
+            <summary>
+            (api:app=2.3.0) 获取当前层级下含有指定generation ID的所有session
+            </summary>
+            <param name="generationID">Generation ID</param>
+            <returns>Session ID列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetTargetReplaySpeed(System.Double)">
+            <summary>
+            (api:app=2.3.0) 设置目标回放速度
+            </summary>
+            <param name="speed">目标回放速度</param>
+        </member>
+        <member name="M:ASEva.Agency.SetSessionSearchKeyword(System.String)">
+            <summary>
+            (api:app=2.3.0) 设置session搜索关键字
+            </summary>
+            <param name="keyword">session搜索关键字</param>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionFilterTable">
+            <summary>
+            (api:app=2.3.0) 获取所有session的筛选标志位
+            </summary>
+            <returns>session的筛选标志位表</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetCurrentOnlineSession">
+            <summary>
+            (api:app=2.3.0) 获取在线模式下正在预览或采集的session
+            </summary>
+            <returns>在线模式下正在预览或采集的session，若非在线模式则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionListTotalLength">
+            <summary>
+            (api:app=2.3.0) 获取当前层级下所有session的总时长
+            </summary>
+            <returns>所有session的总时长</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionSearchKey">
+            <summary>
+            (api:app=2.3.0) 获取当前的session搜索关键字
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ASEva.Agency.RemoveSession(System.DateTime,System.Boolean)">
+            <summary>
+            (api:app=2.3.0) 移除session及相关文件至回收站
+            </summary>
+            <param name="session">Session ID</param>
+            <param name="force">是否强制移除</param>
+            <returns>是否成功移除</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetSessionChecker(System.DateTime,System.Boolean)">
+            <summary>
+            (api:app=2.3.0) 设置session是否框选
+            </summary>
+            <param name="session">session ID</param>
+            <param name="check">是否框选</param>
+        </member>
+        <member name="M:ASEva.Agency.RemoveGeneration(System.DateTime,System.String)">
+            <summary>
+            (api:app=2.3.0) 移除generation及相关文件至回收站
+            </summary>
+            <param name="session">Session ID</param>
+            <param name="genID">Generation ID</param>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionComment(System.DateTime)">
+            <summary>
+            (api:app=2.3.0) 获取session的注释说明
+            </summary>
+            <param name="session">Session ID</param>
+            <returns>Session的注释说明</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetSessionComment(System.DateTime,System.String)">
+            <summary>
+            (api:app=2.3.0) 设置session的注释说明
+            </summary>
+            <param name="session">Session ID</param>
+            <param name="comment">Session的注释说明</param>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionProperties(System.DateTime)">
+            <summary>
+            (api:app=2.3.0) 获取session的属性表
+            </summary>
+            <param name="session">Session ID</param>
+            <returns>Session的属性表</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetSessionProperties(System.DateTime,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            (api:app=2.3.0) 设置session的属性表
+            </summary>
+            <param name="session">Session ID</param>
+            <param name="properties">Session的属性表</param>
+        </member>
+        <member name="M:ASEva.Agency.SetAudioVolume(System.Double)">
+            <summary>
+            (api:app=2.3.0) 设置音量
+            </summary>
+            <param name="volume">音量（倍数）</param>
+        </member>
+        <member name="M:ASEva.Agency.SetCPURateScale(System.Int32)">
+            <summary>
+            (api:app=2.3.0) 设置CPU使用率的乘数
+            </summary>
+            <param name="scale">CPU使用率的乘数</param>
+        </member>
+        <member name="M:ASEva.Agency.GetLicenseInfo">
+            <summary>
+            (api:app=2.3.0) 获取许可证的详细信息
+            </summary>
+            <returns>许可证的详细信息</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetRawChannelDelayConfig(System.String)">
+            <summary>
+            (api:app=2.3.0) 获取原始数据通道延迟配置
+            </summary>
+            <param name="id">原始数据通道ID</param>
+            <returns>延迟配置，单位毫秒</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetBusChannelDelayConfig(System.Int32)">
+            <summary>
+            (api:app=2.3.0) 获取总线数据通道延迟配置
+            </summary>
+            <param name="channel">总线通道，1~16</param>
+            <returns>延迟配置，单位毫秒</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetVideoChannelDelayConfig(System.Int32)">
+            <summary>
+            (api:app=2.3.0) 获取视频数据通道延迟配置
+            </summary>
+            <param name="channel">视频通道，0~23</param>
+            <returns>延迟配置，单位毫秒</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetAudioChannelDelayConfig">
+            <summary>
+            (api:app=2.3.0) 获取音频数据通道延迟配置
+            </summary>
+            <returns>延迟配置，单位毫秒</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetAllRawChannelDelayConfigs">
+            <summary>
+            (api:app=2.3.0) 获取所有原始数据通道延迟配置
+            </summary>
+            <returns>所有原始数据通道的延迟配置，单位毫秒</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetRawChannelDelayConfig(System.String,System.Double)">
+            <summary>
+            (api:app=2.3.0) 设置原始数据通道延迟配置
+            </summary>
+            <param name="id">原始数据通道ID</param>
+            <param name="delay">延迟配置，单位毫秒</param>
+        </member>
+        <member name="M:ASEva.Agency.SetBusChannelDelayConfig(System.Int32,System.Double)">
+            <summary>
+            (api:app=2.3.0) 设置总线数据通道延迟配置
+            </summary>
+            <param name="channel">总线通道，1~16</param>
+            <param name="delay">延迟配置，单位毫秒</param>
+        </member>
+        <member name="M:ASEva.Agency.SetVideoChannelDelayConfig(System.Int32,System.Double)">
+            <summary>
+            (api:app=2.3.0) 设置视频数据通道延迟配置
+            </summary>
+            <param name="channel">视频通道，0~23</param>
+            <param name="delay">延迟配置，单位毫秒</param>
+        </member>
+        <member name="M:ASEva.Agency.SetAudioChannelDelayConfig(System.Double)">
+            <summary>
+            (api:app=2.3.0) 设置音频数据通道延迟配置
+            </summary>
+            <param name="delay">延迟配置，单位毫秒</param>
+        </member>
+        <member name="M:ASEva.Agency.GetChannelMonitoringFlag(System.String)">
+            <summary>
+            (api:app=2.3.0) 获取指定通道的监控配置
+            </summary>
+            <param name="id">通道ID</param>
+            <returns>是否监控</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetChannelMonitoringFlag(System.String,System.Boolean)">
+            <summary>
+            (api:app=2.3.0) 设置指定通道的监控配置
+            </summary>
+            <param name="id">通道ID</param>
+            <param name="monitoring">是否监控，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
+        </member>
+        <member name="M:ASEva.Agency.GetAllChannelMonitoringKeys">
+            <summary>
+            (api:app=2.3.0) 获取所有正在监控的通道ID
+            </summary>
+            <returns>正在监控的通道ID列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetBusChannelStatus(System.Int32,System.Nullable{System.UInt32})">
+            <summary>
+            (api:app=2.3.0) 获取总线数据通道状态
+            </summary>
+            <param name="channel">总线通道，1~16</param>
+            <param name="toleranceMillisecond">无数据的容忍时长</param>
+            <returns>是否有数据</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetVideoChannelStatus(System.Int32,System.Nullable{System.UInt32},System.Collections.Generic.List{System.Double}@,System.Collections.Generic.List{System.Double}@)">
+            <summary>
+            (api:app=2.3.0) 获取视频数据通道状态
+            </summary>
+            <param name="channel">视频通道，0~23</param>
+            <param name="toleranceMillisecond">无数据的容忍时长</param>
+            <param name="interval">输出每帧数据之间的时间间隔曲线，单位秒</param>
+            <param name="delay">输出每帧数据的延迟曲线，单位秒</param>
+            <returns>是否有数据</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetAudioChannelStatus(System.Nullable{System.UInt32},System.Collections.Generic.List{System.Double}@,System.Collections.Generic.List{System.Double}@)">
+            <summary>
+            (api:app=2.3.0) 获取音频数据通道状态
+            </summary>
+            <param name="toleranceMillisecond">无数据的容忍时长</param>
+            <param name="interval">输出每帧数据之间的时间间隔曲线，单位秒</param>
+            <param name="delay">输出每帧数据的延迟曲线，单位秒</param>
+            <returns>是否有数据</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetRawChannelStatus(System.String,System.Nullable{System.UInt32})">
+            <summary>
+            (api:app=2.3.0) 获取原始数据通道状态
+            </summary>
+            <param name="protocol">原始数据通道ID</param>
+            <param name="toleranceMillisecond">无数据的容忍时长</param>
+            <returns>是否有数据</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetSampleChannelStatus(System.String,System.Nullable{System.UInt32},System.Collections.Generic.List{System.Double}@,System.Collections.Generic.List{System.Double}@)">
+            <summary>
+            (api:app=2.3.0) 获取样本数据通道状态
+            </summary>
+            <param name="protocol">样本数据通道ID</param>
+            <param name="toleranceMillisecond">无数据的容忍时长</param>
+            <param name="interval">输出每帧数据之间的时间间隔曲线，单位秒</param>
+            <param name="delay">输出每帧数据的延迟曲线，单位秒</param>
+            <returns>是否有数据</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetAvailableBusChannels">
+            <summary>
+            (api:app=2.3.0) 获取所有有效的总线通道
+            </summary>
+            <returns>有效的总线通道列表，值为1~16</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetAvailableVideoChannels">
+            <summary>
+            (api:app=2.3.0) 获取所有有效的视频通道
+            </summary>
+            <returns>有效的视频通道列表，值为0~23</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetAvailableRawChannels">
+            <summary>
+            (api:app=2.3.0) 获取所有有效的原始数据通道
+            </summary>
+            <returns>有效的原始数据通道列表，值为通道ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetAvailableSampleChannels">
+            <summary>
+            (api:app=2.3.0) 获取所有有效的样本数据通道
+            </summary>
+            <returns>有效的样本数据通道列表，值为通道ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetBusPayloadPercentage(System.Int32)">
+            <summary>
+            (api:app=2.3.0) 获取指定总线通道的负载百分比
+            </summary>
+            <param name="channel">总线通道，1~16</param>
+            <returns>总线通道的负载百分比，若无效则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.CreateWindowPanel(System.Object,System.String,System.String,System.Object@,ASEva.WindowClassInfo@)">
+            <summary>
+            (api:app=2.3.0) 创建窗口对象
+            </summary>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+            <param name="windowClassID">窗口组件ID</param>
+            <param name="transformID">分化ID，null表示不分化</param>
+            <param name="panel">新建的窗口对象，创建失败则为null</param>
+            <param name="info">新建窗口的组件信息，创建失败则为null</param>
+            <returns>创建结果，若成功则在释放窗口时需要调用 ASEva.Agency.UnregisterPanel </returns>
+        </member>
+        <member name="M:ASEva.Agency.CreateConfigPanel(System.Object,System.String,System.String,System.Object@,ASEva.DialogClassInfo@)">
+            <summary>
+            (api:app=2.3.0) 创建对话框对象
+            </summary>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+            <param name="dialogClassID">对话框组件ID</param>
+            <param name="transformID">分化ID，null表示不分化</param>
+            <param name="panel">新建的对话框对象，创建失败则为null</param>
+            <param name="info">新建对话框的组件信息，创建失败则为null</param>
+            <returns>创建结果，若成功则在释放窗口时需要调用 ASEva.Agency.UnregisterPanel </returns>
+        </member>
+        <member name="M:ASEva.Agency.UnregisterPanel(System.Object)">
+            <summary>
+            (api:app=2.3.0) 注销窗口或对话框对象
+            </summary>
+            <param name="panel">窗口或对话框对象</param>
+        </member>
+        <member name="M:ASEva.Agency.ConvertImageToCommon(System.Object)">
+            <summary>
+            (api:app=2.3.0) 转换平台特化图像对象至通用图像数据
+            </summary>
+            <param name="image">平台特化图像</param>
+            <returns>通用图像数据，转换失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.ConvertImageToPlatform(ASEva.Samples.CommonImage,System.Boolean)">
+            <summary>
+            (api:app=2.3.0) 转换通用图像数据至平台特化图像
+            </summary>
+            <param name="image">通用图像数据</param>
+            <param name="eto">是否转换至Eto图像，否则转换为当前UI框架对应的图像对象</param>
+            <returns>平台特化图像，转换失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetWindowClassInfo(System.String)">
+            <summary>
+            (api:app=2.3.0) 获取窗口组件信息
+            </summary>
+            <param name="windowClassID">窗口组件ID</param>
+            <returns>窗口组件信息，若未找到返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetWindowClassInfo(System.String,System.String)">
+            <summary>
+            (api:app=2.5.0) 获取分化窗口组件信息
+            </summary>
+            <param name="windowClassID">窗口组件ID</param>
+            <param name="transformID">分化ID</param>
+            <returns>分化窗口组件信息，若未找到返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetDialogClassInfo(System.String)">
+            <summary>
+            (api:app=2.3.0) 获取对话框组件信息
+            </summary>
+            <param name="dialogClassID">对话框组件ID</param>
+            <returns>对话框组件信息，若未找到返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetDialogClassInfo(System.String,System.String)">
+            <summary>
+            (api:app=2.5.0) 获取分化对话框组件信息
+            </summary>
+            <param name="dialogClassID">对话框组件ID</param>
+            <param name="transformID">分化ID</param>
+            <returns>分化对话框组件信息，若未找到返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.DecodeImage(System.Byte[])">
+            <summary>
+            (api:app=2.3.0) 解码图像数据
+            </summary>
+            <param name="imageData">JPG或PNG二进制数据</param>
+            <returns>解码后的通用图像数据，若失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.EncodeImage(ASEva.Samples.CommonImage,System.String)">
+            <summary>
+            (api:app=2.3.0) 编码图像数据
+            </summary>
+            <param name="image">通用图像数据</param>
+            <param name="format">编码格式，目前支持"jpg", "png"</param>
+            <returns>编码后的二进制数据，若失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetSignalTree">
+            <summary>
+            (api:app=2.3.0) 获取信号树
+            </summary>
+            <returns>信号树根节点下的所有子节点</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetPluginPackIDList">
+            <summary>
+            (api:app=2.3.0) 获取插件包ID列表
+            </summary>
+            <returns>插件包ID列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetPluginPackInfo(System.String)">
+            <summary>
+            (api:app=2.3.0) 获取插件包信息
+            </summary>
+            <param name="packID">插件包ID</param>
+            <returns>插件包信息，若无对应插件包则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.InstallPlugin(System.String)">
+            <summary>
+            (api:app=2.3.0) 安装插件（安装完毕后也需要重启才生效）
+            </summary>
+            <param name="dirPath">插件包文件夹，或包含若干插件包的文件夹</param>
+            <returns>是否安装了插件</returns>
+        </member>
+        <member name="M:ASEva.Agency.UninstallPlugin(System.String)">
+            <summary>
+            (api:app=2.3.0) 卸载插件
+            </summary>
+            <param name="packID">插件包ID</param>
+            <returns>是否卸载了插件</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetLogMessages">
+            <summary>
+            (api:app=2.3.0) 获取所有清单信息
+            </summary>
+            <returns>清单信息列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.IsReady">
+            <summary>
+            (api:app=2.3.1) 返回是否允许进行保存工程项目和开始session等操作
+            </summary>
+            <returns>是否允许进行保存工程项目和开始session等操作</returns>
+        </member>
+        <member name="M:ASEva.Agency.DisablePlugin(System.String)">
+            <summary>
+            (api:app=2.3.4) 禁用插件
+            </summary>
+            <param name="packID">插件包ID</param>
+        </member>
+        <member name="M:ASEva.Agency.EnablePlugin(System.String)">
+            <summary>
+            (api:app=2.3.4) 启用插件（需要重启应用程序后生效）
+            </summary>
+            <param name="packID">插件包ID</param>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.2.3
+            version=2.5.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -1309,6 +2123,12 @@
             (api:app=2.2.1) [可选实现] 获取文件写入需要的所有数据类型
             </summary>
             <returns>文件写入需要的所有数据类型</returns>
+        </member>
+        <member name="M:ASEva.ModuleConfig.MayCauseLowSpeed">
+            <summary>
+            (api:app=2.3.2) [可选实现] 获取是否会合法的导致极低（甚至停滞）的回放速度
+            </summary>
+            <returns>是否会合法的导致极低（甚至停滞）的回放速度</returns>
         </member>
         <member name="M:ASEva.ModuleConfig.DisableAll">
             <summary>
@@ -2395,7 +3215,7 @@
         </member>
         <member name="M:ASEva.Graph.SingleValueData.SetValue(System.Double)">
             <summary>
-            设置值
+            设置值（不推荐操作，将会导致合并结果异常）
             </summary>
             <param name="val">设置值</param>
         </member>
@@ -2425,6 +3245,415 @@
             <summary>
             (api:app=2.0.0) 图表数据的范围区间内验证方式
             </summary>
+        </member>
+        <member name="T:ASEva.MainWorkflow">
+            <summary>
+            (api:app=2.3.0) 主流程基类
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnInit(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.String@)">
+            <summary>
+            [可选实现][可含模态框] 初始化主流程
+            </summary>
+            <param name="appID">应用程序ID</param>
+            <param name="parameters">初始化参数</param>
+            <param name="uiCode">输出UI框架代号，若不使用UI则输出null</param>
+            <returns>初始化是否成功</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnRun(ASEva.MainWorkflowLoopCallback,System.String)">
+            <summary>
+            [必须实现][可含模态框] 运行主流程，需要在其中主循环中确保执行了 ASEva.CoreCallback.OnLoop
+            </summary>
+            <param name="callback">框架软件回调接口</param>
+            <param name="startupProject">初始项目文件路径</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnAppBasicInfo(ASEva.AppBasicInfo)">
+            <summary>
+            [可选实现] 通知应用程序的基本信息
+            </summary>
+            <param name="info">应用程序的基本信息</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnLicenseRequest(ASEva.LicenseRequestReason,System.String,ASEva.MainWorkflowLicenseCallback)">
+            <summary>
+            [可选实现][可含模态框] 许可证验证失败后发起新的请求
+            </summary>
+            <param name="reason">验证失败原因</param>
+            <param name="mac">机器码</param>
+            <param name="callback">框架软件的回调接口</param>
+            <returns>是否接受请求，如接受需稍后调用 ASEva.CoreCallback.OnRevalidateLicense </returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnCoreInitResult(ASEva.CoreInitResult,System.Boolean)">
+            <summary>
+            [可选实现][可含模态框] 通知框架软件的初始化结果
+            </summary>
+            <param name="result">框架软件的初始化结果</param>
+            <param name="revisionUpdated">是否更新了发行号</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnError(System.String)">
+            <summary>
+            [可选实现][可含模态框] 输出错误消息
+            </summary>
+            <param name="message">消息</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnNotice(System.String)">
+            <summary>
+            [可选实现][可含模态框] 输出一般消息
+            </summary>
+            <param name="message">消息</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnConfirm(System.String)">
+            <summary>
+            [可选实现][可含模态框] 输出确认消息，并返回是否确认
+            </summary>
+            <param name="message">消息</param>
+            <returns>是否确认</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnLog(System.String,ASEva.LogLevel)">
+            <summary>
+            (api:app=2.3.3) [可选实现] 输出清单消息
+            </summary>
+            <param name="message"></param>
+            <param name="level"></param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnDebugMessage(System.String)">
+            <summary>
+            [可选实现] 输出调试用消息
+            </summary>
+            <param name="message">消息</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnGetAppLanguage">
+            <summary>
+            [可选实现] 获取语言
+            </summary>
+            <returns>语言代号，null或"en"表示英文，"ch"表示中文</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnCheckMultiInstance">
+            <summary>
+            [可选实现] 返回是否允许多个实例同时运行
+            </summary>
+            <returns>是否允许多个实例同时运行</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnSelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
+            <summary>
+            [可选实现][可含模态框] 选择总线协议文件
+            </summary>
+            <param name="selected">已选择的总线协议文件</param>
+            <returns>新选择的总线协议文件</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnSelectBusMessage(System.String)">
+            <summary>
+            [可选实现][可含模态框] 选择总线报文
+            </summary>
+            <param name="originMessageID">原报文ID</param>
+            <returns>新报文ID</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnSelectSignal(ASEva.SignalConfig,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            [可选实现][可含模态框] 选择信号
+            </summary>
+            <param name="origin">原信号配置</param>
+            <param name="withScale">是否需要配置scale</param>
+            <param name="withSignBit">是否需要配置符号位信号</param>
+            <param name="unit">单位</param>
+            <returns>新信号配置</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnSelectSignals(ASEva.SelectSignalHandler,System.Collections.Generic.List{System.String})">
+            <summary>
+            [可选实现][可含模态框] 一次性选择多个信号
+            </summary>
+            <param name="handler">新选择信号后的回调函数</param>
+            <param name="existSignalIDList">已选择的信号ID列表</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnRunStandaloneTask(System.String,ASEva.MainWorkflowTaskCallback)">
+            <summary>
+            [可选实现][可含模态框] 显示正在进行的独立任务
+            </summary>
+            <param name="title">独立任务标题</param>
+            <param name="callback">框架软件的回调接口</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnOpenDialog(System.Object,ASEva.DialogClassInfo,System.String)">
+            <summary>
+            [可选实现][可含模态框] 打开对话框
+            </summary>
+            <param name="dialog">对话框对象，继承ConfigPanel</param>
+            <param name="info">对话框组件信息</param>
+            <param name="config">对话框初始配置</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnAddWindow(System.Object,ASEva.WindowClassInfo,System.String,System.Boolean)">
+            <summary>
+            [可选实现] 添加窗口至工作空间
+            </summary>
+            <param name="window">窗口对象，继承WindowPanel</param>
+            <param name="info">窗口组件信息</param>
+            <param name="config">窗口初始配置</param>
+            <param name="newWorkspaceIfNeeded">工作空间无足够空间时，是否在新工作空间添加（若不支持工作空间，则无视此选项）</param>
+            <returns>是否成功添加，若成功添加，在释放窗口时需要调用 ASEva.Agency.UnregisterPanel </returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnSetCurrentDialogTitle(System.String,ASEva.Samples.CommonImage)">
+            <summary>
+            [可选实现] 设置当前对话框的标题和图标
+            </summary>
+            <param name="title">标题</param>
+            <param name="icon">图标，分辨率为16x16</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnSetWindowTitle(System.Object,System.String,ASEva.Samples.CommonImage)">
+            <summary>
+            [可选实现] 设置窗口的标题和图标
+            </summary>
+            <param name="window">窗口对象，继承WindowPanel</param>
+            <param name="title">标题</param>
+            <param name="icon">图标，分辨率为16x16</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnResetData">
+            <summary>
+            [可选实现] 通知重置数据
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnInputData(System.Object)">
+            <summary>
+            [可选实现] 输入新数据
+            </summary>
+            <param name="data">新数据</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnStartSession">
+            <summary>
+            [可选实现] 通知正在开始session
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnStopSession">
+            <summary>
+            [可选实现] 通知正在结束session
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnEditRecordedSession(System.DateTime)">
+            <summary>
+            [可选实现][可含模态框] 编辑新采集的session信息
+            </summary>
+            <param name="recordSessionID">新采集的session ID</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnEditOfflineMapPath(System.String)">
+            <summary>
+            [可选实现][可含模态框] 编辑离线地图文件路径
+            </summary>
+            <param name="originPath">原始路径，若未设置则为null</param>
+            <returns>新路径，若未设置则为null</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnEditDataEncryption(ASEva.MainWorkflowEncryptionCallback)">
+            <summary>
+            [可选实现][可含模态框] 编辑数据加密选项
+            </summary>
+            <param name="callback">框架软件的回调接口</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnInstallPlugin(ASEva.InstallPluginLibraryInfo[],ASEva.InstallPluginDriverInfo[],ASEva.MainWorkflowInstallCallback)">
+            <summary>
+            [可选实现][可含模态框] 安装插件
+            </summary>
+            <param name="libs">插件关联的库信息列表</param>
+            <param name="drivers">插件关联的驱动和环境信息列表</param>
+            <param name="callback">框架软件的回调接口</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnNewProject">
+            <summary>
+            [可选实现] 通知正在新建工程项目
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnLoadProject(System.Xml.XmlDocument)">
+            <summary>
+            [可选实现] 通知新加载的工程项目
+            </summary>
+            <param name="xml">工程项目xml</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnSaveProject(System.Xml.XmlDocument)">
+            <summary>
+            [可选实现] 通知正在保存工程项目
+            </summary>
+            <param name="xml">工程项目xml</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnCheckReady">
+            <summary>
+            [可选实现] 返回主流程端是否允许进行保存工程项目和开始session等操作
+            </summary>
+            <returns>主流程端是否允许进行保存工程项目和开始session等操作</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnExiting(System.Boolean)">
+            <summary>
+            [可选实现][可含模态框] 通知正在退出应用程序
+            </summary>
+            <param name="force">是否为强制结束</param>
+            <returns>返回是否可退出，强制结束时将不起作用</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnExit">
+            <summary>
+            [必须实现] 退出主流程
+            </summary>
+        </member>
+        <member name="T:ASEva.AppBasicInfo">
+            <summary>
+            (api:app=2.3.0) 应用程序的基本信息
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.AppName">
+            <summary>
+            应用程序名称
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.AppIconPNG">
+            <summary>
+            应用程序的图标，为PNG文件二进制数据
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.AppVersion">
+            <summary>
+            应用程序版本
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.AppRevision">
+            <summary>
+            应用程序发行号，可为空（相同应用程序版本下的不同插件配置）
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.CoreVersion">
+            <summary>
+            框架软件的版本
+            </summary>
+        </member>
+        <member name="T:ASEva.LicenseRequestReason">
+            <summary>
+            (api:app=2.3.0) 许可证请求原因
+            </summary>
+        </member>
+        <member name="F:ASEva.LicenseRequestReason.InvalidLicense">
+            <summary>
+            未找到有效许可证
+            </summary>
+        </member>
+        <member name="F:ASEva.LicenseRequestReason.WrongMAC">
+            <summary>
+            当前许可证机器码错误
+            </summary>
+        </member>
+        <member name="F:ASEva.LicenseRequestReason.WrongVersion">
+            <summary>
+            当前许可证版本不支持
+            </summary>
+        </member>
+        <member name="F:ASEva.LicenseRequestReason.Expired">
+            <summary>
+            当前许可证已过期
+            </summary>
+        </member>
+        <member name="T:ASEva.CoreInitResult">
+            <summary>
+            (api:app=2.3.0) 框架软件的初始化结果
+            </summary>
+        </member>
+        <member name="F:ASEva.CoreInitResult.OK">
+            <summary>
+            成功
+            </summary>
+        </member>
+        <member name="F:ASEva.CoreInitResult.LoadLibraryFailed">
+            <summary>
+            加载库失败
+            </summary>
+        </member>
+        <member name="F:ASEva.CoreInitResult.InvalidComponent">
+            <summary>
+            含非法或失效组件
+            </summary>
+        </member>
+        <member name="F:ASEva.CoreInitResult.LicenseFailed">
+            <summary>
+            许可证验证失败
+            </summary>
+        </member>
+        <member name="F:ASEva.CoreInitResult.InstallComponentFailed">
+            <summary>
+            安装组件失败
+            </summary>
+        </member>
+        <member name="T:ASEva.MainWorkflowLoopCallback">
+            <summary>
+            (api:app=2.3.0) 在主流程中使用的主循环回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowLoopCallback.OnLoop">
+            <summary>
+            执行框架软件的主循环函数
+            </summary>
+        </member>
+        <member name="T:ASEva.MainWorkflowLicenseCallback">
+            <summary>
+            (api:app=2.3.0) 在主流程中使用的许可证验证回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowLicenseCallback.OnRevalidateLicense(System.String,System.String)">
+            <summary>
+            重新验证许可证
+            </summary>
+            <param name="license">许可证的Base64字符串，设为null表示放弃验证</param>
+            <param name="pluginCode">插件码的Base64字符串</param>
+        </member>
+        <member name="T:ASEva.MainWorkflowTaskCallback">
+            <summary>
+            (api:app=2.3.0) 在主流程中使用的获取独立任务状态回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowTaskCallback.GetTaskState">
+            <summary>
+            获取独立任务状态
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowTaskCallback.GetTaskStateDescription">
+            <summary>
+            获取当前状态描述
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowTaskCallback.GetTaskProgress">
+            <summary>
+            获取任务进度，单位百分比
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowTaskCallback.CancelTask">
+            <summary>
+            取消任务
+            </summary>
+        </member>
+        <member name="T:ASEva.MainWorkflowEncryptionCallback">
+            <summary>
+            (api:app=2.3.0) 在主流程中使用的配置数据加密选项的回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowEncryptionCallback.UnlockDataKey(System.String)">
+            <summary>
+            解锁
+            </summary>
+            <param name="key">旧密码，空表示使用默认密码</param>
+            <returns>是否成功解锁</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflowEncryptionCallback.UpdateDataKey(System.String)">
+            <summary>
+            更新密码
+            </summary>
+            <param name="key">新密码，空表示使用默认密码</param>
+        </member>
+        <member name="T:ASEva.MainWorkflowInstallCallback">
+            <summary>
+            (api:app=2.3.0) 在主流程中使用的安装插件的回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowInstallCallback.InstallLibrary(System.String)">
+            <summary>
+            安装库文件
+            </summary>
+            <param name="libraryID">插件关联的库ID</param>
+        </member>
+        <member name="M:ASEva.MainWorkflowInstallCallback.PrepareDriver(System.String)">
+            <summary>
+            准备驱动和环境等的文件，并返回安装文件的运行路径
+            </summary>
+            <param name="driverID">插件关联的驱动ID</param>
+            <returns>安装文件的运行路径</returns>
         </member>
         <member name="T:ASEva.NativeClass">
             <summary>
@@ -2504,9 +3733,15 @@
         </member>
         <member name="M:ASEva.Plugin.GetTaskClasses">
             <summary>
-            [可选实现] 获取插件包含的所有独立任务组件的定义对象时调用
+            [可选实现] 获取插件包含的所有独立任务组件的定义对象时被调用
             </summary>
             <returns>独立任务组件定义对象的列表</returns>
+        </member>
+        <member name="M:ASEva.Plugin.GetMainWorkflow">
+            <summary>
+            (api:app=2.3.0) [可选实现] 获取插件包含的主流程时被调用
+            </summary>
+            <returns>主流程对象</returns>
         </member>
         <member name="M:ASEva.Plugin.GetGlobalPathKeys">
             <summary>
@@ -2532,6 +3767,16 @@
         <member name="M:ASEva.Plugin.OnProjectSwitched">
             <summary>
             [可选实现] 在项目切换后（包括新建项目）被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.Plugin.OnDataPathSwitched">
+            <summary>
+            (api:app=2.4.0) 在数据根目录切换后被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.Plugin.OnDataLayerSwitched">
+            <summary>
+            (api:app=2.4.0) 在数据层级切换后被调用
             </summary>
         </member>
         <member name="M:ASEva.Plugin.OnSessionStarting">
@@ -2675,12 +3920,12 @@
         </member>
         <member name="P:ASEva.Sample.TimestampLocal">
             <summary>
-            绝对时间戳（本地时间），含年月日时分秒，毫秒
+            [依赖Agency] 绝对时间戳（本地时间），含年月日时分秒，毫秒
             </summary>
         </member>
         <member name="P:ASEva.Sample.TimestampUTC">
             <summary>
-            绝对时间戳（UTC时间），含年月日时分秒，毫秒
+            [依赖Agency] 绝对时间戳（UTC时间），含年月日时分秒，毫秒
             </summary>
         </member>
         <member name="M:ASEva.Sample.#ctor">
@@ -2904,6 +4149,93 @@
             总线报文样本列表
             </summary>
         </member>
+        <member name="T:ASEva.Samples.CommonImage">
+            <summary>
+            (api:app=2.3.0) 通用图像数据
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonImage.Width">
+            <summary>
+            图像宽度
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonImage.Height">
+            <summary>
+            图像高度
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonImage.WithAlpha">
+            <summary>
+            是否含有Alpha通道
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonImage.RowBytes">
+            <summary>
+            每行数据字节数
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonImage.Data">
+            <summary>
+            图像数据，每个像素的存放顺序为BGR或BGRA
+            </summary>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.Create(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            创建通用图像数据
+            </summary>
+            <param name="width">图像宽度</param>
+            <param name="height">图像高度</param>
+            <param name="withAlpha">是否带Alpha通道</param>
+            <returns>通用图像数据</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.LoadFile(System.String)">
+            <summary>
+            从文件读取图像
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>通用图像数据</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.LoadResource(System.String)">
+            <summary>
+            从资源读取图像
+            </summary>
+            <param name="resourceName">资源名称</param>
+            <returns>通用图像数据</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.FromBinary(System.Byte[])">
+            <summary>
+            (api:app=2.4.1) 从图像二进制数据转换
+            </summary>
+            <param name="binary">图像二进制数据，如jpeg、png等</param>
+            <returns>通用图像数据</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.FromRgba32(SixLabors.ImageSharp.Image{SixLabors.ImageSharp.PixelFormats.Rgba32})">
+            <summary>
+            (api:app=2.4.1) 从ImageSharp的Rgba32图像数据转换
+            </summary>
+            <param name="image">ImageSharp的Rgba32图像对象</param>
+            <returns>通用图像数据</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.Save(System.String)">
+            <summary>
+            保存至文件
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>是否成功保存</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.ToBinary(System.String)">
+            <summary>
+            (api:app=2.4.1) 转为图像二进制数据
+            </summary>
+            <param name="format">编码格式，目前支持"jpg", "png"</param>
+            <returns>图像二进制数据</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.ToRgba32">
+            <summary>
+            (api:app=2.4.1) 转为ImageSharp的Rgba32图像
+            </summary>
+            <returns>ImageSharp的Rgba32图像对象</returns>
+        </member>
         <member name="T:ASEva.Samples.ManualTriggerSample">
             <summary>
             (api:app=2.0.0) 手动触发器样本
@@ -3126,6 +4458,26 @@
             是否作了消歪曲
             </summary>
         </member>
+        <member name="P:ASEva.Samples.CommonCameraMeta.K3">
+            <summary>
+            (api:app=2.2.4) K3
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonCameraMeta.K4">
+            <summary>
+            (api:app=2.2.4) K4
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonCameraMeta.K5">
+            <summary>
+            (api:app=2.2.4) K5
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonCameraMeta.K6">
+            <summary>
+            (api:app=2.2.4) K6
+            </summary>
+        </member>
         <member name="T:ASEva.Samples.DefaultCameraMeta">
             <summary>
             (api:app=2.0.0) 默认摄像头关联信息（标准模型）
@@ -3331,9 +4683,15 @@
             (api:app=2.0.0) 视频帧样本
             </summary>
         </member>
+        <member name="P:ASEva.Samples.VideoFrameSample.CommonImage">
+            <summary>
+            (api:app=2.3.0) 通用图像数据
+            </summary>
+            <value></value>
+        </member>
         <member name="P:ASEva.Samples.VideoFrameSample.Image">
             <summary>
-            获取视频帧的位图图像
+            [依赖Agency] 获取视频帧的位图图像（平台特化对象）
             </summary>
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.ChannelIndex">
@@ -3393,7 +4751,18 @@
         </member>
         <member name="M:ASEva.Samples.VideoFrameSample.#ctor(System.Object,ASEva.IntSize,System.Int32,System.DateTime,System.Double,System.Double)">
             <summary>
-            默认构造函数
+            [依赖Agency] 默认构造函数
+            </summary>
+            <param name="image">图像</param>
+            <param name="rawSize">图像的原始大小</param>
+            <param name="channelIndex">通道</param>
+            <param name="bas">Session ID</param>
+            <param name="offset">相对时间戳</param>
+            <param name="timeline">时间线</param>
+        </member>
+        <member name="M:ASEva.Samples.VideoFrameSample.#ctor(ASEva.Samples.CommonImage,ASEva.IntSize,System.Int32,System.DateTime,System.Double,System.Double)">
+            <summary>
+            (api:app=2.3.0) 默认构造函数
             </summary>
             <param name="image">图像</param>
             <param name="rawSize">图像的原始大小</param>
@@ -3774,7 +5143,12 @@
         </member>
         <member name="F:ASEva.WebApiResult.Responsed">
             <summary>
-            成功得到响应
+            已弃用，应使用 ASEva.WebApiResult.Responded
+            </summary>
+        </member>
+        <member name="F:ASEva.WebApiResult.Responded">
+            <summary>
+            (api:app=2.3.0) 成功得到响应
             </summary>
         </member>
         <member name="T:ASEva.WebApiContext">
@@ -4206,6 +5580,666 @@
             对应的枚举值（若存在枚举信息）
             </summary>
         </member>
+        <member name="T:ASEva.SystemStatus">
+            <summary>
+            (api:app=2.3.0) 系统状态 
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.ActualReplaySpeed">
+            <summary>
+            实际回放速度（倍速）
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.TargetReplaySpeed">
+            <summary>
+            目标回放速度（倍速）
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.CurrentLoggerMessage">
+            <summary>
+            最新清单消息
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.DisplayLag">
+            <summary>
+            显示延迟，单位毫秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.ContinuousFileWriteQueue">
+            <summary>
+            连续数据或缓存数据写入队列长度，单位秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.EventFileWriteQueue">
+            <summary>
+            事件数据写入队列长度，单位秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.VideoProcessQueueCapacity">
+            <summary>
+            视频处理队列长度限制
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.VideoProcessQueue">
+            <summary>
+            视频处理队列长度
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.AudioVolume">
+            <summary>
+            音量（倍数）
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.CPUUsage">
+            <summary>
+            CPU使用率，单位百分比
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.CPUUsageRatio">
+            <summary>
+            CPU使用率的乘数
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.MemoryCapacity">
+            <summary>
+            内存总容量，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.MemoryFree">
+            <summary>
+            内存可用容量，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.MemoryWarningThreshold">
+            <summary>
+            内存可用容量的警告阈值，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.MemoryErrorThreshold">
+            <summary>
+            内存可用容量的最小阈值，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.StorageCapacity">
+            <summary>
+            当前数据目录所在磁盘的总容量，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.StorageFree">
+            <summary>
+            当前数据目录所在磁盘可用容量，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.StorageFreeHours">
+            <summary>
+            根据当前数据目录所在磁盘可用容量预估的时长，单位小时
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.StorageWarningThreshold">
+            <summary>
+            当前数据目录所在磁盘可用容量的警告阈值，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.StorageErrorThreshold">
+            <summary>
+            当前数据目录所在磁盘可用容量的最小阈值，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.WorkthreadHeartBeatTime">
+            <summary>
+            最近一次基础线程心跳时间，格式为yyyyMMddHHmmss.fff
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.WorkthreadCurrentLocation">
+            <summary>
+            基础线程当前运行位置
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.WorkthreadLoopTime">
+            <summary>
+            基础线程循环平均运行时间（最近），单位毫秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.ProcthreadHeartBeatTime">
+            <summary>
+            最近一次处理线程心跳时间，格式为yyyyMMddHHmmss.fff
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.ProcthreadCurrentLocation">
+            <summary>
+            处理线程当前运行位置
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.ProcthreadLoopTime">
+            <summary>
+            处理线程循环平均运行时间（最近），单位毫秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.MainthreadLoopTime">
+            <summary>
+            主线程循环平均运行时间（最近），单位毫秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.BusDataFlow">
+            <summary>
+            总线数据流量，单位字节
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.BusDeviceReadTime">
+            <summary>
+            总线设备接收一帧数据的最大耗时，单位微秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.VideoDataFlow">
+            <summary>
+            视频数据流量，单位像素数
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.VideoDeviceReadTime">
+            <summary>
+            视频设备接收一帧数据的最大耗时，单位微秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.StartSessionTime">
+            <summary>
+            开始session耗时，单位毫秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.StopSessionTime">
+            <summary>
+            结束session耗时，单位毫秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.ReplayNeck">
+            <summary>
+            回放速度瓶颈
+            </summary>
+        </member>
+        <member name="T:ASEva.WindowClassInfo">
+            <summary>
+            (api:app=2.3.0) 窗口组件信息
+            </summary>
+        </member>
+        <member name="P:ASEva.WindowClassInfo.OwnerPluginID">
+            <summary>
+            所属插件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.WindowClassInfo.ID">
+            <summary>
+            组件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.WindowClassInfo.TransformID">
+            <summary>
+            分化ID
+            </summary>
+        </member>
+        <member name="P:ASEva.WindowClassInfo.TransformConfig">
+            <summary>
+            (api:app=2.5.0) 注册分化窗口组件的配置字符串
+            </summary>
+        </member>
+        <member name="P:ASEva.WindowClassInfo.Title">
+            <summary>
+            窗口标题
+            </summary>
+        </member>
+        <member name="P:ASEva.WindowClassInfo.Icon">
+            <summary>
+            窗口图标，分辨率为16x16
+            </summary>
+        </member>
+        <member name="P:ASEva.WindowClassInfo.MultipleSupported">
+            <summary>
+            是否支持同时打开多个窗口
+            </summary>
+        </member>
+        <member name="P:ASEva.WindowClassInfo.TransformClasses">
+            <summary>
+            分化的窗口组件信息
+            </summary>
+        </member>
+        <member name="T:ASEva.DialogClassInfo">
+            <summary>
+            (api:app=2.3.0) 对话框组件信息
+            </summary>
+        </member>
+        <member name="P:ASEva.DialogClassInfo.OwnerPluginID">
+            <summary>
+            所属插件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.DialogClassInfo.ID">
+            <summary>
+            组件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.DialogClassInfo.TransformID">
+            <summary>
+            分化ID
+            </summary>
+        </member>
+        <member name="P:ASEva.DialogClassInfo.TransformConfig">
+            <summary>
+            (api:app=2.5.0) 注册分化对话框组件的配置字符串
+            </summary>
+        </member>
+        <member name="P:ASEva.DialogClassInfo.Title">
+            <summary>
+            对话框标题
+            </summary>
+        </member>
+        <member name="P:ASEva.DialogClassInfo.Icon">
+            <summary>
+            对话框图标，分辨率为16x16
+            </summary>
+        </member>
+        <member name="P:ASEva.DialogClassInfo.TransformClasses">
+            <summary>
+            分化的对话框组件信息
+            </summary>
+        </member>
+        <member name="T:ASEva.ProcessorClassInfo">
+            <summary>
+            (api:app=2.3.0) 数据处理组件信息
+            </summary>
+        </member>
+        <member name="P:ASEva.ProcessorClassInfo.OwnerPluginID">
+            <summary>
+            所属插件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.ProcessorClassInfo.ID">
+            <summary>
+            组件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.ProcessorClassInfo.Title">
+            <summary>
+            数据处理组件名称
+            </summary>
+        </member>
+        <member name="T:ASEva.NativeLibraryType">
+            <summary>
+            (api:app=2.3.0) C++库类别
+            </summary>
+        </member>
+        <member name="F:ASEva.NativeLibraryType.Native">
+            <summary>
+            一般原生库
+            </summary>
+        </member>
+        <member name="F:ASEva.NativeLibraryType.Bus">
+            <summary>
+            总线设备库
+            </summary>
+        </member>
+        <member name="F:ASEva.NativeLibraryType.Video">
+            <summary>
+            视频设备库
+            </summary>
+        </member>
+        <member name="F:ASEva.NativeLibraryType.Processor">
+            <summary>
+            数据处理库
+            </summary>
+        </member>
+        <member name="F:ASEva.NativeLibraryType.Device">
+            <summary>
+            一般设备库
+            </summary>
+        </member>
+        <member name="F:ASEva.NativeLibraryType.FileIO">
+            <summary>
+            文件读写库
+            </summary>
+        </member>
+        <member name="T:ASEva.NativeClassInfo">
+            <summary>
+            (api:app=2.3.0) C++组件信息
+            </summary>
+        </member>
+        <member name="P:ASEva.NativeClassInfo.OwnerPluginID">
+            <summary>
+            所属插件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.NativeClassInfo.ID">
+            <summary>
+            组件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.NativeClassInfo.Title">
+            <summary>
+            C++组件名称
+            </summary>
+        </member>
+        <member name="P:ASEva.NativeClassInfo.NativeType">
+            <summary>
+            对应的类型ID
+            </summary>
+        </member>
+        <member name="P:ASEva.NativeClassInfo.LibraryVersions">
+            <summary>
+            绑定的各C++库版本
+            </summary>
+        </member>
+        <member name="T:ASEva.TaskClassInfo">
+            <summary>
+            (api:app=2.3.0) 独立任务组件信息
+            </summary>
+        </member>
+        <member name="P:ASEva.TaskClassInfo.OwnerPluginID">
+            <summary>
+            所属插件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.TaskClassInfo.ID">
+            <summary>
+            组件ID
+            </summary>
+        </member>
+        <member name="P:ASEva.TaskClassInfo.Title">
+            <summary>
+            独立任务组件名称
+            </summary>
+        </member>
+        <member name="T:ASEva.SessionFilterFlags">
+            <summary>
+            (api:app=2.3.0) Session筛选标志位
+            </summary>
+        </member>
+        <member name="P:ASEva.SessionFilterFlags.SearchTrue">
+            <summary>
+            符合搜索条件
+            </summary>
+        </member>
+        <member name="P:ASEva.SessionFilterFlags.CheckTrue">
+            <summary>
+            已选中
+            </summary>
+        </member>
+        <member name="T:ASEva.DeviceStatusDetail">
+            <summary>
+            (api:app=2.3.0) 详细的设备状态信息
+            </summary>
+        </member>
+        <member name="P:ASEva.DeviceStatusDetail.Status">
+            <summary>
+            设备状态
+            </summary>
+        </member>
+        <member name="P:ASEva.DeviceStatusDetail.Description">
+            <summary>
+            状态详细描述
+            </summary>
+        </member>
+        <member name="T:ASEva.CreatePanelResult">
+            <summary>
+            (api:app=2.3.0) 创建窗口对象或对话框对象的结果
+            </summary>
+        </member>
+        <member name="F:ASEva.CreatePanelResult.OK">
+            <summary>
+            创建成功
+            </summary>
+        </member>
+        <member name="F:ASEva.CreatePanelResult.InvalidCaller">
+            <summary>
+            无效的调用者
+            </summary>
+        </member>
+        <member name="F:ASEva.CreatePanelResult.ClassNotFound">
+            <summary>
+            未找到类型
+            </summary>
+        </member>
+        <member name="F:ASEva.CreatePanelResult.CreateFailed">
+            <summary>
+            创建失败
+            </summary>
+        </member>
+        <member name="F:ASEva.CreatePanelResult.SystemBusy">
+            <summary>
+            系统繁忙
+            </summary>
+        </member>
+        <member name="F:ASEva.CreatePanelResult.AlreadyExist">
+            <summary>
+            窗口已存在（不支持多窗口）
+            </summary>
+        </member>
+        <member name="T:ASEva.SignalTreeNodeType">
+            <summary>
+            (api:app=2.3.0) 信号树节点类别
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalTreeNodeType.Category">
+            <summary>
+            I级：信号大类
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalTreeNodeType.BusProtocol">
+            <summary>
+            I级：总线协议
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalTreeNodeType.Type">
+            <summary>
+            II级：信号小类
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalTreeNodeType.BusMessage">
+            <summary>
+            II级：总线报文
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalTreeNodeType.GeneralSignal">
+            <summary>
+            III级：一般信号
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalTreeNodeType.SystemSignal">
+            <summary>
+            III级：系统信号
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalTreeNodeType.NormalBusSignal">
+            <summary>
+            III级：一般总线信号
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalTreeNodeType.MultiplexedBusSignal">
+            <summary>
+            III级：复用的总线信号
+            </summary>
+        </member>
+        <member name="T:ASEva.SignalTreeNode">
+            <summary>
+            (api:app=2.3.0) 信号树节点
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalTreeNode.Type">
+            <summary>
+            节点类别
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalTreeNode.ID">
+            <summary>
+            节点ID
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalTreeNode.Name">
+            <summary>
+            节点名称
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalTreeNode.Children">
+            <summary>
+            子节点
+            </summary>
+        </member>
+        <member name="T:ASEva.PluginPackStatus">
+            <summary>
+            (api:app=2.3.4) 插件包状态
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginPackStatus.Disabled">
+            <summary>
+            已禁用
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginPackStatus.Enabled">
+            <summary>
+            已启用
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginPackStatus.ToBeEnabled">
+            <summary>
+            应用程序重启后启用
+            </summary>
+        </member>
+        <member name="T:ASEva.PluginPackInfo">
+            <summary>
+            (api:app=2.3.0) 插件包信息
+            </summary>
+        </member>
+        <member name="P:ASEva.PluginPackInfo.ID">
+            <summary>
+            插件包ID
+            </summary>
+        </member>
+        <member name="P:ASEva.PluginPackInfo.Name">
+            <summary>
+            插件包名称
+            </summary>
+        </member>
+        <member name="P:ASEva.PluginPackInfo.Version">
+            <summary>
+            插件包版本
+            </summary>
+        </member>
+        <member name="P:ASEva.PluginPackInfo.Brief">
+            <summary>
+            插件包简介
+            </summary>
+        </member>
+        <member name="P:ASEva.PluginPackInfo.Status">
+            <summary>
+            (api:app=2.3.4) 插件包状态
+            </summary>
+        </member>
+        <member name="P:ASEva.PluginPackInfo.AppLayerDetails">
+            <summary>
+            应用层详情
+            </summary>
+        </member>
+        <member name="P:ASEva.PluginPackInfo.NativeLayerDetails">
+            <summary>
+            原生层详情
+            </summary>
+        </member>
+        <member name="T:ASEva.InstallPluginLibraryStatus">
+            <summary>
+            (api:app=2.3.0) 插件关联的库是否可安装的状态
+            </summary>
+        </member>
+        <member name="F:ASEva.InstallPluginLibraryStatus.OK">
+            <summary>
+            可安装
+            </summary>
+        </member>
+        <member name="F:ASEva.InstallPluginLibraryStatus.PlatformUnsupported">
+            <summary>
+            平台不支持（UI）
+            </summary>
+        </member>
+        <member name="F:ASEva.InstallPluginLibraryStatus.TooNew">
+            <summary>
+            插件太新
+            </summary>
+        </member>
+        <member name="F:ASEva.InstallPluginLibraryStatus.TooOld">
+            <summary>
+            插件太旧
+            </summary>
+        </member>
+        <member name="T:ASEva.InstallPluginLibraryInfo">
+            <summary>
+            (api:app=2.3.0) 插件关联库的信息
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginLibraryInfo.LibraryID">
+            <summary>
+            库ID
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginLibraryInfo.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginLibraryInfo.Status">
+            <summary>
+            是否可安装的状态
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginLibraryInfo.Version">
+            <summary>
+            插件版本
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginLibraryInfo.InstalledVersion">
+            <summary>
+            已安装插件的版本，若未安装则为null
+            </summary>
+        </member>
+        <member name="T:ASEva.InstallPluginDriverInfo">
+            <summary>
+            (api:app=2.3.0) 插件关联驱动和环境的信息
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginDriverInfo.DriverID">
+            <summary>
+            驱动ID
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginDriverInfo.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginDriverInfo.Attached">
+            <summary>
+            是否随付在安装包中
+            </summary>
+        </member>
+        <member name="T:ASEva.LogMessage">
+            <summary>
+            (api:app=2.3.0) 清单信息
+            </summary>
+        </member>
+        <member name="P:ASEva.LogMessage.Type">
+            <summary>
+            清单信息级别
+            </summary>
+        </member>
+        <member name="P:ASEva.LogMessage.Text">
+            <summary>
+            清单信息文本
+            </summary>
+        </member>
+        <member name="P:ASEva.LogMessage.Time">
+            <summary>
+            清单信息时间
+            </summary>
+        </member>
+        <member name="P:ASEva.LogMessage.RepeatedCount">
+            <summary>
+            清单信息重复次数
+            </summary>
+        </member>
         <member name="T:ASEva.Utility.AttributeParser">
             <summary>
             (api:app=2.0.0) XML属性解析
@@ -4541,7 +6575,12 @@
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsNotNagtive(System.String)">
             <summary>
-            是否为非负数值字符串
+            已弃用，应使用 ASEva.Utility.RegexUtil.IsNotNegative
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.RegexUtil.IsNotNegative(System.String)">
+            <summary>
+            (api:app=2.3.0) 是否为非负数值字符串
             </summary>
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsUint(System.String)">

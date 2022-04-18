@@ -57,6 +57,14 @@
             "fileVersion": "0.0.1.0"
           }
         }
+      },
+      "SixLabors.ImageSharp/1.0.0.0": {
+        "runtime": {
+          "SixLabors.ImageSharp.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.4.0"
+          }
+        }
       }
     }
   },
@@ -87,6 +95,11 @@
       "sha512": ""
     },
     "MonoMac/0.0.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SixLabors.ImageSharp/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
