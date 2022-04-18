@@ -22,8 +22,10 @@ namespace ASEva.UIWpf
 
             var platform = new global::Eto.Wpf.Platform();
             platform.Add<WebView.IHandler>(() => new WebView2Handler());
-
             var app = new Application(platform);
+
+            SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerWpf();
+
             return app;
         }
 

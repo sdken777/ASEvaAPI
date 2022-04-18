@@ -29,8 +29,10 @@ namespace ASEva.UICoreWF
             platform.Add<SearchBox.IHandler>(() => new SearchBoxHandler());
             platform.Add<WebView.IHandler>(() => new WebView2Handler());
             platform.Add<ComboBox.IHandler>(() => new ComboBoxHandler());
-
             var app = new Application(platform);
+
+            SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerCoreWF();
+
             return app;
         }
 

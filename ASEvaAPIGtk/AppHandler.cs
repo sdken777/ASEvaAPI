@@ -33,8 +33,10 @@ namespace ASEva.UIGtk
             platform.Add<Drawable.IHandler>(() => new DrawableHandler());
             platform.Add<Screen.IScreensHandler>(() => new ScreensHandler());
             platform.Add<Dialog.IHandler>(() => new DialogHandler());
-
             var app = new Application(platform);
+
+            SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerGtk();
+
             return app;
         }
 
