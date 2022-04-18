@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 2, 0); // 支持SetClientSizeHandler
+            return new Version(2, 1, 2, 1); // SetMinimumClientSize确保最小尺寸不小于设定值
         }
     }
 }

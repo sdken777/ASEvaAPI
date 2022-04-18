@@ -20,7 +20,7 @@ namespace ASEva.UIGtk
             else if (window is Dialog)
             {
                 var dialog = window as Dialog;
-                if (dialog.WindowStyle == WindowStyle.Default) window.MinimumSize = new Size(logicalWidth + 56, logicalHeight + 103);
+                if (dialog.WindowStyle == WindowStyle.Default) window.MinimumSize = new Size(logicalWidth + 78, logicalHeight + 120);
                 else if (dialog.WindowStyle == WindowStyle.None) window.MinimumSize = new Size(logicalWidth + 4, logicalHeight + 1);
                 else window.MinimumSize = new Size(logicalWidth, logicalHeight);
             }
