@@ -20,7 +20,25 @@ namespace ASEva.UIGtk
             else if (window is Dialog)
             {
                 var dialog = window as Dialog;
-                if (dialog.WindowStyle == WindowStyle.Default) window.MinimumSize = new Size(logicalWidth + 78, logicalHeight + 120);
+                if (dialog.WindowStyle == WindowStyle.Default)
+                {
+                    var gdialog = dialog.ControlObject as Gtk.Dialog;
+                    gdialog.VisibilityNotifyEvent += delegate
+                    {
+                        if (!gdialog.Visible) return;
+                        if (gdialog.Window != null)
+                        {
+                            var gwindow = gdialog.Window;
+                            int dw = gwindow.Width - dialog.ClientSize.Width;
+                            int dh = gwindow.Height - dialog.ClientSize.Height;
+                            window.MinimumSize = new Size(logicalWidth + dw, logicalHeight + dh);
+                        }
+                        else
+                        {
+                            window.MinimumSize = new Size(logicalWidth + 78, logicalHeight + 120);
+                        }
+                    };
+                }
                 else if (dialog.WindowStyle == WindowStyle.None) window.MinimumSize = new Size(logicalWidth + 4, logicalHeight + 1);
                 else window.MinimumSize = new Size(logicalWidth, logicalHeight);
             }

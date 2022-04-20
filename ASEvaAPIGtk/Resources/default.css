@@ -22,12 +22,14 @@ button.titlebutton
 
 entry
 {
-  min-height: 20pt;
+  min-height: 16pt;
+  padding-top: 2pt;
+  padding-bottom: 2pt;
 }
 
 spinbutton
 {
-  min-height: 20pt;
+  min-height: 16pt;
 }
 
 spinbutton > button

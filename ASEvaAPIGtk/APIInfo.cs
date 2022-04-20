@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 3, 0); // 更改样式令字体尺寸等与其他平台大致相同
+            return new Version(2, 1, 3, 1); // 改良SetMinimumClientSize
         }
     }
 }
