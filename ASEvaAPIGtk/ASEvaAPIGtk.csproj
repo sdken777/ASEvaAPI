@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\*.*" />
+    <EmbeddedResource Include="Resources\*.*">
+      <LogicalName>%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="**\*.glade" />
     <EmbeddedResource Include="**\*.glade">
       <LogicalName>%(Filename)%(Extension)</LogicalName>

@@ -1,4 +1,5 @@
 using System;
+using ASEva.Utility;
 using ASEva.UIEto;
 using Eto.Drawing;
 using Eto.Forms;
@@ -36,6 +37,14 @@ namespace ASEva.UIGtk
             var app = new Application(platform);
 
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerGtk();
+
+            var cssProvider = new Gtk.CssProvider();
+            cssProvider.LoadFromData(ResourceLoader.LoadText("default.css"));
+            foreach (var screen in Screen.Screens)
+            {
+                var gdkMonitor = screen.ControlObject as Gdk.Monitor;
+                Gtk.StyleContext.AddProviderForScreen(gdkMonitor.Display.DefaultScreen, cssProvider, Gtk.StyleProviderPriority.User);
+            }
 
             return app;
         }

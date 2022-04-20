@@ -1,0 +1,41 @@
+*
+{
+  font-size: 9.5pt;
+}
+
+button
+{
+  padding-left: 4pt;
+  padding-right: 4pt;
+  padding-top: 2pt;
+  padding-bottom: 2pt;
+  min-height: 16pt;
+}
+
+button.titlebutton
+{
+  padding-left: 1pt;
+  padding-right: 1pt;
+  padding-top: 2pt;
+  padding-bottom: 2pt;
+}
+
+entry
+{
+  min-height: 20pt;
+}
+
+spinbutton
+{
+  min-height: 20pt;
+}
+
+spinbutton > button
+{
+  padding: 0pt;
+}
+
+treeview > entry
+{
+  min-height: 0pt;
+}
