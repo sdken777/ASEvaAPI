@@ -18,7 +18,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 0, 1, 0); // 支持SetClientSizeHandler
+            return new Version(1, 0, 1, 1); // 改良SetMinimumClientSize
         }
     }
 }

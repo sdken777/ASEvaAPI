@@ -16,8 +16,16 @@ namespace ASEva.UIWpf
         {
             var wpfWindow = window.ControlObject as System.Windows.Window;
             if (wpfWindow.WindowStyle == System.Windows.WindowStyle.None) window.MinimumSize = new Size(logicalWidth, logicalHeight);
-            else if (wpfWindow.WindowStyle == System.Windows.WindowStyle.SingleBorderWindow) window.MinimumSize = new Size(logicalWidth + 14, logicalHeight + 37);
-            else if (wpfWindow.WindowStyle == System.Windows.WindowStyle.ThreeDBorderWindow) window.MinimumSize = new Size(logicalWidth + 16, logicalHeight + 39);
+            else if (wpfWindow.WindowStyle == System.Windows.WindowStyle.SingleBorderWindow || wpfWindow.WindowStyle == System.Windows.WindowStyle.ThreeDBorderWindow)
+            {
+                wpfWindow.Loaded += delegate
+                {
+                    var content = wpfWindow.Content as System.Windows.FrameworkElement;
+                    var dw = (int)Math.Round(wpfWindow.ActualWidth - content.ActualWidth);
+                    var dh = (int)Math.Round(wpfWindow.ActualHeight - content.ActualHeight);
+                    window.MinimumSize = new Size(logicalWidth + dw, logicalHeight + dh);
+                };
+            }
             else window.MinimumSize = new Size(logicalWidth, logicalHeight);
         }
     }
