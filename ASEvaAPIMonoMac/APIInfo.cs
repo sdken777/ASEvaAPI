@@ -16,7 +16,7 @@ namespace ASEva.UIGtk
     /// </summary>
     public class APIInfo
     {
-        /// <summary>5
+        /// <summary>
         /// (api:monomac=1.0.0) 获取API版本
         /// </summary>
         /// <returns>API版本</returns>
