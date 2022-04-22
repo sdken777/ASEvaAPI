@@ -5,9 +5,9 @@ using ASEva.UIEto;
 
 namespace ASEva.UIMonoMac
 {
-    class SetDefaultMenuHandlerMonoMac : SetDefaultMenuHandler
+    class InitWindowHandlerMonoMac : InitWindowHandler
     {
-        public void SetDefaultMenu(Window window)
+        public void InitWindow(Window window)
         {
             if (window.Menu != null) return;
 

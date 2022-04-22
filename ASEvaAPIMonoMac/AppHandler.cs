@@ -32,7 +32,7 @@ namespace ASEva.UIMonoMac
             var appHandler = app.Handler as Eto.Mac.Forms.ApplicationHandler;
             appHandler.AppDelegate = new AppDelegate();
 
-            SetContentExtensions.DefaultMenuSetter = new SetDefaultMenuHandlerMonoMac();
+            SetContentExtensions.WindowInitializer = new InitWindowHandlerMonoMac();
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerMonoMac();
 
             return app;

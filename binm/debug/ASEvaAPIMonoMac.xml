@@ -6,11 +6,11 @@
     <members>
         <member name="T:ASEva.UIGtk.APIInfo">
             <summary>
-            version=1.0.2
+            version=1.0.3
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.APIInfo.GetAPIVersion">
-            <summary>
+            <summary>5
             (api:monomac=1.0.0) 获取API版本
             </summary>
             <returns>API版本</returns>
