@@ -24,6 +24,7 @@ namespace ASEva.UIWpf
             platform.Add<WebView.IHandler>(() => new WebView2Handler());
             var app = new Application(platform);
 
+            SetContentExtensions.WindowInitializer = new InitWindowHandlerWpf();
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerWpf();
 
             return app;

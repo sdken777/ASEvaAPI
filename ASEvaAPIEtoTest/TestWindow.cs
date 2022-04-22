@@ -172,17 +172,19 @@ namespace ASEvaAPIEtoTest
             var layoutRow = layout.AddRowLayout();
             var webView = layout.AddControl(new WebView(), true, 500, 200) as WebView;
 
-            layoutRow.AddButton(t["web-go-back"]).Click += delegate { webView.GoBack(); };
-            layoutRow.AddButton(t["web-go-forward"]).Click += delegate { webView.GoForward(); };
+            layoutRow.AddButtonPanel(Bitmap.FromResource("backward.png")).Click += delegate { webView.GoBack(); };
+            layoutRow.AddButtonPanel(Bitmap.FromResource("forward.png")).Click += delegate { webView.GoForward(); };
+            layoutRow.AddSeparator();
             var textBox = layoutRow.AddControl(new TextBox(), true) as TextBox;
-            layoutRow.AddButton(t["web-go-url"]).Click += delegate
+            layoutRow.AddButtonPanel(t["web-go-url"]).Click += delegate
             {
                 if (!String.IsNullOrEmpty(textBox.Text))
                 {
                     webView.Url = new Uri(textBox.Text.StartsWith("http") ? textBox.Text : ("http://" + textBox.Text));
                 }
             };
-            layoutRow.AddButton(t["web-call-script"]).Click += delegate
+            layoutRow.AddSeparator();
+            layoutRow.AddButtonPanel(t["web-call-script"]).Click += delegate
             {
                 webView.ExecuteScriptAsync("callScript()");
             };

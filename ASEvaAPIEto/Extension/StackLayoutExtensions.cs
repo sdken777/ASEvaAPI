@@ -19,6 +19,22 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
+        /// (api:eto=2.3.3) 添加分割线
+        /// </summary>
+        /// <param name="stackLayout">堆叠布局</param>
+        public static void AddSeparator(this StackLayout stackLayout)
+        {
+            if (stackLayout.Orientation == Orientation.Horizontal)
+            {
+                stackLayout.Items.Add(new StackLayoutItem(new Panel{ Width = 1, BackgroundColor = Colors.LightGrey }, VerticalAlignment.Stretch));
+            }
+            else
+            {
+                stackLayout.Items.Add(new StackLayoutItem(new Panel{ Height = 1, BackgroundColor = Colors.LightGrey }, HorizontalAlignment.Stretch));
+            }
+        }
+
+        /// <summary>
         /// 添加文字标签至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
@@ -99,6 +115,47 @@ namespace ASEva.UIEto
             if (logicalHeight > 0) button.SetLogicalHeight(logicalHeight);
             stackLayout.Items.Add(new StackLayoutItem(button, expand));
             return button;
+        }
+
+        /// <summary>
+        /// (api:eto=2.3.3) 添加文字按键面板至堆叠布局
+        /// </summary>
+        /// <param name="stackLayout">堆叠布局</param>
+        /// <param name="text">文字</param>
+        /// <param name="expand">是否延布局方向撑满</param>
+        /// <param name="logicalWidth">初始宽度，0表示不设置</param>
+        /// <param name="logicalHeight">初始高度，0表示不设置</param>
+        /// <param name="logicalPadding">按钮边框与文字的间距</param>
+        /// <returns>创建的按键面板对象</returns>
+        public static ButtonPanel AddButtonPanel(this StackLayout stackLayout, String text, bool expand = false, int logicalWidth = 0, int logicalHeight = 0, int logicalPadding = 8)
+        {
+            if (text == null) text = "";
+            var panel = new ButtonPanel(text, logicalPadding);
+            stackLayout.AddControl(panel, expand, logicalWidth, logicalHeight);
+            return panel;
+        }
+        /// <summary>
+        /// (api:eto=2.3.3) 添加图像按键面板至堆叠布局
+        /// </summary>
+        /// <param name="stackLayout">堆叠布局</param>
+        /// <param name="image">图像</param>
+        /// <param name="expand">是否延布局方向撑满</param>
+        /// <param name="logicalWidth">初始宽度，0表示不设置</param>
+        /// <param name="logicalHeight">初始高度，0表示不设置</param>
+        /// <param name="logicalPadding">按钮边框与文字的间距</param>
+        /// <returns>创建的按键面板对象</returns>
+        public static ButtonPanel AddButtonPanel(this StackLayout stackLayout, Bitmap image, bool expand = false, int logicalWidth = 0, int logicalHeight = 0, int logicalPadding = 8)
+        {
+            if (image == null) return AddButtonPanel(stackLayout, "", expand, logicalWidth, logicalHeight);
+            if (SizerExtensions.PixelScale != 1)
+            {
+                var w = Math.Max(1, (int)(image.Width * SizerExtensions.PixelScale));
+                var h = Math.Max(1, (int)(image.Height * SizerExtensions.PixelScale));
+                image = new Bitmap(image, w, h, ImageInterpolation.High);
+            }
+            var panel = new ButtonPanel(image, logicalPadding);
+            stackLayout.AddControl(panel, expand, logicalWidth, logicalHeight);
+            return panel;
         }
 
         /// <summary>

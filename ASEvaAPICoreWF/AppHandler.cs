@@ -32,6 +32,7 @@ namespace ASEva.UICoreWF
             var app = new Application(platform);
 
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerCoreWF();
+            ButtonPanel.UseInnerEnterLeave = true;
 
             return app;
         }

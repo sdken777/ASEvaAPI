@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.3.2
+            version=2.3.3
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -68,6 +68,50 @@
             (api:eto=2.1.0) 获取应用程序的工作路径
             </summary>
             <value>工作路径</value>
+        </member>
+        <member name="T:ASEva.UIEto.ButtonPanel">
+            <summary>
+            (api:eto=2.3.3) 按钮面板
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ButtonPanel.#ctor(System.String,System.Int32)">
+            <summary>
+            初始化文字按钮面板
+            </summary>
+            <param name="text">文字</param>
+            <param name="logicalPadding">按钮边框与文字的间距</param>
+        </member>
+        <member name="M:ASEva.UIEto.ButtonPanel.#ctor(Eto.Drawing.Bitmap,System.Int32)">
+            <summary>
+            初始化图像按钮面板
+            </summary>
+            <param name="image">图像</param>
+            <param name="logicalPadding">按钮边框与文字的间距</param>
+        </member>
+        <member name="E:ASEva.UIEto.ButtonPanel.Click">
+            <summary>
+            点击按钮事件
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.ButtonPanel.DefaultBackgroundColor">
+            <summary>
+            默认状态下的背景颜色（默认为Colors.Transparent）
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.ButtonPanel.MouseInsideColor">
+            <summary>
+            鼠标在按钮范围内的背景颜色（默认为Colors.LightSteelBlue）
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.ButtonPanel.MouseDownColor">
+            <summary>
+            鼠标按下后的背景颜色（默认为Colors.SteelBlue）
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.ButtonPanel.TextColor">
+            <summary>
+            文字颜色（默认为Colors.Black）
+            </summary>
         </member>
         <member name="T:ASEva.UIEto.ConfigPanel">
             <summary>
@@ -314,6 +358,12 @@
             </summary>
             <param name="stackLayout">堆叠布局</param>
         </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddSeparator(Eto.Forms.StackLayout)">
+            <summary>
+            (api:eto=2.3.3) 添加分割线
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+        </member>
         <member name="M:ASEva.UIEto.StackLayoutExtensions.AddLabel(Eto.Forms.StackLayout,System.String,System.Boolean)">
             <summary>
             添加文字标签至堆叠布局
@@ -356,6 +406,30 @@
             <param name="logicalWidth">初始宽度，0表示不设置</param>
             <param name="logicalHeight">初始高度，0表示不设置</param>
             <returns>创建的按键对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddButtonPanel(Eto.Forms.StackLayout,System.String,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=2.3.3) 添加文字按键面板至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="text">文字</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <param name="logicalPadding">按钮边框与文字的间距</param>
+            <returns>创建的按键面板对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddButtonPanel(Eto.Forms.StackLayout,Eto.Drawing.Bitmap,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=2.3.3) 添加图像按键面板至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="image">图像</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <param name="logicalPadding">按钮边框与文字的间距</param>
+            <returns>创建的按键面板对象</returns>
         </member>
         <member name="M:ASEva.UIEto.StackLayoutExtensions.AddLinkButton(Eto.Forms.StackLayout,System.String,System.Boolean)">
             <summary>
