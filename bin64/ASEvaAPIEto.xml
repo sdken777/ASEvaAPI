@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.3.4
+            version=2.3.5
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -306,6 +306,20 @@
             <param name="width">默认DPI下的宽度像素值</param>
             <param name="height">默认DPI下的高度像素值</param>
             <returns>任意DPI下的像素尺寸</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.GetLogicalWidth(Eto.Forms.Control)">
+            <summary>
+            (api:eto=2.3.5) 获取控件宽度
+            </summary>
+            <param name="control">控件</param>
+            <returns>控件宽度</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.GetLogicalHeight(Eto.Forms.Control)">
+            <summary>
+            (api:eto=2.3.5) 获取控件高度
+            </summary>
+            <param name="control">控件</param>
+            <returns>控件高度</returns>
         </member>
         <member name="M:ASEva.UIEto.SizerExtensions.SetLogicalWidth(Eto.Forms.Control,System.Int32)">
             <summary>

@@ -46,6 +46,32 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
+        /// (api:eto=2.3.5) 获取控件宽度
+        /// </summary>
+        /// <param name="control">控件</param>
+        /// <returns>控件宽度</returns>
+        public static int GetLogicalWidth(this Control control)
+        {
+            initPixelScale();
+            var scale = PixelScale;
+            if (scale > 0) return (int)(control.Width / scale);
+            else return control.Width;
+        }
+
+        /// <summary>
+        /// (api:eto=2.3.5) 获取控件高度
+        /// </summary>
+        /// <param name="control">控件</param>
+        /// <returns>控件高度</returns>
+        public static int GetLogicalHeight(this Control control)
+        {
+            initPixelScale();
+            var scale = PixelScale;
+            if (scale > 0) return (int)(control.Height / scale);
+            else return control.Height;
+        }
+
+        /// <summary>
         /// 设置控件宽度
         /// </summary>
         /// <param name="control">控件</param>
