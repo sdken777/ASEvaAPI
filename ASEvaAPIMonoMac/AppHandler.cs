@@ -24,7 +24,7 @@ namespace ASEva.UIMonoMac
 
     class AppHandlerMonoMac : AppHandler
     {
-        public Application CreateApp()
+        public Application CreateApp(out String webViewBackend)
         {
             var platform = new global::Eto.Mac.Platform();
 
@@ -35,6 +35,7 @@ namespace ASEva.UIMonoMac
             SetContentExtensions.WindowInitializer = new InitWindowHandlerMonoMac();
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerMonoMac();
 
+            webViewBackend = "wkwebview";
             return app;
         }
 
