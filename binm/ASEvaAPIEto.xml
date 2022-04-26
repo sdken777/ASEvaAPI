@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.3.3
+            version=2.3.4
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -50,6 +50,12 @@
             (api:eto=2.0.7) 返回当前运行的UI框架代号
             </summary>
             <returns>UI框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.GetWebViewBackend">
+            <summary>
+            (api:eto=2.3.4) 返回当前WebView使用的后台框架
+            </summary>
+            <returns></returns>
         </member>
         <member name="P:ASEva.UIEto.App.Instance">
             <summary>

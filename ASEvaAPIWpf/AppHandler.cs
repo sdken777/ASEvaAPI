@@ -16,7 +16,7 @@ namespace ASEva.UIWpf
 
     class AppHandlerWpf : AppHandler
     {
-        public Application CreateApp()
+        public Application CreateApp(out String webViewBackend)
         {
             WebView2Handler.InitCoreWebView2Environment();
 
@@ -27,6 +27,7 @@ namespace ASEva.UIWpf
             SetContentExtensions.WindowInitializer = new InitWindowHandlerWpf();
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerWpf();
 
+            webViewBackend = "webview2";
             return app;
         }
 

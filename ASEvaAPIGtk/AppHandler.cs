@@ -16,14 +16,16 @@ namespace ASEva.UIGtk
 
     class AppHandlerGtk : AppHandler
     {
-        public Application CreateApp()
+        public Application CreateApp(out String webViewBackend)
         {
             if (ASEva.APIInfo.GetRunningOS() == "linuxarm")
             {
                 NativeMethods.DetectNM3();
+                webViewBackend = NativeMethods.IsUsingNM3() ? "webkit2legacy" : "webkit2";
                 Redirection.RedirectMarshaller();
                 Redirection.RedirectMenu();
             }
+            else webViewBackend = "webkit2";
 
             var platform = new global::Eto.GtkSharp.Platform();
             platform.Add<LinkButton.IHandler>(() => new LinkButtonHandler());

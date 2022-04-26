@@ -39,6 +39,11 @@ namespace ASEva.UIGtk
 			}
 		}
 
+		public static bool IsUsingNM3()
+		{
+			return useNM3;
+		}
+
 		static class NM3
 		{
 			public const string libwebkit = "libwebkit2gtk-3.0.so.25";
