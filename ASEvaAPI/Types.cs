@@ -1315,6 +1315,11 @@ namespace ASEva
         /// 独立任务组件名称
         /// </summary>
         public String Title { get; set; }
+
+        /// <summary>
+        /// (api:app=2.5.1) 默认配置字符串，若不支持则为null 
+        /// </summary>
+        public String DefaultConfig { get; set; }
     }
 
     /// <summary>

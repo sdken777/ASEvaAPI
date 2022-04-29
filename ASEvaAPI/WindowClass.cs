@@ -27,7 +27,7 @@ namespace ASEva
         public virtual object GetWindowImage() { return null; }
 
         /// <summary>
-        /// [可选实现]  获取窗口组件相关的组件ID
+        /// [可选实现] 获取窗口组件相关的组件ID
         /// </summary>
         /// <returns>组件ID列表</returns>
         public virtual String[] GetRelatedModules() { return null; }

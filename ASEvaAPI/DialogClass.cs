@@ -33,7 +33,7 @@ namespace ASEva
         public virtual String[] GetRelatedModules() { return null; }
 
         /// <summary>
-        /// [必须实现]  获取对话框组件相关的配置状态时被调用
+        /// [必须实现] 获取对话框组件相关的配置状态时被调用
         /// </summary>
         /// <returns>配置状态</returns>
         public virtual ConfigStatus GetRelatedConfigStatus() { return ConfigStatus.Disabled; }

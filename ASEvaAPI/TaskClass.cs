@@ -43,5 +43,11 @@ namespace ASEva
         /// </summary>
         /// <returns>任务名称</returns>
         public virtual String GetNativeTaskName() { return null; }
+
+        /// <summary>
+        /// (api:app=2.5.1) [可选实现] 获取独立任务的默认配置时被调用
+        /// </summary>
+        /// <returns>独立任务的默认配置字符串，若不支持则为null</returns>
+        public virtual String GetDefaultConfig() { return null;}
     }
 }
