@@ -24,23 +24,49 @@
             "stopAtEntry": false
         },
         {
-            "name": "调试运行(X86-Linux主机)",
+            "name": "调试运行X11(X86-Linux主机)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "调试构建(X86-Ubuntu1804目标)",
             "program": "${workspaceFolder}/../binx/debug/ASEvaAPIEtoTest",
             "args": [],
+            "env": { "GDK_BACKEND":"x11" },
             "cwd": "${workspaceFolder}/../binx/debug/",
             "console": "internalConsole",
             "stopAtEntry": false
         },
         {
-            "name": "调试运行(Arm-Linux主机)",
+            "name": "调试运行Wayland(X86-Linux主机)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "调试构建(X86-Ubuntu1804目标)",
+            "program": "${workspaceFolder}/../binx/debug/ASEvaAPIEtoTest",
+            "args": [],
+            "env": { "GDK_BACKEND":"wayland" },
+            "cwd": "${workspaceFolder}/../binx/debug/",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "调试运行X11(Arm-Linux主机)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "调试构建(Arm-Ubuntu1604目标)",
             "program": "${workspaceFolder}/../binxa/debug/ASEvaAPIEtoTest",
             "args": [],
+            "env": { "GDK_BACKEND":"x11" },
+            "cwd": "${workspaceFolder}/../binxa/debug/",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "调试运行Wayland(Arm-Linux主机)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "调试构建(Arm-Ubuntu1604目标)",
+            "program": "${workspaceFolder}/../binxa/debug/ASEvaAPIEtoTest",
+            "args": [],
+            "env": { "GDK_BACKEND":"wayland" },
             "cwd": "${workspaceFolder}/../binxa/debug/",
             "console": "internalConsole",
             "stopAtEntry": false

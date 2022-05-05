@@ -12,35 +12,43 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
-	class WebViewHandler : GtkControl<Gtk.Widget, WebView, WebView.ICallback>, WebView.IHandler
+	class WebViewHandler : GtkControl<Gtk.ScrolledWindow, WebView, WebView.ICallback>, WebView.IHandler
 	{
 		public bool BrowserContextMenuEnabled { get; set; }
 
 		public string DocumentTitle
 		{
-			get { return NativeMethods.webkit_web_view_get_title(Control.Handle); }
+			get { return WebViewHandle == IntPtr.Zero ? "" : NativeMethods.webkit_web_view_get_title(WebViewHandle); }
 		}
 
 		public Uri Url
 		{
-			get { return new Uri(NativeMethods.webkit_web_view_get_uri(Control.Handle)); }
+			get { return WebViewHandle == IntPtr.Zero ? null : new Uri(NativeMethods.webkit_web_view_get_uri(WebViewHandle)); }
 			set
 			{
-				if (value != null)
-					NativeMethods.webkit_web_view_load_uri(Control.Handle, value.AbsoluteUri);
+				if (WebViewHandle == IntPtr.Zero)
+				{
+					if (value != null && !String.IsNullOrEmpty(value.AbsoluteUri)) targetUrl = value.AbsoluteUri;
+				}
 				else
-					NativeMethods.webkit_web_view_load_html(Control.Handle, "", "");
+				{
+					if (value != null) NativeMethods.webkit_web_view_load_uri(WebViewHandle, value.AbsoluteUri);
+					else NativeMethods.webkit_web_view_load_html(WebViewHandle, "", "");
+				}
 			}
-		}
-
-		public Gtk.ScrolledWindow Scroll
-		{
-			get { return scroll; }
 		}
 
 		public override Gtk.Widget ContainerControl
 		{
-			get { return scroll; }
+			get { return Control; }
+		}
+
+		IntPtr WebViewHandle
+		{
+			get
+			{
+				return webView == null ? IntPtr.Zero : webView.Handle;
+			}
 		}
 
 		EventHandler<WebViewTitleEventArgs> titleChanged;
@@ -49,44 +57,56 @@ namespace ASEva.UIGtk
 		EventHandler<WebViewLoadingEventArgs> documentLoading;
 		EventHandler<WebViewNewWindowEventArgs> openNewWindow;
 
-		readonly Gtk.ScrolledWindow scroll;
 		Queue<TaskCompletionSource<string>> jscs;
-		
+		Gtk.Widget webView;
+		string targetUrl;
+		string targetHtmlString;
+		string targetBaseUrl;
 
 		public WebViewHandler()
 		{
-			scroll = new Gtk.ScrolledWindow();
-			Control = new Gtk.Widget(NativeMethods.webkit_web_view_new());
-			scroll.Add(Control);
-		}
+			Control = new Gtk.ScrolledWindow();
+			Control.Realized += delegate
+			{
+				webView = new Gtk.Widget(NativeMethods.webkit_web_view_new()) { Visible = true };
+				Control.Add(webView);
 
-		protected override void Initialize()
-		{
-			base.Initialize();
+				webView.AddSignalHandler(
+					"context-menu",
+					(Action<object, GLib.SignalArgs>)WebViewHandler_ContextMenu,
+					typeof(GLib.SignalArgs)
+				);
 
-			Control.AddSignalHandler(
-				"context-menu",
-				(Action<object, GLib.SignalArgs>)WebViewHandler_ContextMenu,
-				typeof(GLib.SignalArgs)
-			);
+				webView.AddSignalHandler(
+					"notify::title",
+					(Action<object, GLib.SignalArgs>)WebViewHandler_TitleChanged,
+					typeof(GLib.SignalArgs)
+				);
 
-			Control.AddSignalHandler(
-				"notify::title",
-				(Action<object, GLib.SignalArgs>)WebViewHandler_TitleChanged,
-				typeof(GLib.SignalArgs)
-			);
+				webView.AddSignalHandler(
+					"load-changed",
+					(Action<object, GLib.SignalArgs>)WebViewHandler_LoadChanged,
+					typeof(GLib.SignalArgs)
+				);
 
-			Control.AddSignalHandler(
-				"load-changed",
-				(Action<object, GLib.SignalArgs>)WebViewHandler_LoadChanged,
-				typeof(GLib.SignalArgs)
-			);
+				webView.AddSignalHandler(
+					"decide-policy",
+					(Action<object, GLib.SignalArgs>)WebViewHandler_DecidePolicy,
+					typeof(GLib.SignalArgs)
+				);
 
-			Control.AddSignalHandler(
-				"decide-policy",
-				(Action<object, GLib.SignalArgs>)WebViewHandler_DecidePolicy,
-				typeof(GLib.SignalArgs)
-			);
+				if (targetUrl != null)
+				{
+					NativeMethods.webkit_web_view_load_uri(WebViewHandle, targetUrl);
+					targetUrl = null;
+				}
+				if (targetHtmlString != null)
+				{
+					NativeMethods.webkit_web_view_load_html(WebViewHandle, targetHtmlString, targetBaseUrl);
+					targetHtmlString = null;
+					targetBaseUrl = null;
+				}
+			};
 		}
 
 		private void WebViewHandler_TitleChanged(object o, GLib.SignalArgs args)
@@ -208,6 +228,8 @@ namespace ASEva.UIGtk
 
 		public string ExecuteScript(string script)
 		{
+			if (WebViewHandle == IntPtr.Zero) return null;
+
 			var task = ExecuteScriptAsync(script);
 
 			while (!task.IsCompleted)
@@ -222,13 +244,15 @@ namespace ASEva.UIGtk
 
 		public Task<string> ExecuteScriptAsync(string script)
 		{
+			if (WebViewHandle == IntPtr.Zero) return null;
+
 			TaskCompletionSource<string> tcs = new TaskCompletionSource<string>();
 			if (jscs == null)
 				jscs = new Queue<TaskCompletionSource<string>>();
 			jscs.Enqueue(tcs);
 
 			if (theDelegate == null) theDelegate = (Delegate)(FinishScriptExecutionDelegate)FinishScriptExecution;
-			NativeMethods.webkit_web_view_run_javascript(Control.Handle, $"function _fn() {{{script}}} _fn();", IntPtr.Zero, (FinishScriptExecutionDelegate)theDelegate, IntPtr.Zero);
+			NativeMethods.webkit_web_view_run_javascript(WebViewHandle, $"function _fn() {{{script}}} _fn();", IntPtr.Zero, (FinishScriptExecutionDelegate)theDelegate, IntPtr.Zero);
 
 			return tcs.Task;
 		}
@@ -237,7 +261,7 @@ namespace ASEva.UIGtk
 
 		private void FinishScriptExecution(IntPtr webview, IntPtr result, IntPtr error)
 		{
-			var jsresult = NativeMethods.webkit_web_view_run_javascript_finish(Control.Handle, result, IntPtr.Zero);
+			var jsresult = NativeMethods.webkit_web_view_run_javascript_finish(WebViewHandle, result, IntPtr.Zero);
 			var tcs = jscs?.Count > 0 ? jscs?.Dequeue() : null;
 			if (jsresult != IntPtr.Zero)
 			{
@@ -263,42 +287,50 @@ namespace ASEva.UIGtk
 
 		public void LoadHtml(string html, Uri baseUri)
 		{
-			NativeMethods.webkit_web_view_load_html(Control.Handle, html, baseUri?.AbsoluteUri ?? "");
+			if (WebViewHandle == IntPtr.Zero)
+			{
+				targetHtmlString = html;
+				targetBaseUrl = baseUri?.AbsoluteUri ?? "";
+			}
+			else
+			{
+				NativeMethods.webkit_web_view_load_html(WebViewHandle, html, baseUri?.AbsoluteUri ?? "");
+			}
 		}
 
 		public void Stop()
 		{
-			NativeMethods.webkit_web_view_stop_loading(Control.Handle);
+			if (WebViewHandle != IntPtr.Zero) NativeMethods.webkit_web_view_stop_loading(WebViewHandle);
 		}
 
 		public void Reload()
 		{
-			NativeMethods.webkit_web_view_reload(Control.Handle);
+			if (WebViewHandle != IntPtr.Zero) NativeMethods.webkit_web_view_reload(WebViewHandle);
 		}
 
 		public void GoBack()
 		{
-			NativeMethods.webkit_web_view_go_back(Control.Handle);
+			if (WebViewHandle != IntPtr.Zero) NativeMethods.webkit_web_view_go_back(WebViewHandle);
 		}
 
 		public void GoForward()
 		{
-			NativeMethods.webkit_web_view_go_forward(Control.Handle);
+			if (WebViewHandle != IntPtr.Zero) NativeMethods.webkit_web_view_go_forward(WebViewHandle);
 		}
 
-		public bool CanGoBack
+        public bool CanGoBack
 		{
-			get { return NativeMethods.webkit_web_view_can_go_back(Control.Handle); }
+			get { return WebViewHandle == IntPtr.Zero ? false : NativeMethods.webkit_web_view_can_go_back(WebViewHandle); }
 		}
 
 		public bool CanGoForward
 		{
-			get { return NativeMethods.webkit_web_view_can_go_forward(Control.Handle); }
+			get { return WebViewHandle == IntPtr.Zero ? false : NativeMethods.webkit_web_view_can_go_forward(WebViewHandle); }
 		}
 
 		public void ShowPrintDialog()
 		{
-			NativeMethods.webkit_web_view_run_javascript(Control.Handle, "print();", IntPtr.Zero, null, IntPtr.Zero);
+			if (WebViewHandle != IntPtr.Zero) NativeMethods.webkit_web_view_run_javascript(WebViewHandle, "print();", IntPtr.Zero, null, IntPtr.Zero);
 		}
 	}
 }
