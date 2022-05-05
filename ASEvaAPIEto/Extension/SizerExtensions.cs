@@ -17,10 +17,9 @@ namespace ASEva.UIEto
         /// <returns>任意DPI下的像素值</returns>
         public static int Sizer(this Control control, int size)
         {
-            initPixelScale();
             int outSize = size;
             var scale = PixelScale;
-            if (scale > 0) outSize = (int)(size * scale);
+            if (scale != 1) outSize = (int)(size * scale);
             return Math.Max(1, outSize);
         }
 
@@ -33,11 +32,10 @@ namespace ASEva.UIEto
         /// <returns>任意DPI下的像素尺寸</returns>
         public static Size Sizer(this Control control, int width, int height)
         {
-            initPixelScale();
             int outWidth = width;
             int outHeight = height;
             var scale = PixelScale;
-            if (scale > 0)
+            if (scale != 1)
             {
                 outWidth = (int)(width * scale);
                 outHeight = (int)(height * scale);
@@ -52,9 +50,8 @@ namespace ASEva.UIEto
         /// <returns>控件宽度</returns>
         public static int GetLogicalWidth(this Control control)
         {
-            initPixelScale();
             var scale = PixelScale;
-            if (scale > 0) return (int)(control.Width / scale);
+            if (scale != 1) return (int)(control.Width / scale);
             else return control.Width;
         }
 
@@ -65,9 +62,8 @@ namespace ASEva.UIEto
         /// <returns>控件高度</returns>
         public static int GetLogicalHeight(this Control control)
         {
-            initPixelScale();
             var scale = PixelScale;
-            if (scale > 0) return (int)(control.Height / scale);
+            if (scale != 1) return (int)(control.Height / scale);
             else return control.Height;
         }
 
@@ -78,10 +74,9 @@ namespace ASEva.UIEto
         /// <param name="width">设置宽度</param>
         public static void SetLogicalWidth(this Control control, int width)
         {
-            initPixelScale();
             int setWidth = width;
             var scale = PixelScale;
-            if (scale > 0) setWidth = (int)(width * scale);
+            if (scale != 1) setWidth = (int)(width * scale);
             control.Width = Math.Max(1, setWidth);
         }
 
@@ -92,10 +87,9 @@ namespace ASEva.UIEto
         /// <param name="height">设置高度</param>
         public static void SetLogicalHeight(this Control control, int height)
         {
-            initPixelScale();
             int setHeight = height;
             var scale = PixelScale;
-            if (scale > 0) setHeight = (int)(height * scale);
+            if (scale != 1) setHeight = (int)(height * scale);
             control.Height = Math.Max(1, setHeight);
         }
 
@@ -107,11 +101,10 @@ namespace ASEva.UIEto
         /// <param name="height">设置高度</param>
         public static void SetLogicalSize(this Control control, int width, int height)
         {
-            initPixelScale();
             int setWidth = width;
             int setHeight = height;
             var scale = PixelScale;
-            if (scale > 0)
+            if (scale != 1)
             {
                 setWidth = (int)(width * scale);
                 setHeight = (int)(height * scale);
@@ -120,20 +113,12 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
-        /// 像素单位比例，用于优化在非默认DPI下的显示（一般情况下无需设置）
+        /// 像素单位比例，用于优化在非默认DPI下的显示
         /// </summary>
-        public static float PixelScale { get; set; }
-
-        private static void initPixelScale()
+        public static float PixelScale
         {
-            if (PixelScale != 0) return;
-
-            if (ASEva.APIInfo.GetRunningOS() == "windows" && App.GetRunningUI() == "corewf")
-            {
-                var screen = Screen.PrimaryScreen;
-                PixelScale = screen.RealScale;
-            }
-            else PixelScale = 1;
+            get { return Pixel.Scale; } 
+            set {}
         }
     }
 }

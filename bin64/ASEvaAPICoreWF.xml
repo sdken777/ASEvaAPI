@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UICoreWF.APIInfo">
             <summary>
-            version=2.1.4
+            version=2.1.5
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.APIInfo.GetAPIVersion">
@@ -237,6 +237,12 @@
         <member name="T:ASEva.UICoreWF.FlowPanelResizer">
             <summary>
             (api:corewf=2.0.0) FlowLayoutPanel子控件宽度自适应
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.DrawableHandler.#ctor(ASEva.UICoreWF.DrawableHandler.EtoDrawable)">
+            <summary>
+            This is to allow instantiating a DrawableHandler
+            from an existing control.
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.HistLineGraph">

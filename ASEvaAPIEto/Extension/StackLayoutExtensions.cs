@@ -287,6 +287,26 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
+        /// (api:eto=2.4.0) 添加横向堆叠布局至堆叠布局
+        /// </summary>
+        /// <param name="stackLayout">堆叠布局</param>
+        /// <param name="expand">是否延布局方向撑满</param>
+        /// <param name="logicalWidth">初始宽度，0表示不设置</param>
+        /// <param name="logicalHeight">初始高度，0表示不设置</param>
+        /// <param name="logicalSpacing">横向堆叠布局中各控件的间隙</param>
+        /// <param name="alignment">横向堆叠布局中各控件的纵向对齐方式</param>
+        /// <returns>创建的横向堆叠布局</returns>
+        public static StackLayout AddRowLayout(this StackLayout stackLayout, bool expand, int logicalWidth, int logicalHeight, int logicalSpacing, VerticalAlignment alignment = VerticalAlignment.Center)
+        {
+            var layout = new StackLayout { Orientation = Orientation.Horizontal, VerticalContentAlignment = alignment };
+            if (logicalWidth > 0) layout.SetLogicalWidth(logicalWidth);
+            if (logicalHeight > 0) layout.SetLogicalHeight(logicalHeight);
+            layout.Spacing = layout.Sizer(logicalSpacing);
+            stackLayout.Items.Add(new StackLayoutItem(layout, expand));
+            return layout;
+        }
+
+        /// <summary>
         /// 添加纵向堆叠布局至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
@@ -303,6 +323,26 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
+        /// (api:eto=2.4.0) 添加纵向堆叠布局至堆叠布局
+        /// </summary>
+        /// <param name="stackLayout">堆叠布局</param>
+        /// <param name="expand">是否延布局方向撑满</param>
+        /// <param name="logicalWidth">初始宽度，0表示不设置</param>
+        /// <param name="logicalHeight">初始高度，0表示不设置</param>
+        /// <param name="logicalSpacing">纵向堆叠布局中各控件的间隙</param>
+        /// <param name="alignment">纵向堆叠布局中各控件的横向对齐方式</param>
+        /// <returns>创建的纵向堆叠布局</returns>
+        public static StackLayout AddColumnLayout(this StackLayout stackLayout, bool expand, int logicalWidth, int logicalHeight, int logicalSpacing, HorizontalAlignment alignment = HorizontalAlignment.Stretch)
+        {
+            var layout = new StackLayout { Orientation = Orientation.Vertical, HorizontalContentAlignment = alignment };
+            if (logicalWidth > 0) layout.SetLogicalWidth(logicalWidth);
+            if (logicalHeight > 0) layout.SetLogicalHeight(logicalHeight);
+            layout.Spacing = layout.Sizer(logicalSpacing);
+            stackLayout.Items.Add(new StackLayoutItem(layout, expand));
+            return layout;
+        }
+
+        /// <summary>
         /// 添加表布局至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
@@ -313,6 +353,26 @@ namespace ASEva.UIEto
         public static TableLayout AddTableLayout(this StackLayout stackLayout, bool expand = false, int logicalSpacingX = 8, int logicalSpacingY = 8)
         {
             var layout = new TableLayout();
+            layout.Spacing = new Size(layout.Sizer(logicalSpacingX), layout.Sizer(logicalSpacingY));
+            stackLayout.Items.Add(new StackLayoutItem(layout, expand));
+            return layout;
+        }
+
+        /// <summary>
+        /// (api:eto=2.4.0) 添加表布局至堆叠布局
+        /// </summary>
+        /// <param name="stackLayout">堆叠布局</param>
+        /// <param name="expand">是否延布局方向撑满</param>
+        /// <param name="logicalWidth">初始宽度，0表示不设置</param>
+        /// <param name="logicalHeight">初始高度，0表示不设置</param>
+        /// <param name="logicalSpacingX">表布局中各控件的横向间隙</param>
+        /// <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
+        /// <returns>创建的表布局</returns>
+        public static TableLayout AddTableLayout(this StackLayout stackLayout, bool expand, int logicalWidth, int logicalHeight, int logicalSpacingX, int logicalSpacingY)
+        {
+            var layout = new TableLayout();
+            if (logicalWidth > 0) layout.SetLogicalWidth(logicalWidth);
+            if (logicalHeight > 0) layout.SetLogicalHeight(logicalHeight);
             layout.Spacing = new Size(layout.Sizer(logicalSpacingX), layout.Sizer(logicalSpacingY));
             stackLayout.Items.Add(new StackLayoutItem(layout, expand));
             return layout;

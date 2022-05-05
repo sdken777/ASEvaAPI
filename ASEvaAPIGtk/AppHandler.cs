@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using ASEva.Utility;
 using ASEva.UIEto;
 using Eto.Drawing;
@@ -16,7 +17,7 @@ namespace ASEva.UIGtk
 
     class AppHandlerGtk : AppHandler
     {
-        public Application CreateApp(out String webViewBackend)
+        public Application CreateApp(out String uiBackend, out String webViewBackend)
         {
             if (ASEva.APIInfo.GetRunningOS() == "linuxarm")
             {
@@ -48,6 +49,7 @@ namespace ASEva.UIGtk
                 Gtk.StyleContext.AddProviderForScreen(gdkMonitor.Display.DefaultScreen, cssProvider, Gtk.StyleProviderPriority.User);
             }
 
+            uiBackend = queryUIBackend();
             return app;
         }
 
@@ -60,5 +62,30 @@ namespace ASEva.UIGtk
         {
             application.Run(window);
         }
+
+        private String queryUIBackend()
+        {
+            try
+            {
+                var monitor = Gdk.Display.Default.PrimaryMonitor;
+                var x11MonitorType = new GLib.GType(gdk_x11_monitor_get_type());
+                if (x11MonitorType.IsInstance(monitor.Handle)) return "x11";
+                var waylandMonitorType = new GLib.GType(gdk_wayland_monitor_get_type());
+                if (waylandMonitorType.IsInstance(monitor.Handle)) return "wayland";
+                var mirMonitorType = new GLib.GType(gdk_mir_monitor_get_type());
+                if (mirMonitorType.IsInstance(monitor.Handle)) return "mir";
+            }
+            catch (Exception) {}
+            return "unknown";
+        }
+
+		[DllImport("libgdk-3.so.0", SetLastError = true)]
+		private static extern IntPtr gdk_x11_monitor_get_type();
+
+		[DllImport("libgdk-3.so.0", SetLastError = true)]
+		private static extern IntPtr gdk_wayland_monitor_get_type();
+
+		[DllImport("libgdk-3.so.0", SetLastError = true)]
+		private static extern IntPtr gdk_mir_monitor_get_type();
     }
 }

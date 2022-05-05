@@ -12,8 +12,12 @@ namespace ASEvaAPIEtoTest
         {
             t = TextResource.Load("test.xml", languageCode);
 
+            var title = t["title"] + " (OS:" + ASEva.APIInfo.GetRunningOS() + " / UI:" + App.GetRunningUI();
+            if (!String.IsNullOrEmpty(App.GetUIBackend())) title += "." + App.GetUIBackend();
+            title += ")";
+
             Icon = Icon.FromResource("icon.png");
-            Title = t["title"] + " (OS:" + ASEva.APIInfo.GetRunningOS() + " / UI:" + App.GetRunningUI() + ")";
+            Title = title;
             this.SetClientSize(1300, 750);
             this.SetMinimumClientSize(1200, 700);
             Resizable = true;
@@ -209,8 +213,6 @@ namespace ASEvaAPIEtoTest
         private void drawable_Paint(object o, PaintEventArgs a)
         {
             var g = a.Graphics;
-            g.SetScaleForLogical();
-
             g.Clear(Colors.White);
             g.DrawLine(Colors.Black, 10, 100, 190, 100);
             g.DrawLine(Colors.Black, 10, 120, 190, 120);

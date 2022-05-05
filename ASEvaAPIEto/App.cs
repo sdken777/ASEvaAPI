@@ -9,7 +9,7 @@ namespace ASEva.UIEto
 {
     public interface AppHandler
     {
-        Application CreateApp(out String webViewBackend);
+        Application CreateApp(out String uiBackend, out String webViewBackend);
         void RunApp(Application application, Form window);
         Font CreateDefaultFont();
     }
@@ -85,9 +85,18 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
-        /// (api:eto=2.3.4) 返回当前WebView使用的后台框架
+        /// (api:eto=2.4.0) 返回当前运行UI的后端代号
         /// </summary>
-        /// <returns></returns>
+        /// <returns>UI的后端代号，若未运行 ASEva.UIEto.App.Init 、或初始化失败、或当前运行UI无后端则返回null</returns>
+        public static String GetUIBackend()
+        {
+            return uiBackend;
+        }
+
+        /// <summary>
+        /// (api:eto=2.3.4) 返回当前WebView使用的后台框架代号
+        /// </summary>
+        /// <returns>当前WebView使用的后台框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回null</returns>
         public static String GetWebViewBackend()
         {
             return webViewBackend;
@@ -214,7 +223,7 @@ namespace ASEva.UIEto
 
             if (handler != null && application == null)
             {
-                application = handler.CreateApp(out webViewBackend);
+                application = handler.CreateApp(out uiBackend, out webViewBackend);
                 if (application != null) runningUI = uiCode;
             }
         }
@@ -222,6 +231,7 @@ namespace ASEva.UIEto
         private static AppHandler handler;
         private static Application application;
         private static String runningUI;
+        private static String uiBackend;
         private static String webViewBackend;
         private static Font defaultFont;
         private static bool initAppInvoked;

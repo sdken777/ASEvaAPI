@@ -16,7 +16,7 @@ namespace ASEva.UICoreWF
 
     class AppHandlerCoreWF : AppHandler
     {
-        public Application CreateApp(out String webViewBackend)
+        public Application CreateApp(out String uiBackend, out String webViewBackend)
         {
             System.Windows.Forms.Application.SetHighDpiMode(System.Windows.Forms.HighDpiMode.SystemAware);
 
@@ -29,11 +29,13 @@ namespace ASEva.UICoreWF
             platform.Add<SearchBox.IHandler>(() => new SearchBoxHandler());
             platform.Add<WebView.IHandler>(() => new WebView2Handler());
             platform.Add<ComboBox.IHandler>(() => new ComboBoxHandler());
+            platform.Add<Drawable.IHandler>(() => new DrawableHandler());
             var app = new Application(platform);
 
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerCoreWF();
             ButtonPanel.UseInnerEnterLeave = true;
 
+            uiBackend = null;
             webViewBackend = "webview2";
             return app;
         }

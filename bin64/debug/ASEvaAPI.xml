@@ -1682,7 +1682,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.5.0
+            version=2.5.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -2171,7 +2171,7 @@
         </member>
         <member name="M:ASEva.DialogClass.GetRelatedConfigStatus">
             <summary>
-            [必须实现]  获取对话框组件相关的配置状态时被调用
+            [必须实现] 获取对话框组件相关的配置状态时被调用
             </summary>
             <returns>配置状态</returns>
         </member>
@@ -4926,6 +4926,12 @@
             </summary>
             <returns>任务名称</returns>
         </member>
+        <member name="M:ASEva.TaskClass.GetDefaultConfig">
+            <summary>
+            (api:app=2.5.1) [可选实现] 获取独立任务的默认配置时被调用
+            </summary>
+            <returns>独立任务的默认配置字符串，若不支持则为null</returns>
+        </member>
         <member name="T:ASEva.IntSize">
             <summary>
             (api:app=2.0.0) 尺寸大小（整型）
@@ -5943,6 +5949,11 @@
         <member name="P:ASEva.TaskClassInfo.Title">
             <summary>
             独立任务组件名称
+            </summary>
+        </member>
+        <member name="P:ASEva.TaskClassInfo.DefaultConfig">
+            <summary>
+            (api:app=2.5.1) 默认配置字符串，若不支持则为null 
             </summary>
         </member>
         <member name="T:ASEva.SessionFilterFlags">
@@ -6997,7 +7008,7 @@
         </member>
         <member name="M:ASEva.WindowClass.GetRelatedModules">
             <summary>
-            [可选实现]  获取窗口组件相关的组件ID
+            [可选实现] 获取窗口组件相关的组件ID
             </summary>
             <returns>组件ID列表</returns>
         </member>
