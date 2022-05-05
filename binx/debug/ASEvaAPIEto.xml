@@ -574,7 +574,7 @@
         </member>
         <member name="M:ASEva.UIEto.StackLayoutExtensions.AddTableLayout(Eto.Forms.StackLayout,System.Boolean,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-            添加表布局至堆叠布局
+            (api:eto=2.4.0) 添加表布局至堆叠布局
             </summary>
             <param name="stackLayout">堆叠布局</param>
             <param name="expand">是否延布局方向撑满</param>

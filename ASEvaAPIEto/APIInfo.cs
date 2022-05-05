@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 0, 0); // 增加Pixel类。增加App.GetUIBackend。StackLayoutExtensions.AddXXXLayout可输入长宽参数
+            return new Version(2, 4, 0, 1); // 改良App.DefaultFont
         }
     }
 }

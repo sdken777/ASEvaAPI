@@ -122,7 +122,13 @@ namespace ASEva.UIEto
                 defaultFont = handler.CreateDefaultFont();
             }
             sizeRatio = Math.Max(0.01f, sizeRatio);
-            return new Font(defaultFont.Family, defaultFont.Size * sizeRatio, defaultFont.FontStyle, defaultFont.FontDecoration);
+            var targetSize = defaultFont.Size * sizeRatio;
+            if (!newFontFailed)
+            {
+                try { return new Font(defaultFont.Family, targetSize, defaultFont.FontStyle, defaultFont.FontDecoration); }
+                catch (Exception) { newFontFailed = true; }
+            }
+            return SystemFonts.Default(targetSize);
         }
 
         /// <summary>
@@ -228,12 +234,13 @@ namespace ASEva.UIEto
             }
         }
 
-        private static AppHandler handler;
-        private static Application application;
-        private static String runningUI;
-        private static String uiBackend;
-        private static String webViewBackend;
-        private static Font defaultFont;
-        private static bool initAppInvoked;
+        private static AppHandler handler = null;
+        private static Application application = null;
+        private static String runningUI = null;
+        private static String uiBackend = null;
+        private static String webViewBackend = null;
+        private static Font defaultFont = null;
+        private static bool newFontFailed = false;
+        private static bool initAppInvoked = false;
     }
 }
