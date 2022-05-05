@@ -68,6 +68,7 @@ namespace ASEva.UIGtk
             try
             {
                 var monitor = Gdk.Display.Default.PrimaryMonitor;
+                if (monitor == null) monitor = Gdk.Display.Default.GetMonitor(0);
                 var x11MonitorType = new GLib.GType(gdk_x11_monitor_get_type());
                 if (x11MonitorType.IsInstance(monitor.Handle)) return "x11";
                 var waylandMonitorType = new GLib.GType(gdk_wayland_monitor_get_type());
