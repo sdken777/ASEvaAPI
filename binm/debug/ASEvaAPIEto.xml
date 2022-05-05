@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.3.4
+            version=2.4.0
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -51,11 +51,17 @@
             </summary>
             <returns>UI框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回null</returns>
         </member>
+        <member name="M:ASEva.UIEto.App.GetUIBackend">
+            <summary>
+            (api:eto=2.4.0) 返回当前运行UI的后端代号
+            </summary>
+            <returns>UI的后端代号，若未运行 ASEva.UIEto.App.Init 、或初始化失败、或当前运行UI无后端则返回null</returns>
+        </member>
         <member name="M:ASEva.UIEto.App.GetWebViewBackend">
             <summary>
-            (api:eto=2.3.4) 返回当前WebView使用的后台框架
+            (api:eto=2.3.4) 返回当前WebView使用的后台框架代号
             </summary>
-            <returns></returns>
+            <returns>当前WebView使用的后台框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回null</returns>
         </member>
         <member name="P:ASEva.UIEto.App.Instance">
             <summary>
@@ -307,6 +313,20 @@
             <param name="height">默认DPI下的高度像素值</param>
             <returns>任意DPI下的像素尺寸</returns>
         </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.GetLogicalWidth(Eto.Forms.Control)">
+            <summary>
+            (api:eto=2.3.5) 获取控件宽度
+            </summary>
+            <param name="control">控件</param>
+            <returns>控件宽度</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.GetLogicalHeight(Eto.Forms.Control)">
+            <summary>
+            (api:eto=2.3.5) 获取控件高度
+            </summary>
+            <param name="control">控件</param>
+            <returns>控件高度</returns>
+        </member>
         <member name="M:ASEva.UIEto.SizerExtensions.SetLogicalWidth(Eto.Forms.Control,System.Int32)">
             <summary>
             设置控件宽度
@@ -331,7 +351,7 @@
         </member>
         <member name="P:ASEva.UIEto.SizerExtensions.PixelScale">
             <summary>
-            像素单位比例，用于优化在非默认DPI下的显示（一般情况下无需设置）
+            像素单位比例，用于优化在非默认DPI下的显示
             </summary>
         </member>
         <member name="T:ASEva.UIEto.SplitterExtensions">
@@ -508,6 +528,18 @@
             <param name="alignment">横向堆叠布局中各控件的纵向对齐方式</param>
             <returns>创建的横向堆叠布局</returns>
         </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddRowLayout(Eto.Forms.StackLayout,System.Boolean,System.Int32,System.Int32,System.Int32,Eto.Forms.VerticalAlignment)">
+            <summary>
+            (api:eto=2.4.0) 添加横向堆叠布局至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <param name="logicalSpacing">横向堆叠布局中各控件的间隙</param>
+            <param name="alignment">横向堆叠布局中各控件的纵向对齐方式</param>
+            <returns>创建的横向堆叠布局</returns>
+        </member>
         <member name="M:ASEva.UIEto.StackLayoutExtensions.AddColumnLayout(Eto.Forms.StackLayout,System.Boolean,System.Int32,Eto.Forms.HorizontalAlignment)">
             <summary>
             添加纵向堆叠布局至堆叠布局
@@ -518,12 +550,36 @@
             <param name="alignment">纵向堆叠布局中各控件的横向对齐方式</param>
             <returns>创建的纵向堆叠布局</returns>
         </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddColumnLayout(Eto.Forms.StackLayout,System.Boolean,System.Int32,System.Int32,System.Int32,Eto.Forms.HorizontalAlignment)">
+            <summary>
+            (api:eto=2.4.0) 添加纵向堆叠布局至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <param name="logicalSpacing">纵向堆叠布局中各控件的间隙</param>
+            <param name="alignment">纵向堆叠布局中各控件的横向对齐方式</param>
+            <returns>创建的纵向堆叠布局</returns>
+        </member>
         <member name="M:ASEva.UIEto.StackLayoutExtensions.AddTableLayout(Eto.Forms.StackLayout,System.Boolean,System.Int32,System.Int32)">
             <summary>
             添加表布局至堆叠布局
             </summary>
             <param name="stackLayout">堆叠布局</param>
             <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalSpacingX">表布局中各控件的横向间隙</param>
+            <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
+            <returns>创建的表布局</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddTableLayout(Eto.Forms.StackLayout,System.Boolean,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=2.4.0) 添加表布局至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
             <param name="logicalSpacingX">表布局中各控件的横向间隙</param>
             <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
             <returns>创建的表布局</returns>
@@ -750,6 +806,46 @@
             更新控件位置（一般在手动修改控件大小后调用）
             </summary>
             <param name="control">控件</param>
+        </member>
+        <member name="T:ASEva.UIEto.Pixel">
+            <summary>
+            (api:eto=2.4.0) 像素单位转换
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.Pixel.FromLogicalValue(System.Int32)">
+            <summary>
+            逻辑像素值转原始像素值
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.Pixel.ToLogicalValue(System.Int32)">
+            <summary>
+            原始像素值转逻辑像素值
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.Pixel.FromLogicalPoint(Eto.Drawing.Point)">
+            <summary>
+            逻辑点坐标转原始点坐标
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.Pixel.ToLogicalPoint(Eto.Drawing.Point)">
+            <summary>
+            原始点坐标转逻辑点坐标
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.Pixel.FromLogicalSize(Eto.Drawing.Size)">
+            <summary>
+            逻辑尺寸转原始尺寸
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.Pixel.ToLogicalSize(Eto.Drawing.Size)">
+            <summary>
+            原始尺寸转逻辑尺寸
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.Pixel.Scale">
+            <summary>
+            像素单位比例，用于优化在非默认DPI下的显示
+            </summary>
         </member>
         <member name="T:ASEva.UIEto.TextTableView">
             <summary>
