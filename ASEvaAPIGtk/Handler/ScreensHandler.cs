@@ -33,7 +33,9 @@ namespace ASEva.UIGtk
 			{
 				try
 				{
-					return new Screen(new ScreenHandler(Gdk.Display.Default.PrimaryMonitor));
+					var monitor = Gdk.Display.Default.PrimaryMonitor;
+					if (monitor == null) monitor = Gdk.Display.Default.GetMonitor(0);
+					return new Screen(new ScreenHandler(monitor));
 				}
 				catch (Exception) { return null; }
 			}
