@@ -6,7 +6,7 @@ using Eto.GtkSharp.Forms;
 namespace ASEva.UIGtk
 {
 	#pragma warning disable 612
-	public class DialogHandler : GtkWindow<Gtk.Dialog, Dialog, Dialog.ICallback>, Dialog.IHandler
+	class DialogHandler : GtkWindow<Gtk.Dialog, Dialog, Dialog.ICallback>, Dialog.IHandler
 	{
 		Gtk.Container btcontainer;
 		Button defaultButton;

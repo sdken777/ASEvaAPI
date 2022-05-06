@@ -221,6 +221,21 @@
             (api:gtk=2.0.0) 单值数据可视化窗口
             </summary>
         </member>
+        <member name="M:ASEva.UIGtk.DateComboBox.Dlg_DialogClosed(System.Object,System.EventArgs)">
+            <summary>
+            remove our reference to the dialog ONLY when we know it's 
+            really gone..
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ASEva.UIGtk.DateComboBox.Entry_FocusOutEvent(System.Object,Gtk.FocusOutEventArgs)">
+            <summary>
+            If the drop down dialog is up and lose focus on the parent field, close it
+            </summary>
+            <param name="o"></param>
+            <param name="args"></param>
+        </member>
         <member name="T:ASEva.UIGtk.ImageConverter">
             <summary>
             (api:gtk=2.1.0) 图像对象转换 

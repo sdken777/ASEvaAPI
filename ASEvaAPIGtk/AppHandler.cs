@@ -37,6 +37,7 @@ namespace ASEva.UIGtk
             platform.Add<Drawable.IHandler>(() => new DrawableHandler());
             platform.Add<Screen.IScreensHandler>(() => new ScreensHandler());
             platform.Add<Dialog.IHandler>(() => new DialogHandler());
+            platform.Add<DateTimePicker.IHandler>(() => new DateTimePickerHandler());
             var app = new Application(platform);
 
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerGtk();

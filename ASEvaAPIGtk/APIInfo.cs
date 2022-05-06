@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 6, 0); // 修正Wayland下WebView导致闪退问题
+            return new Version(2, 1, 6, 1); // 修正DateTimePicker的wayland兼容性问题
         }
     }
 }
