@@ -284,7 +284,7 @@
             "command": "dotnet",
             "args": [
                 "../bin/AppMaker.dll",
-                "${workspaceFolder}/macapp-ASEvaAPIEtoTest.xml",
+                "${workspaceFolder}/../macapp-local-ASEvaAPIEtoTest.xml",
                 "release",
             ],
             "dependsOrder": "sequence",
@@ -437,7 +437,7 @@
             "command": "dotnet",
             "args": [
                 "../bin/AppMaker.dll",
-                "${workspaceFolder}/macapp-ASEvaAPIEtoTest.xml",
+                "${workspaceFolder}/../macapp-local-ASEvaAPIEtoTest.xml",
                 "debug",
             ],
             "dependsOrder": "sequence",
