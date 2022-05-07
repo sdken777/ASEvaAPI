@@ -22,13 +22,6 @@ namespace ASEvaAPIEtoTest
             {
                 (sender as LinkButton).Text = ClientSize.Width + "x" + ClientSize.Height;
             };
-            if (withBorder)
-            {
-                layout.AddButton(t["basic-freeze-size"]).Click += delegate
-                {
-                    Resizable = false;
-                };
-            }
             layout.AddButton(t["basic-close"]).Click += delegate
             {
                 this.Close();
