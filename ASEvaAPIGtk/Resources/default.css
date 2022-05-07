@@ -3,21 +3,13 @@
   font-size: 9.5pt;
 }
 
-button
+*:not(spinbutton) > button:not(.titlebutton)
 {
   padding-left: 4pt;
   padding-right: 4pt;
   padding-top: 2pt;
   padding-bottom: 2pt;
   min-height: 16pt;
-}
-
-button.titlebutton
-{
-  padding-left: 1pt;
-  padding-right: 1pt;
-  padding-top: 2pt;
-  padding-bottom: 2pt;
 }
 
 entry
