@@ -51,6 +51,11 @@ namespace ASEva.UIGtk
             }
 
             uiBackend = queryUIBackend();
+            if (uiBackend == "wayland")
+            {
+                OverlayLayout.DelayHandleControl = true;
+            }
+
             return app;
         }
 

@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 6, 3); // 优化default.css
+            return new Version(2, 1, 6, 4); // 修正wayland下OverlayLayout显示问题
         }
     }
 }

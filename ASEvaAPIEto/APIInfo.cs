@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 0, 1); // 改良App.DefaultFont
+            return new Version(2, 4, 0, 2); // 增加OverlayLayout.DelayHandleControl，兼容Wayland
         }
     }
 }

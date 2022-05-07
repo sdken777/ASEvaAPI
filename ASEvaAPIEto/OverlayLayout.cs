@@ -59,7 +59,27 @@ namespace ASEva.UIEto
 
         private void this_SizeChanged(object sender, EventArgs e)
         {
-            foreach (var control in paddingTable.Keys) handleControl(control, false);
+            if (DelayHandleControl)
+            {
+                if (timer != null)
+                {
+                    timer.Stop();
+                    timer = null;
+                }
+                timer = new UITimer();
+                timer.Interval = 0.1;
+                timer.Elapsed += delegate
+                {
+                    timer.Stop();
+                    timer = null;
+                    foreach (var control in paddingTable.Keys) handleControl(control, false);
+                };
+                timer.Start();
+            }
+            else
+            {
+                foreach (var control in paddingTable.Keys) handleControl(control, false);
+            }
         }
 
         private void handleControl(Control control, bool add)
@@ -120,5 +140,8 @@ namespace ASEva.UIEto
         }
 
         private Dictionary<Control, ControlPadding> paddingTable = new Dictionary<Control, ControlPadding>();
+        private UITimer timer = null;
+
+        public static bool DelayHandleControl { private get; set; }
     }
 }
