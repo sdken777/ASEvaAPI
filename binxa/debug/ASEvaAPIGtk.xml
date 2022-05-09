@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIGtk.APIInfo">
             <summary>
-            version=2.0.6
+            version=2.1.6
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.APIInfo.GetAPIVersion">
@@ -24,6 +24,12 @@
             <summary>
             (api:gtk=2.0.0) 配置界面控件，用于实现可视化配置
             </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.ConfigPanel.OnInitSize(System.String)">
+            <summary>
+            (api:gtk=2.1.1) [可选实现] 在初始化控件尺寸时被调用
+            </summary>
+            <param name="config">配置字符串</param>
         </member>
         <member name="M:ASEva.UIGtk.ConfigPanel.OnInit(System.String)">
             <summary>
@@ -44,6 +50,28 @@
         <member name="T:ASEva.UIGtk.DialogHelper">
             <summary>
             (api:gtk=2.0.0) 对话框辅助类
+            </summary>
+        </member>
+        <member name="T:ASEva.UIGtk.DrawSwap">
+            <summary>
+            (api:gtk=2.0.8) 预绘制对象
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.DrawSwap.#ctor(Gtk.Widget,System.String)">
+            <summary>
+            创建预绘制对象
+            </summary>
+            <param name="widget">绘图对象</param>
+            <param name="category">类别，设为空表示不归类</param>
+        </member>
+        <member name="M:ASEva.UIGtk.DrawSwap.Refresh">
+            <summary>
+            刷新，其中会调用Paint
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.DrawSwap.Close">
+            <summary>
+            释放相关资源
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.EventBoxHelper">
@@ -138,6 +166,11 @@
             控件显示更新
             </summary>
         </member>
+        <member name="M:ASEva.UIGtk.BaseGraph.Close">
+            <summary>
+            (api:gtk=2.0.8) 释放相关资源
+            </summary>
+        </member>
         <member name="M:ASEva.UIGtk.BaseGraph.HandleGraphSelected">
             <summary>
             选择图表控件
@@ -148,9 +181,19 @@
             (api:gtk=2.0.0) 柱状折线图可视化控件
             </summary>
         </member>
+        <member name="M:ASEva.UIGtk.HistLineGraph.Close">
+            <summary>
+            (api:gtk=2.0.8) 释放相关资源
+            </summary>
+        </member>
         <member name="T:ASEva.UIGtk.LabelTableGraph">
             <summary>
             (api:gtk=2.0.0) 标签热力图数据可视化窗口
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.LabelTableGraph.Close">
+            <summary>
+            (api:gtk=2.0.8) 释放相关资源
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.MatrixTableGraph">
@@ -158,14 +201,44 @@
             (api:gtk=2.0.0) 矩阵热力图数据可视化窗口
             </summary>
         </member>
+        <member name="M:ASEva.UIGtk.MatrixTableGraph.Close">
+            <summary>
+            (api:gtk=2.0.8) 释放相关资源
+            </summary>
+        </member>
         <member name="T:ASEva.UIGtk.ScatterPointsGraph">
             <summary>
             (api:gtk=2.0.0) 散点图数据可视化窗口
             </summary>
         </member>
+        <member name="M:ASEva.UIGtk.ScatterPointsGraph.Close">
+            <summary>
+            (api:gtk=2.0.8) 释放相关资源
+            </summary>
+        </member>
         <member name="T:ASEva.UIGtk.ValueGraph">
             <summary>
             (api:gtk=2.0.0) 单值数据可视化窗口
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.DateComboBox.Dlg_DialogClosed(System.Object,System.EventArgs)">
+            <summary>
+            remove our reference to the dialog ONLY when we know it's 
+            really gone..
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:ASEva.UIGtk.DateComboBox.Entry_FocusOutEvent(System.Object,Gtk.FocusOutEventArgs)">
+            <summary>
+            If the drop down dialog is up and lose focus on the parent field, close it
+            </summary>
+            <param name="o"></param>
+            <param name="args"></param>
+        </member>
+        <member name="T:ASEva.UIGtk.ImageConverter">
+            <summary>
+            (api:gtk=2.1.0) 图像对象转换 
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.LinkItem">
@@ -198,6 +271,41 @@
             (api:gtk=2.0.0) ASEva.Samples.VideoFrameSample 中的图像对象
             </summary>
         </member>
+        <member name="M:ASEva.UIGtk.VideoFrameSampleImage.#ctor(System.Int32,System.Int32)">
+            <summary>
+            按指定宽高创建无alpha通道的图像
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.VideoFrameSampleImage.FromCommonImage(ASEva.Samples.CommonImage)">
+            <summary>
+            (api:gtk=2.1.0) 绑定通用图像，共享数据
+            </summary>
+        </member>
+        <member name="P:ASEva.UIGtk.VideoFrameSampleImage.Width">
+            <summary>
+            图像宽度
+            </summary>
+        </member>
+        <member name="P:ASEva.UIGtk.VideoFrameSampleImage.Height">
+            <summary>
+            图像高度
+            </summary>
+        </member>
+        <member name="P:ASEva.UIGtk.VideoFrameSampleImage.RowBytes">
+            <summary>
+            一行数据的字节数
+            </summary>
+        </member>
+        <member name="P:ASEva.UIGtk.VideoFrameSampleImage.Data">
+            <summary>
+            图像数据
+            </summary>
+        </member>
+        <member name="P:ASEva.UIGtk.VideoFrameSampleImage.WithAlpha">
+            <summary>
+            (api:gtk=2.1.0) 是否含alpha通道
+            </summary>
+        </member>
         <member name="M:ASEva.UIGtk.VideoFrameSampleImage.ToPixbuf">
             <summary>
             转换为Gdk.Pixbuf对象
@@ -212,6 +320,12 @@
             <summary>
             (api:gtk=2.0.0) 窗口控件，用于实现窗口组件的实际功能
             </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.WindowPanel.OnInitSize(System.String)">
+            <summary>
+            (api:gtk=2.1.1) [可选实现] 在初始化控件尺寸时被调用
+            </summary>
+            <param name="config">配置字符串</param>
         </member>
         <member name="M:ASEva.UIGtk.WindowPanel.OnGetDefaultSize">
             <summary>

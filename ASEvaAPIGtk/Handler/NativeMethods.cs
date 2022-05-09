@@ -132,6 +132,21 @@ namespace ASEva.UIGtk
 			public extern static IntPtr webkit_web_view_new();
 
 			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static IntPtr webkit_web_view_new_with_settings(IntPtr settings);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static IntPtr webkit_settings_new();
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static void webkit_settings_set_enable_accelerated_2d_canvas(IntPtr settings, bool enable);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static void webkit_settings_set_enable_webgl(IntPtr settings, bool enable);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static void webkit_settings_set_hardware_acceleration_policy(IntPtr settings, int policy);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
 			public extern static void webkit_web_view_load_uri(IntPtr web_view, string uri);
 
 			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
@@ -222,6 +237,36 @@ namespace ASEva.UIGtk
 		{
 			if (useNM3) return NM3.webkit_web_view_new();
 			else return NM4.webkit_web_view_new();
+		}
+
+		public static IntPtr webkit_web_view_new_with_settings(IntPtr settings)
+		{
+			if (useNM3) return NM3.webkit_web_view_new();
+			else return NM4.webkit_web_view_new_with_settings(settings);
+		}
+
+		public static IntPtr webkit_settings_new()
+		{
+			if(useNM3) return IntPtr.Zero;
+			else return NM4.webkit_settings_new();
+		}
+
+		public static void webkit_settings_set_enable_accelerated_2d_canvas(IntPtr settings, bool enable)
+		{
+			if (useNM3) return;
+			else NM4.webkit_settings_set_enable_accelerated_2d_canvas(settings, enable);
+		}
+
+		public static void webkit_settings_set_enable_webgl(IntPtr settings, bool enable)
+		{
+			if (useNM3) return;
+			else NM4.webkit_settings_set_enable_webgl(settings, enable);
+		}
+
+		public static void webkit_settings_set_hardware_acceleration_policy(IntPtr settings, int policy)
+		{
+			if (useNM3) return;
+			else NM4.webkit_settings_set_hardware_acceleration_policy(settings, policy);
 		}
 
 		public static void webkit_web_view_load_uri(IntPtr web_view, string uri)

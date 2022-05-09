@@ -68,7 +68,20 @@ namespace ASEva.UIGtk
 			Control = new Gtk.ScrolledWindow();
 			Control.Realized += delegate
 			{
-				webView = new Gtk.Widget(NativeMethods.webkit_web_view_new()) { Visible = true };
+				var runningOS = ASEva.UIEto.App.GetRunningOS();
+				var uiBackend = ASEva.UIEto.App.GetUIBackend();
+				if (runningOS == "linuxarm" && uiBackend != null && uiBackend == "wayland")
+				{
+					var settings = NativeMethods.webkit_settings_new();
+					NativeMethods.webkit_settings_set_enable_accelerated_2d_canvas(settings, false);
+					NativeMethods.webkit_settings_set_enable_webgl(settings, false);
+					NativeMethods.webkit_settings_set_hardware_acceleration_policy(settings, 2/* WEBKIT_HARDWARE_ACCELERATION_POLICY_NEVER */);
+					webView = new Gtk.Widget(NativeMethods.webkit_web_view_new_with_settings(settings)) { Visible = true };
+				}
+				else
+				{
+					webView = new Gtk.Widget(NativeMethods.webkit_web_view_new()) { Visible = true };
+				}
 				Control.Add(webView);
 
 				webView.AddSignalHandler(
