@@ -247,6 +247,11 @@ namespace ASEva
         bool IsReady();
         void DisablePlugin(String packID);
         void EnablePlugin(String packID);
+        void EnqueueDataToNative(object caller, String nativeClassID, String dataID, byte[] data);
+        byte[][] DequeueDataFromNative(object caller, String nativeClassID, String dataID);
+        byte[] CallNativeFunction(object caller, String nativeClassID, String funcID, byte[] input);
+        void SetAppFunctionHandler(object caller, String nativeClassID, String funcID, AppFunctionHandler handler);
+        void ResetAppFunctionHandler(object caller, String nativeClassID, String funcID);
     }
 
     /// <summary>
@@ -2660,6 +2665,66 @@ namespace ASEva
         public static void EnablePlugin(String packID)
         {
             Handler.EnablePlugin(packID);
+        }
+
+        /// <summary>
+        /// (api:app=2.6.0) 发送数据至原生层模块
+        /// </summary>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="nativeClassID">原生组件ID</param>
+        /// <param name="dataID">数据ID</param>
+        /// <param name="data">数据</param>
+        public static void EnqueueDataToNative(object caller, String nativeClassID, String dataID, byte[] data)
+        {
+            Handler.EnqueueDataToNative(caller, nativeClassID, dataID, data);
+        }
+
+        /// <summary>
+        /// (api:app=2.6.0) 接收所有从原生层模块发来的新数据
+        /// </summary>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="nativeClassID">原生组件ID</param>
+        /// <param name="dataID">数据ID</param>
+        /// <returns>所有新数据</returns>
+        public static byte[][] DequeueDataFromNative(object caller, String nativeClassID, String dataID)
+        {
+            return Handler.DequeueDataFromNative(caller, nativeClassID, dataID);
+        }
+
+        /// <summary>
+        /// (api:app=2.6.0) 调用原生层函数
+        /// </summary>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="nativeClassID">原生组件ID</param>
+        /// <param name="funcID">函数ID</param>
+        /// <param name="input">函数输入数据</param>
+        /// <returns>函数输出数据，若未找到相应模块或函数ID无响应则返回null</returns>
+        public static byte[] CallNativeFunction(object caller, String nativeClassID, String funcID, byte[] input)
+        {
+            return Handler.CallNativeFunction(caller, nativeClassID, funcID, input);
+        }
+
+        /// <summary>
+        /// (api:app=2.6.0) 设置供原生层模块调用的应用层函数
+        /// </summary>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="nativeClassID">原生组件ID</param>
+        /// <param name="funcID">函数ID</param>
+        /// <param name="handler">函数接口</param>
+        public static void SetAppFunctionHandler(object caller, String nativeClassID, String funcID, AppFunctionHandler handler)
+        {
+            Handler.SetAppFunctionHandler(caller, nativeClassID, funcID, handler);
+        }
+
+        /// <summary>
+        /// (api:app=2.6.0) 移除供原生层模块调用的应用层函数
+        /// </summary>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="nativeClassID">原生组件ID</param>
+        /// <param name="funcID">函数ID</param>
+        public static void ResetAppFunctionHandler(object caller, String nativeClassID, String funcID)
+        {
+            Handler.ResetAppFunctionHandler(caller, nativeClassID, funcID);
         }
     }
 }

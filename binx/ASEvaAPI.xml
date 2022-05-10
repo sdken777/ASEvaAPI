@@ -1680,9 +1680,54 @@
             </summary>
             <param name="packID">插件包ID</param>
         </member>
+        <member name="M:ASEva.Agency.EnqueueDataToNative(System.Object,System.String,System.String,System.Byte[])">
+            <summary>
+            (api:app=2.6.0) 发送数据至原生层模块
+            </summary>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+            <param name="nativeClassID">原生组件ID</param>
+            <param name="dataID">数据ID</param>
+            <param name="data">数据</param>
+        </member>
+        <member name="M:ASEva.Agency.DequeueDataFromNative(System.Object,System.String,System.String)">
+            <summary>
+            (api:app=2.6.0) 接收所有从原生层模块发来的新数据
+            </summary>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+            <param name="nativeClassID">原生组件ID</param>
+            <param name="dataID">数据ID</param>
+            <returns>所有新数据</returns>
+        </member>
+        <member name="M:ASEva.Agency.CallNativeFunction(System.Object,System.String,System.String,System.Byte[])">
+            <summary>
+            (api:app=2.6.0) 调用原生层函数
+            </summary>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+            <param name="nativeClassID">原生组件ID</param>
+            <param name="funcID">函数ID</param>
+            <param name="input">函数输入数据</param>
+            <returns>函数输出数据，若未找到相应模块或函数ID无响应则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetAppFunctionHandler(System.Object,System.String,System.String,ASEva.AppFunctionHandler)">
+            <summary>
+            (api:app=2.6.0) 设置供原生层模块调用的应用层函数
+            </summary>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+            <param name="nativeClassID">原生组件ID</param>
+            <param name="funcID">函数ID</param>
+            <param name="handler">函数接口</param>
+        </member>
+        <member name="M:ASEva.Agency.ResetAppFunctionHandler(System.Object,System.String,System.String)">
+            <summary>
+            (api:app=2.6.0) 移除供原生层模块调用的应用层函数
+            </summary>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+            <param name="nativeClassID">原生组件ID</param>
+            <param name="funcID">函数ID</param>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.5.1
+            version=2.6.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -6250,6 +6295,20 @@
             <summary>
             清单信息重复次数
             </summary>
+        </member>
+        <member name="T:ASEva.AppFunctionHandler">
+            <summary>
+            (api:app=2.6.0) 处理来自原生层的函数调用请求
+            </summary>
+        </member>
+        <member name="M:ASEva.AppFunctionHandler.OnCrossCall(System.String,System.String,System.Byte[])">
+            <summary>
+            处理函数（应确保毫秒级别的运行时间）
+            </summary>
+            <param name="nativeClassID">原生层模块对应的原生组件ID</param>
+            <param name="funcID">被调用的函数ID</param>
+            <param name="input">输入数据</param>
+            <returns>输出数据</returns>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">
             <summary>

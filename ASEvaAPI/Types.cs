@@ -1627,4 +1627,19 @@ namespace ASEva
         /// </summary>
         public int RepeatedCount { get; set; }
     }
+
+    /// <summary>
+    /// (api:app=2.6.0) 处理来自原生层的函数调用请求
+    /// </summary>
+    public interface AppFunctionHandler
+    {
+        /// <summary>
+        /// 处理函数（应确保毫秒级别的运行时间）
+        /// </summary>
+        /// <param name="nativeClassID">原生层模块对应的原生组件ID</param>
+        /// <param name="funcID">被调用的函数ID</param>
+        /// <param name="input">输入数据</param>
+        /// <returns>输出数据</returns>
+        byte[] OnCrossCall(String nativeClassID, String funcID, byte[] input);
+    }
 }

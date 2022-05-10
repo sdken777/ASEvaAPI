@@ -1162,5 +1162,27 @@ namespace ASEva
         {
             return null;
         }
+
+        public void EnqueueDataToNative(object caller, string nativeClassID, string dataID, byte[] data)
+        {
+        }
+
+        public byte[][] DequeueDataFromNative(object caller, string nativeClassID, string dataID)
+        {
+            return null;
+        }
+
+        public byte[] CallNativeFunction(object caller, string nativeClassID, string funcID, byte[] input)
+        {
+            return null;
+        }
+
+        public void SetAppFunctionHandler(object caller, string nativeClassID, string funcID, AppFunctionHandler handler)
+        {
+        }
+
+        public void ResetAppFunctionHandler(object caller, string nativeClassID, string funcID)
+        {
+        }
     }
 }
