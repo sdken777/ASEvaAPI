@@ -21,7 +21,7 @@ namespace ASEva
         public virtual String GetProcessorClassID() { return null; }
 
         /// <summary>
-        /// [可选实现] 创建配置对象时被调用。若不实现则仅包含一个默认的启用/禁用标志位
+        /// [可选实现] 创建配置对象时被调用。若不实现则为空配置，常时启用状态
         /// </summary>
         /// <returns>配置对象</returns>
         public virtual ModuleConfig CreateConfig() { return null; }

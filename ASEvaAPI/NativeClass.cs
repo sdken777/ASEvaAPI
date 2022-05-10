@@ -27,7 +27,7 @@ namespace ASEva
         public virtual String GetNativePluginType() { return null; }
 
         /// <summary>
-        /// [可选实现] 创建配置对象时被调用。若不实现则仅包含一个默认的启用/禁用标志位
+        /// [可选实现] 创建配置对象时被调用。若不实现则为空配置，常时启用状态
         /// </summary>
         /// <returns>配置对象</returns>
         public virtual ModuleConfig CreateConfig() { return null; }
@@ -39,7 +39,7 @@ namespace ASEva
         public virtual bool ContainsDeviceConnection() { return false; }
 
         /// <summary>
-        /// (api:app=2.2.0) 获取文件读写相关名称的集合
+        /// (api:app=2.2.0) [可选实现] 获取文件读写相关名称的集合
         /// </summary>
         /// <returns>文件读写相关名称的集合，默认为null，即不提供文件读写功能</returns>
         public virtual FileIONames GetFileIONames() { return null; }
