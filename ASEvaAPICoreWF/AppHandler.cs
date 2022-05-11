@@ -34,6 +34,7 @@ namespace ASEva.UICoreWF
 
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerCoreWF();
             ButtonPanel.UseInnerEnterLeave = true;
+            Pixel.CalculateByScreenRealScale = true;
 
             uiBackend = null;
             webViewBackend = "webview2";

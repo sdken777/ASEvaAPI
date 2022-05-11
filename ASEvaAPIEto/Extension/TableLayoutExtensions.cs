@@ -114,11 +114,11 @@ namespace ASEva.UIEto
             var button = new Button();
             if (image != null)
             {
-                if (SizerExtensions.PixelScale == 1) button.Image = image;
+                if (Pixel.Scale == 1) button.Image = image;
                 else
                 {
-                    var w = Math.Max(1, (int)(image.Width * SizerExtensions.PixelScale));
-                    var h = Math.Max(1, (int)(image.Height * SizerExtensions.PixelScale));
+                    var w = Math.Max(1, (int)(image.Width * Pixel.Scale));
+                    var h = Math.Max(1, (int)(image.Height * Pixel.Scale));
                     button.Image = new Bitmap(image, w, h, ImageInterpolation.High);
                 }
                 button.ImagePosition = ButtonImagePosition.Above;

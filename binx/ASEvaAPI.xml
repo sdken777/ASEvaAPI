@@ -488,6 +488,24 @@
             <param name="path">文件或文件夹路径</param>
             <returns>是否成功</returns>
         </member>
+        <member name="M:ASEva.Agency.GetGlobalVariableKeys">
+            <summary>
+            (api:app=2.6.1) 获取所有全局变量的键
+            </summary>
+            <returns>所有全局变量的键</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetGlobalParameterKeys">
+            <summary>
+            (api:app=2.6.1) 获取所有全局参数的键
+            </summary>
+            <returns>所有全局参数的键</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetGlobalPathKeys">
+            <summary>
+            (api:app=2.6.1) 获取所有全局路径的键
+            </summary>
+            <returns>所有全局路径的键</returns>
+        </member>
         <member name="M:ASEva.Agency.SetGlobalVariable(System.String,System.String)">
             <summary>
             设置全局变量
@@ -1727,7 +1745,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.0
+            version=2.6.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">

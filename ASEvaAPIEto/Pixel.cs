@@ -66,7 +66,7 @@ namespace ASEva.UIEto
             {
                 if (scale == 0)
                 {
-                    if (ASEva.APIInfo.GetRunningOS() == "windows" && App.GetRunningUI() == "corewf")
+                    if (CalculateByScreenRealScale)
                     {
                         var screen = Screen.PrimaryScreen;
                         scale = screen.RealScale;
@@ -79,5 +79,7 @@ namespace ASEva.UIEto
         }
 
         private static float scale = 0;
+
+        public static bool CalculateByScreenRealScale { private get; set; }
     }
 }

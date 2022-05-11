@@ -90,14 +90,14 @@ namespace ASEva.UIEto
             // set size
             if (padding.Top != null && padding.Bottom != null)
             {
-                var targetHeight = (int)(this.Height - (padding.Top.Value + padding.Bottom.Value) * SizerExtensions.PixelScale);
+                var targetHeight = (int)(this.Height - (padding.Top.Value + padding.Bottom.Value) * Pixel.Scale);
                 if (targetHeight < 16) visible = false;
                 else control.Height = targetHeight;
             }
 
             if (visible && padding.Left != null && padding.Right != null)
             {
-                var targetWidth = (int)(this.Width - (padding.Left.Value + padding.Right.Value) * SizerExtensions.PixelScale);
+                var targetWidth = (int)(this.Width - (padding.Left.Value + padding.Right.Value) * Pixel.Scale);
                 if (targetWidth < 16) visible = false;
                 else control.Width = targetWidth;
             }
@@ -115,17 +115,17 @@ namespace ASEva.UIEto
             if (padding.Left == null)
             {
                 if (padding.Right == null) posx = (this.Width - control.Width) / 2;
-                else posx = this.Width - (int)(padding.Right.Value * SizerExtensions.PixelScale) - control.Width;
+                else posx = this.Width - (int)(padding.Right.Value * Pixel.Scale) - control.Width;
             }
-            else posx = (int)(padding.Left.Value * SizerExtensions.PixelScale);
+            else posx = (int)(padding.Left.Value * Pixel.Scale);
 
             int posy = 0;
             if (padding.Top == null)
             {
                 if (padding.Bottom == null) posy = (this.Height - control.Height) / 2;
-                else posy = this.Height - (int)(padding.Bottom.Value * SizerExtensions.PixelScale) - control.Height;
+                else posy = this.Height - (int)(padding.Bottom.Value * Pixel.Scale) - control.Height;
             }
-            else posy = (int)(padding.Top.Value * SizerExtensions.PixelScale);
+            else posy = (int)(padding.Top.Value * Pixel.Scale);
 
             if (add) Add(control, posx, posy);
             else Move(control, posx, posy);

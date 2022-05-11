@@ -1184,5 +1184,20 @@ namespace ASEva
         public void ResetAppFunctionHandler(object caller, string nativeClassID, string funcID)
         {
         }
+
+        public string[] GetGlobalVariableKeys()
+        {
+            return null;
+        }
+
+        public string[] GetGlobalParameterKeys()
+        {
+            return null;
+        }
+
+        public string[] GetGlobalPathKeys()
+        {
+            return null;
+        }
     }
 }

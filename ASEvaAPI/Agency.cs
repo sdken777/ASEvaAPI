@@ -10,6 +10,9 @@ namespace ASEva
         String GetConfigFilesRoot();
         String GetAppFilesRoot();
         String GetTempFilesRoot();
+        String[] GetGlobalVariableKeys();
+        String[] GetGlobalParameterKeys();
+        String[] GetGlobalPathKeys();
         void SetGlobalVariable(String key, String value);
         String GetGlobalVariable(String key, String defaultValue);
         void SetGlobalParameter(String key, String value);
@@ -966,6 +969,33 @@ namespace ASEva
         public static bool DeleteToRecycleBin(String path)
         {
             return Handler.DeleteToRecycleBin(path);
+        }
+
+        /// <summary>
+        /// (api:app=2.6.1) 获取所有全局变量的键
+        /// </summary>
+        /// <returns>所有全局变量的键</returns>
+        public static String[] GetGlobalVariableKeys()
+        {
+            return Handler.GetGlobalVariableKeys();
+        }
+
+        /// <summary>
+        /// (api:app=2.6.1) 获取所有全局参数的键
+        /// </summary>
+        /// <returns>所有全局参数的键</returns>
+        public static String[] GetGlobalParameterKeys()
+        {
+            return Handler.GetGlobalParameterKeys();
+        }
+
+        /// <summary>
+        /// (api:app=2.6.1) 获取所有全局路径的键
+        /// </summary>
+        /// <returns>所有全局路径的键</returns>
+        public static String[] GetGlobalPathKeys()
+        {
+            return Handler.GetGlobalPathKeys();
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace ASEva.UIEto
         /// <param name="g">图形对象</param>
         public static void SetScaleForLogical(this Graphics g)
         {
-            g.ScaleTransform(SizerExtensions.PixelScale);
+            g.ScaleTransform(Pixel.Scale);
             
         }
 
@@ -27,12 +27,8 @@ namespace ASEva.UIEto
         /// <returns>可用于绘制的字体</returns>
         public static Font ScaledFont(this Graphics g, Font f)
         {
-            if (ASEva.APIInfo.GetRunningOS() == "windows")
-            {
-                if (SizerExtensions.PixelScale == 1) return f;
-                else return new Font(f.Family, f.Size / SizerExtensions.PixelScale, f.FontStyle, f.FontDecoration);
-            }
-            else return f;
+            if (Pixel.Scale == 1) return f;
+            else return new Font(f.Family, f.Size / Pixel.Scale, f.FontStyle, f.FontDecoration);
         }
 
         /// <summary>
@@ -44,12 +40,8 @@ namespace ASEva.UIEto
         public static Font ScaledDefaultFont(this Graphics g, float sizeRatio = 1)
         {
             var f = App.DefaultFont(sizeRatio);
-            if (ASEva.APIInfo.GetRunningOS() == "windows")
-            {
-                if (SizerExtensions.PixelScale == 1) return f;
-                else return new Font(f.Family, f.Size / SizerExtensions.PixelScale, f.FontStyle, f.FontDecoration);
-            }
-            else return f;
+            if (Pixel.Scale == 1) return f;
+            else return new Font(f.Family, f.Size / Pixel.Scale, f.FontStyle, f.FontDecoration);
         }
     }
 }

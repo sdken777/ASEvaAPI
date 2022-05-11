@@ -101,11 +101,11 @@ namespace ASEva.UIEto
             var button = new Button();
             if (image != null)
             {
-                if (SizerExtensions.PixelScale == 1) button.Image = image;
+                if (Pixel.Scale == 1) button.Image = image;
                 else
                 {
-                    var w = Math.Max(1, (int)(image.Width * SizerExtensions.PixelScale));
-                    var h = Math.Max(1, (int)(image.Height * SizerExtensions.PixelScale));
+                    var w = Math.Max(1, (int)(image.Width * Pixel.Scale));
+                    var h = Math.Max(1, (int)(image.Height * Pixel.Scale));
                     button.Image = new Bitmap(image, w, h, ImageInterpolation.High);
                 }
                 button.ImagePosition = ButtonImagePosition.Above;
@@ -147,10 +147,10 @@ namespace ASEva.UIEto
         public static ButtonPanel AddButtonPanel(this StackLayout stackLayout, Bitmap image, bool expand = false, int logicalWidth = 0, int logicalHeight = 0, int logicalPadding = 8)
         {
             if (image == null) return AddButtonPanel(stackLayout, "", expand, logicalWidth, logicalHeight);
-            if (SizerExtensions.PixelScale != 1)
+            if (Pixel.Scale != 1)
             {
-                var w = Math.Max(1, (int)(image.Width * SizerExtensions.PixelScale));
-                var h = Math.Max(1, (int)(image.Height * SizerExtensions.PixelScale));
+                var w = Math.Max(1, (int)(image.Width * Pixel.Scale));
+                var h = Math.Max(1, (int)(image.Height * Pixel.Scale));
                 image = new Bitmap(image, w, h, ImageInterpolation.High);
             }
             var panel = new ButtonPanel(image, logicalPadding);

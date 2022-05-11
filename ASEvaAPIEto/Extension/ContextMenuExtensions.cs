@@ -20,7 +20,7 @@ namespace ASEva.UIEto
             if (panel.ContextMenu != null) return null;
             var menu = new ContextMenu();
             panel.ContextMenu = menu;
-            if (App.GetRunningUI() == "gtk")
+            if (ShouldAddMouseDownEvent)
             {
                 panel.MouseDown += (o, args) =>
                 {
@@ -90,5 +90,7 @@ namespace ASEva.UIEto
             }
             return list.ToArray();
         }
+
+        public static bool ShouldAddMouseDownEvent { private get; set; }
     }
 }

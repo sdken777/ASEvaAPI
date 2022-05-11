@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 6, 6); // arm下基于wayland的WebView禁用OpenGL（兼容性考虑）
+            return new Version(2, 1, 6, 7); // 设置ContextMenuExtensions.ShouldAddMouseDownEvent
         }
     }
 }

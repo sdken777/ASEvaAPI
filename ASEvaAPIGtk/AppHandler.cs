@@ -57,6 +57,8 @@ namespace ASEva.UIGtk
                 OverlayLayout.DelayHandleControl = true;
             }
 
+            ContextMenuExtensions.ShouldAddMouseDownEvent = true;
+
             return app;
         }
 
