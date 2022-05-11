@@ -1626,6 +1626,13 @@
             <param name="transformID">分化ID</param>
             <returns>分化对话框组件信息，若未找到返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetTaskClassInfo(System.String)">
+            <summary>
+            (api:app=2.6.2) 获取独立任务组件信息
+            </summary>
+            <param name="taskClassID">独立任务组件ID</param>
+            <returns>独立任务组件信息，若未找到返回null</returns>
+        </member>
         <member name="M:ASEva.Agency.DecodeImage(System.Byte[])">
             <summary>
             (api:app=2.3.0) 解码图像数据
@@ -1745,7 +1752,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.1
+            version=2.6.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">

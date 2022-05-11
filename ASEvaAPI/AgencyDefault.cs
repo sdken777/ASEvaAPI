@@ -986,6 +986,11 @@ namespace ASEva
             return null;
         }
 
+        public TaskClassInfo GetTaskClassInfo(string taskClassID)
+        {
+            return null;
+        }
+
         public CommonImage DecodeImage(byte[] imageData)
         {
             return null;

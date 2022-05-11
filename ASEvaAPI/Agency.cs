@@ -239,6 +239,7 @@ namespace ASEva
         WindowClassInfo GetWindowClassInfo(String windowClassID, String transformID);
         DialogClassInfo GetDialogClassInfo(String dialogClassID);
         DialogClassInfo GetDialogClassInfo(String dialogClassID, String transformID);
+        TaskClassInfo GetTaskClassInfo(String taskClassID);
         CommonImage DecodeImage(byte[] imageData);
         byte[] EncodeImage(CommonImage image, String format);
         SignalTreeNode[] GetSignalTree();
@@ -2590,6 +2591,16 @@ namespace ASEva
         public static DialogClassInfo GetDialogClassInfo(String dialogClassID, String transformID)
         {
             return Handler.GetDialogClassInfo(dialogClassID, transformID);
+        }
+
+        /// <summary>
+        /// (api:app=2.6.2) 获取独立任务组件信息
+        /// </summary>
+        /// <param name="taskClassID">独立任务组件ID</param>
+        /// <returns>独立任务组件信息，若未找到返回null</returns>
+        public static TaskClassInfo GetTaskClassInfo(String taskClassID)
+        {
+            return Handler.GetTaskClassInfo(taskClassID);
         }
 
         /// <summary>
