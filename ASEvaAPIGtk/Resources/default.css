@@ -29,6 +29,11 @@ spinbutton > button
   padding: 0pt;
 }
 
+treeview
+{
+  border-color:lightgray;
+}
+
 treeview > entry
 {
   min-height: 0pt;

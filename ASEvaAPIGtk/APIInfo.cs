@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 6, 7); // 设置ContextMenuExtensions.ShouldAddMouseDownEvent
+            return new Version(2, 1, 6, 8); // 优化表格分割线颜色
         }
     }
 }
