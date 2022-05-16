@@ -45,6 +45,7 @@ namespace ASEva
         bool UpdateBusProtocolFilePath(BusProtocolFileID fileID, String filePath);
         BusProtocolFileState GetBusProtocolFileState(BusProtocolFileID fileID);
         bool AddBusProtocolFile(String filePath, out BusProtocolFileID fileID);
+        AddBusProtocolResult AddBusProtocolFile(String filePath);
         void RemoveBusProtocolFile(BusProtocolFileID fileID);
         String GetChannelAliasName(String key);
         Dictionary<String, String> GetChannelAliasTable();
@@ -1062,9 +1063,9 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 获取所有总线通道上的协议文件信息
+        /// 获取所有总线通道上的协议信息
         /// </summary>
-        /// <returns>总线协议文件信息列表</returns>
+        /// <returns>总线协议信息列表，同个文件的多个通道将分列</returns>
         public static BusFileInfo[] GetBusProtocolFilesInfo()
         {
             return Handler.GetBusProtocolFilesInfo();
@@ -1073,7 +1074,7 @@ namespace ASEva
         /// <summary>
         /// 获取总线协议文件当前配置于哪个通道
         /// </summary>
-        /// <param name="fileID">文件ID</param>
+        /// <param name="fileID">文件ID（多通道的情况下包括通道名）</param>
         /// <returns>总线通道（1~16），若未配置则返回null</returns>
         public static int? GetBusProtocolFileChannel(String fileID)
         {
@@ -1497,18 +1498,18 @@ namespace ASEva
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 获取总线协议文件ID列表
+        /// (api:app=2.3.0) 获取总线协议ID列表
         /// </summary>
-        /// <returns>总线协议文件ID列表</returns>
+        /// <returns>总线协议ID列表</returns>
         public static BusProtocolFileID[] GetBusProtocolFileIDList()
         {
             return Handler.GetBusProtocolFileIDList();
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 获取总线协议文件路径
+        /// (api:app=2.3.0) 获取总线协议对应文件的路径
         /// </summary>
-        /// <param name="fileID">总线协议文件ID</param>
+        /// <param name="fileID">总线协议ID</param>
         /// <returns>总线协议文件路径，若未找到返回null</returns>
         public static String GetBusProtocolFilePath(BusProtocolFileID fileID)
         {
@@ -1516,9 +1517,9 @@ namespace ASEva
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 更新总线协议文件路径
+        /// (api:app=2.3.0) 更新总线协议文件路径(仅支持单通道的情况)
         /// </summary>
-        /// <param name="fileID">总线协议文件ID</param>
+        /// <param name="fileID">总线协议ID</param>
         /// <param name="filePath">新路径</param>
         /// <returns>是否成功更新，false表示未找到文件或MD5不匹配</returns>
         public static bool UpdateBusProtocolFilePath(BusProtocolFileID fileID, String filePath)
@@ -1527,9 +1528,9 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 获取总线协议文件的状态
+        /// 获取总线协议对应文件的状态
         /// </summary>
-        /// <param name="fileID">总线协议文件ID</param>
+        /// <param name="fileID">总线协议ID</param>
         /// <returns>文件状态</returns>
         public static BusProtocolFileState GetBusProtocolFileState(BusProtocolFileID fileID)
         {
@@ -1537,20 +1538,30 @@ namespace ASEva
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 添加新的总线协议文件
+        /// (api:app=2.3.0) 添加新的总线协议文件(多通道协议文件将按单通道处理，输出首个通道)
         /// </summary>
         /// <param name="filePath">总线协议文件路径</param>
-        /// <param name="fileID">总线协议文件ID，若文件存在则输出该ID，否则输出null</param>
-        /// <returns>是否为新添加的总线协议文件ID</returns>
+        /// <param name="fileID">总线协议ID，若文件存在则输出该ID，否则输出null</param>
+        /// <returns>是否为新添加的总线协议ID</returns>
         public static bool AddBusProtocolFile(String filePath, out BusProtocolFileID fileID)
         {
             return Handler.AddBusProtocolFile(filePath, out fileID);
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 移除总线协议文件
+        /// (api:app=2.6.3) 添加新的总线协议文件
         /// </summary>
-        /// <param name="fileID">总线协议文件ID</param>
+        /// <param name="filePath">总线协议文件路径</param>
+        /// <returns>添加结果</returns>
+        public static AddBusProtocolResult AddBusProtocolFile(String filePath)
+        {
+            return Handler.AddBusProtocolFile(filePath);
+        }
+
+        /// <summary>
+        /// (api:app=2.3.0) 移除总线协议
+        /// </summary>
+        /// <param name="fileID">总线协议ID</param>
         public static void RemoveBusProtocolFile(BusProtocolFileID fileID)
         {
             Handler.RemoveBusProtocolFile(fileID);

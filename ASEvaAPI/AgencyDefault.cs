@@ -1204,5 +1204,10 @@ namespace ASEva
         {
             return null;
         }
+
+        public AddBusProtocolResult AddBusProtocolFile(string filePath)
+        {
+            return AddBusProtocolResult.Invalid;
+        }
     }
 }

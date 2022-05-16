@@ -539,7 +539,7 @@ namespace ASEva
     public class BusFileInfo
     {
         /// <summary>
-        /// 文件ID
+        /// 文件ID（多通道的情况下包括通道名）
         /// </summary>
         public String FileID { get; set; }
 
@@ -589,11 +589,18 @@ namespace ASEva
     }
 
     /// <summary>
-    /// (api:app=2.0.0) 总线协议文件ID
+    /// (api:app=2.0.0) 总线协议ID
     /// </summary>
     public class BusProtocolFileID
     {
+        /// <summary>
+        /// 文件ID（多通道的情况下包括通道名）
+        /// </summary>
         public String FileName { get; set; }
+
+        /// <summary>
+        /// 文件MD5
+        /// </summary>
         public String MD5 { get; set; }
 
         public override bool Equals(object obj)
@@ -1641,5 +1648,31 @@ namespace ASEva
         /// <param name="input">输入数据</param>
         /// <returns>输出数据</returns>
         byte[] OnCrossCall(String nativeClassID, String funcID, byte[] input);
+    }
+
+    /// <summary>
+    /// (api:app=2.6.3) 添加总线协议文件结果
+    /// </summary>
+    public enum AddBusProtocolResult
+    {
+        /// <summary>
+        /// 无效参数或未实现
+        /// </summary>
+        Invalid,
+
+        /// <summary>
+        /// 成功添加
+        /// </summary>
+        OK,
+
+        /// <summary>
+        /// 已添加过
+        /// </summary>
+        AlreadyAdded,
+
+        /// <summary>
+        /// 无法计算文件MD5
+        /// </summary>
+        CalculateMD5Failed,
     }
 }
