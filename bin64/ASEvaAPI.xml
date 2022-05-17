@@ -1759,7 +1759,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.3
+            version=2.6.4
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4190,6 +4190,12 @@
             <summary>
             音频帧数据
             </summary>
+        </member>
+        <member name="P:ASEva.Samples.AudioFrameSample.MD5">
+            <summary>
+            (api:app=2.6.4) 音频帧数据的MD5
+            </summary>
+            <value></value>
         </member>
         <member name="T:ASEva.Samples.BusMessageSample">
             <summary>
