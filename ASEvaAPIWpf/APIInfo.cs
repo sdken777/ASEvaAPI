@@ -18,7 +18,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 0, 4, 0); // 支持返回uiBackend
+            return new Version(1, 0, 4, 1); // 设置ImageConverter.Mode
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using ASEva.Utility;
+using ASEva.Samples;
 using ASEva.UIEto;
 using Eto.Forms;
 using Eto.Drawing;
@@ -211,46 +212,24 @@ namespace ASEvaAPIEtoTest
             var imageView3 = layoutImages.AddControl(new ImageView(), false, 100, 100) as ImageView;
             var imageView4 = layoutImages.AddControl(new ImageView(), false, 100, 100) as ImageView;
 
-            var bitmap3 = new Bitmap(100, 100, PixelFormat.Format24bppRgb);
-            using (var bitmapData = bitmap3.Lock())
+            var image3 = CommonImage.Create(100, 100, false);
+            var image4 = CommonImage.Create(100, 100, true);
+            for (int i = 0; i < 100; i++)
             {
-                unsafe
+                for (int j = 0; j < 100; j++)
                 {
-                    var dstData = (byte*)bitmapData.Data;
-                    for (int i = 0; i < bitmap3.Height; i++)
-                    {
-                        byte *dstRow = dstData + i * bitmapData.ScanWidth;
-                        for (int j = 0; j < bitmap3.Width; j++)
-                        {
-                            dstRow[3 * j] = (byte)(50 + j * 2); // B
-                            dstRow[3 * j + 1] = (byte)(250 - j * 2); // G
-                            dstRow[3 * j + 2] = 128; // R
-                        }
-                    }
-                }
-            }
-            imageView3.Image = bitmap3;
+                    image3.Data[i * image3.RowBytes + j * 3] = (byte)(50 + j * 2); // B
+                    image3.Data[i * image3.RowBytes + j * 3 + 1] = (byte)(250 - j * 2); // G
+                    image3.Data[i * image3.RowBytes + j * 3 + 2] = 128; // R
 
-            var bitmap4 = new Bitmap(100, 100, PixelFormat.Format32bppRgba);
-            using (var bitmapData = bitmap4.Lock())
-            {
-                unsafe
-                {
-                    var dstData = (byte*)bitmapData.Data;
-                    for (int i = 0; i < bitmap4.Height; i++)
-                    {
-                        byte *dstRow = dstData + i * bitmapData.ScanWidth;
-                        for (int j = 0; j < bitmap4.Width; j++)
-                        {
-                            dstRow[4 * j] = 128; // B
-                            dstRow[4 * j + 1] = 128; // G
-                            dstRow[4 * j + 2] = (byte)(100 + i); // R
-                            dstRow[4 * j + 3] = (byte)(200 - i * 2); // A
-                        }
-                    }
+                    image4.Data[i * image4.RowBytes + j * 4] = 128; // B
+                    image4.Data[i * image4.RowBytes + j * 4 + 1] = 128; // G
+                    image4.Data[i * image4.RowBytes + j * 4 + 2] = (byte)(100 + i); // R
+                    image4.Data[i * image4.RowBytes + j * 4 + 3] = (byte)(200 - j * 2); // A
                 }
             }
-            imageView4.Image = bitmap4;
+            imageView3.Image = ASEva.UIEto.ImageConverter.ConvertToBitmap(image3) as Bitmap;
+            imageView4.Image = ASEva.UIEto.ImageConverter.ConvertToBitmap(image4) as Bitmap;
 
             drawable.Paint += drawable_Paint;
         }

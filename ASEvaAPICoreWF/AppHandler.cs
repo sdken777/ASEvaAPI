@@ -35,6 +35,7 @@ namespace ASEva.UICoreWF
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerCoreWF();
             ButtonPanel.UseInnerEnterLeave = true;
             Pixel.CalculateByScreenRealScale = true;
+            ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.AlphaScale;
 
             uiBackend = null;
             webViewBackend = "webview2";

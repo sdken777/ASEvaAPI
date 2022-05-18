@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 5, 1); // 设置Pixel.CalculateByScreenRealScale
+            return new Version(2, 1, 5, 2); // 设置ImageConverter.Mode
         }
     }
 }

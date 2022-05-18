@@ -58,6 +58,7 @@ namespace ASEva.UIGtk
             }
 
             ContextMenuExtensions.ShouldAddMouseDownEvent = true;
+            ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.ColorInverted;
 
             return app;
         }
