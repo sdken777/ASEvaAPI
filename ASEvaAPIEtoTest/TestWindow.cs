@@ -207,6 +207,51 @@ namespace ASEvaAPIEtoTest
             layoutOverlay.AddControl(new Button { Text = "C"}, null, 10, 10, null);
             layoutOverlay.AddControl(new Button { Text = "D"}, null, 10, null, 10);
 
+            var layoutImages = layoutRow.AddColumnLayout();
+            var imageView3 = layoutImages.AddControl(new ImageView(), false, 100, 100) as ImageView;
+            var imageView4 = layoutImages.AddControl(new ImageView(), false, 100, 100) as ImageView;
+
+            var bitmap3 = new Bitmap(100, 100, PixelFormat.Format24bppRgb);
+            using (var bitmapData = bitmap3.Lock())
+            {
+                unsafe
+                {
+                    var dstData = (byte*)bitmapData.Data;
+                    for (int i = 0; i < bitmap3.Height; i++)
+                    {
+                        byte *dstRow = dstData + i * bitmapData.ScanWidth;
+                        for (int j = 0; j < bitmap3.Width; j++)
+                        {
+                            dstRow[3 * j] = (byte)(50 + j * 2); // B
+                            dstRow[3 * j + 1] = (byte)(250 - j * 2); // G
+                            dstRow[3 * j + 2] = 128; // R
+                        }
+                    }
+                }
+            }
+            imageView3.Image = bitmap3;
+
+            var bitmap4 = new Bitmap(100, 100, PixelFormat.Format32bppRgba);
+            using (var bitmapData = bitmap4.Lock())
+            {
+                unsafe
+                {
+                    var dstData = (byte*)bitmapData.Data;
+                    for (int i = 0; i < bitmap4.Height; i++)
+                    {
+                        byte *dstRow = dstData + i * bitmapData.ScanWidth;
+                        for (int j = 0; j < bitmap4.Width; j++)
+                        {
+                            dstRow[4 * j] = 128; // B
+                            dstRow[4 * j + 1] = 128; // G
+                            dstRow[4 * j + 2] = (byte)(100 + i); // R
+                            dstRow[4 * j + 3] = (byte)(200 - i * 2); // A
+                        }
+                    }
+                }
+            }
+            imageView4.Image = bitmap4;
+
             drawable.Paint += drawable_Paint;
         }
 
