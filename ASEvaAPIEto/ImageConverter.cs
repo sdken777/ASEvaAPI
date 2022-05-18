@@ -30,9 +30,9 @@ namespace ASEva.UIEto
                                 byte *dstRow = dstData + i * bitmapData.ScanWidth;
                                 for (int j = 0; j < image.Width; j++)
                                 {
-                                    dstRow[4 * j] = srcRow[4 * j + 2];
+                                    dstRow[4 * j] = srcRow[4 * j];
                                     dstRow[4 * j + 1] = srcRow[4 * j + 1];
-                                    dstRow[4 * j + 2] = srcRow[4 * j];
+                                    dstRow[4 * j + 2] = srcRow[4 * j + 2];
                                     dstRow[4 * j + 3] = srcRow[4 * j + 3];
                                 }
                             }
@@ -56,9 +56,9 @@ namespace ASEva.UIEto
                                 byte *dstRow = dstData + i * bitmapData.ScanWidth;
                                 for (int j = 0; j < image.Width; j++)
                                 {
-                                    dstRow[3 * j] = srcRow[3 * j + 2];
+                                    dstRow[3 * j] = srcRow[3 * j];
                                     dstRow[3 * j + 1] = srcRow[3 * j + 1];
-                                    dstRow[3 * j + 2] = srcRow[3 * j];
+                                    dstRow[3 * j + 2] = srcRow[3 * j + 2];
                                 }
                             }
                         }
@@ -90,9 +90,9 @@ namespace ASEva.UIEto
                                 byte *dstRow = dstData + i * image.RowBytes;
                                 for (int j = 0; j < image.Width; j++)
                                 {
-                                    dstRow[3 * j] = srcRow[3 * j + 2];
+                                    dstRow[3 * j] = srcRow[3 * j];
                                     dstRow[3 * j + 1] = srcRow[3 * j + 1];
-                                    dstRow[3 * j + 2] = srcRow[3 * j];
+                                    dstRow[3 * j + 2] = srcRow[3 * j + 2];
                                 }
                             }
                         }
@@ -113,9 +113,9 @@ namespace ASEva.UIEto
                                 byte *dstRow = dstData + i * image.RowBytes;
                                 for (int j = 0; j < image.Width; j++)
                                 {
-                                    dstRow[4 * j] = srcRow[4 * j + 2];
+                                    dstRow[4 * j] = srcRow[4 * j];
                                     dstRow[4 * j + 1] = srcRow[4 * j + 1];
-                                    dstRow[4 * j + 2] = srcRow[4 * j];
+                                    dstRow[4 * j + 2] = srcRow[4 * j + 2];
                                     dstRow[4 * j + 3] = srcRow[4 * j + 3];
                                 }
                             }
