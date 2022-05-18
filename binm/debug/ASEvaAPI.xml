@@ -488,6 +488,24 @@
             <param name="path">文件或文件夹路径</param>
             <returns>是否成功</returns>
         </member>
+        <member name="M:ASEva.Agency.GetGlobalVariableKeys">
+            <summary>
+            (api:app=2.6.1) 获取所有全局变量的键
+            </summary>
+            <returns>所有全局变量的键</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetGlobalParameterKeys">
+            <summary>
+            (api:app=2.6.1) 获取所有全局参数的键
+            </summary>
+            <returns>所有全局参数的键</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetGlobalPathKeys">
+            <summary>
+            (api:app=2.6.1) 获取所有全局路径的键
+            </summary>
+            <returns>所有全局路径的键</returns>
+        </member>
         <member name="M:ASEva.Agency.SetGlobalVariable(System.String,System.String)">
             <summary>
             设置全局变量
@@ -534,15 +552,15 @@
         </member>
         <member name="M:ASEva.Agency.GetBusProtocolFilesInfo">
             <summary>
-            获取所有总线通道上的协议文件信息
+            获取所有总线通道上的协议信息
             </summary>
-            <returns>总线协议文件信息列表</returns>
+            <returns>总线协议信息列表，同个文件的多个通道将分列</returns>
         </member>
         <member name="M:ASEva.Agency.GetBusProtocolFileChannel(System.String)">
             <summary>
             获取总线协议文件当前配置于哪个通道
             </summary>
-            <param name="fileID">文件ID</param>
+            <param name="fileID">文件ID（多通道的情况下包括通道名）</param>
             <returns>总线通道（1~16），若未配置则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetBusFloat32Signals">
@@ -840,45 +858,52 @@
         </member>
         <member name="M:ASEva.Agency.GetBusProtocolFileIDList">
             <summary>
-            (api:app=2.3.0) 获取总线协议文件ID列表
+            (api:app=2.3.0) 获取总线协议ID列表
             </summary>
-            <returns>总线协议文件ID列表</returns>
+            <returns>总线协议ID列表</returns>
         </member>
         <member name="M:ASEva.Agency.GetBusProtocolFilePath(ASEva.BusProtocolFileID)">
             <summary>
-            (api:app=2.3.0) 获取总线协议文件路径
+            (api:app=2.3.0) 获取总线协议对应文件的路径
             </summary>
-            <param name="fileID">总线协议文件ID</param>
+            <param name="fileID">总线协议ID</param>
             <returns>总线协议文件路径，若未找到返回null</returns>
         </member>
         <member name="M:ASEva.Agency.UpdateBusProtocolFilePath(ASEva.BusProtocolFileID,System.String)">
             <summary>
-            (api:app=2.3.0) 更新总线协议文件路径
+            (api:app=2.3.0) 更新总线协议文件路径(仅支持单通道的情况)
             </summary>
-            <param name="fileID">总线协议文件ID</param>
+            <param name="fileID">总线协议ID</param>
             <param name="filePath">新路径</param>
             <returns>是否成功更新，false表示未找到文件或MD5不匹配</returns>
         </member>
         <member name="M:ASEva.Agency.GetBusProtocolFileState(ASEva.BusProtocolFileID)">
             <summary>
-            获取总线协议文件的状态
+            获取总线协议对应文件的状态
             </summary>
-            <param name="fileID">总线协议文件ID</param>
+            <param name="fileID">总线协议ID</param>
             <returns>文件状态</returns>
         </member>
         <member name="M:ASEva.Agency.AddBusProtocolFile(System.String,ASEva.BusProtocolFileID@)">
             <summary>
-            (api:app=2.3.0) 添加新的总线协议文件
+            (api:app=2.3.0) 添加新的总线协议文件(多通道协议文件将按单通道处理，输出首个通道)
             </summary>
             <param name="filePath">总线协议文件路径</param>
-            <param name="fileID">总线协议文件ID，若文件存在则输出该ID，否则输出null</param>
-            <returns>是否为新添加的总线协议文件ID</returns>
+            <param name="fileID">总线协议ID，若文件存在则输出该ID，否则输出null</param>
+            <returns>是否为新添加的总线协议ID</returns>
+        </member>
+        <member name="M:ASEva.Agency.AddBusProtocolFile(System.String)">
+            <summary>
+            (api:app=2.6.3) 添加新的总线协议文件
+            </summary>
+            <param name="filePath">总线协议文件路径</param>
+            <returns>添加结果</returns>
         </member>
         <member name="M:ASEva.Agency.RemoveBusProtocolFile(ASEva.BusProtocolFileID)">
             <summary>
-            (api:app=2.3.0) 移除总线协议文件
+            (api:app=2.3.0) 移除总线协议
             </summary>
-            <param name="fileID">总线协议文件ID</param>
+            <param name="fileID">总线协议ID</param>
         </member>
         <member name="M:ASEva.Agency.GetNativePluginVersions(System.String)">
             <summary>
@@ -1608,6 +1633,13 @@
             <param name="transformID">分化ID</param>
             <returns>分化对话框组件信息，若未找到返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetTaskClassInfo(System.String)">
+            <summary>
+            (api:app=2.6.2) 获取独立任务组件信息
+            </summary>
+            <param name="taskClassID">独立任务组件ID</param>
+            <returns>独立任务组件信息，若未找到返回null</returns>
+        </member>
         <member name="M:ASEva.Agency.DecodeImage(System.Byte[])">
             <summary>
             (api:app=2.3.0) 解码图像数据
@@ -1680,9 +1712,54 @@
             </summary>
             <param name="packID">插件包ID</param>
         </member>
+        <member name="M:ASEva.Agency.EnqueueDataToNative(System.Object,System.String,System.String,System.Byte[])">
+            <summary>
+            (api:app=2.6.0) 发送数据至原生层模块
+            </summary>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+            <param name="nativeClassID">原生组件ID</param>
+            <param name="dataID">数据ID</param>
+            <param name="data">数据</param>
+        </member>
+        <member name="M:ASEva.Agency.DequeueDataFromNative(System.Object,System.String,System.String)">
+            <summary>
+            (api:app=2.6.0) 接收所有从原生层模块发来的新数据
+            </summary>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+            <param name="nativeClassID">原生组件ID</param>
+            <param name="dataID">数据ID</param>
+            <returns>所有新数据</returns>
+        </member>
+        <member name="M:ASEva.Agency.CallNativeFunction(System.Object,System.String,System.String,System.Byte[])">
+            <summary>
+            (api:app=2.6.0) 调用原生层函数
+            </summary>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+            <param name="nativeClassID">原生组件ID</param>
+            <param name="funcID">函数ID</param>
+            <param name="input">函数输入数据</param>
+            <returns>函数输出数据，若未找到相应模块或函数ID无响应则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetAppFunctionHandler(System.Object,System.String,System.String,ASEva.AppFunctionHandler)">
+            <summary>
+            (api:app=2.6.0) 设置供原生层模块调用的应用层函数
+            </summary>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+            <param name="nativeClassID">原生组件ID</param>
+            <param name="funcID">函数ID</param>
+            <param name="handler">函数接口</param>
+        </member>
+        <member name="M:ASEva.Agency.ResetAppFunctionHandler(System.Object,System.String,System.String)">
+            <summary>
+            (api:app=2.6.0) 移除供原生层模块调用的应用层函数
+            </summary>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+            <param name="nativeClassID">原生组件ID</param>
+            <param name="funcID">函数ID</param>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.5.1
+            version=2.6.4
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3680,7 +3757,7 @@
         </member>
         <member name="M:ASEva.NativeClass.CreateConfig">
             <summary>
-            [可选实现] 创建配置对象时被调用。若不实现则仅包含一个默认的启用/禁用标志位
+            [可选实现] 创建配置对象时被调用。若不实现则为空配置，常时启用状态
             </summary>
             <returns>配置对象</returns>
         </member>
@@ -3692,7 +3769,7 @@
         </member>
         <member name="M:ASEva.NativeClass.GetFileIONames">
             <summary>
-            (api:app=2.2.0) 获取文件读写相关名称的集合
+            (api:app=2.2.0) [可选实现] 获取文件读写相关名称的集合
             </summary>
             <returns>文件读写相关名称的集合，默认为null，即不提供文件读写功能</returns>
         </member>
@@ -3881,7 +3958,7 @@
         </member>
         <member name="M:ASEva.ProcessorClass.CreateConfig">
             <summary>
-            [可选实现] 创建配置对象时被调用。若不实现则仅包含一个默认的启用/禁用标志位
+            [可选实现] 创建配置对象时被调用。若不实现则为空配置，常时启用状态
             </summary>
             <returns>配置对象</returns>
         </member>
@@ -4113,6 +4190,12 @@
             <summary>
             音频帧数据
             </summary>
+        </member>
+        <member name="P:ASEva.Samples.AudioFrameSample.MD5">
+            <summary>
+            (api:app=2.6.4) 音频帧数据的MD5
+            </summary>
+            <value></value>
         </member>
         <member name="T:ASEva.Samples.BusMessageSample">
             <summary>
@@ -5339,7 +5422,7 @@
         </member>
         <member name="P:ASEva.BusFileInfo.FileID">
             <summary>
-            文件ID
+            文件ID（多通道的情况下包括通道名）
             </summary>
         </member>
         <member name="P:ASEva.BusFileInfo.FilePath">
@@ -5381,7 +5464,17 @@
         </member>
         <member name="T:ASEva.BusProtocolFileID">
             <summary>
-            (api:app=2.0.0) 总线协议文件ID
+            (api:app=2.0.0) 总线协议ID
+            </summary>
+        </member>
+        <member name="P:ASEva.BusProtocolFileID.FileName">
+            <summary>
+            文件ID（多通道的情况下包括通道名）
+            </summary>
+        </member>
+        <member name="P:ASEva.BusProtocolFileID.MD5">
+            <summary>
+            文件MD5
             </summary>
         </member>
         <member name="T:ASEva.BusProtocolFileState">
@@ -6249,6 +6342,45 @@
         <member name="P:ASEva.LogMessage.RepeatedCount">
             <summary>
             清单信息重复次数
+            </summary>
+        </member>
+        <member name="T:ASEva.AppFunctionHandler">
+            <summary>
+            (api:app=2.6.0) 处理来自原生层的函数调用请求
+            </summary>
+        </member>
+        <member name="M:ASEva.AppFunctionHandler.OnCrossCall(System.String,System.String,System.Byte[])">
+            <summary>
+            处理函数（应确保毫秒级别的运行时间）
+            </summary>
+            <param name="nativeClassID">原生层模块对应的原生组件ID</param>
+            <param name="funcID">被调用的函数ID</param>
+            <param name="input">输入数据</param>
+            <returns>输出数据</returns>
+        </member>
+        <member name="T:ASEva.AddBusProtocolResult">
+            <summary>
+            (api:app=2.6.3) 添加总线协议文件结果
+            </summary>
+        </member>
+        <member name="F:ASEva.AddBusProtocolResult.Invalid">
+            <summary>
+            无效参数或未实现
+            </summary>
+        </member>
+        <member name="F:ASEva.AddBusProtocolResult.OK">
+            <summary>
+            成功添加
+            </summary>
+        </member>
+        <member name="F:ASEva.AddBusProtocolResult.AlreadyAdded">
+            <summary>
+            已添加过
+            </summary>
+        </member>
+        <member name="F:ASEva.AddBusProtocolResult.CalculateMD5Failed">
+            <summary>
+            无法计算文件MD5
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">

@@ -34,6 +34,7 @@ namespace ASEva.UIMonoMac
 
             SetContentExtensions.WindowInitializer = new InitWindowHandlerMonoMac();
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerMonoMac();
+            ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.AlphaScaleColorInverted;
 
             uiBackend = null;
             webViewBackend = "wkwebview";

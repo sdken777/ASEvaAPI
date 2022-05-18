@@ -32,6 +32,9 @@ namespace ASEva.UIEto
                                 case ConvertMode.ColorInverted:
                                     convert4ColorInverted(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
                                     break;
+                                case ConvertMode.AlphaScaleColorInverted:
+                                    convert4AlphaScaleColorInvertedToBitmap(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    break;
                                 default:
                                     convert4Default(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
                                     break;
@@ -56,6 +59,9 @@ namespace ASEva.UIEto
                                     convert3Default(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
                                     break;
                                 case ConvertMode.ColorInverted:
+                                    convert3ColorInverted(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    break;
+                                case ConvertMode.AlphaScaleColorInverted:
                                     convert3ColorInverted(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
                                     break;
                                 default:
@@ -93,6 +99,9 @@ namespace ASEva.UIEto
                                 case ConvertMode.ColorInverted:
                                     convert3ColorInverted(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
                                     break;
+                                case ConvertMode.AlphaScaleColorInverted:
+                                    convert3ColorInverted(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    break;
                                 default:
                                     convert3Default(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
                                     break;
@@ -116,6 +125,9 @@ namespace ASEva.UIEto
                                     break;
                                 case ConvertMode.ColorInverted:
                                     convert4ColorInverted(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    break;
+                                case ConvertMode.AlphaScaleColorInverted:
+                                    convert4AlphaScaleColorInvertedFromBitmap(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
                                     break;
                                 default:
                                     convert4Default(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
@@ -234,11 +246,55 @@ namespace ASEva.UIEto
             }
         }
 
+        private static unsafe void convert4AlphaScaleColorInvertedToBitmap(byte *srcData, byte *dstData, int srcStep, int dstStep, int width, int height)
+        {
+            for (int i = 0; i < height; i++)
+            {
+                byte *srcRow = srcData + i * srcStep;
+                byte *dstRow = dstData + i * dstStep;
+                for (int j = 0; j < width; j++)
+                {
+                    int scale = srcRow[4 * j + 3];
+                    dstRow[4 * j + 2] = (byte)((scale * srcRow[4 * j]) >> 8);
+                    dstRow[4 * j + 1] = (byte)((scale * srcRow[4 * j + 1]) >> 8);
+                    dstRow[4 * j] = (byte)((scale * srcRow[4 * j + 2]) >> 8);
+                    dstRow[4 * j + 3] = (byte)scale;
+                }
+            }
+        }
+
+        private static unsafe void convert4AlphaScaleColorInvertedFromBitmap(byte *srcData, byte *dstData, int srcStep, int dstStep, int width, int height)
+        {
+            for (int i = 0; i < height; i++)
+            {
+                byte *srcRow = srcData + i * srcStep;
+                byte *dstRow = dstData + i * dstStep;
+                for (int j = 0; j < width; j++)
+                {
+                    int scale = srcRow[4 * j + 3];
+                    if (scale == 0)
+                    {
+                        dstRow[4 * j] = 0;
+                        dstRow[4 * j + 1] = 0;
+                        dstRow[4 * j + 2] = 0;
+                    }
+                    else
+                    {
+                        dstRow[4 * j + 2] = (byte)Math.Min(255, ((int)srcRow[4 * j] << 8) / scale);
+                        dstRow[4 * j + 1] = (byte)Math.Min(255, ((int)srcRow[4 * j + 1] << 8) / scale);
+                        dstRow[4 * j] = (byte)Math.Min(255, ((int)srcRow[4 * j + 2] << 8) / scale);
+                    }
+                    dstRow[4 * j + 3] = (byte)scale;
+                }
+            }
+        }
+
         public enum ConvertMode
         {
             Default = 0,
             AlphaScale = 1,
             ColorInverted = 2,
+            AlphaScaleColorInverted = 3,
         }
 
         public static ConvertMode Mode { private get; set; }

@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 0, 5, 0); // 支持返回uiBackend
+            return new Version(1, 0, 5, 1); // 设置ImageConverter.Mode
         }
     }
 }

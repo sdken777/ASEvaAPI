@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 1, 0); // 增加ImageConverter.ConvertMode
+            return new Version(2, 4, 1, 1); // 增加ImageConverter.ConvertMode.AlphaScaleColorInverted
         }
     }
 }
