@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Eto.Forms;
 
 namespace ASEva.UIEto
@@ -64,7 +65,37 @@ namespace ASEva.UIEto
             list.Add(new GridItem(valuesToAdd));
             
             DataStore = list;
-            SelectRow(list.Count - 1);
+        }
+
+        /// <summary>
+        /// (api:app=2.4.2) 添加多行
+        /// </summary>
+        /// <param name="rowsValues">每行的初始文字，元素为null则该行默认为空</param>
+        public void AddRows(List<String[]> rowsValues)
+        {
+            if (Columns.Count == 0) return;
+            if (rowsValues == null || rowsValues.Count == 0) return;
+
+            if (DataStore == null) DataStore = new List<GridItem>();
+            else if (!(DataStore is List<GridItem>)) return;
+
+            var list = DataStore as List<GridItem>;
+            foreach (var values in rowsValues)
+            {
+                var valuesToAdd = new String[Columns.Count];
+                int copyCount = values == null ? 0 : Math.Min(values.Length, valuesToAdd.Length);
+                for (int i = 0; i < copyCount; i++)
+                {
+                    valuesToAdd[i] = values[i] == null ? "" : values[i];
+                }
+                for (int i = copyCount; i < valuesToAdd.Length; i++)
+                {
+                    valuesToAdd[i] = "";
+                }
+                list.Add(new GridItem(valuesToAdd));
+            }
+            
+            DataStore = list;
         }
 
         /// <summary>
@@ -78,6 +109,31 @@ namespace ASEva.UIEto
 
             var list = DataStore as List<GridItem>;
             if (rowIndex >= 0 && rowIndex < list.Count) list.RemoveAt(rowIndex);
+
+            DataStore = list;
+        }
+
+        /// <summary>
+        /// (api:app=2.4.2) 移除多行
+        /// </summary>
+        /// <param name="rowIndices">各行序号</param>
+        public void RemoveRows(int[] rowIndices)
+        {
+            if (DataStore == null) return;
+            if (!(DataStore is List<GridItem>)) return;
+            if (rowIndices == null || rowIndices.Length == 0) return;
+    
+            var flags = new Dictionary<int, bool>();
+            foreach (var index in rowIndices) flags[index] = true;
+            var sortedIndices = flags.Keys.ToList();
+            sortedIndices.Sort();
+            sortedIndices.Reverse();
+
+            var list = DataStore as List<GridItem>;
+            foreach (var rowIndex in sortedIndices)
+            {
+                if (rowIndex >= 0 && rowIndex < list.Count) list.RemoveAt(rowIndex);
+            }
 
             DataStore = list;
         }

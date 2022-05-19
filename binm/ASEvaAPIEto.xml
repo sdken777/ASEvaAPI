@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.4.1
+            version=2.4.2
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -872,11 +872,23 @@
             </summary>
             <param name="values">该行的初始文字，设为null则默认为空</param>
         </member>
+        <member name="M:ASEva.UIEto.TextTableView.AddRows(System.Collections.Generic.List{System.String[]})">
+            <summary>
+            (api:app=2.4.2) 添加多行
+            </summary>
+            <param name="rowsValues">每行的初始文字，元素为null则该行默认为空</param>
+        </member>
         <member name="M:ASEva.UIEto.TextTableView.RemoveRow(System.Int32)">
             <summary>
             移除一行
             </summary>
             <param name="rowIndex">行序号</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.RemoveRows(System.Int32[])">
+            <summary>
+            (api:app=2.4.2) 移除多行
+            </summary>
+            <param name="rowIndices">各行序号</param>
         </member>
         <member name="M:ASEva.UIEto.TextTableView.RemoveAllRows">
             <summary>
