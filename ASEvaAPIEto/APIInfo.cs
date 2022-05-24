@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 3, 0); // 增加TextTableView.SetText/BackgroundColor
+            return new Version(2, 4, 3, 1); // 优化TextTableView更新颜色机制
         }
     }
 }

@@ -222,16 +222,8 @@ namespace ASEva.UIEto
         public void SetTextColor(int rowIndex, int columnIndex, Color color)
         {
             if (rowIndex < 0 || rowIndex >= foregroundColors.Count || columnIndex < 0 || columnIndex >= Columns.Count) return;
-
             foregroundColors[rowIndex][Columns[columnIndex]] = color;
-
-            if (timer == null)
-            {
-                timer = new UITimer();
-                timer.Interval = 0.01;
-                timer.Elapsed += timer_Elapsed;
-                timer.Start();
-            }
+            updateColor(rowIndex, columnIndex);
         }
 
         /// <summary>
@@ -243,30 +235,8 @@ namespace ASEva.UIEto
         public void SetBackgroundColor(int rowIndex, int columnIndex, Color color)
         {
             if (rowIndex < 0 || rowIndex >= GetRowCount() || columnIndex < 0 || columnIndex >= Columns.Count) return;
-
             backgroundColors[rowIndex][Columns[columnIndex]] = color;
-
-            if (timer == null)
-            {
-                timer = new UITimer();
-                timer.Interval = 0.01;
-                timer.Elapsed += timer_Elapsed;
-                timer.Start();
-            }
-        }
-
-        private void timer_Elapsed(object sender, EventArgs e)
-        {
-            timer.Stop();
-            timer = null;
-            
-            if (EditBeforeInvalidate)
-            {
-                BeginEdit(Math.Max(0, SelectedRow), 0);
-                CancelEdit();
-            }
-
-            Invalidate();
+            updateColor(rowIndex, columnIndex);
         }
 
         private void TextTableView_CellFormatting(object sender, GridCellFormatEventArgs e)
@@ -275,13 +245,51 @@ namespace ASEva.UIEto
             {
                 var rowTable = foregroundColors[e.Row];
                 if (rowTable.ContainsKey(e.Column)) e.ForegroundColor = rowTable[e.Column];
-                else if (SetDefaultColor) e.ForegroundColor = Colors.Black;
+                else if (DefaultTextColor != null) e.ForegroundColor = DefaultTextColor.Value;
             }
             if (e.Row < backgroundColors.Count)
             {
                 var rowTable = backgroundColors[e.Row];
                 if (rowTable.ContainsKey(e.Column)) e.BackgroundColor = rowTable[e.Column];
-                else if (SetDefaultColor) e.BackgroundColor = Colors.White;
+                else if (DefaultBackgroundColor != null) e.BackgroundColor = DefaultBackgroundColor.Value;
+            }
+        }
+
+        private void timer_Elapsed(object sender, EventArgs e)
+        {
+            timer.Stop();
+            timer = null;
+            Invalidate();
+        }
+
+        private void updateColor(int rowIndex, int columnIndex)
+        {
+            if (UpdateColorMode == InvalidateMode.DelayedInvalidate)
+            {
+                if (timer == null)
+                {
+                    timer = new UITimer();
+                    timer.Interval = 0.01;
+                    timer.Elapsed += timer_Elapsed;
+                    timer.Start();
+                }
+            }
+            else if (UpdateColorMode == InvalidateMode.EditCell)
+            {
+                if (AllowMultipleSelection)
+                {
+                    var selected = SelectedRows;
+                    BeginEdit(rowIndex, columnIndex);
+                    CancelEdit();
+                    SelectedRows = selected;
+                }
+                else
+                {
+                    var selected = SelectedRow;
+                    BeginEdit(rowIndex, columnIndex);
+                    CancelEdit();
+                    SelectedRow = selected;
+                }
             }
         }
 
@@ -289,7 +297,14 @@ namespace ASEva.UIEto
         private List<Dictionary<GridColumn, Color>> backgroundColors = new List<Dictionary<GridColumn, Color>>();
         private UITimer timer = null;
 
-        public static bool EditBeforeInvalidate { private get; set; }
-        public static bool SetDefaultColor { private get; set; }
+        public enum InvalidateMode
+        {
+            DelayedInvalidate = 0,
+            EditCell,
+        }
+
+        public static InvalidateMode UpdateColorMode { private get; set; }
+        public static Color? DefaultTextColor { private get; set; }
+        public static Color? DefaultBackgroundColor { private get; set; }
     }
 }
