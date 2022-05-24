@@ -182,7 +182,7 @@
             "command": "dotnet",
             "args": [
                 "../bin/AppMaker.dll",
-                "${workspaceFolder}/../ASEvaAPIEtoTest/macapp-ASEvaAPIEtoTest.xml",
+                "${workspaceFolder}/../macapp-local-ASEvaAPIEtoTest.xml",
                 "debug",
             ],
             "dependsOn": [

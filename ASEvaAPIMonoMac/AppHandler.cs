@@ -35,6 +35,9 @@ namespace ASEva.UIMonoMac
             SetContentExtensions.WindowInitializer = new InitWindowHandlerMonoMac();
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerMonoMac();
             ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.AlphaScaleColorInverted;
+            TextTableView.UpdateColorMode = TextTableView.InvalidateMode.EditCell;
+            TextTableView.DefaultTextColor = Colors.Black;
+            TextTableView.DefaultBackgroundColor = Color.FromArgb(0, 0, 0, 16);
 
             uiBackend = null;
             webViewBackend = "wkwebview";
