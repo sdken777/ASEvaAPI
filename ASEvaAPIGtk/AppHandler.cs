@@ -59,6 +59,8 @@ namespace ASEva.UIGtk
 
             ContextMenuExtensions.ShouldAddMouseDownEvent = true;
             ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.ColorInverted;
+            TextTableView.EditBeforeInvalidate = true;
+            TextTableView.SetDefaultColor = true;
 
             return app;
         }

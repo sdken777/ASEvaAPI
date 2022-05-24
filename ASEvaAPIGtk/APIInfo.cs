@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 6, 9); // 设置ImageConverter.Mode
+            return new Version(2, 1, 6, 10); // 设置TextTableView.EditBeforeInvalidate, SetDefaultColor
         }
     }
 }

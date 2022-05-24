@@ -167,8 +167,16 @@ namespace ASEvaAPIEtoTest
             tableView.AddColumn(t["basic-grid-key-title"], 100);
             tableView.AddColumn(t["basic-grid-value-title"], 200);
 
+            layoutGridViewRow = layoutGridView.AddRowLayout();
+            var linkButtonChangeColor = layoutGridViewRow.AddLinkButton(t["basic-grid-change-color"]);
+
             linkButtonAdd.Click += delegate { tableView.AddRow(); };
             linkButtonRemove.Click += delegate { tableView.RemoveRow(tableView.SelectedRow); };
+            linkButtonChangeColor.Click += delegate
+            {
+                tableView.SetTextColor(0, 0, Colors.Red);
+                tableView.SetBackgroundColor(0, 1, Colors.Green);
+            };
         }
 
         private void InitWebGroupBox(GroupBox groupBox)

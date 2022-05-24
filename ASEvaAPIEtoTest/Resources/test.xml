@@ -132,4 +132,8 @@
     <en>Freeze size</en>
     <ch>固定尺寸</ch>
   </t>
+  <t id="basic-grid-change-color">
+    <en>Change color</en>
+    <ch>改变颜色</ch>
+  </t>
 </text_resource>

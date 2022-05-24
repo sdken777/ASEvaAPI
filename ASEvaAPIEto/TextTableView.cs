@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Eto.Forms;
+using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
@@ -13,6 +14,7 @@ namespace ASEva.UIEto
         public TextTableView()
         {
             GridLines = GridLines.Both;
+            CellFormatting += TextTableView_CellFormatting;
         }
 
         /// <summary>
@@ -63,12 +65,14 @@ namespace ASEva.UIEto
                 valuesToAdd[i] = "";
             }
             list.Add(new GridItem(valuesToAdd));
+            foregroundColors.Add(new Dictionary<GridColumn, Color>());
+            backgroundColors.Add(new Dictionary<GridColumn, Color>());
             
             DataStore = list;
         }
 
         /// <summary>
-        /// (api:app=2.4.2) 添加多行
+        /// (api:eto=2.4.2) 添加多行
         /// </summary>
         /// <param name="rowsValues">每行的初始文字，元素为null则该行默认为空</param>
         public void AddRows(List<String[]> rowsValues)
@@ -93,6 +97,8 @@ namespace ASEva.UIEto
                     valuesToAdd[i] = "";
                 }
                 list.Add(new GridItem(valuesToAdd));
+                foregroundColors.Add(new Dictionary<GridColumn, Color>());
+                backgroundColors.Add(new Dictionary<GridColumn, Color>());
             }
             
             DataStore = list;
@@ -106,15 +112,20 @@ namespace ASEva.UIEto
         {
             if (DataStore == null) return;
             if (!(DataStore is List<GridItem>)) return;
+            
 
             var list = DataStore as List<GridItem>;
-            if (rowIndex >= 0 && rowIndex < list.Count) list.RemoveAt(rowIndex);
+            if (rowIndex < 0 || rowIndex >= list.Count) return;
+
+            list.RemoveAt(rowIndex);
+            foregroundColors.RemoveAt(rowIndex);
+            backgroundColors.RemoveAt(rowIndex);
 
             DataStore = list;
         }
 
         /// <summary>
-        /// (api:app=2.4.2) 移除多行
+        /// (api:eto=2.4.2) 移除多行
         /// </summary>
         /// <param name="rowIndices">各行序号</param>
         public void RemoveRows(int[] rowIndices)
@@ -132,7 +143,12 @@ namespace ASEva.UIEto
             var list = DataStore as List<GridItem>;
             foreach (var rowIndex in sortedIndices)
             {
-                if (rowIndex >= 0 && rowIndex < list.Count) list.RemoveAt(rowIndex);
+                if (rowIndex >= 0 && rowIndex < list.Count)
+                {
+                    list.RemoveAt(rowIndex);
+                    foregroundColors.RemoveAt(rowIndex);
+                    backgroundColors.RemoveAt(rowIndex);
+                }
             }
 
             DataStore = list;
@@ -148,6 +164,8 @@ namespace ASEva.UIEto
 
             var list = DataStore as List<GridItem>;
             list.Clear();
+            foregroundColors.Clear();
+            backgroundColors.Clear();
 
             DataStore = list;
         }
@@ -194,5 +212,84 @@ namespace ASEva.UIEto
 
             DataStore = list;
         }
+
+        /// <summary>
+        /// (api:eto=2.4.3) 设置某格文字颜色
+        /// </summary>
+        /// <param name="rowIndex">行序号</param>
+        /// <param name="columnIndex">列序号</param>
+        /// <param name="color">文字颜色</param>
+        public void SetTextColor(int rowIndex, int columnIndex, Color color)
+        {
+            if (rowIndex < 0 || rowIndex >= foregroundColors.Count || columnIndex < 0 || columnIndex >= Columns.Count) return;
+
+            foregroundColors[rowIndex][Columns[columnIndex]] = color;
+
+            if (timer == null)
+            {
+                timer = new UITimer();
+                timer.Interval = 0.01;
+                timer.Elapsed += timer_Elapsed;
+                timer.Start();
+            }
+        }
+
+        /// <summary>
+        /// (api:eto=2.4.3) 设置某格背景颜色
+        /// </summary>
+        /// <param name="rowIndex">行序号</param>
+        /// <param name="columnIndex">列序号</param>
+        /// <param name="color">背景颜色</param>
+        public void SetBackgroundColor(int rowIndex, int columnIndex, Color color)
+        {
+            if (rowIndex < 0 || rowIndex >= GetRowCount() || columnIndex < 0 || columnIndex >= Columns.Count) return;
+
+            backgroundColors[rowIndex][Columns[columnIndex]] = color;
+
+            if (timer == null)
+            {
+                timer = new UITimer();
+                timer.Interval = 0.01;
+                timer.Elapsed += timer_Elapsed;
+                timer.Start();
+            }
+        }
+
+        private void timer_Elapsed(object sender, EventArgs e)
+        {
+            timer.Stop();
+            timer = null;
+            
+            if (EditBeforeInvalidate)
+            {
+                BeginEdit(Math.Max(0, SelectedRow), 0);
+                CancelEdit();
+            }
+
+            Invalidate();
+        }
+
+        private void TextTableView_CellFormatting(object sender, GridCellFormatEventArgs e)
+        {
+            if (e.Row < foregroundColors.Count)
+            {
+                var rowTable = foregroundColors[e.Row];
+                if (rowTable.ContainsKey(e.Column)) e.ForegroundColor = rowTable[e.Column];
+                else if (SetDefaultColor) e.ForegroundColor = Colors.Black;
+            }
+            if (e.Row < backgroundColors.Count)
+            {
+                var rowTable = backgroundColors[e.Row];
+                if (rowTable.ContainsKey(e.Column)) e.BackgroundColor = rowTable[e.Column];
+                else if (SetDefaultColor) e.BackgroundColor = Colors.White;
+            }
+        }
+
+        private List<Dictionary<GridColumn, Color>> foregroundColors = new List<Dictionary<GridColumn, Color>>();
+        private List<Dictionary<GridColumn, Color>> backgroundColors = new List<Dictionary<GridColumn, Color>>();
+        private UITimer timer = null;
+
+        public static bool EditBeforeInvalidate { private get; set; }
+        public static bool SetDefaultColor { private get; set; }
     }
 }

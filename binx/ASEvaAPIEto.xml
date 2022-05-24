@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.4.2
+            version=2.4.3
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -874,7 +874,7 @@
         </member>
         <member name="M:ASEva.UIEto.TextTableView.AddRows(System.Collections.Generic.List{System.String[]})">
             <summary>
-            (api:app=2.4.2) 添加多行
+            (api:eto=2.4.2) 添加多行
             </summary>
             <param name="rowsValues">每行的初始文字，元素为null则该行默认为空</param>
         </member>
@@ -886,7 +886,7 @@
         </member>
         <member name="M:ASEva.UIEto.TextTableView.RemoveRows(System.Int32[])">
             <summary>
-            (api:app=2.4.2) 移除多行
+            (api:eto=2.4.2) 移除多行
             </summary>
             <param name="rowIndices">各行序号</param>
         </member>
@@ -910,6 +910,22 @@
             <param name="rowIndex">行序号</param>
             <param name="columnIndex">列序号</param>
             <param name="val">该格文字</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.SetTextColor(System.Int32,System.Int32,Eto.Drawing.Color)">
+            <summary>
+            (api:eto=2.4.3) 设置某格文字颜色
+            </summary>
+            <param name="rowIndex">行序号</param>
+            <param name="columnIndex">列序号</param>
+            <param name="color">文字颜色</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.SetBackgroundColor(System.Int32,System.Int32,Eto.Drawing.Color)">
+            <summary>
+            (api:eto=2.4.3) 设置某格背景颜色
+            </summary>
+            <param name="rowIndex">行序号</param>
+            <param name="columnIndex">列序号</param>
+            <param name="color">背景颜色</param>
         </member>
         <member name="T:ASEva.UIEto.WindowPanel">
             <summary>
