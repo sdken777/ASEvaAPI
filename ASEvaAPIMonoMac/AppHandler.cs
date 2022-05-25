@@ -38,6 +38,7 @@ namespace ASEva.UIMonoMac
             TextTableView.UpdateColorMode = TextTableView.InvalidateMode.EditCell;
             TextTableView.DefaultTextColor = Colors.Black;
             TextTableView.DefaultBackgroundColor = Color.FromArgb(0, 0, 0, 16);
+            CheckableListBox.UpdateColorMode = CheckableListBox.InvalidateMode.EditCell;
 
             uiBackend = null;
             webViewBackend = "wkwebview";

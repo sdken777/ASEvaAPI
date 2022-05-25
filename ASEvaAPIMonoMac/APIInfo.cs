@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 0, 5, 2); // 设置TextViewTable.UpdateColorMode, DefaultText/BackgroundColor
+            return new Version(1, 0, 5, 3); // 设置CheckableListBox.UpdateColorMode
         }
     }
 }
