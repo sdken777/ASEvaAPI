@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 5, 2); // 设置ImageConverter.Mode
+            return new Version(2, 1, 5, 3); // 设置CheckableListBox.DefaultBackgroundColor
         }
     }
 }

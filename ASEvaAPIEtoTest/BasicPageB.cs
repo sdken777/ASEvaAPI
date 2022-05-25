@@ -34,10 +34,11 @@ namespace ASEvaAPIEtoTest
             listBox.Items.Add(t.Format("basic-list-item", "B"));
             listBox.Items.Add(t.Format("basic-list-item", "C"));
 
-            var checkListBox = layout.AddControl(new CheckBoxList { Orientation = Orientation.Vertical} , true) as CheckBoxList;
-            checkListBox.Items.Add(t.Format("basic-list-item", "A"));
-            checkListBox.Items.Add(t.Format("basic-list-item", "B"));
-            checkListBox.Items.Add(t.Format("basic-list-item", "C"));
+            var checkListBox = layout.AddControl(new CheckableListBox(), true) as CheckableListBox;
+            checkListBox.AddItem(t.Format("basic-list-item-short", "A"), false, true);
+            checkListBox.AddItem(t.Format("basic-list-item-short", "B"), false, false);
+            checkListBox.AddItem(t.Format("basic-list-item-short", "C"), true, true);
+            checkListBox.AddItem(t.Format("basic-list-item-short", "D"), true, false);
         }
 
         private void initBasicTagPageBTreeView(TreeGridView view)

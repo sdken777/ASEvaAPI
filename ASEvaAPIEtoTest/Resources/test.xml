@@ -144,4 +144,8 @@
     <en>Child Node {0:D}</en>
     <ch>子节点{0:D}</ch>
   </t>
+  <t id="basic-list-item-short">
+    <en>Option {0}</en>
+    <ch>列表项{0}</ch>
+  </t>
 </text_resource>

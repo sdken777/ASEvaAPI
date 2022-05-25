@@ -36,6 +36,7 @@ namespace ASEva.UICoreWF
             ButtonPanel.UseInnerEnterLeave = true;
             Pixel.CalculateByScreenRealScale = true;
             ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.AlphaScale;
+            CheckableListBox.DefaultBackgroundColor = Colors.White;
 
             uiBackend = null;
             webViewBackend = "webview2";

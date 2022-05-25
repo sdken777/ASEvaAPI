@@ -62,6 +62,7 @@ namespace ASEva.UIGtk
             TextTableView.UpdateColorMode = TextTableView.InvalidateMode.EditCell;
             TextTableView.DefaultTextColor = Colors.Black;
             TextTableView.DefaultBackgroundColor = Colors.WhiteSmoke;
+            CheckableListBox.UpdateColorMode = CheckableListBox.InvalidateMode.EditCell;
 
             return app;
         }
