@@ -136,4 +136,12 @@
     <en>Change color</en>
     <ch>改变颜色</ch>
   </t>
+  <t id="basic-tree-parent">
+    <en>Parent Node {0:D}</en>
+    <ch>父节点{0:D}</ch>
+  </t>
+  <t id="basic-tree-child">
+    <en>Child Node {0:D}</en>
+    <ch>子节点{0:D}</ch>
+  </t>
 </text_resource>
