@@ -235,34 +235,40 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
-        /// 勾选所有多选框
+        /// 勾选所有多选框（不改变禁用的部分）
         /// </summary>
         public void CheckAll()
         {
             if (DataStore == null) return;
             if (!(DataStore is List<GridItem>)) return;
 
+            int index = 0;
             foreach (var item in DataStore as List<GridItem>)
             {
+                var curIndex = index++;
                 var values = item.Values;
                 if (values == null || values.Length < 2) continue;
+                if (curIndex >= enableFlags.Count || !enableFlags[curIndex]) continue;
                 values[1] = true;
             }
             ReloadData(new Range<int>(0, GetItemCount()));
         }
 
         /// <summary>
-        /// 取消勾选所有多选框
+        /// 取消勾选所有多选框（不改变禁用的部分）
         /// </summary>
         public void UncheckAll()
         {
             if (DataStore == null) return;
             if (!(DataStore is List<GridItem>)) return;
 
+            int index = 0;
             foreach (var item in DataStore as List<GridItem>)
             {
+                var curIndex = index++;
                 var values = item.Values;
                 if (values == null || values.Length < 2) continue;
+                if (curIndex >= enableFlags.Count || !enableFlags[curIndex]) continue;
                 values[1] = false;
             }
             ReloadData(new Range<int>(0, GetItemCount()));

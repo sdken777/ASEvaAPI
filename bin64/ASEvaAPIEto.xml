@@ -210,12 +210,12 @@
         </member>
         <member name="M:ASEva.UIEto.CheckableListBox.CheckAll">
             <summary>
-            勾选所有多选框
+            勾选所有多选框（不改变禁用的部分）
             </summary>
         </member>
         <member name="M:ASEva.UIEto.CheckableListBox.UncheckAll">
             <summary>
-            取消勾选所有多选框
+            取消勾选所有多选框（不改变禁用的部分）
             </summary>
         </member>
         <member name="T:ASEva.UIEto.ConfigPanel">

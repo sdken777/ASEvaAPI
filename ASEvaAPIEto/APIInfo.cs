@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 0, 0); // 新增CheckableListBox (替代低效率的CheckBoxList)
+            return new Version(2, 5, 0, 1); // CheckableListBox.Check/UncheckAll不改变禁用的部分
         }
     }
 }
