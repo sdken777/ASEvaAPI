@@ -126,6 +126,11 @@
             <param name="generation">目标generation</param>
             <returns>处理完毕的session ID列表</returns>
         </member>
+        <member name="M:ASEva.Agency.RefreshSessions">
+            <summary>
+            (api:app=2.6.5) 刷新当前层级下所有session
+            </summary>
+        </member>
         <member name="M:ASEva.Agency.RefreshGenerations">
             <summary>
             刷新当前层级下所有session的generation
@@ -229,6 +234,12 @@
             (api:app=2.4.0) 获取当前的数据层级
             </summary>
             <returns>数据层级，其中null表示所有层级，‘.’表示根路径下的session，'..'表示根路径即session</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetCurrentDataLayerPath">
+            <summary>
+            (api:app=2.6.5) 获取当前数据层级的路径
+            </summary>
+            <returns>当前数据层级的路径，若数据目录未设置或数据层级为'..'则返回null，若当前数据层级为null(所有层级)则返回数据目录根路径</returns>
         </member>
         <member name="M:ASEva.Agency.SetCurrentDataLayer(System.String)">
             <summary>
@@ -1759,7 +1770,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.4
+            version=2.6.5
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">

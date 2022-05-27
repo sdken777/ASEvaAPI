@@ -72,7 +72,9 @@ namespace ASEva
         void AddDataLayer(String layer);
         void DeleteDataLayer(String layer);
         String GetCurrentDataLayer();
+        String GetCurrentDataLayerPath();
         void SetCurrentDataLayer(String layer);
+        void RefreshSessions();
         void RefreshGenerations();
         String GetCurrentDataGeneration();
         String GetCurrentSessionGUID();
@@ -450,6 +452,14 @@ namespace ASEva
         }
 
         /// <summary>
+        /// (api:app=2.6.5) 刷新当前层级下所有session
+        /// </summary>
+        public static void RefreshSessions()
+        {
+            Handler.RefreshSessions();
+        }
+
+        /// <summary>
         /// 刷新当前层级下所有session的generation
         /// </summary>
         public static void RefreshGenerations()
@@ -599,6 +609,15 @@ namespace ASEva
         public static String GetCurrentDataLayer()
         {
             return Handler.GetCurrentDataLayer();
+        }
+
+        /// <summary>
+        /// (api:app=2.6.5) 获取当前数据层级的路径
+        /// </summary>
+        /// <returns>当前数据层级的路径，若数据目录未设置或数据层级为'..'则返回null，若当前数据层级为null(所有层级)则返回数据目录根路径</returns>
+        public static String GetCurrentDataLayerPath()
+        {
+            return Handler.GetCurrentDataLayerPath();
         }
 
         /// <summary>

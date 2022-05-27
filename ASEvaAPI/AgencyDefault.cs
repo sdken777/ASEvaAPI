@@ -1209,5 +1209,14 @@ namespace ASEva
         {
             return AddBusProtocolResult.Invalid;
         }
+
+        public void RefreshSessions()
+        {
+        }
+
+        public string GetCurrentDataLayerPath()
+        {
+            return null;
+        }
     }
 }
