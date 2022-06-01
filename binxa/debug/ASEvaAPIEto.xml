@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.4.0
+            version=2.5.0
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -123,6 +123,99 @@
         <member name="P:ASEva.UIEto.ButtonPanel.TextColor">
             <summary>
             文字颜色（默认为Colors.Black）
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.CheckableListBox">
+            <summary>
+            (api:eto=2.5.0) 多选框组
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.GetItemCount">
+            <summary>
+            获取多选框个数
+            </summary>
+            <returns>多选框个数</returns>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.AddItem(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            添加多选框
+            </summary>
+            <param name="text">显示文字</param>
+            <param name="isChecked">初始是否为勾选状态</param>
+            <param name="isEnabled">初始是否为启用状态</param>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.AddItems(System.String[],System.Boolean[],System.Boolean[])">
+            <summary>
+            一次性添加多个多选框
+            </summary>
+            <param name="itemsText">各多选框的显示文字</param>
+            <param name="itemsChecked">各多选框的初始勾选状态，若为null则全部为未勾选，若非null则数组大小应与itemsText一致</param>
+            <param name="itemsEnabled">各多选框的初始启用状态，若为null则全部启用，若非null则数组大小应与itemsText一致</param>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.RemoveItem(System.Int32)">
+            <summary>
+            移除多选框
+            </summary>
+            <param name="index">要移除的多选框的当前序号</param>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.RemoveItems(System.Int32[])">
+            <summary>
+            一次性移除多个多选框
+            </summary>
+            <param name="indices">要移除的所有多选框的当前序号</param>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.RemoveAllItems">
+            <summary>
+            移除所有多选框
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.GetChecked(System.Int32)">
+            <summary>
+            获取某个多选框是否为勾选状态
+            </summary>
+            <param name="index">多选框的当前序号</param>
+            <returns>是否勾选</returns>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.SetChecked(System.Int32,System.Boolean)">
+            <summary>
+            设置某个多选框的勾选状态
+            </summary>
+            <param name="index">多选框的当前序号</param>
+            <param name="isChecked">是否否选</param>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.GetEnabled(System.Int32)">
+            <summary>
+            获取某个多选框是否为启用状态
+            </summary>
+            <param name="index">多选框的当前序号</param>
+            <returns>是否启用</returns>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.SetEnabled(System.Int32,System.Boolean)">
+            <summary>
+            设置某个多选框的启用状态
+            </summary>
+            <param name="index">多选框的当前序号</param>
+            <param name="isEnabled">是否启用</param>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.GetCheckedIndices">
+            <summary>
+            获取所有已勾选的多选框的序号
+            </summary>
+            <returns>所有已勾选的多选框的序号</returns>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.CheckAll">
+            <summary>
+            勾选所有多选框（不改变禁用的部分）
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.UncheckAll">
+            <summary>
+            取消勾选所有多选框（不改变禁用的部分）
             </summary>
         </member>
         <member name="T:ASEva.UIEto.ConfigPanel">
@@ -872,11 +965,23 @@
             </summary>
             <param name="values">该行的初始文字，设为null则默认为空</param>
         </member>
+        <member name="M:ASEva.UIEto.TextTableView.AddRows(System.Collections.Generic.List{System.String[]})">
+            <summary>
+            (api:eto=2.4.2) 添加多行
+            </summary>
+            <param name="rowsValues">每行的初始文字，元素为null则该行默认为空</param>
+        </member>
         <member name="M:ASEva.UIEto.TextTableView.RemoveRow(System.Int32)">
             <summary>
             移除一行
             </summary>
             <param name="rowIndex">行序号</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.RemoveRows(System.Int32[])">
+            <summary>
+            (api:eto=2.4.2) 移除多行
+            </summary>
+            <param name="rowIndices">各行序号</param>
         </member>
         <member name="M:ASEva.UIEto.TextTableView.RemoveAllRows">
             <summary>
@@ -898,6 +1003,22 @@
             <param name="rowIndex">行序号</param>
             <param name="columnIndex">列序号</param>
             <param name="val">该格文字</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.SetTextColor(System.Int32,System.Int32,Eto.Drawing.Color)">
+            <summary>
+            (api:eto=2.4.3) 设置某格文字颜色
+            </summary>
+            <param name="rowIndex">行序号</param>
+            <param name="columnIndex">列序号</param>
+            <param name="color">文字颜色</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.SetBackgroundColor(System.Int32,System.Int32,Eto.Drawing.Color)">
+            <summary>
+            (api:eto=2.4.3) 设置某格背景颜色
+            </summary>
+            <param name="rowIndex">行序号</param>
+            <param name="columnIndex">列序号</param>
+            <param name="color">背景颜色</param>
         </member>
         <member name="T:ASEva.UIEto.WindowPanel">
             <summary>

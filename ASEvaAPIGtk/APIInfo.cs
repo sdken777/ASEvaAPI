@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 6, 12); // 设置CheckableListBox.UpdateColorMode
+            return new Version(2, 1, 6, 13); // ScreensHandler和AppHandlerGtk.CreateApp异常拦截
         }
     }
 }

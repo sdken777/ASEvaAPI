@@ -18,12 +18,18 @@ namespace ASEva.UIGtk
 		{
 			get
 			{
-				var display = Gdk.Display.Default;
-				for (int i = 0; i < display.NMonitors; i++)
+				var list = new List<Screen>();
+				try
 				{
-					var monitor = display.GetMonitor(i);
-					yield return new Screen(new ScreenHandler(monitor));
+					var display = Gdk.Display.Default;
+					for (int i = 0; i < display.NMonitors; i++)
+					{
+						var monitor = display.GetMonitor(i);
+						list.Add(new Screen(new ScreenHandler(monitor)));
+					}
 				}
+				catch (Exception) {}
+				return list;
 			}
 		}
 
