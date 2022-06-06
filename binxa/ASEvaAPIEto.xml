@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.5.0
+            version=2.5.1
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -386,65 +386,79 @@
         </member>
         <member name="T:ASEva.UIEto.SizerExtensions">
             <summary>
-            (api:eto=2.0.0) 提供非默认DPI尺寸转换的扩展
+            (api:eto=2.0.0) 提供逻辑尺寸与实际像素值转换的扩展
             </summary>
         </member>
         <member name="M:ASEva.UIEto.SizerExtensions.Sizer(Eto.Forms.Control,System.Int32)">
             <summary>
-            转换像素值（单值）
+            转换为实际像素值（单值）
             </summary>
             <param name="control">控件</param>
-            <param name="size">默认DPI下的像素值</param>
-            <returns>任意DPI下的像素值</returns>
+            <param name="size">逻辑尺寸</param>
+            <returns>实际像素值</returns>
         </member>
         <member name="M:ASEva.UIEto.SizerExtensions.Sizer(Eto.Forms.Control,System.Int32,System.Int32)">
             <summary>
-            转换像素值（二维）
+            转换为实际像素值（二维）
             </summary>
             <param name="control">控件</param>
-            <param name="width">默认DPI下的宽度像素值</param>
-            <param name="height">默认DPI下的高度像素值</param>
-            <returns>任意DPI下的像素尺寸</returns>
+            <param name="width">逻辑宽度</param>
+            <param name="height">逻辑高度</param>
+            <returns>实际像素值</returns>
         </member>
         <member name="M:ASEva.UIEto.SizerExtensions.GetLogicalWidth(Eto.Forms.Control)">
             <summary>
-            (api:eto=2.3.5) 获取控件宽度
+            (api:eto=2.3.5) 获取控件逻辑宽度
             </summary>
             <param name="control">控件</param>
-            <returns>控件宽度</returns>
+            <returns>逻辑宽度</returns>
         </member>
         <member name="M:ASEva.UIEto.SizerExtensions.GetLogicalHeight(Eto.Forms.Control)">
             <summary>
-            (api:eto=2.3.5) 获取控件高度
+            (api:eto=2.3.5) 获取控件逻辑高度
             </summary>
             <param name="control">控件</param>
-            <returns>控件高度</returns>
+            <returns>逻辑高度</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.GetLogicalSize(Eto.Forms.Control)">
+            <summary>
+            (api:eto=2.5.1) 获取控件逻辑尺寸
+            </summary>
+            <param name="control">控件</param>
+            <returns>逻辑尺寸</returns>
         </member>
         <member name="M:ASEva.UIEto.SizerExtensions.SetLogicalWidth(Eto.Forms.Control,System.Int32)">
             <summary>
-            设置控件宽度
+            设置控件逻辑宽度
             </summary>
             <param name="control">控件</param>
-            <param name="width">设置宽度</param>
+            <param name="width">逻辑宽度</param>
         </member>
         <member name="M:ASEva.UIEto.SizerExtensions.SetLogicalHeight(Eto.Forms.Control,System.Int32)">
             <summary>
-            设置控件高度
+            设置控件逻辑高度
             </summary>
             <param name="control">控件</param>
-            <param name="height">设置高度</param>
+            <param name="height">逻辑高度</param>
         </member>
         <member name="M:ASEva.UIEto.SizerExtensions.SetLogicalSize(Eto.Forms.Control,System.Int32,System.Int32)">
             <summary>
-            设置控件尺寸
+            设置控件逻辑尺寸
             </summary>
             <param name="control">控件</param>
-            <param name="width">设置宽度</param>
-            <param name="height">设置高度</param>
+            <param name="width">逻辑宽度</param>
+            <param name="height">逻辑高度</param>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.GetLogicalPoint(Eto.Forms.MouseEventArgs)">
+            <summary>
+            (api:eto=2.5.1) 获取鼠标事件中鼠标位置的逻辑坐标
+            </summary>
+            <param name="args">鼠标事件</param>
+            <returns>鼠标位置的逻辑坐标</returns>
         </member>
         <member name="P:ASEva.UIEto.SizerExtensions.PixelScale">
             <summary>
-            像素单位比例，用于优化在非默认DPI下的显示
+            像素单位比例
             </summary>
         </member>
         <member name="T:ASEva.UIEto.SplitterExtensions">
