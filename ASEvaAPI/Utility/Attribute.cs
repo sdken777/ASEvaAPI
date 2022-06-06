@@ -57,9 +57,9 @@ namespace ASEva.Utility
             if (a[key] == null) return null;
             var text = a[key].Value;
             if (text.Length == 0 || text == "null") return null;
-            var comps = text.Split(':');
+            var comps = text.Split(':', StringSplitOptions.RemoveEmptyEntries);
             if (comps.Length != 2) return null;
-            return comps[0].ToLower() + ":" + comps[1];
+            return text;
         }
 
         public String ParseSignalID(String key)
@@ -67,9 +67,9 @@ namespace ASEva.Utility
             if (a[key] == null) return null;
             var text = a[key].Value;
             if (text.Length == 0 || text == "null") return null;
-            var comps = text.Split(':');
+            var comps = text.Split(':', StringSplitOptions.RemoveEmptyEntries);
             if (comps.Length != 3) return null;
-            return comps[0].ToLower() + ":" + comps[1] + ":" + comps[2];
+            return text;
         }
 
         public double[] ParseSignalValue(String key, bool optional)

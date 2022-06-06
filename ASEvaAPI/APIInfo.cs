@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 6, 5, 0); // 新增Agency.RefreshSessions，GetCurrentDataLayerPath
+            return new Version(2, 6, 5, 1); // 修正AttributeParser.ParseMessageID/ParseSignalID的多余小写转换
         }
 
         /// <summary>
