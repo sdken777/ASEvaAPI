@@ -37,6 +37,7 @@ namespace ASEva.UICoreWF
             Pixel.CalculateByScreenRealScale = true;
             ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.AlphaScale;
             CheckableListBox.DefaultBackgroundColor = Colors.White;
+            GLView.Factory = new GLViewFactoryCoreWF();
 
             uiBackend = null;
             webViewBackend = "webview2";

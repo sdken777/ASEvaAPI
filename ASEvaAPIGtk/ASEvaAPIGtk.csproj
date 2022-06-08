@@ -48,11 +48,17 @@
     <Reference Include="GioSharp">
       <HintPath>..\binx\GioSharp.dll</HintPath>
     </Reference>
+    <Reference Include="AtkSharp">
+      <HintPath>..\binx\AtkSharp.dll</HintPath>
+    </Reference>
     <Reference Include="CairoSharp">
       <HintPath>..\binx\CairoSharp.dll</HintPath>
     </Reference>
     <Reference Include="PangoSharp">
       <HintPath>..\binx\PangoSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PortableSharpGL">
+      <HintPath>..\binx\PortableSharpGL.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

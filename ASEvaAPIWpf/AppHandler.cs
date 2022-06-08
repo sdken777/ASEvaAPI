@@ -27,6 +27,7 @@ namespace ASEva.UIWpf
             SetContentExtensions.WindowInitializer = new InitWindowHandlerWpf();
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerWpf();
             ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.AlphaScale;
+            GLView.Factory = new GLViewFactoryWpf();
 
             uiBackend = null;
             webViewBackend = "webview2";

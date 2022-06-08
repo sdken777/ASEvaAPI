@@ -24,6 +24,9 @@
     <Reference Include="Eto">
       <HintPath>..\bin64\Eto.dll</HintPath>
     </Reference>
+    <Reference Include="PortableSharpGL">
+      <HintPath>..\bin64\PortableSharpGL.dll</HintPath>
+    </Reference>
   </ItemGroup>
   
 </Project>

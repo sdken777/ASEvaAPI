@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.5.0
+            version=2.6.0
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -210,12 +210,12 @@
         </member>
         <member name="M:ASEva.UIEto.CheckableListBox.CheckAll">
             <summary>
-            勾选所有多选框
+            勾选所有多选框（不改变禁用的部分）
             </summary>
         </member>
         <member name="M:ASEva.UIEto.CheckableListBox.UncheckAll">
             <summary>
-            取消勾选所有多选框
+            取消勾选所有多选框（不改变禁用的部分）
             </summary>
         </member>
         <member name="T:ASEva.UIEto.ConfigPanel">
@@ -386,65 +386,79 @@
         </member>
         <member name="T:ASEva.UIEto.SizerExtensions">
             <summary>
-            (api:eto=2.0.0) 提供非默认DPI尺寸转换的扩展
+            (api:eto=2.0.0) 提供逻辑尺寸与实际像素值转换的扩展
             </summary>
         </member>
         <member name="M:ASEva.UIEto.SizerExtensions.Sizer(Eto.Forms.Control,System.Int32)">
             <summary>
-            转换像素值（单值）
+            转换为实际像素值（单值）
             </summary>
             <param name="control">控件</param>
-            <param name="size">默认DPI下的像素值</param>
-            <returns>任意DPI下的像素值</returns>
+            <param name="size">逻辑尺寸</param>
+            <returns>实际像素值</returns>
         </member>
         <member name="M:ASEva.UIEto.SizerExtensions.Sizer(Eto.Forms.Control,System.Int32,System.Int32)">
             <summary>
-            转换像素值（二维）
+            转换为实际像素值（二维）
             </summary>
             <param name="control">控件</param>
-            <param name="width">默认DPI下的宽度像素值</param>
-            <param name="height">默认DPI下的高度像素值</param>
-            <returns>任意DPI下的像素尺寸</returns>
+            <param name="width">逻辑宽度</param>
+            <param name="height">逻辑高度</param>
+            <returns>实际像素值</returns>
         </member>
         <member name="M:ASEva.UIEto.SizerExtensions.GetLogicalWidth(Eto.Forms.Control)">
             <summary>
-            (api:eto=2.3.5) 获取控件宽度
+            (api:eto=2.3.5) 获取控件逻辑宽度
             </summary>
             <param name="control">控件</param>
-            <returns>控件宽度</returns>
+            <returns>逻辑宽度</returns>
         </member>
         <member name="M:ASEva.UIEto.SizerExtensions.GetLogicalHeight(Eto.Forms.Control)">
             <summary>
-            (api:eto=2.3.5) 获取控件高度
+            (api:eto=2.3.5) 获取控件逻辑高度
             </summary>
             <param name="control">控件</param>
-            <returns>控件高度</returns>
+            <returns>逻辑高度</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.GetLogicalSize(Eto.Forms.Control)">
+            <summary>
+            (api:eto=2.5.1) 获取控件逻辑尺寸
+            </summary>
+            <param name="control">控件</param>
+            <returns>逻辑尺寸</returns>
         </member>
         <member name="M:ASEva.UIEto.SizerExtensions.SetLogicalWidth(Eto.Forms.Control,System.Int32)">
             <summary>
-            设置控件宽度
+            设置控件逻辑宽度
             </summary>
             <param name="control">控件</param>
-            <param name="width">设置宽度</param>
+            <param name="width">逻辑宽度</param>
         </member>
         <member name="M:ASEva.UIEto.SizerExtensions.SetLogicalHeight(Eto.Forms.Control,System.Int32)">
             <summary>
-            设置控件高度
+            设置控件逻辑高度
             </summary>
             <param name="control">控件</param>
-            <param name="height">设置高度</param>
+            <param name="height">逻辑高度</param>
         </member>
         <member name="M:ASEva.UIEto.SizerExtensions.SetLogicalSize(Eto.Forms.Control,System.Int32,System.Int32)">
             <summary>
-            设置控件尺寸
+            设置控件逻辑尺寸
             </summary>
             <param name="control">控件</param>
-            <param name="width">设置宽度</param>
-            <param name="height">设置高度</param>
+            <param name="width">逻辑宽度</param>
+            <param name="height">逻辑高度</param>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.GetLogicalPoint(Eto.Forms.MouseEventArgs)">
+            <summary>
+            (api:eto=2.5.1) 获取鼠标事件中鼠标位置的逻辑坐标
+            </summary>
+            <param name="args">鼠标事件</param>
+            <returns>鼠标位置的逻辑坐标</returns>
         </member>
         <member name="P:ASEva.UIEto.SizerExtensions.PixelScale">
             <summary>
-            像素单位比例，用于优化在非默认DPI下的显示
+            像素单位比例
             </summary>
         </member>
         <member name="T:ASEva.UIEto.SplitterExtensions">
@@ -866,6 +880,231 @@
             </summary>
             <param name="window">窗口</param>
             <param name="screen">目标屏幕，空表示主屏幕</param>
+        </member>
+        <member name="T:ASEva.UIEto.TextAnchor">
+            <summary>
+            (api:eto=2.6.0) 文本锚点坐标位置类型
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.Center">
+            <summary>
+            文本中心
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.TopLeft">
+            <summary>
+            文本左上角
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.LeftCenter">
+            <summary>
+            文本左侧中心
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.BottomLeft">
+            <summary>
+            文本左下角
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.TopRight">
+            <summary>
+            文本右上角
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.RightCenter">
+            <summary>
+            文本右侧中心
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.BottomRight">
+            <summary>
+            文本右下角
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.TopCenter">
+            <summary>
+            文本上方中心
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.BottomCenter">
+            <summary>
+            文本下方中心
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.GLTextTask">
+            <summary>
+            (api:eto=2.6.0) GLView的文本绘制任务
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.text">
+            <summary>
+            文本
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.posX">
+            <summary>
+            文本锚点X轴坐标
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.posY">
+            <summary>
+            文本锚点Y轴坐标
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.isRealPos">
+            <summary>
+            文本锚点坐标是否为物理像素坐标系，否则为逻辑坐标
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.anchor">
+            <summary>
+            文本锚点坐标位置类型
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.red">
+            <summary>
+            文本绘制颜色红色分量
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.green">
+            <summary>
+            文本绘制颜色绿色分量
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.blue">
+            <summary>
+            文本绘制颜色蓝色分量
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.alpha">
+            <summary>
+            文本绘制颜色Alpha通道分量，0将被视为255
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.fontName">
+            <summary>
+            文本字体，空则使用默认字体
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.sizeScale">
+            <summary>
+            文本相对于默认尺寸的比例，0将被视为1
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.GLTextTasks">
+            <summary>
+            (api:eto=2.6.0) GLView的文本绘制任务对象
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.GLTextTasks.Add(System.String,System.Int32,System.Int32,System.Byte,System.Byte,System.Byte,System.Single)">
+            <summary>
+            添加文本绘制任务
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.GLTextTasks.Add(ASEva.UIEto.GLTextTask)">
+            <summary>
+            添加文本绘制任务
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.GLSizeInfo">
+            <summary>
+            (api:eto=2.6.0) GLView的尺寸信息
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLSizeInfo.LogicalWidth">
+            <summary>
+            逻辑宽度
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLSizeInfo.LogicalHeight">
+            <summary>
+            逻辑高度
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLSizeInfo.RealWidth">
+            <summary>
+            物理像素宽度
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLSizeInfo.RealHeight">
+            <summary>
+            物理像素高度
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLSizeInfo.RealPixelScale">
+            <summary>
+            物理像素与逻辑
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLSizeInfo.AspectRatio">
+            <summary>
+            宽度与高度之比
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.GLEventArgs">
+            <summary>
+            (api:eto=2.6.0) GLView事件参数基类
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLEventArgs.GL">
+            <summary>
+            OpenGL对象
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.GLResizeEventArgs">
+            <summary>
+            (api:eto=2.6.0) GLView缩放事件参数
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLResizeEventArgs.SizeInfo">
+            <summary>
+            缩放后的尺寸信息
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.GLRenderEventArgs">
+            <summary>
+            (api:eto=2.6.0) GLView渲染事件参数
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLRenderEventArgs.TextTasks">
+            <summary>
+            文本绘制任务对象
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.GLView">
+            <summary>
+            (api:eto=2.6.0) OpenGL绘制视图（注意，此控件不支持在 ASEva.UIEto.OverlayLayout 中使用）
+            </summary>
+        </member>
+        <member name="E:ASEva.UIEto.GLView.GLInitialize">
+            <summary>
+            初始化事件
+            </summary>
+        </member>
+        <member name="E:ASEva.UIEto.GLView.GLResize">
+            <summary>
+            缩放事件
+            </summary>
+        </member>
+        <member name="E:ASEva.UIEto.GLView.GLRender">
+            <summary>
+            渲染事件
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.GLView.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.GLView.Close">
+            <summary>
+            关闭视图，释放资源
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.GLView.QueueRender">
+            <summary>
+            提交新的渲染请求
+            </summary>
         </member>
         <member name="T:ASEva.UIEto.ImageConverter">
             <summary>

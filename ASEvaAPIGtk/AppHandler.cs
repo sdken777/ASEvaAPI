@@ -67,6 +67,7 @@ namespace ASEva.UIGtk
             TextTableView.DefaultTextColor = Colors.Black;
             TextTableView.DefaultBackgroundColor = Colors.WhiteSmoke;
             CheckableListBox.UpdateColorMode = CheckableListBox.InvalidateMode.EditCell;
+            GLView.Factory = new GLViewFactoryGtk(uiBackend);
 
             return app;
         }

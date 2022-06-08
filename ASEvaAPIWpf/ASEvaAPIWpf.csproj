@@ -5,6 +5,7 @@
     <RootNamespace>ASEva.UIWpf</RootNamespace>
     <Configurations>Release;Debug</Configurations>
     <UseWPF>True</UseWPF>
+    <UseWindowsForms>True</UseWindowsForms>
     <Version>0.0.0.0</Version>
   </PropertyGroup>
 
@@ -21,6 +22,9 @@
     <Reference Include="ASEvaAPIEto">
       <HintPath>..\bin64\ASEvaAPIEto.dll</HintPath>
     </Reference>
+    <Reference Include="ASEvaAPICoreWF">
+      <HintPath>..\bin64\ASEvaAPICoreWF.dll</HintPath>
+    </Reference>
     <Reference Include="Eto">
       <HintPath>..\bin64\Eto.dll</HintPath>
     </Reference>
@@ -32,6 +36,12 @@
     </Reference>
     <Reference Include="Microsoft.Web.WebView2.Wpf">
       <HintPath>..\bin64\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PortableSharpGL">
+      <HintPath>..\bin64\PortableSharpGL.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\bin64\Xceed.Wpf.Toolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
 

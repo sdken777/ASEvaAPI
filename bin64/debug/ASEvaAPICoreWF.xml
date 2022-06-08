@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UICoreWF.APIInfo">
             <summary>
-            version=2.1.5
+            version=2.2.0
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.APIInfo.GetAPIVersion">
@@ -237,6 +237,23 @@
         <member name="T:ASEva.UICoreWF.FlowPanelResizer">
             <summary>
             (api:corewf=2.0.0) FlowLayoutPanel子控件宽度自适应
+            </summary>
+        </member>
+        <member name="F:ASEva.UICoreWF.OpenGLControl.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.OpenGLControl.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.OpenGLControl.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.DrawableHandler.#ctor(ASEva.UICoreWF.DrawableHandler.EtoDrawable)">
