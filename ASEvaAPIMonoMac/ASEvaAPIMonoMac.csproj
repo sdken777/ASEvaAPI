@@ -25,5 +25,8 @@
     <Reference Include="MonoMac">
       <HintPath>..\binm\MonoMac.dll</HintPath>
     </Reference>
+    <Reference Include="PortableSharpGL">
+      <HintPath>..\binm\PortableSharpGL.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

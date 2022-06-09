@@ -12,7 +12,8 @@
           "ASEvaAPIEto": "0.0.0.0",
           "Eto": "2.5.0.0",
           "Eto.Mac64": "2.5.0.0",
-          "MonoMac": "0.0.1.0"
+          "MonoMac": "0.0.1.0",
+          "PortableSharpGL": "0.0.0.0"
         },
         "runtime": {
           "ASEvaAPIMonoMac.dll": {}
@@ -58,6 +59,14 @@
           }
         }
       },
+      "PortableSharpGL/0.0.0.0": {
+        "runtime": {
+          "PortableSharpGL.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "SixLabors.ImageSharp/1.0.0.0": {
         "runtime": {
           "SixLabors.ImageSharp.dll": {
@@ -95,6 +104,11 @@
       "sha512": ""
     },
     "MonoMac/0.0.1.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PortableSharpGL/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
