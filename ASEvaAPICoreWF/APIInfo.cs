@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 0, 0); // 支持GLView
+            return new Version(2, 2, 0, 1); // 修复OpenGLControl的pixel scale获取
         }
     }
 }

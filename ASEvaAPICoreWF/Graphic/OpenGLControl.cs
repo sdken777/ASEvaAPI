@@ -121,7 +121,8 @@ namespace ASEva.UICoreWF
                 {
                     if (size == null || Width != size.RealWidth || Height != size.RealHeight)
                     {
-                        size = new GLSizeInfo((int)(Width / Pixel.Scale), (int)(Height / Pixel.Scale), Width, Height, Pixel.Scale, (float)Width / Height);
+                        var pixelScale = (float)DeviceDpi / 96;
+                        size = new GLSizeInfo((int)(Width / pixelScale), (int)(Height / pixelScale), Width, Height, pixelScale, (float)Width / Height);
                         callback.OnGLResize(gl, size);
                     }
 
@@ -158,7 +159,7 @@ namespace ASEva.UICoreWF
 
                     gl.Finish();
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     break;
                 }
