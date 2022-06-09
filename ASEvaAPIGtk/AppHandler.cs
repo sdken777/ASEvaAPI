@@ -15,6 +15,7 @@ namespace ASEva.UIGtk
         }
     }
 
+    #pragma warning disable 612
     class AppHandlerGtk : AppHandler
     {
         public Application CreateApp(out String uiBackend, out String webViewBackend)
@@ -41,19 +42,27 @@ namespace ASEva.UIGtk
             platform.Add<Form.IHandler>(() => new FormHandler());
             var app = new Application(platform);
 
-            SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerGtk();
+            ScreensHandler.TestLegacy();
 
             try
             {
                 var cssProvider = new Gtk.CssProvider();
-                cssProvider.LoadFromData(ResourceLoader.LoadText("default.css"));
+                cssProvider.LoadFromData(ResourceLoader.LoadText(ScreensHandler.LegacyMode ? "default-legacy.css" : "default.css"));
                 foreach (var screen in Screen.Screens)
                 {
-                    var gdkMonitor = screen.ControlObject as Gdk.Monitor;
-                    Gtk.StyleContext.AddProviderForScreen(gdkMonitor.Display.DefaultScreen, cssProvider, Gtk.StyleProviderPriority.User);
+                    if (ScreensHandler.LegacyMode)
+                    {
+                        var gdkScreen = screen.ControlObject as Gdk.Screen;
+                        Gtk.StyleContext.AddProviderForScreen(gdkScreen, cssProvider, Gtk.StyleProviderPriority.User);
+                    }
+                    else
+                    {
+                        var gdkMonitor = screen.ControlObject as Gdk.Monitor;
+                        Gtk.StyleContext.AddProviderForScreen(gdkMonitor.Display.DefaultScreen, cssProvider, Gtk.StyleProviderPriority.User);
+                    }
                 }
             }
-            catch (Exception) {}
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
 
             uiBackend = queryUIBackend();
             if (uiBackend == "wayland")
@@ -61,6 +70,7 @@ namespace ASEva.UIGtk
                 OverlayLayout.DelayHandleControl = true;
             }
 
+            SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerGtk();
             ContextMenuExtensions.ShouldAddMouseDownEvent = true;
             ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.ColorInverted;
             TextTableView.UpdateColorMode = TextTableView.InvalidateMode.EditCell;
@@ -86,14 +96,26 @@ namespace ASEva.UIGtk
         {
             try
             {
-                var monitor = Gdk.Display.Default.PrimaryMonitor;
-                if (monitor == null) monitor = Gdk.Display.Default.GetMonitor(0);
-                var x11MonitorType = new GLib.GType(gdk_x11_monitor_get_type());
-                if (x11MonitorType.IsInstance(monitor.Handle)) return "x11";
-                var waylandMonitorType = new GLib.GType(gdk_wayland_monitor_get_type());
-                if (waylandMonitorType.IsInstance(monitor.Handle)) return "wayland";
-                var mirMonitorType = new GLib.GType(gdk_mir_monitor_get_type());
-                if (mirMonitorType.IsInstance(monitor.Handle)) return "mir";
+                if (ScreensHandler.LegacyMode)
+                {
+                    var screen = Gdk.Display.Default.DefaultScreen;
+                    if (screen == null) screen = Gdk.Display.Default.GetScreen(0);
+                    var x11ScreenType = new GLib.GType(gdk_x11_screen_get_type());
+                    if (x11ScreenType.IsInstance(screen.Handle)) return "x11";
+                    var mirScreenType = new GLib.GType(gdk_mir_screen_get_type());
+                    if (mirScreenType.IsInstance(screen.Handle)) return "mir";
+                }
+                else
+                {
+                    var monitor = Gdk.Display.Default.PrimaryMonitor;
+                    if (monitor == null) monitor = Gdk.Display.Default.GetMonitor(0);
+                    var x11MonitorType = new GLib.GType(gdk_x11_monitor_get_type());
+                    if (x11MonitorType.IsInstance(monitor.Handle)) return "x11";
+                    var waylandMonitorType = new GLib.GType(gdk_wayland_monitor_get_type());
+                    if (waylandMonitorType.IsInstance(monitor.Handle)) return "wayland";
+                    var mirMonitorType = new GLib.GType(gdk_mir_monitor_get_type());
+                    if (mirMonitorType.IsInstance(monitor.Handle)) return "mir";
+                }
             }
             catch (Exception) {}
             return "unknown";
@@ -107,5 +129,11 @@ namespace ASEva.UIGtk
 
 		[DllImport("libgdk-3.so.0", SetLastError = true)]
 		private static extern IntPtr gdk_mir_monitor_get_type();
+
+		[DllImport("libgdk-3.so.0", SetLastError = true)]
+		private static extern IntPtr gdk_x11_screen_get_type();
+
+		[DllImport("libgdk-3.so.0", SetLastError = true)]
+		private static extern IntPtr gdk_mir_screen_get_type();
     }
 }

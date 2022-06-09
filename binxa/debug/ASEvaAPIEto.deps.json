@@ -9,7 +9,8 @@
       "ASEvaAPIEto/0.0.0.0": {
         "dependencies": {
           "ASEvaAPI": "0.0.0.0",
-          "Eto": "2.5.0.0"
+          "Eto": "2.5.0.0",
+          "PortableSharpGL": "0.0.0.0"
         },
         "runtime": {
           "ASEvaAPIEto.dll": {}
@@ -28,6 +29,14 @@
           "Eto.dll": {
             "assemblyVersion": "2.5.0.0",
             "fileVersion": "2.5.7683.15038"
+          }
+        }
+      },
+      "PortableSharpGL/0.0.0.0": {
+        "runtime": {
+          "PortableSharpGL.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -53,6 +62,11 @@
       "sha512": ""
     },
     "Eto/2.5.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PortableSharpGL/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 0, 2); // GLViewFactoryGtk捕获异常
+            return new Version(2, 2, 0, 3); // 解决px2下无法获取屏幕问题
         }
     }
 }
