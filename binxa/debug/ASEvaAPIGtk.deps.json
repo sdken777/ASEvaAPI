@@ -10,6 +10,7 @@
         "dependencies": {
           "ASEvaAPI": "0.0.0.0",
           "ASEvaAPIEto": "0.0.0.0",
+          "AtkSharp": "3.22.25.125",
           "CairoSharp": "3.22.25.125",
           "Eto": "2.5.0.0",
           "Eto.Gtk": "2.5.0.0",
@@ -17,7 +18,8 @@
           "GioSharp": "3.22.25.125",
           "GLibSharp": "3.22.25.125",
           "GtkSharp": "3.22.25.125",
-          "PangoSharp": "3.22.25.125"
+          "PangoSharp": "3.22.25.125",
+          "PortableSharpGL": "0.0.0.0"
         },
         "runtime": {
           "ASEvaAPIGtk.dll": {}
@@ -36,6 +38,14 @@
           "ASEvaAPIEto.dll": {
             "assemblyVersion": "0.0.0.0",
             "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "AtkSharp/3.22.25.125": {
+        "runtime": {
+          "AtkSharp.dll": {
+            "assemblyVersion": "3.22.25.125",
+            "fileVersion": "3.22.25.125"
           }
         }
       },
@@ -103,19 +113,19 @@
           }
         }
       },
+      "PortableSharpGL/0.0.0.0": {
+        "runtime": {
+          "PortableSharpGL.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "SixLabors.ImageSharp/1.0.0.0": {
         "runtime": {
           "SixLabors.ImageSharp.dll": {
             "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.4.0"
-          }
-        }
-      },
-      "AtkSharp/3.22.25.125": {
-        "runtime": {
-          "AtkSharp.dll": {
-            "assemblyVersion": "3.22.25.125",
-            "fileVersion": "3.22.25.125"
           }
         }
       }
@@ -133,6 +143,11 @@
       "sha512": ""
     },
     "ASEvaAPIEto/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AtkSharp/3.22.25.125": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
@@ -177,12 +192,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "SixLabors.ImageSharp/1.0.0.0": {
+    "PortableSharpGL/0.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "AtkSharp/3.22.25.125": {
+    "SixLabors.ImageSharp/1.0.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 0, 1); // Wayland下的WebView不分操作系统禁用OpenGL
+            return new Version(2, 2, 0, 2); // GLViewFactoryGtk捕获异常
         }
     }
 }
