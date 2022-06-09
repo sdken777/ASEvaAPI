@@ -38,6 +38,7 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/bin64/ASEvaAPIWpf.dll $TARGET_DIR/bin64/
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/bin64/
     cp -vf "$CUR_DIR"/3party/corewf-wpf/* $TARGET_DIR/bin64/
+    cp -vf "$CUR_DIR"/3party/windows/* $TARGET_DIR/bin64/
 fi
 
 mkdir -vp $TARGET_DIR/binx
@@ -48,6 +49,7 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/binx/ASEvaAPIGtk.dll $TARGET_DIR/binx/
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binx/
     cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binx/
+    cp -vf "$CUR_DIR"/3party/linux-x64/* $TARGET_DIR/binx/
 fi
 
 mkdir -vp $TARGET_DIR/binxa
@@ -58,6 +60,7 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/binxa/ASEvaAPIGtk.dll $TARGET_DIR/binxa/
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binxa/
     cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binxa/
+    cp -vf "$CUR_DIR"/3party/linux-arm64/* $TARGET_DIR/binxa/
 fi
 
 mkdir -vp $TARGET_DIR/binm
@@ -68,6 +71,7 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/binm/ASEvaAPIMonoMac.dll $TARGET_DIR/binm/
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binm/
     cp -vf "$CUR_DIR"/3party/monomac/* $TARGET_DIR/binm/
+    cp -vf "$CUR_DIR"/3party/macos/* $TARGET_DIR/binm/
 fi
 
 if [ "$EXPORT_DEVELOPER" = "y" ]; then
@@ -115,6 +119,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/bin64/ASEvaAPIWpf.dll $TARGET_DIR/bin64/debug/
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/bin64/debug/
         cp -vf "$CUR_DIR"/3party/corewf-wpf/* $TARGET_DIR/bin64/debug/
+        cp -vf "$CUR_DIR"/3party/windows/* $TARGET_DIR/bin64/debug/
     fi
 
     mkdir -vp $TARGET_DIR/binx/debug
@@ -125,6 +130,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/binx/ASEvaAPIGtk.dll $TARGET_DIR/binx/debug/
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binx/debug/
         cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binx/debug/
+        cp -vf "$CUR_DIR"/3party/linux-x64/* $TARGET_DIR/binx/debug/
     fi
 
     mkdir -vp $TARGET_DIR/binxa/debug
@@ -135,6 +141,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/binxa/ASEvaAPIGtk.dll $TARGET_DIR/binxa/debug/
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binxa/debug/
         cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binxa/debug/
+        cp -vf "$CUR_DIR"/3party/linux-arm64/* $TARGET_DIR/binxa/debug/
     fi
 
     mkdir -vp $TARGET_DIR/binm/debug
@@ -145,6 +152,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/binm/ASEvaAPIMonoMac.dll $TARGET_DIR/binm/debug/
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binm/debug/
         cp -vf "$CUR_DIR"/3party/monomac/* $TARGET_DIR/binm/debug/
+        cp -vf "$CUR_DIR"/3party/macos/* $TARGET_DIR/binm/debug/
     fi
 fi
 

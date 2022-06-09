@@ -38,6 +38,7 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/bin64/ASEvaAPIWpf.dll $TARGET_DIR/bin64/
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/bin64/
     cp -vf "$CUR_DIR"/3party/corewf-wpf/* $TARGET_DIR/bin64/
+    cp -vf "$CUR_DIR"/3party/windows/* $TARGET_DIR/bin64/
 fi
 
 mkdir -vp $TARGET_DIR/binx
@@ -48,6 +49,7 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/binx/ASEvaAPIGtk.dll $TARGET_DIR/binx/
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binx/
     cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binx/
+    cp -vf "$CUR_DIR"/3party/linux-x64/* $TARGET_DIR/binx/
 fi
 
 if [ "$EXPORT_DEVELOPER" = "y" ]; then
@@ -79,6 +81,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/bin64/ASEvaAPIWpf.dll $TARGET_DIR/bin64/debug/
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/bin64/debug/
         cp -vf "$CUR_DIR"/3party/corewf-wpf/* $TARGET_DIR/bin64/debug/
+        cp -vf "$CUR_DIR"/3party/windows/* $TARGET_DIR/bin64/debug/
     fi
 
     mkdir -vp $TARGET_DIR/binx/debug
@@ -89,6 +92,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/binx/ASEvaAPIGtk.dll $TARGET_DIR/binx/debug/
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binx/debug/
         cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binx/debug/
+        cp -vf "$CUR_DIR"/3party/linux-x64/* $TARGET_DIR/binx/debug/
     fi
 fi
 
