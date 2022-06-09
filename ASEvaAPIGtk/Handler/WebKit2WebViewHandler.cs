@@ -68,9 +68,8 @@ namespace ASEva.UIGtk
 			Control = new Gtk.ScrolledWindow();
 			Control.Realized += delegate
 			{
-				var runningOS = ASEva.UIEto.App.GetRunningOS();
 				var uiBackend = ASEva.UIEto.App.GetUIBackend();
-				if (runningOS == "linuxarm" && uiBackend != null && uiBackend == "wayland")
+				if (uiBackend != null && uiBackend == "wayland") // Wayland下使用OpenGL可能导致花屏，或令WaylandOffscreenView卡死
 				{
 					var settings = NativeMethods.webkit_settings_new();
 					NativeMethods.webkit_settings_set_enable_accelerated_2d_canvas(settings, false);
