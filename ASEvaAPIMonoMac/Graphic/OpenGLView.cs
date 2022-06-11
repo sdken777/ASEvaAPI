@@ -34,34 +34,15 @@ namespace ASEva.UIMonoMac
 
         public void InitializeGL()
         {
-            gl = OpenGL.Create(new MacOSFuncLoader());
-
-            if (OpenGLContext == null || OpenGLContext.ClassHandle == IntPtr.Zero) return;
-
-            OpenGLContext.MakeCurrentContext();
-            
-            if (MacOS.glewInit() != 0) return;
-
-            try
-            {
-                callback.OnGLInitialize(gl);
-                gl.Flush();
-            }
-            catch (Exception)
-            {
-                ClearGLContext();
-                return;
-            }
-
-            rendererStatusOK = true;
+            // 在首次绘制时初始化
         }
 
         public void ReleaseGL()
         {
-            if (!rendererStatusOK) return;
+            if (initStatus != InitStatus.InitOK) return;
 
             ClearGLContext();
-            rendererStatusOK = false;
+            initStatus = InitStatus.NotInitialized;
         }
 
         public void QueueRender()
@@ -75,7 +56,39 @@ namespace ASEva.UIMonoMac
 
         public override void DrawRect(CGRect dirty)
         {
-            if (!rendererStatusOK) return;
+            if (initStatus == InitStatus.InitFailed) return;
+            else if (initStatus == InitStatus.NotInitialized)
+            {
+                gl = OpenGL.Create(new MacOSFuncLoader());
+
+                if (OpenGLContext == null || OpenGLContext.ClassHandle == IntPtr.Zero)
+                {
+                    initStatus = InitStatus.InitFailed;
+                    return;
+                }
+
+                OpenGLContext.MakeCurrentContext();
+                
+                if (MacOS.glewInit() != 0)
+                {
+                    initStatus = InitStatus.InitFailed;
+                    return;
+                }
+
+                try
+                {
+                    callback.OnGLInitialize(gl);
+                    gl.Flush();
+                }
+                catch (Exception)
+                {
+                    ClearGLContext();
+                    initStatus = InitStatus.InitFailed;
+                    return;
+                }
+
+                initStatus = InitStatus.InitOK;
+            }
 
             OpenGLContext.MakeCurrentContext();
 
@@ -97,7 +110,7 @@ namespace ASEva.UIMonoMac
             catch (Exception)
             {
                 ClearGLContext();
-                rendererStatusOK = false;
+                initStatus = InitStatus.InitFailed;
                 return;
             }
 
@@ -209,9 +222,16 @@ namespace ASEva.UIMonoMac
             public GLTextTask Task { get; set; }
         }
 
+        enum InitStatus
+        {
+            NotInitialized = 0,
+            InitOK = 1,
+            InitFailed = 2,
+        }
+
         private OpenGL gl = null;
         private GLView.GLViewCallback callback = null;
-        private bool rendererStatusOK = false;
+        private InitStatus initStatus = InitStatus.NotInitialized;
         private GLSizeInfo size = null;
         private List<TextViewContext> textViews = new List<TextViewContext>();
         private bool drawQueued = false;
