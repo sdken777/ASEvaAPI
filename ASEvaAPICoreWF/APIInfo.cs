@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 0, 1); // 修复OpenGLControl的pixel scale获取
+            return new Version(2, 2, 0, 2); // 修复未安装WebView2环境导致的启动异常
         }
     }
 }

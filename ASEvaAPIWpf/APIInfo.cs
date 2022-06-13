@@ -18,7 +18,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 1, 0, 0); // 支持GLView
+            return new Version(1, 1, 0, 1); // 修复未安装WebView2环境导致的启动异常
         }
     }
 }

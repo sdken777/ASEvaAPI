@@ -16,6 +16,7 @@ namespace ASEva.UIWpf
 {
 	public class WebView2Handler : BaseHandler, WebView.IHandler
 	{
+		bool failed;
 		bool webView2Ready;
 		List<Action> delayedActions;
 
@@ -53,17 +54,24 @@ namespace ASEva.UIWpf
 
 		private void RunDelayedActions()
 		{
-			Control.CoreWebView2.DocumentTitleChanged += CoreWebView2_DocumentTitleChanged;
-			Control.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
-			webView2Ready = true;
-
-			if (delayedActions != null)
+			try
 			{
-				for (int i = 0; i < delayedActions.Count; i++)
+				Control.CoreWebView2.DocumentTitleChanged += CoreWebView2_DocumentTitleChanged;
+				Control.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
+				webView2Ready = true;
+
+				if (delayedActions != null)
 				{
-					delayedActions[i].Invoke();
+					for (int i = 0; i < delayedActions.Count; i++)
+					{
+						delayedActions[i].Invoke();
+					}
+					delayedActions = null;
 				}
-				delayedActions = null;
+			}
+			catch (Exception)
+			{
+				failed = true;
 			}
 		}
 
@@ -142,6 +150,7 @@ namespace ASEva.UIWpf
 
 		public string ExecuteScript(string script)
 		{
+			if (failed) return null;
 			var fullScript = string.Format("var _fn = function() {{ {0} }}; _fn();", script);
 			var task = Control.ExecuteScriptAsync(fullScript);
 			while (!task.IsCompleted)
@@ -156,6 +165,7 @@ namespace ASEva.UIWpf
 
 		public async Task<string> ExecuteScriptAsync(string script)
 		{
+			if (failed) return null;
 			var fullScript = string.Format("var _fn = function() {{ {0} }}; _fn();", script);
 			var result = await Control.ExecuteScriptAsync(fullScript);
 			return Decode(result);
@@ -189,6 +199,7 @@ namespace ASEva.UIWpf
 
 		public void LoadHtml(string html, Uri baseUri)
 		{
+			if (failed) return;
 			if (!webView2Ready)
 			{
 				RunWhenReady(() => LoadHtml(html, baseUri));
