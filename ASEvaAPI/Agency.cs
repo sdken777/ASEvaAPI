@@ -1457,7 +1457,7 @@ namespace ASEva
         /// <summary>
         /// 获取数据处理或C++模块组件配置的字符串描述
         /// </summary>
-        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
         /// <param name="moduleClassID">模块类别ID</param>
         /// <returns>配置的字符串描述，null表示找不到类别ID对应的模块</returns>
         public static String GetModuleConfig(object caller, String moduleClassID)
@@ -1468,7 +1468,7 @@ namespace ASEva
         /// <summary>
         /// 设置数据处理或C++模块组件配置的字符串描述
         /// </summary>
-        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
         /// <param name="moduleClassID">模块类别ID</param>
         /// <param name="config">配置的字符串描述</param>
         public static void SetModuleConfig(object caller, String moduleClassID, String config)
@@ -1479,7 +1479,7 @@ namespace ASEva
         /// <summary>
         /// 获取数据处理或C++模块组件配置的状态
         /// </summary>
-        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
         /// <param name="moduleClassID">模块类别ID</param>
         /// <returns>组件配置的状态，若找不到类别ID对应的模块则返回 ASEva.ConfigStatus.Disabled </returns>
         public static ConfigStatus GetModuleConfigStatus(object caller, String moduleClassID)
@@ -1490,7 +1490,7 @@ namespace ASEva
         /// <summary>
         /// 获取数据处理或C++模块组件各子功能配置的状态
         /// </summary>
-        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
         /// <param name="moduleClassID">模块类别ID</param>
         /// <returns>各子功能配置的状态，若找不到类别ID对应的模块或无子功能配置则返回null</returns>
         public static ConfigStatus[] GetModuleChildConfigStatus(object caller, String moduleClassID)
@@ -2741,7 +2741,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.6.0) 发送数据至原生层模块
         /// </summary>
-        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
         /// <param name="dataID">数据ID</param>
         /// <param name="data">数据</param>
@@ -2753,7 +2753,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.6.0) 接收所有从原生层模块发来的新数据
         /// </summary>
-        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
         /// <param name="dataID">数据ID</param>
         /// <returns>所有新数据</returns>
@@ -2765,7 +2765,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.6.0) 调用原生层函数
         /// </summary>
-        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
         /// <param name="funcID">函数ID</param>
         /// <param name="input">函数输入数据</param>
@@ -2778,7 +2778,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.6.0) 设置供原生层模块调用的应用层函数
         /// </summary>
-        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
         /// <param name="funcID">函数ID</param>
         /// <param name="handler">函数接口</param>
@@ -2790,7 +2790,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.6.0) 移除供原生层模块调用的应用层函数
         /// </summary>
-        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
         /// <param name="funcID">函数ID</param>
         public static void ResetAppFunctionHandler(object caller, String nativeClassID, String funcID)
