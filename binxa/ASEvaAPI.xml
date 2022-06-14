@@ -1770,7 +1770,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.5
+            version=2.6.6
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3836,6 +3836,12 @@
             [可选实现] 获取插件包需要使用的所有全局路径的键
             </summary>
             <returns>全局路径键的列表</returns>
+        </member>
+        <member name="M:ASEva.Plugin.GetRelatedNativeModules">
+            <summary>
+            (api:app=2.6.6) [可选实现] 获取插件相关的C++组件ID（无需考虑本插件内的C++组件）
+            </summary>
+            <returns>C++组件ID列表</returns>
         </member>
         <member name="M:ASEva.Plugin.OnApplicationStarted">
             <summary>

@@ -57,6 +57,12 @@ namespace ASEva
         public virtual String[] GetGlobalPathKeys() { return null; }
 
         /// <summary>
+        /// (api:app=2.6.6) [可选实现] 获取插件相关的C++组件ID（无需考虑本插件内的C++组件）
+        /// </summary>
+        /// <returns>C++组件ID列表</returns>
+        public virtual String[] GetRelatedNativeModules() { return null; }
+
+        /// <summary>
         /// [可选实现] 在插件成功加载后被调用（用于开启背景线程等）
         /// </summary>
         public virtual void OnApplicationStarted() { }
