@@ -25,6 +25,8 @@ namespace ASEvaAPIEtoTest
                 g.DrawLine(Colors.Black, 100, 10, 100, 190);
                 g.DrawLine(new Pen(Colors.Red, 20), 20, 110, 90, 110);
                 g.DrawText(g.ScaledDefaultFont(), Colors.Black, 100, 100, t["draw-text"]);
+                var textSize = g.MeasureString(g.ScaledDefaultFont(), t["draw-text"]);
+                g.DrawRectangle(new Pen(Colors.Green), 100, 100, textSize.Width, textSize.Height);
                 g.DrawImage(Icon.FromResource("camera.png"), 80, 80);
                 g.FillPie(Color.FromArgb(0, 128, 0, 128), 10, 10, 180, 180, -90, 270);
             };
