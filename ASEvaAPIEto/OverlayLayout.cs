@@ -25,6 +25,8 @@ namespace ASEva.UIEto
         /// <returns>新添加的控件</returns>
         public Control AddControl(Control control, int? topLogicalPadding, int? bottomLogicalPadding, int? leftLogicalPadding, int? rightLogicalPadding)
         {
+            if (control is GLView) return null; // 不支持GLView
+
             ControlPadding padding = null;
             if (!paddingTable.ContainsKey(control)) paddingTable[control] = new ControlPadding();
             padding = paddingTable[control];

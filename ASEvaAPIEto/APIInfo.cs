@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 6, 0, 0); // 新增GLView
+            return new Version(2, 6, 0, 1); // 直接在OverlayLayout的AddControl中禁用GLView
         }
     }
 }
