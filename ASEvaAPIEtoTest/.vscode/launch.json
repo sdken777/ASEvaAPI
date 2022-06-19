@@ -1,167 +1,104 @@
 {
-   "version": "0.2.0",
-   "configurations": [
+    "version": "0.2.0",
+    "inputs": [
         {
-            "name": "发布运行CoreWF(X86-Windows主机)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "发布构建(X86-Windows主机/全平台目标)",
-            "program": "${workspaceFolder}/../bin64/ASEvaAPIEtoTest",
-            "args": ["corewf"],
-            "cwd": "${workspaceFolder}/../bin64/",
-            "console": "internalConsole",
-            "stopAtEntry": false
+            "id": "helper_platform_bin_name",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "platform_bin_name"
+                ]
+            }
         },
         {
-            "name": "发布运行Wpf(X86-Windows主机)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "发布构建(X86-Windows主机/全平台目标)",
-            "program": "${workspaceFolder}/../bin64/ASEvaAPIEtoTest",
-            "args": ["wpf"],
-            "cwd": "${workspaceFolder}/../bin64/",
-            "console": "internalConsole",
-            "stopAtEntry": false
+            "id": "windows_ui",
+            "type": "pickString",
+            "description": "请选择UI框架",
+            "default": "",
+            "options": [
+                "",
+                "corewf",
+                "wpf"
+            ]
         },
         {
-            "name": "发布运行X11(X86-Linux主机)",
+            "id": "gdk_backend",
+            "type": "pickString",
+            "description": "请选择显示服务器",
+            "default": "",
+            "options": [
+                "",
+                "x11",
+                "wayland"
+            ]
+        },
+        {
+            "id": "gdk_gl",
+            "type": "pickString",
+            "description": "请选择OpenGL配置",
+            "default": "",
+            "options": [
+                "",
+                "LEGACY",
+            ]
+        }
+    ],
+    "configurations": [
+        {
+            "name": "调试运行",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "发布构建(X86-Linux主机/全平台目标)",
-            "program": "${workspaceFolder}/../binx/ASEvaAPIEtoTest",
+            "preLaunchTask": "调试构建",
+            "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest",
             "args": [],
-            "env": { "GDK_BACKEND":"x11" },
-            "cwd": "${workspaceFolder}/../binx/",
+            "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
             "console": "internalConsole",
-            "stopAtEntry": false
+            "stopAtEntry": false,
+            "windows": {
+                "args": [ "${input:windows_ui}" ]
+            },
+            "osx": {
+                "program": "${workspaceFolder}/../macapp/ASEvaAPIEtoTest.app/Contents/MacOS/ASEvaAPIEtoTest",
+                "cwd": "${workspaceFolder}/../macapp/ASEvaAPIEtoTest.app/Contents/MacOS/",
+            },
+            "linux": {
+                "env": {
+                    "GDK_BACKEND": "${input:gdk_backend}",
+                    "GDK_GL": "${input:gdk_gl}",
+                }
+                // "type": "f5anything",
+                // "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest",
+            },
         },
         {
-            "name": "发布运行Wayland(X86-Linux主机)",
+            "name": "发布运行",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "发布构建(X86-Linux主机/全平台目标)",
-            "program": "${workspaceFolder}/../binx/ASEvaAPIEtoTest",
+            "preLaunchTask": "发布构建",
+            "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/ASEvaAPIEtoTest",
             "args": [],
-            "env": { "GDK_BACKEND":"wayland" },
-            "cwd": "${workspaceFolder}/../binx/",
+            "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/",
             "console": "internalConsole",
-            "stopAtEntry": false
-        },
-        {
-            "name": "发布运行X11(Arm-Linux主机)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "发布构建(Arm-Linux主机/全平台目标)",
-            "program": "${workspaceFolder}/../binxa/ASEvaAPIEtoTest",
-            "args": [],
-            "env": { "GDK_BACKEND":"x11" },
-            "cwd": "${workspaceFolder}/../binxa/",
-            "console": "internalConsole",
-            "stopAtEntry": false
-        },
-        {
-            "name": "发布运行Wayland(Arm-Linux主机)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "发布构建(Arm-Linux主机/全平台目标)",
-            "program": "${workspaceFolder}/../binxa/ASEvaAPIEtoTest",
-            "args": [],
-            "env": { "GDK_BACKEND":"wayland" },
-            "cwd": "${workspaceFolder}/../binxa/",
-            "console": "internalConsole",
-            "stopAtEntry": false
-        },
-        {
-            "name": "发布运行(X86-MacOS主机)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "发布构建并生成app包(X86-MacOS主机/全平台目标)",
-            "program": "${workspaceFolder}/../macapp/ASEvaAPIEtoTest.app/Contents/MacOS/ASEvaAPIEtoTest",
-            "args": [],
-            "cwd": "${workspaceFolder}/../macapp/ASEvaAPIEtoTest.app/Contents/MacOS/",
-            "console": "internalConsole",
-            "stopAtEntry": false
-        },
-        {
-            "name": "调试运行CoreWF(X86-Windows主机)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "调试构建并移除冗余文件(X86-Windows主机/X86-Windows目标)",
-            "program": "${workspaceFolder}/../bin64/debug/ASEvaAPIEtoTest",
-            "args": ["corewf"],
-            "cwd": "${workspaceFolder}/../bin64/debug/",
-            "console": "internalConsole",
-            "stopAtEntry": false
-        },
-        {
-            "name": "调试运行Wpf(X86-Windows主机)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "调试构建并移除冗余文件(X86-Windows主机/X86-Windows目标)",
-            "program": "${workspaceFolder}/../bin64/debug/ASEvaAPIEtoTest",
-            "args": ["wpf"],
-            "cwd": "${workspaceFolder}/../bin64/debug/",
-            "console": "internalConsole",
-            "stopAtEntry": false
-        },
-        {
-            "name": "调试运行X11(X86-Linux主机)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "调试构建并移除冗余文件(X86-Linux主机/X86-Ubuntu1804目标)",
-            "program": "${workspaceFolder}/../binx/debug/ASEvaAPIEtoTest",
-            "args": [],
-            "env": { "GDK_BACKEND":"x11" },
-            "cwd": "${workspaceFolder}/../binx/debug/",
-            "console": "internalConsole",
-            "stopAtEntry": false
-        },
-        {
-            "name": "调试运行Wayland(X86-Linux主机)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "调试构建并移除冗余文件(X86-Linux主机/X86-Ubuntu1804目标)",
-            "program": "${workspaceFolder}/../binx/debug/ASEvaAPIEtoTest",
-            "args": [],
-            "env": { "GDK_BACKEND":"wayland" },
-            "cwd": "${workspaceFolder}/../binx/debug/",
-            "console": "internalConsole",
-            "stopAtEntry": false
-        },
-        {
-            "name": "调试运行X11(Arm-Linux主机)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "调试构建并移除冗余文件(Arm-Linux主机/Arm-Ubuntu1604目标)",
-            "program": "${workspaceFolder}/../binxa/debug/ASEvaAPIEtoTest",
-            "args": [],
-            "env": { "GDK_BACKEND":"x11" },
-            "cwd": "${workspaceFolder}/../binxa/debug/",
-            "console": "internalConsole",
-            "stopAtEntry": false
-        },
-        {
-            "name": "调试运行Wayland(Arm-Linux主机)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "调试构建并移除冗余文件(Arm-Linux主机/Arm-Ubuntu1604目标)",
-            "program": "${workspaceFolder}/../binxa/debug/ASEvaAPIEtoTest",
-            "args": [],
-            "env": { "GDK_BACKEND":"wayland" },
-            "cwd": "${workspaceFolder}/../binxa/debug/",
-            "console": "internalConsole",
-            "stopAtEntry": false
-        },
-        {
-            "name": "调试运行(X86-MacOS主机)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "调试构建并生成app包(X86-MacOS主机/X86-MacOS1010目标)",
-            "program": "${workspaceFolder}/../macapp/ASEvaAPIEtoTest.app/Contents/MacOS/ASEvaAPIEtoTest",
-            "args": [],
-            "cwd": "${workspaceFolder}/../macapp/ASEvaAPIEtoTest.app/Contents/MacOS/",
-            "console": "internalConsole",
-            "stopAtEntry": false
+            "stopAtEntry": false,
+            "windows": {
+                "args": [ "${input:windows_ui}" ]
+            },
+            "osx": {
+                "program": "${workspaceFolder}/../macapp/ASEvaAPIEtoTest.app/Contents/MacOS/ASEvaAPIEtoTest",
+                "cwd": "${workspaceFolder}/../macapp/ASEvaAPIEtoTest.app/Contents/MacOS/",
+            },
+            "linux": {
+                "env": {
+                    "GDK_BACKEND": "${input:gdk_backend}",
+                    "GDK_GL": "${input:gdk_gl}",
+                }
+            //     "type": "f5anything",
+            //     "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/ASEvaAPIEtoTest",
+            },
         },
     ]
 }

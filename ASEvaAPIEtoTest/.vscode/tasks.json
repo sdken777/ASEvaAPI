@@ -1,9 +1,109 @@
 {
     "version": "2.0.0",
+    "inputs": [
+        {
+            "id": "helper_platform_bin_name",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "platform_bin_name"
+                ]
+            }
+        },
+        {
+            "id": "helper_platform_exe_text_resource_editor",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "platform_exe",
+                    "TextResourceEditor",
+                ]
+            }
+        },
+        {
+            "id": "helper_osx_version",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "osx_version"
+                ]
+            }
+        },
+    ],
+    "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+    },
     "tasks": [
         {
             "type": "process",
-            "label": "(internal)清理",
+            "label": "调试构建",
+            "group": "build",
+            "command": "echo",
+            "args": [
+                "Done.",
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "清理",
+                "(子任务)调试构建",
+                "(子任务)移除调试构建冗余文件",
+            ],
+            "problemMatcher": [],
+            "osx": {
+                "command": "dotnet",
+                "args": [
+                    "../bin/AppMaker.dll",
+                    "${workspaceFolder}/../macapp-local-ASEvaAPIEtoTest.xml",
+                    "debug",
+                ],
+            }
+        },
+        {
+            "type": "process",
+            "label": "发布构建",
+            "group": "build",
+            "command": "echo",
+            "args": [
+                "Done.",
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "清理",
+                "(子任务)发布构建",
+                "(子任务)移除发布构建冗余文件",
+                "(子任务)拷贝至其他目录",
+            ],
+            "problemMatcher": [],
+            "osx": {
+                "command": "dotnet",
+                "args": [
+                    "../bin/AppMaker.dll",
+                    "${workspaceFolder}/../macapp-local-ASEvaAPIEtoTest.xml",
+                    "release",
+                ],
+            }
+        },
+        {
+            "type": "process",
+            "label": "清理",
+            "group": "build",
             "command": "rm",
             "args": [
                 "-rf",
@@ -14,466 +114,146 @@
         },
         {
             "type": "process",
-            "label": "(internal)发布构建(X86-Windows主机/X86-Windows目标)",
-            "command": "dotnet",
-            "args": [
-                "build",
-                "./ASEvaAPIEtoTest.csproj",
-                "-c",
-                "Release",
-                "-o",
-                "../bin64",
-                "/property:OutputType=WinExe",
-                "/property:ApplicationIcon=Resources/icon.ico",
-                "/property:UseWindowsForms=true",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "dependsOn": [
-                "(internal)清理"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "type": "process",
-            "label": "(internal)发布构建(X86-Linux主机/X86-Ubuntu1804目标)",
-            "command": "dotnet",
-            "args": [
-                "build",
-                "./ASEvaAPIEtoTest.csproj",
-                "-c",
-                "Release",
-                "-o",
-                "../binx",
-                "/property:OutputType=Exe",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "dependsOn": [
-                "(internal)清理"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "type": "process",
-            "label": "(internal)发布构建(Arm-Linux主机/Arm-Ubuntu1604目标)",
-            "command": "dotnet",
-            "args": [
-                "build",
-                "./ASEvaAPIEtoTest.csproj",
-                "-c",
-                "Release",
-                "-o",
-                "../binxa",
-                "/property:OutputType=Exe",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "dependsOn": [
-                "(internal)清理"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "type": "process",
-            "label": "(internal)发布构建(X86-MacOS主机/X86-MacOS1010目标)",
-            "command": "dotnet",
-            "args": [
-                "publish",
-                "./ASEvaAPIEtoTest.csproj",
-                "-c",
-                "Release",
-                "-r",
-                "osx.10.10-x64",
-                "--no-self-contained",
-                "-o",
-                "../binm",
-                "/property:OutputType=Exe",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "dependsOn": [
-                "(internal)清理"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "type": "process",
-            "label": "(internal)移除发布构建冗余文件(X86-Windows目标)",
-            "command": "rm",
-            "args": [
-                "-vf",
-                "../bin64/ASEvaAPIEtoTest.pdb",
-                "../bin64/ASEvaAPIEtoTest.deps.json",
-                "../bin64/ASEvaAPIEtoTest.runtimeconfig.dev.json",
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)移除发布构建冗余文件(X86-Ubuntu1804目标)",
-            "command": "rm",
-            "args": [
-                "-vf",
-                "../binx/ASEvaAPIEtoTest.pdb",
-                "../binx/ASEvaAPIEtoTest.deps.json",
-                "../binx/ASEvaAPIEtoTest.runtimeconfig.dev.json",
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)移除发布构建冗余文件(Arm-Ubuntu1604目标)",
-            "command": "rm",
-            "args": [
-                "-vf",
-                "../binxa/ASEvaAPIEtoTest.pdb",
-                "../binxa/ASEvaAPIEtoTest.deps.json",
-                "../binxa/ASEvaAPIEtoTest.runtimeconfig.dev.json",
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)移除发布构建冗余文件(X86-MacOS1010目标)",
-            "command": "rm",
-            "args": [
-                "-vf",
-                "../binm/ASEvaAPIEtoTest.pdb",
-                "../binm/ASEvaAPIEtoTest.deps.json",
-                "../binm/ASEvaAPIEtoTest.runtimeconfig.dev.json",
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)创建bin文件夹",
-            "command": "mkdir",
-            "args": [
-                "-p",
-                "../bin64",
-                "../binx",
-                "../binxa",
-                "../binm",
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)拷贝dll至bin(X86-Windows至X86-Ubuntu1804目标)",
-            "command": "cp",
-            "args": [
-                "-vf",
-                "../bin64/ASEvaAPIEtoTest.dll",
-                "../binx/"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)拷贝dll至bin(X86-Windows至Arm-Ubuntu1604目标)",
-            "command": "cp",
-            "args": [
-                "-vf",
-                "../bin64/ASEvaAPIEtoTest.dll",
-                "../binxa/"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)拷贝dll至bin(X86-Windows至X86-MacOS1010目标)",
-            "command": "cp",
-            "args": [
-                "-vf",
-                "../bin64/ASEvaAPIEtoTest.dll",
-                "../binm/"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)拷贝dll至bin(X86-Ubuntu1804至X86-Windows目标)",
-            "command": "cp",
-            "args": [
-                "-vf",
-                "../binx/ASEvaAPIEtoTest.dll",
-                "../bin64/"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)拷贝dll至bin(Arm-Ubuntu1604至X86-Windows目标)",
-            "command": "cp",
-            "args": [
-                "-vf",
-                "../binxa/ASEvaAPIEtoTest.dll",
-                "../bin64/"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)拷贝dll至bin(X86-MacOS1010至X86-Windows目标)",
-            "command": "cp",
-            "args": [
-                "-vf",
-                "../binm/ASEvaAPIEtoTest.dll",
-                "../bin64/"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "发布构建(X86-Windows主机/全平台目标)",
-            "command": "echo",
-            "args": [
-                "Done.",
-            ],
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "(internal)发布构建(X86-Windows主机/X86-Windows目标)",
-                "(internal)移除发布构建冗余文件(X86-Windows目标)",
-                "(internal)创建bin文件夹",
-                "(internal)拷贝dll至bin(X86-Windows至X86-Ubuntu1804目标)",
-                "(internal)拷贝dll至bin(X86-Windows至Arm-Ubuntu1604目标)",
-                "(internal)拷贝dll至bin(X86-Windows至X86-MacOS1010目标)",
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "发布构建(X86-Linux主机/全平台目标)",
-            "command": "echo",
-            "args": [
-                "Done.",
-            ],
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "(internal)发布构建(X86-Linux主机/X86-Ubuntu1804目标)",
-                "(internal)移除发布构建冗余文件(X86-Ubuntu1804目标)",
-                "(internal)创建bin文件夹",
-                "(internal)拷贝dll至bin(X86-Ubuntu1804至X86-Windows目标)",
-                "(internal)拷贝dll至bin(X86-Windows至Arm-Ubuntu1604目标)",
-                "(internal)拷贝dll至bin(X86-Windows至X86-MacOS1010目标)",
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "发布构建(Arm-Linux主机/全平台目标)",
-            "command": "echo",
-            "args": [
-                "Done.",
-            ],
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "(internal)发布构建(Arm-Linux主机/Arm-Ubuntu1604目标)",
-                "(internal)移除发布构建冗余文件(Arm-Ubuntu1604目标)",
-                "(internal)创建bin文件夹",
-                "(internal)拷贝dll至bin(Arm-Ubuntu1604至X86-Windows目标)",
-                "(internal)拷贝dll至bin(X86-Windows至X86-Ubuntu1804目标)",
-                "(internal)拷贝dll至bin(X86-Windows至X86-MacOS1010目标)",
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "发布构建并生成app包(X86-MacOS主机/全平台目标)",
-            "command": "dotnet",
-            "args": [
-                "../bin/AppMaker.dll",
-                "${workspaceFolder}/../macapp-local-ASEvaAPIEtoTest.xml",
-                "release",
-            ],
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "(internal)发布构建(X86-MacOS主机/X86-MacOS1010目标)",
-                "(internal)移除发布构建冗余文件(X86-MacOS1010目标)",
-                "(internal)创建bin文件夹",
-                "(internal)拷贝dll至bin(X86-MacOS1010至X86-Windows目标)",
-                "(internal)拷贝dll至bin(X86-Windows至X86-Ubuntu1804目标)",
-                "(internal)拷贝dll至bin(X86-Windows至Arm-Ubuntu1604目标)",
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)调试构建(X86-Windows主机/X86-Windows目标)",
-            "command": "dotnet",
-            "args": [
-                "build",
-                "./ASEvaAPIEtoTest.csproj",
-                "-o",
-                "../bin64/debug",
-                "/property:OutputType=WinExe",
-                "/property:UseWindowsForms=true",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "dependsOn": [
-                "(internal)清理"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "type": "process",
-            "label": "(internal)调试构建(X86-Linux主机/X86-Ubuntu1804目标)",
-            "command": "dotnet",
-            "args": [
-                "build",
-                "./ASEvaAPIEtoTest.csproj",
-                "-o",
-                "../binx/debug",
-                "/property:OutputType=Exe",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "dependsOn": [
-                "(internal)清理"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "type": "process",
-            "label": "(internal)调试构建(Arm-Linux主机/Arm-Ubuntu1604目标)",
-            "command": "dotnet",
-            "args": [
-                "build",
-                "./ASEvaAPIEtoTest.csproj",
-                "-o",
-                "../binxa/debug",
-                "/property:OutputType=Exe",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "dependsOn": [
-                "(internal)清理"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "type": "process",
-            "label": "(internal)调试构建(X86-MacOS主机/X86-MacOS1010目标)",
-            "command": "dotnet",
-            "args": [
-                "publish",
-                "./ASEvaAPIEtoTest.csproj",
-                "-r",
-                "osx.10.10-x64",
-                "--no-self-contained",
-                "-o",
-                "../binm/debug",
-                "/property:OutputType=Exe",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "dependsOn": [
-                "(internal)清理"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "type": "process",
-            "label": "调试构建并移除冗余文件(X86-Windows主机/X86-Windows目标)",
-            "command": "rm",
-            "args": [
-                "-vf",
-                "../bin64/debug/ASEvaAPIEtoTest.pdb",
-                "../bin64/debug/ASEvaAPIEtoTest.deps.json",
-                "../bin64/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
-            ],
-            "dependsOn": [
-                "(internal)调试构建(X86-Windows主机/X86-Windows目标)"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "调试构建并移除冗余文件(X86-Linux主机/X86-Ubuntu1804目标)",
-            "command": "rm",
-            "args": [
-                "-vf",
-                "../binx/debug/ASEvaAPIEtoTest.pdb",
-                "../binx/debug/ASEvaAPIEtoTest.deps.json",
-                "../binx/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
-            ],
-            "dependsOn": [
-                "(internal)调试构建(X86-Linux主机/X86-Ubuntu1804目标)"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "调试构建并移除冗余文件(Arm-Linux主机/Arm-Ubuntu1604目标)",
-            "command": "rm",
-            "args": [
-                "-vf",
-                "../binxa/debug/ASEvaAPIEtoTest.pdb",
-                "../binxa/debug/ASEvaAPIEtoTest.deps.json",
-                "../binxa/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
-            ],
-            "dependsOn": [
-                "(internal)调试构建(Arm-Linux主机/Arm-Ubuntu1604目标)"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)移除调试构建冗余文件(X86-MacOS1010目标)",
-            "command": "rm",
-            "args": [
-                "-vf",
-                "../binm/debug/ASEvaAPIEtoTest.pdb",
-                "../binm/debug/ASEvaAPIEtoTest.deps.json",
-                "../binm/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "调试构建并生成app包(X86-MacOS主机/X86-MacOS1010目标)",
-            "command": "dotnet",
-            "args": [
-                "../bin/AppMaker.dll",
-                "${workspaceFolder}/../macapp-local-ASEvaAPIEtoTest.xml",
-                "debug",
-            ],
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "(internal)调试构建(X86-MacOS主机/X86-MacOS1010目标)",
-                "(internal)移除调试构建冗余文件(X86-MacOS1010目标)",
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "运行文本资源编辑器(X86-Windows主机)",
-            "command": "../bin64/TextResourceEditor.exe",
+            "label": "运行文本资源编辑器",
+            "group": "build",
+            "command": "../${input:helper_platform_bin_name}/${input:helper_platform_exe_text_resource_editor}",
             "args": [],
             "problemMatcher": [],
         },
+
+        // 以下为子任务
+
         {
             "type": "process",
-            "label": "运行文本资源编辑器(X86-Linux主机)",
-            "command": "../binx/TextResourceEditor",
-            "args": [],
-            "problemMatcher": [],
+            "label": "(子任务)调试构建",
+            "command": "dotnet",
+            "problemMatcher": "$msCompile",
+            "windows": {
+                "args": [
+                    "build",
+                    "./ASEvaAPIEtoTest.csproj",
+                    "-o",
+                    "../${input:helper_platform_bin_name}/debug",
+                    "/property:OutputType=WinExe",
+                    "/property:UseWindowsForms=true",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary"
+                ],
+            },
+            "linux": {
+                "args": [
+                    "build",
+                    "./ASEvaAPIEtoTest.csproj",
+                    "-o",
+                    "../${input:helper_platform_bin_name}/debug",
+                    "/property:OutputType=Exe",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary"
+                ],
+            },
+            "osx": {
+                "args": [
+                    "publish",
+                    "./ASEvaAPIEtoTest.csproj",
+                    "-r",
+                    "${input:helper_osx_version}",
+                    "--no-self-contained",
+                    "-o",
+                    "../${input:helper_platform_bin_name}/debug",
+                    "/property:OutputType=Exe",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary"
+                ],
+            }
         },
         {
             "type": "process",
-            "label": "运行文本资源编辑器(Arm-Linux主机)",
-            "command": "../binxa/TextResourceEditor",
-            "args": [],
-            "problemMatcher": [],
+            "label": "(子任务)发布构建",
+            "command": "dotnet",
+            "problemMatcher": "$msCompile",
+            "windows": {
+                "args": [
+                    "build",
+                    "./ASEvaAPIEtoTest.csproj",
+                    "-c",
+                    "Release",
+                    "-o",
+                    "../${input:helper_platform_bin_name}",
+                    "/property:OutputType=WinExe",
+                    "/property:ApplicationIcon=Resources/icon.ico",
+                    "/property:UseWindowsForms=true",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary"
+                ],
+            },
+            "linux": {
+                "args": [
+                    "build",
+                    "./ASEvaAPIEtoTest.csproj",
+                    "-c",
+                    "Release",
+                    "-o",
+                    "../${input:helper_platform_bin_name}",
+                    "/property:OutputType=Exe",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary"
+                ],
+            },
+            "osx": {
+                "args": [
+                    "publish",
+                    "./ASEvaAPIEtoTest.csproj",
+                    "-c",
+                    "Release",
+                    "-r",
+                    "${input:helper_osx_version}",
+                    "--no-self-contained",
+                    "-o",
+                    "../${input:helper_platform_bin_name}",
+                    "/property:OutputType=Exe",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary"
+                ],
+            }
         },
         {
             "type": "process",
-            "label": "运行文本资源编辑器(X86-MacOS主机)",
-            "command": "open",
-            "args": [ "../binm/TextResourceEditor.app" ],
-            "problemMatcher": [],
+            "label": "(子任务)移除调试构建冗余文件",
+            "command": "rm",
+            "args": [
+                "-vf",
+                "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.pdb",
+                "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.deps.json",
+                "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(子任务)移除发布构建冗余文件",
+            "command": "rm",
+            "args": [
+                "-vf",
+                "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.pdb",
+                "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.deps.json",
+                "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.runtimeconfig.dev.json",
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(子任务)拷贝至其他目录",
+            "command": "dotnet",
+            "args": [
+                "../bin/VSCodeHelper.dll",
+                "copy_outputs",
+                "ASEvaAPIEtoTest",
+                "bin64",
+                "binx",
+                "binxa",
+                "binm",
+            ],
+            "problemMatcher": []
         },
     ]
 }

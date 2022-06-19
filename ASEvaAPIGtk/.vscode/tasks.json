@@ -1,9 +1,66 @@
 {
     "version": "2.0.0",
+    "inputs": [
+        {
+            "id": "helper_platform_bin_name",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "platform_bin_name"
+                ]
+            }
+        },
+    ],
+    "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+    },
     "tasks": [
         {
             "type": "process",
-            "label": "(internal)清理",
+            "label": "调试构建",
+            "group": "build",
+            "command": "echo",
+            "args": [
+                "Done.",
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "清理",
+                "(子任务)调试构建",
+                "(子任务)移除调试构建冗余文件",
+            ],
+            "problemMatcher": [],
+        },
+        {
+            "type": "process",
+            "label": "发布构建",
+            "group": "build",
+            "command": "echo",
+            "args": [
+                "Done.",
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "清理",
+                "(子任务)发布构建",
+                "(子任务)移除发布构建冗余文件",
+                "(子任务)拷贝至其他目录",
+            ],
+            "problemMatcher": [],
+        },
+        {
+            "type": "process",
+            "label": "清理",
+            "group": "build",
             "command": "rm",
             "args": [
                 "-rf",
@@ -12,9 +69,26 @@
             ],
             "problemMatcher": []
         },
+
+        // 以下为子任务
+
         {
             "type": "process",
-            "label": "(internal)发布构建(X86-Ubuntu1804目标)",
+            "label": "(子任务)调试构建",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIGtk.csproj",
+                "-o",
+                "../${input:helper_platform_bin_name}/debug",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+        },
+        {
+            "type": "process",
+            "label": "(子任务)发布构建",
             "command": "dotnet",
             "args": [
                 "build",
@@ -22,108 +96,46 @@
                 "-c",
                 "Release",
                 "-o",
-                "../binx",
+                "../${input:helper_platform_bin_name}",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "dependsOn": [
-                "(internal)清理"
-            ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": "$msCompile",
         },
         {
             "type": "process",
-            "label": "(internal)移除发布构建冗余文件(X86-Ubuntu1804目标)",
+            "label": "(子任务)移除调试构建冗余文件",
             "command": "rm",
             "args": [
                 "-vf",
-                "../binx/ASEvaAPIGtk.pdb",
-                "../binx/ASEvaAPIGtk.deps.json"
+                "../${input:helper_platform_bin_name}/debug/ASEvaAPIGtk.pdb",
+                "../${input:helper_platform_bin_name}/debug/ASEvaAPIGtk.deps.json",
             ],
             "problemMatcher": []
         },
         {
             "type": "process",
-            "label": "(internal)创建bin文件夹",
-            "command": "mkdir",
-            "args": [
-                "-p",
-                "../binxa"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(internal)拷贝dll至bin(X86-Ubuntu1804至Arm-Ubuntu1604目标)",
-            "command": "cp",
+            "label": "(子任务)移除发布构建冗余文件",
+            "command": "rm",
             "args": [
                 "-vf",
-                "../binx/ASEvaAPIGtk.dll",
-                "../binxa/"
+                "../${input:helper_platform_bin_name}/ASEvaAPIGtk.pdb",
+                "../${input:helper_platform_bin_name}/ASEvaAPIGtk.deps.json",
             ],
             "problemMatcher": []
         },
         {
             "type": "process",
-            "label": "(internal)拷贝xml至bin(X86-Ubuntu1804至Arm-Ubuntu1604目标)",
-            "command": "cp",
-            "args": [
-                "-vf",
-                "../binx/ASEvaAPIGtk.xml",
-                "../binxa/"
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "发布构建(全平台目标)",
-            "command": "echo",
-            "args": [
-                "Done.",
-            ],
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "(internal)发布构建(X86-Ubuntu1804目标)",
-                "(internal)移除发布构建冗余文件(X86-Ubuntu1804目标)",
-                "(internal)创建bin文件夹",
-                "(internal)拷贝dll至bin(X86-Ubuntu1804至Arm-Ubuntu1604目标)",
-                "(internal)拷贝xml至bin(X86-Ubuntu1804至Arm-Ubuntu1604目标)",
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "调试构建(X86-Ubuntu1804目标)",
+            "label": "(子任务)拷贝至其他目录",
             "command": "dotnet",
             "args": [
-                "build",
-                "./ASEvaAPIGtk.csproj",
-                "-o",
-                "../binx/debug",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
+                "../bin/VSCodeHelper.dll",
+                "copy_outputs",
+                "ASEvaAPIGtk",
+                "binx",
+                "binxa",
             ],
-            "dependsOn": [
-                "(internal)清理"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "type": "process",
-            "label": "调试构建(Arm-Ubuntu1604目标)",
-            "command": "dotnet",
-            "args": [
-                "build",
-                "./ASEvaAPIGtk.csproj",
-                "-o",
-                "../binxa/debug",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary"
-            ],
-            "dependsOn": [
-                "(internal)清理"
-            ],
-            "problemMatcher": "$msCompile"
+            "problemMatcher": []
         },
     ]
 }

@@ -1,53 +1,58 @@
 {
-   "version": "0.2.0",
-   "configurations": [
+    "version": "0.2.0",
+    "inputs": [
         {
-            "name": "调试运行X11(X86-Linux主机)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "调试构建(X86-Ubuntu1804目标)",
-            "program": "${workspaceFolder}/../binx/debug/ASEvaAPIEtoTest",
-            "args": [],
-            "env":{ "GDK_BACKEND":"x11" },
-            "cwd": "${workspaceFolder}/../binx/debug/",
-            "console": "internalConsole",
-            "stopAtEntry": false
+            "id": "helper_platform_bin_name",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "platform_bin_name"
+                ]
+            }
         },
         {
-            "name": "调试运行Wayland(X86-Linux主机)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "调试构建(X86-Ubuntu1804目标)",
-            "program": "${workspaceFolder}/../binx/debug/ASEvaAPIEtoTest",
-            "args": [],
-            "env":{ "GDK_BACKEND":"wayland" },
-            "cwd": "${workspaceFolder}/../binx/debug/",
-            "console": "internalConsole",
-            "stopAtEntry": false
+            "id": "gdk_backend",
+            "type": "pickString",
+            "description": "请选择显示服务器",
+            "default": "",
+            "options": [
+                "",
+                "x11",
+                "wayland"
+            ]
         },
         {
-            "name": "调试运行X11(Arm-Linux主机)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "调试构建(Arm-Ubuntu1604目标)",
-            "program": "${workspaceFolder}/../binxa/debug/ASEvaAPIEtoTest",
-            "args": [],
-            "env":{ "GDK_BACKEND":"x11" },
-            "cwd": "${workspaceFolder}/../binxa/debug/",
-            "console": "internalConsole",
-            "stopAtEntry": false
-        },
+            "id": "gdk_gl",
+            "type": "pickString",
+            "description": "请选择OpenGL配置",
+            "default": "",
+            "options": [
+                "",
+                "LEGACY",
+            ]
+        }
+    ],
+    "configurations": [
         {
-            "name": "调试运行Wayland(Arm-Linux主机)",
+            "name": "调试运行",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "调试构建(Arm-Ubuntu1604目标)",
-            "program": "${workspaceFolder}/../binxa/debug/ASEvaAPIEtoTest",
+            "preLaunchTask": "调试构建",
+            "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest",
             "args": [],
-            "env":{ "GDK_BACKEND":"wayland" },
-            "cwd": "${workspaceFolder}/../binxa/debug/",
+            "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
             "console": "internalConsole",
-            "stopAtEntry": false
+            "stopAtEntry": false,
+            "env": {
+                "GDK_BACKEND": "${input:gdk_backend}",
+                "GDK_GL": "${input:gdk_gl}",
+            }
+            // "type": "f5anything",
+            // "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest",
         },
     ]
 }
