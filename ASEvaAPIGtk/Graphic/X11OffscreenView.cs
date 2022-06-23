@@ -163,6 +163,7 @@ namespace ASEva.UIGtk
                 return;
             }
 
+            dummyArea.Visible = false;
             rendererStatusOK = true;
         }
 
