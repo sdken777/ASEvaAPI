@@ -18,6 +18,7 @@ namespace ASEva.UIGtk
             PackStart(dummyArea, false, false, 0);
 
             dummyArea.Realized += onRealized;
+            dummyArea.Drawn += onDrawDummy;
             realArea.Drawn += onDraw;
         }
 
@@ -163,7 +164,6 @@ namespace ASEva.UIGtk
                 return;
             }
 
-            dummyArea.Visible = false;
             rendererStatusOK = true;
         }
 
@@ -240,6 +240,30 @@ namespace ASEva.UIGtk
             drawQueued = false;
         }
 
+        private void onDrawDummy(object o, DrawnArgs args)
+        {
+            if (!rendererStatusOK) return;
+            if (dummyArea.AllocatedWidth == dummyWidth) return;
+
+            dummyWidth = dummyArea.AllocatedWidth;
+
+            IntPtr display = Linux.gdk_x11_display_get_xdisplay(Display.Handle);
+            var xid = Linux.gdk_x11_window_get_xid(dummyArea.Window.Handle);
+            Linux.glXMakeCurrent(display, xid, context);
+
+            try
+            {
+                gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, 0);
+                gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT);
+                gl.Finish();
+
+                Linux.glXSwapIntervalEXT(display, xid, 0);
+                Linux.glXSwapBuffers(display, xid);
+                Linux.glXMakeCurrent(display, 0, IntPtr.Zero);
+            }
+            catch (Exception) { }
+        }
+
         private OpenGL gl = null;
         private GLView.GLViewCallback callback;
         private IntPtr context = IntPtr.Zero;
@@ -250,6 +274,7 @@ namespace ASEva.UIGtk
         private Cairo.ImageSurface cairoSurface = null;
         private bool rendererStatusOK = false;
         private GLSizeInfo size = null;
+        private int dummyWidth = 0;
         private bool drawQueued = false;
         private DrawingArea realArea = new DrawingArea();
         private DrawingArea dummyArea = new DrawingArea();
