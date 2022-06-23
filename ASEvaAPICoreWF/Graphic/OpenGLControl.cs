@@ -4,36 +4,22 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
+using System.Drawing.Imaging;
 using SharpGL;
 using ASEva.UIEto;
+using Eto.WinForms;
 
 namespace ASEva.UICoreWF
 {
-    public partial class OpenGLControl : UserControl, GLView.GLViewBackend
+    partial class OpenGLControl : UserControl, GLView.GLViewBackend
     {
         public OpenGLControl()
         {
             InitializeComponent();
 
-            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            SetStyle(ControlStyles.UserPaint, true);
-            SetStyle(ControlStyles.OptimizedDoubleBuffer, false);
-
-            Paint += delegate { drawEvent.Set(); };
-
             gl = OpenGL.Create(new WindowsFuncLoader());
 
-            timer.Interval = 100;
-            timer.Tick += delegate
-            {
-                timer.Stop();
-                hdc = Win32.GetDC(Handle);
-                shouldEnd = false;
-                drawEvent.Set();
-                thread = new Thread(threadFunc);
-                thread.Start();
-            };
-            timer.Start();
+            pictureBox.MouseWheel += pictureBox_MouseWheel;
         }
 
         public void SetCallback(GLView.GLViewCallback callback)
@@ -43,36 +29,182 @@ namespace ASEva.UICoreWF
 
         public void ReleaseGL()
         {
-            if (thread != null)
-            {
-                shouldEnd = true;
-                thread.Join();
-                thread = null;
-                Win32.ReleaseDC(Handle, hdc);
-            }
+            onDestroy();
         }
 
         public void QueueRender()
         {
             if (ParentForm != null && ParentForm.WindowState != FormWindowState.Minimized && Visible)
             {
-                QueueDrawWithoutCheckingParentForm();
+                pictureBox.Invalidate();
             }
         }
 
-        public void QueueDrawWithoutCheckingParentForm()
+        private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
-            drawEvent.Set();
-            finishEvent.WaitOne(20);
+            if (initOK == null)
+            {
+                onInit();
+                e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+                if (initOK == null) initOK = false;
+            }
+            if (!initOK.Value)
+            {
+                e.Graphics.Clear(Color.Black);
+                return;
+            }
+
+            var pixelScale = (float)DeviceDpi / 96;
+            var curSize = new GLSizeInfo((int)(Width / pixelScale), (int)(Height / pixelScale), Width, Height, pixelScale, (float)Width / Height);
+            bool resized = curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
+            size = curSize;
+
+            Win32.wglMakeCurrent(hdc, context);
+
+            try
+            {
+                if (resized)
+                {
+                    gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[0]);
+                    gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+                    gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, depthBuffer[0]);
+                    gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+                    hostBuffer = new byte[size.RealWidth * size.RealHeight * 4]; 
+                    bitmap = new Bitmap(size.RealWidth, size.RealHeight, PixelFormat.Format32bppArgb);
+                }
+
+                gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[0]);
+                gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBuffer[0]);
+                gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_DEPTH_ATTACHMENT_EXT, OpenGL.GL_RENDERBUFFER_EXT, depthBuffer[0]);
+
+                if (resized) callback.OnGLResize(gl, size);
+
+                var textTasks = new GLTextTasks();
+                callback.OnGLRender(gl, textTasks);
+                gl.Finish();
+
+                gl.ReadPixels(0, 0, bitmap.Width, bitmap.Height, OpenGL.GL_RGBA, hostBuffer);
+
+                var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
+                {
+                    var bitmapWidth = bitmapData.Width;
+                    var bitmapHeight = bitmapData.Height;
+                    var bitmapStep = bitmapData.Stride;
+                    unsafe
+                    {
+                        byte* surfaceData = (byte*)bitmapData.Scan0;
+                        fixed (byte* srcData = &(hostBuffer[0]))
+                        {
+                            for (int v = 0; v < bitmapHeight; v++)
+                            {
+                                uint* srcRow = (uint*)&srcData[v * bitmapWidth * 4];
+                                uint* dstRow = (uint*)&surfaceData[(bitmapHeight - 1 - v) * bitmapStep];
+                                for (int u = 0; u < bitmapWidth; u++)
+                                {
+                                    dstRow[u] = ((srcRow[u] & 0x000000ff) << 16) | (srcRow[u] & 0x0000ff00) | ((srcRow[u] & 0x00ff0000) >> 16) | 0xff000000;
+                                }
+                            }
+                        }
+                    }
+                }
+                bitmap.UnlockBits(bitmapData);
+
+                e.Graphics.DrawImageUnscaled(bitmap, 0, 0);
+
+                foreach (var task in textTasks.Clear())
+                {
+                    if (String.IsNullOrEmpty(task.text)) continue;
+
+                    var fontName = String.IsNullOrEmpty(task.fontName) ? "Microsoft Yahei" : task.fontName;
+                    var fontSize = (task.sizeScale <= 0 ? 1.0f : task.sizeScale) * 9.0f;
+                    var font = new Font(fontName, fontSize);
+
+                    var textSize = e.Graphics.MeasureString(task.text, font);
+
+                    int posX = task.posX;
+                    int posY = task.posY;
+                    if (!task.isRealPos)
+                    {
+                        posX = (int)(size.RealPixelScale * posX);
+                        posY = (int)(size.RealPixelScale * posY);
+                    }
+
+                    int fullWidth = (int)textSize.Width;
+                    int fullHeight = (int)textSize.Height;
+                    int halfWidth = (int)(textSize.Width / 2);
+                    int halfHeight = (int)(textSize.Height / 2);
+                    switch (task.anchor)
+                    {
+                        case TextAnchor.TopLeft:
+                            break;
+                        case TextAnchor.LeftCenter:
+                            posY -= halfHeight;
+                            break;
+                        case TextAnchor.BottomLeft:
+                            posY -= fullHeight;
+                            break;
+                        case TextAnchor.TopCenter:
+                            posX -= halfWidth;
+                            break;
+                        case TextAnchor.Center:
+                            posX -= halfWidth;
+                            posY -= halfHeight;
+                            break;
+                        case TextAnchor.BottomCenter:
+                            posX -= halfWidth;
+                            posY -= fullHeight;
+                            break;
+                        case TextAnchor.TopRight:
+                            posX -= fullWidth;
+                            break;
+                        case TextAnchor.RightCenter:
+                            posX -= fullWidth;
+                            posY -= halfHeight;
+                            break;
+                        case TextAnchor.BottomRight:
+                            posX -= fullWidth;
+                            posY -= fullHeight;
+                            break;
+                        default:
+                            break;
+                    }
+
+                    var brush = new SolidBrush(Color.FromArgb(task.alpha == 0 ? (byte)255 : task.alpha, task.red, task.green, task.blue));
+
+                    e.Graphics.DrawString(task.text, font, brush, posX, posY);
+                }
+            }
+            catch (Exception)
+            {
+                initOK = false;
+            }
         }
 
-        private void OpenGLControl_SizeChanged(object sender, EventArgs e)
+        private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
-            drawEvent.Set();
+            callback.OnRaiseMouseDown(e.ToEto(this));
         }
 
-        private void threadFunc()
+        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
         {
+            callback.OnRaiseMouseMove(e.ToEto(this));
+        }
+
+        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            callback.OnRaiseMouseUp(e.ToEto(this));
+        }
+
+        private void pictureBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            callback.OnRaiseMouseWheel(e.ToEto(this));
+        }
+
+        private void onInit()
+        {
+            hdc = Win32.GetDC(Handle);
+            if (hdc == IntPtr.Zero) return;
+
             Win32.PIXELFORMATDESCRIPTOR pfd = new Win32.PIXELFORMATDESCRIPTOR();
             pfd.Init();
             pfd.nVersion = 1;
@@ -87,12 +219,10 @@ namespace ASEva.UICoreWF
             if ((iPixelformat = Win32.ChoosePixelFormat(hdc, pfd)) == 0) return;
             if (Win32.SetPixelFormat(hdc, iPixelformat, pfd) == 0) return;
 
-            var renderContext = Win32.wglCreateContext(hdc);
-            if (renderContext == IntPtr.Zero) return;
+            context = Win32.wglCreateContext(hdc);
+            if (context == IntPtr.Zero) return;
 
-            Win32.wglMakeCurrent(hdc, renderContext);
-
-            if (Win32.glewInit() != 0) return;
+            Win32.wglMakeCurrent(hdc, context);
 
             try
             {
@@ -102,81 +232,94 @@ namespace ASEva.UICoreWF
                 ctxInfo.renderer = gl.Renderer;
                 ctxInfo.extensions = gl.Extensions;
 
+                var pixelScale = (float)DeviceDpi / 96;
+                size = new GLSizeInfo((int)(Width / pixelScale), (int)(Height / pixelScale), Width, Height, pixelScale, (float)Width / Height);
+
+                colorBuffer = new uint[1];
+                gl.GenRenderbuffersEXT(1, colorBuffer);
+                gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[0]);
+                gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+
+                depthBuffer = new uint[1];
+                gl.GenRenderbuffersEXT(1, depthBuffer);
+                gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, depthBuffer[0]);
+                gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+
+                frameBuffer = new uint[1];
+                gl.GenFramebuffersEXT(1, frameBuffer);
+                gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[0]);
+                gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBuffer[0]);
+                gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_DEPTH_ATTACHMENT_EXT, OpenGL.GL_RENDERBUFFER_EXT, depthBuffer[0]);
+
+                if (gl.CheckFramebufferStatusEXT(OpenGL.GL_FRAMEBUFFER_EXT) != OpenGL.GL_FRAMEBUFFER_COMPLETE_EXT)
+                {
+                    onDestroy();
+                    return;
+                }
+
+                hostBuffer = new byte[size.RealWidth * size.RealHeight * 4];
+                bitmap = new Bitmap(size.RealWidth, size.RealHeight, PixelFormat.Format32bppArgb);
+
                 callback.OnGLInitialize(gl, ctxInfo);
+                callback.OnGLResize(gl, size);
+
                 gl.Flush();
             }
             catch (Exception)
             {
+                onDestroy();
                 return;
             }
 
-            GLSizeInfo size = null;
-            while (!shouldEnd)
+            initOK = true;
+        }
+
+        private void onDestroy()
+        {
+            if (context != IntPtr.Zero)
             {
-                if (!drawEvent.WaitOne(20)) continue;
-
-                try
-                {
-                    if (size == null || Width != size.RealWidth || Height != size.RealHeight)
-                    {
-                        var pixelScale = (float)DeviceDpi / 96;
-                        size = new GLSizeInfo((int)(Width / pixelScale), (int)(Height / pixelScale), Width, Height, pixelScale, (float)Width / Height);
-                        callback.OnGLResize(gl, size);
-                    }
-
-                    var textTasks = new GLTextTasks();
-                    callback.OnGLRender(gl, textTasks);
-
-                    gl.MatrixMode(OpenGL.GL_PROJECTION);
-                    gl.PushMatrix();
-                    gl.LoadIdentity();
-                    gl.Ortho(0, Width, 0, Height, -1, 1);
-
-                    gl.MatrixMode(OpenGL.GL_MODELVIEW);
-                    gl.PushMatrix();
-
-                    gl.PushAttrib(OpenGL.GL_LIST_BIT | OpenGL.GL_CURRENT_BIT | OpenGL.GL_ENABLE_BIT | OpenGL.GL_TRANSFORM_BIT);
-                    gl.Disable(OpenGL.GL_LIGHTING);
-                    gl.Disable(OpenGL.GL_TEXTURE_2D);
-                    gl.Disable(OpenGL.GL_DEPTH_TEST);
-
-                    IntPtr? oldFont = null;
-                    foreach (var task in textTasks.Clear())
-                    {
-                        DrawText.Draw(gl, task, size, hdc, ref oldFont);
-                    }
-                    if (oldFont != null) Win32.SelectObject(hdc, oldFont.Value);
-
-                    gl.PopAttrib();
-
-                    gl.MatrixMode(OpenGL.GL_PROJECTION);
-                    gl.PopMatrix();
-
-                    gl.MatrixMode(OpenGL.GL_MODELVIEW);
-                    gl.PopMatrix();
-
-                    gl.Finish();
-                }
-                catch (Exception)
-                {
-                    break;
-                }
-
-                finishEvent.Set();
-
-                Win32.SwapBuffers(hdc);
+                Win32.wglMakeCurrent(hdc, context);
             }
 
-            Win32.wglDeleteContext(renderContext);
+            if (frameBuffer != null)
+            {
+                gl.DeleteFramebuffersEXT(1, frameBuffer);
+                frameBuffer = null;
+            }
+            if (colorBuffer != null)
+            {
+                gl.DeleteRenderbuffersEXT(1, colorBuffer);
+                colorBuffer = null;
+            }
+            if (depthBuffer != null)
+            {
+                gl.DeleteRenderbuffersEXT(1, depthBuffer);
+                depthBuffer = null;
+            }
+            if (context != IntPtr.Zero)
+            {
+                Win32.wglDeleteContext(context);
+                context = IntPtr.Zero;
+            }
+            if (hdc != IntPtr.Zero)
+            {
+                Win32.ReleaseDC(Handle, hdc);
+                hdc = IntPtr.Zero;
+            }
+
+            initOK = null;
         }
 
         private OpenGL gl = null;
         private GLView.GLViewCallback callback = null;
-        private Thread thread = null;
-        private bool shouldEnd = false;
-        private AutoResetEvent drawEvent = new AutoResetEvent(false);
-        private AutoResetEvent finishEvent = new AutoResetEvent(false);
+        private bool? initOK = null;
         private IntPtr hdc = IntPtr.Zero;
-        private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+        private IntPtr context = IntPtr.Zero;
+        private uint[] frameBuffer = null;
+        private uint[] colorBuffer = null;
+        private uint[] depthBuffer = null;
+        private byte[] hostBuffer = null;
+        private Bitmap bitmap = null;
+        private GLSizeInfo size = null;
     }
 }

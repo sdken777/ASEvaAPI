@@ -379,19 +379,40 @@ namespace ASEva.UIEto
 			}
         }
 
+		public void OnRaiseMouseDown(MouseEventArgs args)
+		{
+			OnMouseDown(args);
+		}
+
+		public void OnRaiseMouseMove(MouseEventArgs args)
+		{
+			OnMouseMove(args);
+		}
+
+		public void OnRaiseMouseUp(MouseEventArgs args)
+		{
+			OnMouseUp(args);
+		}
+
+		public void OnRaiseMouseWheel(MouseEventArgs args)
+		{
+			OnMouseWheel(args);
+		}
+
         public interface GLViewCallback
 		{
 			void OnGLInitialize(OpenGL gl, GLContextInfo contextInfo);
-
 			void OnGLResize(OpenGL gl, GLSizeInfo sizeInfo);
-
 			void OnGLRender(OpenGL gl, GLTextTasks textTasks);
+			void OnRaiseMouseDown(MouseEventArgs args);
+			void OnRaiseMouseMove(MouseEventArgs args);
+			void OnRaiseMouseUp(MouseEventArgs args);
+			void OnRaiseMouseWheel(MouseEventArgs args);
 		}
 
 		public interface GLViewBackend
 		{
 			void QueueRender();
-
 			void ReleaseGL();
 		}
 

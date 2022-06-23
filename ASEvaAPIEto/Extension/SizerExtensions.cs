@@ -137,6 +137,19 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
+        /// (api:eto=2.6.2) 获取鼠标相对于当前控件的逻辑坐标
+        /// </summary>
+        /// <param name="control">控件</param>
+        /// <returns>鼠标相对于当前控件的逻辑坐标</returns>
+        public static PointF GetMouseLogicalPoint(this Control control)
+        {
+            var pt = control.PointFromScreen(Mouse.Position);
+            var scale = Pixel.Scale;
+            if (scale != 1) return new PointF(pt.X / scale, pt.Y / scale);
+            else return pt;
+        }
+
+        /// <summary>
         /// 像素单位比例
         /// </summary>
         public static float PixelScale

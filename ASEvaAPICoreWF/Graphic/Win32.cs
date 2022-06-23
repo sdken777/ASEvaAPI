@@ -11,19 +11,16 @@ namespace ASEva.UICoreWF
         {
 			try { HandleOpengl32 = Win32.LoadLibrary(OpenGL32); } catch (Exception) {}
 			try { HandleGlu32 = Win32.LoadLibrary(Glu32); } catch (Exception) {}
-			try { HandleGlew32 = Win32.LoadLibrary(Glew32); } catch (Exception) {}
 		}
 
 		public static IntPtr HandleOpengl32 { get; private set; }
 		public static IntPtr HandleGlu32 { get; private set; }
-		public static IntPtr HandleGlew32 { get; private set; }
 
 		private const string Kernel32 = "kernel32.dll";
 		private const string User32 = "user32.dll";
         private const string OpenGL32 = "opengl32.dll";
         private const string Gdi32 = "gdi32.dll";
 		private const string Glu32 = "glu32.dll";
-		private const string Glew32 = "glew32.dll";
 
 		[DllImport(Kernel32, SetLastError = true)]
         public static extern IntPtr LoadLibrary(string lpFileName);
@@ -49,6 +46,9 @@ namespace ASEva.UICoreWF
 		[DllImport(OpenGL32, SetLastError = true)]
 		public static extern bool wglUseFontBitmapsW(IntPtr hDC, uint first, uint count, uint listBase);
 
+		[DllImport(OpenGL32, SetLastError = true)]
+		public static extern IntPtr wglGetProcAddress(String name);
+
 		[DllImport(Gdi32, SetLastError = true)]
         public unsafe static extern int ChoosePixelFormat(IntPtr hDC, [In, MarshalAs(UnmanagedType.LPStruct)] PIXELFORMATDESCRIPTOR ppfd);
 
@@ -72,9 +72,6 @@ namespace ASEva.UICoreWF
 
 		[DllImport(Gdi32, SetLastError = true)]
 		public static extern bool GetTextExtentPointW(IntPtr hdc, string lpString, int cbString, ref Size lpSize);
-
-		[DllImport(Glew32, SetLastError = true)]
-		public static extern uint glewInit();
 
 		[StructLayout(LayoutKind.Explicit)]
 		public class PIXELFORMATDESCRIPTOR

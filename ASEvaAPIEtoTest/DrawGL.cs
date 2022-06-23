@@ -97,12 +97,9 @@ namespace ASEvaAPIEtoTest
                     gl.LoadIdentity();
                     gl.Ortho(0, glViewSizeInfo.LogicalWidth, glViewSizeInfo.LogicalHeight, 0, -1, 1);
 
-                    var mouseRawPos = glView.PointFromScreen(Mouse.Position);
-                    var mouseInButton = buttonRect.Contains(Pixel.ToLogicalPoint(new Point((int)mouseRawPos.X, (int)mouseRawPos.Y)));
-
                     gl.Begin(OpenGL.GL_QUADS);
                     {
-                        gl.Color(1.0f, 1.0f, 0.5f, mouseInButton ? 1.0f : 0.5f);
+                        gl.Color(1.0f, 1.0f, 0.5f, buttonRect.Contains(glView.GetMouseLogicalPoint()) ? 1.0f : 0.5f);
                         gl.Vertex(buttonRect.Left, buttonRect.Top, 0);
                         gl.Vertex(buttonRect.Right, buttonRect.Top, 0);
                         gl.Vertex(buttonRect.Right, buttonRect.Bottom, 0);

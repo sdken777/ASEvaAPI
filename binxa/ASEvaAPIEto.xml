@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.6.1
+            version=2.6.2
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -455,6 +455,13 @@
             </summary>
             <param name="args">鼠标事件</param>
             <returns>鼠标位置的逻辑坐标</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.GetMouseLogicalPoint(Eto.Forms.Control)">
+            <summary>
+            (api:eto=2.6.2) 获取鼠标相对于当前控件的逻辑坐标
+            </summary>
+            <param name="control">控件</param>
+            <returns>鼠标相对于当前控件的逻辑坐标</returns>
         </member>
         <member name="P:ASEva.UIEto.SizerExtensions.PixelScale">
             <summary>
