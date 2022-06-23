@@ -12,6 +12,8 @@ namespace ASEva.UIGtk
         {
             DoubleBuffered = false;
 
+            gl = OpenGL.Create(new LinuxFuncLoader());
+
             Realized += onRealized;
             Drawn += onDraw;
         }
@@ -19,14 +21,6 @@ namespace ASEva.UIGtk
         public void SetCallback(GLView.GLViewCallback callback)
         {
             this.callback = callback;
-        }
-
-        public void InitializeGL()
-        {
-            gl = OpenGL.Create(new LinuxFuncLoader());
-
-            initConditions[0] = true;
-            onInitialize();
         }
 
         public void ReleaseGL()
@@ -44,10 +38,32 @@ namespace ASEva.UIGtk
             }
         }
 
-        private void onInitialize()
+        private void onDestroy()
         {
-            if (!initConditions[0] || !initConditions[1]) return;
+            if (frameBuffer != null)
+            {
+                gl.DeleteFramebuffersEXT(1, frameBuffer);
+                frameBuffer = null;
+            }
+            if (colorBuffer != null)
+            {
+                gl.DeleteRenderbuffersEXT(1, colorBuffer);
+                colorBuffer = null;
+            }
+            if (depthBuffer != null)
+            {
+                gl.DeleteRenderbuffersEXT(1, depthBuffer);
+                depthBuffer = null;
+            }
 
+            IntPtr display = Linux.gdk_x11_display_get_xdisplay(Display.Handle);
+            Linux.glXDestroyContext(display, context);
+
+            rendererStatusOK = false;
+        }
+
+        private void onRealized(object sender, EventArgs e)
+        {
             IntPtr display = Linux.gdk_x11_display_get_xdisplay(Window.Display.Handle);
             if (display == IntPtr.Zero) return;
 
@@ -85,6 +101,12 @@ namespace ASEva.UIGtk
 
             try
             {
+                var ctxInfo = new GLContextInfo();
+                ctxInfo.version = gl.Version;
+                ctxInfo.vendor = gl.Vendor;
+                ctxInfo.renderer = gl.Renderer;
+                ctxInfo.extensions = gl.Extensions;
+                
                 size = new GLSizeInfo(AllocatedWidth, AllocatedHeight, AllocatedWidth, AllocatedHeight, 1, (float)AllocatedWidth / AllocatedHeight);
 
                 colorBuffer = new uint[1];
@@ -111,7 +133,7 @@ namespace ASEva.UIGtk
 
                 hostBuffer = new byte[size.RealWidth * size.RealHeight * 4];
 
-                callback.OnGLInitialize(gl);
+                callback.OnGLInitialize(gl, ctxInfo);
                 callback.OnGLResize(gl, size);
 
                 gl.Flush();
@@ -123,36 +145,6 @@ namespace ASEva.UIGtk
             }
 
             rendererStatusOK = true;
-        }
-
-        private void onDestroy()
-        {
-            if (frameBuffer != null)
-            {
-                gl.DeleteFramebuffersEXT(1, frameBuffer);
-                frameBuffer = null;
-            }
-            if (colorBuffer != null)
-            {
-                gl.DeleteRenderbuffersEXT(1, colorBuffer);
-                colorBuffer = null;
-            }
-            if (depthBuffer != null)
-            {
-                gl.DeleteRenderbuffersEXT(1, depthBuffer);
-                depthBuffer = null;
-            }
-
-            IntPtr display = Linux.gdk_x11_display_get_xdisplay(Display.Handle);
-            Linux.glXDestroyContext(display, context);
-
-            rendererStatusOK = false;
-        }
-
-        private void onRealized(object sender, EventArgs e)
-        {
-            initConditions[1] = true;
-            onInitialize();
         }
 
         private void onDraw(object o, DrawnArgs args)
@@ -216,7 +208,6 @@ namespace ASEva.UIGtk
         private uint[] depthBuffer = null;
         private byte[] hostBuffer = null;
         private bool rendererStatusOK = false;
-        private bool[] initConditions = new bool[2];
         private GLSizeInfo size = null;
         private bool drawQueued = false;
     }

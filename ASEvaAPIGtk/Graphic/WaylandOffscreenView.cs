@@ -10,6 +10,8 @@ namespace ASEva.UIGtk
     {
         public WaylandOffscreenView()
         {
+            gl = OpenGL.Create(new LinuxFuncLoader());
+
             Realized += onRealized;
             Drawn += onDraw;
         }
@@ -17,14 +19,6 @@ namespace ASEva.UIGtk
         public void SetCallback(GLView.GLViewCallback callback)
         {
             this.callback = callback;
-        }
-
-        public void InitializeGL()
-        {
-            gl = OpenGL.Create(new LinuxFuncLoader());
-
-            initConditions[0] = true;
-            onInitialize();
         }
 
         public void ReleaseGL()
@@ -43,10 +37,41 @@ namespace ASEva.UIGtk
             }
         }
 
-        private void onInitialize()
+        private void onDestroy()
         {
-            if (!initConditions[0] || !initConditions[1]) return;
+            if (frameBuffer != null)
+            {
+                gl.DeleteFramebuffersEXT(1, frameBuffer);
+                frameBuffer = null;
+            }
+            if (colorBuffer != null)
+            {
+                gl.DeleteRenderbuffersEXT(1, colorBuffer);
+                colorBuffer = null;
+            }
+            if (depthBuffer != null)
+            {
+                gl.DeleteRenderbuffersEXT(1, depthBuffer);
+                depthBuffer = null;
+            }
+            if (cairoSurface != null)
+            {
+                cairoSurface.Dispose();
+                cairoSurface = null;
+            }
 
+            IntPtr wlDisplay = Linux.gdk_wayland_display_get_wl_display(Display.Handle);
+            IntPtr eglDisplay = Linux.eglGetDisplay(wlDisplay);
+
+            Linux.eglDestroyContext(eglDisplay, context);
+            Linux.eglDestroySurface(eglDisplay, eglSurface);
+            Linux.wl_egl_window_destroy(wlEglWindow);
+
+            rendererStatusOK = false;
+        }
+
+        private void onRealized(object sender, EventArgs e)
+        {
             IntPtr wlDisplay = Linux.gdk_wayland_display_get_wl_display(Display.Handle);
             if (wlDisplay == IntPtr.Zero) return;
 
@@ -104,6 +129,12 @@ namespace ASEva.UIGtk
 
             try
             {
+                var ctxInfo = new GLContextInfo();
+                ctxInfo.version = gl.Version;
+                ctxInfo.vendor = gl.Vendor;
+                ctxInfo.renderer = gl.Renderer;
+                ctxInfo.extensions = gl.Extensions;
+
                 size = new GLSizeInfo(AllocatedWidth, AllocatedHeight, AllocatedWidth, AllocatedHeight, 1, (float)AllocatedWidth / AllocatedHeight);
 
                 colorBuffer = new uint[1];
@@ -131,7 +162,7 @@ namespace ASEva.UIGtk
                 hostBuffer = new byte[size.RealWidth * size.RealHeight * 4];
                 cairoSurface = new Cairo.ImageSurface(Cairo.Format.RGB24, size.RealWidth, size.RealHeight);
 
-                callback.OnGLInitialize(gl);
+                callback.OnGLInitialize(gl, ctxInfo);
                 callback.OnGLResize(gl, size);
                 
                 gl.Flush();
@@ -143,45 +174,6 @@ namespace ASEva.UIGtk
             }
 
             rendererStatusOK = true;
-        }
-
-        private void onDestroy()
-        {
-            if (frameBuffer != null)
-            {
-                gl.DeleteFramebuffersEXT(1, frameBuffer);
-                frameBuffer = null;
-            }
-            if (colorBuffer != null)
-            {
-                gl.DeleteRenderbuffersEXT(1, colorBuffer);
-                colorBuffer = null;
-            }
-            if (depthBuffer != null)
-            {
-                gl.DeleteRenderbuffersEXT(1, depthBuffer);
-                depthBuffer = null;
-            }
-            if (cairoSurface != null)
-            {
-                cairoSurface.Dispose();
-                cairoSurface = null;
-            }
-
-            IntPtr wlDisplay = Linux.gdk_wayland_display_get_wl_display(Display.Handle);
-            IntPtr eglDisplay = Linux.eglGetDisplay(wlDisplay);
-
-            Linux.eglDestroyContext(eglDisplay, context);
-            Linux.eglDestroySurface(eglDisplay, eglSurface);
-            Linux.wl_egl_window_destroy(wlEglWindow);
-
-            rendererStatusOK = false;
-        }
-
-        private void onRealized(object sender, EventArgs e)
-        {
-            initConditions[1] = true;
-            onInitialize();
         }
 
         private void onDraw(object o, DrawnArgs args)
@@ -269,7 +261,6 @@ namespace ASEva.UIGtk
         private byte[] hostBuffer = null;
         private Cairo.ImageSurface cairoSurface = null;
         private bool rendererStatusOK = false;
-        private bool[] initConditions = new bool[2];
         private GLSizeInfo size = null;
         private bool drawQueued = false;
     }

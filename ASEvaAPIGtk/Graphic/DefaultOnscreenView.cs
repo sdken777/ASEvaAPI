@@ -20,6 +20,8 @@ namespace ASEva.UIGtk
             drawArea.Visible = true;
             AddOverlay(drawArea);
 
+            gl = OpenGL.Create(new LinuxFuncLoader());
+
             glArea.Realized += onRealized;
             glArea.Render += onRenderer;
             drawArea.Drawn += onDraw;
@@ -28,14 +30,6 @@ namespace ASEva.UIGtk
         public void SetCallback(GLView.GLViewCallback callback)
         {
             this.callback = callback;
-        }
-
-        public void InitializeGL()
-        {
-            gl = OpenGL.Create(new LinuxFuncLoader());
-
-            initConditions[0] = true;
-            onInitialize();
         }
 
         public void ReleaseGL()
@@ -52,10 +46,8 @@ namespace ASEva.UIGtk
             }
         }
 
-        private void onInitialize()
+        private void onRealized(object sender, EventArgs e)
         {
-            if (!initConditions[0] || !initConditions[1]) return;
-
             if (glArea.Context == null || glArea.Context.Handle == IntPtr.Zero) return;
 
             glArea.MakeCurrent();
@@ -64,7 +56,13 @@ namespace ASEva.UIGtk
 
             try
             {
-                callback.OnGLInitialize(gl);
+                var ctxInfo = new GLContextInfo();
+                ctxInfo.version = gl.Version;
+                ctxInfo.vendor = gl.Vendor;
+                ctxInfo.renderer = gl.Renderer;
+                ctxInfo.extensions = gl.Extensions;
+
+                callback.OnGLInitialize(gl, ctxInfo);
                 gl.Flush();
             }
             catch (Exception)
@@ -73,12 +71,6 @@ namespace ASEva.UIGtk
             }
 
             rendererStatusOK = true;
-        }
-
-        private void onRealized(object sender, EventArgs e)
-        {
-            initConditions[1] = true;
-            onInitialize();
         }
 
         private void onRenderer(object o, RenderArgs args)
@@ -121,7 +113,6 @@ namespace ASEva.UIGtk
         private OpenGL gl = null;
         private GLView.GLViewCallback callback;
         private bool rendererStatusOK = false;
-        private bool[] initConditions = new bool[2];
         private GLSizeInfo size = null;
         private bool drawQueued = false;
 

@@ -32,11 +32,6 @@ namespace ASEva.UIMonoMac
             this.callback = callback;
         }
 
-        public void InitializeGL()
-        {
-            // 在首次绘制时初始化
-        }
-
         public void ReleaseGL()
         {
             if (initStatus != InitStatus.InitOK) return;

@@ -257,6 +257,32 @@ namespace ASEva.UIEto
 	}
 
 	/// <summary>
+	/// (api:eto=2.6.1) OpenGL上下文信息
+	/// </summary>
+	public struct GLContextInfo
+	{
+		/// <summary>
+		/// 版本
+		/// </summary>
+        public String version;
+
+		/// <summary>
+		/// 厂商
+		/// </summary>
+        public String vendor;
+
+		/// <summary>
+		/// 渲染器
+		/// </summary>
+        public String renderer;
+
+		/// <summary>
+		/// 扩展
+		/// </summary>
+        public String extensions;
+	}
+
+	/// <summary>
 	/// (api:eto=2.6.0) OpenGL绘制视图（注意，此控件不支持在 ASEva.UIEto.OverlayLayout 中使用）
 	/// </summary>
 	public class GLView : Panel, GLView.GLViewCallback
@@ -285,7 +311,6 @@ namespace ASEva.UIEto
 			{
 				Factory.CreateGLViewBackend(this, out etoControl, out glViewBackend);
 				if (etoControl != null) Content = etoControl;
-				if (glViewBackend != null) glViewBackend.InitializeGL();
 			}
 		}
 
@@ -308,8 +333,35 @@ namespace ASEva.UIEto
 			if (!closed && glViewBackend != null) glViewBackend.QueueRender();
 		}
 
-        public void OnGLInitialize(OpenGL gl)
+		/// <summary>
+		/// (api:eto=2.6.1) 上下文信息 (null表示还未初始化完成)
+		/// </summary>
+		public GLContextInfo? ContextInfo { get; private set; }
+
+		/// <summary>
+		/// (api:eto=2.6.1) 渲染帧率（统计最近3秒）
+		/// </summary>
+		public float FPS
+		{
+			get
+			{
+				lock (renderTime)
+				{
+					var now = DateTime.Now;
+					renderTime.RemoveAll((t) => (now - t).TotalSeconds > 3);
+					return (float)renderTime.Count / 3;
+				}
+			}
+		}
+
+        public void OnGLInitialize(OpenGL gl, GLContextInfo contextInfo)
         {
+			if (contextInfo.version == null) contextInfo.version = "";
+			if (contextInfo.vendor == null) contextInfo.vendor = "";
+			if (contextInfo.renderer == null) contextInfo.renderer = "";
+			if (contextInfo.extensions == null) contextInfo.extensions = "";
+			ContextInfo = contextInfo;
+
             if (GLInitialize != null) GLInitialize(this, new GLEventArgs(gl));
         }
 
@@ -321,11 +373,15 @@ namespace ASEva.UIEto
         public void OnGLRender(OpenGL gl, GLTextTasks textTasks)
         {
             if (GLRender != null) GLRender(this, new GLRenderEventArgs(gl, textTasks));
+			lock (renderTime)
+			{
+				renderTime.Add(DateTime.Now);
+			}
         }
 
         public interface GLViewCallback
 		{
-			void OnGLInitialize(OpenGL gl);
+			void OnGLInitialize(OpenGL gl, GLContextInfo contextInfo);
 
 			void OnGLResize(OpenGL gl, GLSizeInfo sizeInfo);
 
@@ -334,8 +390,6 @@ namespace ASEva.UIEto
 
 		public interface GLViewBackend
 		{
-			void InitializeGL();
-
 			void QueueRender();
 
 			void ReleaseGL();
@@ -350,5 +404,6 @@ namespace ASEva.UIEto
 
 		private Control etoControl;
 		private GLViewBackend glViewBackend;
+		private List<DateTime> renderTime = new List<DateTime>();
 	}
 }

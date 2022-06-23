@@ -148,4 +148,24 @@
     <en>Option {0}</en>
     <ch>列表项{0}</ch>
   </t>
+  <t id="draw-gl-detail">
+    <en>Show details</en>
+    <ch>显示详情</ch>
+  </t>
+  <t id="draw-gl-info-version">
+    <en>Version: {0}</en>
+    <ch>版本：{0}</ch>
+  </t>
+  <t id="draw-gl-info-vendor">
+    <en>Vendor: {0}</en>
+    <ch>厂商：{0}</ch>
+  </t>
+  <t id="draw-gl-info-renderer">
+    <en>Renderer: {0}</en>
+    <ch>渲染器：{0}</ch>
+  </t>
+  <t id="draw-gl-info-extensions">
+    <en>Extensions: {0}</en>
+    <ch>扩展：{0}</ch>
+  </t>
 </text_resource>

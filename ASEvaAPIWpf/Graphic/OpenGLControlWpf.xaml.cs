@@ -24,11 +24,6 @@ namespace ASEva.UIWpf
             openglControl.SetCallback(callback);
         }
 
-        public void InitializeGL()
-        {
-            openglControl.InitializeGL();
-        }
-
         public void ReleaseGL()
         {
             openglControl.ReleaseGL();

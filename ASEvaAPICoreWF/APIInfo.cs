@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于.net core winform的部分。详见 ASEva.UICoreWF \n
- * 本文档对应API版本：2.2.0
+ * 本文档对应API版本：2.2.1
  */
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// version=2.2.0
+    /// version=2.2.1
     /// </summary>
     public class APIInfo
     {
@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 0, 2); // 修复未安装WebView2环境导致的启动异常
+            return new Version(2, 2, 1, 0); // 支持GLView.GLViewBackend新接口
         }
     }
 }

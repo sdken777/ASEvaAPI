@@ -20,20 +20,9 @@ namespace ASEva.UICoreWF
             SetStyle(ControlStyles.OptimizedDoubleBuffer, false);
 
             Paint += delegate { drawEvent.Set(); };
-        }
-
-        public void SetCallback(GLView.GLViewCallback callback)
-        {
-            this.callback = callback;
-        }
-
-        public void InitializeGL()
-        {
-            if (thread != null) return;
 
             gl = OpenGL.Create(new WindowsFuncLoader());
 
-            // 直接开始线程可能导致字体初始化失败？
             timer.Interval = 100;
             timer.Tick += delegate
             {
@@ -47,7 +36,10 @@ namespace ASEva.UICoreWF
             timer.Start();
         }
 
-        private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+        public void SetCallback(GLView.GLViewCallback callback)
+        {
+            this.callback = callback;
+        }
 
         public void ReleaseGL()
         {
@@ -104,7 +96,13 @@ namespace ASEva.UICoreWF
 
             try
             {
-                callback.OnGLInitialize(gl);
+                var ctxInfo = new GLContextInfo();
+                ctxInfo.version = gl.Version;
+                ctxInfo.vendor = gl.Vendor;
+                ctxInfo.renderer = gl.Renderer;
+                ctxInfo.extensions = gl.Extensions;
+
+                callback.OnGLInitialize(gl, ctxInfo);
                 gl.Flush();
             }
             catch (Exception)
@@ -179,5 +177,6 @@ namespace ASEva.UICoreWF
         private AutoResetEvent drawEvent = new AutoResetEvent(false);
         private AutoResetEvent finishEvent = new AutoResetEvent(false);
         private IntPtr hdc = IntPtr.Zero;
+        private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
     }
 }

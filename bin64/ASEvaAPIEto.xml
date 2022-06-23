@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.6.0
+            version=2.6.1
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -1071,6 +1071,31 @@
             文本绘制任务对象
             </summary>
         </member>
+        <member name="T:ASEva.UIEto.GLContextInfo">
+            <summary>
+            (api:eto=2.6.1) OpenGL上下文信息
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLContextInfo.version">
+            <summary>
+            版本
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLContextInfo.vendor">
+            <summary>
+            厂商
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLContextInfo.renderer">
+            <summary>
+            渲染器
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLContextInfo.extensions">
+            <summary>
+            扩展
+            </summary>
+        </member>
         <member name="T:ASEva.UIEto.GLView">
             <summary>
             (api:eto=2.6.0) OpenGL绘制视图（注意，此控件不支持在 ASEva.UIEto.OverlayLayout 中使用）
@@ -1104,6 +1129,16 @@
         <member name="M:ASEva.UIEto.GLView.QueueRender">
             <summary>
             提交新的渲染请求
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLView.ContextInfo">
+            <summary>
+            (api:eto=2.6.1) 上下文信息 (null表示还未初始化完成)
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLView.FPS">
+            <summary>
+            (api:eto=2.6.1) 渲染帧率（统计最近3秒）
             </summary>
         </member>
         <member name="T:ASEva.UIEto.ImageConverter">
