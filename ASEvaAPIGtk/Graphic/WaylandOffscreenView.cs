@@ -39,6 +39,14 @@ namespace ASEva.UIGtk
 
         private void onDestroy()
         {
+            IntPtr wlDisplay = Linux.gdk_wayland_display_get_wl_display(Display.Handle);
+            IntPtr eglDisplay = Linux.eglGetDisplay(wlDisplay);
+
+            if (context != IntPtr.Zero)
+            {
+                Linux.eglMakeCurrent(eglDisplay, eglSurface, eglSurface, context);
+            }
+
             if (frameBuffer != null)
             {
                 gl.DeleteFramebuffersEXT(1, frameBuffer);
@@ -59,13 +67,21 @@ namespace ASEva.UIGtk
                 cairoSurface.Dispose();
                 cairoSurface = null;
             }
-
-            IntPtr wlDisplay = Linux.gdk_wayland_display_get_wl_display(Display.Handle);
-            IntPtr eglDisplay = Linux.eglGetDisplay(wlDisplay);
-
-            Linux.eglDestroyContext(eglDisplay, context);
-            Linux.eglDestroySurface(eglDisplay, eglSurface);
-            Linux.wl_egl_window_destroy(wlEglWindow);
+            if (context != IntPtr.Zero)
+            {
+                Linux.eglDestroyContext(eglDisplay, context);
+                context = IntPtr.Zero;
+            }
+            if (eglSurface != IntPtr.Zero)
+            {
+                Linux.eglDestroySurface(eglDisplay, eglSurface);
+                eglSurface = IntPtr.Zero;
+            }
+            if (wlEglWindow != IntPtr.Zero)
+            {
+                Linux.wl_egl_window_destroy(wlEglWindow);
+                wlEglWindow = IntPtr.Zero;
+            }
 
             rendererStatusOK = false;
         }

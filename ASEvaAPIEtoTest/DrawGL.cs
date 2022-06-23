@@ -89,30 +89,30 @@ namespace ASEvaAPIEtoTest
                     red = 255,
                 });
 
-                // var buttonRect = getButtonRect();
+                var buttonRect = getButtonRect();
 
-                // gl.MatrixMode(OpenGL.GL_PROJECTION);
-                // gl.PushMatrix();
-                // {
-                //     gl.LoadIdentity();
-                //     gl.Ortho(0, glViewSizeInfo.LogicalWidth, glViewSizeInfo.LogicalHeight, 0, -1, 1);
+                gl.MatrixMode(OpenGL.GL_PROJECTION);
+                gl.PushMatrix();
+                {
+                    gl.LoadIdentity();
+                    gl.Ortho(0, glViewSizeInfo.LogicalWidth, glViewSizeInfo.LogicalHeight, 0, -1, 1);
 
-                //     var mouseRawPos = glView.PointFromScreen(Mouse.Position);
-                //     var mouseInButton = buttonRect.Contains(Pixel.ToLogicalPoint(new Point((int)mouseRawPos.X, (int)mouseRawPos.Y)));
+                    var mouseRawPos = glView.PointFromScreen(Mouse.Position);
+                    var mouseInButton = buttonRect.Contains(Pixel.ToLogicalPoint(new Point((int)mouseRawPos.X, (int)mouseRawPos.Y)));
 
-                //     gl.Begin(OpenGL.GL_QUADS);
-                //     {
-                //         gl.Color(1.0f, 1.0f, 0.5f, mouseInButton ? 1.0f : 0.5f);
-                //         gl.Vertex(buttonRect.Left, buttonRect.Top, 0);
-                //         gl.Vertex(buttonRect.Right, buttonRect.Top, 0);
-                //         gl.Vertex(buttonRect.Right, buttonRect.Bottom, 0);
-                //         gl.Vertex(buttonRect.Left, buttonRect.Bottom, 0);
-                //     }
-                //     gl.End();
-                // }
-                // gl.PopMatrix();
+                    gl.Begin(OpenGL.GL_QUADS);
+                    {
+                        gl.Color(1.0f, 1.0f, 0.5f, mouseInButton ? 1.0f : 0.5f);
+                        gl.Vertex(buttonRect.Left, buttonRect.Top, 0);
+                        gl.Vertex(buttonRect.Right, buttonRect.Top, 0);
+                        gl.Vertex(buttonRect.Right, buttonRect.Bottom, 0);
+                        gl.Vertex(buttonRect.Left, buttonRect.Bottom, 0);
+                    }
+                    gl.End();
+                }
+                gl.PopMatrix();
 
-                // texts.Add(t["draw-gl-detail"], (int)buttonRect.Center.X, (int)buttonRect.Center.Y, 0, 0, 0, 1.5f);
+                texts.Add(t["draw-gl-detail"], (int)buttonRect.Center.X, (int)buttonRect.Center.Y, 0, 0, 0, 1.5f);
             };
 
             glView.MouseDown += (o, args) =>

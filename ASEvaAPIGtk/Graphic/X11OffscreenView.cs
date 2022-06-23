@@ -6,16 +6,19 @@ using ASEva.UIEto;
 namespace ASEva.UIGtk
 {
     #pragma warning disable 612
-    class X11OffscreenView : DrawingArea, GLView.GLViewBackend
+    class X11OffscreenView : Box, GLView.GLViewBackend
     {
-        public X11OffscreenView()
+        public X11OffscreenView() : base(Orientation.Vertical, 0)
         {
-            DoubleBuffered = false;
-
             gl = OpenGL.Create(new LinuxFuncLoader());
 
-            Realized += onRealized;
-            Drawn += onDraw;
+            dummyArea.HeightRequest = 1;
+
+            PackStart(realArea, true, true, 0);
+            PackStart(dummyArea, false, false, 0);
+
+            dummyArea.Realized += onRealized;
+            realArea.Drawn += onDraw;
         }
 
         public void SetCallback(GLView.GLViewCallback callback)
@@ -40,6 +43,14 @@ namespace ASEva.UIGtk
 
         private void onDestroy()
         {
+            IntPtr display = Linux.gdk_x11_display_get_xdisplay(Display.Handle);
+            var xid = Linux.gdk_x11_window_get_xid(dummyArea.Window.Handle);
+
+            if (context != IntPtr.Zero)
+            {
+                Linux.glXMakeCurrent(display, xid, context);
+            }
+
             if (frameBuffer != null)
             {
                 gl.DeleteFramebuffersEXT(1, frameBuffer);
@@ -55,22 +66,29 @@ namespace ASEva.UIGtk
                 gl.DeleteRenderbuffersEXT(1, depthBuffer);
                 depthBuffer = null;
             }
-
-            IntPtr display = Linux.gdk_x11_display_get_xdisplay(Display.Handle);
-            Linux.glXDestroyContext(display, context);
+            if (cairoSurface != null)
+            {
+                cairoSurface.Dispose();
+                cairoSurface = null;
+            }
+            if (context != IntPtr.Zero)
+            {
+                Linux.glXDestroyContext(display, context);
+                context = IntPtr.Zero;
+            }
 
             rendererStatusOK = false;
         }
 
         private void onRealized(object sender, EventArgs e)
         {
-            IntPtr display = Linux.gdk_x11_display_get_xdisplay(Window.Display.Handle);
+            IntPtr display = Linux.gdk_x11_display_get_xdisplay(Display.Handle);
             if (display == IntPtr.Zero) return;
 
-            IntPtr visual = Linux.gdk_x11_visual_get_xvisual(Window.Visual.Handle);
+            IntPtr visual = Linux.gdk_x11_visual_get_xvisual(dummyArea.Window.Visual.Handle);
             if (visual == IntPtr.Zero) return;
 
-            int screen = Linux.gdk_x11_screen_get_screen_number(Window.Screen.Handle);
+            int screen = Linux.gdk_x11_screen_get_screen_number(dummyArea.Window.Screen.Handle);
             uint visualID = Linux.XVisualIDFromVisual(visual);
 
             var vinfoTemplate = new XVisualInfo[1];
@@ -94,10 +112,10 @@ namespace ASEva.UIGtk
             context = Linux.glXCreateContext(display, vinfo, IntPtr.Zero, true);
             if (context == IntPtr.Zero) return;
 
-            var xid = Linux.gdk_x11_window_get_xid(Window.Handle);
+            var xid = Linux.gdk_x11_window_get_xid(dummyArea.Window.Handle);
             Linux.glXMakeCurrent(display, xid, context);
 
-            if (Linux.glewInit(Window) != 0) return;
+            if (Linux.glewInit(dummyArea.Window) != 0) return;
 
             try
             {
@@ -107,7 +125,7 @@ namespace ASEva.UIGtk
                 ctxInfo.renderer = gl.Renderer;
                 ctxInfo.extensions = gl.Extensions;
                 
-                size = new GLSizeInfo(AllocatedWidth, AllocatedHeight, AllocatedWidth, AllocatedHeight, 1, (float)AllocatedWidth / AllocatedHeight);
+                size = new GLSizeInfo(realArea.AllocatedWidth, realArea.AllocatedHeight, realArea.AllocatedWidth, realArea.AllocatedHeight, 1, (float)realArea.AllocatedWidth / realArea.AllocatedHeight);
 
                 colorBuffer = new uint[1];
                 gl.GenRenderbuffersEXT(1, colorBuffer);
@@ -132,6 +150,7 @@ namespace ASEva.UIGtk
                 }
 
                 hostBuffer = new byte[size.RealWidth * size.RealHeight * 4];
+                cairoSurface = new Cairo.ImageSurface(Cairo.Format.RGB24, size.RealWidth, size.RealHeight);
 
                 callback.OnGLInitialize(gl, ctxInfo);
                 callback.OnGLResize(gl, size);
@@ -151,12 +170,12 @@ namespace ASEva.UIGtk
         {
             if (!rendererStatusOK) return;
 
-            var curSize = new GLSizeInfo(AllocatedWidth, AllocatedHeight, AllocatedWidth, AllocatedHeight, 1, (float)AllocatedWidth / AllocatedHeight);
+            var curSize = new GLSizeInfo(realArea.AllocatedWidth, realArea.AllocatedHeight, realArea.AllocatedWidth, realArea.AllocatedHeight, 1, (float)realArea.AllocatedWidth / realArea.AllocatedHeight);
             bool resized = curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
             size = curSize;
 
             IntPtr display = Linux.gdk_x11_display_get_xdisplay(Display.Handle);
-            var xid = Linux.gdk_x11_window_get_xid(Window.Handle);
+            var xid = Linux.gdk_x11_window_get_xid(dummyArea.Window.Handle);
             Linux.glXMakeCurrent(display, xid, context);
 
             try
@@ -168,6 +187,8 @@ namespace ASEva.UIGtk
                     gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, depthBuffer[0]);
                     gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
                     hostBuffer = new byte[size.RealWidth * size.RealHeight * 4];
+                    if (cairoSurface != null) cairoSurface.Dispose();
+                    cairoSurface = new Cairo.ImageSurface(Cairo.Format.RGB24, size.RealWidth, size.RealHeight);
                 }
 
                 gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[0]);
@@ -180,16 +201,34 @@ namespace ASEva.UIGtk
                 callback.OnGLRender(gl, textTasks);
                 gl.Finish();
 
-                gl.ReadPixels(0, 0, size.RealWidth, size.RealHeight, OpenGL.GL_RGBA, hostBuffer);
-                gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, 0);
-                gl.DrawPixels(size.RealWidth, size.RealHeight, OpenGL.GL_RGBA, hostBuffer);
-                gl.Finish();
+                var cairoWidth = size.RealWidth;
+                var cairoHeight = size.RealHeight;
+                var cairoSurfaceStep = cairoSurface.Stride;
 
-                Linux.glXSwapIntervalEXT(display, xid, 0);
-                Linux.glXSwapBuffers(display, xid);
-                Linux.glXMakeCurrent(display, 0, IntPtr.Zero);
+                gl.ReadPixels(0, 0, cairoWidth, cairoHeight, OpenGL.GL_RGBA, hostBuffer);
 
-                CairoDrawText.Draw(args.Cr, textTasks.Clear(), size);
+                unsafe
+                {
+                    byte *surfaceData = (byte*)cairoSurface.DataPtr;
+                    fixed (byte *srcData = &(hostBuffer[0]))
+                    {
+                        for (int v = 0; v < cairoHeight; v++)
+                        {
+                            uint *srcRow = (uint*)&srcData[v * cairoWidth * 4];
+                            uint *dstRow = (uint*)&surfaceData[(cairoHeight - 1 - v) * cairoSurfaceStep];
+                            for (int u = 0; u < cairoWidth; u++)
+                            {
+                                dstRow[u] = ((srcRow[u] & 0x000000ff) << 16) | (srcRow[u] & 0x0000ff00) | ((srcRow[u] & 0x00ff0000) >> 16) | 0xff000000;
+                            }
+                        }
+                    }
+                }
+
+                var cairo = args.Cr;
+                cairo.SetSourceSurface(cairoSurface, 0, 0);
+                cairo.Paint();
+
+                CairoDrawText.Draw(cairo, textTasks.Clear(), size);
             }
             catch (Exception)
             {
@@ -207,8 +246,11 @@ namespace ASEva.UIGtk
         private uint[] colorBuffer = null;
         private uint[] depthBuffer = null;
         private byte[] hostBuffer = null;
+        private Cairo.ImageSurface cairoSurface = null;
         private bool rendererStatusOK = false;
         private GLSizeInfo size = null;
         private bool drawQueued = false;
+        private DrawingArea realArea = new DrawingArea();
+        private DrawingArea dummyArea = new DrawingArea();
     }
 }
