@@ -62,7 +62,9 @@
             "dependsOrder": "sequence",
             "dependsOn": [
                 "清理",
+                "(子任务)生成Windows项目文件",
                 "(子任务)调试构建",
+                "(子任务)移除Windows项目文件",
                 "(子任务)移除调试构建冗余文件",
             ],
             "problemMatcher": [],
@@ -86,7 +88,9 @@
             "dependsOrder": "sequence",
             "dependsOn": [
                 "清理",
+                "(子任务)生成Windows项目文件",
                 "(子任务)发布构建",
+                "(子任务)移除Windows项目文件",
                 "(子任务)移除发布构建冗余文件",
                 "(子任务)拷贝至其他目录",
             ],
@@ -123,6 +127,27 @@
 
         // 以下为子任务
 
+        {
+            "type": "process",
+            "label": "(子任务)生成Windows项目文件",
+            "command": "dotnet",
+            "args": [
+                "../bin/VSCodeHelper.dll",
+                "gen_windows_csproj",
+                "ASEvaAPIEtoTest.csproj",
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "(子任务)移除Windows项目文件",
+            "command": "rm",
+            "args": [
+                "-vf",
+                "ASEvaAPIEtoTest.WindowsDesktop.csproj",
+            ],
+            "problemMatcher": []
+        },
         {
             "type": "process",
             "label": "(子任务)调试构建",
