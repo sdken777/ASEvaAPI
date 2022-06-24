@@ -156,7 +156,7 @@
             "windows": {
                 "args": [
                     "build",
-                    "./ASEvaAPIEtoTest.csproj",
+                    "./ASEvaAPIEtoTest.WindowsDesktop.csproj",
                     "-o",
                     "../${input:helper_platform_bin_name}/debug",
                     "/property:OutputType=WinExe",
@@ -199,7 +199,7 @@
             "windows": {
                 "args": [
                     "build",
-                    "./ASEvaAPIEtoTest.csproj",
+                    "./ASEvaAPIEtoTest.WindowsDesktop.csproj",
                     "-c",
                     "Release",
                     "-o",
