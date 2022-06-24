@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 2, 0); // OpenGLControl改为离屏渲染
+            return new Version(2, 2, 2, 1); // OpenGLControl尺寸变化时触发渲染
         }
     }
 }

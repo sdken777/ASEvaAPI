@@ -40,6 +40,11 @@ namespace ASEva.UICoreWF
             }
         }
 
+        private void pictureBox_SizeChanged(object sender, EventArgs e)
+        {
+            QueueRender();
+        }
+
         private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
             if (initOK == null)

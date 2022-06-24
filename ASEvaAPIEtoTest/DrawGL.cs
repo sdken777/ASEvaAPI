@@ -12,6 +12,9 @@ namespace ASEvaAPIEtoTest
         private void initDrawGL(StackLayout layout)
         {
             var glView = layout.AddControl(new GLView(), true) as GLView;
+            var layoutBottom = layout.AddRowLayout();
+            layoutBottom.AddLinkButton(t["draw-gl-pause-render"]).Click += delegate { glRenderSwitch = false; };
+            layoutBottom.AddLinkButton(t["draw-gl-resume-render"]).Click += delegate { glRenderSwitch = true; };
 
             glView.GLInitialize += (o, args) =>
             {
@@ -89,7 +92,7 @@ namespace ASEvaAPIEtoTest
                     red = 255,
                 });
 
-                var buttonRect = getButtonRect();
+                var buttonRect = getDrawGLButtonRect();
 
                 gl.MatrixMode(OpenGL.GL_PROJECTION);
                 gl.PushMatrix();
@@ -114,7 +117,7 @@ namespace ASEvaAPIEtoTest
 
             glView.MouseDown += (o, args) =>
             {
-                if (args.Buttons == MouseButtons.Primary && getButtonRect().Contains(args.GetLogicalPoint()) && glView.ContextInfo != null)
+                if (args.Buttons == MouseButtons.Primary && getDrawGLButtonRect().Contains(args.GetLogicalPoint()) && glView.ContextInfo != null)
                 {
                     var info = glView.ContextInfo.Value;
                     var rowTexts = new List<String>();
@@ -129,7 +132,7 @@ namespace ASEvaAPIEtoTest
             glViewTimer.Interval = 0.001;
             glViewTimer.Elapsed += delegate
             {
-                glView.QueueRender();
+                if (glRenderSwitch) glView.QueueRender();
             };
             glViewTimer.Start();
 
@@ -140,7 +143,7 @@ namespace ASEvaAPIEtoTest
             };
         }
 
-        private RectangleF getButtonRect()
+        private RectangleF getDrawGLButtonRect()
         {
             if (glViewSizeInfo == null) return new RectangleF();
             else return new RectangleF(glViewSizeInfo.LogicalWidth - 150, glViewSizeInfo.LogicalHeight - 50, 140, 40);
@@ -149,5 +152,6 @@ namespace ASEvaAPIEtoTest
         private DateTime glViewStartTime = DateTime.Now;
         private GLSizeInfo glViewSizeInfo;
         private UITimer glViewTimer = new UITimer();
+        private bool glRenderSwitch = true;
     }
 }

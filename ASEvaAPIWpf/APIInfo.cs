@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于.net core wpf的部分。详见 ASEva.UIWpf \n
- * 本文档对应API版本：1.1.1
+ * 本文档对应API版本：1.2.0
  */
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace ASEva.UIWpf
 {
     /// <summary>
-    /// version=1.1.0
+    /// version=1.2.0
     /// </summary>
     public class APIInfo
     {
@@ -18,7 +18,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 1, 1, 0); // 支持GLView.GLViewBackend新接口
+            return new Version(1, 2, 0, 0); // OpenGLControlWpf不依赖ASEvaAPICoreWF，使用离屏渲染
         }
     }
 }

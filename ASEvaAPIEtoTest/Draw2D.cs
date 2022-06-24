@@ -19,7 +19,7 @@ namespace ASEvaAPIEtoTest
             drawable.Paint += (o, args) =>
             {
                 var g = args.Graphics;
-                g.Clear(Colors.White);
+                g.Clear(Colors.LightYellow);
                 g.DrawLine(Colors.Black, 10, 100, 190, 100);
                 g.DrawLine(Colors.Black, 10, 120, 190, 120);
                 g.DrawLine(Colors.Black, 100, 10, 100, 190);

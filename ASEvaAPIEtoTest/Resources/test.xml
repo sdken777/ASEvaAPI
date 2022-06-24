@@ -168,4 +168,12 @@
     <en>Extensions: {0}</en>
     <ch>扩展：{0}</ch>
   </t>
+  <t id="draw-gl-pause-render">
+    <en>Pause render</en>
+    <ch>暂停渲染</ch>
+  </t>
+  <t id="draw-gl-resume-render">
+    <en>Resume render</en>
+    <ch>恢复渲染</ch>
+  </t>
 </text_resource>

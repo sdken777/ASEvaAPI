@@ -6,6 +6,7 @@
     <Configurations>Release;Debug</Configurations>
     <UseWPF>True</UseWPF>
     <UseWindowsForms>True</UseWindowsForms>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <Version>0.0.0.0</Version>
   </PropertyGroup>
 
@@ -21,9 +22,6 @@
     </Reference>
     <Reference Include="ASEvaAPIEto">
       <HintPath>..\bin64\ASEvaAPIEto.dll</HintPath>
-    </Reference>
-    <Reference Include="ASEvaAPICoreWF">
-      <HintPath>..\bin64\ASEvaAPICoreWF.dll</HintPath>
     </Reference>
     <Reference Include="Eto">
       <HintPath>..\bin64\Eto.dll</HintPath>
