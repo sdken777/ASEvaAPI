@@ -72,7 +72,13 @@ namespace ASEva.UIMonoMac
 
                 try
                 {
-                    callback.OnGLInitialize(gl);
+                    var ctxInfo = new GLContextInfo();
+                    ctxInfo.version = gl.Version;
+                    ctxInfo.vendor = gl.Vendor;
+                    ctxInfo.renderer = gl.Renderer;
+                    ctxInfo.extensions = gl.Extensions;
+
+                    callback.OnGLInitialize(gl, ctxInfo);
                     gl.Flush();
                 }
                 catch (Exception)
@@ -116,7 +122,7 @@ namespace ASEva.UIMonoMac
             {
                 if (i >= textViews.Count)
                 {
-                    var newView = new NSTextView { Editable = false, Selectable = false, DrawsBackground = false };
+                    var newView = new TextView(callback, this) { Editable = false, Selectable = false, DrawsBackground = false };
                     this.AddSubview(newView);
                     textViews.Add(new TextViewContext
                     {
@@ -211,9 +217,72 @@ namespace ASEva.UIMonoMac
             QueueRender();
         }
 
+        private class TextView : NSTextView
+        {
+            public TextView(GLView.GLViewCallback callback, NSView parent)
+            {
+                this.callback = callback;
+                this.parent = parent;
+            }
+
+            public override void MouseDown(NSEvent ev)
+            {
+                base.MouseDown(ev);
+                callback.OnRaiseMouseDown(toEto(ev, false));
+            }
+
+            public override void MouseDragged(NSEvent ev)
+            {
+                base.MouseDragged(ev);
+                callback.OnRaiseMouseMove(toEto(ev, false));
+            }
+
+            public override void MouseUp(NSEvent ev)
+            {
+                base.MouseUp(ev);
+                callback.OnRaiseMouseUp(toEto(ev, false));
+            }
+
+            public override void RightMouseDown(NSEvent ev)
+            {
+                base.RightMouseDown(ev);
+                callback.OnRaiseMouseDown(toEto(ev, true));
+            }
+
+            public override void RightMouseDragged(NSEvent ev)
+            {
+                base.RightMouseDragged(ev);
+                callback.OnRaiseMouseMove(toEto(ev, true));
+            }
+
+            public override void RightMouseUp(NSEvent ev)
+            {
+                base.RightMouseUp(ev);
+                callback.OnRaiseMouseUp(toEto(ev, true));
+            }
+
+            public override void ScrollWheel(NSEvent ev)
+            {
+                base.ScrollWheel(ev);
+                callback.OnRaiseMouseWheel(toEto(ev, null));
+            }
+
+            private Eto.Forms.MouseEventArgs toEto(NSEvent ev, bool? rightMouse)
+            {
+                var pt = ConvertPointFromView(ev.LocationInWindow, null);
+                var location = new Eto.Drawing.PointF((int)(Frame.X + pt.X), (int)(parent.Frame.Height - Frame.Y - Frame.Height + pt.Y));
+                var buttons = rightMouse == null ? Eto.Forms.MouseButtons.None : (rightMouse.Value ? Eto.Forms.MouseButtons.Alternate : Eto.Forms.MouseButtons.Primary);
+                var delta = new Eto.Drawing.SizeF(0, rightMouse == null ? (float)ev.ScrollingDeltaY : 0);
+                return new Eto.Forms.MouseEventArgs(buttons, Eto.Forms.Keys.None, location, delta);
+            }
+
+            private GLView.GLViewCallback callback;
+            private NSView parent;
+        }
+
         private class TextViewContext
         {
-            public NSTextView TextView { get; set; }
+            public TextView TextView { get; set; }
             public GLTextTask Task { get; set; }
         }
 
