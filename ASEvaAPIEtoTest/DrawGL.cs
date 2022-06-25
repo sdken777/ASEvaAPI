@@ -83,6 +83,30 @@ namespace ASEvaAPIEtoTest
                 texts.Add("UPPER BOUND", centerX, centerY - 20, 255, 255, 255, 0.5f);
                 texts.Add("LOWER BOUND", centerX, centerY + 20, 255, 255, 255, 0.5f);
 
+                gl.VertexPointer(3, 0, new float[]
+                {
+                    -0.5f, 0.8f, -1.0f,
+                    0.5f, 0.8f, -1.0f,
+                    0.5f, 0.75f, -1.0f,
+                    -0.5f, 0.75f, -1.0f,
+                    -0.5f, 0.7f, -0.999f,
+                    0.5f, 0.7f, -0.999f,
+                    0.5f, 0.75f, -0.999f,
+                    -0.5f, 0.775f, -0.999f,
+                });
+                gl.ColorPointer(3, 0, new float[]
+                {
+                    1.0f, 0.0f, 0.0f,
+                    1.0f, 0.0f, 0.0f,
+                    1.0f, 0.0f, 0.0f,
+                    1.0f, 0.0f, 0.0f,
+                    0.0f, 1.0f, 0.0f,
+                    0.0f, 1.0f, 0.0f,
+                    0.0f, 1.0f, 0.0f,
+                    0.0f, 1.0f, 0.0f,
+                });
+                gl.DrawArrays(OpenGL.GL_QUADS, 0, 8);
+
                 texts.Add(new GLTextTask
                 {
                     text = "FPS: " + glView.FPS.ToString("F1"),

@@ -24,7 +24,7 @@ namespace ASEvaAPIEtoTest
             initBasicTagPageBTreeView(treeView);
 
             var scrollBox = panel2.SetContentAsColumnLayout(0).AddControl(new Scrollable(), true) as Scrollable;
-            scrollBox.SetContentAsColumnLayout().AddControl(new ImageView { Image = Bitmap.FromResource("picture.png") }, true);
+            scrollBox.SetContentAsColumnLayout().AddControl(new ImageView { Image = CommonImage.LoadResource("picture.png").ToEtoBitmap() }, true);
         }
 
         private void initBasicTagPageBLists(StackLayout layout)

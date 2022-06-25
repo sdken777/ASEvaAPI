@@ -80,7 +80,7 @@ namespace ASEvaAPIEtoTest
         {
             layout.AddLabel(t.Format("basic-label-row", 5));
             layout.AddButton(t["basic-button"]);
-            layout.AddButton(Icon.FromResource("button.png"));
+            layout.AddButton(CommonImage.LoadResource("button.png").ToEtoBitmap());
             layout.AddControl(new ColorPicker { Value = Colors.Red } );
         }
 

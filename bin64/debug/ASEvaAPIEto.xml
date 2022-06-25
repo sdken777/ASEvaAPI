@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.6.2
+            version=2.7.0
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -251,6 +251,25 @@
             [可选实现] 在需要更新界面时被调用
             </summary>
         </member>
+        <member name="T:ASEva.UIEto.CommonImageExtensions">
+            <summary>
+            (api:eto=2.7.0) 方便使用通用图像数据的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.CommonImageExtensions.ToEtoBitmap(ASEva.Samples.CommonImage)">
+            <summary>
+            转为Eto位图对象
+            </summary>
+            <param name="image">通用图像数据</param>
+            <returns>Eto位图对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.CommonImageExtensions.ToSKImage(ASEva.Samples.CommonImage)">
+            <summary>
+            转为Skia图像对象
+            </summary>
+            <param name="image">通用图像数据</param>
+            <returns>Skia图像对象</returns>
+        </member>
         <member name="T:ASEva.UIEto.ContextMenuExtensions">
             <summary>
             (api:eto=2.0.3) 方便操作右键菜单的扩展
@@ -467,6 +486,18 @@
             <summary>
             像素单位比例
             </summary>
+        </member>
+        <member name="T:ASEva.UIEto.SkiaCanvasExtensions">
+            <summary>
+            (api:eto=2.7.0) 方便操作Skia画布的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaCanvasExtensions.GetDefaultFont(SkiaSharp.SKCanvas,System.Single)">
+            <summary>
+            获取默认字体
+            </summary>
+            <param name="canvas">Skia画布</param>
+            <param name="sizeScale">相对于默认尺寸的比例</param>
         </member>
         <member name="T:ASEva.UIEto.SplitterExtensions">
             <summary>
@@ -1219,6 +1250,56 @@
         <member name="P:ASEva.UIEto.Pixel.Scale">
             <summary>
             像素单位比例，用于优化在非默认DPI下的显示
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.SkiaRenderEventArgs">
+            <summary>
+            (api:eto=2.7.0) SkiaView渲染事件参数
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SkiaRenderEventArgs.Canvas">
+            <summary>
+            Skia画布对象
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SkiaRenderEventArgs.LogicalSize">
+            <summary>
+            画布的逻辑尺寸
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.SkiaView">
+            <summary>
+            (api:eto=2.7.0) Skia绘制视图（注意，此控件不支持在 ASEva.UIEto.OverlayLayout 中使用）
+            </summary>
+        </member>
+        <member name="E:ASEva.UIEto.SkiaView.Render">
+            <summary>
+            渲染事件
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaView.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaView.Close">
+            <summary>
+            关闭视图，释放资源
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaView.QueueRender">
+            <summary>
+            提交新的渲染请求
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SkiaView.ContextInfo">
+            <summary>
+            底层的OpenGL上下文信息 (null表示还未初始化完成)
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SkiaView.FPS">
+            <summary>
+            渲染帧率（统计最近3秒）
             </summary>
         </member>
         <member name="T:ASEva.UIEto.TextTableView">

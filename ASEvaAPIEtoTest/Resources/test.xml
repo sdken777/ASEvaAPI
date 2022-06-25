@@ -176,4 +176,12 @@
     <en>Resume render</en>
     <ch>恢复渲染</ch>
   </t>
+  <t id="draw-tabpage-default">
+    <en>Default</en>
+    <ch>默认</ch>
+  </t>
+  <t id="draw-skia-anti-alias">
+    <en>Anti-alias Test</en>
+    <ch>反锯齿测试</ch>
+  </t>
 </text_resource>

@@ -11,7 +11,7 @@ namespace ASEvaAPIEtoTest
     {
         private void initContextMenu(ContextMenu menu)
         {
-            menu.AddButtonItem(t["menu-button"], Icon.FromResource("menu-button.png")).Click += delegate { MessageBox.Show(App.WorkPath, ""); };
+            menu.AddButtonItem(t["menu-button"], CommonImage.LoadResource("menu-button.png").ToEtoBitmap()).Click += delegate { MessageBox.Show(App.WorkPath, ""); };
             menu.AddSeparator();
             menu.AddCheckItem(t.Format("menu-check", "A"));
             menu.AddCheckItem(t.Format("menu-check", "B"));

@@ -28,6 +28,9 @@ namespace ASEva.UIWpf
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerWpf();
             ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.AlphaScale;
             GLView.Factory = new GLViewFactoryWpf();
+            SkiaView.Factory = new GLViewFactoryWpf();
+            SkiaCanvasExtensions.DefaultFontName = "Microsoft Yahei";
+            SkiaCanvasExtensions.DefaultFontSize = 12;
 
             uiBackend = null;
             webViewBackend = "webview2";

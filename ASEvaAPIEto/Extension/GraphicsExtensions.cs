@@ -16,7 +16,6 @@ namespace ASEva.UIEto
         public static void SetScaleForLogical(this Graphics g)
         {
             g.ScaleTransform(Pixel.Scale);
-            
         }
 
         /// <summary>

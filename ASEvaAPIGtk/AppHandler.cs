@@ -78,6 +78,9 @@ namespace ASEva.UIGtk
             TextTableView.DefaultBackgroundColor = Colors.WhiteSmoke;
             CheckableListBox.UpdateColorMode = CheckableListBox.InvalidateMode.EditCell;
             GLView.Factory = new GLViewFactoryGtk(uiBackend);
+            SkiaView.Factory = new GLViewFactoryGtk(uiBackend);
+            SkiaCanvasExtensions.DefaultFontName = "Noto Sans CJK SC";
+            SkiaCanvasExtensions.DefaultFontSize = 12.5f;
 
             return app;
         }

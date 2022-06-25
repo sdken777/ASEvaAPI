@@ -13,8 +13,13 @@ namespace ASEvaAPIEtoTest
             var layoutImages = layoutRow.AddColumnLayout();
             initDrawImages(layoutImages);
 
-            var layout2D = layoutRow.AddColumnLayout();
-            initDraw2D(layout2D);
+            var tabControl = layoutRow.AddControl(new TabControl(), false, 220) as TabControl;
+
+            var tabPageDefault2D = tabControl.AddPage(t["draw-tabpage-default"]);
+            initDrawDefault2D(tabPageDefault2D);
+
+            var tabPageSkia2D = tabControl.AddPage("Skia");
+            initDrawSkia2D(tabPageSkia2D);
 
             var layoutGL = layoutRow.AddColumnLayout(true);
             initDrawGL(layoutGL);
