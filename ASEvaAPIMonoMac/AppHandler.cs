@@ -40,6 +40,9 @@ namespace ASEva.UIMonoMac
             TextTableView.DefaultBackgroundColor = Color.FromArgb(0, 0, 0, 16);
             CheckableListBox.UpdateColorMode = CheckableListBox.InvalidateMode.EditCell;
             GLView.Factory = new GLViewFactoryMonoMac();
+            SkiaView.Factory = new GLViewFactoryMonoMac();
+            SkiaCanvasExtensions.DefaultFontName = "STHeiti";
+            SkiaCanvasExtensions.DefaultFontSize = 13.0f;
 
             uiBackend = null;
             webViewBackend = "wkwebview";
