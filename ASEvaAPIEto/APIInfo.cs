@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 7, 0, 0); // 新增SkiaView。新增CommonImageExtensions。新增SkiaCanvasExtensions
+            return new Version(2, 7, 0, 1); // 修正部分硬件不支持stencil buffer问题
         }
     }
 }

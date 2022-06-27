@@ -18,7 +18,7 @@ namespace ASEvaAPIEtoTest
             var tabPageDefault2D = tabControl.AddPage(t["draw-tabpage-default"]);
             initDrawDefault2D(tabPageDefault2D);
 
-            var tabPageSkia2D = tabControl.AddPage("Skia");
+            var tabPageSkia2D = tabControl.AddPage(t["draw-tabpage-skia"]);
             initDrawSkia2D(tabPageSkia2D);
 
             var layoutGL = layoutRow.AddColumnLayout(true);

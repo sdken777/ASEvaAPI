@@ -184,4 +184,8 @@
     <en>Anti-alias Test</en>
     <ch>反锯齿测试</ch>
   </t>
+  <t id="draw-tabpage-skia">
+    <en>Skia</en>
+    <ch>Skia绘制</ch>
+  </t>
 </text_resource>

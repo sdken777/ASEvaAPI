@@ -112,6 +112,13 @@ namespace ASEva.UIEto
 
 			funcLoader = gl.FunctionLoader;
 			grContext = GRContext.CreateGl(GRGlInterface.Create((name) => { return funcLoader.GetFunctionAddress(name); }));
+			
+			if (grContext == null)
+			{
+				var options = new GRContextOptions();
+				options.AvoidStencilBuffers = true;
+				grContext = GRContext.CreateGl(options);
+			}
         }
 
         public void OnGLResize(OpenGL gl, GLSizeInfo sizeInfo)
