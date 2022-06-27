@@ -151,7 +151,7 @@ namespace ASEva.UIGtk
                 ctxInfo.renderer = gl.Renderer;
                 ctxInfo.extensions = gl.Extensions;
 
-                size = new GLSizeInfo(AllocatedWidth, AllocatedHeight, AllocatedWidth, AllocatedHeight, 1, (float)AllocatedWidth / AllocatedHeight);
+                size = new GLSizeInfo(AllocatedWidth, AllocatedHeight, AllocatedWidth * ScaleFactor, AllocatedHeight * ScaleFactor, ScaleFactor, (float)AllocatedWidth / AllocatedHeight);
 
                 colorBuffer = new uint[1];
                 gl.GenRenderbuffersEXT(1, colorBuffer);
@@ -196,7 +196,7 @@ namespace ASEva.UIGtk
         {
             if (!rendererStatusOK) return;
 
-            var curSize = new GLSizeInfo(AllocatedWidth, AllocatedHeight, AllocatedWidth, AllocatedHeight, 1, (float)AllocatedWidth / AllocatedHeight);
+            var curSize = new GLSizeInfo(AllocatedWidth, AllocatedHeight, AllocatedWidth * ScaleFactor, AllocatedHeight * ScaleFactor, ScaleFactor, (float)AllocatedWidth / AllocatedHeight);
             bool resized = curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
             size = curSize;
 
@@ -252,8 +252,12 @@ namespace ASEva.UIGtk
                 }
 
                 var cairo = args.Cr;
+                cairo.Save();
+                var cairoScale = 1.0 / size.RealPixelScale;
+                cairo.Scale(cairoScale, cairoScale);
                 cairo.SetSourceSurface(cairoSurface, 0, 0);
                 cairo.Paint();
+                cairo.Restore();
 
                 CairoDrawText.Draw(cairo, textTasks.Clear(), size);
             }

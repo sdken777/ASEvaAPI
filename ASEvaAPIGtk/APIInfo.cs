@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 3, 0); // 支持SkiaView
+            return new Version(2, 2, 3, 1); // GLView支持高DPI
         }
     }
 }
