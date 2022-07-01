@@ -97,7 +97,7 @@ namespace ASEva.Utility
                 range.end = 0.0000001 * DateTime.Now.Ticks;
 
                 ctxs[id].RecentCallbackRanges.Add(range);
-                while (ctxs[id].RecentCallbackRanges.Last().end - ctxs[id].RecentCallbackRanges[0].start > 3) ctxs[id].RecentCallbackRanges.RemoveAt(0);
+                while (ctxs[id].RecentCallbackRanges.Count > 0 && ctxs[id].RecentCallbackRanges.Last().end - ctxs[id].RecentCallbackRanges[0].start > 3) ctxs[id].RecentCallbackRanges.RemoveAt(0);
 
                 if (!ctxs[id].InCaller)
                 {
@@ -106,7 +106,7 @@ namespace ASEva.Utility
 
                     var list = recentOutCallerCallbackRanges[category];
                     list.Add(range);
-                    while (list.Last().end - list[0].start > 3) list.RemoveAt(0);
+                    while (list.Count > 0 && list.Last().end - list[0].start > 3) list.RemoveAt(0);
                 }
 
                 ctxs[id].CallbackBeginTime = null;

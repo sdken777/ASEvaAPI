@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 6, 6, 0); // 新增Plugin.GetRelatedNativeModules
+            return new Version(2, 6, 6, 1); // 修正DrawBeat.CallbackEnd异常
         }
 
         /// <summary>
