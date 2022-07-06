@@ -33,9 +33,9 @@ namespace ASEva
         public virtual ProcessorClass[] GetProcessorClasses() { return null; }
 
         /// <summary>
-        /// [可选实现] 获取插件包含的所有C++模块的定义对象时被调用
+        /// [可选实现] 获取插件包含的所有原生模块的定义对象时被调用
         /// </summary>
-        /// <returns>C++模块定义对象的列表</returns>
+        /// <returns>原生模块定义对象的列表</returns>
         public virtual NativeClass[] GetNativeClasses() { return null; }
 
         /// <summary>
@@ -57,9 +57,9 @@ namespace ASEva
         public virtual String[] GetGlobalPathKeys() { return null; }
 
         /// <summary>
-        /// (api:app=2.6.6) [可选实现] 获取插件相关的C++组件ID（无需考虑本插件内的C++组件）
+        /// (api:app=2.6.6) [可选实现] 获取插件相关的原生组件ID（无需考虑本插件内的原生组件）
         /// </summary>
-        /// <returns>C++组件ID列表</returns>
+        /// <returns>原生组件ID列表</returns>
         public virtual String[] GetRelatedNativeModules() { return null; }
 
         /// <summary>

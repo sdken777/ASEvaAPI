@@ -17,7 +17,7 @@ namespace ASEva
         /// <summary>
         /// [必须实现] 获取窗口组件的类别ID时被调用
         /// </summary>
-        /// <returns>窗口类别ID</returns>
+        /// <returns>窗口组件的类别ID</returns>
         public virtual String GetWindowClassID() { return null; }
 
         /// <summary>

@@ -1218,5 +1218,9 @@ namespace ASEva
         {
             return null;
         }
+
+        public void DisableModule(object caller, string moduleClassID)
+        {
+        }
     }
 }

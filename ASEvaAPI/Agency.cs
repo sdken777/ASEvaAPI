@@ -132,6 +132,7 @@ namespace ASEva
         bool SetControlFlag(String controllerID, bool enabled);
         String GetModuleConfig(object caller, String moduleClassID);
         void SetModuleConfig(object caller, String moduleClassID, String config);
+        void DisableModule(object caller, String moduleClassID);
         ConfigStatus GetModuleConfigStatus(object caller, String moduleClassID);
         ConfigStatus[] GetModuleChildConfigStatus(object caller, String moduleClassID);
         Dictionary<BusDeviceID, BusDeviceInfo> GetBusDevices();
@@ -1455,21 +1456,21 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 获取数据处理或C++模块组件配置的字符串描述
+        /// 获取数据处理或原生模块组件配置的字符串描述
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
-        /// <param name="moduleClassID">模块类别ID</param>
-        /// <returns>配置的字符串描述，null表示找不到类别ID对应的模块</returns>
+        /// <param name="moduleClassID">模块组件的类别ID</param>
+        /// <returns>配置的字符串描述，null表示找不到类别ID对应的模块组件</returns>
         public static String GetModuleConfig(object caller, String moduleClassID)
         {
             return Handler.GetModuleConfig(caller, moduleClassID);
         }
 
         /// <summary>
-        /// 设置数据处理或C++模块组件配置的字符串描述
+        /// 设置数据处理或原生模块组件配置的字符串描述
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
-        /// <param name="moduleClassID">模块类别ID</param>
+        /// <param name="moduleClassID">模块组件的类别ID</param>
         /// <param name="config">配置的字符串描述</param>
         public static void SetModuleConfig(object caller, String moduleClassID, String config)
         {
@@ -1477,22 +1478,32 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 获取数据处理或C++模块组件配置的状态
+        /// (api:app=2.6.7) 禁用数据处理或原生模块组件
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
-        /// <param name="moduleClassID">模块类别ID</param>
-        /// <returns>组件配置的状态，若找不到类别ID对应的模块则返回 ASEva.ConfigStatus.Disabled </returns>
+        /// <param name="moduleClassID">模块组件的类别ID</param>
+        public static void DisableModule(object caller, String moduleClassID)
+        {
+            Handler.DisableModule(caller, moduleClassID);
+        }
+
+        /// <summary>
+        /// 获取数据处理或原生模块组件配置的状态
+        /// </summary>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
+        /// <param name="moduleClassID">模块组件的类别ID</param>
+        /// <returns>组件配置的状态，若找不到类别ID对应的模块组件则返回 ASEva.ConfigStatus.Disabled </returns>
         public static ConfigStatus GetModuleConfigStatus(object caller, String moduleClassID)
         {
             return Handler.GetModuleConfigStatus(caller, moduleClassID);
         }
 
         /// <summary>
-        /// 获取数据处理或C++模块组件各子功能配置的状态
+        /// 获取数据处理或原生模块组件各子功能配置的状态
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
-        /// <param name="moduleClassID">模块类别ID</param>
-        /// <returns>各子功能配置的状态，若找不到类别ID对应的模块或无子功能配置则返回null</returns>
+        /// <param name="moduleClassID">模块组件的类别ID</param>
+        /// <returns>各子功能配置的状态，若找不到类别ID对应的模块组件或无子功能配置则返回null</returns>
         public static ConfigStatus[] GetModuleChildConfigStatus(object caller, String moduleClassID)
         {
             return Handler.GetModuleChildConfigStatus(caller, moduleClassID);
@@ -1587,20 +1598,20 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 获取C++插件模块版本列表
+        /// 获取原生插件模块版本列表
         /// </summary>
         /// <param name="prefix">组件前缀，如bus、video、proc、dev等</param>
-        /// <returns>版本列表，键为C++模块的类型ID，值为版本字符串</returns>
+        /// <returns>版本列表，键为原生模块的类型ID，值为版本字符串</returns>
         public static Dictionary<String, String> GetNativePluginVersions(String prefix)
         {
             return Handler.GetNativePluginVersions(prefix);
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 获取C++插件模块版本列表
+        /// (api:app=2.3.0) 获取原生插件模块版本列表
         /// </summary>
-        /// <param name="type">C++库类别</param>
-        /// <returns>版本列表，键为C++模块的类型ID</returns>
+        /// <param name="type">原生库类别</param>
+        /// <returns>版本列表，键为原生模块的类型ID</returns>
         public static  Dictionary<String, Version> GetNativePluginVersions(NativeLibraryType type)
         {
             return Handler.GetNativePluginVersions(type);
@@ -2046,9 +2057,9 @@ namespace ASEva
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 获取C++组件信息表
+        /// (api:app=2.3.0) 获取原生组件信息表
         /// </summary>
-        /// <returns>C++组件信息表，键为组件ID</returns>
+        /// <returns>原生组件信息表，键为组件ID</returns>
         public static Dictionary<String, NativeClassInfo> GetNativeClassTable()
         {
             return Handler.GetNativeClassTable();

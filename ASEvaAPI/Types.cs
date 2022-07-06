@@ -1237,7 +1237,7 @@ namespace ASEva
     }
 
     /// <summary>
-    /// (api:app=2.3.0) C++库类别
+    /// (api:app=2.3.0) 原生库类别
     /// </summary>
     public enum NativeLibraryType
     {
@@ -1273,7 +1273,7 @@ namespace ASEva
     }
 
     /// <summary>
-    /// (api:app=2.3.0) C++组件信息
+    /// (api:app=2.3.0) 原生组件信息
     /// </summary>
     public class NativeClassInfo
     {
@@ -1288,7 +1288,7 @@ namespace ASEva
         public String ID { get; set; }
 
         /// <summary>
-        /// C++组件名称
+        /// 原生组件名称
         /// </summary>
         public String Title { get; set; }
 
@@ -1298,7 +1298,7 @@ namespace ASEva
         public String NativeType { get; set; }
 
         /// <summary>
-        /// 绑定的各C++库版本
+        /// 绑定的各原生库版本
         /// </summary>
         public Dictionary<NativeLibraryType, Version> LibraryVersions { get; set; }
     }
