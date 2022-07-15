@@ -6,6 +6,7 @@ CUR_DATE=`date +%Y%m%d`
 EXPORT_DEVELOPER=y
 EXPORT_RUNTIME_DEBUG=y
 EXPORT_UI_LIBRARY=y
+EXPORT_SKIA_NATIVE=n
 if [ "$1" = "" ]; then
     TARGET_DIR=~/Desktop/$CUR_DATE-$TARGET_NAME
     GEN_DESKTOP_ZIP=y
@@ -27,6 +28,9 @@ else
         EXPORT_RUNTIME_DEBUG=n
         EXPORT_UI_LIBRARY=n
     fi
+    if [ "$3" = "with-skia-native" ]; then
+        EXPORT_SKIA_NATIVE=y
+    fi
 fi
 
 mkdir -vp $TARGET_DIR/bin64
@@ -38,7 +42,9 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/bin64/ASEvaAPIWpf.dll $TARGET_DIR/bin64/
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/bin64/
     cp -vf "$CUR_DIR"/3party/corewf-wpf/* $TARGET_DIR/bin64/
-    cp -vf "$CUR_DIR"/3party/windows/* $TARGET_DIR/bin64/
+    if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/windows-skia-native/* $TARGET_DIR/bin64/
+    fi
 fi
 
 mkdir -vp $TARGET_DIR/binx
@@ -50,6 +56,9 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binx/
     cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binx/
     cp -vf "$CUR_DIR"/3party/linux-x64/* $TARGET_DIR/binx/
+    if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/linux-x64-skia-native/* $TARGET_DIR/binx/
+    fi
 fi
 
 mkdir -vp $TARGET_DIR/binxa
@@ -61,6 +70,9 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binxa/
     cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binxa/
     cp -vf "$CUR_DIR"/3party/linux-arm64/* $TARGET_DIR/binxa/
+    if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/linux-arm64-skia-native/* $TARGET_DIR/binxa/
+    fi
 fi
 
 mkdir -vp $TARGET_DIR/binm
@@ -72,6 +84,9 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binm/
     cp -vf "$CUR_DIR"/3party/monomac/* $TARGET_DIR/binm/
     cp -vf "$CUR_DIR"/3party/macos/* $TARGET_DIR/binm/
+    if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/macos-skia-native/* $TARGET_DIR/binm/
+    fi
 fi
 
 if [ "$EXPORT_DEVELOPER" = "y" ]; then
@@ -119,7 +134,9 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/bin64/ASEvaAPIWpf.dll $TARGET_DIR/bin64/debug/
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/bin64/debug/
         cp -vf "$CUR_DIR"/3party/corewf-wpf/* $TARGET_DIR/bin64/debug/
-        cp -vf "$CUR_DIR"/3party/windows/* $TARGET_DIR/bin64/debug/
+        if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/windows-skia-native/* $TARGET_DIR/bin64/debug/
+        fi
     fi
 
     mkdir -vp $TARGET_DIR/binx/debug
@@ -131,6 +148,9 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binx/debug/
         cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binx/debug/
         cp -vf "$CUR_DIR"/3party/linux-x64/* $TARGET_DIR/binx/debug/
+        if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/linux-x64-skia-native/* $TARGET_DIR/binx/debug/
+        fi
     fi
 
     mkdir -vp $TARGET_DIR/binxa/debug
@@ -142,6 +162,9 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binxa/debug/
         cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binxa/debug/
         cp -vf "$CUR_DIR"/3party/linux-arm64/* $TARGET_DIR/binxa/debug/
+        if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/linux-arm64-skia-native/* $TARGET_DIR/binxa/debug/
+        fi
     fi
 
     mkdir -vp $TARGET_DIR/binm/debug
@@ -153,6 +176,9 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binm/debug/
         cp -vf "$CUR_DIR"/3party/monomac/* $TARGET_DIR/binm/debug/
         cp -vf "$CUR_DIR"/3party/macos/* $TARGET_DIR/binm/debug/
+        if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/macos-skia-native/* $TARGET_DIR/binm/debug/
+        fi
     fi
 fi
 
