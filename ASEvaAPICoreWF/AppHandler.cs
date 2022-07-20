@@ -30,6 +30,8 @@ namespace ASEva.UICoreWF
             platform.Add<WebView.IHandler>(() => new WebView2Handler());
             platform.Add<ComboBox.IHandler>(() => new ComboBoxHandler());
             platform.Add<Drawable.IHandler>(() => new DrawableHandler());
+            platform.Add<DataObject.IHandler>(() => new DataObjectHandler());
+            platform.Add<DataFormats.IHandler>(() => new DataFormatsHandler());
             var app = new Application(platform);
 
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerCoreWF();

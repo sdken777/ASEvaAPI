@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UICoreWF.APIInfo">
             <summary>
-            version=2.2.3
+            version=2.2.4
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.APIInfo.GetAPIVersion">
@@ -255,6 +255,213 @@
             Required method for Designer support - do not modify 
             the contents of this method with the code editor.
             </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.DragDropLib.DataObject">
+            <summary>
+            Implements the COM version of IDataObject including SetData.
+            </summary>
+            <remarks>
+            <para>Use this object when using shell (or other unmanged) features
+            that utilize the clipboard and/or drag and drop.</para>
+            <para>The System.Windows.DataObject (.NET 3.0) and
+            System.Windows.Forms.DataObject do not support SetData from their COM
+            IDataObject interface implementation.</para>
+            <para>To use this object with .NET drag and drop, create an instance
+            of System.Windows.DataObject (.NET 3.0) or System.Window.Forms.DataObject
+            passing an instance of DataObject as the only constructor parameter. For
+            example:</para>
+            <code>
+            System.Windows.DataObject data = new System.Windows.DataObject(new DragDropLib.DataObject());
+            </code>
+            </remarks>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.#ctor">
+            <summary>
+            Creates an empty instance of DataObject.
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.Finalize">
+            <summary>
+            Releases unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.ClearStorage">
+            <summary>
+            Clears the internal storage array.
+            </summary>
+            <remarks>
+            ClearStorage is called by the IDisposable.Dispose method implementation
+            to make sure all unmanaged references are released properly.
+            </remarks>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.Dispose">
+            <summary>
+            Releases resources.
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.Dispose(System.Boolean)">
+            <summary>
+            Releases resources.
+            </summary>
+            <param name="disposing">Indicates if the call was made by a managed caller, or the garbage collector.
+            True indicates that someone called the Dispose method directly. False indicates that the garbage collector
+            is finalizing the release of the object instance.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.DAdvise(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.ADVF,System.Runtime.InteropServices.ComTypes.IAdviseSink,System.Int32@)">
+            <summary>
+            Adds an advisory connection for the specified format.
+            </summary>
+            <param name="pFormatetc">The format for which this sink is called for changes.</param>
+            <param name="advf">Advisory flags to specify callback behavior.</param>
+            <param name="adviseSink">The IAdviseSink to call for this connection.</param>
+            <param name="connection">Returns the new connection's ID.</param>
+            <returns>An HRESULT.</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.DUnadvise(System.Int32)">
+            <summary>
+            Removes an advisory connection.
+            </summary>
+            <param name="connection">The connection id to remove.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.EnumFormatEtc(System.Runtime.InteropServices.ComTypes.DATADIR)">
+            <summary>
+            Gets an enumerator for the formats contained in this DataObject.
+            </summary>
+            <param name="direction">The direction of the data.</param>
+            <returns>An instance of the IEnumFORMATETC interface.</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.GetData(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@)">
+            <summary>
+            Gets the specified data.
+            </summary>
+            <param name="format">The requested data format.</param>
+            <param name="medium">When the function returns, contains the requested data.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.GetDataHere(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@)">
+            <summary>
+            Gets the specified data.
+            </summary>
+            <param name="format">The requested data format.</param>
+            <param name="medium">When the function returns, contains the requested data.</param>
+            <remarks>Differs from GetData only in that the STGMEDIUM storage is
+            allocated and owned by the caller.</remarks>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.QueryGetData(System.Runtime.InteropServices.ComTypes.FORMATETC@)">
+            <summary>
+            Determines if data of the requested format is present.
+            </summary>
+            <param name="format">The request data format.</param>
+            <returns>Returns the status of the request. If the data is present, S_OK is returned.
+            If the data is not present, an error code with the best guess as to the reason is returned.</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.SetData(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@,System.Boolean)">
+            <summary>
+            Sets data in the specified format into storage.
+            </summary>
+            <param name="formatIn">The format of the data.</param>
+            <param name="medium">The data.</param>
+            <param name="release">If true, ownership of the medium's memory will be transferred
+            to this object. If false, a copy of the medium will be created and maintained, and
+            the caller is responsible for the memory of the medium it provided.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.CopyMedium(System.Runtime.InteropServices.ComTypes.STGMEDIUM@)">
+            <summary>
+            Creates a copy of the STGMEDIUM structure.
+            </summary>
+            <param name="medium">The data to copy.</param>
+            <returns>The copied data.</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.GetDataEntry(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Collections.Generic.KeyValuePair{System.Runtime.InteropServices.ComTypes.FORMATETC,System.Runtime.InteropServices.ComTypes.STGMEDIUM}@)">
+            <summary>
+            Gets a data entry by the specified format.
+            </summary>
+            <param name="pFormatetc">The format to locate the data entry for.</param>
+            <param name="dataEntry">The located data entry.</param>
+            <returns>True if the data entry was found, otherwise False.</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.RaiseDataChanged(System.Int32,System.Collections.Generic.KeyValuePair{System.Runtime.InteropServices.ComTypes.FORMATETC,System.Runtime.InteropServices.ComTypes.STGMEDIUM}@)">
+            <summary>
+            Raises the DataChanged event for the specified connection.
+            </summary>
+            <param name="connection">The connection id.</param>
+            <param name="dataEntry">The data entry for which to raise the event.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.RaiseDataChanged(System.Collections.Generic.KeyValuePair{System.Runtime.InteropServices.ComTypes.FORMATETC,System.Runtime.InteropServices.ComTypes.STGMEDIUM}@)">
+            <summary>
+            Raises the DataChanged event for any advisory connections that
+            are listening for it.
+            </summary>
+            <param name="dataEntry">The relevant data entry.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.IsFormatCompatible(System.Runtime.InteropServices.ComTypes.FORMATETC,System.Runtime.InteropServices.ComTypes.FORMATETC)">
+            <summary>
+            Determines if the formats are compatible.
+            </summary>
+            <param name="format1">A FORMATETC.</param>
+            <param name="format2">A FORMATETC.</param>
+            <returns>True if the formats are compatible, otherwise False.</returns>
+            <remarks>Compatible formats have the same DVASPECT, same format ID, and share
+            at least one TYMED.</remarks>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.IsFormatCompatible(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.FORMATETC@)">
+            <summary>
+            Determines if the formats are compatible.
+            </summary>
+            <param name="format1">A FORMATETC.</param>
+            <param name="format2">A FORMATETC.</param>
+            <returns>True if the formats are compatible, otherwise False.</returns>
+            <remarks>Compatible formats have the same DVASPECT, same format ID, and share
+            at least one TYMED.</remarks>
+        </member>
+        <member name="T:ASEva.UICoreWF.DragDropLib.DataObject.EnumFORMATETC">
+            <summary>
+            Helps enumerate the formats available in our DataObject class.
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.EnumFORMATETC.#ctor(System.Collections.Generic.IList{System.Collections.Generic.KeyValuePair{System.Runtime.InteropServices.ComTypes.FORMATETC,System.Runtime.InteropServices.ComTypes.STGMEDIUM}})">
+            <summary>
+            Creates an instance from a list of key value pairs.
+            </summary>
+            <param name="storage">List of FORMATETC/STGMEDIUM key value pairs</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.EnumFORMATETC.#ctor(System.Runtime.InteropServices.ComTypes.FORMATETC[])">
+            <summary>
+            Creates an instance from an array of FORMATETC's.
+            </summary>
+            <param name="formats">Array of formats to enumerate.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.EnumFORMATETC.Clone(System.Runtime.InteropServices.ComTypes.IEnumFORMATETC@)">
+            <summary>
+            Creates a clone of this enumerator.
+            </summary>
+            <param name="newEnum">When this function returns, contains a new instance of IEnumFORMATETC.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.EnumFORMATETC.Next(System.Int32,System.Runtime.InteropServices.ComTypes.FORMATETC[],System.Int32[])">
+            <summary>
+            Retrieves the next elements from the enumeration.
+            </summary>
+            <param name="celt">The number of elements to retrieve.</param>
+            <param name="rgelt">An array to receive the formats requested.</param>
+            <param name="pceltFetched">An array to receive the number of element fetched.</param>
+            <returns>If the fetched number of formats is the same as the requested number, S_OK is returned.
+            There are several reasons S_FALSE may be returned: (1) The requested number of elements is less than
+            or equal to zero. (2) The rgelt parameter equals null. (3) There are no more elements to enumerate.
+            (4) The requested number of elements is greater than one and pceltFetched equals null or does not
+            have at least one element in it. (5) The number of fetched elements is less than the number of
+            requested elements.</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.EnumFORMATETC.Reset">
+            <summary>
+            Resets the state of enumeration.
+            </summary>
+            <returns>S_OK</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.EnumFORMATETC.Skip(System.Int32)">
+            <summary>
+            Skips the number of elements requested.
+            </summary>
+            <param name="celt">The number of elements to skip.</param>
+            <returns>If there are not enough remaining elements to skip, returns S_FALSE. Otherwise, S_OK is returned.</returns>
         </member>
         <member name="M:ASEva.UICoreWF.DrawableHandler.#ctor(ASEva.UICoreWF.DrawableHandler.EtoDrawable)">
             <summary>
