@@ -825,35 +825,42 @@
         </member>
         <member name="M:ASEva.Agency.GetModuleConfig(System.Object,System.String)">
             <summary>
-            获取数据处理或C++模块组件配置的字符串描述
+            获取数据处理或原生模块组件配置的字符串描述
             </summary>
             <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
-            <param name="moduleClassID">模块类别ID</param>
-            <returns>配置的字符串描述，null表示找不到类别ID对应的模块</returns>
+            <param name="moduleClassID">模块组件的类别ID</param>
+            <returns>配置的字符串描述，null表示找不到类别ID对应的模块组件</returns>
         </member>
         <member name="M:ASEva.Agency.SetModuleConfig(System.Object,System.String,System.String)">
             <summary>
-            设置数据处理或C++模块组件配置的字符串描述
+            设置数据处理或原生模块组件配置的字符串描述
             </summary>
             <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
-            <param name="moduleClassID">模块类别ID</param>
+            <param name="moduleClassID">模块组件的类别ID</param>
             <param name="config">配置的字符串描述</param>
+        </member>
+        <member name="M:ASEva.Agency.DisableModule(System.Object,System.String)">
+            <summary>
+            (api:app=2.6.7) 禁用数据处理或原生模块组件
+            </summary>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
+            <param name="moduleClassID">模块组件的类别ID</param>
         </member>
         <member name="M:ASEva.Agency.GetModuleConfigStatus(System.Object,System.String)">
             <summary>
-            获取数据处理或C++模块组件配置的状态
+            获取数据处理或原生模块组件配置的状态
             </summary>
             <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
-            <param name="moduleClassID">模块类别ID</param>
-            <returns>组件配置的状态，若找不到类别ID对应的模块则返回 ASEva.ConfigStatus.Disabled </returns>
+            <param name="moduleClassID">模块组件的类别ID</param>
+            <returns>组件配置的状态，若找不到类别ID对应的模块组件则返回 ASEva.ConfigStatus.Disabled </returns>
         </member>
         <member name="M:ASEva.Agency.GetModuleChildConfigStatus(System.Object,System.String)">
             <summary>
-            获取数据处理或C++模块组件各子功能配置的状态
+            获取数据处理或原生模块组件各子功能配置的状态
             </summary>
             <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
-            <param name="moduleClassID">模块类别ID</param>
-            <returns>各子功能配置的状态，若找不到类别ID对应的模块或无子功能配置则返回null</returns>
+            <param name="moduleClassID">模块组件的类别ID</param>
+            <returns>各子功能配置的状态，若找不到类别ID对应的模块组件或无子功能配置则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetBusDevices">
             <summary>
@@ -918,17 +925,17 @@
         </member>
         <member name="M:ASEva.Agency.GetNativePluginVersions(System.String)">
             <summary>
-            获取C++插件模块版本列表
+            获取原生插件模块版本列表
             </summary>
             <param name="prefix">组件前缀，如bus、video、proc、dev等</param>
-            <returns>版本列表，键为C++模块的类型ID，值为版本字符串</returns>
+            <returns>版本列表，键为原生模块的类型ID，值为版本字符串</returns>
         </member>
         <member name="M:ASEva.Agency.GetNativePluginVersions(ASEva.NativeLibraryType)">
             <summary>
-            (api:app=2.3.0) 获取C++插件模块版本列表
+            (api:app=2.3.0) 获取原生插件模块版本列表
             </summary>
-            <param name="type">C++库类别</param>
-            <returns>版本列表，键为C++模块的类型ID</returns>
+            <param name="type">原生库类别</param>
+            <returns>版本列表，键为原生模块的类型ID</returns>
         </member>
         <member name="M:ASEva.Agency.ConfigOfflineMapPath">
             <summary>
@@ -1239,9 +1246,9 @@
         </member>
         <member name="M:ASEva.Agency.GetNativeClassTable">
             <summary>
-            (api:app=2.3.0) 获取C++组件信息表
+            (api:app=2.3.0) 获取原生组件信息表
             </summary>
-            <returns>C++组件信息表，键为组件ID</returns>
+            <returns>原生组件信息表，键为组件ID</returns>
         </member>
         <member name="M:ASEva.Agency.GetTaskClassTable">
             <summary>
@@ -1770,7 +1777,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.6
+            version=2.6.7
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3745,26 +3752,26 @@
         </member>
         <member name="T:ASEva.NativeClass">
             <summary>
-            (api:app=2.0.0) C++组件定义的基类
+            (api:app=2.0.0) 原生组件定义的基类
             </summary>
         </member>
         <member name="M:ASEva.NativeClass.GetNativeName">
             <summary>
-            [必须实现] 获取C++组件的名称时被调用
+            [必须实现] 获取原生组件的名称时被调用
             </summary>
-            <returns>C++组件名称表，键'en'表示英文，'ch'表示中文</returns>
+            <returns>原生组件名称表，键'en'表示英文，'ch'表示中文</returns>
         </member>
         <member name="M:ASEva.NativeClass.GetNativeClassID">
             <summary>
-            [必须实现] 获取C++组件的类别ID时被调用
+            [必须实现] 获取原生组件的类别ID时被调用
             </summary>
-            <returns>C++组件类别ID</returns>
+            <returns>原生组件类别ID</returns>
         </member>
         <member name="M:ASEva.NativeClass.GetNativePluginType">
             <summary>
-            [必须实现] 获取C++模块的类型ID时被调用
+            [必须实现] 获取原生模块的类型ID时被调用
             </summary>
-            <returns>C++模块类型ID，需要与插件info.txt中的type字段一致</returns>
+            <returns>原生模块类型ID，需要与插件info.txt中的type字段一致</returns>
         </member>
         <member name="M:ASEva.NativeClass.CreateConfig">
             <summary>
@@ -3815,9 +3822,9 @@
         </member>
         <member name="M:ASEva.Plugin.GetNativeClasses">
             <summary>
-            [可选实现] 获取插件包含的所有C++模块的定义对象时被调用
+            [可选实现] 获取插件包含的所有原生模块的定义对象时被调用
             </summary>
-            <returns>C++模块定义对象的列表</returns>
+            <returns>原生模块定义对象的列表</returns>
         </member>
         <member name="M:ASEva.Plugin.GetTaskClasses">
             <summary>
@@ -3839,9 +3846,9 @@
         </member>
         <member name="M:ASEva.Plugin.GetRelatedNativeModules">
             <summary>
-            (api:app=2.6.6) [可选实现] 获取插件相关的C++组件ID（无需考虑本插件内的C++组件）
+            (api:app=2.6.6) [可选实现] 获取插件相关的原生组件ID（无需考虑本插件内的原生组件）
             </summary>
-            <returns>C++组件ID列表</returns>
+            <returns>原生组件ID列表</returns>
         </member>
         <member name="M:ASEva.Plugin.OnApplicationStarted">
             <summary>
@@ -4994,7 +5001,7 @@
             <summary>
             [必须实现] 获取独立任务组件的类别ID时被调用
             </summary>
-            <returns>类别ID</returns>
+            <returns>独立任务组件的类别ID</returns>
         </member>
         <member name="M:ASEva.TaskClass.GetTaskTitle">
             <summary>
@@ -5004,25 +5011,25 @@
         </member>
         <member name="M:ASEva.TaskClass.IsNativeTask">
             <summary>
-            [必须实现] 查询是否为C++端独立处理任务时被调用
+            [必须实现] 查询是否为原生端独立处理任务时被调用
             </summary>
-            <returns>是否为C++端独立处理任务</returns>
+            <returns>是否为原生端独立处理任务</returns>
         </member>
         <member name="M:ASEva.TaskClass.CreateTask">
             <summary>
-            [非C++模式下必须实现] 创建独立任务对象
+            [非原生模式下必须实现] 创建独立任务对象
             </summary>
             <returns>独立任务对象</returns>
         </member>
         <member name="M:ASEva.TaskClass.GetNativePluginType">
             <summary>
-            [C++模式下必须实现] 获取C++模块的类型ID时被调用
+            [原生模式下必须实现] 获取原生模块的类型ID时被调用
             </summary>
             <returns>类型ID，需要与插件info.txt中的type字段一致</returns>
         </member>
         <member name="M:ASEva.TaskClass.GetNativeTaskName">
             <summary>
-            [C++模式下必须实现] 获取C++独立处理任务名称时被调用
+            [原生模式下必须实现] 获取原生独立处理任务名称时被调用
             </summary>
             <returns>任务名称</returns>
         </member>
@@ -5978,7 +5985,7 @@
         </member>
         <member name="T:ASEva.NativeLibraryType">
             <summary>
-            (api:app=2.3.0) C++库类别
+            (api:app=2.3.0) 原生库类别
             </summary>
         </member>
         <member name="F:ASEva.NativeLibraryType.Native">
@@ -6013,7 +6020,7 @@
         </member>
         <member name="T:ASEva.NativeClassInfo">
             <summary>
-            (api:app=2.3.0) C++组件信息
+            (api:app=2.3.0) 原生组件信息
             </summary>
         </member>
         <member name="P:ASEva.NativeClassInfo.OwnerPluginID">
@@ -6028,7 +6035,7 @@
         </member>
         <member name="P:ASEva.NativeClassInfo.Title">
             <summary>
-            C++组件名称
+            原生组件名称
             </summary>
         </member>
         <member name="P:ASEva.NativeClassInfo.NativeType">
@@ -6038,7 +6045,7 @@
         </member>
         <member name="P:ASEva.NativeClassInfo.LibraryVersions">
             <summary>
-            绑定的各C++库版本
+            绑定的各原生库版本
             </summary>
         </member>
         <member name="T:ASEva.TaskClassInfo">
@@ -7147,7 +7154,7 @@
             <summary>
             [必须实现] 获取窗口组件的类别ID时被调用
             </summary>
-            <returns>窗口类别ID</returns>
+            <returns>窗口组件的类别ID</returns>
         </member>
         <member name="M:ASEva.WindowClass.GetWindowImage">
             <summary>

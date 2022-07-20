@@ -247,9 +247,14 @@ namespace ASEva.UIGtk
         private void onDrawDummy(object o, DrawnArgs args)
         {
             if (!rendererStatusOK) return;
-            if (dummyArea.AllocatedWidth == dummyWidth) return;
+
+            bool shouldUpdate = false;
+            if (dummyArea.AllocatedWidth != dummyWidth) shouldUpdate = true;
+            if ((DateTime.Now - lastUpdateDummy).TotalMilliseconds > 300) shouldUpdate = true;
+            if (!shouldUpdate) return;
 
             dummyWidth = dummyArea.AllocatedWidth;
+            lastUpdateDummy = DateTime.Now;
 
             IntPtr display = Linux.gdk_x11_display_get_xdisplay(Display.Handle);
             var xid = Linux.gdk_x11_window_get_xid(dummyArea.Window.Handle);
@@ -282,5 +287,6 @@ namespace ASEva.UIGtk
         private bool drawQueued = false;
         private DrawingArea realArea = new DrawingArea();
         private DrawingArea dummyArea = new DrawingArea();
+        private DateTime lastUpdateDummy = DateTime.Now;
     }
 }
