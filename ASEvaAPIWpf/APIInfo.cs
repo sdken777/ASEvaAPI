@@ -18,7 +18,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 2, 1, 0); // 支持SkiaView
+            return new Version(1, 2, 1, 1); // 修正OpenGLControlWpf找不到资源问题
         }
     }
 }
