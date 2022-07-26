@@ -43,7 +43,14 @@ namespace ASEva.UICoreWF
 
 		async void InitializeAsync()
 		{
-			if (CoreWebView2Environment != null) await Control.EnsureCoreWebView2Async(CoreWebView2Environment);
+			if (CoreWebView2Environment != null)
+			{
+				try
+                {
+					await Control.EnsureCoreWebView2Async(CoreWebView2Environment);
+				}
+				catch (Exception) { }
+			}
 		}
 
 		void Control_CoreWebView2Ready(object sender, EventArgs e)
