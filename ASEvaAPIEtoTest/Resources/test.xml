@@ -188,4 +188,16 @@
     <en>Skia</en>
     <ch>Skia绘制</ch>
   </t>
+  <t id="basic-dynamic-add">
+    <en>Add</en>
+    <ch>添加项</ch>
+  </t>
+  <t id="basic-dynamic-remove">
+    <en>Remove</en>
+    <ch>移除项</ch>
+  </t>
+  <t id="title-dialog">
+    <en>Test Dialog</en>
+    <ch>测试对话框</ch>
+  </t>
 </text_resource>

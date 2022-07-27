@@ -12,6 +12,8 @@ namespace ASEvaAPIEtoTest
         private void initBasicTagPageB(TabPage tabPage)
         {
             var splitter = tabPage.SetContentAsColumnLayout().AddControl(new Splitter { Position = this.Sizer(300) }, true) as Splitter;
+            splitter.Panel1MinimumSize = 300;
+            splitter.Panel2MinimumSize = 200;
             var panel1 = splitter.SetPanel1();
             var panel2 = splitter.SetPanel2();
 
@@ -23,8 +25,8 @@ namespace ASEvaAPIEtoTest
             var treeView = layoutPanel1.AddControl(new TreeGridView(), true) as TreeGridView;
             initBasicTagPageBTreeView(treeView);
 
-            var scrollBox = panel2.SetContentAsColumnLayout(0).AddControl(new Scrollable(), true) as Scrollable;
-            scrollBox.SetContentAsColumnLayout().AddControl(new ImageView { Image = CommonImage.LoadResource("picture.png").ToEtoBitmap() }, true);
+            var layoutDynamicItems = panel2.SetContentAsColumnLayout();
+            initBasicTagPageBDynamicItems(layoutDynamicItems);
         }
 
         private void initBasicTagPageBLists(StackLayout layout)
@@ -78,5 +80,33 @@ namespace ASEvaAPIEtoTest
                 if (view.SelectedItem != null) MessageBox.Show((view.SelectedItem as TreeGridItem).Values[0] as String, "");
             };
         }
+
+        private void initBasicTagPageBDynamicItems(StackLayout layout)
+        {
+            var layoutButtons = layout.AddRowLayout();
+            var scrollBox = layout.AddControl(new Scrollable(), true) as Scrollable;
+            var layoutItems = scrollBox.SetContentAsColumnLayout(2, 2);
+
+            layoutButtons.AddButton(t["basic-dynamic-add"]).Click += delegate
+            {
+                var panel = new Panel();
+                panel.BackgroundColor = Colors.LightYellow;
+                var table = panel.SetContentAsTableLayout();
+                var row = table.AddRow(true);
+                row.AddLabel(t.Format("basic-label-row", ++dynamicItemCount));
+                row.AddControl(new SearchBox(), true);
+                row = table.AddRow(true);
+                row.AddLabel(t.Format("basic-label-row", ++dynamicItemCount));
+                row.AddControl(new NumericStepper(), true);
+                layoutItems.AddControl(panel, false, 0, 80);
+            };
+            layoutButtons.AddSpace();
+            layoutButtons.AddButton(t["basic-dynamic-remove"]).Click += delegate
+            {
+                if (layoutItems.Items.Count > 0) layoutItems.Items.RemoveAt(0);
+            };
+        }
+
+        private int dynamicItemCount = 0;
     }
 }

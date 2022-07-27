@@ -12,7 +12,7 @@ namespace ASEvaAPIEtoTest
         {
             WindowStyle = withBorder ? WindowStyle.Default : WindowStyle.None;
             Icon = Icon.FromResource("icon.png");
-            Title = "";
+            Title = t["title-dialog"];
             this.SetClientSize(800, 400);
             this.SetMinimumClientSize(600, 300);
             Resizable = withBorder;
