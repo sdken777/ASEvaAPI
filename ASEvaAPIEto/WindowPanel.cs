@@ -65,6 +65,12 @@ namespace ASEva.UIEto
         public virtual void OnUpdateUI() { }
 
         /// <summary>
+        /// (api:eto=2.7.2) [可选实现] 在容器尺寸变化后被调用
+        /// </summary>
+        /// <param name="containerSize">变化后的容器尺寸</param>
+        public virtual void OnUpdateContainerSize(IntSize containerSize) { }
+
+        /// <summary>
         /// [可选实现] 在窗口控件销毁前被调用
         /// </summary>
         public virtual void OnRelease() { }
