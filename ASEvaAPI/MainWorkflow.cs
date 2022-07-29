@@ -20,7 +20,7 @@ namespace ASEva
         public virtual bool OnInit(String appID, Dictionary<String, String> parameters, out String uiCode) { uiCode = null; return true; }
 
         /// <summary>
-        /// [必须实现][可含模态框] 运行主流程，需要在其中主循环中确保执行了 ASEva.CoreCallback.OnLoop
+        /// [必须实现][可含模态框] 运行主流程，需要在其中主循环中确保执行了 ASEva.MainWorkflowLoopCallback.OnLoop
         /// </summary>
         /// <param name="callback">框架软件回调接口</param>
         /// <param name="startupProject">初始项目文件路径</param>
@@ -38,7 +38,7 @@ namespace ASEva
         /// <param name="reason">验证失败原因</param>
         /// <param name="mac">机器码</param>
         /// <param name="callback">框架软件的回调接口</param>
-        /// <returns>是否接受请求，如接受需稍后调用 ASEva.CoreCallback.OnRevalidateLicense </returns>
+        /// <returns>是否接受请求，如接受需确保已调用 ASEva.MainWorkflowLicenseCallback.OnRevalidateLicense </returns>
         public virtual bool OnLicenseRequest(LicenseRequestReason reason, String mac, MainWorkflowLicenseCallback callback) { return false; }
 
         /// <summary>
