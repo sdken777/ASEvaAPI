@@ -87,19 +87,21 @@ namespace ASEvaAPIEtoTest
         private void initBasicTagPageARow6(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 6));
+            layout.AddLinkButton(t["basic-dialog-no-border"]).Click += delegate
+            {
+                var dialog = new TestDialog(false, t);
+                dialog.MoveToCenter();
+                dialog.ShowModal();
+            };
+            layout.AddLinkButton(t["basic-dialog-with-border"]).Click += delegate
+            {
+                var dialog = new TestDialog(true, t);
+                dialog.MoveToCenter();
+                dialog.ShowModal();
+            };
             layout.AddLinkButton(t["basic-client-size"], true).Click += (sender, args) =>
             {
                 (sender as LinkButton).Text = ClientSize.Width + "x" + ClientSize.Height;
-            };
-            layout.AddLinkButton(t["basic-dialog-no-border"], true).Click += delegate
-            {
-                var dialog = new TestDialog(false, t);
-                dialog.ShowModal();
-            };
-            layout.AddLinkButton(t["basic-dialog-with-border"], true).Click += delegate
-            {
-                var dialog = new TestDialog(true, t);
-                dialog.ShowModal();
             };
         }
     }
