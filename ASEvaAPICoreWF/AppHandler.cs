@@ -32,6 +32,7 @@ namespace ASEva.UICoreWF
             platform.Add<Drawable.IHandler>(() => new DrawableHandler());
             platform.Add<DataObject.IHandler>(() => new DataObjectHandler());
             platform.Add<DataFormats.IHandler>(() => new DataFormatsHandler());
+            platform.Add<Slider.IHandler>(() => new SliderHandler());
             var app = new Application(platform);
 
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerCoreWF();
