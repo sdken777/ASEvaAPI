@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 4, 1); // 拦截EnsureCoreWebView2Async异常
+            return new Version(2, 2, 4, 2); // SearchBox的PlaceHolder支持显示中文
         }
     }
 }
