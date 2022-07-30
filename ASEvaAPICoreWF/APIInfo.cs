@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 4, 2); // SearchBox的PlaceHolder支持显示中文
+            return new Version(2, 2, 4, 3); // 修复高DPI下ComboBox下边沿框不显示问题
         }
     }
 }

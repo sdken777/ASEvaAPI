@@ -17,7 +17,8 @@ namespace ASEva.UICoreWF
 		public ComboBoxHandler()
 		{
 			Control.DropDownStyle = swf.ComboBoxStyle.DropDownList;
-			Control.MinSize = new sd.Size(100, 0);
+			var dpiRatio = (float)Control.DeviceDpi / 96;
+			Control.MinSize = new sd.Size(100, (int)Math.Ceiling(10 + 14 * dpiRatio));
 			Control.TextChanged += ControlOnTextChanged;
 		}
 
