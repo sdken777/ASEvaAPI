@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.7.1
+            version=2.7.2
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -1463,6 +1463,12 @@
             <summary>
             [可选实现] 在需要更新界面时被调用。所有与界面相关的更新应全部放在此函数内实现。需要注意，窗口隐藏时将不会调用此函数
             </summary>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnUpdateContainerSize(ASEva.IntSize)">
+            <summary>
+            (api:eto=2.7.2) [可选实现] 在容器尺寸变化后被调用
+            </summary>
+            <param name="containerSize">变化后的容器尺寸</param>
         </member>
         <member name="M:ASEva.UIEto.WindowPanel.OnRelease">
             <summary>

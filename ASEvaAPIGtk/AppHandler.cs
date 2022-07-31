@@ -40,6 +40,7 @@ namespace ASEva.UIGtk
             platform.Add<Dialog.IHandler>(() => new DialogHandler());
             platform.Add<DateTimePicker.IHandler>(() => new DateTimePickerHandler());
             platform.Add<Form.IHandler>(() => new FormHandler());
+            platform.Add<Slider.IHandler>(() => new SliderHandler());
             var app = new Application(platform);
 
             ScreensHandler.TestLegacy();
