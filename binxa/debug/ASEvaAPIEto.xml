@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.6.0
+            version=2.7.2
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -251,6 +251,25 @@
             [可选实现] 在需要更新界面时被调用
             </summary>
         </member>
+        <member name="T:ASEva.UIEto.CommonImageExtensions">
+            <summary>
+            (api:eto=2.7.0) 方便使用通用图像数据的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.CommonImageExtensions.ToEtoBitmap(ASEva.Samples.CommonImage)">
+            <summary>
+            转为Eto位图对象
+            </summary>
+            <param name="image">通用图像数据</param>
+            <returns>Eto位图对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.CommonImageExtensions.ToSKImage(ASEva.Samples.CommonImage)">
+            <summary>
+            转为Skia图像对象
+            </summary>
+            <param name="image">通用图像数据</param>
+            <returns>Skia图像对象</returns>
+        </member>
         <member name="T:ASEva.UIEto.ContextMenuExtensions">
             <summary>
             (api:eto=2.0.3) 方便操作右键菜单的扩展
@@ -456,10 +475,50 @@
             <param name="args">鼠标事件</param>
             <returns>鼠标位置的逻辑坐标</returns>
         </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.GetMouseLogicalPoint(Eto.Forms.Control)">
+            <summary>
+            (api:eto=2.6.2) 获取鼠标相对于当前控件的逻辑坐标
+            </summary>
+            <param name="control">控件</param>
+            <returns>鼠标相对于当前控件的逻辑坐标</returns>
+        </member>
         <member name="P:ASEva.UIEto.SizerExtensions.PixelScale">
             <summary>
             像素单位比例
             </summary>
+        </member>
+        <member name="T:ASEva.UIEto.SkiaCanvasExtensions">
+            <summary>
+            (api:eto=2.7.0) 方便操作Skia画布的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaCanvasExtensions.GetDefaultFont(SkiaSharp.SKCanvas,System.Single)">
+            <summary>
+            获取默认字体
+            </summary>
+            <param name="canvas">Skia画布</param>
+            <param name="sizeScale">相对于默认尺寸的比例</param>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaCanvasExtensions.DrawString(SkiaSharp.SKCanvas,System.String,SkiaSharp.SKFont,SkiaSharp.SKColor,ASEva.UIEto.TextAnchor,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=2.7.1) 指定锚点绘制文本
+            </summary>
+            <param name="canvas">Skia画布</param>
+            <param name="text">文本</param>
+            <param name="font">字体</param>
+            <param name="color">文字颜色</param>
+            <param name="anchor">文本锚点坐标位置类型</param>
+            <param name="logicalX">文本锚点X轴逻辑坐标</param>
+            <param name="logicalY">文本锚点Y轴逻辑坐标</param>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaCanvasExtensions.MeasureString(SkiaSharp.SKCanvas,System.String,SkiaSharp.SKFont)">
+            <summary>
+            (api:eto=2.7.1) 测量文本的尺寸
+            </summary>
+            <param name="canvas">Skia画布</param>
+            <param name="text">文本</param>
+            <param name="font">字体</param>
+            <returns>文本的逻辑尺寸</returns>
         </member>
         <member name="T:ASEva.UIEto.SplitterExtensions">
             <summary>
@@ -1071,6 +1130,31 @@
             文本绘制任务对象
             </summary>
         </member>
+        <member name="T:ASEva.UIEto.GLContextInfo">
+            <summary>
+            (api:eto=2.6.1) OpenGL上下文信息
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLContextInfo.version">
+            <summary>
+            版本
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLContextInfo.vendor">
+            <summary>
+            厂商
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLContextInfo.renderer">
+            <summary>
+            渲染器
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLContextInfo.extensions">
+            <summary>
+            扩展
+            </summary>
+        </member>
         <member name="T:ASEva.UIEto.GLView">
             <summary>
             (api:eto=2.6.0) OpenGL绘制视图（注意，此控件不支持在 ASEva.UIEto.OverlayLayout 中使用）
@@ -1104,6 +1188,16 @@
         <member name="M:ASEva.UIEto.GLView.QueueRender">
             <summary>
             提交新的渲染请求
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLView.ContextInfo">
+            <summary>
+            (api:eto=2.6.1) 上下文信息 (null表示还未初始化完成)
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLView.FPS">
+            <summary>
+            (api:eto=2.6.1) 渲染帧率（统计最近3秒）
             </summary>
         </member>
         <member name="T:ASEva.UIEto.ImageConverter">
@@ -1177,6 +1271,56 @@
         <member name="P:ASEva.UIEto.Pixel.Scale">
             <summary>
             像素单位比例，用于优化在非默认DPI下的显示
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.SkiaRenderEventArgs">
+            <summary>
+            (api:eto=2.7.0) SkiaView渲染事件参数
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SkiaRenderEventArgs.Canvas">
+            <summary>
+            Skia画布对象
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SkiaRenderEventArgs.LogicalSize">
+            <summary>
+            画布的逻辑尺寸
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.SkiaView">
+            <summary>
+            (api:eto=2.7.0) Skia绘制视图（注意，此控件不支持在 ASEva.UIEto.OverlayLayout 中使用）
+            </summary>
+        </member>
+        <member name="E:ASEva.UIEto.SkiaView.Render">
+            <summary>
+            渲染事件
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaView.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaView.Close">
+            <summary>
+            关闭视图，释放资源
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaView.QueueRender">
+            <summary>
+            提交新的渲染请求
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SkiaView.ContextInfo">
+            <summary>
+            底层的OpenGL上下文信息 (null表示还未初始化完成)
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SkiaView.FPS">
+            <summary>
+            渲染帧率（统计最近3秒）
             </summary>
         </member>
         <member name="T:ASEva.UIEto.TextTableView">
@@ -1319,6 +1463,12 @@
             <summary>
             [可选实现] 在需要更新界面时被调用。所有与界面相关的更新应全部放在此函数内实现。需要注意，窗口隐藏时将不会调用此函数
             </summary>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnUpdateContainerSize(ASEva.IntSize)">
+            <summary>
+            (api:eto=2.7.2) [可选实现] 在容器尺寸变化后被调用
+            </summary>
+            <param name="containerSize">变化后的容器尺寸</param>
         </member>
         <member name="M:ASEva.UIEto.WindowPanel.OnRelease">
             <summary>

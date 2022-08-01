@@ -50,7 +50,7 @@
             "env": {
                 "GDK_BACKEND": "${input:gdk_backend}",
                 "GDK_GL": "${input:gdk_gl}",
-            }
+            },
             // "type": "f5anything",
             // "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest",
         },
