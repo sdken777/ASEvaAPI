@@ -59,9 +59,9 @@
                 "env": {
                     "GDK_BACKEND": "${input:gdk_backend}",
                 }
-                // "type": "f5anything",
-                // "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest",
             },
+            // "type": "f5anything",
+            // "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest",
         },
     ]
 }
