@@ -151,7 +151,16 @@ namespace ASEva.UIGtk
                 }
 
                 hostBuffer = new byte[size.RealWidth * size.RealHeight * 4];
-                cairoSurface = new Cairo.ImageSurface(Cairo.Format.RGB24, size.RealWidth, size.RealHeight);
+
+                if (cairoSurface == null || cairoSurface.Width != size.RealWidth || cairoSurface.Height != size.RealHeight)
+                {
+                    if (cairoSurface != null)
+                    {
+                        cairoSurface.Dispose();
+                        cairoSurface = null;
+                    }
+                    cairoSurface = new Cairo.ImageSurface(Cairo.Format.RGB24, size.RealWidth, size.RealHeight);
+                }
 
                 callback.OnGLInitialize(gl, ctxInfo);
                 callback.OnGLResize(gl, size);
@@ -188,7 +197,11 @@ namespace ASEva.UIGtk
                     gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, depthBuffer[0]);
                     gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
                     hostBuffer = new byte[size.RealWidth * size.RealHeight * 4];
-                    if (cairoSurface != null) cairoSurface.Dispose();
+                    if (cairoSurface != null)
+                    {
+                        cairoSurface.Dispose();
+                        cairoSurface = null;
+                    }
                     cairoSurface = new Cairo.ImageSurface(Cairo.Format.RGB24, size.RealWidth, size.RealHeight);
                 }
 
