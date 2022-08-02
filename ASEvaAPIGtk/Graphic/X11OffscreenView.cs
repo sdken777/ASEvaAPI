@@ -12,13 +12,16 @@ namespace ASEva.UIGtk
         {
             gl = OpenGL.Create(new LinuxFuncLoader());
 
+            dummyArea.WidthRequest = 1;
             dummyArea.HeightRequest = 1;
 
             PackStart(realArea, true, true, 0);
-            PackStart(dummyArea, false, false, 0);
+
+            var dummyBox = new Box(Orientation.Horizontal, 0);
+            dummyBox.PackStart(dummyArea, false, false, 0);
+            PackStart(dummyBox, false, false, 0);
 
             dummyArea.Realized += onRealized;
-            dummyArea.Drawn += onDrawDummy;
             realArea.Drawn += onDraw;
         }
 
@@ -257,35 +260,6 @@ namespace ASEva.UIGtk
             drawQueued = false;
         }
 
-        private void onDrawDummy(object o, DrawnArgs args)
-        {
-            if (!rendererStatusOK) return;
-
-            bool shouldUpdate = false;
-            if (dummyArea.AllocatedWidth != dummyWidth) shouldUpdate = true;
-            if ((DateTime.Now - lastUpdateDummy).TotalMilliseconds > 300) shouldUpdate = true;
-            if (!shouldUpdate) return;
-
-            dummyWidth = dummyArea.AllocatedWidth;
-            lastUpdateDummy = DateTime.Now;
-
-            IntPtr display = Linux.gdk_x11_display_get_xdisplay(Display.Handle);
-            var xid = Linux.gdk_x11_window_get_xid(dummyArea.Window.Handle);
-            Linux.glXMakeCurrent(display, xid, context);
-
-            try
-            {
-                gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, 0);
-                gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT);
-                gl.Finish();
-
-                Linux.glXSwapIntervalEXT(display, xid, 0);
-                Linux.glXSwapBuffers(display, xid);
-                Linux.glXMakeCurrent(display, 0, IntPtr.Zero);
-            }
-            catch (Exception) { }
-        }
-
         private OpenGL gl = null;
         private GLView.GLViewCallback callback;
         private IntPtr context = IntPtr.Zero;
@@ -296,10 +270,8 @@ namespace ASEva.UIGtk
         private Cairo.ImageSurface cairoSurface = null;
         private bool rendererStatusOK = false;
         private GLSizeInfo size = null;
-        private int dummyWidth = 0;
         private bool drawQueued = false;
         private DrawingArea realArea = new DrawingArea();
         private DrawingArea dummyArea = new DrawingArea();
-        private DateTime lastUpdateDummy = DateTime.Now;
     }
 }
