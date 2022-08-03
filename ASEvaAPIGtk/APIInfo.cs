@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 4, 3); // 缩小X11OffscreenView的dummy view范围
+            return new Version(2, 2, 4, 4); // 修正X11OffscreenView的xid可能获取不到的问题
         }
     }
 }

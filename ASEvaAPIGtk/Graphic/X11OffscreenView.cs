@@ -48,7 +48,6 @@ namespace ASEva.UIGtk
         private void onDestroy()
         {
             IntPtr display = Linux.gdk_x11_display_get_xdisplay(Display.Handle);
-            var xid = Linux.gdk_x11_window_get_xid(dummyArea.Window.Handle);
 
             if (context != IntPtr.Zero)
             {
@@ -116,7 +115,7 @@ namespace ASEva.UIGtk
             context = Linux.glXCreateContext(display, vinfo, IntPtr.Zero, true);
             if (context == IntPtr.Zero) return;
 
-            var xid = Linux.gdk_x11_window_get_xid(dummyArea.Window.Handle);
+            xid = Linux.gdk_x11_window_get_xid(dummyArea.Window.Handle);
             Linux.glXMakeCurrent(display, xid, context);
 
             if (Linux.glewInit(dummyArea.Window) != 0) return;
@@ -188,7 +187,6 @@ namespace ASEva.UIGtk
             size = curSize;
 
             IntPtr display = Linux.gdk_x11_display_get_xdisplay(Display.Handle);
-            var xid = Linux.gdk_x11_window_get_xid(dummyArea.Window.Handle);
             Linux.glXMakeCurrent(display, xid, context);
 
             try
@@ -263,6 +261,7 @@ namespace ASEva.UIGtk
         private OpenGL gl = null;
         private GLView.GLViewCallback callback;
         private IntPtr context = IntPtr.Zero;
+        private uint xid = 0;
         private uint[] frameBuffer = null;
         private uint[] colorBuffer = null;
         private uint[] depthBuffer = null;
