@@ -89,15 +89,18 @@ namespace ASEvaAPIEtoTest
             layout.AddLabel(t.Format("basic-label-row", 6));
             layout.AddLinkButton(t["basic-dialog-no-border"]).Click += delegate
             {
-                var dialog = new TestDialog(false, t);
-                dialog.MoveToCenter();
-                dialog.ShowModal();
+                var dialog = new TestDialog(true, false, t);
+                App.RunDialog(dialog);
             };
             layout.AddLinkButton(t["basic-dialog-with-border"]).Click += delegate
             {
-                var dialog = new TestDialog(true, t);
-                dialog.MoveToCenter();
-                dialog.ShowModal();
+                var dialog = new TestDialog(false, true, t);
+                App.RunDialog(dialog);
+            };
+            layout.AddLinkButton(t["basic-dialog-with-border-fix"]).Click += delegate
+            {
+                var dialog = new TestDialog(true, true, t);
+                App.RunDialog(dialog);
             };
             layout.AddLinkButton(t["basic-client-size"], true).Click += (sender, args) =>
             {

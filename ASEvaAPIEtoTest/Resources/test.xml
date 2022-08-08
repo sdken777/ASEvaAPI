@@ -124,6 +124,10 @@
     <en>Dialog with border</en>
     <ch>带边框对话框</ch>
   </t>
+  <t id="basic-dialog-with-border-fix">
+    <en>Dialog with fixed border</en>
+    <ch>带固定边框对话框</ch>
+  </t>
   <t id="basic-close">
     <en>Close</en>
     <ch>关闭</ch>

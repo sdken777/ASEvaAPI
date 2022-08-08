@@ -47,5 +47,30 @@ namespace ASEva.UIWpf
         {
             application.Run(window);
         }
+
+        public Control ConvertControlToEto(object platformControl)
+        {
+            if (platformControl == null) return null;
+            if (platformControl is System.Windows.FrameworkElement) return (platformControl as System.Windows.FrameworkElement).ToEto();
+            else return null;
+        }
+
+        public object ConvertControlToPlatform(Control etoControl)
+        {
+            if (etoControl == null) return null;
+            return etoControl.ToNative(true);
+        }
+
+        public bool RunDialog(DialogPanel panel)
+        {
+            if (panel.Mode == DialogPanel.DialogMode.Invalid) return false;
+
+            var element = panel.ToNative(true);
+            if (element == null) return false;
+
+            var dialog = new AppDialogWpf(element, panel);
+            dialog.ShowDialog();
+            return true;
+        }
     }
 }

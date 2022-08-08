@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UICoreWF.APIInfo">
             <summary>
-            version=2.2.5
+            version=2.3.0
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.APIInfo.GetAPIVersion">
@@ -14,6 +14,23 @@
             (api:corewf=2.0.0) 获取API版本
             </summary>
             <returns>API版本</returns>
+        </member>
+        <member name="F:ASEva.UICoreWF.AppDialogCoreWF.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.AppDialogCoreWF.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.AppDialogCoreWF.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
         </member>
         <member name="T:ASEva.UICoreWF.BaseGraph">
             <summary>

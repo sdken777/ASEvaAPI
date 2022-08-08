@@ -5,15 +5,12 @@ using Eto.Drawing;
 
 namespace ASEvaAPIEtoTest
 {
-    class Startup : Dialog
+    class Startup : DialogPanel
     {
         public Startup()
         {
-            WindowStyle = WindowStyle.None;
             Icon = Icon.FromResource("icon.png");
-            this.SetMinimumClientSize(350, 50);
-            this.SetClientSize(350, 50);
-            Resizable = false;
+            SetFixMode(350, 50, false);
 
             var layout = this.SetContentAsRowLayout();
             layout.AddLabel("Language: ");
@@ -22,19 +19,16 @@ namespace ASEvaAPIEtoTest
             layout.AddButton("OK").Click += delegate { this.Close(); };
         }
 
-        public String LanguageCode
+        public override void OnClosing()
         {
-            get
+            switch (radioButtonList.SelectedIndex)
             {
-                switch (radioButtonList.SelectedIndex)
-                {
-                    case 0:
-                        return "en";
-                    case 1:
-                        return "ch";
-                    default:
-                        return null;
-                }
+                case 0:
+                    StringResult = "en";
+                    break;
+                case 1:
+                    StringResult = "ch";
+                    break;
             }
         }
 

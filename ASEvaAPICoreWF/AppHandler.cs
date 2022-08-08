@@ -61,5 +61,30 @@ namespace ASEva.UICoreWF
         {
             application.Run(window);
         }
+
+        public Control ConvertControlToEto(object platformControl)
+        {
+            if (platformControl == null) return null;
+            if (platformControl is System.Windows.Forms.Control) return (platformControl as System.Windows.Forms.Control).ToEto();
+            else return null;
+        }
+
+        public object ConvertControlToPlatform(Control etoControl)
+        {
+            if (etoControl == null) return null;
+            return etoControl.ToNative(true);
+        }
+
+        public bool RunDialog(DialogPanel panel)
+        {
+            if (panel.Mode == DialogPanel.DialogMode.Invalid) return false;
+
+            var winformControl = (System.Windows.Forms.Control)panel.ToNative(true);
+            if (winformControl == null) return false;
+
+            var dialog = new AppDialogCoreWF(winformControl, panel);
+            dialog.ShowDialog();
+            return true;
+        }
     }
 }

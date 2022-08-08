@@ -96,6 +96,31 @@ namespace ASEva.UIGtk
             application.Run(window);
         }
 
+        public Control ConvertControlToEto(object platformControl)
+        {
+            if (platformControl is Gtk.Widget) return (platformControl as Gtk.Widget).ToEto();
+            else return null;
+        }
+
+        public object ConvertControlToPlatform(Control etoControl)
+        {
+            return etoControl.ToNative(true);
+        }
+
+        public bool RunDialog(DialogPanel panel)
+        {
+            if (panel.Mode == DialogPanel.DialogMode.Invalid) return false;
+
+            var widget = panel.ToNative(true);
+            if (widget == null) return false;
+
+            var appDialog = new AppDialogGtk(widget, panel);
+            appDialog.TransientFor = DialogHelper.TopWindow;
+            appDialog.Run();
+            appDialog.Dispose();
+            return true;
+        }
+
         private String queryUIBackend()
         {
             try

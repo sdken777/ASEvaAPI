@@ -12,6 +12,9 @@ namespace ASEva.UIEto
         Application CreateApp(out String uiBackend, out String webViewBackend);
         void RunApp(Application application, Form window);
         Font CreateDefaultFont();
+        Control ConvertControlToEto(object platformControl);
+        object ConvertControlToPlatform(Control etoControl);
+        bool RunDialog(DialogPanel panel);
     }
 
     /// <summary>
@@ -154,6 +157,39 @@ namespace ASEva.UIEto
                 }
                 return workDir;
             }
+        }
+
+        /// <summary>
+        /// (api:eto=2.8.0) 将平台特化控件转化为Eto控件
+        /// </summary>
+        /// <param name="platformControl">平台特化控件</param>
+        /// <returns>Eto控件，若转化失败则返回null</returns>
+        public static Control ConvertControlToEto(object platformControl)
+        {
+            if (handler == null || platformControl == null) return null;
+            return handler.ConvertControlToEto(platformControl);
+        }
+
+        /// <summary>
+        /// (api:eto=2.8.0) 将Eto控件转化为平台特化控件
+        /// </summary>
+        /// <param name="etoControl">Eto控件</param>
+        /// <returns>平台特化控件，若转化失败则返回null</returns>
+        public static object ConvertControlToPlatform(Control etoControl)
+        {
+            if (handler == null || etoControl == null) return null;
+            return handler.ConvertControlToPlatform(etoControl);
+        }
+
+        /// <summary>
+        /// (api:eto=2.8.0) 弹出对话框
+        /// </summary>
+        /// <param name="panel">对话框主面板</param>
+        /// <returns>是否成功弹出，对话框的运行结果应通过主面板的各Result属性获取</returns>
+        public static bool RunDialog(DialogPanel panel)
+        {
+            if (handler == null || panel == null) return false;
+            return handler.RunDialog(panel);
         }
 
         private static String[] getAvailableUICodes()

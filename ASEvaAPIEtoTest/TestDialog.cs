@@ -6,16 +6,14 @@ using Eto.Drawing;
 
 namespace ASEvaAPIEtoTest
 {
-    class TestDialog : Dialog
+    class TestDialog : DialogPanel
     {
-        public TestDialog(bool withBorder, TextResource t)
+        public TestDialog(bool fixSize, bool withBorder, TextResource t)
         {
-            WindowStyle = withBorder ? WindowStyle.Default : WindowStyle.None;
             Icon = Icon.FromResource("icon.png");
             Title = t["title-dialog"];
-            this.SetClientSize(800, 400);
-            this.SetMinimumClientSize(600, 300);
-            Resizable = withBorder;
+            if (fixSize) SetFixMode(800, 400, withBorder);
+            else SetResizableMode(600, 300, 800, 400);
 
             var layout = this.SetContentAsRowLayout();
             layout.AddLinkButton(t["basic-client-size"], true).Click += (sender, args) =>

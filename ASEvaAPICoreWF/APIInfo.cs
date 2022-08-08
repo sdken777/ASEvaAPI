@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于.net core winform的部分。详见 ASEva.UICoreWF \n
- * 本文档对应API版本：2.2.5
+ * 本文档对应API版本：2.3.0
  */
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// version=2.2.5
+    /// version=2.3.0
     /// </summary>
     public class APIInfo
     {
@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 5, 0); // 新增SliderHandler
+            return new Version(2, 3, 0, 0); // 实现AppHandler控件转换和弹出对话框接口
         }
     }
 }
