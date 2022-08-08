@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.7.1
+            version=2.8.0
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -80,6 +80,27 @@
             (api:eto=2.1.0) 获取应用程序的工作路径
             </summary>
             <value>工作路径</value>
+        </member>
+        <member name="M:ASEva.UIEto.App.ConvertControlToEto(System.Object)">
+            <summary>
+            (api:eto=2.8.0) 将平台特化控件转化为Eto控件
+            </summary>
+            <param name="platformControl">平台特化控件</param>
+            <returns>Eto控件，若转化失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.ConvertControlToPlatform(Eto.Forms.Control)">
+            <summary>
+            (api:eto=2.8.0) 将Eto控件转化为平台特化控件
+            </summary>
+            <param name="etoControl">Eto控件</param>
+            <returns>平台特化控件，若转化失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.RunDialog(ASEva.UIEto.DialogPanel)">
+            <summary>
+            (api:eto=2.8.0) 弹出对话框
+            </summary>
+            <param name="panel">对话框主面板</param>
+            <returns>是否成功弹出，对话框的运行结果应通过主面板的各Result属性获取</returns>
         </member>
         <member name="T:ASEva.UIEto.ButtonPanel">
             <summary>
@@ -249,6 +270,113 @@
         <member name="M:ASEva.UIEto.ConfigPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.DialogPanel">
+            <summary>
+            (api:eto=2.8.0) 对话框主面板（使用 ASEva.UIEto.App.RunDialog 弹出对话框）
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.Icon">
+            <summary>
+            对话框图标
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.Title">
+            <summary>
+            对话框标题
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.DialogPanel.SetFixMode(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            初始化为固定大小模式
+            </summary>
+            <param name="fixWidth">固定逻辑宽度，至少100</param>
+            <param name="fixHeight">固定逻辑高度，至少20</param>
+            <param name="withBorder">是否带窗口边框</param>
+        </member>
+        <member name="M:ASEva.UIEto.DialogPanel.SetResizableMode(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            初始化为可变大小模式
+            </summary>
+            <param name="minWidth">最小逻辑宽度，至少100</param>
+            <param name="minHeight">最小逻辑高度，至少20</param>
+            <param name="defaultWidth">初始逻辑宽度</param>
+            <param name="defaultHeight">初始逻辑高度</param>
+        </member>
+        <member name="M:ASEva.UIEto.DialogPanel.Close">
+            <summary>
+            关闭对话框
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.DialogPanel.OnClosing">
+            <summary>
+            对话框即将关闭回调函数
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.BoolResult">
+            <summary>
+            布尔类型的对话框运行结果
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.IntResult">
+            <summary>
+            整数类型的对话框运行结果
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.DoubleResult">
+            <summary>
+            浮点类型的对话框运行结果
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.StringResult">
+            <summary>
+            字符串类型的对话框运行结果
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.ObjectResult">
+            <summary>
+            任意类型的对话框运行结果
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.DialogPanel.DialogMode">
+            <summary>
+            对话框模式
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.DialogPanel.DialogMode.Invalid">
+            <summary>
+            未初始化
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.DialogPanel.DialogMode.FixMode">
+            <summary>
+            固定大小模式
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.DialogPanel.DialogMode.ResizableMode">
+            <summary>
+            可变大小模式
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.Mode">
+            <summary>
+            获取对话框模式
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.MinSize">
+            <summary>
+            获取对话框最小逻辑尺寸（固定大小模式下即该固定逻辑尺寸）
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.DefaultSize">
+            <summary>
+            获取对话框初始逻辑尺寸
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.WithBorder">
+            <summary>
+            获取是否带窗口边框
             </summary>
         </member>
         <member name="T:ASEva.UIEto.CommonImageExtensions">
@@ -1463,6 +1591,12 @@
             <summary>
             [可选实现] 在需要更新界面时被调用。所有与界面相关的更新应全部放在此函数内实现。需要注意，窗口隐藏时将不会调用此函数
             </summary>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnUpdateContainerSize(ASEva.IntSize)">
+            <summary>
+            (api:eto=2.7.2) [可选实现] 在容器尺寸变化后被调用
+            </summary>
+            <param name="containerSize">变化后的容器尺寸</param>
         </member>
         <member name="M:ASEva.UIEto.WindowPanel.OnRelease">
             <summary>

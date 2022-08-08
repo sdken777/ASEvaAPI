@@ -58,5 +58,23 @@ namespace ASEva.UIMonoMac
         {
             application.Run(window);
         }
+
+        public Control ConvertControlToEto(object platformControl)
+        {
+            if (platformControl == null) return null;
+            if (platformControl is NSView) return (platformControl as NSView).ToEto();
+            else return null;
+        }
+
+        public object ConvertControlToPlatform(Control etoControl)
+        {
+            if (etoControl == null) return null;
+            return etoControl.ToNative(true);
+        }
+
+        public bool RunDialog(DialogPanel panel)
+        {
+            return false;
+        }
     }
 }
