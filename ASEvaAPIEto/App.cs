@@ -194,6 +194,7 @@ namespace ASEva.UIEto
             if (runOK) return true;
 
             var dialogEto = new AppDialogEto(panel);
+            dialogEto.MoveToCenter();
             dialogEto.ShowModal();
             return true;
         }
