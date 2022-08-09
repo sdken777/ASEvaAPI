@@ -189,7 +189,13 @@ namespace ASEva.UIEto
         public static bool RunDialog(DialogPanel panel)
         {
             if (handler == null || panel == null) return false;
-            return handler.RunDialog(panel);
+            
+            var runOK = handler.RunDialog(panel);
+            if (runOK) return true;
+
+            var dialogEto = new AppDialogEto(panel);
+            dialogEto.ShowModal();
+            return true;
         }
 
         private static String[] getAvailableUICodes()

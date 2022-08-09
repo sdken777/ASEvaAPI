@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于Eto.Forms的部分。详见 ASEva.UIEto \n
- * 本文档对应API版本：2.8.0\n
+ * 本文档对应API版本：2.8.1\n
  * \n
  * Eto.Forms官方仓库: https://github.com/picoe/Eto \n
  * 镜像仓库: https://hub.fastgit.org/picoe/Eto \n
@@ -12,7 +12,7 @@ using System;
 namespace ASEva.UIEto
 {
     /// <summary>
-    /// version=2.8.0
+    /// version=2.8.1
     /// </summary>
     public class APIInfo
     {
@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 0, 0); // 新增DialogPanel。新增App.ConvertControlToEto, ConvertControlToPlatform, RunDialog
+            return new Version(2, 8, 1, 0); // App.RunDialog增加默认的Eto实现
         }
     }
 }
