@@ -128,6 +128,7 @@ namespace ASEva.UICoreWF
 
 		protected virtual void OnPaint(swf.PaintEventArgs e)
 		{
+			e.Graphics.TextRenderingHint = sd.Text.TextRenderingHint.AntiAliasGridFit;
 			using (var g = e.Graphics.ToEto(false))
 			{
 				g.SetScaleForLogical();

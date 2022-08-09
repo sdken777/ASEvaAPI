@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 0, 0); // 实现AppHandler控件转换和弹出对话框接口
+            return new Version(2, 3, 0, 1); // 修正Drawable未设置文字反锯齿问题
         }
     }
 }
