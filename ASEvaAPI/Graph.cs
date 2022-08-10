@@ -388,7 +388,8 @@ namespace ASEva
                 if (comps.Length < 3 || (comps[0] != "ASEva Report" && comps[0] != "ASEva Report v2")) return null;
 
                 bool isV2 = comps[0] == "ASEva Report v2";
-                var id = Convert.ToInt32(comps[1]);
+                int id;
+                if (!Int32.TryParse(comps[1], out id)) return null;
                 var title = comps[2];
 
                 var paramList = new List<String>();
@@ -437,7 +438,7 @@ namespace ASEva
                     comps = rows[i].Split(',');
                     for (int j = 0; j < cols; j++)
                     {
-                        data[i, j] = Convert.ToDouble(comps[j]);
+                        Double.TryParse(comps[j], out data[i, j]);
                     }
                 }
 

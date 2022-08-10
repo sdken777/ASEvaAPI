@@ -246,11 +246,17 @@ namespace ASEva.Graph
         {
             if (Definition.Config[4] == "XValues")
             {
-                var output = new HistLineXValues();
-                output.Base = Convert.ToDouble(Definition.Config[5]);
-                output.Step = Convert.ToDouble(Definition.Config[6]);
-                output.Count = Convert.ToInt32(Definition.Config[7]);
-                return output;
+                double b, s;
+                int c;
+                if (Double.TryParse(Definition.Config[5], out b) && Double.TryParse(Definition.Config[6], out s) && Int32.TryParse(Definition.Config[7], out c))
+                {
+                    var output = new HistLineXValues();
+                    output.Base = b;
+                    output.Step = s;
+                    output.Count = c;
+                    return output;
+                }
+                else return null;
             }
             else
             {
@@ -367,8 +373,9 @@ namespace ASEva.Graph
             }
             else
             {
-                double bas = Convert.ToDouble(Definition.Config[5]);
-                double step = Convert.ToDouble(Definition.Config[6]);
+                double bas = 0, step = 0;
+                Double.TryParse(Definition.Config[5], out bas);
+                Double.TryParse(Definition.Config[6], out step);
                 for (int i = 0; i < samples.Length; i++)
                 {
                     samples[i].Name = (bas + i * step) + "~" + (bas + (i + 1) * step);
@@ -402,7 +409,7 @@ namespace ASEva.Graph
             var rows = 0;
             if (Definition.Config[4] == "XValues")
             {
-                rows = Convert.ToInt32(Definition.Config[7]);
+                Int32.TryParse(Definition.Config[7], out rows);
             }
             else if (Definition.Config[4] == "XLabels")
             {
@@ -412,8 +419,9 @@ namespace ASEva.Graph
             var lineEnabled = IsLineEnabled();
             Data = new double[rows, lineEnabled ? 4 : 2];
 
-            var defaultHistValue = Convert.ToDouble(Definition.Config[2]);
-            var defaultLineValue = Convert.ToDouble(Definition.Config[3]);
+            double defaultHistValue = 0, defaultLineValue = 0;
+            Double.TryParse(Definition.Config[2], out defaultHistValue);
+            Double.TryParse(Definition.Config[3], out defaultLineValue);
             for (int i = 0; i < rows; i++)
             {
                 Data[i, 0] = defaultHistValue;
@@ -609,7 +617,7 @@ namespace ASEva.Graph
             var rows = 0;
             if (Definition.Config[4] == "XValues")
             {
-                rows = Convert.ToInt32(Definition.Config[7]);
+                if (!Int32.TryParse(Definition.Config[7], out rows)) return false;
             }
             else if (Definition.Config[4] == "XLabels")
             {
@@ -617,8 +625,10 @@ namespace ASEva.Graph
             }
 
             var lineEnabled = IsLineEnabled();
-            var defaultHistValue = Convert.ToDouble(Definition.Config[2]);
-            var defaultLineValue = Convert.ToDouble(Definition.Config[3]);
+            double defaultHistValue = 0;
+            double defaultLineValue = 0;
+            Double.TryParse(Definition.Config[2], out defaultHistValue);
+            Double.TryParse(Definition.Config[3], out defaultLineValue);
             for (int i = 0; i < rows; i++)
             {
                 if (Data[i, 0] != defaultHistValue) return true;
@@ -676,9 +686,8 @@ namespace ASEva.Graph
             }
             else
             {
-                double bas = Convert.ToDouble(Definition.Config[5]);
-                double step = Convert.ToDouble(Definition.Config[6]);
-                double count = Convert.ToDouble(Definition.Config[7]);
+                double bas, step, count;
+                if (!Double.TryParse(Definition.Config[5], out bas) || !Double.TryParse(Definition.Config[6], out step) || !Double.TryParse(Definition.Config[7], out count)) return;
 
                 var index = (x - bas) / step;
                 if (index < 0 || index >= count) return;

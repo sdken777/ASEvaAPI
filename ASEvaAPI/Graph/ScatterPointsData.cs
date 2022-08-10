@@ -130,7 +130,10 @@ namespace ASEva.Graph
         /// <returns>x轴范围</returns>
         public ScatterRange GetXRange()
         {
-            return new ScatterRange(Convert.ToDouble(Definition.Config[0]), Convert.ToDouble(Definition.Config[1]));
+            double lower = 0, upper = 0;
+            Double.TryParse(Definition.Config[0], out lower);
+            Double.TryParse(Definition.Config[1], out upper);
+            return new ScatterRange(lower, upper);
         }
 
         /// <summary>
@@ -139,7 +142,10 @@ namespace ASEva.Graph
         /// <returns>y轴范围</returns>
         public ScatterRange GetYRange()
         {
-            return new ScatterRange(Convert.ToDouble(Definition.Config[2]), Convert.ToDouble(Definition.Config[3]));
+            double lower = 0, upper = 0;
+            Double.TryParse(Definition.Config[2], out lower);
+            Double.TryParse(Definition.Config[3], out upper);
+            return new ScatterRange(lower, upper);
         }
 
         /// <summary>
@@ -151,7 +157,8 @@ namespace ASEva.Graph
             int? xHistCount = null;
             if (Definition.Config.Count >= 6)
             {
-                int val = Convert.ToInt32(Definition.Config[4]);
+                int val = 0;
+                Int32.TryParse(Definition.Config[4], out val);
                 if (val > 0) xHistCount = val;
             }
 
@@ -200,7 +207,8 @@ namespace ASEva.Graph
             int? yHistCount = null;
             if (Definition.Config.Count >= 6)
             {
-                int val = Convert.ToInt32(Definition.Config[5]);
+                int val = 0;
+                Int32.TryParse(Definition.Config[5], out val);
                 if (val > 0) yHistCount = val;
             }
 

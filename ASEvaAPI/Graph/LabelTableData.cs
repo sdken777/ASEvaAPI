@@ -126,7 +126,9 @@ namespace ASEva.Graph
         /// <returns>x轴标签个数</returns>
         public int GetXLabelCount()
         {
-            return Convert.ToInt32(Definition.Config[1]);
+            int val;
+            Int32.TryParse(Definition.Config[1], out val);
+            return val;
         }
 
         /// <summary>
@@ -135,7 +137,9 @@ namespace ASEva.Graph
         /// <returns>y轴标签个数</returns>
         public int GetYLabelCount()
         {
-            return Convert.ToInt32(Definition.Config[2]);
+            int val;
+            Int32.TryParse(Definition.Config[2], out val);
+            return val;
         }
 
         /// <summary>
@@ -144,7 +148,8 @@ namespace ASEva.Graph
         /// <returns>x轴标签列表</returns>
         public String[] GetXLabels()
         {
-            int count = Convert.ToInt32(Definition.Config[1]);
+            int count = 0;
+            Int32.TryParse(Definition.Config[1], out count);
             var output = new String[count];
             for (int i = 0; i < count; i++)
             {
@@ -159,8 +164,9 @@ namespace ASEva.Graph
         /// <returns>y轴标签列表</returns>
         public String[] GetYLabels()
         {
-            int xcount = Convert.ToInt32(Definition.Config[1]);
-            int ycount = Convert.ToInt32(Definition.Config[2]);
+            int xcount = 0, ycount = 0;
+            Int32.TryParse(Definition.Config[1], out xcount);
+            Int32.TryParse(Definition.Config[2], out ycount);
             var output = new String[ycount];
             for (int i = 0; i < ycount; i++)
             {
@@ -184,7 +190,9 @@ namespace ASEva.Graph
         /// <returns>默认值</returns>
         public double GetDefaultValue()
         {
-            return Convert.ToDouble(Definition.Config[4]);
+            double val = 0;
+            Double.TryParse(Definition.Config[4], out val);
+            return val;
         }
 
         /// <summary>
@@ -194,9 +202,12 @@ namespace ASEva.Graph
         public double[] GetXHistValues()
         {
             var mode = (LabelTableMode)Enum.Parse(typeof(LabelTableMode), Definition.Config[0]);
-            var defaultValue = Convert.ToDouble(Definition.Config[4]);
-            var xcount = Convert.ToInt32(Definition.Config[1]);
-            var ycount = Convert.ToInt32(Definition.Config[2]);
+
+            double defaultValue = 0;
+            int xcount = 0, ycount = 0;
+            Double.TryParse(Definition.Config[4], out defaultValue);
+            Int32.TryParse(Definition.Config[1], out xcount);
+            Int32.TryParse(Definition.Config[2], out ycount);
 
             if (mode == LabelTableMode.Percentage)
             {
@@ -274,9 +285,12 @@ namespace ASEva.Graph
         public double[] GetYHistValues()
         {
             var mode = (LabelTableMode)Enum.Parse(typeof(LabelTableMode), Definition.Config[0]);
-            var defaultValue = Convert.ToDouble(Definition.Config[4]);
-            var xcount = Convert.ToInt32(Definition.Config[1]);
-            var ycount = Convert.ToInt32(Definition.Config[2]);
+
+            double defaultValue = 0;
+            int xcount = 0, ycount = 0;
+            Double.TryParse(Definition.Config[4], out defaultValue);
+            Int32.TryParse(Definition.Config[1], out xcount);
+            Int32.TryParse(Definition.Config[2], out ycount);
 
             if (mode == LabelTableMode.Percentage)
             {
@@ -365,8 +379,9 @@ namespace ASEva.Graph
         /// <param name="value">数值样本</param>
         public void AddSample(int x, int y, double value)
         {
-            int xcount = Convert.ToInt32(Definition.Config[1]);
-            int ycount = Convert.ToInt32(Definition.Config[2]);
+            int xcount = 0, ycount = 0;
+            Int32.TryParse(Definition.Config[1], out xcount);
+            Int32.TryParse(Definition.Config[2], out ycount);
 
             if (x < 0 || x >= xcount || y < 0 || y >= ycount) return;
 
@@ -408,8 +423,9 @@ namespace ASEva.Graph
         /// <returns>标签表数据</returns>
         public double[,] GetValues()
         {
-            int xc = Convert.ToInt32(Definition.Config[1]);
-            int yc = Convert.ToInt32(Definition.Config[2]);
+            int xc = 0, yc = 0;
+            Int32.TryParse(Definition.Config[1], out xc);
+            Int32.TryParse(Definition.Config[2], out yc);
 
             double k = 1;
             var mode = (LabelTableMode)Enum.Parse(typeof(LabelTableMode), Definition.Config[0]);
@@ -439,11 +455,13 @@ namespace ASEva.Graph
 
         public override void InitParamsAndData()
         {
-            int xr = Convert.ToInt32(Definition.Config[1]);
-            int yr = Convert.ToInt32(Definition.Config[2]);
+            int xr = 0, yr = 0;
+            Int32.TryParse(Definition.Config[1], out xr);
+            Int32.TryParse(Definition.Config[2], out yr);
             Data = new double[xr, yr * 2];
 
-            double defaultValue = Convert.ToDouble(Definition.Config[4]);
+            double defaultValue = 0;
+            Double.TryParse(Definition.Config[4], out defaultValue);
             for (int x = 0; x < xr; x++)
             {
                 for (int y = 0; y < yr; y++)
@@ -455,8 +473,9 @@ namespace ASEva.Graph
 
         public override void MergeWith(GraphData data)
         {
-            int xc = Convert.ToInt32(Definition.Config[1]);
-            int yc = Convert.ToInt32(Definition.Config[2]);
+            int xc = 0, yc = 0;
+            Int32.TryParse(Definition.Config[1], out xc);
+            Int32.TryParse(Definition.Config[2], out yc);
 
             var mode = (LabelTableMode)Enum.Parse(typeof(LabelTableMode), Definition.Config[0]);
             switch (mode)
@@ -514,9 +533,14 @@ namespace ASEva.Graph
         public override bool HasData()
         {
             if (Data.Length == 0) return false;
-            int xr = Convert.ToInt32(Definition.Config[1]);
-            int yr = Convert.ToInt32(Definition.Config[2]);
-            double defaultValue = Convert.ToDouble(Definition.Config[4]);
+
+            int xr = 0, yr = 0;
+            Int32.TryParse(Definition.Config[1], out xr);
+            Int32.TryParse(Definition.Config[2], out yr);
+            
+            double defaultValue = 0;
+            Double.TryParse(Definition.Config[4], out defaultValue);
+
             for (int x = 0; x < xr; x++)
             {
                 for (int y = 0; y < yr; y++)

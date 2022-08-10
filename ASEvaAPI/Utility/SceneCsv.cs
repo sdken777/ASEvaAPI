@@ -58,8 +58,9 @@ namespace ASEva.Utility
                     if (sceneID.Length == 0) continue;
 
                     var session = DateTime.ParseExact(comps[0], "yyyyMMdd-HH-mm-ss", null);
-                    var startTime = Convert.ToDouble(comps[1]);
-                    var length = Convert.ToDouble(comps[2]);
+
+                    double startTime, length;
+                    if (!Double.TryParse(comps[1], out startTime) || !Double.TryParse(comps[2], out length)) continue;
 
                     var scene = new SceneData();
                     scene.SceneID = sceneID;

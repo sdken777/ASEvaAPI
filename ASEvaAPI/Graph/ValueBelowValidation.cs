@@ -46,8 +46,7 @@ namespace ASEva.Graph
         public bool FromStringList(List<string> stringList)
         {
             if (stringList.Count < 3) return false;
-
-            thresh = Convert.ToDouble(stringList[1]);
+            if (!Double.TryParse(stringList[1], out thresh)) return false;
 
             double tmp = 0;
             if (Double.TryParse(stringList[2], out tmp)) okPercentage = tmp;

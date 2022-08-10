@@ -125,7 +125,12 @@ namespace ASEva.Utility
                 {
                     return false;
                 }
-                if (Convert.ToUInt16(IPs[i]) > 255)
+                ushort ip;
+                if (!UInt16.TryParse(IPs[i], out ip))
+                {
+                    return false;
+                }
+                if (ip > 255)
                 {
                     return false;
                 }

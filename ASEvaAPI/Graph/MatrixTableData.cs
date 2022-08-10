@@ -166,12 +166,18 @@ namespace ASEva.Graph
         /// <returns>x轴范围</returns>
         public MatrixTableRange GetXRange()
         {
-            return new MatrixTableRange()
+            double b, s;
+            int c;
+            if (Double.TryParse(Definition.Config[1], out b) && Double.TryParse(Definition.Config[2], out s) && Int32.TryParse(Definition.Config[3], out c))
             {
-                Base = Convert.ToDouble(Definition.Config[1]),
-                Step = Convert.ToDouble(Definition.Config[2]),
-                Count = Convert.ToInt32(Definition.Config[3]),
-            };
+                return new MatrixTableRange()
+                {
+                    Base = b,
+                    Step = s,
+                    Count = c,
+                };
+            }
+            else return null;
         }
 
         /// <summary>
@@ -180,12 +186,18 @@ namespace ASEva.Graph
         /// <returns>y轴范围</returns>
         public MatrixTableRange GetYRange()
         {
-            return new MatrixTableRange()
+            double b, s;
+            int c;
+            if (Double.TryParse(Definition.Config[4], out b) && Double.TryParse(Definition.Config[5], out s) && Int32.TryParse(Definition.Config[6], out c))
             {
-                Base = Convert.ToDouble(Definition.Config[4]),
-                Step = Convert.ToDouble(Definition.Config[5]),
-                Count = Convert.ToInt32(Definition.Config[6]),
-            };
+                return new MatrixTableRange()
+                {
+                    Base = b,
+                    Step = s,
+                    Count = c,
+                };
+            }
+            else return null;
         }
 
         /// <summary>
@@ -194,7 +206,10 @@ namespace ASEva.Graph
         /// <returns>矩阵表数据参考范围</returns>
         public MatrixTableValueRefRange GetValueRefRange()
         {
-            return new MatrixTableValueRefRange(Convert.ToDouble(Definition.Config[7]), Convert.ToDouble(Definition.Config[8]));
+            double lower = 0, upper = 0;
+            Double.TryParse(Definition.Config[7], out lower);
+            Double.TryParse(Definition.Config[8], out upper);
+            return new MatrixTableValueRefRange(lower, upper);
         }
 
         /// <summary>
@@ -204,7 +219,8 @@ namespace ASEva.Graph
         public double[] GetXHistValues()
         {
             var mode = (MatrixTableMode)Enum.Parse(typeof(MatrixTableMode), Definition.Config[0]);
-            var defaultValue = Convert.ToDouble(Definition.Config[11]);
+            double defaultValue;
+            Double.TryParse(Definition.Config[11], out defaultValue);
             var xcount = GetXRange().Count;
             var ycount = GetYRange().Count;
 
@@ -285,7 +301,8 @@ namespace ASEva.Graph
         public double[] GetYHistValues()
         {
             var mode = (MatrixTableMode)Enum.Parse(typeof(MatrixTableMode), Definition.Config[0]);
-            var defaultValue = Convert.ToDouble(Definition.Config[11]);
+            double defaultValue;
+            Double.TryParse(Definition.Config[11], out defaultValue);
             var xcount = GetXRange().Count;
             var ycount = GetYRange().Count;
 
@@ -458,7 +475,8 @@ namespace ASEva.Graph
             var yr = GetYRange().Count;
             Data = new double[xr, yr * 2];
 
-            double defaultValue = Convert.ToDouble(Definition.Config[11]);
+            double defaultValue;
+            Double.TryParse(Definition.Config[11], out defaultValue);
             for (int x = 0; x < xr; x++)
             {
                 for (int y = 0; y < yr; y++)
@@ -531,7 +549,8 @@ namespace ASEva.Graph
             if (Data.Length == 0) return false;
             var xr = GetXRange().Count;
             var yr = GetYRange().Count;
-            double defaultValue = Convert.ToDouble(Definition.Config[11]);
+            double defaultValue;
+            Double.TryParse(Definition.Config[11], out defaultValue);
             for (int x = 0; x < xr; x++)
             {
                 for (int y = 0; y < yr; y++)

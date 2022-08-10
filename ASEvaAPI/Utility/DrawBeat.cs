@@ -10,12 +10,21 @@ namespace ASEva.Utility
     public class DrawBeat
     {
         /// <summary>
+        /// (api:app=2.6.9) 启用绘图时间记录与反馈（默认不启用）
+        /// </summary>
+        public static void Enable()
+        {
+            enabled = true;
+        }
+
+        /// <summary>
         /// 在调用绘图前调用
         /// </summary>
         /// <param name="id">绘图对象ID</param>
         /// <returns>是否可调用绘图</returns>
         public static bool CallerBegin(int id)
         {
+            if (!enabled) return true;
             if (!ctxs.ContainsKey(id))
             {
                 ctxs[id] = new DrawBeatContext();
@@ -38,6 +47,7 @@ namespace ASEva.Utility
         /// <returns>是否可调用绘图</returns>
         public static bool CallerBegin(object target)
         {
+            if (!enabled) return true;
             if (target == null) return false;
             else return CallerBegin(target.GetHashCode());
         }
@@ -48,6 +58,7 @@ namespace ASEva.Utility
         /// <param name="id">绘图对象ID</param>
         public static void CallerEnd(int id)
         {
+            if (!enabled) return;
             if (!ctxs.ContainsKey(id)) return;
             ctxs[id].InCaller = false;
         }
@@ -58,6 +69,7 @@ namespace ASEva.Utility
         /// <param name="target">绘图对象</param>
         public static void CallerEnd(object target)
         {
+            if (!enabled) return;
             if (target != null) CallerEnd(target.GetHashCode());
         }
 
@@ -68,6 +80,7 @@ namespace ASEva.Utility
         /// <param name="category">类别，设为空表示不归类</param>
         public static void CallbackBegin(int id, String category)
         {
+            if (!enabled) return;
             if (!ctxs.ContainsKey(id)) ctxs[id] = new DrawBeatContext();
             ctxs[id].Category = category == null ? "" : category;
             if (ctxs[id].CallbackBeginTime == null) ctxs[id].CallbackBeginTime = DateTime.Now;
@@ -80,6 +93,7 @@ namespace ASEva.Utility
         /// <param name="category">类别，设为空表示不归类</param>
         public static void CallbackBegin(object target, String category)
         {
+            if (!enabled) return;
             if (target != null) CallbackBegin(target.GetHashCode(), category);
         }
 
@@ -89,6 +103,7 @@ namespace ASEva.Utility
         /// <param name="id">绘图对象ID</param>
         public static void CallbackEnd(int id)
         {
+            if (!enabled) return;
             if (!ctxs.ContainsKey(id)) return;
             if (ctxs[id].CallbackBeginTime != null)
             {
@@ -121,6 +136,7 @@ namespace ASEva.Utility
         /// <param name="target">绘图对象</param>
         public static void CallbackEnd(object target)
         {
+            if (!enabled) return;
             if (target != null) CallbackEnd(target.GetHashCode());
         }
 
@@ -129,6 +145,8 @@ namespace ASEva.Utility
         /// </summary>
         public static void DownSize()
         {
+            if (!enabled) return;
+            
             double latestTime = 0;
             foreach (var pair in ctxs)
             {
@@ -166,6 +184,8 @@ namespace ASEva.Utility
         public static Dictionary<int, double> GetRecentCallbackAverageTime()
         {
             var table = new Dictionary<int, double>();
+            if (!enabled) return table;
+            
             foreach (var pair in ctxs)
             {
                 if (pair.Value.RecentCallbackRanges.Count == 0) continue;
@@ -185,6 +205,8 @@ namespace ASEva.Utility
         public static Dictionary<String, double> PopOutCallerCallbackTime()
         {
             var table = new Dictionary<String, double>();
+            if (!enabled) return table;
+
             foreach (var pair in recentOutCallerCallbackRanges)
             {
                 double sum = 0;
@@ -203,6 +225,7 @@ namespace ASEva.Utility
         /// </summary>
         public static void SetDrawIntervals(Dictionary<int, int> intervals)
         {
+            if (!enabled) return;
             foreach (var pair in intervals)
             {
                 if (ctxs.ContainsKey(pair.Key)) ctxs[pair.Key].DrawInterval = pair.Value;
@@ -234,5 +257,6 @@ namespace ASEva.Utility
 
         private static Dictionary<int, DrawBeatContext> ctxs = new Dictionary<int, DrawBeatContext>();
         private static Dictionary<String, List<DateTimeRange>> recentOutCallerCallbackRanges = new Dictionary<string, List<DateTimeRange>>();
+        private static bool enabled = false;
     }
 }

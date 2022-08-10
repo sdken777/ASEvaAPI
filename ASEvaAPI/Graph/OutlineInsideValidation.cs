@@ -76,7 +76,9 @@ namespace ASEva.Graph
         public bool FromStringList(List<string> stringList)
         {
             if (stringList.Count < 3) return false;
-            var ptCount = Convert.ToInt32(stringList[1]);
+
+            int ptCount;
+            if (!Int32.TryParse(stringList[1], out ptCount)) return false;
             if (stringList.Count != 3 + ptCount * 2) return false;
 
             double tmp = 0;
@@ -86,8 +88,12 @@ namespace ASEva.Graph
             outline = new FloatPoint[ptCount];
             for (int i = 0; i < ptCount; i++)
             {
-                outline[i].X = Convert.ToSingle(stringList[3 + 2 * i]);
-                outline[i].Y = Convert.ToSingle(stringList[4 + 2 * i]);
+                float x, y;
+                if (Single.TryParse(stringList[3 + 2 * i], out x) && Single.TryParse(stringList[4 + 2 * i], out y))
+                {
+                    outline[i].X = x;
+                    outline[i].Y = y;
+                }
             }
 
             return true;

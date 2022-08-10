@@ -26,7 +26,12 @@ namespace ASEva.Utility
 
                 var fileNameComps = Path.GetFileNameWithoutExtension(file).Split('@');
                 loader.protocol = fileNameComps[0];
-                if (fileNameComps.Length >= 2) loader.channel = Convert.ToInt32(fileNameComps[1]);
+                if (fileNameComps.Length >= 2)
+                {
+                    int channel;
+                    if (!Int32.TryParse(fileNameComps[1], out channel)) return null;
+                    loader.channel = channel;
+                }
 
                 reader = new StreamReader(file);
                 var firstLine = reader.ReadLine();
@@ -113,7 +118,9 @@ namespace ASEva.Utility
                 if (comps.Length < timeColumnIndex + 2) continue;
 
                 var session = DateTime.ParseExact(comps[0], "yyyyMMdd-HH-mm-ss", null);
-                var offset = Convert.ToDouble(comps[timeColumnIndex]);
+
+                double offset;
+                if (!Double.TryParse(comps[timeColumnIndex], out offset)) return null;
 
                 var sample = new GeneralSample();
                 sample.Base = session;
@@ -172,7 +179,12 @@ namespace ASEva.Utility
                 var fileNameComps = Path.GetFileNameWithoutExtension(file).Split('@');
                 var protocol = fileNameComps[0];
                 int? channel = null;
-                if (fileNameComps.Length >= 2) channel = Convert.ToInt32(fileNameComps[1]);
+                if (fileNameComps.Length >= 2)
+                {
+                    int ch;
+                    if (!Int32.TryParse(fileNameComps[1], out ch)) return null;
+                    channel = ch;
+                }
 
                 var timeColumnIndex = 0;
 
@@ -212,7 +224,9 @@ namespace ASEva.Utility
                     if (comps.Length < timeColumnIndex + 2) continue;
 
                     var session = DateTime.ParseExact(comps[0], "yyyyMMdd-HH-mm-ss", null);
-                    var offset = Convert.ToDouble(comps[timeColumnIndex]);
+
+                    double offset;
+                    if (!Double.TryParse(comps[timeColumnIndex], out offset)) continue;
 
                     var sample = new GeneralSample();
                     sample.Base = session;

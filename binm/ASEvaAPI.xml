@@ -1783,7 +1783,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.8
+            version=2.6.9
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -6463,6 +6463,11 @@
         <member name="T:ASEva.Utility.DrawBeat">
             <summary>
             (api:app=2.2.2) 绘图时间记录与反馈
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.Enable">
+            <summary>
+            (api:app=2.6.9) 启用绘图时间记录与反馈（默认不启用）
             </summary>
         </member>
         <member name="M:ASEva.Utility.DrawBeat.CallerBegin(System.Int32)">

@@ -28,7 +28,12 @@ namespace ASEva.Utility
 
                 var fileNameComps = Path.GetFileNameWithoutExtension(file).Split('@');
                 output.protocol = fileNameComps[0];
-                if (fileNameComps.Length >= 2) output.channel = Convert.ToInt32(fileNameComps[1]);
+                if (fileNameComps.Length >= 2)
+                {
+                    int channel;
+                    if (!Int32.TryParse(fileNameComps[1], out channel)) return null;
+                    output.channel = channel;
+                }
 
                 writer = new StreamWriter(file, false, Encoding.UTF8);
 
