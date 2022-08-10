@@ -1775,9 +1775,15 @@
             <param name="nativeClassID">原生组件ID</param>
             <param name="funcID">函数ID</param>
         </member>
+        <member name="M:ASEva.Agency.IsGPURenderingDisabled">
+            <summary>
+            (api:app=2.6.8) 获取是否全局禁用GPU渲染
+            </summary>
+            <returns>是否全局禁用GPU渲染</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.7
+            version=2.6.10
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3427,6 +3433,12 @@
             [可选实现] 返回是否允许多个实例同时运行
             </summary>
             <returns>是否允许多个实例同时运行</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnCheckDisableGPURendering">
+            <summary>
+            [可选实现] 返回是否禁用GPU渲染
+            </summary>
+            <returns>是否禁用GPU渲染</returns>
         </member>
         <member name="M:ASEva.MainWorkflow.OnSelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
             <summary>
@@ -6457,6 +6469,11 @@
         <member name="T:ASEva.Utility.DrawBeat">
             <summary>
             (api:app=2.2.2) 绘图时间记录与反馈
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.DrawBeat.Enable">
+            <summary>
+            (api:app=2.6.9) 启用绘图时间记录与反馈（默认不启用）
             </summary>
         </member>
         <member name="M:ASEva.Utility.DrawBeat.CallerBegin(System.Int32)">

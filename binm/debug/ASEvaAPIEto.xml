@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.8.1
+            version=2.8.3
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -1308,6 +1308,12 @@
             构造函数
             </summary>
         </member>
+        <member name="M:ASEva.UIEto.GLView.#ctor(System.String)">
+            <summary>
+            (api:eto=2.8.3) 构造函数
+            </summary>
+            <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈</param>
+        </member>
         <member name="M:ASEva.UIEto.GLView.Close">
             <summary>
             关闭视图，释放资源
@@ -1431,6 +1437,19 @@
             构造函数
             </summary>
         </member>
+        <member name="M:ASEva.UIEto.SkiaView.#ctor(System.Boolean)">
+            <summary>
+            (api:eto=2.8.2) 构造函数
+            </summary>
+            <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaView.#ctor(System.String,System.Boolean)">
+            <summary>
+            (api:eto=2.8.3) 构造函数
+            </summary>
+            <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈</param>
+            <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
+        </member>
         <member name="M:ASEva.UIEto.SkiaView.Close">
             <summary>
             关闭视图，释放资源
@@ -1443,7 +1462,7 @@
         </member>
         <member name="P:ASEva.UIEto.SkiaView.ContextInfo">
             <summary>
-            底层的OpenGL上下文信息 (null表示还未初始化完成)
+            底层的OpenGL上下文信息 (null表示不使用或还未初始化完成)
             </summary>
         </member>
         <member name="P:ASEva.UIEto.SkiaView.FPS">

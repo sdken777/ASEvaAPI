@@ -6,6 +6,7 @@ using MonoMac.Foundation;
 using MonoMac.CoreText;
 using SharpGL;
 using ASEva.UIEto;
+using ASEva.Utility;
 
 namespace ASEva.UIMonoMac
 {
@@ -42,10 +43,11 @@ namespace ASEva.UIMonoMac
 
         public void QueueRender()
         {
-            if (Window != null && !Window.IsMiniaturized && !Hidden && !drawQueued)
+            if (Window != null && !Window.IsMiniaturized && !Hidden && !drawQueued && DrawBeat.CallerBegin(this))
             {
                 NeedsDisplay = true;
                 drawQueued = true;
+                DrawBeat.CallerEnd(this);
             }
         }
 
@@ -91,6 +93,9 @@ namespace ASEva.UIMonoMac
                 initStatus = InitStatus.InitOK;
             }
 
+            var moduleID = callback == null ? null : callback.OnGetModuleID();
+            DrawBeat.CallbackBegin(this, moduleID);
+
             OpenGLContext.MakeCurrentContext();
 
             var texts = new GLTextTasks();
@@ -112,6 +117,7 @@ namespace ASEva.UIMonoMac
             {
                 ClearGLContext();
                 initStatus = InitStatus.InitFailed;
+                DrawBeat.CallbackEnd(this);
                 return;
             }
 
@@ -210,6 +216,7 @@ namespace ASEva.UIMonoMac
             }
 
             drawQueued = false;
+            DrawBeat.CallbackEnd(this);
         }
 
         public override void Reshape()
