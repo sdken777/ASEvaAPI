@@ -1783,7 +1783,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.9
+            version=2.6.10
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3433,6 +3433,12 @@
             [可选实现] 返回是否允许多个实例同时运行
             </summary>
             <returns>是否允许多个实例同时运行</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnCheckDisableGPURendering">
+            <summary>
+            [可选实现] 返回是否禁用GPU渲染
+            </summary>
+            <returns>是否禁用GPU渲染</returns>
         </member>
         <member name="M:ASEva.MainWorkflow.OnSelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
             <summary>

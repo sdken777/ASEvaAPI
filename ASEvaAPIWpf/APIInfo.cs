@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于.net core wpf的部分。详见 ASEva.UIWpf \n
- * 本文档对应API版本：1.3.0
+ * 本文档对应API版本：1.3.1
  */
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace ASEva.UIWpf
 {
     /// <summary>
-    /// version=1.3.0
+    /// version=1.3.1
     /// </summary>
     public class APIInfo
     {
@@ -18,7 +18,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 3, 0, 0); // 实现AppHandler控件转换和弹出对话框接口
+            return new Version(1, 3, 1, 0); // GLViewBackend使用DrawBeat
         }
     }
 }

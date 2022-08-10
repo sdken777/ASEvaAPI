@@ -307,11 +307,17 @@ namespace ASEva.UIEto
 		/// </summary>
 		public GLView()
 		{
-			if (!Agency.IsGPURenderingDisabled() && Factory != null)
-			{
-				Factory.CreateGLViewBackend(this, out etoControl, out glViewBackend);
-				if (etoControl != null) Content = etoControl;
-			}
+			initContent();
+		}
+
+		/// <summary>
+		/// (api:eto=2.8.3) 构造函数
+		/// </summary>
+		/// <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈</param>
+		public GLView(String moduleID)
+		{
+			this.moduleID = moduleID;
+			initContent();
 		}
 
 		/// <summary>
@@ -399,6 +405,11 @@ namespace ASEva.UIEto
 			OnMouseWheel(args);
 		}
 
+        public string OnGetModuleID()
+        {
+            return moduleID;
+        }
+
         public interface GLViewCallback
 		{
 			void OnGLInitialize(OpenGL gl, GLContextInfo contextInfo);
@@ -408,6 +419,7 @@ namespace ASEva.UIEto
 			void OnRaiseMouseMove(MouseEventArgs args);
 			void OnRaiseMouseUp(MouseEventArgs args);
 			void OnRaiseMouseWheel(MouseEventArgs args);
+			String OnGetModuleID();
 		}
 
 		public interface GLViewBackend
@@ -421,10 +433,20 @@ namespace ASEva.UIEto
 			void CreateGLViewBackend(GLViewCallback glView, out Control etoControl, out GLViewBackend glViewBackend);
 		}
 
-		public static GLViewBackendFactory Factory { private get; set; }
+		private void initContent()
+		{
+			if (!Agency.IsGPURenderingDisabled() && Factory != null)
+			{
+				Factory.CreateGLViewBackend(this, out etoControl, out glViewBackend);
+				if (etoControl != null) Content = etoControl;
+			}
+		}
+
+        public static GLViewBackendFactory Factory { private get; set; }
 
 		private Control etoControl;
 		private GLViewBackend glViewBackend;
 		private List<DateTime> renderTime = new List<DateTime>();
+		private String moduleID;
 	}
 }

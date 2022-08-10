@@ -7,6 +7,7 @@ using System.Threading;
 using System.Drawing.Imaging;
 using SharpGL;
 using ASEva.UIEto;
+using ASEva.Utility;
 using Eto.WinForms;
 
 namespace ASEva.UICoreWF
@@ -34,9 +35,10 @@ namespace ASEva.UICoreWF
 
         public void QueueRender()
         {
-            if (ParentForm != null && ParentForm.WindowState != FormWindowState.Minimized && Visible)
+            if (ParentForm != null && ParentForm.WindowState != FormWindowState.Minimized && Visible && DrawBeat.CallerBegin(this))
             {
                 pictureBox.Invalidate();
+                DrawBeat.CallerEnd(this);
             }
         }
 
@@ -57,6 +59,9 @@ namespace ASEva.UICoreWF
                 e.Graphics.Clear(Color.Black);
                 return;
             }
+
+            var moduleID = callback == null ? null : callback.OnGetModuleID();
+            DrawBeat.CallbackBegin(this, moduleID);
 
             var pixelScale = (float)DeviceDpi / 96;
             var curSize = new GLSizeInfo((int)(Width / pixelScale), (int)(Height / pixelScale), Width, Height, pixelScale, (float)Width / Height);
@@ -184,6 +189,8 @@ namespace ASEva.UICoreWF
             {
                 initOK = false;
             }
+
+            DrawBeat.CallbackEnd(this);
         }
 
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)

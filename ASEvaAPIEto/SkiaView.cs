@@ -6,6 +6,7 @@ using Eto.Drawing;
 using SharpGL;
 using SkiaSharp;
 using ASEva.Samples;
+using ASEva.Utility;
 
 namespace ASEva.UIEto
 {
@@ -61,6 +62,18 @@ namespace ASEva.UIEto
 		}
 
 		/// <summary>
+		/// (api:eto=2.8.3) 构造函数
+		/// </summary>
+		/// <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈</param>
+		/// <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
+		public SkiaView(String moduleID, bool disableGLRendering)
+		{
+			this.moduleID = moduleID;
+			useGLView = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
+			initContent();
+		}
+
+		/// <summary>
 		/// 关闭视图，释放资源
 		/// </summary>
 		public void Close()
@@ -98,10 +111,11 @@ namespace ASEva.UIEto
 			}
 			else
 			{
-				if (!drawableInvalidated)
+				if (!drawableInvalidated && DrawBeat.CallerBegin(this))
 				{
 					drawable.Invalidate();
 					drawableInvalidated = true;
+					DrawBeat.CallerEnd(this);
 				}
 			}
 		}
@@ -191,6 +205,8 @@ namespace ASEva.UIEto
         {
 			if (closed) return;
 
+			DrawBeat.CallbackBegin(this, moduleID);
+
 			var targetSize = drawable.GetLogicalSize();
 			if (commonImage == null || commonImage.Width != targetSize.Width || commonImage.Height != targetSize.Height)
 			{
@@ -219,6 +235,8 @@ namespace ASEva.UIEto
 				renderTime.Add(DateTime.Now);
 			}
 			drawableInvalidated = false;
+
+			DrawBeat.CallbackEnd(this);
         }
 
 		public void OnRaiseMouseDown(MouseEventArgs args)
@@ -240,6 +258,11 @@ namespace ASEva.UIEto
 		{
 			OnMouseWheel(args);
 		}
+
+        public string OnGetModuleID()
+        {
+            return moduleID;
+        }
 
 		private void initContent()
 		{
@@ -282,5 +305,6 @@ namespace ASEva.UIEto
 
 		private bool useGLView;
 		private bool closed = false;
+		private String moduleID;
 	}
 }

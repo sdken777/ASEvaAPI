@@ -2,6 +2,7 @@ using System;
 using Gtk;
 using SharpGL;
 using ASEva.UIEto;
+using ASEva.Utility;
 
 namespace ASEva.UIGtk
 {
@@ -39,10 +40,11 @@ namespace ASEva.UIGtk
 
         public void QueueRender()
         {
-            if (Toplevel != null && Toplevel is Window && (Toplevel as Window).IsActive && !drawQueued)
+            if (Toplevel != null && Toplevel is Window && (Toplevel as Window).IsActive && !drawQueued && DrawBeat.CallerBegin(this))
             {
                 glArea.QueueRender();
                 drawQueued = true;
+                DrawBeat.CallerEnd(this);
             }
         }
 
@@ -77,6 +79,9 @@ namespace ASEva.UIGtk
         {
             if (!rendererStatusOK) return;
 
+            var moduleID = callback == null ? null : callback.OnGetModuleID();
+            DrawBeat.CallbackBegin(this, moduleID);
+
             glArea.MakeCurrent();
 
             try
@@ -103,6 +108,7 @@ namespace ASEva.UIGtk
             Gdk.GLContext.ClearCurrent();
 
             drawQueued = false;
+            DrawBeat.CallbackEnd(this);
         }
 
         private void onDraw(object o, DrawnArgs args)

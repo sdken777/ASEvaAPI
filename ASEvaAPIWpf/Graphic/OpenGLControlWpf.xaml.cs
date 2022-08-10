@@ -14,6 +14,7 @@ using System.IO.Packaging;
 using System.Reflection;
 using System.Windows.Navigation;
 using System.Windows.Markup;
+using ASEva.Utility;
 
 namespace ASEva.UIWpf
 {
@@ -59,9 +60,10 @@ namespace ASEva.UIWpf
         public void QueueRender()
         {
             var rootWindow = Window.GetWindow(this);
-            if (rootWindow != null && rootWindow.WindowState != WindowState.Minimized && Visibility == Visibility.Visible)
+            if (rootWindow != null && rootWindow.WindowState != WindowState.Minimized && Visibility == Visibility.Visible && DrawBeat.CallerBegin(this))
             {
                 InvalidateVisual();
+                DrawBeat.CallerEnd(this);
             }
         }
 
@@ -73,6 +75,9 @@ namespace ASEva.UIWpf
                 if (initOK == null) initOK = false;
             }
             if (!initOK.Value) return;
+
+            var moduleID = callback == null ? null : callback.OnGetModuleID();
+            DrawBeat.CallbackBegin(this, moduleID);
 
             var pixelScale = (float)PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice.M11;
             var curSize = new GLSizeInfo((int)ActualWidth, (int)ActualHeight, (int)(pixelScale * ActualWidth), (int)(pixelScale * ActualHeight), pixelScale, (float)(ActualWidth / ActualHeight));
@@ -203,6 +208,8 @@ namespace ASEva.UIWpf
             }
 
             drawingContext.Pop();
+
+            DrawBeat.CallbackEnd(this);
         }
 
         private void onInit()

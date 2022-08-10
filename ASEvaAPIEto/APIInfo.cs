@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于Eto.Forms的部分。详见 ASEva.UIEto \n
- * 本文档对应API版本：2.8.2\n
+ * 本文档对应API版本：2.8.3\n
  * \n
  * Eto.Forms官方仓库: https://github.com/picoe/Eto \n
  * 镜像仓库: https://hub.fastgit.org/picoe/Eto \n
@@ -12,7 +12,7 @@ using System;
 namespace ASEva.UIEto
 {
     /// <summary>
-    /// version=2.8.2
+    /// version=2.8.3
     /// </summary>
     public class APIInfo
     {
@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 2, 0); // SkiaView可使用CPU渲染
+            return new Version(2, 8, 3, 0); // GLView和SkiaView使用DrawBeat
         }
     }
 }

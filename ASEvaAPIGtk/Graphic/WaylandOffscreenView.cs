@@ -2,6 +2,7 @@ using System;
 using Gtk;
 using SharpGL;
 using ASEva.UIEto;
+using ASEva.Utility;
 
 namespace ASEva.UIGtk
 {
@@ -30,10 +31,11 @@ namespace ASEva.UIGtk
 
         public void QueueRender()
         {
-            if (Toplevel != null && Toplevel is Window && (Toplevel as Window).IsActive && !drawQueued)
+            if (Toplevel != null && Toplevel is Window && (Toplevel as Window).IsActive && !drawQueued && DrawBeat.CallerBegin(this))
             {
                 QueueDraw();
                 drawQueued = true;
+                DrawBeat.CallerEnd(this);
             }
         }
 
@@ -205,6 +207,9 @@ namespace ASEva.UIGtk
         {
             if (!rendererStatusOK) return;
 
+            var moduleID = callback == null ? null : callback.OnGetModuleID();
+            DrawBeat.CallbackBegin(this, moduleID);
+
             var curSize = new GLSizeInfo(AllocatedWidth, AllocatedHeight, AllocatedWidth * ScaleFactor, AllocatedHeight * ScaleFactor, ScaleFactor, (float)AllocatedWidth / AllocatedHeight);
             bool resized = curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
             size = curSize;
@@ -277,10 +282,10 @@ namespace ASEva.UIGtk
             catch (Exception)
             {
                 onDestroy();
-                return;
             }
 
             drawQueued = false;
+            DrawBeat.CallbackEnd(this);
         }
 
         private OpenGL gl = null;
