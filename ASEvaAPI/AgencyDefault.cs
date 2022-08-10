@@ -1222,5 +1222,10 @@ namespace ASEva
         public void DisableModule(object caller, string moduleClassID)
         {
         }
+
+        public bool IsGPURenderingDisabled()
+        {
+            return false;
+        }
     }
 }

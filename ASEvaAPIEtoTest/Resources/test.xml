@@ -188,9 +188,9 @@
     <en>Anti-alias Test</en>
     <ch>反锯齿测试</ch>
   </t>
-  <t id="draw-tabpage-skia">
-    <en>Skia</en>
-    <ch>Skia绘制</ch>
+  <t id="draw-tabpage-skia-gl">
+    <en>S-GL</en>
+    <ch>S-GL</ch>
   </t>
   <t id="basic-dynamic-add">
     <en>Add</en>
@@ -203,5 +203,9 @@
   <t id="title-dialog">
     <en>Test Dialog</en>
     <ch>测试对话框</ch>
+  </t>
+  <t id="draw-tabpage-skia-cpu">
+    <en>S-CPU</en>
+    <ch>S-CPU</ch>
   </t>
 </text_resource>

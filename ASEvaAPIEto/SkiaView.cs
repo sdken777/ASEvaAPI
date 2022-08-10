@@ -5,6 +5,7 @@ using Eto.Forms;
 using Eto.Drawing;
 using SharpGL;
 using SkiaSharp;
+using ASEva.Samples;
 
 namespace ASEva.UIEto
 {
@@ -45,11 +46,18 @@ namespace ASEva.UIEto
 		/// </summary>
 		public SkiaView()
 		{
-			if (Factory != null)
-			{
-				Factory.CreateGLViewBackend(this, out etoControl, out glViewBackend);
-				if (etoControl != null) Content = etoControl;
-			}
+			useGLView = !Agency.IsGPURenderingDisabled();
+			initContent();
+		}
+
+		/// <summary>
+		/// (api:eto=2.8.2) 构造函数
+		/// </summary>
+		/// <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
+		public SkiaView(bool disableGLRendering)
+		{
+			useGLView = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
+			initContent();
 		}
 
 		/// <summary>
@@ -58,31 +66,48 @@ namespace ASEva.UIEto
 		public void Close()
 		{
 			if (closed) return;
-			if (skSurface != null)
+			if (useGLView)
 			{
-				skSurface.Dispose();
-				skSurface = null;
+				if (skSurface != null)
+				{
+					skSurface.Dispose();
+					skSurface = null;
+				}
+				if (grContext != null)
+				{
+					grContext.Dispose();
+					grContext = null;
+				}
+				if (glViewBackend != null) glViewBackend.ReleaseGL();
 			}
-			if (grContext != null)
+			else
 			{
-				grContext.Dispose();
-				grContext = null;
+				commonImage = null;
 			}
-			if (glViewBackend != null) glViewBackend.ReleaseGL();
 			closed = true;
 		}
-		private bool closed = false;
 
 		/// <summary>
 		/// 提交新的渲染请求
 		/// </summary>
 		public void QueueRender()
 		{
-			if (!closed && glViewBackend != null) glViewBackend.QueueRender();
+			if (useGLView)
+			{
+				if (!closed && glViewBackend != null) glViewBackend.QueueRender();
+			}
+			else
+			{
+				if (!drawableInvalidated)
+				{
+					drawable.Invalidate();
+					drawableInvalidated = true;
+				}
+			}
 		}
 
 		/// <summary>
-		/// 底层的OpenGL上下文信息 (null表示还未初始化完成)
+		/// 底层的OpenGL上下文信息 (null表示不使用或还未初始化完成)
 		/// </summary>
 		public GLContextInfo? ContextInfo { get; private set; }
 
@@ -162,6 +187,40 @@ namespace ASEva.UIEto
 			}
         }
 
+        private void drawable_Paint(object sender, PaintEventArgs e)
+        {
+			if (closed) return;
+
+			var targetSize = drawable.GetLogicalSize();
+			if (commonImage == null || commonImage.Width != targetSize.Width || commonImage.Height != targetSize.Height)
+			{
+				commonImage = CommonImage.Create(targetSize.Width, targetSize.Height, true);
+			}
+
+			unsafe
+			{
+				fixed (byte *commonImageData = &(commonImage.Data[0]))
+				{
+					var imageInfo = new SKImageInfo(commonImage.Width, commonImage.Height, SKColorType.Bgra8888, SKAlphaType.Opaque);
+					var surface = SKSurface.Create(imageInfo, (IntPtr)commonImageData, commonImage.RowBytes);
+
+					Render(this, new SkiaRenderEventArgs(surface.Canvas, targetSize));
+					surface.Canvas.Flush();
+					surface.Flush();
+
+					surface.Dispose();
+				}
+			}
+
+			e.Graphics.DrawImage(commonImage.ToEtoBitmap(), 0, 0);
+
+			lock (renderTime)
+			{
+				renderTime.Add(DateTime.Now);
+			}
+			drawableInvalidated = false;
+        }
+
 		public void OnRaiseMouseDown(MouseEventArgs args)
 		{
 			OnMouseDown(args);
@@ -182,10 +241,30 @@ namespace ASEva.UIEto
 			OnMouseWheel(args);
 		}
 
-		public static GLView.GLViewBackendFactory Factory { private get; set; }
+		private void initContent()
+		{
+			if (useGLView)
+			{
+				if (Factory != null)
+				{
+					Factory.CreateGLViewBackend(this, out etoControl, out glViewBackend);
+					if (etoControl != null) Content = etoControl;
+				}
+			}
+			else
+			{
+				drawable = new Drawable();
+				drawable.Paint += drawable_Paint;
+				Content = drawable;
+			}
+		}
+
+        public static GLView.GLViewBackendFactory Factory { private get; set; }
 
 		private Control etoControl;
 		private GLView.GLViewBackend glViewBackend;
+		private Drawable drawable;
+		private bool drawableInvalidated = false;
 		private List<DateTime> renderTime = new List<DateTime>();
 
 		private FuncLoader funcLoader;
@@ -198,5 +277,10 @@ namespace ASEva.UIEto
 		private int[] framebuffer = new int[1];
 		private int[] stencil = new int[1];
 		private int[] samples = new int[1];
+
+		private CommonImage commonImage;
+
+		private bool useGLView;
+		private bool closed = false;
 	}
 }

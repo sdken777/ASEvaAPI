@@ -260,6 +260,7 @@ namespace ASEva
         byte[] CallNativeFunction(object caller, String nativeClassID, String funcID, byte[] input);
         void SetAppFunctionHandler(object caller, String nativeClassID, String funcID, AppFunctionHandler handler);
         void ResetAppFunctionHandler(object caller, String nativeClassID, String funcID);
+        bool IsGPURenderingDisabled();
     }
 
     /// <summary>
@@ -2807,6 +2808,15 @@ namespace ASEva
         public static void ResetAppFunctionHandler(object caller, String nativeClassID, String funcID)
         {
             Handler.ResetAppFunctionHandler(caller, nativeClassID, funcID);
+        }
+
+        /// <summary>
+        /// (api:app=2.6.8) 获取是否全局禁用GPU渲染
+        /// </summary>
+        /// <returns>是否全局禁用GPU渲染</returns>
+        public static bool IsGPURenderingDisabled()
+        {
+            return Handler.IsGPURenderingDisabled();
         }
     }
 }

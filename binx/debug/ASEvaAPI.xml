@@ -1775,9 +1775,15 @@
             <param name="nativeClassID">原生组件ID</param>
             <param name="funcID">函数ID</param>
         </member>
+        <member name="M:ASEva.Agency.IsGPURenderingDisabled">
+            <summary>
+            (api:app=2.6.8) 获取是否全局禁用GPU渲染
+            </summary>
+            <returns>是否全局禁用GPU渲染</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.7
+            version=2.6.8
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">

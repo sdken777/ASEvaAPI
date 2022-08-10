@@ -307,7 +307,7 @@ namespace ASEva.UIEto
 		/// </summary>
 		public GLView()
 		{
-			if (Factory != null)
+			if (!Agency.IsGPURenderingDisabled() && Factory != null)
 			{
 				Factory.CreateGLViewBackend(this, out etoControl, out glViewBackend);
 				if (etoControl != null) Content = etoControl;

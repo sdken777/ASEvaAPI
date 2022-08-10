@@ -50,7 +50,6 @@ namespace ASEva.UICoreWF
             if (initOK == null)
             {
                 onInit();
-                e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
                 if (initOK == null) initOK = false;
             }
             if (!initOK.Value)
@@ -115,6 +114,8 @@ namespace ASEva.UICoreWF
                 bitmap.UnlockBits(bitmapData);
 
                 e.Graphics.DrawImageUnscaled(bitmap, 0, 0);
+
+                e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
 
                 foreach (var task in textTasks.Clear())
                 {

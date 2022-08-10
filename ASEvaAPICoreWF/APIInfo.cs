@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 0, 1); // 修正Drawable未设置文字反锯齿问题
+            return new Version(2, 3, 0, 2); // 修正GLView文字反锯齿问题
         }
     }
 }
