@@ -1,4 +1,4 @@
-using swf = System.Windows.Forms;
+Ôªøusing swf = System.Windows.Forms;
 using Eto.Forms;
 using Eto.WinForms.Forms.Controls;
 
@@ -13,7 +13,7 @@ namespace ASEva.UICoreWF
 		public SearchBoxHandler()
 		{
 			var lang = Agency.GetAppLanguage();
-			Control = new EtoTextBox { PlaceholderText = lang != null && lang == "ch" ? "À—À˜" : "Search" };
+			Control = new EtoTextBox { PlaceholderText = lang != null && lang == "ch" ? "ÊêúÁ¥¢" : "Search" };
 		}
 	}
 }

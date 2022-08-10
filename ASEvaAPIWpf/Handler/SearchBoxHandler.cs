@@ -1,4 +1,4 @@
-using Eto.Forms;
+Ôªøusing Eto.Forms;
 using Eto.Wpf.Forms.Controls;
 
 namespace ASEva.UIWpf
@@ -8,7 +8,7 @@ namespace ASEva.UIWpf
         public SearchBoxHandler()
         {
             var lang = Agency.GetAppLanguage();
-            PlaceholderText = lang != null && lang == "ch" ? " À—À˜" : " Search";
+            PlaceholderText = lang != null && lang == "ch" ? " ÊêúÁ¥¢" : " Search";
         }
     }
 }
