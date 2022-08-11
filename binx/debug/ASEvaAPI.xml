@@ -1783,7 +1783,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.9
+            version=2.6.11
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3383,6 +3383,12 @@
             <param name="callback">框架软件的回调接口</param>
             <returns>是否接受请求，如接受需确保已调用 ASEva.MainWorkflowLicenseCallback.OnRevalidateLicense </returns>
         </member>
+        <member name="M:ASEva.MainWorkflow.OnCoreInitPhase(System.String)">
+            <summary>
+            (api:app=2.6.11) [可选实现] 通知框架软件的初始化阶段
+            </summary>
+            <param name="phaseDescription">当前初始化阶段的描述</param>
+        </member>
         <member name="M:ASEva.MainWorkflow.OnCoreInitResult(ASEva.CoreInitResult,System.Boolean)">
             <summary>
             [可选实现][可含模态框] 通知框架软件的初始化结果
@@ -3433,6 +3439,12 @@
             [可选实现] 返回是否允许多个实例同时运行
             </summary>
             <returns>是否允许多个实例同时运行</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnCheckDisableGPURendering">
+            <summary>
+            [可选实现] 返回是否禁用GPU渲染
+            </summary>
+            <returns>是否禁用GPU渲染</returns>
         </member>
         <member name="M:ASEva.MainWorkflow.OnSelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
             <summary>

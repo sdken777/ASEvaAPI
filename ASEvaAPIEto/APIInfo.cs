@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 3, 0); // GLView和SkiaView使用DrawBeat
+            return new Version(2, 8, 3, 1); // 修正AppDialogEto
         }
     }
 }

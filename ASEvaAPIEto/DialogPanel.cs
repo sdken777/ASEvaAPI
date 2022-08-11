@@ -154,6 +154,6 @@ namespace ASEva.UIEto
         private int minHeight;
         private int defaultWidth;
         private int defaultHeight;
-        private bool withBorder;
+        private bool withBorder = true;
     }
 }
