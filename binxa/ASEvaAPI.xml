@@ -1783,7 +1783,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.10
+            version=2.6.11
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3382,6 +3382,12 @@
             <param name="mac">机器码</param>
             <param name="callback">框架软件的回调接口</param>
             <returns>是否接受请求，如接受需确保已调用 ASEva.MainWorkflowLicenseCallback.OnRevalidateLicense </returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnCoreInitPhase(System.String)">
+            <summary>
+            (api:app=2.6.11) [可选实现] 通知框架软件的初始化阶段
+            </summary>
+            <param name="phaseDescription">当前初始化阶段的描述</param>
         </member>
         <member name="M:ASEva.MainWorkflow.OnCoreInitResult(ASEva.CoreInitResult,System.Boolean)">
             <summary>

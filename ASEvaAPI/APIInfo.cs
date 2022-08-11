@@ -7,7 +7,7 @@
  * \n
  * 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph \n
  * \n
- * 本文档对应API版本：2.6.10
+ * 本文档对应API版本：2.6.11
  */
 
 using System;
@@ -16,7 +16,7 @@ using System.Diagnostics;
 namespace ASEva
 {
     /// <summary>
-    /// version=2.6.10
+    /// version=2.6.11
     /// </summary>
     public class APIInfo
     {
@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 6, 10, 0); // 新增MainWorkflow.OnCheckDisableGPURendering
+            return new Version(2, 6, 11, 0); // 新增MainWorkflow.OnCoreInitPhase
         }
 
         /// <summary>

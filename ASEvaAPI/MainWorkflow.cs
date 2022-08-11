@@ -42,6 +42,12 @@ namespace ASEva
         public virtual bool OnLicenseRequest(LicenseRequestReason reason, String mac, MainWorkflowLicenseCallback callback) { return false; }
 
         /// <summary>
+        /// (api:app=2.6.11) [可选实现] 通知框架软件的初始化阶段
+        /// </summary>
+        /// <param name="phaseDescription">当前初始化阶段的描述</param>
+        public virtual void OnCoreInitPhase(String phaseDescription) {}
+
+        /// <summary>
         /// [可选实现][可含模态框] 通知框架软件的初始化结果
         /// </summary>
         /// <param name="result">框架软件的初始化结果</param>
