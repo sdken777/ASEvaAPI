@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于Gtk#的部分。详见 ASEva.UIGtk \n
- * 本文档对应API版本：2.3.1\n
+ * 本文档对应API版本：2.3.2\n
  * \n
  * Gtk#官方仓库: https://github.com/GtkSharp/GtkSharp \n
  * 镜像仓库: https://hub.fastgit.org/GtkSharp/GtkSharp \n
@@ -12,7 +12,7 @@ using System;
 namespace ASEva.UIGtk
 {
     /// <summary>
-    /// version=2.3.1
+    /// version=2.3.2
     /// </summary>
     public class APIInfo
     {
@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 1, 0); // 所有GLViewBackend使用DrawBeat
+            return new Version(2, 3, 2, 0); // SkiaView在X11下使用在屏渲染
         }
     }
 }
