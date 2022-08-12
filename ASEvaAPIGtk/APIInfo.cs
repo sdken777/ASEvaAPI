@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 3, 0); // 使用CloseRecursively
+            return new Version(2, 3, 3, 1); // 优化GLViewFactoryGtk
         }
     }
 }

@@ -7,28 +7,29 @@ namespace ASEva.UIGtk
 {
     class GLViewFactoryGtk : GLView.GLViewBackendFactory
     {
-        public GLViewFactoryGtk(String uiBackend, bool preferOnscreen)
+        public GLViewFactoryGtk(String uiBackend, bool useTextTasks, bool useLegacyAPI)
         {
             this.uiBackend = uiBackend;
-            this.preferOnscreen = preferOnscreen;
+            this.useTextTasks = useTextTasks;
+            this.useLegacyAPI = useLegacyAPI;
         }
 
         public void CreateGLViewBackend(GLView.GLViewCallback glView, out Control etoControl, out GLView.GLViewBackend glViewBackend)
         {
             try
             {
-                if (uiBackend == "x11") // DefaultOnscreenView在x11下存在不少兼容性问题
+                if (uiBackend == "x11")
                 {
-                    if (preferOnscreen)
+                    if (useTextTasks)
                     {
-                        var view = new X11OnscreenView();
+                        var view = new X11OffscreenView();
                         view.SetCallback(glView);
                         etoControl = view.ToEto();
                         glViewBackend = view;
                     }
                     else
                     {
-                        var view = new X11OffscreenView();
+                        var view = new X11OnscreenView();
                         view.SetCallback(glView);
                         etoControl = view.ToEto();
                         glViewBackend = view;
@@ -36,17 +37,37 @@ namespace ASEva.UIGtk
                 }
                 else if (uiBackend == "wayland")
                 {
-                    var view = new WaylandOffscreenView();
-                    view.SetCallback(glView);
-                    etoControl = view.ToEto();
-                    glViewBackend = view;
+                        var view = new WaylandOffscreenView();
+                        view.SetCallback(glView);
+                        etoControl = view.ToEto();
+                        glViewBackend = view;
                 }
                 else
                 {
-                    var view = new DefaultOnscreenView();
-                    view.SetCallback(glView);
-                    etoControl = view.ToEto();
-                    glViewBackend = view;
+                    if (useLegacyAPI)
+                    {
+                        var envGdkGl = Environment.GetEnvironmentVariable("GDK_GL");
+                        var isLegacy = envGdkGl != null && envGdkGl == "LEGACY";
+                        if (isLegacy)
+                        {
+                            var view = new DefaultOnscreenView();
+                            view.SetCallback(glView);
+                            etoControl = view.ToEto();
+                            glViewBackend = view;
+                        }
+                        else
+                        {
+                            etoControl = null;
+                            glViewBackend = null;
+                        }
+                    }
+                    else
+                    {
+                        var view = new DefaultOnscreenView();
+                        view.SetCallback(glView);
+                        etoControl = view.ToEto();
+                        glViewBackend = view;
+                    }
                 }
             }
             catch (Exception)
@@ -57,6 +78,7 @@ namespace ASEva.UIGtk
         }
 
         private String uiBackend;
-        private bool preferOnscreen;
+        private bool useTextTasks;
+        private bool useLegacyAPI;
     }
 }

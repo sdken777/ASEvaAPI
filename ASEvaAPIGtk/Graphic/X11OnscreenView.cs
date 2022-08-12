@@ -136,7 +136,7 @@ namespace ASEva.UIGtk
             {
                 if (resized) callback.OnGLResize(gl, size);
 
-                var dummy = new GLTextTasks(); // X11在屏渲染不支持文字绘制
+                var dummy = new GLTextTasks();
                 callback.OnGLRender(gl, dummy);
                 gl.Finish();
             }
