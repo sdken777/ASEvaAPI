@@ -163,7 +163,6 @@ namespace ASEvaAPIEtoTest
             Closing += delegate
             {
                 glViewTimer.Stop();
-                glView.Close();
             };
         }
 

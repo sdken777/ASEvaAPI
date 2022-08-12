@@ -46,6 +46,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AppDialogCoreWF_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AppDialogCoreWF_FormClosed);
             this.ResumeLayout(false);
 
         }

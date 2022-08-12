@@ -55,6 +55,11 @@ namespace ASEva.UICoreWF
             panel.OnClosing();
         }
 
+        private void AppDialogCoreWF_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            panel.CloseRecursively();
+        }
+
         private DialogPanel panel;
         private Control panelControl;
     }

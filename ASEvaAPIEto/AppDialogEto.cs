@@ -35,6 +35,11 @@ namespace ASEva.UIEto
             {
                 panel.OnClosing();
             };
+
+            Closed += delegate
+            {
+                panel.CloseRecursively();
+            };
         }
     }
 }

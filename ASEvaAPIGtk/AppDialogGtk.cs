@@ -68,12 +68,14 @@ namespace ASEva.UIGtk
         private void OnDialogClose(object sender, EventArgs e)
         {
             panel.OnClosing();
+            panel.CloseRecursively();
             Hide();
         }
 
         private void OnDialogResponse(object o, ResponseArgs args)
         {
             panel.OnClosing();
+            panel.CloseRecursively();
             Hide();
         }
 

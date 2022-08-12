@@ -65,6 +65,7 @@ namespace ASEva.UIEto
         {
             if (application != null)
             {
+                window.Closed += delegate { window.CloseRecursively(); };
                 application.Run(window);
             }
         }

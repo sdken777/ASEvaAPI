@@ -59,6 +59,11 @@ namespace ASEva.UIWpf
             panel.OnClosing();
         }
 
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            panel.CloseRecursively();
+        }
+
         private DialogPanel panel;
         private FrameworkElement panelElement;
     }

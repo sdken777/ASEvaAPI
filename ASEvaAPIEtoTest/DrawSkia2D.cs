@@ -36,11 +36,6 @@ namespace ASEvaAPIEtoTest
                 c.DrawLine(10, 235, 190, 240, blackPaint);
                 c.DrawString(t["draw-skia-anti-alias"], c.GetDefaultFont(), SKColors.Black, TextAnchor.Center, 100, 225);
             };
-
-            Closing += delegate
-            {
-                skiaView.Close();
-            };
         }
     }
 }
