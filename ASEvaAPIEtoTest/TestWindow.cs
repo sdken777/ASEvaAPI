@@ -40,8 +40,24 @@ namespace ASEvaAPIEtoTest
             initDrawGroupBox(groupDraw);
 
             rowSecond.AddGroupBox(t["reserved"], true, true, 200, 100);
+
+            loopTimer.Interval = 0.015;
+            loopTimer.Elapsed += delegate
+            {
+                loopDrawDefault2D();
+                loopDrawSkia2D();
+                loopDrawGL();
+            };
+            loopTimer.Start();
+
+            Closing += delegate
+            {
+                loopTimer.Stop();
+            };
         }
 
         private TextResource t;
+        private DateTime startTime = DateTime.Now;
+        private UITimer loopTimer = new UITimer();
     }
 }

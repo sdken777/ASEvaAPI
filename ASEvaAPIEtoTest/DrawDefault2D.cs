@@ -12,13 +12,13 @@ namespace ASEvaAPIEtoTest
         {
             var layout = tabPage.SetContentAsColumnLayout();
             var overlay = layout.AddControl(new OverlayLayout(), true, 200, 0) as OverlayLayout;
-            var drawable = overlay.AddControl(new Drawable(), 0, 0, 0, 0) as Drawable;
+            drawableDefault2D = overlay.AddControl(new Drawable(), 0, 0, 0, 0) as Drawable;
             overlay.AddControl(new Button { Text = "A"}, 10, null, 10, null);
             overlay.AddControl(new Button { Text = "B"}, 10, null, null, 10);
             overlay.AddControl(new Button { Text = "C"}, null, 10, 10, null);
             overlay.AddControl(new Button { Text = "D"}, null, 10, null, 10);
 
-            drawable.Paint += (o, args) =>
+            drawableDefault2D.Paint += (o, args) =>
             {
                 var g = args.Graphics;
                 g.Clear(Colors.LightYellow);
@@ -30,8 +30,18 @@ namespace ASEvaAPIEtoTest
                 var textSize = g.MeasureString(g.ScaledDefaultFont(), t["draw-text"]);
                 g.DrawRectangle(new Pen(Colors.Green), 100, 100, textSize.Width, textSize.Height);
                 g.DrawImage(CommonImage.LoadResource("camera.png").ToEtoBitmap(), 80, 80);
-                g.FillPie(Color.FromArgb(0, 128, 0, 128), 10, 10, 180, 180, -90, 270);
+
+                var pieAngle = (DateTime.Now - startTime).TotalMilliseconds * 0.1;
+                pieAngle -= Math.Floor(pieAngle / 360) * 360;
+                g.FillPie(Color.FromArgb(0, 128, 0, 128), 10, 10, 180, 180, -90, (float)pieAngle);
             };
         }
+
+        private void loopDrawDefault2D()
+        {
+            drawableDefault2D.Invalidate();
+        }
+
+        private Drawable drawableDefault2D;
     }
 }

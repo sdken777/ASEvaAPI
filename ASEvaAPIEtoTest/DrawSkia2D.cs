@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Eto.Forms;
 using ASEva.Samples;
 using ASEva.UIEto;
@@ -12,6 +13,7 @@ namespace ASEvaAPIEtoTest
         {
             var layout = tabPage.SetContentAsColumnLayout();
             var skiaView = layout.AddControl(new SkiaView(disableGPU), true, 200, 0) as SkiaView;
+            skiaViews.Add(skiaView);
 
             skiaView.Render += (o, args) =>
             {
@@ -30,12 +32,22 @@ namespace ASEvaAPIEtoTest
                 var textSize = c.MeasureString(t["draw-text"], c.GetDefaultFont());
                 c.DrawRect(100, 100, textSize.Width, textSize.Height, textBoundPaint);
                 c.DrawImage(CommonImage.LoadResource("camera.png").ToSKImage(), 80, 80);
-                c.DrawArc(new SKRect(10, 10, 190, 190), -90, 270, true, piePaint);
+
+                var pieAngle = (DateTime.Now - startTime).TotalMilliseconds * 0.1;
+                pieAngle -= Math.Floor(pieAngle / 360) * 360;
+                c.DrawArc(new SKRect(10, 10, 190, 190), -90, (float)pieAngle, true, piePaint);
                 
                 c.DrawLine(10, 210, 190, 215, blackPaint);
                 c.DrawLine(10, 235, 190, 240, blackPaint);
                 c.DrawString(t["draw-skia-anti-alias"], c.GetDefaultFont(), SKColors.Black, TextAnchor.Center, 100, 225);
             };
         }
+
+        private void loopDrawSkia2D()
+        {
+            foreach (var skiaView in skiaViews) skiaView.QueueRender();
+        }
+
+        private List<SkiaView> skiaViews = new List<SkiaView>();
     }
 }

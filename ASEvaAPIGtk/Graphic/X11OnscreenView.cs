@@ -145,7 +145,18 @@ namespace ASEva.UIGtk
                 onDestroy();
             }
 
-            Linux.glXSwapIntervalEXT(display, xid, 0);
+            if (!swapIntervalFailed)
+            {
+                try
+                {
+                    Linux.glXSwapIntervalEXT(display, xid, 0);
+                }
+                catch (Exception)
+                {
+                    swapIntervalFailed = true;
+                }
+            }
+            
             Linux.glXSwapBuffers(display, xid);
             Linux.glXMakeCurrent(display, 0, IntPtr.Zero);
 
@@ -160,5 +171,6 @@ namespace ASEva.UIGtk
         private bool rendererStatusOK = false;
         private GLSizeInfo size = null;
         private bool drawQueued = false;
+        private bool swapIntervalFailed = false;
     }
 }

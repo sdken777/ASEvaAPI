@@ -11,7 +11,7 @@ namespace ASEvaAPIEtoTest
     {
         private void initDrawGL(StackLayout layout)
         {
-            var glView = layout.AddControl(new GLView(), true) as GLView;
+            glView = layout.AddControl(new GLView(), true) as GLView;
             var layoutBottom = layout.AddRowLayout();
             layoutBottom.AddLinkButton(t["draw-gl-pause-render"]).Click += delegate { glRenderSwitch = false; };
             layoutBottom.AddLinkButton(t["draw-gl-resume-render"]).Click += delegate { glRenderSwitch = true; };
@@ -50,7 +50,7 @@ namespace ASEvaAPIEtoTest
                 var gl = args.GL;
                 var texts = args.TextTasks;
 
-                var offset = (float)Math.Cos((DateTime.Now - glViewStartTime).TotalSeconds * 3) * 0.5f;
+                var offset = (float)Math.Cos((DateTime.Now - startTime).TotalSeconds * 3) * 0.5f;
 
                 gl.ClearColor(0.0f, 0.0f, 0.25f + offset * 0.5f, 1.0f);
                 gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
@@ -152,18 +152,11 @@ namespace ASEvaAPIEtoTest
                     MessageBox.Show(String.Join('\n', rowTexts), "");
                 };
             };
+        }
 
-            glViewTimer.Interval = 0.001;
-            glViewTimer.Elapsed += delegate
-            {
-                if (glRenderSwitch) glView.QueueRender();
-            };
-            glViewTimer.Start();
-
-            Closing += delegate
-            {
-                glViewTimer.Stop();
-            };
+        private void loopDrawGL()
+        {
+            if (glRenderSwitch) glView.QueueRender();
         }
 
         private RectangleF getDrawGLButtonRect()
@@ -172,9 +165,8 @@ namespace ASEvaAPIEtoTest
             else return new RectangleF(glViewSizeInfo.LogicalWidth - 150, glViewSizeInfo.LogicalHeight - 50, 140, 40);
         }
 
-        private DateTime glViewStartTime = DateTime.Now;
+        private GLView glView;
         private GLSizeInfo glViewSizeInfo;
-        private UITimer glViewTimer = new UITimer();
         private bool glRenderSwitch = true;
     }
 }
