@@ -148,8 +148,8 @@ namespace ASEvaAPIEtoTest
                     rowTexts.Add(t.Format("draw-gl-info-version", info.version));
                     rowTexts.Add(t.Format("draw-gl-info-vendor", info.vendor));
                     rowTexts.Add(t.Format("draw-gl-info-renderer", info.renderer));
-                    rowTexts.Add(t.Format("draw-gl-info-extensions", info.extensions.Length > 500 ? (info.extensions.Substring(0, 500) + " ...") : info.extensions));
-                    MessageBox.Show(String.Join('\n', rowTexts), "");
+                    rowTexts.Add(t.Format("draw-gl-info-extensions", info.extensions));
+                    App.RunDialog(new InfoDialog(t["draw-gl-info-title"], String.Join('\n', rowTexts)));
                 };
             };
         }
