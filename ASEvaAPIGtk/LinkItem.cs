@@ -62,12 +62,19 @@ namespace ASEva.UIGtk
 
         private void eventBox_LeaveNotify(object o, LeaveNotifyEventArgs args)
         {
-            updateColor();
+            updateColor(false);
         }
 
         private void eventBox_EnterNotify(object o, EnterNotifyEventArgs args)
         {
-            updateColor();
+            if (timer != null) return;
+            timer = new Timer(20, () =>
+            {
+                updateColor();
+                timer.Release();
+                timer = null;
+                return false;
+            });
         }
 
         private void this_StateFlagsChanged(object o, StateFlagsChangedArgs args)
@@ -75,7 +82,7 @@ namespace ASEva.UIGtk
             updateColor();
         }
 
-        private void updateColor()
+        private void updateColor(bool? forceInside = null)
         {
             if (StateFlags.HasFlag(StateFlags.Insensitive))
             {
@@ -86,6 +93,8 @@ namespace ASEva.UIGtk
                 int x, y;
                 eventBox.GetPointer(out x, out y);
                 bool inside = x >= 0 && x < eventBox.AllocatedWidth && y >= 0 && y < eventBox.AllocatedHeight;
+
+                if (forceInside != null) inside = forceInside.Value;
 
                 if (inside)
                 {
@@ -99,5 +108,6 @@ namespace ASEva.UIGtk
         }
 
         private ColorRGBA linkColor;
+        private Timer timer = null;
     }
 }
