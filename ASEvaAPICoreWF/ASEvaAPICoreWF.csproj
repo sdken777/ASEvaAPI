@@ -39,6 +39,12 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Graphic\OpenGLOnscreenControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>..\bin64</OutputPath>
     <DocumentationFile>..\bin64\ASEvaAPICoreWF.xml</DocumentationFile>

@@ -155,6 +155,12 @@ namespace ASEva.UIGtk
 
                 size = new GLSizeInfo(AllocatedWidth, AllocatedHeight, AllocatedWidth * ScaleFactor, AllocatedHeight * ScaleFactor, ScaleFactor, (float)AllocatedWidth / AllocatedHeight);
 
+                if (!gl.ExtensionList.Contains("GL_EXT_framebuffer_object"))
+                {
+                    onDestroy();
+                    return;
+                }
+
                 colorBuffer = new uint[1];
                 gl.GenRenderbuffersEXT(1, colorBuffer);
                 gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[0]);

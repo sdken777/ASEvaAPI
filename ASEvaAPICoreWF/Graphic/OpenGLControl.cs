@@ -248,6 +248,12 @@ namespace ASEva.UICoreWF
                 var pixelScale = (float)DeviceDpi / 96;
                 size = new GLSizeInfo((int)(Width / pixelScale), (int)(Height / pixelScale), Width, Height, pixelScale, (float)Width / Height);
 
+                if (!gl.ExtensionList.Contains("GL_EXT_framebuffer_object"))
+                {
+                    onDestroy();
+                    return;
+                }
+
                 colorBuffer = new uint[1];
                 gl.GenRenderbuffersEXT(1, colorBuffer);
                 gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[0]);

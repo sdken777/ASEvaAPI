@@ -50,7 +50,7 @@ namespace ASEva.UIGtk
                         var isLegacy = envGdkGl != null && envGdkGl == "LEGACY";
                         if (isLegacy)
                         {
-                            var view = new DefaultOnscreenView();
+                            var view = new DefaultOffscreenView();
                             view.SetCallback(glView);
                             etoControl = view.ToEto();
                             glViewBackend = view;
@@ -63,7 +63,7 @@ namespace ASEva.UIGtk
                     }
                     else
                     {
-                        var view = new DefaultOnscreenView();
+                        var view = new DefaultOffscreenView();
                         view.SetCallback(glView);
                         etoControl = view.ToEto();
                         glViewBackend = view;

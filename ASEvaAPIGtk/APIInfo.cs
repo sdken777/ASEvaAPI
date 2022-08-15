@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 3, 2); // 处理glXSwapIntervalEXT不支持的情况
+            return new Version(2, 3, 3, 3); // 离屏渲染检查GL_EXT_framebuffer_object
         }
     }
 }

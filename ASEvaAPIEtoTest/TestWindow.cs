@@ -33,8 +33,8 @@ namespace ASEvaAPIEtoTest
             var groupBasic = rowFirst.AddGroupBox(t["basic-group-title"], true, true);
             initBasicGroupBox(groupBasic);
 
-            var groupWeb = rowFirst.AddGroupBox(t["web-group-title"], true, true);
-            initWebGroupBox(groupWeb);
+            var groupWeb = rowFirst.AddGroupBox(t["util-group-title"], true, true);
+            initUtilGroupBox(groupWeb);
 
             var groupDraw = rowSecond.AddGroupBox(t["draw-group-title"], true, true);
             initDrawGroupBox(groupDraw);

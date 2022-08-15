@@ -11,7 +11,9 @@ namespace ASEvaAPIEtoTest
     {
         private void initDrawGL(StackLayout layout)
         {
-            glView = layout.AddControl(new GLView(), true) as GLView;
+            var overlay = layout.AddControl(new OverlayLayout(), true) as OverlayLayout;
+            glView = overlay.AddControl(new GLView(), 0, 0, 0, 0) as GLView;
+            var button = overlay.AddControl(new Button { Text = t["draw-gl-detail"]}, null, 10, null, 10) as Button;
             var layoutBottom = layout.AddRowLayout();
             layoutBottom.AddLinkButton(t["draw-gl-pause-render"]).Click += delegate { glRenderSwitch = false; };
             layoutBottom.AddLinkButton(t["draw-gl-resume-render"]).Click += delegate { glRenderSwitch = true; };
@@ -115,54 +117,26 @@ namespace ASEvaAPIEtoTest
                     anchor = TextAnchor.BottomLeft,
                     red = 255,
                 });
-
-                var buttonRect = getDrawGLButtonRect();
-
-                gl.MatrixMode(OpenGL.GL_PROJECTION);
-                gl.PushMatrix();
-                {
-                    gl.LoadIdentity();
-                    gl.Ortho(0, glViewSizeInfo.LogicalWidth, glViewSizeInfo.LogicalHeight, 0, -1, 1);
-
-                    gl.Begin(OpenGL.GL_QUADS);
-                    {
-                        gl.Color(1.0f, 1.0f, 0.5f, buttonRect.Contains(glView.GetMouseLogicalPoint()) ? 1.0f : 0.5f);
-                        gl.Vertex(buttonRect.Left, buttonRect.Top, 0);
-                        gl.Vertex(buttonRect.Right, buttonRect.Top, 0);
-                        gl.Vertex(buttonRect.Right, buttonRect.Bottom, 0);
-                        gl.Vertex(buttonRect.Left, buttonRect.Bottom, 0);
-                    }
-                    gl.End();
-                }
-                gl.PopMatrix();
-
-                texts.Add(t["draw-gl-detail"], (int)buttonRect.Center.X, (int)buttonRect.Center.Y, 0, 0, 0, 1.5f);
             };
 
-            glView.MouseDown += (o, args) =>
+            button.Click += delegate
             {
-                if (args.Buttons == MouseButtons.Primary && getDrawGLButtonRect().Contains(args.GetLogicalPoint()) && glView.ContextInfo != null)
+                if (glView.ContextInfo != null)
                 {
                     var info = glView.ContextInfo.Value;
                     var rowTexts = new List<String>();
                     rowTexts.Add(t.Format("draw-gl-info-version", info.version));
                     rowTexts.Add(t.Format("draw-gl-info-vendor", info.vendor));
                     rowTexts.Add(t.Format("draw-gl-info-renderer", info.renderer));
-                    rowTexts.Add(t.Format("draw-gl-info-extensions", info.extensions));
+                    rowTexts.Add(t.Format("draw-gl-info-extensions", String.Join('\n', info.ToExtensionList())));
                     App.RunDialog(new InfoDialog(t["draw-gl-info-title"], String.Join('\n', rowTexts)));
-                };
+                }
             };
         }
 
         private void loopDrawGL()
         {
             if (glRenderSwitch) glView.QueueRender();
-        }
-
-        private RectangleF getDrawGLButtonRect()
-        {
-            if (glViewSizeInfo == null) return new RectangleF();
-            else return new RectangleF(glViewSizeInfo.LogicalWidth - 150, glViewSizeInfo.LogicalHeight - 50, 140, 40);
         }
 
         private GLView glView;

@@ -280,10 +280,28 @@ namespace ASEva.UIEto
 		/// 扩展
 		/// </summary>
         public String extensions;
+
+		/// <summary>
+		/// (api:eto=2.8.5)
+		/// </summary>
+		/// <returns></returns>
+		public List<String> ToExtensionList()
+		{
+			var list = new List<String>();
+			if (!String.IsNullOrEmpty(extensions))
+			{
+				foreach (var row in extensions.Split('\n', StringSplitOptions.RemoveEmptyEntries))
+				{
+					list.AddRange(row.Split(' ', StringSplitOptions.RemoveEmptyEntries));
+				}
+			}
+			list.Sort();
+			return list;
+		}
 	}
 
 	/// <summary>
-	/// (api:eto=2.6.0) OpenGL绘制视图（注意，此控件不支持在 ASEva.UIEto.OverlayLayout 中使用）
+	/// (api:eto=2.6.0) OpenGL绘制视图
 	/// </summary>
 	public class GLView : Panel, GLView.GLViewCallback
 	{

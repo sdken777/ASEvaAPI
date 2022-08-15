@@ -254,6 +254,12 @@ namespace ASEva.UIWpf
                 var pixelScale = (float)PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice.M11;
                 size = new GLSizeInfo((int)ActualWidth, (int)ActualHeight, (int)(pixelScale * ActualWidth), (int)(pixelScale * ActualHeight), pixelScale, (float)(ActualWidth / ActualHeight));
 
+                if (!gl.ExtensionList.Contains("GL_EXT_framebuffer_object"))
+                {
+                    onDestroy();
+                    return;
+                }
+
                 colorBuffer = new uint[1];
                 gl.GenRenderbuffersEXT(1, colorBuffer);
                 gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[0]);

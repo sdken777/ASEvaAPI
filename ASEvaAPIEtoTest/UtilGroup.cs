@@ -9,7 +9,7 @@ namespace ASEvaAPIEtoTest
 {
     partial class TestWindow
     {
-        private void initWebGroupBox(GroupBox groupBox)
+        private void initUtilGroupBox(GroupBox groupBox)
         {
             var layout = groupBox.SetContentAsColumnLayout();
             var layoutRow = layout.AddRowLayout();
@@ -19,7 +19,7 @@ namespace ASEvaAPIEtoTest
             layoutRow.AddButtonPanel(CommonImage.LoadResource("forward.png").ToEtoBitmap()).Click += delegate { webView.GoForward(); };
             layoutRow.AddSeparator();
             var textBox = layoutRow.AddControl(new TextBox(), true) as TextBox;
-            layoutRow.AddButtonPanel(t["web-go-url"]).Click += delegate
+            layoutRow.AddButtonPanel(t["util-web-go-url"]).Click += delegate
             {
                 if (!String.IsNullOrEmpty(textBox.Text))
                 {
@@ -27,7 +27,7 @@ namespace ASEvaAPIEtoTest
                 }
             };
             layoutRow.AddSeparator();
-            layoutRow.AddButtonPanel(t["web-call-script"]).Click += delegate
+            layoutRow.AddButtonPanel(t["util-web-call-script"]).Click += delegate
             {
                 webView.ExecuteScriptAsync("callScript()");
             };

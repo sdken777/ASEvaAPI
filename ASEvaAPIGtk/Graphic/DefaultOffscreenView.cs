@@ -6,9 +6,9 @@ using ASEva.Utility;
 
 namespace ASEva.UIGtk
 {
-    class DefaultOnscreenView : Overlay, GLView.GLViewBackend
+    class DefaultOffscreenView : Overlay, GLView.GLViewBackend
     {
-        public DefaultOnscreenView()
+        public DefaultOffscreenView()
         {
             glArea.Visible = true;
             glArea.UseEs = false;
