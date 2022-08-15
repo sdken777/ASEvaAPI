@@ -77,10 +77,17 @@ namespace ASEva.UIGtk
 
         private bool timer_Timeout()
         {
-			Update();
+			if (Control.AllocatedWidth != lastWidth || Control.AllocatedHeight != lastHeight)
+			{
+				Update();
+				lastWidth = Control.AllocatedWidth;
+				lastHeight = Control.AllocatedHeight;
+			}
             return true;
         }
 
 		private uint timer;
+
+		private int lastWidth = 0, lastHeight = 0;
 	}
 }
