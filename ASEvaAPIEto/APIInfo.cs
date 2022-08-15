@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 5, 0); // OverlayLayout支持GLView。增加GLContextInfo.ToExtensionList
+            return new Version(2, 8, 5, 1); // 修正OverlayLayout
         }
     }
 }

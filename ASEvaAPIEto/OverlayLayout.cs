@@ -61,7 +61,7 @@ namespace ASEva.UIEto
 
         private void this_SizeChanged(object sender, EventArgs e)
         {
-            if (DelayHandleControl)
+            if (!firstSizeChanged && DelayHandleControl)
             {
                 if (timer != null)
                 {
@@ -82,6 +82,7 @@ namespace ASEva.UIEto
             {
                 foreach (var control in paddingTable.Keys) handleControl(control, false);
             }
+            firstSizeChanged = false;
         }
 
         private void handleControl(Control control, bool add)
@@ -143,6 +144,7 @@ namespace ASEva.UIEto
 
         private Dictionary<Control, ControlPadding> paddingTable = new Dictionary<Control, ControlPadding>();
         private UITimer timer = null;
+        private bool firstSizeChanged = true;
 
         public static bool DelayHandleControl { private get; set; }
     }
