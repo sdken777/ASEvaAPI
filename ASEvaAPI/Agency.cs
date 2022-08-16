@@ -56,7 +56,7 @@ namespace ASEva
         void SendRawData(String protocol, double[] values, byte[] binary);
         void SendManualTrigger(int channel);
         String GetDataPath();
-        String[] GetSubDataPathes();
+        String[] GetSubDataPaths();
         String[] GetDataLayers();
         String GetGlobalPublicDataPath();
         String[] GetGenerationList();
@@ -161,7 +161,7 @@ namespace ASEva
         AudioDeviceInfo[] GetAudioReplayDevices(String driverID);
         double GetCPUTime();
         String[] GetEventTypeNames();
-        String[] GetRecentProjectPathes();
+        String[] GetRecentProjectPaths();
         bool TerminateApp(bool force, bool autosave);
         void PopupError(String msg);
         void PopupNotice(String msg);
@@ -268,17 +268,17 @@ namespace ASEva
     /// </summary>
     public partial class Agency
     {
-        private static AgencyHandler hander = null;
+        private static AgencyHandler handler = null;
         public static AgencyHandler Handler
         {
             private get
             {
-                if (hander == null) hander = new AgencyDefault();
-                return hander;
+                if (handler == null) handler = new AgencyDefault();
+                return handler;
             }
             set
             {
-                if (value != null) hander = value;
+                if (value != null) handler = value;
             }
         }
 
@@ -559,12 +559,20 @@ namespace ASEva
         }
 
         /// <summary>
-        /// (api:app=2.4.0) 获取所有子数据目录的路径
+        /// 已弃用，应使用 ASEva.Agency.GetSubDataPaths
         /// </summary>
-        /// <returns>所有子数据目录的路径，目录不存在则为null</returns>
         public static String[] GetSubDataPathes()
         {
-            return Handler.GetSubDataPathes();
+            return Handler.GetSubDataPaths();
+        }
+
+        /// <summary>
+        /// (api:app=2.6.12) 获取所有子数据目录的路径
+        /// </summary>
+        /// <returns>所有子数据目录的路径，目录不存在则为null</returns>
+        public static String[] GetSubDataPaths()
+        {
+            return Handler.GetSubDataPaths();
         }
 
         /// <summary>
@@ -1857,12 +1865,20 @@ namespace ASEva
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 获取最近项目文件路径列表
+        /// 已弃用，应使用 ASEva.Agency.GetRecentProjectPaths
         /// </summary>
-        /// <returns>最近项目文件路径列表</returns>
         public static String[] GetRecentProjectPathes()
         {
-            return Handler.GetRecentProjectPathes();
+            return Handler.GetRecentProjectPaths();
+        }
+
+        /// <summary>
+        /// (api:app=2.6.12) 获取最近项目文件路径列表
+        /// </summary>
+        /// <returns>最近项目文件路径列表</returns>
+        public static String[] GetRecentProjectPaths()
+        {
+            return Handler.GetRecentProjectPaths();
         }
 
         /// <summary>

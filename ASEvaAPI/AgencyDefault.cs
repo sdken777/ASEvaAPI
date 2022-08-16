@@ -598,7 +598,7 @@ namespace ASEva
             return null;
         }
 
-        public string[] GetRecentProjectPathes()
+        public string[] GetRecentProjectPaths()
         {
             return null;
         }
@@ -1082,7 +1082,7 @@ namespace ASEva
         {
         }
 
-        public string[] GetSubDataPathes()
+        public string[] GetSubDataPaths()
         {
             return null;
         }
