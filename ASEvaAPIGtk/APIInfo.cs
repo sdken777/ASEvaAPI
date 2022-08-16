@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 3, 5); // 修正LinkItem
+            return new Version(2, 3, 3, 6); // 修复Wayland下的渲染条件
         }
     }
 }
