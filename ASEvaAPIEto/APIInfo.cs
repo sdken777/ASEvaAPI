@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 5, 1); // 修正OverlayLayout
+            return new Version(2, 8, 5, 2); // SkiaView初始化失败则绘制黑色背景
         }
     }
 }

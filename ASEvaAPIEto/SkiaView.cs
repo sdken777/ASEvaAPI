@@ -157,6 +157,10 @@ namespace ASEva.UIEto
 				var options = new GRContextOptions();
 				options.AvoidStencilBuffers = true;
 				grContext = GRContext.CreateGl(options);
+				if (grContext == null)
+				{
+					gl.ClearColor(0, 0, 0, 1);
+				}
 			}
         }
 
@@ -187,6 +191,12 @@ namespace ASEva.UIEto
 
         public void OnGLRender(OpenGL gl, GLTextTasks textTasks)
         {
+			if (grContext == null)
+			{
+				gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT);
+				return;
+			}
+
             if (Render != null && skSurface != null)
 			{
 				Render(this, new SkiaRenderEventArgs(skSurface.Canvas, new Size(sizeInfo.LogicalWidth, sizeInfo.LogicalHeight)));

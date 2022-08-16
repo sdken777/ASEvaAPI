@@ -200,7 +200,12 @@
         </member>
         <member name="M:ASEva.Agency.GetSubDataPathes">
             <summary>
-            (api:app=2.4.0) 获取所有子数据目录的路径
+            已弃用，应使用 ASEva.Agency.GetSubDataPaths
+            </summary>
+        </member>
+        <member name="M:ASEva.Agency.GetSubDataPaths">
+            <summary>
+            (api:app=2.6.12) 获取所有子数据目录的路径
             </summary>
             <returns>所有子数据目录的路径，目录不存在则为null</returns>
         </member>
@@ -1108,7 +1113,12 @@
         </member>
         <member name="M:ASEva.Agency.GetRecentProjectPathes">
             <summary>
-            (api:app=2.3.0) 获取最近项目文件路径列表
+            已弃用，应使用 ASEva.Agency.GetRecentProjectPaths
+            </summary>
+        </member>
+        <member name="M:ASEva.Agency.GetRecentProjectPaths">
+            <summary>
+            (api:app=2.6.12) 获取最近项目文件路径列表
             </summary>
             <returns>最近项目文件路径列表</returns>
         </member>
@@ -1783,7 +1793,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.11
+            version=2.6.12
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
