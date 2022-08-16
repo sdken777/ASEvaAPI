@@ -32,15 +32,10 @@ namespace ASEvaAPIEtoTest
         private void initBasicTagPageBLists(StackLayout layout)
         {
             var listBox = layout.AddControl(new ListBox(), true) as ListBox;
-            listBox.Items.Add(t.Format("basic-list-item", "A"));
-            listBox.Items.Add(t.Format("basic-list-item", "B"));
-            listBox.Items.Add(t.Format("basic-list-item", "C"));
+            for (int i = 0; i < 26; i++) listBox.Items.Add(t.Format("basic-list-item", (char)('A' + i)));
 
             var checkListBox = layout.AddControl(new CheckableListBox(), true) as CheckableListBox;
-            checkListBox.AddItem(t.Format("basic-list-item-short", "A"), false, true);
-            checkListBox.AddItem(t.Format("basic-list-item-short", "B"), false, false);
-            checkListBox.AddItem(t.Format("basic-list-item-short", "C"), true, true);
-            checkListBox.AddItem(t.Format("basic-list-item-short", "D"), true, false);
+            for (int i = 0; i < 26; i++) checkListBox.AddItem(t.Format("basic-list-item-short", (char)('A' + i)), i % 2 == 0, (i / 2) % 2 == 0);
         }
 
         private void initBasicTagPageBTreeView(TreeGridView view)
