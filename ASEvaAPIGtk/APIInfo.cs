@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 3, 6); // 修复Wayland下的渲染条件
+            return new Version(2, 3, 3, 7); // 修正GridView在ReloadData时重置滚动条问题
         }
     }
 }
