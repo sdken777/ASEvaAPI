@@ -4,9 +4,9 @@ using Eto.Forms;
 
 namespace ASEva.UIMonoMac
 {
-    class GLViewFactoryMonoMac : GLView.GLViewBackendFactory
+    class GLViewFactoryMonoMac : GLBackendFactory
     {
-        public void CreateGLViewBackend(GLView.GLViewCallback glView, out Control etoControl, out GLView.GLViewBackend glViewBackend)
+        public void CreateGLBackend(GLCallback glView, GLOptions options, out Control etoControl, out GLBackend glViewBackend)
         {
             var openglView = new OpenGLView(new MonoMac.CoreGraphics.CGRect(0, 0, 100, 100));
             openglView.SetCallback(glView);

@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.8.3
+            version=2.8.6
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -397,6 +397,17 @@
             </summary>
             <param name="image">通用图像数据</param>
             <returns>Skia图像对象</returns>
+        </member>
+        <member name="T:ASEva.UIEto.ContainerExtensions">
+            <summary>
+            (api:eto=2.8.4) 方便操作控件容器的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ContainerExtensions.CloseRecursively(Eto.Forms.Container)">
+            <summary>
+            释放控件容器中的所有SkiaView等视图的资源
+            </summary>
+            <param name="container">控件容器对象</param>
         </member>
         <member name="T:ASEva.UIEto.ContextMenuExtensions">
             <summary>
@@ -1120,7 +1131,7 @@
         </member>
         <member name="T:ASEva.UIEto.GLTextTask">
             <summary>
-            (api:eto=2.6.0) GLView的文本绘制任务
+            (api:eto=2.6.0) OpenGL文本绘制任务
             </summary>
         </member>
         <member name="F:ASEva.UIEto.GLTextTask.text">
@@ -1180,7 +1191,7 @@
         </member>
         <member name="T:ASEva.UIEto.GLTextTasks">
             <summary>
-            (api:eto=2.6.0) GLView的文本绘制任务对象
+            (api:eto=2.6.0) OpenGL文本绘制任务对象
             </summary>
         </member>
         <member name="M:ASEva.UIEto.GLTextTasks.Add(System.String,System.Int32,System.Int32,System.Byte,System.Byte,System.Byte,System.Single)">
@@ -1195,7 +1206,7 @@
         </member>
         <member name="T:ASEva.UIEto.GLSizeInfo">
             <summary>
-            (api:eto=2.6.0) GLView的尺寸信息
+            (api:eto=2.6.0) OpenGL绘制尺寸信息
             </summary>
         </member>
         <member name="P:ASEva.UIEto.GLSizeInfo.LogicalWidth">
@@ -1283,9 +1294,15 @@
             扩展
             </summary>
         </member>
+        <member name="M:ASEva.UIEto.GLContextInfo.ToExtensionList">
+            <summary>
+            (api:eto=2.8.5)
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:ASEva.UIEto.GLView">
             <summary>
-            (api:eto=2.6.0) OpenGL绘制视图（注意，此控件不支持在 ASEva.UIEto.OverlayLayout 中使用）
+            (api:eto=2.6.0) OpenGL绘制视图
             </summary>
         </member>
         <member name="E:ASEva.UIEto.GLView.GLInitialize">

@@ -200,7 +200,12 @@
         </member>
         <member name="M:ASEva.Agency.GetSubDataPathes">
             <summary>
-            (api:app=2.4.0) 获取所有子数据目录的路径
+            (api:app=2.4.0) 已弃用，应使用 ASEva.Agency.GetSubDataPaths
+            </summary>
+        </member>
+        <member name="M:ASEva.Agency.GetSubDataPaths">
+            <summary>
+            (api:app=2.6.12) 获取所有子数据目录的路径
             </summary>
             <returns>所有子数据目录的路径，目录不存在则为null</returns>
         </member>
@@ -1108,7 +1113,12 @@
         </member>
         <member name="M:ASEva.Agency.GetRecentProjectPathes">
             <summary>
-            (api:app=2.3.0) 获取最近项目文件路径列表
+            (api:app=2.3.0) 已弃用，应使用 ASEva.Agency.GetRecentProjectPaths
+            </summary>
+        </member>
+        <member name="M:ASEva.Agency.GetRecentProjectPaths">
+            <summary>
+            (api:app=2.6.12) 获取最近项目文件路径列表
             </summary>
             <returns>最近项目文件路径列表</returns>
         </member>
@@ -1781,9 +1791,15 @@
             </summary>
             <returns>是否全局禁用GPU渲染</returns>
         </member>
+        <member name="M:ASEva.Agency.IsOnscreenGPURenderingEnabled">
+            <summary>
+            (api:app=2.6.13) 获取是否全局启用在屏GPU渲染
+            </summary>
+            <returns>是否全局启用在屏GPU渲染（若已全局禁用GPU渲染则返回false）</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.10
+            version=2.6.13
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3383,6 +3399,12 @@
             <param name="callback">框架软件的回调接口</param>
             <returns>是否接受请求，如接受需确保已调用 ASEva.MainWorkflowLicenseCallback.OnRevalidateLicense </returns>
         </member>
+        <member name="M:ASEva.MainWorkflow.OnCoreInitPhase(System.String)">
+            <summary>
+            (api:app=2.6.11) [可选实现] 通知框架软件的初始化阶段
+            </summary>
+            <param name="phaseDescription">当前初始化阶段的描述</param>
+        </member>
         <member name="M:ASEva.MainWorkflow.OnCoreInitResult(ASEva.CoreInitResult,System.Boolean)">
             <summary>
             [可选实现][可含模态框] 通知框架软件的初始化结果
@@ -3436,9 +3458,15 @@
         </member>
         <member name="M:ASEva.MainWorkflow.OnCheckDisableGPURendering">
             <summary>
-            [可选实现] 返回是否禁用GPU渲染
+            (api:app=2.6.10) [可选实现] 返回是否禁用GPU渲染
             </summary>
             <returns>是否禁用GPU渲染</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnCheckEnableOnscreenGPURendering">
+            <summary>
+            (api:app=2.6.13) [可选实现] 返回是否启用GPU在屏渲染
+            </summary>
+            <returns>是否启用GPU在屏渲染（若已禁用GPU渲染则无效）</returns>
         </member>
         <member name="M:ASEva.MainWorkflow.OnSelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
             <summary>

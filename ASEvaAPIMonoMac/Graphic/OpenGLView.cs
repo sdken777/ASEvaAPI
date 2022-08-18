@@ -10,7 +10,7 @@ using ASEva.Utility;
 
 namespace ASEva.UIMonoMac
 {
-    class OpenGLView : NSOpenGLView, GLView.GLViewBackend
+    class OpenGLView : NSOpenGLView, GLBackend
     {
         public OpenGLView(CGRect frameRect) : base(frameRect)
         {
@@ -28,7 +28,7 @@ namespace ASEva.UIMonoMac
             });
         }
 
-        public void SetCallback(GLView.GLViewCallback callback)
+        public void SetCallback(GLCallback callback)
         {
             this.callback = callback;
         }
@@ -226,7 +226,7 @@ namespace ASEva.UIMonoMac
 
         private class TextView : NSTextView
         {
-            public TextView(GLView.GLViewCallback callback, NSView parent)
+            public TextView(GLCallback callback, NSView parent)
             {
                 this.callback = callback;
                 this.parent = parent;
@@ -283,7 +283,7 @@ namespace ASEva.UIMonoMac
                 return new Eto.Forms.MouseEventArgs(buttons, Eto.Forms.Keys.None, location, delta);
             }
 
-            private GLView.GLViewCallback callback;
+            private GLCallback callback;
             private NSView parent;
         }
 
@@ -301,7 +301,7 @@ namespace ASEva.UIMonoMac
         }
 
         private OpenGL gl = null;
-        private GLView.GLViewCallback callback = null;
+        private GLCallback callback = null;
         private InitStatus initStatus = InitStatus.NotInitialized;
         private GLSizeInfo size = null;
         private List<TextViewContext> textViews = new List<TextViewContext>();
