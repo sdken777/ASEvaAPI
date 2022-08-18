@@ -12,7 +12,7 @@ using Eto.WinForms;
 
 namespace ASEva.UICoreWF
 {
-    partial class OpenGLControl : UserControl, GLView.GLViewBackend
+    partial class OpenGLControl : UserControl, GLBackend
     {
         public OpenGLControl()
         {
@@ -23,7 +23,7 @@ namespace ASEva.UICoreWF
             pictureBox.MouseWheel += pictureBox_MouseWheel;
         }
 
-        public void SetCallback(GLView.GLViewCallback callback)
+        public void SetCallback(GLCallback callback)
         {
             this.callback = callback;
         }
@@ -332,7 +332,7 @@ namespace ASEva.UICoreWF
         }
 
         private OpenGL gl = null;
-        private GLView.GLViewCallback callback = null;
+        private GLCallback callback = null;
         private bool? initOK = null;
         private IntPtr hdc = IntPtr.Zero;
         private IntPtr context = IntPtr.Zero;

@@ -7,16 +7,11 @@ using Eto.WinForms;
 
 namespace ASEva.UICoreWF
 {
-    class GLViewFactoryCoreWF : GLView.GLViewBackendFactory
+    class GLViewFactoryCoreWF : GLBackendFactory
     {
-        public GLViewFactoryCoreWF(bool useTextTasks)
+        public void CreateGLBackend(GLCallback glView, GLOptions options, out Control etoControl, out GLBackend glViewBackend)
         {
-            this.useTextTasks = useTextTasks;
-        }
-
-        public void CreateGLViewBackend(GLView.GLViewCallback glView, out Control etoControl, out GLView.GLViewBackend glViewBackend)
-        {
-            if (useTextTasks)
+            if (!options.EnableOnscreenRendering || options.UseTextTasks)
             {
                 var openglControl = new OpenGLControl();
                 openglControl.SetCallback(glView);
@@ -31,7 +26,5 @@ namespace ASEva.UICoreWF
                 glViewBackend = openglControl;
             }
         }
-
-        private bool useTextTasks;
     }
 }

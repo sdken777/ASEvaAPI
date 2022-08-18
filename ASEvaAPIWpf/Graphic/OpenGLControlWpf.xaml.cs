@@ -21,7 +21,7 @@ namespace ASEva.UIWpf
     /// <summary>
     /// OpenGLControlWpf.xaml 的交互逻辑
     /// </summary>
-    partial class OpenGLControlWpf : UserControl, GLView.GLViewBackend
+    partial class OpenGLControlWpf : UserControl, GLBackend
     {
         public OpenGLControlWpf()
         {
@@ -47,7 +47,7 @@ namespace ASEva.UIWpf
             {}
         }
 
-        public void SetCallback(GLView.GLViewCallback callback)
+        public void SetCallback(GLCallback callback)
         {
             this.callback = callback;
         }
@@ -338,7 +338,7 @@ namespace ASEva.UIWpf
         }
 
         private OpenGL gl = null;
-        private GLView.GLViewCallback callback = null;
+        private GLCallback callback = null;
         private bool? initOK = null;
         private IntPtr hwnd = IntPtr.Zero;
         private IntPtr hdc = IntPtr.Zero;

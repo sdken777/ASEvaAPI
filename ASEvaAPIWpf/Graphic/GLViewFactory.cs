@@ -7,9 +7,9 @@ using Eto.Wpf;
 
 namespace ASEva.UIWpf
 {
-    class GLViewFactoryWpf : GLView.GLViewBackendFactory
+    class GLViewFactoryWpf : GLBackendFactory
     {
-        public void CreateGLViewBackend(GLView.GLViewCallback glView, out Control etoControl, out GLView.GLViewBackend glViewBackend)
+        public void CreateGLBackend(GLCallback glView, GLOptions options, out Control etoControl, out GLBackend glViewBackend)
         {
             var openglControl = new OpenGLControlWpf();
             openglControl.SetCallback(glView);

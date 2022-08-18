@@ -10,7 +10,7 @@ using Eto.WinForms;
 
 namespace ASEva.UICoreWF
 {
-    partial class OpenGLOnscreenControl : UserControl, GLView.GLViewBackend
+    partial class OpenGLOnscreenControl : UserControl, GLBackend
     {
         public OpenGLOnscreenControl()
         {
@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
             MouseWheel += OpenGLOnscreenControl_MouseWheel;
         }
 
-        public void SetCallback(GLView.GLViewCallback callback)
+        public void SetCallback(GLCallback callback)
         {
             this.callback = callback;
         }
@@ -195,7 +195,7 @@ namespace ASEva.UICoreWF
         }
 
         private OpenGL gl = null;
-        private GLView.GLViewCallback callback = null;
+        private GLCallback callback = null;
         private bool? initOK = null;
         private IntPtr context = IntPtr.Zero;
         private GLSizeInfo size = null;
