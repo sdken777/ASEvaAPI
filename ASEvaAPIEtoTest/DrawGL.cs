@@ -57,7 +57,7 @@ namespace ASEvaAPIEtoTest
                 gl.ClearColor(0.0f, 0.0f, 0.25f + offset * 0.5f, 1.0f);
                 gl.Clear(OpenGL.GL_COLOR_BUFFER_BIT | OpenGL.GL_DEPTH_BUFFER_BIT);
 
-                gl.VertexPointer(3, 0, new float[]
+                var triangleVertexData = new float[]
                 {
                     0.0f + offset, 0.5f, -1.0f,
                     -0.5f + offset, -0.5f, -1.0f,
@@ -65,8 +65,8 @@ namespace ASEvaAPIEtoTest
                     0.0f - offset, 0.5f, -2.0f,
                     -0.5f - offset, -0.5f, -2.0f,
                     0.5f - offset, -0.5f, -2.0f
-                });
-                gl.ColorPointer(3, 0, new float[]
+                };
+                var triangleColorData = new float[]
                 {
                     1.0f, 0.0f, 0.0f,
                     0.0f, 1.0f, 0.0f,
@@ -74,8 +74,16 @@ namespace ASEvaAPIEtoTest
                     0.0f, 0.0f, 1.0f,
                     0.0f, 0.0f, 1.0f,
                     0.0f, 0.0f, 1.0f,
-                });
-                gl.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6);
+                };
+                unsafe
+                {
+                    fixed (float* triangleVertexDataPtr = &(triangleVertexData[0]), triangleColorDataPtr = &(triangleColorData[0]))
+                    {
+                        gl.VertexPointer(3, OpenGL.GL_FLOAT, 0, (IntPtr)triangleVertexDataPtr);
+                        gl.ColorPointer(3, OpenGL.GL_FLOAT, 0, (IntPtr)triangleColorDataPtr);
+                        gl.DrawArrays(OpenGL.GL_TRIANGLES, 0, 6);
+                    }
+                }
 
                 var centerX = glViewSizeInfo.LogicalWidth / 2;
                 var centerY = glViewSizeInfo.LogicalHeight / 2;
@@ -85,7 +93,7 @@ namespace ASEvaAPIEtoTest
                 texts.Add("UPPER BOUND", centerX, centerY - 20, 255, 255, 255, 0.5f);
                 texts.Add("LOWER BOUND", centerX, centerY + 20, 255, 255, 255, 0.5f);
 
-                gl.VertexPointer(3, 0, new float[]
+                var quadVertexData = new float[]
                 {
                     -0.5f, 0.8f, -1.0f,
                     0.5f, 0.8f, -1.0f,
@@ -95,8 +103,8 @@ namespace ASEvaAPIEtoTest
                     0.5f, 0.7f, -0.999f,
                     0.5f, 0.75f, -0.999f,
                     -0.5f, 0.775f, -0.999f,
-                });
-                gl.ColorPointer(3, 0, new float[]
+                };
+                var quadColorData = new float[]
                 {
                     1.0f, 0.0f, 0.0f,
                     1.0f, 0.0f, 0.0f,
@@ -106,8 +114,16 @@ namespace ASEvaAPIEtoTest
                     0.0f, 1.0f, 0.0f,
                     0.0f, 1.0f, 0.0f,
                     0.0f, 1.0f, 0.0f,
-                });
-                gl.DrawArrays(OpenGL.GL_QUADS, 0, 8);
+                };
+                unsafe
+                {
+                    fixed (float* quadVertexDataPtr = &(quadVertexData[0]), quadColorDataPtr = &(quadColorData[0]))
+                    {
+                        gl.VertexPointer(3, OpenGL.GL_FLOAT, 0, (IntPtr)quadVertexDataPtr);
+                        gl.ColorPointer(3, OpenGL.GL_FLOAT, 0, (IntPtr)quadColorDataPtr);
+                        gl.DrawArrays(OpenGL.GL_QUADS, 0, 8);
+                    }
+                }
 
                 texts.Add(new GLTextTask
                 {

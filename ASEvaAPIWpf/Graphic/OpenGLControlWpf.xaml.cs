@@ -249,7 +249,9 @@ namespace ASEva.UIWpf
                 ctxInfo.version = gl.Version;
                 ctxInfo.vendor = gl.Vendor;
                 ctxInfo.renderer = gl.Renderer;
-                ctxInfo.extensions = gl.Extensions;
+
+                var wglExtensionsString = WGL.GetWglExtensionsString(gl, hdc);
+                ctxInfo.extensions = gl.Extensions + (wglExtensionsString.Length == 0 ? "" : (" " + wglExtensionsString));
 
                 var pixelScale = (float)PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice.M11;
                 size = new GLSizeInfo((int)ActualWidth, (int)ActualHeight, (int)(pixelScale * ActualWidth), (int)(pixelScale * ActualHeight), pixelScale, (float)(ActualWidth / ActualHeight));

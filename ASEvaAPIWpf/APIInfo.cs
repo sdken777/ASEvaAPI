@@ -18,7 +18,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 3, 2, 1); // 离屏渲染初始化时检查GL_EXT_framebuffer_object
+            return new Version(1, 3, 2, 2); // 获取完整OpenGL扩展信息
         }
     }
 }

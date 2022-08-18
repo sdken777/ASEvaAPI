@@ -152,7 +152,9 @@ namespace ASEva.UICoreWF
                 ctxInfo.version = gl.Version;
                 ctxInfo.vendor = gl.Vendor;
                 ctxInfo.renderer = gl.Renderer;
-                ctxInfo.extensions = gl.Extensions;
+
+                var wglExtensionsString = WGL.GetWglExtensionsString(gl, hdc);
+                ctxInfo.extensions = gl.Extensions + (wglExtensionsString.Length == 0 ? "" : (" " + wglExtensionsString));
 
                 var pixelScale = (float)DeviceDpi / 96;
                 size = new GLSizeInfo((int)(Width / pixelScale), (int)(Height / pixelScale), Width, Height, pixelScale, (float)Width / Height);
