@@ -7,7 +7,7 @@ using ASEva.Utility;
 namespace ASEva.UIGtk
 {
     #pragma warning disable 612
-    class WaylandOffscreenView : DrawingArea, GLView.GLViewBackend
+    class WaylandOffscreenView : DrawingArea, GLBackend
     {
         public WaylandOffscreenView()
         {
@@ -17,7 +17,7 @@ namespace ASEva.UIGtk
             Drawn += onDraw;
         }
 
-        public void SetCallback(GLView.GLViewCallback callback)
+        public void SetCallback(GLCallback callback)
         {
             this.callback = callback;
         }
@@ -295,7 +295,7 @@ namespace ASEva.UIGtk
         }
 
         private OpenGL gl = null;
-        private GLView.GLViewCallback callback;
+        private GLCallback callback;
         private IntPtr context = IntPtr.Zero;
         private IntPtr wlEglWindow = IntPtr.Zero;
         private IntPtr eglSurface = IntPtr.Zero;

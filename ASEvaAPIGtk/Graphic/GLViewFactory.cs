@@ -5,22 +5,20 @@ using Eto.GtkSharp;
 
 namespace ASEva.UIGtk
 {
-    class GLViewFactoryGtk : GLView.GLViewBackendFactory
+    class GLViewFactoryGtk : GLBackendFactory
     {
-        public GLViewFactoryGtk(String uiBackend, bool useTextTasks, bool useLegacyAPI)
+        public GLViewFactoryGtk(String uiBackend)
         {
             this.uiBackend = uiBackend;
-            this.useTextTasks = useTextTasks;
-            this.useLegacyAPI = useLegacyAPI;
         }
 
-        public void CreateGLViewBackend(GLView.GLViewCallback glView, out Control etoControl, out GLView.GLViewBackend glViewBackend)
+        public void CreateGLBackend(GLCallback glView, GLOptions options, out Control etoControl, out GLBackend glViewBackend)
         {
             try
             {
                 if (uiBackend == "x11")
                 {
-                    if (useTextTasks)
+                    if (!options.EnableOnscreenRendering || options.UseTextTasks)
                     {
                         var view = new X11OffscreenView();
                         view.SetCallback(glView);
@@ -44,7 +42,7 @@ namespace ASEva.UIGtk
                 }
                 else
                 {
-                    if (useLegacyAPI)
+                    if (options.UseLegacyAPI)
                     {
                         var envGdkGl = Environment.GetEnvironmentVariable("GDK_GL");
                         var isLegacy = envGdkGl != null && envGdkGl == "LEGACY";
@@ -78,7 +76,5 @@ namespace ASEva.UIGtk
         }
 
         private String uiBackend;
-        private bool useTextTasks;
-        private bool useLegacyAPI;
     }
 }

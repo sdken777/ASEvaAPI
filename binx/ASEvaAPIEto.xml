@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.8.5
+            version=2.8.6
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -1131,7 +1131,7 @@
         </member>
         <member name="T:ASEva.UIEto.GLTextTask">
             <summary>
-            (api:eto=2.6.0) GLView的文本绘制任务
+            (api:eto=2.6.0) OpenGL文本绘制任务
             </summary>
         </member>
         <member name="F:ASEva.UIEto.GLTextTask.text">
@@ -1191,7 +1191,7 @@
         </member>
         <member name="T:ASEva.UIEto.GLTextTasks">
             <summary>
-            (api:eto=2.6.0) GLView的文本绘制任务对象
+            (api:eto=2.6.0) OpenGL文本绘制任务对象
             </summary>
         </member>
         <member name="M:ASEva.UIEto.GLTextTasks.Add(System.String,System.Int32,System.Int32,System.Byte,System.Byte,System.Byte,System.Single)">
@@ -1206,7 +1206,7 @@
         </member>
         <member name="T:ASEva.UIEto.GLSizeInfo">
             <summary>
-            (api:eto=2.6.0) GLView的尺寸信息
+            (api:eto=2.6.0) OpenGL绘制尺寸信息
             </summary>
         </member>
         <member name="P:ASEva.UIEto.GLSizeInfo.LogicalWidth">

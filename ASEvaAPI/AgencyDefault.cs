@@ -1227,5 +1227,10 @@ namespace ASEva
         {
             return false;
         }
+
+        public bool IsOnscreenGPURenderingEnabled()
+        {
+            return false;
+        }
     }
 }

@@ -58,7 +58,7 @@ namespace ASEva.UIEto
     }
 
 	/// <summary>
-	/// (api:eto=2.6.0) GLView的文本绘制任务
+	/// (api:eto=2.6.0) OpenGL文本绘制任务
 	/// </summary>
     public struct GLTextTask
     {
@@ -119,7 +119,7 @@ namespace ASEva.UIEto
     }
 
 	/// <summary>
-	/// (api:eto=2.6.0) GLView的文本绘制任务对象
+	/// (api:eto=2.6.0) OpenGL文本绘制任务对象
 	/// </summary>
     public class GLTextTasks
     {
@@ -163,7 +163,7 @@ namespace ASEva.UIEto
     }
 
 	/// <summary>
-	/// (api:eto=2.6.0) GLView的尺寸信息
+	/// (api:eto=2.6.0) OpenGL绘制尺寸信息
 	/// </summary>
     public class GLSizeInfo
     {
@@ -303,7 +303,7 @@ namespace ASEva.UIEto
 	/// <summary>
 	/// (api:eto=2.6.0) OpenGL绘制视图
 	/// </summary>
-	public class GLView : Panel, GLView.GLViewCallback
+	public class GLView : Panel, GLCallback
 	{
 		/// <summary>
 		/// 初始化事件
@@ -344,7 +344,7 @@ namespace ASEva.UIEto
 		public void Close()
 		{
 			if (closed) return;
-			if (glViewBackend != null) glViewBackend.ReleaseGL();
+			if (glBackend != null) glBackend.ReleaseGL();
 			closed = true;
 		}
 		private bool closed = false;
@@ -354,7 +354,7 @@ namespace ASEva.UIEto
 		/// </summary>
 		public void QueueRender()
 		{
-			if (!closed && glViewBackend != null) glViewBackend.QueueRender();
+			if (!closed && glBackend != null) glBackend.QueueRender();
 		}
 
 		/// <summary>
@@ -428,43 +428,56 @@ namespace ASEva.UIEto
             return moduleID;
         }
 
-        public interface GLViewCallback
-		{
-			void OnGLInitialize(OpenGL gl, GLContextInfo contextInfo);
-			void OnGLResize(OpenGL gl, GLSizeInfo sizeInfo);
-			void OnGLRender(OpenGL gl, GLTextTasks textTasks);
-			void OnRaiseMouseDown(MouseEventArgs args);
-			void OnRaiseMouseMove(MouseEventArgs args);
-			void OnRaiseMouseUp(MouseEventArgs args);
-			void OnRaiseMouseWheel(MouseEventArgs args);
-			String OnGetModuleID();
-		}
-
-		public interface GLViewBackend
-		{
-			void QueueRender();
-			void ReleaseGL();
-		}
-
-		public interface GLViewBackendFactory
-		{
-			void CreateGLViewBackend(GLViewCallback glView, out Control etoControl, out GLViewBackend glViewBackend);
-		}
-
 		private void initContent()
 		{
 			if (!Agency.IsGPURenderingDisabled() && Factory != null)
 			{
-				Factory.CreateGLViewBackend(this, out etoControl, out glViewBackend);
+				var options = new GLOptions
+				{
+					EnableOnscreenRendering = Agency.IsOnscreenGPURenderingEnabled(),
+					UseTextTasks = true,
+					UseLegacyAPI = true,
+				};
+				Factory.CreateGLBackend(this, options, out etoControl, out glBackend);
 				if (etoControl != null) Content = etoControl;
 			}
 		}
 
-        public static GLViewBackendFactory Factory { private get; set; }
+        public static GLBackendFactory Factory { private get; set; }
 
 		private Control etoControl;
-		private GLViewBackend glViewBackend;
+		private GLBackend glBackend;
 		private List<DateTime> renderTime = new List<DateTime>();
 		private String moduleID;
+	}
+
+	public interface GLCallback
+	{
+		void OnGLInitialize(OpenGL gl, GLContextInfo contextInfo);
+		void OnGLResize(OpenGL gl, GLSizeInfo sizeInfo);
+		void OnGLRender(OpenGL gl, GLTextTasks textTasks);
+		void OnRaiseMouseDown(MouseEventArgs args);
+		void OnRaiseMouseMove(MouseEventArgs args);
+		void OnRaiseMouseUp(MouseEventArgs args);
+		void OnRaiseMouseWheel(MouseEventArgs args);
+		String OnGetModuleID();
+	}
+
+	public interface GLBackend
+	{
+		void QueueRender();
+		void ReleaseGL();
+	}
+
+	public class GLOptions
+	{
+		public bool EnableOnscreenRendering { get; set; }
+		public bool UseTextTasks { get; set; }
+		public bool UseLegacyAPI { get; set; }
+	}
+
+	public interface GLBackendFactory
+	{
+		void CreateGLBackend(GLCallback glCallback, GLOptions options, out Control etoControl, out GLBackend glBackend);
 	}
 }

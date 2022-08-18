@@ -7,7 +7,7 @@ using ASEva.Utility;
 namespace ASEva.UIGtk
 {
     #pragma warning disable 612
-    class X11OnscreenView : DrawingArea, GLView.GLViewBackend
+    class X11OnscreenView : DrawingArea, GLBackend
     {
         public X11OnscreenView()
         {
@@ -19,7 +19,7 @@ namespace ASEva.UIGtk
             Drawn += onDraw;
         }
 
-        public void SetCallback(GLView.GLViewCallback callback)
+        public void SetCallback(GLCallback callback)
         {
             this.callback = callback;
         }
@@ -165,7 +165,7 @@ namespace ASEva.UIGtk
         }
 
         private OpenGL gl = null;
-        private GLView.GLViewCallback callback;
+        private GLCallback callback;
         private IntPtr context = IntPtr.Zero;
         private uint xid = 0;
         private bool rendererStatusOK = false;

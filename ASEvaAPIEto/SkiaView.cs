@@ -35,7 +35,7 @@ namespace ASEva.UIEto
 	/// <summary>
 	/// (api:eto=2.7.0) Skia绘制视图（注意，此控件不支持在 ASEva.UIEto.OverlayLayout 中使用）
 	/// </summary>
-	public class SkiaView : Panel, GLView.GLViewCallback
+	public class SkiaView : Panel, GLCallback
 	{
 		/// <summary>
 		/// 渲染事件
@@ -47,7 +47,7 @@ namespace ASEva.UIEto
 		/// </summary>
 		public SkiaView()
 		{
-			useGLView = !Agency.IsGPURenderingDisabled();
+			useGL = !Agency.IsGPURenderingDisabled();
 			initContent();
 		}
 
@@ -57,7 +57,7 @@ namespace ASEva.UIEto
 		/// <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
 		public SkiaView(bool disableGLRendering)
 		{
-			useGLView = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
+			useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
 			initContent();
 		}
 
@@ -69,7 +69,7 @@ namespace ASEva.UIEto
 		public SkiaView(String moduleID, bool disableGLRendering)
 		{
 			this.moduleID = moduleID;
-			useGLView = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
+			useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
 			initContent();
 		}
 
@@ -79,7 +79,7 @@ namespace ASEva.UIEto
 		public void Close()
 		{
 			if (closed) return;
-			if (useGLView)
+			if (useGL)
 			{
 				if (skSurface != null)
 				{
@@ -91,7 +91,7 @@ namespace ASEva.UIEto
 					grContext.Dispose();
 					grContext = null;
 				}
-				if (glViewBackend != null) glViewBackend.ReleaseGL();
+				if (glBackend != null) glBackend.ReleaseGL();
 			}
 			else
 			{
@@ -105,9 +105,9 @@ namespace ASEva.UIEto
 		/// </summary>
 		public void QueueRender()
 		{
-			if (useGLView)
+			if (useGL)
 			{
-				if (!closed && glViewBackend != null) glViewBackend.QueueRender();
+				if (!closed && glBackend != null) glBackend.QueueRender();
 			}
 			else
 			{
@@ -276,11 +276,17 @@ namespace ASEva.UIEto
 
 		private void initContent()
 		{
-			if (useGLView)
+			if (useGL)
 			{
 				if (Factory != null)
 				{
-					Factory.CreateGLViewBackend(this, out etoControl, out glViewBackend);
+					var options = new GLOptions
+					{
+						EnableOnscreenRendering = Agency.IsOnscreenGPURenderingEnabled(),
+						UseTextTasks = false,
+						UseLegacyAPI = false,
+					};
+					Factory.CreateGLBackend(this, options, out etoControl, out glBackend);
 					if (etoControl != null) Content = etoControl;
 				}
 			}
@@ -292,10 +298,10 @@ namespace ASEva.UIEto
 			}
 		}
 
-        public static GLView.GLViewBackendFactory Factory { private get; set; }
+        public static GLBackendFactory Factory { private get; set; }
 
 		private Control etoControl;
-		private GLView.GLViewBackend glViewBackend;
+		private GLBackend glBackend;
 		private Drawable drawable;
 		private bool drawableInvalidated = false;
 		private List<DateTime> renderTime = new List<DateTime>();
@@ -313,7 +319,7 @@ namespace ASEva.UIEto
 
 		private CommonImage commonImage;
 
-		private bool useGLView;
+		private bool useGL;
 		private bool closed = false;
 		private String moduleID;
 	}

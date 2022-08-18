@@ -261,6 +261,7 @@ namespace ASEva
         void SetAppFunctionHandler(object caller, String nativeClassID, String funcID, AppFunctionHandler handler);
         void ResetAppFunctionHandler(object caller, String nativeClassID, String funcID);
         bool IsGPURenderingDisabled();
+        bool IsOnscreenGPURenderingEnabled();
     }
 
     /// <summary>
@@ -559,7 +560,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.GetSubDataPaths
+        /// (api:app=2.4.0) 已弃用，应使用 ASEva.Agency.GetSubDataPaths
         /// </summary>
         public static String[] GetSubDataPathes()
         {
@@ -1865,7 +1866,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.GetRecentProjectPaths
+        /// (api:app=2.3.0) 已弃用，应使用 ASEva.Agency.GetRecentProjectPaths
         /// </summary>
         public static String[] GetRecentProjectPathes()
         {
@@ -2833,6 +2834,15 @@ namespace ASEva
         public static bool IsGPURenderingDisabled()
         {
             return Handler.IsGPURenderingDisabled();
+        }
+
+        /// <summary>
+        /// (api:app=2.6.13) 获取是否全局启用在屏GPU渲染
+        /// </summary>
+        /// <returns>是否全局启用在屏GPU渲染（若已全局禁用GPU渲染则返回false）</returns>
+        public static bool IsOnscreenGPURenderingEnabled()
+        {
+            return Handler.IsOnscreenGPURenderingEnabled();
         }
     }
 }

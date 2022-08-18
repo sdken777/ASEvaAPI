@@ -99,10 +99,16 @@ namespace ASEva
         public virtual bool OnCheckMultiInstance() { return false; }
 
         /// <summary>
-        /// [可选实现] 返回是否禁用GPU渲染
+        /// (api:app=2.6.10) [可选实现] 返回是否禁用GPU渲染
         /// </summary>
         /// <returns>是否禁用GPU渲染</returns>
         public virtual bool OnCheckDisableGPURendering() { return false; }
+
+        /// <summary>
+        /// (api:app=2.6.13) [可选实现] 返回是否启用GPU在屏渲染
+        /// </summary>
+        /// <returns>是否启用GPU在屏渲染（若已禁用GPU渲染则无效）</returns>
+        public virtual bool OnCheckEnableOnscreenGPURendering() { return false; }
 
         /// <summary>
         /// [可选实现][可含模态框] 选择总线协议文件

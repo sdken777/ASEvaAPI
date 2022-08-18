@@ -200,7 +200,7 @@
         </member>
         <member name="M:ASEva.Agency.GetSubDataPathes">
             <summary>
-            已弃用，应使用 ASEva.Agency.GetSubDataPaths
+            (api:app=2.4.0) 已弃用，应使用 ASEva.Agency.GetSubDataPaths
             </summary>
         </member>
         <member name="M:ASEva.Agency.GetSubDataPaths">
@@ -1113,7 +1113,7 @@
         </member>
         <member name="M:ASEva.Agency.GetRecentProjectPathes">
             <summary>
-            已弃用，应使用 ASEva.Agency.GetRecentProjectPaths
+            (api:app=2.3.0) 已弃用，应使用 ASEva.Agency.GetRecentProjectPaths
             </summary>
         </member>
         <member name="M:ASEva.Agency.GetRecentProjectPaths">
@@ -1791,9 +1791,15 @@
             </summary>
             <returns>是否全局禁用GPU渲染</returns>
         </member>
+        <member name="M:ASEva.Agency.IsOnscreenGPURenderingEnabled">
+            <summary>
+            (api:app=2.6.13) 获取是否全局启用在屏GPU渲染
+            </summary>
+            <returns>是否全局启用在屏GPU渲染（若已全局禁用GPU渲染则返回false）</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.12
+            version=2.6.13
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3452,9 +3458,15 @@
         </member>
         <member name="M:ASEva.MainWorkflow.OnCheckDisableGPURendering">
             <summary>
-            [可选实现] 返回是否禁用GPU渲染
+            (api:app=2.6.10) [可选实现] 返回是否禁用GPU渲染
             </summary>
             <returns>是否禁用GPU渲染</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnCheckEnableOnscreenGPURendering">
+            <summary>
+            (api:app=2.6.13) [可选实现] 返回是否启用GPU在屏渲染
+            </summary>
+            <returns>是否启用GPU在屏渲染（若已禁用GPU渲染则无效）</returns>
         </member>
         <member name="M:ASEva.MainWorkflow.OnSelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
             <summary>

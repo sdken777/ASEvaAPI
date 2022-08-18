@@ -6,7 +6,7 @@ using ASEva.Utility;
 
 namespace ASEva.UIGtk
 {
-    class DefaultOffscreenView : Overlay, GLView.GLViewBackend
+    class DefaultOffscreenView : Overlay, GLBackend
     {
         public DefaultOffscreenView()
         {
@@ -28,7 +28,7 @@ namespace ASEva.UIGtk
             drawArea.Drawn += onDraw;
         }
 
-        public void SetCallback(GLView.GLViewCallback callback)
+        public void SetCallback(GLCallback callback)
         {
             this.callback = callback;
         }
@@ -117,7 +117,7 @@ namespace ASEva.UIGtk
         }
 
         private OpenGL gl = null;
-        private GLView.GLViewCallback callback;
+        private GLCallback callback;
         private bool rendererStatusOK = false;
         private GLSizeInfo size = null;
         private bool drawQueued = false;
