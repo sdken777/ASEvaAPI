@@ -122,6 +122,12 @@ namespace ASEva.UIGtk
 
 			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
 			public extern static void webkit_javascript_result_unref(IntPtr result);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static IntPtr webkit_web_view_get_inspector(IntPtr web_view);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static void webkit_web_inspector_show(IntPtr inspector);
 		}
 
 		static class NM4
@@ -217,6 +223,12 @@ namespace ASEva.UIGtk
 
 			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
 			public extern static void webkit_javascript_result_unref(IntPtr result);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static IntPtr webkit_web_view_get_inspector(IntPtr web_view);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static void webkit_web_inspector_show(IntPtr inspector);
 		}
 
 		public static string GetString(IntPtr handle)
@@ -411,6 +423,18 @@ namespace ASEva.UIGtk
 		{
 			if (useNM3) NM3.webkit_javascript_result_unref(result);
 			else NM4.webkit_javascript_result_unref(result);
+		}
+
+		public static IntPtr webkit_web_view_get_inspector(IntPtr web_view)
+		{
+			if (useNM3) return NM3.webkit_web_view_get_inspector(web_view);
+			else return NM4.webkit_web_view_get_inspector(web_view);
+		}
+
+		public static void webkit_web_inspector_show(IntPtr inspector)
+		{
+			if (useNM3) NM3.webkit_web_inspector_show(inspector);
+			else NM4.webkit_web_inspector_show(inspector);
 		}
 	}
 }

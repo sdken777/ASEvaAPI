@@ -69,18 +69,19 @@ namespace ASEva.UIGtk
 			Control.Realized += delegate
 			{
 				var uiBackend = ASEva.UIEto.App.GetUIBackend();
+
+				var settings = NativeMethods.webkit_settings_new();
 				if (uiBackend != null && uiBackend == "wayland") // Wayland下使用OpenGL可能导致花屏，或令WaylandOffscreenView卡死
 				{
-					var settings = NativeMethods.webkit_settings_new();
 					NativeMethods.webkit_settings_set_enable_accelerated_2d_canvas(settings, false);
 					NativeMethods.webkit_settings_set_enable_webgl(settings, false);
 					NativeMethods.webkit_settings_set_hardware_acceleration_policy(settings, 2/* WEBKIT_HARDWARE_ACCELERATION_POLICY_NEVER */);
-					webView = new Gtk.Widget(NativeMethods.webkit_web_view_new_with_settings(settings)) { Visible = true };
 				}
-				else
-				{
-					webView = new Gtk.Widget(NativeMethods.webkit_web_view_new()) { Visible = true };
-				}
+				
+				var settingsObject = GLib.Object.GetObject(settings);
+				settingsObject.SetProperty("enable-developer-extras", new GLib.Value(true));
+
+				webView = new Gtk.Widget(NativeMethods.webkit_web_view_new_with_settings(settings)) { Visible = true };
 				Control.Add(webView);
 
 				webView.AddSignalHandler(
@@ -117,6 +118,15 @@ namespace ASEva.UIGtk
 					NativeMethods.webkit_web_view_load_html(WebViewHandle, targetHtmlString, targetBaseUrl);
 					targetHtmlString = null;
 					targetBaseUrl = null;
+				}
+			};
+
+			Control.KeyPressEvent += (o, args) =>
+			{
+				if (webView != null && args.Event.Key == Gdk.Key.F12)
+				{
+					var inspector = NativeMethods.webkit_web_view_get_inspector(WebViewHandle);
+					if (inspector != IntPtr.Zero) NativeMethods.webkit_web_inspector_show(inspector);
 				}
 			};
 		}
