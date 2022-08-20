@@ -8,7 +8,7 @@ namespace ASEva.UIMonoMac
     {
         public void CreateGLBackend(GLCallback glView, GLOptions options, out Control etoControl, out GLBackend glViewBackend)
         {
-            var openglView = new OpenGLView(new MonoMac.CoreGraphics.CGRect(0, 0, 100, 100));
+            var openglView = new OpenGLView(options.UseLegacyAPI);
             openglView.SetCallback(glView);
             etoControl = openglView.ToEto();
             glViewBackend = openglView;

@@ -27,6 +27,7 @@ namespace ASEva.UIMonoMac
         public Application CreateApp(out String uiBackend, out String webViewBackend)
         {
             var platform = new global::Eto.Mac.Platform();
+            platform.Add<WebView.IHandler>(() => new WKWebViewHandler());
 
             var app = new Application(platform);
             var appHandler = app.Handler as Eto.Mac.Forms.ApplicationHandler;
@@ -45,7 +46,7 @@ namespace ASEva.UIMonoMac
             SkiaCanvasExtensions.DefaultFontSize = 13.0f;
 
             uiBackend = null;
-            webViewBackend = "wkwebview";
+            webViewBackend = "webkit2";
             return app;
         }
 

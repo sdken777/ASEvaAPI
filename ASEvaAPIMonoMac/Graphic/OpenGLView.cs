@@ -12,7 +12,7 @@ namespace ASEva.UIMonoMac
 {
     class OpenGLView : NSOpenGLView, GLBackend
     {
-        public OpenGLView(CGRect frameRect) : base(frameRect)
+        public OpenGLView(bool useLegacyAPI) : base(new CGRect(0, 0, 100, 100))
         {
             PixelFormat = new NSOpenGLPixelFormat(new NSOpenGLPixelFormatAttribute[]
             {
@@ -23,7 +23,7 @@ namespace ASEva.UIMonoMac
                 NSOpenGLPixelFormatAttribute.ColorSize, (NSOpenGLPixelFormatAttribute)24,
                 NSOpenGLPixelFormatAttribute.AlphaSize, (NSOpenGLPixelFormatAttribute)8,
                 NSOpenGLPixelFormatAttribute.DepthSize, (NSOpenGLPixelFormatAttribute)16,
-                NSOpenGLPixelFormatAttribute.OpenGLProfile, (NSOpenGLPixelFormatAttribute)NSOpenGLProfile.VersionLegacy,
+                NSOpenGLPixelFormatAttribute.OpenGLProfile, useLegacyAPI ? (NSOpenGLPixelFormatAttribute)NSOpenGLProfile.VersionLegacy : (NSOpenGLPixelFormatAttribute)NSOpenGLProfile.Version3_2Core,
                 (NSOpenGLPixelFormatAttribute)0
             });
         }
