@@ -23,12 +23,10 @@ namespace ASEva.UIGtk
             if (ASEva.APIInfo.GetRunningOS() == "linuxarm")
             {
                 NativeMethods.DetectNM3();
-                webViewBackend = NativeMethods.IsUsingNM3() ? "webkit2legacy" : "webkit2";
                 Redirection.RedirectMarshaller();
                 Redirection.RedirectMenu();
             }
-            else webViewBackend = "webkit2";
-
+  
             var platform = new global::Eto.GtkSharp.Platform();
             platform.Add<LinkButton.IHandler>(() => new LinkButtonHandler());
             platform.Add<NumericStepper.IHandler>(() => new NumericStepperHandler());
@@ -83,6 +81,8 @@ namespace ASEva.UIGtk
             SkiaView.Factory = new GLViewFactoryGtk(uiBackend);
             SkiaCanvasExtensions.DefaultFontName = "Noto Sans CJK SC";
             SkiaCanvasExtensions.DefaultFontSize = 12.5f;
+
+            webViewBackend = "webkit2";
 
             return app;
         }
