@@ -63,10 +63,10 @@ namespace ASEva.UIEto
         /// <param name="window">主窗口</param>
         public static void Run(Form window)
         {
-            if (application != null)
+            if (handler != null && application != null && window != null)
             {
                 window.Closed += delegate { window.CloseRecursively(); };
-                application.Run(window);
+                handler.RunApp(application, window);
             }
         }
 

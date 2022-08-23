@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 6, 0); // 优化GLViewBackendFactory结构，支持在屏渲染选项
+            return new Version(2, 8, 6, 1); // 修正App.Run未调用handler
         }
     }
 }

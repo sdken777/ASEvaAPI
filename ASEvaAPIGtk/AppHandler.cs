@@ -94,6 +94,7 @@ namespace ASEva.UIGtk
 
         public void RunApp(Application application, Form window)
         {
+            if (window.ControlObject is Gtk.Window) DialogHelper.MainWindow = window.ControlObject as Gtk.Window;
             application.Run(window);
         }
 
