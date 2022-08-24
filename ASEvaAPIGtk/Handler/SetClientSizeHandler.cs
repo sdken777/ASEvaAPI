@@ -16,7 +16,8 @@ namespace ASEva.UIGtk
 
         public void SetMinimumClientSize(Window window, int logicalWidth, int logicalHeight)
         {
-            if (App.GetUIBackend() == "wayland")
+            var uiBackend = App.GetUIBackend();
+            if (uiBackend != null && uiBackend == "wayland")
             {
                 var gwindow = window.ControlObject as Gtk.Window;
                 gwindow.Realized += delegate

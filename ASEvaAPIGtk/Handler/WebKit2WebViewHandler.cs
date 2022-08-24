@@ -63,25 +63,43 @@ namespace ASEva.UIGtk
 		string targetHtmlString;
 		string targetBaseUrl;
 
+		private static IntPtr webViewGroup = IntPtr.Zero;
+
 		public WebViewHandler()
 		{
 			Control = new Gtk.ScrolledWindow();
 			Control.Realized += delegate
 			{
-				var uiBackend = ASEva.UIEto.App.GetUIBackend();
-
-				var settings = NativeMethods.webkit_settings_new();
-				if (uiBackend != null && uiBackend == "wayland") // Wayland下使用OpenGL可能导致花屏，或令WaylandOffscreenView卡死
+				if (NativeMethods.IsUsingNM3())
 				{
-					NativeMethods.webkit_settings_set_enable_accelerated_2d_canvas(settings, false);
-					NativeMethods.webkit_settings_set_enable_webgl(settings, false);
-					NativeMethods.webkit_settings_set_hardware_acceleration_policy(settings, 2/* WEBKIT_HARDWARE_ACCELERATION_POLICY_NEVER */);
-				}
-				
-				var settingsObject = GLib.Object.GetObject(settings);
-				settingsObject.SetProperty("enable-developer-extras", new GLib.Value(true));
+					if (webViewGroup == IntPtr.Zero)
+					{
+						var settings = NativeMethods.webkit_settings_new();
+						NativeMethods.webkit_settings_set_enable_developer_extras(settings, true);
+						webViewGroup = NativeMethods.webkit_web_view_group_new("ASEva.UIGtk.WebViewHandler");
+						NativeMethods.webkit_web_view_group_set_settings(webViewGroup, settings);
+					}
 
-				webView = new Gtk.Widget(NativeMethods.webkit_web_view_new_with_settings(settings)) { Visible = true };
+					webView = new Gtk.Widget(NativeMethods.webkit_web_view_new_with_group(webViewGroup)) { Visible = true };
+				}
+				else
+				{
+					var settings = NativeMethods.webkit_settings_new();
+
+					var uiBackend = ASEva.UIEto.App.GetUIBackend();
+					if (uiBackend != null && uiBackend == "wayland") // Wayland下使用OpenGL可能导致花屏，或令WaylandOffscreenView卡死
+					{
+						NativeMethods.webkit_settings_set_enable_accelerated_2d_canvas(settings, false);
+						NativeMethods.webkit_settings_set_enable_webgl(settings, false);
+						NativeMethods.webkit_settings_set_hardware_acceleration_policy(settings, 2/* WEBKIT_HARDWARE_ACCELERATION_POLICY_NEVER */);
+					}
+					
+					var settingsObject = GLib.Object.GetObject(settings);
+					settingsObject.SetProperty("enable-developer-extras", new GLib.Value(true));
+
+					webView = new Gtk.Widget(NativeMethods.webkit_web_view_new_with_settings(settings)) { Visible = true };
+				}
+
 				Control.Add(webView);
 
 				webView.AddSignalHandler(

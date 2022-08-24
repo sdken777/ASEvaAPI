@@ -52,6 +52,21 @@ namespace ASEva.UIGtk
 			public extern static IntPtr webkit_web_view_new();
 
 			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static IntPtr webkit_settings_new();
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static IntPtr webkit_web_view_new_with_group(IntPtr group);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static void webkit_settings_set_enable_accelerated_2d_canvas(IntPtr settings, bool enable);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static void webkit_settings_set_enable_webgl(IntPtr settings, bool enable);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static void webkit_settings_set_enable_developer_extras(IntPtr settings, bool enable);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
 			public extern static void webkit_web_view_load_uri(IntPtr web_view, string uri);
 
 			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
@@ -128,6 +143,15 @@ namespace ASEva.UIGtk
 
 			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
 			public extern static void webkit_web_inspector_show(IntPtr inspector);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static void webkit_web_inspector_detach(IntPtr inspector);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static IntPtr webkit_web_view_group_new(string name);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static void webkit_web_view_group_set_settings(IntPtr group, IntPtr settings);
 		}
 
 		static class NM4
@@ -229,6 +253,9 @@ namespace ASEva.UIGtk
 
 			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
 			public extern static void webkit_web_inspector_show(IntPtr inspector);
+
+			[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+			public extern static void webkit_web_inspector_detach(IntPtr inspector);
 		}
 
 		public static string GetString(IntPtr handle)
@@ -253,25 +280,31 @@ namespace ASEva.UIGtk
 
 		public static IntPtr webkit_web_view_new_with_settings(IntPtr settings)
 		{
-			if (useNM3) return NM3.webkit_web_view_new();
+			if (useNM3) return IntPtr.Zero;
 			else return NM4.webkit_web_view_new_with_settings(settings);
+		}
+
+		public static IntPtr webkit_web_view_new_with_group(IntPtr group)
+		{
+			if (useNM3) return NM3.webkit_web_view_new_with_group(group);
+			else return IntPtr.Zero;
 		}
 
 		public static IntPtr webkit_settings_new()
 		{
-			if(useNM3) return IntPtr.Zero;
+			if(useNM3) return NM3.webkit_settings_new();
 			else return NM4.webkit_settings_new();
 		}
 
 		public static void webkit_settings_set_enable_accelerated_2d_canvas(IntPtr settings, bool enable)
 		{
-			if (useNM3) return;
+			if (useNM3) NM3.webkit_settings_set_enable_accelerated_2d_canvas(settings, enable);
 			else NM4.webkit_settings_set_enable_accelerated_2d_canvas(settings, enable);
 		}
 
 		public static void webkit_settings_set_enable_webgl(IntPtr settings, bool enable)
 		{
-			if (useNM3) return;
+			if (useNM3) NM3.webkit_settings_set_enable_webgl(settings, enable);
 			else NM4.webkit_settings_set_enable_webgl(settings, enable);
 		}
 
@@ -279,6 +312,12 @@ namespace ASEva.UIGtk
 		{
 			if (useNM3) return;
 			else NM4.webkit_settings_set_hardware_acceleration_policy(settings, policy);
+		}
+
+		public static void webkit_settings_set_enable_developer_extras(IntPtr settings, bool enable)
+		{
+			if (useNM3) NM3.webkit_settings_set_enable_developer_extras(settings, enable);
+			else return;
 		}
 
 		public static void webkit_web_view_load_uri(IntPtr web_view, string uri)
@@ -435,6 +474,24 @@ namespace ASEva.UIGtk
 		{
 			if (useNM3) NM3.webkit_web_inspector_show(inspector);
 			else NM4.webkit_web_inspector_show(inspector);
+		}
+
+		public static void webkit_web_inspector_detach(IntPtr inspector)
+		{
+			if (useNM3) NM3.webkit_web_inspector_detach(inspector);
+			else NM4.webkit_web_inspector_detach(inspector);
+		}
+
+		public static IntPtr webkit_web_view_group_new(string name)
+		{
+			if (useNM3) return NM3.webkit_web_view_group_new(name);
+			else return IntPtr.Zero;
+		}
+
+		public static void webkit_web_view_group_set_settings(IntPtr group, IntPtr settings)
+		{
+			if (useNM3) NM3.webkit_web_view_group_set_settings(group, settings);
+			else return;
 		}
 	}
 }

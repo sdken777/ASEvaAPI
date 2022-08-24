@@ -154,7 +154,8 @@ namespace ASEva.UIGtk
 		private void Entry_FocusOutEvent(object o, Gtk.FocusOutEventArgs args)
 		{
 			// if the pull-down is are up, close it
-			if (ASEva.UIEto.App.GetUIBackend() != "wayland") dlg?.CloseDialog();
+			var uiBackend = ASEva.UIEto.App.GetUIBackend();
+			if (uiBackend != null && uiBackend != "wayland") dlg?.CloseDialog();
 		}
 
 		void HandleChanged(object sender, EventArgs e)

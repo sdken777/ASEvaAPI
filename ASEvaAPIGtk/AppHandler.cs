@@ -118,7 +118,7 @@ namespace ASEva.UIGtk
             if (widget == null) return false;
 
             var uiBackend = App.GetUIBackend();
-            if (uiBackend == "x11")
+            if (uiBackend != null && uiBackend == "x11")
             {
                 var appDialog = new AppDialogX11(widget, panel);
                 var ev = new AutoResetEvent(false);
@@ -128,7 +128,7 @@ namespace ASEva.UIGtk
                 appDialog.Dispose();
                 return true;
             }
-            else if (uiBackend == "wayland")
+            else
             {
                 var appDialog = new AppDialogWayland(widget, panel);
                 appDialog.TransientFor = DialogHelper.TopWindow;
@@ -136,7 +136,6 @@ namespace ASEva.UIGtk
                 appDialog.Dispose();
                 return true;
             }
-            else return false;
         }
 
         private String queryUIBackend()
