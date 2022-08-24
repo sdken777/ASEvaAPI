@@ -8,11 +8,11 @@ using SO = System.Reflection.ObfuscationAttribute;
 namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612, CS0649
-    partial class AppDialogGtk : Dialog
+    partial class AppDialogWayland : Dialog
     {
         [UI] [SO] Overlay overlay;
 
-        public AppDialogGtk(Widget widget, DialogPanel dialogPanel) : this(new Builder(dialogPanel.WithBorder ? "AppDialogGtk.glade" : "AppDialogGtkPopup.glade"))
+        public AppDialogWayland(Widget widget, DialogPanel dialogPanel) : this(new Builder("AppDialogWayland.glade"))
         {
             DefaultResponse = ResponseType.Cancel;
             ActionArea.Hide();
@@ -21,6 +21,7 @@ namespace ASEva.UIGtk
             this.panelWidget = widget;
 
             Resizable = dialogPanel.Mode == DialogPanel.DialogMode.ResizableMode;
+            Decorated = dialogPanel.WithBorder;
 
             if (dialogPanel.Title != null) Title = dialogPanel.Title;
 
@@ -48,7 +49,7 @@ namespace ASEva.UIGtk
             dialogPanel.OnDialogClose += OnDialogClose;
         }
 
-        private AppDialogGtk(Builder builder) : base(builder.GetObject("AppDialogGtk").Handle)
+        private AppDialogWayland(Builder builder) : base(builder.GetObject("AppDialogWayland").Handle)
         {
             builder.Autoconnect(this);
         }

@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Threading;
 using ASEva.Utility;
 using ASEva.UIEto;
 using Eto.Drawing;
@@ -116,11 +117,26 @@ namespace ASEva.UIGtk
             var widget = panel.ToNative(true);
             if (widget == null) return false;
 
-            var appDialog = new AppDialogGtk(widget, panel);
-            appDialog.TransientFor = DialogHelper.TopWindow;
-            appDialog.Run();
-            appDialog.Dispose();
-            return true;
+            var uiBackend = App.GetUIBackend();
+            if (uiBackend == "x11")
+            {
+                var appDialog = new AppDialogX11(widget, panel);
+                var ev = new AutoResetEvent(false);
+                appDialog.DeleteEvent += delegate { ev.Set(); };
+                appDialog.ShowAll();
+                while (!ev.WaitOne(0)) Gtk.Application.RunIteration();
+                appDialog.Dispose();
+                return true;
+            }
+            else if (uiBackend == "wayland")
+            {
+                var appDialog = new AppDialogWayland(widget, panel);
+                appDialog.TransientFor = DialogHelper.TopWindow;
+                appDialog.Run();
+                appDialog.Dispose();
+                return true;
+            }
+            else return false;
         }
 
         private String queryUIBackend()
