@@ -48,6 +48,7 @@ namespace ASEva.UIEto
 		public SkiaView()
 		{
 			useGL = !Agency.IsGPURenderingDisabled();
+			requestOnscreenRendering = false;
 			initContent();
 		}
 
@@ -58,6 +59,7 @@ namespace ASEva.UIEto
 		public SkiaView(bool disableGLRendering)
 		{
 			useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
+			requestOnscreenRendering = false;
 			initContent();
 		}
 
@@ -70,6 +72,21 @@ namespace ASEva.UIEto
 		{
 			this.moduleID = moduleID;
 			useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
+			requestOnscreenRendering = false;
+			initContent();
+		}
+
+		/// <summary>
+		/// (api:eto=2.8.7) 构造函数
+		/// </summary>
+		/// <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
+		/// <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
+		/// <param name="requestOnscreenRendering">在未禁用OpenGL渲染时，是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
+		public SkiaView(String moduleID, bool disableGLRendering, bool requestOnscreenRendering)
+		{
+			this.moduleID = moduleID;
+			useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
+			requestOnscreenRendering = useGL && requestOnscreenRendering;
 			initContent();
 		}
 
@@ -139,6 +156,14 @@ namespace ASEva.UIEto
 					return (float)renderTime.Count / 3;
 				}
 			}
+		}
+
+		/// <summary>
+		/// (api:eto=2.8.7) 是否支持被其他控件覆盖
+		/// </summary>
+		public bool SupportOverlay
+		{
+			get { return supportOverlay; }
 		}
 
         public void OnGLInitialize(OpenGL gl, GLContextInfo contextInfo)
@@ -282,11 +307,11 @@ namespace ASEva.UIEto
 				{
 					var options = new GLOptions
 					{
-						EnableOnscreenRendering = Agency.IsOnscreenGPURenderingEnabled(),
+						EnableOnscreenRendering = requestOnscreenRendering || Agency.IsOnscreenGPURenderingEnabled(),
 						UseTextTasks = false,
 						UseLegacyAPI = false,
 					};
-					Factory.CreateGLBackend(this, options, out etoControl, out glBackend);
+					Factory.CreateGLBackend(this, options, out etoControl, out glBackend, out supportOverlay);
 					if (etoControl != null) Content = etoControl;
 				}
 			}
@@ -322,5 +347,7 @@ namespace ASEva.UIEto
 		private bool useGL;
 		private bool closed = false;
 		private String moduleID;
+		private bool requestOnscreenRendering;
+		private bool supportOverlay = false;
 	}
 }

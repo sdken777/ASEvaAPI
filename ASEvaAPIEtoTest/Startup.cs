@@ -10,28 +10,27 @@ namespace ASEvaAPIEtoTest
         public Startup()
         {
             Icon = Icon.FromResource("icon.png");
-            SetFixMode(350, 50, false);
+            SetFixMode(400, 80, false);
 
             var layout = this.SetContentAsRowLayout();
-            layout.AddLabel("Language: ");
-            radioButtonList = layout.AddRadioButtonList(new string[] { "English", "中文" });
-            layout.AddSpace();
+            var optionsLayout = layout.AddTableLayout(true);
             layout.AddButton("OK").Click += delegate { this.Close(); };
+
+            var row = optionsLayout.AddRow(true);
+            row.AddLabel("Language: ");
+            radiosLanguage = row.AddRadioButtonList(new string[] { "English", "中文" });
+
+            row = optionsLayout.AddRow(true);
+            row.AddLabel("Rendering: ");
+            radiosRendering = row.AddRadioButtonList(new string[] { "Offscreen", "Onscreen" });
         }
 
         public override void OnClosing()
         {
-            switch (radioButtonList.SelectedIndex)
-            {
-                case 0:
-                    StringResult = "en";
-                    break;
-                case 1:
-                    StringResult = "ch";
-                    break;
-            }
+            StringResult = radiosLanguage.SelectedIndex == 1 ? "ch" : "en";
+            BoolResult = radiosRendering.SelectedIndex == 1;
         }
 
-        private RadioButtonList radioButtonList;
+        private RadioButtonList radiosLanguage, radiosRendering;
     }
 }

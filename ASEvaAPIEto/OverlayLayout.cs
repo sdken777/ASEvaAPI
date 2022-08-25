@@ -25,7 +25,14 @@ namespace ASEva.UIEto
         /// <returns>新添加的控件</returns>
         public Control AddControl(Control control, int? topLogicalPadding, int? bottomLogicalPadding, int? leftLogicalPadding, int? rightLogicalPadding)
         {
-            if (control is SkiaView) return null; // 不支持SkiaView
+            if (control is GLView)
+            {
+                if (!(control as GLView).SupportOverlay) return null;
+            }
+            if (control is SkiaView)
+            {
+                if (!(control as SkiaView).SupportOverlay) return null;
+            }
 
             ControlPadding padding = null;
             if (!paddingTable.ContainsKey(control)) paddingTable[control] = new ControlPadding();

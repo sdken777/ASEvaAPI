@@ -9,10 +9,10 @@ namespace ASEvaAPIEtoTest
 {
     partial class TestWindow
     {
-        private void initDrawSkia2D(TabPage tabPage, bool disableGPU)
+        private void initDrawSkia2D(TabPage tabPage, bool disableGPU, bool onscreenRendering = false)
         {
             var layout = tabPage.SetContentAsColumnLayout();
-            var skiaView = layout.AddControl(new SkiaView(disableGPU), true, 200, 0) as SkiaView;
+            var skiaView = layout.AddControl(new SkiaView(null, disableGPU, onscreenRendering), true, 200, 0) as SkiaView;
             skiaViews.Add(skiaView);
 
             skiaView.Render += (o, args) =>

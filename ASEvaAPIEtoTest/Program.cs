@@ -18,8 +18,7 @@ namespace ASEvaAPIEtoTest
             var startup = new Startup();
             App.RunDialog(startup);
 
-            var window = new TestWindow(startup.StringResult);
-            window.MoveToCenter();
+            var window = new TestWindow(startup.StringResult, startup.BoolResult);
             App.Run(window);
         }
     }

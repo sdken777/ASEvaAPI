@@ -6,7 +6,7 @@ namespace ASEvaAPIEtoTest
 {
     partial class TestWindow
     {
-        private void initDrawGroupBox(GroupBox groupBox)
+        private void initDrawGroupBox(GroupBox groupBox, bool onscreenRendering)
         {
             var layoutRow = groupBox.SetContentAsRowLayout(8, 8, VerticalAlignment.Stretch);
 
@@ -19,13 +19,13 @@ namespace ASEvaAPIEtoTest
             initDrawDefault2D(tabPageDefault2D);
 
             var tabPageSkiaGL = tabControl.AddPage(t["draw-tabpage-skia-gl"]);
-            initDrawSkia2D(tabPageSkiaGL, false);
+            initDrawSkia2D(tabPageSkiaGL, false, onscreenRendering);
 
             var tabPageSkiaCPU = tabControl.AddPage(t["draw-tabpage-skia-cpu"]);
             initDrawSkia2D(tabPageSkiaCPU, true);
 
             var layoutGL = layoutRow.AddColumnLayout(true);
-            initDrawGL(layoutGL);
+            initDrawGL(layoutGL, onscreenRendering);
         }
     }
 }

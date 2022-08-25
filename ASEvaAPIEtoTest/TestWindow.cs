@@ -9,7 +9,7 @@ namespace ASEvaAPIEtoTest
 {
     partial class TestWindow : Form
     {
-        public TestWindow(String languageCode)
+        public TestWindow(String languageCode, bool onscreenRendering)
         {
             t = TextResource.Load("test.xml", languageCode);
 
@@ -37,7 +37,7 @@ namespace ASEvaAPIEtoTest
             initUtilGroupBox(groupWeb);
 
             var groupDraw = rowSecond.AddGroupBox(t["draw-group-title"], true, true);
-            initDrawGroupBox(groupDraw);
+            initDrawGroupBox(groupDraw, onscreenRendering);
 
             rowSecond.AddGroupBox(t["reserved"], true, true, 200, 100);
 

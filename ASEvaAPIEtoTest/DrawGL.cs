@@ -9,14 +9,29 @@ namespace ASEvaAPIEtoTest
 {
     partial class TestWindow
     {
-        private void initDrawGL(StackLayout layout)
+        private void initDrawGL(StackLayout layout, bool onscreenRendering)
         {
-            var overlay = layout.AddControl(new OverlayLayout(), true) as OverlayLayout;
-            glView = overlay.AddControl(new GLView(), 0, 0, 0, 0) as GLView;
-            var button = overlay.AddControl(new Button { Text = t["draw-gl-detail"]}, null, 10, null, 10) as Button;
+            if (onscreenRendering) glView = new GLView(null, true, true, true);
+            else glView = new GLView();
+            var button = new Button { Text = t["draw-gl-detail"]};
+
+            if (glView.SupportOverlay)
+            {
+                var overlay = layout.AddControl(new OverlayLayout(), true) as OverlayLayout;
+                overlay.AddControl(glView, 0, 0, 0, 0);
+                overlay.AddControl(button, null, 10, null, 10);
+            }
+            else layout.AddControl(glView, true);
+
             var layoutBottom = layout.AddRowLayout();
             layoutBottom.AddLinkButton(t["draw-gl-pause-render"]).Click += delegate { glRenderSwitch = false; };
             layoutBottom.AddLinkButton(t["draw-gl-resume-render"]).Click += delegate { glRenderSwitch = true; };
+
+            if (!glView.SupportOverlay)
+            {
+                layoutBottom.AddSpace();
+                layoutBottom.AddControl(button);
+            }
 
             glView.GLInitialize += (o, args) =>
             {

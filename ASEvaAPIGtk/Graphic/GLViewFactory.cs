@@ -12,7 +12,7 @@ namespace ASEva.UIGtk
             this.uiBackend = uiBackend;
         }
 
-        public void CreateGLBackend(GLCallback glView, GLOptions options, out Control etoControl, out GLBackend glViewBackend)
+        public void CreateGLBackend(GLCallback glView, GLOptions options, out Control etoControl, out GLBackend glViewBackend, out bool supportOverlay)
         {
             try
             {
@@ -24,6 +24,7 @@ namespace ASEva.UIGtk
                         view.SetCallback(glView);
                         etoControl = view.ToEto();
                         glViewBackend = view;
+                        supportOverlay = true;
                     }
                     else
                     {
@@ -31,6 +32,7 @@ namespace ASEva.UIGtk
                         view.SetCallback(glView);
                         etoControl = view.ToEto();
                         glViewBackend = view;
+                        supportOverlay = false;
                     }
                 }
                 else if (uiBackend == "wayland")
@@ -39,6 +41,7 @@ namespace ASEva.UIGtk
                         view.SetCallback(glView);
                         etoControl = view.ToEto();
                         glViewBackend = view;
+                        supportOverlay = true;
                 }
                 else
                 {
@@ -52,11 +55,13 @@ namespace ASEva.UIGtk
                             view.SetCallback(glView);
                             etoControl = view.ToEto();
                             glViewBackend = view;
+                            supportOverlay = true;
                         }
                         else
                         {
                             etoControl = null;
                             glViewBackend = null;
+                            supportOverlay = true;
                         }
                     }
                     else
@@ -65,6 +70,7 @@ namespace ASEva.UIGtk
                         view.SetCallback(glView);
                         etoControl = view.ToEto();
                         glViewBackend = view;
+                        supportOverlay = true;
                     }
                 }
             }
@@ -72,6 +78,7 @@ namespace ASEva.UIGtk
             {
                 etoControl = null;
                 glViewBackend = null;
+                supportOverlay = true;
             }
         }
 
