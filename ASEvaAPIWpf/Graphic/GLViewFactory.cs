@@ -9,12 +9,13 @@ namespace ASEva.UIWpf
 {
     class GLViewFactoryWpf : GLBackendFactory
     {
-        public void CreateGLBackend(GLCallback glView, GLOptions options, out Control etoControl, out GLBackend glViewBackend)
+        public void CreateGLBackend(GLCallback glView, GLOptions options, out Control etoControl, out GLBackend glViewBackend, out bool supportOverlay)
         {
             var openglControl = new OpenGLControlWpf();
             openglControl.SetCallback(glView);
             etoControl = openglControl.ToEto();
             glViewBackend = openglControl;
+            supportOverlay = true;
         }
     }
 }

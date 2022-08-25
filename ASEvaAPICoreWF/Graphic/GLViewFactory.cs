@@ -9,7 +9,7 @@ namespace ASEva.UICoreWF
 {
     class GLViewFactoryCoreWF : GLBackendFactory
     {
-        public void CreateGLBackend(GLCallback glView, GLOptions options, out Control etoControl, out GLBackend glViewBackend)
+        public void CreateGLBackend(GLCallback glView, GLOptions options, out Control etoControl, out GLBackend glViewBackend, out bool supportOverlay)
         {
             if (!options.EnableOnscreenRendering || options.UseTextTasks)
             {
@@ -17,6 +17,7 @@ namespace ASEva.UICoreWF
                 openglControl.SetCallback(glView);
                 etoControl = openglControl.ToEto();
                 glViewBackend = openglControl;
+                supportOverlay = true;
             }
             else
             {
@@ -24,6 +25,7 @@ namespace ASEva.UICoreWF
                 openglControl.SetCallback(glView);
                 etoControl = openglControl.ToEto();
                 glViewBackend = openglControl;
+                supportOverlay = false;
             }
         }
     }
