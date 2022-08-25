@@ -25,7 +25,7 @@ namespace ASEva.UICoreWF
                 openglControl.SetCallback(glView);
                 etoControl = openglControl.ToEto();
                 glViewBackend = openglControl;
-                supportOverlay = false;
+                supportOverlay = true;
             }
         }
     }

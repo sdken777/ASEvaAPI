@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 5, 0); // 支持输出supportOverlay
+            return new Version(2, 3, 5, 1); // OpenGLOnscreenControl支持overlay
         }
     }
 }
