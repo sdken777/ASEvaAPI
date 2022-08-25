@@ -1799,7 +1799,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.13
+            version=2.6.14
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -7136,7 +7136,15 @@
             </summary>
             <param name="xmlFileName">资源文件名</param>
             <param name="languageCode">语言代号，en表示英文，ch表示中文，null则通过 ASEva.Agency.GetAppLanguage 获取</param>
-            <returns>多语言文本资源对象</returns>
+            <returns>多语言文本资源对象，获取失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.Utility.TextResource.Load(System.Byte[],System.String)">
+            <summary>
+            (api:app=2.6.14) 从XML文件数据加载多语言文本资源
+            </summary>
+            <param name="xmlFileData">XML文件数据</param>
+            <param name="languageCode">语言代号，en表示英文，ch表示中文，null则通过 ASEva.Agency.GetAppLanguage 获取</param>
+            <returns>多语言文本资源对象，获取失败则返回null</returns>
         </member>
         <member name="P:ASEva.Utility.TextResource.Item(System.String)">
             <summary>

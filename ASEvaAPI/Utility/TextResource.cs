@@ -17,7 +17,7 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="xmlFileName">资源文件名</param>
         /// <param name="languageCode">语言代号，en表示英文，ch表示中文，null则通过 ASEva.Agency.GetAppLanguage 获取</param>
-        /// <returns>多语言文本资源对象</returns>
+        /// <returns>多语言文本资源对象，获取失败则返回null</returns>
         public static TextResource Load(String xmlFileName, String languageCode = null)
         {
             var instream = Assembly.GetCallingAssembly().GetManifestResourceStream(xmlFileName);
@@ -27,16 +27,27 @@ namespace ASEva.Utility
             instream.Read(data, 0, data.Length);
             instream.Close();
 
-            if (data == null || data.Length <= 3) return null;
+            return Load(data, languageCode);
+        }
 
-            if (data[0] == 0xEF && data[1] == 0xBB && data[2] == 0xBF)
+        /// <summary>
+        /// (api:app=2.6.14) 从XML文件数据加载多语言文本资源
+        /// </summary>
+        /// <param name="xmlFileData">XML文件数据</param>
+        /// <param name="languageCode">语言代号，en表示英文，ch表示中文，null则通过 ASEva.Agency.GetAppLanguage 获取</param>
+        /// <returns>多语言文本资源对象，获取失败则返回null</returns>
+        public static TextResource Load(byte[] xmlFileData, String languageCode)
+        {
+            if (xmlFileData == null || xmlFileData.Length <= 3) return null;
+
+            if (xmlFileData[0] == 0xEF && xmlFileData[1] == 0xBB && xmlFileData[2] == 0xBF)
             {
-                var buf = new byte[data.Length - 3];
-                Array.Copy(data, 3, buf, 0, buf.Length);
-                data = buf;
+                var buf = new byte[xmlFileData.Length - 3];
+                Array.Copy(xmlFileData, 3, buf, 0, buf.Length);
+                xmlFileData = buf;
             }
 
-            var xmlString = Encoding.UTF8.GetString(data);
+            var xmlString = Encoding.UTF8.GetString(xmlFileData);
             if (xmlString == null) return null;
 
             var langCodes = new List<String>();
