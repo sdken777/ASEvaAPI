@@ -253,12 +253,23 @@ namespace ASEva.UIEto
                     var dllFilePath = workPath + Path.DirectorySeparatorChar + dllFileName;
                     if (File.Exists(dllFilePath))
                     {
-                        var stream = new FileStream(dllFilePath, FileMode.Open, FileAccess.Read);
-                        var fileBinary = new byte[stream.Length];
-                        stream.Read(fileBinary, 0, (int)stream.Length);
-                        stream.Close();
+                        var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
 
-                        var assembly = Assembly.Load(fileBinary);
+                        Assembly assembly = null;
+                        foreach (var target in loadedAssemblies)
+                        {
+                            if (target.FullName.StartsWith("Microsoft.GeneratedCode")) continue;
+                            String assemblyLocation = null;
+                            try { assemblyLocation = target.Location; }
+                            catch (Exception) { continue; }
+                            if (assemblyLocation == dllFilePath || assemblyLocation == dllFileName) assembly = target;
+                        }
+                        if (assembly == null) 
+                        {
+                            try { assembly = Assembly.LoadFrom(dllFilePath); }
+                            catch {}
+                        }
+
                         if (assembly != null)
                         {
                             var handlerCreator = assembly.GetType("ASEva." + uiNamespace + ".AppHandlerCreator");

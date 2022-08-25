@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 7, 0); // GLView增加requestOnscreenRendering, drawText和useLegacyAPI选项。SkiaView增加requestOnscreenRendering选项。新增GLView/SkiaView.SupportOverlay，并在OverlayLayout中使用
+            return new Version(2, 8, 7, 1); // 修复initApp动态加载问题
         }
     }
 }
