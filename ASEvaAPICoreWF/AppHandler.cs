@@ -57,8 +57,18 @@ namespace ASEva.UICoreWF
             return new Font(font.FontFamily.ToEto(), font.Size);
         }
 
+        private void findAndHideWebViews(Container panel)
+        {
+            foreach (var c in panel.Controls)
+            {
+                if (c is WebView) (c.ControlObject as Microsoft.Web.WebView2.WinForms.WebView2).Visible = false;
+                else if (c is Container) findAndHideWebViews(c as Container);
+            }
+        }
+
         public void RunApp(Application application, Form window)
         {
+            window.Closed += delegate { findAndHideWebViews(window); };
             application.Run(window);
         }
 
@@ -84,6 +94,7 @@ namespace ASEva.UICoreWF
 
             var dialog = new AppDialogCoreWF(winformControl, panel);
             dialog.ShowDialog();
+            dialog.Dispose();
             return true;
         }
     }
