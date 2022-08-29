@@ -86,7 +86,7 @@ namespace ASEva.UIEto
 		{
 			this.moduleID = moduleID;
 			useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
-			requestOnscreenRendering = useGL && requestOnscreenRendering;
+			this.requestOnscreenRendering = useGL && requestOnscreenRendering;
 			initContent();
 		}
 
