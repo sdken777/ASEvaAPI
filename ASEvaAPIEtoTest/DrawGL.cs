@@ -11,8 +11,7 @@ namespace ASEvaAPIEtoTest
     {
         private void initDrawGL(StackLayout layout, bool onscreenRendering)
         {
-            if (onscreenRendering) glView = new GLView(null, true, true, true);
-            else glView = new GLView();
+            glView = new GLView(null, onscreenRendering, !onscreenRendering, true);
             var button = new Button { Text = t["draw-gl-detail"]};
 
             if (glView.SupportOverlay)
