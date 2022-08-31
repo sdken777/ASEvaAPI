@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 10, 0); // 支持输出supportOverlay
+            return new Version(2, 3, 10, 1); // 修正X11OnscreenView的visual配置
         }
     }
 }

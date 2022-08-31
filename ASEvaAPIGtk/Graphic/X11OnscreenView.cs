@@ -14,6 +14,7 @@ namespace ASEva.UIGtk
             gl = OpenGL.Create(new LinuxFuncLoader());
 
             DoubleBuffered = false;
+            Visual = Gdk.Visual.Best;
 
             Realized += onRealized;
             Drawn += onDraw;
