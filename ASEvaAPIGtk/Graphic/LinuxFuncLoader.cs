@@ -16,12 +16,17 @@ namespace ASEva.UIGtk
             {
                 if ((address = Linux.dlsym(Linux.HandleGLU, name)) != IntPtr.Zero) return address;
             }
-            if (Linux.HandleGLEW != IntPtr.Zero)
+            if (UseEGL)
             {
-                var glewName = "__glew" + name.Substring(2);
-                if ((address = Linux.dlsym(Linux.HandleGLEW, glewName)) != IntPtr.Zero) return address;
+                if (!name.StartsWith("glX") && (address = Linux.eglGetProcAddress(name)) != IntPtr.Zero) return address;
+            }
+            else
+            {
+                if (!name.StartsWith("egl") && (address = Linux.glXGetProcAddress(name)) != IntPtr.Zero) return address;
             }
             return IntPtr.Zero;
         }
+
+        public static bool UseEGL { private get; set; }
     }
 }

@@ -142,8 +142,6 @@ namespace ASEva.UIGtk
             if (context == IntPtr.Zero) return;
 
             Linux.eglMakeCurrent(eglDisplay, eglSurface, eglSurface, context);
-            
-            if (Linux.glewInit(Window) != 0) return;
 
             try
             {

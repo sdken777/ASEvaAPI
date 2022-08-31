@@ -93,8 +93,6 @@ namespace ASEva.UIGtk
             xid = Linux.gdk_x11_window_get_xid(Window.Handle);
             Linux.glXMakeCurrent(display, xid, context);
 
-            if (Linux.glewInit(Window) != 0) return;
-
             try
             {
                 var ctxInfo = new GLContextInfo();

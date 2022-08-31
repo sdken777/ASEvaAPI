@@ -54,8 +54,6 @@ namespace ASEva.UIGtk
 
             glArea.MakeCurrent();
 
-            if (Linux.glewInit(Window) != 0) return;
-
             try
             {
                 var ctxInfo = new GLContextInfo();

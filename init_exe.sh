@@ -51,14 +51,8 @@ cp -vf "$CUR_DIR"/3party/gtk/*.* "$CUR_DIR"/binx/debug/
 cp -vf "$CUR_DIR"/3party/gtk/*.* "$CUR_DIR"/binxa/
 cp -vf "$CUR_DIR"/3party/gtk/*.* "$CUR_DIR"/binxa/debug/
 
-cp -vf "$CUR_DIR"/3party/linux-arm64/*.* "$CUR_DIR"/binxa/
-cp -vf "$CUR_DIR"/3party/linux-arm64/*.* "$CUR_DIR"/binxa/debug/
-
 cp -vf "$CUR_DIR"/3party/linux-arm64-skia-native/*.* "$CUR_DIR"/binxa/
 cp -vf "$CUR_DIR"/3party/linux-arm64-skia-native/*.* "$CUR_DIR"/binxa/debug/
-
-cp -vf "$CUR_DIR"/3party/linux-x64/*.* "$CUR_DIR"/binx/
-cp -vf "$CUR_DIR"/3party/linux-x64/*.* "$CUR_DIR"/binx/debug/
 
 cp -vf "$CUR_DIR"/3party/linux-x64-skia-native/*.* "$CUR_DIR"/binx/
 cp -vf "$CUR_DIR"/3party/linux-x64-skia-native/*.* "$CUR_DIR"/binx/debug/

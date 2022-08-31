@@ -55,7 +55,6 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/binx/ASEvaAPIGtk.dll $TARGET_DIR/binx/
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binx/
     cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binx/
-    cp -vf "$CUR_DIR"/3party/linux-x64/* $TARGET_DIR/binx/
     if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/linux-x64-skia-native/* $TARGET_DIR/binx/
     fi
@@ -69,7 +68,6 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/binxa/ASEvaAPIGtk.dll $TARGET_DIR/binxa/
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binxa/
     cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binxa/
-    cp -vf "$CUR_DIR"/3party/linux-arm64/* $TARGET_DIR/binxa/
     if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/linux-arm64-skia-native/* $TARGET_DIR/binxa/
     fi
@@ -147,7 +145,6 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/binx/ASEvaAPIGtk.dll $TARGET_DIR/binx/debug/
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binx/debug/
         cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binx/debug/
-        cp -vf "$CUR_DIR"/3party/linux-x64/* $TARGET_DIR/binx/debug/
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
             cp -vf "$CUR_DIR"/3party/linux-x64-skia-native/* $TARGET_DIR/binx/debug/
         fi
@@ -161,7 +158,6 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/binxa/ASEvaAPIGtk.dll $TARGET_DIR/binxa/debug/
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binxa/debug/
         cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binxa/debug/
-        cp -vf "$CUR_DIR"/3party/linux-arm64/* $TARGET_DIR/binxa/debug/
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
             cp -vf "$CUR_DIR"/3party/linux-arm64-skia-native/* $TARGET_DIR/binxa/debug/
         fi

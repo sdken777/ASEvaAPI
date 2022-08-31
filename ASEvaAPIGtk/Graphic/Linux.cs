@@ -15,14 +15,10 @@ namespace ASEva.UIGtk
 
 		public static IntPtr HandleGL { get; private set; }
 		public static IntPtr HandleGLU { get; private set; }
-		public static IntPtr HandleGLEW { get; private set; }
 
 		private const string libDL = "libdl.so.2";
         private const string libGL = "libGL.so.1";
 		private const string libGLU = "libGLU.so.1";
-		private const string libGLEWGLX = "libGLEW.so.2.1.glx";
-		private const string libGLEWEGL = "libGLEW.so.2.1.egl";
-		private const string libGLX = "libGLX.so.0";
 		private const string libX11 = "libX11.so.6";
 		private const string libEGL = "libEGL.so.1";
 		private const string libGDK = "libgdk-3.so.0";
@@ -34,135 +30,22 @@ namespace ASEva.UIGtk
 		[DllImport(libDL, SetLastError = true)]
 		public static extern IntPtr dlsym(IntPtr handle, string name);
 
-		private static class GlewGlx
-		{
-			[DllImport(libGLEWGLX, SetLastError = true)]
-			public static extern uint glewInit();
-		}
+		[DllImport(libGL, SetLastError = true)]
+		public static extern IntPtr glXGetProcAddress(string name);
 
-		private static class GlewEgl
-		{
-			[DllImport(libGLEWEGL, SetLastError = true)]
-			public static extern uint glewInit();
-		}
+		[DllImport(libGL, SetLastError = true)]
+		public static extern unsafe IntPtr glXCreateContext(IntPtr x11Display, IntPtr x11VisualInfo, IntPtr shareList, bool direct);
 
-		public static unsafe uint glewInit(Gdk.Window window)
-		{
-			var backendType = BackendChecker.Check(window);
-			if (backendType == BackendType.X11)
-			{
-				if (HandleGLEW == IntPtr.Zero)
-				{
-					var glewFilePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + libGLEWGLX;
-					try { HandleGLEW = Linux.dlopen(glewFilePath, 0x0a); } catch (Exception) {}
-				}
+		[DllImport(libGL, SetLastError = true)]
+		public static extern void glXDestroyContext(IntPtr x11Display, IntPtr context);
 
-				try { return GlewGlx.glewInit(); }
-				catch {}
-			}
-			else
-			{
-				if (HandleGLEW == IntPtr.Zero)
-				{
-					var glewFilePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + libGLEWEGL;
-					try { HandleGLEW = Linux.dlopen(glewFilePath, 0x0a); } catch (Exception) {}
-				}
+		[DllImport(libGL, SetLastError = true)]
+		public static extern bool glXMakeCurrent(IntPtr x11Display, uint x11WindowID, IntPtr context);
 
-				try { return GlewEgl.glewInit(); }
-				catch {}
-			}
-			return 1;
-		}
+		[DllImport(libGL, SetLastError = true)]
+		public static extern void glXSwapBuffers(IntPtr x11Display, uint x11WindowID);
 
-		private static bool glxUseBackup = false;
-
-		private static class Normal
-		{
-
-			[DllImport(libGLX, SetLastError = true)]
-			public static extern unsafe IntPtr glXCreateContext(IntPtr x11Display, IntPtr x11VisualInfo, IntPtr shareList, bool direct);
-
-			[DllImport(libGLX, SetLastError = true)]
-			public static extern void glXDestroyContext(IntPtr x11Display, IntPtr context);
-
-			[DllImport(libGLX, SetLastError = true)]
-			public static extern bool glXMakeCurrent(IntPtr x11Display, uint x11WindowID, IntPtr context);
-
-			[DllImport(libGLX, SetLastError = true)]
-			public static extern void glXSwapBuffers(IntPtr x11Display, uint x11WindowID);
-		}
-
-		private static class Backup
-		{
-
-			[DllImport(libGL, SetLastError = true)]
-			public static extern unsafe IntPtr glXCreateContext(IntPtr x11Display, IntPtr x11VisualInfo, IntPtr shareList, bool direct);
-
-			[DllImport(libGL, SetLastError = true)]
-			public static extern void glXDestroyContext(IntPtr x11Display, IntPtr context);
-
-			[DllImport(libGL, SetLastError = true)]
-			public static extern bool glXMakeCurrent(IntPtr x11Display, uint x11WindowID, IntPtr context);
-
-			[DllImport(libGL, SetLastError = true)]
-			public static extern void glXSwapBuffers(IntPtr x11Display, uint x11WindowID);
-		}
-
-		public static unsafe IntPtr glXCreateContext(IntPtr x11Display, IntPtr x11VisualInfo, IntPtr shareList, bool direct)
-		{
-			if (!glxUseBackup)
-			{
-				try { return Normal.glXCreateContext(x11Display, x11VisualInfo, shareList, direct); }
-				catch { glxUseBackup = true; }
-			}
-			if (glxUseBackup)
-			{
-				return Backup.glXCreateContext(x11Display, x11VisualInfo, shareList, direct);
-			}
-			return IntPtr.Zero;
-		}
-
-		public static void glXDestroyContext(IntPtr x11Display, IntPtr context)
-		{
-			if (!glxUseBackup)
-			{
-				try { Normal.glXDestroyContext(x11Display, context); }
-				catch { glxUseBackup = true; }
-			}
-			if (glxUseBackup)
-			{
-				Backup.glXDestroyContext(x11Display, context);
-			}
-		}
-
-		public static bool glXMakeCurrent(IntPtr x11Display, uint x11WindowID, IntPtr context)
-		{
-			if (!glxUseBackup)
-			{
-				try { return Normal.glXMakeCurrent(x11Display, x11WindowID, context); }
-				catch { glxUseBackup = true; }
-			}
-			if (glxUseBackup)
-			{
-				return Backup.glXMakeCurrent(x11Display, x11WindowID, context);
-			}
-			return false;
-		}
-
-		public static void glXSwapBuffers(IntPtr x11Display, uint x11WindowID)
-		{
-			if (!glxUseBackup)
-			{
-				try { Normal.glXSwapBuffers(x11Display, x11WindowID); }
-				catch { glxUseBackup = true; }
-			}
-			if (glxUseBackup)
-			{
-				Backup.glXSwapBuffers(x11Display, x11WindowID);
-			}
-		}
-
-		[DllImport(libGLEWGLX, SetLastError = true)]
+		[DllImport(libGL, SetLastError = true)]
 		public static extern void glXSwapIntervalEXT(IntPtr x11Display, uint x11WindowID, int interval);
 
 		[DllImport(libX11, SetLastError = true)]
@@ -248,6 +131,9 @@ namespace ASEva.UIGtk
 
 		[DllImport(libEGL, SetLastError = true)]
 		public static extern bool eglMakeCurrent(IntPtr eglDisplay, IntPtr drawSurface, IntPtr readSurface, IntPtr ctx);
+
+		[DllImport(libEGL, SetLastError = true)]
+		public static extern IntPtr eglGetProcAddress(string name);
 	}
 
 	struct XVisualInfo

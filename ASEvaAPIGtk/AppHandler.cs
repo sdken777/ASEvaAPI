@@ -69,6 +69,7 @@ namespace ASEva.UIGtk
             if (uiBackend == "wayland")
             {
                 OverlayLayout.DelayHandleControl = true;
+                LinuxFuncLoader.UseEGL = true;
             }
 
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerGtk();
