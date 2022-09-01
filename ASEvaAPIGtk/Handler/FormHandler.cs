@@ -3,7 +3,7 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
-	public class FormHandler : GtkWindow<Gtk.Window, Form, Form.ICallback>, Form.IHandler
+	public class FormHandler : FormHandlerGtkWindow, Form.IHandler
 	{
 		public FormHandler(Gtk.Window window)
 		{

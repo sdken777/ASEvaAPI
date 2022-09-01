@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 11, 0); // 不依赖GLEW
+            return new Version(2, 3, 11, 1); // 修正GtkWindowConnector异常问题
         }
     }
 }
