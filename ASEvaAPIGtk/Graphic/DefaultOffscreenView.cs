@@ -40,7 +40,7 @@ namespace ASEva.UIGtk
 
         public void QueueRender()
         {
-            if (Toplevel != null && Toplevel is Window && !(Toplevel as Window).StateFlags.HasFlag(StateFlags.Backdrop) && !drawQueued && DrawBeat.CallerBegin(this))
+            if (!drawQueued && DrawBeat.CallerBegin(this))
             {
                 glArea.QueueRender();
                 drawQueued = true;

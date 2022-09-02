@@ -58,10 +58,9 @@
             "linux": {
                 "env": {
                     "GDK_BACKEND": "${input:gdk_backend}",
+                    "GDK_GL": "LEGACY",
                 }
             },
-            // "type": "f5anything",
-            // "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest",
         },
     ]
 }

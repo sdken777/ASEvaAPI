@@ -75,6 +75,9 @@ namespace ASEva.UIGtk
 		[DllImport(libGDK, SetLastError = true)]
 		public static extern IntPtr gdk_mir_window_get_type();
 
+		[DllImport(libGDK, SetLastError = true)]
+		public static extern void gdk_cairo_draw_from_gl (IntPtr cr, IntPtr gdkWindow, int source, int source_type, int buffer_scale, int x, int y, int width, int height);
+
 		public const int GLX_USE_GL = 1;
 		public const int GLX_BUFFER_SIZE = 2;
 		public const int GLX_LEVEL = 3;
