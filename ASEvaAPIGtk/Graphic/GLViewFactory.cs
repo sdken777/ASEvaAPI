@@ -64,22 +64,18 @@ namespace ASEva.UIGtk
                 }
                 else
                 {
-                    if (options.UseLegacyAPI)
+                    bool useDefaultBlitView = false;
+                    if (options.EnableOnscreenRendering && !options.UseTextTasks)
                     {
-                        if (isLegacy)
-                        {
-                            var view = new DefaultOffscreenView();
-                            view.SetCallback(glView);
-                            etoControl = view.ToEto();
-                            glViewBackend = view;
-                            supportOverlay = true;
-                        }
-                        else
-                        {
-                            etoControl = null;
-                            glViewBackend = null;
-                            supportOverlay = true;
-                        }
+                        if (!options.UseLegacyAPI || isLegacy) useDefaultBlitView = true;
+                    }
+                    if (useDefaultBlitView)
+                    {
+                        var view = new DefaultBlitView();
+                        view.SetCallback(glView);
+                        etoControl = view.ToEto();
+                        glViewBackend = view;
+                        supportOverlay = true;
                     }
                     else
                     {
