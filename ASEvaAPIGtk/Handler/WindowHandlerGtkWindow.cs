@@ -10,7 +10,11 @@ using Eto.GtkSharp.Forms.Menu;
 
 namespace ASEva.UIGtk
 {
-	public class FormHandlerGtkWindow : GtkPanel<Gtk.Window, Form, Form.ICallback>, Window.IHandler, IGtkWindow
+
+	public class WindowHandlerGtkWindow<TControl, TWidget, TCallback> : GtkPanel<TControl, TWidget, TCallback>, Window.IHandler, IGtkWindow
+		where TControl: Gtk.Window
+		where TWidget: Window
+		where TCallback: Window.ICallback
 	{
 		Gtk.VBox vbox;
 		readonly Gtk.VBox actionvbox;
@@ -31,7 +35,7 @@ namespace ASEva.UIGtk
 		bool resizable;
 		Size? clientSize;
 
-		protected FormHandlerGtkWindow()
+		protected WindowHandlerGtkWindow()
 		{
 			resizable = true;
 
@@ -309,7 +313,7 @@ namespace ASEva.UIGtk
 
 			public WindowState OldState { get; set; }
 
-			public new FormHandlerGtkWindow Handler { get { return (FormHandlerGtkWindow)base.Handler; } }
+			public new WindowHandlerGtkWindow<TControl, TWidget, TCallback> Handler { get { return (WindowHandlerGtkWindow<TControl, TWidget, TCallback>)base.Handler; } }
 
 			public void HandleDeleteEvent(object o, Gtk.DeleteEventArgs args)
 			{
