@@ -58,7 +58,6 @@
             "linux": {
                 "env": {
                     "GDK_BACKEND": "${input:gdk_backend}",
-                    "GDK_GL": "LEGACY",
                 }
             },
         },

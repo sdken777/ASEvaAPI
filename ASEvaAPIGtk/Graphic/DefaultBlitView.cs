@@ -3,6 +3,7 @@ using Gtk;
 using SharpGL;
 using ASEva.UIEto;
 using ASEva.Utility;
+using System.Runtime.InteropServices;
 
 namespace ASEva.UIGtk
 {
@@ -11,6 +12,8 @@ namespace ASEva.UIGtk
         public DefaultBlitView()
         {
             gl = OpenGL.Create(new LinuxFuncLoader());
+
+            setLegacyGL();
 
             Realized += onRealized;
             Drawn += onDraw;
@@ -198,6 +201,32 @@ namespace ASEva.UIGtk
             }
 
             rendererStatusOK = false;
+        }
+
+        private struct VTable
+        {
+            public IntPtr dummy1;
+            public IntPtr dummy2;
+            public IntPtr dummy3;
+            public IntPtr dummy4;
+            public IntPtr dummy5;
+            public IntPtr gdk_gl_set_flags;
+        }
+
+        private delegate void GdkGlSetFlagsDelegate(int gdkGlFlags);
+
+        private void setLegacyGL()
+        {
+            IntPtr vTablePtr = Linux.gdk__private__();
+            if (vTablePtr == IntPtr.Zero) return;
+
+            unsafe
+            {
+                var vTable = *(VTable*)vTablePtr;
+                Type delegateType = typeof(GdkGlSetFlagsDelegate);
+                var gdkGlSetFlags = Marshal.GetDelegateForFunctionPointer(vTable.gdk_gl_set_flags, delegateType) as GdkGlSetFlagsDelegate;
+                gdkGlSetFlags(1 << 5/* LEGACY */);
+            }
         }
 
         private OpenGL gl = null;

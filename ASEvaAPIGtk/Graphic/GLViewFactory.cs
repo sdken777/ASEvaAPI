@@ -14,9 +14,6 @@ namespace ASEva.UIGtk
 
         public void CreateGLBackend(GLCallback glView, GLOptions options, out Control etoControl, out GLBackend glViewBackend, out bool supportOverlay)
         {
-            var envGdkGl = Environment.GetEnvironmentVariable("GDK_GL");
-            var isLegacy = envGdkGl != null && envGdkGl == "LEGACY";
-
             try
             {
                 if (uiBackend == "x11")
@@ -40,12 +37,7 @@ namespace ASEva.UIGtk
                 }
                 else if (uiBackend == "wayland")
                 {
-                    bool useDefaultBlitView = false;
                     if (options.EnableOnscreenRendering && !options.UseTextTasks)
-                    {
-                        if (!options.UseLegacyAPI || isLegacy) useDefaultBlitView = true;
-                    }
-                    if (useDefaultBlitView)
                     {
                         var view = new DefaultBlitView();
                         view.SetCallback(glView);
@@ -64,12 +56,7 @@ namespace ASEva.UIGtk
                 }
                 else
                 {
-                    bool useDefaultBlitView = false;
                     if (options.EnableOnscreenRendering && !options.UseTextTasks)
-                    {
-                        if (!options.UseLegacyAPI || isLegacy) useDefaultBlitView = true;
-                    }
-                    if (useDefaultBlitView)
                     {
                         var view = new DefaultBlitView();
                         view.SetCallback(glView);
