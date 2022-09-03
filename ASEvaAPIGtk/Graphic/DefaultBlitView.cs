@@ -108,6 +108,8 @@ namespace ASEva.UIGtk
         {
             if (!rendererStatusOK) return;
 
+            var passiveDraw = !drawQueued;
+
             var moduleID = callback == null ? null : callback.OnGetModuleID();
             DrawBeat.CallbackBegin(this, moduleID);
 
@@ -115,38 +117,52 @@ namespace ASEva.UIGtk
             bool resized = curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
             size = curSize;
 
-            glContext.MakeCurrent();
+            if (resized) passiveDraw = false;
 
-            GLTextTask[] texts = new GLTextTask[0];
-            try
+            if (passiveDraw)
             {
-                if (resized)
+                try
                 {
-                    gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[0]);
-                    gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
-                    gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, depthBuffer[0]);
-                    gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+                    Linux.gdk_cairo_draw_from_gl(args.Cr.Handle, Window.Handle, (int)colorBuffer[0], (int)OpenGL.GL_RENDERBUFFER, (int)curSize.RealPixelScale, 0, 0, curSize.RealWidth, curSize.RealHeight);
                 }
-
-                gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[0]);
-                gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBuffer[0]);
-                gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_DEPTH_ATTACHMENT_EXT, OpenGL.GL_RENDERBUFFER_EXT, depthBuffer[0]);
-
-                if (resized) callback.OnGLResize(gl, size);
-
-                var dummy = new GLTextTasks();
-                callback.OnGLRender(gl, dummy);
-
-                gl.Finish();
-
-                Linux.gdk_cairo_draw_from_gl(args.Cr.Handle, Window.Handle, (int)colorBuffer[0], (int)OpenGL.GL_RENDERBUFFER, (int)curSize.RealPixelScale, 0, 0, curSize.RealWidth, curSize.RealHeight);
+                catch (Exception)
+                {
+                    rendererStatusOK = false;
+                }
             }
-            catch (Exception)
+            else
             {
-                rendererStatusOK = false;
-            }
+                glContext.MakeCurrent();
 
-            Gdk.GLContext.ClearCurrent();
+                GLTextTask[] texts = new GLTextTask[0];
+                try
+                {
+                    if (resized)
+                    {
+                        gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[0]);
+                        gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+                        gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, depthBuffer[0]);
+                        gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+                    }
+
+                    gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[0]);
+                    gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBuffer[0]);
+                    gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_DEPTH_ATTACHMENT_EXT, OpenGL.GL_RENDERBUFFER_EXT, depthBuffer[0]);
+
+                    if (resized) callback.OnGLResize(gl, size);
+
+                    var dummy = new GLTextTasks();
+                    callback.OnGLRender(gl, dummy);
+
+                    gl.Finish();
+
+                    Linux.gdk_cairo_draw_from_gl(args.Cr.Handle, Window.Handle, (int)colorBuffer[0], (int)OpenGL.GL_RENDERBUFFER, (int)curSize.RealPixelScale, 0, 0, curSize.RealWidth, curSize.RealHeight);
+                }
+                catch (Exception)
+                {
+                    rendererStatusOK = false;
+                }
+            }
 
             drawQueued = false;
             DrawBeat.CallbackEnd(this);

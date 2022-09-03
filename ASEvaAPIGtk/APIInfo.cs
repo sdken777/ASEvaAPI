@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 1, 0); // 改良DefaultOffscreenView
+            return new Version(2, 4, 1, 1); // 修复DefaultBlitView暂停渲染时闪烁问题
         }
     }
 }
