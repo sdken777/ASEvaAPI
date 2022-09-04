@@ -37,7 +37,7 @@ namespace ASEva.UIGtk
                 }
                 else if (uiBackend == "wayland")
                 {
-                    if (options.EnableOnscreenRendering && !options.UseTextTasks)
+                    if (options.EnableOnscreenRendering)
                     {
                         var view = new DefaultBlitView();
                         view.SetCallback(glView);
@@ -56,7 +56,7 @@ namespace ASEva.UIGtk
                 }
                 else
                 {
-                    if (options.EnableOnscreenRendering && !options.UseTextTasks)
+                    if (options.EnableOnscreenRendering)
                     {
                         var view = new DefaultBlitView();
                         view.SetCallback(glView);

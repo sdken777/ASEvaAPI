@@ -22,7 +22,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 2, 0); // 程序设置GDK_GL=LEGACY
+            return new Version(2, 4, 2, 1); // Wayland在屏渲染支持绘制文字
         }
     }
 }

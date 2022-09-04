@@ -7,16 +7,19 @@ using System.Runtime.InteropServices;
 
 namespace ASEva.UIGtk
 {
-    class DefaultBlitView : DrawingArea, GLBackend
+    class DefaultBlitView : Overlay, GLBackend
     {
         public DefaultBlitView()
         {
+            drawAreaGL.Visible = true;
+            Add(drawAreaGL);
+
             gl = OpenGL.Create(new LinuxFuncLoader());
 
             setLegacyGL();
 
-            Realized += onRealized;
-            Drawn += onDraw;
+            drawAreaGL.Realized += onRealized;
+            drawAreaGL.Drawn += onDraw;
         }
 
         public void SetCallback(GLCallback callback)
@@ -137,7 +140,6 @@ namespace ASEva.UIGtk
             {
                 glContext.MakeCurrent();
 
-                GLTextTask[] texts = new GLTextTask[0];
                 try
                 {
                     if (resized)
@@ -154,8 +156,17 @@ namespace ASEva.UIGtk
 
                     if (resized) callback.OnGLResize(gl, size);
 
-                    var dummy = new GLTextTasks();
-                    callback.OnGLRender(gl, dummy);
+                    var textTasks = new GLTextTasks();
+                    callback.OnGLRender(gl, textTasks);
+                    texts = textTasks.Clear();
+
+                    if (texts.Length > 0 && drawAreaText == null)
+                    {
+                        drawAreaText = new DrawingArea();
+                        drawAreaText.Visible = true;
+                        AddOverlay(drawAreaText);
+                        drawAreaText.Drawn += onDrawText;
+                    }
 
                     gl.Finish();
 
@@ -169,6 +180,12 @@ namespace ASEva.UIGtk
 
             drawQueued = false;
             DrawBeat.CallbackEnd(this);
+        }
+
+        private void onDrawText(object o, DrawnArgs args)
+        {
+            if (texts.Length == 0) return;
+            CairoDrawText.Draw(args.Cr, texts, size);
         }
 
         private void onDestroy()
@@ -228,6 +245,11 @@ namespace ASEva.UIGtk
                 gdkGlSetFlags(1 << 5/* LEGACY */);
             }
         }
+
+        private DrawingArea drawAreaGL = new DrawingArea();
+        private DrawingArea drawAreaText = null;
+
+        private GLTextTask[] texts = new GLTextTask[0];
 
         private OpenGL gl = null;
         private GLCallback callback;
