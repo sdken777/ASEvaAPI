@@ -122,6 +122,7 @@ namespace ASEva.UIEto
 		/// </summary>
 		public void QueueRender()
 		{
+			if (!Visible) return;
 			if (useGL)
 			{
 				if (!closed && glBackend != null) glBackend.QueueRender();

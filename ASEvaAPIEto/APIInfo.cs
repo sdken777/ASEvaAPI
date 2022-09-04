@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 7, 2); // 修正SkiaView参数requestOnscreenRendering无效问题
+            return new Version(2, 8, 7, 3); // 修正GLView/SkiaView不可见时仍可渲染问题
         }
     }
 }
