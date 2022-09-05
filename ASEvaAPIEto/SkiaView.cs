@@ -212,7 +212,15 @@ namespace ASEva.UIEto
 			var glInfo = new GRGlFramebufferInfo((uint)framebuffer[0], colorType.ToGlSizedFormat());
 			var renderTarget = new GRBackendRenderTarget(sizeInfo.RealWidth, sizeInfo.RealHeight, samples[0], stencil[0], glInfo);
 			skSurface = SKSurface.Create(grContext, renderTarget, GRSurfaceOrigin.BottomLeft, colorType);
-			if (skSurface != null) skSurface.Canvas.Scale((float)sizeInfo.RealPixelScale);
+			if (skSurface != null)
+			{
+				if (sizeInfo.VerticalInverted)
+				{
+					skSurface.Canvas.Translate(0, sizeInfo.RealHeight);
+					skSurface.Canvas.Scale((float)sizeInfo.RealPixelScale, -(float)sizeInfo.RealPixelScale);
+				}
+				else skSurface.Canvas.Scale((float)sizeInfo.RealPixelScale);
+			}
         }
 
         public void OnGLRender(OpenGL gl, GLTextTasks textTasks)

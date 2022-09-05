@@ -197,6 +197,15 @@ namespace ASEva.UIEto
 		/// </summary>
         public float AspectRatio { get; private set; }
 
+		/// <summary>
+		/// (api:eto=2.8.8) 图像坐标系垂直方向是否反转
+		/// </summary>
+		/// <value></value>
+		public bool VerticalInverted { get; private set; }
+
+		/// <summary>
+		/// 构造函数
+		/// </summary>
         public GLSizeInfo(int logicalWidth, int logicalHeight, int realWidth, int realHeight, double realPixelScale, float aspectRatio)
         {
             LogicalWidth = logicalWidth;
@@ -205,6 +214,21 @@ namespace ASEva.UIEto
             RealHeight = realHeight;
 			RealPixelScale = realPixelScale;
             AspectRatio = aspectRatio;
+			VerticalInverted = false;
+        }
+
+		/// <summary>
+		/// (api:eto=2.8.8) 构造函数
+		/// </summary>
+		public GLSizeInfo(int logicalWidth, int logicalHeight, int realWidth, int realHeight, double realPixelScale, float aspectRatio, bool verticalInverted)
+        {
+            LogicalWidth = logicalWidth;
+            LogicalHeight = logicalHeight;
+            RealWidth = realWidth;
+            RealHeight = realHeight;
+			RealPixelScale = realPixelScale;
+            AspectRatio = aspectRatio;
+			VerticalInverted = verticalInverted;
         }
     }
 

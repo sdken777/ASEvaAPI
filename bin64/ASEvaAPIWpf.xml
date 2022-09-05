@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIWpf.APIInfo">
             <summary>
-            version=1.3.4
+            version=1.4.0
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.APIInfo.GetAPIVersion">
@@ -55,6 +55,19 @@
             [可选实现] 在需要更新界面时被调用
             </summary>
         </member>
+        <member name="T:ASEva.UIWpf.OpenGLBlitControlWpf">
+            <summary>
+            OpenGLBlitControlWpf.xaml 的交互逻辑
+            </summary>
+            <summary>
+            OpenGLBlitControlWpf
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.OpenGLBlitControlWpf.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
         <member name="T:ASEva.UIWpf.OpenGLControlWpf">
             <summary>
             OpenGLControlWpf.xaml 的交互逻辑
@@ -64,6 +77,19 @@
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.OpenGLControlWpf.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ASEva.UIWpf.TextDraw">
+            <summary>
+            TextDraw.xaml 的交互逻辑
+            </summary>
+            <summary>
+            TextDraw
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.TextDraw.InitializeComponent">
             <summary>
             InitializeComponent
             </summary>
@@ -125,6 +151,11 @@
         <member name="M:ASEva.UIWpf.WindowPanel.OnRelease">
             <summary>
             [可选实现] 在窗口控件销毁前被调用
+            </summary>
+        </member>
+        <member name="T:ASEva.UIWpf.XamlLoader">
+            <summary>
+            (api:wpf=1.4.0) 动态加载xaml
             </summary>
         </member>
     </members>

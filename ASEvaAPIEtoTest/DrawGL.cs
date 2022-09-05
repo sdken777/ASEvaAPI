@@ -57,6 +57,7 @@ namespace ASEvaAPIEtoTest
                 gl.MatrixMode(OpenGL.GL_PROJECTION);
                 gl.LoadIdentity();
                 gl.Perspective(90.0f, glViewSizeInfo.AspectRatio, 0.1f, 100.0f);
+                if (glViewSizeInfo.VerticalInverted) gl.Scale(1, -1, 1);
                 gl.MatrixMode(OpenGL.GL_MODELVIEW);
                 gl.LoadIdentity();
             };
