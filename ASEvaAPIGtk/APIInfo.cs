@@ -3,8 +3,7 @@
  * 本文档对应API版本：2.4.3\n
  * \n
  * Gtk#官方仓库: https://github.com/GtkSharp/GtkSharp \n
- * 镜像仓库: https://hub.fastgit.org/GtkSharp/GtkSharp \n
- * API文档(C): https://gnome.pages.gitlab.gnome.org/gtk/gtk3
+ * API文档(C): https://docs.gtk.org/gtk3
  */
 
 using System;
@@ -22,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 3, 0); // 新增DialogHelper.OtherMainWindows
+            return new Version(2, 4, 3, 1); // 捕获CreateGlContext异常
         }
     }
 }

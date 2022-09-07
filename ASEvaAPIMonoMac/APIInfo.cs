@@ -3,7 +3,6 @@
  * 本文档对应API版本：1.3.5\n
  * \n
  * MonoMac仓库(.NET Core分支): https://github.com/cwensley/monomac \n
- * 镜像仓库: https://hub.fastgit.org/cwensley/monomac \n
  * API文档(Swift/ObjC): https://developer.apple.com/documentation/appkit
  */
 

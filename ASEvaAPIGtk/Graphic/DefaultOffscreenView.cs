@@ -42,7 +42,8 @@ namespace ASEva.UIGtk
         {
             if (Window == null) return;
 
-            glContext = Window.CreateGlContext();
+            try { glContext = Window.CreateGlContext(); }
+            catch (Exception) {}
             if (glContext == null) return;
 
             glContext.SetUseEs(0);

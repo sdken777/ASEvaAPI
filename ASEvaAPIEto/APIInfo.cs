@@ -3,7 +3,6 @@
  * 本文档对应API版本：2.8.9\n
  * \n
  * Eto.Forms官方仓库: https://github.com/picoe/Eto \n
- * 镜像仓库: https://hub.fastgit.org/picoe/Eto \n
  * API文档: https://pages.picoe.ca/docs/api
  */
 

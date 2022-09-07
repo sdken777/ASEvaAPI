@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.8.7
+            version=2.8.9
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -222,6 +222,13 @@
             </summary>
             <param name="index">多选框的当前序号</param>
             <param name="isEnabled">是否启用</param>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.SetText(System.Int32,System.String)">
+            <summary>
+            (api:eto=2.8.9) 设置某个多选框的文字
+            </summary>
+            <param name="index">多选框的当前序号</param>
+            <param name="text">多选框的文字</param>
         </member>
         <member name="M:ASEva.UIEto.CheckableListBox.GetCheckedIndices">
             <summary>
@@ -1237,6 +1244,22 @@
         <member name="P:ASEva.UIEto.GLSizeInfo.AspectRatio">
             <summary>
             宽度与高度之比
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLSizeInfo.VerticalInverted">
+            <summary>
+            (api:eto=2.8.8) 图像坐标系垂直方向是否反转
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:ASEva.UIEto.GLSizeInfo.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Double,System.Single)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.GLSizeInfo.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Double,System.Single,System.Boolean)">
+            <summary>
+            (api:eto=2.8.8) 构造函数
             </summary>
         </member>
         <member name="T:ASEva.UIEto.GLEventArgs">
