@@ -167,7 +167,14 @@ namespace ASEva.UIWpf
             context = Win32.wglCreateContext(hdc);
             if (context == IntPtr.Zero) return;
 
-            d3d = new Direct3DEx();
+            try { d3d = new Direct3DEx(); }
+            catch (Exception) { }
+            if (d3d == null)
+            {
+                onDestroy();
+                return;
+            }
+
             d3dDevice = createD3DDevice(d3d, hwnd, D3DDefaultAdapter);
             if (d3dDevice == null)
             {

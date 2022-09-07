@@ -18,7 +18,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 4, 0, 0); // 新增OpenGLBlitControlWpf，支持在屏渲染。新增XamlLoader
+            return new Version(1, 4, 0, 1); // 捕获创建Direct3DEx异常
         }
     }
 }
