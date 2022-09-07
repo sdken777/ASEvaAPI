@@ -60,15 +60,20 @@ namespace ASEva.UIGtk
             overlay.WidthRequest = panel.MinSize.Width;
             overlay.HeightRequest = panel.MinSize.Height;
 
-            Window parentWindow = null;
-            if (DialogChain.Count == 0) parentWindow = DialogHelper.MainWindow;
+            if (DialogChain.Count == 0)
+            {
+                if (DialogHelper.MainWindow != null) DialogHelper.MainWindow.Sensitive = false;
+                if (DialogHelper.OtherMainWindows != null)
+                {
+                    foreach (var window in DialogHelper.OtherMainWindows) window.Sensitive = false;
+                }
+            }
             else 
             {
-                parentWindow = DialogChain.Last();
+                var parentWindow = DialogChain.Last();
                 parentWindow.KeepAbove = false;
+                parentWindow.Sensitive = false;
             }
-
-            if (parentWindow != null) parentWindow.Sensitive = false;
 
             DialogChain.Add(this);
         }
@@ -86,15 +91,20 @@ namespace ASEva.UIGtk
 
             DialogChain.Remove(this);
 
-            Window parentWindow = null;
-            if (DialogChain.Count == 0) parentWindow = DialogHelper.MainWindow;
+            if (DialogChain.Count == 0)
+            {
+                if (DialogHelper.MainWindow != null) DialogHelper.MainWindow.Sensitive = true;
+                if (DialogHelper.OtherMainWindows != null)
+                {
+                    foreach (var window in DialogHelper.OtherMainWindows) window.Sensitive = true;
+                }
+            }
             else
             {
-                parentWindow = DialogChain.Last();
+                var parentWindow = DialogChain.Last();
                 parentWindow.KeepAbove = true;
+                parentWindow.Sensitive = true;
             }
-
-            if (parentWindow != null) parentWindow.Sensitive = true;
         }
 
         private DialogPanel panel;

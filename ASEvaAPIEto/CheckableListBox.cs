@@ -214,6 +214,28 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
+        /// (api:eto=2.8.9) 设置某个多选框的文字
+        /// </summary>
+        /// <param name="index">多选框的当前序号</param>
+        /// <param name="text">多选框的文字</param>
+        public void SetText(int index, String text)
+        {
+            if (DataStore == null) return;
+            if (!(DataStore is List<GridItem>)) return;
+
+            var list = DataStore as List<GridItem>;
+            if (index < 0 || index >= list.Count) return;
+
+            var values = list[index].Values;
+            if (values == null || values.Length < 2) return;
+
+            UnselectAll();
+
+            values[0] = text;
+            ReloadData(index);
+        }
+
+        /// <summary>
         /// 获取所有已勾选的多选框的序号
         /// </summary>
         /// <returns>所有已勾选的多选框的序号</returns>

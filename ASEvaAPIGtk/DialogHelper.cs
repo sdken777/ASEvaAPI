@@ -162,6 +162,9 @@ namespace ASEva.UIGtk
             return output;
         }
 
+        /// <summary>
+        /// 顶层窗口
+        /// </summary>
         public static Window TopWindow
         {
             get
@@ -170,12 +173,21 @@ namespace ASEva.UIGtk
                 for (int i = 0; i < windows.Length; i++)
                 {
                     if (MainWindow != null && windows[i].Equals(MainWindow)) continue;
+                    if (OtherMainWindows != null && OtherMainWindows.Contains(windows[i])) continue;
                     if (windows[i].IsActive) return windows[i];
                 }
                 return null;
             }
         }
 
+        /// <summary>
+        /// 主窗口
+        /// </summary>
         public static Window MainWindow { get; set; }
+
+        /// <summary>
+        /// (api:gtk=2.4.3) 其他主窗口
+        /// </summary>
+        public static Window[] OtherMainWindows { get; set; }
     }
 }

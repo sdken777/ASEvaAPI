@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIGtk.APIInfo">
             <summary>
-            version=2.4.2
+            version=2.4.3
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.APIInfo.GetAPIVersion">
@@ -50,6 +50,21 @@
         <member name="T:ASEva.UIGtk.DialogHelper">
             <summary>
             (api:gtk=2.0.0) 对话框辅助类
+            </summary>
+        </member>
+        <member name="P:ASEva.UIGtk.DialogHelper.TopWindow">
+            <summary>
+            顶层窗口
+            </summary>
+        </member>
+        <member name="P:ASEva.UIGtk.DialogHelper.MainWindow">
+            <summary>
+            主窗口
+            </summary>
+        </member>
+        <member name="P:ASEva.UIGtk.DialogHelper.OtherMainWindows">
+            <summary>
+            (api:gtk=2.4.3) 其他主窗口
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.DrawSwap">

@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于Eto.Forms的部分。详见 ASEva.UIEto \n
- * 本文档对应API版本：2.8.8\n
+ * 本文档对应API版本：2.8.9\n
  * \n
  * Eto.Forms官方仓库: https://github.com/picoe/Eto \n
  * 镜像仓库: https://hub.fastgit.org/picoe/Eto \n
@@ -12,7 +12,7 @@ using System;
 namespace ASEva.UIEto
 {
     /// <summary>
-    /// version=2.8.8
+    /// version=2.8.9
     /// </summary>
     public class APIInfo
     {
@@ -22,7 +22,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 8, 0); // 增加GLSizeInfo.VerticalInverted，以及SkiaView相应修改
+            return new Version(2, 8, 9, 0); // 新增CheckableListBox.SetText
         }
     }
 }
