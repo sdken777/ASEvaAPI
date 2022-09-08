@@ -18,7 +18,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 4, 0, 1); // 捕获创建Direct3DEx异常
+            return new Version(1, 4, 0, 2); // 在onInit中预加载函数，修复onDestroy异常
         }
     }
 }

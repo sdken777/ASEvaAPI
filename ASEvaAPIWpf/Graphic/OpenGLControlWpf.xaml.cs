@@ -242,6 +242,8 @@ namespace ASEva.UIWpf
 
                 colorBuffer = new uint[1];
                 gl.GenRenderbuffersEXT(1, colorBuffer);
+                gl.DeleteRenderbuffersEXT(1, colorBuffer);
+                gl.GenRenderbuffersEXT(1, colorBuffer);
                 gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[0]);
                 gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
 
@@ -251,6 +253,8 @@ namespace ASEva.UIWpf
                 gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
 
                 frameBuffer = new uint[1];
+                gl.GenFramebuffersEXT(1, frameBuffer);
+                gl.DeleteFramebuffersEXT(1, frameBuffer);
                 gl.GenFramebuffersEXT(1, frameBuffer);
                 gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[0]);
                 gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBuffer[0]);
