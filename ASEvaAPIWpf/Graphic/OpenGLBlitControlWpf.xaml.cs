@@ -206,6 +206,11 @@ namespace ASEva.UIWpf
                     return;
                 }
 
+                gl.PreloadFunction("glDeleteFramebuffersEXT");
+                gl.PreloadFunction("glDeleteRenderbuffersEXT");
+                gl.PreloadFunction("wglDXCloseDeviceNV");
+                gl.PreloadFunction("wglDXUnregisterObjectNV");
+
                 if (glBlitFramebufferEXT == null)
                 {
                     IntPtr funcAddress = funcLoader.GetFunctionAddress("glBlitFramebufferEXT");
@@ -347,14 +352,14 @@ namespace ASEva.UIWpf
             return new DeviceEx(d3d, adapter, DeviceType.Hardware, hwnd, dwVertexProcessing | CreateFlags.Multithreaded | CreateFlags.FpuPreserve, d3dpp);
         }
 
-        private Surface createD3DSurface(Direct3DEx d3d, DeviceEx d3dDevice, int adapter, uint surfaceWidth, uint surfaceHeight)
+        private Surface createD3DSurface(Direct3DEx d3d, DeviceEx d3dDevice, int adapter, uint surfaceWidth, uint surfaceHeight, ref IntPtr shareHandle)
         {
             if (d3d == null || d3dDevice == null || adapter < 0) return null;
 
             if (!d3d.CheckDeviceType(adapter, DeviceType.Hardware, Format.X8R8G8B8, Format.X8R8G8B8, true)) return null;
             if (!d3d.CheckDeviceFormat(adapter, DeviceType.Hardware, Format.X8R8G8B8, Usage.RenderTarget | Usage.Dynamic, ResourceType.Surface, Format.X8R8G8B8)) return null;
 
-            var d3dSurface = Surface.CreateRenderTarget(d3dDevice, (int)surfaceWidth, (int)surfaceHeight, Format.X8R8G8B8, MultisampleType.None, 0, false);
+            var d3dSurface = Surface.CreateRenderTarget(d3dDevice, (int)surfaceWidth, (int)surfaceHeight, Format.X8R8G8B8, MultisampleType.None, 0, false, ref shareHandle);
             if (d3dSurface == null) return null;
 
             return d3dSurface;
@@ -362,9 +367,12 @@ namespace ASEva.UIWpf
 
         private bool createD3DSurfaces(uint frameBufferName, uint colorBufferName)
         {
-            d3dSurfaceBuffer = createD3DSurface(d3d, d3dDevice, D3DDefaultAdapter, (uint)size.RealWidth, (uint)size.RealHeight);
-            d3dSurfaceDraw = createD3DSurface(d3d, d3dDevice, D3DDefaultAdapter, (uint)size.RealWidth, (uint)size.RealHeight);
+            IntPtr d3dSurfaceBufferSH = IntPtr.Zero, dummy = IntPtr.Zero;
+            d3dSurfaceBuffer = createD3DSurface(d3d, d3dDevice, D3DDefaultAdapter, (uint)size.RealWidth, (uint)size.RealHeight, ref d3dSurfaceBufferSH);
+            d3dSurfaceDraw = createD3DSurface(d3d, d3dDevice, D3DDefaultAdapter, (uint)size.RealWidth, (uint)size.RealHeight, ref dummy);
             if (d3dSurfaceBuffer == null || d3dSurfaceDraw == null) return false;
+
+            if (d3dSurfaceBufferSH != IntPtr.Zero) gl.DXSetResourceShareHandleNV((IntPtr)d3dSurfaceBuffer, d3dSurfaceBufferSH);
 
             interopSurface[0] = gl.DXRegisterObjectNV(interopDevice, (IntPtr)d3dSurfaceBuffer, colorBufferName, OpenGL.GL_RENDERBUFFER, OpenGL.WGL_ACCESS_READ_WRITE_NV);
             if (interopSurface[0] == IntPtr.Zero) return false;

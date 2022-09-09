@@ -237,6 +237,15 @@
             	<c>true</c> if the function is supported; otherwise, <c>false</c>.
             </returns>
         </member>
+        <member name="M:SharpGL.OpenGL.PreloadFunction(System.String)">
+            <summary>
+            Preloads a named function.
+            </summary>
+            <param name="functionName">Name of the function.</param>
+            <returns>
+            	<c>true</c> if the function is preloaded successfully; otherwise, <c>false</c>.
+            </returns>
+        </member>
         <member name="M:SharpGL.OpenGL.GetErrorDescription(System.UInt32)">
             <summary>
             Gets the error description for a given error code.
