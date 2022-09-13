@@ -49,7 +49,7 @@ namespace ASEva.UIWpf
             if (rootWindow != null && rootWindow.WindowState != WindowState.Minimized && Visibility == Visibility.Visible && DrawBeat.CallerBegin(this))
             {
                 drawQueued = true;
-                textDraw.InvalidateVisual();
+                textDraw.QueueRender();
                 DrawBeat.CallerEnd(this);
             }
         }

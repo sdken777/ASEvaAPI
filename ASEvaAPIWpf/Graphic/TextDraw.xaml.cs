@@ -23,11 +23,22 @@ namespace ASEva.UIWpf
         public GLTextTask[] Texts { private get; set; }
         public float RealPixelScale { get; private set; }
 
+        public void QueueRender()
+        {
+            if (lastRenderWithTexts || (Texts != null && Texts.Length > 0)) InvalidateVisual();
+        }
+
         protected override void OnRender(DrawingContext drawingContext)
         {
             RealPixelScale = (float)PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice.M11;
 
-            if (Texts == null || Texts.Length == 0) return;
+            if (Texts == null || Texts.Length == 0)
+            {
+                lastRenderWithTexts = false;
+                return;
+            }
+
+            lastRenderWithTexts = true;
 
             var clipGeometry = new RectangleGeometry(new Rect(0, 0, ActualWidth, ActualHeight));
             drawingContext.PushClip(clipGeometry);
@@ -96,5 +107,7 @@ namespace ASEva.UIWpf
 
             drawingContext.Pop();
         }
+
+        private bool lastRenderWithTexts = false;
     }
 }
