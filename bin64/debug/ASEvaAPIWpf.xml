@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIWpf.APIInfo">
             <summary>
-            version=1.4.1
+            version=1.4.2
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.APIInfo.GetAPIVersion">

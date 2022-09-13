@@ -89,34 +89,64 @@ namespace ASEva.UIWpf
             {
                 if (resized)
                 {
-                    gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[0]);
-                    gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
-                    gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, depthBuffer[0]);
-                    gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+                    if (fboFallback)
+                    {
+                        gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[1]);
+                        gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+                        gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, depthBuffer[1]);
+                        gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+                    }
+
                     destroyD3DSurfaces();
-                    createD3DSurfaces(frameBuffer[1], colorBuffer[1]);
+
+                    bool dummy = false;
+                    createD3DSurfaces(frameBuffer[0], colorBuffer[0], depthBuffer[0], out dummy);
+
                     img.Width = ActualWidth;
                     img.Height = ActualHeight;
                 }
 
-                gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[0]);
-                gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBuffer[0]);
-                gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_DEPTH_ATTACHMENT_EXT, OpenGL.GL_RENDERBUFFER_EXT, depthBuffer[0]);
+                if (fboFallback)
+                {
+                    gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[1]);
+                    gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBuffer[1]);
+                    gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_DEPTH_ATTACHMENT_EXT, OpenGL.GL_RENDERBUFFER_EXT, depthBuffer[1]);
 
-                if (resized) callback.OnGLResize(gl, size);
+                    if (resized) callback.OnGLResize(gl, size);
 
-                var textTasks = new GLTextTasks();
-                callback.OnGLRender(gl, textTasks);
-                textDraw.Texts = textTasks.Clear();
+                    var textTasks = new GLTextTasks();
+                    callback.OnGLRender(gl, textTasks);
+                    textDraw.Texts = textTasks.Clear();
 
-                gl.Finish();
-                
-                gl.DXLockObjectsNV(interopDevice, interopSurface);
-                gl.BindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, frameBuffer[0]);
-                gl.BindFramebufferEXT(GL_DRAW_FRAMEBUFFER_EXT, frameBuffer[1]);
-                glBlitFramebufferEXT(0, 0, size.RealWidth, size.RealHeight, 0, 0, size.RealWidth, size.RealHeight, (int)OpenGL.GL_COLOR_BUFFER_BIT, (int)OpenGL.GL_NEAREST);
-                gl.Finish();
-                gl.DXUnlockObjectsNV(interopDevice, interopSurface);
+                    gl.Finish();
+
+                    gl.DXLockObjectsNV(interopDevice, interopSurface);
+
+                    gl.BindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, frameBuffer[1]);
+                    gl.BindFramebufferEXT(GL_DRAW_FRAMEBUFFER_EXT, frameBuffer[0]);
+                    glBlitFramebufferEXT(0, 0, size.RealWidth, size.RealHeight, 0, 0, size.RealWidth, size.RealHeight, (int)OpenGL.GL_COLOR_BUFFER_BIT, (int)OpenGL.GL_NEAREST);
+                    gl.Finish();
+
+                    gl.DXUnlockObjectsNV(interopDevice, interopSurface);
+                }
+                else
+                {
+                    gl.DXLockObjectsNV(interopDevice, interopSurface);
+
+                    gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[0]);
+                    gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBuffer[0]);
+                    gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_DEPTH_ATTACHMENT_EXT, OpenGL.GL_RENDERBUFFER_EXT, depthBuffer[0]);
+
+                    if (resized) callback.OnGLResize(gl, size);
+
+                    var textTasks = new GLTextTasks();
+                    callback.OnGLRender(gl, textTasks);
+                    textDraw.Texts = textTasks.Clear();
+
+                    gl.Finish();
+
+                    gl.DXUnlockObjectsNV(interopDevice, interopSurface);
+                }
 
                 d3dimg.Lock();
                 d3dimg.SetBackBuffer(D3DResourceType.IDirect3DSurface9, (IntPtr)d3dSurfaceDraw);
@@ -199,7 +229,6 @@ namespace ASEva.UIWpf
                 extensionList.AddRange(wglExtensionsString.Split(' '));
 
                 if (!extensionList.Contains("GL_EXT_framebuffer_object") ||
-                    !extensionList.Contains("GL_EXT_framebuffer_blit") ||
                     !extensionList.Contains("WGL_NV_DX_interop"))
                 {
                     onDestroy();
@@ -211,21 +240,6 @@ namespace ASEva.UIWpf
                 gl.PreloadFunction("wglDXCloseDeviceNV");
                 gl.PreloadFunction("wglDXUnregisterObjectNV");
 
-                if (glBlitFramebufferEXT == null)
-                {
-                    IntPtr funcAddress = funcLoader.GetFunctionAddress("glBlitFramebufferEXT");
-                    if (funcAddress != IntPtr.Zero)
-                    {
-                        Type delegateType = typeof(BlitFramebufferDelegate);
-                        glBlitFramebufferEXT = Marshal.GetDelegateForFunctionPointer(funcAddress, delegateType) as BlitFramebufferDelegate;
-                    }
-                }
-                if (glBlitFramebufferEXT == null)
-                {
-                    onDestroy();
-                    return;
-                }
-
                 interopDevice = gl.DXOpenDeviceNV((IntPtr)d3dDevice);
                 if (interopDevice == IntPtr.Zero)
                 {
@@ -236,6 +250,9 @@ namespace ASEva.UIWpf
                 colorBuffer = new uint[2];
                 gl.GenRenderbuffersEXT(2, colorBuffer);
 
+                depthBuffer = new uint[2];
+                gl.GenRenderbuffersEXT(2, depthBuffer);
+
                 frameBuffer = new uint[2];
                 gl.GenFramebuffersEXT(2, frameBuffer);
 
@@ -244,27 +261,52 @@ namespace ASEva.UIWpf
                 img.Width = ActualWidth;
                 img.Height = ActualHeight;
 
-                if (!createD3DSurfaces(frameBuffer[1], colorBuffer[1]))
+                bool fboComplete = false;
+                if (!createD3DSurfaces(frameBuffer[0], colorBuffer[0], depthBuffer[0], out fboComplete))
                 {
                     onDestroy();
                     return;
                 }
 
-                gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[0]);
-                gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
-
-                depthBuffer = new uint[1];
-                gl.GenRenderbuffersEXT(1, depthBuffer);
-                gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, depthBuffer[0]);
-                gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
-
-                gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[0]);
-                gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBuffer[0]);
-                gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_DEPTH_ATTACHMENT_EXT, OpenGL.GL_RENDERBUFFER_EXT, depthBuffer[0]);
-                if (gl.CheckFramebufferStatusEXT(OpenGL.GL_FRAMEBUFFER_EXT) != OpenGL.GL_FRAMEBUFFER_COMPLETE_EXT)
+                if (!fboComplete)
                 {
-                    onDestroy();
-                    return;
+                    if (!extensionList.Contains("GL_EXT_framebuffer_blit"))
+                    {
+                        onDestroy();
+                        return;
+                    }
+
+                    if (glBlitFramebufferEXT == null)
+                    {
+                        IntPtr funcAddress = funcLoader.GetFunctionAddress("glBlitFramebufferEXT");
+                        if (funcAddress != IntPtr.Zero)
+                        {
+                            Type delegateType = typeof(BlitFramebufferDelegate);
+                            glBlitFramebufferEXT = Marshal.GetDelegateForFunctionPointer(funcAddress, delegateType) as BlitFramebufferDelegate;
+                        }
+                    }
+                    if (glBlitFramebufferEXT == null)
+                    {
+                        onDestroy();
+                        return;
+                    }
+
+                    gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[1]);
+                    gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+
+                    gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, depthBuffer[1]);
+                    gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+
+                    gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[1]);
+                    gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBuffer[1]);
+                    gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_DEPTH_ATTACHMENT_EXT, OpenGL.GL_RENDERBUFFER_EXT, depthBuffer[1]);
+                    if (gl.CheckFramebufferStatusEXT(OpenGL.GL_FRAMEBUFFER_EXT) != OpenGL.GL_FRAMEBUFFER_COMPLETE_EXT)
+                    {
+                        onDestroy();
+                        return;
+                    }
+
+                    fboFallback = true;
                 }
 
                 callback.OnGLInitialize(gl, ctxInfo);
@@ -302,7 +344,7 @@ namespace ASEva.UIWpf
             }
             if (depthBuffer != null)
             {
-                gl.DeleteRenderbuffersEXT(1, depthBuffer);
+                gl.DeleteRenderbuffersEXT(2, depthBuffer);
                 depthBuffer = null;
             }
 
@@ -333,6 +375,7 @@ namespace ASEva.UIWpf
             }
 
             initOK = null;
+            fboFallback = false;
         }
 
         private DeviceEx createD3DDevice(Direct3DEx d3d, IntPtr hwnd, int adapter)
@@ -365,8 +408,10 @@ namespace ASEva.UIWpf
             return d3dSurface;
         }
 
-        private bool createD3DSurfaces(uint frameBufferName, uint colorBufferName)
+        private bool createD3DSurfaces(uint frameBufferName, uint colorBufferName, uint depthBufferName, out bool fboComplete)
         {
+            fboComplete = false;
+
             IntPtr d3dSurfaceBufferSH = IntPtr.Zero, dummy = IntPtr.Zero;
             d3dSurfaceBuffer = createD3DSurface(d3d, d3dDevice, D3DDefaultAdapter, (uint)size.RealWidth, (uint)size.RealHeight, ref d3dSurfaceBufferSH);
             d3dSurfaceDraw = createD3DSurface(d3d, d3dDevice, D3DDefaultAdapter, (uint)size.RealWidth, (uint)size.RealHeight, ref dummy);
@@ -377,8 +422,14 @@ namespace ASEva.UIWpf
             interopSurface[0] = gl.DXRegisterObjectNV(interopDevice, (IntPtr)d3dSurfaceBuffer, colorBufferName, OpenGL.GL_RENDERBUFFER, OpenGL.WGL_ACCESS_READ_WRITE_NV);
             if (interopSurface[0] == IntPtr.Zero) return false;
 
+            gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, depthBufferName);
+            gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+
             gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBufferName);
             gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBufferName);
+            gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_DEPTH_ATTACHMENT_EXT, OpenGL.GL_RENDERBUFFER_EXT, depthBufferName);
+
+            fboComplete = gl.CheckFramebufferStatusEXT(OpenGL.GL_FRAMEBUFFER_EXT) == OpenGL.GL_FRAMEBUFFER_COMPLETE_EXT;
 
             return true;
         }
@@ -422,9 +473,10 @@ namespace ASEva.UIWpf
         private IntPtr hdc = IntPtr.Zero;
         private IntPtr context = IntPtr.Zero;
         private GLCallback callback = null;
-        private uint[] frameBuffer = null; // Length=2
-        private uint[] colorBuffer = null; // Length=2
-        private uint[] depthBuffer = null; // Length=1
+        private uint[] frameBuffer = null; // [interop, fallback]
+        private uint[] colorBuffer = null; // [interop, fallback]
+        private uint[] depthBuffer = null; // [interop, fallback]
+        private bool fboFallback = false;
         private bool? initOK = null;
         private bool drawQueued = false;
 
