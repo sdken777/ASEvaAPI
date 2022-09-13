@@ -120,6 +120,8 @@ namespace ASEva.UIWpf
 
                     gl.Finish();
 
+                    d3dimg.Lock();
+                    d3dimg.SetBackBuffer(D3DResourceType.IDirect3DSurface9, (IntPtr)d3dSurfaceBuffer);
                     gl.DXLockObjectsNV(interopDevice, interopSurface);
 
                     gl.BindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, frameBuffer[1]);
@@ -128,9 +130,13 @@ namespace ASEva.UIWpf
                     gl.Finish();
 
                     gl.DXUnlockObjectsNV(interopDevice, interopSurface);
+                    d3dimg.AddDirtyRect(new Int32Rect(0, 0, d3dimg.PixelWidth, d3dimg.PixelHeight));
+                    d3dimg.Unlock();
                 }
                 else
                 {
+                    d3dimg.Lock();
+                    d3dimg.SetBackBuffer(D3DResourceType.IDirect3DSurface9, (IntPtr)d3dSurfaceBuffer);
                     gl.DXLockObjectsNV(interopDevice, interopSurface);
 
                     gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[0]);
@@ -146,13 +152,9 @@ namespace ASEva.UIWpf
                     gl.Finish();
 
                     gl.DXUnlockObjectsNV(interopDevice, interopSurface);
+                    d3dimg.AddDirtyRect(new Int32Rect(0, 0, d3dimg.PixelWidth, d3dimg.PixelHeight));
+                    d3dimg.Unlock();
                 }
-
-                d3dimg.Lock();
-                d3dimg.SetBackBuffer(D3DResourceType.IDirect3DSurface9, (IntPtr)d3dSurfaceDraw);
-                d3dDevice.StretchRectangle(d3dSurfaceBuffer, d3dSurfaceDraw, TextureFilter.Point);
-                d3dimg.AddDirtyRect(new Int32Rect(0, 0, d3dimg.PixelWidth, d3dimg.PixelHeight));
-                d3dimg.Unlock();
             }
             catch (Exception)
             {
@@ -414,8 +416,7 @@ namespace ASEva.UIWpf
 
             IntPtr d3dSurfaceBufferSH = IntPtr.Zero, dummy = IntPtr.Zero;
             d3dSurfaceBuffer = createD3DSurface(d3d, d3dDevice, D3DDefaultAdapter, (uint)size.RealWidth, (uint)size.RealHeight, ref d3dSurfaceBufferSH);
-            d3dSurfaceDraw = createD3DSurface(d3d, d3dDevice, D3DDefaultAdapter, (uint)size.RealWidth, (uint)size.RealHeight, ref dummy);
-            if (d3dSurfaceBuffer == null || d3dSurfaceDraw == null) return false;
+            if (d3dSurfaceBuffer == null) return false;
 
             if (d3dSurfaceBufferSH != IntPtr.Zero) gl.DXSetResourceShareHandleNV((IntPtr)d3dSurfaceBuffer, d3dSurfaceBufferSH);
 
@@ -447,11 +448,6 @@ namespace ASEva.UIWpf
                 d3dSurfaceBuffer.Dispose();
                 d3dSurfaceBuffer = null;
             }
-            if (d3dSurfaceDraw != null)
-            {
-                d3dSurfaceDraw.Dispose();
-                d3dSurfaceDraw = null;
-            }
         }
 
         private const int GL_READ_FRAMEBUFFER_EXT = 0x8CA8;
@@ -463,7 +459,7 @@ namespace ASEva.UIWpf
         private IntPtr hwnd = IntPtr.Zero;
         private Direct3DEx d3d;
         private DeviceEx d3dDevice;
-        private Surface d3dSurfaceBuffer, d3dSurfaceDraw;
+        private Surface d3dSurfaceBuffer;
         private IntPtr interopDevice = IntPtr.Zero;
         private IntPtr[] interopSurface = new IntPtr[] { IntPtr.Zero };
 

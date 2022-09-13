@@ -18,7 +18,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 4, 2, 0); // 优化OpenGLBlitControlWpf
+            return new Version(1, 4, 2, 1); // 继续优化OpenGLBlitControlWpf
         }
     }
 }
