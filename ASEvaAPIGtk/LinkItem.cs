@@ -49,6 +49,11 @@ namespace ASEva.UIGtk
             }
         }
 
+        public void SetFont(Pango.FontDescription fd)
+        {
+            label.OverrideFont(fd);
+        }
+
         public object Tag { get; set; }
 
         private void eventBox_ButtonPress(object o, ButtonPressEventArgs args)

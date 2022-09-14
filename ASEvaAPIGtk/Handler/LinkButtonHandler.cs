@@ -43,6 +43,17 @@ namespace ASEva.UIGtk
 			set { Control.Text = value; }
 		}
 
+		public override Font Font
+		{
+			get { return font; }
+			set
+			{
+				font = value;
+				Control.SetFont(value.ControlObject as Pango.FontDescription);
+			}
+		}
+		private Font font;
+
 		public override void AttachEvent(string id)
 		{
 			switch (id)
