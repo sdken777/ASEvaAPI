@@ -54,12 +54,12 @@ namespace ASEva.UIGtk
                     if (ScreensHandler.LegacyMode)
                     {
                         var gdkScreen = screen.ControlObject as Gdk.Screen;
-                        Gtk.StyleContext.AddProviderForScreen(gdkScreen, cssProvider, Gtk.StyleProviderPriority.Fallback);
+                        Gtk.StyleContext.AddProviderForScreen(gdkScreen, cssProvider, Gtk.StyleProviderPriority.Settings);
                     }
                     else
                     {
                         var gdkMonitor = screen.ControlObject as Gdk.Monitor;
-                        Gtk.StyleContext.AddProviderForScreen(gdkMonitor.Display.DefaultScreen, cssProvider, Gtk.StyleProviderPriority.Fallback);
+                        Gtk.StyleContext.AddProviderForScreen(gdkMonitor.Display.DefaultScreen, cssProvider, Gtk.StyleProviderPriority.Settings);
                     }
                 }
             }

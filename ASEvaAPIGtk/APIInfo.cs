@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 4, 0); // 修正样式优先级问题
+            return new Version(2, 4, 4, 1); // 修正样式优先级问题
         }
     }
 }
