@@ -204,4 +204,16 @@
     <en>Details</en>
     <ch>详情</ch>
   </t>
+  <t id="menu-sub">
+    <en>Sub menu</en>
+    <ch>子菜单</ch>
+  </t>
+  <t id="menu-sub-item">
+    <en>Sub item {0}</en>
+    <ch>子菜单项{0}</ch>
+  </t>
+  <t id="basic-text">
+    <en>Text</en>
+    <ch>文本</ch>
+  </t>
 </text_resource>

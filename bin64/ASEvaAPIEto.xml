@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.8.9
+            version=2.8.10
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -456,6 +456,37 @@
             添加一组单选项
             </summary>
             <param name="menu">右键菜单</param>
+            <param name="texts">各菜单项文字</param>
+            <returns>一组单选项对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddSeparator(Eto.Forms.ButtonMenuItem)">
+            <summary>
+            (api:eto=2.8.10) 在子菜单中添加分割线
+            </summary>
+            <param name="subMenu">子菜单</param>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddButtonItem(Eto.Forms.ButtonMenuItem,System.String,Eto.Drawing.Image)">
+            <summary>
+            (api:eto=2.8.10) 在子菜单中添加按键项
+            </summary>
+            <param name="subMenu">子菜单</param>
+            <param name="text">菜单项文字</param>
+            <param name="image">菜单项文字前的图标，默认为null</param>
+            <returns></returns>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddCheckItem(Eto.Forms.ButtonMenuItem,System.String)">
+            <summary>
+            (api:eto=2.8.10) 在子菜单中添加多选项
+            </summary>
+            <param name="subMenu">子菜单</param>
+            <param name="text">菜单项文字</param>
+            <returns>多选项对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddRadioItems(Eto.Forms.ButtonMenuItem,System.String[])">
+            <summary>
+            (api:eto=2.8.10) 在子菜单中添加一组单选项
+            </summary>
+            <param name="subMenu">子菜单</param>
             <param name="texts">各菜单项文字</param>
             <returns>一组单选项对象</returns>
         </member>

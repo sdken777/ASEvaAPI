@@ -76,7 +76,7 @@ namespace ASEvaAPIEtoTest
             };
         }
 
-        // 仅部分平台完美支持（如对跨平台兼容性有较高要求，应手绘实现）
+        // TODO: 增加专用控件
         private void initBasicTagPageBDynamicItems(StackLayout layout)
         {
             var layoutButtons = layout.AddRowLayout();

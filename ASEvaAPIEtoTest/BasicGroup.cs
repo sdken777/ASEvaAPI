@@ -13,14 +13,17 @@ namespace ASEvaAPIEtoTest
         {
             var tabControl = groupBox.SetContentAsColumnLayout().AddControl(new TabControl(), true) as TabControl;
 
-            var tabPage1 = tabControl.AddPage(t.Format("basic-tabpage-title", "A"));
-            initBasicTagPageA(tabPage1);
+            var tabPageA = tabControl.AddPage(t.Format("basic-tabpage-title", "A"));
+            initBasicTagPageA(tabPageA);
 
-            var tabPage2 = tabControl.AddPage(t.Format("basic-tabpage-title", "B"));
-            initBasicTagPageB(tabPage2);
+            var tabPageB = tabControl.AddPage(t.Format("basic-tabpage-title", "B"));
+            initBasicTagPageB(tabPageB);
 
-            var tabPage3 = tabControl.AddPage(t.Format("basic-tabpage-title", "C"));
-            initBasicTagPageC(tabPage3);
+            var tabPageC = tabControl.AddPage(t.Format("basic-tabpage-title", "C"));
+            initBasicTagPageC(tabPageC);
+
+            var tabPageD = tabControl.AddPage(t.Format("basic-tabpage-title", "D"));
+            initBasicTagPageD(tabPageD);
         }
     }
 }
