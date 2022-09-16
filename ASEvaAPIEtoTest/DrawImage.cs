@@ -30,8 +30,8 @@ namespace ASEvaAPIEtoTest
                     image4.Data[i * image4.RowBytes + j * 4 + 3] = (byte)(200 - j * 2); // A
                 }
             }
-            imageView3.Image = ASEva.UIEto.ImageConverter.ConvertToBitmap(image3) as Bitmap;
-            imageView4.Image = ASEva.UIEto.ImageConverter.ConvertToBitmap(image4) as Bitmap;
+            imageView3.Image = image3.ToEtoBitmap();
+            imageView4.Image = image4.ToEtoBitmap();
         }
     }
 }

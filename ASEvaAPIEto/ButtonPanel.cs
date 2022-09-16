@@ -71,6 +71,24 @@ namespace ASEva.UIEto
             }
         }
 
+        /// <summary>
+        /// (api:eto=2.8.11) 提示文字
+        /// </summary>
+        public override string ToolTip
+        {
+            get
+            {
+                if (label != null) return label.ToolTip;
+                else if (imageView != null) return imageView.ToolTip;
+                else return null;
+            }
+            set
+            {
+                if (label != null) label.ToolTip = value;
+                else if (imageView != null) imageView.ToolTip = value;
+            }
+        }
+
         private void setLabelTextColor()
         {
             if (Enabled) label.TextColor = textColor;
