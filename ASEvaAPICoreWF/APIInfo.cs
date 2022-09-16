@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 5, 2); // 修正关闭窗口和对话框后WebView遗留或闪现的问题
+            return new Version(2, 3, 5, 3); // WebView禁用RendererCodeIntegrity
         }
     }
 }

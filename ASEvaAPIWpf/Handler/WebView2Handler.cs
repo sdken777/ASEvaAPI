@@ -38,7 +38,7 @@ namespace ASEva.UIWpf
 		public static void InitCoreWebView2Environment()
         {
 			var path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\SpadasFiles\\temp\\webview2";
-			CoreWebView2Environment.CreateAsync(null, path).ContinueWith((task) => CoreWebView2Environment = task.Result);
+			CoreWebView2Environment.CreateAsync(null, path, new CoreWebView2EnvironmentOptions("--disable-features=RendererCodeIntegrity")).ContinueWith((task) => CoreWebView2Environment = task.Result);
 		}
 
 		async void InitializeAsync()
