@@ -62,21 +62,12 @@ namespace ASEva.UIGtk
 
             if (DialogChain.Count == 0)
             {
-                if (DialogHelper.MainWindow != null)
-                {
-                    windowsDeletable[DialogHelper.MainWindow] = DialogHelper.MainWindow.Deletable;
-                }
-                if (DialogHelper.OtherMainWindows != null)
-                {
-                    foreach (var window in DialogHelper.OtherMainWindows)
-                    {
-                        windowsDeletable[window] = window.Deletable;
-                    }
-                }
-                foreach (var window in windowsDeletable.Keys)
+                if (DialogHelper.MainWindow != null) mainWindows.Add(DialogHelper.MainWindow);
+                if (DialogHelper.OtherMainWindows != null) mainWindows.AddRange(DialogHelper.OtherMainWindows);
+                foreach (var window in mainWindows)
                 {
                     window.Sensitive = false;
-                    window.Deletable = false;
+                    window.DeleteEvent += parent_DeleteEvent;
                 }
             }
             else 
@@ -84,10 +75,16 @@ namespace ASEva.UIGtk
                 var parentWindow = DialogChain.Last();
                 parentWindow.KeepAbove = false;
                 parentWindow.Sensitive = false;
-                parentWindow.Deletable = false;
+                parentWindow.DeleteEvent += parent_DeleteEvent;
             }
 
             DialogChain.Add(this);
+        }
+
+        [GLib.ConnectBefore]
+        private static void parent_DeleteEvent(object o, DeleteEventArgs args)
+        {
+            args.RetVal = true;
         }
 
         private void OnDialogSizeAllocated(object o, SizeAllocatedArgs args)
@@ -105,12 +102,12 @@ namespace ASEva.UIGtk
 
             if (DialogChain.Count == 0)
             {
-                foreach (var pair in windowsDeletable)
+                foreach (var window in mainWindows)
                 {
-                    pair.Key.Deletable = pair.Value;
-                    pair.Key.Sensitive = true;
+                    window.Sensitive = true;
+                    window.DeleteEvent -= parent_DeleteEvent;
                 }
-                windowsDeletable.Clear();
+                mainWindows.Clear();
             }
             else
             {
@@ -118,13 +115,14 @@ namespace ASEva.UIGtk
                 parentWindow.KeepAbove = true;
                 parentWindow.Sensitive = true;
                 parentWindow.Deletable = true;
+                parentWindow.DeleteEvent -= parent_DeleteEvent;
             }
         }
 
         private DialogPanel panel;
         private Widget panelWidget;
 
-        private Dictionary<Window, bool> windowsDeletable = new Dictionary<Window, bool>();
+        private List<Window> mainWindows = new List<Window>();
 
         private static List<Window> DialogChain = new List<Window>();
     }

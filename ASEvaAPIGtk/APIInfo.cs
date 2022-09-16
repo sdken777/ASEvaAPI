@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 4, 2); // 优化AppDialogX11
+            return new Version(2, 4, 4, 3); // AppDialogX11使用更稳妥的方式控制关闭按钮
         }
     }
 }
