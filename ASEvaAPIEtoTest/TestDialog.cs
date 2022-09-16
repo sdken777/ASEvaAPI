@@ -16,10 +16,16 @@ namespace ASEvaAPIEtoTest
             else SetResizableMode(600, 300, 800, 400);
 
             var layout = this.SetContentAsRowLayout();
-            layout.AddLinkButton(t["basic-client-size"], true).Click += (sender, args) =>
+            layout.AddLinkButton(t["basic-client-size"], false).Click += (sender, args) =>
             {
                 (sender as LinkButton).Text = ClientSize.Width + "x" + ClientSize.Height;
             };
+            layout.AddLinkButton(t["basic-dialog-with-border"], false).Click += delegate
+            {
+                var dialog = new TestDialog(false, true, t);
+                App.RunDialog(dialog);
+            };
+            layout.AddSpace();
             layout.AddButton(t["basic-close"]).Click += delegate
             {
                 this.Close();

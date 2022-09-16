@@ -62,10 +62,21 @@ namespace ASEva.UIGtk
 
             if (DialogChain.Count == 0)
             {
-                if (DialogHelper.MainWindow != null) DialogHelper.MainWindow.Sensitive = false;
+                if (DialogHelper.MainWindow != null)
+                {
+                    windowsDeletable[DialogHelper.MainWindow] = DialogHelper.MainWindow.Deletable;
+                }
                 if (DialogHelper.OtherMainWindows != null)
                 {
-                    foreach (var window in DialogHelper.OtherMainWindows) window.Sensitive = false;
+                    foreach (var window in DialogHelper.OtherMainWindows)
+                    {
+                        windowsDeletable[window] = window.Deletable;
+                    }
+                }
+                foreach (var window in windowsDeletable.Keys)
+                {
+                    window.Sensitive = false;
+                    window.Deletable = false;
                 }
             }
             else 
@@ -73,6 +84,7 @@ namespace ASEva.UIGtk
                 var parentWindow = DialogChain.Last();
                 parentWindow.KeepAbove = false;
                 parentWindow.Sensitive = false;
+                parentWindow.Deletable = false;
             }
 
             DialogChain.Add(this);
@@ -93,22 +105,26 @@ namespace ASEva.UIGtk
 
             if (DialogChain.Count == 0)
             {
-                if (DialogHelper.MainWindow != null) DialogHelper.MainWindow.Sensitive = true;
-                if (DialogHelper.OtherMainWindows != null)
+                foreach (var pair in windowsDeletable)
                 {
-                    foreach (var window in DialogHelper.OtherMainWindows) window.Sensitive = true;
+                    pair.Key.Deletable = pair.Value;
+                    pair.Key.Sensitive = true;
                 }
+                windowsDeletable.Clear();
             }
             else
             {
                 var parentWindow = DialogChain.Last();
                 parentWindow.KeepAbove = true;
                 parentWindow.Sensitive = true;
+                parentWindow.Deletable = true;
             }
         }
 
         private DialogPanel panel;
         private Widget panelWidget;
+
+        private Dictionary<Window, bool> windowsDeletable = new Dictionary<Window, bool>();
 
         private static List<Window> DialogChain = new List<Window>();
     }
