@@ -1,12 +1,176 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <text_resource>
-  <t id="title">
-    <en>Test Window</en>
-    <ch>测试窗口</ch>
+  <t id="basic-button">
+    <en>Button</en>
+    <ch>按钮</ch>
   </t>
-  <t id="reserved">
-    <en>Reserved</en>
-    <ch>保留</ch>
+  <t id="basic-checkbox">
+    <en>Save file</en>
+    <ch>保存文件</ch>
+  </t>
+  <t id="basic-client-size">
+    <en>Client Size</en>
+    <ch>用户区域</ch>
+  </t>
+  <t id="basic-close">
+    <en>Close</en>
+    <ch>关闭</ch>
+  </t>
+  <t id="basic-combobox">
+    <en>Option {0}</en>
+    <ch>选项{0}</ch>
+  </t>
+  <t id="basic-dialog-no-border">
+    <en>Dialog without border</en>
+    <ch>无边框对话框</ch>
+  </t>
+  <t id="basic-dialog-with-border">
+    <en>Dialog with border</en>
+    <ch>带边框对话框</ch>
+  </t>
+  <t id="basic-dialog-with-border-fix">
+    <en>Dialog with fixed border</en>
+    <ch>带固定边框对话框</ch>
+  </t>
+  <t id="basic-dynamic-add">
+    <en>Add</en>
+    <ch>添加项</ch>
+  </t>
+  <t id="basic-dynamic-remove">
+    <en>Remove</en>
+    <ch>移除项</ch>
+  </t>
+  <t id="basic-freeze-size">
+    <en>Freeze size</en>
+    <ch>固定尺寸</ch>
+  </t>
+  <t id="basic-grid-add-row">
+    <en>Add row</en>
+    <ch>添加行</ch>
+  </t>
+  <t id="basic-grid-change-color">
+    <en>Change color</en>
+    <ch>改变颜色</ch>
+  </t>
+  <t id="basic-grid-key-title">
+    <en>Key</en>
+    <ch>键</ch>
+  </t>
+  <t id="basic-grid-remove-row">
+    <en>Remove row</en>
+    <ch>移除行</ch>
+  </t>
+  <t id="basic-grid-value-title">
+    <en>Value</en>
+    <ch>值</ch>
+  </t>
+  <t id="basic-group-title">
+    <en>Basic Controls</en>
+    <ch>基本控件</ch>
+  </t>
+  <t id="basic-label-row">
+    <en>Row-{0:D}:</en>
+    <ch>第{0:D}行：</ch>
+  </t>
+  <t id="basic-linkbutton">
+    <en>Browse</en>
+    <ch>浏览</ch>
+  </t>
+  <t id="basic-list-item">
+    <en>List Option {0}</en>
+    <ch>列表项{0}</ch>
+  </t>
+  <t id="basic-list-item-short">
+    <en>Option {0}</en>
+    <ch>列表项{0}</ch>
+  </t>
+  <t id="basic-menu-notice">
+    <en>Context menu is available</en>
+    <ch>右键菜单可用</ch>
+  </t>
+  <t id="basic-radiobutton-dir">
+    <en>Directory</en>
+    <ch>文件夹</ch>
+  </t>
+  <t id="basic-radiobutton-file">
+    <en>File</en>
+    <ch>文件</ch>
+  </t>
+  <t id="basic-tabpage-title">
+    <en>Tabpage {0}</en>
+    <ch>标签页{0}</ch>
+  </t>
+  <t id="basic-text">
+    <en>Text</en>
+    <ch>文本</ch>
+  </t>
+  <t id="basic-tooltip">
+    <en>Tooltip {0:D}</en>
+    <ch>提示{0:D}</ch>
+  </t>
+  <t id="basic-tree-child">
+    <en>Child Node {0:D}</en>
+    <ch>子节点{0:D}</ch>
+  </t>
+  <t id="basic-tree-parent">
+    <en>Parent Node {0:D}</en>
+    <ch>父节点{0:D}</ch>
+  </t>
+  <t id="draw-gl-detail">
+    <en>Show details</en>
+    <ch>显示详情</ch>
+  </t>
+  <t id="draw-gl-info-extensions">
+    <en>Extensions: {0}</en>
+    <ch>扩展：{0}</ch>
+  </t>
+  <t id="draw-gl-info-renderer">
+    <en>Renderer: {0}</en>
+    <ch>渲染器：{0}</ch>
+  </t>
+  <t id="draw-gl-info-title">
+    <en>Details</en>
+    <ch>详情</ch>
+  </t>
+  <t id="draw-gl-info-vendor">
+    <en>Vendor: {0}</en>
+    <ch>厂商：{0}</ch>
+  </t>
+  <t id="draw-gl-info-version">
+    <en>Version: {0}</en>
+    <ch>版本：{0}</ch>
+  </t>
+  <t id="draw-gl-pause-render">
+    <en>Pause render</en>
+    <ch>暂停渲染</ch>
+  </t>
+  <t id="draw-gl-resume-render">
+    <en>Resume render</en>
+    <ch>恢复渲染</ch>
+  </t>
+  <t id="draw-group-title">
+    <en>Drawing Controls</en>
+    <ch>绘图控件</ch>
+  </t>
+  <t id="draw-skia-anti-alias">
+    <en>Anti-alias Test</en>
+    <ch>反锯齿测试</ch>
+  </t>
+  <t id="draw-tabpage-default">
+    <en>Default</en>
+    <ch>默认</ch>
+  </t>
+  <t id="draw-tabpage-skia-cpu">
+    <en>S-CPU</en>
+    <ch>S-CPU</ch>
+  </t>
+  <t id="draw-tabpage-skia-gl">
+    <en>S-GL</en>
+    <ch>S-GL</ch>
+  </t>
+  <t id="draw-text">
+    <en>Hello World</en>
+    <ch>天气不错</ch>
   </t>
   <t id="empty">
     <en>Empty</en>
@@ -24,186 +188,6 @@
     <en>Radio item {0}</en>
     <ch>单选项{0}</ch>
   </t>
-  <t id="basic-menu-notice">
-    <en>Context menu is available</en>
-    <ch>右键菜单可用</ch>
-  </t>
-  <t id="basic-group-title">
-    <en>Basic Controls</en>
-    <ch>基本控件</ch>
-  </t>
-  <t id="basic-label-row">
-    <en>Row-{0:D}:</en>
-    <ch>第{0:D}行：</ch>
-  </t>
-  <t id="basic-checkbox">
-    <en>Save file</en>
-    <ch>保存文件</ch>
-  </t>
-  <t id="basic-radiobutton-file">
-    <en>File</en>
-    <ch>文件</ch>
-  </t>
-  <t id="basic-radiobutton-dir">
-    <en>Directory</en>
-    <ch>文件夹</ch>
-  </t>
-  <t id="basic-linkbutton">
-    <en>Browse</en>
-    <ch>浏览</ch>
-  </t>
-  <t id="basic-button">
-    <en>Button</en>
-    <ch>按钮</ch>
-  </t>
-  <t id="basic-combobox">
-    <en>Option {0}</en>
-    <ch>选项{0}</ch>
-  </t>
-  <t id="basic-list-item">
-    <en>List Option {0}</en>
-    <ch>列表项{0}</ch>
-  </t>
-  <t id="basic-tabpage-title">
-    <en>Tabpage {0}</en>
-    <ch>标签页{0}</ch>
-  </t>
-  <t id="basic-grid-key-title">
-    <en>Key</en>
-    <ch>键</ch>
-  </t>
-  <t id="basic-grid-value-title">
-    <en>Value</en>
-    <ch>值</ch>
-  </t>
-  <t id="basic-grid-add-row">
-    <en>Add row</en>
-    <ch>添加行</ch>
-  </t>
-  <t id="basic-grid-remove-row">
-    <en>Remove row</en>
-    <ch>移除行</ch>
-  </t>
-  <t id="util-group-title">
-    <en>Utility Controls</en>
-    <ch>实用控件</ch>
-  </t>
-  <t id="util-web-go-url">
-    <en>Go</en>
-    <ch>打开</ch>
-  </t>
-  <t id="util-web-call-script">
-    <en>Call script</en>
-    <ch>调用脚本</ch>
-  </t>
-  <t id="draw-group-title">
-    <en>Drawing Controls</en>
-    <ch>绘图控件</ch>
-  </t>
-  <t id="draw-text">
-    <en>Hello World</en>
-    <ch>天气不错</ch>
-  </t>
-  <t id="basic-client-size">
-    <en>Client Size</en>
-    <ch>用户区域</ch>
-  </t>
-  <t id="basic-dialog-no-border">
-    <en>Dialog without border</en>
-    <ch>无边框对话框</ch>
-  </t>
-  <t id="basic-dialog-with-border">
-    <en>Dialog with border</en>
-    <ch>带边框对话框</ch>
-  </t>
-  <t id="basic-dialog-with-border-fix">
-    <en>Dialog with fixed border</en>
-    <ch>带固定边框对话框</ch>
-  </t>
-  <t id="basic-close">
-    <en>Close</en>
-    <ch>关闭</ch>
-  </t>
-  <t id="basic-freeze-size">
-    <en>Freeze size</en>
-    <ch>固定尺寸</ch>
-  </t>
-  <t id="basic-grid-change-color">
-    <en>Change color</en>
-    <ch>改变颜色</ch>
-  </t>
-  <t id="basic-tree-parent">
-    <en>Parent Node {0:D}</en>
-    <ch>父节点{0:D}</ch>
-  </t>
-  <t id="basic-tree-child">
-    <en>Child Node {0:D}</en>
-    <ch>子节点{0:D}</ch>
-  </t>
-  <t id="basic-list-item-short">
-    <en>Option {0}</en>
-    <ch>列表项{0}</ch>
-  </t>
-  <t id="draw-gl-detail">
-    <en>Show details</en>
-    <ch>显示详情</ch>
-  </t>
-  <t id="draw-gl-info-version">
-    <en>Version: {0}</en>
-    <ch>版本：{0}</ch>
-  </t>
-  <t id="draw-gl-info-vendor">
-    <en>Vendor: {0}</en>
-    <ch>厂商：{0}</ch>
-  </t>
-  <t id="draw-gl-info-renderer">
-    <en>Renderer: {0}</en>
-    <ch>渲染器：{0}</ch>
-  </t>
-  <t id="draw-gl-info-extensions">
-    <en>Extensions: {0}</en>
-    <ch>扩展：{0}</ch>
-  </t>
-  <t id="draw-gl-pause-render">
-    <en>Pause render</en>
-    <ch>暂停渲染</ch>
-  </t>
-  <t id="draw-gl-resume-render">
-    <en>Resume render</en>
-    <ch>恢复渲染</ch>
-  </t>
-  <t id="draw-tabpage-default">
-    <en>Default</en>
-    <ch>默认</ch>
-  </t>
-  <t id="draw-skia-anti-alias">
-    <en>Anti-alias Test</en>
-    <ch>反锯齿测试</ch>
-  </t>
-  <t id="draw-tabpage-skia-gl">
-    <en>S-GL</en>
-    <ch>S-GL</ch>
-  </t>
-  <t id="basic-dynamic-add">
-    <en>Add</en>
-    <ch>添加项</ch>
-  </t>
-  <t id="basic-dynamic-remove">
-    <en>Remove</en>
-    <ch>移除项</ch>
-  </t>
-  <t id="title-dialog">
-    <en>Test Dialog</en>
-    <ch>测试对话框</ch>
-  </t>
-  <t id="draw-tabpage-skia-cpu">
-    <en>S-CPU</en>
-    <ch>S-CPU</ch>
-  </t>
-  <t id="draw-gl-info-title">
-    <en>Details</en>
-    <ch>详情</ch>
-  </t>
   <t id="menu-sub">
     <en>Sub menu</en>
     <ch>子菜单</ch>
@@ -212,8 +196,28 @@
     <en>Sub item {0}</en>
     <ch>子菜单项{0}</ch>
   </t>
-  <t id="basic-text">
-    <en>Text</en>
-    <ch>文本</ch>
+  <t id="reserved">
+    <en>Reserved</en>
+    <ch>保留</ch>
+  </t>
+  <t id="title">
+    <en>Test Window</en>
+    <ch>测试窗口</ch>
+  </t>
+  <t id="title-dialog">
+    <en>Test Dialog</en>
+    <ch>测试对话框</ch>
+  </t>
+  <t id="util-group-title">
+    <en>Utility Controls</en>
+    <ch>实用控件</ch>
+  </t>
+  <t id="util-web-call-script">
+    <en>Call script</en>
+    <ch>调用脚本</ch>
+  </t>
+  <t id="util-web-go-url">
+    <en>Go</en>
+    <ch>打开</ch>
   </t>
 </text_resource>

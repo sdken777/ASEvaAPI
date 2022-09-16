@@ -9,15 +9,18 @@ namespace ASEvaAPIEtoTest
 {
     partial class TestWindow
     {
-        private void initBasicTagPageD(TabPage tabPage)
+        private void initBasicTabPageD(TabPage tabPage)
         {
             var layout = tabPage.SetContentAsColumnLayout();
 
             var layoutTextControl = layout.AddRowLayout(false, 8, VerticalAlignment.Stretch);
-            initBasicTagPageDTextControl(layoutTextControl);
+            initBasicTabPageDTextControl(layoutTextControl);
+
+            var layoutTooltip = layout.AddRowLayout();
+            initBasicTabPageDTooltip(layoutTooltip);
         }
 
-        private void initBasicTagPageDTextControl(StackLayout layout)
+        private void initBasicTabPageDTextControl(StackLayout layout)
         {
             layout.AddSeparator();
             var layoutRows = layout.AddColumnLayout(true);
@@ -64,6 +67,15 @@ namespace ASEvaAPIEtoTest
             layoutButtons.AddButton(t["basic-text"], true).Font = App.DefaultFont(0.8f);
             layoutButtons.AddSeparator();
             layoutButtons.AddButton(t["basic-text"], true).Font = App.DefaultFont(1.2f);
+        }
+
+        private void initBasicTabPageDTooltip(StackLayout layout)
+        {
+            layout.AddLabel(t.Format("basic-tooltip", 1)).ToolTip = t.Format("basic-tooltip", 1);
+            layout.AddLinkButton(t.Format("basic-tooltip", 2)).ToolTip = t.Format("basic-tooltip", 2);
+            layout.AddCheckBox(t.Format("basic-tooltip", 3)).ToolTip = t.Format("basic-tooltip", 3);
+            layout.AddButton(t.Format("basic-tooltip", 4)).ToolTip = t.Format("basic-tooltip", 4);
+            layout.AddButtonPanel(t.Format("basic-tooltip", 5)).ToolTip = t.Format("basic-tooltip", 5);
         }
     }
 }

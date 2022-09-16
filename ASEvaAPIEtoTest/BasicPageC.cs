@@ -9,17 +9,17 @@ namespace ASEvaAPIEtoTest
 {
     partial class TestWindow
     {
-        private void initBasicTagPageC(TabPage tabPage)
+        private void initBasicTabPageC(TabPage tabPage)
         {
             var layoutRow = tabPage.SetContentAsRowLayout(8, 8, VerticalAlignment.Stretch);
 
             layoutRow.AddControl(new TextArea { Text = t["empty"] }, false, 150);
 
             var layoutTableView = layoutRow.AddColumnLayout(true, 2);
-            initBasicTagPageCTableView(layoutTableView);
+            initBasicTabPageCTableView(layoutTableView);
         }
 
-        private void initBasicTagPageCTableView(StackLayout layout)
+        private void initBasicTabPageCTableView(StackLayout layout)
         {
             var layoutGridViewRow = layout.AddRowLayout();
             var linkButtonAdd = layoutGridViewRow.AddLinkButton(t["basic-grid-add-row"]);

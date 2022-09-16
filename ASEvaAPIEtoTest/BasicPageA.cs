@@ -9,32 +9,32 @@ namespace ASEvaAPIEtoTest
 {
     partial class TestWindow
     {
-        private void initBasicTagPageA(TabPage tabPage)
+        private void initBasicTabPageA(TabPage tabPage)
         {
             var layout = tabPage.SetContentAsColumnLayout();
 
             layout.AddLabel(t["basic-menu-notice"]);
 
             var layoutRow1 = layout.AddRowLayout();
-            initBasicTagPageARow1(layoutRow1);
+            initBasicTabPageARow1(layoutRow1);
 
             var layoutRow2 = layout.AddRowLayout();
-            initBasicTagPageARow2(layoutRow2);
+            initBasicTabPageARow2(layoutRow2);
 
             var layoutRow3 = layout.AddRowLayout();
-            initBasicTagPageARow3(layoutRow3);
+            initBasicTabPageARow3(layoutRow3);
 
             var layoutRow4 = layout.AddRowLayout();
-            initBasicTagPageARow4(layoutRow4);
+            initBasicTabPageARow4(layoutRow4);
 
             var layoutRow5 = layout.AddRowLayout();
-            initBasicTagPageARow5(layoutRow5);
+            initBasicTabPageARow5(layoutRow5);
 
             var layoutRow6 = layout.AddRowLayout();
-            initBasicTagPageARow6(layoutRow6);
+            initBasicTabPageARow6(layoutRow6);
         }
 
-        private void initBasicTagPageARow1(StackLayout layout)
+        private void initBasicTabPageARow1(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 1));
             var checkBox = layout.AddCheckBox(t["basic-checkbox"]);
@@ -53,14 +53,14 @@ namespace ASEvaAPIEtoTest
             };
         }
 
-        private void initBasicTagPageARow2(StackLayout layout)
+        private void initBasicTabPageARow2(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 2));
             layout.AddComboBox(new string[] { t.Format("basic-combobox", "A"), t.Format("basic-combobox", "B") }, true);
             layout.AddControl(new DateTimePicker(), true);
         }
 
-        private void initBasicTagPageARow3(StackLayout layout)
+        private void initBasicTabPageARow3(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 3));
             layout.AddControl(new TextBox(), true);
@@ -68,7 +68,7 @@ namespace ASEvaAPIEtoTest
             layout.AddControl(new NumericStepper { MinValue = 0, MaxValue = 100 } );
         }
 
-        private void initBasicTagPageARow4(StackLayout layout)
+        private void initBasicTabPageARow4(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 4));
             var slider = layout.AddControl(new Slider { MinValue = 0, MaxValue = 100, TickFrequency = 10 }, true, 0, 40) as Slider;
@@ -76,7 +76,7 @@ namespace ASEvaAPIEtoTest
             slider.ValueChanged += delegate { progressBar.Value = slider.Value; };
         }
 
-        private void initBasicTagPageARow5(StackLayout layout)
+        private void initBasicTabPageARow5(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 5));
             layout.AddButton(t["basic-button"]);
@@ -84,7 +84,7 @@ namespace ASEvaAPIEtoTest
             layout.AddControl(new ColorPicker { Value = Colors.Red } );
         }
 
-        private void initBasicTagPageARow6(StackLayout layout)
+        private void initBasicTabPageARow6(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 6));
             layout.AddLinkButton(t["basic-dialog-no-border"]).Click += delegate

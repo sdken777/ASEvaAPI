@@ -9,7 +9,7 @@ namespace ASEvaAPIEtoTest
 {
     partial class TestWindow
     {
-        private void initBasicTagPageB(TabPage tabPage)
+        private void initBasicTabPageB(TabPage tabPage)
         {
             var splitter = tabPage.SetContentAsColumnLayout().AddControl(new Splitter { Position = this.Sizer(300) }, true) as Splitter;
             splitter.Panel1MinimumSize = 300;
@@ -20,16 +20,16 @@ namespace ASEvaAPIEtoTest
             var layoutPanel1 = panel1.SetContentAsRowLayout(0, 2, VerticalAlignment.Stretch);
             
             var layoutLists = layoutPanel1.AddColumnLayout(false, 120, 0, 8);
-            initBasicTagPageBLists(layoutLists);
+            initBasicTabPageBLists(layoutLists);
 
             var treeView = layoutPanel1.AddControl(new TreeGridView(), true) as TreeGridView;
-            initBasicTagPageBTreeView(treeView);
+            initBasicTabPageBTreeView(treeView);
 
             var layoutDynamicItems = panel2.SetContentAsColumnLayout();
-            initBasicTagPageBDynamicItems(layoutDynamicItems);
+            initBasicTabPageBDynamicItems(layoutDynamicItems);
         }
 
-        private void initBasicTagPageBLists(StackLayout layout)
+        private void initBasicTabPageBLists(StackLayout layout)
         {
             var listBox = layout.AddControl(new ListBox(), true) as ListBox;
             for (int i = 0; i < 26; i++) listBox.Items.Add(t.Format("basic-list-item", (char)('A' + i)));
@@ -38,7 +38,7 @@ namespace ASEvaAPIEtoTest
             for (int i = 0; i < 26; i++) checkListBox.AddItem(t.Format("basic-list-item-short", (char)('A' + i)), i % 2 == 0, (i / 2) % 2 == 0);
         }
 
-        private void initBasicTagPageBTreeView(TreeGridView view)
+        private void initBasicTabPageBTreeView(TreeGridView view)
         {
             view.ShowHeader  = false;
             view.Columns.Add(new GridColumn{ DataCell = new TextBoxCell(0), Width = this.Sizer(150) });
@@ -77,7 +77,7 @@ namespace ASEvaAPIEtoTest
         }
 
         // TODO: 增加专用控件
-        private void initBasicTagPageBDynamicItems(StackLayout layout)
+        private void initBasicTabPageBDynamicItems(StackLayout layout)
         {
             var layoutButtons = layout.AddRowLayout();
             var scrollBox = layout.AddControl(new Scrollable(), true) as Scrollable;

@@ -14,16 +14,16 @@ namespace ASEvaAPIEtoTest
             var tabControl = groupBox.SetContentAsColumnLayout().AddControl(new TabControl(), true) as TabControl;
 
             var tabPageA = tabControl.AddPage(t.Format("basic-tabpage-title", "A"));
-            initBasicTagPageA(tabPageA);
+            initBasicTabPageA(tabPageA);
 
             var tabPageB = tabControl.AddPage(t.Format("basic-tabpage-title", "B"));
-            initBasicTagPageB(tabPageB);
+            initBasicTabPageB(tabPageB);
 
             var tabPageC = tabControl.AddPage(t.Format("basic-tabpage-title", "C"));
-            initBasicTagPageC(tabPageC);
+            initBasicTabPageC(tabPageC);
 
             var tabPageD = tabControl.AddPage(t.Format("basic-tabpage-title", "D"));
-            initBasicTagPageD(tabPageD);
+            initBasicTabPageD(tabPageD);
         }
     }
 }
