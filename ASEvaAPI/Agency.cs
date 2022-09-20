@@ -53,6 +53,7 @@ namespace ASEva
         BusSignalValue[] ParseBusMessage(BusMessageSample busMessage);
         void SendBusMessage(BusMessage msg);
         void SendBusMessage(String messageID, uint? interval);
+        void SendBusMessage(String messageID, uint? interval, out byte[] data);
         void SendRawData(String protocol, double[] values, byte[] binary);
         void SendManualTrigger(int channel);
         String GetDataPath();
@@ -677,7 +678,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 设定想要发送的总线报文，可周期性发送，也可单次发送（仅在线模式可用）
+        /// 发送总线报文，可周期性发送，也可单次发送（仅在线模式可用）
         /// </summary>
         /// <param name="message"> 想要发送的报文信息</param>
         public static void SendBusMessage(BusMessage message)
@@ -686,13 +687,24 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 设定想要发送的总线报文（该报文需设置绑定），可周期性发送，也可单次发送（仅在线模式可用）
+        /// 发送总线报文（该报文需设置绑定），可周期性发送，也可单次发送（仅在线模式可用）
         /// </summary>
         /// <param name="messageID">绑定的报文ID</param>
         /// <param name="interval">报文发送周期，单位毫秒（至少为10），若设为null则只发送一次</param>
         public static void SendBusMessage(String messageID, uint? interval)
         {
             Handler.SendBusMessage(messageID, interval);
+        }
+
+        /// <summary>
+        /// (api:app=2.6.15) 发送总线报文（该报文需设置绑定），可周期性发送，也可单次发送（仅在线模式可用）
+        /// </summary>
+        /// <param name="messageID">绑定的报文ID</param>
+        /// <param name="interval">报文发送周期，单位毫秒（至少为10），若设为null则只发送一次</param>
+        /// <param name="data">输出生成的报文数据，若未绑定则输出null</param>
+        public static void SendBusMessage(String messageID, uint? interval, out byte[] data)
+        {
+            Handler.SendBusMessage(messageID, interval, out data);
         }
 
         /// <summary>

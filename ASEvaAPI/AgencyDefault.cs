@@ -1232,5 +1232,10 @@ namespace ASEva
         {
             return false;
         }
+
+        public void SendBusMessage(string messageID, uint? interval, out byte[] data)
+        {
+            data = null;
+        }
     }
 }
