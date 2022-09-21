@@ -19,17 +19,22 @@ namespace ASEvaAPIEtoTest
             layoutRow.AddButtonPanel(CommonImage.LoadResource("forward.png").ToEtoBitmap()).Click += delegate { webView.GoForward(); };
             layoutRow.AddSeparator();
             var textBox = layoutRow.AddControl(new TextBox(), true) as TextBox;
-            layoutRow.AddButtonPanel(t["util-web-go-url"]).Click += delegate
+            var buttonGo = layoutRow.AddButtonPanel(t["util-web-go-url"]);
+            layoutRow.AddSeparator();
+            layoutRow.AddButtonPanel(t["util-web-call-script"]).Click += delegate { webView.ExecuteScriptAsync("callScript()"); };
+
+            buttonGo.Enabled = false;
+            buttonGo.DefaultBackgroundColor = Colors.LightGrey;
+            buttonGo.Click += delegate
             {
                 if (!String.IsNullOrEmpty(textBox.Text))
                 {
                     webView.Url = new Uri(textBox.Text.StartsWith("http") ? textBox.Text : ("http://" + textBox.Text));
                 }
             };
-            layoutRow.AddSeparator();
-            layoutRow.AddButtonPanel(t["util-web-call-script"]).Click += delegate
+            textBox.TextChanged += delegate
             {
-                webView.ExecuteScriptAsync("callScript()");
+                buttonGo.Enabled = textBox.Text.Length > 0;
             };
 
             webView.LoadHtml(ResourceLoader.LoadText("index.html"));

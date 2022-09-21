@@ -22,8 +22,6 @@ namespace ASEva.UICoreWF
             SetStyle(ControlStyles.Opaque, true);
 
             gl = OpenGL.Create(new WindowsFuncLoader());
-
-            MouseWheel += OpenGLOnscreenControl_MouseWheel;
         }
 
         public void SetCallback(GLCallback callback)
@@ -98,26 +96,6 @@ namespace ASEva.UICoreWF
             Win32.SwapBuffers(hdc);
 
             DrawBeat.CallbackEnd(this);
-        }
-
-        private void OpenGLOnscreenControl_MouseDown(object sender, MouseEventArgs e)
-        {
-            callback.OnRaiseMouseDown(e.ToEto(this));
-        }
-
-        private void OpenGLOnscreenControl_MouseMove(object sender, MouseEventArgs e)
-        {
-            callback.OnRaiseMouseMove(e.ToEto(this));
-        }
-
-        private void OpenGLOnscreenControl_MouseUp(object sender, MouseEventArgs e)
-        {
-            callback.OnRaiseMouseUp(e.ToEto(this));
-        }
-
-        private void OpenGLOnscreenControl_MouseWheel(object sender, MouseEventArgs e)
-        {
-            callback.OnRaiseMouseWheel(e.ToEto(this));
         }
 
         private void onInit()

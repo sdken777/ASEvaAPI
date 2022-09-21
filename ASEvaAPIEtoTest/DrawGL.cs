@@ -25,6 +25,8 @@ namespace ASEvaAPIEtoTest
             var layoutBottom = layout.AddRowLayout();
             layoutBottom.AddLinkButton(t["draw-gl-pause-render"]).Click += delegate { glRenderSwitch = false; };
             layoutBottom.AddLinkButton(t["draw-gl-resume-render"]).Click += delegate { glRenderSwitch = true; };
+            layoutBottom.AddSpace();
+            var labelMouseCount = layoutBottom.AddLabel("0");
 
             if (!glView.SupportOverlay)
             {
@@ -150,6 +152,15 @@ namespace ASEvaAPIEtoTest
                 });
             };
 
+            glView.MouseDown += delegate
+            {
+                labelMouseCount.Text = (++glMouseCount).ToString();
+            };
+            glView.MouseWheel += delegate
+            {
+                labelMouseCount.Text = (++glMouseCount).ToString();
+            };
+
             button.Click += delegate
             {
                 if (glView.ContextInfo != null)
@@ -173,5 +184,6 @@ namespace ASEvaAPIEtoTest
         private GLView glView;
         private GLSizeInfo glViewSizeInfo;
         private bool glRenderSwitch = true;
+        private int glMouseCount = 0;
     }
 }

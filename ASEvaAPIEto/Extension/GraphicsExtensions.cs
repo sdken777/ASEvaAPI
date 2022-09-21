@@ -42,5 +42,62 @@ namespace ASEva.UIEto
             if (Pixel.Scale == 1) return f;
             else return new Font(f.Family, f.Size / Pixel.Scale, f.FontStyle, f.FontDecoration);
         }
+
+        /// <summary>
+        /// (api:eto=2.8.12) 指定锚点绘制文本
+        /// </summary>
+        /// <param name="g">图形对象</param>
+        /// <param name="text">文本</param>
+        /// <param name="font">字体</param>
+        /// <param name="color">文字颜色</param>
+        /// <param name="anchor">文本锚点坐标位置类型</param>
+        /// <param name="logicalX">文本锚点X轴逻辑坐标</param>
+        /// <param name="logicalY">文本锚点Y轴逻辑坐标</param>
+        public static void DrawString(this Graphics g, String text, Font font, Color color, TextAnchor anchor, int logicalX, int logicalY)
+        {
+            var textSize = g.MeasureString(font, text);
+
+            int xOffset = 0;
+            switch (anchor)
+            {
+                case TextAnchor.TopLeft:
+                case TextAnchor.LeftCenter:
+                case TextAnchor.BottomLeft:
+                    xOffset = 0;
+                    break;
+                case TextAnchor.TopCenter:
+                case TextAnchor.Center:
+                case TextAnchor.BottomCenter:
+                    xOffset = (int)(-textSize.Width / 2);
+                    break;
+                case TextAnchor.TopRight:
+                case TextAnchor.RightCenter:
+                case TextAnchor.BottomRight:
+                    xOffset = (int)-textSize.Width;
+                    break;
+            }
+
+            int yOffset = 0;
+            switch (anchor)
+            {
+                case TextAnchor.TopLeft:
+                case TextAnchor.TopCenter:
+                case TextAnchor.TopRight:
+                    yOffset = 0;
+                    break;
+                case TextAnchor.LeftCenter:
+                case TextAnchor.Center:
+                case TextAnchor.RightCenter:
+                    yOffset = (int)(-textSize.Height / 2);
+                    break;
+                case TextAnchor.BottomLeft:
+                case TextAnchor.BottomCenter:
+                case TextAnchor.BottomRight:
+                    yOffset = (int)-textSize.Height;
+                    break;
+            }
+
+            g.DrawText(font, color, logicalX + xOffset, logicalY + yOffset, text);
+        }
     }
 }

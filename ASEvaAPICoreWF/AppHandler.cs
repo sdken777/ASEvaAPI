@@ -37,6 +37,7 @@ namespace ASEva.UICoreWF
 
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerCoreWF();
             ButtonPanel.UseInnerEnterLeave = true;
+            ButtonPanel.TextAlphaUnsupported = true;
             Pixel.CalculateByScreenRealScale = true;
             ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.AlphaScale;
             CheckableListBox.DefaultBackgroundColor = Colors.White;

@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 5, 3); // WebView禁用RendererCodeIntegrity
+            return new Version(2, 3, 5, 4); // 修正在屏模式GLView鼠标事件重复问题。设置ButtonPanel.TextAlphaUnsupported
         }
     }
 }

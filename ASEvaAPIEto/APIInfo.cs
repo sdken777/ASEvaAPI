@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于Eto.Forms的部分。详见 ASEva.UIEto \n
- * 本文档对应API版本：2.8.11\n
+ * 本文档对应API版本：2.8.12\n
  * \n
  * Eto.Forms官方仓库: https://github.com/picoe/Eto \n
  * API文档: https://pages.picoe.ca/docs/api
@@ -11,7 +11,7 @@ using System;
 namespace ASEva.UIEto
 {
     /// <summary>
-    /// version=2.8.11
+    /// version=2.8.12
     /// </summary>
     public class APIInfo
     {
@@ -21,7 +21,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 11, 1); // 修正ButtonPanel颜色设置问题
+            return new Version(2, 8, 12, 0); // 新增GraphicsExtensions.DrawString。增加ButtonPanel.TextAlphaUnsupported
         }
     }
 }

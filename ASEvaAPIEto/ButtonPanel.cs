@@ -119,7 +119,12 @@ namespace ASEva.UIEto
             else
             {
                 var grayScale = textColor.ToHSL().L;
-                label.TextColor = new Color(grayScale, grayScale, grayScale, textColor.A / 3);
+                if (TextAlphaUnsupported)
+                {
+                    var grayScaleAlpha = (grayScale + (grayScale < 0.5f ? 1 : 0)) * 0.5f;
+                    label.TextColor = new Color(grayScaleAlpha, grayScaleAlpha, grayScaleAlpha);
+                }
+                else label.TextColor = new Color(grayScale, grayScale, grayScale, textColor.A / 3);
             }
         }
 
@@ -205,5 +210,6 @@ namespace ASEva.UIEto
         private Bitmap defaultBitmap = null, disableBitmapObj = null;
 
         public static bool UseInnerEnterLeave { private get; set; }
+        public static bool TextAlphaUnsupported { private get; set; }
     }
 }

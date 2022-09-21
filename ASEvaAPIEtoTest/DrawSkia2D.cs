@@ -27,10 +27,10 @@ namespace ASEvaAPIEtoTest
                 c.DrawLine(10, 100, 190, 100, blackPaint);
                 c.DrawLine(10, 120, 190, 120, blackPaint);
                 c.DrawLine(100, 10, 100, 190, blackPaint);
-                c.DrawLine(20, 110, 90, 110, wideLinePaint);
-                c.DrawString(t["draw-text"], c.GetDefaultFont(), SKColors.Black, TextAnchor.TopLeft, 100, 100);
+                c.DrawLine(110, 110, 180, 110, wideLinePaint);
+                c.DrawString(t["draw-text"], c.GetDefaultFont(), SKColors.Black, TextAnchor.BottomRight, 100, 120);
                 var textSize = c.MeasureString(t["draw-text"], c.GetDefaultFont());
-                c.DrawRect(100, 100, textSize.Width, textSize.Height, textBoundPaint);
+                c.DrawRect(100 - textSize.Width, 120 - textSize.Height, textSize.Width, textSize.Height, textBoundPaint);
                 c.DrawImage(CommonImage.LoadResource("camera.png").ToSKImage(), 80, 80);
 
                 var pieAngle = (DateTime.Now - startTime).TotalMilliseconds * 0.1;
