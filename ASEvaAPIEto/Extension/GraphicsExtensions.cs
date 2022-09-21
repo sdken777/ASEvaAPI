@@ -68,12 +68,12 @@ namespace ASEva.UIEto
                 case TextAnchor.TopCenter:
                 case TextAnchor.Center:
                 case TextAnchor.BottomCenter:
-                    xOffset = (int)(-textSize.Width / 2);
+                    xOffset = (int)(-textSize.Width / 2) - 1;
                     break;
                 case TextAnchor.TopRight:
                 case TextAnchor.RightCenter:
                 case TextAnchor.BottomRight:
-                    xOffset = (int)-textSize.Width;
+                    xOffset = (int)-textSize.Width - 1;
                     break;
             }
 
@@ -88,12 +88,12 @@ namespace ASEva.UIEto
                 case TextAnchor.LeftCenter:
                 case TextAnchor.Center:
                 case TextAnchor.RightCenter:
-                    yOffset = (int)(-textSize.Height / 2);
+                    yOffset = (int)(-textSize.Height / 2) - 1;
                     break;
                 case TextAnchor.BottomLeft:
                 case TextAnchor.BottomCenter:
                 case TextAnchor.BottomRight:
-                    yOffset = (int)-textSize.Height;
+                    yOffset = (int)-textSize.Height - 1;
                     break;
             }
 
