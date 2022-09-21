@@ -21,7 +21,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 12, 0); // 新增GraphicsExtensions.DrawString。增加ButtonPanel.TextAlphaUnsupported
+            return new Version(2, 8, 12, 1); // 优化ButtonPanel文字颜色显示
         }
     }
 }

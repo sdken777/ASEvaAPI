@@ -121,7 +121,7 @@ namespace ASEva.UIEto
                 var grayScale = textColor.ToHSL().L;
                 if (TextAlphaUnsupported)
                 {
-                    var grayScaleAlpha = (grayScale + (grayScale < 0.5f ? 1 : 0)) * 0.5f;
+                    var grayScaleAlpha = grayScale * 0.3f +  (grayScale < 0.5f ? 0.7f : 0);
                     label.TextColor = new Color(grayScaleAlpha, grayScaleAlpha, grayScaleAlpha);
                 }
                 else label.TextColor = new Color(grayScale, grayScale, grayScale, textColor.A / 3);
