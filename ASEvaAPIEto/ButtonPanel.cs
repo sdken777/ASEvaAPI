@@ -43,17 +43,41 @@ namespace ASEva.UIEto
         /// <summary>
         /// 默认状态下的背景颜色（默认为Colors.Transparent）
         /// </summary>
-        public Color DefaultBackgroundColor { get; set; }
+        public Color DefaultBackgroundColor
+        {
+            get { return defaultBackgroundColor; }
+            set
+            {
+                defaultBackgroundColor = value;
+                if (!mouseInside && !mouseDown) BackgroundColor = value;
+            }
+        }
 
         /// <summary>
         /// 鼠标在按钮范围内的背景颜色（默认为Colors.LightSteelBlue）
         /// </summary>
-        public Color MouseInsideColor { get; set; }
+        public Color MouseInsideColor
+        {
+            get { return mouseInsideColor; }
+            set
+            {
+                mouseInsideColor = value;
+                if (mouseInside) BackgroundColor = value;
+            }
+        }
 
         /// <summary>
         /// 鼠标按下后的背景颜色（默认为Colors.SteelBlue）
         /// </summary>
-        public Color MouseDownColor { get; set; }
+        public Color MouseDownColor
+        {
+            get { return mouseDownColor; }
+            set
+            {
+                mouseDownColor = value;
+                if (mouseDown) BackgroundColor = value;
+            }
+        }
         
         /// <summary>
         /// 文字颜色（默认为Colors.Black）
@@ -101,10 +125,6 @@ namespace ASEva.UIEto
 
         private void initialize()
         {
-            DefaultBackgroundColor = Colors.Transparent;
-            MouseInsideColor = Colors.LightSteelBlue;
-            MouseDownColor = Colors.SteelBlue;
-
             if (UseInnerEnterLeave)
             {
                 Control innerControl = null;
@@ -113,12 +133,12 @@ namespace ASEva.UIEto
                 innerControl.MouseEnter += delegate
                 {
                     mouseInside = true;
-                    BackgroundColor = MouseInsideColor;
+                    BackgroundColor = mouseInsideColor;
                 };
                 innerControl.MouseLeave += delegate
                 {
                     mouseInside = false;
-                    BackgroundColor = mouseDown ? MouseDownColor : DefaultBackgroundColor;
+                    BackgroundColor = mouseDown ? mouseDownColor : defaultBackgroundColor;
                 };
             }
             else
@@ -126,24 +146,24 @@ namespace ASEva.UIEto
                 MouseEnter += delegate
                 {
                     mouseInside = true;
-                    BackgroundColor = MouseInsideColor;
+                    BackgroundColor = mouseInsideColor;
                 };
                 MouseLeave += delegate
                 {
                     mouseInside = false;
-                    BackgroundColor = mouseDown ? MouseDownColor : DefaultBackgroundColor;
+                    BackgroundColor = mouseDown ? mouseDownColor : defaultBackgroundColor;
                 };
             }
 
             MouseDown += delegate
             {
                 mouseDown = true;
-                BackgroundColor = MouseDownColor;
+                BackgroundColor = mouseDownColor;
             };
             MouseUp += delegate
             {
                 mouseDown = false;
-                BackgroundColor = mouseInside ? MouseInsideColor : DefaultBackgroundColor;
+                BackgroundColor = mouseInside ? mouseInsideColor : defaultBackgroundColor;
                 if (Enabled && Click != null) Click(this, null);
             };
 
@@ -176,6 +196,9 @@ namespace ASEva.UIEto
         }
 
         private bool mouseInside = false, mouseDown = false;
+        private Color defaultBackgroundColor = Colors.Transparent;
+        private Color mouseInsideColor = Colors.LightSteelBlue;
+        private Color mouseDownColor = Colors.SteelBlue;
         private Color textColor = Colors.Black;
         private Label label = null;
         private ImageView imageView = null;

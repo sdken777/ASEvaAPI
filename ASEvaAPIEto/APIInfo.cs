@@ -21,7 +21,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 11, 0); // 新增ButtonPanel.ToolTip
+            return new Version(2, 8, 11, 1); // 修正ButtonPanel颜色设置问题
         }
     }
 }

@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.8.10
+            version=2.8.11
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -144,6 +144,11 @@
         <member name="P:ASEva.UIEto.ButtonPanel.TextColor">
             <summary>
             文字颜色（默认为Colors.Black）
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.ButtonPanel.ToolTip">
+            <summary>
+            (api:eto=2.8.11) 提示文字
             </summary>
         </member>
         <member name="T:ASEva.UIEto.CheckableListBox">
