@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.8.7
+            version=2.8.12
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -146,6 +146,11 @@
             文字颜色（默认为Colors.Black）
             </summary>
         </member>
+        <member name="P:ASEva.UIEto.ButtonPanel.ToolTip">
+            <summary>
+            (api:eto=2.8.11) 提示文字
+            </summary>
+        </member>
         <member name="T:ASEva.UIEto.CheckableListBox">
             <summary>
             (api:eto=2.5.0) 多选框组
@@ -222,6 +227,13 @@
             </summary>
             <param name="index">多选框的当前序号</param>
             <param name="isEnabled">是否启用</param>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.SetText(System.Int32,System.String)">
+            <summary>
+            (api:eto=2.8.9) 设置某个多选框的文字
+            </summary>
+            <param name="index">多选框的当前序号</param>
+            <param name="text">多选框的文字</param>
         </member>
         <member name="M:ASEva.UIEto.CheckableListBox.GetCheckedIndices">
             <summary>
@@ -452,6 +464,37 @@
             <param name="texts">各菜单项文字</param>
             <returns>一组单选项对象</returns>
         </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddSeparator(Eto.Forms.ButtonMenuItem)">
+            <summary>
+            (api:eto=2.8.10) 在子菜单中添加分割线
+            </summary>
+            <param name="subMenu">子菜单</param>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddButtonItem(Eto.Forms.ButtonMenuItem,System.String,Eto.Drawing.Image)">
+            <summary>
+            (api:eto=2.8.10) 在子菜单中添加按键项
+            </summary>
+            <param name="subMenu">子菜单</param>
+            <param name="text">菜单项文字</param>
+            <param name="image">菜单项文字前的图标，默认为null</param>
+            <returns></returns>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddCheckItem(Eto.Forms.ButtonMenuItem,System.String)">
+            <summary>
+            (api:eto=2.8.10) 在子菜单中添加多选项
+            </summary>
+            <param name="subMenu">子菜单</param>
+            <param name="text">菜单项文字</param>
+            <returns>多选项对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddRadioItems(Eto.Forms.ButtonMenuItem,System.String[])">
+            <summary>
+            (api:eto=2.8.10) 在子菜单中添加一组单选项
+            </summary>
+            <param name="subMenu">子菜单</param>
+            <param name="texts">各菜单项文字</param>
+            <returns>一组单选项对象</returns>
+        </member>
         <member name="T:ASEva.UIEto.GraphicsExtensions">
             <summary>
             (api:eto=2.0.4) 方便操作图形对象的扩展
@@ -478,6 +521,18 @@
             <param name="g">图形对象</param>
             <param name="sizeRatio">相对字体默认大小的比例，默认为1</param>
             <returns>可用于绘制的默认字体</returns>
+        </member>
+        <member name="M:ASEva.UIEto.GraphicsExtensions.DrawString(Eto.Drawing.Graphics,System.String,Eto.Drawing.Font,Eto.Drawing.Color,ASEva.UIEto.TextAnchor,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=2.8.12) 指定锚点绘制文本
+            </summary>
+            <param name="g">图形对象</param>
+            <param name="text">文本</param>
+            <param name="font">字体</param>
+            <param name="color">文字颜色</param>
+            <param name="anchor">文本锚点坐标位置类型</param>
+            <param name="logicalX">文本锚点X轴逻辑坐标</param>
+            <param name="logicalY">文本锚点Y轴逻辑坐标</param>
         </member>
         <member name="T:ASEva.UIEto.SetClientSizeExtensions">
             <summary>
@@ -1237,6 +1292,22 @@
         <member name="P:ASEva.UIEto.GLSizeInfo.AspectRatio">
             <summary>
             宽度与高度之比
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLSizeInfo.VerticalInverted">
+            <summary>
+            (api:eto=2.8.8) 图像坐标系垂直方向是否反转
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:ASEva.UIEto.GLSizeInfo.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Double,System.Single)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.GLSizeInfo.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Double,System.Single,System.Boolean)">
+            <summary>
+            (api:eto=2.8.8) 构造函数
             </summary>
         </member>
         <member name="T:ASEva.UIEto.GLEventArgs">

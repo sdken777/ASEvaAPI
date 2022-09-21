@@ -21,7 +21,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 12, 2); // 优化GraphicsExtensions.DrawString
+            return new Version(2, 8, 12, 3); // 修正ButtonPanel禁用时仍可能触发事件问题
         }
     }
 }

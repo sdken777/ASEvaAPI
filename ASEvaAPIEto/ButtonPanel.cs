@@ -137,6 +137,7 @@ namespace ASEva.UIEto
                 if (imageView != null) innerControl = imageView;
                 innerControl.MouseEnter += delegate
                 {
+                    if (!Enabled) return;
                     mouseInside = true;
                     BackgroundColor = mouseInsideColor;
                 };
@@ -150,6 +151,7 @@ namespace ASEva.UIEto
             {
                 MouseEnter += delegate
                 {
+                    if (!Enabled) return;
                     mouseInside = true;
                     BackgroundColor = mouseInsideColor;
                 };
@@ -162,6 +164,7 @@ namespace ASEva.UIEto
 
             MouseDown += delegate
             {
+                if (!Enabled) return;
                 mouseDown = true;
                 BackgroundColor = mouseDownColor;
             };
