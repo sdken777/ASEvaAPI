@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.8.12
+            version=2.8.13
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -282,6 +282,16 @@
         <member name="M:ASEva.UIEto.ConfigPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ConfigPanel.Close">
+            <summary>
+            (api:eto=2.8.13) 关闭配置界面
+            </summary>
+        </member>
+        <member name="E:ASEva.UIEto.ConfigPanel.CloseRequested">
+            <summary>
+            (api:eto=2.8.13) 在此事件中实现配置界面的关闭
             </summary>
         </member>
         <member name="T:ASEva.UIEto.DialogPanel">

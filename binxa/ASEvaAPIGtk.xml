@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIGtk.APIInfo">
             <summary>
-            version=2.4.4
+            version=2.4.5
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.APIInfo.GetAPIVersion">
@@ -45,6 +45,16 @@
         <member name="M:ASEva.UIGtk.ConfigPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.ConfigPanel.Close">
+            <summary>
+            (api:gtk=2.4.5) 关闭配置界面
+            </summary>
+        </member>
+        <member name="E:ASEva.UIGtk.ConfigPanel.CloseRequested">
+            <summary>
+            (api:gtk=2.4.5) 在此事件中实现配置界面的关闭
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.DialogHelper">

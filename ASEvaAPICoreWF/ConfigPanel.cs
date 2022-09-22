@@ -29,5 +29,18 @@ namespace ASEva.UICoreWF
         /// [可选实现] 在需要更新界面时被调用
         /// </summary>
         public virtual void OnUpdateUI() { }
+
+        /// <summary>
+        /// (api:corewf=2.3.6) 关闭配置界面
+        /// </summary>
+        public void Close()
+        {
+            if (CloseRequested != null) CloseRequested(this, null);
+        }
+
+        /// <summary>
+        /// (api:corewf=2.3.6) 在此事件中实现配置界面的关闭
+        /// </summary>
+        public event EventHandler CloseRequested;
     }
 }

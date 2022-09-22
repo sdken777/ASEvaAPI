@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UICoreWF.APIInfo">
             <summary>
-            version=2.3.5
+            version=2.3.6
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.APIInfo.GetAPIVersion">
@@ -217,6 +217,16 @@
         <member name="M:ASEva.UICoreWF.ConfigPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.ConfigPanel.Close">
+            <summary>
+            (api:corewf=2.3.6) 关闭配置界面
+            </summary>
+        </member>
+        <member name="E:ASEva.UICoreWF.ConfigPanel.CloseRequested">
+            <summary>
+            (api:corewf=2.3.6) 在此事件中实现配置界面的关闭
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.DeviceCoordView">
