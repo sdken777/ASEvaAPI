@@ -253,7 +253,7 @@ namespace ASEva
     }
 
     /// <summary>
-    /// (api:app=2.0.0) 用于发送的总线报文数据，可调用 ASEva.Agency.SetBusMessage 进行报文发送
+    /// (api:app=2.0.0) 用于发送的总线报文数据，可调用 ASEva.Agency.SendBusMessage 进行报文发送
     /// </summary>
     public class BusMessage
     {
