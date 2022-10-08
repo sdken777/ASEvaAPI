@@ -21,7 +21,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 13, 0); // 新增ConfigPanel.Close/CloseRequested
+            return new Version(2, 8, 13, 1); // 优化ButtonPanel setters
         }
     }
 }

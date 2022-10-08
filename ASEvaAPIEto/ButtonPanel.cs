@@ -48,6 +48,7 @@ namespace ASEva.UIEto
             get { return defaultBackgroundColor; }
             set
             {
+                if (defaultBackgroundColor == value) return;
                 defaultBackgroundColor = value;
                 if (!mouseInside && !mouseDown) BackgroundColor = value;
             }
@@ -61,6 +62,7 @@ namespace ASEva.UIEto
             get { return mouseInsideColor; }
             set
             {
+                if (mouseInsideColor == value) return;
                 mouseInsideColor = value;
                 if (mouseInside) BackgroundColor = value;
             }
@@ -74,6 +76,7 @@ namespace ASEva.UIEto
             get { return mouseDownColor; }
             set
             {
+                if (mouseDownColor == value) return;
                 mouseDownColor = value;
                 if (mouseDown) BackgroundColor = value;
             }
@@ -90,6 +93,7 @@ namespace ASEva.UIEto
             }
             set
             {
+                if (textColor == value) return;
                 textColor = value;
                 if (label != null) setLabelTextColor();
             }
@@ -108,8 +112,16 @@ namespace ASEva.UIEto
             }
             set
             {
-                if (label != null) label.ToolTip = value;
-                else if (imageView != null) imageView.ToolTip = value;
+                if (label != null)
+                {
+                    if (label.ToolTip == value) return;
+                    label.ToolTip = value;
+                }
+                else if (imageView != null)
+                {
+                    if (imageView.ToolTip == value) return;
+                    imageView.ToolTip = value;
+                }
             }
         }
 
