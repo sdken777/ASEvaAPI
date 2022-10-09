@@ -27,9 +27,9 @@ namespace ASEva.UIEto
         /// <returns>Skia图像对象</returns>
         public static SKImage ToSKImage(this CommonImage image)
         {
-            var buffer = new byte[image.Data.Length];
             int width = image.Width;
             int height = image.Height;
+            var buffer = new byte[width * height * 4];
             unsafe
             {
                 fixed (byte *srcData = &(image.Data[0]), dstData = &(buffer[0]))
@@ -39,7 +39,7 @@ namespace ASEva.UIEto
                         for (int v = 0; v < height; v++)
                         {
                             uint* srcRow = (uint*)&srcData[v * image.RowBytes];
-                            uint* dstRow = (uint*)&dstData[v * image.RowBytes];
+                            uint* dstRow = (uint*)&dstData[v * width * 4];
                             for (int u = 0; u < width; u++)
                             {
                                 uint cell = srcRow[u];
@@ -52,20 +52,18 @@ namespace ASEva.UIEto
                         for (int v = 0; v < height; v++)
                         {
                             byte* srcRow = &srcData[v * image.RowBytes];
-                            byte* dstRow = &dstData[v * image.RowBytes];
+                            uint* dstRow = (uint*)&dstData[v * width * 4];
                             for (int u = 0; u < width; u++)
                             {
-                                dstRow[3 * u + 0] = srcRow[3 * u + 2];
-                                dstRow[3 * u + 1] = srcRow[3 * u + 1];
-                                dstRow[3 * u + 2] = srcRow[3 * u + 0];
+                                dstRow[u] = 0xff000000 | (uint)srcRow[3 * u + 2] | ((uint)srcRow[3 * u + 1] << 8) | ((uint)srcRow[3 * u] << 16);
                             }
                         }
                     }
                 }
             }
 
-            var info = new SKImageInfo(image.Width, image.Height, image.WithAlpha ? SKColorType.Rgba8888 : SKColorType.Rgb888x);
-            return SKImage.FromPixelCopy(info, buffer, image.RowBytes);
+            var info = new SKImageInfo(image.Width, image.Height, SKColorType.Rgba8888);
+            return SKImage.FromPixelCopy(info, buffer, width * 4);
         }
     }
 }
