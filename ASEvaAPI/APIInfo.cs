@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 6, 15, 0); // Agency.SendBusMessage(messageID, interval)支持输出生成的报文数据
+            return new Version(2, 6, 15, 1); // 修正CommonImage.FromRgba32
         }
 
         /// <summary>
