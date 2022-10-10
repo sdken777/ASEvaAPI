@@ -1807,7 +1807,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.15
+            version=2.6.16
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -6276,6 +6276,36 @@
             应用程序重启后启用
             </summary>
         </member>
+        <member name="T:ASEva.PluginPackError">
+            <summary>
+            (api:app=2.6.16) 插件包错误信息
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginPackError.OK">
+            <summary>
+            正常
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginPackError.Disabled">
+            <summary>
+            禁用中
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginPackError.LoadFailed">
+            <summary>
+            加载失败
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginPackError.Unlicensed">
+            <summary>
+            未许可
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginPackError.PlatformUnsupported">
+            <summary>
+            平台不支持（UI）
+            </summary>
+        </member>
         <member name="T:ASEva.PluginPackInfo">
             <summary>
             (api:app=2.3.0) 插件包信息
@@ -6304,6 +6334,11 @@
         <member name="P:ASEva.PluginPackInfo.Status">
             <summary>
             (api:app=2.3.4) 插件包状态
+            </summary>
+        </member>
+        <member name="P:ASEva.PluginPackInfo.Error">
+            <summary>
+            (api:app=2.6.16) 插件包错误信息
             </summary>
         </member>
         <member name="P:ASEva.PluginPackInfo.AppLayerDetails">
