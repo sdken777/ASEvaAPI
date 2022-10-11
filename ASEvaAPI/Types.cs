@@ -1126,6 +1126,16 @@ namespace ASEva
         /// 回放速度瓶颈
         /// </summary>
         ReplayNeck = 34,
+
+        /// <summary>
+        /// (api:app=2.6.17) 文件读取线程循环平均运行时间（最近），单位毫秒
+        /// </summary>
+        FileReadThreadLoopTime = 35,
+
+        /// <summary>
+        /// (api:app=2.6.17) 文件写入线程循环平均运行时间（最近），单位毫秒
+        /// </summary>
+        FileWriteThreadLoopTime = 36,
     }
 
     /// <summary>

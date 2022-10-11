@@ -1807,7 +1807,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.16
+            version=2.6.17
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -5924,6 +5924,16 @@
         <member name="F:ASEva.SystemStatus.ReplayNeck">
             <summary>
             回放速度瓶颈
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.FileReadThreadLoopTime">
+            <summary>
+            (api:app=2.6.17) 文件读取线程循环平均运行时间（最近），单位毫秒
+            </summary>
+        </member>
+        <member name="F:ASEva.SystemStatus.FileWriteThreadLoopTime">
+            <summary>
+            (api:app=2.6.17) 文件写入线程循环平均运行时间（最近），单位毫秒
             </summary>
         </member>
         <member name="T:ASEva.WindowClassInfo">
