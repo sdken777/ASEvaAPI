@@ -255,6 +255,7 @@ namespace ASEva
         LogMessage[] GetLogMessages();
         bool IsReady();
         void DisablePlugin(String packID);
+        void DisableAllPlugins();
         void EnablePlugin(String packID);
         void EnqueueDataToNative(object caller, String nativeClassID, String dataID, byte[] data);
         byte[][] DequeueDataFromNative(object caller, String nativeClassID, String dataID);
@@ -2768,6 +2769,14 @@ namespace ASEva
         public static void DisablePlugin(String packID)
         {
             Handler.DisablePlugin(packID);
+        }
+
+        /// <summary>
+        /// (api:app=2.6.18) 禁用所有插件（除当前主流程插件外）
+        /// </summary>
+        public static void DisableAllPlugins()
+        {
+            Handler.DisableAllPlugins();
         }
 
         /// <summary>

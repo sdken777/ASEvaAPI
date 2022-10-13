@@ -1742,6 +1742,11 @@
             </summary>
             <param name="packID">插件包ID</param>
         </member>
+        <member name="M:ASEva.Agency.DisableAllPlugins">
+            <summary>
+            (api:app=2.6.18) 禁用所有插件（除当前主流程插件外）
+            </summary>
+        </member>
         <member name="M:ASEva.Agency.EnablePlugin(System.String)">
             <summary>
             (api:app=2.3.4) 启用插件（需要重启应用程序后生效）
@@ -1807,7 +1812,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.17
+            version=2.6.18
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
