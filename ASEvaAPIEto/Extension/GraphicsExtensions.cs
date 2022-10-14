@@ -27,7 +27,7 @@ namespace ASEva.UIEto
         public static Font ScaledFont(this Graphics g, Font f)
         {
             if (Pixel.Scale == 1) return f;
-            else return new Font(f.Family, f.Size / Pixel.Scale, f.FontStyle, f.FontDecoration);
+            else return FontLibrary.GetFont(f.Family, f.Size / Pixel.Scale, f.FontStyle, f.FontDecoration);
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace ASEva.UIEto
         {
             var f = App.DefaultFont(sizeRatio);
             if (Pixel.Scale == 1) return f;
-            else return new Font(f.Family, f.Size / Pixel.Scale, f.FontStyle, f.FontDecoration);
+            else return FontLibrary.GetFont(f.Family, f.Size / Pixel.Scale, f.FontStyle, f.FontDecoration);
         }
 
         /// <summary>

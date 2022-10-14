@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.8.11
+            version=2.8.15
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -284,6 +284,16 @@
             [可选实现] 在需要更新界面时被调用
             </summary>
         </member>
+        <member name="M:ASEva.UIEto.ConfigPanel.Close">
+            <summary>
+            (api:eto=2.8.13) 关闭配置界面
+            </summary>
+        </member>
+        <member name="E:ASEva.UIEto.ConfigPanel.CloseRequested">
+            <summary>
+            (api:eto=2.8.13) 在此事件中实现配置界面的关闭
+            </summary>
+        </member>
         <member name="T:ASEva.UIEto.DialogPanel">
             <summary>
             (api:eto=2.8.0) 对话框主面板（使用 ASEva.UIEto.App.RunDialog 弹出对话框）
@@ -495,6 +505,11 @@
             <param name="texts">各菜单项文字</param>
             <returns>一组单选项对象</returns>
         </member>
+        <member name="T:ASEva.UIEto.ConvertExtensions">
+            <summary>
+            (api:eto=2.8.14) 方便进行结构体转换操作的扩展
+            </summary>
+        </member>
         <member name="T:ASEva.UIEto.GraphicsExtensions">
             <summary>
             (api:eto=2.0.4) 方便操作图形对象的扩展
@@ -521,6 +536,18 @@
             <param name="g">图形对象</param>
             <param name="sizeRatio">相对字体默认大小的比例，默认为1</param>
             <returns>可用于绘制的默认字体</returns>
+        </member>
+        <member name="M:ASEva.UIEto.GraphicsExtensions.DrawString(Eto.Drawing.Graphics,System.String,Eto.Drawing.Font,Eto.Drawing.Color,ASEva.UIEto.TextAnchor,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=2.8.12) 指定锚点绘制文本
+            </summary>
+            <param name="g">图形对象</param>
+            <param name="text">文本</param>
+            <param name="font">字体</param>
+            <param name="color">文字颜色</param>
+            <param name="anchor">文本锚点坐标位置类型</param>
+            <param name="logicalX">文本锚点X轴逻辑坐标</param>
+            <param name="logicalY">文本锚点Y轴逻辑坐标</param>
         </member>
         <member name="T:ASEva.UIEto.SetClientSizeExtensions">
             <summary>

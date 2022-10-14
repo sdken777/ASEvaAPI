@@ -129,8 +129,9 @@ namespace ASEva.UIEto
             var targetSize = defaultFont.Size * sizeRatio;
             if (!newFontFailed)
             {
-                try { return new Font(defaultFont.Family, targetSize, defaultFont.FontStyle, defaultFont.FontDecoration); }
-                catch (Exception) { newFontFailed = true; }
+                var font = FontLibrary.GetFont(defaultFont.Family, targetSize, defaultFont.FontStyle, defaultFont.FontDecoration);
+                if (font != null) return font;
+                else newFontFailed = true;
             }
             return SystemFonts.Default(targetSize);
         }
