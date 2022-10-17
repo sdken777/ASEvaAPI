@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.8.15
+            version=2.8.16
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -707,6 +707,18 @@
             </summary>
             <param name="canvas">Skia画布</param>
             <param name="sizeScale">相对于默认尺寸的比例</param>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaCanvasExtensions.GetFont(SkiaSharp.SKCanvas,System.String,System.Single,SkiaSharp.SKFontStyleWeight,SkiaSharp.SKFontStyleWidth,SkiaSharp.SKFontStyleSlant)">
+            <summary>
+            (api:eto=2.8.16) 获取指定字体
+            </summary>
+            <param name="canvas">Skia画布</param>
+            <param name="fontName">字体名称</param>
+            <param name="sizeScale">相对于默认尺寸的比例</param>
+            <param name="weight">字重</param>
+            <param name="width">宽度</param>
+            <param name="slant">倾斜度</param>
+            <returns></returns>
         </member>
         <member name="M:ASEva.UIEto.SkiaCanvasExtensions.DrawString(SkiaSharp.SKCanvas,System.String,SkiaSharp.SKFont,SkiaSharp.SKColor,ASEva.UIEto.TextAnchor,System.Int32,System.Int32)">
             <summary>
