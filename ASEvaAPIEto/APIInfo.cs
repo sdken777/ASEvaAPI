@@ -21,7 +21,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 16, 0); // 新增SkiaCanvasExtensions.GetFont。FontLibrary增加SKFont部分
+            return new Version(2, 8, 16, 1); // 修正ConvertExtensions
         }
     }
 }

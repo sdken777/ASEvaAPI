@@ -128,11 +128,11 @@ namespace ASEva.UIEto
         }
         public static SKRectI ToSkia(this IntRect rect)
         {
-            return new SKRectI(rect.X, rect.Y, rect.Width, rect.Height);
+            return new SKRectI(rect.Left, rect.Top, rect.Right, rect.Bottom);
         }
         public static SKRectI ToSkia(this Rectangle rect)
         {
-            return new SKRectI(rect.X, rect.Y, rect.Width, rect.Height);
+            return new SKRectI(rect.Left, rect.Top, rect.Right, rect.Bottom);
         }
 
         public static FloatRect ToCommon(this RectangleF rect)
@@ -153,11 +153,11 @@ namespace ASEva.UIEto
         }
         public static SKRect ToSkia(this FloatRect rect)
         {
-            return new SKRect(rect.X, rect.Y, rect.Width, rect.Height);
+            return new SKRect(rect.Left, rect.Top, rect.Right, rect.Bottom);
         }
         public static SKRect ToSkia(this RectangleF rect)
         {
-            return new SKRect(rect.X, rect.Y, rect.Width, rect.Height);
+            return new SKRect(rect.Left, rect.Top, rect.Right, rect.Bottom);
         }
 
         public static ColorRGBA ToCommon(this Color color)
