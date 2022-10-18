@@ -21,7 +21,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 16, 1); // 修正ConvertExtensions
+            return new Version(2, 8, 16, 2); // 修正Skia文本绘制对齐问题
         }
     }
 }

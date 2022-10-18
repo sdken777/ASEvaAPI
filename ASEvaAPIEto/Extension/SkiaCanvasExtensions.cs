@@ -78,8 +78,8 @@ namespace ASEva.UIEto
             }
 
             var fontPaint = new SKPaint(font){ Color = color, TextAlign = align, IsAntialias = true };
-            var textRect = new SKRect();
-            fontPaint.MeasureText(text, ref textRect);
+            var testTextRect = new SKRect();
+            fontPaint.MeasureText(testText, ref testTextRect);
 
             int yOffset = 0;
             switch (anchor)
@@ -87,17 +87,17 @@ namespace ASEva.UIEto
                 case TextAnchor.TopLeft:
                 case TextAnchor.TopCenter:
                 case TextAnchor.TopRight:
-                    yOffset = (int)textRect.Top;
+                    yOffset = (int)testTextRect.Top;
                     break;
                 case TextAnchor.LeftCenter:
                 case TextAnchor.Center:
                 case TextAnchor.RightCenter:
-                    yOffset = (int)((textRect.Top + textRect.Bottom) * 0.5);
+                    yOffset = (int)((testTextRect.Top + testTextRect.Bottom) * 0.5);
                     break;
                 case TextAnchor.BottomLeft:
                 case TextAnchor.BottomCenter:
                 case TextAnchor.BottomRight:
-                    yOffset = (int)textRect.Bottom;
+                    yOffset = (int)testTextRect.Bottom;
                     break;
             }
 
@@ -115,11 +115,15 @@ namespace ASEva.UIEto
         {
             var fontPaint = new SKPaint(font);
             var textRect = new SKRect();
+            var testTextRect = new SKRect();
             fontPaint.MeasureText(text, ref textRect);
-            return textRect.Size;
+            fontPaint.MeasureText(testText, ref testTextRect);
+            return new SKSize(textRect.Width, testTextRect.Height);
         }
 
 		public static String DefaultFontName { private get; set; }
 		public static float DefaultFontSize { private get; set; }
+
+        private static String testText = "0O口";
     }
 }
