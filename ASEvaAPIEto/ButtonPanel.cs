@@ -36,6 +36,20 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
+        /// (api:eto=2.8.17) 更新图像
+        /// </summary>
+        /// <param name="image">新图像，尺寸应与原图像一致，否则不更新</param>
+        public void UpdateImage(Bitmap image)
+        {
+            if (image == null || image.Width != defaultBitmap.Width || image.Height != defaultBitmap.Height) return;
+            if (image == defaultBitmap) return;
+
+            defaultBitmap = image;
+            disableBitmapObj = null;
+            imageView.Image = image;
+        }
+
+        /// <summary>
         /// 点击按钮事件
         /// </summary>
         public event EventHandler Click;
