@@ -15,6 +15,8 @@ namespace ASEvaAPIEtoTest
             var skiaView = layout.AddControl(new SkiaView(null, disableGPU, onscreenRendering), true, 200, 0) as SkiaView;
             skiaViews.Add(skiaView);
 
+            var image = CommonImage.LoadResource("camera.png").ToSKImage();
+
             skiaView.Render += (o, args) =>
             {
                 var c = args.Canvas;
@@ -31,7 +33,7 @@ namespace ASEvaAPIEtoTest
                 c.DrawString(t["draw-text"], c.GetDefaultFont(), SKColors.Black, TextAnchor.BottomRight, 100, 120);
                 var textSize = c.MeasureString(t["draw-text"], c.GetDefaultFont());
                 c.DrawRect(100 - textSize.Width, 120 - textSize.Height, textSize.Width, textSize.Height, textBoundPaint);
-                c.DrawImage(CommonImage.LoadResource("camera.png").ToSKImage(), 80, 80);
+                c.DrawImage(image, 80, 80);
 
                 var pieAngle = (DateTime.Now - startTime).TotalMilliseconds * 0.1;
                 pieAngle -= Math.Floor(pieAngle / 360) * 360;

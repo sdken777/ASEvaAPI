@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using Eto.Drawing;
 using SkiaSharp;
 using ASEva.Samples;
@@ -24,30 +25,24 @@ namespace ASEva.UIEto
         /// 转为Skia图像对象
         /// </summary>
         /// <param name="image">通用图像数据</param>
-        /// <returns>Skia图像对象</returns>
+        /// <returns>Skia图像对象（使用完毕后建议及时调用Dispose，可减少内存占用）</returns>
         public static SKImage ToSKImage(this CommonImage image)
         {
-            int width = image.Width;
-            int height = image.Height;
-            var buffer = new byte[width * height * 4];
-            unsafe
+            byte[] targetData = null;
+            SKColorType colorType;
+            if (image.WithAlpha)
             {
-                fixed (byte *srcData = &(image.Data[0]), dstData = &(buffer[0]))
+                targetData = image.Data;
+                colorType = SKColorType.Bgra8888;
+            }
+            else
+            {
+                int width = image.Width;
+                int height = image.Height;
+                var buffer = new byte[width * height * 4];
+                unsafe
                 {
-                    if (image.WithAlpha)
-                    {
-                        for (int v = 0; v < height; v++)
-                        {
-                            uint* srcRow = (uint*)&srcData[v * image.RowBytes];
-                            uint* dstRow = (uint*)&dstData[v * width * 4];
-                            for (int u = 0; u < width; u++)
-                            {
-                                uint cell = srcRow[u];
-                                dstRow[u] = (cell & 0xff00ff00) | ((cell & 0x000000ff) << 16) | ((cell & 0x00ff0000) >> 16);
-                            }
-                        }
-                    }
-                    else
+                    fixed (byte *srcData = &(image.Data[0]), dstData = &(buffer[0]))
                     {
                         for (int v = 0; v < height; v++)
                         {
@@ -60,10 +55,19 @@ namespace ASEva.UIEto
                         }
                     }
                 }
+                targetData = buffer;
+                colorType = SKColorType.Rgba8888;
             }
 
-            var info = new SKImageInfo(image.Width, image.Height, SKColorType.Rgba8888);
-            return SKImage.FromPixelCopy(info, buffer, width * 4);
+            var context = new SKPixmapContext{ Handle = GCHandle.Alloc(targetData, GCHandleType.Pinned) };
+            var info = new SKImageInfo(image.Width, image.Height, colorType);
+            var pixmap = new SKPixmap(info, context.Handle.AddrOfPinnedObject(), image.Width * 4);
+            return SKImage.FromPixels(pixmap, (p, c) => (c as SKPixmapContext).Handle.Free(), context);
+        }
+
+        private class SKPixmapContext
+        {
+            public GCHandle Handle { get; set; }
         }
     }
 }

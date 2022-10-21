@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.8.17
+            version=2.8.18
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -424,7 +424,7 @@
             转为Skia图像对象
             </summary>
             <param name="image">通用图像数据</param>
-            <returns>Skia图像对象</returns>
+            <returns>Skia图像对象（使用完毕后建议及时调用Dispose，可减少内存占用）</returns>
         </member>
         <member name="T:ASEva.UIEto.ContainerExtensions">
             <summary>
