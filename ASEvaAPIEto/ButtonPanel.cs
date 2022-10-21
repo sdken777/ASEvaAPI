@@ -36,6 +36,20 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
+        /// (api:eto=2.8.17) 更新图像
+        /// </summary>
+        /// <param name="image">新图像，尺寸应与原图像一致，否则不更新</param>
+        public void UpdateImage(Bitmap image)
+        {
+            if (image == null || image.Width != defaultBitmap.Width || image.Height != defaultBitmap.Height) return;
+            if (image == defaultBitmap) return;
+
+            defaultBitmap = image;
+            disableBitmapObj = null;
+            imageView.Image = image;
+        }
+
+        /// <summary>
         /// 点击按钮事件
         /// </summary>
         public event EventHandler Click;
@@ -48,6 +62,7 @@ namespace ASEva.UIEto
             get { return defaultBackgroundColor; }
             set
             {
+                if (defaultBackgroundColor == value) return;
                 defaultBackgroundColor = value;
                 if (!mouseInside && !mouseDown) BackgroundColor = value;
             }
@@ -61,6 +76,7 @@ namespace ASEva.UIEto
             get { return mouseInsideColor; }
             set
             {
+                if (mouseInsideColor == value) return;
                 mouseInsideColor = value;
                 if (mouseInside) BackgroundColor = value;
             }
@@ -74,6 +90,7 @@ namespace ASEva.UIEto
             get { return mouseDownColor; }
             set
             {
+                if (mouseDownColor == value) return;
                 mouseDownColor = value;
                 if (mouseDown) BackgroundColor = value;
             }
@@ -90,6 +107,7 @@ namespace ASEva.UIEto
             }
             set
             {
+                if (textColor == value) return;
                 textColor = value;
                 if (label != null) setLabelTextColor();
             }
@@ -108,8 +126,16 @@ namespace ASEva.UIEto
             }
             set
             {
-                if (label != null) label.ToolTip = value;
-                else if (imageView != null) imageView.ToolTip = value;
+                if (label != null)
+                {
+                    if (label.ToolTip == value) return;
+                    label.ToolTip = value;
+                }
+                else if (imageView != null)
+                {
+                    if (imageView.ToolTip == value) return;
+                    imageView.ToolTip = value;
+                }
             }
         }
 

@@ -139,10 +139,25 @@ namespace ASEva.Samples
                 var dstRowIndex = i * output.RowBytes;
                 for (int j = 0; j < srcRow.Length; j++)
                 {
-                    output.Data[dstRowIndex + j * bytesPerPixel] = srcRow[j].B;
-                    output.Data[dstRowIndex + j * bytesPerPixel + 1] = srcRow[j].G;
-                    output.Data[dstRowIndex + j * bytesPerPixel + 2] = srcRow[j].R;
-                    if (withAlpha) output.Data[dstRowIndex + j * bytesPerPixel + 3] = srcRow[j].A;
+                    bool alphaZero = false;
+                    if (withAlpha)
+                    {
+                        var alpha = srcRow[j].A;
+                        output.Data[dstRowIndex + j * bytesPerPixel + 3] = alpha;
+                        alphaZero = alpha == 0;
+                    }
+                    if (alphaZero)
+                    {
+                        output.Data[dstRowIndex + j * bytesPerPixel] = 0;
+                        output.Data[dstRowIndex + j * bytesPerPixel + 1] = 0;
+                        output.Data[dstRowIndex + j * bytesPerPixel + 2] = 0;
+                    }
+                    else
+                    {
+                        output.Data[dstRowIndex + j * bytesPerPixel] = srcRow[j].B;
+                        output.Data[dstRowIndex + j * bytesPerPixel + 1] = srcRow[j].G;
+                        output.Data[dstRowIndex + j * bytesPerPixel + 2] = srcRow[j].R;
+                    }
                 }
             }
 

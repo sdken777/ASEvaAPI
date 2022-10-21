@@ -1126,6 +1126,16 @@ namespace ASEva
         /// 回放速度瓶颈
         /// </summary>
         ReplayNeck = 34,
+
+        /// <summary>
+        /// (api:app=2.6.17) 文件读取线程循环平均运行时间（最近），单位毫秒
+        /// </summary>
+        FileReadThreadLoopTime = 35,
+
+        /// <summary>
+        /// (api:app=2.6.17) 文件写入线程循环平均运行时间（最近），单位毫秒
+        /// </summary>
+        FileWriteThreadLoopTime = 36,
     }
 
     /// <summary>
@@ -1491,6 +1501,37 @@ namespace ASEva
     }
 
     /// <summary>
+    /// (api:app=2.6.16) 插件包错误信息
+    /// </summary>
+    public enum PluginPackError
+    {
+        /// <summary>
+        /// 正常
+        /// </summary>
+        OK = 0,
+        
+        /// <summary>
+        /// 禁用中
+        /// </summary>
+        Disabled = 1,
+
+        /// <summary>
+        /// 加载失败
+        /// </summary>
+        LoadFailed = 2,
+
+        /// <summary>
+        /// 未许可
+        /// </summary>
+        Unlicensed = 3,
+
+        /// <summary>
+        /// 平台不支持（UI）
+        /// </summary>
+        PlatformUnsupported = 4,
+    }
+
+    /// <summary>
     /// (api:app=2.3.0) 插件包信息
     /// </summary>
     public class PluginPackInfo
@@ -1519,6 +1560,11 @@ namespace ASEva
         /// (api:app=2.3.4) 插件包状态
         /// </summary>
         public PluginPackStatus Status { get; set; }
+
+        /// <summary>
+        /// (api:app=2.6.16) 插件包错误信息
+        /// </summary>
+        public PluginPackError Error { get; set; }
 
         /// <summary>
         /// 应用层详情

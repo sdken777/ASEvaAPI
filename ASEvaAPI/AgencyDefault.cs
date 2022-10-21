@@ -1237,5 +1237,9 @@ namespace ASEva
         {
             data = null;
         }
+
+        public void DisableAllPlugins()
+        {
+        }
     }
 }

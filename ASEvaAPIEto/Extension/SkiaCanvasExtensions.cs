@@ -16,11 +16,32 @@ namespace ASEva.UIEto
         public static SKFont GetDefaultFont(this SKCanvas canvas, float sizeScale = 1.0f)
         {
             if (sizeScale <= 0) sizeScale = 1;
-            if (String.IsNullOrEmpty(DefaultFontName)) return new SKFont();
+            if (String.IsNullOrEmpty(DefaultFontName)) return FontLibrary.GetSKFont();
             else
             {
-                if (DefaultFontSize == 0) return new SKFont(SKTypeface.FromFamilyName(DefaultFontName));
-                else return new SKFont(SKTypeface.FromFamilyName(DefaultFontName), DefaultFontSize * sizeScale);
+                if (DefaultFontSize == 0) return FontLibrary.GetSKFont(DefaultFontName);
+                else return FontLibrary.GetSKFont(DefaultFontName, DefaultFontSize * sizeScale, SKFontStyleWeight.Normal, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
+            }
+        }
+
+        /// <summary>
+        /// (api:eto=2.8.16) 获取指定字体
+        /// </summary>
+        /// <param name="canvas">Skia画布</param>
+        /// <param name="fontName">字体名称</param>
+        /// <param name="sizeScale">相对于默认尺寸的比例</param>
+        /// <param name="weight">字重</param>
+        /// <param name="width">宽度</param>
+        /// <param name="slant">倾斜度</param>
+        /// <returns></returns>
+        public static SKFont GetFont(this SKCanvas canvas, String fontName, float sizeScale = 1.0f, SKFontStyleWeight weight = SKFontStyleWeight.Normal, SKFontStyleWidth width = SKFontStyleWidth.Normal, SKFontStyleSlant slant = SKFontStyleSlant.Upright)
+        {
+            if (sizeScale <= 0) sizeScale = 1;
+            if (String.IsNullOrEmpty(fontName)) return FontLibrary.GetSKFont();
+            else
+            {
+                if (DefaultFontSize == 0) return FontLibrary.GetSKFont(fontName);
+                else return FontLibrary.GetSKFont(fontName, DefaultFontSize * sizeScale, weight, width, slant);
             }
         }
 
@@ -57,8 +78,8 @@ namespace ASEva.UIEto
             }
 
             var fontPaint = new SKPaint(font){ Color = color, TextAlign = align, IsAntialias = true };
-            var textRect = new SKRect();
-            fontPaint.MeasureText(text, ref textRect);
+            var testTextRect = new SKRect();
+            fontPaint.MeasureText(testText, ref testTextRect);
 
             int yOffset = 0;
             switch (anchor)
@@ -66,17 +87,17 @@ namespace ASEva.UIEto
                 case TextAnchor.TopLeft:
                 case TextAnchor.TopCenter:
                 case TextAnchor.TopRight:
-                    yOffset = (int)textRect.Top;
+                    yOffset = (int)testTextRect.Top;
                     break;
                 case TextAnchor.LeftCenter:
                 case TextAnchor.Center:
                 case TextAnchor.RightCenter:
-                    yOffset = (int)((textRect.Top + textRect.Bottom) * 0.5);
+                    yOffset = (int)((testTextRect.Top + testTextRect.Bottom) * 0.5);
                     break;
                 case TextAnchor.BottomLeft:
                 case TextAnchor.BottomCenter:
                 case TextAnchor.BottomRight:
-                    yOffset = (int)textRect.Bottom;
+                    yOffset = (int)testTextRect.Bottom;
                     break;
             }
 
@@ -94,11 +115,15 @@ namespace ASEva.UIEto
         {
             var fontPaint = new SKPaint(font);
             var textRect = new SKRect();
+            var testTextRect = new SKRect();
             fontPaint.MeasureText(text, ref textRect);
-            return textRect.Size;
+            fontPaint.MeasureText(testText, ref testTextRect);
+            return new SKSize(textRect.Width, testTextRect.Height);
         }
 
 		public static String DefaultFontName { private get; set; }
 		public static float DefaultFontSize { private get; set; }
+
+        private static String testText = "0O口";
     }
 }
