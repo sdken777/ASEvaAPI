@@ -264,6 +264,8 @@ namespace ASEva
         void ResetAppFunctionHandler(object caller, String nativeClassID, String funcID);
         bool IsGPURenderingDisabled();
         bool IsOnscreenGPURenderingEnabled();
+        DataSubscriber SubscribeData(String dataID, int bufferLength, int timeout);
+        void PublishData(String dataID, byte[] data);
     }
 
     /// <summary>
@@ -2793,8 +2795,8 @@ namespace ASEva
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
-        /// <param name="dataID">数据ID</param>
-        /// <param name="data">数据</param>
+        /// <param name="dataID">数据ID，不可为null</param>
+        /// <param name="data">数据，不可为null</param>
         public static void EnqueueDataToNative(object caller, String nativeClassID, String dataID, byte[] data)
         {
             Handler.EnqueueDataToNative(caller, nativeClassID, dataID, data);
@@ -2805,7 +2807,7 @@ namespace ASEva
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
-        /// <param name="dataID">数据ID</param>
+        /// <param name="dataID">数据ID，不可为null</param>
         /// <returns>所有新数据</returns>
         public static byte[][] DequeueDataFromNative(object caller, String nativeClassID, String dataID)
         {
@@ -2864,6 +2866,28 @@ namespace ASEva
         public static bool IsOnscreenGPURenderingEnabled()
         {
             return Handler.IsOnscreenGPURenderingEnabled();
+        }
+
+        /// <summary>
+        /// (api:app=2.6.19) 订阅数据
+        /// </summary>
+        /// <param name="dataID">数据ID，不可为null或空字符串</param>
+        /// <param name="bufferLength">缓存长度，范围在1~1000</param>
+        /// <param name="timeout">超过该时间不取出缓存数据则自动关闭订阅，单位秒，范围在10～600</param>
+        /// <returns>数据订阅对象，若初始化失败则返回null</returns>
+        public static DataSubscriber SubscribeData(String dataID, int bufferLength, int timeout)
+        {
+            return Handler.SubscribeData(dataID, bufferLength, timeout);
+        }
+
+        /// <summary>
+        /// (api:app=2.6.19) 发布数据
+        /// </summary>
+        /// <param name="dataID">数据ID，不可为null或空字符串</param>
+        /// <param name="data">数据，不可为null</param>
+        public static void PublishData(String dataID, byte[] data)
+        {
+            Handler.PublishData(dataID, data);
         }
     }
 }
