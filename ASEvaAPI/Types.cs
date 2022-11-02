@@ -1721,4 +1721,32 @@ namespace ASEva
         /// </summary>
         CalculateMD5Failed,
     }
+
+    /// <summary>
+    /// (api:app=2.6.19) 数据订阅对象，调用 ASEva.Agency.SubscribeData 获取
+    /// </summary>
+    public class DataSubscriber
+    {
+        /// <summary>
+        /// 从缓存取出所有新数据（需要确保经常调用，超时后将自动关闭订阅）
+        /// </summary>
+        public virtual byte[][] Dequeue()
+        {
+            return null;
+        }
+
+        /// <summary>
+        /// 立即关闭订阅
+        /// </summary>
+        public virtual void Close()
+        {}
+
+        /// <summary>
+        /// 是否已关闭订阅
+        /// </summary>
+        public virtual bool IsClosed()
+        {
+            return false;
+        }
+    }
 }

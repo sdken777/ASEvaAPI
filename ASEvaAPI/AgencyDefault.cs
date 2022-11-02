@@ -1241,5 +1241,14 @@ namespace ASEva
         public void DisableAllPlugins()
         {
         }
+
+        public DataSubscriber SubscribeData(string dataID, int bufferLength, int timeout)
+        {
+            return null;
+        }
+
+        public void PublishData(string dataID, byte[] data)
+        {
+        }
     }
 }

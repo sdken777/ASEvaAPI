@@ -1759,8 +1759,8 @@
             </summary>
             <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
             <param name="nativeClassID">原生组件ID</param>
-            <param name="dataID">数据ID</param>
-            <param name="data">数据</param>
+            <param name="dataID">数据ID，不可为null</param>
+            <param name="data">数据，不可为null</param>
         </member>
         <member name="M:ASEva.Agency.DequeueDataFromNative(System.Object,System.String,System.String)">
             <summary>
@@ -1768,7 +1768,7 @@
             </summary>
             <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
             <param name="nativeClassID">原生组件ID</param>
-            <param name="dataID">数据ID</param>
+            <param name="dataID">数据ID，不可为null</param>
             <returns>所有新数据</returns>
         </member>
         <member name="M:ASEva.Agency.CallNativeFunction(System.Object,System.String,System.String,System.Byte[])">
@@ -1810,9 +1810,25 @@
             </summary>
             <returns>是否全局启用在屏GPU渲染（若已全局禁用GPU渲染则返回false）</returns>
         </member>
+        <member name="M:ASEva.Agency.SubscribeData(System.String,System.Int32,System.Int32)">
+            <summary>
+            (api:app=2.6.19) 订阅数据
+            </summary>
+            <param name="dataID">数据ID，不可为null或空字符串</param>
+            <param name="bufferLength">缓存长度，范围在1~1000</param>
+            <param name="timeout">超过该时间不取出缓存数据则自动关闭订阅，单位秒，范围在10～600</param>
+            <returns>数据订阅对象，若初始化失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.PublishData(System.String,System.Byte[])">
+            <summary>
+            (api:app=2.6.19) 发布数据
+            </summary>
+            <param name="dataID">数据ID，不可为null或空字符串</param>
+            <param name="data">数据，不可为null</param>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.18
+            version=2.6.19
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -6503,6 +6519,26 @@
         <member name="F:ASEva.AddBusProtocolResult.CalculateMD5Failed">
             <summary>
             无法计算文件MD5
+            </summary>
+        </member>
+        <member name="T:ASEva.DataSubscriber">
+            <summary>
+            (api:app=2.6.19) 数据订阅对象，调用 ASEva.Agency.SubscribeData 获取
+            </summary>
+        </member>
+        <member name="M:ASEva.DataSubscriber.Dequeue">
+            <summary>
+            从缓存取出所有新数据（需要确保经常调用，超时后将自动关闭订阅）
+            </summary>
+        </member>
+        <member name="M:ASEva.DataSubscriber.Close">
+            <summary>
+            立即关闭订阅
+            </summary>
+        </member>
+        <member name="M:ASEva.DataSubscriber.IsClosed">
+            <summary>
+            是否已关闭订阅
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">
