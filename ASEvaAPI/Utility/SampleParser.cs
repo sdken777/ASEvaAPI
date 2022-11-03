@@ -48,9 +48,7 @@ namespace ASEva.Utility
             if (obj == null || !(obj is Sample)) return null;
 
             var output = obj as Sample;
-            output.Base = input.Base;
-            output.Offset = input.Offset;
-            output.Timeline = input.Timeline;
+            output.SetTime(input);
 
             try
             {

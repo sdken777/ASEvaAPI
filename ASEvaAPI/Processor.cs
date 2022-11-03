@@ -10,12 +10,12 @@ namespace ASEva
     public struct ProcessorOutputSample
     {
         /// <summary>
-        /// 输出样本，若timeRef为空则需要对Base, Offset, Timeline赋值
+        /// 输出样本，若timeRef为空则需要手动对时间戳和时间线位置赋值
         /// </summary>
         public Sample sample;
 
         /// <summary>
-        /// 时间戳参考样本，sample的时间戳将被赋值为与此样本一致
+        /// 时间参考样本，sample的时间戳和时间线位置将被赋值为与此样本一致
         /// </summary>
         public Sample timeRef;
 
@@ -30,10 +30,10 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 基于输出样本和时间戳参考样本构造
+        /// 基于输出样本和时间参考样本构造
         /// </summary>
         /// <param name="sample">输出样本</param>
-        /// <param name="timeRef">时间戳参考样本</param>
+        /// <param name="timeRef">时间参考样本</param>
         public ProcessorOutputSample(Sample sample, Sample timeRef)
         {
             this.sample = sample;

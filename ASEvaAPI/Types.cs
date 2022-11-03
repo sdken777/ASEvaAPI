@@ -578,12 +578,12 @@ namespace ASEva
     public class TimeWithSession
     {
         /// <summary>
-        /// 秒
+        /// 时间偏置，单位秒
         /// </summary>
         public double Time { get; set; }
 
         /// <summary>
-        /// Session
+        /// 所在Session
         /// </summary>
         public DateTime Session { get; set; }
     }
@@ -852,7 +852,7 @@ namespace ASEva
         /// 按指定参数获取时间轴上最近的视频帧
         /// </summary>
         /// <param name="channel">视频通道，0~23</param>
-        /// <param name="timeline">获取视频帧的目标时间，单位秒</param>
+        /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
         /// <param name="maxGap">容许的最大间隔，单位秒</param>
         /// <param name="targetSize">输出图像的尺寸</param>
         /// <param name="hires">是否优先输出高清图像，否则固定输出不大于VGA分辨率的图像</param>
@@ -1747,6 +1747,56 @@ namespace ASEva
         public virtual bool IsClosed()
         {
             return false;
+        }
+    }
+
+    /// <summary>
+    /// (api:app=2.7.0) CPU时间模型
+    /// </summary>
+    public class CPUTimeModel
+    {
+        /// <summary>
+        /// Session开始时的CPU计数
+        /// </summary>
+        public ulong StartCPUTick { get; set; }
+
+        /// <summary>
+        /// 每秒增加的CPU计数
+        /// </summary>
+        public ulong CPUTicksPerSecond { get; set; }
+
+        /// <summary>
+        /// 默认构造函数
+        /// </summary>
+        public CPUTimeModel()
+        {
+            StartCPUTick = 0;
+            CPUTicksPerSecond = 1000000000;
+        }
+    }
+
+    /// <summary>
+    /// (api:app=2.7.0) Posix时间模型
+    /// </summary>
+    public class PosixTimeModel
+    {
+        /// <summary>
+        /// Session开始时的Posix时间，单位毫秒，0表示无效
+        /// </summary>
+        public ulong StartPosix { get; set; }
+
+        /// <summary>
+        /// CPU时间转为Posix时间的时间比例，应为1左右
+        /// </summary>
+        public double TimeRatio { get; set; }
+
+        /// <summary>
+        /// 默认构造函数
+        /// </summary>
+        public PosixTimeModel()
+        {
+            StartPosix = 0;
+            TimeRatio = 1;
         }
     }
 }

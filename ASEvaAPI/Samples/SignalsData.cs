@@ -8,7 +8,7 @@ namespace ASEva.Samples
     public struct SignalData
     {
         /// <summary>
-        /// 相对时间戳，单位秒
+        /// 时间偏置，单位秒
         /// </summary>
         public double Offset { get; set; }
         /// <summary>
@@ -19,7 +19,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 默认构造函数
         /// </summary>
-        /// <param name="offset">相对时间戳</param>
+        /// <param name="offset">时间偏置，单位秒</param>
         /// <param name="value">信号值</param>
         public SignalData(double offset, double value)
         {

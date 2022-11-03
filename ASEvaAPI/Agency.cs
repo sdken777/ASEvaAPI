@@ -209,6 +209,8 @@ namespace ASEva
         void SetSessionComment(DateTime session, String comment);
         Dictionary<String, String> GetSessionProperties(DateTime session);
         void SetSessionProperties(DateTime session, Dictionary<String, String> properties);
+        bool GetSessionHostSync(DateTime session);
+        void SetSessionHostSync(DateTime session, bool hostSync);
         void SetAudioVolume(double volume);
         void SetCPURateScale(int scale);
         String GetLicenseInfo();
@@ -266,10 +268,18 @@ namespace ASEva
         bool IsOnscreenGPURenderingEnabled();
         DataSubscriber SubscribeData(String dataID, int bufferLength, int timeout);
         void PublishData(String dataID, byte[] data);
+        CPUTimeModel GetCPUTimeModel(DateTime session);
+        PosixTimeModel GetHostPosixTimeModel(DateTime session);
+        PosixTimeModel GetGNSSPosixTimeModel(DateTime session);
+        DateTime? GetLocalDateTime(DateTime session, double timeOffset, bool useGNSS);
+        DateTime? GetUTCDateTime(DateTime session, double timeOffset, bool useGNSS);
+        ulong GetCPUTick();
+        ulong GetCPUTicksPerSecond();
+
     }
 
     /// <summary>
-    /// (api:app=2.0.0) 集合了ASEva所有主要API
+    /// (api:app=2.0.0) 集合了所有主要API
     /// </summary>
     public partial class Agency
     {
@@ -288,18 +298,18 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 获取ASEva当前的运行状态
+        /// 获取应用程序当前的运行状态
         /// </summary>
-        /// <returns>ASEva运行状态</returns>
+        /// <returns>应用程序运行状态</returns>
         public static ApplicationStatus GetAppStatus()
         {
             return Handler.GetAppStatus();
         }
 
         /// <summary>
-        /// 获取ASEva当前的运行模式
+        /// 获取应用程序当前的运行模式
         /// </summary>
-        /// <returns>ASEva运行模式</returns>
+        /// <returns>应用程序运行模式</returns>
         public static ApplicationMode GetAppMode()
         {
             return Handler.GetAppMode();
@@ -315,7 +325,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 获取ASEva当前的显示语言
+        /// 获取应用程序当前的显示语言
         /// </summary>
         /// <returns>语言ID，如en表示英文，ch表示中文等</returns>
         public static String GetAppLanguage()
@@ -324,7 +334,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 获取ASEva当前的兴趣时间点
+        /// 获取应用程序当前兴趣点在时间线上的位置
         /// </summary>
         /// <returns>在时间线上的兴趣点，单位秒</returns>
         public static double GetInterestTime()
@@ -333,9 +343,9 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 获取ASEva当前的兴趣时间戳
+        /// 获取应用程序当前兴趣点对应的本地时间
         /// </summary>
-        /// <returns>兴趣点的时间戳(包括年月日时分秒，毫秒)，若无数据则返回null</returns>
+        /// <returns>兴趣点的本地时间，若无数据则返回null</returns>
         public static DateTime? GetInterestTimestamp()
         {
             return Handler.GetInterestTimestamp();
@@ -351,7 +361,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 获取ASEva数据缓存范围
+        /// 获取应用程序当前的数据缓存范围
         /// </summary>
         /// <returns>数据缓存范围</returns>
         public static BufferRange GetBufferRange()
@@ -493,62 +503,48 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 获取某个session的本地开始时间（相对时间戳=0）
+        /// 已弃用，应使用 ASEva.Agency.GetHostPosixTimeModel
         /// </summary>
-        /// <param name="session">希望获取本地开始时间的session ID</param>
-        /// <returns>本地开始时间，若空表示无此信息或session不在当前层级</returns>
         public static DateTime? GetStartTimeLocal(DateTime session)
         {
             return Handler.GetStartTimeLocal(session);
         }
 
         /// <summary>
-        /// 获取某个session的UTC开始时间（相对时间戳=0）
+        /// 已弃用，应使用 ASEva.Agency.GetGNSSPosixTimeModel
         /// </summary>
-        /// <param name="session">希望获取UTC开始时间的session ID</param>
-        /// <returns>UTC开始时间，若空表示无此信息或session不在当前层级</returns>
         public static DateTime? GetStartTimeUTC(DateTime session)
         {
             return Handler.GetStartTimeUTC(session);
         }
 
         /// <summary>
-        /// 获取某个session上指定相对时间对应的本地时间
+        /// 已弃用，应使用 ASEva.Agency.GetLocalDateTime
         /// </summary>
-        /// <param name="session">Session ID</param>
-        /// <param name="timeOffset">相对时间 (时间偏置)</param>
-        /// <returns>本地时间戳</returns>
         public static DateTime? GetTimestampLocal(DateTime session, double timeOffset)
         {
             return Handler.GetTimestampLocal(session, timeOffset);
         }
 
         /// <summary>
-        /// 获取某个session上指定相对时间对应的UTC时间
+        /// 已弃用，应使用 ASEva.Agency.GetUTCDateTime
         /// </summary>
-        /// <param name="session">Session ID</param>
-        /// <param name="timeOffset">相对时间 (时间偏置)</param>
-        /// <returns>UTC时间戳</returns>
         public static DateTime? GetTimestampUTC(DateTime session, double timeOffset)
         {
             return Handler.GetTimestampUTC(session, timeOffset);
         }
 
         /// <summary>
-        /// 获取某个session上相对时间转为本地时间的时间比例
+        /// 已弃用，应使用 ASEva.Agency.GetHostPosixTimeModel
         /// </summary>
-        /// <param name="session">Session ID</param>
-        /// <returns>相对时间转为本地时间的时间比例</returns>
         public static double GetTimeRatioToLocal(DateTime session)
         {
             return Handler.GetTimeRatioToLocal(session);
         }
 
         /// <summary>
-        /// 获取某个session上相对时间转为UTC时间的时间比例
+        /// 已弃用，应使用 ASEva.Agency.GetGNSSPosixTimeModel
         /// </summary>
-        /// <param name="session">Session ID</param>
-        /// <returns>相对时间转为UTC时间的时间比例</returns>
         public static double GetTimeRatioToUTC(DateTime session)
         {
             return Handler.GetTimeRatioToUTC(session);
@@ -991,18 +987,18 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 设置兴趣时间戳
+        /// 按本地日期时间设置兴趣点
         /// </summary>
-        /// <param name="targetTimestamp">目标时间戳</param>
+        /// <param name="targetTimestamp">本地日期时间</param>
         public static void SetInterestTimestamp(DateTime targetTimestamp)
         {
             Handler.SetInterestTimestamp(targetTimestamp);
         }
 
         /// <summary>
-        /// 设置兴趣时间点
+        /// 按时间线设置兴趣点
         /// </summary>
-        /// <param name="targetTimeline">目标时间点</param>
+        /// <param name="targetTimeline">时间线</param>
         public static void SetInterestTime(double targetTimeline)
         {
             Handler.SetInterestTime(targetTimeline);
@@ -1226,8 +1222,8 @@ namespace ASEva
         /// <summary>
         /// 切换至回放模式并开始回放
         /// </summary>
-        /// <param name="startTimeline">回放开始时间，单位秒</param>
-        /// <param name="interestTarget">目标兴趣点，单位秒（空表示不设置兴趣点）</param>
+        /// <param name="startTimeline">时间线上的回放开始时间，单位秒</param>
+        /// <param name="interestTarget">时间线上的目标兴趣点，单位秒（空表示不设置兴趣点）</param>
         public static void StartReplay(double startTimeline, double? interestTarget)
         {
             Handler.StartReplay(startTimeline, interestTarget);
@@ -1237,8 +1233,8 @@ namespace ASEva
         /// (api:app=2.3.0) 切换至回放模式并开始回放
         /// </summary>
         /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
-        /// <param name="startTimeline">回放开始时间，单位秒</param>
-        /// <param name="interestTarget">目标兴趣点，单位秒（空表示不设置兴趣点）</param>
+        /// <param name="startTimeline">时间线上的回放开始时间，单位秒</param>
+        /// <param name="interestTarget">时间线上的目标兴趣点，单位秒（空表示不设置兴趣点）</param>
         /// <returns>是否成功</returns>
         public static bool StartReplay(bool force, double startTimeline, double? interestTarget)
         {
@@ -1332,10 +1328,10 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 获取指定session开始时间对应的时间点
+        /// 获取指定session在时间线上的开始时间点
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>时间点，session不存在或不属于当前层级则返回null</returns>
+        /// <returns>在时间线上的开始时间点，session不存在或不属于当前层级则返回null</returns>
         public static double? GetSessionTimeline(DateTime session)
         {
             return Handler.GetSessionTimeline(session);
@@ -1425,7 +1421,7 @@ namespace ASEva
         /// <summary>
         /// 将时间线上的时间转换为在session中的时间
         /// </summary>
-        /// <param name="timeline">时间点</param>
+        /// <param name="timeline">时间线上的时间点</param>
         /// <returns>在session中的时间，若超出范围则返回null</returns>
         public static TimeWithSession ConvertTimeIntoSession(double timeline)
         {
@@ -1853,7 +1849,7 @@ namespace ASEva
         }
         
         /// <summary>
-        /// (api:app=2.0.6) 获取CPU时间
+        /// (api:app=2.0.6) 获取CPU时间（从开机起算的时间）
         /// </summary>
         /// <returns>CPU时间，单位秒，返回0表示无效</returns>
         public static double GetCPUTime()
@@ -2316,6 +2312,26 @@ namespace ASEva
         public static void SetSessionProperties(DateTime session, Dictionary<String, String> properties)
         {
             Handler.SetSessionProperties(session, properties);
+        }
+
+        /// <summary>
+        /// (api:app=2.7.0) 获取session采集时主机是否与授时服务器同步
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <returns>主机是否与授时服务器同步</returns>
+        public static bool GetSessionHostSync(DateTime session)
+        {
+            return Handler.GetSessionHostSync(session);
+        }
+
+        /// <summary>
+        /// (api:app=2.7.0) 设置session采集时主机是否与授时服务器同步
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <param name="hostSync">主机是否与授时服务器同步</param>
+        public static void SetSessionHostSync(DateTime session, bool hostSync)
+        {
+            Handler.SetSessionHostSync(session, hostSync);
         }
 
         /// <summary>
@@ -2888,6 +2904,78 @@ namespace ASEva
         public static void PublishData(String dataID, byte[] data)
         {
             Handler.PublishData(dataID, data);
+        }
+
+        /// <summary>
+        /// (api:app=2.7.0) 获取session的CPU时间模型
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <returns>CPU时间模型</returns>
+        public static CPUTimeModel GetCPUTimeModel(DateTime session)
+        {
+            return Handler.GetCPUTimeModel(session);
+        }
+
+        /// <summary>
+        /// (api:app=2.7.0) 获取session的主机Posix时间模型
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <returns>主机Posix时间模型</returns>
+        public static PosixTimeModel GetHostPosixTimeModel(DateTime session)
+        {
+            return Handler.GetHostPosixTimeModel(session);
+        }
+
+        /// <summary>
+        /// (api:app=2.7.0) 获取session的卫星Posix时间模型
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <returns>卫星Posix时间模型</returns>
+        public static PosixTimeModel GetGNSSPosixTimeModel(DateTime session)
+        {
+            return Handler.GetGNSSPosixTimeModel(session);
+        }
+
+        /// <summary>
+        /// (api:app=2.7.0) 计算session中某个时间偏置对应的本地时间
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <param name="timeOffset">时间偏置，单位秒</param>
+        /// <param name="useGNSS">是否使用卫星Posix时间模型计算，否则使用主机Posix时间模型</param>
+        /// <returns>对应的本地时间</returns>
+        public static DateTime? GetLocalDateTime(DateTime session, double timeOffset, bool useGNSS)
+        {
+            return Handler.GetLocalDateTime(session, timeOffset, useGNSS);
+        }
+
+        /// <summary>
+        /// (api:app=2.7.0) 计算session中某个时间偏置对应的UTC时间
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <param name="timeOffset">时间偏置，单位秒</param>
+        /// <param name="useGNSS">是否使用卫星Posix时间模型计算，否则使用主机Posix时间模型</param>
+        /// <returns>对应的UTC时间</returns>
+        public static DateTime? GetUTCDateTime(DateTime session, double timeOffset, bool useGNSS)
+        {
+            return Handler.GetUTCDateTime(session, timeOffset, useGNSS);
+        }
+
+        /// <summary>
+        /// (api:app=2.7.0) 获取主机当前的CPU计数
+        /// </summary>
+        /// <returns>当前的CPU计数</returns>
+        public static ulong GetCPUTick()
+        {
+            return Handler.GetCPUTick();
+        }
+
+        /// <summary>
+        /// (api:app=2.7.0) 获取主机上每秒增加的CPU计数
+        /// </summary>
+        /// <returns>每秒增加的CPU计数</returns>
+        public static ulong GetCPUTicksPerSecond()
+        {
+            return Handler.GetCPUTicksPerSecond();
         }
     }
 }

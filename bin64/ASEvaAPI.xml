@@ -6,20 +6,20 @@
     <members>
         <member name="T:ASEva.Agency">
             <summary>
-            (api:app=2.0.0) 集合了ASEva所有主要API
+            (api:app=2.0.0) 集合了所有主要API
             </summary>
         </member>
         <member name="M:ASEva.Agency.GetAppStatus">
             <summary>
-            获取ASEva当前的运行状态
+            获取应用程序当前的运行状态
             </summary>
-            <returns>ASEva运行状态</returns>
+            <returns>应用程序运行状态</returns>
         </member>
         <member name="M:ASEva.Agency.GetAppMode">
             <summary>
-            获取ASEva当前的运行模式
+            获取应用程序当前的运行模式
             </summary>
-            <returns>ASEva运行模式</returns>
+            <returns>应用程序运行模式</returns>
         </member>
         <member name="M:ASEva.Agency.IsFileOutputEnabled">
             <summary>
@@ -29,21 +29,21 @@
         </member>
         <member name="M:ASEva.Agency.GetAppLanguage">
             <summary>
-            获取ASEva当前的显示语言
+            获取应用程序当前的显示语言
             </summary>
             <returns>语言ID，如en表示英文，ch表示中文等</returns>
         </member>
         <member name="M:ASEva.Agency.GetInterestTime">
             <summary>
-            获取ASEva当前的兴趣时间点
+            获取应用程序当前兴趣点在时间线上的位置
             </summary>
             <returns>在时间线上的兴趣点，单位秒</returns>
         </member>
         <member name="M:ASEva.Agency.GetInterestTimestamp">
             <summary>
-            获取ASEva当前的兴趣时间戳
+            获取应用程序当前兴趣点对应的本地时间
             </summary>
-            <returns>兴趣点的时间戳(包括年月日时分秒，毫秒)，若无数据则返回null</returns>
+            <returns>兴趣点的本地时间，若无数据则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetInterestTarget">
             <summary>
@@ -53,7 +53,7 @@
         </member>
         <member name="M:ASEva.Agency.GetBufferRange">
             <summary>
-            获取ASEva数据缓存范围
+            获取应用程序当前的数据缓存范围
             </summary>
             <returns>数据缓存范围</returns>
         </member>
@@ -150,47 +150,33 @@
         </member>
         <member name="M:ASEva.Agency.GetStartTimeLocal(System.DateTime)">
             <summary>
-            获取某个session的本地开始时间（相对时间戳=0）
+            已弃用，应使用 ASEva.Agency.GetHostPosixTimeModel
             </summary>
-            <param name="session">希望获取本地开始时间的session ID</param>
-            <returns>本地开始时间，若空表示无此信息或session不在当前层级</returns>
         </member>
         <member name="M:ASEva.Agency.GetStartTimeUTC(System.DateTime)">
             <summary>
-            获取某个session的UTC开始时间（相对时间戳=0）
+            已弃用，应使用 ASEva.Agency.GetGNSSPosixTimeModel
             </summary>
-            <param name="session">希望获取UTC开始时间的session ID</param>
-            <returns>UTC开始时间，若空表示无此信息或session不在当前层级</returns>
         </member>
         <member name="M:ASEva.Agency.GetTimestampLocal(System.DateTime,System.Double)">
             <summary>
-            获取某个session上指定相对时间对应的本地时间
+            已弃用，应使用 ASEva.Agency.GetLocalDateTime
             </summary>
-            <param name="session">Session ID</param>
-            <param name="timeOffset">相对时间 (时间偏置)</param>
-            <returns>本地时间戳</returns>
         </member>
         <member name="M:ASEva.Agency.GetTimestampUTC(System.DateTime,System.Double)">
             <summary>
-            获取某个session上指定相对时间对应的UTC时间
+            已弃用，应使用 ASEva.Agency.GetUTCDateTime
             </summary>
-            <param name="session">Session ID</param>
-            <param name="timeOffset">相对时间 (时间偏置)</param>
-            <returns>UTC时间戳</returns>
         </member>
         <member name="M:ASEva.Agency.GetTimeRatioToLocal(System.DateTime)">
             <summary>
-            获取某个session上相对时间转为本地时间的时间比例
+            已弃用，应使用 ASEva.Agency.GetHostPosixTimeModel
             </summary>
-            <param name="session">Session ID</param>
-            <returns>相对时间转为本地时间的时间比例</returns>
         </member>
         <member name="M:ASEva.Agency.GetTimeRatioToUTC(System.DateTime)">
             <summary>
-            获取某个session上相对时间转为UTC时间的时间比例
+            已弃用，应使用 ASEva.Agency.GetGNSSPosixTimeModel
             </summary>
-            <param name="session">Session ID</param>
-            <returns>相对时间转为UTC时间的时间比例</returns>
         </member>
         <member name="M:ASEva.Agency.GetDataPath">
             <summary>
@@ -495,15 +481,15 @@
         </member>
         <member name="M:ASEva.Agency.SetInterestTimestamp(System.DateTime)">
             <summary>
-            设置兴趣时间戳
+            按本地日期时间设置兴趣点
             </summary>
-            <param name="targetTimestamp">目标时间戳</param>
+            <param name="targetTimestamp">本地日期时间</param>
         </member>
         <member name="M:ASEva.Agency.SetInterestTime(System.Double)">
             <summary>
-            设置兴趣时间点
+            按时间线设置兴趣点
             </summary>
-            <param name="targetTimeline">目标时间点</param>
+            <param name="targetTimeline">时间线</param>
         </member>
         <member name="M:ASEva.Agency.DeleteToRecycleBin(System.String)">
             <summary>
@@ -658,16 +644,16 @@
             <summary>
             切换至回放模式并开始回放
             </summary>
-            <param name="startTimeline">回放开始时间，单位秒</param>
-            <param name="interestTarget">目标兴趣点，单位秒（空表示不设置兴趣点）</param>
+            <param name="startTimeline">时间线上的回放开始时间，单位秒</param>
+            <param name="interestTarget">时间线上的目标兴趣点，单位秒（空表示不设置兴趣点）</param>
         </member>
         <member name="M:ASEva.Agency.StartReplay(System.Boolean,System.Double,System.Nullable{System.Double})">
             <summary>
             (api:app=2.3.0) 切换至回放模式并开始回放
             </summary>
             <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
-            <param name="startTimeline">回放开始时间，单位秒</param>
-            <param name="interestTarget">目标兴趣点，单位秒（空表示不设置兴趣点）</param>
+            <param name="startTimeline">时间线上的回放开始时间，单位秒</param>
+            <param name="interestTarget">时间线上的目标兴趣点，单位秒（空表示不设置兴趣点）</param>
             <returns>是否成功</returns>
         </member>
         <member name="M:ASEva.Agency.StartOnline(System.String,System.Boolean)">
@@ -734,10 +720,10 @@
         </member>
         <member name="M:ASEva.Agency.GetSessionTimeline(System.DateTime)">
             <summary>
-            获取指定session开始时间对应的时间点
+            获取指定session在时间线上的开始时间点
             </summary>
             <param name="session">Session ID</param>
-            <returns>时间点，session不存在或不属于当前层级则返回null</returns>
+            <returns>在时间线上的开始时间点，session不存在或不属于当前层级则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetSessionLength(System.DateTime)">
             <summary>
@@ -800,7 +786,7 @@
             <summary>
             将时间线上的时间转换为在session中的时间
             </summary>
-            <param name="timeline">时间点</param>
+            <param name="timeline">时间线上的时间点</param>
             <returns>在session中的时间，若超出范围则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetFilteredSessionListTotalLength">
@@ -1102,7 +1088,7 @@
         </member>
         <member name="M:ASEva.Agency.GetCPUTime">
             <summary>
-            (api:app=2.0.6) 获取CPU时间
+            (api:app=2.0.6) 获取CPU时间（从开机起算的时间）
             </summary>
             <returns>CPU时间，单位秒，返回0表示无效</returns>
         </member>
@@ -1421,6 +1407,20 @@
             </summary>
             <param name="session">Session ID</param>
             <param name="properties">Session的属性表</param>
+        </member>
+        <member name="M:ASEva.Agency.GetSessionHostSync(System.DateTime)">
+            <summary>
+            (api:app=2.7.0) 获取session采集时主机是否与授时服务器同步
+            </summary>
+            <param name="session">Session ID</param>
+            <returns>主机是否与授时服务器同步</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetSessionHostSync(System.DateTime,System.Boolean)">
+            <summary>
+            (api:app=2.7.0) 设置session采集时主机是否与授时服务器同步
+            </summary>
+            <param name="session">Session ID</param>
+            <param name="hostSync">主机是否与授时服务器同步</param>
         </member>
         <member name="M:ASEva.Agency.SetAudioVolume(System.Double)">
             <summary>
@@ -1826,9 +1826,60 @@
             <param name="dataID">数据ID，不可为null或空字符串</param>
             <param name="data">数据，不可为null</param>
         </member>
+        <member name="M:ASEva.Agency.GetCPUTimeModel(System.DateTime)">
+            <summary>
+            (api:app=2.7.0) 获取session的CPU时间模型
+            </summary>
+            <param name="session">Session ID</param>
+            <returns>CPU时间模型</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetHostPosixTimeModel(System.DateTime)">
+            <summary>
+            (api:app=2.7.0) 获取session的主机Posix时间模型
+            </summary>
+            <param name="session">Session ID</param>
+            <returns>主机Posix时间模型</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetGNSSPosixTimeModel(System.DateTime)">
+            <summary>
+            (api:app=2.7.0) 获取session的卫星Posix时间模型
+            </summary>
+            <param name="session">Session ID</param>
+            <returns>卫星Posix时间模型</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetLocalDateTime(System.DateTime,System.Double,System.Boolean)">
+            <summary>
+            (api:app=2.7.0) 计算session中某个时间偏置对应的本地时间
+            </summary>
+            <param name="session">Session ID</param>
+            <param name="timeOffset">时间偏置，单位秒</param>
+            <param name="useGNSS">是否使用卫星Posix时间模型计算，否则使用主机Posix时间模型</param>
+            <returns>对应的本地时间</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetUTCDateTime(System.DateTime,System.Double,System.Boolean)">
+            <summary>
+            (api:app=2.7.0) 计算session中某个时间偏置对应的UTC时间
+            </summary>
+            <param name="session">Session ID</param>
+            <param name="timeOffset">时间偏置，单位秒</param>
+            <param name="useGNSS">是否使用卫星Posix时间模型计算，否则使用主机Posix时间模型</param>
+            <returns>对应的UTC时间</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetCPUTick">
+            <summary>
+            (api:app=2.7.0) 获取主机当前的CPU计数
+            </summary>
+            <returns>当前的CPU计数</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetCPUTicksPerSecond">
+            <summary>
+            (api:app=2.7.0) 获取主机上每秒增加的CPU计数
+            </summary>
+            <returns>每秒增加的CPU计数</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.19
+            version=2.7.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -1853,7 +1904,7 @@
             数据回调函数
             </summary>
             <param name="samples">音频样本数据</param>
-            <param name="cpuSyncTime">样本数据的CPU时间，单位秒，可通过 ASEva.Agency.GetCPUTime 获得</param>
+            <param name="cpuSyncTime">样本数据的到达时CPU时间，单位秒，可通过 ASEva.Agency.GetCPUTime 获得</param>
         </member>
         <member name="T:ASEva.WaveProvider">
             <summary>
@@ -2363,7 +2414,7 @@
         </member>
         <member name="P:ASEva.EventData.Offset">
             <summary>
-            (api:app=2.0.5) 在所属session中的相对时间戳
+            (api:app=2.0.5) 在所属session中的时间偏置
             </summary>
         </member>
         <member name="P:ASEva.EventData.TimeStampLocal">
@@ -3971,12 +4022,12 @@
         </member>
         <member name="F:ASEva.ProcessorOutputSample.sample">
             <summary>
-            输出样本，若timeRef为空则需要对Base, Offset, Timeline赋值
+            输出样本，若timeRef为空则需要手动对时间戳和时间线位置赋值
             </summary>
         </member>
         <member name="F:ASEva.ProcessorOutputSample.timeRef">
             <summary>
-            时间戳参考样本，sample的时间戳将被赋值为与此样本一致
+            时间参考样本，sample的时间戳和时间线位置将被赋值为与此样本一致
             </summary>
         </member>
         <member name="M:ASEva.ProcessorOutputSample.#ctor(ASEva.Sample)">
@@ -3987,10 +4038,10 @@
         </member>
         <member name="M:ASEva.ProcessorOutputSample.#ctor(ASEva.Sample,ASEva.Sample)">
             <summary>
-            基于输出样本和时间戳参考样本构造
+            基于输出样本和时间参考样本构造
             </summary>
             <param name="sample">输出样本</param>
-            <param name="timeRef">时间戳参考样本</param>
+            <param name="timeRef">时间参考样本</param>
         </member>
         <member name="T:ASEva.Processor">
             <summary>
@@ -4068,34 +4119,144 @@
             </summary>
             <returns>原始数据协议（键）列表及对应的样本别名（值）</returns>
         </member>
+        <member name="T:ASEva.TimeOffsetSync">
+            <summary>
+            (api:app=2.7.0) 时间偏置同步状态
+            </summary>
+        </member>
+        <member name="F:ASEva.TimeOffsetSync.None">
+            <summary>
+            未同步或同步源未知
+            </summary>
+        </member>
+        <member name="F:ASEva.TimeOffsetSync.Server">
+            <summary>
+            已与授时服务器时间同步
+            </summary>
+        </member>
+        <member name="F:ASEva.TimeOffsetSync.Gnss">
+            <summary>
+            已与卫星时间同步
+            </summary>
+        </member>
+        <member name="T:ASEva.SessionIdentifier">
+            <summary>
+            (api:app=2.7.0) Session标识符
+            </summary>
+        </member>
+        <member name="M:ASEva.SessionIdentifier.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            默认构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.SessionIdentifier.FromDateTime(System.DateTime)">
+            <summary>
+            通过日期时间创建
+            </summary>
+        </member>
+        <member name="M:ASEva.SessionIdentifier.ToDateTime">
+            <summary>
+            转为日期时间
+            </summary>
+        </member>
+        <member name="T:ASEva.IndependentTimeInfo">
+            <summary>
+            (api:app=2.7.0) Session无关时间信息
+            </summary>
+        </member>
+        <member name="P:ASEva.IndependentTimeInfo.OffsetSync">
+            <summary>
+            时间偏置同步状态
+            </summary>
+        </member>
+        <member name="P:ASEva.IndependentTimeInfo.CPUTick">
+            <summary>
+            到达时CPU计数，0表示无效
+            </summary>
+        </member>
+        <member name="P:ASEva.IndependentTimeInfo.HostPosix">
+            <summary>
+            到达时主机Posix时间，单位纳秒，0表示无效
+            </summary>
+        </member>
+        <member name="P:ASEva.IndependentTimeInfo.GuestPosix">
+            <summary>
+            采样时客机Posix时间，单位纳秒，0表示无效
+            </summary>
+        </member>
+        <member name="P:ASEva.IndependentTimeInfo.ServerPosix">
+            <summary>
+            采样时授时服务器Posix时间，单位纳秒，0表示无效
+            </summary>
+        </member>
+        <member name="P:ASEva.IndependentTimeInfo.GNSSPosix">
+            <summary>
+            采样时卫星Posix时间，单位纳秒，0表示无效
+            </summary>
+        </member>
+        <member name="M:ASEva.IndependentTimeInfo.#ctor(ASEva.TimeOffsetSync,System.UInt64,System.UInt64,System.UInt64,System.UInt64,System.UInt64)">
+            <summary>
+            默认构造函数
+            </summary>
+        </member>
+        <member name="T:ASEva.Timestamp">
+            <summary>
+            (api:app=2.7.0) 时间戳
+            </summary>
+        </member>
+        <member name="P:ASEva.Timestamp.Session">
+            <summary>
+            Session标识符
+            </summary>
+        </member>
+        <member name="P:ASEva.Timestamp.Offset">
+            <summary>
+            时间偏置，单位秒
+            </summary>
+        </member>
+        <member name="P:ASEva.Timestamp.TimeInfo">
+            <summary>
+            Session无关时间信息
+            </summary>
+        </member>
+        <member name="M:ASEva.Timestamp.#ctor(ASEva.SessionIdentifier,System.Double,ASEva.IndependentTimeInfo)">
+            <summary>
+            默认构造函数
+            </summary>
+        </member>
         <member name="T:ASEva.Sample">
             <summary>
             (api:app=2.0.0) 数据样本
             </summary>
         </member>
+        <member name="P:ASEva.Sample.Timestamp">
+            <summary>
+            (api:app=2.7.0) 时间戳
+            </summary>
+        </member>
         <member name="P:ASEva.Sample.Base">
             <summary>
-            所属session ID
+            所属session ID（注意，set操作将清除Session无关时间信息）
             </summary>
         </member>
         <member name="P:ASEva.Sample.Offset">
             <summary>
-            相对时间戳（session开始时间为0），单位秒
+            时间偏置，单位秒（注意，set操作将清除Session无关时间信息）
             </summary>
         </member>
         <member name="P:ASEva.Sample.Timeline">
             <summary>
-            时间线，单位秒
+            在时间线上的位置，单位秒
             </summary>
         </member>
         <member name="P:ASEva.Sample.TimestampLocal">
             <summary>
-            [依赖Agency] 绝对时间戳（本地时间），含年月日时分秒，毫秒
+            [依赖Agency] 获取通过主机Posix时间模型计算得到的本地时间
             </summary>
         </member>
         <member name="P:ASEva.Sample.TimestampUTC">
             <summary>
-            [依赖Agency] 绝对时间戳（UTC时间），含年月日时分秒，毫秒
+            [依赖Agency] 获取通过卫星Posix时间模型得到的计算UTC时间
             </summary>
         </member>
         <member name="M:ASEva.Sample.#ctor">
@@ -4105,15 +4266,39 @@
         </member>
         <member name="M:ASEva.Sample.#ctor(System.DateTime,System.Double,System.Double)">
             <summary>
-            带时间戳初始化的构造函数
+            按指定时间信息进行初始化
             </summary>
-            <param name="bas">所属session ID</param>
-            <param name="offset">相对时间戳</param>
-            <param name="timeline">时间线</param>
+            <param name="session">所属session ID</param>
+            <param name="offset">时间偏置，单位秒</param>
+            <param name="timeline">在时间线上的位置</param>
+        </member>
+        <member name="M:ASEva.Sample.#ctor(System.DateTime,System.Double,ASEva.IndependentTimeInfo,System.Double)">
+            <summary>
+            (api:app=2.7.0) 按指定时间信息进行初始化
+            </summary>
+            <param name="session">所属session ID</param>
+            <param name="offset">时间偏置，单位秒</param>
+            <param name="timeInfo">Session无关时间信息</param>
+            <param name="timeline">在时间线上的位置</param>
+        </member>
+        <member name="M:ASEva.Sample.SetTime(System.DateTime,System.Double,ASEva.IndependentTimeInfo,System.Double)">
+            <summary>
+            (api:app=2.7.0) 设置当前样本的时间戳和时间线位置
+            </summary>
+            <param name="session">所属session ID</param>
+            <param name="offset">时间偏置，单位秒</param>
+            <param name="timeInfo">Session无关时间信息</param>
+            <param name="timeline">在时间线上的位置</param>
+        </member>
+        <member name="M:ASEva.Sample.SetTime(ASEva.Sample)">
+            <summary>
+            (api:app=2.7.0) 按时间参考样本设置当前样本的时间戳和时间线位置
+            </summary>
+            <param name="timeRef">时间参考样本</param>
         </member>
         <member name="M:ASEva.Sample.CompareTo(ASEva.Sample)">
             <summary>
-            时间线比较
+            按时间线进行比较
             </summary>
             <param name="other">另一个数据样本</param>
             <returns>比较结果</returns>
@@ -4137,20 +4322,20 @@
         </member>
         <member name="M:ASEva.Sample.FromGeneralSample(ASEva.GeneralSample)">
             <summary>
-            [支持通用样本转换时必须实现] 从 ASEva.GeneralSample 转为特化样本，需实现时间戳拷贝(Base, Offset, Timeline)
+            [支持通用样本转换时必须实现] 从 ASEva.GeneralSample 转为特化样本，该实现需调用SetTime进行时间拷贝
             </summary>
             <param name="sample">通用样本</param>
             <returns>转换是否成功</returns>
         </member>
         <member name="M:ASEva.Sample.ToGeneralSample">
             <summary>
-            [支持通用样本转换时可选实现] 特化样本转为 ASEva.GeneralSample ，需实现时间戳拷贝(Base, Offset, Timeline)
+            [支持通用样本转换时可选实现] 特化样本转为 ASEva.GeneralSample ，该实现需调用SetTime进行时间拷贝
             </summary>
             <returns>通用样本</returns>
         </member>
         <member name="M:ASEva.Sample.ToGeneralSample(System.Int32)">
             <summary>
-            [支持通用样本转换时可选实现] 特化样本转为 ASEva.GeneralSample ，需实现时间戳拷贝(Base, Offset, Timeline)以及通道赋值
+            [支持通用样本转换时可选实现] 特化样本转为 ASEva.GeneralSample ，该实现需调用SetTime进行时间拷贝并赋值通道
             </summary>
             <returns>通用样本</returns>
         </member>
@@ -4162,50 +4347,50 @@
         </member>
         <member name="M:ASEva.Sample.Interpolate(ASEva.Sample.SearchResult)">
             <summary>
-            [SupportInterpolation返回true时必须实现] 基于 ASEva.Sample.Search 返回的搜索结果进行样本插值，无需输出时间戳
+            [SupportInterpolation返回true时必须实现] 基于 ASEva.Sample.Search 返回的搜索结果进行样本插值，无需输出时间信息
             </summary>
             <param name="input">样本缓存的搜索结果</param>
             <returns>返回插值后的样本</returns>
         </member>
         <member name="M:ASEva.Sample.IsInRange(System.Collections.Generic.List{ASEva.Sample},System.Double)">
             <summary>
-            判断目标时间线是否在样本缓存范围内
+            判断目标时间点是否在样本缓存范围内
             </summary>
             <param name="samples">样本缓存</param>
-            <param name="targetTimeline">目标时间线</param>
+            <param name="targetTimeline">在时间线上的目标时间点</param>
             <returns>是否在范围内</returns>
         </member>
         <member name="M:ASEva.Sample.IsOutRangeLower(System.Collections.Generic.List{ASEva.Sample},System.Double)">
             <summary>
-            判断目标时间线是否在样本缓存范围外，且比所有样本都更早
+            判断目标时间点是否在样本缓存范围外，且比所有样本都更早
             </summary>
             <param name="samples">样本缓存</param>
-            <param name="targetTimeline">目标时间线</param>
+            <param name="targetTimeline">在时间线上的目标时间点</param>
             <returns>是否在范围外，且比所有样本都更早</returns>
         </member>
         <member name="M:ASEva.Sample.IsOutRangeUpper(System.Collections.Generic.List{ASEva.Sample},System.Double)">
             <summary>
-            判断目标时间线是否在样本缓存范围外，且比所有样本都更晚
+            判断目标时间点是否在样本缓存范围外，且比所有样本都更晚
             </summary>
             <param name="samples">样本缓存</param>
-            <param name="targetTimeline">目标时间线</param>
+            <param name="targetTimeline">在时间线上的目标时间点</param>
             <returns>是否在范围外，且比所有样本都更晚</returns>
         </member>
         <member name="M:ASEva.Sample.Search(System.Collections.Generic.List{ASEva.Sample},System.Double,System.Double)">
             <summary>
-            按目标时间戳搜索缓存列表
+            按目标时间点搜索缓存列表
             </summary>
             <param name="samples">样本缓存</param>
-            <param name="targetTimeline">目标时间线</param>
+            <param name="targetTimeline">在时间线上的目标时间点</param>
             <param name="maxGap">最大时间间隔，若最近样本的时间间隔大于此值，则不考虑</param>
             <returns>返回搜索结果</returns>
         </member>
         <member name="M:ASEva.Sample.SearchAndInterpolate(System.Collections.Generic.List{ASEva.Sample},System.Double)">
             <summary>
-            按目标时间戳搜索缓存列表，自动进行插值并返回插值后样本（需要样本支持插值，且目标时间在缓存范围内，默认最大时间间隔为10秒）
+            按目标时间点搜索缓存列表，自动进行插值并返回插值后样本（需要样本支持插值，且目标时间在缓存范围内，默认最大时间间隔为10秒）
             </summary>
             <param name="samples">样本缓存</param>
-            <param name="targetTimeline">目标时间线</param>
+            <param name="targetTimeline">在时间线上的目标时间点</param>
             <returns>插值后的样本</returns>
         </member>
         <member name="M:ASEva.Sample.SearchAndGetNearest(System.Collections.Generic.List{ASEva.Sample},System.Double,System.DateTime)">
@@ -4213,8 +4398,8 @@
             在样本缓存列表中搜索最近样本
             </summary>
             <param name="samples">样本缓存</param>
-            <param name="targetTimeline">目标时间线</param>
-            <param name="targetBase">目标的session ID</param>
+            <param name="targetTimeline">在时间线上的目标时间点</param>
+            <param name="targetSession">目标的session ID</param>
             <returns>最近样本，若无则返回null</returns>
         </member>
         <member name="M:ASEva.Sample.ClipWithBufferBegin(System.Collections.Generic.List{ASEva.Sample},System.Double)">
@@ -4434,7 +4619,7 @@
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.Channel">
             <summary>
-            样本通道（0~5）
+            样本通道（0~11）
             </summary>
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.PointCount">
@@ -4464,7 +4649,7 @@
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.TimeOffsets">
             <summary>
-            数组长度N，值为相对于样本时间戳的时间偏置，单位为10微秒（若一帧数据时间跨度超过655ms则不应有此字段数据）
+            数组长度N，值为相对于样本时间的时间偏置，单位为10微秒（若一帧数据时间跨度超过655ms则不应有此字段数据）
             </summary>
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.YawAngles">
@@ -4524,7 +4709,7 @@
         </member>
         <member name="P:ASEva.Samples.SignalData.Offset">
             <summary>
-            相对时间戳，单位秒
+            时间偏置，单位秒
             </summary>
         </member>
         <member name="P:ASEva.Samples.SignalData.Value">
@@ -4536,7 +4721,7 @@
             <summary>
             默认构造函数
             </summary>
-            <param name="offset">相对时间戳</param>
+            <param name="offset">时间偏置，单位秒</param>
             <param name="value">信号值</param>
         </member>
         <member name="T:ASEva.Samples.SignalsData">
@@ -4932,9 +5117,9 @@
             <param name="image">图像</param>
             <param name="rawSize">图像的原始大小</param>
             <param name="channelIndex">通道</param>
-            <param name="bas">Session ID</param>
-            <param name="offset">相对时间戳</param>
-            <param name="timeline">时间线</param>
+            <param name="session">Session ID</param>
+            <param name="offset">时间偏置，单位秒</param>
+            <param name="timeline">时间线上的目标时间点</param>
         </member>
         <member name="M:ASEva.Samples.VideoFrameSample.#ctor(ASEva.Samples.CommonImage,ASEva.IntSize,System.Int32,System.DateTime,System.Double,System.Double)">
             <summary>
@@ -4943,9 +5128,9 @@
             <param name="image">图像</param>
             <param name="rawSize">图像的原始大小</param>
             <param name="channelIndex">通道</param>
-            <param name="bas">Session ID</param>
-            <param name="offset">相对时间戳</param>
-            <param name="timeline">时间线</param>
+            <param name="session">Session ID</param>
+            <param name="offset">时间偏置，单位秒</param>
+            <param name="timeline">时间线上的目标时间点</param>
         </member>
         <member name="T:ASEva.SceneData">
             <summary>
@@ -4964,7 +5149,7 @@
         </member>
         <member name="P:ASEva.SceneData.BeginOffset">
             <summary>
-            场景开始时间（在该session中的相对时间）
+            场景开始时间（在该session中的时间偏置）
             </summary>
         </member>
         <member name="P:ASEva.SceneData.TimeLength">
@@ -5225,7 +5410,7 @@
         </member>
         <member name="T:ASEva.BusMessage">
             <summary>
-            (api:app=2.0.0) 用于发送的总线报文数据，可调用 ASEva.Agency.SetBusMessage 进行报文发送
+            (api:app=2.0.0) 用于发送的总线报文数据，可调用 ASEva.Agency.SendBusMessage 进行报文发送
             </summary>
         </member>
         <member name="P:ASEva.BusMessage.Channel">
@@ -5547,12 +5732,12 @@
         </member>
         <member name="P:ASEva.TimeWithSession.Time">
             <summary>
-            秒
+            时间偏置，单位秒
             </summary>
         </member>
         <member name="P:ASEva.TimeWithSession.Session">
             <summary>
-            Session
+            所在Session
             </summary>
         </member>
         <member name="T:ASEva.BusProtocolFileID">
@@ -5670,7 +5855,7 @@
             按指定参数获取时间轴上最近的视频帧
             </summary>
             <param name="channel">视频通道，0~23</param>
-            <param name="timeline">获取视频帧的目标时间，单位秒</param>
+            <param name="timeline">获取视频帧的目标时间线，单位秒</param>
             <param name="maxGap">容许的最大间隔，单位秒</param>
             <param name="targetSize">输出图像的尺寸</param>
             <param name="hires">是否优先输出高清图像，否则固定输出不大于VGA分辨率的图像</param>
@@ -6541,6 +6726,46 @@
             是否已关闭订阅
             </summary>
         </member>
+        <member name="T:ASEva.CPUTimeModel">
+            <summary>
+            (api:app=2.7.0) CPU时间模型
+            </summary>
+        </member>
+        <member name="P:ASEva.CPUTimeModel.StartCPUTick">
+            <summary>
+            Session开始时的CPU计数
+            </summary>
+        </member>
+        <member name="P:ASEva.CPUTimeModel.CPUTicksPerSecond">
+            <summary>
+            每秒增加的CPU计数
+            </summary>
+        </member>
+        <member name="M:ASEva.CPUTimeModel.#ctor">
+            <summary>
+            默认构造函数
+            </summary>
+        </member>
+        <member name="T:ASEva.PosixTimeModel">
+            <summary>
+            (api:app=2.7.0) Posix时间模型
+            </summary>
+        </member>
+        <member name="P:ASEva.PosixTimeModel.StartPosix">
+            <summary>
+            Session开始时的Posix时间，单位毫秒，0表示无效
+            </summary>
+        </member>
+        <member name="P:ASEva.PosixTimeModel.TimeRatio">
+            <summary>
+            CPU时间转为Posix时间的时间比例，应为1左右
+            </summary>
+        </member>
+        <member name="M:ASEva.PosixTimeModel.#ctor">
+            <summary>
+            默认构造函数
+            </summary>
+        </member>
         <member name="T:ASEva.Utility.AttributeParser">
             <summary>
             (api:app=2.0.0) XML属性解析
@@ -7012,22 +7237,22 @@
         </member>
         <member name="P:ASEva.Utility.SampleCsvWriter.StartTimeUTC">
             <summary>
-            设置Session开始时的UTC时间，默认为空
+            按UTC时间设置卫星Posix时间模型的session开始时间
             </summary>
         </member>
         <member name="P:ASEva.Utility.SampleCsvWriter.StartTimeLocal">
             <summary>
-            设置Session开始时的本地时间，默认为空
+            按本地时间设置主机Posix时间模型的session开始时间
             </summary>
         </member>
         <member name="P:ASEva.Utility.SampleCsvWriter.TimeRatioToUTC">
             <summary>
-            设置相对时间转为UTC时间的时间比例，默认为1
+            设置卫星Posix时间模型的时间比例，默认为1
             </summary>
         </member>
         <member name="P:ASEva.Utility.SampleCsvWriter.TimeRatioToLocal">
             <summary>
-            设置相对时间转为本地时间的时间比例，默认为1
+            设置主机Posix时间模型的时间比例，默认为1
             </summary>
         </member>
         <member name="T:ASEva.Utility.SampleParser">
@@ -7058,7 +7283,7 @@
             样本同步函数，根据目标时间点搜索样本缓存，输出插值或最近样本
             </summary>
             <param name="timeline">希望同步的时间线</param>
-            <param name="Base">时间线所在session</param>
+            <param name="session">时间线所在session</param>
             <param name="sampleLists">输入的样本缓存，可以是多个缓存</param>
             <param name="outputs">各个缓存按指定时间点输出插值或最近样本</param>
             <returns>需要保留返回false，否则返回true</returns>
@@ -7125,7 +7350,7 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.ID">
             <summary>
-            Session ID （开始采集时ECU时间）
+            Session ID
             </summary>
         </member>
         <member name="P:ASEva.Utility.SessionMeta.GUID">
@@ -7138,24 +7363,24 @@
             Session长度，单位秒
             </summary>
         </member>
-        <member name="P:ASEva.Utility.SessionMeta.StartTimeLocal">
+        <member name="P:ASEva.Utility.SessionMeta.CPUTimeModel">
             <summary>
-            Session开始时的本地时间
+            CPU时间模型
             </summary>
         </member>
-        <member name="P:ASEva.Utility.SessionMeta.TimeRatioToLocal">
+        <member name="P:ASEva.Utility.SessionMeta.HostPosixModel">
             <summary>
-            相对时间(时间偏置)转换为本地时间的时间比例
+            主机Posix时间模型
             </summary>
         </member>
-        <member name="P:ASEva.Utility.SessionMeta.StartTimeUTC">
+        <member name="P:ASEva.Utility.SessionMeta.GNSSPosixModel">
             <summary>
-            Session开始时的UTC时间
+            卫星Posix时间模型
             </summary>
         </member>
-        <member name="P:ASEva.Utility.SessionMeta.TimeRatioToUTC">
+        <member name="P:ASEva.Utility.SessionMeta.HostSync">
             <summary>
-            相对时间(时间偏置)转换为UTC时间的时间比例
+            主机是否与授时服务器同步
             </summary>
         </member>
         <member name="P:ASEva.Utility.SessionMeta.Comment">
@@ -7183,6 +7408,26 @@
             采集Session的软件版本信息（用于回溯）
             </summary>
         </member>
+        <member name="P:ASEva.Utility.SessionMeta.StartTimeLocal">
+            <summary>
+            按本地时间表示的主机Posix时间模型的session开始时间
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.SessionMeta.TimeRatioToLocal">
+            <summary>
+            主机Posix时间模型的时间比例
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.SessionMeta.StartTimeUTC">
+            <summary>
+            按UTC时间表示的卫星Posix时间模型的session开始时间
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.SessionMeta.TimeRatioToUTC">
+            <summary>
+            卫星Posix时间模型的时间比例
+            </summary>
+        </member>
         <member name="M:ASEva.Utility.SessionMeta.Create(System.String,System.DateTime,System.String,System.Nullable{System.Double},System.Nullable{System.DateTime},System.Double,System.Nullable{System.DateTime},System.Double,System.String,System.Collections.Generic.Dictionary{System.String,System.Version},System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
             <summary>
             创建meta文件对象（仅创建对象，不写入文件）
@@ -7191,10 +7436,29 @@
             <param name="id">Session ID</param>
             <param name="guid">Session GUID</param>
             <param name="length">Session长度</param>
-            <param name="startTimeUTC">Session开始时的UTC时间</param>
-            <param name="timeRatioToUTC">相对时间(时间偏置)转换为UTC时间的时间比例</param>
-            <param name="startTimeLocal">Session开始时的本地时间</param>
-            <param name="timeRatioToLocal">相对时间(时间偏置)转换为本地时间的时间比例</param>
+            <param name="startTimeUTC">按UTC时间表示的卫星Posix时间模型的session开始时间</param>
+            <param name="timeRatioToUTC">卫星Posix时间模型的时间比例</param>
+            <param name="startTimeLocal">按本地时间表示的主机Posix时间模型的session开始时间</param>
+            <param name="timeRatioToLocal">主机Posix时间模型的时间比例</param>
+            <param name="comment">Session的注释说明</param>
+            <param name="versions">采集Session的软件版本信息</param>
+            <param name="props">Session的属性</param>
+            <param name="pick">Session的截取ID，origin表示原始数据</param>
+            <param name="pickProps">Session的截取属性列表</param>
+            <returns>返回创建的对象</returns>
+        </member>
+        <member name="M:ASEva.Utility.SessionMeta.Create(System.String,System.DateTime,System.String,System.Nullable{System.Double},ASEva.CPUTimeModel,ASEva.PosixTimeModel,ASEva.PosixTimeModel,System.Boolean,System.String,System.Collections.Generic.Dictionary{System.String,System.Version},System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            (api:app=2.7.0) 创建meta文件对象（仅创建对象，不写入文件）
+            </summary>
+            <param name="filePath">文件路径</param>
+            <param name="id">Session ID</param>
+            <param name="guid">Session GUID</param>
+            <param name="length">Session长度</param>
+            <param name="cpuTimeModel">CPU时间模型</param>
+            <param name="hostPosixModel">主机Posix时间模型</param>
+            <param name="gnssPosixModel">卫星Posix时间模型</param>
+            <param name="hostSync">主机是否与授时服务器同步</param>
             <param name="comment">Session的注释说明</param>
             <param name="versions">采集Session的软件版本信息</param>
             <param name="props">Session的属性</param>

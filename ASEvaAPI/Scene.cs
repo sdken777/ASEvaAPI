@@ -19,7 +19,7 @@ namespace ASEva
         /// </summary>
         public DateTime BeginBase { get; set; }
         /// <summary>
-        /// 场景开始时间（在该session中的相对时间）
+        /// 场景开始时间（在该session中的时间偏置）
         /// </summary>
         public double BeginOffset { get; set; }
         /// <summary>

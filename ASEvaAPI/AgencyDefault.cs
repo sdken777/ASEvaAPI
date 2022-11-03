@@ -1250,5 +1250,49 @@ namespace ASEva
         public void PublishData(string dataID, byte[] data)
         {
         }
+
+        public CPUTimeModel GetCPUTimeModel(DateTime session)
+        {
+            return null;
+        }
+
+        public PosixTimeModel GetHostPosixTimeModel(DateTime session)
+        {
+            return null;
+        }
+
+        public PosixTimeModel GetGNSSPosixTimeModel(DateTime session)
+        {
+            return null;
+        }
+
+        public DateTime? GetLocalDateTime(DateTime session, double timeOffset, bool useGNSS)
+        {
+            return null;
+        }
+
+        public DateTime? GetUTCDateTime(DateTime session, double timeOffset, bool useGNSS)
+        {
+            return null;
+        }
+
+        public ulong GetCPUTick()
+        {
+            return 0;
+        }
+
+        public ulong GetCPUTicksPerSecond()
+        {
+            return 0;
+        }
+
+        public bool GetSessionHostSync(DateTime session)
+        {
+            return false;
+        }
+
+        public void SetSessionHostSync(DateTime session, bool hostSync)
+        {
+        }
     }
 }

@@ -58,6 +58,7 @@ namespace ASEva.Utility
         /// <returns>若该通用样本协议或session不一致则返回false</returns>
         public bool Write(GeneralSample sample)
         {
+            if (sample == null || sample.Offset <= 0) return false;
             if (sample.Protocol != protocol) return false;
             if (sample.Channel == null)
             {
@@ -74,10 +75,10 @@ namespace ASEva.Utility
 
             var list = new List<String>();
             list.Add(sample.Base.ToString("yyyyMMdd-HH-mm-ss"));
-            if (startTimeLocal == null) list.Add("na");
-            else list.Add((startTimeLocal.Value + (long)(1000.0 * sample.Offset * timeRatioToLocal)).ToString());
-            if (startTimeUTC == null) list.Add("na");
-            else list.Add((startTimeUTC.Value + (long)(1000.0 * sample.Offset * timeRatioToUTC)).ToString());
+            if (hostModel == null) list.Add("na");
+            else list.Add((hostModel.StartPosix + (ulong)(1000.0 * sample.Offset * hostModel.TimeRatio)).ToString());
+            if (gnssModel == null) list.Add("na");
+            else list.Add((gnssModel.StartPosix + (ulong)(1000.0 * sample.Offset * gnssModel.TimeRatio)).ToString());
             list.Add(sample.Offset.ToString());
 
             int count = 0;
@@ -104,48 +105,58 @@ namespace ASEva.Utility
         }
 
         /// <summary>
-        /// 设置Session开始时的UTC时间，默认为空
+        /// 按UTC时间设置卫星Posix时间模型的session开始时间
         /// </summary>
         public DateTime? StartTimeUTC
         {
             set
             {
-                if (value == null) startTimeUTC = null;
-                else startTimeUTC = (long)(value.Value - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
+                if (value == null) gnssModel = null;
+                else
+                {
+                    if (gnssModel == null) gnssModel = new PosixTimeModel();
+                    gnssModel.StartPosix = (ulong)(value.Value - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
+                }
             }
         }
 
         /// <summary>
-        /// 设置Session开始时的本地时间，默认为空
+        /// 按本地时间设置主机Posix时间模型的session开始时间
         /// </summary>
         public DateTime? StartTimeLocal
         {
             set
             {
-                if (value == null) startTimeLocal = null;
-                else startTimeLocal = (long)(TimeZoneInfo.ConvertTimeToUtc(value.Value, TimeZoneInfo.Local) - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
+                if (value == null) hostModel = null;
+                else
+                {
+                    if (hostModel == null) hostModel = new PosixTimeModel();
+                    hostModel.StartPosix = (ulong)(TimeZoneInfo.ConvertTimeToUtc(value.Value, TimeZoneInfo.Local) - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
+                }
             }
         }
 
         /// <summary>
-        /// 设置相对时间转为UTC时间的时间比例，默认为1
+        /// 设置卫星Posix时间模型的时间比例，默认为1
         /// </summary>
         public double TimeRatioToUTC
         {
             set
             {
-                timeRatioToUTC = value;
+                if (gnssModel == null) gnssModel = new PosixTimeModel();
+                gnssModel.TimeRatio = value;
             }
         }
 
         /// <summary>
-        /// 设置相对时间转为本地时间的时间比例，默认为1
+        /// 设置主机Posix时间模型的时间比例，默认为1
         /// </summary>
         public double TimeRatioToLocal
         {
             set
             {
-                timeRatioToLocal = value;
+                if (hostModel == null) hostModel = new PosixTimeModel();
+                hostModel.TimeRatio = value;
             }
         }
 
@@ -153,10 +164,8 @@ namespace ASEva.Utility
         private String protocol = null;
         private int? channel = null;
         private DateTime? session = null;
-        private long? startTimeUTC = null;
-        private long? startTimeLocal = null;
-        private double timeRatioToUTC = 1;
-        private double timeRatioToLocal = 1;
+        private PosixTimeModel hostModel = null;
+        private PosixTimeModel gnssModel = null;
 
         private SampleCsvWriter()
         { }

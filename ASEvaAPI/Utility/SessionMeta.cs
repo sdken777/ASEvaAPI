@@ -16,7 +16,7 @@ namespace ASEva.Utility
         public String FilePath { get; set; }
 
         /// <summary>
-        /// Session ID （开始采集时ECU时间）
+        /// Session ID
         /// </summary>
         public DateTime ID { get; set; }
 
@@ -31,24 +31,24 @@ namespace ASEva.Utility
         public double? Length { get; set; }
 
         /// <summary>
-        /// Session开始时的本地时间
+        /// CPU时间模型
         /// </summary>
-        public DateTime? StartTimeLocal { get; set; }
+        public CPUTimeModel CPUTimeModel { get; set; }
 
         /// <summary>
-        /// 相对时间(时间偏置)转换为本地时间的时间比例
+        /// 主机Posix时间模型
         /// </summary>
-        public double TimeRatioToLocal { get; set; }
+        public PosixTimeModel HostPosixModel { get; set; }
 
         /// <summary>
-        /// Session开始时的UTC时间
+        /// 卫星Posix时间模型
         /// </summary>
-        public DateTime? StartTimeUTC { get; set; }
+        public PosixTimeModel GNSSPosixModel { get; set; }
 
         /// <summary>
-        /// 相对时间(时间偏置)转换为UTC时间的时间比例
+        /// 主机是否与授时服务器同步
         /// </summary>
-        public double TimeRatioToUTC { get; set; }
+        public bool HostSync { get; set; }
 
         /// <summary>
         /// Session的注释说明
@@ -75,6 +75,92 @@ namespace ASEva.Utility
         /// </summary>
         public Dictionary<string, Version> Versions { get; set; }
 
+        /// <summary>
+        /// 按本地时间表示的主机Posix时间模型的session开始时间
+        /// </summary>
+        public DateTime? StartTimeLocal
+        {
+            get
+            {
+                if (HostPosixModel == null) return null;
+                else
+                {
+                    var origin = new DateTime(1970, 1, 1, 0, 0, 0);
+                    return TimeZoneInfo.ConvertTimeFromUtc(origin.AddMilliseconds(HostPosixModel.StartPosix), TimeZoneInfo.Local);
+                }
+            }
+            set
+            {
+                if (value == null) HostPosixModel = null;
+                else
+                {
+                    var origin = new DateTime(1970, 1, 1, 0, 0, 0);
+                    ulong startPosix = (ulong)(TimeZoneInfo.ConvertTimeToUtc(value.Value, TimeZoneInfo.Local) - origin).TotalMilliseconds;
+                    if (HostPosixModel == null) HostPosixModel = new PosixTimeModel();
+                    HostPosixModel.StartPosix = startPosix;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 主机Posix时间模型的时间比例
+        /// </summary>
+        public double TimeRatioToLocal
+        {
+            get
+            {
+                if (HostPosixModel == null) return 1.0;
+                else return HostPosixModel.TimeRatio;
+            }
+            set
+            {
+                if (HostPosixModel != null) HostPosixModel.TimeRatio = value;
+            }
+        }
+
+        /// <summary>
+        /// 按UTC时间表示的卫星Posix时间模型的session开始时间
+        /// </summary>
+        public DateTime? StartTimeUTC
+        {
+            get
+            {
+                if (GNSSPosixModel == null) return null;
+                else
+                {
+                    var origin = new DateTime(1970, 1, 1, 0, 0, 0);
+                    return origin.AddMilliseconds(GNSSPosixModel.StartPosix);
+                }
+            }
+            set
+            {
+                if (value == null) GNSSPosixModel = null;
+                else
+                {
+                    var origin = new DateTime(1970, 1, 1, 0, 0, 0);
+                    ulong startPosix = (ulong)(value.Value - origin).TotalMilliseconds;
+                    if (GNSSPosixModel == null) GNSSPosixModel = new PosixTimeModel();
+                    GNSSPosixModel.StartPosix = startPosix;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 卫星Posix时间模型的时间比例
+        /// </summary>
+        public double TimeRatioToUTC
+        {
+            get
+            {
+                if (GNSSPosixModel == null) return 1.0;
+                else return GNSSPosixModel.TimeRatio;
+            }
+            set
+            {
+                if (GNSSPosixModel != null) GNSSPosixModel.TimeRatio = value;
+            }
+        }
+
         private SessionMeta()
         {
         }
@@ -86,10 +172,10 @@ namespace ASEva.Utility
         /// <param name="id">Session ID</param>
         /// <param name="guid">Session GUID</param>
         /// <param name="length">Session长度</param>
-        /// <param name="startTimeUTC">Session开始时的UTC时间</param>
-        /// <param name="timeRatioToUTC">相对时间(时间偏置)转换为UTC时间的时间比例</param>
-        /// <param name="startTimeLocal">Session开始时的本地时间</param>
-        /// <param name="timeRatioToLocal">相对时间(时间偏置)转换为本地时间的时间比例</param>
+        /// <param name="startTimeUTC">按UTC时间表示的卫星Posix时间模型的session开始时间</param>
+        /// <param name="timeRatioToUTC">卫星Posix时间模型的时间比例</param>
+        /// <param name="startTimeLocal">按本地时间表示的主机Posix时间模型的session开始时间</param>
+        /// <param name="timeRatioToLocal">主机Posix时间模型的时间比例</param>
         /// <param name="comment">Session的注释说明</param>
         /// <param name="versions">采集Session的软件版本信息</param>
         /// <param name="props">Session的属性</param>
@@ -110,6 +196,48 @@ namespace ASEva.Utility
             meta.StartTimeLocal = startTimeLocal;
             meta.TimeRatioToUTC = timeRatioToUTC;
             meta.TimeRatioToLocal = timeRatioToLocal;
+            meta.Comment = comment;
+            meta.Versions = versions;
+            meta.Properties = props;
+            if (meta.Properties == null) meta.Properties = new Dictionary<string, string>();
+            meta.Pick = pick;
+            meta.PickProperties = pickProps;
+            if (meta.PickProperties == null) meta.PickProperties = new Dictionary<string, string>();
+
+            return meta;
+        }
+
+        /// <summary>
+        /// (api:app=2.7.0) 创建meta文件对象（仅创建对象，不写入文件）
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        /// <param name="id">Session ID</param>
+        /// <param name="guid">Session GUID</param>
+        /// <param name="length">Session长度</param>
+        /// <param name="cpuTimeModel">CPU时间模型</param>
+        /// <param name="hostPosixModel">主机Posix时间模型</param>
+        /// <param name="gnssPosixModel">卫星Posix时间模型</param>
+        /// <param name="hostSync">主机是否与授时服务器同步</param>
+        /// <param name="comment">Session的注释说明</param>
+        /// <param name="versions">采集Session的软件版本信息</param>
+        /// <param name="props">Session的属性</param>
+        /// <param name="pick">Session的截取ID，origin表示原始数据</param>
+        /// <param name="pickProps">Session的截取属性列表</param>
+        /// <returns>返回创建的对象</returns>
+        public static SessionMeta Create(String filePath, DateTime id, String guid, double? length, CPUTimeModel cpuTimeModel, PosixTimeModel hostPosixModel, PosixTimeModel gnssPosixModel, bool hostSync, String comment, Dictionary<String, Version> versions, Dictionary<String, String> props, String pick, Dictionary<String, String> pickProps)
+        {
+            if (filePath == null || filePath.Length == 0) return null;
+
+            var meta = new SessionMeta();
+            meta.FilePath = filePath;
+            meta.ID = id;
+            meta.GUID = guid;
+            if (meta.GUID == null) meta.GUID = Guid.NewGuid().ToString();
+            meta.Length = length;
+            meta.CPUTimeModel = cpuTimeModel;
+            meta.HostPosixModel = hostPosixModel;
+            meta.GNSSPosixModel = gnssPosixModel;
+            meta.HostSync = hostSync;
             meta.Comment = comment;
             meta.Versions = versions;
             meta.Properties = props;
@@ -189,49 +317,81 @@ namespace ASEva.Utility
 
                 try
                 {
-                    if (attribs["start_posix_local"] != null)
+                    if (attribs["start_cpu_tick"] != null && attribs["cpu_ticks_per_second"] != null)
                     {
-                        if (attribs["start_posix_local"].Value == "unknown") meta.StartTimeLocal = null;
-                        else meta.StartTimeLocal = TimeZoneInfo.ConvertTimeFromUtc((new DateTime(1970, 1, 1, 0, 0, 0)).AddMilliseconds(Convert.ToUInt64(attribs["start_posix_local"].Value)), TimeZoneInfo.Local);
+                        meta.CPUTimeModel = new CPUTimeModel
+                        {
+                            StartCPUTick = Convert.ToUInt64(attribs["start_cpu_tick"].Value),
+                            CPUTicksPerSecond = Convert.ToUInt64(attribs["cpu_ticks_per_second"].Value),
+                        };
                     }
-                    else if (attribs["start_time_local"] != null)
-                    {
-                        if (attribs["start_time_local"].Value == "unknown") meta.StartTimeLocal = null;
-                        else meta.StartTimeLocal = TimeZoneInfo.ConvertTimeFromUtc(DateTime.ParseExact(attribs["start_time_local"].Value, "yyyy-MM-dd-HH-mm-ss-fff", null), TimeZoneInfo.Local);
-                    }
-                    else meta.StartTimeLocal = null;
+                    else meta.CPUTimeModel = null;
                 }
-                catch (Exception) { meta.StartTimeLocal = null; }
+                catch (Exception) { meta.CPUTimeModel = null; }
 
                 try
                 {
-                    if (attribs["time_ratio_to_local"] != null) meta.TimeRatioToLocal = Convert.ToDouble(attribs["time_ratio_to_local"].Value);
-                    else meta.TimeRatioToLocal = 1.0;
+                    if (attribs["start_posix_host"] != null && attribs["time_ratio_host"] != null && attribs["host_sync"] != null)
+                    {
+                        meta.HostPosixModel = new PosixTimeModel
+                        {
+                            StartPosix = Convert.ToUInt64(attribs["start_posix_host"].Value),
+                            TimeRatio = Convert.ToDouble(attribs["time_ratio_host"].Value),
+                        };
+                        meta.HostSync = attribs["host_sync"].Value == "yes";
+                    }
+                    else if (attribs["start_posix_local"] != null && attribs["start_posix_local"].Value != "unknown" && attribs["time_ratio_to_local"] != null)
+                    {
+                        meta.HostPosixModel = new PosixTimeModel
+                        {
+                            StartPosix = Convert.ToUInt64(attribs["start_posix_local"].Value),
+                            TimeRatio = Convert.ToDouble(attribs["time_ratio_to_local"].Value),
+                        };
+                        meta.HostSync = false;
+                    }
+                    else
+                    {
+                        meta.HostPosixModel = null;
+                        meta.HostSync = false;
+                    }
                 }
-                catch (Exception) { meta.TimeRatioToLocal = 1.0; }
+                catch (Exception)
+                {
+                    meta.HostPosixModel = null;
+                    meta.HostSync = false;
+                }
 
                 try
                 {
-                    if (attribs["start_posix_utc"] != null)
+                    if (attribs["start_posix_gnss"] != null && attribs["time_ratio_gnss"] != null)
                     {
-                        if (attribs["start_posix_utc"].Value == "unknown") meta.StartTimeUTC = null;
-                        else meta.StartTimeUTC = (new DateTime(1970, 1, 1, 0, 0, 0)).AddMilliseconds(Convert.ToUInt64(attribs["start_posix_utc"].Value));
+                        meta.GNSSPosixModel = new PosixTimeModel
+                        {
+                            StartPosix = Convert.ToUInt64(attribs["start_posix_gnss"].Value),
+                            TimeRatio = Convert.ToDouble(attribs["time_ratio_gnss"].Value),
+                        };
                     }
-                    else if (attribs["start_time_utc"] != null)
+                    else if (attribs["start_posix_utc"] != null && attribs["start_posix_utc"].Value != "unknown" && attribs["time_ratio_to_utc"] != null)
                     {
-                        if (attribs["start_time_utc"].Value == "unknown") meta.StartTimeUTC = null;
-                        else meta.StartTimeUTC = DateTime.ParseExact(attribs["start_time_utc"].Value, "yyyy-MM-dd-HH-mm-ss-fff", null);
+                        meta.GNSSPosixModel = new PosixTimeModel
+                        {
+                            StartPosix = Convert.ToUInt64(attribs["start_posix_utc"].Value),
+                            TimeRatio = Convert.ToDouble(attribs["time_ratio_to_utc"].Value),
+                        };
                     }
-                    else meta.StartTimeUTC = null;
+                    else if (attribs["start_time_utc"] != null && attribs["start_time_utc"].Value != "unknown" && attribs["time_ratio_to_utc"] != null)
+                    {
+                        var startTimeUTC = DateTime.ParseExact(attribs["start_time_utc"].Value, "yyyy-MM-dd-HH-mm-ss-fff", null);
+                        var startPosix = (ulong)(startTimeUTC - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds;
+                        meta.GNSSPosixModel = new PosixTimeModel
+                        {
+                            StartPosix = startPosix,
+                            TimeRatio = Convert.ToDouble(attribs["time_ratio_to_utc"].Value),
+                        };
+                    }
+                    else meta.GNSSPosixModel = null;
                 }
-                catch (Exception) { meta.StartTimeUTC = null; }
-
-                try
-                {
-                    if (attribs["time_ratio_to_utc"] != null) meta.TimeRatioToUTC = Convert.ToDouble(attribs["time_ratio_to_utc"].Value);
-                    else meta.TimeRatioToUTC = 1.0;
-                }
-                catch (Exception) { meta.TimeRatioToUTC = 1.0; }
+                catch (Exception) { meta.GNSSPosixModel = null; }
 
                 var pickNodes = root.GetElementsByTagName("pick");
                 foreach (XmlElement pickNode in pickNodes)
@@ -306,25 +466,40 @@ namespace ASEva.Utility
             var xml = new XmlDocument();
             xml.AppendChild(xml.CreateXmlDeclaration("1.0", "utf-8", null));
             var rootNode = xml.AppendChild(xml.CreateElement("root")) as XmlElement;
+            var cw = new AttributeWriter(rootNode);
 
-            if (GUID != null)
+            if (GUID != null) cw.WriteString("guid", GUID);
+
+            cw.WriteString("session_id", ID.ToString("yyyy-MM-dd-HH-mm-ss"));
+            cw.WriteString("length", Length == null ? "0" : Length.Value.ToString("F3"));
+
+            if (CPUTimeModel != null)
             {
-                rootNode.Attributes.Append(xml.CreateAttribute("guid")).Value = GUID;
+                cw.WriteLong("start_cpu_tick", (long)CPUTimeModel.StartCPUTick);
+                cw.WriteLong("cpu_ticks_per_second", (long)CPUTimeModel.CPUTicksPerSecond);
             }
 
-            rootNode.Attributes.Append(xml.CreateAttribute("session_id")).Value = ID.ToString("yyyy-MM-dd-HH-mm-ss");
-            rootNode.Attributes.Append(xml.CreateAttribute("length")).Value = Length == null ? "0" : Length.Value.ToString("F3");
+            if (HostPosixModel != null)
+            {
+                cw.WriteLong("start_posix_host", (long)HostPosixModel.StartPosix);
+                cw.WriteDouble("time_ratio_host", HostPosixModel.TimeRatio);
+                cw.WriteBool("host_sync", HostSync, "yes", "no");
+                cw.WriteLong("start_posix_local", (long)HostPosixModel.StartPosix); // 兼容老版本
+                cw.WriteDouble("time_ratio_to_local", HostPosixModel.TimeRatio); // 兼容老版本
+            }
 
-            rootNode.Attributes.Append(xml.CreateAttribute("start_posix_local")).Value = StartTimeLocal == null ? "unknown" : ((ulong)(TimeZoneInfo.ConvertTimeToUtc(StartTimeLocal.Value, TimeZoneInfo.Local) - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds).ToString();
-            rootNode.Attributes.Append(xml.CreateAttribute("start_posix_utc")).Value = StartTimeUTC == null ? "unknown" : ((ulong)(StartTimeUTC.Value - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds).ToString();
-            rootNode.Attributes.Append(xml.CreateAttribute("start_time_utc")).Value = StartTimeUTC == null ? "unknown" : StartTimeUTC.Value.ToString("yyyy-MM-dd-HH-mm-ss-fff"); // 用作向后兼容
-
-            rootNode.Attributes.Append(xml.CreateAttribute("time_ratio_to_local")).Value = TimeRatioToLocal.ToString();
-            rootNode.Attributes.Append(xml.CreateAttribute("time_ratio_to_utc")).Value = TimeRatioToUTC.ToString();
+            if (GNSSPosixModel != null)
+            {
+                cw.WriteLong("start_posix_gnss", (long)GNSSPosixModel.StartPosix);
+                cw.WriteDouble("time_ratio_gnss", GNSSPosixModel.TimeRatio);
+                cw.WriteLong("start_posix_utc", (long)GNSSPosixModel.StartPosix); // 兼容老版本
+                cw.WriteDouble("time_ratio_to_utc", GNSSPosixModel.TimeRatio); // 兼容老版本
+                cw.WriteString("start_time_utc", StartTimeUTC.Value.ToString("yyyy-MM-dd-HH-mm-ss-fff")); // 兼容老版本
+            }
 
             var pickNode = rootNode.AppendChild(xml.CreateElement("pick")) as XmlElement;
-            var c = new AttributeWriter(xml, pickNode);
-            c.WriteString("id", Pick == null ? "origin" : Pick);
+            cw = new AttributeWriter(xml, pickNode);
+            cw.WriteString("id", Pick == null ? "origin" : Pick);
 
             if (Comment != null)
             {
@@ -335,7 +510,7 @@ namespace ASEva.Utility
             {
                 foreach (var item in PickProperties)
                 {
-                    var cw = new AttributeWriter(xml, pickNode.AppendChild(xml.CreateElement("property")) as XmlElement);
+                    cw = new AttributeWriter(xml, pickNode.AppendChild(xml.CreateElement("property")) as XmlElement);
                     cw.WriteString("key", item.Key);
                     cw.WriteString("value", item.Value);
                 }
@@ -345,7 +520,7 @@ namespace ASEva.Utility
             {
                 foreach (var item in Properties)
                 {
-                    var cw = new AttributeWriter(xml, rootNode.AppendChild(xml.CreateElement("property")) as XmlElement);
+                    cw = new AttributeWriter(xml, rootNode.AppendChild(xml.CreateElement("property")) as XmlElement);
                     cw.WriteString("key", item.Key);
                     cw.WriteString("value", item.Value);
                 }

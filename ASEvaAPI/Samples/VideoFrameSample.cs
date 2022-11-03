@@ -103,11 +103,10 @@ namespace ASEva.Samples
         /// <param name="image">图像</param>
         /// <param name="rawSize">图像的原始大小</param>
         /// <param name="channelIndex">通道</param>
-        /// <param name="bas">Session ID</param>
-        /// <param name="offset">相对时间戳</param>
-        /// <param name="timeline">时间线</param>
-        public VideoFrameSample(object image, IntSize rawSize, int channelIndex, DateTime bas, double offset, double timeline)
-            : base(bas, offset, timeline)
+        /// <param name="session">Session ID</param>
+        /// <param name="offset">时间偏置，单位秒</param>
+        /// <param name="timeline">时间线上的目标时间点</param>
+        public VideoFrameSample(object image, IntSize rawSize, int channelIndex, DateTime session, double offset, double timeline) : base(session, offset, timeline)
         {
             CommonImage = Agency.ConvertImageToCommon(image);
             ChannelIndex = channelIndex;
@@ -129,11 +128,10 @@ namespace ASEva.Samples
         /// <param name="image">图像</param>
         /// <param name="rawSize">图像的原始大小</param>
         /// <param name="channelIndex">通道</param>
-        /// <param name="bas">Session ID</param>
-        /// <param name="offset">相对时间戳</param>
-        /// <param name="timeline">时间线</param>
-        public VideoFrameSample(CommonImage image, IntSize rawSize, int channelIndex, DateTime bas, double offset, double timeline)
-            : base(bas, offset, timeline)
+        /// <param name="session">Session ID</param>
+        /// <param name="offset">时间偏置，单位秒</param>
+        /// <param name="timeline">时间线上的目标时间点</param>
+        public VideoFrameSample(CommonImage image, IntSize rawSize, int channelIndex, DateTime session, double offset, double timeline) : base(session, offset, timeline)
         {
             CommonImage = image;
             ChannelIndex = channelIndex;

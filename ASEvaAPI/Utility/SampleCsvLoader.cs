@@ -123,12 +123,10 @@ namespace ASEva.Utility
                 if (!Double.TryParse(comps[timeColumnIndex], out offset)) return null;
 
                 var sample = new GeneralSample();
-                sample.Base = session;
+                sample.SetTime(session, offset, null, offset);
                 sample.Channel = channel;
                 sample.NumberOfSignificants = comps.Length - (timeColumnIndex + 1);
-                sample.Offset = offset;
                 sample.Protocol = protocol;
-                sample.Timeline = offset;
                 sample.Values = new List<GeneralSampleValue>();
 
                 for (int i = timeColumnIndex + 1; i < comps.Length; i++)
@@ -229,12 +227,10 @@ namespace ASEva.Utility
                     if (!Double.TryParse(comps[timeColumnIndex], out offset)) continue;
 
                     var sample = new GeneralSample();
-                    sample.Base = session;
+                    sample.SetTime(session, offset, null, offset);
                     sample.Channel = channel;
                     sample.NumberOfSignificants = comps.Length - (timeColumnIndex + 1);
-                    sample.Offset = offset;
                     sample.Protocol = protocol;
-                    sample.Timeline = offset;
                     sample.Values = new List<GeneralSampleValue>();
 
                     for (int i = timeColumnIndex + 1; i < comps.Length; i++)

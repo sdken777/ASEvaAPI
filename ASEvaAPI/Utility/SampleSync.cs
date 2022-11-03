@@ -13,11 +13,11 @@ namespace ASEva.Utility
         /// 样本同步函数，根据目标时间点搜索样本缓存，输出插值或最近样本
         /// </summary>
         /// <param name="timeline">希望同步的时间线</param>
-        /// <param name="Base">时间线所在session</param>
+        /// <param name="session">时间线所在session</param>
         /// <param name="sampleLists">输入的样本缓存，可以是多个缓存</param>
         /// <param name="outputs">各个缓存按指定时间点输出插值或最近样本</param>
         /// <returns>需要保留返回false，否则返回true</returns>
-        static public bool Sync(double timeline, DateTime Base, List<List<Sample>> sampleLists, out List<Sample> outputs)
+        static public bool Sync(double timeline, DateTime session, List<List<Sample>> sampleLists, out List<Sample> outputs)
         {
             bool pass = false;
             bool disc = true;
@@ -48,12 +48,12 @@ namespace ASEva.Utility
                 {
                     var s = Sample.SearchAndInterpolate(list, timeline);
 
-                    if (s == null || s.Base != Base) outputs.Add(null);
+                    if (s == null || s.Base != session) outputs.Add(null);
                     else outputs.Add(s);
                 }
                 else if (Sample.IsInRange(list, timeline) && list.Count != 0 && !list.First().SupportInterpolation())
                 {
-                    var s = Sample.SearchAndGetNearest(list, timeline, Base);
+                    var s = Sample.SearchAndGetNearest(list, timeline, session);
                     outputs.Add(s);
                 }
                 else outputs.Add(null);

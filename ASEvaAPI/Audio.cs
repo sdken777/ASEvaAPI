@@ -14,7 +14,7 @@ namespace ASEva
         /// 数据回调函数
         /// </summary>
         /// <param name="samples">音频样本数据</param>
-        /// <param name="cpuSyncTime">样本数据的CPU时间，单位秒，可通过 ASEva.Agency.GetCPUTime 获得</param>
+        /// <param name="cpuSyncTime">样本数据的到达时CPU时间，单位秒，可通过 ASEva.Agency.GetCPUTime 获得</param>
         void OnData(short[] samples, double cpuSyncTime);
     }
 

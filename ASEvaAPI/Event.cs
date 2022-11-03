@@ -18,7 +18,7 @@ namespace ASEva
         public DateTime Base { get; set; }
 
         /// <summary>
-        /// (api:app=2.0.5) 在所属session中的相对时间戳
+        /// (api:app=2.0.5) 在所属session中的时间偏置
         /// </summary>
         public double? Offset { get; set; }
 

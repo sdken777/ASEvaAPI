@@ -5,42 +5,217 @@ using System.Linq;
 namespace ASEva
 {
     /// <summary>
+    /// (api:app=2.7.0) 时间偏置同步状态
+    /// </summary>
+    public enum TimeOffsetSync
+    {
+        /// <summary>
+        /// 未同步或同步源未知
+        /// </summary>
+		None = 0,
+
+        /// <summary>
+        /// 已与授时服务器时间同步
+        /// </summary>
+		Server = 1,
+
+        /// <summary>
+        /// 已与卫星时间同步
+        /// </summary>
+		Gnss = 2,
+    }
+
+    /// <summary>
+    /// (api:app=2.7.0) Session标识符
+    /// </summary>
+    public struct SessionIdentifier
+    {
+        public int Year { get { return (int)year; }}
+        public int Month { get { return (int)month; }}
+        public int Day { get { return (int)day; }}
+        public int Hour { get { return (int)hour; }}
+        public int Minute { get { return (int)minute; }}
+        public int Second { get { return (int)second; }}
+
+        /// <summary>
+        /// 默认构造函数
+        /// </summary>
+        public SessionIdentifier(int year, int month, int day, int hour, int minute, int second)
+        {
+            this.year = (ushort)year;
+            this.month = (byte)month;
+            this.day = (byte)day;
+            this.hour = (byte)hour;
+            this.minute = (byte)minute;
+            this.second = (byte)second;
+        }
+
+        /// <summary>
+        /// 通过日期时间创建
+        /// </summary>
+        public static SessionIdentifier FromDateTime(DateTime dateTime)
+        {
+            return new SessionIdentifier(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
+        }
+
+        /// <summary>
+        /// 转为日期时间
+        /// </summary>
+        public DateTime ToDateTime()
+        {
+            return new DateTime(year, month, day, hour, minute, second);
+        }
+
+        private ushort year;
+        private byte month, day, hour, minute, second;
+    }
+
+    /// <summary>
+    /// (api:app=2.7.0) Session无关时间信息
+    /// </summary>
+    public class IndependentTimeInfo
+    {
+        /// <summary>
+        /// 时间偏置同步状态
+        /// </summary>
+        public TimeOffsetSync OffsetSync { get { return offsetSync; }}
+
+        /// <summary>
+        /// 到达时CPU计数，0表示无效
+        /// </summary>
+        public ulong CPUTick { get { return cpuTick; }}
+
+        /// <summary>
+        /// 到达时主机Posix时间，单位纳秒，0表示无效
+        /// </summary>
+        public ulong HostPosix { get { return hostPosix; }}
+
+        /// <summary>
+        /// 采样时客机Posix时间，单位纳秒，0表示无效
+        /// </summary>
+        public ulong GuestPosix { get { return guestPosix; }}
+
+        /// <summary>
+        /// 采样时授时服务器Posix时间，单位纳秒，0表示无效
+        /// </summary>
+        public ulong ServerPosix { get { return serverPosix; }}
+
+        /// <summary>
+        /// 采样时卫星Posix时间，单位纳秒，0表示无效
+        /// </summary>
+        public ulong GNSSPosix { get { return gnssPosix; }}
+
+        /// <summary>
+        /// 默认构造函数
+        /// </summary>
+        public IndependentTimeInfo(TimeOffsetSync offsetSync, ulong cpuTick, ulong hostPosix, ulong guestPosix, ulong serverPosix, ulong gnssPosix)
+        {
+            this.offsetSync = offsetSync;
+            this.cpuTick = cpuTick;
+            this.hostPosix = hostPosix;
+            this.guestPosix = guestPosix;
+            this.serverPosix = serverPosix;
+            this.gnssPosix = gnssPosix;
+        }
+
+        private TimeOffsetSync offsetSync;
+        private ulong cpuTick, hostPosix, guestPosix, serverPosix, gnssPosix;
+    }
+
+    /// <summary>
+    /// (api:app=2.7.0) 时间戳
+    /// </summary>
+    public struct Timestamp
+    {
+        /// <summary>
+        /// Session标识符
+        /// </summary>
+        public SessionIdentifier Session { get { return session; }}
+
+        /// <summary>
+        /// 时间偏置，单位秒
+        /// </summary>
+        public double Offset { get { return offset; }}
+
+        /// <summary>
+        /// Session无关时间信息
+        /// </summary>
+        public IndependentTimeInfo TimeInfo { get { return timeInfo; }}
+
+        /// <summary>
+        /// 默认构造函数
+        /// </summary>
+        public Timestamp(SessionIdentifier session, double offset, IndependentTimeInfo timeInfo)
+        {
+            this.session = session;
+            this.offset = offset;
+            this.timeInfo = timeInfo;
+        }
+
+        private SessionIdentifier session;
+        private double offset;
+        private IndependentTimeInfo timeInfo;
+    }
+
+    /// <summary>
     /// (api:app=2.0.0) 数据样本
     /// </summary>
     public class Sample : IComparable<Sample>
     {
         /// <summary>
-        /// 所属session ID
+        /// (api:app=2.7.0) 时间戳
         /// </summary>
-        public DateTime Base { get; set; }
-        /// <summary>
-        /// 相对时间戳（session开始时间为0），单位秒
-        /// </summary>
-        public double Offset { get; set; }
-        /// <summary>
-        /// 时间线，单位秒
-        /// </summary>
-        public double Timeline { get; set; }
+        public Timestamp Timestamp
+        {
+            get { return timestamp; }
+        }
 
         /// <summary>
-        /// [依赖Agency] 绝对时间戳（本地时间），含年月日时分秒，毫秒
+        /// 所属session ID（注意，set操作将清除Session无关时间信息）
+        /// </summary>
+        public DateTime Base
+        {
+            get { return timestamp.Session.ToDateTime(); }
+            set { timestamp = new Timestamp(SessionIdentifier.FromDateTime(value), timestamp.Offset, null); }
+        }
+
+        /// <summary>
+        /// 时间偏置，单位秒（注意，set操作将清除Session无关时间信息）
+        /// </summary>
+        public double Offset
+        {
+            get { return timestamp.Offset; }
+            set { timestamp = new Timestamp(timestamp.Session, value, null); }
+        }
+
+        /// <summary>
+        /// 在时间线上的位置，单位秒
+        /// </summary>
+        public double Timeline
+        {
+            get { return timeline; }
+            set { timeline = value; }
+        }
+
+        /// <summary>
+        /// [依赖Agency] 获取通过主机Posix时间模型计算得到的本地时间
         /// </summary>
         public DateTime? TimestampLocal
         {
             get
             {
-                return Agency.GetTimestampLocal(Base, Offset);
+                return Agency.GetLocalDateTime(Base, Offset, false);
             }
         }
 
         /// <summary>
-        /// [依赖Agency] 绝对时间戳（UTC时间），含年月日时分秒，毫秒
+        /// [依赖Agency] 获取通过卫星Posix时间模型得到的计算UTC时间
         /// </summary>
         public DateTime? TimestampUTC
         {
             get
             {
-                return Agency.GetTimestampUTC(Base, Offset);
+                return Agency.GetUTCDateTime(Base, Offset, true);
             }
         }
 
@@ -49,25 +224,60 @@ namespace ASEva
         /// </summary>
         public Sample()
         {
-            Offset = 0;
-            Timeline = 0;
+            timestamp = new Timestamp(new SessionIdentifier(0, 0, 0, 0, 0, 0), 0, null);
+            timeline = 0;
         }
 
         /// <summary>
-        /// 带时间戳初始化的构造函数
+        /// 按指定时间信息进行初始化
         /// </summary>
-        /// <param name="bas">所属session ID</param>
-        /// <param name="offset">相对时间戳</param>
-        /// <param name="timeline">时间线</param>
-        public Sample(DateTime bas, double offset, double timeline)
+        /// <param name="session">所属session ID</param>
+        /// <param name="offset">时间偏置，单位秒</param>
+        /// <param name="timeline">在时间线上的位置</param>
+        public Sample(DateTime session, double offset, double timeline)
         {
-            Base = bas;
-            Offset = offset;
-            Timeline = timeline;
+            timestamp = new Timestamp(SessionIdentifier.FromDateTime(session), offset, null);
+            this.timeline = timeline;
         }
 
         /// <summary>
-        /// 时间线比较
+        /// (api:app=2.7.0) 按指定时间信息进行初始化
+        /// </summary>
+        /// <param name="session">所属session ID</param>
+        /// <param name="offset">时间偏置，单位秒</param>
+        /// <param name="timeInfo">Session无关时间信息</param>
+        /// <param name="timeline">在时间线上的位置</param>
+        public Sample(DateTime session, double offset, IndependentTimeInfo timeInfo, double timeline)
+        {
+            timestamp = new Timestamp(SessionIdentifier.FromDateTime(session), offset, timeInfo);
+            this.timeline = timeline;
+        }
+
+        /// <summary>
+        /// (api:app=2.7.0) 设置当前样本的时间戳和时间线位置
+        /// </summary>
+        /// <param name="session">所属session ID</param>
+        /// <param name="offset">时间偏置，单位秒</param>
+        /// <param name="timeInfo">Session无关时间信息</param>
+        /// <param name="timeline">在时间线上的位置</param>
+        public void SetTime(DateTime session, double offset, IndependentTimeInfo timeInfo, double timeline)
+        {
+            timestamp = new Timestamp(SessionIdentifier.FromDateTime(session), offset, timeInfo);
+            this.timeline = timeline;
+        }
+
+        /// <summary>
+        /// (api:app=2.7.0) 按时间参考样本设置当前样本的时间戳和时间线位置
+        /// </summary>
+        /// <param name="timeRef">时间参考样本</param>
+        public void SetTime(Sample timeRef)
+        {
+            timestamp = timeRef.timestamp;
+            timeline = timeRef.timeline;
+        }
+
+        /// <summary>
+        /// 按时间线进行比较
         /// </summary>
         /// <param name="other">另一个数据样本</param>
         /// <returns>比较结果</returns>
@@ -108,7 +318,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// [支持通用样本转换时必须实现] 从 ASEva.GeneralSample 转为特化样本，需实现时间戳拷贝(Base, Offset, Timeline)
+        /// [支持通用样本转换时必须实现] 从 ASEva.GeneralSample 转为特化样本，该实现需调用SetTime进行时间拷贝
         /// </summary>
         /// <param name="sample">通用样本</param>
         /// <returns>转换是否成功</returns>
@@ -118,21 +328,21 @@ namespace ASEva
         }
 
         /// <summary>
-        /// [支持通用样本转换时可选实现] 特化样本转为 ASEva.GeneralSample ，需实现时间戳拷贝(Base, Offset, Timeline)
+        /// [支持通用样本转换时可选实现] 特化样本转为 ASEva.GeneralSample ，该实现需调用SetTime进行时间拷贝
         /// </summary>
         /// <returns>通用样本</returns>
         public virtual GeneralSample ToGeneralSample()
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         /// <summary>
-        /// [支持通用样本转换时可选实现] 特化样本转为 ASEva.GeneralSample ，需实现时间戳拷贝(Base, Offset, Timeline)以及通道赋值
+        /// [支持通用样本转换时可选实现] 特化样本转为 ASEva.GeneralSample ，该实现需调用SetTime进行时间拷贝并赋值通道
         /// </summary>
         /// <returns>通用样本</returns>
         public virtual GeneralSample ToGeneralSample(int channel)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         /// <summary>
@@ -145,7 +355,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// [SupportInterpolation返回true时必须实现] 基于 ASEva.Sample.Search 返回的搜索结果进行样本插值，无需输出时间戳
+        /// [SupportInterpolation返回true时必须实现] 基于 ASEva.Sample.Search 返回的搜索结果进行样本插值，无需输出时间信息
         /// </summary>
         /// <param name="input">样本缓存的搜索结果</param>
         /// <returns>返回插值后的样本</returns>
@@ -155,10 +365,10 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 判断目标时间线是否在样本缓存范围内
+        /// 判断目标时间点是否在样本缓存范围内
         /// </summary>
         /// <param name="samples">样本缓存</param>
-        /// <param name="targetTimeline">目标时间线</param>
+        /// <param name="targetTimeline">在时间线上的目标时间点</param>
         /// <returns>是否在范围内</returns>
         public static bool IsInRange(List<Sample> samples, double targetTimeline)
         {
@@ -167,10 +377,10 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 判断目标时间线是否在样本缓存范围外，且比所有样本都更早
+        /// 判断目标时间点是否在样本缓存范围外，且比所有样本都更早
         /// </summary>
         /// <param name="samples">样本缓存</param>
-        /// <param name="targetTimeline">目标时间线</param>
+        /// <param name="targetTimeline">在时间线上的目标时间点</param>
         /// <returns>是否在范围外，且比所有样本都更早</returns>
         public static bool IsOutRangeLower(List<Sample> samples, double targetTimeline)
         {
@@ -179,10 +389,10 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 判断目标时间线是否在样本缓存范围外，且比所有样本都更晚
+        /// 判断目标时间点是否在样本缓存范围外，且比所有样本都更晚
         /// </summary>
         /// <param name="samples">样本缓存</param>
-        /// <param name="targetTimeline">目标时间线</param>
+        /// <param name="targetTimeline">在时间线上的目标时间点</param>
         /// <returns>是否在范围外，且比所有样本都更晚</returns>
         public static bool IsOutRangeUpper(List<Sample> samples, double targetTimeline)
         {
@@ -205,10 +415,10 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 按目标时间戳搜索缓存列表
+        /// 按目标时间点搜索缓存列表
         /// </summary>
         /// <param name="samples">样本缓存</param>
-        /// <param name="targetTimeline">目标时间线</param>
+        /// <param name="targetTimeline">在时间线上的目标时间点</param>
         /// <param name="maxGap">最大时间间隔，若最近样本的时间间隔大于此值，则不考虑</param>
         /// <returns>返回搜索结果</returns>
         public static SearchResult Search(List<Sample> samples, double targetTimeline, double maxGap = 1.0)
@@ -332,10 +542,10 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 按目标时间戳搜索缓存列表，自动进行插值并返回插值后样本（需要样本支持插值，且目标时间在缓存范围内，默认最大时间间隔为10秒）
+        /// 按目标时间点搜索缓存列表，自动进行插值并返回插值后样本（需要样本支持插值，且目标时间在缓存范围内，默认最大时间间隔为10秒）
         /// </summary>
         /// <param name="samples">样本缓存</param>
-        /// <param name="targetTimeline">目标时间线</param>
+        /// <param name="targetTimeline">在时间线上的目标时间点</param>
         /// <returns>插值后的样本</returns>
         public static Sample SearchAndInterpolate(List<Sample> samples, double targetTimeline)
         {
@@ -350,9 +560,27 @@ namespace ASEva
                 var buf = samples[0].Interpolate(result);
                 if (buf == null) return null;
 
-                buf.Base = result.s1.Base;
-                buf.Offset = result.s1.Offset * result.w1 + result.s2.Offset * result.w2;
-                buf.Timeline = targetTimeline;
+                IndependentTimeInfo timeInfo = null;
+                if (result.s1.timestamp.TimeInfo != null && result.s2.timestamp.TimeInfo != null)
+                {
+                    var t1 = result.s1.timestamp.TimeInfo;
+                    var t2 = result.s2.timestamp.TimeInfo;
+                    if (t1.OffsetSync == t2.OffsetSync)
+                    {
+                        var t1Comps = new ulong[] { t1.CPUTick, t1.HostPosix, t1.GuestPosix, t1.ServerPosix, t1.GNSSPosix };
+                        var t2Comps = new ulong[] { t2.CPUTick, t2.HostPosix, t2.GuestPosix, t2.ServerPosix, t2.GNSSPosix };
+                        var outComps = new ulong[5];
+                        for (int i = 0; i < 5; i++)
+                        {
+                            long diffTime = (long)t2Comps[i] - (long)t1Comps[i];
+                            outComps[i] = (ulong)((long)t1Comps[i] + (long)(result.w2 * diffTime));
+                        }
+
+                        timeInfo = new IndependentTimeInfo(t1.OffsetSync, outComps[0], outComps[1], outComps[2], outComps[3], outComps[4]);
+                    }
+                }
+
+                buf.SetTime(result.s1.Base, result.s1.Offset * result.w1 + result.s2.Offset * result.w2, timeInfo, targetTimeline);
                 return buf;
             }
             catch (Exception)
@@ -365,22 +593,22 @@ namespace ASEva
         /// 在样本缓存列表中搜索最近样本
         /// </summary>
         /// <param name="samples">样本缓存</param>
-        /// <param name="targetTimeline">目标时间线</param>
-        /// <param name="targetBase">目标的session ID</param>
+        /// <param name="targetTimeline">在时间线上的目标时间点</param>
+        /// <param name="targetSession">目标的session ID</param>
         /// <returns>最近样本，若无则返回null</returns>
-        public static Sample SearchAndGetNearest(List<Sample> samples, double targetTimeline, DateTime targetBase)
+        public static Sample SearchAndGetNearest(List<Sample> samples, double targetTimeline, DateTime targetSession)
         {
             if (samples.Count == 0) return null;
             if (samples.Count == 1)
             {
-                if (samples[0].Base == targetBase) return samples[0];
+                if (samples[0].Base == targetSession) return samples[0];
                 else return null;
             }
 
             var result = Search(samples, targetTimeline, 10/* support 10 second gap */);
             if (result == null) return null;
 
-            if (result.s1.Base != targetBase) return null;
+            if (result.s1.Base != targetSession) return null;
 
             if (Math.Abs(result.s1.Timeline - targetTimeline) < Math.Abs(result.s2.Timeline - targetTimeline)) return result.s1;
             else return result.s2;
@@ -404,6 +632,9 @@ namespace ASEva
 
             if (removeCount > 0) samples.RemoveRange(0, removeCount);
         }
+
+        private Timestamp timestamp;
+        private double timeline;
     }
 
     /// <summary>

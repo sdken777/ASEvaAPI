@@ -9,7 +9,7 @@ namespace ASEva.Samples
     public class PointCloudSample : Sample
     {
         /// <summary>
-        /// 样本通道（0~5）
+        /// 样本通道（0~11）
         /// </summary>
         public int Channel { get; set; }
 
@@ -39,7 +39,7 @@ namespace ASEva.Samples
         public ushort[] LaserIDs { get; set; }
 
         /// <summary>
-        /// 数组长度N，值为相对于样本时间戳的时间偏置，单位为10微秒（若一帧数据时间跨度超过655ms则不应有此字段数据）
+        /// 数组长度N，值为相对于样本时间的时间偏置，单位为10微秒（若一帧数据时间跨度超过655ms则不应有此字段数据）
         /// </summary>
         public ushort[] TimeOffsets { get; set; }
 
