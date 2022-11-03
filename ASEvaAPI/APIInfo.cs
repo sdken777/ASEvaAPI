@@ -7,7 +7,7 @@
  * \n
  * 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph \n
  * \n
- * 本文档对应API版本：2.7.0
+ * 本文档对应API版本：2.7.1
  */
 
 using System;
@@ -16,7 +16,7 @@ using System.Diagnostics;
 namespace ASEva
 {
     /// <summary>
-    /// version=2.7.0
+    /// version=2.7.1
     /// </summary>
     public class APIInfo
     {
@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 7, 0, 0); // 新增Timestamp并作为Sample的时间戳数据结构。新增CPUTimeModel，PosixTimeModel及相关接口。新增Agency.GetCPUTick/GetCPUTicksPerSecond。新增Agency.Get/SetSessionHostSync。SessionMeta增加字段。完善相关注释
+            return new Version(2, 7, 1, 0); // 新增VideoDataCodec，VideoOutputMode
         }
 
         /// <summary>

@@ -754,9 +754,22 @@ namespace ASEva
     }
 
     /// <summary>
-    /// (api:app=2.0.0) 视频编码格式
+    /// (api:app=2.0.0) 已弃用，应使用 ASEva.VideoDataCodec
     /// </summary>
     public enum VideoInputCodec
+    {
+        Invalid = 0,
+        MJPEG = 1,
+        H264 = 2,
+        YUV411 = 3,
+        YUV420 = 4,
+        H265 = 5,
+    };
+
+    /// <summary>
+    /// (api:app=2.7.1) 视频编码格式
+    /// </summary>
+    public enum VideoDataCodec
     {
         /// <summary>
         /// 无效
@@ -787,19 +800,45 @@ namespace ASEva
         /// H.265：有损编码，帧间依赖
         /// </summary>
         H265 = 5,
-    };
+
+        /// <summary>
+        /// YUV422：无损编码，帧间独立
+        /// </summary>
+        YUV422 = 6,
+
+        /// <summary>
+        /// RAW：自定义原始数据
+        /// </summary>
+        RAW = 7,
+    }
 
     /// <summary>
     /// (api:app=2.0.0) 视频输入模式
     /// </summary>
     public class VideoInputMode
     {
-        public VideoInputCodec Codec { get; set; }
+        /// <summary>
+        /// (api:app=2.7.1) 视频输入编码格式
+        /// </summary>
+        public VideoDataCodec InputCodec { get; set; }
+
+        /// <summary>
+        /// 视频尺寸
+        /// </summary>
         public IntSize Size { get; set; }
+
+        /// <summary>
+        /// 已弃用，应使用 ASEva.VideoInputMode.InputCodec
+        /// </summary>
+        public VideoInputCodec Codec
+        {
+            get { return (VideoInputCodec)InputCodec; }
+            set { InputCodec = (VideoDataCodec)value; }
+        }
 
         public override bool Equals(object obj)
         {
-            return obj != null && obj is VideoInputMode && (obj as VideoInputMode).Codec == Codec && (obj as VideoInputMode).Size.Width == Size.Width && (obj as VideoInputMode).Size.Height == Size.Height;
+            return obj != null && obj is VideoInputMode && (obj as VideoInputMode).InputCodec == InputCodec && (obj as VideoInputMode).Size.Width == Size.Width && (obj as VideoInputMode).Size.Height == Size.Height;
         }
 
         public override int GetHashCode()
@@ -809,7 +848,38 @@ namespace ASEva
 
         public override string ToString()
         {
-            return Size.Width + "x" + Size.Height + " " + Codec.ToString();
+            return Size.Width + "x" + Size.Height + " " + InputCodec.ToString();
+        }
+    }
+
+    /// <summary>
+    /// (api:app=2.7.1) 视频输出模式
+    /// </summary>
+    public class VideoOutputMode
+    {
+        /// <summary>
+        /// 视频输出编码格式
+        /// </summary>
+        public VideoDataCodec OutputCodec { get; set; }
+
+        /// <summary>
+        /// 视频尺寸
+        /// </summary>
+        public IntSize Size { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj != null && obj is VideoOutputMode && (obj as VideoOutputMode).OutputCodec == OutputCodec && (obj as VideoOutputMode).Size.Width == Size.Width && (obj as VideoOutputMode).Size.Height == Size.Height;
+        }
+
+        public override int GetHashCode()
+        {
+            return ToString().GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return Size.Width + "x" + Size.Height + " " + OutputCodec.ToString();
         }
     }
 
@@ -818,8 +888,20 @@ namespace ASEva
     /// </summary>
     public class VideoDeviceInfo
     {
+        /// <summary>
+        /// 硬件信息描述
+        /// </summary>
         public String HardwareInfo { get; set; }
+
+        /// <summary>
+        /// 支持的视频输入格式列表
+        /// </summary>
         public VideoInputMode[] InputModes { get; set; }
+
+        /// <summary>
+        /// (api:app=2.7.1) 支持的视频输出格式列表
+        /// </summary>
+        public VideoOutputMode[] OutputModes { get; set; }
     }
 
     /// <summary>

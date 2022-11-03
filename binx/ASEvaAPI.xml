@@ -1879,7 +1879,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.7.0
+            version=2.7.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -5782,37 +5782,52 @@
         </member>
         <member name="T:ASEva.VideoInputCodec">
             <summary>
-            (api:app=2.0.0) 视频编码格式
+            (api:app=2.0.0) 已弃用，应使用 ASEva.VideoDataCodec
             </summary>
         </member>
-        <member name="F:ASEva.VideoInputCodec.Invalid">
+        <member name="T:ASEva.VideoDataCodec">
+            <summary>
+            (api:app=2.7.1) 视频编码格式
+            </summary>
+        </member>
+        <member name="F:ASEva.VideoDataCodec.Invalid">
             <summary>
             无效
             </summary>
         </member>
-        <member name="F:ASEva.VideoInputCodec.MJPEG">
+        <member name="F:ASEva.VideoDataCodec.MJPEG">
             <summary>
             MJPEG：有损编码，帧间独立
             </summary>
         </member>
-        <member name="F:ASEva.VideoInputCodec.H264">
+        <member name="F:ASEva.VideoDataCodec.H264">
             <summary>
             H.264：有损编码，帧间依赖
             </summary>
         </member>
-        <member name="F:ASEva.VideoInputCodec.YUV411">
+        <member name="F:ASEva.VideoDataCodec.YUV411">
             <summary>
             YUV411：无损编码，帧间独立
             </summary>
         </member>
-        <member name="F:ASEva.VideoInputCodec.YUV420">
+        <member name="F:ASEva.VideoDataCodec.YUV420">
             <summary>
             YUV420：无损编码，帧间独立
             </summary>
         </member>
-        <member name="F:ASEva.VideoInputCodec.H265">
+        <member name="F:ASEva.VideoDataCodec.H265">
             <summary>
             H.265：有损编码，帧间依赖
+            </summary>
+        </member>
+        <member name="F:ASEva.VideoDataCodec.YUV422">
+            <summary>
+            YUV422：无损编码，帧间独立
+            </summary>
+        </member>
+        <member name="F:ASEva.VideoDataCodec.RAW">
+            <summary>
+            RAW：自定义原始数据
             </summary>
         </member>
         <member name="T:ASEva.VideoInputMode">
@@ -5820,9 +5835,54 @@
             (api:app=2.0.0) 视频输入模式
             </summary>
         </member>
+        <member name="P:ASEva.VideoInputMode.InputCodec">
+            <summary>
+            (api:app=2.7.1) 视频输入编码格式
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoInputMode.Size">
+            <summary>
+            视频尺寸
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoInputMode.Codec">
+            <summary>
+            已弃用，应使用 ASEva.VideoInputMode.InputCodec
+            </summary>
+        </member>
+        <member name="T:ASEva.VideoOutputMode">
+            <summary>
+            (api:app=2.7.1) 视频输出模式
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoOutputMode.OutputCodec">
+            <summary>
+            视频输出编码格式
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoOutputMode.Size">
+            <summary>
+            视频尺寸
+            </summary>
+        </member>
         <member name="T:ASEva.VideoDeviceInfo">
             <summary>
             (api:app=2.0.0) 视频设备信息
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoDeviceInfo.HardwareInfo">
+            <summary>
+            硬件信息描述
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoDeviceInfo.InputModes">
+            <summary>
+            支持的视频输入格式列表
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoDeviceInfo.OutputModes">
+            <summary>
+            (api:app=2.7.1) 支持的视频输出格式列表
             </summary>
         </member>
         <member name="T:ASEva.VideoFrameGetScale">
