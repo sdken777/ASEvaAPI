@@ -1879,7 +1879,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.7.2
+            version=2.7.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4157,6 +4157,11 @@
         <member name="M:ASEva.SessionIdentifier.FromDateTime(System.DateTime)">
             <summary>
             通过日期时间创建
+            </summary>
+        </member>
+        <member name="M:ASEva.SessionIdentifier.IsValid">
+            <summary>
+            (api:app=2.7.3) 是否有效
             </summary>
         </member>
         <member name="M:ASEva.SessionIdentifier.ToDateTime">

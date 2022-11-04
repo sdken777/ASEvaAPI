@@ -31,24 +31,23 @@ namespace ASEva
     /// </summary>
     public struct SessionIdentifier
     {
-        public int Year { get { return (int)year; }}
-        public int Month { get { return (int)month; }}
-        public int Day { get { return (int)day; }}
-        public int Hour { get { return (int)hour; }}
-        public int Minute { get { return (int)minute; }}
-        public int Second { get { return (int)second; }}
-
         /// <summary>
         /// 默认构造函数
         /// </summary>
         public SessionIdentifier(int year, int month, int day, int hour, int minute, int second)
         {
-            this.year = (ushort)year;
-            this.month = (byte)month;
-            this.day = (byte)day;
-            this.hour = (byte)hour;
-            this.minute = (byte)minute;
-            this.second = (byte)second;
+            if (year >= 1900 && year < 10000 && month >= 1 && month <= 12 && day >= 1 && day <= 31 &&
+		        hour >= 0 && hour < 24 && minute >= 0 && minute < 60 && second >= 0 && second < 60)
+            {
+                ulong yearCode = (ulong)year << 48;
+                ulong monthCode = (ulong)month << 40;
+                ulong dayCode = (ulong)day << 32;
+                ulong hourCode = (ulong)hour << 16;
+                ulong minuteCode = (ulong)minute << 8;
+                ulong secondCode = (ulong)second;
+                value = yearCode | monthCode | dayCode | hourCode | minuteCode | secondCode;
+            }
+            else value = 0;
         }
 
         /// <summary>
@@ -73,43 +72,73 @@ namespace ASEva
         }
 
         /// <summary>
+        /// (api:app=2.7.3) 是否有效
+        /// </summary>
+        public bool IsValid()
+        {
+            return value != 0;
+        }
+
+        /// <summary>
         /// 转为日期时间
         /// </summary>
         public DateTime ToDateTime()
         {
-            return new DateTime(year, month, day, hour, minute, second);
+            if (value == 0) return new DateTime(1900, 1, 1, 0, 0, 0);
+            else
+            {
+                int year = (int)((value & 0xffff000000000000) >> 48);
+                int month = (int)((value & 0x0000ff0000000000) >> 40);
+                int day = (int)((value & 0x000000ff00000000) >> 32);
+                int hour = (int)((value & 0x0000000000ff0000) >> 16);
+                int minute = (int)((value & 0x000000000000ff00) >> 8);
+                int second = (int)(value & 0x00000000000000ff);
+                return new DateTime(year, month, day, hour, minute, second);
+            }
         }
 
         public override string ToString()
         {
-            return String.Format("{0:D4}-{1:D2}-{2:D2}-{3:D2}-{4:D2}-{5:D2}", year, month, day, hour, minute, second);
+            if (value == 0) return "1900-01-01-00-00-00";
+            else
+            {
+                var dateTime = ToDateTime();
+                return String.Format("{0:D4}-{1:D2}-{2:D2}-{3:D2}-{4:D2}-{5:D2}", dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
+            }
         }
 
         public override bool Equals(object obj)
         {
             var target = (SessionIdentifier)obj;
-            return second == target.second && minute == target.minute && hour == target.hour && day == target.day && month == target.month && year == target.year;
+            return value == target.value;
         }
 
         public override int GetHashCode()
         {
-            var a = ((uint)year << 16) | ((uint)month << 8) | (uint)day;
-            var b = ((uint)hour << 16) | ((uint)minute << 8) | (uint)second;
-            return (int)(a ^ b);
+            return (int)value;
         }
 
         public static bool operator ==(SessionIdentifier id1, SessionIdentifier id2)
         {
-            return id1.second == id2.second && id1.minute == id2.minute && id1.hour == id2.hour && id1.day == id2.day && id1.month == id2.month && id1.year == id2.year;
+            return id1.value == id2.value;
         }
 
         public static bool operator !=(SessionIdentifier id1, SessionIdentifier id2)
         {
-            return id1.second != id2.second || id1.minute != id2.minute || id1.hour != id2.hour || id1.day != id2.day || id1.month != id2.month || id1.year != id2.year;
+            return id1.value != id2.value;
         }
 
-        private ushort year;
-        private byte month, day, hour, minute, second;
+        public static bool operator <(SessionIdentifier id1, SessionIdentifier id2)
+        {
+            return id1.value < id2.value;
+        }
+
+        public static bool operator >(SessionIdentifier id1, SessionIdentifier id2)
+        {
+            return id1.value > id2.value;
+        }
+
+        private ulong value;
     }
 
     /// <summary>

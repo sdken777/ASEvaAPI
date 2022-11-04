@@ -7,7 +7,7 @@
  * \n
  * 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph \n
  * \n
- * 本文档对应API版本：2.7.2
+ * 本文档对应API版本：2.7.3
  */
 
 using System;
@@ -16,7 +16,7 @@ using System.Diagnostics;
 namespace ASEva
 {
     /// <summary>
-    /// version=2.7.2
+    /// version=2.7.3
     /// </summary>
     public class APIInfo
     {
@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 7, 2, 0); // 完善SessionIdentifier功能。增加Sample.Session，Sample.SetTime(timestamp, timeline)
+            return new Version(2, 7, 3, 0); // SessionIdentifier基于单个ulong。新增SessionIdentifier.IsValid以及比较符
         }
 
         /// <summary>
