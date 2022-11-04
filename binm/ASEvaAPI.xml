@@ -1879,7 +1879,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.7.1
+            version=2.7.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4149,6 +4149,11 @@
             默认构造函数
             </summary>
         </member>
+        <member name="M:ASEva.SessionIdentifier.FromString(System.String)">
+            <summary>
+            (api:app=2.7.2) 通过字符串创建
+            </summary>
+        </member>
         <member name="M:ASEva.SessionIdentifier.FromDateTime(System.DateTime)">
             <summary>
             通过日期时间创建
@@ -4234,6 +4239,11 @@
             (api:app=2.7.0) 时间戳
             </summary>
         </member>
+        <member name="P:ASEva.Sample.Session">
+            <summary>
+            (api:app=2.7.2) 所属Session标识符
+            </summary>
+        </member>
         <member name="P:ASEva.Sample.Base">
             <summary>
             所属session ID（注意，set操作将清除Session无关时间信息）
@@ -4288,6 +4298,13 @@
             <param name="session">所属session ID</param>
             <param name="offset">时间偏置，单位秒</param>
             <param name="timeInfo">Session无关时间信息</param>
+            <param name="timeline">在时间线上的位置</param>
+        </member>
+        <member name="M:ASEva.Sample.SetTime(ASEva.Timestamp,System.Double)">
+            <summary>
+            (api:app=2.7.2) 设置当前样本的时间戳和时间线位置
+            </summary>
+            <param name="timestamp">时间戳</param>
             <param name="timeline">在时间线上的位置</param>
         </member>
         <member name="M:ASEva.Sample.SetTime(ASEva.Sample)">

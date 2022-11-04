@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 
 namespace ASEva
 {
@@ -51,6 +52,19 @@ namespace ASEva
         }
 
         /// <summary>
+        /// (api:app=2.7.2) 通过字符串创建
+        /// </summary>
+        public static SessionIdentifier FromString(String str)
+        {
+            DateTime dateTime;
+            if (DateTime.TryParseExact(str, "yyyy-MM-dd-HH-mm-ss", null, DateTimeStyles.None, out dateTime))
+            {
+                return FromDateTime(dateTime);
+            }
+            else return new SessionIdentifier(0, 0, 0, 0, 0, 0);
+        }
+
+        /// <summary>
         /// 通过日期时间创建
         /// </summary>
         public static SessionIdentifier FromDateTime(DateTime dateTime)
@@ -64,6 +78,34 @@ namespace ASEva
         public DateTime ToDateTime()
         {
             return new DateTime(year, month, day, hour, minute, second);
+        }
+
+        public override string ToString()
+        {
+            return String.Format("{0:D4}-{1:D2}-{2:D2}-{3:D2}-{4:D2}-{5:D2}", year, month, day, hour, minute, second);
+        }
+
+        public override bool Equals(object obj)
+        {
+            var target = (SessionIdentifier)obj;
+            return second == target.second && minute == target.minute && hour == target.hour && day == target.day && month == target.month && year == target.year;
+        }
+
+        public override int GetHashCode()
+        {
+            var a = ((uint)year << 16) | ((uint)month << 8) | (uint)day;
+            var b = ((uint)hour << 16) | ((uint)minute << 8) | (uint)second;
+            return (int)(a ^ b);
+        }
+
+        public static bool operator ==(SessionIdentifier id1, SessionIdentifier id2)
+        {
+            return id1.second == id2.second && id1.minute == id2.minute && id1.hour == id2.hour && id1.day == id2.day && id1.month == id2.month && id1.year == id2.year;
+        }
+
+        public static bool operator !=(SessionIdentifier id1, SessionIdentifier id2)
+        {
+            return id1.second != id2.second || id1.minute != id2.minute || id1.hour != id2.hour || id1.day != id2.day || id1.month != id2.month || id1.year != id2.year;
         }
 
         private ushort year;
@@ -171,6 +213,14 @@ namespace ASEva
         }
 
         /// <summary>
+        /// (api:app=2.7.2) 所属Session标识符
+        /// </summary>
+        public SessionIdentifier Session
+        {
+            get { return timestamp.Session; }
+        }
+
+        /// <summary>
         /// 所属session ID（注意，set操作将清除Session无关时间信息）
         /// </summary>
         public DateTime Base
@@ -263,6 +313,17 @@ namespace ASEva
         public void SetTime(DateTime session, double offset, IndependentTimeInfo timeInfo, double timeline)
         {
             timestamp = new Timestamp(SessionIdentifier.FromDateTime(session), offset, timeInfo);
+            this.timeline = timeline;
+        }
+
+        /// <summary>
+        /// (api:app=2.7.2) 设置当前样本的时间戳和时间线位置
+        /// </summary>
+        /// <param name="timestamp">时间戳</param>
+        /// <param name="timeline">在时间线上的位置</param>
+        public void SetTime(Timestamp timestamp, double timeline)
+        {
+            this.timestamp = timestamp;
             this.timeline = timeline;
         }
 
