@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 7, 3, 0); // SessionIdentifier基于单个ulong。新增SessionIdentifier.IsValid以及比较符
+            return new Version(2, 7, 3, 1); // SessionMeta确保HostPosixModel有效
         }
 
         /// <summary>

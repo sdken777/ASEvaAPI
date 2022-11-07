@@ -290,10 +290,13 @@ namespace ASEva.Utility
                         {
                             meta.ID = begin;
                             meta.Length = (end - begin).TotalSeconds;
+                            found = true;
                         }
                     }
                     catch (Exception) { }
                 }
+
+                if (!found) return null;
 
                 if (attribs["guid"] != null)
                 {
@@ -358,6 +361,15 @@ namespace ASEva.Utility
                 catch (Exception)
                 {
                     meta.HostPosixModel = null;
+                    meta.HostSync = false;
+                }
+                if (meta.HostPosixModel == null)
+                {
+                    meta.HostPosixModel = new PosixTimeModel
+                    {
+                        StartPosix = (ulong)(TimeZoneInfo.ConvertTimeToUtc(meta.ID, TimeZoneInfo.Local) - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds,
+                        TimeRatio = 1,
+                    };
                     meta.HostSync = false;
                 }
 
