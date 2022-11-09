@@ -15,6 +15,12 @@ namespace ASEva
         public virtual Version GetVersion() { return new Version(1, 0, 0, 0); }
 
         /// <summary>
+        /// (api:app=2.6.20) [可选实现] 获取当前版本发布日期时被调用
+        /// </summary>
+        /// <returns>当前版本发布日期</returns>
+        public virtual DateTime? GetVersionReleaseDate() { return null; }
+
+        /// <summary>
         /// [可选实现] 获取插件包含的所有窗口组件的定义对象时被调用
         /// </summary>
         /// <returns>窗口组件定义对象的列表</returns>

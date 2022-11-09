@@ -286,9 +286,15 @@ namespace ASEva
         public Version AppVersion { get; set; }
 
         /// <summary>
-        /// 应用程序发行号，可为空（相同应用程序版本下的不同插件配置）
+        /// 应用程序发行号，可为空（相同应用程序版本下可按不同配置发行）
         /// </summary>
         public String AppRevision { get; set; }
+
+        /// <summary>
+        /// (api:app=2.6.20) 缩略的应用程序发行号，可为空（相同应用程序版本下可按不同配置发行）
+        /// </summary>
+        /// <value></value>
+        public String AppRevisionShort { get; set; }
 
         /// <summary>
         /// 框架软件的版本

@@ -1828,7 +1828,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.6.19
+            version=2.6.20
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3673,8 +3673,14 @@
         </member>
         <member name="P:ASEva.AppBasicInfo.AppRevision">
             <summary>
-            应用程序发行号，可为空（相同应用程序版本下的不同插件配置）
+            应用程序发行号，可为空（相同应用程序版本下可按不同配置发行）
             </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.AppRevisionShort">
+            <summary>
+            (api:app=2.6.20) 缩略的应用程序发行号，可为空（相同应用程序版本下可按不同配置发行）
+            </summary>
+            <value></value>
         </member>
         <member name="P:ASEva.AppBasicInfo.CoreVersion">
             <summary>
@@ -3870,6 +3876,12 @@
             [必须实现] 获取插件版本时被调用
             </summary>
             <returns>版本号</returns>
+        </member>
+        <member name="M:ASEva.Plugin.GetVersionReleaseDate">
+            <summary>
+            (api:app=2.6.20) [可选实现] 获取当前版本发布日期时被调用
+            </summary>
+            <returns>当前版本发布日期</returns>
         </member>
         <member name="M:ASEva.Plugin.GetWindowClasses">
             <summary>
