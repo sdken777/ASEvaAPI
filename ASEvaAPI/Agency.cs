@@ -130,6 +130,7 @@ namespace ASEva
         String[] GetSceneIDList();
         Dictionary<String, SceneTitle> GetSceneTitleTable();
         Dictionary<String, bool> GetChannelStatusTable(uint? tolerance);
+        Dictionary<String, TimeOffsetSync> GetChannelSyncTable();
         bool SetControlFlag(String controllerID, bool enabled);
         String GetModuleConfig(object caller, String moduleClassID);
         void SetModuleConfig(object caller, String moduleClassID, String config);
@@ -275,7 +276,7 @@ namespace ASEva
         DateTime? GetUTCDateTime(DateTime session, double timeOffset, bool useGNSS);
         ulong GetCPUTick();
         ulong GetCPUTicksPerSecond();
-
+        Timestamp[] GetChannelLatestTimestamps(String key);
     }
 
     /// <summary>
@@ -1463,6 +1464,15 @@ namespace ASEva
         public static Dictionary<String, bool> GetChannelStatusTable(uint? tolerance)
         {
             return Handler.GetChannelStatusTable(tolerance);
+        }
+
+        /// <summary>
+        /// (api:app=2.7.4) 获取所有通道的时间同步状态
+        /// </summary>
+        /// <returns>返回各通道的时间同步状态，key为通道ID</returns>
+        public static Dictionary<String, TimeOffsetSync> GetChannelSyncTable()
+        {
+            return Handler.GetChannelSyncTable();
         }
 
         /// <summary>
@@ -2976,6 +2986,16 @@ namespace ASEva
         public static ulong GetCPUTicksPerSecond()
         {
             return Handler.GetCPUTicksPerSecond();
+        }
+
+        /// <summary>
+        /// (api:app=2.7.4) 获取数据通道上最近的若干帧时间戳
+        /// </summary>
+        /// <param name="key">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始。视频协议名为video</param>
+        /// <returns>指定数据通道上最近的若干帧时间戳，若该通道未找到或最近无数据则返回null</returns>
+        public static Timestamp[] GetChannelLatestTimestamps(String key)
+        {
+            return Handler.GetChannelLatestTimestamps(key);
         }
     }
 }

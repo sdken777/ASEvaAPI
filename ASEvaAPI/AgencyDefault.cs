@@ -1294,5 +1294,15 @@ namespace ASEva
         public void SetSessionHostSync(DateTime session, bool hostSync)
         {
         }
+
+        public Dictionary<string, TimeOffsetSync> GetChannelSyncTable()
+        {
+            return null;
+        }
+
+        public Timestamp[] GetChannelLatestTimestamps(string key)
+        {
+            return null;
+        }
     }
 }
