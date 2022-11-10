@@ -5842,12 +5842,12 @@
         </member>
         <member name="F:ASEva.VideoDataCodec.YUV411">
             <summary>
-            YUV411：无损编码，帧间独立
+            YUV411：无损编码，帧间独立，格式为每8像素(U0 Y0 V0 Y1 U4 Y2 V4 Y3 Y4 Y5 Y6 Y7)，每数值8bit
             </summary>
         </member>
         <member name="F:ASEva.VideoDataCodec.YUV420">
             <summary>
-            YUV420：无损编码，帧间独立
+            YUV420：无损编码，帧间独立，格式为每2x2像素(U V Y00 Y01 Y10 Y11)，每数值8bit
             </summary>
         </member>
         <member name="F:ASEva.VideoDataCodec.H265">
@@ -5857,12 +5857,12 @@
         </member>
         <member name="F:ASEva.VideoDataCodec.YUV422">
             <summary>
-            YUV422：无损编码，帧间独立
+            YUV422：无损编码，帧间独立，格式为每2像素(Y0 U Y1 V)，每数值8bit
             </summary>
         </member>
         <member name="F:ASEva.VideoDataCodec.RAW">
             <summary>
-            RAW：自定义原始数据
+            RAW：无损编码，帧间独立，格式为奇数行BG，偶数行GR，每数值8bit
             </summary>
         </member>
         <member name="T:ASEva.VideoInputMode">

@@ -787,12 +787,12 @@ namespace ASEva
         H264 = 2,
 
         /// <summary>
-        /// YUV411：无损编码，帧间独立
+        /// YUV411：无损编码，帧间独立，格式为每8像素(U0 Y0 V0 Y1 U4 Y2 V4 Y3 Y4 Y5 Y6 Y7)，每数值8bit
         /// </summary>
         YUV411 = 3,
 
         /// <summary>
-        /// YUV420：无损编码，帧间独立
+        /// YUV420：无损编码，帧间独立，格式为每2x2像素(U V Y00 Y01 Y10 Y11)，每数值8bit
         /// </summary>
         YUV420 = 4,
 
@@ -802,12 +802,12 @@ namespace ASEva
         H265 = 5,
 
         /// <summary>
-        /// YUV422：无损编码，帧间独立
+        /// YUV422：无损编码，帧间独立，格式为每2像素(Y0 U Y1 V)，每数值8bit
         /// </summary>
         YUV422 = 6,
 
         /// <summary>
-        /// RAW：自定义原始数据
+        /// RAW：无损编码，帧间独立，格式为奇数行BG，偶数行GR，每数值8bit
         /// </summary>
         RAW = 7,
     }
