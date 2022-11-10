@@ -2991,7 +2991,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.7.4) 获取数据通道上最近的若干帧时间戳
         /// </summary>
-        /// <param name="key">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始。视频协议名为video</param>
+        /// <param name="key">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始。视频协议名为video，音频协议名为audio</param>
         /// <returns>指定数据通道上最近的若干帧时间戳，若该通道未找到或最近无数据则返回null</returns>
         public static Timestamp[] GetChannelLatestTimestamps(String key)
         {

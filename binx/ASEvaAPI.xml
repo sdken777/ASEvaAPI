@@ -1887,7 +1887,7 @@
             <summary>
             (api:app=2.7.4) 获取数据通道上最近的若干帧时间戳
             </summary>
-            <param name="key">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始。视频协议名为video</param>
+            <param name="key">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始。视频协议名为video，音频协议名为audio</param>
             <returns>指定数据通道上最近的若干帧时间戳，若该通道未找到或最近无数据则返回null</returns>
         </member>
         <member name="T:ASEva.APIInfo">
@@ -3737,8 +3737,14 @@
         </member>
         <member name="P:ASEva.AppBasicInfo.AppRevision">
             <summary>
-            应用程序发行号，可为空（相同应用程序版本下的不同插件配置）
+            应用程序发行号，可为空（相同应用程序版本下可按不同配置发行）
             </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.AppRevisionShort">
+            <summary>
+            (api:app=2.6.20) 缩略的应用程序发行号，可为空（相同应用程序版本下可按不同配置发行）
+            </summary>
+            <value></value>
         </member>
         <member name="P:ASEva.AppBasicInfo.CoreVersion">
             <summary>
@@ -3934,6 +3940,12 @@
             [必须实现] 获取插件版本时被调用
             </summary>
             <returns>版本号</returns>
+        </member>
+        <member name="M:ASEva.Plugin.GetVersionReleaseDate">
+            <summary>
+            (api:app=2.6.20) [可选实现] 获取当前版本发布日期时被调用
+            </summary>
+            <returns>当前版本发布日期</returns>
         </member>
         <member name="M:ASEva.Plugin.GetWindowClasses">
             <summary>

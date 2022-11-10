@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 7, 4, 0); // 新增Agency.GetChannelSyncTable, GetChannelLatestTimestamps
+            return new Version(2, 7, 4, 1); // 合并2.6.20
         }
 
         /// <summary>
