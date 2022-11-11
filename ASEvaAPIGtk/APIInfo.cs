@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 5, 0); // 增加ConfigPanel.Close/CloseRequested
+            return new Version(2, 4, 5, 1); // DialogHelper.TopWindow排除Popup类型
         }
     }
 }

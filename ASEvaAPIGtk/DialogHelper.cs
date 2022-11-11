@@ -172,6 +172,7 @@ namespace ASEva.UIGtk
                 var windows = Window.ListToplevels();
                 for (int i = 0; i < windows.Length; i++)
                 {
+                    if (windows[i].WindowType == WindowType.Popup) continue;
                     if (MainWindow != null && windows[i].Equals(MainWindow)) continue;
                     if (OtherMainWindows != null && OtherMainWindows.Contains(windows[i])) continue;
                     if (windows[i].IsActive) return windows[i];

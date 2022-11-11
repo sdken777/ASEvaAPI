@@ -60,5 +60,8 @@
     <Reference Include="PortableSharpGL">
       <HintPath>..\binx\PortableSharpGL.dll</HintPath>
     </Reference>
+    <Reference Include="SkiaSharp">
+      <HintPath>..\binx\SkiaSharp.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
