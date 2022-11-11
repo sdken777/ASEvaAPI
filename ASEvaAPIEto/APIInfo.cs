@@ -21,7 +21,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 18, 0); // 优化CommonImage.ToSKImage
+            return new Version(2, 8, 18, 1); // 修正wayland下获取字体异常
         }
     }
 }

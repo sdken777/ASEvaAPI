@@ -40,7 +40,7 @@ namespace ASEva.UIEto
         {
             var f = App.DefaultFont(sizeRatio);
             if (Pixel.Scale == 1) return f;
-            else return FontLibrary.GetFont(f.Family, f.Size / Pixel.Scale, f.FontStyle, f.FontDecoration);
+            else return FontLibrary.GetFont(f, f.Size / Pixel.Scale);
         }
 
         /// <summary>
