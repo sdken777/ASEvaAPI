@@ -810,6 +810,16 @@ namespace ASEva
         /// RAW：无损编码，帧间独立，格式为奇数行BG，偶数行GR，每数值8bit
         /// </summary>
         RAW = 7,
+
+        /// <summary>
+        /// (api:app=2.7.5) RAW12：无损编码，帧间独立，格式为奇数行BG，偶数行GR，每数值12bit按小字序依次存储
+        /// </summary>
+        RAW12 = 8,
+
+        /// <summary>
+        /// (api:app=2.7.5) RAW14：无损编码，帧间独立，格式为奇数行BG，偶数行GR，每数值14bit按小字序依次存储
+        /// </summary>
+        RAW14 = 9,
     }
 
     /// <summary>
