@@ -125,11 +125,14 @@ namespace ASEva.UIEto
             {
                 defaultFont = handler.CreateDefaultFont();
             }
+
+            if (sizeRatio == 1) return defaultFont;
             sizeRatio = Math.Max(0.01f, sizeRatio);
+
             var targetSize = defaultFont.Size * sizeRatio;
             if (!newFontFailed)
             {
-                var font = FontLibrary.GetFont(defaultFont.Family, targetSize, defaultFont.FontStyle, defaultFont.FontDecoration);
+                var font = FontLibrary.GetFont(defaultFont, targetSize);
                 if (font != null) return font;
                 else newFontFailed = true;
             }

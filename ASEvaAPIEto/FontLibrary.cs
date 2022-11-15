@@ -7,6 +7,31 @@ namespace ASEva.UIEto
 {
     class FontLibrary
     {
+        public static Font GetFont(Font defaultFont, float size)
+        {
+            FontFamily family = null;
+            try { family = defaultFont.Family; }
+            catch (Exception) {}
+
+            if (family == null)
+            {
+                if (!libraryDefault.ContainsKey(size))
+                {
+                    try
+                    {
+                        var newFont = new Font(SystemFont.Default, size);
+                        libraryDefault[size] = newFont;
+                    }
+                    catch (Exception)
+                    {
+                        libraryDefault[size] = null;
+                    }
+                }
+                return libraryDefault[size];
+            }
+            else return GetFont(family, size, FontStyle.None, FontDecoration.None);
+        }
+
         public static Font GetFont(FontFamily family, float size, FontStyle style, FontDecoration decoration)
         {
             var key = family.Name + ":" + size + ":" + style.ToString() + ":" + decoration.ToString();
@@ -68,6 +93,7 @@ namespace ASEva.UIEto
         }
 
         private static Dictionary<String, Font> library = new Dictionary<String, Font>();
+        private static Dictionary<float, Font> libraryDefault = new Dictionary<float, Font>();
 
         private static SKFont skDefault = null;
         private static Dictionary<String, SKFont> skLibrary = new Dictionary<String, SKFont>();
