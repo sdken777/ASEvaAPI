@@ -41,6 +41,7 @@ namespace ASEva.UIGtk
             platform.Add<Form.IHandler>(() => new FormHandler());
             platform.Add<Slider.IHandler>(() => new SliderHandler());
             platform.Add<GridView.IHandler>(() => new GridViewHandler());
+            platform.Add<GroupBox.IHandler>(() => new GroupBoxHandler());
             var app = new Application(platform);
 
             ScreensHandler.TestLegacy();

@@ -1,0 +1,64 @@
+using Eto.Forms;
+using Eto.Drawing;
+using Eto.GtkSharp;
+using Eto.GtkSharp.Forms;
+
+namespace ASEva.UIGtk
+{
+	class GroupBoxHandler : GtkPanel<Gtk.Frame, GroupBox, GroupBox.ICallback>, GroupBox.IHandler
+	{
+		public GroupBoxHandler ()
+		{
+			Control = new Gtk.Frame ();
+			Control.LabelXalign = 0.5f;
+		}
+
+		protected override Gtk.Widget FontControl => Control.LabelWidget ?? new Gtk.Label();
+
+		public override string Text {
+			get { return textValue; }
+			set
+			{
+				textValue = value;
+				var needsFont = Control.LabelWidget == null && Font != null;
+				Control.Label = " " + textValue + " ";
+				if (needsFont)
+					Control.LabelWidget?.SetFont(Font.ToPango());
+			}
+		}
+
+		private string textValue = "";
+
+		public override Size ClientSize {
+			get {
+				if (Control.Visible && Control.Child != null)
+					return Control.Child.Allocation.Size.ToEto ();
+				else {
+					var label = Control.LabelWidget;
+					var size = Size;
+					size.Height -= label.Allocation.Height + 10;
+					size.Width -= 10;
+					return size;
+				}
+			}
+			set {
+				var label = Control.LabelWidget;
+				var size = value;
+				size.Height += label.Allocation.Height + 10;
+				size.Width += 10;
+				Size = size;
+			}
+		}
+
+		protected override void SetContainerContent(Gtk.Widget content)
+		{
+			Control.Add(content);
+		}
+
+		public Color TextColor
+		{
+			get { return Control.LabelWidget.GetForeground(); }
+			set { Control.LabelWidget.SetForeground(value); }
+		}
+	}
+}

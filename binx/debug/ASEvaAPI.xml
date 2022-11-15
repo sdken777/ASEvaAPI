@@ -814,6 +814,12 @@
             <param name="tolerance">可容忍最近多少毫秒（现实时间）无数据</param>
             <returns>返回各通道的数据状态，key为通道ID</returns>
         </member>
+        <member name="M:ASEva.Agency.GetChannelSyncTable">
+            <summary>
+            (api:app=2.7.4) 获取所有通道的时间同步状态
+            </summary>
+            <returns>返回各通道的时间同步状态，key为通道ID</returns>
+        </member>
         <member name="M:ASEva.Agency.SetControlFlag(System.String,System.Boolean)">
             <summary>
             设置独占控制模式（在独占控制模式下，其他控制者的操作将被禁用）
@@ -1877,9 +1883,16 @@
             </summary>
             <returns>每秒增加的CPU计数</returns>
         </member>
+        <member name="M:ASEva.Agency.GetChannelLatestTimestamps(System.String)">
+            <summary>
+            (api:app=2.7.4) 获取数据通道上最近的若干帧时间戳
+            </summary>
+            <param name="key">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始。视频协议名为video，音频协议名为audio</param>
+            <returns>指定数据通道上最近的若干帧时间戳，若该通道未找到或最近无数据则返回null</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.7.0
+            version=2.7.5
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3724,8 +3737,14 @@
         </member>
         <member name="P:ASEva.AppBasicInfo.AppRevision">
             <summary>
-            应用程序发行号，可为空（相同应用程序版本下的不同插件配置）
+            应用程序发行号，可为空（相同应用程序版本下可按不同配置发行）
             </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.AppRevisionShort">
+            <summary>
+            (api:app=2.6.20) 缩略的应用程序发行号，可为空（相同应用程序版本下可按不同配置发行）
+            </summary>
+            <value></value>
         </member>
         <member name="P:ASEva.AppBasicInfo.CoreVersion">
             <summary>
@@ -3921,6 +3940,12 @@
             [必须实现] 获取插件版本时被调用
             </summary>
             <returns>版本号</returns>
+        </member>
+        <member name="M:ASEva.Plugin.GetVersionReleaseDate">
+            <summary>
+            (api:app=2.6.20) [可选实现] 获取当前版本发布日期时被调用
+            </summary>
+            <returns>当前版本发布日期</returns>
         </member>
         <member name="M:ASEva.Plugin.GetWindowClasses">
             <summary>
@@ -4149,9 +4174,19 @@
             默认构造函数
             </summary>
         </member>
+        <member name="M:ASEva.SessionIdentifier.FromString(System.String)">
+            <summary>
+            (api:app=2.7.2) 通过字符串创建
+            </summary>
+        </member>
         <member name="M:ASEva.SessionIdentifier.FromDateTime(System.DateTime)">
             <summary>
             通过日期时间创建
+            </summary>
+        </member>
+        <member name="M:ASEva.SessionIdentifier.IsValid">
+            <summary>
+            (api:app=2.7.3) 是否有效
             </summary>
         </member>
         <member name="M:ASEva.SessionIdentifier.ToDateTime">
@@ -4234,6 +4269,11 @@
             (api:app=2.7.0) 时间戳
             </summary>
         </member>
+        <member name="P:ASEva.Sample.Session">
+            <summary>
+            (api:app=2.7.2) 所属Session标识符
+            </summary>
+        </member>
         <member name="P:ASEva.Sample.Base">
             <summary>
             所属session ID（注意，set操作将清除Session无关时间信息）
@@ -4288,6 +4328,13 @@
             <param name="session">所属session ID</param>
             <param name="offset">时间偏置，单位秒</param>
             <param name="timeInfo">Session无关时间信息</param>
+            <param name="timeline">在时间线上的位置</param>
+        </member>
+        <member name="M:ASEva.Sample.SetTime(ASEva.Timestamp,System.Double)">
+            <summary>
+            (api:app=2.7.2) 设置当前样本的时间戳和时间线位置
+            </summary>
+            <param name="timestamp">时间戳</param>
             <param name="timeline">在时间线上的位置</param>
         </member>
         <member name="M:ASEva.Sample.SetTime(ASEva.Sample)">
@@ -5782,37 +5829,62 @@
         </member>
         <member name="T:ASEva.VideoInputCodec">
             <summary>
-            (api:app=2.0.0) 视频编码格式
+            (api:app=2.0.0) 已弃用，应使用 ASEva.VideoDataCodec
             </summary>
         </member>
-        <member name="F:ASEva.VideoInputCodec.Invalid">
+        <member name="T:ASEva.VideoDataCodec">
+            <summary>
+            (api:app=2.7.1) 视频编码格式
+            </summary>
+        </member>
+        <member name="F:ASEva.VideoDataCodec.Invalid">
             <summary>
             无效
             </summary>
         </member>
-        <member name="F:ASEva.VideoInputCodec.MJPEG">
+        <member name="F:ASEva.VideoDataCodec.MJPEG">
             <summary>
             MJPEG：有损编码，帧间独立
             </summary>
         </member>
-        <member name="F:ASEva.VideoInputCodec.H264">
+        <member name="F:ASEva.VideoDataCodec.H264">
             <summary>
             H.264：有损编码，帧间依赖
             </summary>
         </member>
-        <member name="F:ASEva.VideoInputCodec.YUV411">
+        <member name="F:ASEva.VideoDataCodec.YUV411">
             <summary>
-            YUV411：无损编码，帧间独立
+            YUV411：无损编码，帧间独立，格式为每8像素(U0 Y0 V0 Y1 U4 Y2 V4 Y3 Y4 Y5 Y6 Y7)，每数值8bit
             </summary>
         </member>
-        <member name="F:ASEva.VideoInputCodec.YUV420">
+        <member name="F:ASEva.VideoDataCodec.YUV420">
             <summary>
-            YUV420：无损编码，帧间独立
+            YUV420：无损编码，帧间独立，格式为每2x2像素(U V Y00 Y01 Y10 Y11)，每数值8bit
             </summary>
         </member>
-        <member name="F:ASEva.VideoInputCodec.H265">
+        <member name="F:ASEva.VideoDataCodec.H265">
             <summary>
             H.265：有损编码，帧间依赖
+            </summary>
+        </member>
+        <member name="F:ASEva.VideoDataCodec.YUV422">
+            <summary>
+            YUV422：无损编码，帧间独立，格式为每2像素(Y0 U Y1 V)，每数值8bit
+            </summary>
+        </member>
+        <member name="F:ASEva.VideoDataCodec.RAW">
+            <summary>
+            RAW：无损编码，帧间独立，格式为奇数行BG，偶数行GR，每数值8bit
+            </summary>
+        </member>
+        <member name="F:ASEva.VideoDataCodec.RAW12">
+            <summary>
+            (api:app=2.7.5) RAW12：无损编码，帧间独立，格式为奇数行BG，偶数行GR，每数值12bit按小字序依次存储
+            </summary>
+        </member>
+        <member name="F:ASEva.VideoDataCodec.RAW14">
+            <summary>
+            (api:app=2.7.5) RAW14：无损编码，帧间独立，格式为奇数行BG，偶数行GR，每数值14bit按小字序依次存储
             </summary>
         </member>
         <member name="T:ASEva.VideoInputMode">
@@ -5820,9 +5892,54 @@
             (api:app=2.0.0) 视频输入模式
             </summary>
         </member>
+        <member name="P:ASEva.VideoInputMode.InputCodec">
+            <summary>
+            (api:app=2.7.1) 视频输入编码格式
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoInputMode.Size">
+            <summary>
+            视频尺寸
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoInputMode.Codec">
+            <summary>
+            已弃用，应使用 ASEva.VideoInputMode.InputCodec
+            </summary>
+        </member>
+        <member name="T:ASEva.VideoOutputMode">
+            <summary>
+            (api:app=2.7.1) 视频输出模式
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoOutputMode.OutputCodec">
+            <summary>
+            视频输出编码格式
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoOutputMode.Size">
+            <summary>
+            视频尺寸
+            </summary>
+        </member>
         <member name="T:ASEva.VideoDeviceInfo">
             <summary>
             (api:app=2.0.0) 视频设备信息
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoDeviceInfo.HardwareInfo">
+            <summary>
+            硬件信息描述
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoDeviceInfo.InputModes">
+            <summary>
+            支持的视频输入格式列表
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoDeviceInfo.OutputModes">
+            <summary>
+            (api:app=2.7.1) 支持的视频输出格式列表
             </summary>
         </member>
         <member name="T:ASEva.VideoFrameGetScale">
