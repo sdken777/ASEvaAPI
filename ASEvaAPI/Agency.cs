@@ -227,6 +227,9 @@ namespace ASEva
         bool GetChannelMonitoringFlag(String key);
         void SetChannelMonitoringFlag(String key, bool monitoring);
         String[] GetAllChannelMonitoringKeys();
+        bool GetChannelGuestSyncFlag(String key);
+        void SetChannelGuestSyncFlag(String key, bool guestSync);
+        String[] GetAllChannelGuestSyncKeys();
         bool GetBusChannelStatus(int channel, uint? toleranceMillisecond);
         bool GetVideoChannelStatus(int channel, uint? toleranceMillisecond, out List<double> interval, out List<double> delay);
         bool GetAudioChannelStatus(uint? toleranceMillisecond, out List<double> interval, out List<double> delay);
@@ -2461,7 +2464,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) 获取指定通道的监控配置
         /// </summary>
-        /// <param name="id">通道ID</param>
+        /// <param name="id">通道ID，如：bus1, video0, audio, raw:xxx, sample:xxx</param>
         /// <returns>是否监控</returns>
         public static bool GetChannelMonitoringFlag(String id)
         {
@@ -2471,7 +2474,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) 设置指定通道的监控配置
         /// </summary>
-        /// <param name="id">通道ID</param>
+        /// <param name="id">通道ID，如：bus1, video0, audio, raw:xxx, sample:xxx</param>
         /// <param name="monitoring">是否监控，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
         public static void SetChannelMonitoringFlag(String id, bool monitoring)
         {
@@ -2485,6 +2488,35 @@ namespace ASEva
         public static string[] GetAllChannelMonitoringKeys()
         {
             return Handler.GetAllChannelMonitoringKeys();
+        }
+
+        /// <summary>
+        /// (api:app=2.7.6) 获取指定通道的客机同步配置
+        /// </summary>
+        /// <param name="id">通道ID，如：bus1, video0, raw:xxx</param>
+        /// <returns>客机是否与授时服务器同步</returns>
+        public static bool GetChannelGuestSyncFlag(String id)
+        {
+            return Handler.GetChannelGuestSyncFlag(id);
+        }
+
+        /// <summary>
+        /// (api:app=2.7.6) 设置指定通道的客机同步配置
+        /// </summary>
+        /// <param name="id">通道ID，如：bus1, video0, raw:xxx</param>
+        /// <param name="guestSync">客机是否与授时服务器同步</param>
+        public static void SetChannelGuestSyncFlag(String id, bool guestSync)
+        {
+            Handler.SetChannelGuestSyncFlag(id, guestSync);
+        }
+
+        /// <summary>
+        /// (api:app=2.7.6) 获取客机已同步的所有通道ID
+        /// </summary>
+        /// <returns>客机已同步的所有通道ID列表</returns>
+        public static string[] GetAllChannelGuestSyncKeys()
+        {
+            return Handler.GetAllChannelGuestSyncKeys();
         }
 
         /// <summary>

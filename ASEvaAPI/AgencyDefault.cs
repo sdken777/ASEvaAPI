@@ -1304,5 +1304,19 @@ namespace ASEva
         {
             return null;
         }
+
+        public bool GetChannelGuestSyncFlag(string key)
+        {
+            return false;
+        }
+
+        public void SetChannelGuestSyncFlag(string key, bool guestSync)
+        {
+        }
+
+        public string[] GetAllChannelGuestSyncKeys()
+        {
+            return null;
+        }
     }
 }
