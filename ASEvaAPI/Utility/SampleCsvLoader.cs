@@ -57,6 +57,33 @@ namespace ASEva.Utility
                             break;
                         }
                     }
+                    for (int i = 1; i < titleComps.Length; i++)
+                    {
+                        if (loader.syncStateIndex == 0 && titleComps[i] == "Sync State")
+                        {
+                            loader.syncStateIndex = i;
+                        }
+                        if (loader.cpuTickIndex == 0 && titleComps[i] == "CPU Tick")
+                        {
+                            loader.cpuTickIndex = i;
+                        }
+                        if (loader.hostPosixIndex == 0 && titleComps[i] == "Host Posix")
+                        {
+                            loader.hostPosixIndex = i;
+                        }
+                        if (loader.guestPosixIndex == 0 && titleComps[i] == "Guest Posix")
+                        {
+                            loader.guestPosixIndex = i;
+                        }
+                        if (loader.serverPosixIndex == 0 && titleComps[i] == "Server Posix")
+                        {
+                            loader.serverPosixIndex = i;
+                        }
+                        if (loader.gnssPosixIndex == 0 && titleComps[i] == "Gnss Posix")
+                        {
+                            loader.gnssPosixIndex = i;
+                        }
+                    }
                     if (loader.timeColumnIndex > 0)
                     {
                         if (titleComps.Length > loader.timeColumnIndex + 1)
@@ -122,8 +149,21 @@ namespace ASEva.Utility
                 double offset;
                 if (!Double.TryParse(comps[timeColumnIndex], out offset)) return null;
 
+                TimeOffsetSync syncState = TimeOffsetSync.None;
+                ulong cpuTick = 0, hostPosix = 0, guestPosix = 0, serverPosix = 0, gnssPosix = 0;
+                if (syncStateIndex > 0)
+                {
+                    if (comps[syncStateIndex] == "SERV") syncState = TimeOffsetSync.Server;
+                    else if (comps[syncStateIndex] == "GNSS") syncState = TimeOffsetSync.Gnss;
+                }
+                if (cpuTickIndex > 0) UInt64.TryParse(comps[cpuTickIndex], out cpuTick);
+                if (hostPosixIndex > 0) UInt64.TryParse(comps[hostPosixIndex], out hostPosix);
+                if (guestPosixIndex > 0) UInt64.TryParse(comps[guestPosixIndex], out guestPosix);
+                if (serverPosixIndex > 0) UInt64.TryParse(comps[serverPosixIndex], out serverPosix);
+                if (gnssPosixIndex > 0) UInt64.TryParse(comps[gnssPosixIndex], out gnssPosix);
+
                 var sample = new GeneralSample();
-                sample.SetTime(session, offset, null, offset);
+                sample.SetTime(session, offset, new IndependentTimeInfo(syncState, cpuTick, hostPosix, guestPosix, serverPosix, gnssPosix), offset);
                 sample.Channel = channel;
                 sample.NumberOfSignificants = comps.Length - (timeColumnIndex + 1);
                 sample.Protocol = protocol;
@@ -158,6 +198,12 @@ namespace ASEva.Utility
         private int? channel = null;
         private String[] title = null;
         private int timeColumnIndex = 0; // 0表示无效
+        private int  syncStateIndex = 0;
+        private int cpuTickIndex = 0;
+        private int hostPosixIndex = 0;
+        private int guestPosixIndex = 0;
+        private int serverPosixIndex = 0;
+        private int gnssPosixIndex = 0;
 
         private SampleCsvLoader()
         { }
@@ -185,6 +231,12 @@ namespace ASEva.Utility
                 }
 
                 var timeColumnIndex = 0;
+                var syncStateIndex = 0;
+                var cpuTickIndex = 0;
+                var hostPosixIndex = 0;
+                var guestPosixIndex = 0;
+                var serverPosixIndex = 0;
+                var gnssPosixIndex = 0;
 
                 reader = new StreamReader(file);
                 var firstLine = reader.ReadLine();
@@ -202,6 +254,33 @@ namespace ASEva.Utility
                         {
                             timeColumnIndex = i;
                             break;
+                        }
+                    }
+                    for (int i = 1; i < titleComps.Length; i++)
+                    {
+                        if (syncStateIndex == 0 && titleComps[i] == "Sync State")
+                        {
+                            syncStateIndex = i;
+                        }
+                        if (cpuTickIndex == 0 && titleComps[i] == "CPU Tick")
+                        {
+                            cpuTickIndex = i;
+                        }
+                        if (hostPosixIndex == 0 && titleComps[i] == "Host Posix")
+                        {
+                            hostPosixIndex = i;
+                        }
+                        if (guestPosixIndex == 0 && titleComps[i] == "Guest Posix")
+                        {
+                            guestPosixIndex = i;
+                        }
+                        if (serverPosixIndex == 0 && titleComps[i] == "Server Posix")
+                        {
+                            serverPosixIndex = i;
+                        }
+                        if (gnssPosixIndex == 0 && titleComps[i] == "Gnss Posix")
+                        {
+                            gnssPosixIndex = i;
                         }
                     }
                 }
@@ -226,8 +305,21 @@ namespace ASEva.Utility
                     double offset;
                     if (!Double.TryParse(comps[timeColumnIndex], out offset)) continue;
 
+                    TimeOffsetSync syncState = TimeOffsetSync.None;
+                    ulong cpuTick = 0, hostPosix = 0, guestPosix = 0, serverPosix = 0, gnssPosix = 0;
+                    if (syncStateIndex > 0)
+                    {
+                        if (comps[syncStateIndex] == "SERV") syncState = TimeOffsetSync.Server;
+                        else if (comps[syncStateIndex] == "GNSS") syncState = TimeOffsetSync.Gnss;
+                    }
+                    if (cpuTickIndex > 0) UInt64.TryParse(comps[cpuTickIndex], out cpuTick);
+                    if (hostPosixIndex > 0) UInt64.TryParse(comps[hostPosixIndex], out hostPosix);
+                    if (guestPosixIndex > 0) UInt64.TryParse(comps[guestPosixIndex], out guestPosix);
+                    if (serverPosixIndex > 0) UInt64.TryParse(comps[serverPosixIndex], out serverPosix);
+                    if (gnssPosixIndex > 0) UInt64.TryParse(comps[gnssPosixIndex], out gnssPosix);
+
                     var sample = new GeneralSample();
-                    sample.SetTime(session, offset, null, offset);
+                    sample.SetTime(session, offset, new IndependentTimeInfo(syncState, cpuTick, hostPosix, guestPosix, serverPosix, gnssPosix), offset);
                     sample.Channel = channel;
                     sample.NumberOfSignificants = comps.Length - (timeColumnIndex + 1);
                     sample.Protocol = protocol;
