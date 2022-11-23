@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 6, 20, 0); // 新增Plugin.GetVersionReleaseDate和AppBasicInfo.AppRevisionShort
+            return new Version(2, 6, 20, 1); // 修正HistLineSample.Name显示小数问题
         }
 
         /// <summary>
