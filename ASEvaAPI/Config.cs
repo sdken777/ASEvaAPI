@@ -302,61 +302,61 @@ namespace ASEva
         public virtual ConfigStatus[] GetChildConfigStatus() { return null; }
 
         /// <summary>
-        /// [可选实现] 获取输出的样本标题集合时被调用
+        /// [ProcessorClass/NativeClass可选实现] 获取输出的样本标题集合时被调用
         /// </summary>
         /// <returns>样本标题集合，key为样本ID，value为标题描述</returns>
         public virtual Dictionary<String, GeneralSampleTitle> GetProcessorOutputSampleTitles() { return null; }
 
         /// <summary>
-        /// [可选实现] 获取输出的场景标题集合时被调用
+        /// [ProcessorClass可选实现] 获取输出的场景标题集合时被调用
         /// </summary>
         /// <returns>场景标题集合，key为场景ID，value为标题描述</returns>
         public virtual Dictionary<String, SceneTitle> GetProcessorOutputSceneTitles() { return null; }
 
         /// <summary>
-        /// [可选实现] 获得该组件默认类别下的所有输出信号的名称时被调用
+        /// [ProcessorClass/NativeClass可选实现] 获得该组件默认类别下的所有输出信号的名称时被调用
         /// </summary>
         /// <returns>信号名称列表</returns>
         public virtual String[] GetProcessorOutputSignalNames() { return null; }
 
         /// <summary>
-        /// [可选实现] 获得该组件非默认类别下的所有输出信号的名称时被调用
+        /// [ProcessorClass可选实现] 获得该组件非默认类别下的所有输出信号的名称时被调用
         /// </summary>
         /// <returns>信号名称列表，key为类别名称</returns>
         public virtual Dictionary<String, String[]> GetProcessorOutputSignalNameTable() { return null; }
 
         /// <summary>
-        /// [可选实现] 获得该组件所有输出图表的定义时被调用
+        /// [ProcessorClass可选实现] 获得该组件所有输出图表的定义时被调用
         /// </summary>
         /// <returns>图表定义列表</returns>
         public virtual GraphDefinition[] GetProcessorOutputGraphDefinitions() { return null; }
 
         /// <summary>
-        /// [可选实现] 获取数据处理需要用到的所有信号打包配置时被调用
+        /// [ProcessorClass/NativeClass可选实现] 获取数据处理需要用到的所有信号打包配置时被调用
         /// </summary>
         /// <returns>信号打包配置列表</returns>
         public virtual List<SignalPackConfig> GetProcessorRelatedSignalPackings() { return null; }
 
         /// <summary>
-        /// [可选实现] 获取所有输出样本通道的别名列表时被调用
+        /// [ProcessorClass/NativeClass可选实现] 获取所有输出样本通道的别名列表时被调用
         /// </summary>
         /// <returns>通道别名列表</returns>
         public virtual List<ChannelAlias> GetChannelAliasList() { return null; }
 
         /// <summary>
-        /// [可选实现] 获取所有使用的视频通道时被调用
+        /// [ProcessorClass/NativeClass可选实现] 获取所有使用的视频通道时被调用
         /// </summary>
         /// <returns>所有使用的视频通道</returns>
         public virtual List<UsingVideoChannel> GetUsingVideoChannels() { return null; }
 
         /// <summary>
-        /// (api:app=2.2.1) [可选实现] 获取文件写入需要的所有数据类型
+        /// (api:app=2.2.1) [NativeClass可选实现] 获取文件写入需要的所有数据类型
         /// </summary>
         /// <returns>文件写入需要的所有数据类型</returns>
         public virtual List<RecordDataType> GetRecordDataTypes() { return null; }
 
         /// <summary>
-        /// (api:app=2.3.2) [可选实现] 获取是否会合法的导致极低（甚至停滞）的回放速度
+        /// (api:app=2.3.2) [ProcessorClass/NativeClass可选实现] 获取是否会合法的导致极低（甚至停滞）的回放速度
         /// </summary>
         /// <returns>是否会合法的导致极低（甚至停滞）的回放速度</returns>
         public virtual bool MayCauseLowSpeed() { return false; }

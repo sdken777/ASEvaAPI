@@ -1318,5 +1318,14 @@ namespace ASEva
         {
             return null;
         }
+
+        public void SendRawData(ulong cpuTick, string protocol, double[] values, byte[] binary)
+        {
+        }
+
+        public Dictionary<string, DeviceClassInfo> GetDeviceClassTable()
+        {
+            return null;
+        }
     }
 }

@@ -7,7 +7,7 @@
  * \n
  * 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph \n
  * \n
- * 本文档对应API版本：2.7.7
+ * 本文档对应API版本：2.8.0
  */
 
 using System;
@@ -16,7 +16,7 @@ using System.Diagnostics;
 namespace ASEva
 {
     /// <summary>
-    /// version=2.7.7
+    /// version=2.8.0
     /// </summary>
     public class APIInfo
     {
@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 7, 7, 0); // SampleCsvLoader支持读取session无关时间戳
+            return new Version(2, 8, 0, 0); // 新增DeviceClass。增加带cpuTick信息的Agency.SendRawData。新增Agency.GetDeviceClassTable
         }
 
         /// <summary>

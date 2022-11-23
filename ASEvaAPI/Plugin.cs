@@ -51,6 +51,12 @@ namespace ASEva
         public virtual TaskClass[] GetTaskClasses() { return null; }
 
         /// <summary>
+        /// (api:app=2.8.0) [可选实现] 获取插件包含的所有设备组件的定义对象时被调用
+        /// </summary>
+        /// <returns>设备组件定义对象的列表</returns>
+        public virtual DeviceClass[] GetDeviceClasses() { return null; }
+
+        /// <summary>
         /// (api:app=2.3.0) [可选实现] 获取插件包含的主流程时被调用
         /// </summary>
         /// <returns>主流程对象</returns>

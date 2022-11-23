@@ -1406,6 +1406,27 @@ namespace ASEva
     }
 
     /// <summary>
+    /// (api:app=2.8.0) 设备组件信息
+    /// </summary>
+    public class DeviceClassInfo
+    {
+        /// <summary>
+        /// 所属插件ID
+        /// </summary>
+        public String OwnerPluginID { get; set; }
+
+        /// <summary>
+        /// 组件ID
+        /// </summary>
+        public String ID { get; set; }
+
+        /// <summary>
+        /// 设备组件名称
+        /// </summary>
+        public String Title { get; set; }
+    }
+
+    /// <summary>
     /// (api:app=2.3.0) 独立任务组件信息
     /// </summary>
     public class TaskClassInfo

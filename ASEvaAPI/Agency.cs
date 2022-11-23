@@ -55,6 +55,7 @@ namespace ASEva
         void SendBusMessage(String messageID, uint? interval);
         void SendBusMessage(String messageID, uint? interval, out byte[] data);
         void SendRawData(String protocol, double[] values, byte[] binary);
+        void SendRawData(ulong cpuTick, String protocol, double[] values, byte[] binary);
         void SendManualTrigger(int channel);
         String GetDataPath();
         String[] GetSubDataPaths();
@@ -186,6 +187,7 @@ namespace ASEva
         Dictionary<String, DialogClassInfo> GetDialogClassTable();
         Dictionary<String, ProcessorClassInfo> GetProcessorClassTable();
         Dictionary<String, NativeClassInfo> GetNativeClassTable();
+        Dictionary<String, DeviceClassInfo> GetDeviceClassTable();
         Dictionary<String, TaskClassInfo> GetTaskClassTable();
         WindowClassInfo RegisterTransformWindowClass(String windowClassID, String config);
         WindowClassInfo RegisterTransformWindowClass(String windowClassID, WindowClass transformWindowClass, String defaultConfig);
@@ -711,7 +713,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 添加想要采集的原始数据信息（仅在线模式可用）
+        /// 发送已获取的原始数据信息（仅在线模式可用）
         /// </summary>
         /// <param name="protocol">原始数据协议名称，对应input/raw/raw.csv首列文字</param>
         /// <param name="values">数值数据</param>
@@ -719,6 +721,18 @@ namespace ASEva
         public static void SendRawData(String protocol, double[] values, byte[] binary)
         {
             Handler.SendRawData(protocol, values, binary);
+        }
+
+        /// <summary>
+        /// (api:app=2.8.0) 发送已获取的原始数据信息（仅在线模式可用）
+        /// </summary>
+        /// <param name="cpuTick">数据的到达时CPU计数</param>
+        /// <param name="protocol">原始数据协议名称，对应input/raw/raw.csv首列文字</param>
+        /// <param name="values">数值数据</param>
+        /// <param name="binary">二进制数据</param>
+        public static void SendRawData(ulong cpuTick, String protocol, double[] values, byte[] binary)
+        {
+            Handler.SendRawData(cpuTick, protocol, values, binary);
         }
 
         /// <summary>
@@ -2114,6 +2128,15 @@ namespace ASEva
         public static Dictionary<String, TaskClassInfo> GetTaskClassTable()
         {
             return Handler.GetTaskClassTable();
+        }
+
+        /// <summary>
+        /// (api:app=2.8.0) 获取设备组件信息表
+        /// </summary>
+        /// <returns>设备组件信息表，键为组件ID</returns>
+        public static Dictionary<String, DeviceClassInfo> GetDeviceClassTable()
+        {
+            return Handler.GetDeviceClassTable();
         }
 
         /// <summary>
