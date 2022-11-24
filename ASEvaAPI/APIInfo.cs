@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 0, 0); // 新增DeviceClass。增加带cpuTick信息的Agency.SendRawData。新增Agency.GetDeviceClassTable
+            return new Version(2, 8, 0, 1); // 修正HistLineSample.Name显示小数问题
         }
 
         /// <summary>

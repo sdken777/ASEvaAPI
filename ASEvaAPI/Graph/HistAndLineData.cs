@@ -373,12 +373,16 @@ namespace ASEva.Graph
             }
             else
             {
-                double bas = 0, step = 0;
-                Double.TryParse(Definition.Config[5], out bas);
-                Double.TryParse(Definition.Config[6], out step);
+                double baseDouble = 0, stepDouble = 0;
+                Double.TryParse(Definition.Config[5], out baseDouble);
+                Double.TryParse(Definition.Config[6], out stepDouble);
+                var baseDecimal = new Decimal(baseDouble);
+                var stepDecimal = new Decimal(stepDouble);
                 for (int i = 0; i < samples.Length; i++)
                 {
-                    samples[i].Name = (bas + i * step) + "~" + (bas + (i + 1) * step);
+                    var lower = baseDecimal + stepDecimal * i;
+                    var upper = baseDecimal + stepDecimal * (i + 1);
+                    samples[i].Name = lower + "~" + upper;
                 }
             }
 
