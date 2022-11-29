@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.8.18
+            version=2.9.0
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -1166,6 +1166,87 @@
             </summary>
             <param name="window">窗口</param>
             <param name="screen">目标屏幕，空表示主屏幕</param>
+        </member>
+        <member name="T:ASEva.UIEto.FlowLayout">
+            <summary>
+            (api:eto=2.9.0) 沿纵向添加的控件列表
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.AddControl(Eto.Forms.Control,System.Int32)">
+            <summary>
+            在底部添加控件
+            </summary>
+            <param name="control">目标控件，若已存在则不添加</param>
+            <param name="logicalHeight">目标控件的高度，至少为4</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.InsertControl(System.Int32,Eto.Forms.Control,System.Int32)">
+            <summary>
+            在指定序号位置添加控件
+            </summary>
+            <param name="index">指定序号位置，超出范围则添加至顶部或底部</param>
+            <param name="control">目标控件，若已存在则不添加</param>
+            <param name="logicalHeight">目标控件的高度，至少为4</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.GetControlCount">
+            <summary>
+            获取控件个数
+            </summary>
+            <returns>控件个数</returns>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.GetControlIndex(Eto.Forms.Control)">
+            <summary>
+            获取指定控件的序号位置
+            </summary>
+            <param name="control">目标控件</param>
+            <returns>序号位置，若不存在则返回-1</returns>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.GetControlAt(System.Int32)">
+            <summary>
+            获取指定序号位置上的控件
+            </summary>
+            <param name="index">指定序号位置</param>
+            <returns>目标控件，若超出范围则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.RemoveControl(System.Int32)">
+            <summary>
+            移除指定序号位置处的控件
+            </summary>
+            <param name="index">指定序号位置，超出范围则不移除</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.RemoveAllControls">
+            <summary>
+            移除所有控件
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.SetControlVisible(System.Int32,System.Boolean)">
+            <summary>
+            设置指定序号位置处的控件是否可见
+            </summary>
+            <param name="index">指定序号位置，超出范围则忽略</param>
+            <param name="visible">是否可见</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.SelectControl(System.Int32,System.Boolean)">
+            <summary>
+            选中指定序号位置处的控件
+            </summary>
+            <param name="index">指定序号位置，超出范围则忽略</param>
+            <param name="invokeEvent">新选中后是否触发ControlSelected事件</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.GetSelectedControlIndex">
+            <summary>
+            获取选中控件所在序号位置
+            </summary>
+            <returns>序号位置，若无选中则返回-1</returns>
+        </member>
+        <member name="E:ASEva.UIEto.FlowLayout.ControlSelected">
+            <summary>
+            新选中控件后触发事件
+            </summary>
         </member>
         <member name="T:ASEva.UIEto.TextAnchor">
             <summary>

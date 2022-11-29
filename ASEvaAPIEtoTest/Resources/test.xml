@@ -32,13 +32,33 @@
     <en>Dialog with fixed border</en>
     <ch>带固定边框对话框</ch>
   </t>
-  <t id="basic-dynamic-add">
+  <t id="basic-flow-add">
     <en>Add</en>
     <ch>添加项</ch>
   </t>
-  <t id="basic-dynamic-remove">
+  <t id="basic-flow-hide">
+    <en>Hide</en>
+    <ch>隐藏项</ch>
+  </t>
+  <t id="basic-flow-insert">
+    <en>Insert</en>
+    <ch>插入项</ch>
+  </t>
+  <t id="basic-flow-remove">
     <en>Remove</en>
     <ch>移除项</ch>
+  </t>
+  <t id="basic-flow-select">
+    <en>Select</en>
+    <ch>选中项</ch>
+  </t>
+  <t id="basic-flow-selected">
+    <en>Selected item {0}</en>
+    <ch>已选中项{0}</ch>
+  </t>
+  <t id="basic-flow-show">
+    <en>Show</en>
+    <ch>显示项</ch>
   </t>
   <t id="basic-freeze-size">
     <en>Freeze size</en>

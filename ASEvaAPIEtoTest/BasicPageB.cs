@@ -25,8 +25,8 @@ namespace ASEvaAPIEtoTest
             var treeView = layoutPanel1.AddControl(new TreeGridView(), true) as TreeGridView;
             initBasicTabPageBTreeView(treeView);
 
-            var layoutDynamicItems = panel2.SetContentAsColumnLayout();
-            initBasicTabPageBDynamicItems(layoutDynamicItems);
+            var layoutFlowItems = panel2.SetContentAsColumnLayout();
+            initBasicTabPageBFlowItems(layoutFlowItems);
         }
 
         private void initBasicTabPageBLists(StackLayout layout)
@@ -76,33 +76,55 @@ namespace ASEvaAPIEtoTest
             };
         }
 
-        // TODO: 增加专用控件
-        private void initBasicTabPageBDynamicItems(StackLayout layout)
+        private void initBasicTabPageBFlowItems(StackLayout layout)
         {
             var layoutButtons = layout.AddRowLayout();
-            var scrollBox = layout.AddControl(new Scrollable(), true) as Scrollable;
-            var layoutItems = scrollBox.SetContentAsColumnLayout(2, 2);
-
-            layoutButtons.AddButton(t["basic-dynamic-add"]).Click += delegate
+            var flowLayout = layout.AddControl(new FlowLayout(), true) as FlowLayout;
+            flowLayout.ControlSelected += delegate
             {
-                var panel = new Panel();
-                panel.BackgroundColor = Colors.LightYellow;
-                var table = panel.SetContentAsTableLayout();
-                var row = table.AddRow(true);
-                row.AddLabel(t.Format("basic-label-row", ++dynamicItemCount));
-                row.AddControl(new SearchBox(), true);
-                row = table.AddRow(true);
-                row.AddLabel(t.Format("basic-label-row", ++dynamicItemCount));
-                row.AddControl(new NumericStepper(), true);
-                layoutItems.AddControl(panel, false, 0, 80);
+                MessageBox.Show(t.Format("basic-flow-selected", flowLayout.GetSelectedControlIndex()));
             };
-            layoutButtons.AddSpace();
-            layoutButtons.AddButton(t["basic-dynamic-remove"]).Click += delegate
+
+            layoutButtons.AddLinkButton(t["basic-flow-add"]).Click += delegate
             {
-                if (layoutItems.Items.Count > 0) layoutItems.Items.RemoveAt(0);
+                flowLayout.AddControl(generateFlowItem(), 80);
+            };
+            layoutButtons.AddLinkButton(t["basic-flow-remove"]).Click += delegate
+            {
+                flowLayout.RemoveControl(flowLayout.GetControlCount() / 2);
+            };
+            layoutButtons.AddLinkButton(t["basic-flow-insert"]).Click += delegate
+            {
+                flowLayout.InsertControl(1, generateFlowItem(), 80);
+            };
+            layoutButtons.AddLinkButton(t["basic-flow-select"]).Click += delegate
+            {
+                flowLayout.SelectControl(0, false);
+            };
+            layoutButtons.AddLinkButton(t["basic-flow-show"]).Click += delegate
+            {
+                flowLayout.SetControlVisible(0, true);
+            };
+            layoutButtons.AddLinkButton(t["basic-flow-hide"]).Click += delegate
+            {
+                flowLayout.SetControlVisible(0, false);
             };
         }
 
-        private int dynamicItemCount = 0;
+        private Panel generateFlowItem()
+        {
+            var panel = new Panel();
+            panel.BackgroundColor = Colors.LightYellow;
+            var table = panel.SetContentAsTableLayout();
+            var row = table.AddRow(true);
+            row.AddLabel(t.Format("basic-label-row", ++flowItemCount));
+            row.AddControl(new SearchBox(), true);
+            row = table.AddRow(true);
+            row.AddLabel(t.Format("basic-label-row", ++flowItemCount));
+            row.AddControl(new NumericStepper(), true);
+            return panel;
+        }
+
+        private int flowItemCount = 0;
     }
 }
