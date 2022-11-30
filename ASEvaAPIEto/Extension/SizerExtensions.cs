@@ -89,7 +89,8 @@ namespace ASEva.UIEto
             int setWidth = width;
             var scale = Pixel.Scale;
             if (scale != 1) setWidth = (int)(width * scale);
-            control.Width = Math.Max(1, setWidth);
+            var targetWidth = Math.Max(1, setWidth);
+            if (control.Width != targetWidth) control.Width = targetWidth;
         }
 
         /// <summary>
@@ -102,7 +103,8 @@ namespace ASEva.UIEto
             int setHeight = height;
             var scale = Pixel.Scale;
             if (scale != 1) setHeight = (int)(height * scale);
-            control.Height = Math.Max(1, setHeight);
+            var targetHeight = Math.Max(1, setHeight);
+            if (control.Height != targetHeight) control.Height = targetHeight;
         }
 
         /// <summary>
@@ -121,7 +123,9 @@ namespace ASEva.UIEto
                 setWidth = (int)(width * scale);
                 setHeight = (int)(height * scale);
             }
-            control.Size = new Size(Math.Max(1, setWidth), Math.Max(1, setHeight));
+            var targetWidth = Math.Max(1, setWidth);
+            var targetHeight = Math.Max(1, setHeight);
+            if (control.Width != targetWidth || control.Height != targetHeight) control.Size = new Size(targetWidth, targetHeight);
         }
 
         /// <summary>

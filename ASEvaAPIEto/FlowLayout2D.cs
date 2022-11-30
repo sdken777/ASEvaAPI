@@ -322,6 +322,8 @@ namespace ASEva.UIEto
             }
             if (colIdentifiers.Count > 0) targetIdentifiers.Add(colIdentifiers);
 
+            mainLayout.SuspendLayout();
+
             if (curIdentifiers.Count > 0)
             {
                 int i = curIdentifiers.Count - 1;
@@ -337,6 +339,7 @@ namespace ASEva.UIEto
                         var curColIdentifiers = curIdentifiers[i];
                         var colLayout = mainLayout.Items[i].Control as StackLayout;
                         int j = curColIdentifiers.Count - 1;
+                        colLayout.SuspendLayout();
                         while (j >= 0)
                         {
                             if (!targetIdentifiers[i].Contains(curColIdentifiers[j]))
@@ -346,6 +349,7 @@ namespace ASEva.UIEto
                             }
                             j--;
                         }
+                        colLayout.ResumeLayout();
                     }
                     i--;
                 }
@@ -356,12 +360,14 @@ namespace ASEva.UIEto
                 if (i >= curIdentifiers.Count)
                 {
                     var colLayout = mainLayout.AddColumnLayout(false, 6);
+                    colLayout.SuspendLayout();
                     foreach (var identifier in targetIdentifiers[i])
                     {
                         var ctx = identifierMap[identifier];
                         ctx.Item.Control.SetLogicalWidth(controlWidth + 2);
                         colLayout.Items.Add(ctx.Item);
                     }
+                    colLayout.ResumeLayout();
                     curIdentifiers.Add(targetIdentifiers[i]);
                 }
                 else
@@ -369,6 +375,7 @@ namespace ASEva.UIEto
                     var curColIdentifiers = curIdentifiers[i];
                     var colLayout = mainLayout.Items[i].Control as StackLayout;
                     int insertIndex = 0;
+                    colLayout.SuspendLayout();
                     foreach (var identifier in targetIdentifiers[i])
                     {
                         var ctx = identifierMap[identifier];
@@ -390,8 +397,11 @@ namespace ASEva.UIEto
                         }
                         insertIndex++;
                     }
+                    colLayout.ResumeLayout();
                 }
             }
+
+            mainLayout.ResumeLayout();
         }
 
         public void AddControl(Control control, int logicalHeight)

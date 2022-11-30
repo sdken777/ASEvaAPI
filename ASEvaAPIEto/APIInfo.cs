@@ -21,7 +21,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 1, 0); // 新增FlowLayout2D
+            return new Version(2, 9, 1, 1); // 优化UpdateControlsLayout
         }
     }
 }
