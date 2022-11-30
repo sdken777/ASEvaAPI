@@ -8,7 +8,7 @@ namespace ASEva.UICoreWF
     /// <summary>
     /// (api:corewf=2.0.0) 图表显示控件基类
     /// </summary>
-    public partial class BaseGraph : UserControl
+    public partial class BaseGraph : UserControl, GraphPanel
     {
         public BaseGraph()
         {
@@ -149,6 +149,12 @@ namespace ASEva.UICoreWF
         protected void HandleGraphSelected()
         {
             if (GraphSelected != null) GraphSelected(this, null);
+        }
+
+        public void UpdateWithGraphData(GraphData data)
+        {
+            Data = data;
+            UpdateUIWithData();
         }
 
         private static Dictionary<int, Type> ControlTypeTable = new Dictionary<int, Type>();
