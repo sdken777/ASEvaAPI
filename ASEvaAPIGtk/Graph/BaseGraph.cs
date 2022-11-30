@@ -9,7 +9,7 @@ namespace ASEva.UIGtk
     /// <summary>
     /// (api:gtk=2.0.0) 图表显示控件基类
     /// </summary>
-    public class BaseGraph : Box
+    public class BaseGraph : Box, GraphPanel
     {
         public BaseGraph(IntPtr raw) : base(raw)
         {}
@@ -151,6 +151,12 @@ namespace ASEva.UIGtk
         protected void HandleGraphSelected()
         {
             if (GraphSelected != null) GraphSelected(this, null);
+        }
+
+        public void UpdateWithGraphData(GraphData data)
+        {
+            Data = data;
+            UpdateUIWithData();
         }
 
         private static Dictionary<int, Type> ControlTypeTable = new Dictionary<int, Type>();

@@ -546,4 +546,12 @@ namespace ASEva
             return output;
         }
     }
+
+    /// <summary>
+    /// (api:app=2.8.1) 图表可视化面板接口
+    /// </summary>
+    public interface GraphPanel
+    {
+        void UpdateWithGraphData(GraphData data);
+    }
 }

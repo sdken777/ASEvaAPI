@@ -1925,9 +1925,40 @@
             <param name="key">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始。视频协议名为video，音频协议名为audio</param>
             <returns>指定数据通道上最近的若干帧时间戳，若该通道未找到或最近无数据则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.RegisterGraphPanel(ASEva.GraphType,System.String,System.Type)">
+            <summary>
+            (api:app=2.8.1) 注册针对指定图表类型的可视化面板
+            </summary>
+            <param name="graphType">指定图表类型</param>
+            <param name="styleName">面板样式名</param>
+            <param name="panelType">面板类型，需要继承UI框架的控件基类，并实现 ASEva.GraphPanel </param>
+        </member>
+        <member name="M:ASEva.Agency.RegisterGraphPanel(System.Int32,System.String,System.Type)">
+            <summary>
+            (api:app=2.8.1) 注册针对指定图表ID的可视化面板（比按图表类型注册的优先级更高）
+            </summary>
+            <param name="graphDefinitionID">图表ID</param>
+            <param name="styleName">面板样式名</param>
+            <param name="panelType">面板类型，需要继承UI框架的控件基类，并实现 ASEva.GraphPanel </param>
+        </member>
+        <member name="M:ASEva.Agency.GetGraphPanelStyles(ASEva.GraphDefinition)">
+            <summary>
+            (api:app=2.8.1) 获取符合图表定义的所有可视化面板样式名
+            </summary>
+            <param name="definition">图表定义</param>
+            <returns>可视化面板样式名列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.CreateGraphPanel(ASEva.GraphDefinition,System.String)">
+            <summary>
+            (api:app=2.8.1) 创建图表可视化面板
+            </summary>
+            <param name="definition">图表定义</param>
+            <param name="styleName">可视化面板样式名</param>
+            <returns>可视化面板对象，若创建失败则返回null</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.8.0
+            version=2.8.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -2802,6 +2833,11 @@
             </summary>
             <param name="file">文件路径</param>
             <returns>图表数据对象</returns>
+        </member>
+        <member name="T:ASEva.GraphPanel">
+            <summary>
+            (api:app=2.8.1) 图表可视化面板接口
+            </summary>
         </member>
         <member name="T:ASEva.Graph.HistLineMode">
             <summary>

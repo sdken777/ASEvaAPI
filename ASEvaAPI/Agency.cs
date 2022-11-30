@@ -282,6 +282,10 @@ namespace ASEva
         ulong GetCPUTick();
         ulong GetCPUTicksPerSecond();
         Timestamp[] GetChannelLatestTimestamps(String key);
+        void RegisterGraphPanel(GraphType graphType, String styleName, Type panelType);
+        void RegisterGraphPanel(int graphDefinitionID, String styleName, Type panelType);
+        String[] GetGraphPanelStyles(GraphDefinition definition);
+        GraphPanel CreateGraphPanel(GraphDefinition definition, String styleName);
     }
 
     /// <summary>
@@ -3051,6 +3055,49 @@ namespace ASEva
         public static Timestamp[] GetChannelLatestTimestamps(String key)
         {
             return Handler.GetChannelLatestTimestamps(key);
+        }
+
+        /// <summary>
+        /// (api:app=2.8.1) 注册针对指定图表类型的可视化面板
+        /// </summary>
+        /// <param name="graphType">指定图表类型</param>
+        /// <param name="styleName">面板样式名</param>
+        /// <param name="panelType">面板类型，需要继承UI框架的控件基类，并实现 ASEva.GraphPanel </param>
+        public static void RegisterGraphPanel(GraphType graphType, String styleName, Type panelType)
+        {
+            Handler.RegisterGraphPanel(graphType, styleName, panelType);
+        }
+
+        /// <summary>
+        /// (api:app=2.8.1) 注册针对指定图表ID的可视化面板（比按图表类型注册的优先级更高）
+        /// </summary>
+        /// <param name="graphDefinitionID">图表ID</param>
+        /// <param name="styleName">面板样式名</param>
+        /// <param name="panelType">面板类型，需要继承UI框架的控件基类，并实现 ASEva.GraphPanel </param>
+        public static void RegisterGraphPanel(int graphDefinitionID, String styleName, Type panelType)
+        {
+            Handler.RegisterGraphPanel(graphDefinitionID, styleName, panelType);
+        }
+
+        /// <summary>
+        /// (api:app=2.8.1) 获取符合图表定义的所有可视化面板样式名
+        /// </summary>
+        /// <param name="definition">图表定义</param>
+        /// <returns>可视化面板样式名列表</returns>
+        public static String[] GetGraphPanelStyles(GraphDefinition definition)
+        {
+            return Handler.GetGraphPanelStyles(definition);
+        }
+
+        /// <summary>
+        /// (api:app=2.8.1) 创建图表可视化面板
+        /// </summary>
+        /// <param name="definition">图表定义</param>
+        /// <param name="styleName">可视化面板样式名</param>
+        /// <returns>可视化面板对象，若创建失败则返回null</returns>
+        public static GraphPanel CreateGraphPanel(GraphDefinition definition, String styleName)
+        {
+            return Handler.CreateGraphPanel(definition, styleName);
         }
     }
 }
