@@ -45,6 +45,7 @@ namespace ASEva.UICoreWF
             SkiaView.Factory = new GLViewFactoryCoreWF();
             SkiaCanvasExtensions.DefaultFontName = "Microsoft Yahei";
             SkiaCanvasExtensions.DefaultFontSize = 12;
+            FlowLayout.Factory = new FlowLayoutFactoryCoreWF();
 
             uiBackend = null;
             webViewBackend = "webview2";

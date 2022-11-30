@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于.net core winform的部分。详见 ASEva.UICoreWF \n
- * 本文档对应API版本：2.3.6
+ * 本文档对应API版本：2.4.0
  */
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// version=2.3.6
+    /// version=2.4.0
     /// </summary>
     public class APIInfo
     {
@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 6, 0); // 增加ConfigPanel.Close/CloseRequested
+            return new Version(2, 4, 0, 0); // 增加FlowLayout实现
         }
     }
 }

@@ -41,11 +41,14 @@
     <Reference Include="Xceed.Wpf.Toolkit">
       <HintPath>..\bin64\Xceed.Wpf.Toolkit.dll</HintPath>
     </Reference>
-	<Reference Include="SharpDX">
+	  <Reference Include="SharpDX">
       <HintPath>..\bin64\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D9">
       <HintPath>..\bin64\SharpDX.Direct3D9.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp">
+      <HintPath>..\bin64\SkiaSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
 
