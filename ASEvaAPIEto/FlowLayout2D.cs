@@ -291,10 +291,10 @@ namespace ASEva.UIEto
 
         public void UpdateControlsLayout(Size containerLogicalSize)
         {
-            if (containerLogicalSize.Width < 8 || containerLogicalSize.Height < 8) return;
+            int containerWidth = Math.Min(containerLogicalSize.Width, (int)(VisibleRect.Width / Pixel.Scale - 6));
+            int containerHeight = Math.Min(containerLogicalSize.Height, (int)(VisibleRect.Height / Pixel.Scale - 6));
+            if (containerWidth < 8 || containerHeight < 8) return;
 
-            int containerWidth = containerLogicalSize.Width;
-            int containerHeight = containerLogicalSize.Height;
             int itemWidth = controlWidth + 8;
 
             var identifierMap = new Dictionary<int, ControlContext>();
