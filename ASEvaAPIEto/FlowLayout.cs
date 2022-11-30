@@ -217,14 +217,16 @@ namespace ASEva.UIEto
             var panel = new Panel();
             panel.SetLogicalHeight(logicalHeight + 2);
             panel.SetContentAsColumnLayout(1, 0).AddControl(control, true);
-            layout.AddControl(panel);
+            var item = new StackLayoutItem(panel);
+            ctxs.Add(new ControlContext{ Item = item, Visible = true });
+            layout.Items.Add(item);
             panel.MouseDown += (obj, args) =>
             {
-                foreach (var item in layout.Items)
+                for (int i = 0; i < ctxs.Count; i++)
                 {
-                    if (item.Control.Equals(obj))
+                    if (ctxs[i].Item.Control.Equals(obj))
                     {
-                        callback.OnControlClicked(layout.Items.IndexOf(item));
+                        callback.OnControlClicked(i);
                         return;
                     }
                 }
@@ -236,14 +238,22 @@ namespace ASEva.UIEto
             var panel = new Panel();
             panel.SetLogicalHeight(logicalHeight + 2);
             panel.SetContentAsColumnLayout(1, 0).AddControl(control, true);
-            layout.Items.Insert(index, new StackLayoutItem(panel, true));
+            var item = new StackLayoutItem(panel);
+            ctxs.Insert(index, new ControlContext{ Item = item, Visible = true });
+            int visibleIndex = 0;
+            foreach (var ctx in ctxs)
+            {
+                if (ctx.Item.Equals(item)) break;
+                if (ctx.Visible) visibleIndex++;
+            }
+            layout.Items.Insert(visibleIndex, item);
             panel.MouseDown += (obj, args) =>
             {
-                foreach (var item in layout.Items)
+                for (int i = 0; i < ctxs.Count; i++)
                 {
-                    if (item.Control.Equals(obj))
+                    if (ctxs[i].Item.Control.Equals(obj))
                     {
-                        callback.OnControlClicked(layout.Items.IndexOf(item));
+                        callback.OnControlClicked(i);
                         return;
                     }
                 }
@@ -253,11 +263,13 @@ namespace ASEva.UIEto
         public void RemoveAllControls()
         {
             layout.Items.Clear();
+            ctxs.Clear();
         }
 
         public void RemoveControl(int index)
         {
-            layout.Items.RemoveAt(index);
+            layout.Items.Remove(ctxs[index].Item);
+            ctxs.RemoveAt(index);
         }
 
         public void SelectControl(int index)
@@ -267,17 +279,38 @@ namespace ASEva.UIEto
                 selectedControl.BackgroundColor = Colors.Transparent;
                 selectedControl = null;
             }
-            selectedControl = layout.Items[index].Control;
+            selectedControl = ctxs[index].Item.Control;
             selectedControl.BackgroundColor = Colors.Black;
         }
 
         public void SetControlVisible(int index, bool visible)
         {
-            layout.Items[index].Control.Visible = visible;
+            if (visible)
+            {
+                int visibleIndex = 0;
+                for (int i = 0; i < index; i++)
+                {
+                    if (ctxs[i].Visible) visibleIndex++;
+                }
+                ctxs[index].Visible = true;
+                layout.Items.Insert(visibleIndex, ctxs[index].Item);
+            }
+            else
+            {
+                layout.Items.Remove(ctxs[index].Item);
+                ctxs[index].Visible = false;
+            }
+        }
+
+        private class ControlContext
+        {
+            public StackLayoutItem Item { get; set; }
+            public bool Visible { get; set; }
         }
 
         private FlowLayoutCallback callback;
         private StackLayout layout;
+        private List<ControlContext> ctxs = new List<ControlContext>();
         private Control selectedControl;
     }
 }
