@@ -24,6 +24,9 @@ namespace ASEvaAPIEtoTest
 
             var tabPageD = tabControl.AddPage(t.Format("basic-tabpage-title", "D"));
             initBasicTabPageD(tabPageD);
+
+            var tabPageE = tabControl.AddPage(t.Format("basic-tabpage-title", "E"));
+            initBasicTabPageE(tabPageE);
         }
     }
 }

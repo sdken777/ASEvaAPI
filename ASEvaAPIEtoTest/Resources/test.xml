@@ -36,6 +36,10 @@
     <en>Add</en>
     <ch>添加项</ch>
   </t>
+  <t id="basic-flow-bigger">
+    <en>Bigger</en>
+    <ch>放大</ch>
+  </t>
   <t id="basic-flow-hide">
     <en>Hide</en>
     <ch>隐藏项</ch>
@@ -59,6 +63,10 @@
   <t id="basic-flow-show">
     <en>Show</en>
     <ch>显示项</ch>
+  </t>
+  <t id="basic-flow-smaller">
+    <en>Smaller</en>
+    <ch>缩小</ch>
   </t>
   <t id="basic-freeze-size">
     <en>Freeze size</en>

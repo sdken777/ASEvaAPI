@@ -262,12 +262,14 @@ namespace ASEva.UIEto
 
         public void RemoveAllControls()
         {
+            selectedControl = null;
             layout.Items.Clear();
             ctxs.Clear();
         }
 
         public void RemoveControl(int index)
         {
+            if (ctxs[index].Item.Control.Equals(selectedControl)) selectedControl = null;
             layout.Items.Remove(ctxs[index].Item);
             ctxs.RemoveAt(index);
         }
