@@ -2491,7 +2491,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) 获取指定通道的监控配置
         /// </summary>
-        /// <param name="id">通道ID，如：bus1, video0, audio, raw:xxx, sample:xxx</param>
+        /// <param name="id">通道ID，如：bus@1, video@0, audio, xxx-v1, xxx-v2@0等</param>
         /// <returns>是否监控</returns>
         public static bool GetChannelMonitoringFlag(String id)
         {
@@ -2501,7 +2501,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) 设置指定通道的监控配置
         /// </summary>
-        /// <param name="id">通道ID，如：bus1, video0, audio, raw:xxx, sample:xxx</param>
+        /// <param name="id">通道ID，如：bus@1, video@0, audio, xxx-v1, xxx-v2@0等</param>
         /// <param name="monitoring">是否监控，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
         public static void SetChannelMonitoringFlag(String id, bool monitoring)
         {
@@ -2520,7 +2520,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.7.6) 获取指定通道的客机同步配置
         /// </summary>
-        /// <param name="id">通道ID，如：bus1, video0, raw:xxx</param>
+        /// <param name="id">通道ID，如：bus@1, video@0, audio, xxx-v1等</param>
         /// <returns>客机是否与授时服务器同步</returns>
         public static bool GetChannelGuestSyncFlag(String id)
         {
@@ -2530,7 +2530,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.7.6) 设置指定通道的客机同步配置
         /// </summary>
-        /// <param name="id">通道ID，如：bus1, video0, raw:xxx</param>
+        /// <param name="id">通道ID，如：bus@1, video@0, audio, xxx-v1等</param>
         /// <param name="guestSync">客机是否与授时服务器同步</param>
         public static void SetChannelGuestSyncFlag(String id, bool guestSync)
         {
