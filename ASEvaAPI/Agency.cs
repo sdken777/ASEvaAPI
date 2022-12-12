@@ -3093,7 +3093,7 @@ namespace ASEva
         /// (api:app=2.8.1) 创建图表可视化面板
         /// </summary>
         /// <param name="definition">图表定义</param>
-        /// <param name="styleName">可视化面板样式名</param>
+        /// <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
         /// <returns>可视化面板对象，若创建失败则返回null</returns>
         public static GraphPanel CreateGraphPanel(GraphDefinition definition, String styleName)
         {
