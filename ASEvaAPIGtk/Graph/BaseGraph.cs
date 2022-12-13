@@ -165,6 +165,11 @@ namespace ASEva.UIGtk
             else return null;
         }
 
+        public void ReleaseResources()
+        {
+            Close();
+        }
+
         private static Dictionary<int, Type> ControlTypeTable = new Dictionary<int, Type>();
     }
 }

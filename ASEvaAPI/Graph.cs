@@ -561,5 +561,10 @@ namespace ASEva
         /// (api:app=2.8.2) 返回面板高度（若为固定高度）
         /// </summary>
         int? GetFixedHeight();
+
+        /// <summary>
+        /// (api:app=2.8.3) 释放资源
+        /// </summary>
+        void ReleaseResources();
     }
 }
