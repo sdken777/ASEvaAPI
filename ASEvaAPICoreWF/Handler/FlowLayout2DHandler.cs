@@ -54,7 +54,7 @@ namespace ASEva.UICoreWF
         public void AddControl(Control control, int logicalHeight)
         {
             control.SetLogicalSize(controlWidth, logicalHeight);
-            var winformControl = control.ToNative(true) as System.Windows.Forms.Panel;
+            var winformControl = control.ToNative(true);
             winformControl.Margin = new System.Windows.Forms.Padding(4);
             ctxs.Add(new ControlContext { EtoControl = control, WinformControl = winformControl, Visible = true });
             control.MouseDown += (obj, args) =>
@@ -66,7 +66,7 @@ namespace ASEva.UICoreWF
         public void InsertControl(int index, Control control, int logicalHeight)
         {
             control.SetLogicalSize(controlWidth, logicalHeight);
-            var winformControl = control.ToNative(true) as System.Windows.Forms.Panel;
+            var winformControl = control.ToNative(true);
             winformControl.Margin = new System.Windows.Forms.Padding(4);
             ctxs.Insert(index, new ControlContext { EtoControl = control, WinformControl = winformControl, Visible = true });
             control.MouseDown += (obj, args) =>
@@ -91,11 +91,11 @@ namespace ASEva.UICoreWF
         {
             if (selectedControl != null)
             {
-                selectedControl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+                setBorderStyle(selectedControl, System.Windows.Forms.BorderStyle.None);
                 selectedControl = null;
             }
             selectedControl = ctxs[index].WinformControl;
-            selectedControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            setBorderStyle(selectedControl, System.Windows.Forms.BorderStyle.FixedSingle);
         }
 
         public void SetControlVisible(int index, bool visible)
@@ -124,25 +124,42 @@ namespace ASEva.UICoreWF
 
         private void updateToPanel()
         {
-            int index = 0;
-            foreach (var ctx in ctxs)
+            try
             {
-                if (ctx.Visible)
+                int index = 0;
+                foreach (var ctx in ctxs)
                 {
-                    if (!Controls.Contains(ctx.WinformControl))
+                    if (ctx.Visible)
                     {
-                        Controls.Add(ctx.WinformControl);
-                        Controls.SetChildIndex(ctx.WinformControl, index);
-                        break;
+                        if (!Controls.Contains(ctx.WinformControl))
+                        {
+                            Controls.Add(ctx.WinformControl);
+                            Controls.SetChildIndex(ctx.WinformControl, index);
+                            break;
+                        }
+                        index++;
                     }
-                    index++;
+                }
+            }
+            catch (Exception)
+            {
+                if (timer != null)
+                {
+                    timer.Stop();
+                    timer = null;
                 }
             }
         }
 
+        private void setBorderStyle(System.Windows.Forms.Control control, System.Windows.Forms.BorderStyle border)
+        {
+            if (control is System.Windows.Forms.Panel) (control as System.Windows.Forms.Panel).BorderStyle = border;
+            else if (control is System.Windows.Forms.UserControl) (control as System.Windows.Forms.UserControl).BorderStyle = border;
+        }
+
         private class ControlContext
         {
-            public System.Windows.Forms.Panel WinformControl { get; set; }
+            public System.Windows.Forms.Control WinformControl { get; set; }
             public Control EtoControl { get; set; }
             public bool Visible { get; set; }
         }
@@ -150,7 +167,7 @@ namespace ASEva.UICoreWF
         private FlowLayoutCallback callback;
         private System.Windows.Forms.Timer timer;
         private List<ControlContext> ctxs = new List<ControlContext>();
-        private System.Windows.Forms.Panel selectedControl = null;
+        private System.Windows.Forms.Control selectedControl = null;
         private int controlWidth;
     }
 }
