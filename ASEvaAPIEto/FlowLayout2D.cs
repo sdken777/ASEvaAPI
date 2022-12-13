@@ -193,6 +193,16 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
+        /// (api:eto=2.9.2) 获取鼠标所在控件的序号位置
+        /// </summary>
+        /// <returns>鼠标所在控件的序号位置，-1表示鼠标未在任何控件上</returns>
+        public int GetControlWithMouse()
+        {
+            if (backend != null) return backend.GetControlWithMouse();
+            else return -1;
+        }
+
+        /// <summary>
         /// 选中指定序号位置处的控件
         /// </summary>
         /// <param name="index">指定序号位置，超出范围则忽略</param>
@@ -253,6 +263,7 @@ namespace ASEva.UIEto
         void RemoveAllControls();
         void SetControlVisible(int index, bool visible);
         void SelectControl(int index);
+        int GetControlWithMouse();
 	}
 
 	public interface FlowLayout2DFactory
@@ -291,8 +302,13 @@ namespace ASEva.UIEto
 
         public void UpdateControlsLayout(Size containerLogicalSize)
         {
-            int containerWidth = Math.Min(containerLogicalSize.Width, (int)(VisibleRect.Width / Pixel.Scale - 6));
-            int containerHeight = Math.Min(containerLogicalSize.Height, (int)(VisibleRect.Height / Pixel.Scale - 6));
+            int containerWidth = 0, containerHeight = 0;
+            try
+            {
+                containerWidth = Math.Min(containerLogicalSize.Width, (int)(VisibleRect.Width / Pixel.Scale - 6));
+                containerHeight = Math.Min(containerLogicalSize.Height, (int)(VisibleRect.Height / Pixel.Scale - 6));
+            }
+            catch (Exception) {}
             if (containerWidth < 8 || containerHeight < 8) return;
 
             int itemWidth = controlWidth + 8;
@@ -478,6 +494,18 @@ namespace ASEva.UIEto
         public void SetControlVisible(int index, bool visible)
         {
             ctxs[index].Visible = visible;
+        }
+
+        public int GetControlWithMouse()
+        {
+            foreach (var ctx in ctxs)
+            {
+                if (!ctx.Visible) continue;
+                var mouse = ctx.Item.Control.GetMouseLogicalPoint();
+                var size = ctx.Item.Control.GetLogicalSize();
+                if (mouse.X > 0 && mouse.Y > 0 && mouse.X < size.Width && mouse.Y < size.Height) return ctxs.IndexOf(ctx);
+            }
+            return -1;
         }
 
         private class ControlContext

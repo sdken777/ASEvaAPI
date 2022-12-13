@@ -57,8 +57,8 @@
     <ch>选中项</ch>
   </t>
   <t id="basic-flow-selected">
-    <en>Selected item {0}</en>
-    <ch>已选中项{0}</ch>
+    <en>Selected item {0}, {1}</en>
+    <ch>已选中项{0},{1}</ch>
   </t>
   <t id="basic-flow-show">
     <en>Show</en>

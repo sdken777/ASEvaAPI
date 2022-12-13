@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.9.1
+            version=2.9.2
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -1323,6 +1323,12 @@
             </summary>
             <param name="index">指定序号位置，超出范围则忽略</param>
             <param name="visible">是否可见</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.GetControlWithMouse">
+            <summary>
+            (api:eto=2.9.2) 获取鼠标所在控件的序号位置
+            </summary>
+            <returns>鼠标所在控件的序号位置，-1表示鼠标未在任何控件上</returns>
         </member>
         <member name="M:ASEva.UIEto.FlowLayout2D.SelectControl(System.Int32,System.Boolean)">
             <summary>
