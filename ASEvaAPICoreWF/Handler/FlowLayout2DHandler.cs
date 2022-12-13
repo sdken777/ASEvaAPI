@@ -107,6 +107,21 @@ namespace ASEva.UICoreWF
             }
         }
 
+        public int GetControlWithMouse()
+        {
+            foreach (var ctx in ctxs)
+            {
+                if (!ctx.Visible) continue;
+                var mouse = ctx.EtoControl.GetMouseLogicalPoint();
+                var size = ctx.EtoControl.GetLogicalSize();
+                if (mouse.X > 0 && mouse.Y > 0 && mouse.X < size.Width && mouse.Y < size.Height)
+                {
+                    return ctxs.IndexOf(ctx);
+                }
+            }
+            return -1;
+        }
+
         private void updateToPanel()
         {
             int index = 0;

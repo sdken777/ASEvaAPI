@@ -311,7 +311,7 @@
             获取图表对象
             </summary>
             <param name="session">想要获取图表的session ID</param>
-            <param name="id">图表的ID，通过 ASEva.GraphDefinition.GetHashCode 获取</param>
+            <param name="graphID">图表报告ID，通过 ASEva.GraphDefinition.GetHashCode 获取</param>
             <returns>图表对象，若不存在或不属于当前层级则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.AddSceneData(ASEva.SceneData)">
@@ -758,7 +758,7 @@
             <summary>
             获取指定ID图表的标题
             </summary>
-            <param name="id">图表报告ID</param>
+            <param name="graphID">图表报告ID</param>
             <returns>图表报告标题，若不存在则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetSignalName(System.String,System.Boolean)">
@@ -1525,14 +1525,14 @@
             <summary>
             (api:app=2.3.0) 获取指定通道的监控配置
             </summary>
-            <param name="id">通道ID，如：bus1, video0, audio, raw:xxx, sample:xxx</param>
+            <param name="id">通道ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
             <returns>是否监控</returns>
         </member>
         <member name="M:ASEva.Agency.SetChannelMonitoringFlag(System.String,System.Boolean)">
             <summary>
             (api:app=2.3.0) 设置指定通道的监控配置
             </summary>
-            <param name="id">通道ID，如：bus1, video0, audio, raw:xxx, sample:xxx</param>
+            <param name="id">通道ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
             <param name="monitoring">是否监控，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
         </member>
         <member name="M:ASEva.Agency.GetAllChannelMonitoringKeys">
@@ -1545,14 +1545,14 @@
             <summary>
             (api:app=2.7.6) 获取指定通道的客机同步配置
             </summary>
-            <param name="id">通道ID，如：bus1, video0, raw:xxx</param>
+            <param name="id">通道ID，如：bus@1, video@0, raw@xxx-v1, sample@xxx-v2@0等</param>
             <returns>客机是否与授时服务器同步</returns>
         </member>
         <member name="M:ASEva.Agency.SetChannelGuestSyncFlag(System.String,System.Boolean)">
             <summary>
             (api:app=2.7.6) 设置指定通道的客机同步配置
             </summary>
-            <param name="id">通道ID，如：bus1, video0, raw:xxx</param>
+            <param name="id">通道ID，如：bus@1, video@0, raw@xxx-v1, sample@xxx-v2@0等</param>
             <param name="guestSync">客机是否与授时服务器同步</param>
         </member>
         <member name="M:ASEva.Agency.GetAllChannelGuestSyncKeys">
@@ -1925,9 +1925,40 @@
             <param name="key">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始。视频协议名为video，音频协议名为audio</param>
             <returns>指定数据通道上最近的若干帧时间戳，若该通道未找到或最近无数据则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.RegisterGraphPanel(ASEva.GraphType,System.String,System.Type)">
+            <summary>
+            (api:app=2.8.1) 注册针对指定图表类型的可视化面板
+            </summary>
+            <param name="graphType">指定图表类型</param>
+            <param name="styleName">面板样式名</param>
+            <param name="panelType">面板类型，需要继承UI框架的控件基类，并实现 ASEva.GraphPanel </param>
+        </member>
+        <member name="M:ASEva.Agency.RegisterGraphPanel(System.Int32,System.String,System.Type)">
+            <summary>
+            (api:app=2.8.1) 注册针对指定图表ID的可视化面板（比按图表类型注册的优先级更高）
+            </summary>
+            <param name="graphID">图表报告ID</param>
+            <param name="styleName">面板样式名</param>
+            <param name="panelType">面板类型，需要继承UI框架的控件基类，并实现 ASEva.GraphPanel </param>
+        </member>
+        <member name="M:ASEva.Agency.GetGraphPanelStyles(System.Int32)">
+            <summary>
+            (api:app=2.8.2) 获取符合图表报告的所有可视化面板样式名
+            </summary>
+            <param name="graphID">图表报告ID</param>
+            <returns>可视化面板样式名列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.CreateGraphPanel(System.Int32,System.String)">
+            <summary>
+            (api:app=2.8.2) 创建图表可视化面板
+            </summary>
+            <param name="graphID">图表报告ID</param>
+            <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
+            <returns>可视化面板对象，若创建失败则返回null</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.8.0
+            version=2.8.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -2802,6 +2833,21 @@
             </summary>
             <param name="file">文件路径</param>
             <returns>图表数据对象</returns>
+        </member>
+        <member name="T:ASEva.GraphPanel">
+            <summary>
+            (api:app=2.8.1) 图表可视化面板接口
+            </summary>
+        </member>
+        <member name="M:ASEva.GraphPanel.UpdateWithGraphData(ASEva.GraphData)">
+            <summary>
+            更新图表数据
+            </summary>
+        </member>
+        <member name="M:ASEva.GraphPanel.GetFixedHeight">
+            <summary>
+            (api:app=2.8.2) 返回面板高度（若为固定高度）
+            </summary>
         </member>
         <member name="T:ASEva.Graph.HistLineMode">
             <summary>
