@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         [UI] DrawingArea draw;
         [UI] EventBox eventBox;
 
-        EventBoxHelper eventBoxHelper = new EventBoxHelper();
+        EventBoxHelper eventBoxHelper = new EventBoxHelper{ PassEvents = true };
 		DrawSwap drawSwap;
 
         public HistLineGraph() : this(new Builder("HistLineGraph.glade"))

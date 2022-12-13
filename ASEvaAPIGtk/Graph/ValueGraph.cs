@@ -16,7 +16,7 @@ namespace ASEva.UIGtk
         [UI] EventBox eventBox;
         [UI] Label labelTitle, labelValidation, labelValueMain, labelValueSub;
 
-        EventBoxHelper eventBoxHelper = new EventBoxHelper();
+        EventBoxHelper eventBoxHelper = new EventBoxHelper{ PassEvents = true };
 
         public ValueGraph() : this(new Builder("ValueGraph.glade"))
         {

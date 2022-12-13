@@ -12,6 +12,12 @@ namespace ASEva.UIGtk
     /// </summary>
     public class EventBoxHelper
     {
+        /// <summary>
+        /// 添加事件框
+        /// </summary>
+        /// <param name="eventBox">事件框</param>
+        /// <param name="contextMenu">关联右键菜单</param>
+        /// <param name="enableScrolledEvent">是否启用滚轮事件</param>
         public void Add(EventBox eventBox, Menu contextMenu = null, bool enableScrolledEvent = false)
         {
             if (eventBox == null) return;
@@ -28,6 +34,11 @@ namespace ASEva.UIGtk
             eventBox.LeaveNotifyEvent += eventBox_LeaveNotify;
             eventBox.ScrollEvent += eventBox_Scroll;
         }
+
+        /// <summary>
+        /// (api:gtk=2.5.4) 事件是否允许下层控件接收，默认false
+        /// </summary>
+        public bool PassEvents { get; set; }
 
         public delegate void ButtonHandler(EventBox box, EventButton ev);
         public delegate void MovedHandler(EventBox box, EventMotion ev);
@@ -47,13 +58,13 @@ namespace ASEva.UIGtk
 
         private void eventBox_Scroll(object o, ScrollEventArgs args)
         {
-            args.RetVal = true;
+            if (!PassEvents) args.RetVal = true;
             if (Scrolled != null) Scrolled(o as EventBox, args.Event);
         }
 
         private void eventBox_LeaveNotify(object o, LeaveNotifyEventArgs args)
         {
-            args.RetVal = true;
+            if (!PassEvents) args.RetVal = true;
             if (args.Event.Detail != Gdk.NotifyType.Inferior)
             {
                 if (Leave != null) Leave(o, args);
@@ -62,13 +73,13 @@ namespace ASEva.UIGtk
 
         private void eventBox_EnterNotify(object o, EnterNotifyEventArgs args)
         {
-            args.RetVal = true;
+            if (!PassEvents) args.RetVal = true;
             if (Enter != null) Enter(o, args);
         }
 
         private void eventBox_MotionNotify(object o, MotionNotifyEventArgs args)
         {
-            args.RetVal = true;
+            if (!PassEvents) args.RetVal = true;
 
             var box = o as EventBox;
 
@@ -91,7 +102,7 @@ namespace ASEva.UIGtk
 
         private void eventBox_ButtonRelease(object o, ButtonReleaseEventArgs args)
         {
-            args.RetVal = true;
+            if (!PassEvents) args.RetVal = true;
 
             var box = o as EventBox;
 
@@ -108,7 +119,7 @@ namespace ASEva.UIGtk
 
         private void eventBox_ButtonPress(object o, ButtonPressEventArgs args)
         {
-            args.RetVal = true;
+            if (!PassEvents) args.RetVal = true;
 
             var box = o as EventBox;
 

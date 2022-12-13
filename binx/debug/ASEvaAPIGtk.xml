@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIGtk.APIInfo">
             <summary>
-            version=2.5.2
+            version=2.5.4
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.APIInfo.GetAPIVersion">
@@ -102,6 +102,19 @@
         <member name="T:ASEva.UIGtk.EventBoxHelper">
             <summary>
             (api:gtk=2.0.0) 事件框辅助类
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.EventBoxHelper.Add(Gtk.EventBox,Gtk.Menu,System.Boolean)">
+            <summary>
+            添加事件框
+            </summary>
+            <param name="eventBox">事件框</param>
+            <param name="contextMenu">关联右键菜单</param>
+            <param name="enableScrolledEvent">是否启用滚轮事件</param>
+        </member>
+        <member name="P:ASEva.UIGtk.EventBoxHelper.PassEvents">
+            <summary>
+            (api:gtk=2.5.4) 事件是否允许下层控件接收，默认false
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.CairoContextExtension">

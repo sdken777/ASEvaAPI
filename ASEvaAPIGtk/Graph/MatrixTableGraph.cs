@@ -20,7 +20,7 @@ namespace ASEva.UIGtk
         [UI] EventBox eventBox;
         [UI] Box boxValidation;
 
-        EventBoxHelper eventBoxHelper = new EventBoxHelper();
+        EventBoxHelper eventBoxHelper = new EventBoxHelper{ PassEvents = true };
         DrawSwap drawSwap;
 
         public MatrixTableGraph() : this(new Builder("MatrixTableGraph.glade"))
