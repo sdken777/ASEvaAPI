@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace ASEva.UICoreWF
 {
@@ -148,6 +149,7 @@ namespace ASEva.UICoreWF
         /// </summary>
         protected void HandleGraphSelected()
         {
+            if (clickEvent != null) clickEvent.Set();
             if (GraphSelected != null) GraphSelected(this, null);
         }
 
@@ -166,6 +168,13 @@ namespace ASEva.UICoreWF
         public void ReleaseResources()
         { 
         }
+
+        public void UseClickEvent(ManualResetEventSlim ev)
+        {
+            clickEvent = ev;
+        }
+
+        private ManualResetEventSlim clickEvent;
 
         private static Dictionary<int, Type> ControlTypeTable = new Dictionary<int, Type>();
     }
