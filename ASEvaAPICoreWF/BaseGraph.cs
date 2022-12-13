@@ -163,6 +163,10 @@ namespace ASEva.UICoreWF
             else return null;
         }
 
+        public void ReleaseResources()
+        { 
+        }
+
         private static Dictionary<int, Type> ControlTypeTable = new Dictionary<int, Type>();
     }
 }
