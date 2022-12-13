@@ -1332,16 +1332,16 @@ namespace ASEva
         {
         }
 
-        public void RegisterGraphPanel(int graphDefinitionID, string styleName, Type panelType)
+        public void RegisterGraphPanel(int graphID, string styleName, Type panelType)
         {
         }
 
-        public string[] GetGraphPanelStyles(GraphDefinition definition)
+        public string[] GetGraphPanelStyles(int graphID)
         {
             return null;
         }
 
-        public GraphPanel CreateGraphPanel(GraphDefinition definition, string styleName)
+        public GraphPanel CreateGraphPanel(int graphID, string styleName)
         {
             return null;
         }

@@ -311,7 +311,7 @@
             获取图表对象
             </summary>
             <param name="session">想要获取图表的session ID</param>
-            <param name="id">图表的ID，通过 ASEva.GraphDefinition.GetHashCode 获取</param>
+            <param name="graphID">图表报告ID，通过 ASEva.GraphDefinition.GetHashCode 获取</param>
             <returns>图表对象，若不存在或不属于当前层级则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.AddSceneData(ASEva.SceneData)">
@@ -758,7 +758,7 @@
             <summary>
             获取指定ID图表的标题
             </summary>
-            <param name="id">图表报告ID</param>
+            <param name="graphID">图表报告ID</param>
             <returns>图表报告标题，若不存在则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetSignalName(System.String,System.Boolean)">
@@ -1937,28 +1937,28 @@
             <summary>
             (api:app=2.8.1) 注册针对指定图表ID的可视化面板（比按图表类型注册的优先级更高）
             </summary>
-            <param name="graphDefinitionID">图表ID</param>
+            <param name="graphID">图表报告ID</param>
             <param name="styleName">面板样式名</param>
             <param name="panelType">面板类型，需要继承UI框架的控件基类，并实现 ASEva.GraphPanel </param>
         </member>
-        <member name="M:ASEva.Agency.GetGraphPanelStyles(ASEva.GraphDefinition)">
+        <member name="M:ASEva.Agency.GetGraphPanelStyles(System.Int32)">
             <summary>
-            (api:app=2.8.1) 获取符合图表定义的所有可视化面板样式名
+            (api:app=2.8.2) 获取符合图表报告的所有可视化面板样式名
             </summary>
-            <param name="definition">图表定义</param>
+            <param name="graphID">图表报告ID</param>
             <returns>可视化面板样式名列表</returns>
         </member>
-        <member name="M:ASEva.Agency.CreateGraphPanel(ASEva.GraphDefinition,System.String)">
+        <member name="M:ASEva.Agency.CreateGraphPanel(System.Int32,System.String)">
             <summary>
-            (api:app=2.8.1) 创建图表可视化面板
+            (api:app=2.8.2) 创建图表可视化面板
             </summary>
-            <param name="definition">图表定义</param>
+            <param name="graphID">图表报告ID</param>
             <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
             <returns>可视化面板对象，若创建失败则返回null</returns>
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.8.1
+            version=2.8.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -2837,6 +2837,16 @@
         <member name="T:ASEva.GraphPanel">
             <summary>
             (api:app=2.8.1) 图表可视化面板接口
+            </summary>
+        </member>
+        <member name="M:ASEva.GraphPanel.UpdateWithGraphData(ASEva.GraphData)">
+            <summary>
+            更新图表数据
+            </summary>
+        </member>
+        <member name="M:ASEva.GraphPanel.GetFixedHeight">
+            <summary>
+            (api:app=2.8.2) 返回面板高度（若为固定高度）
             </summary>
         </member>
         <member name="T:ASEva.Graph.HistLineMode">

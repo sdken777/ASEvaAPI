@@ -159,6 +159,12 @@ namespace ASEva.UIGtk
             UpdateUIWithData();
         }
 
+        public int? GetFixedHeight()
+        {
+            if (IsHeightFixed()) return 61;
+            else return null;
+        }
+
         private static Dictionary<int, Type> ControlTypeTable = new Dictionary<int, Type>();
     }
 }

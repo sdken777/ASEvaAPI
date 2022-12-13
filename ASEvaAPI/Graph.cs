@@ -552,6 +552,14 @@ namespace ASEva
     /// </summary>
     public interface GraphPanel
     {
+        /// <summary>
+        /// 更新图表数据
+        /// </summary>
         void UpdateWithGraphData(GraphData data);
+
+        /// <summary>
+        /// (api:app=2.8.2) 返回面板高度（若为固定高度）
+        /// </summary>
+        int? GetFixedHeight();
     }
 }

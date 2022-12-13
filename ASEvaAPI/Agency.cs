@@ -24,7 +24,7 @@ namespace ASEva
         ApplicationMode GetAppMode();
         bool IsFileOutputEnabled();
         String GetAppLanguage();
-        GraphData GetGraphData(DateTime session, int id);
+        GraphData GetGraphData(DateTime session, int graphID);
         void AddSceneData(SceneData scene);
         List<String> GetSampleTitle(String protocol);
         DateTime? GetStartTimeLocal(DateTime session);
@@ -123,7 +123,7 @@ namespace ASEva
         double GetFilteredSessionListTotalLength();
         int[] GetGraphIDList();
         int? GetGraphIDWithTitle(String title);
-        String GetGraphTitle(int id);
+        String GetGraphTitle(int graphID);
         String GetSignalName(String signalID, bool fullName);
         bool IsVideoDataAvailable(int channel, uint? tolerance);
         Samples.SpecialCameraType GetVideoSpecialType(int channel);
@@ -283,9 +283,9 @@ namespace ASEva
         ulong GetCPUTicksPerSecond();
         Timestamp[] GetChannelLatestTimestamps(String key);
         void RegisterGraphPanel(GraphType graphType, String styleName, Type panelType);
-        void RegisterGraphPanel(int graphDefinitionID, String styleName, Type panelType);
-        String[] GetGraphPanelStyles(GraphDefinition definition);
-        GraphPanel CreateGraphPanel(GraphDefinition definition, String styleName);
+        void RegisterGraphPanel(int graphID, String styleName, Type panelType);
+        String[] GetGraphPanelStyles(int graphID);
+        GraphPanel CreateGraphPanel(int graphID, String styleName);
     }
 
     /// <summary>
@@ -752,11 +752,11 @@ namespace ASEva
         /// 获取图表对象
         /// </summary>
         /// <param name="session">想要获取图表的session ID</param>
-        /// <param name="id">图表的ID，通过 ASEva.GraphDefinition.GetHashCode 获取</param>
+        /// <param name="graphID">图表报告ID，通过 ASEva.GraphDefinition.GetHashCode 获取</param>
         /// <returns>图表对象，若不存在或不属于当前层级则返回null</returns>
-        public static GraphData GetGraphData(DateTime session, int id)
+        public static GraphData GetGraphData(DateTime session, int graphID)
         {
-            return Handler.GetGraphData(session, id);
+            return Handler.GetGraphData(session, graphID);
         }
 
         /// <summary>
@@ -1391,11 +1391,11 @@ namespace ASEva
         /// <summary>
         /// 获取指定ID图表的标题
         /// </summary>
-        /// <param name="id">图表报告ID</param>
+        /// <param name="graphID">图表报告ID</param>
         /// <returns>图表报告标题，若不存在则返回null</returns>
-        public static String GetGraphTitle(int id)
+        public static String GetGraphTitle(int graphID)
         {
-            return Handler.GetGraphTitle(id);
+            return Handler.GetGraphTitle(graphID);
         }
 
         /// <summary>
@@ -3071,33 +3071,33 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.8.1) 注册针对指定图表ID的可视化面板（比按图表类型注册的优先级更高）
         /// </summary>
-        /// <param name="graphDefinitionID">图表ID</param>
+        /// <param name="graphID">图表报告ID</param>
         /// <param name="styleName">面板样式名</param>
         /// <param name="panelType">面板类型，需要继承UI框架的控件基类，并实现 ASEva.GraphPanel </param>
-        public static void RegisterGraphPanel(int graphDefinitionID, String styleName, Type panelType)
+        public static void RegisterGraphPanel(int graphID, String styleName, Type panelType)
         {
-            Handler.RegisterGraphPanel(graphDefinitionID, styleName, panelType);
+            Handler.RegisterGraphPanel(graphID, styleName, panelType);
         }
 
         /// <summary>
-        /// (api:app=2.8.1) 获取符合图表定义的所有可视化面板样式名
+        /// (api:app=2.8.2) 获取符合图表报告的所有可视化面板样式名
         /// </summary>
-        /// <param name="definition">图表定义</param>
+        /// <param name="graphID">图表报告ID</param>
         /// <returns>可视化面板样式名列表</returns>
-        public static String[] GetGraphPanelStyles(GraphDefinition definition)
+        public static String[] GetGraphPanelStyles(int graphID)
         {
-            return Handler.GetGraphPanelStyles(definition);
+            return Handler.GetGraphPanelStyles(graphID);
         }
 
         /// <summary>
-        /// (api:app=2.8.1) 创建图表可视化面板
+        /// (api:app=2.8.2) 创建图表可视化面板
         /// </summary>
-        /// <param name="definition">图表定义</param>
+        /// <param name="graphID">图表报告ID</param>
         /// <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
         /// <returns>可视化面板对象，若创建失败则返回null</returns>
-        public static GraphPanel CreateGraphPanel(GraphDefinition definition, String styleName)
+        public static GraphPanel CreateGraphPanel(int graphID, String styleName)
         {
-            return Handler.CreateGraphPanel(definition, styleName);
+            return Handler.CreateGraphPanel(graphID, styleName);
         }
     }
 }
