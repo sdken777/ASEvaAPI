@@ -19,7 +19,7 @@ namespace ASEva.UIGtk
         [UI] DrawingArea draw;
         [UI] EventBox eventBox;
 
-        EventBoxHelper eventBoxHelper = new EventBoxHelper{ PassEvents = true };
+        EventBoxHelper eventBoxHelper = new EventBoxHelper();
         DrawSwap drawSwap;
 
         public LabelTableGraph() : this(new Builder("LabelTableGraph.glade"))

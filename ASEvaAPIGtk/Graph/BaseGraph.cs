@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using Gtk;
 
 namespace ASEva.UIGtk
@@ -150,6 +151,7 @@ namespace ASEva.UIGtk
         /// </summary>
         protected void HandleGraphSelected()
         {
+            if (clickEvent != null) clickEvent.Set();
             if (GraphSelected != null) GraphSelected(this, null);
         }
 
@@ -169,6 +171,13 @@ namespace ASEva.UIGtk
         {
             Close();
         }
+
+        public void UseClickEvent(ManualResetEventSlim ev)
+        {
+            clickEvent = ev;
+        }
+
+        private ManualResetEventSlim clickEvent;
 
         private static Dictionary<int, Type> ControlTypeTable = new Dictionary<int, Type>();
     }

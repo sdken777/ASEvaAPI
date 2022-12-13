@@ -1958,7 +1958,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.8.3
+            version=2.8.4
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -2852,6 +2852,11 @@
         <member name="M:ASEva.GraphPanel.ReleaseResources">
             <summary>
             (api:app=2.8.3) 释放资源
+            </summary>
+        </member>
+        <member name="M:ASEva.GraphPanel.UseClickEvent(System.Threading.ManualResetEventSlim)">
+            <summary>
+            (api:app=2.8.4) 绑定点击事件对象
             </summary>
         </member>
         <member name="T:ASEva.Graph.HistLineMode">

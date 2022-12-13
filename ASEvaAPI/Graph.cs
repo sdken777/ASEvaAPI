@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using System.Threading;
 
 namespace ASEva
 {
@@ -566,5 +567,10 @@ namespace ASEva
         /// (api:app=2.8.3) 释放资源
         /// </summary>
         void ReleaseResources();
+
+        /// <summary>
+        /// (api:app=2.8.4) 绑定点击事件对象
+        /// </summary>
+        void UseClickEvent(ManualResetEventSlim ev);
     }
 }
