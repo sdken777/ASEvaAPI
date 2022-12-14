@@ -18,7 +18,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 4, 3, 0); // 新增ConfigPanel.Close/CloseRequested
+            return new Version(1, 4, 3, 1); // 修正离屏渲染模糊问题
         }
     }
 }

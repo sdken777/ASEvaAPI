@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIWpf.APIInfo">
             <summary>
-            version=1.4.2
+            version=1.4.3
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.APIInfo.GetAPIVersion">
@@ -53,6 +53,16 @@
         <member name="M:ASEva.UIWpf.ConfigPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.ConfigPanel.Close">
+            <summary>
+            (api:wpf=1.4.3) 关闭配置界面
+            </summary>
+        </member>
+        <member name="E:ASEva.UIWpf.ConfigPanel.CloseRequested">
+            <summary>
+            (api:wpf=1.4.3) 在此事件中实现配置界面的关闭
             </summary>
         </member>
         <member name="T:ASEva.UIWpf.OpenGLBlitControlWpf">
