@@ -116,7 +116,9 @@ namespace ASEva.UIWpf
                 bitmap.AddDirtyRect(new Int32Rect(0, 0, bitmap.PixelWidth, bitmap.PixelHeight));
                 bitmap.Unlock();
 
-                drawingContext.DrawImage(bitmap, new Rect(0, 0, size.LogicalWidth, size.LogicalHeight));
+                drawingContext.PushTransform(new ScaleTransform(1.0f / pixelScale, 1.0f / pixelScale));
+                drawingContext.DrawImage(bitmap, new Rect(0, 0, bitmap.PixelWidth, bitmap.PixelHeight));
+                drawingContext.Pop();
 
                 foreach (var task in textTasks.Clear())
                 {
