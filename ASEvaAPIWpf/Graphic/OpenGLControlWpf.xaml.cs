@@ -76,7 +76,6 @@ namespace ASEva.UIWpf
                     gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, depthBuffer[0]);
                     gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
                     hostBuffer = new byte[size.RealWidth * size.RealHeight * 4];
-                    bitmap = new WriteableBitmap(size.RealWidth, size.RealHeight, 96, 96, PixelFormats.Bgra32, null);
                 }
 
                 gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[0]);
@@ -89,6 +88,7 @@ namespace ASEva.UIWpf
                 callback.OnGLRender(gl, textTasks);
                 gl.Finish();
 
+                bitmap = new WriteableBitmap(size.RealWidth, size.RealHeight, 96, 96, PixelFormats.Bgra32, null);
                 gl.ReadPixels(0, 0, bitmap.PixelWidth, bitmap.PixelHeight, OpenGL.GL_RGBA, hostBuffer);
 
                 bitmap.Lock();
