@@ -8,7 +8,7 @@
 
 using System;
 
-namespace ASEva.UIGtk
+namespace ASEva.UIMonoMac
 {
     /// <summary>
     /// version=1.3.5
@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 3, 5, 0); // GLViewFactory支持输出supportOverlay
+            return new Version(1, 3, 5, 1); // 修正命名空间
         }
     }
 }
