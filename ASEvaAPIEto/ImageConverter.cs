@@ -27,16 +27,20 @@ namespace ASEva.UIEto
                             switch (Mode)
                             {
                                 case ConvertMode.AlphaScale:
-                                    convert4AlphaScaleToBitmap(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    if (image.BgrInverted) convert4AlphaScaleColorInvertedToBitmap(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    else convert4AlphaScaleToBitmap(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
                                     break;
                                 case ConvertMode.ColorInverted:
-                                    convert4ColorInverted(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    if (image.BgrInverted) convert4Default(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    else convert4ColorInverted(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
                                     break;
                                 case ConvertMode.AlphaScaleColorInverted:
-                                    convert4AlphaScaleColorInvertedToBitmap(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    if (image.BgrInverted) convert4AlphaScaleToBitmap(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    else convert4AlphaScaleColorInvertedToBitmap(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
                                     break;
                                 default:
-                                    convert4Default(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    if (image.BgrInverted) convert4ColorInverted(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    else convert4Default(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
                                     break;
                             }
                         }
@@ -56,16 +60,20 @@ namespace ASEva.UIEto
                             switch (Mode)
                             {
                                 case ConvertMode.AlphaScale:
-                                    convert3Default(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    if (image.BgrInverted) convert3ColorInverted(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    else convert3Default(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
                                     break;
                                 case ConvertMode.ColorInverted:
-                                    convert3ColorInverted(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    if (image.BgrInverted) convert3Default(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    else convert3ColorInverted(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
                                     break;
                                 case ConvertMode.AlphaScaleColorInverted:
-                                    convert3ColorInverted(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    if (image.BgrInverted) convert3Default(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    else convert3ColorInverted(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
                                     break;
                                 default:
-                                    convert3Default(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    if (image.BgrInverted) convert3ColorInverted(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
+                                    else convert3Default(srcData, dstData, image.RowBytes, bitmapData.ScanWidth, image.Width, image.Height);
                                     break;
                             }
                         }
@@ -85,7 +93,7 @@ namespace ASEva.UIEto
             {
                 if (bitmapData.BytesPerPixel == 3)
                 {
-                    var image = CommonImage.Create(bitmap.Width, bitmap.Height, false);
+                    var image = CommonImage.Create(bitmap.Width, bitmap.Height, false, false);
                     unsafe
                     {
                         var srcData = (byte*)bitmapData.Data;
@@ -112,7 +120,7 @@ namespace ASEva.UIEto
                 }
                 else if (bitmapData.BytesPerPixel == 4)
                 {
-                    var image = CommonImage.Create(bitmap.Width, bitmap.Height, true);
+                    var image = CommonImage.Create(bitmap.Width, bitmap.Height, true, false);
                     unsafe
                     {
                         var srcData = (byte*)bitmapData.Data;

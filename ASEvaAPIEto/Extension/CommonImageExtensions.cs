@@ -33,7 +33,7 @@ namespace ASEva.UIEto
             if (image.WithAlpha)
             {
                 targetData = image.Data;
-                colorType = SKColorType.Bgra8888;
+                colorType = image.BgrInverted ? SKColorType.Rgba8888 : SKColorType.Bgra8888;
             }
             else
             {
@@ -48,9 +48,19 @@ namespace ASEva.UIEto
                         {
                             byte* srcRow = &srcData[v * image.RowBytes];
                             uint* dstRow = (uint*)&dstData[v * width * 4];
-                            for (int u = 0; u < width; u++)
+                            if (image.BgrInverted)
                             {
-                                dstRow[u] = 0xff000000 | (uint)srcRow[3 * u + 2] | ((uint)srcRow[3 * u + 1] << 8) | ((uint)srcRow[3 * u] << 16);
+                                for (int u = 0; u < width; u++)
+                                {
+                                    dstRow[u] = 0xff000000 | (uint)srcRow[3 * u] | ((uint)srcRow[3 * u + 1] << 8) | ((uint)srcRow[3 * u + 2] << 16);
+                                }
+                            }
+                            else
+                            {
+                                for (int u = 0; u < width; u++)
+                                {
+                                    dstRow[u] = 0xff000000 | (uint)srcRow[3 * u + 2] | ((uint)srcRow[3 * u + 1] << 8) | ((uint)srcRow[3 * u] << 16);
+                                }
                             }
                         }
                     }
@@ -60,7 +70,7 @@ namespace ASEva.UIEto
             }
 
             var context = new SKPixmapContext{ Handle = GCHandle.Alloc(targetData, GCHandleType.Pinned) };
-            var info = new SKImageInfo(image.Width, image.Height, colorType);
+            var info = new SKImageInfo(image.Width, image.Height, colorType, SKAlphaType.Unpremul);
             var pixmap = new SKPixmap(info, context.Handle.AddrOfPinnedObject(), image.Width * 4);
             return SKImage.FromPixels(pixmap, (p, c) => (c as SKPixmapContext).Handle.Free(), context);
         }

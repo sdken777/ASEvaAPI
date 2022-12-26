@@ -254,7 +254,7 @@ namespace ASEva.UIEto
 			var targetSize = drawable.GetLogicalSize();
 			if (commonImage == null || commonImage.Width != targetSize.Width || commonImage.Height != targetSize.Height)
 			{
-				commonImage = CommonImage.Create(targetSize.Width, targetSize.Height, true);
+				commonImage = CommonImage.Create(targetSize.Width, targetSize.Height, true, false);
 			}
 
 			unsafe

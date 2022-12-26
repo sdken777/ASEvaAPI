@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于Eto.Forms的部分。详见 ASEva.UIEto \n
- * 本文档对应API版本：2.9.2\n
+ * 本文档对应API版本：2.9.3\n
  * \n
  * Eto.Forms官方仓库: https://github.com/picoe/Eto \n
  * API文档: https://pages.picoe.ca/docs/api
@@ -11,7 +11,7 @@ using System;
 namespace ASEva.UIEto
 {
     /// <summary>
-    /// version=2.9.2
+    /// version=2.9.3
     /// </summary>
     public class APIInfo
     {
@@ -21,7 +21,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 2, 0); // 新增FlowLayout2D.GetControlWithMouse。修正FlowLayout2D.UpdateControlsLayout可能弹出异常
+            return new Version(2, 9, 3, 0); // 支持CommonImage.BgrInverted
         }
     }
 }
