@@ -30,12 +30,17 @@ namespace ASEva.Samples
         public bool WithAlpha { get { return withAlpha; } }
 
         /// <summary>
+        /// (api:app=2.8.5) BGR是否逆序
+        /// </summary>
+        public bool BgrInverted { get { return bgrInverted; } }
+
+        /// <summary>
         /// 每行数据字节数
         /// </summary>
         public int RowBytes { get { return rowBytes; } }
 
         /// <summary>
-        /// 图像数据，每个像素的存放顺序为BGR或BGRA
+        /// 图像数据，每个像素的存放顺序为BGR或BGRA（若BGR逆序则为RGB或RGBA）
         /// </summary>
         public byte[] Data { get { return data; } }
 
@@ -57,6 +62,32 @@ namespace ASEva.Samples
             image.width = width;
             image.height = height;
             image.withAlpha = withAlpha;
+            image.bgrInverted = false;
+            image.rowBytes = rowBytes;
+            image.data = new byte[rowBytes * height];
+            return image;
+        }
+
+        /// <summary>
+        /// 创建通用图像数据
+        /// </summary>
+        /// <param name="width">图像宽度</param>
+        /// <param name="height">图像高度</param>
+        /// <param name="withAlpha">是否带Alpha通道</param>
+        /// <param name="bgrInverted">BGR是否逆序</param>
+        /// <returns>通用图像数据</returns>
+        public static CommonImage Create(int width, int height, bool withAlpha, bool bgrInverted)
+        {
+            if (width <= 0 || height <= 0 || width > 65536 || height > 65536) return null;
+
+            var rowBytesValid = width * (withAlpha ? 4 : 3);
+            var rowBytes = (((rowBytesValid - 1) >> 2) + 1) << 2;
+
+            var image = new CommonImage();
+            image.width = width;
+            image.height = height;
+            image.withAlpha = withAlpha;
+            image.bgrInverted = bgrInverted;
             image.rowBytes = rowBytes;
             image.data = new byte[rowBytes * height];
             return image;
@@ -132,7 +163,7 @@ namespace ASEva.Samples
             var withAlpha = image.PixelType.BitsPerPixel == 32;
             var bytesPerPixel = withAlpha ? 4 : 3;
 
-            var output = CommonImage.Create(image.Width, image.Height, withAlpha);
+            var output = CommonImage.Create(image.Width, image.Height, withAlpha, false);
             for (int i = 0; i < image.Height; i++)
             {
                 var srcRow = image.GetPixelRowSpan(i);
@@ -237,31 +268,66 @@ namespace ASEva.Samples
             if (WithAlpha)
             {
                 image = new Image<Rgba32>(Width, Height, new Rgba32(0, 0, 0, 0));
-                for (int i = 0; i < image.Height; i++)
+                if (bgrInverted)
                 {
-                    var srcRowIndex = i * RowBytes;
-                    var dstRow = image.GetPixelRowSpan(i);
-                    for (int j = 0; j < dstRow.Length; j++)
+                    for (int i = 0; i < image.Height; i++)
                     {
-                        dstRow[j].B = Data[srcRowIndex + j * 4];
-                        dstRow[j].G = Data[srcRowIndex + j * 4 + 1];
-                        dstRow[j].R = Data[srcRowIndex + j * 4 + 2];
-                        dstRow[j].A = Data[srcRowIndex + j * 4 + 3];
+                        var srcRowIndex = i * RowBytes;
+                        var dstRow = image.GetPixelRowSpan(i);
+                        for (int j = 0; j < dstRow.Length; j++)
+                        {
+                            dstRow[j].R = Data[srcRowIndex + j * 4];
+                            dstRow[j].G = Data[srcRowIndex + j * 4 + 1];
+                            dstRow[j].B = Data[srcRowIndex + j * 4 + 2];
+                            dstRow[j].A = Data[srcRowIndex + j * 4 + 3];
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < image.Height; i++)
+                    {
+                        var srcRowIndex = i * RowBytes;
+                        var dstRow = image.GetPixelRowSpan(i);
+                        for (int j = 0; j < dstRow.Length; j++)
+                        {
+                            dstRow[j].B = Data[srcRowIndex + j * 4];
+                            dstRow[j].G = Data[srcRowIndex + j * 4 + 1];
+                            dstRow[j].R = Data[srcRowIndex + j * 4 + 2];
+                            dstRow[j].A = Data[srcRowIndex + j * 4 + 3];
+                        }
                     }
                 }
             }
             else
             {
                 image = new Image<Rgba32>(Width, Height, new Rgba32(0, 0, 0, 255));
-                for (int i = 0; i < image.Height; i++)
+                if (bgrInverted)
                 {
-                    var srcRowIndex = i * RowBytes;
-                    var dstRow = image.GetPixelRowSpan(i);
-                    for (int j = 0; j < dstRow.Length; j++)
+                    for (int i = 0; i < image.Height; i++)
                     {
-                        dstRow[j].B = Data[srcRowIndex + j * 3];
-                        dstRow[j].G = Data[srcRowIndex + j * 3 + 1];
-                        dstRow[j].R = Data[srcRowIndex + j * 3 + 2];
+                        var srcRowIndex = i * RowBytes;
+                        var dstRow = image.GetPixelRowSpan(i);
+                        for (int j = 0; j < dstRow.Length; j++)
+                        {
+                            dstRow[j].R = Data[srcRowIndex + j * 3];
+                            dstRow[j].G = Data[srcRowIndex + j * 3 + 1];
+                            dstRow[j].B = Data[srcRowIndex + j * 3 + 2];
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < image.Height; i++)
+                    {
+                        var srcRowIndex = i * RowBytes;
+                        var dstRow = image.GetPixelRowSpan(i);
+                        for (int j = 0; j < dstRow.Length; j++)
+                        {
+                            dstRow[j].B = Data[srcRowIndex + j * 3];
+                            dstRow[j].G = Data[srcRowIndex + j * 3 + 1];
+                            dstRow[j].R = Data[srcRowIndex + j * 3 + 2];
+                        }
                     }
                 }
             }
@@ -274,6 +340,7 @@ namespace ASEva.Samples
         private int width, height;
         private byte[] data;
         private bool withAlpha;
+        private bool bgrInverted;
         private int rowBytes;
     }
 }

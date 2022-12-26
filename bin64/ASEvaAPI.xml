@@ -1958,7 +1958,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.8.4
+            version=2.8.5
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4721,6 +4721,11 @@
             是否含有Alpha通道
             </summary>
         </member>
+        <member name="P:ASEva.Samples.CommonImage.BgrInverted">
+            <summary>
+            (api:app=2.8.5) BGR是否逆序
+            </summary>
+        </member>
         <member name="P:ASEva.Samples.CommonImage.RowBytes">
             <summary>
             每行数据字节数
@@ -4728,7 +4733,7 @@
         </member>
         <member name="P:ASEva.Samples.CommonImage.Data">
             <summary>
-            图像数据，每个像素的存放顺序为BGR或BGRA
+            图像数据，每个像素的存放顺序为BGR或BGRA（若BGR逆序则为RGB或RGBA）
             </summary>
         </member>
         <member name="M:ASEva.Samples.CommonImage.Create(System.Int32,System.Int32,System.Boolean)">
@@ -4738,6 +4743,16 @@
             <param name="width">图像宽度</param>
             <param name="height">图像高度</param>
             <param name="withAlpha">是否带Alpha通道</param>
+            <returns>通用图像数据</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.Create(System.Int32,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            创建通用图像数据
+            </summary>
+            <param name="width">图像宽度</param>
+            <param name="height">图像高度</param>
+            <param name="withAlpha">是否带Alpha通道</param>
+            <param name="bgrInverted">BGR是否逆序</param>
             <returns>通用图像数据</returns>
         </member>
         <member name="M:ASEva.Samples.CommonImage.LoadFile(System.String)">
