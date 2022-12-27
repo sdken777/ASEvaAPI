@@ -16,11 +16,62 @@ namespace ASEva.UIWpf
 
             if (image.WithAlpha)
             {
-                return BitmapSource.Create(image.Width, image.Height, 96, 96, PixelFormats.Bgra32, null, image.Data, image.RowBytes);
+                if (image.BgrInverted)
+                {
+                    var imageData = new byte[image.Height * image.RowBytes];
+                    unsafe
+                    {
+                        fixed (byte* srcData = &image.Data[0], dstData = &imageData[0])
+                        {
+                            for (int i = 0; i < image.Height; i++)
+                            {
+                                byte* srcRow = &srcData[i * image.RowBytes];
+                                byte* dstRow = &dstData[i * image.RowBytes];
+                                for (int n = 0; n < image.Width; n++)
+                                {
+                                    dstRow[4 * n] = srcRow[4 * n + 2];
+                                    dstRow[4 * n + 1] = srcRow[4 * n + 1];
+                                    dstRow[4 * n + 2] = srcRow[4 * n];
+                                    dstRow[4 * n + 3] = srcRow[4 * n + 3];
+                                }
+                            }
+                        }
+                    }
+                    return BitmapSource.Create(image.Width, image.Height, 96, 96, PixelFormats.Bgra32, null, imageData, image.RowBytes);
+                }
+                else
+                {
+                    return BitmapSource.Create(image.Width, image.Height, 96, 96, PixelFormats.Bgra32, null, image.Data, image.RowBytes);
+                }
             }
             else
             {
-                return BitmapSource.Create(image.Width, image.Height, 96, 96, PixelFormats.Bgr24, null, image.Data, image.RowBytes);
+                if (image.BgrInverted)
+                {
+                    var imageData = new byte[image.Height * image.RowBytes];
+                    unsafe
+                    {
+                        fixed (byte* srcData = &image.Data[0], dstData = &imageData[0])
+                        {
+                            for (int i = 0; i < image.Height; i++)
+                            {
+                                byte* srcRow = &srcData[i * image.RowBytes];
+                                byte* dstRow = &dstData[i * image.RowBytes];
+                                for (int n = 0; n < image.Width; n++)
+                                {
+                                    dstRow[3 * n] = srcRow[3 * n + 2];
+                                    dstRow[3 * n + 1] = srcRow[3 * n + 1];
+                                    dstRow[3 * n + 2] = srcRow[3 * n];
+                                }
+                            }
+                        }
+                    }
+                    return BitmapSource.Create(image.Width, image.Height, 96, 96, PixelFormats.Bgr24, null, imageData, image.RowBytes);
+                }
+                else
+                {
+                    return BitmapSource.Create(image.Width, image.Height, 96, 96, PixelFormats.Bgr24, null, image.Data, image.RowBytes);
+                }
             }
         }
 
@@ -32,13 +83,13 @@ namespace ASEva.UIWpf
             var bitmap = bitmapObject as BitmapSource;
             if (bitmap.Format == PixelFormats.Bgra32)
             {
-                var image = CommonImage.Create(bitmap.PixelWidth, bitmap.PixelHeight, true);
+                var image = CommonImage.Create(bitmap.PixelWidth, bitmap.PixelHeight, true, false);
                 bitmap.CopyPixels(image.Data, image.RowBytes, 0);
                 return image;
             }
             else if (bitmap.Format == PixelFormats.Bgr24)
             {
-                var image = CommonImage.Create(bitmap.PixelWidth, bitmap.PixelHeight, false);
+                var image = CommonImage.Create(bitmap.PixelWidth, bitmap.PixelHeight, false, false);
                 bitmap.CopyPixels(image.Data, image.RowBytes, 0);
                 return image;
             }
