@@ -1695,7 +1695,7 @@ namespace ASEva
         /// <param name="imageSize">指定图像大小</param>
         /// <param name="centerLocation">图像中心的经纬度</param>
         /// <param name="zoom">图像的尺度，0~24</param>
-        /// <returns>离线地图图像（通用图像数据），空表示获取失败</returns>
+        /// <returns>离线地图图像（通用图像数据，BGR不逆序），空表示获取失败</returns>
         public static CommonImage GetOfflineMapCommonImage(IntSize imageSize, LocPoint centerLocation, int zoom)
         {
             return Handler.GetOfflineMapCommonImage(imageSize, centerLocation, zoom);
@@ -2693,7 +2693,7 @@ namespace ASEva
         /// (api:app=2.3.0) 转换平台特化图像对象至通用图像数据
         /// </summary>
         /// <param name="image">平台特化图像</param>
-        /// <returns>通用图像数据，转换失败则返回null</returns>
+        /// <returns>通用图像数据(BGR不逆序)，转换失败则返回null</returns>
         public static CommonImage ConvertImageToCommon(object image)
         {
             return Handler.ConvertImageToCommon(image);
@@ -2766,7 +2766,7 @@ namespace ASEva
         /// (api:app=2.3.0) 解码图像数据
         /// </summary>
         /// <param name="imageData">JPG或PNG二进制数据</param>
-        /// <returns>解码后的通用图像数据，若失败则返回null</returns>
+        /// <returns>解码后的通用图像数据(BGR不逆序)，若失败则返回null</returns>
         public static CommonImage DecodeImage(byte[] imageData)
         {
             return Handler.DecodeImage(imageData);

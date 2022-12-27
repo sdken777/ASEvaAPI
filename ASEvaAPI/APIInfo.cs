@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 5, 0); // 新增CommonImage.BgrInverted
+            return new Version(2, 8, 5, 1); // 确保VideoFrameSample.CommonImage的BGR不逆序
         }
 
         /// <summary>

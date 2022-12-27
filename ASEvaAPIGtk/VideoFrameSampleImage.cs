@@ -20,6 +20,7 @@ namespace ASEva.UIGtk
             rowBytes = (w * 3 + 3) & 0xfffc;
             data = new byte[h * rowBytes];
             withAlpha = false;
+            bgrInverted = false;
         }
 
         /// <summary>
@@ -35,6 +36,7 @@ namespace ASEva.UIGtk
             output.rowBytes = image.RowBytes;
             output.data = image.Data;
             output.withAlpha = image.WithAlpha;
+            output.bgrInverted = image.BgrInverted;
             return output;
         }
 
@@ -79,6 +81,14 @@ namespace ASEva.UIGtk
         }
 
         /// <summary>
+        /// (api:gtk=2.5.6) BGR是否逆序
+        /// </summary>
+        public bool BgrInverted
+        {
+            get { return bgrInverted; }
+        }
+
+        /// <summary>
         /// 转换为Gdk.Pixbuf对象
         /// </summary>
         public Pixbuf ToPixbuf()
@@ -91,18 +101,34 @@ namespace ASEva.UIGtk
                     byte* dstData = (byte*)pixbuf.Pixels;
                     fixed (byte* srcData = &(data[0]))
                     {
-                        for (int v = 0; v < h; v++)
+                        if (bgrInverted)
                         {
-                            byte* srcRow = &srcData[v * rowBytes];
-                            byte* dstRow = &dstData[v * pixbuf.Rowstride];
-                            for (int u = 0; u < w; u++)
+                            for (int v = 0; v < h; v++)
                             {
-                                dstRow[4 * u] = srcRow[4 * u + 2];
-                                dstRow[4 * u + 1] = srcRow[4 * u + 1];
-                                dstRow[4 * u + 2] = srcRow[4 * u];
-                                dstRow[4 * u + 3] = srcRow[4 * u + 3];
+                                uint* srcRow = (uint*)&srcData[v * rowBytes];
+                                uint* dstRow = (uint*)&dstData[v * pixbuf.Rowstride];
+                                for (int u = 0; u < w; u++)
+                                {
+                                    dstRow[u] = srcRow[u];
+                                }
                             }
                         }
+                        else
+                        {
+                            for (int v = 0; v < h; v++)
+                            {
+                                byte* srcRow = &srcData[v * rowBytes];
+                                byte* dstRow = &dstData[v * pixbuf.Rowstride];
+                                for (int u = 0; u < w; u++)
+                                {
+                                    dstRow[4 * u] = srcRow[4 * u + 2];
+                                    dstRow[4 * u + 1] = srcRow[4 * u + 1];
+                                    dstRow[4 * u + 2] = srcRow[4 * u];
+                                    dstRow[4 * u + 3] = srcRow[4 * u + 3];
+                                }
+                            }
+                        }
+
                     }
                 }
                 return pixbuf;
@@ -115,15 +141,30 @@ namespace ASEva.UIGtk
                     byte* dstData = (byte*)pixbuf.Pixels;
                     fixed (byte* srcData = &(data[0]))
                     {
-                        for (int v = 0; v < h; v++)
+                        if (bgrInverted)
                         {
-                            byte* srcRow = &srcData[v * rowBytes];
-                            byte* dstRow = &dstData[v * pixbuf.Rowstride];
-                            for (int u = 0; u < w; u++)
+                            for (int v = 0; v < h; v++)
                             {
-                                dstRow[3 * u] = srcRow[3 * u + 2];
-                                dstRow[3 * u + 1] = srcRow[3 * u + 1];
-                                dstRow[3 * u + 2] = srcRow[3 * u];
+                                byte* srcRow = &srcData[v * rowBytes];
+                                byte* dstRow = &dstData[v * pixbuf.Rowstride];
+                                for (int u = 0; u < 3 * w; u++)
+                                {
+                                    dstRow[u] = srcRow[u];
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int v = 0; v < h; v++)
+                            {
+                                byte* srcRow = &srcData[v * rowBytes];
+                                byte* dstRow = &dstData[v * pixbuf.Rowstride];
+                                for (int u = 0; u < w; u++)
+                                {
+                                    dstRow[3 * u] = srcRow[3 * u + 2];
+                                    dstRow[3 * u + 1] = srcRow[3 * u + 1];
+                                    dstRow[3 * u + 2] = srcRow[3 * u];
+                                }
                             }
                         }
                     }
@@ -149,14 +190,29 @@ namespace ASEva.UIGtk
                         {
                             byte* srcRow = &srcData[v * rowBytes];
                             byte* dstRow = &dstData[v * w * 4];
-                            for (int u = 0; u < w; u++)
+                            if (bgrInverted)
                             {
-                                if (srcRow[4 * u + 3] == 0) continue;
-                                var ratio = k * srcRow[4 * u + 3];
-                                dstRow[4 * u] = (byte)(ratio * srcRow[4 * u]);
-                                dstRow[4 * u + 1] = (byte)(ratio * srcRow[4 * u + 1]);
-                                dstRow[4 * u + 2] = (byte)(ratio * srcRow[4 * u + 2]);
-                                dstRow[4 * u + 3] = srcRow[4 * u + 3];
+                                for (int u = 0; u < w; u++)
+                                {
+                                    if (srcRow[4 * u + 3] == 0) continue;
+                                    var ratio = k * srcRow[4 * u + 3];
+                                    dstRow[4 * u] = (byte)(ratio * srcRow[4 * u + 2]);
+                                    dstRow[4 * u + 1] = (byte)(ratio * srcRow[4 * u + 1]);
+                                    dstRow[4 * u + 2] = (byte)(ratio * srcRow[4 * u]);
+                                    dstRow[4 * u + 3] = srcRow[4 * u + 3];
+                                }
+                            }
+                            else
+                            {
+                                for (int u = 0; u < w; u++)
+                                {
+                                    if (srcRow[4 * u + 3] == 0) continue;
+                                    var ratio = k * srcRow[4 * u + 3];
+                                    dstRow[4 * u] = (byte)(ratio * srcRow[4 * u]);
+                                    dstRow[4 * u + 1] = (byte)(ratio * srcRow[4 * u + 1]);
+                                    dstRow[4 * u + 2] = (byte)(ratio * srcRow[4 * u + 2]);
+                                    dstRow[4 * u + 3] = srcRow[4 * u + 3];
+                                }
                             }
                         }
                     }
@@ -174,12 +230,25 @@ namespace ASEva.UIGtk
                         {
                             byte* srcRow = &srcData[v * rowBytes];
                             byte* dstRow = &dstData[v * w * 4];
-                            for (int u = 0; u < w; u++)
+                            if (bgrInverted)
                             {
-                                dstRow[4 * u] = srcRow[3 * u];
-                                dstRow[4 * u + 1] = srcRow[3 * u + 1];
-                                dstRow[4 * u + 2] = srcRow[3 * u + 2];
-                                dstRow[4 * u + 3] = 255;
+                                for (int u = 0; u < w; u++)
+                                {
+                                    dstRow[4 * u] = srcRow[3 * u + 2];
+                                    dstRow[4 * u + 1] = srcRow[3 * u + 1];
+                                    dstRow[4 * u + 2] = srcRow[3 * u];
+                                    dstRow[4 * u + 3] = 255;
+                                }
+                            }
+                            else
+                            {
+                                for (int u = 0; u < w; u++)
+                                {
+                                    dstRow[4 * u] = srcRow[3 * u];
+                                    dstRow[4 * u + 1] = srcRow[3 * u + 1];
+                                    dstRow[4 * u + 2] = srcRow[3 * u + 2];
+                                    dstRow[4 * u + 3] = 255;
+                                }
                             }
                         }
                     }
@@ -196,5 +265,6 @@ namespace ASEva.UIGtk
         private int h;
         private int rowBytes;
         private bool withAlpha;
+        private bool bgrInverted;
     }
 }

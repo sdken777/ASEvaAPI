@@ -11,7 +11,7 @@ namespace ASEva.Samples
     public class VideoFrameSample : Sample
     {
         /// <summary>
-        /// (api:app=2.3.0) 通用图像数据
+        /// (api:app=2.3.0) 通用图像数据(BGR不逆序)
         /// </summary>
         /// <value></value>
         public CommonImage CommonImage { get; set; }
@@ -108,7 +108,7 @@ namespace ASEva.Samples
         /// <param name="timeline">时间线上的目标时间点</param>
         public VideoFrameSample(object image, IntSize rawSize, int channelIndex, DateTime session, double offset, double timeline) : base(session, offset, timeline)
         {
-            CommonImage = Agency.ConvertImageToCommon(image);
+            if (image != null) CommonImage = Agency.ConvertImageToCommon(image);
             ChannelIndex = channelIndex;
             SpecialCameraType = SpecialCameraType.Normal;
             SpecialCameraInfo = null;
@@ -133,7 +133,7 @@ namespace ASEva.Samples
         /// <param name="timeline">时间线上的目标时间点</param>
         public VideoFrameSample(CommonImage image, IntSize rawSize, int channelIndex, DateTime session, double offset, double timeline) : base(session, offset, timeline)
         {
-            CommonImage = image;
+            if (image != null && !image.BgrInverted) CommonImage = image;
             ChannelIndex = channelIndex;
             SpecialCameraType = SpecialCameraType.Normal;
             SpecialCameraInfo = null;

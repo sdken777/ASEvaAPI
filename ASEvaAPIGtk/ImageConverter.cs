@@ -20,17 +20,47 @@ namespace ASEva.UIGtk
             if (platformImage is VideoFrameSampleImage)
             {
                 var sampleImage = platformImage as VideoFrameSampleImage;
-                var image = CommonImage.Create(sampleImage.Width, sampleImage.Height, sampleImage.WithAlpha);
+                var image = CommonImage.Create(sampleImage.Width, sampleImage.Height, sampleImage.WithAlpha, false);
                 unsafe
                 {
                     fixed (byte* srcData = &(sampleImage.Data[0]), dstData = &(image.Data[0]))
                     {
-                        for (int i = 0; i < sampleImage.Height; i++)
+                        if (sampleImage.BgrInverted)
                         {
-                            byte* srcRow = srcData + i * sampleImage.RowBytes;
-                            byte* dstRow = dstData + i * image.RowBytes;
-                            int copyBytes = Math.Min(sampleImage.RowBytes, image.RowBytes);
-                            for (int n = 0; n < copyBytes; n++) dstRow[n] = srcRow[n];
+                            for (int i = 0; i < sampleImage.Height; i++)
+                            {
+                                byte* srcRow = srcData + i * sampleImage.RowBytes;
+                                byte* dstRow = dstData + i * image.RowBytes;
+                                if (sampleImage.WithAlpha)
+                                {
+                                    for (int n = 0; n < sampleImage.Width; n++)
+                                    {
+                                        dstRow[4 * n] = srcRow[4 * n + 2];
+                                        dstRow[4 * n + 1] = srcRow[4 * n + 1];
+                                        dstRow[4 * n + 2] = srcRow[4 * n];
+                                        dstRow[4 * n + 3] = srcRow[4 * n + 3];
+                                    }
+                                }
+                                else
+                                {
+                                    for (int n = 0; n < sampleImage.Width; n++)
+                                    {
+                                        dstRow[3 * n] = srcRow[3 * n + 2];
+                                        dstRow[3 * n + 1] = srcRow[3 * n + 1];
+                                        dstRow[3 * n + 2] = srcRow[3 * n];
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < sampleImage.Height; i++)
+                            {
+                                byte* srcRow = srcData + i * sampleImage.RowBytes;
+                                byte* dstRow = dstData + i * image.RowBytes;
+                                int copyBytes = Math.Min(sampleImage.RowBytes, image.RowBytes);
+                                for (int n = 0; n < copyBytes; n++) dstRow[n] = srcRow[n];
+                            }
                         }
                     }
                 }
@@ -41,7 +71,7 @@ namespace ASEva.UIGtk
                 var pixbuf = platformImage as Gdk.Pixbuf;
                 if (pixbuf.HasAlpha)
                 {
-                    var image = CommonImage.Create(pixbuf.Width, pixbuf.Height, true);
+                    var image = CommonImage.Create(pixbuf.Width, pixbuf.Height, true, false);
                     unsafe
                     {
                         byte* srcData = (byte*)pixbuf.Pixels;
@@ -65,7 +95,7 @@ namespace ASEva.UIGtk
                 }
                 else
                 {
-                    var image = CommonImage.Create(pixbuf.Width, pixbuf.Height, false);
+                    var image = CommonImage.Create(pixbuf.Width, pixbuf.Height, false, false);
                     unsafe
                     {
                         byte* srcData = (byte*)pixbuf.Pixels;

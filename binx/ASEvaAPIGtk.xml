@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIGtk.APIInfo">
             <summary>
-            version=2.5.5
+            version=2.5.6
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.APIInfo.GetAPIVersion">
@@ -342,6 +342,11 @@
         <member name="P:ASEva.UIGtk.VideoFrameSampleImage.WithAlpha">
             <summary>
             (api:gtk=2.1.0) 是否含alpha通道
+            </summary>
+        </member>
+        <member name="P:ASEva.UIGtk.VideoFrameSampleImage.BgrInverted">
+            <summary>
+            (api:gtk=2.5.6) BGR是否逆序
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.VideoFrameSampleImage.ToPixbuf">
