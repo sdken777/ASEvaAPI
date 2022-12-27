@@ -143,6 +143,7 @@ namespace ASEva
         Dictionary<String, String> GetNativePluginVersions(String prefix);
         Dictionary<String, Version> GetNativePluginVersions(NativeLibraryType type);
         VideoFrameGetter CreateVideoFrameGetter();
+        VideoFrameGetterX CreateVideoFrameGetterX();
         object GetOfflineMapImage(IntSize imageSize, LocPoint centerLocation, int zoom);
         CommonImage GetOfflineMapCommonImage(IntSize imageSize, LocPoint centerLocation, int zoom);
         FloatPoint ConvertOfflineMapLocToPix(LocPoint origin, int zoom, LocPoint point);
@@ -1755,6 +1756,15 @@ namespace ASEva
         public static VideoFrameGetter CreateVideoFrameGetter()
         {
             return Handler.CreateVideoFrameGetter();
+        }
+
+        /// <summary>
+        /// (api:app=2.9.0) 创建视频帧获取器(扩展版)
+        /// </summary>
+        /// <returns>视频帧获取器(扩展版)</returns>
+        public static VideoFrameGetterX CreateVideoFrameGetterX()
+        {
+            return Handler.CreateVideoFrameGetterX();
         }
 
         /// <summary>

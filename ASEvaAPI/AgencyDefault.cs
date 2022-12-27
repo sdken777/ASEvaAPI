@@ -1345,5 +1345,10 @@ namespace ASEva
         {
             return null;
         }
+
+        public VideoFrameGetterX CreateVideoFrameGetterX()
+        {
+            return null;
+        }
     }
 }

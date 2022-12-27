@@ -1912,4 +1912,49 @@ namespace ASEva
             TimeRatio = 1;
         }
     }
+
+    /// <summary>
+    /// (api:app=2.9.0) 获取视频帧的接口（扩展版）
+    /// </summary>
+    public interface VideoFrameGetterX
+    {
+        /// <summary>
+        /// 获取指定通道在指定时间上的视频帧的原始尺寸
+        /// </summary>
+        /// <param name="channel">视频通道，0~23</param>
+        /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
+        /// <returns>原始尺寸，若无数据则返回null</returns>
+        IntSize? GetVideoRawSize(int channel, double timeline);
+
+        /// <summary>
+        /// 获取指定通道在指定时间上的摄像头信息
+        /// </summary>
+        /// <param name="channel">视频通道，0~23</param>
+        /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
+        /// <returns>摄像头信息，获取失败则返回null</returns>
+        CameraInfo GetVideoCameraInfo(int channel, double timeline);
+
+        /// <summary>
+        /// 获取距离指定时间最近的视频帧数据
+        /// </summary>
+        /// <param name="channel">视频通道，0~23</param>
+        /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
+        /// <param name="maxGap">容许的最大间隔，单位秒</param>
+        /// <param name="targetRect">输出图像在原始尺寸坐标系下的范围</param>
+        /// <param name="hires">是否优先输出高清图像，否则固定输出不大于VGA分辨率的图像</param>
+        /// <param name="withAlpha">是否输出带Alpha通道的图像(固定赋值255)</param>
+        /// <param name="timestamp">输出图像的时间戳，获取失败则为null</param>
+        /// <returns>视频帧数据，根据实际情况可能为原始尺寸大小图像或不大于VGA分辨率的图像，获取失败则返回null</returns>
+        CommonImage GetVideoFrameImage(int channel, double timeline, double maxGap, IntRect targetRect, bool hires, bool withAlpha, out Timestamp? timestamp);
+
+        /// <summary>
+        /// 获取距离指定时间最近的缩略图数据
+        /// </summary>
+        /// <param name="channel">视频通道，0~23</param>
+        /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
+        /// <param name="maxGap">容许的最大间隔，单位秒</param>
+        /// <param name="withAlpha">是否输出带Alpha通道的图像(固定赋值255)</param>
+        /// <returns>缩略图数据，图像宽度固定为80，获取失败则返回null</returns>
+        CommonImage GetVideoFrameThumbnail(int channel, double timeline, double maxGap, bool withAlpha);
+    }
 }
