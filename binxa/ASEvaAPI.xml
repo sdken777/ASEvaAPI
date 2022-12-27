@@ -1958,7 +1958,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.8.5
+            version=2.8.6
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4802,6 +4802,13 @@
             (api:app=2.4.1) 转为ImageSharp的Rgba32图像
             </summary>
             <returns>ImageSharp的Rgba32图像对象</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.ConvertBgrInverted(System.Boolean)">
+            <summary>
+            (api:app=2.8.6) 转换为BGR逆序或不逆序的图像对象
+            </summary>
+            <param name="targetInverted">BGR是否逆序</param>
+            <returns>转换后的图像对象</returns>
         </member>
         <member name="T:ASEva.Samples.ManualTriggerSample">
             <summary>

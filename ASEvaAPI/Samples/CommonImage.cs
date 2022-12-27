@@ -334,6 +334,49 @@ namespace ASEva.Samples
             return image;
         }
 
+        /// <summary>
+        /// (api:app=2.8.6) 转换为BGR逆序或不逆序的图像对象
+        /// </summary>
+        /// <param name="targetInverted">BGR是否逆序</param>
+        /// <returns>转换后的图像对象</returns>
+        public CommonImage ConvertBgrInverted(bool targetInverted)
+        {
+            if (targetInverted == bgrInverted) return this;
+
+            var output = CommonImage.Create(width, height, withAlpha, targetInverted);
+            unsafe
+            {
+                fixed (byte* srcData = &data[0], dstData = &output.data[0])
+                {
+                    for (int i = 0; i < height; i++)
+                    {
+                        byte* srcRow = &srcData[i * rowBytes];
+                        byte* dstRow = &dstData[i * output.rowBytes];
+                        if (withAlpha)
+                        {
+                            for (int n = 0; n < width; n++)
+                            {
+                                dstRow[4 * n] = srcRow[4 * n + 2];
+                                dstRow[4 * n + 1] = srcRow[4 * n + 1];
+                                dstRow[4 * n + 2] = srcRow[4 * n];
+                                dstRow[4 * n + 3] = srcRow[4 * n + 3];
+                            }
+                        }
+                        else
+                        {
+                            for (int n = 0; n < width; n++)
+                            {
+                                dstRow[3 * n] = srcRow[3 * n + 2];
+                                dstRow[3 * n + 1] = srcRow[3 * n + 1];
+                                dstRow[3 * n + 2] = srcRow[3 * n];
+                            }
+                        }
+                    }
+                }
+            }
+            return output;
+        }
+
         private CommonImage()
         {}
 

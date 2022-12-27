@@ -5,6 +5,7 @@
     <AssemblyName>ASEvaAPI</AssemblyName>
     <Version>0.0.0.0</Version>
     <NoWarn>1701;1702;1591</NoWarn>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <DocumentationFile>..\bin64\ASEvaAPI.xml</DocumentationFile>
   </PropertyGroup>
 
