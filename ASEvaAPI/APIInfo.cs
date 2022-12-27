@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 0, 0); // 新增CameraInfo，VideoFrameGetterX，以及Agency.CreateVideoFrameGetterX
+            return new Version(2, 9, 0, 1); // 修正VideoFrameGetterX
         }
 
         /// <summary>

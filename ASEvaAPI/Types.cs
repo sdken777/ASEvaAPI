@@ -1914,6 +1914,32 @@ namespace ASEva
     }
 
     /// <summary>
+    /// (api:app=2.9.0) 获取视频帧的模式
+    /// </summary>
+    public enum VideoFrameGetMode
+    {
+        /// <summary>
+        /// 固定输出VGA尺寸图像数据
+        /// </summary>
+        Preview = 0,
+
+        /// <summary>
+        /// 输出原始尺寸图像数据(若条件不满足则退化为Preview)
+        /// </summary>
+        RawFull = 1,
+
+        /// <summary>
+        /// 输出按原始尺寸1/2缩小后的图像数据(若条件不满足则退化为Preview)
+        /// </summary>
+        RawHalf = 2,
+
+        /// <summary>
+        /// 输出按原始尺寸1/4缩小后的图像数据(若条件不满足则退化为Preview)
+        /// </summary>
+        RawQuarter = 3,
+    }
+
+    /// <summary>
     /// (api:app=2.9.0) 获取视频帧的接口（扩展版）
     /// </summary>
     public interface VideoFrameGetterX
@@ -1927,25 +1953,18 @@ namespace ASEva
         IntSize? GetVideoRawSize(int channel, double timeline);
 
         /// <summary>
-        /// 获取指定通道在指定时间上的摄像头信息
-        /// </summary>
-        /// <param name="channel">视频通道，0~23</param>
-        /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
-        /// <returns>摄像头信息，获取失败则返回null</returns>
-        CameraInfo GetVideoCameraInfo(int channel, double timeline);
-
-        /// <summary>
         /// 获取距离指定时间最近的视频帧数据
         /// </summary>
         /// <param name="channel">视频通道，0~23</param>
         /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
         /// <param name="maxGap">容许的最大间隔，单位秒</param>
-        /// <param name="targetRect">输出图像在原始尺寸坐标系下的范围</param>
-        /// <param name="hires">是否优先输出高清图像，否则固定输出不大于VGA分辨率的图像</param>
+        /// <param name="mode">视频数据输出模式</param>
+        /// <param name="clip">在输出模式基础上进一步裁剪，为原始尺寸坐标系，至少为16x16，null表示完整输出</param>
         /// <param name="withAlpha">是否输出带Alpha通道的图像(固定赋值255)</param>
         /// <param name="timestamp">输出图像的时间戳，获取失败则为null</param>
-        /// <returns>视频帧数据，根据实际情况可能为原始尺寸大小图像或不大于VGA分辨率的图像，获取失败则返回null</returns>
-        CommonImage GetVideoFrameImage(int channel, double timeline, double maxGap, IntRect targetRect, bool hires, bool withAlpha, out Timestamp? timestamp);
+        /// <param name="cameraInfo">摄像头信息，获取失败则为null</param>
+        /// <returns>视频帧数据，图像实际大小由mode和clip决定，获取失败则返回null</returns>
+        CommonImage GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha, out Timestamp? timestamp, out CameraInfo cameraInfo);
 
         /// <summary>
         /// 获取距离指定时间最近的缩略图数据
