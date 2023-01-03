@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 7, 0); // 支持CommonImage.BgrInverted
+            return new Version(2, 4, 7, 1); // 修正离屏渲染未清空上下文问题
         }
     }
 }

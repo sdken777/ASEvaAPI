@@ -190,6 +190,8 @@ namespace ASEva.UICoreWF
                 initOK = false;
             }
 
+            Win32.wglMakeCurrent(hdc, IntPtr.Zero);
+
             DrawBeat.CallbackEnd(this);
         }
 
