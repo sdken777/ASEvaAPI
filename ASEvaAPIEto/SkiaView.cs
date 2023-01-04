@@ -47,8 +47,10 @@ namespace ASEva.UIEto
 		/// </summary>
 		public SkiaView()
 		{
-			useGL = !Agency.IsGPURenderingDisabled();
-			requestOnscreenRendering = false;
+			this.moduleID = null;
+			this.useGL = !Agency.IsGPURenderingDisabled();
+			this.requestOnscreenRendering = false;
+			this.requestOverlay = false;
 			initContent();
 		}
 
@@ -58,8 +60,10 @@ namespace ASEva.UIEto
 		/// <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
 		public SkiaView(bool disableGLRendering)
 		{
-			useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
-			requestOnscreenRendering = false;
+			this.moduleID = null;
+			this.useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
+			this.requestOnscreenRendering = false;
+			this.requestOverlay = false;
 			initContent();
 		}
 
@@ -71,8 +75,9 @@ namespace ASEva.UIEto
 		public SkiaView(String moduleID, bool disableGLRendering)
 		{
 			this.moduleID = moduleID;
-			useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
-			requestOnscreenRendering = false;
+			this.useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
+			this.requestOnscreenRendering = false;
+			this.requestOverlay = false;
 			initContent();
 		}
 
@@ -85,8 +90,25 @@ namespace ASEva.UIEto
 		public SkiaView(String moduleID, bool disableGLRendering, bool requestOnscreenRendering)
 		{
 			this.moduleID = moduleID;
-			useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
+			this.useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
 			this.requestOnscreenRendering = useGL && requestOnscreenRendering;
+			this.requestOverlay = false;
+			initContent();
+		}
+
+		/// <summary>
+		/// (api:eto=2.9.4) 构造函数
+		/// </summary>
+		/// <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
+		/// <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
+		/// <param name="requestOnscreenRendering">在未禁用OpenGL渲染时，是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
+		/// <param name="requestOverlay">是否需要支持被其他控件覆盖(若不支持则SupportOverlay属性为false)，默认为false</param>
+		public SkiaView(String moduleID, bool disableGLRendering, bool requestOnscreenRendering, bool requestOverlay)
+		{
+			this.moduleID = moduleID;
+			this.useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
+			this.requestOnscreenRendering = useGL && requestOnscreenRendering;
+			this.requestOverlay = requestOverlay;
 			initContent();
 		}
 
@@ -319,6 +341,8 @@ namespace ASEva.UIEto
 						EnableOnscreenRendering = requestOnscreenRendering || Agency.IsOnscreenGPURenderingEnabled(),
 						UseTextTasks = false,
 						UseLegacyAPI = false,
+						RequestAntialias = GLAntialias.Disabled,
+						RequestOverlay = requestOverlay,
 					};
 					Factory.CreateGLBackend(this, options, out etoControl, out glBackend, out supportOverlay);
 					if (etoControl != null) Content = etoControl;
@@ -357,6 +381,7 @@ namespace ASEva.UIEto
 		private bool closed = false;
 		private String moduleID;
 		private bool requestOnscreenRendering;
+		private bool requestOverlay;
 		private bool supportOverlay = false;
 	}
 }

@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.9.3
+            version=2.9.4
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -1585,6 +1585,36 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="T:ASEva.UIEto.GLAntialias">
+            <summary>
+            (api:eto=2.9.4) 抗锯齿选项
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLAntialias.Disabled">
+            <summary>
+            禁用
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLAntialias.Sample2x">
+            <summary>
+            2x抗锯齿
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLAntialias.Sample4x">
+            <summary>
+            4x抗锯齿
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLAntialias.Sample8x">
+            <summary>
+            8x抗锯齿
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLAntialias.Sample16x">
+            <summary>
+            16x抗锯齿
+            </summary>
+        </member>
         <member name="T:ASEva.UIEto.GLView">
             <summary>
             (api:eto=2.6.0) OpenGL绘制视图
@@ -1622,6 +1652,17 @@
             </summary>
             <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
             <param name="requestOnscreenRendering">是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
+            <param name="drawText">是否需要绘制文本，默认为true</param>
+            <param name="useLegacyAPI">是否需要使用OpenGL传统API，默认为true</param>
+        </member>
+        <member name="M:ASEva.UIEto.GLView.#ctor(System.String,ASEva.UIEto.GLAntialias,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            (api:eto=2.9.4) 构造函数
+            </summary>
+            <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
+            <param name="requestAntialias">请求抗锯齿选项(若不满足条件则使用最接近的选项)，默认为4倍抗锯齿</param>
+            <param name="requestOnscreenRendering">是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
+            <param name="requestOverlay">是否需要支持被其他控件覆盖(若不支持则SupportOverlay属性为false)，默认为true</param>
             <param name="drawText">是否需要绘制文本，默认为true</param>
             <param name="useLegacyAPI">是否需要使用OpenGL传统API，默认为true</param>
         </member>
@@ -1773,6 +1814,15 @@
             <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
             <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
             <param name="requestOnscreenRendering">在未禁用OpenGL渲染时，是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaView.#ctor(System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            (api:eto=2.9.4) 构造函数
+            </summary>
+            <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
+            <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
+            <param name="requestOnscreenRendering">在未禁用OpenGL渲染时，是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
+            <param name="requestOverlay">是否需要支持被其他控件覆盖(若不支持则SupportOverlay属性为false)，默认为false</param>
         </member>
         <member name="M:ASEva.UIEto.SkiaView.Close">
             <summary>

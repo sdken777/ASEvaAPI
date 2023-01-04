@@ -48,6 +48,12 @@ namespace ASEva.UIGtk
 		[DllImport(libGL, SetLastError = true)]
 		public static extern void glXSwapIntervalEXT(IntPtr x11Display, uint x11WindowID, int interval);
 
+		[DllImport(libGL, SetLastError = true)]
+		public static extern unsafe IntPtr glXChooseVisual(IntPtr x11Display, int x11ScreenNumber, int *attribs);
+
+		[DllImport(libGL, SetLastError = true)]
+		public static extern unsafe int glXGetConfig(IntPtr x11Display, IntPtr x11VisualInfo, int attrib, int *value);
+
 		[DllImport(libX11, SetLastError = true)]
 		public static extern uint XVisualIDFromVisual(IntPtr x11Visual);
 
@@ -65,6 +71,9 @@ namespace ASEva.UIGtk
 
 		[DllImport(libGDK, SetLastError = true)]
 		public static extern int gdk_x11_screen_get_screen_number(IntPtr gdkScreen);
+
+		[DllImport(libGDK, SetLastError = true)]
+		public static extern IntPtr gdk_x11_screen_lookup_visual(IntPtr gdkScreen, uint xvisualid);
 
 		[DllImport(libGDK, SetLastError = true)]
 		public static extern IntPtr gdk_x11_window_get_type();
@@ -98,6 +107,8 @@ namespace ASEva.UIGtk
 		public const int GLX_ACCUM_GREEN_SIZE = 15;
 		public const int GLX_ACCUM_BLUE_SIZE = 16;
 		public const int GLX_ACCUM_ALPHA_SIZE = 17;
+		public const int GLX_SAMPLE_BUFFERS = 0x186a0; /*100000*/
+		public const int GLX_SAMPLES = 0x186a1; /*100001*/
 
 		[DllImport(libGDK, SetLastError = true)]
 		public static extern IntPtr gdk_wayland_display_get_wl_display(IntPtr gdkDisplay);

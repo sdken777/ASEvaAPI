@@ -18,7 +18,7 @@ namespace ASEva.UIGtk
             {
                 if (uiBackend == "x11")
                 {
-                    if (!options.EnableOnscreenRendering || options.UseTextTasks)
+                    if (!options.EnableOnscreenRendering || options.UseTextTasks || options.RequestOverlay)
                     {
                         var view = new X11OffscreenView();
                         view.SetCallback(glView);
@@ -28,8 +28,7 @@ namespace ASEva.UIGtk
                     }
                     else
                     {
-                        var view = new X11OnscreenView();
-                        view.SetCallback(glView);
+                        var view = new X11OnscreenView(glView, options.RequestAntialias);
                         etoControl = view.ToEto();
                         glViewBackend = view;
                         supportOverlay = false;

@@ -325,6 +325,37 @@ namespace ASEva.UIEto
 	}
 
 	/// <summary>
+	/// (api:eto=2.9.4) 抗锯齿选项
+	/// </summary>
+	public enum GLAntialias
+	{
+		/// <summary>
+		/// 禁用
+		/// </summary>
+		Disabled = 0,
+
+		/// <summary>
+		/// 2x抗锯齿
+		/// </summary>
+		Sample2x = 1,
+
+		/// <summary>
+		/// 4x抗锯齿
+		/// </summary>
+		Sample4x = 2,
+
+		/// <summary>
+		/// 8x抗锯齿
+		/// </summary>
+		Sample8x = 3,
+
+		/// <summary>
+		/// 16x抗锯齿
+		/// </summary>
+		Sample16x = 4,
+	}
+
+	/// <summary>
 	/// (api:eto=2.6.0) OpenGL绘制视图
 	/// </summary>
 	public class GLView : Panel, GLCallback
@@ -350,7 +381,9 @@ namespace ASEva.UIEto
 		public GLView()
 		{
 			this.moduleID = null;
+			this.requestAntialias = GLAntialias.Sample4x;
 			this.requestOnscreenRendering = false;
+			this.requestOverlay = true;
 			this.drawText = true;
 			this.useLegacyAPI = true;
 			initContent();
@@ -363,7 +396,9 @@ namespace ASEva.UIEto
 		public GLView(String moduleID)
 		{
 			this.moduleID = moduleID;
+			this.requestAntialias = GLAntialias.Sample4x;
 			this.requestOnscreenRendering = false;
+			this.requestOverlay = true;
 			this.drawText = true;
 			this.useLegacyAPI = true;
 			initContent();
@@ -376,10 +411,32 @@ namespace ASEva.UIEto
 		/// <param name="requestOnscreenRendering">是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
 		/// <param name="drawText">是否需要绘制文本，默认为true</param>
 		/// <param name="useLegacyAPI">是否需要使用OpenGL传统API，默认为true</param>
-		public GLView(String moduleID, bool requestOnscreenRendering, bool drawText, bool useLegacyAPI)
+		public GLView(String moduleID, bool requestOnscreenRendering, bool drawText = true, bool useLegacyAPI = true)
 		{
 			this.moduleID = moduleID;
+			this.requestAntialias = GLAntialias.Sample4x;
 			this.requestOnscreenRendering = requestOnscreenRendering;
+			this.requestOverlay = true;
+			this.drawText = drawText;
+			this.useLegacyAPI = useLegacyAPI;
+			initContent();
+		}
+
+        /// <summary>
+        /// (api:eto=2.9.4) 构造函数
+        /// </summary>
+        /// <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
+        /// <param name="requestAntialias">请求抗锯齿选项(若不满足条件则使用最接近的选项)，默认为4倍抗锯齿</param>
+        /// <param name="requestOnscreenRendering">是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
+        /// <param name="requestOverlay">是否需要支持被其他控件覆盖(若不支持则SupportOverlay属性为false)，默认为true</param>
+        /// <param name="drawText">是否需要绘制文本，默认为true</param>
+        /// <param name="useLegacyAPI">是否需要使用OpenGL传统API，默认为true</param>
+        public GLView(String moduleID, GLAntialias requestAntialias, bool requestOnscreenRendering = false, bool requestOverlay = true, bool drawText = true, bool useLegacyAPI = true)
+		{
+			this.moduleID = moduleID;
+			this.requestAntialias = requestAntialias;
+			this.requestOnscreenRendering = requestOnscreenRendering;
+			this.requestOverlay = requestOverlay;
 			this.drawText = drawText;
 			this.useLegacyAPI = useLegacyAPI;
 			initContent();
@@ -493,6 +550,8 @@ namespace ASEva.UIEto
 					EnableOnscreenRendering = requestOnscreenRendering || Agency.IsOnscreenGPURenderingEnabled(),
 					UseTextTasks = drawText,
 					UseLegacyAPI = useLegacyAPI,
+					RequestAntialias = requestAntialias,
+					RequestOverlay = requestOverlay,
 				};
 				Factory.CreateGLBackend(this, options, out etoControl, out glBackend, out supportOverlay);
 				if (etoControl != null) Content = etoControl;
@@ -505,7 +564,9 @@ namespace ASEva.UIEto
 		private GLBackend glBackend;
 		private List<DateTime> renderTime = new List<DateTime>();
 		private String moduleID;
+		private GLAntialias requestAntialias;
 		private bool requestOnscreenRendering;
+		private bool requestOverlay;
 		private bool drawText;
 		private bool useLegacyAPI;
 		private bool supportOverlay = false;
@@ -534,6 +595,8 @@ namespace ASEva.UIEto
 		public bool EnableOnscreenRendering { get; set; }
 		public bool UseTextTasks { get; set; }
 		public bool UseLegacyAPI { get; set; }
+		public bool RequestOverlay { get; set; }
+		public GLAntialias RequestAntialias { get; set; }
 	}
 
 	public interface GLBackendFactory

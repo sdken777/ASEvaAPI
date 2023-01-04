@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于Gtk#的部分。详见 ASEva.UIGtk \n
- * 本文档对应API版本：2.5.6\n
+ * 本文档对应API版本：2.5.7\n
  * \n
  * Gtk#官方仓库: https://github.com/GtkSharp/GtkSharp \n
  * API文档(C): https://docs.gtk.org/gtk3
@@ -11,7 +11,7 @@ using System;
 namespace ASEva.UIGtk
 {
     /// <summary>
-    /// version=2.5.6
+    /// version=2.5.7
     /// </summary>
     public class APIInfo
     {
@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 6, 0); // 新增VideoFrameSampleImage.BgrInverted。ImageConverter支持CommonImage.BgrInverted
+            return new Version(2, 5, 7, 0); // GLViewFactoryGtk支持RequestOverlay选项。X11在屏渲染支持抗锯齿选项
         }
     }
 }
