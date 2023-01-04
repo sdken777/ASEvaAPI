@@ -9,9 +9,11 @@ namespace ASEva.UIGtk
     #pragma warning disable 612
     class X11OffscreenView : Box, GLBackend
     {
-        public X11OffscreenView() : base(Orientation.Vertical, 0)
+        public X11OffscreenView(GLCallback callback, GLAntialias antialias) : base(Orientation.Vertical, 0)
         {
-            gl = OpenGL.Create(new LinuxFuncLoader());
+            this.callback = callback;
+            this.antialias = antialias;
+            this.gl = OpenGL.Create(new LinuxFuncLoader());
 
             dummyArea.WidthRequest = 1;
             dummyArea.HeightRequest = 1;
@@ -24,11 +26,6 @@ namespace ASEva.UIGtk
 
             dummyArea.Realized += onRealized;
             realArea.Drawn += onDraw;
-        }
-
-        public void SetCallback(GLCallback callback)
-        {
-            this.callback = callback;
         }
 
         public void ReleaseGL()
@@ -58,12 +55,12 @@ namespace ASEva.UIGtk
 
             if (frameBuffer != null)
             {
-                gl.DeleteFramebuffersEXT(1, frameBuffer);
+                gl.DeleteFramebuffersEXT((uint)frameBuffer.Length, frameBuffer);
                 frameBuffer = null;
             }
             if (colorBuffer != null)
             {
-                gl.DeleteRenderbuffersEXT(1, colorBuffer);
+                gl.DeleteRenderbuffersEXT((uint)colorBuffer.Length, colorBuffer);
                 colorBuffer = null;
             }
             if (depthBuffer != null)
@@ -136,21 +133,48 @@ namespace ASEva.UIGtk
                     return;
                 }
 
-                colorBuffer = new uint[1];
-                gl.GenRenderbuffersEXT(1, colorBuffer);
+                if (antialias != GLAntialias.Disabled)
+                {
+                    if (gl.ExtensionList.Contains("GL_EXT_framebuffer_multisample") && gl.ExtensionList.Contains("GL_EXT_framebuffer_blit"))
+                    {
+                        var maxSamples = new int[1];
+                        gl.GetInteger(OpenGL.GL_MAX_SAMPLES_EXT, maxSamples);
+                        
+                        if (antialias == GLAntialias.Sample16x && maxSamples[0] < 16) antialias = GLAntialias.Sample8x;
+                        if (antialias == GLAntialias.Sample8x && maxSamples[0] < 8) antialias = GLAntialias.Sample4x;
+                        if (antialias == GLAntialias.Sample4x && maxSamples[0] < 4) antialias = GLAntialias.Sample2x;
+                        if (antialias == GLAntialias.Sample2x && maxSamples[0] < 2) antialias = GLAntialias.Disabled;
+                    }
+                    else antialias = GLAntialias.Disabled;
+                }
+
+                colorBuffer = new uint[antialias == GLAntialias.Disabled ? 1 : 2];
+                gl.GenRenderbuffersEXT((uint)colorBuffer.Length, colorBuffer);
                 gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[0]);
-                gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+                if (antialias != GLAntialias.Disabled)
+                {
+                    gl.RenderbufferStorageMultisampleEXT(OpenGL.GL_RENDERBUFFER, getSampleCount(antialias), OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+                    gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[1]);
+                    gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+                }
+                else gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
 
                 depthBuffer = new uint[1];
                 gl.GenRenderbuffersEXT(1, depthBuffer);
                 gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, depthBuffer[0]);
-                gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+                if (antialias == GLAntialias.Disabled) gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+                else gl.RenderbufferStorageMultisampleEXT(OpenGL.GL_RENDERBUFFER, getSampleCount(antialias), OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
 
-                frameBuffer = new uint[1];
-                gl.GenFramebuffersEXT(1, frameBuffer);
+                frameBuffer = new uint[antialias == GLAntialias.Disabled ? 1 : 2];
+                gl.GenFramebuffersEXT((uint)frameBuffer.Length, frameBuffer);
                 gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[0]);
                 gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBuffer[0]);
                 gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_DEPTH_ATTACHMENT_EXT, OpenGL.GL_RENDERBUFFER_EXT, depthBuffer[0]);
+                if (antialias != GLAntialias.Disabled)
+                {
+                    gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[1]);
+                    gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBuffer[1]);
+                }
 
                 if (gl.CheckFramebufferStatusEXT(OpenGL.GL_FRAMEBUFFER_EXT) != OpenGL.GL_FRAMEBUFFER_COMPLETE_EXT)
                 {
@@ -203,9 +227,21 @@ namespace ASEva.UIGtk
                 if (resized)
                 {
                     gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[0]);
-                    gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+                    if (antialias != GLAntialias.Disabled)
+                    {
+                        gl.RenderbufferStorageMultisampleEXT(OpenGL.GL_RENDERBUFFER, getSampleCount(antialias), OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+                        gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[1]);
+                        gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+                    }
+                    else gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+
                     gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, depthBuffer[0]);
-                    gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+                    if (antialias != GLAntialias.Disabled)
+                    {
+                        gl.RenderbufferStorageMultisampleEXT(OpenGL.GL_RENDERBUFFER, getSampleCount(antialias), OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+                    }
+                    else gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+                    
                     hostBuffer = new byte[size.RealWidth * size.RealHeight * 4];
                     if (cairoSurface != null)
                     {
@@ -216,14 +252,20 @@ namespace ASEva.UIGtk
                 }
 
                 gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[0]);
-                gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBuffer[0]);
-                gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_DEPTH_ATTACHMENT_EXT, OpenGL.GL_RENDERBUFFER_EXT, depthBuffer[0]);
 
                 if (resized) callback.OnGLResize(gl, size);
 
                 var textTasks = new GLTextTasks();
                 callback.OnGLRender(gl, textTasks);
                 gl.Finish();
+
+                if (antialias != GLAntialias.Disabled)
+                {
+                    gl.BindFramebufferEXT(OpenGL.GL_READ_FRAMEBUFFER_EXT, frameBuffer[0]);
+                    gl.BindFramebufferEXT(OpenGL.GL_DRAW_FRAMEBUFFER_EXT, frameBuffer[1]);
+                    gl.BlitFramebufferEXT(0, 0, size.RealWidth, size.RealHeight, 0, 0, size.RealWidth, size.RealHeight, OpenGL.GL_COLOR_BUFFER_BIT, OpenGL.GL_NEAREST);
+                    gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[1]);
+                }
 
                 var cairoWidth = size.RealWidth;
                 var cairoHeight = size.RealHeight;
@@ -267,6 +309,23 @@ namespace ASEva.UIGtk
             DrawBeat.CallbackEnd(this);
         }
 
+        private int getSampleCount(GLAntialias antialias)
+        {
+            switch (antialias)
+            {
+                case GLAntialias.Sample2x:
+                    return 2;
+                case GLAntialias.Sample4x:
+                    return 4;
+                case GLAntialias.Sample8x:
+                    return 8;
+                case GLAntialias.Sample16x:
+                    return 16;
+                default:
+                    return 0;
+            }
+        }
+
         private OpenGL gl = null;
         private GLCallback callback;
         private IntPtr context = IntPtr.Zero;
@@ -281,5 +340,6 @@ namespace ASEva.UIGtk
         private bool drawQueued = false;
         private DrawingArea realArea = new DrawingArea();
         private DrawingArea dummyArea = new DrawingArea();
+        private GLAntialias antialias;
     }
 }

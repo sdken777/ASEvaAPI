@@ -20,8 +20,7 @@ namespace ASEva.UIGtk
                 {
                     if (!options.EnableOnscreenRendering || options.UseTextTasks || options.RequestOverlay)
                     {
-                        var view = new X11OffscreenView();
-                        view.SetCallback(glView);
+                        var view = new X11OffscreenView(glView, options.RequestAntialias);
                         etoControl = view.ToEto();
                         glViewBackend = view;
                         supportOverlay = true;
