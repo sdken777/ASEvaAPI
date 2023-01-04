@@ -8,8 +8,7 @@ namespace ASEva.UIMonoMac
     {
         public void CreateGLBackend(GLCallback glView, GLOptions options, out Control etoControl, out GLBackend glViewBackend, out bool supportOverlay)
         {
-            var openglView = new OpenGLView(options.UseLegacyAPI);
-            openglView.SetCallback(glView);
+            var openglView = new OpenGLView(glView, options.RequestAntialias, options.UseLegacyAPI);
             etoControl = openglView.ToEto();
             glViewBackend = openglView;
             supportOverlay = true;

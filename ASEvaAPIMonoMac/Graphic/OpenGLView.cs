@@ -12,25 +12,29 @@ namespace ASEva.UIMonoMac
 {
     class OpenGLView : NSOpenGLView, GLBackend
     {
-        public OpenGLView(bool useLegacyAPI) : base(new CGRect(0, 0, 100, 100))
-        {
-            PixelFormat = new NSOpenGLPixelFormat(new NSOpenGLPixelFormatAttribute[]
-            {
-                NSOpenGLPixelFormatAttribute.Window,
-                NSOpenGLPixelFormatAttribute.Accelerated,
-                NSOpenGLPixelFormatAttribute.DoubleBuffer,
-                NSOpenGLPixelFormatAttribute.MinimumPolicy,
-                NSOpenGLPixelFormatAttribute.ColorSize, (NSOpenGLPixelFormatAttribute)24,
-                NSOpenGLPixelFormatAttribute.AlphaSize, (NSOpenGLPixelFormatAttribute)8,
-                NSOpenGLPixelFormatAttribute.DepthSize, (NSOpenGLPixelFormatAttribute)16,
-                NSOpenGLPixelFormatAttribute.OpenGLProfile, useLegacyAPI ? (NSOpenGLPixelFormatAttribute)NSOpenGLProfile.VersionLegacy : (NSOpenGLPixelFormatAttribute)NSOpenGLProfile.Version3_2Core,
-                (NSOpenGLPixelFormatAttribute)0
-            });
-        }
-
-        public void SetCallback(GLCallback callback)
+        public OpenGLView(GLCallback callback, GLAntialias antialias, bool useLegacyAPI) : base(new CGRect(0, 0, 100, 100))
         {
             this.callback = callback;
+
+            if (antialias == GLAntialias.Sample16x) antialias = GLAntialias.Sample8x; // 可能不支持16x
+
+            var attribs = new List<NSOpenGLPixelFormatAttribute>();
+            attribs.Add(NSOpenGLPixelFormatAttribute.Window);
+            attribs.Add(NSOpenGLPixelFormatAttribute.Accelerated);
+            attribs.Add(NSOpenGLPixelFormatAttribute.DoubleBuffer);
+            attribs.Add(NSOpenGLPixelFormatAttribute.MinimumPolicy);
+            attribs.Add(NSOpenGLPixelFormatAttribute.ColorSize); attribs.Add((NSOpenGLPixelFormatAttribute)24);
+            attribs.Add(NSOpenGLPixelFormatAttribute.AlphaSize); attribs.Add((NSOpenGLPixelFormatAttribute)8);
+            attribs.Add(NSOpenGLPixelFormatAttribute.DepthSize); attribs.Add((NSOpenGLPixelFormatAttribute)16);
+            attribs.Add(NSOpenGLPixelFormatAttribute.OpenGLProfile); attribs.Add(useLegacyAPI ? (NSOpenGLPixelFormatAttribute)NSOpenGLProfile.VersionLegacy : (NSOpenGLPixelFormatAttribute)NSOpenGLProfile.Version3_2Core);
+            if (antialias != GLAntialias.Disabled)
+            {
+                attribs.Add(NSOpenGLPixelFormatAttribute.SampleBuffers); attribs.Add((NSOpenGLPixelFormatAttribute)1);
+                attribs.Add(NSOpenGLPixelFormatAttribute.Samples); attribs.Add((NSOpenGLPixelFormatAttribute)getSampleCount(antialias));
+            }
+            attribs.Add((NSOpenGLPixelFormatAttribute)0);
+
+            PixelFormat = new NSOpenGLPixelFormat(attribs.ToArray());
         }
 
         public void ReleaseGL()
@@ -285,6 +289,23 @@ namespace ASEva.UIMonoMac
 
             private GLCallback callback;
             private NSView parent;
+        }
+
+        private int getSampleCount(GLAntialias antialias)
+        {
+            switch (antialias)
+            {
+                case GLAntialias.Sample2x:
+                    return 2;
+                case GLAntialias.Sample4x:
+                    return 4;
+                case GLAntialias.Sample8x:
+                    return 8;
+                case GLAntialias.Sample16x:
+                    return 16;
+                default:
+                    return 0;
+            }
         }
 
         private class TextViewContext
