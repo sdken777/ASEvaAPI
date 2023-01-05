@@ -21,8 +21,7 @@ namespace ASEva.UICoreWF
             }
             else
             {
-                var openglControl = new OpenGLOnscreenControl();
-                openglControl.SetCallback(glView);
+                var openglControl = new OpenGLOnscreenControl(glView, options.RequestAntialias);
                 etoControl = openglControl.ToEto();
                 glViewBackend = openglControl;
                 supportOverlay = true;
