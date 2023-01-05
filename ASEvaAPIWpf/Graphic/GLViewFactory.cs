@@ -13,16 +13,14 @@ namespace ASEva.UIWpf
         {
             if (options.EnableOnscreenRendering)
             {
-                var openglControl = new OpenGLBlitControlWpf();
-                openglControl.SetCallback(glView);
+                var openglControl = new OpenGLBlitControlWpf(glView, options.RequestAntialias);
                 etoControl = openglControl.ToEto();
                 glViewBackend = openglControl;
                 supportOverlay = true;
             }
             else
             {
-                var openglControl = new OpenGLControlWpf();
-                openglControl.SetCallback(glView);
+                var openglControl = new OpenGLControlWpf(glView, options.RequestAntialias);
                 etoControl = openglControl.ToEto();
                 glViewBackend = openglControl;
                 supportOverlay = true;

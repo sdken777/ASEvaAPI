@@ -23,19 +23,16 @@ namespace ASEva.UIWpf
     {
         private const int D3DDefaultAdapter = 0;
 
-        public OpenGLBlitControlWpf()
+        public OpenGLBlitControlWpf(GLCallback callback, GLAntialias antialias)
         {
             XamlLoader.Load(this, "/ASEvaAPIWpf;component/graphic/openglblitcontrolwpf.xaml");
             grid.Children.Add(textDraw);
 
-            gl = OpenGL.Create(funcLoader);
+            this.callback = callback;
+            this.antialias = antialias;
+            this.gl = OpenGL.Create(funcLoader);
 
             CompositionTarget.Rendering += CompositionTarget_Rendering;
-        }
-
-        public void SetCallback(GLCallback callback)
-        {
-            this.callback = callback;
         }
 
         public void ReleaseGL()
@@ -92,9 +89,12 @@ namespace ASEva.UIWpf
                     if (fboFallback)
                     {
                         gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[1]);
-                        gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+                        if (antialias == GLAntialias.Disabled) gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+                        else gl.RenderbufferStorageMultisampleEXT(OpenGL.GL_RENDERBUFFER, getSampleCount(antialias), OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+
                         gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, depthBuffer[1]);
-                        gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+                        if (antialias == GLAntialias.Disabled) gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+                        else gl.RenderbufferStorageMultisampleEXT(OpenGL.GL_RENDERBUFFER, getSampleCount(antialias), OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
                     }
 
                     destroyD3DSurfaces();
@@ -109,8 +109,6 @@ namespace ASEva.UIWpf
                 if (fboFallback)
                 {
                     gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[1]);
-                    gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBuffer[1]);
-                    gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_DEPTH_ATTACHMENT_EXT, OpenGL.GL_RENDERBUFFER_EXT, depthBuffer[1]);
 
                     if (resized) callback.OnGLResize(gl, size);
 
@@ -124,9 +122,9 @@ namespace ASEva.UIWpf
                     d3dimg.SetBackBuffer(D3DResourceType.IDirect3DSurface9, (IntPtr)d3dSurfaceBuffer);
                     gl.DXLockObjectsNV(interopDevice, interopSurface);
 
-                    gl.BindFramebufferEXT(GL_READ_FRAMEBUFFER_EXT, frameBuffer[1]);
-                    gl.BindFramebufferEXT(GL_DRAW_FRAMEBUFFER_EXT, frameBuffer[0]);
-                    glBlitFramebufferEXT(0, 0, size.RealWidth, size.RealHeight, 0, 0, size.RealWidth, size.RealHeight, (int)OpenGL.GL_COLOR_BUFFER_BIT, (int)OpenGL.GL_NEAREST);
+                    gl.BindFramebufferEXT(OpenGL.GL_READ_FRAMEBUFFER_EXT, frameBuffer[1]);
+                    gl.BindFramebufferEXT(OpenGL.GL_DRAW_FRAMEBUFFER_EXT, frameBuffer[0]);
+                    gl.BlitFramebufferEXT(0, 0, size.RealWidth, size.RealHeight, 0, 0, size.RealWidth, size.RealHeight, (int)OpenGL.GL_COLOR_BUFFER_BIT, (int)OpenGL.GL_NEAREST);
                     gl.Finish();
 
                     gl.DXUnlockObjectsNV(interopDevice, interopSurface);
@@ -140,8 +138,6 @@ namespace ASEva.UIWpf
                     gl.DXLockObjectsNV(interopDevice, interopSurface);
 
                     gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[0]);
-                    gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBuffer[0]);
-                    gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_DEPTH_ATTACHMENT_EXT, OpenGL.GL_RENDERBUFFER_EXT, depthBuffer[0]);
 
                     if (resized) callback.OnGLResize(gl, size);
 
@@ -231,6 +227,7 @@ namespace ASEva.UIWpf
                 extensionList.AddRange(wglExtensionsString.Split(' '));
 
                 if (!extensionList.Contains("GL_EXT_framebuffer_object") ||
+                    !extensionList.Contains("GL_EXT_framebuffer_blit") ||
                     !extensionList.Contains("WGL_NV_DX_interop"))
                 {
                     onDestroy();
@@ -270,34 +267,30 @@ namespace ASEva.UIWpf
                     return;
                 }
 
-                if (!fboComplete)
+                if (antialias != GLAntialias.Disabled)
                 {
-                    if (!extensionList.Contains("GL_EXT_framebuffer_blit"))
+                    if (gl.ExtensionList.Contains("GL_EXT_framebuffer_multisample"))
                     {
-                        onDestroy();
-                        return;
-                    }
+                        var maxSamples = new int[1];
+                        gl.GetInteger(OpenGL.GL_MAX_SAMPLES_EXT, maxSamples);
 
-                    if (glBlitFramebufferEXT == null)
-                    {
-                        IntPtr funcAddress = funcLoader.GetFunctionAddress("glBlitFramebufferEXT");
-                        if (funcAddress != IntPtr.Zero)
-                        {
-                            Type delegateType = typeof(BlitFramebufferDelegate);
-                            glBlitFramebufferEXT = Marshal.GetDelegateForFunctionPointer(funcAddress, delegateType) as BlitFramebufferDelegate;
-                        }
+                        if (antialias == GLAntialias.Sample16x && maxSamples[0] < 16) antialias = GLAntialias.Sample8x;
+                        if (antialias == GLAntialias.Sample8x && maxSamples[0] < 8) antialias = GLAntialias.Sample4x;
+                        if (antialias == GLAntialias.Sample4x && maxSamples[0] < 4) antialias = GLAntialias.Sample2x;
+                        if (antialias == GLAntialias.Sample2x && maxSamples[0] < 2) antialias = GLAntialias.Disabled;
                     }
-                    if (glBlitFramebufferEXT == null)
-                    {
-                        onDestroy();
-                        return;
-                    }
+                    else antialias = GLAntialias.Disabled;
+                }
 
+                if (!fboComplete || antialias != GLAntialias.Disabled)
+                {
                     gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, colorBuffer[1]);
-                    gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+                    if (antialias == GLAntialias.Disabled) gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
+                    else gl.RenderbufferStorageMultisampleEXT(OpenGL.GL_RENDERBUFFER, getSampleCount(antialias), OpenGL.GL_RGB8, size.RealWidth, size.RealHeight);
 
                     gl.BindRenderbufferEXT(OpenGL.GL_RENDERBUFFER, depthBuffer[1]);
-                    gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+                    if (antialias == GLAntialias.Disabled) gl.RenderbufferStorageEXT(OpenGL.GL_RENDERBUFFER, OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
+                    else gl.RenderbufferStorageMultisampleEXT(OpenGL.GL_RENDERBUFFER, getSampleCount(antialias), OpenGL.GL_DEPTH_COMPONENT16, size.RealWidth, size.RealHeight);
 
                     gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[1]);
                     gl.FramebufferRenderbufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, OpenGL.GL_COLOR_ATTACHMENT0_EXT, OpenGL.GL_RENDERBUFFER_EXT, colorBuffer[1]);
@@ -450,11 +443,22 @@ namespace ASEva.UIWpf
             }
         }
 
-        private const int GL_READ_FRAMEBUFFER_EXT = 0x8CA8;
-        private const int GL_DRAW_FRAMEBUFFER_EXT = 0x8CA9;
-
-        private delegate void BlitFramebufferDelegate(int srcX0, int srcY0, int srcX1, int srcY1, int dstX0, int dstY0, int dstX1, int dstY1, int mask, int filter);
-        private BlitFramebufferDelegate glBlitFramebufferEXT = null;
+        private int getSampleCount(GLAntialias antialias)
+        {
+            switch (antialias)
+            {
+                case GLAntialias.Sample2x:
+                    return 2;
+                case GLAntialias.Sample4x:
+                    return 4;
+                case GLAntialias.Sample8x:
+                    return 8;
+                case GLAntialias.Sample16x:
+                    return 16;
+                default:
+                    return 0;
+            }
+        }
 
         private IntPtr hwnd = IntPtr.Zero;
         private Direct3DEx d3d;
@@ -469,9 +473,10 @@ namespace ASEva.UIWpf
         private IntPtr hdc = IntPtr.Zero;
         private IntPtr context = IntPtr.Zero;
         private GLCallback callback = null;
-        private uint[] frameBuffer = null; // [interop, fallback]
-        private uint[] colorBuffer = null; // [interop, fallback]
-        private uint[] depthBuffer = null; // [interop, fallback]
+        private GLAntialias antialias;
+        private uint[] frameBuffer = null; // [interop, fallback/multisample]
+        private uint[] colorBuffer = null; // [interop, fallback/multisample]
+        private uint[] depthBuffer = null; // [interop, fallback/multisample]
         private bool fboFallback = false;
         private bool? initOK = null;
         private bool drawQueued = false;
