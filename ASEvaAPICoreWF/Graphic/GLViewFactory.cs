@@ -13,8 +13,7 @@ namespace ASEva.UICoreWF
         {
             if (!options.EnableOnscreenRendering || options.UseTextTasks)
             {
-                var openglControl = new OpenGLControl();
-                openglControl.SetCallback(glView);
+                var openglControl = new OpenGLControl(glView, options.RequestAntialias);
                 etoControl = openglControl.ToEto();
                 glViewBackend = openglControl;
                 supportOverlay = true;
