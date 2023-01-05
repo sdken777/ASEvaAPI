@@ -273,13 +273,13 @@
         </member>
         <member name="P:SharpGL.OpenGL.Extensions">
             <summary>
-            Gets the extensions.
+            Gets the extensions by using glGetString(GL_EXTENSIONS)
             </summary>
             <value>The extensions.</value>
         </member>
         <member name="P:SharpGL.OpenGL.ExtensionList">
             <summary>
-            Gets the sorted extension list.
+            Gets the sorted extension list by using glGetStringi(GL_EXTENSIONS, i)
             </summary>
             <value>The extension list.</value>
         </member>

@@ -37,16 +37,14 @@ namespace ASEva.UIGtk
                 {
                     if (options.EnableOnscreenRendering)
                     {
-                        var view = new DefaultBlitView();
-                        view.SetCallback(glView);
+                        var view = new DefaultBlitView(glView, options.RequestAntialias, options.UseLegacyAPI);
                         etoControl = view.ToEto();
                         glViewBackend = view;
                         supportOverlay = true;
                     }
                     else
                     {
-                        var view = new WaylandOffscreenView();
-                        view.SetCallback(glView);
+                        var view = new WaylandOffscreenView(glView, options.RequestAntialias);
                         etoControl = view.ToEto();
                         glViewBackend = view;
                         supportOverlay = true;
@@ -56,16 +54,14 @@ namespace ASEva.UIGtk
                 {
                     if (options.EnableOnscreenRendering)
                     {
-                        var view = new DefaultBlitView();
-                        view.SetCallback(glView);
+                        var view = new DefaultBlitView(glView, options.RequestAntialias, options.UseLegacyAPI);
                         etoControl = view.ToEto();
                         glViewBackend = view;
                         supportOverlay = true;
                     }
                     else
                     {
-                        var view = new DefaultOffscreenView();
-                        view.SetCallback(glView);
+                        var view = new DefaultOffscreenView(glView, options.RequestAntialias, options.UseLegacyAPI);
                         etoControl = view.ToEto();
                         glViewBackend = view;
                         supportOverlay = true;
