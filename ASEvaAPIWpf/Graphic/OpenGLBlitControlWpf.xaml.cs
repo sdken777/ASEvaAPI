@@ -222,9 +222,9 @@ namespace ASEva.UIWpf
                 ctxInfo.version = gl.Version;
                 ctxInfo.vendor = gl.Vendor;
                 ctxInfo.renderer = gl.Renderer;
+                ctxInfo.extensions = gl.Extensions;
 
                 var wglExtensionsString = WGL.GetWglExtensionsString(gl, hdc);
-                ctxInfo.extensions = gl.Extensions + (wglExtensionsString.Length == 0 ? "" : (" " + wglExtensionsString));
 
                 var extensionList = new List<String>();
                 extensionList.AddRange(gl.ExtensionList);

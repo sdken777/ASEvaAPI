@@ -18,7 +18,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 4, 4, 0); // 支持CommonImage.BgrInverted
+            return new Version(1, 4, 4, 1); // 仅在屏渲染获取WGL扩展信息
         }
     }
 }
