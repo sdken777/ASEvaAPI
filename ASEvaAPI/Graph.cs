@@ -291,7 +291,7 @@ namespace ASEva
                 if (!Directory.Exists(root)) Directory.CreateDirectory(root);
                 if (!Directory.Exists(root)) return false;
 
-                var writer = new StreamWriter(file);
+                var writer = new StreamWriter(file, false, Encoding.UTF8);
 
                 // 第一行：header，ID，标题，数据参数
                 var paramsText = "";

@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 0, 1); // 修正VideoFrameGetterX
+            return new Version(2, 9, 0, 2); // 修正图表报告csv乱码问题
         }
 
         /// <summary>
