@@ -6009,6 +6009,36 @@
             (api:app=2.0.0) 总线设备通道类型
             </summary>
         </member>
+        <member name="F:ASEva.BusChannelType.None">
+            <summary>
+            无效类型
+            </summary>
+        </member>
+        <member name="F:ASEva.BusChannelType.Can">
+            <summary>
+            CAN总线，报文数据即payload，1～8字节
+            </summary>
+        </member>
+        <member name="F:ASEva.BusChannelType.CanFD">
+            <summary>
+            CAN-FD总线，报文数据即payload，1～64字节
+            </summary>
+        </member>
+        <member name="F:ASEva.BusChannelType.Lin">
+            <summary>
+            LIN总线，报文数据即payload，1～8字节
+            </summary>
+        </member>
+        <member name="F:ASEva.BusChannelType.Flexray">
+            <summary>
+            Flexray总线，报文数据由标志位字节(从低至高为startup,sync,null)、cycle字节和payload构成，2～256字节
+            </summary>
+        </member>
+        <member name="F:ASEva.BusChannelType.Ethernet">
+            <summary>
+            以太网总线，报文数据为包含链路层等等协议的完整以太网帧数据
+            </summary>
+        </member>
         <member name="T:ASEva.BusDeviceInfo">
             <summary>
             (api:app=2.0.0) 总线设备信息

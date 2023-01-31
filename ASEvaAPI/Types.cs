@@ -686,11 +686,34 @@ namespace ASEva
     /// </summary>
     public enum BusChannelType
     {
+        /// <summary>
+        /// 无效类型
+        /// </summary>
         None = 0,
+
+        /// <summary>
+        /// CAN总线，报文数据即payload，1～8字节
+        /// </summary>
         Can = 1,
+
+        /// <summary>
+        /// CAN-FD总线，报文数据即payload，1～64字节
+        /// </summary>
         CanFD = 2,
+
+        /// <summary>
+        /// LIN总线，报文数据即payload，1～8字节
+        /// </summary>
         Lin = 3,
+
+        /// <summary>
+        /// Flexray总线，报文数据由标志位字节(从低至高为startup,sync,null)、cycle字节和payload构成，2～256字节
+        /// </summary>
         Flexray = 4,
+
+        /// <summary>
+        /// 以太网总线，报文数据为包含链路层等等协议的完整以太网帧数据
+        /// </summary>
         Ethernet = 5,
     };
 
