@@ -707,6 +707,16 @@
             <param name="genDirName">后处理输出时，写入generation数据的文件夹名（若已存在且强制开始时，则使用默认的日期格式）</param>
             <returns>是否成功</returns>
         </member>
+        <member name="M:ASEva.Agency.StartRemote(System.Boolean,System.Boolean,System.String,System.UInt64)">
+            <summary>
+            (api:app=2.10.0) 切换至远程模式并开始预览或采集
+            </summary>
+            <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
+            <param name="previewOnly">是否为预览</param>
+            <param name="sessionDirName">采集时，写入session数据的文件夹名（若已存在且强制开始时，则使用默认的日期格式，时间为本机时间，非远程主机时间）</param>
+            <param name="startPosixTime">远程主机的开始时间，单位毫秒</param>
+            <returns>是否成功</returns>
+        </member>
         <member name="M:ASEva.Agency.StopRunning">
             <summary>
             停止采集、处理、回放
@@ -1369,9 +1379,9 @@
         </member>
         <member name="M:ASEva.Agency.GetCurrentOnlineSession">
             <summary>
-            (api:app=2.3.0) 获取在线模式下正在预览或采集的session
+            (api:app=2.3.0) 获取采集模式(在线/远程)下正在预览或采集的session
             </summary>
-            <returns>在线模式下正在预览或采集的session，若非在线模式则返回null</returns>
+            <returns>采集模式(在线/远程)下正在预览或采集的session，若非采集模式则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetSessionListTotalLength">
             <summary>
@@ -1964,7 +1974,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.9.1
+            version=2.10.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -5599,7 +5609,7 @@
         </member>
         <member name="F:ASEva.ApplicationMode.Online">
             <summary>
-            在线模式，采集数据与在线处理
+            在线采集模式
             </summary>
         </member>
         <member name="F:ASEva.ApplicationMode.Offline">
@@ -5610,6 +5620,11 @@
         <member name="F:ASEva.ApplicationMode.Replay">
             <summary>
             离线回放模式
+            </summary>
+        </member>
+        <member name="F:ASEva.ApplicationMode.Remote">
+            <summary>
+            (api:app=2.10.0) 远程采集模式
             </summary>
         </member>
         <member name="T:ASEva.LogLevel">
@@ -6219,6 +6234,11 @@
         <member name="P:ASEva.FileIONames.ReaderNames">
             <summary>
             文件读取器的名称列表
+            </summary>
+        </member>
+        <member name="P:ASEva.FileIONames.RemoteReaderNames">
+            <summary>
+            (api:app=2.10.0) 远程文件读取器的名称列表
             </summary>
         </member>
         <member name="P:ASEva.FileIONames.WriterNames">

@@ -205,7 +205,7 @@ namespace ASEva
     public enum ApplicationMode
     {
         /// <summary>
-        /// 在线模式，采集数据与在线处理
+        /// 在线采集模式
         /// </summary>
         Online,
         /// <summary>
@@ -216,6 +216,10 @@ namespace ASEva
         /// 离线回放模式
         /// </summary>
         Replay,
+        /// <summary>
+        /// (api:app=2.10.0) 远程采集模式
+        /// </summary>
+        Remote,
     }
 
     /// <summary>
@@ -995,6 +999,11 @@ namespace ASEva
         /// 文件读取器的名称列表
         /// </summary>
         public String[] ReaderNames { get; set; }
+
+        /// <summary>
+        /// (api:app=2.10.0) 远程文件读取器的名称列表
+        /// </summary>
+        public String[] RemoteReaderNames { get; set; }
 
         /// <summary>
         /// 文件写入器的名称列表

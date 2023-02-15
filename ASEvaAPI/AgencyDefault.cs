@@ -1350,5 +1350,10 @@ namespace ASEva
         {
             return null;
         }
+
+        public bool StartRemote(bool force, bool previewOnly, string sessionDirName, ulong startPosixTime)
+        {
+            return false;
+        }
     }
 }

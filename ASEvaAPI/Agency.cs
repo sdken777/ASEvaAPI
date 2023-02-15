@@ -115,6 +115,7 @@ namespace ASEva
         bool StartOnline(bool force, bool previewOnly, String sessionDirName);
         bool StartOffline(bool force, bool previewOnly);
         bool StartOffline(bool force, bool previewOnly, String genDirName);
+        bool StartRemote(bool force, bool previewOnly, String sessionDirName, ulong startPosixTime);
         void StopRunning();
         bool StopRunning(String controllerID);
         bool StopRunning(bool force, bool editRecordedSession);
@@ -1322,6 +1323,19 @@ namespace ASEva
         }
 
         /// <summary>
+        /// (api:app=2.10.0) 切换至远程模式并开始预览或采集
+        /// </summary>
+        /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
+        /// <param name="previewOnly">是否为预览</param>
+        /// <param name="sessionDirName">采集时，写入session数据的文件夹名（若已存在且强制开始时，则使用默认的日期格式，时间为本机时间，非远程主机时间）</param>
+        /// <param name="startPosixTime">远程主机的开始时间，单位毫秒</param>
+        /// <returns>是否成功</returns>
+        public static bool StartRemote(bool force, bool previewOnly, String sessionDirName, ulong startPosixTime)
+        {
+            return Handler.StartRemote(force, previewOnly, sessionDirName, startPosixTime);
+        }
+
+        /// <summary>
         /// 停止采集、处理、回放
         /// </summary>
         public static void StopRunning()
@@ -2267,9 +2281,9 @@ namespace ASEva
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 获取在线模式下正在预览或采集的session
+        /// (api:app=2.3.0) 获取采集模式(在线/远程)下正在预览或采集的session
         /// </summary>
-        /// <returns>在线模式下正在预览或采集的session，若非在线模式则返回null</returns>
+        /// <returns>采集模式(在线/远程)下正在预览或采集的session，若非采集模式则返回null</returns>
         public static DateTime? GetCurrentOnlineSession()
         {
             return Handler.GetCurrentOnlineSession();
