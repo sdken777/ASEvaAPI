@@ -1964,7 +1964,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.9.0
+            version=2.9.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -6107,6 +6107,16 @@
         <member name="F:ASEva.VideoDataCodec.RAW14">
             <summary>
             (api:app=2.7.5) RAW14：无损编码，帧间独立，格式为奇数行BG，偶数行GR，每数值14bit按小字序依次存储
+            </summary>
+        </member>
+        <member name="F:ASEva.VideoDataCodec.RAW16">
+            <summary>
+            (api:app=2.9.1) RAW16：无损编码，帧间独立，格式为奇数行BG，偶数行GR，每数值16bit按大字序依次存储
+            </summary>
+        </member>
+        <member name="F:ASEva.VideoDataCodec.Y16">
+            <summary>
+            (api:app=2.9.1) Y16：无损编码，帧间独立，每数值16bit按大字序依次存储
             </summary>
         </member>
         <member name="T:ASEva.VideoInputMode">

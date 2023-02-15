@@ -843,6 +843,16 @@ namespace ASEva
         /// (api:app=2.7.5) RAW14：无损编码，帧间独立，格式为奇数行BG，偶数行GR，每数值14bit按小字序依次存储
         /// </summary>
         RAW14 = 9,
+
+        /// <summary>
+        /// (api:app=2.9.1) RAW16：无损编码，帧间独立，格式为奇数行BG，偶数行GR，每数值16bit按大字序依次存储
+        /// </summary>
+        RAW16 = 10,
+
+        /// <summary>
+        /// (api:app=2.9.1) Y16：无损编码，帧间独立，每数值16bit按大字序依次存储
+        /// </summary>
+        Y16 = 11,
     }
 
     /// <summary>
