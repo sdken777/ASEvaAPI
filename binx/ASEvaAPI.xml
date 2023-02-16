@@ -2418,9 +2418,8 @@
         </member>
         <member name="M:ASEva.ModuleConfig.MayCauseLowSpeed">
             <summary>
-            (api:app=2.3.2) [ProcessorClass/NativeClass可选实现] 获取是否会合法的导致极低（甚至停滞）的回放速度
+            (api:app=2.3.2) 已弃用，远程采集应使用 ASEva.FileIONames.RemoteReaderNames
             </summary>
-            <returns>是否会合法的导致极低（甚至停滞）的回放速度</returns>
         </member>
         <member name="M:ASEva.ModuleConfig.DisableAll">
             <summary>
