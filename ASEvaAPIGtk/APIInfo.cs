@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 9, 0); // Wayland在屏/离屏渲染支持抗锯齿，支持UseLegacyAPI选项
+            return new Version(2, 5, 9, 1); // 修正VideoFrameSampleImage.ToImageSurface导致的内存访问异常
         }
     }
 }

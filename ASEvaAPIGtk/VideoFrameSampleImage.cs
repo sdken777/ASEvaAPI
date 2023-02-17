@@ -178,13 +178,14 @@ namespace ASEva.UIGtk
         /// </summary>
         public ImageSurface ToImageSurface()
         {
-            if (withAlpha)
+            var surface = new Cairo.ImageSurface(Cairo.Format.Argb32, w, h);
+            unsafe
             {
-                var buffer = new byte[w * h * 4];
-                var k = 1.0f / 255;
-                unsafe
+                byte* dstData = (byte*)surface.DataPtr;
+                if (withAlpha)
                 {
-                    fixed (byte* srcData = &(Data[0]), dstData = &(buffer[0]))
+                    var k = 1.0f / 255;
+                    fixed (byte* srcData = &(Data[0]))
                     {
                         for (int v = 0; v < h; v++)
                         {
@@ -217,14 +218,9 @@ namespace ASEva.UIGtk
                         }
                     }
                 }
-                return new Cairo.ImageSurface(buffer, Cairo.Format.Argb32, w, h, w * 4);
-            }
-            else
-            {
-                var buffer = new byte[w * h * 4];
-                unsafe
+                else
                 {
-                    fixed (byte* srcData = &(Data[0]), dstData = &(buffer[0]))
+                    fixed (byte* srcData = &(Data[0]))
                     {
                         for (int v = 0; v < h; v++)
                         {
@@ -253,8 +249,9 @@ namespace ASEva.UIGtk
                         }
                     }
                 }
-                return new Cairo.ImageSurface(buffer, Cairo.Format.Argb32, w, h, w * 4);
             }
+            surface.MarkDirty();
+            return surface;
         }
 
         private VideoFrameSampleImage()
