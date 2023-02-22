@@ -82,7 +82,7 @@ namespace ASEvaAPIEtoTest
             var flowLayout = layout.AddControl(new FlowLayout(), true) as FlowLayout;
             flowLayout.ControlSelected += delegate
             {
-                MessageBox.Show(t.Format("basic-flow-selected", flowLayout.GetSelectedControlIndex()));
+                MessageBox.Show(t.Format("basic-flow-selected", flowLayout.GetSelectedControlIndex(), ""));
             };
 
             layoutButtons.AddLinkButton(t["basic-flow-add"]).Click += delegate
