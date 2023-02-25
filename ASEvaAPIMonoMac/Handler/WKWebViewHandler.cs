@@ -15,7 +15,7 @@ using Eto.Mac.Forms;
 
 namespace ASEva.UIMonoMac
 {
-	public class WKWebViewHandler : MacView<wk.WKWebView, WebView, WebView.ICallback>, WebView.IHandler
+	class WKWebViewHandler : MacView<wk.WKWebView, WebView, WebView.ICallback>, WebView.IHandler
 	{
 		public override NSView ContainerControl { get { return Control; } }
 

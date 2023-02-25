@@ -28,6 +28,7 @@ namespace ASEva.UIMonoMac
         {
             var platform = new global::Eto.Mac.Platform();
             platform.Add<WebView.IHandler>(() => new WKWebViewHandler());
+            platform.Add<UITimer.IHandler>(() => new UITimerHandler());
 
             var app = new Application(platform);
             var appHandler = app.Handler as Eto.Mac.Forms.ApplicationHandler;
