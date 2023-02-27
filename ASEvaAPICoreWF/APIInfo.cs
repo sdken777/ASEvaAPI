@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于.net core winform的部分。详见 ASEva.UICoreWF \n
- * 本文档对应API版本：2.4.9
+ * 本文档对应API版本：2.4.10
  */
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// version=2.4.9
+    /// version=2.4.10
     /// </summary>
     public class APIInfo
     {
@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 9, 0); // OpenGLControl支持抗锯齿
+            return new Version(2, 4, 10, 0); // 新增WindowPanel/ConfigPanel.OnHandleModal
         }
     }
 }

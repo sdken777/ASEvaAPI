@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIWpf.APIInfo">
             <summary>
-            version=1.4.5
+            version=1.4.6
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.APIInfo.GetAPIVersion">
@@ -53,6 +53,11 @@
         <member name="M:ASEva.UIWpf.ConfigPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.ConfigPanel.OnHandleModal">
+            <summary>
+            (api:wpf=1.4.6) [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.ConfigPanel.Close">
@@ -156,6 +161,11 @@
         <member name="M:ASEva.UIWpf.WindowPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用。所有与界面相关的更新应全部放在此函数内实现。需要注意，窗口隐藏时将不会调用此函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.WindowPanel.OnHandleModal">
+            <summary>
+            (api:wpf=1.4.6) [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.WindowPanel.OnRelease">

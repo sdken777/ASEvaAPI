@@ -53,6 +53,11 @@ namespace ASEva.UIWpf
         public virtual void OnUpdateUI() { }
 
         /// <summary>
+        /// (api:wpf=1.4.6) [可选实现] 在主循环中被调用，可进行模态对话
+        /// </summary>
+        public virtual void OnHandleModal() { }
+
+        /// <summary>
         /// [可选实现] 在窗口控件销毁前被调用
         /// </summary>
         public virtual void OnRelease() { }
