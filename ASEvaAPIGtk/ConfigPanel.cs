@@ -36,6 +36,11 @@ namespace ASEva.UIGtk
         public virtual void OnUpdateUI() { }
 
         /// <summary>
+        /// (api:gtk=2.5.10) [可选实现] 在主循环中被调用，可进行模态对话
+        /// </summary>
+        public virtual void OnHandleModal() { }
+
+        /// <summary>
         /// (api:gtk=2.4.5) 关闭配置界面
         /// </summary>
         public void Close()

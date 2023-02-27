@@ -37,6 +37,11 @@ namespace ASEva.UIEto
         public virtual void OnUpdateUI() { }
 
         /// <summary>
+        /// (api:eto=2.9.5) [可选实现] 在主循环中被调用，可进行模态对话
+        /// </summary>
+        public virtual void OnHandleModal() { }
+
+        /// <summary>
         /// (api:eto=2.8.13) 关闭配置界面
         /// </summary>
         public void Close()

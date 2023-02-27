@@ -20,11 +20,19 @@ namespace ASEva
         public virtual bool OnInit(String appID, Dictionary<String, String> parameters, out String uiCode) { uiCode = null; return true; }
 
         /// <summary>
-        /// [必须实现][可含模态框] 运行主流程，需要在其中主循环中确保执行了 ASEva.MainWorkflowLoopCallback.OnLoop
+        /// 已弃用，应实现OnRun(loopCallback, modalCallback, startupProject)
         /// </summary>
-        /// <param name="callback">框架软件回调接口</param>
-        /// <param name="startupProject">初始项目文件路径</param>
+
         public virtual void OnRun(MainWorkflowLoopCallback callback, String startupProject) {}
+
+        /// <summary>
+        /// (api:app=2.10.1) [必须实现][可含模态框] 运行主流程，需要在其主循环中确保执行了 ASEva.MainWorkflowLoopCallback.OnLoop 和 ASEva.MainWorkflowModalCallback.OnHandleModal
+        /// </summary>
+        /// <param name="loopCallback">主循环回调接口</param>
+        /// <param name="modalCallback">模态对话回调接口</param>
+        /// <param name="startupProject">初始项目文件路径</param>
+        /// <returns>应固定返回true，否则将继续调用旧版OnRun</returns>
+        public virtual bool OnRun(MainWorkflowLoopCallback loopCallback, MainWorkflowModalCallback modalCallback, String startupProject) { return false; }
 
         /// <summary>
         /// [可选实现] 通知应用程序的基本信息
@@ -365,9 +373,20 @@ namespace ASEva
     public interface MainWorkflowLoopCallback
     {
         /// <summary>
-        /// 执行框架软件的主循环函数
+        /// 执行框架软件中的主循环程序
         /// </summary>
         void OnLoop();
+    }
+
+    /// <summary>
+    /// (api:app=2.10.1) 在主流程中使用的模态对话回调接口
+    /// </summary>
+    public interface MainWorkflowModalCallback
+    {
+        /// <summary>
+        /// 执行框架软件中可能产生模态对话的程序
+        /// </summary>
+        void OnHandleModal();
     }
 
     /// <summary>

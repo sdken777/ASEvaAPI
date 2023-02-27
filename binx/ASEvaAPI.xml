@@ -1974,7 +1974,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.10.0
+            version=2.10.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3625,10 +3625,17 @@
         </member>
         <member name="M:ASEva.MainWorkflow.OnRun(ASEva.MainWorkflowLoopCallback,System.String)">
             <summary>
-            [必须实现][可含模态框] 运行主流程，需要在其中主循环中确保执行了 ASEva.MainWorkflowLoopCallback.OnLoop
+            已弃用，应实现OnRun(loopCallback, modalCallback, startupProject)
             </summary>
-            <param name="callback">框架软件回调接口</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnRun(ASEva.MainWorkflowLoopCallback,ASEva.MainWorkflowModalCallback,System.String)">
+            <summary>
+            (api:app=2.10.1) [必须实现][可含模态框] 运行主流程，需要在其主循环中确保执行了 ASEva.MainWorkflowLoopCallback.OnLoop 和 ASEva.MainWorkflowModalCallback.OnHandleModal
+            </summary>
+            <param name="loopCallback">主循环回调接口</param>
+            <param name="modalCallback">模态对话回调接口</param>
             <param name="startupProject">初始项目文件路径</param>
+            <returns>应固定返回true，否则将继续调用旧版OnRun</returns>
         </member>
         <member name="M:ASEva.MainWorkflow.OnAppBasicInfo(ASEva.AppBasicInfo)">
             <summary>
@@ -3966,7 +3973,17 @@
         </member>
         <member name="M:ASEva.MainWorkflowLoopCallback.OnLoop">
             <summary>
-            执行框架软件的主循环函数
+            执行框架软件中的主循环程序
+            </summary>
+        </member>
+        <member name="T:ASEva.MainWorkflowModalCallback">
+            <summary>
+            (api:app=2.10.1) 在主流程中使用的模态对话回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowModalCallback.OnHandleModal">
+            <summary>
+            执行框架软件中可能产生模态对话的程序
             </summary>
         </member>
         <member name="T:ASEva.MainWorkflowLicenseCallback">
