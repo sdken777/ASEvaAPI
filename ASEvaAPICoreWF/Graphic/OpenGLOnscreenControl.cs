@@ -250,7 +250,11 @@ namespace ASEva.UICoreWF
 
                     var format = new int[1];
                     var dummy = new uint[1];
-                    if (gl.ChoosePixelFormatARB(tempHDC, intAttribList, floatAttribList, 1, format, dummy)) formats.Add(format[0]);
+                    try
+                    {
+                        if (gl.ChoosePixelFormatARB(tempHDC, intAttribList, floatAttribList, 1, format, dummy)) formats.Add(format[0]);
+                    }
+                    catch (Exception) { break; }
                 }
             }
             formats.Add(basicPixelformat);

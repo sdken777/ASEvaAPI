@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 10, 1); // 修正ValueGraph.trimDigits
+            return new Version(2, 4, 10, 2); // 捕获ChoosePixelFormatARB异常
         }
     }
 }

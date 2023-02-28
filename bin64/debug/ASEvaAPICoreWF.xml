@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UICoreWF.APIInfo">
             <summary>
-            version=2.4.9
+            version=2.4.10
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.APIInfo.GetAPIVersion">
@@ -217,6 +217,11 @@
         <member name="M:ASEva.UICoreWF.ConfigPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.ConfigPanel.OnHandleModal">
+            <summary>
+            (api:corewf=2.4.10) [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.ConfigPanel.Close">
@@ -768,6 +773,11 @@
         <member name="M:ASEva.UICoreWF.WindowPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用。所有与界面相关的更新应全部放在此函数内实现。需要注意，窗口隐藏时将不会调用此函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnHandleModal">
+            <summary>
+            (api:corewf=2.4.10) [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.WindowPanel.OnRelease">
