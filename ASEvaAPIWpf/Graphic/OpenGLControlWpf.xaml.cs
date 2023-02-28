@@ -132,8 +132,17 @@ namespace ASEva.UIWpf
                 bitmap.AddDirtyRect(new Int32Rect(0, 0, bitmap.PixelWidth, bitmap.PixelHeight));
                 bitmap.Unlock();
 
+                double dx = 0, dy = 0;
+                var rootWindow = Window.GetWindow(this);
+                if (this.IsDescendantOf(rootWindow))
+                {
+                    var origin = this.TransformToAncestor(rootWindow).Transform(new Point(0, 0));
+                    dx = Math.Ceiling(origin.X) - origin.X;
+                    dy = Math.Ceiling(origin.Y) - origin.Y;
+                }
+
                 drawingContext.PushTransform(new ScaleTransform(1.0f / pixelScale, 1.0f / pixelScale));
-                drawingContext.DrawImage(bitmap, new Rect(0, 0, bitmap.PixelWidth, bitmap.PixelHeight));
+                drawingContext.DrawImage(bitmap, new Rect(dx, dy, bitmap.PixelWidth, bitmap.PixelHeight));
                 drawingContext.Pop();
 
                 foreach (var task in textTasks.Clear())

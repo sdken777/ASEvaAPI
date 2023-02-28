@@ -45,6 +45,14 @@ namespace ASEva.UIWpf
             var rootWindow = Window.GetWindow(this);
             if (rootWindow != null && rootWindow.WindowState != WindowState.Minimized && Visibility == Visibility.Visible && DrawBeat.CallerBegin(this))
             {
+                if (this.IsDescendantOf(rootWindow))
+                {
+                    var origin = this.TransformToAncestor(rootWindow).Transform(new Point(0, 0));
+                    var dx = Math.Ceiling(origin.X) - origin.X;
+                    var dy = Math.Ceiling(origin.Y) - origin.Y;
+                    if (img.Margin.Left != dx || img.Margin.Top != dy) img.Margin = new Thickness(dx, dy, 0, 0);
+                }
+
                 drawQueued = true;
                 textDraw.QueueRender();
                 DrawBeat.CallerEnd(this);
