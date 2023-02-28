@@ -137,6 +137,7 @@ namespace ASEva.UIWpf
                 if (this.IsDescendantOf(rootWindow))
                 {
                     var origin = this.TransformToAncestor(rootWindow).Transform(new Point(0, 0));
+                    origin = new Point(origin.X * pixelScale, origin.Y * pixelScale);
                     dx = Math.Ceiling(origin.X) - origin.X;
                     dy = Math.Ceiling(origin.Y) - origin.Y;
                 }

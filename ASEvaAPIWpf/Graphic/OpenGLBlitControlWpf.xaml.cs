@@ -47,7 +47,9 @@ namespace ASEva.UIWpf
             {
                 if (this.IsDescendantOf(rootWindow))
                 {
+                    var pixelScale = textDraw.RealPixelScale;
                     var origin = this.TransformToAncestor(rootWindow).Transform(new Point(0, 0));
+                    origin = new Point(origin.X * pixelScale, origin.Y * pixelScale);
                     var dx = Math.Ceiling(origin.X) - origin.X;
                     var dy = Math.Ceiling(origin.Y) - origin.Y;
                     if (img.Margin.Left != dx || img.Margin.Top != dy) img.Margin = new Thickness(dx, dy, 0, 0);

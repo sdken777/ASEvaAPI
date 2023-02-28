@@ -18,7 +18,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 4, 6, 1); // 修正GLView控件坐标非整数时绘制模糊问题
+            return new Version(1, 4, 6, 2); // 继续修正GLView控件坐标非整数时绘制模糊问题
         }
     }
 }
