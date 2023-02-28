@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 10, 0); // 新增WindowPanel/ConfigPanel.OnHandleModal
+            return new Version(2, 5, 10, 1); // 修正ValueGraph.trimDigits
         }
     }
 }

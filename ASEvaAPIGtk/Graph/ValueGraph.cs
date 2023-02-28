@@ -127,7 +127,7 @@ namespace ASEva.UIGtk
             while (true)
             {
                 src *= 10;
-                if (src > 1000000000) break;
+                if (src >= 1000000000) break;
                 zeroCount++;
             }
             while (src != 0 && src % 10 == 0) src /= 10;
