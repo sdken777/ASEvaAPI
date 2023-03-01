@@ -43,7 +43,7 @@ namespace ASEva.UIWpf
         public void QueueRender()
         {
             var rootWindow = Window.GetWindow(this);
-            if (rootWindow != null && rootWindow.WindowState != WindowState.Minimized && Visibility == Visibility.Visible && DrawBeat.CallerBegin(this))
+            if (rootWindow != null && rootWindow.WindowState != WindowState.Minimized && Visibility == Visibility.Visible && DrawBeat.CallerBegin(this) && drawQueued < 2)
             {
                 if (this.IsDescendantOf(rootWindow))
                 {
@@ -55,7 +55,7 @@ namespace ASEva.UIWpf
                     if (img.Margin.Left != dx || img.Margin.Top != dy) img.Margin = new Thickness(dx, dy, 0, 0);
                 }
 
-                drawQueued = true;
+                drawQueued = Math.Min(2, drawQueued + 2);
                 textDraw.QueueRender();
                 DrawBeat.CallerEnd(this);
             }
@@ -66,7 +66,7 @@ namespace ASEva.UIWpf
             var ct = sender as CompositionTarget;
             var args = (RenderingEventArgs)e;
 
-            if (!drawQueued || !d3dimg.IsFrontBufferAvailable || ActualWidth <= 0 || ActualHeight <= 0 || textDraw.RealPixelScale == 0) return;
+            if (drawQueued == 0 || !d3dimg.IsFrontBufferAvailable || ActualWidth <= 0 || ActualHeight <= 0 || textDraw.RealPixelScale == 0) return;
 
             if (d3dDevice != null && d3dDevice.CheckDeviceState(IntPtr.Zero) != DeviceState.Ok)
             {
@@ -169,7 +169,7 @@ namespace ASEva.UIWpf
                 return;
             }
 
-            drawQueued = false;
+            drawQueued--;
             DrawBeat.CallbackEnd(this);
         }
 
@@ -483,7 +483,7 @@ namespace ASEva.UIWpf
         private uint[] depthBuffer = null; // [interop, fallback/multisample]
         private bool fboFallback = false;
         private bool? initOK = null;
-        private bool drawQueued = false;
+        private int drawQueued = 0;
 
         private TextDraw textDraw = new TextDraw();
     }
