@@ -230,15 +230,9 @@ namespace ASEva.UIWpf
                 ctxInfo.renderer = gl.Renderer;
                 ctxInfo.extensions = gl.Extensions;
 
-                var wglExtensionsString = WGL.GetWglExtensionsString(gl, hdc);
-
-                var extensionList = new List<String>();
-                extensionList.AddRange(gl.ExtensionList);
-                extensionList.AddRange(wglExtensionsString.Split(' '));
-
-                if (!extensionList.Contains("GL_EXT_framebuffer_object") ||
-                    !extensionList.Contains("GL_EXT_framebuffer_blit") ||
-                    !extensionList.Contains("WGL_NV_DX_interop"))
+                if (!ctxInfo.extensions.Contains("GL_EXT_framebuffer_object") ||
+                    !ctxInfo.extensions.Contains("GL_EXT_framebuffer_blit") ||
+                    !gl.IsFunctionSupported("wglDXCloseDeviceNV"))
                 {
                     onDestroy();
                     return;
