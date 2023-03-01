@@ -23,6 +23,7 @@ namespace ASEva.UIWpf
             var platform = new global::Eto.Wpf.Platform();
             platform.Add<WebView.IHandler>(() => new WebView2Handler());
             platform.Add<SearchBox.IHandler>(() => new SearchBoxHandler());
+            platform.Add<UITimer.IHandler>(() => new UITimerHandler());
             var app = new Application(platform);
 
             SetContentExtensions.WindowInitializer = new InitWindowHandlerWpf();

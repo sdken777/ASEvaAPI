@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于.net core wpf的部分。详见 ASEva.UIWpf \n
- * 本文档对应API版本：1.4.6
+ * 本文档对应API版本：1.4.7
  */
 
 using System;
@@ -8,7 +8,7 @@ using System;
 namespace ASEva.UIWpf
 {
     /// <summary>
-    /// version=1.4.6
+    /// version=1.4.7
     /// </summary>
     public class APIInfo
     {
@@ -18,7 +18,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 4, 6, 3); // 不使用wglGetExtensionsStringARB(可能导致崩溃)
+            return new Version(1, 4, 7, 0); // 解决UITimer卡顿问题
         }
     }
 }
