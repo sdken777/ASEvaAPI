@@ -21,8 +21,12 @@ namespace ASEva.UIEto
             if (String.IsNullOrEmpty(text)) text = " ";
             sizeRatio = Math.Max(0.1f, sizeRatio);
 
-            var font = g.ScaledDefaultFont(sizeRatio * LargeScale);
-            var largeLogicalSize = g.MeasureString(font, text);
+            fastMode = Pixel.RealConsistency;
+            bitmapScale = fastMode ? 1 : BitmapScale;
+
+            var largeScale = bitmapScale * 2;
+            var largeFont = g.ScaledDefaultFont(sizeRatio * largeScale);
+            var largeLogicalSize = g.MeasureString(largeFont, text);
 
             var largeBitmapWidth = (int)Math.Ceiling(largeLogicalSize.Width);
             largeBitmapWidth += largeBitmapWidth % 2 == 0 ? 2 : 1;
@@ -32,7 +36,7 @@ namespace ASEva.UIEto
             var largeBitmap = new Bitmap(largeBitmapWidth, largeBitmapHeight, PixelFormat.Format32bppRgba);
             using (var bitmapGraphics = new Graphics(largeBitmap))
             {
-                bitmapGraphics.DrawString(text, font, color, TextAnchor.Center, largeBitmapWidth / 2, largeBitmapHeight / 2);
+                bitmapGraphics.DrawString(text, largeFont, color, TextAnchor.Center, largeBitmapWidth / 2, largeBitmapHeight / 2);
             }
 
             var largeCommonImage = ImageConverter.ConvertFromBitmap(largeBitmap);
@@ -64,7 +68,7 @@ namespace ASEva.UIEto
             bitmap = ImageConverter.ConvertToBitmap(commonImage) as Bitmap;
 
             this.text = text;
-            this.font = font;
+            this.sizeRatio = sizeRatio;
             this.color = color;
         }
 
@@ -85,47 +89,56 @@ namespace ASEva.UIEto
                 case TextAnchor.TopLeft:
                     break;
                 case TextAnchor.LeftCenter:
-                    dy -= (float)bitmap.Height / BitmapScale / 2;
+                    dy -= (float)bitmap.Height / bitmapScale / 2;
                     break;
                 case TextAnchor.BottomLeft:
-                    dy -= (float)bitmap.Height / BitmapScale;
+                    dy -= (float)bitmap.Height / bitmapScale;
                     break;
                 case TextAnchor.TopCenter:
-                    dx -= (float)bitmap.Width / BitmapScale / 2;
+                    dx -= (float)bitmap.Width / bitmapScale / 2;
                     break;
                 case TextAnchor.Center:
-                    dx -= (float)bitmap.Width / BitmapScale / 2;
-                    dy -= (float)bitmap.Height / BitmapScale / 2;
+                    dx -= (float)bitmap.Width / bitmapScale / 2;
+                    dy -= (float)bitmap.Height / bitmapScale / 2;
                     break;
                 case TextAnchor.BottomCenter:
-                    dx -= (float)bitmap.Width / BitmapScale / 2;
-                    dy -= (float)bitmap.Height / BitmapScale;
+                    dx -= (float)bitmap.Width / bitmapScale / 2;
+                    dy -= (float)bitmap.Height / bitmapScale;
                     break;
                 case TextAnchor.TopRight:
-                    dx -= (float)bitmap.Width / BitmapScale;
+                    dx -= (float)bitmap.Width / bitmapScale;
                     break;
                 case TextAnchor.RightCenter:
-                    dx -= (float)bitmap.Width / BitmapScale;
-                    dy -= (float)bitmap.Height / BitmapScale / 2;
+                    dx -= (float)bitmap.Width / bitmapScale;
+                    dy -= (float)bitmap.Height / bitmapScale / 2;
                     break;
                 case TextAnchor.BottomRight:
-                    dx -= (float)bitmap.Width / BitmapScale;
-                    dy -= (float)bitmap.Height / BitmapScale;
+                    dx -= (float)bitmap.Width / bitmapScale;
+                    dy -= (float)bitmap.Height / bitmapScale;
                     break;
             }
 
-            g.SaveTransform();
             var originInterpolationMode = g.ImageInterpolation;
 
-            g.TranslateTransform(dx, dy);
-            g.ScaleTransform(1.0f / BitmapScale);
+            if (fastMode)
+            {
+                g.ImageInterpolation = ImageInterpolation.None;
+                g.DrawImage(bitmap, (float)Math.Round(dx), (float)Math.Round(dy));
+            }
+            else
+            {
+                g.SaveTransform();
+                g.TranslateTransform(dx, dy);
+                g.ScaleTransform(1.0f / bitmapScale);
 
-            if (ImageInterpolationMode != null) g.ImageInterpolation = ImageInterpolationMode.Value;
-            else g.ImageInterpolation = ImageInterpolation.Default;
-            g.DrawImage(bitmap, 0, 0);
+                if (ImageInterpolationMode != null) g.ImageInterpolation = ImageInterpolationMode.Value;
+                else g.ImageInterpolation = ImageInterpolation.Default;
+                g.DrawImage(bitmap, 0, 0);
+
+                g.RestoreTransform();
+            }
 
             g.ImageInterpolation = originInterpolationMode;
-            g.RestoreTransform();
         }
 
         /// <summary>
@@ -134,9 +147,9 @@ namespace ASEva.UIEto
         public String Text { get { return text; }}
 
         /// <summary>
-        /// 获取当前字体
+        /// (api:eto=2.9.8) 获取当前字体相对于默认大小比例
         /// </summary>
-        public Font Font { get { return font; }}
+        public float SizeRatio { get { return sizeRatio; }}
 
         /// <summary>
         /// 获取当前绘制颜色
@@ -144,12 +157,13 @@ namespace ASEva.UIEto
         public Color Color { get { return color; }}
 
         private String text;
-        private Font font;
+        private float sizeRatio;
         private Color color;
         private Bitmap bitmap;
+        private int bitmapScale;
+        private bool fastMode;
 
         private const int BitmapScale = 3;
-        private const int LargeScale = BitmapScale * 2;
 
         public static ImageInterpolation? ImageInterpolationMode { private get; set; }
     }

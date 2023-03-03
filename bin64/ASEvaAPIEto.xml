@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.9.7
+            version=2.9.8
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -1887,9 +1887,9 @@
             获取当前文本
             </summary>
         </member>
-        <member name="P:ASEva.UIEto.TextBitmap.Font">
+        <member name="P:ASEva.UIEto.TextBitmap.SizeRatio">
             <summary>
-            获取当前字体
+            (api:eto=2.9.8) 获取当前字体相对于默认大小比例
             </summary>
         </member>
         <member name="P:ASEva.UIEto.TextBitmap.Color">
