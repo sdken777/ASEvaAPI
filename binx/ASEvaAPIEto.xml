@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.9.6
+            version=2.9.7
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -1505,7 +1505,7 @@
         </member>
         <member name="P:ASEva.UIEto.GLSizeInfo.RealPixelScale">
             <summary>
-            物理像素与逻辑
+            物理像素与逻辑像素的换算比
             </summary>
         </member>
         <member name="P:ASEva.UIEto.GLSizeInfo.AspectRatio">
@@ -1766,7 +1766,12 @@
         </member>
         <member name="P:ASEva.UIEto.Pixel.Scale">
             <summary>
-            像素单位比例，用于优化在非默认DPI下的显示
+            逻辑像素与原始像素(即UI框架下的像素，非物理像素)的换算比
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.Pixel.RealConsistency">
+            <summary>
+            (api:eto=2.9.7) 逻辑像素与物理像素是否为1:1
             </summary>
         </member>
         <member name="T:ASEva.UIEto.SkiaRenderEventArgs">

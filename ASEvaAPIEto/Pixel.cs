@@ -58,7 +58,7 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
-        /// 像素单位比例，用于优化在非默认DPI下的显示
+        /// 逻辑像素与原始像素(即UI框架下的像素，非物理像素)的换算比
         /// </summary>
         public static float Scale
         {
@@ -78,7 +78,25 @@ namespace ASEva.UIEto
             }
         }
 
+        /// <summary>
+        /// (api:eto=2.9.7) 逻辑像素与物理像素是否为1:1
+        /// </summary>
+        public static bool RealConsistency
+        {
+            get
+            {
+                if (realConsistency == null)
+                {
+                    var screen = Screen.PrimaryScreen;
+                    if (CalculateByScreenRealScale) realConsistency = screen.RealScale == 1;
+                    else realConsistency = screen.LogicalPixelSize == 1;
+                }
+                return realConsistency.Value;
+            }
+        }
+
         private static float scale = 0;
+        private static bool? realConsistency = null;
 
         public static bool CalculateByScreenRealScale { private get; set; }
     }

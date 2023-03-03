@@ -188,7 +188,7 @@ namespace ASEva.UIEto
         public int RealHeight { get; private set; }
 
 		/// <summary>
-		/// 物理像素与逻辑
+		/// 物理像素与逻辑像素的换算比
 		/// </summary>
 		public double RealPixelScale { get; private set; }
 
