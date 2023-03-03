@@ -707,6 +707,16 @@
             <param name="genDirName">后处理输出时，写入generation数据的文件夹名（若已存在且强制开始时，则使用默认的日期格式）</param>
             <returns>是否成功</returns>
         </member>
+        <member name="M:ASEva.Agency.StartRemote(System.Boolean,System.Boolean,System.String,System.UInt64)">
+            <summary>
+            (api:app=2.10.0) 切换至远程模式并开始预览或采集
+            </summary>
+            <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
+            <param name="previewOnly">是否为预览</param>
+            <param name="sessionDirName">采集时，写入session数据的文件夹名（若已存在且强制开始时，则使用默认的日期格式，时间为本机时间，非远程主机时间）</param>
+            <param name="startPosixTime">远程主机的开始时间，单位毫秒</param>
+            <returns>是否成功</returns>
+        </member>
         <member name="M:ASEva.Agency.StopRunning">
             <summary>
             停止采集、处理、回放
@@ -1369,9 +1379,9 @@
         </member>
         <member name="M:ASEva.Agency.GetCurrentOnlineSession">
             <summary>
-            (api:app=2.3.0) 获取在线模式下正在预览或采集的session
+            (api:app=2.3.0) 获取采集模式(在线/远程)下正在预览或采集的session
             </summary>
-            <returns>在线模式下正在预览或采集的session，若非在线模式则返回null</returns>
+            <returns>采集模式(在线/远程)下正在预览或采集的session，若非采集模式则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetSessionListTotalLength">
             <summary>
@@ -1964,7 +1974,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.9.0
+            version=2.10.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -2408,9 +2418,8 @@
         </member>
         <member name="M:ASEva.ModuleConfig.MayCauseLowSpeed">
             <summary>
-            (api:app=2.3.2) [ProcessorClass/NativeClass可选实现] 获取是否会合法的导致极低（甚至停滞）的回放速度
+            (api:app=2.3.2) 已弃用，远程采集应使用 ASEva.FileIONames.RemoteReaderNames
             </summary>
-            <returns>是否会合法的导致极低（甚至停滞）的回放速度</returns>
         </member>
         <member name="M:ASEva.ModuleConfig.DisableAll">
             <summary>
@@ -3616,10 +3625,17 @@
         </member>
         <member name="M:ASEva.MainWorkflow.OnRun(ASEva.MainWorkflowLoopCallback,System.String)">
             <summary>
-            [必须实现][可含模态框] 运行主流程，需要在其中主循环中确保执行了 ASEva.MainWorkflowLoopCallback.OnLoop
+            已弃用，应实现OnRun(loopCallback, modalCallback, startupProject)
             </summary>
-            <param name="callback">框架软件回调接口</param>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnRun(ASEva.MainWorkflowLoopCallback,ASEva.MainWorkflowModalCallback,System.String)">
+            <summary>
+            (api:app=2.10.1) [必须实现][可含模态框] 运行主流程，需要在其主循环中确保执行了 ASEva.MainWorkflowLoopCallback.OnLoop 和 ASEva.MainWorkflowModalCallback.OnHandleModal
+            </summary>
+            <param name="loopCallback">主循环回调接口</param>
+            <param name="modalCallback">模态对话回调接口</param>
             <param name="startupProject">初始项目文件路径</param>
+            <returns>应固定返回true，否则将继续调用旧版OnRun</returns>
         </member>
         <member name="M:ASEva.MainWorkflow.OnAppBasicInfo(ASEva.AppBasicInfo)">
             <summary>
@@ -3957,7 +3973,17 @@
         </member>
         <member name="M:ASEva.MainWorkflowLoopCallback.OnLoop">
             <summary>
-            执行框架软件的主循环函数
+            执行框架软件中的主循环程序
+            </summary>
+        </member>
+        <member name="T:ASEva.MainWorkflowModalCallback">
+            <summary>
+            (api:app=2.10.1) 在主流程中使用的模态对话回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.MainWorkflowModalCallback.OnHandleModal">
+            <summary>
+            执行框架软件中可能产生模态对话的程序
             </summary>
         </member>
         <member name="T:ASEva.MainWorkflowLicenseCallback">
@@ -5599,7 +5625,7 @@
         </member>
         <member name="F:ASEva.ApplicationMode.Online">
             <summary>
-            在线模式，采集数据与在线处理
+            在线采集模式
             </summary>
         </member>
         <member name="F:ASEva.ApplicationMode.Offline">
@@ -5610,6 +5636,11 @@
         <member name="F:ASEva.ApplicationMode.Replay">
             <summary>
             离线回放模式
+            </summary>
+        </member>
+        <member name="F:ASEva.ApplicationMode.Remote">
+            <summary>
+            (api:app=2.10.0) 远程采集模式
             </summary>
         </member>
         <member name="T:ASEva.LogLevel">
@@ -6009,6 +6040,36 @@
             (api:app=2.0.0) 总线设备通道类型
             </summary>
         </member>
+        <member name="F:ASEva.BusChannelType.None">
+            <summary>
+            无效类型
+            </summary>
+        </member>
+        <member name="F:ASEva.BusChannelType.Can">
+            <summary>
+            CAN总线，报文数据即payload，1～8字节
+            </summary>
+        </member>
+        <member name="F:ASEva.BusChannelType.CanFD">
+            <summary>
+            CAN-FD总线，报文数据即payload，1～64字节
+            </summary>
+        </member>
+        <member name="F:ASEva.BusChannelType.Lin">
+            <summary>
+            LIN总线，报文数据即payload，1～8字节
+            </summary>
+        </member>
+        <member name="F:ASEva.BusChannelType.Flexray">
+            <summary>
+            Flexray总线，报文数据由标志位字节(从低至高为startup,sync,null)、cycle字节和payload构成，2～256字节
+            </summary>
+        </member>
+        <member name="F:ASEva.BusChannelType.Ethernet">
+            <summary>
+            以太网总线，报文数据为包含链路层等等协议的完整以太网帧数据
+            </summary>
+        </member>
         <member name="T:ASEva.BusDeviceInfo">
             <summary>
             (api:app=2.0.0) 总线设备信息
@@ -6077,6 +6138,16 @@
         <member name="F:ASEva.VideoDataCodec.RAW14">
             <summary>
             (api:app=2.7.5) RAW14：无损编码，帧间独立，格式为奇数行BG，偶数行GR，每数值14bit按小字序依次存储
+            </summary>
+        </member>
+        <member name="F:ASEva.VideoDataCodec.RAW16">
+            <summary>
+            (api:app=2.9.1) RAW16：无损编码，帧间独立，格式为奇数行BG，偶数行GR，每数值16bit按大字序依次存储
+            </summary>
+        </member>
+        <member name="F:ASEva.VideoDataCodec.Y16">
+            <summary>
+            (api:app=2.9.1) Y16：无损编码，帧间独立，每数值16bit按大字序依次存储
             </summary>
         </member>
         <member name="T:ASEva.VideoInputMode">
@@ -6179,6 +6250,11 @@
         <member name="P:ASEva.FileIONames.ReaderNames">
             <summary>
             文件读取器的名称列表
+            </summary>
+        </member>
+        <member name="P:ASEva.FileIONames.RemoteReaderNames">
+            <summary>
+            (api:app=2.10.0) 远程文件读取器的名称列表
             </summary>
         </member>
         <member name="P:ASEva.FileIONames.WriterNames">
