@@ -21,7 +21,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 7, 0); // 新增Pixel.RealConsistency
+            return new Version(2, 9, 7, 1); // 修复defaultFont可能中途失效问题
         }
     }
 }

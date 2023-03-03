@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.9.4
+            version=2.9.7
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -288,6 +288,11 @@
         <member name="M:ASEva.UIEto.ConfigPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ConfigPanel.OnHandleModal">
+            <summary>
+            (api:eto=2.9.5) [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
         <member name="M:ASEva.UIEto.ConfigPanel.Close">
@@ -1500,7 +1505,7 @@
         </member>
         <member name="P:ASEva.UIEto.GLSizeInfo.RealPixelScale">
             <summary>
-            物理像素与逻辑
+            物理像素与逻辑像素的换算比
             </summary>
         </member>
         <member name="P:ASEva.UIEto.GLSizeInfo.AspectRatio">
@@ -1761,7 +1766,12 @@
         </member>
         <member name="P:ASEva.UIEto.Pixel.Scale">
             <summary>
-            像素单位比例，用于优化在非默认DPI下的显示
+            逻辑像素与原始像素(即UI框架下的像素，非物理像素)的换算比
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.Pixel.RealConsistency">
+            <summary>
+            (api:eto=2.9.7) 逻辑像素与物理像素是否为1:1
             </summary>
         </member>
         <member name="T:ASEva.UIEto.SkiaRenderEventArgs">
@@ -1847,6 +1857,44 @@
         <member name="P:ASEva.UIEto.SkiaView.SupportOverlay">
             <summary>
             (api:eto=2.8.7) 是否支持被其他控件覆盖
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.TextBitmap">
+            <summary>
+            (api:eto=2.9.6) 文本位图，可替代Graphics.DrawString以提高效率
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.TextBitmap.#ctor(Eto.Drawing.Graphics,System.String,System.Single,Eto.Drawing.Color)">
+            <summary>
+            创建文本位图（仅支持默认字体）
+            </summary>
+            <param name="g">图形对象</param>
+            <param name="text">文本</param>
+            <param name="sizeRatio">相对字体默认大小的比例，默认为1</param>
+            <param name="color">绘制颜色</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextBitmap.Draw(Eto.Drawing.Graphics,ASEva.UIEto.TextAnchor,System.Int32,System.Int32)">
+            <summary>
+            通过图形对象绘制文本位图
+            </summary>
+            <param name="g">图形对象</param>
+            <param name="anchor">文本锚点坐标位置类型</param>
+            <param name="logicalX">文本锚点X轴逻辑坐标</param>
+            <param name="logicalY">文本锚点Y轴逻辑坐标</param>
+        </member>
+        <member name="P:ASEva.UIEto.TextBitmap.Text">
+            <summary>
+            获取当前文本
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.TextBitmap.Font">
+            <summary>
+            获取当前字体
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.TextBitmap.Color">
+            <summary>
+            获取当前绘制颜色
             </summary>
         </member>
         <member name="T:ASEva.UIEto.TextTableView">
@@ -1988,6 +2036,11 @@
         <member name="M:ASEva.UIEto.WindowPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用。所有与界面相关的更新应全部放在此函数内实现。需要注意，窗口隐藏时将不会调用此函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnHandleModal">
+            <summary>
+            (api:eto=2.9.5) [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
         <member name="M:ASEva.UIEto.WindowPanel.OnUpdateContainerSize(ASEva.IntSize)">

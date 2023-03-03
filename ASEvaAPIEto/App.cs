@@ -124,7 +124,10 @@ namespace ASEva.UIEto
             if (handler != null && defaultFont == null)
             {
                 defaultFont = handler.CreateDefaultFont();
+                defaultFontSize = defaultFont.Size;
             }
+
+            if (defaultFont.Size == 0) defaultFont = SystemFonts.Default(defaultFontSize);
 
             if (sizeRatio == 1) return defaultFont;
             sizeRatio = Math.Max(0.01f, sizeRatio);
@@ -299,6 +302,7 @@ namespace ASEva.UIEto
         private static String uiBackend = null;
         private static String webViewBackend = null;
         private static Font defaultFont = null;
+        private static float defaultFontSize = 0;
         private static bool newFontFailed = false;
         private static bool initAppInvoked = false;
     }
