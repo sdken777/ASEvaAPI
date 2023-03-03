@@ -115,13 +115,16 @@ namespace ASEva.UIEto
             }
 
             g.SaveTransform();
+            var originInterpolationMode = g.ImageInterpolation;
 
             g.TranslateTransform(dx, dy);
             g.ScaleTransform(1.0f / BitmapScale);
 
-            g.ImageInterpolation = ImageInterpolation.Medium;
+            if (ImageInterpolationMode != null) g.ImageInterpolation = ImageInterpolationMode.Value;
+            else g.ImageInterpolation = ImageInterpolation.Default;
             g.DrawImage(bitmap, 0, 0);
 
+            g.ImageInterpolation = originInterpolationMode;
             g.RestoreTransform();
         }
 
@@ -147,5 +150,7 @@ namespace ASEva.UIEto
 
         private const int BitmapScale = 3;
         private const int LargeScale = BitmapScale * 2;
+
+        public static ImageInterpolation? ImageInterpolationMode { private get; set; }
     }
 }

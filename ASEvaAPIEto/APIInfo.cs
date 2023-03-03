@@ -21,7 +21,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 6, 0); // 新增TextBitmap
+            return new Version(2, 9, 6, 1); // TextBitmap.Draw的图像插值模式可配置
         }
     }
 }

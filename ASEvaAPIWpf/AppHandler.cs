@@ -33,6 +33,7 @@ namespace ASEva.UIWpf
             SkiaView.Factory = new GLViewFactoryWpf();
             SkiaCanvasExtensions.DefaultFontName = "Microsoft Yahei";
             SkiaCanvasExtensions.DefaultFontSize = 12;
+            TextBitmap.ImageInterpolationMode = ImageInterpolation.Medium;
 
             uiBackend = null;
             webViewBackend = "webview2";
