@@ -24,48 +24,72 @@ namespace ASEva.UIEto
             fastMode = Pixel.RealConsistency;
             bitmapScale = fastMode ? 1 : BitmapScale;
 
-            var largeScale = bitmapScale * 2;
-            var largeFont = g.ScaledDefaultFont(sizeRatio * largeScale);
-            var largeLogicalSize = g.MeasureString(largeFont, text);
-
-            var largeBitmapWidth = (int)Math.Ceiling(largeLogicalSize.Width);
-            largeBitmapWidth += largeBitmapWidth % 2 == 0 ? 2 : 1;
-            var largeBitmapHeight = (int)Math.Ceiling(largeLogicalSize.Height);
-            largeBitmapHeight += largeBitmapHeight % 2 == 0 ? 2 : 1;
-
-            var largeBitmap = new Bitmap(largeBitmapWidth, largeBitmapHeight, PixelFormat.Format32bppRgba);
-            using (var bitmapGraphics = new Graphics(largeBitmap))
+            if (MultiSample)
             {
-                bitmapGraphics.DrawString(text, largeFont, color, TextAnchor.Center, largeBitmapWidth / 2, largeBitmapHeight / 2);
-            }
+                var largeScale = bitmapScale * 3;
+                var largeFont = g.ScaledDefaultFont(sizeRatio * largeScale);
+                var largeLogicalSize = g.MeasureString(largeFont, text);
 
-            var largeCommonImage = ImageConverter.ConvertFromBitmap(largeBitmap);
+                var largeBitmapWidth = (int)Math.Ceiling(largeLogicalSize.Width);
+                largeBitmapWidth += 3 - largeBitmapWidth % 3;
+                var largeBitmapHeight = (int)Math.Ceiling(largeLogicalSize.Height);
+                largeBitmapHeight += 3 - largeBitmapHeight % 3;
 
-            var bitmapWidth = largeBitmapWidth / 2;
-            var bitmapHeight = largeBitmapHeight / 2;
-
-            var commonImage = CommonImage.Create(bitmapWidth, bitmapHeight, true);
-            unsafe
-            {
-                fixed (byte* srcData = &largeCommonImage.Data[0], dstData = &commonImage.Data[0])
+                var largeBitmap = new Bitmap(largeBitmapWidth, largeBitmapHeight, PixelFormat.Format32bppRgba);
+                using (var bitmapGraphics = new Graphics(largeBitmap))
                 {
-                    for (int v = 0; v < bitmapHeight; v++)
+                    bitmapGraphics.DrawString(text, largeFont, color, TextAnchor.Center, largeBitmapWidth / 2, largeBitmapHeight / 2);
+                }
+
+                var largeCommonImage = ImageConverter.ConvertFromBitmap(largeBitmap);
+
+                var bitmapWidth = largeBitmapWidth / 3;
+                var bitmapHeight = largeBitmapHeight / 3;
+
+                var commonImage = CommonImage.Create(bitmapWidth, bitmapHeight, true);
+                unsafe
+                {
+                    fixed (byte* srcData = &largeCommonImage.Data[0], dstData = &commonImage.Data[0])
                     {
-                        byte* srcRow1 = &srcData[2 * v * bitmapWidth * 8];
-                        byte* srcRow2 = &srcData[(2 * v + 1) * bitmapWidth * 8];
-                        byte* dstRow = &dstData[v * bitmapWidth * 4];
-                        for (int u = 0; u < bitmapWidth; u++)
+                        for (int v = 0; v < bitmapHeight; v++)
                         {
-                            dstRow[4 * u] = (byte)(((int)srcRow1[8 * u] + (int)srcRow1[8 * u + 4] + (int)srcRow2[8 * u] + (int)srcRow2[8 * u + 4]) >> 2);
-                            dstRow[4 * u + 1] = (byte)(((int)srcRow1[8 * u + 1] + (int)srcRow1[8 * u + 5] + (int)srcRow2[8 * u + 1] + (int)srcRow2[8 * u + 5]) >> 2);
-                            dstRow[4 * u + 2] = (byte)(((int)srcRow1[8 * u + 2] + (int)srcRow1[8 * u + 6] + (int)srcRow2[8 * u + 2] + (int)srcRow2[8 * u + 6]) >> 2);
-                            dstRow[4 * u + 3] = (byte)(((int)srcRow1[8 * u + 3] + (int)srcRow1[8 * u + 7] + (int)srcRow2[8 * u + 3] + (int)srcRow2[8 * u + 7]) >> 2);
+                            byte* srcRow1 = &srcData[3 * v * bitmapWidth * 12];
+                            byte* srcRow2 = &srcData[(3 * v + 1) * bitmapWidth * 12];
+                            byte* srcRow3 = &srcData[(3 * v + 2) * bitmapWidth * 12];
+                            byte* dstRow = &dstData[v * bitmapWidth * 4];
+                            for (int u = 0; u < bitmapWidth; u++)
+                            {
+                                dstRow[4 * u] = (byte)(((int)srcRow1[12 * u] + (int)srcRow1[12 * u + 4] + (int)srcRow1[12 * u + 8] + (int)srcRow2[12 * u] + 
+                                    (int)srcRow2[12 * u + 8] + (int)srcRow3[12 * u] + (int)srcRow3[12 * u + 4] + (int)srcRow3[12 * u + 8]) >> 3);
+                                dstRow[4 * u + 1] = (byte)(((int)srcRow1[12 * u + 1] + (int)srcRow1[12 * u + 5] + (int)srcRow1[12 * u + 9] + (int)srcRow2[12 * u + 1] + 
+                                    (int)srcRow2[12 * u + 9] + (int)srcRow3[12 * u + 1] + (int)srcRow3[12 * u + 5] + (int)srcRow3[12 * u + 9]) >> 3);
+                                dstRow[4 * u + 2] = (byte)(((int)srcRow1[12 * u + 2] + (int)srcRow1[12 * u + 6] + (int)srcRow1[12 * u + 10] + (int)srcRow2[12 * u + 2] + 
+                                    (int)srcRow2[12 * u + 10] + (int)srcRow3[12 * u + 2] + (int)srcRow3[12 * u + 6] + (int)srcRow3[12 * u + 10]) >> 3);
+                                dstRow[4 * u + 3] = (byte)(((int)srcRow1[12 * u + 3] + (int)srcRow1[12 * u + 7] + (int)srcRow1[12 * u + 11] + (int)srcRow2[12 * u + 3] + 
+                                    (int)srcRow2[12 * u + 11] + (int)srcRow3[12 * u + 3] + (int)srcRow3[12 * u + 7] + (int)srcRow3[12 * u + 11]) >> 3);
+                            }
                         }
                     }
                 }
-            }
 
-            bitmap = ImageConverter.ConvertToBitmap(commonImage) as Bitmap;
+                bitmap = ImageConverter.ConvertToBitmap(commonImage) as Bitmap;
+            }
+            else
+            {
+                var font = g.ScaledDefaultFont(sizeRatio * bitmapScale);
+                var logicalSize = g.MeasureString(font, text);
+
+                var bitmapWidth = (int)Math.Ceiling(logicalSize.Width);
+                bitmapWidth += bitmapWidth % 2 == 0 ? 0 : 1;
+                var bitmapHeight = (int)Math.Ceiling(logicalSize.Height);
+                bitmapHeight += bitmapHeight % 2 == 0 ? 0 : 1;
+
+                bitmap = new Bitmap(bitmapWidth, bitmapHeight, PixelFormat.Format32bppRgba);
+                using (var bitmapGraphics = new Graphics(bitmap))
+                {
+                    bitmapGraphics.DrawString(text, font, color, TextAnchor.Center, bitmapWidth / 2, bitmapHeight / 2);
+                }
+            }
 
             this.text = text;
             this.sizeRatio = sizeRatio;
@@ -166,5 +190,7 @@ namespace ASEva.UIEto
         private const int BitmapScale = 3;
 
         public static ImageInterpolation? ImageInterpolationMode { private get; set; }
+
+        public static bool MultiSample { private get; set; }
     }
 }
