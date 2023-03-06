@@ -34,6 +34,7 @@ namespace ASEva.UIWpf
             SkiaCanvasExtensions.DefaultFontName = "Microsoft Yahei";
             SkiaCanvasExtensions.DefaultFontSize = 12;
             TextBitmap.ImageInterpolationMode = ImageInterpolation.Medium;
+            TopMostExtensions.QueryInterface = new TopMostHandler();
 
             uiBackend = null;
             webViewBackend = "webview2";

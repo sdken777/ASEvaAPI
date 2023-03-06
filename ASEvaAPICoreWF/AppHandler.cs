@@ -48,6 +48,7 @@ namespace ASEva.UICoreWF
             FlowLayout.Factory = new FlowLayoutFactoryCoreWF();
             FlowLayout2D.Factory = new FlowLayout2DFactoryCoreWF();
             TextBitmap.MultiSample = true;
+            TopMostExtensions.QueryInterface = new TopMostHandler();
 
             uiBackend = null;
             webViewBackend = "webview2";
