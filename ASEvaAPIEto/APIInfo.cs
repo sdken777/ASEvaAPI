@@ -21,7 +21,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 9, 0); // TextBitmap默认不进行多重采样
+            return new Version(2, 9, 9, 1); // 修复TextBitmap
         }
     }
 }

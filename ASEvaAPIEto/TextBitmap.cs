@@ -46,6 +46,10 @@ namespace ASEva.UIEto
                 var bitmapWidth = largeBitmapWidth / 3;
                 var bitmapHeight = largeBitmapHeight / 3;
 
+                var bComp = (byte)color.Bb;
+                var gComp = (byte)color.Gb;
+                var rComp = (byte)color.Rb;
+
                 var commonImage = CommonImage.Create(bitmapWidth, bitmapHeight, true);
                 unsafe
                 {
@@ -59,12 +63,9 @@ namespace ASEva.UIEto
                             byte* dstRow = &dstData[v * bitmapWidth * 4];
                             for (int u = 0; u < bitmapWidth; u++)
                             {
-                                dstRow[4 * u] = (byte)(((int)srcRow1[12 * u] + (int)srcRow1[12 * u + 4] + (int)srcRow1[12 * u + 8] + (int)srcRow2[12 * u] + 
-                                    (int)srcRow2[12 * u + 8] + (int)srcRow3[12 * u] + (int)srcRow3[12 * u + 4] + (int)srcRow3[12 * u + 8]) >> 3);
-                                dstRow[4 * u + 1] = (byte)(((int)srcRow1[12 * u + 1] + (int)srcRow1[12 * u + 5] + (int)srcRow1[12 * u + 9] + (int)srcRow2[12 * u + 1] + 
-                                    (int)srcRow2[12 * u + 9] + (int)srcRow3[12 * u + 1] + (int)srcRow3[12 * u + 5] + (int)srcRow3[12 * u + 9]) >> 3);
-                                dstRow[4 * u + 2] = (byte)(((int)srcRow1[12 * u + 2] + (int)srcRow1[12 * u + 6] + (int)srcRow1[12 * u + 10] + (int)srcRow2[12 * u + 2] + 
-                                    (int)srcRow2[12 * u + 10] + (int)srcRow3[12 * u + 2] + (int)srcRow3[12 * u + 6] + (int)srcRow3[12 * u + 10]) >> 3);
+                                dstRow[4 * u] = bComp;
+                                dstRow[4 * u + 1] = gComp;
+                                dstRow[4 * u + 2] = rComp;
                                 dstRow[4 * u + 3] = (byte)(((int)srcRow1[12 * u + 3] + (int)srcRow1[12 * u + 7] + (int)srcRow1[12 * u + 11] + (int)srcRow2[12 * u + 3] + 
                                     (int)srcRow2[12 * u + 11] + (int)srcRow3[12 * u + 3] + (int)srcRow3[12 * u + 7] + (int)srcRow3[12 * u + 11]) >> 3);
                             }
