@@ -84,6 +84,7 @@ namespace ASEva.UIGtk
             SkiaView.Factory = new GLViewFactoryGtk(uiBackend);
             SkiaCanvasExtensions.DefaultFontName = "Noto Sans CJK SC";
             SkiaCanvasExtensions.DefaultFontSize = 12.5f;
+            TopMostExtensions.QueryInterface = new TopMostHandler();
 
             webViewBackend = "webkit2";
 
