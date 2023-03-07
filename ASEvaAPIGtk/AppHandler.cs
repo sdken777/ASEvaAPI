@@ -85,6 +85,7 @@ namespace ASEva.UIGtk
             SkiaCanvasExtensions.DefaultFontName = "Noto Sans CJK SC";
             SkiaCanvasExtensions.DefaultFontSize = 12.5f;
             TopMostExtensions.QueryInterface = new TopMostHandler();
+            DefaultFlowLayout2DBackend.FixedScrollBarSize = 15;
 
             webViewBackend = "webkit2";
 

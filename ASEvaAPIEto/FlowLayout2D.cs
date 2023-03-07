@@ -271,7 +271,7 @@ namespace ASEva.UIEto
 		void CreateFlowLayout2DBackend(FlowLayoutCallback callback, out Control etoControl, out FlowLayout2DBackend backend);
 	}
 
-    public class DefaultFlowLayout2DFactory : FlowLayout2DFactory
+    class DefaultFlowLayout2DFactory : FlowLayout2DFactory
     {
         public void CreateFlowLayout2DBackend(FlowLayoutCallback callback, out Control etoControl, out FlowLayout2DBackend backend)
         {
@@ -281,7 +281,7 @@ namespace ASEva.UIEto
         }
     }
 
-    class DefaultFlowLayout2DBackend : Scrollable, FlowLayout2DBackend
+    public class DefaultFlowLayout2DBackend : Scrollable, FlowLayout2DBackend
     {
         public DefaultFlowLayout2DBackend(FlowLayoutCallback callback)
         {
@@ -303,12 +303,20 @@ namespace ASEva.UIEto
         public void UpdateControlsLayout(Size containerLogicalSize)
         {
             int containerWidth = 0, containerHeight = 0;
-            try
+            if (FixedScrollBarSize != null)
             {
-                containerWidth = Math.Min(containerLogicalSize.Width, (int)(VisibleRect.Width / Pixel.Scale - 6));
-                containerHeight = Math.Min(containerLogicalSize.Height, (int)(VisibleRect.Height / Pixel.Scale - 6));
+                containerWidth = containerLogicalSize.Width - FixedScrollBarSize.Value;
+                containerHeight = containerLogicalSize.Height - FixedScrollBarSize.Value;
             }
-            catch (Exception) {}
+            else
+            {
+                try
+                {
+                    containerWidth = Math.Min(containerLogicalSize.Width, (int)(VisibleRect.Width / Pixel.Scale - 6));
+                    containerHeight = Math.Min(containerLogicalSize.Height, (int)(VisibleRect.Height / Pixel.Scale - 6));
+                }
+                catch (Exception) {}
+            }
             if (containerWidth < 8 || containerHeight < 8) return;
 
             int itemWidth = controlWidth + 8;
@@ -524,5 +532,7 @@ namespace ASEva.UIEto
         private int controlWidth;
 
         private int identifierCount = 0;
+
+        public static int? FixedScrollBarSize { private get; set; }
     }
 }
