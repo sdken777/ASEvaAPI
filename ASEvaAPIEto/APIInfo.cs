@@ -21,7 +21,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 11, 0); // TextBitmap.MultiSample改为ModifyInterface
+            return new Version(2, 9, 11, 1); // 修复TextBitmap宽度不够问题
         }
     }
 }

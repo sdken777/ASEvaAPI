@@ -28,9 +28,9 @@ namespace ASEva.UIEto
             var logicalSize = g.MeasureString(font, text);
 
             var bitmapWidth = (int)Math.Ceiling(logicalSize.Width);
-            bitmapWidth += bitmapWidth % 2 == 0 ? 0 : 1;
+            bitmapWidth += bitmapWidth % 2 == 0 ? 2 : 1;
             var bitmapHeight = (int)Math.Ceiling(logicalSize.Height);
-            bitmapHeight += bitmapHeight % 2 == 0 ? 0 : 1;
+            bitmapHeight += bitmapHeight % 2 == 0 ? 2 : 1;
 
             bitmap = new Bitmap(bitmapWidth, bitmapHeight, PixelFormat.Format32bppRgba);
             using (var bitmapGraphics = new Graphics(bitmap))
