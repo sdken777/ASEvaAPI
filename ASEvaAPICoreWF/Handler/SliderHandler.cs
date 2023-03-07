@@ -7,7 +7,7 @@ using Eto.WinForms.Forms;
 
 namespace ASEva.UICoreWF
 {
-	public class SliderHandler : WindowsControl<swf.TrackBar, Slider, Slider.ICallback>, Slider.IHandler
+	class SliderHandler : WindowsControl<swf.TrackBar, Slider, Slider.ICallback>, Slider.IHandler
 	{
 		int? lastValue;
 

@@ -10,7 +10,7 @@ using ASEva.UIEto;
 
 namespace ASEva.UICoreWF
 {
-	public class DrawableHandler : WindowsPanel<DrawableHandler.EtoDrawable, Drawable, Drawable.ICallback>, Drawable.IHandler
+	class DrawableHandler : WindowsPanel<DrawableHandler.EtoDrawable, Drawable, Drawable.ICallback>, Drawable.IHandler
 	{
 		public virtual bool SupportsCreateGraphics { get { return true; } }
 

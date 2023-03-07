@@ -47,8 +47,8 @@ namespace ASEva.UICoreWF
             SkiaCanvasExtensions.DefaultFontSize = 12;
             FlowLayout.Factory = new FlowLayoutFactoryCoreWF();
             FlowLayout2D.Factory = new FlowLayout2DFactoryCoreWF();
-            TextBitmap.MultiSample = true;
             TopMostExtensions.QueryInterface = new TopMostHandler();
+            TextBitmap.ModifyInterface = new BitmapGraphicsHandler();
 
             uiBackend = null;
             webViewBackend = "webview2";

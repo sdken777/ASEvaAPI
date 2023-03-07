@@ -6,7 +6,7 @@ using ASEva.UIEto;
 
 namespace ASEva.UICoreWF
 {
-	public class ProgressBarHandler : WindowsControl<SWF.ProgressBar, ProgressBar, ProgressBar.ICallback>, ProgressBar.IHandler
+	class ProgressBarHandler : WindowsControl<SWF.ProgressBar, ProgressBar, ProgressBar.ICallback>, ProgressBar.IHandler
 	{
 		public ProgressBarHandler ()
 		{

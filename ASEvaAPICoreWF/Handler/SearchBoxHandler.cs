@@ -4,7 +4,7 @@ using Eto.WinForms.Forms.Controls;
 
 namespace ASEva.UICoreWF
 {
-	public class SearchBoxHandler : TextBoxHandler<EtoTextBox, TextBox, TextBox.ICallback>, SearchBox.IHandler
+	class SearchBoxHandler : TextBoxHandler<EtoTextBox, TextBox, TextBox.ICallback>, SearchBox.IHandler
     {
 		public override swf.TextBox SwfTextBox => Control;
 

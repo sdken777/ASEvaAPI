@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.9.9
+            version=2.9.11
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -1159,6 +1159,18 @@
             <param name="logicalSpacingX">表布局中各控件的横向间隙</param>
             <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
             <returns>创建的表布局</returns>
+        </member>
+        <member name="T:ASEva.UIEto.TopMostExtensions">
+            <summary>
+            (api:eto=2.9.10) 方便获取控件所在窗口或对话框是否在顶层的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.TopMostExtensions.IsTopMost(Eto.Forms.Control)">
+            <summary>
+            获取控件所在窗口或对话框是否在顶层
+            </summary>
+            <param name="control">控件</param>
+            <returns>所在窗口或对话框是否在顶层</returns>
         </member>
         <member name="T:ASEva.UIEto.WindowExtensions">
             <summary>

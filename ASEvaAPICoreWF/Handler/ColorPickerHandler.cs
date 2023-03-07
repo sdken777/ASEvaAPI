@@ -13,7 +13,7 @@ using ASEva.UIEto;
 
 namespace ASEva.UICoreWF
 {
-	public class ColorPickerHandler : WindowsControl<swf.Button, ColorPicker, ColorPicker.ICallback>, ColorPicker.IHandler
+	class ColorPickerHandler : WindowsControl<swf.Button, ColorPicker, ColorPicker.ICallback>, ColorPicker.IHandler
 	{
 		public ColorPickerHandler()
 		{

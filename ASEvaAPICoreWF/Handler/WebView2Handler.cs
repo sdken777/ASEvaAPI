@@ -14,7 +14,7 @@ using BaseHandler = Eto.WinForms.Forms.WindowsControl<Microsoft.Web.WebView2.Win
 
 namespace ASEva.UICoreWF
 {
-	public class WebView2Handler : BaseHandler, WebView.IHandler
+	class WebView2Handler : BaseHandler, WebView.IHandler
 	{
 		bool failed;
 		bool webView2Ready;

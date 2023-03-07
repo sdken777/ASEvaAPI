@@ -9,7 +9,7 @@ using Eto.WinForms.Forms.Controls;
 
 namespace ASEva.UICoreWF
 {
-	public class ComboBoxHandler : DropDownHandler<EtoComboBox, ComboBox, ComboBox.ICallback>, ComboBox.IHandler
+	class ComboBoxHandler : DropDownHandler<EtoComboBox, ComboBox, ComboBox.ICallback>, ComboBox.IHandler
 	{
 		bool readOnly;
 		int suppressTextChanged;

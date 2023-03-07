@@ -6,7 +6,7 @@ using Eto.WinForms.Forms;
 
 namespace ASEva.UICoreWF
 {
-	public class GroupBoxHandler : WindowsPanel<GroupBoxHandler.EtoGroupBox, GroupBox, GroupBox.ICallback>, GroupBox.IHandler
+	class GroupBoxHandler : WindowsPanel<GroupBoxHandler.EtoGroupBox, GroupBox, GroupBox.ICallback>, GroupBox.IHandler
 	{
 		readonly swf.Panel content;
 
