@@ -296,6 +296,11 @@ namespace ASEva.UIEto
             ReloadData(new Range<int>(0, GetItemCount()));
         }
 
+        /// <summary>
+        /// (api:eto=2.9.13) 多选框点击事件
+        /// </summary>
+        public event EventHandler ItemClicked;
+
         private void CheckableListBox_CellClick(object sender, GridCellMouseEventArgs e)
         {
             if (e.Row >= 0 && e.Row < enableFlags.Count && enableFlags[e.Row])
@@ -313,6 +318,24 @@ namespace ASEva.UIEto
                 ReloadData(e.Row);
 
                 SelectRow(e.Row);
+
+                if (ItemClicked != null)
+                {
+                    if (clickTimer != null)
+                    {
+                        clickTimer.Stop();
+                        clickTimer = null;
+                    }
+                    clickTimer = new UITimer();
+                    clickTimer.Interval = 0.05;
+                    clickTimer.Elapsed += delegate
+                    {
+                        clickTimer.Stop();
+                        clickTimer = null;
+                        ItemClicked(this, null);
+                    };
+                    clickTimer.Start();
+                }
             }
         }
 
@@ -334,13 +357,6 @@ namespace ASEva.UIEto
             updateColumnWidth();
         }
 
-        private void timer_Elapsed(object sender, EventArgs e)
-        {
-            timer.Stop();
-            timer = null;
-            Invalidate();
-        }
-
         private void updateColumnWidth()
         {
             Columns[1].Width = this.Sizer(this.GetLogicalWidth() - 45);
@@ -350,12 +366,17 @@ namespace ASEva.UIEto
         {
             if (UpdateColorMode == InvalidateMode.DelayedInvalidate)
             {
-                if (timer == null)
+                if (colorTimer == null)
                 {
-                    timer = new UITimer();
-                    timer.Interval = 0.01;
-                    timer.Elapsed += timer_Elapsed;
-                    timer.Start();
+                    colorTimer = new UITimer();
+                    colorTimer.Interval = 0.01;
+                    colorTimer.Elapsed += delegate
+                    {
+                        colorTimer.Stop();
+                        colorTimer = null;
+                        Invalidate();
+                    };
+                    colorTimer.Start();
                 }
             }
             else if (UpdateColorMode == InvalidateMode.EditCell)
@@ -378,7 +399,7 @@ namespace ASEva.UIEto
         }
 
         private List<bool> enableFlags = new List<bool>();
-        private UITimer timer = null;
+        private UITimer colorTimer = null, clickTimer = null;
 
         public enum InvalidateMode
         {

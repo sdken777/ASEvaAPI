@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.9.12
+            version=2.9.13
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -255,6 +255,11 @@
         <member name="M:ASEva.UIEto.CheckableListBox.UncheckAll">
             <summary>
             取消勾选所有多选框（不改变禁用的部分）
+            </summary>
+        </member>
+        <member name="E:ASEva.UIEto.CheckableListBox.ItemClicked">
+            <summary>
+            (api:eto=2.9.13) 多选框点击事件
             </summary>
         </member>
         <member name="T:ASEva.UIEto.ConfigPanel">
