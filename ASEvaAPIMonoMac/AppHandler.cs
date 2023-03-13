@@ -45,6 +45,7 @@ namespace ASEva.UIMonoMac
             SkiaView.Factory = new GLViewFactoryMonoMac();
             SkiaCanvasExtensions.DefaultFontName = "STHeiti";
             SkiaCanvasExtensions.DefaultFontSize = 13.0f;
+            DefaultSimpleTreeViewBackend.DefaultBackgroundColor = Colors.Transparent;
 
             uiBackend = null;
             webViewBackend = "webkit2";

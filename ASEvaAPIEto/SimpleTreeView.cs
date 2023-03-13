@@ -161,7 +161,7 @@ namespace ASEva.UIEto
 		void CreateSimpleTreeViewBackend(SimpleTreeViewCallback callback, out Control etoControl, out SimpleTreeViewBackend backend);
 	}
 
-    public class DefaultSimpleTreeViewFactory : SimpleTreeViewFactory
+    class DefaultSimpleTreeViewFactory : SimpleTreeViewFactory
     {
         public void CreateSimpleTreeViewBackend(SimpleTreeViewCallback callback, out Control etoControl, out SimpleTreeViewBackend backend)
         {
@@ -171,7 +171,7 @@ namespace ASEva.UIEto
         }
     }
 
-    class DefaultSimpleTreeViewBackend : TreeGridView, SimpleTreeViewBackend
+    public class DefaultSimpleTreeViewBackend : TreeGridView, SimpleTreeViewBackend
     {
         public DefaultSimpleTreeViewBackend(SimpleTreeViewCallback callback)
         {
@@ -196,9 +196,9 @@ namespace ASEva.UIEto
             {
                 var node = (e.Item as TreeGridItem).Tag as SimpleTreeNode;
                 if (node.TextColor != Colors.Transparent) e.ForegroundColor = node.TextColor;
-                else e.ForegroundColor = SystemColors.ControlText;
+                else e.ForegroundColor = DefaultTextColor == null ? SystemColors.ControlText : DefaultTextColor.Value;
                 if (node.BackgroundColor != Colors.Transparent) e.BackgroundColor = node.BackgroundColor;
-                else e.BackgroundColor = SystemColors.ControlBackground;
+                else e.BackgroundColor = DefaultBackgroundColor == null ? SystemColors.ControlBackground : DefaultBackgroundColor.Value;
             };
 
             SizeChanged += delegate
@@ -332,5 +332,8 @@ namespace ASEva.UIEto
         private Dictionary<object, SimpleTreeNode> nodeMap = new Dictionary<object, SimpleTreeNode>();
         private Dictionary<object, TreeGridItem> itemMap = new Dictionary<object, TreeGridItem>();
         private UITimer setWidthTimer;
+
+        public static Color? DefaultTextColor { private get; set; }
+        public static Color? DefaultBackgroundColor { private get; set; }
     }
 }
