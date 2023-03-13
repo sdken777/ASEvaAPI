@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 13, 1); // 修正ExpandRow操作
+            return new Version(2, 5, 13, 2); // 支持SimpleTreeView.SelectItem
         }
     }
 }

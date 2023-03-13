@@ -50,6 +50,15 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
+        /// (api:eto=2.10.1) 选中键对象对应的条目
+        /// </summary>
+        /// <param name="key">键对象</param>
+        public void SelectItem(object key)
+        {
+            if (backend != null) backend.SelectItem(key);
+        }
+
+        /// <summary>
         /// 选中条目切换事件
         /// </summary>
         public event EventHandler SelectedItemChanged;
@@ -144,6 +153,7 @@ namespace ASEva.UIEto
         void SetModel(SimpleTreeNode[] rootNodes, bool sort);
         void UpdateNodes(SimpleTreeNodeUpdateTask[] tasks);
         object GetSelectedKey();
+        void SelectItem(object key);
 	}
 
 	public interface SimpleTreeViewFactory
@@ -222,6 +232,7 @@ namespace ASEva.UIEto
         {
             DataStore = null;
             nodeMap.Clear();
+            itemMap.Clear();
 
             var model = new TreeGridItemCollection();
             if(rootNodes != null)
@@ -233,6 +244,7 @@ namespace ASEva.UIEto
 
                     var rootItem = new TreeGridItem{ Tag = node, Values = new String[] { node.Text } };
                     nodeMap[node.Key] = node;
+                    itemMap[node.Key] = rootItem;
                     if (node.ChildNodes != null && node.ChildNodes.Count > 0)
                     {
                         addChildNodes(rootItem, node.ChildNodes, sort);
@@ -280,6 +292,11 @@ namespace ASEva.UIEto
             else return ((SelectedItem as TreeGridItem).Tag as SimpleTreeNode).Key;
         }
 
+        public void SelectItem(object key)
+        {
+            if (key != null && itemMap.ContainsKey(key)) SelectedItem = itemMap[key];
+        }
+
         private void addChildNodes(TreeGridItem parentItem, List<SimpleTreeNode> childNodes, bool sort)
         {
             foreach (var node in childNodes)
@@ -289,6 +306,7 @@ namespace ASEva.UIEto
 
                 var childItem = new TreeGridItem{ Tag = node, Values = new String[] { node.Text } };
                 nodeMap[node.Key] = node;
+                itemMap[node.Key] = childItem;
                 if (node.ChildNodes != null && node.ChildNodes.Count > 0)
                 {
                     addChildNodes(childItem, node.ChildNodes, sort);
@@ -312,6 +330,7 @@ namespace ASEva.UIEto
         private SimpleTreeViewCallback callback;
         private GridColumn column;
         private Dictionary<object, SimpleTreeNode> nodeMap = new Dictionary<object, SimpleTreeNode>();
+        private Dictionary<object, TreeGridItem> itemMap = new Dictionary<object, TreeGridItem>();
         private UITimer setWidthTimer;
     }
 }

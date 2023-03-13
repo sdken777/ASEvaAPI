@@ -117,6 +117,16 @@ namespace ASEva.UIGtk
             }
         }
 
+        public void SelectItem(object key)
+        {
+            if (key != null && nodeMap.ContainsKey(key))
+            {
+                var targetIter = treeModel.ConvertChildIterToIter(nodeMap[key].Iter);
+                treeView.ExpandToPath(treeModel.GetPath(targetIter));
+                treeView.Selection.SelectIter(targetIter);
+            }
+        }
+
         private void treeView_SelectionChanged(object sender, EventArgs e)
         {
             if (callback != null) callback.OnSelectedItemChanged();

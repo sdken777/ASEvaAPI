@@ -42,7 +42,9 @@ namespace ASEvaAPIEtoTest
         private void initBasicTabPageBTreeView(StackLayout layout)
         {
             var view = layout.AddControl(new SimpleTreeView(), true) as SimpleTreeView;
-            var button = layout.AddLinkButton(t["basic-grid-change-color"]);
+            var buttonLayout = layout.AddRowLayout();
+            var buttonChange = buttonLayout.AddLinkButton(t["basic-tree-change-color"]);
+            var buttonSelect = buttonLayout.AddLinkButton(t["basic-tree-select-first"]);
 
             var parentNodes = new List<SimpleTreeNode>();
             for (int i = 1; i <= 99; i++)
@@ -70,7 +72,7 @@ namespace ASEvaAPIEtoTest
                 if (selectedKey != null) MessageBox.Show(selectedKey as String, "");
             };
 
-            button.Click += delegate
+            buttonChange.Click += delegate
             {
                 var tasks = new List<SimpleTreeNodeUpdateTask>();
                 for (int i = 1; i <= 99; i++)
@@ -85,6 +87,11 @@ namespace ASEvaAPIEtoTest
                     }
                 }
                 view.UpdateNodes(tasks.ToArray());
+            };
+
+            buttonSelect.Click += delegate
+            {
+                view.SelectItem(parentNodes[0].Key);
             };
         }
 

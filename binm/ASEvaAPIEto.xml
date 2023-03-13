@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.10.0
+            version=2.10.1
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -1818,6 +1818,12 @@
             <summary>
             获取当前选中条目的键对象
             </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SimpleTreeView.SelectItem(System.Object)">
+            <summary>
+            (api:eto=2.10.1) 选中键对象对应的条目
+            </summary>
+            <param name="key">键对象</param>
         </member>
         <member name="E:ASEva.UIEto.SimpleTreeView.SelectedItemChanged">
             <summary>
