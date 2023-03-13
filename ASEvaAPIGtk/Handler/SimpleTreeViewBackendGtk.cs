@@ -52,6 +52,7 @@ namespace ASEva.UIGtk
 
             if (rootNodes == null || rootNodes.Length == 0) return;
 
+            var expandedItemKeys = new List<object>();
             foreach (var node in rootNodes)
             {
                 if (node.Key == null || nodeMap.ContainsKey(node.Key)) continue;
@@ -70,8 +71,8 @@ namespace ASEva.UIGtk
 
                 if (node.ChildNodes != null && node.ChildNodes.Count > 0)
                 {
-                    addChildNodes(iter, node.ChildNodes);
-                    if (node.ChildNodesExpanded) treeView.ExpandRow(treeStore.GetPath(iter), false);
+                    if (node.ChildNodesExpanded) expandedItemKeys.Add(node.Key);
+                    addChildNodes(iter, node.ChildNodes, expandedItemKeys);
                 }
             }
 
@@ -88,6 +89,11 @@ namespace ASEva.UIGtk
             else
             {
                 treeModel.ResetDefaultSortFunc();
+            }
+
+            foreach (var key in expandedItemKeys)
+            {
+                treeView.ExpandRow(treeStore.GetPath(nodeMap[key].Iter), false);
             }
         }
 
@@ -121,7 +127,7 @@ namespace ASEva.UIGtk
             if (callback != null) callback.OnSelectedItemActivated();
         }
 
-        private void addChildNodes(TreeIter parentIter, List<SimpleTreeNode> childNodes)
+        private void addChildNodes(TreeIter parentIter, List<SimpleTreeNode> childNodes, List<object> expandedItemKeys)
         {
             foreach (var node in childNodes)
             {
@@ -141,8 +147,8 @@ namespace ASEva.UIGtk
 
                 if (node.ChildNodes != null && node.ChildNodes.Count > 0)
                 {
-                    addChildNodes(iter, node.ChildNodes);
-                    if (node.ChildNodesExpanded) treeView.ExpandRow(treeStore.GetPath(iter), false);
+                    if (node.ChildNodesExpanded) expandedItemKeys.Add(node.Key);
+                    addChildNodes(iter, node.ChildNodes, expandedItemKeys);
                 }
             }
         }

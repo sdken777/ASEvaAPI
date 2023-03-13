@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 13, 0); // 使用SimpleTreeViewFactoryGtk
+            return new Version(2, 5, 13, 1); // 修正ExpandRow操作
         }
     }
 }
