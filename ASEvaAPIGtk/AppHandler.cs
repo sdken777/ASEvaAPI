@@ -86,6 +86,7 @@ namespace ASEva.UIGtk
             SkiaCanvasExtensions.DefaultFontSize = 12.5f;
             TopMostExtensions.QueryInterface = new TopMostHandler();
             DefaultFlowLayout2DBackend.FixedScrollBarSize = 15;
+            SimpleTreeView.Factory = new SimpleTreeViewFactoryGtk();
 
             webViewBackend = "webkit2";
 

@@ -251,7 +251,7 @@ namespace ASEva.UIEto
 
         public void UpdateNodes(SimpleTreeNodeUpdateTask[] tasks)
         {
-            if (tasks.Length == 0) return;
+            if (tasks == null || tasks.Length == 0) return;
 
             bool updated = false;
             foreach (var task in tasks)

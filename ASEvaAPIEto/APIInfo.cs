@@ -21,7 +21,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 10, 0, 0); // 新增SimpleTreeView
+            return new Version(2, 10, 0, 1); // 修正DefaultSimpleTreeViewBackend.UpdateNodes
         }
     }
 }
