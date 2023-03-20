@@ -23,7 +23,11 @@ namespace ASEva.UIGtk
 
 		public Uri Url
 		{
-			get { return WebViewHandle == IntPtr.Zero ? null : new Uri(NativeMethods.webkit_web_view_get_uri(WebViewHandle)); }
+			get
+			{
+				String uriString = WebViewHandle == IntPtr.Zero ? null : NativeMethods.webkit_web_view_get_uri(WebViewHandle);
+				return String.IsNullOrEmpty(uriString) ? null : new Uri(uriString);
+			}
 			set
 			{
 				if (WebViewHandle == IntPtr.Zero)
@@ -161,15 +165,18 @@ namespace ASEva.UIGtk
 
 		private void WebViewHandler_LoadChanged(object o, GLib.SignalArgs args)
 		{
+			var url = Url;
+			if (url == null) return;
+
 			var loadEvent = (int)args.Args[0];
 
 			switch (loadEvent)
 			{
 				case 2: // WEBKIT_LOAD_COMMITTED
-					navigated?.Invoke(this, new WebViewLoadedEventArgs(Url));
+					navigated?.Invoke(this, new WebViewLoadedEventArgs(url));
 					break;
 				case 3: // WEBKIT_LOAD_FINISHED
-					documentLoaded?.Invoke(this, new WebViewLoadedEventArgs(Url));
+					documentLoaded?.Invoke(this, new WebViewLoadedEventArgs(url));
 					break;
 			}
 		}

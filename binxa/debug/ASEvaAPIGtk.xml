@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIGtk.APIInfo">
             <summary>
-            version=2.4.4
+            version=2.5.13
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.APIInfo.GetAPIVersion">
@@ -45,6 +45,21 @@
         <member name="M:ASEva.UIGtk.ConfigPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.ConfigPanel.OnHandleModal">
+            <summary>
+            (api:gtk=2.5.10) [可选实现] 在主循环中被调用，可进行模态对话
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.ConfigPanel.Close">
+            <summary>
+            (api:gtk=2.4.5) 关闭配置界面
+            </summary>
+        </member>
+        <member name="E:ASEva.UIGtk.ConfigPanel.CloseRequested">
+            <summary>
+            (api:gtk=2.4.5) 在此事件中实现配置界面的关闭
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.DialogHelper">
@@ -92,6 +107,19 @@
         <member name="T:ASEva.UIGtk.EventBoxHelper">
             <summary>
             (api:gtk=2.0.0) 事件框辅助类
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.EventBoxHelper.Add(Gtk.EventBox,Gtk.Menu,System.Boolean)">
+            <summary>
+            添加事件框
+            </summary>
+            <param name="eventBox">事件框</param>
+            <param name="contextMenu">关联右键菜单</param>
+            <param name="enableScrolledEvent">是否启用滚轮事件</param>
+        </member>
+        <member name="P:ASEva.UIGtk.EventBoxHelper.PassEvents">
+            <summary>
+            (api:gtk=2.5.4) 事件是否允许下层控件接收，默认false
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.CairoContextExtension">
@@ -321,6 +349,11 @@
             (api:gtk=2.1.0) 是否含alpha通道
             </summary>
         </member>
+        <member name="P:ASEva.UIGtk.VideoFrameSampleImage.BgrInverted">
+            <summary>
+            (api:gtk=2.5.6) BGR是否逆序
+            </summary>
+        </member>
         <member name="M:ASEva.UIGtk.VideoFrameSampleImage.ToPixbuf">
             <summary>
             转换为Gdk.Pixbuf对象
@@ -384,6 +417,11 @@
         <member name="M:ASEva.UIGtk.WindowPanel.OnUpdateUI">
             <summary>
             [可选实现] 在需要更新界面时被调用。所有与界面相关的更新应全部放在此函数内实现。需要注意，窗口隐藏时将不会调用此函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.WindowPanel.OnHandleModal">
+            <summary>
+            (api:gtk=2.5.10) [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.WindowPanel.OnRelease">
