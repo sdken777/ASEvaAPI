@@ -106,13 +106,15 @@ namespace ASEva.UIGtk
                 if (task.Key == null || !nodeMap.ContainsKey(task.Key)) continue;
 
                 var node = nodeMap[task.Key];
-                if (task.TextColor != null && task.TextColor != node.Common.TextColor)
+                if (task.TextColor != null && task.TextColor.Value != node.Common.TextColor)
                 {
                     treeStore.SetValue(node.Iter, 1, rgb(task.TextColor.Value));
+                    node.Common.TextColor = task.TextColor.Value;
                 }
-                if (task.BackgroundColor != null && task.BackgroundColor != node.Common.BackgroundColor)
+                if (task.BackgroundColor != null && task.BackgroundColor.Value != node.Common.BackgroundColor)
                 {
                     treeStore.SetValue(node.Iter, 2, rgb(task.BackgroundColor.Value));
+                    node.Common.BackgroundColor = task.BackgroundColor.Value;
                 }
             }
         }
