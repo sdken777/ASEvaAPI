@@ -980,7 +980,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 添加信号引用，在 ASEva.WindowPanel.OnInputData 中可获得该信号的数据
+        /// 添加信号引用，在应用层才可获得该信号的数据
         /// </summary>
         /// <param name="signalID">信号ID</param>
         public static void AddSignalReference(String signalID)

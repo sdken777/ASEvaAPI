@@ -33,7 +33,7 @@ namespace ASEva.UIEto
     }
 
 	/// <summary>
-	/// (api:eto=2.7.0) Skia绘制视图（注意，此控件不支持在 ASEva.UIEto.OverlayLayout 中使用）
+	/// (api:eto=2.7.0) Skia绘制视图
 	/// </summary>
 	public class SkiaView : Panel, GLCallback
 	{

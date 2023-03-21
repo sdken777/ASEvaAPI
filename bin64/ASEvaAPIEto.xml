@@ -1907,7 +1907,7 @@
         </member>
         <member name="T:ASEva.UIEto.SkiaView">
             <summary>
-            (api:eto=2.7.0) Skia绘制视图（注意，此控件不支持在 ASEva.UIEto.OverlayLayout 中使用）
+            (api:eto=2.7.0) Skia绘制视图
             </summary>
         </member>
         <member name="E:ASEva.UIEto.SkiaView.Render">
