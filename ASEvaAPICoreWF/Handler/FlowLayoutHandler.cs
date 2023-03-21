@@ -36,6 +36,14 @@ namespace ASEva.UICoreWF
         {
             control.SetLogicalHeight(logicalHeight);
             var winformControl = control.ToNative(true) as System.Windows.Forms.Panel;
+
+            if (winformControl == null)
+            {
+                control = new Panel { Content = control };
+                control.SetLogicalHeight(logicalHeight);
+                winformControl = control.ToNative(true) as System.Windows.Forms.Panel;
+            }
+
             winformControl.Width = 1;
             winformControl.Margin = new System.Windows.Forms.Padding(2);
             ctxs.Add(new ControlContext { EtoControl = control, WinformControl = winformControl, Visible = true });
@@ -49,6 +57,14 @@ namespace ASEva.UICoreWF
         {
             control.SetLogicalHeight(logicalHeight);
             var winformControl = control.ToNative(true) as System.Windows.Forms.Panel;
+
+            if (winformControl == null)
+            {
+                control = new Panel { Content = control };
+                control.SetLogicalHeight(logicalHeight);
+                winformControl = control.ToNative(true) as System.Windows.Forms.Panel;
+            }
+
             winformControl.Width = 1;
             winformControl.Margin = new System.Windows.Forms.Padding(2);
             ctxs.Insert(index, new ControlContext { EtoControl = control, WinformControl = winformControl, Visible = true });

@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 14, 0); // 使用SimpleTreeViewFactoryCoreWF
+            return new Version(2, 4, 14, 1); // 修复FlowLayout.Add/InsertControl时控件非容器时崩溃问题
         }
     }
 }
