@@ -1974,7 +1974,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.10.1
+            version=2.10.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4705,7 +4705,7 @@
         </member>
         <member name="P:ASEva.Samples.BusMessageSample.Channel">
             <summary>
-            来源通道（1~16）
+            接收来源通道或发送目标通道（1~16）
             </summary>
         </member>
         <member name="P:ASEva.Samples.BusMessageSample.Length">
@@ -4721,6 +4721,26 @@
         <member name="P:ASEva.Samples.BusMessageSample.Data">
             <summary>
             报文数据，长度限定在64以下，可能小于报文的实际长度
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.BusMessageSample.Type">
+            <summary>
+            (api:app=2.10.2) 总线通道类型
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.BusMessageSample.State">
+            <summary>
+            (api:app=2.10.2) 总线数据的(发送)状态
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.BusMessageSample.ScheduleTimeOffset">
+            <summary>
+            (api:app=2.10.2) 预约发送的时间偏置，0表示无效
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.BusMessageSample.SchedulePosixTime">
+            <summary>
+            (api:app=2.10.2) 预约发送的授时服务器时间，单位纳秒，0表示无效
             </summary>
         </member>
         <member name="T:ASEva.Samples.BusDataPack">
@@ -7232,6 +7252,66 @@
             <param name="maxGap">容许的最大间隔，单位秒</param>
             <param name="withAlpha">是否输出带Alpha通道的图像(固定赋值255)</param>
             <returns>缩略图数据，图像宽度固定为80，获取失败则返回null</returns>
+        </member>
+        <member name="T:ASEva.BusRawDataState">
+            <summary>
+            (api:app=2.10.2) 总线数据的(发送)状态
+            </summary>
+        </member>
+        <member name="F:ASEva.BusRawDataState.Received">
+            <summary>
+            收到的报文，其他状态都为发送报文
+            </summary>
+        </member>
+        <member name="F:ASEva.BusRawDataState.NotRunning">
+            <summary>
+            未运行
+            </summary>
+        </member>
+        <member name="F:ASEva.BusRawDataState.InvalidChannel">
+            <summary>
+            无效通道
+            </summary>
+        </member>
+        <member name="F:ASEva.BusRawDataState.PluginNotFound">
+            <summary>
+            插件未找到
+            </summary>
+        </member>
+        <member name="F:ASEva.BusRawDataState.NotSync">
+            <summary>
+            未同步
+            </summary>
+        </member>
+        <member name="F:ASEva.BusRawDataState.ScheduleUnsupported">
+            <summary>
+            不支持预约
+            </summary>
+        </member>
+        <member name="F:ASEva.BusRawDataState.TimeDisorder">
+            <summary>
+            时间乱序
+            </summary>
+        </member>
+        <member name="F:ASEva.BusRawDataState.TransmitOK">
+            <summary>
+            发送成功
+            </summary>
+        </member>
+        <member name="F:ASEva.BusRawDataState.TransmitFailed">
+            <summary>
+            发送失败
+            </summary>
+        </member>
+        <member name="F:ASEva.BusRawDataState.ScheduleOK">
+            <summary>
+            预约成功
+            </summary>
+        </member>
+        <member name="F:ASEva.BusRawDataState.ScheduleFailed">
+            <summary>
+            预约失败
+            </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">
             <summary>

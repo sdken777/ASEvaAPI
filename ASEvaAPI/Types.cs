@@ -2018,4 +2018,65 @@ namespace ASEva
         /// <returns>缩略图数据，图像宽度固定为80，获取失败则返回null</returns>
         CommonImage GetVideoFrameThumbnail(int channel, double timeline, double maxGap, bool withAlpha);
     }
+
+    /// <summary>
+    /// (api:app=2.10.2) 总线数据的(发送)状态
+    /// </summary>
+    public enum BusRawDataState
+	{
+        /// <summary>
+        /// 收到的报文，其他状态都为发送报文
+        /// </summary>
+		Received = 0,
+
+        /// <summary>
+        /// 未运行
+        /// </summary>
+		NotRunning = 1,
+
+        /// <summary>
+        /// 无效通道
+        /// </summary>
+		InvalidChannel = 2,
+
+        /// <summary>
+        /// 插件未找到
+        /// </summary>
+		PluginNotFound = 3,
+
+        /// <summary>
+        /// 未同步
+        /// </summary>
+		NotSync = 4,
+
+        /// <summary>
+        /// 不支持预约
+        /// </summary>
+		ScheduleUnsupported = 5,
+
+        /// <summary>
+        /// 时间乱序
+        /// </summary>
+		TimeDisorder = 6,
+
+        /// <summary>
+        /// 发送成功
+        /// </summary>
+		TransmitOK = 7,
+
+        /// <summary>
+        /// 发送失败
+        /// </summary>
+		TransmitFailed = 8,
+
+        /// <summary>
+        /// 预约成功
+        /// </summary>
+		ScheduleOK = 9,
+
+        /// <summary>
+        /// 预约失败
+        /// </summary>
+		ScheduleFailed = 10,
+	};
 }
