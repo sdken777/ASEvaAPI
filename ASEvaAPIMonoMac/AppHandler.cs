@@ -46,6 +46,7 @@ namespace ASEva.UIMonoMac
             SkiaCanvasExtensions.DefaultFontName = "STHeiti";
             SkiaCanvasExtensions.DefaultFontSize = 13.0f;
             DefaultSimpleTreeViewBackend.DefaultBackgroundColor = Colors.Transparent;
+            SnapshotExtensions.Handler = new SnapshotHandler();
 
             uiBackend = null;
             webViewBackend = "webkit2";
