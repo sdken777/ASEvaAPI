@@ -224,6 +224,14 @@
     <en>Radio item {0}</en>
     <ch>单选项{0}</ch>
   </t>
+  <t id="menu-snapshot">
+    <en>Snapshot</en>
+    <ch>快照</ch>
+  </t>
+  <t id="menu-snapshot-failed">
+    <en>Failed to get snapshot.</en>
+    <ch>获取快照失败。</ch>
+  </t>
   <t id="menu-sub">
     <en>Sub menu</en>
     <ch>子菜单</ch>

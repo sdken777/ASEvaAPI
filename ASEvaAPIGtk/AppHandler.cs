@@ -87,6 +87,7 @@ namespace ASEva.UIGtk
             TopMostExtensions.QueryInterface = new TopMostHandler();
             DefaultFlowLayout2DBackend.FixedScrollBarSize = 15;
             SimpleTreeView.Factory = new SimpleTreeViewFactoryGtk();
+            SnapshotExtensions.Handler = new SnapshotHandler();
 
             webViewBackend = "webkit2";
 

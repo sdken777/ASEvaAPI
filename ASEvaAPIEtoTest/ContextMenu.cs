@@ -21,6 +21,17 @@ namespace ASEvaAPIEtoTest
             menu.AddCheckItem(t.Format("menu-check", "B"));
             menu.AddSeparator();
             menu.AddRadioItems(new String[] { t.Format("menu-radio", "A"), t.Format("menu-radio", "B") });
+            menu.AddSeparator();
+            menu.AddButtonItem(t["menu-snapshot"]).Click += delegate
+            {
+                var snapshot = this.Snapshot();
+                if (snapshot == null) MessageBox.Show(t["menu-snapshot-failed"], "", MessageBoxType.Error);
+                else
+                {
+                    var dialog = new ImageDialog(snapshot);
+                    App.RunDialog(dialog);
+                }
+            };
         }
     }
 }

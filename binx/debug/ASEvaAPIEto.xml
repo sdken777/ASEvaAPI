@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.10.2
+            version=2.10.3
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -756,6 +756,18 @@
             <param name="text">文本</param>
             <param name="font">字体</param>
             <returns>文本的逻辑尺寸</returns>
+        </member>
+        <member name="T:ASEva.UIEto.SnapshotExtensions">
+            <summary>
+            (api:eto=2.10.3) 获取控件快照的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SnapshotExtensions.Snapshot(Eto.Forms.Control)">
+            <summary>
+            获取控件快照
+            </summary>
+            <param name="control">目标控件</param>
+            <returns>控件快照图像，若不支持或获取失败则返回null</returns>
         </member>
         <member name="T:ASEva.UIEto.SplitterExtensions">
             <summary>
@@ -1907,7 +1919,7 @@
         </member>
         <member name="T:ASEva.UIEto.SkiaView">
             <summary>
-            (api:eto=2.7.0) Skia绘制视图（注意，此控件不支持在 ASEva.UIEto.OverlayLayout 中使用）
+            (api:eto=2.7.0) Skia绘制视图
             </summary>
         </member>
         <member name="E:ASEva.UIEto.SkiaView.Render">
