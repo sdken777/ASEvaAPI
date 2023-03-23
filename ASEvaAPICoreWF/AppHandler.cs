@@ -50,6 +50,7 @@ namespace ASEva.UICoreWF
             TopMostExtensions.QueryInterface = new TopMostHandler();
             TextBitmap.ModifyInterface = new BitmapGraphicsHandler();
             SimpleTreeView.Factory = new SimpleTreeViewFactoryCoreWF();
+            SnapshotExtensions.Handler = new SnapshotHandler();
 
             uiBackend = null;
             webViewBackend = "webview2";
