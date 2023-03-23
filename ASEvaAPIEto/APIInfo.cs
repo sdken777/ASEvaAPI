@@ -21,7 +21,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 10, 3, 0); // 增加SnapshotExtensions
+            return new Version(2, 10, 3, 1); // 提高SnapshotExtensions安全性
         }
     }
 }

@@ -17,7 +17,7 @@ namespace ASEva.UIEto
         /// <returns>控件快照图像，若不支持或获取失败则返回null</returns>
         public static CommonImage Snapshot(this Control control)
         {
-            if (Handler == null) return null;
+            if (control == null || Handler == null) return null;
             else return Handler.Snapshot(control);
         }
 

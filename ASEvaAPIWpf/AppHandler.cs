@@ -35,6 +35,7 @@ namespace ASEva.UIWpf
             SkiaCanvasExtensions.DefaultFontSize = 12;
             TextBitmap.ImageInterpolationMode = ImageInterpolation.Medium;
             TopMostExtensions.QueryInterface = new TopMostHandler();
+            SnapshotExtensions.Handler = new SnapshotHandler();
 
             uiBackend = null;
             webViewBackend = "webview2";
