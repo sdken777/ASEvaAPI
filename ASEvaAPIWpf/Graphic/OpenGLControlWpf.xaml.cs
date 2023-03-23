@@ -56,7 +56,7 @@ namespace ASEva.UIWpf
             DrawBeat.CallbackBegin(this, moduleID);
 
             var pixelScale = (float)PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice.M11;
-            var curSize = new GLSizeInfo((int)ActualWidth, (int)ActualHeight, (int)(pixelScale * ActualWidth), (int)(pixelScale * ActualHeight), pixelScale, (float)(ActualWidth / ActualHeight));
+            var curSize = new GLSizeInfo((int)ActualWidth, (int)ActualHeight, (int)(pixelScale * ActualWidth), (int)(pixelScale * ActualHeight), pixelScale, (float)(ActualWidth / ActualHeight), true);
             bool resized = curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
             size = curSize;
 
@@ -104,33 +104,9 @@ namespace ASEva.UIWpf
                     gl.BindFramebufferEXT(OpenGL.GL_FRAMEBUFFER_EXT, frameBuffer[1]);
                 }
 
-                bitmap = new WriteableBitmap(size.RealWidth, size.RealHeight, 96, 96, PixelFormats.Bgra32, null);
-                gl.ReadPixels(0, 0, bitmap.PixelWidth, bitmap.PixelHeight, OpenGL.GL_RGBA, hostBuffer);
+                gl.ReadPixels(0, 0, size.RealWidth, size.RealHeight, OpenGL.GL_BGRA, hostBuffer);
 
-                bitmap.Lock();
-                {
-                    var bitmapWidth = bitmap.PixelWidth;
-                    var bitmapHeight = bitmap.PixelHeight;
-                    var bitmapStep = bitmap.BackBufferStride;
-                    unsafe
-                    {
-                        byte* surfaceData = (byte*)bitmap.BackBuffer;
-                        fixed (byte* srcData = &(hostBuffer[0]))
-                        {
-                            for (int v = 0; v < bitmapHeight; v++)
-                            {
-                                uint* srcRow = (uint*)&srcData[v * bitmapWidth * 4];
-                                uint* dstRow = (uint*)&surfaceData[(bitmapHeight - 1 - v) * bitmapStep];
-                                for (int u = 0; u < bitmapWidth; u++)
-                                {
-                                    dstRow[u] = ((srcRow[u] & 0x000000ff) << 16) | (srcRow[u] & 0x0000ff00) | ((srcRow[u] & 0x00ff0000) >> 16) | 0xff000000;
-                                }
-                            }
-                        }
-                    }
-                }
-                bitmap.AddDirtyRect(new Int32Rect(0, 0, bitmap.PixelWidth, bitmap.PixelHeight));
-                bitmap.Unlock();
+                var bitmap = BitmapSource.Create(size.RealWidth, size.RealHeight, 96, 96, PixelFormats.Bgra32, null, hostBuffer, size.RealWidth * 4);
 
                 double dx = 0, dy = 0;
                 var rootWindow = Window.GetWindow(this);
@@ -258,7 +234,7 @@ namespace ASEva.UIWpf
                 ctxInfo.extensions = gl.Extensions;
 
                 var pixelScale = (float)PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice.M11;
-                size = new GLSizeInfo((int)ActualWidth, (int)ActualHeight, (int)(pixelScale * ActualWidth), (int)(pixelScale * ActualHeight), pixelScale, (float)(ActualWidth / ActualHeight));
+                size = new GLSizeInfo((int)ActualWidth, (int)ActualHeight, (int)(pixelScale * ActualWidth), (int)(pixelScale * ActualHeight), pixelScale, (float)(ActualWidth / ActualHeight), true);
 
                 if (!gl.ExtensionList.Contains("GL_EXT_framebuffer_object"))
                 {
@@ -319,7 +295,6 @@ namespace ASEva.UIWpf
                 }
 
                 hostBuffer = new byte[size.RealWidth * size.RealHeight * 4];
-                bitmap = new WriteableBitmap(size.RealWidth, size.RealHeight, 96, 96, PixelFormats.Bgra32, null);
 
                 callback.OnGLInitialize(gl, ctxInfo);
                 callback.OnGLResize(gl, size);
@@ -399,7 +374,6 @@ namespace ASEva.UIWpf
         private uint[] colorBuffer = null;
         private uint[] depthBuffer = null;
         private byte[] hostBuffer = null;
-        private WriteableBitmap bitmap = null;
         private GLSizeInfo size = null;
     }
 }
