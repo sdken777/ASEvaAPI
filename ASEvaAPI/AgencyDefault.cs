@@ -1355,5 +1355,15 @@ namespace ASEva
         {
             return false;
         }
+
+        public string[] GetGraphPanelStyles(GraphType graphType)
+        {
+            return null;
+        }
+
+        public GraphPanel CreateGraphPanel(GraphType graphID, string styleName)
+        {
+            return null;
+        }
     }
 }

@@ -1972,9 +1972,24 @@
             <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
             <returns>可视化面板对象，若创建失败则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetGraphPanelStyles(ASEva.GraphType)">
+            <summary>
+            (api:app=2.10.3) 获取符合图表报告的所有可视化面板样式名
+            </summary>
+            <param name="graphType">图表类型</param>
+            <returns>可视化面板样式名列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.CreateGraphPanel(ASEva.GraphType,System.String)">
+            <summary>
+            (api:app=2.10.3) 创建图表可视化面板
+            </summary>
+            <param name="graphType">图表类型</param>
+            <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
+            <returns>可视化面板对象，若创建失败则返回null</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.10.2
+            version=2.10.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">

@@ -286,7 +286,9 @@ namespace ASEva
         Timestamp[] GetChannelLatestTimestamps(String key);
         void RegisterGraphPanel(GraphType graphType, String styleName, Type panelType);
         void RegisterGraphPanel(int graphID, String styleName, Type panelType);
+        String[] GetGraphPanelStyles(GraphType graphType);
         String[] GetGraphPanelStyles(int graphID);
+        GraphPanel CreateGraphPanel(GraphType graphID, String styleName);
         GraphPanel CreateGraphPanel(int graphID, String styleName);
     }
 
@@ -3122,6 +3124,27 @@ namespace ASEva
         public static GraphPanel CreateGraphPanel(int graphID, String styleName)
         {
             return Handler.CreateGraphPanel(graphID, styleName);
+        }
+
+        /// <summary>
+        /// (api:app=2.10.3) 获取符合图表报告的所有可视化面板样式名
+        /// </summary>
+        /// <param name="graphType">图表类型</param>
+        /// <returns>可视化面板样式名列表</returns>
+        public static String[] GetGraphPanelStyles(GraphType graphType)
+        {
+            return Handler.GetGraphPanelStyles(graphType);
+        }
+
+        /// <summary>
+        /// (api:app=2.10.3) 创建图表可视化面板
+        /// </summary>
+        /// <param name="graphType">图表类型</param>
+        /// <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
+        /// <returns>可视化面板对象，若创建失败则返回null</returns>
+        public static GraphPanel CreateGraphPanel(GraphType graphType, String styleName)
+        {
+            return Handler.CreateGraphPanel(graphType, styleName);
         }
     }
 }
