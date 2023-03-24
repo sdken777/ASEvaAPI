@@ -19,6 +19,23 @@ namespace ASEva.UIEto
         }
 
         /// <summary>
+        /// (api:eto=2.10.4) 延布局方向添加指定大小空间
+        /// </summary>
+        /// <param name="stackLayout">堆叠布局</param>
+        /// <param name="logicalSize">指定大小空间</param>
+        public static void AddSpace(this StackLayout stackLayout, int logicalSize)
+        {
+            if (stackLayout.Orientation == Orientation.Horizontal)
+            {
+                stackLayout.Items.Add(new StackLayoutItem(new Panel{ Width = stackLayout.Sizer(logicalSize) }));
+            }
+            else
+            {
+                stackLayout.Items.Add(new StackLayoutItem(new Panel{ Height = stackLayout.Sizer(logicalSize) }));
+            }
+        }
+
+        /// <summary>
         /// (api:eto=2.3.3) 添加分割线
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
