@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.10.3
+            version=2.10.4
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -798,6 +798,13 @@
             添加空间延布局方向撑满
             </summary>
             <param name="stackLayout">堆叠布局</param>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddSpace(Eto.Forms.StackLayout,System.Int32)">
+            <summary>
+            (api:eto=2.10.4) 延布局方向添加指定大小空间
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="logicalSize">指定大小空间</param>
         </member>
         <member name="M:ASEva.UIEto.StackLayoutExtensions.AddSeparator(Eto.Forms.StackLayout)">
             <summary>
