@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.10.4
+            version=2.10.5
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -14,6 +14,12 @@
             (api:eto=2.0.0) 获取API版本
             </summary>
             <returns>API版本</returns>
+        </member>
+        <member name="M:ASEva.UIEto.APIInfo.GetEtoLibVersion">
+            <summary>
+            (api:eto=2.10.5) 获取Eto库版本
+            </summary>
+            <returns>Eto库版本</returns>
         </member>
         <member name="T:ASEva.UIEto.App">
             <summary>
