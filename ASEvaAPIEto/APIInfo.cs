@@ -23,7 +23,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 10, 5, 0); // 新增APIInfo.GetEtoLibVersion
+            return new Version(2, 10, 5, 1); // 优化APIInfo.GetEtoLibVersion
         }
 
         /// <summary>
@@ -38,8 +38,8 @@ namespace ASEva.UIEto
             try
             {
                 var etoLib = Assembly.LoadFrom(etoLibPath);
-                var etoLibName = etoLib.GetName();
-                return etoLibName.Version;
+                var etoLibVersion = etoLib.GetName().Version;
+                return etoLibVersion == null ? null : new Version(etoLibVersion.Major, etoLibVersion.Minor);
             }
             catch (Exception) { return null;}
         }
