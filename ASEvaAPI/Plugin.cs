@@ -63,16 +63,22 @@ namespace ASEva
         public virtual MainWorkflow GetMainWorkflow() { return null; }
 
         /// <summary>
-        /// [可选实现] 获取插件包需要使用的所有全局路径的键
+        /// [可选实现] 获取插件包需要使用的所有全局路径的键时被调用
         /// </summary>
         /// <returns>全局路径键的列表</returns>
         public virtual String[] GetGlobalPathKeys() { return null; }
 
         /// <summary>
-        /// (api:app=2.6.6) [可选实现] 获取插件相关的原生组件ID（无需考虑本插件内的原生组件）
+        /// (api:app=2.6.6) [可选实现] 获取插件相关的原生组件ID时被调用（无需考虑本插件内的原生组件）
         /// </summary>
         /// <returns>原生组件ID列表</returns>
         public virtual String[] GetRelatedNativeModules() { return null; }
+
+        /// <summary>
+        /// (api:app=2.11.0) [可选实现] 设置用于记录调试信息的接口时被调用
+        /// </summary>
+        /// <param name="logger">记录调试信息的接口，基于此接口记录可带上来源信息</param>
+        public virtual void UseLogger(Logger logger) { }
 
         /// <summary>
         /// [可选实现] 在插件成功加载后被调用（用于开启背景线程等）

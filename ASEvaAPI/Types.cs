@@ -2079,4 +2079,16 @@ namespace ASEva
         /// </summary>
 		ScheduleFailed = 10,
 	};
+
+    /// <summary>
+    /// (api:app=2.11.0) 记录调试信息接口
+    /// </summary>
+    public interface Logger
+    {
+        /// <summary>
+        /// 打印信息至Debugger，不需要指定来源时可使用 ASEva.Agency.Print
+        /// </summary>
+        /// <param name="text">想要打印的文本</param>
+        void Print(String text);
+    }
 }

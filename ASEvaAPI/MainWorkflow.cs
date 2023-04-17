@@ -89,10 +89,16 @@ namespace ASEva
         public virtual void OnLog(String message, LogLevel level) {}
 
         /// <summary>
-        /// [可选实现] 输出调试用消息
+        /// 已弃用，应实现OnDebugMessage(message, source)
+        /// </summary>
+        public virtual void OnDebugMessage(String message) {}
+
+        /// <summary>
+        /// (api:app=2.11.0) [可选实现] 输出调试用消息
         /// </summary>
         /// <param name="message">消息</param>
-        public virtual void OnDebugMessage(String message) {}
+        /// <param name="source">来源</param>
+        public virtual void OnDebugMessage(String message, String source) {}
 
         /// <summary>
         /// [可选实现] 获取语言

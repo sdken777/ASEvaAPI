@@ -802,7 +802,7 @@ namespace ASEva
         }
 
         /// <summary>
-        /// 打印信息至Debugger
+        /// 打印信息至Debugger，需要指定来源时应使用 ASEva.Logger
         /// </summary>
         /// <param name="text">想要打印的文本</param>
         public static void Print(String text)
