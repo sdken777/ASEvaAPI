@@ -496,17 +496,12 @@ namespace ASEva.Utility
                 cw.WriteLong("start_posix_host", (long)HostPosixModel.StartPosix);
                 cw.WriteDouble("time_ratio_host", HostPosixModel.TimeRatio);
                 cw.WriteBool("host_sync", HostSync, "yes", "no");
-                cw.WriteLong("start_posix_local", (long)HostPosixModel.StartPosix); // 兼容老版本
-                cw.WriteDouble("time_ratio_to_local", HostPosixModel.TimeRatio); // 兼容老版本
             }
 
             if (GNSSPosixModel != null)
             {
                 cw.WriteLong("start_posix_gnss", (long)GNSSPosixModel.StartPosix);
                 cw.WriteDouble("time_ratio_gnss", GNSSPosixModel.TimeRatio);
-                cw.WriteLong("start_posix_utc", (long)GNSSPosixModel.StartPosix); // 兼容老版本
-                cw.WriteDouble("time_ratio_to_utc", GNSSPosixModel.TimeRatio); // 兼容老版本
-                cw.WriteString("start_time_utc", StartTimeUTC.Value.ToString("yyyy-MM-dd-HH-mm-ss-fff")); // 兼容老版本
             }
 
             var pickNode = rootNode.AppendChild(xml.CreateElement("pick")) as XmlElement;

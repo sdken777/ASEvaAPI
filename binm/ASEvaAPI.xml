@@ -1989,7 +1989,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.11.0
+            version=2.11.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
