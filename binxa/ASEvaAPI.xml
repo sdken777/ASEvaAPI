@@ -1989,7 +1989,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.11.1
+            version=2.11.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -7569,6 +7569,35 @@
             <summary>
             保存信息文件
             </summary>
+        </member>
+        <member name="T:ASEva.Utility.IntervalControl">
+            <summary>
+            (api:app=2.11.2) 执行操作的间隔控制
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.IntervalControl.#ctor(System.Double,System.Boolean,System.Boolean)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="interval">执行操作的间隔时间，单位秒，至少0.1秒</param>
+            <param name="manual">是否手动控制计时，手动模式下需要调用Next方法开启下一轮计时</param>
+            <param name="immediate">是否可立即执行操作，否则需要等待interval时间后才可进行操作</param>
+        </member>
+        <member name="M:ASEva.Utility.IntervalControl.Test">
+            <summary>
+            检查是否应执行操作
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.IntervalControl.Next">
+            <summary>
+            手动模式下开启下一轮计时
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.IntervalControl.Reset(System.Boolean)">
+            <summary>
+            重置间隔控制
+            </summary>
+            <param name="immediate">是否可立即执行操作，否则需要等待interval时间后才可进行操作</param>
         </member>
         <member name="T:ASEva.Utility.MD5Calculator">
             <summary>
