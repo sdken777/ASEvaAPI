@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 16, 0); // 使用FlowLayout/2DBackendGtk
+            return new Version(2, 5, 16, 1); // 修正Label重复设置文字导致全局Drawable刷新问题
         }
     }
 }

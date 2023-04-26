@@ -43,6 +43,7 @@ namespace ASEva.UIGtk
             platform.Add<GridView.IHandler>(() => new GridViewHandler());
             platform.Add<GroupBox.IHandler>(() => new GroupBoxHandler());
             platform.Add<SaveFileDialog.IHandler>(() => new SaveFileDialogHandler());
+            platform.Add<Label.IHandler>(() => new LabelHandler());
             var app = new Application(platform);
 
             ScreensHandler.TestLegacy();
