@@ -132,16 +132,16 @@ namespace ASEva.UICoreWF
             var yrange = D.GetYRange();
 
             var intervalX = (width - 1 - originPoint.X) /xrange.Count;
-            var xString = (xrange.Base + xrange.Step * xrange.Count).ToString();
+            var xString = (new Decimal(xrange.Base + xrange.Step * xrange.Count)).ToString();
             g.DrawLine(blackPen, new PointF(intervalX* xrange.Count+originPoint.X, originPoint.Y), new PointF(intervalX * xrange.Count + originPoint.X, originPoint.Y+2));
             g.DrawString(xString, font7f, brushBlack, new PointF(intervalX * xrange.Count + originPoint.X - g.MeasureString(xString, font7f).Width, originPoint.Y));
-            g.DrawString(xrange.Base.ToString(), font7f, brushBlack, new PointF(originPoint.X, originPoint.Y));
+            g.DrawString((new Decimal(xrange.Base)).ToString(), font7f, brushBlack, new PointF(originPoint.X, originPoint.Y));
 
             var intervalY = originPoint.Y / yrange.Count;
-            var yString = (yrange.Base + yrange.Step * yrange.Count).ToString();
+            var yString = (new Decimal(yrange.Base + yrange.Step * yrange.Count)).ToString();
             g.DrawLine(blackPen, new PointF(originPoint.X, originPoint.Y - intervalY * yrange.Count), new PointF(originPoint.X-2,originPoint.Y - intervalY * yrange.Count));
             g.DrawString(yString, font7f, brushBlack, new PointF(originPoint.X - 15, 0), new StringFormat(StringFormatFlags.DirectionVertical));
-            g.DrawString(yrange.Base.ToString(), font7f, brushBlack, new PointF(originPoint.X - 15, originPoint.Y - g.MeasureString(yrange.Base.ToString(), font7f).Width), new StringFormat(StringFormatFlags.DirectionVertical));
+            g.DrawString((new Decimal(yrange.Base)).ToString(), font7f, brushBlack, new PointF(originPoint.X - 15, originPoint.Y - g.MeasureString(yrange.Base.ToString(), font7f).Width), new StringFormat(StringFormatFlags.DirectionVertical));
         }
 
         private void pic_drawBarGraph(object sender, PaintEventArgs e)
@@ -354,7 +354,7 @@ namespace ASEva.UICoreWF
             {
                 var Xindex = (int)Math.Floor((curPoint.X - originPoint.X) / intervalX);
                 var Yindex = (int)Math.Floor((originPoint.Y - curPoint.Y) / intervalY);
-                var text = isPercentage ? (values[Xindex, Yindex].ToString("F1") + "%") : (Math.Abs(values[Xindex, Yindex]) >= 0.1 ? values[Xindex, Yindex].ToString("F3") : values[Xindex, Yindex].ToString());
+                var text = isPercentage ? (values[Xindex, Yindex].ToString("F1") + "%") : (Math.Abs(values[Xindex, Yindex]) >= 0.1 ? values[Xindex, Yindex].ToString("F3") : (new Decimal(values[Xindex, Yindex])).ToString());
                 pointAnnotation = new KeyValuePair<PointF, string>(curPoint, "(" + Math.Round((xRangeUpper - xRangeLow) * (curPoint.X - originPoint.X) / (width - 1 - originPoint.X) + xRangeLow, 3) + "," + Math.Round((yRangeUpper - yRangeLow) * (originPoint.Y - curPoint.Y) / originPoint.Y + yRangeLow, 3) + " : " + text + ")");
             }
 
@@ -367,8 +367,8 @@ namespace ASEva.UICoreWF
                 var bx = originPoint.X + (i + 1) * intervalX;
                 if (curPoint.Y > originPoint.Y && curPoint.X >= ax && curPoint.X < bx)
                 {
-                    var text = isPercentage ? (xHeights[i].ToString("F1") + "%") : (Math.Abs(xHeights[i]) >= 0.1 ? xHeights[i].ToString("F3") : xHeights[i].ToString());
-                    barAnnotationX = new KeyValuePair<PointF, string>(new PointF(curPoint.X, curPoint.Y), "(" + a + "~" + b + " : " + text + ")");
+                    var text = isPercentage ? (xHeights[i].ToString("F1") + "%") : (Math.Abs(xHeights[i]) >= 0.1 ? xHeights[i].ToString("F3") : (new Decimal(xHeights[i])).ToString());
+                    barAnnotationX = new KeyValuePair<PointF, string>(new PointF(curPoint.X, curPoint.Y), "(" + (new Decimal(a)).ToString() + "~" + (new Decimal(b)).ToString() + " : " + text + ")");
                 }
             }
 
@@ -381,8 +381,8 @@ namespace ASEva.UICoreWF
                 var by = originPoint.Y - (i + 1) * intervalY;
                 if (curPoint.X < originPoint.X && curPoint.X > 0 && curPoint.Y >= by && curPoint.Y < ay)
                 {
-                    var text = isPercentage ? (yHeights[i].ToString("F1") + "%") : (Math.Abs(yHeights[i]) >= 0.1 ? yHeights[i].ToString("F3") : yHeights[i].ToString());
-                    barAnnotationY = new KeyValuePair<PointF, string>(new PointF(curPoint.X, curPoint.Y), "(" + a + "~" + b + " : " + text + ")");
+                    var text = isPercentage ? (yHeights[i].ToString("F1") + "%") : (Math.Abs(yHeights[i]) >= 0.1 ? yHeights[i].ToString("F3") : (new Decimal(yHeights[i])).ToString());
+                    barAnnotationY = new KeyValuePair<PointF, string>(new PointF(curPoint.X, curPoint.Y), "(" + (new Decimal(a)).ToString() + "~" + (new Decimal(b)).ToString() + " : " + text + ")");
                 }
             }
 

@@ -275,10 +275,10 @@ namespace ASEva.UICoreWF
             var yrange = D.GetYRange();
             g.DrawLine(blackPen, new PointF(originPoint.X, 0), new PointF(originPoint.X - 2, 0));
             g.DrawLine(blackPen, new PointF(width-1, originPoint.Y), new PointF(width-1, originPoint.Y+2));
-            g.DrawString(xrange.upper.ToString(), font7f, brushBlack, new PointF(width-20, originPoint.Y));
-            g.DrawString(xrange.lower.ToString(), font7f, brushBlack, new PointF(originPoint.X, originPoint.Y));
-            g.DrawString(yrange.upper.ToString(), font7f, brushBlack, new PointF(originPoint.X - 15, 0), new StringFormat(StringFormatFlags.DirectionVertical));
-            g.DrawString(yrange.lower.ToString(), font7f, brushBlack, new PointF(originPoint.X - 15, originPoint.Y - g.MeasureString(yrange.lower.ToString(), font7f).Width), new StringFormat(StringFormatFlags.DirectionVertical));
+            g.DrawString((new Decimal(xrange.upper)).ToString(), font7f, brushBlack, new PointF(width-20, originPoint.Y));
+            g.DrawString((new Decimal(xrange.lower)).ToString(), font7f, brushBlack, new PointF(originPoint.X, originPoint.Y));
+            g.DrawString((new Decimal(yrange.upper)).ToString(), font7f, brushBlack, new PointF(originPoint.X - 15, 0), new StringFormat(StringFormatFlags.DirectionVertical));
+            g.DrawString((new Decimal(yrange.lower)).ToString(), font7f, brushBlack, new PointF(originPoint.X - 15, originPoint.Y - g.MeasureString(yrange.lower.ToString(), font7f).Width), new StringFormat(StringFormatFlags.DirectionVertical));
         }
 
         private void pic_drawPoint(object sender, PaintEventArgs e)
@@ -337,7 +337,7 @@ namespace ASEva.UICoreWF
                 {
                     var a = i * xStep + xRangeLow;
                     var b = (i + 1) * xStep + xRangeLow;
-                    var text = a + " " + b;
+                    var text = (new Decimal(a)).ToString() + " " + (new Decimal(b)).ToString();
                     g.DrawString(text, font7f, brushBlack, new PointF(ax, originPoint.Y + 15), new StringFormat(StringFormatFlags.DirectionVertical));
                 }
             }
@@ -356,7 +356,7 @@ namespace ASEva.UICoreWF
                 {
                     var a = i * yStep + yRangeLow;
                     var b = (i + 1) * yStep + yRangeLow;
-                    var text = a + " " + b;
+                    var text = (new Decimal(a)).ToString() + " " + (new Decimal(b)).ToString();
                     var textWidth = g.MeasureString(text, font7f).Width;
                     g.DrawString(text, font7f, brushBlack, new PointF(originPoint.X - textWidth - 15, ay));
                 }

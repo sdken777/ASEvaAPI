@@ -286,7 +286,7 @@ namespace ASEva.UICoreWF
             {
                 var Xindex = (int)Math.Floor((curPoint.X - originPoint.X) / intervalX);
                 var Yindex = (int)Math.Floor((originPoint.Y - curPoint.Y) / intervalY);
-                var text = isPercentage ? (values[Xindex, Yindex].ToString("F1") + "%") : (Math.Abs(values[Xindex, Yindex]) >= 0.1 ? values[Xindex, Yindex].ToString("F3") : values[Xindex, Yindex].ToString());
+                var text = isPercentage ? (values[Xindex, Yindex].ToString("F1") + "%") : (Math.Abs(values[Xindex, Yindex]) >= 0.1 ? values[Xindex, Yindex].ToString("F3") : (new Decimal(values[Xindex, Yindex])).ToString());
                 var fullText = "(" + xLabels[Xindex] + "," + yLabels[Yindex] + " : " + text + ")";
 
                 var sizef = g.MeasureString(fullText, font8f);
@@ -307,7 +307,7 @@ namespace ASEva.UICoreWF
                 var bx = originPoint.X + (i + 1) * intervalX;
                 if (curPoint.Y > originPoint.Y && curPoint.X >= ax && curPoint.X < bx)
                 {
-                    var text = isPercentage ? (xHeights[i].ToString("F1") + "%") : (Math.Abs(xHeights[i]) >= 0.1 ? xHeights[i].ToString("F3") : xHeights[i].ToString());
+                    var text = isPercentage ? (xHeights[i].ToString("F1") + "%") : (Math.Abs(xHeights[i]) >= 0.1 ? xHeights[i].ToString("F3") : (new Decimal(xHeights[i])).ToString());
                     var fullText = "(" + xLabels[i] + " : " + text + ")";
 
                     var sizef = g.MeasureString(fullText, font8f);
@@ -322,7 +322,7 @@ namespace ASEva.UICoreWF
                 var by = originPoint.Y - (i + 1) * intervalY;
                 if (curPoint.X < originPoint.X && curPoint.X > 0 && curPoint.Y >= by && curPoint.Y < ay)
                 {
-                    var text = isPercentage ? (yHeights[i].ToString("F1") + "%") : (Math.Abs(yHeights[i]) >= 0.1 ? yHeights[i].ToString("F3") : yHeights[i].ToString());
+                    var text = isPercentage ? (yHeights[i].ToString("F1") + "%") : (Math.Abs(yHeights[i]) >= 0.1 ? yHeights[i].ToString("F3") : (new Decimal(yHeights[i])).ToString());
                     var fullText = "(" + yLabels[i] + " : " + text + ")";
                     g.DrawString(fullText, font8f, brushBlack, new PointF((float)curPoint.X + 15, (float)curPoint.Y));
                 }
