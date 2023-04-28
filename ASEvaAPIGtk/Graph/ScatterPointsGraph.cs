@@ -170,7 +170,7 @@ namespace ASEva.UIGtk
                         cc.SetSourceColor(ColorRGBA.Black);
                         cc.MoveTo(ax + 4, originPoint.Y + 16);
                         cc.Rotate(0.5 * Math.PI);
-                        cc.ShowText(a + " " + b);
+                        cc.ShowText((new Decimal(a)).ToString() + " " + (new Decimal(b)).ToString());
                         cc.Rotate(-0.5 * Math.PI);
                     }
                 }
@@ -189,7 +189,7 @@ namespace ASEva.UIGtk
                     {
                         var a = i * yStep + yRangeLower;
                         var b = (i + 1) * yStep + yRangeLower;
-                        var text = a + " " + b;
+                        var text = (new Decimal(a)).ToString() + " " + (new Decimal(b)).ToString();
                         var textWidth = cc.TextExtents(text).Width;
                         cc.SetSourceColor(ColorRGBA.Black);
                         cc.MoveTo(originPoint.X - textWidth - 16, ay + 11);
@@ -228,20 +228,24 @@ namespace ASEva.UIGtk
                 cc.DrawLine(width - 0.5f, originPoint.Y, width - 0.5f, originPoint.Y + 2);
                 cc.DrawLine(originPoint.X, 0.5f, originPoint.X - 2, 0.5f);
 
-                cc.MoveTo(width - cc.TextExtents(xRangeUpper.ToString()).Width - 4, originPoint.Y + 11);
-                cc.ShowText(xRangeUpper.ToString());
+                var xRangeUpperText = (new Decimal(xRangeUpper)).ToString();
+                cc.MoveTo(width - cc.TextExtents(xRangeUpperText).Width - 4, originPoint.Y + 11);
+                cc.ShowText(xRangeUpperText);
 
+                var xRangeLowerText = (new Decimal(xRangeLower)).ToString();
                 cc.MoveTo(originPoint.X + 4, originPoint.Y + 11);
-                cc.ShowText(xRangeLower.ToString());
+                cc.ShowText(xRangeLowerText);
 
+                var yRangeUpperText = (new Decimal(yRangeUpper)).ToString();
                 cc.MoveTo(originPoint.X - 11, 4);
                 cc.Rotate(0.5 * Math.PI);
-                cc.ShowText(yRangeUpper.ToString());
+                cc.ShowText(yRangeUpperText);
                 cc.Rotate(-0.5 * Math.PI);
 
-                cc.MoveTo(originPoint.X - 11, originPoint.Y - cc.TextExtents(yRangeLower.ToString()).Width - 4);
+                var yRangeLowerText = (new Decimal(yRangeLower)).ToString();
+                cc.MoveTo(originPoint.X - 11, originPoint.Y - cc.TextExtents(yRangeLowerText).Width - 4);
                 cc.Rotate(0.5 * Math.PI);
-                cc.ShowText(yRangeLower.ToString());
+                cc.ShowText(yRangeLowerText);
                 cc.Rotate(-0.5 * Math.PI);
                 
                 // 验证框

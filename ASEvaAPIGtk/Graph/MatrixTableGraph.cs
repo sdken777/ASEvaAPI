@@ -265,20 +265,24 @@ namespace ASEva.UIGtk
                 cc.DrawLine(width - 0.5f, originPoint.Y, width - 0.5f, originPoint.Y + 2);
                 cc.DrawLine(originPoint.X, 0.5f, originPoint.X - 2, 0.5f);
 
-                cc.MoveTo(width - cc.TextExtents(xRangeUpper.ToString()).Width - 4, originPoint.Y + 11);
-                cc.ShowText(xRangeUpper.ToString());
+                var xRangeUpperText = (new Decimal(xRangeUpper)).ToString();
+                cc.MoveTo(width - cc.TextExtents(xRangeUpperText).Width - 4, originPoint.Y + 11);
+                cc.ShowText(xRangeUpperText);
 
+                var xRangeLowerText = (new Decimal(xRangeLower)).ToString();
                 cc.MoveTo(originPoint.X + 4, originPoint.Y + 11);
-                cc.ShowText(xRangeLower.ToString());
+                cc.ShowText(xRangeLowerText);
 
+                var yRangeUpperText = (new Decimal(yRangeUpper)).ToString();
                 cc.MoveTo(originPoint.X - 11, 4);
                 cc.Rotate(0.5 * Math.PI);
-                cc.ShowText(yRangeUpper.ToString());
+                cc.ShowText(yRangeUpperText);
                 cc.Rotate(-0.5 * Math.PI);
 
-                cc.MoveTo(originPoint.X - 11, originPoint.Y - cc.TextExtents(yRangeLower.ToString()).Width - 4);
+                var yRangeLowerText = (new Decimal(yRangeLower)).ToString();
+                cc.MoveTo(originPoint.X - 11, originPoint.Y - cc.TextExtents(yRangeLowerText).Width - 4);
                 cc.Rotate(0.5 * Math.PI);
-                cc.ShowText(yRangeLower.ToString());
+                cc.ShowText(yRangeLowerText);
                 cc.Rotate(-0.5 * Math.PI);
 
                 // 验证框
@@ -331,7 +335,7 @@ namespace ASEva.UIGtk
                     {
                         var Xindex = (int)Math.Floor((mouse.X - originPoint.X) / intervalX);
                         var Yindex = (int)Math.Floor((originPoint.Y - mouse.Y) / intervalY);
-                        var text = isPercentage ? (values[Xindex, Yindex].ToString("F1") + "%") : (Math.Abs(values[Xindex, Yindex]) >= 0.1 ? values[Xindex, Yindex].ToString("F3") : values[Xindex, Yindex].ToString());
+                        var text = isPercentage ? (values[Xindex, Yindex].ToString("F1") + "%") : (Math.Abs(values[Xindex, Yindex]) >= 0.1 ? values[Xindex, Yindex].ToString("F3") : (new Decimal(values[Xindex, Yindex])).ToString());
                         var fullText = "(" + Math.Round((xRangeUpper - xRangeLower) * (mouse.X - originPoint.X) / (width - 1 - originPoint.X) + xRangeLower, 3) + "," + Math.Round((yRangeUpper - yRangeLower) * (originPoint.Y - mouse.Y) / originPoint.Y + yRangeLower, 3) + " : " + text + ")";
 
                         var sizef = cc.TextExtents(fullText);
@@ -359,8 +363,8 @@ namespace ASEva.UIGtk
                             cc.SetSourceColor(ColorRGBA.Gray);
                             cc.DrawRectangle(i * intervalX + originPoint.X, originPoint.Y + 15, intervalX - 1, height - originPoint.Y - 15 - 1);
 
-                            var text = isPercentage ? (xHeights[i].ToString("F1") + "%") : (Math.Abs(xHeights[i]) >= 0.1 ? xHeights[i].ToString("F3") : xHeights[i].ToString());
-                            var fullText = "(" + a + "~" + b + " : " + text + ")";
+                            var text = isPercentage ? (xHeights[i].ToString("F1") + "%") : (Math.Abs(xHeights[i]) >= 0.1 ? xHeights[i].ToString("F3") : (new Decimal(xHeights[i])).ToString());
+                            var fullText = "(" + (new Decimal(a)).ToString() + "~" + (new Decimal(b)).ToString() + " : " + text + ")";
 
                             var sizef = cc.TextExtents(fullText);
                             cc.MoveTo(mouse.X - sizef.Width, originPoint.Y + 15 + sizef.Height);
@@ -380,8 +384,8 @@ namespace ASEva.UIGtk
                             cc.SetSourceColor(ColorRGBA.Gray);
                             cc.DrawRectangle(1, originPoint.Y - (i + 1) * intervalY, originPoint.X - 16, intervalY);
 
-                            var text = isPercentage ? (yHeights[i].ToString("F1") + "%") : (Math.Abs(yHeights[i]) >= 0.1 ? yHeights[i].ToString("F3") : yHeights[i].ToString());
-                            var fullText = "(" + a + "~" + b + " : " + text + ")";
+                            var text = isPercentage ? (yHeights[i].ToString("F1") + "%") : (Math.Abs(yHeights[i]) >= 0.1 ? yHeights[i].ToString("F3") : (new Decimal(yHeights[i])).ToString());
+                            var fullText = "(" + (new Decimal(a)).ToString() + "~" + (new Decimal(b)).ToString() + " : " + text + ")";
 
                             var sizef = cc.TextExtents(fullText);
                             cc.MoveTo(mouse.X + 15, mouse.Y + sizef.Height);

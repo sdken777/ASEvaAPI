@@ -290,7 +290,7 @@ namespace ASEva.UIGtk
                             cc.DrawRectangle(xIndex * intervalX + originPoint.X, originPoint.Y - (yIndex + 1) * intervalY, intervalX, intervalY);
                         }
 
-                        var text = isPercentage ? (values[xIndex, yIndex].ToString("F1") + "%") : (Math.Abs(values[xIndex, yIndex]) >= 0.1 ? values[xIndex, yIndex].ToString("F3") : values[xIndex, yIndex].ToString());
+                        var text = isPercentage ? (values[xIndex, yIndex].ToString("F1") + "%") : (Math.Abs(values[xIndex, yIndex]) >= 0.1 ? values[xIndex, yIndex].ToString("F3") : (new Decimal(values[xIndex, yIndex])).ToString());
                         var fullText = "(" + xLabels[xIndex] + "," + yLabels[yIndex] + " : " + text + ")";
 
                         var sizef = cc.TextExtents(fullText);
@@ -310,7 +310,7 @@ namespace ASEva.UIGtk
                             cc.SetSourceColor(ColorRGBA.Gray);
                             cc.DrawRectangle(i * intervalX + originPoint.X, originPoint.Y + 15, intervalX - 1, height - originPoint.Y - 15 - 1);
 
-                            var text = isPercentage ? (xHeights[i].ToString("F1") + "%") : (Math.Abs(xHeights[i]) >= 0.1 ? xHeights[i].ToString("F3") : xHeights[i].ToString());
+                            var text = isPercentage ? (xHeights[i].ToString("F1") + "%") : (Math.Abs(xHeights[i]) >= 0.1 ? xHeights[i].ToString("F3") : (new Decimal(xHeights[i])).ToString());
                             var fullText = "(" + xLabels[i] + " : " + text + ")";
 
                             var sizef = cc.TextExtents(fullText);
@@ -329,7 +329,7 @@ namespace ASEva.UIGtk
                             cc.SetSourceColor(ColorRGBA.Gray);
                             cc.DrawRectangle(1, originPoint.Y - (i + 1) * intervalY, originPoint.X - 16, intervalY);
 
-                            var text = isPercentage ? (yHeights[i].ToString("F1") + "%") : (Math.Abs(yHeights[i]) >= 0.1 ? yHeights[i].ToString("F3") : yHeights[i].ToString());
+                            var text = isPercentage ? (yHeights[i].ToString("F1") + "%") : (Math.Abs(yHeights[i]) >= 0.1 ? yHeights[i].ToString("F3") : (new Decimal(yHeights[i])).ToString());
                             var fullText = "(" + yLabels[i] + " : " + text + ")";
 
                             var sizef = cc.TextExtents(fullText);

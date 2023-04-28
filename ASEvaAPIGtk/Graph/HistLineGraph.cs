@@ -162,14 +162,13 @@ namespace ASEva.UIGtk
 						}
 					}
 
-
 					var yStart = Math.Ceiling(minimum / yScale) * yScale;
 					int k = 0;
 					while (true)
 					{
 						var target = yStart + k++ * yScale;
-						if (target > minimum && target < maximum) yGrids.Add(target);
-						else break;
+						if (target >= maximum) break;
+						else if (target > minimum) yGrids.Add(target);
 					}
 				}
 
@@ -180,7 +179,7 @@ namespace ASEva.UIGtk
 				var yGridTextsMaxWidth = 0f;
 				foreach (var y in yGrids)
 				{
-					var text = y.ToString();
+					var text = (new Decimal(y)).ToString();
 					yGridTexts.Add(text);
 					yGridTextsMaxWidth = Math.Max(yGridTextsMaxWidth, (float)cc.TextExtents(text).Width);
 				}
@@ -373,8 +372,8 @@ namespace ASEva.UIGtk
 						var target = samples[mouseIndex];
 
 						String histText = null, lineText = null;
-						histText = Math.Abs(target.HistValue) >= 0.1 ? target.HistValue.ToString("F3") : target.HistValue.ToString();
-						if (isEnableLine) lineText = Math.Abs(target.LineValue) >= 0.1 ? target.LineValue.ToString("F3") : target.LineValue.ToString();
+						histText = Math.Abs(target.HistValue) >= 0.1 ? target.HistValue.ToString("F3") : (new Decimal(target.HistValue)).ToString();
+						if (isEnableLine) lineText = Math.Abs(target.LineValue) >= 0.1 ? target.LineValue.ToString("F3") : (new Decimal(target.LineValue)).ToString();
 
 						var annotationText = "(" + target.Name + " : " + histText + (isEnableLine ? ", " + lineText : "") + ")";
 						var annotationWidth = cc.TextExtents(annotationText).Width;

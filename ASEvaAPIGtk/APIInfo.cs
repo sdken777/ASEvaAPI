@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 16, 1); // 修正Label重复设置文字导致全局Drawable刷新问题
+            return new Version(2, 5, 16, 2); // 修正图表显示问题
         }
     }
 }
