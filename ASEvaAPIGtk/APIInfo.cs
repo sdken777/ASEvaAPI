@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于Gtk#的部分。详见 ASEva.UIGtk \n
- * 本文档对应API版本：2.5.16\n
+ * 本文档对应API版本：2.6.0\n
  * \n
  * Gtk#官方仓库: https://github.com/GtkSharp/GtkSharp \n
  * API文档(C): https://docs.gtk.org/gtk3
@@ -11,7 +11,7 @@ using System;
 namespace ASEva.UIGtk
 {
     /// <summary>
-    /// version=2.5.16
+    /// version=2.6.0
     /// </summary>
     public class APIInfo
     {
@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 16, 2); // 修正图表显示问题
+            return new Version(2, 6, 0, 0); // 移除对Ubuntu 16.04支持
         }
     }
 }
