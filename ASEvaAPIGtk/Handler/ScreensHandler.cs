@@ -1,19 +1,16 @@
 using System;
-using Eto.Forms;
-using Eto;
-using Eto.GtkSharp.Forms;
 using System.Collections.Generic;
+using Eto.Forms;
+using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
-	#pragma warning disable 612
-	public class ScreensHandler : Screen.IScreensHandler
+	#pragma warning disable CS0612
+	class ScreensHandler : Screen.IScreensHandler
 	{
 		public void Initialize ()
 		{
 		}
-
-		public Widget Widget { get; set; }
 
 		public Eto.Platform Platform { get; set; }
 
@@ -21,12 +18,18 @@ namespace ASEva.UIGtk
 		{
 			get
 			{
-				var display = Gdk.Display.Default;
-				for (int i = 0; i < display.NMonitors; i++)
+				var list = new List<Screen>();
+				try
 				{
-					var monitor = display.GetMonitor(i);
-					yield return new Screen(new ScreenHandler(monitor));
+					var display = Gdk.Display.Default;
+					for (int i = 0; i < display.NMonitors; i++)
+					{
+						var monitor = display.GetMonitor(i);
+						list.Add(new Screen(new ScreenHandler(monitor)));
+					}
 				}
+				catch (Exception) {}
+				return list;
 			}
 		}
 
@@ -34,7 +37,13 @@ namespace ASEva.UIGtk
 		{
 			get
 			{
-				return new Screen(new ScreenHandler(Gdk.Display.Default.PrimaryMonitor));
+				try
+				{
+					var monitor = Gdk.Display.Default.PrimaryMonitor;
+					if (monitor == null) monitor = Gdk.Display.Default.GetMonitor(0);
+					return new Screen(new ScreenHandler(monitor));
+				}
+				catch (Exception) { return null; }
 			}
 		}
 	}
