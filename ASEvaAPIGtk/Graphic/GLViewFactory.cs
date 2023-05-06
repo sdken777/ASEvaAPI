@@ -27,7 +27,7 @@ namespace ASEva.UIGtk
                     }
                     else
                     {
-                        var view = new X11OnscreenView(glView, options.RequestAntialias);
+                        var view = new X11OnscreenView(glView, options.RequestAntialias, options.UseLegacyAPI);
                         etoControl = view.ToEto();
                         glViewBackend = view;
                         supportOverlay = false;
