@@ -45,7 +45,7 @@ namespace ASEva.UIGtk
                     }
                     else
                     {
-                        var view = new WaylandOffscreenView(glView, options.RequestAntialias);
+                        var view = new WaylandOffscreenView(glView, options.RequestAntialias, options.UseLegacyAPI);
                         etoControl = view.ToEto();
                         glViewBackend = view;
                         supportOverlay = true;
