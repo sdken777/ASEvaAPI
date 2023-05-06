@@ -14,13 +14,15 @@ namespace ASEva.UICoreWF
 {
     partial class OpenGLControl : UserControl, GLBackend
     {
-        public OpenGLControl(GLCallback callback, GLAntialias antialias)
+        public OpenGLControl(GLCallback callback, GLAntialias antialias, bool useLegacyAPI)
         {
             InitializeComponent();
 
             this.callback = callback;
             this.antialias = antialias;
-            this.gl = OpenGL.Create(new WindowsFuncLoader());
+            this.useLegacyAPI = useLegacyAPI;
+            
+            if (gl == null) gl = OpenGL.Create(new WindowsFuncLoader());
 
             pictureBox.MouseWheel += pictureBox_MouseWheel;
         }
@@ -249,8 +251,7 @@ namespace ASEva.UICoreWF
             if ((iPixelformat = Win32.ChoosePixelFormat(hdc, pfd)) == 0) return;
             if (Win32.SetPixelFormat(hdc, iPixelformat, pfd) == 0) return;
 
-            context = Win32.wglCreateContext(hdc);
-            if (context == IntPtr.Zero) return;
+            if (!createContext()) return;
 
             Win32.wglMakeCurrent(hdc, context);
 
@@ -261,6 +262,7 @@ namespace ASEva.UICoreWF
                 ctxInfo.vendor = gl.Vendor;
                 ctxInfo.renderer = gl.Renderer;
                 ctxInfo.extensions = gl.Extensions;
+                if (String.IsNullOrEmpty(ctxInfo.extensions)) ctxInfo.extensions = String.Join(' ', gl.ExtensionList);
 
                 var pixelScale = (float)DeviceDpi / 96;
                 size = new GLSizeInfo((int)(Width / pixelScale), (int)(Height / pixelScale), Width, Height, pixelScale, (float)Width / Height);
@@ -390,9 +392,52 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private OpenGL gl = null;
+        private bool createContext()
+        {
+            bool contextCreated = false;
+            if (!useLegacyAPI && !createContextAttribsARBUnsupported)
+            {
+                if (!gl.IsFunctionSupported("wglCreateContextAttribsARB"))
+                {
+                    var tempContext = Win32.wglCreateContext(hdc);
+                    if (tempContext == IntPtr.Zero) return false;
+
+                    Win32.wglMakeCurrent(hdc, tempContext);
+
+                    if (!gl.PreloadFunction("wglCreateContextAttribsARB")) createContextAttribsARBUnsupported = true;
+
+                    Win32.wglDeleteContext(tempContext);
+                }
+
+                if (!createContextAttribsARBUnsupported)
+                {
+                    var attribs = new int[]
+                    {
+                    0x2091, // WGL_CONTEXT_MAJOR_VERSION_ARB
+                    3,
+                    0x2092, // WGL_CONTEXT_MINOR_VERSION_ARB
+                    2,
+                    (int)OpenGL.GL_CONTEXT_PROFILE_MASK,
+                    (int)OpenGL.GL_CONTEXT_CORE_PROFILE_BIT,
+                    0
+                    };
+
+                    context = gl.CreateContextAttribsARB(hdc, IntPtr.Zero, attribs);
+                    if (context != IntPtr.Zero) contextCreated = true;
+                }
+            }
+
+            if (!contextCreated)
+            {
+                context = Win32.wglCreateContext(hdc);
+             }
+
+            return context != IntPtr.Zero;
+        }
+
         private GLCallback callback = null;
         private GLAntialias antialias;
+        private bool useLegacyAPI;
         private bool? initOK = null;
         private IntPtr hdc = IntPtr.Zero;
         private IntPtr context = IntPtr.Zero;
@@ -402,5 +447,8 @@ namespace ASEva.UICoreWF
         private byte[] hostBuffer = null;
         private Bitmap bitmap = null;
         private GLSizeInfo size = null;
+
+        private static OpenGL gl = null;
+        private static bool createContextAttribsARBUnsupported = false;
     }
 }

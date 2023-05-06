@@ -13,7 +13,7 @@ namespace ASEva.UICoreWF
 {
     partial class OpenGLOnscreenControl : UserControl, GLBackend
     {
-        public OpenGLOnscreenControl(GLCallback callback, GLAntialias antialias)
+        public OpenGLOnscreenControl(GLCallback callback, GLAntialias antialias, bool useLegacyAPI)
         {
             InitializeComponent();
 
@@ -24,7 +24,9 @@ namespace ASEva.UICoreWF
 
             this.callback = callback;
             this.antialias = antialias;
-            this.gl = OpenGL.Create(new WindowsFuncLoader());
+            this.useLegacyAPI = useLegacyAPI;
+
+            if (gl == null) gl = OpenGL.Create(new WindowsFuncLoader());
         }
 
         public void ReleaseGL()
@@ -108,8 +110,7 @@ namespace ASEva.UICoreWF
             }
             if (!setPixelFormatOK) return;
 
-            context = Win32.wglCreateContext(hdc);
-            if (context == IntPtr.Zero) return;
+            if (!createContext()) return;
 
             Win32.wglMakeCurrent(hdc, context);
 
@@ -120,6 +121,7 @@ namespace ASEva.UICoreWF
                 ctxInfo.vendor = gl.Vendor;
                 ctxInfo.renderer = gl.Renderer;
                 ctxInfo.extensions = gl.Extensions;
+                if (String.IsNullOrEmpty(ctxInfo.extensions)) ctxInfo.extensions = String.Join(' ', gl.ExtensionList);
 
                 supportSwapInterval = gl.ExtensionList.Contains("WGL_EXT_swap_control");
 
@@ -265,13 +267,59 @@ namespace ASEva.UICoreWF
             return formats.ToArray();
         }
 
-        private OpenGL gl = null;
+        private bool createContext()
+        {
+            bool contextCreated = false;
+            if (!useLegacyAPI && !createContextAttribsARBUnsupported)
+            {
+                if (!gl.IsFunctionSupported("wglCreateContextAttribsARB"))
+                {
+                    var tempContext = Win32.wglCreateContext(hdc);
+                    if (tempContext == IntPtr.Zero) return false;
+
+                    Win32.wglMakeCurrent(hdc, tempContext);
+
+                    if (!gl.PreloadFunction("wglCreateContextAttribsARB")) createContextAttribsARBUnsupported = true;
+
+                    Win32.wglDeleteContext(tempContext);
+                }
+
+                if (!createContextAttribsARBUnsupported)
+                {
+                    var attribs = new int[]
+                    {
+                    0x2091, // WGL_CONTEXT_MAJOR_VERSION_ARB
+                    3,
+                    0x2092, // WGL_CONTEXT_MINOR_VERSION_ARB
+                    2,
+                    (int)OpenGL.GL_CONTEXT_PROFILE_MASK,
+                    (int)OpenGL.GL_CONTEXT_CORE_PROFILE_BIT,
+                    0
+                    };
+
+                    context = gl.CreateContextAttribsARB(hdc, IntPtr.Zero, attribs);
+                    if (context != IntPtr.Zero) contextCreated = true;
+                }
+            }
+
+            if (!contextCreated)
+            {
+                context = Win32.wglCreateContext(hdc);
+            }
+
+            return context != IntPtr.Zero;
+        }
+
         private GLCallback callback = null;
         private GLAntialias antialias;
+        private bool useLegacyAPI;
         private bool? initOK = null;
         private IntPtr context = IntPtr.Zero;
         private GLSizeInfo size = null;
         private IntPtr hdc = IntPtr.Zero;
         private bool supportSwapInterval = false;
+
+        private static OpenGL gl = null;
+        private static bool createContextAttribsARBUnsupported = false;
     }
 }

@@ -13,14 +13,14 @@ namespace ASEva.UICoreWF
         {
             if (!options.EnableOnscreenRendering || options.UseTextTasks)
             {
-                var openglControl = new OpenGLControl(glView, options.RequestAntialias);
+                var openglControl = new OpenGLControl(glView, options.RequestAntialias, options.UseLegacyAPI);
                 etoControl = openglControl.ToEto();
                 glViewBackend = openglControl;
                 supportOverlay = true;
             }
             else
             {
-                var openglControl = new OpenGLOnscreenControl(glView, options.RequestAntialias);
+                var openglControl = new OpenGLOnscreenControl(glView, options.RequestAntialias, options.UseLegacyAPI);
                 etoControl = openglControl.ToEto();
                 glViewBackend = openglControl;
                 supportOverlay = true;
