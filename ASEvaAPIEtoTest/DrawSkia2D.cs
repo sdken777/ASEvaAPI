@@ -13,10 +13,24 @@ namespace ASEvaAPIEtoTest
         {
             var layout = tabPage.SetContentAsColumnLayout();
             var skiaView = layout.AddControl(new SkiaView(null, disableGPU, onscreenRendering), true, 200, 0) as SkiaView;
-            skiaViews.Add(skiaView);
+            if (!disableGPU)
+            {
+                layout.AddLinkButton(t["draw-gl-detail"]).Click += delegate
+                {
+                    if (skiaView.ContextInfo != null)
+                    {
+                        var info = skiaView.ContextInfo.Value;
+                        var rowTexts = new List<String>();
+                        rowTexts.Add(t.Format("draw-gl-info-version", info.version));
+                        rowTexts.Add(t.Format("draw-gl-info-vendor", info.vendor));
+                        rowTexts.Add(t.Format("draw-gl-info-renderer", info.renderer));
+                        rowTexts.Add(t.Format("draw-gl-info-extensions", String.Join('\n', info.ToExtensionList())));
+                        App.RunDialog(new InfoDialog(t["draw-gl-info-title"], String.Join('\n', rowTexts)));
+                    }
+                };
+            }
 
             var image = CommonImage.LoadResource("camera.png").ToSKImage();
-
             skiaView.Render += (o, args) =>
             {
                 var c = args.Canvas;
@@ -43,6 +57,7 @@ namespace ASEvaAPIEtoTest
                 c.DrawLine(10, 235, 190, 240, blackPaint);
                 c.DrawString(t["draw-skia-anti-alias"], c.GetDefaultFont(), SKColors.Black, TextAnchor.Center, 100, 225);
             };
+            skiaViews.Add(skiaView);
         }
 
         private void loopDrawSkia2D()

@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace ASEva.UIGtk
 {
+    #pragma warning disable CS0649
     class LegacySetter
     {
         public static void SetLegacyGL()

@@ -20,7 +20,7 @@ namespace ASEva.UIGtk
                 {
                     if (!options.EnableOnscreenRendering || options.UseTextTasks || options.RequestOverlay)
                     {
-                        var view = new X11OffscreenView(glView, options.RequestAntialias);
+                        var view = new X11OffscreenView(glView, options.RequestAntialias, options.UseLegacyAPI);
                         etoControl = view.ToEto();
                         glViewBackend = view;
                         supportOverlay = true;
@@ -37,7 +37,8 @@ namespace ASEva.UIGtk
                 {
                     if (options.EnableOnscreenRendering)
                     {
-                        var view = new DefaultBlitView(glView, options.RequestAntialias, options.UseLegacyAPI);
+                        LegacySetter.SetLegacyGL();
+                        var view = new DefaultBlitView(glView, options.RequestAntialias);
                         etoControl = view.ToEto();
                         glViewBackend = view;
                         supportOverlay = true;
@@ -52,16 +53,17 @@ namespace ASEva.UIGtk
                 }
                 else
                 {
+                    LegacySetter.SetLegacyGL();
                     if (options.EnableOnscreenRendering)
                     {
-                        var view = new DefaultBlitView(glView, options.RequestAntialias, options.UseLegacyAPI);
+                        var view = new DefaultBlitView(glView, options.RequestAntialias);
                         etoControl = view.ToEto();
                         glViewBackend = view;
                         supportOverlay = true;
                     }
                     else
                     {
-                        var view = new DefaultOffscreenView(glView, options.RequestAntialias, options.UseLegacyAPI);
+                        var view = new DefaultOffscreenView(glView, options.RequestAntialias);
                         etoControl = view.ToEto();
                         glViewBackend = view;
                         supportOverlay = true;

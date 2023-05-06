@@ -37,6 +37,9 @@ namespace ASEva.UIGtk
 		public static extern unsafe IntPtr glXCreateContext(IntPtr x11Display, IntPtr x11VisualInfo, IntPtr shareList, bool direct);
 
 		[DllImport(libGL, SetLastError = true)]
+		public static extern unsafe IntPtr glXCreateContextAttribsARB(IntPtr x11Display, IntPtr fbConfig, IntPtr shareList, bool direct, int *attribs);
+
+		[DllImport(libGL, SetLastError = true)]
 		public static extern void glXDestroyContext(IntPtr x11Display, IntPtr context);
 
 		[DllImport(libGL, SetLastError = true)]
@@ -50,6 +53,9 @@ namespace ASEva.UIGtk
 
 		[DllImport(libGL, SetLastError = true)]
 		public static extern unsafe IntPtr glXChooseVisual(IntPtr x11Display, int x11ScreenNumber, int *attribs);
+
+		[DllImport(libGL, SetLastError = true)]
+		public static extern unsafe IntPtr* glXChooseFBConfig(IntPtr x11Display, int x11ScreenNumber, int *attribs, int *nElements);
 
 		[DllImport(libGL, SetLastError = true)]
 		public static extern unsafe int glXGetConfig(IntPtr x11Display, IntPtr x11VisualInfo, int attrib, int *value);

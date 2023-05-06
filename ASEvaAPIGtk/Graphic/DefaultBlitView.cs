@@ -9,7 +9,7 @@ namespace ASEva.UIGtk
 {
     class DefaultBlitView : Overlay, GLBackend
     {
-        public DefaultBlitView(GLCallback callback, GLAntialias antialias, bool useLegacyAPI)
+        public DefaultBlitView(GLCallback callback, GLAntialias antialias)
         {
             drawAreaGL.Visible = true;
             Add(drawAreaGL);
@@ -17,8 +17,6 @@ namespace ASEva.UIGtk
             this.callback = callback;
             this.gl = OpenGL.Create(new LinuxFuncLoader());
             this.antialias = antialias;
-
-            if (useLegacyAPI) LegacySetter.SetLegacyGL();
 
             drawAreaGL.Realized += onRealized;
             drawAreaGL.Drawn += onDraw;

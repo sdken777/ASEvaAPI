@@ -8,13 +8,11 @@ namespace ASEva.UIGtk
 {
     class DefaultOffscreenView : DrawingArea, GLBackend
     {
-        public DefaultOffscreenView(GLCallback callback, GLAntialias antialias, bool useLegacyAPI)
+        public DefaultOffscreenView(GLCallback callback, GLAntialias antialias)
         {
             this.callback = callback;
             this.antialias = antialias;
             this.gl = OpenGL.Create(new LinuxFuncLoader());
-
-            if (useLegacyAPI) LegacySetter.SetLegacyGL();
 
             Realized += onRealized;
             Drawn += onDraw;

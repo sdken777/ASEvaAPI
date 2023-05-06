@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Gtk;
 using SharpGL;
 using ASEva.UIEto;
@@ -9,10 +10,11 @@ namespace ASEva.UIGtk
     #pragma warning disable 612
     class X11OffscreenView : Box, GLBackend
     {
-        public X11OffscreenView(GLCallback callback, GLAntialias antialias) : base(Orientation.Vertical, 0)
+        public X11OffscreenView(GLCallback callback, GLAntialias antialias, bool useLegacyAPI) : base(Orientation.Vertical, 0)
         {
             this.callback = callback;
             this.antialias = antialias;
+            this.useLegacyAPI = useLegacyAPI;
             this.gl = OpenGL.Create(new LinuxFuncLoader());
 
             dummyArea.WidthRequest = 1;
@@ -111,8 +113,38 @@ namespace ASEva.UIGtk
             }
             if (vinfo == IntPtr.Zero) return;
 
-            context = Linux.glXCreateContext(display, vinfo, IntPtr.Zero, true);
-            if (context == IntPtr.Zero) return;
+            IntPtr fbConfig = IntPtr.Zero;
+            bool contextCreated = false;
+            if (!useLegacyAPI && chooseFBConfigForVisual(vinfo, out fbConfig))
+            {
+                try
+                {
+                    var attribs = new int[]
+                    {
+                        0x2091, // GLX_CONTEXT_MAJOR_VERSION_ARB
+                        3,
+                        0x2092, // GLX_CONTEXT_MINOR_VERSION_ARB
+                        2,                        
+                        (int)OpenGL.GL_CONTEXT_PROFILE_MASK,
+                        (int)OpenGL.GL_CONTEXT_CORE_PROFILE_BIT,
+                        0
+                    };
+                    unsafe
+                    {
+                        fixed (int *attribsPtr = &(attribs[0]))
+                        {
+                            context = Linux.glXCreateContextAttribsARB(display, fbConfig, IntPtr.Zero, true, attribsPtr);
+                            if (context != IntPtr.Zero) contextCreated = true;
+                        }
+                    }
+                }
+                catch (Exception) {}
+            }
+            if (!contextCreated)
+            {
+                context = Linux.glXCreateContext(display, vinfo, IntPtr.Zero, true);
+                if (context == IntPtr.Zero) return;
+            }
 
             xid = Linux.gdk_x11_window_get_xid(dummyArea.Window.Handle);
             Linux.glXMakeCurrent(display, xid, context);
@@ -124,6 +156,7 @@ namespace ASEva.UIGtk
                 ctxInfo.vendor = gl.Vendor;
                 ctxInfo.renderer = gl.Renderer;
                 ctxInfo.extensions = gl.Extensions;
+                if (String.IsNullOrEmpty(ctxInfo.extensions)) ctxInfo.extensions = String.Join(' ', gl.ExtensionList);
                 
                 size = new GLSizeInfo(realArea.AllocatedWidth, realArea.AllocatedHeight, realArea.AllocatedWidth * realArea.ScaleFactor, realArea.AllocatedHeight * realArea.ScaleFactor, realArea.ScaleFactor, (float)realArea.AllocatedWidth / realArea.AllocatedHeight);
 
@@ -309,6 +342,139 @@ namespace ASEva.UIGtk
             DrawBeat.CallbackEnd(this);
         }
 
+        private int? getVisualAttrib(IntPtr x11Display, IntPtr x11Visual, int attrib)
+        {
+            unsafe
+            {
+                var val = new int[1];
+                fixed (int *valPtr = &val[0])
+                {
+                    int res = Linux.glXGetConfig(x11Display, x11Visual, attrib, valPtr);
+                    return res == 0 ? (int?)val[0] : null;
+                }
+            }
+        }
+
+        private bool chooseFBConfigForVisual(IntPtr x11VisualInfo, out IntPtr fbConfig)
+        {
+            fbConfig = IntPtr.Zero;
+
+            IntPtr x11Display = Linux.gdk_x11_display_get_xdisplay(Display.Handle);
+            if (x11Display == IntPtr.Zero) return false;
+
+            var bufferSize = getVisualAttrib(x11Display, x11VisualInfo, Linux.GLX_BUFFER_SIZE);
+            var level = getVisualAttrib(x11Display, x11VisualInfo, Linux.GLX_LEVEL);
+            var doubleBuffer = getVisualAttrib(x11Display, x11VisualInfo, Linux.GLX_DOUBLEBUFFER);
+            var stereo = getVisualAttrib(x11Display, x11VisualInfo, Linux.GLX_STEREO);
+            var auxBuffers = getVisualAttrib(x11Display, x11VisualInfo, Linux.GLX_AUX_BUFFERS);
+            var redSize = getVisualAttrib(x11Display, x11VisualInfo, Linux.GLX_RED_SIZE);
+            var greenSize = getVisualAttrib(x11Display, x11VisualInfo, Linux.GLX_GREEN_SIZE);
+            var blueSize = getVisualAttrib(x11Display, x11VisualInfo, Linux.GLX_BLUE_SIZE);
+            var alphaSize = getVisualAttrib(x11Display, x11VisualInfo, Linux.GLX_ALPHA_SIZE);
+            var depthSize = getVisualAttrib(x11Display, x11VisualInfo, Linux.GLX_DEPTH_SIZE);
+            var stencilSize = getVisualAttrib(x11Display, x11VisualInfo, Linux.GLX_STENCIL_SIZE);
+            var accumRedSize = getVisualAttrib(x11Display, x11VisualInfo, Linux.GLX_ACCUM_RED_SIZE);
+            var accumGreenSize = getVisualAttrib(x11Display, x11VisualInfo, Linux.GLX_ACCUM_GREEN_SIZE);
+            var accumBlueSize = getVisualAttrib(x11Display, x11VisualInfo, Linux.GLX_ACCUM_BLUE_SIZE);
+            var accumAlphaSize = getVisualAttrib(x11Display, x11VisualInfo, Linux.GLX_ACCUM_ALPHA_SIZE);
+
+            var attribList = new List<int>();
+            if (bufferSize != null)
+            {
+                attribList.Add(Linux.GLX_BUFFER_SIZE);
+                attribList.Add(bufferSize.Value);
+            }
+            if (level != null)
+            {
+                attribList.Add(Linux.GLX_LEVEL);
+                attribList.Add(level.Value);
+            }
+            if (doubleBuffer != null)
+            {
+                attribList.Add(Linux.GLX_DOUBLEBUFFER);
+                attribList.Add(doubleBuffer.Value);
+            }
+            if (stereo != null)
+            {
+                attribList.Add(Linux.GLX_STEREO);
+                attribList.Add(stereo.Value);
+            }
+            if (auxBuffers != null)
+            {
+                attribList.Add(Linux.GLX_AUX_BUFFERS);
+                attribList.Add(auxBuffers.Value);
+            }
+            if (redSize != null)
+            {
+                attribList.Add(Linux.GLX_RED_SIZE);
+                attribList.Add(redSize.Value);
+            }
+            if (greenSize != null)
+            {
+                attribList.Add(Linux.GLX_GREEN_SIZE);
+                attribList.Add(greenSize.Value);
+            }
+            if (blueSize != null)
+            {
+                attribList.Add(Linux.GLX_BLUE_SIZE);
+                attribList.Add(blueSize.Value);
+            }
+            if (alphaSize != null)
+            {
+                attribList.Add(Linux.GLX_ALPHA_SIZE);
+                attribList.Add(alphaSize.Value);
+            }
+            if (depthSize != null)
+            {
+                attribList.Add(Linux.GLX_DEPTH_SIZE);
+                attribList.Add(depthSize.Value);
+            }
+            if (stencilSize != null)
+            {
+                attribList.Add(Linux.GLX_STENCIL_SIZE);
+                attribList.Add(stencilSize.Value);
+            }
+            if (accumRedSize != null)
+            {
+                attribList.Add(Linux.GLX_ACCUM_RED_SIZE);
+                attribList.Add(accumRedSize.Value);
+            }
+            if (accumGreenSize != null)
+            {
+                attribList.Add(Linux.GLX_ACCUM_GREEN_SIZE);
+                attribList.Add(accumGreenSize.Value);
+            }
+            if (accumBlueSize != null)
+            {
+                attribList.Add(Linux.GLX_ACCUM_BLUE_SIZE);
+                attribList.Add(accumBlueSize.Value);
+            }
+            if (accumAlphaSize != null)
+            {
+                attribList.Add(Linux.GLX_ACCUM_ALPHA_SIZE);
+                attribList.Add(accumAlphaSize.Value);
+            }
+            if (attribList.Count == 0) return false;
+
+            attribList.Add(0);
+
+            int snumber = Linux.gdk_x11_screen_get_screen_number(Display.DefaultScreen.Handle);
+            var attribs = attribList.ToArray();
+
+            unsafe
+            {
+                fixed (int *attribsPtr = &(attribs[0]))
+                {
+                    int nElements = 0;
+                    IntPtr *fbConfigs = Linux.glXChooseFBConfig(x11Display, snumber, attribsPtr, &nElements);
+                    if (nElements == 0 || fbConfigs == null) return false;
+
+                    fbConfig = fbConfigs[0];
+                    return true;
+                }
+            }
+        }
+
         private int getSampleCount(GLAntialias antialias)
         {
             switch (antialias)
@@ -341,5 +507,6 @@ namespace ASEva.UIGtk
         private DrawingArea realArea = new DrawingArea();
         private DrawingArea dummyArea = new DrawingArea();
         private GLAntialias antialias;
+        private bool useLegacyAPI;
     }
 }
