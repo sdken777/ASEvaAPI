@@ -6,7 +6,7 @@ using Eto.GtkSharp.Forms;
 namespace ASEva.UIGtk
 {
 	#pragma warning disable CS0612
-	class ScreensHandler : Screen.IScreensHandler
+	public class ScreensHandler : Screen.IScreensHandler
 	{
 		public void Initialize ()
 		{
@@ -46,6 +46,8 @@ namespace ASEva.UIGtk
 				catch (Exception) { return null; }
 			}
 		}
+
+		public static bool LegacyMode { get; private set; } // 已弃用
 	}
 }
 

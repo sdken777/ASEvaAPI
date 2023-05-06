@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 6, 1, 0); // 修复获取屏幕信息异常
+            return new Version(2, 6, 1, 1); // 补上ScreensHandler.LegacyMode(仅用于向后兼容)
         }
     }
 }
