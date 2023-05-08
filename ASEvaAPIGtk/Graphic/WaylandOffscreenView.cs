@@ -136,28 +136,42 @@ namespace ASEva.UIGtk
             eglSurface = Linux.eglCreateWindowSurface(eglDisplay, configs[0], wlEglWindow, IntPtr.Zero);
             if (eglSurface == IntPtr.Zero) return;
 
-            if (useLegacyAPI)
+            bool contextCreated = false;
+            if (!useLegacyAPI)
+            {
+                var glCoreVersions = new Version[]
+                {
+                    new Version(4, 6),
+                    new Version(3, 3)
+                };
+
+                foreach (var ver in glCoreVersions)
+                {
+                    attribs = new int[]
+                    {
+                        0x3098/*EGL_CONTEXT_MAJOR_VERSION*/, ver.Major,
+                        0x30FB/*EGL_CONTEXT_MINOR_VERSION*/, ver.Minor,
+                        0x30FD/*EGL_CONTEXT_OPENGL_PROFILE_MASK*/, 1/*EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT*/,
+                        0x3038/*EGL_NONE*/
+                    };
+                    unsafe
+                    {
+                        fixed (int *attribsPtr = &(attribs[0]))
+                        {
+                            context = Linux.eglCreateContext(eglDisplay, configs[0], IntPtr.Zero, (IntPtr)attribsPtr);
+                            if (context != IntPtr.Zero)
+                            {
+                                contextCreated = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            if (!contextCreated)
             {
                 context = Linux.eglCreateContext(eglDisplay, configs[0], IntPtr.Zero, IntPtr.Zero);
                 if (context == IntPtr.Zero) return;
-            }
-            else
-            {
-                attribs = new int[]
-                {
-                    0x3098/*EGL_CONTEXT_MAJOR_VERSION*/, 3,
-                    0x30FB/*EGL_CONTEXT_MINOR_VERSION*/, 2,
-                    0x30FD/*EGL_CONTEXT_OPENGL_PROFILE_MASK*/, 1/*EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT*/,
-                    0x3038/*EGL_NONE*/
-                };
-                unsafe
-                {
-                    fixed (int *attribsPtr = &(attribs[0]))
-                    {
-                        context = Linux.eglCreateContext(eglDisplay, configs[0], IntPtr.Zero, (IntPtr)attribsPtr);
-                        if (context == IntPtr.Zero) return;
-                    }
-                }
             }
 
             Linux.eglMakeCurrent(eglDisplay, eglSurface, eglSurface, context);

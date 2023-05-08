@@ -83,22 +83,35 @@ namespace ASEva.UIGtk
             {
                 try
                 {
-                    var attribs = new int[]
+                    var glCoreVersions = new Version[]
                     {
-                        0x2091, // GLX_CONTEXT_MAJOR_VERSION_ARB
-                        3,
-                        0x2092, // GLX_CONTEXT_MINOR_VERSION_ARB
-                        2,                        
-                        (int)OpenGL.GL_CONTEXT_PROFILE_MASK,
-                        (int)OpenGL.GL_CONTEXT_CORE_PROFILE_BIT,
-                        0
+                        new Version(4, 6),
+                        new Version(3, 3)
                     };
-                    unsafe
+
+                    foreach (var ver in glCoreVersions)
                     {
-                        fixed (int *attribsPtr = &(attribs[0]))
+                        var attribs = new int[]
                         {
-                            context = Linux.glXCreateContextAttribsARB(display, targetFBConfig, IntPtr.Zero, true, attribsPtr);
-                            if (context != IntPtr.Zero) contextCreated = true;
+                            0x2091, // GLX_CONTEXT_MAJOR_VERSION_ARB
+                            ver.Major,
+                            0x2092, // GLX_CONTEXT_MINOR_VERSION_ARB
+                            ver.Minor,                        
+                            (int)OpenGL.GL_CONTEXT_PROFILE_MASK,
+                            (int)OpenGL.GL_CONTEXT_CORE_PROFILE_BIT,
+                            0
+                        };
+                        unsafe
+                        {
+                            fixed (int *attribsPtr = &(attribs[0]))
+                            {
+                                context = Linux.glXCreateContextAttribsARB(display, targetFBConfig, IntPtr.Zero, true, attribsPtr);
+                                if (context != IntPtr.Zero)
+                                {
+                                    contextCreated = true;
+                                    break;
+                                }
+                            }
                         }
                     }
                 }

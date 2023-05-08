@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 6, 4, 0); // WaylandOffscreenView优先使用Core profile
+            return new Version(2, 6, 4, 1); // 改良OpenGL请求版本
         }
     }
 }
