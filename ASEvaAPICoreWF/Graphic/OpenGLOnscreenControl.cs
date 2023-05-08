@@ -286,19 +286,32 @@ namespace ASEva.UICoreWF
 
                 if (!createContextAttribsARBUnsupported)
                 {
-                    var attribs = new int[]
+                    var glCoreVersions = new Version[]
                     {
-                    0x2091, // WGL_CONTEXT_MAJOR_VERSION_ARB
-                    3,
-                    0x2092, // WGL_CONTEXT_MINOR_VERSION_ARB
-                    2,
-                    (int)OpenGL.GL_CONTEXT_PROFILE_MASK,
-                    (int)OpenGL.GL_CONTEXT_CORE_PROFILE_BIT,
-                    0
+                        new Version(4, 6),
+                        new Version(3, 3)
                     };
 
-                    context = gl.CreateContextAttribsARB(hdc, IntPtr.Zero, attribs);
-                    if (context != IntPtr.Zero) contextCreated = true;
+                    foreach (var ver in glCoreVersions)
+                    {
+                        var attribs = new int[]
+                        {
+                            0x2091, // WGL_CONTEXT_MAJOR_VERSION_ARB
+                            ver.Major,
+                            0x2092, // WGL_CONTEXT_MINOR_VERSION_ARB
+                            ver.Minor,
+                            (int)OpenGL.GL_CONTEXT_PROFILE_MASK,
+                            (int)OpenGL.GL_CONTEXT_CORE_PROFILE_BIT,
+                            0
+                        };
+
+                        context = gl.CreateContextAttribsARB(hdc, IntPtr.Zero, attribs);
+                        if (context != IntPtr.Zero)
+                        {
+                            contextCreated = true;
+                            break;
+                        }
+                    }
                 }
             }
 

@@ -23,14 +23,16 @@ namespace ASEva.UIWpf
     {
         private const int D3DDefaultAdapter = 0;
 
-        public OpenGLBlitControlWpf(GLCallback callback, GLAntialias antialias)
+        public OpenGLBlitControlWpf(GLCallback callback, GLAntialias antialias, bool useLegacyAPI)
         {
             XamlLoader.Load(this, "/ASEvaAPIWpf;component/graphic/openglblitcontrolwpf.xaml");
             grid.Children.Add(textDraw);
 
             this.callback = callback;
             this.antialias = antialias;
-            this.gl = OpenGL.Create(funcLoader);
+            this.useLegacyAPI = useLegacyAPI;
+
+            if (gl == null) gl = OpenGL.Create(funcLoader);
 
             CompositionTarget.Rendering += CompositionTarget_Rendering;
         }
@@ -202,8 +204,7 @@ namespace ASEva.UIWpf
             if ((iPixelformat = Win32.ChoosePixelFormat(hdc, pfd)) == 0) return;
             if (Win32.SetPixelFormat(hdc, iPixelformat, pfd) == 0) return;
 
-            context = Win32.wglCreateContext(hdc);
-            if (context == IntPtr.Zero) return;
+            if (!createContext()) return;
 
             try { d3d = new Direct3DEx(); }
             catch (Exception) { }
@@ -229,6 +230,7 @@ namespace ASEva.UIWpf
                 ctxInfo.vendor = gl.Vendor;
                 ctxInfo.renderer = gl.Renderer;
                 ctxInfo.extensions = gl.Extensions;
+                if (String.IsNullOrEmpty(ctxInfo.extensions)) ctxInfo.extensions = String.Join(' ', gl.ExtensionList);
 
                 if (!ctxInfo.extensions.Contains("GL_EXT_framebuffer_object") ||
                     !ctxInfo.extensions.Contains("GL_EXT_framebuffer_blit") ||
@@ -464,6 +466,62 @@ namespace ASEva.UIWpf
             }
         }
 
+        private bool createContext()
+        {
+            bool contextCreated = false;
+            if (!useLegacyAPI && !createContextAttribsARBUnsupported)
+            {
+                if (!gl.IsFunctionSupported("wglCreateContextAttribsARB"))
+                {
+                    var tempContext = Win32.wglCreateContext(hdc);
+                    if (tempContext == IntPtr.Zero) return false;
+
+                    Win32.wglMakeCurrent(hdc, tempContext);
+
+                    if (!gl.PreloadFunction("wglCreateContextAttribsARB")) createContextAttribsARBUnsupported = true;
+
+                    Win32.wglDeleteContext(tempContext);
+                }
+
+                if (!createContextAttribsARBUnsupported)
+                {
+                    var glCoreVersions = new Version[]
+                    {
+                        new Version(4, 6),
+                        new Version(3, 3)
+                    };
+
+                    foreach (var ver in glCoreVersions)
+                    {
+                        var attribs = new int[]
+                        {
+                            0x2091, // WGL_CONTEXT_MAJOR_VERSION_ARB
+                            ver.Major,
+                            0x2092, // WGL_CONTEXT_MINOR_VERSION_ARB
+                            ver.Minor,
+                            (int)OpenGL.GL_CONTEXT_PROFILE_MASK,
+                            (int)OpenGL.GL_CONTEXT_CORE_PROFILE_BIT,
+                            0
+                        };
+
+                        context = gl.CreateContextAttribsARB(hdc, IntPtr.Zero, attribs);
+                        if (context != IntPtr.Zero)
+                        {
+                            contextCreated = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (!contextCreated)
+            {
+                context = Win32.wglCreateContext(hdc);
+            }
+
+            return context != IntPtr.Zero;
+        }
+
         private IntPtr hwnd = IntPtr.Zero;
         private Direct3DEx d3d;
         private DeviceEx d3dDevice;
@@ -472,12 +530,13 @@ namespace ASEva.UIWpf
         private IntPtr[] interopSurface = new IntPtr[] { IntPtr.Zero };
 
         private WindowsFuncLoader funcLoader = new WindowsFuncLoader();
-        private OpenGL gl = null;
         private GLSizeInfo size = null;
         private IntPtr hdc = IntPtr.Zero;
         private IntPtr context = IntPtr.Zero;
         private GLCallback callback = null;
         private GLAntialias antialias;
+        private bool useLegacyAPI;
+
         private uint[] frameBuffer = null; // [interop, fallback/multisample]
         private uint[] colorBuffer = null; // [interop, fallback/multisample]
         private uint[] depthBuffer = null; // [interop, fallback/multisample]
@@ -486,5 +545,8 @@ namespace ASEva.UIWpf
         private int drawQueued = 0;
 
         private TextDraw textDraw = new TextDraw();
+
+        private static OpenGL gl = null;
+        private static bool createContextAttribsARBUnsupported = false;
     }
 }

@@ -19,13 +19,15 @@ namespace ASEva.UIWpf
     /// </summary>
     partial class OpenGLControlWpf : UserControl, GLBackend
     {
-        public OpenGLControlWpf(GLCallback callback, GLAntialias antialias)
+        public OpenGLControlWpf(GLCallback callback, GLAntialias antialias, bool useLegacyAPI)
         {
             XamlLoader.Load(this, "/ASEvaAPIWpf;component/graphic/openglcontrolwpf.xaml");
 
             this.callback = callback;
             this.antialias = antialias;
-            this.gl = OpenGL.Create(new WindowsFuncLoader());
+            this.useLegacyAPI = useLegacyAPI;
+
+            if (gl == null) gl = OpenGL.Create(new WindowsFuncLoader());
         }
 
         public void ReleaseGL()
@@ -220,8 +222,7 @@ namespace ASEva.UIWpf
             if ((iPixelformat = Win32.ChoosePixelFormat(hdc, pfd)) == 0) return;
             if (Win32.SetPixelFormat(hdc, iPixelformat, pfd) == 0) return;
 
-            context = Win32.wglCreateContext(hdc);
-            if (context == IntPtr.Zero) return;
+            if (!createContext()) return;
 
             Win32.wglMakeCurrent(hdc, context);
 
@@ -232,6 +233,7 @@ namespace ASEva.UIWpf
                 ctxInfo.vendor = gl.Vendor;
                 ctxInfo.renderer = gl.Renderer;
                 ctxInfo.extensions = gl.Extensions;
+                if (String.IsNullOrEmpty(ctxInfo.extensions)) ctxInfo.extensions = String.Join(' ', gl.ExtensionList);
 
                 var pixelScale = (float)PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice.M11;
                 size = new GLSizeInfo((int)ActualWidth, (int)ActualHeight, (int)(pixelScale * ActualWidth), (int)(pixelScale * ActualHeight), pixelScale, (float)(ActualWidth / ActualHeight), true);
@@ -363,9 +365,65 @@ namespace ASEva.UIWpf
             }
         }
 
-        private OpenGL gl = null;
+        private bool createContext()
+        {
+            bool contextCreated = false;
+            if (!useLegacyAPI && !createContextAttribsARBUnsupported)
+            {
+                if (!gl.IsFunctionSupported("wglCreateContextAttribsARB"))
+                {
+                    var tempContext = Win32.wglCreateContext(hdc);
+                    if (tempContext == IntPtr.Zero) return false;
+
+                    Win32.wglMakeCurrent(hdc, tempContext);
+
+                    if (!gl.PreloadFunction("wglCreateContextAttribsARB")) createContextAttribsARBUnsupported = true;
+
+                    Win32.wglDeleteContext(tempContext);
+                }
+
+                if (!createContextAttribsARBUnsupported)
+                {
+                    var glCoreVersions = new Version[]
+                    {
+                        new Version(4, 6),
+                        new Version(3, 3)
+                    };
+
+                    foreach (var ver in glCoreVersions)
+                    {
+                        var attribs = new int[]
+                        {
+                            0x2091, // WGL_CONTEXT_MAJOR_VERSION_ARB
+                            ver.Major,
+                            0x2092, // WGL_CONTEXT_MINOR_VERSION_ARB
+                            ver.Minor,
+                            (int)OpenGL.GL_CONTEXT_PROFILE_MASK,
+                            (int)OpenGL.GL_CONTEXT_CORE_PROFILE_BIT,
+                            0
+                        };
+
+                        context = gl.CreateContextAttribsARB(hdc, IntPtr.Zero, attribs);
+                        if (context != IntPtr.Zero)
+                        {
+                            contextCreated = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (!contextCreated)
+            {
+                context = Win32.wglCreateContext(hdc);
+            }
+
+            return context != IntPtr.Zero;
+        }
+
         private GLCallback callback = null;
         private GLAntialias antialias;
+        private bool useLegacyAPI;
         private bool? initOK = null;
         private IntPtr hwnd = IntPtr.Zero;
         private IntPtr hdc = IntPtr.Zero;
@@ -375,5 +433,8 @@ namespace ASEva.UIWpf
         private uint[] depthBuffer = null;
         private byte[] hostBuffer = null;
         private GLSizeInfo size = null;
+
+        private static OpenGL gl = null;
+        private static bool createContextAttribsARBUnsupported = false;
     }
 }
