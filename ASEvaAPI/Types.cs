@@ -711,14 +711,19 @@ namespace ASEva
         Lin = 3,
 
         /// <summary>
-        /// Flexray总线，报文数据由标志位字节(从低至高为startup,sync,null)、cycle字节和payload构成，2～256字节
+        /// Flexray总线，报文数据由标志位字节(从低至高为startup,sync,null)、cycle字节和payload构成(共2～256字节)，报文ID即Slot ID
         /// </summary>
         Flexray = 4,
 
         /// <summary>
-        /// 以太网总线，报文数据为包含链路层等等协议的完整以太网帧数据
+        /// 以太网总线，报文数据为包含链路层等等协议的完整以太网帧数据，报文ID定义为源MAC的后四字节(小字序)
         /// </summary>
         Ethernet = 5,
+
+        /// <summary>
+        /// (api:app=2.11.3) SOME/IP车载以太网总线，报文数据为包含链路层等等协议的完整以太网帧数据，报文ID即Message ID(由Service ID和Method ID组成)
+        /// </summary>
+        SomeIP = 6,
     };
 
     /// <summary>
