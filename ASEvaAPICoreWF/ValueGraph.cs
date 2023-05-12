@@ -38,9 +38,10 @@ namespace ASEva.UICoreWF
                 val = (Data as SingleValueData).GetValue();
             }
 
-            label2.Text = ((int)val).ToString() + ".";
+            label2.Text = ((long)val).ToString() + ".";
 
-            long digits = (int)((val - Math.Floor(val)) * 1000000000);
+            var valAbs = Math.Abs(val);
+            long digits = (int)((valAbs - Math.Floor(valAbs)) * 1000000000);
             if (digits == 0 || digits == 1 || digits == 1000000000 - 1)
             {
                 label3.Text = "0";

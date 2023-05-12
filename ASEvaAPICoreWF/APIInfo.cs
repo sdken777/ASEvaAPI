@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 16, 1); // 改良OpenGL版本请求
+            return new Version(2, 4, 16, 2); // 修正ValueGraph负值显示
         }
     }
 }
