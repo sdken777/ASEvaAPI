@@ -290,6 +290,7 @@ namespace ASEva
         String[] GetGraphPanelStyles(int graphID);
         GraphPanel CreateGraphPanel(GraphType graphID, String styleName);
         GraphPanel CreateGraphPanel(int graphID, String styleName);
+        DateTime? GetInternetNTPTime();
     }
 
     /// <summary>
@@ -3145,6 +3146,15 @@ namespace ASEva
         public static GraphPanel CreateGraphPanel(GraphType graphType, String styleName)
         {
             return Handler.CreateGraphPanel(graphType, styleName);
+        }
+
+        /// <summary>
+        /// (api:app=2.11.4) 获取从互联网获取的当前时间
+        /// </summary>
+        /// <returns>从互联网获取的当前时间(UTC时间)，若未联网或获取失败则返回空</returns>
+        public static DateTime? GetInternetNTPTime()
+        {
+            return Handler.GetInternetNTPTime();
         }
     }
 }

@@ -19,6 +19,11 @@ namespace ASEva.Samples
         public int PointCount { get; set; }
 
         /// <summary>
+        /// (api:app=2.11.4) 数据是否已被释放（出于内存用量控制等目的）
+        /// </summary>
+        public bool DataReleased { get; set; }
+
+        /// <summary>
         /// 点坐标列表，数组尺寸为Nx3，N为个数，3分别为x(前),y(左),z(上)轴坐标，单位为厘米
         /// </summary>
         public short[,] Points { get; set; }

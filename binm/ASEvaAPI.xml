@@ -1987,9 +1987,15 @@
             <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
             <returns>可视化面板对象，若创建失败则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetInternetNTPTime">
+            <summary>
+            (api:app=2.11.4) 获取从互联网获取的当前时间
+            </summary>
+            <returns>从互联网获取的当前时间(UTC时间)，若未联网或获取失败则返回空</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.11.3
+            version=2.11.4
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4917,6 +4923,11 @@
         <member name="P:ASEva.Samples.PointCloudSample.PointCount">
             <summary>
             点个数
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.PointCloudSample.DataReleased">
+            <summary>
+            (api:app=2.11.4) 数据是否已被释放（出于内存用量控制等目的）
             </summary>
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.Points">

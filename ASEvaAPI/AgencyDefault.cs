@@ -1365,5 +1365,10 @@ namespace ASEva
         {
             return null;
         }
+
+        public DateTime? GetInternetNTPTime()
+        {
+            return null;
+        }
     }
 }
