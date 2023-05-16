@@ -121,7 +121,7 @@ namespace ASEva.UIGtk
                 {
                     var glCoreVersions = new Version[]
                     {
-                        new Version(4, 6),
+                        // new Version(4, 6), // 可能导致崩溃
                         new Version(3, 3)
                     };
 
