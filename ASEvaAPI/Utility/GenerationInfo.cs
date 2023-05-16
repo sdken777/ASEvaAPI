@@ -230,7 +230,22 @@ namespace ASEva.Utility
                 }
             }
 
-            xml.Save(FilePath);
+            try
+            {
+                xml.Save(FilePath);
+                return;
+            }
+            catch (Exception) {}
+
+            if (File.Exists(FilePath))
+            {
+                try
+                {
+                    File.Delete(FilePath);
+                    xml.Save(FilePath);
+                }
+                catch (Exception) {}
+            }
         }
     }
 }

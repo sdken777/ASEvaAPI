@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 11, 4, 0); // 新增PointCloudSample.DataReleased。新增Agency.GetInternetNTPTime
+            return new Version(2, 11, 4, 1); // 保存xml失败后尝试先删除原文件再保存
         }
 
         /// <summary>
