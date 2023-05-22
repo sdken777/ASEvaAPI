@@ -56,10 +56,11 @@ namespace ASEva.UIGtk
                 val = (Data as SingleValueData).GetValue();
             }
 
-            labelValueMain.Text = ((long)val).ToString() + ".";
-
             var valAbs = Math.Abs(val);
-            long digits = (int)((valAbs - Math.Floor(valAbs)) * 1000000000);
+            var valAbsInt = (ulong)Math.Floor(valAbs);
+            labelValueMain.Text = (val < 0 ? "-" : "") + valAbsInt + ".";
+
+            long digits = (int)((valAbs - valAbsInt) * 1000000000);
             if (digits == 0 || digits == 1 || digits == 1000000000 - 1)
             {
                 labelValueSub.Text = "0";

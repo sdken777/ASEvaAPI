@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 6, 4, 3); // X11离屏渲染core profile不使用OpenGL 4.6
+            return new Version(2, 6, 4, 4); // 继续修正ValueGraph负值显示
         }
     }
 }
