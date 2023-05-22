@@ -38,10 +38,11 @@ namespace ASEva.UICoreWF
                 val = (Data as SingleValueData).GetValue();
             }
 
-            label2.Text = ((long)val).ToString() + ".";
-
             var valAbs = Math.Abs(val);
-            long digits = (int)((valAbs - Math.Floor(valAbs)) * 1000000000);
+            var valAbsInt = (ulong)Math.Floor(valAbs);
+            label2.Text = (val < 0 ? "-" : "") + valAbsInt + ".";
+
+            long digits = (int)((valAbs - valAbsInt) * 1000000000);
             if (digits == 0 || digits == 1 || digits == 1000000000 - 1)
             {
                 label3.Text = "0";
