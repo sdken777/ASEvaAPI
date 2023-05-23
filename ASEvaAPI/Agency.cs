@@ -291,6 +291,7 @@ namespace ASEva
         GraphPanel CreateGraphPanel(GraphType graphID, String styleName);
         GraphPanel CreateGraphPanel(int graphID, String styleName);
         DateTime? GetInternetNTPTime();
+        Dictionary<String, String> GetPluginGuestSyncTable();
     }
 
     /// <summary>
@@ -2547,7 +2548,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.7.6) 获取指定通道的客机同步配置
         /// </summary>
-        /// <param name="id">通道ID，如：bus@1, video@0, raw@xxx-v1, sample@xxx-v2@0等</param>
+        /// <param name="id">客机同步ID，如：bus@1, video@0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
         /// <returns>客机是否与授时服务器同步</returns>
         public static bool GetChannelGuestSyncFlag(String id)
         {
@@ -2557,7 +2558,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.7.6) 设置指定通道的客机同步配置
         /// </summary>
-        /// <param name="id">通道ID，如：bus@1, video@0, raw@xxx-v1, sample@xxx-v2@0等</param>
+        /// <param name="id">客机同步ID，如：bus@1, video@0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
         /// <param name="guestSync">客机是否与授时服务器同步</param>
         public static void SetChannelGuestSyncFlag(String id, bool guestSync)
         {
@@ -2565,9 +2566,9 @@ namespace ASEva
         }
 
         /// <summary>
-        /// (api:app=2.7.6) 获取客机已同步的所有通道ID
+        /// (api:app=2.7.6) 获取客机已同步的所有ID
         /// </summary>
-        /// <returns>客机已同步的所有通道ID列表</returns>
+        /// <returns>客机已同步的所有ID列表</returns>
         public static string[] GetAllChannelGuestSyncKeys()
         {
             return Handler.GetAllChannelGuestSyncKeys();
@@ -3155,6 +3156,15 @@ namespace ASEva
         public static DateTime? GetInternetNTPTime()
         {
             return Handler.GetInternetNTPTime();
+        }
+
+        /// <summary>
+        /// (api:app=2.12.0) 获取所有插件的客机同步ID以及对应的标题
+        /// </summary>
+        /// <returns>客机同步标题表，键为客机同步ID，值为对应的标题</returns>
+        public static Dictionary<String, String> GetPluginGuestSyncTable()
+        {
+            return Handler.GetPluginGuestSyncTable();
         }
     }
 }

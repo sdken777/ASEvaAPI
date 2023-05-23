@@ -1370,5 +1370,10 @@ namespace ASEva
         {
             return null;
         }
+
+        public Dictionary<string, string> GetPluginGuestSyncTable()
+        {
+            return null;
+        }
     }
 }

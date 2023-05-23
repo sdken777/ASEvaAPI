@@ -61,6 +61,21 @@ namespace ASEva.Utility
         /// </summary>
         public Dictionary<DateTime, string> UpdateLogs { get; set; }
 
+        /// <summary>
+        /// (api:app=2.12.0) Generation生成时使用或覆盖的卫星Posix时间模型
+        /// </summary>
+        public PosixTimeModel GNSSPosixModel { get; set; }
+
+        /// <summary>
+        /// (api:app=2.12.0) Generation生成时主机是否配置为与授时服务器同步
+        /// </summary>
+        public bool HostSync { get; set; }
+
+        /// <summary>
+        /// (api:app=2.12.0) Generation生成时被配置为与授时服务器同步的所有客机同步ID
+        /// </summary>
+        public String[] GuestSyncIDs { get; set; }
+
         private GenerationInfo()
         {
         }
@@ -75,7 +90,7 @@ namespace ASEva.Utility
         /// <returns>返回创建的对象</returns>
         public static GenerationInfo Create(String filePath, String generationID, GenerationProcessStatus status, Dictionary<string, Version> versions)
         {
-            return Create(filePath, generationID, status, null, versions, null);
+            return Create(filePath, generationID, status, null, versions, null, null, false, null);
         }
 
         /// <summary>
@@ -90,6 +105,24 @@ namespace ASEva.Utility
         /// <returns>返回创建的对象</returns>
         public static GenerationInfo Create(String filePath, String generationID, GenerationProcessStatus status, Dictionary<string, string> sampleAlias, Dictionary<string, Version> versions, Dictionary<DateTime, string> updateLogs)
         {
+            return Create(filePath, generationID, status, sampleAlias, versions, updateLogs, null, false, null);
+        }
+
+        /// <summary>
+        /// (api:app=2.12.0) 创建信息文件对象（仅创建对象，不写入文件）
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        /// <param name="generationID">Generation ID</param>
+        /// <param name="status">状态信息</param>
+        /// <param name="sampleAlias">样本别名表</param>
+        /// <param name="versions">生成Generation的软件版本信息</param>
+        /// <param name="updateLogs">Generation更新记录</param>
+        /// <param name="gnssPosixModel">Generation生成时使用或覆盖的卫星Posix时间模型</param>
+        /// <param name="hostSync">Generation生成时主机是否配置为与授时服务器同步</param>
+        /// <param name="guestSyncIDs">Generation生成时被配置为与授时服务器同步的所有客机同步ID</param>
+        /// <returns>返回创建的对象</returns>
+        public static GenerationInfo Create(String filePath, String generationID, GenerationProcessStatus status, Dictionary<string, string> sampleAlias, Dictionary<string, Version> versions, Dictionary<DateTime, string> updateLogs, PosixTimeModel gnssPosixModel, bool hostSync, String[] guestSyncIDs)
+        {
             if (filePath == null || filePath.Length == 0 || generationID == null || generationID.Length == 0) return null;
 
             var info = new GenerationInfo();
@@ -99,6 +132,9 @@ namespace ASEva.Utility
             info.SampleAlias = sampleAlias;
             info.Versions = versions;
             info.UpdateLogs = updateLogs;
+            info.GNSSPosixModel = gnssPosixModel;
+            info.HostSync = hostSync;
+            info.GuestSyncIDs = guestSyncIDs;
 
             return info;
         }
@@ -162,6 +198,33 @@ namespace ASEva.Utility
                 {
                     info.UpdateLogs[DateTime.ParseExact(updateNode.Attributes["time"].Value, "yyyy-MM-dd-HH-mm-ss", null)] = updateNode.InnerText;
                 }
+
+                try
+                {
+                    if (attribs["start_posix_gnss"] != null && attribs["time_ratio_gnss"] != null)
+                    {
+                        info.GNSSPosixModel = new PosixTimeModel
+                        {
+                            StartPosix = Convert.ToUInt64(attribs["start_posix_gnss"].Value),
+                            TimeRatio = Convert.ToDouble(attribs["time_ratio_gnss"].Value),
+                        };
+                    }
+                    else info.GNSSPosixModel = null;
+                }
+                catch (Exception) { info.GNSSPosixModel = null; }
+
+                if (attribs["host_sync"] != null)
+                {
+                    info.HostSync = attribs["host_sync"].Value == "yes";
+                }
+                else info.HostSync = false;
+
+                var guestSyncList = new List<String>();
+                foreach (XmlElement guestSyncNode in xml.DocumentElement.GetElementsByTagName("guest_sync"))
+                {
+                    if (guestSyncNode.InnerText.Length > 0) guestSyncList.Add(guestSyncNode.InnerText);
+                }
+                info.GuestSyncIDs = guestSyncList.ToArray();
             }
             catch (Exception) { }
 
@@ -227,6 +290,22 @@ namespace ASEva.Utility
                     var updateNode = rootNode.AppendChild(xml.CreateElement("update")) as XmlElement;
                     updateNode.Attributes.Append(xml.CreateAttribute("time")).Value = update.Key.ToString("yyyy-MM-dd-HH-mm-ss");
                     updateNode.InnerText = update.Value;
+                }
+            }
+
+            if (GNSSPosixModel != null)
+            {
+                rootNode.Attributes.Append(xml.CreateAttribute("start_posix_gnss")).Value = GNSSPosixModel.StartPosix.ToString();
+                rootNode.Attributes.Append(xml.CreateAttribute("time_ratio_gnss")).Value = GNSSPosixModel.TimeRatio.ToString();
+            }
+
+            rootNode.Attributes.Append(xml.CreateAttribute("host_sync")).Value = HostSync ? "yes" : "no";
+
+            if (GuestSyncIDs != null)
+            {
+                foreach (var id in GuestSyncIDs)
+                {
+                    if (id.Length > 0) rootNode.AppendChild(xml.CreateElement("guest_sync")).InnerText = id;
                 }
             }
 
