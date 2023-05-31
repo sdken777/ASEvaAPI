@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 12, 0, 0); // 新增Plugin.GetGuestSyncTitleTable。新增Agency.GetPluginGuestSyncTable。新增GenerationInfo.GNSSPosixModel/HostSync/GuestSyncIDs
+            return new Version(2, 12, 0, 1); // 修正ResourceLoader
         }
 
         /// <summary>

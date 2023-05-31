@@ -20,7 +20,7 @@ namespace ASEva.Utility
             if (instream == null) return null;
 
             var data = new byte[instream.Length];
-            instream.Read(data, 0, data.Length);
+            if (instream.Length > 0) instream.Read(data, 0, data.Length);
             instream.Close();
 
             return data;
@@ -37,13 +37,13 @@ namespace ASEva.Utility
             if (instream == null) return null;
 
             var data = new byte[instream.Length];
-            instream.Read(data, 0, data.Length);
+            if (instream.Length > 0) instream.Read(data, 0, data.Length);
             instream.Close();
 
-            if (data[0] == 0xEF && data[1] == 0xBB && data[2] == 0xBF)
+            if (data.Length >= 3 && data[0] == 0xEF && data[1] == 0xBB && data[2] == 0xBF)
             {
                 var buf = new byte[data.Length - 3];
-                Array.Copy(data, 3, buf, 0, buf.Length);
+                if (buf.Length > 0) Array.Copy(data, 3, buf, 0, buf.Length);
                 data = buf;
             }
 
