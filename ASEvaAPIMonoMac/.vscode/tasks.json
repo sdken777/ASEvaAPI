@@ -28,17 +28,12 @@
             "type": "process",
             "label": "调试构建",
             "group": "build",
-            "command": "echo",
+            "command": "rm",
             "args": [
-                "Done.",
+                "-vf",
+                "../${input:helper_platform_bin_name}/debug/ASEvaAPIMonoMac.pdb",
+                "../${input:helper_platform_bin_name}/debug/ASEvaAPIMonoMac.deps.json",
             ],
-            "dependsOrder": "sequence",
-            "dependsOn": [
-                "清理",
-                "(子任务)调试构建",
-                "(子任务)移除调试构建冗余文件",
-            ],
-            "problemMatcher": [],
             "osx": {
                 "command": "dotnet",
                 "args": [
@@ -46,42 +41,42 @@
                     "${workspaceFolder}/../macapp-local-ASEvaAPIEtoTest.xml",
                     "debug",
                 ],
-            }
+            },
+            "dependsOn": [
+                "(子任务)执行调试构建",
+            ],
         },
         {
             "type": "process",
             "label": "发布构建",
             "group": "build",
-            "command": "echo",
+            "command": "rm",
             "args": [
-                "Done.",
+                "-vf",
+                "../${input:helper_platform_bin_name}/ASEvaAPIMonoMac.pdb",
+                "../${input:helper_platform_bin_name}/ASEvaAPIMonoMac.deps.json",
             ],
-            "dependsOrder": "sequence",
             "dependsOn": [
-                "清理",
-                "(子任务)发布构建",
-                "(子任务)移除发布构建冗余文件",
+                "(子任务)执行发布构建",
             ],
-            "problemMatcher": [],
         },
         {
             "type": "process",
             "label": "清理",
-            "group": "build",
             "command": "rm",
             "args": [
                 "-rf",
                 "./obj",
                 "./bin"
             ],
-            "problemMatcher": []
         },
 
         // 以下为子任务
 
         {
             "type": "process",
-            "label": "(子任务)调试构建",
+            "label": "(子任务)执行调试构建",
+            "hide": true,
             "command": "dotnet",
             "args": [
                 "build",
@@ -95,7 +90,8 @@
         },
         {
             "type": "process",
-            "label": "(子任务)发布构建",
+            "label": "(子任务)执行发布构建",
+            "hide": true,
             "command": "dotnet",
             "args": [
                 "build",
@@ -108,28 +104,6 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile",
-        },
-        {
-            "type": "process",
-            "label": "(子任务)移除调试构建冗余文件",
-            "command": "rm",
-            "args": [
-                "-vf",
-                "../${input:helper_platform_bin_name}/debug/ASEvaAPIMonoMac.pdb",
-                "../${input:helper_platform_bin_name}/debug/ASEvaAPIMonoMac.deps.json",
-            ],
-            "problemMatcher": []
-        },
-        {
-            "type": "process",
-            "label": "(子任务)移除发布构建冗余文件",
-            "command": "rm",
-            "args": [
-                "-vf",
-                "../${input:helper_platform_bin_name}/ASEvaAPIMonoMac.pdb",
-                "../${input:helper_platform_bin_name}/ASEvaAPIMonoMac.deps.json",
-            ],
-            "problemMatcher": []
         },
     ]
 }
