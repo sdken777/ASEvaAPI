@@ -28,19 +28,6 @@
                 ]
             }
         },
-        {
-            "id": "helper_osx_version",
-            "type": "command",
-            "command": "shell-command.run",
-            "args": {
-                "cmd": "dotnet",
-                "args": [
-                    "../bin/VSCodeHelper.dll",
-                    "shell_command",
-                    "osx_version"
-                ]
-            }
-        },
     ],
     "presentation": {
         "echo": true,
@@ -61,7 +48,6 @@
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.pdb",
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.deps.json",
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
-                "ASEvaAPIEtoTest.WindowsDesktop.csproj",
             ],
             "osx": {
                 "command": "dotnet",
@@ -73,7 +59,6 @@
             },
             "dependsOrder": "sequence",
             "dependsOn": [
-                "(子任务)生成Windows项目文件",
                 "(子任务)执行调试构建",
             ],
         },
@@ -87,7 +72,6 @@
                 "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.pdb",
                 "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.deps.json",
                 "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.runtimeconfig.dev.json",
-                "ASEvaAPIEtoTest.WindowsDesktop.csproj",
             ],
             "osx": {
                 "command": "dotnet",
@@ -99,7 +83,6 @@
             },
             "dependsOrder": "sequence",
             "dependsOn": [
-                "(子任务)生成Windows项目文件",
                 "(子任务)执行发布构建",
                 "(子任务)拷贝至其他目录",
             ],
@@ -124,109 +107,38 @@
 
         {
             "type": "process",
-            "label": "(子任务)生成Windows项目文件",
-            "hide": true,
-            "command": "dotnet",
-            "args": [
-                "../bin/VSCodeHelper.dll",
-                "gen_windows_csproj",
-                "ASEvaAPIEtoTest.csproj",
-            ],
-        },
-        {
-            "type": "process",
             "label": "(子任务)执行调试构建",
             "hide": true,
             "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIEtoTest.csproj",
+                "-o",
+                "../${input:helper_platform_bin_name}/debug",
+                "/property:OutputType=Exe",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
             "problemMatcher": "$msCompile",
-            "windows": {
-                "args": [
-                    "build",
-                    "./ASEvaAPIEtoTest.WindowsDesktop.csproj",
-                    "-o",
-                    "../${input:helper_platform_bin_name}/debug",
-                    "/property:OutputType=WinExe",
-                    "/property:UseWindowsForms=true",
-                    "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary"
-                ],
-            },
-            "linux": {
-                "args": [
-                    "build",
-                    "./ASEvaAPIEtoTest.csproj",
-                    "-o",
-                    "../${input:helper_platform_bin_name}/debug",
-                    "/property:OutputType=Exe",
-                    "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary"
-                ],
-            },
-            "osx": {
-                "args": [
-                    "publish",
-                    "./ASEvaAPIEtoTest.csproj",
-                    "-r",
-                    "${input:helper_osx_version}",
-                    "--no-self-contained",
-                    "-o",
-                    "../${input:helper_platform_bin_name}/debug",
-                    "/property:OutputType=Exe",
-                    "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary"
-                ],
-            }
         },
         {
             "type": "process",
             "label": "(子任务)执行发布构建",
             "hide": true,
             "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIEtoTest.csproj",
+                "-c",
+                "Release",
+                "-o",
+                "../${input:helper_platform_bin_name}",
+                "/property:OutputType=Exe",
+                "/property:ApplicationIcon=Resources/icon.ico",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
             "problemMatcher": "$msCompile",
-            "windows": {
-                "args": [
-                    "build",
-                    "./ASEvaAPIEtoTest.WindowsDesktop.csproj",
-                    "-c",
-                    "Release",
-                    "-o",
-                    "../${input:helper_platform_bin_name}",
-                    "/property:OutputType=WinExe",
-                    "/property:ApplicationIcon=Resources/icon.ico",
-                    "/property:UseWindowsForms=true",
-                    "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary"
-                ],
-            },
-            "linux": {
-                "args": [
-                    "build",
-                    "./ASEvaAPIEtoTest.csproj",
-                    "-c",
-                    "Release",
-                    "-o",
-                    "../${input:helper_platform_bin_name}",
-                    "/property:OutputType=Exe",
-                    "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary"
-                ],
-            },
-            "osx": {
-                "args": [
-                    "publish",
-                    "./ASEvaAPIEtoTest.csproj",
-                    "-c",
-                    "Release",
-                    "-r",
-                    "${input:helper_osx_version}",
-                    "--no-self-contained",
-                    "-o",
-                    "../${input:helper_platform_bin_name}",
-                    "/property:OutputType=Exe",
-                    "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary"
-                ],
-            }
         },
         {
             "type": "process",
@@ -241,6 +153,7 @@
                 "binx",
                 "binxa",
                 "binm",
+                "binma",
             ],
         },
     ]
