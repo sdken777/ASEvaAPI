@@ -56,8 +56,10 @@
                 "../${input:helper_platform_bin_name}/ASEvaAPIMonoMac.pdb",
                 "../${input:helper_platform_bin_name}/ASEvaAPIMonoMac.deps.json",
             ],
+            "dependsOrder": "sequence",
             "dependsOn": [
                 "(子任务)执行发布构建",
+                "(子任务)拷贝至其他目录",
             ],
         },
         {
@@ -104,6 +106,19 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile",
+        },
+        {
+            "type": "process",
+            "label": "(子任务)拷贝至其他目录",
+            "hide": true,
+            "command": "dotnet",
+            "args": [
+                "../bin/VSCodeHelper.dll",
+                "copy_outputs",
+                "ASEvaAPIMonoMac",
+                "binm",
+                "binma",
+            ],
         },
     ]
 }
