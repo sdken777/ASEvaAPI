@@ -63,6 +63,7 @@
                 "./obj",
                 "./bin"
             ],
+            "problemMatcher":[],
         },
 
         // 以下为子任务
@@ -94,6 +95,7 @@
                 "Release",
                 "-o",
                 "../${input:helper_platform_bin_name}",
+                "/property:DocumentationFile=../${input:helper_platform_bin_name}/ASEvaAPIGtk.xml",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

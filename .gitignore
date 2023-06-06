@@ -21,6 +21,8 @@ external.avi
 netcoreapp3.1/
 *.o
 macapp/
+net6.0/
+net6.0-windows/
 
 # User-specific files
 *.suo

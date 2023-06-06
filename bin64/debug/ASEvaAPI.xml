@@ -1561,21 +1561,21 @@
             <summary>
             (api:app=2.7.6) 获取指定通道的客机同步配置
             </summary>
-            <param name="id">通道ID，如：bus@1, video@0, raw@xxx-v1, sample@xxx-v2@0等</param>
+            <param name="id">客机同步ID，如：bus@1, video@0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
             <returns>客机是否与授时服务器同步</returns>
         </member>
         <member name="M:ASEva.Agency.SetChannelGuestSyncFlag(System.String,System.Boolean)">
             <summary>
             (api:app=2.7.6) 设置指定通道的客机同步配置
             </summary>
-            <param name="id">通道ID，如：bus@1, video@0, raw@xxx-v1, sample@xxx-v2@0等</param>
+            <param name="id">客机同步ID，如：bus@1, video@0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
             <param name="guestSync">客机是否与授时服务器同步</param>
         </member>
         <member name="M:ASEva.Agency.GetAllChannelGuestSyncKeys">
             <summary>
-            (api:app=2.7.6) 获取客机已同步的所有通道ID
+            (api:app=2.7.6) 获取客机已同步的所有ID
             </summary>
-            <returns>客机已同步的所有通道ID列表</returns>
+            <returns>客机已同步的所有ID列表</returns>
         </member>
         <member name="M:ASEva.Agency.GetBusChannelStatus(System.Int32,System.Nullable{System.UInt32})">
             <summary>
@@ -1987,9 +1987,21 @@
             <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
             <returns>可视化面板对象，若创建失败则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetInternetNTPTime">
+            <summary>
+            (api:app=2.11.4) 获取从互联网获取的当前时间
+            </summary>
+            <returns>从互联网获取的当前时间(UTC时间)，若未联网或获取失败则返回空</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetPluginGuestSyncTable">
+            <summary>
+            (api:app=2.12.0) 获取所有插件的客机同步ID以及对应的标题
+            </summary>
+            <returns>客机同步标题表，键为客机同步ID，值为对应的标题</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.11.2
+            version=2.12.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4192,6 +4204,12 @@
             </summary>
             <returns>原生组件ID列表</returns>
         </member>
+        <member name="M:ASEva.Plugin.GetGuestSyncTitleTable">
+            <summary>
+            (api:app=2.12.0) [可选实现] 获取插件相关的客机同步通道标题表
+            </summary>
+            <returns>客机同步通道标题表，键为客机同步ID，值为其标题</returns>
+        </member>
         <member name="M:ASEva.Plugin.UseLogger(ASEva.Logger)">
             <summary>
             (api:app=2.11.0) [可选实现] 设置用于记录调试信息的接口时被调用
@@ -4917,6 +4935,11 @@
         <member name="P:ASEva.Samples.PointCloudSample.PointCount">
             <summary>
             点个数
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.PointCloudSample.DataReleased">
+            <summary>
+            (api:app=2.11.4) 数据是否已被释放（出于内存用量控制等目的）
             </summary>
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.Points">
@@ -6109,12 +6132,17 @@
         </member>
         <member name="F:ASEva.BusChannelType.Flexray">
             <summary>
-            Flexray总线，报文数据由标志位字节(从低至高为startup,sync,null)、cycle字节和payload构成，2～256字节
+            Flexray总线，报文数据由标志位字节(从低至高为startup,sync,null)、cycle字节和payload构成(共2～256字节)，报文ID即Slot ID
             </summary>
         </member>
         <member name="F:ASEva.BusChannelType.Ethernet">
             <summary>
-            以太网总线，报文数据为包含链路层等等协议的完整以太网帧数据
+            以太网总线，报文数据为包含链路层等等协议的完整以太网帧数据，报文ID定义为源MAC的后四字节(小字序)
+            </summary>
+        </member>
+        <member name="F:ASEva.BusChannelType.SomeIP">
+            <summary>
+            (api:app=2.11.3) SOME/IP车载以太网总线，报文数据为包含链路层等等协议的完整以太网帧数据，报文ID即Message ID(由Service ID和Method ID组成)
             </summary>
         </member>
         <member name="T:ASEva.BusDeviceInfo">
@@ -7536,6 +7564,21 @@
             Generation更新记录
             </summary>
         </member>
+        <member name="P:ASEva.Utility.GenerationInfo.GNSSPosixModel">
+            <summary>
+            (api:app=2.12.0) Generation生成时使用或覆盖的卫星Posix时间模型
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.GenerationInfo.HostSync">
+            <summary>
+            (api:app=2.12.0) Generation生成时主机是否配置为与授时服务器同步
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.GenerationInfo.GuestSyncIDs">
+            <summary>
+            (api:app=2.12.0) Generation生成时被配置为与授时服务器同步的所有客机同步ID
+            </summary>
+        </member>
         <member name="M:ASEva.Utility.GenerationInfo.Create(System.String,System.String,ASEva.Utility.GenerationProcessStatus,System.Collections.Generic.Dictionary{System.String,System.Version})">
             <summary>
             创建信息文件对象（仅创建对象，不写入文件）
@@ -7556,6 +7599,21 @@
             <param name="sampleAlias">样本别名表</param>
             <param name="versions">生成Generation的软件版本信息</param>
             <param name="updateLogs">Generation更新记录</param>
+            <returns>返回创建的对象</returns>
+        </member>
+        <member name="M:ASEva.Utility.GenerationInfo.Create(System.String,System.String,ASEva.Utility.GenerationProcessStatus,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Version},System.Collections.Generic.Dictionary{System.DateTime,System.String},ASEva.PosixTimeModel,System.Boolean,System.String[])">
+            <summary>
+            (api:app=2.12.0) 创建信息文件对象（仅创建对象，不写入文件）
+            </summary>
+            <param name="filePath">文件路径</param>
+            <param name="generationID">Generation ID</param>
+            <param name="status">状态信息</param>
+            <param name="sampleAlias">样本别名表</param>
+            <param name="versions">生成Generation的软件版本信息</param>
+            <param name="updateLogs">Generation更新记录</param>
+            <param name="gnssPosixModel">Generation生成时使用或覆盖的卫星Posix时间模型</param>
+            <param name="hostSync">Generation生成时主机是否配置为与授时服务器同步</param>
+            <param name="guestSyncIDs">Generation生成时被配置为与授时服务器同步的所有客机同步ID</param>
             <returns>返回创建的对象</returns>
         </member>
         <member name="M:ASEva.Utility.GenerationInfo.Load(System.String)">

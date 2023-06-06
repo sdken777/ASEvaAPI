@@ -48,6 +48,7 @@
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.pdb",
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.deps.json",
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
+                "ASEvaAPIEtoTest.WindowsDesktop.csproj",
             ],
             "osx": {
                 "command": "dotnet",
@@ -59,6 +60,7 @@
             },
             "dependsOrder": "sequence",
             "dependsOn": [
+                "(子任务)生成Windows项目文件",
                 "(子任务)执行调试构建",
             ],
         },
@@ -72,6 +74,7 @@
                 "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.pdb",
                 "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.deps.json",
                 "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.runtimeconfig.dev.json",
+                "ASEvaAPIEtoTest.WindowsDesktop.csproj",
             ],
             "osx": {
                 "command": "dotnet",
@@ -83,6 +86,7 @@
             },
             "dependsOrder": "sequence",
             "dependsOn": [
+                "(子任务)生成Windows项目文件",
                 "(子任务)执行发布构建",
                 "(子任务)拷贝至其他目录",
             ],
@@ -96,15 +100,28 @@
                 "./obj",
                 "./bin"
             ],
+            "problemMatcher":[],
         },
         {
             "type": "process",
             "label": "运行文本资源编辑器",
             "command": "../${input:helper_platform_bin_name}/${input:helper_platform_exe_text_resource_editor}",
+            "problemMatcher":[],
         },
 
         // 以下为子任务
 
+        {
+            "type": "process",
+            "label": "(子任务)生成Windows项目文件",
+            "hide": true,
+            "command": "dotnet",
+            "args": [
+                "../bin/VSCodeHelper.dll",
+                "gen_windows_csproj",
+                "ASEvaAPIEtoTest.csproj",
+            ],
+        },
         {
             "type": "process",
             "label": "(子任务)执行调试构建",
@@ -119,6 +136,17 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
+            "windows": {
+                "args": [
+                    "build",
+                    "./ASEvaAPIEtoTest.WindowsDesktop.csproj",
+                    "-o",
+                    "../${input:helper_platform_bin_name}/debug",
+                    "/property:OutputType=WinExe",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary"
+                ],
+            },
             "problemMatcher": "$msCompile",
         },
         {
@@ -134,10 +162,23 @@
                 "-o",
                 "../${input:helper_platform_bin_name}",
                 "/property:OutputType=Exe",
-                "/property:ApplicationIcon=Resources/icon.ico",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
+            "windows": {
+                "args": [
+                    "build",
+                    "./ASEvaAPIEtoTest.WindowsDesktop.csproj",
+                    "-c",
+                    "Release",
+                    "-o",
+                    "../${input:helper_platform_bin_name}",
+                    "/property:OutputType=WinExe",
+                    "/property:ApplicationIcon=Resources/icon.ico",
+                    "/property:GenerateFullPaths=true",
+                    "/consoleloggerparameters:NoSummary"
+                ],
+            },
             "problemMatcher": "$msCompile",
         },
         {

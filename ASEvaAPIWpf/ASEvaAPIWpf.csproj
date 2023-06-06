@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <RootNamespace>ASEva.UIWpf</RootNamespace>
     <Configurations>Release;Debug</Configurations>
     <UseWPF>True</UseWPF>
@@ -68,7 +68,6 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\bin64\debug\</OutputPath>
-    <DocumentationFile>..\bin64\debug\ASEvaAPIWpf.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>

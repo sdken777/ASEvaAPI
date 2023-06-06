@@ -5,9 +5,6 @@
     <Compile Update="AppDialogCoreWF.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="ConfigPanel.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="BaseGraph.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -20,6 +17,9 @@
     <Compile Update="ComboSelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="ConfigPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="DeviceCoordView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -27,6 +27,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Graphic\OpenGLControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Graphic\OpenGLOnscreenControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Handler\SimpleTreeViewBackendCoreWF.cs">
