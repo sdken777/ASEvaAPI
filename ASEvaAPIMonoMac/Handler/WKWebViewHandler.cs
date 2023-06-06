@@ -4,18 +4,25 @@ using System.Linq;
 using Eto.Drawing;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+#if XAMMAC2
+using AppKit;
+using Foundation;
+using CoreGraphics;
+using ObjCRuntime;
+using CoreAnimation;
+using wk = WebKit;
+#else
 using MonoMac.AppKit;
 using MonoMac.Foundation;
 using MonoMac.CoreGraphics;
 using MonoMac.ObjCRuntime;
 using MonoMac.CoreAnimation;
 using wk = MonoMac.WebKit;
-using Eto.Mac;
-using Eto.Mac.Forms;
+#endif
 
-namespace ASEva.UIMonoMac
+namespace Eto.Mac.Forms.Controls
 {
-	class WKWebViewHandler : MacView<wk.WKWebView, WebView, WebView.ICallback>, WebView.IHandler
+	public class WKWebViewHandler : MacView<wk.WKWebView, WebView, WebView.ICallback>, WebView.IHandler
 	{
 		public override NSView ContainerControl { get { return Control; } }
 
@@ -95,8 +102,8 @@ namespace ASEva.UIMonoMac
 			{
 				Handler = handler;
 				UIDelegate = new EtoUIDelegate { Handler = handler };
-				Configuration.Preferences.SetValueForKey(NSNumber.FromBoolean(true), new NSString("developerExtrasEnabled"));
 			}
+
 		}
 
 		class PromptDialog : Dialog<bool>
@@ -305,7 +312,7 @@ namespace ASEva.UIMonoMac
 			else if (Control.RespondsToSelector(s_selGetPrintOperationInternal))
 			{
 				// older versions have this but is undocumented and internal..
-				printOperation = Runtime.GetNSObject<NSPrintOperation>(Eto.Mac.Messaging.IntPtr_objc_msgSend_IntPtr(Control.Handle, s_selGetPrintOperationInternal.Handle, printInfo.Handle));
+				printOperation = Runtime.GetNSObject<NSPrintOperation>(Messaging.IntPtr_objc_msgSend_IntPtr(Control.Handle, s_selGetPrintOperationInternal.Handle, printInfo.Handle));
 			}
 			if (printOperation != null)
 			{

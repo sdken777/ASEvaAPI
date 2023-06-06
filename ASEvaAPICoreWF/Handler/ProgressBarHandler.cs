@@ -1,21 +1,16 @@
 using SWF = System.Windows.Forms;
 using Eto.Forms;
-using Eto.WinForms;
-using Eto.WinForms.Forms;
-using ASEva.UIEto;
 
-namespace ASEva.UICoreWF
+namespace Eto.WinForms.Forms.Controls
 {
-	class ProgressBarHandler : WindowsControl<SWF.ProgressBar, ProgressBar, ProgressBar.ICallback>, ProgressBar.IHandler
+	public class ProgressBarHandler : WindowsControl<SWF.ProgressBar, ProgressBar, ProgressBar.ICallback>, ProgressBar.IHandler
 	{
 		public ProgressBarHandler ()
 		{
 			this.Control = new SWF.ProgressBar {
 				Maximum = 100,
-				Style = SWF.ProgressBarStyle.Blocks,
+				Style = SWF.ProgressBarStyle.Blocks
 			};
-			this.Control.Size = new System.Drawing.Size((int)(this.Control.Width * SizerExtensions.PixelScale),
-				(int)(this.Control.Height * SizerExtensions.PixelScale));
 		}
 
 		static SWF.ProgressBarStyle IndeterminateStyle
@@ -44,6 +39,6 @@ namespace ASEva.UICoreWF
 			get { return Control.Value; }
 			set { Control.Value = value; }
 		}
-    }
+	}
 }
 

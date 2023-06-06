@@ -1,9 +1,9 @@
 using Eto.Forms;
-using Eto.GtkSharp.Forms;
+using System.Threading.Tasks;
 
-namespace ASEva.UIGtk
+namespace Eto.GtkSharp.Forms
 {
-	public class FormHandler : WindowHandlerGtkWindow<Gtk.Window, Form, Form.ICallback>, Form.IHandler
+	public class FormHandler : GtkWindow<Gtk.Window, Form, Form.ICallback>, Form.IHandler
 	{
 		public FormHandler(Gtk.Window window)
 		{
@@ -13,6 +13,11 @@ namespace ASEva.UIGtk
 		public FormHandler()
 		{
 			Control = new Gtk.Window(Gtk.WindowType.Toplevel);
+#if GTK2
+			Control.AllowGrow = true;
+#else
+			Control.Resizable = true;
+#endif
 			Control.SetPosition(Gtk.WindowPosition.Center);
 
 			var vbox = new Gtk.VBox();
@@ -21,6 +26,19 @@ namespace ASEva.UIGtk
 			Control.Child = vbox;
 		}
 
+		#if NET40
+		public void Show ()
+		{
+			Control.Child.ShowAll ();
+			if (ShowActivated || !Control.AcceptFocus)
+				Control.Show ();
+			else {
+				Control.AcceptFocus = false;
+				Control.Show ();
+				Control.AcceptFocus = true;
+			}
+		}
+		#else
 		public async void Show()
 		{
 			Control.Child.ShowAll();
@@ -30,10 +48,11 @@ namespace ASEva.UIGtk
 			{
 				Control.AcceptFocus = false;
 				Control.Show();
-				await System.Threading.Tasks.Task.Delay(1); // why???  Only way I can get it to work properly on ubuntu 16.04
+				await Task.Delay(1); // why???  Only way I can get it to work properly on ubuntu 16.04
 				Control.AcceptFocus = CanFocus; // in case user changes it right after this call, but should be true
 			}
 		}
+		#endif
 
 		static object ShowActivated_Key = new object();
 
@@ -49,18 +68,6 @@ namespace ASEva.UIGtk
 		{
 			get { return Widget.Properties.Get<bool>(CanFocus_Key, true); }
 			set { Widget.Properties.Set(CanFocus_Key, value, () => Control.AcceptFocus = value, true); }
-		}
-
-		public new bool Resizable
-		{
-			get
-			{
-				return Control.Resizable;
-			}
-			set
-			{
-				Control.Resizable = value;
-			}
 		}
 	}
 }

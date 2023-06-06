@@ -1,39 +1,17 @@
 ﻿using System;
-using ASEva.UIGtk;
 using Eto.Forms;
 using Eto.Drawing;
-using Eto.GtkSharp;
-using Eto.GtkSharp.Forms;
 
-namespace ASEva.UIGtk
+namespace Eto.GtkSharp.Forms.Controls
 {
-	class ColorPickerHandler : GtkControl<Gtk.Button, ColorPicker, ColorPicker.ICallback>, ColorPicker.IHandler
+	public class ColorPickerHandler : GtkControl<Gtk.ColorButton, ColorPicker, ColorPicker.ICallback>, ColorPicker.IHandler
 	{
 		public ColorPickerHandler()
 		{
-			Control = new Gtk.Button();
-			Control.Child = new Gtk.Label { WidthRequest = 30 };
-			Control.Clicked += button_Clicked;
+			Control = new Gtk.ColorButton();
 		}
 
-		public event EventHandler ColorSet;
-
-        private void button_Clicked(object sender, EventArgs e)
-        {
-            var dialog = new Gtk.ColorChooserDialog("", DialogHelper.TopWindow);
-			dialog.UseAlpha = AllowAlpha;
-			dialog.Rgba = (Control.Child as Gtk.Label).GetBackground().ToRGBA();
-			int res = dialog.Run();
-			var color = dialog.Rgba.ToEto();
-			dialog.Dispose();
-			if (res == (int)Gtk.ResponseType.Ok)
-			{
-				(Control.Child as Gtk.Label).SetBackground(color);
-				if (ColorSet != null) ColorSet(this, null);
-			}
-        }
-
-        protected new ColorPickerConnector Connector { get { return (ColorPickerConnector)base.Connector; } }
+		protected new ColorPickerConnector Connector { get { return (ColorPickerConnector)base.Connector; } }
 
 		protected override WeakConnector CreateConnector()
 		{
@@ -45,7 +23,7 @@ namespace ASEva.UIGtk
 			switch (id)
 			{
 				case ColorPicker.ColorChangedEvent:
-					this.ColorSet += Connector.HandleSelectedColorChanged;
+					Control.ColorSet += Connector.HandleSelectedColorChanged;
 					break;
 				default:
 					base.AttachEvent(id);
@@ -62,14 +40,27 @@ namespace ASEva.UIGtk
 				Handler.Callback.OnColorChanged(Handler.Widget, EventArgs.Empty);
 			}
 		}
-
+#if GTK3
 		public Eto.Drawing.Color Color
 		{
-			get { return (Control.Child as Gtk.Label).GetBackground(); }
-			set { (Control.Child as Gtk.Label).SetBackground(value); }
+			get { return Control.Rgba.ToEto(); }
+			set { Control.Rgba = value.ToRGBA(); }
 		}
-
-		public bool AllowAlpha { get; set; }
+#else
+		public Eto.Drawing.Color Color
+		{
+			get { return Control.Color.ToEto(Control.Alpha); }
+			set {
+				Control.Color = value.ToGdk();
+				Control.Alpha = (ushort)(value.A * ushort.MaxValue);
+			}
+		}
+#endif
+		public bool AllowAlpha
+		{
+			get { return Control.UseAlpha; }
+			set { Control.UseAlpha = value; }
+		}
 
 		public bool SupportsAllowAlpha => true;
 	}

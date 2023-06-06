@@ -1,17 +1,14 @@
 using System;
 using Eto.Forms;
 using Eto.Drawing;
-using Eto.GtkSharp;
-using Eto.GtkSharp.Forms;
-using Eto.GtkSharp.Forms.Controls;
 
-namespace ASEva.UIGtk
+namespace Eto.GtkSharp.Forms.Controls
 {
-	class DateTimePickerHandler : GtkControl<DateComboBox, DateTimePicker, DateTimePicker.ICallback>, DateTimePicker.IHandler
+	public class DateTimePickerHandler : GtkControl<CustomControls.DateComboBox, DateTimePicker, DateTimePicker.ICallback>, DateTimePicker.IHandler
 	{
 		public DateTimePickerHandler()
 		{
-			Control = new DateComboBox();
+			Control = new CustomControls.DateComboBox();
 			this.Mode = DateTimePickerMode.Date;
 		}
 

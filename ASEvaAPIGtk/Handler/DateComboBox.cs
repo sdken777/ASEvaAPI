@@ -4,12 +4,11 @@ using Eto.Forms;
 using Eto.Drawing;
 
 using System.Globalization;
-using Eto.GtkSharp;
-using Eto.GtkSharp.CustomControls;
+using Eto.GtkSharp.Forms;
 
-namespace ASEva.UIGtk
+namespace Eto.GtkSharp.CustomControls
 {
-	class DateComboBox : BaseComboBox
+	public class DateComboBox : BaseComboBox
 	{
 		DateTime? selectedDate;
 		private DateComboBoxDialog dlg;
@@ -106,8 +105,10 @@ namespace ASEva.UIGtk
 				}
 				else			
 				{
+#if GTKCORE
 					// move the focus to the Entry control so we can detect it moving away..
 					Entry.GrabFocusWithoutSelecting();
+#endif
 					dlg = new DateComboBoxDialog(selectedDate ?? DateTime.Now, this.Mode);
 					dlg.DateChanged += Dlg_DateChanged;
 					dlg.DialogClosed += Dlg_DialogClosed;
@@ -154,8 +155,7 @@ namespace ASEva.UIGtk
 		private void Entry_FocusOutEvent(object o, Gtk.FocusOutEventArgs args)
 		{
 			// if the pull-down is are up, close it
-			var uiBackend = ASEva.UIEto.App.GetUIBackend();
-			if (uiBackend != null && uiBackend != "wayland") dlg?.CloseDialog();
+			dlg?.CloseDialog();
 		}
 
 		void HandleChanged(object sender, EventArgs e)

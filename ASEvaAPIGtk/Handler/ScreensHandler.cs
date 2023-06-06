@@ -1,16 +1,15 @@
-using System;
-using System.Collections.Generic;
 using Eto.Forms;
-using Eto.GtkSharp.Forms;
+using System.Collections.Generic;
 
-namespace ASEva.UIGtk
+namespace Eto.GtkSharp.Forms
 {
-	#pragma warning disable CS0612
 	public class ScreensHandler : Screen.IScreensHandler
 	{
 		public void Initialize ()
 		{
 		}
+
+		public Widget Widget { get; set; }
 
 		public Eto.Platform Platform { get; set; }
 
@@ -18,18 +17,23 @@ namespace ASEva.UIGtk
 		{
 			get
 			{
-				var list = new List<Screen>();
-				try
+#if GTKCORE
+				var display = Gdk.Display.Default;
+				for (int i = 0; i < display.NMonitors; i++)
 				{
-					var display = Gdk.Display.Default;
-					for (int i = 0; i < display.NMonitors; i++)
-					{
-						var monitor = display.GetMonitor(i);
-						list.Add(new Screen(new ScreenHandler(monitor)));
+					var monitor = display.GetMonitor(i);
+					yield return new Screen(new ScreenHandler(monitor));
+				}
+
+#else
+				var display = Gdk.Display.Default;
+				for (int i = 0; i < display.NScreens; i++) {
+					var screen = display.GetScreen (i);
+					for (int monitor = 0; monitor < screen.NMonitors; monitor++) {
+						yield return new Screen (new ScreenHandler (screen, monitor));
 					}
 				}
-				catch (Exception) {}
-				return list;
+#endif
 			}
 		}
 
@@ -37,17 +41,13 @@ namespace ASEva.UIGtk
 		{
 			get
 			{
-				try
-				{
-					var monitor = Gdk.Display.Default.PrimaryMonitor;
-					if (monitor == null) monitor = Gdk.Display.Default.GetMonitor(0);
-					return new Screen(new ScreenHandler(monitor));
-				}
-				catch (Exception) { return null; }
+#if GTKCORE
+				return new Screen(new ScreenHandler(Gdk.Display.Default.PrimaryMonitor));
+#else
+				return new Screen(new ScreenHandler(Gdk.Display.Default.DefaultScreen, 0));
+#endif
 			}
 		}
-
-		public static bool LegacyMode { get; private set; } // 已弃用
 	}
 }
 

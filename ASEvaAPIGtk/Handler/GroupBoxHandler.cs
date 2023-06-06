@@ -1,33 +1,27 @@
 using Eto.Forms;
 using Eto.Drawing;
-using Eto.GtkSharp;
-using Eto.GtkSharp.Forms;
 
-namespace ASEva.UIGtk
+namespace Eto.GtkSharp.Forms.Controls
 {
-	class GroupBoxHandler : GtkPanel<Gtk.Frame, GroupBox, GroupBox.ICallback>, GroupBox.IHandler
+	public class GroupBoxHandler : GtkPanel<Gtk.Frame, GroupBox, GroupBox.ICallback>, GroupBox.IHandler
 	{
 		public GroupBoxHandler ()
 		{
 			Control = new Gtk.Frame ();
-			Control.LabelXalign = 0.5f;
 		}
 
 		protected override Gtk.Widget FontControl => Control.LabelWidget ?? new Gtk.Label();
 
 		public override string Text {
-			get { return textValue; }
+			get { return Control.Label; }
 			set
 			{
-				textValue = value;
-				var needsFont = Control.LabelWidget == null && Font != null;
-				Control.Label = " " + textValue + " ";
+				var needsFont = Control.LabelWidget == null && Widget.Properties.ContainsKey(GtkControl.Font_Key);
+				Control.Label = value;
 				if (needsFont)
 					Control.LabelWidget?.SetFont(Font.ToPango());
 			}
 		}
-
-		private string textValue = "";
 
 		public override Size ClientSize {
 			get {
@@ -53,6 +47,12 @@ namespace ASEva.UIGtk
 		protected override void SetContainerContent(Gtk.Widget content)
 		{
 			Control.Add(content);
+
+			/*if (clientSize != null) {
+				var label = Control.LabelWidget;
+				Control.SetSizeRequest(clientSize.Value.Width + 10, clientSize.Value.Height + label.Allocation.Height + 10);
+				clientSize = null;
+			}*/
 		}
 
 		public Color TextColor

@@ -4,13 +4,9 @@ using System.Linq;
 using System.Collections.Generic;
 using Eto.GtkSharp.Forms.Cells;
 using Eto.GtkSharp.Forms.Menu;
-using Eto.GtkSharp.Forms.Controls;
-using Eto.GtkSharp.Forms;
-using Eto.GtkSharp;
 using Eto.Drawing;
-using Eto;
 
-namespace ASEva.UIGtk
+namespace Eto.GtkSharp.Forms.Controls
 {
 	class GridHandler
 	{
@@ -44,28 +40,12 @@ namespace ASEva.UIGtk
 			{
 				ShadowType = Gtk.ShadowType.In
 			};
-			Control.Vadjustment.ValueChanged += Vadjustment_ValueChanged;
 		}
-
-        private double? updateModelVAajustmentValue = null;
-		private void Vadjustment_ValueChanged(object sender, EventArgs e)
-        {
-            if (updateModelVAajustmentValue == null) return;
-			if (updateModelVAajustmentValue.Value == Control.Vadjustment.Value) return;
-
-			Control.Vadjustment.ValueChanged -= Vadjustment_ValueChanged;
-			Control.Vadjustment.Value = updateModelVAajustmentValue.Value;
-			Control.Vadjustment.ValueChanged += Vadjustment_ValueChanged;
-
-			updateModelVAajustmentValue = null;
-        }
 
 		protected abstract ITreeModelImplementor CreateModelImplementor();
 
 		protected void UpdateModel()
 		{
-			updateModelVAajustmentValue = Control.Vadjustment.Value;
-
 			SkipSelectedChange = true;
 			var selected = SelectedRows;
 			Tree.Model = new Gtk.TreeModelAdapter(CreateModelImplementor());
@@ -566,7 +546,11 @@ namespace ASEva.UIGtk
 				Gtk.TreeViewColumn focus_column;
 				Tree.GetCursor(out path, out focus_column);
 
+#if GTK2
+				var cells = focus_column?.CellRenderers;
+#elif GTK3
 				var cells = focus_column?.Cells;
+#endif
 				return cells?.OfType<IEtoCellRenderer>().Any(r => r.Editing) ?? false;
 			}
 		}

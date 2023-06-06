@@ -3,24 +3,24 @@ using Eto.Forms;
 using Eto.Drawing;
 using System.Globalization;
 using System.ComponentModel;
-using System.Text.RegularExpressions;
 using Gtk;
-using Eto.GtkSharp;
-using Eto.GtkSharp.Forms;
+using System.Text.RegularExpressions;
 
-namespace ASEva.UIGtk
+namespace Eto.GtkSharp.Forms.Controls
 {
-	class NumericStepperHandler : GtkControl<Gtk.SpinButton, NumericStepper, NumericStepper.ICallback>, NumericStepper.IHandler
+	public class NumericStepperHandler : GtkControl<Gtk.SpinButton, NumericStepper, NumericStepper.ICallback>, NumericStepper.IHandler
 	{
 		public NumericStepperHandler()
 		{
 			Control = new Gtk.SpinButton(double.MinValue, double.MaxValue, 1);
-			Control.WidthChars = -1;
+			Control.WidthChars = 5; // default to show 5 characters
 			Value = 0;
 		}
 
 		protected override void SetSize(Size size)
 		{
+			// if a width is set, we allow it to shrink as small as possible..
+			Control.WidthChars = size.Width > 0 ? 0 : 5;
 			base.SetSize(size);
 		}
 
@@ -64,7 +64,7 @@ namespace ASEva.UIGtk
 
 			bool NumberStringsMatch(string num1, string num2) => string.Compare(TrimNumericString(num1), TrimNumericString(num2), Handler.CultureInfo, CompareOptions.IgnoreCase) == 0;
 
-			// [GLib.ConnectBefore]
+			[GLib.ConnectBefore]
 			public void HandleInput(object o, InputArgs args)
 			{
 				var h = Handler;
@@ -89,7 +89,7 @@ namespace ASEva.UIGtk
 				args.RetVal = 0;
 			}
 
-			// [GLib.ConnectBefore]
+			[GLib.ConnectBefore]
 			public void HandleOutput(object o, OutputArgs args)
 			{
 				var h = Handler;

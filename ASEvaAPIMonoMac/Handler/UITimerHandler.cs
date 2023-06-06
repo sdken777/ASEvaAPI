@@ -1,17 +1,31 @@
 using System;
 using Eto.Forms;
+#if IOS
+using Foundation;
+#else
+#if XAMMAC2
+using AppKit;
+using Foundation;
+using CoreGraphics;
+using ObjCRuntime;
+using CoreAnimation;
+#else
 using MonoMac.AppKit;
 using MonoMac.Foundation;
 using MonoMac.CoreGraphics;
 using MonoMac.ObjCRuntime;
 using MonoMac.CoreAnimation;
-using Eto;
-using Eto.Mac;
-using Eto.Mac.Forms;
+#endif
+#endif
 
-namespace ASEva.UIMonoMac
+#if IOS
+namespace Eto.iOS.Forms
+
+#elif OSX
+namespace Eto.Mac.Forms
+#endif
 {
-	class UITimerHandler : WidgetHandler<NSTimer, UITimer, UITimer.ICallback>, UITimer.IHandler
+	public class UITimerHandler : WidgetHandler<NSTimer, UITimer, UITimer.ICallback>, UITimer.IHandler
 	{
 		double interval = 1f;
 		
@@ -20,7 +34,11 @@ namespace ASEva.UIMonoMac
 			WeakReference handler;
 			public UITimerHandler Handler { get { return (UITimerHandler)handler.Target; } set { handler = new WeakReference(value); } }
 
+			#if XAMMAC2 || IOS
+			public void Elapsed(NSTimer timer)
+			#else
 			public void Elapsed()
+			#endif
 			{
 				var h = Handler;
 				if (h != null)
@@ -39,8 +57,6 @@ namespace ASEva.UIMonoMac
 		{
 			Stop();
 			NSRunLoop.Current.AddTimer(Control, NSRunLoopMode.Default);
-			NSRunLoop.Current.AddTimer(Control, NSRunLoopMode.ModalPanel);
-			NSRunLoop.Current.AddTimer(Control, NSRunLoopMode.EventTracking);
 		}
 
 		public void Stop ()

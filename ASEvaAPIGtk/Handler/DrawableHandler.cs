@@ -1,13 +1,11 @@
-using System;
 using Eto.Drawing;
 using Eto.Forms;
-using Eto.GtkSharp;
 using Eto.GtkSharp.Drawing;
-using Eto.GtkSharp.Forms;
+using System;
 
-namespace ASEva.UIGtk
+namespace Eto.GtkSharp.Forms.Controls
 {
-	class DrawableHandler : GtkPanel<Gtk.EventBox, Drawable, Drawable.ICallback>, Drawable.IHandler
+	public class DrawableHandler : GtkPanel<Gtk.EventBox, Drawable, Drawable.ICallback>, Drawable.IHandler
 	{
 		Gtk.VBox content;
 
@@ -31,7 +29,11 @@ namespace ASEva.UIGtk
 		protected override void Initialize()
 		{
 			base.Initialize();
+#if GTK2
+			Control.ExposeEvent += Connector.HandleExpose;
+#else
 			Control.Drawn += Connector.HandleDrawn;
+#endif
 			Control.ButtonPressEvent += Connector.HandleDrawableButtonPressEvent;
 		}
 
@@ -63,7 +65,21 @@ namespace ASEva.UIGtk
 					Handler.Control.GrabFocus();
 			}
 
-			// [GLib.ConnectBefore]
+#if GTK2
+			public void HandleExpose(object o, Gtk.ExposeEventArgs args)
+			{
+				var h = Handler;
+				if (h == null) // can happen if expose event happens after window is closed
+					return;
+				Gdk.EventExpose ev = args.Event;
+				using (var graphics = new Graphics(new GraphicsHandler(h.Control, ev.Window)))
+				{
+					Rectangle rect = ev.Region.Clipbox.ToEto();
+					h.Callback.OnPaint(h.Widget, new PaintEventArgs(graphics, rect));
+				}
+			}
+#else
+			[GLib.ConnectBefore]
 			public void HandleDrawn(object o, Gtk.DrawnArgs args)
 			{
 				var h = Handler;
@@ -83,6 +99,7 @@ namespace ASEva.UIGtk
 					h.Callback.OnPaint(h.Widget, new PaintEventArgs(graphics, rect.ToEto()));
 				}
 			}
+#endif
 		}
 
 		public void Update(Rectangle rect)
@@ -103,11 +120,13 @@ namespace ASEva.UIGtk
 			this.content.Add(content);
 		}
 
+#if GTK3
 		protected override void SetBackgroundColor(Color? color)
 		{
 			// we handle this ourselves
 			//base.SetBackgroundColor(color);
 			Invalidate(false);
 		}
+#endif
 	}
 }

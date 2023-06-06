@@ -5,20 +5,18 @@ using swf = System.Windows.Forms;
 using sd = System.Drawing;
 using Eto.Forms;
 using Eto.Drawing;
-using Eto.WinForms.Forms.Controls;
 
-namespace ASEva.UICoreWF
+namespace Eto.WinForms.Forms.Controls
 {
-	class ComboBoxHandler : DropDownHandler<EtoComboBox, ComboBox, ComboBox.ICallback>, ComboBox.IHandler
+	public class ComboBoxHandler : DropDownHandler<EtoComboBox, ComboBox, ComboBox.ICallback>, ComboBox.IHandler
 	{
 		bool readOnly;
 		int suppressTextChanged;
 
 		public ComboBoxHandler()
 		{
-			Control.DropDownStyle = swf.ComboBoxStyle.DropDownList;
-			var dpiRatio = (float)Control.DeviceDpi / 96;
-			Control.MinSize = new sd.Size(100, (int)Math.Ceiling(10 + 14 * dpiRatio));
+			Control.DropDownStyle = swf.ComboBoxStyle.DropDown;
+			Control.MinSize = new sd.Size(100, 0);
 			Control.TextChanged += ControlOnTextChanged;
 		}
 

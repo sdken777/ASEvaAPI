@@ -3,15 +3,67 @@ using System.ComponentModel;
 using System.Linq;
 using Eto.Drawing;
 using Eto.Forms;
-using Eto.GtkSharp;
 using Eto.GtkSharp.Drawing;
 using Eto.GtkSharp.Forms;
 using Eto.GtkSharp.Forms.Menu;
 
-namespace ASEva.UIGtk
+namespace Eto.GtkSharp.Forms
 {
+	public interface IGtkWindow
+	{
+		bool CloseWindow(Action<CancelEventArgs> closing = null);
 
-	public class WindowHandlerGtkWindow<TControl, TWidget, TCallback> : GtkPanel<TControl, TWidget, TCallback>, Window.IHandler, IGtkWindow
+		Gtk.Window Control { get; }
+	}
+
+	public class GtkShrinkableVBox : Gtk.VBox
+	{
+		public bool Resizable;
+
+		public GtkShrinkableVBox()
+		{
+		}
+
+		public GtkShrinkableVBox(Gtk.Widget child)
+		{
+			if (child != null)
+				PackStart(child, true, true, 0);
+		}
+
+#if GTK3
+		protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
+		{
+			base.OnGetPreferredWidth(out minimum_width, out natural_width);
+
+			if (Resizable)
+				minimum_width = 0;
+		}
+
+		protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
+		{
+			base.OnGetPreferredHeight(out minimum_height, out natural_height);
+
+			if (Resizable)
+				minimum_height = 0;
+		}
+
+#if GTKCORE
+		protected override void OnGetPreferredHeightAndBaselineForWidth(int width, out int minimum_height, out int natural_height, out int minimum_baseline, out int natural_baseline)
+		{
+			base.OnGetPreferredHeightAndBaselineForWidth(width, out minimum_height, out natural_height, out minimum_baseline, out natural_baseline);
+			if (Resizable)
+				minimum_height = 0;
+		}
+#endif
+#endif
+	}
+
+	static class GtkWindow
+	{
+		internal static readonly object MovableByWindowBackground_Key = new object();
+	}
+
+	public abstract class GtkWindow<TControl, TWidget, TCallback> : GtkPanel<TControl, TWidget, TCallback>, Window.IHandler, IGtkWindow
 		where TControl: Gtk.Window
 		where TWidget: Window
 		where TCallback: Window.ICallback
@@ -35,7 +87,7 @@ namespace ASEva.UIGtk
 		bool resizable;
 		Size? clientSize;
 
-		protected WindowHandlerGtkWindow()
+		protected GtkWindow()
 		{
 			resizable = true;
 
@@ -313,19 +365,16 @@ namespace ASEva.UIGtk
 
 			public WindowState OldState { get; set; }
 
-			public new WindowHandlerGtkWindow<TControl, TWidget, TCallback> Handler { get { return (WindowHandlerGtkWindow<TControl, TWidget, TCallback>)base.Handler; } }
+			public new GtkWindow<TControl, TWidget, TCallback> Handler { get { return (GtkWindow<TControl, TWidget, TCallback>)base.Handler; } }
 
 			public void HandleDeleteEvent(object o, Gtk.DeleteEventArgs args)
 			{
-				var handler = Handler;
-				if (handler == null)
-					return;
-				args.RetVal = !handler.CloseWindow();
+				args.RetVal = !Handler.CloseWindow();
 			}
 
 			public void HandleShownEvent(object sender, EventArgs e)
 			{
-				Handler?.Callback.OnShown(Handler.Widget, EventArgs.Empty);
+				Handler.Callback.OnShown(Handler.Widget, EventArgs.Empty);
 			}
 
 			public void HandleWindowStateEvent(object o, Gtk.WindowStateEventArgs args)
@@ -360,13 +409,10 @@ namespace ASEva.UIGtk
 			// do not connect before, otherwise it is sent before sending to child
 			public void HandleWindowKeyPressEvent(object o, Gtk.KeyPressEventArgs args)
 			{
-				var handler = Handler;
-				if (handler == null)
-					return;
 				var e = args.Event.ToEto();
 				if (e != null)
 				{
-					handler.Callback.OnKeyDown(handler.Widget, e);
+					Handler.Callback.OnKeyDown(Handler.Widget, e);
 					args.RetVal = e.Handled;
 				}
 			}
@@ -374,9 +420,7 @@ namespace ASEva.UIGtk
 			public void HandleWindowSizeAllocated(object o, Gtk.SizeAllocatedArgs args)
 			{
 				var handler = Handler;
-				if (handler == null)
-					return;
-				var newSize = handler.Control.Allocation.Size.ToEto();
+				var newSize = handler.Size;
 				if (handler.Control.IsRealized && oldSize != newSize)
 				{
 					handler.Callback.OnSizeChanged(Handler.Widget, EventArgs.Empty);
@@ -409,13 +453,11 @@ namespace ASEva.UIGtk
 
 			internal void ButtonPressEvent_Movable(object o, Gtk.ButtonPressEventArgs args)
 			{
-				var handler = Handler;
-				if (handler == null)
-					return;
+				var h = Handler;
 				var evt = args.Event;
-				if (handler != null && evt.Type == Gdk.EventType.ButtonPress && evt.Button == 1)
+				if (h != null && evt.Type == Gdk.EventType.ButtonPress && evt.Button == 1)
 				{
-					handler.Control.BeginMoveDrag((int)evt.Button, (int)evt.XRoot, (int)evt.YRoot, evt.Time);
+					h.Control.BeginMoveDrag((int)evt.Button, (int)evt.XRoot, (int)evt.YRoot, evt.Time);
 				}
 			}
 		}
@@ -499,6 +541,9 @@ namespace ASEva.UIGtk
 		{
 			if (disposing)
 			{
+#if !GTKCORE
+				Control.Destroy();
+#endif
 				if (menuBox != null)
 				{
 					menuBox.Dispose();
@@ -638,8 +683,13 @@ namespace ASEva.UIGtk
 				var gdkWindow = Control.GetWindow();
 				if (screen != null && gdkWindow != null)
 				{
+#if GTKCORE
 					var monitor = screen.Display.GetMonitorAtWindow(gdkWindow);
 					return new Screen(new ScreenHandler(monitor));
+#else
+					var monitor = screen.GetMonitorAtWindow(gdkWindow);
+					return new Screen(new ScreenHandler(screen, monitor));
+#endif
 				}
 				return null;
 			}
@@ -676,6 +726,7 @@ namespace ASEva.UIGtk
 		{
 			get
 			{
+#if GTKCORE
 				var screen = Control.Screen;
 				var gdkWindow = Control.GetWindow();
 				if (screen != null && gdkWindow != null)
@@ -683,13 +734,9 @@ namespace ASEva.UIGtk
 					var monitor = screen.Display.GetMonitorAtWindow(gdkWindow);
 					return monitor?.ScaleFactor ?? 1f;
 				}
+#endif
 				return 1f;
 			}
 		}
-	}
-
-	static class GtkWindow
-	{
-		internal static readonly object MovableByWindowBackground_Key = new object();
 	}
 }

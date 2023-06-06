@@ -1,21 +1,19 @@
 using System;
 using System.Threading.Tasks;
 using Eto.Forms;
-using Eto.GtkSharp.Forms;
 
-namespace ASEva.UIGtk
+namespace Eto.GtkSharp.Forms
 {
-	#pragma warning disable 612
-	class DialogHandler : WindowHandlerGtkWindow<Gtk.Dialog, Dialog, Dialog.ICallback>, Dialog.IHandler
+	public class DialogHandler : GtkWindow<Gtk.Dialog, Dialog, Dialog.ICallback>, Dialog.IHandler
 	{
 		Gtk.Container btcontainer;
 		Button defaultButton;
 
-		private bool UseHeaderBar = true;
-
 		public DialogHandler()
 		{
 			Control = new Gtk.Dialog("", null, Gtk.DialogFlags.DestroyWithParent);
+
+			Resizable = false;
 		}
 
 		protected override void Initialize()
@@ -23,13 +21,20 @@ namespace ASEva.UIGtk
 			base.Initialize();
 			Control.KeyPressEvent += Connector.Control_KeyPressEvent;
 
+#if GTK2
+			Control.VBox.PackStart(WindowActionControl, false, true, 0);
+			Control.VBox.PackStart(WindowContentControl, true, true, 0);
+
+			btcontainer = Control.ActionArea;
+#else
 			Control.ContentArea.PackStart(WindowActionControl, false, true, 0);
 			Control.ContentArea.PackStart(WindowContentControl, true, true, 0);
 
 			Control.ActionArea.NoShowAll = true;
 			Control.ActionArea.Hide();
 
-			if (UseHeaderBar)
+#if GTKCORE
+			if (Helper.UseHeaderBar)
 			{
 				btcontainer = new Gtk.HeaderBar();
 
@@ -38,7 +43,9 @@ namespace ASEva.UIGtk
 				Control.Title = title;
 			}
 			else
+#endif
 				btcontainer = Control.ActionArea;
+#endif
 		}
 
 		public Button AbortButton { get; set; }
@@ -51,17 +58,25 @@ namespace ASEva.UIGtk
 			}
 			set
 			{
+#if GTK3
 				defaultButton?.ToNative().StyleContext.RemoveClass("suggested-action");
+#endif
 				defaultButton = value;
 
 				if (value != null)
 				{
+#if GTK3
 					value.ToNative().StyleContext.AddClass("suggested-action");
+#endif
 					var widget = DefaultButton.GetContainerWidget();
 
 					if (widget != null)
 					{
+#if GTK2
+						widget.SetFlag(Gtk.WidgetFlags.CanDefault);
+#else
 						widget.CanDefault = true;
+#endif
 						Control.Default = widget;
 					}
 				}
@@ -69,18 +84,6 @@ namespace ASEva.UIGtk
 		}
 
 		public DialogDisplayMode DisplayMode { get; set; }
-
-		public new bool Resizable
-		{
-			get
-			{
-				return Control.Resizable;
-			}
-			set
-			{
-				Control.Resizable = value;
-			}
-		}
 
 		public void ShowModal()
 		{
@@ -115,7 +118,7 @@ namespace ASEva.UIGtk
 
 			if (negativeButtons.Count + positiveButtons.Count > 0)
 			{
-				if (!UseHeaderBar)
+				if (!Helper.UseHeaderBar)
 				{
 					Control.ActionArea.NoShowAll = false;
 
@@ -125,6 +128,7 @@ namespace ASEva.UIGtk
 					foreach (var button in positiveButtons)
 						Control.ActionArea.PackStart(button.ToNative(), false, true, 1);
 				}
+#if GTKCORE
 				else
 				{
 					for (int i = positiveButtons.Count - 1; i >= 0; i--)
@@ -136,19 +140,22 @@ namespace ASEva.UIGtk
 
 				if (btcontainer is Gtk.HeaderBar)
 					(btcontainer as Gtk.HeaderBar).ShowCloseButton = false;
+#endif
 
 				btcontainer.ShowAll();
 			}
 			else
 			{
 				Control.ActionArea.NoShowAll = true;
-				if (!UseHeaderBar)
+				if (!Helper.UseHeaderBar)
 					btcontainer.Hide();
+#if GTKCORE
 				else
 				{
 					if (btcontainer is Gtk.HeaderBar)
 						(btcontainer as Gtk.HeaderBar).ShowCloseButton = true;
 				}
+#endif
 			}
 		}
 
@@ -197,7 +204,7 @@ namespace ASEva.UIGtk
 			}
 		}
 
-		public System.Threading.Tasks.Task ShowModalAsync()
+		public Task ShowModalAsync()
 		{
 			var tcs = new TaskCompletionSource<bool>();
 			Application.Instance.AsyncInvoke(() =>
