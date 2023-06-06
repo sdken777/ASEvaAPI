@@ -1,11 +1,12 @@
 using Eto.Drawing;
 using Eto.Forms;
+using Eto.GtkSharp;
 using Eto.GtkSharp.Drawing;
-using System;
+using Eto.GtkSharp.Forms;
 
-namespace Eto.GtkSharp.Forms.Controls
+namespace ASEva.UIGtk
 {
-	public class DrawableHandler : GtkPanel<Gtk.EventBox, Drawable, Drawable.ICallback>, Drawable.IHandler
+	class DrawableHandler : GtkPanel<Gtk.EventBox, Drawable, Drawable.ICallback>, Drawable.IHandler
 	{
 		Gtk.VBox content;
 
@@ -79,7 +80,7 @@ namespace Eto.GtkSharp.Forms.Controls
 				}
 			}
 #else
-			[GLib.ConnectBefore]
+			// [GLib.ConnectBefore]
 			public void HandleDrawn(object o, Gtk.DrawnArgs args)
 			{
 				var h = Handler;

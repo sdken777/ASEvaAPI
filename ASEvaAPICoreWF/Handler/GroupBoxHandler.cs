@@ -2,11 +2,11 @@ using sd = System.Drawing;
 using swf = System.Windows.Forms;
 using Eto.Forms;
 using Eto.Drawing;
-using System;
+using Eto.WinForms.Forms;
 
-namespace Eto.WinForms.Forms.Controls
+namespace ASEva.UICoreWF
 {
-	public class GroupBoxHandler : WindowsPanel<GroupBoxHandler.EtoGroupBox, GroupBox, GroupBox.ICallback>, GroupBox.IHandler
+	class GroupBoxHandler : WindowsPanel<GroupBoxHandler.EtoGroupBox, GroupBox, GroupBox.ICallback>, GroupBox.IHandler
 	{
 		readonly swf.Panel content;
 
@@ -27,7 +27,7 @@ namespace Eto.WinForms.Forms.Controls
 			};
 			content = new swf.Panel
 			{
-				Font = sd.SystemFonts.DefaultFont,
+				Font = null,
 				Dock = swf.DockStyle.Fill,
 				ForeColor = sd.SystemColors.ControlText,
 				AutoSize = true,
@@ -38,7 +38,11 @@ namespace Eto.WinForms.Forms.Controls
 
 		protected override Size ContentPadding
 		{
-			get { return Control.GetBorderSize().ToEto() + base.ContentPadding; }
+			get
+			{
+				var borderSize = Control.GetBorderSize();
+				return new Size(borderSize.Width, borderSize.Height) + base.ContentPadding;
+			}
 		}
 
 		public override swf.Control ContainerContentControl

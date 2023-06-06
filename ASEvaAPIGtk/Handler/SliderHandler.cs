@@ -1,13 +1,15 @@
 using System;
 using Eto.Forms;
+using Eto.GtkSharp.Forms;
 
-namespace Eto.GtkSharp.Forms.Controls
+namespace ASEva.UIGtk
 {
-	public class SliderHandler : GtkControl<Gtk.EventBox, Slider, Slider.ICallback>, Slider.IHandler
+	class SliderHandler : GtkControl<Gtk.EventBox, Slider, Slider.ICallback>, Slider.IHandler
 	{
 		int min;
 		int max = 100;
 		int tick = 1;
+		Gtk.Box box;
 		Gtk.Scale scale;
 
 		public SliderHandler()
@@ -15,7 +17,10 @@ namespace Eto.GtkSharp.Forms.Controls
 			this.Control = new Gtk.EventBox();
 			//Control.VisibleWindow = false;
 			scale = new Gtk.HScale(min, max, 1);
-			this.Control.Child = scale;
+			box = new Gtk.Box(Gtk.Orientation.Vertical, 0);
+			box.PackStart(scale, true, true, 0);
+			box.BorderWidth = 3;
+			this.Control.Child = box;
 		}
 
 		protected override void Initialize()
@@ -116,7 +121,7 @@ namespace Eto.GtkSharp.Forms.Controls
 				if (Orientation != value)
 				{
 					scale.ValueChanged -= Connector.HandleScaleValueChanged;
-					Control.Remove(scale);
+					box.Remove(scale);
 #if !GTKCORE
 					scale.Destroy();
 #endif
@@ -126,7 +131,7 @@ namespace Eto.GtkSharp.Forms.Controls
 					else
 						scale = new Gtk.VScale(min, max, 1);
 					scale.ValueChanged += Connector.HandleScaleValueChanged;
-					Control.Child = scale;
+					box.PackStart(scale, true, true, 0);
 					scale.ShowAll();
 				}
 			}

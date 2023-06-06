@@ -1,17 +1,39 @@
 ﻿using System;
+using ASEva.UIGtk;
 using Eto.Forms;
 using Eto.Drawing;
+using Eto.GtkSharp;
+using Eto.GtkSharp.Forms;
 
-namespace Eto.GtkSharp.Forms.Controls
+namespace ASEva.UIGtk
 {
-	public class ColorPickerHandler : GtkControl<Gtk.ColorButton, ColorPicker, ColorPicker.ICallback>, ColorPicker.IHandler
+	class ColorPickerHandler : GtkControl<Gtk.Button, ColorPicker, ColorPicker.ICallback>, ColorPicker.IHandler
 	{
 		public ColorPickerHandler()
 		{
-			Control = new Gtk.ColorButton();
+			Control = new Gtk.Button();
+			Control.Child = new Gtk.Label { WidthRequest = 30 };
+			Control.Clicked += button_Clicked;
 		}
 
-		protected new ColorPickerConnector Connector { get { return (ColorPickerConnector)base.Connector; } }
+		public event EventHandler ColorSet;
+
+        private void button_Clicked(object sender, EventArgs e)
+        {
+            var dialog = new Gtk.ColorChooserDialog("", DialogHelper.TopWindow);
+			dialog.UseAlpha = AllowAlpha;
+			dialog.Rgba = (Control.Child as Gtk.Label).GetBackground().ToRGBA();
+			int res = dialog.Run();
+			var color = dialog.Rgba.ToEto();
+			dialog.Dispose();
+			if (res == (int)Gtk.ResponseType.Ok)
+			{
+				(Control.Child as Gtk.Label).SetBackground(color);
+				if (ColorSet != null) ColorSet(this, null);
+			}
+        }
+
+        protected new ColorPickerConnector Connector { get { return (ColorPickerConnector)base.Connector; } }
 
 		protected override WeakConnector CreateConnector()
 		{
@@ -23,7 +45,7 @@ namespace Eto.GtkSharp.Forms.Controls
 			switch (id)
 			{
 				case ColorPicker.ColorChangedEvent:
-					Control.ColorSet += Connector.HandleSelectedColorChanged;
+					this.ColorSet += Connector.HandleSelectedColorChanged;
 					break;
 				default:
 					base.AttachEvent(id);
@@ -43,8 +65,8 @@ namespace Eto.GtkSharp.Forms.Controls
 #if GTK3
 		public Eto.Drawing.Color Color
 		{
-			get { return Control.Rgba.ToEto(); }
-			set { Control.Rgba = value.ToRGBA(); }
+			get { return (Control.Child as Gtk.Label).GetBackground(); }
+			set { (Control.Child as Gtk.Label).SetBackground(value); }
 		}
 #else
 		public Eto.Drawing.Color Color
@@ -56,11 +78,7 @@ namespace Eto.GtkSharp.Forms.Controls
 			}
 		}
 #endif
-		public bool AllowAlpha
-		{
-			get { return Control.UseAlpha; }
-			set { Control.UseAlpha = value; }
-		}
+		public bool AllowAlpha { get; set; }
 
 		public bool SupportsAllowAlpha => true;
 	}

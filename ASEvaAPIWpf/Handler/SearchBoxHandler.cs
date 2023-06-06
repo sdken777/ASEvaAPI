@@ -1,8 +1,14 @@
-using Eto.Forms;
+﻿using Eto.Forms;
+using Eto.Wpf.Forms.Controls;
 
-namespace Eto.Wpf.Forms.Controls
+namespace ASEva.UIWpf
 {
-	public class SearchBoxHandler : TextBoxHandler, SearchBox.IHandler
+	class SearchBoxHandler : TextBoxHandler, SearchBox.IHandler
 	{
-	}
+        public SearchBoxHandler()
+        {
+            var lang = Agency.GetAppLanguage();
+            PlaceholderText = lang != null && lang == "ch" ? " 搜索" : " Search";
+        }
+    }
 }

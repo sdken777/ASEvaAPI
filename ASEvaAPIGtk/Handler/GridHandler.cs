@@ -4,9 +4,13 @@ using System.Linq;
 using System.Collections.Generic;
 using Eto.GtkSharp.Forms.Cells;
 using Eto.GtkSharp.Forms.Menu;
+using Eto.GtkSharp.Forms.Controls;
+using Eto.GtkSharp.Forms;
+using Eto.GtkSharp;
 using Eto.Drawing;
+using Eto;
 
-namespace Eto.GtkSharp.Forms.Controls
+namespace ASEva.UIGtk
 {
 	class GridHandler
 	{
@@ -40,12 +44,28 @@ namespace Eto.GtkSharp.Forms.Controls
 			{
 				ShadowType = Gtk.ShadowType.In
 			};
+			Control.Vadjustment.ValueChanged += Vadjustment_ValueChanged;
 		}
+
+        private double? updateModelVAajustmentValue = null;
+		private void Vadjustment_ValueChanged(object sender, EventArgs e)
+        {
+            if (updateModelVAajustmentValue == null) return;
+			if (updateModelVAajustmentValue.Value == Control.Vadjustment.Value) return;
+
+			Control.Vadjustment.ValueChanged -= Vadjustment_ValueChanged;
+			Control.Vadjustment.Value = updateModelVAajustmentValue.Value;
+			Control.Vadjustment.ValueChanged += Vadjustment_ValueChanged;
+
+			updateModelVAajustmentValue = null;
+        }
 
 		protected abstract ITreeModelImplementor CreateModelImplementor();
 
 		protected void UpdateModel()
 		{
+			updateModelVAajustmentValue = Control.Vadjustment.Value;
+
 			SkipSelectedChange = true;
 			var selected = SelectedRows;
 			Tree.Model = new Gtk.TreeModelAdapter(CreateModelImplementor());

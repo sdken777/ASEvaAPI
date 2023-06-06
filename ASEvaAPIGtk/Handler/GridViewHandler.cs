@@ -4,10 +4,13 @@ using Eto.GtkSharp.Forms.Cells;
 using System.Collections;
 using System.Linq;
 using Eto.Drawing;
+using Eto;
+using Eto.GtkSharp;
+using Eto.GtkSharp.Forms.Controls;
 
-namespace Eto.GtkSharp.Forms.Controls
+namespace ASEva.UIGtk
 {
-	public class GridViewHandler : GridHandler<GridView, GridView.ICallback>, GridView.IHandler, ICellDataSource, IGtkEnumerableModelHandler<object>
+	class GridViewHandler : GridHandler<GridView, GridView.ICallback>, GridView.IHandler, ICellDataSource, IGtkEnumerableModelHandler<object>
 	{
 		GtkEnumerableModel<object> model;
 		CollectionHandler collection;

@@ -1,57 +1,58 @@
 ﻿using System;
 using Eto.Forms;
 using Eto.Drawing;
-using System.Linq;
+using Eto.GtkSharp.Forms;
 
-namespace Eto.GtkSharp.Forms.Controls
+namespace ASEva.UIGtk
 {
-	public class LinkButtonHandler : GtkControl<Gtk.LinkButton, LinkButton, LinkButton.ICallback>, LinkButton.IHandler
+	class LinkButtonHandler : GtkControl<LinkItem, LinkButton, LinkButton.ICallback>, LinkButton.IHandler
 	{
-
-		Gtk.EventBox box;
-
 		public override Gtk.Widget ContainerControl
 		{
-			get { return box; }
+			get { return Control; }
 		}
 
 		public LinkButtonHandler()
 		{
-			Control = new Gtk.LinkButton(string.Empty);
-			Control.Xalign = 0f;
-			Control.Yalign = .5f;
-			Control.TooltipText = null;
-			box = new Gtk.EventBox();
-			box.Child = Control;
+			Control = new LinkItem();
 		}
 
 		public Color TextColor
 		{
-			get { return Control.GetForeground(); }
+			get
+			{
+				var c = Control.ForeColor;
+				var k = 1.0f / 255;
+				return new Color(k * c.R, k * c.G, k * c.B, k * c.A);
+			}
 			set
 			{
-				Control.SetForeground(value);
-				Control.SetTextColor(value);
-				Control.Child.SetForeground(value);
-				Control.Child.SetTextColor(value);
+				Control.ForeColor = new ColorRGBA((byte)value.Rb, (byte)value.Gb, (byte)value.Bb, (byte)value.Ab);
 			}
 		}
 
 		public Color DisabledTextColor
 		{
-			get { return Control.GetForeground(GtkStateFlags.Insensitive); }
-			set
-			{
-				Control.SetForeground(value, GtkStateFlags.Insensitive);
-				Control.Child.SetForeground(value, GtkStateFlags.Insensitive);
-			}
+			get { return Colors.Gray; }
+			set { }
 		}
 
 		public override string Text
 		{
-			get { return Control.Label; }
-			set { Control.Label = value; }
+			get { return Control.Text; }
+			set { Control.Text = value; }
 		}
+
+		public override Font Font
+		{
+			get { return font; }
+			set
+			{
+				font = value;
+				Control.SetFont(value.ControlObject as Pango.FontDescription);
+			}
+		}
+		private Font font;
 
 		public override void AttachEvent(string id)
 		{

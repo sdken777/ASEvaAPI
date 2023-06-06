@@ -1,15 +1,16 @@
-using Eto.Forms;
+using System;
 using System.Collections.Generic;
+using Eto.Forms;
+using Eto.GtkSharp.Forms;
 
-namespace Eto.GtkSharp.Forms
+namespace ASEva.UIGtk
 {
+	#pragma warning disable CS0612
 	public class ScreensHandler : Screen.IScreensHandler
 	{
 		public void Initialize ()
 		{
 		}
-
-		public Widget Widget { get; set; }
 
 		public Eto.Platform Platform { get; set; }
 
@@ -18,12 +19,18 @@ namespace Eto.GtkSharp.Forms
 			get
 			{
 #if GTKCORE
-				var display = Gdk.Display.Default;
-				for (int i = 0; i < display.NMonitors; i++)
+				var list = new List<Screen>();
+				try
 				{
-					var monitor = display.GetMonitor(i);
-					yield return new Screen(new ScreenHandler(monitor));
+					var display = Gdk.Display.Default;
+					for (int i = 0; i < display.NMonitors; i++)
+					{
+						var monitor = display.GetMonitor(i);
+						list.Add(new Screen(new ScreenHandler(monitor)));
+					}
 				}
+				catch (Exception) {}
+				return list;
 
 #else
 				var display = Gdk.Display.Default;
@@ -42,12 +49,20 @@ namespace Eto.GtkSharp.Forms
 			get
 			{
 #if GTKCORE
-				return new Screen(new ScreenHandler(Gdk.Display.Default.PrimaryMonitor));
+				try
+				{
+					var monitor = Gdk.Display.Default.PrimaryMonitor;
+					if (monitor == null) monitor = Gdk.Display.Default.GetMonitor(0);
+					return new Screen(new ScreenHandler(monitor));
+				}
+				catch (Exception) { return null; }
 #else
 				return new Screen(new ScreenHandler(Gdk.Display.Default.DefaultScreen, 0));
 #endif
 			}
 		}
+
+		public static bool LegacyMode { get; private set; } // 已弃用
 	}
 }
 

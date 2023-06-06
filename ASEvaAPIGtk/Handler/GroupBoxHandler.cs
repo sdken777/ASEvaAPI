@@ -1,27 +1,33 @@
 using Eto.Forms;
 using Eto.Drawing;
+using Eto.GtkSharp;
+using Eto.GtkSharp.Forms;
 
-namespace Eto.GtkSharp.Forms.Controls
+namespace ASEva.UIGtk
 {
-	public class GroupBoxHandler : GtkPanel<Gtk.Frame, GroupBox, GroupBox.ICallback>, GroupBox.IHandler
+	class GroupBoxHandler : GtkPanel<Gtk.Frame, GroupBox, GroupBox.ICallback>, GroupBox.IHandler
 	{
 		public GroupBoxHandler ()
 		{
 			Control = new Gtk.Frame ();
+			Control.LabelXalign = 0.5f;
 		}
 
 		protected override Gtk.Widget FontControl => Control.LabelWidget ?? new Gtk.Label();
 
 		public override string Text {
-			get { return Control.Label; }
+			get { return textValue; }
 			set
 			{
-				var needsFont = Control.LabelWidget == null && Widget.Properties.ContainsKey(GtkControl.Font_Key);
-				Control.Label = value;
+				textValue = value;
+				var needsFont = Control.LabelWidget == null && Font != null;
+				Control.Label = " " + textValue + " ";
 				if (needsFont)
 					Control.LabelWidget?.SetFont(Font.ToPango());
 			}
 		}
+
+		private string textValue = "";
 
 		public override Size ClientSize {
 			get {

@@ -3,67 +3,15 @@ using System.ComponentModel;
 using System.Linq;
 using Eto.Drawing;
 using Eto.Forms;
+using Eto.GtkSharp;
 using Eto.GtkSharp.Drawing;
 using Eto.GtkSharp.Forms;
 using Eto.GtkSharp.Forms.Menu;
 
-namespace Eto.GtkSharp.Forms
+namespace ASEva.UIGtk
 {
-	public interface IGtkWindow
-	{
-		bool CloseWindow(Action<CancelEventArgs> closing = null);
 
-		Gtk.Window Control { get; }
-	}
-
-	public class GtkShrinkableVBox : Gtk.VBox
-	{
-		public bool Resizable;
-
-		public GtkShrinkableVBox()
-		{
-		}
-
-		public GtkShrinkableVBox(Gtk.Widget child)
-		{
-			if (child != null)
-				PackStart(child, true, true, 0);
-		}
-
-#if GTK3
-		protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
-		{
-			base.OnGetPreferredWidth(out minimum_width, out natural_width);
-
-			if (Resizable)
-				minimum_width = 0;
-		}
-
-		protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
-		{
-			base.OnGetPreferredHeight(out minimum_height, out natural_height);
-
-			if (Resizable)
-				minimum_height = 0;
-		}
-
-#if GTKCORE
-		protected override void OnGetPreferredHeightAndBaselineForWidth(int width, out int minimum_height, out int natural_height, out int minimum_baseline, out int natural_baseline)
-		{
-			base.OnGetPreferredHeightAndBaselineForWidth(width, out minimum_height, out natural_height, out minimum_baseline, out natural_baseline);
-			if (Resizable)
-				minimum_height = 0;
-		}
-#endif
-#endif
-	}
-
-	static class GtkWindow
-	{
-		internal static readonly object MovableByWindowBackground_Key = new object();
-	}
-
-	public abstract class GtkWindow<TControl, TWidget, TCallback> : GtkPanel<TControl, TWidget, TCallback>, Window.IHandler, IGtkWindow
+	class WindowHandlerGtkWindow<TControl, TWidget, TCallback> : GtkPanel<TControl, TWidget, TCallback>, Window.IHandler, IGtkWindow
 		where TControl: Gtk.Window
 		where TWidget: Window
 		where TCallback: Window.ICallback
@@ -87,7 +35,7 @@ namespace Eto.GtkSharp.Forms
 		bool resizable;
 		Size? clientSize;
 
-		protected GtkWindow()
+		protected WindowHandlerGtkWindow()
 		{
 			resizable = true;
 
@@ -365,16 +313,19 @@ namespace Eto.GtkSharp.Forms
 
 			public WindowState OldState { get; set; }
 
-			public new GtkWindow<TControl, TWidget, TCallback> Handler { get { return (GtkWindow<TControl, TWidget, TCallback>)base.Handler; } }
+			public new WindowHandlerGtkWindow<TControl, TWidget, TCallback> Handler { get { return (WindowHandlerGtkWindow<TControl, TWidget, TCallback>)base.Handler; } }
 
 			public void HandleDeleteEvent(object o, Gtk.DeleteEventArgs args)
 			{
-				args.RetVal = !Handler.CloseWindow();
+				var handler = Handler;
+				if (handler == null)
+					return;
+				args.RetVal = !handler.CloseWindow();
 			}
 
 			public void HandleShownEvent(object sender, EventArgs e)
 			{
-				Handler.Callback.OnShown(Handler.Widget, EventArgs.Empty);
+				Handler?.Callback.OnShown(Handler.Widget, EventArgs.Empty);
 			}
 
 			public void HandleWindowStateEvent(object o, Gtk.WindowStateEventArgs args)
@@ -409,10 +360,13 @@ namespace Eto.GtkSharp.Forms
 			// do not connect before, otherwise it is sent before sending to child
 			public void HandleWindowKeyPressEvent(object o, Gtk.KeyPressEventArgs args)
 			{
+				var handler = Handler;
+				if (handler == null)
+					return;
 				var e = args.Event.ToEto();
 				if (e != null)
 				{
-					Handler.Callback.OnKeyDown(Handler.Widget, e);
+					handler.Callback.OnKeyDown(handler.Widget, e);
 					args.RetVal = e.Handled;
 				}
 			}
@@ -420,7 +374,9 @@ namespace Eto.GtkSharp.Forms
 			public void HandleWindowSizeAllocated(object o, Gtk.SizeAllocatedArgs args)
 			{
 				var handler = Handler;
-				var newSize = handler.Size;
+				if (handler == null)
+					return;
+				var newSize = handler.Control.Allocation.Size.ToEto();
 				if (handler.Control.IsRealized && oldSize != newSize)
 				{
 					handler.Callback.OnSizeChanged(Handler.Widget, EventArgs.Empty);
@@ -453,11 +409,13 @@ namespace Eto.GtkSharp.Forms
 
 			internal void ButtonPressEvent_Movable(object o, Gtk.ButtonPressEventArgs args)
 			{
-				var h = Handler;
+				var handler = Handler;
+				if (handler == null)
+					return;
 				var evt = args.Event;
-				if (h != null && evt.Type == Gdk.EventType.ButtonPress && evt.Button == 1)
+				if (handler != null && evt.Type == Gdk.EventType.ButtonPress && evt.Button == 1)
 				{
-					h.Control.BeginMoveDrag((int)evt.Button, (int)evt.XRoot, (int)evt.YRoot, evt.Time);
+					handler.Control.BeginMoveDrag((int)evt.Button, (int)evt.XRoot, (int)evt.YRoot, evt.Time);
 				}
 			}
 		}
@@ -738,5 +696,10 @@ namespace Eto.GtkSharp.Forms
 				return 1f;
 			}
 		}
+	}
+
+	static class GtkWindow
+	{
+		internal static readonly object MovableByWindowBackground_Key = new object();
 	}
 }

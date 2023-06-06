@@ -1,19 +1,21 @@
 using System;
 using System.Threading.Tasks;
 using Eto.Forms;
+using Eto.GtkSharp.Forms;
 
-namespace Eto.GtkSharp.Forms
+namespace ASEva.UIGtk
 {
-	public class DialogHandler : GtkWindow<Gtk.Dialog, Dialog, Dialog.ICallback>, Dialog.IHandler
+	#pragma warning disable 612
+	class DialogHandler : WindowHandlerGtkWindow<Gtk.Dialog, Dialog, Dialog.ICallback>, Dialog.IHandler
 	{
 		Gtk.Container btcontainer;
 		Button defaultButton;
 
+		private bool UseHeaderBar = true;
+
 		public DialogHandler()
 		{
 			Control = new Gtk.Dialog("", null, Gtk.DialogFlags.DestroyWithParent);
-
-			Resizable = false;
 		}
 
 		protected override void Initialize()
@@ -34,7 +36,7 @@ namespace Eto.GtkSharp.Forms
 			Control.ActionArea.Hide();
 
 #if GTKCORE
-			if (Helper.UseHeaderBar)
+			if (UseHeaderBar)
 			{
 				btcontainer = new Gtk.HeaderBar();
 
@@ -85,6 +87,18 @@ namespace Eto.GtkSharp.Forms
 
 		public DialogDisplayMode DisplayMode { get; set; }
 
+		public new bool Resizable
+		{
+			get
+			{
+				return Control.Resizable;
+			}
+			set
+			{
+				Control.Resizable = value;
+			}
+		}
+
 		public void ShowModal()
 		{
 			ReloadButtons();
@@ -118,7 +132,7 @@ namespace Eto.GtkSharp.Forms
 
 			if (negativeButtons.Count + positiveButtons.Count > 0)
 			{
-				if (!Helper.UseHeaderBar)
+				if (!UseHeaderBar)
 				{
 					Control.ActionArea.NoShowAll = false;
 
@@ -147,7 +161,7 @@ namespace Eto.GtkSharp.Forms
 			else
 			{
 				Control.ActionArea.NoShowAll = true;
-				if (!Helper.UseHeaderBar)
+				if (!UseHeaderBar)
 					btcontainer.Hide();
 #if GTKCORE
 				else
@@ -204,7 +218,7 @@ namespace Eto.GtkSharp.Forms
 			}
 		}
 
-		public Task ShowModalAsync()
+		public System.Threading.Tasks.Task ShowModalAsync()
 		{
 			var tcs = new TaskCompletionSource<bool>();
 			Application.Instance.AsyncInvoke(() =>

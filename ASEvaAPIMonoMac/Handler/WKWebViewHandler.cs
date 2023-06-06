@@ -19,10 +19,12 @@ using MonoMac.ObjCRuntime;
 using MonoMac.CoreAnimation;
 using wk = MonoMac.WebKit;
 #endif
+using Eto.Mac;
+using Eto.Mac.Forms;
 
-namespace Eto.Mac.Forms.Controls
+namespace ASEva.UIMonoMac
 {
-	public class WKWebViewHandler : MacView<wk.WKWebView, WebView, WebView.ICallback>, WebView.IHandler
+	class WKWebViewHandler : MacView<wk.WKWebView, WebView, WebView.ICallback>, WebView.IHandler
 	{
 		public override NSView ContainerControl { get { return Control; } }
 
@@ -102,6 +104,7 @@ namespace Eto.Mac.Forms.Controls
 			{
 				Handler = handler;
 				UIDelegate = new EtoUIDelegate { Handler = handler };
+				Configuration.Preferences.SetValueForKey(NSNumber.FromBoolean(true), new NSString("developerExtrasEnabled"));
 			}
 
 		}
@@ -312,7 +315,7 @@ namespace Eto.Mac.Forms.Controls
 			else if (Control.RespondsToSelector(s_selGetPrintOperationInternal))
 			{
 				// older versions have this but is undocumented and internal..
-				printOperation = Runtime.GetNSObject<NSPrintOperation>(Messaging.IntPtr_objc_msgSend_IntPtr(Control.Handle, s_selGetPrintOperationInternal.Handle, printInfo.Handle));
+				printOperation = Runtime.GetNSObject<NSPrintOperation>(Eto.Mac.Messaging.IntPtr_objc_msgSend_IntPtr(Control.Handle, s_selGetPrintOperationInternal.Handle, printInfo.Handle));
 			}
 			if (printOperation != null)
 			{

@@ -3,11 +3,14 @@ using sd = System.Drawing;
 using swf = System.Windows.Forms;
 using Eto.Drawing;
 using Eto.Forms;
+using Eto.WinForms;
 using Eto.WinForms.Drawing;
+using Eto.WinForms.Forms;
+using ASEva.UIEto;
 
-namespace Eto.WinForms.Forms.Controls
+namespace ASEva.UICoreWF
 {
-	public class DrawableHandler : WindowsPanel<DrawableHandler.EtoDrawable, Drawable, Drawable.ICallback>, Drawable.IHandler
+	class DrawableHandler : WindowsPanel<DrawableHandler.EtoDrawable, Drawable, Drawable.ICallback>, Drawable.IHandler
 	{
 		public virtual bool SupportsCreateGraphics { get { return true; } }
 
@@ -117,13 +120,20 @@ namespace Eto.WinForms.Forms.Controls
 		public virtual void Update(Rectangle rect)
 		{
 			using (var g = CreateGraphics())
+			{
+				g.SetScaleForLogical();
 				Callback.OnPaint(Widget, new PaintEventArgs(g, rect));
+			}
 		}
 
 		protected virtual void OnPaint(swf.PaintEventArgs e)
 		{
+			e.Graphics.TextRenderingHint = sd.Text.TextRenderingHint.AntiAliasGridFit;
 			using (var g = e.Graphics.ToEto(false))
+			{
+				g.SetScaleForLogical();
 				Callback.OnPaint(Widget, new PaintEventArgs(g, e.ClipRectangle.ToEto()));
+			}
 		}
 
 		protected override void SetContent(Control control, swf.Control contentControl)

@@ -1,15 +1,16 @@
 using System;
+using System.Windows.Threading;
 using Eto.Forms;
+using Eto;
 
-namespace Eto.Wpf.Forms
+namespace ASEva.UIWpf
 {
-
-	public class UITimerHandler : WidgetHandler<System.Windows.Threading.DispatcherTimer, UITimer, UITimer.ICallback>, UITimer.IHandler
+	class UITimerHandler : WidgetHandler<DispatcherTimer, UITimer, UITimer.ICallback>, UITimer.IHandler
 	{
 
 		public UITimerHandler()
 		{
-			Control = new System.Windows.Threading.DispatcherTimer();
+			Control = new DispatcherTimer(DispatcherPriority.Normal);
 			Control.Tick += (sender, e) => Callback.OnElapsed(Widget, EventArgs.Empty);
 		}
 

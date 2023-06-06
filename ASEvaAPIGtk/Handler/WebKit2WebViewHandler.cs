@@ -4,39 +4,55 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
+using System.Diagnostics;
 using Eto.Forms;
+using Eto.GtkSharp;
+using Eto.GtkSharp.Forms;
 
-namespace Eto.GtkSharp.Forms.Controls
+namespace ASEva.UIGtk
 {
-	public class WebViewHandler : GtkControl<Gtk.Widget, WebView, WebView.ICallback>, WebView.IHandler
+	class WebViewHandler : GtkControl<Gtk.ScrolledWindow, WebView, WebView.ICallback>, WebView.IHandler
 	{
 		public bool BrowserContextMenuEnabled { get; set; }
 
 		public string DocumentTitle
 		{
-			get { return NativeMethods.webkit_web_view_get_title(Control.Handle); }
+			get { return WebViewHandle == IntPtr.Zero ? "" : NativeMethods.webkit_web_view_get_title(WebViewHandle); }
 		}
 
 		public Uri Url
 		{
-			get { return new Uri(NativeMethods.webkit_web_view_get_uri(Control.Handle)); }
+			get
+			{
+				String uriString = WebViewHandle == IntPtr.Zero ? null : NativeMethods.webkit_web_view_get_uri(WebViewHandle);
+				return String.IsNullOrEmpty(uriString) ? null : new Uri(uriString);
+			}
 			set
 			{
-				if (value != null)
-					NativeMethods.webkit_web_view_load_uri(Control.Handle, value.AbsoluteUri);
+				if (WebViewHandle == IntPtr.Zero)
+				{
+					if (value != null && !String.IsNullOrEmpty(value.AbsoluteUri)) targetUrl = value.AbsoluteUri;
+				}
 				else
-					NativeMethods.webkit_web_view_load_html(Control.Handle, "", "");
+				{
+					if (value != null) NativeMethods.webkit_web_view_load_uri(WebViewHandle, value.AbsoluteUri);
+					else NativeMethods.webkit_web_view_load_html(WebViewHandle, "", "");
+				}
 			}
 		}
 
-		public Gtk.ScrolledWindow Scroll
+		IntPtr WebViewHandle
 		{
-			get { return scroll; }
+			get
+			{
+				return webView == null ? IntPtr.Zero : webView.Handle;
+			}
 		}
 
 		public override Gtk.Widget ContainerControl
 		{
-			get { return scroll; }
+			get { return Control; }
 		}
 
 		EventHandler<WebViewTitleEventArgs> titleChanged;
@@ -45,44 +61,81 @@ namespace Eto.GtkSharp.Forms.Controls
 		EventHandler<WebViewLoadingEventArgs> documentLoading;
 		EventHandler<WebViewNewWindowEventArgs> openNewWindow;
 
-		readonly Gtk.ScrolledWindow scroll;
 		Queue<TaskCompletionSource<string>> jscs;
-		
+		Gtk.Widget webView;
+		string targetUrl;
+		string targetHtmlString;
+		string targetBaseUrl;
+
+		private static IntPtr webViewGroup = IntPtr.Zero;
 
 		public WebViewHandler()
 		{
-			scroll = new Gtk.ScrolledWindow();
-			Control = new Gtk.Widget(NativeMethods.webkit_web_view_new());
-			scroll.Add(Control);
-		}
+			Control = new Gtk.ScrolledWindow();
+			Control.Realized += delegate
+			{
+				var settings = NativeMethods.webkit_settings_new();
 
-		protected override void Initialize()
-		{
-			base.Initialize();
+				var uiBackend = ASEva.UIEto.App.GetUIBackend();
+				if (uiBackend != null && uiBackend == "wayland") // Wayland下使用OpenGL可能导致花屏，或令WaylandOffscreenView卡死
+				{
+					NativeMethods.webkit_settings_set_enable_accelerated_2d_canvas(settings, false);
+					NativeMethods.webkit_settings_set_enable_webgl(settings, false);
+					NativeMethods.webkit_settings_set_hardware_acceleration_policy(settings, 2/* WEBKIT_HARDWARE_ACCELERATION_POLICY_NEVER */);
+				}
+				
+				var settingsObject = GLib.Object.GetObject(settings);
+				settingsObject.SetProperty("enable-developer-extras", new GLib.Value(true));
 
-			Control.AddSignalHandler(
-				"context-menu",
-				(Action<object, GLib.SignalArgs>)WebViewHandler_ContextMenu,
-				typeof(GLib.SignalArgs)
-			);
+				webView = new Gtk.Widget(NativeMethods.webkit_web_view_new_with_settings(settings)) { Visible = true };
 
-			Control.AddSignalHandler(
-				"notify::title",
-				(Action<object, GLib.SignalArgs>)WebViewHandler_TitleChanged,
-				typeof(GLib.SignalArgs)
-			);
+				Control.Add(webView);
 
-			Control.AddSignalHandler(
-				"load-changed",
-				(Action<object, GLib.SignalArgs>)WebViewHandler_LoadChanged,
-				typeof(GLib.SignalArgs)
-			);
+				webView.AddSignalHandler(
+					"context-menu",
+					(Action<object, GLib.SignalArgs>)WebViewHandler_ContextMenu,
+					typeof(GLib.SignalArgs)
+				);
 
-			Control.AddSignalHandler(
-				"decide-policy",
-				(Action<object, GLib.SignalArgs>)WebViewHandler_DecidePolicy,
-				typeof(GLib.SignalArgs)
-			);
+				webView.AddSignalHandler(
+					"notify::title",
+					(Action<object, GLib.SignalArgs>)WebViewHandler_TitleChanged,
+					typeof(GLib.SignalArgs)
+				);
+
+				webView.AddSignalHandler(
+					"load-changed",
+					(Action<object, GLib.SignalArgs>)WebViewHandler_LoadChanged,
+					typeof(GLib.SignalArgs)
+				);
+
+				webView.AddSignalHandler(
+					"decide-policy",
+					(Action<object, GLib.SignalArgs>)WebViewHandler_DecidePolicy,
+					typeof(GLib.SignalArgs)
+				);
+
+				if (targetUrl != null)
+				{
+					NativeMethods.webkit_web_view_load_uri(WebViewHandle, targetUrl);
+					targetUrl = null;
+				}
+				if (targetHtmlString != null)
+				{
+					NativeMethods.webkit_web_view_load_html(WebViewHandle, targetHtmlString, targetBaseUrl);
+					targetHtmlString = null;
+					targetBaseUrl = null;
+				}
+			};
+
+			Control.KeyPressEvent += (o, args) =>
+			{
+				if (webView != null && args.Event.Key == Gdk.Key.F12)
+				{
+					var inspector = NativeMethods.webkit_web_view_get_inspector(WebViewHandle);
+					if (inspector != IntPtr.Zero) NativeMethods.webkit_web_inspector_show(inspector);
+				}
+			};
 		}
 
 		private void WebViewHandler_TitleChanged(object o, GLib.SignalArgs args)
@@ -97,15 +150,18 @@ namespace Eto.GtkSharp.Forms.Controls
 
 		private void WebViewHandler_LoadChanged(object o, GLib.SignalArgs args)
 		{
+			var url = Url;
+			if (url == null) return;
+
 			var loadEvent = (int)args.Args[0];
 
 			switch (loadEvent)
 			{
 				case 2: // WEBKIT_LOAD_COMMITTED
-					navigated?.Invoke(this, new WebViewLoadedEventArgs(Url));
+					navigated?.Invoke(this, new WebViewLoadedEventArgs(url));
 					break;
 				case 3: // WEBKIT_LOAD_FINISHED
-					documentLoaded?.Invoke(this, new WebViewLoadedEventArgs(Url));
+					documentLoaded?.Invoke(this, new WebViewLoadedEventArgs(url));
 					break;
 			}
 		}
@@ -116,28 +172,68 @@ namespace Eto.GtkSharp.Forms.Controls
 			var decision = (GLib.Object)args.Args[0];
 			var type = (int)args.Args[1];
 
-			if (type != 0 && type != 1)
-				return;
-			
-			var request = NativeMethods.webkit_navigation_policy_decision_get_request(decision.Handle);
-			var uri = new Uri(NativeMethods.webkit_uri_request_get_uri(request));
-
-			switch (type)
+			if (type == 0) // WEBKIT_POLICY_DECISION_TYPE_NAVIGATION_ACTION
 			{
-				case 0: // WEBKIT_POLICY_DECISION_TYPE_NAVIGATION_ACTION
-					var loadingArgs = new WebViewLoadingEventArgs(uri, true);
-					documentLoading?.Invoke(this, loadingArgs);
-					args.RetVal = loadingArgs.Cancel;
-					break;
-				case 1: // WEBKIT_POLICY_DECISION_TYPE_NEW_WINDOW_ACTION
-					var newWindowArgs = new WebViewNewWindowEventArgs(uri, "");
-					openNewWindow?.Invoke(this, newWindowArgs);
-					args.RetVal = newWindowArgs.Cancel;
-					break;
+				var request = NativeMethods.webkit_navigation_policy_decision_get_request(decision.Handle);
+				var uriString = NativeMethods.webkit_uri_request_get_uri(request);
+				var uri = String.IsNullOrEmpty(uriString) ? null : new Uri(uriString);
+
+				var loadingArgs = new WebViewLoadingEventArgs(uri, true);
+				documentLoading?.Invoke(this, loadingArgs);
+				args.RetVal = loadingArgs.Cancel;
+			}
+			else if (type == 1) // WEBKIT_POLICY_DECISION_TYPE_NEW_WINDOW_ACTION
+			{
+				var request = NativeMethods.webkit_navigation_policy_decision_get_request(decision.Handle);
+				var uriString = NativeMethods.webkit_uri_request_get_uri(request);
+				var uri = String.IsNullOrEmpty(uriString) ? null : new Uri(uriString);
+
+				var newWindowArgs = new WebViewNewWindowEventArgs(uri, "");
+				openNewWindow?.Invoke(this, newWindowArgs);
+				args.RetVal = newWindowArgs.Cancel;
+			}
+			else if (type == 2)
+			{
+				var request = NativeMethods.webkit_response_policy_decision_get_request(decision.Handle);
+				var uriString = NativeMethods.webkit_uri_request_get_uri(request);
+				var mimeSupport = NativeMethods.webkit_response_policy_decision_is_mime_type_supported(decision.Handle);
+
+				if (!mimeSupport && !String.IsNullOrEmpty(uriString))
+				{
+					GLib.Timeout.Add(1, timer_Timeout);
+					NativeMethods.webkit_policy_decision_download(decision.Handle);
+					args.RetVal = true;
+					return;
+				}
 			}
 		}
 
-		public override void AttachEvent(string id)
+        private bool timer_Timeout()
+        {
+			var userDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+			var downloadDirName = new String[] {"Downloads", "Download", "下载"};
+			String targetDir = null;
+			foreach (var dirName in downloadDirName)
+			{
+				var downloadDir = userDir + "/" + dirName;
+				if (Directory.Exists(downloadDir)) targetDir = downloadDir;
+			}
+			if (targetDir != null)
+			{
+				try
+				{
+					var startInfo = new ProcessStartInfo();
+					startInfo.FileName = targetDir;
+					startInfo.WorkingDirectory = targetDir;
+					startInfo.UseShellExecute = true;
+					Process.Start(startInfo);
+				}
+				catch (Exception) { }
+			}
+            return false;
+        }
+
+        public override void AttachEvent(string id)
 		{
 			switch (id)
 			{
@@ -164,6 +260,8 @@ namespace Eto.GtkSharp.Forms.Controls
 
 		public string ExecuteScript(string script)
 		{
+			if (WebViewHandle == IntPtr.Zero) return null;
+
 			var task = ExecuteScriptAsync(script);
 
 			while (!task.IsCompleted)
@@ -174,14 +272,19 @@ namespace Eto.GtkSharp.Forms.Controls
 			return task.Result;
 		}
 
+		private Delegate theDelegate = null;
+
 		public Task<string> ExecuteScriptAsync(string script)
 		{
+			if (WebViewHandle == IntPtr.Zero) return null;
+
 			TaskCompletionSource<string> tcs = new TaskCompletionSource<string>();
 			if (jscs == null)
 				jscs = new Queue<TaskCompletionSource<string>>();
 			jscs.Enqueue(tcs);
 
-			NativeMethods.webkit_web_view_run_javascript(Control.Handle, $"function _fn() {{{script}}} _fn();", IntPtr.Zero, (FinishScriptExecutionDelegate)FinishScriptExecution, IntPtr.Zero);
+			if (theDelegate == null) theDelegate = (Delegate)(FinishScriptExecutionDelegate)FinishScriptExecution;
+			NativeMethods.webkit_web_view_run_javascript(WebViewHandle, $"function _fn() {{{script}}} _fn();", IntPtr.Zero, (FinishScriptExecutionDelegate)theDelegate, IntPtr.Zero);
 
 			return tcs.Task;
 		}
@@ -190,7 +293,7 @@ namespace Eto.GtkSharp.Forms.Controls
 
 		private void FinishScriptExecution(IntPtr webview, IntPtr result, IntPtr error)
 		{
-			var jsresult = NativeMethods.webkit_web_view_run_javascript_finish(Control.Handle, result, IntPtr.Zero);
+			var jsresult = NativeMethods.webkit_web_view_run_javascript_finish(WebViewHandle, result, IntPtr.Zero);
 			var tcs = jscs?.Count > 0 ? jscs?.Dequeue() : null;
 			if (jsresult != IntPtr.Zero)
 			{
@@ -205,6 +308,7 @@ namespace Eto.GtkSharp.Forms.Controls
 
 				Marshal.FreeHGlobal(utfvalue);
 				NativeMethods.JSStringRelease(strvalue);
+				NativeMethods.webkit_javascript_result_unref(jsresult);
 				tcs?.SetResult(jsreturn);
 			}
 			else
@@ -215,42 +319,50 @@ namespace Eto.GtkSharp.Forms.Controls
 
 		public void LoadHtml(string html, Uri baseUri)
 		{
-			NativeMethods.webkit_web_view_load_html(Control.Handle, html, baseUri?.AbsoluteUri ?? "");
+			if (WebViewHandle == IntPtr.Zero)
+			{
+				targetHtmlString = html;
+				targetBaseUrl = baseUri?.AbsoluteUri ?? "";
+			}
+			else
+			{
+				NativeMethods.webkit_web_view_load_html(WebViewHandle, html, baseUri?.AbsoluteUri ?? "");
+			}
 		}
 
 		public void Stop()
 		{
-			NativeMethods.webkit_web_view_stop_loading(Control.Handle);
+			if (WebViewHandle != IntPtr.Zero) NativeMethods.webkit_web_view_stop_loading(WebViewHandle);
 		}
 
 		public void Reload()
 		{
-			NativeMethods.webkit_web_view_reload(Control.Handle);
+			if (WebViewHandle != IntPtr.Zero) NativeMethods.webkit_web_view_reload(WebViewHandle);
 		}
 
 		public void GoBack()
 		{
-			NativeMethods.webkit_web_view_go_back(Control.Handle);
+			if (WebViewHandle != IntPtr.Zero) NativeMethods.webkit_web_view_go_back(WebViewHandle);
 		}
 
 		public void GoForward()
 		{
-			NativeMethods.webkit_web_view_go_forward(Control.Handle);
+			if (WebViewHandle != IntPtr.Zero) NativeMethods.webkit_web_view_go_forward(WebViewHandle);
 		}
 
-		public bool CanGoBack
+        public bool CanGoBack
 		{
-			get { return NativeMethods.webkit_web_view_can_go_back(Control.Handle); }
+			get { return WebViewHandle == IntPtr.Zero ? false : NativeMethods.webkit_web_view_can_go_back(WebViewHandle); }
 		}
 
 		public bool CanGoForward
 		{
-			get { return NativeMethods.webkit_web_view_can_go_forward(Control.Handle); }
+			get { return WebViewHandle == IntPtr.Zero ? false : NativeMethods.webkit_web_view_can_go_forward(WebViewHandle); }
 		}
 
 		public void ShowPrintDialog()
 		{
-			NativeMethods.webkit_web_view_run_javascript(Control.Handle, "print();", IntPtr.Zero, null, IntPtr.Zero);
+			if (WebViewHandle != IntPtr.Zero) NativeMethods.webkit_web_view_run_javascript(WebViewHandle, "print();", IntPtr.Zero, null, IntPtr.Zero);
 		}
 	}
 }

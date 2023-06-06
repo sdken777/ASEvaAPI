@@ -1,11 +1,14 @@
 using System;
+using Eto;
 using Eto.Forms;
 using Eto.Drawing;
+using Eto.GtkSharp;
+using Eto.GtkSharp.Forms;
 using Eto.GtkSharp.Drawing;
 
-namespace Eto.GtkSharp.Forms.Controls
+namespace ASEva.UIGtk
 {
-	public class LabelHandler : GtkControl<LabelHandler.EtoLabel, Label, Label.ICallback>, Label.IHandler
+	class LabelHandler : GtkControl<LabelHandler.EtoLabel, Label, Label.ICallback>, Label.IHandler
 	{
 		readonly Gtk.EventBox eventBox;
 		TextAlignment horizontalAlign = TextAlignment.Left;
@@ -197,8 +200,11 @@ namespace Eto.GtkSharp.Forms.Controls
 			get { return Control.Text.ToEtoMnemonic(); }
 			set
 			{
-				Control.ResetWidth();
-				Control.TextWithMnemonic = value.ToPlatformMnemonic();
+				if (Control.Text.ToEtoMnemonic() != value)
+				{
+					Control.ResetWidth();
+					Control.TextWithMnemonic = value.ToPlatformMnemonic();
+				}
 			}
 		}
 
@@ -207,8 +213,11 @@ namespace Eto.GtkSharp.Forms.Controls
 			get { return horizontalAlign; }
 			set
 			{
-				horizontalAlign = value;
-				SetAlignment();
+				if (horizontalAlign != value)
+				{
+					horizontalAlign = value;
+					SetAlignment();
+				}
 			}
 		}
 
@@ -228,8 +237,11 @@ namespace Eto.GtkSharp.Forms.Controls
 			get { return verticalAlign; }
 			set
 			{
-				verticalAlign = value;
-				SetAlignment();
+				if (verticalAlign != value)
+				{
+					verticalAlign = value;
+					SetAlignment();
+				}
 			}
 		}
 

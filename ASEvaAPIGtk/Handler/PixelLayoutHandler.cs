@@ -1,21 +1,29 @@
+using System;
 using Eto.Forms;
 using Eto.Drawing;
-using Eto.GtkSharp.Forms.Controls;
-using Gtk;
-using System;
+using Eto.GtkSharp;
+using Eto.GtkSharp.Forms;
 
-namespace Eto.GtkSharp.Forms
+namespace ASEva.UIGtk
 {
-
-	public class PixelLayoutHandler : GtkContainer<Gtk.Fixed, PixelLayout, PixelLayout.ICallback>, PixelLayout.IHandler
+	class PixelLayoutHandler : GtkContainer<Gtk.ScrolledWindow, PixelLayout, PixelLayout.ICallback>, PixelLayout.IHandler
 	{
 		public PixelLayoutHandler()
 		{
-			Control = new EtoFixed { Handler = this };
+			Control = new Gtk.ScrolledWindow();
+			Control.Add(new Gtk.Viewport());
+			(Control.Child as Gtk.Viewport).Add(new EtoFixed { Handler = this });
+			timer = GLib.Timeout.Add(100, timer_Timeout);
+		}
+
+		public override void OnUnLoad(EventArgs e)
+		{
+			GLib.Timeout.Remove(timer);
+			base.OnUnLoad(e);
 		}
 
 #if GTK3
-		class EtoVBox : Gtk.VBox
+        class EtoVBox : Gtk.VBox
 		{
 			protected override void OnAdjustSizeRequest(Gtk.Orientation orientation, out int minimum_size, out int natural_size)
 			{
@@ -42,7 +50,7 @@ namespace Eto.GtkSharp.Forms
 				((Gtk.Container)widget.Parent).Remove(widget);
 			widget.ShowAll();
 #endif
-			Control.Put(widget, x, y);
+			((Control.Child as Gtk.Viewport).Child as Gtk.Fixed).Put(widget, x, y);
 			ctl.CurrentLocation = new Point(x, y);
 		}
 
@@ -56,7 +64,7 @@ namespace Eto.GtkSharp.Forms
 #else
 				var widget = ctl.ContainerControl;
 #endif
-				Control.Move(widget, x, y);
+				((Control.Child as Gtk.Viewport).Child as Gtk.Fixed).Move(widget, x, y);
 
 				ctl.CurrentLocation = new Point(x, y);
 			}
@@ -65,7 +73,7 @@ namespace Eto.GtkSharp.Forms
 		public void Remove(Control child)
 		{
 #if GTK3
-			Control.Remove(child.GetContainerWidget().Parent);
+			((Control.Child as Gtk.Viewport).Child as Gtk.Fixed).Remove(child.GetContainerWidget().Parent);
 #else
 			Control.Remove(child.GetContainerWidget());
 #endif
@@ -74,7 +82,7 @@ namespace Eto.GtkSharp.Forms
 		public void Update()
 		{
 #if GTK3
-			Control.QueueResize();
+			((Control.Child as Gtk.Viewport).Child as Gtk.Fixed).QueueResize();
 #else
 			Control.ResizeChildren();
 #endif
@@ -85,5 +93,20 @@ namespace Eto.GtkSharp.Forms
 			base.OnLoadComplete(e);
 			SetFocusChain();
 		}
+
+        private bool timer_Timeout()
+        {
+			if (Control.AllocatedWidth != lastWidth || Control.AllocatedHeight != lastHeight)
+			{
+				Update();
+				lastWidth = Control.AllocatedWidth;
+				lastHeight = Control.AllocatedHeight;
+			}
+            return true;
+        }
+
+		private uint timer;
+
+		private int lastWidth = 0, lastHeight = 0;
 	}
 }

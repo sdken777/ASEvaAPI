@@ -17,15 +17,13 @@ using MonoMac.ObjCRuntime;
 using MonoMac.CoreAnimation;
 #endif
 #endif
+using Eto;
+using Eto.Mac;
+using Eto.Mac.Forms;
 
-#if IOS
-namespace Eto.iOS.Forms
-
-#elif OSX
-namespace Eto.Mac.Forms
-#endif
+namespace ASEva.UIMonoMac
 {
-	public class UITimerHandler : WidgetHandler<NSTimer, UITimer, UITimer.ICallback>, UITimer.IHandler
+	class UITimerHandler : WidgetHandler<NSTimer, UITimer, UITimer.ICallback>, UITimer.IHandler
 	{
 		double interval = 1f;
 		
@@ -57,6 +55,8 @@ namespace Eto.Mac.Forms
 		{
 			Stop();
 			NSRunLoop.Current.AddTimer(Control, NSRunLoopMode.Default);
+			NSRunLoop.Current.AddTimer(Control, NSRunLoopMode.ModalPanel);
+			NSRunLoop.Current.AddTimer(Control, NSRunLoopMode.EventTracking);
 		}
 
 		public void Stop ()
