@@ -52,6 +52,7 @@
     <OutputPath>..\bin64</OutputPath>
     <DocumentationFile>..\bin64\ASEvaAPICoreWF.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
+    <DefineConstants>WINFORMS</DefineConstants>
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
@@ -60,7 +61,7 @@
     <OutputPath>..\bin64\debug\</OutputPath>
     <DocumentationFile>..\bin64\debug\ASEvaAPICoreWF.xml</DocumentationFile>
     <NoWarn>1701;1702;1591</NoWarn>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;WINFORMS</DefineConstants>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>

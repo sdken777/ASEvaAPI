@@ -29,7 +29,7 @@
     <Compile Update="Graphic\OpenGLControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Handler\SimpleTreeViewBackendCoreWF.cs">
+    <Compile Update="HandlerFreestyle\SimpleTreeViewBackendCoreWF.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="HistLineGraph.cs">
