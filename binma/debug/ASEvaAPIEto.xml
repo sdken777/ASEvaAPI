@@ -1,0 +1,2199 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ASEvaAPIEto</name>
+    </assembly>
+    <members>
+        <member name="T:ASEva.UIEto.APIInfo">
+            <summary>
+            version=2.10.5
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
+            <summary>
+            (api:eto=2.0.0) 获取API版本
+            </summary>
+            <returns>API版本</returns>
+        </member>
+        <member name="M:ASEva.UIEto.APIInfo.GetEtoLibVersion">
+            <summary>
+            (api:eto=2.10.5) 获取Eto库版本
+            </summary>
+            <returns>Eto库版本</returns>
+        </member>
+        <member name="T:ASEva.UIEto.App">
+            <summary>
+            (api:eto=2.0.0) Eto应用程序
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.App.Init">
+            <summary>
+            应用程序初始化
+            </summary>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.Init(System.String)">
+            <summary>
+            (api:eto=2.0.7) 以指定UI框架初始化应用程序
+            </summary>
+            <param name="uiCode">UI框架代号</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.Run(Eto.Forms.Form)">
+            <summary>
+            运行应用程序
+            </summary>
+            <param name="window">主窗口</param>
+        </member>
+        <member name="M:ASEva.UIEto.App.GetRunningOS">
+            <summary>
+            (api:eto=2.0.7) 返回当前运行的OS代号，与 ASEva.APIInfo.GetRunningOS 结果一致
+            </summary>
+            <returns>OS代号，若无法识别返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.GetRunningUI">
+            <summary>
+            (api:eto=2.0.7) 返回当前运行的UI框架代号
+            </summary>
+            <returns>UI框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.GetUIBackend">
+            <summary>
+            (api:eto=2.4.0) 返回当前运行UI的后端代号
+            </summary>
+            <returns>UI的后端代号，若未运行 ASEva.UIEto.App.Init 、或初始化失败、或当前运行UI无后端则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.GetWebViewBackend">
+            <summary>
+            (api:eto=2.3.4) 返回当前WebView使用的后台框架代号
+            </summary>
+            <returns>当前WebView使用的后台框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回null</returns>
+        </member>
+        <member name="P:ASEva.UIEto.App.Instance">
+            <summary>
+            应用程序对象
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.App.DefaultFont(System.Single)">
+            <summary>
+            (api:eto=2.0.6) 获取默认字体
+            </summary>
+            <param name="sizeRatio">相对字体默认大小的比例，默认为1</param>
+            <returns>默认字体</returns>
+        </member>
+        <member name="P:ASEva.UIEto.App.WorkPath">
+            <summary>
+            (api:eto=2.1.0) 获取应用程序的工作路径
+            </summary>
+            <value>工作路径</value>
+        </member>
+        <member name="M:ASEva.UIEto.App.ConvertControlToEto(System.Object)">
+            <summary>
+            (api:eto=2.8.0) 将平台特化控件转化为Eto控件
+            </summary>
+            <param name="platformControl">平台特化控件</param>
+            <returns>Eto控件，若转化失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.ConvertControlToPlatform(Eto.Forms.Control)">
+            <summary>
+            (api:eto=2.8.0) 将Eto控件转化为平台特化控件
+            </summary>
+            <param name="etoControl">Eto控件</param>
+            <returns>平台特化控件，若转化失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.RunDialog(ASEva.UIEto.DialogPanel)">
+            <summary>
+            (api:eto=2.8.0) 弹出对话框
+            </summary>
+            <param name="panel">对话框主面板</param>
+            <returns>是否成功弹出，对话框的运行结果应通过主面板的各Result属性获取</returns>
+        </member>
+        <member name="T:ASEva.UIEto.ButtonPanel">
+            <summary>
+            (api:eto=2.3.3) 按钮面板
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ButtonPanel.#ctor(System.String,System.Int32)">
+            <summary>
+            初始化文字按钮面板
+            </summary>
+            <param name="text">文字</param>
+            <param name="logicalPadding">按钮边框与文字的间距</param>
+        </member>
+        <member name="M:ASEva.UIEto.ButtonPanel.#ctor(Eto.Drawing.Bitmap,System.Int32)">
+            <summary>
+            初始化图像按钮面板
+            </summary>
+            <param name="image">图像</param>
+            <param name="logicalPadding">按钮边框与文字的间距</param>
+        </member>
+        <member name="M:ASEva.UIEto.ButtonPanel.UpdateImage(Eto.Drawing.Bitmap)">
+            <summary>
+            (api:eto=2.8.17) 更新图像
+            </summary>
+            <param name="image">新图像，尺寸应与原图像一致，否则不更新</param>
+        </member>
+        <member name="E:ASEva.UIEto.ButtonPanel.Click">
+            <summary>
+            点击按钮事件
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.ButtonPanel.DefaultBackgroundColor">
+            <summary>
+            默认状态下的背景颜色（默认为Colors.Transparent）
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.ButtonPanel.MouseInsideColor">
+            <summary>
+            鼠标在按钮范围内的背景颜色（默认为Colors.LightSteelBlue）
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.ButtonPanel.MouseDownColor">
+            <summary>
+            鼠标按下后的背景颜色（默认为Colors.SteelBlue）
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.ButtonPanel.TextColor">
+            <summary>
+            文字颜色（默认为Colors.Black）
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.ButtonPanel.ToolTip">
+            <summary>
+            (api:eto=2.8.11) 提示文字
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.CheckableListBox">
+            <summary>
+            (api:eto=2.5.0) 多选框组
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.GetItemCount">
+            <summary>
+            获取多选框个数
+            </summary>
+            <returns>多选框个数</returns>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.AddItem(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            添加多选框
+            </summary>
+            <param name="text">显示文字</param>
+            <param name="isChecked">初始是否为勾选状态</param>
+            <param name="isEnabled">初始是否为启用状态</param>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.AddItems(System.String[],System.Boolean[],System.Boolean[])">
+            <summary>
+            一次性添加多个多选框
+            </summary>
+            <param name="itemsText">各多选框的显示文字</param>
+            <param name="itemsChecked">各多选框的初始勾选状态，若为null则全部为未勾选，若非null则数组大小应与itemsText一致</param>
+            <param name="itemsEnabled">各多选框的初始启用状态，若为null则全部启用，若非null则数组大小应与itemsText一致</param>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.RemoveItem(System.Int32)">
+            <summary>
+            移除多选框
+            </summary>
+            <param name="index">要移除的多选框的当前序号</param>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.RemoveItems(System.Int32[])">
+            <summary>
+            一次性移除多个多选框
+            </summary>
+            <param name="indices">要移除的所有多选框的当前序号</param>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.RemoveAllItems">
+            <summary>
+            移除所有多选框
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.GetChecked(System.Int32)">
+            <summary>
+            获取某个多选框是否为勾选状态
+            </summary>
+            <param name="index">多选框的当前序号</param>
+            <returns>是否勾选</returns>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.SetChecked(System.Int32,System.Boolean)">
+            <summary>
+            设置某个多选框的勾选状态
+            </summary>
+            <param name="index">多选框的当前序号</param>
+            <param name="isChecked">是否否选</param>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.GetEnabled(System.Int32)">
+            <summary>
+            获取某个多选框是否为启用状态
+            </summary>
+            <param name="index">多选框的当前序号</param>
+            <returns>是否启用</returns>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.SetEnabled(System.Int32,System.Boolean)">
+            <summary>
+            设置某个多选框的启用状态
+            </summary>
+            <param name="index">多选框的当前序号</param>
+            <param name="isEnabled">是否启用</param>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.SetText(System.Int32,System.String)">
+            <summary>
+            (api:eto=2.8.9) 设置某个多选框的文字
+            </summary>
+            <param name="index">多选框的当前序号</param>
+            <param name="text">多选框的文字</param>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.GetCheckedIndices">
+            <summary>
+            获取所有已勾选的多选框的序号
+            </summary>
+            <returns>所有已勾选的多选框的序号</returns>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.CheckAll">
+            <summary>
+            勾选所有多选框（不改变禁用的部分）
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.CheckableListBox.UncheckAll">
+            <summary>
+            取消勾选所有多选框（不改变禁用的部分）
+            </summary>
+        </member>
+        <member name="E:ASEva.UIEto.CheckableListBox.ItemClicked">
+            <summary>
+            (api:eto=2.9.13) 多选框点击事件
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.ConfigPanel">
+            <summary>
+            (api:eto=2.0.0) 配置界面控件，用于实现可视化配置
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ConfigPanel.OnInitSize(System.String)">
+            <summary>
+            (api:eto=2.2.1) [可选实现] 在初始化控件尺寸时被调用
+            </summary>
+            <param name="config">配置字符串</param>
+        </member>
+        <member name="M:ASEva.UIEto.ConfigPanel.OnGetSize">
+            <summary>
+            [必须实现] 获取尺寸时被调用
+            </summary>
+            <returns>默认DPI下的尺寸，将被调整为至少200x50</returns>
+        </member>
+        <member name="M:ASEva.UIEto.ConfigPanel.OnInit(System.String)">
+            <summary>
+            [可选实现] 在配置界面控件初始化时被调用
+            </summary>
+            <param name="config">配置字符串</param>
+        </member>
+        <member name="M:ASEva.UIEto.ConfigPanel.OnRelease">
+            <summary>
+            [可选实现] 在配置界面控件销毁前被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ConfigPanel.OnUpdateUI">
+            <summary>
+            [可选实现] 在需要更新界面时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ConfigPanel.OnHandleModal">
+            <summary>
+            (api:eto=2.9.5) [可选实现] 在主循环中被调用，可进行模态对话
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ConfigPanel.Close">
+            <summary>
+            (api:eto=2.8.13) 关闭配置界面
+            </summary>
+        </member>
+        <member name="E:ASEva.UIEto.ConfigPanel.CloseRequested">
+            <summary>
+            (api:eto=2.8.13) 在此事件中实现配置界面的关闭
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.DialogPanel">
+            <summary>
+            (api:eto=2.8.0) 对话框主面板（使用 ASEva.UIEto.App.RunDialog 弹出对话框）
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.Icon">
+            <summary>
+            对话框图标
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.Title">
+            <summary>
+            对话框标题
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.DialogPanel.SetFixMode(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            初始化为固定大小模式
+            </summary>
+            <param name="fixWidth">固定逻辑宽度，至少100</param>
+            <param name="fixHeight">固定逻辑高度，至少20</param>
+            <param name="withBorder">是否带窗口边框</param>
+        </member>
+        <member name="M:ASEva.UIEto.DialogPanel.SetResizableMode(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            初始化为可变大小模式
+            </summary>
+            <param name="minWidth">最小逻辑宽度，至少100</param>
+            <param name="minHeight">最小逻辑高度，至少20</param>
+            <param name="defaultWidth">初始逻辑宽度</param>
+            <param name="defaultHeight">初始逻辑高度</param>
+        </member>
+        <member name="M:ASEva.UIEto.DialogPanel.Close">
+            <summary>
+            关闭对话框
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.DialogPanel.OnClosing">
+            <summary>
+            对话框即将关闭回调函数
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.BoolResult">
+            <summary>
+            布尔类型的对话框运行结果
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.IntResult">
+            <summary>
+            整数类型的对话框运行结果
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.DoubleResult">
+            <summary>
+            浮点类型的对话框运行结果
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.StringResult">
+            <summary>
+            字符串类型的对话框运行结果
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.ObjectResult">
+            <summary>
+            任意类型的对话框运行结果
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.DialogPanel.DialogMode">
+            <summary>
+            对话框模式
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.DialogPanel.DialogMode.Invalid">
+            <summary>
+            未初始化
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.DialogPanel.DialogMode.FixMode">
+            <summary>
+            固定大小模式
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.DialogPanel.DialogMode.ResizableMode">
+            <summary>
+            可变大小模式
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.Mode">
+            <summary>
+            获取对话框模式
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.MinSize">
+            <summary>
+            获取对话框最小逻辑尺寸（固定大小模式下即该固定逻辑尺寸）
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.DefaultSize">
+            <summary>
+            获取对话框初始逻辑尺寸
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.DialogPanel.WithBorder">
+            <summary>
+            获取是否带窗口边框
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.CommonImageExtensions">
+            <summary>
+            (api:eto=2.7.0) 方便使用通用图像数据的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.CommonImageExtensions.ToEtoBitmap(ASEva.Samples.CommonImage)">
+            <summary>
+            转为Eto位图对象
+            </summary>
+            <param name="image">通用图像数据</param>
+            <returns>Eto位图对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.CommonImageExtensions.ToSKImage(ASEva.Samples.CommonImage)">
+            <summary>
+            转为Skia图像对象
+            </summary>
+            <param name="image">通用图像数据</param>
+            <returns>Skia图像对象（使用完毕后建议及时调用Dispose，可减少内存占用）</returns>
+        </member>
+        <member name="T:ASEva.UIEto.ContainerExtensions">
+            <summary>
+            (api:eto=2.8.4) 方便操作控件容器的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ContainerExtensions.CloseRecursively(Eto.Forms.Container)">
+            <summary>
+            释放控件容器中的所有SkiaView等视图的资源
+            </summary>
+            <param name="container">控件容器对象</param>
+        </member>
+        <member name="T:ASEva.UIEto.ContextMenuExtensions">
+            <summary>
+            (api:eto=2.0.3) 方便操作右键菜单的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.SetContextMenuAsNew(Eto.Forms.Panel)">
+            <summary>
+            (api:eto=2.0.8) 设置面板右键菜单
+            </summary>
+            <param name="panel">面板</param>
+            <returns>右键菜单对象，若已存在则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddSeparator(Eto.Forms.ContextMenu)">
+            <summary>
+            添加分割线
+            </summary>
+            <param name="menu">右键菜单</param>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddButtonItem(Eto.Forms.ContextMenu,System.String,Eto.Drawing.Image)">
+            <summary>
+            (api:eto=2.0.4) 添加按键项
+            </summary>
+            <param name="menu">右键菜单</param>
+            <param name="text">菜单项文字</param>
+            <param name="image">菜单项文字前的图标，默认为null</param>
+            <returns></returns>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddCheckItem(Eto.Forms.ContextMenu,System.String)">
+            <summary>
+            添加多选项
+            </summary>
+            <param name="menu">右键菜单</param>
+            <param name="text">菜单项文字</param>
+            <returns>多选项对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddRadioItems(Eto.Forms.ContextMenu,System.String[])">
+            <summary>
+            添加一组单选项
+            </summary>
+            <param name="menu">右键菜单</param>
+            <param name="texts">各菜单项文字</param>
+            <returns>一组单选项对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddSeparator(Eto.Forms.ButtonMenuItem)">
+            <summary>
+            (api:eto=2.8.10) 在子菜单中添加分割线
+            </summary>
+            <param name="subMenu">子菜单</param>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddButtonItem(Eto.Forms.ButtonMenuItem,System.String,Eto.Drawing.Image)">
+            <summary>
+            (api:eto=2.8.10) 在子菜单中添加按键项
+            </summary>
+            <param name="subMenu">子菜单</param>
+            <param name="text">菜单项文字</param>
+            <param name="image">菜单项文字前的图标，默认为null</param>
+            <returns></returns>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddCheckItem(Eto.Forms.ButtonMenuItem,System.String)">
+            <summary>
+            (api:eto=2.8.10) 在子菜单中添加多选项
+            </summary>
+            <param name="subMenu">子菜单</param>
+            <param name="text">菜单项文字</param>
+            <returns>多选项对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.ContextMenuExtensions.AddRadioItems(Eto.Forms.ButtonMenuItem,System.String[])">
+            <summary>
+            (api:eto=2.8.10) 在子菜单中添加一组单选项
+            </summary>
+            <param name="subMenu">子菜单</param>
+            <param name="texts">各菜单项文字</param>
+            <returns>一组单选项对象</returns>
+        </member>
+        <member name="T:ASEva.UIEto.ConvertExtensions">
+            <summary>
+            (api:eto=2.8.14) 方便进行结构体转换操作的扩展
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.GraphicsExtensions">
+            <summary>
+            (api:eto=2.0.4) 方便操作图形对象的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.GraphicsExtensions.SetScaleForLogical(Eto.Drawing.Graphics)">
+            <summary>
+            设置绘图尺度，令所有相关绘制函数的输入尺寸都为logical尺寸
+            </summary>
+            <param name="g">图形对象</param>
+        </member>
+        <member name="M:ASEva.UIEto.GraphicsExtensions.ScaledFont(Eto.Drawing.Graphics,Eto.Drawing.Font)">
+            <summary>
+            调用SetScaleForLogical后，绘制文字需要使用此函数返回的字体
+            </summary>
+            <param name="g">图形对象</param>
+            <param name="f">原字体</param>
+            <returns>可用于绘制的字体</returns>
+        </member>
+        <member name="M:ASEva.UIEto.GraphicsExtensions.ScaledDefaultFont(Eto.Drawing.Graphics,System.Single)">
+            <summary>
+            (api:eto=2.0.6) 调用SetScaleForLogical后，以默认字体绘制需要使用此函数返回的字体
+            </summary>
+            <param name="g">图形对象</param>
+            <param name="sizeRatio">相对字体默认大小的比例，默认为1</param>
+            <returns>可用于绘制的默认字体</returns>
+        </member>
+        <member name="M:ASEva.UIEto.GraphicsExtensions.DrawString(Eto.Drawing.Graphics,System.String,Eto.Drawing.Font,Eto.Drawing.Color,ASEva.UIEto.TextAnchor,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=2.8.12) 指定锚点绘制文本
+            </summary>
+            <param name="g">图形对象</param>
+            <param name="text">文本</param>
+            <param name="font">字体</param>
+            <param name="color">文字颜色</param>
+            <param name="anchor">文本锚点坐标位置类型</param>
+            <param name="logicalX">文本锚点X轴逻辑坐标</param>
+            <param name="logicalY">文本锚点Y轴逻辑坐标</param>
+        </member>
+        <member name="T:ASEva.UIEto.SetClientSizeExtensions">
+            <summary>
+            (api:eto=2.3.2) 方便设置窗口或对话框的用户区域
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SetClientSizeExtensions.SetClientSize(Eto.Forms.Window,System.Int32,System.Int32)">
+            <summary>
+            设置窗口或对话框的用户区域尺寸
+            </summary>
+            <param name="window">窗口或对话框对象</param>
+            <param name="logicalWidth">宽度</param>
+            <param name="logicalHeight">高度</param>
+        </member>
+        <member name="M:ASEva.UIEto.SetClientSizeExtensions.SetMinimumClientSize(Eto.Forms.Window,System.Int32,System.Int32)">
+            <summary>
+            设置窗口或对话框的用户区域的最小尺寸
+            </summary>
+            <param name="window">窗口或对话框对象</param>
+            <param name="logicalWidth">最小宽度</param>
+            <param name="logicalHeight">最小高度</param>
+        </member>
+        <member name="T:ASEva.UIEto.SetContentExtensions">
+            <summary>
+            (api:eto=2.0.0) 方便设置面板Content的扩展 
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SetContentExtensions.SetContentAsRowLayout(Eto.Forms.Panel,System.Int32,System.Int32,Eto.Forms.VerticalAlignment)">
+            <summary>
+            设置横向堆叠布局至面板Content
+            </summary>
+            <param name="panel">面板</param>
+            <param name="logicalPadding">横向堆叠布局的边缘空隙</param>
+            <param name="logicalSpacing">横向堆叠布局中各控件的间隙</param>
+            <param name="alignment">横向堆叠布局中各控件的纵向对齐方式</param>
+            <returns>创建的横向堆叠布局</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SetContentExtensions.SetContentAsColumnLayout(Eto.Forms.Panel,System.Int32,System.Int32,Eto.Forms.HorizontalAlignment)">
+            <summary>
+            设置纵向堆叠布局至面板Content
+            </summary>
+            <param name="panel">面板</param>
+            <param name="logicalPadding">纵向堆叠布局的边缘空隙</param>
+            <param name="logicalSpacing">纵向堆叠布局中各控件的间隙</param>
+            <param name="alignment">纵向堆叠布局中各控件的横向对齐方式</param>
+            <returns>创建的纵向堆叠布局</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SetContentExtensions.SetContentAsTableLayout(Eto.Forms.Panel,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            设置表布局至面板Content
+            </summary>
+            <param name="panel">面板</param>
+            <param name="logicalPadding">表布局的边缘空隙</param>
+            <param name="logicalSpacingX">表布局中各控件的横向间隙</param>
+            <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
+            <returns>创建的表布局</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SetContentExtensions.SetContentAsPixelLayout(Eto.Forms.Panel)">
+            <summary>
+            设置像素布局至面板Content
+            </summary>
+            <param name="panel">面板</param>
+            <returns>创建的像素布局</returns>
+        </member>
+        <member name="T:ASEva.UIEto.SizerExtensions">
+            <summary>
+            (api:eto=2.0.0) 提供逻辑尺寸与实际像素值转换的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.Sizer(Eto.Forms.Control,System.Int32)">
+            <summary>
+            转换为实际像素值（单值）
+            </summary>
+            <param name="control">控件</param>
+            <param name="size">逻辑尺寸</param>
+            <returns>实际像素值</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.Sizer(Eto.Forms.Control,System.Int32,System.Int32)">
+            <summary>
+            转换为实际像素值（二维）
+            </summary>
+            <param name="control">控件</param>
+            <param name="width">逻辑宽度</param>
+            <param name="height">逻辑高度</param>
+            <returns>实际像素值</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.GetLogicalWidth(Eto.Forms.Control)">
+            <summary>
+            (api:eto=2.3.5) 获取控件逻辑宽度
+            </summary>
+            <param name="control">控件</param>
+            <returns>逻辑宽度</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.GetLogicalHeight(Eto.Forms.Control)">
+            <summary>
+            (api:eto=2.3.5) 获取控件逻辑高度
+            </summary>
+            <param name="control">控件</param>
+            <returns>逻辑高度</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.GetLogicalSize(Eto.Forms.Control)">
+            <summary>
+            (api:eto=2.5.1) 获取控件逻辑尺寸
+            </summary>
+            <param name="control">控件</param>
+            <returns>逻辑尺寸</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.SetLogicalWidth(Eto.Forms.Control,System.Int32)">
+            <summary>
+            设置控件逻辑宽度
+            </summary>
+            <param name="control">控件</param>
+            <param name="width">逻辑宽度</param>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.SetLogicalHeight(Eto.Forms.Control,System.Int32)">
+            <summary>
+            设置控件逻辑高度
+            </summary>
+            <param name="control">控件</param>
+            <param name="height">逻辑高度</param>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.SetLogicalSize(Eto.Forms.Control,System.Int32,System.Int32)">
+            <summary>
+            设置控件逻辑尺寸
+            </summary>
+            <param name="control">控件</param>
+            <param name="width">逻辑宽度</param>
+            <param name="height">逻辑高度</param>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.GetLogicalPoint(Eto.Forms.MouseEventArgs)">
+            <summary>
+            (api:eto=2.5.1) 获取鼠标事件中鼠标位置的逻辑坐标
+            </summary>
+            <param name="args">鼠标事件</param>
+            <returns>鼠标位置的逻辑坐标</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SizerExtensions.GetMouseLogicalPoint(Eto.Forms.Control)">
+            <summary>
+            (api:eto=2.6.2) 获取鼠标相对于当前控件的逻辑坐标
+            </summary>
+            <param name="control">控件</param>
+            <returns>鼠标相对于当前控件的逻辑坐标</returns>
+        </member>
+        <member name="P:ASEva.UIEto.SizerExtensions.PixelScale">
+            <summary>
+            像素单位比例
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.SkiaCanvasExtensions">
+            <summary>
+            (api:eto=2.7.0) 方便操作Skia画布的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaCanvasExtensions.GetDefaultFont(SkiaSharp.SKCanvas,System.Single)">
+            <summary>
+            获取默认字体
+            </summary>
+            <param name="canvas">Skia画布</param>
+            <param name="sizeScale">相对于默认尺寸的比例</param>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaCanvasExtensions.GetFont(SkiaSharp.SKCanvas,System.String,System.Single,SkiaSharp.SKFontStyleWeight,SkiaSharp.SKFontStyleWidth,SkiaSharp.SKFontStyleSlant)">
+            <summary>
+            (api:eto=2.8.16) 获取指定字体
+            </summary>
+            <param name="canvas">Skia画布</param>
+            <param name="fontName">字体名称</param>
+            <param name="sizeScale">相对于默认尺寸的比例</param>
+            <param name="weight">字重</param>
+            <param name="width">宽度</param>
+            <param name="slant">倾斜度</param>
+            <returns></returns>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaCanvasExtensions.DrawString(SkiaSharp.SKCanvas,System.String,SkiaSharp.SKFont,SkiaSharp.SKColor,ASEva.UIEto.TextAnchor,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=2.7.1) 指定锚点绘制文本
+            </summary>
+            <param name="canvas">Skia画布</param>
+            <param name="text">文本</param>
+            <param name="font">字体</param>
+            <param name="color">文字颜色</param>
+            <param name="anchor">文本锚点坐标位置类型</param>
+            <param name="logicalX">文本锚点X轴逻辑坐标</param>
+            <param name="logicalY">文本锚点Y轴逻辑坐标</param>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaCanvasExtensions.MeasureString(SkiaSharp.SKCanvas,System.String,SkiaSharp.SKFont)">
+            <summary>
+            (api:eto=2.7.1) 测量文本的尺寸
+            </summary>
+            <param name="canvas">Skia画布</param>
+            <param name="text">文本</param>
+            <param name="font">字体</param>
+            <returns>文本的逻辑尺寸</returns>
+        </member>
+        <member name="T:ASEva.UIEto.SnapshotExtensions">
+            <summary>
+            (api:eto=2.10.3) 获取控件快照的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SnapshotExtensions.Snapshot(Eto.Forms.Control)">
+            <summary>
+            获取控件快照
+            </summary>
+            <param name="control">目标控件</param>
+            <returns>控件快照图像，若不支持或获取失败则返回null</returns>
+        </member>
+        <member name="T:ASEva.UIEto.SplitterExtensions">
+            <summary>
+            (api:eto=2.0.2) 方便操作分屏控件的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SplitterExtensions.SetPanel1(Eto.Forms.Splitter)">
+            <summary>
+            设置面板1
+            </summary>
+            <param name="splitter">分屏控件</param>
+            <returns>面板1对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SplitterExtensions.SetPanel2(Eto.Forms.Splitter)">
+            <summary>
+            设置面板2
+            </summary>
+            <param name="splitter">分屏控件</param>
+            <returns>面板2对象</returns>
+        </member>
+        <member name="T:ASEva.UIEto.StackLayoutExtensions">
+            <summary>
+            (api:eto=2.0.2) 方便操作堆叠布局的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddSpace(Eto.Forms.StackLayout)">
+            <summary>
+            添加空间延布局方向撑满
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddSpace(Eto.Forms.StackLayout,System.Int32)">
+            <summary>
+            (api:eto=2.10.4) 延布局方向添加指定大小空间
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="logicalSize">指定大小空间</param>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddSeparator(Eto.Forms.StackLayout)">
+            <summary>
+            (api:eto=2.3.3) 添加分割线
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddLabel(Eto.Forms.StackLayout,System.String,System.Boolean)">
+            <summary>
+            添加文字标签至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="text">文字</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <returns>创建的文字标签对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddLabel(Eto.Forms.StackLayout,System.String,Eto.Forms.TextAlignment,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            添加文字标签至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="text">文字</param>
+            <param name="alignment">文字对齐</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <returns>创建的文字标签对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddButton(Eto.Forms.StackLayout,System.String,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            添加文字按键至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="text">文字</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <returns>创建的按键对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddButton(Eto.Forms.StackLayout,Eto.Drawing.Image,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=2.0.4) 添加图像按键至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="image">图像</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <returns>创建的按键对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddButtonPanel(Eto.Forms.StackLayout,System.String,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=2.3.3) 添加文字按键面板至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="text">文字</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <param name="logicalPadding">按钮边框与文字的间距</param>
+            <returns>创建的按键面板对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddButtonPanel(Eto.Forms.StackLayout,Eto.Drawing.Bitmap,System.Boolean,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=2.3.3) 添加图像按键面板至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="image">图像</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <param name="logicalPadding">按钮边框与文字的间距</param>
+            <returns>创建的按键面板对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddLinkButton(Eto.Forms.StackLayout,System.String,System.Boolean)">
+            <summary>
+            添加链接式按键至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="text">文字</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <returns>创建的链接式按键对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddCheckBox(Eto.Forms.StackLayout,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            添加多选框至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="text">文字</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="isChecked">初始状态是否勾选</param>
+            <returns>创建的多选框对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddRadioButtonList(Eto.Forms.StackLayout,System.String[],System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            添加单选框组至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="texts">各单选框的文字</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="selectedIndex">初始的选中单选框序号</param>
+            <param name="logicalSpacing">单选框间的间隙</param>
+            <returns>创建的单选框组对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddComboBox(Eto.Forms.StackLayout,System.String[],System.Boolean,System.Int32)">
+            <summary>
+            添加组合框至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="texts">组合框各选项的文字，可为空</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="selectedIndex">初始的选项序号</param>
+            <returns>创建的组合框对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddGroupBox(Eto.Forms.StackLayout,System.String,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            添加分组框至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="title">标题</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <returns>创建的分组框对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddControl(Eto.Forms.StackLayout,Eto.Forms.Control,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            添加控件至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="control">控件</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddRowLayout(Eto.Forms.StackLayout,System.Boolean,System.Int32,Eto.Forms.VerticalAlignment)">
+            <summary>
+            添加横向堆叠布局至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalSpacing">横向堆叠布局中各控件的间隙</param>
+            <param name="alignment">横向堆叠布局中各控件的纵向对齐方式</param>
+            <returns>创建的横向堆叠布局</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddRowLayout(Eto.Forms.StackLayout,System.Boolean,System.Int32,System.Int32,System.Int32,Eto.Forms.VerticalAlignment)">
+            <summary>
+            (api:eto=2.4.0) 添加横向堆叠布局至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <param name="logicalSpacing">横向堆叠布局中各控件的间隙</param>
+            <param name="alignment">横向堆叠布局中各控件的纵向对齐方式</param>
+            <returns>创建的横向堆叠布局</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddColumnLayout(Eto.Forms.StackLayout,System.Boolean,System.Int32,Eto.Forms.HorizontalAlignment)">
+            <summary>
+            添加纵向堆叠布局至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalSpacing">纵向堆叠布局中各控件的间隙</param>
+            <param name="alignment">纵向堆叠布局中各控件的横向对齐方式</param>
+            <returns>创建的纵向堆叠布局</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddColumnLayout(Eto.Forms.StackLayout,System.Boolean,System.Int32,System.Int32,System.Int32,Eto.Forms.HorizontalAlignment)">
+            <summary>
+            (api:eto=2.4.0) 添加纵向堆叠布局至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <param name="logicalSpacing">纵向堆叠布局中各控件的间隙</param>
+            <param name="alignment">纵向堆叠布局中各控件的横向对齐方式</param>
+            <returns>创建的纵向堆叠布局</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddTableLayout(Eto.Forms.StackLayout,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            添加表布局至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalSpacingX">表布局中各控件的横向间隙</param>
+            <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
+            <returns>创建的表布局</returns>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddTableLayout(Eto.Forms.StackLayout,System.Boolean,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=2.4.0) 添加表布局至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <param name="logicalSpacingX">表布局中各控件的横向间隙</param>
+            <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
+            <returns>创建的表布局</returns>
+        </member>
+        <member name="T:ASEva.UIEto.TabControlExtensions">
+            <summary>
+            (api:eto=2.0.2) 方便操作选项卡控件的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.TabControlExtensions.AddPage(Eto.Forms.TabControl,System.String)">
+            <summary>
+            添加页至选项卡控件
+            </summary>
+            <param name="tabControl">选项卡控件</param>
+            <param name="title">页标题</param>
+            <returns>页对象</returns>
+        </member>
+        <member name="T:ASEva.UIEto.TableLayoutExtensions">
+            <summary>
+            (api:eto=2.0.2) 方便操作表布局的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddRow(Eto.Forms.TableLayout,System.Boolean)">
+            <summary>
+            表布局添加一行
+            </summary>
+            <param name="tableLayout">表布局</param>
+            <param name="expandHeight">是否纵向撑满</param>
+            <returns>表布局的行</returns>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddSpace(Eto.Forms.TableRow)">
+            <summary>
+            添加空间延横向撑满
+            </summary>
+            <param name="tableRow">表布局的行</param>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddLabel(Eto.Forms.TableRow,System.String,System.Boolean)">
+            <summary>
+            添加文字标签至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="text">文字</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <returns>创建的文字标签对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddLabel(Eto.Forms.TableRow,System.String,Eto.Forms.TextAlignment,System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            添加文字标签至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="text">文字</param>
+            <param name="alignment">文字对齐</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <returns>创建的文字标签对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddButton(Eto.Forms.TableRow,System.String,System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            添加文字按键至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="text">文字</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <returns>创建的按键对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddButton(Eto.Forms.TableRow,Eto.Drawing.Image,System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            (api:eto=2.0.4) 添加图像按键至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="image">图像</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <returns>创建的按键对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddLinkButton(Eto.Forms.TableRow,System.String,System.Boolean,System.Boolean)">
+            <summary>
+            添加链接式按键至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="text">文字</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <returns>创建的链接式按键对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddCheckBox(Eto.Forms.TableRow,System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            添加多选框至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="text">文字</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="isChecked">初始状态是否勾选</param>
+            <returns>创建的多选框对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddRadioButtonList(Eto.Forms.TableRow,System.String[],System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            添加单选框组至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="texts">各单选框的文字</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="selectedIndex">初始的选中单选框序号</param>
+            <param name="logicalSpacing">单选框间的间隙</param>
+            <returns>创建的单选框组对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddComboBox(Eto.Forms.TableRow,System.String[],System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            添加组合框至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="texts">组合框各选项的文字，可为空</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="selectedIndex">初始的选项序号</param>
+            <returns>创建的组合框对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddGroupBox(Eto.Forms.TableRow,System.String,System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            添加分组框至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="title">标题</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+            <returns>创建的分组框对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddControl(Eto.Forms.TableRow,Eto.Forms.Control,System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            添加控件至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="control">控件</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddRowLayout(Eto.Forms.TableRow,System.Boolean,System.Boolean,System.Int32,Eto.Forms.VerticalAlignment)">
+            <summary>
+            添加横向堆叠布局至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="logicalSpacing">横向堆叠布局中各控件的间隙</param>
+            <param name="alignment">横向堆叠布局中各控件的纵向对齐方式</param>
+            <returns>创建的横向堆叠布局</returns>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddColumnLayout(Eto.Forms.TableRow,System.Boolean,System.Boolean,System.Int32,Eto.Forms.HorizontalAlignment)">
+            <summary>
+            添加纵向堆叠布局至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="logicalSpacing">纵向堆叠布局中各控件的间隙</param>
+            <param name="alignment">纵向堆叠布局中各控件的横向对齐方式</param>
+            <returns>创建的纵向堆叠布局</returns>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddTableLayout(Eto.Forms.TableRow,System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            添加表布局至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="logicalSpacingX">表布局中各控件的横向间隙</param>
+            <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
+            <returns>创建的表布局</returns>
+        </member>
+        <member name="T:ASEva.UIEto.TopMostExtensions">
+            <summary>
+            (api:eto=2.9.10) 方便获取控件所在窗口或对话框是否在顶层的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.TopMostExtensions.IsTopMost(Eto.Forms.Control)">
+            <summary>
+            获取控件所在窗口或对话框是否在顶层
+            </summary>
+            <param name="control">控件</param>
+            <returns>所在窗口或对话框是否在顶层</returns>
+        </member>
+        <member name="T:ASEva.UIEto.WindowExtensions">
+            <summary>
+            (api:eto=2.0.9) 方便操作窗口的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.WindowExtensions.MoveToCenter(Eto.Forms.Window,Eto.Forms.Screen)">
+            <summary>
+            将窗口移动至屏幕中央
+            </summary>
+            <param name="window">窗口</param>
+            <param name="screen">目标屏幕，空表示主屏幕</param>
+        </member>
+        <member name="T:ASEva.UIEto.FlowLayout">
+            <summary>
+            (api:eto=2.9.0) 沿纵向添加的控件列表
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.AddControl(Eto.Forms.Control,System.Int32)">
+            <summary>
+            在底部添加控件
+            </summary>
+            <param name="control">目标控件，若已存在则不添加</param>
+            <param name="logicalHeight">目标控件的高度，至少为4</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.InsertControl(System.Int32,Eto.Forms.Control,System.Int32)">
+            <summary>
+            在指定序号位置添加控件
+            </summary>
+            <param name="index">指定序号位置，超出范围则添加至顶部或底部</param>
+            <param name="control">目标控件，若已存在则不添加</param>
+            <param name="logicalHeight">目标控件的高度，至少为4</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.GetControlCount">
+            <summary>
+            获取控件个数
+            </summary>
+            <returns>控件个数</returns>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.GetControlIndex(Eto.Forms.Control)">
+            <summary>
+            获取指定控件的序号位置
+            </summary>
+            <param name="control">目标控件</param>
+            <returns>序号位置，若不存在则返回-1</returns>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.GetControlAt(System.Int32)">
+            <summary>
+            获取指定序号位置上的控件
+            </summary>
+            <param name="index">指定序号位置</param>
+            <returns>目标控件，若超出范围则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.RemoveControl(System.Int32)">
+            <summary>
+            移除指定序号位置处的控件
+            </summary>
+            <param name="index">指定序号位置，超出范围则不移除</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.RemoveAllControls">
+            <summary>
+            移除所有控件
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.SetControlVisible(System.Int32,System.Boolean)">
+            <summary>
+            设置指定序号位置处的控件是否可见
+            </summary>
+            <param name="index">指定序号位置，超出范围则忽略</param>
+            <param name="visible">是否可见</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.SelectControl(System.Int32,System.Boolean)">
+            <summary>
+            选中指定序号位置处的控件
+            </summary>
+            <param name="index">指定序号位置，超出范围则忽略</param>
+            <param name="invokeEvent">新选中后是否触发ControlSelected事件</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.GetSelectedControlIndex">
+            <summary>
+            获取选中控件所在序号位置
+            </summary>
+            <returns>序号位置，若无选中则返回-1</returns>
+        </member>
+        <member name="E:ASEva.UIEto.FlowLayout.ControlSelected">
+            <summary>
+            新选中控件后触发事件
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.FlowLayout2D">
+            <summary>
+            (api:eto=2.9.1) 沿纵向添加的二维控件列表
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.#ctor">
+            <summary>
+            构造函数，默认控件宽度为300
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.#ctor(System.Int32)">
+            <summary>
+            构造函数，并指定默认控件宽度
+            </summary>
+            <param name="controlLogicalWidth">默认控件宽度，至少为4</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.AddControl(Eto.Forms.Control,System.Int32)">
+            <summary>
+            在底部添加控件
+            </summary>
+            <param name="control">目标控件，若已存在则不添加</param>
+            <param name="logicalHeight">目标控件的高度，至少为4</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.InsertControl(System.Int32,Eto.Forms.Control,System.Int32)">
+            <summary>
+            在指定序号位置添加控件
+            </summary>
+            <param name="index">指定序号位置，超出范围则添加至顶部或底部</param>
+            <param name="control">目标控件，若已存在则不添加</param>
+            <param name="logicalHeight">目标控件的高度，至少为4</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.UpdateControlsSize(System.Int32,System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
+            <summary>
+            更新控件尺寸
+            </summary>
+            <param name="controlLogicalWidth">默认控件宽度，至少为4</param>
+            <param name="controlsLogicalHeight">需要更新的所有控件的高度表，键为控件的序号位置，值为控件高度，至少为4</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.GetControlCount">
+            <summary>
+            获取控件个数
+            </summary>
+            <returns>控件个数</returns>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.GetControlIndex(Eto.Forms.Control)">
+            <summary>
+            获取指定控件的序号位置
+            </summary>
+            <param name="control">目标控件</param>
+            <returns>序号位置，若不存在则返回-1</returns>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.GetControlAt(System.Int32)">
+            <summary>
+            获取指定序号位置上的控件
+            </summary>
+            <param name="index">指定序号位置</param>
+            <returns>目标控件，若超出范围则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.RemoveControl(System.Int32)">
+            <summary>
+            移除指定序号位置处的控件
+            </summary>
+            <param name="index">指定序号位置，超出范围则不移除</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.RemoveAllControls">
+            <summary>
+            移除所有控件
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.SetControlVisible(System.Int32,System.Boolean)">
+            <summary>
+            设置指定序号位置处的控件是否可见
+            </summary>
+            <param name="index">指定序号位置，超出范围则忽略</param>
+            <param name="visible">是否可见</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.GetControlWithMouse">
+            <summary>
+            (api:eto=2.9.2) 获取鼠标所在控件的序号位置
+            </summary>
+            <returns>鼠标所在控件的序号位置，-1表示鼠标未在任何控件上</returns>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.SelectControl(System.Int32,System.Boolean)">
+            <summary>
+            选中指定序号位置处的控件
+            </summary>
+            <param name="index">指定序号位置，超出范围则忽略</param>
+            <param name="invokeEvent">新选中后是否触发ControlSelected事件</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.GetSelectedControlIndex">
+            <summary>
+            获取选中控件所在序号位置
+            </summary>
+            <returns>序号位置，若无选中则返回-1</returns>
+        </member>
+        <member name="E:ASEva.UIEto.FlowLayout2D.ControlSelected">
+            <summary>
+            新选中控件后触发事件
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.TextAnchor">
+            <summary>
+            (api:eto=2.6.0) 文本锚点坐标位置类型
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.Center">
+            <summary>
+            文本中心
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.TopLeft">
+            <summary>
+            文本左上角
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.LeftCenter">
+            <summary>
+            文本左侧中心
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.BottomLeft">
+            <summary>
+            文本左下角
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.TopRight">
+            <summary>
+            文本右上角
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.RightCenter">
+            <summary>
+            文本右侧中心
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.BottomRight">
+            <summary>
+            文本右下角
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.TopCenter">
+            <summary>
+            文本上方中心
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.TextAnchor.BottomCenter">
+            <summary>
+            文本下方中心
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.GLTextTask">
+            <summary>
+            (api:eto=2.6.0) OpenGL文本绘制任务
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.text">
+            <summary>
+            文本
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.posX">
+            <summary>
+            文本锚点X轴坐标
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.posY">
+            <summary>
+            文本锚点Y轴坐标
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.isRealPos">
+            <summary>
+            文本锚点坐标是否为物理像素坐标系，否则为逻辑坐标
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.anchor">
+            <summary>
+            文本锚点坐标位置类型
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.red">
+            <summary>
+            文本绘制颜色红色分量
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.green">
+            <summary>
+            文本绘制颜色绿色分量
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.blue">
+            <summary>
+            文本绘制颜色蓝色分量
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.alpha">
+            <summary>
+            文本绘制颜色Alpha通道分量，0将被视为255
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.fontName">
+            <summary>
+            文本字体，空则使用默认字体
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLTextTask.sizeScale">
+            <summary>
+            文本相对于默认尺寸的比例，0将被视为1
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.GLTextTasks">
+            <summary>
+            (api:eto=2.6.0) OpenGL文本绘制任务对象
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.GLTextTasks.Add(System.String,System.Int32,System.Int32,System.Byte,System.Byte,System.Byte,System.Single)">
+            <summary>
+            添加文本绘制任务
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.GLTextTasks.Add(ASEva.UIEto.GLTextTask)">
+            <summary>
+            添加文本绘制任务
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.GLSizeInfo">
+            <summary>
+            (api:eto=2.6.0) OpenGL绘制尺寸信息
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLSizeInfo.LogicalWidth">
+            <summary>
+            逻辑宽度
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLSizeInfo.LogicalHeight">
+            <summary>
+            逻辑高度
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLSizeInfo.RealWidth">
+            <summary>
+            物理像素宽度
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLSizeInfo.RealHeight">
+            <summary>
+            物理像素高度
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLSizeInfo.RealPixelScale">
+            <summary>
+            物理像素与逻辑像素的换算比
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLSizeInfo.AspectRatio">
+            <summary>
+            宽度与高度之比
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLSizeInfo.VerticalInverted">
+            <summary>
+            (api:eto=2.8.8) 图像坐标系垂直方向是否反转
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:ASEva.UIEto.GLSizeInfo.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Double,System.Single)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.GLSizeInfo.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Double,System.Single,System.Boolean)">
+            <summary>
+            (api:eto=2.8.8) 构造函数
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.GLEventArgs">
+            <summary>
+            (api:eto=2.6.0) GLView事件参数基类
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLEventArgs.GL">
+            <summary>
+            OpenGL对象
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.GLResizeEventArgs">
+            <summary>
+            (api:eto=2.6.0) GLView缩放事件参数
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLResizeEventArgs.SizeInfo">
+            <summary>
+            缩放后的尺寸信息
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.GLRenderEventArgs">
+            <summary>
+            (api:eto=2.6.0) GLView渲染事件参数
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLRenderEventArgs.TextTasks">
+            <summary>
+            文本绘制任务对象
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.GLContextInfo">
+            <summary>
+            (api:eto=2.6.1) OpenGL上下文信息
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLContextInfo.version">
+            <summary>
+            版本
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLContextInfo.vendor">
+            <summary>
+            厂商
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLContextInfo.renderer">
+            <summary>
+            渲染器
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLContextInfo.extensions">
+            <summary>
+            扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.GLContextInfo.ToExtensionList">
+            <summary>
+            (api:eto=2.8.5)
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ASEva.UIEto.GLAntialias">
+            <summary>
+            (api:eto=2.9.4) 抗锯齿选项
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLAntialias.Disabled">
+            <summary>
+            禁用
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLAntialias.Sample2x">
+            <summary>
+            2x抗锯齿
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLAntialias.Sample4x">
+            <summary>
+            4x抗锯齿
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLAntialias.Sample8x">
+            <summary>
+            8x抗锯齿
+            </summary>
+        </member>
+        <member name="F:ASEva.UIEto.GLAntialias.Sample16x">
+            <summary>
+            16x抗锯齿
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.GLView">
+            <summary>
+            (api:eto=2.6.0) OpenGL绘制视图
+            </summary>
+        </member>
+        <member name="E:ASEva.UIEto.GLView.GLInitialize">
+            <summary>
+            初始化事件
+            </summary>
+        </member>
+        <member name="E:ASEva.UIEto.GLView.GLResize">
+            <summary>
+            缩放事件
+            </summary>
+        </member>
+        <member name="E:ASEva.UIEto.GLView.GLRender">
+            <summary>
+            渲染事件
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.GLView.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.GLView.#ctor(System.String)">
+            <summary>
+            (api:eto=2.8.3) 构造函数
+            </summary>
+            <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈</param>
+        </member>
+        <member name="M:ASEva.UIEto.GLView.#ctor(System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            (api:eto=2.8.7) 构造函数
+            </summary>
+            <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
+            <param name="requestOnscreenRendering">是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
+            <param name="drawText">是否需要绘制文本，默认为true</param>
+            <param name="useLegacyAPI">是否需要使用OpenGL传统API，默认为true</param>
+        </member>
+        <member name="M:ASEva.UIEto.GLView.#ctor(System.String,ASEva.UIEto.GLAntialias,System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            (api:eto=2.9.4) 构造函数
+            </summary>
+            <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
+            <param name="requestAntialias">请求抗锯齿选项(若不满足条件则使用最接近的选项)，默认为4倍抗锯齿</param>
+            <param name="requestOnscreenRendering">是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
+            <param name="requestOverlay">是否需要支持被其他控件覆盖(若不支持则SupportOverlay属性为false)，默认为true</param>
+            <param name="drawText">是否需要绘制文本，默认为true</param>
+            <param name="useLegacyAPI">是否需要使用OpenGL传统API，默认为true</param>
+        </member>
+        <member name="M:ASEva.UIEto.GLView.Close">
+            <summary>
+            关闭视图，释放资源
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.GLView.QueueRender">
+            <summary>
+            提交新的渲染请求
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLView.ContextInfo">
+            <summary>
+            (api:eto=2.6.1) 上下文信息 (null表示还未初始化完成)
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLView.FPS">
+            <summary>
+            (api:eto=2.6.1) 渲染帧率（统计最近3秒）
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLView.SupportOverlay">
+            <summary>
+            (api:eto=2.8.7) 是否支持被其他控件覆盖
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.ImageConverter">
+            <summary>
+            (api:eto=2.2.0) 图像对象转换
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.OverlayLayout">
+            <summary>
+            (api:eto=2.0.4) 可覆盖的布局
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.OverlayLayout.AddControl(Eto.Forms.Control,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            添加控件
+            </summary>
+            <param name="control">控件</param>
+            <param name="topLogicalPadding">控件与顶部间隔，null表示不关联</param>
+            <param name="bottomLogicalPadding">控件与底部间隔，null表示不关联</param>
+            <param name="leftLogicalPadding">控件与左侧间隔，null表示不关联</param>
+            <param name="rightLogicalPadding">控件与右侧间隔，null表示不关联</param>
+            <returns>新添加的控件</returns>
+        </member>
+        <member name="M:ASEva.UIEto.OverlayLayout.RemoveControl(Eto.Forms.Control)">
+            <summary>
+            移除控件
+            </summary>
+            <param name="control">控件</param>
+        </member>
+        <member name="M:ASEva.UIEto.OverlayLayout.UpdatePosition(Eto.Forms.Control)">
+            <summary>
+            更新控件位置（一般在手动修改控件大小后调用）
+            </summary>
+            <param name="control">控件</param>
+        </member>
+        <member name="T:ASEva.UIEto.Pixel">
+            <summary>
+            (api:eto=2.4.0) 像素单位转换
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.Pixel.FromLogicalValue(System.Int32)">
+            <summary>
+            逻辑像素值转原始像素值
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.Pixel.ToLogicalValue(System.Int32)">
+            <summary>
+            原始像素值转逻辑像素值
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.Pixel.FromLogicalPoint(Eto.Drawing.Point)">
+            <summary>
+            逻辑点坐标转原始点坐标
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.Pixel.ToLogicalPoint(Eto.Drawing.Point)">
+            <summary>
+            原始点坐标转逻辑点坐标
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.Pixel.FromLogicalSize(Eto.Drawing.Size)">
+            <summary>
+            逻辑尺寸转原始尺寸
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.Pixel.ToLogicalSize(Eto.Drawing.Size)">
+            <summary>
+            原始尺寸转逻辑尺寸
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.Pixel.Scale">
+            <summary>
+            逻辑像素与原始像素(即UI框架下的像素，非物理像素)的换算比
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.Pixel.RealConsistency">
+            <summary>
+            (api:eto=2.9.7) 逻辑像素与物理像素是否为1:1
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.SimpleTreeView">
+            <summary>
+            (api:eto=2.10.0) 简易树状视图
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SimpleTreeView.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SimpleTreeView.SetModel(ASEva.UIEto.SimpleTreeNode[],System.Boolean)">
+            <summary>
+            设置树状视图内容
+            </summary>
+            <param name="rootNodes">内容的根节点集合</param>
+            <param name="sort">是否对条目排序</param>
+        </member>
+        <member name="M:ASEva.UIEto.SimpleTreeView.UpdateNodes(ASEva.UIEto.SimpleTreeNodeUpdateTask[])">
+            <summary>
+            批量更新内容节点
+            </summary>
+            <param name="tasks">更新内容节点的任务</param>
+        </member>
+        <member name="M:ASEva.UIEto.SimpleTreeView.GetSelectedKey">
+            <summary>
+            获取当前选中条目的键对象
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SimpleTreeView.SelectItem(System.Object)">
+            <summary>
+            (api:eto=2.10.1) 选中键对象对应的条目
+            </summary>
+            <param name="key">键对象</param>
+        </member>
+        <member name="E:ASEva.UIEto.SimpleTreeView.SelectedItemChanged">
+            <summary>
+            选中条目切换事件
+            </summary>
+        </member>
+        <member name="E:ASEva.UIEto.SimpleTreeView.SelectedItemActivated">
+            <summary>
+            选中条目双击或回车事件
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.SimpleTreeNode">
+            <summary>
+            (api:eto=2.10.0) 简易树状视图的内容节点
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SimpleTreeNode.Key">
+            <summary>
+            条目的键对象
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SimpleTreeNode.Text">
+            <summary>
+            显示文本内容
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SimpleTreeNode.TextColor">
+            <summary>
+            文本颜色，Colors.Transparent表示使用默认颜色
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SimpleTreeNode.BackgroundColor">
+            <summary>
+            条目背景颜色，Colors.Transparent表示使用默认颜色
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SimpleTreeNode.ChildNodes">
+            <summary>
+            子节点集合
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SimpleTreeNode.ChildNodesExpanded">
+            <summary>
+            子节点是否展开显示
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.SimpleTreeNodeUpdateTask">
+            <summary>
+            (api:eto=2.10.0) 更新简易树状视图内容节点的任务
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SimpleTreeNodeUpdateTask.Key">
+            <summary>
+            条目的键对象
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SimpleTreeNodeUpdateTask.TextColor">
+            <summary>
+            文本颜色，null表示不更新，Colors.Transparent表示设置为默认颜色
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SimpleTreeNodeUpdateTask.BackgroundColor">
+            <summary>
+            条目背景颜色，null表示不更新，Colors.Transparent表示设置为默认颜色
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.SkiaRenderEventArgs">
+            <summary>
+            (api:eto=2.7.0) SkiaView渲染事件参数
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SkiaRenderEventArgs.Canvas">
+            <summary>
+            Skia画布对象
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SkiaRenderEventArgs.LogicalSize">
+            <summary>
+            画布的逻辑尺寸
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.SkiaView">
+            <summary>
+            (api:eto=2.7.0) Skia绘制视图
+            </summary>
+        </member>
+        <member name="E:ASEva.UIEto.SkiaView.Render">
+            <summary>
+            渲染事件
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaView.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaView.#ctor(System.Boolean)">
+            <summary>
+            (api:eto=2.8.2) 构造函数
+            </summary>
+            <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaView.#ctor(System.String,System.Boolean)">
+            <summary>
+            (api:eto=2.8.3) 构造函数
+            </summary>
+            <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈</param>
+            <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaView.#ctor(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            (api:eto=2.8.7) 构造函数
+            </summary>
+            <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
+            <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
+            <param name="requestOnscreenRendering">在未禁用OpenGL渲染时，是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaView.#ctor(System.String,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            (api:eto=2.9.4) 构造函数
+            </summary>
+            <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
+            <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
+            <param name="requestOnscreenRendering">在未禁用OpenGL渲染时，是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
+            <param name="requestOverlay">是否需要支持被其他控件覆盖(若不支持则SupportOverlay属性为false)，默认为false</param>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaView.Close">
+            <summary>
+            关闭视图，释放资源
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SkiaView.QueueRender">
+            <summary>
+            提交新的渲染请求
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SkiaView.ContextInfo">
+            <summary>
+            底层的OpenGL上下文信息 (null表示不使用或还未初始化完成)
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SkiaView.FPS">
+            <summary>
+            渲染帧率（统计最近3秒）
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.SkiaView.SupportOverlay">
+            <summary>
+            (api:eto=2.8.7) 是否支持被其他控件覆盖
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.TextBitmap">
+            <summary>
+            (api:eto=2.9.6) 文本位图，可替代Graphics.DrawString以提高效率
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.TextBitmap.#ctor(Eto.Drawing.Graphics,System.String,System.Single,Eto.Drawing.Color)">
+            <summary>
+            创建文本位图（仅支持默认字体）
+            </summary>
+            <param name="g">图形对象</param>
+            <param name="text">文本</param>
+            <param name="sizeRatio">相对字体默认大小的比例，默认为1</param>
+            <param name="color">绘制颜色</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextBitmap.Draw(Eto.Drawing.Graphics,ASEva.UIEto.TextAnchor,System.Int32,System.Int32)">
+            <summary>
+            通过图形对象绘制文本位图
+            </summary>
+            <param name="g">图形对象</param>
+            <param name="anchor">文本锚点坐标位置类型</param>
+            <param name="logicalX">文本锚点X轴逻辑坐标</param>
+            <param name="logicalY">文本锚点Y轴逻辑坐标</param>
+        </member>
+        <member name="P:ASEva.UIEto.TextBitmap.Text">
+            <summary>
+            获取当前文本
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.TextBitmap.SizeRatio">
+            <summary>
+            (api:eto=2.9.8) 获取当前字体相对于默认大小比例
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.TextBitmap.Color">
+            <summary>
+            获取当前绘制颜色
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.TextTableView">
+            <summary>
+            (api:eto=2.0.3) 纯文字的表格控件
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.AddColumn(System.String,System.Int32,System.Boolean)">
+            <summary>
+            添加一列（需要在添加行之前进行）
+            </summary>
+            <param name="title">列标题</param>
+            <param name="logicalWidth">列宽度</param>
+            <param name="editable">是否可编辑该列文字</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.GetRowCount">
+            <summary>
+            (api:eto=2.0.10) 获取行数
+            </summary>
+            <returns>行数</returns>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.AddRow(System.String[])">
+            <summary>
+            添加一行
+            </summary>
+            <param name="values">该行的初始文字，设为null则默认为空</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.AddRows(System.Collections.Generic.List{System.String[]})">
+            <summary>
+            (api:eto=2.4.2) 添加多行
+            </summary>
+            <param name="rowsValues">每行的初始文字，元素为null则该行默认为空</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.RemoveRow(System.Int32)">
+            <summary>
+            移除一行
+            </summary>
+            <param name="rowIndex">行序号</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.RemoveRows(System.Int32[])">
+            <summary>
+            (api:eto=2.4.2) 移除多行
+            </summary>
+            <param name="rowIndices">各行序号</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.RemoveAllRows">
+            <summary>
+            (api:eto=2.0.10) 移除所有行
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.GetValue(System.Int32,System.Int32)">
+            <summary>
+            获取某格文字
+            </summary>
+            <param name="rowIndex">行序号</param>
+            <param name="columnIndex">列序号</param>
+            <returns>该格文字</returns>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.SetValue(System.Int32,System.Int32,System.String)">
+            <summary>
+            设置某格文字
+            </summary>
+            <param name="rowIndex">行序号</param>
+            <param name="columnIndex">列序号</param>
+            <param name="val">该格文字</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.SetTextColor(System.Int32,System.Int32,Eto.Drawing.Color)">
+            <summary>
+            (api:eto=2.4.3) 设置某格文字颜色
+            </summary>
+            <param name="rowIndex">行序号</param>
+            <param name="columnIndex">列序号</param>
+            <param name="color">文字颜色</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextTableView.SetBackgroundColor(System.Int32,System.Int32,Eto.Drawing.Color)">
+            <summary>
+            (api:eto=2.4.3) 设置某格背景颜色
+            </summary>
+            <param name="rowIndex">行序号</param>
+            <param name="columnIndex">列序号</param>
+            <param name="color">背景颜色</param>
+        </member>
+        <member name="T:ASEva.UIEto.WindowPanel">
+            <summary>
+            (api:eto=2.0.0) 窗口控件，用于实现窗口组件的实际功能
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnInitSize(System.String)">
+            <summary>
+            (api:eto=2.2.1) [可选实现] 在初始化控件尺寸时被调用
+            </summary>
+            <param name="config">配置字符串</param>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnGetMinimumSize">
+            <summary>
+            [必须实现] 获取最小尺寸时被调用
+            </summary>
+            <returns>默认DPI下的最小尺寸，将被调整为至少100x50</returns>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnGetDefaultSize">
+            <summary>
+            [可选实现] 获取默认尺寸时被调用（若不实现默认尺寸即为最小尺寸）
+            </summary>
+            <returns>默认DPI下的默认尺寸，将被调整为至少100x50</returns>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnInit(System.String)">
+            <summary>
+            [可选实现] 在配置界面控件初始化时被调用
+            </summary>
+            <param name="config">配置字符串</param>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnGetConfig">
+            <summary>
+            [可选实现] 获取配置字符串时被调用
+            </summary>
+            <returns>配置字符串</returns>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnInputData(System.Object)">
+            <summary>
+            [可选实现] 在获得新数据时被调用。如果存在样本缓存，则需要在添加至缓存后使用 ASEva.Sample.ClipWithBufferBegin 将缓存范围外数据移除。另外，由于窗口隐藏时将不会调用 ASEva.WindowPanel.OnUpdateUI ，所以可以在此函数中的data为 ASEva.Samples.ManualTriggerSample 时进行后台处理（ManualTriggerSample频率为50Hz）
+            </summary>
+            <param name="data">新数据，包括通用样本 ASEva.GeneralSample , 手动触发器样本 ASEva.Samples.ManualTriggerSample , 音频帧样本 ASEva.Samples.AudioFrameSample , 点云帧样本 ASEva.Samples.PointCloudSample , 总线数据 ASEva.Samples.BusDataPack , 信号数据 ASEva.Samples.SignalsData , 事件数据 ASEva.EventData , 场景片段描述 ASEva.SceneData 等类型</param>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnResetData">
+            <summary>
+            [可选实现] 在需要重置数据缓存时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnStartSession">
+            <summary>
+            [可选实现] 在每轮开始时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnStopSession">
+            <summary>
+            [可选实现] 在每轮结束时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnUpdateUI">
+            <summary>
+            [可选实现] 在需要更新界面时被调用。所有与界面相关的更新应全部放在此函数内实现。需要注意，窗口隐藏时将不会调用此函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnHandleModal">
+            <summary>
+            (api:eto=2.9.5) [可选实现] 在主循环中被调用，可进行模态对话
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnUpdateContainerSize(ASEva.IntSize)">
+            <summary>
+            (api:eto=2.7.2) [可选实现] 在容器尺寸变化后被调用
+            </summary>
+            <param name="containerSize">变化后的容器尺寸</param>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnRelease">
+            <summary>
+            [可选实现] 在窗口控件销毁前被调用
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <base mode="release">binm</base>
-    <base mode="debug">binm/debug</base>
+    <base mode="release" arch="x86">binm</base>
+    <base mode="debug" arch="x86">binm/debug</base>
+    <base mode="release" arch="arm">binma</base>
+    <base mode="debug" arch="arm">binma/debug</base>
     <exe>ASEvaAPIEtoTest</exe>
     <icon>ASEvaAPIEtoTest/Resources/icon.icns</icon>
     <target>macapp/ASEvaAPIEtoTest.app</target>

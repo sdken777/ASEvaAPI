@@ -81,7 +81,7 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/binm/ASEvaAPIMonoMac.dll $TARGET_DIR/binm/
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binm/
     cp -vf "$CUR_DIR"/3party/monomac/* $TARGET_DIR/binm/
-    cp -vf "$CUR_DIR"/3party/macos/* $TARGET_DIR/binm/
+    cp -vf "$CUR_DIR"/3party/macos-x64/* $TARGET_DIR/binm/
     if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/macos-skia-native/* $TARGET_DIR/binm/
     fi
@@ -171,7 +171,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/binm/ASEvaAPIMonoMac.dll $TARGET_DIR/binm/debug/
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binm/debug/
         cp -vf "$CUR_DIR"/3party/monomac/* $TARGET_DIR/binm/debug/
-        cp -vf "$CUR_DIR"/3party/macos/* $TARGET_DIR/binm/debug/
+        cp -vf "$CUR_DIR"/3party/macos-x64/* $TARGET_DIR/binm/debug/
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
             cp -vf "$CUR_DIR"/3party/macos-skia-native/* $TARGET_DIR/binm/debug/
         fi

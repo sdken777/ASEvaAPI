@@ -69,6 +69,7 @@ namespace ASEva
                             else if (osName == "darwin")
                             {
                                 if (archName == "x86_64") osCode = "macos";
+                                else if (archName == "arm64") osCode = "macosarm";
                             }
                         }
                         break;
