@@ -2548,7 +2548,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.7.6) 获取指定通道的客机同步配置
         /// </summary>
-        /// <param name="id">客机同步ID，如：bus@1, video@0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
+        /// <param name="id">客机同步监控通道，如bus@1, video@0, sample@xxx-v2@0等；或设置已同步的客机同步ID，如bus.1, video.0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
         /// <returns>客机是否与授时服务器同步</returns>
         public static bool GetChannelGuestSyncFlag(String id)
         {
@@ -2558,7 +2558,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.7.6) 设置指定通道的客机同步配置
         /// </summary>
-        /// <param name="id">客机同步ID，如：bus@1, video@0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
+        /// <param name="id">客机同步监控通道，如bus@1, video@0, sample@xxx-v2@0等；或设置已同步的客机同步ID，如bus.1, video.0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
         /// <param name="guestSync">客机是否与授时服务器同步</param>
         public static void SetChannelGuestSyncFlag(String id, bool guestSync)
         {
