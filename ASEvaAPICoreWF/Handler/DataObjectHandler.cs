@@ -16,6 +16,10 @@ using BitmapSource = System.Windows.Media.Imaging.BitmapSource;
 using static System.Windows.Forms.SwfDataObjectExtensions;
 using sw = System.Windows.Forms;
 using BitmapSource = System.Drawing.Image;
+using Eto;
+using Eto.WinForms;
+using sd = System.Drawing;
+using Eto.WinForms.Drawing;
 #endif
 
 namespace ASEva.UICoreWF
