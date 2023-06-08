@@ -10,7 +10,7 @@ using Eto.GtkSharp.Forms.Controls;
 
 namespace ASEva.UIGtk
 {
-	public class GridViewHandler : GridHandler<GridView, GridView.ICallback>, GridView.IHandler, ICellDataSource, IGtkEnumerableModelHandler<object>
+	class GridViewHandler : GridHandler<GridView, GridView.ICallback>, GridView.IHandler, ICellDataSource, IGtkEnumerableModelHandler<object>
 	{
 		GtkEnumerableModel<object> model;
 		CollectionHandler collection;

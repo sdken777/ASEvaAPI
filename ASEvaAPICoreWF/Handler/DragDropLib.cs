@@ -1,11 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.ComTypes;
 
 namespace ASEva.UICoreWF.DragDropLib
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Runtime.InteropServices;
+	using System.Runtime.InteropServices.ComTypes;
+
 	/// <summary>
 	/// Implements the COM version of IDataObject including SetData.
 	/// </summary>

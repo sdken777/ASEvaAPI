@@ -4,12 +4,21 @@ using System.Linq;
 using Eto.Drawing;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+#if XAMMAC2
+using AppKit;
+using Foundation;
+using CoreGraphics;
+using ObjCRuntime;
+using CoreAnimation;
+using wk = WebKit;
+#else
 using MonoMac.AppKit;
 using MonoMac.Foundation;
 using MonoMac.CoreGraphics;
 using MonoMac.ObjCRuntime;
 using MonoMac.CoreAnimation;
 using wk = MonoMac.WebKit;
+#endif
 using Eto.Mac;
 using Eto.Mac.Forms;
 
@@ -97,6 +106,7 @@ namespace ASEva.UIMonoMac
 				UIDelegate = new EtoUIDelegate { Handler = handler };
 				Configuration.Preferences.SetValueForKey(NSNumber.FromBoolean(true), new NSString("developerExtrasEnabled"));
 			}
+
 		}
 
 		class PromptDialog : Dialog<bool>

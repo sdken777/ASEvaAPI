@@ -566,7 +566,11 @@ namespace ASEva.UIGtk
 				Gtk.TreeViewColumn focus_column;
 				Tree.GetCursor(out path, out focus_column);
 
+#if GTK2
+				var cells = focus_column?.CellRenderers;
+#elif GTK3
 				var cells = focus_column?.Cells;
+#endif
 				return cells?.OfType<IEtoCellRenderer>().Any(r => r.Editing) ?? false;
 			}
 		}

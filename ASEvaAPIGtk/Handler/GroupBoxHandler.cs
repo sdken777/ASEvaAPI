@@ -53,6 +53,12 @@ namespace ASEva.UIGtk
 		protected override void SetContainerContent(Gtk.Widget content)
 		{
 			Control.Add(content);
+
+			/*if (clientSize != null) {
+				var label = Control.LabelWidget;
+				Control.SetSizeRequest(clientSize.Value.Width + 10, clientSize.Value.Height + label.Allocation.Height + 10);
+				clientSize = null;
+			}*/
 		}
 
 		public Color TextColor

@@ -4,7 +4,7 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
-	public class SliderHandler : GtkControl<Gtk.EventBox, Slider, Slider.ICallback>, Slider.IHandler
+	class SliderHandler : GtkControl<Gtk.EventBox, Slider, Slider.ICallback>, Slider.IHandler
 	{
 		int min;
 		int max = 100;
@@ -106,6 +106,7 @@ namespace ASEva.UIGtk
 			set
 			{
 				tick = value;
+				// TODO: Only supported from GTK 2.16
 			}
 		}
 
@@ -121,6 +122,9 @@ namespace ASEva.UIGtk
 				{
 					scale.ValueChanged -= Connector.HandleScaleValueChanged;
 					box.Remove(scale);
+#if !GTKCORE
+					scale.Destroy();
+#endif
 					scale.Dispose();
 					if (value == Orientation.Horizontal)
 						scale = new Gtk.HScale(min, max, 1);

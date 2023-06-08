@@ -20,6 +20,71 @@ namespace ASEva.UIGtk
 
 		public class EtoLabel : Gtk.Label
 		{
+#if GTK2
+			int? wrapWidth;
+
+			public void ResetWidth()
+			{
+				wrapWidth = null;
+			}
+
+			protected override void OnSizeRequested(ref Gtk.Requisition requisition)
+			{
+				int width, height;
+				if (wrapWidth != null && wrapWidth > 0) {
+					Layout.Width = (int)(wrapWidth * Pango.Scale.PangoScale);
+					Layout.GetPixelSize(out width, out height);
+					requisition.Width = width;
+					requisition.Height = height;
+				}
+				else {
+					Layout.GetPixelSize(out width, out height);
+
+					requisition.Width = width;
+					requisition.Height = height;
+				}
+			}
+
+			protected override void OnSizeAllocated(Gdk.Rectangle allocation)
+			{
+				base.OnSizeAllocated(allocation);
+				SetWrapWidth(allocation.Width);
+			}
+
+			protected override void OnRealized()
+			{
+				// the allocation may default to 1, in that case ignore OnRealized
+				if (Allocation.Width > 1 && wrapWidth != Allocation.Width)
+				{
+					CalculateHeight(Allocation.Width);
+				}
+
+				base.OnRealized();
+			}
+
+			void SetWrapWidth(int width)
+			{
+				if (!IsRealized || SingleLineMode || width == 0)
+				{
+					HeightRequest = -1;
+					wrapWidth = null;
+					return;
+				}
+				if (wrapWidth != width)
+				{
+					CalculateHeight(width);
+				}
+			}
+
+			void CalculateHeight(int width)
+			{
+				Layout.Width = (int)(width * Pango.Scale.PangoScale);
+				int pixWidth, pixHeight;
+				Layout.GetPixelSize(out pixWidth, out pixHeight);
+				HeightRequest = pixHeight;
+				wrapWidth = width;
+			}
+#else
 			public void ResetWidth()
 			{
 			}
@@ -41,18 +106,24 @@ namespace ASEva.UIGtk
 				base.OnGetPreferredHeightForWidth(width, out minimum_height, out natural_height);
 			}
 
+#if GTKCORE
 			protected override void OnGetPreferredHeightAndBaselineForWidth(int width, out int minimum_height, out int natural_height, out int minimum_baseline, out int natural_baseline)
 			{
 				if (width == 0)
 					width = int.MaxValue;
 				base.OnGetPreferredHeightAndBaselineForWidth(width, out minimum_height, out natural_height, out minimum_baseline, out natural_baseline);
 			}
+#endif
+#endif
+
 		}
 
 		public LabelHandler()
 		{
 			eventBox = new EtoEventBox { Handler = this };
-
+#if GTK2
+			eventBox.ResizeMode = Gtk.ResizeMode.Immediate;
+#endif
 			Control = new EtoLabel();
 			Control.Xalign = 0;
 			Control.Yalign = 0;
@@ -156,6 +227,9 @@ namespace ASEva.UIGtk
 			Control.Justify = horizontalAlign.ToGtk();
 			Control.Xalign = horizontalAlign.ToAlignment();
 			Control.Yalign = verticalAlign.ToAlignment();
+#if GTK2
+			eventBox.ResizeChildren();
+#endif
 		}
 
 		public VerticalAlignment VerticalAlignment

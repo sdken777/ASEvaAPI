@@ -1,16 +1,24 @@
 
+// #define TEST_INSTALL // test installation without actually installing it.
+
+#if !NET45
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.IO;
 using Eto.Forms;
 using Eto.CustomControls;
 using Eto.Drawing;
 using System.Threading.Tasks;
 using Microsoft.Web.WebView2.Core;
+using System.IO;
 
+#if WINFORMS
 using WebView2Control = Microsoft.Web.WebView2.WinForms.WebView2;
 using BaseHandler = Eto.WinForms.Forms.WindowsControl<Microsoft.Web.WebView2.WinForms.WebView2, Eto.Forms.WebView, Eto.Forms.WebView.ICallback>;
+#elif WPF
+using WebView2Control = Microsoft.Web.WebView2.Wpf.WebView2;
+using BaseHandler = Eto.Wpf.Forms.WpfFrameworkElement<Microsoft.Web.WebView2.Wpf.WebView2, Eto.Forms.WebView, Eto.Forms.WebView.ICallback>;
+#endif
 
 namespace ASEva.UICoreWF
 {
@@ -243,5 +251,16 @@ namespace ASEva.UICoreWF
 			get => true;
 			set {}
 		}
+
+#if WPF
+		public override Color BackgroundColor
+		{
+			get => Colors.Transparent;
+			set { }
+		}
+#endif
+
 	}
 }
+
+#endif

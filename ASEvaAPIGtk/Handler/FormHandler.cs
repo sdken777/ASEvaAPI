@@ -3,7 +3,7 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
-	public class FormHandler : WindowHandlerGtkWindow<Gtk.Window, Form, Form.ICallback>, Form.IHandler
+	class FormHandler : WindowHandlerGtkWindow<Gtk.Window, Form, Form.ICallback>, Form.IHandler
 	{
 		public FormHandler(Gtk.Window window)
 		{
@@ -21,6 +21,19 @@ namespace ASEva.UIGtk
 			Control.Child = vbox;
 		}
 
+		#if NET40
+		public void Show ()
+		{
+			Control.Child.ShowAll ();
+			if (ShowActivated || !Control.AcceptFocus)
+				Control.Show ();
+			else {
+				Control.AcceptFocus = false;
+				Control.Show ();
+				Control.AcceptFocus = true;
+			}
+		}
+		#else
 		public async void Show()
 		{
 			Control.Child.ShowAll();
@@ -34,6 +47,7 @@ namespace ASEva.UIGtk
 				Control.AcceptFocus = CanFocus; // in case user changes it right after this call, but should be true
 			}
 		}
+		#endif
 
 		static object ShowActivated_Key = new object();
 

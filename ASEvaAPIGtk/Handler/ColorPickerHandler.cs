@@ -62,13 +62,22 @@ namespace ASEva.UIGtk
 				Handler.Callback.OnColorChanged(Handler.Widget, EventArgs.Empty);
 			}
 		}
-
+#if GTK3
 		public Eto.Drawing.Color Color
 		{
 			get { return (Control.Child as Gtk.Label).GetBackground(); }
 			set { (Control.Child as Gtk.Label).SetBackground(value); }
 		}
-
+#else
+		public Eto.Drawing.Color Color
+		{
+			get { return Control.Color.ToEto(Control.Alpha); }
+			set {
+				Control.Color = value.ToGdk();
+				Control.Alpha = (ushort)(value.A * ushort.MaxValue);
+			}
+		}
+#endif
 		public bool AllowAlpha { get; set; }
 
 		public bool SupportsAllowAlpha => true;

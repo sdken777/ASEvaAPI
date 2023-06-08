@@ -18,6 +18,7 @@ namespace ASEva.UIGtk
 		{
 			get
 			{
+#if GTKCORE
 				var list = new List<Screen>();
 				try
 				{
@@ -30,6 +31,16 @@ namespace ASEva.UIGtk
 				}
 				catch (Exception) {}
 				return list;
+
+#else
+				var display = Gdk.Display.Default;
+				for (int i = 0; i < display.NScreens; i++) {
+					var screen = display.GetScreen (i);
+					for (int monitor = 0; monitor < screen.NMonitors; monitor++) {
+						yield return new Screen (new ScreenHandler (screen, monitor));
+					}
+				}
+#endif
 			}
 		}
 
@@ -37,6 +48,7 @@ namespace ASEva.UIGtk
 		{
 			get
 			{
+#if GTKCORE
 				try
 				{
 					var monitor = Gdk.Display.Default.PrimaryMonitor;
@@ -44,6 +56,9 @@ namespace ASEva.UIGtk
 					return new Screen(new ScreenHandler(monitor));
 				}
 				catch (Exception) { return null; }
+#else
+				return new Screen(new ScreenHandler(Gdk.Display.Default.DefaultScreen, 0));
+#endif
 			}
 		}
 

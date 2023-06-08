@@ -234,6 +234,9 @@ namespace ASEva
         bool GetChannelGuestSyncFlag(String key);
         void SetChannelGuestSyncFlag(String key, bool guestSync);
         String[] GetAllChannelGuestSyncKeys();
+        bool GetChannelServerSyncMonitoringFlag(String key);
+        void SetChannelServerSyncMonitoringFlag(String key, bool monitoring);
+        String[] GetAllChannelServerSyncMonitoringKeys();
         bool GetBusChannelStatus(int channel, uint? toleranceMillisecond);
         bool GetVideoChannelStatus(int channel, uint? toleranceMillisecond, out List<double> interval, out List<double> delay);
         bool GetAudioChannelStatus(uint? toleranceMillisecond, out List<double> interval, out List<double> delay);
@@ -2517,58 +2520,87 @@ namespace ASEva
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 获取指定通道的监控配置
+        /// (api:app=2.3.0) 获取是否监控指定通道有无数据
         /// </summary>
         /// <param name="id">通道ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
-        /// <returns>是否监控</returns>
+        /// <returns>是否监控有无数据</returns>
         public static bool GetChannelMonitoringFlag(String id)
         {
             return Handler.GetChannelMonitoringFlag(id);
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 设置指定通道的监控配置
+        /// (api:app=2.3.0) 设置是否监控指定通道有无数据
         /// </summary>
         /// <param name="id">通道ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
-        /// <param name="monitoring">是否监控，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
+        /// <param name="monitoring">是否监控有无数据，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
         public static void SetChannelMonitoringFlag(String id, bool monitoring)
         {
             Handler.SetChannelMonitoringFlag(id, monitoring);
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 获取所有正在监控的通道ID
+        /// (api:app=2.3.0) 获取所有正在监控有无数据的通道ID
         /// </summary>
-        /// <returns>正在监控的通道ID列表</returns>
+        /// <returns>正在监控有无数据的通道ID列表</returns>
         public static string[] GetAllChannelMonitoringKeys()
         {
             return Handler.GetAllChannelMonitoringKeys();
         }
 
         /// <summary>
-        /// (api:app=2.7.6) 获取指定通道的客机同步配置
+        /// (api:app=2.12.1) 获取是否监控指定通道数据与授时服务器同步
         /// </summary>
-        /// <param name="id">客机同步ID，如：bus@1, video@0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
-        /// <returns>客机是否与授时服务器同步</returns>
+        /// <param name="key">通道ID，如bus@1, video@0, sample@xxx-v2@0等</param>
+        /// <returns>是否监控指定通道数据与授时服务器同步</returns>
+        public static bool GetChannelServerSyncMonitoringFlag(String key)
+        {
+            return Handler.GetChannelServerSyncMonitoringFlag(key);
+        }
+
+        /// <summary>
+        /// (api:app=2.12.1) 设置是否监控指定通道数据与授时服务器同步
+        /// </summary>
+        /// <param name="key">通道ID，如bus@1, video@0, sample@xxx-v2@0等</param>
+        /// <param name="monitoring">是否监控数据与授时服务器同步，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
+        public static void SetChannelServerSyncMonitoringFlag(String key, bool monitoring)
+        {
+            Handler.SetChannelServerSyncMonitoringFlag(key, monitoring);
+        }
+
+        /// <summary>
+        /// (api:app=2.12.1) 获取所有正在监控数据与授时服务器同步的通道ID
+        /// </summary>
+        /// <returns>正在监控数据与授时服务器同步的通道ID列表</returns>
+        public static String[] GetAllChannelServerSyncMonitoringKeys()
+        {
+            return Handler.GetAllChannelServerSyncMonitoringKeys();
+        }
+
+        /// <summary>
+        /// (api:app=2.7.6) 获取指定通道是否已配置为客机同步
+        /// </summary>
+        /// <param name="id">客机同步ID，如bus.1, video.0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
+        /// <returns>是否已配置为客机同步</returns>
         public static bool GetChannelGuestSyncFlag(String id)
         {
             return Handler.GetChannelGuestSyncFlag(id);
         }
 
         /// <summary>
-        /// (api:app=2.7.6) 设置指定通道的客机同步配置
+        /// (api:app=2.7.6) 设置指定通道是否配置为客机同步
         /// </summary>
-        /// <param name="id">客机同步ID，如：bus@1, video@0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
-        /// <param name="guestSync">客机是否与授时服务器同步</param>
+        /// <param name="id">客机同步ID，如bus.1, video.0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
+        /// <param name="guestSync">是否配置为客机同步</param>
         public static void SetChannelGuestSyncFlag(String id, bool guestSync)
         {
             Handler.SetChannelGuestSyncFlag(id, guestSync);
         }
 
         /// <summary>
-        /// (api:app=2.7.6) 获取客机已同步的所有ID
+        /// (api:app=2.7.6) 获取已配置为客机同步的所有ID
         /// </summary>
-        /// <returns>客机已同步的所有ID列表</returns>
+        /// <returns>已配置为客机同步的所有ID列表</returns>
         public static string[] GetAllChannelGuestSyncKeys()
         {
             return Handler.GetAllChannelGuestSyncKeys();

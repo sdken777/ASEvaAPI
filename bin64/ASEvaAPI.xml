@@ -1539,43 +1539,63 @@
         </member>
         <member name="M:ASEva.Agency.GetChannelMonitoringFlag(System.String)">
             <summary>
-            (api:app=2.3.0) 获取指定通道的监控配置
+            (api:app=2.3.0) 获取是否监控指定通道有无数据
             </summary>
             <param name="id">通道ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
-            <returns>是否监控</returns>
+            <returns>是否监控有无数据</returns>
         </member>
         <member name="M:ASEva.Agency.SetChannelMonitoringFlag(System.String,System.Boolean)">
             <summary>
-            (api:app=2.3.0) 设置指定通道的监控配置
+            (api:app=2.3.0) 设置是否监控指定通道有无数据
             </summary>
             <param name="id">通道ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
-            <param name="monitoring">是否监控，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
+            <param name="monitoring">是否监控有无数据，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
         </member>
         <member name="M:ASEva.Agency.GetAllChannelMonitoringKeys">
             <summary>
-            (api:app=2.3.0) 获取所有正在监控的通道ID
+            (api:app=2.3.0) 获取所有正在监控有无数据的通道ID
             </summary>
-            <returns>正在监控的通道ID列表</returns>
+            <returns>正在监控有无数据的通道ID列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetChannelServerSyncMonitoringFlag(System.String)">
+            <summary>
+            (api:app=2.12.1) 获取是否监控指定通道数据与授时服务器同步
+            </summary>
+            <param name="key">通道ID，如bus@1, video@0, sample@xxx-v2@0等</param>
+            <returns>是否监控指定通道数据与授时服务器同步</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetChannelServerSyncMonitoringFlag(System.String,System.Boolean)">
+            <summary>
+            (api:app=2.12.1) 设置是否监控指定通道数据与授时服务器同步
+            </summary>
+            <param name="key">通道ID，如bus@1, video@0, sample@xxx-v2@0等</param>
+            <param name="monitoring">是否监控数据与授时服务器同步，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
+        </member>
+        <member name="M:ASEva.Agency.GetAllChannelServerSyncMonitoringKeys">
+            <summary>
+            (api:app=2.12.1) 获取所有正在监控数据与授时服务器同步的通道ID
+            </summary>
+            <returns>正在监控数据与授时服务器同步的通道ID列表</returns>
         </member>
         <member name="M:ASEva.Agency.GetChannelGuestSyncFlag(System.String)">
             <summary>
-            (api:app=2.7.6) 获取指定通道的客机同步配置
+            (api:app=2.7.6) 获取指定通道是否已配置为客机同步
             </summary>
-            <param name="id">客机同步ID，如：bus@1, video@0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
-            <returns>客机是否与授时服务器同步</returns>
+            <param name="id">客机同步ID，如bus.1, video.0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
+            <returns>是否已配置为客机同步</returns>
         </member>
         <member name="M:ASEva.Agency.SetChannelGuestSyncFlag(System.String,System.Boolean)">
             <summary>
-            (api:app=2.7.6) 设置指定通道的客机同步配置
+            (api:app=2.7.6) 设置指定通道是否配置为客机同步
             </summary>
-            <param name="id">客机同步ID，如：bus@1, video@0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
-            <param name="guestSync">客机是否与授时服务器同步</param>
+            <param name="id">客机同步ID，如bus.1, video.0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
+            <param name="guestSync">是否配置为客机同步</param>
         </member>
         <member name="M:ASEva.Agency.GetAllChannelGuestSyncKeys">
             <summary>
-            (api:app=2.7.6) 获取客机已同步的所有ID
+            (api:app=2.7.6) 获取已配置为客机同步的所有ID
             </summary>
-            <returns>客机已同步的所有ID列表</returns>
+            <returns>已配置为客机同步的所有ID列表</returns>
         </member>
         <member name="M:ASEva.Agency.GetBusChannelStatus(System.Int32,System.Nullable{System.UInt32})">
             <summary>
@@ -2001,7 +2021,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.12.0
+            version=2.12.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">

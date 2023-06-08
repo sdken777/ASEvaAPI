@@ -22,6 +22,7 @@ namespace ASEva.UIGtk
 			base.OnUnLoad(e);
 		}
 
+#if GTK3
         class EtoVBox : Gtk.VBox
 		{
 			protected override void OnAdjustSizeRequest(Gtk.Orientation orientation, out int minimum_size, out int natural_size)
@@ -31,17 +32,24 @@ namespace ASEva.UIGtk
 				minimum_size = natural_size;
 			}
 		}
+#endif
 
 		public void Add(Control child, int x, int y)
 		{
 			var ctl = child.GetGtkControlHandler();
 
+#if GTK3
 			var widget = ctl.ContainerControl;
 			if (widget.Parent != null)
 				((Gtk.Container)widget.Parent).Remove(widget);
 			widget.ShowAll();
 			widget = new EtoVBox { Child = widget };
-
+#else
+			var widget = ctl.ContainerControl;
+			if (widget.Parent != null)
+				((Gtk.Container)widget.Parent).Remove(widget);
+			widget.ShowAll();
+#endif
 			((Control.Child as Gtk.Viewport).Child as Gtk.Fixed).Put(widget, x, y);
 			ctl.CurrentLocation = new Point(x, y);
 		}
@@ -51,8 +59,11 @@ namespace ASEva.UIGtk
 			var ctl = child.GetGtkControlHandler();
 			if (ctl.CurrentLocation.X != x || ctl.CurrentLocation.Y != y)
 			{
+#if GTK3
 				var widget = ctl.ContainerControl.Parent;
-
+#else
+				var widget = ctl.ContainerControl;
+#endif
 				((Control.Child as Gtk.Viewport).Child as Gtk.Fixed).Move(widget, x, y);
 
 				ctl.CurrentLocation = new Point(x, y);
@@ -61,12 +72,20 @@ namespace ASEva.UIGtk
 
 		public void Remove(Control child)
 		{
+#if GTK3
 			((Control.Child as Gtk.Viewport).Child as Gtk.Fixed).Remove(child.GetContainerWidget().Parent);
+#else
+			Control.Remove(child.GetContainerWidget());
+#endif
 		}
 
 		public void Update()
 		{
+#if GTK3
 			((Control.Child as Gtk.Viewport).Child as Gtk.Fixed).QueueResize();
+#else
+			Control.ResizeChildren();
+#endif
 		}
 
 		public override void OnLoadComplete(System.EventArgs e)

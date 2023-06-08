@@ -11,7 +11,7 @@ using Eto.GtkSharp.Forms.Menu;
 namespace ASEva.UIGtk
 {
 
-	public class WindowHandlerGtkWindow<TControl, TWidget, TCallback> : GtkPanel<TControl, TWidget, TCallback>, Window.IHandler, IGtkWindow
+	class WindowHandlerGtkWindow<TControl, TWidget, TCallback> : GtkPanel<TControl, TWidget, TCallback>, Window.IHandler, IGtkWindow
 		where TControl: Gtk.Window
 		where TWidget: Window
 		where TCallback: Window.ICallback
@@ -499,6 +499,9 @@ namespace ASEva.UIGtk
 		{
 			if (disposing)
 			{
+#if !GTKCORE
+				Control.Destroy();
+#endif
 				if (menuBox != null)
 				{
 					menuBox.Dispose();
@@ -638,8 +641,13 @@ namespace ASEva.UIGtk
 				var gdkWindow = Control.GetWindow();
 				if (screen != null && gdkWindow != null)
 				{
+#if GTKCORE
 					var monitor = screen.Display.GetMonitorAtWindow(gdkWindow);
 					return new Screen(new ScreenHandler(monitor));
+#else
+					var monitor = screen.GetMonitorAtWindow(gdkWindow);
+					return new Screen(new ScreenHandler(screen, monitor));
+#endif
 				}
 				return null;
 			}
@@ -676,6 +684,7 @@ namespace ASEva.UIGtk
 		{
 			get
 			{
+#if GTKCORE
 				var screen = Control.Screen;
 				var gdkWindow = Control.GetWindow();
 				if (screen != null && gdkWindow != null)
@@ -683,6 +692,7 @@ namespace ASEva.UIGtk
 					var monitor = screen.Display.GetMonitorAtWindow(gdkWindow);
 					return monitor?.ScaleFactor ?? 1f;
 				}
+#endif
 				return 1f;
 			}
 		}

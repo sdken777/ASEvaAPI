@@ -5,7 +5,7 @@ using Eto;
 
 namespace ASEva.UIWpf
 {
-	public class UITimerHandler : WidgetHandler<DispatcherTimer, UITimer, UITimer.ICallback>, UITimer.IHandler
+	class UITimerHandler : WidgetHandler<DispatcherTimer, UITimer, UITimer.ICallback>, UITimer.IHandler
 	{
 
 		public UITimerHandler()

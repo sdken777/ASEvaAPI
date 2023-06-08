@@ -23,12 +23,19 @@ namespace ASEva.UIGtk
 			base.Initialize();
 			Control.KeyPressEvent += Connector.Control_KeyPressEvent;
 
+#if GTK2
+			Control.VBox.PackStart(WindowActionControl, false, true, 0);
+			Control.VBox.PackStart(WindowContentControl, true, true, 0);
+
+			btcontainer = Control.ActionArea;
+#else
 			Control.ContentArea.PackStart(WindowActionControl, false, true, 0);
 			Control.ContentArea.PackStart(WindowContentControl, true, true, 0);
 
 			Control.ActionArea.NoShowAll = true;
 			Control.ActionArea.Hide();
 
+#if GTKCORE
 			if (UseHeaderBar)
 			{
 				btcontainer = new Gtk.HeaderBar();
@@ -38,7 +45,9 @@ namespace ASEva.UIGtk
 				Control.Title = title;
 			}
 			else
+#endif
 				btcontainer = Control.ActionArea;
+#endif
 		}
 
 		public Button AbortButton { get; set; }
@@ -51,17 +60,25 @@ namespace ASEva.UIGtk
 			}
 			set
 			{
+#if GTK3
 				defaultButton?.ToNative().StyleContext.RemoveClass("suggested-action");
+#endif
 				defaultButton = value;
 
 				if (value != null)
 				{
+#if GTK3
 					value.ToNative().StyleContext.AddClass("suggested-action");
+#endif
 					var widget = DefaultButton.GetContainerWidget();
 
 					if (widget != null)
 					{
+#if GTK2
+						widget.SetFlag(Gtk.WidgetFlags.CanDefault);
+#else
 						widget.CanDefault = true;
+#endif
 						Control.Default = widget;
 					}
 				}
@@ -125,6 +142,7 @@ namespace ASEva.UIGtk
 					foreach (var button in positiveButtons)
 						Control.ActionArea.PackStart(button.ToNative(), false, true, 1);
 				}
+#if GTKCORE
 				else
 				{
 					for (int i = positiveButtons.Count - 1; i >= 0; i--)
@@ -136,6 +154,7 @@ namespace ASEva.UIGtk
 
 				if (btcontainer is Gtk.HeaderBar)
 					(btcontainer as Gtk.HeaderBar).ShowCloseButton = false;
+#endif
 
 				btcontainer.ShowAll();
 			}
@@ -144,11 +163,13 @@ namespace ASEva.UIGtk
 				Control.ActionArea.NoShowAll = true;
 				if (!UseHeaderBar)
 					btcontainer.Hide();
+#if GTKCORE
 				else
 				{
 					if (btcontainer is Gtk.HeaderBar)
 						(btcontainer as Gtk.HeaderBar).ShowCloseButton = true;
 				}
+#endif
 			}
 		}
 

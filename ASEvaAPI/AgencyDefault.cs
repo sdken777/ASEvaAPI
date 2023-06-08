@@ -1375,5 +1375,19 @@ namespace ASEva
         {
             return null;
         }
+
+        public bool GetChannelServerSyncMonitoringFlag(string key)
+        {
+            return false;
+        }
+
+        public void SetChannelServerSyncMonitoringFlag(string key, bool monitoring)
+        {
+        }
+
+        public string[] GetAllChannelServerSyncMonitoringKeys()
+        {
+            return null;
+        }
     }
 }

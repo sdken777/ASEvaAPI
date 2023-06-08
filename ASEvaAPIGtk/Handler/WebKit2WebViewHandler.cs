@@ -1,4 +1,4 @@
-﻿
+﻿#if GTKCORE || GTK3
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -42,17 +42,17 @@ namespace ASEva.UIGtk
 			}
 		}
 
-		public override Gtk.Widget ContainerControl
-		{
-			get { return Control; }
-		}
-
 		IntPtr WebViewHandle
 		{
 			get
 			{
 				return webView == null ? IntPtr.Zero : webView.Handle;
 			}
+		}
+
+		public override Gtk.Widget ContainerControl
+		{
+			get { return Control; }
 		}
 
 		EventHandler<WebViewTitleEventArgs> titleChanged;
@@ -366,3 +366,4 @@ namespace ASEva.UIGtk
 		}
 	}
 }
+#endif
