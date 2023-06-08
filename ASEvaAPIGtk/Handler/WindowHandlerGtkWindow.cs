@@ -37,8 +37,6 @@ namespace ASEva.UIGtk
 
 		protected WindowHandlerGtkWindow()
 		{
-			resizable = true;
-
 			vbox = new Gtk.VBox();
 			actionvbox = new Gtk.VBox();
 
@@ -99,6 +97,9 @@ namespace ASEva.UIGtk
 			{
 				containerBox.Resizable = value;
 				resizable = value;
+#if GTK3
+				Control.Resizable = value;
+#endif
 				SetMinMax(null);
 			}
 		}
@@ -109,6 +110,7 @@ namespace ASEva.UIGtk
 			geom.MinWidth = minimumSize.Width;
 			geom.MinHeight = minimumSize.Height;
 
+#if GTK2
 			if (!resizable)
 			{
 				if (size != null)
@@ -127,25 +129,48 @@ namespace ASEva.UIGtk
 					geom.MinHeight = geom.MaxHeight = Control.DefaultHeight;
 				}
 			}
-
+#endif
 			Control.SetGeometryHints(Control, geom, Gdk.WindowHints.MinSize);
 		}
+		
 
-		public bool Minimizable { get; set; }
+		public bool Minimizable
+		{
+			get => Widget.Properties.Get<bool>(GtkWindow.Minimizable_Key, true);
+			set
+			{
+				if (Widget.Properties.TrySet(GtkWindow.Minimizable_Key, value, true))
+					SetTypeHint();
+			}
+		}
 
-		public bool Maximizable { get; set; }
+		public bool Maximizable
+		{
+			get => Widget.Properties.Get<bool>(GtkWindow.Maximizable_Key, true);
+			set
+			{
+				if (Widget.Properties.TrySet(GtkWindow.Maximizable_Key, value, true))
+					SetTypeHint();
+			}
+		}
 
 		public bool ShowInTaskbar
 		{
 			get { return !Control.SkipTaskbarHint; }
 			set { Control.SkipTaskbarHint = !value; }
 		}
+		
+		public bool Closeable
+		{
+			get => Control.Deletable;
+			set => Control.Deletable = value;
+		}
 
 		public bool Topmost
 		{
 			get { return topmost; }
 			set
-			{ 
+			{
 				if (topmost != value)
 				{
 					topmost = value;
@@ -158,7 +183,7 @@ namespace ASEva.UIGtk
 		{
 			get { return style; }
 			set
-			{ 
+			{
 				if (style != value)
 				{
 					style = value;
@@ -173,36 +198,51 @@ namespace ASEva.UIGtk
 							break;
 						case WindowStyle.Utility:
 							Control.Decorated = true;
-							Control.TypeHint = Gdk.WindowTypeHint.Utility;
 							break;
 						default:
 							throw new NotSupportedException();
 					}
+					SetTypeHint();
 				}
+			}
+		}
+		
+		protected virtual Gdk.WindowTypeHint DefaultTypeHint => Gdk.WindowTypeHint.Normal;
+		
+		void SetTypeHint()
+		{
+			if (WindowStyle == WindowStyle.Default && (Minimizable || Maximizable))
+			{
+				Control.TypeHint = DefaultTypeHint;
+			}
+			else
+			{
+				Control.TypeHint = Gdk.WindowTypeHint.Utility;
 			}
 		}
 
 		public override Size Size
 		{
-			get
-			{
-				var window = Control.GetWindow();
-				return window != null ? window.FrameExtents.Size.ToEto() : Control.DefaultSize.ToEto();
-			}
+			get => Widget.Loaded ? Control.GetWindow()?.FrameExtents.Size.ToEto() ?? UserPreferredSize : UserPreferredSize;
 			set
 			{
-				var window = Control.GetWindow();
-				if (window != null)
+				DisableAutoSizeUpdate++;
+				UserPreferredSize = value;
+					
+				if (Widget.Loaded)
 				{
-					var diff = window.FrameExtents.Size.ToEto() - Control.Allocation.Size.ToEto();
+					var diff = WindowDecorationSize;
 					Control.Resize(value.Width - diff.Width, value.Height - diff.Height);
 				}
 				else
 				{
 					clientSize = null;
+					// this doesn't take into account window decoration size
+					// there doesn't seem to be an (easy) way to do that currently..
 					Control.SetDefaultSize(value.Width, value.Height);
 				}
 				SetMinMax(value);
+				DisableAutoSizeUpdate--;
 			}
 		}
 
@@ -214,6 +254,7 @@ namespace ASEva.UIGtk
 			}
 			set
 			{
+				DisableAutoSizeUpdate++;
 				if (Control.IsRealized)
 				{
 					var diff = vbox.Allocation.Size.ToEto() - containerBox.Allocation.Size.ToEto();
@@ -226,6 +267,7 @@ namespace ASEva.UIGtk
 					Control.SetDefaultSize(value.Width, value.Height);
 					SetMinMax(value);
 				}
+				DisableAutoSizeUpdate--;
 			}
 		}
 		public bool MovableByWindowBackground
@@ -246,14 +288,32 @@ namespace ASEva.UIGtk
 		private void Control_Realized(object sender, EventArgs e)
 		{
 			Control.Realized -= Control_Realized;
+			Size size;
 			if (clientSize.HasValue)
-				ClientSize = clientSize.Value;
+			{
+				size = clientSize.Value;
+			}
+			else
+			{
+				size = UserPreferredSize - WindowDecorationSize;
+			}
+
+			if (size.Width > 0 || size.Height > 0)
+			{
+				var allocated = Control.Allocation.Size;
+				if (size.Width < 0)
+					size.Width = allocated.Width;
+				if (size.Height < 0)
+					size.Height = allocated.Height;
+				Control.Resize(size.Width, size.Height);
+			}
 		}
 
 		protected override void Initialize()
 		{
 			base.Initialize();
-			
+
+			DisableAutoSizeUpdate++;
 			HandleEvent(Window.WindowStateChangedEvent); // to set restore bounds properly
 			HandleEvent(Window.ClosingEvent); // to chain application termination events
 			HandleEvent(Eto.Forms.Control.SizeChangedEvent); // for RestoreBounds
@@ -262,6 +322,12 @@ namespace ASEva.UIGtk
 			Control.Realized += Connector.Control_Realized;
 
 			ApplicationHandler.Instance.RegisterIsActiveChanged(Control);
+		}
+
+		public override void OnLoadComplete(EventArgs e)
+		{
+			base.OnLoadComplete(e);
+			DisableAutoSizeUpdate--;
 		}
 
 		public override void AttachEvent(string id)
@@ -380,10 +446,17 @@ namespace ASEva.UIGtk
 				if (handler.Control.IsRealized && oldSize != newSize)
 				{
 					handler.Callback.OnSizeChanged(Handler.Widget, EventArgs.Empty);
+
+					// annoyingly, there's no way to tell if the user is resizing things
+					if (handler.AutoSizePerformed == 0 && handler.DisableAutoSizeUpdate == 0)
+						handler.AutoSize = false;
+
 					if (handler.WindowState == WindowState.Normal)
 						handler.restoreBounds = handler.Widget.Bounds;
 					oldSize = newSize;
 				}
+				if (handler.AutoSizePerformed > 0)
+					handler.AutoSizePerformed--;
 			}
 
 			Point? oldLocation;
@@ -488,7 +561,7 @@ namespace ASEva.UIGtk
 
 		public virtual void Close()
 		{
-			if (CloseWindow())
+			if (Widget.Loaded && CloseWindow())
 			{
 				Control.Hide();
 				Control.Unrealize();
@@ -570,7 +643,7 @@ namespace ASEva.UIGtk
 			{
 				var gdkWindow = Control.GetWindow();
 				if (gdkWindow == null)
-					return state;	
+					return state;
 
 				if (gdkWindow.State.HasFlag(Gdk.WindowState.Iconified))
 					return WindowState.Minimized;
@@ -585,7 +658,7 @@ namespace ASEva.UIGtk
 				if (WindowState != value)
 				{
 					state = value;
-					var gdkWindow = Control.GetWindow();				
+					var gdkWindow = Control.GetWindow();
 					switch (value)
 					{
 						case WindowState.Maximized:
@@ -696,10 +769,83 @@ namespace ASEva.UIGtk
 				return 1f;
 			}
 		}
+
+		internal int DisableAutoSizeUpdate
+		{
+			get => Widget.Properties.Get<int>(GtkWindow.DisableAutoSizeUpdate_Key);
+			set => Widget.Properties.Set(GtkWindow.DisableAutoSizeUpdate_Key, value);
+		}
+		internal int AutoSizePerformed
+		{
+			get => Widget.Properties.Get<int>(GtkWindow.AutoSizePerformed_Key);
+			set => Widget.Properties.Set(GtkWindow.AutoSizePerformed_Key, value);
+		}
+
+		public bool AutoSize
+		{
+			get => Widget.Properties.Get<bool>(GtkWindow.AutoSize_Key) || !Resizable; // gtk always auto sizes when the window is not resizable
+			set
+			{
+				if (Widget.Properties.TrySet(GtkWindow.AutoSize_Key, value))
+				{
+					InvalidateMeasure();
+				}
+			}
+		}
+
+		public override SizeF GetPreferredSize(SizeF availableSize)
+		{
+			var size = base.GetPreferredSize(availableSize);
+			return size + WindowDecorationSize;
+		}
+
+		Size WindowDecorationSize
+		{
+			get
+			{
+				var window = Control.GetWindow();
+				if (window == null)
+					return Size.Empty;
+				return window.FrameExtents.Size.ToEto() - Control.Allocation.Size.ToEto();
+			}
+		}
+
+		bool isInvalidated;
+
+		internal void PerformResize()
+		{
+			Control.GetSize(out var width, out var height);
+			var availableSize = Screen?.WorkingArea.Size ?? SizeF.PositiveInfinity;
+			var preferred = Size.Round(SizeF.Min(base.GetPreferredSize(availableSize), availableSize));
+			if (preferred.Width != width || preferred.Height != height)
+			{
+				// signal that we are auto sizing ourselves so don't turn off AutoSize.
+				AutoSizePerformed++;
+				Control.Resize(preferred.Width, preferred.Height);
+			}
+			isInvalidated = false;
+			DisableAutoSizeUpdate--;
+		}
+
+		public override void InvalidateMeasure()
+		{
+			base.InvalidateMeasure();
+			if (!isInvalidated && Resizable && Widget.Loaded && !Widget.IsSuspended && AutoSize && DisableAutoSizeUpdate == 0 && AutoSizePerformed == 0)
+			{
+				isInvalidated = true;
+				DisableAutoSizeUpdate++;
+				Application.Instance.AsyncInvoke(PerformResize);
+			}
+		}
 	}
 
 	static class GtkWindow
 	{
 		internal static readonly object MovableByWindowBackground_Key = new object();
+		internal static readonly object DisableAutoSizeUpdate_Key = new object();
+		internal static readonly object AutoSizePerformed_Key = new object();
+		internal static readonly object AutoSize_Key = new object();
+		internal static readonly object Minimizable_Key = new object();
+		internal static readonly object Maximizable_Key = new object();
 	}
 }

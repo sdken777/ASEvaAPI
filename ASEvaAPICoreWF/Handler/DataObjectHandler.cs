@@ -5,16 +5,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using sw = System.Windows.Forms;
 using Eto.Drawing;
 using System.Collections.Specialized;
 using System.IO;
+#if WPF
+using static System.Windows.WpfDataObjectExtensions;
+using sw = System.Windows;
+using BitmapSource = System.Windows.Media.Imaging.BitmapSource;
+#elif WINFORMS
 using static System.Windows.Forms.SwfDataObjectExtensions;
+using sw = System.Windows.Forms;
 using BitmapSource = System.Drawing.Image;
-using Eto;
-using Eto.WinForms;
-using sd = System.Drawing;
-using Eto.WinForms.Drawing;
+#endif
 
 namespace ASEva.UICoreWF
 {
@@ -159,10 +161,17 @@ namespace ASEva.UICoreWF
 					else
 						Control.SetData(sw.DataFormats.Dib, dib);
 				}
+#if WPF				
+				else if (IsExtended)
+					Control.SetDataEx(sw.DataFormats.Bitmap, value.ToWpf());
+				else
+					Control.SetImage(value.ToWpf());
+#elif WINFORMS
 				else if (IsExtended)
 					Control.SetDataEx(sw.DataFormats.Bitmap, value.ToSD());
 				else
 					Control.SetImage(value.ToSD());
+#endif
 
 				Update();
 			}
@@ -351,7 +360,11 @@ namespace ASEva.UICoreWF
 
 		public void SetDragImage(Bitmap bitmap, PointF offset)
 		{
+#if WPF
+			Control.SetDragImage(bitmap.ToWpf(), offset.ToWpf());
+#elif WINFORMS
 			Control.SetDragImage(bitmap.ToSD(), offset.ToSDPoint());
+#endif
 		}
 
 		public bool TrySetObject(object value, string type)

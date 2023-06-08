@@ -5,10 +5,10 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
-	#pragma warning disable 612
 	class DialogHandler : WindowHandlerGtkWindow<Gtk.Dialog, Dialog, Dialog.ICallback>, Dialog.IHandler
 	{
 		Gtk.Container btcontainer;
+		Gtk.Box actionarea;
 		Button defaultButton;
 
 		private bool UseHeaderBar = true;
@@ -17,23 +17,30 @@ namespace ASEva.UIGtk
 		{
 			Control = new Gtk.Dialog("", null, Gtk.DialogFlags.DestroyWithParent);
 		}
+		
+		protected override Gdk.WindowTypeHint DefaultTypeHint => Gdk.WindowTypeHint.Dialog;
 
 		protected override void Initialize()
 		{
 			base.Initialize();
 			Control.KeyPressEvent += Connector.Control_KeyPressEvent;
 
-#if GTK2
-			Control.VBox.PackStart(WindowActionControl, false, true, 0);
-			Control.VBox.PackStart(WindowContentControl, true, true, 0);
+			var vbox = new EtoVBox { Handler = this };
+			vbox.PackStart(WindowActionControl, false, true, 0);
+			vbox.PackStart(WindowContentControl, true, true, 0);
 
+#pragma warning disable 612
+			actionarea = Control.ActionArea;
+#pragma warning restore 612
+
+#if GTK2
+			var content = Control.VBox;
 			btcontainer = Control.ActionArea;
 #else
-			Control.ContentArea.PackStart(WindowActionControl, false, true, 0);
-			Control.ContentArea.PackStart(WindowContentControl, true, true, 0);
+			var content = Control.ContentArea;
 
-			Control.ActionArea.NoShowAll = true;
-			Control.ActionArea.Hide();
+			actionarea.NoShowAll = true;
+			actionarea.Hide();
 
 #if GTKCORE
 			if (UseHeaderBar)
@@ -46,8 +53,10 @@ namespace ASEva.UIGtk
 			}
 			else
 #endif
-				btcontainer = Control.ActionArea;
+				btcontainer = actionarea;
 #endif
+
+			content.PackStart(vbox, true, true, 0);
 		}
 
 		public Button AbortButton { get; set; }
@@ -101,10 +110,12 @@ namespace ASEva.UIGtk
 
 		public void ShowModal()
 		{
+			DisableAutoSizeUpdate++;
 			ReloadButtons();
 
 			Control.Modal = true;
 			Control.ShowAll();
+			DisableAutoSizeUpdate--;
 
 			do
 			{
@@ -122,7 +133,7 @@ namespace ASEva.UIGtk
 		{
 			var children = btcontainer.Children;
 			foreach (var child in children)
-				Control.ActionArea.Remove(child);
+				btcontainer.Remove(child);
 		}
 
 		public void ReloadButtons()
@@ -134,13 +145,13 @@ namespace ASEva.UIGtk
 			{
 				if (!UseHeaderBar)
 				{
-					Control.ActionArea.NoShowAll = false;
+					actionarea.NoShowAll = false;
 
 					for (int i = negativeButtons.Count - 1; i >= 0; i--)
-						Control.ActionArea.PackStart(negativeButtons[i].ToNative(), false, true, 1);
+						actionarea.PackStart(negativeButtons[i].ToNative(), false, true, 1);
 
 					foreach (var button in positiveButtons)
-						Control.ActionArea.PackStart(button.ToNative(), false, true, 1);
+						actionarea.PackStart(button.ToNative(), false, true, 1);
 				}
 #if GTKCORE
 				else
@@ -160,7 +171,7 @@ namespace ASEva.UIGtk
 			}
 			else
 			{
-				Control.ActionArea.NoShowAll = true;
+				actionarea.NoShowAll = true;
 				if (!UseHeaderBar)
 					btcontainer.Hide();
 #if GTKCORE
@@ -209,7 +220,7 @@ namespace ASEva.UIGtk
 		}
 
 		[GLib.ConnectBefore]
-		void Control_KeyPressEvent (object o, Gtk.KeyPressEventArgs args)
+		void Control_KeyPressEvent(object o, Gtk.KeyPressEventArgs args)
 		{
 			if (args.Event.Key == Gdk.Key.Escape && AbortButton != null)
 			{
@@ -238,7 +249,7 @@ namespace ASEva.UIGtk
 		{
 			public new DialogHandler Handler => (DialogHandler)base.Handler;
 
-			internal void Control_KeyPressEvent(object o, Gtk.KeyPressEventArgs args) => Handler.Control_KeyPressEvent(o, args);
+			internal void Control_KeyPressEvent(object o, Gtk.KeyPressEventArgs args) => Handler?.Control_KeyPressEvent(o, args);
 		}
 	}
 }

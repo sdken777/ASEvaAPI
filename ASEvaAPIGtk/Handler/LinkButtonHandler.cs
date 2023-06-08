@@ -80,7 +80,7 @@ namespace ASEva.UIGtk
 
 			public void HandleClicked(object sender, EventArgs e)
 			{
-				Handler.Callback.OnClick(Handler.Widget, EventArgs.Empty);
+				Handler?.Callback.OnClick(Handler.Widget, EventArgs.Empty);
 			}
 		}
 
