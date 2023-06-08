@@ -1,7 +1,6 @@
 
 // #define TEST_INSTALL // test installation without actually installing it.
 
-#if !NET45
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +17,7 @@ using System.Net;
 using System.IO;
 using System.Runtime.Serialization;
 
+
 #if WINFORMS
 using WebView2Control = Microsoft.Web.WebView2.WinForms.WebView2;
 using BaseHandler = Eto.WinForms.Forms.WindowsControl<Microsoft.Web.WebView2.WinForms.WebView2, Eto.Forms.WebView, Eto.Forms.WebView.ICallback>;
@@ -26,6 +26,7 @@ namespace Eto.WinForms.Forms.Controls
 #elif WPF
 using WebView2Control = Microsoft.Web.WebView2.Wpf.WebView2;
 using BaseHandler = Eto.Wpf.Forms.WpfFrameworkElement<Microsoft.Web.WebView2.Wpf.WebView2, Eto.Forms.WebView, Eto.Forms.WebView.ICallback>;
+using BaseHost = Eto.Wpf.Forms.EtoBorder;
 
 namespace Eto.Wpf.Forms.Controls
 #endif
@@ -33,7 +34,7 @@ namespace Eto.Wpf.Forms.Controls
 	/// <summary>
 	/// Loader class and helper utilities to install the WebView2 runtime.
 	/// </summary>
-	static class WebView2Loader
+	public static class WebView2Loader
 	{
 		/// <summary>
 		/// Creates the WetView2Handler
@@ -59,10 +60,6 @@ namespace Eto.Wpf.Forms.Controls
 		/// </summary>
 		public static WebView2InstallMode InstallMode = WebView2InstallMode.Manual;
 
-
-		const string reg64BitKey = @"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}";
-		const string reg32BitKey = @"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate\Clients\{F3017226-FE2A-4295-8BDF-00C3A9A7E4C5}";
-
 		/// <summary>
 		/// Detects whether WebView2 is installed
 		/// </summary>
@@ -72,9 +69,15 @@ namespace Eto.Wpf.Forms.Controls
 #if TEST_INSTALL
 			return false;
 #endif
-			// https://docs.microsoft.com/en-us/microsoft-edge/webview2/concepts/distribution#deploying-the-evergreen-webview2-runtime
-			var pv = Registry.GetValue(Environment.Is64BitOperatingSystem ? reg64BitKey : reg32BitKey, "pv", null);
-			return pv is string s && !string.IsNullOrEmpty(s);
+			try
+			{
+				var versionInfo = CoreWebView2Environment.GetAvailableBrowserVersionString();
+				return versionInfo != null;
+			}
+			catch (WebView2RuntimeNotFoundException)
+			{
+				return false;
+			}
 		}
 
 		/// <summary>
@@ -207,7 +210,7 @@ namespace Eto.Wpf.Forms.Controls
 				reportProgress?.Invoke(info);
 			}
 			// download bootstrapper to temp folder
-			var tempFile = Path.GetTempFileName() + ".exe";
+			var tempFile = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString()) + ".exe";
 			try
 			{
 				info.Text = Loc("Downloading bootstrapper...");
@@ -375,41 +378,111 @@ namespace Eto.Wpf.Forms.Controls
 	{
 		public WebView2NotInstalledException() : base("The WebView2 runtime is not installed") { }
 	}
+	
+	public class WebView2InitializationException : System.Exception
+	{
+		public WebView2InitializationException(string message, Exception inner) : base(message, inner)
+		{
+		}
+	}
+	
+	#if WPF
+	public class WebView2Host : BaseHost
+	{
+	}
+	#endif
 
 	public class WebView2Handler : BaseHandler, WebView.IHandler
 	{
 		bool webView2Ready;
+		protected bool WebView2Ready => webView2Ready;
+		CoreWebView2Environment _environment;
 		List<Action> delayedActions;
-
+		
 		public WebView2Handler()
 		{
 			WebView2Loader.EnsureWebView2Runtime();
 			Control = new WebView2Control();
-			Control.CoreWebView2Ready += Control_CoreWebView2Ready;
-			InitializeAsync();
+			Control.CoreWebView2InitializationCompleted += Control_CoreWebView2Ready;
+#if WPF
+			_host = new WebView2Host();
+			_host.Child = Control;
+			_host.Handler = this;
+#endif
 		}
 
+#if WPF
+		WebView2Host _host;
+		public override System.Windows.FrameworkElement ContainerControl => _host;
+#endif
+		/// <summary>
+		/// The default environment to use if none is specified with <see cref="Environment"/>.
+		/// </summary>
+		public static CoreWebView2Environment CoreWebView2Environment;
+		
+		/// <summary>
+		/// Specifies a function to call when we need the default environment, if not already specified
+		/// </summary>
+		public static Func<Task<CoreWebView2Environment>> GetCoreWebView2Environment;
+		
+		/// <summary>
+		/// Gets or sets the environment to use, defaulting to <see cref="CoreWebView2Environment"/>.
+		/// This can only be set once during construction or with a style for this handler.
+		/// </summary>
+		/// <value>Environment to use to initialize WebView2</value>
+		public CoreWebView2Environment Environment
+		{
+			get => _environment ?? CoreWebView2Environment;
+			set => _environment = value;
+		}
+
+		/// <summary>
+		/// Override to use your own WebView2 initialization, if necessary
+		/// </summary>
+		/// <returns>Task</returns>
+		protected async virtual Task OnInitializeWebView2Async()
+		{
+			var env = Environment;
+			if (env == null && GetCoreWebView2Environment != null)
+			{
+				env = CoreWebView2Environment = await GetCoreWebView2Environment();
+			}
+			
+			await Control.EnsureCoreWebView2Async(env);
+		}
+		
+		async void InitializeAsync() => await OnInitializeWebView2Async();
+		
 		protected override void Initialize()
 		{
 			base.Initialize();
 			Size = new Size(100, 100);
 		}
 
-		public static CoreWebView2Environment CoreWebView2Environment;
-
-		async void InitializeAsync()
+		protected override void OnInitializeComplete()
 		{
-			await Control.EnsureCoreWebView2Async(CoreWebView2Environment);
+			base.OnInitializeComplete();
+			
+			// initialize webview2 after styles are applied, since styles might be used to configure the Environment or CoreWebView2Environment
+			InitializeAsync();
 		}
 
-		void Control_CoreWebView2Ready(object sender, EventArgs e)
+		void Control_CoreWebView2Ready(object sender, CoreWebView2InitializationCompletedEventArgs e)
 		{
+			if (!e.IsSuccess)
+			{
+				throw new WebView2InitializationException("Failed to initialze WebView2", e.InitializationException);
+			}
+			
 			// can't actually do anything here, so execute them in the main loop
 			Application.Instance.AsyncInvoke(RunDelayedActions);
 		}
 
 		private void RunDelayedActions()
 		{
+			if (Widget.IsDisposed)
+				return;
+			
 			Control.CoreWebView2.DocumentTitleChanged += CoreWebView2_DocumentTitleChanged;
 			Control.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
 			webView2Ready = true;
@@ -424,6 +497,26 @@ namespace Eto.Wpf.Forms.Controls
 			}
 		}
 
+		public override void OnUnLoad(EventArgs e)
+		{
+			base.OnUnLoad(e);
+			
+			// Fixes crash when shown as a child window and the parent is closed
+			// https://github.com/MicrosoftEdge/WebView2Feedback/issues/1971
+			// See WebViewTests.WebViewClosedAsChildShouldNotCrash for repro
+#if WPF
+			_host.Child = null;
+#endif
+		}
+		
+		public override void OnLoad(EventArgs e)
+		{
+#if WPF
+			if (_host.Child == null)
+				_host.Child = Control;
+#endif
+		}
+
 		private void CoreWebView2_NewWindowRequested(object sender, CoreWebView2NewWindowRequestedEventArgs e)
 		{
 			var args = new WebViewNewWindowEventArgs(new Uri(e.Uri), null);
@@ -436,8 +529,15 @@ namespace Eto.Wpf.Forms.Controls
 			Callback.OnDocumentTitleChanged(Widget, new WebViewTitleEventArgs(CoreWebView2.DocumentTitle));
 		}
 
-		void RunWhenReady(Action action)
+		protected void RunWhenReady(Action action)
 		{
+			if (webView2Ready)
+			{
+				// already ready, run now!
+				action();
+				return;
+			}
+			
 			if (delayedActions == null)
 			{
 				delayedActions = new List<Action>();
@@ -486,7 +586,11 @@ namespace Eto.Wpf.Forms.Controls
 		private void Control_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
 		{
 			var args = new WebViewLoadedEventArgs(Control.Source);
-			Application.Instance.AsyncInvoke(() => Callback.OnDocumentLoaded(Widget, args));
+			Application.Instance.AsyncInvoke(() => {
+				if (Widget.IsDisposed)
+					return;
+				Callback.OnDocumentLoaded(Widget, args);
+			});
 		}
 
 		public Uri Url
@@ -565,7 +669,7 @@ namespace Eto.Wpf.Forms.Controls
 
 		}
 
-		Microsoft.Web.WebView2.Core.CoreWebView2 CoreWebView2
+		protected Microsoft.Web.WebView2.Core.CoreWebView2 CoreWebView2
 		{
 			get
 			{
@@ -577,12 +681,23 @@ namespace Eto.Wpf.Forms.Controls
 
 		public void ShowPrintDialog() => ExecuteScript("print()");
 
+
+		static readonly object BrowserContextMenuEnabled_Key = new object();
+
 		public bool BrowserContextMenuEnabled
 		{
-			get => true;
+			get => CoreWebView2?.Settings.AreDefaultContextMenusEnabled ?? Widget.Properties.Get<bool>(BrowserContextMenuEnabled_Key, true);
 			set
 			{
-				Debug.WriteLine("BrowserContextMenuEnabled is not supported with WebView2.  Use javascript to disable.");
+				if (Widget.Properties.TrySet<bool>(BrowserContextMenuEnabled_Key, value, true))
+				{
+					if (!webView2Ready)
+					{
+						RunWhenReady(() => CoreWebView2.Settings.AreDefaultContextMenusEnabled = value);
+						return;
+					}
+					CoreWebView2.Settings.AreDefaultContextMenusEnabled = value;
+				}
 			}
 		}
 
@@ -596,5 +711,3 @@ namespace Eto.Wpf.Forms.Controls
 
 	}
 }
-
-#endif

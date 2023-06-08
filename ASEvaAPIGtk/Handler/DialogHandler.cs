@@ -7,31 +7,39 @@ namespace Eto.GtkSharp.Forms
 	public class DialogHandler : GtkWindow<Gtk.Dialog, Dialog, Dialog.ICallback>, Dialog.IHandler
 	{
 		Gtk.Container btcontainer;
+		Gtk.Box actionarea;
 		Button defaultButton;
 
 		public DialogHandler()
 		{
-			Control = new Gtk.Dialog("", null, Gtk.DialogFlags.DestroyWithParent);
+			Control = new Gtk.Dialog();
 
 			Resizable = false;
 		}
+		
+		protected override Gdk.WindowTypeHint DefaultTypeHint => Gdk.WindowTypeHint.Dialog;
 
 		protected override void Initialize()
 		{
 			base.Initialize();
 			Control.KeyPressEvent += Connector.Control_KeyPressEvent;
 
-#if GTK2
-			Control.VBox.PackStart(WindowActionControl, false, true, 0);
-			Control.VBox.PackStart(WindowContentControl, true, true, 0);
+			var vbox = new EtoVBox { Handler = this };
+			vbox.PackStart(WindowActionControl, false, true, 0);
+			vbox.PackStart(WindowContentControl, true, true, 0);
 
+#pragma warning disable 612
+			actionarea = Control.ActionArea;
+#pragma warning restore 612
+
+#if GTK2
+			var content = Control.VBox;
 			btcontainer = Control.ActionArea;
 #else
-			Control.ContentArea.PackStart(WindowActionControl, false, true, 0);
-			Control.ContentArea.PackStart(WindowContentControl, true, true, 0);
+			var content = Control.ContentArea;
 
-			Control.ActionArea.NoShowAll = true;
-			Control.ActionArea.Hide();
+			actionarea.NoShowAll = true;
+			actionarea.Hide();
 
 #if GTKCORE
 			if (Helper.UseHeaderBar)
@@ -44,8 +52,10 @@ namespace Eto.GtkSharp.Forms
 			}
 			else
 #endif
-				btcontainer = Control.ActionArea;
+				btcontainer = actionarea;
 #endif
+
+			content.PackStart(vbox, true, true, 0);
 		}
 
 		public Button AbortButton { get; set; }
@@ -87,10 +97,12 @@ namespace Eto.GtkSharp.Forms
 
 		public void ShowModal()
 		{
+			DisableAutoSizeUpdate++;
 			ReloadButtons();
 
 			Control.Modal = true;
 			Control.ShowAll();
+			DisableAutoSizeUpdate--;
 
 			do
 			{
@@ -108,7 +120,7 @@ namespace Eto.GtkSharp.Forms
 		{
 			var children = btcontainer.Children;
 			foreach (var child in children)
-				Control.ActionArea.Remove(child);
+				btcontainer.Remove(child);
 		}
 
 		public void ReloadButtons()
@@ -120,13 +132,13 @@ namespace Eto.GtkSharp.Forms
 			{
 				if (!Helper.UseHeaderBar)
 				{
-					Control.ActionArea.NoShowAll = false;
+					actionarea.NoShowAll = false;
 
 					for (int i = negativeButtons.Count - 1; i >= 0; i--)
-						Control.ActionArea.PackStart(negativeButtons[i].ToNative(), false, true, 1);
+						actionarea.PackStart(negativeButtons[i].ToNative(), false, true, 1);
 
 					foreach (var button in positiveButtons)
-						Control.ActionArea.PackStart(button.ToNative(), false, true, 1);
+						actionarea.PackStart(button.ToNative(), false, true, 1);
 				}
 #if GTKCORE
 				else
@@ -146,7 +158,7 @@ namespace Eto.GtkSharp.Forms
 			}
 			else
 			{
-				Control.ActionArea.NoShowAll = true;
+				actionarea.NoShowAll = true;
 				if (!Helper.UseHeaderBar)
 					btcontainer.Hide();
 #if GTKCORE
@@ -195,7 +207,7 @@ namespace Eto.GtkSharp.Forms
 		}
 
 		[GLib.ConnectBefore]
-		void Control_KeyPressEvent (object o, Gtk.KeyPressEventArgs args)
+		void Control_KeyPressEvent(object o, Gtk.KeyPressEventArgs args)
 		{
 			if (args.Event.Key == Gdk.Key.Escape && AbortButton != null)
 			{
@@ -224,7 +236,7 @@ namespace Eto.GtkSharp.Forms
 		{
 			public new DialogHandler Handler => (DialogHandler)base.Handler;
 
-			internal void Control_KeyPressEvent(object o, Gtk.KeyPressEventArgs args) => Handler.Control_KeyPressEvent(o, args);
+			internal void Control_KeyPressEvent(object o, Gtk.KeyPressEventArgs args) => Handler?.Control_KeyPressEvent(o, args);
 		}
 	}
 }
