@@ -87,6 +87,20 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     fi
 fi
 
+mkdir -vp $TARGET_DIR/binma
+cp -vf "$CUR_DIR"/binma/ASEvaAPI.dll $TARGET_DIR/binma/
+cp -vf "$CUR_DIR"/3party/common/* $TARGET_DIR/binma/
+if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
+    cp -vf "$CUR_DIR"/binma/ASEvaAPIEto.dll $TARGET_DIR/binma/
+    cp -vf "$CUR_DIR"/binma/ASEvaAPIMonoMac.dll $TARGET_DIR/binma/
+    cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binma/
+    cp -vf "$CUR_DIR"/3party/monomac/* $TARGET_DIR/binma/
+    cp -vf "$CUR_DIR"/3party/macos-arm64/* $TARGET_DIR/binma/
+    if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/macos-skia-native/* $TARGET_DIR/binma/
+    fi
+fi
+
 if [ "$EXPORT_DEVELOPER" = "y" ]; then
     mkdir -vp $TARGET_DIR/bin64/debug
     cp -vf "$CUR_DIR"/bin64/ASEvaAPI.xml $TARGET_DIR/bin64/
@@ -119,6 +133,14 @@ if [ "$EXPORT_DEVELOPER" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/eto-doc/* $TARGET_DIR/binm/
         cp -vf "$CUR_DIR"/binm/ASEvaAPIEto.xml $TARGET_DIR/binm/
         cp -vf "$CUR_DIR"/binm/ASEvaAPIMonoMac.xml $TARGET_DIR/binm/
+    fi
+
+    mkdir -vp $TARGET_DIR/binma/debug
+    cp -vf "$CUR_DIR"/binma/ASEvaAPI.xml $TARGET_DIR/binma/
+    if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/eto-doc/* $TARGET_DIR/binma/
+        cp -vf "$CUR_DIR"/binma/ASEvaAPIEto.xml $TARGET_DIR/binma/
+        cp -vf "$CUR_DIR"/binma/ASEvaAPIMonoMac.xml $TARGET_DIR/binma/
     fi
 fi
 
@@ -174,6 +196,20 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/macos-x64/* $TARGET_DIR/binm/debug/
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
             cp -vf "$CUR_DIR"/3party/macos-skia-native/* $TARGET_DIR/binm/debug/
+        fi
+    fi
+
+    mkdir -vp $TARGET_DIR/binma/debug
+    cp -vf "$CUR_DIR"/binma/ASEvaAPI.dll $TARGET_DIR/binma/debug/
+    cp -vf "$CUR_DIR"/3party/common/* $TARGET_DIR/binma/debug/
+    if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
+        cp -vf "$CUR_DIR"/binma/ASEvaAPIEto.dll $TARGET_DIR/binma/debug/
+        cp -vf "$CUR_DIR"/binma/ASEvaAPIMonoMac.dll $TARGET_DIR/binma/debug/
+        cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binma/debug/
+        cp -vf "$CUR_DIR"/3party/monomac/* $TARGET_DIR/binma/debug/
+        cp -vf "$CUR_DIR"/3party/macos-arm64/* $TARGET_DIR/binma/debug/
+        if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/macos-skia-native/* $TARGET_DIR/binma/debug/
         fi
     fi
 fi
