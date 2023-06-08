@@ -3,6 +3,7 @@ using Eto.Forms;
 #if IOS
 using Foundation;
 #else
+using MonoMac.Foundation;
 #endif
 using Eto;
 using Eto.Mac;

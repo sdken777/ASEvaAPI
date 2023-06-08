@@ -5,6 +5,11 @@ using Eto.Drawing;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 #if MONOMAC
+using MonoMac.AppKit;
+using MonoMac.Foundation;
+using MonoMac.CoreGraphics;
+using MonoMac.ObjCRuntime;
+using MonoMac.CoreAnimation;
 using wk = MonoMac.WebKit;
 #else
 using wk = WebKit;
