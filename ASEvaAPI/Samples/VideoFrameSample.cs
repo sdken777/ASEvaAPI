@@ -58,7 +58,7 @@ namespace ASEva.Samples
         public object SpecialCameraInfo { get; set; }
 
         /// <summary>
-        /// 标准针孔模型下的横向视场角（未消歪曲时为空）
+        /// 标准针孔模型下的横向视场角（未去畸变时为空）
         /// </summary>
         public double? HorizontalFov { get; set; }
 

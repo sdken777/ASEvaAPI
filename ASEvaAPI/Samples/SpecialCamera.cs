@@ -38,7 +38,7 @@ namespace ASEva.Samples
         RightBlindSpotCamera = 5,
 
         /// <summary>
-        /// 任意位置摄像头
+        /// 任意位置摄像头（标准模型），使用 GenericCameraMeta
         /// </summary>
         AnyCamera = 6,
 
@@ -74,16 +74,48 @@ namespace ASEva.Samples
         public bool VFlipped { get; set; }
 
         /// <summary>
-        /// 是否作了消歪曲
+        /// 是否作了去畸变
         /// </summary>
         public bool Undistorted { get; set; }
 
+        /// <summary>
+        /// (api:app=2.12.2) 去畸变后的理想针孔模型图像的横向视场角 [deg]
+        /// </summary>
+        public double UndistortedHFOV { get; set; }
+
+        /// <summary>
+        /// 像素尺寸横纵比
+        /// </summary>
         public double AR { get; set; }
+
+        /// <summary>
+        /// 归一化视轴u坐标
+        /// </summary>
         public double CU { get; set; }
+
+        /// <summary>
+        /// 归一化视轴v坐标
+        /// </summary>
         public double CV { get; set; }
+
+        /// <summary>
+        /// 畸变参数K1
+        /// </summary>
         public double K1 { get; set; }
+
+        /// <summary>
+        /// 畸变参数K2
+        /// </summary>
         public double K2 { get; set; }
+
+        /// <summary>
+        /// 畸变参数P1
+        /// </summary>
         public double P1 { get; set; }
+
+        /// <summary>
+        /// 畸变参数P2
+        /// </summary>
         public double P2 { get; set; }
 
         /// <summary>
@@ -209,8 +241,19 @@ namespace ASEva.Samples
         /// </summary>
         public float MeterScale { get; set; }
 
+        /// <summary>
+        /// 零点位置
+        /// </summary>
         public FloatPoint ZeroPosition { get; set; }
+
+        /// <summary>
+        /// 单位点位置
+        /// </summary>
         public FloatPoint MeterPosition { get; set; }
+
+        /// <summary>
+        /// 半长占比
+        /// </summary>
         public float FiftyRatio { get; set; }
     }
 
@@ -229,13 +272,44 @@ namespace ASEva.Samples
         /// </summary>
         public CommonCameraMeta Common { get; set; }
 
+        /// <summary>
+        /// P00位置
+        /// </summary>
         public FloatPoint P00Position { get; set; }
+
+        /// <summary>
+        /// P04位置
+        /// </summary>
         public FloatPoint P04Position { get; set; }
+
+        /// <summary>
+        /// P30位置
+        /// </summary>
         public FloatPoint P30Position { get; set; }
+
+        /// <summary>
+        /// P34位置
+        /// </summary>
         public FloatPoint P34Position { get; set; }
+
+        /// <summary>
+        /// P0X半长占比
+        /// </summary>
         public float P0HRatio { get; set; }
+
+        /// <summary>
+        /// P3X半长占比
+        /// </summary>
         public float P3HRatio { get; set; }
+
+        /// <summary>
+        /// PX0半长占比
+        /// </summary>
         public float PH0Ratio { get; set; }
+
+        /// <summary>
+        /// PX4半长占比
+        /// </summary>
         public float PH4Ratio { get; set; }
     }
 
@@ -255,17 +329,53 @@ namespace ASEva.Samples
         public bool VFlipped { get; set; }
 
         /// <summary>
-        /// 是否作了消歪曲
+        /// 是否作了去畸变
         /// </summary>
         public bool Undistorted { get; set; }
 
+        /// <summary>
+        /// (api:app=2.12.2) 去畸变后的理想针孔模型图像的横向视场角 [deg]
+        /// </summary>
+        public double UndistortedHFOV { get; set; }
+
+        /// <summary>
+        /// 理想鱼眼模型横向视场角 [deg]
+        /// </summary>
         public double HFOVFisheye { get; set; }
+
+        /// <summary>
+        /// 像素尺寸横纵比
+        /// </summary>
         public double AR { get; set; }
+
+        /// <summary>
+        /// 归一化视轴u坐标
+        /// </summary>
         public double CU { get; set; }
+
+        /// <summary>
+        /// 归一化视轴v坐标
+        /// </summary>
         public double CV { get; set; }
+
+        /// <summary>
+        /// 畸变参数K1
+        /// </summary>
         public double K1 { get; set; }
+
+        /// <summary>
+        /// 畸变参数K2
+        /// </summary>
         public double K2 { get; set; }
+
+        /// <summary>
+        /// 畸变参数K3
+        /// </summary>
         public double K3 { get; set; }
+
+        /// <summary>
+        /// 畸变参数K4
+        /// </summary>
         public double K4 { get; set; }
 
         /// <summary>
@@ -350,7 +460,7 @@ namespace ASEva.Samples
         public object SpecialCameraInfo { get; set; }
 
         /// <summary>
-        /// 标准针孔模型下的横向视场角（未消歪曲时为空）
+        /// 标准针孔模型下的横向视场角（未去畸变时为空）
         /// </summary>
         public double? HorizontalFov { get; set; }
     }
