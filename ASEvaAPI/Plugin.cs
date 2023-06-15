@@ -81,6 +81,12 @@ namespace ASEva
         public virtual Dictionary<String, String> GetGuestSyncTitleTable() { return null; }
 
         /// <summary>
+        /// (api:app=2.12.3) [可选实现] 获取需要提前加载的库文件列表
+        /// </summary>
+        /// <returns>库文件名的列表，不需要绝对路径</returns>
+        public virtual String[] GetPreloadLibFiles() { return null; }
+
+        /// <summary>
         /// (api:app=2.11.0) [可选实现] 设置用于记录调试信息的接口时被调用
         /// </summary>
         /// <param name="logger">记录调试信息的接口，基于此接口记录可带上来源信息</param>

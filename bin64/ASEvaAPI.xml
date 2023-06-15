@@ -2021,7 +2021,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.12.2
+            version=2.12.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4229,6 +4229,12 @@
             (api:app=2.12.0) [可选实现] 获取插件相关的客机同步通道标题表
             </summary>
             <returns>客机同步通道标题表，键为客机同步ID，值为其标题</returns>
+        </member>
+        <member name="M:ASEva.Plugin.GetPreloadLibFiles">
+            <summary>
+            (api:app=2.12.3) [可选实现] 获取需要提前加载的库文件列表
+            </summary>
+            <returns>库文件名的列表，不需要绝对路径</returns>
         </member>
         <member name="M:ASEva.Plugin.UseLogger(ASEva.Logger)">
             <summary>
