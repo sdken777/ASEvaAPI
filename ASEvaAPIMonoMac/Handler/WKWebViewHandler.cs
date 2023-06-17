@@ -4,16 +4,20 @@ using System.Linq;
 using Eto.Drawing;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
-#if MONOMAC
+#if XAMMAC2
+using AppKit;
+using Foundation;
+using CoreGraphics;
+using ObjCRuntime;
+using CoreAnimation;
+using wk = WebKit;
+#else
 using MonoMac.AppKit;
 using MonoMac.Foundation;
 using MonoMac.CoreGraphics;
 using MonoMac.ObjCRuntime;
 using MonoMac.CoreAnimation;
 using wk = MonoMac.WebKit;
-#else
-using wk = WebKit;
-#endif
 using Eto.Mac;
 using Eto.Mac.Forms;
 
@@ -298,10 +302,7 @@ namespace ASEva.UIMonoMac
 
 		public void LoadHtml(string html, Uri baseUri)
 		{
-			var baseNSUrl = baseUri.ToNS();
-			if (baseNSUrl != null)
-				Control.LoadFileUrl(baseNSUrl, baseNSUrl);
-			Control.LoadHtmlString(html, baseNSUrl);
+			Control.LoadHtmlString(html, baseUri.ToNS());
 		}
 
 		public void Stop() => Control.StopLoading();

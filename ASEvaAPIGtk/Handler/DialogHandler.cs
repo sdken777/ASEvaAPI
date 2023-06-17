@@ -17,8 +17,6 @@ namespace ASEva.UIGtk
 		{
 			Control = new Gtk.Dialog("", null, Gtk.DialogFlags.DestroyWithParent);
 		}
-		
-		protected override Gdk.WindowTypeHint DefaultTypeHint => Gdk.WindowTypeHint.Dialog;
 
 		protected override void Initialize()
 		{
@@ -249,7 +247,7 @@ namespace ASEva.UIGtk
 		{
 			public new DialogHandler Handler => (DialogHandler)base.Handler;
 
-			internal void Control_KeyPressEvent(object o, Gtk.KeyPressEventArgs args) => Handler?.Control_KeyPressEvent(o, args);
+			internal void Control_KeyPressEvent(object o, Gtk.KeyPressEventArgs args) => Handler.Control_KeyPressEvent(o, args);
 		}
 	}
 }

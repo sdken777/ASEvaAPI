@@ -62,11 +62,8 @@ namespace ASEva.UIGtk
 
 			public void HandleDrawableButtonPressEvent(object o, Gtk.ButtonPressEventArgs args)
 			{
-				var handler = Handler;
-				if (handler == null)
-					return;
-				if (handler.CanFocus)
-					handler.Control.GrabFocus();
+				if (Handler.CanFocus)
+					Handler.Control.GrabFocus();
 			}
 
 #if GTK2
@@ -86,23 +83,21 @@ namespace ASEva.UIGtk
 			// [GLib.ConnectBefore]
 			public void HandleDrawn(object o, Gtk.DrawnArgs args)
 			{
-				var handler = Handler;
-				if (handler == null)
-					return;
+				var h = Handler;
 
-				var allocation = handler.Control.Allocation.Size;
+				var allocation = h.Control.Allocation.Size;
 				args.Cr.Rectangle(new Cairo.Rectangle(0, 0, allocation.Width, allocation.Height));
 				args.Cr.Clip();
 				Gdk.Rectangle rect = new Gdk.Rectangle();
 				if (!GraphicsHandler.GetClipRectangle(args.Cr, ref rect))
 					rect = new Gdk.Rectangle(Gdk.Point.Zero, allocation);
 
-				using (var graphics = new Graphics(new GraphicsHandler(args.Cr, handler.Control.PangoContext, false)))
+				using (var graphics = new Graphics(new GraphicsHandler(args.Cr, h.Control.PangoContext, false)))
 				{
-					if (handler.SelectedBackgroundColor != null)
-						graphics.Clear(handler.SelectedBackgroundColor.Value);
+					if (h.SelectedBackgroundColor != null)
+						graphics.Clear(h.SelectedBackgroundColor.Value);
 					
-					handler.Callback.OnPaint(handler.Widget, new PaintEventArgs(graphics, rect.ToEto()));
+					h.Callback.OnPaint(h.Widget, new PaintEventArgs(graphics, rect.ToEto()));
 				}
 			}
 #endif

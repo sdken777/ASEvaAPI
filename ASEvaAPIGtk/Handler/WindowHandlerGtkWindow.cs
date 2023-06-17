@@ -132,38 +132,15 @@ namespace ASEva.UIGtk
 #endif
 			Control.SetGeometryHints(Control, geom, Gdk.WindowHints.MinSize);
 		}
-		
 
-		public bool Minimizable
-		{
-			get => Widget.Properties.Get<bool>(GtkWindow.Minimizable_Key, true);
-			set
-			{
-				if (Widget.Properties.TrySet(GtkWindow.Minimizable_Key, value, true))
-					SetTypeHint();
-			}
-		}
+		public bool Minimizable { get; set; }
 
-		public bool Maximizable
-		{
-			get => Widget.Properties.Get<bool>(GtkWindow.Maximizable_Key, true);
-			set
-			{
-				if (Widget.Properties.TrySet(GtkWindow.Maximizable_Key, value, true))
-					SetTypeHint();
-			}
-		}
+		public bool Maximizable { get; set; }
 
 		public bool ShowInTaskbar
 		{
 			get { return !Control.SkipTaskbarHint; }
 			set { Control.SkipTaskbarHint = !value; }
-		}
-		
-		public bool Closeable
-		{
-			get => Control.Deletable;
-			set => Control.Deletable = value;
 		}
 
 		public bool Topmost
@@ -198,26 +175,12 @@ namespace ASEva.UIGtk
 							break;
 						case WindowStyle.Utility:
 							Control.Decorated = true;
+							Control.TypeHint = Gdk.WindowTypeHint.Utility;
 							break;
 						default:
 							throw new NotSupportedException();
 					}
-					SetTypeHint();
 				}
-			}
-		}
-		
-		protected virtual Gdk.WindowTypeHint DefaultTypeHint => Gdk.WindowTypeHint.Normal;
-		
-		void SetTypeHint()
-		{
-			if (WindowStyle == WindowStyle.Default && (Minimizable || Maximizable))
-			{
-				Control.TypeHint = DefaultTypeHint;
-			}
-			else
-			{
-				Control.TypeHint = Gdk.WindowTypeHint.Utility;
 			}
 		}
 
@@ -383,15 +346,12 @@ namespace ASEva.UIGtk
 
 			public void HandleDeleteEvent(object o, Gtk.DeleteEventArgs args)
 			{
-				var handler = Handler;
-				if (handler == null)
-					return;
-				args.RetVal = !handler.CloseWindow();
+				args.RetVal = !Handler.CloseWindow();
 			}
 
 			public void HandleShownEvent(object sender, EventArgs e)
 			{
-				Handler?.Callback.OnShown(Handler.Widget, EventArgs.Empty);
+				Handler.Callback.OnShown(Handler.Widget, EventArgs.Empty);
 			}
 
 			public void HandleWindowStateEvent(object o, Gtk.WindowStateEventArgs args)
@@ -426,13 +386,10 @@ namespace ASEva.UIGtk
 			// do not connect before, otherwise it is sent before sending to child
 			public void HandleWindowKeyPressEvent(object o, Gtk.KeyPressEventArgs args)
 			{
-				var handler = Handler;
-				if (handler == null)
-					return;
 				var e = args.Event.ToEto();
 				if (e != null)
 				{
-					handler.Callback.OnKeyDown(handler.Widget, e);
+					Handler.Callback.OnKeyDown(Handler.Widget, e);
 					args.RetVal = e.Handled;
 				}
 			}
@@ -482,13 +439,11 @@ namespace ASEva.UIGtk
 
 			internal void ButtonPressEvent_Movable(object o, Gtk.ButtonPressEventArgs args)
 			{
-				var handler = Handler;
-				if (handler == null)
-					return;
+				var h = Handler;
 				var evt = args.Event;
-				if (handler != null && evt.Type == Gdk.EventType.ButtonPress && evt.Button == 1)
+				if (h != null && evt.Type == Gdk.EventType.ButtonPress && evt.Button == 1)
 				{
-					handler.Control.BeginMoveDrag((int)evt.Button, (int)evt.XRoot, (int)evt.YRoot, evt.Time);
+					h.Control.BeginMoveDrag((int)evt.Button, (int)evt.XRoot, (int)evt.YRoot, evt.Time);
 				}
 			}
 		}

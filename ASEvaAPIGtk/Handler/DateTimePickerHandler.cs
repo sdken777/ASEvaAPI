@@ -34,7 +34,7 @@ namespace ASEva.UIGtk
 
 			public void HandleDateChanged(object sender, EventArgs e)
 			{
-				Handler?.Callback.OnValueChanged(Handler.Widget, EventArgs.Empty);
+				Handler.Callback.OnValueChanged(Handler.Widget, EventArgs.Empty);
 			}
 		}
 

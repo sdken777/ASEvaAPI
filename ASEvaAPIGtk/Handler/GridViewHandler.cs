@@ -36,7 +36,7 @@ namespace ASEva.UIGtk
 				var iter = Handler.model.GetIterAtRow(count);
 				var path = Handler.model.GetPathAtRow(count);
 				Handler.model.Count++;
-				Handler.Control.Model.EmitRowInserted(path, iter);
+				Handler.Tree.Model.EmitRowInserted(path, iter);
 			}
 
 			public override void InsertItem(int index, object item)
@@ -44,14 +44,14 @@ namespace ASEva.UIGtk
 				var iter = Handler.model.GetIterAtRow(index);
 				var path = Handler.model.GetPathAtRow(index);
 				Handler.model.Count++;
-				Handler.Control.Model.EmitRowInserted(path, iter);
+				Handler.Tree.Model.EmitRowInserted(path, iter);
 			}
 
 			public override void RemoveItem(int index)
 			{
 				var path = Handler.model.GetPathAtRow(index);
 				Handler.model.Count--;
-				Handler.Control.Model.EmitRowDeleted(path);
+				Handler.Tree.Model.EmitRowDeleted(path);
 			}
 
 			public override void RemoveAllItems()
@@ -108,7 +108,7 @@ namespace ASEva.UIGtk
 
 		protected override void SetSelectedRows(IEnumerable<int> value)
 		{
-			Control.Selection.UnselectAll();
+			Tree.Selection.UnselectAll();
 			if (value != null && collection != null)
 			{
 				int start = -1;
@@ -124,18 +124,18 @@ namespace ASEva.UIGtk
 					else
 					{
 						if (start == end)
-							Control.Selection.SelectIter(GetIterAtRow(start));
+							Tree.Selection.SelectIter(GetIterAtRow(start));
 						else
-							Control.Selection.SelectRange(GetPathAtRow(start), GetPathAtRow(end));
+							Tree.Selection.SelectRange(GetPathAtRow(start), GetPathAtRow(end));
 						start = end = row;
 					}
 				}
 				if (start != -1)
 				{
 					if (start == end)
-						Control.Selection.SelectIter(GetIterAtRow(start));
+						Tree.Selection.SelectIter(GetIterAtRow(start));
 					else
-						Control.Selection.SelectRange(GetPathAtRow(start), GetPathAtRow(end));
+						Tree.Selection.SelectRange(GetPathAtRow(start), GetPathAtRow(end));
 				}
 			}
 		}
@@ -149,12 +149,10 @@ namespace ASEva.UIGtk
 		{
 			if (dataColumn == RowDataColumn)
 				return new GLib.Value(row);
-			if (dataColumn == ItemDataColumn)
-				return new GLib.Value(item);
 			int column;
 			if (ColumnMap.TryGetValue(dataColumn, out column))
 			{
-				var colHandler = (GridColumnHandler)Widget.Columns[column].Handler;
+				var colHandler = (IGridColumnHandler)Widget.Columns[column].Handler;
 				return colHandler.GetValue(item, dataColumn, row);
 			}
 			return new GLib.Value((string)null);
@@ -172,78 +170,24 @@ namespace ASEva.UIGtk
 
 		public void ReloadData(IEnumerable<int> rows)
 		{
-			if (rows != null)
-			{
-				foreach (var row in rows)
-				{
-					var iter = GetIterAtRow(row);
-					var path = GetPathAtRow(row);
-					Control.Model.EmitRowChanged(path, iter);
-				}
-			}
-			else
-				UpdateModel();
+			UpdateModel();
 		}
 
-
-		public GridCell GetCellAt(PointF location)
+		public object GetCellAt(PointF location, out int column, out int row)
 		{
-			int columnIndex;
-			int rowIndex;
-			object item;
-			GridCellType cellType;
-			int headerIndex = -1;
-
-#if !GTK2
-			if (ShowHeader)
+			Gtk.TreePath path;
+			Gtk.TreeViewColumn col;
+			if (Tree.GetPathAtPos((int)location.X, (int)location.Y, out path, out col))
 			{
-				int headerHeight = 0;
-				for (int i = 0; i < Control.Columns.Length; i++)
-				{
-					Gtk.TreeViewColumn col = Control.Columns[i];
-					var header = col.Button?.GetWindow();
-					if (header != null)
-					{
-						var bounds = header.GetBounds();
-						if (bounds.Contains(Point.Round(location)))
-						{
-							headerIndex = GetColumnIndex(col);
-						}
-						headerHeight = Math.Max(headerHeight, bounds.Height);
-					}
-				}
-				location.Y -= headerHeight;
+				column = GetColumnOfItem(col);
+				row = GetRowIndexOfPath(path);
+				return model.GetItemAtPath(path);
 			}
-#endif
-
-			if (headerIndex == -1 && Control.GetPathAtPos((int)location.X, (int)location.Y, out var path, out var dataColumn))
-			{
-				columnIndex = GetColumnIndex(dataColumn);
-				rowIndex = GetRowIndexOfPath(path);
-				item = model.GetItemAtPath(path);
-				if (columnIndex == -1)
-					cellType = GridCellType.None;
-				else
-					cellType = GridCellType.Data;
-			}
-			else if (headerIndex != -1)
-			{
-				cellType = GridCellType.ColumnHeader;
-				columnIndex = headerIndex;
-				rowIndex = -1;
-				item = null;
-			}
-			else
-			{
-				columnIndex = -1;
-				rowIndex = -1;
-				item = null;
-				cellType = GridCellType.None;
-			}
-
-			var column = columnIndex != -1 ? Widget.Columns[columnIndex] : null;
-			return new GridCell(column, columnIndex, rowIndex, cellType, item);
+			column = -1;
+			row = -1;
+			return null;
 		}
+
 
 
 		protected class GridViewConnector : GridConnector
@@ -252,9 +196,9 @@ namespace ASEva.UIGtk
 
 			public new GridViewHandler Handler { get { return (GridViewHandler)base.Handler; } }
 
-			protected override DragEventArgs GetDragEventArgs(Gdk.DragContext context, PointF? location, uint time = 0, object controlObject = null, DataObject data = null)
+			protected override DragEventArgs GetDragEventArgs(Gdk.DragContext context, PointF? location, uint time = 0, object controlObject = null)
 			{
-				var t = Handler?.Control;
+				var t = Handler?.Tree;
 				GridViewDragInfo dragInfo = _dragInfo;
 				if (dragInfo == null && location != null)
 				{
@@ -267,7 +211,7 @@ namespace ASEva.UIGtk
 					}
 				}
 
-				return base.GetDragEventArgs(context, location, time, dragInfo, data);
+				return base.GetDragEventArgs(context, location, time, dragInfo);
 			}
 
 			public override void HandleDragMotion(object o, Gtk.DragMotionArgs args)
@@ -285,7 +229,7 @@ namespace ASEva.UIGtk
 				{
 					var path = new Gtk.TreePath(new[] { info.Index });
 					var pos = info.Position.ToGtk();
-					h.Control.SetDragDestRow(path, pos);
+					h.Tree.SetDragDestRow(path, pos);
 				}
 			}
 
