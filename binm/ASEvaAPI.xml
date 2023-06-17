@@ -2021,7 +2021,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.12.1
+            version=0.0.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">

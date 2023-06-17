@@ -18,6 +18,7 @@ using MonoMac.CoreGraphics;
 using MonoMac.ObjCRuntime;
 using MonoMac.CoreAnimation;
 using wk = MonoMac.WebKit;
+#endif
 using Eto.Mac;
 using Eto.Mac.Forms;
 
