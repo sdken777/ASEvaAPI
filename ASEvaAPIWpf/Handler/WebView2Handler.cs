@@ -26,7 +26,6 @@ namespace Eto.WinForms.Forms.Controls
 #elif WPF
 using WebView2Control = Microsoft.Web.WebView2.Wpf.WebView2;
 using BaseHandler = Eto.Wpf.Forms.WpfFrameworkElement<Microsoft.Web.WebView2.Wpf.WebView2, Eto.Forms.WebView, Eto.Forms.WebView.ICallback>;
-using BaseHost = Eto.Wpf.Forms.EtoBorder;
 
 namespace Eto.Wpf.Forms.Controls
 #endif
@@ -385,36 +384,22 @@ namespace Eto.Wpf.Forms.Controls
 		{
 		}
 	}
-	
-	#if WPF
-	public class WebView2Host : BaseHost
-	{
-	}
-	#endif
 
 	public class WebView2Handler : BaseHandler, WebView.IHandler
 	{
 		bool webView2Ready;
 		protected bool WebView2Ready => webView2Ready;
 		CoreWebView2Environment _environment;
+
 		List<Action> delayedActions;
-		
+
 		public WebView2Handler()
 		{
 			WebView2Loader.EnsureWebView2Runtime();
 			Control = new WebView2Control();
 			Control.CoreWebView2InitializationCompleted += Control_CoreWebView2Ready;
-#if WPF
-			_host = new WebView2Host();
-			_host.Child = Control;
-			_host.Handler = this;
-#endif
 		}
 
-#if WPF
-		WebView2Host _host;
-		public override System.Windows.FrameworkElement ContainerControl => _host;
-#endif
 		/// <summary>
 		/// The default environment to use if none is specified with <see cref="Environment"/>.
 		/// </summary>
@@ -480,9 +465,6 @@ namespace Eto.Wpf.Forms.Controls
 
 		private void RunDelayedActions()
 		{
-			if (Widget.IsDisposed)
-				return;
-			
 			Control.CoreWebView2.DocumentTitleChanged += CoreWebView2_DocumentTitleChanged;
 			Control.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
 			webView2Ready = true;
@@ -495,26 +477,6 @@ namespace Eto.Wpf.Forms.Controls
 				}
 				delayedActions = null;
 			}
-		}
-
-		public override void OnUnLoad(EventArgs e)
-		{
-			base.OnUnLoad(e);
-			
-			// Fixes crash when shown as a child window and the parent is closed
-			// https://github.com/MicrosoftEdge/WebView2Feedback/issues/1971
-			// See WebViewTests.WebViewClosedAsChildShouldNotCrash for repro
-#if WPF
-			_host.Child = null;
-#endif
-		}
-		
-		public override void OnLoad(EventArgs e)
-		{
-#if WPF
-			if (_host.Child == null)
-				_host.Child = Control;
-#endif
 		}
 
 		private void CoreWebView2_NewWindowRequested(object sender, CoreWebView2NewWindowRequestedEventArgs e)
@@ -586,11 +548,7 @@ namespace Eto.Wpf.Forms.Controls
 		private void Control_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
 		{
 			var args = new WebViewLoadedEventArgs(Control.Source);
-			Application.Instance.AsyncInvoke(() => {
-				if (Widget.IsDisposed)
-					return;
-				Callback.OnDocumentLoaded(Widget, args);
-			});
+			Application.Instance.AsyncInvoke(() => Callback.OnDocumentLoaded(Widget, args));
 		}
 
 		public Uri Url

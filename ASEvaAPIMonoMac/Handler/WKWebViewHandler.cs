@@ -4,10 +4,20 @@ using System.Linq;
 using Eto.Drawing;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
-#if MONOMAC
-using wk = MonoMac.WebKit;
-#else
+#if XAMMAC2
+using AppKit;
+using Foundation;
+using CoreGraphics;
+using ObjCRuntime;
+using CoreAnimation;
 using wk = WebKit;
+#else
+using MonoMac.AppKit;
+using MonoMac.Foundation;
+using MonoMac.CoreGraphics;
+using MonoMac.ObjCRuntime;
+using MonoMac.CoreAnimation;
+using wk = MonoMac.WebKit;
 #endif
 
 namespace Eto.Mac.Forms.Controls
@@ -290,10 +300,7 @@ namespace Eto.Mac.Forms.Controls
 
 		public void LoadHtml(string html, Uri baseUri)
 		{
-			var baseNSUrl = baseUri.ToNS();
-			if (baseNSUrl != null)
-				Control.LoadFileUrl(baseNSUrl, baseNSUrl);
-			Control.LoadHtmlString(html, baseNSUrl);
+			Control.LoadHtmlString(html, baseUri.ToNS());
 		}
 
 		public void Stop() => Control.StopLoading();
