@@ -24,7 +24,7 @@ namespace ASEva.UIGtk
             if (ASEva.APIInfo.GetRunningOS() == "linuxarm")
             {
                 Redirection.RedirectMarshaller();
-                Redirection.RedirectMenu();
+                // Redirection.RedirectMenu();
             }
   
             var platform = new global::Eto.GtkSharp.Platform();
