@@ -49,7 +49,7 @@ namespace ASEva.UIGtk
             dialogPanel.OnDialogClose += OnDialogClose;
         }
 
-        private AppDialogWayland(Builder builder) : base(builder.GetObject("AppDialogWayland").Handle)
+        private AppDialogWayland(Builder builder) : base(builder.GetRawOwnedObject("AppDialogWayland"))
         {
             builder.Autoconnect(this);
         }

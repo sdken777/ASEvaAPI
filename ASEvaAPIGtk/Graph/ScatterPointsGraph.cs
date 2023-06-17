@@ -35,7 +35,7 @@ namespace ASEva.UIGtk
             drawSwap.Paint += draw_Paint;
         }
 
-        private ScatterPointsGraph(Builder builder) : base(builder.GetObject("ScatterPointsGraph").Handle)
+        private ScatterPointsGraph(Builder builder) : base(builder.GetRawOwnedObject("ScatterPointsGraph"))
         {
             builder.Autoconnect(this);
         }

@@ -26,7 +26,7 @@ namespace ASEva.UIGtk
             treeView.RowActivated += treeView_RowActivated;
         }
 
-        private SimpleTreeViewBackendGtk(Builder builder) : base(builder.GetObject("SimpleTreeViewBackendGtk").Handle)
+        private SimpleTreeViewBackendGtk(Builder builder) : base(builder.GetRawOwnedObject("SimpleTreeViewBackendGtk"))
         {
             builder.Autoconnect(this);
         }

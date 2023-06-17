@@ -55,7 +55,7 @@ namespace ASEva.UIGtk
             }
         }
 
-        private TimelineIndicator(Builder builder) : base(builder.GetObject("TimelineIndicator").Handle)
+        private TimelineIndicator(Builder builder) : base(builder.GetRawOwnedObject("TimelineIndicator"))
         {
             builder.Autoconnect(this);
         }
