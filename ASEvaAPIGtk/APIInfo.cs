@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 6, 5, 0); // 官方handler添加至仓库
+            return new Version(2, 6, 5, 1); // 修正PixelLayout异常。设置OverlayLayout.DelayHandleControl。修正GridHandler鼠标双击事件
         }
     }
 }

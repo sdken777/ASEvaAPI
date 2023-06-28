@@ -98,7 +98,7 @@ namespace ASEva.UIGtk
         {
 			if (Control.AllocatedWidth != lastWidth || Control.AllocatedHeight != lastHeight)
 			{
-				Update();
+				if (Control.Child != null) Update();
 				lastWidth = Control.AllocatedWidth;
 				lastHeight = Control.AllocatedHeight;
 			}

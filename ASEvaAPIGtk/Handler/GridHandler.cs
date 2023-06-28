@@ -235,7 +235,7 @@ namespace ASEva.UIGtk
 						var columnIndex = GetColumnOfItem(e.Column);
 						var item = GetItem(e.Path);
 						var column = columnIndex == -1 ? null : Widget.Columns[columnIndex];
-						Callback.OnCellClick(Widget, new GridCellMouseEventArgs(column, rowIndex, columnIndex, item, Mouse.Buttons, Keyboard.Modifiers, PointFromScreen(Mouse.Position)));
+						Callback.OnCellDoubleClick(Widget, new GridCellMouseEventArgs(column, rowIndex, columnIndex, item, Mouse.Buttons, Keyboard.Modifiers, PointFromScreen(Mouse.Position)));
 					};
 					break;
 				case Grid.SelectionChangedEvent:

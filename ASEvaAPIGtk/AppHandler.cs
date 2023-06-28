@@ -81,6 +81,7 @@ namespace ASEva.UIGtk
             SnapshotExtensions.Handler = new SnapshotHandler();
             FlowLayout.Factory = new FlowLayoutFactoryGtk();
             FlowLayout2D.Factory = new FlowLayout2DFactoryGtk();
+            OverlayLayout.DelayHandleControl = true;
 
             webViewBackend = "webkit2";
 
