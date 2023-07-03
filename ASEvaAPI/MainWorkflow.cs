@@ -125,6 +125,18 @@ namespace ASEva
         public virtual bool OnCheckEnableOnscreenGPURendering() { return false; }
 
         /// <summary>
+        /// (api:app=2.13.0) [可选实现] 返回是否禁用GPU解码
+        /// </summary>
+        /// <returns>是否禁用GPU解码</returns>
+        public virtual bool OnCheckDisableGPUDecoding() { return false; }
+
+        /// <summary>
+        /// (api:app=2.13.0) [可选实现] 返回是否启用GPU专用解码
+        /// </summary>
+        /// <returns>是否启用GPU专用解码（若已禁用GPU解码则无效）</returns>
+        public virtual bool OnCheckEnableSpecializedGPUDecoding() { return false; }
+
+        /// <summary>
         /// [可选实现][可含模态框] 选择总线协议文件
         /// </summary>
         /// <param name="selected">已选择的总线协议文件</param>

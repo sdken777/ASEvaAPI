@@ -2021,7 +2021,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.12.3
+            version=2.13.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3773,6 +3773,18 @@
             (api:app=2.6.13) [可选实现] 返回是否启用GPU在屏渲染
             </summary>
             <returns>是否启用GPU在屏渲染（若已禁用GPU渲染则无效）</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnCheckDisableGPUDecoding">
+            <summary>
+            (api:app=2.13.0) [可选实现] 返回是否禁用GPU解码
+            </summary>
+            <returns>是否禁用GPU解码</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnCheckEnableSpecializedGPUDecoding">
+            <summary>
+            (api:app=2.13.0) [可选实现] 返回是否启用GPU专用解码
+            </summary>
+            <returns>是否启用GPU专用解码（若已禁用GPU解码则无效）</returns>
         </member>
         <member name="M:ASEva.MainWorkflow.OnSelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
             <summary>
