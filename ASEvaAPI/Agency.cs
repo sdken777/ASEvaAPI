@@ -267,6 +267,7 @@ namespace ASEva
         bool UninstallPlugin(String packID);
         LogMessage[] GetLogMessages();
         bool IsReady();
+        bool IsReady(out String busyReason);
         void DisablePlugin(String packID);
         void DisableAllPlugins();
         void EnablePlugin(String packID);
@@ -277,6 +278,7 @@ namespace ASEva
         void ResetAppFunctionHandler(object caller, String nativeClassID, String funcID);
         bool IsGPURenderingDisabled();
         bool IsOnscreenGPURenderingEnabled();
+        void ResetGPUDecoderTestResults();
         DataSubscriber SubscribeData(String dataID, int bufferLength, int timeout);
         void PublishData(String dataID, byte[] data);
         CPUTimeModel GetCPUTimeModel(DateTime session);
@@ -2910,6 +2912,16 @@ namespace ASEva
         }
 
         /// <summary>
+        /// (api:app=2.13.1) 返回是否允许进行保存工程项目和开始session等操作，若不允许则输出繁忙原因
+        /// </summary>
+        /// <param name="busyReason">系统繁忙原因，空表示原因未知</param>
+        /// <returns>是否允许进行保存工程项目和开始session等操作</returns>
+        public static bool IsReady(out String busyReason)
+        {
+            return Handler.IsReady(out busyReason);
+        }
+
+        /// <summary>
         /// (api:app=2.3.4) 禁用插件
         /// </summary>
         /// <param name="packID">插件包ID</param>
@@ -3011,6 +3023,14 @@ namespace ASEva
         public static bool IsOnscreenGPURenderingEnabled()
         {
             return Handler.IsOnscreenGPURenderingEnabled();
+        }
+
+        /// <summary>
+        /// (api:app=2.13.1) 重置GPU解码测试结果
+        /// </summary>
+        public static void ResetGPUDecoderTestResults()
+        {
+            Handler.ResetGPUDecoderTestResults();
         }
 
         /// <summary>

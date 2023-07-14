@@ -1389,5 +1389,15 @@ namespace ASEva
         {
             return null;
         }
+
+        public bool IsReady(out string busyReason)
+        {
+            busyReason = null;
+            return false;
+        }
+
+        public void ResetGPUDecoderTestResults()
+        {
+        }
     }
 }

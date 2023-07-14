@@ -1813,6 +1813,13 @@
             </summary>
             <returns>是否允许进行保存工程项目和开始session等操作</returns>
         </member>
+        <member name="M:ASEva.Agency.IsReady(System.String@)">
+            <summary>
+            (api:app=2.13.1) 返回是否允许进行保存工程项目和开始session等操作，若不允许则输出繁忙原因
+            </summary>
+            <param name="busyReason">系统繁忙原因，空表示原因未知</param>
+            <returns>是否允许进行保存工程项目和开始session等操作</returns>
+        </member>
         <member name="M:ASEva.Agency.DisablePlugin(System.String)">
             <summary>
             (api:app=2.3.4) 禁用插件
@@ -1886,6 +1893,11 @@
             (api:app=2.6.13) 获取是否全局启用在屏GPU渲染
             </summary>
             <returns>是否全局启用在屏GPU渲染（若已全局禁用GPU渲染则返回false）</returns>
+        </member>
+        <member name="M:ASEva.Agency.ResetGPUDecoderTestResults">
+            <summary>
+            (api:app=2.13.1) 重置GPU解码测试结果
+            </summary>
         </member>
         <member name="M:ASEva.Agency.SubscribeData(System.String,System.Int32,System.Int32)">
             <summary>
@@ -2021,7 +2033,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.13.0
+            version=2.13.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
