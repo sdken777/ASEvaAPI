@@ -297,6 +297,7 @@ namespace ASEva
         GraphPanel CreateGraphPanel(int graphID, String styleName);
         DateTime? GetInternetNTPTime();
         Dictionary<String, String> GetPluginGuestSyncTable();
+        GraphicCardInfo[] GetGraphicCardInfos();
     }
 
     /// <summary>
@@ -2417,9 +2418,8 @@ namespace ASEva
         }
 
         /// <summary>
-        /// (api:app=2.3.0) 设置CPU使用率的乘数
+        /// (api:app=2.3.0) 已弃用，无需再调用
         /// </summary>
-        /// <param name="scale">CPU使用率的乘数</param>
         public static void SetCPURateScale(int scale)
         {
             Handler.SetCPURateScale(scale);
@@ -3217,6 +3217,15 @@ namespace ASEva
         public static Dictionary<String, String> GetPluginGuestSyncTable()
         {
             return Handler.GetPluginGuestSyncTable();
+        }
+
+        /// <summary>
+        /// (api:app=2.13.2) 获取主机上所有独立显卡信息
+        /// </summary>
+        /// <returns>独立显卡信息列表</returns>
+        public static GraphicCardInfo[] GetGraphicCardInfos()
+        {
+            return Handler.GetGraphicCardInfos();
         }
     }
 }

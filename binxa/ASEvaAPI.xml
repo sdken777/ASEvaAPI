@@ -1467,9 +1467,8 @@
         </member>
         <member name="M:ASEva.Agency.SetCPURateScale(System.Int32)">
             <summary>
-            (api:app=2.3.0) 设置CPU使用率的乘数
+            (api:app=2.3.0) 已弃用，无需再调用
             </summary>
-            <param name="scale">CPU使用率的乘数</param>
         </member>
         <member name="M:ASEva.Agency.GetLicenseInfo">
             <summary>
@@ -2031,9 +2030,15 @@
             </summary>
             <returns>客机同步标题表，键为客机同步ID，值为对应的标题</returns>
         </member>
+        <member name="M:ASEva.Agency.GetGraphicCardInfos">
+            <summary>
+            (api:app=2.13.2) 获取主机上所有独立显卡信息
+            </summary>
+            <returns>独立显卡信息列表</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.13.1
+            version=2.13.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -6664,7 +6669,7 @@
         </member>
         <member name="F:ASEva.SystemStatus.CPUUsageRatio">
             <summary>
-            CPU使用率的乘数
+            CPU使用率的乘数，固定为1
             </summary>
         </member>
         <member name="F:ASEva.SystemStatus.MemoryCapacity">
@@ -7568,6 +7573,51 @@
             打印信息至Debugger，不需要指定来源时可使用 ASEva.Agency.Print
             </summary>
             <param name="text">想要打印的文本</param>
+        </member>
+        <member name="T:ASEva.GraphicCardVendor">
+            <summary>
+            (api:app=2.13.2) 独立显卡厂商
+            </summary>
+        </member>
+        <member name="F:ASEva.GraphicCardVendor.Unknown">
+            <summary>
+            未知
+            </summary>
+        </member>
+        <member name="F:ASEva.GraphicCardVendor.NVidia">
+            <summary>
+            英伟达
+            </summary>
+        </member>
+        <member name="F:ASEva.GraphicCardVendor.AMD">
+            <summary>
+            AMD
+            </summary>
+        </member>
+        <member name="T:ASEva.GraphicCardInfo">
+            <summary>
+            (api:app=2.13.2) 独立显卡信息
+            </summary>
+        </member>
+        <member name="P:ASEva.GraphicCardInfo.Vendor">
+            <summary>
+            独立显卡厂商
+            </summary>
+        </member>
+        <member name="P:ASEva.GraphicCardInfo.CardIndex">
+            <summary>
+            该厂商下的显卡序号，从0起算 (针对多显卡场合)
+            </summary>
+        </member>
+        <member name="P:ASEva.GraphicCardInfo.MemoryCapacity">
+            <summary>
+            显存总容量，单位字节
+            </summary>
+        </member>
+        <member name="P:ASEva.GraphicCardInfo.MemoryFree">
+            <summary>
+            显存可用容量，单位字节
+            </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">
             <summary>

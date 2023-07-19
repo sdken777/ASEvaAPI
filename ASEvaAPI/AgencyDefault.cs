@@ -1399,5 +1399,10 @@ namespace ASEva
         public void ResetGPUDecoderTestResults()
         {
         }
+
+        public GraphicCardInfo[] GetGraphicCardInfos()
+        {
+            return null;
+        }
     }
 }

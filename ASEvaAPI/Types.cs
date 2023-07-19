@@ -1147,7 +1147,7 @@ namespace ASEva
         CPUUsage = 10,
 
         /// <summary>
-        /// CPU使用率的乘数
+        /// CPU使用率的乘数，固定为1
         /// </summary>
         CPUUsageRatio = 11,
 
@@ -2095,5 +2095,52 @@ namespace ASEva
         /// </summary>
         /// <param name="text">想要打印的文本</param>
         void Print(String text);
+    }
+
+    /// <summary>
+    /// (api:app=2.13.2) 独立显卡厂商
+    /// </summary>
+    public enum GraphicCardVendor
+    {
+        /// <summary>
+        /// 未知
+        /// </summary>
+        Unknown = 0,
+
+        /// <summary>
+        /// 英伟达
+        /// </summary>
+        NVidia = 1,
+
+        /// <summary>
+        /// AMD
+        /// </summary>
+        AMD = 2,
+    }
+
+    /// <summary>
+    /// (api:app=2.13.2) 独立显卡信息
+    /// </summary>
+    public class GraphicCardInfo
+    {
+        /// <summary>
+        /// 独立显卡厂商
+        /// </summary>
+        public GraphicCardVendor Vendor { get; set; }
+
+        /// <summary>
+        /// 该厂商下的显卡序号，从0起算 (针对多显卡场合)
+        /// </summary>
+        public int CardIndex { get; set; }
+
+        /// <summary>
+        /// 显存总容量，单位字节
+        /// </summary>
+        public ulong MemoryCapacity { get; set; }
+
+        /// <summary>
+        /// 显存可用容量，单位字节
+        /// </summary>
+        public ulong MemoryFree { get; set; }
     }
 }

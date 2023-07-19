@@ -7,7 +7,7 @@
  * \n
  * 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph \n
  * \n
- * 本文档对应API版本：2.13.1
+ * 本文档对应API版本：2.13.2
  */
 
 using System;
@@ -16,7 +16,7 @@ using System.Diagnostics;
 namespace ASEva
 {
     /// <summary>
-    /// version=2.13.1
+    /// version=2.13.2
     /// </summary>
     public class APIInfo
     {
@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 13, 1, 0); // 新增Agency.IsReady(busyReason)和ResetGPUDecoderTestResults
+            return new Version(2, 13, 2, 0); // 新增GraphicCardInfo和Agency.GetGraphicCardInfos。弃用CPU使用率乘数
         }
 
         /// <summary>
