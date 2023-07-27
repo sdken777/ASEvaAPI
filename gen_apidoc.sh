@@ -22,9 +22,5 @@ cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/Gtk/
 doxygen Doxyfile-ASEvaAPIMonoMac
 cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/MonoMac/
 
-cd ~/Desktop
-zip -r D01006_ASEvaAPIDoc.zip ./D01006_ASEvaAPIDoc/
-rm -r ./D01006_ASEvaAPIDoc/
-
 echo "Done. (ASEvaAPI/gen_apidoc.sh)"
 sleep 1
