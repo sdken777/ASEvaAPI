@@ -15,8 +15,8 @@ namespace ASEvaAPIEtoTest
             var layoutRow = layout.AddRowLayout();
             var webView = layout.AddControl(new WebView(), true, 500, 200) as WebView;
 
-            layoutRow.AddButtonPanel(CommonImage.LoadResource("backward.png").ToEtoBitmap()).Click += delegate { webView.GoBack(); };
-            layoutRow.AddButtonPanel(CommonImage.LoadResource("forward.png").ToEtoBitmap()).Click += delegate { webView.GoForward(); };
+            layoutRow.AddButtonPanel(Bitmap.FromResource("backward.png")).Click += delegate { webView.GoBack(); };
+            layoutRow.AddButtonPanel(Bitmap.FromResource("forward.png")).Click += delegate { webView.GoForward(); };
             layoutRow.AddSeparator();
             var textBox = layoutRow.AddControl(new TextBox(), true) as TextBox;
             var buttonGo = layoutRow.AddButtonPanel(t["util-web-go-url"]);

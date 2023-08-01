@@ -1,8 +1,10 @@
 using System;
+using System.Text;
 using ASEva.UIEto;
 using Eto.Forms;
 using Eto.Drawing;
 using Eto.WinForms;
+using System.Collections.Generic;
 
 namespace ASEva.UICoreWF
 {
@@ -103,6 +105,13 @@ namespace ASEva.UICoreWF
             dialog.ShowDialog();
             dialog.Dispose();
             return true;
+        }
+
+        public Dictionary<string, string> GetThirdPartyNotices()
+        {
+            var table = new Dictionary<String, String>();
+            table["WebView2"] = Encoding.UTF8.GetString(Resource.WebView2);
+            return table;
         }
     }
 }
