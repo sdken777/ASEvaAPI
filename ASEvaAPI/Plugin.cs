@@ -75,16 +75,22 @@ namespace ASEva
         public virtual String[] GetRelatedNativeModules() { return null; }
 
         /// <summary>
-        /// (api:app=2.12.0) [可选实现] 获取插件相关的客机同步通道标题表
+        /// (api:app=2.12.0) [可选实现] 获取插件相关的客机同步通道标题表时被调用
         /// </summary>
         /// <returns>客机同步通道标题表，键为客机同步ID，值为其标题</returns>
         public virtual Dictionary<String, String> GetGuestSyncTitleTable() { return null; }
 
         /// <summary>
-        /// (api:app=2.12.3) [可选实现] 获取需要提前加载的库文件列表
+        /// (api:app=2.12.3) [可选实现] 获取需要提前加载的库文件列表时被调用
         /// </summary>
         /// <returns>库文件名的列表，不需要绝对路径</returns>
         public virtual String[] GetPreloadLibFiles() { return null; }
+
+        /// <summary>
+        /// (api:app=2.14.0) [可选实现] 获取插件使用的第三方软件版权声明时被调用
+        /// </summary>
+        /// <returns>键为标题，值为版权声明</returns>
+        public virtual Dictionary<String, String> GetThirdPartyNotices() { return null; }
 
         /// <summary>
         /// (api:app=2.11.0) [可选实现] 设置用于记录调试信息的接口时被调用

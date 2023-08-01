@@ -137,6 +137,12 @@ namespace ASEva
         public virtual bool OnCheckEnableSpecializedGPUDecoding() { return false; }
 
         /// <summary>
+        /// (api:app=2.14.0) [可选实现] 返回是否使用国内网络服务
+        /// </summary>
+        /// <returns>是否使用国内网络服务</returns>
+        public virtual bool OnCheckPreferPRCWeb() { return true; }
+
+        /// <summary>
         /// [可选实现][可含模态框] 选择总线协议文件
         /// </summary>
         /// <param name="selected">已选择的总线协议文件</param>

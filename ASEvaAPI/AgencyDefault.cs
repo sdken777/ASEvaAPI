@@ -1404,5 +1404,25 @@ namespace ASEva
         {
             return null;
         }
+
+        public Dictionary<string, string> GetFrameworkThirdPartyNotices()
+        {
+            return null;
+        }
+
+        public Dictionary<string, Dictionary<string, string>> GetPluginThirdPartyNotices()
+        {
+            return null;
+        }
+
+        public string GetOfflineMapCopyrightInfo()
+        {
+            return null;
+        }
+
+        public bool IsPRCWebPreferred()
+        {
+            return false;
+        }
     }
 }

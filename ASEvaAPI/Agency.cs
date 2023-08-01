@@ -298,6 +298,10 @@ namespace ASEva
         DateTime? GetInternetNTPTime();
         Dictionary<String, String> GetPluginGuestSyncTable();
         GraphicCardInfo[] GetGraphicCardInfos();
+        Dictionary<String, String> GetFrameworkThirdPartyNotices();
+        Dictionary<String, Dictionary<String, String> > GetPluginThirdPartyNotices();
+        String GetOfflineMapCopyrightInfo();
+        bool IsPRCWebPreferred();
     }
 
     /// <summary>
@@ -3226,6 +3230,42 @@ namespace ASEva
         public static GraphicCardInfo[] GetGraphicCardInfos()
         {
             return Handler.GetGraphicCardInfos();
+        }
+
+        /// <summary>
+        /// (api:app=2.14.0) 获取框架软件使用的第三方软件版权声明
+        /// </summary>
+        /// <returns>键为标题，值为版权声明</returns>
+        public static Dictionary<String, String> GetFrameworkThirdPartyNotices()
+        {
+            return Handler.GetFrameworkThirdPartyNotices();
+        }
+
+        /// <summary>
+        /// (api:app=2.14.0) 获取所有插件使用的第三方软件版权声明
+        /// </summary>
+        /// <returns>键为插件ID，值为该插件使用的第三方软件版权声明(其中键为标题，值为版权声明)</returns>
+        public static Dictionary<String, Dictionary<String, String> > GetPluginThirdPartyNotices()
+        {
+            return Handler.GetPluginThirdPartyNotices();
+        }
+
+        /// <summary>
+        /// (api:app=2.14.0) 获取离线地图的版权信息
+        /// </summary>
+        /// <returns>离线地图的版权信息</returns>
+        public static String GetOfflineMapCopyrightInfo()
+        {
+            return Handler.GetOfflineMapCopyrightInfo();
+        }
+
+        /// <summary>
+        /// (api:app=2.14.0) 获取是否使用国内网络服务
+        /// </summary>
+        /// <returns>是否使用国内网络服务</returns>
+        public static bool IsPRCWebPreferred()
+        {
+            return Handler.IsPRCWebPreferred();
         }
     }
 }

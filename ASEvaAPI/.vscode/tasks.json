@@ -63,6 +63,7 @@
                 "./obj",
                 "./bin"
             ],
+            "problemMatcher":[]
         },
 
         // 以下为子任务
