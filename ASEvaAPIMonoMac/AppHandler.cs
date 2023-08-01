@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using ASEva.Utility;
 using ASEva.UIEto;
 using Eto.Drawing;
 using Eto.Forms;
@@ -79,6 +81,14 @@ namespace ASEva.UIMonoMac
         public bool RunDialog(DialogPanel panel)
         {
             return false;
+        }
+
+        public Dictionary<string, string> GetThirdPartyNotices()
+        {
+            var table = new Dictionary<string, string>();
+            table["MonoMac"] = ResourceLoader.LoadText("MonoMac.LICENSE");
+            table["The OpenGL Extension Wrangler Library"] = ResourceLoader.LoadText("GLEW.LICENSE");
+            return table;
         }
     }
 }
