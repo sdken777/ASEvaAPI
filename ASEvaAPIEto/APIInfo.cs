@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于Eto.Forms的部分。详见 ASEva.UIEto \n
- * 本文档对应API版本：2.10.5\n
+ * 本文档对应API版本：2.11.0\n
  * \n
  * Eto.Forms官方仓库: https://github.com/picoe/Eto \n
  * API文档: https://pages.picoe.ca/docs/api
@@ -9,11 +9,13 @@
 using System;
 using System.IO;
 using System.Reflection;
+using System.Collections.Generic;
+using ASEva.Utility;
 
 namespace ASEva.UIEto
 {
     /// <summary>
-    /// version=2.10.5
+    /// version=2.11.0
     /// </summary>
     public class APIInfo
     {
@@ -23,7 +25,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 10, 5, 1); // 优化APIInfo.GetEtoLibVersion
+            return new Version(2, 11, 0, 0); // 新增APIInfo.GetThirdPartyNotices。新增App.GetUIBackendThirdPartyNotices
         }
 
         /// <summary>
@@ -42,6 +44,19 @@ namespace ASEva.UIEto
                 return etoLibVersion == null ? null : new Version(etoLibVersion.Major, etoLibVersion.Minor);
             }
             catch (Exception) { return null;}
+        }
+
+        /// <summary>
+        /// (api:eto=2.11.0) 获取使用的第三方软件版权声明
+        /// </summary>
+        /// <returns>键为标题，值为版权声明</returns>
+        public static Dictionary<String, String> GetThirdPartyNotices()
+        {
+            var table = new Dictionary<String, String>();
+            table["Eto"] = ResourceLoader.LoadText("Eto.LICENSE");
+            table["SharpGL"] = ResourceLoader.LoadText("SharpGL.LICENSE");
+            table["SkiaSharp"] = ResourceLoader.LoadText("SkiaSharp.LICENSE");
+            return table;
         }
     }
 }

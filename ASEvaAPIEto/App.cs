@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
 using Eto.Forms;
 using Eto.Drawing;
 
@@ -15,6 +16,7 @@ namespace ASEva.UIEto
         Control ConvertControlToEto(object platformControl);
         object ConvertControlToPlatform(Control etoControl);
         bool RunDialog(DialogPanel panel);
+        Dictionary<String, String> GetThirdPartyNotices();
     }
 
     /// <summary>
@@ -95,6 +97,15 @@ namespace ASEva.UIEto
         public static String GetUIBackend()
         {
             return uiBackend;
+        }
+
+        /// <summary>
+        /// (api:eto=2.11.0) 返回当前运行UI后端使用的第三方软件版权声明
+        /// </summary>
+        /// <returns>键为标题，值为版权声明</returns>
+        public static Dictionary<String, String> GetUIBackendThirdPartyNotices()
+        {
+            return handler == null ? null : handler.GetThirdPartyNotices();
         }
 
         /// <summary>

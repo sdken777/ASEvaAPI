@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Collections.Generic;
 using ASEva.Utility;
 using ASEva.UIEto;
 using Eto.Drawing;
@@ -136,6 +137,14 @@ namespace ASEva.UIGtk
                 appDialog.Dispose();
                 return true;
             }
+        }
+
+        public Dictionary<String, String> GetThirdPartyNotices()
+        {
+            var table = new Dictionary<String, String>();
+            table["GtkSharp"] = ResourceLoader.LoadText("GtkSharp.LICENSE");
+            table["webkitgtk"] = ResourceLoader.LoadText("webkitgtk.LICENSE");
+            return table;
         }
 
         private String queryUIBackend()
