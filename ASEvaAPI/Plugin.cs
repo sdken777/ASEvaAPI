@@ -93,6 +93,12 @@ namespace ASEva
         public virtual Dictionary<String, String> GetThirdPartyNotices() { return null; }
 
         /// <summary>
+        /// (api:app=2.14.2) [可选实现] 获取Linux系统下需要自动root权限的可执行程序路径时被调用
+        /// </summary>
+        /// <returns>可执行程序路径列表，仅限无界面程序</returns>
+        public virtual String[] GetAutoRootTargets() { return null; }
+
+        /// <summary>
         /// (api:app=2.11.0) [可选实现] 设置用于记录调试信息的接口时被调用
         /// </summary>
         /// <param name="logger">记录调试信息的接口，基于此接口记录可带上来源信息</param>
