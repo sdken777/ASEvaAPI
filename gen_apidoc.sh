@@ -1,4 +1,4 @@
-CUR_DIR=$(dirname "$0")
+CUR_DIR=$(cd $(dirname $0) && pwd)
 
 mkdir -vp ~/Desktop/D01006_ASEvaAPIDoc
 

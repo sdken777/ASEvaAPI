@@ -1,6 +1,6 @@
 TARGET_NAME=EtoSDK-Full
 
-CUR_DIR=$(dirname "$0")
+CUR_DIR=$(cd $(dirname $0) && pwd)
 CUR_DATE=`date +%Y%m%d`
 
 EXPORT_DEVELOPER=y
