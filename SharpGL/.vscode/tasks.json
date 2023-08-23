@@ -1,0 +1,118 @@
+{
+    "version": "2.0.0",
+    "inputs": [
+        {
+            "id": "helper_platform_bin_name",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "platform_bin_name"
+                ]
+            }
+        },
+    ],
+    "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+    },
+    "tasks": [
+        {
+            "type": "process",
+            "label": "调试构建",
+            "group": "build",
+            "command": "rm",
+            "args": [
+                "-vf",
+                "../${input:helper_platform_bin_name}/debug/PortableSharpGL.pdb",
+                "../${input:helper_platform_bin_name}/debug/PortableSharpGL.deps.json",
+            ],
+            "dependsOn": [
+                "(子任务)执行调试构建",
+            ],
+        },
+        {
+            "type": "process",
+            "label": "发布构建",
+            "group": "build",
+            "command": "rm",
+            "args": [
+                "-vf",
+                "../${input:helper_platform_bin_name}/PortableSharpGL.pdb",
+                "../${input:helper_platform_bin_name}/PortableSharpGL.deps.json",
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "(子任务)执行发布构建",
+                "(子任务)拷贝至其他目录",
+            ],
+        },
+        {
+            "type": "process",
+            "label": "清理",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "./obj",
+                "./bin"
+            ],
+        },
+
+        // 以下为子任务
+
+        {
+            "type": "process",
+            "label": "(子任务)执行调试构建",
+            "hide": true,
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./SharpGL.csproj",
+                "-o",
+                "../${input:helper_platform_bin_name}/debug",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+        },
+        {
+            "type": "process",
+            "label": "(子任务)执行发布构建",
+            "hide": true,
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./SharpGL.csproj",
+                "-c",
+                "Release",
+                "-o",
+                "../${input:helper_platform_bin_name}",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+        },
+        {
+            "type": "process",
+            "label": "(子任务)拷贝至其他目录",
+            "hide": true,
+            "command": "dotnet",
+            "args": [
+                "../bin/VSCodeHelper.dll",
+                "copy_outputs",
+                "PortableSharpGL",
+                "bin64",
+                "binx",
+                "binxa",
+                "binm",
+            ],
+        },
+    ]
+}

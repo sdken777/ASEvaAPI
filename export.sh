@@ -40,6 +40,7 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/bin64/ASEvaAPIEto.dll $TARGET_DIR/bin64/
     cp -vf "$CUR_DIR"/bin64/ASEvaAPICoreWF.dll $TARGET_DIR/bin64/
     cp -vf "$CUR_DIR"/bin64/ASEvaAPIWpf.dll $TARGET_DIR/bin64/
+    cp -vf "$CUR_DIR"/bin64/PortableSharpGL.dll $TARGET_DIR/bin64/
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/bin64/
     cp -vf "$CUR_DIR"/3party/corewf-wpf/* $TARGET_DIR/bin64/
     if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
@@ -53,6 +54,7 @@ cp -vf "$CUR_DIR"/3party/common/* $TARGET_DIR/binx/
 if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/binx/ASEvaAPIEto.dll $TARGET_DIR/binx/
     cp -vf "$CUR_DIR"/binx/ASEvaAPIGtk.dll $TARGET_DIR/binx/
+    cp -vf "$CUR_DIR"/binx/PortableSharpGL.dll $TARGET_DIR/binx/
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binx/
     cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binx/
     if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
@@ -66,6 +68,7 @@ cp -vf "$CUR_DIR"/3party/common/* $TARGET_DIR/binxa/
 if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/binxa/ASEvaAPIEto.dll $TARGET_DIR/binxa/
     cp -vf "$CUR_DIR"/binxa/ASEvaAPIGtk.dll $TARGET_DIR/binxa/
+    cp -vf "$CUR_DIR"/binxa/PortableSharpGL.dll $TARGET_DIR/binxa/
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binxa/
     cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binxa/
     if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
@@ -79,6 +82,7 @@ cp -vf "$CUR_DIR"/3party/common/* $TARGET_DIR/binm/
 if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/binm/ASEvaAPIEto.dll $TARGET_DIR/binm/
     cp -vf "$CUR_DIR"/binm/ASEvaAPIMonoMac.dll $TARGET_DIR/binm/
+    cp -vf "$CUR_DIR"/binm/PortableSharpGL.dll $TARGET_DIR/binm/
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binm/
     cp -vf "$CUR_DIR"/3party/monomac/* $TARGET_DIR/binm/
     cp -vf "$CUR_DIR"/3party/macos/* $TARGET_DIR/binm/
@@ -130,6 +134,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/bin64/ASEvaAPIEto.dll $TARGET_DIR/bin64/debug/
         cp -vf "$CUR_DIR"/bin64/ASEvaAPICoreWF.dll $TARGET_DIR/bin64/debug/
         cp -vf "$CUR_DIR"/bin64/ASEvaAPIWpf.dll $TARGET_DIR/bin64/debug/
+        cp -vf "$CUR_DIR"/bin64/PortableSharpGL.dll $TARGET_DIR/bin64/debug/
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/bin64/debug/
         cp -vf "$CUR_DIR"/3party/corewf-wpf/* $TARGET_DIR/bin64/debug/
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
@@ -143,6 +148,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
     if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
         cp -vf "$CUR_DIR"/binx/ASEvaAPIEto.dll $TARGET_DIR/binx/debug/
         cp -vf "$CUR_DIR"/binx/ASEvaAPIGtk.dll $TARGET_DIR/binx/debug/
+        cp -vf "$CUR_DIR"/binx/PortableSharpGL.dll $TARGET_DIR/binx/debug/
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binx/debug/
         cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binx/debug/
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
@@ -156,6 +162,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
     if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
         cp -vf "$CUR_DIR"/binxa/ASEvaAPIEto.dll $TARGET_DIR/binxa/debug/
         cp -vf "$CUR_DIR"/binxa/ASEvaAPIGtk.dll $TARGET_DIR/binxa/debug/
+        cp -vf "$CUR_DIR"/binxa/PortableSharpGL.dll $TARGET_DIR/binxa/debug/
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binxa/debug/
         cp -vf "$CUR_DIR"/3party/gtk/* $TARGET_DIR/binxa/debug/
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
@@ -169,6 +176,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
     if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
         cp -vf "$CUR_DIR"/binm/ASEvaAPIEto.dll $TARGET_DIR/binm/debug/
         cp -vf "$CUR_DIR"/binm/ASEvaAPIMonoMac.dll $TARGET_DIR/binm/debug/
+        cp -vf "$CUR_DIR"/binm/PortableSharpGL.dll $TARGET_DIR/binm/debug/
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binm/debug/
         cp -vf "$CUR_DIR"/3party/monomac/* $TARGET_DIR/binm/debug/
         cp -vf "$CUR_DIR"/3party/macos/* $TARGET_DIR/binm/debug/
