@@ -143,6 +143,12 @@ namespace ASEva
         public virtual bool OnCheckPreferPRCWeb() { return true; }
 
         /// <summary>
+        /// (api:app=2.14.1) [可选实现] 返回是否请求自动root权限 (仅针对Linux操作系统)
+        /// </summary>
+        /// <returns>是否请求自动root权限</returns>
+        public virtual bool OnCheckRequestAutoRoot() { return false; }
+
+        /// <summary>
         /// [可选实现][可含模态框] 选择总线协议文件
         /// </summary>
         /// <param name="selected">已选择的总线协议文件</param>

@@ -2062,7 +2062,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.14.0
+            version=2.14.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3832,6 +3832,12 @@
             (api:app=2.14.0) [可选实现] 返回是否使用国内网络服务
             </summary>
             <returns>是否使用国内网络服务</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnCheckRequestAutoRoot">
+            <summary>
+            (api:app=2.14.1) [可选实现] 返回是否请求自动root权限 (仅针对Linux操作系统)
+            </summary>
+            <returns>是否请求自动root权限</returns>
         </member>
         <member name="M:ASEva.MainWorkflow.OnSelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
             <summary>
