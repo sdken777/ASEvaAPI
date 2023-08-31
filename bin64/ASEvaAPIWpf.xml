@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIWpf.APIInfo">
             <summary>
-            version=1.4.14
+            version=1.4.15
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.APIInfo.GetAPIVersion">
@@ -107,6 +107,19 @@
         <member name="M:ASEva.UIWpf.TextDraw.InitializeComponent">
             <summary>
             InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ASEva.UIWpf.ButtonHandler`3">
+            <summary>
+            Button handler.
+            </summary>
+            <copyright>(c) 2014 by Vivek Jhaveri</copyright>
+            <copyright>(c) 2012-2019 by Curtis Wensley</copyright>
+            <license type="BSD-3">See LICENSE for full terms</license>
+        </member>
+        <member name="P:ASEva.UIWpf.ButtonHandler`3.ImageLabelSpacing">
+            <summary>
+            Gets or sets the spacing between the image and the label when both are present
             </summary>
         </member>
         <member name="T:ASEva.UIWpf.ImageConverter">

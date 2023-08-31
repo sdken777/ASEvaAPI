@@ -17,10 +17,14 @@ using wf = System.Windows;
 
 using WpfLabel = System.Windows.Controls.Label;
 
-namespace Eto.Wpf.Forms.Controls
+using Eto;
+using Eto.Wpf;
+using Eto.Wpf.Forms;
+
+namespace ASEva.UIWpf
 #endif
 {
-	public class EtoButton : swc.Button, IEtoWpfControl
+	class EtoButton : swc.Button, IEtoWpfControl
 	{
 		public IWpfFrameworkElement Handler { get; set; }
 
@@ -30,7 +34,7 @@ namespace Eto.Wpf.Forms.Controls
 		}
 	}
 
-	public class ButtonHandler : ButtonHandler<swc.Button, Button, Button.ICallback>, Button.IHandler
+	class ButtonHandler : ButtonHandler<swc.Button, Button, Button.ICallback>, Button.IHandler
 	{
 		public static Size DefaultMinimumSize = new Size(80, 23);
 
@@ -47,7 +51,7 @@ namespace Eto.Wpf.Forms.Controls
 	/// <copyright>(c) 2014 by Vivek Jhaveri</copyright>
 	/// <copyright>(c) 2012-2019 by Curtis Wensley</copyright>
 	/// <license type="BSD-3">See LICENSE for full terms</license>
-	public class ButtonHandler<TControl, TWidget, TCallback> : WpfControl<TControl, TWidget, TCallback>, Button.IHandler
+	class ButtonHandler<TControl, TWidget, TCallback> : WpfControl<TControl, TWidget, TCallback>, Button.IHandler
 		where TControl: swc.Primitives.ButtonBase
 		where TWidget: Button
 		where TCallback: Button.ICallback
@@ -85,7 +89,9 @@ namespace Eto.Wpf.Forms.Controls
 				VerticalAlignment = sw.VerticalAlignment.Center,
 				HorizontalAlignment = sw.HorizontalAlignment.Center,
 				Padding = new sw.Thickness(0),
-				Visibility = sw.Visibility.Collapsed
+				Visibility = sw.Visibility.Collapsed,
+				Background = new sw.Media.SolidColorBrush(sw.Media.Colors.Transparent),
+				BorderBrush = new sw.Media.SolidColorBrush(sw.Media.Colors.Transparent)
 			};
 			swc.Grid.SetColumn(LabelPart, 1);
 			swc.Grid.SetRow(LabelPart, 1);

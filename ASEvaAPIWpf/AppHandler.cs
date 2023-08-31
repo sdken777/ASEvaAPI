@@ -24,6 +24,7 @@ namespace ASEva.UIWpf
             platform.Add<WebView.IHandler>(() => new WebView2Handler());
             platform.Add<SearchBox.IHandler>(() => new SearchBoxHandler());
             platform.Add<UITimer.IHandler>(() => new UITimerHandler());
+            platform.Add<Button.IHandler>(() => new ButtonHandler());
             var app = new Application(platform);
 
             SetContentExtensions.WindowInitializer = new InitWindowHandlerWpf();
