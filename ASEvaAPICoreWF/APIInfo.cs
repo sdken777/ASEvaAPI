@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 0, 0); // AppHandler支持GetThirdPartyNotices
+            return new Version(2, 5, 0, 1); // 修正英文日期显示
         }
     }
 }

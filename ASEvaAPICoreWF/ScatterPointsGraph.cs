@@ -24,9 +24,14 @@ namespace ASEva.UICoreWF
 
         private int mouseAtPointIndex = -1;
 
+        private bool chinese = false;
+
         public ScatterPointsGraph()
         {
             InitializeComponent();
+
+            var lang = Agency.GetAppLanguage();
+            if (lang != null) chinese = lang == "ch";
         }
 
         public override void UpdateUIWithData()
@@ -164,7 +169,7 @@ namespace ASEva.UICoreWF
                     double offset = 0;
                     if (D.GetPointTimeInfo(mouseAtPointIndex, ref session, ref offset))
                     {
-                        secondText = session.ToString("yyyy/MM/dd HH:mm:ss") + " + " + offset.ToString("F3");
+                        secondText = session.ToString(chinese ? "yyyy/MM/dd HH:mm:ss" : "MM/dd/yyyy HH:mm:ss") + " + " + offset.ToString("F3");
                     }
                 }
 
