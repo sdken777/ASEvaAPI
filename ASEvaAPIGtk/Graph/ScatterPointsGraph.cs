@@ -22,6 +22,7 @@ namespace ASEva.UIGtk
 
         EventBoxHelper eventBoxHelper = new EventBoxHelper();
         DrawSwap drawSwap;
+        bool chinese = false;
 
         public ScatterPointsGraph() : this(new Builder("ScatterPointsGraph.glade"))
         {
@@ -30,6 +31,9 @@ namespace ASEva.UIGtk
             overlay.AddOverlay(labelValidation);
             eventBoxHelper.Add(eventBox);
             drawSwap = new DrawSwap(draw, "ASEva.UIGtk.ScatterPointsGraph");
+
+            var lang = Agency.GetAppLanguage();
+            if (lang != null) chinese = lang == "ch";
 
             eventBoxHelper.LeftDown += eventBox_LeftDown;
             drawSwap.Paint += draw_Paint;
@@ -302,7 +306,7 @@ namespace ASEva.UIGtk
                             double offset = 0;
                             if (D.GetPointTimeInfo(mouseAtPointIndex, ref session, ref offset))
                             {
-                                secondText = session.ToString("yyyy/MM/dd HH:mm:ss") + " + " + offset.ToString("F3");
+                                secondText = session.ToString(chinese ? "yyyy/MM/dd HH:mm:ss" : "MM/dd/yyyy HH:mm:ss") + " + " + offset.ToString("F3");
                             }
                         }
 
