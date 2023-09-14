@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 7, 0, 1); // 修正英文日期显示
+            return new Version(2, 7, 0, 2); // 修正Button背景颜色问题
         }
     }
 }

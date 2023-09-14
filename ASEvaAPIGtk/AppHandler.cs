@@ -44,6 +44,7 @@ namespace ASEva.UIGtk
             platform.Add<GroupBox.IHandler>(() => new GroupBoxHandler());
             platform.Add<SaveFileDialog.IHandler>(() => new SaveFileDialogHandler());
             platform.Add<Label.IHandler>(() => new LabelHandler());
+            platform.Add<Button.IHandler>(() => new ButtonHandler());
             var app = new Application(platform);
 
             try
