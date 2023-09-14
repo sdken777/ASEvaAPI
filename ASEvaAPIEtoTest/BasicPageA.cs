@@ -79,8 +79,11 @@ namespace ASEvaAPIEtoTest
         private void initBasicTabPageARow5(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 5));
-            layout.AddButton(t["basic-button"]);
-            layout.AddButton(CommonImage.LoadResource("button.png").ToEtoBitmap());
+            var textButton = layout.AddButton(t["basic-button"]);
+            textButton.BackgroundColor = Colors.Green;
+            textButton.TextColor = Colors.Gold;
+            var imageButton = layout.AddButton(CommonImage.LoadResource("button.png").ToEtoBitmap());
+            imageButton.BackgroundColor = Colors.PaleGreen;
             layout.AddControl(new ColorPicker { Value = Colors.Red } );
         }
 

@@ -1,9 +1,12 @@
 #if GTK3
 using System;
+using Eto;
 using Eto.Forms;
 using Eto.Drawing;
+using Eto.GtkSharp;
+using Eto.GtkSharp.Forms;
 
-namespace Eto.GtkSharp.Forms.Controls
+namespace ASEva.UIGtk
 {
 	/// <summary>
 	/// Button handler.
@@ -197,6 +200,20 @@ namespace Eto.GtkSharp.Forms.Controls
 				default:
 					base.AttachEvent(id);
 					break;
+			}
+		}
+
+		protected override void SetBackgroundColor(Eto.Drawing.Color? color)
+		{
+			if (color != null)
+			{
+				label?.SetBackground(color.Value);
+				gtkimage?.SetBackground(color.Value);
+			}
+			else
+			{
+				label?.SetBackground(Colors.Transparent);
+				gtkimage?.SetBackground(Colors.Transparent);
 			}
 		}
 	}

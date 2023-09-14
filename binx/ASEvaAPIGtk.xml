@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIGtk.APIInfo">
             <summary>
-            version=2.6.5
+            version=2.6.6
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.APIInfo.GetAPIVersion">
@@ -263,6 +263,13 @@
             <summary>
             (api:gtk=2.0.0) 单值数据可视化窗口
             </summary>
+        </member>
+        <member name="T:ASEva.UIGtk.ButtonHandler`3">
+            <summary>
+            Button handler.
+            </summary>
+            <copyright>(c) 2012-2020 by Curtis Wensley</copyright>
+            <license type="BSD-3">See LICENSE for full terms</license>
         </member>
         <member name="M:ASEva.UIGtk.DateComboBox.Dlg_DialogClosed(System.Object,System.EventArgs)">
             <summary>

@@ -1,10 +1,11 @@
 using System;
 using Eto.Forms;
 using Eto.Drawing;
+using Eto.GtkSharp;
 
-namespace Eto.GtkSharp.Forms.Controls
+namespace ASEva.UIGtk
 {
-	public class ButtonHandler : ButtonHandler<Gtk.Button, Button, Button.ICallback>
+	class ButtonHandler : ButtonHandler<Gtk.Button, Button, Button.ICallback>
 	{
 		public static int MinimumWidth = 80;
 
