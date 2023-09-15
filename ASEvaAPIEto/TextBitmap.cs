@@ -1,6 +1,5 @@
 using System;
 using Eto.Drawing;
-using ASEva.Samples;
 
 namespace ASEva.UIEto
 {
@@ -94,8 +93,15 @@ namespace ASEva.UIEto
 
             if (fastMode)
             {
+                float drawOffsetX = 0, drawOffsetY = 0;
+                if (FastModeDrawOffset != null)
+                {
+                    drawOffsetX = FastModeDrawOffset.Value.X;
+                    drawOffsetY = FastModeDrawOffset.Value.Y;
+                }
+
                 g.ImageInterpolation = ImageInterpolation.None;
-                g.DrawImage(bitmap, (float)Math.Round(dx), (float)Math.Round(dy));
+                g.DrawImage(bitmap, (float)Math.Round(dx) + drawOffsetX, (float)Math.Round(dy) + drawOffsetY);
             }
             else
             {
@@ -145,5 +151,7 @@ namespace ASEva.UIEto
         public static ModifyBitmapGraphics ModifyInterface { private get; set; }
 
         public static ImageInterpolation? ImageInterpolationMode { private get; set; }
+
+        public static PointF? FastModeDrawOffset { private get; set; }
     }
 }

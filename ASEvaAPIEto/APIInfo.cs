@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于Eto.Forms的部分。详见 ASEva.UIEto \n
- * 本文档对应API版本：2.10.5\n
+ * 本文档对应API版本：2.10.6\n
  * \n
  * Eto.Forms官方仓库: https://github.com/picoe/Eto \n
  * API文档: https://pages.picoe.ca/docs/api
@@ -13,7 +13,7 @@ using System.Reflection;
 namespace ASEva.UIEto
 {
     /// <summary>
-    /// version=2.10.5
+    /// version=2.10.6
     /// </summary>
     public class APIInfo
     {
@@ -23,7 +23,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 10, 5, 1); // 优化APIInfo.GetEtoLibVersion
+            return new Version(2, 10, 6, 0); // 新增TextBitmap.FastModeDrawOffset
         }
 
         /// <summary>

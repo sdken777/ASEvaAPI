@@ -49,6 +49,7 @@ namespace ASEva.UICoreWF
             FlowLayout2D.Factory = new FlowLayout2DFactoryCoreWF();
             TopMostExtensions.QueryInterface = new TopMostHandler();
             TextBitmap.ModifyInterface = new BitmapGraphicsHandler();
+            TextBitmap.FastModeDrawOffset = new PointF(1, 1);
             SimpleTreeView.Factory = new SimpleTreeViewFactoryCoreWF();
             SnapshotExtensions.Handler = new SnapshotHandler();
 

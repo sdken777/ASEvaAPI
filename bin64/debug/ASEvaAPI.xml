@@ -1539,43 +1539,63 @@
         </member>
         <member name="M:ASEva.Agency.GetChannelMonitoringFlag(System.String)">
             <summary>
-            (api:app=2.3.0) 获取指定通道的监控配置
+            (api:app=2.3.0) 获取是否监控指定通道有无数据
             </summary>
             <param name="id">通道ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
-            <returns>是否监控</returns>
+            <returns>是否监控有无数据</returns>
         </member>
         <member name="M:ASEva.Agency.SetChannelMonitoringFlag(System.String,System.Boolean)">
             <summary>
-            (api:app=2.3.0) 设置指定通道的监控配置
+            (api:app=2.3.0) 设置是否监控指定通道有无数据
             </summary>
             <param name="id">通道ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
-            <param name="monitoring">是否监控，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
+            <param name="monitoring">是否监控有无数据，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
         </member>
         <member name="M:ASEva.Agency.GetAllChannelMonitoringKeys">
             <summary>
-            (api:app=2.3.0) 获取所有正在监控的通道ID
+            (api:app=2.3.0) 获取所有正在监控有无数据的通道ID
             </summary>
-            <returns>正在监控的通道ID列表</returns>
+            <returns>正在监控有无数据的通道ID列表</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetChannelServerSyncMonitoringFlag(System.String)">
+            <summary>
+            (api:app=2.12.1) 获取是否监控指定通道数据与授时服务器同步
+            </summary>
+            <param name="key">通道ID，如bus@1, video@0, sample@xxx-v2@0等</param>
+            <returns>是否监控指定通道数据与授时服务器同步</returns>
+        </member>
+        <member name="M:ASEva.Agency.SetChannelServerSyncMonitoringFlag(System.String,System.Boolean)">
+            <summary>
+            (api:app=2.12.1) 设置是否监控指定通道数据与授时服务器同步
+            </summary>
+            <param name="key">通道ID，如bus@1, video@0, sample@xxx-v2@0等</param>
+            <param name="monitoring">是否监控数据与授时服务器同步，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
+        </member>
+        <member name="M:ASEva.Agency.GetAllChannelServerSyncMonitoringKeys">
+            <summary>
+            (api:app=2.12.1) 获取所有正在监控数据与授时服务器同步的通道ID
+            </summary>
+            <returns>正在监控数据与授时服务器同步的通道ID列表</returns>
         </member>
         <member name="M:ASEva.Agency.GetChannelGuestSyncFlag(System.String)">
             <summary>
-            (api:app=2.7.6) 获取指定通道的客机同步配置
+            (api:app=2.7.6) 获取指定通道是否已配置为客机同步
             </summary>
-            <param name="id">通道ID，如：bus@1, video@0, raw@xxx-v1, sample@xxx-v2@0等</param>
-            <returns>客机是否与授时服务器同步</returns>
+            <param name="id">客机同步ID，如bus.1, video.0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
+            <returns>是否已配置为客机同步</returns>
         </member>
         <member name="M:ASEva.Agency.SetChannelGuestSyncFlag(System.String,System.Boolean)">
             <summary>
-            (api:app=2.7.6) 设置指定通道的客机同步配置
+            (api:app=2.7.6) 设置指定通道是否配置为客机同步
             </summary>
-            <param name="id">通道ID，如：bus@1, video@0, raw@xxx-v1, sample@xxx-v2@0等</param>
-            <param name="guestSync">客机是否与授时服务器同步</param>
+            <param name="id">客机同步ID，如bus.1, video.0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
+            <param name="guestSync">是否配置为客机同步</param>
         </member>
         <member name="M:ASEva.Agency.GetAllChannelGuestSyncKeys">
             <summary>
-            (api:app=2.7.6) 获取客机已同步的所有通道ID
+            (api:app=2.7.6) 获取已配置为客机同步的所有ID
             </summary>
-            <returns>客机已同步的所有通道ID列表</returns>
+            <returns>已配置为客机同步的所有ID列表</returns>
         </member>
         <member name="M:ASEva.Agency.GetBusChannelStatus(System.Int32,System.Nullable{System.UInt32})">
             <summary>
@@ -1987,9 +2007,21 @@
             <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
             <returns>可视化面板对象，若创建失败则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetInternetNTPTime">
+            <summary>
+            (api:app=2.11.4) 获取从互联网获取的当前时间
+            </summary>
+            <returns>从互联网获取的当前时间(UTC时间)，若未联网或获取失败则返回空</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetPluginGuestSyncTable">
+            <summary>
+            (api:app=2.12.0) 获取所有插件的客机同步ID以及对应的标题
+            </summary>
+            <returns>客机同步标题表，键为客机同步ID，值为对应的标题</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.11.2
+            version=2.12.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4192,6 +4224,18 @@
             </summary>
             <returns>原生组件ID列表</returns>
         </member>
+        <member name="M:ASEva.Plugin.GetGuestSyncTitleTable">
+            <summary>
+            (api:app=2.12.0) [可选实现] 获取插件相关的客机同步通道标题表
+            </summary>
+            <returns>客机同步通道标题表，键为客机同步ID，值为其标题</returns>
+        </member>
+        <member name="M:ASEva.Plugin.GetPreloadLibFiles">
+            <summary>
+            (api:app=2.12.3) [可选实现] 获取需要提前加载的库文件列表
+            </summary>
+            <returns>库文件名的列表，不需要绝对路径</returns>
+        </member>
         <member name="M:ASEva.Plugin.UseLogger(ASEva.Logger)">
             <summary>
             (api:app=2.11.0) [可选实现] 设置用于记录调试信息的接口时被调用
@@ -4919,6 +4963,11 @@
             点个数
             </summary>
         </member>
+        <member name="P:ASEva.Samples.PointCloudSample.DataReleased">
+            <summary>
+            (api:app=2.11.4) 数据是否已被释放（出于内存用量控制等目的）
+            </summary>
+        </member>
         <member name="P:ASEva.Samples.PointCloudSample.Points">
             <summary>
             点坐标列表，数组尺寸为Nx3，N为个数，3分别为x(前),y(左),z(上)轴坐标，单位为厘米
@@ -5073,7 +5122,7 @@
         </member>
         <member name="F:ASEva.Samples.SpecialCameraType.AnyCamera">
             <summary>
-            任意位置摄像头
+            任意位置摄像头（标准模型），使用 GenericCameraMeta
             </summary>
         </member>
         <member name="F:ASEva.Samples.SpecialCameraType.NormalFisheyeCamera">
@@ -5108,7 +5157,47 @@
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.Undistorted">
             <summary>
-            是否作了消歪曲
+            是否作了去畸变
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonCameraMeta.UndistortedHFOV">
+            <summary>
+            (api:app=2.12.2) 去畸变后的理想针孔模型图像的横向视场角 [deg]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonCameraMeta.AR">
+            <summary>
+            像素尺寸横纵比
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonCameraMeta.CU">
+            <summary>
+            归一化视轴u坐标
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonCameraMeta.CV">
+            <summary>
+            归一化视轴v坐标
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonCameraMeta.K1">
+            <summary>
+            畸变参数K1
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonCameraMeta.K2">
+            <summary>
+            畸变参数K2
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonCameraMeta.P1">
+            <summary>
+            畸变参数P1
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CommonCameraMeta.P2">
+            <summary>
+            畸变参数P2
             </summary>
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.K3">
@@ -5231,6 +5320,21 @@
             单位点长度 [m]
             </summary>
         </member>
+        <member name="P:ASEva.Samples.LaneLineCameraMeta.ZeroPosition">
+            <summary>
+            零点位置
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.LaneLineCameraMeta.MeterPosition">
+            <summary>
+            单位点位置
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.LaneLineCameraMeta.FiftyRatio">
+            <summary>
+            半长占比
+            </summary>
+        </member>
         <member name="T:ASEva.Samples.BlindSpotCameraMeta">
             <summary>
             (api:app=2.0.0) 盲区摄像头关联信息（标准模型）
@@ -5244,6 +5348,46 @@
         <member name="P:ASEva.Samples.BlindSpotCameraMeta.Common">
             <summary>
             共通部分
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.BlindSpotCameraMeta.P00Position">
+            <summary>
+            P00位置
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.BlindSpotCameraMeta.P04Position">
+            <summary>
+            P04位置
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.BlindSpotCameraMeta.P30Position">
+            <summary>
+            P30位置
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.BlindSpotCameraMeta.P34Position">
+            <summary>
+            P34位置
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.BlindSpotCameraMeta.P0HRatio">
+            <summary>
+            P0X半长占比
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.BlindSpotCameraMeta.P3HRatio">
+            <summary>
+            P3X半长占比
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.BlindSpotCameraMeta.PH0Ratio">
+            <summary>
+            PX0半长占比
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.BlindSpotCameraMeta.PH4Ratio">
+            <summary>
+            PX4半长占比
             </summary>
         </member>
         <member name="T:ASEva.Samples.FisheyeCameraMeta">
@@ -5263,7 +5407,52 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.Undistorted">
             <summary>
-            是否作了消歪曲
+            是否作了去畸变
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.UndistortedHFOV">
+            <summary>
+            (api:app=2.12.2) 去畸变后的理想针孔模型图像的横向视场角 [deg]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.HFOVFisheye">
+            <summary>
+            理想鱼眼模型横向视场角 [deg]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.AR">
+            <summary>
+            像素尺寸横纵比
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.CU">
+            <summary>
+            归一化视轴u坐标
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.CV">
+            <summary>
+            归一化视轴v坐标
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.K1">
+            <summary>
+            畸变参数K1
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.K2">
+            <summary>
+            畸变参数K2
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.K3">
+            <summary>
+            畸变参数K3
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.FisheyeCameraMeta.K4">
+            <summary>
+            畸变参数K4
             </summary>
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.HasExtrinsicsInfo">
@@ -5348,7 +5537,7 @@
         </member>
         <member name="P:ASEva.Samples.CameraInfo.HorizontalFov">
             <summary>
-            标准针孔模型下的横向视场角（未消歪曲时为空）
+            标准针孔模型下的横向视场角（未去畸变时为空）
             </summary>
         </member>
         <member name="T:ASEva.Samples.VideoFrameSample">
@@ -5384,7 +5573,7 @@
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.HorizontalFov">
             <summary>
-            标准针孔模型下的横向视场角（未消歪曲时为空）
+            标准针孔模型下的横向视场角（未去畸变时为空）
             </summary>
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.Scaled">
@@ -6109,12 +6298,17 @@
         </member>
         <member name="F:ASEva.BusChannelType.Flexray">
             <summary>
-            Flexray总线，报文数据由标志位字节(从低至高为startup,sync,null)、cycle字节和payload构成，2～256字节
+            Flexray总线，报文数据由标志位字节(从低至高为startup,sync,null)、cycle字节和payload构成(共2～256字节)，报文ID即Slot ID
             </summary>
         </member>
         <member name="F:ASEva.BusChannelType.Ethernet">
             <summary>
-            以太网总线，报文数据为包含链路层等等协议的完整以太网帧数据
+            以太网总线，报文数据为包含链路层等等协议的完整以太网帧数据，报文ID定义为源MAC的后四字节(小字序)
+            </summary>
+        </member>
+        <member name="F:ASEva.BusChannelType.SomeIP">
+            <summary>
+            (api:app=2.11.3) SOME/IP车载以太网总线，报文数据为包含链路层等等协议的完整以太网帧数据，报文ID即Message ID(由Service ID和Method ID组成)
             </summary>
         </member>
         <member name="T:ASEva.BusDeviceInfo">
@@ -7536,6 +7730,21 @@
             Generation更新记录
             </summary>
         </member>
+        <member name="P:ASEva.Utility.GenerationInfo.GNSSPosixModel">
+            <summary>
+            (api:app=2.12.0) Generation生成时使用或覆盖的卫星Posix时间模型
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.GenerationInfo.HostSync">
+            <summary>
+            (api:app=2.12.0) Generation生成时主机是否配置为与授时服务器同步
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.GenerationInfo.GuestSyncIDs">
+            <summary>
+            (api:app=2.12.0) Generation生成时被配置为与授时服务器同步的所有客机同步ID
+            </summary>
+        </member>
         <member name="M:ASEva.Utility.GenerationInfo.Create(System.String,System.String,ASEva.Utility.GenerationProcessStatus,System.Collections.Generic.Dictionary{System.String,System.Version})">
             <summary>
             创建信息文件对象（仅创建对象，不写入文件）
@@ -7556,6 +7765,21 @@
             <param name="sampleAlias">样本别名表</param>
             <param name="versions">生成Generation的软件版本信息</param>
             <param name="updateLogs">Generation更新记录</param>
+            <returns>返回创建的对象</returns>
+        </member>
+        <member name="M:ASEva.Utility.GenerationInfo.Create(System.String,System.String,ASEva.Utility.GenerationProcessStatus,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Version},System.Collections.Generic.Dictionary{System.DateTime,System.String},ASEva.PosixTimeModel,System.Boolean,System.String[])">
+            <summary>
+            (api:app=2.12.0) 创建信息文件对象（仅创建对象，不写入文件）
+            </summary>
+            <param name="filePath">文件路径</param>
+            <param name="generationID">Generation ID</param>
+            <param name="status">状态信息</param>
+            <param name="sampleAlias">样本别名表</param>
+            <param name="versions">生成Generation的软件版本信息</param>
+            <param name="updateLogs">Generation更新记录</param>
+            <param name="gnssPosixModel">Generation生成时使用或覆盖的卫星Posix时间模型</param>
+            <param name="hostSync">Generation生成时主机是否配置为与授时服务器同步</param>
+            <param name="guestSyncIDs">Generation生成时被配置为与授时服务器同步的所有客机同步ID</param>
             <returns>返回创建的对象</returns>
         </member>
         <member name="M:ASEva.Utility.GenerationInfo.Load(System.String)">
