@@ -37,6 +37,7 @@ namespace ASEva.UIWpf
             SkiaCanvasExtensions.DefaultFontName = "Microsoft Yahei";
             SkiaCanvasExtensions.DefaultFontSize = 12;
             TextBitmap.ImageInterpolationMode = ImageInterpolation.Medium;
+            TextBitmap.FastModeDrawOffset = new PointF(1, 1);
             TopMostExtensions.QueryInterface = new TopMostHandler();
             SnapshotExtensions.Handler = new SnapshotHandler();
 
