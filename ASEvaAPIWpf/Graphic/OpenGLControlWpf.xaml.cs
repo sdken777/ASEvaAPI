@@ -14,9 +14,6 @@ using ASEva.Utility;
 
 namespace ASEva.UIWpf
 {
-    /// <summary>
-    /// OpenGLControlWpf.xaml 的交互逻辑
-    /// </summary>
     partial class OpenGLControlWpf : UserControl, GLBackend
     {
         public OpenGLControlWpf(GLCallback callback, GLAntialias antialias, bool useLegacyAPI)

@@ -16,9 +16,6 @@ using System.Runtime.InteropServices;
 
 namespace ASEva.UIWpf
 {
-    /// <summary>
-    /// OpenGLBlitControlWpf.xaml 的交互逻辑
-    /// </summary>
     partial class OpenGLBlitControlWpf : UserControl, GLBackend
     {
         private const int D3DDefaultAdapter = 0;

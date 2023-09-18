@@ -3260,9 +3260,9 @@ namespace ASEva
         }
 
         /// <summary>
-        /// (api:app=2.14.0) 获取是否使用国内网络服务
+        /// (api:app=2.14.0) 获取是否使用境内网络服务
         /// </summary>
-        /// <returns>是否使用国内网络服务</returns>
+        /// <returns>是否使用境内网络服务</returns>
         public static bool IsPRCWebPreferred()
         {
             return Handler.IsPRCWebPreferred();
