@@ -114,5 +114,10 @@ namespace ASEva.UICoreWF
             table["WebView2"] = Encoding.UTF8.GetString(Resource.WebView2);
             return table;
         }
+
+        public bool ShouldPassParent()
+        {
+            return false;
+        }
     }
 }

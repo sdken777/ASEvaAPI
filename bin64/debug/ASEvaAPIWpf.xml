@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIWpf.APIInfo">
             <summary>
-            version=1.5.0
+            version=1.5.3
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.APIInfo.GetAPIVersion">
@@ -16,9 +16,6 @@
             <returns>API版本</returns>
         </member>
         <member name="T:ASEva.UIWpf.AppDialogWpf">
-            <summary>
-            AppDialogWpf.xaml 的交互逻辑
-            </summary>
             <summary>
             AppDialogWpf
             </summary>
@@ -72,9 +69,6 @@
         </member>
         <member name="T:ASEva.UIWpf.OpenGLBlitControlWpf">
             <summary>
-            OpenGLBlitControlWpf.xaml 的交互逻辑
-            </summary>
-            <summary>
             OpenGLBlitControlWpf
             </summary>
         </member>
@@ -84,9 +78,6 @@
             </summary>
         </member>
         <member name="T:ASEva.UIWpf.OpenGLControlWpf">
-            <summary>
-            OpenGLControlWpf.xaml 的交互逻辑
-            </summary>
             <summary>
             OpenGLControlWpf
             </summary>
@@ -98,15 +89,25 @@
         </member>
         <member name="T:ASEva.UIWpf.TextDraw">
             <summary>
-            TextDraw.xaml 的交互逻辑
-            </summary>
-            <summary>
             TextDraw
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.TextDraw.InitializeComponent">
             <summary>
             InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ASEva.UIWpf.ButtonHandler`3">
+            <summary>
+            Button handler.
+            </summary>
+            <copyright>(c) 2014 by Vivek Jhaveri</copyright>
+            <copyright>(c) 2012-2019 by Curtis Wensley</copyright>
+            <license type="BSD-3">See LICENSE for full terms</license>
+        </member>
+        <member name="P:ASEva.UIWpf.ButtonHandler`3.ImageLabelSpacing">
+            <summary>
+            Gets or sets the spacing between the image and the label when both are present
             </summary>
         </member>
         <member name="T:ASEva.UIWpf.ImageConverter">

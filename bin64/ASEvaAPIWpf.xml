@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIWpf.APIInfo">
             <summary>
-            version=1.5.2
+            version=1.5.3
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.APIInfo.GetAPIVersion">
@@ -16,9 +16,6 @@
             <returns>API版本</returns>
         </member>
         <member name="T:ASEva.UIWpf.AppDialogWpf">
-            <summary>
-            AppDialogWpf.xaml 的交互逻辑
-            </summary>
             <summary>
             AppDialogWpf
             </summary>
@@ -72,9 +69,6 @@
         </member>
         <member name="T:ASEva.UIWpf.OpenGLBlitControlWpf">
             <summary>
-            OpenGLBlitControlWpf.xaml 的交互逻辑
-            </summary>
-            <summary>
             OpenGLBlitControlWpf
             </summary>
         </member>
@@ -85,9 +79,6 @@
         </member>
         <member name="T:ASEva.UIWpf.OpenGLControlWpf">
             <summary>
-            OpenGLControlWpf.xaml 的交互逻辑
-            </summary>
-            <summary>
             OpenGLControlWpf
             </summary>
         </member>
@@ -97,9 +88,6 @@
             </summary>
         </member>
         <member name="T:ASEva.UIWpf.TextDraw">
-            <summary>
-            TextDraw.xaml 的交互逻辑
-            </summary>
             <summary>
             TextDraw
             </summary>

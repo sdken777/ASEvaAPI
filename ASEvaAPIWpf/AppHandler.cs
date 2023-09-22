@@ -89,5 +89,10 @@ namespace ASEva.UIWpf
             table["Extended WPF Toolkit version 3.6.0"] = Encoding.UTF8.GetString(Resource.Extended_WPF_Toolkit__3_6_);
             return table;
         }
+
+        public bool ShouldPassParent()
+        {
+            return true;
+        }
     }
 }
