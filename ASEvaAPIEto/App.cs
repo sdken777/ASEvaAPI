@@ -17,6 +17,7 @@ namespace ASEva.UIEto
         object ConvertControlToPlatform(Control etoControl);
         bool RunDialog(DialogPanel panel);
         Dictionary<String, String> GetThirdPartyNotices();
+        bool ShouldPassParent();
     }
 
     /// <summary>
@@ -216,6 +217,28 @@ namespace ASEva.UIEto
             dialogEto.MoveToCenter();
             dialogEto.ShowModal();
             return true;
+        }
+
+        /// <summary>
+        /// (api:eto=2.11.2) 调用ShowDialog时建议通过此函数传parent参数
+        /// </summary>
+        /// <param name="parent">parent参数</param>
+        /// <returns>返回parent或null</returns>
+        public static Window PassParent(Window parent)
+        {
+            if (handler == null || !handler.ShouldPassParent()) return null;
+            else return parent;
+        }
+
+        /// <summary>
+        /// (api:eto=2.11.2) 调用ShowDialog时建议通过此函数传parent参数
+        /// </summary>
+        /// <param name="parent">parent参数</param>
+        /// <returns>返回parent或null</returns>
+        public static Control PassParent(Control parent)
+        {
+            if (handler == null || !handler.ShouldPassParent()) return null;
+            else return parent;
         }
 
         private static String[] getAvailableUICodes()

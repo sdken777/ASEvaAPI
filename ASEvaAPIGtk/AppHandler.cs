@@ -148,6 +148,11 @@ namespace ASEva.UIGtk
             return table;
         }
 
+        public bool ShouldPassParent()
+        {
+            return false;
+        }
+
         private String queryUIBackend()
         {
             try

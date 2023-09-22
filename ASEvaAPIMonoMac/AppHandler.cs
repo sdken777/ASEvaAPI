@@ -90,5 +90,10 @@ namespace ASEva.UIMonoMac
             table["The OpenGL Extension Wrangler Library"] = ResourceLoader.LoadText("GLEW.LICENSE");
             return table;
         }
+
+        public bool ShouldPassParent()
+        {
+            return false;
+        }
     }
 }

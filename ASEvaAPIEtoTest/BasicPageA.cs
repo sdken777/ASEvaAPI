@@ -46,10 +46,10 @@ namespace ASEvaAPIEtoTest
             {
                 if (radioButtonList.SelectedIndex == 0)
                 {
-                    if (checkBox.Checked.Value) new SaveFileDialog().ShowDialog(null);
-                    else new OpenFileDialog().ShowDialog(null);
+                    if (checkBox.Checked.Value) new SaveFileDialog().ShowDialog(App.PassParent(this));
+                    else new OpenFileDialog().ShowDialog(App.PassParent(this));
                 }
-                else new SelectFolderDialog().ShowDialog(null);
+                else new SelectFolderDialog().ShowDialog(App.PassParent(this));
             };
         }
 

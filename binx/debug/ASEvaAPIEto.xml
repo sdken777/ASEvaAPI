@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.11.0
+            version=2.11.2
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -119,6 +119,20 @@
             </summary>
             <param name="panel">对话框主面板</param>
             <returns>是否成功弹出，对话框的运行结果应通过主面板的各Result属性获取</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.PassParent(Eto.Forms.Window)">
+            <summary>
+            (api:eto=2.11.2) 调用ShowDialog时建议通过此函数传parent参数
+            </summary>
+            <param name="parent">parent参数</param>
+            <returns>返回parent或null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.PassParent(Eto.Forms.Control)">
+            <summary>
+            (api:eto=2.11.2) 调用ShowDialog时建议通过此函数传parent参数
+            </summary>
+            <param name="parent">parent参数</param>
+            <returns>返回parent或null</returns>
         </member>
         <member name="T:ASEva.UIEto.ButtonPanel">
             <summary>
