@@ -212,6 +212,10 @@
     <en>Empty</en>
     <ch>空</ch>
   </t>
+  <t id="exit-confirm">
+    <en>Exit?</en>
+    <ch>是否退出？</ch>
+  </t>
   <t id="menu-button">
     <en>Message box</en>
     <ch>消息框</ch>

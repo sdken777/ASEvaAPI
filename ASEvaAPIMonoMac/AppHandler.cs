@@ -62,6 +62,7 @@ namespace ASEva.UIMonoMac
 
         public void RunApp(Application application, Form window)
         {
+            window.Closing += (o, e) => { if (e.Cancel) window.Visible = true; };
             application.Run(window);
         }
 

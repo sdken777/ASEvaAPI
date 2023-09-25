@@ -1,6 +1,6 @@
 ﻿/*! \mainpage
  * 此类库为ASEva-API中基于MonoMac的部分。详见 ASEva.UIMonoMac \n
- * 本文档对应API版本：1.4.1\n
+ * 本文档对应API版本：1.4.2\n
  * \n
  * MonoMac仓库(.NET Core分支): https://github.com/cwensley/monomac \n
  * API文档(Swift/ObjC): https://developer.apple.com/documentation/appkit
@@ -11,7 +11,7 @@ using System;
 namespace ASEva.UIMonoMac
 {
     /// <summary>
-    /// version=1.4.1
+    /// version=1.4.2
     /// </summary>
     public class APIInfo
     {
@@ -21,7 +21,7 @@ namespace ASEva.UIMonoMac
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 4, 1, 0); // 实现AppHandler.ShouldPassParent
+            return new Version(1, 4, 2, 0); // 支持主窗口关闭取消
         }
     }
 }
