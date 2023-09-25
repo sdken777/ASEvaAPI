@@ -4,6 +4,7 @@ using ASEva;
 using ASEva.Samples;
 using ASEva.UIEto;
 using Eto.Forms;
+using Eto.Drawing;
 using MonoMac.AppKit;
 using MonoMac.Foundation;
 
@@ -29,7 +30,15 @@ namespace ASEva.UIMonoMac
             var pngBytes = new byte[pngData.Length];
             Marshal.Copy(pngData.Bytes, pngBytes, 0, (int)pngData.Length);
 
-            return CommonImage.FromBinary(pngBytes);
+            try
+            {
+                var etoBitmap = new Bitmap(pngBytes);
+                return ASEva.UIEto.ImageConverter.ConvertFromBitmap(etoBitmap);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

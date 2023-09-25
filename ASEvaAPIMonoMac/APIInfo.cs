@@ -21,7 +21,7 @@ namespace ASEva.UIMonoMac
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 4, 2, 0); // 支持主窗口关闭取消
+            return new Version(1, 4, 2, 1); // 修正SnapshotHandler
         }
     }
 }
