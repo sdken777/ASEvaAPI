@@ -13,9 +13,16 @@ namespace ASEva.UIEto
     {
         public static Icon ToIcon(this byte[] imageData)
         {
-            var bitmap = new Bitmap(imageData);
-            if (bitmap == null) return null;
-            else return ToIcon(bitmap);
+            try
+            {
+                var bitmap = new Bitmap(imageData);
+                if (bitmap == null) return null;
+                else return ToIcon(bitmap);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public static Icon ToIcon(this Bitmap bitmap)

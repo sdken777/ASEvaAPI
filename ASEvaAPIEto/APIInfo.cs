@@ -25,7 +25,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 11, 3, 0); // 新增IconExtensions
+            return new Version(2, 11, 3, 1); // ToIcon捕获异常
         }
 
         /// <summary>
