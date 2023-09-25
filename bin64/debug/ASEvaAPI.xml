@@ -2062,7 +2062,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.14.0
+            version=2.14.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -3833,6 +3833,12 @@
             </summary>
             <returns>是否使用国内网络服务</returns>
         </member>
+        <member name="M:ASEva.MainWorkflow.OnCheckRequestAutoRoot">
+            <summary>
+            (api:app=2.14.1) [可选实现] 返回是否请求自动root权限 (仅针对Linux操作系统)
+            </summary>
+            <returns>是否请求自动root权限</returns>
+        </member>
         <member name="M:ASEva.MainWorkflow.OnSelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
             <summary>
             [可选实现][可含模态框] 选择总线协议文件
@@ -4300,6 +4306,12 @@
             (api:app=2.14.0) [可选实现] 获取插件使用的第三方软件版权声明时被调用
             </summary>
             <returns>键为标题，值为版权声明</returns>
+        </member>
+        <member name="M:ASEva.Plugin.GetAutoRootTargets">
+            <summary>
+            (api:app=2.14.2) [可选实现] 获取Linux系统下需要自动root权限的可执行程序路径时被调用
+            </summary>
+            <returns>可执行程序路径列表，仅限无界面程序</returns>
         </member>
         <member name="M:ASEva.Plugin.UseLogger(ASEva.Logger)">
             <summary>

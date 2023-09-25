@@ -54,6 +54,7 @@ namespace ASEva.UICoreWF
             TextBitmap.FastModeDrawOffset = new PointF(1, 1);
             SimpleTreeView.Factory = new SimpleTreeViewFactoryCoreWF();
             SnapshotExtensions.Handler = new SnapshotHandler();
+            IconExtensions.FinalFrameOnly = true;
 
             uiBackend = null;
             webViewBackend = "webview2";
