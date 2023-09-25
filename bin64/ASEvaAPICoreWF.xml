@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UICoreWF.APIInfo">
             <summary>
-            version=2.5.3
+            version=2.5.4
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.APIInfo.GetAPIVersion">
@@ -259,6 +259,11 @@
         <member name="T:ASEva.UICoreWF.DoubleBufferListView">
             <summary>
             (api:corewf=2.0.0) 双缓存ListView
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.WinformIconExtensions">
+            <summary>
+            (api:corewf=2.5.4) 方便生成图标的扩展
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.FlowPanelManager">
