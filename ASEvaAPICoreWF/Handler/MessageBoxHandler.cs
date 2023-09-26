@@ -1,9 +1,11 @@
 using System;
 using sd = System.Drawing;
 using swf = System.Windows.Forms;
+using Eto;
 using Eto.Forms;
+using Eto.WinForms;
 
-namespace Eto.WinForms.Forms
+namespace ASEva.UICoreWF
 {
 	public class MessageBoxHandler : WidgetHandler<Widget>, MessageBox.IHandler
 	{
@@ -21,7 +23,9 @@ namespace Eto.WinForms.Forms
 		{
 			var caption = Caption ?? ((parent != null && parent.ParentWindow != null) ? parent.ParentWindow.Title : null);
 			swf.Control c = (parent == null) ? null : (swf.Control)parent.ControlObject;
-			swf.DialogResult result = swf.MessageBox.Show(c, Text, caption, Convert(Buttons), Convert(Type), Convert(DefaultButton, Buttons));
+
+			// MOD: 修正标题给null则显示"错误"
+			swf.DialogResult result = swf.MessageBox.Show(c, Text, caption == null ? "" : caption, Convert(Buttons), Convert(Type), Convert(DefaultButton, Buttons));
 			return result.ToEto();
 		}
 

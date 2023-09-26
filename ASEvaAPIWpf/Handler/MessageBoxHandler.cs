@@ -3,8 +3,16 @@ using Eto.Forms;
 using sw = System.Windows;
 //using WpfMessageBox = Xceed.Wpf.Toolkit.MessageBox;
 using WpfMessageBox = System.Windows.MessageBox;
+using Eto;
+using Eto.Wpf;
+using Eto.Wpf.Forms;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Security;
+using System.Security.Permissions;
+using swm = System.Windows.Media;
 
-namespace Eto.Wpf.Forms
+namespace ASEva.UIWpf
 {
 	public class MessageBoxHandler : WidgetHandler<Widget>, MessageBox.IHandler
 	{
@@ -23,12 +31,15 @@ namespace Eto.Wpf.Forms
 			using (var visualStyles = new EnableThemingInScope(ApplicationHandler.EnableVisualStyles))
 			{
 				var element = parent == null ? null : parent.GetContainerControl();
-				var window = element == null ? null : element.GetVisualParent<sw.Window>();
+				var window = element == null ? null : GetVisualParent<sw.Window>(element);
 				sw.MessageBoxResult result;
 				var buttons = Convert(Buttons);
 				var defaultButton = Convert(DefaultButton, Buttons);
 				var icon = Convert(Type);
 				var caption = Caption ?? ((parent != null && parent.ParentWindow != null) ? parent.ParentWindow.Title : null);
+
+				// MOD: 修正caption为null则显示"错误"
+				if (caption == null) caption = "";
 				if (window != null) result = WpfMessageBox.Show(window, Text, caption, buttons, icon, defaultButton);
 				else result = WpfMessageBox.Show(Text, caption, buttons, icon, defaultButton);
 				return Convert(result);
@@ -110,6 +121,166 @@ namespace Eto.Wpf.Forms
 				default:
 					throw new NotSupportedException();
 			}
+		}
+
+		static T GetVisualParent<T>(sw.DependencyObject control)
+			where T : class
+		{
+			var ce = control as sw.ContentElement;
+			while (ce != null)
+			{
+				control = sw.ContentOperations.GetParent(ce);
+				ce = control as sw.ContentElement;
+			}
+
+			while (control is swm.Visual || control is swm.Media3D.Visual3D)
+			{
+				control = swm.VisualTreeHelper.GetParent(control);
+				var tmp = control as T;
+				if (tmp != null)
+					return tmp;
+			}
+			return null;
+		}
+	}
+
+	/// <devdoc>
+	///     This class is intended to use with the C# 'using' statement in
+	///     to activate an activation context for turning on visual theming at
+	///     the beginning of a scope, and have it automatically deactivated
+	///     when the scope is exited.
+	/// </devdoc>
+	/// <summary>
+	/// Enables visual styles for common system dialogs (e.g message box).
+	/// Original source from: http://support.microsoft.com/kb/830033/en-us
+	/// Curtis Wensley: Modified for 64-bit compatibility by using an IntPtr instead of uint for the cookie
+	/// </summary>
+	[SuppressUnmanagedCodeSecurity]
+	class EnableThemingInScope : IDisposable
+	{
+		// Private data
+		IntPtr cookie;
+		static ACTCTX enableThemingActivationContext;
+		static IntPtr hActCtx;
+		static bool contextCreationSucceeded = false;
+
+		public EnableThemingInScope(bool enable)
+		{
+			cookie = IntPtr.Zero;
+			if (enable && System.Windows.Forms.OSFeature.Feature.IsPresent(System.Windows.Forms.OSFeature.Themes))
+			{
+				if (EnsureActivateContextCreated())
+				{
+					if (!ActivateActCtx(hActCtx, out cookie))
+					{
+						// Be sure cookie always zero if activation failed
+						cookie = IntPtr.Zero;
+					}
+				}
+			}
+		}
+
+		~EnableThemingInScope()
+		{
+			Dispose(false);
+		}
+
+		void IDisposable.Dispose()
+		{
+			Dispose(true);
+		}
+
+		void Dispose(bool disposing)
+		{
+			if (cookie != IntPtr.Zero)
+			{
+				if (DeactivateActCtx(0, cookie))
+				{
+					// deactivation succeeded...
+					cookie = IntPtr.Zero;
+				}
+			}
+		}
+
+		bool EnsureActivateContextCreated()
+		{
+			lock (typeof(EnableThemingInScope))
+			{
+				if (!contextCreationSucceeded)
+				{
+					// Pull manifest from the .NET Framework install
+					// directory
+
+					string assemblyLoc = null;
+
+					FileIOPermission fiop = new FileIOPermission(PermissionState.None);
+					fiop.AllFiles = FileIOPermissionAccess.PathDiscovery;
+					fiop.Assert();
+					try
+					{
+						assemblyLoc = typeof(Object).Assembly.Location;
+					}
+					finally
+					{
+						CodeAccessPermission.RevertAssert();
+					}
+
+					string manifestLoc = null;
+					string installDir = null;
+					if (assemblyLoc != null)
+					{
+						installDir = Path.GetDirectoryName(assemblyLoc);
+						const string manifestName = "XPThemes.manifest";
+						manifestLoc = Path.Combine(installDir, manifestName);
+					}
+
+					if (manifestLoc != null && installDir != null)
+					{
+						enableThemingActivationContext = new ACTCTX();
+						enableThemingActivationContext.cbSize = Marshal.SizeOf(typeof(ACTCTX));
+						enableThemingActivationContext.lpSource = manifestLoc;
+
+						// Set the lpAssemblyDirectory to the install
+						// directory to prevent Win32 Side by Side from
+						// looking for comctl32 in the application
+						// directory, which could cause a bogus dll to be
+						// placed there and open a security hole.
+						enableThemingActivationContext.lpAssemblyDirectory = installDir;
+						enableThemingActivationContext.dwFlags = ACTCTX_FLAG_ASSEMBLY_DIRECTORY_VALID;
+
+						// Note this will fail gracefully if file specified
+						// by manifestLoc doesn't exist.
+						hActCtx = CreateActCtx(ref enableThemingActivationContext);
+						contextCreationSucceeded = (hActCtx != new IntPtr(-1));
+					}
+				}
+
+				// If we return false, we'll try again on the next call into
+				// EnsureActivateContextCreated(), which is fine.
+				return contextCreationSucceeded;
+			}
+		}
+
+		// All the pinvoke goo...
+		[DllImport("Kernel32.dll")]
+		extern static IntPtr CreateActCtx(ref ACTCTX actctx);
+		[DllImport("Kernel32.dll")]
+		extern static bool ActivateActCtx(IntPtr hActCtx, out IntPtr lpCookie);
+		[DllImport("Kernel32.dll")]
+		extern static bool DeactivateActCtx(uint dwFlags, IntPtr lpCookie);
+
+		const int ACTCTX_FLAG_ASSEMBLY_DIRECTORY_VALID = 0x004;
+
+		struct ACTCTX
+		{
+			public int cbSize;
+			public uint dwFlags;
+			public string lpSource;
+			public ushort wProcessorArchitecture;
+			public ushort wLangId;
+			public string lpAssemblyDirectory;
+			public string lpResourceName;
+			public string lpApplicationName;
 		}
 	}
 }
