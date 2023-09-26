@@ -69,7 +69,7 @@ namespace ASEvaAPIEtoTest
             view.SelectedItemActivated += delegate
             {
                 var selectedKey = view.GetSelectedKey();
-                if (selectedKey != null) MessageBox.Show(selectedKey as String, "");
+                if (selectedKey != null) MessageBox.Show(selectedKey as String);
             };
 
             buttonChange.Click += delegate
