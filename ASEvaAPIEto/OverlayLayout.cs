@@ -43,7 +43,8 @@ namespace ASEva.UIEto
             padding.Left = leftLogicalPadding;
             padding.Right = rightLogicalPadding;
 
-            handleControl(control, true);
+            if (DelayHandleControl) Add(control, 0, 0);
+            else handleControl(control, true);
             return control;
         }
 

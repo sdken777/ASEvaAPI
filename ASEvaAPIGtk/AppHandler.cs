@@ -60,12 +60,7 @@ namespace ASEva.UIGtk
             catch (Exception ex) { Console.WriteLine(ex.Message); }
 
             uiBackend = queryUIBackend();
-            if (uiBackend == "wayland")
-            {
-                OverlayLayout.DelayHandleControl = true;
-                LinuxFuncLoader.UseEGL = true;
-            }
-
+            if (uiBackend == "wayland") LinuxFuncLoader.UseEGL = true;
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerGtk();
             ContextMenuExtensions.ShouldAddMouseDownEvent = true;
             ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.ColorInverted;

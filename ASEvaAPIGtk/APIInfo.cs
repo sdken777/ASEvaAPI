@@ -21,7 +21,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 7, 1, 0); // 实现AppHandler.ShouldPassParent
+            return new Version(2, 7, 1, 1); // 移除冗余代码
         }
     }
 }
