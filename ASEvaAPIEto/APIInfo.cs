@@ -23,7 +23,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 10, 6, 0); // 新增TextBitmap.FastModeDrawOffset
+            return new Version(2, 10, 6, 1); // 修正OverlayLayout
         }
 
         /// <summary>
