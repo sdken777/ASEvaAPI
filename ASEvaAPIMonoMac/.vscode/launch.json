@@ -2,10 +2,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "调试运行",
+            "name": "Run (Debug)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "调试构建",
+            "preLaunchTask": "Build (Debug)",
             "program": "${workspaceFolder}/../macapp/ASEvaAPIEtoTest.app/Contents/MacOS/ASEvaAPIEtoTest",
             "args": [],
             "cwd": "${workspaceFolder}/../macapp/ASEvaAPIEtoTest.app/Contents/MacOS/",
