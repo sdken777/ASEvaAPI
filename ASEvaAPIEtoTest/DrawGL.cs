@@ -12,7 +12,7 @@ namespace ASEvaAPIEtoTest
         private void initDrawGL(StackLayout layout, bool onscreenRendering)
         {
             bool requestOverlay, drawText;
-            requestOverlay = drawText = !onscreenRendering; // 在屏渲染时不要求支持控件覆盖和绘制文本
+            requestOverlay = drawText = !onscreenRendering; // For onscreen rendering, control overlay and text drawing is not required / 在屏渲染时不要求支持控件覆盖和绘制文本
 
             glView = new GLView(null, GLAntialias.Sample16x, onscreenRendering, requestOverlay, drawText, true);
             var button = new Button { Text = t["draw-gl-detail"]};
