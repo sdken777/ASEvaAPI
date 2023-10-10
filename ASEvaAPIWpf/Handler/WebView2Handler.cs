@@ -1,4 +1,4 @@
-
+﻿
 // #define TEST_INSTALL // test installation without actually installing it.
 
 #if !NET45

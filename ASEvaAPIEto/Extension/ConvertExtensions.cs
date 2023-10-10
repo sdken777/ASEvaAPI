@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using ASEva;
 using Eto.Drawing;
 using SkiaSharp;

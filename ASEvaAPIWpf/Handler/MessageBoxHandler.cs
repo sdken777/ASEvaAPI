@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using Eto.Forms;
 using sw = System.Windows;
 //using WpfMessageBox = Xceed.Wpf.Toolkit.MessageBox;
@@ -38,7 +38,7 @@ namespace ASEva.UIWpf
 				var icon = Convert(Type);
 				var caption = Caption ?? ((parent != null && parent.ParentWindow != null) ? parent.ParentWindow.Title : null);
 
-				// MOD: ÐÞÕýcaptionÎªnullÔòÏÔÊ¾"´íÎó"
+				// MOD: ä¿®æ­£captionä¸ºnullåˆ™æ˜¾ç¤º"é”™è¯¯"
 				if (caption == null) caption = "";
 				if (window != null) result = WpfMessageBox.Show(window, Text, caption, buttons, icon, defaultButton);
 				else result = WpfMessageBox.Show(Text, caption, buttons, icon, defaultButton);

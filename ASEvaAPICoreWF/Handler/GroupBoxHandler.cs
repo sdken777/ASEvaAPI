@@ -1,4 +1,4 @@
-using sd = System.Drawing;
+﻿using sd = System.Drawing;
 using swf = System.Windows.Forms;
 using Eto.Forms;
 using Eto.Drawing;

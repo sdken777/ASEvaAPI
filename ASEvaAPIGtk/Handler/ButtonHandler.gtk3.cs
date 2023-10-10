@@ -1,4 +1,4 @@
-#if GTK3
+﻿#if GTK3
 using System;
 using Eto;
 using Eto.Forms;

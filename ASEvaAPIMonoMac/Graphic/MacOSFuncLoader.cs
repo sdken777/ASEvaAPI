@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using SharpGL;
 
 namespace ASEva.UIMonoMac

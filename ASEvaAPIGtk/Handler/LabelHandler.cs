@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Eto;
 using Eto.Forms;
 using Eto.Drawing;

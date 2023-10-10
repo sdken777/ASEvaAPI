@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using ASEva.Utility;
 using ASEva.Samples;
 using ASEva.UIEto;

@@ -1,4 +1,4 @@
-using SWF = System.Windows.Forms;
+﻿using SWF = System.Windows.Forms;
 using Eto.Forms;
 using Eto.WinForms;
 using Eto.WinForms.Forms;

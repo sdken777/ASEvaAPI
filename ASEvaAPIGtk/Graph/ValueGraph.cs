@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Gtk;
 using ASEva.Graph;
 using UI = Gtk.Builder.ObjectAttribute;

@@ -1,4 +1,4 @@
-using Eto.Drawing;
+﻿using Eto.Drawing;
 using Eto.Forms;
 using Eto.GtkSharp;
 using Eto.GtkSharp.Drawing;

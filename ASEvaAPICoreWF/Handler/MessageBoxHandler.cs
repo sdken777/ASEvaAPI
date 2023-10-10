@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using sd = System.Drawing;
 using swf = System.Windows.Forms;
 using Eto;
@@ -24,7 +24,7 @@ namespace ASEva.UICoreWF
 			var caption = Caption ?? ((parent != null && parent.ParentWindow != null) ? parent.ParentWindow.Title : null);
 			swf.Control c = (parent == null) ? null : (swf.Control)parent.ControlObject;
 
-			// MOD: ÐÞÕý±êÌâ¸ønullÔòÏÔÊ¾"´íÎó"
+			// MOD: ä¿®æ­£æ ‡é¢˜ç»™nullåˆ™æ˜¾ç¤º"é”™è¯¯"
 			swf.DialogResult result = swf.MessageBox.Show(c, Text, caption == null ? "" : caption, Convert(Buttons), Convert(Type), Convert(DefaultButton, Buttons));
 			return result.ToEto();
 		}

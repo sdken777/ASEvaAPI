@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Eto.Forms;
 using Eto.GtkSharp.Forms;
@@ -62,7 +62,7 @@ namespace ASEva.UIGtk
 			}
 		}
 
-		public static bool LegacyMode { get; private set; } // 已弃用
+		public static bool LegacyMode { get; private set; } // Deprecated
 	}
 }
 
