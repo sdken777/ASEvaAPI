@@ -1,6 +1,8 @@
 ﻿/*! \mainpage
- * 此类库为ASEva-API中基于.net core winform的部分。详见 ASEva.UICoreWF \n
- * 本文档对应API版本：2.5.5
+ * \~English This library contains the APIs for .NET Core Winform. See ASEva.UICoreWF for details. \n
+ * \~Chinese 此类库为ASEva-API中基于.NET Core Winform的部分。详见 ASEva.UICoreWF \n
+ * \~English This document corresponds to API version: 2.5.5
+ * \~Chinese 本文档对应API版本：2.5.5
  */
 
 using System;
@@ -12,13 +14,19 @@ namespace ASEva.UICoreWF
     /// </summary>
     public class APIInfo
     {
+        /// \~English
+        /// <summary>
+        /// (api:corewf=2.0.0) Get API version
+        /// </summary>
+        /// <returns>The API version</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:corewf=2.0.0) 获取API版本
         /// </summary>
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 5, 0); // 修正MessageBox标题给null则显示"错误"
+            return new Version(2, 5, 5, 0); // Update log / 更新记录: 修正MessageBox标题给null则显示"错误"
         }
     }
 }

@@ -422,6 +422,13 @@ namespace ASEva
             return Handler.GetGenerationList();
         }
 
+        /// \~English
+        /// <summary>
+        /// Obtain the root path of a session data on the storage
+        /// </summary>
+        /// <param name="session">Target session ID</param>
+        /// <returns>The root path of the session data, null if it does not exist or not belongs to the current layer.</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取某个session数据在硬盘的根路径
         /// </summary>
