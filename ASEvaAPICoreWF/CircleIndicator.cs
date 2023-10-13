@@ -5,6 +5,9 @@ using ASEva.Utility;
 
 namespace ASEva.UICoreWF
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) 圆形指示器
     /// </summary>

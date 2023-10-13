@@ -5,11 +5,17 @@ using System.IO;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 写入样本csv文件
     /// </summary>
     public class SampleCsvWriter
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 根据指定路径创建样本csv写入器
         /// </summary>
@@ -51,6 +57,9 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 写入一个通用样本
         /// </summary>
@@ -92,6 +101,9 @@ namespace ASEva.Utility
             return true;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 关闭样本csv写入器
         /// </summary>
@@ -104,6 +116,9 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 按UTC时间设置卫星Posix时间模型的session开始时间
         /// </summary>
@@ -120,6 +135,9 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 按本地时间设置主机Posix时间模型的session开始时间
         /// </summary>
@@ -136,6 +154,9 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置卫星Posix时间模型的时间比例，默认为1
         /// </summary>
@@ -148,6 +169,9 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置主机Posix时间模型的时间比例，默认为1
         /// </summary>

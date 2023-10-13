@@ -2,37 +2,70 @@
 
 namespace ASEva.Graph
 {
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Mode of statistics for matrix table
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 矩阵表模式
     /// </summary>
     public enum MatrixTableMode
     {
+        /// \~English
+        /// <summary>
+        /// Sum, supporting the validations: ValueBelow, ValueAbove, OutlineInside, OutlineOutside
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 求和矩阵表，图表数据验证支持ValueBelow, ValueAbove, OutlineInside, OutlineOutside
         /// </summary>
         Sum,
 
+        /// \~English
+        /// <summary>
+        /// Average value, supporting the validations: ValueBelow, ValueAbove
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 平均值矩阵表，图表数据验证支持ValueBelow, ValueAbove
         /// </summary>
         Aver,
 
+        /// \~English
+        /// <summary>
+        /// Minimum value, supporting the validations: ValueBelow, ValueAbove
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 最小值矩阵表，图表数据验证支持ValueBelow, ValueAbove
         /// </summary>
         Min,
 
+        /// \~English
+        /// <summary>
+        /// Maximum value, supporting the validations: ValueBelow, ValueAbove
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 最大值矩阵表，图表数据验证支持ValueBelow, ValueAbove
         /// </summary>
         Max,
 
+        /// \~English
+        /// <summary>
+        /// Percentage, supporting the validations: ValueBelow, ValueAbove, OutlineInside, OutlineOutside
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 百分比矩阵表，图表数据验证支持ValueBelow, ValueAbove, OutlineInside, OutlineOutside
         /// </summary>
         Percentage,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 矩阵表单轴范围
     /// </summary>
@@ -43,6 +76,9 @@ namespace ASEva.Graph
         public int Count { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 矩阵表中数值的范围
     /// </summary>
@@ -58,11 +94,17 @@ namespace ASEva.Graph
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 矩阵表数据
     /// </summary>
     public class MatrixTableData : GraphData
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 创建图表定义（不带数据验证）
         /// </summary>
@@ -80,6 +122,9 @@ namespace ASEva.Graph
             return CreateDefinitionWithValidation(title, xTitle, yTitle, mode, null, xRange, yRange, valueRefRange, defaultValue);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 创建带数据验证的图表定义
         /// </summary>
@@ -133,6 +178,9 @@ namespace ASEva.Graph
             return def;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取矩阵表模式
         /// </summary>
@@ -142,6 +190,9 @@ namespace ASEva.Graph
             return (MatrixTableMode)Enum.Parse(typeof(MatrixTableMode), Definition.Config[0]);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取x轴标题
         /// </summary>
@@ -151,6 +202,9 @@ namespace ASEva.Graph
             return Definition.Config[9];
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取y轴标题
         /// </summary>
@@ -160,6 +214,9 @@ namespace ASEva.Graph
             return Definition.Config[10];
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取x轴范围
         /// </summary>
@@ -180,6 +237,9 @@ namespace ASEva.Graph
             else return null;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取y轴范围
         /// </summary>
@@ -200,6 +260,9 @@ namespace ASEva.Graph
             else return null;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取矩阵表数据参考范围
         /// </summary>
@@ -212,6 +275,9 @@ namespace ASEva.Graph
             return new MatrixTableValueRefRange(lower, upper);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取矩阵表中x轴各区间统计值
         /// </summary>
@@ -294,6 +360,9 @@ namespace ASEva.Graph
             return output;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取矩阵表中y轴各区间统计值
         /// </summary>
@@ -376,6 +445,9 @@ namespace ASEva.Graph
             return output;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 在输入x，y坐标所在区间添加1
         /// </summary>
@@ -386,6 +458,9 @@ namespace ASEva.Graph
             AddSample(x, y, 1);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 在输入x，y坐标所在区间添加数值样本
         /// </summary>
@@ -434,6 +509,9 @@ namespace ASEva.Graph
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取矩阵表数据
         /// </summary>

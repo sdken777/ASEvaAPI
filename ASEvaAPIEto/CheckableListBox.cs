@@ -6,11 +6,17 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.5.0) 多选框组
     /// </summary>
     public class CheckableListBox : GridView
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -27,6 +33,9 @@ namespace ASEva.UIEto
             Shown += CheckableListBox_Shown;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取多选框个数
         /// </summary>
@@ -38,6 +47,9 @@ namespace ASEva.UIEto
             return (DataStore as List<GridItem>).Count;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加多选框
         /// </summary>
@@ -58,6 +70,9 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 一次性添加多个多选框
         /// </summary>
@@ -84,6 +99,9 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 移除多选框
         /// </summary>
@@ -103,6 +121,9 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 一次性移除多个多选框
         /// </summary>
@@ -132,6 +153,9 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 移除所有多选框
         /// </summary>
@@ -147,6 +171,9 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取某个多选框是否为勾选状态
         /// </summary>
@@ -166,6 +193,9 @@ namespace ASEva.UIEto
             return (bool)values[1];
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置某个多选框的勾选状态
         /// </summary>
@@ -188,6 +218,9 @@ namespace ASEva.UIEto
             ReloadData(index);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取某个多选框是否为启用状态
         /// </summary>
@@ -199,6 +232,9 @@ namespace ASEva.UIEto
             else return enableFlags[index];
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置某个多选框的启用状态
         /// </summary>
@@ -213,6 +249,9 @@ namespace ASEva.UIEto
             updateColor(index, 1);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.9) 设置某个多选框的文字
         /// </summary>
@@ -235,6 +274,9 @@ namespace ASEva.UIEto
             ReloadData(index);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取所有已勾选的多选框的序号
         /// </summary>
@@ -256,6 +298,9 @@ namespace ASEva.UIEto
             return buffer.ToArray();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 勾选所有多选框（不改变禁用的部分）
         /// </summary>
@@ -276,6 +321,9 @@ namespace ASEva.UIEto
             ReloadData(new Range<int>(0, GetItemCount()));
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 取消勾选所有多选框（不改变禁用的部分）
         /// </summary>
@@ -296,6 +344,9 @@ namespace ASEva.UIEto
             ReloadData(new Range<int>(0, GetItemCount()));
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.9.13) 多选框点击事件
         /// </summary>

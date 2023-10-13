@@ -3,11 +3,17 @@ using Eto.Forms;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.3.2) 方便设置窗口或对话框的用户区域
     /// </summary>
     public static class SetClientSizeExtensions
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置窗口或对话框的用户区域尺寸
         /// </summary>
@@ -20,6 +26,9 @@ namespace ASEva.UIEto
             else window.ClientSize = window.Sizer(logicalWidth, logicalHeight);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置窗口或对话框的用户区域的最小尺寸
         /// </summary>

@@ -4,11 +4,17 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.0) 方便设置面板Content的扩展 
     /// </summary>
     public static class SetContentExtensions
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置横向堆叠布局至面板Content
         /// </summary>
@@ -28,6 +34,9 @@ namespace ASEva.UIEto
             return layout;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置纵向堆叠布局至面板Content
         /// </summary>
@@ -47,6 +56,9 @@ namespace ASEva.UIEto
             return layout;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置表布局至面板Content
         /// </summary>
@@ -66,6 +78,9 @@ namespace ASEva.UIEto
             return layout;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置像素布局至面板Content
         /// </summary>

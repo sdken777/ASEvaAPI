@@ -5,6 +5,9 @@ using ASEva.Utility;
 
 namespace ASEva.UICoreWF
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) 通道选择器
     /// </summary>
@@ -18,6 +21,9 @@ namespace ASEva.UICoreWF
             gridSize = (int)(dpiRatio * 22);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置各通道数据是否有效
         /// </summary>
@@ -30,6 +36,9 @@ namespace ASEva.UICoreWF
             DrawBeat.CallerEnd(this);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 通道数量
         /// </summary>
@@ -46,6 +55,9 @@ namespace ASEva.UICoreWF
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 选中通道
         /// </summary>
@@ -62,6 +74,9 @@ namespace ASEva.UICoreWF
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 通道协议，不需要加'@x' 
         /// </summary>

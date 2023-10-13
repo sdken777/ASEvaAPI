@@ -4,11 +4,17 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.4) 方便操作图形对象的扩展
     /// </summary>
     public static class GraphicsExtensions
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置绘图尺度，令所有相关绘制函数的输入尺寸都为logical尺寸
         /// </summary>
@@ -18,6 +24,9 @@ namespace ASEva.UIEto
             g.ScaleTransform(Pixel.Scale);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 调用SetScaleForLogical后，绘制文字需要使用此函数返回的字体
         /// </summary>
@@ -30,6 +39,9 @@ namespace ASEva.UIEto
             else return FontLibrary.GetFont(f.Family, f.Size / Pixel.Scale, f.FontStyle, f.FontDecoration);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.6) 调用SetScaleForLogical后，以默认字体绘制需要使用此函数返回的字体
         /// </summary>
@@ -43,6 +55,9 @@ namespace ASEva.UIEto
             else return FontLibrary.GetFont(f, f.Size / Pixel.Scale);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.12) 指定锚点绘制文本
         /// </summary>

@@ -9,6 +9,9 @@ namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612, CS0649
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 标签热力图数据可视化窗口
     /// </summary>
@@ -39,6 +42,9 @@ namespace ASEva.UIGtk
             builder.Autoconnect(this);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:gtk=2.0.8) 释放相关资源
         /// </summary>

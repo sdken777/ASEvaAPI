@@ -4,11 +4,17 @@ using System.Linq;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.2.2) 绘图时间记录与反馈
     /// </summary>
     public class DrawBeat
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.9) 启用绘图时间记录与反馈（默认不启用）
         /// </summary>
@@ -17,6 +23,9 @@ namespace ASEva.Utility
             enabled = true;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 在调用绘图前调用
         /// </summary>
@@ -40,6 +49,9 @@ namespace ASEva.Utility
             else return false;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 在调用绘图前调用
         /// </summary>
@@ -52,6 +64,9 @@ namespace ASEva.Utility
             else return CallerBegin(target.GetHashCode());
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 在调用绘图后调用
         /// </summary>
@@ -63,6 +78,9 @@ namespace ASEva.Utility
             ctxs[id].InCaller = false;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 在调用绘图后调用
         /// </summary>
@@ -73,6 +91,9 @@ namespace ASEva.Utility
             if (target != null) CallerEnd(target.GetHashCode());
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 在绘图回调函数开始时调用
         /// </summary>
@@ -86,6 +107,9 @@ namespace ASEva.Utility
             if (ctxs[id].CallbackBeginTime == null) ctxs[id].CallbackBeginTime = DateTime.Now;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 在绘图回调函数开始时调用
         /// </summary>
@@ -97,6 +121,9 @@ namespace ASEva.Utility
             if (target != null) CallbackBegin(target.GetHashCode(), category);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 在绘图毁掉函数结束前调用
         /// </summary>
@@ -130,6 +157,9 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 在绘图毁掉函数结束前调用
         /// </summary>
@@ -140,6 +170,9 @@ namespace ASEva.Utility
             if (target != null) CallbackEnd(target.GetHashCode());
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 缩减上下文规模
         /// </summary>
@@ -177,6 +210,9 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取最近3秒回调函数运行平均时间
         /// </summary>
@@ -199,6 +235,9 @@ namespace ASEva.Utility
             return table;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取在caller外的回调函数运行时间，并清空缓存
         /// </summary>
@@ -220,6 +259,9 @@ namespace ASEva.Utility
             return table;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置各绘图对象的绘制时间间隔
         /// </summary>

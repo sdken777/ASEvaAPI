@@ -7,6 +7,9 @@ namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612, CS0649
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 带下划线的蓝色文字
     /// </summary>

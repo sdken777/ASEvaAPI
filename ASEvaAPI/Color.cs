@@ -3,6 +3,9 @@ using ASEva;
 
 namespace ASEva
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 以RGBA四通道描述的颜色（整型）
     /// </summary>

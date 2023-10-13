@@ -5,76 +5,121 @@ using System.Xml;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) Session的meta信息
     /// </summary>
     public class SessionMeta
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 文件路径
         /// </summary>
         public String FilePath { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// Session ID
         /// </summary>
         public DateTime ID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// Session GUID
         /// </summary>
         public String GUID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// Session长度，单位秒
         /// </summary>
         public double? Length { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// CPU时间模型
         /// </summary>
         public CPUTimeModel CPUTimeModel { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 主机Posix时间模型
         /// </summary>
         public PosixTimeModel HostPosixModel { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 卫星Posix时间模型
         /// </summary>
         public PosixTimeModel GNSSPosixModel { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 主机是否与授时服务器同步
         /// </summary>
         public bool HostSync { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// Session的注释说明
         /// </summary>
         public String Comment { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// Session的截取ID，origin表示原始数据
         /// </summary>
         public String Pick { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// Session的截取属性列表
         /// </summary>
         public Dictionary<String, String> PickProperties { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// Session的属性
         /// </summary>
         public Dictionary<string, string> Properties { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 采集Session的软件版本信息（用于回溯）
         /// </summary>
         public Dictionary<string, Version> Versions { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 按本地时间表示的主机Posix时间模型的session开始时间
         /// </summary>
@@ -102,6 +147,9 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 主机Posix时间模型的时间比例
         /// </summary>
@@ -118,6 +166,9 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 按UTC时间表示的卫星Posix时间模型的session开始时间
         /// </summary>
@@ -145,6 +196,9 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 卫星Posix时间模型的时间比例
         /// </summary>
@@ -165,6 +219,9 @@ namespace ASEva.Utility
         {
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 创建meta文件对象（仅创建对象，不写入文件）
         /// </summary>
@@ -207,6 +264,9 @@ namespace ASEva.Utility
             return meta;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 创建meta文件对象（仅创建对象，不写入文件）
         /// </summary>
@@ -249,6 +309,9 @@ namespace ASEva.Utility
             return meta;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 从已有meta文件中读取
         /// </summary>
@@ -461,6 +524,9 @@ namespace ASEva.Utility
             return meta;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 保存meta文件
         /// </summary>

@@ -22,7 +22,7 @@ using BaseHandler = Eto.Wpf.Forms.WpfFrameworkElement<Microsoft.Web.WebView2.Wpf
 
 namespace ASEva.UIWpf
 {
-	public class WebView2Handler : BaseHandler, WebView.IHandler
+	class WebView2Handler : BaseHandler, WebView.IHandler
 	{
 		bool failed;
 		bool webView2Ready;

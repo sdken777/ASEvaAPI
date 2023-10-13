@@ -6,6 +6,9 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.11.3) 方便生成图标的扩展
     /// </summary>

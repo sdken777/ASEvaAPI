@@ -6,6 +6,9 @@ using ASEva.Samples;
 
 namespace ASEva.UICoreWF
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:corewf=2.1.0) 图像对象转换
     /// </summary>

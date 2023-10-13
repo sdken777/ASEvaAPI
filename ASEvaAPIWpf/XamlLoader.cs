@@ -9,6 +9,11 @@ using System.Windows.Navigation;
 
 namespace ASEva.UIWpf
 {
+    /// \~English
+    /// <summary>
+    /// (api:wpf=1.4.0) Load xaml dynamically
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:wpf=1.4.0) 动态加载xaml
     /// </summary>

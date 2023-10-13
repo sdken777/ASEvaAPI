@@ -5,11 +5,17 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.9.0) 沿纵向添加的控件列表
     /// </summary>
     public class FlowLayout : Panel, FlowLayoutCallback
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -22,6 +28,9 @@ namespace ASEva.UIEto
             if (etoControl != null) Content = etoControl;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 在底部添加控件
         /// </summary>
@@ -35,6 +44,9 @@ namespace ASEva.UIEto
             if (backend != null) backend.AddControl(control, logicalHeight);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 在指定序号位置添加控件
         /// </summary>
@@ -54,6 +66,9 @@ namespace ASEva.UIEto
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取控件个数
         /// </summary>
@@ -63,6 +78,9 @@ namespace ASEva.UIEto
             return controls.Count;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定控件的序号位置
         /// </summary>
@@ -73,6 +91,9 @@ namespace ASEva.UIEto
             return controls.FindIndex(c => c.Equals(control));
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定序号位置上的控件
         /// </summary>
@@ -87,6 +108,9 @@ namespace ASEva.UIEto
             else return null;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 移除指定序号位置处的控件
         /// </summary>
@@ -101,6 +125,9 @@ namespace ASEva.UIEto
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 移除所有控件
         /// </summary>
@@ -111,6 +138,9 @@ namespace ASEva.UIEto
             if (backend != null) backend.RemoveAllControls();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置指定序号位置处的控件是否可见
         /// </summary>
@@ -125,6 +155,9 @@ namespace ASEva.UIEto
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 选中指定序号位置处的控件
         /// </summary>
@@ -140,6 +173,9 @@ namespace ASEva.UIEto
             }
         }
         
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取选中控件所在序号位置
         /// </summary>
@@ -150,6 +186,9 @@ namespace ASEva.UIEto
             else return controls.FindIndex(c => c.Control.Equals(selectedControl));
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 新选中控件后触发事件
         /// </summary>

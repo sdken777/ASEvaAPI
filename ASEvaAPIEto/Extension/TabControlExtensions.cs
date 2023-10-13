@@ -4,11 +4,17 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.2) 方便操作选项卡控件的扩展
     /// </summary>
     public static class TabControlExtensions
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加页至选项卡控件
         /// </summary>

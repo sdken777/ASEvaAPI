@@ -4,11 +4,17 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.8.4) 方便操作控件容器的扩展
     /// </summary>
     public static class ContainerExtensions
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 释放控件容器中的所有SkiaView等视图的资源
         /// </summary>

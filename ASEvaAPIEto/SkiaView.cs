@@ -10,6 +10,9 @@ using ASEva.Utility;
 
 namespace ASEva.UIEto
 {
+	/// \~English
+	/// 
+	/// \~Chinese
 	/// <summary>
 	/// (api:eto=2.7.0) SkiaView渲染事件参数
 	/// </summary>
@@ -21,27 +24,42 @@ namespace ASEva.UIEto
 			LogicalSize = logicalSize;
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// Skia画布对象
 		/// </summary>
         public SKCanvas Canvas { get; private set; }
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 画布的逻辑尺寸
 		/// </summary>
 		public Size LogicalSize { get; private set; }
     }
 
+	/// \~English
+	/// 
+	/// \~Chinese
 	/// <summary>
 	/// (api:eto=2.7.0) Skia绘制视图
 	/// </summary>
 	public class SkiaView : Panel, GLCallback
 	{
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 渲染事件
 		/// </summary>
 		public event EventHandler<SkiaRenderEventArgs> Render;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 构造函数
 		/// </summary>
@@ -54,6 +72,9 @@ namespace ASEva.UIEto
 			initContent();
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.8.2) 构造函数
 		/// </summary>
@@ -67,6 +88,9 @@ namespace ASEva.UIEto
 			initContent();
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.8.3) 构造函数
 		/// </summary>
@@ -81,6 +105,9 @@ namespace ASEva.UIEto
 			initContent();
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.8.7) 构造函数
 		/// </summary>
@@ -96,6 +123,9 @@ namespace ASEva.UIEto
 			initContent();
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.9.4) 构造函数
 		/// </summary>
@@ -112,6 +142,9 @@ namespace ASEva.UIEto
 			initContent();
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 关闭视图，释放资源
 		/// </summary>
@@ -139,6 +172,9 @@ namespace ASEva.UIEto
 			closed = true;
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 提交新的渲染请求
 		/// </summary>
@@ -160,11 +196,17 @@ namespace ASEva.UIEto
 			}
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 底层的OpenGL上下文信息 (null表示不使用或还未初始化完成)
 		/// </summary>
 		public GLContextInfo? ContextInfo { get; private set; }
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 渲染帧率（统计最近3秒）
 		/// </summary>
@@ -181,6 +223,9 @@ namespace ASEva.UIEto
 			}
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.8.7) 是否支持被其他控件覆盖
 		/// </summary>

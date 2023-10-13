@@ -4,11 +4,17 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.4.0) 像素单位转换
     /// </summary>
     public class Pixel
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 逻辑像素值转原始像素值
         /// </summary>
@@ -17,6 +23,9 @@ namespace ASEva.UIEto
             return (int)(logicalValue * Scale);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 原始像素值转逻辑像素值
         /// </summary>
@@ -25,6 +34,9 @@ namespace ASEva.UIEto
             return (int)(rawValue / Scale);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 逻辑点坐标转原始点坐标
         /// </summary>
@@ -33,6 +45,9 @@ namespace ASEva.UIEto
             return new Point((int)(logicalPoint.X * Scale), (int)(logicalPoint.Y * Scale));
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 原始点坐标转逻辑点坐标
         /// </summary>
@@ -41,6 +56,9 @@ namespace ASEva.UIEto
             return new Point((int)(rawPoint.X / Scale), (int)(rawPoint.Y / Scale));
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 逻辑尺寸转原始尺寸
         /// </summary>
@@ -49,6 +67,9 @@ namespace ASEva.UIEto
             return new Size((int)(logicalSize.Width * Scale), (int)(logicalSize.Height * Scale));
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 原始尺寸转逻辑尺寸
         /// </summary>
@@ -57,6 +78,9 @@ namespace ASEva.UIEto
             return new Size((int)(rawSize.Width / Scale), (int)(rawSize.Height / Scale));
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 逻辑像素与原始像素(即UI框架下的像素，非物理像素)的换算比
         /// </summary>
@@ -78,6 +102,9 @@ namespace ASEva.UIEto
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.9.7) 逻辑像素与物理像素是否为1:1
         /// </summary>

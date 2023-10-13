@@ -5,6 +5,9 @@ namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 获取鼠标在控件内坐标的扩展方法
     /// </summary>

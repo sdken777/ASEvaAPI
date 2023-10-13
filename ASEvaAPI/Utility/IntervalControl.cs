@@ -2,11 +2,17 @@
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.11.2) 执行操作的间隔控制
     /// </summary>
     public class IntervalControl
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -20,6 +26,9 @@ namespace ASEva.Utility
             lastOperated = immediate ? new DateTime(0) : DateTime.Now;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 检查是否应执行操作
         /// </summary>
@@ -38,6 +47,9 @@ namespace ASEva.Utility
             return true;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 手动模式下开启下一轮计时
         /// </summary>
@@ -46,6 +58,9 @@ namespace ASEva.Utility
             if (lastOperated == null) lastOperated = DateTime.Now;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 重置间隔控制
         /// </summary>

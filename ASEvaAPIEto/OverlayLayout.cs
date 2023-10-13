@@ -4,6 +4,9 @@ using Eto.Forms;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.4) 可覆盖的布局
     /// </summary>
@@ -14,6 +17,9 @@ namespace ASEva.UIEto
             SizeChanged += this_SizeChanged;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加控件
         /// </summary>
@@ -48,6 +54,9 @@ namespace ASEva.UIEto
             return control;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 移除控件
         /// </summary>
@@ -58,6 +67,9 @@ namespace ASEva.UIEto
             Remove(control);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 更新控件位置（一般在手动修改控件大小后调用）
         /// </summary>

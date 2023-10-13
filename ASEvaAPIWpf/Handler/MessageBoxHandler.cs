@@ -14,7 +14,7 @@ using swm = System.Windows.Media;
 
 namespace ASEva.UIWpf
 {
-	public class MessageBoxHandler : WidgetHandler<Widget>, MessageBox.IHandler
+	class MessageBoxHandler : WidgetHandler<Widget>, MessageBox.IHandler
 	{
 		public string Text { get; set; }
 
@@ -144,17 +144,6 @@ namespace ASEva.UIWpf
 		}
 	}
 
-	/// <devdoc>
-	///     This class is intended to use with the C# 'using' statement in
-	///     to activate an activation context for turning on visual theming at
-	///     the beginning of a scope, and have it automatically deactivated
-	///     when the scope is exited.
-	/// </devdoc>
-	/// <summary>
-	/// Enables visual styles for common system dialogs (e.g message box).
-	/// Original source from: http://support.microsoft.com/kb/830033/en-us
-	/// Curtis Wensley: Modified for 64-bit compatibility by using an IntPtr instead of uint for the cookie
-	/// </summary>
 	[SuppressUnmanagedCodeSecurity]
 	class EnableThemingInScope : IDisposable
 	{

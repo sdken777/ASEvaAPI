@@ -4,11 +4,17 @@ using System.Reflection;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 资源读取器
     /// </summary>
     public class ResourceLoader
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 按指定名称读取资源
         /// </summary>
@@ -26,6 +32,9 @@ namespace ASEva.Utility
             return data;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.0.8) 按指定名称读取资源（UTF-8文本），并转为文本
         /// </summary>

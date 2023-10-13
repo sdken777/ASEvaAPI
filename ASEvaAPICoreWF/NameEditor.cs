@@ -3,6 +3,9 @@ using System.Windows.Forms;
 
 namespace ASEva.UICoreWF
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) 名称编辑控件
     /// </summary>

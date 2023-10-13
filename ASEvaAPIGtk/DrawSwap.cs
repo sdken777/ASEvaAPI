@@ -5,11 +5,17 @@ using ASEva.Utility;
 
 namespace ASEva.UIGtk
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.8) 预绘制对象
     /// </summary>
     public class DrawSwap
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 创建预绘制对象
         /// </summary>
@@ -22,6 +28,9 @@ namespace ASEva.UIGtk
             widget.Drawn += widget_Drawn;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 刷新，其中会调用Paint
         /// </summary>
@@ -48,6 +57,9 @@ namespace ASEva.UIGtk
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 释放相关资源
         /// </summary>

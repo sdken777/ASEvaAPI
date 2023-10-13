@@ -5,6 +5,11 @@ using ASEva.Samples;
 
 namespace ASEva.UIWpf
 {
+    /// \~English
+    /// <summary>
+    /// (api:wpf=1.0.0) Conversion of image object
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:wpf=1.0.0) 图像对象转换
     /// </summary>

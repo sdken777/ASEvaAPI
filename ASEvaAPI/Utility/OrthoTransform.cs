@@ -2,42 +2,66 @@
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 经纬度坐标
     /// </summary>
     public struct LocPoint
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 经度
         /// </summary>
         public double Lng { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 纬度
         /// </summary>
         public double Lat { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 正交坐标系参数
     /// </summary>
     public class OrthoParameters
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 原点经度
         /// </summary>
         public double OrthoCenterLng { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 原点纬度
         /// </summary>
         public double OrthoCenterLat { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 球半径
         /// </summary>
         public double OrthoRadius { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 构造函数，默认原点为(0, 0)，默认球半径为地球半径
         /// </summary>
@@ -49,11 +73,17 @@ namespace ASEva.Utility
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 正交坐标系变换
     /// </summary>
     public class OrthoTransform
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -69,6 +99,9 @@ namespace ASEva.Utility
             lng0Rad = param.OrthoCenterLng * deg2rad;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 全球坐标系转正交坐标系
         /// </summary>
@@ -84,6 +117,9 @@ namespace ASEva.Utility
             return new FloatPoint((float)x, (float)y);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 正交坐标系转全球坐标系
         /// </summary>

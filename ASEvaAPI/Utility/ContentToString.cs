@@ -2,6 +2,9 @@
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 递归的将对象信息转化为字符串
     /// </summary>

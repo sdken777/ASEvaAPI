@@ -26,7 +26,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 5, 4, 0); // Update log / 更新记录: 修正MessageBox的caption为null时显示"错误"问题
+            return new Version(1, 5, 4, 1); // Update log / 更新记录: 修正部分Handler为internal
         }
     }
 }

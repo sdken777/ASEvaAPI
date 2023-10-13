@@ -6,6 +6,9 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.3) 纯文字的表格控件
     /// </summary>
@@ -17,6 +20,9 @@ namespace ASEva.UIEto
             CellFormatting += TextTableView_CellFormatting;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加一列（需要在添加行之前进行）
         /// </summary>
@@ -31,6 +37,9 @@ namespace ASEva.UIEto
             Columns.Add(column);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.10) 获取行数
         /// </summary>
@@ -42,6 +51,9 @@ namespace ASEva.UIEto
             return (DataStore as List<GridItem>).Count;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加一行
         /// </summary>
@@ -71,6 +83,9 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.2) 添加多行
         /// </summary>
@@ -104,6 +119,9 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 移除一行
         /// </summary>
@@ -124,6 +142,9 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.2) 移除多行
         /// </summary>
@@ -154,6 +175,9 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.10) 移除所有行
         /// </summary>
@@ -170,6 +194,9 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取某格文字
         /// </summary>
@@ -190,6 +217,9 @@ namespace ASEva.UIEto
             return values[columnIndex].ToString();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置某格文字
         /// </summary>
@@ -213,6 +243,9 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.3) 设置某格文字颜色
         /// </summary>
@@ -226,6 +259,9 @@ namespace ASEva.UIEto
             updateColor(rowIndex, columnIndex);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.3) 设置某格背景颜色
         /// </summary>

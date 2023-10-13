@@ -3,11 +3,17 @@ using System.Collections.Generic;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 样本解析，自动将 ASEva.GeneralSample 转化为特化样本
     /// </summary>
     public class SampleParser
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 注册需要解析的 ASEva.GeneralSample 协议
         /// </summary>
@@ -33,6 +39,9 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 解析样本
         /// </summary>

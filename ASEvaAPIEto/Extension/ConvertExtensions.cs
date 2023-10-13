@@ -5,6 +5,9 @@ using SkiaSharp;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.8.14) 方便进行结构体转换操作的扩展
     /// </summary>

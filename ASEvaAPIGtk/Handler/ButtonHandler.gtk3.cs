@@ -8,12 +8,9 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
-	/// <summary>
-	/// Button handler.
-	/// </summary>
 	/// <copyright>(c) 2012-2020 by Curtis Wensley</copyright>
 	/// <license type="BSD-3">See LICENSE for full terms</license>
-	public class ButtonHandler<TControl, TWidget, TCallback> : GtkControl<TControl, TWidget, TCallback>, Button.IHandler
+	class ButtonHandler<TControl, TWidget, TCallback> : GtkControl<TControl, TWidget, TCallback>, Button.IHandler
 		where TControl : Gtk.Button
 		where TWidget : Button
 		where TCallback : Button.ICallback

@@ -5,11 +5,17 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.10.0) 简易树状视图
     /// </summary>
     public class SimpleTreeView : Panel, SimpleTreeViewCallback
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -22,6 +28,9 @@ namespace ASEva.UIEto
             if (etoControl != null) Content = etoControl;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置树状视图内容
         /// </summary>
@@ -32,6 +41,9 @@ namespace ASEva.UIEto
             if (backend != null) backend.SetModel(rootNodes, sort);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 批量更新内容节点
         /// </summary>
@@ -41,6 +53,9 @@ namespace ASEva.UIEto
             if (backend != null) backend.UpdateNodes(tasks);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取当前选中条目的键对象
         /// </summary>
@@ -49,6 +64,9 @@ namespace ASEva.UIEto
             return backend == null ? null : backend.GetSelectedKey();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.10.1) 选中键对象对应的条目
         /// </summary>
@@ -58,11 +76,17 @@ namespace ASEva.UIEto
             if (backend != null) backend.SelectItem(key);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 选中条目切换事件
         /// </summary>
         public event EventHandler SelectedItemChanged;
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 选中条目双击或回车事件
         /// </summary>
@@ -83,36 +107,57 @@ namespace ASEva.UIEto
 		private SimpleTreeViewBackend backend;
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.10.0) 简易树状视图的内容节点
     /// </summary>
     public class SimpleTreeNode
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 条目的键对象
         /// </summary>
         public object Key { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 显示文本内容
         /// </summary>
         public String Text { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 文本颜色，Colors.Transparent表示使用默认颜色
         /// </summary>
         public Color TextColor { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 条目背景颜色，Colors.Transparent表示使用默认颜色
         /// </summary>
         public Color BackgroundColor { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 子节点集合
         /// </summary>
         public List<SimpleTreeNode> ChildNodes { get { return childNodes; } }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 子节点是否展开显示
         /// </summary>
@@ -121,21 +166,33 @@ namespace ASEva.UIEto
         private List<SimpleTreeNode> childNodes = new List<SimpleTreeNode>();
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.10.0) 更新简易树状视图内容节点的任务
     /// </summary>
     public class SimpleTreeNodeUpdateTask
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 条目的键对象
         /// </summary>
         public object Key { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 文本颜色，null表示不更新，Colors.Transparent表示设置为默认颜色
         /// </summary>
         public Color? TextColor { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 条目背景颜色，null表示不更新，Colors.Transparent表示设置为默认颜色
         /// </summary>

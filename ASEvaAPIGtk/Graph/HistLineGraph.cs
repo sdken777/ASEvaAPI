@@ -11,6 +11,9 @@ namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612, CS0649
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 柱状折线图可视化控件
     /// </summary>
@@ -41,6 +44,9 @@ namespace ASEva.UIGtk
             builder.Autoconnect(this);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:gtk=2.0.8) 释放相关资源
         /// </summary>

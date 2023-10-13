@@ -7,11 +7,17 @@ namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 事件框辅助类
     /// </summary>
     public class EventBoxHelper
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加事件框
         /// </summary>
@@ -35,6 +41,9 @@ namespace ASEva.UIGtk
             eventBox.ScrollEvent += eventBox_Scroll;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:gtk=2.5.4) 事件是否允许下层控件接收，默认false
         /// </summary>

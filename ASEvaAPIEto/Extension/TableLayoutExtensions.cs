@@ -4,11 +4,17 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.2) 方便操作表布局的扩展
     /// </summary>
     public static class TableLayoutExtensions
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 表布局添加一行
         /// </summary>
@@ -22,6 +28,9 @@ namespace ASEva.UIEto
             return row;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加空间延横向撑满
         /// </summary>
@@ -31,6 +40,9 @@ namespace ASEva.UIEto
             tableRow.Cells.Add(new TableCell(new Panel(), true));
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加文字标签至表布局的行
         /// </summary>
@@ -50,6 +62,9 @@ namespace ASEva.UIEto
             return label;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加文字标签至表布局的行
         /// </summary>
@@ -75,6 +90,9 @@ namespace ASEva.UIEto
             return label;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加文字按键至表布局的行
         /// </summary>
@@ -99,6 +117,9 @@ namespace ASEva.UIEto
             return button;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.4) 添加图像按键至表布局的行
         /// </summary>
@@ -134,6 +155,9 @@ namespace ASEva.UIEto
             return button;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加链接式按键至表布局的行
         /// </summary>
@@ -154,6 +178,9 @@ namespace ASEva.UIEto
             return button;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加多选框至表布局的行
         /// </summary>
@@ -175,6 +202,9 @@ namespace ASEva.UIEto
             return checkBox;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加单选框组至表布局的行
         /// </summary>
@@ -202,6 +232,9 @@ namespace ASEva.UIEto
             return radioButtonList;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加组合框至表布局的行
         /// </summary>
@@ -228,6 +261,9 @@ namespace ASEva.UIEto
             return comboBox;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加分组框至表布局的行
         /// </summary>
@@ -252,6 +288,9 @@ namespace ASEva.UIEto
             return groupBox;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加控件至表布局的行
         /// </summary>
@@ -273,6 +312,9 @@ namespace ASEva.UIEto
             return control;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加横向堆叠布局至表布局的行
         /// </summary>
@@ -294,6 +336,9 @@ namespace ASEva.UIEto
             return layout;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加纵向堆叠布局至表布局的行
         /// </summary>
@@ -315,6 +360,9 @@ namespace ASEva.UIEto
             return layout;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加表布局至表布局的行
         /// </summary>

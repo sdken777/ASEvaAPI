@@ -20,11 +20,17 @@ namespace ASEva.UIEto
         bool ShouldPassParent();
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.0) Eto应用程序
     /// </summary>
     public class App
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 应用程序初始化
         /// </summary>
@@ -40,6 +46,9 @@ namespace ASEva.UIEto
             return application != null;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.7) 以指定UI框架初始化应用程序
         /// </summary>
@@ -60,6 +69,9 @@ namespace ASEva.UIEto
             return application != null;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 运行应用程序
         /// </summary>
@@ -73,6 +85,9 @@ namespace ASEva.UIEto
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.7) 返回当前运行的OS代号，与 ASEva.APIInfo.GetRunningOS 结果一致
         /// </summary>
@@ -82,6 +97,9 @@ namespace ASEva.UIEto
             return ASEva.APIInfo.GetRunningOS();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.7) 返回当前运行的UI框架代号
         /// </summary>
@@ -91,6 +109,9 @@ namespace ASEva.UIEto
             return runningUI;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.0) 返回当前运行UI的后端代号
         /// </summary>
@@ -100,6 +121,9 @@ namespace ASEva.UIEto
             return uiBackend;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.11.0) 返回当前运行UI后端使用的第三方软件版权声明
         /// </summary>
@@ -109,6 +133,9 @@ namespace ASEva.UIEto
             return handler == null ? null : handler.GetThirdPartyNotices();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.3.4) 返回当前WebView使用的后台框架代号
         /// </summary>
@@ -118,6 +145,9 @@ namespace ASEva.UIEto
             return webViewBackend;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 应用程序对象
         /// </summary>
@@ -126,6 +156,9 @@ namespace ASEva.UIEto
             get { return application; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.6) 获取默认字体
         /// </summary>
@@ -154,6 +187,9 @@ namespace ASEva.UIEto
             return SystemFonts.Default(targetSize);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.1.0) 获取应用程序的工作路径
         /// </summary>
@@ -179,6 +215,9 @@ namespace ASEva.UIEto
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.0) 将平台特化控件转化为Eto控件
         /// </summary>
@@ -190,6 +229,9 @@ namespace ASEva.UIEto
             return handler.ConvertControlToEto(platformControl);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.0) 将Eto控件转化为平台特化控件
         /// </summary>
@@ -201,6 +243,9 @@ namespace ASEva.UIEto
             return handler.ConvertControlToPlatform(etoControl);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.0) 弹出对话框
         /// </summary>
@@ -219,6 +264,9 @@ namespace ASEva.UIEto
             return true;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.11.2) 调用ShowDialog时建议通过此函数传parent参数
         /// </summary>
@@ -230,6 +278,9 @@ namespace ASEva.UIEto
             else return parent;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.11.2) 调用ShowDialog时建议通过此函数传parent参数
         /// </summary>

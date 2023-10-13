@@ -3,11 +3,17 @@ using System.Xml;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) XML相关功能类
     /// </summary>
     public class Xml
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 创建一个包含根节点的空XML文档
         /// </summary>

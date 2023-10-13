@@ -8,6 +8,9 @@ using ASEva.Utility;
 
 namespace ASEva.UICoreWF
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) 散点图数据可视化窗口
     /// </summary>

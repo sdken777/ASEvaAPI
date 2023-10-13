@@ -7,23 +7,6 @@ namespace ASEva.UICoreWF.DragDropLib
 	using System.Runtime.InteropServices;
 	using System.Runtime.InteropServices.ComTypes;
 
-	/// <summary>
-	/// Implements the COM version of IDataObject including SetData.
-	/// </summary>
-	/// <remarks>
-	/// <para>Use this object when using shell (or other unmanged) features
-	/// that utilize the clipboard and/or drag and drop.</para>
-	/// <para>The System.Windows.DataObject (.NET 3.0) and
-	/// System.Windows.Forms.DataObject do not support SetData from their COM
-	/// IDataObject interface implementation.</para>
-	/// <para>To use this object with .NET drag and drop, create an instance
-	/// of System.Windows.DataObject (.NET 3.0) or System.Window.Forms.DataObject
-	/// passing an instance of DataObject as the only constructor parameter. For
-	/// example:</para>
-	/// <code>
-	/// System.Windows.DataObject data = new System.Windows.DataObject(new DragDropLib.DataObject());
-	/// </code>
-	/// </remarks>
 	[ComVisible(true)]
 	class DataObject : IDataObject, IDisposable
 	{

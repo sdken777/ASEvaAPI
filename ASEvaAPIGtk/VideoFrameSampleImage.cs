@@ -5,11 +5,17 @@ using ASEva.Samples;
 
 namespace ASEva.UIGtk
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) ASEva.Samples.VideoFrameSample 中的图像对象
     /// </summary>
     public class VideoFrameSampleImage
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 按指定宽高创建无alpha通道的图像
         /// </summary>
@@ -23,6 +29,9 @@ namespace ASEva.UIGtk
             bgrInverted = false;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:gtk=2.1.0) 绑定通用图像，共享数据
         /// </summary>
@@ -40,6 +49,9 @@ namespace ASEva.UIGtk
             return output;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图像宽度
         /// </summary>
@@ -48,6 +60,9 @@ namespace ASEva.UIGtk
             get { return w; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图像高度
         /// </summary>
@@ -56,6 +71,9 @@ namespace ASEva.UIGtk
             get { return h; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 一行数据的字节数
         /// </summary>
@@ -64,6 +82,9 @@ namespace ASEva.UIGtk
             get { return rowBytes; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图像数据
         /// </summary>
@@ -72,6 +93,9 @@ namespace ASEva.UIGtk
             get { return data; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:gtk=2.1.0) 是否含alpha通道
         /// </summary>
@@ -80,6 +104,9 @@ namespace ASEva.UIGtk
             get { return withAlpha; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:gtk=2.5.6) BGR是否逆序
         /// </summary>
@@ -88,6 +115,9 @@ namespace ASEva.UIGtk
             get { return bgrInverted; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 转换为Gdk.Pixbuf对象
         /// </summary>
@@ -173,6 +203,9 @@ namespace ASEva.UIGtk
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 转换为Cairo.ImageSurface对象，使用完毕后需调用Dispose方法进行释放
         /// </summary>

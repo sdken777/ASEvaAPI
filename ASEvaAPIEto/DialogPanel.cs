@@ -4,21 +4,33 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.8.0) 对话框主面板（使用 ASEva.UIEto.App.RunDialog 弹出对话框）
     /// </summary>
     public class DialogPanel : Panel
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 对话框图标
         /// </summary>
         public Icon Icon { get; protected set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 对话框标题
         /// </summary>
         public String Title { get; protected set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 初始化为固定大小模式
         /// </summary>
@@ -35,6 +47,9 @@ namespace ASEva.UIEto
             this.withBorder = withBorder;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 初始化为可变大小模式
         /// </summary>
@@ -54,6 +69,9 @@ namespace ASEva.UIEto
             this.withBorder = true;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 关闭对话框
         /// </summary>
@@ -62,6 +80,9 @@ namespace ASEva.UIEto
             if (OnDialogClose != null) OnDialogClose(this, null);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 对话框即将关闭回调函数
         /// </summary>
@@ -69,52 +90,82 @@ namespace ASEva.UIEto
         {
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 布尔类型的对话框运行结果
         /// </summary>
         public bool BoolResult { get; protected set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 整数类型的对话框运行结果
         /// </summary>
         public int IntResult { get; protected set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 浮点类型的对话框运行结果
         /// </summary>
         public double DoubleResult { get; protected set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 字符串类型的对话框运行结果
         /// </summary>
         public String StringResult { get; protected set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 任意类型的对话框运行结果
         /// </summary>
         public object ObjectResult { get; protected set; }
 
+        /// \~English
+        /// Dialog mode
+        /// \~Chinese
         /// <summary>
         /// 对话框模式
         /// </summary>
         public enum DialogMode
         {
+            /// \~English
+            /// Not initialized
+            /// \~Chinese
             /// <summary>
             /// 未初始化
             /// </summary>
             Invalid,
 
+            /// \~English
+            /// Fixed size
+            /// \~Chinese
             /// <summary>
             /// 固定大小模式
             /// </summary>
             FixMode,
 
+            /// \~English
+            /// Resizable
+            /// \~Chinese
             /// <summary>
             /// 可变大小模式
             /// </summary>
             ResizableMode,
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取对话框模式
         /// </summary>
@@ -123,6 +174,9 @@ namespace ASEva.UIEto
             get { return mode; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取对话框最小逻辑尺寸（固定大小模式下即该固定逻辑尺寸）
         /// </summary>
@@ -131,6 +185,9 @@ namespace ASEva.UIEto
             get { return new Size(minWidth, minHeight); }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取对话框初始逻辑尺寸
         /// </summary>
@@ -139,6 +196,9 @@ namespace ASEva.UIEto
             get { return new Size(defaultWidth, defaultHeight); }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取是否带窗口边框
         /// </summary>

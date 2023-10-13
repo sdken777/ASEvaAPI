@@ -5,11 +5,17 @@ using System.Security.Cryptography;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) MD5计算
     /// </summary>
     public class MD5Calculator
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 计算文件MD5
         /// </summary>
@@ -35,6 +41,9 @@ namespace ASEva.Utility
             return null;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 计算二进制数据块MD5
         /// </summary>

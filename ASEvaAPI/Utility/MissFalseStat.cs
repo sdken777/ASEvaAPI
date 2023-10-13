@@ -2,6 +2,9 @@
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 漏检/误检结果
     /// </summary>
@@ -11,6 +14,9 @@ namespace ASEva.Utility
         public bool falseOccurred;
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 漏检/误检分析与统计
     /// </summary>

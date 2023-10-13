@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace ASEva.Graph
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 图表数据的范围区间内验证方式
     /// </summary>

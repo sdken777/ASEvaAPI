@@ -5,6 +5,9 @@ using System.IO;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 场景csv文件读写
     /// </summary>

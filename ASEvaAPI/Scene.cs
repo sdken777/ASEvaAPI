@@ -5,32 +5,53 @@ using System.Text;
 
 namespace ASEva
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 场景片段描述
     /// </summary>
     public class SceneData
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 场景ID
         /// </summary>
         public String SceneID { get; set; }
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 场景所属session ID
         /// </summary>
         public DateTime BeginBase { get; set; }
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 场景开始时间（在该session中的时间偏置）
         /// </summary>
         public double BeginOffset { get; set; }
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 场景时间长度
         /// </summary>
         public double TimeLength { get; set; }
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 场景属性列表
         /// </summary>
         public String[] PropertyValues { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 默认构造函数
         /// </summary>
@@ -39,6 +60,9 @@ namespace ASEva
             PropertyValues = new string[0];
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 从另一个对象复制
         /// </summary>

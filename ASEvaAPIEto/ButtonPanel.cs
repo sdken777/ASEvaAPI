@@ -4,13 +4,19 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
-    /// (api:eto=2.3.3) 按钮面板
+    /// (api:eto=2.3.3) 面板式按钮
     /// </summary>
     public class ButtonPanel : Panel
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
-        /// 初始化文字按钮面板
+        /// 初始化面板式文字按钮
         /// </summary>
         /// <param name="text">文字</param>
         /// <param name="logicalPadding">按钮边框与文字的间距</param>
@@ -22,8 +28,11 @@ namespace ASEva.UIEto
             initialize();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
-        /// 初始化图像按钮面板
+        /// 初始化面板式图像按钮
         /// </summary>
         /// <param name="image">图像</param>
         /// <param name="logicalPadding">按钮边框与文字的间距</param>
@@ -35,6 +44,9 @@ namespace ASEva.UIEto
             initialize();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.17) 更新图像
         /// </summary>
@@ -49,11 +61,17 @@ namespace ASEva.UIEto
             imageView.Image = image;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 点击按钮事件
         /// </summary>
         public event EventHandler Click;
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 默认状态下的背景颜色（默认为Colors.Transparent）
         /// </summary>
@@ -68,6 +86,9 @@ namespace ASEva.UIEto
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 鼠标在按钮范围内的背景颜色（默认为Colors.LightSteelBlue）
         /// </summary>
@@ -82,6 +103,9 @@ namespace ASEva.UIEto
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 鼠标按下后的背景颜色（默认为Colors.SteelBlue）
         /// </summary>
@@ -96,6 +120,9 @@ namespace ASEva.UIEto
             }
         }
         
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 文字颜色（默认为Colors.Black）
         /// </summary>
@@ -113,6 +140,9 @@ namespace ASEva.UIEto
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.11) 提示文字
         /// </summary>

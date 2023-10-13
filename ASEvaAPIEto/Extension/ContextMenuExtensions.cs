@@ -5,11 +5,17 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.3) 方便操作右键菜单的扩展
     /// </summary>
     public static class ContextMenuExtensions
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.8) 设置面板右键菜单
         /// </summary>
@@ -30,6 +36,9 @@ namespace ASEva.UIEto
             return menu;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加分割线
         /// </summary>
@@ -39,6 +48,9 @@ namespace ASEva.UIEto
             menu.Items.Add(new SeparatorMenuItem());
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.4) 添加按键项
         /// </summary>
@@ -55,6 +67,9 @@ namespace ASEva.UIEto
             return item;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加多选项
         /// </summary>
@@ -69,6 +84,9 @@ namespace ASEva.UIEto
             return item;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加一组单选项
         /// </summary>
@@ -91,6 +109,9 @@ namespace ASEva.UIEto
             return list.ToArray();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.10) 在子菜单中添加分割线
         /// </summary>
@@ -100,6 +121,9 @@ namespace ASEva.UIEto
             subMenu.Items.Add(new SeparatorMenuItem());
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.10) 在子菜单中添加按键项
         /// </summary>
@@ -116,6 +140,9 @@ namespace ASEva.UIEto
             return item;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.10) 在子菜单中添加多选项
         /// </summary>
@@ -130,6 +157,9 @@ namespace ASEva.UIEto
             return item;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.10) 在子菜单中添加一组单选项
         /// </summary>

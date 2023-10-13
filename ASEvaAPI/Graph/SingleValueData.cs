@@ -2,11 +2,17 @@
 
 namespace ASEva.Graph
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 单值数据
     /// </summary>
     public class SingleValueData : GraphData
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 创建图表定义（不带数据验证）
         /// </summary>
@@ -17,6 +23,9 @@ namespace ASEva.Graph
             return CreateDefinitionWithValidation(title, null);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 创建带数据验证的图表定义
         /// </summary>
@@ -41,6 +50,9 @@ namespace ASEva.Graph
             return def;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置值（不推荐操作，将会导致合并结果异常）
         /// </summary>
@@ -50,6 +62,9 @@ namespace ASEva.Graph
             Data[0, 0] = val;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加值
         /// </summary>
@@ -60,6 +75,9 @@ namespace ASEva.Graph
             else Data[0, 0] += val;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 取得值
         /// </summary>

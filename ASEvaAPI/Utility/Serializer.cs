@@ -6,11 +6,17 @@ using System.Runtime.Serialization.Json;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) XML/Json的对象读写与文件读写
     /// </summary>
     public class Serializer
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 对象转XML字符串
         /// </summary>
@@ -32,6 +38,9 @@ namespace ASEva.Utility
             catch (Exception) { return null; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// XML字符串转对象
         /// </summary>
@@ -48,6 +57,9 @@ namespace ASEva.Utility
             catch (Exception) { return null; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 对象写入XML文件
         /// </summary>
@@ -64,6 +76,9 @@ namespace ASEva.Utility
             catch (Exception) { return false; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 从XML文件读取对象
         /// </summary>
@@ -80,6 +95,9 @@ namespace ASEva.Utility
             catch (Exception) { return null; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 对象转JSON字符串
         /// </summary>
@@ -101,6 +119,9 @@ namespace ASEva.Utility
             catch (Exception) { return null; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// JSON字符串转对象
         /// </summary>
@@ -117,6 +138,9 @@ namespace ASEva.Utility
             catch (Exception) { return null; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 对象写入JSON文件
         /// </summary>
@@ -133,6 +157,9 @@ namespace ASEva.Utility
             catch (Exception) { return false; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 从JSON文件读取对象
         /// </summary>

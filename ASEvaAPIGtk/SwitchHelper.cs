@@ -4,6 +4,9 @@ using Gtk;
 
 namespace ASEva.UIGtk
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 开关框辅助类
     /// </summary>

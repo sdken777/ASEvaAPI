@@ -4,6 +4,9 @@ using ASEva.Samples;
 
 namespace ASEva
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 尺寸大小（整型）
     /// </summary>
@@ -19,6 +22,9 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 尺寸大小（浮点型）
     /// </summary>
@@ -34,6 +40,9 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 点坐标（整型）
     /// </summary>
@@ -49,6 +58,9 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 点坐标（浮点型）
     /// </summary>
@@ -64,6 +76,9 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 矩形（整型）
     /// </summary>
@@ -118,6 +133,9 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 矩形（浮点型）
     /// </summary>
@@ -172,386 +190,707 @@ namespace ASEva
         }
     }
 
+    /// \~English
     /// <summary>
-    /// (api:app=2.0.0) ASEva当前的运行状态，调用 ASEva.Agency.GetAppStatus 获取
+    /// (api:app=2.0.0) Current status of application, call ASEva.Agency.GetAppStatus to get
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=2.0.0) 应用当前的运行状态，调用 ASEva.Agency.GetAppStatus 获取
     /// </summary>
     public enum ApplicationStatus
     {
+        /// \~English
+        /// <summary>
+        /// Idle
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 空闲
         /// </summary>
         Idle,
+
+        /// \~English
+        /// <summary>
+        /// Running session
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 运行session中
         /// </summary>
         Running,
+
+        /// \~English
+        /// <summary>
+        /// Starting session
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 启动session中
         /// </summary>
         Starting,
+
+        /// \~English
+        /// <summary>
+        /// Stopping session
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 停止session中
         /// </summary>
         Stopping,
+
+        /// \~English
+        /// <summary>
+        /// Running standalone task
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 运行独立任务中
         /// </summary>
         Tasking,
     }
 
+    /// \~English
     /// <summary>
-    /// (api:app=2.0.0) ASEva当前的运行模式，调用 ASEva.Agency.GetAppMode 获取
+    /// (api:app=2.0.0) Current mode of application, call ASEva.Agency.GetAppMode to get
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=2.0.0) 应用当前的运行模式，调用 ASEva.Agency.GetAppMode 获取
     /// </summary>
     public enum ApplicationMode
     {
+        /// \~English
+        /// <summary>
+        /// Online acquisition mode
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 在线采集模式
         /// </summary>
         Online,
+
+        /// \~English
+        /// <summary>
+        /// Offline processing mode
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 离线处理模式
         /// </summary>
         Offline,
+
+        /// \~English
+        /// <summary>
+        /// Offline replay mode
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 离线回放模式
         /// </summary>
         Replay,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.10.0) Remove acquisition mode
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.10.0) 远程采集模式
         /// </summary>
         Remote,
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Log level, as the input argument of ASEva.Agency.Log
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 清单信息等级，为 ASEva.Agency.Log 函数的输入参数
     /// </summary>
     public enum LogLevel
     {
+        /// \~English
+        /// <summary>
+        /// Info, generally shown in green
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 信息，绿色显示
         /// </summary>
         Info,
+
+        /// \~English
+        /// <summary>
+        /// Warning, generally shown in orange
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 警告，橙色显示
         /// </summary>
         Warning,
+
+        /// \~English
+        /// <summary>
+        /// Error, generally shown in red
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 错误，红色显示
         /// </summary>
         Error,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 当前缓存的数据在时间线上的范围，调用 ASEva.Agency.GetBufferRange 获取
     /// </summary>
     public struct BufferRange
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 缓存数据时间范围的下沿（最早），单位秒
         /// </summary>
         public double begin;
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 缓存数据时间范围的下沿（最迟），单位秒
         /// </summary>
         public double end;
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 用于发送的总线报文数据，可调用 ASEva.Agency.SendBusMessage 进行报文发送
     /// </summary>
     public class BusMessage
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 总线设备通道序号（1~16），报文将在对应硬件上发送
         /// </summary>
         public uint Channel { get; set; }
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 报文ID
         /// </summary>
         public uint ID { get; set; }
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 报文数据
         /// </summary>
         public byte[] Data { get; set; }
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 报文发送周期，单位毫秒（至少为10），若设为null则只发送一次
         /// </summary>
         public uint? MillisecondInterval { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 报文配置，作为 ASEva.Agency.BindMessageSelector 参数传入
     /// </summary>
     public class MessageConfig
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 报文的全局唯一ID，为xxx.yyy:zzz格式。其中xxx.yyy为协议文件名，如vehicle.dbc，zzz为报文ID
         /// </summary>
         public String MessageID { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 信号配置，作为 ASEva.Agency.BindSignalSelector 参数传入
     /// </summary>
     public class SignalConfig
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 主信号的全局唯一ID，为xxx:yyy:zzz格式。其中xxx为协议文件名或信号分类，yyy为报文ID或信号子分类，zzz为信号名称
         /// </summary>
         public String SignalID { get; set; }
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 符号位信号的全局唯一ID，格式与主信号一致，仅在主信号与符号位信号分别解析的情况使用
         /// </summary>
         public String SignBitSignalID { get; set; }
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 信号值的乘数，一般用于单位转换
         /// </summary>
         public double? Scale { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 信号值配置，作为 ASEva.Agency.BindValueInput 参数传入
     /// </summary>
     public class ValueConfig
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 信号值列表
         /// </summary>
         public double[] Values { get; set; }
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.4) Web API POST's content type
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.4) Web API POST的内容类型
     /// </summary>
     public enum WebPostContentType
     {
+        /// \~English
+        /// <summary>
+        /// Default type, as application/x-www-form-urlencoded
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 默认类型，对应application/x-www-form-urlencoded
         /// </summary>
         WWWFormUrlEncoded = 0,
 
+        /// \~English
+        /// <summary>
+        /// As application/octet-stream
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 对应application/octet-stream
         /// </summary>
         OctetStream = 1,
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Result of Web API request
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) Web API调用的结果
     /// </summary>
     public enum WebApiResult
     {
+        /// \~English
+        /// <summary>
+        /// Unknown, the request should be in this status for a while after sending
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 未知，在添加请求后的一段时间内为此状态
         /// </summary>
         Unknown = 0,
+
+        /// \~English
+        /// <summary>
+        /// Failed because the Internet is not connected
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 互联网未连接导致失败
         /// </summary>
         InternetNotConnected = 1,
+
+        /// \~English
+        /// <summary>
+        /// Timeout, for 5 seconds not sending the request, or 3 seconds not receiving response
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 超时，定义为超过3秒未收到回复，或超过5秒仍未实际发出请求
         /// </summary>
         Timeout = 2,
+
+        /// \~English
+        /// <summary>
+        /// Deprecated, use ASEva.WebApiResult.Responded
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 已弃用，应使用 ASEva.WebApiResult.Responded
         /// </summary>
         Responsed = 3,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.3.0) The response received
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 成功得到响应
         /// </summary>
         Responded = 3,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) Web API调用的上下文，作为 ASEva.Agency.CallWebApi 参数传入
     /// </summary>
     public class WebApiContext
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 调用结果
         /// </summary>
         public WebApiResult Result { get; set; }
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 响应的字符串
         /// </summary>
         public String Response { get; set; }
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) General device's status, call ASEva.Agency.GetDeviceStatus to get
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 设备状态，调用 ASEva.Agency.GetDeviceStatus 获取
     /// </summary>
     public enum GeneralDeviceStatus
     {
+        /// \~English
+        /// <summary>
+        /// Connection not requested
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 未启用连接
         /// </summary>
         None = 0,
+
+        /// \~English
+        /// <summary>
+        /// Connected
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 连接成功
         /// </summary>
         OK = 1,
+
+        /// \~English
+        /// <summary>
+        /// Failed to connect
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 未连接或连接状态不正常
         /// </summary>
         Error = 2,
+
+        /// \~English
+        /// <summary>
+        /// Failed to connect part of child devices, or the connection status is not fully normal
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 部分设备未连接或连接状态不正常
         /// </summary>
         Warning = 3,
     };
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Multiplex type of bus signal
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 总线信号的多路复用类型
     /// </summary>
     public enum BusSignalMultiplexType
     {
+        /// \~English
+        /// <summary>
+        /// Normal signal
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 一般信号
         /// </summary>
         None = 0,
+
+        /// \~English
+        /// <summary>
+        /// Multiplexor signal
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 多路复用通道值信号
         /// </summary>
         Multiplexor = 1,
+
+        /// \~English
+        /// <summary>
+        /// Multiplexed signal
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 多路复用信号
         /// </summary>
         Multiplexed = 2,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 总线信号信息
     /// </summary>
     public class BusSignalInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 信号ID
         /// </summary>
         public String SignalID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 信号名称
         /// </summary>
         public String SignalName { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 起始bit
         /// </summary>
         public int StartBit { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// bit长度
         /// </summary>
         public int BitLength { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 是否大字序
         /// </summary>
         public bool BigEndian { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 是否有符号
         /// </summary>
         public bool Signed { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 乘数
         /// </summary>
         public double Factor { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 加数
         /// </summary>
         public double Offset { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 最小值
         /// </summary>
         public double Minimum { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 最大值
         /// </summary>
         public double Maximum { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 单位
         /// </summary>
         public String Unit { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 信号的多路复用类型
         /// </summary>
         public BusSignalMultiplexType MultiplexType { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 信号对应的多路复用通道，仅当多路复用类型为Multiplexed时有效
         /// </summary>
         public int MultiplexChannel { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 枚举值
         /// </summary>
         public Dictionary<long, String> Enums { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 所属报文
         /// </summary>
         public BusMessageInfo OwnerMessage { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 总线报文信息
     /// </summary>
     public class BusMessageInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 报文ID
         /// </summary>
         public String MessageID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 报文名称
         /// </summary>
         public String MessageName { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 通道内ID
         /// </summary>
         public uint LocalID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 字节数
         /// </summary>
         public int ByteLength { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 信号信息列表
         /// </summary>
         public BusSignalInfo[] Signals { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 所属协议文件
         /// </summary>
         public BusFileInfo OwnerFile { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 总线协议文件信息
     /// </summary>
     public class BusFileInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 文件ID（多通道的情况下包括通道名）
         /// </summary>
         public String FileID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 文件路径
         /// </summary>
         public String FilePath { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 报文信息列表
         /// </summary>
@@ -563,11 +902,17 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 用于 ASEva.Agency.SelectSignals 的回调接口
     /// </summary>
     public interface SelectSignalHandler
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加选中信号时被调用
         /// </summary>
@@ -576,32 +921,50 @@ namespace ASEva
         bool SelectSignal(String signalID);
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 在session中的时间
     /// </summary>
     public class TimeWithSession
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 时间偏置，单位秒
         /// </summary>
         public double Time { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 所在Session
         /// </summary>
         public DateTime Session { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 总线协议ID
     /// </summary>
     public class BusProtocolFileID
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 文件ID（多通道的情况下包括通道名）
         /// </summary>
         public String FileName { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 文件MD5
         /// </summary>
@@ -629,17 +992,60 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Bus protocol file's status
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 总线协议文件状态
     /// </summary>
     public enum BusProtocolFileState
     {
+        /// \~English
+        /// <summary>
+        /// OK
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 正常
+        /// </summary>
         OK,
+
+        /// \~English
+        /// <summary>
+        /// Not in the protocol library
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 未在协议库中找到
+        /// </summary>
         NotFoundInLibrary,
+
+        /// \~English
+        /// <summary>
+        /// Protocol file doesn't exist
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 协议文件不存在
+        /// </summary>
         FileNotExist,
+
+        /// \~English
+        /// <summary>
+        /// Protocol file content doesn't match
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 协议文件内容不匹配
+        /// </summary>
         MD5NotCorrect,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 总线设备ID
     /// </summary>
@@ -685,47 +1091,90 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Type of bus device channel
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 总线设备通道类型
     /// </summary>
     public enum BusChannelType
     {
+        /// \~English
+        /// <summary>
+        /// Invalid type
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 无效类型
         /// </summary>
         None = 0,
 
+        /// \~English
+        /// <summary>
+        /// CAN bus, message data is payload, 1~8 bytes
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// CAN总线，报文数据即payload，1～8字节
         /// </summary>
         Can = 1,
 
+        /// \~English
+        /// <summary>
+        /// CAN-FD bus, message data is payload, 1~64 bytes
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// CAN-FD总线，报文数据即payload，1～64字节
         /// </summary>
         CanFD = 2,
 
+        /// \~English
+        /// <summary>
+        /// LIN bus, message data is payload, 1~8 bytes
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// LIN总线，报文数据即payload，1～8字节
         /// </summary>
         Lin = 3,
 
+        /// \~English
+        /// <summary>
+        /// Flexray bus, message data is composed of flag byte (startup, sync, null from low to high), cycle byte and payload, totally 2~256 bytes, and message ID is Slot ID
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// Flexray总线，报文数据由标志位字节(从低至高为startup,sync,null)、cycle字节和payload构成(共2～256字节)，报文ID即Slot ID
         /// </summary>
         Flexray = 4,
 
+        /// \~English
+        /// <summary>
+        /// Ethernet bus, the message data is the complete Ethernet frame data including the link layer and other protocols, and the message ID is defined as the last four bytes (little endian) of the source MAC
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 以太网总线，报文数据为包含链路层等等协议的完整以太网帧数据，报文ID定义为源MAC的后四字节(小字序)
         /// </summary>
         Ethernet = 5,
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.11.3) SOME/IP automobile Ethernet bus, the message data is the complete Ethernet frame data including the link layer and other protocols, and the message ID is the "SOME/IP Message ID" (composed of Service ID and Method ID)
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.11.3) SOME/IP车载以太网总线，报文数据为包含链路层等等协议的完整以太网帧数据，报文ID即Message ID(由Service ID和Method ID组成)
         /// </summary>
         SomeIP = 6,
     };
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 总线设备信息
     /// </summary>
@@ -735,6 +1184,9 @@ namespace ASEva
         public String Description { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 视频设备ID
     /// </summary>
@@ -785,6 +1237,11 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Deprecated, use ASEva.VideoDataCodec
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 已弃用，应使用 ASEva.VideoDataCodec
     /// </summary>
@@ -798,87 +1255,164 @@ namespace ASEva
         H265 = 5,
     };
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.7.1) Video stream codec type
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.7.1) 视频编码格式
     /// </summary>
     public enum VideoDataCodec
     {
+        /// \~English
+        /// <summary>
+        /// Invalid
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 无效
         /// </summary>
         Invalid = 0,
 
+        /// \~English
+        /// <summary>
+        /// MJPEG: Lossy encoding, independent frames
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// MJPEG：有损编码，帧间独立
         /// </summary>
         MJPEG = 1,
 
+        /// \~English
+        /// <summary>
+        /// H.264: Lossy encoding, inter-frame dependence
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// H.264：有损编码，帧间依赖
         /// </summary>
         H264 = 2,
 
+        /// \~English
+        /// <summary>
+        /// YUV411: Lossless encoding, independent frames, the format is (U0 Y0 V0 Y1 U4 Y2 V4 Y3 Y4 Y5 Y6 Y7) per 8 pixels, 8 bits per value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// YUV411：无损编码，帧间独立，格式为每8像素(U0 Y0 V0 Y1 U4 Y2 V4 Y3 Y4 Y5 Y6 Y7)，每数值8bit
         /// </summary>
         YUV411 = 3,
 
+        /// \~English
+        /// <summary>
+        /// YUV420: Lossless encoding, independent frames, the format is (U V Y00 Y01 Y10 Y11) per 2x2 pixels, 8 bits per value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// YUV420：无损编码，帧间独立，格式为每2x2像素(U V Y00 Y01 Y10 Y11)，每数值8bit
         /// </summary>
         YUV420 = 4,
 
+        /// \~English
+        /// <summary>
+        /// H.265: Lossy encoding, inter-frame dependence
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// H.265：有损编码，帧间依赖
         /// </summary>
         H265 = 5,
 
+        /// \~English
+        /// <summary>
+        /// YUV422: Lossless encoding, independent frames, the format is (Y0 U Y1 V) per 2 pixels , 8 bits per value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// YUV422：无损编码，帧间独立，格式为每2像素(Y0 U Y1 V)，每数值8bit
         /// </summary>
         YUV422 = 6,
 
+        /// \~English
+        /// <summary>
+        /// RAW: Lossless encoding, independent frames, the format is BG on 024... rows, GR on 135... rows, 8 bits per value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// RAW：无损编码，帧间独立，格式为024...行BG，135...行GR，每数值8bit
         /// </summary>
         RAW = 7,
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.7.5) RAW12: Lossless encoding, independent frames, the format is BG on 024... rows, GR on 135... rows, 12 bits per value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.5) RAW12：无损编码，帧间独立，格式为024...行BG，135...行GR，每数值12bit按小字序依次存储
         /// </summary>
         RAW12 = 8,
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.7.5) RAW14: Lossless encoding, independent frames, the format is BG on 024... rows, GR on 135... rows, 14 bits per value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.5) RAW14：无损编码，帧间独立，格式为024...行BG，135...行GR，每数值14bit按小字序依次存储
         /// </summary>
         RAW14 = 9,
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.9.1) RAW16: Lossless encoding, independent frames, the format is BG on 024... rows, GR on 135... rows, 16 bits per value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.9.1) RAW16：无损编码，帧间独立，格式为024...行BG，135...行GR，每数值16bit按大字序依次存储
         /// </summary>
         RAW16 = 10,
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.9.1) Y16: Lossless encoding, independent frames, 16 bits (big endian) per value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.9.1) Y16：无损编码，帧间独立，每数值16bit按大字序依次存储
         /// </summary>
         Y16 = 11,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 视频输入模式
     /// </summary>
     public class VideoInputMode
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.1) 视频输入编码格式
         /// </summary>
         public VideoDataCodec InputCodec { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 视频尺寸
         /// </summary>
         public IntSize Size { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 已弃用，应使用 ASEva.VideoInputMode.InputCodec
         /// </summary>
@@ -904,16 +1438,25 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.7.1) 视频输出模式
     /// </summary>
     public class VideoOutputMode
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 视频输出编码格式
         /// </summary>
         public VideoDataCodec OutputCodec { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 视频尺寸
         /// </summary>
@@ -935,53 +1478,83 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 视频设备信息
     /// </summary>
     public class VideoDeviceInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 硬件信息描述
         /// </summary>
         public String HardwareInfo { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 支持的视频输入格式列表
         /// </summary>
         public VideoInputMode[] InputModes { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.1) 支持的视频输出格式列表
         /// </summary>
         public VideoOutputMode[] OutputModes { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 获取视频帧的缩放设置
     /// </summary>
     public class VideoFrameGetScale
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 输出图像中心在原始图像坐标系下的像素坐标
         /// </summary>
         public FloatPoint Center { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 相对于原始图像大小的缩放比率，0.1~4x
         /// </summary>
         public float Scale { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 是否在图像上方绘制缩略图（若实际进行了放大）
         /// </summary>
         public bool WithPreview { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 获取视频帧的接口
     /// </summary>
     public interface VideoFrameGetter
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 按指定参数获取时间轴上最近的视频帧
         /// </summary>
@@ -995,857 +1568,1534 @@ namespace ASEva
         VideoFrameSample GetVideoFrame(int channel, double timeline, double maxGap, IntSize targetSize, bool hires, VideoFrameGetScale scale);
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.2.0) 文件读写相关名称的集合
     /// </summary>
     public class FileIONames
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 文件读取器的名称列表
         /// </summary>
         public String[] ReaderNames { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.10.0) 远程文件读取器的名称列表
         /// </summary>
         public String[] RemoteReaderNames { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 文件写入器的名称列表
         /// </summary>
         public String[] WriterNames { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 文件数据截取器的名称列表
         /// </summary>
         public String[] PickerNames { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 通过文件读取器和写入器组合的方式形成的数据截取器列表，键为读取器名称，值为写入器名称
         /// </summary>
         public Dictionary<String, String> ComboPickers { get; set; }
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.2.1) The data type needed for file writing
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.2.1) 文件写入需要的数据类型
     /// </summary>
     public enum RecordDataType
     {
+        /// \~English
+        /// <summary>
+        /// Invalid
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 无效值
         /// </summary>
         Invalid = 0,
+
+        /// \~English
+        /// <summary>
+        /// Bus raw data
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 总线原始数据
         /// </summary>
         BusRawData = 1,
+
+        /// \~English
+        /// <summary>
+        /// Bus message data
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 总线协议报文数据
         /// </summary>
         BusMessages = 2,
+
+        /// \~English
+        /// <summary>
+        /// Video raw data
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 视频原始数据
         /// </summary>
         VideoRawData = 3,
+
+        /// \~English
+        /// <summary>
+        /// Video data for processing
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 用于数据处理的视频数据
         /// </summary>
         VideoProcData = 4,
+
+        /// \~English
+        /// <summary>
+        /// Signal data
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 信号数据
         /// </summary>
         Signals = 5,
+
+        /// \~English
+        /// <summary>
+        /// Sample data
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 样本数据
         /// </summary>
         Samples = 6,
+
+        /// \~English
+        /// <summary>
+        /// Matrix data
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 矩阵数据
         /// </summary>
         Matrices = 7,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.2.3) 解析总线报文得到的信号值及相关信息
     /// </summary>
     public struct BusSignalValue
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 信号名
         /// </summary>
         public String signalName;
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 信号值
         /// </summary>
         public double? value;
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 单位
         /// </summary>
         public String unit;
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 对应的枚举值（若存在枚举信息）
         /// </summary>
         public String enumValue;
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.3.0) System status 
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 系统状态 
     /// </summary>
     public enum SystemStatus
     {
+        /// \~English
+        /// <summary>
+        /// Actual replay speed (times)
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 实际回放速度（倍速）
         /// </summary>
         ActualReplaySpeed = 1,
 
+        /// \~English
+        /// <summary>
+        /// Target replay speed (times)
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 目标回放速度（倍速）
         /// </summary>
         TargetReplaySpeed = 2,
 
+        /// \~English
+        /// <summary>
+        /// The latest log message
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 最新清单消息
         /// </summary>
         CurrentLoggerMessage = 3,
 
+        /// \~English
+        /// <summary>
+        /// Display lag, in milliseconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 显示延迟，单位毫秒
         /// </summary>
         DisplayLag = 4,
 
+        /// \~English
+        /// <summary>
+        /// Queue length for writing continuous data, in seconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 连续数据或缓存数据写入队列长度，单位秒
         /// </summary>
         ContinuousFileWriteQueue = 5,
 
+        /// \~English
+        /// <summary>
+        /// Queue length for writing event session data, in seconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 事件数据写入队列长度，单位秒
         /// </summary>
         EventFileWriteQueue = 6,
 
+        /// \~English
+        /// <summary>
+        /// Video process queue's capacity
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 视频处理队列长度限制
         /// </summary>
         VideoProcessQueueCapacity = 7,
 
+        /// \~English
+        /// <summary>
+        /// Video process queue's length
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 视频处理队列长度
         /// </summary>
         VideoProcessQueue = 8,
 
+        /// \~English
+        /// <summary>
+        /// Audio volume (times)
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 音量（倍数）
         /// </summary>
         AudioVolume = 9,
 
+        /// \~English
+        /// <summary>
+        /// CPU usage, in percentage
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// CPU使用率，单位百分比
         /// </summary>
         CPUUsage = 10,
 
+        /// \~English
+        /// <summary>
+        /// Multiplier of CPU usage, fixed to 1
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// CPU使用率的乘数，固定为1
         /// </summary>
         CPUUsageRatio = 11,
 
+        /// \~English
+        /// <summary>
+        /// Memory capacity, in bytes
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 内存总容量，单位字节
         /// </summary>
         MemoryCapacity = 12,
 
+        /// \~English
+        /// <summary>
+        /// Memory free space, in bytes
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 内存可用容量，单位字节
         /// </summary>
         MemoryFree = 13,
 
+        /// \~English
+        /// <summary>
+        /// Warning threshold of memory free space, in bytes
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 内存可用容量的警告阈值，单位字节
         /// </summary>
         MemoryWarningThreshold = 14,
 
+        /// \~English
+        /// <summary>
+        /// Lower limit of memory free space, in bytes
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 内存可用容量的最小阈值，单位字节
         /// </summary>
         MemoryErrorThreshold = 15,
 
+        /// \~English
+        /// <summary>
+        /// Capacity of the storage that owns current data path, in bytes
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 当前数据目录所在磁盘的总容量，单位字节
         /// </summary>
         StorageCapacity = 16,
 
+        /// \~English
+        /// Free space of the storage that owns current data path, in bytes
+        /// \~Chinese
         /// <summary>
         /// 当前数据目录所在磁盘可用容量，单位字节
         /// </summary>
         StorageFree = 17,
 
+        /// \~English
+        /// <summary>
+        /// Estimated recordable time of the storage that owns current data path, in hours
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 根据当前数据目录所在磁盘可用容量预估的时长，单位小时
         /// </summary>
         StorageFreeHours = 18,
 
+        /// \~English
+        /// <summary>
+        /// Warning threshold of free space of the storage that owns current data path, in bytes
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 当前数据目录所在磁盘可用容量的警告阈值，单位字节
         /// </summary>
         StorageWarningThreshold = 19,
 
+        /// \~English
+        /// <summary>
+        /// Lower limit of free space of the storage that owns current data path, in bytes
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 当前数据目录所在磁盘可用容量的最小阈值，单位字节
         /// </summary>
         StorageErrorThreshold = 20,
 
+        /// \~English
+        /// <summary>
+        /// The latest heart beat time of work thread, in format "yyyyMMddHHmmss.fff"
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 最近一次基础线程心跳时间，格式为yyyyMMddHHmmss.fff
         /// </summary>
         WorkthreadHeartBeatTime = 21,
         
+        /// \~English
+        /// <summary>
+        /// Current operation of work thread
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 基础线程当前运行位置
         /// </summary>
         WorkthreadCurrentLocation = 22,
 
+        /// \~English
+        /// <summary>
+        /// Average loop time of work thread, in milliseconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 基础线程循环平均运行时间（最近），单位毫秒
         /// </summary>
         WorkthreadLoopTime = 23,
 
+        /// \~English
+        /// <summary>
+        /// The latest heart beat time of process thread, in format "yyyyMMddHHmmss.fff"
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 最近一次处理线程心跳时间，格式为yyyyMMddHHmmss.fff
         /// </summary>
         ProcthreadHeartBeatTime = 24,
 
+        /// \~English
+        /// <summary>
+        /// Current operation of process thread
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 处理线程当前运行位置
         /// </summary>
         ProcthreadCurrentLocation = 25,
 
+        /// \~English
+        /// <summary>
+        /// Average loop time of process thread, in milliseconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 处理线程循环平均运行时间（最近），单位毫秒
         /// </summary>
         ProcthreadLoopTime = 26,
 
+        /// \~English
+        /// <summary>
+        /// Average loop time of main thread, in milliseconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 主线程循环平均运行时间（最近），单位毫秒
         /// </summary>
         MainthreadLoopTime = 27,
 
+        /// \~English
+        /// <summary>
+        /// Bus data flow, in bytes
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 总线数据流量，单位字节
         /// </summary>
         BusDataFlow = 28,
 
+        /// \~English
+        /// <summary>
+        /// Max cost time for bus device to receive a frame, in microseconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 总线设备接收一帧数据的最大耗时，单位微秒
         /// </summary>
         BusDeviceReadTime = 29,
 
+        /// \~English
+        /// <summary>
+        /// Video data flow, in pixels
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 视频数据流量，单位像素数
         /// </summary>
         VideoDataFlow = 30,
 
+        /// \~English
+        /// <summary>
+        /// Max cost time for video device to receive a frame, in microseconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 视频设备接收一帧数据的最大耗时，单位微秒
         /// </summary>
         VideoDeviceReadTime = 31,
 
+        /// \~English
+        /// <summary>
+        /// Cost time of starting session, in milliseconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 开始session耗时，单位毫秒
         /// </summary>
         StartSessionTime = 32,
 
+        /// \~English
+        /// <summary>
+        /// Cost time of stopping session, in milliseconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 结束session耗时，单位毫秒
         /// </summary>
         StopSessionTime = 33,
 
+        /// \~English
+        /// <summary>
+        /// Bottleneck of replay speed
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 回放速度瓶颈
         /// </summary>
         ReplayNeck = 34,
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.6.17) Average loop time of file reading thread, in milliseconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.17) 文件读取线程循环平均运行时间（最近），单位毫秒
         /// </summary>
         FileReadThreadLoopTime = 35,
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.6.17) Average loop time of file writing thread, in milliseconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.17) 文件写入线程循环平均运行时间（最近），单位毫秒
         /// </summary>
         FileWriteThreadLoopTime = 36,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 窗口组件信息
     /// </summary>
     public class WindowClassInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 所属插件ID
         /// </summary>
         public String OwnerPluginID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 组件ID
         /// </summary>
         public String ID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 分化ID
         /// </summary>
         public String TransformID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.5.0) 注册分化窗口组件的配置字符串
         /// </summary>
         public String TransformConfig { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 窗口标题
         /// </summary>
         public String Title { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 窗口图标，分辨率为16x16
         /// </summary>
         public CommonImage Icon { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 是否支持同时打开多个窗口
         /// </summary>
         public bool MultipleSupported { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 分化的窗口组件信息
         /// </summary>
         public Dictionary<String, WindowClassInfo> TransformClasses { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 对话框组件信息
     /// </summary>
     public class DialogClassInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 所属插件ID
         /// </summary>
         public String OwnerPluginID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 组件ID
         /// </summary>
         public String ID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 分化ID
         /// </summary>
         public String TransformID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.5.0) 注册分化对话框组件的配置字符串
         /// </summary>
         public String TransformConfig { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 对话框标题
         /// </summary>
         public String Title { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 对话框图标，分辨率为16x16
         /// </summary>
         public CommonImage Icon { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 分化的对话框组件信息
         /// </summary>
         public Dictionary<String, DialogClassInfo> TransformClasses { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 数据处理组件信息
     /// </summary>
     public class ProcessorClassInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 所属插件ID
         /// </summary>
         public String OwnerPluginID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 组件ID
         /// </summary>
         public String ID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 数据处理组件名称
         /// </summary>
         public String Title { get; set; }
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.3.0) Native library's type
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 原生库类别
     /// </summary>
     public enum NativeLibraryType
     {
+        /// \~English
+        /// <summary>
+        /// General native library
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 一般原生库
         /// </summary>
         Native = 1,
 
+        /// \~English
+        /// <summary>
+        /// Bus device library
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 总线设备库
         /// </summary>
         Bus = 2,
 
+        /// \~English
+        /// <summary>
+        /// Video device library
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 视频设备库
         /// </summary>
         Video = 3,
 
+        /// \~English
+        /// <summary>
+        /// Data processing library
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 数据处理库
         /// </summary>
         Processor = 4,
 
+        /// \~English
+        /// <summary>
+        /// General device library
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 一般设备库
         /// </summary>
         Device = 5,
 
+        /// \~English
+        /// <summary>
+        /// File R/W library
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 文件读写库
         /// </summary>
         FileIO = 6,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 原生组件信息
     /// </summary>
     public class NativeClassInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 所属插件ID
         /// </summary>
         public String OwnerPluginID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 组件ID
         /// </summary>
         public String ID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 原生组件名称
         /// </summary>
         public String Title { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 对应的类型ID
         /// </summary>
         public String NativeType { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 绑定的各原生库版本
         /// </summary>
         public Dictionary<NativeLibraryType, Version> LibraryVersions { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.8.0) 设备组件信息
     /// </summary>
     public class DeviceClassInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 所属插件ID
         /// </summary>
         public String OwnerPluginID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 组件ID
         /// </summary>
         public String ID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设备组件名称
         /// </summary>
         public String Title { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 独立任务组件信息
     /// </summary>
     public class TaskClassInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 所属插件ID
         /// </summary>
         public String OwnerPluginID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 组件ID
         /// </summary>
         public String ID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 独立任务组件名称
         /// </summary>
         public String Title { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.5.1) 默认配置字符串，若不支持则为null 
         /// </summary>
         public String DefaultConfig { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) Session筛选标志位
     /// </summary>
     public class SessionFilterFlags
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 符合搜索条件
         /// </summary>
         public bool SearchTrue { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 已选中
         /// </summary>
         public bool CheckTrue { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 详细的设备状态信息
     /// </summary>
     public class DeviceStatusDetail
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设备状态
         /// </summary>
         public GeneralDeviceStatus Status { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 状态详细描述
         /// </summary>
         public String Description { get; set; }
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.3.0) Result of creating window panel of configuration panel
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 创建窗口对象或对话框对象的结果
     /// </summary>
     public enum CreatePanelResult
     {
+        /// \~English
+        /// <summary>
+        /// Success
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 创建成功
         /// </summary>
         OK = 0,
 
+        /// \~English
+        /// <summary>
+        /// Invalid caller
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 无效的调用者
         /// </summary>
         InvalidCaller = 1,
 
+        /// \~English
+        /// <summary>
+        /// Can't find the target class by ID
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 未找到类型
         /// </summary>
         ClassNotFound = 2,
 
+        /// \~English
+        /// <summary>
+        /// Failed to create the panel object
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 创建失败
         /// </summary>
         CreateFailed = 3,
 
+        /// \~English
+        /// <summary>
+        /// System is busy
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 系统繁忙
         /// </summary>
         SystemBusy = 4,
 
+        /// \~English
+        /// <summary>
+        /// The window already exists (for the window classes which don't support multiple windows)
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 窗口已存在（不支持多窗口）
         /// </summary>
         AlreadyExist = 5,
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.3.0) Type of a node in signal tree
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 信号树节点类别
     /// </summary>
     public enum SignalTreeNodeType
     {
+        /// \~English
+        /// <summary>
+        /// Layer I: signal category
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// I级：信号大类
         /// </summary>
         Category = 11,
 
+        /// \~English
+        /// <summary>
+        /// Layer I: bus protocol
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// I级：总线协议
         /// </summary>
         BusProtocol = 12,
 
+        /// \~English
+        /// <summary>
+        /// Layer II: signal type
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// II级：信号小类
         /// </summary>
         Type = 21,
 
+        /// \~English
+        /// <summary>
+        /// Layer II: bus message
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// II级：总线报文
         /// </summary>
         BusMessage = 22,
 
+        /// \~English
+        /// <summary>
+        /// Layer III: general signal
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// III级：一般信号
         /// </summary>
         GeneralSignal = 31,
 
+        /// \~English
+        /// <summary>
+        /// Layer III: system signal
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// III级：系统信号
         /// </summary>
         SystemSignal = 32,
 
+        /// \~English
+        /// <summary>
+        /// Layer III: normal bus signal
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// III级：一般总线信号
         /// </summary>
         NormalBusSignal = 33,
 
+        /// \~English
+        /// <summary>
+        /// Layer III: multiplexed bus signal
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// III级：复用的总线信号
         /// </summary>
         MultiplexedBusSignal = 34,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 信号树节点
     /// </summary>
     public class SignalTreeNode
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 节点类别
         /// </summary>
         public SignalTreeNodeType Type { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 节点ID
         /// </summary>
         public String ID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 节点名称
         /// </summary>
         public String Name { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 子节点
         /// </summary>
         public SignalTreeNode[] Children { get; set; }
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.3.4) Plugin pack's status
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.4) 插件包状态
     /// </summary>
     public enum PluginPackStatus
     {
+        /// \~English
+        /// <summary>
+        /// Disabled
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 已禁用
         /// </summary>
         Disabled,
 
+        /// \~English
+        /// <summary>
+        /// Enabled
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 已启用
         /// </summary>
         Enabled,
 
+        /// \~English
+        /// <summary>
+        /// Enabled but only activated after restarting application
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 应用程序重启后启用
         /// </summary>
         ToBeEnabled,
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.6.16) Error info of plugin pack
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.6.16) 插件包错误信息
     /// </summary>
     public enum PluginPackError
     {
+        /// \~English
+        /// <summary>
+        /// Normal
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 正常
         /// </summary>
         OK = 0,
         
+        /// \~English
+        /// <summary>
+        /// Disabled
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 禁用中
         /// </summary>
         Disabled = 1,
 
+        /// \~English
+        /// <summary>
+        /// Failed to load
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 加载失败
         /// </summary>
         LoadFailed = 2,
 
+        /// \~English
+        /// <summary>
+        /// Not licensed
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 未许可
         /// </summary>
         Unlicensed = 3,
 
+        /// \~English
+        /// <summary>
+        /// Not supported for current UI platform
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 平台不支持（UI）
         /// </summary>
         PlatformUnsupported = 4,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 插件包信息
     /// </summary>
     public class PluginPackInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 插件包ID
         /// </summary>
         public String ID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 插件包名称
         /// </summary>
         public String Name { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 插件包版本
         /// </summary>
         public Version Version { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 插件包简介
         /// </summary>
         public String Brief { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.4) 插件包状态
         /// </summary>
         public PluginPackStatus Status { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.16) 插件包错误信息
         /// </summary>
         public PluginPackError Error { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 应用层详情
         /// </summary>
         public String AppLayerDetails { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 原生层详情
         /// </summary>
         public String NativeLayerDetails { get; set; }
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.3.0) Installation status of the plugin related library
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 插件关联的库是否可安装的状态
     /// </summary>
     public enum InstallPluginLibraryStatus
     {
+        /// \~English
+        /// <summary>
+        /// Installable
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 可安装
         /// </summary>
         OK,
 
+        /// \~English
+        /// <summary>
+        /// Not supported by current UI platform
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 平台不支持（UI）
         /// </summary>
         PlatformUnsupported,
 
+        /// \~English
+        /// <summary>
+        /// The plugin is too new
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 插件太新
         /// </summary>
         TooNew,
 
+        /// \~English
+        /// <summary>
+        /// The plugin is too old
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 插件太旧
         /// </summary>
         TooOld,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 插件关联库的信息
     /// </summary>
     public class InstallPluginLibraryInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 库ID
         /// </summary>
         public String LibraryID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 名称
         /// </summary>
         public String Name { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 是否可安装的状态
         /// </summary>
         public InstallPluginLibraryStatus Status { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 插件版本
         /// </summary>
         public Version Version { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 已安装插件的版本，若未安装则为null
         /// </summary>
         public Version InstalledVersion { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 插件关联驱动和环境的信息
     /// </summary>
     public class InstallPluginDriverInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 驱动ID
         /// </summary>
         public String DriverID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 名称
         /// </summary>
         public String Name { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 是否随付在安装包中
         /// </summary>
         public bool Attached { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 清单信息
     /// </summary>
     public class LogMessage
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 清单信息级别
         /// </summary>
         public LogLevel Type { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 清单信息文本
         /// </summary>
         public String Text { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 清单信息时间
         /// </summary>
         public DateTime Time { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 清单信息重复次数
         /// </summary>
         public int RepeatedCount { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.6.0) 处理来自原生层的函数调用请求
     /// </summary>
     public interface AppFunctionHandler
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 处理函数（应确保毫秒级别的运行时间）
         /// </summary>
@@ -1856,37 +3106,68 @@ namespace ASEva
         byte[] OnCrossCall(String nativeClassID, String funcID, byte[] input);
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.6.3) Result of adding bus protocol
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.6.3) 添加总线协议文件结果
     /// </summary>
     public enum AddBusProtocolResult
     {
+        /// \~English
+        /// <summary>
+        /// Invalid parameter of unimplemented
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 无效参数或未实现
         /// </summary>
         Invalid,
 
+        /// \~English
+        /// <summary>
+        /// Success
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 成功添加
         /// </summary>
         OK,
 
+        /// \~English
+        /// <summary>
+        /// Already added
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 已添加过
         /// </summary>
         AlreadyAdded,
 
+        /// \~English
+        /// <summary>
+        /// Failed to calculate MD5
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 无法计算文件MD5
         /// </summary>
         CalculateMD5Failed,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.6.19) 数据订阅对象，调用 ASEva.Agency.SubscribeData 获取
     /// </summary>
     public class DataSubscriber
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 从缓存取出所有新数据（需要确保经常调用，超时后将自动关闭订阅）
         /// </summary>
@@ -1895,12 +3176,18 @@ namespace ASEva
             return null;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 立即关闭订阅
         /// </summary>
         public virtual void Close()
         {}
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 是否已关闭订阅
         /// </summary>
@@ -1910,21 +3197,33 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.7.0) CPU时间模型
     /// </summary>
     public class CPUTimeModel
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// Session开始时的CPU计数
         /// </summary>
         public ulong StartCPUTick { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 每秒增加的CPU计数
         /// </summary>
         public ulong CPUTicksPerSecond { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 默认构造函数
         /// </summary>
@@ -1935,21 +3234,33 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.7.0) Posix时间模型
     /// </summary>
     public class PosixTimeModel
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// Session开始时的Posix时间，单位毫秒，0表示无效
         /// </summary>
         public ulong StartPosix { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// CPU时间转为Posix时间的时间比例，应为1左右
         /// </summary>
         public double TimeRatio { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 默认构造函数
         /// </summary>
@@ -1960,37 +3271,68 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.9.0) The mode to query video frame
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.9.0) 获取视频帧的模式
     /// </summary>
     public enum VideoFrameGetMode
     {
+        /// \~English
+        /// <summary>
+        /// Fixed to output image of VGA size (640xN)
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 固定输出VGA尺寸图像数据
         /// </summary>
         Preview = 0,
 
+        /// \~English
+        /// <summary>
+        /// Output image of raw size (Fallback to Preview if unavailable)
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 输出原始尺寸图像数据(若条件不满足则退化为Preview)
         /// </summary>
         RawFull = 1,
 
+        /// \~English
+        /// <summary>
+        /// Output image of half raw size (Fallback to Preview if unavailable)
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 输出按原始尺寸1/2缩小后的图像数据(若条件不满足则退化为Preview)
         /// </summary>
         RawHalf = 2,
 
+        /// \~English
+        /// <summary>
+        /// Output image of quarter raw size (Fallback to Preview if unavailable)
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 输出按原始尺寸1/4缩小后的图像数据(若条件不满足则退化为Preview)
         /// </summary>
         RawQuarter = 3,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.9.0) 获取视频帧的接口（扩展版）
     /// </summary>
     public interface VideoFrameGetterX
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定通道在指定时间上的视频帧的原始尺寸
         /// </summary>
@@ -1999,6 +3341,9 @@ namespace ASEva
         /// <returns>原始尺寸，若无数据则返回null</returns>
         IntSize? GetVideoRawSize(int channel, double timeline);
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取距离指定时间最近的视频帧数据
         /// </summary>
@@ -2013,6 +3358,9 @@ namespace ASEva
         /// <returns>视频帧数据，图像实际大小由mode和clip决定，获取失败则返回null</returns>
         CommonImage GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha, out Timestamp? timestamp, out CameraInfo cameraInfo);
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取距离指定时间最近的缩略图数据
         /// </summary>
@@ -2024,72 +3372,138 @@ namespace ASEva
         CommonImage GetVideoFrameThumbnail(int channel, double timeline, double maxGap, bool withAlpha);
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.10.2) Bus raw data's status (mainly for transmitting)
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.10.2) 总线数据的(发送)状态
     /// </summary>
     public enum BusRawDataState
 	{
+        /// \~English
+        /// <summary>
+        /// Received message (Other enumeration values are for transmitting)
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 收到的报文，其他状态都为发送报文
         /// </summary>
 		Received = 0,
 
+        /// \~English
+        /// <summary>
+        /// Not running a session
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 未运行
         /// </summary>
 		NotRunning = 1,
 
+        /// \~English
+        /// <summary>
+        /// Invalid channel
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 无效通道
         /// </summary>
 		InvalidChannel = 2,
 
+        /// \~English
+        /// <summary>
+        /// Can't find corresponding plugin for the channel
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 插件未找到
         /// </summary>
 		PluginNotFound = 3,
 
+        /// \~English
+        /// <summary>
+        /// Not synchronized
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 未同步
         /// </summary>
 		NotSync = 4,
 
+        /// \~English
+        /// <summary>
+        /// Scheduled transmitting unsupported
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 不支持预约
         /// </summary>
 		ScheduleUnsupported = 5,
 
+        /// \~English
+        /// <summary>
+        /// Disorder of transmitting time
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 时间乱序
         /// </summary>
 		TimeDisorder = 6,
 
+        /// \~English
+        /// <summary>
+        /// Transmitting OK
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 发送成功
         /// </summary>
 		TransmitOK = 7,
 
+        /// \~English
+        /// <summary>
+        /// Transmitting failed
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 发送失败
         /// </summary>
 		TransmitFailed = 8,
 
+        /// \~English
+        /// <summary>
+        /// Scheduled
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 预约成功
         /// </summary>
 		ScheduleOK = 9,
 
+        /// \~English
+        /// <summary>
+        /// Failed to schedule transmitting
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 预约失败
         /// </summary>
 		ScheduleFailed = 10,
 	};
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.11.0) 记录调试信息接口
     /// </summary>
     public interface Logger
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 打印信息至Debugger，不需要指定来源时可使用 ASEva.Agency.Print
         /// </summary>
@@ -2097,47 +3511,82 @@ namespace ASEva
         void Print(String text);
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.13.2) Vendor of graphic card
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.13.2) 独立显卡厂商
     /// </summary>
     public enum GraphicCardVendor
     {
+        /// \~English
+        /// <summary>
+        /// Unknown
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 未知
         /// </summary>
         Unknown = 0,
 
+        /// \~English
+        /// <summary>
+        /// nVidia
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 英伟达
         /// </summary>
         NVidia = 1,
 
+        /// \~English
+        /// <summary>
+        /// AMD
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// AMD
         /// </summary>
         AMD = 2,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.13.2) 独立显卡信息
     /// </summary>
     public class GraphicCardInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 独立显卡厂商
         /// </summary>
         public GraphicCardVendor Vendor { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 该厂商下的显卡序号，从0起算 (针对多显卡场合)
         /// </summary>
         public int CardIndex { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 显存总容量，单位字节
         /// </summary>
         public ulong MemoryCapacity { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 显存可用容量，单位字节
         /// </summary>

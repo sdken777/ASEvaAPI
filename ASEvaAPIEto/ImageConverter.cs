@@ -4,6 +4,9 @@ using ASEva.Samples;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.2.0) 图像对象转换
     /// </summary>

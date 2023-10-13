@@ -3,16 +3,25 @@ using System.Net;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 带Timeout属性的WebClient
     /// </summary>
     public class TimeoutWebClient : WebClient
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 超时，单位毫秒
         /// </summary>
         public int Timeout { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 构造函数，默认超时5秒
         /// </summary>

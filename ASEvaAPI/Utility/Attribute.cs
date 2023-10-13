@@ -3,6 +3,9 @@ using System.Xml;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) XML属性解析
     /// </summary>
@@ -135,6 +138,9 @@ namespace ASEva.Utility
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) XML属性输出
     /// </summary>
@@ -143,6 +149,9 @@ namespace ASEva.Utility
         private XmlDocument x;
         private XmlAttributeCollection a;
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 基于XML元素节点创建
         /// </summary>

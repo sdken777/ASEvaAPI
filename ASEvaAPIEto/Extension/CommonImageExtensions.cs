@@ -6,11 +6,17 @@ using ASEva.Samples;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.7.0) 方便使用通用图像数据的扩展
     /// </summary>
     public static class CommonImageExtensions
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 转为Eto位图对象
         /// </summary>
@@ -21,6 +27,9 @@ namespace ASEva.UIEto
             return ImageConverter.ConvertToBitmap(image) as Bitmap;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 转为Skia图像对象
         /// </summary>

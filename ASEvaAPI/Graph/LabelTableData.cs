@@ -2,63 +2,119 @@
 
 namespace ASEva.Graph
 {
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Mode of statistics for label table
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 标签表模式
     /// </summary>
     public enum LabelTableMode
     {
+        /// \~English
+        /// <summary>
+        /// Sum
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 求和标签表
         /// </summary>
         Sum,
 
+        /// \~English
+        /// <summary>
+        /// Average value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 平均值标签表
         /// </summary>
         Aver,
 
+        /// \~English
+        /// <summary>
+        /// Minimum value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 最小值标签表
         /// </summary>
         Min,
 
+        /// \~English
+        /// <summary>
+        /// Maximum value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 最大值标签表
         /// </summary>
         Max,
 
+        /// \~English
+        /// <summary>
+        /// Percentage
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 百分比标签表
         /// </summary>
         Percentage,
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Value direction of label table
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 标签表数值方向
     /// </summary>
     public enum LabelTableValueDirection
     {
+        /// \~English
+        /// <summary>
+        /// Positive, valid range is from the default value to the maximum value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 正向，数值可视化范围为默认值至最大值
         /// </summary>
         Positive,
 
+        /// \~English
+        /// <summary>
+        /// Negative, valid range is from the default value to the minimum value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 负向，数值可视化范围为默认值至最小值
         /// </summary>
         Negative,
 
+        /// \~English
+        /// <summary>
+        /// Bidirectional, valid range is a bidirectional symmetric interval centered by the default value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 双向，数值可视化范围为默认值为中心的双向对称区间
         /// </summary>
         Bidirectional,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 标签表数据
     /// </summary>
     public class LabelTableData : GraphData
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 创建图表定义
         /// </summary>
@@ -93,6 +149,9 @@ namespace ASEva.Graph
             return def;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取标签表模式
         /// </summary>
@@ -102,6 +161,9 @@ namespace ASEva.Graph
             return (LabelTableMode)Enum.Parse(typeof(LabelTableMode), Definition.Config[0]);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取x轴标题
         /// </summary>
@@ -111,6 +173,9 @@ namespace ASEva.Graph
             return Definition.Config[5];
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取y轴标题
         /// </summary>
@@ -120,6 +185,9 @@ namespace ASEva.Graph
             return Definition.Config[6];
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取x轴标签个数
         /// </summary>
@@ -131,6 +199,9 @@ namespace ASEva.Graph
             return val;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取y轴标签个数
         /// </summary>
@@ -142,6 +213,9 @@ namespace ASEva.Graph
             return val;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取x轴标签列表
         /// </summary>
@@ -158,6 +232,9 @@ namespace ASEva.Graph
             return output;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取y轴标签列表
         /// </summary>
@@ -175,6 +252,9 @@ namespace ASEva.Graph
             return output;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取标签表数据方向
         /// </summary>
@@ -184,6 +264,9 @@ namespace ASEva.Graph
             return (LabelTableValueDirection)Enum.Parse(typeof(LabelTableValueDirection), Definition.Config[3]);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取标签表默认值
         /// </summary>
@@ -195,6 +278,9 @@ namespace ASEva.Graph
             return val;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取x轴各标签统计值
         /// </summary>
@@ -278,6 +364,9 @@ namespace ASEva.Graph
             return output;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取y轴各标签统计值
         /// </summary>
@@ -361,6 +450,9 @@ namespace ASEva.Graph
             return output;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 在x轴，y轴标签序号的位置添加1
         /// </summary>
@@ -371,6 +463,9 @@ namespace ASEva.Graph
             AddSample(x, y, 1);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 在x轴，y轴标签序号的位置添加数值样本
         /// </summary>
@@ -417,6 +512,9 @@ namespace ASEva.Graph
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取标签表数据
         /// </summary>

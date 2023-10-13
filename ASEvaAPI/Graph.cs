@@ -7,84 +7,167 @@ using System.Threading;
 
 namespace ASEva
 {
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Graph type
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 图表类型
     /// </summary>
     public enum GraphType
     {
+        /// \~English
+        /// <summary>
+        /// Invalid
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 无效图表
         /// </summary>
         Invalid = 0,
 
+        /// \~English
+        /// <summary>
+        /// Single value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 单值
         /// </summary>
         SingleValue = 1,
+        /// \~English
+        /// <summary>
+        /// Scatter points
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 散点图
         /// </summary>
         ScatterPoints = 2,
+        /// \~English
+        /// <summary>
+        /// Histogram and poly line
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 直方折线图
         /// </summary>
         HistAndLine = 3,
+        /// \~English
+        /// <summary>
+        /// Matrix table
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 矩阵表
         /// </summary>
         MatrixTable = 4,
+        /// \~English
+        /// <summary>
+        /// Label table
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 标签表
         /// </summary>
         LabelTable = 5,
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Validation type of graph data
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 图表数据验证类型
     /// </summary>
     public enum GraphValidationType
     {
+        /// \~English
+        /// <summary>
+        /// No validation
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 不验证
         /// </summary>
         Invalid = 0,
 
+        /// \~English
+        /// <summary>
+        /// Valid while below the value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 阈值下方有效
         /// </summary>
         ValueBelow = 1,
 
+        /// \~English
+        /// <summary>
+        /// Valid while above the value
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 阈值上方有效
         /// </summary>
         ValueAbove = 2,
 
+        /// \~English
+        /// <summary>
+        /// Valid while in the range
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 范围区间内有效
         /// </summary>
         ValueInRange = 3,
 
+        /// \~English
+        /// <summary>
+        /// Valid while below the poly line
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 折线下方有效
         /// </summary>
         PolyBelow = 11,
 
+        /// \~English
+        /// <summary>
+        /// Valid while above the poly line
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 折线上方有效
         /// </summary>
         PolyAbove = 12,
 
+        /// \~English
+        /// <summary>
+        /// Valid while inside the outline
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 轮廓范围内有效
         /// </summary>
         OutlineInside = 21,
 
+        /// \~English
+        /// <summary>
+        /// Valid while outside the outline
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 轮廓范围外有效
         /// </summary>
         OutlineOutside = 22,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 图表数据验证接口
     /// </summary>
@@ -96,31 +179,49 @@ namespace ASEva
         bool? Validate(GraphData data, out double? percentage);
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 图表定义
     /// </summary>
     public class GraphDefinition
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图表类型
         /// </summary>
         public GraphType Type { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图表定义相关参数
         /// </summary>
         public List<String> Config { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图表标题
         /// </summary>
         public String MainTitle { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 各列数据标题
         /// </summary>
         public List<String> ColumnTitles { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图表数据验证方式
         /// </summary>
@@ -135,6 +236,9 @@ namespace ASEva
             Validation = null;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取图表ID
         /// </summary>
@@ -204,26 +308,41 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 图表数据
     /// </summary>
     public class GraphData
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图表ID
         /// </summary>
         public int ID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图表定义
         /// </summary>
         public GraphDefinition Definition { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图表数据相关参数
         /// </summary>
         public List<String> Params { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图表数据
         /// </summary>
@@ -237,6 +356,9 @@ namespace ASEva
             Data = new double[0, 0];
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图表数据初始化，需要派生类实现
         /// </summary>
@@ -245,6 +367,9 @@ namespace ASEva
 
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 与其他图表数据合并，需要派生类实现
         /// </summary>
@@ -254,6 +379,9 @@ namespace ASEva
 
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 是否已添加或赋值数据 ，需要派生类实现
         /// </summary>
@@ -263,6 +391,9 @@ namespace ASEva
             return false;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 验证图表数据
         /// </summary>
@@ -278,6 +409,9 @@ namespace ASEva
             else return Definition.Validation.Validate(this, out percentage);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 保存至文件
         /// </summary>
@@ -355,6 +489,9 @@ namespace ASEva
             catch (Exception) { return false; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 根据图表定义创建初始化完成后的数据
         /// </summary>
@@ -373,6 +510,9 @@ namespace ASEva
             return output;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 从文件读取图表数据
         /// </summary>
@@ -548,26 +688,41 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.8.1) 图表可视化面板接口
     /// </summary>
     public interface GraphPanel
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 更新图表数据
         /// </summary>
         void UpdateWithGraphData(GraphData data);
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.8.2) 返回面板高度（若为固定高度）
         /// </summary>
         int? GetFixedHeight();
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.8.3) 释放资源
         /// </summary>
         void ReleaseResources();
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.8.4) 绑定点击事件对象
         /// </summary>

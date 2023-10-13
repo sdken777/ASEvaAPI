@@ -6,6 +6,9 @@ using System.Threading;
 
 namespace ASEva.UICoreWF
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) 图表显示控件基类
     /// </summary>
@@ -16,16 +19,25 @@ namespace ASEva.UICoreWF
             InitializeComponent();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图表数据
         /// </summary>
         public GraphData Data { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图表控件被选择事件
         /// </summary>
         public event EventHandler GraphSelected;
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置图表控件大小
         /// </summary>
@@ -78,6 +90,9 @@ namespace ASEva.UICoreWF
             this.Size = new Size((int)(dpiRatio * width), (int)(dpiRatio * height));
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 创建图表控件
         /// </summary>
@@ -123,6 +138,9 @@ namespace ASEva.UICoreWF
             return defaultGraph;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 注册指定ID的图表使用自定义可视化控件
         /// </summary>
@@ -133,17 +151,26 @@ namespace ASEva.UICoreWF
             if (controlType != null) ControlTypeTable[graphDefinitionID] = controlType;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 控件高度是否固定
         /// </summary>
         /// <returns>控件高度是否固定</returns>
         public virtual bool IsHeightFixed() { return false; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 控件显示更新
         /// </summary>
         public virtual void UpdateUIWithData() { }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 选择图表控件
         /// </summary>

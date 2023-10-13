@@ -5,11 +5,17 @@ using ASEva.Samples;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.10.3) 获取控件快照的扩展
     /// </summary>
     public static class SnapshotExtensions
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取控件快照
         /// </summary>

@@ -6,123 +6,195 @@ using SharpGL;
 
 namespace ASEva.UIEto
 {
+	/// \~English
+	/// (api:eto=2.6.0) Anchor position of a text
+	/// \~Chinese
 	/// <summary>
 	/// (api:eto=2.6.0) 文本锚点坐标位置类型
 	/// </summary>
     public enum TextAnchor
     {
+		/// \~English
+		/// Text center point
+		/// \~Chinese
 		/// <summary>
 		/// 文本中心
 		/// </summary>
         Center = 0,
 
+		/// \~English
+		/// Top left point of text
+		/// \~Chinese
 		/// <summary>
 		/// 文本左上角
 		/// </summary>
         TopLeft = 1,
 
+		/// \~English
+		/// Left center point of text
+		/// \~Chinese
 		/// <summary>
 		/// 文本左侧中心
 		/// </summary>
         LeftCenter = 2,
 
+		/// \~English
+		/// Bottom left point of text
+		/// \~Chinese
 		/// <summary>
 		/// 文本左下角
 		/// </summary>
         BottomLeft = 3,
 
+		/// \~English
+		/// Top right point of text
+		/// \~Chinese
 		/// <summary>
 		/// 文本右上角
 		/// </summary>
         TopRight = 4,
 
+		/// \~English
+		/// Right center point of text
+		/// \~Chinese
 		/// <summary>
 		/// 文本右侧中心
 		/// </summary>
         RightCenter = 5,
 		
+		/// \~English
+		/// Bottom right point of text
+		/// \~Chinese
 		/// <summary>
 		/// 文本右下角
 		/// </summary>
         BottomRight = 6,
 
+		/// \~English
+		/// Top center point of text
+		/// \~Chinese
 		/// <summary>
 		/// 文本上方中心
 		/// </summary>
         TopCenter = 7,
 
+		/// \~English
+		/// Bottom center point of text
+		/// \~Chinese
 		/// <summary>
 		/// 文本下方中心
 		/// </summary>
         BottomCenter = 8,
     }
 
+	/// \~English
+	/// 
+	/// \~Chinese
 	/// <summary>
 	/// (api:eto=2.6.0) OpenGL文本绘制任务
 	/// </summary>
     public struct GLTextTask
     {
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 文本
 		/// </summary>
         public String text;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 文本锚点X轴坐标
 		/// </summary>
         public int posX;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 文本锚点Y轴坐标
 		/// </summary>
         public int posY;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 文本锚点坐标是否为物理像素坐标系，否则为逻辑坐标
 		/// </summary>
         public bool isRealPos;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 文本锚点坐标位置类型
 		/// </summary>
         public TextAnchor anchor;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 文本绘制颜色红色分量
 		/// </summary>
         public byte red;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 文本绘制颜色绿色分量
 		/// </summary>
         public byte green;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 文本绘制颜色蓝色分量
 		/// </summary>
         public byte blue;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 文本绘制颜色Alpha通道分量，0将被视为255
 		/// </summary>
         public byte alpha;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 文本字体，空则使用默认字体
 		/// </summary>
         public String fontName;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 文本相对于默认尺寸的比例，0将被视为1
 		/// </summary>
         public float sizeScale; // 0 as 1
     }
 
+	/// \~English
+	/// 
+	/// \~Chinese
 	/// <summary>
 	/// (api:eto=2.6.0) OpenGL文本绘制任务对象
 	/// </summary>
     public class GLTextTasks
     {
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 添加文本绘制任务
 		/// </summary>
@@ -144,6 +216,9 @@ namespace ASEva.UIEto
             });
         }
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 添加文本绘制任务
 		/// </summary>
@@ -162,47 +237,74 @@ namespace ASEva.UIEto
         private List<GLTextTask> tasks = new List<GLTextTask>();
     }
 
+	/// \~English
+	/// 
+	/// \~Chinese
 	/// <summary>
 	/// (api:eto=2.6.0) OpenGL绘制尺寸信息
 	/// </summary>
     public class GLSizeInfo
     {
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 逻辑宽度
 		/// </summary>
         public int LogicalWidth { get; private set; }
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 逻辑高度
 		/// </summary>
         public int LogicalHeight { get; private set; }
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 物理像素宽度
 		/// </summary>
         public int RealWidth { get; private set; }
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 物理像素高度
 		/// </summary>
         public int RealHeight { get; private set; }
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 物理像素与逻辑像素的换算比
 		/// </summary>
 		public double RealPixelScale { get; private set; }
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 宽度与高度之比
 		/// </summary>
         public float AspectRatio { get; private set; }
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.8.8) 图像坐标系垂直方向是否反转
 		/// </summary>
 		/// <value></value>
 		public bool VerticalInverted { get; private set; }
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 构造函数
 		/// </summary>
@@ -217,6 +319,9 @@ namespace ASEva.UIEto
 			VerticalInverted = false;
         }
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.8.8) 构造函数
 		/// </summary>
@@ -232,6 +337,9 @@ namespace ASEva.UIEto
         }
     }
 
+	/// \~English
+	/// 
+	/// \~Chinese
 	/// <summary>
 	/// (api:eto=2.6.0) GLView事件参数基类
 	/// </summary>
@@ -242,12 +350,18 @@ namespace ASEva.UIEto
 			GL = gl;
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// OpenGL对象
 		/// </summary>
 		public OpenGL GL { get; private set; }
 	}
 
+	/// \~English
+	/// 
+	/// \~Chinese
 	/// <summary>
 	/// (api:eto=2.6.0) GLView缩放事件参数
 	/// </summary>
@@ -258,12 +372,18 @@ namespace ASEva.UIEto
 			SizeInfo = sizeInfo;
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 缩放后的尺寸信息
 		/// </summary>
 		public GLSizeInfo SizeInfo { get; private set; }
 	}
 
+	/// \~English
+	/// 
+	/// \~Chinese
 	/// <summary>
 	/// (api:eto=2.6.0) GLView渲染事件参数
 	/// </summary>
@@ -274,37 +394,58 @@ namespace ASEva.UIEto
 			TextTasks = textTasks;
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 文本绘制任务对象
 		/// </summary>
 		public GLTextTasks TextTasks { get; private set; }
 	}
 
+	/// \~English
+	/// 
+	/// \~Chinese
 	/// <summary>
 	/// (api:eto=2.6.1) OpenGL上下文信息
 	/// </summary>
 	public struct GLContextInfo
 	{
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 版本
 		/// </summary>
         public String version;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 厂商
 		/// </summary>
         public String vendor;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 渲染器
 		/// </summary>
         public String renderer;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 扩展
 		/// </summary>
         public String extensions;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.8.5)
 		/// </summary>
@@ -324,57 +465,92 @@ namespace ASEva.UIEto
 		}
 	}
 
+	/// \~English
+	/// <summary>
+	/// (api:eto=2.9.4) Antialias option
+	/// </summary>
+	/// \~Chinese
 	/// <summary>
 	/// (api:eto=2.9.4) 抗锯齿选项
 	/// </summary>
 	public enum GLAntialias
 	{
+		/// \~English
+		/// Disabled
+		/// \~Chinese
 		/// <summary>
 		/// 禁用
 		/// </summary>
 		Disabled = 0,
 
+		/// \~English
+		/// 2x sampling
+		/// \~Chinese
 		/// <summary>
 		/// 2x抗锯齿
 		/// </summary>
 		Sample2x = 1,
 
+		/// \~English
+		/// 4x sampling
+		/// \~Chinese
 		/// <summary>
 		/// 4x抗锯齿
 		/// </summary>
 		Sample4x = 2,
 
+		/// \~English
+		/// 8x sampling
+		/// \~Chinese
 		/// <summary>
 		/// 8x抗锯齿
 		/// </summary>
 		Sample8x = 3,
 
+		/// \~English
+		/// 16x sampling
+		/// \~Chinese
 		/// <summary>
 		/// 16x抗锯齿
 		/// </summary>
 		Sample16x = 4,
 	}
 
+	/// \~English
+	/// 
+	/// \~Chinese
 	/// <summary>
 	/// (api:eto=2.6.0) OpenGL绘制视图
 	/// </summary>
 	public class GLView : Panel, GLCallback
 	{
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 初始化事件
 		/// </summary>
 		public event EventHandler<GLEventArgs> GLInitialize;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 缩放事件
 		/// </summary>
 		public event EventHandler<GLResizeEventArgs> GLResize;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 渲染事件
 		/// </summary>
 		public event EventHandler<GLRenderEventArgs> GLRender;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 构造函数
 		/// </summary>
@@ -389,6 +565,9 @@ namespace ASEva.UIEto
 			initContent();
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.8.3) 构造函数
 		/// </summary>
@@ -404,6 +583,9 @@ namespace ASEva.UIEto
 			initContent();
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.8.7) 构造函数
 		/// </summary>
@@ -422,6 +604,9 @@ namespace ASEva.UIEto
 			initContent();
 		}
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.9.4) 构造函数
         /// </summary>
@@ -442,6 +627,9 @@ namespace ASEva.UIEto
 			initContent();
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 关闭视图，释放资源
 		/// </summary>
@@ -453,6 +641,9 @@ namespace ASEva.UIEto
 		}
 		private bool closed = false;
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// 提交新的渲染请求
 		/// </summary>
@@ -462,11 +653,17 @@ namespace ASEva.UIEto
 			if (!closed && glBackend != null) glBackend.QueueRender();
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.6.1) 上下文信息 (null表示还未初始化完成)
 		/// </summary>
 		public GLContextInfo? ContextInfo { get; private set; }
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.6.1) 渲染帧率（统计最近3秒）
 		/// </summary>
@@ -483,6 +680,9 @@ namespace ASEva.UIEto
 			}
 		}
 
+		/// \~English
+		/// 
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.8.7) 是否支持被其他控件覆盖
 		/// </summary>

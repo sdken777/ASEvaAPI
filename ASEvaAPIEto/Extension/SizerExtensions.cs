@@ -4,11 +4,17 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.0) 提供逻辑尺寸与实际像素值转换的扩展
     /// </summary>
     public static class SizerExtensions
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 转换为实际像素值（单值）
         /// </summary>
@@ -23,6 +29,9 @@ namespace ASEva.UIEto
             return Math.Max(1, outSize);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 转换为实际像素值（二维）
         /// </summary>
@@ -43,6 +52,9 @@ namespace ASEva.UIEto
             return new Size(Math.Max(1, outWidth), Math.Max(1, outHeight));
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.3.5) 获取控件逻辑宽度
         /// </summary>
@@ -55,6 +67,9 @@ namespace ASEva.UIEto
             else return control.Width;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.3.5) 获取控件逻辑高度
         /// </summary>
@@ -67,6 +82,9 @@ namespace ASEva.UIEto
             else return control.Height;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.5.1) 获取控件逻辑尺寸
         /// </summary>
@@ -79,6 +97,9 @@ namespace ASEva.UIEto
             else return control.Size;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置控件逻辑宽度
         /// </summary>
@@ -93,6 +114,9 @@ namespace ASEva.UIEto
             if (control.Width != targetWidth) control.Width = targetWidth;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置控件逻辑高度
         /// </summary>
@@ -107,6 +131,9 @@ namespace ASEva.UIEto
             if (control.Height != targetHeight) control.Height = targetHeight;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置控件逻辑尺寸
         /// </summary>
@@ -128,6 +155,9 @@ namespace ASEva.UIEto
             if (control.Width != targetWidth || control.Height != targetHeight) control.Size = new Size(targetWidth, targetHeight);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.5.1) 获取鼠标事件中鼠标位置的逻辑坐标
         /// </summary>
@@ -140,6 +170,9 @@ namespace ASEva.UIEto
             else return args.Location;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.6.2) 获取鼠标相对于当前控件的逻辑坐标
         /// </summary>
@@ -153,6 +186,9 @@ namespace ASEva.UIEto
             else return pt;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 像素单位比例
         /// </summary>

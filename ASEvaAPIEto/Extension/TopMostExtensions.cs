@@ -3,11 +3,17 @@ using Eto.Forms;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.9.10) 方便获取控件所在窗口或对话框是否在顶层的扩展
     /// </summary>
     public static class TopMostExtensions
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取控件所在窗口或对话框是否在顶层
         /// </summary>

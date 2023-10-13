@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 5, 0); // Update log / 更新记录: 修正MessageBox标题给null则显示"错误"
+            return new Version(2, 5, 5, 1); // Update log / 更新记录: 修正部分Handler为internal
         }
     }
 }

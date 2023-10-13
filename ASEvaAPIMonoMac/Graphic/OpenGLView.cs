@@ -16,7 +16,7 @@ namespace ASEva.UIMonoMac
         {
             this.callback = callback;
 
-            if (antialias == GLAntialias.Sample16x) antialias = GLAntialias.Sample8x; // 可能不支持16x
+            if (antialias == GLAntialias.Sample16x) antialias = GLAntialias.Sample8x; // 16x could be unsupported / 可能不支持16x
 
             var attribs = new List<NSOpenGLPixelFormatAttribute>();
             attribs.Add(NSOpenGLPixelFormatAttribute.Window);

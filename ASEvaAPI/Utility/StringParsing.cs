@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 字符串与数据相互转换
     /// </summary>

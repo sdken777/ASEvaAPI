@@ -4,11 +4,17 @@ using System.Linq;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 样本同步
     /// </summary>
     public class SampleSync
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 样本同步函数，根据目标时间点搜索样本缓存，输出插值或最近样本
         /// </summary>

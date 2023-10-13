@@ -4,6 +4,9 @@ using Gtk;
 
 namespace ASEva.UIGtk
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) Flow框扩展方法
     /// </summary>

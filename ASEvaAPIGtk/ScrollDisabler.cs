@@ -4,6 +4,9 @@ using Gtk;
 
 namespace ASEva.UIGtk
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 用于禁用控件的鼠标滚动
     /// </summary>

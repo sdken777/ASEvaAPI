@@ -3,11 +3,17 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.9.6) 文本位图，可替代Graphics.DrawString以提高效率
     /// </summary>
     public class TextBitmap
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 创建文本位图（仅支持默认字体）
         /// </summary>
@@ -43,6 +49,9 @@ namespace ASEva.UIEto
             this.color = color;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 通过图形对象绘制文本位图
         /// </summary>
@@ -119,16 +128,25 @@ namespace ASEva.UIEto
             g.ImageInterpolation = originInterpolationMode;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取当前文本
         /// </summary>
         public String Text { get { return text; }}
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.9.8) 获取当前字体相对于默认大小比例
         /// </summary>
         public float SizeRatio { get { return sizeRatio; }}
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取当前绘制颜色
         /// </summary>

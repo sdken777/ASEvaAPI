@@ -4,41 +4,65 @@ using System.Reflection;
 
 namespace ASEva.Samples
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 通用图像数据
     /// </summary>
     public class CommonImage
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图像宽度
         /// </summary>
         public int Width { get { return width; } }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图像高度
         /// </summary>
         public int Height { get { return height; } }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 是否含有Alpha通道
         /// </summary>
         public bool WithAlpha { get { return withAlpha; } }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.8.5) BGR是否逆序
         /// </summary>
         public bool BgrInverted { get { return bgrInverted; } }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 每行数据字节数
         /// </summary>
         public int RowBytes { get { return rowBytes; } }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 图像数据，每个像素的存放顺序为BGR或BGRA（若BGR逆序则为RGB或RGBA）
         /// </summary>
         public byte[] Data { get { return data; } }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 创建通用图像数据
         /// </summary>
@@ -63,6 +87,9 @@ namespace ASEva.Samples
             return image;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 创建通用图像数据
         /// </summary>
@@ -88,6 +115,9 @@ namespace ASEva.Samples
             return image;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// [依赖Agency] 从文件读取图像
         /// </summary>
@@ -113,6 +143,9 @@ namespace ASEva.Samples
             return CommonImage.FromBinary(data);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// [依赖Agency] 从资源读取图像
         /// </summary>
@@ -130,6 +163,9 @@ namespace ASEva.Samples
             return CommonImage.FromBinary(data);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.4.1) [依赖Agency] 从图像二进制数据转换
         /// </summary>
@@ -141,6 +177,9 @@ namespace ASEva.Samples
             return Agency.DecodeImage(binary);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// [依赖Agency] 保存至文件
         /// </summary>
@@ -171,6 +210,9 @@ namespace ASEva.Samples
             return ok;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.4.1) [依赖Agency] 转为图像二进制数据
         /// </summary>
@@ -183,6 +225,9 @@ namespace ASEva.Samples
             else return null;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.8.6) 转换为BGR逆序或不逆序的图像对象
         /// </summary>

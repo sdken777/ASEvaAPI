@@ -7,6 +7,9 @@ using ASEva.UIEto;
 
 namespace ASEva.UICoreWF
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:corewf=2.5.4) 方便生成图标的扩展
     /// </summary>

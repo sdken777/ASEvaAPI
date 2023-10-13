@@ -2,6 +2,9 @@
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 地图坐标系转换
     /// </summary>
@@ -12,6 +15,9 @@ namespace ASEva.Utility
         private static double x_pi = Math.PI * 3000.0 / 180.0;
 
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// WGS坐标转百度坐标
         /// </summary>
@@ -22,6 +28,9 @@ namespace ASEva.Utility
             return gcj2bd(wgs2gcj(src));
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// GCJ坐标转百度坐标
         /// </summary>
@@ -37,6 +46,9 @@ namespace ASEva.Utility
             return new LocPoint() { Lng = bd_lon, Lat = bd_lat };
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// WGS坐标转GCJ坐标
         /// </summary>

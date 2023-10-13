@@ -303,7 +303,10 @@ namespace ASEva
         String GetOfflineMapCopyrightInfo();
         bool IsPRCWebPreferred();
     }
-
+    
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 集合了所有主要API
     /// </summary>
@@ -323,6 +326,9 @@ namespace ASEva
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取应用程序当前的运行状态
         /// </summary>
@@ -332,6 +338,9 @@ namespace ASEva
             return Handler.GetAppStatus();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取应用程序当前的运行模式
         /// </summary>
@@ -341,6 +350,9 @@ namespace ASEva
             return Handler.GetAppMode();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 检查是否为在线采集或离线处理生成模式
         /// </summary>
@@ -350,6 +362,9 @@ namespace ASEva
             return Handler.IsFileOutputEnabled();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取应用程序当前的显示语言
         /// </summary>
@@ -359,6 +374,9 @@ namespace ASEva
             return Handler.GetAppLanguage();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取应用程序当前兴趣点在时间线上的位置
         /// </summary>
@@ -368,6 +386,9 @@ namespace ASEva
             return Handler.GetInterestTime();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取应用程序当前兴趣点对应的本地时间
         /// </summary>
@@ -377,6 +398,9 @@ namespace ASEva
             return Handler.GetInterestTimestamp();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取兴趣时间点目标
         /// </summary>
@@ -386,6 +410,9 @@ namespace ASEva
             return Handler.GetInterestTarget();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取应用程序当前的数据缓存范围
         /// </summary>
@@ -395,6 +422,9 @@ namespace ASEva
             return Handler.GetBufferRange();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取当前数据层级下的所有session
         /// </summary>
@@ -404,6 +434,9 @@ namespace ASEva
             return Handler.GetSessionList();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取当前数据层级下筛选后的所有session
         /// </summary>
@@ -413,6 +446,9 @@ namespace ASEva
             return Handler.GetFilteredSessionList();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取当前数据目录下的所有generation
         /// </summary>
@@ -439,6 +475,9 @@ namespace ASEva
             return Handler.GetSessionPath(session);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取某个session的公共数据在硬盘的根路径
         /// </summary>
@@ -449,6 +488,9 @@ namespace ASEva
             return Handler.GetSessionPublicDataPath(session);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.4.0) 获取某个session所属数据层级
         /// </summary>
@@ -459,6 +501,9 @@ namespace ASEva
             return Handler.GetSessionLayer(session);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.4.0) 获取某个session的文件夹名
         /// </summary>
@@ -469,6 +514,9 @@ namespace ASEva
             return Handler.GetSessionFolderName(session);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取某个session中的某个generation在硬盘的根路径
         /// </summary>
@@ -480,6 +528,9 @@ namespace ASEva
             return Handler.GetGenerationPath(session, generation);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.4.2) 获取某个session中的某个generation的处理状态
         /// </summary>
@@ -491,6 +542,9 @@ namespace ASEva
             return Handler.GetGenerationProcessStatus(session, generation);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取当前层级下某个generation下所有处理完毕的session
         /// </summary>
@@ -501,6 +555,9 @@ namespace ASEva
             return Handler.GetFinishedSessions(generation);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.5) 刷新当前层级下所有session
         /// </summary>
@@ -509,6 +566,9 @@ namespace ASEva
             Handler.RefreshSessions();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 刷新当前层级下所有session的generation
         /// </summary>
@@ -517,6 +577,9 @@ namespace ASEva
             Handler.RefreshGenerations();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取当前输入数据的generation ID
         /// </summary>
@@ -526,6 +589,9 @@ namespace ASEva
             return Handler.GetCurrentDataGeneration();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取当前session的GUID
         /// </summary>
@@ -535,6 +601,9 @@ namespace ASEva
             return Handler.GetCurrentSessionGUID();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 已弃用，应使用 ASEva.Agency.GetHostPosixTimeModel
         /// </summary>
@@ -543,6 +612,9 @@ namespace ASEva
             return Handler.GetStartTimeLocal(session);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 已弃用，应使用 ASEva.Agency.GetGNSSPosixTimeModel
         /// </summary>
@@ -551,6 +623,9 @@ namespace ASEva
             return Handler.GetStartTimeUTC(session);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 已弃用，应使用 ASEva.Agency.GetLocalDateTime
         /// </summary>
@@ -559,6 +634,9 @@ namespace ASEva
             return Handler.GetTimestampLocal(session, timeOffset);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 已弃用，应使用 ASEva.Agency.GetUTCDateTime
         /// </summary>
@@ -567,6 +645,9 @@ namespace ASEva
             return Handler.GetTimestampUTC(session, timeOffset);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 已弃用，应使用 ASEva.Agency.GetHostPosixTimeModel
         /// </summary>
@@ -575,6 +656,9 @@ namespace ASEva
             return Handler.GetTimeRatioToLocal(session);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 已弃用，应使用 ASEva.Agency.GetGNSSPosixTimeModel
         /// </summary>
@@ -583,6 +667,9 @@ namespace ASEva
             return Handler.GetTimeRatioToUTC(session);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取当前数据目录的路径
         /// </summary>
@@ -592,6 +679,9 @@ namespace ASEva
             return Handler.GetDataPath();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.4.0) 已弃用，应使用 ASEva.Agency.GetSubDataPaths
         /// </summary>
@@ -600,6 +690,9 @@ namespace ASEva
             return Handler.GetSubDataPaths();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.12) 获取所有子数据目录的路径
         /// </summary>
@@ -609,6 +702,9 @@ namespace ASEva
             return Handler.GetSubDataPaths();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.4.0) 设置子数据目录的路径
         /// </summary>
@@ -619,6 +715,9 @@ namespace ASEva
             Handler.SetSubDataPath(subIndex, path);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.4.0) 获取所有有效的数据层级
         /// </summary>
@@ -628,6 +727,9 @@ namespace ASEva
             return Handler.GetDataLayers();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.4.0) 添加新的数据层级
         /// </summary>
@@ -637,6 +739,9 @@ namespace ASEva
             Handler.AddDataLayer(layer);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.4.0) 移除数据层级，并删除所有文件至回收站
         /// </summary>
@@ -646,6 +751,9 @@ namespace ASEva
             Handler.DeleteDataLayer(layer);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.4.0) 获取当前的数据层级
         /// </summary>
@@ -655,6 +763,9 @@ namespace ASEva
             return Handler.GetCurrentDataLayer();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.5) 获取当前数据层级的路径
         /// </summary>
@@ -664,6 +775,9 @@ namespace ASEva
             return Handler.GetCurrentDataLayerPath();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.4.0) 设置当前的数据层级
         /// </summary>
@@ -673,6 +787,9 @@ namespace ASEva
             Handler.SetCurrentDataLayer(layer);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取当前全局公共数据目录的路径
         /// </summary>
@@ -682,6 +799,9 @@ namespace ASEva
             return Handler.GetGlobalPublicDataPath();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取配置文件根目录路径
         /// </summary>
@@ -691,6 +811,9 @@ namespace ASEva
             return Handler.GetConfigFilesRoot();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取应用数据和文档文件根目录路径
         /// </summary>
@@ -700,6 +823,9 @@ namespace ASEva
             return Handler.GetAppFilesRoot();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取临时文件根目录路径
         /// </summary>
@@ -709,6 +835,9 @@ namespace ASEva
             return Handler.GetTempFilesRoot();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 发送总线报文，可周期性发送，也可单次发送（仅在线模式可用）
         /// </summary>
@@ -718,6 +847,9 @@ namespace ASEva
             Handler.SendBusMessage(message);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 发送总线报文（该报文需设置绑定），可周期性发送，也可单次发送（仅在线模式可用）
         /// </summary>
@@ -728,6 +860,9 @@ namespace ASEva
             Handler.SendBusMessage(messageID, interval);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.15) 发送总线报文（该报文需设置绑定），可周期性发送，也可单次发送（仅在线模式可用）
         /// </summary>
@@ -739,6 +874,9 @@ namespace ASEva
             Handler.SendBusMessage(messageID, interval, out data);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 发送已获取的原始数据信息（仅在线模式可用）
         /// </summary>
@@ -750,6 +888,9 @@ namespace ASEva
             Handler.SendRawData(protocol, values, binary);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.8.0) 发送已获取的原始数据信息（仅在线模式可用）
         /// </summary>
@@ -762,6 +903,9 @@ namespace ASEva
             Handler.SendRawData(cpuTick, protocol, values, binary);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 发送手动触发器信号
         /// </summary>
@@ -771,6 +915,9 @@ namespace ASEva
             Handler.SendManualTrigger(channel);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取图表对象
         /// </summary>
@@ -782,6 +929,9 @@ namespace ASEva
             return Handler.GetGraphData(session, graphID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加一个场景片段
         /// </summary>
@@ -791,6 +941,9 @@ namespace ASEva
             Handler.AddSceneData(scene);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取设备状态
         /// </summary>
@@ -801,6 +954,9 @@ namespace ASEva
             return Handler.GetDeviceStatus(type);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取所有设备状态
         /// </summary>
@@ -810,6 +966,9 @@ namespace ASEva
             return Handler.GetAllDeviceStatus();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取各子设备的设备状态
         /// </summary>
@@ -820,6 +979,9 @@ namespace ASEva
             return Handler.GetChildDeviceStatus(type);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 打印信息至Debugger，需要指定来源时应使用 ASEva.Logger
         /// </summary>
@@ -829,6 +991,9 @@ namespace ASEva
             Handler.Print(text);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加清单信息，在Log窗口和状态栏显示信息
         /// </summary>
@@ -839,6 +1004,9 @@ namespace ASEva
             Handler.Log(text, level);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 查看报文配置是否有效，如dbc文件加载不正确则可能导致无效
         /// </summary>
@@ -850,6 +1018,9 @@ namespace ASEva
             return Handler.IsMessageValid(messageID, optional);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 查看信号配置是否有效，如dbc文件加载不正确，插件文件未加载都可能导致无效
         /// </summary>
@@ -861,6 +1032,9 @@ namespace ASEva
             return Handler.IsSignalValid(signalID, optional);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定报文ID下的所有信号名称
         /// </summary>
@@ -871,6 +1045,9 @@ namespace ASEva
             return Handler.GetSignalNamesOfBusMessage(messageID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 当前互联网是否已连接
         /// </summary>
@@ -880,6 +1057,9 @@ namespace ASEva
             return Handler.IsInternetConnected();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取内存容量
         /// </summary>
@@ -889,6 +1069,9 @@ namespace ASEva
             return Handler.GetMemoryCapacity();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 非阻塞调用Web API (GET)
         /// </summary>
@@ -899,6 +1082,9 @@ namespace ASEva
             Handler.CallWebApi(request, context);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 非阻塞调用Web API (POST)，内容类型默认为 ASEva.WebPostContentType.WWWFormUrlEncoded
         /// </summary>
@@ -910,6 +1096,9 @@ namespace ASEva
             Handler.CallWebApiPost(request, body, context);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.0.4) 非阻塞调用Web API (POST)，指定内容类型
         /// </summary>
@@ -922,6 +1111,9 @@ namespace ASEva
             Handler.CallWebApiPost(request, body, contentType, context);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取数据通道别名
         /// </summary>
@@ -932,6 +1124,9 @@ namespace ASEva
             return Handler.GetChannelAliasName(key);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.4.4) 获取数据通道别名
         /// </summary>
@@ -941,6 +1136,9 @@ namespace ASEva
             return Handler.GetChannelAliasTable();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 检查样本数据通道是否冲突（有多个模块输出相同协议和通道的样本数据）
         /// </summary>
@@ -951,6 +1149,9 @@ namespace ASEva
             return Handler.IsSampleChannelConflict(protocol);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 检查指定的输入样本通道是否可用
         /// </summary>
@@ -961,6 +1162,9 @@ namespace ASEva
             return Handler.IsInputChannelAvailable(protocol);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定样本通道对应的标题
         /// </summary>
@@ -971,6 +1175,9 @@ namespace ASEva
             return Handler.GetSampleTitle(protocol);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获得手动触发器所有通道的名称
         /// </summary>
@@ -980,6 +1187,9 @@ namespace ASEva
             return Handler.GetManualTriggerNames();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获得手动触发器通道的名称
         /// </summary>
@@ -990,6 +1200,9 @@ namespace ASEva
             return Handler.GetManualTriggerName(index);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设定手动触发器通道的名称
         /// </summary>
@@ -1000,6 +1213,9 @@ namespace ASEva
             Handler.SetManualTriggerName(index, name);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加信号引用，在应用层才可获得该信号的数据
         /// </summary>
@@ -1009,6 +1225,9 @@ namespace ASEva
             Handler.AddSignalReference(signalID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 移除信号引用
         /// </summary>
@@ -1018,6 +1237,9 @@ namespace ASEva
             Handler.RemoveSignalReference(signalID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 运行一个独立处理任务，运行过程中将弹出进度条并禁用其他操作
         /// </summary>
@@ -1031,6 +1253,9 @@ namespace ASEva
             return Handler.RunStandaloneTask(caller, taskClassID, config, out returnValue);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 按本地日期时间设置兴趣点
         /// </summary>
@@ -1040,6 +1265,9 @@ namespace ASEva
             Handler.SetInterestTimestamp(targetTimestamp);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 按时间线设置兴趣点
         /// </summary>
@@ -1049,6 +1277,9 @@ namespace ASEva
             Handler.SetInterestTime(targetTimeline);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 删除指定文件或文件夹至回收站
         /// </summary>
@@ -1059,6 +1290,9 @@ namespace ASEva
             return Handler.DeleteToRecycleBin(path);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.1) 获取所有全局变量的键
         /// </summary>
@@ -1068,6 +1302,9 @@ namespace ASEva
             return Handler.GetGlobalVariableKeys();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.1) 获取所有全局参数的键
         /// </summary>
@@ -1077,6 +1314,9 @@ namespace ASEva
             return Handler.GetGlobalParameterKeys();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.1) 获取所有全局路径的键
         /// </summary>
@@ -1086,6 +1326,9 @@ namespace ASEva
             return Handler.GetGlobalPathKeys();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置全局变量
         /// </summary>
@@ -1096,6 +1339,9 @@ namespace ASEva
             Handler.SetGlobalVariable(key, value);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取全局变量
         /// </summary>
@@ -1107,6 +1353,9 @@ namespace ASEva
             return Handler.GetGlobalVariable(key, defaultValue);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置全局参数
         /// </summary>
@@ -1117,6 +1366,9 @@ namespace ASEva
             Handler.SetGlobalParameter(key, value);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取全局参数
         /// </summary>
@@ -1128,6 +1380,9 @@ namespace ASEva
             return Handler.GetGlobalParameter(key, defaultValue);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取全局路径
         /// </summary>
@@ -1138,6 +1393,9 @@ namespace ASEva
             return Handler.GetGlobalPath(key);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置全局路径
         /// </summary>
@@ -1148,6 +1406,9 @@ namespace ASEva
             Handler.SetGlobalPath(key, path);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取所有总线通道上的协议信息
         /// </summary>
@@ -1157,6 +1418,9 @@ namespace ASEva
             return Handler.GetBusProtocolFilesInfo();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取总线协议文件当前配置于哪个通道
         /// </summary>
@@ -1167,6 +1431,9 @@ namespace ASEva
             return Handler.GetBusProtocolFileChannel(fileID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取所有作为32位浮点解析的信号列表
         /// </summary>
@@ -1176,6 +1443,9 @@ namespace ASEva
             return Handler.GetBusFloat32Signals();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定通道收到的指定ID报文的帧率
         /// </summary>
@@ -1187,6 +1457,9 @@ namespace ASEva
             return Handler.GetBusMessageFPS(channel, localID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定通道上指定ID报文信息
         /// </summary>
@@ -1198,6 +1471,9 @@ namespace ASEva
             return Handler.GetBusMessageInfo(channel, localID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定ID的总线报文的信息
         /// </summary>
@@ -1208,6 +1484,9 @@ namespace ASEva
             return Handler.GetBusMessageInfo(busMessageID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 已弃用，应使用 ASEva.Agency.IsBusMessageBound
         /// </summary>
@@ -1216,6 +1495,9 @@ namespace ASEva
             return Handler.IsBusMessageBound(busMessageID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取总线报文是否已绑定发送
         /// </summary>
@@ -1226,6 +1508,9 @@ namespace ASEva
             return Handler.IsBusMessageBound(busMessageID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 返回事件对象列表
         /// </summary>
@@ -1235,6 +1520,9 @@ namespace ASEva
             return Handler.GetEventHandles();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 返回指定事件对象的完整信息
         /// </summary>
@@ -1245,6 +1533,9 @@ namespace ASEva
             return Handler.GetEventInfo(eventHandle);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 移除指定事件对象
         /// </summary>
@@ -1254,6 +1545,9 @@ namespace ASEva
             Handler.RemoveEvent(eventHandle);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置指定事件的注释
         /// </summary>
@@ -1264,6 +1558,9 @@ namespace ASEva
             Handler.SetEventComment(eventHandle, comment);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 切换至回放模式并开始回放
         /// </summary>
@@ -1274,6 +1571,9 @@ namespace ASEva
             Handler.StartReplay(startTimeline, interestTarget);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 切换至回放模式并开始回放
         /// </summary>
@@ -1286,6 +1586,9 @@ namespace ASEva
             return Handler.StartReplay(force, startTimeline, interestTarget);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 切换至在线模式并开始预览或采集
         /// </summary>
@@ -1297,6 +1600,9 @@ namespace ASEva
             return Handler.StartOnline(controllerName, previewOnly);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 切换至在线模式并开始预览或采集
         /// </summary>
@@ -1308,6 +1614,9 @@ namespace ASEva
             return Handler.StartOnline(force, previewOnly);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.4.0) 切换至在线模式并开始预览或采集
         /// </summary>
@@ -1320,6 +1629,9 @@ namespace ASEva
             return Handler.StartOnline(force, previewOnly, sessionDirName);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 切换至离线模式并开始预览或后处理
         /// </summary>
@@ -1331,6 +1643,9 @@ namespace ASEva
             return Handler.StartOffline(force, previewOnly);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.4.3) 切换至离线模式并开始预览或后处理
         /// </summary>
@@ -1343,6 +1658,9 @@ namespace ASEva
             return Handler.StartOffline(force, previewOnly, genDirName);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.10.0) 切换至远程模式并开始预览或采集
         /// </summary>
@@ -1356,6 +1674,9 @@ namespace ASEva
             return Handler.StartRemote(force, previewOnly, sessionDirName, startPosixTime);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 停止采集、处理、回放
         /// </summary>
@@ -1364,6 +1685,9 @@ namespace ASEva
             Handler.StopRunning();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 停止采集、处理、回放
         /// </summary>
@@ -1374,6 +1698,9 @@ namespace ASEva
             return Handler.StopRunning(controllerName);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 停止采集、处理、回放
         /// </summary>
@@ -1385,6 +1712,9 @@ namespace ASEva
             return Handler.StopRunning(force, editRecordedSession);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定session在时间线上的开始时间点
         /// </summary>
@@ -1395,6 +1725,9 @@ namespace ASEva
             return Handler.GetSessionTimeline(session);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定session的长度
         /// </summary>
@@ -1405,6 +1738,9 @@ namespace ASEva
             return Handler.GetSessionLength(session);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取图表报告ID列表
         /// </summary>
@@ -1414,6 +1750,9 @@ namespace ASEva
             return Handler.GetGraphIDList();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定图表报告标题的报告ID
         /// </summary>
@@ -1424,6 +1763,9 @@ namespace ASEva
             return Handler.GetGraphIDWithTitle(title);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定ID图表的标题
         /// </summary>
@@ -1434,6 +1776,9 @@ namespace ASEva
             return Handler.GetGraphTitle(graphID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定ID信号的名称
         /// </summary>
@@ -1445,6 +1790,9 @@ namespace ASEva
             return Handler.GetSignalName(signalID, fullName);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定ID的总线信号的信息
         /// </summary>
@@ -1455,6 +1803,9 @@ namespace ASEva
             return Handler.GetBusSignalInfo(busSignalID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 查看指定视频通道是否有数据可供显示
         /// </summary>
@@ -1466,6 +1817,9 @@ namespace ASEva
             return Handler.IsVideoDataAvailable(channel, tolerance);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取视频通道的特殊摄像头类型
         /// </summary>
@@ -1476,6 +1830,9 @@ namespace ASEva
             return Handler.GetVideoSpecialType(channel);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 将时间线上的时间转换为在session中的时间
         /// </summary>
@@ -1486,6 +1843,9 @@ namespace ASEva
             return  Handler.ConvertTimeIntoSession(timeline);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取当前层级下筛选后的所有session的时长总长
         /// </summary>
@@ -1495,6 +1855,9 @@ namespace ASEva
             return Handler.GetFilteredSessionListTotalLength();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取所有场景ID列表
         /// </summary>
@@ -1504,6 +1867,9 @@ namespace ASEva
             return Handler.GetSceneIDList();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取场景标题表
         /// </summary>
@@ -1513,6 +1879,9 @@ namespace ASEva
             return Handler.GetSceneTitleTable();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取所有通道的数据状态
         /// </summary>
@@ -1523,6 +1892,9 @@ namespace ASEva
             return Handler.GetChannelStatusTable(tolerance);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.4) 获取所有通道的时间同步状态
         /// </summary>
@@ -1532,6 +1904,9 @@ namespace ASEva
             return Handler.GetChannelSyncTable();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置独占控制模式（在独占控制模式下，其他控制者的操作将被禁用）
         /// </summary>
@@ -1543,6 +1918,9 @@ namespace ASEva
             return Handler.SetControlFlag(controllerName, enabled);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取数据处理或原生模块组件配置的字符串描述
         /// </summary>
@@ -1554,6 +1932,9 @@ namespace ASEva
             return Handler.GetModuleConfig(caller, moduleClassID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置数据处理或原生模块组件配置的字符串描述
         /// </summary>
@@ -1565,6 +1946,9 @@ namespace ASEva
             Handler.SetModuleConfig(caller, moduleClassID, config);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.7) 禁用数据处理或原生模块组件
         /// </summary>
@@ -1575,6 +1959,9 @@ namespace ASEva
             Handler.DisableModule(caller, moduleClassID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取数据处理或原生模块组件配置的状态
         /// </summary>
@@ -1586,6 +1973,9 @@ namespace ASEva
             return Handler.GetModuleConfigStatus(caller, moduleClassID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取数据处理或原生模块组件各子功能配置的状态
         /// </summary>
@@ -1597,6 +1987,9 @@ namespace ASEva
             return Handler.GetModuleChildConfigStatus(caller, moduleClassID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取总线设备列表
         /// </summary>
@@ -1606,6 +1999,9 @@ namespace ASEva
             return Handler.GetBusDevices();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取视频设备列表
         /// </summary>
@@ -1615,6 +2011,9 @@ namespace ASEva
             return Handler.GetVideoDevices();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取总线协议ID列表
         /// </summary>
@@ -1624,6 +2023,9 @@ namespace ASEva
             return Handler.GetBusProtocolFileIDList();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取总线协议对应文件的路径
         /// </summary>
@@ -1634,6 +2036,9 @@ namespace ASEva
             return Handler.GetBusProtocolFilePath(fileID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 更新总线协议文件路径(仅支持单通道的情况)
         /// </summary>
@@ -1645,6 +2050,9 @@ namespace ASEva
             return Handler.UpdateBusProtocolFilePath(fileID, filePath);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取总线协议对应文件的状态
         /// </summary>
@@ -1655,6 +2063,9 @@ namespace ASEva
             return Handler.GetBusProtocolFileState(fileID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 添加新的总线协议文件(多通道协议文件将按单通道处理，输出首个通道)
         /// </summary>
@@ -1666,6 +2077,9 @@ namespace ASEva
             return Handler.AddBusProtocolFile(filePath, out fileID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.3) 添加新的总线协议文件
         /// </summary>
@@ -1676,6 +2090,9 @@ namespace ASEva
             return Handler.AddBusProtocolFile(filePath);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 移除总线协议
         /// </summary>
@@ -1685,6 +2102,9 @@ namespace ASEva
             Handler.RemoveBusProtocolFile(fileID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取原生插件模块版本列表
         /// </summary>
@@ -1695,6 +2115,9 @@ namespace ASEva
             return Handler.GetNativePluginVersions(prefix);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取原生插件模块版本列表
         /// </summary>
@@ -1705,6 +2128,9 @@ namespace ASEva
             return Handler.GetNativePluginVersions(type);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 弹出对话框配置离线地图路径
         /// </summary>
@@ -1713,6 +2139,9 @@ namespace ASEva
             Handler.ConfigOfflineMapPath();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取离线地图图像
         /// </summary>
@@ -1725,6 +2154,9 @@ namespace ASEva
             return Handler.GetOfflineMapImage(imageSize, centerLocation, zoom);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取离线地图图像
         /// </summary>
@@ -1737,6 +2169,9 @@ namespace ASEva
             return Handler.GetOfflineMapCommonImage(imageSize, centerLocation, zoom);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 离线地图中经纬度坐标转为像素坐标
         /// </summary>
@@ -1749,6 +2184,9 @@ namespace ASEva
             return Handler.ConvertOfflineMapLocToPix(origin, zoom, point);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 离线地图中像素坐标转为经纬度坐标
         /// </summary>
@@ -1761,6 +2199,9 @@ namespace ASEva
             return Handler.ConvertOfflineMapPixToLoc(origin, zoom, pixel);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 打开对话框选择信号
         /// </summary>
@@ -1774,6 +2215,9 @@ namespace ASEva
             return Handler.SelectSignal(origin, withScale, withSignBit, unit);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 打开对话框选择总线报文
         /// </summary>
@@ -1784,6 +2228,9 @@ namespace ASEva
             return Handler.SelectBusMessage(originMessageID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 创建视频帧获取器，可指定更多参数，以及获取高清视频帧等
         /// </summary>
@@ -1793,6 +2240,9 @@ namespace ASEva
             return Handler.CreateVideoFrameGetter();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.9.0) 创建视频帧获取器(扩展版)
         /// </summary>
@@ -1802,6 +2252,9 @@ namespace ASEva
             return Handler.CreateVideoFrameGetterX();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 打开对话框选择多个信号
         /// </summary>
@@ -1812,6 +2265,9 @@ namespace ASEva
             Handler.SelectSignals(handler, existSignalIDList);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 打开对话框选择作为32位浮点解析的总线信号
         /// </summary>
@@ -1822,6 +2278,9 @@ namespace ASEva
             return Handler.SelectBusFloat32Signal(existSignalIDList);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 打开对话框
         /// </summary>
@@ -1833,6 +2292,9 @@ namespace ASEva
             Handler.OpenDialog(caller, dialogClassID, config);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加窗口至工作空间
         /// </summary>
@@ -1845,6 +2307,9 @@ namespace ASEva
             Handler.AddWindow(caller, windowClassID, config, newWorkspaceIfNeeded);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置窗口标题与图标
         /// </summary>
@@ -1856,6 +2321,9 @@ namespace ASEva
             Handler.SetWindowTitle(window, title, icon);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设置当前对话框的标题与图标
         /// </summary>
@@ -1866,6 +2334,9 @@ namespace ASEva
             Handler.SetCurrentDialogTitle(title, icon);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 打开对话框选择总线协议文件（可多个）
         /// </summary>
@@ -1876,6 +2347,9 @@ namespace ASEva
             return Handler.SelectBusProtocolFiles(selected);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 打开对话框配置文件加密选项
         /// </summary>
@@ -1884,6 +2358,9 @@ namespace ASEva
             Handler.ConfigDataEncryption();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 注册音频驱动关联的采集和回放接口
         /// </summary>
@@ -1895,6 +2372,9 @@ namespace ASEva
             Handler.RegisterAudioDriver(driver, recorder, replayer);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取所有已注册的音频驱动信息
         /// </summary>
@@ -1904,6 +2384,9 @@ namespace ASEva
             return Handler.GetAudioDrivers();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定驱动下的音频采集设备信息列表
         /// </summary>
@@ -1914,6 +2397,9 @@ namespace ASEva
             return Handler.GetAudioRecordDevices(driverID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定驱动下的音频回放设备信息列表
         /// </summary>
@@ -1924,6 +2410,9 @@ namespace ASEva
             return Handler.GetAudioReplayDevices(driverID);
         }
         
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.0.6) 获取CPU时间（从开机起算的时间）
         /// </summary>
@@ -1933,6 +2422,9 @@ namespace ASEva
             return Handler.GetCPUTime();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.2.3) 获取事件类型名称列表（包括未启用的） 
         /// </summary>
@@ -1942,6 +2434,9 @@ namespace ASEva
             return Handler.GetEventTypeNames();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.2.3) 解析总线报文，获取信号值等信息
         /// </summary>
@@ -1952,6 +2447,9 @@ namespace ASEva
             return Handler.ParseBusMessage(busMessage);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 已弃用，应使用 ASEva.Agency.GetRecentProjectPaths
         /// </summary>
@@ -1960,6 +2458,9 @@ namespace ASEva
             return Handler.GetRecentProjectPaths();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.12) 获取最近项目文件路径列表
         /// </summary>
@@ -1969,6 +2470,9 @@ namespace ASEva
             return Handler.GetRecentProjectPaths();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 尝试终止应用程序
         /// </summary>
@@ -1980,6 +2484,9 @@ namespace ASEva
             return Handler.TerminateApp(force, autosave);
         }
         
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 弹出模态框显示错误信息
         /// </summary>
@@ -1989,6 +2496,9 @@ namespace ASEva
             Handler.PopupError(msg);
         }
         
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 弹出模态框显示提示信息
         /// </summary>
@@ -1998,6 +2508,9 @@ namespace ASEva
             Handler.PopupNotice(msg);
         }
         
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 弹出模态框显示确认信息
         /// </summary>
@@ -2008,6 +2521,9 @@ namespace ASEva
             return Handler.PopupConfirm(msg);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 添加主线程检查点
         /// </summary>
@@ -2017,6 +2533,9 @@ namespace ASEva
             Handler.AddMainThreadCheckpoint(location);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 新建项目
         /// </summary>
@@ -2027,6 +2546,9 @@ namespace ASEva
             return Handler.NewProject(force);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 打开新项目
         /// </summary>
@@ -2037,6 +2559,9 @@ namespace ASEva
             return Handler.OpenProject(projectFile);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 保存当前项目
         /// </summary>
@@ -2047,6 +2572,9 @@ namespace ASEva
             return Handler.SaveCurrentProject(projectFile);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取当前项目文件
         /// </summary>
@@ -2056,6 +2584,9 @@ namespace ASEva
             return Handler.GetCurrentProject();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 播放MP3音频
         /// </summary>
@@ -2065,6 +2596,9 @@ namespace ASEva
             Handler.PlayMp3(mp3FileData);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 启动进程以默认方式打开文件、文件夹或网址
         /// </summary>
@@ -2075,6 +2609,9 @@ namespace ASEva
             return Handler.StartProcess(target);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取软件版本信息总表
         /// </summary>
@@ -2084,6 +2621,9 @@ namespace ASEva
             return Handler.GetVersionTable();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取系统状态信息
         /// </summary>
@@ -2094,6 +2634,9 @@ namespace ASEva
             return Handler.GetSystemStatus(status);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取系统状态详情
         /// </summary>
@@ -2104,6 +2647,9 @@ namespace ASEva
             return Handler.GetSystemStatusDetails(status);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取被许可的功能序号列表
         /// </summary>
@@ -2113,6 +2659,9 @@ namespace ASEva
             return Handler.GetLicensedFunctionIndices();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 切换应用程序当前的运行模式
         /// </summary>
@@ -2125,6 +2674,9 @@ namespace ASEva
             return Handler.SwitchAppMode(controllerName, mode, waitSecond);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 设置数据目录的路径
         /// </summary>
@@ -2134,6 +2686,9 @@ namespace ASEva
             Handler.SetDataPath(path);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取窗口组件信息表
         /// </summary>
@@ -2143,6 +2698,9 @@ namespace ASEva
             return Handler.GetWindowClassTable();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取对话框组件信息表
         /// </summary>
@@ -2152,6 +2710,9 @@ namespace ASEva
             return Handler.GetDialogClassTable();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取数据处理组件信息表
         /// </summary>
@@ -2161,6 +2722,9 @@ namespace ASEva
             return Handler.GetProcessorClassTable();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取原生组件信息表
         /// </summary>
@@ -2170,6 +2734,9 @@ namespace ASEva
             return Handler.GetNativeClassTable();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取独立任务组件信息表
         /// </summary>
@@ -2179,6 +2746,9 @@ namespace ASEva
             return Handler.GetTaskClassTable();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.8.0) 获取设备组件信息表
         /// </summary>
@@ -2188,6 +2758,9 @@ namespace ASEva
             return Handler.GetDeviceClassTable();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 通过配置注册分化窗口组件
         /// </summary>
@@ -2199,6 +2772,9 @@ namespace ASEva
             return Handler.RegisterTransformWindowClass(windowClassID, config);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.5.0) 直接注册分化窗口组件
         /// </summary>
@@ -2211,6 +2787,9 @@ namespace ASEva
             return Handler.RegisterTransformWindowClass(windowClassID, transformWindowClass, defaultConfig);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 通过配置注册分化对话框组件
         /// </summary>
@@ -2222,6 +2801,9 @@ namespace ASEva
             return Handler.RegisterTransformDialogClass(dialogClassID, config);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.5.0) 直接注册分化对话框组件
         /// </summary>
@@ -2234,6 +2816,9 @@ namespace ASEva
             return Handler.RegisterTransformDialogClass(dialogClassID, transformDialogClass, defaultConfig);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取对话框相关模块配置状态
         /// </summary>
@@ -2246,6 +2831,9 @@ namespace ASEva
             return Handler.GetDialogRelatedModulesConfigStatus(dialogClassID, transformID, out childrenStatus);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 禁用所有模块配置
         /// </summary>
@@ -2254,6 +2842,9 @@ namespace ASEva
             Handler.DisableAllConfigs();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.4.2) 获取当前层级下指定session下的所有generation ID
         /// </summary>
@@ -2264,6 +2855,9 @@ namespace ASEva
             return Handler.GetSessionGenerations(sessionID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取当前层级下含有指定generation ID的所有session
         /// </summary>
@@ -2274,6 +2868,9 @@ namespace ASEva
             return Handler.GetGenerationSessions(generationID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 设置目标回放速度
         /// </summary>
@@ -2283,6 +2880,9 @@ namespace ASEva
             Handler.SetTargetReplaySpeed(speed);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 设置session搜索关键字
         /// </summary>
@@ -2292,6 +2892,9 @@ namespace ASEva
             Handler.SetSessionSearchKeyword(keyword);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取所有session的筛选标志位
         /// </summary>
@@ -2301,6 +2904,9 @@ namespace ASEva
             return Handler.GetSessionFilterTable();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取采集模式(在线/远程)下正在预览或采集的session
         /// </summary>
@@ -2310,6 +2916,9 @@ namespace ASEva
             return Handler.GetCurrentOnlineSession();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取当前层级下所有session的总时长
         /// </summary>
@@ -2319,6 +2928,9 @@ namespace ASEva
             return Handler.GetSessionListTotalLength();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取当前的session搜索关键字
         /// </summary>
@@ -2328,6 +2940,9 @@ namespace ASEva
             return Handler.GetSessionSearchKey();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 移除session及相关文件至回收站
         /// </summary>
@@ -2339,6 +2954,9 @@ namespace ASEva
             return Handler.RemoveSession(session, force);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 设置session是否框选
         /// </summary>
@@ -2349,6 +2967,9 @@ namespace ASEva
             Handler.SetSessionChecker(session, check);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 移除generation及相关文件至回收站
         /// </summary>
@@ -2359,6 +2980,9 @@ namespace ASEva
             Handler.RemoveGeneration(session, genID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取session的注释说明
         /// </summary>
@@ -2369,6 +2993,9 @@ namespace ASEva
             return Handler.GetSessionComment(session);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 设置session的注释说明
         /// </summary>
@@ -2379,6 +3006,9 @@ namespace ASEva
             Handler.SetSessionComment(session, comment);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取session的属性表
         /// </summary>
@@ -2389,6 +3019,9 @@ namespace ASEva
             return Handler.GetSessionProperties(session);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 设置session的属性表
         /// </summary>
@@ -2399,6 +3032,9 @@ namespace ASEva
             Handler.SetSessionProperties(session, properties);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 获取session采集时主机是否与授时服务器同步
         /// </summary>
@@ -2409,6 +3045,9 @@ namespace ASEva
             return Handler.GetSessionHostSync(session);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 设置session采集时主机是否与授时服务器同步
         /// </summary>
@@ -2419,6 +3058,9 @@ namespace ASEva
             Handler.SetSessionHostSync(session, hostSync);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 设置音量
         /// </summary>
@@ -2428,6 +3070,9 @@ namespace ASEva
             Handler.SetAudioVolume(volume);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 已弃用，无需再调用
         /// </summary>
@@ -2436,6 +3081,9 @@ namespace ASEva
             Handler.SetCPURateScale(scale);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取许可证的详细信息
         /// </summary>
@@ -2445,6 +3093,9 @@ namespace ASEva
             return Handler.GetLicenseInfo();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取原始数据通道延迟配置
         /// </summary>
@@ -2455,6 +3106,9 @@ namespace ASEva
             return Handler.GetRawChannelDelayConfig(id);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取总线数据通道延迟配置
         /// </summary>
@@ -2465,6 +3119,9 @@ namespace ASEva
             return Handler.GetBusChannelDelayConfig(channel);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取视频数据通道延迟配置
         /// </summary>
@@ -2475,6 +3132,9 @@ namespace ASEva
             return Handler.GetVideoChannelDelayConfig(channel);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取音频数据通道延迟配置
         /// </summary>
@@ -2484,6 +3144,9 @@ namespace ASEva
             return Handler.GetAudioChannelDelayConfig();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取所有原始数据通道延迟配置
         /// </summary>
@@ -2493,6 +3156,9 @@ namespace ASEva
             return Handler.GetAllRawChannelDelayConfigs();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 设置原始数据通道延迟配置
         /// </summary>
@@ -2503,6 +3169,9 @@ namespace ASEva
             Handler.SetRawChannelDelayConfig(id, delay);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 设置总线数据通道延迟配置
         /// </summary>
@@ -2513,6 +3182,9 @@ namespace ASEva
             Handler.SetBusChannelDelayConfig(channel, delay);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 设置视频数据通道延迟配置
         /// </summary>
@@ -2523,6 +3195,9 @@ namespace ASEva
             Handler.SetVideoChannelDelayConfig(channel, delay);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 设置音频数据通道延迟配置
         /// </summary>
@@ -2532,6 +3207,9 @@ namespace ASEva
             Handler.SetAudioChannelDelayConfig(delay);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取是否监控指定通道有无数据
         /// </summary>
@@ -2542,6 +3220,9 @@ namespace ASEva
             return Handler.GetChannelMonitoringFlag(id);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 设置是否监控指定通道有无数据
         /// </summary>
@@ -2552,6 +3233,9 @@ namespace ASEva
             Handler.SetChannelMonitoringFlag(id, monitoring);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取所有正在监控有无数据的通道ID
         /// </summary>
@@ -2561,6 +3245,9 @@ namespace ASEva
             return Handler.GetAllChannelMonitoringKeys();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.12.1) 获取是否监控指定通道数据与授时服务器同步
         /// </summary>
@@ -2571,6 +3258,9 @@ namespace ASEva
             return Handler.GetChannelServerSyncMonitoringFlag(key);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.12.1) 设置是否监控指定通道数据与授时服务器同步
         /// </summary>
@@ -2581,6 +3271,9 @@ namespace ASEva
             Handler.SetChannelServerSyncMonitoringFlag(key, monitoring);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.12.1) 获取所有正在监控数据与授时服务器同步的通道ID
         /// </summary>
@@ -2590,6 +3283,9 @@ namespace ASEva
             return Handler.GetAllChannelServerSyncMonitoringKeys();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.6) 获取指定通道是否已配置为客机同步
         /// </summary>
@@ -2600,6 +3296,9 @@ namespace ASEva
             return Handler.GetChannelGuestSyncFlag(id);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.6) 设置指定通道是否配置为客机同步
         /// </summary>
@@ -2610,6 +3309,9 @@ namespace ASEva
             Handler.SetChannelGuestSyncFlag(id, guestSync);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.6) 获取已配置为客机同步的所有ID
         /// </summary>
@@ -2619,6 +3321,9 @@ namespace ASEva
             return Handler.GetAllChannelGuestSyncKeys();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取总线数据通道状态
         /// </summary>
@@ -2630,6 +3335,9 @@ namespace ASEva
             return Handler.GetBusChannelStatus(channel, toleranceMillisecond);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取视频数据通道状态
         /// </summary>
@@ -2643,6 +3351,9 @@ namespace ASEva
             return Handler.GetVideoChannelStatus(channel, toleranceMillisecond, out interval, out delay);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取音频数据通道状态
         /// </summary>
@@ -2655,6 +3366,9 @@ namespace ASEva
             return Handler.GetAudioChannelStatus(toleranceMillisecond, out interval, out delay);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取原始数据通道状态
         /// </summary>
@@ -2666,6 +3380,9 @@ namespace ASEva
             return Handler.GetRawChannelStatus(protocol, toleranceMillisecond);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取样本数据通道状态
         /// </summary>
@@ -2679,6 +3396,9 @@ namespace ASEva
             return Handler.GetSampleChannelStatus(protocol, toleranceMillisecond, out interval, out delay);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取所有有效的总线通道
         /// </summary>
@@ -2688,6 +3408,9 @@ namespace ASEva
             return Handler.GetAvailableBusChannels();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取所有有效的视频通道
         /// </summary>
@@ -2697,6 +3420,9 @@ namespace ASEva
             return Handler.GetAvailableVideoChannels();   
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取所有有效的原始数据通道
         /// </summary>
@@ -2706,6 +3432,9 @@ namespace ASEva
             return Handler.GetAvailableRawChannels();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取所有有效的样本数据通道
         /// </summary>
@@ -2715,6 +3444,9 @@ namespace ASEva
             return Handler.GetAvailableSampleChannels();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取指定总线通道的负载百分比
         /// </summary>
@@ -2725,6 +3457,9 @@ namespace ASEva
             return Handler.GetBusPayloadPercentage(channel);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 创建窗口对象
         /// </summary>
@@ -2739,6 +3474,9 @@ namespace ASEva
             return Handler.CreateWindowPanel(caller, windowClassID, transformID, out panel, out info);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 创建对话框对象
         /// </summary>
@@ -2753,6 +3491,9 @@ namespace ASEva
             return Handler.CreateConfigPanel(caller, dialogClassID, transformID, out panel, out info);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 注销窗口或对话框对象
         /// </summary>
@@ -2762,6 +3503,9 @@ namespace ASEva
             Handler.UnregisterPanel(panel);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 转换平台特化图像对象至通用图像数据
         /// </summary>
@@ -2772,6 +3516,9 @@ namespace ASEva
             return Handler.ConvertImageToCommon(image);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 转换通用图像数据至平台特化图像
         /// </summary>
@@ -2783,6 +3530,9 @@ namespace ASEva
             return Handler.ConvertImageToPlatform(image, eto);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取窗口组件信息
         /// </summary>
@@ -2793,6 +3543,9 @@ namespace ASEva
             return Handler.GetWindowClassInfo(windowClassID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.5.0) 获取分化窗口组件信息
         /// </summary>
@@ -2804,6 +3557,9 @@ namespace ASEva
             return Handler.GetWindowClassInfo(windowClassID, transformID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取对话框组件信息
         /// </summary>
@@ -2814,6 +3570,9 @@ namespace ASEva
             return Handler.GetDialogClassInfo(dialogClassID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.5.0) 获取分化对话框组件信息
         /// </summary>
@@ -2825,6 +3584,9 @@ namespace ASEva
             return Handler.GetDialogClassInfo(dialogClassID, transformID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.2) 获取独立任务组件信息
         /// </summary>
@@ -2835,6 +3597,9 @@ namespace ASEva
             return Handler.GetTaskClassInfo(taskClassID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 解码图像数据
         /// </summary>
@@ -2845,6 +3610,9 @@ namespace ASEva
             return Handler.DecodeImage(imageData);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 编码图像数据
         /// </summary>
@@ -2856,6 +3624,9 @@ namespace ASEva
             return Handler.EncodeImage(image, format);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取信号树
         /// </summary>
@@ -2865,6 +3636,9 @@ namespace ASEva
             return Handler.GetSignalTree();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取插件包ID列表
         /// </summary>
@@ -2874,6 +3648,9 @@ namespace ASEva
             return Handler.GetPluginPackIDList();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取插件包信息
         /// </summary>
@@ -2884,6 +3661,9 @@ namespace ASEva
             return Handler.GetPluginPackInfo(packID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 安装插件（安装完毕后也需要重启才生效）
         /// </summary>
@@ -2894,6 +3674,9 @@ namespace ASEva
             return Handler.InstallPlugin(dirPath);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 卸载插件
         /// </summary>
@@ -2904,6 +3687,9 @@ namespace ASEva
             return Handler.UninstallPlugin(packID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取所有清单信息
         /// </summary>
@@ -2913,6 +3699,9 @@ namespace ASEva
             return Handler.GetLogMessages();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.1) 返回是否允许进行保存工程项目和开始session等操作
         /// </summary>
@@ -2922,6 +3711,9 @@ namespace ASEva
             return Handler.IsReady();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.13.1) 返回是否允许进行保存工程项目和开始session等操作，若不允许则输出繁忙原因
         /// </summary>
@@ -2932,6 +3724,9 @@ namespace ASEva
             return Handler.IsReady(out busyReason);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.4) 禁用插件
         /// </summary>
@@ -2941,6 +3736,9 @@ namespace ASEva
             Handler.DisablePlugin(packID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.18) 禁用所有插件（除当前主流程插件外）
         /// </summary>
@@ -2949,6 +3747,9 @@ namespace ASEva
             Handler.DisableAllPlugins();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.4) 启用插件（需要重启应用程序后生效）
         /// </summary>
@@ -2958,6 +3759,9 @@ namespace ASEva
             Handler.EnablePlugin(packID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.0) 发送数据至原生层模块
         /// </summary>
@@ -2970,6 +3774,9 @@ namespace ASEva
             Handler.EnqueueDataToNative(caller, nativeClassID, dataID, data);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.0) 接收所有从原生层模块发来的新数据
         /// </summary>
@@ -2982,6 +3789,9 @@ namespace ASEva
             return Handler.DequeueDataFromNative(caller, nativeClassID, dataID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.0) 调用原生层函数
         /// </summary>
@@ -2995,6 +3805,9 @@ namespace ASEva
             return Handler.CallNativeFunction(caller, nativeClassID, funcID, input);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.0) 设置供原生层模块调用的应用层函数
         /// </summary>
@@ -3007,6 +3820,9 @@ namespace ASEva
             Handler.SetAppFunctionHandler(caller, nativeClassID, funcID, handler);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.0) 移除供原生层模块调用的应用层函数
         /// </summary>
@@ -3018,6 +3834,9 @@ namespace ASEva
             Handler.ResetAppFunctionHandler(caller, nativeClassID, funcID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.8) 获取是否全局禁用GPU渲染
         /// </summary>
@@ -3027,6 +3846,9 @@ namespace ASEva
             return Handler.IsGPURenderingDisabled();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.13) 获取是否全局启用在屏GPU渲染
         /// </summary>
@@ -3036,6 +3858,9 @@ namespace ASEva
             return Handler.IsOnscreenGPURenderingEnabled();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.13.1) 重置GPU解码测试结果
         /// </summary>
@@ -3044,6 +3869,9 @@ namespace ASEva
             Handler.ResetGPUDecoderTestResults();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.19) 订阅数据
         /// </summary>
@@ -3056,6 +3884,9 @@ namespace ASEva
             return Handler.SubscribeData(dataID, bufferLength, timeout);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.19) 发布数据
         /// </summary>
@@ -3066,6 +3897,9 @@ namespace ASEva
             Handler.PublishData(dataID, data);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 获取session的CPU时间模型
         /// </summary>
@@ -3076,6 +3910,9 @@ namespace ASEva
             return Handler.GetCPUTimeModel(session);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 获取session的主机Posix时间模型
         /// </summary>
@@ -3086,6 +3923,9 @@ namespace ASEva
             return Handler.GetHostPosixTimeModel(session);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 获取session的卫星Posix时间模型
         /// </summary>
@@ -3096,6 +3936,9 @@ namespace ASEva
             return Handler.GetGNSSPosixTimeModel(session);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 计算session中某个时间偏置对应的本地时间
         /// </summary>
@@ -3108,6 +3951,9 @@ namespace ASEva
             return Handler.GetLocalDateTime(session, timeOffset, useGNSS);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 计算session中某个时间偏置对应的UTC时间
         /// </summary>
@@ -3120,6 +3966,9 @@ namespace ASEva
             return Handler.GetUTCDateTime(session, timeOffset, useGNSS);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 获取主机当前的CPU计数
         /// </summary>
@@ -3129,6 +3978,9 @@ namespace ASEva
             return Handler.GetCPUTick();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 获取主机上每秒增加的CPU计数
         /// </summary>
@@ -3138,6 +3990,9 @@ namespace ASEva
             return Handler.GetCPUTicksPerSecond();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.4) 获取数据通道上最近的若干帧时间戳
         /// </summary>
@@ -3148,6 +4003,9 @@ namespace ASEva
             return Handler.GetChannelLatestTimestamps(key);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.8.1) 注册针对指定图表类型的可视化面板
         /// </summary>
@@ -3159,6 +4017,9 @@ namespace ASEva
             Handler.RegisterGraphPanel(graphType, styleName, panelType);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.8.1) 注册针对指定图表ID的可视化面板（比按图表类型注册的优先级更高）
         /// </summary>
@@ -3170,6 +4031,9 @@ namespace ASEva
             Handler.RegisterGraphPanel(graphID, styleName, panelType);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.8.2) 获取符合图表报告的所有可视化面板样式名
         /// </summary>
@@ -3180,6 +4044,9 @@ namespace ASEva
             return Handler.GetGraphPanelStyles(graphID);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.8.2) 创建图表可视化面板
         /// </summary>
@@ -3191,6 +4058,9 @@ namespace ASEva
             return Handler.CreateGraphPanel(graphID, styleName);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.10.3) 获取符合图表报告的所有可视化面板样式名
         /// </summary>
@@ -3201,6 +4071,9 @@ namespace ASEva
             return Handler.GetGraphPanelStyles(graphType);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.10.3) 创建图表可视化面板
         /// </summary>
@@ -3212,6 +4085,9 @@ namespace ASEva
             return Handler.CreateGraphPanel(graphType, styleName);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.11.4) 获取从互联网获取的当前时间
         /// </summary>
@@ -3221,6 +4097,9 @@ namespace ASEva
             return Handler.GetInternetNTPTime();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.12.0) 获取所有插件的客机同步ID以及对应的标题
         /// </summary>
@@ -3230,6 +4109,9 @@ namespace ASEva
             return Handler.GetPluginGuestSyncTable();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.13.2) 获取主机上所有独立显卡信息
         /// </summary>
@@ -3239,6 +4121,9 @@ namespace ASEva
             return Handler.GetGraphicCardInfos();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.14.0) 获取框架软件使用的第三方软件版权声明
         /// </summary>
@@ -3248,6 +4133,9 @@ namespace ASEva
             return Handler.GetFrameworkThirdPartyNotices();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.14.0) 获取所有插件使用的第三方软件版权声明
         /// </summary>
@@ -3257,6 +4145,9 @@ namespace ASEva
             return Handler.GetPluginThirdPartyNotices();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.14.0) 获取离线地图的版权信息
         /// </summary>
@@ -3266,6 +4157,9 @@ namespace ASEva
             return Handler.GetOfflineMapCopyrightInfo();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.14.0) 获取是否使用境内网络服务
         /// </summary>

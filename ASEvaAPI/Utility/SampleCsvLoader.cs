@@ -5,11 +5,17 @@ using System.Linq;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 读取样本csv文件
     /// </summary>
     public class SampleCsvLoader
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 根据指定路径创建样本csv读取器
         /// </summary>
@@ -113,6 +119,9 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取样本标题 
         /// </summary>
@@ -123,6 +132,9 @@ namespace ASEva.Utility
             else return title.ToList();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 读取下一个样本
         /// </summary>
@@ -181,6 +193,9 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 关闭样本csv读取器
         /// </summary>
@@ -208,6 +223,9 @@ namespace ASEva.Utility
         private SampleCsvLoader()
         { }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 从csv读取样本，输出GeneralSample数组（仅适合较小文件的情况）
         /// </summary>

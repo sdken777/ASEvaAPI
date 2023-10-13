@@ -45,9 +45,6 @@ namespace ASEva.UIWpf
 		protected override swc.Button CreateControl() => new EtoButton { Handler = this };
 	}
 
-	/// <summary>
-	/// Button handler.
-	/// </summary>
 	/// <copyright>(c) 2014 by Vivek Jhaveri</copyright>
 	/// <copyright>(c) 2012-2019 by Curtis Wensley</copyright>
 	/// <license type="BSD-3">See LICENSE for full terms</license>

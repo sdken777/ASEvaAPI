@@ -7,11 +7,17 @@ using ASEva;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.1.0) 多语言文本资源
     /// </summary>
     public class TextResource
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 加载多语言文本资源
         /// </summary>
@@ -30,6 +36,9 @@ namespace ASEva.Utility
             return Load(data, languageCode);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.14) 从XML文件数据加载多语言文本资源
         /// </summary>
@@ -99,6 +108,9 @@ namespace ASEva.Utility
             dict = new Dictionary<string, string>();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取指定ID对应的文本
         /// </summary>
@@ -112,6 +124,9 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 以指定ID对应的文本作为格式描述，输出文本
         /// </summary>

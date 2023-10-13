@@ -5,11 +5,17 @@ using System.Text;
 
 namespace ASEva
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 在音频采集到数据后调用此接口
     /// </summary>
     public interface WaveReceiver
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 数据回调函数
         /// </summary>
@@ -18,11 +24,17 @@ namespace ASEva
         void OnData(short[] samples, double cpuSyncTime);
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 在音频回放需要数据时调用此接口
     /// </summary>
     public interface WaveProvider
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 数据回调函数
         /// </summary>
@@ -31,33 +43,51 @@ namespace ASEva
         short[] GetData(int sampleCount);
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 音频设备信息
     /// </summary>
     public class AudioDeviceInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设备ID
         /// </summary>
         public String DeviceID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设备名称
         /// </summary>
         public String DeviceName { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 音频采集设备接口
     /// </summary>
     public interface AudioRecorder
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取设备列表
         /// </summary>
         /// <returns>设备列表</returns>
         AudioDeviceInfo[] GetRecordDevices();
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 启动音频采集设备
         /// </summary>
@@ -66,6 +96,9 @@ namespace ASEva
         /// <returns>设备对象，若启动失败返回null</returns>
         object StartRecordDevice(String deviceID, WaveReceiver receiver);
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 停止音频采集设备
         /// </summary>
@@ -73,17 +106,26 @@ namespace ASEva
         void StopRecordDevice(object device);
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 音频回放设备接口
     /// </summary>
     public interface AudioReplayer
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取设备列表
         /// </summary>
         /// <returns>设备列表</returns>
         AudioDeviceInfo[] GetReplayDevices();
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 启动音频回放设备
         /// </summary>
@@ -92,6 +134,9 @@ namespace ASEva
         /// <returns>设备对象，若启动失败返回null</returns>
         object StartReplayDevice(String deviceID, WaveProvider provider);
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 停止音频回放设备
         /// </summary>
@@ -99,16 +144,25 @@ namespace ASEva
         void StopReplayDevice(object device);
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 音频驱动信息
     /// </summary>
     public class AudioDriverInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设备ID
         /// </summary>
         public String DriverID { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 设备名称
         /// </summary>

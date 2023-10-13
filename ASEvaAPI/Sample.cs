@@ -5,32 +5,58 @@ using System.Globalization;
 
 namespace ASEva
 {
+    /// \~English
+    /// <summary>
+    /// (api:app=2.7.0) Sync status of time offset
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.7.0) 时间偏置同步状态
     /// </summary>
     public enum TimeOffsetSync
     {
+        /// \~English
+        /// <summary>
+        /// Not synchronized or the sync source is unknown
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 未同步或同步源未知
         /// </summary>
 		None = 0,
 
+        /// \~English
+        /// <summary>
+        /// Synchronized with time server
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 已与授时服务器时间同步
         /// </summary>
 		Server = 1,
 
+        /// \~English
+        /// <summary>
+        /// Synchronized with satellite time
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 已与卫星时间同步
         /// </summary>
 		Gnss = 2,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.7.0) Session标识符
     /// </summary>
     public struct SessionIdentifier
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 默认构造函数
         /// </summary>
@@ -50,6 +76,9 @@ namespace ASEva
             else value = 0;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.2) 通过字符串创建
         /// </summary>
@@ -63,6 +92,9 @@ namespace ASEva
             else return new SessionIdentifier(0, 0, 0, 0, 0, 0);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 通过日期时间创建
         /// </summary>
@@ -71,6 +103,9 @@ namespace ASEva
             return new SessionIdentifier(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.3) 是否有效
         /// </summary>
@@ -79,6 +114,9 @@ namespace ASEva
             return value != 0;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 转为日期时间
         /// </summary>
@@ -141,41 +179,65 @@ namespace ASEva
         private ulong value;
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.7.0) Session无关时间信息
     /// </summary>
     public class IndependentTimeInfo
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 时间偏置同步状态
         /// </summary>
         public TimeOffsetSync OffsetSync { get { return offsetSync; }}
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 到达时CPU计数，0表示无效
         /// </summary>
         public ulong CPUTick { get { return cpuTick; }}
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 到达时主机Posix时间，单位纳秒，0表示无效
         /// </summary>
         public ulong HostPosix { get { return hostPosix; }}
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 采样时客机Posix时间，单位纳秒，0表示无效
         /// </summary>
         public ulong GuestPosix { get { return guestPosix; }}
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 采样时授时服务器Posix时间，单位纳秒，0表示无效
         /// </summary>
         public ulong ServerPosix { get { return serverPosix; }}
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 采样时卫星Posix时间，单位纳秒，0表示无效
         /// </summary>
         public ulong GNSSPosix { get { return gnssPosix; }}
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 默认构造函数
         /// </summary>
@@ -193,26 +255,41 @@ namespace ASEva
         private ulong cpuTick, hostPosix, guestPosix, serverPosix, gnssPosix;
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.7.0) 时间戳
     /// </summary>
     public struct Timestamp
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// Session标识符
         /// </summary>
         public SessionIdentifier Session { get { return session; }}
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 时间偏置，单位秒
         /// </summary>
         public double Offset { get { return offset; }}
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// Session无关时间信息
         /// </summary>
         public IndependentTimeInfo TimeInfo { get { return timeInfo; }}
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 默认构造函数
         /// </summary>
@@ -228,11 +305,17 @@ namespace ASEva
         private IndependentTimeInfo timeInfo;
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 数据样本
     /// </summary>
     public class Sample : IComparable<Sample>
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 时间戳
         /// </summary>
@@ -241,6 +324,9 @@ namespace ASEva
             get { return timestamp; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.2) 所属Session标识符
         /// </summary>
@@ -249,6 +335,9 @@ namespace ASEva
             get { return timestamp.Session; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 所属session ID（注意，set操作将清除Session无关时间信息）
         /// </summary>
@@ -258,6 +347,9 @@ namespace ASEva
             set { timestamp = new Timestamp(SessionIdentifier.FromDateTime(value), timestamp.Offset, null); }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 时间偏置，单位秒（注意，set操作将清除Session无关时间信息）
         /// </summary>
@@ -267,6 +359,9 @@ namespace ASEva
             set { timestamp = new Timestamp(timestamp.Session, value, null); }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 在时间线上的位置，单位秒
         /// </summary>
@@ -276,6 +371,9 @@ namespace ASEva
             set { timeline = value; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// [依赖Agency] 获取通过主机Posix时间模型计算得到的本地时间
         /// </summary>
@@ -287,6 +385,9 @@ namespace ASEva
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// [依赖Agency] 获取通过卫星Posix时间模型得到的计算UTC时间
         /// </summary>
@@ -298,6 +399,9 @@ namespace ASEva
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 默认构造函数
         /// </summary>
@@ -307,6 +411,9 @@ namespace ASEva
             timeline = 0;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 按指定时间信息进行初始化
         /// </summary>
@@ -319,6 +426,9 @@ namespace ASEva
             this.timeline = timeline;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 按指定时间信息进行初始化
         /// </summary>
@@ -332,6 +442,9 @@ namespace ASEva
             this.timeline = timeline;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 设置当前样本的时间戳和时间线位置
         /// </summary>
@@ -345,6 +458,9 @@ namespace ASEva
             this.timeline = timeline;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.2) 设置当前样本的时间戳和时间线位置
         /// </summary>
@@ -356,6 +472,9 @@ namespace ASEva
             this.timeline = timeline;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 按时间参考样本设置当前样本的时间戳和时间线位置
         /// </summary>
@@ -366,6 +485,9 @@ namespace ASEva
             timeline = timeRef.timeline;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 按时间线进行比较
         /// </summary>
@@ -376,6 +498,9 @@ namespace ASEva
             return Timeline.CompareTo(other.Timeline);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 对样本缓存的搜索结果
         /// </summary>
@@ -389,6 +514,9 @@ namespace ASEva
             public double w2 { get; set; }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// [支持通用样本转换时必须实现] 特化样本转为 ASEva.GeneralSample 的协议名称
         /// </summary>
@@ -398,6 +526,9 @@ namespace ASEva
             return null;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// [支持通用样本转换时必须实现] 从 ASEva.GeneralSample 转为特化样本时支持的协议名称列表
         /// </summary>
@@ -407,6 +538,9 @@ namespace ASEva
             return null;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// [支持通用样本转换时必须实现] 从 ASEva.GeneralSample 转为特化样本，该实现需调用SetTime进行时间拷贝
         /// </summary>
@@ -417,6 +551,9 @@ namespace ASEva
             return false;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// [支持通用样本转换时可选实现] 特化样本转为 ASEva.GeneralSample ，该实现需调用SetTime进行时间拷贝
         /// </summary>
@@ -426,6 +563,9 @@ namespace ASEva
             return null;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// [支持通用样本转换时可选实现] 特化样本转为 ASEva.GeneralSample ，该实现需调用SetTime进行时间拷贝并赋值通道
         /// </summary>
@@ -435,6 +575,9 @@ namespace ASEva
             return null;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// [可选实现] 返回是否支持样本间插值
         /// </summary>
@@ -444,6 +587,9 @@ namespace ASEva
             return false;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// [SupportInterpolation返回true时必须实现] 基于 ASEva.Sample.Search 返回的搜索结果进行样本插值，无需输出时间信息
         /// </summary>
@@ -454,6 +600,9 @@ namespace ASEva
             return null;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 判断目标时间点是否在样本缓存范围内
         /// </summary>
@@ -466,6 +615,9 @@ namespace ASEva
             return targetTimeline >= samples[0].Timeline && targetTimeline <= samples.Last().Timeline;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 判断目标时间点是否在样本缓存范围外，且比所有样本都更早
         /// </summary>
@@ -478,6 +630,9 @@ namespace ASEva
             return targetTimeline < samples[0].Timeline;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 判断目标时间点是否在样本缓存范围外，且比所有样本都更晚
         /// </summary>
@@ -504,6 +659,9 @@ namespace ASEva
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 按目标时间点搜索缓存列表
         /// </summary>
@@ -631,6 +789,9 @@ namespace ASEva
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 按目标时间点搜索缓存列表，自动进行插值并返回插值后样本（需要样本支持插值，且目标时间在缓存范围内，默认最大时间间隔为10秒）
         /// </summary>
@@ -679,6 +840,9 @@ namespace ASEva
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 在样本缓存列表中搜索最近样本
         /// </summary>
@@ -704,6 +868,9 @@ namespace ASEva
             else return result.s2;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 根据全局缓存范围，将样本缓存中较早样本移除
         /// </summary>
@@ -727,25 +894,50 @@ namespace ASEva
         private double timeline;
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Type of an element in general sample
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 通用样本中值的类型
     /// </summary>
     public enum GeneralSampleValueMode
     {
+        /// \~English
+        /// <summary>
+        /// Invalid, recorded as "na"
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 无效，采集为"na"
         /// </summary>
         Invalid,
+
+        /// \~English
+        /// <summary>
+        /// Number
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 数值
         /// </summary>
         Number,
+
+        /// \~English
+        /// <summary>
+        /// Text
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 字符串
         /// </summary>
         Text,
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 通用样本值
     /// </summary>
@@ -819,23 +1011,38 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 通用样本
     /// </summary>
     public class GeneralSample : Sample
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 样本协议
         /// </summary>
         public String Protocol { get; set; }
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 样本所属通道，null表示无通道信息（唯一通道样本）
         /// </summary>
         public int? Channel { get; set; }
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 值列表
         /// </summary>
         public List<GeneralSampleValue> Values { get; set; }
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 值列表中关键数值的个数
         /// </summary>

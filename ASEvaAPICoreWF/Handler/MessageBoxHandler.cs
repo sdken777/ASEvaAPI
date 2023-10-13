@@ -7,7 +7,7 @@ using Eto.WinForms;
 
 namespace ASEva.UICoreWF
 {
-	public class MessageBoxHandler : WidgetHandler<Widget>, MessageBox.IHandler
+	class MessageBoxHandler : WidgetHandler<Widget>, MessageBox.IHandler
 	{
 		public string Text { get; set; }
 

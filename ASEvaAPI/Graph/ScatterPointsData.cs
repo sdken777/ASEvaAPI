@@ -2,6 +2,9 @@
 
 namespace ASEva.Graph
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 散点图单轴范围
     /// </summary>
@@ -17,27 +20,42 @@ namespace ASEva.Graph
         }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 散点图定义的附加选项
     /// </summary>
     public class ScatterOptions
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// x轴柱状图区间个数，null表示自动计算
         /// </summary>
         public int? XHistCount { get; set; }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// y轴柱状图区间个数，null表示自动计算
         /// </summary>
         public int? YHistCount { get; set; }
     }
 
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 散点图数据
     /// </summary>
     public class ScatterPointsData : GraphData
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 创建图表定义（不带数据验证，柱状图区间个数自动计算）
         /// </summary>
@@ -52,6 +70,9 @@ namespace ASEva.Graph
             return CreateDefinitionWithValidationAndOptions(title, xTitle, yTitle, xRange, yRange, null, null);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 创建带数据验证的图表定义（柱状图区间个数自动计算）
         /// </summary>
@@ -67,6 +88,9 @@ namespace ASEva.Graph
             return CreateDefinitionWithValidationAndOptions(title, xTitle, yTitle, xRange, yRange, validation, null);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 创建带数据验证和附加选项的图表定义
         /// </summary>
@@ -106,6 +130,9 @@ namespace ASEva.Graph
             return def;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取x轴标题
         /// </summary>
@@ -115,6 +142,9 @@ namespace ASEva.Graph
             return Definition.ColumnTitles[0];
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取y轴标题
         /// </summary>
@@ -124,6 +154,9 @@ namespace ASEva.Graph
             return Definition.ColumnTitles[1];
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取x轴范围
         /// </summary>
@@ -136,6 +169,9 @@ namespace ASEva.Graph
             return new ScatterRange(lower, upper);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取y轴范围
         /// </summary>
@@ -148,6 +184,9 @@ namespace ASEva.Graph
             return new ScatterRange(lower, upper);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取x轴柱状图区间个数
         /// </summary>
@@ -198,6 +237,9 @@ namespace ASEva.Graph
             return xHistCount.Value;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取y轴柱状图区间个数
         /// </summary>
@@ -248,6 +290,9 @@ namespace ASEva.Graph
             return yHistCount.Value;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取x轴柱状图各区间统计数
         /// </summary>
@@ -271,6 +316,9 @@ namespace ASEva.Graph
             return output;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取y轴柱状图各区间统计数
         /// </summary>
@@ -294,6 +342,9 @@ namespace ASEva.Graph
             return output;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加样本点
         /// </summary>
@@ -335,6 +386,9 @@ namespace ASEva.Graph
             Params[0] = (count + 1).ToString();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加含时间信息的样本点
         /// </summary>
@@ -376,6 +430,9 @@ namespace ASEva.Graph
             Params[0] = (count + 1).ToString();
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取所有散点样本
         /// </summary>
@@ -397,6 +454,9 @@ namespace ASEva.Graph
             return pts;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取某个散点样本的时间信息
         /// </summary>

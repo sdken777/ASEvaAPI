@@ -3,6 +3,9 @@ using ASEva.Samples;
 
 namespace ASEva.UIGtk
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.1.0) 图像对象转换 
     /// </summary>

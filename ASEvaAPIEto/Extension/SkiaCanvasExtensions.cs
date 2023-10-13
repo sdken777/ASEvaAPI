@@ -3,11 +3,17 @@ using SkiaSharp;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.7.0) 方便操作Skia画布的扩展
     /// </summary>
     public static class SkiaCanvasExtensions
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 获取默认字体
         /// </summary>
@@ -24,6 +30,9 @@ namespace ASEva.UIEto
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.16) 获取指定字体
         /// </summary>
@@ -45,6 +54,9 @@ namespace ASEva.UIEto
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.7.1) 指定锚点绘制文本
         /// </summary>
@@ -104,6 +116,9 @@ namespace ASEva.UIEto
             canvas.DrawText(text, new SKPoint(logicalX, logicalY - yOffset), fontPaint);
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.7.1) 测量文本的尺寸
         /// </summary>

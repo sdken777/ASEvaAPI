@@ -4,11 +4,17 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// 
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.2) 方便操作堆叠布局的扩展
     /// </summary>
     public static class StackLayoutExtensions
     {
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加空间延布局方向撑满
         /// </summary>
@@ -18,6 +24,9 @@ namespace ASEva.UIEto
             stackLayout.Items.Add(new StackLayoutItem(new Panel(), true));
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.10.4) 延布局方向添加指定大小空间
         /// </summary>
@@ -35,6 +44,9 @@ namespace ASEva.UIEto
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.3.3) 添加分割线
         /// </summary>
@@ -51,6 +63,9 @@ namespace ASEva.UIEto
             }
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加文字标签至堆叠布局
         /// </summary>
@@ -66,6 +81,9 @@ namespace ASEva.UIEto
             return label;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加文字标签至堆叠布局
         /// </summary>
@@ -86,6 +104,9 @@ namespace ASEva.UIEto
             return label;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加文字按键至堆叠布局
         /// </summary>
@@ -104,6 +125,9 @@ namespace ASEva.UIEto
             stackLayout.Items.Add(new StackLayoutItem(button, expand));
             return button;
         }
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.4) 添加图像按键至堆叠布局
         /// </summary>
@@ -134,6 +158,9 @@ namespace ASEva.UIEto
             return button;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.3.3) 添加文字按键面板至堆叠布局
         /// </summary>
@@ -151,6 +178,9 @@ namespace ASEva.UIEto
             stackLayout.AddControl(panel, expand, logicalWidth, logicalHeight);
             return panel;
         }
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.3.3) 添加图像按键面板至堆叠布局
         /// </summary>
@@ -175,6 +205,9 @@ namespace ASEva.UIEto
             return panel;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加链接式按键至堆叠布局
         /// </summary>
@@ -190,6 +223,9 @@ namespace ASEva.UIEto
             return button;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加多选框至堆叠布局
         /// </summary>
@@ -206,6 +242,9 @@ namespace ASEva.UIEto
             return checkBox;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加单选框组至堆叠布局
         /// </summary>
@@ -230,6 +269,9 @@ namespace ASEva.UIEto
             return radioButtonList;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加组合框至堆叠布局
         /// </summary>
@@ -252,6 +294,9 @@ namespace ASEva.UIEto
             return comboBox;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加分组框至堆叠布局
         /// </summary>
@@ -271,6 +316,9 @@ namespace ASEva.UIEto
             return groupBox;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加控件至堆叠布局
         /// </summary>
@@ -287,6 +335,9 @@ namespace ASEva.UIEto
             return control;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加横向堆叠布局至堆叠布局
         /// </summary>
@@ -303,6 +354,9 @@ namespace ASEva.UIEto
             return layout;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.0) 添加横向堆叠布局至堆叠布局
         /// </summary>
@@ -323,6 +377,9 @@ namespace ASEva.UIEto
             return layout;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加纵向堆叠布局至堆叠布局
         /// </summary>
@@ -339,6 +396,9 @@ namespace ASEva.UIEto
             return layout;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.0) 添加纵向堆叠布局至堆叠布局
         /// </summary>
@@ -359,6 +419,9 @@ namespace ASEva.UIEto
             return layout;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// 添加表布局至堆叠布局
         /// </summary>
@@ -375,6 +438,9 @@ namespace ASEva.UIEto
             return layout;
         }
 
+        /// \~English
+        /// 
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.0) 添加表布局至堆叠布局
         /// </summary>
