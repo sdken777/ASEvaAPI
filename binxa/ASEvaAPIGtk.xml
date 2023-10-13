@@ -735,7 +735,7 @@
             <summary>
             [Optional] Called while getting default size (Use requested size if this method is not overridden)
             </summary>
-            <returns>默认大小</returns>
+            <returns>The default size</returns>
             \~Chinese
             <summary>
             [可选实现] 获取默认大小时被调用（若不实现默认大小即为最小尺寸）

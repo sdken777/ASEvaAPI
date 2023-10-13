@@ -19,7 +19,7 @@ namespace ASEva.UICoreWF
         /// <summary>
         /// (api:corewf=2.1.1) [Optional] Called while initializing panel's size
         /// </summary>
-        /// <param name="config">配置字符串</param>
+        /// <param name="config">Configuration string</param>
         /// \~Chinese
         /// <summary>
         /// (api:corewf=2.1.1) [可选实现] 在初始化控件尺寸时被调用
