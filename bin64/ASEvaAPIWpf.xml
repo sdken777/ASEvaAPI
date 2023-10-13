@@ -10,6 +10,12 @@
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.APIInfo.GetAPIVersion">
+            \~English
+            <summary>
+            (api:wpf=1.0.0) Get API version
+            </summary>
+            <returns>The API version</returns>
+            \~Chinese
             <summary>
             (api:wpf=1.0.0) 获取API版本
             </summary>
@@ -26,43 +32,85 @@
             </summary>
         </member>
         <member name="T:ASEva.UIWpf.ConfigPanel">
+            \~English
+            <summary>
+            (api:wpf=1.0.0) UI panel for configuration
+            </summary>
+            \~Chinese
             <summary>
             (api:wpf=1.0.0) 配置界面控件，用于实现可视化配置
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.ConfigPanel.OnInitSize(System.String)">
+            \~English
+            <summary>
+            [Optional] Called while initializing panel's size
+            </summary>
+            <param name="config">Configuration string</param>
+            \~Chinese
             <summary>
             [可选实现] 在初始化控件尺寸时被调用
             </summary>
             <param name="config">配置字符串</param>
         </member>
         <member name="M:ASEva.UIWpf.ConfigPanel.OnInit(System.String)">
+            \~English
+            <summary>
+            [Optional] Called while initializing the panel
+            </summary>
+            <param name="config">Configuration string</param>
+            \~Chinese
             <summary>
             [可选实现] 在配置界面控件初始化时被调用
             </summary>
             <param name="config">配置字符串</param>
         </member>
         <member name="M:ASEva.UIWpf.ConfigPanel.OnRelease">
+            \~English
+            <summary>
+            [Optional] Called before destroying the panel
+            </summary>
+            \~Chinese
             <summary>
             [可选实现] 在配置界面控件销毁前被调用
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.ConfigPanel.OnUpdateUI">
+            \~English
+            <summary>
+            [Optional] Called while updating the panel's UI
+            </summary>
+            \~Chinese
             <summary>
             [可选实现] 在需要更新界面时被调用
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.ConfigPanel.OnHandleModal">
+            \~English
+            <summary>
+            (api:wpf=1.4.6) [Optional] Called in the main loop, for running modal dialog
+            </summary>
+            \~Chinese
             <summary>
             (api:wpf=1.4.6) [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.ConfigPanel.Close">
+            \~English
+            <summary>
+            (api:wpf=1.4.3) Close the container holding the panel
+            </summary>
+            \~Chinese
             <summary>
             (api:wpf=1.4.3) 关闭配置界面
             </summary>
         </member>
         <member name="E:ASEva.UIWpf.ConfigPanel.CloseRequested">
+            \~English
+            <summary>
+            (api:wpf=1.4.3) Implement closing the panel container in this event
+            </summary>
+            \~Chinese
             <summary>
             (api:wpf=1.4.3) 在此事件中实现配置界面的关闭
             </summary>
@@ -98,9 +146,6 @@
             </summary>
         </member>
         <member name="T:ASEva.UIWpf.ButtonHandler`3">
-            <summary>
-            Button handler.
-            </summary>
             <copyright>(c) 2014 by Vivek Jhaveri</copyright>
             <copyright>(c) 2012-2019 by Curtis Wensley</copyright>
             <license type="BSD-3">See LICENSE for full terms</license>
@@ -110,115 +155,140 @@
             Gets or sets the spacing between the image and the label when both are present
             </summary>
         </member>
-        <member name="T:ASEva.UIWpf.EnableThemingInScope">
-            <devdoc>
-                This class is intended to use with the C# 'using' statement in
-                to activate an activation context for turning on visual theming at
-                the beginning of a scope, and have it automatically deactivated
-                when the scope is exited.
-            </devdoc>
-            <summary>
-            Enables visual styles for common system dialogs (e.g message box).
-            Original source from: http://support.microsoft.com/kb/830033/en-us
-            Curtis Wensley: Modified for 64-bit compatibility by using an IntPtr instead of uint for the cookie
-            </summary>
-        </member>
         <member name="T:ASEva.UIWpf.ImageConverter">
+            \~English
+            <summary>
+            (api:wpf=1.0.0) Conversion of image object
+            </summary>
+            \~Chinese
             <summary>
             (api:wpf=1.0.0) 图像对象转换
             </summary>
         </member>
-        <member name="T:ASEva.UIWpf.Resource">
-            <summary>
-              一个强类型的资源类，用于查找本地化的字符串等。
-            </summary>
-        </member>
-        <member name="P:ASEva.UIWpf.Resource.ResourceManager">
-            <summary>
-              返回此类使用的缓存的 ResourceManager 实例。
-            </summary>
-        </member>
-        <member name="P:ASEva.UIWpf.Resource.Culture">
-            <summary>
-              重写当前线程的 CurrentUICulture 属性，对
-              使用此强类型资源类的所有资源查找执行重写。
-            </summary>
-        </member>
-        <member name="P:ASEva.UIWpf.Resource.Extended_WPF_Toolkit__3_6_">
-            <summary>
-              查找 System.Byte[] 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:ASEva.UIWpf.Resource.SharpDX">
-            <summary>
-              查找 System.Byte[] 类型的本地化资源。
-            </summary>
-        </member>
-        <member name="P:ASEva.UIWpf.Resource.WebView2">
-            <summary>
-              查找 System.Byte[] 类型的本地化资源。
-            </summary>
-        </member>
         <member name="T:ASEva.UIWpf.WindowPanel">
+            \~English
+            <summary>
+            (api:wpf=1.0.0) UI panel for child window
+            </summary>
+            \~Chinese
             <summary>
             (api:wpf=1.0.0) 窗口控件，用于实现窗口组件的实际功能
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.WindowPanel.OnInitSize(System.String)">
+            \~English
+            <summary>
+            [Optional] Called while initializing panel's size
+            </summary>
+            <param name="config">Configuration string</param>
+            \~Chinese
             <summary>
             [可选实现] 在初始化控件尺寸时被调用
             </summary>
             <param name="config">配置字符串</param>
         </member>
         <member name="M:ASEva.UIWpf.WindowPanel.OnInit(System.String)">
+            \~English
+            <summary>
+            [Optional] Called while initializing the panel
+            </summary>
+            <param name="config">Configuration string</param>
+            \~Chinese
             <summary>
             [可选实现] 在配置界面控件初始化时被调用
             </summary>
             <param name="config">配置字符串</param>
         </member>
         <member name="M:ASEva.UIWpf.WindowPanel.OnGetConfig">
+            \~English
+            <summary>
+            [Optional] Called while getting the configuration string
+            </summary>
+            <returns>Configuration string</returns>
+            \~Chinese
             <summary>
             [可选实现] 获取配置字符串时被调用
             </summary>
             <returns>配置字符串</returns>
         </member>
         <member name="M:ASEva.UIWpf.WindowPanel.OnInputData(System.Object)">
+            \~English
+            <summary>
+            [Optional] Called while new data arrived. If there's a sample buffer, use ASEva.Sample.ClipWithBufferBegin to remove data outside the buffer range after adding new sample. In addition, since ASEva.WindowPanel.OnUpdateUI won't be called while the child window is hidden, you can use ASEva.Samples.ManualTriggerSample to perform background processing (ManualTriggerSample's frequency is 50Hz)
+            </summary>
+            <param name="data">New data, can be ASEva.GeneralSample , ASEva.Samples.ManualTriggerSample , ASEva.Samples.AudioFrameSample , ASEva.Samples.PointCloudSample , ASEva.Samples.BusDataPack , ASEva.Samples.SignalsData , ASEva.EventData , ASEva.SceneData , etc.</param>
+            \~Chinese
             <summary>
             [可选实现] 在获得新数据时被调用。如果存在样本缓存，则需要在添加至缓存后使用 ASEva.Sample.ClipWithBufferBegin 将缓存范围外数据移除。另外，由于窗口隐藏时将不会调用 ASEva.WindowPanel.OnUpdateUI ，所以可以在此函数中的data为 ASEva.Samples.ManualTriggerSample 时进行后台处理（ManualTriggerSample频率为50Hz）
             </summary>
             <param name="data">新数据，包括通用样本 ASEva.GeneralSample , 手动触发器样本 ASEva.Samples.ManualTriggerSample , 音频帧样本 ASEva.Samples.AudioFrameSample , 点云帧样本 ASEva.Samples.PointCloudSample , 总线数据 ASEva.Samples.BusDataPack , 信号数据 ASEva.Samples.SignalsData , 事件数据 ASEva.EventData , 场景片段描述 ASEva.SceneData 等类型</param>
         </member>
         <member name="M:ASEva.UIWpf.WindowPanel.OnResetData">
+            \~English
+            <summary>
+            [Optional] Called while needed to reset data buffer
+            </summary>
+            \~Chinese
             <summary>
             [可选实现] 在需要重置数据缓存时被调用
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.WindowPanel.OnStartSession">
+            \~English
+            <summary>
+            [Optional] Called while starting a session
+            </summary>
+            \~Chinese
             <summary>
             [可选实现] 在每轮开始时被调用
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.WindowPanel.OnStopSession">
+            \~English
+            <summary>
+            [Optional] Called while stopping a session
+            </summary>
+            \~Chinese
             <summary>
             [可选实现] 在每轮结束时被调用
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.WindowPanel.OnUpdateUI">
+            \~English
+            <summary>
+            [Optional] Called while updating the panel's UI. All UI related updating should be put here. Note that this function won't be called when the child window is hidden
+            </summary>
+            \~Chinese
             <summary>
             [可选实现] 在需要更新界面时被调用。所有与界面相关的更新应全部放在此函数内实现。需要注意，窗口隐藏时将不会调用此函数
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.WindowPanel.OnHandleModal">
+            \~English
+            <summary>
+            (api:wpf=1.4.6) [Optional] Called in the main loop, for running modal dialog
+            </summary>
+            \~Chinese
             <summary>
             (api:wpf=1.4.6) [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.WindowPanel.OnRelease">
+            \~English
+            <summary>
+            [Optional] Called before destroying the panel
+            </summary>
+            \~Chinese
             <summary>
             [可选实现] 在窗口控件销毁前被调用
             </summary>
         </member>
         <member name="T:ASEva.UIWpf.XamlLoader">
+            \~English
+            <summary>
+            (api:wpf=1.4.0) Load xaml dynamically
+            </summary>
+            \~Chinese
             <summary>
             (api:wpf=1.4.0) 动态加载xaml
             </summary>
