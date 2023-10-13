@@ -6,6 +6,8 @@ using System.Threading;
 
 namespace ASEva.UICoreWF
 {
+    #pragma warning disable CS1571
+
     /// \~English
     /// <summary>
     /// (api:corewf=2.0.0) Base class of graph control
