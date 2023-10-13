@@ -11,7 +11,9 @@ namespace ASEva.UIGtk
     #pragma warning disable CS0612, CS0649
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:gtk=2.0.0) Scatter points graph control
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 散点图数据可视化窗口
@@ -48,7 +50,9 @@ namespace ASEva.UIGtk
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:gtk=2.0.8) Release resources
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:gtk=2.0.8) 释放相关资源

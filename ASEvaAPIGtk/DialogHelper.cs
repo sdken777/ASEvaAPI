@@ -8,7 +8,9 @@ using Gtk;
 namespace ASEva.UIGtk
 {
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:gtk=2.0.0) Dialog helper class
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 对话框辅助类
@@ -166,7 +168,9 @@ namespace ASEva.UIGtk
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Top window
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 顶层窗口
@@ -188,7 +192,9 @@ namespace ASEva.UIGtk
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Main window
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 主窗口
@@ -196,7 +202,9 @@ namespace ASEva.UIGtk
         public static Window MainWindow { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:gtk=2.4.3) Other main windows
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:gtk=2.4.3) 其他主窗口

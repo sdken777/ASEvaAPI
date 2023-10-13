@@ -3,6 +3,8 @@ using System.Windows.Controls;
 
 namespace ASEva.UIWpf
 {
+    #pragma warning disable CS1571
+    
     /// \~English
     /// <summary>
     /// (api:wpf=1.0.0) UI panel for child window

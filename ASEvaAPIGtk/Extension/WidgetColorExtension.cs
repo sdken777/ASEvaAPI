@@ -6,7 +6,9 @@ namespace ASEva.UIGtk
     #pragma warning disable CS0612
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:gtk=2.0.0) Extension methods for setting control's color
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 控件颜色设置扩展方法

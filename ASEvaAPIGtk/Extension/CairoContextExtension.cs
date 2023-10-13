@@ -4,7 +4,9 @@ using Gtk;
 namespace ASEva.UIGtk
 {
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:gtk=2.0.0) Extension methods for Cairo painting
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) Cairo绘图工具扩展方法

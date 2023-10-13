@@ -4,7 +4,9 @@ using Gtk;
 namespace ASEva.UIGtk
 {
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:gtk=2.0.0) Extension methods for combo box
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 组合框扩展方法

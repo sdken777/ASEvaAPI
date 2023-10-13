@@ -9,7 +9,9 @@ namespace ASEva.UIGtk
     #pragma warning disable CS0612, CS0649
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:gtk=2.0.0) Single value graph control
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 单值数据可视化窗口

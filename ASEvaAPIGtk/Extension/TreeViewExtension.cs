@@ -4,7 +4,9 @@ using Gtk;
 namespace ASEva.UIGtk
 {
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:gtk=2.0.0) Extension methods for tree view
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 树和表视图框扩展方法

@@ -5,8 +5,12 @@ using ASEva.Utility;
 
 namespace ASEva.UIGtk
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:gtk=2.0.8) Pre-render object
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.8) 预绘制对象
@@ -14,7 +18,11 @@ namespace ASEva.UIGtk
     public class DrawSwap
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Create a pre-render object
+        /// </summary>
+        /// <param name="widget">Render target</param>
+        /// <param name="category">Category, set null if not specify any</param>
         /// \~Chinese
         /// <summary>
         /// 创建预绘制对象
@@ -29,7 +37,9 @@ namespace ASEva.UIGtk
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Refresh, "Paint" event will be invoked
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 刷新，其中会调用Paint
@@ -58,7 +68,9 @@ namespace ASEva.UIGtk
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Release resources
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 释放相关资源

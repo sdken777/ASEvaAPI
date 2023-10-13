@@ -7,7 +7,9 @@ using ASEva;
 namespace ASEva.UIGtk
 {
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:gtk=2.0.0) Timer
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 计时器

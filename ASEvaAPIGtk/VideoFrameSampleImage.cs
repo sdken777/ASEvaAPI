@@ -6,7 +6,9 @@ using ASEva.Samples;
 namespace ASEva.UIGtk
 {
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:gtk=2.0.0) The image object of ASEva.Samples.VideoFrameSample
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) ASEva.Samples.VideoFrameSample 中的图像对象
@@ -14,7 +16,9 @@ namespace ASEva.UIGtk
     public class VideoFrameSampleImage
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Create image with the specified size and without alpha channel
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 按指定宽高创建无alpha通道的图像
@@ -30,7 +34,9 @@ namespace ASEva.UIGtk
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:gtk=2.1.0) Bind to common image object
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:gtk=2.1.0) 绑定通用图像，共享数据
@@ -50,7 +56,9 @@ namespace ASEva.UIGtk
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Image width
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 图像宽度
@@ -61,7 +69,9 @@ namespace ASEva.UIGtk
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Image height
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 图像高度
@@ -72,7 +82,9 @@ namespace ASEva.UIGtk
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Number of bytes per row
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 一行数据的字节数
@@ -83,7 +95,9 @@ namespace ASEva.UIGtk
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Image data
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 图像数据
@@ -94,7 +108,9 @@ namespace ASEva.UIGtk
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:gtk=2.1.0) Whether it contains alpha channel
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:gtk=2.1.0) 是否含alpha通道
@@ -105,10 +121,12 @@ namespace ASEva.UIGtk
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:gtk=2.5.6) Whether it's BGR inverted (i.e. RGB or RGBA)
+        /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:gtk=2.5.6) BGR是否逆序
+        /// (api:gtk=2.5.6) BGR是否逆序 (即RGB或RGBA)
         /// </summary>
         public bool BgrInverted
         {
@@ -116,7 +134,9 @@ namespace ASEva.UIGtk
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Convert to Gdk.Pixbuf object
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 转换为Gdk.Pixbuf对象
@@ -204,7 +224,9 @@ namespace ASEva.UIGtk
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Convert to Cairo.ImageSurface object. When you're done using it, call Dispose method to release
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 转换为Cairo.ImageSurface对象，使用完毕后需调用Dispose方法进行释放
