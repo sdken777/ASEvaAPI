@@ -154,13 +154,13 @@ namespace ASEva.UIGtk
         /// Register to use the specified type of control for graph data visualization
         /// </summary>
         /// <param name="graphDefinitionID">Graph definition ID</param>
-        /// <param name="controlType">Control type, which should be derived class of ASEva.UI.BaseGraph </param>
+        /// <param name="controlType">Control type, which should be derived class of ASEva.UIGtk.BaseGraph </param>
         /// \~Chinese
         /// <summary>
         /// 注册指定ID的图表使用自定义可视化控件
         /// </summary>
         /// <param name="graphDefinitionID">图表定义ID</param>
-        /// <param name="controlType">控件类型，必须为 ASEva.UI.BaseGraph 的子类</param>
+        /// <param name="controlType">控件类型，必须为 ASEva.UIGtk.BaseGraph 的子类</param>
         public static void RegisterGraphControl(int graphDefinitionID, Type controlType)
         {
             if (controlType != null) ControlTypeTable[graphDefinitionID] = controlType;

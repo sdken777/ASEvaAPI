@@ -9,7 +9,9 @@ using ASEva.Utility;
 namespace ASEva.UICoreWF
 {
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:corewf=2.0.0) Histogram and poly line graph control
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) 柱状折线图可视化控件

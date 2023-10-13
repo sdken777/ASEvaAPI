@@ -9,7 +9,9 @@ using ASEva.Utility;
 namespace ASEva.UICoreWF
 {
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:corewf=2.0.0) Scatter points graph control
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) 散点图数据可视化窗口

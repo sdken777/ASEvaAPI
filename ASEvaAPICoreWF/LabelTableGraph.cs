@@ -7,7 +7,9 @@ using ASEva.Utility;
 namespace ASEva.UICoreWF
 {
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:corewf=2.0.0) Label table graph control
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) 标签热力图数据可视化窗口

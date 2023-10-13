@@ -23,7 +23,7 @@ namespace ASEva.UIGtk
         /// <summary>
         /// (api:gtk=2.1.1) [Optional] Called while initializing panel's size
         /// </summary>
-        /// <param name="config">配置Configuration string字符串</param>
+        /// <param name="config">Configuration string</param>
         /// \~Chinese
         /// <summary>
         /// (api:gtk=2.1.1) [可选实现] 在初始化控件尺寸时被调用

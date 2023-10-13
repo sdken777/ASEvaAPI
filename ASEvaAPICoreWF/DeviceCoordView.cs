@@ -6,7 +6,9 @@ using ASEva.Utility;
 namespace ASEva.UICoreWF
 {
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:corewf=2.0.0) A control to visualize sensor's coordinate system and position
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) 传感器坐标系及位置等的可视化控件
