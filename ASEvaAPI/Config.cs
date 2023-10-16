@@ -4,7 +4,9 @@ using System.Collections.Generic;
 namespace ASEva
 {
     /// \~English
+    /// <summary>
     /// (api:app=2.0.0) Component configuration's status
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 组件配置的状态
@@ -12,15 +14,19 @@ namespace ASEva
     public enum ConfigStatus
     {
         /// \~English
+        /// <summary>
         /// Enabled and normal
-        /// \~Chinese
+        /// </summary>
+         /// \~Chinese
         /// <summary>
         /// 启用且正常
         /// </summary>
         Enabled,
         
         /// \~English
+        /// <summary>
         /// Enabled but with errors
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 启用但存在错误
@@ -28,7 +34,9 @@ namespace ASEva
         EnabledWithError,
 
         /// \~English
+        /// <summary>
         /// Enabled but with warnings
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 启用但部分存在错误
@@ -36,7 +44,9 @@ namespace ASEva
         EnabledWithWarning,
 
         /// \~English
+        /// <summary>
         /// Disabled
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 禁用

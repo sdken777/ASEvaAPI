@@ -6,8 +6,12 @@ using ASEva.Samples;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:eto=2.7.0) Extensions for common image object
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:eto=2.7.0) 方便使用通用图像数据的扩展
@@ -15,7 +19,11 @@ namespace ASEva.UIEto
     public static class CommonImageExtensions
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Convert to Eto bitmap object
+        /// </summary>
+        /// <param name="image">Common image object</param>
+        /// <returns>Eto bitmap object</returns>
         /// \~Chinese
         /// <summary>
         /// 转为Eto位图对象
@@ -28,7 +36,11 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Convert to Skia image object
+        /// </summary>
+        /// <param name="image">Common image object</param>
+        /// <returns>Skia image object (After you're done using it, it's recommended to call "Dispose" immediately to reduce memory usage)</returns>
         /// \~Chinese
         /// <summary>
         /// 转为Skia图像对象

@@ -3,8 +3,12 @@ using Eto.Forms;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:eto=2.0.0) UI panel for configuration
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.0) 配置界面控件，用于实现可视化配置
@@ -12,7 +16,10 @@ namespace ASEva.UIEto
     public class ConfigPanel : Panel
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.2.1) [Optional] Called while initializing panel's size
+        /// </summary>
+        /// <param name="config">Configuration string</param>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.2.1) [可选实现] 在初始化控件尺寸时被调用
@@ -21,16 +28,22 @@ namespace ASEva.UIEto
         public virtual void OnInitSize(String config) { }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Required] Called while querying panel size
+        /// </summary>
+        /// <returns>Logical size, at least 200x50</returns>
         /// \~Chinese
         /// <summary>
         /// [必须实现] 获取尺寸时被调用
         /// </summary>
-        /// <returns>默认DPI下的尺寸，将被调整为至少200x50</returns>
+        /// <returns>逻辑尺寸，将被调整为至少200x50</returns>
         public virtual IntSize OnGetSize() { return new IntSize(0, 0); }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Optional] Called while initializing the panel
+        /// </summary>
+        /// <param name="config">Configuration string</param>
         /// \~Chinese
         /// <summary>
         /// [可选实现] 在配置界面控件初始化时被调用
@@ -39,7 +52,9 @@ namespace ASEva.UIEto
         public virtual void OnInit(String config) { }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Optional] Called before destroying the panel
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// [可选实现] 在配置界面控件销毁前被调用
@@ -47,7 +62,9 @@ namespace ASEva.UIEto
         public virtual void OnRelease() { }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Optional] Called while updating the panel's UI
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// [可选实现] 在需要更新界面时被调用
@@ -55,7 +72,9 @@ namespace ASEva.UIEto
         public virtual void OnUpdateUI() { }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.9.5) [Optional] Called in the main loop, for running modal dialog
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.9.5) [可选实现] 在主循环中被调用，可进行模态对话
@@ -63,7 +82,9 @@ namespace ASEva.UIEto
         public virtual void OnHandleModal() { }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.8.13) Close the container holding the panel
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.13) 关闭配置界面
@@ -74,7 +95,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.8.13) Implement closing the panel container in this event
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.13) 在此事件中实现配置界面的关闭

@@ -5,7 +5,9 @@ using Eto.Drawing;
 namespace ASEva.UIEto
 {
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:eto=2.4.0) Conversion of pixel units
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:eto=2.4.0) 像素单位转换
@@ -13,7 +15,9 @@ namespace ASEva.UIEto
     public class Pixel
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Convert logical size to raw pixel size
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 逻辑像素值转原始像素值
@@ -24,7 +28,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Convert raw pixel size to logical size
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 原始像素值转逻辑像素值
@@ -35,7 +41,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Convert logical point to raw pixel point
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 逻辑点坐标转原始点坐标
@@ -46,7 +54,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Convert raw pixel point to logical point
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 原始点坐标转逻辑点坐标
@@ -57,7 +67,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Convert logical size to raw pixel size 
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 逻辑尺寸转原始尺寸
@@ -68,7 +80,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Convert raw pixel size to logical size
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 原始尺寸转逻辑尺寸
@@ -79,7 +93,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Ratio of logical unit to raw pixel (Pixel in current UI framework, may not be physical pixel)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 逻辑像素与原始像素(即UI框架下的像素，非物理像素)的换算比
@@ -103,7 +119,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.9.7) Whether logical unit is 1:1 to the physical pixel
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.9.7) 逻辑像素与物理像素是否为1:1

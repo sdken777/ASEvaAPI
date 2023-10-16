@@ -6,8 +6,12 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:eto=2.9.1) Vertical flow layout with 2D
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:eto=2.9.1) 沿纵向添加的二维控件列表
@@ -15,7 +19,9 @@ namespace ASEva.UIEto
     public class FlowLayout2D : Panel, FlowLayoutCallback
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Constructor, default control width is 300
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 构造函数，默认控件宽度为300
@@ -26,7 +32,10 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Constructor with the specified control width
+        /// </summary>
+        /// <param name="controlLogicalWidth">Default control width, at least 4</param>
         /// \~Chinese
         /// <summary>
         /// 构造函数，并指定默认控件宽度
@@ -64,7 +73,11 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add control
+        /// </summary>
+        /// <param name="control">Target control object, do nothing if it's already in the layout</param>
+        /// <param name="logicalHeight">Target logical height, at least 4</param>
         /// \~Chinese
         /// <summary>
         /// 在底部添加控件
@@ -84,7 +97,12 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Insert control at index
+        /// </summary>
+        /// <param name="index">Specified control index (If it's over the bound, insert to index 0 or add to last position)</param>
+        /// <param name="control">Target control object, do nothing if it's already in the layout</param>
+        /// <param name="logicalHeight">Target logical height, at least 4</param>
         /// \~Chinese
         /// <summary>
         /// 在指定序号位置添加控件
@@ -110,7 +128,11 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Update controls' size
+        /// </summary>
+        /// <param name="controlLogicalWidth">Default control width, at least 4</param>
+        /// <param name="controlsLogicalHeight">All the controls needed to update height, key is index of control, value is height which is at least 4</param>
         /// \~Chinese
         /// <summary>
         /// 更新控件尺寸
@@ -132,7 +154,10 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get number of controls
+        /// </summary>
+        /// <returns>Number of controls</returns>
         /// \~Chinese
         /// <summary>
         /// 获取控件个数
@@ -144,7 +169,11 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get index of the target control
+        /// </summary>
+        /// <param name="control">The target control</param>
+        /// <returns>Index, -1 if it's not in the layout</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定控件的序号位置
@@ -157,7 +186,11 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get control at the index
+        /// </summary>
+        /// <param name="index">Index of control</param>
+        /// <returns>Target control, null if it's over the bound</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定序号位置上的控件
@@ -174,7 +207,10 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Remove control at the index
+        /// </summary>
+        /// <param name="index">Index of control, do nothing if it's over the bound</param>
         /// \~Chinese
         /// <summary>
         /// 移除指定序号位置处的控件
@@ -195,7 +231,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Remove all controls
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 移除所有控件
@@ -208,7 +246,11 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Set visibility of the control at the index
+        /// </summary>
+        /// <param name="index">Index of control, do nothing if over the bound</param>
+        /// <param name="visible">Visibility of the control</param>
         /// \~Chinese
         /// <summary>
         /// 设置指定序号位置处的控件是否可见
@@ -229,7 +271,10 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.9.2) Get index of control where the mouse is
+        /// </summary>
+        /// <returns>Index of the control, -1 while mouse is not inside any control</returns>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.9.2) 获取鼠标所在控件的序号位置
@@ -242,7 +287,11 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Select the control at the index
+        /// </summary>
+        /// <param name="index">Index of control, do nothing if over the bound</param>
+        /// <param name="invokeEvent">Whether trigger ControlSelected event if newly selected</param>
         /// \~Chinese
         /// <summary>
         /// 选中指定序号位置处的控件
@@ -260,7 +309,10 @@ namespace ASEva.UIEto
         }
         
         /// \~English
-        /// 
+        /// <summary>
+        /// Get index of the selected control
+        /// </summary>
+        /// <returns>Index of selected control, -1 if no control is selected</returns>
         /// \~Chinese
         /// <summary>
         /// 获取选中控件所在序号位置
@@ -273,7 +325,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Trigger event while newly selected
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 新选中控件后触发事件

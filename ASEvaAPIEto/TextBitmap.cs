@@ -3,8 +3,12 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+    
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:eto=2.9.6) Text bitmap, alternative to Graphics.DrawString for increased efficiency
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:eto=2.9.6) 文本位图，可替代Graphics.DrawString以提高效率
@@ -12,7 +16,13 @@ namespace ASEva.UIEto
     public class TextBitmap
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Create text bitmap (Only default font supported)
+        /// </summary>
+        /// <param name="g">Graphics object</param>
+        /// <param name="text">Text</param>
+        /// <param name="sizeRatio">Ratio to the default size, default is 1</param>
+        /// <param name="color">Paint color</param>
         /// \~Chinese
         /// <summary>
         /// 创建文本位图（仅支持默认字体）
@@ -50,7 +60,13 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Draw the text bitmap
+        /// </summary>
+        /// <param name="g">Graphics object</param>
+        /// <param name="anchor">Anchor point's type</param>
+        /// <param name="logicalX">X-coordinate of anchor point</param>
+        /// <param name="logicalY">Y-coordinate of anchor point</param>
         /// \~Chinese
         /// <summary>
         /// 通过图形对象绘制文本位图
@@ -129,7 +145,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// The text
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 获取当前文本
@@ -137,7 +155,9 @@ namespace ASEva.UIEto
         public String Text { get { return text; }}
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.9.8) The ratio to the default size
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.9.8) 获取当前字体相对于默认大小比例
@@ -145,7 +165,9 @@ namespace ASEva.UIEto
         public float SizeRatio { get { return sizeRatio; }}
 
         /// \~English
-        /// 
+        /// <summary>
+        /// The paint color
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 获取当前绘制颜色

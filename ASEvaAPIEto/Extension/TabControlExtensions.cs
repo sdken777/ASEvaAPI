@@ -4,8 +4,12 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+    
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:eto=2.0.2) Extensions for tab control
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.2) 方便操作选项卡控件的扩展
@@ -13,7 +17,12 @@ namespace ASEva.UIEto
     public static class TabControlExtensions
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Add page to tab control
+        /// </summary>
+        /// <param name="tabControl">Tabl control object</param>
+        /// <param name="title">Page title</param>
+        /// <returns>Page object</returns>
         /// \~Chinese
         /// <summary>
         /// 添加页至选项卡控件

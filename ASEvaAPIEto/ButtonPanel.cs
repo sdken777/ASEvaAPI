@@ -4,8 +4,12 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:eto=2.3.3) Button panel
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:eto=2.3.3) 面板式按钮
@@ -13,7 +17,11 @@ namespace ASEva.UIEto
     public class ButtonPanel : Panel
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Initialize as text button panel
+        /// </summary>
+        /// <param name="text">Text</param>
+        /// <param name="logicalPadding">Space between border and text</param>
         /// \~Chinese
         /// <summary>
         /// 初始化面板式文字按钮
@@ -29,7 +37,11 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Initialize as image button panel
+        /// </summary>
+        /// <param name="image">Image</param>
+        /// <param name="logicalPadding">Space between border and image</param>
         /// \~Chinese
         /// <summary>
         /// 初始化面板式图像按钮
@@ -45,7 +57,10 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.8.17) Update image
+        /// </summary>
+        /// <param name="image">New image, whose size should be the same as origin (Or else it won't update)</param>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.17) 更新图像
@@ -62,7 +77,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Click event
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 点击按钮事件
@@ -70,7 +87,9 @@ namespace ASEva.UIEto
         public event EventHandler Click;
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Default background color (default is Colors.Transparent)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 默认状态下的背景颜色（默认为Colors.Transparent）
@@ -87,7 +106,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Background color while mouse is inside (default is Colors.LightSteelBlue)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 鼠标在按钮范围内的背景颜色（默认为Colors.LightSteelBlue）
@@ -104,7 +125,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Background color while mouse is down (default is Colors.SteelBlue)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 鼠标按下后的背景颜色（默认为Colors.SteelBlue）
@@ -121,7 +144,9 @@ namespace ASEva.UIEto
         }
         
         /// \~English
-        /// 
+        /// <summary>
+        /// Text color (default is Colors.Black)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 文字颜色（默认为Colors.Black）
@@ -141,7 +166,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.8.11) Tool tip text
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.11) 提示文字

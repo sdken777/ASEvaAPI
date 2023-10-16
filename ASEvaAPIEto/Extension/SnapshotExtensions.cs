@@ -5,8 +5,12 @@ using ASEva.Samples;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+    
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:eto=2.10.3) Extensions for querying control's snapshot
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:eto=2.10.3) 获取控件快照的扩展
@@ -14,7 +18,11 @@ namespace ASEva.UIEto
     public static class SnapshotExtensions
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Query snapshot
+        /// </summary>
+        /// <param name="control">Target control object</param>
+        /// <returns>Queried snapshot, return null if unsupported or query failed</returns>
         /// \~Chinese
         /// <summary>
         /// 获取控件快照

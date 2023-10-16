@@ -5,6 +5,8 @@ using ASEva.Utility;
 
 namespace ASEva
 {
+    #pragma warning disable CS1571
+    
     public interface AgencyHandler
     {
         String GetConfigFilesRoot();

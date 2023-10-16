@@ -4,8 +4,12 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:eto=2.0.2) Extensions for table layout
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.2) 方便操作表布局的扩展
@@ -13,7 +17,12 @@ namespace ASEva.UIEto
     public static class TableLayoutExtensions
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Add a row to table layout
+        /// </summary>
+        /// <param name="tableLayout">Table layout object</param>
+        /// <param name="expandHeight">Whether to expand</param>
+        /// <returns>Row object of table layout</returns>
         /// \~Chinese
         /// <summary>
         /// 表布局添加一行
@@ -29,7 +38,10 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add a panel to fill the remaining space
+        /// </summary>
+        /// <param name="tableRow">Row object of table layout</param>
         /// \~Chinese
         /// <summary>
         /// 添加空间延横向撑满
@@ -41,7 +53,13 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add label
+        /// </summary>
+        /// <param name="tableRow">Row object of table layout</param>
+        /// <param name="text">Text</param>
+        /// <param name="expandWidth">Whether to expand horizontally</param>
+        /// <returns>Created label object</returns>
         /// \~Chinese
         /// <summary>
         /// 添加文字标签至表布局的行
@@ -63,7 +81,17 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add label with the specified alignment and size
+        /// </summary>
+        /// <param name="tableRow">Row object of table layout</param>
+        /// <param name="text">Text</param>
+        /// <param name="alignment">Text alignment</param>
+        /// <param name="expandWidth">Whether to expand horizontally</param>
+        /// <param name="fillHeight">Whether to fill vertically</param>
+        /// <param name="logicalWidth">Initial logical width, 0 as not to set</param>
+        /// <param name="logicalHeight">Initial logical height, 0 as not to set</param>
+        /// <returns>Create label object</returns>
         /// \~Chinese
         /// <summary>
         /// 添加文字标签至表布局的行
@@ -91,7 +119,16 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add text button
+        /// </summary>
+        /// <param name="tableRow">Row object of table layout</param>
+        /// <param name="text">Text</param>
+        /// <param name="expandWidth">Whether to expand horizontally</param>
+        /// <param name="fillHeight">Whether to fill vertically</param>
+        /// <param name="logicalWidth">Initial logical width, 0 as not to set</param>
+        /// <param name="logicalHeight">Initial logical height, 0 as not to set</param>
+        /// <returns>Created text button object</returns>
         /// \~Chinese
         /// <summary>
         /// 添加文字按键至表布局的行
@@ -118,7 +155,16 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.0.4) Add image button
+        /// </summary>
+        /// <param name="tableRow">Row object of table layout</param>
+        /// <param name="image">Image</param>
+        /// <param name="expandWidth">Whether to expand horizontally</param>
+        /// <param name="fillHeight">Whether to fill vertically</param>
+        /// <param name="logicalWidth">Initial logical width, 0 as not to set</param>
+        /// <param name="logicalHeight">Initial logical height, 0 as not to set</param>
+        /// <returns>Created image button object</returns>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.4) 添加图像按键至表布局的行
@@ -156,7 +202,14 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add link button
+        /// </summary>
+        /// <param name="tableRow">Row object of table layout</param>
+        /// <param name="text">Text</param>
+        /// <param name="expandWidth">Whether to expand horizontally</param>
+        /// <param name="fillHeight">Whether to fill vertically</param>
+        /// <returns>Created link button object</returns>
         /// \~Chinese
         /// <summary>
         /// 添加链接式按键至表布局的行
@@ -179,7 +232,15 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add check box
+        /// </summary>
+        /// <param name="tableRow">Row object of table layout</param>
+        /// <param name="text">Text</param>
+        /// <param name="expandWidth">Whether to expand horizontally</param>
+        /// <param name="fillHeight">Whether to fill vertically</param>
+        /// <param name="isChecked">Initial check state</param>
+        /// <returns>Created check box object</returns>
         /// \~Chinese
         /// <summary>
         /// 添加多选框至表布局的行
@@ -203,7 +264,16 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add radio button list
+        /// </summary>
+        /// <param name="tableRow">Row object of table layout</param>
+        /// <param name="texts">Text of each item</param>
+        /// <param name="expandWidth">Whether to expand horizontally</param>
+        /// <param name="fillHeight">Whether to fill vertically</param>
+        /// <param name="selectedIndex">Initial selected item index</param>
+        /// <param name="logicalSpacing">Space (in logical size) between items</param>
+        /// <returns>Created radio button list</returns>
         /// \~Chinese
         /// <summary>
         /// 添加单选框组至表布局的行
@@ -233,7 +303,15 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add combo box
+        /// </summary>
+        /// <param name="tableRow">Row object of table layout</param>
+        /// <param name="texts">Text of each item (can be null)</param>
+        /// <param name="expandWidth">Whether to expand horizontally</param>
+        /// <param name="fillHeight">Whether to fill vertically</param>
+        /// <param name="selectedIndex">Initial selected index</param>
+        /// <returns>Created combo box object</returns>
         /// \~Chinese
         /// <summary>
         /// 添加组合框至表布局的行
@@ -262,7 +340,16 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add group box
+        /// </summary>
+        /// <param name="tableRow">Row object of table layout</param>
+        /// <param name="title">Title</param>
+        /// <param name="expandWidth">Whether to expand horizontally</param>
+        /// <param name="fillHeight">Whether to fill vertically</param>
+        /// <param name="logicalWidth">Initial logical width, 0 as not to set</param>
+        /// <param name="logicalHeight">Initial logical height, 0 as not to set</param>
+        /// <returns>Created group box object</returns>
         /// \~Chinese
         /// <summary>
         /// 添加分组框至表布局的行
@@ -289,7 +376,15 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add control
+        /// </summary>
+        /// <param name="tableRow">Row object of table layout</param>
+        /// <param name="control">Control object</param>
+        /// <param name="expandWidth">Whether to expand horizontally</param>
+        /// <param name="fillHeight">Whether to fill vertically</param>
+        /// <param name="logicalWidth">Initial logical width, 0 as not to set</param>
+        /// <param name="logicalHeight">Initial logical height, 0 as not to set</param>
         /// \~Chinese
         /// <summary>
         /// 添加控件至表布局的行
@@ -313,7 +408,15 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add horizontal stack layout
+        /// </summary>
+        /// <param name="tableRow">Row object of table layout</param>
+        /// <param name="expandWidth">Whether to expand horizontally</param>
+        /// <param name="fillHeight">Whether to fill vertically</param>
+        /// <param name="logicalSpacing">Space (in logical size) between controls in the layout</param>
+        /// <param name="alignment">Alignment of controls in the layout</param>
+        /// <returns>Created StackLayout object</returns>
         /// \~Chinese
         /// <summary>
         /// 添加横向堆叠布局至表布局的行
@@ -337,7 +440,15 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add vertical stack layout
+        /// </summary>
+        /// <param name="tableRow">Row object of table layout</param>
+        /// <param name="expandWidth">Whether to expand horizontally</param>
+        /// <param name="fillHeight">Whether to fill vertically</param>
+        /// <param name="logicalSpacing">Space (in logical size) between controls in the layout</param>
+        /// <param name="alignment">Alignment of controls in the layout</param>
+        /// <returns>Created StackLayout object</returns>
         /// \~Chinese
         /// <summary>
         /// 添加纵向堆叠布局至表布局的行
@@ -361,7 +472,15 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add child table layout
+        /// </summary>
+        /// <param name="tableRow">Row object of table layout</param>
+        /// <param name="expandWidth">Whether to expand horizontally</param>
+        /// <param name="fillHeight">Whether to fill vertically</param>
+        /// <param name="logicalSpacingX">Space (in logical size) between controls along X axis</param>
+        /// <param name="logicalSpacingY">Space (in logical size) between controls along Y axis</param>
+        /// <returns>Created child TableLayout object</returns>
         /// \~Chinese
         /// <summary>
         /// 添加表布局至表布局的行

@@ -4,8 +4,11 @@ using Eto.Forms;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:eto=2.0.4) Overlay layout
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.4) 可覆盖的布局
@@ -18,7 +21,15 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add control
+        /// </summary>
+        /// <param name="control">The control object</param>
+        /// <param name="topLogicalPadding">Space between top bound and the control, null as not related</param>
+        /// <param name="bottomLogicalPadding">Space between bottom bound and the control, null as not related</param>
+        /// <param name="leftLogicalPadding">Space between left bound and the control, null as not related</param>
+        /// <param name="rightLogicalPadding">Space between right bound and the control, null as not related</param>
+        /// <returns>新添加的控件</returns>
         /// \~Chinese
         /// <summary>
         /// 添加控件
@@ -55,7 +66,10 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Remove control
+        /// </summary>
+        /// <param name="control">The control</param>
         /// \~Chinese
         /// <summary>
         /// 移除控件
@@ -68,7 +82,10 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Update control's position (Generally used after manual modification of the control's size)
+        /// </summary>
+        /// <param name="control">The control</param>
         /// \~Chinese
         /// <summary>
         /// 更新控件位置（一般在手动修改控件大小后调用）

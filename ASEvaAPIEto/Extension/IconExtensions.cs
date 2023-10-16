@@ -7,7 +7,9 @@ using Eto.Drawing;
 namespace ASEva.UIEto
 {
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:eto=2.11.3) Extensions for creating icon
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:eto=2.11.3) 方便生成图标的扩展

@@ -6,8 +6,12 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+    
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:eto=2.0.3) Plain text table control
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.3) 纯文字的表格控件
@@ -21,7 +25,12 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add a column (should be called before any ASEva.UIEto.TextTableView.AddRow )
+        /// </summary>
+        /// <param name="title">Column title</param>
+        /// <param name="logicalWidth">Logical width of the column</param>
+        /// <param name="editable">Whether text of the column is editable</param>
         /// \~Chinese
         /// <summary>
         /// 添加一列（需要在添加行之前进行）
@@ -38,7 +47,10 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.0.10) Get number of rows
+        /// </summary>
+        /// <returns>行数</returns>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.10) 获取行数
@@ -52,7 +64,10 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add a row
+        /// </summary>
+        /// <param name="values">Initial texts for columns, null as empty</param>
         /// \~Chinese
         /// <summary>
         /// 添加一行
@@ -84,7 +99,10 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.4.2) Add multiple rows
+        /// </summary>
+        /// <param name="rowsValues">Initial texts of each row, null as empty</param>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.2) 添加多行
@@ -120,7 +138,10 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Remove a row
+        /// </summary>
+        /// <param name="rowIndex">The row index</param>
         /// \~Chinese
         /// <summary>
         /// 移除一行
@@ -143,7 +164,10 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.4.2) Remove multiple rows
+        /// </summary>
+        /// <param name="rowIndices">Row indices</param>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.2) 移除多行
@@ -176,7 +200,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.0.10) Remove all rows
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.10) 移除所有行
@@ -195,7 +221,12 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get text of a cell
+        /// </summary>
+        /// <param name="rowIndex">Row index</param>
+        /// <param name="columnIndex">Column index</param>
+        /// <returns>Text of the cell</returns>
         /// \~Chinese
         /// <summary>
         /// 获取某格文字
@@ -218,7 +249,12 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Set text of a cell
+        /// </summary>
+        /// <param name="rowIndex">Row index</param>
+        /// <param name="columnIndex">Column index</param>
+        /// <param name="val">Text of the cell</param>
         /// \~Chinese
         /// <summary>
         /// 设置某格文字
@@ -244,7 +280,12 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.4.3) Set text color of a cell
+        /// </summary>
+        /// <param name="rowIndex">Row index</param>
+        /// <param name="columnIndex">Column index</param>
+        /// <param name="color">Text color</param>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.3) 设置某格文字颜色
@@ -260,7 +301,12 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.4.3) Set background color of a cell
+        /// </summary>
+        /// <param name="rowIndex">Row index</param>
+        /// <param name="columnIndex">Column index</param>
+        /// <param name="color">Background color</param>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.3) 设置某格背景颜色

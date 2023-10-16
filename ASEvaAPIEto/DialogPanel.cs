@@ -4,8 +4,12 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:eto=2.8.0) Dialog panel (Use ASEva.UIEto.App.RunDialog to run dialog)
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:eto=2.8.0) 对话框主面板（使用 ASEva.UIEto.App.RunDialog 弹出对话框）
@@ -13,7 +17,9 @@ namespace ASEva.UIEto
     public class DialogPanel : Panel
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Dialog icon
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 对话框图标
@@ -21,7 +27,9 @@ namespace ASEva.UIEto
         public Icon Icon { get; protected set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Dialog title
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 对话框标题
@@ -29,7 +37,12 @@ namespace ASEva.UIEto
         public String Title { get; protected set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Initialize as a dialog with fixed size
+        /// </summary>
+        /// <param name="fixWidth">Logical width, at least 100</param>
+        /// <param name="fixHeight">Logical height, at least 20</param>
+        /// <param name="withBorder">Whether it's with border</param>
         /// \~Chinese
         /// <summary>
         /// 初始化为固定大小模式
@@ -48,7 +61,13 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Initialize as a resizable dialog
+        /// </summary>
+        /// <param name="minWidth">Minimum logical width, at least 100</param>
+        /// <param name="minHeight">Minimum logical height, at least 20</param>
+        /// <param name="defaultWidth">Default logical width</param>
+        /// <param name="defaultHeight">Default logical height</param>
         /// \~Chinese
         /// <summary>
         /// 初始化为可变大小模式
@@ -70,7 +89,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Close the dialog containing the panel
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 关闭对话框
@@ -81,7 +102,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Callback while closing the dialog containing the panel
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 对话框即将关闭回调函数
@@ -91,7 +114,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Boolean result
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 布尔类型的对话框运行结果
@@ -99,7 +124,9 @@ namespace ASEva.UIEto
         public bool BoolResult { get; protected set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Integer result
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 整数类型的对话框运行结果
@@ -107,7 +134,9 @@ namespace ASEva.UIEto
         public int IntResult { get; protected set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Floating number result
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 浮点类型的对话框运行结果
@@ -115,7 +144,9 @@ namespace ASEva.UIEto
         public double DoubleResult { get; protected set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Text result
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 字符串类型的对话框运行结果
@@ -123,7 +154,9 @@ namespace ASEva.UIEto
         public String StringResult { get; protected set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Result of any type
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 任意类型的对话框运行结果
@@ -131,7 +164,9 @@ namespace ASEva.UIEto
         public object ObjectResult { get; protected set; }
 
         /// \~English
+        /// <summary>
         /// Dialog mode
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 对话框模式
@@ -139,7 +174,9 @@ namespace ASEva.UIEto
         public enum DialogMode
         {
             /// \~English
+            /// <summary>
             /// Not initialized
+            /// </summary>
             /// \~Chinese
             /// <summary>
             /// 未初始化
@@ -147,7 +184,9 @@ namespace ASEva.UIEto
             Invalid,
 
             /// \~English
+            /// <summary>
             /// Fixed size
+            /// </summary>
             /// \~Chinese
             /// <summary>
             /// 固定大小模式
@@ -155,7 +194,9 @@ namespace ASEva.UIEto
             FixMode,
 
             /// \~English
+            /// <summary>
             /// Resizable
+            /// </summary>
             /// \~Chinese
             /// <summary>
             /// 可变大小模式
@@ -164,7 +205,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get dialog mode
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 获取对话框模式
@@ -175,7 +218,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get minimum logical size of dialog panel (It's the fixed size for fixed size mode)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 获取对话框最小逻辑尺寸（固定大小模式下即该固定逻辑尺寸）
@@ -186,7 +231,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get default logical size
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 获取对话框初始逻辑尺寸
@@ -197,7 +244,9 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether with border
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 获取是否带窗口边框

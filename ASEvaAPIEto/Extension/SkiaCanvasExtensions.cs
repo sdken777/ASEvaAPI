@@ -3,8 +3,12 @@ using SkiaSharp;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:eto=2.7.0) Extensions for Skia canvas
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:eto=2.7.0) 方便操作Skia画布的扩展
@@ -12,7 +16,11 @@ namespace ASEva.UIEto
     public static class SkiaCanvasExtensions
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Get default font
+        /// </summary>
+        /// <param name="canvas">Skia canvas object</param>
+        /// <param name="sizeScale">Ratio to the default size</param>
         /// \~Chinese
         /// <summary>
         /// 获取默认字体
@@ -31,7 +39,16 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.8.16) Get the specified font object
+        /// </summary>
+        /// <param name="canvas">Skia canvas object</param>
+        /// <param name="fontName">Font name</param>
+        /// <param name="sizeScale">Ratio to the default size</param>
+        /// <param name="weight">Font weight</param>
+        /// <param name="width">Font width</param>
+        /// <param name="slant">Font slant</param>
+        /// <returns>Font object</returns>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.16) 获取指定字体
@@ -42,7 +59,7 @@ namespace ASEva.UIEto
         /// <param name="weight">字重</param>
         /// <param name="width">宽度</param>
         /// <param name="slant">倾斜度</param>
-        /// <returns></returns>
+        /// <returns>字体对象</returns>
         public static SKFont GetFont(this SKCanvas canvas, String fontName, float sizeScale = 1.0f, SKFontStyleWeight weight = SKFontStyleWeight.Normal, SKFontStyleWidth width = SKFontStyleWidth.Normal, SKFontStyleSlant slant = SKFontStyleSlant.Upright)
         {
             if (sizeScale <= 0) sizeScale = 1;
@@ -55,7 +72,16 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.7.1) Draw text with the specified anchor
+        /// </summary>
+        /// <param name="canvas">Skia canvas object</param>
+        /// <param name="text">Text</param>
+        /// <param name="font">Font</param>
+        /// <param name="color">Text color</param>
+        /// <param name="anchor">Anchor point's type</param>
+        /// <param name="logicalX">X-coordinate of anchor point</param>
+        /// <param name="logicalY">Y-coordinate of anchor point</param>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.7.1) 指定锚点绘制文本
@@ -117,7 +143,13 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:eto=2.7.1) Measure text's size
+        /// </summary>
+        /// <param name="canvas">Skia canvas object</param>
+        /// <param name="text">Text</param>
+        /// <param name="font">Font</param>
+        /// <returns>Text's logical size</returns>
         /// \~Chinese
         /// <summary>
         /// (api:eto=2.7.1) 测量文本的尺寸

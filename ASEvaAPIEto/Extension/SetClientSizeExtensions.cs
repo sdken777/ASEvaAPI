@@ -3,8 +3,12 @@ using Eto.Forms;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+    
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:eto=2.3.2) Extensions for settings client size of window or dialog
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:eto=2.3.2) 方便设置窗口或对话框的用户区域
@@ -12,7 +16,12 @@ namespace ASEva.UIEto
     public static class SetClientSizeExtensions
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Set client size of window or dialog
+        /// </summary>
+        /// <param name="window">Window or dialog object</param>
+        /// <param name="logicalWidth">Logical width</param>
+        /// <param name="logicalHeight">Logical height</param>
         /// \~Chinese
         /// <summary>
         /// 设置窗口或对话框的用户区域尺寸
@@ -27,7 +36,12 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Set minimum client size of window or dialog
+        /// </summary>
+        /// <param name="window">Window or dialog object</param>
+        /// <param name="logicalWidth">Logical width</param>
+        /// <param name="logicalHeight">Logical height</param>
         /// \~Chinese
         /// <summary>
         /// 设置窗口或对话框的用户区域的最小尺寸

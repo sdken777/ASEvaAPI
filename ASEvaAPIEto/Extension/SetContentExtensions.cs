@@ -4,8 +4,12 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:eto=2.0.0) Extensions for setting panel's content
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.0) 方便设置面板Content的扩展 
@@ -13,7 +17,14 @@ namespace ASEva.UIEto
     public static class SetContentExtensions
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Set content as horizontal StackLayout object
+        /// </summary>
+        /// <param name="panel">Panel object</param>
+        /// <param name="logicalPadding">Layout's logical padding</param>
+        /// <param name="logicalSpacing">Space (in logical size) between controls in the layout</param>
+        /// <param name="alignment">Alignment of controls in the layout</param>
+        /// <returns>Created StackLayout object</returns>
         /// \~Chinese
         /// <summary>
         /// 设置横向堆叠布局至面板Content
@@ -35,7 +46,14 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Set content as vertical StackLayout object
+        /// </summary>
+        /// <param name="panel">Panel object</param>
+        /// <param name="logicalPadding">Layout's logical padding</param>
+        /// <param name="logicalSpacing">Space (in logical size) between controls in the layout</param>
+        /// <param name="alignment">Alignment of controls in the layout</param>
+        /// <returns>Created StackLayout object</returns>
         /// \~Chinese
         /// <summary>
         /// 设置纵向堆叠布局至面板Content
@@ -57,7 +75,14 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Set content as TableLayout object
+        /// </summary>
+        /// <param name="panel">Panel object</param>
+        /// <param name="logicalPadding">Layout's logical padding</param>
+        /// <param name="logicalSpacingX">Space (in logical size) between controls along X axis</param>
+        /// <param name="logicalSpacingY">Space (in logical size) between controls along Y axis</param>
+        /// <returns>Created TableLayout object</returns>
         /// \~Chinese
         /// <summary>
         /// 设置表布局至面板Content
@@ -79,7 +104,11 @@ namespace ASEva.UIEto
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Set content as PixelLayout object
+        /// </summary>
+        /// <param name="panel">Panel object</param>
+        /// <returns>Created PixelLayout object</returns>
         /// \~Chinese
         /// <summary>
         /// 设置像素布局至面板Content
