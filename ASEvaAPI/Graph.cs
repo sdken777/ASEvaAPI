@@ -299,10 +299,11 @@ namespace ASEva
                 {
                     foreach (var param in Params)
                     {
-                        paramsText += "," + param;
+                        paramsText += "," + (param == null ? "" : param);
                     }
                 }
-                writer.WriteLine("ASEva Report v2," + ID + "," + Definition.MainTitle + paramsText);
+                var mainTitle = String.IsNullOrWhiteSpace(Definition.MainTitle) ? "No title" : Definition.MainTitle;
+                writer.WriteLine("ASEva Report v2," + ID + "," + mainTitle + paramsText);
 
                 // 第二行：类型，配置
                 var configText = "";
@@ -310,7 +311,7 @@ namespace ASEva
                 {
                     foreach (var config in Definition.Config)
                     {
-                        configText += "," + config;
+                        configText += "," + (config == null ? "" : config);
                     }
                 }
                 writer.WriteLine(Definition.Type.ToString() + configText);
@@ -329,7 +330,7 @@ namespace ASEva
                 var columnsText = "";
                 foreach (var title in Definition.ColumnTitles)
                 {
-                    columnsText += (columnsText.Length == 0 ? "" : ",") + title;
+                    columnsText += (columnsText.Length == 0 ? "" : ",") + (title == null ? "" : title);
                 }
                 writer.WriteLine(columnsText);
 

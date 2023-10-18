@@ -26,7 +26,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 12, 3, 0); // 新增Plugin.GetPreloadLibFiles
+            return new Version(2, 12, 3, 1); // 修正GraphData.Save
         }
 
         /// <summary>

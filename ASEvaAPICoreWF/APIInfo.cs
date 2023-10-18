@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 4, 18, 0); // 设置TextBitmap.FastModeDrawOffset
+            return new Version(2, 4, 18, 1); // 修正HistLineGraph在单柱时的显示
         }
     }
 }
