@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 5, 1); // Update log / 更新记录: 修正部分Handler为internal
+            return new Version(2, 5, 5, 2); // Update log / 更新记录: 修正HistLineGraph在单柱时的显示
         }
     }
 }

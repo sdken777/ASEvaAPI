@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 7, 1, 2); // Update log / 更新记录: 修正部分Handler为internal
+            return new Version(2, 7, 1, 3); // Update log / 更新记录: 修正HistLineGraph在单柱时的显示
         }
     }
 }
