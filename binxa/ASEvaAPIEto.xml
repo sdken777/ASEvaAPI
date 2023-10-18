@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.11.3
+            version=2.11.4
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -258,6 +258,16 @@
             </summary>
             <param name="parent">parent参数</param>
             <returns>返回parent或null</returns>
+        </member>
+        <member name="E:ASEva.UIEto.App.KeyDown">
+            \~English
+            <summary>
+            (api:eto=2.11.4) Key press event of main window
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=2.11.4) 主窗口的按键事件
+            </summary>
         </member>
         <member name="T:ASEva.UIEto.ButtonPanel">
             \~English

@@ -94,6 +94,7 @@ namespace ASEva.UIEto
         {
             if (handler != null && application != null && window != null)
             {
+                window.KeyDown += (o, e) => { KeyDown?.Invoke(o, e); };
                 window.Closed += delegate { window.CloseRecursively(); };
                 handler.RunApp(application, window);
             }
@@ -349,6 +350,16 @@ namespace ASEva.UIEto
             if (handler == null || !handler.ShouldPassParent()) return null;
             else return parent;
         }
+
+		/// \~English
+		/// <summary>
+		/// (api:eto=2.11.4) Key press event of main window
+		/// </summary>
+		/// \~Chinese
+		/// <summary>
+		/// (api:eto=2.11.4) 主窗口的按键事件
+		/// </summary>
+		public static event EventHandler<KeyEventArgs> KeyDown;
 
         private static String[] getAvailableUICodes()
         {
