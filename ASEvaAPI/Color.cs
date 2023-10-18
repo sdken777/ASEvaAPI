@@ -4,10 +4,12 @@ using ASEva;
 namespace ASEva
 {
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Color described by RGBA channels (integer ranges 0~255)
+    /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 以RGBA四通道描述的颜色（整型）
+    /// (api:app=2.0.0) 以RGBA四通道描述的颜色（整型0~255）
     /// </summary>
     public struct ColorRGBA
     {

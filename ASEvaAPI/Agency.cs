@@ -1123,7 +1123,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) Get all general devices' status
         /// </summary>
-        /// <returns>The dictionary, with key as type ID of general device</returns>
+        /// <returns>The Dictionary. The key is type ID of general device</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取所有设备状态
@@ -1346,7 +1346,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.4.4) Get all data channels' alias name
         /// </summary>
-        /// <returns>The dictionary, with key as data channel ID</returns>
+        /// <returns>The Dictionary. The key is data channel ID</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.4.4) 获取数据通道别名
@@ -2319,7 +2319,7 @@ namespace ASEva
         /// <summary>
         /// Get titles of all scenarios
         /// </summary>
-        /// <returns>Dictionary, with key as scenario ID</returns>
+        /// <returns>Dictionary. The key is scenario ID</returns>
         /// \~Chinese
         /// <summary>
         /// 获取场景标题表
@@ -2335,7 +2335,7 @@ namespace ASEva
         /// Get whether there's data of all channels
         /// </summary>
         /// <param name="tolerance">How many milliseconds (realistic time) can be tolerated without data</param>
-        /// <returns>Dictionary, with key as channel ID</returns>
+        /// <returns>Dictionary. The key is channel ID</returns>
         /// \~Chinese
         /// <summary>
         /// 获取所有通道的数据状态
@@ -2351,7 +2351,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.7.4) Get time synchronization status of all channels
         /// </summary>
-        /// <returns>Dictionary, with key as channel ID</returns>
+        /// <returns>Dictionary. The key is channel ID</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.7.4) 获取所有通道的时间同步状态
@@ -2478,7 +2478,7 @@ namespace ASEva
         /// <summary>
         /// Get information of all bus devices
         /// </summary>
-        /// <returns>Dictionary, with key as bus device ID</returns>
+        /// <returns>Dictionary. The key is bus device ID</returns>
         /// \~Chinese
         /// <summary>
         /// 获取总线设备列表
@@ -2493,7 +2493,7 @@ namespace ASEva
         /// <summary>
         /// Get information of all video devices
         /// </summary>
-        /// <returns>Dictionary, with key as video device ID</returns>
+        /// <returns>Dictionary. The key is video device ID</returns>
         /// \~Chinese
         /// <summary>
         /// 获取视频设备列表
@@ -2628,7 +2628,7 @@ namespace ASEva
         /// Get version of all native plugins
         /// </summary>
         /// <param name="prefix">Prefix, like "bus", "video", "proc", "dev", etc.</param>
-        /// <returns>Dictionary, with key as plugin's type ID</returns>
+        /// <returns>Dictionary. The key is plugin's type ID</returns>
         /// \~Chinese
         /// <summary>
         /// 获取原生插件模块版本列表
@@ -2645,7 +2645,7 @@ namespace ASEva
         /// (api:app=2.3.0) Get version of all native plugins
         /// </summary>
         /// <param name="type">Type of native plugin</param>
-        /// <returns>Dictionary, with key as plugin's type ID</returns>
+        /// <returns>Dictionary. The key is plugin's type ID</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取原生插件模块版本列表
@@ -3284,7 +3284,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) Get application's version info
         /// </summary>
-        /// <returns>Dictionary, with key as version title</returns>
+        /// <returns>Dictionary. The key is version title</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取软件版本信息总表
@@ -3384,7 +3384,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) Get information of all window classes
         /// </summary>
-        /// <returns>Dictionary, with key as window class ID</returns>
+        /// <returns>Dictionary. The key is window class ID</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取窗口组件信息表
@@ -3399,7 +3399,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) Get information of all dialog classes
         /// </summary>
-        /// <returns>Dictionary, with key as dialog class ID</returns>
+        /// <returns>Dictionary. The key is dialog class ID</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取对话框组件信息表
@@ -3414,7 +3414,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) Get information of all app-layer processor classes
         /// </summary>
-        /// <returns>Dictionary, with key as app-layer processor's class ID</returns>
+        /// <returns>Dictionary. The key is app-layer processor's class ID</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取数据处理组件信息表
@@ -3429,7 +3429,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) Get information of all native-layer module classes
         /// </summary>
-        /// <returns>Dictionary, with key as native-layer module class ID</returns>
+        /// <returns>Dictionary. The key is native-layer module class ID</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取原生组件信息表
@@ -3444,7 +3444,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) Get information of all standalone task classes
         /// </summary>
-        /// <returns>Dictionary, with key as standalone task class ID</returns>
+        /// <returns>Dictionary. The key is standalone task class ID</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取独立任务组件信息表
@@ -3459,7 +3459,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.8.0) Get information of all app-layer device classes
         /// </summary>
-        /// <returns>Dictionary, with key as app-layer device class ID</returns>
+        /// <returns>Dictionary. The key is app-layer device class ID</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.8.0) 获取设备组件信息表
@@ -3798,7 +3798,7 @@ namespace ASEva
         /// (api:app=2.3.0) Get session's properties
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>Dictionary, with key as session's property title</returns>
+        /// <returns>Dictionary. The key is session's property title</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取session的属性表
@@ -3815,7 +3815,7 @@ namespace ASEva
         /// (api:app=2.3.0) Set session's properties
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <param name="properties">Dictionary, with key as session's property title</param>
+        /// <param name="properties">Dictionary. The key is session's property title</param>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 设置session的属性表
@@ -3974,7 +3974,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) Get time shift configuration for all raw data channels
         /// </summary>
-        /// <returns>Dictionary, with key as channel ID and value as time shift (in milliseconds)</returns>
+        /// <returns>Dictionary. The key is channel ID and the value is time shift (in milliseconds)</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取所有原始数据通道延迟配置
@@ -5232,7 +5232,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.12.0) Get all guest synchronization IDs and title of each ID
         /// </summary>
-        /// <returns>Dictionary, with key as guest synchronization ID and value as the title</returns>
+        /// <returns>Dictionary. The key is guest synchronization ID and the value is the title</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.12.0) 获取所有插件的客机同步ID以及对应的标题
@@ -5262,7 +5262,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.14.0) Get third part license notices of software used by framework
         /// </summary>
-        /// <returns>Dictionary, with key as title</returns>
+        /// <returns>Dictionary. The key is title</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.14.0) 获取框架软件使用的第三方软件版权声明
@@ -5277,7 +5277,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.14.0) Get all third party license notices of software used by plugins
         /// </summary>
-        /// <returns>Dictionary, with key as plugin pack ID and value as the information corresponding to the plugin (which is a dictionary with key as third party software's title)</returns>
+        /// <returns>Dictionary. The key is plugin pack ID and the value is the information corresponding to the plugin (which is a dictionary with key as third party software's title)</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.14.0) 获取所有插件使用的第三方软件版权声明
