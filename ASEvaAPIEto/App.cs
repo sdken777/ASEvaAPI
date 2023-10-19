@@ -361,6 +361,19 @@ namespace ASEva.UIEto
 		/// </summary>
 		public static event EventHandler<KeyEventArgs> KeyDown;
 
+		/// \~English
+		/// <summary>
+        /// (api:eto=2.11.4) When ASEva.UIEto.App.Run is not used, you can use this function to manually trigger the KeyDown event
+        /// </summary>
+		/// \~Chinese
+        /// <summary>
+        /// (api:eto=2.11.4) 未使用 ASEva.UIEto.App.Run 启动时可使用此函数手动触发KeyDown事件
+        /// </summary>
+        public static void TriggerKeyDown(object sender, KeyEventArgs args)
+        {
+            KeyDown?.Invoke(sender, args);
+        }
+
         private static String[] getAvailableUICodes()
         {
             var osCode = GetRunningOS();

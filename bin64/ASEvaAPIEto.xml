@@ -269,6 +269,16 @@
             (api:eto=2.11.4) 主窗口的按键事件
             </summary>
         </member>
+        <member name="M:ASEva.UIEto.App.TriggerKeyDown(System.Object,Eto.Forms.KeyEventArgs)">
+            \~English
+            <summary>
+            (api:eto=2.11.4) When ASEva.UIEto.App.Run is not used, you can use this function to manually trigger the KeyDown event
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=2.11.4) 未使用 ASEva.UIEto.App.Run 启动时可使用此函数手动触发KeyDown事件
+            </summary>
+        </member>
         <member name="T:ASEva.UIEto.ButtonPanel">
             \~English
             <summary>
