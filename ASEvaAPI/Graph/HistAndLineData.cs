@@ -2,13 +2,15 @@
 
 namespace ASEva.Graph
 {
+    #pragma warning disable CS1571
+
     /// \~English
     /// <summary>
     /// (api:app=2.0.0) Mode of statistics for histogram and poly line
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 直方折线图模式
+    /// (api:app=2.0.0) 直方折线图统计模式
     /// </summary>
     public enum HistLineMode
     {
@@ -154,12 +156,14 @@ namespace ASEva.Graph
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Numerical definition of histogram and poly line graph's X-axis
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 直方折线图中X轴数值描述
     /// </summary>
-    public class HistLineXValues //（图表数据验证有效）
+    public class HistLineXValues //（Validation supported / 图表数据验证有效）
     {
         public double Base { get; set; }
         public double Step { get; set; }
@@ -167,18 +171,22 @@ namespace ASEva.Graph
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Literal definition of histogram and poly line graph's X-axis
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 直方折线图中X轴文字描述
     /// </summary>
-    public class HistLineXLabels //（图表数据验证无效）
+    public class HistLineXLabels //（Validation unsupported / 图表数据验证无效）
     {
         public String[] Labels { get; set; }
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Sample of histogram and poly line graph
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 直方折线图中的样本
@@ -191,7 +199,9 @@ namespace ASEva.Graph
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Histogram and poly line graph data
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 直方折线图数据
@@ -200,7 +210,18 @@ namespace ASEva.Graph
     {
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Create graph definition (without validation)
+        /// </summary>
+        /// <param name="title">Title</param>
+        /// <param name="xTitle">X axis title</param>
+        /// <param name="xValuesOrLabels">X axis definition</param>
+        /// <param name="mode">Mode of statistics</param>
+        /// <param name="histTitle">Histogram title</param>
+        /// <param name="defaultHistValue">Default value for histogram</param>
+        /// <param name="lineTitle">Poly line title</param>
+        /// <param name="defaultLineValue">Default value for poly line</param>
+        /// <returns>Graph definition object</returns>
         /// \~Chinese
         /// <summary>
         /// 创建图表定义（不带数据验证）
@@ -208,7 +229,7 @@ namespace ASEva.Graph
         /// <param name="title">图表标题</param>
         /// <param name="xTitle">x轴标题</param>
         /// <param name="xValuesOrLabels">x轴的值或文字描述</param>
-        /// <param name="mode">图表模式</param>
+        /// <param name="mode">图表统计模式</param>
         /// <param name="histTitle">柱状图标题</param>
         /// <param name="defaultHistValue">柱状图初始值</param>
         /// <param name="lineTitle">折线图标题</param>
@@ -220,7 +241,19 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Create graph definition
+        /// </summary>
+        /// <param name="title">Title</param>
+        /// <param name="xTitle">X axis title</param>
+        /// <param name="xValuesOrLabels">X axis definition</param>
+        /// <param name="mode">Mode of statistics</param>
+        /// <param name="validation">Graph validation, null means no validation. For details about the support types in different modes, see ASEva.Graph.HistLineMode </param>
+        /// <param name="histTitle">Histogram title</param>
+        /// <param name="defaultHistValue">Default value for histogram</param>
+        /// <param name="lineTitle">Poly line title</param>
+        /// <param name="defaultLineValue">Default value for poly line</param>
+        /// <returns>Graph definition object</returns>
         /// \~Chinese
         /// <summary>
         /// 创建带数据验证的图表定义
@@ -228,7 +261,7 @@ namespace ASEva.Graph
         /// <param name="title">图表标题</param>
         /// <param name="xTitle">x轴标题</param>
         /// <param name="xValuesOrLabels">x轴的值或文字描述</param>
-        /// <param name="mode">图表模式</param>
+        /// <param name="mode">图表统计模式</param>
         /// <param name="validation">数据验证方式，null表示不验证。不同模式下的支持类型请参考 ASEva.Graph.HistLineMode </param>
         /// <param name="histTitle">柱状图标题</param>
         /// <param name="defaultHistValue">柱状图初始值</param>
@@ -295,7 +328,10 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get X axis title
+        /// </summary>
+        /// <returns>X axis title</returns>
         /// \~Chinese
         /// <summary>
         /// 获取x轴标题
@@ -307,7 +343,10 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get histogram title
+        /// </summary>
+        /// <returns>Histogram title</returns>
         /// \~Chinese
         /// <summary>
         /// 获取柱状图标题
@@ -319,7 +358,10 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get poly line title
+        /// </summary>
+        /// <returns>Poly line title</returns>
         /// \~Chinese
         /// <summary>
         /// 获取折线图标题
@@ -331,7 +373,10 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get whether poly line is enabled
+        /// </summary>
+        /// <returns>Whether poly line is enabled</returns>
         /// \~Chinese
         /// <summary>
         /// 获取折线图是否启用
@@ -344,7 +389,10 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get X axis definition
+        /// </summary>
+        /// <returns>X axis definition</returns>
         /// \~Chinese
         /// <summary>
         /// 获取x轴的值或文字描述
@@ -379,7 +427,10 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add 1 in the interval where x is
+        /// </summary>
+        /// <param name="xValue">Input x, do nothing if it's over the range</param>
         /// \~Chinese
         /// <summary>
         /// 在输入x的所在区间添加1
@@ -391,7 +442,10 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add 1 in the interval with the index
+        /// </summary>
+        /// <param name="xLabelIndex">Input index, do nothing if it's over the range</param>
         /// \~Chinese
         /// <summary>
         /// 在输入文本序号对应的区间添加1
@@ -403,7 +457,12 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add hits in the interval where x is
+        /// </summary>
+        /// <param name="xValue">Input x, do nothing if it's over the range</param>
+        /// <param name="hit">Whether hit</param>
+        /// <param name="times">Add times</param>
         /// \~Chinese
         /// <summary>
         /// 在输入x的所在区间添加若干次命中或不命中
@@ -417,7 +476,12 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add hits in the interval of the index
+        /// </summary>
+        /// <param name="xLabelIndex">Input index, do nothing if it's over the range</param>
+        /// <param name="hit">Whether hit</param>
+        /// <param name="times">Add times</param>
         /// \~Chinese
         /// <summary>
         /// 在输入文本序号对应的区间添加若干次命中或不命中
@@ -431,7 +495,11 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add sample to the interval where x is
+        /// </summary>
+        /// <param name="xValue">Input x, do nothing if it's over the range</param>
+        /// <param name="yValue">Sample for histogram</param>
         /// \~Chinese
         /// <summary>
         /// 在输入x的所在区间添加柱状图数值样本
@@ -444,7 +512,12 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add samples to the interval where x is
+        /// </summary>
+        /// <param name="xValue">Input x, do nothing if it's over the range</param>
+        /// <param name="histValue">Sample for histogram</param>
+        /// <param name="lineValue">Sample for poly line</param>
         /// \~Chinese
         /// <summary>
         /// 在输入x的所在区间添加柱状图和折线图数值样本
@@ -458,7 +531,11 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add sample to the interval of the index
+        /// </summary>
+        /// <param name="xLabelIndex">Input index, do nothing if it's over the range</param>
+        /// <param name="yValue">Sample for histogram</param>
         /// \~Chinese
         /// <summary>
         /// 在输入文本序号对应的区间添加柱状图数值样本
@@ -471,7 +548,12 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add samples to the interval of the index
+        /// </summary>
+        /// <param name="xLabelIndex">Input index, do nothing if it's over the range</param>
+        /// <param name="histValue">Sample for histogram</param>
+        /// <param name="lineValue">Sample for poly line</param>
         /// \~Chinese
         /// <summary>
         /// 在输入文本序号对应的区间添加柱状图和折线图数值样本
@@ -485,12 +567,15 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get statistical data
+        /// </summary>
+        /// <returns>Statistical data</returns>
         /// \~Chinese
         /// <summary>
-        /// 获取所有样本
+        /// 获取统计数据
         /// </summary>
-        /// <returns>样本数组</returns>
+        /// <returns>统计数据</returns>
         public HistLineSample[] GetSamples()
         {
             var samples = new HistLineSample[Data.GetLength(0)];
@@ -783,12 +868,16 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get whether the mode is for histogram only
+        /// </summary>
+        /// <param name="mode">Mode of statistics</param>
+        /// <returns>Whether the mode is for histogram only</returns>
         /// \~Chinese
         /// <summary>
         /// 检查一种模式是否为仅柱状图模式
         /// </summary>
-        /// <param name="mode">图表模式</param>
+        /// <param name="mode">图表统计模式</param>
         /// <returns>是否为仅柱状图模式</returns>
         public static bool IsHistogramOnlyMode(HistLineMode mode)
         {

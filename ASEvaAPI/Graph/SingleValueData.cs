@@ -2,8 +2,12 @@
 
 namespace ASEva.Graph
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Single value graph data
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 单值数据
@@ -11,7 +15,11 @@ namespace ASEva.Graph
     public class SingleValueData : GraphData
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Create graph definition (without validation)
+        /// </summary>
+        /// <param name="title">Title</param>
+        /// <returns>Graph definition object</returns>
         /// \~Chinese
         /// <summary>
         /// 创建图表定义（不带数据验证）
@@ -24,7 +32,12 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Create graph definition
+        /// </summary>
+        /// <param name="title">Title</param>
+        /// <param name="validation">Graph validation, null means no validation. Supported ValueAbove, ValueBelow, ValueInRange</param>
+        /// <returns>Graph definition object</returns>
         /// \~Chinese
         /// <summary>
         /// 创建带数据验证的图表定义
@@ -51,7 +64,10 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Set value (not recommended, since it will cause exception while merging data)
+        /// </summary>
+        /// <param name="val">Set the value</param>
         /// \~Chinese
         /// <summary>
         /// 设置值（不推荐操作，将会导致合并结果异常）
@@ -63,7 +79,10 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Add value
+        /// </summary>
+        /// <param name="val">Add the value</param>
         /// \~Chinese
         /// <summary>
         /// 添加值
@@ -76,7 +95,10 @@ namespace ASEva.Graph
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get the value
+        /// </summary>
+        /// <returns>The value</returns>
         /// \~Chinese
         /// <summary>
         /// 取得值
