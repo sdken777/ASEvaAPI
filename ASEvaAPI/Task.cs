@@ -2,6 +2,8 @@
 
 namespace ASEva
 {
+    #pragma warning disable CS1571
+
     /// \~English
     /// <summary>
     /// (api:app=2.0.0) Standalone task's status
@@ -115,7 +117,9 @@ namespace ASEva
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Standalone task object
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 独立任务对象
@@ -123,7 +127,11 @@ namespace ASEva
     public class Task
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// [Required] Run the task. The thread calling this function is different from others, be aware of multithread safety
+        /// </summary>
+        /// <param name="config">Configuration string</param>
+        /// <param name="shouldEnd">Whether to abort, if it's true the function should return immediately</param>
         /// \~Chinese
         /// <summary>
         /// [必须实现] 运行任务。本方法的调用线程与其他方法的不一致，需要注意线程安全
@@ -133,7 +141,10 @@ namespace ASEva
         public virtual void RunTask(String config, ref bool shouldEnd) { }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Optional] Get task's state
+        /// </summary>
+        /// <returns>Task's state</returns>
         /// \~Chinese
         /// <summary>
         /// [可选实现] 获取任务运行状态
@@ -142,7 +153,10 @@ namespace ASEva
         public virtual TaskState GetState() { return TaskState.Unknown; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Optional] Get description of task's state
+        /// </summary>
+        /// <returns>Description of task's state</returns>
         /// \~Chinese
         /// <summary>
         /// [可选实现] 获取任务状态描述
@@ -151,7 +165,10 @@ namespace ASEva
         public virtual String GetDescription() { return null; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Optional] Get progress
+        /// </summary>
+        /// <returns>Progress in percentages, ranges 0~100</returns>
         /// \~Chinese
         /// <summary>
         /// [可选实现] 获取任务运行进度
@@ -160,7 +177,10 @@ namespace ASEva
         public virtual double GetProgress() { return 0; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Optional] Get return value
+        /// </summary>
+        /// <returns>The return value</returns>
         /// \~Chinese
         /// <summary>
         /// [可选实现] 获取任务返回值信息

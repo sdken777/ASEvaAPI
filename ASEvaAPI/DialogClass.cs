@@ -3,8 +3,12 @@ using System.Collections.Generic;
 
 namespace ASEva
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Base class for dialog component definition
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 对话框组件定义的基类
@@ -12,7 +16,10 @@ namespace ASEva
     public class DialogClass
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// [Required] Called while getting component's name
+        /// </summary>
+        /// <returns>Dictionary. The key 'en' is English, 'ch' is Chinese</returns>
         /// \~Chinese
         /// <summary>
         /// [必须实现] 获取对话框组件的名称时被调用
@@ -21,7 +28,10 @@ namespace ASEva
         public virtual Dictionary<String, String> GetDialogName() { return null; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Required] Called while getting component's class ID
+        /// </summary>
+        /// <returns>Dialog class ID</returns>
         /// \~Chinese
         /// <summary>
         /// [必须实现] 获取对话框组件的类别ID时被调用
@@ -30,7 +40,10 @@ namespace ASEva
         public virtual String GetDialogClassID() { return null; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Optional] Called while getting dialog's icon
+        /// </summary>
+        /// <returns>Icon image (size should be 16x16)</returns>
         /// \~Chinese
         /// <summary>
         /// [可选实现] 获取对话框组件的图标图像时被调用
@@ -39,16 +52,22 @@ namespace ASEva
         public virtual object GetDialogImage() { return null; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Required] Called while getting class IDs of related components
+        /// </summary>
+        /// <returns>Class IDs of related components</returns>
         /// \~Chinese
         /// <summary>
-        /// [必须实现]  获取对话框组件相关的组件ID
+        /// [必须实现] 获取对话框组件相关的组件ID
         /// </summary>
         /// <returns>组件ID列表</returns>
         public virtual String[] GetRelatedModules() { return null; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Required] Called while getting configuration status of related components
+        /// </summary>
+        /// <returns>Configuration status</returns>
         /// \~Chinese
         /// <summary>
         /// [必须实现] 获取对话框组件相关的配置状态时被调用
@@ -57,7 +76,10 @@ namespace ASEva
         public virtual ConfigStatus GetRelatedConfigStatus() { return ConfigStatus.Disabled; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Optional] Called while getting child configuration status of related components
+        /// </summary>
+        /// <returns>Child configuration status</returns>
         /// \~Chinese
         /// <summary>
         /// [可选实现] 查询对话框组件相关的各子功能配置状态时被调用
@@ -66,7 +88,10 @@ namespace ASEva
         public virtual ConfigStatus[] GetRelatedChildConfigStatus() { return null; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Required] Called to create configuration panel
+        /// </summary>
+        /// <returns>Configuration panel to fill the dialog's client area</returns>
         /// \~Chinese
         /// <summary>
         /// [必须实现] 创建对话框控件时被调用
@@ -75,7 +100,11 @@ namespace ASEva
         public virtual object CreateDialogPanel() { return null; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Optional] Return transformed dialog class according to the configuration string
+        /// </summary>
+        /// <param name="config">Configuration string</param>
+        /// <returns>Definition of transformed dialog class</returns>
         /// \~Chinese
         /// <summary>
         /// [可选实现] 根据对话框配置返回分化的对话框组件定义
@@ -85,7 +114,10 @@ namespace ASEva
         public virtual DialogClass Transform(String config) { return null; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Required for transformed dialog] Called while getting transform ID
+        /// </summary>
+        /// <returns>Transform ID</returns>
         /// \~Chinese
         /// <summary>
         /// [分化的对话框组件必须实现] 获取分化标识ID时被调用

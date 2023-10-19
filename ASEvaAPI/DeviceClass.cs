@@ -41,12 +41,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Required] Called while creating module configuration object. It will be empty configuration if not implemented, that is always enabled
+        /// [Required] Called to create configuration object
         /// </summary>
         /// <returns>Configuration object</returns>
         /// \~Chinese
         /// <summary>
-        /// [必须实现] 创建配置对象时被调用。若不实现则为空配置，常时启用状态
+        /// [必须实现] 创建配置对象时被调用
         /// </summary>
         /// <returns>配置对象</returns>
         public virtual ModuleConfig CreateConfig() { return null; }

@@ -7,6 +7,8 @@ using System.Threading;
 
 namespace ASEva
 {
+    #pragma warning disable CS1571
+
     /// \~English
     /// <summary>
     /// (api:app=2.0.0) Graph type
@@ -166,7 +168,9 @@ namespace ASEva
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Interface of graph data validation
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 图表数据验证接口
@@ -180,7 +184,9 @@ namespace ASEva
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Graph definition
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 图表定义
@@ -188,7 +194,9 @@ namespace ASEva
     public class GraphDefinition
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Graph type
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 图表类型
@@ -196,7 +204,9 @@ namespace ASEva
         public GraphType Type { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Definition related parameters
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 图表定义相关参数
@@ -204,7 +214,9 @@ namespace ASEva
         public List<String> Config { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Graph's title
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 图表标题
@@ -212,7 +224,9 @@ namespace ASEva
         public String MainTitle { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Title of each column
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 各列数据标题
@@ -220,7 +234,9 @@ namespace ASEva
         public List<String> ColumnTitles { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Data validation
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 图表数据验证方式
@@ -237,7 +253,10 @@ namespace ASEva
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get graph ID
+        /// </summary>
+        /// <returns>Graph ID</returns>
         /// \~Chinese
         /// <summary>
         /// 获取图表ID
@@ -309,7 +328,9 @@ namespace ASEva
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Graph data
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 图表数据
@@ -317,7 +338,9 @@ namespace ASEva
     public class GraphData
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Graph ID
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 图表ID
@@ -325,7 +348,9 @@ namespace ASEva
         public int ID { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Graph definition
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 图表定义
@@ -333,7 +358,9 @@ namespace ASEva
         public GraphDefinition Definition { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Data related parameters
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 图表数据相关参数
@@ -341,7 +368,9 @@ namespace ASEva
         public List<String> Params { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Graph data
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 图表数据
@@ -357,7 +386,9 @@ namespace ASEva
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Initialization of data, implemented in deviced class
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 图表数据初始化，需要派生类实现
@@ -368,7 +399,10 @@ namespace ASEva
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Merge with another graph data, implemented in derived class
+        /// </summary>
+        /// <param name="data">Another graph data, whose ID should be the same</param>
         /// \~Chinese
         /// <summary>
         /// 与其他图表数据合并，需要派生类实现
@@ -380,10 +414,13 @@ namespace ASEva
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get whether there's any data added, implemented in derived class
+        /// </summary>
+        /// <returns>Whether there's any data added</returns>
         /// \~Chinese
         /// <summary>
-        /// 是否已添加或赋值数据 ，需要派生类实现
+        /// 是否已添加或赋值数据，需要派生类实现
         /// </summary>
         /// <returns>是否已添加或赋值数据 </returns>
         public virtual bool HasData()
@@ -392,7 +429,11 @@ namespace ASEva
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Validate graph data
+        /// </summary>
+        /// <param name="percentage">Output the percentage of OK data</param>
+        /// <returns>Whether the validation passed</returns>
         /// \~Chinese
         /// <summary>
         /// 验证图表数据
@@ -410,12 +451,16 @@ namespace ASEva
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Save to file
+        /// </summary>
+        /// <param name="file">File path</param>
+        /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
         /// 保存至文件
         /// </summary>
-        /// <param name="file">文件名</param>
+        /// <param name="file">文件路径</param>
         /// <returns>保存是否成功</returns>
         public bool Save(String file)
         {
@@ -491,7 +536,11 @@ namespace ASEva
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Create the initialized graph data based on definition
+        /// </summary>
+        /// <param name="definition">Graph definition</param>
+        /// <returns>Graph data object</returns>
         /// \~Chinese
         /// <summary>
         /// 根据图表定义创建初始化完成后的数据
@@ -512,7 +561,11 @@ namespace ASEva
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Load from file
+        /// </summary>
+        /// <param name="file">File path</param>
+        /// <returns>Graph data object</returns>
         /// \~Chinese
         /// <summary>
         /// 从文件读取图表数据
@@ -690,7 +743,9 @@ namespace ASEva
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.8.1) Interface for graph data visualization
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.8.1) 图表可视化面板接口
@@ -698,7 +753,9 @@ namespace ASEva
     public interface GraphPanel
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Update graph data
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 更新图表数据
@@ -706,7 +763,9 @@ namespace ASEva
         void UpdateWithGraphData(GraphData data);
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.8.2) Get height of the panel (if fixed)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.8.2) 返回面板高度（若为固定高度）
@@ -714,7 +773,9 @@ namespace ASEva
         int? GetFixedHeight();
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.8.3) Release resources
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.8.3) 释放资源
@@ -722,7 +783,9 @@ namespace ASEva
         void ReleaseResources();
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.8.4) Bind click event object
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.8.4) 绑定点击事件对象

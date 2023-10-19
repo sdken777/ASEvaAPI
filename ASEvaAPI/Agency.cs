@@ -101,7 +101,7 @@ namespace ASEva
         TaskResult RunStandaloneTask(object caller, String taskClassID, String config, out String returnValue);
         void SetGlobalPath(String key, String path);
         BusFileInfo[] GetBusProtocolFilesInfo();
-        int? GetBusProtocolFileChannel(String fileID);
+        int? GetBusProtocolFileChannel(String protocolName);
         String[] GetBusFloat32Signals();
         float GetBusMessageFPS(int channel, uint localID);
         BusMessageInfo GetBusMessageInfo(int channel, uint localID);
@@ -136,11 +136,11 @@ namespace ASEva
         Dictionary<String, bool> GetChannelStatusTable(uint? tolerance);
         Dictionary<String, TimeOffsetSync> GetChannelSyncTable();
         bool SetControlFlag(String controllerID, bool enabled);
-        String GetModuleConfig(object caller, String moduleClassID);
-        void SetModuleConfig(object caller, String moduleClassID, String config);
-        void DisableModule(object caller, String moduleClassID);
-        ConfigStatus GetModuleConfigStatus(object caller, String moduleClassID);
-        ConfigStatus[] GetModuleChildConfigStatus(object caller, String moduleClassID);
+        String GetModuleConfig(object caller, String classID);
+        void SetModuleConfig(object caller, String classID, String config);
+        void DisableModule(object caller, String classID);
+        ConfigStatus GetModuleConfigStatus(object caller, String classID);
+        ConfigStatus[] GetModuleChildConfigStatus(object caller, String classID);
         Dictionary<BusDeviceID, BusDeviceInfo> GetBusDevices();
         Dictionary<VideoDeviceID, VideoDeviceInfo> GetVideoDevices();
         Dictionary<String, String> GetNativePluginVersions(String prefix);
@@ -1089,9 +1089,9 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Add a new scenario data
+        /// Add a new scenario segment
         /// </summary>
-        /// <param name="scene">Scenario data</param>
+        /// <param name="scene">Scenario segment</param>
         /// \~Chinese
         /// <summary>
         /// 添加一个场景片段
@@ -1106,7 +1106,7 @@ namespace ASEva
         /// <summary>
         /// Get status of a general device
         /// </summary>
-        /// <param name="type">General device's type ID, the same as the "type" field in info.txt</param>
+        /// <param name="type">Related native plugin's type ID, the same as the "type" field in info.txt</param>
         /// <returns>Status of the general device</returns>
         /// \~Chinese
         /// <summary>
@@ -1138,7 +1138,7 @@ namespace ASEva
         /// <summary>
         /// Get status of a general device's sub devices
         /// </summary>
-        /// <param name="type">General device's type ID, the same as the "type" field in info.txt</param>
+        /// <param name="type">Related native plugin's type ID, the same as the "type" field in info.txt</param>
         /// <returns>Status of a general device's sub devices</returns>
         /// \~Chinese
         /// <summary>
@@ -1365,7 +1365,7 @@ namespace ASEva
         /// <returns>Whether conflict exists</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 检查样本数据通道是否冲突（有多个模块输出相同协议和通道的样本数据）
+        /// (api:app=2.3.0) 检查样本数据通道是否冲突（有多个组件输出相同协议和通道的样本数据）
         /// </summary>
         /// <param name="channelID">样本通道协议，格式为"协议名@通道序号"，通道序号从0开始，协议名中带"v"字版本号的可向下兼容</param>
         /// <returns>是否冲突</returns>
@@ -1710,14 +1710,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get information of all bus protocol files bound to any bus channel
+        /// Get information of all bus protocols bound to any bus channel
         /// </summary>
-        /// <returns>Information of all bus protocol files, multiple files could be bound to the same bus channel</returns>
+        /// <returns>Information of all bus protocols</returns>
         /// \~Chinese
         /// <summary>
         /// 获取所有总线通道上的协议信息
         /// </summary>
-        /// <returns>总线协议信息列表，同个文件的多个通道将分列</returns>
+        /// <returns>总线协议信息列表</returns>
         public static BusFileInfo[] GetBusProtocolFilesInfo()
         {
             return Handler.GetBusProtocolFilesInfo();
@@ -1725,19 +1725,19 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get the bound channel of bus protocol file
+        /// Get the bound channel of bus protocol
         /// </summary>
-        /// <param name="fileID">Bus protocol file ID (In the case of multiple channels, the channel name is included)</param>
+        /// <param name="protocolName">Bus protocol name (In the case of multiple channels, the channel name is included)</param>
         /// <returns>Bus channel (1~16), null if not bound</returns>
         /// \~Chinese
         /// <summary>
         /// 获取总线协议文件当前配置于哪个通道
         /// </summary>
-        /// <param name="fileID">文件ID（多通道的情况下包括通道名）</param>
+        /// <param name="protocolName">总线协议名称（多通道的情况下包括通道名）</param>
         /// <returns>总线通道（1~16），若未配置则返回null</returns>
-        public static int? GetBusProtocolFileChannel(String fileID)
+        public static int? GetBusProtocolFileChannel(String protocolName)
         {
-            return Handler.GetBusProtocolFileChannel(fileID);
+            return Handler.GetBusProtocolFileChannel(protocolName);
         }
 
         /// \~English
@@ -2383,95 +2383,95 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get module's configuration string
+        /// Get processor/native/device component's configuration string
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
-        /// <param name="moduleClassID">Module's class ID</param>
+        /// <param name="classID">Component's class ID</param>
         /// <returns>Configuration string, null if not found</returns>
         /// \~Chinese
         /// <summary>
-        /// 获取数据处理或原生模块组件配置的字符串描述
+        /// 获取数据处理/原生/设备组件配置的字符串描述
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
-        /// <param name="moduleClassID">模块组件的类别ID</param>
-        /// <returns>配置的字符串描述，null表示找不到类别ID对应的模块组件</returns>
-        public static String GetModuleConfig(object caller, String moduleClassID)
+        /// <param name="classID">组件的类别ID</param>
+        /// <returns>配置的字符串描述，null表示找不到类别ID对应的组件</returns>
+        public static String GetModuleConfig(object caller, String classID)
         {
-            return Handler.GetModuleConfig(caller, moduleClassID);
+            return Handler.GetModuleConfig(caller, classID);
         }
 
         /// \~English
         /// <summary>
-        /// Set module's configuration string
+        /// Set processor/native/device component's configuration string
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
-        /// <param name="moduleClassID">Module's class ID</param>
+        /// <param name="classID">Component's class ID</param>
         /// <param name="config">Configuration string</param>
         /// \~Chinese
         /// <summary>
-        /// 设置数据处理或原生模块组件配置的字符串描述
+        /// 设置数据处理/原生/设备组件配置的字符串描述
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
-        /// <param name="moduleClassID">模块组件的类别ID</param>
+        /// <param name="classID">组件的类别ID</param>
         /// <param name="config">配置的字符串描述</param>
-        public static void SetModuleConfig(object caller, String moduleClassID, String config)
+        public static void SetModuleConfig(object caller, String classID, String config)
         {
-            Handler.SetModuleConfig(caller, moduleClassID, config);
+            Handler.SetModuleConfig(caller, classID, config);
         }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.7) Disable module
+        /// (api:app=2.6.7) Disable processor/native/device component component
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
-        /// <param name="moduleClassID">Module's class ID</param>
+        /// <param name="classID">Component's class ID</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.7) 禁用数据处理或原生模块组件
+        /// (api:app=2.6.7) 禁用数据处理/原生/设备组件
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
-        /// <param name="moduleClassID">模块组件的类别ID</param>
-        public static void DisableModule(object caller, String moduleClassID)
+        /// <param name="classID">组件的类别ID</param>
+        public static void DisableModule(object caller, String classID)
         {
-            Handler.DisableModule(caller, moduleClassID);
+            Handler.DisableModule(caller, classID);
         }
 
         /// \~English
         /// <summary>
-        /// Get status of module's configuration
+        /// Get status of processor/native/device component's configuration
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
-        /// <param name="moduleClassID">Module's class ID</param>
-        /// <returns>Status of module's configuration, returns ASEva.ConfigStatus.Disabled if not found</returns>
+        /// <param name="classID">Component's class ID</param>
+        /// <returns>Status of component's configuration, returns ASEva.ConfigStatus.Disabled if not found</returns>
         /// \~Chinese
         /// <summary>
-        /// 获取数据处理或原生模块组件配置的状态
+        /// 获取数据处理/原生/设备组件配置的状态
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
-        /// <param name="moduleClassID">模块组件的类别ID</param>
-        /// <returns>组件配置的状态，若找不到类别ID对应的模块组件则返回 ASEva.ConfigStatus.Disabled </returns>
-        public static ConfigStatus GetModuleConfigStatus(object caller, String moduleClassID)
+        /// <param name="classID">组件的类别ID</param>
+        /// <returns>组件配置的状态，若找不到类别ID对应的组件则返回 ASEva.ConfigStatus.Disabled </returns>
+        public static ConfigStatus GetModuleConfigStatus(object caller, String classID)
         {
-            return Handler.GetModuleConfigStatus(caller, moduleClassID);
+            return Handler.GetModuleConfigStatus(caller, classID);
         }
 
         /// \~English
         /// <summary>
-        /// Get child status of module's configuration
+        /// Get child status of processor/native/device component's configuration
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
-        /// <param name="moduleClassID">Module's class ID</param>
-        /// <returns>Child status of module's configuration, null if not found or there's no child functions</returns>
+        /// <param name="classID">Component's class ID</param>
+        /// <returns>Child status of component's configuration, null if not found or there's no child functions</returns>
         /// \~Chinese
         /// <summary>
-        /// 获取数据处理或原生模块组件各子功能配置的状态
+        /// 获取数据处理/原生/设备组件各子功能配置的状态
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
-        /// <param name="moduleClassID">模块组件的类别ID</param>
-        /// <returns>各子功能配置的状态，若找不到类别ID对应的模块组件或无子功能配置则返回null</returns>
-        public static ConfigStatus[] GetModuleChildConfigStatus(object caller, String moduleClassID)
+        /// <param name="classID">组件的类别ID</param>
+        /// <returns>各子功能配置的状态，若找不到类别ID对应的组件或无子功能配置则返回null</returns>
+        public static ConfigStatus[] GetModuleChildConfigStatus(object caller, String classID)
         {
-            return Handler.GetModuleChildConfigStatus(caller, moduleClassID);
+            return Handler.GetModuleChildConfigStatus(caller, classID);
         }
 
         /// \~English
@@ -2511,9 +2511,9 @@ namespace ASEva
         /// <returns>All bus protocol file IDs</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取总线协议ID列表
+        /// (api:app=2.3.0) 获取总线协议文件ID列表
         /// </summary>
-        /// <returns>总线协议ID列表</returns>
+        /// <returns>总线协议文件ID列表</returns>
         public static BusProtocolFileID[] GetBusProtocolFileIDList()
         {
             return Handler.GetBusProtocolFileIDList();
@@ -2529,7 +2529,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) 获取总线协议对应文件的路径
         /// </summary>
-        /// <param name="fileID">总线协议ID</param>
+        /// <param name="fileID">总线协议文件ID</param>
         /// <returns>总线协议文件路径，若未找到返回null</returns>
         public static String GetBusProtocolFilePath(BusProtocolFileID fileID)
         {
@@ -2547,7 +2547,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) 更新总线协议文件路径(仅支持单通道的情况)
         /// </summary>
-        /// <param name="fileID">总线协议ID</param>
+        /// <param name="fileID">总线协议文件ID</param>
         /// <param name="filePath">新路径</param>
         /// <returns>是否成功更新，false表示未找到文件或MD5不匹配</returns>
         public static bool UpdateBusProtocolFilePath(BusProtocolFileID fileID, String filePath)
@@ -2565,7 +2565,7 @@ namespace ASEva
         /// <summary>
         /// 获取总线协议对应文件的状态
         /// </summary>
-        /// <param name="fileID">总线协议ID</param>
+        /// <param name="fileID">总线协议文件ID</param>
         /// <returns>文件状态</returns>
         public static BusProtocolFileState GetBusProtocolFileState(BusProtocolFileID fileID)
         {
@@ -2574,7 +2574,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Add bus protocol (For multiple channel protocol, only the first channel will be added)
+        /// (api:app=2.3.0) Add bus protocol file (For multiple channel protocol, only the first channel will be added)
         /// </summary>
         /// <param name="filePath">File path of bus protocol file</param>
         /// <param name="fileID">Output bus protocol file ID, null if the file doesn't exist</param>
@@ -2584,8 +2584,8 @@ namespace ASEva
         /// (api:app=2.3.0) 添加新的总线协议文件(多通道协议文件将按单通道处理，输出首个通道)
         /// </summary>
         /// <param name="filePath">总线协议文件路径</param>
-        /// <param name="fileID">总线协议ID，若文件存在则输出该ID，否则输出null</param>
-        /// <returns>是否为新添加的总线协议ID</returns>
+        /// <param name="fileID">总线协议文件ID，若文件存在则输出该ID，否则输出null</param>
+        /// <returns>是否为新添加的总线协议</returns>
         public static bool AddBusProtocolFile(String filePath, out BusProtocolFileID fileID)
         {
             return Handler.AddBusProtocolFile(filePath, out fileID);
@@ -2593,7 +2593,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.3) Add bus protocol
+        /// (api:app=2.6.3) Add bus protocol file
         /// </summary>
         /// <param name="filePath">File path of bus protocol file</param>
         /// <returns>The result</returns>
@@ -2617,7 +2617,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) 移除总线协议
         /// </summary>
-        /// <param name="fileID">总线协议ID</param>
+        /// <param name="fileID">总线协议文件ID</param>
         public static void RemoveBusProtocolFile(BusProtocolFileID fileID)
         {
             Handler.RemoveBusProtocolFile(fileID);
@@ -2631,10 +2631,10 @@ namespace ASEva
         /// <returns>Dictionary. The key is plugin's type ID</returns>
         /// \~Chinese
         /// <summary>
-        /// 获取原生插件模块版本列表
+        /// 获取原生插件版本列表
         /// </summary>
-        /// <param name="prefix">组件前缀，如bus、video、proc、dev等</param>
-        /// <returns>版本列表，键为原生模块的类型ID，值为版本字符串</returns>
+        /// <param name="prefix">插件前缀，如bus、video、proc、dev等</param>
+        /// <returns>版本列表，键为原生插件的类型ID，值为版本字符串</returns>
         public static Dictionary<String, String> GetNativePluginVersions(String prefix)
         {
             return Handler.GetNativePluginVersions(prefix);
@@ -2648,10 +2648,10 @@ namespace ASEva
         /// <returns>Dictionary. The key is plugin's type ID</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取原生插件模块版本列表
+        /// (api:app=2.3.0) 获取原生插件插件版本列表
         /// </summary>
         /// <param name="type">原生库类别</param>
-        /// <returns>版本列表，键为原生模块的类型ID</returns>
+        /// <returns>版本列表，键为原生插件的类型ID</returns>
         public static  Dictionary<String, Version> GetNativePluginVersions(NativeLibraryType type)
         {
             return Handler.GetNativePluginVersions(type);
@@ -2826,13 +2826,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Show a modal dialog to select multiple signals
+        /// Show a modal dialog to select multiple signals at once
         /// </summary>
         /// <param name="handler">Callback to handle signal selection</param>
         /// <param name="existSignalIDList">List of all signal IDs that already exist</param>
         /// \~Chinese
         /// <summary>
-        /// 打开对话框选择多个信号
+        /// 打开对话框一次性选择多个信号
         /// </summary>
         /// <param name="handler">选中信号时调用的回调接口</param>
         /// <param name="existSignalIDList">既存的选中信号ID列表</param>
@@ -2857,7 +2857,7 @@ namespace ASEva
         /// Open a dialog
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel , etc.</param>
-        /// <param name="dialogClassID">Dialog's class ID</param>
+        /// <param name="dialogClassID">Dialog class ID</param>
         /// <param name="config">Configuration string</param>
         /// \~Chinese
         /// <summary>
@@ -2876,7 +2876,7 @@ namespace ASEva
         /// Add a window to workspace
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel , etc.</param>
-        /// <param name="windowClassID">Window's class ID</param>
+        /// <param name="windowClassID">Window class ID</param>
         /// <param name="config">Configuration string</param>
         /// <param name="newWorkspaceIfNeeded">Whether to add to a new workspace (if available) if there's no space in the current workspace</param>
         /// \~Chinese
@@ -2933,7 +2933,7 @@ namespace ASEva
         /// Show modal dialog to select (multiple) bus protocols
         /// </summary>
         /// <param name="selected">Bus protocols already selected</param>
-        /// <returns>Selected bus protocols</returns>
+        /// <returns>Newly selected bus protocols</returns>
         /// \~Chinese
         /// <summary>
         /// 打开对话框选择总线协议文件（可多个）
@@ -3414,7 +3414,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) Get information of all app-layer processor classes
         /// </summary>
-        /// <returns>Dictionary. The key is app-layer processor's class ID</returns>
+        /// <returns>Dictionary. The key is processor class ID</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取数据处理组件信息表
@@ -3427,9 +3427,9 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get information of all native-layer module classes
+        /// (api:app=2.3.0) Get information of all native-layer component classes
         /// </summary>
-        /// <returns>Dictionary. The key is native-layer module class ID</returns>
+        /// <returns>Dictionary. The key is native-layer component's class ID</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取原生组件信息表
@@ -3444,7 +3444,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) Get information of all standalone task classes
         /// </summary>
-        /// <returns>Dictionary. The key is standalone task class ID</returns>
+        /// <returns>Dictionary. The key is task class ID</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取独立任务组件信息表
@@ -3459,7 +3459,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.8.0) Get information of all app-layer device classes
         /// </summary>
-        /// <returns>Dictionary. The key is app-layer device class ID</returns>
+        /// <returns>Dictionary. The key is device class ID</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.8.0) 获取设备组件信息表
@@ -3552,7 +3552,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get status of modules related to the dialog
+        /// (api:app=2.3.0) Get status of components related to the dialog
         /// </summary>
         /// <param name="dialogClassID">Dialog class ID</param>
         /// <param name="transformID">Transform ID</param>
@@ -3560,7 +3560,7 @@ namespace ASEva
         /// <returns>The main status</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取对话框相关模块配置状态
+        /// (api:app=2.3.0) 获取对话框相关组件配置状态
         /// </summary>
         /// <param name="dialogClassID">对话框组件ID</param>
         /// <param name="transformID">分化ID</param>
@@ -3573,11 +3573,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Disable all modules (Some may not be able to disabled)
+        /// (api:app=2.3.0) Disable all components (Some may not be able to disabled)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 禁用所有模块配置
+        /// (api:app=2.3.0) 禁用所有组件配置
         /// </summary>
         public static void DisableAllConfigs()
         {
@@ -4368,7 +4368,7 @@ namespace ASEva
         /// (api:app=2.3.0) Get payload of bus channel
         /// </summary>
         /// <param name="channel">Bus channel, ranges 1~16</param>
-        /// <returns>Payload in percentage, null if unavailable</returns>
+        /// <returns>Payload in percentages, null if unavailable</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取指定总线通道的负载百分比
@@ -4557,7 +4557,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.6.2) Get information of standalone task class
         /// </summary>
-        /// <param name="taskClassID">Standalone task's class ID</param>
+        /// <param name="taskClassID">Task class ID</param>
         /// <returns>Information of standalone task class, null if not found</returns>
         /// \~Chinese
         /// <summary>
@@ -4779,15 +4779,15 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.0) Send data to native layer components
+        /// (api:app=2.6.0) Send data to native plugins
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel , etc.</param>
-        /// <param name="nativeClassID">Native module's class ID</param>
+        /// <param name="nativeClassID">Native class ID</param>
         /// <param name="dataID">Data ID, should not be null</param>
         /// <param name="data">Binary data, should not be null</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.0) 发送数据至原生层模块
+        /// (api:app=2.6.0) 发送数据至原生插件
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
@@ -4800,15 +4800,15 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.0) Receive data from native layer components
+        /// (api:app=2.6.0) Receive data from native plugins
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel , etc.</param>
-        /// <param name="nativeClassID">Native module's class ID</param>
+        /// <param name="nativeClassID">Native class ID</param>
         /// <param name="dataID">Data ID, should not be null</param>
         /// <returns>All received binary data</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.0) 接收所有从原生层模块发来的新数据
+        /// (api:app=2.6.0) 接收所有从原生插件发来的新数据
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
@@ -4821,22 +4821,22 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.0) Call native layer component's function
+        /// (api:app=2.6.0) Call native plugin's function
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel , etc.</param>
-        /// <param name="nativeClassID">Native module's class ID</param>
+        /// <param name="nativeClassID">Native class ID</param>
         /// <param name="funcID">Function ID</param>
         /// <param name="input">Input data for the function</param>
         /// <returns>Output data from the function, null if the function is not found</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.0) 调用原生层函数
+        /// (api:app=2.6.0) 调用原生插件中的函数
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
         /// <param name="funcID">函数ID</param>
         /// <param name="input">函数输入数据</param>
-        /// <returns>函数输出数据，若未找到相应模块或函数ID无响应则返回null</returns>
+        /// <returns>函数输出数据，若未找到相应插件或函数ID无响应则返回null</returns>
         public static byte[] CallNativeFunction(object caller, String nativeClassID, String funcID, byte[] input)
         {
             return Handler.CallNativeFunction(caller, nativeClassID, funcID, input);
@@ -4844,15 +4844,15 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.0) Set handler for function calling from native layer components
+        /// (api:app=2.6.0) Set handler for function calling from native plugins
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel , etc.</param>
-        /// <param name="nativeClassID">Native module's class ID</param>
+        /// <param name="nativeClassID">Native class ID</param>
         /// <param name="funcID">Function ID</param>
         /// <param name="handler">Handler for function calling</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.0) 设置供原生层模块调用的应用层函数
+        /// (api:app=2.6.0) 设置供原生插件调用的应用层函数
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
@@ -4865,14 +4865,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.0) Reset the handler for function calling from native layer components
+        /// (api:app=2.6.0) Reset the handler for function calling from native plugins
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel , etc.</param>
-        /// <param name="nativeClassID">Native module's class ID</param>
+        /// <param name="nativeClassID">Native class ID</param>
         /// <param name="funcID">Function ID</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.0) 移除供原生层模块调用的应用层函数
+        /// (api:app=2.6.0) 移除供原生插件调用的应用层函数
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
@@ -5245,9 +5245,9 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.13.2) Get information of all dedicated graphics card
+        /// (api:app=2.13.2) Get information of all dedicated graphic card
         /// </summary>
-        /// <returns>Information of all dedicated graphics card</returns>
+        /// <returns>Information of all dedicated graphic card</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.13.2) 获取主机上所有独立显卡信息

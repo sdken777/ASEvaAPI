@@ -19,7 +19,7 @@ namespace ASEva
         /// <summary>
         /// Enabled and normal
         /// </summary>
-         /// \~Chinese
+        /// \~Chinese
         /// <summary>
         /// 启用且正常
         /// </summary>
@@ -514,17 +514,17 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Base class of module configuration
+    /// (api:app=2.0.0) Base class of component configuration
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 模块配置的基类
+    /// (api:app=2.0.0) 组件配置的基类
     /// </summary>
     public class ModuleConfig
     {
         /// \~English
         /// <summary>
-        /// [Required] Called while getting configuration string of the module
+        /// [Required] Called while getting configuration string of the component
         /// </summary>
         /// <returns>Configuration string, recommended to use XML or JSON</returns>
         /// \~Chinese
@@ -536,7 +536,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Required] Called while updating configuration string of the module
+        /// [Required] Called while updating configuration string of the component
         /// </summary>
         /// <param name="config">Configuration string, the format should be the same as the one queried from ASEva.ModuleConfig.GetConfig </param>
         /// \~Chinese
@@ -572,12 +572,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Called while getting titles of output general samples
+        /// [Optional. Only for ProcessorClass and NativeClass] Called while getting titles of output general samples
         /// </summary>
         /// <returns>Dictionary. The key is sample channel ID</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 获取输出的样本标题集合时被调用
+        /// [可选实现；仅限ProcessorClass和NativeClass] 获取输出的样本标题集合时被调用
         /// </summary>
         /// <returns>样本标题集合，key为样本ID，value为标题描述</returns>
         public virtual Dictionary<String, GeneralSampleTitle> GetProcessorOutputSampleTitles() { return null; }
@@ -596,12 +596,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Called while getting names of output signals
+        /// [Optional. Only for ProcessorClass and NativeClass] Called while getting names of output signals
         /// </summary>
         /// <returns>Names of output signals</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 获得该组件默认类别下的所有输出信号的名称时被调用
+        /// [可选实现；仅限ProcessorClass和NativeClass] 获得该组件默认类别下的所有输出信号的名称时被调用
         /// </summary>
         /// <returns>信号名称列表</returns>
         public virtual String[] GetProcessorOutputSignalNames() { return null; }
@@ -632,36 +632,36 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Called while getting signal packing configurations
+        /// [Optional. Only for ProcessorClass and NativeClass] Called while getting signal packing configurations
         /// </summary>
         /// <returns>Signal packing configurations</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 获取数据处理需要用到的所有信号打包配置时被调用
+        /// [可选实现；仅限ProcessorClass和NativeClass] 获取数据处理需要用到的所有信号打包配置时被调用
         /// </summary>
         /// <returns>信号打包配置列表</returns>
         public virtual List<SignalPackConfig> GetProcessorRelatedSignalPackings() { return null; }
 
         /// \~English
         /// <summary>
-        /// [Optional] Called while getting alias names of output samples
+        /// [Optional. Only for ProcessorClass and NativeClass] Called while getting alias names of output samples
         /// </summary>
         /// <returns>Alias names of output samples</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 获取所有输出样本通道的别名列表时被调用
+        /// [可选实现；仅限ProcessorClass和NativeClass] 获取所有输出样本通道的别名列表时被调用
         /// </summary>
         /// <returns>通道别名列表</returns>
         public virtual List<ChannelAlias> GetChannelAliasList() { return null; }
 
         /// \~English
         /// <summary>
-        /// [Optional] Called while getting used video channels
+        /// [Optional. Only for ProcessorClass and NativeClass] Called while getting used video channels
         /// </summary>
         /// <returns>Used video channels</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 获取所有使用的视频通道时被调用
+        /// [可选实现；仅限ProcessorClass和NativeClass] 获取所有使用的视频通道时被调用
         /// </summary>
         /// <returns>所有使用的视频通道</returns>
         public virtual List<UsingVideoChannel> GetUsingVideoChannels() { return null; }
@@ -690,7 +690,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Disable all module functions by user
+        /// [Optional] Disable all component functions by user
         /// </summary>
         /// \~Chinese
         /// <summary>
@@ -700,7 +700,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Disable error parts of the module functions. No need to implement if ASEva.ModuleConfig.GetConfigStatus won't return ASEva.ConfigStatus.EnabledWithWarning
+        /// [Optional] Disable error parts of the component functions. No need to implement if ASEva.ModuleConfig.GetConfigStatus won't return ASEva.ConfigStatus.EnabledWithWarning
         /// </summary>
         /// \~Chinese
         /// <summary>

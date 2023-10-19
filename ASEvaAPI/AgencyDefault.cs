@@ -398,21 +398,21 @@ namespace ASEva
             return false;
         }
 
-        public string GetModuleConfig(object caller, string moduleClassID)
+        public string GetModuleConfig(object caller, string classID)
         {
             return null;
         }
 
-        public void SetModuleConfig(object caller, string moduleClassID, string config)
+        public void SetModuleConfig(object caller, string classID, string config)
         {
         }
 
-        public ConfigStatus GetModuleConfigStatus(object caller, string moduleClassID)
+        public ConfigStatus GetModuleConfigStatus(object caller, string classID)
         {
             return ConfigStatus.Disabled;
         }
 
-        public ConfigStatus[] GetModuleChildConfigStatus(object caller, string moduleClassID)
+        public ConfigStatus[] GetModuleChildConfigStatus(object caller, string classID)
         {
             return null;
         }
@@ -1219,7 +1219,7 @@ namespace ASEva
             return null;
         }
 
-        public void DisableModule(object caller, string moduleClassID)
+        public void DisableModule(object caller, string classID)
         {
         }
 

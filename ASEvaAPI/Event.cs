@@ -3,7 +3,9 @@
 namespace ASEva
 {
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Basic info of event
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 事件基础信息
@@ -11,7 +13,9 @@ namespace ASEva
     public class EventData
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Event name
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 事件名称
@@ -19,7 +23,9 @@ namespace ASEva
         public String Name { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Session ID belonged
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 所属session ID
@@ -27,7 +33,9 @@ namespace ASEva
         public DateTime Base { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.0.5) Time offset in the session
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.0.5) 在所属session中的时间偏置
@@ -35,7 +43,9 @@ namespace ASEva
         public double? Offset { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Triggered time (Local date and time, accurate to millisecond)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 事件发生时刻（本地时间，精确至毫秒）
@@ -43,7 +53,9 @@ namespace ASEva
         public DateTime TimeStampLocal { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Trigger condition ID
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 事件触发条件ID
@@ -51,7 +63,9 @@ namespace ASEva
         public String ConfigID { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Description of trigger condition
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 事件触发条件描述
@@ -59,7 +73,9 @@ namespace ASEva
         public String Description { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Event handle
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 事件对象
@@ -109,7 +125,9 @@ namespace ASEva
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Full info of event
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 事件完整信息
@@ -117,7 +135,9 @@ namespace ASEva
     public class EventInfo
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Basic info
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 基础信息
@@ -125,7 +145,9 @@ namespace ASEva
         public EventData Data { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Comment
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 注释
@@ -133,15 +155,19 @@ namespace ASEva
         public String Comment { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Root folder of event data
+        /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 根路径
+        /// 事件数据的根路径
         /// </summary>
         public String RootPath { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Path of info.xml
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// info.xml路径
@@ -149,7 +175,9 @@ namespace ASEva
         public String InfoXmlDataPath { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Path of snapshot signal table
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 快照信号表路径
@@ -157,7 +185,9 @@ namespace ASEva
         public String SnapshotTableDataPath { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Path of snapshot city-level map image
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 快照城市尺度地图图像路径
@@ -165,7 +195,9 @@ namespace ASEva
         public String SnapshotLocationCityImagePath { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Path of snapshot road-level map image
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 快照街道尺度地图图像路径
@@ -173,7 +205,9 @@ namespace ASEva
         public String SnapshotLocationRoadImagePath { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Path of snapshot video image
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 快照视频图像路径
@@ -181,7 +215,9 @@ namespace ASEva
         public String SnapshotVideoImagePath { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Path of snapshot bird view image
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 快照俯瞰图图像路径
@@ -189,7 +225,9 @@ namespace ASEva
         public String SnapshotBirdViewImagePath { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Path of event session
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 事件session记录路径
@@ -197,7 +235,9 @@ namespace ASEva
         public String SessionRecordPath { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Status of event session recording
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 事件session记录状态
