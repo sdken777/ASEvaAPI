@@ -5,8 +5,12 @@ using System.Linq;
 
 namespace ASEva.Utility
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Sample CSV file loader
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 读取样本csv文件
@@ -14,7 +18,11 @@ namespace ASEva.Utility
     public class SampleCsvLoader
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Create sample CSV file loader from the specified path
+        /// </summary>
+        /// <param name="file">File path</param>
+        /// <returns>Sample CSV file loader object, null if the file doesn't exist or failed to load</returns>
         /// \~Chinese
         /// <summary>
         /// 根据指定路径创建样本csv读取器
@@ -120,7 +128,10 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get title of sample's fields 
+        /// </summary>
+        /// <returns>Title of sample's fields, null means no title</returns>
         /// \~Chinese
         /// <summary>
         /// 获取样本标题 
@@ -133,7 +144,10 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Read next sample
+        /// </summary>
+        /// <returns>General sample object</returns>
         /// \~Chinese
         /// <summary>
         /// 读取下一个样本
@@ -194,7 +208,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Close sample CSV loader
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 关闭样本csv读取器
@@ -224,7 +240,11 @@ namespace ASEva.Utility
         { }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Load GeneralSample array from csv file (This function is only suitable for small files)
+        /// </summary>
+        /// <param name="file">File path</param>
+        /// <returns>Array of general samples, null if the file doesn't exist or failed to load</returns>
         /// \~Chinese
         /// <summary>
         /// 从csv读取样本，输出GeneralSample数组（仅适合较小文件的情况）

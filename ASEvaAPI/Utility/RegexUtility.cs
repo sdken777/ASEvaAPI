@@ -4,7 +4,9 @@ using System.Text.RegularExpressions;
 namespace ASEva.Utility
 {
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Regular expression utility
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 正则表达式工具
@@ -12,7 +14,9 @@ namespace ASEva.Utility
     public class RegexUtil
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether it's Chinese string
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否为中文字符串
@@ -23,7 +27,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether it's phone number
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否为电话号码
@@ -35,7 +41,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether it's mobile phone number
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否为手机号码
@@ -46,7 +54,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether it's numeric string
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否为数值字符串
@@ -58,7 +68,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Deprecated, use ASEva.Utility.RegexUtil.IsNotNegative
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 已弃用，应使用 ASEva.Utility.RegexUtil.IsNotNegative
@@ -69,7 +81,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.3.0) Whether it's non-negative numeric string
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 是否为非负数值字符串
@@ -80,7 +94,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether it's unsigned integer
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否为无符号整型
@@ -91,7 +107,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether it's English string
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否为英文字符串
@@ -102,7 +120,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether it's mail address
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否为邮件字符串
@@ -114,7 +134,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether it's mixed string of English and numbers
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否为英文数字结合字符串
@@ -125,7 +147,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether it's URL
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否为URL
@@ -137,7 +161,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether it's URL without protocol header
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否为无协议头URL
@@ -149,7 +175,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether it's IPv4
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否为IPv4
@@ -181,7 +209,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether it's IPv6
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否为IPv6

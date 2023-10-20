@@ -5,8 +5,12 @@ using System.IO;
 
 namespace ASEva.Utility
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Sample CSV file writer
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 写入样本csv文件
@@ -14,14 +18,20 @@ namespace ASEva.Utility
     public class SampleCsvWriter
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Create sample CSV writer writing to the specified path
+        /// </summary>
+        /// <param name="file">File path, whose file name must be the same as sample's channel ID, suffixed with ".csv"</param>
+        /// <param name="overwrite">Whether to overwrite if it exists</param>
+        /// <param name="titles">Title of sample's fields</param>
+        /// <returns>Sample CSV writer, null if failed to create</returns>
         /// \~Chinese
         /// <summary>
         /// 根据指定路径创建样本csv写入器
         /// </summary>
         /// <param name="file">文件路径，文件名必须与样本协议ID一致，后缀为csv</param>
         /// <param name="overwrite">若文件已存在是否覆盖</param>
-        /// <param name="titles"></param>
+        /// <param name="titles">样本标题</param>
         /// <returns>csv写入器，若文件创建失败则返回空</returns>
         public static SampleCsvWriter CreateWriter(String file, bool overwrite, List<String> titles)
         {
@@ -58,7 +68,11 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Write a general sample to file
+        /// </summary>
+        /// <param name="sample">General sample object</param>
+        /// <returns>Whether successful, false if the channel ID or session doesn't match</returns>
         /// \~Chinese
         /// <summary>
         /// 写入一个通用样本
@@ -102,7 +116,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Close sample CSV writer
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 关闭样本csv写入器
@@ -117,7 +133,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Set session's start time of satellite posix time model in UTC date and time
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 按UTC时间设置卫星Posix时间模型的session开始时间
@@ -136,7 +154,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Set session's start time of host machine posix time model in local date and time
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 按本地时间设置主机Posix时间模型的session开始时间
@@ -155,7 +175,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Set time ratio of satellite posix time model, default is 1
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 设置卫星Posix时间模型的时间比例，默认为1
@@ -170,7 +192,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Set time ratio of host machine posix time model, default is 1
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 设置主机Posix时间模型的时间比例，默认为1

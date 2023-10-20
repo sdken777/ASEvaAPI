@@ -3,8 +3,12 @@ using System.Xml;
 
 namespace ASEva.Utility
 {
+    #pragma warning disable CS1571
+    
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) XML attribute parsing
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) XML属性解析
@@ -139,7 +143,9 @@ namespace ASEva.Utility
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) XML attribute writer
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) XML属性输出
@@ -150,7 +156,10 @@ namespace ASEva.Utility
         private XmlAttributeCollection a;
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Create based on XML element
+        /// </summary>
+        /// <param name="element">XML element</param>
         /// \~Chinese
         /// <summary>
         /// 基于XML元素节点创建

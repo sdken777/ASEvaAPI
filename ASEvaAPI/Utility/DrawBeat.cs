@@ -4,8 +4,12 @@ using System.Linq;
 
 namespace ASEva.Utility
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.2.2) Drawing time cost recording and feedback
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.2.2) 绘图时间记录与反馈
@@ -13,7 +17,9 @@ namespace ASEva.Utility
     public class DrawBeat
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.6.9) Enable the function (default is disabled)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.6.9) 启用绘图时间记录与反馈（默认不启用）
@@ -24,7 +30,11 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Call before queue drawing
+        /// </summary>
+        /// <param name="id">Drawing ID</param>
+        /// <returns>Whether it's available to draw</returns>
         /// \~Chinese
         /// <summary>
         /// 在调用绘图前调用
@@ -50,7 +60,11 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Call before queue drawing
+        /// </summary>
+        /// <param name="target">Drawing target</param>
+        /// <returns>Whether it's available to draw</returns>
         /// \~Chinese
         /// <summary>
         /// 在调用绘图前调用
@@ -65,7 +79,10 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Call after drawing queued
+        /// </summary>
+        /// <param name="id">Drawing ID</param>
         /// \~Chinese
         /// <summary>
         /// 在调用绘图后调用
@@ -79,7 +96,10 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Call after drawing queued
+        /// </summary>
+        /// <param name="target">Drawing target</param>
         /// \~Chinese
         /// <summary>
         /// 在调用绘图后调用
@@ -92,7 +112,11 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Call at the beginning of draw callback
+        /// </summary>
+        /// <param name="id">Drawing ID</param>
+        /// <param name="category">Category, set to null if not to specify</param>
         /// \~Chinese
         /// <summary>
         /// 在绘图回调函数开始时调用
@@ -108,7 +132,11 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Call at the beginning of draw callback
+        /// </summary>
+        /// <param name="target">Drawing ID</param>
+        /// <param name="category">Category, set to null if not to specify</param>
         /// \~Chinese
         /// <summary>
         /// 在绘图回调函数开始时调用
@@ -122,10 +150,13 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Call at the end of draw callback
+        /// </summary>
+        /// <param name="id">Drawing ID</param>
         /// \~Chinese
         /// <summary>
-        /// 在绘图毁掉函数结束前调用
+        /// 在绘图回调函数结束前调用
         /// </summary>
         /// <param name="id">绘图对象ID</param>
         public static void CallbackEnd(int id)
@@ -158,10 +189,13 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Call at the end of draw callback
+        /// </summary>
+        /// <param name="target">Drawing target</param>
         /// \~Chinese
         /// <summary>
-        /// 在绘图毁掉函数结束前调用
+        /// 在绘图回调函数结束前调用
         /// </summary>
         /// <param name="target">绘图对象</param>
         public static void CallbackEnd(object target)
@@ -171,7 +205,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Reduce the size of context
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 缩减上下文规模
@@ -211,12 +247,13 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get average cost time of callback functions in recent 3 seconds
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 获取最近3秒回调函数运行平均时间
         /// </summary>
-        /// <returns></returns>
         public static Dictionary<int, double> GetRecentCallbackAverageTime()
         {
             var table = new Dictionary<int, double>();
@@ -236,7 +273,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get cost time of callback functions running outside of caller, and clear the buffer
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 获取在caller外的回调函数运行时间，并清空缓存
@@ -260,7 +299,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Set the drawing time interval for each drawing object
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 设置各绘图对象的绘制时间间隔

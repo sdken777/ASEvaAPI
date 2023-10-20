@@ -2,8 +2,12 @@
 
 namespace ASEva.Utility
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.11.2) Controlling operation's time interval
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.11.2) 执行操作的间隔控制
@@ -11,7 +15,12 @@ namespace ASEva.Utility
     public class IntervalControl
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="interval">Time interval of operation, in seconds, at least 0.1 second</param>
+        /// <param name="manual">Whether in manual mode. If yes, you should call Next method to start next loop</param>
+        /// <param name="immediate">Whether the operation can be performed immediately, or else wait for "interval" time</param>
         /// \~Chinese
         /// <summary>
         /// 构造函数
@@ -27,7 +36,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Get whether to perform the operation
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 检查是否应执行操作
@@ -48,7 +59,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Start next loop manually
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 手动模式下开启下一轮计时
@@ -59,7 +72,10 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Reset the time control
+        /// </summary>
+        /// <param name="immediate">Whether the operation can be performed immediately, or else wait for "interval" time</param>
         /// \~Chinese
         /// <summary>
         /// 重置间隔控制

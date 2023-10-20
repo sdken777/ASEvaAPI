@@ -5258,7 +5258,7 @@
         <member name="P:ASEva.EventData.Base">
             \~English
             <summary>
-            Session ID belonged
+            The session that event belongs to
             </summary>
             \~Chinese
             <summary>
@@ -5914,7 +5914,7 @@
             </summary>
             \~Chinese
             <summary>
-            (api:app=2.0.0) 直方折线图模式
+            (api:app=2.0.0) 直方折线图统计模式
             </summary>
         </member>
         <member name="F:ASEva.Graph.HistLineMode.Sum">
@@ -6059,7 +6059,9 @@
         </member>
         <member name="T:ASEva.Graph.HistLineXValues">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Numerical definition of histogram and poly line graph's X-axis
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 直方折线图中X轴数值描述
@@ -6067,7 +6069,9 @@
         </member>
         <member name="T:ASEva.Graph.HistLineXLabels">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Literal definition of histogram and poly line graph's X-axis
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 直方折线图中X轴文字描述
@@ -6075,7 +6079,9 @@
         </member>
         <member name="T:ASEva.Graph.HistLineSample">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Sample of histogram and poly line graph
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 直方折线图中的样本
@@ -6083,7 +6089,9 @@
         </member>
         <member name="T:ASEva.Graph.HistAndLineData">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Histogram and poly line graph data
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 直方折线图数据
@@ -6091,7 +6099,18 @@
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.CreateDefinition(System.String,System.String,System.Object,ASEva.Graph.HistLineMode,System.String,System.Double,System.String,System.Double)">
             \~English
-            
+            <summary>
+            Create graph definition (without validation)
+            </summary>
+            <param name="title">Title</param>
+            <param name="xTitle">X axis title</param>
+            <param name="xValuesOrLabels">X axis definition</param>
+            <param name="mode">Mode of statistics</param>
+            <param name="histTitle">Histogram title</param>
+            <param name="defaultHistValue">Default value for histogram</param>
+            <param name="lineTitle">Poly line title</param>
+            <param name="defaultLineValue">Default value for poly line</param>
+            <returns>Graph definition object</returns>
             \~Chinese
             <summary>
             创建图表定义（不带数据验证）
@@ -6099,7 +6118,7 @@
             <param name="title">图表标题</param>
             <param name="xTitle">x轴标题</param>
             <param name="xValuesOrLabels">x轴的值或文字描述</param>
-            <param name="mode">图表模式</param>
+            <param name="mode">图表统计模式</param>
             <param name="histTitle">柱状图标题</param>
             <param name="defaultHistValue">柱状图初始值</param>
             <param name="lineTitle">折线图标题</param>
@@ -6108,7 +6127,19 @@
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.CreateDefinitionWithValidation(System.String,System.String,System.Object,ASEva.Graph.HistLineMode,ASEva.GraphValidation,System.String,System.Double,System.String,System.Double)">
             \~English
-            
+            <summary>
+            Create graph definition
+            </summary>
+            <param name="title">Title</param>
+            <param name="xTitle">X axis title</param>
+            <param name="xValuesOrLabels">X axis definition</param>
+            <param name="mode">Mode of statistics</param>
+            <param name="validation">Graph validation, null means no validation. For details about the support types in different modes, see ASEva.Graph.HistLineMode </param>
+            <param name="histTitle">Histogram title</param>
+            <param name="defaultHistValue">Default value for histogram</param>
+            <param name="lineTitle">Poly line title</param>
+            <param name="defaultLineValue">Default value for poly line</param>
+            <returns>Graph definition object</returns>
             \~Chinese
             <summary>
             创建带数据验证的图表定义
@@ -6116,7 +6147,7 @@
             <param name="title">图表标题</param>
             <param name="xTitle">x轴标题</param>
             <param name="xValuesOrLabels">x轴的值或文字描述</param>
-            <param name="mode">图表模式</param>
+            <param name="mode">图表统计模式</param>
             <param name="validation">数据验证方式，null表示不验证。不同模式下的支持类型请参考 ASEva.Graph.HistLineMode </param>
             <param name="histTitle">柱状图标题</param>
             <param name="defaultHistValue">柱状图初始值</param>
@@ -6126,7 +6157,10 @@
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.GetXTitle">
             \~English
-            
+            <summary>
+            Get X axis title
+            </summary>
+            <returns>X axis title</returns>
             \~Chinese
             <summary>
             获取x轴标题
@@ -6135,7 +6169,10 @@
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.GetHistTitle">
             \~English
-            
+            <summary>
+            Get histogram title
+            </summary>
+            <returns>Histogram title</returns>
             \~Chinese
             <summary>
             获取柱状图标题
@@ -6144,7 +6181,10 @@
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.GetLineTitle">
             \~English
-            
+            <summary>
+            Get poly line title
+            </summary>
+            <returns>Poly line title</returns>
             \~Chinese
             <summary>
             获取折线图标题
@@ -6153,7 +6193,10 @@
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.IsLineEnabled">
             \~English
-            
+            <summary>
+            Get whether poly line is enabled
+            </summary>
+            <returns>Whether poly line is enabled</returns>
             \~Chinese
             <summary>
             获取折线图是否启用
@@ -6162,7 +6205,10 @@
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.GetXValuesOrLabels">
             \~English
-            
+            <summary>
+            Get X axis definition
+            </summary>
+            <returns>X axis definition</returns>
             \~Chinese
             <summary>
             获取x轴的值或文字描述
@@ -6171,7 +6217,10 @@
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.AddTime(System.Double)">
             \~English
-            
+            <summary>
+            Add 1 in the interval where x is
+            </summary>
+            <param name="xValue">Input x, do nothing if it's over the range</param>
             \~Chinese
             <summary>
             在输入x的所在区间添加1
@@ -6180,7 +6229,10 @@
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.AddTime(System.Int32)">
             \~English
-            
+            <summary>
+            Add 1 in the interval with the index
+            </summary>
+            <param name="xLabelIndex">Input index, do nothing if it's over the range</param>
             \~Chinese
             <summary>
             在输入文本序号对应的区间添加1
@@ -6189,7 +6241,12 @@
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.AddHits(System.Double,System.Boolean,System.UInt32)">
             \~English
-            
+            <summary>
+            Add hits in the interval where x is
+            </summary>
+            <param name="xValue">Input x, do nothing if it's over the range</param>
+            <param name="hit">Whether hit</param>
+            <param name="times">Add times</param>
             \~Chinese
             <summary>
             在输入x的所在区间添加若干次命中或不命中
@@ -6200,7 +6257,12 @@
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.AddHits(System.Int32,System.Boolean,System.UInt32)">
             \~English
-            
+            <summary>
+            Add hits in the interval of the index
+            </summary>
+            <param name="xLabelIndex">Input index, do nothing if it's over the range</param>
+            <param name="hit">Whether hit</param>
+            <param name="times">Add times</param>
             \~Chinese
             <summary>
             在输入文本序号对应的区间添加若干次命中或不命中
@@ -6211,7 +6273,11 @@
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.AddSample(System.Double,System.Double)">
             \~English
-            
+            <summary>
+            Add sample to the interval where x is
+            </summary>
+            <param name="xValue">Input x, do nothing if it's over the range</param>
+            <param name="yValue">Sample for histogram</param>
             \~Chinese
             <summary>
             在输入x的所在区间添加柱状图数值样本
@@ -6221,7 +6287,12 @@
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.AddSample(System.Double,System.Double,System.Double)">
             \~English
-            
+            <summary>
+            Add samples to the interval where x is
+            </summary>
+            <param name="xValue">Input x, do nothing if it's over the range</param>
+            <param name="histValue">Sample for histogram</param>
+            <param name="lineValue">Sample for poly line</param>
             \~Chinese
             <summary>
             在输入x的所在区间添加柱状图和折线图数值样本
@@ -6232,7 +6303,11 @@
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.AddSample(System.Int32,System.Double)">
             \~English
-            
+            <summary>
+            Add sample to the interval of the index
+            </summary>
+            <param name="xLabelIndex">Input index, do nothing if it's over the range</param>
+            <param name="yValue">Sample for histogram</param>
             \~Chinese
             <summary>
             在输入文本序号对应的区间添加柱状图数值样本
@@ -6242,7 +6317,12 @@
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.AddSample(System.Int32,System.Double,System.Double)">
             \~English
-            
+            <summary>
+            Add samples to the interval of the index
+            </summary>
+            <param name="xLabelIndex">Input index, do nothing if it's over the range</param>
+            <param name="histValue">Sample for histogram</param>
+            <param name="lineValue">Sample for poly line</param>
             \~Chinese
             <summary>
             在输入文本序号对应的区间添加柱状图和折线图数值样本
@@ -6253,21 +6333,28 @@
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.GetSamples">
             \~English
-            
+            <summary>
+            Get statistical data
+            </summary>
+            <returns>Statistical data</returns>
             \~Chinese
             <summary>
-            获取所有样本
+            获取统计数据
             </summary>
-            <returns>样本数组</returns>
+            <returns>统计数据</returns>
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.IsHistogramOnlyMode(ASEva.Graph.HistLineMode)">
             \~English
-            
+            <summary>
+            Get whether the mode is for histogram only
+            </summary>
+            <param name="mode">Mode of statistics</param>
+            <returns>Whether the mode is for histogram only</returns>
             \~Chinese
             <summary>
             检查一种模式是否为仅柱状图模式
             </summary>
-            <param name="mode">图表模式</param>
+            <param name="mode">图表统计模式</param>
             <returns>是否为仅柱状图模式</returns>
         </member>
         <member name="T:ASEva.Graph.LabelTableMode">
@@ -6277,7 +6364,7 @@
             </summary>
             \~Chinese
             <summary>
-            (api:app=2.0.0) 标签表模式
+            (api:app=2.0.0) 标签表统计模式
             </summary>
         </member>
         <member name="F:ASEva.Graph.LabelTableMode.Sum">
@@ -6372,7 +6459,9 @@
         </member>
         <member name="T:ASEva.Graph.LabelTableData">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Label table graph data
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 标签表数据
@@ -6380,7 +6469,18 @@
         </member>
         <member name="M:ASEva.Graph.LabelTableData.CreateDefinition(System.String,System.String,System.String,ASEva.Graph.LabelTableMode,System.String[],System.String[],ASEva.Graph.LabelTableValueDirection,System.Double)">
             \~English
-            
+            <summary>
+            Create graph definition
+            </summary>
+            <param name="title">Title</param>
+            <param name="xTitle">X axis title</param>
+            <param name="yTitle">Y axis title</param>
+            <param name="mode">Mode of statistics</param>
+            <param name="xLabels">X axis definition</param>
+            <param name="yLabels">Y axis definition</param>
+            <param name="valueDirection">Value direction of label table, only affects how to visualize</param>
+            <param name="defaultValue">Default value</param>
+            <returns>Graph definition object</returns>
             \~Chinese
             <summary>
             创建图表定义
@@ -6388,7 +6488,7 @@
             <param name="title">图表标题</param>
             <param name="xTitle">x轴标题</param>
             <param name="yTitle">y轴标题</param>
-            <param name="mode">图表模式</param>
+            <param name="mode">图表统计模式</param>
             <param name="xLabels">x轴标签列表</param>
             <param name="yLabels">y轴标签列表</param>
             <param name="valueDirection">以默认值为基准值的数值方向，仅影响可视化效果</param>
@@ -6397,16 +6497,22 @@
         </member>
         <member name="M:ASEva.Graph.LabelTableData.GetMode">
             \~English
-            
+            <summary>
+            Get mode of statistics
+            </summary>
+            <returns>Mode of statistics</returns>
             \~Chinese
             <summary>
-            获取标签表模式
+            获取标签表统计模式
             </summary>
-            <returns>标签表模式</returns>
+            <returns>标签表统计模式</returns>
         </member>
         <member name="M:ASEva.Graph.LabelTableData.GetXTitle">
             \~English
-            
+            <summary>
+            Get X axis title
+            </summary>
+            <returns>X axis title</returns>
             \~Chinese
             <summary>
             获取x轴标题
@@ -6415,7 +6521,10 @@
         </member>
         <member name="M:ASEva.Graph.LabelTableData.GetYTitle">
             \~English
-            
+            <summary>
+            Get Y axis title
+            </summary>
+            <returns>Y axis title</returns>
             \~Chinese
             <summary>
             获取y轴标题
@@ -6424,7 +6533,10 @@
         </member>
         <member name="M:ASEva.Graph.LabelTableData.GetXLabelCount">
             \~English
-            
+            <summary>
+            Get numbers of X axis labels
+            </summary>
+            <returns>Numbers of X axis labels</returns>
             \~Chinese
             <summary>
             获取x轴标签个数
@@ -6433,7 +6545,10 @@
         </member>
         <member name="M:ASEva.Graph.LabelTableData.GetYLabelCount">
             \~English
-            
+            <summary>
+            Get numbers of Y axis labels
+            </summary>
+            <returns>Numbers of Y axis labels</returns>
             \~Chinese
             <summary>
             获取y轴标签个数
@@ -6442,7 +6557,10 @@
         </member>
         <member name="M:ASEva.Graph.LabelTableData.GetXLabels">
             \~English
-            
+            <summary>
+            Get X axis labels
+            </summary>
+            <returns>X axis labels</returns>
             \~Chinese
             <summary>
             获取x轴标签列表
@@ -6451,7 +6569,10 @@
         </member>
         <member name="M:ASEva.Graph.LabelTableData.GetYLabels">
             \~English
-            
+            <summary>
+            Get Y axis labels
+            </summary>
+            <returns>Y axis labels</returns>
             \~Chinese
             <summary>
             获取y轴标签列表
@@ -6460,7 +6581,10 @@
         </member>
         <member name="M:ASEva.Graph.LabelTableData.GetValueDirection">
             \~English
-            
+            <summary>
+            Get value direction of label table
+            </summary>
+            <returns>Value direction of label table</returns>
             \~Chinese
             <summary>
             获取标签表数据方向
@@ -6469,7 +6593,10 @@
         </member>
         <member name="M:ASEva.Graph.LabelTableData.GetDefaultValue">
             \~English
-            
+            <summary>
+            Get default value
+            </summary>
+            <returns>Default value</returns>
             \~Chinese
             <summary>
             获取标签表默认值
@@ -6478,25 +6605,31 @@
         </member>
         <member name="M:ASEva.Graph.LabelTableData.GetXHistValues">
             \~English
-            
+            <summary>
+            Get statistical value of each X axis label
+            </summary>
             \~Chinese
             <summary>
             获取x轴各标签统计值
             </summary>
-            <returns></returns>
         </member>
         <member name="M:ASEva.Graph.LabelTableData.GetYHistValues">
             \~English
-            
+            <summary>
+            Get statistical value of each Y axis label
+            </summary>
             \~Chinese
             <summary>
             获取y轴各标签统计值
             </summary>
-            <returns></returns>
         </member>
         <member name="M:ASEva.Graph.LabelTableData.AddTime(System.Int32,System.Int32)">
             \~English
-            
+            <summary>
+            Add 1 to the interval where the index (x,y) is
+            </summary>
+            <param name="x">X axis index, do nothing if over the range</param>
+            <param name="y">Y axis index, do nothing if over the range</param>
             \~Chinese
             <summary>
             在x轴，y轴标签序号的位置添加1
@@ -6506,7 +6639,12 @@
         </member>
         <member name="M:ASEva.Graph.LabelTableData.AddSample(System.Int32,System.Int32,System.Double)">
             \~English
-            
+            <summary>
+            Add sample to the interval where the index (x,y) is
+            </summary>
+            <param name="x">X axis index, do nothing if over the range</param>
+            <param name="y">Y axis index, do nothing if over the range</param>
+            <param name="value">Sample value</param>
             \~Chinese
             <summary>
             在x轴，y轴标签序号的位置添加数值样本
@@ -6517,12 +6655,15 @@
         </member>
         <member name="M:ASEva.Graph.LabelTableData.GetValues">
             \~English
-            
+            <summary>
+            Get statistical data
+            </summary>
+            <returns>Statistical data</returns>
             \~Chinese
             <summary>
-            获取标签表数据
+            获取统计数据
             </summary>
-            <returns>标签表数据</returns>
+            <returns>统计数据</returns>
         </member>
         <member name="T:ASEva.Graph.MatrixTableMode">
             \~English
@@ -6531,7 +6672,7 @@
             </summary>
             \~Chinese
             <summary>
-            (api:app=2.0.0) 矩阵表模式
+            (api:app=2.0.0) 矩阵表统计模式
             </summary>
         </member>
         <member name="F:ASEva.Graph.MatrixTableMode.Sum">
@@ -6586,7 +6727,9 @@
         </member>
         <member name="T:ASEva.Graph.MatrixTableRange">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Single axis' range of matrix table
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 矩阵表单轴范围
@@ -6594,7 +6737,9 @@
         </member>
         <member name="T:ASEva.Graph.MatrixTableValueRefRange">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Numeric range of matrix table
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 矩阵表中数值的范围
@@ -6602,7 +6747,9 @@
         </member>
         <member name="T:ASEva.Graph.MatrixTableData">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Matrix table graph data
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 矩阵表数据
@@ -6610,7 +6757,18 @@
         </member>
         <member name="M:ASEva.Graph.MatrixTableData.CreateDefinition(System.String,System.String,System.String,ASEva.Graph.MatrixTableMode,ASEva.Graph.MatrixTableRange,ASEva.Graph.MatrixTableRange,ASEva.Graph.MatrixTableValueRefRange,System.Double)">
             \~English
-            
+            <summary>
+            Create graph definition (without validation)
+            </summary>
+            <param name="title">Title</param>
+            <param name="xTitle">X axis title</param>
+            <param name="yTitle">Y axis title</param>
+            <param name="mode">Mode of statistics</param>
+            <param name="xRange">X axis range</param>
+            <param name="yRange">Y axis range</param>
+            <param name="valueRefRange">Reference range of values</param>
+            <param name="defaultValue">Default value</param>
+            <returns>Graph definition object</returns>
             \~Chinese
             <summary>
             创建图表定义（不带数据验证）
@@ -6618,7 +6776,7 @@
             <param name="title">图表标题</param>
             <param name="xTitle">x轴标题</param>
             <param name="yTitle">y轴标题</param>
-            <param name="mode">图表模式</param>
+            <param name="mode">图表统计模式</param>
             <param name="xRange">x轴范围</param>
             <param name="yRange">y轴范围</param>
             <param name="valueRefRange">矩阵表数据参考范围</param>
@@ -6627,7 +6785,19 @@
         </member>
         <member name="M:ASEva.Graph.MatrixTableData.CreateDefinitionWithValidation(System.String,System.String,System.String,ASEva.Graph.MatrixTableMode,ASEva.GraphValidation,ASEva.Graph.MatrixTableRange,ASEva.Graph.MatrixTableRange,ASEva.Graph.MatrixTableValueRefRange,System.Double)">
             \~English
-            
+            <summary>
+            Create graph definition
+            </summary>
+            <param name="title">Title</param>
+            <param name="xTitle">X axis title</param>
+            <param name="yTitle">Y axis title</param>
+            <param name="mode">Mode of statistics</param>
+            <param name="validation">Graph validation, null means no validation. For details about the support types in different modes, see ASEva.Graph.MatrixTableMode </param>
+            <param name="xRange">X axis range</param>
+            <param name="yRange">Y axis range</param>
+            <param name="valueRefRange">Reference range of values</param>
+            <param name="defaultValue">Default value</param>
+            <returns>Graph definition object</returns>
             \~Chinese
             <summary>
             创建带数据验证的图表定义
@@ -6635,7 +6805,7 @@
             <param name="title">图表标题</param>
             <param name="xTitle">x轴标题</param>
             <param name="yTitle">y轴标题</param>
-            <param name="mode">图表模式</param>
+            <param name="mode">图表统计模式</param>
             <param name="validation">数据验证方式，null表示不验证。不同模式下的支持类型请参考 ASEva.Graph.MatrixTableMode </param>
             <param name="xRange">x轴范围</param>
             <param name="yRange">y轴范围</param>
@@ -6645,16 +6815,22 @@
         </member>
         <member name="M:ASEva.Graph.MatrixTableData.GetMode">
             \~English
-            
+            <summary>
+            Get mode of statistics
+            </summary>
+            <returns>Mode of statistics</returns>
             \~Chinese
             <summary>
-            获取矩阵表模式
+            获取矩阵表统计模式
             </summary>
-            <returns>矩阵表模式</returns>
+            <returns>矩阵表统计模式</returns>
         </member>
         <member name="M:ASEva.Graph.MatrixTableData.GetXTitle">
             \~English
-            
+            <summary>
+            Get X axis title
+            </summary>
+            <returns>X axis title</returns>
             \~Chinese
             <summary>
             获取x轴标题
@@ -6663,7 +6839,10 @@
         </member>
         <member name="M:ASEva.Graph.MatrixTableData.GetYTitle">
             \~English
-            
+            <summary>
+            Get Y axis title
+            </summary>
+            <returns>Y axis title</returns>
             \~Chinese
             <summary>
             获取y轴标题
@@ -6672,7 +6851,10 @@
         </member>
         <member name="M:ASEva.Graph.MatrixTableData.GetXRange">
             \~English
-            
+            <summary>
+            Get X axis range
+            </summary>
+            <returns>X axis range</returns>
             \~Chinese
             <summary>
             获取x轴范围
@@ -6681,7 +6863,10 @@
         </member>
         <member name="M:ASEva.Graph.MatrixTableData.GetYRange">
             \~English
-            
+            <summary>
+            Get Y axis range
+            </summary>
+            <returns>Y axis range</returns>
             \~Chinese
             <summary>
             获取y轴范围
@@ -6690,7 +6875,10 @@
         </member>
         <member name="M:ASEva.Graph.MatrixTableData.GetValueRefRange">
             \~English
-            
+            <summary>
+            Get reference range of values
+            </summary>
+            <returns>Reference range of values</returns>
             \~Chinese
             <summary>
             获取矩阵表数据参考范围
@@ -6699,7 +6887,10 @@
         </member>
         <member name="M:ASEva.Graph.MatrixTableData.GetXHistValues">
             \~English
-            
+            <summary>
+            Get statistical value of each interval along X axis
+            </summary>
+            <returns>Statistical value of each interval along X axis</returns>
             \~Chinese
             <summary>
             获取矩阵表中x轴各区间统计值
@@ -6708,7 +6899,10 @@
         </member>
         <member name="M:ASEva.Graph.MatrixTableData.GetYHistValues">
             \~English
-            
+            <summary>
+            Get statistical value of each interval along Y axis
+            </summary>
+            <returns>Statistical value of each interval along Y axis</returns>
             \~Chinese
             <summary>
             获取矩阵表中y轴各区间统计值
@@ -6717,7 +6911,11 @@
         </member>
         <member name="M:ASEva.Graph.MatrixTableData.AddTime(System.Double,System.Double)">
             \~English
-            
+            <summary>
+            Add 1 to the interval where (x，y) is
+            </summary>
+            <param name="x">Input x, do nothing if over the range</param>
+            <param name="y">Input y, do nothing if over the range</param>
             \~Chinese
             <summary>
             在输入x，y坐标所在区间添加1
@@ -6727,7 +6925,12 @@
         </member>
         <member name="M:ASEva.Graph.MatrixTableData.AddSample(System.Double,System.Double,System.Double)">
             \~English
-            
+            <summary>
+            Add sample to the interval where (x，y) is
+            </summary>
+            <param name="x">Input x, do nothing if over the range</param>
+            <param name="y">Input y, do nothing if over the range</param>
+            <param name="value">Sample value</param>
             \~Chinese
             <summary>
             在输入x，y坐标所在区间添加数值样本
@@ -6738,16 +6941,21 @@
         </member>
         <member name="M:ASEva.Graph.MatrixTableData.GetValues">
             \~English
-            
+            <summary>
+            Get statistical data
+            </summary>
+            <returns>Statistical data</returns>
             \~Chinese
             <summary>
-            获取矩阵表数据
+            获取统计数据
             </summary>
-            <returns>矩阵表数据</returns>
+            <returns>统计数据</returns>
         </member>
         <member name="T:ASEva.Graph.OutlineInsideValidation">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Validation of whether the data is inside the outline
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 图表数据的轮廓内验证方式
@@ -6755,7 +6963,9 @@
         </member>
         <member name="T:ASEva.Graph.OutlineOutsideValidation">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Validation of whether the data is outside the outline
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 图表数据的轮廓外验证方式
@@ -6763,7 +6973,9 @@
         </member>
         <member name="T:ASEva.Graph.PolyAboveValidation">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Validation of whether the data is above the poly line
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 图表数据的折线上方验证方式
@@ -6771,7 +6983,9 @@
         </member>
         <member name="T:ASEva.Graph.PolyBelowValidation">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Validation of whether the data is below the poly line
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 图表数据的折线下方验证方式
@@ -6779,7 +6993,9 @@
         </member>
         <member name="T:ASEva.Graph.ScatterRange">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Single axis' range of scatter points graph
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 散点图单轴范围
@@ -6787,7 +7003,9 @@
         </member>
         <member name="T:ASEva.Graph.ScatterOptions">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Additional options for definition of scatter points graph
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 散点图定义的附加选项
@@ -6795,7 +7013,9 @@
         </member>
         <member name="P:ASEva.Graph.ScatterOptions.XHistCount">
             \~English
-            
+            <summary>
+            Number of intervals along X axis, set to null to determine automatically
+            </summary>
             \~Chinese
             <summary>
             x轴柱状图区间个数，null表示自动计算
@@ -6803,7 +7023,9 @@
         </member>
         <member name="P:ASEva.Graph.ScatterOptions.YHistCount">
             \~English
-            
+            <summary>
+            Number of intervals along Y axis, set to null to determine automatically
+            </summary>
             \~Chinese
             <summary>
             y轴柱状图区间个数，null表示自动计算
@@ -6811,7 +7033,9 @@
         </member>
         <member name="T:ASEva.Graph.ScatterPointsData">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Scatter points graph data
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 散点图数据
@@ -6819,7 +7043,15 @@
         </member>
         <member name="M:ASEva.Graph.ScatterPointsData.CreateDefinition(System.String,System.String,System.String,ASEva.Graph.ScatterRange,ASEva.Graph.ScatterRange)">
             \~English
-            
+            <summary>
+            Create graph definition (without validation, and the number of intervals is determined automatically)
+            </summary>
+            <param name="title">Title</param>
+            <param name="xTitle">X axis title</param>
+            <param name="yTitle">Y axis title</param>
+            <param name="xRange">X axis range</param>
+            <param name="yRange">Y axis range</param>
+            <returns>Graph definition object</returns>
             \~Chinese
             <summary>
             创建图表定义（不带数据验证，柱状图区间个数自动计算）
@@ -6833,7 +7065,16 @@
         </member>
         <member name="M:ASEva.Graph.ScatterPointsData.CreateDefinitionWithValidation(System.String,System.String,System.String,ASEva.Graph.ScatterRange,ASEva.Graph.ScatterRange,ASEva.GraphValidation)">
             \~English
-            
+            <summary>
+            Create graph definition (the number of intervals is determined automatically)
+            </summary>
+            <param name="title">Title</param>
+            <param name="xTitle">X axis title</param>
+            <param name="yTitle">Y axis title</param>
+            <param name="xRange">X axis range</param>
+            <param name="yRange">Y axis range</param>
+            <param name="validation">Graph validation, null means no validation. Supported OutlineInside, OutlineOutside</param>
+            <returns>Graph definition object</returns>
             \~Chinese
             <summary>
             创建带数据验证的图表定义（柱状图区间个数自动计算）
@@ -6848,7 +7089,17 @@
         </member>
         <member name="M:ASEva.Graph.ScatterPointsData.CreateDefinitionWithValidationAndOptions(System.String,System.String,System.String,ASEva.Graph.ScatterRange,ASEva.Graph.ScatterRange,ASEva.GraphValidation,ASEva.Graph.ScatterOptions)">
             \~English
-            
+            <summary>
+            Create graph definition
+            </summary>
+            <param name="title">Title</param>
+            <param name="xTitle">X axis title</param>
+            <param name="yTitle">Y axis title</param>
+            <param name="xRange">X axis range</param>
+            <param name="yRange">Y axis range</param>
+            <param name="validation">Graph validation, null means no validation. Supported OutlineInside, OutlineOutside</param>
+            <param name="options">Additional options</param>
+            <returns>Graph definition object</returns>
             \~Chinese
             <summary>
             创建带数据验证和附加选项的图表定义
@@ -6864,7 +7115,10 @@
         </member>
         <member name="M:ASEva.Graph.ScatterPointsData.GetXTitle">
             \~English
-            
+            <summary>
+            Get X axis title
+            </summary>
+            <returns>X axis title</returns>
             \~Chinese
             <summary>
             获取x轴标题
@@ -6873,7 +7127,10 @@
         </member>
         <member name="M:ASEva.Graph.ScatterPointsData.GetYTitle">
             \~English
-            
+            <summary>
+            Get Y axis title
+            </summary>
+            <returns>Y axis title</returns>
             \~Chinese
             <summary>
             获取y轴标题
@@ -6882,7 +7139,10 @@
         </member>
         <member name="M:ASEva.Graph.ScatterPointsData.GetXRange">
             \~English
-            
+            <summary>
+            Get X axis range
+            </summary>
+            <returns>X axis range</returns>
             \~Chinese
             <summary>
             获取x轴范围
@@ -6891,7 +7151,10 @@
         </member>
         <member name="M:ASEva.Graph.ScatterPointsData.GetYRange">
             \~English
-            
+            <summary>
+            Get Y axis range
+            </summary>
+            <returns>Y axis range</returns>
             \~Chinese
             <summary>
             获取y轴范围
@@ -6900,7 +7163,10 @@
         </member>
         <member name="M:ASEva.Graph.ScatterPointsData.GetXHistCount">
             \~English
-            
+            <summary>
+            Get number of intervals along X axis
+            </summary>
+            <returns>Number of intervals along X axis</returns>
             \~Chinese
             <summary>
             获取x轴柱状图区间个数
@@ -6909,7 +7175,10 @@
         </member>
         <member name="M:ASEva.Graph.ScatterPointsData.GetYHistCount">
             \~English
-            
+            <summary>
+            Get number of intervals along Y axis
+            </summary>
+            <returns>Number of intervals along Y axis</returns>
             \~Chinese
             <summary>
             获取y轴柱状图区间个数
@@ -6918,25 +7187,34 @@
         </member>
         <member name="M:ASEva.Graph.ScatterPointsData.GetXHistValues">
             \~English
-            
+            <summary>
+            Get number of scatter points in each interval along X axis
+            </summary>
+            <returns>Number of scatter points in each interval along X axis</returns>
             \~Chinese
             <summary>
-            获取x轴柱状图各区间统计数
+            获取x轴柱状图各区间散点数
             </summary>
-            <returns>x轴柱状图各区间统计数</returns>
+            <returns>x轴柱状图各区间散点数</returns>
         </member>
         <member name="M:ASEva.Graph.ScatterPointsData.GetYHistValues">
             \~English
-            
+            <summary>
+            Get number of scatter points in each interval along Y axis
+            </summary>
+            <returns>Number of scatter points in each interval along Y axis</returns>
             \~Chinese
             <summary>
-            获取y轴柱状图各区间统计数
+            获取y轴柱状图各区间散点数
             </summary>
-            <returns>y轴柱状图各区间统计数</returns>
+            <returns>y轴柱状图各区间散点数</returns>
         </member>
         <member name="M:ASEva.Graph.ScatterPointsData.AddPoint(ASEva.FloatPoint)">
             \~English
-            
+            <summary>
+            Add sample point
+            </summary>
+            <param name="point">Sample point, do nothing if over the range</param>
             \~Chinese
             <summary>
             添加样本点
@@ -6945,7 +7223,12 @@
         </member>
         <member name="M:ASEva.Graph.ScatterPointsData.AddPointWithTimeInfo(ASEva.FloatPoint,System.DateTime,System.Double)">
             \~English
-            
+            <summary>
+            Add sample point with time info
+            </summary>
+            <param name="point">Sample point, do nothing if over the range</param>
+            <param name="session">The session that it belongs to</param>
+            <param name="offset">The time offset of the sample in the session</param>
             \~Chinese
             <summary>
             添加含时间信息的样本点
@@ -6956,7 +7239,10 @@
         </member>
         <member name="M:ASEva.Graph.ScatterPointsData.GetPoints">
             \~English
-            
+            <summary>
+            Get all scatter points
+            </summary>
+            <returns>All scatter points</returns>
             \~Chinese
             <summary>
             获取所有散点样本
@@ -6965,7 +7251,13 @@
         </member>
         <member name="M:ASEva.Graph.ScatterPointsData.GetPointTimeInfo(System.Int32,System.DateTime@,System.Double@)">
             \~English
-            
+            <summary>
+            Get time info of a scatter point
+            </summary>
+            <param name="index">Index of scatter point</param>
+            <param name="session">Output the session that it belongs to</param>
+            <param name="offset">Output the time offset of the sample in the session</param>
+            <returns>Whether successful</returns>
             \~Chinese
             <summary>
             获取某个散点样本的时间信息
@@ -6977,7 +7269,9 @@
         </member>
         <member name="T:ASEva.Graph.SingleValueData">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Single value graph data
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 单值数据
@@ -6985,7 +7279,11 @@
         </member>
         <member name="M:ASEva.Graph.SingleValueData.CreateDefinition(System.String)">
             \~English
-            
+            <summary>
+            Create graph definition (without validation)
+            </summary>
+            <param name="title">Title</param>
+            <returns>Graph definition object</returns>
             \~Chinese
             <summary>
             创建图表定义（不带数据验证）
@@ -6995,7 +7293,12 @@
         </member>
         <member name="M:ASEva.Graph.SingleValueData.CreateDefinitionWithValidation(System.String,ASEva.GraphValidation)">
             \~English
-            
+            <summary>
+            Create graph definition
+            </summary>
+            <param name="title">Title</param>
+            <param name="validation">Graph validation, null means no validation. Supported ValueAbove, ValueBelow, ValueInRange</param>
+            <returns>Graph definition object</returns>
             \~Chinese
             <summary>
             创建带数据验证的图表定义
@@ -7006,7 +7309,10 @@
         </member>
         <member name="M:ASEva.Graph.SingleValueData.SetValue(System.Double)">
             \~English
-            
+            <summary>
+            Set value (not recommended, since it will cause exception while merging data)
+            </summary>
+            <param name="val">Set the value</param>
             \~Chinese
             <summary>
             设置值（不推荐操作，将会导致合并结果异常）
@@ -7015,7 +7321,10 @@
         </member>
         <member name="M:ASEva.Graph.SingleValueData.AddValue(System.Double)">
             \~English
-            
+            <summary>
+            Add value
+            </summary>
+            <param name="val">Add the value</param>
             \~Chinese
             <summary>
             添加值
@@ -7024,7 +7333,10 @@
         </member>
         <member name="M:ASEva.Graph.SingleValueData.GetValue">
             \~English
-            
+            <summary>
+            Get the value
+            </summary>
+            <returns>The value</returns>
             \~Chinese
             <summary>
             取得值
@@ -7033,7 +7345,9 @@
         </member>
         <member name="T:ASEva.Graph.ValueAboveValidation">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Validation of whether the data is above the threshold
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 图表数据的阈值上方验证方式
@@ -7041,7 +7355,9 @@
         </member>
         <member name="T:ASEva.Graph.ValueBelowValidation">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Validation of whether the data is below the threshold
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 图表数据的阈值下方验证方式
@@ -7049,7 +7365,9 @@
         </member>
         <member name="T:ASEva.Graph.ValueInRangeValidation">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Validation of whether the data is in the range
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 图表数据的范围区间内验证方式
@@ -8848,7 +9166,7 @@
         <member name="P:ASEva.Sample.Session">
             \~English
             <summary>
-            (api:app=2.7.2) Session belonged
+            (api:app=2.7.2) The session that sample belongs to
             </summary>
             \~Chinese
             <summary>
@@ -8858,7 +9176,7 @@
         <member name="P:ASEva.Sample.Base">
             \~English
             <summary>
-            Session belonged (Be aware that "set" operation will clear session independent time info)
+            The session that sample belongs to (Be aware that "set" operation will clear session independent time info)
             </summary>
             \~Chinese
             <summary>
@@ -8888,7 +9206,7 @@
         <member name="P:ASEva.Sample.TimestampLocal">
             \~English
             <summary>
-            [Agency dependency] Calculate local date and time based on host machine posix time model
+            [Depend on Agency] Calculate local date and time based on host machine posix time model
             </summary>
             \~Chinese
             <summary>
@@ -8898,7 +9216,7 @@
         <member name="P:ASEva.Sample.TimestampUTC">
             \~English
             <summary>
-            [Agency dependency] Calculate UTC date and time based on satellite posix time model
+            [Depend on Agency] Calculate UTC date and time based on satellite posix time model
             </summary>
             \~Chinese
             <summary>
@@ -8920,7 +9238,7 @@
             <summary>
             Constructor based on time information
             </summary>
-            <param name="session">Session belonged</param>
+            <param name="session">The session that sample belongs to</param>
             <param name="offset">Time offset, in seconds</param>
             <param name="timeline">Timeline point</param>
             \~Chinese
@@ -8936,7 +9254,7 @@
             <summary>
             (api:app=2.7.0) Constructor based on time information
             </summary>
-            <param name="session">Session belonged</param>
+            <param name="session">The session that sample belongs to</param>
             <param name="offset">Time offset, in seconds</param>
             <param name="timeInfo">Session independent time info</param>
             <param name="timeline">Timeline point</param>
@@ -8954,7 +9272,7 @@
             <summary>
             (api:app=2.7.0) Set time information
             </summary>
-            <param name="session">Session belonged</param>
+            <param name="session">The session that sample belongs to</param>
             <param name="offset">Time offset, in seconds</param>
             <param name="timeInfo">Session independent time info</param>
             <param name="timeline">Timeline point</param>
@@ -9319,7 +9637,9 @@
         </member>
         <member name="T:ASEva.Samples.AudioFrameSample">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Audio frame sample, 44100Hz, 16bit, mono channel
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 音频帧样本，44100Hz，16bit，单通道
@@ -9327,7 +9647,9 @@
         </member>
         <member name="P:ASEva.Samples.AudioFrameSample.Data">
             \~English
-            
+            <summary>
+            Sample data
+            </summary>
             \~Chinese
             <summary>
             音频帧数据
@@ -9335,16 +9657,19 @@
         </member>
         <member name="P:ASEva.Samples.AudioFrameSample.MD5">
             \~English
-            
+            <summary>
+            (api:app=2.6.4) MD5 of the sample data
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.6.4) 音频帧数据的MD5
             </summary>
-            <value></value>
         </member>
         <member name="T:ASEva.Samples.BusMessageSample">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Single bus message sample
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 单个总线报文样本
@@ -9352,7 +9677,9 @@
         </member>
         <member name="P:ASEva.Samples.BusMessageSample.Channel">
             \~English
-            
+            <summary>
+            Bus channel, ranges 1~16
+            </summary>
             \~Chinese
             <summary>
             接收来源通道或发送目标通道（1~16）
@@ -9360,7 +9687,9 @@
         </member>
         <member name="P:ASEva.Samples.BusMessageSample.Length">
             \~English
-            
+            <summary>
+            Actual length of the bus message
+            </summary>
             \~Chinese
             <summary>
             总线报文的实际长度
@@ -9368,7 +9697,9 @@
         </member>
         <member name="P:ASEva.Samples.BusMessageSample.ID">
             \~English
-            
+            <summary>
+            Local ID
+            </summary>
             \~Chinese
             <summary>
             报文ID
@@ -9376,7 +9707,9 @@
         </member>
         <member name="P:ASEva.Samples.BusMessageSample.Data">
             \~English
-            
+            <summary>
+            Bus message data, the length is limited to 64 bytes, so it may be smaller than actual length
+            </summary>
             \~Chinese
             <summary>
             报文数据，长度限定在64以下，可能小于报文的实际长度
@@ -9384,7 +9717,9 @@
         </member>
         <member name="P:ASEva.Samples.BusMessageSample.Type">
             \~English
-            
+            <summary>
+            (api:app=2.10.2) Bus channel type
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.10.2) 总线通道类型
@@ -9392,7 +9727,9 @@
         </member>
         <member name="P:ASEva.Samples.BusMessageSample.State">
             \~English
-            
+            <summary>
+            (api:app=2.10.2) Data state (mainly for transmitting)
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.10.2) 总线数据的(发送)状态
@@ -9400,7 +9737,9 @@
         </member>
         <member name="P:ASEva.Samples.BusMessageSample.ScheduleTimeOffset">
             \~English
-            
+            <summary>
+            (api:app=2.10.2) Time offset of scheduled transmitting, 0 means invalid
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.10.2) 预约发送的时间偏置，0表示无效
@@ -9408,7 +9747,9 @@
         </member>
         <member name="P:ASEva.Samples.BusMessageSample.SchedulePosixTime">
             \~English
-            
+            <summary>
+            (api:app=2.10.2) Server posix time of scheduled transmitting, 0 means invalid
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.10.2) 预约发送的授时服务器时间，单位纳秒，0表示无效
@@ -9416,7 +9757,9 @@
         </member>
         <member name="T:ASEva.Samples.BusDataPack">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Pack of bus message data
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 总线报文样本集合
@@ -9424,7 +9767,9 @@
         </member>
         <member name="P:ASEva.Samples.BusDataPack.Samples">
             \~English
-            
+            <summary>
+            Samples of bus message data
+            </summary>
             \~Chinese
             <summary>
             总线报文样本列表
@@ -9432,7 +9777,9 @@
         </member>
         <member name="T:ASEva.Samples.CommonImage">
             \~English
-            
+            <summary>
+            (api:app=2.3.0) Common image data
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.3.0) 通用图像数据
@@ -9440,7 +9787,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonImage.Width">
             \~English
-            
+            <summary>
+            Image width
+            </summary>
             \~Chinese
             <summary>
             图像宽度
@@ -9448,7 +9797,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonImage.Height">
             \~English
-            
+            <summary>
+            Image height
+            </summary>
             \~Chinese
             <summary>
             图像高度
@@ -9456,7 +9807,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonImage.WithAlpha">
             \~English
-            
+            <summary>
+            Whether alpha channel included
+            </summary>
             \~Chinese
             <summary>
             是否含有Alpha通道
@@ -9464,7 +9817,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonImage.BgrInverted">
             \~English
-            
+            <summary>
+            (api:app=2.8.5) Whether BGR inverted
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.8.5) BGR是否逆序
@@ -9472,7 +9827,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonImage.RowBytes">
             \~English
-            
+            <summary>
+            Number of bytes for each row
+            </summary>
             \~Chinese
             <summary>
             每行数据字节数
@@ -9480,7 +9837,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonImage.Data">
             \~English
-            
+            <summary>
+            Image data, in order of BGR or BGRA (If inverted, it's  RGB or RGBA)
+            </summary>
             \~Chinese
             <summary>
             图像数据，每个像素的存放顺序为BGR或BGRA（若BGR逆序则为RGB或RGBA）
@@ -9488,7 +9847,13 @@
         </member>
         <member name="M:ASEva.Samples.CommonImage.Create(System.Int32,System.Int32,System.Boolean)">
             \~English
-            
+            <summary>
+            Create common image
+            </summary>
+            <param name="width">Image width</param>
+            <param name="height">Image height</param>
+            <param name="withAlpha">Whether to include alpha channel</param>
+            <returns>Common image object</returns>
             \~Chinese
             <summary>
             创建通用图像数据
@@ -9500,7 +9865,14 @@
         </member>
         <member name="M:ASEva.Samples.CommonImage.Create(System.Int32,System.Int32,System.Boolean,System.Boolean)">
             \~English
-            
+            <summary>
+            Create common image
+            </summary>
+            <param name="width">Image width</param>
+            <param name="height">Image height</param>
+            <param name="withAlpha">Whether to include alpha channel</param>
+            <param name="bgrInverted">Whether BGR inverted</param>
+            <returns>Common image object</returns>
             \~Chinese
             <summary>
             创建通用图像数据
@@ -9513,7 +9885,11 @@
         </member>
         <member name="M:ASEva.Samples.CommonImage.LoadFile(System.String)">
             \~English
-            
+            <summary>
+            [Depend on Agency] Load from file
+            </summary>
+            <param name="filePath">File path</param>
+            <returns>Common image object</returns>
             \~Chinese
             <summary>
             [依赖Agency] 从文件读取图像
@@ -9523,7 +9899,11 @@
         </member>
         <member name="M:ASEva.Samples.CommonImage.LoadResource(System.String)">
             \~English
-            
+            <summary>
+            [Depend on Agency] Load from resource
+            </summary>
+            <param name="resourceName">Resource name</param>
+            <returns>Common image object</returns>
             \~Chinese
             <summary>
             [依赖Agency] 从资源读取图像
@@ -9533,7 +9913,11 @@
         </member>
         <member name="M:ASEva.Samples.CommonImage.FromBinary(System.Byte[])">
             \~English
-            
+            <summary>
+            (api:app=2.4.1) [Depend on Agency] Create from image binary data
+            </summary>
+            <param name="binary">Image binary data, like jpeg, png, etc.</param>
+            <returns>Common image object</returns>
             \~Chinese
             <summary>
             (api:app=2.4.1) [依赖Agency] 从图像二进制数据转换
@@ -9543,7 +9927,11 @@
         </member>
         <member name="M:ASEva.Samples.CommonImage.Save(System.String)">
             \~English
-            
+            <summary>
+            [Depend on Agency] Save to file
+            </summary>
+            <param name="filePath">File path</param>
+            <returns>Whether successful</returns>
             \~Chinese
             <summary>
             [依赖Agency] 保存至文件
@@ -9553,7 +9941,11 @@
         </member>
         <member name="M:ASEva.Samples.CommonImage.ToBinary(System.String)">
             \~English
-            
+            <summary>
+            (api:app=2.4.1) [Depend on Agency] Convert to image binary data
+            </summary>
+            <param name="format">Target format, only "jpg" and "png" supported</param>
+            <returns>Image binary data</returns>
             \~Chinese
             <summary>
             (api:app=2.4.1) [依赖Agency] 转为图像二进制数据
@@ -9563,7 +9955,11 @@
         </member>
         <member name="M:ASEva.Samples.CommonImage.ConvertBgrInverted(System.Boolean)">
             \~English
-            
+            <summary>
+            (api:app=2.8.6) Convert to/from BGR inverted image
+            </summary>
+            <param name="targetInverted">Whether BGR inverted</param>
+            <returns>Converted image</returns>
             \~Chinese
             <summary>
             (api:app=2.8.6) 转换为BGR逆序或不逆序的图像对象
@@ -9573,7 +9969,9 @@
         </member>
         <member name="T:ASEva.Samples.ManualTriggerSample">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Manual trigger sample
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 手动触发器样本
@@ -9581,7 +9979,9 @@
         </member>
         <member name="P:ASEva.Samples.ManualTriggerSample.States">
             \~English
-            
+            <summary>
+            State of each channel, length is 16
+            </summary>
             \~Chinese
             <summary>
             手动触发器状态列表，长度16
@@ -9589,7 +9989,9 @@
         </member>
         <member name="M:ASEva.Samples.ManualTriggerSample.#ctor">
             \~English
-            
+            <summary>
+            Default constructor
+            </summary>
             \~Chinese
             <summary>
             默认构造函数
@@ -9597,7 +9999,9 @@
         </member>
         <member name="T:ASEva.Samples.PointCloudSample">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Point cloud sample
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 点云样本
@@ -9605,7 +10009,9 @@
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.Channel">
             \~English
-            
+            <summary>
+            Sample channel (0~11)
+            </summary>
             \~Chinese
             <summary>
             样本通道（0~11）
@@ -9613,7 +10019,9 @@
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.PointCount">
             \~English
-            
+            <summary>
+            Number of points
+            </summary>
             \~Chinese
             <summary>
             点个数
@@ -9621,7 +10029,9 @@
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.DataReleased">
             \~English
-            
+            <summary>
+            (api:app=2.11.4) Whether the data is released (for purpose of memory usage control)
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.11.4) 数据是否已被释放（出于内存用量控制等目的）
@@ -9629,7 +10039,9 @@
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.Points">
             \~English
-            
+            <summary>
+            Coordinates of points, the size of array is Nx3, while N is number of points, 3 means x(front),y(left),z(up), in centimeters
+            </summary>
             \~Chinese
             <summary>
             点坐标列表，数组尺寸为Nx3，N为个数，3分别为x(前),y(左),z(上)轴坐标，单位为厘米
@@ -9637,7 +10049,9 @@
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.Intensities">
             \~English
-            
+            <summary>
+            Intensity of points, the size of array is number of points, value ranges 0(minimum)~10000(maximum)
+            </summary>
             \~Chinese
             <summary>
             点强度列表，数组长度个数N，数值范围为0(最小)~10000(最大)
@@ -9645,7 +10059,9 @@
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.Colors">
             \~English
-            
+            <summary>
+            Colors of points, the size of array is Nx3, while N is number of points, 3 means red, green, blue components of color
+            </summary>
             \~Chinese
             <summary>
             点颜色列表，数组尺寸为Nx3，N为个数，3分别为R,G,B颜色值
@@ -9653,7 +10069,9 @@
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.LaserIDs">
             \~English
-            
+            <summary>
+            The size of array is number of points, the value is laser ID (For example, from bottom to top, ID of 32 line lidar are 0~31)
+            </summary>
             \~Chinese
             <summary>
             数组长度N，值为激光线ID，如32线雷达从下往上ID分别为0~31
@@ -9661,7 +10079,9 @@
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.TimeOffsets">
             \~English
-            
+            <summary>
+            The size of array is number of points, the value is the time offset to the frame's timestamp, in 10 microseconds (If the time span of a frame is more than 655ms, there should be no data in this field)
+            </summary>
             \~Chinese
             <summary>
             数组长度N，值为相对于样本时间的时间偏置，单位为10微秒（若一帧数据时间跨度超过655ms则不应有此字段数据）
@@ -9669,7 +10089,9 @@
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.YawAngles">
             \~English
-            
+            <summary>
+            The size of array is number of points, the value is yaw angle in 0.01 degrees, ranges -18000~+18000, while zero means the X axis of vehicle coordinate system, CCW is positive
+            </summary>
             \~Chinese
             <summary>
             数组长度N，值为横摆角，单位为0.01°，数值范围为-18000~+18000，0点为车辆坐标系x轴，逆时针为正
@@ -9677,7 +10099,9 @@
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.MirrorIDs">
             \~English
-            
+            <summary>
+            The size of array is number of points, the value is mirror ID
+            </summary>
             \~Chinese
             <summary>
             数组长度N，值为镜面ID
@@ -9685,7 +10109,9 @@
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.ByteValues">
             \~English
-            
+            <summary>
+            (api:app=2.0.9) Dictionary for byte values. The key is field ID (See document of point-cloud-v2), the value is array whose size is number of points, storing byte values of the field
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.9) byte字段数组的表，键为字段ID（具体请参考点云数据格式文档），值为长度为N的数组，存放该字段ID对应byte数值
@@ -9693,7 +10119,9 @@
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.ShortValues">
             \~English
-            
+            <summary>
+            (api:app=2.0.9) Dictionary for short values. The key is field ID (See document of point-cloud-v2), the value is array whose size is number of points, storing short values of the field
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.9) short字段数组的表，键为字段ID（具体请参考点云数据格式文档），值为长度为N的数组，存放该字段ID对应short数值
@@ -9701,7 +10129,9 @@
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.FloatValues">
             \~English
-            
+            <summary>
+            (api:app=2.0.9) Dictionary for float values. The key is field ID (See document of point-cloud-v2), the value is array whose size is number of points, storing float values of the field
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.9) float字段数组的表，键为字段ID（具体请参考点云数据格式文档），值为长度为N的数组，存放该字段ID对应float数值
@@ -9709,7 +10139,9 @@
         </member>
         <member name="T:ASEva.Samples.SignalSample">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Signal sample output by processor
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 数据处理组件输出的信号样本
@@ -9717,7 +10149,9 @@
         </member>
         <member name="P:ASEva.Samples.SignalSample.Prefix">
             \~English
-            
+            <summary>
+            Prefix of signal ID, set to null for output (will be set by framework later)
+            </summary>
             \~Chinese
             <summary>
             信号ID的前缀，输出时无需赋值（由系统赋值）
@@ -9725,7 +10159,9 @@
         </member>
         <member name="P:ASEva.Samples.SignalSample.Name">
             \~English
-            
+            <summary>
+            Signal name, should be in the list returned by ASEva.ProcessorClass.GetProcessorOutputSignalNames
+            </summary>
             \~Chinese
             <summary>
             信号的名称，应为 ASEva.ProcessorClass.GetProcessorOutputSignalNames 返回列表中的名称
@@ -9733,7 +10169,9 @@
         </member>
         <member name="P:ASEva.Samples.SignalSample.Value">
             \~English
-            
+            <summary>
+            Signal value
+            </summary>
             \~Chinese
             <summary>
             信号值
@@ -9741,7 +10179,9 @@
         </member>
         <member name="P:ASEva.Samples.SignalSample.SignalID">
             \~English
-            
+            <summary>
+            Signal ID (get only)
+            </summary>
             \~Chinese
             <summary>
             信号的全局唯一ID（仅get）
@@ -9749,7 +10189,9 @@
         </member>
         <member name="T:ASEva.Samples.SignalData">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Single signal data
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 单个信号数据
@@ -9757,7 +10199,9 @@
         </member>
         <member name="P:ASEva.Samples.SignalData.Offset">
             \~English
-            
+            <summary>
+            Time offset, in seconds
+            </summary>
             \~Chinese
             <summary>
             时间偏置，单位秒
@@ -9765,7 +10209,9 @@
         </member>
         <member name="P:ASEva.Samples.SignalData.Value">
             \~English
-            
+            <summary>
+            Signal value
+            </summary>
             \~Chinese
             <summary>
             信号值
@@ -9773,7 +10219,11 @@
         </member>
         <member name="M:ASEva.Samples.SignalData.#ctor(System.Double,System.Double)">
             \~English
-            
+            <summary>
+            Default constructor
+            </summary>
+            <param name="offset">Time offset, in seconds</param>
+            <param name="value">Signal value</param>
             \~Chinese
             <summary>
             默认构造函数
@@ -9783,7 +10233,9 @@
         </member>
         <member name="T:ASEva.Samples.SignalsData">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Input signal data (For one signal ID)
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 输入的信号数据列表（单个信号类别）
@@ -9791,7 +10243,9 @@
         </member>
         <member name="P:ASEva.Samples.SignalsData.Base">
             \~English
-            
+            <summary>
+            The session that data belongs to
+            </summary>
             \~Chinese
             <summary>
             所属session ID
@@ -9799,7 +10253,9 @@
         </member>
         <member name="P:ASEva.Samples.SignalsData.SignalID">
             \~English
-            
+            <summary>
+            Signal ID
+            </summary>
             \~Chinese
             <summary>
             信号的全局唯一ID
@@ -9807,7 +10263,9 @@
         </member>
         <member name="P:ASEva.Samples.SignalsData.Signals">
             \~English
-            
+            <summary>
+            Signal data
+            </summary>
             \~Chinese
             <summary>
             信号列表
@@ -9925,7 +10383,9 @@
         </member>
         <member name="T:ASEva.Samples.CommonCameraMeta">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Common part of camera info (Pinhole model)
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 摄像头信息共通部分（标准模型）
@@ -9933,7 +10393,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.Inverted">
             \~English
-            
+            <summary>
+            Whether inverted
+            </summary>
             \~Chinese
             <summary>
             是否作了翻转
@@ -9941,7 +10403,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.VFlipped">
             \~English
-            
+            <summary>
+            Whether vertical flipped
+            </summary>
             \~Chinese
             <summary>
             是否作了镜像
@@ -9949,7 +10413,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.Undistorted">
             \~English
-            
+            <summary>
+            Whether undistorted
+            </summary>
             \~Chinese
             <summary>
             是否作了去畸变
@@ -9957,7 +10423,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.UndistortedHFOV">
             \~English
-            
+            <summary>
+            (api:app=2.12.2) Horizontal FOV of ideal pinhole model after undistorted [deg]
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.12.2) 去畸变后的理想针孔模型图像的横向视场角 [deg]
@@ -9965,7 +10433,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.AR">
             \~English
-            
+            <summary>
+            Aspect ratio (width/height)
+            </summary>
             \~Chinese
             <summary>
             像素尺寸横纵比
@@ -9973,7 +10443,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.CU">
             \~English
-            
+            <summary>
+            Normalized U coordinate of optical axis
+            </summary>
             \~Chinese
             <summary>
             归一化视轴u坐标
@@ -9981,7 +10453,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.CV">
             \~English
-            
+            <summary>
+            Normalized V coordinate of optical axis
+            </summary>
             \~Chinese
             <summary>
             归一化视轴v坐标
@@ -9989,7 +10463,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.K1">
             \~English
-            
+            <summary>
+            Distortion coefficient K1
+            </summary>
             \~Chinese
             <summary>
             畸变参数K1
@@ -9997,7 +10473,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.K2">
             \~English
-            
+            <summary>
+            Distortion coefficient K2
+            </summary>
             \~Chinese
             <summary>
             畸变参数K2
@@ -10005,7 +10483,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.P1">
             \~English
-            
+            <summary>
+            Distortion coefficient P1
+            </summary>
             \~Chinese
             <summary>
             畸变参数P1
@@ -10013,7 +10493,9 @@
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.P2">
             \~English
-            
+            <summary>
+            Distortion coefficient P2
+            </summary>
             \~Chinese
             <summary>
             畸变参数P2
@@ -10021,39 +10503,49 @@
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.K3">
             \~English
-            
+            <summary>
+            (api:app=2.2.4) Distortion coefficient K3
+            </summary>
             \~Chinese
             <summary>
-            (api:app=2.2.4) K3
+            (api:app=2.2.4) 畸变参数K3
             </summary>
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.K4">
             \~English
-            
+            <summary>
+            (api:app=2.2.4) Distortion coefficient K4
+            </summary>
             \~Chinese
             <summary>
-            (api:app=2.2.4) K4
+            (api:app=2.2.4) 畸变参数K4
             </summary>
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.K5">
             \~English
-            
+            <summary>
+            (api:app=2.2.4) Distortion coefficient K5
+            </summary>
             \~Chinese
             <summary>
-            (api:app=2.2.4) K5
+            (api:app=2.2.4) 畸变参数K5
             </summary>
         </member>
         <member name="P:ASEva.Samples.CommonCameraMeta.K6">
             \~English
-            
+            <summary>
+            (api:app=2.2.4) Distortion coefficient K6
+            </summary>
             \~Chinese
             <summary>
-            (api:app=2.2.4) K6
+            (api:app=2.2.4) 畸变参数K6
             </summary>
         </member>
         <member name="T:ASEva.Samples.DefaultCameraMeta">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Related information of default camera (Pinhole model)
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 默认摄像头关联信息（标准模型）
@@ -10061,7 +10553,9 @@
         </member>
         <member name="P:ASEva.Samples.DefaultCameraMeta.Common">
             \~English
-            
+            <summary>
+            Common part
+            </summary>
             \~Chinese
             <summary>
             共同部分
@@ -10069,7 +10563,9 @@
         </member>
         <member name="T:ASEva.Samples.GenericCameraMeta">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Related information of generic parameterized camera (Pinhole model)
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 泛用参数摄像头关联信息（标准模型）
@@ -10077,7 +10573,9 @@
         </member>
         <member name="P:ASEva.Samples.GenericCameraMeta.Common">
             \~English
-            
+            <summary>
+            Common part
+            </summary>
             \~Chinese
             <summary>
             共通部分
@@ -10085,7 +10583,9 @@
         </member>
         <member name="P:ASEva.Samples.GenericCameraMeta.PositionX">
             \~English
-            
+            <summary>
+            X coordinate of position [m]
+            </summary>
             \~Chinese
             <summary>
             位置坐标X轴分量 [m]
@@ -10093,7 +10593,9 @@
         </member>
         <member name="P:ASEva.Samples.GenericCameraMeta.PositionY">
             \~English
-            
+            <summary>
+            Y coordinate of position [m]
+            </summary>
             \~Chinese
             <summary>
             位置坐标Y轴分量 [m]
@@ -10101,7 +10603,9 @@
         </member>
         <member name="P:ASEva.Samples.GenericCameraMeta.PositionZ">
             \~English
-            
+            <summary>
+            Z coordinate of position [m]
+            </summary>
             \~Chinese
             <summary>
             位置坐标Z轴分量 [m]
@@ -10109,7 +10613,9 @@
         </member>
         <member name="P:ASEva.Samples.GenericCameraMeta.YawRectified">
             \~English
-            
+            <summary>
+            Whether yaw rectified
+            </summary>
             \~Chinese
             <summary>
             是否作了横摆对正
@@ -10117,7 +10623,9 @@
         </member>
         <member name="P:ASEva.Samples.GenericCameraMeta.OriginYaw">
             \~English
-            
+            <summary>
+            Original yaw angle [°]
+            </summary>
             \~Chinese
             <summary>
             原横摆角 [°]
@@ -10125,7 +10633,9 @@
         </member>
         <member name="P:ASEva.Samples.GenericCameraMeta.RectifiedYaw">
             \~English
-            
+            <summary>
+            Yaw angle after rectified [°]
+            </summary>
             \~Chinese
             <summary>
             对正后的横摆角 [°]
@@ -10133,7 +10643,9 @@
         </member>
         <member name="P:ASEva.Samples.GenericCameraMeta.PitchRectified">
             \~English
-            
+            <summary>
+            Whether pitch rectified
+            </summary>
             \~Chinese
             <summary>
             是否作了俯仰对正
@@ -10141,7 +10653,9 @@
         </member>
         <member name="P:ASEva.Samples.GenericCameraMeta.OriginPitch">
             \~English
-            
+            <summary>
+            Original pitch angle
+            </summary>
             \~Chinese
             <summary>
             原俯仰角 [°]
@@ -10149,7 +10663,9 @@
         </member>
         <member name="P:ASEva.Samples.GenericCameraMeta.RollRectified">
             \~English
-            
+            <summary>
+            Whether roll rectified
+            </summary>
             \~Chinese
             <summary>
             是否作了横滚对正
@@ -10157,7 +10673,9 @@
         </member>
         <member name="P:ASEva.Samples.GenericCameraMeta.OriginRoll">
             \~English
-            
+            <summary>
+            Original roll angle
+            </summary>
             \~Chinese
             <summary>
             原横滚角 [°]
@@ -10165,7 +10683,9 @@
         </member>
         <member name="P:ASEva.Samples.GenericCameraMeta.ShakeYaw">
             \~English
-            
+            <summary>
+            Yaw offset by shake detection (only valid for some cameras)
+            </summary>
             \~Chinese
             <summary>
             抖动偏置横摆角（仅部分摄像头有效）
@@ -10173,7 +10693,9 @@
         </member>
         <member name="P:ASEva.Samples.GenericCameraMeta.ShakePitch">
             \~English
-            
+            <summary>
+            Pitch offset by shake detection (only valid for some cameras)
+            </summary>
             \~Chinese
             <summary>
             抖动偏置俯仰角（仅部分摄像头有效）
@@ -10181,7 +10703,9 @@
         </member>
         <member name="T:ASEva.Samples.LaneLineCameraMeta">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Related information of lane line camera (Pinhole model)
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 车道线摄像头关联信息（标准模型）
@@ -10189,7 +10713,9 @@
         </member>
         <member name="P:ASEva.Samples.LaneLineCameraMeta.IsRightSide">
             \~English
-            
+            <summary>
+            Whether it's on the right side
+            </summary>
             \~Chinese
             <summary>
             是否在右侧
@@ -10197,7 +10723,9 @@
         </member>
         <member name="P:ASEva.Samples.LaneLineCameraMeta.Common">
             \~English
-            
+            <summary>
+            Common part
+            </summary>
             \~Chinese
             <summary>
             共通部分
@@ -10205,7 +10733,9 @@
         </member>
         <member name="P:ASEva.Samples.LaneLineCameraMeta.MeterScale">
             \~English
-            
+            <summary>
+            Length of one-unit [m]
+            </summary>
             \~Chinese
             <summary>
             单位点长度 [m]
@@ -10213,7 +10743,9 @@
         </member>
         <member name="P:ASEva.Samples.LaneLineCameraMeta.ZeroPosition">
             \~English
-            
+            <summary>
+            Position of the zero point
+            </summary>
             \~Chinese
             <summary>
             零点位置
@@ -10221,7 +10753,9 @@
         </member>
         <member name="P:ASEva.Samples.LaneLineCameraMeta.MeterPosition">
             \~English
-            
+            <summary>
+            Position of the one-unit point
+            </summary>
             \~Chinese
             <summary>
             单位点位置
@@ -10229,7 +10763,9 @@
         </member>
         <member name="P:ASEva.Samples.LaneLineCameraMeta.FiftyRatio">
             \~English
-            
+            <summary>
+            Ratio of the center point
+            </summary>
             \~Chinese
             <summary>
             半长占比
@@ -10237,7 +10773,9 @@
         </member>
         <member name="T:ASEva.Samples.BlindSpotCameraMeta">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Related information of blind spot camera (Pinhole model)
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 盲区摄像头关联信息（标准模型）
@@ -10245,7 +10783,9 @@
         </member>
         <member name="P:ASEva.Samples.BlindSpotCameraMeta.IsRightSide">
             \~English
-            
+            <summary>
+            Whether it's on the right side
+            </summary>
             \~Chinese
             <summary>
             是否在右侧
@@ -10253,7 +10793,9 @@
         </member>
         <member name="P:ASEva.Samples.BlindSpotCameraMeta.Common">
             \~English
-            
+            <summary>
+            Common part
+            </summary>
             \~Chinese
             <summary>
             共通部分
@@ -10261,7 +10803,9 @@
         </member>
         <member name="P:ASEva.Samples.BlindSpotCameraMeta.P00Position">
             \~English
-            
+            <summary>
+            Position of P00
+            </summary>
             \~Chinese
             <summary>
             P00位置
@@ -10269,7 +10813,9 @@
         </member>
         <member name="P:ASEva.Samples.BlindSpotCameraMeta.P04Position">
             \~English
-            
+            <summary>
+            Position of P04
+            </summary>
             \~Chinese
             <summary>
             P04位置
@@ -10277,7 +10823,9 @@
         </member>
         <member name="P:ASEva.Samples.BlindSpotCameraMeta.P30Position">
             \~English
-            
+            <summary>
+            Position of P30
+            </summary>
             \~Chinese
             <summary>
             P30位置
@@ -10285,7 +10833,9 @@
         </member>
         <member name="P:ASEva.Samples.BlindSpotCameraMeta.P34Position">
             \~English
-            
+            <summary>
+            Position of P34
+            </summary>
             \~Chinese
             <summary>
             P34位置
@@ -10293,39 +10843,49 @@
         </member>
         <member name="P:ASEva.Samples.BlindSpotCameraMeta.P0HRatio">
             \~English
-            
+            <summary>
+            Ratio of P0h
+            </summary>
             \~Chinese
             <summary>
-            P0X半长占比
+            P0h半长占比
             </summary>
         </member>
         <member name="P:ASEva.Samples.BlindSpotCameraMeta.P3HRatio">
             \~English
-            
+            <summary>
+            Ratio of P3h
+            </summary>
             \~Chinese
             <summary>
-            P3X半长占比
+            P3h半长占比
             </summary>
         </member>
         <member name="P:ASEva.Samples.BlindSpotCameraMeta.PH0Ratio">
             \~English
-            
+            <summary>
+            Ratio of Ph0
+            </summary>
             \~Chinese
             <summary>
-            PX0半长占比
+            Ph0半长占比
             </summary>
         </member>
         <member name="P:ASEva.Samples.BlindSpotCameraMeta.PH4Ratio">
             \~English
-            
+            <summary>
+            Ratio of Ph4
+            </summary>
             \~Chinese
             <summary>
-            PX4半长占比
+            Ph4半长占比
             </summary>
         </member>
         <member name="T:ASEva.Samples.FisheyeCameraMeta">
             \~English
-            
+            <summary>
+            (api:app=2.1.2) Related information of fisheye camera (Fisheye model)
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.1.2) 鱼眼摄像头关联信息（鱼眼模型）
@@ -10333,7 +10893,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.Inverted">
             \~English
-            
+            <summary>
+            Whether inverted
+            </summary>
             \~Chinese
             <summary>
             是否作了翻转
@@ -10341,7 +10903,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.VFlipped">
             \~English
-            
+            <summary>
+            Whether vertical flipped
+            </summary>
             \~Chinese
             <summary>
             是否作了镜像
@@ -10349,7 +10913,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.Undistorted">
             \~English
-            
+            <summary>
+            Whether undistorted
+            </summary>
             \~Chinese
             <summary>
             是否作了去畸变
@@ -10357,7 +10923,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.UndistortedHFOV">
             \~English
-            
+            <summary>
+            (api:app=2.12.2) Horizontal FOV of ideal pinhole model after undistorted [deg]
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.12.2) 去畸变后的理想针孔模型图像的横向视场角 [deg]
@@ -10365,7 +10933,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.HFOVFisheye">
             \~English
-            
+            <summary>
+            Horizontal FOV of ideal fisheye model [deg]
+            </summary>
             \~Chinese
             <summary>
             理想鱼眼模型横向视场角 [deg]
@@ -10373,7 +10943,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.AR">
             \~English
-            
+            <summary>
+            Aspect ratio (width/height)
+            </summary>
             \~Chinese
             <summary>
             像素尺寸横纵比
@@ -10381,7 +10953,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.CU">
             \~English
-            
+            <summary>
+            Normalized U coordinate of optical axis
+            </summary>
             \~Chinese
             <summary>
             归一化视轴u坐标
@@ -10389,7 +10963,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.CV">
             \~English
-            
+            <summary>
+            Normalized V coordinate of optical axis
+            </summary>
             \~Chinese
             <summary>
             归一化视轴v坐标
@@ -10397,7 +10973,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.K1">
             \~English
-            
+            <summary>
+            Distortion coefficient K1
+            </summary>
             \~Chinese
             <summary>
             畸变参数K1
@@ -10405,7 +10983,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.K2">
             \~English
-            
+            <summary>
+            Distortion coefficient K2
+            </summary>
             \~Chinese
             <summary>
             畸变参数K2
@@ -10413,7 +10993,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.K3">
             \~English
-            
+            <summary>
+            Distortion coefficient K3
+            </summary>
             \~Chinese
             <summary>
             畸变参数K3
@@ -10421,7 +11003,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.K4">
             \~English
-            
+            <summary>
+            Distortion coefficient K4
+            </summary>
             \~Chinese
             <summary>
             畸变参数K4
@@ -10429,7 +11013,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.HasExtrinsicsInfo">
             \~English
-            
+            <summary>
+            Whether there's extrinsic parameters information
+            </summary>
             \~Chinese
             <summary>
             是否含有外参信息
@@ -10437,7 +11023,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.PositionX">
             \~English
-            
+            <summary>
+            X coordinate of position [m]
+            </summary>
             \~Chinese
             <summary>
             位置坐标X轴分量 [m]
@@ -10445,7 +11033,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.PositionY">
             \~English
-            
+            <summary>
+            Y coordinate of position [m]
+            </summary>
             \~Chinese
             <summary>
             位置坐标Y轴分量 [m]
@@ -10453,7 +11043,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.PositionZ">
             \~English
-            
+            <summary>
+            Z coordinate of position [m]
+            </summary>
             \~Chinese
             <summary>
             位置坐标Z轴分量 [m]
@@ -10461,7 +11053,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.YawRectified">
             \~English
-            
+            <summary>
+            Whether yaw rectified
+            </summary>
             \~Chinese
             <summary>
             是否作了横摆对正
@@ -10469,7 +11063,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.OriginYaw">
             \~English
-            
+            <summary>
+            Original yaw angle [°]
+            </summary>
             \~Chinese
             <summary>
             原横摆角 [°]
@@ -10477,7 +11073,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.RectifiedYaw">
             \~English
-            
+            <summary>
+            Yaw angle after rectified [°]
+            </summary>
             \~Chinese
             <summary>
             对正后的横摆角 [°]
@@ -10485,7 +11083,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.PitchRectified">
             \~English
-            
+            <summary>
+            Whether pitch rectified
+            </summary>
             \~Chinese
             <summary>
             是否作了俯仰对正
@@ -10493,7 +11093,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.OriginPitch">
             \~English
-            
+            <summary>
+            Original pitch angle
+            </summary>
             \~Chinese
             <summary>
             原俯仰角 [°]
@@ -10501,7 +11103,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.RollRectified">
             \~English
-            
+            <summary>
+            Whether roll rectified
+            </summary>
             \~Chinese
             <summary>
             是否作了横滚对正
@@ -10509,7 +11113,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.OriginRoll">
             \~English
-            
+            <summary>
+            Original roll angle
+            </summary>
             \~Chinese
             <summary>
             原横滚角 [°]
@@ -10517,7 +11123,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.ShakeYaw">
             \~English
-            
+            <summary>
+            Yaw offset by shake detection (only valid for some cameras)
+            </summary>
             \~Chinese
             <summary>
             抖动偏置横摆角（仅部分摄像头有效）
@@ -10525,7 +11133,9 @@
         </member>
         <member name="P:ASEva.Samples.FisheyeCameraMeta.ShakePitch">
             \~English
-            
+            <summary>
+            Pitch offset by shake detection (only valid for some cameras)
+            </summary>
             \~Chinese
             <summary>
             抖动偏置俯仰角（仅部分摄像头有效）
@@ -10533,7 +11143,9 @@
         </member>
         <member name="T:ASEva.Samples.CameraInfo">
             \~English
-            
+            <summary>
+            (api:app=2.9.0) Camera information
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.9.0) 摄像头信息
@@ -10541,7 +11153,9 @@
         </member>
         <member name="P:ASEva.Samples.CameraInfo.SpecialCameraType">
             \~English
-            
+            <summary>
+            Special camera type
+            </summary>
             \~Chinese
             <summary>
             特殊摄像头类型
@@ -10549,7 +11163,9 @@
         </member>
         <member name="P:ASEva.Samples.CameraInfo.SpecialCameraInfo">
             \~English
-            
+            <summary>
+            Information of special camera, could be ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta
+            </summary>
             \~Chinese
             <summary>
             特殊摄像头信息，可以为 ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta
@@ -10557,7 +11173,9 @@
         </member>
         <member name="P:ASEva.Samples.CameraInfo.HorizontalFov">
             \~English
-            
+            <summary>
+            Horizontal FOV of ideal pinhole model (null if not undistorted)
+            </summary>
             \~Chinese
             <summary>
             标准针孔模型下的横向视场角（未去畸变时为空）
@@ -10565,7 +11183,9 @@
         </member>
         <member name="T:ASEva.Samples.VideoFrameSample">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Video frame sample
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 视频帧样本
@@ -10573,16 +11193,19 @@
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.CommonImage">
             \~English
-            
+            <summary>
+            (api:app=2.3.0) Common image data (in order of BGR)
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.3.0) 通用图像数据(BGR不逆序)
             </summary>
-            <value></value>
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.Image">
             \~English
-            
+            <summary>
+            [Depend on Agency] Get platform image
+            </summary>
             \~Chinese
             <summary>
             [依赖Agency] 获取视频帧的位图图像（平台特化对象）
@@ -10590,7 +11213,9 @@
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.ChannelIndex">
             \~English
-            
+            <summary>
+            Video channel (0~23)
+            </summary>
             \~Chinese
             <summary>
             视频帧所属通道（0~23）
@@ -10598,7 +11223,9 @@
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.SpecialCameraType">
             \~English
-            
+            <summary>
+            Special camera type
+            </summary>
             \~Chinese
             <summary>
             特殊摄像头类型
@@ -10606,7 +11233,9 @@
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.SpecialCameraInfo">
             \~English
-            
+            <summary>
+            Information of special camera, could be ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta
+            </summary>
             \~Chinese
             <summary>
             特殊摄像头信息，可以为 ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta
@@ -10614,7 +11243,9 @@
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.HorizontalFov">
             \~English
-            
+            <summary>
+            Horizontal FOV of ideal pinhole model (null if not undistorted)
+            </summary>
             \~Chinese
             <summary>
             标准针孔模型下的横向视场角（未去畸变时为空）
@@ -10622,7 +11253,9 @@
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.Scaled">
             \~English
-            
+            <summary>
+            Whether it's scaled, false means fitting to the size
+            </summary>
             \~Chinese
             <summary>
             是否对图像进行了放大，false表示按可贴合的最小尺寸缩放
@@ -10630,7 +11263,9 @@
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.RawResolution">
             \~English
-            
+            <summary>
+            Raw image's resolution
+            </summary>
             \~Chinese
             <summary>
             原始图像的原分辨率
@@ -10638,7 +11273,9 @@
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.RawCenter">
             \~English
-            
+            <summary>
+            The image center in the raw image's coordinate system
+            </summary>
             \~Chinese
             <summary>
             在原始图像坐标系下的实际截取框中心
@@ -10646,7 +11283,9 @@
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.RawScale">
             \~English
-            
+            <summary>
+            Scaling ratio to the raw image's size
+            </summary>
             \~Chinese
             <summary>
             相对与原始图像大小的实际缩放比率
@@ -10654,7 +11293,9 @@
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.ActualResolution">
             \~English
-            
+            <summary>
+            Medium image's resolution
+            </summary>
             \~Chinese
             <summary>
             实际图像的原分辨率
@@ -10662,7 +11303,9 @@
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.ActualCenter">
             \~English
-            
+            <summary>
+            The image center in the medium image's coordinate system
+            </summary>
             \~Chinese
             <summary>
             在实际图像坐标系下的实际截取框中心
@@ -10670,7 +11313,9 @@
         </member>
         <member name="P:ASEva.Samples.VideoFrameSample.ActualScale">
             \~English
-            
+            <summary>
+            Scaling ratio to the medium image's size
+            </summary>
             \~Chinese
             <summary>
             相对与实际图像大小的实际缩放比率
@@ -10678,12 +11323,20 @@
         </member>
         <member name="M:ASEva.Samples.VideoFrameSample.#ctor(System.Object,ASEva.IntSize,System.Int32,System.DateTime,System.Double,System.Double)">
             \~English
-            
+            <summary>
+            [Depend on Agency] Default constructor
+            </summary>
+            <param name="image">The platform image</param>
+            <param name="rawSize">Raw resolution</param>
+            <param name="channelIndex">Video channel</param>
+            <param name="session">Session ID</param>
+            <param name="offset">Time offset, in secodns</param>
+            <param name="timeline">Timeline point</param>
             \~Chinese
             <summary>
             [依赖Agency] 默认构造函数
             </summary>
-            <param name="image">图像</param>
+            <param name="image">平台特化图像</param>
             <param name="rawSize">图像的原始大小</param>
             <param name="channelIndex">通道</param>
             <param name="session">Session ID</param>
@@ -10692,12 +11345,20 @@
         </member>
         <member name="M:ASEva.Samples.VideoFrameSample.#ctor(ASEva.Samples.CommonImage,ASEva.IntSize,System.Int32,System.DateTime,System.Double,System.Double)">
             \~English
-            
+            <summary>
+            (api:app=2.3.0) Default constructor
+            </summary>
+            <param name="image">Common image object</param>
+            <param name="rawSize">Raw resolution</param>
+            <param name="channelIndex">Video channel</param>
+            <param name="session">Session ID</param>
+            <param name="offset">Time offset, in secodns</param>
+            <param name="timeline">Timeline point</param>
             \~Chinese
             <summary>
             (api:app=2.3.0) 默认构造函数
             </summary>
-            <param name="image">图像</param>
+            <param name="image">通用图像对象</param>
             <param name="rawSize">图像的原始大小</param>
             <param name="channelIndex">通道</param>
             <param name="session">Session ID</param>
@@ -10727,7 +11388,7 @@
         <member name="P:ASEva.SceneData.BeginBase">
             \~English
             <summary>
-            Session belonged
+            The session that scenario belongs to
             </summary>
             \~Chinese
             <summary>
@@ -11795,7 +12456,7 @@
         <member name="P:ASEva.BusSignalInfo.OwnerMessage">
             \~English
             <summary>
-            Information of bus message belonged
+            Information of the bus message that signal belongs to
             </summary>
             \~Chinese
             <summary>
@@ -11865,7 +12526,7 @@
         <member name="P:ASEva.BusMessageInfo.OwnerFile">
             \~English
             <summary>
-            Information of bus protocol belonged
+            Information of the bus protocol that bus message belongs to
             </summary>
             \~Chinese
             <summary>
@@ -11959,7 +12620,7 @@
         <member name="P:ASEva.TimeWithSession.Session">
             \~English
             <summary>
-            Session belonged
+            The session that it belongs to
             </summary>
             \~Chinese
             <summary>
@@ -13061,7 +13722,7 @@
         <member name="P:ASEva.WindowClassInfo.OwnerPluginID">
             \~English
             <summary>
-            ID of plugin pack belonged
+            ID of the plugin pack that component belongs to
             </summary>
             \~Chinese
             <summary>
@@ -13151,7 +13812,7 @@
         <member name="P:ASEva.DialogClassInfo.OwnerPluginID">
             \~English
             <summary>
-            ID of plugin pack belonged
+            ID of the plugin pack that component belongs to
             </summary>
             \~Chinese
             <summary>
@@ -13231,7 +13892,7 @@
         <member name="P:ASEva.ProcessorClassInfo.OwnerPluginID">
             \~English
             <summary>
-            ID of plugin pack belonged
+            ID of the plugin pack that component belongs to
             </summary>
             \~Chinese
             <summary>
@@ -13341,7 +14002,7 @@
         <member name="P:ASEva.NativeClassInfo.OwnerPluginID">
             \~English
             <summary>
-            ID of plugin pack belonged
+            ID of the plugin pack that component belongs to
             </summary>
             \~Chinese
             <summary>
@@ -13401,7 +14062,7 @@
         <member name="P:ASEva.DeviceClassInfo.OwnerPluginID">
             \~English
             <summary>
-            ID of plugin pack belonged
+            ID of the plugin pack that component belongs to
             </summary>
             \~Chinese
             <summary>
@@ -13441,7 +14102,7 @@
         <member name="P:ASEva.TaskClassInfo.OwnerPluginID">
             \~English
             <summary>
-            ID of plugin pack belonged
+            ID of the plugin pack that component belongs to
             </summary>
             \~Chinese
             <summary>
@@ -14694,7 +15355,9 @@
         </member>
         <member name="T:ASEva.Utility.AttributeParser">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) XML attribute parsing
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) XML属性解析
@@ -14702,7 +15365,9 @@
         </member>
         <member name="T:ASEva.Utility.AttributeWriter">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) XML attribute writer
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) XML属性输出
@@ -14710,7 +15375,10 @@
         </member>
         <member name="M:ASEva.Utility.AttributeWriter.#ctor(System.Xml.XmlElement)">
             \~English
-            
+            <summary>
+            Create based on XML element
+            </summary>
+            <param name="element">XML element</param>
             \~Chinese
             <summary>
             基于XML元素节点创建
@@ -14719,7 +15387,9 @@
         </member>
         <member name="T:ASEva.Utility.ContentToString">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Convert object's info to string
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 递归的将对象信息转化为字符串
@@ -14727,7 +15397,9 @@
         </member>
         <member name="T:ASEva.Utility.MapCoordination">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Conversion of map coordinates
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 地图坐标系转换
@@ -14735,7 +15407,11 @@
         </member>
         <member name="M:ASEva.Utility.MapCoordination.wgs2bd(ASEva.Utility.LocPoint)">
             \~English
-            
+            <summary>
+            Convert WGS coordinates to Baidu coordinates
+            </summary>
+            <param name="src">WGS coordinates</param>
+            <returns>Baidu coordinates</returns>
             \~Chinese
             <summary>
             WGS坐标转百度坐标
@@ -14745,7 +15421,11 @@
         </member>
         <member name="M:ASEva.Utility.MapCoordination.gcj2bd(ASEva.Utility.LocPoint)">
             \~English
-            
+            <summary>
+            Convert GCJ coordinates to Baidu coordinates
+            </summary>
+            <param name="src">GCJ coordinates</param>
+            <returns>Baidu coordinates</returns>
             \~Chinese
             <summary>
             GCJ坐标转百度坐标
@@ -14755,7 +15435,11 @@
         </member>
         <member name="M:ASEva.Utility.MapCoordination.wgs2gcj(ASEva.Utility.LocPoint)">
             \~English
-            
+            <summary>
+            Convert WGS coordinates to GCJ coordinates
+            </summary>
+            <param name="src">WGS coordinates</param>
+            <returns>GCJ coordinates</returns>
             \~Chinese
             <summary>
             WGS坐标转GCJ坐标
@@ -14765,7 +15449,9 @@
         </member>
         <member name="T:ASEva.Utility.DrawBeat">
             \~English
-            
+            <summary>
+            (api:app=2.2.2) Drawing time cost recording and feedback
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.2.2) 绘图时间记录与反馈
@@ -14773,7 +15459,9 @@
         </member>
         <member name="M:ASEva.Utility.DrawBeat.Enable">
             \~English
-            
+            <summary>
+            (api:app=2.6.9) Enable the function (default is disabled)
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.6.9) 启用绘图时间记录与反馈（默认不启用）
@@ -14781,7 +15469,11 @@
         </member>
         <member name="M:ASEva.Utility.DrawBeat.CallerBegin(System.Int32)">
             \~English
-            
+            <summary>
+            Call before queue drawing
+            </summary>
+            <param name="id">Drawing ID</param>
+            <returns>Whether it's available to draw</returns>
             \~Chinese
             <summary>
             在调用绘图前调用
@@ -14791,7 +15483,11 @@
         </member>
         <member name="M:ASEva.Utility.DrawBeat.CallerBegin(System.Object)">
             \~English
-            
+            <summary>
+            Call before queue drawing
+            </summary>
+            <param name="target">Drawing target</param>
+            <returns>Whether it's available to draw</returns>
             \~Chinese
             <summary>
             在调用绘图前调用
@@ -14801,7 +15497,10 @@
         </member>
         <member name="M:ASEva.Utility.DrawBeat.CallerEnd(System.Int32)">
             \~English
-            
+            <summary>
+            Call after drawing queued
+            </summary>
+            <param name="id">Drawing ID</param>
             \~Chinese
             <summary>
             在调用绘图后调用
@@ -14810,7 +15509,10 @@
         </member>
         <member name="M:ASEva.Utility.DrawBeat.CallerEnd(System.Object)">
             \~English
-            
+            <summary>
+            Call after drawing queued
+            </summary>
+            <param name="target">Drawing target</param>
             \~Chinese
             <summary>
             在调用绘图后调用
@@ -14819,7 +15521,11 @@
         </member>
         <member name="M:ASEva.Utility.DrawBeat.CallbackBegin(System.Int32,System.String)">
             \~English
-            
+            <summary>
+            Call at the beginning of draw callback
+            </summary>
+            <param name="id">Drawing ID</param>
+            <param name="category">Category, set to null if not to specify</param>
             \~Chinese
             <summary>
             在绘图回调函数开始时调用
@@ -14829,7 +15535,11 @@
         </member>
         <member name="M:ASEva.Utility.DrawBeat.CallbackBegin(System.Object,System.String)">
             \~English
-            
+            <summary>
+            Call at the beginning of draw callback
+            </summary>
+            <param name="target">Drawing ID</param>
+            <param name="category">Category, set to null if not to specify</param>
             \~Chinese
             <summary>
             在绘图回调函数开始时调用
@@ -14839,25 +15549,33 @@
         </member>
         <member name="M:ASEva.Utility.DrawBeat.CallbackEnd(System.Int32)">
             \~English
-            
+            <summary>
+            Call at the end of draw callback
+            </summary>
+            <param name="id">Drawing ID</param>
             \~Chinese
             <summary>
-            在绘图毁掉函数结束前调用
+            在绘图回调函数结束前调用
             </summary>
             <param name="id">绘图对象ID</param>
         </member>
         <member name="M:ASEva.Utility.DrawBeat.CallbackEnd(System.Object)">
             \~English
-            
+            <summary>
+            Call at the end of draw callback
+            </summary>
+            <param name="target">Drawing target</param>
             \~Chinese
             <summary>
-            在绘图毁掉函数结束前调用
+            在绘图回调函数结束前调用
             </summary>
             <param name="target">绘图对象</param>
         </member>
         <member name="M:ASEva.Utility.DrawBeat.DownSize">
             \~English
-            
+            <summary>
+            Reduce the size of context
+            </summary>
             \~Chinese
             <summary>
             缩减上下文规模
@@ -14865,16 +15583,19 @@
         </member>
         <member name="M:ASEva.Utility.DrawBeat.GetRecentCallbackAverageTime">
             \~English
-            
+            <summary>
+            Get average cost time of callback functions in recent 3 seconds
+            </summary>
             \~Chinese
             <summary>
             获取最近3秒回调函数运行平均时间
             </summary>
-            <returns></returns>
         </member>
         <member name="M:ASEva.Utility.DrawBeat.PopOutCallerCallbackTime">
             \~English
-            
+            <summary>
+            Get cost time of callback functions running outside of caller, and clear the buffer
+            </summary>
             \~Chinese
             <summary>
             获取在caller外的回调函数运行时间，并清空缓存
@@ -14882,7 +15603,9 @@
         </member>
         <member name="M:ASEva.Utility.DrawBeat.SetDrawIntervals(System.Collections.Generic.Dictionary{System.Int32,System.Int32})">
             \~English
-            
+            <summary>
+            Set the drawing time interval for each drawing object
+            </summary>
             \~Chinese
             <summary>
             设置各绘图对象的绘制时间间隔
@@ -14930,7 +15653,9 @@
         </member>
         <member name="T:ASEva.Utility.GenerationInfo">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Object for reading and writing generation's info file (info.xml)
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 读写Generation的信息文件(info.xml)
@@ -14938,7 +15663,9 @@
         </member>
         <member name="P:ASEva.Utility.GenerationInfo.FilePath">
             \~English
-            
+            <summary>
+            File path
+            </summary>
             \~Chinese
             <summary>
             文件路径
@@ -14946,7 +15673,9 @@
         </member>
         <member name="P:ASEva.Utility.GenerationInfo.GenerationID">
             \~English
-            
+            <summary>
+            Generation ID
+            </summary>
             \~Chinese
             <summary>
             Generation ID
@@ -14954,7 +15683,9 @@
         </member>
         <member name="P:ASEva.Utility.GenerationInfo.ProcessStatus">
             \~English
-            
+            <summary>
+            Processing status info
+            </summary>
             \~Chinese
             <summary>
             状态信息
@@ -14962,7 +15693,9 @@
         </member>
         <member name="P:ASEva.Utility.GenerationInfo.SampleAlias">
             \~English
-            
+            <summary>
+            Dictionary of sample alias
+            </summary>
             \~Chinese
             <summary>
             样本别名表
@@ -14970,7 +15703,9 @@
         </member>
         <member name="P:ASEva.Utility.GenerationInfo.Versions">
             \~English
-            
+            <summary>
+            Versions of software that created the generation
+            </summary>
             \~Chinese
             <summary>
             创建Generation的软件版本信息（用于回溯）
@@ -14978,7 +15713,9 @@
         </member>
         <member name="P:ASEva.Utility.GenerationInfo.UpdateLogs">
             \~English
-            
+            <summary>
+            Generation update logs
+            </summary>
             \~Chinese
             <summary>
             Generation更新记录
@@ -14986,7 +15723,9 @@
         </member>
         <member name="P:ASEva.Utility.GenerationInfo.GNSSPosixModel">
             \~English
-            
+            <summary>
+            (api:app=2.12.0) Satellite posix time model used while creating the generation
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.12.0) Generation生成时使用或覆盖的卫星Posix时间模型
@@ -14994,7 +15733,9 @@
         </member>
         <member name="P:ASEva.Utility.GenerationInfo.HostSync">
             \~English
-            
+            <summary>
+            (api:app=2.12.0) Whether host machine is synchronized with time server while creating the generation
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.12.0) Generation生成时主机是否配置为与授时服务器同步
@@ -15002,7 +15743,9 @@
         </member>
         <member name="P:ASEva.Utility.GenerationInfo.GuestSyncIDs">
             \~English
-            
+            <summary>
+            (api:app=2.12.0) IDs of the guest synchronized with time server while creating the generation
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.12.0) Generation生成时被配置为与授时服务器同步的所有客机同步ID
@@ -15010,7 +15753,14 @@
         </member>
         <member name="M:ASEva.Utility.GenerationInfo.Create(System.String,System.String,ASEva.Utility.GenerationProcessStatus,System.Collections.Generic.Dictionary{System.String,System.Version})">
             \~English
-            
+            <summary>
+            Create generation info object (Not write to file)
+            </summary>
+            <param name="filePath">File path</param>
+            <param name="generationID">Generation ID</param>
+            <param name="status">Processing status</param>
+            <param name="versions">Versions of software that created the generation</param>
+            <returns>Created generation info object</returns>
             \~Chinese
             <summary>
             创建信息文件对象（仅创建对象，不写入文件）
@@ -15023,7 +15773,16 @@
         </member>
         <member name="M:ASEva.Utility.GenerationInfo.Create(System.String,System.String,ASEva.Utility.GenerationProcessStatus,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Version},System.Collections.Generic.Dictionary{System.DateTime,System.String})">
             \~English
-            
+            <summary>
+            Create generation info object (Not write to file)
+            </summary>
+            <param name="filePath">File path</param>
+            <param name="generationID">Generation ID</param>
+            <param name="status">Processing status</param>
+            <param name="sampleAlias">Dictionary of sample alias</param>
+            <param name="versions">Versions of software that created the generation</param>
+            <param name="updateLogs">Generation's update logs</param>
+            <returns>Created generation info object</returns>
             \~Chinese
             <summary>
             创建信息文件对象（仅创建对象，不写入文件）
@@ -15038,7 +15797,19 @@
         </member>
         <member name="M:ASEva.Utility.GenerationInfo.Create(System.String,System.String,ASEva.Utility.GenerationProcessStatus,System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.Version},System.Collections.Generic.Dictionary{System.DateTime,System.String},ASEva.PosixTimeModel,System.Boolean,System.String[])">
             \~English
-            
+            <summary>
+            (api:app=2.12.0) Create generation info object (Not write to file)
+            </summary>
+            <param name="filePath">File path</param>
+            <param name="generationID">Generation ID</param>
+            <param name="status">Processing status</param>
+            <param name="sampleAlias">Dictionary of sample alias</param>
+            <param name="versions">Versions of software that created the generation</param>
+            <param name="updateLogs">Generation's update logs</param>
+            <param name="gnssPosixModel">Satellite posix time model used while creating the generation</param>
+            <param name="hostSync">Whether host machine is synchronized with time server while creating the generation</param>
+            <param name="guestSyncIDs">IDs of the guest synchronized with time server while creating the generation</param>
+            <returns>Created generation info object</returns>
             \~Chinese
             <summary>
             (api:app=2.12.0) 创建信息文件对象（仅创建对象，不写入文件）
@@ -15056,7 +15827,11 @@
         </member>
         <member name="M:ASEva.Utility.GenerationInfo.Load(System.String)">
             \~English
-            
+            <summary>
+            Load from file
+            </summary>
+            <param name="filePath">File path</param>
+            <returns>Created generation info object</returns>
             \~Chinese
             <summary>
             从已有信息文件中读取
@@ -15066,7 +15841,9 @@
         </member>
         <member name="M:ASEva.Utility.GenerationInfo.Save">
             \~English
-            
+            <summary>
+            Save to file
+            </summary>
             \~Chinese
             <summary>
             保存信息文件
@@ -15074,7 +15851,9 @@
         </member>
         <member name="T:ASEva.Utility.IntervalControl">
             \~English
-            
+            <summary>
+            (api:app=2.11.2) Controlling operation's time interval
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.11.2) 执行操作的间隔控制
@@ -15082,7 +15861,12 @@
         </member>
         <member name="M:ASEva.Utility.IntervalControl.#ctor(System.Double,System.Boolean,System.Boolean)">
             \~English
-            
+            <summary>
+            Constructor
+            </summary>
+            <param name="interval">Time interval of operation, in seconds, at least 0.1 second</param>
+            <param name="manual">Whether in manual mode. If yes, you should call Next method to start next loop</param>
+            <param name="immediate">Whether the operation can be performed immediately, or else wait for "interval" time</param>
             \~Chinese
             <summary>
             构造函数
@@ -15093,7 +15877,9 @@
         </member>
         <member name="M:ASEva.Utility.IntervalControl.Test">
             \~English
-            
+            <summary>
+            Get whether to perform the operation
+            </summary>
             \~Chinese
             <summary>
             检查是否应执行操作
@@ -15101,7 +15887,9 @@
         </member>
         <member name="M:ASEva.Utility.IntervalControl.Next">
             \~English
-            
+            <summary>
+            Start next loop manually
+            </summary>
             \~Chinese
             <summary>
             手动模式下开启下一轮计时
@@ -15109,7 +15897,10 @@
         </member>
         <member name="M:ASEva.Utility.IntervalControl.Reset(System.Boolean)">
             \~English
-            
+            <summary>
+            Reset the time control
+            </summary>
+            <param name="immediate">Whether the operation can be performed immediately, or else wait for "interval" time</param>
             \~Chinese
             <summary>
             重置间隔控制
@@ -15118,7 +15909,9 @@
         </member>
         <member name="T:ASEva.Utility.MD5Calculator">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) MD5 calculator
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) MD5计算
@@ -15126,7 +15919,11 @@
         </member>
         <member name="M:ASEva.Utility.MD5Calculator.Calculate(System.String)">
             \~English
-            
+            <summary>
+            Calculate MD5 of file
+            </summary>
+            <param name="fileName">File path</param>
+            <returns>MD5 string</returns>
             \~Chinese
             <summary>
             计算文件MD5
@@ -15136,7 +15933,11 @@
         </member>
         <member name="M:ASEva.Utility.MD5Calculator.Calculate(System.Byte[])">
             \~English
-            
+            <summary>
+            Calculate MD5 of binary data
+            </summary>
+            <param name="data">Binary data</param>
+            <returns>MD5 string</returns>
             \~Chinese
             <summary>
             计算二进制数据块MD5
@@ -15146,7 +15947,9 @@
         </member>
         <member name="T:ASEva.Utility.MissFalseResult">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Result of miss detection / false detection
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 漏检/误检结果
@@ -15154,7 +15957,9 @@
         </member>
         <member name="T:ASEva.Utility.MissFalseStat">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Statistics of miss detection / false detection
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 漏检/误检分析与统计
@@ -15162,7 +15967,9 @@
         </member>
         <member name="T:ASEva.Utility.LocPoint">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Coordinates of longitude and latitude
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 经纬度坐标
@@ -15170,7 +15977,9 @@
         </member>
         <member name="P:ASEva.Utility.LocPoint.Lng">
             \~English
-            
+            <summary>
+            Longitude
+            </summary>
             \~Chinese
             <summary>
             经度
@@ -15178,7 +15987,9 @@
         </member>
         <member name="P:ASEva.Utility.LocPoint.Lat">
             \~English
-            
+            <summary>
+            Latitude
+            </summary>
             \~Chinese
             <summary>
             纬度
@@ -15186,7 +15997,9 @@
         </member>
         <member name="T:ASEva.Utility.OrthoParameters">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Parameters of orthogonal coordinate system
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 正交坐标系参数
@@ -15194,7 +16007,9 @@
         </member>
         <member name="P:ASEva.Utility.OrthoParameters.OrthoCenterLng">
             \~English
-            
+            <summary>
+            Longitude of the orthogonal coordinate system's origin
+            </summary>
             \~Chinese
             <summary>
             原点经度
@@ -15202,7 +16017,9 @@
         </member>
         <member name="P:ASEva.Utility.OrthoParameters.OrthoCenterLat">
             \~English
-            
+            <summary>
+            Latitude of the orthogonal coordinate system's origin
+            </summary>
             \~Chinese
             <summary>
             原点纬度
@@ -15210,7 +16027,9 @@
         </member>
         <member name="P:ASEva.Utility.OrthoParameters.OrthoRadius">
             \~English
-            
+            <summary>
+            Sphere's radius
+            </summary>
             \~Chinese
             <summary>
             球半径
@@ -15218,7 +16037,9 @@
         </member>
         <member name="M:ASEva.Utility.OrthoParameters.#ctor">
             \~English
-            
+            <summary>
+            Default constructor, default origin is (0, 0) and use the earth's radius
+            </summary>
             \~Chinese
             <summary>
             构造函数，默认原点为(0, 0)，默认球半径为地球半径
@@ -15226,7 +16047,9 @@
         </member>
         <member name="T:ASEva.Utility.OrthoTransform">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Conversion of orthogonal coordinates
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 正交坐标系变换
@@ -15234,7 +16057,10 @@
         </member>
         <member name="M:ASEva.Utility.OrthoTransform.#ctor(ASEva.Utility.OrthoParameters)">
             \~English
-            
+            <summary>
+            Constructor
+            </summary>
+            <param name="param">Parameters of orthogonal coordinate system</param>
             \~Chinese
             <summary>
             构造函数
@@ -15243,7 +16069,11 @@
         </member>
         <member name="M:ASEva.Utility.OrthoTransform.GlobalToOrtho(ASEva.Utility.LocPoint)">
             \~English
-            
+            <summary>
+            Convert global coordinates to orthogonal coordinates
+            </summary>
+            <param name="src">Global coordinates</param>
+            <returns>Orthogonal coordinates</returns>
             \~Chinese
             <summary>
             全球坐标系转正交坐标系
@@ -15253,7 +16083,11 @@
         </member>
         <member name="M:ASEva.Utility.OrthoTransform.OrthoToGlobal(ASEva.FloatPoint)">
             \~English
-            
+            <summary>
+            Convert orthogonal coordinates to global coordinates
+            </summary>
+            <param name="src">Orthogonal coordinates</param>
+            <returns>Global coordinates</returns>
             \~Chinese
             <summary>
             正交坐标系转全球坐标系
@@ -15263,7 +16097,9 @@
         </member>
         <member name="T:ASEva.Utility.RegexUtil">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Regular expression utility
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 正则表达式工具
@@ -15271,7 +16107,9 @@
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsChineseCh(System.String)">
             \~English
-            
+            <summary>
+            Whether it's Chinese string
+            </summary>
             \~Chinese
             <summary>
             是否为中文字符串
@@ -15279,7 +16117,9 @@
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsPhone(System.String)">
             \~English
-            
+            <summary>
+            Whether it's phone number
+            </summary>
             \~Chinese
             <summary>
             是否为电话号码
@@ -15287,7 +16127,9 @@
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsMobilePhone(System.String)">
             \~English
-            
+            <summary>
+            Whether it's mobile phone number
+            </summary>
             \~Chinese
             <summary>
             是否为手机号码
@@ -15295,7 +16137,9 @@
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsNumber(System.String)">
             \~English
-            
+            <summary>
+            Whether it's numeric string
+            </summary>
             \~Chinese
             <summary>
             是否为数值字符串
@@ -15303,7 +16147,9 @@
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsNotNagtive(System.String)">
             \~English
-            
+            <summary>
+            Deprecated, use ASEva.Utility.RegexUtil.IsNotNegative
+            </summary>
             \~Chinese
             <summary>
             已弃用，应使用 ASEva.Utility.RegexUtil.IsNotNegative
@@ -15311,7 +16157,9 @@
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsNotNegative(System.String)">
             \~English
-            
+            <summary>
+            (api:app=2.3.0) Whether it's non-negative numeric string
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.3.0) 是否为非负数值字符串
@@ -15319,7 +16167,9 @@
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsUint(System.String)">
             \~English
-            
+            <summary>
+            Whether it's unsigned integer
+            </summary>
             \~Chinese
             <summary>
             是否为无符号整型
@@ -15327,7 +16177,9 @@
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsEnglishCh(System.String)">
             \~English
-            
+            <summary>
+            Whether it's English string
+            </summary>
             \~Chinese
             <summary>
             是否为英文字符串
@@ -15335,7 +16187,9 @@
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsEmail(System.String)">
             \~English
-            
+            <summary>
+            Whether it's mail address
+            </summary>
             \~Chinese
             <summary>
             是否为邮件字符串
@@ -15343,7 +16197,9 @@
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsNumAndEnCh(System.String)">
             \~English
-            
+            <summary>
+            Whether it's mixed string of English and numbers
+            </summary>
             \~Chinese
             <summary>
             是否为英文数字结合字符串
@@ -15351,7 +16207,9 @@
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsURL(System.String)">
             \~English
-            
+            <summary>
+            Whether it's URL
+            </summary>
             \~Chinese
             <summary>
             是否为URL
@@ -15359,7 +16217,9 @@
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsNoHeadURL(System.String)">
             \~English
-            
+            <summary>
+            Whether it's URL without protocol header
+            </summary>
             \~Chinese
             <summary>
             是否为无协议头URL
@@ -15367,7 +16227,9 @@
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsIPv4(System.String)">
             \~English
-            
+            <summary>
+            Whether it's IPv4
+            </summary>
             \~Chinese
             <summary>
             是否为IPv4
@@ -15375,7 +16237,9 @@
         </member>
         <member name="M:ASEva.Utility.RegexUtil.IsIPv6(System.String)">
             \~English
-            
+            <summary>
+            Whether it's IPv6
+            </summary>
             \~Chinese
             <summary>
             是否为IPv6
@@ -15383,7 +16247,9 @@
         </member>
         <member name="T:ASEva.Utility.ResourceLoader">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Resource loader
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 资源读取器
@@ -15391,7 +16257,11 @@
         </member>
         <member name="M:ASEva.Utility.ResourceLoader.Load(System.String)">
             \~English
-            
+            <summary>
+            Load the resource with the name
+            </summary>
+            <param name="name">Resource name</param>
+            <returns>Resource data, null if not found</returns>
             \~Chinese
             <summary>
             按指定名称读取资源
@@ -15401,7 +16271,11 @@
         </member>
         <member name="M:ASEva.Utility.ResourceLoader.LoadText(System.String)">
             \~English
-            
+            <summary>
+            (api:app=2.0.8) Load the resource with the name (UTF-8 data), and convert to text
+            </summary>
+            <param name="name">Resource name</param>
+            <returns>Loaded text, null if not found</returns>
             \~Chinese
             <summary>
             (api:app=2.0.8) 按指定名称读取资源（UTF-8文本），并转为文本
@@ -15411,7 +16285,9 @@
         </member>
         <member name="T:ASEva.Utility.SampleCsvLoader">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Sample CSV file loader
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 读取样本csv文件
@@ -15419,7 +16295,11 @@
         </member>
         <member name="M:ASEva.Utility.SampleCsvLoader.CreateLoader(System.String)">
             \~English
-            
+            <summary>
+            Create sample CSV file loader from the specified path
+            </summary>
+            <param name="file">File path</param>
+            <returns>Sample CSV file loader object, null if the file doesn't exist or failed to load</returns>
             \~Chinese
             <summary>
             根据指定路径创建样本csv读取器
@@ -15429,7 +16309,10 @@
         </member>
         <member name="M:ASEva.Utility.SampleCsvLoader.GetSampleTitle">
             \~English
-            
+            <summary>
+            Get title of sample's fields 
+            </summary>
+            <returns>Title of sample's fields, null means no title</returns>
             \~Chinese
             <summary>
             获取样本标题 
@@ -15438,7 +16321,10 @@
         </member>
         <member name="M:ASEva.Utility.SampleCsvLoader.ReadNext">
             \~English
-            
+            <summary>
+            Read next sample
+            </summary>
+            <returns>General sample object</returns>
             \~Chinese
             <summary>
             读取下一个样本
@@ -15447,7 +16333,9 @@
         </member>
         <member name="M:ASEva.Utility.SampleCsvLoader.Close">
             \~English
-            
+            <summary>
+            Close sample CSV loader
+            </summary>
             \~Chinese
             <summary>
             关闭样本csv读取器
@@ -15455,7 +16343,11 @@
         </member>
         <member name="M:ASEva.Utility.SampleCsvLoader.Load(System.String)">
             \~English
-            
+            <summary>
+            Load GeneralSample array from csv file (This function is only suitable for small files)
+            </summary>
+            <param name="file">File path</param>
+            <returns>Array of general samples, null if the file doesn't exist or failed to load</returns>
             \~Chinese
             <summary>
             从csv读取样本，输出GeneralSample数组（仅适合较小文件的情况）
@@ -15465,7 +16357,9 @@
         </member>
         <member name="T:ASEva.Utility.SampleCsvWriter">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Sample CSV file writer
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 写入样本csv文件
@@ -15473,19 +16367,29 @@
         </member>
         <member name="M:ASEva.Utility.SampleCsvWriter.CreateWriter(System.String,System.Boolean,System.Collections.Generic.List{System.String})">
             \~English
-            
+            <summary>
+            Create sample CSV writer writing to the specified path
+            </summary>
+            <param name="file">File path, whose file name must be the same as sample's channel ID, suffixed with ".csv"</param>
+            <param name="overwrite">Whether to overwrite if it exists</param>
+            <param name="titles">Title of sample's fields</param>
+            <returns>Sample CSV writer, null if failed to create</returns>
             \~Chinese
             <summary>
             根据指定路径创建样本csv写入器
             </summary>
             <param name="file">文件路径，文件名必须与样本协议ID一致，后缀为csv</param>
             <param name="overwrite">若文件已存在是否覆盖</param>
-            <param name="titles"></param>
+            <param name="titles">样本标题</param>
             <returns>csv写入器，若文件创建失败则返回空</returns>
         </member>
         <member name="M:ASEva.Utility.SampleCsvWriter.Write(ASEva.GeneralSample)">
             \~English
-            
+            <summary>
+            Write a general sample to file
+            </summary>
+            <param name="sample">General sample object</param>
+            <returns>Whether successful, false if the channel ID or session doesn't match</returns>
             \~Chinese
             <summary>
             写入一个通用样本
@@ -15495,7 +16399,9 @@
         </member>
         <member name="M:ASEva.Utility.SampleCsvWriter.Close">
             \~English
-            
+            <summary>
+            Close sample CSV writer
+            </summary>
             \~Chinese
             <summary>
             关闭样本csv写入器
@@ -15503,7 +16409,9 @@
         </member>
         <member name="P:ASEva.Utility.SampleCsvWriter.StartTimeUTC">
             \~English
-            
+            <summary>
+            Set session's start time of satellite posix time model in UTC date and time
+            </summary>
             \~Chinese
             <summary>
             按UTC时间设置卫星Posix时间模型的session开始时间
@@ -15511,7 +16419,9 @@
         </member>
         <member name="P:ASEva.Utility.SampleCsvWriter.StartTimeLocal">
             \~English
-            
+            <summary>
+            Set session's start time of host machine posix time model in local date and time
+            </summary>
             \~Chinese
             <summary>
             按本地时间设置主机Posix时间模型的session开始时间
@@ -15519,7 +16429,9 @@
         </member>
         <member name="P:ASEva.Utility.SampleCsvWriter.TimeRatioToUTC">
             \~English
-            
+            <summary>
+            Set time ratio of satellite posix time model, default is 1
+            </summary>
             \~Chinese
             <summary>
             设置卫星Posix时间模型的时间比例，默认为1
@@ -15527,7 +16439,9 @@
         </member>
         <member name="P:ASEva.Utility.SampleCsvWriter.TimeRatioToLocal">
             \~English
-            
+            <summary>
+            Set time ratio of host machine posix time model, default is 1
+            </summary>
             \~Chinese
             <summary>
             设置主机Posix时间模型的时间比例，默认为1
@@ -15535,7 +16449,9 @@
         </member>
         <member name="T:ASEva.Utility.SampleParser">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Sample parser, automatically convert ASEva.GeneralSample to sample of any type
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 样本解析，自动将 ASEva.GeneralSample 转化为特化样本
@@ -15543,16 +16459,23 @@
         </member>
         <member name="M:ASEva.Utility.SampleParser.Register(System.Type)">
             \~English
-            
+            <summary>
+            Register protocol of ASEva.GeneralSample that needed to be parsed
+            </summary>
+            <param name="type">Sample protocol (not including channel info, like'@1')</param>
             \~Chinese
             <summary>
             注册需要解析的 ASEva.GeneralSample 协议
             </summary>
-            <param name="type">协议ID（不包括通道信息，如'@1'）</param>
+            <param name="type">样本协议（不包括通道信息，如'@1'）</param>
         </member>
         <member name="M:ASEva.Utility.SampleParser.Parse(ASEva.GeneralSample)">
             \~English
-            
+            <summary>
+            Parse sample
+            </summary>
+            <param name="input">ASEva.GeneralSample to be parsed</param>
+            <returns>The corresponding sample object, null if failed</returns>
             \~Chinese
             <summary>
             解析样本
@@ -15562,7 +16485,9 @@
         </member>
         <member name="T:ASEva.Utility.SampleSync">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Sample synchronization
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 样本同步
@@ -15570,12 +16495,19 @@
         </member>
         <member name="M:ASEva.Utility.SampleSync.Sync(System.Double,System.DateTime,System.Collections.Generic.List{System.Collections.Generic.List{ASEva.Sample}},System.Collections.Generic.List{ASEva.Sample}@)">
             \~English
-            
+            <summary>
+            Synchronize samples according to the target timeline point, output interpolated or nearest samples
+            </summary>
+            <param name="timeline">Timeline point, in seconds</param>
+            <param name="session">The session that sample belongs to</param>
+            <param name="sampleLists">Input sample buffers (can be multiple)</param>
+            <param name="outputs">Output synchronized samples</param>
+            <returns>Whether the target time can be passed, false means you should try to synchronize again later</returns>
             \~Chinese
             <summary>
             样本同步函数，根据目标时间点搜索样本缓存，输出插值或最近样本
             </summary>
-            <param name="timeline">希望同步的时间线</param>
+            <param name="timeline">希望同步的时间线，单位秒</param>
             <param name="session">时间线所在session</param>
             <param name="sampleLists">输入的样本缓存，可以是多个缓存</param>
             <param name="outputs">各个缓存按指定时间点输出插值或最近样本</param>
@@ -15583,7 +16515,9 @@
         </member>
         <member name="T:ASEva.Utility.SceneCsv">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Scenario CSV reader and writer
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 场景csv文件读写
@@ -15591,7 +16525,9 @@
         </member>
         <member name="T:ASEva.Utility.Serializer">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) XML/Json object reader and writer
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) XML/Json的对象读写与文件读写
@@ -15599,7 +16535,9 @@
         </member>
         <member name="M:ASEva.Utility.Serializer.ObjectToXml(System.Object)">
             \~English
-            
+            <summary>
+            Convert object to XML string
+            </summary>
             \~Chinese
             <summary>
             对象转XML字符串
@@ -15607,7 +16545,9 @@
         </member>
         <member name="M:ASEva.Utility.Serializer.XmlToObject(System.String,System.Type)">
             \~English
-            
+            <summary>
+            Convert XML string to object
+            </summary>
             \~Chinese
             <summary>
             XML字符串转对象
@@ -15615,7 +16555,9 @@
         </member>
         <member name="M:ASEva.Utility.Serializer.ObjectToXmlFile(System.Object,System.String)">
             \~English
-            
+            <summary>
+            Write object to XML file
+            </summary>
             \~Chinese
             <summary>
             对象写入XML文件
@@ -15623,7 +16565,9 @@
         </member>
         <member name="M:ASEva.Utility.Serializer.XmlFileToObject(System.String,System.Type)">
             \~English
-            
+            <summary>
+            Load object from XML file
+            </summary>
             \~Chinese
             <summary>
             从XML文件读取对象
@@ -15631,7 +16575,9 @@
         </member>
         <member name="M:ASEva.Utility.Serializer.ObjectToJson(System.Object)">
             \~English
-            
+            <summary>
+            Convert object to Json String
+            </summary>
             \~Chinese
             <summary>
             对象转JSON字符串
@@ -15639,7 +16585,9 @@
         </member>
         <member name="M:ASEva.Utility.Serializer.JsonToObject(System.String,System.Type)">
             \~English
-            
+            <summary>
+            Convert Json string to object
+            </summary>
             \~Chinese
             <summary>
             JSON字符串转对象
@@ -15647,7 +16595,9 @@
         </member>
         <member name="M:ASEva.Utility.Serializer.ObjectToJsonFile(System.Object,System.String)">
             \~English
-            
+            <summary>
+            Write object to Json file
+            </summary>
             \~Chinese
             <summary>
             对象写入JSON文件
@@ -15655,7 +16605,9 @@
         </member>
         <member name="M:ASEva.Utility.Serializer.JsonFileToObject(System.String,System.Type)">
             \~English
-            
+            <summary>
+            Load object from Json file
+            </summary>
             \~Chinese
             <summary>
             从JSON文件读取对象
@@ -15663,7 +16615,9 @@
         </member>
         <member name="T:ASEva.Utility.SessionMeta">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Session's meta info
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) Session的meta信息
@@ -15671,7 +16625,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.FilePath">
             \~English
-            
+            <summary>
+            File path
+            </summary>
             \~Chinese
             <summary>
             文件路径
@@ -15679,7 +16635,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.ID">
             \~English
-            
+            <summary>
+            Session ID
+            </summary>
             \~Chinese
             <summary>
             Session ID
@@ -15687,7 +16645,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.GUID">
             \~English
-            
+            <summary>
+            Session GUID
+            </summary>
             \~Chinese
             <summary>
             Session GUID
@@ -15695,7 +16655,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.Length">
             \~English
-            
+            <summary>
+            Session's duration, in seconds
+            </summary>
             \~Chinese
             <summary>
             Session长度，单位秒
@@ -15703,7 +16665,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.CPUTimeModel">
             \~English
-            
+            <summary>
+            CPU time model
+            </summary>
             \~Chinese
             <summary>
             CPU时间模型
@@ -15711,7 +16675,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.HostPosixModel">
             \~English
-            
+            <summary>
+            Host machine posix time model
+            </summary>
             \~Chinese
             <summary>
             主机Posix时间模型
@@ -15719,7 +16685,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.GNSSPosixModel">
             \~English
-            
+            <summary>
+            Satellite posix time model
+            </summary>
             \~Chinese
             <summary>
             卫星Posix时间模型
@@ -15727,7 +16695,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.HostSync">
             \~English
-            
+            <summary>
+            Whether host machine is synchronized with time server while recording session
+            </summary>
             \~Chinese
             <summary>
             主机是否与授时服务器同步
@@ -15735,7 +16705,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.Comment">
             \~English
-            
+            <summary>
+            Session's comment
+            </summary>
             \~Chinese
             <summary>
             Session的注释说明
@@ -15743,7 +16715,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.Pick">
             \~English
-            
+            <summary>
+            Session's pick ID, "origin" means it's the original data
+            </summary>
             \~Chinese
             <summary>
             Session的截取ID，origin表示原始数据
@@ -15751,7 +16725,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.PickProperties">
             \~English
-            
+            <summary>
+            Session's properties of picking
+            </summary>
             \~Chinese
             <summary>
             Session的截取属性列表
@@ -15759,7 +16735,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.Properties">
             \~English
-            
+            <summary>
+            Session's properties
+            </summary>
             \~Chinese
             <summary>
             Session的属性
@@ -15767,7 +16745,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.Versions">
             \~English
-            
+            <summary>
+            Versions of software that recorded the session
+            </summary>
             \~Chinese
             <summary>
             采集Session的软件版本信息（用于回溯）
@@ -15775,7 +16755,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.StartTimeLocal">
             \~English
-            
+            <summary>
+            Session's start time of host machine posix time model in local date and time
+            </summary>
             \~Chinese
             <summary>
             按本地时间表示的主机Posix时间模型的session开始时间
@@ -15783,7 +16765,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.TimeRatioToLocal">
             \~English
-            
+            <summary>
+            Session's time ratio of host machine posix time model
+            </summary>
             \~Chinese
             <summary>
             主机Posix时间模型的时间比例
@@ -15791,7 +16775,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.StartTimeUTC">
             \~English
-            
+            <summary>
+            Session's start time of satellite posix time model in UTC date and time
+            </summary>
             \~Chinese
             <summary>
             按UTC时间表示的卫星Posix时间模型的session开始时间
@@ -15799,7 +16785,9 @@
         </member>
         <member name="P:ASEva.Utility.SessionMeta.TimeRatioToUTC">
             \~English
-            
+            <summary>
+            Session's time ratio of satellite posix time model
+            </summary>
             \~Chinese
             <summary>
             卫星Posix时间模型的时间比例
@@ -15807,7 +16795,23 @@
         </member>
         <member name="M:ASEva.Utility.SessionMeta.Create(System.String,System.DateTime,System.String,System.Nullable{System.Double},System.Nullable{System.DateTime},System.Double,System.Nullable{System.DateTime},System.Double,System.String,System.Collections.Generic.Dictionary{System.String,System.Version},System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
             \~English
-            
+            <summary>
+            Create session meta object (not write to file)
+            </summary>
+            <param name="filePath">File path</param>
+            <param name="id">Session ID</param>
+            <param name="guid">Session GUID</param>
+            <param name="length">Session's duration</param>
+            <param name="startTimeUTC">Session's start time of satellite posix time model in UTC date and time</param>
+            <param name="timeRatioToUTC">Session's time ratio of satellite posix time model</param>
+            <param name="startTimeLocal">Session's start time of host machine posix time model in local date and time</param>
+            <param name="timeRatioToLocal">Session's time ratio of host machine posix time model</param>
+            <param name="comment">Session's comment</param>
+            <param name="versions">Versions of software that recorded the session</param>
+            <param name="props">Session's properties</param>
+            <param name="pick">Session's pick ID, "origin" means it's the original data</param>
+            <param name="pickProps">Session's properties of picking</param>
+            <returns>Created session meta object</returns>
             \~Chinese
             <summary>
             创建meta文件对象（仅创建对象，不写入文件）
@@ -15829,7 +16833,23 @@
         </member>
         <member name="M:ASEva.Utility.SessionMeta.Create(System.String,System.DateTime,System.String,System.Nullable{System.Double},ASEva.CPUTimeModel,ASEva.PosixTimeModel,ASEva.PosixTimeModel,System.Boolean,System.String,System.Collections.Generic.Dictionary{System.String,System.Version},System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
             \~English
-            
+            <summary>
+            (api:app=2.7.0) Create session meta object (not write to file)
+            </summary>
+            <param name="filePath">File path</param>
+            <param name="id">Session ID</param>
+            <param name="guid">Session GUID</param>
+            <param name="length">Session's duration</param>
+            <param name="cpuTimeModel">CPU time model</param>
+            <param name="hostPosixModel">Host machine posix time model</param>
+            <param name="gnssPosixModel">Satellite posix time model</param>
+            <param name="hostSync">Whether host machine is synchronized with time server</param>
+            <param name="comment">Session's comment</param>
+            <param name="versions">Versions of software that recorded the session</param>
+            <param name="props">Session's properties</param>
+            <param name="pick">Session's pick ID, "origin" means it's the original data</param>
+            <param name="pickProps">Session's properties of picking</param>
+            <returns>Created session meta object</returns>
             \~Chinese
             <summary>
             (api:app=2.7.0) 创建meta文件对象（仅创建对象，不写入文件）
@@ -15851,7 +16871,11 @@
         </member>
         <member name="M:ASEva.Utility.SessionMeta.Load(System.String)">
             \~English
-            
+            <summary>
+            Load from file
+            </summary>
+            <param name="filePath">File path</param>
+            <returns>Created session meta object</returns>
             \~Chinese
             <summary>
             从已有meta文件中读取
@@ -15861,7 +16885,9 @@
         </member>
         <member name="M:ASEva.Utility.SessionMeta.Save">
             \~English
-            
+            <summary>
+            Save to file
+            </summary>
             \~Chinese
             <summary>
             保存meta文件
@@ -15869,7 +16895,9 @@
         </member>
         <member name="T:ASEva.Utility.StringParsing">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Conversion of string
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 字符串与数据相互转换
@@ -15877,7 +16905,9 @@
         </member>
         <member name="T:ASEva.Utility.TextResource">
             \~English
-            
+            <summary>
+            (api:app=2.1.0) Multi-language text resource
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.1.0) 多语言文本资源
@@ -15885,7 +16915,12 @@
         </member>
         <member name="M:ASEva.Utility.TextResource.Load(System.String,System.String)">
             \~English
-            
+            <summary>
+            Load the resource
+            </summary>
+            <param name="xmlFileName">Resource name</param>
+            <param name="languageCode">Language code, "en" is English, "ch" is Chinese, set to null to get by ASEva.Agency.GetAppLanguage internally</param>
+            <returns>Multi-language text resource object, null if failed to load</returns>
             \~Chinese
             <summary>
             加载多语言文本资源
@@ -15896,7 +16931,12 @@
         </member>
         <member name="M:ASEva.Utility.TextResource.Load(System.Byte[],System.String)">
             \~English
-            
+            <summary>
+            (api:app=2.6.14) Load from binary data
+            </summary>
+            <param name="xmlFileData">XML binary data</param>
+            <param name="languageCode">Language code, "en" is English, "ch" is Chinese, set to null to get by ASEva.Agency.GetAppLanguage internally</param>
+            <returns>Multi-language text resource object, null if failed to load</returns>
             \~Chinese
             <summary>
             (api:app=2.6.14) 从XML文件数据加载多语言文本资源
@@ -15907,7 +16947,10 @@
         </member>
         <member name="P:ASEva.Utility.TextResource.Item(System.String)">
             \~English
-            
+            <summary>
+            Get the text with the ID
+            </summary>
+            <value>Text ID</value>
             \~Chinese
             <summary>
             获取指定ID对应的文本
@@ -15916,7 +16959,12 @@
         </member>
         <member name="M:ASEva.Utility.TextResource.Format(System.String,System.Object[])">
             \~English
-            
+            <summary>
+            Get the format text with the ID and use it to create the final text
+            </summary>
+            <param name="id">Text ID</param>
+            <param name="args">Arguments for the formats</param>
+            <returns>Output text</returns>
             \~Chinese
             <summary>
             以指定ID对应的文本作为格式描述，输出文本
@@ -15927,7 +16975,9 @@
         </member>
         <member name="T:ASEva.Utility.TimeoutWebClient">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) WebClient with Timeout property
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 带Timeout属性的WebClient
@@ -15935,7 +16985,9 @@
         </member>
         <member name="P:ASEva.Utility.TimeoutWebClient.Timeout">
             \~English
-            
+            <summary>
+            Timeout, in milliseconds
+            </summary>
             \~Chinese
             <summary>
             超时，单位毫秒
@@ -15943,7 +16995,9 @@
         </member>
         <member name="M:ASEva.Utility.TimeoutWebClient.#ctor">
             \~English
-            
+            <summary>
+            Default constructor, default timeout is 5 seconds
+            </summary>
             \~Chinese
             <summary>
             构造函数，默认超时5秒
@@ -15951,7 +17005,9 @@
         </member>
         <member name="T:ASEva.Utility.TriggerFilter">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) Filter boolean signals and extract rising edge
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) 二值化信号滤波并提取上升沿
@@ -15959,7 +17015,9 @@
         </member>
         <member name="T:ASEva.Utility.Xml">
             \~English
-            
+            <summary>
+            (api:app=2.0.0) XML utility
+            </summary>
             \~Chinese
             <summary>
             (api:app=2.0.0) XML相关功能类
@@ -15967,7 +17025,11 @@
         </member>
         <member name="M:ASEva.Utility.Xml.Create(System.String)">
             \~English
-            
+            <summary>
+            Create a XmlDocument object with a root node
+            </summary>
+            <param name="rootTag">Tag name of root node</param>
+            <returns>Created XmlDocument object</returns>
             \~Chinese
             <summary>
             创建一个包含根节点的空XML文档

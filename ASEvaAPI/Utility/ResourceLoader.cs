@@ -4,8 +4,12 @@ using System.Reflection;
 
 namespace ASEva.Utility
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Resource loader
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 资源读取器
@@ -13,7 +17,11 @@ namespace ASEva.Utility
     public class ResourceLoader
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Load the resource with the name
+        /// </summary>
+        /// <param name="name">Resource name</param>
+        /// <returns>Resource data, null if not found</returns>
         /// \~Chinese
         /// <summary>
         /// 按指定名称读取资源
@@ -33,7 +41,11 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.0.8) Load the resource with the name (UTF-8 data), and convert to text
+        /// </summary>
+        /// <param name="name">Resource name</param>
+        /// <returns>Loaded text, null if not found</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.0.8) 按指定名称读取资源（UTF-8文本），并转为文本

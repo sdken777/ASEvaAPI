@@ -3,7 +3,9 @@
 namespace ASEva.Utility
 {
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Result of miss detection / false detection
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 漏检/误检结果
@@ -15,7 +17,9 @@ namespace ASEva.Utility
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Statistics of miss detection / false detection
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 漏检/误检分析与统计

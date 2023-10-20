@@ -2,8 +2,12 @@
 
 namespace ASEva.Utility
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Coordinates of longitude and latitude
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 经纬度坐标
@@ -11,7 +15,9 @@ namespace ASEva.Utility
     public struct LocPoint
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Longitude
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 经度
@@ -19,7 +25,9 @@ namespace ASEva.Utility
         public double Lng { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Latitude
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 纬度
@@ -28,7 +36,9 @@ namespace ASEva.Utility
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Parameters of orthogonal coordinate system
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 正交坐标系参数
@@ -36,7 +46,9 @@ namespace ASEva.Utility
     public class OrthoParameters
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Longitude of the orthogonal coordinate system's origin
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 原点经度
@@ -44,7 +56,9 @@ namespace ASEva.Utility
         public double OrthoCenterLng { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Latitude of the orthogonal coordinate system's origin
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 原点纬度
@@ -52,7 +66,9 @@ namespace ASEva.Utility
         public double OrthoCenterLat { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Sphere's radius
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 球半径
@@ -60,7 +76,9 @@ namespace ASEva.Utility
         public double OrthoRadius { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Default constructor, default origin is (0, 0) and use the earth's radius
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 构造函数，默认原点为(0, 0)，默认球半径为地球半径
@@ -74,7 +92,9 @@ namespace ASEva.Utility
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Conversion of orthogonal coordinates
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 正交坐标系变换
@@ -82,7 +102,10 @@ namespace ASEva.Utility
     public class OrthoTransform
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="param">Parameters of orthogonal coordinate system</param>
         /// \~Chinese
         /// <summary>
         /// 构造函数
@@ -100,7 +123,11 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Convert global coordinates to orthogonal coordinates
+        /// </summary>
+        /// <param name="src">Global coordinates</param>
+        /// <returns>Orthogonal coordinates</returns>
         /// \~Chinese
         /// <summary>
         /// 全球坐标系转正交坐标系
@@ -118,7 +145,11 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Convert orthogonal coordinates to global coordinates
+        /// </summary>
+        /// <param name="src">Orthogonal coordinates</param>
+        /// <returns>Global coordinates</returns>
         /// \~Chinese
         /// <summary>
         /// 正交坐标系转全球坐标系

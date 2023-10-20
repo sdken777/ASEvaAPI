@@ -3,8 +3,12 @@ using System.Xml;
 
 namespace ASEva.Utility
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) XML utility
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) XML相关功能类
@@ -12,7 +16,11 @@ namespace ASEva.Utility
     public class Xml
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Create a XmlDocument object with a root node
+        /// </summary>
+        /// <param name="rootTag">Tag name of root node</param>
+        /// <returns>Created XmlDocument object</returns>
         /// \~Chinese
         /// <summary>
         /// 创建一个包含根节点的空XML文档

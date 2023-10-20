@@ -3,7 +3,9 @@
 namespace ASEva.Utility
 {
 	/// \~English
-	/// 
+	/// <summary>
+	/// (api:app=2.0.0) Filter boolean signals and extract rising edge
+	/// </summary>
 	/// \~Chinese
 	/// <summary>
 	/// (api:app=2.0.0) 二值化信号滤波并提取上升沿

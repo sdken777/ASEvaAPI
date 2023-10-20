@@ -5,6 +5,8 @@ using System.Xml;
 
 namespace ASEva.Utility
 {
+    #pragma warning disable CS1571
+
     /// \~English
     /// <summary>
     /// (api:app=2.0.0) Generation's processing status
@@ -47,7 +49,9 @@ namespace ASEva.Utility
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Object for reading and writing generation's info file (info.xml)
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 读写Generation的信息文件(info.xml)
@@ -55,7 +59,9 @@ namespace ASEva.Utility
     public class GenerationInfo
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// File path
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 文件路径
@@ -63,7 +69,9 @@ namespace ASEva.Utility
         public String FilePath { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Generation ID
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// Generation ID
@@ -71,7 +79,9 @@ namespace ASEva.Utility
         public String GenerationID { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Processing status info
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 状态信息
@@ -79,7 +89,9 @@ namespace ASEva.Utility
         public GenerationProcessStatus ProcessStatus { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Dictionary of sample alias
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 样本别名表
@@ -87,7 +99,9 @@ namespace ASEva.Utility
         public Dictionary<string, string> SampleAlias { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Versions of software that created the generation
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 创建Generation的软件版本信息（用于回溯）
@@ -95,7 +109,9 @@ namespace ASEva.Utility
         public Dictionary<string, Version> Versions { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Generation update logs
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// Generation更新记录
@@ -103,7 +119,9 @@ namespace ASEva.Utility
         public Dictionary<DateTime, string> UpdateLogs { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.12.0) Satellite posix time model used while creating the generation
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.12.0) Generation生成时使用或覆盖的卫星Posix时间模型
@@ -111,7 +129,9 @@ namespace ASEva.Utility
         public PosixTimeModel GNSSPosixModel { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.12.0) Whether host machine is synchronized with time server while creating the generation
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.12.0) Generation生成时主机是否配置为与授时服务器同步
@@ -119,7 +139,9 @@ namespace ASEva.Utility
         public bool HostSync { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.12.0) IDs of the guest synchronized with time server while creating the generation
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.12.0) Generation生成时被配置为与授时服务器同步的所有客机同步ID
@@ -131,7 +153,14 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Create generation info object (Not write to file)
+        /// </summary>
+        /// <param name="filePath">File path</param>
+        /// <param name="generationID">Generation ID</param>
+        /// <param name="status">Processing status</param>
+        /// <param name="versions">Versions of software that created the generation</param>
+        /// <returns>Created generation info object</returns>
         /// \~Chinese
         /// <summary>
         /// 创建信息文件对象（仅创建对象，不写入文件）
@@ -147,7 +176,16 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Create generation info object (Not write to file)
+        /// </summary>
+        /// <param name="filePath">File path</param>
+        /// <param name="generationID">Generation ID</param>
+        /// <param name="status">Processing status</param>
+        /// <param name="sampleAlias">Dictionary of sample alias</param>
+        /// <param name="versions">Versions of software that created the generation</param>
+        /// <param name="updateLogs">Generation's update logs</param>
+        /// <returns>Created generation info object</returns>
         /// \~Chinese
         /// <summary>
         /// 创建信息文件对象（仅创建对象，不写入文件）
@@ -165,7 +203,19 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.12.0) Create generation info object (Not write to file)
+        /// </summary>
+        /// <param name="filePath">File path</param>
+        /// <param name="generationID">Generation ID</param>
+        /// <param name="status">Processing status</param>
+        /// <param name="sampleAlias">Dictionary of sample alias</param>
+        /// <param name="versions">Versions of software that created the generation</param>
+        /// <param name="updateLogs">Generation's update logs</param>
+        /// <param name="gnssPosixModel">Satellite posix time model used while creating the generation</param>
+        /// <param name="hostSync">Whether host machine is synchronized with time server while creating the generation</param>
+        /// <param name="guestSyncIDs">IDs of the guest synchronized with time server while creating the generation</param>
+        /// <returns>Created generation info object</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.12.0) 创建信息文件对象（仅创建对象，不写入文件）
@@ -199,7 +249,11 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Load from file
+        /// </summary>
+        /// <param name="filePath">File path</param>
+        /// <returns>Created generation info object</returns>
         /// \~Chinese
         /// <summary>
         /// 从已有信息文件中读取
@@ -304,7 +358,9 @@ namespace ASEva.Utility
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Save to file
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 保存信息文件
