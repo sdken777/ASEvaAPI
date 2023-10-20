@@ -29,7 +29,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Session belonged
+        /// The session that scenario belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>

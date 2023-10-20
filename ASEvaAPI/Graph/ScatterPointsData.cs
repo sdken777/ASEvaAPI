@@ -457,7 +457,7 @@ namespace ASEva.Graph
         /// Add sample point with time info
         /// </summary>
         /// <param name="point">Sample point, do nothing if over the range</param>
-        /// <param name="session">The session belonged</param>
+        /// <param name="session">The session that it belongs to</param>
         /// <param name="offset">The time offset of the sample in the session</param>
         /// \~Chinese
         /// <summary>
@@ -533,7 +533,7 @@ namespace ASEva.Graph
         /// Get time info of a scatter point
         /// </summary>
         /// <param name="index">Index of scatter point</param>
-        /// <param name="session">Output the session belonged</param>
+        /// <param name="session">Output the session that it belongs to</param>
         /// <param name="offset">Output the time offset of the sample in the session</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese

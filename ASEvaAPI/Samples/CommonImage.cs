@@ -4,8 +4,12 @@ using System.Reflection;
 
 namespace ASEva.Samples
 {
+    #pragma warning disable CS1571
+
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.3.0) Common image data
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.3.0) 通用图像数据
@@ -13,7 +17,9 @@ namespace ASEva.Samples
     public class CommonImage
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Image width
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 图像宽度
@@ -21,7 +27,9 @@ namespace ASEva.Samples
         public int Width { get { return width; } }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Image height
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 图像高度
@@ -29,7 +37,9 @@ namespace ASEva.Samples
         public int Height { get { return height; } }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether alpha channel included
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否含有Alpha通道
@@ -37,7 +47,9 @@ namespace ASEva.Samples
         public bool WithAlpha { get { return withAlpha; } }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.8.5) Whether BGR inverted
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.8.5) BGR是否逆序
@@ -45,7 +57,9 @@ namespace ASEva.Samples
         public bool BgrInverted { get { return bgrInverted; } }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Number of bytes for each row
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 每行数据字节数
@@ -53,7 +67,9 @@ namespace ASEva.Samples
         public int RowBytes { get { return rowBytes; } }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Image data, in order of BGR or BGRA (If inverted, it's  RGB or RGBA)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 图像数据，每个像素的存放顺序为BGR或BGRA（若BGR逆序则为RGB或RGBA）
@@ -61,7 +77,13 @@ namespace ASEva.Samples
         public byte[] Data { get { return data; } }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Create common image
+        /// </summary>
+        /// <param name="width">Image width</param>
+        /// <param name="height">Image height</param>
+        /// <param name="withAlpha">Whether to include alpha channel</param>
+        /// <returns>Common image object</returns>
         /// \~Chinese
         /// <summary>
         /// 创建通用图像数据
@@ -88,7 +110,14 @@ namespace ASEva.Samples
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Create common image
+        /// </summary>
+        /// <param name="width">Image width</param>
+        /// <param name="height">Image height</param>
+        /// <param name="withAlpha">Whether to include alpha channel</param>
+        /// <param name="bgrInverted">Whether BGR inverted</param>
+        /// <returns>Common image object</returns>
         /// \~Chinese
         /// <summary>
         /// 创建通用图像数据
@@ -116,7 +145,11 @@ namespace ASEva.Samples
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Depend on Agency] Load from file
+        /// </summary>
+        /// <param name="filePath">File path</param>
+        /// <returns>Common image object</returns>
         /// \~Chinese
         /// <summary>
         /// [依赖Agency] 从文件读取图像
@@ -144,7 +177,11 @@ namespace ASEva.Samples
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Depend on Agency] Load from resource
+        /// </summary>
+        /// <param name="resourceName">Resource name</param>
+        /// <returns>Common image object</returns>
         /// \~Chinese
         /// <summary>
         /// [依赖Agency] 从资源读取图像
@@ -164,7 +201,11 @@ namespace ASEva.Samples
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.4.1) [Depend on Agency] Create from image binary data
+        /// </summary>
+        /// <param name="binary">Image binary data, like jpeg, png, etc.</param>
+        /// <returns>Common image object</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.4.1) [依赖Agency] 从图像二进制数据转换
@@ -178,7 +219,11 @@ namespace ASEva.Samples
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// [Depend on Agency] Save to file
+        /// </summary>
+        /// <param name="filePath">File path</param>
+        /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
         /// [依赖Agency] 保存至文件
@@ -211,7 +256,11 @@ namespace ASEva.Samples
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.4.1) [Depend on Agency] Convert to image binary data
+        /// </summary>
+        /// <param name="format">Target format, only "jpg" and "png" supported</param>
+        /// <returns>Image binary data</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.4.1) [依赖Agency] 转为图像二进制数据
@@ -226,7 +275,11 @@ namespace ASEva.Samples
         }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.8.6) Convert to/from BGR inverted image
+        /// </summary>
+        /// <param name="targetInverted">Whether BGR inverted</param>
+        /// <returns>Converted image</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.8.6) 转换为BGR逆序或不逆序的图像对象

@@ -370,7 +370,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.2) Session belonged
+        /// (api:app=2.7.2) The session that sample belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>
@@ -383,7 +383,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Session belonged (Be aware that "set" operation will clear session independent time info)
+        /// The session that sample belongs to (Be aware that "set" operation will clear session independent time info)
         /// </summary>
         /// \~Chinese
         /// <summary>
@@ -425,7 +425,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Agency dependency] Calculate local date and time based on host machine posix time model
+        /// [Depend on Agency] Calculate local date and time based on host machine posix time model
         /// </summary>
         /// \~Chinese
         /// <summary>
@@ -441,7 +441,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Agency dependency] Calculate UTC date and time based on satellite posix time model
+        /// [Depend on Agency] Calculate UTC date and time based on satellite posix time model
         /// </summary>
         /// \~Chinese
         /// <summary>
@@ -473,7 +473,7 @@ namespace ASEva
         /// <summary>
         /// Constructor based on time information
         /// </summary>
-        /// <param name="session">Session belonged</param>
+        /// <param name="session">The session that sample belongs to</param>
         /// <param name="offset">Time offset, in seconds</param>
         /// <param name="timeline">Timeline point</param>
         /// \~Chinese
@@ -493,7 +493,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.7.0) Constructor based on time information
         /// </summary>
-        /// <param name="session">Session belonged</param>
+        /// <param name="session">The session that sample belongs to</param>
         /// <param name="offset">Time offset, in seconds</param>
         /// <param name="timeInfo">Session independent time info</param>
         /// <param name="timeline">Timeline point</param>
@@ -515,7 +515,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.7.0) Set time information
         /// </summary>
-        /// <param name="session">Session belonged</param>
+        /// <param name="session">The session that sample belongs to</param>
         /// <param name="offset">Time offset, in seconds</param>
         /// <param name="timeInfo">Session independent time info</param>
         /// <param name="timeline">Timeline point</param>

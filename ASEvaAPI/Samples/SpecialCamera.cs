@@ -114,7 +114,9 @@ namespace ASEva.Samples
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Common part of camera info (Pinhole model)
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 摄像头信息共通部分（标准模型）
@@ -122,7 +124,9 @@ namespace ASEva.Samples
     public class CommonCameraMeta
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether inverted
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否作了翻转
@@ -130,7 +134,9 @@ namespace ASEva.Samples
         public bool Inverted { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether vertical flipped
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否作了镜像
@@ -138,7 +144,9 @@ namespace ASEva.Samples
         public bool VFlipped { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether undistorted
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否作了去畸变
@@ -146,7 +154,9 @@ namespace ASEva.Samples
         public bool Undistorted { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.12.2) Horizontal FOV of ideal pinhole model after undistorted [deg]
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.12.2) 去畸变后的理想针孔模型图像的横向视场角 [deg]
@@ -154,7 +164,9 @@ namespace ASEva.Samples
         public double UndistortedHFOV { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Aspect ratio (width/height)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 像素尺寸横纵比
@@ -162,7 +174,9 @@ namespace ASEva.Samples
         public double AR { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Normalized U coordinate of optical axis
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 归一化视轴u坐标
@@ -170,7 +184,9 @@ namespace ASEva.Samples
         public double CU { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Normalized V coordinate of optical axis
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 归一化视轴v坐标
@@ -178,7 +194,9 @@ namespace ASEva.Samples
         public double CV { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Distortion coefficient K1
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 畸变参数K1
@@ -186,7 +204,9 @@ namespace ASEva.Samples
         public double K1 { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Distortion coefficient K2
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 畸变参数K2
@@ -194,7 +214,9 @@ namespace ASEva.Samples
         public double K2 { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Distortion coefficient P1
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 畸变参数P1
@@ -202,7 +224,9 @@ namespace ASEva.Samples
         public double P1 { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Distortion coefficient P2
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 畸变参数P2
@@ -210,40 +234,50 @@ namespace ASEva.Samples
         public double P2 { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.2.4) Distortion coefficient K3
+        /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.2.4) K3
+        /// (api:app=2.2.4) 畸变参数K3
         /// </summary>
         public double K3 { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.2.4) Distortion coefficient K4
+        /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.2.4) K4
+        /// (api:app=2.2.4) 畸变参数K4
         /// </summary>
         public double K4 { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.2.4) Distortion coefficient K5
+        /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.2.4) K5
+        /// (api:app=2.2.4) 畸变参数K5
         /// </summary>
         public double K5 { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.2.4) Distortion coefficient K6
+        /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.2.4) K6
+        /// (api:app=2.2.4) 畸变参数K6
         /// </summary>
         public double K6 { get; set; }
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Related information of default camera (Pinhole model)
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 默认摄像头关联信息（标准模型）
@@ -251,7 +285,9 @@ namespace ASEva.Samples
     public class DefaultCameraMeta
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Common part
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 共同部分
@@ -260,7 +296,9 @@ namespace ASEva.Samples
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Related information of generic parameterized camera (Pinhole model)
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 泛用参数摄像头关联信息（标准模型）
@@ -268,7 +306,9 @@ namespace ASEva.Samples
     public class GenericCameraMeta
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Common part
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 共通部分
@@ -276,7 +316,9 @@ namespace ASEva.Samples
         public CommonCameraMeta Common { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// X coordinate of position [m]
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 位置坐标X轴分量 [m]
@@ -284,7 +326,9 @@ namespace ASEva.Samples
         public double PositionX { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Y coordinate of position [m]
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 位置坐标Y轴分量 [m]
@@ -292,7 +336,9 @@ namespace ASEva.Samples
         public double PositionY { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Z coordinate of position [m]
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 位置坐标Z轴分量 [m]
@@ -300,7 +346,9 @@ namespace ASEva.Samples
         public double PositionZ { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether yaw rectified
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否作了横摆对正
@@ -308,7 +356,9 @@ namespace ASEva.Samples
         public bool YawRectified { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Original yaw angle [°]
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 原横摆角 [°]
@@ -316,7 +366,9 @@ namespace ASEva.Samples
         public double OriginYaw { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Yaw angle after rectified [°]
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 对正后的横摆角 [°]
@@ -324,7 +376,9 @@ namespace ASEva.Samples
         public double RectifiedYaw { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether pitch rectified
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否作了俯仰对正
@@ -332,7 +386,9 @@ namespace ASEva.Samples
         public bool PitchRectified { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Original pitch angle
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 原俯仰角 [°]
@@ -340,7 +396,9 @@ namespace ASEva.Samples
         public double OriginPitch { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether roll rectified
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否作了横滚对正
@@ -348,7 +406,9 @@ namespace ASEva.Samples
         public bool RollRectified { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Original roll angle
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 原横滚角 [°]
@@ -356,7 +416,9 @@ namespace ASEva.Samples
         public double OriginRoll { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Yaw offset by shake detection (only valid for some cameras)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 抖动偏置横摆角（仅部分摄像头有效）
@@ -364,7 +426,9 @@ namespace ASEva.Samples
         public double ShakeYaw { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Pitch offset by shake detection (only valid for some cameras)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 抖动偏置俯仰角（仅部分摄像头有效）
@@ -373,7 +437,9 @@ namespace ASEva.Samples
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Related information of lane line camera (Pinhole model)
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 车道线摄像头关联信息（标准模型）
@@ -381,7 +447,9 @@ namespace ASEva.Samples
     public class LaneLineCameraMeta
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether it's on the right side
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否在右侧
@@ -389,7 +457,9 @@ namespace ASEva.Samples
         public bool IsRightSide { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Common part
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 共通部分
@@ -397,7 +467,9 @@ namespace ASEva.Samples
         public CommonCameraMeta Common { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Length of one-unit [m]
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 单位点长度 [m]
@@ -405,7 +477,9 @@ namespace ASEva.Samples
         public float MeterScale { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Position of the zero point
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 零点位置
@@ -413,7 +487,9 @@ namespace ASEva.Samples
         public FloatPoint ZeroPosition { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Position of the one-unit point
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 单位点位置
@@ -421,7 +497,9 @@ namespace ASEva.Samples
         public FloatPoint MeterPosition { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Ratio of the center point
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 半长占比
@@ -430,7 +508,9 @@ namespace ASEva.Samples
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.0.0) Related information of blind spot camera (Pinhole model)
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 盲区摄像头关联信息（标准模型）
@@ -438,7 +518,9 @@ namespace ASEva.Samples
     public class BlindSpotCameraMeta
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether it's on the right side
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否在右侧
@@ -446,7 +528,9 @@ namespace ASEva.Samples
         public bool IsRightSide { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Common part
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 共通部分
@@ -454,7 +538,9 @@ namespace ASEva.Samples
         public CommonCameraMeta Common { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Position of P00
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// P00位置
@@ -462,7 +548,9 @@ namespace ASEva.Samples
         public FloatPoint P00Position { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Position of P04
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// P04位置
@@ -470,7 +558,9 @@ namespace ASEva.Samples
         public FloatPoint P04Position { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Position of P30
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// P30位置
@@ -478,7 +568,9 @@ namespace ASEva.Samples
         public FloatPoint P30Position { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Position of P34
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// P34位置
@@ -486,40 +578,50 @@ namespace ASEva.Samples
         public FloatPoint P34Position { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Ratio of P0h
+        /// </summary>
         /// \~Chinese
         /// <summary>
-        /// P0X半长占比
+        /// P0h半长占比
         /// </summary>
         public float P0HRatio { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Ratio of P3h
+        /// </summary>
         /// \~Chinese
         /// <summary>
-        /// P3X半长占比
+        /// P3h半长占比
         /// </summary>
         public float P3HRatio { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Ratio of Ph0
+        /// </summary>
         /// \~Chinese
         /// <summary>
-        /// PX0半长占比
+        /// Ph0半长占比
         /// </summary>
         public float PH0Ratio { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Ratio of Ph4
+        /// </summary>
         /// \~Chinese
         /// <summary>
-        /// PX4半长占比
+        /// Ph4半长占比
         /// </summary>
         public float PH4Ratio { get; set; }
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.1.2) Related information of fisheye camera (Fisheye model)
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.1.2) 鱼眼摄像头关联信息（鱼眼模型）
@@ -527,7 +629,9 @@ namespace ASEva.Samples
     public class FisheyeCameraMeta
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether inverted
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否作了翻转
@@ -535,7 +639,9 @@ namespace ASEva.Samples
         public bool Inverted { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether vertical flipped
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否作了镜像
@@ -543,7 +649,9 @@ namespace ASEva.Samples
         public bool VFlipped { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether undistorted
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否作了去畸变
@@ -551,7 +659,9 @@ namespace ASEva.Samples
         public bool Undistorted { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// (api:app=2.12.2) Horizontal FOV of ideal pinhole model after undistorted [deg]
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.12.2) 去畸变后的理想针孔模型图像的横向视场角 [deg]
@@ -559,7 +669,9 @@ namespace ASEva.Samples
         public double UndistortedHFOV { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Horizontal FOV of ideal fisheye model [deg]
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 理想鱼眼模型横向视场角 [deg]
@@ -567,7 +679,9 @@ namespace ASEva.Samples
         public double HFOVFisheye { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Aspect ratio (width/height)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 像素尺寸横纵比
@@ -575,7 +689,9 @@ namespace ASEva.Samples
         public double AR { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Normalized U coordinate of optical axis
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 归一化视轴u坐标
@@ -583,7 +699,9 @@ namespace ASEva.Samples
         public double CU { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Normalized V coordinate of optical axis
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 归一化视轴v坐标
@@ -591,7 +709,9 @@ namespace ASEva.Samples
         public double CV { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Distortion coefficient K1
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 畸变参数K1
@@ -599,7 +719,9 @@ namespace ASEva.Samples
         public double K1 { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Distortion coefficient K2
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 畸变参数K2
@@ -607,7 +729,9 @@ namespace ASEva.Samples
         public double K2 { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Distortion coefficient K3
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 畸变参数K3
@@ -615,7 +739,9 @@ namespace ASEva.Samples
         public double K3 { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Distortion coefficient K4
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 畸变参数K4
@@ -623,7 +749,9 @@ namespace ASEva.Samples
         public double K4 { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether there's extrinsic parameters information
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否含有外参信息
@@ -631,7 +759,9 @@ namespace ASEva.Samples
         public bool HasExtrinsicsInfo { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// X coordinate of position [m]
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 位置坐标X轴分量 [m]
@@ -639,7 +769,9 @@ namespace ASEva.Samples
         public double PositionX { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Y coordinate of position [m]
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 位置坐标Y轴分量 [m]
@@ -647,7 +779,9 @@ namespace ASEva.Samples
         public double PositionY { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Z coordinate of position [m]
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 位置坐标Z轴分量 [m]
@@ -655,7 +789,9 @@ namespace ASEva.Samples
         public double PositionZ { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether yaw rectified
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否作了横摆对正
@@ -663,7 +799,9 @@ namespace ASEva.Samples
         public bool YawRectified { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Original yaw angle [°]
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 原横摆角 [°]
@@ -671,7 +809,9 @@ namespace ASEva.Samples
         public double OriginYaw { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Yaw angle after rectified [°]
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 对正后的横摆角 [°]
@@ -679,7 +819,9 @@ namespace ASEva.Samples
         public double RectifiedYaw { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether pitch rectified
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否作了俯仰对正
@@ -687,7 +829,9 @@ namespace ASEva.Samples
         public bool PitchRectified { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Original pitch angle
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 原俯仰角 [°]
@@ -695,7 +839,9 @@ namespace ASEva.Samples
         public double OriginPitch { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Whether roll rectified
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 是否作了横滚对正
@@ -703,7 +849,9 @@ namespace ASEva.Samples
         public bool RollRectified { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Original roll angle
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 原横滚角 [°]
@@ -711,7 +859,9 @@ namespace ASEva.Samples
         public double OriginRoll { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Yaw offset by shake detection (only valid for some cameras)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 抖动偏置横摆角（仅部分摄像头有效）
@@ -719,7 +869,9 @@ namespace ASEva.Samples
         public double ShakeYaw { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Pitch offset by shake detection (only valid for some cameras)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 抖动偏置俯仰角（仅部分摄像头有效）
@@ -728,7 +880,9 @@ namespace ASEva.Samples
     }
 
     /// \~English
-    /// 
+    /// <summary>
+    /// (api:app=2.9.0) Camera information
+    /// </summary>
     /// \~Chinese
     /// <summary>
     /// (api:app=2.9.0) 摄像头信息
@@ -736,7 +890,9 @@ namespace ASEva.Samples
     public class CameraInfo
     {
         /// \~English
-        /// 
+        /// <summary>
+        /// Special camera type
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 特殊摄像头类型
@@ -744,7 +900,9 @@ namespace ASEva.Samples
         public SpecialCameraType SpecialCameraType { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Information of special camera, could be ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 特殊摄像头信息，可以为 ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta
@@ -752,7 +910,9 @@ namespace ASEva.Samples
         public object SpecialCameraInfo { get; set; }
 
         /// \~English
-        /// 
+        /// <summary>
+        /// Horizontal FOV of ideal pinhole model (null if not undistorted)
+        /// </summary>
         /// \~Chinese
         /// <summary>
         /// 标准针孔模型下的横向视场角（未去畸变时为空）

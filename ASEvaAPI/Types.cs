@@ -889,7 +889,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Information of bus message belonged
+        /// Information of the bus message that signal belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>
@@ -960,7 +960,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Information of bus protocol belonged
+        /// Information of the bus protocol that bus message belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>
@@ -1062,7 +1062,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Session belonged
+        /// The session that it belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>
@@ -2330,7 +2330,7 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// ID of plugin pack belonged
+        /// ID of the plugin pack that component belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>
@@ -2421,7 +2421,7 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// ID of plugin pack belonged
+        /// ID of the plugin pack that component belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>
@@ -2502,7 +2502,7 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// ID of plugin pack belonged
+        /// ID of the plugin pack that component belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>
@@ -2614,7 +2614,7 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// ID of plugin pack belonged
+        /// ID of the plugin pack that component belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>
@@ -2675,7 +2675,7 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// ID of plugin pack belonged
+        /// ID of the plugin pack that component belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>
@@ -2716,7 +2716,7 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// ID of plugin pack belonged
+        /// ID of the plugin pack that component belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>

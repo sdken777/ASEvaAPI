@@ -24,7 +24,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Session ID belonged
+        /// The session that event belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>
