@@ -10,7 +10,7 @@ using Eto.CustomControls;
 using Eto.Drawing;
 using System.Threading.Tasks;
 using Microsoft.Web.WebView2.Core;
-using System.IO;
+using System.Reflection;
 
 #if WINFORMS
 using WebView2Control = Microsoft.Web.WebView2.WinForms.WebView2;
@@ -27,6 +27,9 @@ namespace ASEva.UIWpf
 		bool failed;
 		bool webView2Ready;
 		List<Action> delayedActions;
+		CoreWebView2Controller controller;
+		System.Windows.Threading.DispatcherTimer timer;
+		System.Windows.Point lastPos;
 
 		public WebView2Handler()
 		{
@@ -220,6 +223,36 @@ namespace ASEva.UIWpf
 				RunWhenReady(() => LoadHtml(html, baseUri));
 				return;
 			}
+
+            if (controller == null)
+            {
+                controller = Control.GetType().GetProperty("CoreWebView2Controller", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(Control) as CoreWebView2Controller;
+            }
+
+            if (controller != null && timer == null)
+			{
+				timer = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.Normal);
+				timer.Interval = TimeSpan.FromMilliseconds(100);
+				timer.Tick += delegate
+				{
+					try
+					{
+						var curPos = Control.PointToScreen(new System.Windows.Point(0, 0));
+						if (curPos != lastPos)
+						{
+							controller.NotifyParentWindowPositionChanged();
+							lastPos = curPos;
+						}
+					}
+					catch (Exception)
+                    {
+						timer.Stop();
+						timer = null;
+                    }
+				};
+				timer.Start();
+			}
+
 			if (baseUri != null)
 			{
 				if (server == null)
