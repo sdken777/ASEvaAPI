@@ -104,6 +104,8 @@ namespace ASEva.UIMonoMac
 			{
 				Handler = handler;
 				UIDelegate = new EtoUIDelegate { Handler = handler };
+
+				// CHECK: 支持F12弹出开发者调试窗口
 				Configuration.Preferences.SetValueForKey(NSNumber.FromBoolean(true), new NSString("developerExtrasEnabled"));
 			}
 

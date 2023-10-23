@@ -33,6 +33,8 @@ namespace ASEva.UIMonoMac
             platform.Add<UITimer.IHandler>(() => new UITimerHandler());
 
             var app = new Application(platform);
+
+            // CHECK: 点击主窗口关闭按钮后令应用程序退出
             var appHandler = app.Handler as Eto.Mac.Forms.ApplicationHandler;
             appHandler.AppDelegate = new AppDelegate();
 
