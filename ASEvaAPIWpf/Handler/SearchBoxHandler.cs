@@ -5,6 +5,7 @@ namespace ASEva.UIWpf
 {
 	class SearchBoxHandler : TextBoxHandler, SearchBox.IHandler
 	{
+        // CHECK: 增加文字为空时的水印显示
         public SearchBoxHandler()
         {
             var lang = Agency.GetAppLanguage();

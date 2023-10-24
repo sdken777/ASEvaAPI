@@ -38,7 +38,7 @@ namespace ASEva.UIWpf
 				var icon = Convert(Type);
 				var caption = Caption ?? ((parent != null && parent.ParentWindow != null) ? parent.ParentWindow.Title : null);
 
-				// MOD: 修正caption为null则显示"错误"
+				// CHECK: 修正caption为null则显示"错误"
 				if (caption == null) caption = "";
 				if (window != null) result = WpfMessageBox.Show(window, Text, caption, buttons, icon, defaultButton);
 				else result = WpfMessageBox.Show(Text, caption, buttons, icon, defaultButton);

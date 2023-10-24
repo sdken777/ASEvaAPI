@@ -34,7 +34,10 @@ namespace ASEva.UIWpf
 		public WebView2Handler()
 		{
 			Control = new WebView2Control();
+
+			// CHECK: 使用WebView2新版事件，Eto-2.5.11已更正
 			Control.CoreWebView2InitializationCompleted += Control_CoreWebView2Ready;
+
 			InitializeAsync();
 		}
 
@@ -46,6 +49,7 @@ namespace ASEva.UIWpf
 
 		public static CoreWebView2Environment CoreWebView2Environment;
 
+		// CHECK: 简化WebView2环境验证与初始化
 		public static void InitCoreWebView2Environment()
         {
 			var path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\SpadasFiles\\temp\\webview2";
@@ -54,6 +58,7 @@ namespace ASEva.UIWpf
 
 		async void InitializeAsync()
 		{
+			// CHECK: 确保WebView2环境已初始化完毕
 			if (CoreWebView2Environment != null)
 			{
 				try
@@ -72,6 +77,7 @@ namespace ASEva.UIWpf
 
 		private void RunDelayedActions()
 		{
+			// CHECK: 截获初始化异常
 			try
 			{
 				Control.CoreWebView2.DocumentTitleChanged += CoreWebView2_DocumentTitleChanged;
@@ -168,7 +174,9 @@ namespace ASEva.UIWpf
 
 		public string ExecuteScript(string script)
 		{
+			// CHECK: 初始化异常则不执行
 			if (failed) return null;
+
 			var fullScript = string.Format("var _fn = function() {{ {0} }}; _fn();", script);
 			var task = Control.ExecuteScriptAsync(fullScript);
 			while (!task.IsCompleted)
@@ -183,7 +191,9 @@ namespace ASEva.UIWpf
 
 		public async Task<string> ExecuteScriptAsync(string script)
 		{
+			// CHECK: 初始化异常则不执行
 			if (failed) return null;
+
 			var fullScript = string.Format("var _fn = function() {{ {0} }}; _fn();", script);
 			var result = await Control.ExecuteScriptAsync(fullScript);
 			return Decode(result);
@@ -217,18 +227,20 @@ namespace ASEva.UIWpf
 
 		public void LoadHtml(string html, Uri baseUri)
 		{
+			// CHECK: 初始化异常则不执行
 			if (failed) return;
+
 			if (!webView2Ready)
 			{
 				RunWhenReady(() => LoadHtml(html, baseUri));
 				return;
 			}
 
+			// CHECK: 修正窗口移动后下拉菜单显示位置不正确问题
             if (controller == null)
             {
                 controller = Control.GetType().GetProperty("CoreWebView2Controller", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(Control) as CoreWebView2Controller;
             }
-
             if (controller != null && timer == null)
 			{
 				timer = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.Normal);
