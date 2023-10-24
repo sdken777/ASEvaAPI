@@ -24,7 +24,10 @@ namespace ASEva.UIGtk
         {
             if (ASEva.APIInfo.GetRunningOS() == "linuxarm")
             {
+                // CHECK: 修正在Arm下打开文件对话框异常
                 Redirection.RedirectMarshaller();
+
+                // CHECK: 修正打开右键菜单异常，Arm-Ubuntu16.04-X11可重现
                 Redirection.RedirectMenu();
             }
   
@@ -47,6 +50,7 @@ namespace ASEva.UIGtk
             platform.Add<Button.IHandler>(() => new ButtonHandler());
             var app = new Application(platform);
 
+            // CHECK: 应用全局样式令显示较为紧凑
             try
             {
                 var cssProvider = new Gtk.CssProvider();

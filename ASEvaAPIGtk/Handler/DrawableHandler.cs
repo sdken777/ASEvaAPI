@@ -80,6 +80,8 @@ namespace ASEva.UIGtk
 				}
 			}
 #else
+
+			// CHECK: 修正DrawnSignalCallback异常，Ubuntu22.04都可重现
 			// [GLib.ConnectBefore]
 			public void HandleDrawn(object o, Gtk.DrawnArgs args)
 			{

@@ -6,11 +6,14 @@ using Eto.GtkSharp.Forms;
 namespace ASEva.UIGtk
 {
 	#pragma warning disable 612
+
+	// CHECK: 继承WindowHandlerGtkWindow，修正GtkWindowConnector异常问题，Eto-2.7.0已修复
 	class DialogHandler : WindowHandlerGtkWindow<Gtk.Dialog, Dialog, Dialog.ICallback>, Dialog.IHandler
 	{
 		Gtk.Container btcontainer;
 		Button defaultButton;
 
+		// CHECK: 修正对话框标题栏高度偏大问题
 		private bool UseHeaderBar = true;
 
 		public DialogHandler()
@@ -87,6 +90,7 @@ namespace ASEva.UIGtk
 
 		public DialogDisplayMode DisplayMode { get; set; }
 
+		// CHECK: 修正设置Resizable属性无效问题
 		public new bool Resizable
 		{
 			get

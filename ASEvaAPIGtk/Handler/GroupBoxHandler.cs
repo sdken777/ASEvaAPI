@@ -10,11 +10,14 @@ namespace ASEva.UIGtk
 		public GroupBoxHandler ()
 		{
 			Control = new Gtk.Frame ();
+
+			// CHECK: 标题改为居中显示
 			Control.LabelXalign = 0.5f;
 		}
 
 		protected override Gtk.Widget FontControl => Control.LabelWidget ?? new Gtk.Label();
 
+		// CHECK: 修正标题两侧无空隙问题
 		public override string Text {
 			get { return textValue; }
 			set
@@ -26,7 +29,6 @@ namespace ASEva.UIGtk
 					Control.LabelWidget?.SetFont(Font.ToPango());
 			}
 		}
-
 		private string textValue = "";
 
 		public override Size ClientSize {

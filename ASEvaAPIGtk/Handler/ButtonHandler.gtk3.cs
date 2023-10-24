@@ -200,6 +200,7 @@ namespace ASEva.UIGtk
 			}
 		}
 
+		// CHECK: 修正按键背景颜色设置无效问题
 		protected override void SetBackgroundColor(Eto.Drawing.Color? color)
 		{
 			if (color != null)

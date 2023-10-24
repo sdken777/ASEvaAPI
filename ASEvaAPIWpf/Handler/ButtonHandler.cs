@@ -88,7 +88,7 @@ namespace ASEva.UIWpf
 				Padding = new sw.Thickness(0),
 				Visibility = sw.Visibility.Collapsed,
 
-				// CHECK: 修正在OverlayLayout中位于其他控件(Drawable?)上方时背景颜色设置无效问题
+				// CHECK: 修正在OverlayLayout中位于其他控件(Drawable?)上方时背景颜色显示问题
 				Background = new sw.Media.SolidColorBrush(sw.Media.Colors.Transparent),
 				BorderBrush = new sw.Media.SolidColorBrush(sw.Media.Colors.Transparent)
 			};

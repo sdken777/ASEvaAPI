@@ -12,6 +12,7 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
+	// CHECK: 大量修正和优化，官方Handler仅作为参考，更新部分根据情况合并至此实现
 	class WebViewHandler : GtkControl<Gtk.ScrolledWindow, WebView, WebView.ICallback>, WebView.IHandler
 	{
 		public bool BrowserContextMenuEnabled { get; set; }

@@ -44,9 +44,12 @@ namespace ASEva.UIGtk
 			{
 				ShadowType = Gtk.ShadowType.In
 			};
+
+			// CHECK: 修正GridView在ReloadData时重置滚动条问题
 			Control.Vadjustment.ValueChanged += Vadjustment_ValueChanged;
 		}
 
+		// CHECK: 修正GridView在ReloadData时重置滚动条问题
         private double? updateModelVAajustmentValue = null;
 		private void Vadjustment_ValueChanged(object sender, EventArgs e)
         {
@@ -64,6 +67,7 @@ namespace ASEva.UIGtk
 
 		protected void UpdateModel()
 		{
+			// CHECK: 修正GridView在ReloadData时重置滚动条问题
 			updateModelVAajustmentValue = Control.Vadjustment.Value;
 
 			SkipSelectedChange = true;
@@ -235,6 +239,8 @@ namespace ASEva.UIGtk
 						var columnIndex = GetColumnOfItem(e.Column);
 						var item = GetItem(e.Path);
 						var column = columnIndex == -1 ? null : Widget.Columns[columnIndex];
+
+						// CHECK: 修正在网格中双击鼠标事件无响应问题，Eto-2.6.0已修复
 						Callback.OnCellDoubleClick(Widget, new GridCellMouseEventArgs(column, rowIndex, columnIndex, item, Mouse.Buttons, Keyboard.Modifiers, PointFromScreen(Mouse.Position)));
 					};
 					break;
