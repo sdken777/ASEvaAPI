@@ -20,8 +20,10 @@ namespace ASEva.UICoreWF
     {
         public Application CreateApp(out String uiBackend, out String webViewBackend)
         {
+            // CHECK: 支持高DPI显示
             System.Windows.Forms.Application.SetHighDpiMode(System.Windows.Forms.HighDpiMode.SystemAware);
 
+            // CHECK: 初始化WebView2环境
             WebView2Handler.InitCoreWebView2Environment();
 
             var platform = new global::Eto.WinForms.Platform();
@@ -32,8 +34,11 @@ namespace ASEva.UICoreWF
             platform.Add<WebView.IHandler>(() => new WebView2Handler());
             platform.Add<ComboBox.IHandler>(() => new ComboBoxHandler());
             platform.Add<Drawable.IHandler>(() => new DrawableHandler());
+
+            // CHECK: 改为使用Wpf版的Handler，Eto-2.6.0已修正
             platform.Add<DataObject.IHandler>(() => new DataObjectHandler());
             platform.Add<DataFormats.IHandler>(() => new DataFormatsHandler());
+
             platform.Add<Slider.IHandler>(() => new SliderHandler());
             platform.Add<MessageBox.IHandler>(() => new MessageBoxHandler());
             var app = new Application(platform);

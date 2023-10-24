@@ -20,6 +20,7 @@ namespace ASEva.UIWpf
     {
         public Application CreateApp(out String uiBackend, out String webViewBackend)
         {
+            // CHECK: 初始化WebView2环境
             WebView2Handler.InitCoreWebView2Environment();
 
             var platform = new global::Eto.Wpf.Platform();

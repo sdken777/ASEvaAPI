@@ -12,8 +12,10 @@ namespace ASEva.UICoreWF
 		{
 			this.Control = new SWF.ProgressBar {
 				Maximum = 100,
-				Style = SWF.ProgressBarStyle.Blocks,
+				Style = SWF.ProgressBarStyle.Blocks
 			};
+
+			// CHECK: 修正高DPI显示时的尺寸问题
 			this.Control.Size = new System.Drawing.Size((int)(this.Control.Width * SizerExtensions.PixelScale),
 				(int)(this.Control.Height * SizerExtensions.PixelScale));
 		}
@@ -44,6 +46,6 @@ namespace ASEva.UICoreWF
 			get { return Control.Value; }
 			set { Control.Value = value; }
 		}
-    }
+	}
 }
 

@@ -24,7 +24,7 @@ namespace ASEva.UICoreWF
 			var caption = Caption ?? ((parent != null && parent.ParentWindow != null) ? parent.ParentWindow.Title : null);
 			swf.Control c = (parent == null) ? null : (swf.Control)parent.ControlObject;
 
-			// MOD: 修正标题给null则显示"错误"
+			// CHECK: 修正标题给null则显示"错误"
 			swf.DialogResult result = swf.MessageBox.Show(c, Text, caption == null ? "" : caption, Convert(Buttons), Convert(Type), Convert(DefaultButton, Buttons));
 			return result.ToEto();
 		}
