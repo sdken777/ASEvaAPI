@@ -124,6 +124,27 @@ namespace ASEva.UIEto
             return layout;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.11.5) Set content as OverlayLayout object
+        /// </summary>
+        /// <param name="panel">Panel object</param>
+        /// <returns>Created OverlayLayout object</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.11.5) 设置可覆盖布局至面板Content
+        /// </summary>
+        /// <param name="panel">面板</param>
+        /// <returns>创建的可覆盖布局</returns>
+        public static OverlayLayout SetContentAsOverlayLayout(this Panel panel)
+        {
+            if (panel.Content != null) return null;
+            if (panel is Window && WindowInitializer != null) WindowInitializer.InitWindow(panel as Window);
+            var layout = new OverlayLayout();
+            panel.Content = layout;
+            return layout;
+        }
+
         public static InitWindowHandler WindowInitializer { private get; set; }
     }
 

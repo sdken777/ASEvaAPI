@@ -61,6 +61,7 @@ namespace ASEva.UICoreWF
             SimpleTreeView.Factory = new SimpleTreeViewFactoryCoreWF();
             SnapshotExtensions.Handler = new SnapshotHandler();
             IconExtensions.FinalFrameOnly = true;
+            OverlayLayout.ExpandControlSize = true;
 
             uiBackend = null;
             webViewBackend = "webview2";

@@ -130,14 +130,14 @@ namespace ASEva.UIEto
             // set size
             if (padding.Top != null && padding.Bottom != null)
             {
-                var targetHeight = (int)(this.Height - (padding.Top.Value + padding.Bottom.Value) * Pixel.Scale);
+                var targetHeight = (int)(this.Height - (padding.Top.Value + padding.Bottom.Value) * Pixel.Scale) + (ExpandControlSize && padding.Bottom.Value == 0 ? 1 : 0);
                 if (targetHeight < 16) visible = false;
                 else control.Height = targetHeight;
             }
 
             if (visible && padding.Left != null && padding.Right != null)
             {
-                var targetWidth = (int)(this.Width - (padding.Left.Value + padding.Right.Value) * Pixel.Scale);
+                var targetWidth = (int)(this.Width - (padding.Left.Value + padding.Right.Value) * Pixel.Scale) + (ExpandControlSize && padding.Right.Value == 0 ? 1 : 0);
                 if (targetWidth < 16) visible = false;
                 else control.Width = targetWidth;
             }
@@ -184,5 +184,6 @@ namespace ASEva.UIEto
         private bool firstSizeChanged = true;
 
         public static bool DelayHandleControl { private get; set; }
+        public static bool ExpandControlSize { private get; set; }
     }
 }
