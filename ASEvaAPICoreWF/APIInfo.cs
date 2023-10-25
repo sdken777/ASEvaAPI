@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 7, 0); // Update log / 更新记录: 设置OverlayLayout.ExpandControlSize
+            return new Version(2, 5, 7, 1); // Update log / 更新记录: controller初始化改为在RunDelayedActions中进行
         }
     }
 }

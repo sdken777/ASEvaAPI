@@ -26,7 +26,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 5, 5, 0); // Update log / 更新记录: 修正WebView的下拉框等显示位置问题
+            return new Version(1, 5, 5, 1); // Update log / 更新记录: controller初始化改为在RunDelayedActions中进行
         }
     }
 }

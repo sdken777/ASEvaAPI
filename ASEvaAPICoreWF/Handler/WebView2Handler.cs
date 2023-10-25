@@ -80,6 +80,35 @@ namespace ASEva.UICoreWF
 			// CHECK: 截获初始化异常
 			try
             {
+				// CHECK: 修正窗口移动后下拉菜单显示位置不正确问题
+				if (controller == null)
+				{
+					controller = Control.GetType().GetField("_coreWebView2Controller", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(Control) as CoreWebView2Controller;
+				}
+				if (controller != null && timer == null)
+				{
+					timer = new System.Windows.Forms.Timer();
+					timer.Interval = 100;
+					timer.Tick += delegate
+					{
+						try
+						{
+							var curBound = new System.Drawing.Rectangle(Control.PointToScreen(new System.Drawing.Point(0, 0)), Control.Size);
+							if (curBound != lastBound)
+							{
+								controller.NotifyParentWindowPositionChanged();
+								lastBound = curBound;
+							}
+						}
+						catch (Exception)
+						{
+							timer.Stop();
+							timer = null;
+						}
+					};
+					timer.Start();
+				}
+
 				Control.CoreWebView2.DocumentTitleChanged += CoreWebView2_DocumentTitleChanged;
 				Control.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
 				webView2Ready = true;
@@ -235,36 +264,6 @@ namespace ASEva.UICoreWF
 				RunWhenReady(() => LoadHtml(html, baseUri));
 				return;
 			}
-
-			// CHECK: 修正窗口移动后下拉菜单显示位置不正确问题
-			if (controller == null)
-			{
-				controller = Control.GetType().GetField("_coreWebView2Controller", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(Control) as CoreWebView2Controller;
-			}
-			if (controller != null && timer == null)
-			{
-				timer = new System.Windows.Forms.Timer();
-				timer.Interval = 100;
-				timer.Tick += delegate
-				{
-					try
-					{
-						var curBound = new System.Drawing.Rectangle(Control.PointToScreen(new System.Drawing.Point(0, 0)), Control.Size);
-						if (curBound != lastBound)
-						{
-							controller.NotifyParentWindowPositionChanged();
-							lastBound = curBound;
-						}
-					}
-					catch (Exception)
-                    {
-						timer.Stop();
-						timer = null;
-                    }
-				};
-				timer.Start();
-			}
-
 			if (baseUri != null)
 			{
 				if (server == null)
