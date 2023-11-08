@@ -296,5 +296,17 @@ namespace ASEva
         /// [可选实现] 在UI线程循环时被调用（用于执行仅限UI线程的功能）
         /// </summary>
         public virtual void OnUIThreadLooping() { }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.14.3) [Optional] Called while checking whether the plugin is busy with some time-consuming operation
+        /// </summary>
+        /// <returns>Description of the time-consuming operation, null if none</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.14.3) [可选实现] 在检查插件是否忙于长耗时操作时被调用
+        /// </summary>
+        /// <returns>长耗时操作的描述，若无则返回null</returns>
+        public virtual String OnCheckBusy() { return null;}
     }
 }
