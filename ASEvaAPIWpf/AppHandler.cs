@@ -42,6 +42,7 @@ namespace ASEva.UIWpf
             TextBitmap.FastModeDrawOffset = new PointF(1, 1);
             TopMostExtensions.QueryInterface = new TopMostHandler();
             SnapshotExtensions.Handler = new SnapshotHandler();
+            SnapshotExtensions.ScreenModeHandler = new ScreenSnapshotHandler();
 
             uiBackend = null;
             webViewBackend = "webview2";

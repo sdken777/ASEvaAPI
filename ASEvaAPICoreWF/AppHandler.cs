@@ -60,6 +60,7 @@ namespace ASEva.UICoreWF
             TextBitmap.FastModeDrawOffset = new PointF(1, 1);
             SimpleTreeView.Factory = new SimpleTreeViewFactoryCoreWF();
             SnapshotExtensions.Handler = new SnapshotHandler();
+            SnapshotExtensions.ScreenModeHandler = new ScreenSnapshotHandler();
             IconExtensions.FinalFrameOnly = true;
             OverlayLayout.ExpandControlSize = true;
 

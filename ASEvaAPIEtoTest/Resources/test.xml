@@ -229,8 +229,12 @@
     <ch>单选项{0}</ch>
   </t>
   <t id="menu-snapshot">
-    <en>Snapshot</en>
-    <ch>快照</ch>
+    <en>Snapshot (render)</en>
+    <ch>快照（渲染）</ch>
+  </t>
+  <t id="menu-snapshot-screen">
+    <en>Snapshot (screen)</en>
+    <ch>快照（屏幕）</ch>
   </t>
   <t id="menu-snapshot-failed">
     <en>Failed to get snapshot.</en>

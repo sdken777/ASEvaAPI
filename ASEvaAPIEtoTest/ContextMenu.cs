@@ -32,6 +32,16 @@ namespace ASEvaAPIEtoTest
                     App.RunDialog(dialog);
                 }
             };
+            menu.AddButtonItem(t["menu-snapshot-screen"]).Click += delegate
+            {
+                var snapshot = this.SnapshotFromScreen();
+                if (snapshot == null) MessageBox.Show(t["menu-snapshot-failed"], MessageBoxType.Error);
+                else
+                {
+                    var dialog = new ImageDialog(snapshot);
+                    App.RunDialog(dialog);
+                }
+            };
         }
     }
 }

@@ -19,13 +19,13 @@ namespace ASEva.UIEto
     {
         /// \~English
         /// <summary>
-        /// Query snapshot
+        /// Query snapshot by directly rendering to image
         /// </summary>
         /// <param name="control">Target control object</param>
         /// <returns>Queried snapshot, return null if unsupported or query failed</returns>
         /// \~Chinese
         /// <summary>
-        /// 获取控件快照
+        /// 获取控件快照（直接渲染图像方式）
         /// </summary>
         /// <param name="control">目标控件</param>
         /// <returns>控件快照图像，若不支持或获取失败则返回null</returns>
@@ -35,11 +35,30 @@ namespace ASEva.UIEto
             else return Handler.Snapshot(control);
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.11.6) Query snapshot by downloading data from screen buffer
+        /// </summary>
+        /// <param name="control">Target control object</param>
+        /// <returns>Queried snapshot, return null if unsupported or query failed</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.11.6) 获取控件快照（从屏幕缓存下载方式）
+        /// </summary>
+        /// <param name="control">目标控件</param>
+        /// <returns>控件快照图像，若不支持或获取失败则返回null</returns>
+        public static CommonImage SnapshotFromScreen(this Control control)
+        {
+            if (control == null || ScreenModeHandler == null) return null;
+            else return ScreenModeHandler.Snapshot(control);
+        }
+
         public interface SnapshotHandler
         {
             CommonImage Snapshot(Control control);
         }
 
         public static SnapshotHandler Handler { private get; set; }
+        public static SnapshotHandler ScreenModeHandler { private get; set; }
     }
 }
