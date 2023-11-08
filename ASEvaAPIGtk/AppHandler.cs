@@ -80,6 +80,7 @@ namespace ASEva.UIGtk
             DefaultFlowLayout2DBackend.FixedScrollBarSize = 15;
             SimpleTreeView.Factory = new SimpleTreeViewFactoryGtk();
             SnapshotExtensions.Handler = new SnapshotHandler();
+            SnapshotExtensions.ScreenModeHandler = new ScreenSnapshotHandler();
             FlowLayout.Factory = new FlowLayoutFactoryGtk();
             FlowLayout2D.Factory = new FlowLayout2DFactoryGtk();
             OverlayLayout.DelayHandleControl = true;

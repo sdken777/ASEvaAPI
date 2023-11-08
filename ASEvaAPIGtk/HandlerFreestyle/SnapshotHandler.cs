@@ -49,4 +49,16 @@ namespace ASEva.UIGtk
             return output;
         }
     }
+
+    class ScreenSnapshotHandler : SnapshotExtensions.SnapshotHandler
+    {
+        public CommonImage Snapshot(Eto.Forms.Control control)
+        {
+            var widget = control.ControlObject as Widget;
+            if (widget == null) return null;
+
+            var pixbuf = new Gdk.Pixbuf(widget.Window, widget.Allocation.X, widget.Allocation.Y, widget.AllocatedWidth, widget.AllocatedHeight);
+            return ImageConverter.ConvertFromPlatformImage(pixbuf);
+        }
+    }
 }

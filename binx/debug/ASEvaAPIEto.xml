@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.11.4
+            version=2.11.6
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -267,6 +267,16 @@
             \~Chinese
             <summary>
             (api:eto=2.11.4) 主窗口的按键事件
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.App.TriggerKeyDown(System.Object,Eto.Forms.KeyEventArgs)">
+            \~English
+            <summary>
+            (api:eto=2.11.4) When ASEva.UIEto.App.Run is not used, you can use this function to manually trigger the KeyDown event
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=2.11.4) 未使用 ASEva.UIEto.App.Run 启动时可使用此函数手动触发KeyDown事件
             </summary>
         </member>
         <member name="T:ASEva.UIEto.ButtonPanel">
@@ -1331,6 +1341,20 @@
             <param name="panel">面板</param>
             <returns>创建的像素布局</returns>
         </member>
+        <member name="M:ASEva.UIEto.SetContentExtensions.SetContentAsOverlayLayout(Eto.Forms.Panel)">
+            \~English
+            <summary>
+            (api:eto=2.11.5) Set content as OverlayLayout object
+            </summary>
+            <param name="panel">Panel object</param>
+            <returns>Created OverlayLayout object</returns>
+            \~Chinese
+            <summary>
+            (api:eto=2.11.5) 设置可覆盖布局至面板Content
+            </summary>
+            <param name="panel">面板</param>
+            <returns>创建的可覆盖布局</returns>
+        </member>
         <member name="T:ASEva.UIEto.SizerExtensions">
             \~English
             <summary>
@@ -1602,13 +1626,27 @@
         <member name="M:ASEva.UIEto.SnapshotExtensions.Snapshot(Eto.Forms.Control)">
             \~English
             <summary>
-            Query snapshot
+            Query snapshot by directly rendering to image
             </summary>
             <param name="control">Target control object</param>
             <returns>Queried snapshot, return null if unsupported or query failed</returns>
             \~Chinese
             <summary>
-            获取控件快照
+            获取控件快照（直接渲染图像方式）
+            </summary>
+            <param name="control">目标控件</param>
+            <returns>控件快照图像，若不支持或获取失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SnapshotExtensions.SnapshotFromScreen(Eto.Forms.Control)">
+            \~English
+            <summary>
+            (api:eto=2.11.6) Query snapshot by downloading data from screen buffer
+            </summary>
+            <param name="control">Target control object</param>
+            <returns>Queried snapshot, return null if unsupported or query failed</returns>
+            \~Chinese
+            <summary>
+            (api:eto=2.11.6) 获取控件快照（从屏幕缓存下载方式）
             </summary>
             <param name="control">目标控件</param>
             <returns>控件快照图像，若不支持或获取失败则返回null</returns>
