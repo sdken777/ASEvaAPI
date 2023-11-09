@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 7, 2, 0); // Update log / 更新记录: 支持SnapshotFromScreen
+            return new Version(2, 7, 2, 1); // Update log / 更新记录: 快照图像缩放至逻辑尺寸
         }
     }
 }

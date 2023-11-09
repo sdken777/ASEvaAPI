@@ -58,7 +58,10 @@ namespace ASEva.UIGtk
             if (widget == null) return null;
 
             var pixbuf = new Gdk.Pixbuf(widget.Window, widget.Allocation.X, widget.Allocation.Y, widget.AllocatedWidth, widget.AllocatedHeight);
-            return ImageConverter.ConvertFromPlatformImage(pixbuf);
+            var rawImage = ImageConverter.ConvertFromPlatformImage(pixbuf);
+
+            if (rawImage.Width == widget.AllocatedWidth) return rawImage;
+            else return rawImage.Resize(widget.AllocatedWidth);
         }
     }
 }
