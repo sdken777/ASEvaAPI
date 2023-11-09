@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 11, 7, 0); // Update log / 更新记录: 缩放快照图像至控件逻辑尺寸
+            return new Version(2, 11, 7, 1); // Update log / 更新记录: 缩放快照图像改为在handler中解决
         }
 
         /// \~English

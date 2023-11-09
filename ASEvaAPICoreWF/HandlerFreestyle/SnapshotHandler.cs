@@ -15,6 +15,7 @@ namespace ASEva.UICoreWF
             if (winformControl == null) return null;
 
             int x = 0, y = 0, w = winformControl.Width, h = winformControl.Height;
+            var logicalWidth = control.GetLogicalWidth();
             if (winformControl is Form)
             {
                 var clientXY = winformControl.PointToScreen(new Point(0, 0));
@@ -23,12 +24,16 @@ namespace ASEva.UICoreWF
                 y = clientXY.Y - winformControl.Location.Y;
                 w = clientSize.Width;
                 h = clientSize.Height;
+                logicalWidth = (int)((float)clientSize.Width / Pixel.Scale);
             }
 
             var bitmap = new Bitmap(x + w, y + h);
             winformControl.DrawToBitmap(bitmap, new Rectangle(0, 0, bitmap.Width, bitmap.Height));
             if (x > 0 || y > 0) bitmap = bitmap.Clone(new Rectangle(x, y, w, h), bitmap.PixelFormat);
-            return ImageConverter.ConvertFromBitmap(bitmap);
+            var rawImage = ImageConverter.ConvertFromBitmap(bitmap);
+
+            if (rawImage.Width == logicalWidth) return rawImage;
+            else return rawImage.Resize(logicalWidth);
         }
     }
 
@@ -40,11 +45,13 @@ namespace ASEva.UICoreWF
             if (winformControl == null) return null;
 
             int w = winformControl.Width, h = winformControl.Height;
+            var logicalWidth = control.GetLogicalWidth();
             if (winformControl is Form)
             {
                 var clientSize = winformControl.ClientSize;
                 w = clientSize.Width;
                 h = clientSize.Height;
+                logicalWidth = (int)((float)clientSize.Width / Pixel.Scale);
             }
 
             var topLeft = winformControl.PointToScreen(new Point(0, 0));
@@ -58,7 +65,10 @@ namespace ASEva.UICoreWF
                 g.CopyFromScreen((int)topLeft.X, (int)topLeft.Y, 0, 0, bitmap.Size);
             }
 
-            return ImageConverter.ConvertFromBitmap(bitmap);
+            var rawImage = ImageConverter.ConvertFromBitmap(bitmap);
+
+            if (rawImage.Width == logicalWidth) return rawImage;
+            else return rawImage.Resize(logicalWidth);
         }
     }
-    }
+}

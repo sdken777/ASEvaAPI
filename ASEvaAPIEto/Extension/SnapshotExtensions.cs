@@ -32,11 +32,7 @@ namespace ASEva.UIEto
         public static CommonImage Snapshot(this Control control)
         {
             if (control == null || Handler == null) return null;
-            
-            var rawImage = Handler.Snapshot(control);
-            if (rawImage == null) return null;
-
-            return resizeToControlSize(rawImage, control);
+            return Handler.Snapshot(control);
         }
 
         /// \~English
@@ -54,26 +50,7 @@ namespace ASEva.UIEto
         public static CommonImage SnapshotFromScreen(this Control control)
         {
             if (control == null || ScreenModeHandler == null) return null;
-            
-            var rawImage = ScreenModeHandler.Snapshot(control);
-            if (rawImage == null) return null;
-
-            return resizeToControlSize(rawImage, control);
-        }
-
-        private static CommonImage resizeToControlSize(CommonImage rawImage, Control control)
-        {
-            var targetWidth = control.GetLogicalWidth();
-            if (control is Window)
-            {
-                var content = (control as Window).Content;
-                if (content == null) return null;
-                else targetWidth = content.GetLogicalWidth();
-            }
-
-            if (rawImage.Width == targetWidth) return rawImage;
-
-            return rawImage.Resize(targetWidth);
+            return ScreenModeHandler.Snapshot(control);
         }
 
         public interface SnapshotHandler

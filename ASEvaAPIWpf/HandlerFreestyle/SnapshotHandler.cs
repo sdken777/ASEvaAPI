@@ -58,7 +58,9 @@ namespace ASEva.UIWpf
                 g.CopyFromScreen((int)topLeft.X, (int)topLeft.Y, 0, 0, bitmap.Size);
             }
 
-            return ConvertFromBitmap(bitmap);
+            var rawImage = ConvertFromBitmap(bitmap);
+            if (rawImage.Width == element.ActualWidth) return rawImage;
+            else return rawImage.Resize((int)element.ActualWidth);
         }
 
         private static CommonImage ConvertFromBitmap(object bitmapObject)
