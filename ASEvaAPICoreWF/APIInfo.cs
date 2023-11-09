@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 8, 0); // Update log / 更新记录: 支持SnapshotFromScreen
+            return new Version(2, 5, 8, 1); // Update log / 更新记录: 修正输出快照图像，统一为输出客户区域
         }
     }
 }
