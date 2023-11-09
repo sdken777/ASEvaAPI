@@ -4110,7 +4110,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.14.3
+            version=2.14.4
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -9978,6 +9978,20 @@
             </summary>
             <param name="targetInverted">BGR是否逆序</param>
             <returns>转换后的图像对象</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.Resize(System.Int32)">
+            \~English
+            <summary>
+            (api:app=2.14.4) Resize image (keep the ratio of width to height)
+            </summary>
+            <param name="targetWidth">Width of resized image, in pixels, at least 8 (height will be calculated automatically)</param>
+            <returns>Resized image, return null if the source image's width is less than 8</returns>
+            \~Chinese
+            <summary>
+            (api:app=2.14.4) 缩放图像（保持宽高比）
+            </summary>
+            <param name="targetWidth">缩放后的图像宽度，高度自动计算，至少为8</param>
+            <returns>缩放后的图像，原图像尺寸小于8像素则返回null</returns>
         </member>
         <member name="T:ASEva.Samples.ManualTriggerSample">
             \~English

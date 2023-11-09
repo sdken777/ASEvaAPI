@@ -4110,7 +4110,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.14.2
+            version=2.14.4
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -8705,6 +8705,18 @@
             [可选实现] 在UI线程循环时被调用（用于执行仅限UI线程的功能）
             </summary>
         </member>
+        <member name="M:ASEva.Plugin.OnCheckBusy">
+            \~English
+            <summary>
+            (api:app=2.14.3) [Optional] Called while checking whether the plugin is busy with some time-consuming operation
+            </summary>
+            <returns>Description of the time-consuming operation, null if none</returns>
+            \~Chinese
+            <summary>
+            (api:app=2.14.3) [可选实现] 在检查插件是否忙于长耗时操作时被调用
+            </summary>
+            <returns>长耗时操作的描述，若无则返回null</returns>
+        </member>
         <member name="T:ASEva.ProcessorOutputSample">
             \~English
             <summary>
@@ -9966,6 +9978,20 @@
             </summary>
             <param name="targetInverted">BGR是否逆序</param>
             <returns>转换后的图像对象</returns>
+        </member>
+        <member name="M:ASEva.Samples.CommonImage.Resize(System.Int32)">
+            \~English
+            <summary>
+            (api:app=2.14.4) Resize image (keep the ratio of width to height)
+            </summary>
+            <param name="targetWidth">Width of resized image, in pixels, at least 8 (height will be calculated automatically)</param>
+            <returns>Resized image, return null if the source image's width is less than 8</returns>
+            \~Chinese
+            <summary>
+            (api:app=2.14.4) 缩放图像（保持宽高比）
+            </summary>
+            <param name="targetWidth">缩放后的图像宽度，高度自动计算，至少为8</param>
+            <returns>缩放后的图像，原图像尺寸小于8像素则返回null</returns>
         </member>
         <member name="T:ASEva.Samples.ManualTriggerSample">
             \~English

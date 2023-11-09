@@ -324,8 +324,105 @@ namespace ASEva.Samples
             return output;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.14.4) Resize image (keep the ratio of width to height)
+        /// </summary>
+        /// <param name="targetWidth">Width of resized image, in pixels, at least 8 (height will be calculated automatically)</param>
+        /// <returns>Resized image, return null if the source image's width is less than 8</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.14.4) 缩放图像（保持宽高比）
+        /// </summary>
+        /// <param name="targetWidth">缩放后的图像宽度，高度自动计算，至少为8</param>
+        /// <returns>缩放后的图像，原图像尺寸小于8像素则返回null</returns>
+        public CommonImage Resize(int targetWidth)
+        {
+            if (Width < 8 || Height < 8 || targetWidth < 8) return null;
+
+            if (targetWidth == Width)
+            {
+                var output = new CommonImage();
+                output.width = this.width;
+                output.height = this.height;
+                output.rowBytes = this.rowBytes;
+                output.bgrInverted = this.bgrInverted;
+                output.withAlpha = this.withAlpha;
+                output.data = new byte[this.data.Length];
+                Array.Copy(this.data, output.data, this.data.Length);
+                return output;
+            }
+
+            var scale = (float)targetWidth / Width;
+            var targetHeight = (int)Math.Ceiling(scale * Height);
+
+            var rawClipRect = new IntRect(0, 0, targetWidth, targetHeight);
+            if (scale < 0.25)
+            {
+                var halfClipRect = new IntRect(0, 0, (int)Math.Ceiling(0.5f * targetWidth), (int)Math.Ceiling(0.5f * targetHeight));
+                var halfImage = processImageSub(this, 0.5f, halfClipRect);
+                var quarterClipRect = new IntRect(0, 0, (int)Math.Ceiling(0.25f * targetWidth), (int)Math.Ceiling(0.25f * targetHeight));
+                var quarterImage = processImageSub(halfImage, 0.5f, quarterClipRect);
+                return processImageSub(quarterImage, scale * 4, rawClipRect);
+            }
+            else if (scale < 0.5)
+            {
+                var halfClipRect = new IntRect(0, 0, (int)Math.Ceiling(0.5f * targetWidth), (int)Math.Ceiling(0.5f * targetHeight));
+                var halfImage = processImageSub(this, 0.5f, halfClipRect);
+                return processImageSub(halfImage, scale * 2, rawClipRect);
+            }
+            else
+            {
+                return processImageSub(this, scale, rawClipRect);
+            }
+        }
+
         private CommonImage()
         {}
+
+        private CommonImage processImageSub(CommonImage srcImage, float scale, IntRect clipRect)
+        {
+            var newImage = CommonImage.Create(clipRect.Width, clipRect.Height, srcImage.WithAlpha);
+            unsafe
+            {
+                int clipWidth = clipRect.Width, clipHeight = clipRect.Height;
+                int offsetU = clipRect.X, offsetV = clipRect.Y;
+                int bpp = srcImage.WithAlpha ? 4 : 3;
+                int srcStep = srcImage.RowBytes;
+                int dstStep = newImage.RowBytes;
+                float srcWidthLimit = (float)srcImage.Width - 1.1f;
+                float srcHeightLimit = (float)srcImage.Height - 1.1f;
+                fixed (byte *srcData = &srcImage.Data[0], dstData = &newImage.Data[0])
+                {
+                    for (int v = 0; v < clipHeight; v++)
+                    {
+                        float srcV = Math.Max(0.0f, Math.Min(srcHeightLimit, ((float)offsetV + v + 0.5f) / scale) - 0.5f);
+                        int srcVI = (int)Math.Floor(srcV);
+                        float q = srcV - srcVI;
+                        byte *srcRowT = srcData + srcVI * srcStep;
+                        byte *srcRowB = srcData + (srcVI + 1) * srcStep;
+                        byte *dstRow = dstData + v * dstStep;
+                        for (int u = 0; u < clipWidth; u++)
+                        {
+                            float srcU = Math.Max(0.0f, Math.Min(srcWidthLimit, ((float)offsetU + u + 0.5f) / scale) - 0.5f);
+                            int srcUI = (int)Math.Floor(srcU);
+                            float p = srcU - srcUI;
+                            byte *srcCellTL = srcRowT + srcUI * bpp;
+                            byte *srcCellTR = srcRowT + (srcUI + 1) * bpp;
+                            byte *srcCellBL = srcRowB + srcUI * bpp;
+                            byte *srcCellBR = srcRowB + (srcUI + 1) * bpp;
+                            byte *dstCell = dstRow + u * bpp;
+                            for (int n = 0; n < bpp; n++)
+                            {
+                                dstCell[n] = (byte)((1-p)*(1-q)*srcCellTL[n] + p*(1-q) * srcCellTR[n] + (1-p)*q*srcCellBL[n] + p*q*srcCellBR[n]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return newImage;
+        }
 
         private int width, height;
         private byte[] data;
