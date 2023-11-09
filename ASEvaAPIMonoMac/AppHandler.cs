@@ -51,6 +51,7 @@ namespace ASEva.UIMonoMac
             SkiaCanvasExtensions.DefaultFontSize = 13.0f;
             DefaultSimpleTreeViewBackend.DefaultBackgroundColor = Colors.Transparent;
             SnapshotExtensions.Handler = new SnapshotHandler();
+            SnapshotExtensions.ScreenModeHandler = new ScreenSnapshotHandler();
 
             uiBackend = null;
             webViewBackend = "webkit2";
