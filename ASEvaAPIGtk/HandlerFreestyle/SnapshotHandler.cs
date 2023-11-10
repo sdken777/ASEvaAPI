@@ -14,6 +14,12 @@ namespace ASEva.UIGtk
             var widget = control.ControlObject as Widget;
             if (widget == null) return null;
 
+            if (widget is Window)
+            {
+                widget = (widget as Window).Child;
+                if (widget == null) return null;
+            }
+
             var w = widget.AllocatedWidth;
             var h = widget.AllocatedHeight;
 
@@ -56,6 +62,12 @@ namespace ASEva.UIGtk
         {
             var widget = control.ControlObject as Widget;
             if (widget == null) return null;
+
+            if (widget is Window)
+            {
+                widget = (widget as Window).Child;
+                if (widget == null) return null;
+            }
 
             var pixbuf = new Gdk.Pixbuf(widget.Window, widget.Allocation.X, widget.Allocation.Y, widget.AllocatedWidth, widget.AllocatedHeight);
             var rawImage = ImageConverter.ConvertFromPlatformImage(pixbuf);
