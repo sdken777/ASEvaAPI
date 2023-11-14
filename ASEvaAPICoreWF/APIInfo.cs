@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 8, 2); // Update log / 更新记录: 缩放快照图像至逻辑尺寸
+            return new Version(2, 5, 8, 3); // Update log / 更新记录: 修正DialogPanel中首个控件为RadioButtonList时SelectedIndex无效问题
         }
     }
 }
