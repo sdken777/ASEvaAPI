@@ -27,7 +27,7 @@ namespace ASEva
         /// <returns>Whether initialization is successful</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 初始化主流程
+        /// [可选实现][可含模态] 初始化主流程
         /// </summary>
         /// <param name="appID">应用程序ID</param>
         /// <param name="parameters">初始化参数</param>
@@ -56,7 +56,7 @@ namespace ASEva
         /// <returns>Always return true, or else the legacy OnRun will be called</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.10.1) [必须实现][可含模态框] 运行主流程，需要在其主循环中确保执行了 ASEva.MainWorkflowLoopCallback.OnLoop 和 ASEva.MainWorkflowModalCallback.OnHandleModal
+        /// (api:app=2.10.1) [必须实现][可含模态] 运行主流程，需要在其主循环中确保执行了 ASEva.MainWorkflowLoopCallback.OnLoop 和 ASEva.MainWorkflowModalCallback.OnHandleModal
         /// </summary>
         /// <param name="loopCallback">主循环回调接口</param>
         /// <param name="modalCallback">模态对话回调接口</param>
@@ -86,7 +86,7 @@ namespace ASEva
         /// <returns>Whether a new request is accepted, if yes you should guarantee ASEva.MainWorkflowLicenseCallback.OnRevalidateLicense is called </returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 许可证验证失败后发起新的请求
+        /// [可选实现][可含模态] 许可证验证失败后发起新的请求
         /// </summary>
         /// <param name="reason">验证失败原因</param>
         /// <param name="mac">机器码</param>
@@ -114,7 +114,7 @@ namespace ASEva
         /// <param name="revisionUpdated">Whether release revision is updated</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 通知框架软件的初始化结果
+        /// [可选实现][可含模态] 通知框架软件的初始化结果
         /// </summary>
         /// <param name="result">框架软件的初始化结果</param>
         /// <param name="revisionUpdated">是否更新了发行号</param>
@@ -127,7 +127,7 @@ namespace ASEva
         /// <param name="message">The message</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 输出错误消息
+        /// [可选实现][可含模态] 输出错误消息
         /// </summary>
         /// <param name="message">消息</param>
         public virtual void OnError(String message) {}
@@ -139,7 +139,7 @@ namespace ASEva
         /// <param name="message">The message</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 输出一般消息
+        /// [可选实现][可含模态] 输出一般消息
         /// </summary>
         /// <param name="message">消息</param>
         public virtual void OnNotice(String message) {}
@@ -152,7 +152,7 @@ namespace ASEva
         /// <returns>Whether it's confirmed</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 输出确认消息，并返回是否确认
+        /// [可选实现][可含模态] 输出确认消息，并返回是否确认
         /// </summary>
         /// <param name="message">消息</param>
         /// <returns>是否确认</returns>
@@ -300,7 +300,7 @@ namespace ASEva
         /// <returns>Newly selected bus protocols</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 选择总线协议文件（可多个）
+        /// [可选实现][可含模态] 选择总线协议文件（可多个）
         /// </summary>
         /// <param name="selected">已选择的总线协议文件</param>
         /// <returns>新选择的总线协议文件</returns>
@@ -314,7 +314,7 @@ namespace ASEva
         /// <returns>Bus message configuration result, null if requested to delete</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 选择总线报文
+        /// [可选实现][可含模态] 选择总线报文
         /// </summary>
         /// <param name="originMessageID">初始总线报文配置</param>
         /// <returns>返回总线报文配置，若删除则返回null</returns>
@@ -331,7 +331,7 @@ namespace ASEva
         /// <returns>Signal configuration result, null if requested to delete</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 选择信号
+        /// [可选实现][可含模态] 选择信号
         /// </summary>
         /// <param name="origin">初始信号配置</param>
         /// <param name="withScale">是否包含乘数的配置</param>
@@ -348,7 +348,7 @@ namespace ASEva
         /// <param name="existSignalIDList">List of all signal IDs that already exist</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 一次性选择多个信号
+        /// [可选实现][可含模态] 一次性选择多个信号
         /// </summary>
         /// <param name="handler">选中信号时调用的回调接口</param>
         /// <param name="existSignalIDList">既存的选中信号ID列表</param>
@@ -362,7 +362,7 @@ namespace ASEva
         /// <param name="callback">Framework callback interface</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 显示正在进行的独立任务
+        /// [可选实现][可含模态] 显示正在进行的独立任务
         /// </summary>
         /// <param name="title">独立任务标题</param>
         /// <param name="callback">框架软件的回调接口</param>
@@ -373,11 +373,11 @@ namespace ASEva
         /// [Optional][OK for modal] Open dialog
         /// </summary>
         /// <param name="dialog">Configuration panel object, derived from ConfigPanel</param>
-        /// <param name="info">Information of dialog class</param>
+        /// <param name="info">Information of dialog component</param>
         /// <param name="config">Initial configuration string</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 打开对话框
+        /// [可选实现][可含模态] 打开对话框
         /// </summary>
         /// <param name="dialog">配置面板对象，继承ConfigPanel</param>
         /// <param name="info">对话框组件信息</param>
@@ -389,7 +389,7 @@ namespace ASEva
         /// [Optional] Add window to workspace
         /// </summary>
         /// <param name="window">Window panel object, derived from WindowPanel</param>
-        /// <param name="info">Information of window class</param>
+        /// <param name="info">Information of window component</param>
         /// <param name="config">Initial configuration string</param>
         /// <param name="newWorkspaceIfNeeded">Whether to add to a new workspace (if available) if there's no space in the current workspace</param>
         /// <returns>Whether successful. After you're done using the panel, call ASEva.Agency.UnregisterPanel</returns>
@@ -403,6 +403,20 @@ namespace ASEva
         /// <param name="newWorkspaceIfNeeded">工作空间无足够空间时，是否在新工作空间添加（若不支持工作空间，则无视此选项）</param>
         /// <returns>是否成功添加，若成功添加，在释放窗口时需要调用 ASEva.Agency.UnregisterPanel </returns>
         public virtual bool OnAddWindow(object window, WindowClassInfo info, String config, bool newWorkspaceIfNeeded) { return false; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.15.0) [Optional][OK for modal] Run console procedure
+        /// </summary>
+        /// <param name="consoleClass">Console object</param>
+        /// <param name="info">Information of console component</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.15.0) [可选实现][可含模态] 运行控制台过程
+        /// </summary>
+        /// <param name="consoleClass">控制台对象</param>
+        /// <param name="info">控制台组件信息</param>
+        public virtual void OnRunConsole(ConsoleClass consoleClass, ConsoleClassInfo info) {}
 
         /// \~English
         /// <summary>
@@ -483,7 +497,7 @@ namespace ASEva
         /// <param name="recordSessionID">Lately recorded session's ID</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 编辑新采集的session信息
+        /// [可选实现][可含模态] 编辑新采集的session信息
         /// </summary>
         /// <param name="recordSessionID">新采集的session ID</param>
         public virtual void OnEditRecordedSession(DateTime recordSessionID) { }
@@ -496,7 +510,7 @@ namespace ASEva
         /// <returns>New path, set to null if not configured</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 编辑离线地图文件路径
+        /// [可选实现][可含模态] 编辑离线地图文件路径
         /// </summary>
         /// <param name="originPath">原始路径，若未设置则为null</param>
         /// <returns>新路径，若未设置则为null</returns>
@@ -509,7 +523,7 @@ namespace ASEva
         /// <param name="callback">Framework callback interface</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 编辑数据加密选项
+        /// [可选实现][可含模态] 编辑数据加密选项
         /// </summary>
         /// <param name="callback">框架软件的回调接口</param>
         public virtual void OnEditDataEncryption(MainWorkflowEncryptionCallback callback) {}
@@ -523,7 +537,7 @@ namespace ASEva
         /// <param name="callback">Framework callback interface</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 安装插件
+        /// [可选实现][可含模态] 安装插件
         /// </summary>
         /// <param name="libs">插件关联的库信息列表</param>
         /// <param name="drivers">插件关联的驱动和环境信息列表</param>
@@ -584,7 +598,7 @@ namespace ASEva
         /// <returns>Whether it's OK to exist (no use while forced to exist)</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态框] 通知正在退出应用程序
+        /// [可选实现][可含模态] 通知正在退出应用程序
         /// </summary>
         /// <param name="force">是否为强制结束</param>
         /// <returns>返回是否可退出，强制结束时将不起作用</returns>

@@ -4006,4 +4006,45 @@ namespace ASEva
         /// </summary>
         public ulong MemoryFree { get; set; }
     }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=2.15.0) Console component info
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=2.15.0) 控制台组件信息
+    /// </summary>
+    public class ConsoleClassInfo
+    {
+        /// \~English
+        /// <summary>
+        /// ID of the plugin pack that component belongs to
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 所属插件ID
+        /// </summary>
+        public String OwnerPluginID { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Component's class ID
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 组件ID
+        /// </summary>
+        public String ID { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Console component's title
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 控制台组件标题
+        /// </summary>
+        public String Title { get; set; }
+    }
 }

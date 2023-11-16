@@ -1424,5 +1424,19 @@ namespace ASEva
         {
             return false;
         }
+
+        public void RunConsole(object caller, string consoleClassID)
+        {
+        }
+
+        public Dictionary<string, ConsoleClassInfo> GetConsoleClassTable()
+        {
+            return null;
+        }
+
+        public ConsoleClassInfo GetConsoleClassInfo(string consoleClassID)
+        {
+            return null;
+        }
     }
 }
