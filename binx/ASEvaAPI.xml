@@ -4166,7 +4166,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.15.1
+            version=2.15.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -8758,6 +8758,18 @@
             [可选实现] 获取插件包含的所有对话框组件的定义对象时被调用
             </summary>
             <returns>对话框组件定义对象的列表</returns>
+        </member>
+        <member name="M:ASEva.Plugin.GetConsoleClasses">
+            \~English
+            <summary>
+            (api:app=2.15.2) [Optional] Called while getting all definitions of console components
+            </summary>
+            <returns>All definitions of console components</returns>
+            \~Chinese
+            <summary>
+            (api:app=2.15.2) [可选实现] 获取插件包含的所有控制台组件的定义对象时被调用
+            </summary>
+            <returns>控制台组件定义对象的列表</returns>
         </member>
         <member name="M:ASEva.Plugin.GetProcessorClasses">
             \~English

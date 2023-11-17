@@ -65,6 +65,18 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=2.15.2) [Optional] Called while getting all definitions of console components
+        /// </summary>
+        /// <returns>All definitions of console components</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.15.2) [可选实现] 获取插件包含的所有控制台组件的定义对象时被调用
+        /// </summary>
+        /// <returns>控制台组件定义对象的列表</returns>
+        public virtual ConsoleClass[] GetConsoleClasses() { return null; }
+
+        /// \~English
+        /// <summary>
         /// [Optional] Called while getting all definitions of processor components
         /// </summary>
         /// <returns>All definitions of processor components</returns>
