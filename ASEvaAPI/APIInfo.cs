@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 15, 2, 0); // Update log / 更新记录: 补上Plugin.GetConsoleClasses
+            return new Version(2, 15, 2, 1); // Update log / 更新记录: 完善ConsoleIO
         }
 
         /// \~English
