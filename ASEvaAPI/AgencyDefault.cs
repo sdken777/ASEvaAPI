@@ -1438,5 +1438,11 @@ namespace ASEva
         {
             return null;
         }
+
+        public ConfigStatus GetConsoleRelatedModulesConfigStatus(string consoleClassID, out ConfigStatus[] childrenStatus)
+        {
+            childrenStatus = null;
+            return ConfigStatus.Disabled;
+        }
     }
 }

@@ -53,6 +53,30 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=2.15.1) [Required] Called while getting configuration status of related components
+        /// </summary>
+        /// <returns>Configuration status</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.15.1) [必须实现] 获取控制台组件相关的配置状态时被调用
+        /// </summary>
+        /// <returns>配置状态</returns>
+        public virtual ConfigStatus GetRelatedConfigStatus() { return ConfigStatus.Disabled; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.15.1) [Optional] Called while getting child configuration status of related components
+        /// </summary>
+        /// <returns>Child configuration status</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.15.1) [可选实现] 查询控制台组件相关的各子功能配置状态时被调用
+        /// </summary>
+        /// <returns>各子功能的配置状态</returns>
+        public virtual ConfigStatus[] GetRelatedChildConfigStatus() { return null; }
+
+        /// \~English
+        /// <summary>
         /// [Required] Called while running console procedure
         /// </summary>
         /// <param name="io">Console interaction interface</param>

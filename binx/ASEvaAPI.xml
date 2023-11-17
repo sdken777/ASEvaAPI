@@ -2683,7 +2683,7 @@
             <summary>
             (api:app=2.3.0) Get status of components related to the dialog
             </summary>
-            <param name="dialogClassID">Dialog class ID</param>
+            <param name="dialogClassID">Dialog component's class ID</param>
             <param name="transformID">Transform ID</param>
             <param name="childrenStatus">Output child status</param>
             <returns>The main status</returns>
@@ -2693,6 +2693,22 @@
             </summary>
             <param name="dialogClassID">对话框组件ID</param>
             <param name="transformID">分化ID</param>
+            <param name="childrenStatus">子配置状态</param>
+            <returns>配置状态</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetConsoleRelatedModulesConfigStatus(System.String,ASEva.ConfigStatus[]@)">
+            \~English
+            <summary>
+            (api:app=2.15.1) Get status of components related to the console
+            </summary>
+            <param name="dialogClassID">Console component's class ID</param>
+            <param name="childrenStatus">Output child status</param>
+            <returns>The main status</returns>
+            \~Chinese
+            <summary>
+            (api:app=2.15.1) 获取控制台相关组件配置状态
+            </summary>
+            <param name="dialogClassID">控制台组件ID</param>
             <param name="childrenStatus">子配置状态</param>
             <returns>配置状态</returns>
         </member>
@@ -4150,7 +4166,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.15.0
+            version=2.15.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -5106,6 +5122,30 @@
             [可选实现] 获取控制台组件相关的组件ID
             </summary>
             <returns>组件ID列表</returns>
+        </member>
+        <member name="M:ASEva.ConsoleClass.GetRelatedConfigStatus">
+            \~English
+            <summary>
+            (api:app=2.15.1) [Required] Called while getting configuration status of related components
+            </summary>
+            <returns>Configuration status</returns>
+            \~Chinese
+            <summary>
+            (api:app=2.15.1) [必须实现] 获取控制台组件相关的配置状态时被调用
+            </summary>
+            <returns>配置状态</returns>
+        </member>
+        <member name="M:ASEva.ConsoleClass.GetRelatedChildConfigStatus">
+            \~English
+            <summary>
+            (api:app=2.15.1) [Optional] Called while getting child configuration status of related components
+            </summary>
+            <returns>Child configuration status</returns>
+            \~Chinese
+            <summary>
+            (api:app=2.15.1) [可选实现] 查询控制台组件相关的各子功能配置状态时被调用
+            </summary>
+            <returns>各子功能的配置状态</returns>
         </member>
         <member name="M:ASEva.ConsoleClass.RunConsole(ASEva.ConsoleIO)">
             \~English

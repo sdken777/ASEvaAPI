@@ -200,6 +200,7 @@ namespace ASEva
         DialogClassInfo RegisterTransformDialogClass(String dialogClassID, String config);
         DialogClassInfo RegisterTransformDialogClass(String dialogClassID, DialogClass transformDialogClass, String defaultConfig);
         ConfigStatus GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID, out ConfigStatus[] childrenStatus);
+        ConfigStatus GetConsoleRelatedModulesConfigStatus(String consoleClassID, out ConfigStatus[] childrenStatus);
         void DisableAllConfigs();
         String[] GetSessionGenerations(DateTime sessionID);
         DateTime[] GetGenerationSessions(String generationID);
@@ -3589,7 +3590,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.3.0) Get status of components related to the dialog
         /// </summary>
-        /// <param name="dialogClassID">Dialog class ID</param>
+        /// <param name="dialogClassID">Dialog component's class ID</param>
         /// <param name="transformID">Transform ID</param>
         /// <param name="childrenStatus">Output child status</param>
         /// <returns>The main status</returns>
@@ -3604,6 +3605,25 @@ namespace ASEva
         public static ConfigStatus GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID, out ConfigStatus[] childrenStatus)
         {
             return Handler.GetDialogRelatedModulesConfigStatus(dialogClassID, transformID, out childrenStatus);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.15.1) Get status of components related to the console
+        /// </summary>
+        /// <param name="dialogClassID">Console component's class ID</param>
+        /// <param name="childrenStatus">Output child status</param>
+        /// <returns>The main status</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.15.1) 获取控制台相关组件配置状态
+        /// </summary>
+        /// <param name="dialogClassID">控制台组件ID</param>
+        /// <param name="childrenStatus">子配置状态</param>
+        /// <returns>配置状态</returns>
+        public static ConfigStatus GetConsoleRelatedModulesConfigStatus(String dialogClassID, out ConfigStatus[] childrenStatus)
+        {
+            return Handler.GetConsoleRelatedModulesConfigStatus(dialogClassID, out childrenStatus);
         }
 
         /// \~English
