@@ -167,8 +167,8 @@ namespace ASEva
         /// <param name="requestID">Request ID, for distinguish different request. Set to null if unnecessary</param>
         /// <param name="message">Title message</param>
         /// <param name="options">All options</param>
-        /// <param name="initialSelected">Index of initial selected option, null if not selected</param>
-        /// <returns>Index of option selected by user, null if not selected</returns>
+        /// <param name="initialSelected">Index of initial selected option</param>
+        /// <returns>Index of option selected by user, -1 only when options is empty</returns>
         /// \~Chinese
         /// <summary>
         /// 单项选择
@@ -176,9 +176,9 @@ namespace ASEva
         /// <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
         /// <param name="message">提示消息</param>
         /// <param name="options">所有选项</param>
-        /// <param name="initialSelected">开始时即选中的选项序号，未选择则为null</param>
-        /// <returns>用户勾选的选项序号，未选择则为null</returns>
-        int? SingleSelect(String requestID, String message, String[] options, int? initialSelected);
+        /// <param name="initialSelected">开始时即选中的选项序号</param>
+        /// <returns>用户勾选的选项序号，仅当options为空时返回-1</returns>
+        int SingleSelect(String requestID, String message, String[] options, int initialSelected);
 
         /// \~English
         /// <summary>
