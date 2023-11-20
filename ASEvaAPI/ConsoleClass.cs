@@ -119,7 +119,7 @@ namespace ASEva
         /// <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
         /// <param name="message">Title message</param>
         /// <param name="result">Input default string, output the text input by user (the object remains the same if no input)</param>
-        /// <returns>Whether interrupted</returns>
+        /// <returns>False if interrupted</returns>
         /// \~Chinese
         /// <summary>
         /// 获取字符串输入
@@ -127,7 +127,7 @@ namespace ASEva
         /// <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
         /// <param name="message">提示消息</param>
         /// <param name="result">输入默认字符串，输出用户输入的字符串(若不输入则保持其默认值)</param>
-        /// <returns>是否中断</returns>
+        /// <returns>若中断则返回false</returns>
         bool InputString(String requestID, String message, ref String result);
 
         /// \~English
@@ -137,7 +137,7 @@ namespace ASEva
         /// <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
         /// <param name="message">Title message</param>
         /// <param name="result">Input default value, output the number input by user (the value remains the same if no input or the input is invalid)</param>
-        /// <returns>Whether interrupted</returns>
+        /// <returns>False if interrupted</returns>
         /// \~Chinese
         /// <summary>
         /// 获取数值输入
@@ -145,7 +145,7 @@ namespace ASEva
         /// <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
         /// <param name="message">提示消息</param>
         /// <param name="result">输入默认值，输出用户输入的数值(若不输入或输入无效则保持其默认值)</param>
-        /// <returns>是否中断</returns>
+        /// <returns>若中断则返回false</returns>
         bool InputNumber(String requestID, String message, ref double result);
 
         /// \~English
@@ -155,7 +155,7 @@ namespace ASEva
         /// <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
         /// <param name="message">Title message</param>
         /// <param name="result">Whether user confirmed</param>
-        /// <returns>Whether interrupted</returns>
+        /// <returns>False if interrupted</returns>
         /// \~Chinese
         /// <summary>
         /// 请求用户确认
@@ -163,7 +163,7 @@ namespace ASEva
         /// <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
         /// <param name="message">提示消息</param>
         /// <param name="result">用户是否确认</param>
-        /// <returns>是否中断</returns>
+        /// <returns>若中断则返回false</returns>
         bool Confirm(String requestID, String message, out bool result);
 
         /// \~English
@@ -174,7 +174,7 @@ namespace ASEva
         /// <param name="message">Title message</param>
         /// <param name="options">All options</param>
         /// <param name="result">Input index of initial selected option, output the index of option selected by user (-1 only when options is empty)</param>
-        /// <returns>Whether interrupted</returns>
+        /// <returns>False if interrupted</returns>
         /// \~Chinese
         /// <summary>
         /// 单项选择
@@ -183,7 +183,7 @@ namespace ASEva
         /// <param name="message">提示消息</param>
         /// <param name="options">所有选项</param>
         /// <param name="result">输入开始时即选中的选项序号，输出用户勾选的选项序号(仅当options为空时返回-1)</param>
-        /// <returns>是否中断</returns>
+        /// <returns>若中断则返回false</returns>
         bool SingleSelect(String requestID, String message, String[] options, ref int result);
 
         /// \~English
@@ -194,7 +194,7 @@ namespace ASEva
         /// <param name="message">Title message</param>
         /// <param name="options">All options</param>
         /// <param name="result">Input index of all options selected by the user, output the index of all options selected by the user</param>
-        /// <returns>Whether interrupted</returns>
+        /// <returns>False if interrupted</returns>
         /// \~Chinese
         /// <summary>
         /// 多项选择
@@ -203,7 +203,7 @@ namespace ASEva
         /// <param name="message">提示消息</param>
         /// <param name="options">所有选项</param>
         /// <param name="result">输入开始时即选中的所有选项序号，输出用户勾选的所有选项序号</param>
-        /// <returns>是否中断</returns>
+        /// <returns>若中断则返回false</returns>
         bool MultiSelect(String requestID, String message, String[] options, ref int[] result);
 
         /// \~English
@@ -214,7 +214,7 @@ namespace ASEva
         /// <param name="message">Title message</param>
         /// <param name="extensions">Suffix filtering, starts with '.', or set to null not specified</param>
         /// <param name="result">Selected file's path, null if user cancelled</param>
-        /// <returns>Whether interrupted</returns>
+        /// <returns>False if interrupted</returns>
         /// \~Chinese
         /// <summary>
         /// 选择文件用于打开
@@ -223,7 +223,7 @@ namespace ASEva
         /// <param name="message">提示消息</param>
         /// <param name="extensions">后缀名筛选，以'.'开头，若不限后缀则设为null</param>
         /// <param name="result">用户选中文件的路径，若取消则为null</param>
-        /// <returns>是否中断</returns>
+        /// <returns>若中断则返回false</returns>
         bool SelectOpenFile(String requestID, String message, String[] extensions, out String result);
 
         /// \~English
@@ -234,7 +234,7 @@ namespace ASEva
         /// <param name="message">Title message</param>
         /// <param name="extension">Suffix of the file to save, starts with '.', or set to null not specified</param>
         /// <param name="result">Selected file's path, null if user cancelled</param>
-        /// <returns>Whether interrupted</returns>
+        /// <returns>False if interrupted</returns>
         /// \~Chinese
         /// <summary>
         /// 选择文件用于保存
@@ -243,7 +243,7 @@ namespace ASEva
         /// <param name="message">提示消息</param>
         /// <param name="extension">保存文件的后缀名，以'.'开头，若不考虑后缀则设为null</param>
         /// <param name="result">用户选中文件的路径，若取消则为null</param>
-        /// <returns>是否中断</returns>
+        /// <returns>若中断则返回false</returns>
         bool SelectSaveFile(String requestID, String message, String extension, out String result);
 
         /// \~English
@@ -253,7 +253,7 @@ namespace ASEva
         /// <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
         /// <param name="message">Title message</param>
         /// <param name="result">Selected folder's path, null if user cancelled</param>
-        /// <returns>Whether interrupted</returns>
+        /// <returns>False if interrupted</returns>
         /// \~Chinese
         /// <summary>
         /// 选择文件夹
@@ -261,7 +261,7 @@ namespace ASEva
         /// <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
         /// <param name="message">提示消息</param>
         /// <param name="result">用户选中文件夹的路径，若取消则为null</param>
-        /// <returns>是否中断</returns>
+        /// <returns>若中断则返回false</returns>
         bool SelectFolder(String requestID, String message, out String result);
 
         /// \~English
@@ -272,7 +272,7 @@ namespace ASEva
         /// <param name="message">Title message</param>
         /// <param name="extensions">Suffix filtering, starts with '.', or set to null not specified</param>
         /// <param name="data">Binary data of the file selected by user, null if user cancelled</param>
-        /// <returns>Whether interrupted</returns>
+        /// <returns>False if interrupted</returns>
         /// \~Chinese
         /// <summary>
         /// 选择文件并读取内容，仅适用于小文件
@@ -281,7 +281,7 @@ namespace ASEva
         /// <param name="message">提示消息</param>
         /// <param name="extensions">后缀名筛选，以'.'开头，若不限后缀则设为null</param>
         /// <param name="data">用户选中文件的二进制数据，若取消则输出null</param>
-        /// <returns>是否中断</returns>
+        /// <returns>若中断则返回false</returns>
         bool LoadFileData(String requestID, String message, String[] extensions, out byte[] data);
 
         /// \~English
@@ -293,7 +293,7 @@ namespace ASEva
         /// <param name="extension">Suffix of the file to save, starts with '.', or set to null not specified</param>
         /// <param name="data">Binary data to save to the file</param>
         /// <param name="saved">Whether it's successfully saved, false if user cancelled</param>
-        /// <returns>Whether interrupted</returns>
+        /// <returns>False if interrupted</returns>
         /// \~Chinese
         /// <summary>
         /// 选择文件并保存内容，仅适用于小文件
@@ -303,7 +303,7 @@ namespace ASEva
         /// <param name="extension">保存文件的后缀名，以'.'开头，若不考虑后缀则设为null</param>
         /// <param name="data">需要保存的二进制数据</param>
         /// <param name="saved">是否成功保存，若取消则输出false</param>
-        /// <returns>是否中断</returns>
+        /// <returns>若中断则返回false</returns>
         bool SaveFileData(String requestID, String message, String extension, byte[] data, out bool saved);
     }
 }
