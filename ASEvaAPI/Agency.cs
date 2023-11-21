@@ -3493,15 +3493,15 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.15.0) Get information of all console classes
+        /// (api:app=2.15.2) Get information of all console classes
         /// </summary>
         /// <returns>Dictionary. The key is console class ID</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.15.0) 获取控制台组件信息表
+        /// (api:app=2.15.2) 获取控制台组件信息表
         /// </summary>
         /// <returns>控制台组件信息表，键为组件ID</returns>
-        public Dictionary<string, ConsoleClassInfo> GetConsoleClassTable()
+        public static Dictionary<string, ConsoleClassInfo> GetConsoleClassTable()
         {
             return Handler.GetConsoleClassTable();
         }
