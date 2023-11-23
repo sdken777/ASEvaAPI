@@ -77,15 +77,17 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Required] Called while running console procedure
+        /// (api:app=2.15.3) [Required] Called while running console procedure
         /// </summary>
         /// <param name="io">Console interaction interface</param>
+        /// <param name="machineText">Whether the text of messages and options given to the interaction interface should be ID or JSON string that is easy to parse by the machine. Otherwise it should be text that is easy to read by humans</param>
         /// \~Chinese
         /// <summary>
-        /// [必须实现] 运行控制台过程时被调用
+        /// (api:app=2.15.3) [必须实现] 运行控制台过程时被调用
         /// </summary>
         /// <param name="io">控制台交互接口</param>
-        public virtual void RunConsole(ConsoleIO io) { }
+        /// <param name="machineText">输入至交互接口的消息、选项等文本是否应该为便于机器解析的ID或JSON字符串等，否则为便于人阅读的文本</param>
+        public virtual void RunConsole(ConsoleIO io, bool machineText) { }
     }
 
     /// \~English
