@@ -79,15 +79,56 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.15.3) [Required] Called while running console procedure
         /// </summary>
-        /// <param name="io">Console interaction interface</param>
+        /// <param name="io">Console interaction interface. The procedure should end immediately if any method of this interface that returns false (interrupted)</param>
         /// <param name="machineText">Whether the text of messages and options given to the interaction interface should be ID or JSON string that is easy to parse by the machine. Otherwise it should be text that is easy to read by humans</param>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.15.3) [必须实现] 运行控制台过程时被调用
         /// </summary>
-        /// <param name="io">控制台交互接口</param>
+        /// <param name="io">控制台交互接口，在运行过程中次此接口的任何方法返回false(中断)都应该立即结束</param>
         /// <param name="machineText">输入至交互接口的消息、选项等文本是否应该为便于机器解析的ID或JSON字符串等，否则为便于人阅读的文本</param>
         public virtual void RunConsole(ConsoleIO io, bool machineText) { }
+    }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=2.15.4) Result of saving or loading file data through console
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=2.15.4) 通过控制台读写文件的结果
+    /// </summary>
+    public class ConsoleFileResult
+    {
+        /// \~English
+        /// <summary>
+        /// Whether successfully saved or loaded file
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 是否成功读写文件
+        /// </summary>
+        public bool OK { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// The target file's path
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 目标文件路径
+        /// </summary>
+        public String FilePath { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Whether it's a client-side file
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 是否为客户端文件
+        /// </summary>
+        public bool IsClientFile { get; set; }
     }
 
     /// \~English
@@ -104,21 +145,18 @@ namespace ASEva
         /// <summary>
         /// Print message
         /// </summary>
-        /// <param name="noticeID">Notice ID, for distinguish different notices. Set to null if unnecessary</param>
         /// <param name="message">The message</param>
         /// \~Chinese
         /// <summary>
         /// 打印消息
         /// </summary>
-        /// <param name="noticeID">消息ID，用于区分不同消息，若不需要设为null</param>
         /// <param name="message">消息</param>
-        void Print(String noticeID, String message);
+        void Print(String message);
 
         /// \~English
         /// <summary>
         /// Get text input
         /// </summary>
-        /// <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
         /// <param name="message">Title message</param>
         /// <param name="result">Input default string, output the text input by user (the object remains the same if no input)</param>
         /// <returns>False if interrupted</returns>
@@ -126,17 +164,15 @@ namespace ASEva
         /// <summary>
         /// 获取字符串输入
         /// </summary>
-        /// <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
         /// <param name="message">提示消息</param>
         /// <param name="result">输入默认字符串，输出用户输入的字符串(若不输入则保持其默认值)</param>
         /// <returns>若中断则返回false</returns>
-        bool InputString(String requestID, String message, ref String result);
+        bool InputString(String message, ref String result);
 
         /// \~English
         /// <summary>
         /// Get number input
         /// </summary>
-        /// <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
         /// <param name="message">Title message</param>
         /// <param name="result">Input default value, output the number input by user (the value remains the same if no input or the input is invalid)</param>
         /// <returns>False if interrupted</returns>
@@ -144,17 +180,15 @@ namespace ASEva
         /// <summary>
         /// 获取数值输入
         /// </summary>
-        /// <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
         /// <param name="message">提示消息</param>
         /// <param name="result">输入默认值，输出用户输入的数值(若不输入或输入无效则保持其默认值)</param>
         /// <returns>若中断则返回false</returns>
-        bool InputNumber(String requestID, String message, ref double result);
+        bool InputNumber(String message, ref double result);
 
         /// \~English
         /// <summary>
         /// Request user to confirm
         /// </summary>
-        /// <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
         /// <param name="message">Title message</param>
         /// <param name="result">Whether user confirmed</param>
         /// <returns>False if interrupted</returns>
@@ -162,17 +196,15 @@ namespace ASEva
         /// <summary>
         /// 请求用户确认
         /// </summary>
-        /// <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
         /// <param name="message">提示消息</param>
         /// <param name="result">用户是否确认</param>
         /// <returns>若中断则返回false</returns>
-        bool Confirm(String requestID, String message, out bool result);
+        bool Confirm(String message, out bool result);
 
         /// \~English
         /// <summary>
         /// Single selection
         /// </summary>
-        /// <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
         /// <param name="message">Title message</param>
         /// <param name="options">All options</param>
         /// <param name="result">Input index of initial selected option, output the index of option selected by user (-1 only when options is empty)</param>
@@ -181,18 +213,16 @@ namespace ASEva
         /// <summary>
         /// 单项选择
         /// </summary>
-        /// <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
         /// <param name="message">提示消息</param>
         /// <param name="options">所有选项</param>
         /// <param name="result">输入开始时即选中的选项序号，输出用户勾选的选项序号(仅当options为空时返回-1)</param>
         /// <returns>若中断则返回false</returns>
-        bool SingleSelect(String requestID, String message, String[] options, ref int result);
+        bool SingleSelect(String message, String[] options, ref int result);
 
         /// \~English
         /// <summary>
         /// Multiple selection
         /// </summary>
-        /// <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
         /// <param name="message">Title message</param>
         /// <param name="options">All options</param>
         /// <param name="result">Input index of all options selected by the user, output the index of all options selected by the user</param>
@@ -201,18 +231,16 @@ namespace ASEva
         /// <summary>
         /// 多项选择
         /// </summary>
-        /// <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
         /// <param name="message">提示消息</param>
         /// <param name="options">所有选项</param>
         /// <param name="result">输入开始时即选中的所有选项序号，输出用户勾选的所有选项序号</param>
         /// <returns>若中断则返回false</returns>
-        bool MultiSelect(String requestID, String message, String[] options, ref int[] result);
+        bool MultiSelect(String message, String[] options, ref int[] result);
 
         /// \~English
         /// <summary>
         /// Select file for opening
         /// </summary>
-        /// <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
         /// <param name="message">Title message</param>
         /// <param name="extensions">Suffix filtering, starts with '.', or set to null not specified</param>
         /// <param name="result">Selected file's path, null if user cancelled</param>
@@ -221,18 +249,16 @@ namespace ASEva
         /// <summary>
         /// 选择文件用于打开
         /// </summary>
-        /// <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
         /// <param name="message">提示消息</param>
         /// <param name="extensions">后缀名筛选，以'.'开头，若不限后缀则设为null</param>
         /// <param name="result">用户选中文件的路径，若取消则为null</param>
         /// <returns>若中断则返回false</returns>
-        bool SelectOpenFile(String requestID, String message, String[] extensions, out String result);
+        bool SelectOpenFile(String message, String[] extensions, out String result);
 
         /// \~English
         /// <summary>
         /// Select file for saving
         /// </summary>
-        /// <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
         /// <param name="message">Title message</param>
         /// <param name="extension">Suffix of the file to save, starts with '.', or set to null not specified</param>
         /// <param name="result">Selected file's path, null if user cancelled</param>
@@ -241,18 +267,16 @@ namespace ASEva
         /// <summary>
         /// 选择文件用于保存
         /// </summary>
-        /// <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
         /// <param name="message">提示消息</param>
         /// <param name="extension">保存文件的后缀名，以'.'开头，若不考虑后缀则设为null</param>
         /// <param name="result">用户选中文件的路径，若取消则为null</param>
         /// <returns>若中断则返回false</returns>
-        bool SelectSaveFile(String requestID, String message, String extension, out String result);
+        bool SelectSaveFile(String message, String extension, out String result);
 
         /// \~English
         /// <summary>
         /// Select folder
         /// </summary>
-        /// <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
         /// <param name="message">Title message</param>
         /// <param name="result">Selected folder's path, null if user cancelled</param>
         /// <returns>False if interrupted</returns>
@@ -260,52 +284,49 @@ namespace ASEva
         /// <summary>
         /// 选择文件夹
         /// </summary>
-        /// <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
         /// <param name="message">提示消息</param>
         /// <param name="result">用户选中文件夹的路径，若取消则为null</param>
         /// <returns>若中断则返回false</returns>
-        bool SelectFolder(String requestID, String message, out String result);
+        bool SelectFolder(String message, out String result);
 
         /// \~English
         /// <summary>
         /// Select a file and load the data, only for small files
         /// </summary>
-        /// <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
         /// <param name="message">Title message</param>
         /// <param name="extensions">Suffix filtering, starts with '.', or set to null not specified</param>
         /// <param name="data">Binary data of the file selected by user, null if user cancelled</param>
+        /// <param name="result">Result of loading file</param>
         /// <returns>False if interrupted</returns>
         /// \~Chinese
         /// <summary>
         /// 选择文件并读取内容，仅适用于小文件
         /// </summary>
-        /// <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
         /// <param name="message">提示消息</param>
         /// <param name="extensions">后缀名筛选，以'.'开头，若不限后缀则设为null</param>
         /// <param name="data">用户选中文件的二进制数据，若取消则输出null</param>
+        /// <param name="result">读文件结果</param>
         /// <returns>若中断则返回false</returns>
-        bool LoadFileData(String requestID, String message, String[] extensions, out byte[] data);
+        bool LoadFileData(String message, String[] extensions, out byte[] data, out ConsoleFileResult result);
 
         /// \~English
         /// <summary>
         /// Select a file and save the data, only for small files
         /// </summary>
-        /// <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
         /// <param name="message">Title message</param>
         /// <param name="extension">Suffix of the file to save, starts with '.', or set to null not specified</param>
         /// <param name="data">Binary data to save to the file</param>
-        /// <param name="saved">Whether it's successfully saved, false if user cancelled</param>
+        /// <param name="result">Result of saving file</param>
         /// <returns>False if interrupted</returns>
         /// \~Chinese
         /// <summary>
         /// 选择文件并保存内容，仅适用于小文件
         /// </summary>
-        /// <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
         /// <param name="message">提示消息</param>
         /// <param name="extension">保存文件的后缀名，以'.'开头，若不考虑后缀则设为null</param>
         /// <param name="data">需要保存的二进制数据</param>
-        /// <param name="saved">是否成功保存，若取消则输出false</param>
+        /// <param name="result">写文件结果</param>
         /// <returns>若中断则返回false</returns>
-        bool SaveFileData(String requestID, String message, String extension, byte[] data, out bool saved);
+        bool SaveFileData(String message, String extension, byte[] data, out ConsoleFileResult result);
     }
 }

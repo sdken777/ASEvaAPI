@@ -1430,6 +1430,24 @@
             <param name="startPosixTime">远程主机的开始时间，单位毫秒</param>
             <returns>是否成功</returns>
         </member>
+        <member name="M:ASEva.Agency.StartRemote(System.String,System.Boolean,System.UInt64)">
+            \~English
+            <summary>
+            (api:app=2.15.4) Switch to remote mode and start
+            </summary>
+            <param name="controllerName">Controller name, for exclusive control</param>
+            <param name="previewOnly">Whether previewing, otherwise recording</param>
+            <param name="startPosixTime">Start time on the remote machine, in posix milliseconds</param>
+            <returns>Whether successful</returns>
+            \~Chinese
+            <summary>
+            (api:app=2.15.4) 切换至远程模式并开始预览或采集
+            </summary>
+            <param name="controllerName">控制者名称，用于独占控制模式</param>
+            <param name="previewOnly">是否为预览</param>
+            <param name="startPosixTime">远程主机的开始时间，单位毫秒</param>
+            <returns>是否成功</returns>
+        </member>
         <member name="M:ASEva.Agency.StopRunning">
             \~English
             <summary>
@@ -2057,6 +2075,28 @@
             (api:app=2.9.0) 创建视频帧获取器(扩展版)
             </summary>
             <returns>视频帧获取器(扩展版)</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetPreviewJpeg(System.Int32,System.Double,System.Double,System.Nullable{ASEva.Timestamp}@,ASEva.Samples.CameraInfo@)">
+            \~English
+            <summary>
+            (api:app=2.15.4) Get the nearest video frame's preview JPEG data from the specified time
+            </summary>
+            <param name="channel">Video channel, ranges 0~23</param>
+            <param name="timeline">Target timeline point, in seconds</param>
+            <param name="maxGap">Max time gap, in seconds</param>
+            <param name="timestamp">Timestamp of output image, null if failed to query</param>
+            <param name="cameraInfo">Camera information, null if failed to query</param>
+            <returns>Video frame's preview JPEG data, image width is 640 pix, null if failed to query</returns>
+            \~Chinese
+            <summary>
+            (api:app=2.15.4) 获取距离指定时间最近的视频帧的预览JPEG图像数据
+            </summary>
+            <param name="channel">视频通道，0~23</param>
+            <param name="timeline">获取视频帧的目标时间线，单位秒</param>
+            <param name="maxGap">容许的最大间隔，单位秒</param>
+            <param name="timestamp">输出图像的时间戳，获取失败则为null</param>
+            <param name="cameraInfo">摄像头信息，获取失败则为null</param>
+            <returns>视频帧的预览JPEG数据，图像宽度为640像素，获取失败则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.SelectSignals(ASEva.SelectSignalHandler,System.Collections.Generic.List{System.String})">
             \~English
@@ -4166,7 +4206,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.15.3
+            version=2.15.4
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -5152,14 +5192,54 @@
             <summary>
             (api:app=2.15.3) [Required] Called while running console procedure
             </summary>
-            <param name="io">Console interaction interface</param>
+            <param name="io">Console interaction interface. The procedure should end immediately if any method of this interface that returns false (interrupted)</param>
             <param name="machineText">Whether the text of messages and options given to the interaction interface should be ID or JSON string that is easy to parse by the machine. Otherwise it should be text that is easy to read by humans</param>
             \~Chinese
             <summary>
             (api:app=2.15.3) [必须实现] 运行控制台过程时被调用
             </summary>
-            <param name="io">控制台交互接口</param>
+            <param name="io">控制台交互接口，在运行过程中次此接口的任何方法返回false(中断)都应该立即结束</param>
             <param name="machineText">输入至交互接口的消息、选项等文本是否应该为便于机器解析的ID或JSON字符串等，否则为便于人阅读的文本</param>
+        </member>
+        <member name="T:ASEva.ConsoleFileResult">
+            \~English
+            <summary>
+            (api:app=2.15.4) Result of saving or loading file data through console
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=2.15.4) 通过控制台读写文件的结果
+            </summary>
+        </member>
+        <member name="P:ASEva.ConsoleFileResult.OK">
+            \~English
+            <summary>
+            Whether successfully saved or loaded file
+            </summary>
+            \~Chinese
+            <summary>
+            是否成功读写文件
+            </summary>
+        </member>
+        <member name="P:ASEva.ConsoleFileResult.FilePath">
+            \~English
+            <summary>
+            The target file's path
+            </summary>
+            \~Chinese
+            <summary>
+            目标文件路径
+            </summary>
+        </member>
+        <member name="P:ASEva.ConsoleFileResult.IsClientFile">
+            \~English
+            <summary>
+            Whether it's a client-side file
+            </summary>
+            \~Chinese
+            <summary>
+            是否为客户端文件
+            </summary>
         </member>
         <member name="T:ASEva.ConsoleIO">
             \~English
@@ -5171,26 +5251,23 @@
             (api:app=2.15.0) 控制台交互接口
             </summary>
         </member>
-        <member name="M:ASEva.ConsoleIO.Print(System.String,System.String)">
+        <member name="M:ASEva.ConsoleIO.Print(System.String)">
             \~English
             <summary>
             Print message
             </summary>
-            <param name="noticeID">Notice ID, for distinguish different notices. Set to null if unnecessary</param>
             <param name="message">The message</param>
             \~Chinese
             <summary>
             打印消息
             </summary>
-            <param name="noticeID">消息ID，用于区分不同消息，若不需要设为null</param>
             <param name="message">消息</param>
         </member>
-        <member name="M:ASEva.ConsoleIO.InputString(System.String,System.String,System.String@)">
+        <member name="M:ASEva.ConsoleIO.InputString(System.String,System.String@)">
             \~English
             <summary>
             Get text input
             </summary>
-            <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
             <param name="message">Title message</param>
             <param name="result">Input default string, output the text input by user (the object remains the same if no input)</param>
             <returns>False if interrupted</returns>
@@ -5198,17 +5275,15 @@
             <summary>
             获取字符串输入
             </summary>
-            <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
             <param name="message">提示消息</param>
             <param name="result">输入默认字符串，输出用户输入的字符串(若不输入则保持其默认值)</param>
             <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.InputNumber(System.String,System.String,System.Double@)">
+        <member name="M:ASEva.ConsoleIO.InputNumber(System.String,System.Double@)">
             \~English
             <summary>
             Get number input
             </summary>
-            <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
             <param name="message">Title message</param>
             <param name="result">Input default value, output the number input by user (the value remains the same if no input or the input is invalid)</param>
             <returns>False if interrupted</returns>
@@ -5216,17 +5291,15 @@
             <summary>
             获取数值输入
             </summary>
-            <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
             <param name="message">提示消息</param>
             <param name="result">输入默认值，输出用户输入的数值(若不输入或输入无效则保持其默认值)</param>
             <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.Confirm(System.String,System.String,System.Boolean@)">
+        <member name="M:ASEva.ConsoleIO.Confirm(System.String,System.Boolean@)">
             \~English
             <summary>
             Request user to confirm
             </summary>
-            <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
             <param name="message">Title message</param>
             <param name="result">Whether user confirmed</param>
             <returns>False if interrupted</returns>
@@ -5234,17 +5307,15 @@
             <summary>
             请求用户确认
             </summary>
-            <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
             <param name="message">提示消息</param>
             <param name="result">用户是否确认</param>
             <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.SingleSelect(System.String,System.String,System.String[],System.Int32@)">
+        <member name="M:ASEva.ConsoleIO.SingleSelect(System.String,System.String[],System.Int32@)">
             \~English
             <summary>
             Single selection
             </summary>
-            <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
             <param name="message">Title message</param>
             <param name="options">All options</param>
             <param name="result">Input index of initial selected option, output the index of option selected by user (-1 only when options is empty)</param>
@@ -5253,18 +5324,16 @@
             <summary>
             单项选择
             </summary>
-            <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
             <param name="message">提示消息</param>
             <param name="options">所有选项</param>
             <param name="result">输入开始时即选中的选项序号，输出用户勾选的选项序号(仅当options为空时返回-1)</param>
             <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.MultiSelect(System.String,System.String,System.String[],System.Int32[]@)">
+        <member name="M:ASEva.ConsoleIO.MultiSelect(System.String,System.String[],System.Int32[]@)">
             \~English
             <summary>
             Multiple selection
             </summary>
-            <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
             <param name="message">Title message</param>
             <param name="options">All options</param>
             <param name="result">Input index of all options selected by the user, output the index of all options selected by the user</param>
@@ -5273,18 +5342,16 @@
             <summary>
             多项选择
             </summary>
-            <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
             <param name="message">提示消息</param>
             <param name="options">所有选项</param>
             <param name="result">输入开始时即选中的所有选项序号，输出用户勾选的所有选项序号</param>
             <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.SelectOpenFile(System.String,System.String,System.String[],System.String@)">
+        <member name="M:ASEva.ConsoleIO.SelectOpenFile(System.String,System.String[],System.String@)">
             \~English
             <summary>
             Select file for opening
             </summary>
-            <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
             <param name="message">Title message</param>
             <param name="extensions">Suffix filtering, starts with '.', or set to null not specified</param>
             <param name="result">Selected file's path, null if user cancelled</param>
@@ -5293,18 +5360,16 @@
             <summary>
             选择文件用于打开
             </summary>
-            <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
             <param name="message">提示消息</param>
             <param name="extensions">后缀名筛选，以'.'开头，若不限后缀则设为null</param>
             <param name="result">用户选中文件的路径，若取消则为null</param>
             <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.SelectSaveFile(System.String,System.String,System.String,System.String@)">
+        <member name="M:ASEva.ConsoleIO.SelectSaveFile(System.String,System.String,System.String@)">
             \~English
             <summary>
             Select file for saving
             </summary>
-            <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
             <param name="message">Title message</param>
             <param name="extension">Suffix of the file to save, starts with '.', or set to null not specified</param>
             <param name="result">Selected file's path, null if user cancelled</param>
@@ -5313,18 +5378,16 @@
             <summary>
             选择文件用于保存
             </summary>
-            <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
             <param name="message">提示消息</param>
             <param name="extension">保存文件的后缀名，以'.'开头，若不考虑后缀则设为null</param>
             <param name="result">用户选中文件的路径，若取消则为null</param>
             <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.SelectFolder(System.String,System.String,System.String@)">
+        <member name="M:ASEva.ConsoleIO.SelectFolder(System.String,System.String@)">
             \~English
             <summary>
             Select folder
             </summary>
-            <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
             <param name="message">Title message</param>
             <param name="result">Selected folder's path, null if user cancelled</param>
             <returns>False if interrupted</returns>
@@ -5332,51 +5395,48 @@
             <summary>
             选择文件夹
             </summary>
-            <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
             <param name="message">提示消息</param>
             <param name="result">用户选中文件夹的路径，若取消则为null</param>
             <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.LoadFileData(System.String,System.String,System.String[],System.Byte[]@)">
+        <member name="M:ASEva.ConsoleIO.LoadFileData(System.String,System.String[],System.Byte[]@,ASEva.ConsoleFileResult@)">
             \~English
             <summary>
             Select a file and load the data, only for small files
             </summary>
-            <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
             <param name="message">Title message</param>
             <param name="extensions">Suffix filtering, starts with '.', or set to null not specified</param>
             <param name="data">Binary data of the file selected by user, null if user cancelled</param>
+            <param name="result">Result of loading file</param>
             <returns>False if interrupted</returns>
             \~Chinese
             <summary>
             选择文件并读取内容，仅适用于小文件
             </summary>
-            <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
             <param name="message">提示消息</param>
             <param name="extensions">后缀名筛选，以'.'开头，若不限后缀则设为null</param>
             <param name="data">用户选中文件的二进制数据，若取消则输出null</param>
+            <param name="result">读文件结果</param>
             <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.SaveFileData(System.String,System.String,System.String,System.Byte[],System.Boolean@)">
+        <member name="M:ASEva.ConsoleIO.SaveFileData(System.String,System.String,System.Byte[],ASEva.ConsoleFileResult@)">
             \~English
             <summary>
             Select a file and save the data, only for small files
             </summary>
-            <param name="requestID">Request ID, for distinguish different requests. Set to null if unnecessary</param>
             <param name="message">Title message</param>
             <param name="extension">Suffix of the file to save, starts with '.', or set to null not specified</param>
             <param name="data">Binary data to save to the file</param>
-            <param name="saved">Whether it's successfully saved, false if user cancelled</param>
+            <param name="result">Result of saving file</param>
             <returns>False if interrupted</returns>
             \~Chinese
             <summary>
             选择文件并保存内容，仅适用于小文件
             </summary>
-            <param name="requestID">请求ID，用于区分不同请求，若不需要则设为null</param>
             <param name="message">提示消息</param>
             <param name="extension">保存文件的后缀名，以'.'开头，若不考虑后缀则设为null</param>
             <param name="data">需要保存的二进制数据</param>
-            <param name="saved">是否成功保存，若取消则输出false</param>
+            <param name="result">写文件结果</param>
             <returns>若中断则返回false</returns>
         </member>
         <member name="T:ASEva.DeviceClass">

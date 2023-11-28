@@ -1444,5 +1444,17 @@ namespace ASEva
             childrenStatus = null;
             return ConfigStatus.Disabled;
         }
+
+        public bool StartRemote(string controllerName, bool previewOnly, ulong startPosixTime)
+        {
+            return false;
+        }
+
+        public byte[] GetPreviewJpeg(int channel, double timeline, double maxGap, out Timestamp? timestamp, out CameraInfo cameraInfo)
+        {
+            timestamp = null;
+            cameraInfo = null;
+            return null;
+        }
     }
 }

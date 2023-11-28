@@ -118,6 +118,7 @@ namespace ASEva
         bool StartOffline(bool force, bool previewOnly);
         bool StartOffline(bool force, bool previewOnly, String genDirName);
         bool StartRemote(bool force, bool previewOnly, String sessionDirName, ulong startPosixTime);
+        bool StartRemote(String controllerName, bool previewOnly, ulong startPosixTime);
         void StopRunning();
         bool StopRunning(String controllerID);
         bool StopRunning(bool force, bool editRecordedSession);
@@ -147,6 +148,7 @@ namespace ASEva
         Dictionary<String, Version> GetNativePluginVersions(NativeLibraryType type);
         VideoFrameGetter CreateVideoFrameGetter();
         VideoFrameGetterX CreateVideoFrameGetterX();
+        byte[] GetPreviewJpeg(int channel, double timeline, double maxGap, out Timestamp? timestamp, out CameraInfo cameraInfo);
         object GetOfflineMapImage(IntSize imageSize, LocPoint centerLocation, int zoom);
         CommonImage GetOfflineMapCommonImage(IntSize imageSize, LocPoint centerLocation, int zoom);
         FloatPoint ConvertOfflineMapLocToPix(LocPoint origin, int zoom, LocPoint point);
@@ -2070,6 +2072,27 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=2.15.4) Switch to remote mode and start
+        /// </summary>
+        /// <param name="controllerName">Controller name, for exclusive control</param>
+        /// <param name="previewOnly">Whether previewing, otherwise recording</param>
+        /// <param name="startPosixTime">Start time on the remote machine, in posix milliseconds</param>
+        /// <returns>Whether successful</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.15.4) 切换至远程模式并开始预览或采集
+        /// </summary>
+        /// <param name="controllerName">控制者名称，用于独占控制模式</param>
+        /// <param name="previewOnly">是否为预览</param>
+        /// <param name="startPosixTime">远程主机的开始时间，单位毫秒</param>
+        /// <returns>是否成功</returns>
+        public static bool StartRemote(String controllerName, bool previewOnly, ulong startPosixTime)
+        {
+            return Handler.StartRemote(controllerName, previewOnly, startPosixTime);
+        }
+
+        /// \~English
+        /// <summary>
         /// Stop the session
         /// </summary>
         /// \~Chinese
@@ -2826,6 +2849,31 @@ namespace ASEva
         public static VideoFrameGetterX CreateVideoFrameGetterX()
         {
             return Handler.CreateVideoFrameGetterX();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.15.4) Get the nearest video frame's preview JPEG data from the specified time
+        /// </summary>
+        /// <param name="channel">Video channel, ranges 0~23</param>
+        /// <param name="timeline">Target timeline point, in seconds</param>
+        /// <param name="maxGap">Max time gap, in seconds</param>
+        /// <param name="timestamp">Timestamp of output image, null if failed to query</param>
+        /// <param name="cameraInfo">Camera information, null if failed to query</param>
+        /// <returns>Video frame's preview JPEG data, image width is 640 pix, null if failed to query</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.15.4) 获取距离指定时间最近的视频帧的预览JPEG图像数据
+        /// </summary>
+        /// <param name="channel">视频通道，0~23</param>
+        /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
+        /// <param name="maxGap">容许的最大间隔，单位秒</param>
+        /// <param name="timestamp">输出图像的时间戳，获取失败则为null</param>
+        /// <param name="cameraInfo">摄像头信息，获取失败则为null</param>
+        /// <returns>视频帧的预览JPEG数据，图像宽度为640像素，获取失败则返回null</returns>
+        public static byte[] GetPreviewJpeg(int channel, double timeline, double maxGap, out Timestamp? timestamp, out CameraInfo cameraInfo)
+        {
+            return Handler.GetPreviewJpeg(channel, timeline, maxGap, out timestamp, out cameraInfo);
         }
 
         /// \~English
