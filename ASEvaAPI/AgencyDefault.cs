@@ -1456,5 +1456,15 @@ namespace ASEva
             cameraInfo = null;
             return null;
         }
+
+        public BusChannelInfo[] GetBusChannelsInfo(DateTime session)
+        {
+            return null;
+        }
+
+        public VideoChannelInfo[] GetVideoChannelsInfo(DateTime session)
+        {
+            return null;
+        }
     }
 }

@@ -4047,4 +4047,66 @@ namespace ASEva
         /// </summary>
         public String Title { get; set; }
     }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=2.15.5) Bus channel info
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=2.15.5) 总线通道信息
+    /// </summary>
+    public class BusChannelInfo
+    {
+        /// \~English
+        /// <summary>
+        /// Channel's type
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 通道类型
+        /// </summary>
+        public BusChannelType Type { get; set; }
+    }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=2.15.5) Video channel info
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=2.15.5) 视频通道信息
+    /// </summary>
+    public class VideoChannelInfo
+    {
+        /// \~English
+        /// <summary>
+        /// Input mode
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 输入模式
+        /// </summary>
+        public VideoInputMode Type { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Frame rate in recording file
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 采集文件帧率
+        /// </summary>
+        public int RecordFPS { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Whether to align as frame rate in recording file
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 是否按采集文件帧率对齐
+        /// </summary>
+        public bool RecordFPSAlign { get; set; }
+    }
 }

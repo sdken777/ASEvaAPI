@@ -4204,9 +4204,37 @@
             </summary>
             <returns>是否使用境内网络服务</returns>
         </member>
+        <member name="M:ASEva.Agency.GetBusChannelsInfo(System.DateTime)">
+            \~English
+            <summary>
+            (api:app=2.15.5) Gets information about all bus channels of a specified session
+            </summary>
+            <param name="session">Session ID</param>
+            <returns>Information about all bus channels of this session. Return null if none exist</returns>
+            \~Chinese
+            <summary>
+            (api:app=2.15.5) 获取指定session的所有总线通道的信息
+            </summary>
+            <param name="session">Session ID</param>
+            <returns>该session的所有总线通道的信息，若不存在则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetVideoChannelsInfo(System.DateTime)">
+            \~English
+            <summary>
+            (api:app=2.15.5) Gets information about all video channels of a specified session
+            </summary>
+            <param name="session">Session ID</param>
+            <returns>Information about all video channels of this session. Return null if none exist</returns>
+            \~Chinese
+            <summary>
+            (api:app=2.15.5) 获取指定session的所有视频通道的信息
+            </summary>
+            <param name="session">Session ID</param>
+            <returns>该session的所有视频通道的信息，若不存在则返回null</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.15.4
+            version=2.15.5
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -15861,6 +15889,66 @@
             \~Chinese
             <summary>
             控制台组件标题
+            </summary>
+        </member>
+        <member name="T:ASEva.BusChannelInfo">
+            \~English
+            <summary>
+            (api:app=2.15.5) Bus channel info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=2.15.5) 总线通道信息
+            </summary>
+        </member>
+        <member name="P:ASEva.BusChannelInfo.Type">
+            \~English
+            <summary>
+            Channel's type
+            </summary>
+            \~Chinese
+            <summary>
+            通道类型
+            </summary>
+        </member>
+        <member name="T:ASEva.VideoChannelInfo">
+            \~English
+            <summary>
+            (api:app=2.15.5) Video channel info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=2.15.5) 视频通道信息
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoChannelInfo.Type">
+            \~English
+            <summary>
+            Input mode
+            </summary>
+            \~Chinese
+            <summary>
+            输入模式
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoChannelInfo.RecordFPS">
+            \~English
+            <summary>
+            Frame rate in recording file
+            </summary>
+            \~Chinese
+            <summary>
+            采集文件帧率
+            </summary>
+        </member>
+        <member name="P:ASEva.VideoChannelInfo.RecordFPSAlign">
+            \~English
+            <summary>
+            Whether to align as frame rate in recording file
+            </summary>
+            \~Chinese
+            <summary>
+            是否按采集文件帧率对齐
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">

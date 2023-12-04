@@ -310,6 +310,8 @@ namespace ASEva
         Dictionary<String, Dictionary<String, String> > GetPluginThirdPartyNotices();
         String GetOfflineMapCopyrightInfo();
         bool IsPRCWebPreferred();
+        BusChannelInfo[] GetBusChannelsInfo(DateTime session);
+        VideoChannelInfo[] GetVideoChannelsInfo(DateTime session);
     }
     
     /// \~English
@@ -5436,6 +5438,40 @@ namespace ASEva
         public static bool IsPRCWebPreferred()
         {
             return Handler.IsPRCWebPreferred();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.15.5) Gets information about all bus channels of a specified session
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <returns>Information about all bus channels of this session. Return null if none exist</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.15.5) 获取指定session的所有总线通道的信息
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <returns>该session的所有总线通道的信息，若不存在则返回null</returns>
+        public static BusChannelInfo[] GetBusChannelsInfo(DateTime session)
+        {
+            return Handler.GetBusChannelsInfo(session);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.15.5) Gets information about all video channels of a specified session
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <returns>Information about all video channels of this session. Return null if none exist</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.15.5) 获取指定session的所有视频通道的信息
+        /// </summary>
+        /// <param name="session">Session ID</param>
+        /// <returns>该session的所有视频通道的信息，若不存在则返回null</returns>
+        public static VideoChannelInfo[] GetVideoChannelsInfo(DateTime session)
+        {
+            return Handler.GetVideoChannelsInfo(session);
         }
     }
 }
