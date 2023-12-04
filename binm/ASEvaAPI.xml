@@ -15921,7 +15921,7 @@
             (api:app=2.15.5) 视频通道信息
             </summary>
         </member>
-        <member name="P:ASEva.VideoChannelInfo.Type">
+        <member name="P:ASEva.VideoChannelInfo.InputMode">
             \~English
             <summary>
             Input mode

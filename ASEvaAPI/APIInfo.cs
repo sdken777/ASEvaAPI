@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 15, 5, 0); // Update log / 更新记录: 新增BusChannelInfo, VideoChannelInfo, Agency.GetBusChannelsInfo, GetVideoChannelsInfo
+            return new Version(2, 15, 5, 1); // Update log / 更新记录: 修正VideoChannelInfo.InputMode
         }
 
         /// \~English

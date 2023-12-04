@@ -4087,7 +4087,7 @@ namespace ASEva
         /// <summary>
         /// 输入模式
         /// </summary>
-        public VideoInputMode Type { get; set; }
+        public VideoInputMode InputMode { get; set; }
 
         /// \~English
         /// <summary>
