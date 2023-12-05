@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 15, 5, 1); // Update log / 更新记录: 修正VideoChannelInfo.InputMode
+            return new Version(2, 15, 5, 2); // Update log / 更新记录: 初始化VideoChannelInfo
         }
 
         /// \~English

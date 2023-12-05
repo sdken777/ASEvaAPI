@@ -15951,6 +15951,16 @@
             是否按采集文件帧率对齐
             </summary>
         </member>
+        <member name="M:ASEva.VideoChannelInfo.#ctor">
+            \~English
+            <summary>
+            Constructor
+            </summary>
+            \~Chinese
+            <summary>
+            默认构造函数
+            </summary>
+        </member>
         <member name="T:ASEva.Utility.AttributeParser">
             \~English
             <summary>

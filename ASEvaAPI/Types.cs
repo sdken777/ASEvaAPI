@@ -4108,5 +4108,18 @@ namespace ASEva
         /// 是否按采集文件帧率对齐
         /// </summary>
         public bool RecordFPSAlign { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 默认构造函数
+        /// </summary>
+        public VideoChannelInfo()
+        {
+            InputMode = new VideoInputMode();
+        }
     }
 }
