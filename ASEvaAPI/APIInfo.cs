@@ -12,8 +12,8 @@
  * \~English In addition, refer to ASEva.Samples for the definition of samples used in plugin, and ASEva.Graph for graph report definitions. \n\n
  * \~Chinese 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph 。 \n\n
  * 
- * \~English This document corresponds to API version: 2.15.5 \n
- * \~Chinese 本文档对应API版本：2.15.5
+ * \~English This document corresponds to API version: 2.15.6 \n
+ * \~Chinese 本文档对应API版本：2.15.6
  */
 
 using System;
@@ -22,7 +22,7 @@ using System.Diagnostics;
 namespace ASEva
 {
     /// <summary>
-    /// version=2.15.5
+    /// version=2.15.6
     /// </summary>
     public class APIInfo
     {
@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 15, 5, 2); // Update log / 更新记录: 初始化VideoChannelInfo
+            return new Version(2, 15, 6, 0); // Update log / 更新记录: 新增NativeClass.GetRawToSampleProtocols
         }
 
         /// \~English
