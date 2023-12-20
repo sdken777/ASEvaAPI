@@ -1,8 +1,8 @@
 ﻿/*! \mainpage
  * \~English This library contains the APIs for MonoMac. See ASEva.UIMonoMac for details. \n
  * \~Chinese 此类库为ASEva-API中基于MonoMac的部分。详见 ASEva.UIMonoMac \n
- * \~English This document corresponds to API version: 1.4.3 \n\n
- * \~Chinese 本文档对应API版本：1.4.3 \n\n
+ * \~English This document corresponds to API version: 1.5.0 \n\n
+ * \~Chinese 本文档对应API版本：1.5.0 \n\n
  * 
  * \~English MonoMac repository (.NET Core branch): https://github.com/cwensley/monomac \n
  * \~Chinese MonoMac仓库(.NET Core分支): https://github.com/cwensley/monomac \n
@@ -15,7 +15,7 @@ using System;
 namespace ASEva.UIMonoMac
 {
     /// <summary>
-    /// version=1.4.3
+    /// version=1.5.0
     /// </summary>
     public class APIInfo
     {
@@ -31,7 +31,7 @@ namespace ASEva.UIMonoMac
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 4, 3, 0); // Update log / 更新记录: 实现SnapshotFromScreen
+            return new Version(1, 5, 0, 0); // Update log / 更新记录: 支持eto 2.6.1
         }
     }
 }

@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.11.7
+            version=2.12.1
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -4189,14 +4189,14 @@
             Add a column (should be called before any ASEva.UIEto.TextTableView.AddRow )
             </summary>
             <param name="title">Column title</param>
-            <param name="logicalWidth">Logical width of the column</param>
+            <param name="logicalWidth">Logical width of the column, set to zero to expand</param>
             <param name="editable">Whether text of the column is editable</param>
             \~Chinese
             <summary>
             添加一列（需要在添加行之前进行）
             </summary>
             <param name="title">列标题</param>
-            <param name="logicalWidth">列宽度</param>
+            <param name="logicalWidth">列宽度，设为0表示自动扩展</param>
             <param name="editable">是否可编辑该列文字</param>
         </member>
         <member name="M:ASEva.UIEto.TextTableView.GetRowCount">
