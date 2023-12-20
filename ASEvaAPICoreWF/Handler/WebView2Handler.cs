@@ -10,6 +10,7 @@ using Eto.Drawing;
 using System.Threading.Tasks;
 using Microsoft.Web.WebView2.Core;
 using System.Reflection;
+using Eto.WinForms.Forms.Controls;
 
 
 #if WINFORMS
@@ -38,7 +39,6 @@ namespace ASEva.UICoreWF
 		{
 			Control = new WebView2Control();
 			Control.CoreWebView2InitializationCompleted += Control_CoreWebView2Ready;
-			InitializeAsync();
 		}
 
 		/// <summary>
@@ -66,15 +66,22 @@ namespace ASEva.UICoreWF
 		/// Override to use your own WebView2 initialization, if necessary
 		/// </summary>
 		/// <returns>Task</returns>
-		protected async virtual Task OnInitializeWebView2Async()
+		protected async virtual System.Threading.Tasks.Task OnInitializeWebView2Async()
 		{
 			var env = Environment;
 			if (env == null && GetCoreWebView2Environment != null)
 			{
 				env = CoreWebView2Environment = await GetCoreWebView2Environment();
 			}
-			
-			await Control.EnsureCoreWebView2Async(env);
+
+			try
+			{
+				await Control.EnsureCoreWebView2Async(env);
+			}
+			catch (Exception)
+            {
+				failed = true;
+            }
 		}
 		
 		async void InitializeAsync() => await OnInitializeWebView2Async();
@@ -85,26 +92,22 @@ namespace ASEva.UICoreWF
 			Size = new Size(100, 100);
 		}
 
-		public static CoreWebView2Environment CoreWebView2Environment;
+		protected override void OnInitializeComplete()
+		{
+			base.OnInitializeComplete();
+
+			// initialize webview2 after styles are applied, since styles might be used to configure the Environment or CoreWebView2Environment
+			InitializeAsync();
+		}
 
 		// CHECK: 简化WebView2环境验证与初始化
 		public static void InitCoreWebView2Environment()
-        {
-			var path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\SpadasFiles\\temp\\webview2";
-			CoreWebView2Environment.CreateAsync(null, path, new CoreWebView2EnvironmentOptions("--disable-features=RendererCodeIntegrity")).ContinueWith((task) => CoreWebView2Environment = task.Result);
-		}
-
-		async void InitializeAsync()
 		{
-			// CHECK: 确保WebView2环境已初始化完毕
-			if (CoreWebView2Environment != null)
+			GetCoreWebView2Environment = () =>
 			{
-				try
-                {
-					await Control.EnsureCoreWebView2Async(CoreWebView2Environment);
-				}
-				catch (Exception) { }
-			}
+				var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile) + "\\SpadasFiles\\temp\\webview2";
+				return CoreWebView2Environment.CreateAsync(null, path, new CoreWebView2EnvironmentOptions("--disable-features=RendererCodeIntegrity"));
+			};
 		}
 
 		void Control_CoreWebView2Ready(object sender, CoreWebView2InitializationCompletedEventArgs e)

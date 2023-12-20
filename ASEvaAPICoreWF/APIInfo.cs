@@ -1,8 +1,8 @@
 ﻿/*! \mainpage
  * \~English This library contains the APIs for .NET Core Winform. See ASEva.UICoreWF for details. \n
  * \~Chinese 此类库为ASEva-API中基于.NET Core Winform的部分。详见 ASEva.UICoreWF \n
- * \~English This document corresponds to API version: 2.5.8
- * \~Chinese 本文档对应API版本：2.5.8
+ * \~English This document corresponds to API version: 2.6.0
+ * \~Chinese 本文档对应API版本：2.6.0
  */
 
 using System;
@@ -10,7 +10,7 @@ using System;
 namespace ASEva.UICoreWF
 {
     /// <summary>
-    /// version=2.5.8
+    /// version=2.6.0
     /// </summary>
     public class APIInfo
     {
@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 5, 8, 3); // Update log / 更新记录: 修正DialogPanel中首个控件为RadioButtonList时SelectedIndex无效问题
+            return new Version(2, 6, 0, 0); // Update log / 更新记录: 支持eto 2.6.1
         }
     }
 }

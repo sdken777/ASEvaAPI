@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIWpf.APIInfo">
             <summary>
-            version=1.5.6
+            version=1.6.0
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.APIInfo.GetAPIVersion">
@@ -154,6 +154,29 @@
             <summary>
             Gets or sets the spacing between the image and the label when both are present
             </summary>
+        </member>
+        <member name="F:ASEva.UIWpf.WebView2Handler.CoreWebView2Environment">
+            <summary>
+            The default environment to use if none is specified with <see cref="P:ASEva.UIWpf.WebView2Handler.Environment"/>.
+            </summary>
+        </member>
+        <member name="F:ASEva.UIWpf.WebView2Handler.GetCoreWebView2Environment">
+            <summary>
+            Specifies a function to call when we need the default environment, if not already specified
+            </summary>
+        </member>
+        <member name="P:ASEva.UIWpf.WebView2Handler.Environment">
+            <summary>
+            Gets or sets the environment to use, defaulting to <see cref="F:ASEva.UIWpf.WebView2Handler.CoreWebView2Environment"/>.
+            This can only be set once during construction or with a style for this handler.
+            </summary>
+            <value>Environment to use to initialize WebView2</value>
+        </member>
+        <member name="M:ASEva.UIWpf.WebView2Handler.OnInitializeWebView2Async">
+            <summary>
+            Override to use your own WebView2 initialization, if necessary
+            </summary>
+            <returns>Task</returns>
         </member>
         <member name="T:ASEva.UIWpf.ImageConverter">
             \~English

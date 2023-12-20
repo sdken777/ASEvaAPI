@@ -7,16 +7,11 @@ using wf = System.Windows;
 
 using WpfLabel = System.Windows.Controls.Label;
 
-<<<<<<< HEAD
 using Eto;
 using Eto.Wpf;
 using Eto.Wpf.Forms;
 
 namespace ASEva.UIWpf
-#endif
-=======
-namespace Eto.Wpf.Forms.Controls
->>>>>>> official-handler
 {
 	class EtoButton : swc.Button, IEtoWpfControl
 	{
