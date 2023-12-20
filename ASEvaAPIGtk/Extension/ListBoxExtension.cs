@@ -97,7 +97,7 @@ namespace ASEva.UIGtk
         public static int[] GetActiveIndices(this ListBox listBox)
         {
             var rows = listBox.SelectedRows;
-            var output = new int[rows == null ? 0 : rows.Count];
+            var output = new int[rows == null ? 0 : rows.Length];
             for (int i = 0; i < output.Length; i++) output[i] = (rows[i] as ListBoxRow).Index;
             return output;
         }
@@ -111,7 +111,7 @@ namespace ASEva.UIGtk
         public static Widget[] GetActiveItems(this ListBox listBox)
         {
             var rows = listBox.SelectedRows;
-            var output = new Widget[rows == null ? 0 : rows.Count];
+            var output = new Widget[rows == null ? 0 : rows.Length];
             for (int i = 0; i < output.Length; i++)
             {
                 var c = (rows[i] as ListBoxRow).Child;

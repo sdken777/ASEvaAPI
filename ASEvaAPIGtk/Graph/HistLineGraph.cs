@@ -41,7 +41,7 @@ namespace ASEva.UIGtk
             drawSwap.Paint += draw_Paint;
         }
 
-        private HistLineGraph(Builder builder) : base(builder.GetObject("HistLineGraph").Handle)
+        private HistLineGraph(Builder builder) : base(builder.GetRawOwnedObject("HistLineGraph"))
         {
             builder.Autoconnect(this);
         }

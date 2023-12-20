@@ -50,7 +50,7 @@ namespace ASEva.UIGtk
             dialogPanel.OnDialogClose += delegate { Close(); };
         }
 
-        private AppDialogX11(Builder builder) : base(builder.GetObject("AppDialogX11").Handle)
+        private AppDialogX11(Builder builder) : base(builder.GetRawOwnedObject("AppDialogX11"))
         {
             builder.Autoconnect(this);
         }

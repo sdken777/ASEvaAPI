@@ -29,7 +29,7 @@ namespace ASEva.UIGtk
             this.callback = callback;
         }
  
-        private FlowLayout2DBackendGtk(Gtk.Builder builder) : base(builder.GetObject("FlowLayout2DBackendGtk").Handle)
+        private FlowLayout2DBackendGtk(Gtk.Builder builder) : base(builder.GetRawOwnedObject("FlowLayout2DBackendGtk"))
         {
             builder.Autoconnect(this);
         }

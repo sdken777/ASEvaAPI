@@ -32,7 +32,7 @@ namespace ASEva.UIGtk
             eventBoxHelper.LeftDown += eventBoxHelper_LeftDown;
         }
 
-        private ValueGraph(Builder builder) : base(builder.GetObject("ValueGraph").Handle)
+        private ValueGraph(Builder builder) : base(builder.GetRawOwnedObject("ValueGraph"))
         {
             builder.Autoconnect(this);
         }

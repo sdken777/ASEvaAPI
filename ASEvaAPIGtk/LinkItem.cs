@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
             eventBox.LeaveNotifyEvent += eventBox_LeaveNotify;
         }
 
-        private LinkItem(Builder builder) : base(builder.GetObject("LinkItem").Handle)
+        private LinkItem(Builder builder) : base(builder.GetRawOwnedObject("LinkItem"))
         {
             builder.Autoconnect(this);
         }

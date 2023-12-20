@@ -39,7 +39,7 @@ namespace ASEva.UIGtk
             drawSwap.Paint += draw_Paint;
         }
 
-        private LabelTableGraph(Builder builder) : base(builder.GetObject("LabelTableGraph").Handle)
+        private LabelTableGraph(Builder builder) : base(builder.GetRawOwnedObject("LabelTableGraph"))
         {
             builder.Autoconnect(this);
         }

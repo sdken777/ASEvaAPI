@@ -805,5 +805,8 @@ namespace ASEva.UIGtk
 	static class GtkWindow
 	{
 		internal static readonly object MovableByWindowBackground_Key = new object();
+		internal static readonly object DisableAutoSizeUpdate_Key = new object();
+		internal static readonly object AutoSizePerformed_Key = new object();
+		internal static readonly object AutoSize_Key = new object();
 	}
 }

@@ -40,7 +40,7 @@ namespace ASEva.UIGtk
             drawSwap.Paint += draw_Paint;
         }
 
-        private MatrixTableGraph(Builder builder) : base(builder.GetObject("MatrixTableGraph").Handle)
+        private MatrixTableGraph(Builder builder) : base(builder.GetRawOwnedObject("MatrixTableGraph"))
         {
             builder.Autoconnect(this);
         }
