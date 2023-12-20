@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 1, 1); // Update log / 更新记录: GridHandler禁用搜索框
+            return new Version(2, 8, 1, 2); // Update log / 更新记录: NativeMethods合并至WebViewHandler
         }
     }
 }
