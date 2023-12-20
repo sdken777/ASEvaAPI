@@ -812,6 +812,17 @@
             <param name="bitsPerPixel">Bits per pixel</param>
             <param name="controlObject">Platform specific object for the bitmap data (if any)</param>
         </member>
+        <member name="M:Eto.Drawing.BitmapData.#ctor(Eto.Drawing.Image,System.IntPtr,System.Int32,System.Int32,System.Object,System.Boolean)">
+            <summary>
+            Initializes a new instance of the BitmapData class
+            </summary>
+            <param name="image">Image this data is for</param>
+            <param name="data">Pointer to the bitmap data</param>
+            <param name="scanWidth">Width of each scan row, in bytes</param>
+            <param name="bitsPerPixel">Bits per pixel</param>
+            <param name="controlObject">Platform specific object for the bitmap data (if any)</param>
+            <param name="premultipliedAlpha"><c>true</c> to specify that the RGB components are premultiplied with the alpha component, <c>false</c> otherwise.</param>
+        </member>
         <member name="P:Eto.Drawing.BitmapData.Image">
             <summary>
             Gets the image this data is for
@@ -930,6 +941,15 @@
             <summary>
             Gets the platform-specific control object for the bitmap data
             </summary>
+        </member>
+        <member name="P:Eto.Drawing.BitmapData.PremultipliedAlpha">
+            <summary>
+            Gets a value indicating the RGB components are premultiplied with the alpha component
+            </summary>
+            <remarks>
+            Note that the <see cref="M:Eto.Drawing.BitmapData.TranslateDataToArgb(System.Int32)"/> and <see cref="M:Eto.Drawing.BitmapData.TranslateArgbToData(System.Int32)"/> take this into account when translating data.
+            Otherwise, you can use this value do determine how to do your own translation.
+            </remarks>
         </member>
         <member name="M:Eto.Drawing.BitmapData.Dispose">
             <summary>
@@ -1459,6 +1479,39 @@
         <member name="P:Eto.Drawing.Brushes.Black">
             <summary>Gets a solid brush with a color ARGB value of #FF000000</summary>
         </member>
+        <member name="T:Eto.Drawing.ColorStyles">
+            <summary>
+            Color styles when parsing or converting the Color struct
+            </summary>
+        </member>
+        <member name="F:Eto.Drawing.ColorStyles.None">
+            <summary>
+            Default style for Eto
+            </summary>
+        </member>
+        <member name="F:Eto.Drawing.ColorStyles.ExcludeAlpha">
+            <summary>
+            Exclude the alpha component when parsing or when converting to hex, omit alpha if possible (it equals 1.0 / 255)
+            </summary>
+        </member>
+        <member name="F:Eto.Drawing.ColorStyles.AlphaLast">
+            <summary>
+            Specifies that the alpha component comes last when in hex (compatible with CSS format), otherwise alpha is first
+            </summary>
+        </member>
+        <member name="F:Eto.Drawing.ColorStyles.ShortHex">
+            <summary>
+            Use short hex version, if possible.
+            </summary>
+            <remarks>
+            This is only used when converting to hex, and only if all component values support the short version
+            </remarks>
+        </member>
+        <member name="F:Eto.Drawing.ColorStyles.All">
+            <summary>
+            All color styles
+            </summary>
+        </member>
         <member name="T:Eto.Drawing.Color">
             <summary>
             Represents a color with RGBA (Red, Green, Blue, and Alpha) components
@@ -1534,12 +1587,29 @@
             <param name="blue">The blue component (0-255)</param>
             <param name="alpha">The alpha component (0-255)</param>
         </member>
+        <member name="M:Eto.Drawing.Color.FromPremultipliedArgb(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a color from premultiplied 8-bit ARGB components
+            </summary>
+            <returns>A new instance of the Color object with the specified components unmultiplied</returns>
+            <param name="red">The red component (0-255)</param>
+            <param name="green">The green component (0-255)</param>
+            <param name="blue">The blue component (0-255)</param>
+            <param name="alpha">The alpha component (0-255)</param>
+        </member>
         <member name="M:Eto.Drawing.Color.FromArgb(System.Int32)">
             <summary>
             Creates a Color from a 32-bit ARGB value
             </summary>
             <param name="argb">32-bit ARGB value with Alpha in the high byte</param>
             <returns>A new instance of the Color object with the specified color</returns>
+        </member>
+        <member name="M:Eto.Drawing.Color.FromPremultipliedArgb(System.Int32)">
+            <summary>
+            Creates a Color from a premultiplied 32-bit ARGB value
+            </summary>
+            <param name="argb">32-bit ARGB value with Alpha in the high byte</param>
+            <returns>A new instance of the Color object with the specified color, unmultiplied</returns>
         </member>
         <member name="M:Eto.Drawing.Color.FromRgb(System.Int32)">
             <summary>
@@ -1625,13 +1695,13 @@
             Converts the specified string to a color
             </summary>
             <remarks>
-            The string can be any of these formats:
+            The string can be any of these formats
             	- #AARRGGBB or #RRGGBB  (where ARGB are hex values)
             	- 0xAARRGGBB or 0xRRGGBB
             	- [named] (where [named] is a name of one of the properties in <see cref="T:Eto.Drawing.Colors"/>)
             	- [uint]  (where [uint] is a base-10 ARGB value)
-            	- [red], [green], [blue] (where each component is a value from 0-255)
-            	- [alpha], [red], [green], [blue]  (where each component is a value from 0-255)
+            	- [red], [green], [blue] (where each component is a value from 0-255, 0%-100%, or 0.0-1.0)
+            	- [alpha], [red], [green], [blue] (where each component is a value from 0-255, 0%-100%, or 0.0-1.0)
             	
             If the string is null or empty, this will return <see cref="P:Eto.Drawing.Colors.Transparent"/>
             </remarks>
@@ -1639,12 +1709,35 @@
             <param name="color">Color struct with the parsed value, or Transparent if value is invalid</param>
             <returns>True if the value was successfully parsed into a color, false otherwise</returns>
         </member>
+        <member name="M:Eto.Drawing.Color.TryParse(System.String,Eto.Drawing.Color@,Eto.Drawing.ColorStyles)">
+            <summary>
+            Converts the specified string to a color
+            </summary>
+            <remarks>
+            The string can be any of these formats:
+            	- #AARRGGBB or 0xAARRGGBB (where ARGB are hex values)
+            	- #RRGGBBAA or 0xRRGGBBAA (when <paramref name="style" /> has <see cref="F:Eto.Drawing.ColorStyles.AlphaLast" />)
+            	- #RRGGBB or 0xRRGGBB
+            	- [named] (where [named] is a name of one of the properties in <see cref="T:Eto.Drawing.Colors"/>)
+            	- [uint]  (where [uint] is a base-10 ARGB value)
+            	- [uint]  (where [uint] is a base-10 RGBA value when <paramref name="style" /> has <see cref="F:Eto.Drawing.ColorStyles.AlphaLast" />)
+            	- [red], [green], [blue] (where each component is a value from 0-255, 0%-100%, or 0.0-1.0)
+            	- [alpha], [red], [green], [blue] (where each component is a value from 0-255, 0%-100%, or 0.0-1.0)
+            	- [red], [green], [blue], [alpha] (when <paramref name="style" /> has <see cref="F:Eto.Drawing.ColorStyles.AlphaLast" />)
+            	
+            If the string is null or empty, this will return <see cref="P:Eto.Drawing.Colors.Transparent"/>
+            </remarks>
+            <param name="value">String value to parse</param>
+            <param name="color">Color struct with the parsed value, or Transparent if value is invalid</param>
+            <param name="style">Styles for parsing</param>
+            <returns>True if the value was successfully parsed into a color, false otherwise</returns>
+        </member>
         <member name="M:Eto.Drawing.Color.Parse(System.String)">
             <summary>
             Converts a string into a new instance of a Color
             </summary>
             <remarks>
-            Use <see cref="M:Eto.Drawing.Color.TryParse(System.String,Eto.Drawing.Color@)"/> instead of try/catch.
+            Use <see cref="M:Eto.Drawing.Color.TryParse(System.String,Eto.Drawing.Color@,Eto.Drawing.ColorStyles)"/> instead of try/catch.
             </remarks>
             <exception cref="T:System.ArgumentOutOfRangeException">If the value is an invalid color</exception>
             <param name="value">Value to convert</param>
@@ -1694,6 +1787,18 @@
             </summary>
             <returns>The 32-bit ARGB value that corresponds to this color</returns>
         </member>
+        <member name="M:Eto.Drawing.Color.ToPremultipliedArgb">
+            <summary>
+            Converts this color to a premultiplied 32-bit ARGB value, where each of the R, G, B components are first multiplied by the alpha component
+            </summary>
+            <returns>A premultiplied ARGB value</returns>
+        </member>
+        <member name="M:Eto.Drawing.Color.ToArgb(Eto.Drawing.ColorStyles)">
+            <summary>
+            Converts this color to a 32-bit ARGB value given the specified <paramref name="style" />
+            </summary>
+            <returns>The 32-bit ARGB value that corresponds to this color</returns>
+        </member>
         <member name="M:Eto.Drawing.Color.ToHex(System.Boolean)">
             <summary>
             Converts this color to a hex representation
@@ -1703,6 +1808,16 @@
             </remarks>
             <param name="includeAlpha">True to include the alpha component, false to exclude it</param>
             <returns>A hex representation of this color, with 8 digits if <paramref name="includeAlpha"/> is true, or 6 digits if false</returns>
+        </member>
+        <member name="M:Eto.Drawing.Color.ToHex(Eto.Drawing.ColorStyles)">
+            <summary>
+            Converts this color to a hex representation
+            </summary>
+            <remarks>
+            This will either return a hex value with 8 digits (two per component), or 6 digits (two per RGB) depending on the specified <paramref name="style" />
+            </remarks>
+            <param name="style">Styles for converting to hex</param>
+            <returns>A hex representation of this color, with 6 digits if <paramref name="style" /> has <see cref="F:Eto.Drawing.ColorStyles.ExcludeAlpha" />, or 8 digits if not</returns>
         </member>
         <member name="M:Eto.Drawing.Color.ToString">
             <summary>
@@ -5208,6 +5323,21 @@
             Creates a clone of the graphics path
             </summary>
         </member>
+        <member name="M:Eto.Drawing.IGraphicsPath.FillContains(Eto.Drawing.PointF)">
+            <summary>
+            Gets a value indicating that the specified <paramref name="point"/> is contained by the path when filled
+            </summary>
+            <param name="point">Point to test</param>
+            <returns><c>true</c> if the path contains the point when filled, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:Eto.Drawing.IGraphicsPath.StrokeContains(Eto.Drawing.Pen,Eto.Drawing.PointF)">
+            <summary>
+            Gets a value indicating that the spedified <paramref name="point"/> is on the path when stroked with the specified <paramref name="pen"/>
+            </summary>
+            <param name="pen">Pen to test the stroke with</param>
+            <param name="point">Point to test</param>
+            <returns><c>true</c> if the point is on the path when stroked with the specified pen, <c>false</c> otherwise</returns>
+        </member>
         <member name="T:Eto.Drawing.GraphicsPathExtensions">
             <summary>
             Extensions for the <see cref="T:Eto.Drawing.IGraphicsPath"/>
@@ -5455,6 +5585,21 @@
             </remarks>
             <param name="path">Child path to add to this instance</param>
             <param name="connect">True to connect the current figure to the first figure of the specified path, if it is not closed</param>
+        </member>
+        <member name="M:Eto.Drawing.GraphicsPath.FillContains(Eto.Drawing.PointF)">
+            <summary>
+            Gets a value indicating that the specified <paramref name="point"/> is contained by the path when filled
+            </summary>
+            <param name="point">Point to test</param>
+            <returns><c>true</c> if the path contains the point when filled, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:Eto.Drawing.GraphicsPath.StrokeContains(Eto.Drawing.Pen,Eto.Drawing.PointF)">
+            <summary>
+            Gets a value indicating that the spedified <paramref name="point"/> is on the path when stroked with the specified <paramref name="pen"/>
+            </summary>
+            <param name="pen">Pen to test the stroke with</param>
+            <param name="point">Point to test</param>
+            <returns><c>true</c> if the point is on the path when stroked with the specified pen, <c>false</c> otherwise</returns>
         </member>
         <member name="M:Eto.Drawing.GraphicsPath.Transform(Eto.Drawing.IMatrix)">
             <summary>
@@ -6715,6 +6860,27 @@
             <param name="right">Amount of padding to apply to the right</param>
             <param name="bottom">Amount of padding to apply to the bottom</param>
         </member>
+        <member name="M:Eto.Drawing.Padding.Round(Eto.Drawing.PaddingF)">
+            <summary>
+            Converts a floating point <paramref name="padding"/> to an integral padding by rounding each of its components
+            </summary>
+            <param name="padding">Padding to convert</param>
+            <returns>A new instance of a Padding class with rounded components of the specified <paramref name="padding"/></returns>
+        </member>
+        <member name="M:Eto.Drawing.Padding.Truncate(Eto.Drawing.PaddingF)">
+            <summary>
+            Converts a floating point <paramref name="padding"/> to an integral padding by truncating each of its components
+            </summary>
+            <param name="padding">Padding to convert</param>
+            <returns>A new instance of a Padding class with truncated components of the specified <paramref name="padding"/></returns>
+        </member>
+        <member name="M:Eto.Drawing.Padding.Ceiling(Eto.Drawing.PaddingF)">
+            <summary>
+            Converts a floating point <paramref name="padding"/> to an integral padding by taking the ceiling of its components
+            </summary>
+            <param name="padding">Padding to convert</param>
+            <returns>A new instance of a Padding class with the ceiling of the specified <paramref name="padding"/></returns>
+        </member>
         <member name="P:Eto.Drawing.Padding.Horizontal">
             <summary>
             Gets the total horizontal padding, which is the sum of <see cref="P:Eto.Drawing.Padding.Left"/> and <see cref="P:Eto.Drawing.Padding.Right"/>.
@@ -6800,6 +6966,19 @@
             <param name="other">Other padding instance to compare with</param>
             <returns>True if the specified padding is equal to this instance, false if not</returns>
         </member>
+        <member name="M:Eto.Drawing.Padding.op_Explicit(Eto.Drawing.PaddingF)~Eto.Drawing.Padding">
+            <summary>
+            Converts a floating precision padding to integral values by truncating them.
+            </summary>
+            <param name="padding">Padding to truncate</param>
+        </member>
+        <member name="M:Eto.Drawing.Padding.op_UnaryNegation(Eto.Drawing.Padding)">
+            <summary>
+            Returns a new Padding with negative left, top, right, and bottom values
+            </summary>
+            <param name="padding">Padding to negate</param>
+            <returns>A new padding with negative values</returns>
+        </member>
         <member name="T:Eto.Drawing.PaddingConverterInternal">
             <summary>
             Converter for the <see cref="T:Eto.Drawing.Padding"/> class
@@ -6857,6 +7036,183 @@
             <param name="culture">Culture to perform the conversion for</param>
             <param name="value">Value to convert</param>
             <returns>A new instance of the <see cref="T:Eto.Drawing.Padding"/> object with the value represented by <paramref name="value"/></returns>
+        </member>
+        <member name="T:Eto.Drawing.PaddingF">
+            <summary>
+            Represents an amount of padding to apply to an object at the top, left, right, and bottom.
+            </summary>
+        </member>
+        <member name="P:Eto.Drawing.PaddingF.Top">
+            <summary>
+            Gets or sets the padding on the top
+            </summary>
+        </member>
+        <member name="P:Eto.Drawing.PaddingF.Left">
+            <summary>
+            Gets or sets the padding on the left
+            </summary>
+        </member>
+        <member name="P:Eto.Drawing.PaddingF.Right">
+            <summary>
+            Gets or sets the padding on the right
+            </summary>
+        </member>
+        <member name="P:Eto.Drawing.PaddingF.Bottom">
+            <summary>
+            Gets or sets the padding on the bottom
+            </summary>
+        </member>
+        <member name="F:Eto.Drawing.PaddingF.Empty">
+            <summary>
+            Gets an empty padding with zero for each side
+            </summary>
+        </member>
+        <member name="M:Eto.Drawing.PaddingF.#ctor(System.Single)">
+            <summary>
+            Initializes a new instance of the Padding class with the specified padding for all sides
+            </summary>
+            <param name="all">Amount of padding to apply to each side</param>
+        </member>
+        <member name="M:Eto.Drawing.PaddingF.#ctor(System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the Padding class with the specified padding for horizontal and vertical sides
+            </summary>
+            <param name="horizontal">Amount of padding to set the <see cref="P:Eto.Drawing.PaddingF.Left"/> and <see cref="P:Eto.Drawing.PaddingF.Right"/> sides</param>
+            <param name="vertical">Amount of padding to set the <see cref="P:Eto.Drawing.PaddingF.Top"/> and <see cref="P:Eto.Drawing.PaddingF.Bottom"/> sides</param>
+        </member>
+        <member name="M:Eto.Drawing.PaddingF.#ctor(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the Padding class
+            </summary>
+            <param name="left">Amount of padding to apply to the left</param>
+            <param name="top">Amount of padding to apply to the top</param>
+            <param name="right">Amount of padding to apply to the right</param>
+            <param name="bottom">Amount of padding to apply to the bottom</param>
+        </member>
+        <member name="P:Eto.Drawing.PaddingF.Horizontal">
+            <summary>
+            Gets the total horizontal padding, which is the sum of <see cref="P:Eto.Drawing.PaddingF.Left"/> and <see cref="P:Eto.Drawing.PaddingF.Right"/>.
+            </summary>
+        </member>
+        <member name="P:Eto.Drawing.PaddingF.Vertical">
+            <summary>
+            Gets the total vertical padding, which is the sum of <see cref="P:Eto.Drawing.PaddingF.Top"/> and <see cref="P:Eto.Drawing.PaddingF.Bottom"/>
+            </summary>
+        </member>
+        <member name="P:Eto.Drawing.PaddingF.Size">
+            <summary>
+            Gets the padding as a size value with the <see cref="P:Eto.Drawing.PaddingF.Horizontal"/> and <see cref="P:Eto.Drawing.PaddingF.Vertical"/> values as 
+            the <see cref="P:Eto.Drawing.Size.Width"/> and <see cref="P:Eto.Drawing.Size.Height"/>, respectively.
+            </summary>
+        </member>
+        <member name="P:Eto.Drawing.PaddingF.IsZero">
+            <summary>
+            Gets a value indicating that all sides of the padding are zero
+            </summary>
+        </member>
+        <member name="M:Eto.Drawing.PaddingF.op_Addition(Eto.Drawing.PaddingF,Eto.Drawing.PaddingF)">
+            <summary>
+            Adds two padding values together
+            </summary>
+            <param name="value1">First padding value to add</param>
+            <param name="value2">Second padding value to add</param>
+            <returns>The sum of both padding values</returns>
+        </member>
+        <member name="M:Eto.Drawing.PaddingF.op_Subtraction(Eto.Drawing.PaddingF,Eto.Drawing.PaddingF)">
+            <summary>
+            Subtracts a padding value from another value
+            </summary>
+            <param name="value1">Padding value to subtract from</param>
+            <param name="value2">Padding value to subtract from the first value</param>
+            <returns>The value of the first padding minus the second padding value</returns>
+        </member>
+        <member name="M:Eto.Drawing.PaddingF.op_Equality(Eto.Drawing.PaddingF,Eto.Drawing.PaddingF)">
+            <summary>
+            Determines the equality of two padding objects
+            </summary>
+            <param name="value1">First padding value to compare</param>
+            <param name="value2">Second padding value to compare</param>
+            <returns>True if the two padding values are equal, false otherwise</returns>
+        </member>
+        <member name="M:Eto.Drawing.PaddingF.op_Inequality(Eto.Drawing.PaddingF,Eto.Drawing.PaddingF)">
+            <summary>
+            Determines the inequality of two padding objects
+            </summary>
+            <param name="value1">First padding value to compare</param>
+            <param name="value2">Second padding value to compare</param>
+            <returns>True if the values are not equal, false if they are equal</returns>
+        </member>
+        <member name="M:Eto.Drawing.PaddingF.op_Implicit(System.Single)~Eto.Drawing.PaddingF">
+            <summary>
+            Implicitly converts a single integer to a padding with all sides of equal value.
+            </summary>
+            <param name="all">Value for padding on all sides</param>
+        </member>
+        <member name="M:Eto.Drawing.PaddingF.Equals(System.Object)">
+            <summary>
+            Determines the equality between this instance and the specified object
+            </summary>
+            <param name="obj">Object to compare to</param>
+            <returns>True if obj is a Padding object and is equal to this instance, false if not</returns>
+        </member>
+        <member name="M:Eto.Drawing.PaddingF.GetHashCode">
+            <summary>
+            Gets the hash code for this Padding instance
+            </summary>
+            <returns>Hash code for this instance</returns>
+        </member>
+        <member name="M:Eto.Drawing.PaddingF.ToString">
+            <summary>
+            Converts this object to a string
+            </summary>
+            <returns>String representation of this object</returns>
+        </member>
+        <member name="M:Eto.Drawing.PaddingF.Equals(Eto.Drawing.PaddingF)">
+            <summary>
+            Determines equality between this instance and the specified padding
+            </summary>
+            <param name="other">Other padding instance to compare with</param>
+            <returns>True if the specified padding is equal to this instance, false if not</returns>
+        </member>
+        <member name="M:Eto.Drawing.PaddingF.op_Implicit(Eto.Drawing.Padding)~Eto.Drawing.PaddingF">
+            <summary>
+            Converts an integral padding to floading precision padding.
+            </summary>
+            <param name="padding">Padding to convert</param>
+        </member>
+        <member name="M:Eto.Drawing.PaddingF.op_UnaryNegation(Eto.Drawing.PaddingF)">
+            <summary>
+            Returns a new Padding with negative left, top, right, and bottom values
+            </summary>
+            <param name="padding">Padding to negate</param>
+            <returns>A new padding with negative values</returns>
+        </member>
+        <member name="T:Eto.Drawing.PaddingFConverterInternal">
+            <summary>
+            Converter for the <see cref="T:Eto.Drawing.PaddingF"/> class
+            </summary>
+        </member>
+        <member name="F:Eto.Drawing.PaddingFConverterInternal.DimensionSplitter">
+            <summary>
+            The character to split up the string which will be converted
+            </summary>
+        </member>
+        <member name="M:Eto.Drawing.PaddingFConverterInternal.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)">
+            <summary>
+            Determines if the specified <paramref name="sourceType"/> can be converted to a <see cref="T:Eto.Drawing.PaddingF"/> object
+            </summary>
+            <param name="context">Conversion context</param>
+            <param name="sourceType">Type to convert from</param>
+            <returns>True if this converter can convert from the specified type, false otherwise</returns>
+        </member>
+        <member name="M:Eto.Drawing.PaddingFConverterInternal.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)">
+            <summary>
+            Converts the specified value to a <see cref="T:Eto.Drawing.PaddingF"/> object
+            </summary>
+            <param name="context">Conversion context</param>
+            <param name="culture">Culture to perform the conversion for</param>
+            <param name="value">Value to convert</param>
+            <returns>A new instance of the <see cref="T:Eto.Drawing.PaddingF"/> object with the value represented by <paramref name="value"/></returns>
         </member>
         <member name="T:Eto.Drawing.Palette">
             <summary>
@@ -9098,6 +9454,20 @@
             <param name="height">Height to inflate the top and bottom of the rectangle by</param>
             <returns>A new rectangle inflated by the specified width and height</returns>
         </member>
+        <member name="M:Eto.Drawing.Rectangle.Inset(Eto.Drawing.Padding)">
+            <summary>
+            Insets the rectangle by the specified padding.
+            </summary>
+            <param name="padding">Padding to inset this rectangle by</param>
+        </member>
+        <member name="M:Eto.Drawing.Rectangle.Inset(Eto.Drawing.Rectangle,Eto.Drawing.Padding)">
+            <summary>
+            Returns a new rectangle that is inset by the specified <paramref name="padding" />
+            </summary>
+            <param name="rectangle">Rectangle to inset</param>
+            <param name="padding">Padding to inset by</param>
+            <returns>A new rectangle inset by the specified padding</returns>
+        </member>
         <member name="M:Eto.Drawing.Rectangle.Align(Eto.Drawing.Size)">
             <summary>
             Aligns the rectangle to a grid of the specified <paramref name="gridSize"/>
@@ -9288,6 +9658,22 @@
             </summary>
             <param name="rectangle">Rectangle to offset</param>
             <param name="offset">Offset to move the location by</param>
+        </member>
+        <member name="M:Eto.Drawing.Rectangle.op_Addition(Eto.Drawing.Rectangle,Eto.Drawing.Padding)">
+            <summary>
+            Returns a rectangle inset by the specified padding
+            </summary>
+            <param name="rectangle">Rectangle to inset</param>
+            <param name="padding">Padding to inset by</param>
+            <returns>A new rectangle inset by the specified padding</returns>
+        </member>
+        <member name="M:Eto.Drawing.Rectangle.op_Subtraction(Eto.Drawing.Rectangle,Eto.Drawing.Padding)">
+            <summary>
+            Returns a rectangle expanded by the specified padding
+            </summary>
+            <param name="rectangle">Rectangle to expanded</param>
+            <param name="padding">Padding to expanded by</param>
+            <returns>A new rectangle expanded by the specified padding</returns>
         </member>
         <member name="M:Eto.Drawing.Rectangle.op_Equality(Eto.Drawing.Rectangle,Eto.Drawing.Rectangle)">
             <summary>
@@ -9795,6 +10181,20 @@
             <param name="height">Height to inflate the top and bottom of the rectangle by</param>
             <returns>A new rectangle inflated by the specified width and height</returns>
         </member>
+        <member name="M:Eto.Drawing.RectangleF.Inset(Eto.Drawing.PaddingF)">
+            <summary>
+            Insets the rectangle by the specified padding.
+            </summary>
+            <param name="padding">Padding to inset this rectangle by</param>
+        </member>
+        <member name="M:Eto.Drawing.RectangleF.Inset(Eto.Drawing.RectangleF,Eto.Drawing.PaddingF)">
+            <summary>
+            Returns a new rectangle that is inset by the specified <paramref name="padding" />
+            </summary>
+            <param name="rectangle">Rectangle to inset</param>
+            <param name="padding">Padding to inset by</param>
+            <returns>A new rectangle inset by the specified padding</returns>
+        </member>
         <member name="M:Eto.Drawing.RectangleF.Distance(Eto.Drawing.RectangleF,Eto.Drawing.PointF)">
             <summary>
             Calculates the distance between the specified <paramref name="point"/> and <paramref name="rect"/>.
@@ -9994,6 +10394,22 @@
             </summary>
             <param name="rectangle">Rectangle to offset</param>
             <param name="offset">Offset to move the location by</param>
+        </member>
+        <member name="M:Eto.Drawing.RectangleF.op_Addition(Eto.Drawing.RectangleF,Eto.Drawing.PaddingF)">
+            <summary>
+            Returns a rectangle inset by the specified padding
+            </summary>
+            <param name="rectangle">Rectangle to inset</param>
+            <param name="padding">Padding to inset by</param>
+            <returns>A new rectangle inset by the specified padding</returns>
+        </member>
+        <member name="M:Eto.Drawing.RectangleF.op_Subtraction(Eto.Drawing.RectangleF,Eto.Drawing.PaddingF)">
+            <summary>
+            Returns a rectangle expanded by the specified padding
+            </summary>
+            <param name="rectangle">Rectangle to expanded</param>
+            <param name="padding">Padding to expanded by</param>
+            <returns>A new rectangle expanded by the specified padding</returns>
         </member>
         <member name="M:Eto.Drawing.RectangleF.op_Equality(Eto.Drawing.RectangleF,Eto.Drawing.RectangleF)">
             <summary>
@@ -11253,6 +11669,11 @@
             the location of the assembly can no longer be found as it is loaded from memory.
             </remarks>
         </member>
+        <member name="F:Eto.EtoSpecialFolder.Downloads">
+            <summary>
+            Gets the user's downloads folder
+            </summary>
+        </member>
         <member name="T:Eto.EtoEnvironment">
             <summary>
             Environment methods
@@ -11640,6 +12061,56 @@
             </summary>
             <value>The application website label.</value>
         </member>
+        <member name="T:Eto.Forms.UIThreadCheckMode">
+            <summary>
+            UI Thread check mode when <see cref="M:Eto.Forms.Application.EnsureUIThread"/> is called.
+            </summary>
+        </member>
+        <member name="F:Eto.Forms.UIThreadCheckMode.None">
+            <summary>
+            Do no checking
+            </summary>
+        </member>
+        <member name="F:Eto.Forms.UIThreadCheckMode.Warning">
+            <summary>
+            Emit a warning with Trace.WriteLine()
+            </summary>
+        </member>
+        <member name="F:Eto.Forms.UIThreadCheckMode.Error">
+            <summary>
+            Throw an exception
+            </summary>
+        </member>
+        <member name="T:Eto.Forms.UIThreadAccessException">
+            <summary>
+            Exception thrown when a control method is accessed in a non-UI thread using <see cref="M:Eto.Forms.Application.EnsureUIThread"/>.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.UIThreadAccessException.#ctor">
+            <summary>
+            Initializes a new instance of the UIThreadAccessException class
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.UIThreadAccessException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the UIThreadAccessException class with the specified message
+            </summary>
+            <param name="message">Message for the exception</param>
+        </member>
+        <member name="M:Eto.Forms.UIThreadAccessException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the UIThreadAccessException class with the specified message and inner exception
+            </summary>
+            <param name="message">Message for the exception</param>
+            <param name="inner">Inner exception</param>
+        </member>
+        <member name="M:Eto.Forms.UIThreadAccessException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Initializes a new instance of the UIThreadAccessException class from serialization
+            </summary>
+            <param name="info">Serialization info</param>
+            <param name="context">Streaming context</param>
+        </member>
         <member name="T:Eto.Forms.Application">
             <summary>
             Starting point for any UI application
@@ -11793,6 +12264,17 @@
         <member name="M:Eto.Forms.Application.InitializePlatform(Eto.Platform)">
             <summary>
             Helper to call proper constructor for initializing the platform before base class constructor is called
+            </summary>
+        </member>
+        <member name="P:Eto.Forms.Application.UIThreadCheckMode">
+            <summary>
+            Gets or sets the UI thread check mode which can be used to troubleshoot or ensure that all UI code is executed in the UI thread.
+            </summary>
+            <value>The current thread check mode</value>
+        </member>
+        <member name="M:Eto.Forms.Application.EnsureUIThread">
+            <summary>
+            Ensures the current thread is the main/UI thread
             </summary>
         </member>
         <member name="M:Eto.Forms.Application.Run">
@@ -12927,9 +13409,14 @@
         </member>
         <member name="M:Eto.Forms.BindingChangedEventArgs.#ctor(System.Object)">
             <summary>
-            Initializes a new instance of the BindingChangedEventArgs
+            Initializes a new instance of the BindingChangedEventArgs with the specified value
             </summary>
             <param name="value">value that the binding was set to</param>
+        </member>
+        <member name="M:Eto.Forms.BindingChangedEventArgs.#ctor">
+            <summary>
+            Initializes a new instance of the BindingChangedEventArgs
+            </summary>
         </member>
         <member name="T:Eto.Forms.BindingChangingEventArgs">
             <summary>
@@ -12949,9 +13436,14 @@
         </member>
         <member name="M:Eto.Forms.BindingChangingEventArgs.#ctor(System.Object)">
             <summary>
-            Initializes a new instance of the BindingChangingEventArgs
+            Initializes a new instance of the BindingChangingEventArgs with the specifid value
             </summary>
             <param name="value"></param>
+        </member>
+        <member name="M:Eto.Forms.BindingChangingEventArgs.#ctor">
+            <summary>
+            Initializes a new instance of the BindingChangingEventArgs
+            </summary>
         </member>
         <member name="T:Eto.Forms.BindingCollection">
             <summary>
@@ -17396,6 +17888,12 @@
             load/unload, and common events.
             </remarks>
         </member>
+        <member name="P:Eto.Forms.Control.Handler">
+            <summary>
+            Gets the handler for the widget, ensuring the current thread is the UI thread
+            </summary>
+            <value>The handler object for this control</value>
+        </member>
         <member name="P:Eto.Forms.Control.Loaded">
             <summary>
             Gets a value indicating that the control is loaded onto a form, that is it has been created, added to a parent, and shown
@@ -17918,6 +18416,19 @@
             </remarks>
             <value>The current size of the control</value>
         </member>
+        <member name="M:Eto.Forms.Control.GetPreferredSize">
+            <summary>
+            Gets the preferred size of this control given infinite space available.
+            </summary>
+            <returns>The size this control would prefer to be</returns>
+        </member>
+        <member name="M:Eto.Forms.Control.GetPreferredSize(Eto.Drawing.SizeF)">
+            <summary>
+            Gets the preferred size of this control given the specified <paramref name="availableSize" />.
+            </summary>
+            <param name="availableSize">The available size to determine the preferred size</param>
+            <returns>The preferred size this control would like to be, which can be larger than the specified <paramref name="availableSize" />.</returns>
+        </member>
         <member name="P:Eto.Forms.Control.Width">
             <summary>
             Gets or sets the width of the control size.
@@ -17945,9 +18456,7 @@
             Gets or sets a value indicating whether this <see cref="T:Eto.Forms.Control"/> is visible to the user.
             </summary>
             <remarks>
-            When the visibility of a control is set to false, it will still occupy space in the layout, but not be shown.
-            The only exception is for controls like the <see cref="T:Eto.Forms.Splitter"/>, which will hide a pane if the visibility
-            of one of the panels is changed.
+            When the visibility of a control is set to false, it will not occupy space in the layout.
             </remarks>
             <value><c>true</c> if visible; otherwise, <c>false</c>.</value>
         </member>
@@ -17999,7 +18508,7 @@
         </member>
         <member name="P:Eto.Forms.Control.IsAttached">
             <summary>
-            Gets or sets a value indicating this control has been attached to a native container
+            Gets a value indicating this control has been attached to a native container
             </summary>
             <seealso cref="M:Eto.Forms.Control.AttachNative"/>
         </member>
@@ -18236,6 +18745,11 @@
             </remarks>
             <param name="widget">Widget to style.</param>
             <param name="style">Style of the widget to apply.</param>
+        </member>
+        <member name="M:Eto.Forms.Control.Print">
+            <summary>
+            Shows a print dialog to print the specified control
+            </summary>
         </member>
         <member name="M:Eto.Forms.Control.Dispose(System.Boolean)">
             <summary>
@@ -18738,6 +19252,13 @@
             Gets a parent window wrapper around the native window
             </summary>
             <returns>The parent window.</returns>
+        </member>
+        <member name="M:Eto.Forms.Control.IHandler.GetPreferredSize(Eto.Drawing.SizeF)">
+            <summary>
+            Gets the preferred size of this control given the specified <paramref name="availableSize" />.
+            </summary>
+            <param name="availableSize">The available size to determine the preferred size</param>
+            <returns>The preferred size this control would like to be, which can be larger than the specified <paramref name="availableSize" />.</returns>
         </member>
         <member name="T:Eto.Forms.DateTimePickerMode">
             <summary>
@@ -20883,6 +21404,33 @@
             </summary>
             <value><c>true</c> if visible; otherwise, <c>false</c>.</value>
         </member>
+        <member name="P:Eto.Forms.GridColumn.Expand">
+            <summary>
+            Gets or sets a value indicating whether this column should expand to fill the available space in the Grid
+            </summary>
+            <remarks>
+            If more than one column has this set, they will share the space evenly.
+            </remarks>
+            <value><c>true</c> to expand the column; otherwise, <c>false</c></value>
+        </member>
+        <member name="P:Eto.Forms.GridColumn.HeaderTextAlignment">
+            <summary>
+            Gets or sets a value to specify the header text alignment for this column
+            </summary>
+            <value>TextAlignment for the column header</value>
+        </member>
+        <member name="P:Eto.Forms.GridColumn.MinWidth">
+            <summary>
+            Gets or sets the minimum width for the column
+            </summary>
+            <value>The column minimum width</value>
+        </member>
+        <member name="P:Eto.Forms.GridColumn.MaxWidth">
+            <summary>
+            Gets or sets the maximum width for the column
+            </summary>
+            <value>The column maximum width</value>
+        </member>
         <member name="T:Eto.Forms.GridColumn.IHandler">
             <summary>
             Handler interface for the <see cref="T:Eto.Forms.GridColumn"/>.
@@ -20939,6 +21487,33 @@
             Gets or sets a value indicating whether this column is visible.
             </summary>
             <value><c>true</c> if visible; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Eto.Forms.GridColumn.IHandler.Expand">
+            <summary>
+            Gets or sets a value indicating whether this column should expand to fill the available space in the Grid
+            </summary>
+            <remarks>
+            If more than one column has this set, they will share the space evenly.
+            </remarks>
+            <value><c>true</c> to expand the column; otherwise, <c>false</c></value>
+        </member>
+        <member name="P:Eto.Forms.GridColumn.IHandler.HeaderTextAlignment">
+            <summary>
+            Gets or sets a value to specify the header text alignment for this column
+            </summary>
+            <value>TextAlignment for the column header</value>
+        </member>
+        <member name="P:Eto.Forms.GridColumn.IHandler.MinWidth">
+            <summary>
+            Gets or sets the minimum width for the column
+            </summary>
+            <value>The column minimum width</value>
+        </member>
+        <member name="P:Eto.Forms.GridColumn.IHandler.MaxWidth">
+            <summary>
+            Gets or sets the maximum width for the column
+            </summary>
+            <value>The column maximum width</value>
         </member>
         <member name="T:Eto.Forms.GridItem">
             <summary>
@@ -23092,6 +23667,12 @@
             for the thousands separator, decimal separator, and currency symbol.
             </remarks>
         </member>
+        <member name="P:Eto.Forms.NumericStepper.Wrap">
+            <summary>
+            A value indicating whether to wrap the value after the user steps past the min or max value
+            </summary>
+            <value><c>true</c> to wrap the value when stepping past its bounds, <c>false</c> to stop</value>
+        </member>
         <member name="P:Eto.Forms.NumericStepper.ValueBinding">
             <summary>
             Gets the binding for the <see cref="P:Eto.Forms.NumericStepper.Value"/> property.
@@ -23226,6 +23807,12 @@
             This is used to format the numeric value, and when using the <see cref="P:Eto.Forms.NumericStepper.IHandler.FormatString"/> it determines the character(s) used
             for the thousands separator, decimal separator, and currency symbol.
             </remarks>
+        </member>
+        <member name="P:Eto.Forms.NumericStepper.IHandler.Wrap">
+            <summary>
+            A value indicating whether to wrap the value after the user steps past the min or max value
+            </summary>
+            <value><c>true</c> to wrap the value when stepping past its bounds, <c>false</c> to stop</value>
         </member>
         <member name="T:Eto.Forms.Panel">
             <summary>
@@ -24562,6 +25149,12 @@
             </summary>
             <value>The value.</value>
         </member>
+        <member name="P:Eto.Forms.Slider.ValueBinding">
+            <summary>
+            Gets the binding for the <see cref="P:Eto.Forms.Slider.Value"/> property.
+            </summary>
+            <value>The value binding.</value>
+        </member>
         <member name="P:Eto.Forms.Slider.Orientation">
             <summary>
             Gets or sets the orientation of the slider.
@@ -24731,6 +25324,23 @@
             Both panels will resize along with the splitter's container.
             </summary>
         </member>
+        <member name="T:Eto.Forms.SplitterPositionChangingEventArgs">
+            <summary>
+            Event arguments for the <see cref="E:Eto.Forms.Splitter.PositionChanging"/> event.
+            </summary>
+        </member>
+        <member name="P:Eto.Forms.SplitterPositionChangingEventArgs.NewPosition">
+            <summary>
+            The new position for the splitter
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:Eto.Forms.SplitterPositionChangingEventArgs.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the SplitterPositionChangingEventArgs class
+            </summary>
+            <param name="newPosition"></param>
+        </member>
         <member name="T:Eto.Forms.Splitter">
             <summary>
             Control to show two panels separated by a splitter
@@ -24767,6 +25377,54 @@
         <member name="M:Eto.Forms.Splitter.OnPositionChanged(System.EventArgs)">
             <summary>
             Raises the <see cref="E:Eto.Forms.Splitter.PositionChanged"/> event.
+            </summary>
+            <param name="e">Event arguments.</param>
+        </member>
+        <member name="F:Eto.Forms.Splitter.PositionChangingEvent">
+            <summary>
+            Identifier for the <see cref="E:Eto.Forms.Splitter.PositionChanging"/> event
+            </summary>
+        </member>
+        <member name="E:Eto.Forms.Splitter.PositionChanging">
+            <summary>
+            Raised when the user moves the splitter. Set <see cref="P:System.ComponentModel.CancelEventArgs.Cancel" /> to true to abort the change.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Splitter.OnPositionChanging(Eto.Forms.SplitterPositionChangingEventArgs)">
+            <summary>
+            Raises the <see cref="E:Eto.Forms.Splitter.PositionChanging"/> event.
+            </summary>
+            <param name="e">Event arguments.</param>
+        </member>
+        <member name="F:Eto.Forms.Splitter.PositionChangeStartedEvent">
+            <summary>
+            Identifier for the <see cref="E:Eto.Forms.Splitter.PositionChangeStarted"/> event
+            </summary>
+        </member>
+        <member name="E:Eto.Forms.Splitter.PositionChangeStarted">
+            <summary>
+            Raised when the user starts moving the splitter.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Splitter.OnPositionChangeStarted(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Eto.Forms.Splitter.PositionChangeStarted"/> event.
+            </summary>
+            <param name="e">Event arguments.</param>
+        </member>
+        <member name="F:Eto.Forms.Splitter.PositionChangeCompletedEvent">
+            <summary>
+            Identifier for the <see cref="E:Eto.Forms.Splitter.PositionChangeCompleted"/> event
+            </summary>
+        </member>
+        <member name="E:Eto.Forms.Splitter.PositionChangeCompleted">
+            <summary>
+            Raised when the user starts finishes moving the splitter
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Splitter.OnPositionChangeCompleted(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Eto.Forms.Splitter.PositionChangeCompleted"/> event.
             </summary>
             <param name="e">Event arguments.</param>
         </member>
@@ -24858,6 +25516,21 @@
             Raises the position changed event.
             </summary>
         </member>
+        <member name="M:Eto.Forms.Splitter.ICallback.OnPositionChanging(Eto.Forms.Splitter,Eto.Forms.SplitterPositionChangingEventArgs)">
+            <summary>
+            Raises the position changing event.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Splitter.ICallback.OnPositionChangeStarted(Eto.Forms.Splitter,System.EventArgs)">
+            <summary>
+            Raises the position change started event.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Splitter.ICallback.OnPositionChangeCompleted(Eto.Forms.Splitter,System.EventArgs)">
+            <summary>
+            Raises the position change completed event.
+            </summary>
+        </member>
         <member name="T:Eto.Forms.Splitter.Callback">
             <summary>
             Callback implementation for handlers of the <see cref="T:Eto.Forms.Splitter"/>
@@ -24866,6 +25539,21 @@
         <member name="M:Eto.Forms.Splitter.Callback.OnPositionChanged(Eto.Forms.Splitter,System.EventArgs)">
             <summary>
             Raises the position changed event.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Splitter.Callback.OnPositionChanging(Eto.Forms.Splitter,Eto.Forms.SplitterPositionChangingEventArgs)">
+            <summary>
+            Raises the position changing event.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Splitter.Callback.OnPositionChangeStarted(Eto.Forms.Splitter,System.EventArgs)">
+            <summary>
+            Raises the position change started event.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Splitter.Callback.OnPositionChangeCompleted(Eto.Forms.Splitter,System.EventArgs)">
+            <summary>
+            Raises the position change completed event.
             </summary>
         </member>
         <member name="T:Eto.Forms.Splitter.IHandler">
@@ -26287,6 +26975,13 @@
             </summary>
             <value>The size.</value>
         </member>
+        <member name="M:Eto.Forms.ThemedControlHandler`3.GetPreferredSize(Eto.Drawing.SizeF)">
+            <summary>
+            Gets the preferred size of this control given the specified <paramref name="availableSize" />.
+            </summary>
+            <param name="availableSize">The available size to determine the preferred size</param>
+            <returns>The preferred size this control would like to be, which can be larger than the specified <paramref name="availableSize" />.</returns>
+        </member>
         <member name="P:Eto.Forms.ThemedControlHandler`3.Width">
             <summary>
             Gets or sets the width of the control size.
@@ -26516,6 +27211,9 @@
             Gets the window this control is contained in
             </summary>
             <returns>The parent window, or null if it is not currently on a window</returns>
+        </member>
+        <member name="M:Eto.Forms.ThemedControlHandler`3.Print">
+            <inheritdoc />
         </member>
         <member name="T:Eto.Forms.ToggleButton">
             <summary>
@@ -28209,6 +28907,51 @@
             Horizontal sizing cursor
             </summary>
         </member>
+        <member name="F:Eto.Forms.CursorType.SizeAll">
+            <summary>
+            All direction sizing cursor
+            </summary>
+        </member>
+        <member name="F:Eto.Forms.CursorType.SizeLeft">
+            <summary>
+            Left side sizing cursor, which on some platforms is the same as <see cref="F:Eto.Forms.CursorType.SizeRight"/>
+            </summary>
+        </member>
+        <member name="F:Eto.Forms.CursorType.SizeTop">
+            <summary>
+            Top side sizing cursor, which on some platforms is the same as <see cref="F:Eto.Forms.CursorType.SizeBottom"/>
+            </summary>
+        </member>
+        <member name="F:Eto.Forms.CursorType.SizeRight">
+            <summary>
+            Right side sizing cursor, which on some platforms is the same as <see cref="F:Eto.Forms.CursorType.SizeLeft"/>
+            </summary>
+        </member>
+        <member name="F:Eto.Forms.CursorType.SizeBottom">
+            <summary>
+            Bottom side sizing cursor, which on some platforms is the same as <see cref="F:Eto.Forms.CursorType.SizeTop"/>
+            </summary>
+        </member>
+        <member name="F:Eto.Forms.CursorType.SizeTopLeft">
+            <summary>
+            Top-left corner sizing cursor, which on some platforms is the same as <see cref="F:Eto.Forms.CursorType.SizeBottomRight"/>
+            </summary>
+        </member>
+        <member name="F:Eto.Forms.CursorType.SizeTopRight">
+            <summary>
+            Top-right corner sizing cursor, which on some platforms is the same as <see cref="F:Eto.Forms.CursorType.SizeBottomLeft"/>
+            </summary>
+        </member>
+        <member name="F:Eto.Forms.CursorType.SizeBottomLeft">
+            <summary>
+            Bottom-left corner sizing cursor, which on some platforms is the same as <see cref="F:Eto.Forms.CursorType.SizeTopRight"/>
+            </summary>
+        </member>
+        <member name="F:Eto.Forms.CursorType.SizeBottomRight">
+            <summary>
+            Bottom-right corner sizing cursor, which on some platforms is the same as <see cref="F:Eto.Forms.CursorType.SizeTopLeft"/>
+            </summary>
+        </member>
         <member name="T:Eto.Forms.Cursor">
             <summary>
             Class for a particular Mouse cursor type
@@ -28366,6 +29109,51 @@
         <member name="P:Eto.Forms.Cursors.HorizontalSplit">
             <summary>
             Horizontal sizing cursor
+            </summary>
+        </member>
+        <member name="P:Eto.Forms.Cursors.SizeAll">
+            <summary>
+            All direction sizing cursor
+            </summary>
+        </member>
+        <member name="P:Eto.Forms.Cursors.SizeLeft">
+            <summary>
+            Left side sizing cursor, which on some platforms is the same as <see cref="P:Eto.Forms.Cursors.SizeRight"/>
+            </summary>
+        </member>
+        <member name="P:Eto.Forms.Cursors.SizeTop">
+            <summary>
+            Top side sizing cursor, which on some platforms is the same as <see cref="P:Eto.Forms.Cursors.SizeBottom"/>
+            </summary>
+        </member>
+        <member name="P:Eto.Forms.Cursors.SizeRight">
+            <summary>
+            Right side sizing cursor, which on some platforms is the same as <see cref="P:Eto.Forms.Cursors.SizeLeft"/>
+            </summary>
+        </member>
+        <member name="P:Eto.Forms.Cursors.SizeBottom">
+            <summary>
+            Bottom side sizing cursor, which on some platforms is the same as <see cref="P:Eto.Forms.Cursors.SizeTop"/>
+            </summary>
+        </member>
+        <member name="P:Eto.Forms.Cursors.SizeTopLeft">
+            <summary>
+            Top-left corner sizing cursor, which on some platforms is the same as <see cref="P:Eto.Forms.Cursors.SizeBottomRight"/>
+            </summary>
+        </member>
+        <member name="P:Eto.Forms.Cursors.SizeTopRight">
+            <summary>
+            Top-right corner sizing cursor, which on some platforms is the same as <see cref="P:Eto.Forms.Cursors.SizeBottomLeft"/>
+            </summary>
+        </member>
+        <member name="P:Eto.Forms.Cursors.SizeBottomLeft">
+            <summary>
+            Bottom-left corner sizing cursor, which on some platforms is the same as <see cref="P:Eto.Forms.Cursors.SizeTopRight"/>
+            </summary>
+        </member>
+        <member name="P:Eto.Forms.Cursors.SizeBottomRight">
+            <summary>
+            Bottom-right corner sizing cursor, which on some platforms is the same as <see cref="P:Eto.Forms.Cursors.SizeTopLeft"/>
             </summary>
         </member>
         <member name="T:Eto.Forms.DataFormats">
@@ -30327,6 +31115,42 @@
         </member>
         <member name="F:Eto.Forms.Keys.RightApplication">
             <summary>The right application/windows key</summary>
+        </member>
+        <member name="F:Eto.Forms.Keys.F13">
+            <summary>The F13 key</summary>
+        </member>
+        <member name="F:Eto.Forms.Keys.F14">
+            <summary>The F14 key</summary>
+        </member>
+        <member name="F:Eto.Forms.Keys.F15">
+            <summary>The F15 key</summary>
+        </member>
+        <member name="F:Eto.Forms.Keys.F16">
+            <summary>The F16 key</summary>
+        </member>
+        <member name="F:Eto.Forms.Keys.F17">
+            <summary>The F17 key</summary>
+        </member>
+        <member name="F:Eto.Forms.Keys.F18">
+            <summary>The F18 key</summary>
+        </member>
+        <member name="F:Eto.Forms.Keys.F19">
+            <summary>The F19 key</summary>
+        </member>
+        <member name="F:Eto.Forms.Keys.F20">
+            <summary>The F20 key</summary>
+        </member>
+        <member name="F:Eto.Forms.Keys.F21">
+            <summary>The F21 key</summary>
+        </member>
+        <member name="F:Eto.Forms.Keys.F22">
+            <summary>The F22 key</summary>
+        </member>
+        <member name="F:Eto.Forms.Keys.F23">
+            <summary>The F23 key</summary>
+        </member>
+        <member name="F:Eto.Forms.Keys.F24">
+            <summary>The F24 key</summary>
         </member>
         <member name="F:Eto.Forms.Keys.Shift">
             <summary>The Shift Key Modifier</summary>
@@ -33947,6 +34771,126 @@
             <param name="submenu">Submenu to get all child menu items for.</param>
             <returns>Enumeration of all child menu items of the specified submenu.</returns>
         </member>
+        <member name="T:Eto.Forms.SubMenuItem">
+            <summary>
+            Menu item for a submenu
+            </summary>
+            <remarks>
+            This will always show as a submenu, even when no items have been added.
+            The <see cref="E:Eto.Forms.SubMenuItem.Opening" /> can be used to populate or modify the submenu before it opens.
+            </remarks>
+        </member>
+        <member name="F:Eto.Forms.SubMenuItem.OpeningEvent">
+            <summary>
+            Event identifier for handlers when attaching the <see cref="E:Eto.Forms.SubMenuItem.Opening"/> event.
+            </summary>
+        </member>
+        <member name="E:Eto.Forms.SubMenuItem.Opening">
+            <summary>
+            Occurs when the sub menu is opening, before it is shown.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.SubMenuItem.OnOpening(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Eto.Forms.SubMenuItem.Opening"/> event.
+            </summary>
+            <param name="e">Event arguments</param>
+        </member>
+        <member name="F:Eto.Forms.SubMenuItem.ClosedEvent">
+            <summary>
+            Event identifier for handlers when attaching the <see cref="E:Eto.Forms.SubMenuItem.Closed"/> event.
+            </summary>
+        </member>
+        <member name="E:Eto.Forms.SubMenuItem.Closed">
+            <summary>
+            Occurs when the sub menu is closed/dismissed, after the menu item has been selected and its click 
+            event is triggered.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.SubMenuItem.OnClosed(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Eto.Forms.SubMenuItem.Closed"/> event.
+            </summary>
+            <param name="e">Event arguments</param>
+        </member>
+        <member name="F:Eto.Forms.SubMenuItem.ClosingEvent">
+            <summary>
+            Event identifier for handlers when attaching the <see cref="E:Eto.Forms.SubMenuItem.Closing"/> event.
+            </summary>
+        </member>
+        <member name="E:Eto.Forms.SubMenuItem.Closing">
+            <summary>
+            Occurs before the sub menu is closed/dismissed when the user clicks an item, but before the menu item's
+            click event is triggered.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.SubMenuItem.OnClosing(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Eto.Forms.SubMenuItem.Closing"/> event.
+            </summary>
+            <param name="e">Event arguments</param>
+        </member>
+        <member name="M:Eto.Forms.SubMenuItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Eto.Forms.SubMenuItem"/> class.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.SubMenuItem.#ctor(Eto.Forms.MenuItem[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Eto.Forms.SubMenuItem"/> class with the specified <paramref name="items" />.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.SubMenuItem.GetCallback">
+            <summary>
+            Gets an instance of an object used to perform callbacks to the widget from handler implementations
+            </summary>
+            <returns>The callback instance to use for this widget</returns>
+        </member>
+        <member name="T:Eto.Forms.SubMenuItem.ICallback">
+            <summary>
+            Callback interface for instances of <see cref="T:Eto.Forms.SubMenuItem"/>
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.SubMenuItem.ICallback.OnOpening(Eto.Forms.SubMenuItem,System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Eto.Forms.SubMenuItem.Opening"/> event.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.SubMenuItem.ICallback.OnClosed(Eto.Forms.SubMenuItem,System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Eto.Forms.SubMenuItem.Closed"/> event.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.SubMenuItem.ICallback.OnClosing(Eto.Forms.SubMenuItem,System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Eto.Forms.SubMenuItem.Closing"/> event.
+            </summary>
+        </member>
+        <member name="T:Eto.Forms.SubMenuItem.Callback">
+            <summary>
+            Callback implementation for handlers of the <see cref="T:Eto.Forms.SubMenuItem"/>
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.SubMenuItem.Callback.OnOpening(Eto.Forms.SubMenuItem,System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Eto.Forms.SubMenuItem.Opening"/> event.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.SubMenuItem.Callback.OnClosed(Eto.Forms.SubMenuItem,System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Eto.Forms.SubMenuItem.Closed"/> event.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.SubMenuItem.Callback.OnClosing(Eto.Forms.SubMenuItem,System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Eto.Forms.SubMenuItem.Closing"/> event.
+            </summary>
+        </member>
+        <member name="T:Eto.Forms.SubMenuItem.IHandler">
+            <summary>
+            Handler interface for the <see cref="T:Eto.Forms.SubMenuItem"/>.
+            </summary>
+        </member>
         <member name="T:Eto.Forms.MessageBoxButtons">
             <summary>
             Message box buttons for methods of <see cref="T:Eto.Forms.MessageBox"/>
@@ -34577,6 +35521,17 @@
             <see cref="E:Eto.Forms.PrintDocument.PrintPage"/> event.
             </remarks>
         </member>
+        <member name="M:Eto.Forms.PrintDocument.#ctor">
+            <summary>
+            Initializes a new instance of the PrintDocument class with custom drawn content only.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.PrintDocument.#ctor(Eto.Forms.Control)">
+            <summary>
+            Initializes a new instance of the PrintDocument class with the specified control as the print content.
+            </summary>
+            <param name="control">Control to print</param>
+        </member>
         <member name="F:Eto.Forms.PrintDocument.PrintingEvent">
             <summary>
             Identifier for handlers when attaching the <see cref="E:Eto.Forms.PrintDocument.Printing"/> event
@@ -34719,6 +35674,17 @@
             the current <see cref="P:Eto.Forms.PrintDocument.IHandler.PrintSettings"/>
             </remarks>
         </member>
+        <member name="M:Eto.Forms.PrintDocument.IHandler.Create">
+            <summary>
+            Creates the handler with only custom drawn content
+            </summary>			
+        </member>
+        <member name="M:Eto.Forms.PrintDocument.IHandler.Create(Eto.Forms.Control)">
+            <summary>
+            Creates the handler with the specified control as its content
+            </summary>
+            <param name="control">Control to use as content for the print canvas</param>
+        </member>
         <member name="P:Eto.Forms.PrintDocument.IHandler.Name">
             <summary>
             Gets or sets the name of the document to show in the printer queue
@@ -34774,6 +35740,56 @@
             <param name="graphics">Graphics context to paint the page.</param>
             <param name="pageSize">Size of the page in device units.</param>
             <param name="currentPage">Current page that is being printed.</param>
+        </member>
+        <member name="T:Eto.Forms.PrintPreviewDialog">
+            <summary>
+            Dialog to show a print preview dialog which the user can print from
+            </summary>
+        </member>
+        <member name="P:Eto.Forms.PrintPreviewDialog.Document">
+            <summary>
+            Gets the document the preview dialog is presenting
+            </summary>
+            <value></value>
+        </member>
+        <member name="M:Eto.Forms.PrintPreviewDialog.#ctor(Eto.Forms.PrintDocument)">
+            <summary>
+            Initializes a new instance of the PrintPreviewDialog for the specified <paramref name="document"/>.
+            </summary>
+            <param name="document">Print document to preview</param>
+        </member>
+        <member name="P:Eto.Forms.PrintPreviewDialog.PrintSettings">
+            <summary>
+            Gets or sets the print settings the print dialog is modifying.
+            </summary>
+            <value>The print settings.</value>
+        </member>
+        <member name="M:Eto.Forms.PrintPreviewDialog.ShowDialog(Eto.Forms.Window)">
+            <summary>
+            Shows the print preview dialog with the specified <paramref name="parent"/>
+            </summary>
+            <param name="parent">Parent window</param>
+            <returns>The dialog resultP</returns>
+        </member>
+        <member name="T:Eto.Forms.PrintPreviewDialog.IHandler">
+            <summary>
+            Handler for the <see cref="T:Eto.Forms.PrintPreviewDialog"/>.
+            </summary>
+        </member>
+        <member name="P:Eto.Forms.PrintPreviewDialog.IHandler.Document">
+            <summary>
+            Gets or sets the document that is being printed.
+            </summary>
+            <value>The document to print.</value>
+        </member>
+        <member name="P:Eto.Forms.PrintPreviewDialog.IHandler.PrintSettings">
+            <summary>
+            Gets or sets the print settings the print dialog is modifying.
+            </summary>
+            <remarks>
+            This should always return an instance, and is not required to be set by the user.
+            </remarks>
+            <value>The print settings.</value>
         </member>
         <member name="T:Eto.Forms.PageOrientation">
             <summary>
@@ -37015,6 +38031,13 @@
         <member name="M:Eto.Forms.ThemedControls.ThemedSegmentedButtonHandler.OnLoad(System.EventArgs)">
             <inheritdoc/>
         </member>
+        <member name="M:Eto.Forms.ThemedControls.ThemedSegmentedButtonHandler.GetPreferredSize(Eto.Drawing.SizeF)">
+            <summary>
+            Gets the preferred size of this control given the specified <paramref name="availableSize" />.
+            </summary>
+            <param name="availableSize">The available size to determine the preferred size</param>
+            <returns>The preferred size this control would like to be, which can be larger than the specified <paramref name="availableSize" />.</returns>
+        </member>
         <member name="T:Eto.Forms.ThemedControls.ThemedSpinnerMode">
             <summary>
             Display Mode of the <see cref="T:Eto.Forms.ThemedControls.ThemedSpinnerHandler"/>
@@ -38543,8 +39566,8 @@
             Gets or sets the menu bar for this window
             </summary>
             <remarks>
-            Some platforms have a global menu bar (e.g. ubuntu, OS X).
-            When the winow is in focus, the global menu bar will be changed to reflect the menu assigned.
+            Some platforms have a global menu bar (e.g. Ubuntu, OS X).
+            When the window is in focus, the global menu bar will be changed to reflect the menu assigned.
             </remarks>
             <value>The menu.</value>
         </member>
@@ -38676,6 +39699,15 @@
             <summary>
             Gets or sets a value indicating that the window can be moved by click+dragging the window background
             </summary>
+        </member>
+        <member name="P:Eto.Forms.Window.AutoSize">
+            <summary>
+            Gets or sets a value indicating that the window will automatically resize when its content changes
+            </summary>
+            <remarks>
+            Note that if you set both dimensions of the <see cref="T:Eto.Drawing.Size"/> and/or <see cref="P:Eto.Forms.Container.ClientSize"/>, this will be set to false.
+            </remarks>
+            <value><c>true</c> to auto size the window when its content changes, <c>false</c> to only auto size when first created</value>
         </member>
         <member name="M:Eto.Forms.Window.GetCallback">
             <summary>
@@ -38916,6 +39948,15 @@
             <summary>
             Gets or sets a value indicating that the window can be moved by click+dragging the window background
             </summary>
+        </member>
+        <member name="P:Eto.Forms.Window.IHandler.AutoSize">
+            <summary>
+            Gets or sets a value indicating that the window will automatically resize when its content changes
+            </summary>
+            <remarks>
+            Note that if you set both dimensions of the <see cref="T:Eto.Drawing.Size"/> and/or <see cref="P:Eto.Forms.Container.ClientSize"/>, this will be set to false.
+            </remarks>
+            <value><c>true</c> to auto size the window when its content changes, <c>false</c> to only auto size when first created</value>
         </member>
         <member name="T:Eto.HandlerAttribute">
             <summary>
@@ -41022,6 +42063,17 @@
             <remarks>
             Override this to initialize any of the platform objects.  This is called
             in the widget constructor, after all of the widget's constructor code has been called.
+            </remarks>
+        </member>
+        <member name="M:Eto.WidgetHandler`1.OnInitializeComplete">
+            <summary>
+            Called after initialization is complete
+            </summary>
+            <remarks>
+            Override this to perform any logic after the handler is fully initialized, but before
+            returning from the construction of the widget.
+            
+            This by default applies the any styles for the handler.
             </remarks>
         </member>
         <member name="P:Eto.WidgetHandler`1.Eto#Widget#IHandler#Widget">
