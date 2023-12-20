@@ -35,9 +35,9 @@ namespace ASEva.UICoreWF
             platform.Add<ComboBox.IHandler>(() => new ComboBoxHandler());
             platform.Add<Drawable.IHandler>(() => new DrawableHandler());
 
-            // CHECK: 改为使用Wpf版的Handler，Eto-2.6.0已修正
-            platform.Add<DataObject.IHandler>(() => new DataObjectHandler());
-            platform.Add<DataFormats.IHandler>(() => new DataFormatsHandler());
+            // 改为使用Wpf版的Handler，Eto-2.6.0已修正
+            //platform.Add<DataObject.IHandler>(() => new DataObjectHandler());
+            //platform.Add<DataFormats.IHandler>(() => new DataFormatsHandler());
 
             platform.Add<Slider.IHandler>(() => new SliderHandler());
             platform.Add<MessageBox.IHandler>(() => new MessageBoxHandler());

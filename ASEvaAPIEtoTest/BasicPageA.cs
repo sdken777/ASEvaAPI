@@ -91,18 +91,20 @@ namespace ASEvaAPIEtoTest
             {
                 var form = new Form();
                 form.SetMinimumClientSize(300, 300);
-                form.Resizable = false;
+                form.Resizable = form.Maximizable = false;
                 form.Title = "";
+                form.Content = new Panel();
                 form.Show();
             };
             var imageButton = layout.AddButton(Bitmap.FromResource("button.png"));
             imageButton.BackgroundColor = Colors.PaleGreen;
             imageButton.Click += delegate
             {
-                var dialog = new Dialog();
+                var dialog = new Dialog(); // Recommended to use App.RunDialog / 建议使用App.RunDialog
                 dialog.SetMinimumClientSize(300, 300);
                 dialog.Resizable = false;
                 dialog.Title = "";
+                dialog.Content = new Panel();
                 dialog.ShowModal(App.PassParent(this));
             };
             layout.AddControl(new ColorPicker { Value = Colors.Red } );
@@ -128,7 +130,8 @@ namespace ASEvaAPIEtoTest
             };
             layout.AddLinkButton(t["basic-client-size"], true).Click += (sender, args) =>
             {
-                (sender as LinkButton).Text = ClientSize.Width + "x" + ClientSize.Height;
+                var logicalSize = Pixel.ToLogicalSize(ClientSize);
+                (sender as LinkButton).Text = logicalSize.Width + "x" + logicalSize.Height;
             };
         }
     }
