@@ -27,8 +27,8 @@ namespace ASEvaAPIEtoTest
             var linkButtonRemove = layoutGridViewRow.AddLinkButton(t["basic-grid-remove-row"]);
 
             var tableView = layout.AddControl(new TextTableView(), true) as TextTableView;
-            tableView.AddColumn(t["basic-grid-key-title"], 100);
-            tableView.AddColumn(t["basic-grid-value-title"], 200);
+            tableView.AddColumn(t["basic-grid-key-title"]);
+            tableView.AddColumn(t["basic-grid-value-title"]);
 
             layoutGridViewRow = layout.AddRowLayout();
             var linkButtonChangeColor = layoutGridViewRow.AddLinkButton(t["basic-grid-change-color"]);

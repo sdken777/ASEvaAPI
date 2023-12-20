@@ -129,6 +129,10 @@ namespace ASEva.UIGtk
 			Tree = new Gtk.TreeView();
 			UpdateModel();
 			Tree.HeadersVisible = true;
+
+			// CHECK: 禁用搜索框（与其他框架行为一致）
+			Tree.EnableSearch = false;
+
 			Control.Add(Tree);
 
 			Tree.Events |= Gdk.EventMask.ButtonPressMask;

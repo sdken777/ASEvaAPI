@@ -29,20 +29,22 @@ namespace ASEva.UIEto
         /// Add a column (should be called before any ASEva.UIEto.TextTableView.AddRow )
         /// </summary>
         /// <param name="title">Column title</param>
-        /// <param name="logicalWidth">Logical width of the column</param>
+        /// <param name="logicalWidth">Logical width of the column, set to zero to expand</param>
         /// <param name="editable">Whether text of the column is editable</param>
         /// \~Chinese
         /// <summary>
         /// 添加一列（需要在添加行之前进行）
         /// </summary>
         /// <param name="title">列标题</param>
-        /// <param name="logicalWidth">列宽度</param>
+        /// <param name="logicalWidth">列宽度，设为0表示自动扩展</param>
         /// <param name="editable">是否可编辑该列文字</param>
-        public void AddColumn(String title, int logicalWidth, bool editable = true)
+        public void AddColumn(String title, int logicalWidth = 0, bool editable = true)
         {
             if (DataStore != null) return;
 
-            var column = new GridColumn { DataCell = new TextBoxCell(Columns.Count), HeaderText = title, Width = this.Sizer(logicalWidth), Editable = editable };
+            var column = new GridColumn { DataCell = new TextBoxCell(Columns.Count), HeaderText = title, Editable = editable };
+            if (logicalWidth <= 0) column.Expand = true;
+            else column.Width = this.Sizer(logicalWidth);
             Columns.Add(column);
         }
 

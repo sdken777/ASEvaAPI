@@ -31,7 +31,7 @@ namespace ASEva.UIEto
             ShowHeader = false;
             if (DefaultBackgroundColor != null) BackgroundColor = DefaultBackgroundColor.Value;
             Columns.Add(new GridColumn { DataCell = new CheckBoxCell(1), Resizable = false, Width = this.Sizer(22) });
-            Columns.Add(new GridColumn { DataCell = new TextBoxCell(0), Resizable = false, });
+            Columns.Add(new GridColumn { DataCell = new TextBoxCell(0), Resizable = false, Expand = true });
             CellClick += CheckableListBox_CellClick;
             CellDoubleClick += CheckableListBox_CellClick;
             CellFormatting += CheckableListBox_CellFormatting;

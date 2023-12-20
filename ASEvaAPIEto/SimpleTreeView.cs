@@ -280,7 +280,7 @@ namespace ASEva.UIEto
 
             ShowHeader = false;
 
-            column = new GridColumn{ DataCell = new TextBoxCell(0), Width = this.Sizer(100) };
+            column = new GridColumn{ DataCell = new TextBoxCell(0), Expand = true };
             Columns.Add(column);
 
             SelectedItemChanged += delegate
