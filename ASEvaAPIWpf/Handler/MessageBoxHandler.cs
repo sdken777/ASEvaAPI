@@ -42,6 +42,7 @@ namespace ASEva.UIWpf
 				if (caption == null) caption = "";
 				if (window != null) result = WpfMessageBox.Show(window, Text, caption, buttons, icon, defaultButton);
 				else result = WpfMessageBox.Show(Text, caption, buttons, icon, defaultButton);
+				WpfFrameworkElementHelper.ShouldCaptureMouse = false;
 				return Convert(result);
 			}
 		}

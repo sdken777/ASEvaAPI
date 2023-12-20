@@ -1,28 +1,22 @@
 ﻿using System;
 using Eto.Forms;
 using Eto.Drawing;
-#if WINRT
-using sw = Windows.UI.Xaml;
-using swc = Windows.UI.Xaml.Controls;
-using wf = Windows.Foundation;
-
-using WpfLabel = Windows.UI.Xaml.Controls.TextBlock;
-using EtoImage = Windows.UI.Xaml.Controls.Image;
-
-namespace Eto.WinRT.Forms.Controls
-#else
 using sw = System.Windows;
 using swc = System.Windows.Controls;
 using wf = System.Windows;
 
 using WpfLabel = System.Windows.Controls.Label;
 
+<<<<<<< HEAD
 using Eto;
 using Eto.Wpf;
 using Eto.Wpf.Forms;
 
 namespace ASEva.UIWpf
 #endif
+=======
+namespace Eto.Wpf.Forms.Controls
+>>>>>>> official-handler
 {
 	class EtoButton : swc.Button, IEtoWpfControl
 	{
@@ -118,17 +112,6 @@ namespace ASEva.UIWpf
 
 		public override bool UseKeyPreview => true;
 
-#if WINRT
-		public string Text
-		{
-			get { return label.Text; }
-			set
-			{
-				label.Text = value;
-				SetImagePosition();
-			}
-		}
-#else
 		public string Text
 		{
 			get { return (LabelPart.Content as string).ToEtoMnemonic(); }
@@ -138,15 +121,8 @@ namespace ASEva.UIWpf
 				SetImagePosition();
 			}
 		}
-#endif
 		static readonly object Image_Key = new object();
 
-#if WINRT
-		void SetImage()
-		{
-			swcimage.Source = Image.ToWpf();
-		}
-#else
 		protected override bool NeedsPixelSizeNotifications => true;
 
 		protected override void OnLogicalPixelSizeChanged()
@@ -159,7 +135,6 @@ namespace ASEva.UIWpf
 		{
 			ImagePart.Source = Image.ToWpf(ParentScale);
 		}
-#endif
 
 		public Image Image
 		{

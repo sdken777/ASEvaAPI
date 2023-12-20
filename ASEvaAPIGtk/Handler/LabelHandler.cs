@@ -200,12 +200,18 @@ namespace ASEva.UIGtk
 			get { return Control.Text.ToEtoMnemonic(); }
 			set
 			{
+<<<<<<< HEAD
 				// CHECK: 修复重复设置同样的属性导致界面不停刷新问题(效率低下)
 				if (Control.Text.ToEtoMnemonic() != value)
 				{
 					Control.ResetWidth();
 					Control.TextWithMnemonic = value.ToPlatformMnemonic();
 				}
+=======
+				Control.ResetWidth();
+				Control.TextWithMnemonic = value.ToPlatformMnemonic();
+				InvalidateMeasure();
+>>>>>>> official-handler
 			}
 		}
 

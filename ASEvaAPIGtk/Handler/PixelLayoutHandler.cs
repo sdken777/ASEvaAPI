@@ -53,6 +53,7 @@ namespace ASEva.UIGtk
 #endif
 			((Control.Child as Gtk.Viewport).Child as Gtk.Fixed).Put(widget, x, y);
 			ctl.CurrentLocation = new Point(x, y);
+			InvalidateMeasure();
 		}
 
 		public void Move(Control child, int x, int y)
@@ -69,6 +70,7 @@ namespace ASEva.UIGtk
 
 				ctl.CurrentLocation = new Point(x, y);
 			}
+			InvalidateMeasure();
 		}
 
 		public void Remove(Control child)
@@ -78,6 +80,7 @@ namespace ASEva.UIGtk
 #else
 			Control.Remove(child.GetContainerWidget());
 #endif
+			InvalidateMeasure();
 		}
 
 		public void Update()

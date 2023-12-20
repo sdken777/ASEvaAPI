@@ -4,6 +4,7 @@ using sc = System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+<<<<<<< HEAD
 using System.Threading.Tasks;
 using sw = System.Windows.Forms;
 using Eto.Drawing;
@@ -15,10 +16,34 @@ using Eto;
 using Eto.WinForms;
 using sd = System.Drawing;
 using Eto.WinForms.Drawing;
+=======
+using Eto.Drawing;
+using System.Collections.Specialized;
+using System.IO;
+#if WPF
+using static System.Windows.WpfDataObjectExtensions;
+using sw = System.Windows;
+using BitmapSource = System.Windows.Media.Imaging.BitmapSource;
+>>>>>>> official-handler
 
 namespace ASEva.UICoreWF
 {
+<<<<<<< HEAD
 	class DataFormatsHandler : DataFormats.IHandler
+=======
+
+#elif WINFORMS
+using static System.Windows.Forms.SwfDataObjectExtensions;
+using sw = System.Windows.Forms;
+using BitmapSource = System.Drawing.Image;
+
+namespace Eto.WinForms.Forms
+{
+
+#endif
+
+	public class DataFormatsHandler : DataFormats.IHandler
+>>>>>>> official-handler
 	{
 		public virtual string Text => sw.DataFormats.UnicodeText;
 		public virtual string Html => sw.DataFormats.Html;
@@ -159,10 +184,21 @@ namespace ASEva.UICoreWF
 					else
 						Control.SetData(sw.DataFormats.Dib, dib);
 				}
+#if WPF				
+				else if (IsExtended)
+					Control.SetDataEx(sw.DataFormats.Bitmap, value.ToSD());
+				else
+<<<<<<< HEAD
+					Control.SetImage(value.ToSD());
+=======
+					Control.SetImage(value.ToWpf());
+#elif WINFORMS
 				else if (IsExtended)
 					Control.SetDataEx(sw.DataFormats.Bitmap, value.ToSD());
 				else
 					Control.SetImage(value.ToSD());
+#endif
+>>>>>>> official-handler
 
 				Update();
 			}
@@ -351,7 +387,15 @@ namespace ASEva.UICoreWF
 
 		public void SetDragImage(Bitmap bitmap, PointF offset)
 		{
+<<<<<<< HEAD
 			Control.SetDragImage(bitmap.ToSD(), offset.ToSDPoint());
+=======
+#if WPF
+			Control.SetDragImage(bitmap.ToWpf(), offset.ToWpf());
+#elif WINFORMS
+			Control.SetDragImage(bitmap.ToSD(), offset.ToSDPoint());
+#endif
+>>>>>>> official-handler
 		}
 
 		public bool TrySetObject(object value, string type)
