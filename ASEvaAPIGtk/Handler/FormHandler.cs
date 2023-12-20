@@ -1,4 +1,4 @@
-﻿using Eto.Forms;
+using Eto.Forms;
 using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
@@ -14,13 +14,6 @@ namespace ASEva.UIGtk
 		public FormHandler()
 		{
 			Control = new Gtk.Window(Gtk.WindowType.Toplevel);
-<<<<<<< HEAD
-=======
-#if GTK2
-			Control.AllowGrow = true;
-#endif
-			Resizable = true;
->>>>>>> official-handler
 			Control.SetPosition(Gtk.WindowPosition.Center);
 
 			var vbox = new EtoVBox { Handler = this };

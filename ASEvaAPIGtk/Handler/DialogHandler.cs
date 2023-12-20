@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Eto.Forms;
 using Eto.GtkSharp.Forms;
@@ -19,13 +19,7 @@ namespace ASEva.UIGtk
 
 		public DialogHandler()
 		{
-<<<<<<< HEAD
 			Control = new Gtk.Dialog("", null, Gtk.DialogFlags.DestroyWithParent);
-=======
-			Control = new Gtk.Dialog();
-
-			Resizable = false;
->>>>>>> official-handler
 		}
 
 		protected override void Initialize()
@@ -180,13 +174,8 @@ namespace ASEva.UIGtk
 			}
 			else
 			{
-<<<<<<< HEAD
-				Control.ActionArea.NoShowAll = true;
-				if (!UseHeaderBar)
-=======
 				actionarea.NoShowAll = true;
-				if (!Helper.UseHeaderBar)
->>>>>>> official-handler
+				if (!UseHeaderBar)
 					btcontainer.Hide();
 #if GTKCORE
 				else

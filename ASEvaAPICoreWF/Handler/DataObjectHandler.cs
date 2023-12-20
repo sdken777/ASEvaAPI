@@ -1,22 +1,10 @@
-﻿using Eto.Forms;
+using Eto.Forms;
 using System;
 using sc = System.ComponentModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-<<<<<<< HEAD
 using System.Threading.Tasks;
-using sw = System.Windows.Forms;
-using Eto.Drawing;
-using System.Collections.Specialized;
-using System.IO;
-using static System.Windows.Forms.SwfDataObjectExtensions;
-using BitmapSource = System.Drawing.Image;
-using Eto;
-using Eto.WinForms;
-using sd = System.Drawing;
-using Eto.WinForms.Drawing;
-=======
 using Eto.Drawing;
 using System.Collections.Specialized;
 using System.IO;
@@ -24,26 +12,19 @@ using System.IO;
 using static System.Windows.WpfDataObjectExtensions;
 using sw = System.Windows;
 using BitmapSource = System.Windows.Media.Imaging.BitmapSource;
->>>>>>> official-handler
-
-namespace ASEva.UICoreWF
-{
-<<<<<<< HEAD
-	class DataFormatsHandler : DataFormats.IHandler
-=======
-
 #elif WINFORMS
 using static System.Windows.Forms.SwfDataObjectExtensions;
 using sw = System.Windows.Forms;
 using BitmapSource = System.Drawing.Image;
-
-namespace Eto.WinForms.Forms
-{
-
+using Eto;
+using Eto.WinForms;
+using sd = System.Drawing;
+using Eto.WinForms.Drawing;
 #endif
 
-	public class DataFormatsHandler : DataFormats.IHandler
->>>>>>> official-handler
+namespace ASEva.UICoreWF
+{
+	class DataFormatsHandler : DataFormats.IHandler
 	{
 		public virtual string Text => sw.DataFormats.UnicodeText;
 		public virtual string Html => sw.DataFormats.Html;
@@ -186,11 +167,8 @@ namespace Eto.WinForms.Forms
 				}
 #if WPF				
 				else if (IsExtended)
-					Control.SetDataEx(sw.DataFormats.Bitmap, value.ToSD());
+					Control.SetDataEx(sw.DataFormats.Bitmap, value.ToWpf());
 				else
-<<<<<<< HEAD
-					Control.SetImage(value.ToSD());
-=======
 					Control.SetImage(value.ToWpf());
 #elif WINFORMS
 				else if (IsExtended)
@@ -198,7 +176,6 @@ namespace Eto.WinForms.Forms
 				else
 					Control.SetImage(value.ToSD());
 #endif
->>>>>>> official-handler
 
 				Update();
 			}
@@ -387,15 +364,11 @@ namespace Eto.WinForms.Forms
 
 		public void SetDragImage(Bitmap bitmap, PointF offset)
 		{
-<<<<<<< HEAD
-			Control.SetDragImage(bitmap.ToSD(), offset.ToSDPoint());
-=======
 #if WPF
 			Control.SetDragImage(bitmap.ToWpf(), offset.ToWpf());
 #elif WINFORMS
 			Control.SetDragImage(bitmap.ToSD(), offset.ToSDPoint());
 #endif
->>>>>>> official-handler
 		}
 
 		public bool TrySetObject(object value, string type)

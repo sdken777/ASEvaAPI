@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using Eto.Drawing;
@@ -11,71 +11,10 @@ using Eto.GtkSharp.Forms.Menu;
 namespace ASEva.UIGtk
 {
 
-<<<<<<< HEAD
 	class WindowHandlerGtkWindow<TControl, TWidget, TCallback> : GtkPanel<TControl, TWidget, TCallback>, Window.IHandler, IGtkWindow
 		where TControl: Gtk.Window
 		where TWidget: Window
 		where TCallback: Window.ICallback
-=======
-		Gtk.Window Control { get; }
-
-		Size UserPreferredSize { get; }
-	}
-
-	public class GtkShrinkableVBox : Gtk.VBox
-	{
-		public bool Resizable { get; set; }
-
-		public GtkShrinkableVBox()
-		{
-		}
-
-		public GtkShrinkableVBox(Gtk.Widget child)
-		{
-			if (child != null)
-				PackStart(child, true, true, 0);
-		}
-
-#if GTK3
-		protected override void OnGetPreferredWidth(out int minimum_width, out int natural_width)
-		{
-			base.OnGetPreferredWidth(out minimum_width, out natural_width);
-			if (Resizable)
-				minimum_width = 0;
-		}
-
-		protected override void OnGetPreferredHeight(out int minimum_height, out int natural_height)
-		{
-			base.OnGetPreferredHeight(out minimum_height, out natural_height);
-
-			if (Resizable)
-				minimum_height = 0;
-		}
-
-#if GTKCORE
-		protected override void OnGetPreferredHeightAndBaselineForWidth(int width, out int minimum_height, out int natural_height, out int minimum_baseline, out int natural_baseline)
-		{
-			base.OnGetPreferredHeightAndBaselineForWidth(width, out minimum_height, out natural_height, out minimum_baseline, out natural_baseline);
-			if (Resizable)
-				minimum_height = 0;
-		}
-#endif
-#endif
-	}
-
-	static class GtkWindow
-	{
-		internal static readonly object MovableByWindowBackground_Key = new object();
-		internal static readonly object DisableAutoSizeUpdate_Key = new object();
-		internal static readonly object AutoSizePerformed_Key = new object();
-		internal static readonly object AutoSize_Key = new object();
-	}
-
-	public abstract class GtkWindow<TControl, TWidget, TCallback> : GtkPanel<TControl, TWidget, TCallback>, Window.IHandler, IGtkWindow
-		where TControl : Gtk.Window
-		where TWidget : Window
-		where TCallback : Window.ICallback
->>>>>>> official-handler
 	{
 		Gtk.VBox vbox;
 		readonly Gtk.VBox actionvbox;

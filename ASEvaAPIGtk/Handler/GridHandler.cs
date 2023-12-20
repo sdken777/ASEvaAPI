@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Eto.Forms;
 using System.Linq;
 using System.Collections.Generic;
@@ -286,11 +286,6 @@ namespace ASEva.UIGtk
 						var columnIndex = GetColumnOfItem(e.Column);
 						var item = GetItem(e.Path);
 						var column = columnIndex == -1 ? null : Widget.Columns[columnIndex];
-<<<<<<< HEAD
-
-						// CHECK: 修正在网格中双击鼠标事件无响应问题，Eto-2.6.0已修复
-=======
->>>>>>> official-handler
 						Callback.OnCellDoubleClick(Widget, new GridCellMouseEventArgs(column, rowIndex, columnIndex, item, Mouse.Buttons, Keyboard.Modifiers, PointFromScreen(Mouse.Position)));
 					};
 					break;
