@@ -16,7 +16,7 @@ namespace ASEva.UIGtk
 		{
 			Control = new Gtk.SpinButton(double.MinValue, double.MaxValue, 1);
 
-			// CHECK: 修正控件显示宽度过大问题，Arm-Ubuntu16.04-X11可重现
+			// 修正控件显示宽度过大问题，Arm-Ubuntu16.04-X11可重现 (不再支持Ubuntu16.04)
 			Control.WidthChars = -1;
 
 			Value = 0;
@@ -67,7 +67,7 @@ namespace ASEva.UIGtk
 
 			bool NumberStringsMatch(string num1, string num2) => string.Compare(TrimNumericString(num1), TrimNumericString(num2), Handler.CultureInfo, CompareOptions.IgnoreCase) == 0;
 
-			// CHECK: 修正设置MinValue异常问题，Ubuntu22.04都可重现
+			// 修正设置MinValue异常问题，Ubuntu22.04都可重现 (eto 2.6.1已解决)
 			// [GLib.ConnectBefore]
 			public void HandleInput(object o, InputArgs args)
 			{
@@ -93,7 +93,7 @@ namespace ASEva.UIGtk
 				args.RetVal = 0;
 			}
 
-			// CHECK: 修正设置MinValue异常问题，Ubuntu22.04都可重现
+			// 修正设置MinValue异常问题，Ubuntu22.04都可重现 (eto 2.6.1已解决)
 			// [GLib.ConnectBefore]
 			public void HandleOutput(object o, OutputArgs args)
 			{

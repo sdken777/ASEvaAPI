@@ -27,17 +27,17 @@ namespace ASEva.UIGtk
                 // CHECK: 修正在Arm下打开文件对话框异常
                 Redirection.RedirectMarshaller();
 
-                // CHECK: 修正打开右键菜单异常，Arm-Ubuntu16.04-X11可重现
-                Redirection.RedirectMenu();
+                // 修正打开右键菜单异常，Arm-Ubuntu16.04-X11可重现 (不再支持Ubuntu16.04)
+                // Redirection.RedirectMenu();
             }
   
             var platform = new global::Eto.GtkSharp.Platform();
             platform.Add<LinkButton.IHandler>(() => new LinkButtonHandler());
-            platform.Add<NumericStepper.IHandler>(() => new NumericStepperHandler());
+            // platform.Add<NumericStepper.IHandler>(() => new NumericStepperHandler());
             platform.Add<ColorPicker.IHandler>(() => new ColorPickerHandler());
             platform.Add<WebView.IHandler>(() => new WebViewHandler());
             platform.Add<PixelLayout.IHandler>(() => new PixelLayoutHandler());
-            platform.Add<Drawable.IHandler>(() => new DrawableHandler());
+            // platform.Add<Drawable.IHandler>(() => new DrawableHandler());
             platform.Add<Screen.IScreensHandler>(() => new ScreensHandler());
             platform.Add<Dialog.IHandler>(() => new DialogHandler());
             platform.Add<DateTimePicker.IHandler>(() => new DateTimePickerHandler());

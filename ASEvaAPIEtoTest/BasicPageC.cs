@@ -32,6 +32,8 @@ namespace ASEvaAPIEtoTest
 
             layoutGridViewRow = layout.AddRowLayout();
             var linkButtonChangeColor = layoutGridViewRow.AddLinkButton(t["basic-grid-change-color"]);
+            layoutGridViewRow.AddSpace();
+            var linkButtonReload = layoutGridViewRow.AddLinkButton(t["basic-grid-reload"]);
 
             linkButtonAdd.Click += delegate { tableView.AddRow(); };
             linkButtonRemove.Click += delegate { tableView.RemoveRow(tableView.SelectedRow); };
@@ -40,6 +42,7 @@ namespace ASEvaAPIEtoTest
                 tableView.SetTextColor(0, 0, Colors.Red);
                 tableView.SetBackgroundColor(0, 1, Colors.Green);
             };
+            linkButtonReload.Click += delegate { tableView.ReloadData(0); };
         }
     }
 }

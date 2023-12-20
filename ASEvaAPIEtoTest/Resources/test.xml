@@ -92,6 +92,10 @@
     <en>Value</en>
     <ch>值</ch>
   </t>
+  <t id="basic-grid-reload">
+    <en>Reload</en>
+    <ch>重加载</ch>
+  </t>
   <t id="basic-group-title">
     <en>Basic Controls</en>
     <ch>基本控件</ch>
@@ -123,6 +127,10 @@
   <t id="basic-radiobutton-file">
     <en>File</en>
     <ch>文件</ch>
+  </t>
+  <t id="basic-save-file-filter">
+    <en>Text file</en>
+    <ch>文本文件</ch>
   </t>
   <t id="basic-tabpage-title">
     <en>Tabpage {0}</en>

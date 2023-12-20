@@ -15,7 +15,7 @@ namespace ASEva.UIGtk
 		Button defaultButton;
 
 		// CHECK: 修正对话框标题栏高度偏大问题
-		private bool UseHeaderBar = true;
+		private bool UseHeaderBar = false;
 
 		public DialogHandler()
 		{
@@ -98,7 +98,7 @@ namespace ASEva.UIGtk
 
 		public DialogDisplayMode DisplayMode { get; set; }
 
-		// CHECK: 修正设置Resizable属性无效问题
+		// 修正设置Resizable属性无效问题 (eto-2.6.1已解决)
 		public new bool Resizable
 		{
 			get

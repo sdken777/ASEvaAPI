@@ -46,7 +46,12 @@ namespace ASEvaAPIEtoTest
             {
                 if (radioButtonList.SelectedIndex == 0)
                 {
-                    if (checkBox.Checked.Value) new SaveFileDialog().ShowDialog(App.PassParent(this));
+                    if (checkBox.Checked.Value)
+                    {
+                        var dialog = new SaveFileDialog();
+                        dialog.Filters.Add(new FileFilter(t["basic-save-file-filter"], ".txt"));
+                        if (dialog.ShowDialog(App.PassParent(this)) == DialogResult.Ok) MessageBox.Show(dialog.FileName);
+                    }
                     else new OpenFileDialog().ShowDialog(App.PassParent(this));
                 }
                 else new SelectFolderDialog().ShowDialog(App.PassParent(this));
@@ -82,8 +87,24 @@ namespace ASEvaAPIEtoTest
             var textButton = layout.AddButton(t["basic-button"]);
             textButton.BackgroundColor = Colors.Green;
             textButton.TextColor = Colors.Gold;
+            textButton.Click += delegate
+            {
+                var form = new Form();
+                form.SetMinimumClientSize(300, 300);
+                form.Resizable = false;
+                form.Title = "";
+                form.Show();
+            };
             var imageButton = layout.AddButton(Bitmap.FromResource("button.png"));
             imageButton.BackgroundColor = Colors.PaleGreen;
+            imageButton.Click += delegate
+            {
+                var dialog = new Dialog();
+                dialog.SetMinimumClientSize(300, 300);
+                dialog.Resizable = false;
+                dialog.Title = "";
+                dialog.ShowModal(App.PassParent(this));
+            };
             layout.AddControl(new ColorPicker { Value = Colors.Red } );
         }
 

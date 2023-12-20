@@ -54,7 +54,7 @@ namespace ASEva.UIGtk
 			set { Widget.Properties.Set(CanFocus_Key, value, () => Control.AcceptFocus = value, true); }
 		}
 
-		// CHECK: 修正设置Resizable属性无效问题
+		// 修正设置Resizable属性无效问题 (eto-2.6.1已解决)
 		public new bool Resizable
 		{
 			get
