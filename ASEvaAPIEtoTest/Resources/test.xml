@@ -4,6 +4,10 @@
     <en>Button</en>
     <ch>按钮</ch>
   </t>
+  <t id="basic-cases">
+    <en>Cases:</en>
+    <ch>特例:</ch>
+  </t>
   <t id="basic-checkbox">
     <en>Save file</en>
     <ch>保存文件</ch>

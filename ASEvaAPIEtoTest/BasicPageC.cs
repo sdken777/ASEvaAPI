@@ -13,7 +13,16 @@ namespace ASEvaAPIEtoTest
         {
             var layoutRow = tabPage.SetContentAsRowLayout(8, 8, VerticalAlignment.Stretch);
 
-            layoutRow.AddControl(new TextArea { Text = t["empty"] }, false, 150);
+            var layoutStuff = layoutRow.AddColumnLayout(false, 150, 0, 2);
+            layoutStuff.AddControl(new TextArea { Text = t["empty"] }, true);
+            var layoutCases = layoutStuff.AddRowLayout();
+
+            layoutCases.AddLabel(t["basic-cases"]);
+            layoutCases.AddLinkButton("1").Click += delegate
+            {
+                var dialog = new Case1();
+                App.RunDialog(dialog);
+            };
 
             var layoutTableView = layoutRow.AddColumnLayout(true, 2);
             initBasicTabPageCTableView(layoutTableView);
