@@ -192,6 +192,10 @@
     <en>Resume render</en>
     <ch>恢复渲染</ch>
   </t>
+  <t id="draw-gl-loop-interval">
+    <en>Max loop interval:</en>
+    <ch>最大循环间隔:</ch>
+  </t>
   <t id="draw-group-title">
     <en>Drawing Controls</en>
     <ch>绘图控件</ch>
