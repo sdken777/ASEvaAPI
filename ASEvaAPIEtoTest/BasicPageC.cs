@@ -23,6 +23,11 @@ namespace ASEvaAPIEtoTest
                 var dialog = new Case1();
                 App.RunDialog(dialog);
             };
+            layoutCases.AddLinkButton("2").Click += delegate
+            {
+                var form = new Case2();
+                form.Show();
+            };
 
             var layoutTableView = layoutRow.AddColumnLayout(true, 2);
             initBasicTabPageCTableView(layoutTableView);
