@@ -13,7 +13,7 @@ namespace ASEvaAPIEtoTest
             Icon = Icon.FromResource("icon.png");
             SetFixMode(image.Width, image.Height, true);
 
-            this.SetContentAsColumnLayout(0).AddControl(new ImageView{ Image = image.ToEtoBitmap() }, true);
+            this.SetContentAsControl(new ImageView{ Image = image.ToEtoBitmap() }, 0);
         }
     }
 }

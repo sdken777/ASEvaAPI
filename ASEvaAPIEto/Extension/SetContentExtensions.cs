@@ -145,6 +145,29 @@ namespace ASEva.UIEto
             return layout;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.12.2) Set content as a control object
+        /// </summary>
+        /// <param name="panel">Panel object</param>
+        /// <param name="control">The control object to set as content</param>
+        /// <param name="logicalPadding">Control's logical padding</param>
+        /// <returns>The control object set as content</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.12.2) 设置控件至面板Content
+        /// </summary>
+        /// <param name="panel">面板</param>
+        /// <param name="control">目标控件</param>
+        /// <param name="logicalPadding">目标控件的边缘空隙</param>
+        /// <returns>已设置为Content的目标控件</returns>
+        public static Control SetContentAsControl(this Panel panel, Control control, int logicalPadding = 8)
+        {
+            var layout = SetContentAsColumnLayout(panel, logicalPadding);
+            if (layout == null) return null;
+            return layout.AddControl(control, true);
+        }
+
         public static InitWindowHandler WindowInitializer { private get; set; }
     }
 

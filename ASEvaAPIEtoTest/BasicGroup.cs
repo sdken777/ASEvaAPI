@@ -11,7 +11,7 @@ namespace ASEvaAPIEtoTest
     {
         private void initBasicGroupBox(GroupBox groupBox)
         {
-            var tabControl = groupBox.SetContentAsColumnLayout().AddControl(new TabControl(), true) as TabControl;
+            var tabControl = groupBox.SetContentAsControl(new TabControl()) as TabControl;
 
             var tabPageA = tabControl.AddPage(t.Format("basic-tabpage-title", "A"));
             initBasicTabPageA(tabPageA);
