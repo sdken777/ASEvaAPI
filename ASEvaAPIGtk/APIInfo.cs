@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 1, 2); // Update log / 更新记录: NativeMethods合并至WebViewHandler
+            return new Version(2, 8, 1, 3); // Update log / 更新记录: 修正截屏崩溃问题
         }
     }
 }
