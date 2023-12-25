@@ -359,15 +359,15 @@ namespace ASEva.Samples
             var rawClipRect = new IntRect(0, 0, targetWidth, targetHeight);
             if (scale < 0.25)
             {
-                var halfClipRect = new IntRect(0, 0, (int)Math.Ceiling(0.5f * targetWidth), (int)Math.Ceiling(0.5f * targetHeight));
+                var halfClipRect = new IntRect(0, 0, (int)Math.Ceiling(0.5f * Width), (int)Math.Ceiling(0.5f * Height));
                 var halfImage = processImageSub(this, 0.5f, halfClipRect);
-                var quarterClipRect = new IntRect(0, 0, (int)Math.Ceiling(0.25f * targetWidth), (int)Math.Ceiling(0.25f * targetHeight));
+                var quarterClipRect = new IntRect(0, 0, (int)Math.Ceiling(0.25f * Width), (int)Math.Ceiling(0.25f * Height));
                 var quarterImage = processImageSub(halfImage, 0.5f, quarterClipRect);
                 return processImageSub(quarterImage, scale * 4, rawClipRect);
             }
             else if (scale < 0.5)
             {
-                var halfClipRect = new IntRect(0, 0, (int)Math.Ceiling(0.5f * targetWidth), (int)Math.Ceiling(0.5f * targetHeight));
+                var halfClipRect = new IntRect(0, 0, (int)Math.Ceiling(0.5f * Width), (int)Math.Ceiling(0.5f * Height));
                 var halfImage = processImageSub(this, 0.5f, halfClipRect);
                 return processImageSub(halfImage, scale * 2, rawClipRect);
             }

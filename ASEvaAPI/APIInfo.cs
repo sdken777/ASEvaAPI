@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 14, 4, 0); // Update log / 更新记录: 新增CommonImage.Resize
+            return new Version(2, 14, 4, 1); // Update log / 更新记录: 修正CommonImage.Resize
         }
 
         /// \~English
