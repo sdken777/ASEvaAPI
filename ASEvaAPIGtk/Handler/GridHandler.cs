@@ -82,14 +82,10 @@ namespace ASEva.UIGtk
 
 		protected GridHandler()
 		{
-			Control = new EtoScrolledWindow
+			// CHECK: 修正与其他控件并排且expand都为true时，其他控件不伸缩问题
+			Control = new Gtk.ScrolledWindow
 			{
-				Handler = this,
 				ShadowType = Gtk.ShadowType.In,
-#if GTKCORE
-				PropagateNaturalHeight = true,
-				PropagateNaturalWidth = true
-#endif
 			};
 
 			// CHECK: 修正GridView在ReloadData时重置滚动条问题

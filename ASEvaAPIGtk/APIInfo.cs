@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 2, 0); // Update log / 更新记录: Timer增加finalizer，且不再统计实例个数
+            return new Version(2, 8, 2, 1); // Update log / 更新记录: 修正Grid与其他控件并排且expand都为true时，其他控件不伸缩问题
         }
     }
 }
