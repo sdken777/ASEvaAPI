@@ -76,15 +76,8 @@ namespace ASEva.UIGtk
                 if (widget == null) return null;
             }
 
-            var loc = control.PointToScreen(new Eto.Drawing.PointF(0, 0));
-            var factor = widget.ScaleFactor;
-            var right = (loc.X + widget.AllocatedWidth) * factor;
-            var bottom = (loc.Y + widget.AllocatedHeight) * factor;
-            var left = Math.Max(0, loc.X) * factor;
-            var top = Math.Max(0, loc.Y) * factor;
-
             CommonImage rawImage = null;
-            if (uiBackend == "wayland")
+            if (uiBackend == "wayland") // for future use
             {
                 var dbus = new DBus();
                 dbus.Snapshot();
@@ -104,7 +97,22 @@ namespace ASEva.UIGtk
                 var etoBitmap = new Eto.Drawing.Bitmap(uri);
                 File.Delete(uri);
 
+                var windowSize = control.ParentWindow.Size;
+                var etoBitmapSize = etoBitmap.Size;
+                if (Math.Abs(windowSize.Width * etoBitmapSize.Height - windowSize.Height * etoBitmapSize.Width) > 0.001)
+                {
+                    Agency.Print("Wayland screenshot: Choose 'Grab the current window' and 'Take screenshot'.");
+                    return null;
+                }
+
                 var fullImage = ASEva.UIEto.ImageConverter.ConvertFromBitmap(etoBitmap);
+
+                var loc = widget.Allocation;
+                var factor = (double)etoBitmapSize.Width / windowSize.Width;
+                var right = (loc.X + widget.AllocatedWidth) * factor;
+                var bottom = (loc.Y + widget.AllocatedHeight) * factor;
+                var left = Math.Max(0, loc.X) * factor;
+                var top = Math.Max(0, loc.Y) * factor;
 
                 int x = (int)left, y = (int)top;
                 int width = (int)(right - left), height = (int)(bottom - top);
@@ -131,10 +139,17 @@ namespace ASEva.UIGtk
             }
             else if (uiBackend == "x11")
             {
+                var loc = control.PointToScreen(new Eto.Drawing.PointF(0, 0));
+                var factor = widget.ScaleFactor;
+                var right = (loc.X + widget.AllocatedWidth) * factor;
+                var bottom = (loc.Y + widget.AllocatedHeight) * factor;
+                var left = Math.Max(0, loc.X) * factor;
+                var top = Math.Max(0, loc.Y) * factor;
+
                 var xcb = new XCB();
                 rawImage = xcb.Snapshot((ushort)left, (ushort)top, (ushort)(right - left), (ushort)(bottom - top));
             }
-            else return null;
+            if (rawImage == null) return null;
 
             if (rawImage.Width == widget.AllocatedWidth) return rawImage;
             else return rawImage.Resize(widget.AllocatedWidth);
@@ -156,6 +171,12 @@ namespace ASEva.UIGtk
                 }
 
                 IntPtr image = xcb_image_get(connection, draw, x, y, width, height, 0xffffffff, xcb_image_format_t.XCB_IMAGE_FORMAT_Z_PIXMAP);
+                if (image == IntPtr.Zero)
+                {
+                    xcb_disconnect(connection);
+                    return null;
+                }
+
                 CommonImage commonImage = null;
                 unsafe
                 {
@@ -271,7 +292,7 @@ namespace ASEva.UIGtk
 
                 var asvType = new VariantType("a{sv}");
                 var builder = g_variant_builder_new(asvType.Handle);
-                g_variant_builder_add(builder, "{sv}", "handle_token", g_variant_new_string("token1"));
+                g_variant_builder_add(builder, "{sv}", "handle_token", g_variant_new_string(Guid.NewGuid().ToString().Replace("-", "")));
                 g_variant_builder_add(builder, "{sv}", "interactive", g_variant_new_boolean(true));
                 var parameters = new Variant(g_variant_new("(sa{sv})", "", builder));
                 g_variant_builder_unref(builder);

@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 3, 0); // Update log / 更新记录: 支持Wayland截屏
+            return new Version(2, 8, 3, 1); // Update log / 更新记录: 完善wayland下的ScreenSnapshotHandler.Snapshot
         }
     }
 }
