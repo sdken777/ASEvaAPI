@@ -35,8 +35,6 @@ namespace ASEva.UIEto
             CellClick += CheckableListBox_CellClick;
             CellDoubleClick += CheckableListBox_CellClick;
             CellFormatting += CheckableListBox_CellFormatting;
-            SizeChanged += CheckableListBox_SizeChanged;
-            Shown += CheckableListBox_Shown;
         }
 
         /// \~English
@@ -452,21 +450,6 @@ namespace ASEva.UIEto
             {
                 e.ForegroundColor = enableFlags[e.Row] ? Colors.Black : Colors.LightGrey;
             }
-        }
-
-        private void CheckableListBox_Shown(object sender, EventArgs e)
-        {
-            updateColumnWidth();
-        }
-
-        private void CheckableListBox_SizeChanged(object sender, EventArgs e)
-        {
-            updateColumnWidth();
-        }
-
-        private void updateColumnWidth()
-        {
-            Columns[1].Width = this.Sizer(this.GetLogicalWidth() - 45);
         }
 
         private void updateColor(int rowIndex, int columnIndex)

@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 12, 3, 0); // Update log / 更新记录: GLView/SkiaView实现finalizer
+            return new Version(2, 12, 3, 1); // Update log / 更新记录: 修正CheckableListBox
         }
 
         /// \~English

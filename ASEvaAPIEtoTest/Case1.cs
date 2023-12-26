@@ -4,7 +4,7 @@ using ASEva.UIEto;
 
 namespace ASEvaAPIEtoTest
 {
-    class Case1 : DialogPanel
+    class Case1 : DialogPanel // ASEvaAPIEto 2.12.3.1解决
     {
         public Case1()
         {
