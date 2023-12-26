@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.IO;
 using ASEva;
 using ASEva.Samples;
-using ASEva.UIEto;
 using Gtk;
+using GLib;
 using Cairo;
 
 namespace ASEva.UIGtk
 {
     #pragma warning disable CS0649
 
-    class SnapshotHandler : SnapshotExtensions.SnapshotHandler
+    class SnapshotHandler : ASEva.UIEto.SnapshotExtensions.SnapshotHandler
     {
         public CommonImage Snapshot(Eto.Forms.Control control)
         {
@@ -59,12 +60,12 @@ namespace ASEva.UIGtk
         }
     }
 
-    class ScreenSnapshotHandler : SnapshotExtensions.SnapshotHandler
+    class ScreenSnapshotHandler : ASEva.UIEto.SnapshotExtensions.SnapshotHandler
     {
         public CommonImage Snapshot(Eto.Forms.Control control)
         {
             var uiBackend = ASEva.UIEto.App.GetUIBackend();
-			if (uiBackend != null && uiBackend != "x11") return null; // Wayland not supported yet
+            if (uiBackend == null) return null;
 
             var widget = control.ControlObject as Widget;
             if (widget == null) return null;
@@ -82,8 +83,58 @@ namespace ASEva.UIGtk
             var left = Math.Max(0, loc.X) * factor;
             var top = Math.Max(0, loc.Y) * factor;
 
-            var xcb = new XCB();
-            var rawImage = xcb.Snapshot((ushort)left, (ushort)top, (ushort)(right - left), (ushort)(bottom - top));
+            CommonImage rawImage = null;
+            if (uiBackend == "wayland")
+            {
+                var dbus = new DBus();
+                dbus.Snapshot();
+
+                String uri = null;
+                while (true)
+                {
+                    System.Threading.Thread.Sleep(1);
+                    Gtk.Application.RunIteration();
+                    uri = dbus.PopUri();
+                    if (uri != null) break;
+                }
+                if (uri.Length == 0) return null;
+
+                if (uri.StartsWith("file://")) uri = uri.Substring(7);
+
+                var etoBitmap = new Eto.Drawing.Bitmap(uri);
+                File.Delete(uri);
+
+                var fullImage = ASEva.UIEto.ImageConverter.ConvertFromBitmap(etoBitmap);
+
+                int x = (int)left, y = (int)top;
+                int width = (int)(right - left), height = (int)(bottom - top);
+                if (x + width > fullImage.Width || y + height > fullImage.Height) return null;
+
+                rawImage = CommonImage.Create(width, height, fullImage.WithAlpha);
+                var cellBytes = fullImage.WithAlpha ? 4 : 3;
+                unsafe
+                {
+                    fixed (byte *srcData = &fullImage.Data[0], dstData = &rawImage.Data[0])
+                    {
+                        for (int v = 0; v < height; v++)
+                        {
+                            byte *srcPtr = srcData + (y + v) * fullImage.RowBytes + x * cellBytes;
+                            byte *dstPtr = dstData + v * rawImage.RowBytes;
+                            int copyBytes = width * cellBytes;
+                            for (int n = 0; n < copyBytes; n++)
+                            {
+                                *dstPtr++ = *srcPtr++;
+                            }
+                        }
+                    }
+                }
+            }
+            else if (uiBackend == "x11")
+            {
+                var xcb = new XCB();
+                rawImage = xcb.Snapshot((ushort)left, (ushort)top, (ushort)(right - left), (ushort)(bottom - top));
+            }
+            else return null;
 
             if (rawImage.Width == widget.AllocatedWidth) return rawImage;
             else return rawImage.Resize(widget.AllocatedWidth);
@@ -204,6 +255,116 @@ namespace ASEva.UIGtk
 
             [DllImport("libxcb-image.so.0")]
             private static extern void xcb_image_destroy(IntPtr image);
+        }
+
+        class DBus
+        {
+            public void Snapshot()
+            {
+                if (curInstance != null) return;
+                curInstance = this;
+
+                connection = new DBusConnection(g_bus_get_sync(BusType.Session, IntPtr.Zero, IntPtr.Zero));
+                proxy = new DBusProxy(g_dbus_proxy_new_sync(connection.Handle, DBusProxyFlags.None, IntPtr.Zero,
+                    "org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop",
+                    "org.freedesktop.portal.Screenshot", IntPtr.Zero, IntPtr.Zero));
+
+                var asvType = new VariantType("a{sv}");
+                var builder = g_variant_builder_new(asvType.Handle);
+                g_variant_builder_add(builder, "{sv}", "handle_token", g_variant_new_string("token1"));
+                g_variant_builder_add(builder, "{sv}", "interactive", g_variant_new_boolean(true));
+                var parameters = new Variant(g_variant_new("(sa{sv})", "", builder));
+                g_variant_builder_unref(builder);
+
+                var result = new Variant(g_dbus_proxy_call_sync(proxy.Handle, "Screenshot", parameters.Handle, DBusCallFlags.None, -1, IntPtr.Zero, IntPtr.Zero));
+                
+                String objPath = null;
+                g_variant_get(result.Handle, "(o)", ref objPath);
+
+                id = g_dbus_connection_signal_subscribe(connection.Handle, "org.freedesktop.portal.Desktop",
+                            "org.freedesktop.portal.Request", "Response", objPath,
+                            null, DBusSignalFlags.None, signalCallback, IntPtr.Zero, IntPtr.Zero);
+            }
+
+            public String PopUri()
+            {
+                var output = uri;
+                uri = null;
+                return output;
+            }
+
+            private delegate void GDBusSignalCallback(IntPtr connection, String sender_name, String object_path, String interface_name, String signal_name, IntPtr parameters, IntPtr user_data);
+            private static GDBusSignalCallback signalCallback = signalCallbackFunc;
+            private static void signalCallbackFunc(IntPtr connection, String sender_name, String object_path, String interface_name, String signal_name, IntPtr parameters, IntPtr user_data)
+            {
+                var variant = new Variant(parameters);
+
+                uint response = 0;
+                IntPtr dict = IntPtr.Zero;
+                g_variant_get(parameters, "(u@a{sv})", ref response, ref dict);
+
+                if (response == 0)
+                {
+                    String uri = null;
+                    g_variant_lookup(dict, "uri", "s", ref uri);
+                    curInstance.uri = uri == null ? "" : uri;
+                }
+                else curInstance.uri = "";
+
+                g_dbus_connection_signal_unsubscribe(curInstance.connection.Handle, curInstance.id.Value);
+                curInstance.connection.Dispose();
+                curInstance.proxy.Dispose();
+                curInstance.id = null;
+                curInstance = null;
+            }
+
+            private static DBus curInstance = null;
+            private DBusConnection connection = null;
+            private DBusProxy proxy = null;
+            private uint? id = null;
+            private String uri = null;
+
+            [DllImport("libgio-2.0.so.0")]
+            private static extern IntPtr g_bus_get_sync(BusType type, IntPtr cancel, IntPtr error);
+
+            [DllImport("libgio-2.0.so.0")]
+            private static extern IntPtr g_dbus_proxy_new_sync(IntPtr connection, DBusProxyFlags flags, IntPtr info, String name, String objectPath, String interfaceName, IntPtr cancel, IntPtr error);
+
+            [DllImport("libgio-2.0.so.0")]
+            private static extern IntPtr g_dbus_proxy_call_sync(IntPtr proxy, String methodName, IntPtr parameters, DBusCallFlags flags, int timeoutMs, IntPtr cancel, IntPtr error);
+
+            [DllImport("libgio-2.0.so.0")]
+            private static extern IntPtr g_variant_builder_new(IntPtr type);
+
+            [DllImport("libgio-2.0.so.0")]
+            private static extern void g_variant_builder_add(IntPtr builder, String format/* "{sv}" */, String str, IntPtr variant);
+
+            [DllImport("libgio-2.0.so.0")]
+            private static extern void g_variant_builder_unref(IntPtr builder);
+
+            [DllImport("libgio-2.0.so.0")]
+            private static extern IntPtr g_variant_new_string(String str);
+
+            [DllImport("libgio-2.0.so.0")]
+            private static extern IntPtr g_variant_new_boolean(bool boolean);
+
+            [DllImport("libgio-2.0.so.0")]
+            private static extern IntPtr g_variant_new(String format/* "(sa{sv})" */, String str, IntPtr builder);
+
+            [DllImport("libgio-2.0.so.0")]
+            private static extern void g_variant_get(IntPtr variant, String format/* "(o)" */, ref String str);
+
+            [DllImport("libgio-2.0.so.0")]
+            private static extern void g_variant_get(IntPtr variant, String format/* "(u@a{sv})" */, ref uint number, ref IntPtr keyValuePairs);
+
+            [DllImport("libgio-2.0.so.0")]
+            private static extern uint g_dbus_connection_signal_subscribe(IntPtr connection, String sender, String interface_name, String member, String object_path, String arg0, DBusSignalFlags flags, GDBusSignalCallback callback, IntPtr user_data, IntPtr user_data_free_func);
+
+            [DllImport("libgio-2.0.so.0")]
+            private static extern void g_dbus_connection_signal_unsubscribe(IntPtr connection, uint id);
+
+            [DllImport("libgio-2.0.so.0")]
+            private static extern bool g_variant_lookup(IntPtr dictionary, String key, String format/* "s" */, ref String str);
         }
     }
 }
