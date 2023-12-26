@@ -9,13 +9,13 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Sample CSV file writer
+    /// (api:app=2.15.7) Sample CSV file writer
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 写入样本csv文件
+    /// (api:app=2.15.7) 写入样本csv文件
     /// </summary>
-    public class SampleCsvWriter
+    public class SampleCsvWriter : IDisposable
     {
         /// \~English
         /// <summary>
@@ -124,6 +124,11 @@ namespace ASEva.Utility
         /// 关闭样本csv写入器
         /// </summary>
         public void Close()
+        {
+            Dispose();
+        }
+
+        public void Dispose()
         {
             if (writer != null)
             {

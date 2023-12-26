@@ -4234,7 +4234,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.15.6
+            version=2.15.7
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -16906,11 +16906,11 @@
         <member name="T:ASEva.Utility.SampleCsvLoader">
             \~English
             <summary>
-            (api:app=2.0.0) Sample CSV file loader
+            (api:app=2.15.7) Sample CSV file loader
             </summary>
             \~Chinese
             <summary>
-            (api:app=2.0.0) 读取样本csv文件
+            (api:app=2.15.7) 读取样本csv文件
             </summary>
         </member>
         <member name="M:ASEva.Utility.SampleCsvLoader.CreateLoader(System.String)">
@@ -16978,11 +16978,11 @@
         <member name="T:ASEva.Utility.SampleCsvWriter">
             \~English
             <summary>
-            (api:app=2.0.0) Sample CSV file writer
+            (api:app=2.15.7) Sample CSV file writer
             </summary>
             \~Chinese
             <summary>
-            (api:app=2.0.0) 写入样本csv文件
+            (api:app=2.15.7) 写入样本csv文件
             </summary>
         </member>
         <member name="M:ASEva.Utility.SampleCsvWriter.CreateWriter(System.String,System.Boolean,System.Collections.Generic.List{System.String})">

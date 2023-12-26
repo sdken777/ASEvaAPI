@@ -9,13 +9,13 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Sample CSV file loader
+    /// (api:app=2.15.7) Sample CSV file loader
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 读取样本csv文件
+    /// (api:app=2.15.7) 读取样本csv文件
     /// </summary>
-    public class SampleCsvLoader
+    public class SampleCsvLoader : IDisposable
     {
         /// \~English
         /// <summary>
@@ -216,6 +216,11 @@ namespace ASEva.Utility
         /// 关闭样本csv读取器
         /// </summary>
         public void Close()
+        {
+            Dispose();
+        }
+
+        public void Dispose()
         {
             if (reader != null)
             {
