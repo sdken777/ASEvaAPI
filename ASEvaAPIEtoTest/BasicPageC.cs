@@ -17,17 +17,7 @@ namespace ASEvaAPIEtoTest
             layoutStuff.AddControl(new TextArea { Text = t["empty"] }, true);
             var layoutCases = layoutStuff.AddRowLayout();
 
-            layoutCases.AddLabel(t["basic-cases"]);
-            layoutCases.AddLinkButton("1").Click += delegate
-            {
-                var dialog = new Case1();
-                App.RunDialog(dialog);
-            };
-            layoutCases.AddLinkButton("2").Click += delegate
-            {
-                var form = new Case2();
-                form.Show();
-            };
+            // layoutCases.AddLabel(t["basic-cases"]);
 
             var layoutTableView = layoutRow.AddColumnLayout(true, 2);
             initBasicTabPageCTableView(layoutTableView);
