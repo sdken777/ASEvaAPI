@@ -8,11 +8,11 @@ namespace ASEva.UIGtk
 {
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Timer
+    /// (api:gtk=2.8.2) Timer
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 计时器
+    /// (api:gtk=2.8.2) 计时器
     /// </summary>
     public class Timer
     {
@@ -21,43 +21,28 @@ namespace ASEva.UIGtk
             if (handler == null) return;
 
             interval = Math.Max(1, interval);
-            timerID = GLib.Timeout.Add(interval, handler);
-            handlerMethod = handler.Target.GetType().ToString() + "." + handler.Method.Name;
-
-            int timerCount = 0;
-            lock (timers)
-            {
-                timers.Add(this);
-                timerCount = timers.Count;
-            }
-
-            if (timerCount >= 200)
-            {
-                Agency.Print("[Timer] Too many timers:\n- " + String.Join("\n- ", Timer.Handlers));
-            }
+            timerID = (long)GLib.Timeout.Add(interval, handler);
         }
 
         public void Release()
         {
-            if (timerID == null) return;
-
-            GLib.Timeout.Remove(timerID.Value);
-            timerID = null;
-
-            lock (timers)
+            if (timerID >= 0)
             {
-                timers.Remove(this);
+                GLib.Timeout.Remove((uint)timerID);
+                timerID = -1;
             }
+        }
+
+        ~Timer()
+        {
+            Release();
         }
 
         public static int Count
         {
             get
             {
-                lock (timers)
-                {
-                    return timers.Count;
-                }
+                return 0;
             }
         }
 
@@ -65,21 +50,10 @@ namespace ASEva.UIGtk
         {
             get
             {
-                lock (timers)
-                {
-                    var handlers = new List<String>();
-                    foreach (var timer in timers)
-                    {
-                        handlers.Add(timer.handlerMethod);
-                    }
-                    return handlers.ToArray();
-                }
+                return new String[0];
             }
         }
 
-        private uint? timerID = null;
-        private String handlerMethod;
-
-        private static List<Timer> timers = new List<Timer>();
+        private long timerID = -1;
     }
 }
