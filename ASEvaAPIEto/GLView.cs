@@ -772,7 +772,11 @@ namespace ASEva.UIEto
 			if (glBackend != null) glBackend.ReleaseGL();
 			closed = true;
 		}
-		private bool closed = false;
+
+		~GLView()
+		{
+			Close();
+		}
 
 		/// \~English
 		/// <summary>
@@ -911,6 +915,7 @@ namespace ASEva.UIEto
 		private bool drawText;
 		private bool useLegacyAPI;
 		private bool supportOverlay = false;
+		private bool closed = false;
 	}
 
 	public interface GLCallback

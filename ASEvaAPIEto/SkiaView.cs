@@ -206,6 +206,11 @@ namespace ASEva.UIEto
 			closed = true;
 		}
 
+		~SkiaView()
+		{
+			Close();
+		}
+
 		/// \~English
 		/// <summary>
 		/// Request new rendering
