@@ -3,6 +3,8 @@ using System.Net;
 
 namespace ASEva.Utility
 {
+    #pragma warning disable SYSLIB0014
+
     /// \~English
     /// <summary>
     /// (api:app=2.0.0) WebClient with Timeout property

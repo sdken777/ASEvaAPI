@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace ASEva.Utility
 {
-    #pragma warning disable CS1571
+    #pragma warning disable CS1571, SYSLIB0021
 
     /// \~English
     /// <summary>
