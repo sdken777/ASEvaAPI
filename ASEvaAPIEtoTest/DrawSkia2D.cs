@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Eto.Forms;
-using ASEva.Samples;
+using ASEva;
 using ASEva.UIEto;
 using SkiaSharp;
 
@@ -30,6 +30,11 @@ namespace ASEvaAPIEtoTest
                 };
             }
 
+            skiaView.MouseDown += (o, e) =>
+            {
+                skiaDrawPoints.Add(e.GetLogicalPoint().ToCommon());
+            };
+
             var image = ImageConverter.ConvertFromBitmap(Eto.Drawing.Bitmap.FromResource("camera.png")).ToSKImage();
             skiaView.Render += (o, args) =>
             {
@@ -38,6 +43,7 @@ namespace ASEvaAPIEtoTest
                 var wideLinePaint = new SKPaint{ Color = SKColors.Red, StrokeWidth = 20, StrokeCap = SKStrokeCap.Square, IsAntialias = true };
                 var piePaint = new SKPaint{ Color = new SKColor(0, 128, 0, 128), IsAntialias = true };
                 var textBoundPaint = new SKPaint{ Color = SKColors.Green, Style = SKPaintStyle.Stroke, IsAntialias = true };
+                var pointPaint = new SKPaint{ Color = SKColors.DarkBlue, StrokeWidth = 2, IsAntialias = true };
 
                 c.Clear(SKColors.LightYellow);
                 c.DrawLine(10, 100, 190, 100, blackPaint);
@@ -56,6 +62,11 @@ namespace ASEvaAPIEtoTest
                 c.DrawLine(10, 210, 190, 215, blackPaint);
                 c.DrawLine(10, 235, 190, 240, blackPaint);
                 c.DrawString(t["draw-skia-anti-alias"], c.GetDefaultFont(), SKColors.Black, TextAnchor.Center, 100, 225);
+
+                foreach (var pt in skiaDrawPoints)
+                {
+                    c.DrawPoint(pt.X, pt.Y, pointPaint);
+                }
             };
             skiaViews.Add(skiaView);
         }
@@ -66,5 +77,6 @@ namespace ASEvaAPIEtoTest
         }
 
         private List<SkiaView> skiaViews = new List<SkiaView>();
+        private List<FloatPoint> skiaDrawPoints = new List<FloatPoint>();
     }
 }
