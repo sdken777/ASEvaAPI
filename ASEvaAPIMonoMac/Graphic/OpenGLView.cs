@@ -107,7 +107,8 @@ namespace ASEva.UIMonoMac
             {
                 var curWidth = (int)Frame.Width;
                 var curHeight = (int)Frame.Height;
-                var curSize = new GLSizeInfo(curWidth, curHeight, curWidth, curHeight, 1, (float)curWidth / curHeight);
+                var pixelScale = Eto.Forms.Screen.PrimaryScreen.LogicalPixelSize;
+                var curSize = new GLSizeInfo(curWidth, curHeight, (int)(curWidth * pixelScale), (int)(curHeight * pixelScale), pixelScale, (float)curWidth / curHeight);
                 if (size == null || curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight)
                 {
                     size = curSize;

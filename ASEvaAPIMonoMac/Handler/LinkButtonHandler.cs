@@ -32,7 +32,9 @@ using CGPoint = System.Drawing.PointF;
 #endif
 #endif
 
-namespace Eto.Mac.Forms.Controls
+using Eto.Mac;
+
+namespace ASEva.UIMonoMac
 {
 	/// <summary>
 	/// LinkButton handler.

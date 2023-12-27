@@ -43,7 +43,11 @@ using nnint = System.UInt64;
 using nnint = System.UInt32;
 #endif
 
-namespace Eto.Mac.Forms.Controls
+using Eto;
+using Eto.Mac;
+using Eto.Mac.Forms;
+
+namespace ASEva.UIMonoMac
 {
 
 	public class EtoLabelFieldCell : NSTextFieldCell
@@ -363,8 +367,11 @@ namespace Eto.Mac.Forms.Controls
 					// need a copy of the paragraph style otherwise they don't get applied correctly when changed
 					attr.Add(NSStringAttributeKey.ParagraphStyle, (NSParagraphStyle)paragraphStyle.Copy());
 					var col = CurrentColor;	
-					if (col != null)
+
+					// CHECK: 修正偶尔产生的异常"object cannot be nil (key: NSColor)"
+					if (col != null && col.Handle != IntPtr.Zero)
 						attr.Add(NSStringAttributeKey.ForegroundColor, col);
+
 					str.SetAttributes(attr, range);
 					if (underlineIndex >= 0)
 					{
