@@ -18,7 +18,12 @@ namespace ASEva.UIMonoMac
             if (control.ControlObject == null) return null;
 
             NSView view = null;
-            if (control.ControlObject is NSWindow) view = (control.ControlObject as NSWindow).ContentView;
+            var logicalWidth = control.GetLogicalWidth();
+            if (control.ControlObject is NSWindow) 
+            {
+                view = (control.ControlObject as NSWindow).ContentView;
+                logicalWidth = (int)view.Frame.Width;
+            }
             else if (control.ControlObject is NSView) view = control.ControlObject as NSView;
             if (view == null) return null;
 
@@ -34,7 +39,10 @@ namespace ASEva.UIMonoMac
             try
             {
                 var etoBitmap = new Bitmap(pngBytes);
-                return ASEva.UIEto.ImageConverter.ConvertFromBitmap(etoBitmap);
+                var rawImage = ASEva.UIEto.ImageConverter.ConvertFromBitmap(etoBitmap);
+
+                if (rawImage.Width == logicalWidth) return rawImage;
+                else return rawImage.Resize(logicalWidth);
             }
             catch (Exception)
             {
@@ -50,7 +58,12 @@ namespace ASEva.UIMonoMac
             if (control.ControlObject == null) return null;
 
             NSView view = null;
-            if (control.ControlObject is NSWindow) view = (control.ControlObject as NSWindow).ContentView;
+            var logicalWidth = control.GetLogicalWidth();
+            if (control.ControlObject is NSWindow)
+            {
+                view = (control.ControlObject as NSWindow).ContentView;
+                logicalWidth = (int)view.Frame.Width;
+            }
             else if (control.ControlObject is NSView) view = control.ControlObject as NSView;
             if (view == null) return null;
 
@@ -69,9 +82,14 @@ namespace ASEva.UIMonoMac
                 var etoBitmap = new Bitmap(pngBytes);
 
                 var bound = view.Window.ConvertRectToScreen(view.Frame);
-                etoBitmap = etoBitmap.Clone(new Rectangle((int)bound.X, etoBitmap.Height - (int)bound.Y - (int)bound.Height, (int)bound.Width, (int)bound.Height));
+                var scale = Screen.PrimaryScreen.LogicalPixelSize;
+                bound = new CGRect(bound.X * scale, bound.Y * scale, bound.Width * scale, bound.Height * scale);
 
-                return ASEva.UIEto.ImageConverter.ConvertFromBitmap(etoBitmap);
+                etoBitmap = etoBitmap.Clone(new Rectangle((int)bound.X, etoBitmap.Height - (int)bound.Y - (int)bound.Height, (int)bound.Width, (int)bound.Height));
+                var rawImage = ASEva.UIEto.ImageConverter.ConvertFromBitmap(etoBitmap);
+
+                if (rawImage.Width == logicalWidth) return rawImage;
+                else return rawImage.Resize(logicalWidth);
             }
             catch (Exception)
             {
