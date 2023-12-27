@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.12.0
+            version=2.12.3
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -1354,6 +1354,24 @@
             </summary>
             <param name="panel">面板</param>
             <returns>创建的可覆盖布局</returns>
+        </member>
+        <member name="M:ASEva.UIEto.SetContentExtensions.SetContentAsControl(Eto.Forms.Panel,Eto.Forms.Control,System.Int32)">
+            \~English
+            <summary>
+            (api:eto=2.12.2) Set content as a control object
+            </summary>
+            <param name="panel">Panel object</param>
+            <param name="control">The control object to set as content</param>
+            <param name="logicalPadding">Control's logical padding</param>
+            <returns>The control object set as content</returns>
+            \~Chinese
+            <summary>
+            (api:eto=2.12.2) 设置控件至面板Content
+            </summary>
+            <param name="panel">面板</param>
+            <param name="control">目标控件</param>
+            <param name="logicalPadding">目标控件的边缘空隙</param>
+            <returns>已设置为Content的目标控件</returns>
         </member>
         <member name="T:ASEva.UIEto.SizerExtensions">
             \~English
@@ -4189,14 +4207,14 @@
             Add a column (should be called before any ASEva.UIEto.TextTableView.AddRow )
             </summary>
             <param name="title">Column title</param>
-            <param name="logicalWidth">Logical width of the column</param>
+            <param name="logicalWidth">Logical width of the column, set to zero to expand</param>
             <param name="editable">Whether text of the column is editable</param>
             \~Chinese
             <summary>
             添加一列（需要在添加行之前进行）
             </summary>
             <param name="title">列标题</param>
-            <param name="logicalWidth">列宽度</param>
+            <param name="logicalWidth">列宽度，设为0表示自动扩展</param>
             <param name="editable">是否可编辑该列文字</param>
         </member>
         <member name="M:ASEva.UIEto.TextTableView.GetRowCount">
