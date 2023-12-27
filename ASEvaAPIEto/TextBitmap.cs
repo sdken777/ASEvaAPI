@@ -1,14 +1,29 @@
-using System;
+﻿using System;
 using Eto.Drawing;
-using ASEva.Samples;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+    
+    /// \~English
+    /// <summary>
+    /// (api:eto=2.9.6) Text bitmap, alternative to Graphics.DrawString for increased efficiency
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.9.6) 文本位图，可替代Graphics.DrawString以提高效率
     /// </summary>
     public class TextBitmap
     {
+        /// \~English
+        /// <summary>
+        /// Create text bitmap (Only default font supported)
+        /// </summary>
+        /// <param name="g">Graphics object</param>
+        /// <param name="text">Text</param>
+        /// <param name="sizeRatio">Ratio to the default size, default is 1</param>
+        /// <param name="color">Paint color</param>
+        /// \~Chinese
         /// <summary>
         /// 创建文本位图（仅支持默认字体）
         /// </summary>
@@ -44,6 +59,15 @@ namespace ASEva.UIEto
             this.color = color;
         }
 
+        /// \~English
+        /// <summary>
+        /// Draw the text bitmap
+        /// </summary>
+        /// <param name="g">Graphics object</param>
+        /// <param name="anchor">Anchor point's type</param>
+        /// <param name="logicalX">X-coordinate of anchor point</param>
+        /// <param name="logicalY">Y-coordinate of anchor point</param>
+        /// \~Chinese
         /// <summary>
         /// 通过图形对象绘制文本位图
         /// </summary>
@@ -94,8 +118,15 @@ namespace ASEva.UIEto
 
             if (fastMode)
             {
+                float drawOffsetX = 0, drawOffsetY = 0;
+                if (FastModeDrawOffset != null)
+                {
+                    drawOffsetX = FastModeDrawOffset.Value.X;
+                    drawOffsetY = FastModeDrawOffset.Value.Y;
+                }
+
                 g.ImageInterpolation = ImageInterpolation.None;
-                g.DrawImage(bitmap, (float)Math.Round(dx), (float)Math.Round(dy));
+                g.DrawImage(bitmap, (float)Math.Round(dx) + drawOffsetX, (float)Math.Round(dy) + drawOffsetY);
             }
             else
             {
@@ -113,16 +144,31 @@ namespace ASEva.UIEto
             g.ImageInterpolation = originInterpolationMode;
         }
 
+        /// \~English
+        /// <summary>
+        /// The text
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 获取当前文本
         /// </summary>
         public String Text { get { return text; }}
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.9.8) The ratio to the default size
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.9.8) 获取当前字体相对于默认大小比例
         /// </summary>
         public float SizeRatio { get { return sizeRatio; }}
 
+        /// \~English
+        /// <summary>
+        /// The paint color
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 获取当前绘制颜色
         /// </summary>
@@ -145,5 +191,7 @@ namespace ASEva.UIEto
         public static ModifyBitmapGraphics ModifyInterface { private get; set; }
 
         public static ImageInterpolation? ImageInterpolationMode { private get; set; }
+
+        public static PointF? FastModeDrawOffset { private get; set; }
     }
 }

@@ -5,76 +5,153 @@ using System.Xml;
 
 namespace ASEva.Utility
 {
+    #pragma warning disable CS1571
+
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Session's meta info
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) Session的meta信息
     /// </summary>
     public class SessionMeta
     {
+        /// \~English
+        /// <summary>
+        /// File path
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 文件路径
         /// </summary>
         public String FilePath { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Session ID
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// Session ID
         /// </summary>
         public DateTime ID { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Session GUID
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// Session GUID
         /// </summary>
         public String GUID { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Session's duration, in seconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// Session长度，单位秒
         /// </summary>
         public double? Length { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// CPU time model
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// CPU时间模型
         /// </summary>
         public CPUTimeModel CPUTimeModel { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Host machine posix time model
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 主机Posix时间模型
         /// </summary>
         public PosixTimeModel HostPosixModel { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Satellite posix time model
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 卫星Posix时间模型
         /// </summary>
         public PosixTimeModel GNSSPosixModel { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Whether host machine is synchronized with time server while recording session
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 主机是否与授时服务器同步
         /// </summary>
         public bool HostSync { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Session's comment
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// Session的注释说明
         /// </summary>
         public String Comment { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Session's pick ID, "origin" means it's the original data
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// Session的截取ID，origin表示原始数据
         /// </summary>
         public String Pick { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Session's properties of picking
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// Session的截取属性列表
         /// </summary>
         public Dictionary<String, String> PickProperties { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Session's properties
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// Session的属性
         /// </summary>
         public Dictionary<string, string> Properties { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Versions of software that recorded the session
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 采集Session的软件版本信息（用于回溯）
         /// </summary>
         public Dictionary<string, Version> Versions { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Session's start time of host machine posix time model in local date and time
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 按本地时间表示的主机Posix时间模型的session开始时间
         /// </summary>
@@ -102,6 +179,11 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// Session's time ratio of host machine posix time model
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 主机Posix时间模型的时间比例
         /// </summary>
@@ -118,6 +200,11 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// Session's start time of satellite posix time model in UTC date and time
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 按UTC时间表示的卫星Posix时间模型的session开始时间
         /// </summary>
@@ -145,6 +232,11 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// Session's time ratio of satellite posix time model
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 卫星Posix时间模型的时间比例
         /// </summary>
@@ -165,6 +257,25 @@ namespace ASEva.Utility
         {
         }
 
+        /// \~English
+        /// <summary>
+        /// Create session meta object (not write to file)
+        /// </summary>
+        /// <param name="filePath">File path</param>
+        /// <param name="id">Session ID</param>
+        /// <param name="guid">Session GUID</param>
+        /// <param name="length">Session's duration</param>
+        /// <param name="startTimeUTC">Session's start time of satellite posix time model in UTC date and time</param>
+        /// <param name="timeRatioToUTC">Session's time ratio of satellite posix time model</param>
+        /// <param name="startTimeLocal">Session's start time of host machine posix time model in local date and time</param>
+        /// <param name="timeRatioToLocal">Session's time ratio of host machine posix time model</param>
+        /// <param name="comment">Session's comment</param>
+        /// <param name="versions">Versions of software that recorded the session</param>
+        /// <param name="props">Session's properties</param>
+        /// <param name="pick">Session's pick ID, "origin" means it's the original data</param>
+        /// <param name="pickProps">Session's properties of picking</param>
+        /// <returns>Created session meta object</returns>
+        /// \~Chinese
         /// <summary>
         /// 创建meta文件对象（仅创建对象，不写入文件）
         /// </summary>
@@ -207,6 +318,25 @@ namespace ASEva.Utility
             return meta;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.7.0) Create session meta object (not write to file)
+        /// </summary>
+        /// <param name="filePath">File path</param>
+        /// <param name="id">Session ID</param>
+        /// <param name="guid">Session GUID</param>
+        /// <param name="length">Session's duration</param>
+        /// <param name="cpuTimeModel">CPU time model</param>
+        /// <param name="hostPosixModel">Host machine posix time model</param>
+        /// <param name="gnssPosixModel">Satellite posix time model</param>
+        /// <param name="hostSync">Whether host machine is synchronized with time server</param>
+        /// <param name="comment">Session's comment</param>
+        /// <param name="versions">Versions of software that recorded the session</param>
+        /// <param name="props">Session's properties</param>
+        /// <param name="pick">Session's pick ID, "origin" means it's the original data</param>
+        /// <param name="pickProps">Session's properties of picking</param>
+        /// <returns>Created session meta object</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 创建meta文件对象（仅创建对象，不写入文件）
         /// </summary>
@@ -249,6 +379,13 @@ namespace ASEva.Utility
             return meta;
         }
 
+        /// \~English
+        /// <summary>
+        /// Load from file
+        /// </summary>
+        /// <param name="filePath">File path</param>
+        /// <returns>Created session meta object</returns>
+        /// \~Chinese
         /// <summary>
         /// 从已有meta文件中读取
         /// </summary>
@@ -461,6 +598,11 @@ namespace ASEva.Utility
             return meta;
         }
 
+        /// \~English
+        /// <summary>
+        /// Save to file
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 保存meta文件
         /// </summary>

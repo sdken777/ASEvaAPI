@@ -1,14 +1,24 @@
-using System;
+﻿using System;
 using Eto.Forms;
 using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// <summary>
+    /// (api:eto=2.4.0) Conversion of pixel units
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.4.0) 像素单位转换
     /// </summary>
     public class Pixel
     {
+        /// \~English
+        /// <summary>
+        /// Convert logical size to raw pixel size
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 逻辑像素值转原始像素值
         /// </summary>
@@ -17,6 +27,11 @@ namespace ASEva.UIEto
             return (int)(logicalValue * Scale);
         }
 
+        /// \~English
+        /// <summary>
+        /// Convert raw pixel size to logical size
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 原始像素值转逻辑像素值
         /// </summary>
@@ -25,6 +40,11 @@ namespace ASEva.UIEto
             return (int)(rawValue / Scale);
         }
 
+        /// \~English
+        /// <summary>
+        /// Convert logical point to raw pixel point
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 逻辑点坐标转原始点坐标
         /// </summary>
@@ -33,6 +53,11 @@ namespace ASEva.UIEto
             return new Point((int)(logicalPoint.X * Scale), (int)(logicalPoint.Y * Scale));
         }
 
+        /// \~English
+        /// <summary>
+        /// Convert raw pixel point to logical point
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 原始点坐标转逻辑点坐标
         /// </summary>
@@ -41,6 +66,11 @@ namespace ASEva.UIEto
             return new Point((int)(rawPoint.X / Scale), (int)(rawPoint.Y / Scale));
         }
 
+        /// \~English
+        /// <summary>
+        /// Convert logical size to raw pixel size 
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 逻辑尺寸转原始尺寸
         /// </summary>
@@ -49,6 +79,11 @@ namespace ASEva.UIEto
             return new Size((int)(logicalSize.Width * Scale), (int)(logicalSize.Height * Scale));
         }
 
+        /// \~English
+        /// <summary>
+        /// Convert raw pixel size to logical size
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 原始尺寸转逻辑尺寸
         /// </summary>
@@ -57,6 +92,11 @@ namespace ASEva.UIEto
             return new Size((int)(rawSize.Width / Scale), (int)(rawSize.Height / Scale));
         }
 
+        /// \~English
+        /// <summary>
+        /// Ratio of logical unit to raw pixel (Pixel in current UI framework, may not be physical pixel)
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 逻辑像素与原始像素(即UI框架下的像素，非物理像素)的换算比
         /// </summary>
@@ -78,6 +118,11 @@ namespace ASEva.UIEto
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.9.7) Whether logical unit is 1:1 to the physical pixel
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.9.7) 逻辑像素与物理像素是否为1:1
         /// </summary>

@@ -2,6 +2,13 @@
 
 namespace ASEva.Graph
 {
+    #pragma warning disable CS1571
+
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Single axis' range of scatter points graph
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 散点图单轴范围
     /// </summary>
@@ -17,27 +24,58 @@ namespace ASEva.Graph
         }
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Additional options for definition of scatter points graph
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 散点图定义的附加选项
     /// </summary>
     public class ScatterOptions
     {
+        /// \~English
+        /// <summary>
+        /// Number of intervals along X axis, set to null to determine automatically
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// x轴柱状图区间个数，null表示自动计算
         /// </summary>
         public int? XHistCount { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Number of intervals along Y axis, set to null to determine automatically
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// y轴柱状图区间个数，null表示自动计算
         /// </summary>
         public int? YHistCount { get; set; }
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Scatter points graph data
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 散点图数据
     /// </summary>
     public class ScatterPointsData : GraphData
     {
+        /// \~English
+        /// <summary>
+        /// Create graph definition (without validation, and the number of intervals is determined automatically)
+        /// </summary>
+        /// <param name="title">Title</param>
+        /// <param name="xTitle">X axis title</param>
+        /// <param name="yTitle">Y axis title</param>
+        /// <param name="xRange">X axis range</param>
+        /// <param name="yRange">Y axis range</param>
+        /// <returns>Graph definition object</returns>
+        /// \~Chinese
         /// <summary>
         /// 创建图表定义（不带数据验证，柱状图区间个数自动计算）
         /// </summary>
@@ -52,6 +90,18 @@ namespace ASEva.Graph
             return CreateDefinitionWithValidationAndOptions(title, xTitle, yTitle, xRange, yRange, null, null);
         }
 
+        /// \~English
+        /// <summary>
+        /// Create graph definition (the number of intervals is determined automatically)
+        /// </summary>
+        /// <param name="title">Title</param>
+        /// <param name="xTitle">X axis title</param>
+        /// <param name="yTitle">Y axis title</param>
+        /// <param name="xRange">X axis range</param>
+        /// <param name="yRange">Y axis range</param>
+        /// <param name="validation">Graph validation, null means no validation. Supported OutlineInside, OutlineOutside</param>
+        /// <returns>Graph definition object</returns>
+        /// \~Chinese
         /// <summary>
         /// 创建带数据验证的图表定义（柱状图区间个数自动计算）
         /// </summary>
@@ -67,6 +117,19 @@ namespace ASEva.Graph
             return CreateDefinitionWithValidationAndOptions(title, xTitle, yTitle, xRange, yRange, validation, null);
         }
 
+        /// \~English
+        /// <summary>
+        /// Create graph definition
+        /// </summary>
+        /// <param name="title">Title</param>
+        /// <param name="xTitle">X axis title</param>
+        /// <param name="yTitle">Y axis title</param>
+        /// <param name="xRange">X axis range</param>
+        /// <param name="yRange">Y axis range</param>
+        /// <param name="validation">Graph validation, null means no validation. Supported OutlineInside, OutlineOutside</param>
+        /// <param name="options">Additional options</param>
+        /// <returns>Graph definition object</returns>
+        /// \~Chinese
         /// <summary>
         /// 创建带数据验证和附加选项的图表定义
         /// </summary>
@@ -106,6 +169,12 @@ namespace ASEva.Graph
             return def;
         }
 
+        /// \~English
+        /// <summary>
+        /// Get X axis title
+        /// </summary>
+        /// <returns>X axis title</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取x轴标题
         /// </summary>
@@ -115,6 +184,12 @@ namespace ASEva.Graph
             return Definition.ColumnTitles[0];
         }
 
+        /// \~English
+        /// <summary>
+        /// Get Y axis title
+        /// </summary>
+        /// <returns>Y axis title</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取y轴标题
         /// </summary>
@@ -124,6 +199,12 @@ namespace ASEva.Graph
             return Definition.ColumnTitles[1];
         }
 
+        /// \~English
+        /// <summary>
+        /// Get X axis range
+        /// </summary>
+        /// <returns>X axis range</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取x轴范围
         /// </summary>
@@ -136,6 +217,12 @@ namespace ASEva.Graph
             return new ScatterRange(lower, upper);
         }
 
+        /// \~English
+        /// <summary>
+        /// Get Y axis range
+        /// </summary>
+        /// <returns>Y axis range</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取y轴范围
         /// </summary>
@@ -148,6 +235,12 @@ namespace ASEva.Graph
             return new ScatterRange(lower, upper);
         }
 
+        /// \~English
+        /// <summary>
+        /// Get number of intervals along X axis
+        /// </summary>
+        /// <returns>Number of intervals along X axis</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取x轴柱状图区间个数
         /// </summary>
@@ -198,6 +291,12 @@ namespace ASEva.Graph
             return xHistCount.Value;
         }
 
+        /// \~English
+        /// <summary>
+        /// Get number of intervals along Y axis
+        /// </summary>
+        /// <returns>Number of intervals along Y axis</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取y轴柱状图区间个数
         /// </summary>
@@ -248,10 +347,16 @@ namespace ASEva.Graph
             return yHistCount.Value;
         }
 
+        /// \~English
         /// <summary>
-        /// 获取x轴柱状图各区间统计数
+        /// Get number of scatter points in each interval along X axis
         /// </summary>
-        /// <returns>x轴柱状图各区间统计数</returns>
+        /// <returns>Number of scatter points in each interval along X axis</returns>
+        /// \~Chinese
+        /// <summary>
+        /// 获取x轴柱状图各区间散点数
+        /// </summary>
+        /// <returns>x轴柱状图各区间散点数</returns>
         public int[] GetXHistValues()
         {
             var xRange = GetXRange();
@@ -271,10 +376,16 @@ namespace ASEva.Graph
             return output;
         }
 
+        /// \~English
         /// <summary>
-        /// 获取y轴柱状图各区间统计数
+        /// Get number of scatter points in each interval along Y axis
         /// </summary>
-        /// <returns>y轴柱状图各区间统计数</returns>
+        /// <returns>Number of scatter points in each interval along Y axis</returns>
+        /// \~Chinese
+        /// <summary>
+        /// 获取y轴柱状图各区间散点数
+        /// </summary>
+        /// <returns>y轴柱状图各区间散点数</returns>
         public int[] GetYHistValues()
         {
             var yRange = GetYRange();
@@ -294,6 +405,12 @@ namespace ASEva.Graph
             return output;
         }
 
+        /// \~English
+        /// <summary>
+        /// Add sample point
+        /// </summary>
+        /// <param name="point">Sample point, do nothing if over the range</param>
+        /// \~Chinese
         /// <summary>
         /// 添加样本点
         /// </summary>
@@ -335,6 +452,14 @@ namespace ASEva.Graph
             Params[0] = (count + 1).ToString();
         }
 
+        /// \~English
+        /// <summary>
+        /// Add sample point with time info
+        /// </summary>
+        /// <param name="point">Sample point, do nothing if over the range</param>
+        /// <param name="session">The session that it belongs to</param>
+        /// <param name="offset">The time offset of the sample in the session</param>
+        /// \~Chinese
         /// <summary>
         /// 添加含时间信息的样本点
         /// </summary>
@@ -376,6 +501,12 @@ namespace ASEva.Graph
             Params[0] = (count + 1).ToString();
         }
 
+        /// \~English
+        /// <summary>
+        /// Get all scatter points
+        /// </summary>
+        /// <returns>All scatter points</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取所有散点样本
         /// </summary>
@@ -397,6 +528,15 @@ namespace ASEva.Graph
             return pts;
         }
 
+        /// \~English
+        /// <summary>
+        /// Get time info of a scatter point
+        /// </summary>
+        /// <param name="index">Index of scatter point</param>
+        /// <param name="session">Output the session that it belongs to</param>
+        /// <param name="offset">Output the time offset of the sample in the session</param>
+        /// <returns>Whether successful</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取某个散点样本的时间信息
         /// </summary>

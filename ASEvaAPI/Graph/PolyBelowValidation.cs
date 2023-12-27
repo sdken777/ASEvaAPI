@@ -4,6 +4,11 @@ using System.Linq;
 
 namespace ASEva.Graph
 {
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Validation of whether the data is below the poly line
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 图表数据的折线下方验证方式
     /// </summary>

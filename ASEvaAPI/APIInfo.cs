@@ -1,13 +1,19 @@
 ﻿/*! \mainpage
- * ASEva-API分为三类：回调类API，主动调用类API，以及实用功能。\n
- * \n
- * 回调类API：继承Plugin类作为插件入口，实现插件功能供ASEva系统调用。详见 ASEva.Plugin \n
- * 主动调用类API：在插件功能的实现中可直接调用的API。详见 ASEva.Agency \n
- * 实用功能：在插件开发中时常用到的功能类和控件等。详见 ASEva.Utility \n
- * \n
- * 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph \n
- * \n
- * 本文档对应API版本：0.0.0
+ * \~English ASEva-API consists of three parts: Callback API, Agency API, and utility functions. \n\n
+ * \~Chinese ASEva-API分为三类：回调类API，主动调用类API，以及实用功能。 \n\n
+ * 
+ * \~English Callback API: Implement Plugin class, to achieve plugin functions for framework calls. See ASEva.Plugin for details \n
+ * \~Chinese 回调类API：继承Plugin类作为插件入口，实现插件功能供框架软件调用。详见 ASEva.Plugin \n
+ * \~English Agency API: API that can be directly called in plugin functions. See ASEva.Agency for details \n
+ * \~Chinese 主动调用类API：在插件功能的实现中可直接调用的API。详见 ASEva.Agency \n
+ * \~English Utility functions: Utility classes that are often used in plugin development. See ASEva.Utility for details \n\n
+ * \~Chinese 实用功能：在插件开发中时常用到的功能类等。详见 ASEva.Utility \n\n
+ * 
+ * \~English In addition, refer to ASEva.Samples for the definition of samples used in plugin, and ASEva.Graph for graph report definitions. \n\n
+ * \~Chinese 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph 。 \n\n
+ * 
+ * \~English This document corresponds to API version: 0.0.0 \n
+ * \~Chinese 本文档对应API版本：0.0.0
  */
 
 using System;
@@ -20,6 +26,12 @@ namespace ASEva
     /// </summary>
     public class APIInfo
     {
+        /// \~English
+        /// <summary>
+        /// (api:app=2.0.0) Get API version
+        /// </summary>
+        /// <returns>The API version</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.0.0) 获取API版本
         /// </summary>
@@ -29,6 +41,12 @@ namespace ASEva
             return new Version(0, 0, 0, 0);
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.0.0) Get the currently running OS code
+        /// </summary>
+        /// <returns>OS code, null if not recognized</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.0.0) 返回当前运行的OS代号
         /// </summary>

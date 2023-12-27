@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 namespace ASEva.Graph
 {
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Validation of whether the data is in the range
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 图表数据的范围区间内验证方式
     /// </summary>

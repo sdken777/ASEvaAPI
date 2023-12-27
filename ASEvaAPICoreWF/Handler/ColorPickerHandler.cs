@@ -20,6 +20,8 @@ namespace ASEva.UICoreWF
 			Control = new swf.Button { Width = 40 };
 			Control.Click += HandleClick;
 			Control.BackColor = sd.Color.Black;
+
+			// CHECK: 修正高DPI显示时的尺寸问题
 			this.Control.Size = new System.Drawing.Size((int)(this.Control.Width * SizerExtensions.PixelScale),
 				(int)(this.Control.Height * SizerExtensions.PixelScale));
 		}

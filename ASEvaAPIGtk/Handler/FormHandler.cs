@@ -3,6 +3,7 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
+	// CHECK: 继承WindowHandlerGtkWindow，修正GtkWindowConnector异常问题，Eto-2.7.0已修复
 	class FormHandler : WindowHandlerGtkWindow<Gtk.Window, Form, Form.ICallback>, Form.IHandler
 	{
 		public FormHandler(Gtk.Window window)
@@ -53,6 +54,7 @@ namespace ASEva.UIGtk
 			set { Widget.Properties.Set(CanFocus_Key, value, () => Control.AcceptFocus = value, true); }
 		}
 
+		// 修正设置Resizable属性无效问题 (eto-2.6.1已解决)
 		public new bool Resizable
 		{
 			get

@@ -39,7 +39,7 @@
     "tasks": [
         {
             "type": "process",
-            "label": "调试构建",
+            "label": "Build (Debug)",
             "group": "build",
             "command": "rm",
             "args": [
@@ -57,12 +57,12 @@
                 ],
             },
             "dependsOn": [
-                "(子任务)执行调试构建",
+                "Subtask: Build for host (Debug)",
             ],
         },
         {
             "type": "process",
-            "label": "发布构建",
+            "label": "Build (Release)",
             "group": "build",
             "command": "rm",
             "args": [
@@ -72,13 +72,13 @@
             ],
             "dependsOrder": "sequence",
             "dependsOn": [
-                "(子任务)执行发布构建",
-                "(子任务)拷贝至其他目录",
+                "Subtask: Build for host (Release)",
+                "Subtask: Copy to other folders",
             ],
         },
         {
             "type": "process",
-            "label": "清理",
+            "label": "Clean",
             "command": "rm",
             "args": [
                 "-rf",
@@ -88,11 +88,11 @@
             "problemMatcher":[],
         },
 
-        // 以下为子任务
+        // Subtasks:
 
         {
             "type": "process",
-            "label": "(子任务)执行调试构建",
+            "label": "Subtask: Build for host (Debug)",
             "hide": true,
             "command": "dotnet",
             "args": [
@@ -107,7 +107,7 @@
         },
         {
             "type": "process",
-            "label": "(子任务)执行发布构建",
+            "label": "Subtask: Build for host (Release)",
             "hide": true,
             "command": "dotnet",
             "args": [
@@ -125,7 +125,7 @@
         },
         {
             "type": "process",
-            "label": "(子任务)拷贝至其他目录",
+            "label": "Subtask: Copy to other folders",
             "hide": true,
             "command": "dotnet",
             "args": [

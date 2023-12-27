@@ -1,14 +1,28 @@
-using System;
+﻿using System;
 using Eto.Forms;
 using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+    
+    /// \~English
+    /// <summary>
+    /// (api:eto=2.0.9) Extensions for window
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.9) 方便操作窗口的扩展
     /// </summary>
     public static class WindowExtensions
     {
+        /// \~English
+        /// <summary>
+        /// Move the window to center of screen
+        /// </summary>
+        /// <param name="window">Window object</param>
+        /// <param name="screen">The target screen, null as the primary screen</param>
+        /// \~Chinese
         /// <summary>
         /// 将窗口移动至屏幕中央
         /// </summary>

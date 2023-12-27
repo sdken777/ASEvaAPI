@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Collections.Generic;
 using ASEva.Utility;
 using ASEva.UIEto;
 using Eto.Drawing;
@@ -23,17 +24,20 @@ namespace ASEva.UIGtk
         {
             if (ASEva.APIInfo.GetRunningOS() == "linuxarm")
             {
+                // CHECK: 修正在Arm下打开文件对话框异常
                 Redirection.RedirectMarshaller();
+
+                // 修正打开右键菜单异常，Arm-Ubuntu16.04-X11可重现 (不再支持Ubuntu16.04)
                 // Redirection.RedirectMenu();
             }
   
             var platform = new global::Eto.GtkSharp.Platform();
             platform.Add<LinkButton.IHandler>(() => new LinkButtonHandler());
-            platform.Add<NumericStepper.IHandler>(() => new NumericStepperHandler());
+            // platform.Add<NumericStepper.IHandler>(() => new NumericStepperHandler());
             platform.Add<ColorPicker.IHandler>(() => new ColorPickerHandler());
             platform.Add<WebView.IHandler>(() => new WebViewHandler());
             platform.Add<PixelLayout.IHandler>(() => new PixelLayoutHandler());
-            platform.Add<Drawable.IHandler>(() => new DrawableHandler());
+            // platform.Add<Drawable.IHandler>(() => new DrawableHandler());
             platform.Add<Screen.IScreensHandler>(() => new ScreensHandler());
             platform.Add<Dialog.IHandler>(() => new DialogHandler());
             platform.Add<DateTimePicker.IHandler>(() => new DateTimePickerHandler());
@@ -43,8 +47,10 @@ namespace ASEva.UIGtk
             platform.Add<GroupBox.IHandler>(() => new GroupBoxHandler());
             platform.Add<SaveFileDialog.IHandler>(() => new SaveFileDialogHandler());
             platform.Add<Label.IHandler>(() => new LabelHandler());
+            platform.Add<Button.IHandler>(() => new ButtonHandler());
             var app = new Application(platform);
 
+            // CHECK: 应用全局样式令显示较为紧凑
             try
             {
                 var cssProvider = new Gtk.CssProvider();
@@ -58,12 +64,7 @@ namespace ASEva.UIGtk
             catch (Exception ex) { Console.WriteLine(ex.Message); }
 
             uiBackend = queryUIBackend();
-            if (uiBackend == "wayland")
-            {
-                OverlayLayout.DelayHandleControl = true;
-                LinuxFuncLoader.UseEGL = true;
-            }
-
+            if (uiBackend == "wayland") LinuxFuncLoader.UseEGL = true;
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerGtk();
             ContextMenuExtensions.ShouldAddMouseDownEvent = true;
             ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.ColorInverted;
@@ -79,8 +80,11 @@ namespace ASEva.UIGtk
             DefaultFlowLayout2DBackend.FixedScrollBarSize = 15;
             SimpleTreeView.Factory = new SimpleTreeViewFactoryGtk();
             SnapshotExtensions.Handler = new SnapshotHandler();
+            if (uiBackend == "wayland") SnapshotExtensions.ScreenModeHandler = new SnapshotHandler();
+            else SnapshotExtensions.ScreenModeHandler = new ScreenSnapshotHandler();
             FlowLayout.Factory = new FlowLayoutFactoryGtk();
             FlowLayout2D.Factory = new FlowLayout2DFactoryGtk();
+            OverlayLayout.DelayHandleControl = true;
 
             webViewBackend = "webkit2";
 
@@ -135,6 +139,19 @@ namespace ASEva.UIGtk
                 appDialog.Dispose();
                 return true;
             }
+        }
+
+        public Dictionary<String, String> GetThirdPartyNotices()
+        {
+            var table = new Dictionary<String, String>();
+            table["GtkSharp"] = ResourceLoader.LoadText("GtkSharp.LICENSE");
+            table["webkitgtk"] = ResourceLoader.LoadText("webkitgtk.LICENSE");
+            return table;
+        }
+
+        public bool ShouldPassParent()
+        {
+            return false;
         }
 
         private String queryUIBackend()

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Eto.Drawing;
 using Eto.Forms;
 using ASEva.UIEto;
@@ -13,7 +13,7 @@ namespace ASEvaAPIEtoTest
             Title = title;
             SetResizableMode(500, 700, 500, 700);
 
-            this.SetContentAsColumnLayout().AddControl(new TextArea{ Text = text, ReadOnly = true }, true);
+            this.SetContentAsControl(new TextArea{ Text = text, ReadOnly = true });
         }
     }
 }

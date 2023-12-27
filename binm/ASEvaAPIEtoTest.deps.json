@@ -1,0 +1,96 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1/osx.10.10-x64",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {},
+    ".NETCoreApp,Version=v3.1/osx.10.10-x64": {
+      "ASEvaAPIEtoTest/1.0.0": {
+        "dependencies": {
+          "ASEvaAPI": "0.0.0.0",
+          "ASEvaAPIEto": "0.0.0.0",
+          "Eto": "2.5.0.0",
+          "PortableSharpGL": "0.0.0.0",
+          "SkiaSharp": "2.88.0.0"
+        },
+        "runtime": {
+          "ASEvaAPIEtoTest.dll": {}
+        }
+      },
+      "ASEvaAPI/0.0.0.0": {
+        "runtime": {
+          "ASEvaAPI.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "ASEvaAPIEto/0.0.0.0": {
+        "runtime": {
+          "ASEvaAPIEto.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Eto/2.5.0.0": {
+        "runtime": {
+          "Eto.dll": {
+            "assemblyVersion": "2.5.0.0",
+            "fileVersion": "2.5.7683.15038"
+          }
+        }
+      },
+      "PortableSharpGL/0.0.0.0": {
+        "runtime": {
+          "PortableSharpGL.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "SkiaSharp/2.88.0.0": {
+        "runtime": {
+          "SkiaSharp.dll": {
+            "assemblyVersion": "2.88.0.0",
+            "fileVersion": "2.88.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ASEvaAPIEtoTest/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ASEvaAPI/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ASEvaAPIEto/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Eto/2.5.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "PortableSharpGL/0.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SkiaSharp/2.88.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

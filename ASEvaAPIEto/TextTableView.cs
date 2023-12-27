@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Eto.Forms;
@@ -6,6 +6,13 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+    
+    /// \~English
+    /// <summary>
+    /// (api:eto=2.0.3) Plain text table control
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.3) 纯文字的表格控件
     /// </summary>
@@ -17,20 +24,36 @@ namespace ASEva.UIEto
             CellFormatting += TextTableView_CellFormatting;
         }
 
+        /// \~English
+        /// <summary>
+        /// Add a column (should be called before any ASEva.UIEto.TextTableView.AddRow )
+        /// </summary>
+        /// <param name="title">Column title</param>
+        /// <param name="logicalWidth">Logical width of the column, set to zero to expand</param>
+        /// <param name="editable">Whether text of the column is editable</param>
+        /// \~Chinese
         /// <summary>
         /// 添加一列（需要在添加行之前进行）
         /// </summary>
         /// <param name="title">列标题</param>
-        /// <param name="logicalWidth">列宽度</param>
+        /// <param name="logicalWidth">列宽度，设为0表示自动扩展</param>
         /// <param name="editable">是否可编辑该列文字</param>
-        public void AddColumn(String title, int logicalWidth, bool editable = true)
+        public void AddColumn(String title, int logicalWidth = 0, bool editable = true)
         {
             if (DataStore != null) return;
 
-            var column = new GridColumn { DataCell = new TextBoxCell(Columns.Count), HeaderText = title, Width = this.Sizer(logicalWidth), Editable = editable };
+            var column = new GridColumn { DataCell = new TextBoxCell(Columns.Count), HeaderText = title, Editable = editable };
+            if (logicalWidth <= 0) column.Expand = true;
+            else column.Width = this.Sizer(logicalWidth);
             Columns.Add(column);
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.0.10) Get number of rows
+        /// </summary>
+        /// <returns>行数</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.10) 获取行数
         /// </summary>
@@ -42,6 +65,12 @@ namespace ASEva.UIEto
             return (DataStore as List<GridItem>).Count;
         }
 
+        /// \~English
+        /// <summary>
+        /// Add a row
+        /// </summary>
+        /// <param name="values">Initial texts for columns, null as empty</param>
+        /// \~Chinese
         /// <summary>
         /// 添加一行
         /// </summary>
@@ -71,6 +100,12 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.4.2) Add multiple rows
+        /// </summary>
+        /// <param name="rowsValues">Initial texts of each row, null as empty</param>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.2) 添加多行
         /// </summary>
@@ -104,6 +139,12 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// <summary>
+        /// Remove a row
+        /// </summary>
+        /// <param name="rowIndex">The row index</param>
+        /// \~Chinese
         /// <summary>
         /// 移除一行
         /// </summary>
@@ -124,6 +165,12 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.4.2) Remove multiple rows
+        /// </summary>
+        /// <param name="rowIndices">Row indices</param>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.2) 移除多行
         /// </summary>
@@ -154,6 +201,11 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.0.10) Remove all rows
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.10) 移除所有行
         /// </summary>
@@ -170,6 +222,14 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// <summary>
+        /// Get text of a cell
+        /// </summary>
+        /// <param name="rowIndex">Row index</param>
+        /// <param name="columnIndex">Column index</param>
+        /// <returns>Text of the cell</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取某格文字
         /// </summary>
@@ -190,6 +250,14 @@ namespace ASEva.UIEto
             return values[columnIndex].ToString();
         }
 
+        /// \~English
+        /// <summary>
+        /// Set text of a cell
+        /// </summary>
+        /// <param name="rowIndex">Row index</param>
+        /// <param name="columnIndex">Column index</param>
+        /// <param name="val">Text of the cell</param>
+        /// \~Chinese
         /// <summary>
         /// 设置某格文字
         /// </summary>
@@ -213,6 +281,14 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.4.3) Set text color of a cell
+        /// </summary>
+        /// <param name="rowIndex">Row index</param>
+        /// <param name="columnIndex">Column index</param>
+        /// <param name="color">Text color</param>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.3) 设置某格文字颜色
         /// </summary>
@@ -226,6 +302,14 @@ namespace ASEva.UIEto
             updateColor(rowIndex, columnIndex);
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.4.3) Set background color of a cell
+        /// </summary>
+        /// <param name="rowIndex">Row index</param>
+        /// <param name="columnIndex">Column index</param>
+        /// <param name="color">Background color</param>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.3) 设置某格背景颜色
         /// </summary>

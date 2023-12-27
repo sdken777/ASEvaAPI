@@ -2,37 +2,74 @@
 
 namespace ASEva.Graph
 {
+    #pragma warning disable CS1571
+
+    /// \~English
     /// <summary>
-    /// (api:app=2.0.0) 矩阵表模式
+    /// (api:app=2.0.0) Mode of statistics for matrix table
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=2.0.0) 矩阵表统计模式
     /// </summary>
     public enum MatrixTableMode
     {
+        /// \~English
+        /// <summary>
+        /// Sum, supporting the validations: ValueBelow, ValueAbove, OutlineInside, OutlineOutside
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 求和矩阵表，图表数据验证支持ValueBelow, ValueAbove, OutlineInside, OutlineOutside
         /// </summary>
         Sum,
 
+        /// \~English
+        /// <summary>
+        /// Average value, supporting the validations: ValueBelow, ValueAbove
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 平均值矩阵表，图表数据验证支持ValueBelow, ValueAbove
         /// </summary>
         Aver,
 
+        /// \~English
+        /// <summary>
+        /// Minimum value, supporting the validations: ValueBelow, ValueAbove
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 最小值矩阵表，图表数据验证支持ValueBelow, ValueAbove
         /// </summary>
         Min,
 
+        /// \~English
+        /// <summary>
+        /// Maximum value, supporting the validations: ValueBelow, ValueAbove
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 最大值矩阵表，图表数据验证支持ValueBelow, ValueAbove
         /// </summary>
         Max,
 
+        /// \~English
+        /// <summary>
+        /// Percentage, supporting the validations: ValueBelow, ValueAbove, OutlineInside, OutlineOutside
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 百分比矩阵表，图表数据验证支持ValueBelow, ValueAbove, OutlineInside, OutlineOutside
         /// </summary>
         Percentage,
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Single axis' range of matrix table
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 矩阵表单轴范围
     /// </summary>
@@ -43,6 +80,11 @@ namespace ASEva.Graph
         public int Count { get; set; }
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Numeric range of matrix table
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 矩阵表中数值的范围
     /// </summary>
@@ -58,18 +100,37 @@ namespace ASEva.Graph
         }
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Matrix table graph data
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 矩阵表数据
     /// </summary>
     public class MatrixTableData : GraphData
     {
+        /// \~English
+        /// <summary>
+        /// Create graph definition (without validation)
+        /// </summary>
+        /// <param name="title">Title</param>
+        /// <param name="xTitle">X axis title</param>
+        /// <param name="yTitle">Y axis title</param>
+        /// <param name="mode">Mode of statistics</param>
+        /// <param name="xRange">X axis range</param>
+        /// <param name="yRange">Y axis range</param>
+        /// <param name="valueRefRange">Reference range of values</param>
+        /// <param name="defaultValue">Default value</param>
+        /// <returns>Graph definition object</returns>
+        /// \~Chinese
         /// <summary>
         /// 创建图表定义（不带数据验证）
         /// </summary>
         /// <param name="title">图表标题</param>
         /// <param name="xTitle">x轴标题</param>
         /// <param name="yTitle">y轴标题</param>
-        /// <param name="mode">图表模式</param>
+        /// <param name="mode">图表统计模式</param>
         /// <param name="xRange">x轴范围</param>
         /// <param name="yRange">y轴范围</param>
         /// <param name="valueRefRange">矩阵表数据参考范围</param>
@@ -80,13 +141,28 @@ namespace ASEva.Graph
             return CreateDefinitionWithValidation(title, xTitle, yTitle, mode, null, xRange, yRange, valueRefRange, defaultValue);
         }
 
+        /// \~English
+        /// <summary>
+        /// Create graph definition
+        /// </summary>
+        /// <param name="title">Title</param>
+        /// <param name="xTitle">X axis title</param>
+        /// <param name="yTitle">Y axis title</param>
+        /// <param name="mode">Mode of statistics</param>
+        /// <param name="validation">Graph validation, null means no validation. For details about the support types in different modes, see ASEva.Graph.MatrixTableMode </param>
+        /// <param name="xRange">X axis range</param>
+        /// <param name="yRange">Y axis range</param>
+        /// <param name="valueRefRange">Reference range of values</param>
+        /// <param name="defaultValue">Default value</param>
+        /// <returns>Graph definition object</returns>
+        /// \~Chinese
         /// <summary>
         /// 创建带数据验证的图表定义
         /// </summary>
         /// <param name="title">图表标题</param>
         /// <param name="xTitle">x轴标题</param>
         /// <param name="yTitle">y轴标题</param>
-        /// <param name="mode">图表模式</param>
+        /// <param name="mode">图表统计模式</param>
         /// <param name="validation">数据验证方式，null表示不验证。不同模式下的支持类型请参考 ASEva.Graph.MatrixTableMode </param>
         /// <param name="xRange">x轴范围</param>
         /// <param name="yRange">y轴范围</param>
@@ -133,15 +209,27 @@ namespace ASEva.Graph
             return def;
         }
 
+        /// \~English
         /// <summary>
-        /// 获取矩阵表模式
+        /// Get mode of statistics
         /// </summary>
-        /// <returns>矩阵表模式</returns>
+        /// <returns>Mode of statistics</returns>
+        /// \~Chinese
+        /// <summary>
+        /// 获取矩阵表统计模式
+        /// </summary>
+        /// <returns>矩阵表统计模式</returns>
         public MatrixTableMode GetMode()
         {
             return (MatrixTableMode)Enum.Parse(typeof(MatrixTableMode), Definition.Config[0]);
         }
 
+        /// \~English
+        /// <summary>
+        /// Get X axis title
+        /// </summary>
+        /// <returns>X axis title</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取x轴标题
         /// </summary>
@@ -151,6 +239,12 @@ namespace ASEva.Graph
             return Definition.Config[9];
         }
 
+        /// \~English
+        /// <summary>
+        /// Get Y axis title
+        /// </summary>
+        /// <returns>Y axis title</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取y轴标题
         /// </summary>
@@ -160,6 +254,12 @@ namespace ASEva.Graph
             return Definition.Config[10];
         }
 
+        /// \~English
+        /// <summary>
+        /// Get X axis range
+        /// </summary>
+        /// <returns>X axis range</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取x轴范围
         /// </summary>
@@ -180,6 +280,12 @@ namespace ASEva.Graph
             else return null;
         }
 
+        /// \~English
+        /// <summary>
+        /// Get Y axis range
+        /// </summary>
+        /// <returns>Y axis range</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取y轴范围
         /// </summary>
@@ -200,6 +306,12 @@ namespace ASEva.Graph
             else return null;
         }
 
+        /// \~English
+        /// <summary>
+        /// Get reference range of values
+        /// </summary>
+        /// <returns>Reference range of values</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取矩阵表数据参考范围
         /// </summary>
@@ -212,6 +324,12 @@ namespace ASEva.Graph
             return new MatrixTableValueRefRange(lower, upper);
         }
 
+        /// \~English
+        /// <summary>
+        /// Get statistical value of each interval along X axis
+        /// </summary>
+        /// <returns>Statistical value of each interval along X axis</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取矩阵表中x轴各区间统计值
         /// </summary>
@@ -294,6 +412,12 @@ namespace ASEva.Graph
             return output;
         }
 
+        /// \~English
+        /// <summary>
+        /// Get statistical value of each interval along Y axis
+        /// </summary>
+        /// <returns>Statistical value of each interval along Y axis</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取矩阵表中y轴各区间统计值
         /// </summary>
@@ -376,6 +500,13 @@ namespace ASEva.Graph
             return output;
         }
 
+        /// \~English
+        /// <summary>
+        /// Add 1 to the interval where (x，y) is
+        /// </summary>
+        /// <param name="x">Input x, do nothing if over the range</param>
+        /// <param name="y">Input y, do nothing if over the range</param>
+        /// \~Chinese
         /// <summary>
         /// 在输入x，y坐标所在区间添加1
         /// </summary>
@@ -386,6 +517,14 @@ namespace ASEva.Graph
             AddSample(x, y, 1);
         }
 
+        /// \~English
+        /// <summary>
+        /// Add sample to the interval where (x，y) is
+        /// </summary>
+        /// <param name="x">Input x, do nothing if over the range</param>
+        /// <param name="y">Input y, do nothing if over the range</param>
+        /// <param name="value">Sample value</param>
+        /// \~Chinese
         /// <summary>
         /// 在输入x，y坐标所在区间添加数值样本
         /// </summary>
@@ -434,10 +573,16 @@ namespace ASEva.Graph
             }
         }
 
+        /// \~English
         /// <summary>
-        /// 获取矩阵表数据
+        /// Get statistical data
         /// </summary>
-        /// <returns>矩阵表数据</returns>
+        /// <returns>Statistical data</returns>
+        /// \~Chinese
+        /// <summary>
+        /// 获取统计数据
+        /// </summary>
+        /// <returns>统计数据</returns>
         public double[,] GetValues()
         {
             var xc = GetXRange().Count;

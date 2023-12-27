@@ -200,6 +200,7 @@ namespace ASEva.UIGtk
 			get { return Control.Text.ToEtoMnemonic(); }
 			set
 			{
+				// CHECK: 修复重复设置同样的属性导致界面不停刷新问题(效率低下)
 				if (Control.Text.ToEtoMnemonic() != value)
 				{
 					Control.ResetWidth();
@@ -214,6 +215,7 @@ namespace ASEva.UIGtk
 			get { return horizontalAlign; }
 			set
 			{
+				// CHECK: 修复重复设置同样的属性导致界面不停刷新问题(效率低下)
 				if (horizontalAlign != value)
 				{
 					horizontalAlign = value;
@@ -238,6 +240,7 @@ namespace ASEva.UIGtk
 			get { return verticalAlign; }
 			set
 			{
+				// CHECK: 修复重复设置同样的属性导致界面不停刷新问题(效率低下)
 				if (verticalAlign != value)
 				{
 					verticalAlign = value;

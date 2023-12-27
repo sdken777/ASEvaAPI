@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using sd = System.Drawing;
 using swf = System.Windows.Forms;
 using Eto.Drawing;
@@ -121,17 +121,23 @@ namespace ASEva.UICoreWF
 		{
 			using (var g = CreateGraphics())
 			{
+				// CHECK: 确保高DPI显示时绘制尺寸正确
 				g.SetScaleForLogical();
+
 				Callback.OnPaint(Widget, new PaintEventArgs(g, rect));
 			}
 		}
 
 		protected virtual void OnPaint(swf.PaintEventArgs e)
 		{
+			// CHECK: 设置绘制文字反锯齿
 			e.Graphics.TextRenderingHint = sd.Text.TextRenderingHint.AntiAliasGridFit;
+
 			using (var g = e.Graphics.ToEto(false))
 			{
+				// CHECK: 确保高DPI显示时绘制尺寸正确
 				g.SetScaleForLogical();
+
 				Callback.OnPaint(Widget, new PaintEventArgs(g, e.ClipRectangle.ToEto()));
 			}
 		}

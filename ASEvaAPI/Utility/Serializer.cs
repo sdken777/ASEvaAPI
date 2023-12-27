@@ -6,11 +6,21 @@ using System.Runtime.Serialization.Json;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) XML/Json object reader and writer
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) XML/Json的对象读写与文件读写
     /// </summary>
     public class Serializer
     {
+        /// \~English
+        /// <summary>
+        /// Convert object to XML string
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 对象转XML字符串
         /// </summary>
@@ -32,6 +42,11 @@ namespace ASEva.Utility
             catch (Exception) { return null; }
         }
 
+        /// \~English
+        /// <summary>
+        /// Convert XML string to object
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// XML字符串转对象
         /// </summary>
@@ -48,6 +63,11 @@ namespace ASEva.Utility
             catch (Exception) { return null; }
         }
 
+        /// \~English
+        /// <summary>
+        /// Write object to XML file
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 对象写入XML文件
         /// </summary>
@@ -64,6 +84,11 @@ namespace ASEva.Utility
             catch (Exception) { return false; }
         }
 
+        /// \~English
+        /// <summary>
+        /// Load object from XML file
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 从XML文件读取对象
         /// </summary>
@@ -80,6 +105,11 @@ namespace ASEva.Utility
             catch (Exception) { return null; }
         }
 
+        /// \~English
+        /// <summary>
+        /// Convert object to Json String
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 对象转JSON字符串
         /// </summary>
@@ -101,6 +131,11 @@ namespace ASEva.Utility
             catch (Exception) { return null; }
         }
 
+        /// \~English
+        /// <summary>
+        /// Convert Json string to object
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// JSON字符串转对象
         /// </summary>
@@ -117,6 +152,11 @@ namespace ASEva.Utility
             catch (Exception) { return null; }
         }
 
+        /// \~English
+        /// <summary>
+        /// Write object to Json file
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 对象写入JSON文件
         /// </summary>
@@ -133,6 +173,11 @@ namespace ASEva.Utility
             catch (Exception) { return false; }
         }
 
+        /// \~English
+        /// <summary>
+        /// Load object from Json file
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 从JSON文件读取对象
         /// </summary>

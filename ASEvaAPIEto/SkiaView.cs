@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Eto;
 using Eto.Forms;
@@ -10,6 +10,13 @@ using ASEva.Utility;
 
 namespace ASEva.UIEto
 {
+	#pragma warning disable CS1571
+
+	/// \~English
+	/// <summary>
+	/// (api:eto=2.7.0) Skia view render event argument
+	/// </summary>
+	/// \~Chinese
 	/// <summary>
 	/// (api:eto=2.7.0) SkiaView渲染事件参数
 	/// </summary>
@@ -21,27 +28,52 @@ namespace ASEva.UIEto
 			LogicalSize = logicalSize;
 		}
 
+		/// \~English
+		/// <summary>
+		/// Skia canvas object
+		/// </summary>
+		/// \~Chinese
 		/// <summary>
 		/// Skia画布对象
 		/// </summary>
         public SKCanvas Canvas { get; private set; }
 
+		/// \~English
+		/// <summary>
+		/// Logical size of canvas
+		/// </summary>
+		/// \~Chinese
 		/// <summary>
 		/// 画布的逻辑尺寸
 		/// </summary>
 		public Size LogicalSize { get; private set; }
     }
 
+	/// \~English
+	/// <summary>
+	/// (api:eto=2.7.0) Skia view
+	/// </summary>
+	/// \~Chinese
 	/// <summary>
 	/// (api:eto=2.7.0) Skia绘制视图
 	/// </summary>
 	public class SkiaView : Panel, GLCallback
 	{
+		/// \~English
+		/// <summary>
+		/// Render event
+		/// </summary>
+		/// \~Chinese
 		/// <summary>
 		/// 渲染事件
 		/// </summary>
 		public event EventHandler<SkiaRenderEventArgs> Render;
 
+		/// \~English
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// \~Chinese
 		/// <summary>
 		/// 构造函数
 		/// </summary>
@@ -54,6 +86,12 @@ namespace ASEva.UIEto
 			initContent();
 		}
 
+		/// \~English
+		/// <summary>
+		/// (api:eto=2.8.2) Constructor
+		/// </summary>
+		/// <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.8.2) 构造函数
 		/// </summary>
@@ -67,6 +105,13 @@ namespace ASEva.UIEto
 			initContent();
 		}
 
+		/// \~English
+		/// <summary>
+		/// (api:eto=2.8.3) Constructor
+		/// </summary>
+		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
+		/// <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.8.3) 构造函数
 		/// </summary>
@@ -81,6 +126,14 @@ namespace ASEva.UIEto
 			initContent();
 		}
 
+		/// \~English
+		/// <summary>
+		/// (api:eto=2.8.7) Constructor
+		/// </summary>
+		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
+		/// <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
+		/// <param name="requestOnscreenRendering">Whether to request onscreen rendering when OpenGL rendering is not disabled (offscreen rendering is still used if unsupported), the default is false</param>
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.8.7) 构造函数
 		/// </summary>
@@ -96,6 +149,15 @@ namespace ASEva.UIEto
 			initContent();
 		}
 
+		/// \~English
+		/// <summary>
+		/// (api:eto=2.9.4) Constructor
+		/// </summary>
+		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
+		/// <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
+		/// <param name="requestOnscreenRendering">Whether to request onscreen rendering when OpenGL rendering is not disabled (offscreen rendering is still used if unsupported), the default is false</param>
+		/// <param name="requestOverlay">Whether to request support of overlay (SupportOverlay will be false if unsupported), default is true</param>
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.9.4) 构造函数
 		/// </summary>
@@ -112,6 +174,11 @@ namespace ASEva.UIEto
 			initContent();
 		}
 
+		/// \~English
+		/// <summary>
+		/// Release resources
+		/// </summary>
+		/// \~Chinese
 		/// <summary>
 		/// 关闭视图，释放资源
 		/// </summary>
@@ -139,6 +206,16 @@ namespace ASEva.UIEto
 			closed = true;
 		}
 
+		~SkiaView()
+		{
+			Close();
+		}
+
+		/// \~English
+		/// <summary>
+		/// Request new rendering
+		/// </summary>
+		/// \~Chinese
 		/// <summary>
 		/// 提交新的渲染请求
 		/// </summary>
@@ -160,11 +237,21 @@ namespace ASEva.UIEto
 			}
 		}
 
+		/// \~English
+		/// <summary>
+		/// Based OpenGL context info (null if not initialized yet)
+		/// </summary>
+		/// \~Chinese
 		/// <summary>
 		/// 底层的OpenGL上下文信息 (null表示不使用或还未初始化完成)
 		/// </summary>
 		public GLContextInfo? ContextInfo { get; private set; }
 
+		/// \~English
+		/// <summary>
+		/// Frame rate (for the latest 3 seconds)
+		/// </summary>
+		/// \~Chinese
 		/// <summary>
 		/// 渲染帧率（统计最近3秒）
 		/// </summary>
@@ -181,6 +268,11 @@ namespace ASEva.UIEto
 			}
 		}
 
+		/// \~English
+		/// <summary>
+		/// (api:eto=2.8.7)  Whether overlay is supported
+		/// </summary>
+		/// \~Chinese
 		/// <summary>
 		/// (api:eto=2.8.7) 是否支持被其他控件覆盖
 		/// </summary>

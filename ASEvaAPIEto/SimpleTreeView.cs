@@ -1,15 +1,27 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Eto.Forms;
 using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+
+    /// \~English
+    /// <summary>
+    /// (api:eto=2.10.0) Simple tree view
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.10.0) 简易树状视图
     /// </summary>
     public class SimpleTreeView : Panel, SimpleTreeViewCallback
     {
+        /// \~English
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -22,6 +34,13 @@ namespace ASEva.UIEto
             if (etoControl != null) Content = etoControl;
         }
 
+        /// \~English
+        /// <summary>
+        /// Set content of tree view
+        /// </summary>
+        /// <param name="rootNodes">Root nodes of the tree view</param>
+        /// <param name="sort">Whether to sort the items</param>
+        /// \~Chinese
         /// <summary>
         /// 设置树状视图内容
         /// </summary>
@@ -32,6 +51,12 @@ namespace ASEva.UIEto
             if (backend != null) backend.SetModel(rootNodes, sort);
         }
 
+        /// \~English
+        /// <summary>
+        /// Update nodes' content in batches
+        /// </summary>
+        /// <param name="tasks">Tasks of node updating</param>
+        /// \~Chinese
         /// <summary>
         /// 批量更新内容节点
         /// </summary>
@@ -41,6 +66,11 @@ namespace ASEva.UIEto
             if (backend != null) backend.UpdateNodes(tasks);
         }
 
+        /// \~English
+        /// <summary>
+        /// Get key object of the selected item
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 获取当前选中条目的键对象
         /// </summary>
@@ -49,6 +79,12 @@ namespace ASEva.UIEto
             return backend == null ? null : backend.GetSelectedKey();
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.10.1) Select the item with the key object
+        /// </summary>
+        /// <param name="key">Key object</param>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.10.1) 选中键对象对应的条目
         /// </summary>
@@ -58,11 +94,21 @@ namespace ASEva.UIEto
             if (backend != null) backend.SelectItem(key);
         }
 
+        /// \~English
+        /// <summary>
+        /// Event triggered while selected item is changed
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 选中条目切换事件
         /// </summary>
         public event EventHandler SelectedItemChanged;
 
+        /// \~English
+        /// <summary>
+        /// Event triggered while selected item is double clicked or ENTER key is pressed
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 选中条目双击或回车事件
         /// </summary>
@@ -83,36 +129,71 @@ namespace ASEva.UIEto
 		private SimpleTreeViewBackend backend;
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:eto=2.10.0) Node of simple tree view
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.10.0) 简易树状视图的内容节点
     /// </summary>
     public class SimpleTreeNode
     {
+        /// \~English
+        /// <summary>
+        /// Key object
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 条目的键对象
         /// </summary>
         public object Key { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Text
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 显示文本内容
         /// </summary>
         public String Text { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Text color, Colors.Transparent as default color
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 文本颜色，Colors.Transparent表示使用默认颜色
         /// </summary>
         public Color TextColor { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Background color, Colors.Transparent as default color
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 条目背景颜色，Colors.Transparent表示使用默认颜色
         /// </summary>
         public Color BackgroundColor { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Child nodes
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 子节点集合
         /// </summary>
         public List<SimpleTreeNode> ChildNodes { get { return childNodes; } }
 
+        /// \~English
+        /// <summary>
+        /// Whether to expand child nodes
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 子节点是否展开显示
         /// </summary>
@@ -121,21 +202,41 @@ namespace ASEva.UIEto
         private List<SimpleTreeNode> childNodes = new List<SimpleTreeNode>();
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:eto=2.10.0) Task of updating node content
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.10.0) 更新简易树状视图内容节点的任务
     /// </summary>
     public class SimpleTreeNodeUpdateTask
     {
+        /// \~English
+        /// <summary>
+        /// Key object of the item to update
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 条目的键对象
         /// </summary>
         public object Key { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Text color, null as not to update, Colors.Transparent as default color
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 文本颜色，null表示不更新，Colors.Transparent表示设置为默认颜色
         /// </summary>
         public Color? TextColor { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Background color, null as not to update, Colors.Transparent as default color
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 条目背景颜色，null表示不更新，Colors.Transparent表示设置为默认颜色
         /// </summary>
@@ -179,7 +280,7 @@ namespace ASEva.UIEto
 
             ShowHeader = false;
 
-            column = new GridColumn{ DataCell = new TextBoxCell(0), Width = this.Sizer(100) };
+            column = new GridColumn{ DataCell = new TextBoxCell(0), Expand = true };
             Columns.Add(column);
 
             SelectedItemChanged += delegate

@@ -5,6 +5,11 @@ using ASEva.Utility;
 
 namespace ASEva.UICoreWF
 {
+    /// \~English
+    /// <summary>
+    /// (api:corewf=2.0.0) Circle indicator
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) 圆形指示器
     /// </summary>

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Eto.Forms;
 using Eto.Drawing;
 using ASEva.UIEto;
@@ -12,7 +12,7 @@ namespace ASEvaAPIEtoTest
         {
             var imageView3 = layout.AddControl(new ImageView(), false, 100, 100) as ImageView;
             var imageView4 = layout.AddControl(new ImageView(), false, 100, 100) as ImageView;
-            layout.AddControl(new ImageView { Image = CommonImage.LoadResource("picture.png").ToEtoBitmap() }, false, 100, 100);
+            layout.AddControl(new ImageView { Image = Bitmap.FromResource("picture.png") }, false, 100, 100);
 
             var image3 = CommonImage.Create(100, 100, false);
             var image4 = CommonImage.Create(100, 100, true);

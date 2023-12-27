@@ -3,11 +3,21 @@ using System.Text.RegularExpressions;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Regular expression utility
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 正则表达式工具
     /// </summary>
     public class RegexUtil
     {
+        /// \~English
+        /// <summary>
+        /// Whether it's Chinese string
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 是否为中文字符串
         /// </summary>
@@ -16,6 +26,11 @@ namespace ASEva.Utility
             return IsMatch(@"^[\u4e00-\u9fa5]+$", input);
         }
 
+        /// \~English
+        /// <summary>
+        /// Whether it's phone number
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 是否为电话号码
         /// </summary>
@@ -25,6 +40,11 @@ namespace ASEva.Utility
             return IsMatch(pattern, input);
         }
 
+        /// \~English
+        /// <summary>
+        /// Whether it's mobile phone number
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 是否为手机号码
         /// </summary>
@@ -33,6 +53,11 @@ namespace ASEva.Utility
             return IsMatch(@"^13\\d{9}$", input);
         }
 
+        /// \~English
+        /// <summary>
+        /// Whether it's numeric string
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 是否为数值字符串
         /// </summary>
@@ -42,6 +67,11 @@ namespace ASEva.Utility
             return IsMatch(pattern, input);
         }
 
+        /// \~English
+        /// <summary>
+        /// Deprecated, use ASEva.Utility.RegexUtil.IsNotNegative
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 已弃用，应使用 ASEva.Utility.RegexUtil.IsNotNegative
         /// </summary>
@@ -50,6 +80,11 @@ namespace ASEva.Utility
             return IsMatch(@"^\d+$", input);
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.3.0) Whether it's non-negative numeric string
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 是否为非负数值字符串
         /// </summary>
@@ -58,6 +93,11 @@ namespace ASEva.Utility
             return IsMatch(@"^\d+$", input);
         }
 
+        /// \~English
+        /// <summary>
+        /// Whether it's unsigned integer
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 是否为无符号整型
         /// </summary>
@@ -66,6 +106,11 @@ namespace ASEva.Utility
             return IsMatch(@"^[0-9]*[1-9][0-9]*$", input);
         }
 
+        /// \~English
+        /// <summary>
+        /// Whether it's English string
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 是否为英文字符串
         /// </summary>
@@ -74,6 +119,11 @@ namespace ASEva.Utility
             return IsMatch(@"^[A-Za-z]+$", input);
         }
 
+        /// \~English
+        /// <summary>
+        /// Whether it's mail address
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 是否为邮件字符串
         /// </summary>
@@ -83,6 +133,11 @@ namespace ASEva.Utility
             return IsMatch(pattern, input);
         }
 
+        /// \~English
+        /// <summary>
+        /// Whether it's mixed string of English and numbers
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 是否为英文数字结合字符串
         /// </summary>
@@ -91,6 +146,11 @@ namespace ASEva.Utility
             return IsMatch(@"^[A-Za-z0-9]+$", input);
         }
 
+        /// \~English
+        /// <summary>
+        /// Whether it's URL
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 是否为URL
         /// </summary>
@@ -100,6 +160,11 @@ namespace ASEva.Utility
             return IsMatch(pattern, input);
         }
 
+        /// \~English
+        /// <summary>
+        /// Whether it's URL without protocol header
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 是否为无协议头URL
         /// </summary>
@@ -109,6 +174,11 @@ namespace ASEva.Utility
             return IsMatch(pattern, input);
         }
 
+        /// \~English
+        /// <summary>
+        /// Whether it's IPv4
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 是否为IPv4
         /// </summary>
@@ -138,6 +208,11 @@ namespace ASEva.Utility
             return true;
         }
 
+        /// \~English
+        /// <summary>
+        /// Whether it's IPv6
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 是否为IPv6
         /// </summary>

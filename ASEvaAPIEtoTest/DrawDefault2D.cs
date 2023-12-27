@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Eto.Forms;
 using Eto.Drawing;
 using ASEva.Samples;
@@ -18,6 +18,7 @@ namespace ASEvaAPIEtoTest
             overlay.AddControl(new Button { Text = "C"}, null, 10, 10, null);
             overlay.AddControl(new Button { Text = "D"}, null, 10, null, 10);
 
+            var image = Bitmap.FromResource("camera.png");
             drawableDefault2D.Paint += (o, args) =>
             {
                 var g = args.Graphics;
@@ -38,7 +39,7 @@ namespace ASEvaAPIEtoTest
                 var textSize = g.MeasureString(g.ScaledDefaultFont(), t["draw-text"]);
                 g.DrawRectangle(new Pen(Colors.Green), 100 - textSize.Width, 120 - textSize.Height, textSize.Width, textSize.Height);
                 
-                g.DrawImage(CommonImage.LoadResource("camera.png").ToEtoBitmap(), 80, 80);
+                g.DrawImage(image, 80, 80);
 
                 var pieAngle = (DateTime.Now - startTime).TotalMilliseconds * 0.1;
                 pieAngle -= Math.Floor(pieAngle / 360) * 360;

@@ -9,9 +9,6 @@ using ASEva.UIEto;
 
 namespace ASEva.UIWpf
 {
-    /// <summary>
-    /// TextDraw.xaml 的交互逻辑
-    /// </summary>
     partial class TextDraw : UserControl
     {
         public TextDraw()

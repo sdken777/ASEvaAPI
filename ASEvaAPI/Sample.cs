@@ -5,32 +5,64 @@ using System.Globalization;
 
 namespace ASEva
 {
+    #pragma warning disable CS1571
+
+    /// \~English
+    /// <summary>
+    /// (api:app=2.7.0) Sync status of time offset
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.7.0) 时间偏置同步状态
     /// </summary>
     public enum TimeOffsetSync
     {
+        /// \~English
+        /// <summary>
+        /// Not synchronized or the sync source is unknown
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 未同步或同步源未知
         /// </summary>
 		None = 0,
 
+        /// \~English
+        /// <summary>
+        /// Synchronized with time server
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 已与授时服务器时间同步
         /// </summary>
 		Server = 1,
 
+        /// \~English
+        /// <summary>
+        /// Synchronized with satellite time
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 已与卫星时间同步
         /// </summary>
 		Gnss = 2,
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.7.0) Session ID
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.7.0) Session标识符
     /// </summary>
     public struct SessionIdentifier
     {
+        /// \~English
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 默认构造函数
         /// </summary>
@@ -50,6 +82,11 @@ namespace ASEva
             else value = 0;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.7.2) Create from string
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.2) 通过字符串创建
         /// </summary>
@@ -63,6 +100,11 @@ namespace ASEva
             else return new SessionIdentifier(0, 0, 0, 0, 0, 0);
         }
 
+        /// \~English
+        /// <summary>
+        /// Create by date and time
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 通过日期时间创建
         /// </summary>
@@ -71,6 +113,11 @@ namespace ASEva
             return new SessionIdentifier(dateTime.Year, dateTime.Month, dateTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.7.3) Whether it's valid
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.3) 是否有效
         /// </summary>
@@ -79,6 +126,11 @@ namespace ASEva
             return value != 0;
         }
 
+        /// \~English
+        /// <summary>
+        /// Convert to date and time
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 转为日期时间
         /// </summary>
@@ -141,41 +193,81 @@ namespace ASEva
         private ulong value;
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.7.0) Session independent time info
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.7.0) Session无关时间信息
     /// </summary>
     public class IndependentTimeInfo
     {
+        /// \~English
+        /// <summary>
+        /// Time offset synchronization status
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 时间偏置同步状态
         /// </summary>
         public TimeOffsetSync OffsetSync { get { return offsetSync; }}
 
+        /// \~English
+        /// <summary>
+        /// CPU tick while data arrived, 0 means invalid
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 到达时CPU计数，0表示无效
         /// </summary>
         public ulong CPUTick { get { return cpuTick; }}
 
+        /// \~English
+        /// <summary>
+        /// Host machine's posix time while data arrived, in nanoseconds, 0 means invalid
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 到达时主机Posix时间，单位纳秒，0表示无效
         /// </summary>
         public ulong HostPosix { get { return hostPosix; }}
 
+        /// \~English
+        /// <summary>
+        /// Guest machine's posix time while data sampling, in nanoseconds, 0 means invalid
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 采样时客机Posix时间，单位纳秒，0表示无效
         /// </summary>
         public ulong GuestPosix { get { return guestPosix; }}
 
+        /// \~English
+        /// <summary>
+        /// Time server's posix time while data sampling, in nanoseconds, 0 means invalid
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 采样时授时服务器Posix时间，单位纳秒，0表示无效
         /// </summary>
         public ulong ServerPosix { get { return serverPosix; }}
 
+        /// \~English
+        /// <summary>
+        /// Satellite posix time while data sampling, in nanoseconds, 0 means invalid
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 采样时卫星Posix时间，单位纳秒，0表示无效
         /// </summary>
         public ulong GNSSPosix { get { return gnssPosix; }}
 
+        /// \~English
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 默认构造函数
         /// </summary>
@@ -193,26 +285,51 @@ namespace ASEva
         private ulong cpuTick, hostPosix, guestPosix, serverPosix, gnssPosix;
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.7.0) Timestamp
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.7.0) 时间戳
     /// </summary>
     public struct Timestamp
     {
+        /// \~English
+        /// <summary>
+        /// Session ID
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// Session标识符
         /// </summary>
         public SessionIdentifier Session { get { return session; }}
 
+        /// \~English
+        /// <summary>
+        /// Time offset, in seconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 时间偏置，单位秒
         /// </summary>
         public double Offset { get { return offset; }}
 
+        /// \~English
+        /// <summary>
+        /// Session independent time info
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// Session无关时间信息
         /// </summary>
         public IndependentTimeInfo TimeInfo { get { return timeInfo; }}
 
+        /// \~English
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 默认构造函数
         /// </summary>
@@ -228,11 +345,21 @@ namespace ASEva
         private IndependentTimeInfo timeInfo;
     }
 
+    /// \~English
     /// <summary>
-    /// (api:app=2.0.0) 数据样本
+    /// (api:app=2.0.0) Base class of sample data
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=2.0.0) 数据样本基类
     /// </summary>
     public class Sample : IComparable<Sample>
     {
+        /// \~English
+        /// <summary>
+        /// (api:app=2.7.0) Timestamp
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 时间戳
         /// </summary>
@@ -241,6 +368,11 @@ namespace ASEva
             get { return timestamp; }
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.7.2) The session that sample belongs to
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.2) 所属Session标识符
         /// </summary>
@@ -249,6 +381,11 @@ namespace ASEva
             get { return timestamp.Session; }
         }
 
+        /// \~English
+        /// <summary>
+        /// The session that sample belongs to (Be aware that "set" operation will clear session independent time info)
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 所属session ID（注意，set操作将清除Session无关时间信息）
         /// </summary>
@@ -258,6 +395,11 @@ namespace ASEva
             set { timestamp = new Timestamp(SessionIdentifier.FromDateTime(value), timestamp.Offset, null); }
         }
 
+        /// \~English
+        /// <summary>
+        /// Time offset, in seconds (Be aware that "set" operation will clear session independent time info)
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 时间偏置，单位秒（注意，set操作将清除Session无关时间信息）
         /// </summary>
@@ -267,6 +409,11 @@ namespace ASEva
             set { timestamp = new Timestamp(timestamp.Session, value, null); }
         }
 
+        /// \~English
+        /// <summary>
+        /// Timeline point, in seconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 在时间线上的位置，单位秒
         /// </summary>
@@ -276,6 +423,11 @@ namespace ASEva
             set { timeline = value; }
         }
 
+        /// \~English
+        /// <summary>
+        /// [Depend on Agency] Calculate local date and time based on host machine posix time model
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// [依赖Agency] 获取通过主机Posix时间模型计算得到的本地时间
         /// </summary>
@@ -287,6 +439,11 @@ namespace ASEva
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// [Depend on Agency] Calculate UTC date and time based on satellite posix time model
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// [依赖Agency] 获取通过卫星Posix时间模型得到的计算UTC时间
         /// </summary>
@@ -298,6 +455,11 @@ namespace ASEva
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 默认构造函数
         /// </summary>
@@ -307,6 +469,14 @@ namespace ASEva
             timeline = 0;
         }
 
+        /// \~English
+        /// <summary>
+        /// Constructor based on time information
+        /// </summary>
+        /// <param name="session">The session that sample belongs to</param>
+        /// <param name="offset">Time offset, in seconds</param>
+        /// <param name="timeline">Timeline point</param>
+        /// \~Chinese
         /// <summary>
         /// 按指定时间信息进行初始化
         /// </summary>
@@ -319,6 +489,15 @@ namespace ASEva
             this.timeline = timeline;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.7.0) Constructor based on time information
+        /// </summary>
+        /// <param name="session">The session that sample belongs to</param>
+        /// <param name="offset">Time offset, in seconds</param>
+        /// <param name="timeInfo">Session independent time info</param>
+        /// <param name="timeline">Timeline point</param>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 按指定时间信息进行初始化
         /// </summary>
@@ -332,6 +511,15 @@ namespace ASEva
             this.timeline = timeline;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.7.0) Set time information
+        /// </summary>
+        /// <param name="session">The session that sample belongs to</param>
+        /// <param name="offset">Time offset, in seconds</param>
+        /// <param name="timeInfo">Session independent time info</param>
+        /// <param name="timeline">Timeline point</param>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 设置当前样本的时间戳和时间线位置
         /// </summary>
@@ -345,6 +533,13 @@ namespace ASEva
             this.timeline = timeline;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.7.2) Set time information
+        /// </summary>
+        /// <param name="timestamp">Timestamp</param>
+        /// <param name="timeline">Timeline point</param>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.2) 设置当前样本的时间戳和时间线位置
         /// </summary>
@@ -356,6 +551,12 @@ namespace ASEva
             this.timeline = timeline;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.7.0) Set time to the same as the sample
+        /// </summary>
+        /// <param name="timeRef">Time reference sample</param>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.7.0) 按时间参考样本设置当前样本的时间戳和时间线位置
         /// </summary>
@@ -366,6 +567,13 @@ namespace ASEva
             timeline = timeRef.timeline;
         }
 
+        /// \~English
+        /// <summary>
+        /// Compare based on timeline point
+        /// </summary>
+        /// <param name="other">Another sample</param>
+        /// <returns>Result</returns>
+        /// \~Chinese
         /// <summary>
         /// 按时间线进行比较
         /// </summary>
@@ -376,6 +584,11 @@ namespace ASEva
             return Timeline.CompareTo(other.Timeline);
         }
 
+        /// \~English
+        /// <summary>
+        /// Result of searching in sample buffer
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 对样本缓存的搜索结果
         /// </summary>
@@ -389,15 +602,25 @@ namespace ASEva
             public double w2 { get; set; }
         }
 
+        /// \~English
+        /// <summary>
+        /// [Required for conversion of general sample] The protocol of ASEva.GeneralSample after converted
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// [支持通用样本转换时必须实现] 特化样本转为 ASEva.GeneralSample 的协议名称
         /// </summary>
-        /// <returns></returns>
         public virtual String GetGeneralSampleProtocol()
         {
             return null;
         }
 
+        /// \~English
+        /// <summary>
+        /// [Required for conversion of general sample] Supported protocols of ASEva.GeneralSample that can be converted
+        /// </summary>
+        /// <returns>Supported protocols</returns>
+        /// \~Chinese
         /// <summary>
         /// [支持通用样本转换时必须实现] 从 ASEva.GeneralSample 转为特化样本时支持的协议名称列表
         /// </summary>
@@ -407,6 +630,13 @@ namespace ASEva
             return null;
         }
 
+        /// \~English
+        /// <summary>
+        /// [Required for conversion of general sample] Convert from ASEva.GeneralSample , you should use SetTime to copy the time info
+        /// </summary>
+        /// <param name="sample">General sample</param>
+        /// <returns>Whether conversion is successful</returns>
+        /// \~Chinese
         /// <summary>
         /// [支持通用样本转换时必须实现] 从 ASEva.GeneralSample 转为特化样本，该实现需调用SetTime进行时间拷贝
         /// </summary>
@@ -417,6 +647,12 @@ namespace ASEva
             return false;
         }
 
+        /// \~English
+        /// <summary>
+        /// [Required for conversion of general sample] Convert to ASEva.GeneralSample , you should use SetTime to copy the time info
+        /// </summary>
+        /// <returns>General sample</returns>
+        /// \~Chinese
         /// <summary>
         /// [支持通用样本转换时可选实现] 特化样本转为 ASEva.GeneralSample ，该实现需调用SetTime进行时间拷贝
         /// </summary>
@@ -426,6 +662,12 @@ namespace ASEva
             return null;
         }
 
+        /// \~English
+        /// <summary>
+        /// [Required for conversion of general sample] Convert to ASEva.GeneralSample , you should use SetTime to copy the time info and set the channel
+        /// </summary>
+        /// <returns>General sample</returns>
+        /// \~Chinese
         /// <summary>
         /// [支持通用样本转换时可选实现] 特化样本转为 ASEva.GeneralSample ，该实现需调用SetTime进行时间拷贝并赋值通道
         /// </summary>
@@ -435,6 +677,12 @@ namespace ASEva
             return null;
         }
 
+        /// \~English
+        /// <summary>
+        /// [Optional] Get whether sample interpolation is supported
+        /// </summary>
+        /// <returns>Whether sample interpolation is supported, default is false</returns>
+        /// \~Chinese
         /// <summary>
         /// [可选实现] 返回是否支持样本间插值
         /// </summary>
@@ -444,6 +692,13 @@ namespace ASEva
             return false;
         }
 
+        /// \~English
+        /// <summary>
+        /// [Required if SupportInterpolation returns true] Implement sample interpolation based on the result of ASEva.Sample.Search , no need to output time info
+        /// </summary>
+        /// <param name="input">Result of searching in sample buffer</param>
+        /// <returns>Interpolated sample</returns>
+        /// \~Chinese
         /// <summary>
         /// [SupportInterpolation返回true时必须实现] 基于 ASEva.Sample.Search 返回的搜索结果进行样本插值，无需输出时间信息
         /// </summary>
@@ -454,6 +709,14 @@ namespace ASEva
             return null;
         }
 
+        /// \~English
+        /// <summary>
+        /// Get whether the target timeline point is inside the sample buffer's range
+        /// </summary>
+        /// <param name="samples">Sample buffer</param>
+        /// <param name="targetTimeline">Timeline point</param>
+        /// <returns>Whether it's in the range</returns>
+        /// \~Chinese
         /// <summary>
         /// 判断目标时间点是否在样本缓存范围内
         /// </summary>
@@ -466,6 +729,14 @@ namespace ASEva
             return targetTimeline >= samples[0].Timeline && targetTimeline <= samples.Last().Timeline;
         }
 
+        /// \~English
+        /// <summary>
+        /// Get whether the target timeline point is outside the sample buffer's range, and earlier than all samples
+        /// </summary>
+        /// <param name="samples">Sample buffer</param>
+        /// <param name="targetTimeline">Timeline point</param>
+        /// <returns>Whether it's out of the range, and earlier than all samples</returns>
+        /// \~Chinese
         /// <summary>
         /// 判断目标时间点是否在样本缓存范围外，且比所有样本都更早
         /// </summary>
@@ -478,6 +749,14 @@ namespace ASEva
             return targetTimeline < samples[0].Timeline;
         }
 
+        /// \~English
+        /// <summary>
+        /// Get whether the target timeline point is outside the sample buffer's range, and later than all samples
+        /// </summary>
+        /// <param name="samples">Sample buffer</param>
+        /// <param name="targetTimeline">Timeline point</param>
+        /// <returns>Whether it's out of the range, and later than all samples</returns>
+        /// \~Chinese
         /// <summary>
         /// 判断目标时间点是否在样本缓存范围外，且比所有样本都更晚
         /// </summary>
@@ -504,6 +783,15 @@ namespace ASEva
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// Search in the sample buffer
+        /// </summary>
+        /// <param name="samples">Sample buffer</param>
+        /// <param name="targetTimeline">Timeline point</param>
+        /// <param name="maxGap">Max time gap. The samples will be ignored if the interval between is larger than the time gap</param>
+        /// <returns>Result</returns>
+        /// \~Chinese
         /// <summary>
         /// 按目标时间点搜索缓存列表
         /// </summary>
@@ -631,6 +919,14 @@ namespace ASEva
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// Search in the sample buffer, perform interpolation and return the interpolated sample (Interpolation should be supported and the timeline point must be in the range, the time gap is 10 seconds）
+        /// </summary>
+        /// <param name="samples">Sample buffer</param>
+        /// <param name="targetTimeline">Timeline point</param>
+        /// <returns>Interpolated sample</returns>
+        /// \~Chinese
         /// <summary>
         /// 按目标时间点搜索缓存列表，自动进行插值并返回插值后样本（需要样本支持插值，且目标时间在缓存范围内，默认最大时间间隔为10秒）
         /// </summary>
@@ -679,8 +975,17 @@ namespace ASEva
             }
         }
 
+        /// \~English
         /// <summary>
-        /// 在样本缓存列表中搜索最近样本
+        /// Search in the sample buffer and get the nearest sample (time gap is 10 seconds)
+        /// </summary>
+        /// <param name="samples">Sample buffer</param>
+        /// <param name="targetTimeline">Timeline point</param>
+        /// <param name="targetSession">Target session ID</param>
+        /// <returns>Nearest sample, null if not found</returns>
+        /// \~Chinese
+        /// <summary>
+        /// 在样本缓存列表中搜索最近样本（最大时间间隔10秒）
         /// </summary>
         /// <param name="samples">样本缓存</param>
         /// <param name="targetTimeline">在时间线上的目标时间点</param>
@@ -704,6 +1009,13 @@ namespace ASEva
             else return result.s2;
         }
 
+        /// \~English
+        /// <summary>
+        /// Remove earliest samples, based on the global buffer range
+        /// </summary>
+        /// <param name="samples">Sample buffer</param>
+        /// <param name="bufferBegin">Lower bound of global buffer range</param>
+        /// \~Chinese
         /// <summary>
         /// 根据全局缓存范围，将样本缓存中较早样本移除
         /// </summary>
@@ -727,25 +1039,52 @@ namespace ASEva
         private double timeline;
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Type of an element in general sample
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 通用样本中值的类型
     /// </summary>
     public enum GeneralSampleValueMode
     {
+        /// \~English
+        /// <summary>
+        /// Invalid, recorded as "na"
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 无效，采集为"na"
         /// </summary>
         Invalid,
+
+        /// \~English
+        /// <summary>
+        /// Number
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 数值
         /// </summary>
         Number,
+
+        /// \~English
+        /// <summary>
+        /// Text
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 字符串
         /// </summary>
         Text,
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) General sample value
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 通用样本值
     /// </summary>
@@ -819,25 +1158,53 @@ namespace ASEva
         }
     }
 
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) General sample
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 通用样本
     /// </summary>
     public class GeneralSample : Sample
     {
+        /// \~English
+        /// <summary>
+        /// Sample protocol
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 样本协议
         /// </summary>
         public String Protocol { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Channel, null means without channel (single channel sample)
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 样本所属通道，null表示无通道信息（唯一通道样本）
         /// </summary>
         public int? Channel { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Values
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 值列表
         /// </summary>
         public List<GeneralSampleValue> Values { get; set; }
+        
+        /// \~English
         /// <summary>
-        /// 值列表中关键数值的个数
+        /// Number of significant values (Generally for recording, not significant values will not be recorded)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 值列表中关键数值的个数（一般用于采集，非关键的将不保存）
         /// </summary>
         public int NumberOfSignificants { get; set; }
 

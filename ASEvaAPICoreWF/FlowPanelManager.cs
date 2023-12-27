@@ -4,6 +4,11 @@ using System.Windows.Forms;
 
 namespace ASEva.UICoreWF
 {
+	/// \~English
+	/// <summary>
+	/// (api:corewf=2.0.0) Wrapper of FlowLayoutPanel
+	/// </summary>
+	/// \~Chinese
 	/// <summary>
 	/// (api:corewf=2.0.0) FlowLayoutPanel封装
 	/// </summary>

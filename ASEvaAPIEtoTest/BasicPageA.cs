@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using ASEva.Utility;
 using ASEva.Samples;
 using ASEva.UIEto;
@@ -46,10 +46,15 @@ namespace ASEvaAPIEtoTest
             {
                 if (radioButtonList.SelectedIndex == 0)
                 {
-                    if (checkBox.Checked.Value) new SaveFileDialog().ShowDialog(null);
-                    else new OpenFileDialog().ShowDialog(null);
+                    if (checkBox.Checked.Value)
+                    {
+                        var dialog = new SaveFileDialog();
+                        dialog.Filters.Add(new FileFilter(t["basic-save-file-filter"], ".txt"));
+                        if (dialog.ShowDialog(App.PassParent(this)) == DialogResult.Ok) MessageBox.Show(dialog.FileName);
+                    }
+                    else new OpenFileDialog().ShowDialog(App.PassParent(this));
                 }
-                else new SelectFolderDialog().ShowDialog(null);
+                else new SelectFolderDialog().ShowDialog(App.PassParent(this));
             };
         }
 
@@ -79,8 +84,29 @@ namespace ASEvaAPIEtoTest
         private void initBasicTabPageARow5(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 5));
-            layout.AddButton(t["basic-button"]);
-            layout.AddButton(CommonImage.LoadResource("button.png").ToEtoBitmap());
+            var textButton = layout.AddButton(t["basic-button"]);
+            textButton.BackgroundColor = Colors.Green;
+            textButton.TextColor = Colors.Gold;
+            textButton.Click += delegate
+            {
+                var form = new Form();
+                form.SetMinimumClientSize(300, 300);
+                form.Resizable = form.Maximizable = false;
+                form.Title = "";
+                form.Content = new Panel();
+                form.Show();
+            };
+            var imageButton = layout.AddButton(Bitmap.FromResource("button.png"));
+            imageButton.BackgroundColor = Colors.PaleGreen;
+            imageButton.Click += delegate
+            {
+                var dialog = new Dialog(); // Recommended to use App.RunDialog / 建议使用App.RunDialog
+                dialog.SetMinimumClientSize(300, 300);
+                dialog.Resizable = false;
+                dialog.Title = "";
+                dialog.Content = new Panel();
+                dialog.ShowModal(App.PassParent(this));
+            };
             layout.AddControl(new ColorPicker { Value = Colors.Red } );
         }
 
@@ -104,7 +130,8 @@ namespace ASEvaAPIEtoTest
             };
             layout.AddLinkButton(t["basic-client-size"], true).Click += (sender, args) =>
             {
-                (sender as LinkButton).Text = ClientSize.Width + "x" + ClientSize.Height;
+                var logicalSize = Pixel.ToLogicalSize(ClientSize);
+                (sender as LinkButton).Text = logicalSize.Width + "x" + logicalSize.Height;
             };
         }
     }

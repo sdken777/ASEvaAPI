@@ -3,6 +3,11 @@ using System.Windows.Forms;
 
 namespace ASEva.UICoreWF
 {
+    /// \~English
+    /// <summary>
+    /// (api:corewf=2.0.0) A channel selector based on combo box, which can display channel alias and whether the channel is available
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) 基于组合框的通道选择器，集成输入通道别名和有效性显示
     /// </summary>

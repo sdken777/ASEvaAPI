@@ -17,7 +17,7 @@
         {
             "id": "windows_ui",
             "type": "pickString",
-            "description": "请选择UI框架",
+            "description": "Choose UI Framework",
             "default": "",
             "options": [
                 "",
@@ -28,7 +28,7 @@
         {
             "id": "gdk_backend",
             "type": "pickString",
-            "description": "请选择显示服务器",
+            "description": "Choose Display Server",
             "default": "",
             "options": [
                 "",
@@ -39,10 +39,10 @@
     ],
     "configurations": [
         {
-            "name": "调试运行",
+            "name": "Run (Debug)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "调试构建",
+            "preLaunchTask": "Build (Debug)",
             "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest",
             "args": [],
             "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",

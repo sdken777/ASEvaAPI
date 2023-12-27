@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Gtk;
 using ASEva;
 using UI = Gtk.Builder.ObjectAttribute;
@@ -7,6 +7,11 @@ namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612, CS0649
 
+    /// \~English
+    /// <summary>
+    /// (api:gtk=2.0.0) Compact link item
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 带下划线的蓝色文字
     /// </summary>

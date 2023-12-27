@@ -1,4 +1,4 @@
-using Eto.Drawing;
+﻿using Eto.Drawing;
 using Eto.Forms;
 using Eto.GtkSharp;
 using Eto.GtkSharp.Drawing;
@@ -80,6 +80,8 @@ namespace ASEva.UIGtk
 				}
 			}
 #else
+
+			// 修正DrawnSignalCallback异常，Ubuntu22.04都可重现 (eto 2.6.1已解决)
 			// [GLib.ConnectBefore]
 			public void HandleDrawn(object o, Gtk.DrawnArgs args)
 			{

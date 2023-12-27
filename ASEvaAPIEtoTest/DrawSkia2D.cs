@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Eto.Forms;
 using ASEva.Samples;
@@ -30,7 +30,7 @@ namespace ASEvaAPIEtoTest
                 };
             }
 
-            var image = CommonImage.LoadResource("camera.png").ToSKImage();
+            var image = ImageConverter.ConvertFromBitmap(Eto.Drawing.Bitmap.FromResource("camera.png")).ToSKImage();
             skiaView.Render += (o, args) =>
             {
                 var c = args.Canvas;

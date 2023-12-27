@@ -1,5 +1,6 @@
-using sd = System.Drawing;
+﻿using sd = System.Drawing;
 using swf = System.Windows.Forms;
+using Eto;
 using Eto.Forms;
 using Eto.Drawing;
 using Eto.WinForms.Forms;
@@ -27,7 +28,9 @@ namespace ASEva.UICoreWF
 			};
 			content = new swf.Panel
 			{
+				// CHECK: 修正GroupBox内所有控件字体错误
 				Font = null,
+
 				Dock = swf.DockStyle.Fill,
 				ForeColor = sd.SystemColors.ControlText,
 				AutoSize = true,
@@ -38,11 +41,7 @@ namespace ASEva.UICoreWF
 
 		protected override Size ContentPadding
 		{
-			get
-			{
-				var borderSize = Control.GetBorderSize();
-				return new Size(borderSize.Width, borderSize.Height) + base.ContentPadding;
-			}
+			get { return Control.GetBorderSize().ToEto() + base.ContentPadding; }
 		}
 
 		public override swf.Control ContainerContentControl

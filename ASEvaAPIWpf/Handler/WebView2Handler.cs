@@ -1,7 +1,6 @@
 
 // #define TEST_INSTALL // test installation without actually installing it.
 
-#if !NET45
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -10,7 +9,9 @@ using Eto.CustomControls;
 using Eto.Drawing;
 using System.Threading.Tasks;
 using Microsoft.Web.WebView2.Core;
-using System.IO;
+using System.Reflection;
+using Eto.Wpf.Forms.Controls;
+
 
 #if WINFORMS
 using WebView2Control = Microsoft.Web.WebView2.WinForms.WebView2;
@@ -22,55 +23,138 @@ using BaseHandler = Eto.Wpf.Forms.WpfFrameworkElement<Microsoft.Web.WebView2.Wpf
 
 namespace ASEva.UIWpf
 {
-	public class WebView2Handler : BaseHandler, WebView.IHandler
+	class WebView2Handler : BaseHandler, WebView.IHandler
 	{
 		bool failed;
 		bool webView2Ready;
+		protected bool WebView2Ready => webView2Ready;
+		CoreWebView2Environment _environment;
+
 		List<Action> delayedActions;
+		CoreWebView2Controller controller;
+		System.Windows.Threading.DispatcherTimer timer;
+		System.Windows.Point lastPos;
 
 		public WebView2Handler()
 		{
 			Control = new WebView2Control();
 			Control.CoreWebView2InitializationCompleted += Control_CoreWebView2Ready;
-			InitializeAsync();
 		}
 
+		/// <summary>
+		/// The default environment to use if none is specified with <see cref="Environment"/>.
+		/// </summary>
+		public static CoreWebView2Environment CoreWebView2Environment;
+		
+		/// <summary>
+		/// Specifies a function to call when we need the default environment, if not already specified
+		/// </summary>
+		public static Func<Task<CoreWebView2Environment>> GetCoreWebView2Environment;
+		
+		/// <summary>
+		/// Gets or sets the environment to use, defaulting to <see cref="CoreWebView2Environment"/>.
+		/// This can only be set once during construction or with a style for this handler.
+		/// </summary>
+		/// <value>Environment to use to initialize WebView2</value>
+		public CoreWebView2Environment Environment
+		{
+			get => _environment ?? CoreWebView2Environment;
+			set => _environment = value;
+		}
+
+		/// <summary>
+		/// Override to use your own WebView2 initialization, if necessary
+		/// </summary>
+		/// <returns>Task</returns>
+		protected async virtual System.Threading.Tasks.Task OnInitializeWebView2Async()
+		{
+			var env = Environment;
+			if (env == null && GetCoreWebView2Environment != null)
+			{
+				env = CoreWebView2Environment = await GetCoreWebView2Environment();
+			}
+
+			try
+			{
+				await Control.EnsureCoreWebView2Async(env);
+			}
+			catch (Exception)
+            {
+				failed = true;
+            }
+		}
+		
+		async void InitializeAsync() => await OnInitializeWebView2Async();
+		
 		protected override void Initialize()
 		{
 			base.Initialize();
 			Size = new Size(100, 100);
 		}
 
-		public static CoreWebView2Environment CoreWebView2Environment;
+		protected override void OnInitializeComplete()
+		{
+			base.OnInitializeComplete();
 
+			// initialize webview2 after styles are applied, since styles might be used to configure the Environment or CoreWebView2Environment
+			InitializeAsync();
+		}
+
+		// CHECK: 简化WebView2环境验证与初始化
 		public static void InitCoreWebView2Environment()
         {
-			var path = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\SpadasFiles\\temp\\webview2";
-			CoreWebView2Environment.CreateAsync(null, path, new CoreWebView2EnvironmentOptions("--disable-features=RendererCodeIntegrity")).ContinueWith((task) => CoreWebView2Environment = task.Result);
-		}
-
-		async void InitializeAsync()
-		{
-			if (CoreWebView2Environment != null)
+			GetCoreWebView2Environment = () =>
 			{
-				try
-				{
-					await Control.EnsureCoreWebView2Async(CoreWebView2Environment);
-				}
-				catch (Exception) { }
-			}
+				var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.UserProfile) + "\\SpadasFiles\\temp\\webview2";
+				return CoreWebView2Environment.CreateAsync(null, path, new CoreWebView2EnvironmentOptions("--disable-features=RendererCodeIntegrity"));
+			};
 		}
 
-		void Control_CoreWebView2Ready(object sender, EventArgs e)
+		void Control_CoreWebView2Ready(object sender, CoreWebView2InitializationCompletedEventArgs e)
 		{
+			if (!e.IsSuccess)
+			{
+				throw new WebView2InitializationException("Failed to initialze WebView2", e.InitializationException);
+			}
+			
 			// can't actually do anything here, so execute them in the main loop
 			Application.Instance.AsyncInvoke(RunDelayedActions);
 		}
 
 		private void RunDelayedActions()
 		{
+			// CHECK: 截获初始化异常
 			try
 			{
+				// CHECK: 修正窗口移动后下拉菜单显示位置不正确问题
+				if (controller == null)
+				{
+					controller = Control.GetType().GetProperty("CoreWebView2Controller", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(Control) as CoreWebView2Controller;
+				}
+				if (controller != null && timer == null)
+				{
+					timer = new System.Windows.Threading.DispatcherTimer(System.Windows.Threading.DispatcherPriority.Normal);
+					timer.Interval = TimeSpan.FromMilliseconds(100);
+					timer.Tick += delegate
+					{
+						try
+						{
+							var curPos = Control.PointToScreen(new System.Windows.Point(0, 0));
+							if (curPos != lastPos)
+							{
+								controller.NotifyParentWindowPositionChanged();
+								lastPos = curPos;
+							}
+						}
+						catch (Exception)
+						{
+							timer.Stop();
+							timer = null;
+						}
+					};
+					timer.Start();
+				}
+
 				Control.CoreWebView2.DocumentTitleChanged += CoreWebView2_DocumentTitleChanged;
 				Control.CoreWebView2.NewWindowRequested += CoreWebView2_NewWindowRequested;
 				webView2Ready = true;
@@ -102,8 +186,15 @@ namespace ASEva.UIWpf
 			Callback.OnDocumentTitleChanged(Widget, new WebViewTitleEventArgs(CoreWebView2.DocumentTitle));
 		}
 
-		void RunWhenReady(Action action)
+		protected void RunWhenReady(Action action)
 		{
+			if (webView2Ready)
+			{
+				// already ready, run now!
+				action();
+				return;
+			}
+			
 			if (delayedActions == null)
 			{
 				delayedActions = new List<Action>();
@@ -165,7 +256,9 @@ namespace ASEva.UIWpf
 
 		public string ExecuteScript(string script)
 		{
+			// CHECK: 初始化异常则不执行
 			if (failed) return null;
+
 			var fullScript = string.Format("var _fn = function() {{ {0} }}; _fn();", script);
 			var task = Control.ExecuteScriptAsync(fullScript);
 			while (!task.IsCompleted)
@@ -180,7 +273,9 @@ namespace ASEva.UIWpf
 
 		public async Task<string> ExecuteScriptAsync(string script)
 		{
+			// CHECK: 初始化异常则不执行
 			if (failed) return null;
+
 			var fullScript = string.Format("var _fn = function() {{ {0} }}; _fn();", script);
 			var result = await Control.ExecuteScriptAsync(fullScript);
 			return Decode(result);
@@ -214,7 +309,9 @@ namespace ASEva.UIWpf
 
 		public void LoadHtml(string html, Uri baseUri)
 		{
+			// CHECK: 初始化异常则不执行
 			if (failed) return;
+
 			if (!webView2Ready)
 			{
 				RunWhenReady(() => LoadHtml(html, baseUri));
@@ -234,7 +331,7 @@ namespace ASEva.UIWpf
 
 		}
 
-		Microsoft.Web.WebView2.Core.CoreWebView2 CoreWebView2
+		protected Microsoft.Web.WebView2.Core.CoreWebView2 CoreWebView2
 		{
 			get
 			{
@@ -245,6 +342,9 @@ namespace ASEva.UIWpf
 		}
 
 		public void ShowPrintDialog() => ExecuteScript("print()");
+
+
+		static readonly object BrowserContextMenuEnabled_Key = new object();
 
 		public bool BrowserContextMenuEnabled
 		{
@@ -262,5 +362,3 @@ namespace ASEva.UIWpf
 
 	}
 }
-
-#endif

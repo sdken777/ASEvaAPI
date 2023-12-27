@@ -1,14 +1,28 @@
-using System;
+﻿using System;
 using Eto.Forms;
 using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+
+    /// \~English
+    /// <summary>
+    /// (api:eto=2.0.2) Extensions for splitter
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.2) 方便操作分屏控件的扩展
     /// </summary>
     public static class SplitterExtensions
     {
+        /// \~English
+        /// <summary>
+        /// Set panel 1
+        /// </summary>
+        /// <param name="splitter">Splitter object</param>
+        /// <returns>Panel 1 object</returns>
+        /// \~Chinese
         /// <summary>
         /// 设置面板1
         /// </summary>
@@ -22,6 +36,13 @@ namespace ASEva.UIEto
             return panel;
         }
 
+        /// \~English
+        /// <summary>
+        /// Set panel 2
+        /// </summary>
+        /// <param name="splitter">Splitter object</param>
+        /// <returns>Panel 2 object</returns>
+        /// \~Chinese
         /// <summary>
         /// 设置面板2
         /// </summary>

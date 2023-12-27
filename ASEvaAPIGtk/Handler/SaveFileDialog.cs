@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
@@ -21,6 +21,7 @@ namespace ASEva.UIGtk
 			Control.DefaultResponse = Gtk.ResponseType.Ok;
 		}
 
+		// CHECK: 修正输入文件名无后缀时未补上的问题
 		public string FileName
 		{
 			get

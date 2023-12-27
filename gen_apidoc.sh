@@ -1,30 +1,39 @@
-CUR_DIR=$(dirname "$0")
+CUR_DIR=$(cd $(dirname $0) && pwd)
 
-mkdir -vp ~/Desktop/D01006_ASEvaAPIDoc
+mkdir -vp ~/Desktop/D01006_ASEvaAPIDoc_Chinese
+mkdir -vp ~/Desktop/D01006_ASEvaAPIDoc_English
 
 cd "$CUR_DIR"/doc
 
-doxygen Doxyfile-ASEvaAPI
-cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/Common/
+DOCUMENT_LANGUAGE=Chinese doxygen Doxyfile-ASEvaAPI
+cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc_Chinese/Common/
+DOCUMENT_LANGUAGE=English doxygen Doxyfile-ASEvaAPI
+cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc_English/Common/
 
-doxygen Doxyfile-ASEvaAPIEto
-cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/Eto/
+DOCUMENT_LANGUAGE=Chinese doxygen Doxyfile-ASEvaAPIEto
+cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc_Chinese/Eto/
+DOCUMENT_LANGUAGE=English doxygen Doxyfile-ASEvaAPIEto
+cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc_English/Eto/
 
-doxygen Doxyfile-ASEvaAPICoreWF
-cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/CoreWF/
+DOCUMENT_LANGUAGE=Chinese doxygen Doxyfile-ASEvaAPICoreWF
+cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc_Chinese/CoreWF/
+DOCUMENT_LANGUAGE=English doxygen Doxyfile-ASEvaAPICoreWF
+cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc_English/CoreWF/
 
-doxygen Doxyfile-ASEvaAPIWpf
-cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/Wpf/
+DOCUMENT_LANGUAGE=Chinese doxygen Doxyfile-ASEvaAPIWpf
+cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc_Chinese/Wpf/
+DOCUMENT_LANGUAGE=English doxygen Doxyfile-ASEvaAPIWpf
+cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc_English/Wpf/
 
-doxygen Doxyfile-ASEvaAPIGtk
-cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/Gtk/
+DOCUMENT_LANGUAGE=Chinese doxygen Doxyfile-ASEvaAPIGtk
+cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc_Chinese/Gtk/
+DOCUMENT_LANGUAGE=English doxygen Doxyfile-ASEvaAPIGtk
+cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc_English/Gtk/
 
-doxygen Doxyfile-ASEvaAPIMonoMac
-cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc/MonoMac/
-
-cd ~/Desktop
-zip -r D01006_ASEvaAPIDoc.zip ./D01006_ASEvaAPIDoc/
-rm -r ./D01006_ASEvaAPIDoc/
+DOCUMENT_LANGUAGE=Chinese doxygen Doxyfile-ASEvaAPIMonoMac
+cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc_Chinese/MonoMac/
+DOCUMENT_LANGUAGE=English doxygen Doxyfile-ASEvaAPIMonoMac
+cp -vf ./index.html ~/Desktop/D01006_ASEvaAPIDoc_English/MonoMac/
 
 echo "Done. (ASEvaAPI/gen_apidoc.sh)"
 sleep 1

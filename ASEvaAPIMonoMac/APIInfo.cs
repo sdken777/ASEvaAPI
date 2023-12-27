@@ -1,9 +1,13 @@
 ﻿/*! \mainpage
- * 此类库为ASEva-API中基于MonoMac的部分。详见 ASEva.UIMonoMac \n
- * 本文档对应API版本：0.0.0\n
- * \n
- * MonoMac仓库(.NET Core分支): https://github.com/cwensley/monomac \n
- * API文档(Swift/ObjC): https://developer.apple.com/documentation/appkit
+ * \~English This library contains the APIs for MonoMac. See ASEva.UIMonoMac for details. \n
+ * \~Chinese 此类库为ASEva-API中基于MonoMac的部分。详见 ASEva.UIMonoMac \n
+ * \~English This document corresponds to API version: 0.0.0 \n\n
+ * \~Chinese 本文档对应API版本：0.0.0 \n\n
+ * 
+ * \~English MonoMac repository (.NET Core branch): https://github.com/cwensley/monomac \n
+ * \~Chinese MonoMac仓库(.NET Core分支): https://github.com/cwensley/monomac \n
+ * \~English API reference (Swift/ObjC): https://developer.apple.com/documentation/appkit
+ * \~Chinese API文档(Swift/ObjC): https://developer.apple.com/documentation/appkit
  */
 
 using System;
@@ -15,6 +19,12 @@ namespace ASEva.UIMonoMac
     /// </summary>
     public class APIInfo
     {
+        /// \~English
+        /// <summary>
+        /// (api:monomac=1.0.0) Get API version
+        /// </summary>
+        /// <returns>The API version</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:monomac=1.0.0) 获取API版本
         /// </summary>

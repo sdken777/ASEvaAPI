@@ -5,6 +5,7 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
+	// CHECK: 改为跟其他界面框架接近的显示效果
 	class LinkButtonHandler : GtkControl<LinkItem, LinkButton, LinkButton.ICallback>, LinkButton.IHandler
 	{
 		public override Gtk.Widget ContainerControl

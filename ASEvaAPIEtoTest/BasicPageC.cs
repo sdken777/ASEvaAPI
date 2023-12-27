@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using ASEva.Utility;
 using ASEva.Samples;
 using ASEva.UIEto;
@@ -13,7 +13,11 @@ namespace ASEvaAPIEtoTest
         {
             var layoutRow = tabPage.SetContentAsRowLayout(8, 8, VerticalAlignment.Stretch);
 
-            layoutRow.AddControl(new TextArea { Text = t["empty"] }, false, 150);
+            var layoutStuff = layoutRow.AddColumnLayout(false, 150, 0, 2);
+            layoutStuff.AddControl(new TextArea { Text = t["empty"] }, true);
+            var layoutCases = layoutStuff.AddRowLayout();
+
+            // layoutCases.AddLabel(t["basic-cases"]);
 
             var layoutTableView = layoutRow.AddColumnLayout(true, 2);
             initBasicTabPageCTableView(layoutTableView);
@@ -27,11 +31,13 @@ namespace ASEvaAPIEtoTest
             var linkButtonRemove = layoutGridViewRow.AddLinkButton(t["basic-grid-remove-row"]);
 
             var tableView = layout.AddControl(new TextTableView(), true) as TextTableView;
-            tableView.AddColumn(t["basic-grid-key-title"], 100);
-            tableView.AddColumn(t["basic-grid-value-title"], 200);
+            tableView.AddColumn(t["basic-grid-key-title"]);
+            tableView.AddColumn(t["basic-grid-value-title"]);
 
             layoutGridViewRow = layout.AddRowLayout();
             var linkButtonChangeColor = layoutGridViewRow.AddLinkButton(t["basic-grid-change-color"]);
+            layoutGridViewRow.AddSpace();
+            var linkButtonReload = layoutGridViewRow.AddLinkButton(t["basic-grid-reload"]);
 
             linkButtonAdd.Click += delegate { tableView.AddRow(); };
             linkButtonRemove.Click += delegate { tableView.RemoveRow(tableView.SelectedRow); };
@@ -40,6 +46,7 @@ namespace ASEvaAPIEtoTest
                 tableView.SetTextColor(0, 0, Colors.Red);
                 tableView.SetBackgroundColor(0, 1, Colors.Green);
             };
+            linkButtonReload.Click += delegate { tableView.ReloadData(0); };
         }
     }
 }

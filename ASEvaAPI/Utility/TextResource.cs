@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Xml;
 using System.Reflection;
@@ -7,11 +7,25 @@ using ASEva;
 
 namespace ASEva.Utility
 {
+    #pragma warning disable CS1571
+    /// \~English
+    /// <summary>
+    /// (api:app=2.1.0) Multi-language text resource
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.1.0) 多语言文本资源
     /// </summary>
     public class TextResource
     {
+        /// \~English
+        /// <summary>
+        /// Load the resource
+        /// </summary>
+        /// <param name="xmlFileName">Resource name</param>
+        /// <param name="languageCode">Language code, "en" is English, "ch" is Chinese, set to null to get by ASEva.Agency.GetAppLanguage internally</param>
+        /// <returns>Multi-language text resource object, null if failed to load</returns>
+        /// \~Chinese
         /// <summary>
         /// 加载多语言文本资源
         /// </summary>
@@ -30,6 +44,14 @@ namespace ASEva.Utility
             return Load(data, languageCode);
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:app=2.6.14) Load from binary data
+        /// </summary>
+        /// <param name="xmlFileData">XML binary data</param>
+        /// <param name="languageCode">Language code, "en" is English, "ch" is Chinese, set to null to get by ASEva.Agency.GetAppLanguage internally</param>
+        /// <returns>Multi-language text resource object, null if failed to load</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:app=2.6.14) 从XML文件数据加载多语言文本资源
         /// </summary>
@@ -99,6 +121,12 @@ namespace ASEva.Utility
             dict = new Dictionary<string, string>();
         }
 
+        /// \~English
+        /// <summary>
+        /// Get the text with the ID
+        /// </summary>
+        /// <value>Text ID</value>
+        /// \~Chinese
         /// <summary>
         /// 获取指定ID对应的文本
         /// </summary>
@@ -112,6 +140,14 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// Get the format text with the ID and use it to create the final text
+        /// </summary>
+        /// <param name="id">Text ID</param>
+        /// <param name="args">Arguments for the formats</param>
+        /// <returns>Output text</returns>
+        /// \~Chinese
         /// <summary>
         /// 以指定ID对应的文本作为格式描述，输出文本
         /// </summary>

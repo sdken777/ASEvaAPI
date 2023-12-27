@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using Gtk;
 using ASEva.Utility;
@@ -10,6 +10,11 @@ namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612, CS0649
 
+    /// \~English
+    /// <summary>
+    /// (api:gtk=2.0.0) Scatter points graph control
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 散点图数据可视化窗口
     /// </summary>
@@ -22,6 +27,7 @@ namespace ASEva.UIGtk
 
         EventBoxHelper eventBoxHelper = new EventBoxHelper();
         DrawSwap drawSwap;
+        bool chinese = false;
 
         public ScatterPointsGraph() : this(new Builder("ScatterPointsGraph.glade"))
         {
@@ -30,6 +36,9 @@ namespace ASEva.UIGtk
             overlay.AddOverlay(labelValidation);
             eventBoxHelper.Add(eventBox);
             drawSwap = new DrawSwap(draw, "ASEva.UIGtk.ScatterPointsGraph");
+
+            var lang = Agency.GetAppLanguage();
+            if (lang != null) chinese = lang == "ch";
 
             eventBoxHelper.LeftDown += eventBox_LeftDown;
             drawSwap.Paint += draw_Paint;
@@ -40,6 +49,11 @@ namespace ASEva.UIGtk
             builder.Autoconnect(this);
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:gtk=2.0.8) Release resources
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:gtk=2.0.8) 释放相关资源
         /// </summary>
@@ -302,7 +316,7 @@ namespace ASEva.UIGtk
                             double offset = 0;
                             if (D.GetPointTimeInfo(mouseAtPointIndex, ref session, ref offset))
                             {
-                                secondText = session.ToString("yyyy/MM/dd HH:mm:ss") + " + " + offset.ToString("F3");
+                                secondText = session.ToString(chinese ? "yyyy/MM/dd HH:mm:ss" : "MM/dd/yyyy HH:mm:ss") + " + " + offset.ToString("F3");
                             }
                         }
 

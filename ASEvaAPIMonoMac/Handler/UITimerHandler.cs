@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Eto.Forms;
 #if IOS
 using Foundation;
@@ -55,6 +55,8 @@ namespace ASEva.UIMonoMac
 		{
 			Stop();
 			NSRunLoop.Current.AddTimer(Control, NSRunLoopMode.Default);
+
+			// CHECK: 修正显示右键菜单时或鼠标拖拽窗口边框时不触发Elapsed事件问题
 			NSRunLoop.Current.AddTimer(Control, NSRunLoopMode.ModalPanel);
 			NSRunLoop.Current.AddTimer(Control, NSRunLoopMode.EventTracking);
 		}

@@ -1,8 +1,13 @@
-using System;
+﻿using System;
 using ASEva.Samples;
 
 namespace ASEva.UIGtk
 {
+    /// \~English
+    /// <summary>
+    /// (api:gtk=2.1.0) Conversion of image object
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.1.0) 图像对象转换 
     /// </summary>

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using Eto.Forms;
@@ -6,11 +6,23 @@ using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+
+    /// \~English
+    /// <summary>
+    /// (api:eto=2.5.0) List box of checkboxes
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.5.0) 多选框组
     /// </summary>
     public class CheckableListBox : GridView
     {
+        /// \~English
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 构造函数
         /// </summary>
@@ -19,14 +31,18 @@ namespace ASEva.UIEto
             ShowHeader = false;
             if (DefaultBackgroundColor != null) BackgroundColor = DefaultBackgroundColor.Value;
             Columns.Add(new GridColumn { DataCell = new CheckBoxCell(1), Resizable = false, Width = this.Sizer(22) });
-            Columns.Add(new GridColumn { DataCell = new TextBoxCell(0), Resizable = false, });
+            Columns.Add(new GridColumn { DataCell = new TextBoxCell(0), Resizable = false, Expand = true });
             CellClick += CheckableListBox_CellClick;
             CellDoubleClick += CheckableListBox_CellClick;
             CellFormatting += CheckableListBox_CellFormatting;
-            SizeChanged += CheckableListBox_SizeChanged;
-            Shown += CheckableListBox_Shown;
         }
 
+        /// \~English
+        /// <summary>
+        /// Get number of check boxes
+        /// </summary>
+        /// <returns>多选框个数</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取多选框个数
         /// </summary>
@@ -38,6 +54,14 @@ namespace ASEva.UIEto
             return (DataStore as List<GridItem>).Count;
         }
 
+        /// \~English
+        /// <summary>
+        /// Add check box
+        /// </summary>
+        /// <param name="text">Text</param>
+        /// <param name="isChecked">Initial check state</param>
+        /// <param name="isEnabled">Initial enable state</param>
+        /// \~Chinese
         /// <summary>
         /// 添加多选框
         /// </summary>
@@ -58,6 +82,14 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// <summary>
+        /// Add check boxes at once
+        /// </summary>
+        /// <param name="itemsText">Text of each check box</param>
+        /// <param name="itemsChecked">Initial check state of each check box. "null" indicated all are unchecked. If it's not null, you should guarantee the size is the same</param>
+        /// <param name="itemsEnabled">Initial enable state of each check box. "null" indicated all are enabled. If it's not null, you should guarantee the size is the same</param>
+        /// \~Chinese
         /// <summary>
         /// 一次性添加多个多选框
         /// </summary>
@@ -84,6 +116,12 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// <summary>
+        /// Remove check box
+        /// </summary>
+        /// <param name="index">The index of check box to remove</param>
+        /// \~Chinese
         /// <summary>
         /// 移除多选框
         /// </summary>
@@ -103,6 +141,12 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// <summary>
+        /// Remove check boxes at once
+        /// </summary>
+        /// <param name="indices">The indices of check boxes to remove</param>
+        /// \~Chinese
         /// <summary>
         /// 一次性移除多个多选框
         /// </summary>
@@ -132,6 +176,11 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// <summary>
+        /// Remove all check boxes
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 移除所有多选框
         /// </summary>
@@ -147,6 +196,13 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
+        /// \~English
+        /// <summary>
+        /// Get check status of check box
+        /// </summary>
+        /// <param name="index">Index of check box</param>
+        /// <returns>Whether it's checked</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取某个多选框是否为勾选状态
         /// </summary>
@@ -166,6 +222,13 @@ namespace ASEva.UIEto
             return (bool)values[1];
         }
 
+        /// \~English
+        /// <summary>
+        /// Set check status of check box
+        /// </summary>
+        /// <param name="index">Index of check box</param>
+        /// <param name="isChecked">Whether it's checked</param>
+        /// \~Chinese
         /// <summary>
         /// 设置某个多选框的勾选状态
         /// </summary>
@@ -188,6 +251,13 @@ namespace ASEva.UIEto
             ReloadData(index);
         }
 
+        /// \~English
+        /// <summary>
+        /// Get enable status of check box
+        /// </summary>
+        /// <param name="index">Index of check box</param>
+        /// <returns>Whether it's enabled</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取某个多选框是否为启用状态
         /// </summary>
@@ -199,6 +269,13 @@ namespace ASEva.UIEto
             else return enableFlags[index];
         }
 
+        /// \~English
+        /// <summary>
+        /// Set enable status of check box
+        /// </summary>
+        /// <param name="index">Index of check box</param>
+        /// <param name="isEnabled">Whether it's enabled</param>
+        /// \~Chinese
         /// <summary>
         /// 设置某个多选框的启用状态
         /// </summary>
@@ -213,6 +290,13 @@ namespace ASEva.UIEto
             updateColor(index, 1);
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.8.9) Set text of check box
+        /// </summary>
+        /// <param name="index">Index of check box</param>
+        /// <param name="text">Text of check box</param>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.9) 设置某个多选框的文字
         /// </summary>
@@ -235,6 +319,12 @@ namespace ASEva.UIEto
             ReloadData(index);
         }
 
+        /// \~English
+        /// <summary>
+        /// Get all indices of checked check box
+        /// </summary>
+        /// <returns>All indices of checked check box</returns>
+        /// \~Chinese
         /// <summary>
         /// 获取所有已勾选的多选框的序号
         /// </summary>
@@ -256,6 +346,11 @@ namespace ASEva.UIEto
             return buffer.ToArray();
         }
 
+        /// \~English
+        /// <summary>
+        /// Check all items (Not for disabled ones)
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 勾选所有多选框（不改变禁用的部分）
         /// </summary>
@@ -276,6 +371,11 @@ namespace ASEva.UIEto
             ReloadData(new Range<int>(0, GetItemCount()));
         }
 
+        /// \~English
+        /// <summary>
+        /// Uncheck all items (Not for disabled ones)
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 取消勾选所有多选框（不改变禁用的部分）
         /// </summary>
@@ -296,6 +396,11 @@ namespace ASEva.UIEto
             ReloadData(new Range<int>(0, GetItemCount()));
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.9.13) Click event of check box
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.9.13) 多选框点击事件
         /// </summary>
@@ -345,21 +450,6 @@ namespace ASEva.UIEto
             {
                 e.ForegroundColor = enableFlags[e.Row] ? Colors.Black : Colors.LightGrey;
             }
-        }
-
-        private void CheckableListBox_Shown(object sender, EventArgs e)
-        {
-            updateColumnWidth();
-        }
-
-        private void CheckableListBox_SizeChanged(object sender, EventArgs e)
-        {
-            updateColumnWidth();
-        }
-
-        private void updateColumnWidth()
-        {
-            Columns[1].Width = this.Sizer(this.GetLogicalWidth() - 45);
         }
 
         private void updateColor(int rowIndex, int columnIndex)

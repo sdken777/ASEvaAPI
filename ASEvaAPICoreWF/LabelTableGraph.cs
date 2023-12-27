@@ -6,6 +6,11 @@ using ASEva.Utility;
 
 namespace ASEva.UICoreWF
 {
+    /// \~English
+    /// <summary>
+    /// (api:corewf=2.0.0) Label table graph control
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) 标签热力图数据可视化窗口
     /// </summary>
@@ -30,14 +35,14 @@ namespace ASEva.UICoreWF
         {
             if (Data == null || !(Data is LabelTableData)) return;
 
-            // 数据显示
+            // Data display / 数据显示
             if (DrawBeat.CallerBegin(pictureBox1))
             {
                 pictureBox1.Refresh();
                 DrawBeat.CallerEnd(pictureBox1);
             }
 
-            // 标题显示
+            // Title display / 标题显示
             label1.Text = Data == null ? "" : Data.Definition.MainTitle;
             if (!Data.HasData())
             {

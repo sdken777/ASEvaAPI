@@ -4,6 +4,10 @@
     <en>Button</en>
     <ch>按钮</ch>
   </t>
+  <t id="basic-cases">
+    <en>Cases:</en>
+    <ch>特例:</ch>
+  </t>
   <t id="basic-checkbox">
     <en>Save file</en>
     <ch>保存文件</ch>
@@ -92,6 +96,10 @@
     <en>Value</en>
     <ch>值</ch>
   </t>
+  <t id="basic-grid-reload">
+    <en>Reload</en>
+    <ch>重加载</ch>
+  </t>
   <t id="basic-group-title">
     <en>Basic Controls</en>
     <ch>基本控件</ch>
@@ -123,6 +131,10 @@
   <t id="basic-radiobutton-file">
     <en>File</en>
     <ch>文件</ch>
+  </t>
+  <t id="basic-save-file-filter">
+    <en>Text file</en>
+    <ch>文本文件</ch>
   </t>
   <t id="basic-tabpage-title">
     <en>Tabpage {0}</en>
@@ -184,6 +196,10 @@
     <en>Resume render</en>
     <ch>恢复渲染</ch>
   </t>
+  <t id="draw-gl-loop-interval">
+    <en>Max loop interval:</en>
+    <ch>最大循环间隔:</ch>
+  </t>
   <t id="draw-group-title">
     <en>Drawing Controls</en>
     <ch>绘图控件</ch>
@@ -212,6 +228,10 @@
     <en>Empty</en>
     <ch>空</ch>
   </t>
+  <t id="exit-confirm">
+    <en>Exit?</en>
+    <ch>是否退出？</ch>
+  </t>
   <t id="menu-button">
     <en>Message box</en>
     <ch>消息框</ch>
@@ -225,8 +245,12 @@
     <ch>单选项{0}</ch>
   </t>
   <t id="menu-snapshot">
-    <en>Snapshot</en>
-    <ch>快照</ch>
+    <en>Snapshot (render)</en>
+    <ch>快照（渲染）</ch>
+  </t>
+  <t id="menu-snapshot-screen">
+    <en>Snapshot (screen)</en>
+    <ch>快照（屏幕）</ch>
   </t>
   <t id="menu-snapshot-failed">
     <en>Failed to get snapshot.</en>

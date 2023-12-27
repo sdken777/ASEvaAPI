@@ -27,6 +27,10 @@ namespace ASEva.UICoreWF
             if (dialogPanel.Title != null) Text = dialogPanel.Title;
             if (dialogPanel.Icon != null) Icon = dialogPanel.Icon.ControlObject as Icon;
 
+            var initialFocus = new TextBox { Location = new Point(0, -50) };
+            Controls.Add(initialFocus);
+            initialFocus.Focus();
+
             Controls.Add(control);
             control.Dock = DockStyle.Fill;
 

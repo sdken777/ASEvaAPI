@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using swf = System.Windows.Forms;
@@ -16,9 +16,13 @@ namespace ASEva.UICoreWF
 
 		public ComboBoxHandler()
 		{
+			// CHECK: 修正选项内容可被删除问题
 			Control.DropDownStyle = swf.ComboBoxStyle.DropDownList;
+
+			// CHECK: 修正高DPI显示时控件显示不全的问题
 			var dpiRatio = (float)Control.DeviceDpi / 96;
 			Control.MinSize = new sd.Size(100, (int)Math.Ceiling(10 + 14 * dpiRatio));
+
 			Control.TextChanged += ControlOnTextChanged;
 		}
 

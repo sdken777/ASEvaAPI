@@ -398,21 +398,21 @@ namespace ASEva
             return false;
         }
 
-        public string GetModuleConfig(object caller, string moduleClassID)
+        public string GetModuleConfig(object caller, string classID)
         {
             return null;
         }
 
-        public void SetModuleConfig(object caller, string moduleClassID, string config)
+        public void SetModuleConfig(object caller, string classID, string config)
         {
         }
 
-        public ConfigStatus GetModuleConfigStatus(object caller, string moduleClassID)
+        public ConfigStatus GetModuleConfigStatus(object caller, string classID)
         {
             return ConfigStatus.Disabled;
         }
 
-        public ConfigStatus[] GetModuleChildConfigStatus(object caller, string moduleClassID)
+        public ConfigStatus[] GetModuleChildConfigStatus(object caller, string classID)
         {
             return null;
         }
@@ -1219,7 +1219,7 @@ namespace ASEva
             return null;
         }
 
-        public void DisableModule(object caller, string moduleClassID)
+        public void DisableModule(object caller, string classID)
         {
         }
 
@@ -1386,6 +1386,83 @@ namespace ASEva
         }
 
         public string[] GetAllChannelServerSyncMonitoringKeys()
+        {
+            return null;
+        }
+
+        public bool IsReady(out string busyReason)
+        {
+            busyReason = null;
+            return false;
+        }
+
+        public void ResetGPUDecoderTestResults()
+        {
+        }
+
+        public GraphicCardInfo[] GetGraphicCardInfos()
+        {
+            return null;
+        }
+
+        public Dictionary<string, string> GetFrameworkThirdPartyNotices()
+        {
+            return null;
+        }
+
+        public Dictionary<string, Dictionary<string, string>> GetPluginThirdPartyNotices()
+        {
+            return null;
+        }
+
+        public string GetOfflineMapCopyrightInfo()
+        {
+            return null;
+        }
+
+        public bool IsPRCWebPreferred()
+        {
+            return false;
+        }
+
+        public void RunConsole(object caller, string consoleClassID)
+        {
+        }
+
+        public Dictionary<string, ConsoleClassInfo> GetConsoleClassTable()
+        {
+            return null;
+        }
+
+        public ConsoleClassInfo GetConsoleClassInfo(string consoleClassID)
+        {
+            return null;
+        }
+
+        public ConfigStatus GetConsoleRelatedModulesConfigStatus(string consoleClassID, out ConfigStatus[] childrenStatus)
+        {
+            childrenStatus = null;
+            return ConfigStatus.Disabled;
+        }
+
+        public bool StartRemote(string controllerName, bool previewOnly, ulong startPosixTime)
+        {
+            return false;
+        }
+
+        public byte[] GetPreviewJpeg(int channel, double timeline, double maxGap, out Timestamp? timestamp, out CameraInfo cameraInfo)
+        {
+            timestamp = null;
+            cameraInfo = null;
+            return null;
+        }
+
+        public BusChannelInfo[] GetBusChannelsInfo(DateTime session)
+        {
+            return null;
+        }
+
+        public VideoChannelInfo[] GetVideoChannelsInfo(DateTime session)
         {
             return null;
         }

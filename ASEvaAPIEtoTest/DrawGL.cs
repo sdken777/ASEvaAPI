@@ -1,7 +1,7 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Eto.Forms;
-using Eto.Drawing;
 using ASEva.UIEto;
 using SharpGL;
 
@@ -12,10 +12,14 @@ namespace ASEvaAPIEtoTest
         private void initDrawGL(StackLayout layout, bool onscreenRendering)
         {
             bool requestOverlay, drawText;
-            requestOverlay = drawText = !onscreenRendering; // 在屏渲染时不要求支持控件覆盖和绘制文本
+            requestOverlay = drawText = !onscreenRendering; // For onscreen rendering, control overlay and text drawing is not required / 在屏渲染时不要求支持控件覆盖和绘制文本
 
             glView = new GLView(null, GLAntialias.Sample16x, onscreenRendering, requestOverlay, drawText, true);
             var button = new Button { Text = t["draw-gl-detail"]};
+
+            var layoutTop = layout.AddRowLayout();
+            layoutTop.AddLabel(t["draw-gl-loop-interval"]);
+            glLabelLoopInterval = layoutTop.AddLabel("");
 
             if (glView.SupportOverlay)
             {
@@ -181,12 +185,32 @@ namespace ASEvaAPIEtoTest
 
         private void loopDrawGL()
         {
+            glLabelLoopInterval.Text = glLoopIntervalStat.Update() + "ms";
             if (glRenderSwitch) glView.QueueRender();
+        }
+
+        private class LoopIntervalStat
+        {
+            public int Update()
+            {
+                var now = DateTime.Now;
+                var loopInterval = (int)(now - glLastLoopTime).TotalMilliseconds;
+                glLastLoopTime = now;
+
+                loopIntervals.Add(loopInterval);
+                if (loopIntervals.Count > 1000) loopIntervals.RemoveAt(0);
+                return loopIntervals.Max();
+            }
+
+            private DateTime glLastLoopTime = DateTime.Now;
+            private List<int> loopIntervals = new List<int>();
         }
 
         private GLView glView;
         private GLSizeInfo glViewSizeInfo;
         private bool glRenderSwitch = true;
         private int glMouseCount = 0;
+        private Label glLabelLoopInterval;
+        private LoopIntervalStat glLoopIntervalStat = new LoopIntervalStat();
     }
 }

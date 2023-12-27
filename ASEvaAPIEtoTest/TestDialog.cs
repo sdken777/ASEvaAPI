@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using ASEva.Utility;
 using ASEva.UIEto;
 using Eto.Forms;
@@ -18,7 +18,7 @@ namespace ASEvaAPIEtoTest
             var layout = this.SetContentAsRowLayout();
             layout.AddLinkButton(t["basic-client-size"], false).Click += (sender, args) =>
             {
-                (sender as LinkButton).Text = ClientSize.Width + "x" + ClientSize.Height;
+                (sender as LinkButton).Text = this.GetLogicalWidth() + "x" + this.GetLogicalHeight();
             };
             layout.AddLinkButton(t["basic-dialog-with-border"], false).Click += delegate
             {

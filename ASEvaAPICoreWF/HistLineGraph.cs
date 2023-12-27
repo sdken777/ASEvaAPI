@@ -8,6 +8,11 @@ using ASEva.Utility;
 
 namespace ASEva.UICoreWF
 {
+    /// \~English
+    /// <summary>
+    /// (api:corewf=2.0.0) Histogram and poly line graph control
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) 柱状折线图可视化控件
     /// </summary>
@@ -70,6 +75,8 @@ namespace ASEva.UICoreWF
 
 		private void pictureBox1_Paint(object sender, PaintEventArgs e)
 		{
+			if (Data == null || !(Data is HistAndLineData)) return;
+
 			DrawBeat.CallbackBegin(pictureBox1, "ASEva.UICoreWF.HistLineGraph");
 
 			try
@@ -108,16 +115,32 @@ namespace ASEva.UICoreWF
 					}
 				}
 
-				bool hasValue = maximum > minimum;
+				bool hasValue = maximum >= minimum;
 				if (hasValue)
 				{
-					var maxreal = maximum + (maximum - minimum) * 0.02;
-					var minreal = minimum - (maximum - minimum) * 0.02;
-					maximum = maxreal;
-					minimum = minreal;
+					if (maximum == minimum)
+					{
+						if (minimum > 0)
+                        {
+							maximum = minimum * 1.25;
+							minimum = 0;
+                        }
+						else if (minimum < 0)
+                        {
+							minimum = minimum * 1.25;
+							maximum = 0;
+                        }
+					}
+					else
+					{
+						var maxreal = maximum + (maximum - minimum) * 0.02;
+						var minreal = minimum - (maximum - minimum) * 0.02;
+						maximum = maxreal;
+						minimum = minreal;
 
-					if (minimum > -0.001) minimum = -0.001;
-					if (maximum < 0.001) maximum = 0.001;
+						if (minimum > -0.001) minimum = -0.001;
+						if (maximum < 0.001) maximum = 0.001;
+					}
 				}
 
 				var yGrids = new List<double>();
@@ -211,7 +234,12 @@ namespace ASEva.UICoreWF
 					{
 						float pixelY = (float)(samples[x].HistValue * yFactor + yBase);
 						float rectX = 0, rectW = 0;
-						if (step > 8)
+						if (samples.Length == 1)
+                        {
+							rectX = left + x * step + 0.25f * step;
+							rectW = step - 0.5f * step;
+						}
+						else if (step > 8)
 						{
 							rectX = left + x * step + 2;
 							rectW = step - 4;

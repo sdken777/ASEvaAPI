@@ -4,6 +4,11 @@ using System.Windows.Forms;
 
 namespace ASEva.UICoreWF
 {
+    /// \~English
+    /// <summary>
+    /// (api:corewf=2.0.0) A window to show image
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) 图像显示窗口
     /// </summary>

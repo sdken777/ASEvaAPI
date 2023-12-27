@@ -1,14 +1,27 @@
-using System;
+﻿using System;
 using Eto.Forms;
 using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+
+    /// \~English
+    /// <summary>
+    /// (api:eto=2.0.4) Extensions for graphics object
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.4) 方便操作图形对象的扩展
     /// </summary>
     public static class GraphicsExtensions
     {
+        /// \~English
+        /// <summary>
+        /// Set the scale of graphics the same as logical units
+        /// </summary>
+        /// <param name="g">Graphics object</param>
+        /// \~Chinese
         /// <summary>
         /// 设置绘图尺度，令所有相关绘制函数的输入尺寸都为logical尺寸
         /// </summary>
@@ -18,6 +31,14 @@ namespace ASEva.UIEto
             g.ScaleTransform(Pixel.Scale);
         }
 
+        /// \~English
+        /// <summary>
+        /// After calling SetScaleForLogical, use returned Font object by this function to draw texts
+        /// </summary>
+        /// <param name="g">Graphics object</param>
+        /// <param name="f">Original font</param>
+        /// <returns>Scaled font object</returns>
+        /// \~Chinese
         /// <summary>
         /// 调用SetScaleForLogical后，绘制文字需要使用此函数返回的字体
         /// </summary>
@@ -30,6 +51,14 @@ namespace ASEva.UIEto
             else return FontLibrary.GetFont(f.Family, f.Size / Pixel.Scale, f.FontStyle, f.FontDecoration);
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.0.6) After calling SetScaleForLogical, if you want to use default font, use returned Font object by this function to draw texts
+        /// </summary>
+        /// <param name="g">Graphics object</param>
+        /// <param name="sizeRatio">Ratio to the default scale, default is 1</param>
+        /// <returns>Scaled font object</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.6) 调用SetScaleForLogical后，以默认字体绘制需要使用此函数返回的字体
         /// </summary>
@@ -43,6 +72,18 @@ namespace ASEva.UIEto
             else return FontLibrary.GetFont(f, f.Size / Pixel.Scale);
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.8.12) Draw text with the specified anchor point
+        /// </summary>
+        /// <param name="g">Graphics object</param>
+        /// <param name="text">Text</param>
+        /// <param name="font">Font</param>
+        /// <param name="color">Text color</param>
+        /// <param name="anchor">Anchor type</param>
+        /// <param name="logicalX">X-coordinate of anchor point</param>
+        /// <param name="logicalY">Y-coordinate of anchor point</param>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.12) 指定锚点绘制文本
         /// </summary>

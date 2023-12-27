@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using Eto.Forms;
 using Eto.Drawing;
@@ -155,7 +155,7 @@ namespace ASEva.UIGtk
 		/// <param name="args"></param>
 		private void Entry_FocusOutEvent(object o, Gtk.FocusOutEventArgs args)
 		{
-			// if the pull-down is are up, close it
+			// CHECK: 修正Wayland下弹出后立即消失的问题
 			var uiBackend = ASEva.UIEto.App.GetUIBackend();
 			if (uiBackend != null && uiBackend != "wayland") dlg?.CloseDialog();
 		}

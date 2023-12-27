@@ -1,10 +1,15 @@
-using System;
+﻿using System;
 using ASEva;
 using Eto.Drawing;
 using SkiaSharp;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// <summary>
+    /// (api:eto=2.8.14) Extensions for conversion between common objects, Eto objects and Skia objects
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.8.14) 方便进行结构体转换操作的扩展
     /// </summary>

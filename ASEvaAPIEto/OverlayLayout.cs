@@ -1,9 +1,15 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Eto.Forms;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+    /// \~English
+    /// <summary>
+    /// (api:eto=2.0.4) Overlay layout
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.4) 可覆盖的布局
     /// </summary>
@@ -14,6 +20,17 @@ namespace ASEva.UIEto
             SizeChanged += this_SizeChanged;
         }
 
+        /// \~English
+        /// <summary>
+        /// Add control
+        /// </summary>
+        /// <param name="control">The control object</param>
+        /// <param name="topLogicalPadding">Space between top bound and the control, null as not related</param>
+        /// <param name="bottomLogicalPadding">Space between bottom bound and the control, null as not related</param>
+        /// <param name="leftLogicalPadding">Space between left bound and the control, null as not related</param>
+        /// <param name="rightLogicalPadding">Space between right bound and the control, null as not related</param>
+        /// <returns>新添加的控件</returns>
+        /// \~Chinese
         /// <summary>
         /// 添加控件
         /// </summary>
@@ -43,10 +60,17 @@ namespace ASEva.UIEto
             padding.Left = leftLogicalPadding;
             padding.Right = rightLogicalPadding;
 
-            handleControl(control, true);
+            if (DelayHandleControl) Add(control, 0, 0);
+            else handleControl(control, true);
             return control;
         }
 
+        /// \~English
+        /// <summary>
+        /// Remove control
+        /// </summary>
+        /// <param name="control">The control</param>
+        /// \~Chinese
         /// <summary>
         /// 移除控件
         /// </summary>
@@ -57,6 +81,12 @@ namespace ASEva.UIEto
             Remove(control);
         }
 
+        /// \~English
+        /// <summary>
+        /// Update control's position (Generally used after manual modification of the control's size)
+        /// </summary>
+        /// <param name="control">The control</param>
+        /// \~Chinese
         /// <summary>
         /// 更新控件位置（一般在手动修改控件大小后调用）
         /// </summary>
@@ -100,14 +130,14 @@ namespace ASEva.UIEto
             // set size
             if (padding.Top != null && padding.Bottom != null)
             {
-                var targetHeight = (int)(this.Height - (padding.Top.Value + padding.Bottom.Value) * Pixel.Scale);
+                var targetHeight = (int)(this.Height - (padding.Top.Value + padding.Bottom.Value) * Pixel.Scale) + (ExpandControlSize && padding.Bottom.Value == 0 ? 1 : 0);
                 if (targetHeight < 16) visible = false;
                 else control.Height = targetHeight;
             }
 
             if (visible && padding.Left != null && padding.Right != null)
             {
-                var targetWidth = (int)(this.Width - (padding.Left.Value + padding.Right.Value) * Pixel.Scale);
+                var targetWidth = (int)(this.Width - (padding.Left.Value + padding.Right.Value) * Pixel.Scale) + (ExpandControlSize && padding.Right.Value == 0 ? 1 : 0);
                 if (targetWidth < 16) visible = false;
                 else control.Width = targetWidth;
             }
@@ -154,5 +184,6 @@ namespace ASEva.UIEto
         private bool firstSizeChanged = true;
 
         public static bool DelayHandleControl { private get; set; }
+        public static bool ExpandControlSize { private get; set; }
     }
 }

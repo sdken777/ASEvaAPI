@@ -6,10 +6,16 @@
     <members>
         <member name="T:ASEva.UIMonoMac.APIInfo">
             <summary>
-            version=1.3.9
+            version=1.5.0
             </summary>
         </member>
         <member name="M:ASEva.UIMonoMac.APIInfo.GetAPIVersion">
+            \~English
+            <summary>
+            (api:monomac=1.0.0) Get API version
+            </summary>
+            <returns>The API version</returns>
+            \~Chinese
             <summary>
             (api:monomac=1.0.0) 获取API版本
             </summary>

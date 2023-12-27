@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Eto.Forms;
 using Eto.GtkSharp.Forms;
 
@@ -17,6 +17,8 @@ namespace ASEva.UIGtk
 			this.Control = new Gtk.EventBox();
 			//Control.VisibleWindow = false;
 			scale = new Gtk.HScale(min, max, 1);
+
+			// CHECK: 修正控件显示不完整问题，X86-Ubuntu18.04-X11可重现
 			box = new Gtk.Box(Gtk.Orientation.Vertical, 0);
 			box.PackStart(scale, true, true, 0);
 			box.BorderWidth = 3;
@@ -121,6 +123,8 @@ namespace ASEva.UIGtk
 				if (Orientation != value)
 				{
 					scale.ValueChanged -= Connector.HandleScaleValueChanged;
+
+					// CHECK: 修正控件显示不完整问题，X86-Ubuntu18.04-X11可重现
 					box.Remove(scale);
 #if !GTKCORE
 					scale.Destroy();
@@ -131,7 +135,10 @@ namespace ASEva.UIGtk
 					else
 						scale = new Gtk.VScale(min, max, 1);
 					scale.ValueChanged += Connector.HandleScaleValueChanged;
+
+					// CHECK: 修正控件显示不完整问题，X86-Ubuntu18.04-X11可重现
 					box.PackStart(scale, true, true, 0);
+					
 					scale.ShowAll();
 				}
 			}

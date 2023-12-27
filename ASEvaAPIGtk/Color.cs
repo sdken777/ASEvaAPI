@@ -4,6 +4,11 @@ using Gdk;
 
 namespace ASEva.UIGtk
 {
+    /// \~English
+    /// <summary>
+    /// (api:gtk=2.0.0) Color type conversion
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 颜色类型转换
     /// </summary>

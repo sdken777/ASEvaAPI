@@ -4,15 +4,32 @@ using System.Linq;
 
 namespace ASEva.Utility
 {
+    #pragma warning disable CS1571
+
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Sample synchronization
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 样本同步
     /// </summary>
     public class SampleSync
     {
+        /// \~English
+        /// <summary>
+        /// Synchronize samples according to the target timeline point, output interpolated or nearest samples
+        /// </summary>
+        /// <param name="timeline">Timeline point, in seconds</param>
+        /// <param name="session">The session that sample belongs to</param>
+        /// <param name="sampleLists">Input sample buffers (can be multiple)</param>
+        /// <param name="outputs">Output synchronized samples</param>
+        /// <returns>Whether the target time can be passed, false means you should try to synchronize again later</returns>
+        /// \~Chinese
         /// <summary>
         /// 样本同步函数，根据目标时间点搜索样本缓存，输出插值或最近样本
         /// </summary>
-        /// <param name="timeline">希望同步的时间线</param>
+        /// <param name="timeline">希望同步的时间线，单位秒</param>
         /// <param name="session">时间线所在session</param>
         /// <param name="sampleLists">输入的样本缓存，可以是多个缓存</param>
         /// <param name="outputs">各个缓存按指定时间点输出插值或最近样本</param>

@@ -1,8 +1,10 @@
-using System;
+﻿using System;
+using System.Text;
 using ASEva.UIEto;
 using Eto.Forms;
 using Eto.Drawing;
 using Eto.Wpf;
+using System.Collections.Generic;
 
 namespace ASEva.UIWpf
 {
@@ -18,12 +20,15 @@ namespace ASEva.UIWpf
     {
         public Application CreateApp(out String uiBackend, out String webViewBackend)
         {
+            // CHECK: 初始化WebView2环境
             WebView2Handler.InitCoreWebView2Environment();
 
             var platform = new global::Eto.Wpf.Platform();
             platform.Add<WebView.IHandler>(() => new WebView2Handler());
             platform.Add<SearchBox.IHandler>(() => new SearchBoxHandler());
             platform.Add<UITimer.IHandler>(() => new UITimerHandler());
+            platform.Add<Button.IHandler>(() => new ButtonHandler());
+            platform.Add<MessageBox.IHandler>(() => new MessageBoxHandler());
             var app = new Application(platform);
 
             SetContentExtensions.WindowInitializer = new InitWindowHandlerWpf();
@@ -34,8 +39,10 @@ namespace ASEva.UIWpf
             SkiaCanvasExtensions.DefaultFontName = "Microsoft Yahei";
             SkiaCanvasExtensions.DefaultFontSize = 12;
             TextBitmap.ImageInterpolationMode = ImageInterpolation.Medium;
+            TextBitmap.FastModeDrawOffset = new PointF(1, 1);
             TopMostExtensions.QueryInterface = new TopMostHandler();
             SnapshotExtensions.Handler = new SnapshotHandler();
+            SnapshotExtensions.ScreenModeHandler = new ScreenSnapshotHandler();
 
             uiBackend = null;
             webViewBackend = "webview2";
@@ -74,6 +81,20 @@ namespace ASEva.UIWpf
 
             var dialog = new AppDialogWpf(element, panel);
             dialog.ShowDialog();
+            return true;
+        }
+
+        public Dictionary<string, string> GetThirdPartyNotices()
+        {
+            var table = new Dictionary<string, string>();
+            table["WebView2"] = Encoding.UTF8.GetString(Resource.WebView2);
+            table["SharpDX"] = Encoding.UTF8.GetString(Resource.SharpDX);
+            table["Extended WPF Toolkit version 3.6.0"] = Encoding.UTF8.GetString(Resource.Extended_WPF_Toolkit__3_6_);
+            return table;
+        }
+
+        public bool ShouldPassParent()
+        {
             return true;
         }
     }

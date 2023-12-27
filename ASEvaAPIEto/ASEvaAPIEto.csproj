@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\*.*" />
+    <EmbeddedResource Include="Resources\*.*">
+      <LogicalName>%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="ASEvaAPI">
       <HintPath>..\bin64\ASEvaAPI.dll</HintPath>
     </Reference>

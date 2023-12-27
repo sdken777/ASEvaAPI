@@ -1,8 +1,10 @@
-using System;
+﻿using System;
+using System.Text;
 using ASEva.UIEto;
 using Eto.Forms;
 using Eto.Drawing;
 using Eto.WinForms;
+using System.Collections.Generic;
 
 namespace ASEva.UICoreWF
 {
@@ -18,8 +20,10 @@ namespace ASEva.UICoreWF
     {
         public Application CreateApp(out String uiBackend, out String webViewBackend)
         {
+            // CHECK: 支持高DPI显示
             System.Windows.Forms.Application.SetHighDpiMode(System.Windows.Forms.HighDpiMode.SystemAware);
 
+            // CHECK: 初始化WebView2环境
             WebView2Handler.InitCoreWebView2Environment();
 
             var platform = new global::Eto.WinForms.Platform();
@@ -30,9 +34,13 @@ namespace ASEva.UICoreWF
             platform.Add<WebView.IHandler>(() => new WebView2Handler());
             platform.Add<ComboBox.IHandler>(() => new ComboBoxHandler());
             platform.Add<Drawable.IHandler>(() => new DrawableHandler());
-            platform.Add<DataObject.IHandler>(() => new DataObjectHandler());
-            platform.Add<DataFormats.IHandler>(() => new DataFormatsHandler());
+
+            // 改为使用Wpf版的Handler，Eto-2.6.0已修正
+            //platform.Add<DataObject.IHandler>(() => new DataObjectHandler());
+            //platform.Add<DataFormats.IHandler>(() => new DataFormatsHandler());
+
             platform.Add<Slider.IHandler>(() => new SliderHandler());
+            platform.Add<MessageBox.IHandler>(() => new MessageBoxHandler());
             var app = new Application(platform);
 
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerCoreWF();
@@ -49,8 +57,12 @@ namespace ASEva.UICoreWF
             FlowLayout2D.Factory = new FlowLayout2DFactoryCoreWF();
             TopMostExtensions.QueryInterface = new TopMostHandler();
             TextBitmap.ModifyInterface = new BitmapGraphicsHandler();
+            TextBitmap.FastModeDrawOffset = new PointF(1, 1);
             SimpleTreeView.Factory = new SimpleTreeViewFactoryCoreWF();
             SnapshotExtensions.Handler = new SnapshotHandler();
+            SnapshotExtensions.ScreenModeHandler = new ScreenSnapshotHandler();
+            IconExtensions.FinalFrameOnly = true;
+            OverlayLayout.ExpandControlSize = true;
 
             uiBackend = null;
             webViewBackend = "webview2";
@@ -103,6 +115,18 @@ namespace ASEva.UICoreWF
             dialog.ShowDialog();
             dialog.Dispose();
             return true;
+        }
+
+        public Dictionary<string, string> GetThirdPartyNotices()
+        {
+            var table = new Dictionary<String, String>();
+            table["WebView2"] = Encoding.UTF8.GetString(Resource.WebView2);
+            return table;
+        }
+
+        public bool ShouldPassParent()
+        {
+            return false;
         }
     }
 }

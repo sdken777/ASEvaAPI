@@ -1,14 +1,31 @@
-using System;
+﻿using System;
 using Eto.Forms;
 using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+
+    /// \~English
+    /// <summary>
+    /// (api:eto=2.0.0) Extensions for setting panel's content
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.0.0) 方便设置面板Content的扩展 
     /// </summary>
     public static class SetContentExtensions
     {
+        /// \~English
+        /// <summary>
+        /// Set content as horizontal StackLayout object
+        /// </summary>
+        /// <param name="panel">Panel object</param>
+        /// <param name="logicalPadding">Layout's logical padding</param>
+        /// <param name="logicalSpacing">Space (in logical size) between controls in the layout</param>
+        /// <param name="alignment">Alignment of controls in the layout</param>
+        /// <returns>Created StackLayout object</returns>
+        /// \~Chinese
         /// <summary>
         /// 设置横向堆叠布局至面板Content
         /// </summary>
@@ -28,6 +45,16 @@ namespace ASEva.UIEto
             return layout;
         }
 
+        /// \~English
+        /// <summary>
+        /// Set content as vertical StackLayout object
+        /// </summary>
+        /// <param name="panel">Panel object</param>
+        /// <param name="logicalPadding">Layout's logical padding</param>
+        /// <param name="logicalSpacing">Space (in logical size) between controls in the layout</param>
+        /// <param name="alignment">Alignment of controls in the layout</param>
+        /// <returns>Created StackLayout object</returns>
+        /// \~Chinese
         /// <summary>
         /// 设置纵向堆叠布局至面板Content
         /// </summary>
@@ -47,6 +74,16 @@ namespace ASEva.UIEto
             return layout;
         }
 
+        /// \~English
+        /// <summary>
+        /// Set content as TableLayout object
+        /// </summary>
+        /// <param name="panel">Panel object</param>
+        /// <param name="logicalPadding">Layout's logical padding</param>
+        /// <param name="logicalSpacingX">Space (in logical size) between controls along X axis</param>
+        /// <param name="logicalSpacingY">Space (in logical size) between controls along Y axis</param>
+        /// <returns>Created TableLayout object</returns>
+        /// \~Chinese
         /// <summary>
         /// 设置表布局至面板Content
         /// </summary>
@@ -66,6 +103,13 @@ namespace ASEva.UIEto
             return layout;
         }
 
+        /// \~English
+        /// <summary>
+        /// Set content as PixelLayout object
+        /// </summary>
+        /// <param name="panel">Panel object</param>
+        /// <returns>Created PixelLayout object</returns>
+        /// \~Chinese
         /// <summary>
         /// 设置像素布局至面板Content
         /// </summary>
@@ -78,6 +122,50 @@ namespace ASEva.UIEto
             var layout = new PixelLayout();
             panel.Content = layout;
             return layout;
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.11.5) Set content as OverlayLayout object
+        /// </summary>
+        /// <param name="panel">Panel object</param>
+        /// <returns>Created OverlayLayout object</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.11.5) 设置可覆盖布局至面板Content
+        /// </summary>
+        /// <param name="panel">面板</param>
+        /// <returns>创建的可覆盖布局</returns>
+        public static OverlayLayout SetContentAsOverlayLayout(this Panel panel)
+        {
+            if (panel.Content != null) return null;
+            if (panel is Window && WindowInitializer != null) WindowInitializer.InitWindow(panel as Window);
+            var layout = new OverlayLayout();
+            panel.Content = layout;
+            return layout;
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.12.2) Set content as a control object
+        /// </summary>
+        /// <param name="panel">Panel object</param>
+        /// <param name="control">The control object to set as content</param>
+        /// <param name="logicalPadding">Control's logical padding</param>
+        /// <returns>The control object set as content</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.12.2) 设置控件至面板Content
+        /// </summary>
+        /// <param name="panel">面板</param>
+        /// <param name="control">目标控件</param>
+        /// <param name="logicalPadding">目标控件的边缘空隙</param>
+        /// <returns>已设置为Content的目标控件</returns>
+        public static Control SetContentAsControl(this Panel panel, Control control, int logicalPadding = 8)
+        {
+            var layout = SetContentAsColumnLayout(panel, logicalPadding);
+            if (layout == null) return null;
+            return layout.AddControl(control, true);
         }
 
         public static InitWindowHandler WindowInitializer { private get; set; }

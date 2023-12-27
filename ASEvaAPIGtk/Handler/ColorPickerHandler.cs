@@ -7,6 +7,7 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
+	// CHECK: 重新实现Handler，解决打开颜色选择器后程序无法退出问题，可在X86-Ubuntu22.04-X11下重现
 	class ColorPickerHandler : GtkControl<Gtk.Button, ColorPicker, ColorPicker.ICallback>, ColorPicker.IHandler
 	{
 		public ColorPickerHandler()

@@ -1,9 +1,14 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Gtk;
 
 namespace ASEva.UIGtk
 {
+    /// \~English
+    /// <summary>
+    /// (api:gtk=2.0.0) Extension methods for flow box
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) Flow框扩展方法
     /// </summary>

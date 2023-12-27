@@ -5,6 +5,11 @@ using ASEva.Utility;
 
 namespace ASEva.UICoreWF
 {
+    /// \~English
+    /// <summary>
+    /// (api:corewf=2.0.0) Channel selector
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) 通道选择器
     /// </summary>
@@ -18,6 +23,11 @@ namespace ASEva.UICoreWF
             gridSize = (int)(dpiRatio * 22);
         }
 
+        /// \~English
+        /// <summary>
+        /// Set whether the data of each channel is available
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 设置各通道数据是否有效
         /// </summary>
@@ -30,6 +40,11 @@ namespace ASEva.UICoreWF
             DrawBeat.CallerEnd(this);
         }
 
+        /// \~English
+        /// <summary>
+        /// Number of channels
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 通道数量
         /// </summary>
@@ -46,6 +61,11 @@ namespace ASEva.UICoreWF
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// The selected channel
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 选中通道
         /// </summary>
@@ -62,6 +82,11 @@ namespace ASEva.UICoreWF
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// Channel protocol, without '@x' 
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 通道协议，不需要加'@x' 
         /// </summary>

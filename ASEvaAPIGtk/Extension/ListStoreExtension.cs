@@ -1,8 +1,13 @@
-using System;
+﻿using System;
 using Gtk;
 
 namespace ASEva.UIGtk
 {
+    /// \~English
+    /// <summary>
+    /// (api:gtk=2.0.0) Extension methods for list store
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 表数据模型扩展方法
     /// </summary>

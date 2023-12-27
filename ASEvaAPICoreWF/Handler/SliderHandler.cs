@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using swf = System.Windows.Forms;
 using sd = System.Drawing;
@@ -27,6 +27,7 @@ namespace ASEva.UICoreWF
 				base.OnCreateControl();
 			}
 
+			// CHECK: 修正窗口最大化/恢复时控件整体闪烁问题
             protected override void OnPaint(swf.PaintEventArgs e)
             {
 				var bitmap = new sd.Bitmap(Width, Height);

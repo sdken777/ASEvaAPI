@@ -1,4 +1,5 @@
-using System;
+﻿using System;
+using Eto.Forms;
 using ASEva.UIEto;
 
 namespace ASEvaAPIEtoTest
@@ -17,6 +18,11 @@ namespace ASEvaAPIEtoTest
 
             var startup = new Startup();
             App.RunDialog(startup);
+
+            App.KeyDown += (o, e) =>
+            {
+                if (e.Control && e.Key == Keys.P) MessageBox.Show("Ctrl+P");
+            };
 
             var window = new TestWindow(startup.StringResult, startup.BoolResult);
             App.Run(window);

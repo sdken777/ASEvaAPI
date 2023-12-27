@@ -3,6 +3,11 @@ using System.Windows.Forms;
 
 namespace ASEva.UICoreWF
 {
+    /// \~English
+    /// <summary>
+    /// (api:corewf=2.0.0) Set value to NumericUpDown control
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) NumericUpDown控件设置值
     /// </summary>

@@ -4,6 +4,11 @@ using ASEva.Graph;
 
 namespace ASEva.UICoreWF
 {
+    /// \~English
+    /// <summary>
+    /// (api:corewf=2.0.0) Single value graph control
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:corewf=2.0.0) 单值数据可视化窗口
     /// </summary>

@@ -1,12 +1,15 @@
-using System;
+﻿using System;
 using System.Reflection;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
 using Eto.Forms;
 using Eto.Drawing;
 
 namespace ASEva.UIEto
 {
+    #pragma warning disable CS1571
+
     public interface AppHandler
     {
         Application CreateApp(out String uiBackend, out String webViewBackend);
@@ -15,13 +18,26 @@ namespace ASEva.UIEto
         Control ConvertControlToEto(object platformControl);
         object ConvertControlToPlatform(Control etoControl);
         bool RunDialog(DialogPanel panel);
+        Dictionary<String, String> GetThirdPartyNotices();
+        bool ShouldPassParent();
     }
 
+    /// \~English
     /// <summary>
-    /// (api:eto=2.0.0) Eto应用程序
+    /// (api:eto=2.0.0) Utility functions for Eto application
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:eto=2.0.0) Eto应用程序相关的实用函数
     /// </summary>
     public class App
     {
+        /// \~English
+        /// <summary>
+        /// Initialize application
+        /// </summary>
+        /// <returns>Whether initialization is successfull</returns>
+        /// \~Chinese
         /// <summary>
         /// 应用程序初始化
         /// </summary>
@@ -37,6 +53,13 @@ namespace ASEva.UIEto
             return application != null;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.0.7) Initialize application with the specified UI framework
+        /// </summary>
+        /// <param name="uiCode">UI framework code</param>
+        /// <returns>Whether initialization is successfull</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.7) 以指定UI框架初始化应用程序
         /// </summary>
@@ -57,6 +80,12 @@ namespace ASEva.UIEto
             return application != null;
         }
 
+        /// \~English
+        /// <summary>
+        /// Run application
+        /// </summary>
+        /// <param name="window">The main window</param>
+        /// \~Chinese
         /// <summary>
         /// 运行应用程序
         /// </summary>
@@ -65,11 +94,18 @@ namespace ASEva.UIEto
         {
             if (handler != null && application != null && window != null)
             {
+                window.KeyDown += (o, e) => { KeyDown?.Invoke(o, e); };
                 window.Closed += delegate { window.CloseRecursively(); };
                 handler.RunApp(application, window);
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.0.7) Get current running OS's code, which is the same as ASEva.APIInfo.GetRunningOS
+        /// </summary>
+        /// <returns>OS code, null if unrecognized</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.7) 返回当前运行的OS代号，与 ASEva.APIInfo.GetRunningOS 结果一致
         /// </summary>
@@ -79,6 +115,12 @@ namespace ASEva.UIEto
             return ASEva.APIInfo.GetRunningOS();
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.0.7) Get current running UI framework's code
+        /// </summary>
+        /// <returns>UI framework code, null if ASEva.UIEto.App.Init is not called or initialization failed</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.7) 返回当前运行的UI框架代号
         /// </summary>
@@ -88,6 +130,12 @@ namespace ASEva.UIEto
             return runningUI;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.4.0) Get the backend code of current running UI
+        /// </summary>
+        /// <returns>UI backend code, null if ASEva.UIEto.App.Init is not called or initialization failed or there's no backend for current UI</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.4.0) 返回当前运行UI的后端代号
         /// </summary>
@@ -97,6 +145,27 @@ namespace ASEva.UIEto
             return uiBackend;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.11.0) Get current running UI and UI backend's third party license notices
+        /// </summary>
+        /// <returns>Key is title, value is notice</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.11.0) 返回当前运行的UI框架和UI后端使用的第三方软件版权声明
+        /// </summary>
+        /// <returns>键为标题，值为版权声明</returns>
+        public static Dictionary<String, String> GetUIBackendThirdPartyNotices()
+        {
+            return handler == null ? null : handler.GetThirdPartyNotices();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.3.4) Get current WebView backend code
+        /// </summary>
+        /// <returns>WebView backend code, null if ASEva.UIEto.App.Init is not called or initialization failed</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.3.4) 返回当前WebView使用的后台框架代号
         /// </summary>
@@ -106,6 +175,11 @@ namespace ASEva.UIEto
             return webViewBackend;
         }
 
+        /// \~English
+        /// <summary>
+        /// Application instance
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 应用程序对象
         /// </summary>
@@ -114,6 +188,13 @@ namespace ASEva.UIEto
             get { return application; }
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.0.6) Get default font
+        /// </summary>
+        /// <param name="sizeRatio">Ratio to the default size, default is 1</param>
+        /// <returns>Font object</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.0.6) 获取默认字体
         /// </summary>
@@ -142,6 +223,12 @@ namespace ASEva.UIEto
             return SystemFonts.Default(targetSize);
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.1.0) Get application's work path
+        /// </summary>
+        /// <value>Work path</value>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.1.0) 获取应用程序的工作路径
         /// </summary>
@@ -167,6 +254,13 @@ namespace ASEva.UIEto
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.8.0) Convert platform control to Eto control
+        /// </summary>
+        /// <param name="platformControl">Platform control</param>
+        /// <returns>Eto control, null if conversion failed</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.0) 将平台特化控件转化为Eto控件
         /// </summary>
@@ -178,6 +272,13 @@ namespace ASEva.UIEto
             return handler.ConvertControlToEto(platformControl);
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.8.0) Convert Eto control to platform control
+        /// </summary>
+        /// <param name="etoControl">Eto control</param>
+        /// <returns>Platform control, null if conversion failed</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.0) 将Eto控件转化为平台特化控件
         /// </summary>
@@ -189,6 +290,13 @@ namespace ASEva.UIEto
             return handler.ConvertControlToPlatform(etoControl);
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.8.0) Run dialog
+        /// </summary>
+        /// <param name="panel">Target dialog panel object</param>
+        /// <returns>Whether the dialog is shown. You should use "Result" properties of the dialog panel object to get result</returns>
+        /// \~Chinese
         /// <summary>
         /// (api:eto=2.8.0) 弹出对话框
         /// </summary>
@@ -205,6 +313,65 @@ namespace ASEva.UIEto
             dialogEto.MoveToCenter();
             dialogEto.ShowModal();
             return true;
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.11.2) It's recommended to use this function to pass parent argument while calling ShowDialog
+        /// </summary>
+        /// <param name="parent">"parent" argument</param>
+        /// <returns>"parent" or null</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.11.2) 调用ShowDialog时建议通过此函数传parent参数
+        /// </summary>
+        /// <param name="parent">parent参数</param>
+        /// <returns>返回parent或null</returns>
+        public static Window PassParent(Window parent)
+        {
+            if (handler == null || !handler.ShouldPassParent()) return null;
+            else return parent;
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.11.2) It's recommended to use this function to pass parent argument while calling ShowDialog
+        /// </summary>
+        /// <param name="parent">"parent" argument</param>
+        /// <returns>"parent" or null</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.11.2) 调用ShowDialog时建议通过此函数传parent参数
+        /// </summary>
+        /// <param name="parent">parent参数</param>
+        /// <returns>返回parent或null</returns>
+        public static Control PassParent(Control parent)
+        {
+            if (handler == null || !handler.ShouldPassParent()) return null;
+            else return parent;
+        }
+
+		/// \~English
+		/// <summary>
+		/// (api:eto=2.11.4) Key press event of main window
+		/// </summary>
+		/// \~Chinese
+		/// <summary>
+		/// (api:eto=2.11.4) 主窗口的按键事件
+		/// </summary>
+		public static event EventHandler<KeyEventArgs> KeyDown;
+
+		/// \~English
+		/// <summary>
+        /// (api:eto=2.11.4) When ASEva.UIEto.App.Run is not used, you can use this function to manually trigger the KeyDown event
+        /// </summary>
+		/// \~Chinese
+        /// <summary>
+        /// (api:eto=2.11.4) 未使用 ASEva.UIEto.App.Run 启动时可使用此函数手动触发KeyDown事件
+        /// </summary>
+        public static void TriggerKeyDown(object sender, KeyEventArgs args)
+        {
+            KeyDown?.Invoke(sender, args);
         }
 
         private static String[] getAvailableUICodes()

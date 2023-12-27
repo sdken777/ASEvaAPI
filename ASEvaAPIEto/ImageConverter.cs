@@ -1,9 +1,14 @@
-using System;
+﻿using System;
 using Eto.Drawing;
 using ASEva.Samples;
 
 namespace ASEva.UIEto
 {
+    /// \~English
+    /// <summary>
+    /// (api:eto=2.2.0) Conversion of image object
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:eto=2.2.0) 图像对象转换
     /// </summary>

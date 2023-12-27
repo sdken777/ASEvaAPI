@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using ASEva.Utility;
 using ASEva.Samples;
@@ -12,7 +12,7 @@ namespace ASEvaAPIEtoTest
     {
         private void initBasicTabPageB(TabPage tabPage)
         {
-            var splitter = tabPage.SetContentAsColumnLayout().AddControl(new Splitter { Position = this.Sizer(300) }, true) as Splitter;
+            var splitter = tabPage.SetContentAsControl(new Splitter { Position = this.Sizer(300) }) as Splitter;
             splitter.Panel1MinimumSize = 300;
             splitter.Panel2MinimumSize = 200;
             var panel1 = splitter.SetPanel1();
@@ -69,7 +69,7 @@ namespace ASEvaAPIEtoTest
             view.SelectedItemActivated += delegate
             {
                 var selectedKey = view.GetSelectedKey();
-                if (selectedKey != null) MessageBox.Show(selectedKey as String, "");
+                if (selectedKey != null) MessageBox.Show(selectedKey as String);
             };
 
             buttonChange.Click += delegate

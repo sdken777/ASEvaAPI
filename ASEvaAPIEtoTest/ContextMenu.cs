@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using ASEva.Utility;
 using ASEva.Samples;
 using ASEva.UIEto;
@@ -11,7 +11,7 @@ namespace ASEvaAPIEtoTest
     {
         private void initContextMenu(ContextMenu menu)
         {
-            menu.AddButtonItem(t["menu-button"], CommonImage.LoadResource("menu-button.png").ToEtoBitmap()).Click += delegate { MessageBox.Show(App.WorkPath, ""); };
+            menu.AddButtonItem(t["menu-button"], Bitmap.FromResource("menu-button.png")).Click += delegate { MessageBox.Show(App.WorkPath); };
             var subMenu = menu.AddButtonItem(t["menu-sub"]);
             subMenu.AddButtonItem(t.Format("menu-sub-item", "A"));
             subMenu.AddSeparator();
@@ -25,7 +25,17 @@ namespace ASEvaAPIEtoTest
             menu.AddButtonItem(t["menu-snapshot"]).Click += delegate
             {
                 var snapshot = this.Snapshot();
-                if (snapshot == null) MessageBox.Show(t["menu-snapshot-failed"], "", MessageBoxType.Error);
+                if (snapshot == null) MessageBox.Show(t["menu-snapshot-failed"], MessageBoxType.Error);
+                else
+                {
+                    var dialog = new ImageDialog(snapshot);
+                    App.RunDialog(dialog);
+                }
+            };
+            menu.AddButtonItem(t["menu-snapshot-screen"]).Click += delegate
+            {
+                var snapshot = this.SnapshotFromScreen();
+                if (snapshot == null) MessageBox.Show(t["menu-snapshot-failed"], MessageBoxType.Error);
                 else
                 {
                     var dialog = new ImageDialog(snapshot);

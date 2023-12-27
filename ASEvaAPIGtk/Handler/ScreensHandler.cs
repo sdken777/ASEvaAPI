@@ -1,16 +1,19 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using Eto;
 using Eto.Forms;
 using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
 	#pragma warning disable CS0612
-	public class ScreensHandler : Screen.IScreensHandler
+	class ScreensHandler : Screen.IScreensHandler
 	{
 		public void Initialize ()
 		{
 		}
+
+		public Widget Widget { get; set; }
 
 		public Eto.Platform Platform { get; set; }
 
@@ -19,6 +22,7 @@ namespace ASEva.UIGtk
 			get
 			{
 #if GTKCORE
+				// CHECK: 修正获取Screens属性异常，Arm-Ubuntu22.04-Wayland和Arm-Ubuntu16.04-X11可重现
 				var list = new List<Screen>();
 				try
 				{
@@ -49,6 +53,7 @@ namespace ASEva.UIGtk
 			get
 			{
 #if GTKCORE
+				// CHECK: 修正获取PrimaryScreen属性异常，Arm-Ubuntu22.04-Wayland和Arm-Ubuntu16.04-X11可重现
 				try
 				{
 					var monitor = Gdk.Display.Default.PrimaryMonitor;
@@ -62,7 +67,7 @@ namespace ASEva.UIGtk
 			}
 		}
 
-		public static bool LegacyMode { get; private set; } // 已弃用
+		public static bool LegacyMode { get; private set; } // Deprecated
 	}
 }
 

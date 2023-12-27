@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Gtk;
 using ASEva.Utility;
 using ASEva.UIGtk;
@@ -9,6 +9,11 @@ namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612, CS0649
 
+    /// \~English
+    /// <summary>
+    /// (api:gtk=2.0.0) Matrix table graph control
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 矩阵热力图数据可视化窗口
     /// </summary>
@@ -40,6 +45,11 @@ namespace ASEva.UIGtk
             builder.Autoconnect(this);
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:gtk=2.0.8) Release resources
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:gtk=2.0.8) 释放相关资源
         /// </summary>

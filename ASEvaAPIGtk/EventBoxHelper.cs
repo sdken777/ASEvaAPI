@@ -1,17 +1,30 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Gdk;
 using Gtk;
 
 namespace ASEva.UIGtk
 {
-    #pragma warning disable CS0612
+    #pragma warning disable CS0612, CS1571
 
+    /// \~English
+    /// <summary>
+    /// (api:gtk=2.0.0) Event box helper class
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:gtk=2.0.0) 事件框辅助类
     /// </summary>
     public class EventBoxHelper
     {
+        /// \~English
+        /// <summary>
+        /// Add event box
+        /// </summary>
+        /// <param name="eventBox">The event box</param>
+        /// <param name="contextMenu">Related context menu</param>
+        /// <param name="enableScrolledEvent">Whether to enable scroll event</param>
+        /// \~Chinese
         /// <summary>
         /// 添加事件框
         /// </summary>
@@ -35,6 +48,11 @@ namespace ASEva.UIGtk
             eventBox.ScrollEvent += eventBox_Scroll;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:gtk=2.5.4) Whether the event can be received by lower controls, default is false
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// (api:gtk=2.5.4) 事件是否允许下层控件接收，默认false
         /// </summary>

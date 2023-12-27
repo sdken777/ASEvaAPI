@@ -8,9 +8,6 @@ using Eto.Forms;
 
 namespace ASEva.UIWpf
 {
-    /// <summary>
-    /// AppDialogWpf.xaml 的交互逻辑
-    /// </summary>
     public partial class AppDialogWpf : System.Windows.Window
     {
         public AppDialogWpf(FrameworkElement element, DialogPanel dialogPanel)

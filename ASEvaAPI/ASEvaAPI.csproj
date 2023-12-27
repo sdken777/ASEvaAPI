@@ -12,15 +12,6 @@
     <Reference Include="System.Resources.Extensions">
       <HintPath>..\bin64\System.Resources.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="SixLabors.ImageSharp">
-      <HintPath>..\binx\SixLabors.ImageSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="SixLabors.ImageSharp.Drawing">
-      <HintPath>..\binx\SixLabors.ImageSharp.Drawing.dll</HintPath>
-    </Reference>
-    <Reference Include="SixLabors.Fonts">
-      <HintPath>..\binx\SixLabors.Fonts.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

@@ -3,16 +3,31 @@ using System.Net;
 
 namespace ASEva.Utility
 {
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) WebClient with Timeout property
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 带Timeout属性的WebClient
     /// </summary>
     public class TimeoutWebClient : WebClient
     {
+        /// \~English
+        /// <summary>
+        /// Timeout, in milliseconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 超时，单位毫秒
         /// </summary>
         public int Timeout { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Default constructor, default timeout is 5 seconds
+        /// </summary>
+        /// \~Chinese
         /// <summary>
         /// 构造函数，默认超时5秒
         /// </summary>

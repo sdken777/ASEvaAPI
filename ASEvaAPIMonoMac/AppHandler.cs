@@ -1,4 +1,6 @@
-using System;
+﻿using System;
+using System.Collections.Generic;
+using ASEva.Utility;
 using ASEva.UIEto;
 using Eto.Drawing;
 using Eto.Forms;
@@ -31,6 +33,8 @@ namespace ASEva.UIMonoMac
             platform.Add<UITimer.IHandler>(() => new UITimerHandler());
 
             var app = new Application(platform);
+
+            // CHECK: 点击主窗口关闭按钮后令应用程序退出
             var appHandler = app.Handler as Eto.Mac.Forms.ApplicationHandler;
             appHandler.AppDelegate = new AppDelegate();
 
@@ -47,6 +51,7 @@ namespace ASEva.UIMonoMac
             SkiaCanvasExtensions.DefaultFontSize = 13.0f;
             DefaultSimpleTreeViewBackend.DefaultBackgroundColor = Colors.Transparent;
             SnapshotExtensions.Handler = new SnapshotHandler();
+            SnapshotExtensions.ScreenModeHandler = new ScreenSnapshotHandler();
 
             uiBackend = null;
             webViewBackend = "webkit2";
@@ -60,6 +65,7 @@ namespace ASEva.UIMonoMac
 
         public void RunApp(Application application, Form window)
         {
+            window.Closing += (o, e) => { if (e.Cancel) window.Visible = true; };
             application.Run(window);
         }
 
@@ -77,6 +83,19 @@ namespace ASEva.UIMonoMac
         }
 
         public bool RunDialog(DialogPanel panel)
+        {
+            return false;
+        }
+
+        public Dictionary<string, string> GetThirdPartyNotices()
+        {
+            var table = new Dictionary<string, string>();
+            table["MonoMac"] = ResourceLoader.LoadText("MonoMac.LICENSE");
+            table["The OpenGL Extension Wrangler Library"] = ResourceLoader.LoadText("GLEW.LICENSE");
+            return table;
+        }
+
+        public bool ShouldPassParent()
         {
             return false;
         }

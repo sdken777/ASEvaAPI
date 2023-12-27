@@ -2,6 +2,13 @@
 
 namespace ASEva.Utility
 {
+    #pragma warning disable CS1571
+
+    /// \~English
+    /// <summary>
+    /// (api:app=2.0.0) Conversion of map coordinates
+    /// </summary>
+    /// \~Chinese
     /// <summary>
     /// (api:app=2.0.0) 地图坐标系转换
     /// </summary>
@@ -12,6 +19,13 @@ namespace ASEva.Utility
         private static double x_pi = Math.PI * 3000.0 / 180.0;
 
 
+        /// \~English
+        /// <summary>
+        /// Convert WGS coordinates to Baidu coordinates
+        /// </summary>
+        /// <param name="src">WGS coordinates</param>
+        /// <returns>Baidu coordinates</returns>
+        /// \~Chinese
         /// <summary>
         /// WGS坐标转百度坐标
         /// </summary>
@@ -22,6 +36,13 @@ namespace ASEva.Utility
             return gcj2bd(wgs2gcj(src));
         }
 
+        /// \~English
+        /// <summary>
+        /// Convert GCJ coordinates to Baidu coordinates
+        /// </summary>
+        /// <param name="src">GCJ coordinates</param>
+        /// <returns>Baidu coordinates</returns>
+        /// \~Chinese
         /// <summary>
         /// GCJ坐标转百度坐标
         /// </summary>
@@ -37,6 +58,13 @@ namespace ASEva.Utility
             return new LocPoint() { Lng = bd_lon, Lat = bd_lat };
         }
 
+        /// \~English
+        /// <summary>
+        /// Convert WGS coordinates to GCJ coordinates
+        /// </summary>
+        /// <param name="src">WGS coordinates</param>
+        /// <returns>GCJ coordinates</returns>
+        /// \~Chinese
         /// <summary>
         /// WGS坐标转GCJ坐标
         /// </summary>

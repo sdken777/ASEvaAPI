@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using ASEva.Utility;
 using ASEva.Samples;
 using ASEva.UIEto;
@@ -50,9 +50,13 @@ namespace ASEvaAPIEtoTest
             };
             loopTimer.Start();
 
-            Closing += delegate
+            Closing += (o, e) =>
             {
-                loopTimer.Stop();
+                if (MessageBox.Show(t["exit-confirm"], MessageBoxButtons.YesNo, MessageBoxType.Question) == DialogResult.Yes)
+                {
+                    loopTimer.Stop();
+                }
+                else e.Cancel = true;
             };
         }
 
