@@ -65,6 +65,8 @@ namespace Eto.GtkSharp.Forms
 		internal static readonly object DisableAutoSizeUpdate_Key = new object();
 		internal static readonly object AutoSizePerformed_Key = new object();
 		internal static readonly object AutoSize_Key = new object();
+		internal static readonly object Minimizable_Key = new object();
+		internal static readonly object Maximizable_Key = new object();
 	}
 
 	public abstract class GtkWindow<TControl, TWidget, TCallback> : GtkPanel<TControl, TWidget, TCallback>, Window.IHandler, IGtkWindow
@@ -188,15 +190,38 @@ namespace Eto.GtkSharp.Forms
 #endif
 			Control.SetGeometryHints(Control, geom, Gdk.WindowHints.MinSize);
 		}
+		
 
-		public bool Minimizable { get; set; }
+		public bool Minimizable
+		{
+			get => Widget.Properties.Get<bool>(GtkWindow.Minimizable_Key, true);
+			set
+			{
+				if (Widget.Properties.TrySet(GtkWindow.Minimizable_Key, value, true))
+					SetTypeHint();
+			}
+		}
 
-		public bool Maximizable { get; set; }
+		public bool Maximizable
+		{
+			get => Widget.Properties.Get<bool>(GtkWindow.Maximizable_Key, true);
+			set
+			{
+				if (Widget.Properties.TrySet(GtkWindow.Maximizable_Key, value, true))
+					SetTypeHint();
+			}
+		}
 
 		public bool ShowInTaskbar
 		{
 			get { return !Control.SkipTaskbarHint; }
 			set { Control.SkipTaskbarHint = !value; }
+		}
+		
+		public bool Closeable
+		{
+			get => Control.Deletable;
+			set => Control.Deletable = value;
 		}
 
 		public bool Topmost
@@ -231,12 +256,26 @@ namespace Eto.GtkSharp.Forms
 							break;
 						case WindowStyle.Utility:
 							Control.Decorated = true;
-							Control.TypeHint = Gdk.WindowTypeHint.Utility;
 							break;
 						default:
 							throw new NotSupportedException();
 					}
+					SetTypeHint();
 				}
+			}
+		}
+		
+		protected virtual Gdk.WindowTypeHint DefaultTypeHint => Gdk.WindowTypeHint.Normal;
+		
+		void SetTypeHint()
+		{
+			if (WindowStyle == WindowStyle.Default && (Minimizable || Maximizable))
+			{
+				Control.TypeHint = DefaultTypeHint;
+			}
+			else
+			{
+				Control.TypeHint = Gdk.WindowTypeHint.Utility;
 			}
 		}
 
@@ -402,12 +441,15 @@ namespace Eto.GtkSharp.Forms
 
 			public void HandleDeleteEvent(object o, Gtk.DeleteEventArgs args)
 			{
-				args.RetVal = !Handler.CloseWindow();
+				var handler = Handler;
+				if (handler == null)
+					return;
+				args.RetVal = !handler.CloseWindow();
 			}
 
 			public void HandleShownEvent(object sender, EventArgs e)
 			{
-				Handler.Callback.OnShown(Handler.Widget, EventArgs.Empty);
+				Handler?.Callback.OnShown(Handler.Widget, EventArgs.Empty);
 			}
 
 			public void HandleWindowStateEvent(object o, Gtk.WindowStateEventArgs args)
@@ -442,10 +484,13 @@ namespace Eto.GtkSharp.Forms
 			// do not connect before, otherwise it is sent before sending to child
 			public void HandleWindowKeyPressEvent(object o, Gtk.KeyPressEventArgs args)
 			{
+				var handler = Handler;
+				if (handler == null)
+					return;
 				var e = args.Event.ToEto();
 				if (e != null)
 				{
-					Handler.Callback.OnKeyDown(Handler.Widget, e);
+					handler.Callback.OnKeyDown(handler.Widget, e);
 					args.RetVal = e.Handled;
 				}
 			}
@@ -495,11 +540,13 @@ namespace Eto.GtkSharp.Forms
 
 			internal void ButtonPressEvent_Movable(object o, Gtk.ButtonPressEventArgs args)
 			{
-				var h = Handler;
+				var handler = Handler;
+				if (handler == null)
+					return;
 				var evt = args.Event;
-				if (h != null && evt.Type == Gdk.EventType.ButtonPress && evt.Button == 1)
+				if (handler != null && evt.Type == Gdk.EventType.ButtonPress && evt.Button == 1)
 				{
-					h.Control.BeginMoveDrag((int)evt.Button, (int)evt.XRoot, (int)evt.YRoot, evt.Time);
+					handler.Control.BeginMoveDrag((int)evt.Button, (int)evt.XRoot, (int)evt.YRoot, evt.Time);
 				}
 			}
 		}
