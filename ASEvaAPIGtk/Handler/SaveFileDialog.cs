@@ -133,12 +133,16 @@ namespace ASEva.UIGtk
 		public DialogResult ShowDialog(Window parent)
 		{
 			SetFilters();
+#if !GTKCORE
 			if (parent != null) Control.TransientFor = (Gtk.Window)parent.ControlObject;
+#endif
 
 			int result = Control.Run();
 
-			Control.Hide ();
+			Control.Hide();
+#if !GTKCORE
 			Control.Unrealize();
+#endif
 
 			DialogResult response = ((Gtk.ResponseType)result).ToEto ();
 			if (response == DialogResult.Ok && !string.IsNullOrEmpty(Control.CurrentFolder))

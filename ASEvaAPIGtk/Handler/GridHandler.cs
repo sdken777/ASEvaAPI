@@ -87,13 +87,15 @@ namespace ASEva.UIGtk
 		protected GridHandler()
 		{
 			// CHECK: 修正与其他控件并排且expand都为true时，其他控件不伸缩问题
-			Control = new Gtk.ScrolledWindow
+			ScrolledWindow = new EtoScrolledWindow
 			{
+				Handler = this,
 				ShadowType = Gtk.ShadowType.In,
+// #if GTKCORE
+// 				PropagateNaturalHeight = true,
+// 				PropagateNaturalWidth = true
+// #endif
 			};
-
-			// CHECK: 修正GridView在ReloadData时重置滚动条问题
-			Control.Vadjustment.ValueChanged += Vadjustment_ValueChanged;
 		}
 
 		// CHECK: 修正GridView在ReloadData时重置滚动条问题
@@ -157,6 +159,9 @@ namespace ASEva.UIGtk
 
 			// CHECK: 禁用搜索框（与其他框架行为一致）
 			Control.EnableSearch = false;
+
+			// CHECK: 修正GridView在ReloadData时重置滚动条问题
+			Control.Vadjustment.ValueChanged += Vadjustment_ValueChanged;
 			
 			Control.Events |= Gdk.EventMask.ButtonPressMask;
 			Control.ButtonPressEvent += Connector.HandleButtonPress;

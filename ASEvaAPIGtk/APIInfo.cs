@@ -1,8 +1,8 @@
 ﻿/*! \mainpage
  * \~English This library contains the APIs for Gtk#. See ASEva.UIGtk for details. \n
  * \~Chinese 此类库为ASEva-API中基于Gtk#的部分。详见 ASEva.UIGtk \n
- * \~English This document corresponds to API version: 2.8.3 \n\n
- * \~Chinese 本文档对应API版本：2.8.3 \n\n
+ * \~English This document corresponds to API version: 2.9.0 \n\n
+ * \~Chinese 本文档对应API版本：2.9.0 \n\n
  * 
  * \~English Gtk# official repository: https://github.com/GtkSharp/GtkSharp \n
  * \~Chinese Gtk#官方仓库: https://github.com/GtkSharp/GtkSharp \n
@@ -15,7 +15,7 @@ using System;
 namespace ASEva.UIGtk
 {
     /// <summary>
-    /// version=2.8.3
+    /// version=2.9.0
     /// </summary>
     public class APIInfo
     {
@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 8, 3, 1); // Update log / 更新记录: 完善wayland下的ScreenSnapshotHandler.Snapshot
+            return new Version(2, 9, 0, 0); // Update log / 更新记录: 基于eto 2.7.5
         }
     }
 }
