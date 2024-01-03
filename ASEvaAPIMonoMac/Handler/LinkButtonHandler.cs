@@ -4,8 +4,10 @@ using Eto.Forms;
 using Eto.Mac.Drawing;
 using System.Runtime.InteropServices;
 
-
 using Eto.Mac;
+using MonoMac.AppKit;
+using MonoMac.Foundation;
+using MonoMac.CoreGraphics;
 
 namespace ASEva.UIMonoMac
 {

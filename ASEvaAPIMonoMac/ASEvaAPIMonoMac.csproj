@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>ASEvaAPIMonoMac</AssemblyName>
     <Version>0.0.0.0</Version>
+    <DefineConstants>MONOMAC</DefineConstants>
     <NoWarn>1701;1702;1591</NoWarn>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>..\binm\ASEvaAPIMonoMac.xml</DocumentationFile>
