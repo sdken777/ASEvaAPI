@@ -60,7 +60,7 @@ namespace ASEva.UIGtk
 
 			public void HandleSelectedColorChanged(object sender, EventArgs e)
 			{
-				Handler.Callback.OnColorChanged(Handler.Widget, EventArgs.Empty);
+				Handler?.Callback.OnColorChanged(Handler.Widget, EventArgs.Empty);
 			}
 		}
 #if GTK3

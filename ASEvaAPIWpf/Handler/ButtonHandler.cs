@@ -68,7 +68,6 @@ namespace ASEva.UIWpf
 		protected override void Initialize()
 		{
 			Control.Click += (sender, e) => Callback.OnClick(Widget, EventArgs.Empty);
-			Control.Padding = new sw.Thickness(2);
 			LabelPart = new WpfLabel
 			{
 				IsHitTestVisible = false,

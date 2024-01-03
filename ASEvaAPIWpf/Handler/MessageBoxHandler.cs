@@ -30,13 +30,17 @@ namespace ASEva.UIWpf
 		{
 			using (var visualStyles = new EnableThemingInScope(ApplicationHandler.EnableVisualStyles))
 			{
+				var parentWindow = parent?.ParentWindow;
+				if (parentWindow?.HasFocus == false)
+					parentWindow.Focus();
+
 				var element = parent == null ? null : parent.GetContainerControl();
 				var window = element == null ? null : GetVisualParent<sw.Window>(element);
 				sw.MessageBoxResult result;
 				var buttons = Convert(Buttons);
 				var defaultButton = Convert(DefaultButton, Buttons);
 				var icon = Convert(Type);
-				var caption = Caption ?? ((parent != null && parent.ParentWindow != null) ? parent.ParentWindow.Title : null);
+				var caption = Caption ?? parentWindow?.Title;
 
 				// CHECK: 修正caption为null则显示"错误"
 				if (caption == null) caption = "";
