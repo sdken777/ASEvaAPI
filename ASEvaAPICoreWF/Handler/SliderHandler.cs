@@ -27,7 +27,7 @@ namespace ASEva.UICoreWF
 				base.OnCreateControl();
 			}
 
-			// CHECK: 修正窗口最大化/恢复时控件整体闪烁问题
+			// CHECK: 修正窗口最大化/恢复时控件整体闪烁问题，Win10可重现
             protected override void OnPaint(swf.PaintEventArgs e)
             {
 				var bitmap = new sd.Bitmap(Width, Height);
