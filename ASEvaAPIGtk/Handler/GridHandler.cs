@@ -98,26 +98,26 @@ namespace ASEva.UIGtk
 			};
 		}
 
-		// CHECK: 修正GridView在ReloadData时重置滚动条问题
-        private double? updateModelVAajustmentValue = null;
-		private void Vadjustment_ValueChanged(object sender, EventArgs e)
-        {
-            if (updateModelVAajustmentValue == null) return;
-			if (updateModelVAajustmentValue.Value == Control.Vadjustment.Value) return;
+		// 修正GridView在ReloadData时重置滚动条问题 (eto 2.7.5已解决)
+        // private double? updateModelVAajustmentValue = null;
+		// private void Vadjustment_ValueChanged(object sender, EventArgs e)
+        // {
+        //     if (updateModelVAajustmentValue == null) return;
+		// 	if (updateModelVAajustmentValue.Value == Control.Vadjustment.Value) return;
 
-			Control.Vadjustment.ValueChanged -= Vadjustment_ValueChanged;
-			Control.Vadjustment.Value = updateModelVAajustmentValue.Value;
-			Control.Vadjustment.ValueChanged += Vadjustment_ValueChanged;
+		// 	Control.Vadjustment.ValueChanged -= Vadjustment_ValueChanged;
+		// 	Control.Vadjustment.Value = updateModelVAajustmentValue.Value;
+		// 	Control.Vadjustment.ValueChanged += Vadjustment_ValueChanged;
 
-			updateModelVAajustmentValue = null;
-        }
+		// 	updateModelVAajustmentValue = null;
+        // }
 
 		protected abstract ITreeModelImplementor CreateModelImplementor();
 
 		protected void UpdateModel()
 		{
-			// CHECK: 修正GridView在ReloadData时重置滚动条问题
-			updateModelVAajustmentValue = Control.Vadjustment.Value;
+			// 修正GridView在ReloadData时重置滚动条问题 (eto 2.7.5已解决)
+			// updateModelVAajustmentValue = Control.Vadjustment.Value;
 
 			SkipSelectedChange = true;
 			var selected = SelectedRows;
@@ -160,8 +160,8 @@ namespace ASEva.UIGtk
 			// CHECK: 禁用搜索框（与其他框架行为一致）
 			Control.EnableSearch = false;
 
-			// CHECK: 修正GridView在ReloadData时重置滚动条问题
-			Control.Vadjustment.ValueChanged += Vadjustment_ValueChanged;
+			// 修正GridView在ReloadData时重置滚动条问题 (eto 2.7.5已解决)
+			// Control.Vadjustment.ValueChanged += Vadjustment_ValueChanged;
 			
 			Control.Events |= Gdk.EventMask.ButtonPressMask;
 			Control.ButtonPressEvent += Connector.HandleButtonPress;

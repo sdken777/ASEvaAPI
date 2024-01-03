@@ -3,7 +3,7 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
-	// CHECK: 继承WindowHandlerGtkWindow，修正GtkWindowConnector异常问题，Eto-2.7.0已修复
+	// 继承WindowHandlerGtkWindow，修正GtkWindowConnector异常问题，Eto-2.7.0已修复
 	class FormHandler : WindowHandlerGtkWindow<Gtk.Window, Form, Form.ICallback>, Form.IHandler
 	{
 		public FormHandler(Gtk.Window window)
