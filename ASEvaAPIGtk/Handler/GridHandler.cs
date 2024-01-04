@@ -86,7 +86,7 @@ namespace ASEva.UIGtk
 
 		protected GridHandler()
 		{
-			// CHECK: 修正与其他控件并排且expand都为true时，其他控件不伸缩问题
+			// 修正与其他控件并排且expand都为true时，其他控件不伸缩问题 (已弃用)
 			ScrolledWindow = new EtoScrolledWindow
 			{
 				Handler = this,
@@ -157,8 +157,8 @@ namespace ASEva.UIGtk
 			Control.HeadersVisible = true;
 			ScrolledWindow.Child = Control;
 
-			// CHECK: 禁用搜索框（与其他框架行为一致）
-			Control.EnableSearch = false;
+			// 禁用搜索框（与其他框架行为一致） (已弃用)
+			// Control.EnableSearch = false;
 
 			// 修正GridView在ReloadData时重置滚动条问题 (eto 2.7.5已解决)
 			// Control.Vadjustment.ValueChanged += Vadjustment_ValueChanged;

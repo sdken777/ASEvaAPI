@@ -19,8 +19,64 @@ namespace ASEvaAPIEtoTest
 
             // layoutCases.AddLabel(t["basic-cases"]);
 
+            var layoutCheckList = layoutRow.AddColumnLayout(false, 180, 0, 2);
+            initBasicTabPageCCheckList(layoutCheckList);
+
+            layoutRow.AddSeparator();
+
             var layoutTableView = layoutRow.AddColumnLayout(true, 2);
             initBasicTabPageCTableView(layoutTableView);
+        }
+
+        private void initBasicTabPageCCheckList(StackLayout layout)
+        {
+            var buttonRow = layout.AddRowLayout();
+            var buttonCheckAll = buttonRow.AddLinkButton(t["basic-checklist-check-all"]);
+            buttonRow.AddSpace();
+            var buttonUncheckAll = buttonRow.AddLinkButton(t["basic-checklist-uncheck-all"]);
+
+            var checkListBox = layout.AddControl(new CheckableListBox(), true) as CheckableListBox;
+            for (int i = 0; i < 1000; i++) checkListBox.AddItem(t.Format("basic-list-item-short", i.ToString()), i % 2 == 0, (i / 2) % 2 == 0);
+            checkListBox.ItemClicked += delegate { MessageBox.Show(checkListBox.GetSelectedRow().ToString()); };
+
+            buttonCheckAll.Click += delegate { checkListBox.CheckAll(); };
+            buttonUncheckAll.Click += delegate { checkListBox.UncheckAll(); };
+
+            buttonRow = layout.AddRowLayout();
+            buttonRow.AddLinkButton(t["basic-checklist-remove"]).Click += delegate
+            {
+                if (checkListBox.GetItemCount() > 100) checkListBox.RemoveItem(checkListBox.GetItemCount() - 1);
+            };
+            buttonRow.AddSpace();
+            buttonRow.AddLinkButton(t["basic-checklist-set-text"]).Click += delegate
+            {
+                checkListBox.SetText(checkListTarget, checkListTarget.ToString());
+                if (checkListTarget < 99) checkListTarget++;
+            };
+
+            buttonRow = layout.AddRowLayout();
+            buttonRow.AddLinkButton(t["basic-checklist-get-check"]).Click += delegate
+            {
+                MessageBox.Show(checkListTarget + ": " + checkListBox.GetChecked(checkListTarget).ToString());
+            };
+            buttonRow.AddSpace();
+            buttonRow.AddLinkButton(t["basic-checklist-set-check"]).Click += delegate
+            {
+                checkListBox.SetChecked(checkListTarget, !checkListBox.GetChecked(checkListTarget));
+                if (checkListTarget < 99) checkListTarget++;
+            };
+
+            buttonRow = layout.AddRowLayout();
+            buttonRow.AddLinkButton(t["basic-checklist-get-enable"]).Click += delegate
+            {
+                MessageBox.Show(checkListTarget + ": " + checkListBox.GetEnabled(checkListTarget).ToString());
+            };
+            buttonRow.AddSpace();
+            buttonRow.AddLinkButton(t["basic-checklist-set-enable"]).Click += delegate
+            {
+                checkListBox.SetEnabled(checkListTarget, !checkListBox.GetEnabled(checkListTarget));
+                if (checkListTarget < 99) checkListTarget++;
+            };
         }
 
         private void initBasicTabPageCTableView(StackLayout layout)
@@ -33,20 +89,26 @@ namespace ASEvaAPIEtoTest
             var tableView = layout.AddControl(new TextTableView(), true) as TextTableView;
             tableView.AddColumn(t["basic-grid-key-title"]);
             tableView.AddColumn(t["basic-grid-value-title"]);
+            tableView.CellEdited += (o, row, col) =>
+            {
+                if (row == 0) return;
+                tableView.SetValue(0, 0, t.Format("basic-grid-edited", row, col));
+                tableView.SetValue(0, 1, tableView.GetValue(row, col));
+            };
 
             layoutGridViewRow = layout.AddRowLayout();
             var linkButtonChangeColor = layoutGridViewRow.AddLinkButton(t["basic-grid-change-color"]);
             layoutGridViewRow.AddSpace();
-            var linkButtonReload = layoutGridViewRow.AddLinkButton(t["basic-grid-reload"]);
 
             linkButtonAdd.Click += delegate { tableView.AddRow(); };
-            linkButtonRemove.Click += delegate { tableView.RemoveRow(tableView.SelectedRow); };
+            linkButtonRemove.Click += delegate { tableView.RemoveRow(tableView.GetSelectedRow()); };
             linkButtonChangeColor.Click += delegate
             {
                 tableView.SetTextColor(0, 0, Colors.Red);
                 tableView.SetBackgroundColor(0, 1, Colors.Green);
             };
-            linkButtonReload.Click += delegate { tableView.ReloadData(0); };
         }
+
+        private int checkListTarget = 0;
     }
 }

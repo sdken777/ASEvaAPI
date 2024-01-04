@@ -36,7 +36,7 @@ namespace ASEvaAPIEtoTest
             for (int i = 1; i <= 1000; i++) listBox.Items.Add(t.Format("basic-list-item", i.ToString()));
 
             var checkListBox = layout.AddControl(new CheckableListBox(), true) as CheckableListBox;
-            for (int i = 1; i <= 1000; i++) checkListBox.AddItem(t.Format("basic-list-item-short", i.ToString()), i % 2 == 0, (i / 2) % 2 == 0);
+            for (int i = 1; i <= 1000; i++) checkListBox.AddItem(t.Format("basic-list-item-short", i.ToString()));
         }
 
         private void initBasicTabPageBTreeView(StackLayout layout)
