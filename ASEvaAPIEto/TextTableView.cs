@@ -455,13 +455,13 @@ namespace ASEva.UIEto
 
         private void TextTableView_CellFormatting(object sender, GridCellFormatEventArgs e)
         {
-            if (e.Row < foregroundColors.Count)
+            if (e.Row >= 0 && e.Row < foregroundColors.Count)
             {
                 var rowTable = foregroundColors[e.Row];
                 if (rowTable.ContainsKey(e.Column)) e.ForegroundColor = rowTable[e.Column];
                 else if (DefaultTextColor != null) e.ForegroundColor = DefaultTextColor.Value;
             }
-            if (e.Row < backgroundColors.Count)
+            if (e.Row >= 0 && e.Row < backgroundColors.Count)
             {
                 var rowTable = backgroundColors[e.Row];
                 if (rowTable.ContainsKey(e.Column)) e.BackgroundColor = rowTable[e.Column];

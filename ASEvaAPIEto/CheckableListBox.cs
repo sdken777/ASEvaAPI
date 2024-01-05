@@ -468,7 +468,7 @@ namespace ASEva.UIEto
 
             for (int i = 0; i < indices.Length; i++)
             {
-                var values = list[i].Values;
+                var values = list[indices[i]].Values;
                 if (values == null || values.Length < 2) continue;
                 values[1] = isChecked;
             }
