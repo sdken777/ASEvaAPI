@@ -14,7 +14,7 @@
       <column type="gchararray"/>
     </columns>
   </object>
-  <object class="GtkBox" id="CheckableListBoxBackendGtk">
+  <object class="GtkEventBox" id="CheckableListBoxBackendGtk">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
     <child>
@@ -31,9 +31,6 @@
             <property name="headers-visible">False</property>
             <property name="enable-search">False</property>
             <property name="search-column">0</property>
-            <child internal-child="selection">
-              <object class="GtkTreeSelection"/>
-            </child>
             <child>
               <object class="GtkTreeViewColumn">
                 <property name="title" translatable="yes">column</property>
@@ -48,11 +45,6 @@
           </object>
         </child>
       </object>
-      <packing>
-        <property name="expand">True</property>
-        <property name="fill">True</property>
-        <property name="position">0</property>
-      </packing>
     </child>
   </object>
 </interface>

@@ -9,7 +9,7 @@ using UI = Gtk.Builder.ObjectAttribute;
 namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612, CS0649
-    class CheckableListBoxBackendGtk : Box, CheckableListBoxBackend
+    class CheckableListBoxBackendGtk : EventBox, CheckableListBoxBackend
     {
         [UI] TreeView treeView;
         [UI] ListStore listStore;
@@ -37,6 +37,33 @@ namespace ASEva.UIGtk
 
                     treeView.Selection.SelectIter(iter);
                     callback.OnItemClicked();
+
+                    toggled = true;
+                }
+            };
+
+            ButtonReleaseEvent += (o, e) =>
+            {
+                if (toggled)
+                {
+                    toggled = false;
+                    return;
+                }
+
+                if (e.Event.Button != 1 || e.Event.Type != Gdk.EventType.ButtonRelease) return;
+                e.RetVal = true;
+
+                TreeIter iter;
+                if (treeView.Selection.GetSelected(out iter))
+                {
+                    GLib.Value enabled = new GLib.Value(), active = new GLib.Value();
+                    listStore.GetValue(iter, 1, ref enabled);
+                    listStore.GetValue(iter, 2, ref active);
+                    if ((bool)enabled)
+                    {
+                        listStore.SetValue(iter, 2, new GLib.Value(!(bool)active));
+                        callback.OnItemClicked();
+                    }
                 }
             };
         }
@@ -139,5 +166,7 @@ namespace ASEva.UIGtk
         {
             return "rgb(" + color.Rb + "," + color.Gb + "," + color.Bb + ")";
         }
+
+        private bool toggled = false;
     }
 }
