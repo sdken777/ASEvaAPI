@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 13, 1, 2); // Update log / 更新记录: 修正bug
+            return new Version(2, 13, 1, 3); // Update log / 更新记录: CheckableListBox.ItemClicked需要点中启用的多选框才触发
         }
 
         /// \~English

@@ -37,7 +37,11 @@ namespace ASEvaAPIEtoTest
 
             var checkListBox = layout.AddControl(new CheckableListBox(), true) as CheckableListBox;
             for (int i = 0; i < 1000; i++) checkListBox.AddItem(t.Format("basic-list-item-short", i.ToString()), i % 2 == 0, (i / 2) % 2 == 0);
-            checkListBox.ItemClicked += delegate { MessageBox.Show(checkListBox.GetSelectedRow().ToString()); };
+            checkListBox.ItemClicked += delegate
+            {
+                var selectedIndex = checkListBox.GetSelectedRow();
+                MessageBox.Show(selectedIndex + ": " + checkListBox.GetChecked(selectedIndex));
+            };
 
             buttonCheckAll.Click += delegate { checkListBox.CheckAll(); };
             buttonUncheckAll.Click += delegate { checkListBox.UncheckAll(); };

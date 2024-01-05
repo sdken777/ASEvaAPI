@@ -26,7 +26,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 7, 1, 0); // Update log / 更新记录: 新增CheckableListBoxFactory
+            return new Version(1, 7, 1, 1); // Update log / 更新记录: 修正bug
         }
     }
 }

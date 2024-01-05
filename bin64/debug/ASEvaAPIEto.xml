@@ -604,11 +604,11 @@
         <member name="E:ASEva.UIEto.CheckableListBox.ItemClicked">
             \~English
             <summary>
-            Click event of check box
+            Click event of check box (won't trigger while clicking disabled items)
             </summary>
             \~Chinese
             <summary>
-            多选框点击事件
+            多选框点击事件（点中禁用的选项不触发）
             </summary>
         </member>
         <member name="T:ASEva.UIEto.ConfigPanel">

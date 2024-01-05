@@ -340,17 +340,18 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// Click event of check box
+        /// Click event of check box (won't trigger while clicking disabled items)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 多选框点击事件
+        /// 多选框点击事件（点中禁用的选项不触发）
         /// </summary>
         public event EventHandler ItemClicked;
 
         public void OnItemClicked()
         {
-            ItemClicked?.Invoke(this, null);
+            var selectedIndex = backend.GetSelectedRowIndex();
+            if (selectedIndex >= 0 && enableFlags[selectedIndex]) ItemClicked?.Invoke(this, null);
         }
 
         private List<bool> enableFlags = new List<bool>();

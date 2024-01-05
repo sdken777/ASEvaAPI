@@ -93,6 +93,8 @@ namespace ASEva.UIWpf
             if (SelectedIndex < 0) return;
             
             var checkBox = (Items[SelectedIndex] as ListBoxItem).Content as CheckBox;
+            if (!checkBox.IsEnabled) return;
+
             checkBox.Checked -= CheckBox_Checked;
             checkBox.Unchecked -= CheckBox_Checked;
             checkBox.IsChecked = !checkBox.IsChecked;
