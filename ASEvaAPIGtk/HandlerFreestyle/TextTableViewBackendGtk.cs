@@ -31,6 +31,7 @@ namespace ASEva.UIGtk
                 Title = title,
                 FixedWidth = logicalWidth <= 0 ? -1 : logicalWidth,
                 Expand = logicalWidth <= 0,
+                Resizable = true,
             });
             
             var colIndex = treeView.Columns.Length - 1;

@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 2, 1); // Update log / 更新记录: 修正窗口g_object_remove_toggle_ref异常
+            return new Version(2, 9, 2, 2); // Update log / 更新记录: TextTableView支持手动调整列宽
         }
     }
 }
