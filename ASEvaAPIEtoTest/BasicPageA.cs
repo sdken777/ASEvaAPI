@@ -12,6 +12,7 @@ namespace ASEvaAPIEtoTest
         private void initBasicTabPageA(TabPage tabPage)
         {
             var layout = tabPage.SetContentAsColumnLayout();
+            layout.BackgroundColor = Colors.LightYellow;
 
             layout.AddLabel(t["basic-menu-notice"]);
 

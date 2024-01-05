@@ -12,7 +12,10 @@ namespace ASEvaAPIEtoTest
         {
             Icon = Icon.FromResource("icon.png");
             SetFixMode(image.Width + 8, image.Height + 8, true);
-            this.SetContentAsOverlayLayout().AddControl(new ImageView{ Image = image.ToEtoBitmap() }, null, null, null, null);
+
+            var imageView = new ImageView{ Image = image.ToEtoBitmap() };
+            imageView.SetLogicalSize(image.Width, image.Height);
+            this.SetContentAsOverlayLayout().AddControl(imageView, null, null, null, null);
         }
     }
 }
