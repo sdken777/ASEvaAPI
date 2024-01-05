@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 7, 1, 0); // Update log / 更新记录: 新增CheckableListBox/TextTableViewFactoryCoreWF
+            return new Version(2, 7, 1, 1); // Update log / 更新记录: 细节调整
         }
     }
 }

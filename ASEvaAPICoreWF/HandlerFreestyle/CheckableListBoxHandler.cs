@@ -37,6 +37,7 @@ namespace ASEva.UICoreWF
             for (int i = 0; i < itemsText.Length; i++)
             {
                 var checkBox = new System.Windows.Forms.CheckBox();
+                checkBox.Height = (int)(Pixel.Scale * 18);
                 checkBox.Text = itemsText[i];
                 checkBox.Checked = itemsChecked == null ? false : itemsChecked[i];
                 checkBox.Enabled = itemsEnabled == null ? true : itemsEnabled[i];
@@ -149,7 +150,7 @@ namespace ASEva.UICoreWF
                 if (lastSize.Width < 50) return;
                 foreach (var checkBox in checkBoxes)
                 {
-                    checkBox.Width = lastSize.Width - (int)((6 + (VerticalScroll.Visible ? System.Windows.Forms.SystemInformation.VerticalScrollBarWidth : 0)) * Pixel.Scale);
+                    checkBox.Width = lastSize.Width - (int)(6 * Pixel.Scale) - (VerticalScroll.Visible ? System.Windows.Forms.SystemInformation.VerticalScrollBarWidth : 0);
                 }
             }
         }
