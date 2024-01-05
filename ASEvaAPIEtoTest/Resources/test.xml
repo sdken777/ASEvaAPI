@@ -197,8 +197,8 @@
     <ch>父节点{0:D}</ch>
   </t>
   <t id="basic-tree-select-first">
-    <en>Select first</en>
-    <ch>选中首项</ch>
+    <en>Select</en>
+    <ch>选首项</ch>
   </t>
   <t id="draw-gl-detail">
     <en>Show details</en>

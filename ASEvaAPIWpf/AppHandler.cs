@@ -43,6 +43,7 @@ namespace ASEva.UIWpf
             TopMostExtensions.QueryInterface = new TopMostHandler();
             SnapshotExtensions.Handler = new SnapshotHandler();
             SnapshotExtensions.ScreenModeHandler = new ScreenSnapshotHandler();
+            CheckableListBox.Factory = new CheckableListBoxFactoryWpf();
 
             uiBackend = null;
             webViewBackend = "webview2";
