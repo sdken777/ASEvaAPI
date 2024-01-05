@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 13, 1, 0); // Update log / 更新记录: CheckableListBox/TextTableView freestyle化
+            return new Version(2, 13, 1, 1); // Update log / 更新记录: GetCheckedIndices不包括已禁用部分
         }
 
         /// \~English

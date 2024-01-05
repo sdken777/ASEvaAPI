@@ -112,19 +112,22 @@ namespace ASEva.UICoreWF
         private void updateToPanel()
         {
             bool added = false;
-            int index = 0;
-            foreach (var ctx in ctxs)
+            if (Visible)
             {
-                if (ctx.Visible)
+                int index = 0;
+                foreach (var ctx in ctxs)
                 {
-                    if (!Controls.Contains(ctx.WinformControl))
+                    if (ctx.Visible)
                     {
-                        Controls.Add(ctx.WinformControl);
-                        Controls.SetChildIndex(ctx.WinformControl, index);
-                        added = true;
-                        break;
+                        if (!Controls.Contains(ctx.WinformControl))
+                        {
+                            Controls.Add(ctx.WinformControl);
+                            Controls.SetChildIndex(ctx.WinformControl, index);
+                            added = true;
+                            break;
+                        }
+                        index++;
                     }
-                    index++;
                 }
             }
 

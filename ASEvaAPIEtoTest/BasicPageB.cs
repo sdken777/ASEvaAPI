@@ -20,7 +20,7 @@ namespace ASEvaAPIEtoTest
 
             var layoutPanel1 = panel1.SetContentAsRowLayout(0, 2, VerticalAlignment.Stretch);
             
-            var layoutLists = layoutPanel1.AddColumnLayout(false, 120, 0, 8);
+            var layoutLists = layoutPanel1.AddColumnLayout(false, 125, 0, 8);
             initBasicTabPageBLists(layoutLists);
 
             var treeViewLayout = layoutPanel1.AddColumnLayout(true, 2);

@@ -48,7 +48,8 @@ namespace ASEva.UICoreWF
             ButtonPanel.TextAlphaUnsupported = true;
             Pixel.CalculateByScreenRealScale = true;
             ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.AlphaScale;
-            CheckableListBox.DefaultBackgroundColor = Colors.White;
+            CheckableListBox.Factory = new CheckableListBoxFactoryCoreWF();
+            TextTableView.Factory = new TextTableViewFactoryCoreWF();
             GLView.Factory = new GLViewFactoryCoreWF();
             SkiaView.Factory = new GLViewFactoryCoreWF();
             SkiaCanvasExtensions.DefaultFontName = "Microsoft Yahei";

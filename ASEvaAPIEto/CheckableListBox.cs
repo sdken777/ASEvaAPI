@@ -278,15 +278,20 @@ namespace ASEva.UIEto
         /// <summary>
         /// Get all indices of checked check box
         /// </summary>
-        /// <returns>All indices of checked check box</returns>
+        /// <returns>All indices of checked check box (Not included disabled ones)</returns>
         /// \~Chinese
         /// <summary>
         /// 获取所有已勾选的多选框的序号
         /// </summary>
-        /// <returns>所有已勾选的多选框的序号</returns>
+        /// <returns>所有已勾选的多选框的序号（不包括禁用的部分）</returns>
         public int[] GetCheckedIndices()
         {
-            return backend.GetCheckedIndices();
+            var list = new List<int>();
+            foreach (var index in backend.GetCheckedIndices())
+            {
+                if (enableFlags[index]) list.Add(index);
+            }
+            return list.ToArray();
         }
 
         /// \~English
