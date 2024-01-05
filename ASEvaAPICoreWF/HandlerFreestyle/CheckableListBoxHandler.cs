@@ -37,7 +37,7 @@ namespace ASEva.UICoreWF
             for (int i = 0; i < itemsText.Length; i++)
             {
                 var checkBox = new System.Windows.Forms.CheckBox();
-                checkBox.Height = (int)(Pixel.Scale * 18);
+                checkBox.Height = (int)(Pixel.Scale * 20);
                 checkBox.Text = itemsText[i];
                 checkBox.Checked = itemsChecked == null ? false : itemsChecked[i];
                 checkBox.Enabled = itemsEnabled == null ? true : itemsEnabled[i];
