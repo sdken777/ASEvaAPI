@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 2, 0); // Update log / 更新记录: 新增CheckableListBox/TextTableViewBackendGtk
+            return new Version(2, 9, 2, 1); // Update log / 更新记录: 修正窗口g_object_remove_toggle_ref异常
         }
     }
 }

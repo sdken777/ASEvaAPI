@@ -41,7 +41,7 @@ namespace ASEva.UIGtk
             platform.Add<Screen.IScreensHandler>(() => new ScreensHandler());
             platform.Add<Dialog.IHandler>(() => new DialogHandler());
             platform.Add<DateTimePicker.IHandler>(() => new DateTimePickerHandler());
-            // platform.Add<Form.IHandler>(() => new FormHandler());
+            platform.Add<Form.IHandler>(() => new FormHandler());
             platform.Add<Slider.IHandler>(() => new SliderHandler());
             // platform.Add<GridView.IHandler>(() => new GridViewHandler());
             platform.Add<GroupBox.IHandler>(() => new GroupBoxHandler());
