@@ -32,6 +32,7 @@ namespace ASEva.UIMonoMac
             platform.Add<WebView.IHandler>(() => new WKWebViewHandler());
             platform.Add<UITimer.IHandler>(() => new UITimerHandler());
             platform.Add<LinkButton.IHandler>(() => new LinkButtonHandler());
+            platform.Add<Label.IHandler>(() => new LabelHandler());
 
             var app = new Application(platform);
 
@@ -42,10 +43,10 @@ namespace ASEva.UIMonoMac
             SetContentExtensions.WindowInitializer = new InitWindowHandlerMonoMac();
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerMonoMac();
             ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.AlphaScaleColorInverted;
-            TextTableView.UpdateColorMode = TextTableView.InvalidateMode.EditCell;
-            TextTableView.DefaultTextColor = Colors.Black;
-            TextTableView.DefaultBackgroundColor = Color.FromArgb(0, 0, 0, 16);
-            CheckableListBox.UpdateColorMode = CheckableListBox.InvalidateMode.EditCell;
+            DefaultTextTableViewBackend.UpdateColorMode = DefaultTextTableViewBackend.InvalidateMode.EditCell;
+            DefaultTextTableViewBackend.DefaultTextColor = Colors.Black;
+            DefaultTextTableViewBackend.DefaultBackgroundColor = Color.FromArgb(0, 0, 0, 16);
+            DefaultCheckableListBoxBackend.UpdateColorMode = DefaultCheckableListBoxBackend.InvalidateMode.EditCell;
             GLView.Factory = new GLViewFactoryMonoMac();
             SkiaView.Factory = new GLViewFactoryMonoMac();
             SkiaCanvasExtensions.DefaultFontName = "STHeiti";

@@ -50,7 +50,7 @@ using Eto.Mac.Forms;
 namespace ASEva.UIMonoMac
 {
 
-	public class EtoLabelFieldCell : NSTextFieldCell
+	class EtoLabelFieldCell : NSTextFieldCell
 	{
 		public EtoLabelFieldCell()
 		{
@@ -104,7 +104,7 @@ namespace ASEva.UIMonoMac
 		}
 	}
 
-	public class EtoLabel : NSTextField, IMacControl
+	class EtoLabel : NSTextField, IMacControl
 	{
 		public WeakReference WeakHandler { get; set; }
 
@@ -135,7 +135,7 @@ namespace ASEva.UIMonoMac
 		public static readonly object TextColorKey = new object();
 	}
 
-	public abstract class MacLabel<TControl, TWidget, TCallback> : MacView<TControl, TWidget, TCallback>
+	abstract class MacLabel<TControl, TWidget, TCallback> : MacView<TControl, TWidget, TCallback>
 		where TControl: NSTextField
 		where TWidget: Control
 		where TCallback: Control.ICallback

@@ -4,12 +4,12 @@ using Eto.Drawing;
 using Eto.Mac.Drawing;
 using System.Text.RegularExpressions;
 using System.Linq;
+using MonoMac.AppKit;
 
 
-
-namespace Eto.Mac.Forms.Controls
+namespace ASEva.UIMonoMac
 {
-	public class LabelHandler : MacLabel<NSTextField, Label, Label.ICallback>, Label.IHandler
+	class LabelHandler : MacLabel<NSTextField, Label, Label.ICallback>, Label.IHandler
 	{
 	}
 }

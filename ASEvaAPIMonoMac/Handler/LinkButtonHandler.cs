@@ -16,7 +16,7 @@ namespace ASEva.UIMonoMac
 	/// </summary>
 	/// <copyright>(c) 2012-2014 by Curtis Wensley</copyright>
 	/// <license type="BSD-3">See LICENSE for full terms</license>
-	public class LinkButtonHandler : MacLabel<LinkButtonHandler.EtoLinkLabel, LinkButton, LinkButton.ICallback>, LinkButton.IHandler
+	class LinkButtonHandler : MacLabel<LinkButtonHandler.EtoLinkLabel, LinkButton, LinkButton.ICallback>, LinkButton.IHandler
 	{
 		static readonly object HoverFontKey = new object();
 		static readonly object NormalFontKey = new object();
