@@ -31,7 +31,7 @@ namespace ASEva.UIMonoMac
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 6, 2, 0); // Update log / 更新记录: 新增CheckableListBoxFactoryMonoMac
+            return new Version(1, 6, 2, 1); // Update log / 更新记录: 补上DefineConstants
         }
     }
 }

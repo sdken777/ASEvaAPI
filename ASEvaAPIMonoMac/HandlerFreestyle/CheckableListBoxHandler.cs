@@ -45,7 +45,6 @@ namespace ASEva.UIMonoMac
 			AutoresizesSubviews = true;
 			DocumentView = tableView;
 			HasVerticalScroller = true;
-			HasHorizontalScroller = true;
 			AutohidesScrollers = true;
 			BorderType = NSBorderType.BezelBorder;
         }
