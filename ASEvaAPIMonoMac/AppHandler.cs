@@ -54,6 +54,7 @@ namespace ASEva.UIMonoMac
             DefaultSimpleTreeViewBackend.DefaultBackgroundColor = Colors.Transparent;
             SnapshotExtensions.Handler = new SnapshotHandler();
             SnapshotExtensions.ScreenModeHandler = new ScreenSnapshotHandler();
+            CheckableListBox.Factory = new CheckableListBoxFactoryMonoMac();
 
             uiBackend = null;
             webViewBackend = "webkit2";
