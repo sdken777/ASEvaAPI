@@ -91,28 +91,30 @@ namespace ASEvaAPIEtoTest
             var linkButtonRemove = layoutGridViewRow.AddLinkButton(t["basic-grid-remove-row"]);
 
             var tableView = layout.AddControl(new TextTableView(), true) as TextTableView;
+            tableView.AddColumn(t["basic-grid-index-title"], 50, false);
             tableView.AddColumn(t["basic-grid-key-title"]);
             tableView.AddColumn(t["basic-grid-value-title"]);
             tableView.CellEdited += (o, row, col) =>
             {
                 if (row == 0) return;
-                tableView.SetValue(0, 0, t.Format("basic-grid-edited", row, col));
-                tableView.SetValue(0, 1, tableView.GetValue(row, col));
+                tableView.SetValue(0, 1, t.Format("basic-grid-edited", row, col));
+                tableView.SetValue(0, 2, tableView.GetValue(row, col));
             };
 
             layoutGridViewRow = layout.AddRowLayout();
             var linkButtonChangeColor = layoutGridViewRow.AddLinkButton(t["basic-grid-change-color"]);
             layoutGridViewRow.AddSpace();
 
-            linkButtonAdd.Click += delegate { tableView.AddRow(); };
+            linkButtonAdd.Click += delegate { tableView.AddRow(new String[]{ (++tableItemIndex).ToString(), "", "" }); };
             linkButtonRemove.Click += delegate { tableView.RemoveRow(tableView.GetSelectedRow()); };
             linkButtonChangeColor.Click += delegate
             {
-                tableView.SetTextColor(0, 0, Colors.Red);
-                tableView.SetBackgroundColor(0, 1, Colors.Green);
+                tableView.SetTextColor(0, 1, Colors.Red);
+                tableView.SetBackgroundColor(0, 2, Colors.Green);
             };
         }
 
         private int checkListTarget = 0;
+        private int tableItemIndex = 0;
     }
 }

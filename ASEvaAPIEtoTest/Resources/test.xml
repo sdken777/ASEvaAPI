@@ -120,6 +120,10 @@
     <en>Edited: ({0}, {1})</en>
     <ch>已编辑: ({0}, {1})</ch>
   </t>
+  <t id="basic-grid-index-title">
+    <en>Index</en>
+    <ch>序号</ch>
+  </t>
   <t id="basic-grid-key-title">
     <en>Key</en>
     <ch>键</ch>
