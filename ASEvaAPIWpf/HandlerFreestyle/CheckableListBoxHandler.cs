@@ -23,6 +23,7 @@ namespace ASEva.UIWpf
                 checkBox.IsEnabled = itemsEnabled == null ? true : itemsEnabled[i];
                 checkBox.IsChecked = itemsChecked == null ? false : itemsChecked[i];
                 checkBox.Margin = new Thickness(1);
+                checkBox.VerticalContentAlignment = VerticalAlignment.Center;
                 checkBox.Checked += CheckBox_Checked;
                 checkBox.Unchecked += CheckBox_Checked;
                 Items.Add(new ListBoxItem { Content = checkBox });

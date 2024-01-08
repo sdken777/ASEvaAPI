@@ -105,7 +105,7 @@ namespace ASEvaAPIEtoTest
             var linkButtonChangeColor = layoutGridViewRow.AddLinkButton(t["basic-grid-change-color"]);
             layoutGridViewRow.AddSpace();
 
-            linkButtonAdd.Click += delegate { tableView.AddRow(new String[]{ (++tableItemIndex).ToString(), "", "" }); };
+            linkButtonAdd.Click += delegate { tableView.AddRow(new String[]{ (tableItemIndex++).ToString(), "", "" }); };
             linkButtonRemove.Click += delegate { tableView.RemoveRow(tableView.GetSelectedRow()); };
             linkButtonChangeColor.Click += delegate
             {
