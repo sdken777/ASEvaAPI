@@ -17,6 +17,11 @@ namespace ASEva.UIGtk
         public TextTableViewBackendGtk(TextTableViewCallback callback) : this(new Builder("TextTableViewBackendGtk.glade"))
         {
             this.callback = callback;
+
+            treeView.Selection.Changed += delegate
+            {
+                callback.OnSelectedRowChanged();
+            };
         }
 
         private TextTableViewBackendGtk(Builder builder) : base(builder.GetRawOwnedObject("TextTableViewBackendGtk"))

@@ -19,6 +19,7 @@ namespace ASEva.UIMonoMac
 
             tableView = new NSTableView();
 			tableView.DataSource = dataSource;
+            tableView.Delegate = new TextTableDelegate(callback);
             tableView.GridStyleMask = NSTableViewGridStyle.SolidHorizontalLine | NSTableViewGridStyle.SolidVerticalLine;
             tableView.ColumnAutoresizingStyle = NSTableViewColumnAutoresizingStyle.Uniform;
             tableView.AllowsColumnReordering = false;
@@ -206,6 +207,21 @@ namespace ASEva.UIMonoMac
                 }
             }
 		}
+
+        class TextTableDelegate : NSTableViewDelegate
+        {
+            public TextTableDelegate(ASEva.UIEto.TextTableViewCallback callback)
+            {
+                this.callback = callback;
+            }
+
+            public override void SelectionDidChange(NSNotification notification)
+            {
+                callback.OnSelectedRowChanged();
+            }
+
+            private ASEva.UIEto.TextTableViewCallback callback;
+        }
 
         private ASEva.UIEto.TextTableViewCallback callback;
         private NSTableView tableView;

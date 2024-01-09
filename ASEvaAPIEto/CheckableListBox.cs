@@ -67,6 +67,19 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
+        /// (api:eto=2.13.2) Get the selected row's index, -1 means not selected
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.13.2) 获取当前选中行的序号，-1表示未选中
+        /// </summary>
+        public int SelectedRow
+        {
+            get { return GetSelectedRow(); }
+        }
+
+        /// \~English
+        /// <summary>
         /// Add check box
         /// </summary>
         /// <param name="text">Text</param>

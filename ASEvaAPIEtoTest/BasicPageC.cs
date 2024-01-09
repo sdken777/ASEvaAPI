@@ -39,7 +39,7 @@ namespace ASEvaAPIEtoTest
             for (int i = 0; i < 1000; i++) checkListBox.AddItem(t.Format("basic-list-item-short", i.ToString()), i % 2 == 0, (i / 2) % 2 == 0);
             checkListBox.ItemClicked += delegate
             {
-                var selectedIndex = checkListBox.GetSelectedRow();
+                var selectedIndex = checkListBox.SelectedRow;
                 MessageBox.Show(selectedIndex + ": " + checkListBox.GetChecked(selectedIndex));
             };
 
@@ -94,19 +94,22 @@ namespace ASEvaAPIEtoTest
             tableView.AddColumn(t["basic-grid-index-title"], 50, false);
             tableView.AddColumn(t["basic-grid-key-title"]);
             tableView.AddColumn(t["basic-grid-value-title"]);
-            tableView.CellEdited += (o, row, col) =>
-            {
-                if (row == 0) return;
-                tableView.SetValue(0, 1, t.Format("basic-grid-edited", row, col));
-                tableView.SetValue(0, 2, tableView.GetValue(row, col));
-            };
 
             layoutGridViewRow = layout.AddRowLayout();
             var linkButtonChangeColor = layoutGridViewRow.AddLinkButton(t["basic-grid-change-color"]);
             layoutGridViewRow.AddSpace();
+            var labelChangedRow = layoutGridViewRow.AddLabel("");
+
+            tableView.SelectedRowsChanged += delegate { labelChangedRow.Text = tableView.SelectedRow.ToString(); };
+            tableView.CellEdited += (o, e) =>
+            {
+                if (e.Row == 0) return;
+                tableView.SetValue(0, 1, t.Format("basic-grid-edited", e.Row, e.Column));
+                tableView.SetValue(0, 2, tableView.GetValue(e.Row, e.Column));
+            };
 
             linkButtonAdd.Click += delegate { tableView.AddRow(new String[]{ (tableItemIndex++).ToString(), "", "" }); };
-            linkButtonRemove.Click += delegate { tableView.RemoveRow(tableView.GetSelectedRow()); };
+            linkButtonRemove.Click += delegate { tableView.RemoveRow(tableView.SelectedRow); };
             linkButtonChangeColor.Click += delegate
             {
                 tableView.SetTextColor(0, 1, Colors.Red);

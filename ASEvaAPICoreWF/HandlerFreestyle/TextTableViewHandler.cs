@@ -30,10 +30,16 @@ namespace ASEva.UICoreWF
             AllowUserToResizeColumns = true;
             AllowUserToResizeRows = false;
             RowHeadersVisible = false;
+            RowTemplate.Height = (int)(Pixel.Scale * 20);
 
             CellEndEdit += (o, e) =>
             {
                 callback.OnCellEdited(e.RowIndex, e.ColumnIndex);
+            };
+
+            SelectionChanged += delegate
+            {
+                callback.OnSelectedRowChanged();
             };
         }
 
