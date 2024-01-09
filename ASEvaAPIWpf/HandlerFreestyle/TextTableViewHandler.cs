@@ -27,6 +27,11 @@ namespace ASEva.UIWpf
             CanUserReorderColumns = false;
             CanUserResizeRows = false;
             CanUserSortColumns = false;
+
+            SelectionChanged += delegate
+            {
+                callback.OnSelectedRowChanged();
+            };
         }
 
         public void AddColumn(string title, int logicalWidth, bool editable)

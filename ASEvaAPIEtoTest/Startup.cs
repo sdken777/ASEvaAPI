@@ -14,7 +14,7 @@ namespace ASEvaAPIEtoTest
 
             var layout = this.SetContentAsRowLayout();
             var optionsLayout = layout.AddTableLayout(true);
-            layout.AddButton("OK").Click += delegate { this.Close(); };
+            layout.AddButton("OK", false, 80).Click += delegate { this.Close(); };
 
             var row = optionsLayout.AddRow(true);
             row.AddLabel("Language: ");
