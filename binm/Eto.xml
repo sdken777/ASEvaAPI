@@ -1650,8 +1650,7 @@
         </member>
         <member name="M:Eto.Drawing.Color.Blend(Eto.Drawing.Color,Eto.Drawing.Color,System.Single)">
             <summary>
-            Blends the <paramref name="blendColor"/> onto the specified <paramref name="baseColor"/>. Ignores the alpha component and uses
-            the provided blend factor.
+            Blends the <paramref name="blendColor"/> onto the specified <paramref name="baseColor"/>, including the Alpha component.
             </summary>
             <remarks>
             This computes the blended value of two colors.
@@ -1886,6 +1885,22 @@
             Converts this RGB color to the CMYK colorspace.
             </summary>
             <returns>A new ColorCMYK structure.</returns>
+        </member>
+        <member name="T:Eto.Drawing.Color.IHandler">
+            <summary>
+            Handler interface for <see cref="T:Eto.Drawing.Color"/>
+            </summary>
+        </member>
+        <member name="M:Eto.Drawing.Color.IHandler.ModifyComponent(System.Object,System.Nullable{System.Single},System.Nullable{System.Single},System.Nullable{System.Single},System.Nullable{System.Single})">
+            <summary>
+            Returns a new ControlObject with the modified RGBA values.
+            </summary>
+            <param name="controlObject">Current ControlObject to modify</param>
+            <param name="r">Red component to set, or null to keep the same value</param>
+            <param name="g">Green component to set, or null to keep the same value</param>
+            <param name="b">Blue component to set, or null to keep the same value</param>
+            <param name="a">Alpha component to set, or null to keep the same value</param>
+            <returns></returns>
         </member>
         <member name="T:Eto.Drawing.ColorCMYK">
             <summary>
@@ -3061,6 +3076,34 @@
             <copyright>(c) 2014 by Curtis Wensley</copyright>
             <license type="BSD-3">See LICENSE for full terms</license>
         </member>
+        <member name="M:Eto.Drawing.Font.FromFile(System.String,System.Single,Eto.Drawing.FontDecoration)">
+            <summary>
+            Creates a new instance of the Font class with the specified font file on disk.
+            </summary>
+            <remarks>
+            Note that calling this multiple times for the same file may cause additional overhead or unpredictable results, 
+            so you should keep a copy of it in memory when you want to use it.
+            </remarks>
+            <param name="fileName">Path to the font file to load</param>
+            <param name="size">Size of the font, in points</param>
+            <param name="decoration">Docorations to apply to the font</param>
+            <returns>A new instance of the Font object</returns>
+            <seealso cref="M:Eto.Drawing.FontTypeface.#ctor(System.String)"/>
+        </member>
+        <member name="M:Eto.Drawing.Font.FromStream(System.IO.Stream,System.Single,Eto.Drawing.FontDecoration)">
+            <summary>
+            Creates a new instance of the Font class from the specified stream.
+            </summary>
+            <remarks>
+            Note that calling this multiple times for the same stream may cause additional overhead or unpredictable results, 
+            so you should keep a copy of it in memory when you want to use it.
+            </remarks>
+            <param name="stream">Stream to a font file to load</param>
+            <param name="size">Size of the font, in points</param>
+            <param name="decoration">Decorations to apply to the font</param>
+            <returns>A new instance of the Font object</returns>
+            <seealso cref="M:Eto.Drawing.FontTypeface.#ctor(System.IO.Stream)"/>
+        </member>
         <member name="M:Eto.Drawing.Font.#ctor(System.String,System.Single,Eto.Drawing.FontStyle,Eto.Drawing.FontDecoration)">
             <summary>
             Creates a new instance of the Font class with a specified <paramref name="family"/>, <paramref name="size"/>, and <paramref name="style"/>
@@ -3517,6 +3560,58 @@
             Gets an enumeration of the one or more supported typefaces for this font family
             </summary>
         </member>
+        <member name="M:Eto.Drawing.FontFamily.FromFiles(System.String[])">
+            <summary>
+            Creates a new instance of the FontFamily class with the specified font files.
+            </summary>
+            <remarks>
+            All font files specified must be a part of the same typographical font family.
+            
+            Also, calling this multiple times for the same streams may cause additional overhead or unpredictable results, 
+            so you should keep a copy of it in memory when you want to use it.
+            </remarks>
+            <param name="fileNames">Path to the file(s) to include in this font family</param>
+            <returns>A new instance of the FontFamily class</returns>
+        </member>
+        <member name="M:Eto.Drawing.FontFamily.FromFiles(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new instance of the FontFamily class with the specified font files.
+            </summary>
+            <remarks>
+            All font files specified must be a part of the same typographical font family.
+            
+            Also, calling this multiple times for the same streams may cause additional overhead or unpredictable results, 
+            so you should keep a copy of it in memory when you want to use it.
+            </remarks>
+            <param name="fileNames">Path to the file(s) to include in this font family</param>
+            <returns>A new instance of the FontFamily class</returns>
+        </member>
+        <member name="M:Eto.Drawing.FontFamily.FromStreams(System.IO.Stream[])">
+            <summary>
+            Creates a new instance of the FontFamily class with the specified font file streams.
+            </summary>
+            <remarks>
+            All font files specified must be a part of the same typographical font family.
+            
+            Also, calling this multiple times for the same streams may cause additional overhead or unpredictable results, 
+            so you should keep a copy of it in memory when you want to use it.
+            </remarks>
+            <param name="streams">Streams of the font file(s) to include in this font family</param>
+            <returns>A new instance of the FontFamily class</returns>
+        </member>
+        <member name="M:Eto.Drawing.FontFamily.FromStreams(System.Collections.Generic.IEnumerable{System.IO.Stream})">
+            <summary>
+            Creates a new instance of the FontFamily class with the specified font file streams.
+            </summary>
+            <remarks>
+            All font files specified must be a part of the same typographical font family.
+            
+            Also, calling this multiple times for the same streams may cause additional overhead or unpredictable results, 
+            so you should keep a copy of it in memory when you want to use it.
+            </remarks>
+            <param name="streams">Streams of the font file(s) to include in this font family</param>
+            <returns>A new instance of the FontFamily class</returns>
+        </member>
         <member name="M:Eto.Drawing.FontFamily.#ctor(Eto.Drawing.FontFamily.IHandler)">
             <summary>
             Initializes a new instance of the FontFamily class with the specified handler
@@ -3615,6 +3710,18 @@
             Creates a new instance of a font family with a given name
             </summary>
             <param name="familyName">Name of the font family to create this instance for</param>
+        </member>
+        <member name="M:Eto.Drawing.FontFamily.IHandler.CreateFromFiles(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new instance of a font family with the given file names.
+            </summary>
+            <param name="fileNames">Paths to the font files to include in this FontFamily</param>
+        </member>
+        <member name="M:Eto.Drawing.FontFamily.IHandler.CreateFromStreams(System.Collections.Generic.IEnumerable{System.IO.Stream})">
+            <summary>
+            Creates a new instance of a font family with the given font file streams.
+            </summary>
+            <param name="streams">Streams to each of the font files to include in this FontFamily</param>
         </member>
         <member name="T:Eto.Drawing.Fonts">
             <summary>
@@ -3784,6 +3891,28 @@
             <param name="family">Family this typeface is part of</param>
             <param name="handler">Handler to use for this typeface instance</param>
         </member>
+        <member name="M:Eto.Drawing.FontTypeface.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the FontTypeface from the specified font file on disk.
+            </summary>
+            <remarks>
+            Note that calling this multiple times for the same file may cause additional overhead or unpredictable results, 
+            so you should keep a copy of it in memory when you want to use it.
+            </remarks>
+            <param name="fileName">Path to the font file to load</param>
+            <seealso cref="M:Eto.Drawing.FontFamily.FromFiles(System.Collections.Generic.IEnumerable{System.String})"/>
+        </member>
+        <member name="M:Eto.Drawing.FontTypeface.#ctor(System.IO.Stream)">
+            <summary>
+            Creates a new instance of the FontTypeface from a font in the specified stream.
+            </summary>
+            <remarks>
+            Note that calling this multiple times for the same stream may cause additional overhead or unpredictable results, 
+            so you should keep a copy of it in memory when you want to use it.
+            </remarks>
+            <param name="stream">Stream to a font file to load</param>
+            <seealso cref="M:Eto.Drawing.FontFamily.FromStreams(System.Collections.Generic.IEnumerable{System.IO.Stream})"/>
+        </member>
         <member name="M:Eto.Drawing.FontTypeface.ToString">
             <summary>
             Gets a string representation of this typeface
@@ -3892,6 +4021,35 @@
             <summary>
             Gets a value indicating that this font is a symbol font and not generally used for text
             </summary>
+        </member>
+        <member name="P:Eto.Drawing.FontTypeface.IHandler.Family">
+            <summary>
+            Gets the FontFamily associated with this typeface
+            </summary>
+        </member>
+        <member name="M:Eto.Drawing.FontTypeface.IHandler.Create(Eto.Drawing.FontFamily)">
+            <summary>
+            Called when creating a FontTypeface for the specified FontFamily
+            </summary>
+            <param name="family">FontFamily this typeface was created for</param>
+        </member>
+        <member name="M:Eto.Drawing.FontTypeface.IHandler.Create(System.IO.Stream)">
+            <summary>
+            Called when creating a FontTypeface for the specified font file stream.
+            </summary>
+            <remarks>
+            Note that the Family must not be null after this call.
+            </remarks>
+            <param name="stream">Stream of the font file to load in this typeface</param>
+        </member>
+        <member name="M:Eto.Drawing.FontTypeface.IHandler.Create(System.String)">
+            <summary>
+            Called when creating a FontTypeface for the specified font file name.
+            </summary>
+            <remarks>
+            Note that the Family must not be null after this call.
+            </remarks>
+            <param name="fileName">Path to the font file to load in this typeface</param>
         </member>
         <member name="M:Eto.Drawing.FontTypeface.IHandler.HasCharacterRanges(System.Collections.Generic.IEnumerable{Eto.Forms.Range{System.Int32}})">
             <summary>
@@ -11640,10 +11798,10 @@
             Application settings folder to store settings or data
             </summary>
             <remarks>
-            This will return a different folder, depending on the platform:
-              OS X:    ~/Library/Application Settings/[Name Of Application]
-              Windows: [User's Home]/AppSettings
-              Linux:   ~/.config
+            This will return a different folder, depending on the platform: <br/>
+              OS X:    ~/Library/Application Support/ <br/>
+              Windows: %APPDATA% [User's Home]/Appdata/Roaming <br/>
+              Linux:   ~/.config <br/>
             </remarks>
         </member>
         <member name="F:Eto.EtoSpecialFolder.ApplicationResources">
@@ -11651,8 +11809,8 @@
             The application resources.path
             </summary>
             <remarks>
-            In OS X, this will be the .app bunldle's resource path.  Other platforms
-            will typically return the same path as the current executable file
+            In OS X, this will be the .app bundle's resource path.  Other platforms
+            will typically return the same path as the current executable file.
             </remarks>
         </member>
         <member name="F:Eto.EtoSpecialFolder.Documents">
@@ -11673,6 +11831,10 @@
             <summary>
             Gets the user's downloads folder
             </summary>
+            <remarks>
+            Note that for GTK on Windows, this will *always* return "[User's Home]/Downloads",
+            regardless of what the user's actual download path is.
+            </remarks>
         </member>
         <member name="T:Eto.EtoEnvironment">
             <summary>
@@ -12217,6 +12379,22 @@
             </summary>
             <param name="e">Event arguments</param>
         </member>
+        <member name="F:Eto.Forms.Application.IsActiveChangedEvent">
+            <summary>
+            Identifier for handlers when attaching the <see cref="E:Eto.Forms.Application.IsActiveChanged"/> event
+            </summary>
+        </member>
+        <member name="E:Eto.Forms.Application.IsActiveChanged">
+            <summary>
+            Occurs when the <see cref="P:Eto.Forms.Application.IsActive"/> property is changed, which tracks whether the application is currently active or not.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Application.OnIsActiveChanged(System.EventArgs)">
+            <summary>
+            Raises the <see cref="E:Eto.Forms.Application.IsActiveChanged"/> event
+            </summary>
+            <param name="e">Event arguments</param>
+        </member>
         <member name="P:Eto.Forms.Application.MainForm">
             <summary>
             Gets or sets the main form for your application.
@@ -12397,6 +12575,12 @@
             </remarks>
             <value>The badge label.</value>
         </member>
+        <member name="P:Eto.Forms.Application.IsActive">
+            <summary>
+            Gets a value indicating that the application is currently the active application.
+            </summary>
+            <seealso cref="E:Eto.Forms.Application.IsActiveChanged"/>
+        </member>
         <member name="M:Eto.Forms.Application.RunIteration">
             <summary>
             Advanced. Runs an iteration of the main UI loop when you are blocking the UI thread with logic.
@@ -12453,6 +12637,11 @@
             Raises the notification activated event.
             </summary>
         </member>
+        <member name="M:Eto.Forms.Application.ICallback.OnIsActiveChanged(Eto.Forms.Application,System.EventArgs)">
+            <summary>
+            Raises the IsActiveChanged event.
+            </summary>
+        </member>
         <member name="T:Eto.Forms.Application.Callback">
             <summary>
             Callback implementation for the <see cref="T:Eto.Forms.Application"/> class
@@ -12476,6 +12665,11 @@
         <member name="M:Eto.Forms.Application.Callback.OnNotificationActivated(Eto.Forms.Application,Eto.Forms.NotificationEventArgs)">
             <summary>
             Raises the notification activated event.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Application.Callback.OnIsActiveChanged(Eto.Forms.Application,System.EventArgs)">
+            <summary>
+            Raises the IsActiveChanged event.
             </summary>
         </member>
         <member name="T:Eto.Forms.Application.IHandler">
@@ -12579,6 +12773,11 @@
             <remarks>
             This is not recommended to use and you should use asynchronous calls instead via Task.Run or threads.
             </remarks>
+        </member>
+        <member name="P:Eto.Forms.Application.IHandler.IsActive">
+            <summary>
+            Gets a value indicating that the application is currently the active application
+            </summary>
         </member>
         <member name="T:Eto.Forms.BindingExtensions">
             <summary>
@@ -13076,6 +13275,18 @@
             <summary>
             Gets the collection of bindings that are attached to this widget
             </summary>
+        </member>
+        <member name="P:Eto.Forms.BindableWidget.IsDataContextChanging">
+            <summary>
+            Gets a value indicating that the <see cref="P:Eto.Forms.BindableWidget.DataContext"/> property is changing.
+            </summary>
+            <remarks>
+            This can be used to determine when to allow certain logic during the update of the data context.
+            
+            It is used to disable binding setters on the model when the data context changes so that a binding
+            does not cause the view model to be updated when the state hasn't been fully set yet.
+            </remarks>
+            <value><c>true</c> if the DataContext is currently changing, <c>false</c> otherwise.</value>
         </member>
         <member name="M:Eto.Forms.BindableWidget.Unbind">
             <summary>
@@ -14016,6 +14227,18 @@
             For example, a Control may return the data context of a parent, if it is not set explicitly.
             </remarks>
         </member>
+        <member name="P:Eto.Forms.IBindable.IsDataContextChanging">
+            <summary>
+            Gets a value indicating that the <see cref="P:Eto.Forms.IBindable.DataContext"/> property is changing.
+            </summary>
+            <remarks>
+            This can be used to determine when to allow certain logic during the update of the data context.
+            
+            It is used to disable binding setters on the model when the data context changes so that a binding
+            does not cause the view model to be updated when the state hasn't been fully set yet.
+            </remarks>
+            <value><c>true</c> if the DataContext is currently changing, <c>false</c> otherwise.</value>
+        </member>
         <member name="E:Eto.Forms.IBindable.DataContextChanged">
             <summary>
             Event to handle when the <see cref="P:Eto.Forms.IBindable.DataContext"/> has changed
@@ -14457,8 +14680,38 @@
         </member>
         <member name="P:Eto.Forms.ObjectBinding`2.DataItem">
             <summary>
-            Gets the object to get/set the values using the <see cref="P:Eto.Forms.ObjectBinding`2.InnerBinding"/>
+            Gets or sets the object to get/set the values using the <see cref="P:Eto.Forms.ObjectBinding`2.InnerBinding"/>
             </summary>
+            <remarks>
+            This uses <see cref="P:Eto.Forms.ObjectBinding`2.GetDataItem"/> if set, otherwise it will use the set value. 
+            Setting the value explicitly will set <see cref="P:Eto.Forms.ObjectBinding`2.GetDataItem"/> to null.
+            </remarks>
+        </member>
+        <member name="P:Eto.Forms.ObjectBinding`2.GetDataItem">
+            <summary>
+            Gets or sets a delegate used to get the current <see cref="P:Eto.Forms.ObjectBinding`2.DataItem"/> value instead of storing the value in this binding.
+            </summary>
+            <remarks>
+            This is used so that all bindings using a DataContext will be updated with the correct value as soon as the DataContext is set.
+            For example, if updating one binding would trigger the setter of a secondary binding that hasn't been updated with the new value yet
+            it would inadvertently change the DataContext even though it is now actually null.
+            
+            Use the <see cref="M:Eto.Forms.ObjectBinding`2.TriggerDataValueChanged"/> method to specify that the value returned by this delegate has changed,
+            which will cause the binding to update all of its dependants.
+            
+            Note if this is set, then it will always be used to retrieve the DataItem. If you set the DataItem directly, this will be set to null
+            and will no longer be used..
+            </remarks>
+            <value>The delegate used to get the current data item</value>
+        </member>
+        <member name="M:Eto.Forms.ObjectBinding`2.TriggerDataValueChanged">
+            <summary>
+            Triggers the <see cref="E:Eto.Forms.DirectBinding`1.DataValueChanged"/> event.
+            </summary>
+            <remarks>
+            When using the <see cref="P:Eto.Forms.ObjectBinding`2.GetDataItem"/> delegate to retrieve the value of the DataItem, you can call this method to trigger
+            that its value has been changed.
+            </remarks>
         </member>
         <member name="P:Eto.Forms.ObjectBinding`2.SettingNullValue">
             <summary>
@@ -16670,6 +16923,18 @@
             For example, a Control may return the data context of a parent, if it is not set explicitly.
             </remarks>
         </member>
+        <member name="P:Eto.Forms.Command.IsDataContextChanging">
+            <summary>
+            Gets a value indicating that the <see cref="P:Eto.Forms.Command.DataContext"/> property is changing.
+            </summary>
+            <remarks>
+            This can be used to determine when to allow certain logic during the update of the data context.
+            
+            It is used to disable binding setters on the model when the data context changes so that a binding
+            does not cause the view model to be updated when the state hasn't been fully set yet.
+            </remarks>
+            <value><c>true</c> if the DataContext is currently changing, <c>false</c> otherwise.</value>
+        </member>
         <member name="P:Eto.Forms.Command.Bindings">
             <summary>
             Gets the collection of bindings that are attached to this widget
@@ -17017,53 +17282,58 @@
         </member>
         <member name="T:Eto.Forms.ButtonImagePosition">
             <summary>
-            Button image position
+            Possible values for how images can be positioned in <see cref="T:Eto.Forms.Button"/>s.
             </summary>
-            <copyright>(c) 2012-2014 by Curtis Wensley</copyright>
-            <license type="BSD-3">See LICENSE for full terms</license>
         </member>
         <member name="F:Eto.Forms.ButtonImagePosition.Left">
             <summary>
-            Positions the image to the left of the text
+            Positions the image to the left of the text.
             </summary>
         </member>
         <member name="F:Eto.Forms.ButtonImagePosition.Right">
             <summary>
-            Positions the image to the right of the text
+            Positions the image to the right of the text.
             </summary>
         </member>
         <member name="F:Eto.Forms.ButtonImagePosition.Above">
             <summary>
-            Positions the image on top of the text
+            Positions the image above of the text.
             </summary>
         </member>
         <member name="F:Eto.Forms.ButtonImagePosition.Below">
             <summary>
-            Positions the image below the text
+            Positions the image below the text.
             </summary>
         </member>
         <member name="F:Eto.Forms.ButtonImagePosition.Overlay">
             <summary>
-            Positions the image behind the text
+            Positions the image behind the text.
             </summary>
         </member>
         <member name="T:Eto.Forms.Button">
             <summary>
-            Button control
+            A standard button control.
             </summary>
-            <copyright>(c) 2012-2014 by Curtis Wensley</copyright>
-            <license type="BSD-3">See LICENSE for full terms</license>
+            <example>
+            <code>
+            var myButton = new Button
+            {
+            	Text = "This is my button!"
+            };
+            myButton.Clicked += (sender, e) => { Console.WriteLine("My button was clicked."); };
+            </code> 
+            </example>
         </member>
         <member name="E:Eto.Forms.Button.Click">
             <summary>
-            Event to handle when the user clicks the button
+            Event to handle when the user clicks the button.
             </summary>
         </member>
         <member name="M:Eto.Forms.Button.OnClick(System.EventArgs)">
             <summary>
-            Raises the <see cref="E:Eto.Forms.Button.Click"/> event
+            Raises the <see cref="E:Eto.Forms.Button.Click"/> event.
             </summary>
-            <param name="e">Event arguments</param>
+            <param name="e">Event arguments.</param>
         </member>
         <member name="P:Eto.Forms.Button.Command">
             <summary>
@@ -17071,27 +17341,27 @@
             </summary>
             <remarks>
             This will invoke the specified command when the button is pressed.
-            The <see cref="M:System.Windows.Input.ICommand.CanExecute(System.Object)"/> will also used to set the enabled/disabled state of the button.
+            The <see cref="M:System.Windows.Input.ICommand.CanExecute(System.Object)"/> will also be used to set the <see cref="P:Eto.Forms.Control.Enabled"/> state of the button.
             </remarks>
             <value>The command to invoke.</value>
         </member>
         <member name="P:Eto.Forms.Button.CommandParameter">
             <summary>
-            Gets or sets the parameter to pass to the <see cref="P:Eto.Forms.Button.Command"/> when executing or determining its CanExecute state.
+            Gets or sets the parameter to pass to the <see cref="P:Eto.Forms.Button.Command"/> when executing or determining its <see cref="M:System.Windows.Input.ICommand.CanExecute(System.Object)"/> state.
             </summary>
             <value>The command parameter.</value>
         </member>
         <member name="P:Eto.Forms.Button.Image">
             <summary>
-            Gets or sets the image to display on the button
+            Gets or sets the image to display on the button.
             </summary>
-            <value>The image to display</value>
+            <value>The image to display.</value>
         </member>
         <member name="P:Eto.Forms.Button.ImagePosition">
             <summary>
-            Gets or sets the position of the image relative to the text
+            Gets or sets the position of the image relative to the text.
             </summary>
-            <value>The image position</value>
+            <value>The image position on the <see cref="T:Eto.Forms.Button"/>.</value>
         </member>
         <member name="P:Eto.Forms.Button.MinimumSize">
             <summary>
@@ -17099,7 +17369,7 @@
             </summary>
             <remarks>
             Each platform may have a different initial minimum size set for buttons to match their standard sizes.
-            
+            <br/>
             Setting this to <see cref="F:Eto.Drawing.Size.Empty"/> is useful when you want the button to shrink to fit the size
             of the specified <see cref="P:Eto.Forms.Button.Image"/> and/or <see cref="P:Eto.Forms.TextControl.Text"/>.
             </remarks>
@@ -17111,14 +17381,10 @@
             <value>The size of the control.</value>
         </member>
         <member name="P:Eto.Forms.Button.Width">
-            <summary>
-            Gets or sets the width of the control size.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:Eto.Forms.Button.Height">
-            <summary>
-            Gets or sets the height of the control size.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="M:Eto.Forms.Button.#ctor">
             <summary>
@@ -17130,9 +17396,21 @@
             Initializes a new instance of the <see cref="T:Eto.Forms.Button"/> class with the specified <paramref name="click"/> handler.
             </summary>
             <remarks>
-            This is a convenience constructor to set up the click event.
+            This is a convenience constructor to set up the <see cref="E:Eto.Forms.Button.Click"/> event.
             </remarks>
-            <param name="click">Delegate to handle when the button is clicked.</param>
+            <param name="click">Delegate to invoke when the button is clicked.</param>
+            <example>
+            The following two snippets are identical. 
+            Without convenience constructor:
+            <code>
+            var myButton = new Button() { Text = "This is my button!" };
+            myButton.Clicked += (sender, e) => { Console.WriteLine("My button was clicked."); };
+            </code>
+            With convenience constructor:
+            <code>
+            var myButton = new Button((sender, e) => Console.WriteLine("My button was clicked.") { Text = "This is my button!" };
+            </code>
+            </example>
         </member>
         <member name="M:Eto.Forms.Button.PerformClick">
             <summary>
@@ -17140,80 +17418,66 @@
             </summary>
         </member>
         <member name="M:Eto.Forms.Button.GetCallback">
-            <summary>
-            Gets an instance of an object used to perform callbacks to the widget from handler implementations
-            </summary>
-            <returns>The callback instance to use for this widget</returns>
+            <inheritdoc/>
         </member>
         <member name="T:Eto.Forms.Button.ICallback">
             <summary>
-            Callback interface for <see cref="T:Eto.Forms.Button"/>
+            Callback interface for <see cref="T:Eto.Forms.Button"/>.
             </summary>
         </member>
         <member name="M:Eto.Forms.Button.ICallback.OnClick(Eto.Forms.Button,System.EventArgs)">
             <summary>
-            Raises the click event.
+            Raises the <see cref="E:Eto.Forms.Button.Click"/> event.
             </summary>
         </member>
         <member name="T:Eto.Forms.Button.Callback">
             <summary>
-            Callback implementation for handlers of <see cref="T:Eto.Forms.Button"/>
+            Callback implementation for handlers of <see cref="T:Eto.Forms.Button"/>.
             </summary>
         </member>
         <member name="M:Eto.Forms.Button.Callback.OnClick(Eto.Forms.Button,System.EventArgs)">
-            <summary>
-            Raises the click event.
-            </summary>
+            <inheritdoc cref="M:Eto.Forms.Button.ICallback.OnClick(Eto.Forms.Button,System.EventArgs)"/>.
         </member>
         <member name="T:Eto.Forms.Button.IHandler">
             <summary>
-            Handler interface for the <see cref="T:Eto.Forms.Button"/> control
+            Handler interface for the <see cref="T:Eto.Forms.Button"/> control.
             </summary>
-            <copyright>(c) 2012-2014 by Curtis Wensley</copyright>
-            <license type="BSD-3">See LICENSE for full terms</license>
         </member>
         <member name="P:Eto.Forms.Button.IHandler.Image">
-            <summary>
-            Gets or sets the image to display on the button
-            </summary>
-            <value>The image to display</value>
+            <inheritdoc cref="P:Eto.Forms.Button.Image"/>
         </member>
         <member name="P:Eto.Forms.Button.IHandler.ImagePosition">
-            <summary>
-            Gets or sets the image position
-            </summary>
-            <value>The image position</value>
+            <inheritdoc cref="P:Eto.Forms.Button.ImagePosition"/>
         </member>
         <member name="P:Eto.Forms.Button.IHandler.MinimumSize">
-            <summary>
-            Gets or sets the minimum size for the button.
-            </summary>
-            <remarks>
-            Each platform may have a different initial minimum size set for buttons to match their standard sizes.
-            
-            Setting this to <see cref="F:Eto.Drawing.Size.Empty"/> is useful when you want the button to shrink to fit the size
-            of the specified <see cref="P:Eto.Forms.Button.IHandler.Image"/> and/or <see cref="P:Eto.Forms.TextControl.Text"/>.
-            </remarks>
+            <inheritdoc cref="P:Eto.Forms.Button.MinimumSize"/>
         </member>
         <member name="T:Eto.Forms.CalendarMode">
             <summary>
-            Mode for the <see cref="T:Eto.Forms.Calendar"/> control
+            Possible modes for the <see cref="T:Eto.Forms.Calendar"/> control.
             </summary>
         </member>
         <member name="F:Eto.Forms.CalendarMode.Single">
             <summary>
-            Calendar allows only a single date to be selected
+            Calendar allows only a single date to be selected.
             </summary>
         </member>
         <member name="F:Eto.Forms.CalendarMode.Range">
             <summary>
-            Can select a range of dates. In some cases two calendars will be shown to select the start and end dates of the range.
+            Can select a range of dates. In some platforms, two calendars will be shown to select the start and end dates of the range.
             </summary>
         </member>
         <member name="T:Eto.Forms.Calendar">
             <summary>
-            Control to show a calendar that the user can select either a single date or range of dates.
+            Control to show a Calendar, where the user can select either a single date or a range of dates.
             </summary>
+            <example>
+            Here is an example for creating a single date calendar and a calendar with a range of dates.
+            <code>
+            var singleDateCalendar = new Calendar();
+            var rangeDateCalendar = new Calendar() { Mode = CalendarMode.Range };
+            </code>
+            </example>
         </member>
         <member name="F:Eto.Forms.Calendar.SelectedDateChangedEvent">
             <summary>
@@ -17249,13 +17513,13 @@
         </member>
         <member name="P:Eto.Forms.Calendar.MinDate">
             <summary>
-            Gets or sets the minimum date entered
+            Gets or sets the minimum date entered.
             </summary>
             <value>The minimum date.</value>
         </member>
         <member name="P:Eto.Forms.Calendar.MaxDate">
             <summary>
-            Gets or sets the maximum date entered
+            Gets or sets the maximum date entered.
             </summary>
             <value>The maximum date.</value>
         </member>
@@ -17263,6 +17527,8 @@
             <summary>
             Gets or sets the selected date.
             </summary>
+            <remarks>If <see cref="P:Eto.Forms.Calendar.Mode"/> is <see cref="F:Eto.Forms.CalendarMode.Range"/>, then this will be most recent date the user selected.
+            To get the selected range, use <see cref="P:Eto.Forms.Calendar.SelectedRange"/> instead.</remarks>
             <value>The selected date.</value>
         </member>
         <member name="P:Eto.Forms.Calendar.SelectedRange">
@@ -17270,15 +17536,15 @@
             Gets or sets the selected range.
             </summary>
             <remarks>
-            The SelectedRange will have the same start/end dates when <see cref="P:Eto.Forms.Calendar.Mode"/> is <see cref="F:Eto.Forms.CalendarMode.Single"/>.
+            The <see cref="P:Eto.Forms.Calendar.SelectedRange"/> will have the same start/end dates when <see cref="P:Eto.Forms.Calendar.Mode"/> is <see cref="F:Eto.Forms.CalendarMode.Single"/>.
             </remarks>
             <value>The selected range.</value>
         </member>
         <member name="P:Eto.Forms.Calendar.Mode">
             <summary>
-            Gets or sets the mode of the calendar.
+            Gets or sets the mode of the <see cref="T:Eto.Forms.Calendar"/>.
             </summary>
-            <value>The calendar mode.</value>
+            <value>The mode of the <see cref="T:Eto.Forms.Calendar"/>.</value>
         </member>
         <member name="M:Eto.Forms.Calendar.#ctor">
             <summary>
@@ -17286,16 +17552,11 @@
             </summary>
         </member>
         <member name="M:Eto.Forms.Calendar.#ctor(Eto.Forms.Calendar.IHandler)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Eto.Forms.Calendar"/> class.
-            </summary>
+            <inheritdoc cref="M:Eto.Forms.Calendar.#ctor"/>
             <param name="handler">Handler implementation to wrap.</param>
         </member>
         <member name="M:Eto.Forms.Calendar.GetCallback">
-            <summary>
-            Gets an instance of an object used to perform callbacks to the widget from handler implementations
-            </summary>
-            <returns>The callback.</returns>
+            <inheritdoc/>
         </member>
         <member name="T:Eto.Forms.Calendar.ICallback">
             <summary>
@@ -17304,12 +17565,12 @@
         </member>
         <member name="M:Eto.Forms.Calendar.ICallback.OnSelectedDateChanged(Eto.Forms.Calendar,System.EventArgs)">
             <summary>
-            Raises the selected date changed event.
+            Raises the <see cref="E:Eto.Forms.Calendar.SelectedDateChanged"/> event.
             </summary>
         </member>
         <member name="M:Eto.Forms.Calendar.ICallback.OnSelectedRangeChanged(Eto.Forms.Calendar,System.EventArgs)">
             <summary>
-            Raises the selected range changed event.
+            Raises the <see cref="E:Eto.Forms.Calendar.SelectedRangeChanged"/> event.
             </summary>
         </member>
         <member name="T:Eto.Forms.Calendar.Callback">
@@ -17318,14 +17579,10 @@
             </summary>
         </member>
         <member name="M:Eto.Forms.Calendar.Callback.OnSelectedDateChanged(Eto.Forms.Calendar,System.EventArgs)">
-            <summary>
-            Raises the selected date changed event.
-            </summary>
+            <inheritdoc cref="M:Eto.Forms.Calendar.ICallback.OnSelectedDateChanged(Eto.Forms.Calendar,System.EventArgs)"/>
         </member>
         <member name="M:Eto.Forms.Calendar.Callback.OnSelectedRangeChanged(Eto.Forms.Calendar,System.EventArgs)">
-            <summary>
-            Raises the selected range changed event.
-            </summary>
+            <inheritdoc cref="M:Eto.Forms.Calendar.ICallback.OnSelectedRangeChanged(Eto.Forms.Calendar,System.EventArgs)"/>
         </member>
         <member name="T:Eto.Forms.Calendar.IHandler">
             <summary>
@@ -17333,94 +17590,80 @@
             </summary>
         </member>
         <member name="P:Eto.Forms.Calendar.IHandler.MinDate">
-            <summary>
-            Gets or sets the minimum date entered
-            </summary>
-            <value>The minimum date.</value>
+            <inheritdoc cref="P:Eto.Forms.Calendar.MinDate"/>
         </member>
         <member name="P:Eto.Forms.Calendar.IHandler.MaxDate">
-            <summary>
-            Gets or sets the maximum date entered
-            </summary>
-            <value>The maximum date.</value>
+            <inheritdoc cref="P:Eto.Forms.Calendar.MaxDate"/>
         </member>
         <member name="P:Eto.Forms.Calendar.IHandler.SelectedRange">
-            <summary>
-            Gets or sets the selected range.
-            </summary>
-            <remarks>
-            The SelectedRange will have the same start/end dates when <see cref="P:Eto.Forms.Calendar.IHandler.Mode"/> is <see cref="F:Eto.Forms.CalendarMode.Single"/>.
-            </remarks>
-            <value>The selected range.</value>
+            <inheritdoc cref="P:Eto.Forms.Calendar.SelectedRange"/>
         </member>
         <member name="P:Eto.Forms.Calendar.IHandler.SelectedDate">
-            <summary>
-            Gets or sets the selected date.
-            </summary>
-            <value>The selected date.</value>
+            <inheritdoc cref="P:Eto.Forms.Calendar.SelectedDate"/>
         </member>
         <member name="P:Eto.Forms.Calendar.IHandler.Mode">
-            <summary>
-            Gets or sets the mode of the calendar.
-            </summary>
-            <value>The calendar mode.</value>
+            <inheritdoc cref="P:Eto.Forms.Calendar.Mode"/>
         </member>
         <member name="T:Eto.Forms.CheckBox">
             <summary>
-            Control to show a two or three state check box
+            A control that shows a two or three state check box.
             </summary>
             <remarks>
-            Two state is either checked (true) or unchecked (false).
+            A two state check box is either checked (<see langword="true"/>) or unchecked (<see langword="false"/>).
             
-            Three state check box can also have a null value.
+            A three state check box can also have an additional <see langword="null"/> value.
             </remarks>
+            <example>
+            An example to create a two and a three state check box:
+            <code>
+            var twoStateCheckBox = new Checkbox() { Text = "Two state checkbox" };
+            var threeStateCheckBox = new Checkbox() { Text = "Three state checkbox", ThreeState = true };
+            </code>
+            </example>
         </member>
         <member name="E:Eto.Forms.CheckBox.CheckedChanged">
             <summary>
-            Occurs when <see cref="P:Eto.Forms.CheckBox.Checked"/> property is changed by the user
+            Occurs when the <see cref="P:Eto.Forms.CheckBox.Checked"/> property is changed by the user.
             </summary>
         </member>
         <member name="M:Eto.Forms.CheckBox.OnCheckedChanged(System.EventArgs)">
             <summary>
             Raises the <see cref="E:Eto.Forms.CheckBox.CheckedChanged"/> event.
             </summary>
-            <param name="e">Event arguments</param>
+            <param name="e">Event arguments.</param>
         </member>
         <member name="P:Eto.Forms.CheckBox.Checked">
             <summary>
-            Gets or sets the checked state
+            Gets or sets the checked state.
             </summary>
             <remarks>
-            When <see cref="P:Eto.Forms.CheckBox.ThreeState"/> is true, null signifies an indeterminate value.
+            When <see cref="P:Eto.Forms.CheckBox.ThreeState"/> is <see langword="true"/>, <see langword="null"/> signifies an indeterminate value.
             </remarks>
-            <value>The checked value</value>
+            <value>The checked value.</value>
         </member>
         <member name="P:Eto.Forms.CheckBox.ThreeState">
             <summary>
-            Gets or sets a value indicating whether this CheckBox allows three states: true, false, or null
+            Gets or sets a value indicating whether this <see cref="T:Eto.Forms.CheckBox"/> allows three states: <see langword="true"/>, <see langword="false"/>, or <see langword="null"/>.
             </summary>
-            <value><c>true</c> if three state; otherwise, <c>false</c>.</value>
+            <value><see langword="true"/> if this <see cref="T:Eto.Forms.CheckBox"/> allows three state; otherwise, <see langword="false"/>.</value>
         </member>
         <member name="P:Eto.Forms.CheckBox.CheckedBinding">
             <summary>
-            Gets a binding for the <see cref="P:Eto.Forms.CheckBox.Checked"/> property
+            Gets a binding for the <see cref="P:Eto.Forms.CheckBox.Checked"/> property.
             </summary>
-            <value>The binding for the checked property.</value>
+            <value>The binding for the <see cref="P:Eto.Forms.CheckBox.Checked"/> property.</value>
         </member>
         <member name="M:Eto.Forms.CheckBox.GetCallback">
-            <summary>
-            Gets an instance of an object used to perform callbacks to the widget from handler implementations
-            </summary>
-            <returns>The callback instance to use for this widget</returns>
+            <inheritdoc/>
         </member>
         <member name="T:Eto.Forms.CheckBox.ICallback">
             <summary>
-            Callback interface for the <see cref="T:Eto.Forms.CheckBox"/>
+            Callback interface for the <see cref="T:Eto.Forms.CheckBox"/>.
             </summary>
         </member>
         <member name="M:Eto.Forms.CheckBox.ICallback.OnCheckedChanged(Eto.Forms.CheckBox,System.EventArgs)">
             <summary>
-            Raises the checked changed event.
+            Raises the <see cref="E:Eto.Forms.CheckBox.CheckedChanged"/> event.
             </summary>
         </member>
         <member name="T:Eto.Forms.CheckBox.Callback">
@@ -17429,38 +17672,40 @@
             </summary>
         </member>
         <member name="M:Eto.Forms.CheckBox.Callback.OnCheckedChanged(Eto.Forms.CheckBox,System.EventArgs)">
-            <summary>
-            Raises the checked changed event.
-            </summary>
+            <inheritdoc cref="M:Eto.Forms.CheckBox.ICallback.OnCheckedChanged(Eto.Forms.CheckBox,System.EventArgs)"/>
         </member>
         <member name="T:Eto.Forms.CheckBox.IHandler">
             <summary>
-            Handler interface for the <see cref="T:Eto.Forms.CheckBox"/> control
+            Handler interface for the <see cref="T:Eto.Forms.CheckBox"/> control.
             </summary>
         </member>
         <member name="P:Eto.Forms.CheckBox.IHandler.Checked">
-            <summary>
-            Gets or sets the checked state
-            </summary>
-            <remarks>
-            When <see cref="P:Eto.Forms.CheckBox.IHandler.ThreeState"/> is true, null signifies an indeterminate value.
-            </remarks>
-            <value>The checked value</value>
+            <inheritdoc cref="P:Eto.Forms.CheckBox.Checked"/>
         </member>
         <member name="P:Eto.Forms.CheckBox.IHandler.ThreeState">
-            <summary>
-            Gets or sets a value indicating whether this CheckBox allows three states: true, false, or null
-            </summary>
-            <value><c>true</c> if three state; otherwise, <c>false</c>.</value>
+            <inheritdoc cref="P:Eto.Forms.CheckBox.ThreeState"/>
         </member>
         <member name="T:Eto.Forms.CheckBoxList">
             <summary>
-            Shows a list of check boxes.
+            A control that shows a list of check boxes.
             </summary>
             <remarks>
-            The list of items can be added manually using <see cref="P:Eto.Forms.CheckBoxList.Items"/>, or 
-            use the <see cref="P:Eto.Forms.CheckBoxList.DataStore"/> to have a dynamic list of items controlled by a custom collection.
+            The list of items can be added manually by using <see cref="P:Eto.Forms.CheckBoxList.Items"/>. 
+            Use <see cref="P:Eto.Forms.CheckBoxList.DataStore"/> to have a dynamic list of items controlled by a custom collection.
             </remarks>
+            <example>
+            This creates a list of check boxes and adds items manually:
+            <code>
+            var myCheckBoxList = new CheckBoxList();
+            myCheckBoxList.Items.Add(new ListItem { Text = "Item 1" });
+            myCheckBoxList.Items.Add(new ListItem { Text = "Item 2" });
+            </code>
+            This creates a list of check boxes and uses an external collection to control the items:
+            <code>
+            var myCustomList = new List&lt;string&gt;() { "Item 1", "Item 2" };
+            var myCheckboxList = new CheckBoxList() { DataStore = myCustomList };
+            </code>
+            </example>
         </member>
         <member name="P:Eto.Forms.CheckBoxList.ItemTextBinding">
             <summary>
@@ -17473,7 +17718,7 @@
         </member>
         <member name="P:Eto.Forms.CheckBoxList.ItemToolTipBinding">
             <summary>
-            Gets or sets the binding to get the tooltop for each check box.
+            Gets or sets the binding to get the tooltip for each check box.
             </summary>
             <value>The item tool tip binding.</value>
         </member>
@@ -17510,7 +17755,7 @@
         </member>
         <member name="P:Eto.Forms.CheckBoxList.SelectedKeys">
             <summary>
-            Gets or sets the selected key of the currently selected item using the <see cref="P:Eto.Forms.CheckBoxList.ItemKeyBinding"/>.
+            Gets or sets the selected key of the currently selected item using <see cref="P:Eto.Forms.CheckBoxList.ItemKeyBinding"/>.
             </summary>
             <value>The selected key.</value>
         </member>
@@ -17519,41 +17764,41 @@
             Gets or sets a value indicating whether this <see cref="T:Eto.Forms.CheckBoxList"/> is enabled.
             </summary>
             <remarks>
-            When the control is disabled, the user will not be able to change the selected radio button.
+            When the control is disabled, the user will not be able to change the selected check box.
             However, you can still programatically change the selection.
             </remarks>
-            <value><c>true</c> if enabled; otherwise, <c>false</c>.</value>
+            <value><see langword="true"/> if enabled; otherwise, <see langword="false"/>.</value>
         </member>
         <member name="P:Eto.Forms.CheckBoxList.SelectedValues">
             <summary>
-            Gets or sets the selected value, which is the <see cref="T:Eto.Forms.ListItem"/> or object in your custom data store.
+            Gets or sets the selected values, which are <see cref="T:Eto.Forms.ListItem"/>s or objects in your custom data store.
             </summary>
-            <value>The selected value.</value>
+            <value>The selected values.</value>
         </member>
         <member name="P:Eto.Forms.CheckBoxList.TextColor">
             <summary>
-            Gets or sets the color of the radio button text.
+            Gets or sets the color of the check box text.
             </summary>
-            <value>The color of the radio button text.</value>
+            <value>The color of the check box text.</value>
         </member>
         <member name="P:Eto.Forms.CheckBoxList.Orientation">
             <summary>
-            Gets or sets the orientation of the radio buttons.
+            Gets or sets the orientation of the check boxes.
             </summary>
-            <value>The radio button orientation.</value>
+            <value>The check box orientation.</value>
         </member>
         <member name="P:Eto.Forms.CheckBoxList.Spacing">
             <summary>
-            Gets or sets the spacing between each radio button.
+            Gets or sets the spacing between each check box.
             </summary>
-            <value>The spacing between radio buttons.</value>
+            <value>The spacing between check boxes.</value>
         </member>
         <member name="P:Eto.Forms.CheckBoxList.Items">
             <summary>
             Gets the item collection, when adding items programatically.
             </summary>
             <remarks>
-            This is used when you want to add items manually.  Use the <see cref="P:Eto.Forms.CheckBoxList.DataStore"/>
+            This is used when you want to add items manually. Use <see cref="P:Eto.Forms.CheckBoxList.DataStore"/>
             when you have an existing collection you want to bind to directly.
             </remarks>
             <value>The item collection.</value>
@@ -17633,8 +17878,14 @@
         </member>
         <member name="T:Eto.Forms.ColorPicker">
             <summary>
-            Control to show and pick a color.
+            A control to show and pick a color.
             </summary>
+            <example>
+            An example to create a <see cref="T:Eto.Forms.ColorPicker"/> which supports selecting alpha colors:  
+            <code>
+            var colorPicker = new ColorPicker() { AllowAlpha = true };
+            </code>
+            </example>
         </member>
         <member name="F:Eto.Forms.ColorPicker.ColorChangedEvent">
             <summary>
@@ -17654,19 +17905,19 @@
         </member>
         <member name="P:Eto.Forms.ColorPicker.Value">
             <summary>
-            Gets or sets the selected color value.
+            Gets or sets the selected <see cref="T:Eto.Drawing.Color"/> value.
             </summary>
-            <value>The currently selected color value.</value>
+            <value>The currently selected <see cref="T:Eto.Drawing.Color"/> value.</value>
         </member>
         <member name="P:Eto.Forms.ColorPicker.AllowAlpha">
             <summary>
-            Gets or sets a value indicating whether the user can adjust the Alpha component of the Color.
+            Gets or sets a value indicating whether the user can adjust the Alpha component of the <see cref="T:Eto.Drawing.Color"/>.
             </summary>
             <remarks>
             This may or may not be supported in all platforms (e.g. WinForms).  
             Use <see cref="P:Eto.Forms.ColorPicker.SupportsAllowAlpha"/> to determine if the current platform supports this feature.
             </remarks>
-            <value><c>true</c> to allow adjustment of alpha; otherwise, <c>false</c>.</value>
+            <value><see langword="true"/> to allow adjustment of Alpha; otherwise, <see langword="false"/>.</value>
             <seealso cref="P:Eto.Forms.ColorPicker.SupportsAllowAlpha"/>
         </member>
         <member name="P:Eto.Forms.ColorPicker.SupportsAllowAlpha">
@@ -17676,7 +17927,7 @@
             <remarks>
             If not supported, the setting will be ignored.
             </remarks>
-            <value><c>true</c> AllowAlpha is supported; otherwise, <c>false</c>.</value>
+            <value><see langword="true"/> <see cref="P:Eto.Forms.ColorPicker.AllowAlpha"/> is supported; otherwise, <see langword="false"/>.</value>
             <seealso cref="P:Eto.Forms.ColorPicker.AllowAlpha"/>
         </member>
         <member name="P:Eto.Forms.ColorPicker.ValueBinding">
@@ -17687,13 +17938,13 @@
         </member>
         <member name="M:Eto.Forms.ColorPicker.GetCallback">
             <summary>
-            Gets an instance of an object used to perform callbacks to the widget from handler implementations
+            Gets an instance of an object used to perform callbacks to the widget from handler implementations.
             </summary>
-            <returns>The callback instance to use for this widget</returns>
+            <returns>The callback instance to use for this widget.</returns>
         </member>
         <member name="T:Eto.Forms.ColorPicker.ICallback">
             <summary>
-            Callback interface for <see cref="T:Eto.Forms.ColorPicker"/>
+            A callback interface for <see cref="T:Eto.Forms.ColorPicker"/>.
             </summary>
         </member>
         <member name="M:Eto.Forms.ColorPicker.ICallback.OnColorChanged(Eto.Forms.ColorPicker,System.EventArgs)">
@@ -17703,20 +17954,16 @@
         </member>
         <member name="T:Eto.Forms.ColorPicker.Callback">
             <summary>
-            Callback implementation for handlers of <see cref="T:Eto.Forms.ColorPicker"/>
+            A callback implementation for handlers of <see cref="T:Eto.Forms.ColorPicker"/>.
             </summary>
         </member>
         <member name="M:Eto.Forms.ColorPicker.Callback.OnColorChanged(Eto.Forms.ColorPicker,System.EventArgs)">
-            <summary>
-            Raises the color changed event.
-            </summary>
+            <inheritdoc cref="M:Eto.Forms.ColorPicker.ICallback.OnColorChanged(Eto.Forms.ColorPicker,System.EventArgs)"/>
         </member>
         <member name="T:Eto.Forms.ColorPicker.IHandler">
             <summary>
-            Handler interface for the <see cref="T:Eto.Forms.ColorPicker"/> control
+            Handler interface for the <see cref="T:Eto.Forms.ColorPicker"/> control.
             </summary>
-            <copyright>(c) 2012-2014 by Curtis Wensley</copyright>
-            <license type="BSD-3">See LICENSE for full terms</license>
         </member>
         <member name="P:Eto.Forms.ColorPicker.IHandler.Color">
             <summary>
@@ -17725,30 +17972,22 @@
             <value>The selected color.</value>
         </member>
         <member name="P:Eto.Forms.ColorPicker.IHandler.AllowAlpha">
-            <summary>
-            Gets or sets a value indicating whether the user can adjust the Alpha component of the Color.
-            </summary>
-            <remarks>
-            This may or may not be supported in all platforms (e.g. WinForms).  
-            Use <see cref="P:Eto.Forms.ColorPicker.IHandler.SupportsAllowAlpha"/> to determine if the current platform supports this feature.
-            </remarks>
-            <value><c>true</c> to allow adjustment of alpha; otherwise, <c>false</c>.</value>
-            <seealso cref="P:Eto.Forms.ColorPicker.IHandler.SupportsAllowAlpha"/>
+            <inheritdoc cref="P:Eto.Forms.ColorPicker.AllowAlpha"/>
         </member>
         <member name="P:Eto.Forms.ColorPicker.IHandler.SupportsAllowAlpha">
-            <summary>
-            Gets a value indicating that the current platform supports the <see cref="P:Eto.Forms.ColorPicker.IHandler.AllowAlpha"/> property.
-            </summary>
-            <remarks>
-            If not supported, the setting will be ignored.
-            </remarks>
-            <value><c>true</c> AllowAlpha is supported; otherwise, <c>false</c>.</value>
-            <seealso cref="P:Eto.Forms.ColorPicker.IHandler.AllowAlpha"/>
+            <inheritdoc cref="P:Eto.Forms.ColorPicker.SupportsAllowAlpha"/>
         </member>
         <member name="T:Eto.Forms.ComboBox">
             <summary>
             Presents a combination of an editable text box and drop down to select from a list of items and enter text.
             </summary>
+            <example>
+            Here is a short example on how to create an autocompleting check box.
+            <code>
+            var list = new List&lt;string&gt;() { "First item", "Second item", "Third item" };
+            var comboBox = new ComboBox() { AutoComplete = true, DataStore = list }; 
+            </code>
+            </example>
         </member>
         <member name="F:Eto.Forms.ComboBox.TextChangedEvent">
             <summary>
@@ -17757,14 +17996,14 @@
         </member>
         <member name="E:Eto.Forms.ComboBox.TextChanged">
             <summary>
-            Occurs when the Text property is changed either by the user or programatically.
+            Occurs when the <see cref="P:Eto.Forms.ComboBox.Text"/> property is changed either by the user or programatically.
             </summary>
         </member>
         <member name="M:Eto.Forms.ComboBox.OnTextChanged(System.EventArgs)">
             <summary>
             Raises the <see cref="E:Eto.Forms.ComboBox.TextChanged"/> event.
             </summary>
-            <param name="e">Event arguments</param>
+            <param name="e">Event arguments.</param>
         </member>
         <member name="M:Eto.Forms.ComboBox.#ctor">
             <summary>
@@ -17773,7 +18012,7 @@
         </member>
         <member name="P:Eto.Forms.ComboBox.Text">
             <summary>
-            Gets or sets the text of the ComboBox.
+            Gets or sets the text of the combo box.
             </summary>
             <value>The text content.</value>
         </member>
@@ -17782,8 +18021,9 @@
             Gets or sets whether the user can change the text in the combo box.
             </summary>
             <remarks>
-            When <c>true</c>, the user will still be able to select/copy the text, select items from the drop down, etc.
-            To disable the control, use the <see cref="P:Eto.Forms.Control.Enabled"/> property.
+            When <see langword="true"/>, the user will still be able to select/copy the text or select items from the drop down.
+            They will only be unable to type in different text. <br/>
+            To fully disable the control, use the <see cref="P:Eto.Forms.Control.Enabled"/> property.
             </remarks>
         </member>
         <member name="P:Eto.Forms.ComboBox.AutoComplete">
@@ -17791,60 +18031,44 @@
             Gets or sets a value indicating that the text should autocomplete when the user types in a value.
             </summary>
             <remarks>
-            The autocomplete will be based off of the items in the combo box.
+            The autocomplete will be based off of the available items in the combo box.
             </remarks>
-            <value><c>true</c> to auto complete the text; otherwise, <c>false</c>.</value>
+            <value><see langword="true"/> to auto complete the text; otherwise, <see langword="false"/>.</value>
         </member>
         <member name="M:Eto.Forms.ComboBox.GetCallback">
-            <summary>
-            Gets an instance of an object used to perform callbacks to the widget from handler implementations
-            </summary>
-            <returns>The callback instance to use for this widget</returns>
+            <inheritdoc/>
         </member>
         <member name="T:Eto.Forms.ComboBox.ICallback">
             <summary>
-            Callback interface for the <see cref="T:Eto.Forms.ComboBox"/>
+            Callback interface for the <see cref="T:Eto.Forms.ComboBox"/>.
             </summary>
         </member>
         <member name="M:Eto.Forms.ComboBox.ICallback.OnTextChanged(Eto.Forms.ComboBox,System.EventArgs)">
             <summary>
-            Raises the text changed event.
+            <inheritdoc cref="M:Eto.Forms.ComboBox.OnTextChanged(System.EventArgs)" path="/summary"/>
             </summary>
         </member>
         <member name="T:Eto.Forms.ComboBox.Callback">
             <summary>
-            Callback implementation for handlers of <see cref="T:Eto.Forms.ListControl"/>
+            Callback implementation for handlers of <see cref="T:Eto.Forms.ComboBox"/>.
             </summary>
         </member>
         <member name="M:Eto.Forms.ComboBox.Callback.OnTextChanged(Eto.Forms.ComboBox,System.EventArgs)">
-            <summary>
-            Raises the text changed event.
-            </summary>
+            <inheritdoc cref="M:Eto.Forms.ComboBox.ICallback.OnTextChanged(Eto.Forms.ComboBox,System.EventArgs)"/>
         </member>
         <member name="T:Eto.Forms.ComboBox.IHandler">
             <summary>
-            Handler interface for the <see cref="T:Eto.Forms.ComboBox"/>
+            Handler interface for the <see cref="T:Eto.Forms.ComboBox"/>.
             </summary>
         </member>
         <member name="P:Eto.Forms.ComboBox.IHandler.Text">
-            <summary>
-            Gets or sets the text of the ComboBox.
-            </summary>
-            <value>The text content.</value>
+            <inheritdoc cref="P:Eto.Forms.ComboBox.Text"/>
         </member>
         <member name="P:Eto.Forms.ComboBox.IHandler.ReadOnly">
-            <summary>
-            Gets or sets the editable of ComboBox.
-            </summary>
+            <inheritdoc cref="P:Eto.Forms.ComboBox.ReadOnly"/>
         </member>
         <member name="P:Eto.Forms.ComboBox.IHandler.AutoComplete">
-            <summary>
-            Gets or sets a value indicating that the text should autocomplete when the user types in a value.
-            </summary>
-            <remarks>
-            The autocomplete will be based off of the items in the combo box.
-            </remarks>
-            <value><c>true</c> to auto complete the text; otherwise, <c>false</c>.</value>
+            <inheritdoc cref="P:Eto.Forms.ComboBox.AutoComplete"/>
         </member>
         <member name="T:Eto.Forms.CommonControl">
             <summary>
@@ -18339,6 +18563,26 @@
             </summary>
             <param name="e">Event arguments</param>
         </member>
+        <member name="F:Eto.Forms.Control.DragEndEvent">
+            <summary>
+            Event identifier for handlers when attaching the <see cref="E:Eto.Forms.Control.DragEnd"/> event
+            </summary>
+        </member>
+        <member name="E:Eto.Forms.Control.DragEnd">
+            <summary>
+            Occurs for a source control after a call to <see cref="M:Eto.Forms.Control.DoDragDrop(Eto.Forms.DataObject,Eto.Forms.DragEffects,Eto.Drawing.Image,Eto.Drawing.PointF)"/> when the drag operation has ended.
+            The <see cref="P:Eto.Forms.DragEventArgs.Effects"/> is the final <see cref="T:Eto.Forms.DragEffects"/> used at the drop destination.
+            </summary>
+            <remarks>
+            For controls that you are dragging from this event is useful to know what to do with the dragged content after it is dropped in a different control or application.
+            </remarks>
+        </member>
+        <member name="M:Eto.Forms.Control.OnDragEnd(Eto.Forms.DragEventArgs)">
+            <summary>
+            Raises the <see cref="E:Eto.Forms.Control.DragEnd"/> event.
+            </summary>
+            <param name="e">Event arguments</param>
+        </member>
         <member name="F:Eto.Forms.Control.EnabledChangedEvent">
             <summary>
             Event identifier for handlers when attaching the <see cref="E:Eto.Forms.Control.EnabledChanged"/> event
@@ -18401,6 +18645,19 @@
             </remarks>
             <param name="rect">Rectangle to repaint</param>
             <param name="invalidateChildren"><c>True</c> to invalidate all children, <c>false</c> to only invalidate the container</param>
+        </member>
+        <member name="M:Eto.Forms.Control.UpdateLayout">
+            <summary>
+            Updates the layout of this control if necessary.
+            </summary>
+            <remarks>
+            This will ensure the control has had all of its layout applied so you can use its position and size right after this call.
+            Most platforms (except WinForms) use a deferred layout system so that after adding your control to the form dynamically it won't
+            get laid out until the next idle loop.
+            This is useful when you need to know the dimensions of the control immediately.
+            Note that this can be an expensive operation, so it is recommended to only call this method when necessary and after all of the
+            controls have been added/updated.
+            </remarks>
         </member>
         <member name="P:Eto.Forms.Control.Size">
             <summary>
@@ -18703,6 +18960,10 @@
             <summary>
             Starts drag operation using this control as drag source.
             </summary>
+            <remarks>
+            This method can be blocking on some platforms (Wpf, WinForms), and non-blocking on others (Mac, Gtk).
+            Use the <see cref="E:Eto.Forms.Control.DragEnd"/> event to determine when the drag operation is completed and get its resulting DragEffects.
+            </remarks>
             <param name="data">Drag data.</param>
             <param name="allowedEffects">Allowed action.</param>
         </member>
@@ -18710,6 +18971,10 @@
             <summary>
             Starts drag operation using this control as drag source.
             </summary>
+            <remarks>
+            This method can be blocking on some platforms (Wpf, WinForms), and non-blocking on others (Mac, Gtk).
+            Use the <see cref="E:Eto.Forms.Control.DragEnd"/> event to determine when the drag operation is completed and get its resulting DragEffects.
+            </remarks>
             <param name="data">Drag data.</param>
             <param name="allowedEffects">Allowed effects.</param>
             <param name="image">Custom drag image</param>
@@ -18722,6 +18987,11 @@
             <remarks>
             This applies the cascading styles to the control and any of its children.
             </remarks>
+        </member>
+        <member name="M:Eto.Forms.Control.TriggerStyleChanged">
+            <summary>
+            Triggers the StyleChanged event and re-applies the styles to this control and its children.
+            </summary>
         </member>
         <member name="M:Eto.Forms.Control.OnApplyCascadingStyles">
             <summary>
@@ -18777,7 +19047,7 @@
         </member>
         <member name="M:Eto.Forms.Control.GetCallback">
             <summary>
-            Gets an instance of an object used to perform callbacks to the widget from handler implementations
+            Gets an instance of an object used to perform callbacks to the widget from handler implementations.
             </summary>
             <returns>The callback instance to use for this widget</returns>
         </member>
@@ -18874,6 +19144,11 @@
         <member name="M:Eto.Forms.Control.ICallback.OnDragLeave(Eto.Forms.Control,Eto.Forms.DragEventArgs)">
             <summary>
             Raises the DragLeave event.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Control.ICallback.OnDragEnd(Eto.Forms.Control,Eto.Forms.DragEventArgs)">
+            <summary>
+            Raises the DragEnd event.
             </summary>
         </member>
         <member name="M:Eto.Forms.Control.ICallback.OnEnabledChanged(Eto.Forms.Control,System.EventArgs)">
@@ -18974,6 +19249,11 @@
         <member name="M:Eto.Forms.Control.Callback.OnDragLeave(Eto.Forms.Control,Eto.Forms.DragEventArgs)">
             <summary>
             Raises the DragLeave event.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Control.Callback.OnDragEnd(Eto.Forms.Control,Eto.Forms.DragEventArgs)">
+            <summary>
+            Raises the DragEnd event.
             </summary>
         </member>
         <member name="M:Eto.Forms.Control.Callback.OnEnabledChanged(Eto.Forms.Control,System.EventArgs)">
@@ -19260,57 +19540,102 @@
             <param name="availableSize">The available size to determine the preferred size</param>
             <returns>The preferred size this control would like to be, which can be larger than the specified <paramref name="availableSize" />.</returns>
         </member>
+        <member name="M:Eto.Forms.Control.IHandler.UpdateLayout">
+            <summary>
+            Updates the layout of this control if necessary.
+            </summary>
+            <remarks>
+            This will ensure the control has had all of its layout applied so you can use its position and size right after this call.
+            Most platforms (except WinForms) use a deferred layout system so that after adding your control to the form dynamically it won't
+            get laid out until the next idle loop.
+            This is useful when you need to know the dimensions of the control immediately.
+            </remarks>
+        </member>
+        <member name="T:Eto.Forms.DataStoreExtensions">
+            <summary>
+            Extension methods for the <see cref="T:Eto.Forms.IDataStore`1"/>
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.DataStoreExtensions.GetExpandedRowCount``1(Eto.Forms.IDataStore{``0},System.Int32)">
+            <summary>
+            Gets the expanded row count of the specified IDataStore&lt;ITreeItem&gt;, taking into account the expanded state of each child.
+            </summary>
+            <remarks>
+            Note that this has to traverse the entire tree up to the <paramref name="index"/>, so it will get slower for large trees
+            </remarks>
+            <typeparam name="T">Type of item</typeparam>
+            <param name="store">The data store to count the rows</param>
+            <param name="index">The index in <paramref name="store"/> to count up to, or -1 to count all rows</param>
+            <returns>The total row count including the count of any expanded nodes</returns>
+            <exception cref="T:System.ArgumentNullException">When store is null</exception>
+        </member>
+        <member name="M:Eto.Forms.DataStoreExtensions.GetRowOfIndexPath``1(Eto.Forms.IDataStore{``0},System.Int32[])">
+            <summary>
+            Gets the row of a path of indecies for each level in a IDataStore&lt;ITreeItem&gt;
+            </summary>
+            <typeparam name="T">Type of item</typeparam>
+            <param name="store">The data store to get the row.</param>
+            <param name="indexPath">Array of indexes leading to the item to get the row for.</param>
+            <returns>Row index where the specified index path points to</returns>
+            <exception cref="T:System.ArgumentNullException">When store is null</exception>
+        </member>
         <member name="T:Eto.Forms.DateTimePickerMode">
             <summary>
-            Modes for the <see cref="T:Eto.Forms.DateTimePicker"/>
+            Available modes for how a <see cref="T:Eto.Forms.DateTimePicker"/> can be displayed.
             </summary>
         </member>
         <member name="F:Eto.Forms.DateTimePickerMode.Date">
             <summary>
-            Show only the date component
+            Only the date component will be shown.
             </summary>
         </member>
         <member name="F:Eto.Forms.DateTimePickerMode.Time">
             <summary>
-            Show only the time component
+            Only the time component will be shown.
             </summary>
         </member>
         <member name="F:Eto.Forms.DateTimePickerMode.DateTime">
             <summary>
-            Show both the date and time components
+            Both the date and time components will be shown.
             </summary>
         </member>
         <member name="T:Eto.Forms.DateTimePicker">
             <summary>
-            Date/time picker control to enter a date and/or time value
+            A control that allows the user to select a date and/or a time.
             </summary>
+            <example>
+            Here is an example that creates a date/time picker, where the user will only be able to choose between two dates:
+            <code>
+            var dateTimePicker = new DateTimePicker () { MinDate = DateTime.Now, MaxDate = DateTime.Now.AddYears(2) }; 
+            </code>
+            </example>
         </member>
         <member name="E:Eto.Forms.DateTimePicker.ValueChanged">
             <summary>
-            Occurs when the <see cref="P:Eto.Forms.DateTimePicker.Value"/> property has changed by the user
+            Occurs when the <see cref="P:Eto.Forms.DateTimePicker.Value"/> property has changed by the user.
             </summary>
         </member>
         <member name="M:Eto.Forms.DateTimePicker.OnValueChanged(System.EventArgs)">
             <summary>
             Raises the <see cref="E:Eto.Forms.DateTimePicker.ValueChanged"/> event.
             </summary>
-            <param name="e">Event arguments</param>
+            <param name="e">Event arguments.</param>
         </member>
         <member name="P:Eto.Forms.DateTimePicker.MinDate">
             <summary>
-            Gets or sets the minimum date entered
+            Gets or sets the minimum date that is allowed to be entered.
             </summary>
             <value>The minimum date.</value>
         </member>
         <member name="P:Eto.Forms.DateTimePicker.MaxDate">
             <summary>
-            Gets or sets the maximum date entered
+            Gets or sets the maximum date that is allowed to be entered.
             </summary>
             <value>The maximum date.</value>
         </member>
         <member name="P:Eto.Forms.DateTimePicker.Value">
             <summary>
-            Gets or sets the value of the date/time picker. Null to display blank or with a unchecked checkbox.
+            Gets or sets the value of the date/time picker. <see langword="null"/> to display blank or with a unchecked checkbox.
             </summary>
             <value>The current value.</value>
         </member>
@@ -19322,18 +19647,12 @@
         </member>
         <member name="P:Eto.Forms.DateTimePicker.Mode">
             <summary>
-            Gets or sets the mode of the date/time picker.
+            Gets or sets the mode of how the date/time picker will be displayed.
             </summary>
             <value>The picker mode.</value>
         </member>
         <member name="P:Eto.Forms.DateTimePicker.TextColor">
-            <summary>
-            Gets or sets the color of the text.
-            </summary>
-            <remarks>
-            By default, the text will get a color based on the user's theme. However, this is usually black.
-            </remarks>
-            <value>The color of the text.</value>
+            <inheritdoc cref="P:Eto.Forms.TextControl.TextColor"/>
         </member>
         <member name="P:Eto.Forms.DateTimePicker.ShowBorder">
             <summary>
@@ -19341,16 +19660,12 @@
             </summary>
             <remarks>
             This is a hint to omit the border of the control and show it as plainly as possible.
-            
             Typically used when you want to show the control within a cell of the <see cref="T:Eto.Forms.GridView"/>.
             </remarks>
-            <value><c>true</c> to show the control border; otherwise, <c>false</c>.</value>
+            <value><see langword="true"/> to show the control border; otherwise, <see langword="false"/>.</value>
         </member>
         <member name="M:Eto.Forms.DateTimePicker.GetCallback">
-            <summary>
-            Gets an instance of an object used to perform callbacks to the widget from handler implementations
-            </summary>
-            <returns>The callback instance to use for this widget</returns>
+            <inheritdoc/>
         </member>
         <member name="T:Eto.Forms.DateTimePicker.ICallback">
             <summary>
@@ -19358,9 +19673,7 @@
             </summary>
         </member>
         <member name="M:Eto.Forms.DateTimePicker.ICallback.OnValueChanged(Eto.Forms.DateTimePicker,System.EventArgs)">
-            <summary>
-            Raises the value changed event.
-            </summary>
+            <summary><inheritdoc cref="M:Eto.Forms.DateTimePicker.OnValueChanged(System.EventArgs)"/></summary>
         </member>
         <member name="T:Eto.Forms.DateTimePicker.Callback">
             <summary>
@@ -19368,9 +19681,7 @@
             </summary>
         </member>
         <member name="M:Eto.Forms.DateTimePicker.Callback.OnValueChanged(Eto.Forms.DateTimePicker,System.EventArgs)">
-            <summary>
-            Raises the value changed event.
-            </summary>
+            <inheritdoc cref="M:Eto.Forms.DateTimePicker.ICallback.OnValueChanged(Eto.Forms.DateTimePicker,System.EventArgs)"/>
         </member>
         <member name="T:Eto.Forms.DateTimePicker.IHandler">
             <summary>
@@ -19378,48 +19689,22 @@
             </summary>
         </member>
         <member name="P:Eto.Forms.DateTimePicker.IHandler.Value">
-            <summary>
-            Gets or sets the value of the date/time picker
-            </summary>
-            <value>The current value.</value>
+            <inheritdoc cref="P:Eto.Forms.DateTimePicker.Value"/>
         </member>
         <member name="P:Eto.Forms.DateTimePicker.IHandler.MinDate">
-            <summary>
-            Gets or sets the minimum date entered
-            </summary>
-            <value>The minimum date.</value>
+            <inheritdoc cref="P:Eto.Forms.DateTimePicker.MinDate"/>
         </member>
         <member name="P:Eto.Forms.DateTimePicker.IHandler.MaxDate">
-            <summary>
-            Gets or sets the maximum date entered
-            </summary>
-            <value>The maximum date.</value>
+            <inheritdoc cref="P:Eto.Forms.DateTimePicker.MaxDate"/>
         </member>
         <member name="P:Eto.Forms.DateTimePicker.IHandler.Mode">
-            <summary>
-            Gets or sets the mode of the date/time picker.
-            </summary>
-            <value>The picker mode.</value>
+            <inheritdoc cref="P:Eto.Forms.DateTimePicker.Mode"/>
         </member>
         <member name="P:Eto.Forms.DateTimePicker.IHandler.TextColor">
-            <summary>
-            Gets or sets the color of the text.
-            </summary>
-            <remarks>
-            By default, the text will get a color based on the user's theme. However, this is usually black.
-            </remarks>
-            <value>The color of the text.</value>
+            <inheritdoc cref="P:Eto.Forms.DateTimePicker.TextColor"/>
         </member>
         <member name="P:Eto.Forms.DateTimePicker.IHandler.ShowBorder">
-            <summary>
-            Gets or sets a value indicating whether to show the control's border.
-            </summary>
-            <remarks>
-            This is a hint to omit the border of the control and show it as plainly as possible.
-            
-            Typically used when you want to show the control within a cell of the <see cref="T:Eto.Forms.GridView"/>.
-            </remarks>
-            <value><c>true</c> to show the control border; otherwise, <c>false</c>.</value>
+            <inheritdoc cref="P:Eto.Forms.DateTimePicker.ShowBorder"/>
         </member>
         <member name="T:Eto.Forms.DocumentPageEventArgs">
             <summary>
@@ -20042,12 +20327,12 @@
         </member>
         <member name="T:Eto.Forms.DropDownFormatEventArgs">
             <summary>
-            Arguments for formatting items in a DropDown using the <see cref="E:Eto.Forms.DropDown.FormatItem"/> event.
+            Arguments for formatting items in a drop down using the <see cref="E:Eto.Forms.DropDown.FormatItem"/> event.
             </summary>
         </member>
         <member name="P:Eto.Forms.DropDownFormatEventArgs.Font">
             <summary>
-            Gets or sets the font to use for this item
+            Gets or sets the font to use for this item.
             </summary>
         </member>
         <member name="P:Eto.Forms.DropDownFormatEventArgs.IsFontSet">
@@ -20060,26 +20345,33 @@
         </member>
         <member name="P:Eto.Forms.DropDownFormatEventArgs.Item">
             <summary>
-            Item to specify the format for
+            Item to specify the format for.
             </summary>
         </member>
         <member name="P:Eto.Forms.DropDownFormatEventArgs.Row">
             <summary>
-            Row number in the list of items to format for
+            Row number in the list of items to format for.
             </summary>
         </member>
         <member name="M:Eto.Forms.DropDownFormatEventArgs.#ctor(System.Object,System.Int32,Eto.Drawing.Font)">
             <summary>
-            Initializes a new instance of the DropDownFormatEventArgs class
+            Initializes a new instance of the DropDownFormatEventArgs class.
             </summary>
-            <param name="item">Item to format</param>
-            <param name="row">Row of the item to format</param>
-            <param name="font">Font to use if no other is specified</param>
+            <param name="item">Item to format.</param>
+            <param name="row">Row of the item to format.</param>
+            <param name="font">Font to use if no other is specified.</param>
         </member>
         <member name="T:Eto.Forms.DropDown">
             <summary>
-            Presents a drop down to select from a list of items
+            Presents a drop down to select from a list of items.
             </summary>
+            <example>
+            Here is a short example on how to create a drop down with its items being based off a list:
+            <code>
+            var list = new List&lt;string&gt;() { "First item", "Second item", "Third item" };
+            var dropdown = new DropDown() { DataStore = list };
+            </code>
+            </example>
         </member>
         <member name="M:Eto.Forms.DropDown.#ctor">
             <summary>
@@ -20091,7 +20383,7 @@
             Gets or sets the binding to get the image for each item. 
             </summary>
             <remarks>
-            By default this looks for the "Image" property of the item, and also works if you use <see cref="T:Eto.Forms.ImageListItem"/>.
+            By default this looks for the <code>Image</code> property of the item, and also works if you use <see cref="T:Eto.Forms.ImageListItem"/>.
             
             This will be ignored when creating a <see cref="T:Eto.Forms.ComboBox"/>, and is only supported with the <see cref="T:Eto.Forms.DropDown"/> directly.
             </remarks>
@@ -20103,14 +20395,13 @@
             </summary>
             <remarks>
             This is a hint to omit the border of the control and show it as plainly as possible.
-            
             Typically used when you want to show the control within a cell of the <see cref="T:Eto.Forms.GridView"/>.
             </remarks>
-            <value><c>true</c> to show the control border; otherwise, <c>false</c>.</value>
+            <value><see langword="true"/> to show the control border; otherwise, <see langword="false"/>.</value>
         </member>
         <member name="F:Eto.Forms.DropDown.DropDownOpeningEvent">
             <summary>
-            Event identifier for handlers when attaching the <see cref="E:Eto.Forms.DropDown.DropDownOpening"/> event
+            Event identifier for handlers when attaching the <see cref="E:Eto.Forms.DropDown.DropDownOpening"/> event.
             </summary>
         </member>
         <member name="E:Eto.Forms.DropDown.DropDownOpening">
@@ -20125,7 +20416,7 @@
             <summary>
             Raises the <see cref="E:Eto.Forms.DropDown.DropDownOpening"/> event.
             </summary>
-            <param name="e">Event arguments</param>
+            <param name="e">Event arguments.</param>
         </member>
         <member name="F:Eto.Forms.DropDown.DropDownClosedEvent">
             <summary>
@@ -20139,9 +20430,9 @@
         </member>
         <member name="M:Eto.Forms.DropDown.OnDropDownClosed(System.EventArgs)">
             <summary>
-            Raises the <see cref="E:Eto.Forms.DropDown.DropDownClosed"/> event
+            Raises the <see cref="E:Eto.Forms.DropDown.DropDownClosed"/> event.
             </summary>
-            <param name="e">Event arguments</param>
+            <param name="e">Event arguments.</param>
         </member>
         <member name="F:Eto.Forms.DropDown.FormatItemEvent">
             <summary>
@@ -20157,81 +20448,58 @@
             <summary>
             Raises the <see cref="E:Eto.Forms.DropDown.FormatItem"/> event.
             </summary>
-            <param name="e">Event Arguments</param>
+            <param name="e">Event Arguments.</param>
         </member>
         <member name="M:Eto.Forms.DropDown.GetCallback">
-            <summary>
-            Gets the callback.
-            </summary>
-            <returns>The callback.</returns>
+            <inheritdoc/>
         </member>
         <member name="T:Eto.Forms.DropDown.ICallback">
             <summary>
-            Callback interface for the DropDown
+            Callback interface for the <see cref="T:Eto.Forms.DropDown"/> control.
             </summary>
         </member>
         <member name="M:Eto.Forms.DropDown.ICallback.OnDropDownOpening(Eto.Forms.DropDown,System.EventArgs)">
             <summary>
-            Raises the <see cref="E:Eto.Forms.DropDown.DropDownOpening"/> event.
+            <inheritdoc cref="M:Eto.Forms.DropDown.OnDropDownOpening(System.EventArgs)"/>
             </summary>
-            <param name="widget">Widget to raise the event</param>
-            <param name="e">Event arguments</param>
+            <param name="widget">Widget to raise the event.</param>
+            <param name="e">Event arguments.</param>
         </member>
         <member name="M:Eto.Forms.DropDown.ICallback.OnDropDownClosed(Eto.Forms.DropDown,System.EventArgs)">
             <summary>
-            Raises the <see cref="E:Eto.Forms.DropDown.DropDownClosed"/> event
+            <inheritdoc cref="M:Eto.Forms.DropDown.OnDropDownClosed(System.EventArgs)"/>
             </summary>
-            <param name="widget">Widget to raise the event</param>
-            <param name="e">Event arguments</param>
+            <param name="widget">Widget to raise the event.</param>
+            <param name="e">Event arguments.</param>
         </member>
         <member name="M:Eto.Forms.DropDown.ICallback.OnFormatItem(Eto.Forms.DropDown,Eto.Forms.DropDownFormatEventArgs)">
             <summary>
-            Raises the <see cref="E:Eto.Forms.DropDown.FormatItem"/> event.
+            <inheritdoc cref="E:Eto.Forms.DropDown.FormatItem"/>
             </summary>
-            <param name="widget">Widget to raise the event</param>
-            <param name="e">Event Arguments</param>
+            <param name="widget">Widget to raise the event.</param>
+            <param name="e">Event Arguments.</param>
         </member>
         <member name="T:Eto.Forms.DropDown.Callback">
             <summary>
-            Callback implementation for the DropDown
+            Callback implementation for the <see cref="T:Eto.Forms.DropDown"/> control.
             </summary>
         </member>
         <member name="M:Eto.Forms.DropDown.Callback.OnDropDownOpening(Eto.Forms.DropDown,System.EventArgs)">
-            <summary>
-            Raises the <see cref="E:Eto.Forms.DropDown.DropDownOpening"/> event.
-            </summary>
-            <param name="widget">Widget to raise the event</param>
-            <param name="e">Event arguments</param>
+            <inheritdoc cref="M:Eto.Forms.DropDown.ICallback.OnDropDownOpening(Eto.Forms.DropDown,System.EventArgs)"/>
         </member>
         <member name="M:Eto.Forms.DropDown.Callback.OnDropDownClosed(Eto.Forms.DropDown,System.EventArgs)">
-            <summary>
-            Raises the <see cref="E:Eto.Forms.DropDown.DropDownClosed"/> event
-            </summary>
-            <param name="widget">Widget to raise the event</param>
-            <param name="e">Event arguments</param>
+            <inheritdoc cref="M:Eto.Forms.DropDown.ICallback.OnDropDownClosed(Eto.Forms.DropDown,System.EventArgs)"/>
         </member>
         <member name="M:Eto.Forms.DropDown.Callback.OnFormatItem(Eto.Forms.DropDown,Eto.Forms.DropDownFormatEventArgs)">
-            <summary>
-            Raises the <see cref="E:Eto.Forms.DropDown.FormatItem"/> event.
-            </summary>
-            <param name="widget">Widget to raise the event</param>
-            <param name="e">Event Arguments</param>
+            /// <inheritdoc cref="M:Eto.Forms.DropDown.ICallback.OnFormatItem(Eto.Forms.DropDown,Eto.Forms.DropDownFormatEventArgs)"/>
         </member>
         <member name="T:Eto.Forms.DropDown.IHandler">
             <summary>
-            Handler interface for the <see cref="T:Eto.Forms.DropDown"/>
+            Handler interface for the <see cref="T:Eto.Forms.DropDown"/> control.
             </summary>
         </member>
         <member name="P:Eto.Forms.DropDown.IHandler.ShowBorder">
-            <summary>
-            Gets or sets a value indicating whether to show the control's border.
-            </summary>
-            <remarks>
-            This is a hint to omit the border of the control and show it as plainly as possible.
-            
-            Typically used when you want to show the control within a cell of the <see cref="T:Eto.Forms.GridView"/>.
-            </remarks>
-            <value><c>true</c> to show the control border; otherwise, <c>false</c>.</value>
+            <inheritdoc cref="P:Eto.Forms.DropDown.ShowBorder"/>
         </member>
         <member name="T:Eto.Forms.EnumCheckBoxList`1">
             <summary>
@@ -20991,6 +21259,38 @@
             Occurs when the <see cref="P:Eto.Forms.Grid.SelectedRows"/> is changed.
             </summary>
         </member>
+        <member name="F:Eto.Forms.Grid.ColumnOrderChangedEvent">
+            <summary>
+            Event identifier for handlers when attaching the <see cref="E:Eto.Forms.Grid.ColumnOrderChanged"/> event
+            </summary>
+        </member>
+        <member name="E:Eto.Forms.Grid.ColumnOrderChanged">
+            <summary>
+            Event to handle when a column has been reordered by the user.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Grid.OnColumnOrderChanged(Eto.Forms.GridColumnEventArgs)">
+            <summary>
+            Raises the <see cref="E:Eto.Forms.Grid.ColumnOrderChanged"/> event
+            </summary>
+            <param name="e">Event arguments</param>
+        </member>
+        <member name="F:Eto.Forms.Grid.ColumnWidthChangedEvent">
+            <summary>
+            Event identifier for handlers when attaching the <see cref="E:Eto.Forms.Grid.ColumnWidthChanged"/> event
+            </summary>
+        </member>
+        <member name="E:Eto.Forms.Grid.ColumnWidthChanged">
+            <summary>
+            Event to handle when a column width has been changed.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Grid.OnColumnWidthChanged(Eto.Forms.GridColumnEventArgs)">
+            <summary>
+            Raises the <see cref="E:Eto.Forms.Grid.ColumnWidthChanged"/> event
+            </summary>
+            <param name="e">Event arguments</param>
+        </member>
         <member name="M:Eto.Forms.Grid.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Eto.Forms.Grid"/> class.
@@ -21187,6 +21487,16 @@
             Raises the cell formatting event.
             </summary>
         </member>
+        <member name="M:Eto.Forms.Grid.ICallback.OnColumnOrderChanged(Eto.Forms.Grid,Eto.Forms.GridColumnEventArgs)">
+            <summary>
+            Raises the column display index changed event.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Grid.ICallback.OnColumnWidthChanged(Eto.Forms.Grid,Eto.Forms.GridColumnEventArgs)">
+            <summary>
+            Raises the column width changed event.
+            </summary>
+        </member>
         <member name="T:Eto.Forms.Grid.Callback">
             <summary>
             Callbacks for instances of <see cref="T:Eto.Forms.Grid"/>
@@ -21225,6 +21535,16 @@
         <member name="M:Eto.Forms.Grid.Callback.OnCellFormatting(Eto.Forms.Grid,Eto.Forms.GridCellFormatEventArgs)">
             <summary>
             Raises the cell formatting event.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Grid.Callback.OnColumnOrderChanged(Eto.Forms.Grid,Eto.Forms.GridColumnEventArgs)">
+            <summary>
+            Raises the column display index changed event.
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Grid.Callback.OnColumnWidthChanged(Eto.Forms.Grid,Eto.Forms.GridColumnEventArgs)">
+            <summary>
+            Raises the column width changed event.
             </summary>
         </member>
         <member name="T:Eto.Forms.Grid.IHandler">
@@ -21358,6 +21678,18 @@
             </summary>
             <value>The header text.</value>
         </member>
+        <member name="P:Eto.Forms.GridColumn.HeaderToolTip">
+            <summary>
+            Gets or sets the tooltip to display when the user moves the cursor over the header of this column.
+            </summary>
+            <value>The tooltip for the header of this column</value>
+        </member>
+        <member name="P:Eto.Forms.GridColumn.CellToolTipBinding">
+            <summary>
+            Gets or sets the binding to use to get the tooltip for each cell in this column.
+            </summary>
+            <value>The binding to get the tooltip for cells in this column</value>
+        </member>
         <member name="P:Eto.Forms.GridColumn.Resizable">
             <summary>
             Gets or sets a value indicating whether the column is resizable by the user.
@@ -21430,6 +21762,14 @@
             Gets or sets the maximum width for the column
             </summary>
             <value>The column maximum width</value>
+        </member>
+        <member name="P:Eto.Forms.GridColumn.DisplayIndex">
+            <summary>
+            Gets or sets the index of the column in display order, or -1 to use the order they are added.
+            </summary>
+            <remarks>
+            This value must be within the range of the total number of columns that are added.
+            </remarks>
         </member>
         <member name="T:Eto.Forms.GridColumn.IHandler">
             <summary>
@@ -21514,6 +21854,26 @@
             Gets or sets the maximum width for the column
             </summary>
             <value>The column maximum width</value>
+        </member>
+        <member name="P:Eto.Forms.GridColumn.IHandler.DisplayIndex">
+            <summary>
+            Gets or sets the index of the column in display order, or -1 to use the order they are added.
+            </summary>
+            <remarks>
+            This value must be within the range of the total number of columns that are added.
+            </remarks>
+        </member>
+        <member name="P:Eto.Forms.GridColumn.IHandler.HeaderToolTip">
+            <summary>
+            Gets or sets the tooltip to display when the user moves the cursor over the header of this column.
+            </summary>
+            <value>The tooltip for the header of this column</value>
+        </member>
+        <member name="P:Eto.Forms.GridColumn.IHandler.CellToolTipBinding">
+            <summary>
+            Gets or sets the binding to use to get the tooltip for each cell in this column.
+            </summary>
+            <value>The binding to get the tooltip for cells in this column</value>
         </member>
         <member name="T:Eto.Forms.GridItem">
             <summary>
@@ -21606,27 +21966,43 @@
         </member>
         <member name="P:Eto.Forms.GridCell.Item">
             <summary>
-            Gets the item associated with the row of the cell.
+            Gets the item associated with the row of the cell, or null if there is no row.
             </summary>
             <value>The row item.</value>
         </member>
         <member name="P:Eto.Forms.GridCell.RowIndex">
             <summary>
-            Gets the index of the row.
+            Gets the index of the row, or -1 if there is no row at this location.
             </summary>
             <value>The index of the row.</value>
         </member>
         <member name="P:Eto.Forms.GridCell.Column">
             <summary>
-            Gets the column of the cell, or null
+            Gets the column of the cell, or null if there is no column at the specified location.
             </summary>
             <value>The column.</value>
         </member>
         <member name="P:Eto.Forms.GridCell.ColumnIndex">
             <summary>
-            Gets the index of the column.
+            Gets the index of the column, or -1 if there is no column at the specified location.
             </summary>
             <value>The index of the column.</value>
+        </member>
+        <member name="P:Eto.Forms.GridCell.Type">
+            <summary>
+            Gets the type of the cell
+            </summary>
+            <value>Type of the cell</value>
+        </member>
+        <member name="M:Eto.Forms.GridCell.#ctor(Eto.Forms.GridColumn,System.Int32,System.Int32,Eto.Forms.GridCellType,System.Object)">
+            <summary>
+            Initializes a new instance of the GridCell class
+            </summary>
+            <param name="column">Column instance, or null if no column (e.g. empty area to right of columns)</param>
+            <param name="columnIndex">Index of the column for this cell, or -1 if no column (e.g. empty area to right of columns)</param>
+            <param name="rowIndex">Index of the row at the cell, or -1 if no row (e.g. header or empty area)</param>
+            <param name="type">Type of the cell, e.g. header, data, none</param>
+            <param name="item">Item instance for this row</param>
         </member>
         <member name="T:Eto.Forms.GridViewDragInfo">
             <summary>
@@ -21810,12 +22186,12 @@
         </member>
         <member name="M:Eto.Forms.GridView.GetCellAt(Eto.Drawing.PointF)">
             <summary>
-            Gets the node at a specified location from the origin of the control
+            Gets the cell information at a specified location from the origin of the control
             </summary>
             <remarks>
-            Useful for determining which node is under the mouse cursor.
+            Useful for determining which cell is under the mouse cursor.
             </remarks>
-            <returns>The item from the data store that is displayed at the specified location</returns>
+            <returns>The cell information at the specified location</returns>
             <param name="location">Point to find the node</param>
         </member>
         <member name="P:Eto.Forms.GridView.SelectionPreserver">
@@ -21900,17 +22276,15 @@
             </remarks>
             <param name="rows">Rows to update.</param>
         </member>
-        <member name="M:Eto.Forms.GridView.IHandler.GetCellAt(Eto.Drawing.PointF,System.Int32@,System.Int32@)">
+        <member name="M:Eto.Forms.GridView.IHandler.GetCellAt(Eto.Drawing.PointF)">
             <summary>
-            Gets the node at a specified point from the origin of the control
+            Gets the cell information at a specified location from the origin of the control
             </summary>
             <remarks>
-            Useful for determining which node is under the mouse cursor.
+            Useful for determining which cell is under the mouse cursor.
             </remarks>
-            <returns>The item from the data store that is displayed at the specified location</returns>
+            <returns>The cell information at the specified location</returns>
             <param name="location">Point to find the node</param>
-            <param name="row">Row under the specified location</param>
-            <param name="column">Column under the specified location</param>
         </member>
         <member name="M:Eto.Forms.GridView.IHandler.GetDragInfo(Eto.Forms.DragEventArgs)">
             <summary>
@@ -27215,6 +27589,9 @@
         <member name="M:Eto.Forms.ThemedControlHandler`3.Print">
             <inheritdoc />
         </member>
+        <member name="M:Eto.Forms.ThemedControlHandler`3.UpdateLayout">
+            <inheritdoc />
+        </member>
         <member name="T:Eto.Forms.ToggleButton">
             <summary>
             Specialized Button that can be toggled on or off.
@@ -27451,6 +27828,26 @@
             </summary>
             <param name="item">Item that triggered the event.</param>
         </member>
+        <member name="T:Eto.Forms.GridCellType">
+            <summary>
+            Enumeration of the types of grid cells
+            </summary>
+        </member>
+        <member name="F:Eto.Forms.GridCellType.None">
+            <summary>
+            Empty part of the grid
+            </summary>
+        </member>
+        <member name="F:Eto.Forms.GridCellType.Data">
+            <summary>
+            Cell containing the data, that is when the row and column are a valid value.
+            </summary>
+        </member>
+        <member name="F:Eto.Forms.GridCellType.ColumnHeader">
+            <summary>
+            Column header
+            </summary>
+        </member>
         <member name="T:Eto.Forms.TreeGridCell">
             <summary>
             Information of a cell in the <see cref="T:Eto.Forms.TreeGridView"/>
@@ -27458,21 +27855,36 @@
         </member>
         <member name="P:Eto.Forms.TreeGridCell.Item">
             <summary>
-            Gets the item associated with the row of the cell.
+            Gets the item associated with the row of the cell, or null if there is no item.
             </summary>
             <value>The row item.</value>
         </member>
         <member name="P:Eto.Forms.TreeGridCell.Column">
             <summary>
-            Gets the column of the cell, or null
+            Gets the column of the cell, or null if there is no column at the specified location.
             </summary>
             <value>The column.</value>
         </member>
         <member name="P:Eto.Forms.TreeGridCell.ColumnIndex">
             <summary>
-            Gets the index of the column.
+            Gets the index of the column, or -1 if there is no column at the specified location.
             </summary>
             <value>The index of the column.</value>
+        </member>
+        <member name="P:Eto.Forms.TreeGridCell.Type">
+            <summary>
+            Gets the type of the cell
+            </summary>
+            <value>Type of the cell</value>
+        </member>
+        <member name="M:Eto.Forms.TreeGridCell.#ctor(Eto.Forms.GridColumn,System.Int32,Eto.Forms.GridCellType,System.Object)">
+            <summary>
+            Initializes a new instance of the TreeGridCell class
+            </summary>
+            <param name="column">Column instance, or null if no column (e.g. empty area to right of columns)</param>
+            <param name="columnIndex">Index of the column for this cell, or -1 if no column (e.g. empty area to right of columns)</param>
+            <param name="type">Type of the cell, e.g. header, data, none</param>
+            <param name="item">Item instance for this row</param>
         </member>
         <member name="T:Eto.Forms.GridDragPosition">
             <summary>
@@ -27742,12 +28154,12 @@
         </member>
         <member name="M:Eto.Forms.TreeGridView.GetCellAt(Eto.Drawing.PointF)">
             <summary>
-            Gets the node at a specified location from the origin of the control
+            Gets the cell information at a specified location from the origin of the control
             </summary>
             <remarks>
             Useful for determining which node is under the mouse cursor.
             </remarks>
-            <returns>The item from the data store that is displayed at the specified location</returns>
+            <returns>The cell information at the specified location</returns>
             <param name="location">Point to find the node</param>
         </member>
         <member name="M:Eto.Forms.TreeGridView.GetDragInfo(Eto.Forms.DragEventArgs)">
@@ -27874,13 +28286,12 @@
             <param name="item">Item to refresh</param>
             <param name="reloadChildren">Reload children of the specified item</param>
         </member>
-        <member name="M:Eto.Forms.TreeGridView.IHandler.GetCellAt(Eto.Drawing.PointF,System.Int32@)">
+        <member name="M:Eto.Forms.TreeGridView.IHandler.GetCellAt(Eto.Drawing.PointF)">
             <summary>
-            Gets the item and column of a location in the control.
+            Gets the cell information at a specified location from the origin of the control
             </summary>
-            <returns>The item from the data store that is displayed at the specified location</returns>
+            <returns>The cell information at the specified location</returns>
             <param name="location">Point to find the node</param>
-            <param name="column">Column at the location, or -1 if no column (e.g. at the end of the row)</param>
         </member>
         <member name="M:Eto.Forms.TreeGridView.IHandler.GetDragInfo(Eto.Forms.DragEventArgs)">
             <summary>
@@ -32244,7 +32655,7 @@
         </member>
         <member name="T:Eto.Forms.VerticalAlignment">
             <summary>
-            Horizontal alignment for controls
+            Vertical alignment for controls
             </summary>
         </member>
         <member name="F:Eto.Forms.VerticalAlignment.Top">
@@ -33744,6 +34155,12 @@
             Initializes a new instance of the <see cref="T:Eto.Forms.CheckMenuItem"/> class.
             </summary>
         </member>
+        <member name="M:Eto.Forms.CheckMenuItem.#ctor(System.EventHandler{System.EventArgs})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Eto.Forms.CheckMenuItem"/> class with the specified <paramref name="checkedChanged"/> handler.
+            </summary>
+            <param name="checkedChanged">Event handler to call when the <see cref="P:Eto.Forms.CheckMenuItem.Checked"/> property changes.</param>
+        </member>
         <member name="M:Eto.Forms.CheckMenuItem.#ctor(Eto.Forms.CheckCommand)">
             <summary>
             Initializes a new instance of the <see cref="T:Eto.Forms.CheckMenuItem"/> class with the specified command.
@@ -34460,6 +34877,14 @@
             </summary>
             <remarks>
             This performs the click by calling <see cref="M:Eto.Forms.MenuItem.OnClick(System.EventArgs)"/> which triggers the <see cref="E:Eto.Forms.MenuItem.Click"/> event.
+            </remarks>
+        </member>
+        <member name="M:Eto.Forms.MenuItem.PerformValidate">
+            <summary>
+            Executes the <see cref="M:Eto.Forms.MenuItem.OnValidate(System.EventArgs)"/> for this item.
+            </summary>
+            <remarks>
+            This allows you to manually validate the menu item to determine its enabled state.
             </remarks>
         </member>
         <member name="T:Eto.Forms.MenuItem.ICallback">
@@ -38535,6 +38960,39 @@
             </summary>
             <value><c>true</c> if checked; otherwise, <c>false</c>.</value>
         </member>
+        <member name="T:Eto.Forms.DropDownToolItem">
+            <summary>
+            Tool item to display a drop-down menu
+            </summary>
+        </member>
+        <member name="P:Eto.Forms.DropDownToolItem.ShowDropArrow">
+            <summary>
+            Gets or sets a value indicating that the drop arrow should be shown
+            </summary>
+            <value><c>true</c> to show the drop arrow, <c>false</c> to hide it</value>
+        </member>
+        <member name="M:Eto.Forms.DropDownToolItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Eto.Forms.DropDownToolItem"/> class.
+            </summary>
+        </member>
+        <member name="P:Eto.Forms.DropDownToolItem.Items">
+            <summary>
+            Gets the collection of menu items
+            </summary>
+            <value>The menu items</value>
+        </member>
+        <member name="T:Eto.Forms.DropDownToolItem.IHandler">
+            <summary>
+            Handler for the <see cref="T:Eto.Forms.DropDownToolItem"/>.
+            </summary>
+        </member>
+        <member name="P:Eto.Forms.DropDownToolItem.IHandler.ShowDropArrow">
+            <summary>
+            Gets or sets a value indicating that the drop arrow should be shown
+            </summary>
+            <value><c>true</c> to show the drop arrow, <c>false</c> to hide it</value>
+        </member>
         <member name="T:Eto.Forms.RadioToolItem">
             <summary>
             Tool item that can be toggled on or off.
@@ -39485,6 +39943,16 @@
             </summary>
             <param name="e">Event arguments</param>
         </member>
+        <member name="M:Eto.Forms.Window.FromPoint(Eto.Drawing.PointF)">
+            <summary>
+            Gets the window at the specified logical screen point.
+            </summary>
+            <remarks>
+            This should get the first Eto window directly underneath the specified point.
+            </remarks>
+            <param name="point">Point to find the window at</param>
+            <returns>Instance of a Window (Form or Dialog) underneath the specified point, or null if none found</returns>
+        </member>
         <member name="M:Eto.Forms.Window.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Eto.Forms.Window"/> class.
@@ -39511,7 +39979,8 @@
             Gets or sets the location of the window
             </summary>
             <remarks>
-            Note that in multi-monitor setups, the origin of the location is at the upper-left of <see cref="P:Eto.Forms.Screen.PrimaryScreen"/>
+            Note that in multi-monitor setups, the origin of the location is at the upper-left of <see cref="P:Eto.Forms.Screen.PrimaryScreen"/>. <br/>
+            Also note, that on Linux systems running GTK via Wayland, this will always point to <c>0, 0</c>, and setting it to different values will have no effect.
             </remarks>
         </member>
         <member name="P:Eto.Forms.Window.Bounds">
@@ -39606,6 +40075,16 @@
             This may hide or disable the maximize button on the title bar.
             </remarks>
             <value><c>true</c> if minimizable; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Eto.Forms.Window.Closeable">
+            <summary>
+            Gets or sets a value indicating whether the close button should be shown. Defaults to <c>true</c>
+            </summary>
+            <remarks>
+            Note that on some platforms (e.g. Windows) this also hides the system menu and minimize/maximize buttons.
+            Note that this does not prevent the window from being closed, to do that use the <see cref="E:Eto.Forms.Window.Closing"/> event.
+            </remarks>
+            <value><c>true</c> to show the close button (and in some platforms the system menu), <c>false</c> to hide them.</value>
         </member>
         <member name="P:Eto.Forms.Window.ShowInTaskbar">
             <summary>
@@ -39802,7 +40281,8 @@
             Gets or sets the location of the window
             </summary>
             <remarks>
-            Note that in multi-monitor setups, the origin of the location is at the upper-left of <see cref="P:Eto.Forms.Screen.PrimaryScreen"/>
+            Note that in multi-monitor setups, the origin of the location is at the upper-left of <see cref="P:Eto.Forms.Screen.PrimaryScreen"/> <br/>
+            Also note, that on Linux systems running GTK via Wayland, this will always point to <c>0, 0</c>, and setting it to different values will have no effect.
             </remarks>
         </member>
         <member name="P:Eto.Forms.Window.IHandler.Opacity">
@@ -39872,6 +40352,16 @@
             This may hide or disable the maximize button on the title bar.
             </remarks>
             <value><c>true</c> if minimizable; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Eto.Forms.Window.IHandler.Closeable">
+            <summary>
+            Gets or sets a value indicating whether the close button should be shown. Defaults to <c>true</c>
+            </summary>
+            <remarks>
+            Note that on some platforms (e.g. Windows) this also hides the system menu if <see cref="P:Eto.Forms.Window.IHandler.Minimizable"/> and <see cref="P:Eto.Forms.Window.IHandler.Maximizable"/> are also false.
+            Note that this does not prevent the window from being closed, to do that use the <see cref="E:Eto.Forms.Window.Closing"/> event.
+            </remarks>
+            <value><c>true</c> to show the close button (and in some platforms the system menu), <c>false</c> to hide them.</value>
         </member>
         <member name="P:Eto.Forms.Window.IHandler.ShowInTaskbar">
             <summary>
@@ -39957,6 +40447,21 @@
             Note that if you set both dimensions of the <see cref="T:Eto.Drawing.Size"/> and/or <see cref="P:Eto.Forms.Container.ClientSize"/>, this will be set to false.
             </remarks>
             <value><c>true</c> to auto size the window when its content changes, <c>false</c> to only auto size when first created</value>
+        </member>
+        <member name="T:Eto.Forms.Window.IWindowHandler">
+            <summary>
+            Handler interface for static methods of <see cref="T:Eto.Forms.Window"/>
+            </summary>
+        </member>
+        <member name="M:Eto.Forms.Window.IWindowHandler.FromPoint(Eto.Drawing.PointF)">
+            <summary>
+            Gets the window at the specified logical screen point.
+            </summary>
+            <remarks>
+            This should get the first Eto window directly underneath the specified point.
+            </remarks>
+            <param name="point">Point to find the window at</param>
+            <returns>Instance of a Window (Form or Dialog) underneath the specified point, or null if none found</returns>
         </member>
         <member name="T:Eto.HandlerAttribute">
             <summary>
@@ -40989,49 +41494,34 @@
             Type of the GTK platform
             </summary>
         </member>
-        <member name="F:Eto.Platforms.Gtk2">
-            <summary>
-            Type of the GTK 2 platform
-            </summary>
-        </member>
-        <member name="F:Eto.Platforms.Gtk3">
-            <summary>
-            Type of the GTK 3 platform
-            </summary>
-        </member>
-        <member name="F:Eto.Platforms.Mac">
-            <summary>
-            Type of the Mac OS X platform
-            </summary>
-        </member>
         <member name="F:Eto.Platforms.Mac64">
             <summary>
-            Type of the Mac OS X platform on 64-bit mono
-            </summary>
-        </member>
-        <member name="F:Eto.Platforms.XamMac">
-            <summary>
-            Type of the Xamarin.Mac v1 OS X platform
+            Type of the macOS platform on .NET 6+ or mono
             </summary>
         </member>
         <member name="F:Eto.Platforms.XamMac2">
             <summary>
-            Type of the Xamarin.Mac v2 OS X platform
+            Type of the Xamarin.Mac v2 macOS platform on mono
+            </summary>
+        </member>
+        <member name="F:Eto.Platforms.macOS">
+            <summary>
+            Type of the macOS platform on .NET 6.0.2xx+ SDK
             </summary>
         </member>
         <member name="F:Eto.Platforms.WinForms">
             <summary>
-            Type of the Windows forms platform
+            Type of the Windows Forms platform
             </summary>
         </member>
         <member name="F:Eto.Platforms.Wpf">
             <summary>
-            ID of the WPF platform
+            Type of the WPF platform
             </summary>
         </member>
         <member name="F:Eto.Platforms.Android">
             <summary>
-            ID of the Android platform
+            Type of the Android platform
             </summary>
         </member>
         <member name="T:Eto.PropertyStore">

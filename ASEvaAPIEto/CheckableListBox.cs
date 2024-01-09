@@ -10,13 +10,13 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.5.0) List box of checkboxes
+    /// (api:eto=2.13.1) List box of checkboxes
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.5.0) 多选框组
+    /// (api:eto=2.13.1) 多选框组
     /// </summary>
-    public class CheckableListBox : GridView
+    public class CheckableListBox : Panel, CheckableListBoxCallback
     {
         /// \~English
         /// <summary>
@@ -28,13 +28,11 @@ namespace ASEva.UIEto
         /// </summary>
         public CheckableListBox()
         {
-            ShowHeader = false;
-            if (DefaultBackgroundColor != null) BackgroundColor = DefaultBackgroundColor.Value;
-            Columns.Add(new GridColumn { DataCell = new CheckBoxCell(1), Resizable = false, Width = this.Sizer(22) });
-            Columns.Add(new GridColumn { DataCell = new TextBoxCell(0), Resizable = false, Expand = true });
-            CellClick += CheckableListBox_CellClick;
-            CellDoubleClick += CheckableListBox_CellClick;
-            CellFormatting += CheckableListBox_CellFormatting;
+            if (Factory == null) Factory = new DefaultCheckableListBoxFactory();
+
+            Control etoControl = null;
+            Factory.CreateCheckableListBoxBackend(this, out etoControl, out backend);
+            if (etoControl != null) Content = etoControl;
         }
 
         /// \~English
@@ -49,9 +47,22 @@ namespace ASEva.UIEto
         /// <returns>多选框个数</returns>
         public int GetItemCount()
         {
-            if (DataStore == null) return 0;
-            if (!(DataStore is List<GridItem>)) return 0;
-            return (DataStore as List<GridItem>).Count;
+            return enableFlags.Count;
+        }
+
+        /// \~English
+        /// <summary>
+        /// Get the selected row's index
+        /// </summary>
+        /// <returns>The selected row's index, -1 means not selected</returns>
+        /// \~Chinese
+        /// <summary>
+        /// 获取当前选中行的序号
+        /// </summary>
+        /// <returns>获取当前选中行的序号，-1表示未选中</returns>
+        public int GetSelectedRow()
+        {
+            return backend.GetSelectedRowIndex();
         }
 
         /// \~English
@@ -70,16 +81,8 @@ namespace ASEva.UIEto
         /// <param name="isEnabled">初始是否为启用状态</param>
         public void AddItem(String text, bool isChecked = false, bool isEnabled = true)
         {
-            if (DataStore == null) DataStore = new List<GridItem>();
-            else if (!(DataStore is List<GridItem>)) return;
-
-            if (text == null) text = "";
-
-            var list = DataStore as List<GridItem>;
-            list.Add(new GridItem(new object[] { text, isChecked }));
             enableFlags.Add(isEnabled);
-            
-            DataStore = list;
+            backend.AddItems(new String[]{ text }, new bool[]{ isChecked }, new bool[]{ isEnabled });
         }
 
         /// \~English
@@ -103,17 +106,13 @@ namespace ASEva.UIEto
             if (itemsChecked != null && itemsChecked.Length != itemsText.Length) return;
             if (itemsEnabled != null && itemsEnabled.Length != itemsText.Length) return;
 
-            if (DataStore == null) DataStore = new List<GridItem>();
-            else if (!(DataStore is List<GridItem>)) return;
-
-            var list = DataStore as List<GridItem>;
             for (int i = 0; i < itemsText.Length; i++)
             {
-                list.Add(new GridItem(new object[] { itemsText[i], itemsChecked == null ? false : itemsChecked[i] }));
+                if (itemsText[i] == null) itemsText[i] = "";
                 enableFlags.Add(itemsEnabled == null ? true : itemsEnabled[i]);
             }
-            
-            DataStore = list;
+
+            backend.AddItems(itemsText, itemsChecked, itemsEnabled);
         }
 
         /// \~English
@@ -128,17 +127,9 @@ namespace ASEva.UIEto
         /// <param name="index">要移除的多选框的当前序号</param>
         public void RemoveItem(int index)
         {
-            if (DataStore == null) return;
-            if (!(DataStore is List<GridItem>)) return;
-            
-
-            var list = DataStore as List<GridItem>;
-            if (index < 0 || index >= list.Count) return;
-
-            list.RemoveAt(index);
+            if (index < 0 || index >= enableFlags.Count) return;
             enableFlags.RemoveAt(index);
-
-            DataStore = list;
+            backend.RemoveItems(new int[]{ index });
         }
 
         /// \~English
@@ -153,27 +144,26 @@ namespace ASEva.UIEto
         /// <param name="indices">要移除的所有多选框的当前序号</param>
         public void RemoveItems(int[] indices)
         {
-            if (DataStore == null) return;
-            if (!(DataStore is List<GridItem>)) return;
             if (indices == null || indices.Length == 0) return;
-    
+
             var flags = new Dictionary<int, bool>();
-            foreach (var index in indices) flags[index] = true;
+            foreach (var index in indices)
+            {
+                if (index < 0 || index >= enableFlags.Count) continue;
+                flags[index] = true;
+            }
             var sortedIndices = flags.Keys.ToList();
+            if (sortedIndices.Count == 0) return;
+
             sortedIndices.Sort();
             sortedIndices.Reverse();
 
-            var list = DataStore as List<GridItem>;
-            foreach (var rowIndex in sortedIndices)
+            foreach (var index in sortedIndices)
             {
-                if (rowIndex >= 0 && rowIndex < list.Count)
-                {
-                    list.RemoveAt(rowIndex);
-                    enableFlags.RemoveAt(rowIndex);
-                }
+                enableFlags.RemoveAt(index);
             }
 
-            DataStore = list;
+            backend.RemoveItems(sortedIndices.ToArray());
         }
 
         /// \~English
@@ -186,14 +176,8 @@ namespace ASEva.UIEto
         /// </summary>
         public void RemoveAllItems()
         {
-            if (DataStore == null) return;
-            if (!(DataStore is List<GridItem>)) return;
-
-            var list = DataStore as List<GridItem>;
-            list.Clear();
             enableFlags.Clear();
-
-            DataStore = list;
+            backend.RemoveAllItems();
         }
 
         /// \~English
@@ -210,45 +194,26 @@ namespace ASEva.UIEto
         /// <returns>是否勾选</returns>
         public bool GetChecked(int index)
         {
-            if (DataStore == null) return false;
-            if (!(DataStore is List<GridItem>)) return false;
-
-            var list = DataStore as List<GridItem>;
-            if (index < 0 || index >= list.Count) return false;
-
-            var values = list[index].Values;
-            if (values == null || values.Length < 2) return false;
-
-            return (bool)values[1];
+            if (index < 0 || index >= enableFlags.Count) return false;
+            return backend.GetChecked(index);
         }
 
         /// \~English
         /// <summary>
-        /// Set check status of check box
+        /// Set check status of check box, no matter whether it's enabled
         /// </summary>
         /// <param name="index">Index of check box</param>
         /// <param name="isChecked">Whether it's checked</param>
         /// \~Chinese
         /// <summary>
-        /// 设置某个多选框的勾选状态
+        /// 设置某个多选框的勾选状态，无论该选项是否启用
         /// </summary>
         /// <param name="index">多选框的当前序号</param>
         /// <param name="isChecked">是否否选</param>
         public void SetChecked(int index, bool isChecked)
         {
-            if (DataStore == null) return;
-            if (!(DataStore is List<GridItem>)) return;
-
-            var list = DataStore as List<GridItem>;
-            if (index < 0 || index >= list.Count) return;
-
-            var values = list[index].Values;
-            if (values == null || values.Length < 2) return;
-
-            UnselectAll();
-
-            values[1] = isChecked;
-            ReloadData(index);
+            if (index < 0 || index >= enableFlags.Count) return;
+            backend.SetChecked(new int[]{ index }, isChecked);
         }
 
         /// \~English
@@ -287,28 +252,236 @@ namespace ASEva.UIEto
             if (enableFlags[index] == isEnabled) return;
 
             enableFlags[index] = isEnabled;
-            updateColor(index, 1);
+            backend.SetEnabled(index, isEnabled);
         }
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.8.9) Set text of check box
+        /// Set text of check box
         /// </summary>
         /// <param name="index">Index of check box</param>
         /// <param name="text">Text of check box</param>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.8.9) 设置某个多选框的文字
+        /// 设置某个多选框的文字
         /// </summary>
         /// <param name="index">多选框的当前序号</param>
         /// <param name="text">多选框的文字</param>
         public void SetText(int index, String text)
         {
-            if (DataStore == null) return;
-            if (!(DataStore is List<GridItem>)) return;
+            if (index < 0 || index >= enableFlags.Count) return;
+            if (text == null) text = "";
+            backend.SetText(index, text);
+        }
+
+        /// \~English
+        /// <summary>
+        /// Get all indices of checked check box
+        /// </summary>
+        /// <returns>All indices of checked check box (Not included disabled ones)</returns>
+        /// \~Chinese
+        /// <summary>
+        /// 获取所有已勾选的多选框的序号
+        /// </summary>
+        /// <returns>所有已勾选的多选框的序号（不包括禁用的部分）</returns>
+        public int[] GetCheckedIndices()
+        {
+            var list = new List<int>();
+            foreach (var index in backend.GetCheckedIndices())
+            {
+                if (enableFlags[index]) list.Add(index);
+            }
+            return list.ToArray();
+        }
+
+        /// \~English
+        /// <summary>
+        /// Check all items (Not for disabled ones)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 勾选所有多选框（不改变禁用的部分）
+        /// </summary>
+        public void CheckAll()
+        {
+            var indices = new List<int>();
+            int index = 0;
+            foreach (var flag in enableFlags)
+            {
+                var curIndex = index++;
+                if (flag) indices.Add(curIndex);
+            }
+            if (indices.Count == 0) return;
+
+            backend.SetChecked(indices.ToArray(), true);
+        }
+
+        /// \~English
+        /// <summary>
+        /// Uncheck all items (Not for disabled ones)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 取消勾选所有多选框（不改变禁用的部分）
+        /// </summary>
+        public void UncheckAll()
+        {
+            var indices = new List<int>();
+            int index = 0;
+            foreach (var flag in enableFlags)
+            {
+                var curIndex = index++;
+                if (flag) indices.Add(curIndex);
+            }
+            if (indices.Count == 0) return;
+
+            backend.SetChecked(indices.ToArray(), false);
+        }
+
+        /// \~English
+        /// <summary>
+        /// Click event of check box (won't trigger while clicking disabled items)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 多选框点击事件（点中禁用的选项不触发）
+        /// </summary>
+        public event EventHandler ItemClicked;
+
+        public void OnItemClicked()
+        {
+            var selectedIndex = backend.GetSelectedRowIndex();
+            if (selectedIndex >= 0 && enableFlags[selectedIndex]) ItemClicked?.Invoke(this, null);
+        }
+
+        private List<bool> enableFlags = new List<bool>();
+
+        public static CheckableListBoxFactory Factory { private get; set; }
+
+		private CheckableListBoxBackend backend;
+    }
+
+	public interface CheckableListBoxCallback
+	{
+        void OnItemClicked();
+	}
+
+	public interface CheckableListBoxBackend
+	{
+        void AddItems(String[] itemsText, bool[] itemsChecked, bool[] itemsEnabled); // not empty, length validated, text not null
+        void RemoveItems(int[] indices); // validated, not empty, reversed
+        void RemoveAllItems();
+        bool GetChecked(int index); // validated
+        void SetChecked(int[] indices, bool isChecked); // validated, not empty, ordered
+        void SetText(int index, String text); // validated, text not null
+        void SetEnabled(int index, bool isEnabled); // validated
+        int[] GetCheckedIndices();
+        int GetSelectedRowIndex();
+	}
+
+	public interface CheckableListBoxFactory
+	{
+		void CreateCheckableListBoxBackend(CheckableListBoxCallback callback, out Control etoControl, out CheckableListBoxBackend backend);
+	}
+
+    class DefaultCheckableListBoxFactory : CheckableListBoxFactory
+    {
+        public void CreateCheckableListBoxBackend(CheckableListBoxCallback callback, out Control etoControl, out CheckableListBoxBackend backend)
+        {
+            var control = new DefaultCheckableListBoxBackend(callback);
+            etoControl = control;
+            backend = control;
+        }
+    }
+
+    public class DefaultCheckableListBoxBackend : GridView, CheckableListBoxBackend
+    {
+        public DefaultCheckableListBoxBackend(CheckableListBoxCallback callback)
+        {
+            this.callback = callback;
+            ShowHeader = false;
+            if (DefaultBackgroundColor != null) BackgroundColor = DefaultBackgroundColor.Value;
+            Columns.Add(new GridColumn { DataCell = new CheckBoxCell(1), Resizable = false, Width = this.Sizer(22) });
+            Columns.Add(new GridColumn { DataCell = new TextBoxCell(0), Resizable = false, Expand = true });
+            CellClick += CheckableListBox_CellClick;
+            CellDoubleClick += CheckableListBox_CellClick;
+            CellFormatting += CheckableListBox_CellFormatting;
+        }
+
+        public void AddItems(String[] itemsText, bool[] itemsChecked, bool[] itemsEnabled)
+        {
+            if (DataStore == null) DataStore = new List<GridItem>();
 
             var list = DataStore as List<GridItem>;
-            if (index < 0 || index >= list.Count) return;
+            for (int i = 0; i < itemsText.Length; i++)
+            {
+                list.Add(new GridItem(new object[] { itemsText[i], itemsChecked == null ? false : itemsChecked[i] }));
+                enableFlags.Add(itemsEnabled == null ? true : itemsEnabled[i]);
+            }
+            
+            DataStore = list;
+        }
+        
+        public void RemoveItems(int[] indices)
+        {
+            if (DataStore == null) return;
+
+            var list = DataStore as List<GridItem>;
+            foreach (var rowIndex in indices)
+            {
+                list.RemoveAt(rowIndex);
+                enableFlags.RemoveAt(rowIndex);
+            }
+
+            DataStore = list;
+        }
+        
+        public void RemoveAllItems()
+        {
+            if (DataStore == null) return;
+
+            var list = DataStore as List<GridItem>;
+            list.Clear();
+            enableFlags.Clear();
+
+            DataStore = list;
+        }
+        
+        public bool GetChecked(int index)
+        {
+            if (DataStore == null) return false;
+
+            var list = DataStore as List<GridItem>;
+
+            var values = list[index].Values;
+            if (values == null || values.Length < 2) return false;
+
+            return (bool)values[1];
+        }
+        
+        public void SetChecked(int[] indices, bool isChecked)
+        {
+            if (DataStore == null) return;
+
+            var list = (DataStore as List<GridItem>).ToArray();
+
+            UnselectAll();
+
+            for (int i = 0; i < indices.Length; i++)
+            {
+                var values = list[indices[i]].Values;
+                if (values == null || values.Length < 2) continue;
+                values[1] = isChecked;
+            }
+
+            ReloadData(new Range<int>(indices[0], indices.Last() + 1));
+        }
+        
+        public void SetText(int index, String text)
+        {
+            if (DataStore == null) return;
+
+            var list = DataStore as List<GridItem>;
 
             var values = list[index].Values;
             if (values == null || values.Length < 2) return;
@@ -318,17 +491,13 @@ namespace ASEva.UIEto
             values[0] = text;
             ReloadData(index);
         }
-
-        /// \~English
-        /// <summary>
-        /// Get all indices of checked check box
-        /// </summary>
-        /// <returns>All indices of checked check box</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取所有已勾选的多选框的序号
-        /// </summary>
-        /// <returns>所有已勾选的多选框的序号</returns>
+        
+        public void SetEnabled(int index, bool isEnabled)
+        {
+            enableFlags[index] = isEnabled;
+            updateColor(index, 1);
+        }
+        
         public int[] GetCheckedIndices()
         {
             var buffer = new List<int>();
@@ -346,65 +515,11 @@ namespace ASEva.UIEto
             return buffer.ToArray();
         }
 
-        /// \~English
-        /// <summary>
-        /// Check all items (Not for disabled ones)
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 勾选所有多选框（不改变禁用的部分）
-        /// </summary>
-        public void CheckAll()
+        public int GetSelectedRowIndex()
         {
-            if (DataStore == null) return;
-            if (!(DataStore is List<GridItem>)) return;
-
-            int index = 0;
-            foreach (var item in DataStore as List<GridItem>)
-            {
-                var curIndex = index++;
-                var values = item.Values;
-                if (values == null || values.Length < 2) continue;
-                if (curIndex >= enableFlags.Count || !enableFlags[curIndex]) continue;
-                values[1] = true;
-            }
-            ReloadData(new Range<int>(0, GetItemCount()));
+            var index = SelectedRow;
+            return index < 0 ? -1 : index;
         }
-
-        /// \~English
-        /// <summary>
-        /// Uncheck all items (Not for disabled ones)
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 取消勾选所有多选框（不改变禁用的部分）
-        /// </summary>
-        public void UncheckAll()
-        {
-            if (DataStore == null) return;
-            if (!(DataStore is List<GridItem>)) return;
-
-            int index = 0;
-            foreach (var item in DataStore as List<GridItem>)
-            {
-                var curIndex = index++;
-                var values = item.Values;
-                if (values == null || values.Length < 2) continue;
-                if (curIndex >= enableFlags.Count || !enableFlags[curIndex]) continue;
-                values[1] = false;
-            }
-            ReloadData(new Range<int>(0, GetItemCount()));
-        }
-
-        /// \~English
-        /// <summary>
-        /// (api:eto=2.9.13) Click event of check box
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// (api:eto=2.9.13) 多选框点击事件
-        /// </summary>
-        public event EventHandler ItemClicked;
 
         private void CheckableListBox_CellClick(object sender, GridCellMouseEventArgs e)
         {
@@ -424,23 +539,20 @@ namespace ASEva.UIEto
 
                 SelectRow(e.Row);
 
-                if (ItemClicked != null)
+                if (clickTimer != null)
                 {
-                    if (clickTimer != null)
-                    {
-                        clickTimer.Stop();
-                        clickTimer = null;
-                    }
-                    clickTimer = new UITimer();
-                    clickTimer.Interval = 0.05;
-                    clickTimer.Elapsed += delegate
-                    {
-                        clickTimer.Stop();
-                        clickTimer = null;
-                        ItemClicked(this, null);
-                    };
-                    clickTimer.Start();
+                    clickTimer.Stop();
+                    clickTimer = null;
                 }
+                clickTimer = new UITimer();
+                clickTimer.Interval = 0.05;
+                clickTimer.Elapsed += delegate
+                {
+                    clickTimer.Stop();
+                    clickTimer = null;
+                    callback.OnItemClicked();
+                };
+                clickTimer.Start();
             }
         }
 
@@ -488,8 +600,9 @@ namespace ASEva.UIEto
             }
         }
 
-        private List<bool> enableFlags = new List<bool>();
+        private CheckableListBoxCallback callback;
         private UITimer colorTimer = null, clickTimer = null;
+        private List<bool> enableFlags = new List<bool>();
 
         public enum InvalidateMode
         {

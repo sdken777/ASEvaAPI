@@ -5,7 +5,7 @@ namespace ASEva.UIWpf
 {
 	class SearchBoxHandler : TextBoxHandler, SearchBox.IHandler
 	{
-        // CHECK: 增加文字为空时的水印显示
+        // CHECK: 增加文字为空时的水印显示 (eto-2.7.5新增的官方版本风格与wpf默认风格不一致)
         public SearchBoxHandler()
         {
             var lang = Agency.GetAppLanguage();

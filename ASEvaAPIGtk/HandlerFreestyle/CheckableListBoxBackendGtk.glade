@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.2 -->
+<interface>
+  <requires lib="gtk+" version="3.18"/>
+  <object class="GtkListStore" id="listStore">
+    <columns>
+      <!-- column-name gchararray1 -->
+      <column type="gchararray"/>
+      <!-- column-name gboolean1 -->
+      <column type="gboolean"/>
+      <!-- column-name gboolean2 -->
+      <column type="gboolean"/>
+      <!-- column-name gchararray2 -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkEventBox" id="CheckableListBoxBackendGtk">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="hscrollbar-policy">never</property>
+        <property name="shadow-type">in</property>
+        <child>
+          <object class="GtkTreeView" id="treeView">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="model">listStore</property>
+            <property name="headers-visible">False</property>
+            <property name="enable-search">False</property>
+            <property name="search-column">0</property>
+            <child>
+              <object class="GtkTreeViewColumn">
+                <property name="title" translatable="yes">column</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn">
+                <property name="resizable">True</property>
+                <property name="title" translatable="yes">column</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

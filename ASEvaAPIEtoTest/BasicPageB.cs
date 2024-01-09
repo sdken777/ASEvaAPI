@@ -12,15 +12,15 @@ namespace ASEvaAPIEtoTest
     {
         private void initBasicTabPageB(TabPage tabPage)
         {
-            var splitter = tabPage.SetContentAsControl(new Splitter { Position = this.Sizer(300) }) as Splitter;
+            var splitter = tabPage.SetContentAsControl(new Splitter { Position = this.Sizer(300) }, 0) as Splitter;
             splitter.Panel1MinimumSize = 300;
             splitter.Panel2MinimumSize = 200;
             var panel1 = splitter.SetPanel1();
             var panel2 = splitter.SetPanel2();
 
-            var layoutPanel1 = panel1.SetContentAsRowLayout(0, 2, VerticalAlignment.Stretch);
+            var layoutPanel1 = panel1.SetContentAsRowLayout(8, 8, VerticalAlignment.Stretch);
             
-            var layoutLists = layoutPanel1.AddColumnLayout(false, 120, 0, 8);
+            var layoutLists = layoutPanel1.AddColumnLayout(false, 130, 0, 8);
             initBasicTabPageBLists(layoutLists);
 
             var treeViewLayout = layoutPanel1.AddColumnLayout(true, 2);
@@ -36,15 +36,15 @@ namespace ASEvaAPIEtoTest
             for (int i = 1; i <= 1000; i++) listBox.Items.Add(t.Format("basic-list-item", i.ToString()));
 
             var checkListBox = layout.AddControl(new CheckableListBox(), true) as CheckableListBox;
-            for (int i = 1; i <= 1000; i++) checkListBox.AddItem(t.Format("basic-list-item-short", i.ToString()), i % 2 == 0, (i / 2) % 2 == 0);
+            for (int i = 1; i <= 1000; i++) checkListBox.AddItem(t.Format("basic-list-item-short", i.ToString()));
         }
 
         private void initBasicTabPageBTreeView(StackLayout layout)
         {
             var view = layout.AddControl(new SimpleTreeView(), true) as SimpleTreeView;
             var buttonLayout = layout.AddRowLayout();
-            var buttonChange = buttonLayout.AddLinkButton(t["basic-tree-change-color"]);
             var buttonSelect = buttonLayout.AddLinkButton(t["basic-tree-select-first"]);
+            var buttonChange = buttonLayout.AddLinkButton(t["basic-tree-change-color"]);
 
             var parentNodes = new List<SimpleTreeNode>();
             for (int i = 1; i <= 99; i++)

@@ -24,7 +24,7 @@ namespace ASEva.UIGtk
         {
             if (ASEva.APIInfo.GetRunningOS() == "linuxarm")
             {
-                // CHECK: 修正在Arm下打开文件对话框异常
+                // CHECK: 修正在Arm下打开文件对话框异常，Eto-2.8.3已修复
                 Redirection.RedirectMarshaller();
 
                 // 修正打开右键菜单异常，Arm-Ubuntu16.04-X11可重现 (不再支持Ubuntu16.04)
@@ -43,7 +43,7 @@ namespace ASEva.UIGtk
             platform.Add<DateTimePicker.IHandler>(() => new DateTimePickerHandler());
             platform.Add<Form.IHandler>(() => new FormHandler());
             platform.Add<Slider.IHandler>(() => new SliderHandler());
-            platform.Add<GridView.IHandler>(() => new GridViewHandler());
+            // platform.Add<GridView.IHandler>(() => new GridViewHandler());
             platform.Add<GroupBox.IHandler>(() => new GroupBoxHandler());
             platform.Add<SaveFileDialog.IHandler>(() => new SaveFileDialogHandler());
             platform.Add<Label.IHandler>(() => new LabelHandler());
@@ -68,10 +68,8 @@ namespace ASEva.UIGtk
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerGtk();
             ContextMenuExtensions.ShouldAddMouseDownEvent = true;
             ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.ColorInverted;
-            TextTableView.UpdateColorMode = TextTableView.InvalidateMode.EditCell;
-            TextTableView.DefaultTextColor = Colors.Black;
-            TextTableView.DefaultBackgroundColor = Colors.WhiteSmoke;
-            CheckableListBox.UpdateColorMode = CheckableListBox.InvalidateMode.EditCell;
+            TextTableView.Factory = new TextTableViewFactoryGtk();
+            CheckableListBox.Factory = new CheckableListBoxFactoryGtk();
             GLView.Factory = new GLViewFactoryGtk(uiBackend);
             SkiaView.Factory = new GLViewFactoryGtk(uiBackend);
             SkiaCanvasExtensions.DefaultFontName = "Noto Sans CJK SC";

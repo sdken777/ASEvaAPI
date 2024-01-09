@@ -7,7 +7,7 @@ namespace ASEva.UIGtk
 {
 	#pragma warning disable 612
 
-	// CHECK: 继承WindowHandlerGtkWindow，修正GtkWindowConnector异常问题，Eto-2.7.0已修复
+	// 继承WindowHandlerGtkWindow，修正GtkWindowConnector异常问题，Eto-2.7.0已修复
 	class DialogHandler : WindowHandlerGtkWindow<Gtk.Dialog, Dialog, Dialog.ICallback>, Dialog.IHandler
 	{
 		Gtk.Container btcontainer;
@@ -21,6 +21,8 @@ namespace ASEva.UIGtk
 		{
 			Control = new Gtk.Dialog("", null, Gtk.DialogFlags.DestroyWithParent);
 		}
+		
+		protected override Gdk.WindowTypeHint DefaultTypeHint => Gdk.WindowTypeHint.Dialog;
 
 		protected override void Initialize()
 		{
@@ -252,7 +254,7 @@ namespace ASEva.UIGtk
 		{
 			public new DialogHandler Handler => (DialogHandler)base.Handler;
 
-			internal void Control_KeyPressEvent(object o, Gtk.KeyPressEventArgs args) => Handler.Control_KeyPressEvent(o, args);
+			internal void Control_KeyPressEvent(object o, Gtk.KeyPressEventArgs args) => Handler?.Control_KeyPressEvent(o, args);
 		}
 	}
 }

@@ -12,6 +12,38 @@
     <en>Save file</en>
     <ch>保存文件</ch>
   </t>
+  <t id="basic-checklist-check-all">
+    <en>Check all</en>
+    <ch>全选</ch>
+  </t>
+  <t id="basic-checklist-get-check">
+    <en>Get checked</en>
+    <ch>是否选中</ch>
+  </t>
+  <t id="basic-checklist-get-enable">
+    <en>Get enabled</en>
+    <ch>是否启用</ch>
+  </t>
+  <t id="basic-checklist-remove">
+    <en>Remove</en>
+    <ch>移除</ch>
+  </t>
+  <t id="basic-checklist-set-check">
+    <en>Set checked</en>
+    <ch>切换选中</ch>
+  </t>
+  <t id="basic-checklist-set-enable">
+    <en>Set enabled</en>
+    <ch>切换启用</ch>
+  </t>
+  <t id="basic-checklist-set-text">
+    <en>Set text</en>
+    <ch>设置文本</ch>
+  </t>
+  <t id="basic-checklist-uncheck-all">
+    <en>Clear all</en>
+    <ch>清空</ch>
+  </t>
   <t id="basic-client-size">
     <en>Client Size</en>
     <ch>用户区域</ch>
@@ -84,9 +116,21 @@
     <en>Change color</en>
     <ch>改变颜色</ch>
   </t>
+  <t id="basic-grid-edited">
+    <en>Edited: ({0}, {1})</en>
+    <ch>已编辑: ({0}, {1})</ch>
+  </t>
+  <t id="basic-grid-index-title">
+    <en>Index</en>
+    <ch>序号</ch>
+  </t>
   <t id="basic-grid-key-title">
     <en>Key</en>
     <ch>键</ch>
+  </t>
+  <t id="basic-grid-reload">
+    <en>Reload</en>
+    <ch>重加载</ch>
   </t>
   <t id="basic-grid-remove-row">
     <en>Remove row</en>
@@ -95,10 +139,6 @@
   <t id="basic-grid-value-title">
     <en>Value</en>
     <ch>值</ch>
-  </t>
-  <t id="basic-grid-reload">
-    <en>Reload</en>
-    <ch>重加载</ch>
   </t>
   <t id="basic-group-title">
     <en>Basic Controls</en>
@@ -161,8 +201,8 @@
     <ch>父节点{0:D}</ch>
   </t>
   <t id="basic-tree-select-first">
-    <en>Select first</en>
-    <ch>选中首项</ch>
+    <en>Select</en>
+    <ch>选首项</ch>
   </t>
   <t id="draw-gl-detail">
     <en>Show details</en>
@@ -188,6 +228,10 @@
     <en>Version: {0}</en>
     <ch>版本：{0}</ch>
   </t>
+  <t id="draw-gl-loop-interval">
+    <en>Max loop interval:</en>
+    <ch>最大循环间隔:</ch>
+  </t>
   <t id="draw-gl-pause-render">
     <en>Pause render</en>
     <ch>暂停渲染</ch>
@@ -195,10 +239,6 @@
   <t id="draw-gl-resume-render">
     <en>Resume render</en>
     <ch>恢复渲染</ch>
-  </t>
-  <t id="draw-gl-loop-interval">
-    <en>Max loop interval:</en>
-    <ch>最大循环间隔:</ch>
   </t>
   <t id="draw-group-title">
     <en>Drawing Controls</en>
@@ -248,13 +288,13 @@
     <en>Snapshot (render)</en>
     <ch>快照（渲染）</ch>
   </t>
-  <t id="menu-snapshot-screen">
-    <en>Snapshot (screen)</en>
-    <ch>快照（屏幕）</ch>
-  </t>
   <t id="menu-snapshot-failed">
     <en>Failed to get snapshot.</en>
     <ch>获取快照失败。</ch>
+  </t>
+  <t id="menu-snapshot-screen">
+    <en>Snapshot (screen)</en>
+    <ch>快照（屏幕）</ch>
   </t>
   <t id="menu-sub">
     <en>Sub menu</en>

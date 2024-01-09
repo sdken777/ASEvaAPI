@@ -1,9 +1,10 @@
 using Eto.Forms;
 using Eto.GtkSharp.Forms;
+using System;
 
 namespace ASEva.UIGtk
 {
-	// CHECK: 继承WindowHandlerGtkWindow，修正GtkWindowConnector异常问题，Eto-2.7.0已修复
+	// 继承WindowHandlerGtkWindow，修正GtkWindowConnector异常问题，Eto-2.7.0已修复
 	class FormHandler : WindowHandlerGtkWindow<Gtk.Window, Form, Form.ICallback>, Form.IHandler
 	{
 		public FormHandler(Gtk.Window window)
@@ -36,6 +37,13 @@ namespace ASEva.UIGtk
 				Control.AcceptFocus = CanFocus; // in case user changes it right after this call, but should be true
 			}
 			DisableAutoSizeUpdate--;
+		}
+
+		// CHECK: 修正窗口关闭后一段时间出现g_object_remove_toggle_ref异常
+		public override void OnLoadComplete(EventArgs e)
+		{
+			base.OnLoadComplete(e);
+			Widget.Closed += delegate { Widget.Dispose(); };
 		}
 
 		static object ShowActivated_Key = new object();

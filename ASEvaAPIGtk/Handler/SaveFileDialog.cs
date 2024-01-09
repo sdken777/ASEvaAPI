@@ -8,17 +8,24 @@ using Eto.GtkSharp;
 
 namespace ASEva.UIGtk
 {
+#if GTKCORE
+	class SaveFileDialogHandler : WidgetHandler<Gtk.FileChooserNative, SaveFileDialog>, SaveFileDialog.IHandler
+#else
 	class SaveFileDialogHandler : WidgetHandler<Gtk.FileChooserDialog, SaveFileDialog>, SaveFileDialog.IHandler
+#endif
 	{
 		public SaveFileDialogHandler()
 		{
+#if GTKCORE
+			Control = new Gtk.FileChooserNative(string.Empty, null, Gtk.FileChooserAction.Save, null, null);
+#else
 			Control = new Gtk.FileChooserDialog(string.Empty, null, Gtk.FileChooserAction.Save);
-			Control.DoOverwriteConfirmation = true;
-			Control.SetCurrentFolder(System.IO.Directory.GetCurrentDirectory());
-			
 			Control.AddButton(Gtk.Stock.Cancel, Gtk.ResponseType.Cancel);
 			Control.AddButton(Gtk.Stock.Save, Gtk.ResponseType.Ok);
 			Control.DefaultResponse = Gtk.ResponseType.Ok;
+#endif
+			Control.DoOverwriteConfirmation = true;
+			Control.SetCurrentFolder(System.IO.Directory.GetCurrentDirectory());
 		}
 
 		// CHECK: 修正输入文件名无后缀时未补上的问题
@@ -126,12 +133,16 @@ namespace ASEva.UIGtk
 		public DialogResult ShowDialog(Window parent)
 		{
 			SetFilters();
+#if !GTKCORE
 			if (parent != null) Control.TransientFor = (Gtk.Window)parent.ControlObject;
+#endif
 
 			int result = Control.Run();
 
-			Control.Hide ();
+			Control.Hide();
+#if !GTKCORE
 			Control.Unrealize();
+#endif
 
 			DialogResult response = ((Gtk.ResponseType)result).ToEto ();
 			if (response == DialogResult.Ok && !string.IsNullOrEmpty(Control.CurrentFolder))

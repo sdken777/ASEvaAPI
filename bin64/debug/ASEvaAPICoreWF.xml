@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UICoreWF.APIInfo">
             <summary>
-            version=2.6.1
+            version=2.7.1
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.APIInfo.GetAPIVersion">

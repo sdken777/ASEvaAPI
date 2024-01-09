@@ -124,6 +124,8 @@ namespace ASEva.UICoreWF
 
         private void updateToPanel()
         {
+            if (!Visible) return;
+
             try
             {
                 int index = 0;

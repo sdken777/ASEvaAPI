@@ -63,7 +63,7 @@
                 "./obj",
                 "./bin"
             ],
-            "problemMatcher":[],
+            "problemMatcher": []
         },
 
         // Subtasks:

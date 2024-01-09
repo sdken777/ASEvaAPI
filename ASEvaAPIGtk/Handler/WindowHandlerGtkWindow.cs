@@ -132,15 +132,38 @@ namespace ASEva.UIGtk
 #endif
 			Control.SetGeometryHints(Control, geom, Gdk.WindowHints.MinSize);
 		}
+		
 
-		public bool Minimizable { get; set; }
+		public bool Minimizable
+		{
+			get => Widget.Properties.Get<bool>(GtkWindow.Minimizable_Key, true);
+			set
+			{
+				if (Widget.Properties.TrySet(GtkWindow.Minimizable_Key, value, true))
+					SetTypeHint();
+			}
+		}
 
-		public bool Maximizable { get; set; }
+		public bool Maximizable
+		{
+			get => Widget.Properties.Get<bool>(GtkWindow.Maximizable_Key, true);
+			set
+			{
+				if (Widget.Properties.TrySet(GtkWindow.Maximizable_Key, value, true))
+					SetTypeHint();
+			}
+		}
 
 		public bool ShowInTaskbar
 		{
 			get { return !Control.SkipTaskbarHint; }
 			set { Control.SkipTaskbarHint = !value; }
+		}
+		
+		public bool Closeable
+		{
+			get => Control.Deletable;
+			set => Control.Deletable = value;
 		}
 
 		public bool Topmost
@@ -175,12 +198,26 @@ namespace ASEva.UIGtk
 							break;
 						case WindowStyle.Utility:
 							Control.Decorated = true;
-							Control.TypeHint = Gdk.WindowTypeHint.Utility;
 							break;
 						default:
 							throw new NotSupportedException();
 					}
+					SetTypeHint();
 				}
+			}
+		}
+		
+		protected virtual Gdk.WindowTypeHint DefaultTypeHint => Gdk.WindowTypeHint.Normal;
+		
+		void SetTypeHint()
+		{
+			if (WindowStyle == WindowStyle.Default && (Minimizable || Maximizable))
+			{
+				Control.TypeHint = DefaultTypeHint;
+			}
+			else
+			{
+				Control.TypeHint = Gdk.WindowTypeHint.Utility;
 			}
 		}
 
@@ -808,5 +845,7 @@ namespace ASEva.UIGtk
 		internal static readonly object DisableAutoSizeUpdate_Key = new object();
 		internal static readonly object AutoSizePerformed_Key = new object();
 		internal static readonly object AutoSize_Key = new object();
+		internal static readonly object Minimizable_Key = new object();
+		internal static readonly object Maximizable_Key = new object();
 	}
 }
