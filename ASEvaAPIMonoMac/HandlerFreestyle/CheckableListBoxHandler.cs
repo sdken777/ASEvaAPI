@@ -22,7 +22,7 @@ namespace ASEva.UIMonoMac
 			switchColumn.Editable = true;
 			switchColumn.DataCell = switchCell;
 
-            var textCell = new NSTextFieldCell();
+            var textCell = new VerticalAlignTextCell();
             textCell.Wraps = false;
 
             var textColumn = new NSTableColumn();
@@ -62,7 +62,7 @@ namespace ASEva.UIMonoMac
             {
                 var text = itemsText[i];
                 bool isChecked = itemsChecked == null ? false : itemsChecked[i];
-                bool isEnabled = itemsEnabled == null ? false : itemsEnabled[i];
+                bool isEnabled = itemsEnabled == null ? true : itemsEnabled[i];
                 items.Add(new CheckableItem
                 {
                     Text = text,
@@ -72,7 +72,7 @@ namespace ASEva.UIMonoMac
                 indices.Add(startRowIndex + i);
             }
 
-            tableView.ReloadData(NSIndexSet.FromArray(indices.ToArray()), NSIndexSet.FromArray(new int[]{ 0, 1 }));
+            tableView.ReloadData();
         }
 
         public void RemoveItems(int[] indices)
@@ -177,7 +177,7 @@ namespace ASEva.UIMonoMac
                 }
                 else if (tableColumn.Equals(TextColumn))
                 {
-                    var textCell = new NSTextFieldCell(tableColumn.DataCell.Handle);
+                    var textCell = new VerticalAlignTextCell(tableColumn.DataCell.Handle);
                     textCell.TextColor = item.IsEnabled ? DefaultTextColor : NSColor.LightGray;
                     return new NSString(item.Text);
                 }
@@ -197,6 +197,22 @@ namespace ASEva.UIMonoMac
                 }
             }
 		}
+
+        class VerticalAlignTextCell : NSTextFieldCell
+        {
+            public VerticalAlignTextCell()
+            {}
+
+            public VerticalAlignTextCell(IntPtr handle) : base(handle)
+            {}
+
+            public override CGRect DrawingRectForBounds(CGRect theRect)
+            {
+                var titleFrame = base.DrawingRectForBounds(theRect);
+                var yOffset = (titleFrame.Height - CellSize.Height) / 2;
+                return new CGRect(titleFrame.X, titleFrame.Y + yOffset, titleFrame.Width, titleFrame.Height - yOffset);
+            }
+        }
 
         private ASEva.UIEto.CheckableListBoxCallback callback;
         private NSTableView tableView;
