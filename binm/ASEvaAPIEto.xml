@@ -433,6 +433,16 @@
             </summary>
             <returns>获取当前选中行的序号，-1表示未选中</returns>
         </member>
+        <member name="P:ASEva.UIEto.CheckableListBox.SelectedRow">
+            \~English
+            <summary>
+            (api:eto=2.13.2) Get the selected row's index, -1 means not selected
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=2.13.2) 获取当前选中行的序号，-1表示未选中
+            </summary>
+        </member>
         <member name="M:ASEva.UIEto.CheckableListBox.AddItem(System.String,System.Boolean,System.Boolean)">
             \~English
             <summary>
@@ -4253,6 +4263,16 @@
             </summary>
             <returns>获取当前选中行的序号，-1表示未选中</returns>
         </member>
+        <member name="P:ASEva.UIEto.TextTableView.SelectedRow">
+            \~English
+            <summary>
+            (api:eto=2.13.2) Get the selected row's index, -1 means not selected
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=2.13.2) 获取当前选中行的序号，-1表示未选中
+            </summary>
+        </member>
         <member name="M:ASEva.UIEto.TextTableView.AddRow(System.String[])">
             \~English
             <summary>
@@ -4375,14 +4395,24 @@
             <param name="columnIndex">列序号</param>
             <param name="color">背景颜色</param>
         </member>
-        <member name="E:ASEva.UIEto.TextTableView.CellEdited">
+        <member name="E:ASEva.UIEto.TextTableView.SelectedRowsChanged">
             \~English
             <summary>
-            Edited event of text cell
+            (api:eto=2.13.2) Occurs when the selected row is changed
             </summary>
             \~Chinese
             <summary>
-            文本框编辑事件
+            (api:eto=2.13.2) 选中行变更事件
+            </summary>
+        </member>
+        <member name="E:ASEva.UIEto.TextTableView.CellEdited">
+            \~English
+            <summary>
+            (api:eto=2.13.2) Occurs after a cell has been edited
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=2.13.2) 文本框编辑事件
             </summary>
         </member>
         <member name="T:ASEva.UIEto.WindowPanel">
