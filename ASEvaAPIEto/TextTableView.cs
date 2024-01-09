@@ -80,6 +80,19 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
+        /// (api:eto=2.13.2) Get the selected row's index, -1 means not selected
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.13.2) 获取当前选中行的序号，-1表示未选中
+        /// </summary>
+        public int SelectedRow
+        {
+            get { return GetSelectedRow(); }
+        }
+
+        /// \~English
+        /// <summary>
         /// Add a row
         /// </summary>
         /// <param name="values">Initial texts for columns, null as empty</param>
@@ -295,19 +308,32 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// Edited event of text cell
+        /// (api:eto=2.13.2) Occurs when the selected row is changed
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 文本框编辑事件
+        /// (api:eto=2.13.2) 选中行变更事件
         /// </summary>
-        public event CellEditedHandler CellEdited;
+        public event EventHandler<EventArgs> SelectedRowsChanged;
 
-        public delegate void CellEditedHandler(object sender, int rowIndex, int colIndex);
+        public void OnSelectedRowChanged()
+        {
+            SelectedRowsChanged?.Invoke(this, null);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.13.2) Occurs after a cell has been edited
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.13.2) 文本框编辑事件
+        /// </summary>
+        public event EventHandler<GridViewCellEventArgs> CellEdited;
 
         public void OnCellEdited(int rowIndex, int colIndex)
         {
-            CellEdited?.Invoke(this, rowIndex, colIndex);
+            CellEdited?.Invoke(this, new GridViewCellEventArgs(null, rowIndex, colIndex, null));
         }
 
         private int colCount = 0;
@@ -321,6 +347,7 @@ namespace ASEva.UIEto
 
 	public interface TextTableViewCallback
 	{
+        void OnSelectedRowChanged();
         void OnCellEdited(int rowIndex, int colIndex);
 	}
 
