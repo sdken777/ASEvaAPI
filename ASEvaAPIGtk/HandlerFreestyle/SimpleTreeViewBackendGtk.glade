@@ -2,6 +2,19 @@
 <!-- Generated with glade 3.38.2 -->
 <interface>
   <requires lib="gtk+" version="3.18"/>
+  <object class="GtkTreeStore" id="treeStore">
+    <columns>
+      <!-- column-name gchararray1 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray2 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray3 -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkTreeModelSort" id="treeModel">
+    <property name="model">treeStore</property>
+  </object>
   <object class="GtkBox" id="SimpleTreeViewBackendGtk">
     <property name="visible">True</property>
     <property name="can-focus">False</property>
@@ -9,7 +22,6 @@
       <object class="GtkScrolledWindow">
         <property name="visible">True</property>
         <property name="can-focus">True</property>
-        <property name="hscrollbar-policy">never</property>
         <property name="shadow-type">in</property>
         <child>
           <object class="GtkTreeView" id="treeView">
@@ -37,18 +49,5 @@
         <property name="position">0</property>
       </packing>
     </child>
-  </object>
-  <object class="GtkTreeStore" id="treeStore">
-    <columns>
-      <!-- column-name gchararray1 -->
-      <column type="gchararray"/>
-      <!-- column-name gchararray2 -->
-      <column type="gchararray"/>
-      <!-- column-name gchararray3 -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkTreeModelSort" id="treeModel">
-    <property name="model">treeStore</property>
   </object>
 </interface>
