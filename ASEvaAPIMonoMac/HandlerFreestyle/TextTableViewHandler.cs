@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using MonoMac.AppKit;
 using MonoMac.Foundation;
+using MonoMac.CoreGraphics;
 using Eto.Mac;
 
 namespace ASEva.UIMonoMac
@@ -20,6 +21,9 @@ namespace ASEva.UIMonoMac
 			tableView.DataSource = dataSource;
             tableView.GridStyleMask = NSTableViewGridStyle.SolidHorizontalLine | NSTableViewGridStyle.SolidVerticalLine;
             tableView.ColumnAutoresizingStyle = NSTableViewColumnAutoresizingStyle.Uniform;
+            tableView.AllowsColumnReordering = false;
+            tableView.IntercellSpacing = new CGSize(0, 0);
+            tableView.RowHeight = 18;
 
 			DrawsBackground = false;
 			AutoresizesSubviews = true;

@@ -31,7 +31,7 @@ namespace ASEva.UIMonoMac
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 6, 3, 0); // Update log / 更新记录: 新增TextTableViewFactoryMonoMac
+            return new Version(1, 6, 3, 1); // Update log / 更新记录: 细节优化
         }
     }
 }

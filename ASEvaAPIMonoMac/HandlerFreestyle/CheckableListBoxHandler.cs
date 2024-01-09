@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using MonoMac.AppKit;
 using MonoMac.Foundation;
+using MonoMac.CoreGraphics;
 
 namespace ASEva.UIMonoMac
 {
@@ -40,6 +41,8 @@ namespace ASEva.UIMonoMac
             tableView.AddColumn(textColumn);
 			tableView.HeaderView = null;
 			tableView.DataSource = dataSource;
+            tableView.IntercellSpacing = new CGSize(0, 0);
+            tableView.RowHeight = 18;
 
 			DrawsBackground = false;
 			AutoresizesSubviews = true;
