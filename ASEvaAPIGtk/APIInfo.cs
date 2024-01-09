@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 2, 3); // Update log / 更新记录: 优化CheckedListBox
+            return new Version(2, 9, 2, 4); // Update log / 更新记录: 细节修正
         }
     }
 }
