@@ -21,6 +21,11 @@ namespace ASEva.UIGtk
 			var rawPath = Control.Filename;
 			if (String.IsNullOrEmpty(rawPath)) return rawPath;
 
+			Gtk.FileFilter controlFilter = null;
+			if (Control.Filter != null) controlFilter = Control.Filter;
+			else if (Control.Filters != null && Control.Filters.Length > 0 && Control.Filters[0] != null) controlFilter = Control.Filters[0];
+			else return rawPath;
+
 			var dir = Path.GetDirectoryName(rawPath);
 			if (dir.EndsWith(Path.DirectorySeparatorChar)) dir = dir.Substring(0, dir.Length - 1);
 			var fullName = Path.GetFileName(rawPath);
@@ -28,7 +33,7 @@ namespace ASEva.UIGtk
 			var extension = Path.GetExtension(rawPath).ToLower();
 			foreach (var filter in Widget.Filters)
 			{
-				if (Control.Filter.Name != filter.Name) continue;
+				if (controlFilter.Name != filter.Name) continue;
 				if (filter.Extensions == null || filter.Extensions.Length == 0) continue;
 
 				bool found = false;
