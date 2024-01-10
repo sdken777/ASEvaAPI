@@ -115,6 +115,14 @@ namespace ASEvaAPIEtoTest
                 tableView.SetTextColor(0, 1, Colors.Red);
                 tableView.SetBackgroundColor(0, 2, Colors.Green);
             };
+
+            layout.AddSpace(4);
+            var tableView2 = layout.AddControl(new TextTableView(), false, 0, 80) as TextTableView;
+            for (int i = 0; i < 10; i++)
+            {
+                tableView2.AddColumn(t.Format("basic-grid-column", i + 1), 50, true);
+            }
+            tableView2.AddRow();
         }
 
         private int checkListTarget = 0;

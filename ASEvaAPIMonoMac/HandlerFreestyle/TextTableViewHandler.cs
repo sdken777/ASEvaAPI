@@ -25,6 +25,7 @@ namespace ASEva.UIMonoMac
             tableView.AllowsColumnReordering = false;
             tableView.IntercellSpacing = new CGSize(0, 0);
             tableView.RowHeight = 18;
+            tableView.BackgroundColor = Eto.Drawing.Color.FromArgb(0xf0, 0xf0, 0xf0).ToNSUI();
 
 			DrawsBackground = false;
 			AutoresizesSubviews = true;
@@ -48,7 +49,16 @@ namespace ASEva.UIMonoMac
             textColumn.HeaderCell.Title = title;
 			textColumn.Editable = editable;
 			textColumn.DataCell = textCell;
-            if (logicalWidth > 0) textColumn.Width = logicalWidth;
+            if (logicalWidth > 0)
+            {
+                textColumn.Width = logicalWidth;
+                textColumn.ResizingMask = NSTableColumnResizing.UserResizingMask;
+            }
+            else
+            {
+                textColumn.Width = 1;
+                textColumn.ResizingMask = NSTableColumnResizing.Autoresizing | NSTableColumnResizing.UserResizingMask;
+            }
             tableView.AddColumn(textColumn);
             dataSource.Columns.Add(textColumn);
 

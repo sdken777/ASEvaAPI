@@ -28,7 +28,7 @@ namespace ASEva.UIGtk
 			Control.SetCurrentFolder(System.IO.Directory.GetCurrentDirectory());
 		}
 
-		// CHECK: 修正输入文件名无后缀时未补上的问题
+		// 修正输入文件名无后缀时未补上的问题（通过SafeSaveFileDialogHandler解决）
 		public string FileName
 		{
 			get

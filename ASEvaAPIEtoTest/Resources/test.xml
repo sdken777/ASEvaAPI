@@ -116,6 +116,10 @@
     <en>Change color</en>
     <ch>改变颜色</ch>
   </t>
+  <t id="basic-grid-column">
+    <en>C{0}</en>
+    <ch>{0}列</ch>
+  </t>
   <t id="basic-grid-edited">
     <en>Edited: ({0}, {1})</en>
     <ch>已编辑: ({0}, {1})</ch>
