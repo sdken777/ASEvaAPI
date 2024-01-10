@@ -63,14 +63,6 @@
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
                 "ASEvaAPIEtoTest.WindowsDesktop.csproj",
             ],
-            "osx": {
-                "command": "dotnet",
-                "args": [
-                    "../bin/AppMaker.dll",
-                    "${workspaceFolder}/../macapp-local-ASEvaAPIEtoTest.xml",
-                    "debug",
-                ],
-            },
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Subtask: Generate Windows project file",
@@ -89,14 +81,6 @@
                 "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.runtimeconfig.dev.json",
                 "ASEvaAPIEtoTest.WindowsDesktop.csproj",
             ],
-            "osx": {
-                "command": "dotnet",
-                "args": [
-                    "../bin/AppMaker.dll",
-                    "${workspaceFolder}/../macapp-local-ASEvaAPIEtoTest.xml",
-                    "release",
-                ],
-            },
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Subtask: Generate Windows project file",

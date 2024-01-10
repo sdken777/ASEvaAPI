@@ -1,10 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.IO;
+using System.Reflection;
 using ASEva.Utility;
 using ASEva.UIEto;
+using Eto;
 using Eto.Drawing;
 using Eto.Forms;
+using Eto.Mac;
+using Eto.Mac.Drawing;
 using MonoMac.AppKit;
+using MonoMac.ObjCRuntime;
+using MonoMac.Foundation;
 
 namespace ASEva.UIMonoMac
 {
@@ -35,6 +43,13 @@ namespace ASEva.UIMonoMac
             platform.Add<Label.IHandler>(() => new LabelHandler());
 
             var app = new Application(platform);
+
+            // CHECK: 支持无bundle运行
+            if (!InBundle)
+            {
+                var nsApp = app.ControlObject as NSApplication;
+                nsApp.ActivationPolicy = NSApplicationActivationPolicy.Regular;
+            }
 
             // CHECK: 点击主窗口关闭按钮后令应用程序退出
             var appHandler = app.Handler as Eto.Mac.Forms.ApplicationHandler;
@@ -70,7 +85,25 @@ namespace ASEva.UIMonoMac
         public void RunApp(Application application, Form window)
         {
             window.Closing += (o, e) => { if (e.Cancel) window.Visible = true; };
-            application.Run(window);
+            
+            // CHECK: 支持无bundle运行
+            if (InBundle)
+            {
+                application.Run(window);
+            }
+            else
+            {
+                CrashReporter.Attach();
+                NSSetUncaughtExceptionHandler(UncaughtExceptionHandler);
+                EtoBundle.Init();
+                EtoFontManager.Install();
+
+                var nsApp = application.ControlObject as NSApplication;
+                var nsWindow = window.ControlObject as NSWindow;
+                nsWindow.WillClose += delegate { nsApp.AbortModal(); };
+                window.Visible = true;
+                nsApp.RunModalForWindow(nsWindow);
+            }
         }
 
         public Control ConvertControlToEto(object platformControl)
@@ -103,5 +136,41 @@ namespace ASEva.UIMonoMac
         {
             return false;
         }
+
+        private bool InBundle
+        {
+            get
+            {
+                var executableFolderDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                return Path.GetFileName(executableFolderDir) == "MacOS";
+            }
+        }
+
+		private delegate void UncaughtExceptionHandlerDelegate(IntPtr nsexceptionPtr);
+		
+		[DllImport("/System/Library/Frameworks/Foundation.framework/Foundation")]
+		private static extern void NSSetUncaughtExceptionHandler(UncaughtExceptionHandlerDelegate handler);
+
+		private static void UncaughtExceptionHandler(IntPtr nsexceptionPtr)
+		{
+			var nsexception = Runtime.GetNSObject<NSException>(nsexceptionPtr);
+			if (nsexception != null)
+			{
+				if (EtoEnvironment.Platform.IsMono)
+				{
+					// mono includes full stack already
+					throw new ObjCException(nsexception);
+				}
+				else
+				{
+					// .NET 5 does not include the full stack as it goes through native code.
+					// Fortunately, .NET 5 does actually use the StackTrace property for its Exception.ToString() implementation,
+					// so we can feed the stack to the exception object.
+					var st = new System.Diagnostics.StackTrace(1); // skip UncaughtException method
+					var ststr = st.ToString();
+					throw new ObjCException(nsexception, st.ToString());
+				}
+			}
+		}
     }
 }

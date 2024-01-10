@@ -34,14 +34,6 @@
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEto.pdb",
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEto.deps.json",
             ],
-            "osx": {
-                "command": "dotnet",
-                "args": [
-                    "../bin/AppMaker.dll",
-                    "${workspaceFolder}/../macapp-local-ASEvaAPIEtoTest.xml",
-                    "debug",
-                ],
-            },
             "dependsOn": [
                 "Subtask: Build for host (Debug)",
             ],
