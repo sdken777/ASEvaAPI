@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 7, 2, 0); // Update log / 更新记录: 支持TextTableViewCallback.OnSelectedRowChanged
+            return new Version(2, 7, 2, 1); // Update log / 更新记录: 细节调整
         }
     }
 }
