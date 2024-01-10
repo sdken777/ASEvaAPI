@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 3, 1); // Update log / 更新记录: 细节优化
+            return new Version(2, 9, 3, 2); // Update log / 更新记录: 修正对话框打开关闭后无法退出应用程序问题
         }
     }
 }

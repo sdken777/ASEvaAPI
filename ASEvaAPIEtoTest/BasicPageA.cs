@@ -53,9 +53,17 @@ namespace ASEvaAPIEtoTest
                         dialog.Filters.Add(new FileFilter(t["basic-save-file-filter"], ".txt"));
                         if (dialog.ShowDialog(App.PassParent(this)) == DialogResult.Ok) MessageBox.Show(dialog.FileName);
                     }
-                    else new OpenFileDialog().ShowDialog(App.PassParent(this));
+                    else
+                    {
+                        var dialog = new OpenFileDialog();
+                        if (dialog.ShowDialog(App.PassParent(this)) == DialogResult.Ok) MessageBox.Show(dialog.FileName);
+                    }
                 }
-                else new SelectFolderDialog().ShowDialog(App.PassParent(this));
+                else
+                {
+                    var dialog = new SelectFolderDialog();
+                    if (dialog.ShowDialog(App.PassParent(this)) == DialogResult.Ok) MessageBox.Show(dialog.Directory);
+                }
             };
         }
 
