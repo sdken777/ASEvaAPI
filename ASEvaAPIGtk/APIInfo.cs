@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 3, 0); // Update log / 更新记录: 支持TextTableViewCallback.OnSelectedRowChanged
+            return new Version(2, 9, 3, 1); // Update log / 更新记录: 细节优化
         }
     }
 }
