@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Reflection;
+using System.Linq;
 using ASEva.Utility;
 using ASEva.UIEto;
 using Eto;
@@ -49,6 +50,24 @@ namespace ASEva.UIMonoMac
             {
                 var nsApp = app.ControlObject as NSApplication;
                 nsApp.ActivationPolicy = NSApplicationActivationPolicy.Regular;
+
+                var targetLib = Assembly.GetEntryAssembly();
+                var names = targetLib.GetManifestResourceNames().ToList();
+                String icnsName = null;
+                if (names.Contains("icon.icns")) icnsName = "icon.icns";
+                else icnsName = names.Find(s => s.EndsWith(".icns"));
+                if (icnsName != null)
+                {
+                    var instream = targetLib.GetManifestResourceStream(icnsName);
+                    if (instream != null && instream.Length > 0)
+                    {
+                        var data = new byte[instream.Length];
+                        instream.Read(data, 0, data.Length);
+                        instream.Close();
+
+                        nsApp.ApplicationIconImage = new NSImage(NSData.FromArray(data));
+                    }
+                }
             }
 
             // CHECK: 点击主窗口关闭按钮后令应用程序退出
