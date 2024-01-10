@@ -45,6 +45,9 @@ namespace ASEva.UIMonoMac
 
 			public override void DidFinishNavigation(wk.WKWebView webView, wk.WKNavigation navigation)
 			{
+				// CHECK: 使用系统字体
+				Handler.ExecuteScript("document.body.style.fontFamily = \"-apple-system\"");
+
 				var h = Handler;
 				if (h != null)
 				{

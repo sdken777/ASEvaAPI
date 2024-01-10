@@ -31,7 +31,7 @@ namespace ASEva.UIMonoMac
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 6, 4, 1); // Update log / 更新记录: 细节修正
+            return new Version(1, 6, 4, 2); // Update log / 更新记录: 细节修正2
         }
     }
 }
