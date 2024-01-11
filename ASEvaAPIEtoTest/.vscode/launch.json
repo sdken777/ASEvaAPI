@@ -51,10 +51,6 @@
             "windows": {
                 "args": [ "${input:windows_ui}" ]
             },
-            "osx": {
-                "program": "${workspaceFolder}/../macapp/ASEvaAPIEtoTest.app/Contents/MacOS/ASEvaAPIEtoTest",
-                "cwd": "${workspaceFolder}/../macapp/ASEvaAPIEtoTest.app/Contents/MacOS/",
-            },
             "linux": {
                 "env": {
                     "GDK_BACKEND": "${input:gdk_backend}",
@@ -73,10 +69,6 @@
             "stopAtEntry": false,
             "windows": {
                 "args": [ "${input:windows_ui}" ]
-            },
-            "osx": {
-                "program": "${workspaceFolder}/../macapp/ASEvaAPIEtoTest.app/Contents/MacOS/ASEvaAPIEtoTest",
-                "cwd": "${workspaceFolder}/../macapp/ASEvaAPIEtoTest.app/Contents/MacOS/",
             },
             "linux": {
                 "env": {

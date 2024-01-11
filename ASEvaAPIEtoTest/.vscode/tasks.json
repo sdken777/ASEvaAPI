@@ -15,19 +15,6 @@
             }
         },
         {
-            "id": "helper_platform_simple_arch",
-            "type": "command",
-            "command": "shell-command.run",
-            "args": {
-                "cmd": "dotnet",
-                "args": [
-                    "../bin/VSCodeHelper.dll",
-                    "shell_command",
-                    "platform_simple_arch"
-                ]
-            }
-        },
-        {
             "id": "helper_platform_exe_text_resource_editor",
             "type": "command",
             "command": "shell-command.run",
@@ -36,7 +23,7 @@
                 "args": [
                     "../bin/VSCodeHelper.dll",
                     "shell_command",
-                    "platform_exe",
+                    "platform_console_exe",
                     "TextResourceEditor",
                 ]
             }
@@ -63,15 +50,6 @@
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
                 "ASEvaAPIEtoTest.WindowsDesktop.csproj",
             ],
-            "osx": {
-                "command": "dotnet",
-                "args": [
-                    "../bin/AppMaker.dll",
-                    "${workspaceFolder}/../macapp-local-ASEvaAPIEtoTest.xml",
-                    "debug",
-                    "${input:helper_platform_simple_arch}",
-                ],
-            },
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Subtask: Generate Windows project file",
@@ -90,15 +68,6 @@
                 "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.runtimeconfig.dev.json",
                 "ASEvaAPIEtoTest.WindowsDesktop.csproj",
             ],
-            "osx": {
-                "command": "dotnet",
-                "args": [
-                    "../bin/AppMaker.dll",
-                    "${workspaceFolder}/../macapp-local-ASEvaAPIEtoTest.xml",
-                    "release",
-                    "${input:helper_platform_simple_arch}",
-                ],
-            },
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Subtask: Generate Windows project file",

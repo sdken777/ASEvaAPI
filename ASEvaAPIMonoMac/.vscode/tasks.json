@@ -14,19 +14,6 @@
                 ]
             }
         },
-        {
-            "id": "helper_platform_simple_arch",
-            "type": "command",
-            "command": "shell-command.run",
-            "args": {
-                "cmd": "dotnet",
-                "args": [
-                    "../bin/VSCodeHelper.dll",
-                    "shell_command",
-                    "platform_simple_arch"
-                ]
-            }
-        },
     ],
     "presentation": {
         "echo": true,
@@ -47,15 +34,6 @@
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIMonoMac.pdb",
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIMonoMac.deps.json",
             ],
-            "osx": {
-                "command": "dotnet",
-                "args": [
-                    "../bin/AppMaker.dll",
-                    "${workspaceFolder}/../macapp-local-ASEvaAPIEtoTest.xml",
-                    "debug",
-                    "${input:helper_platform_simple_arch}",
-                ],
-            },
             "dependsOn": [
                 "Subtask: Build for host (Debug)",
             ],
