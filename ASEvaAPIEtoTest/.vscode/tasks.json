@@ -23,7 +23,7 @@
                 "args": [
                     "../bin/VSCodeHelper.dll",
                     "shell_command",
-                    "platform_exe",
+                    "platform_console_exe",
                     "TextResourceEditor",
                 ]
             }
