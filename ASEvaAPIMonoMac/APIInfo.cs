@@ -31,7 +31,7 @@ namespace ASEva.UIMonoMac
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 7, 1, 1); // Update log / 更新记录: 细节调整
+            return new Version(1, 7, 1, 2); // Update log / 更新记录: 修复无bundle运行时（或info.plist不设置NSRequiresAquaSystemAppearance）OpenGLView不显示文本问题
         }
     }
 }
