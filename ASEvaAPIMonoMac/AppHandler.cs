@@ -90,6 +90,7 @@ namespace ASEva.UIMonoMac
             SnapshotExtensions.ScreenModeHandler = new ScreenSnapshotHandler();
             CheckableListBox.Factory = new CheckableListBoxFactoryMonoMac();
             TextTableView.Factory = new TextTableViewFactoryMonoMac();
+            SimpleTreeView.Factory = new SimpleTreeViewFactoryMonoMac();
 
             uiBackend = null;
             webViewBackend = "webkit2";

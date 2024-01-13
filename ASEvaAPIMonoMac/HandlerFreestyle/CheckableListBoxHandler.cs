@@ -198,23 +198,23 @@ namespace ASEva.UIMonoMac
             }
 		}
 
-        class VerticalAlignTextCell : NSTextFieldCell
-        {
-            public VerticalAlignTextCell()
-            {}
-
-            public VerticalAlignTextCell(IntPtr handle) : base(handle)
-            {}
-
-            public override CGRect DrawingRectForBounds(CGRect theRect)
-            {
-                var titleFrame = base.DrawingRectForBounds(theRect);
-                var yOffset = (titleFrame.Height - CellSize.Height) / 2;
-                return new CGRect(titleFrame.X, titleFrame.Y + yOffset, titleFrame.Width, titleFrame.Height - yOffset);
-            }
-        }
-
         private ASEva.UIEto.CheckableListBoxCallback callback;
         private NSTableView tableView;
+    }
+
+    class VerticalAlignTextCell : NSTextFieldCell
+    {
+        public VerticalAlignTextCell()
+        {}
+
+        public VerticalAlignTextCell(IntPtr handle) : base(handle)
+        {}
+
+        public override CGRect DrawingRectForBounds(CGRect theRect)
+        {
+            var titleFrame = base.DrawingRectForBounds(theRect);
+            var yOffset = (titleFrame.Height - CellSize.Height) / 2;
+            return new CGRect(titleFrame.X, titleFrame.Y + yOffset, titleFrame.Width, titleFrame.Height - yOffset);
+        }
     }
 }

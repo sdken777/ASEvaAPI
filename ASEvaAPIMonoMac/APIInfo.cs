@@ -1,8 +1,8 @@
 ﻿/*! \mainpage
  * \~English This library contains the APIs for MonoMac. See ASEva.UIMonoMac for details. \n
  * \~Chinese 此类库为ASEva-API中基于MonoMac的部分。详见 ASEva.UIMonoMac \n
- * \~English This document corresponds to API version: 1.7.1 \n\n
- * \~Chinese 本文档对应API版本：1.7.1 \n\n
+ * \~English This document corresponds to API version: 1.7.2 \n\n
+ * \~Chinese 本文档对应API版本：1.7.2 \n\n
  * 
  * \~English MonoMac repository (.NET Core branch): https://github.com/cwensley/monomac \n
  * \~Chinese MonoMac仓库(.NET Core分支): https://github.com/cwensley/monomac \n
@@ -15,7 +15,7 @@ using System;
 namespace ASEva.UIMonoMac
 {
     /// <summary>
-    /// version=1.7.1
+    /// version=1.7.2
     /// </summary>
     public class APIInfo
     {
@@ -31,7 +31,7 @@ namespace ASEva.UIMonoMac
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 7, 1, 2); // Update log / 更新记录: 修复无bundle运行时（或info.plist不设置NSRequiresAquaSystemAppearance）OpenGLView不显示文本问题
+            return new Version(1, 7, 2, 0); // Update log / 更新记录: 新增SimpleTreeViewFactoryMonoMac
         }
     }
 }
