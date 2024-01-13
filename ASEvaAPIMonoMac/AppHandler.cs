@@ -90,6 +90,7 @@ namespace ASEva.UIMonoMac
             SnapshotExtensions.ScreenModeHandler = new ScreenSnapshotHandler();
             CheckableListBox.Factory = new CheckableListBoxFactoryMonoMac();
             TextTableView.Factory = new TextTableViewFactoryMonoMac();
+            SimpleTreeView.Factory = new SimpleTreeViewFactoryMonoMac();
 
             uiBackend = null;
             webViewBackend = "webkit2";
@@ -115,7 +116,7 @@ namespace ASEva.UIMonoMac
                 CrashReporter.Attach();
                 NSSetUncaughtExceptionHandler(UncaughtExceptionHandler);
                 EtoBundle.Init();
-                EtoFontManager.Install();
+                // EtoFontManager.Install(); // 会出现"A shared NSFontManager instance already exists"
 
                 var nsApp = application.ControlObject as NSApplication;
                 var nsWindow = window.ControlObject as NSWindow;
@@ -153,7 +154,7 @@ namespace ASEva.UIMonoMac
 
         public bool ShouldPassParent()
         {
-            return false;
+            return true;
         }
 
         private bool InBundle

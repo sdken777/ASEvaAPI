@@ -133,7 +133,7 @@ namespace ASEva.UIMonoMac
             {
                 if (i >= textViews.Count)
                 {
-                    var newView = new TextView(callback, this) { Editable = false, Selectable = false, DrawsBackground = false };
+                    var newView = new TextView(callback, this) { Editable = false, Selectable = false, DrawsBackground = false, WantsLayer = true };
                     this.AddSubview(newView);
                     textViews.Add(new TextViewContext
                     {

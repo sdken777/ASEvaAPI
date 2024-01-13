@@ -103,6 +103,7 @@ namespace ASEvaAPIEtoTest
                 form.Resizable = form.Maximizable = false;
                 form.Title = "";
                 form.Content = new Panel();
+                form.Owner = App.PassParent(this);
                 form.Show();
             };
             var imageButton = layout.AddButton(Bitmap.FromResource("button.png"));
