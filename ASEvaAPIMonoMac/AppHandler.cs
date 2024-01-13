@@ -115,7 +115,7 @@ namespace ASEva.UIMonoMac
                 CrashReporter.Attach();
                 NSSetUncaughtExceptionHandler(UncaughtExceptionHandler);
                 EtoBundle.Init();
-                EtoFontManager.Install();
+                // EtoFontManager.Install(); // 会出现"A shared NSFontManager instance already exists"
 
                 var nsApp = application.ControlObject as NSApplication;
                 var nsWindow = window.ControlObject as NSWindow;
@@ -153,7 +153,7 @@ namespace ASEva.UIMonoMac
 
         public bool ShouldPassParent()
         {
-            return false;
+            return true;
         }
 
         private bool InBundle

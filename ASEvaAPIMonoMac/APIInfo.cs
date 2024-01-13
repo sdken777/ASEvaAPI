@@ -31,7 +31,7 @@ namespace ASEva.UIMonoMac
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 7, 1, 0); // Update log / 更新记录: 支持无bundle时设置应用图标
+            return new Version(1, 7, 1, 1); // Update log / 更新记录: 细节调整
         }
     }
 }
