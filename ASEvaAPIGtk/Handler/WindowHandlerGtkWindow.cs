@@ -561,7 +561,8 @@ namespace ASEva.UIGtk
 
 		public virtual void Close()
 		{
-			if (Widget.Loaded && CloseWindow())
+			// CHECK: 修正调用Form.Close导致异常问题
+			if (Widget.Loaded && CloseWindow() && !Widget.IsDisposed)
 			{
 				Control.Hide();
 				Control.Unrealize();

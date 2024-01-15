@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 3, 3); // Update log / 更新记录: 修正SafeSaveFileDialogHandler.genFileName异常
+            return new Version(2, 9, 3, 4); // Update log / 更新记录: 修正调用Form.Close导致异常问题
         }
     }
 }
