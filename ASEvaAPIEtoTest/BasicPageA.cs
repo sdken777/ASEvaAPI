@@ -73,7 +73,7 @@ namespace ASEvaAPIEtoTest
         private void initBasicTabPageARow2(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 2));
-            layout.AddComboBox(new string[] { t.Format("basic-combobox", "A"), t.Format("basic-combobox", "B") }, false, 120);
+            layout.AddComboBox(new string[] { t.Format("basic-combobox", "A"), t.Format("basic-combobox", "B") }).SetLogicalWidth(120);
             layout.AddControl(new NumericStepper { MinValue = 0, MaxValue = 100 }, false, 120 );
             layout.AddControl(new DateTimePicker(), true);
         }
