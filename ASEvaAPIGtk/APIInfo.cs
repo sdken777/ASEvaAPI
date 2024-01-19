@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 3, 5); // Update log / 更新记录: 修正DateComboBox.CleanDialog
+            return new Version(2, 9, 3, 6); // Update log / 更新记录: 修正PixelLayout添加后无显示问题
         }
     }
 }

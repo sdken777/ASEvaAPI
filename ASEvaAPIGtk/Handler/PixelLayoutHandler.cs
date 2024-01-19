@@ -43,8 +43,10 @@ namespace ASEva.UIGtk
 			var widget = ctl.ContainerControl;
 			if (widget.Parent != null)
 				((Gtk.Container)widget.Parent).Remove(widget);
-			widget.ShowAll();
+			
+			// CHECK: 修正添加后无显示问题
 			widget = new EtoVBox { Child = widget };
+			widget.ShowAll();
 #else
 			var widget = ctl.ContainerControl;
 			if (widget.Parent != null)
