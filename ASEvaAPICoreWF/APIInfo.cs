@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 7, 2, 1); // Update log / 更新记录: 细节调整
+            return new Version(2, 7, 2, 2); // Update log / 更新记录: 细节调整2
         }
     }
 }
