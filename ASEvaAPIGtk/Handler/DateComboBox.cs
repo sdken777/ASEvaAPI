@@ -125,6 +125,10 @@ namespace ASEva.UIGtk
 
 			dlg.DateChanged -= Dlg_DateChanged;
 			dlg.DialogClosed -= Dlg_DialogClosed;
+
+			// CHECK: 修正弹窗关闭后一段时间出现g_object_remove_toggle_ref异常
+			dlg.Dispose();
+
 			dlg = null;
 		}
 

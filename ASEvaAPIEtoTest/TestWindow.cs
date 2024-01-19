@@ -44,6 +44,7 @@ namespace ASEvaAPIEtoTest
             loopTimer.Interval = 0.015;
             loopTimer.Elapsed += delegate
             {
+                loopBasicPageA();
                 loopDrawDefault2D();
                 loopDrawSkia2D();
                 loopDrawGL();
