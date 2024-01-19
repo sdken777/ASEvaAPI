@@ -189,7 +189,11 @@ namespace ASEva.UIGtk
 		public virtual Color TextColor
 		{
 			get { return Control.GetForeground(); }
-			set { Control.SetForeground(value); }
+			set
+			{
+				if (value == Colors.Black) Control.ModifyFg(Gtk.StateType.Normal);
+				else Control.SetForeground(value);
+			}
 		}
 
 		public override string Text
