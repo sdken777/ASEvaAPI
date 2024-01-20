@@ -133,7 +133,7 @@ namespace ASEvaAPIEtoTest
         private Panel generateFlowItem()
         {
             var panel = new Panel();
-            panel.BackgroundColor = Colors.LightYellow;
+            panel.BackgroundColor = new Color(Colors.DarkBlue, 0.2f);
             var table = panel.SetContentAsTableLayout();
             var row = table.AddRow(true);
             row.AddLabel(t.Format("basic-label-row", ++flowItemCount));
