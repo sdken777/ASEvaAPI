@@ -45,6 +45,7 @@ namespace ASEva.UIWpf
             SnapshotExtensions.ScreenModeHandler = new ScreenSnapshotHandler();
             CheckableListBox.Factory = new CheckableListBoxFactoryWpf();
             TextTableView.Factory = new TextTableViewFactoryWpf();
+            FullScreenExtensions.Handler = new FullScreenHandler();
 
             uiBackend = null;
             webViewBackend = "webview2";

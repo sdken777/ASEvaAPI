@@ -284,6 +284,14 @@
     <en>Check item {0}</en>
     <ch>多选项{0}</ch>
   </t>
+  <t id="menu-exit">
+    <en>Exit</en>
+    <ch>退出</ch>
+  </t>
+  <t id="menu-fullscreen">
+    <en>Fullscreen</en>
+    <ch>全屏</ch>
+  </t>
   <t id="menu-radio">
     <en>Radio item {0}</en>
     <ch>单选项{0}</ch>

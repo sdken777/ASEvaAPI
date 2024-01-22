@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.13.4
+            version=2.13.5
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -1158,6 +1158,28 @@
             <summary>
             (api:eto=2.8.14) 方便进行结构体转换操作的扩展
             </summary>
+        </member>
+        <member name="T:ASEva.UIEto.FullScreenExtensions">
+            \~English
+            <summary>
+            (api:eto=2.13.5) Extensions for make window full screen
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=2.13.5) 全屏化窗口的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.FullScreenExtensions.MaximizeToFullScreen(Eto.Forms.Window)">
+            \~English
+            <summary>
+            Make window full screen
+            </summary>
+            <param name="window">Target window object</param>
+            \~Chinese
+            <summary>
+            全屏化窗口
+            </summary>
+            <param name="window">目标窗口</param>
         </member>
         <member name="T:ASEva.UIEto.GraphicsExtensions">
             \~English

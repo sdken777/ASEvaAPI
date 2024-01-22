@@ -64,6 +64,7 @@ namespace ASEva.UICoreWF
             SnapshotExtensions.ScreenModeHandler = new ScreenSnapshotHandler();
             IconExtensions.FinalFrameOnly = true;
             OverlayLayout.ExpandControlSize = true;
+            FullScreenExtensions.Handler = new FullScreenHandler();
 
             uiBackend = null;
             webViewBackend = "webview2";

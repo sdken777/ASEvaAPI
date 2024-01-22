@@ -11,7 +11,9 @@ namespace ASEvaAPIEtoTest
     {
         private void initContextMenu(ContextMenu menu)
         {
-            menu.AddButtonItem(t["menu-button"], Bitmap.FromResource("menu-button.png")).Click += delegate { MessageBox.Show(App.WorkPath); };
+            menu.AddButtonItem(t["menu-fullscreen"]).Click += delegate { this.MaximizeToFullScreen(); };
+            menu.AddButtonItem(t["menu-exit"]).Click += delegate { Close(); };
+            menu.AddSeparator();
             var subMenu = menu.AddButtonItem(t["menu-sub"]);
             subMenu.AddButtonItem(t.Format("menu-sub-item", "A"));
             subMenu.AddSeparator();
