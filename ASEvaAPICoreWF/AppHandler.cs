@@ -5,6 +5,7 @@ using Eto.Forms;
 using Eto.Drawing;
 using Eto.WinForms;
 using System.Collections.Generic;
+using Eto.WinForms.Forms;
 
 namespace ASEva.UICoreWF
 {
@@ -66,6 +67,9 @@ namespace ASEva.UICoreWF
             OverlayLayout.ExpandControlSize = true;
             FullScreenExtensions.Handler = new FullScreenHandler();
 
+            // CHECK: 修正application.Run之前不触发MouseDown等事件
+            System.Windows.Forms.Application.AddMessageFilter(TempBubbleEventFilter);
+
             uiBackend = null;
             webViewBackend = "webview2";
             return app;
@@ -89,6 +93,9 @@ namespace ASEva.UICoreWF
 
         public void RunApp(Application application, Form window)
         {
+            // CHECK: 修正application.Run之前不触发MouseDown等事件
+            System.Windows.Forms.Application.RemoveMessageFilter(TempBubbleEventFilter);
+
             window.Closed += delegate { findAndHideWebViews(window); };
             application.Run(window);
         }
@@ -130,5 +137,50 @@ namespace ASEva.UICoreWF
         {
             return false;
         }
+
+        private BubbleEventFilter TempBubbleEventFilter
+        {
+            get
+            {
+                if (tempBubbleEventFilter == null)
+                {
+                    var bubble = new BubbleEventFilter();
+                    bubble.AddBubbleMouseEvent((c, cb, e) => cb.OnMouseWheel(c, e), null, Win32.WM.MOUSEWHEEL);
+                    bubble.AddBubbleMouseEvent((c, cb, e) => cb.OnMouseMove(c, e), null, Win32.WM.MOUSEMOVE);
+                    bubble.AddBubbleMouseEvents((c, cb, e) =>
+                    {
+                        cb.OnMouseDown(c, e);
+                        if (e.Handled && c.Handler is IWindowsControl handler && handler.ShouldCaptureMouse)
+                        {
+                            handler.ContainerControl.Capture = true;
+                            handler.MouseCaptured = true;
+                        }
+                    }, true, Win32.WM.LBUTTONDOWN, Win32.WM.RBUTTONDOWN, Win32.WM.MBUTTONDOWN);
+                    bubble.AddBubbleMouseEvents((c, cb, e) =>
+                    {
+                        cb.OnMouseDoubleClick(c, e);
+                        if (!e.Handled)
+                            cb.OnMouseDown(c, e);
+                    }, null, Win32.WM.LBUTTONDBLCLK, Win32.WM.RBUTTONDBLCLK, Win32.WM.MBUTTONDBLCLK);
+                    void OnMouseUpHandler(Control c, Control.ICallback cb, MouseEventArgs e)
+                    {
+                        if (c.Handler is IWindowsControl handler && handler.MouseCaptured)
+                        {
+                            handler.MouseCaptured = false;
+                            handler.ContainerControl.Capture = false;
+                        }
+                        cb.OnMouseUp(c, e);
+                    }
+                    bubble.AddBubbleMouseEvent(OnMouseUpHandler, false, Win32.WM.LBUTTONUP, b => MouseButtons.Primary);
+                    bubble.AddBubbleMouseEvent(OnMouseUpHandler, false, Win32.WM.RBUTTONUP, b => MouseButtons.Alternate);
+                    bubble.AddBubbleMouseEvent(OnMouseUpHandler, false, Win32.WM.MBUTTONUP, b => MouseButtons.Middle);
+                    tempBubbleEventFilter = bubble;
+                }
+                return tempBubbleEventFilter;
+            }
+        }
+        private BubbleEventFilter tempBubbleEventFilter;
     }
+
+
 }

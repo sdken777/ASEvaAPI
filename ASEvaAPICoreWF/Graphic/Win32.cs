@@ -5,7 +5,7 @@ using System.Drawing;
 
 namespace ASEva.UICoreWF
 {
-	static class Win32
+	static partial class Win32
 	{
         static Win32()
         {
