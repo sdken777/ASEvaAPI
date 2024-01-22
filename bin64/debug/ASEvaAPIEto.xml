@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.13.2
+            version=2.13.3
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -2731,6 +2731,16 @@
             新选中控件后触发事件
             </summary>
         </member>
+        <member name="P:ASEva.UIEto.FlowLayout.Selectable">
+            \~English
+            <summary>
+            (api:eto=2.13.3) Whether selectable
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=2.13.3) 是否可选中控件
+            </summary>
+        </member>
         <member name="T:ASEva.UIEto.FlowLayout2D">
             \~English
             <summary>
@@ -2929,6 +2939,16 @@
             \~Chinese
             <summary>
             新选中控件后触发事件
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.FlowLayout2D.Selectable">
+            \~English
+            <summary>
+            (api:eto=2.13.3) Whether selectable
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=2.13.3) 是否可选中控件
             </summary>
         </member>
         <member name="T:ASEva.UIEto.TextAnchor">
