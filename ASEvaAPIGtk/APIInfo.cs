@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 4, 0); // Update log / 更新记录: 支持MaximizeToFullScreen
+            return new Version(2, 9, 4, 1); // Update log / 更新记录: 修正方向键无法触发事件问题
         }
     }
 }
