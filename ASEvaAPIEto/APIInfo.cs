@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 13, 5, 0); // Update log / 更新记录: 增加FullScreenExtensions
+            return new Version(2, 13, 5, 1); // Update log / 更新记录: App.Run不转发KeyDown事件
         }
 
         /// \~English

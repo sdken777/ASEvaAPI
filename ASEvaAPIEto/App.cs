@@ -94,7 +94,6 @@ namespace ASEva.UIEto
         {
             if (handler != null && application != null && window != null)
             {
-                window.KeyDown += (o, e) => { KeyDown?.Invoke(o, e); };
                 window.Closed += delegate { window.CloseRecursively(); };
                 handler.RunApp(application, window);
             }
@@ -353,21 +352,21 @@ namespace ASEva.UIEto
 
 		/// \~English
 		/// <summary>
-		/// (api:eto=2.11.4) Key press event of main window
+		/// (api:eto=2.11.4) Key press event of main window (Generally only for plugins)
 		/// </summary>
 		/// \~Chinese
 		/// <summary>
-		/// (api:eto=2.11.4) 主窗口的按键事件
+		/// (api:eto=2.11.4) 主窗口的按键事件（一般仅供插件使用）
 		/// </summary>
 		public static event EventHandler<KeyEventArgs> KeyDown;
 
 		/// \~English
 		/// <summary>
-        /// (api:eto=2.11.4) When ASEva.UIEto.App.Run is not used, you can use this function to manually trigger the KeyDown event
+        /// (api:eto=2.11.4) Workflow should use this function to manually trigger the KeyDown event
         /// </summary>
 		/// \~Chinese
         /// <summary>
-        /// (api:eto=2.11.4) 未使用 ASEva.UIEto.App.Run 启动时可使用此函数手动触发KeyDown事件
+        /// (api:eto=2.11.4) 主流程应使用此函数手动触发KeyDown事件
         /// </summary>
         public static void TriggerKeyDown(object sender, KeyEventArgs args)
         {
