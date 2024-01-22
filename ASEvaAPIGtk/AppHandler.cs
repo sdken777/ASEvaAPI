@@ -85,6 +85,7 @@ namespace ASEva.UIGtk
             FlowLayout.Factory = new FlowLayoutFactoryGtk();
             FlowLayout2D.Factory = new FlowLayout2DFactoryGtk();
             OverlayLayout.DelayHandleControl = true;
+            FullScreenExtensions.Handler = new FullScreenHandler();
 
             webViewBackend = "webkit2";
 

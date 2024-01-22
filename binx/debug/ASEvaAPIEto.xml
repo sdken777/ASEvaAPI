@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.13.2
+            version=2.13.5
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -328,6 +328,16 @@
             (api:eto=2.8.17) 更新图像
             </summary>
             <param name="image">新图像，尺寸应与原图像一致，否则不更新</param>
+        </member>
+        <member name="P:ASEva.UIEto.ButtonPanel.Font">
+            \~English
+            <summary>
+            (api:eto=2.13.4) Font of text button panel
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=2.13.4) 面板式文字按钮的字体
+            </summary>
         </member>
         <member name="E:ASEva.UIEto.ButtonPanel.Click">
             \~English
@@ -1148,6 +1158,28 @@
             <summary>
             (api:eto=2.8.14) 方便进行结构体转换操作的扩展
             </summary>
+        </member>
+        <member name="T:ASEva.UIEto.FullScreenExtensions">
+            \~English
+            <summary>
+            (api:eto=2.13.5) Extensions for make window full screen
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=2.13.5) 全屏化窗口的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.FullScreenExtensions.MaximizeToFullScreen(Eto.Forms.Window)">
+            \~English
+            <summary>
+            Make window full screen
+            </summary>
+            <param name="window">Target window object</param>
+            \~Chinese
+            <summary>
+            全屏化窗口
+            </summary>
+            <param name="window">目标窗口</param>
         </member>
         <member name="T:ASEva.UIEto.GraphicsExtensions">
             \~English
@@ -2731,6 +2763,16 @@
             新选中控件后触发事件
             </summary>
         </member>
+        <member name="P:ASEva.UIEto.FlowLayout.Selectable">
+            \~English
+            <summary>
+            (api:eto=2.13.3) Whether selectable
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=2.13.3) 是否可选中控件
+            </summary>
+        </member>
         <member name="T:ASEva.UIEto.FlowLayout2D">
             \~English
             <summary>
@@ -2929,6 +2971,16 @@
             \~Chinese
             <summary>
             新选中控件后触发事件
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.FlowLayout2D.Selectable">
+            \~English
+            <summary>
+            (api:eto=2.13.3) Whether selectable
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=2.13.3) 是否可选中控件
             </summary>
         </member>
         <member name="T:ASEva.UIEto.TextAnchor">
