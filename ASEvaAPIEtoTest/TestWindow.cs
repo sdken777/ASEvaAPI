@@ -51,6 +51,11 @@ namespace ASEvaAPIEtoTest
             };
             loopTimer.Start();
 
+            KeyDown += (o, e) =>
+            {
+                if (e.Control && e.Key == Keys.P) MessageBox.Show("Ctrl+P");
+            };
+
             Closing += (o, e) =>
             {
                 if (MessageBox.Show(t["exit-confirm"], MessageBoxButtons.YesNo, MessageBoxType.Question) == DialogResult.Yes)

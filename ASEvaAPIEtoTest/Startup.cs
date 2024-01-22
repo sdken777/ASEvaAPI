@@ -12,9 +12,12 @@ namespace ASEvaAPIEtoTest
             Icon = Icon.FromResource("icon.png");
             SetFixMode(400, 80, false);
 
-            var layout = this.SetContentAsRowLayout();
-            var optionsLayout = layout.AddTableLayout(true);
-            layout.AddButton("OK", false, 80).Click += delegate { this.Close(); };
+            var layout = this.SetContentAsRowLayout(8, 8, VerticalAlignment.Stretch);
+            var optionsLayout = layout.AddTableLayout(true, 8, 0);
+            
+            var button = layout.AddButtonPanel("OK", false, 80);
+            button.DefaultBackgroundColor = Colors.LightGrey;
+            button.Click += delegate { this.Close(); };
 
             var row = optionsLayout.AddRow(true);
             row.AddLabel("Language: ");
