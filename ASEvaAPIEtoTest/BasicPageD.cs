@@ -75,7 +75,9 @@ namespace ASEvaAPIEtoTest
             layout.AddLinkButton(t.Format("basic-tooltip", 2)).ToolTip = t.Format("basic-tooltip", 2);
             layout.AddCheckBox(t.Format("basic-tooltip", 3)).ToolTip = t.Format("basic-tooltip", 3);
             layout.AddButton(t.Format("basic-tooltip", 4)).ToolTip = t.Format("basic-tooltip", 4);
-            layout.AddButtonPanel(t.Format("basic-tooltip", 5)).ToolTip = t.Format("basic-tooltip", 5);
+            var textButton = layout.AddButtonPanel(t.Format("basic-tooltip", 5), false, 0, 0, 2);
+            textButton.Font = App.DefaultFont(1.2f);
+            textButton.ToolTip = t.Format("basic-tooltip", 5);
             layout.AddButtonPanel(Bitmap.FromResource("button.png")).ToolTip = t.Format("basic-tooltip", 6);
         }
     }

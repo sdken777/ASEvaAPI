@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.13.3
+            version=2.13.4
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -328,6 +328,16 @@
             (api:eto=2.8.17) 更新图像
             </summary>
             <param name="image">新图像，尺寸应与原图像一致，否则不更新</param>
+        </member>
+        <member name="P:ASEva.UIEto.ButtonPanel.Font">
+            \~English
+            <summary>
+            (api:eto=2.13.4) Font of text button panel
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=2.13.4) 面板式文字按钮的字体
+            </summary>
         </member>
         <member name="E:ASEva.UIEto.ButtonPanel.Click">
             \~English

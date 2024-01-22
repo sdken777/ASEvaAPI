@@ -78,6 +78,28 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
+        /// (api:eto=2.13.4) Font of text button panel
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.13.4) 面板式文字按钮的字体
+        /// </summary>
+        public Font Font
+        {
+            get
+            {
+                if (label == null) return null;
+                else return label.Font;
+            }
+            set
+            {
+                if (label == null) return;
+                label.Font = value;
+            }
+        }
+
+        /// \~English
+        /// <summary>
         /// Click event
         /// </summary>
         /// \~Chinese
