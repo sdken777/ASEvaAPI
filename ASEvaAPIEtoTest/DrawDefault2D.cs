@@ -14,25 +14,33 @@ namespace ASEvaAPIEtoTest
             var layout = tabPage.SetContentAsColumnLayout();
             var overlay = layout.AddControl(new OverlayLayout(), true, 200, 0) as OverlayLayout;
             drawableDefault2D = overlay.AddControl(new Drawable(), 0, 0, 0, 0) as Drawable;
-            var buttonA = overlay.AddControl(new Button { Text = "A" }, 10, null, 10, null) as Button;
-            var buttonB = overlay.AddControl(new Button { Text = "B", Visible = false }, 10, null, null, 10) as Button;
-            var buttonC = overlay.AddControl(new Button { Text = "C", Visible = false }, null, 10, 10, null) as Button;
-            var buttonD = overlay.AddControl(new Button { Text = "D", Visible = false }, null, 10, null, 10) as Button;
 
-            buttonA.SetLogicalWidth(30);
-            buttonB.SetLogicalWidth(30);
-            buttonC.SetLogicalWidth(30);
-            buttonD.SetLogicalWidth(30);
+            var buttonA = new Button { Text = "A" };
+            var buttonB = new Button { Text = "B" };
+            var buttonC = new Button { Text = "C" };
+            var buttonD = new Button { Text = "D" };
+            var linkButton = new LinkButton{ Text = "ABCD", ToolTip = "ABCD" };
+            overlay.AddControl(buttonA, 10, null, 10, null);
 
             buttonA.Click += delegate
             {
-                buttonB.Visible = buttonC.Visible = buttonD.Visible = true;
+                overlay.AddControl(buttonB, null, 10, 10, null);
+                overlay.AddControl(buttonC, null, 10, null, 10);
+                overlay.AddControl(buttonD, 10, null, null, 10);
+            };
+            buttonB.Click += delegate
+            {
+                overlay.AddControl(linkButton, null, 10, null, null);
             };
             buttonC.Click += delegate
             {
-                if (overlayLinkButton != null) return;
-                overlayLinkButton = new LinkButton{ Text = "ABCD", ToolTip = "ABCD" };
-                overlay.AddControl(overlayLinkButton, null, 10, null, null);
+                overlay.RemoveControl(linkButton);
+            };
+            buttonD.Click += delegate
+            {
+                overlay.RemoveControl(buttonB);
+                overlay.RemoveControl(buttonC);
+                overlay.RemoveControl(buttonD);
             };
 
             drawableDefault2D.MouseDown += (o, e) =>
@@ -82,6 +90,5 @@ namespace ASEvaAPIEtoTest
         private Drawable drawableDefault2D;
         private TextBitmap drawableTextBitmap;
         private List<FloatPoint> drawPoints = new List<FloatPoint>();
-        private LinkButton overlayLinkButton;
     }
 }
