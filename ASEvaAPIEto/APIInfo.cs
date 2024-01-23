@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 13, 5, 3); // Update log / 更新记录: 修正OverlayLayout.AddControl重复添加问题，以及后期添加位置问题
+            return new Version(2, 13, 5, 4); // Update log / 更新记录: 继续改良OverlayLayout
         }
 
         /// \~English

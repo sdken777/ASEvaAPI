@@ -67,7 +67,7 @@ namespace ASEva.UIEto
             if (DelayHandleControl)
             {
                 Add(control, 0, 0);
-                if (!firstSizeChanged) handleControl(control, false);
+                if (sizeInitialized) handleControl(control, false);
             }
             else handleControl(control, true);
             return control;
@@ -106,28 +106,33 @@ namespace ASEva.UIEto
 
         private void this_SizeChanged(object sender, EventArgs e)
         {
-            if (!firstSizeChanged && DelayHandleControl)
+            if (sizeInitialized && DelayHandleControl)
             {
-                if (timer != null)
-                {
-                    timer.Stop();
-                    timer = null;
-                }
-                timer = new UITimer();
-                timer.Interval = 0.1;
-                timer.Elapsed += delegate
-                {
-                    timer.Stop();
-                    timer = null;
-                    foreach (var control in paddingTable.Keys) handleControl(control, false);
-                };
-                timer.Start();
+                handleAllControlsLater(0.1);
             }
             else
             {
                 foreach (var control in paddingTable.Keys) handleControl(control, false);
             }
-            firstSizeChanged = false;
+            sizeInitialized = true;
+        }
+
+        private void handleAllControlsLater(double interval)
+        {
+            if (timer != null)
+            {
+                timer.Stop();
+                timer = null;
+            }
+            timer = new UITimer();
+            timer.Interval = interval;
+            timer.Elapsed += delegate
+            {
+                timer.Stop();
+                timer = null;
+                foreach (var control in paddingTable.Keys) handleControl(control, false);
+            };
+            timer.Start();
         }
 
         private void handleControl(Control control, bool add)
@@ -177,6 +182,12 @@ namespace ASEva.UIEto
 
             if (add) Add(control, posx, posy);
             else Move(control, posx, posy);
+
+            // fix invalid size if any
+            if (!DelayHandleControl && sizeInitialized)
+            {
+                handleAllControlsLater(0.001);
+            }
         }
 
         private class ControlPadding
@@ -189,7 +200,7 @@ namespace ASEva.UIEto
 
         private Dictionary<Control, ControlPadding> paddingTable = new Dictionary<Control, ControlPadding>();
         private UITimer timer = null;
-        private bool firstSizeChanged = true;
+        private bool sizeInitialized = false;
 
         public static bool DelayHandleControl { private get; set; }
         public static bool ExpandControlSize { private get; set; }
