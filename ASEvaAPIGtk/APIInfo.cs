@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 6, 0); // Update log / 更新记录: PasswordBox支持设置0显示密码
+            return new Version(2, 9, 6, 1); // Update log / 更新记录: 修复ComboBox不设置宽度时宽度过小问题
         }
     }
 }

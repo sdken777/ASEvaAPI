@@ -33,6 +33,18 @@ namespace ASEva.UIGtk
 			Control.Changed += Connector.HandleChanged;
         }
 
+		// CHECK: 修复不设置宽度时宽度过小问题
+		public override void OnLoadComplete(EventArgs e)
+		{
+			int textLength = 0;
+			foreach (var item in Widget.Items)
+			{
+				textLength = Math.Max(textLength, item.Text.Length);
+			}
+			entry.WidthChars = Math.Min(MaxTextLength, textLength);
+		}
+		private const int MaxTextLength = 8;
+
 		protected override void Initialize()
 		{
 			base.Initialize();
