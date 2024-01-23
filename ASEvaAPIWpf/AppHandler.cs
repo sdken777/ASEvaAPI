@@ -29,6 +29,7 @@ namespace ASEva.UIWpf
             platform.Add<UITimer.IHandler>(() => new UITimerHandler());
             platform.Add<Button.IHandler>(() => new ButtonHandler());
             platform.Add<MessageBox.IHandler>(() => new MessageBoxHandler());
+            platform.Add<PasswordBox.IHandler>(() => new PasswordBoxHandler());
             var app = new Application(platform);
 
             SetContentExtensions.WindowInitializer = new InitWindowHandlerWpf();

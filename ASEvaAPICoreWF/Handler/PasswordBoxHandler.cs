@@ -2,8 +2,9 @@ using SD = System.Drawing;
 using swf = System.Windows.Forms;
 using System.Linq;
 using Eto.Forms;
+using Eto.WinForms.Forms;
 
-namespace Eto.WinForms.Forms.Controls
+namespace ASEva.UICoreWF
 {
 	public class PasswordBoxHandler : WindowsControl<swf.TextBox, PasswordBox, PasswordBox.ICallback>, PasswordBox.IHandler
 	{
@@ -25,18 +26,14 @@ namespace Eto.WinForms.Forms.Controls
 			set { Control.MaxLength = value; }
 		}
 
+		// CHECK: 值为0时显示密码
 		public char PasswordChar
 		{
 			get { return Control.PasswordChar; }
 			set
 			{
-				if (value == '\0')
-					Control.UseSystemPasswordChar = true;
-				else
-				{
-					Control.UseSystemPasswordChar = false;
-					Control.PasswordChar = value;
-				}
+				Control.UseSystemPasswordChar = false;
+				Control.PasswordChar = value;
 			}
 		}
 

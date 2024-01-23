@@ -1,8 +1,8 @@
 ﻿/*! \mainpage
  * \~English This library contains the APIs for .NET Core Wpf. See ASEva.UIWpf for details. \n
  * \~Chinese 此类库为ASEva-API中基于.NET Core Wpf的部分。详见 ASEva.UIWpf \n
- * \~English This document corresponds to API version: 1.7.4
- * \~Chinese 本文档对应API版本：1.7.4
+ * \~English This document corresponds to API version: 1.7.5
+ * \~Chinese 本文档对应API版本：1.7.5
  */
 
 using System;
@@ -10,7 +10,7 @@ using System;
 namespace ASEva.UIWpf
 {
     /// <summary>
-    /// version=1.7.4
+    /// version=1.7.5
     /// </summary>
     public class APIInfo
     {
@@ -26,7 +26,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 7, 4, 1); // Update log / 更新记录: 修正长条按钮使用正方形图像时按钮尺寸异常
+            return new Version(1, 7, 5, 0); // Update log / 更新记录: PasswordBox支持显示密码
         }
     }
 }
