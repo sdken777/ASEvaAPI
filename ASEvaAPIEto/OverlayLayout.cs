@@ -69,7 +69,11 @@ namespace ASEva.UIEto
                 Add(control, 0, 0);
                 if (sizeInitialized) handleControl(control, false);
             }
-            else handleControl(control, true);
+            else
+            {
+                handleControl(control, true);
+                if (sizeInitialized) handleAllControlsLater(0.02);
+            }
             return control;
         }
 
@@ -182,12 +186,6 @@ namespace ASEva.UIEto
 
             if (add) Add(control, posx, posy);
             else Move(control, posx, posy);
-
-            // fix invalid size if any
-            if (!DelayHandleControl && sizeInitialized)
-            {
-                handleAllControlsLater(0.001);
-            }
         }
 
         private class ControlPadding
