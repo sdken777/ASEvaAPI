@@ -128,6 +128,9 @@ namespace ASEva.UIWpf
 		void SetImage()
 		{
 			ImagePart.Source = Image.ToWpf(ParentScale);
+
+			// CHECK: 修正长条按钮使用正方形图像时按钮尺寸异常
+			ImagePart.StretchDirection = swc.StretchDirection.DownOnly;
 		}
 
 		public Image Image

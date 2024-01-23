@@ -26,7 +26,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 7, 4, 0); // Update log / 更新记录: 支持MaximizeToFullScreen
+            return new Version(1, 7, 4, 1); // Update log / 更新记录: 修正长条按钮使用正方形图像时按钮尺寸异常
         }
     }
 }
