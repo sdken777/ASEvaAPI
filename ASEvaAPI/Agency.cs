@@ -179,6 +179,7 @@ namespace ASEva
         void AddMainThreadCheckpoint(String location);
         bool NewProject(bool force);
         bool OpenProject(String projectFile);
+        bool OpenProject(String projectFile, bool force);
         bool SaveCurrentProject(String projectFile);
         String GetCurrentProject();
         void PlayMp3(byte[] mp3FileData);
@@ -3255,15 +3256,15 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) New project
+        /// (api:app=2.3.0) Create blank project
         /// </summary>
-        /// <param name="force">Whether forced to new project</param>
+        /// <param name="force">Whether forced to create new project</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 新建项目
+        /// (api:app=2.3.0) 新建空白项目
         /// </summary>
-        /// <param name="force">是否强制新建项目</param>
+        /// <param name="force">是否强制新建空白项目</param>
         /// <returns>是否成功新建项目</returns>
         public static bool NewProject(bool force)
         {
@@ -3278,13 +3279,32 @@ namespace ASEva
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 打开新项目
+        /// (api:app=2.3.0) 打开项目
         /// </summary>
         /// <param name="projectFile">项目文件路径，若设为null则从autosave读取</param>
         /// <returns>是否成功打开项目</returns>
         public static bool OpenProject(String projectFile)
         {
             return Handler.OpenProject(projectFile);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.15.8) Open project
+        /// </summary>
+        /// <param name="projectFile">Path of project file, set to null to load autosaved in the folder of application's configuration files</param>
+        /// <param name="force">Whether forced to open the project</param>
+        /// <returns>Whether successful</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.15.8) 打开项目
+        /// </summary>
+        /// <param name="projectFile">项目文件路径，若设为null则从autosave读取</param>
+        /// <param name="force">是否强制打开项目</param>
+        /// <returns>是否成功打开项目</returns>
+        public static bool OpenProject(String projectFile, bool force)
+        {
+            return Handler.OpenProject(projectFile, force);
         }
 
         /// \~English

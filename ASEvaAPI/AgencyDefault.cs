@@ -1466,5 +1466,10 @@ namespace ASEva
         {
             return null;
         }
+
+        public bool OpenProject(string projectFile, bool force)
+        {
+            return false;
+        }
     }
 }
