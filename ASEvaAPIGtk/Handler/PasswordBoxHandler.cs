@@ -1,8 +1,10 @@
 using System;
 using Eto.Forms;
 using Eto.Drawing;
+using Eto.GtkSharp;
+using Eto.GtkSharp.Forms;
 
-namespace Eto.GtkSharp.Forms.Controls
+namespace ASEva.UIGtk
 {
 	public class PasswordBoxHandler : GtkControl<Gtk.Entry, PasswordBox, PasswordBox.ICallback>, PasswordBox.IHandler
 	{
@@ -47,7 +49,17 @@ namespace Eto.GtkSharp.Forms.Controls
 		public char PasswordChar
 		{
 			get { return Control.InvisibleChar; }
-			set { Control.InvisibleChar = value; }
+
+			// CHECK: 支持设置0显示密码
+			set
+			{
+				if (value == (char)0) Control.Visibility = true;
+				else
+				{
+					Control.Visibility = false;
+					Control.InvisibleChar = value;
+				}
+			}
 		}
 
 		public override string Text
