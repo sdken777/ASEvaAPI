@@ -50,6 +50,7 @@ namespace ASEva.UIGtk
             platform.Add<SelectFolderDialog.IHandler>(() => new SafeSelectFolderDialogHandler());
             platform.Add<Label.IHandler>(() => new LabelHandler());
             platform.Add<Button.IHandler>(() => new ButtonHandler());
+            platform.Add<ComboBox.IHandler>(() => new ComboBoxHandler());
             var app = new Application(platform);
 
             // CHECK: 应用全局样式令显示较为紧凑

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using Eto.Drawing;
 using Eto.Forms;
+using Eto.GtkSharp;
 using Eto.GtkSharp.Drawing;
+using Eto.GtkSharp.Forms.Controls;
 
-namespace Eto.GtkSharp.Forms.Controls
+namespace ASEva.UIGtk
 {
 	public class ComboBoxHandler : DropDownHandler<Gtk.ComboBox, ComboBox, ComboBox.ICallback>, ComboBox.IHandler
 	{
@@ -24,6 +26,10 @@ namespace Eto.GtkSharp.Forms.Controls
 			text = Control.Cells[0] as Gtk.CellRendererText;
 			entry = (Gtk.Entry)Control.Child;
 			entry.IsEditable = true;
+
+			// CHECK: 修复无法设置宽度为较小值问题
+			entry.WidthChars = 0;
+
 			Control.Changed += Connector.HandleChanged;
         }
 
