@@ -99,7 +99,7 @@ namespace ASEvaAPIEtoTest
         {
             layout.AddLabel(t.Format("basic-label-row", 5));
 
-            var textButton = layout.AddButton(t["basic-button"]);
+            var textButton = layout.AddButton(t["basic-button"], false, 120);
             textButton.BackgroundColor = Colors.Green;
             textButton.TextColor = Colors.Gold;
             textButton.Click += delegate
@@ -113,7 +113,7 @@ namespace ASEvaAPIEtoTest
                 form.Show();
             };
 
-            var imageButton = layout.AddButton(Bitmap.FromResource("button.png"));
+            var imageButton = layout.AddButton(Bitmap.FromResource("button.png"), false, 120);
             imageButton.BackgroundColor = Colors.PaleGreen;
             imageButton.Click += delegate
             {
