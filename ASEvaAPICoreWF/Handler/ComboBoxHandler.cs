@@ -21,12 +21,23 @@ namespace ASEva.UICoreWF
 
 			// CHECK: 修正高DPI显示时控件显示不全的问题
 			var dpiRatio = (float)Control.DeviceDpi / 96;
-			Control.MinSize = new sd.Size(100, (int)Math.Ceiling(10 + 14 * dpiRatio));
+			Control.MinSize = new sd.Size(0, (int)Math.Ceiling(10 + 14 * dpiRatio));
 
 			Control.TextChanged += ControlOnTextChanged;
 		}
 
-		void ControlOnTextChanged(object sender, EventArgs e)
+		// CHECK: 修正无法设置宽度问题
+        public override int Width
+		{
+			get => base.Width; 
+			set
+            {
+				base.Width = value;
+				Control.MinSize = new sd.Size(value, Control.MinSize.Height);
+			}
+		}
+
+        void ControlOnTextChanged(object sender, EventArgs e)
 		{
 			if (suppressTextChanged > 0)
 				return;

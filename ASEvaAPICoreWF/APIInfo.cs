@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 7, 4, 0); // Update log / 更新记录: 修正application.Run之前不触发MouseDown等事件。修正TopMostHandler
+            return new Version(2, 7, 4, 1); // Update log / 更新记录: 修正ComboBox无法设置宽度问题
         }
     }
 }
