@@ -15,11 +15,9 @@ namespace ASEvaAPIEtoTest
             var overlay = layout.AddControl(new OverlayLayout(), true, 200, 0) as OverlayLayout;
             drawableDefault2D = overlay.AddControl(new Drawable(), 0, 0, 0, 0) as Drawable;
 
-            var buttonA = new Button { Text = "A" };
-            var buttonB = new Button { Text = "B" };
-            var buttonC = new Button { Text = "C" };
-            var buttonD = new Button { Text = "D" };
-            var linkButton = new LinkButton{ Text = "ABCD", ToolTip = "ABCD" };
+            Button buttonA = new Button { Text = "A" }, buttonB = new Button { Text = "B" }, buttonC = new Button { Text = "C" }, buttonD = new Button { Text = "D" };
+            buttonA.SetLogicalWidth(30); buttonB.SetLogicalWidth(30); buttonC.SetLogicalWidth(30); buttonD.SetLogicalWidth(30);
+            var linkButton = new LinkButton{ Text = "ABCD", ToolTip = "ABCD", BackgroundColor = Colors.LightYellow };
             overlay.AddControl(buttonA, 10, null, 10, null);
 
             buttonA.Click += delegate

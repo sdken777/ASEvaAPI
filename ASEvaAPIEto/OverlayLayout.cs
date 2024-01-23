@@ -51,29 +51,26 @@ namespace ASEva.UIEto
                 if (!(control as SkiaView).SupportOverlay) return null;
             }
 
+            if (paddingTable.ContainsKey(control))
+            {
+                RemoveControl(control);
+                return AddControl(control, topLogicalPadding, bottomLogicalPadding, leftLogicalPadding, rightLogicalPadding);
+            }
+
             var padding = new ControlPadding();
             padding.Top = topLogicalPadding;
             padding.Bottom = bottomLogicalPadding;
             padding.Left = leftLogicalPadding;
             padding.Right = rightLogicalPadding;
-
-            if (paddingTable.ContainsKey(control))
+            paddingTable[control] = padding;
+            
+            if (DelayHandleControl)
             {
-                paddingTable[control] = padding;
-                handleControl(control, false);
-                return control;
+                Add(control, 0, 0);
+                if (!firstSizeChanged) handleControl(control, false);
             }
-            else
-            {
-                paddingTable[control] = padding;
-                if (DelayHandleControl)
-                {
-                    Add(control, 0, 0);
-                    if (!firstSizeChanged) handleControl(control, false);
-                }
-                else handleControl(control, true);
-                return control;
-            }
+            else handleControl(control, true);
+            return control;
         }
 
         /// \~English
