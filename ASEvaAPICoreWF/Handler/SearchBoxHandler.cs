@@ -13,8 +13,20 @@ namespace ASEva.UICoreWF
 
 		public SearchBoxHandler()
 		{
+			Control = new EtoTextBox();
+			updatePlaceholder();
+
+			Control.EnabledChanged += delegate
+			{
+				updatePlaceholder();
+			};
+		}
+
+		private void updatePlaceholder()
+        {
 			var lang = Agency.GetAppLanguage();
-			Control = new EtoTextBox { PlaceholderText = lang != null && lang == "ch" ? "搜索" : "Search" };
+			if (Control.Enabled) Control.PlaceholderText = lang != null && lang == "ch" ? "搜索" : "Search";
+			else Control.PlaceholderText = "";
 		}
 	}
 }

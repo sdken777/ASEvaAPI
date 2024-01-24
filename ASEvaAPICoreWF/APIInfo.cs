@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 7, 5, 0); // Update log / 更新记录: PasswordBox支持显示密码
+            return new Version(2, 7, 5, 1); // Update log / 更新记录: 优化SearchBox显示
         }
     }
 }
