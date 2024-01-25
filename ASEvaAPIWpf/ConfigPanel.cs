@@ -92,4 +92,46 @@ namespace ASEva.UIWpf
         /// </summary>
         public event EventHandler CloseRequested;
     }
+
+    class EtoConfigPanel : UIEto.ConfigPanel
+    {
+        public EtoConfigPanel(ConfigPanel wpfConfigPanel)
+        {
+            this.wpfConfigPanel = wpfConfigPanel;
+            Content = Eto.Forms.WpfHelpers.ToEto(wpfConfigPanel);
+            wpfConfigPanel.CloseRequested += delegate { Close(); };
+        }
+
+        public override IntSize OnGetSize()
+        {
+            return new IntSize((int)wpfConfigPanel.Width, (int)wpfConfigPanel.Height);
+        }
+
+        public override void OnHandleModal()
+        {
+            wpfConfigPanel.OnHandleModal();
+        }
+
+        public override void OnInit(string config)
+        {
+            wpfConfigPanel.OnInit(config);
+        }
+
+        public override void OnInitSize(string config)
+        {
+            wpfConfigPanel.OnInitSize(config);
+        }
+
+        public override void OnRelease()
+        {
+            wpfConfigPanel.OnRelease();
+        }
+
+        public override void OnUpdateUI()
+        {
+            wpfConfigPanel.OnUpdateUI();
+        }
+
+        private ConfigPanel wpfConfigPanel;
+    }
 }

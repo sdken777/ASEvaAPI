@@ -92,4 +92,48 @@ namespace ASEva.UICoreWF
         /// </summary>
         public event EventHandler CloseRequested;
     }
+
+    class EtoConfigPanel : UIEto.ConfigPanel
+    {
+        public EtoConfigPanel(ConfigPanel winformConfigPanel)
+        {
+            this.winformConfigPanel = winformConfigPanel;
+            Content = Eto.Forms.WinFormsHelpers.ToEto(winformConfigPanel);
+            winformConfigPanel.CloseRequested += delegate { Close(); };
+        }
+
+        public override IntSize OnGetSize()
+        {
+            var size = winformConfigPanel.Size;
+            var dpiRatio = (float)winformConfigPanel.DeviceDpi / 96;
+            return new IntSize((int)Math.Ceiling((float)size.Width / dpiRatio), (int)Math.Ceiling((float)size.Height / dpiRatio));
+        }
+
+        public override void OnHandleModal()
+        {
+            winformConfigPanel.OnHandleModal();
+        }
+
+        public override void OnInit(string config)
+        {
+            winformConfigPanel.OnInit(config);
+        }
+
+        public override void OnInitSize(string config)
+        {
+            winformConfigPanel.OnInitSize(config);
+        }
+
+        public override void OnRelease()
+        {
+            winformConfigPanel.OnRelease();
+        }
+
+        public override void OnUpdateUI()
+        {
+            winformConfigPanel.OnUpdateUI();
+        }
+
+        private ConfigPanel winformConfigPanel;
+    }
 }
