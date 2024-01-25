@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 13, 6, 0); // Update log / 更新记录: 新增App.ConvertWindow/ConfigPanelToEto
+            return new Version(2, 13, 6, 1); // Update log / 更新记录: 修正App.ConvertWindow/ConfigPanelToEto
         }
 
         /// \~English

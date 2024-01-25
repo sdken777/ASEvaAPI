@@ -306,7 +306,8 @@ namespace ASEva.UIEto
         public static WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
         {
             if (handler == null || platformWindowPanel == null) return null;
-            return handler.ConvertWindowPanelToEto(platformWindowPanel);
+            if (platformWindowPanel is WindowPanel) return platformWindowPanel as WindowPanel;
+            else return handler.ConvertWindowPanelToEto(platformWindowPanel);
         }
 
         /// \~English
@@ -324,7 +325,8 @@ namespace ASEva.UIEto
         public static ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
         {
             if (handler == null || platformConfigPanel == null) return null;
-            return handler.ConvertConfigPanelToEto(platformConfigPanel);
+            if (platformConfigPanel is ConfigPanel) return platformConfigPanel as ConfigPanel;
+            else return handler.ConvertConfigPanelToEto(platformConfigPanel);
         }
 
         /// \~English
