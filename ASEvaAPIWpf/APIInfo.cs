@@ -26,7 +26,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 7, 5, 1); // Update log / 更新记录: 改善图标分辨率
+            return new Version(1, 7, 5, 2); // Update log / 更新记录: 修正ImageConverter配置
         }
     }
 }
