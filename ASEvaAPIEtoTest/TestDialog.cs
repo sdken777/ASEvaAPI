@@ -10,7 +10,7 @@ namespace ASEvaAPIEtoTest
     {
         public TestDialog(bool fixSize, bool withBorder, TextResource t)
         {
-            Icon = Icon.FromResource("icon.png");
+            Icon = Bitmap.FromResource("icon.png").ToIcon();
             Title = t["title-dialog"];
             if (fixSize) SetFixMode(800, 400, withBorder);
             else SetResizableMode(600, 300, 800, 400);

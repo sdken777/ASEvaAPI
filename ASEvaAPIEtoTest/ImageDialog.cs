@@ -10,7 +10,7 @@ namespace ASEvaAPIEtoTest
     {
         public ImageDialog(CommonImage image)
         {
-            Icon = Icon.FromResource("icon.png");
+            Icon = Bitmap.FromResource("icon.png").ToIcon();
             SetFixMode(image.Width + 8, image.Height + 8, true);
 
             var imageView = new ImageView{ Image = image.ToEtoBitmap() };

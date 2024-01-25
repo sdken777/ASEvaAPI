@@ -26,7 +26,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 7, 5, 0); // Update log / 更新记录: PasswordBox支持显示密码
+            return new Version(1, 7, 5, 1); // Update log / 更新记录: 改善图标分辨率
         }
     }
 }

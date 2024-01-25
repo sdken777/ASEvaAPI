@@ -17,7 +17,7 @@ namespace ASEvaAPIEtoTest
             if (!String.IsNullOrEmpty(App.GetUIBackend())) title += "." + App.GetUIBackend();
             title += ")";
 
-            Icon = Icon.FromResource("icon.png");
+            Icon = Bitmap.FromResource("icon.png").ToIcon();
             Title = title;
             this.SetClientSize(1300, 750);
             this.SetMinimumClientSize(1200, 700);

@@ -9,7 +9,7 @@ namespace ASEvaAPIEtoTest
     {
         public InfoDialog(String title, String text)
         {
-            Icon = Icon.FromResource("icon.png");
+            Icon = Bitmap.FromResource("icon.png").ToIcon();
             Title = title;
             SetResizableMode(500, 700, 500, 700);
 

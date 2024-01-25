@@ -9,7 +9,7 @@ namespace ASEvaAPIEtoTest
     {
         public Startup()
         {
-            Icon = Icon.FromResource("icon.png");
+            Icon = Bitmap.FromResource("icon.png").ToIcon();
             SetFixMode(400, 80, false);
 
             var layout = this.SetContentAsRowLayout(8, 8, VerticalAlignment.Stretch);

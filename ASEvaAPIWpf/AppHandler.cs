@@ -47,6 +47,7 @@ namespace ASEva.UIWpf
             CheckableListBox.Factory = new CheckableListBoxFactoryWpf();
             TextTableView.Factory = new TextTableViewFactoryWpf();
             FullScreenExtensions.Handler = new FullScreenHandler();
+            IconExtensions.FinalFrameOnly = true;
 
             uiBackend = null;
             webViewBackend = "webview2";
