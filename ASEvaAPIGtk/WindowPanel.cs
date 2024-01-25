@@ -1,6 +1,7 @@
 ﻿using System;
 using Gtk;
 using ASEva;
+using Eto.Forms;
 
 namespace ASEva.UIGtk
 {
@@ -138,5 +139,76 @@ namespace ASEva.UIGtk
         /// [可选实现] 在窗口控件销毁前被调用
         /// </summary>
         public virtual void OnRelease() { }
+    }
+
+    class EtoWindowPanel : ASEva.UIEto.WindowPanel
+    {
+        public EtoWindowPanel(WindowPanel gtkWindowPanel)
+        {
+            this.gtkWindowPanel = gtkWindowPanel;
+            Content = gtkWindowPanel.ToEto();
+        }
+
+        public override string OnGetConfig()
+        {
+            return gtkWindowPanel.OnGetConfig();
+        }
+
+        public override IntSize OnGetDefaultSize()
+        {
+            return gtkWindowPanel.OnGetDefaultSize();
+        }
+
+        public override IntSize OnGetMinimumSize()
+        {
+            return new IntSize(gtkWindowPanel.WidthRequest, gtkWindowPanel.HeightRequest);
+        }
+
+        public override void OnHandleModal()
+        {
+            gtkWindowPanel.OnHandleModal();
+        }
+
+        public override void OnInit(string config)
+        {
+            gtkWindowPanel.OnInit(config);
+        }
+
+        public override void OnInitSize(string config)
+        {
+            gtkWindowPanel.OnInitSize(config);
+        }
+
+        public override void OnInputData(object data)
+        {
+            gtkWindowPanel.OnInputData(data);
+        }
+
+        public override void OnRelease()
+        {
+            gtkWindowPanel.OnRelease();
+        }
+
+        public override void OnResetData()
+        {
+            gtkWindowPanel.OnResetData();
+        }
+
+        public override void OnStartSession()
+        {
+            gtkWindowPanel.OnStartSession();
+        }
+
+        public override void OnStopSession()
+        {
+            gtkWindowPanel.OnStopSession();
+        }
+
+        public override void OnUpdateUI()
+        {
+            gtkWindowPanel.OnUpdateUI();
+        }
+
+        private WindowPanel gtkWindowPanel;
     }
 }

@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.13.5
+            version=2.13.6
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -216,6 +216,34 @@
             </summary>
             <param name="etoControl">Eto控件</param>
             <returns>平台特化控件，若转化失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.ConvertWindowPanelToEto(System.Object)">
+            \~English
+            <summary>
+            (api:eto=2.13.6) Convert platform window panel to Eto window panel
+            </summary>
+            <param name="platformWindowPanel">Platform window panel</param>
+            <returns>Eto window panel, null if conversion failed</returns>
+            \~Chinese
+            <summary>
+            (api:eto=2.13.6) 将平台特化窗口控件转化为Eto窗口控件
+            </summary>
+            <param name="platformWindowPanel">平台特化窗口控件</param>
+            <returns>Eto窗口控件，若转化失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.ConvertConfigPanelToEto(System.Object)">
+            \~English
+            <summary>
+            (api:eto=2.13.6) Convert platform config panel to Eto config panel
+            </summary>
+            <param name="platformConfigPanel">Platform config panel</param>
+            <returns>Eto config panel, null if conversion failed</returns>
+            \~Chinese
+            <summary>
+            (api:eto=2.13.6) 将平台特化配置界面控件转化为Eto配置界面控件
+            </summary>
+            <param name="platformConfigPanel">平台特化配置界面控件</param>
+            <returns>Eto配置界面控件，若转化失败则返回null</returns>
         </member>
         <member name="M:ASEva.UIEto.App.RunDialog(ASEva.UIEto.DialogPanel)">
             \~English

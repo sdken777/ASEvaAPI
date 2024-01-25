@@ -116,6 +116,18 @@ namespace ASEva.UIGtk
             return etoControl.ToNative(true);
         }
 
+        public UIEto.WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
+        {
+            if (platformWindowPanel is WindowPanel) return new EtoWindowPanel(platformWindowPanel as WindowPanel);
+            else return null;
+        }
+
+        public UIEto.ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
+        {
+            if (platformConfigPanel is ConfigPanel) return new EtoConfigPanel(platformConfigPanel as ConfigPanel);
+            else return null;
+        }
+
         public bool RunDialog(DialogPanel panel)
         {
             if (panel.Mode == DialogPanel.DialogMode.Invalid) return false;

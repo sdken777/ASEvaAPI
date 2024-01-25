@@ -17,6 +17,8 @@ namespace ASEva.UIEto
         Font CreateDefaultFont();
         Control ConvertControlToEto(object platformControl);
         object ConvertControlToPlatform(Control etoControl);
+        WindowPanel ConvertWindowPanelToEto(object platformWindowPanel);
+        ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel);
         bool RunDialog(DialogPanel panel);
         Dictionary<String, String> GetThirdPartyNotices();
         bool ShouldPassParent();
@@ -287,6 +289,42 @@ namespace ASEva.UIEto
         {
             if (handler == null || etoControl == null) return null;
             return handler.ConvertControlToPlatform(etoControl);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.13.6) Convert platform window panel to Eto window panel
+        /// </summary>
+        /// <param name="platformWindowPanel">Platform window panel</param>
+        /// <returns>Eto window panel, null if conversion failed</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.13.6) 将平台特化窗口控件转化为Eto窗口控件
+        /// </summary>
+        /// <param name="platformWindowPanel">平台特化窗口控件</param>
+        /// <returns>Eto窗口控件，若转化失败则返回null</returns>
+        public static WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
+        {
+            if (handler == null || platformWindowPanel == null) return null;
+            return handler.ConvertWindowPanelToEto(platformWindowPanel);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.13.6) Convert platform config panel to Eto config panel
+        /// </summary>
+        /// <param name="platformConfigPanel">Platform config panel</param>
+        /// <returns>Eto config panel, null if conversion failed</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.13.6) 将平台特化配置界面控件转化为Eto配置界面控件
+        /// </summary>
+        /// <param name="platformConfigPanel">平台特化配置界面控件</param>
+        /// <returns>Eto配置界面控件，若转化失败则返回null</returns>
+        public static ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
+        {
+            if (handler == null || platformConfigPanel == null) return null;
+            return handler.ConvertConfigPanelToEto(platformConfigPanel);
         }
 
         /// \~English

@@ -139,6 +139,16 @@ namespace ASEva.UIMonoMac
             return etoControl.ToNative(true);
         }
 
+        public WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
+        {
+            return null;
+        }
+
+        public ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
+        {
+            return null;
+        }
+
         public bool RunDialog(DialogPanel panel)
         {
             return false;

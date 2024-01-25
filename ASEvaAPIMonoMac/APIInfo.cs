@@ -31,7 +31,7 @@ namespace ASEva.UIMonoMac
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 7, 2, 0); // Update log / 更新记录: 新增SimpleTreeViewFactoryMonoMac
+            return new Version(1, 7, 2, 1); // Update log / 更新记录: 支持新AppHandler
         }
     }
 }
