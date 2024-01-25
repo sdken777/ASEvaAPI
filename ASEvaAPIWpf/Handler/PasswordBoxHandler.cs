@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using swc = System.Windows.Controls;
 using sw = System.Windows;
 using Eto.Forms;
@@ -7,7 +7,7 @@ using Eto.Wpf.Forms;
 
 namespace ASEva.UIWpf
 {
-    // CHECK: ��Ϊ֧��show password�İ汾
+    // CHECK: 改为支持show password的版本
     class PasswordBoxHandler : WpfControl<Handler.PeekablePasswordBox, PasswordBox, PasswordBox.ICallback>, PasswordBox.IHandler
 	{
         protected override sw.Size DefaultSize => new sw.Size(80, 23);

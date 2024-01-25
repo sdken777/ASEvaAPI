@@ -6,7 +6,7 @@ using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
-	public class PasswordBoxHandler : GtkControl<Gtk.Entry, PasswordBox, PasswordBox.ICallback>, PasswordBox.IHandler
+	class PasswordBoxHandler : GtkControl<Gtk.Entry, PasswordBox, PasswordBox.ICallback>, PasswordBox.IHandler
 	{
 		public PasswordBoxHandler()
 		{

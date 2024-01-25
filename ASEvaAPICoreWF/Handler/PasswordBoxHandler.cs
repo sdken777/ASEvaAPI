@@ -1,4 +1,4 @@
-using SD = System.Drawing;
+﻿using SD = System.Drawing;
 using swf = System.Windows.Forms;
 using System.Linq;
 using Eto.Forms;
@@ -6,7 +6,7 @@ using Eto.WinForms.Forms;
 
 namespace ASEva.UICoreWF
 {
-	public class PasswordBoxHandler : WindowsControl<swf.TextBox, PasswordBox, PasswordBox.ICallback>, PasswordBox.IHandler
+	class PasswordBoxHandler : WindowsControl<swf.TextBox, PasswordBox, PasswordBox.ICallback>, PasswordBox.IHandler
 	{
 		public PasswordBoxHandler()
 		{
@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
 			set { Control.MaxLength = value; }
 		}
 
-		// CHECK: ֵΪ0ʱ��ʾ����
+		// CHECK: 值为0时显示密码
 		public char PasswordChar
 		{
 			get { return Control.PasswordChar; }

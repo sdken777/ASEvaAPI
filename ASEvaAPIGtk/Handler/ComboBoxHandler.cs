@@ -10,7 +10,7 @@ using Eto.GtkSharp.Forms.Controls;
 
 namespace ASEva.UIGtk
 {
-	public class ComboBoxHandler : DropDownHandler<Gtk.ComboBox, ComboBox, ComboBox.ICallback>, ComboBox.IHandler
+	class ComboBoxHandler : DropDownHandler<Gtk.ComboBox, ComboBox, ComboBox.ICallback>, ComboBox.IHandler
 	{
 		Gtk.Entry entry;
 		Gtk.EntryCompletion completion;
