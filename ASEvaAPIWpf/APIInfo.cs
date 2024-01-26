@@ -1,8 +1,8 @@
 ﻿/*! \mainpage
  * \~English This library contains the APIs for .NET Core Wpf. See ASEva.UIWpf for details. \n
  * \~Chinese 此类库为ASEva-API中基于.NET Core Wpf的部分。详见 ASEva.UIWpf \n
- * \~English This document corresponds to API version: 1.7.6
- * \~Chinese 本文档对应API版本：1.7.6
+ * \~English This document corresponds to API version: 1.7.7
+ * \~Chinese 本文档对应API版本：1.7.7
  */
 
 using System;
@@ -10,7 +10,7 @@ using System;
 namespace ASEva.UIWpf
 {
     /// <summary>
-    /// version=1.7.6
+    /// version=1.7.7
     /// </summary>
     public class APIInfo
     {
@@ -26,7 +26,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 7, 6, 0); // Update log / 更新记录: 支持AppHandler新接口
+            return new Version(1, 7, 7, 0); // Update log / 更新记录: 恢复使用官方UITimer
         }
     }
 }
