@@ -30,6 +30,7 @@ namespace ASEva.UIWpf
             platform.Add<Button.IHandler>(() => new ButtonHandler());
             platform.Add<MessageBox.IHandler>(() => new MessageBoxHandler());
             platform.Add<PasswordBox.IHandler>(() => new PasswordBoxHandler());
+            platform.Add<LinkButton.IHandler>(() => new SafeLinkButtonHandler());
             var app = new Application(platform);
 
             SetContentExtensions.WindowInitializer = new InitWindowHandlerWpf();
