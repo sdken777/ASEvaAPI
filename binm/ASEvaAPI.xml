@@ -1757,17 +1757,29 @@
         <member name="M:ASEva.Agency.GetModuleConfigStatus(System.Object,System.String)">
             \~English
             <summary>
-            Get status of processor/native/device component's configuration
+            Deprecated, use GetModuleConfigStatus(caller, classID, errorHint)
+            </summary>
+            \~Chinese
+            <summary>
+            已弃用，应使用GetModuleConfigStatus(caller, classID, errorHint)
+            </summary>
+        </member>
+        <member name="M:ASEva.Agency.GetModuleConfigStatus(System.Object,System.String,System.String@)">
+            \~English
+            <summary>
+            (api:app=2.16.0) Get status of processor/native/device component's configuration
             </summary>
             <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
             <param name="classID">Component's class ID</param>
+            <param name="errorHint">Error hint, available while the status is EnabledWithError or EnabledWithWarning</param>
             <returns>Status of component's configuration, returns ASEva.ConfigStatus.Disabled if not found</returns>
             \~Chinese
             <summary>
-            获取数据处理/原生/设备组件配置的状态
+            (api:app=2.16.0) 获取数据处理/原生/设备组件配置的状态
             </summary>
             <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
             <param name="classID">组件的类别ID</param>
+            <param name="errorHint">错误提示，当配置状态为EnabledWithError或EnabledWithWarning时有效</param>
             <returns>组件配置的状态，若找不到类别ID对应的组件则返回 ASEva.ConfigStatus.Disabled </returns>
         </member>
         <member name="M:ASEva.Agency.GetModuleChildConfigStatus(System.Object,System.String)">
@@ -4248,9 +4260,21 @@
             <param name="session">Session ID</param>
             <returns>该session的所有视频通道的信息，若不存在则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetModuleDetails(System.String)">
+            \~English
+            <summary>
+            (api:app=2.16.0) Gets details about the processor/native/device component
+            </summary>
+            <returns>Component details. Return null if none exist</returns>
+            \~Chinese
+            <summary>
+            (api:app=2.16.0) 获取数据处理/原生/设备组件的详情
+            </summary>
+            <returns>组件详情，若不存在则返回null</returns>
+        </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.15.9
+            version=2.16.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -5002,13 +5026,25 @@
         <member name="M:ASEva.ModuleConfig.GetConfigStatus">
             \~English
             <summary>
-            [Required] Called while getting configuration's status
+            [Required] Deprecated, implement GetConfigStatus(errorHint)
             </summary>
+            \~Chinese
+            <summary>
+            [必须实现] 已弃用，应实现GetConfigStatus(errorHint)
+            </summary>
+        </member>
+        <member name="M:ASEva.ModuleConfig.GetConfigStatus(System.String@)">
+            \~English
+            <summary>
+            (api:app=2.16.0) [Required] Called while getting configuration's status
+            </summary>
+            <param name="errorHint">Error hint, should be available while the status is EnabledWithError or EnabledWithWarning</param>
             <returns>Configuration's status</returns>
             \~Chinese
             <summary>
-            [必须实现] 查询配置状态时被调用
+            (api:app=2.16.0) [必须实现] 查询配置状态时被调用
             </summary>
+            <param name="errorHint">错误提示，当配置状态为EnabledWithError或EnabledWithWarning时应有效</param>
             <returns>配置状态</returns>
         </member>
         <member name="M:ASEva.ModuleConfig.GetChildConfigStatus">
@@ -16031,6 +16067,186 @@
             \~Chinese
             <summary>
             默认构造函数
+            </summary>
+        </member>
+        <member name="T:ASEva.ModuleRelatedUIType">
+            \~English
+            <summary>
+            (api:app=2.16.0) Type of component related UI
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=2.16.0) 组件相关用户界面的类别
+            </summary>
+        </member>
+        <member name="F:ASEva.ModuleRelatedUIType.Invalid">
+            \~English
+            <summary>
+            Invalid
+            </summary>
+            \~Chinese
+            <summary>
+            无效
+            </summary>
+        </member>
+        <member name="F:ASEva.ModuleRelatedUIType.Dialog">
+            \~English
+            <summary>
+            Dialog component
+            </summary>
+            \~Chinese
+            <summary>
+            对话框组件
+            </summary>
+        </member>
+        <member name="F:ASEva.ModuleRelatedUIType.Window">
+            \~English
+            <summary>
+            Window component
+            </summary>
+            \~Chinese
+            <summary>
+            窗口组件
+            </summary>
+        </member>
+        <member name="F:ASEva.ModuleRelatedUIType.Console">
+            \~English
+            <summary>
+            Console component
+            </summary>
+            \~Chinese
+            <summary>
+            控制台组件
+            </summary>
+        </member>
+        <member name="T:ASEva.ModuleRelatedUIEntry">
+            \~English
+            <summary>
+            (api:app=2.16.0) Entry arguments of component related UI
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=2.16.0) 组件相关用户界面的入口参数
+            </summary>
+        </member>
+        <member name="P:ASEva.ModuleRelatedUIEntry.Type">
+            \~English
+            <summary>
+            UI type
+            </summary>
+            \~Chinese
+            <summary>
+            UI类别
+            </summary>
+        </member>
+        <member name="P:ASEva.ModuleRelatedUIEntry.ClassID">
+            \~English
+            <summary>
+            UI component's class ID
+            </summary>
+            \~Chinese
+            <summary>
+            UI组件的类别ID
+            </summary>
+        </member>
+        <member name="P:ASEva.ModuleRelatedUIEntry.TransformID">
+            \~English
+            <summary>
+            UI component's transform ID
+            </summary>
+            \~Chinese
+            <summary>
+            UI组件的分化标识ID
+            </summary>
+        </member>
+        <member name="T:ASEva.ModuleDetails">
+            \~English
+            <summary>
+            (api:app=2.16.0) Component details
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=2.16.0) 组件详情
+            </summary>
+        </member>
+        <member name="P:ASEva.ModuleDetails.OutputSamples">
+            \~English
+            <summary>
+            Channel ID and alias name of output samples
+            </summary>
+            \~Chinese
+            <summary>
+            输出样本的通道ID和别名
+            </summary>
+        </member>
+        <member name="P:ASEva.ModuleDetails.OutputScenes">
+            \~English
+            <summary>
+            ID of output scenarios
+            </summary>
+            \~Chinese
+            <summary>
+            输出场景的ID
+            </summary>
+        </member>
+        <member name="P:ASEva.ModuleDetails.OutputSignals">
+            \~English
+            <summary>
+            Type and name of output signals, use empty string for default type
+            </summary>
+            \~Chinese
+            <summary>
+            输出信号类别和名称，默认类别使用空字符串
+            </summary>
+        </member>
+        <member name="P:ASEva.ModuleDetails.OutputGraphs">
+            \~English
+            <summary>
+            Title of output graphs
+            </summary>
+            \~Chinese
+            <summary>
+            输出图表的标题
+            </summary>
+        </member>
+        <member name="P:ASEva.ModuleDetails.RequiredSignalPackings">
+            \~English
+            <summary>
+            ID of the required signal packing data channels
+            </summary>
+            \~Chinese
+            <summary>
+            所需信号打包数据通道ID
+            </summary>
+        </member>
+        <member name="P:ASEva.ModuleDetails.RequiredVideoChannels">
+            \~English
+            <summary>
+            ID of the required video channels
+            </summary>
+            \~Chinese
+            <summary>
+            所需视频通道
+            </summary>
+        </member>
+        <member name="P:ASEva.ModuleDetails.RequiredRecordDataTypes">
+            \~English
+            <summary>
+            Data types required for writing data files
+            </summary>
+            \~Chinese
+            <summary>
+            写入数据文件所需的数据类型
+            </summary>
+        </member>
+        <member name="P:ASEva.ModuleDetails.RelatedUIEntries">
+            \~English
+            <summary>
+            Entry arguments of related UIs
+            </summary>
+            \~Chinese
+            <summary>
+            相关用户界面的入口参数
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">

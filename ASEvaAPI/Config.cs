@@ -548,15 +548,27 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Required] Called while getting configuration's status
+        /// [Required] Deprecated, implement GetConfigStatus(errorHint)
         /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// [必须实现] 已弃用，应实现GetConfigStatus(errorHint)
+        /// </summary>
+        public virtual ConfigStatus GetConfigStatus() { return ConfigStatus.Disabled; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.16.0) [Required] Called while getting configuration's status
+        /// </summary>
+        /// <param name="errorHint">Error hint, should be available while the status is EnabledWithError or EnabledWithWarning</param>
         /// <returns>Configuration's status</returns>
         /// \~Chinese
         /// <summary>
-        /// [必须实现] 查询配置状态时被调用
+        /// (api:app=2.16.0) [必须实现] 查询配置状态时被调用
         /// </summary>
+        /// <param name="errorHint">错误提示，当配置状态为EnabledWithError或EnabledWithWarning时应有效</param>
         /// <returns>配置状态</returns>
-        public virtual ConfigStatus GetConfigStatus() { return ConfigStatus.Disabled; }
+        public virtual ConfigStatus GetConfigStatus(out String errorHint) { errorHint = null; return ConfigStatus.Disabled; }
 
         /// \~English
         /// <summary>

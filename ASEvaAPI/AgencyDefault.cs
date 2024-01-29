@@ -1471,5 +1471,16 @@ namespace ASEva
         {
             return false;
         }
+
+        public ConfigStatus GetModuleConfigStatus(object caller, string classID, out string errorHint)
+        {
+            errorHint = null;
+            return ConfigStatus.Disabled;
+        }
+
+        public ModuleDetails GetModuleDetails(string classID)
+        {
+            return null;
+        }
     }
 }
