@@ -952,13 +952,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get task result
+        /// Get task return value
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 获取任务结果
+        /// 获取任务返回值
         /// </summary>
-        String GetTaskResult();
+        String GetTaskReturnValue();
     }
 
     /// \~English

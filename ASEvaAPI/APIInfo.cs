@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 15, 9, 0); // Update log / 更新记录: 新增MainWorkflowTaskIODetailsCallback
+            return new Version(2, 15, 9, 1); // Update log / 更新记录: 修正MainWorkflowTaskIODetailsCallback.GetTaskReturnValue命名
         }
 
         /// \~English

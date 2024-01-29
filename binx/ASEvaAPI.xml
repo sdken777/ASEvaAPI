@@ -8769,14 +8769,14 @@
             获取任务配置
             </summary>
         </member>
-        <member name="M:ASEva.MainWorkflowTaskIODetailsCallback.GetTaskResult">
+        <member name="M:ASEva.MainWorkflowTaskIODetailsCallback.GetTaskReturnValue">
             \~English
             <summary>
-            Get task result
+            Get task return value
             </summary>
             \~Chinese
             <summary>
-            获取任务结果
+            获取任务返回值
             </summary>
         </member>
         <member name="T:ASEva.MainWorkflowEncryptionCallback">
