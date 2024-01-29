@@ -4213,6 +4213,16 @@ namespace ASEva
         /// UI组件的分化标识ID
         /// </summary>
         public String TransformID { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.16.1) Component's name
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.16.1) 组件名称
+        /// </summary>
+        public String Name { get; set; }
     }
 
     /// \~English

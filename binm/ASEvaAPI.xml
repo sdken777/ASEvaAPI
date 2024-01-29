@@ -4274,7 +4274,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.16.0
+            version=2.16.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -16157,6 +16157,16 @@
             \~Chinese
             <summary>
             UI组件的分化标识ID
+            </summary>
+        </member>
+        <member name="P:ASEva.ModuleRelatedUIEntry.Name">
+            \~English
+            <summary>
+            (api:app=2.16.1) Component's name
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=2.16.1) 组件名称
             </summary>
         </member>
         <member name="T:ASEva.ModuleDetails">
