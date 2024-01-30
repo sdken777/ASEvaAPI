@@ -284,6 +284,14 @@
     <en>Check item {0}</en>
     <ch>多选项{0}</ch>
   </t>
+  <t id="menu-exception-main">
+    <en>Exception (main thread)</en>
+    <ch>制造异常（主线程）</ch>
+  </t>
+  <t id="menu-exception-sub">
+    <en>Exception (sub thread)</en>
+    <ch>制造异常（子线程）</ch>
+  </t>
   <t id="menu-exit">
     <en>Exit</en>
     <ch>退出</ch>
