@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.13.6
+            version=2.14.0
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -305,6 +305,16 @@
             \~Chinese
             <summary>
             (api:eto=2.11.4) 主流程应使用此函数手动触发KeyDown事件
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.App.FatalException">
+            \~English
+            <summary>
+            (api:eto=2.14.0) Whether a fatal exception occurred, and the application will terminate immediately
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=2.14.0) 是否发生了致命异常，应用程序将立即强制退出
             </summary>
         </member>
         <member name="T:ASEva.UIEto.ButtonPanel">

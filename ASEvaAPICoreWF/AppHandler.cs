@@ -98,7 +98,15 @@ namespace ASEva.UICoreWF
             System.Windows.Forms.Application.RemoveMessageFilter(TempBubbleEventFilter);
 
             window.Closed += delegate { findAndHideWebViews(window); };
-            application.Run(window);
+
+            try
+            {
+                application.Run(window);
+            }
+            catch (Exception ex)
+            {
+                App.TriggerFatalException(new UnhandledExceptionEventArgs(ex, false));
+            }
         }
 
         public Control ConvertControlToEto(object platformControl)
@@ -133,10 +141,18 @@ namespace ASEva.UICoreWF
             var winformControl = (System.Windows.Forms.Control)panel.ToNative(true);
             if (winformControl == null) return false;
 
-            var dialog = new AppDialogCoreWF(winformControl, panel);
-            dialog.ShowDialog();
-            dialog.Dispose();
-            return true;
+            try
+            {
+                var dialog = new AppDialogCoreWF(winformControl, panel);
+                dialog.ShowDialog();
+                dialog.Dispose();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                App.TriggerFatalException(new UnhandledExceptionEventArgs(ex, false));
+                return false;
+            }
         }
 
         public Dictionary<string, string> GetThirdPartyNotices()

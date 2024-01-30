@@ -61,7 +61,15 @@ namespace ASEva.UIWpf
 
         public void RunApp(Application application, Form window)
         {
-            application.Run(window);
+            try
+            {
+                application.Run(window);
+            }
+            catch (Exception ex)
+            {
+                App.TriggerFatalException(new UnhandledExceptionEventArgs(ex, false));
+                window.Close();
+            }
         }
 
         public Control ConvertControlToEto(object platformControl)
@@ -96,9 +104,18 @@ namespace ASEva.UIWpf
             var element = panel.ToNative(true);
             if (element == null) return false;
 
-            var dialog = new AppDialogWpf(element, panel);
-            dialog.ShowDialog();
-            return true;
+            try
+            {
+                var dialog = new AppDialogWpf(element, panel);
+                dialog.ShowDialog();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                App.TriggerFatalException(new UnhandledExceptionEventArgs(ex, false));
+                panel.Close();
+                return false;
+            }
         }
 
         public Dictionary<string, string> GetThirdPartyNotices()
