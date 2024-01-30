@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using ASEva.UIEto;
 using Eto.Forms;
 using Eto.Drawing;
@@ -26,6 +27,22 @@ namespace ASEvaAPIEtoTest
             row = optionsLayout.AddRow(true);
             row.AddLabel("Rendering: ");
             radiosRendering = row.AddRadioButtonList(new string[] { "Offscreen", "Onscreen" });
+
+            var menu = this.SetContextMenuAsNew();
+            menu.AddButtonItem("Main thread exception").Click += delegate
+            {
+                String a = null;
+                Console.WriteLine(a.Length.ToString());
+            };
+            menu.AddButtonItem("Sub thread exception").Click += delegate
+            {
+                var thread = new Thread(() =>
+                {
+                    String a = null;
+                    Console.WriteLine(a.Length.ToString());
+                });
+                thread.Start();
+            };
         }
 
         public override void OnClosing()

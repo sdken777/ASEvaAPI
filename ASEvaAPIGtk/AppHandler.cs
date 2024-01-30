@@ -22,6 +22,11 @@ namespace ASEva.UIGtk
     {
         public Application CreateApp(out String uiBackend, out String webViewBackend)
         {
+            GLib.ExceptionManager.UnhandledException += (args) =>
+            {
+                App.TriggerFatalException(args);
+            };
+
             if (ASEva.APIInfo.GetRunningOS() == "linuxarm")
             {
                 // CHECK: 修正在Arm下打开文件对话框异常，Eto-2.8.3已修复

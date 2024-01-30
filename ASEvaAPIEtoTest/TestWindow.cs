@@ -58,7 +58,7 @@ namespace ASEvaAPIEtoTest
 
             Closing += (o, e) =>
             {
-                if (MessageBox.Show(t["exit-confirm"], MessageBoxButtons.YesNo, MessageBoxType.Question) == DialogResult.Yes)
+                if (App.FatalException || MessageBox.Show(t["exit-confirm"], MessageBoxButtons.YesNo, MessageBoxType.Question) == DialogResult.Yes)
                 {
                     loopTimer.Stop();
                 }

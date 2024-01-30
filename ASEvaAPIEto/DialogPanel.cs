@@ -96,7 +96,7 @@ namespace ASEva.UIEto
         /// <summary>
         /// 关闭对话框
         /// </summary>
-        protected void Close()
+        public void Close()
         {
             if (OnDialogClose != null) OnDialogClose(this, null);
         }
