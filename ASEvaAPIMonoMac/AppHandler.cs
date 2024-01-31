@@ -42,6 +42,7 @@ namespace ASEva.UIMonoMac
             platform.Add<UITimer.IHandler>(() => new UITimerHandler());
             platform.Add<LinkButton.IHandler>(() => new LinkButtonHandler());
             platform.Add<Label.IHandler>(() => new LabelHandler());
+            platform.Add<PasswordBox.IHandler>(() => new PasswordBoxHandler());
 
             var app = new Application(platform);
 
