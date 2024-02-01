@@ -31,7 +31,7 @@ namespace ASEva.UIMonoMac
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 7, 4, 0); // Update log / 更新记录: 实现TopMostHandlerMonoMac
+            return new Version(1, 7, 4, 1); // Update log / 更新记录: 修正控件截屏问题
         }
     }
 }
