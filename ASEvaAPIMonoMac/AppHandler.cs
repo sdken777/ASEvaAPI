@@ -92,6 +92,7 @@ namespace ASEva.UIMonoMac
             CheckableListBox.Factory = new CheckableListBoxFactoryMonoMac();
             TextTableView.Factory = new TextTableViewFactoryMonoMac();
             SimpleTreeView.Factory = new SimpleTreeViewFactoryMonoMac();
+            TopMostExtensions.QueryInterface = new TopMostHandlerMonoMac();
 
             uiBackend = null;
             webViewBackend = "webkit2";
