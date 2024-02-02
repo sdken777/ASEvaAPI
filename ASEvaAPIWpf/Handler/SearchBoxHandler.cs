@@ -10,6 +10,13 @@ namespace ASEva.UIWpf
         {
             var lang = Agency.GetAppLanguage();
             PlaceholderText = lang != null && lang == "ch" ? " 搜索" : " Search";
+
+            var textBox = Control as EtoWatermarkTextBox;
+            textBox.MouseRightButtonUp += (o, e) =>
+            {
+                textBox.Text = "";
+                e.Handled = true;
+            };
         }
     }
 }

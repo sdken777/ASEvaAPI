@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 14, 1, 0); // Update log / 更新记录: AddButtonPanel默认padding减小至2
+            return new Version(2, 14, 1, 1); // Update log / 更新记录: AddButtonPanel默认padding改为4
         }
 
         /// \~English
