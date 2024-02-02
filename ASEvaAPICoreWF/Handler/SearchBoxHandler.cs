@@ -16,9 +16,29 @@ namespace ASEva.UICoreWF
 			Control = new EtoTextBox();
 			updatePlaceholder();
 
+			var deleteButton = new swf.Label();
+			deleteButton.AutoSize = false;
+			deleteButton.Width = (int)(12.0f * Control.DeviceDpi / 96);
+			deleteButton.Text = "x";
+			deleteButton.Dock = swf.DockStyle.Right;
+			Control.Controls.Add(deleteButton);
+
 			Control.EnabledChanged += delegate
 			{
 				updatePlaceholder();
+			};
+
+			Control.MouseMove += (o, e) =>
+			{
+				if (e.Button == swf.MouseButtons.None) Cursor = Cursors.IBeam;
+			};
+			deleteButton.MouseMove += (o, e) =>
+			{
+				if (e.Button == swf.MouseButtons.None) Cursor = Cursors.Default;
+			};
+			deleteButton.MouseClick += delegate
+			{
+				Control.Text = "";
 			};
 		}
 

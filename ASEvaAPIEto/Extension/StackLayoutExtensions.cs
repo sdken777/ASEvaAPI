@@ -225,7 +225,7 @@ namespace ASEva.UIEto
         /// <param name="logicalHeight">初始高度，0表示不设置</param>
         /// <param name="logicalPadding">按钮边框与文字的间距</param>
         /// <returns>创建的面板式按钮对象</returns>
-        public static ButtonPanel AddButtonPanel(this StackLayout stackLayout, String text, bool expand = false, int logicalWidth = 0, int logicalHeight = 0, int logicalPadding = 8)
+        public static ButtonPanel AddButtonPanel(this StackLayout stackLayout, String text, bool expand = false, int logicalWidth = 0, int logicalHeight = 0, int logicalPadding = 2)
         {
             if (text == null) text = "";
             var panel = new ButtonPanel(text, logicalPadding);
@@ -254,7 +254,7 @@ namespace ASEva.UIEto
         /// <param name="logicalHeight">初始高度，0表示不设置</param>
         /// <param name="logicalPadding">按钮边框与图像的间距</param>
         /// <returns>创建的面板式按钮对象</returns>
-        public static ButtonPanel AddButtonPanel(this StackLayout stackLayout, Bitmap image, bool expand = false, int logicalWidth = 0, int logicalHeight = 0, int logicalPadding = 8)
+        public static ButtonPanel AddButtonPanel(this StackLayout stackLayout, Bitmap image, bool expand = false, int logicalWidth = 0, int logicalHeight = 0, int logicalPadding = 2)
         {
             if (image == null) return AddButtonPanel(stackLayout, "", expand, logicalWidth, logicalHeight);
             if (Pixel.Scale != 1)

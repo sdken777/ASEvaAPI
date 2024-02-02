@@ -53,7 +53,10 @@ namespace ASEvaAPIEtoTest
 
             KeyDown += (o, e) =>
             {
-                if (e.Control && e.Key != Keys.Control && e.Key != Keys.LeftControl && e.Key != Keys.RightControl) MessageBox.Show("Ctrl+" + e.Key.ToString());
+                if (e.Control && e.Key != Keys.Control && e.Key != Keys.LeftControl && e.Key != Keys.RightControl && e.Key != Keys.Space && e.Key != Keys.None)
+                {
+                    MessageBox.Show("Ctrl+" + e.Key.ToString());
+                }
             };
 
             Closing += (o, e) =>
