@@ -155,6 +155,16 @@
             Gets or sets the spacing between the image and the label when both are present
             </summary>
         </member>
+        <member name="T:ASEva.UIWpf.Handler.PeekablePasswordBox">
+            <summary>
+            PeekablePasswordBox
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.Handler.PeekablePasswordBox.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
         <member name="F:ASEva.UIWpf.WebView2Handler.CoreWebView2Environment">
             <summary>
             The default environment to use if none is specified with <see cref="P:ASEva.UIWpf.WebView2Handler.Environment"/>.
