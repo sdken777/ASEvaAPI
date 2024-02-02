@@ -5,12 +5,18 @@
     <Compile Update="Graphic\TextDraw.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Handler\PeekablePasswordBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Graphic\OpenGLBlitControlWpf.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Graphic\TextDraw.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Handler\PeekablePasswordBox.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

@@ -51,17 +51,29 @@ namespace ASEva.UIEto
                 if (!(control as SkiaView).SupportOverlay) return null;
             }
 
-            ControlPadding padding = null;
-            if (!paddingTable.ContainsKey(control)) paddingTable[control] = new ControlPadding();
-            padding = paddingTable[control];
+            if (paddingTable.ContainsKey(control))
+            {
+                RemoveControl(control);
+                return AddControl(control, topLogicalPadding, bottomLogicalPadding, leftLogicalPadding, rightLogicalPadding);
+            }
 
+            var padding = new ControlPadding();
             padding.Top = topLogicalPadding;
             padding.Bottom = bottomLogicalPadding;
             padding.Left = leftLogicalPadding;
             padding.Right = rightLogicalPadding;
-
-            if (DelayHandleControl) Add(control, 0, 0);
-            else handleControl(control, true);
+            paddingTable[control] = padding;
+            
+            if (DelayHandleControl)
+            {
+                Add(control, 0, 0);
+                if (sizeInitialized) handleControl(control, false);
+            }
+            else
+            {
+                handleControl(control, true);
+                if (sizeInitialized) handleAllControlsLater(0.02);
+            }
             return control;
         }
 
@@ -98,28 +110,33 @@ namespace ASEva.UIEto
 
         private void this_SizeChanged(object sender, EventArgs e)
         {
-            if (!firstSizeChanged && DelayHandleControl)
+            if (sizeInitialized && DelayHandleControl)
             {
-                if (timer != null)
-                {
-                    timer.Stop();
-                    timer = null;
-                }
-                timer = new UITimer();
-                timer.Interval = 0.1;
-                timer.Elapsed += delegate
-                {
-                    timer.Stop();
-                    timer = null;
-                    foreach (var control in paddingTable.Keys) handleControl(control, false);
-                };
-                timer.Start();
+                handleAllControlsLater(0.1);
             }
             else
             {
                 foreach (var control in paddingTable.Keys) handleControl(control, false);
             }
-            firstSizeChanged = false;
+            sizeInitialized = true;
+        }
+
+        private void handleAllControlsLater(double interval)
+        {
+            if (timer != null)
+            {
+                timer.Stop();
+                timer = null;
+            }
+            timer = new UITimer();
+            timer.Interval = interval;
+            timer.Elapsed += delegate
+            {
+                timer.Stop();
+                timer = null;
+                foreach (var control in paddingTable.Keys) handleControl(control, false);
+            };
+            timer.Start();
         }
 
         private void handleControl(Control control, bool add)
@@ -181,7 +198,7 @@ namespace ASEva.UIEto
 
         private Dictionary<Control, ControlPadding> paddingTable = new Dictionary<Control, ControlPadding>();
         private UITimer timer = null;
-        private bool firstSizeChanged = true;
+        private bool sizeInitialized = false;
 
         public static bool DelayHandleControl { private get; set; }
         public static bool ExpandControlSize { private get; set; }

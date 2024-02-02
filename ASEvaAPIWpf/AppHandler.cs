@@ -26,14 +26,15 @@ namespace ASEva.UIWpf
             var platform = new global::Eto.Wpf.Platform();
             platform.Add<WebView.IHandler>(() => new WebView2Handler());
             platform.Add<SearchBox.IHandler>(() => new SearchBoxHandler());
-            platform.Add<UITimer.IHandler>(() => new UITimerHandler());
+            //platform.Add<UITimer.IHandler>(() => new UITimerHandler());
             platform.Add<Button.IHandler>(() => new ButtonHandler());
             platform.Add<MessageBox.IHandler>(() => new MessageBoxHandler());
+            platform.Add<PasswordBox.IHandler>(() => new PasswordBoxHandler());
+            platform.Add<LinkButton.IHandler>(() => new SafeLinkButtonHandler());
             var app = new Application(platform);
 
             SetContentExtensions.WindowInitializer = new InitWindowHandlerWpf();
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerWpf();
-            ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.AlphaScale;
             GLView.Factory = new GLViewFactoryWpf();
             SkiaView.Factory = new GLViewFactoryWpf();
             SkiaCanvasExtensions.DefaultFontName = "Microsoft Yahei";
@@ -45,6 +46,8 @@ namespace ASEva.UIWpf
             SnapshotExtensions.ScreenModeHandler = new ScreenSnapshotHandler();
             CheckableListBox.Factory = new CheckableListBoxFactoryWpf();
             TextTableView.Factory = new TextTableViewFactoryWpf();
+            FullScreenExtensions.Handler = new FullScreenHandler();
+            IconExtensions.FinalFrameOnly = true;
 
             uiBackend = null;
             webViewBackend = "webview2";
@@ -58,7 +61,15 @@ namespace ASEva.UIWpf
 
         public void RunApp(Application application, Form window)
         {
-            application.Run(window);
+            try
+            {
+                application.Run(window);
+            }
+            catch (Exception ex)
+            {
+                App.TriggerFatalException(new UnhandledExceptionEventArgs(ex, false));
+                window.Close();
+            }
         }
 
         public Control ConvertControlToEto(object platformControl)
@@ -74,6 +85,18 @@ namespace ASEva.UIWpf
             return etoControl.ToNative(true);
         }
 
+        public UIEto.WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
+        {
+            if (platformWindowPanel is WindowPanel) return new EtoWindowPanel(platformWindowPanel as WindowPanel);
+            else return null;
+        }
+
+        public UIEto.ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
+        {
+            if (platformConfigPanel is ConfigPanel) return new EtoConfigPanel(platformConfigPanel as ConfigPanel);
+            else return null;
+        }
+
         public bool RunDialog(DialogPanel panel)
         {
             if (panel.Mode == DialogPanel.DialogMode.Invalid) return false;
@@ -81,9 +104,18 @@ namespace ASEva.UIWpf
             var element = panel.ToNative(true);
             if (element == null) return false;
 
-            var dialog = new AppDialogWpf(element, panel);
-            dialog.ShowDialog();
-            return true;
+            try
+            {
+                var dialog = new AppDialogWpf(element, panel);
+                dialog.ShowDialog();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                App.TriggerFatalException(new UnhandledExceptionEventArgs(ex, false));
+                panel.Close();
+                return false;
+            }
         }
 
         public Dictionary<string, string> GetThirdPartyNotices()

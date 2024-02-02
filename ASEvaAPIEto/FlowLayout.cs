@@ -27,6 +27,8 @@ namespace ASEva.UIEto
         /// </summary>
         public FlowLayout()
         {
+            Selectable = true;
+            
             if (Factory == null) Factory = new DefaultFlowLayoutFactory();
 
             Control etoControl = null;
@@ -204,7 +206,7 @@ namespace ASEva.UIEto
         /// <param name="invokeEvent">新选中后是否触发ControlSelected事件</param>
         public void SelectControl(int index, bool invokeEvent)
         {
-            if (index >= 0 && index < controls.Count && index != GetSelectedControlIndex())
+            if (Selectable && index >= 0 && index < controls.Count && index != GetSelectedControlIndex())
             {
                 selectedControl = controls[index].Control;
                 if (backend != null) backend.SelectControl(index);
@@ -238,9 +240,19 @@ namespace ASEva.UIEto
         /// </summary>
         public event EventHandler ControlSelected;
 
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.13.3) Whether selectable
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.13.3) 是否可选中控件
+        /// </summary>
+        public bool Selectable { get; set; }
+
         public void OnControlClicked(int index)
         {
-            SelectControl(index, true);
+            if (Selectable) SelectControl(index, true);
         }
 
         public static FlowLayoutFactory Factory { private get; set; }
@@ -299,9 +311,18 @@ namespace ASEva.UIEto
         {
             var panel = new Panel();
             panel.SetLogicalHeight(logicalHeight + 2);
-            panel.SetContentAsColumnLayout(1, 0).AddControl(control, true);
+
+            var borders = new Control[4];
+            var cLayout = panel.SetContentAsColumnLayout(0, 0);
+            borders[0] = cLayout.AddControl(new Panel(), false, 0, 1);
+            var hLayout = cLayout.AddRowLayout(true, 0, VerticalAlignment.Stretch);
+            borders[1] = hLayout.AddControl(new Panel(), false, 1, 0);
+            hLayout.AddControl(control, true);
+            borders[2] = hLayout.AddControl(new Panel(), false, 1, 0);
+            borders[3] = cLayout.AddControl(new Panel(), false, 0, 1);
+
             var item = new StackLayoutItem(panel);
-            ctxs.Add(new ControlContext{ Item = item, Visible = true });
+            ctxs.Add(new ControlContext{ Item = item, Visible = true, Borders = borders });
             layout.Items.Add(item);
             panel.MouseDown += (obj, args) =>
             {
@@ -320,9 +341,18 @@ namespace ASEva.UIEto
         {
             var panel = new Panel();
             panel.SetLogicalHeight(logicalHeight + 2);
-            panel.SetContentAsColumnLayout(1, 0).AddControl(control, true);
+
+            var borders = new Control[4];
+            var cLayout = panel.SetContentAsColumnLayout(0, 0);
+            borders[0] = cLayout.AddControl(new Panel(), false, 0, 1);
+            var hLayout = cLayout.AddRowLayout(true, 0, VerticalAlignment.Stretch);
+            borders[1] = hLayout.AddControl(new Panel(), false, 1, 0);
+            hLayout.AddControl(control, true);
+            borders[2] = hLayout.AddControl(new Panel(), false, 1, 0);
+            borders[3] = cLayout.AddControl(new Panel(), false, 0, 1);
+
             var item = new StackLayoutItem(panel);
-            ctxs.Insert(index, new ControlContext{ Item = item, Visible = true });
+            ctxs.Insert(index, new ControlContext{ Item = item, Visible = true, Borders = borders });
             int visibleIndex = 0;
             foreach (var ctx in ctxs)
             {
@@ -361,11 +391,15 @@ namespace ASEva.UIEto
         {
             if (selectedControl != null)
             {
-                selectedControl.BackgroundColor = Colors.Transparent;
+                var item = ctxs.Find(ctx => ctx.Item.Control.Equals(selectedControl));
+                if (item != null)
+                {
+                    foreach (var control in item.Borders) control.BackgroundColor = Colors.Transparent;
+                }
                 selectedControl = null;
             }
             selectedControl = ctxs[index].Item.Control;
-            selectedControl.BackgroundColor = Colors.Black;
+            foreach (var control in ctxs[index].Borders) control.BackgroundColor = Colors.Black;
         }
 
         public void SetControlVisible(int index, bool visible)
@@ -391,6 +425,7 @@ namespace ASEva.UIEto
         {
             public StackLayoutItem Item { get; set; }
             public bool Visible { get; set; }
+            public Control[] Borders { get; set; }
         }
 
         private FlowLayoutCallback callback;

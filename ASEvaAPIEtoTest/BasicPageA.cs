@@ -33,6 +33,9 @@ namespace ASEvaAPIEtoTest
 
             var layoutRow6 = layout.AddRowLayout();
             initBasicTabPageARow6(layoutRow6);
+
+            var contextMenu = layout.SetContextMenuAsNew();
+            contextMenu.AddButtonItem(t["menu-button"]).Click += delegate { MessageBox.Show(App.WorkPath); };
         }
 
         private void initBasicTabPageARow1(StackLayout layout)
@@ -70,7 +73,8 @@ namespace ASEvaAPIEtoTest
         private void initBasicTabPageARow2(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 2));
-            layout.AddComboBox(new string[] { t.Format("basic-combobox", "A"), t.Format("basic-combobox", "B") }, true);
+            layout.AddComboBox(new string[] { t.Format("basic-combobox", "A"), t.Format("basic-combobox", "B") }).SetLogicalWidth(120);
+            layout.AddControl(new NumericStepper { MinValue = 0, MaxValue = 100 }, false, 120 );
             layout.AddControl(new DateTimePicker(), true);
         }
 
@@ -79,7 +83,8 @@ namespace ASEvaAPIEtoTest
             layout.AddLabel(t.Format("basic-label-row", 3));
             layout.AddControl(new TextBox(), true);
             layout.AddControl(new SearchBox());
-            layout.AddControl(new NumericStepper { MinValue = 0, MaxValue = 100 } );
+            var passwordBox = layout.AddControl(new PasswordBox{ PasswordChar = '●' }) as PasswordBox;
+            layout.AddCheckBox("").CheckedChanged += (o, e) => { passwordBox.PasswordChar = (o as CheckBox).Checked.Value ? (char)0 : '●'; };
         }
 
         private void initBasicTabPageARow4(StackLayout layout)
@@ -93,7 +98,8 @@ namespace ASEvaAPIEtoTest
         private void initBasicTabPageARow5(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 5));
-            var textButton = layout.AddButton(t["basic-button"]);
+
+            var textButton = layout.AddButton(t["basic-button"], false, 120);
             textButton.BackgroundColor = Colors.Green;
             textButton.TextColor = Colors.Gold;
             textButton.Click += delegate
@@ -106,7 +112,8 @@ namespace ASEvaAPIEtoTest
                 form.Owner = App.PassParent(this);
                 form.Show();
             };
-            var imageButton = layout.AddButton(Bitmap.FromResource("button.png"));
+
+            var imageButton = layout.AddButton(Bitmap.FromResource("button.png"), false, 120);
             imageButton.BackgroundColor = Colors.PaleGreen;
             imageButton.Click += delegate
             {
@@ -117,7 +124,9 @@ namespace ASEvaAPIEtoTest
                 dialog.Content = new Panel();
                 dialog.ShowModal(App.PassParent(this));
             };
+
             layout.AddControl(new ColorPicker { Value = Colors.Red } );
+            labelTopMost = layout.AddLabel("");
         }
 
         private void initBasicTabPageARow6(StackLayout layout)
@@ -144,5 +153,12 @@ namespace ASEvaAPIEtoTest
                 (sender as LinkButton).Text = logicalSize.Width + "x" + logicalSize.Height;
             };
         }
+
+        private void loopBasicPageA()
+        {
+            labelTopMost.Text = labelTopMost.IsTopMost() ? "O" : "X";
+        }
+
+        private Label labelTopMost;
     }
 }

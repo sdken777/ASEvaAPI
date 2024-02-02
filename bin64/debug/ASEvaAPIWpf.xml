@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIWpf.APIInfo">
             <summary>
-            version=1.7.3
+            version=1.8.1
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.APIInfo.GetAPIVersion">
@@ -153,6 +153,16 @@
         <member name="P:ASEva.UIWpf.ButtonHandler`3.ImageLabelSpacing">
             <summary>
             Gets or sets the spacing between the image and the label when both are present
+            </summary>
+        </member>
+        <member name="T:ASEva.UIWpf.Handler.PeekablePasswordBox">
+            <summary>
+            PeekablePasswordBox
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.Handler.PeekablePasswordBox.InitializeComponent">
+            <summary>
+            InitializeComponent
             </summary>
         </member>
         <member name="F:ASEva.UIWpf.WebView2Handler.CoreWebView2Environment">

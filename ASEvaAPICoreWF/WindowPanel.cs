@@ -123,4 +123,79 @@ namespace ASEva.UICoreWF
         /// </summary>
         public virtual void OnRelease() { }
     }
+
+    class EtoWindowPanel : UIEto.WindowPanel
+    {
+        public EtoWindowPanel(WindowPanel winformWindowPanel)
+        {
+            this.winformWindowPanel = winformWindowPanel;
+            Content = Eto.Forms.WinFormsHelpers.ToEto(winformWindowPanel);
+        }
+
+        public override string OnGetConfig()
+        {
+            return winformWindowPanel.OnGetConfig();
+        }
+
+        public override IntSize OnGetDefaultSize()
+        {
+            var size = winformWindowPanel.Size;
+            var dpiRatio = (float)winformWindowPanel.DeviceDpi / 96;
+            return new IntSize((int)Math.Ceiling((float)size.Width / dpiRatio), (int)Math.Ceiling((float)size.Height / dpiRatio));
+        }
+
+        public override IntSize OnGetMinimumSize()
+        {
+            var size = winformWindowPanel.MinimumSize;
+            var dpiRatio = (float)winformWindowPanel.DeviceDpi / 96;
+            return new IntSize((int)Math.Ceiling((float)size.Width / dpiRatio), (int)Math.Ceiling((float)size.Height / dpiRatio));
+        }
+
+        public override void OnHandleModal()
+        {
+            winformWindowPanel.OnHandleModal();
+        }
+
+        public override void OnInit(string config)
+        {
+            winformWindowPanel.OnInit(config);
+        }
+
+        public override void OnInitSize(string config)
+        {
+            winformWindowPanel.OnInitSize(config);
+        }
+
+        public override void OnInputData(object data)
+        {
+            winformWindowPanel.OnInputData(data);
+        }
+
+        public override void OnRelease()
+        {
+            winformWindowPanel.OnRelease();
+        }
+
+        public override void OnResetData()
+        {
+            winformWindowPanel.OnResetData();
+        }
+
+        public override void OnStartSession()
+        {
+            winformWindowPanel.OnStartSession();
+        }
+
+        public override void OnStopSession()
+        {
+            winformWindowPanel.OnStopSession();
+        }
+
+        public override void OnUpdateUI()
+        {
+            winformWindowPanel.OnUpdateUI();
+        }
+
+        private WindowPanel winformWindowPanel;
+    }
 }

@@ -1466,5 +1466,21 @@ namespace ASEva
         {
             return null;
         }
+
+        public bool OpenProject(string projectFile, bool force)
+        {
+            return false;
+        }
+
+        public ConfigStatus GetModuleConfigStatus(object caller, string classID, out string errorHint)
+        {
+            errorHint = null;
+            return ConfigStatus.Disabled;
+        }
+
+        public ModuleDetails GetModuleDetails(string classID)
+        {
+            return null;
+        }
     }
 }

@@ -30,6 +30,7 @@ namespace ASEva.UICoreWF
             AllowUserToResizeColumns = true;
             AllowUserToResizeRows = false;
             RowHeadersVisible = false;
+            ColumnHeadersHeight = (int)(Pixel.Scale * 24);
             ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             RowTemplate.Height = (int)(Pixel.Scale * 20);
 

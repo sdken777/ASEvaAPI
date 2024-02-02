@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Eto.Forms;
 using Eto.Drawing;
-using ASEva.Samples;
+using ASEva;
 using ASEva.UIEto;
 
 namespace ASEvaAPIEtoTest
@@ -13,10 +14,37 @@ namespace ASEvaAPIEtoTest
             var layout = tabPage.SetContentAsColumnLayout();
             var overlay = layout.AddControl(new OverlayLayout(), true, 200, 0) as OverlayLayout;
             drawableDefault2D = overlay.AddControl(new Drawable(), 0, 0, 0, 0) as Drawable;
-            overlay.AddControl(new Button { Text = "A"}, 10, null, 10, null);
-            overlay.AddControl(new Button { Text = "B"}, 10, null, null, 10);
-            overlay.AddControl(new Button { Text = "C"}, null, 10, 10, null);
-            overlay.AddControl(new Button { Text = "D"}, null, 10, null, 10);
+
+            Button buttonA = new Button { Text = "A" }, buttonB = new Button { Text = "B" }, buttonC = new Button { Text = "C" }, buttonD = new Button { Text = "D" };
+            buttonA.SetLogicalWidth(30); buttonB.SetLogicalWidth(30); buttonC.SetLogicalWidth(30); buttonD.SetLogicalWidth(30);
+            var linkButton = new LinkButton{ Text = "ABCD", ToolTip = "ABCD", BackgroundColor = Colors.LightYellow };
+            overlay.AddControl(buttonA, 10, null, 10, null);
+
+            buttonA.Click += delegate
+            {
+                overlay.AddControl(buttonB, null, 10, 10, null);
+                overlay.AddControl(buttonC, null, 10, null, 10);
+                overlay.AddControl(buttonD, 10, null, null, 10);
+            };
+            buttonB.Click += delegate
+            {
+                overlay.AddControl(linkButton, null, 10, null, null);
+            };
+            buttonC.Click += delegate
+            {
+                overlay.RemoveControl(linkButton);
+            };
+            buttonD.Click += delegate
+            {
+                overlay.RemoveControl(buttonB);
+                overlay.RemoveControl(buttonC);
+                overlay.RemoveControl(buttonD);
+            };
+
+            drawableDefault2D.MouseDown += (o, e) =>
+            {
+                drawPoints.Add(e.GetLogicalPoint().ToCommon());
+            };
 
             var image = Bitmap.FromResource("camera.png");
             drawableDefault2D.Paint += (o, args) =>
@@ -44,6 +72,11 @@ namespace ASEvaAPIEtoTest
                 var pieAngle = (DateTime.Now - startTime).TotalMilliseconds * 0.1;
                 pieAngle -= Math.Floor(pieAngle / 360) * 360;
                 g.FillPie(Color.FromArgb(0, 128, 0, 128), 10, 10, 180, 180, -90, (float)pieAngle);
+
+                foreach (var pt in drawPoints)
+                {
+                    g.FillEllipse(Colors.DarkBlue, pt.X - 1, pt.Y - 1, 2, 2);
+                }
             };
         }
 
@@ -54,5 +87,6 @@ namespace ASEvaAPIEtoTest
 
         private Drawable drawableDefault2D;
         private TextBitmap drawableTextBitmap;
+        private List<FloatPoint> drawPoints = new List<FloatPoint>();
     }
 }

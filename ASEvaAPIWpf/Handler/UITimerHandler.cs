@@ -10,7 +10,7 @@ namespace ASEva.UIWpf
 
 		public UITimerHandler()
 		{
-			// CHECK: 提高计时器Tick事件触发频率
+			// 提高计时器Tick事件触发频率 (可能导致鼠标事件卡顿)
 			Control = new DispatcherTimer(DispatcherPriority.Normal);
 
 			Control.Tick += (sender, e) => Callback.OnElapsed(Widget, EventArgs.Empty);

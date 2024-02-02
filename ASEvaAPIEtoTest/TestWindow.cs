@@ -17,7 +17,7 @@ namespace ASEvaAPIEtoTest
             if (!String.IsNullOrEmpty(App.GetUIBackend())) title += "." + App.GetUIBackend();
             title += ")";
 
-            Icon = Icon.FromResource("icon.png");
+            Icon = Bitmap.FromResource("icon.png").ToIcon();
             Title = title;
             this.SetClientSize(1300, 750);
             this.SetMinimumClientSize(1200, 700);
@@ -44,15 +44,24 @@ namespace ASEvaAPIEtoTest
             loopTimer.Interval = 0.015;
             loopTimer.Elapsed += delegate
             {
+                loopBasicPageA();
                 loopDrawDefault2D();
                 loopDrawSkia2D();
                 loopDrawGL();
             };
             loopTimer.Start();
 
+            KeyDown += (o, e) =>
+            {
+                if (e.Control && e.Key != Keys.Control && e.Key != Keys.LeftControl && e.Key != Keys.RightControl && e.Key != Keys.Space && e.Key != Keys.None)
+                {
+                    MessageBox.Show("Ctrl+" + e.Key.ToString());
+                }
+            };
+
             Closing += (o, e) =>
             {
-                if (MessageBox.Show(t["exit-confirm"], MessageBoxButtons.YesNo, MessageBoxType.Question) == DialogResult.Yes)
+                if (App.FatalException || MessageBox.Show(t["exit-confirm"], MessageBoxButtons.YesNo, MessageBoxType.Question) == DialogResult.Yes)
                 {
                     loopTimer.Stop();
                 }

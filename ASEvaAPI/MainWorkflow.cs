@@ -356,17 +356,31 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Show running standalone task
+        /// [Optional][OK for modal] Deprecated, implement OnRunStandaloneTask(title, basicCallback, detailsCallback)
         /// </summary>
-        /// <param name="title">Title of standalone task</param>
-        /// <param name="callback">Framework callback interface</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 显示正在进行的独立任务
+        /// [可选实现][可含模态] 已弃用，应实现OnRunStandaloneTask(title, basicCallback, detailsCallback)
+        /// </summary>
+        public virtual void OnRunStandaloneTask(String title, MainWorkflowTaskCallback callback) {}
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.15.9) [Optional][OK for modal] Show running standalone task
+        /// </summary>
+        /// <param name="title">Title of standalone task</param>
+        /// <param name="basicCallback">Basic callback interface</param>
+        /// <param name="detailsCallback">I/O details getter callback interface</param>
+        /// <returns>Always return true, or else the legacy OnRunStandaloneTask will be called</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.15.9) [可选实现][可含模态] 显示正在进行的独立任务
         /// </summary>
         /// <param name="title">独立任务标题</param>
-        /// <param name="callback">框架软件的回调接口</param>
-        public virtual void OnRunStandaloneTask(String title, MainWorkflowTaskCallback callback) {}
+        /// <param name="basicCallback">基础回调接口</param>
+        /// <param name="detailsCallback">获取I/O详情的回调接口</param>
+        /// <returns>应固定返回true，否则将继续调用旧版OnRunStandaloneTask</returns>
+        public virtual bool OnRunStandaloneTask(String title, MainWorkflowTaskCallback basicCallback, MainWorkflowTaskIODetailsCallback detailsCallback) { return false; }
 
         /// \~English
         /// <summary>
@@ -914,6 +928,37 @@ namespace ASEva
         /// 取消任务
         /// </summary>
         void CancelTask();
+    }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=2.15.9) Task I/O details getter callback interface used my main workflow
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=2.15.9) 在主流程中使用的获取独立任务I/O详情的回调接口
+    /// </summary>
+    public interface MainWorkflowTaskIODetailsCallback
+    {
+        /// \~English
+        /// <summary>
+        /// Get task config
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 获取任务配置
+        /// </summary>
+        String GetTaskConfig();
+
+        /// \~English
+        /// <summary>
+        /// Get task return value
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 获取任务返回值
+        /// </summary>
+        String GetTaskReturnValue();
     }
 
     /// \~English

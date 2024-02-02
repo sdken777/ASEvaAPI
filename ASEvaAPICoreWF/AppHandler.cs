@@ -5,6 +5,7 @@ using Eto.Forms;
 using Eto.Drawing;
 using Eto.WinForms;
 using System.Collections.Generic;
+using Eto.WinForms.Forms;
 
 namespace ASEva.UICoreWF
 {
@@ -34,6 +35,7 @@ namespace ASEva.UICoreWF
             platform.Add<WebView.IHandler>(() => new WebView2Handler());
             platform.Add<ComboBox.IHandler>(() => new ComboBoxHandler());
             platform.Add<Drawable.IHandler>(() => new DrawableHandler());
+            platform.Add<PasswordBox.IHandler>(() => new PasswordBoxHandler());
 
             // 改为使用Wpf版的Handler，Eto-2.6.0已修正
             //platform.Add<DataObject.IHandler>(() => new DataObjectHandler());
@@ -64,6 +66,10 @@ namespace ASEva.UICoreWF
             SnapshotExtensions.ScreenModeHandler = new ScreenSnapshotHandler();
             IconExtensions.FinalFrameOnly = true;
             OverlayLayout.ExpandControlSize = true;
+            FullScreenExtensions.Handler = new FullScreenHandler();
+
+            // CHECK: 修正application.Run之前不触发MouseDown等事件
+            System.Windows.Forms.Application.AddMessageFilter(TempBubbleEventFilter);
 
             uiBackend = null;
             webViewBackend = "webview2";
@@ -88,8 +94,19 @@ namespace ASEva.UICoreWF
 
         public void RunApp(Application application, Form window)
         {
+            // CHECK: 修正application.Run之前不触发MouseDown等事件
+            System.Windows.Forms.Application.RemoveMessageFilter(TempBubbleEventFilter);
+
             window.Closed += delegate { findAndHideWebViews(window); };
-            application.Run(window);
+
+            try
+            {
+                application.Run(window);
+            }
+            catch (Exception ex)
+            {
+                App.TriggerFatalException(new UnhandledExceptionEventArgs(ex, false));
+            }
         }
 
         public Control ConvertControlToEto(object platformControl)
@@ -105,6 +122,18 @@ namespace ASEva.UICoreWF
             return etoControl.ToNative(true);
         }
 
+        public UIEto.WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
+        {
+            if (platformWindowPanel is WindowPanel) return new EtoWindowPanel(platformWindowPanel as WindowPanel);
+            else return null;
+        }
+
+        public UIEto.ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
+        {
+            if (platformConfigPanel is ConfigPanel) return new EtoConfigPanel(platformConfigPanel as ConfigPanel);
+            else return null;
+        }
+
         public bool RunDialog(DialogPanel panel)
         {
             if (panel.Mode == DialogPanel.DialogMode.Invalid) return false;
@@ -112,10 +141,18 @@ namespace ASEva.UICoreWF
             var winformControl = (System.Windows.Forms.Control)panel.ToNative(true);
             if (winformControl == null) return false;
 
-            var dialog = new AppDialogCoreWF(winformControl, panel);
-            dialog.ShowDialog();
-            dialog.Dispose();
-            return true;
+            try
+            {
+                var dialog = new AppDialogCoreWF(winformControl, panel);
+                dialog.ShowDialog();
+                dialog.Dispose();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                App.TriggerFatalException(new UnhandledExceptionEventArgs(ex, false));
+                return false;
+            }
         }
 
         public Dictionary<string, string> GetThirdPartyNotices()
@@ -129,5 +166,50 @@ namespace ASEva.UICoreWF
         {
             return false;
         }
+
+        private BubbleEventFilter TempBubbleEventFilter
+        {
+            get
+            {
+                if (tempBubbleEventFilter == null)
+                {
+                    var bubble = new BubbleEventFilter();
+                    bubble.AddBubbleMouseEvent((c, cb, e) => cb.OnMouseWheel(c, e), null, Win32.WM.MOUSEWHEEL);
+                    bubble.AddBubbleMouseEvent((c, cb, e) => cb.OnMouseMove(c, e), null, Win32.WM.MOUSEMOVE);
+                    bubble.AddBubbleMouseEvents((c, cb, e) =>
+                    {
+                        cb.OnMouseDown(c, e);
+                        if (e.Handled && c.Handler is IWindowsControl handler && handler.ShouldCaptureMouse)
+                        {
+                            handler.ContainerControl.Capture = true;
+                            handler.MouseCaptured = true;
+                        }
+                    }, true, Win32.WM.LBUTTONDOWN, Win32.WM.RBUTTONDOWN, Win32.WM.MBUTTONDOWN);
+                    bubble.AddBubbleMouseEvents((c, cb, e) =>
+                    {
+                        cb.OnMouseDoubleClick(c, e);
+                        if (!e.Handled)
+                            cb.OnMouseDown(c, e);
+                    }, null, Win32.WM.LBUTTONDBLCLK, Win32.WM.RBUTTONDBLCLK, Win32.WM.MBUTTONDBLCLK);
+                    void OnMouseUpHandler(Control c, Control.ICallback cb, MouseEventArgs e)
+                    {
+                        if (c.Handler is IWindowsControl handler && handler.MouseCaptured)
+                        {
+                            handler.MouseCaptured = false;
+                            handler.ContainerControl.Capture = false;
+                        }
+                        cb.OnMouseUp(c, e);
+                    }
+                    bubble.AddBubbleMouseEvent(OnMouseUpHandler, false, Win32.WM.LBUTTONUP, b => MouseButtons.Primary);
+                    bubble.AddBubbleMouseEvent(OnMouseUpHandler, false, Win32.WM.RBUTTONUP, b => MouseButtons.Alternate);
+                    bubble.AddBubbleMouseEvent(OnMouseUpHandler, false, Win32.WM.MBUTTONUP, b => MouseButtons.Middle);
+                    tempBubbleEventFilter = bubble;
+                }
+                return tempBubbleEventFilter;
+            }
+        }
+        private BubbleEventFilter tempBubbleEventFilter;
     }
+
+
 }

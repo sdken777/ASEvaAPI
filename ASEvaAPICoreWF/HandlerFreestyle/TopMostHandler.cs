@@ -8,20 +8,16 @@ namespace ASEva.UICoreWF
     {
         public bool IsTopMost(Control control)
         {
-            if (control.ControlObject is System.Windows.Forms.Control)
-            {
-                var winformControl = control.ControlObject as System.Windows.Forms.Control;
-                var activeForm = System.Windows.Forms.Form.ActiveForm;
-                while (true)
-                {
-                    if (winformControl is System.Windows.Forms.ContainerControl) break;
-                    winformControl = winformControl.Parent;
-                    if (winformControl == null) return false;
-                }
-                var containerControl = winformControl as System.Windows.Forms.ContainerControl;
-                return containerControl.ParentForm != null && activeForm != null && activeForm.Equals(containerControl.ParentForm);
-            }
-            else return false;
+            var window = control.ParentWindow;
+            if (window == null) return false;
+
+            var form = window.ControlObject as System.Windows.Forms.Form;
+            if (form == null) return false;
+
+            var activeForm = System.Windows.Forms.Form.ActiveForm;
+            if (activeForm == null) return false;
+
+            return form.Equals(activeForm);
         }
     }
 }

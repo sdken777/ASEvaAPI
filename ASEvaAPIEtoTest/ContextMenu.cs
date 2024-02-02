@@ -1,9 +1,7 @@
 ﻿using System;
-using ASEva.Utility;
-using ASEva.Samples;
+using System.Threading;
 using ASEva.UIEto;
 using Eto.Forms;
-using Eto.Drawing;
 
 namespace ASEvaAPIEtoTest
 {
@@ -11,7 +9,9 @@ namespace ASEvaAPIEtoTest
     {
         private void initContextMenu(ContextMenu menu)
         {
-            menu.AddButtonItem(t["menu-button"], Bitmap.FromResource("menu-button.png")).Click += delegate { MessageBox.Show(App.WorkPath); };
+            menu.AddButtonItem(t["menu-fullscreen"]).Click += delegate { this.MaximizeToFullScreen(); };
+            menu.AddButtonItem(t["menu-exit"]).Click += delegate { Close(); };
+            menu.AddSeparator();
             var subMenu = menu.AddButtonItem(t["menu-sub"]);
             subMenu.AddButtonItem(t.Format("menu-sub-item", "A"));
             subMenu.AddSeparator();
@@ -41,6 +41,21 @@ namespace ASEvaAPIEtoTest
                     var dialog = new ImageDialog(snapshot);
                     App.RunDialog(dialog);
                 }
+            };
+            menu.AddSeparator();
+            menu.AddButtonItem(t["menu-exception-main"]).Click += delegate
+            {
+                String a = null;
+                Console.WriteLine(a.Length.ToString());
+            };
+            menu.AddButtonItem(t["menu-exception-sub"]).Click += delegate
+            {
+                var thread = new Thread(() =>
+                {
+                    String a = null;
+                    Console.WriteLine(a.Length.ToString());
+                });
+                thread.Start();
             };
         }
     }

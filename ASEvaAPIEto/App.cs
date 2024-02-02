@@ -17,6 +17,8 @@ namespace ASEva.UIEto
         Font CreateDefaultFont();
         Control ConvertControlToEto(object platformControl);
         object ConvertControlToPlatform(Control etoControl);
+        WindowPanel ConvertWindowPanelToEto(object platformWindowPanel);
+        ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel);
         bool RunDialog(DialogPanel panel);
         Dictionary<String, String> GetThirdPartyNotices();
         bool ShouldPassParent();
@@ -48,7 +50,9 @@ namespace ASEva.UIEto
             {
                 var availableUICodes = getAvailableUICodes();
                 if (availableUICodes == null) return false;
+
                 initApp(availableUICodes[0]);
+                AppDomain.CurrentDomain.UnhandledException += (o, args) => { TriggerFatalException(args); };
             }
             return application != null;
         }
@@ -92,11 +96,38 @@ namespace ASEva.UIEto
         /// <param name="window">主窗口</param>
         public static void Run(Form window)
         {
-            if (handler != null && application != null && window != null)
+            if (handler != null && application != null && window != null && firstFatalException == null)
             {
-                window.KeyDown += (o, e) => { KeyDown?.Invoke(o, e); };
                 window.Closed += delegate { window.CloseRecursively(); };
-                handler.RunApp(application, window);
+
+                exceptionTimer = new UITimer();
+                exceptionTimer.Interval = 0.1;
+                exceptionTimer.Elapsed += delegate
+                {
+                    if (firstFatalException != null)
+                    {
+                        exceptionTimer.Stop();
+                        application.Quit();
+                    }
+                };
+                exceptionTimer.Start();
+
+                try
+                {
+                    handler.RunApp(application, window);
+                }
+                catch (Exception ex)
+                {
+                    if (firstFatalException == null) firstFatalException = ex;
+                }
+
+                exceptionTimer.Stop();
+                exceptionTimer = null;
+
+                if (firstFatalException != null)
+                {
+                    MessageBox.Show(firstFatalException.Message + "\n" + firstFatalException.StackTrace, MessageBoxType.Error);
+                }
             }
         }
 
@@ -292,6 +323,44 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
+        /// (api:eto=2.13.6) Convert platform window panel to Eto window panel
+        /// </summary>
+        /// <param name="platformWindowPanel">Platform window panel</param>
+        /// <returns>Eto window panel, null if conversion failed</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.13.6) 将平台特化窗口控件转化为Eto窗口控件
+        /// </summary>
+        /// <param name="platformWindowPanel">平台特化窗口控件</param>
+        /// <returns>Eto窗口控件，若转化失败则返回null</returns>
+        public static WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
+        {
+            if (handler == null || platformWindowPanel == null) return null;
+            if (platformWindowPanel is WindowPanel) return platformWindowPanel as WindowPanel;
+            else return handler.ConvertWindowPanelToEto(platformWindowPanel);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.13.6) Convert platform config panel to Eto config panel
+        /// </summary>
+        /// <param name="platformConfigPanel">Platform config panel</param>
+        /// <returns>Eto config panel, null if conversion failed</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.13.6) 将平台特化配置界面控件转化为Eto配置界面控件
+        /// </summary>
+        /// <param name="platformConfigPanel">平台特化配置界面控件</param>
+        /// <returns>Eto配置界面控件，若转化失败则返回null</returns>
+        public static ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
+        {
+            if (handler == null || platformConfigPanel == null) return null;
+            if (platformConfigPanel is ConfigPanel) return platformConfigPanel as ConfigPanel;
+            else return handler.ConvertConfigPanelToEto(platformConfigPanel);
+        }
+
+        /// \~English
+        /// <summary>
         /// (api:eto=2.8.0) Run dialog
         /// </summary>
         /// <param name="panel">Target dialog panel object</param>
@@ -304,15 +373,50 @@ namespace ASEva.UIEto
         /// <returns>是否成功弹出，对话框的运行结果应通过主面板的各Result属性获取</returns>
         public static bool RunDialog(DialogPanel panel)
         {
-            if (handler == null || panel == null) return false;
-            
-            var runOK = handler.RunDialog(panel);
-            if (runOK) return true;
+            if (handler == null || panel == null || firstFatalException != null) return false;
 
-            var dialogEto = new AppDialogEto(panel);
-            dialogEto.MoveToCenter();
-            dialogEto.ShowModal();
-            return true;
+            UITimer localTimer = null;
+            if (exceptionTimer == null)
+            {
+                localTimer = new UITimer();
+                localTimer.Interval = 0.1;
+                localTimer.Elapsed += delegate
+                {
+                    if (firstFatalException != null)
+                    {
+                        localTimer.Stop();
+                        panel.Close();
+                    }
+                };
+                localTimer.Start();
+            }
+
+            try
+            {
+                var runOK = handler.RunDialog(panel);
+                if (!runOK)
+                {
+                    var dialogEto = new AppDialogEto(panel);
+                    dialogEto.MoveToCenter();
+                    dialogEto.ShowModal();
+                }
+            }
+            catch (Exception ex)
+            {
+                if (firstFatalException == null) firstFatalException = ex;
+            }
+
+            if (localTimer != null)
+            {
+                localTimer.Stop();
+                localTimer = null;
+                if (firstFatalException != null)
+                {
+                    MessageBox.Show(firstFatalException.Message + "\n" + firstFatalException.StackTrace, MessageBoxType.Error);
+                }
+            }
+
+            return firstFatalException == null;
         }
 
         /// \~English
@@ -353,25 +457,68 @@ namespace ASEva.UIEto
 
 		/// \~English
 		/// <summary>
-		/// (api:eto=2.11.4) Key press event of main window
+		/// (api:eto=2.11.4) Key press event of main window (Generally only for plugins)
 		/// </summary>
 		/// \~Chinese
 		/// <summary>
-		/// (api:eto=2.11.4) 主窗口的按键事件
+		/// (api:eto=2.11.4) 主窗口的按键事件（一般仅供插件使用）
 		/// </summary>
 		public static event EventHandler<KeyEventArgs> KeyDown;
 
 		/// \~English
 		/// <summary>
-        /// (api:eto=2.11.4) When ASEva.UIEto.App.Run is not used, you can use this function to manually trigger the KeyDown event
+        /// (api:eto=2.11.4) Workflow should use this function to manually trigger the KeyDown event
         /// </summary>
 		/// \~Chinese
         /// <summary>
-        /// (api:eto=2.11.4) 未使用 ASEva.UIEto.App.Run 启动时可使用此函数手动触发KeyDown事件
+        /// (api:eto=2.11.4) 主流程应使用此函数手动触发KeyDown事件
         /// </summary>
         public static void TriggerKeyDown(object sender, KeyEventArgs args)
         {
             KeyDown?.Invoke(sender, args);
+        }
+
+		/// \~English
+		/// <summary>
+        /// (api:eto=2.14.0) Whether a fatal exception occurred, and the application will terminate immediately
+        /// </summary>
+		/// \~Chinese
+        /// <summary>
+        /// (api:eto=2.14.0) 是否发生了致命异常，应用程序将立即强制退出
+        /// </summary>
+        public static bool FatalException
+        {
+            get { return firstFatalException != null; }
+        }
+
+        public static void TriggerFatalException(UnhandledExceptionEventArgs args)
+        {
+            var exObj = args.ExceptionObject;
+            if (exObj is TargetInvocationException) exObj = (exObj as TargetInvocationException).InnerException;
+
+            Exception ex = null;
+            if (exObj is Exception) ex = exObj as Exception;
+            else ex = new Exception("Unknown exception.");
+
+            if (args.IsTerminating)
+            {
+                try
+                {
+                    var sep = Path.DirectorySeparatorChar;
+                    var logDirPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + sep + "SpadasFiles" + sep + "log";
+                    if (!Directory.Exists(logDirPath)) Directory.CreateDirectory(logDirPath);
+
+                    var errorFilePath = logDirPath + sep + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_Exception.txt";
+                    using (var writer = new StreamWriter(errorFilePath))
+                    {
+                        writer.WriteLine(ex.Message + "\n" + ex.StackTrace);
+                    }
+
+                    Console.WriteLine("Exception message written to: " + errorFilePath);
+                }
+                catch (Exception) {}
+            }
+            else if (firstFatalException == null) firstFatalException = ex;
         }
 
         private static String[] getAvailableUICodes()
@@ -473,5 +620,7 @@ namespace ASEva.UIEto
         private static float defaultFontSize = 0;
         private static bool newFontFailed = false;
         private static bool initAppInvoked = false;
+        private static Exception firstFatalException = null;
+        private static UITimer exceptionTimer = null;
     }
 }

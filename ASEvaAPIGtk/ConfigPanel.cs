@@ -1,4 +1,5 @@
 ﻿using System;
+using Eto.Forms;
 using Gtk;
 
 namespace ASEva.UIGtk
@@ -94,5 +95,47 @@ namespace ASEva.UIGtk
         /// (api:gtk=2.4.5) 在此事件中实现配置界面的关闭
         /// </summary>
         public event EventHandler CloseRequested;
+    }
+
+    class EtoConfigPanel : ASEva.UIEto.ConfigPanel
+    {
+        public EtoConfigPanel(ConfigPanel gtkConfigPanel)
+        {
+            this.gtkConfigPanel = gtkConfigPanel;
+            Content = gtkConfigPanel.ToEto();
+            CloseRequested += delegate { Close(); };
+        }
+
+        public override IntSize OnGetSize()
+        {
+            return new IntSize(gtkConfigPanel.WidthRequest, gtkConfigPanel.HeightRequest);
+        }
+
+        public override void OnHandleModal()
+        {
+            gtkConfigPanel.OnHandleModal();
+        }
+
+        public override void OnInit(string config)
+        {
+            gtkConfigPanel.OnInit(config);
+        }
+
+        public override void OnInitSize(string config)
+        {
+            gtkConfigPanel.OnInitSize(config);
+        }
+
+        public override void OnRelease()
+        {
+            gtkConfigPanel.OnRelease();
+        }
+
+        public override void OnUpdateUI()
+        {
+            gtkConfigPanel.OnUpdateUI();
+        }
+
+        private ConfigPanel gtkConfigPanel;
     }
 }

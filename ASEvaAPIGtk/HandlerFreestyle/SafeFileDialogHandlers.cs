@@ -91,7 +91,7 @@ namespace ASEva.UIGtk
         public new DialogResult ShowDialog(Eto.Forms.Window parent)
 		{
 			var result = base.ShowDialog(parent);
-			currentFolder = Control.CurrentFolder;
+			currentFolder = Control.Filename ?? Control.CurrentFolder;
 			Control.Dispose();
 			return result;
 		}

@@ -81,9 +81,10 @@ namespace ASEva.UIMonoMac
             {
                 var etoBitmap = new Bitmap(pngBytes);
 
+                var viewOffset = view.ConvertPointToView(new CGPoint(0,0), view.Window.ContentView);
                 var bound = view.Window.ConvertRectToScreen(view.Frame);
                 var scale = Screen.PrimaryScreen.LogicalPixelSize;
-                bound = new CGRect(bound.X * scale, bound.Y * scale, bound.Width * scale, bound.Height * scale);
+                bound = new CGRect((viewOffset.X + bound.X) * scale, (viewOffset.Y + bound.Y) * scale, bound.Width * scale, bound.Height * scale);
 
                 etoBitmap = etoBitmap.Clone(new Rectangle((int)bound.X, etoBitmap.Height - (int)bound.Y - (int)bound.Height, (int)bound.Width, (int)bound.Height));
                 var rawImage = ASEva.UIEto.ImageConverter.ConvertFromBitmap(etoBitmap);

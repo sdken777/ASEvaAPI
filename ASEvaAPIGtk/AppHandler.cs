@@ -22,6 +22,11 @@ namespace ASEva.UIGtk
     {
         public Application CreateApp(out String uiBackend, out String webViewBackend)
         {
+            GLib.ExceptionManager.UnhandledException += (args) =>
+            {
+                App.TriggerFatalException(args);
+            };
+
             if (ASEva.APIInfo.GetRunningOS() == "linuxarm")
             {
                 // CHECK: 修正在Arm下打开文件对话框异常，Eto-2.8.3已修复
@@ -50,6 +55,8 @@ namespace ASEva.UIGtk
             platform.Add<SelectFolderDialog.IHandler>(() => new SafeSelectFolderDialogHandler());
             platform.Add<Label.IHandler>(() => new LabelHandler());
             platform.Add<Button.IHandler>(() => new ButtonHandler());
+            platform.Add<ComboBox.IHandler>(() => new ComboBoxHandler());
+            platform.Add<PasswordBox.IHandler>(() => new PasswordBoxHandler());
             var app = new Application(platform);
 
             // CHECK: 应用全局样式令显示较为紧凑
@@ -85,6 +92,7 @@ namespace ASEva.UIGtk
             FlowLayout.Factory = new FlowLayoutFactoryGtk();
             FlowLayout2D.Factory = new FlowLayout2DFactoryGtk();
             OverlayLayout.DelayHandleControl = true;
+            FullScreenExtensions.Handler = new FullScreenHandler();
 
             webViewBackend = "webkit2";
 
@@ -111,6 +119,18 @@ namespace ASEva.UIGtk
         public object ConvertControlToPlatform(Control etoControl)
         {
             return etoControl.ToNative(true);
+        }
+
+        public UIEto.WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
+        {
+            if (platformWindowPanel is WindowPanel) return new EtoWindowPanel(platformWindowPanel as WindowPanel);
+            else return null;
+        }
+
+        public UIEto.ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
+        {
+            if (platformConfigPanel is ConfigPanel) return new EtoConfigPanel(platformConfigPanel as ConfigPanel);
+            else return null;
         }
 
         public bool RunDialog(DialogPanel panel)

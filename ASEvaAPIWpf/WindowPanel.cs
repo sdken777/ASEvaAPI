@@ -123,4 +123,75 @@ namespace ASEva.UIWpf
         /// </summary>
         public virtual void OnRelease() { }
     }
+
+    class EtoWindowPanel : UIEto.WindowPanel
+    {
+        public EtoWindowPanel(WindowPanel wpfWindowPanel)
+        {
+            this.wpfWindowPanel = wpfWindowPanel;
+            Content = Eto.Forms.WpfHelpers.ToEto(wpfWindowPanel);
+        }
+
+        public override string OnGetConfig()
+        {
+            return wpfWindowPanel.OnGetConfig();
+        }
+
+        public override IntSize OnGetDefaultSize()
+        {
+            return new IntSize((int)wpfWindowPanel.Width, (int)wpfWindowPanel.Height);
+        }
+
+        public override IntSize OnGetMinimumSize()
+        {
+            return new IntSize((int)Math.Ceiling(wpfWindowPanel.MinWidth), (int)Math.Ceiling(wpfWindowPanel.MinHeight));
+        }
+
+        public override void OnHandleModal()
+        {
+            wpfWindowPanel.OnHandleModal();
+        }
+
+        public override void OnInit(string config)
+        {
+            wpfWindowPanel.OnInit(config);
+        }
+
+        public override void OnInitSize(string config)
+        {
+            wpfWindowPanel.OnInitSize(config);
+        }
+
+        public override void OnInputData(object data)
+        {
+            wpfWindowPanel.OnInputData(data);
+        }
+
+        public override void OnRelease()
+        {
+            wpfWindowPanel.OnRelease();
+        }
+
+        public override void OnResetData()
+        {
+            wpfWindowPanel.OnResetData();
+        }
+
+        public override void OnStartSession()
+        {
+            wpfWindowPanel.OnStartSession();
+        }
+
+        public override void OnStopSession()
+        {
+            wpfWindowPanel.OnStopSession();
+        }
+
+        public override void OnUpdateUI()
+        {
+            wpfWindowPanel.OnUpdateUI();
+        }
+
+        private WindowPanel wpfWindowPanel;
+    }
 }

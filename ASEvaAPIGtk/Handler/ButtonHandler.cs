@@ -7,7 +7,8 @@ namespace ASEva.UIGtk
 {
 	class ButtonHandler : ButtonHandler<Gtk.Button, Button, Button.ICallback>
 	{
-		public static int MinimumWidth = 80;
+		// CHECK: 修正宽度无法设置较小值问题
+		public static int MinimumWidth = 10;
 
 		public class EtoButton : Gtk.Button
 		{

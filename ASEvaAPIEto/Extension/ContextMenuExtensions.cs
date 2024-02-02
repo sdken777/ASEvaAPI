@@ -38,7 +38,11 @@ namespace ASEva.UIEto
             {
                 panel.MouseDown += (o, args) =>
                 {
-                    if (args.Buttons.HasFlag(MouseButtons.Alternate)) menu.Show();
+                    if (args.Buttons.HasFlag(MouseButtons.Alternate))
+                    {
+                        menu.Show();
+                        args.Handled = true;
+                    }
                 };
             }
             return menu;

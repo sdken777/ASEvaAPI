@@ -141,6 +141,7 @@ namespace ASEva
         void SetModuleConfig(object caller, String classID, String config);
         void DisableModule(object caller, String classID);
         ConfigStatus GetModuleConfigStatus(object caller, String classID);
+        ConfigStatus GetModuleConfigStatus(object caller, String classID, out String errorHint);
         ConfigStatus[] GetModuleChildConfigStatus(object caller, String classID);
         Dictionary<BusDeviceID, BusDeviceInfo> GetBusDevices();
         Dictionary<VideoDeviceID, VideoDeviceInfo> GetVideoDevices();
@@ -179,6 +180,7 @@ namespace ASEva
         void AddMainThreadCheckpoint(String location);
         bool NewProject(bool force);
         bool OpenProject(String projectFile);
+        bool OpenProject(String projectFile, bool force);
         bool SaveCurrentProject(String projectFile);
         String GetCurrentProject();
         void PlayMp3(byte[] mp3FileData);
@@ -312,6 +314,7 @@ namespace ASEva
         bool IsPRCWebPreferred();
         BusChannelInfo[] GetBusChannelsInfo(DateTime session);
         VideoChannelInfo[] GetVideoChannelsInfo(DateTime session);
+        ModuleDetails GetModuleDetails(String classID);
     }
     
     /// \~English
@@ -2467,21 +2470,36 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get status of processor/native/device component's configuration
+        /// Deprecated, use GetModuleConfigStatus(caller, classID, errorHint)
         /// </summary>
-        /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
-        /// <param name="classID">Component's class ID</param>
-        /// <returns>Status of component's configuration, returns ASEva.ConfigStatus.Disabled if not found</returns>
         /// \~Chinese
         /// <summary>
-        /// 获取数据处理/原生/设备组件配置的状态
+        /// 已弃用，应使用GetModuleConfigStatus(caller, classID, errorHint)
         /// </summary>
-        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
-        /// <param name="classID">组件的类别ID</param>
-        /// <returns>组件配置的状态，若找不到类别ID对应的组件则返回 ASEva.ConfigStatus.Disabled </returns>
         public static ConfigStatus GetModuleConfigStatus(object caller, String classID)
         {
             return Handler.GetModuleConfigStatus(caller, classID);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.16.0) Get status of processor/native/device component's configuration
+        /// </summary>
+        /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
+        /// <param name="classID">Component's class ID</param>
+        /// <param name="errorHint">Error hint, available while the status is EnabledWithError or EnabledWithWarning</param>
+        /// <returns>Status of component's configuration, returns ASEva.ConfigStatus.Disabled if not found</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.16.0) 获取数据处理/原生/设备组件配置的状态
+        /// </summary>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
+        /// <param name="classID">组件的类别ID</param>
+        /// <param name="errorHint">错误提示，当配置状态为EnabledWithError或EnabledWithWarning时有效</param>
+        /// <returns>组件配置的状态，若找不到类别ID对应的组件则返回 ASEva.ConfigStatus.Disabled </returns>
+        public static ConfigStatus GetModuleConfigStatus(object caller, String classID, out String errorHint)
+        {
+            return Handler.GetModuleConfigStatus(caller, classID, out errorHint);
         }
 
         /// \~English
@@ -3255,15 +3273,15 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) New project
+        /// (api:app=2.3.0) Create blank project
         /// </summary>
-        /// <param name="force">Whether forced to new project</param>
+        /// <param name="force">Whether forced to create new project</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 新建项目
+        /// (api:app=2.3.0) 新建空白项目
         /// </summary>
-        /// <param name="force">是否强制新建项目</param>
+        /// <param name="force">是否强制新建空白项目</param>
         /// <returns>是否成功新建项目</returns>
         public static bool NewProject(bool force)
         {
@@ -3278,13 +3296,32 @@ namespace ASEva
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 打开新项目
+        /// (api:app=2.3.0) 打开项目
         /// </summary>
         /// <param name="projectFile">项目文件路径，若设为null则从autosave读取</param>
         /// <returns>是否成功打开项目</returns>
         public static bool OpenProject(String projectFile)
         {
             return Handler.OpenProject(projectFile);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.15.8) Open project
+        /// </summary>
+        /// <param name="projectFile">Path of project file, set to null to load autosaved in the folder of application's configuration files</param>
+        /// <param name="force">Whether forced to open the project</param>
+        /// <returns>Whether successful</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.15.8) 打开项目
+        /// </summary>
+        /// <param name="projectFile">项目文件路径，若设为null则从autosave读取</param>
+        /// <param name="force">是否强制打开项目</param>
+        /// <returns>是否成功打开项目</returns>
+        public static bool OpenProject(String projectFile, bool force)
+        {
+            return Handler.OpenProject(projectFile, force);
         }
 
         /// \~English
@@ -5472,6 +5509,21 @@ namespace ASEva
         public static VideoChannelInfo[] GetVideoChannelsInfo(DateTime session)
         {
             return Handler.GetVideoChannelsInfo(session);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.16.0) Gets details about the processor/native/device component
+        /// </summary>
+        /// <returns>Component details. Return null if none exist</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.16.0) 获取数据处理/原生/设备组件的详情
+        /// </summary>
+        /// <returns>组件详情，若不存在则返回null</returns>
+        public static ModuleDetails GetModuleDetails(String classID)
+        {
+            return Handler.GetModuleDetails(classID);
         }
     }
 }

@@ -423,7 +423,8 @@ namespace ASEva.UIGtk
 				}
 			}
 
-			// do not connect before, otherwise it is sent before sending to child
+			// CHECK: 修正方向键无法触发事件问题
+			[GLib.ConnectBefore]
 			public void HandleWindowKeyPressEvent(object o, Gtk.KeyPressEventArgs args)
 			{
 				var handler = Handler;
@@ -561,7 +562,8 @@ namespace ASEva.UIGtk
 
 		public virtual void Close()
 		{
-			if (Widget.Loaded && CloseWindow())
+			// CHECK: 修正调用Form.Close导致异常问题
+			if (Widget.Loaded && CloseWindow() && !Widget.IsDisposed)
 			{
 				Control.Hide();
 				Control.Unrealize();

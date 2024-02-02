@@ -42,6 +42,7 @@ namespace ASEva.UIMonoMac
             platform.Add<UITimer.IHandler>(() => new UITimerHandler());
             platform.Add<LinkButton.IHandler>(() => new LinkButtonHandler());
             platform.Add<Label.IHandler>(() => new LabelHandler());
+            platform.Add<PasswordBox.IHandler>(() => new PasswordBoxHandler());
 
             var app = new Application(platform);
 
@@ -91,6 +92,7 @@ namespace ASEva.UIMonoMac
             CheckableListBox.Factory = new CheckableListBoxFactoryMonoMac();
             TextTableView.Factory = new TextTableViewFactoryMonoMac();
             SimpleTreeView.Factory = new SimpleTreeViewFactoryMonoMac();
+            TopMostExtensions.QueryInterface = new TopMostHandlerMonoMac();
 
             uiBackend = null;
             webViewBackend = "webkit2";
@@ -137,6 +139,16 @@ namespace ASEva.UIMonoMac
         {
             if (etoControl == null) return null;
             return etoControl.ToNative(true);
+        }
+
+        public WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
+        {
+            return null;
+        }
+
+        public ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
+        {
+            return null;
         }
 
         public bool RunDialog(DialogPanel panel)

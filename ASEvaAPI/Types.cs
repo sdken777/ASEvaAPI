@@ -4122,4 +4122,197 @@ namespace ASEva
             InputMode = new VideoInputMode();
         }
     }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=2.16.0) Type of component related UI
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=2.16.0) 组件相关用户界面的类别
+    /// </summary>
+    public enum ModuleRelatedUIType
+    {
+        /// \~English
+        /// <summary>
+        /// Invalid
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 无效
+        /// </summary>
+        Invalid = 0,
+
+        /// \~English
+        /// <summary>
+        /// Dialog component
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 对话框组件
+        /// </summary>
+        Dialog = 1,
+
+        /// \~English
+        /// <summary>
+        /// Window component
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 窗口组件
+        /// </summary>
+        Window = 2,
+
+        /// \~English
+        /// <summary>
+        /// Console component
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 控制台组件
+        /// </summary>
+        Console = 3
+    }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=2.16.0) Entry arguments of component related UI
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=2.16.0) 组件相关用户界面的入口参数
+    /// </summary>
+    public class ModuleRelatedUIEntry
+    {
+        /// \~English
+        /// <summary>
+        /// UI type
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// UI类别
+        /// </summary>
+        public ModuleRelatedUIType Type { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// UI component's class ID
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// UI组件的类别ID
+        /// </summary>
+        public String ClassID { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// UI component's transform ID
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// UI组件的分化标识ID
+        /// </summary>
+        public String TransformID { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.16.1) Component's name
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.16.1) 组件名称
+        /// </summary>
+        public String Name { get; set; }
+    }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=2.16.0) Component details
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=2.16.0) 组件详情
+    /// </summary>
+    public class ModuleDetails
+    {
+        /// \~English
+        /// <summary>
+        /// Channel ID and alias name of output samples
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 输出样本的通道ID和别名
+        /// </summary>
+        public Dictionary<String, String> OutputSamples { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// ID of output scenarios
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 输出场景的ID
+        /// </summary>
+        public String[] OutputScenes { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Type and name of output signals, use empty string for default type
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 输出信号类别和名称，默认类别使用空字符串
+        /// </summary>
+        public Dictionary<String, String[]> OutputSignals { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Title of output graphs
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 输出图表的标题
+        /// </summary>
+        public String[] OutputGraphs { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// ID of the required signal packing data channels
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 所需信号打包数据通道ID
+        /// </summary>
+        public String[] RequiredSignalPackings { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// ID of the required video channels
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 所需视频通道
+        /// </summary>
+        public UsingVideoChannel[] RequiredVideoChannels { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Data types required for writing data files
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 写入数据文件所需的数据类型
+        /// </summary>
+        public RecordDataType[] RequiredRecordDataTypes { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Entry arguments of related UIs
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 相关用户界面的入口参数
+        /// </summary>
+        public ModuleRelatedUIEntry[] RelatedUIEntries { get; set; }
+    }
 }
