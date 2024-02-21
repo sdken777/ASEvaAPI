@@ -417,6 +417,11 @@ namespace ASEva.UIEto
 			OnMouseWheel(args);
 		}
 
+		public void OnRaiseMouseDoubleClick(MouseEventArgs args)
+		{
+			OnMouseDoubleClick(args);
+		}
+
         public string OnGetModuleID()
         {
             return moduleID;

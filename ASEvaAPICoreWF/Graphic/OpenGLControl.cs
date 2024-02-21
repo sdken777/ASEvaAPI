@@ -232,6 +232,11 @@ namespace ASEva.UICoreWF
             callback.OnRaiseMouseWheel(e.ToEto(this));
         }
 
+        private void pictureBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            callback.OnRaiseMouseDoubleClick(e.ToEto(this));
+        }
+
         private void onInit()
         {
             hdc = Win32.GetDC(Handle);

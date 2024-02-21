@@ -881,6 +881,11 @@ namespace ASEva.UIEto
 			OnMouseWheel(args);
 		}
 
+		public void OnRaiseMouseDoubleClick(MouseEventArgs args)
+		{
+			OnMouseDoubleClick(args);
+		}
+
         public string OnGetModuleID()
         {
             return moduleID;
@@ -927,6 +932,7 @@ namespace ASEva.UIEto
 		void OnRaiseMouseMove(MouseEventArgs args);
 		void OnRaiseMouseUp(MouseEventArgs args);
 		void OnRaiseMouseWheel(MouseEventArgs args);
+		void OnRaiseMouseDoubleClick(MouseEventArgs args);
 		String OnGetModuleID();
 	}
 
