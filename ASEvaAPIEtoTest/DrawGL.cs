@@ -168,6 +168,11 @@ namespace ASEvaAPIEtoTest
                 labelMouseCount.Text = (++glMouseCount).ToString();
             };
 
+            glView.MouseDoubleClick += delegate
+            {
+                button.PerformClick();
+            };
+
             button.Click += delegate
             {
                 if (glView.ContextInfo != null)
