@@ -341,6 +341,45 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
+        /// (api:eto=2.14.3) Add combo box
+        /// </summary>
+        /// <param name="tableRow">Row object of table layout</param>
+        /// <param name="texts">Text of each item (can be null)</param>
+        /// <param name="logicalWidth">Initial logical width, 0 as not to set</param>
+        /// <param name="fillHeight">Whether to fill vertically</param>
+        /// <param name="selectedIndex">Initial selected index</param>
+        /// <returns>Created combo box object</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.14.3) 添加组合框至表布局的行
+        /// </summary>
+        /// <param name="tableRow">表布局的行</param>
+        /// <param name="texts">组合框各选项的文字，可为空</param>
+        /// <param name="logicalWidth">初始宽度，0表示不设置</param>
+        /// <param name="fillHeight">是否纵向填满</param>
+        /// <param name="selectedIndex">初始的选项序号</param>
+        /// <returns>创建的组合框对象</returns>
+        public static ComboBox AddComboBox(this TableRow tableRow, String[] texts, int logicalWidth, bool fillHeight = false, int selectedIndex = 0)
+        {
+            if (texts == null) texts = new String[0];
+
+            var comboBox = new ComboBox { ReadOnly = true };
+            foreach (var text in texts) comboBox.Items.Add(text);
+
+            if (logicalWidth > 0) comboBox.SetLogicalWidth(logicalWidth);
+            
+            if (selectedIndex >= 0 && selectedIndex < texts.Length) comboBox.SelectedIndex = selectedIndex;
+            else if (texts.Length > 0) comboBox.SelectedIndex = 0;
+
+            var stackLayout = new StackLayout() { Orientation = Orientation.Horizontal };
+            stackLayout.Items.Add(new StackLayoutItem(comboBox, fillHeight ? VerticalAlignment.Stretch : VerticalAlignment.Center, true));
+
+            tableRow.Cells.Add(new TableCell(stackLayout, false));
+            return comboBox;
+        }
+
+        /// \~English
+        /// <summary>
         /// Add group box
         /// </summary>
         /// <param name="tableRow">Row object of table layout</param>

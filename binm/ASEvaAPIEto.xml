@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.14.2
+            version=2.14.3
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -2061,6 +2061,26 @@
             <param name="selectedIndex">初始的选项序号</param>
             <returns>创建的组合框对象</returns>
         </member>
+        <member name="M:ASEva.UIEto.StackLayoutExtensions.AddComboBox(Eto.Forms.StackLayout,System.String[],System.Int32,System.Int32)">
+            \~English
+            <summary>
+            (api:eto=2.14.3) Add combo box
+            </summary>
+            <param name="stackLayout">Stack layout object</param>
+            <param name="texts">Text of each item (can be null)</param>
+            <param name="logicalWidth">Initial logical width, 0 as not to set</param>
+            <param name="selectedIndex">Initial selected index</param>
+            <returns>Created combo box object</returns>
+            \~Chinese
+            <summary>
+            (api:eto=2.14.3) 添加组合框至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="texts">组合框各选项的文字，可为空</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="selectedIndex">初始的选项序号</param>
+            <returns>创建的组合框对象</returns>
+        </member>
         <member name="M:ASEva.UIEto.StackLayoutExtensions.AddGroupBox(Eto.Forms.StackLayout,System.String,System.Boolean,System.Int32,System.Int32)">
             \~English
             <summary>
@@ -2475,6 +2495,28 @@
             <param name="tableRow">表布局的行</param>
             <param name="texts">组合框各选项的文字，可为空</param>
             <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="selectedIndex">初始的选项序号</param>
+            <returns>创建的组合框对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutExtensions.AddComboBox(Eto.Forms.TableRow,System.String[],System.Int32,System.Boolean,System.Int32)">
+            \~English
+            <summary>
+            (api:eto=2.14.3) Add combo box
+            </summary>
+            <param name="tableRow">Row object of table layout</param>
+            <param name="texts">Text of each item (can be null)</param>
+            <param name="logicalWidth">Initial logical width, 0 as not to set</param>
+            <param name="fillHeight">Whether to fill vertically</param>
+            <param name="selectedIndex">Initial selected index</param>
+            <returns>Created combo box object</returns>
+            \~Chinese
+            <summary>
+            (api:eto=2.14.3) 添加组合框至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="texts">组合框各选项的文字，可为空</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
             <param name="fillHeight">是否纵向填满</param>
             <param name="selectedIndex">初始的选项序号</param>
             <returns>创建的组合框对象</returns>

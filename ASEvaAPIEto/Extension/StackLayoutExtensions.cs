@@ -387,6 +387,40 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
+        /// (api:eto=2.14.3) Add combo box
+        /// </summary>
+        /// <param name="stackLayout">Stack layout object</param>
+        /// <param name="texts">Text of each item (can be null)</param>
+        /// <param name="logicalWidth">Initial logical width, 0 as not to set</param>
+        /// <param name="selectedIndex">Initial selected index</param>
+        /// <returns>Created combo box object</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.14.3) 添加组合框至堆叠布局
+        /// </summary>
+        /// <param name="stackLayout">堆叠布局</param>
+        /// <param name="texts">组合框各选项的文字，可为空</param>
+        /// <param name="logicalWidth">初始宽度，0表示不设置</param>
+        /// <param name="selectedIndex">初始的选项序号</param>
+        /// <returns>创建的组合框对象</returns>
+        public static ComboBox AddComboBox(this StackLayout stackLayout, String[] texts, int logicalWidth, int selectedIndex = 0)
+        {
+            if (texts == null) texts = new String[0];
+
+            var comboBox = new ComboBox { ReadOnly = true };
+            foreach (var text in texts) comboBox.Items.Add(text);
+
+            if (logicalWidth > 0) comboBox.SetLogicalWidth(logicalWidth);
+
+            if (selectedIndex >= 0 && selectedIndex < texts.Length) comboBox.SelectedIndex = selectedIndex;
+            else if (texts.Length > 0) comboBox.SelectedIndex = 0;
+
+            stackLayout.Items.Add(new StackLayoutItem(comboBox, false));
+            return comboBox;
+        }
+
+        /// \~English
+        /// <summary>
         /// Add group box
         /// </summary>
         /// <param name="stackLayout">Stack layout</param>
