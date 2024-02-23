@@ -36,6 +36,12 @@ namespace ASEva.UIGtk
 		// CHECK: 修复不设置宽度时宽度过小问题
 		public override void OnLoadComplete(EventArgs e)
 		{
+			base.OnLoadComplete(e);
+			updateWidthChars();
+			Widget.Items.CollectionChanged += delegate { updateWidthChars(); };
+		}
+		private void updateWidthChars()
+		{
 			int textLength = 0;
 			foreach (var item in Widget.Items)
 			{

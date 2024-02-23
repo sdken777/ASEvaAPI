@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 10, 0, 0); // Update log / 更新记录: 完善异常处理
+            return new Version(2, 10, 0, 1); // Update log / 更新记录: 修复ComboBox不设置宽度时宽度过小问题2
         }
     }
 }
