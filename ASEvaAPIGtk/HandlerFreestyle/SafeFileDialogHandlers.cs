@@ -67,13 +67,14 @@ namespace ASEva.UIGtk
 		private String filename = null;
 	}
 
-	class SafeOpenFileDialogHandler : OpenFileDialogHandler
+	class SafeOpenFileDialogHandler : OpenFileDialogHandler, OpenFileDialog.IHandler
 	{
 		// CHECK: 修正对话框打开关闭后无法退出应用程序问题
         public override DialogResult ShowDialog(Eto.Forms.Window parent)
 		{
 			var result = base.ShowDialog(parent);
 			filename = Control.Filename;
+			filenames = Control.Filenames;
 			Control.Dispose();
 			return result;
 		}
@@ -83,6 +84,12 @@ namespace ASEva.UIGtk
 			set => base.FileName = value;
 		}
 		private String filename = null;
+
+		public new IEnumerable<string> Filenames
+		{
+			get => filenames;
+		}
+		private String[] filenames = null;
 	}
 
 	class SafeSelectFolderDialogHandler : SelectFolderDialogHandler, SelectFolderDialog.IHandler, CommonDialog.IHandler
