@@ -97,6 +97,7 @@ cp -vf "$CUR_DIR"/3party/common/* $TARGET_DIR/binma/
 if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/binma/ASEvaAPIEto.dll $TARGET_DIR/binma/
     cp -vf "$CUR_DIR"/binma/ASEvaAPIMonoMac.dll $TARGET_DIR/binma/
+    cp -vf "$CUR_DIR"/binma/PortableSharpGL.dll $TARGET_DIR/binma/
     cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binma/
     cp -vf "$CUR_DIR"/3party/monomac/* $TARGET_DIR/binma/
     cp -vf "$CUR_DIR"/3party/macos-arm64/* $TARGET_DIR/binma/
@@ -213,6 +214,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
     if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
         cp -vf "$CUR_DIR"/binma/ASEvaAPIEto.dll $TARGET_DIR/binma/debug/
         cp -vf "$CUR_DIR"/binma/ASEvaAPIMonoMac.dll $TARGET_DIR/binma/debug/
+        cp -vf "$CUR_DIR"/binma/PortableSharpGL.dll $TARGET_DIR/binma/debug/
         cp -vf "$CUR_DIR"/3party/eto/* $TARGET_DIR/binma/debug/
         cp -vf "$CUR_DIR"/3party/monomac/* $TARGET_DIR/binma/debug/
         cp -vf "$CUR_DIR"/3party/macos-arm64/* $TARGET_DIR/binma/debug/
