@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.14.3
+            version=2.14.4
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -86,12 +86,26 @@
             <summary>
             Run application
             </summary>
-            <param name="window">The main window</param>
+            <param name="mainWindow">The main window</param>
             \~Chinese
             <summary>
             运行应用程序
             </summary>
-            <param name="window">主窗口</param>
+            <param name="mainWindow">主窗口</param>
+        </member>
+        <member name="M:ASEva.UIEto.App.Run(Eto.Forms.Form,Eto.Forms.Form[])">
+            \~English
+            <summary>
+            (api:eto=2.14.4) Run application
+            </summary>
+            <param name="mainWindow">The main window</param>
+            <param name="subWindows"></param>
+            \~Chinese
+            <summary>
+            (api:eto=2.14.4) 运行应用程序
+            </summary>
+            <param name="mainWindow">主窗口</param>
+            <param name="subWindows"></param>
         </member>
         <member name="M:ASEva.UIEto.App.GetRunningOS">
             \~English

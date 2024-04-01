@@ -13,7 +13,7 @@ namespace ASEva.UIEto
     public interface AppHandler
     {
         Application CreateApp(out String uiBackend, out String webViewBackend);
-        void RunApp(Application application, Form window);
+        void RunApp(Application application, Form mainWindow, Form[] subWindows);
         Font CreateDefaultFont();
         Control ConvertControlToEto(object platformControl);
         object ConvertControlToPlatform(Control etoControl);
@@ -88,17 +88,34 @@ namespace ASEva.UIEto
         /// <summary>
         /// Run application
         /// </summary>
-        /// <param name="window">The main window</param>
+        /// <param name="mainWindow">The main window</param>
         /// \~Chinese
         /// <summary>
         /// 运行应用程序
         /// </summary>
-        /// <param name="window">主窗口</param>
-        public static void Run(Form window)
+        /// <param name="mainWindow">主窗口</param>
+        public static void Run(Form mainWindow)
         {
-            if (handler != null && application != null && window != null && firstFatalException == null)
+            Run(mainWindow, null);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.14.4) Run application
+        /// </summary>
+        /// <param name="mainWindow">The main window</param>
+        /// <param name="subWindows"></param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.14.4) 运行应用程序
+        /// </summary>
+        /// <param name="mainWindow">主窗口</param>
+        /// <param name="subWindows"></param>
+        public static void Run(Form mainWindow, Form[] subWindows)
+        {
+            if (handler != null && application != null && mainWindow != null && firstFatalException == null)
             {
-                window.Closed += delegate { window.CloseRecursively(); };
+                mainWindow.Closed += delegate { mainWindow.CloseRecursively(); };
 
                 exceptionTimer = new UITimer();
                 exceptionTimer.Interval = 0.1;
@@ -114,7 +131,7 @@ namespace ASEva.UIEto
 
                 try
                 {
-                    handler.RunApp(application, window);
+                    handler.RunApp(application, mainWindow, subWindows);
                 }
                 catch (Exception ex)
                 {

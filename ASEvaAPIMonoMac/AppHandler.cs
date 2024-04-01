@@ -104,7 +104,7 @@ namespace ASEva.UIMonoMac
             return SystemFonts.Default();
         }
 
-        public void RunApp(Application application, Form window)
+        public void RunApp(Application application, Form window, Form[] subWindows)
         {
             window.Closing += (o, e) => { if (e.Cancel) window.Visible = true; };
             
