@@ -92,7 +92,7 @@ namespace ASEva.UICoreWF
             }
         }
 
-        public void RunApp(Application application, Form window)
+        public void RunApp(Application application, Form window, Form[] subWindows)
         {
             // CHECK: 修正application.Run之前不触发MouseDown等事件
             System.Windows.Forms.Application.RemoveMessageFilter(TempBubbleEventFilter);
