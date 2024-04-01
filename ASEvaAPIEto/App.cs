@@ -129,9 +129,18 @@ namespace ASEva.UIEto
                 };
                 exceptionTimer.Start();
 
+                var validSubWindows = new List<Form>();
+                if (subWindows != null)
+                {
+                    foreach (var form in subWindows)
+                    {
+                        if (form != null) validSubWindows.Add(form);
+                    }
+                }
+
                 try
                 {
-                    handler.RunApp(application, mainWindow, subWindows);
+                    handler.RunApp(application, mainWindow, validSubWindows.ToArray());
                 }
                 catch (Exception ex)
                 {
