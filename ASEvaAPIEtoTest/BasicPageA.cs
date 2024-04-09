@@ -35,7 +35,7 @@ namespace ASEvaAPIEtoTest
             initBasicTabPageARow6(layoutRow6);
 
             var contextMenu = layout.SetContextMenuAsNew();
-            contextMenu.AddButtonItem(t["menu-button"]).Click += delegate { MessageBox.Show(App.WorkPath); };
+            contextMenu.AddButtonItem(t["menu-button"], Bitmap.FromResource("menu-button.png")).Click += delegate { MessageBox.Show(App.WorkPath); };
         }
 
         private void initBasicTabPageARow1(StackLayout layout)
