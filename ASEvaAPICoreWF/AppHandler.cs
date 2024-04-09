@@ -36,6 +36,7 @@ namespace ASEva.UICoreWF
             platform.Add<ComboBox.IHandler>(() => new ComboBoxHandler());
             platform.Add<Drawable.IHandler>(() => new DrawableHandler());
             platform.Add<PasswordBox.IHandler>(() => new PasswordBoxHandler());
+            platform.Add<Bitmap.IHandler>(() => new SafeBitmapHandler());
 
             // 改为使用Wpf版的Handler，Eto-2.6.0已修正
             //platform.Add<DataObject.IHandler>(() => new DataObjectHandler());
