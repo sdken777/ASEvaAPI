@@ -9,6 +9,7 @@ namespace ASEva
     
     public interface AgencyHandler
     {
+        String GetAppID();
         String GetConfigFilesRoot();
         String GetAppFilesRoot();
         String GetTempFilesRoot();
@@ -339,6 +340,21 @@ namespace ASEva
             {
                 if (value != null) handler = value;
             }
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.16.3) Get application's ID
+        /// </summary>
+        /// <returns>Application's ID</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.16.3) 获取应用程序ID
+        /// </summary>
+        /// <returns>应用程序ID</returns>
+        public static String GetAppID()
+        {
+            return handler.GetAppID();
         }
 
         /// \~English

@@ -1482,5 +1482,10 @@ namespace ASEva
         {
             return null;
         }
+
+        public string GetAppID()
+        {
+            return null;
+        }
     }
 }

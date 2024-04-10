@@ -14,6 +14,18 @@
             (api:app=2.0.0) 集合了所有主要API
             </summary>
         </member>
+        <member name="M:ASEva.Agency.GetAppID">
+            \~English
+            <summary>
+            (api:app=2.16.3) Get application's ID
+            </summary>
+            <returns>Application's ID</returns>
+            \~Chinese
+            <summary>
+            (api:app=2.16.3) 获取应用程序ID
+            </summary>
+            <returns>应用程序ID</returns>
+        </member>
         <member name="M:ASEva.Agency.GetAppStatus">
             \~English
             <summary>
@@ -4274,7 +4286,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.16.2
+            version=2.16.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
