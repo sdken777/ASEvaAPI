@@ -88,6 +88,20 @@ namespace ASEva
         {
             Titles = new List<string>();
         }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.16.4) Constructor with input of comma-separated title string
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.16.4) 输入逗号分隔的标题字符串的构造函数
+        /// </summary>
+        public GeneralSampleTitle(String titleString)
+        {
+            Titles = new List<string>();
+            if (!String.IsNullOrWhiteSpace(titleString)) Titles.AddRange(titleString.Split(','));
+        }
     }
 
     /// \~English
@@ -121,6 +135,20 @@ namespace ASEva
         public SceneTitle()
         {
             Titles = new List<string>();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.16.4) Constructor with input of comma-separated title string
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.16.4) 输入逗号分隔的标题字符串的构造函数
+        /// </summary>
+        public SceneTitle(String titleString)
+        {
+            Titles = new List<string>();
+            if (!String.IsNullOrWhiteSpace(titleString)) Titles.AddRange(titleString.Split(','));
         }
     }
 

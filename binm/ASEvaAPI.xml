@@ -4286,7 +4286,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.16.3
+            version=2.16.4
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4611,6 +4611,16 @@
             默认构造函数
             </summary>
         </member>
+        <member name="M:ASEva.GeneralSampleTitle.#ctor(System.String)">
+            \~English
+            <summary>
+            (api:app=2.16.4) Constructor with input of comma-separated title string
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=2.16.4) 输入逗号分隔的标题字符串的构造函数
+            </summary>
+        </member>
         <member name="T:ASEva.SceneTitle">
             \~English
             <summary>
@@ -4639,6 +4649,16 @@
             \~Chinese
             <summary>
             默认构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.SceneTitle.#ctor(System.String)">
+            \~English
+            <summary>
+            (api:app=2.16.4) Constructor with input of comma-separated title string
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=2.16.4) 输入逗号分隔的标题字符串的构造函数
             </summary>
         </member>
         <member name="T:ASEva.ChannelAlias">
