@@ -23,16 +23,16 @@ namespace ASEva.Utility
         /// Load the resource
         /// </summary>
         /// <param name="xmlFileName">Resource name</param>
-        /// <param name="languageCode">Language code, "en" is English, "ch" is Chinese, set to null to get by ASEva.Agency.GetAppLanguage internally</param>
+        /// <param name="language">Language, set to Language.Invalid to get by ASEva.Agency.GetAppLanguage internally</param>
         /// <returns>Multi-language text resource object, null if failed to load</returns>
         /// \~Chinese
         /// <summary>
         /// 加载多语言文本资源
         /// </summary>
         /// <param name="xmlFileName">资源文件名</param>
-        /// <param name="languageCode">语言代号，en表示英文，ch表示中文，null则通过 ASEva.Agency.GetAppLanguage 获取</param>
+        /// <param name="language">语言，设置为Language.Invalid则通过 ASEva.Agency.GetAppLanguage 获取</param>
         /// <returns>多语言文本资源对象，获取失败则返回null</returns>
-        public static TextResource Load(String xmlFileName, String languageCode = null)
+        public static TextResource Load(String xmlFileName, Language language = Language.Invalid)
         {
             var instream = Assembly.GetCallingAssembly().GetManifestResourceStream(xmlFileName);
             if (instream == null) return null;
@@ -41,7 +41,7 @@ namespace ASEva.Utility
             instream.Read(data, 0, data.Length);
             instream.Close();
 
-            return Load(data, languageCode);
+            return Load(data, language);
         }
 
         /// \~English
@@ -49,16 +49,16 @@ namespace ASEva.Utility
         /// Load from binary data
         /// </summary>
         /// <param name="xmlFileData">XML binary data</param>
-        /// <param name="languageCode">Language code, "en" is English, "ch" is Chinese, set to null to get by ASEva.Agency.GetAppLanguage internally</param>
+        /// <param name="language">Language, set to Language.Invalid to get by ASEva.Agency.GetAppLanguage internally</param>
         /// <returns>Multi-language text resource object, null if failed to load</returns>
         /// \~Chinese
         /// <summary>
         /// 从XML文件数据加载多语言文本资源
         /// </summary>
         /// <param name="xmlFileData">XML文件数据</param>
-        /// <param name="languageCode">语言代号，en表示英文，ch表示中文，null则通过 ASEva.Agency.GetAppLanguage 获取</param>
+        /// <param name="language">语言，设置为Language.Invalid则通过 ASEva.Agency.GetAppLanguage 获取</param>
         /// <returns>多语言文本资源对象，获取失败则返回null</returns>
-        public static TextResource Load(byte[] xmlFileData, String languageCode)
+        public static TextResource Load(byte[] xmlFileData, Language language = Language.Invalid)
         {
             if (xmlFileData == null || xmlFileData.Length <= 3) return null;
 
@@ -74,15 +74,17 @@ namespace ASEva.Utility
 
             var langCodes = new List<String>();
 
-            var lang = String.IsNullOrEmpty(languageCode) ? Agency.GetAppLanguage() : languageCode;
-            if (lang == null || lang == "en")
+            var lang = language == Language.Invalid ? Agency.GetAppLanguage() : language;
+            if (lang == Language.Invalid || lang == Language.English)
             {
                 langCodes.Add("en");
-                langCodes.Add("ch");
+                langCodes.Add("zh");
+                langCodes.Add("ch"); // 兼容旧版本
             }
-            else if (lang == "ch")
+            else if (lang == Language.Chinese)
             {
-                langCodes.Add("ch");
+                langCodes.Add("zh");
+                langCodes.Add("ch"); // 兼容旧版本
                 langCodes.Add("en");
             }
             else return null;

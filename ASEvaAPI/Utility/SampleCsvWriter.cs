@@ -53,7 +53,7 @@ namespace ASEva.Utility
 
                 writer = new StreamWriter(file, false, Encoding.UTF8);
 
-                var titleLine = "Session,LocalTime,UtcTime,Time";
+                var titleLine = "Session,Sync State,CPU Tick,Host Posix,Guest Posix,Gnss Posix,Time";
                 if (titles != null) titleLine += "," + String.Join(",", titles);
                 writer.WriteLine(titleLine);
 
@@ -98,11 +98,29 @@ namespace ASEva.Utility
 
             var list = new List<String>();
             list.Add(sample.Base.ToString("yyyyMMdd-HH-mm-ss"));
-            if (hostModel == null) list.Add("na");
-            else list.Add((hostModel.StartPosix + (ulong)(1000.0 * sample.Offset * hostModel.TimeRatio)).ToString());
-            if (gnssModel == null) list.Add("na");
-            else list.Add((gnssModel.StartPosix + (ulong)(1000.0 * sample.Offset * gnssModel.TimeRatio)).ToString());
-            list.Add(sample.Offset.ToString());
+
+            if (sample.Timestamp.TimeInfo == null)
+            {
+                list.Add("NONE");
+                list.Add("0");
+                list.Add("0");
+                list.Add("0");
+                list.Add("0");
+            }
+            else
+            {
+                var info = sample.Timestamp.TimeInfo;
+                if (info.OffsetSync == TimeOffsetSync.Server) list.Add("SERV");
+                else if (info.OffsetSync == TimeOffsetSync.Gnss) list.Add("GNSS");
+                else if (info.OffsetSync == TimeOffsetSync.BusReceiverArrival) list.Add("RECV");
+                else if (info.OffsetSync == TimeOffsetSync.Interpolated) list.Add("INTR");
+                else list.Add("NONE");
+
+                list.Add(info.CPUTick.ToString());
+                list.Add(info.HostPosix.ToString());
+                list.Add(info.GuestPosix.ToString());
+                list.Add(info.GNSSPosix.ToString());
+            }
 
             int count = 0;
             foreach (var val in sample.Values)
@@ -137,88 +155,10 @@ namespace ASEva.Utility
             }
         }
 
-        /// \~English
-        /// <summary>
-        /// Set session's start time of satellite posix time model in UTC date and time
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 按UTC时间设置卫星Posix时间模型的session开始时间
-        /// </summary>
-        public DateTime? StartTimeUTC
-        {
-            set
-            {
-                if (value == null) gnssModel = null;
-                else
-                {
-                    if (gnssModel == null) gnssModel = new PosixTimeModel();
-                    gnssModel.StartPosix = (ulong)(value.Value - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
-                }
-            }
-        }
-
-        /// \~English
-        /// <summary>
-        /// Set session's start time of host machine posix time model in local date and time
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 按本地时间设置主机Posix时间模型的session开始时间
-        /// </summary>
-        public DateTime? StartTimeLocal
-        {
-            set
-            {
-                if (value == null) hostModel = null;
-                else
-                {
-                    if (hostModel == null) hostModel = new PosixTimeModel();
-                    hostModel.StartPosix = (ulong)(TimeZoneInfo.ConvertTimeToUtc(value.Value, TimeZoneInfo.Local) - new DateTime(1970, 1, 1, 0, 0, 0, 0)).TotalMilliseconds;
-                }
-            }
-        }
-
-        /// \~English
-        /// <summary>
-        /// Set time ratio of satellite posix time model, default is 1
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 设置卫星Posix时间模型的时间比例，默认为1
-        /// </summary>
-        public double TimeRatioToUTC
-        {
-            set
-            {
-                if (gnssModel == null) gnssModel = new PosixTimeModel();
-                gnssModel.TimeRatio = value;
-            }
-        }
-
-        /// \~English
-        /// <summary>
-        /// Set time ratio of host machine posix time model, default is 1
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 设置主机Posix时间模型的时间比例，默认为1
-        /// </summary>
-        public double TimeRatioToLocal
-        {
-            set
-            {
-                if (hostModel == null) hostModel = new PosixTimeModel();
-                hostModel.TimeRatio = value;
-            }
-        }
-
         private StreamWriter writer = null;
         private String protocol = null;
         private int? channel = null;
         private DateTime? session = null;
-        private PosixTimeModel hostModel = null;
-        private PosixTimeModel gnssModel = null;
 
         private SampleCsvWriter()
         { }

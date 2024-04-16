@@ -37,17 +37,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Deprecated, implement OnRun(loopCallback, modalCallback, startupProject)
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应实现OnRun(loopCallback, modalCallback, startupProject)
-        /// </summary>
-
-        public virtual void OnRun(MainWorkflowLoopCallback callback, String startupProject) {}
-
-        /// \~English
-        /// <summary>
         /// [Required][OK for modal] Run the main workflow, you should guarantee ASEva.MainWorkflowLoopCallback.OnLoop and ASEva.MainWorkflowModalCallback.OnHandleModal is called in the main loop
         /// </summary>
         /// <param name="loopCallback">Loop callback interface</param>
@@ -62,7 +51,7 @@ namespace ASEva
         /// <param name="modalCallback">模态对话回调接口</param>
         /// <param name="startupProject">初始项目文件路径</param>
         /// <returns>应固定返回true，否则将继续调用旧版OnRun</returns>
-        public virtual bool OnRun(MainWorkflowLoopCallback loopCallback, MainWorkflowModalCallback modalCallback, String startupProject) { return false; }
+        public virtual void OnRun(MainWorkflowLoopCallback loopCallback, MainWorkflowModalCallback modalCallback, String startupProject) {}
 
         /// \~English
         /// <summary>
@@ -174,16 +163,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Deprecated, implement OnDebugMessage(message, source)
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应实现OnDebugMessage(message, source)
-        /// </summary>
-        public virtual void OnDebugMessage(String message) {}
-
-        /// \~English
-        /// <summary>
         /// [Optional] Output message for debugging
         /// </summary>
         /// <param name="message">Message</param>
@@ -200,13 +179,13 @@ namespace ASEva
         /// <summary>
         /// [Optional] Get application's language
         /// </summary>
-        /// <returns>Language code, null or "en" is English, "ch" is Chinese</returns>
+        /// <returns>Language</returns>
         /// \~Chinese
         /// <summary>
         /// [可选实现] 获取语言
         /// </summary>
-        /// <returns>语言代号，null或"en"表示英文，"ch"表示中文</returns>
-        public virtual String OnGetAppLanguage() { return null; }
+        /// <returns>语言</returns>
+        public virtual Language OnGetAppLanguage() { return Language.Invalid; }
 
         /// \~English
         /// <summary>
@@ -356,26 +335,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Deprecated, implement OnRunStandaloneTask(title, taskClassID, basicCallback, detailsCallback)
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// [可选实现][可含模态] 已弃用，应实现OnRunStandaloneTask(title, taskClassID, basicCallback, detailsCallback)
-        /// </summary>
-        public virtual void OnRunStandaloneTask(String title, MainWorkflowTaskCallback callback) {}
-
-        /// \~English
-        /// <summary>
-        /// [Optional][OK for modal] Deprecated, implement OnRunStandaloneTask(title, taskClassID, basicCallback, detailsCallback)
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// [可选实现][可含模态] 已弃用，应实现OnRunStandaloneTask(title, taskClassID, basicCallback, detailsCallback)
-        /// </summary>
-        public virtual bool OnRunStandaloneTask(String title, MainWorkflowTaskCallback basicCallback, MainWorkflowTaskIODetailsCallback detailsCallback) { return false; }
-
-        /// \~English
-        /// <summary>
         /// [Optional][OK for modal] Show running standalone task
         /// </summary>
         /// <param name="title">Title of standalone task</param>
@@ -392,8 +351,7 @@ namespace ASEva
         /// <param name="basicCallback">基础回调接口</param>
         /// <param name="detailsCallback">获取I/O详情的回调接口</param>
         /// <returns>应固定返回true，否则将继续调用旧版OnRunStandaloneTask</returns>
-        public virtual bool OnRunStandaloneTask(String title, String taskClassID, MainWorkflowTaskCallback basicCallback, MainWorkflowTaskIODetailsCallback detailsCallback) { return false; }
-
+        public virtual void OnRunStandaloneTask(String title, String taskClassID, MainWorkflowTaskCallback basicCallback, MainWorkflowTaskIODetailsCallback detailsCallback) {}
 
         /// \~English
         /// <summary>

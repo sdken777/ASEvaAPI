@@ -19,33 +19,53 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// Not synchronized or the sync source is unknown
+        /// Host arrival time, not synchronized
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 未同步或同步源未知
+        /// 到达主机的时间，未同步
         /// </summary>
-		None = 0,
+		HostArrival = 0,
 
         /// \~English
         /// <summary>
-        /// Synchronized with time server
+        /// Sampling time, synchronized with the time server
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 已与授时服务器时间同步
+        /// 采样时间，已与授时服务器同步
         /// </summary>
 		Server = 1,
 
         /// \~English
         /// <summary>
-        /// Synchronized with satellite time
+        /// Sampling time, synchronized with satellite
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 已与卫星时间同步
+        /// 采样时间，已与卫星同步
         /// </summary>
 		Gnss = 2,
+
+        /// \~English
+        /// <summary>
+        /// Bus receiver arrival time, synchronized with the time server
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 到达总线设备的时间，已与授时服务器同步
+        /// </summary>
+        BusReceiverArrival = 3,
+
+        /// \~English
+        /// <summary>
+        /// The time obtained by interpolating two samples with different synchronization status
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 同步状态不同的两个样本插值得到的时间
+        /// </summary>
+        Interpolated = 4,
     }
 
     /// \~English
@@ -245,16 +265,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Time server's posix time while data sampling, in nanoseconds, 0 means invalid
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 采样时授时服务器Posix时间，单位纳秒，0表示无效
-        /// </summary>
-        public ulong ServerPosix { get { return serverPosix; }}
-
-        /// \~English
-        /// <summary>
         /// Satellite posix time while data sampling, in nanoseconds, 0 means invalid
         /// </summary>
         /// \~Chinese
@@ -271,18 +281,17 @@ namespace ASEva
         /// <summary>
         /// 默认构造函数
         /// </summary>
-        public IndependentTimeInfo(TimeOffsetSync offsetSync, ulong cpuTick, ulong hostPosix, ulong guestPosix, ulong serverPosix, ulong gnssPosix)
+        public IndependentTimeInfo(TimeOffsetSync offsetSync, ulong cpuTick, ulong hostPosix, ulong guestPosix, ulong gnssPosix)
         {
             this.offsetSync = offsetSync;
             this.cpuTick = cpuTick;
             this.hostPosix = hostPosix;
             this.guestPosix = guestPosix;
-            this.serverPosix = serverPosix;
             this.gnssPosix = gnssPosix;
         }
 
         private TimeOffsetSync offsetSync;
-        private ulong cpuTick, hostPosix, guestPosix, serverPosix, gnssPosix;
+        private ulong cpuTick, hostPosix, guestPosix, gnssPosix;
     }
 
     /// \~English
@@ -951,19 +960,17 @@ namespace ASEva
                 {
                     var t1 = result.s1.timestamp.TimeInfo;
                     var t2 = result.s2.timestamp.TimeInfo;
-                    if (t1.OffsetSync == t2.OffsetSync)
-                    {
-                        var t1Comps = new ulong[] { t1.CPUTick, t1.HostPosix, t1.GuestPosix, t1.ServerPosix, t1.GNSSPosix };
-                        var t2Comps = new ulong[] { t2.CPUTick, t2.HostPosix, t2.GuestPosix, t2.ServerPosix, t2.GNSSPosix };
-                        var outComps = new ulong[5];
-                        for (int i = 0; i < 5; i++)
-                        {
-                            long diffTime = (long)t2Comps[i] - (long)t1Comps[i];
-                            outComps[i] = (ulong)((long)t1Comps[i] + (long)(result.w2 * diffTime));
-                        }
 
-                        timeInfo = new IndependentTimeInfo(t1.OffsetSync, outComps[0], outComps[1], outComps[2], outComps[3], outComps[4]);
+                    var t1Comps = new ulong[] { t1.CPUTick, t1.HostPosix, t1.GuestPosix, t1.GNSSPosix };
+                    var t2Comps = new ulong[] { t2.CPUTick, t2.HostPosix, t2.GuestPosix, t2.GNSSPosix };
+                    var outComps = new ulong[4];
+                    for (int i = 0; i < 4; i++)
+                    {
+                        long diffTime = (long)t2Comps[i] - (long)t1Comps[i];
+                        outComps[i] = (ulong)((long)t1Comps[i] + (long)(result.w2 * diffTime));
                     }
+
+                    timeInfo = new IndependentTimeInfo(t1.OffsetSync == t2.OffsetSync ? t1.OffsetSync : TimeOffsetSync.Interpolated, outComps[0], outComps[1], outComps[2], outComps[3]);
                 }
 
                 buf.SetTime(result.s1.Base, result.s1.Offset * result.w1 + result.s2.Offset * result.w2, timeInfo, targetTimeline);

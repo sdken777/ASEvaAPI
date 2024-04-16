@@ -576,16 +576,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Required] Deprecated, implement GetConfigStatus(errorHint)
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// [必须实现] 已弃用，应实现GetConfigStatus(errorHint)
-        /// </summary>
-        public virtual ConfigStatus GetConfigStatus() { return ConfigStatus.Disabled; }
-
-        /// \~English
-        /// <summary>
         /// [Required] Called while getting configuration's status
         /// </summary>
         /// <param name="errorHint">Error hint, should be available while the status is EnabledWithError or EnabledWithWarning</param>
@@ -717,16 +707,6 @@ namespace ASEva
         /// </summary>
         /// <returns>文件写入需要的所有数据类型</returns>
         public virtual List<RecordDataType> GetRecordDataTypes() { return null; }
-
-        /// \~English
-        /// <summary>
-        /// Deprecated. Use ASEva.FileIONames.RemoteReaderNames for remote data acquisition
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，远程采集应使用 ASEva.FileIONames.RemoteReaderNames
-        /// </summary>
-        public virtual bool MayCauseLowSpeed() { return false; }
 
         /// \~English
         /// <summary>

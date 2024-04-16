@@ -59,7 +59,7 @@ namespace ASEva
         /// [非原生模式下必须实现] 创建独立任务对象
         /// </summary>
         /// <returns>独立任务对象</returns>
-        public virtual Task CreateTask() { return null; }
+        public virtual StandaloneTask CreateTask() { return null; }
 
         /// \~English
         /// <summary>

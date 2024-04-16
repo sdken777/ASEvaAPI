@@ -595,16 +595,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Deprecated, use ASEva.WebApiResult.Responded
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.WebApiResult.Responded
-        /// </summary>
-        Responsed = 3,
-
-        /// \~English
-        /// <summary>
         /// The response received
         /// </summary>
         /// \~Chinese
@@ -1376,24 +1366,6 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Deprecated, use ASEva.VideoDataCodec
-    /// </summary>
-    /// \~Chinese
-    /// <summary>
-    /// (api:app=3.0.0) 已弃用，应使用 ASEva.VideoDataCodec
-    /// </summary>
-    public enum VideoInputCodec
-    {
-        Invalid = 0,
-        MJPEG = 1,
-        H264 = 2,
-        YUV411 = 3,
-        YUV420 = 4,
-        H265 = 5,
-    };
-
-    /// \~English
-    /// <summary>
     /// (api:app=3.0.0) Video stream codec type
     /// </summary>
     /// \~Chinese
@@ -1552,20 +1524,6 @@ namespace ASEva
         /// 视频尺寸 (分辨率)
         /// </summary>
         public IntSize Size { get; set; }
-
-        /// \~English
-        /// <summary>
-        /// Deprecated, use ASEva.VideoInputMode.InputCodec
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.VideoInputMode.InputCodec
-        /// </summary>
-        public VideoInputCodec Codec
-        {
-            get { return (VideoInputCodec)InputCodec; }
-            set { InputCodec = (VideoDataCodec)value; }
-        }
 
         public override bool Equals(object obj)
         {
@@ -4314,5 +4272,77 @@ namespace ASEva
         /// 相关用户界面的入口参数
         /// </summary>
         public ModuleRelatedUIEntry[] RelatedUIEntries { get; set; }
+    }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.0.0) Platform image type
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.0.0) 平台特化图像类型
+    /// </summary>
+    public enum PlatformImageType
+    {
+        /// \~English
+        /// <summary>
+        /// Native image, like Winform Bitmap, Gtk VideoFrameSampleImage object (Can be converted to Pixbuf or ImageSurface), Wpf BitmapSource, etc.
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 原生图像，如Winform的Bitmap，Gtk的VideoFrameSampleImage对象(可转Pixbuf或ImageSurface)，Wpf的BitmapSource等
+        /// </summary>
+        Native = 0,
+
+        /// \~English
+        /// <summary>
+        /// Eto Bitmap object
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// Eto的Bitmap对象
+        /// </summary>
+        Eto = 1,
+    }
+    
+    /// \~English
+    /// <summary>
+    /// (api:app=3.0.0) Language
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.0.0) 语言
+    /// </summary>
+    public enum Language
+    {
+        /// \~English
+        /// <summary>
+        /// Invalid value
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 无效值
+        /// </summary>
+        Invalid = 0,
+
+        /// \~English
+        /// <summary>
+        /// English, language code is "en"
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 英文，语言代号为"en"
+        /// </summary>
+        English = 1,
+
+        /// \~English
+        /// <summary>
+        /// Chinese, language code is "zh"
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 中文，语言代号为"zh"
+        /// </summary>
+        Chinese = 2,
     }
 }

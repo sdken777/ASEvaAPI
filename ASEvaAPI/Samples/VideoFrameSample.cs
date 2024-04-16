@@ -39,7 +39,7 @@ namespace ASEva.Samples
         {
             get
             {
-                if (platformImage == null && CommonImage != null) platformImage = Agency.ConvertImageToPlatform(CommonImage, false);
+                if (platformImage == null && CommonImage != null) platformImage = Agency.ConvertImageToPlatform(CommonImage, PlatformImageType.Native);
                 return platformImage;
             }
             set
@@ -53,7 +53,7 @@ namespace ASEva.Samples
                 {
                     CommonImage = Agency.ConvertImageToCommon(value);
                     if (CommonImage == null) platformImage = null;
-                    else platformImage = Agency.ConvertImageToPlatform(CommonImage, false);
+                    else platformImage = Agency.ConvertImageToPlatform(CommonImage, PlatformImageType.Native);
                 }
             }
         }

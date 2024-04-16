@@ -124,7 +124,7 @@ namespace ASEva
     /// <summary>
     /// (api:app=3.0.0) 独立任务对象
     /// </summary>
-    public class Task
+    public class StandaloneTask
     {
         /// \~English
         /// <summary>

@@ -50,9 +50,9 @@ namespace ASEva
             return false;
         }
 
-        public string GetAppLanguage()
+        public Language GetAppLanguage()
         {
-            return null;
+            return Language.Invalid;
         }
 
         public GraphData GetGraphData(DateTime session, int id)
@@ -971,7 +971,7 @@ namespace ASEva
             return null;
         }
 
-        public object ConvertImageToPlatform(CommonImage image, bool eto)
+        public object ConvertImageToPlatform(CommonImage image, PlatformImageType type)
         {
             return null;
         }

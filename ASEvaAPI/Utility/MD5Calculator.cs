@@ -33,8 +33,9 @@ namespace ASEva.Utility
         {
             try
             {
+                
                 var file = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-                var md5 = new MD5CryptoServiceProvider();
+                var md5 = MD5.Create();
                 var retVal = md5.ComputeHash(file);
                 file.Close();
  
@@ -65,7 +66,7 @@ namespace ASEva.Utility
         {
             try
             {
-                var md5 = new MD5CryptoServiceProvider();
+                var md5 = MD5.Create();
                 var retVal = md5.ComputeHash(data);
 
                 var sb = new StringBuilder();

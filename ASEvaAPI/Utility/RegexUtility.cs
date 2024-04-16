@@ -69,19 +69,6 @@ namespace ASEva.Utility
 
         /// \~English
         /// <summary>
-        /// Deprecated, use ASEva.Utility.RegexUtil.IsNotNegative
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Utility.RegexUtil.IsNotNegative
-        /// </summary>
-        public static bool IsNotNagtive(string input)
-        {
-            return IsMatch(@"^\d+$", input);
-        }
-
-        /// \~English
-        /// <summary>
         /// Whether it's non-negative numeric string
         /// </summary>
         /// \~Chinese

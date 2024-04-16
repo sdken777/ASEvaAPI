@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 0, 0, 0); // Update log / 更新记录: 基于.NET8。移除2.x废弃部分。
+            return new Version(3, 0, 0, 0); // Update log / 更新记录: 基于.NET8。移除2.x废弃部分。Task->StandaloneTask。Agency.ConvertImageToPlatform改为输入PlatformImageType参数。TimeOffsetSync.None->HostArrival，并增加BusReceiverArrival和Interpolated。移除IndependentTimeInfo.ServerPosix。SampleCsvWriter按新格式写文件
         }
 
         /// \~English

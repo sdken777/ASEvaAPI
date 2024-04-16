@@ -26,16 +26,10 @@ namespace ASEva
         ApplicationStatus GetAppStatus();
         ApplicationMode GetAppMode();
         bool IsFileOutputEnabled();
-        String GetAppLanguage();
+        Language GetAppLanguage();
         GraphData GetGraphData(DateTime session, int graphID);
         void AddSceneData(SceneData scene);
         List<String> GetSampleTitle(String channelID);
-        DateTime? GetStartTimeLocal(DateTime session);
-        DateTime? GetStartTimeUTC(DateTime session);
-        DateTime? GetTimestampLocal(DateTime session, double timeOffset);
-        DateTime? GetTimestampUTC(DateTime session, double timeOffset);
-        double GetTimeRatioToLocal(DateTime session);
-        double GetTimeRatioToUTC(DateTime session);
         void AddSignalReference(String signalID);
         void RemoveSignalReference(String signalID);
         bool DeleteToRecycleBin(String path);
@@ -161,7 +155,6 @@ namespace ASEva
         SignalConfig SelectSignal(SignalConfig origin, bool withScale, bool withSignBit, String unit);
         String SelectBusMessage(String originMessageID);
         void SelectSignals(SelectSignalHandler handler, List<String> existSignalIDList);
-        List<String> SelectBusFloat32Signal(List<String> existSignalIDList);
         void ConfigDataEncryption();
         void ConfigOfflineMapPath();
         void OpenDialog(object caller, String dialogClassID, String config);
@@ -227,7 +220,6 @@ namespace ASEva
         bool GetSessionHostSync(DateTime session);
         void SetSessionHostSync(DateTime session, bool hostSync);
         void SetAudioVolume(double volume);
-        void SetCPURateScale(int scale);
         String GetLicenseInfo();
         double GetRawChannelDelayConfig(String id);
         double GetBusChannelDelayConfig(int channel);
@@ -262,7 +254,7 @@ namespace ASEva
         CreatePanelResult CreateConfigPanel(object caller, String dialogClassID, String transformID, out object panel, out DialogClassInfo info);
         void UnregisterPanel(object panel);
         CommonImage ConvertImageToCommon(object image);
-        object ConvertImageToPlatform(CommonImage image, bool eto);
+        object ConvertImageToPlatform(CommonImage image, PlatformImageType type);
         WindowClassInfo GetWindowClassInfo(String windowClassID);
         WindowClassInfo GetWindowClassInfo(String windowClassID, String transformID);
         DialogClassInfo GetDialogClassInfo(String dialogClassID);
@@ -404,15 +396,15 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get application's language code
+        /// Get application's language
         /// </summary>
-        /// <returns>Application's language code, "en" means English, "ch" means Chinese</returns>
+        /// <returns>Application's language</returns>
         /// \~Chinese
         /// <summary>
-        /// 获取应用程序当前的显示语言
+        /// 获取应用程序的显示语言
         /// </summary>
-        /// <returns>语言ID，如en表示英文，ch表示中文等</returns>
-        public static String GetAppLanguage()
+        /// <returns>应用程序的显示语言</returns>
+        public static Language GetAppLanguage()
         {
             return Handler.GetAppLanguage();
         }
@@ -703,84 +695,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Deprecated, use ASEva.Agency.GetHostPosixTimeModel
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.GetHostPosixTimeModel
-        /// </summary>
-        public static DateTime? GetStartTimeLocal(DateTime session)
-        {
-            return Handler.GetStartTimeLocal(session);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Deprecated, use ASEva.Agency.GetGNSSPosixTimeModel
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.GetGNSSPosixTimeModel
-        /// </summary>
-        public static DateTime? GetStartTimeUTC(DateTime session)
-        {
-            return Handler.GetStartTimeUTC(session);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Deprecated, use ASEva.Agency.GetLocalDateTime
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.GetLocalDateTime
-        /// </summary>
-        public static DateTime? GetTimestampLocal(DateTime session, double timeOffset)
-        {
-            return Handler.GetTimestampLocal(session, timeOffset);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Deprecated, use ASEva.Agency.GetUTCDateTime
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.GetUTCDateTime
-        /// </summary>
-        public static DateTime? GetTimestampUTC(DateTime session, double timeOffset)
-        {
-            return Handler.GetTimestampUTC(session, timeOffset);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Deprecated, use ASEva.Agency.GetHostPosixTimeModel
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.GetHostPosixTimeModel
-        /// </summary>
-        public static double GetTimeRatioToLocal(DateTime session)
-        {
-            return Handler.GetTimeRatioToLocal(session);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Deprecated, use ASEva.Agency.GetGNSSPosixTimeModel
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.GetGNSSPosixTimeModel
-        /// </summary>
-        public static double GetTimeRatioToUTC(DateTime session)
-        {
-            return Handler.GetTimeRatioToUTC(session);
-        }
-
-        /// \~English
-        /// <summary>
         /// Get the current data path
         /// </summary>
         /// <returns>The data path, null if not configured</returns>
@@ -792,19 +706,6 @@ namespace ASEva
         public static String GetDataPath()
         {
             return Handler.GetDataPath();
-        }
-
-        /// \~English
-        /// <summary>
-        /// Deprecated, use ASEva.Agency.GetSubDataPaths
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.GetSubDataPaths
-        /// </summary>
-        public static String[] GetSubDataPathes()
-        {
-            return Handler.GetSubDataPaths();
         }
 
         /// \~English
@@ -1839,19 +1740,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Deprecated, use ASEva.Agency.IsBusMessageBound
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.IsBusMessageBound
-        /// </summary>
-        public static bool IsBusMessageBinded(string busMessageID)
-        {
-            return Handler.IsBusMessageBound(busMessageID);
-        }
-
-        /// \~English
-        /// <summary>
         /// Get whether the bus message is bound
         /// </summary>
         /// <param name="busMessageID">Bus message ID</param>
@@ -2486,12 +2374,18 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Deprecated, use GetModuleConfigStatus(caller, classID, errorHint)
+        /// Get status of processor/native/device component's configuration
         /// </summary>
+        /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
+        /// <param name="classID">Component's class ID</param>
+        /// <returns>Status of component's configuration, returns ASEva.ConfigStatus.Disabled if not found</returns>
         /// \~Chinese
         /// <summary>
-        /// 已弃用，应使用GetModuleConfigStatus(caller, classID, errorHint)
+        /// 获取数据处理/原生/设备组件配置的状态
         /// </summary>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
+        /// <param name="classID">组件的类别ID</param>
+        /// <returns>组件配置的状态，若找不到类别ID对应的组件则返回 ASEva.ConfigStatus.Disabled </returns>
         public static ConfigStatus GetModuleConfigStatus(object caller, String classID)
         {
             return Handler.GetModuleConfigStatus(caller, classID);
@@ -2740,7 +2634,7 @@ namespace ASEva
         /// <param name="imageSize">Image size</param>
         /// <param name="centerLocation">Location of the image's center</param>
         /// <param name="zoom">Scale, ranges 0~24</param>
-        /// <returns>Platform image of offline map, null if failed to query</returns>
+        /// <returns>Platform native image of offline map, null if failed to query</returns>
         /// \~Chinese
         /// <summary>
         /// 获取离线地图图像
@@ -2748,7 +2642,7 @@ namespace ASEva
         /// <param name="imageSize">指定图像大小</param>
         /// <param name="centerLocation">图像中心的经纬度</param>
         /// <param name="zoom">图像的尺度，0~24</param>
-        /// <returns>离线地图图像（平台特化），空表示获取失败</returns>
+        /// <returns>离线地图图像（平台原生图像），空表示获取失败</returns>
         public static object GetOfflineMapImage(IntSize imageSize, LocPoint centerLocation, int zoom)
         {
             return Handler.GetOfflineMapImage(imageSize, centerLocation, zoom);
@@ -2927,17 +2821,6 @@ namespace ASEva
         public static void SelectSignals(SelectSignalHandler handler, List<String> existSignalIDList)
         {
             Handler.SelectSignals(handler, existSignalIDList);
-        }
-
-        /// \~English
-        /// Deprecated, unnecessary to configure
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，无需再配置
-        /// </summary>
-        public static List<String> SelectBusFloat32Signal(List<String> existSignalIDList)
-        {
-            return Handler.SelectBusFloat32Signal(existSignalIDList);
         }
 
         /// \~English
@@ -3176,19 +3059,6 @@ namespace ASEva
         public static BusSignalValue[] ParseBusMessage(BusMessageSample busMessage)
         {
             return Handler.ParseBusMessage(busMessage);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Deprecated, use ASEva.Agency.GetRecentProjectPaths
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.GetRecentProjectPaths
-        /// </summary>
-        public static String[] GetRecentProjectPathes()
-        {
-            return Handler.GetRecentProjectPaths();
         }
 
         /// \~English
@@ -4036,19 +3906,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Deprecated, no need to use
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，无需再调用
-        /// </summary>
-        public static void SetCPURateScale(int scale)
-        {
-            Handler.SetCPURateScale(scale);
-        }
-
-        /// \~English
-        /// <summary>
         /// Get license information
         /// </summary>
         /// <returns>License information</returns>
@@ -4625,18 +4482,18 @@ namespace ASEva
         /// Convert common image to platform image
         /// </summary>
         /// <param name="image">Common image</param>
-        /// <param name="eto">Whether to convert to Eto bitmap image, or else platform image</param>
+        /// <param name="type">Platform image type</param>
         /// <returns>Platform image, null if failed to convert</returns>
         /// \~Chinese
         /// <summary>
         /// 转换通用图像数据至平台特化图像
         /// </summary>
         /// <param name="image">通用图像数据</param>
-        /// <param name="eto">是否转换至Eto图像，否则转换为当前UI框架对应的图像对象</param>
+        /// <param name="type">平台特化图像类型</param>
         /// <returns>平台特化图像，转换失败则返回null</returns>
-        public static object ConvertImageToPlatform(CommonImage image, bool eto)
+        public static object ConvertImageToPlatform(CommonImage image, PlatformImageType type)
         {
-            return Handler.ConvertImageToPlatform(image, eto);
+            return Handler.ConvertImageToPlatform(image, type);
         }
 
         /// \~English
