@@ -10,11 +10,11 @@ namespace ASEva.Utility
     #pragma warning disable CS1571
     /// \~English
     /// <summary>
-    /// (api:app=2.1.0) Multi-language text resource
+    /// (api:app=3.0.0) Multi-language text resource
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.1.0) 多语言文本资源
+    /// (api:app=3.0.0) 多语言文本资源
     /// </summary>
     public class TextResource
     {
@@ -46,14 +46,14 @@ namespace ASEva.Utility
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.14) Load from binary data
+        /// Load from binary data
         /// </summary>
         /// <param name="xmlFileData">XML binary data</param>
         /// <param name="languageCode">Language code, "en" is English, "ch" is Chinese, set to null to get by ASEva.Agency.GetAppLanguage internally</param>
         /// <returns>Multi-language text resource object, null if failed to load</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.14) 从XML文件数据加载多语言文本资源
+        /// 从XML文件数据加载多语言文本资源
         /// </summary>
         /// <param name="xmlFileData">XML文件数据</param>
         /// <param name="languageCode">语言代号，en表示英文，ch表示中文，null则通过 ASEva.Agency.GetAppLanguage 获取</param>

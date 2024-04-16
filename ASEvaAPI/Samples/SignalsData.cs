@@ -6,11 +6,11 @@ namespace ASEva.Samples
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Single signal data
+    /// (api:app=3.0.0) Single signal data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 单个信号数据
+    /// (api:app=3.0.0) 单个信号数据
     /// </summary>
     public struct SignalData
     {
@@ -54,11 +54,11 @@ namespace ASEva.Samples
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Input signal data (For one signal ID)
+    /// (api:app=3.0.0) Input signal data (For one signal ID)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 输入的信号数据列表（单个信号类别）
+    /// (api:app=3.0.0) 输入的信号数据列表（单个信号类别）
     /// </summary>
     public class SignalsData
     {

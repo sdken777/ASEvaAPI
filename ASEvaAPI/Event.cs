@@ -4,11 +4,11 @@ namespace ASEva
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Basic info of event
+    /// (api:app=3.0.0) Basic info of event
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 事件基础信息
+    /// (api:app=3.0.0) 事件基础信息
     /// </summary>
     public class EventData
     {
@@ -34,11 +34,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.0.5) Time offset in the session
+        /// Time offset in the session
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.0.5) 在所属session中的时间偏置
+        /// 在所属session中的时间偏置
         /// </summary>
         public double? Offset { get; set; }
 
@@ -85,11 +85,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Record status of event session
+    /// (api:app=3.0.0) Record status of event session
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 事件session记录状态
+    /// (api:app=3.0.0) 事件session记录状态
     /// </summary>
     public enum EventSessionRecordStatus
     {
@@ -126,11 +126,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Full info of event
+    /// (api:app=3.0.0) Full info of event
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 事件完整信息
+    /// (api:app=3.0.0) 事件完整信息
     /// </summary>
     public class EventInfo
     {

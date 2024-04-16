@@ -7,11 +7,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Base class for dialog component definition
+    /// (api:app=3.0.0) Base class for dialog component definition
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 对话框组件定义的基类
+    /// (api:app=3.0.0) 对话框组件定义的基类
     /// </summary>
     public class DialogClass
     {

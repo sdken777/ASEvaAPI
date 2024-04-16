@@ -6,11 +6,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Coordinates of longitude and latitude
+    /// (api:app=3.0.0) Coordinates of longitude and latitude
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 经纬度坐标
+    /// (api:app=3.0.0) 经纬度坐标
     /// </summary>
     public struct LocPoint
     {
@@ -37,11 +37,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Parameters of orthogonal coordinate system
+    /// (api:app=3.0.0) Parameters of orthogonal coordinate system
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 正交坐标系参数
+    /// (api:app=3.0.0) 正交坐标系参数
     /// </summary>
     public class OrthoParameters
     {
@@ -93,11 +93,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Conversion of orthogonal coordinates
+    /// (api:app=3.0.0) Conversion of orthogonal coordinates
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 正交坐标系变换
+    /// (api:app=3.0.0) 正交坐标系变换
     /// </summary>
     public class OrthoTransform
     {

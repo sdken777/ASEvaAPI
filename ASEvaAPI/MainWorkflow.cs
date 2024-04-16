@@ -9,11 +9,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.3.0) Base class of main workflow
+    /// (api:app=3.0.0) Base class of main workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.3.0) 主流程基类
+    /// (api:app=3.0.0) 主流程基类
     /// </summary>
     public class MainWorkflow
     {
@@ -48,7 +48,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.10.1) [Required][OK for modal] Run the main workflow, you should guarantee ASEva.MainWorkflowLoopCallback.OnLoop and ASEva.MainWorkflowModalCallback.OnHandleModal is called in the main loop
+        /// [Required][OK for modal] Run the main workflow, you should guarantee ASEva.MainWorkflowLoopCallback.OnLoop and ASEva.MainWorkflowModalCallback.OnHandleModal is called in the main loop
         /// </summary>
         /// <param name="loopCallback">Loop callback interface</param>
         /// <param name="modalCallback">Modal callback interface</param>
@@ -56,7 +56,7 @@ namespace ASEva
         /// <returns>Always return true, or else the legacy OnRun will be called</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.10.1) [必须实现][可含模态] 运行主流程，需要在其主循环中确保执行了 ASEva.MainWorkflowLoopCallback.OnLoop 和 ASEva.MainWorkflowModalCallback.OnHandleModal
+        /// [必须实现][可含模态] 运行主流程，需要在其主循环中确保执行了 ASEva.MainWorkflowLoopCallback.OnLoop 和 ASEva.MainWorkflowModalCallback.OnHandleModal
         /// </summary>
         /// <param name="loopCallback">主循环回调接口</param>
         /// <param name="modalCallback">模态对话回调接口</param>
@@ -96,12 +96,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.11) [Optional] Notify the initialization phase of framework
+        /// [Optional] Notify the initialization phase of framework
         /// </summary>
         /// <param name="phaseDescription">Initialization phase of framework</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.11) [可选实现] 通知框架软件的初始化阶段
+        /// [可选实现] 通知框架软件的初始化阶段
         /// </summary>
         /// <param name="phaseDescription">当前初始化阶段的描述</param>
         public virtual void OnCoreInitPhase(String phaseDescription) {}
@@ -160,13 +160,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.3) [Optional] Output log message
+        /// [Optional] Output log message
         /// </summary>
         /// <param name="message">The message</param>
         /// <param name="level">Log level</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.3) [可选实现] 输出清单消息
+        /// [可选实现] 输出清单消息
         /// </summary>
         /// <param name="message">消息</param>
         /// <param name="level">消息级别</param>
@@ -184,13 +184,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.11.0) [Optional] Output message for debugging
+        /// [Optional] Output message for debugging
         /// </summary>
         /// <param name="message">Message</param>
         /// <param name="source">Source</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.11.0) [可选实现] 输出调试用消息
+        /// [可选实现] 输出调试用消息
         /// </summary>
         /// <param name="message">消息</param>
         /// <param name="source">来源</param>
@@ -222,72 +222,72 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.10) [Optional] Get whether to disable GPU rendering
+        /// [Optional] Get whether to disable GPU rendering
         /// </summary>
         /// <returns>Whether to disable GPU rendering</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.10) [可选实现] 返回是否禁用GPU渲染
+        /// [可选实现] 返回是否禁用GPU渲染
         /// </summary>
         /// <returns>是否禁用GPU渲染</returns>
         public virtual bool OnCheckDisableGPURendering() { return false; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.13) [Optional] Get whether to enable GPU onscreen rendering
+        /// [Optional] Get whether to enable GPU onscreen rendering
         /// </summary>
         /// <returns>Whether to enable GPU onscreen rendering (always false if GPU rendering is disabled)</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.13) [可选实现] 返回是否启用GPU在屏渲染
+        /// [可选实现] 返回是否启用GPU在屏渲染
         /// </summary>
         /// <returns>是否启用GPU在屏渲染（若已禁用GPU渲染则无效）</returns>
         public virtual bool OnCheckEnableOnscreenGPURendering() { return false; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.13.0) [Optional] Get whether to disable GPU decoding
+        /// [Optional] Get whether to disable GPU decoding
         /// </summary>
         /// <returns>Whether to disable GPU decoding</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.13.0) [可选实现] 返回是否禁用GPU解码
+        /// [可选实现] 返回是否禁用GPU解码
         /// </summary>
         /// <returns>是否禁用GPU解码</returns>
         public virtual bool OnCheckDisableGPUDecoding() { return false; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.13.0) [Optional] Get whether to enable GPU specialized decoding
+        /// [Optional] Get whether to enable GPU specialized decoding
         /// </summary>
         /// <returns>Whether to enable GPU specialized decoding (always false if GPU decoding is disabled)</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.13.0) [可选实现] 返回是否启用GPU专用解码
+        /// [可选实现] 返回是否启用GPU专用解码
         /// </summary>
         /// <returns>是否启用GPU专用解码（若已禁用GPU解码则无效）</returns>
         public virtual bool OnCheckEnableSpecializedGPUDecoding() { return false; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.14.0) [Optional] Get whether to use PRC web service
+        /// [Optional] Get whether to use PRC web service
         /// </summary>
         /// <returns>Whether to use PRC web service</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.14.0) [可选实现] 返回是否使用境内网络服务
+        /// [可选实现] 返回是否使用境内网络服务
         /// </summary>
         /// <returns>是否使用境内网络服务</returns>
         public virtual bool OnCheckPreferPRCWeb() { return true; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.14.1) [Optional] Get whether to request auto root privilege (Only for Linux)
+        /// [Optional] Get whether to request auto root privilege (Only for Linux)
         /// </summary>
         /// <returns>Whether to request auto root privilege</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.14.1) [可选实现] 返回是否请求自动root权限 (仅针对Linux操作系统)
+        /// [可选实现] 返回是否请求自动root权限 (仅针对Linux操作系统)
         /// </summary>
         /// <returns>是否请求自动root权限</returns>
         public virtual bool OnCheckRequestAutoRoot() { return false; }
@@ -366,17 +366,17 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.15.9) [Optional][OK for modal] Deprecated, implement OnRunStandaloneTask(title, taskClassID, basicCallback, detailsCallback)
+        /// [Optional][OK for modal] Deprecated, implement OnRunStandaloneTask(title, taskClassID, basicCallback, detailsCallback)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.15.9) [可选实现][可含模态] 已弃用，应实现OnRunStandaloneTask(title, taskClassID, basicCallback, detailsCallback)
+        /// [可选实现][可含模态] 已弃用，应实现OnRunStandaloneTask(title, taskClassID, basicCallback, detailsCallback)
         /// </summary>
         public virtual bool OnRunStandaloneTask(String title, MainWorkflowTaskCallback basicCallback, MainWorkflowTaskIODetailsCallback detailsCallback) { return false; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.16.2) [Optional][OK for modal] Show running standalone task
+        /// [Optional][OK for modal] Show running standalone task
         /// </summary>
         /// <param name="title">Title of standalone task</param>
         /// <param name="taskClassID">The standalone task's class ID</param>
@@ -385,7 +385,7 @@ namespace ASEva
         /// <returns>Always return true, or else the legacy OnRunStandaloneTask will be called</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.16.2) [可选实现][可含模态] 显示正在进行的独立任务
+        /// [可选实现][可含模态] 显示正在进行的独立任务
         /// </summary>
         /// <param name="title">独立任务标题</param>
         /// <param name="taskClassID">独立任务类别ID</param>
@@ -433,13 +433,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.15.0) [Optional][OK for modal] Run console procedure
+        /// [Optional][OK for modal] Run console procedure
         /// </summary>
         /// <param name="consoleClass">Console object</param>
         /// <param name="info">Information of console component</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.15.0) [可选实现][可含模态] 运行控制台过程
+        /// [可选实现][可含模态] 运行控制台过程
         /// </summary>
         /// <param name="consoleClass">控制台对象</param>
         /// <param name="info">控制台组件信息</param>
@@ -644,11 +644,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.3.0) Application's basic info
+    /// (api:app=3.0.0) Application's basic info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.3.0) 应用程序的基本信息
+    /// (api:app=3.0.0) 应用程序的基本信息
     /// </summary>
     public class AppBasicInfo
     {
@@ -694,11 +694,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.20) Application's release revision in short, which can be null (Applications with the same version can be distributed in different configurations)
+        /// Application's release revision in short, which can be null (Applications with the same version can be distributed in different configurations)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.20) 缩略的应用程序发行号，可为空（相同应用程序版本下可按不同配置发行）
+        /// 缩略的应用程序发行号，可为空（相同应用程序版本下可按不同配置发行）
         /// </summary>
         public String AppRevisionShort { get; set; }
 
@@ -715,11 +715,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.3.0) The reason for requesting license
+    /// (api:app=3.0.0) The reason for requesting license
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.3.0) 许可证请求原因
+    /// (api:app=3.0.0) 许可证请求原因
     /// </summary>
     public enum LicenseRequestReason
     {
@@ -766,11 +766,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.3.0) Initialization result of framework software
+    /// (api:app=3.0.0) Initialization result of framework software
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.3.0) 框架软件的初始化结果
+    /// (api:app=3.0.0) 框架软件的初始化结果
     /// </summary>
     public enum CoreInitResult
     {
@@ -827,11 +827,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.3.0) Loop callback interface used by main workflow
+    /// (api:app=3.0.0) Loop callback interface used by main workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.3.0) 在主流程中使用的主循环回调接口
+    /// (api:app=3.0.0) 在主流程中使用的主循环回调接口
     /// </summary>
     public interface MainWorkflowLoopCallback
     {
@@ -848,11 +848,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.10.1) Modal callback interface used by main workflow
+    /// (api:app=3.0.0) Modal callback interface used by main workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.10.1) 在主流程中使用的模态对话回调接口
+    /// (api:app=3.0.0) 在主流程中使用的模态对话回调接口
     /// </summary>
     public interface MainWorkflowModalCallback
     {
@@ -869,11 +869,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.3.0) License validation callback used by main workflow
+    /// (api:app=3.0.0) License validation callback used by main workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.3.0) 在主流程中使用的许可证验证回调接口
+    /// (api:app=3.0.0) 在主流程中使用的许可证验证回调接口
     /// </summary>
     public interface MainWorkflowLicenseCallback
     {
@@ -894,11 +894,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.3.0) Standalone task callback interface used my main workflow
+    /// (api:app=3.0.0) Standalone task callback interface used my main workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.3.0) 在主流程中使用的获取独立任务状态回调接口
+    /// (api:app=3.0.0) 在主流程中使用的获取独立任务状态回调接口
     /// </summary>
     public interface MainWorkflowTaskCallback
     {
@@ -945,11 +945,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.15.9) Task I/O details getter callback interface used my main workflow
+    /// (api:app=3.0.0) Task I/O details getter callback interface used my main workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.15.9) 在主流程中使用的获取独立任务I/O详情的回调接口
+    /// (api:app=3.0.0) 在主流程中使用的获取独立任务I/O详情的回调接口
     /// </summary>
     public interface MainWorkflowTaskIODetailsCallback
     {
@@ -976,11 +976,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.3.0) Data encryption callback used by main workflow
+    /// (api:app=3.0.0) Data encryption callback used by main workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.3.0) 在主流程中使用的配置数据加密选项的回调接口
+    /// (api:app=3.0.0) 在主流程中使用的配置数据加密选项的回调接口
     /// </summary>
     public interface MainWorkflowEncryptionCallback
     {
@@ -1013,11 +1013,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.3.0) Plugin installation callback used by main workflow
+    /// (api:app=3.0.0) Plugin installation callback used by main workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.3.0) 在主流程中使用的安装插件的回调接口
+    /// (api:app=3.0.0) 在主流程中使用的安装插件的回调接口
     /// </summary>
     public interface MainWorkflowInstallCallback
     {

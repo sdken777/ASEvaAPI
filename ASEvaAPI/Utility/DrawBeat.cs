@@ -8,21 +8,21 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.2.2) Drawing time cost recording and feedback
+    /// (api:app=3.0.0) Drawing time cost recording and feedback
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.2.2) 绘图时间记录与反馈
+    /// (api:app=3.0.0) 绘图时间记录与反馈
     /// </summary>
     public class DrawBeat
     {
         /// \~English
         /// <summary>
-        /// (api:app=2.6.9) Enable the function (default is disabled)
+        /// Enable the function (default is disabled)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.9) 启用绘图时间记录与反馈（默认不启用）
+        /// 启用绘图时间记录与反馈（默认不启用）
         /// </summary>
         public static void Enable()
         {

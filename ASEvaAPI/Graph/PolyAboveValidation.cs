@@ -6,11 +6,11 @@ namespace ASEva.Graph
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Validation of whether the data is above the poly line
+    /// (api:app=3.0.0) Validation of whether the data is above the poly line
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 图表数据的折线上方验证方式
+    /// (api:app=3.0.0) 图表数据的折线上方验证方式
     /// </summary>
     public class PolyAboveValidation : GraphValidation
     {

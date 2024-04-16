@@ -6,11 +6,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Standalone task's status
+    /// (api:app=3.0.0) Standalone task's status
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 独立任务状态
+    /// (api:app=3.0.0) 独立任务状态
     /// </summary>
     public enum TaskState
 	{
@@ -57,11 +57,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Standalone task's result
+    /// (api:app=3.0.0) Standalone task's result
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 独立任务运行结果
+    /// (api:app=3.0.0) 独立任务运行结果
     /// </summary>
     public enum TaskResult
     {
@@ -118,11 +118,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Standalone task object
+    /// (api:app=3.0.0) Standalone task object
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 独立任务对象
+    /// (api:app=3.0.0) 独立任务对象
     /// </summary>
     public class Task
     {

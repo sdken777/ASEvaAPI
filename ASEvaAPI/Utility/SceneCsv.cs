@@ -7,11 +7,11 @@ namespace ASEva.Utility
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Scenario CSV reader and writer
+    /// (api:app=3.0.0) Scenario CSV reader and writer
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 场景csv文件读写
+    /// (api:app=3.0.0) 场景csv文件读写
     /// </summary>
     public class SceneCsv
     {

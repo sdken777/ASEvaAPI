@@ -6,11 +6,11 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Mode of statistics for matrix table
+    /// (api:app=3.0.0) Mode of statistics for matrix table
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 矩阵表统计模式
+    /// (api:app=3.0.0) 矩阵表统计模式
     /// </summary>
     public enum MatrixTableMode
     {
@@ -67,11 +67,11 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Single axis' range of matrix table
+    /// (api:app=3.0.0) Single axis' range of matrix table
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 矩阵表单轴范围
+    /// (api:app=3.0.0) 矩阵表单轴范围
     /// </summary>
     public class MatrixTableRange
     {
@@ -82,11 +82,11 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Numeric range of matrix table
+    /// (api:app=3.0.0) Numeric range of matrix table
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 矩阵表中数值的范围
+    /// (api:app=3.0.0) 矩阵表中数值的范围
     /// </summary>
     public struct MatrixTableValueRefRange
     {
@@ -102,11 +102,11 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Matrix table graph data
+    /// (api:app=3.0.0) Matrix table graph data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 矩阵表数据
+    /// (api:app=3.0.0) 矩阵表数据
     /// </summary>
     public class MatrixTableData : GraphData
     {

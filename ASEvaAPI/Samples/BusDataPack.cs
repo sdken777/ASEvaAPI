@@ -4,11 +4,11 @@ namespace ASEva.Samples
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Single bus message sample
+    /// (api:app=3.0.0) Single bus message sample
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 单个总线报文样本
+    /// (api:app=3.0.0) 单个总线报文样本
     /// </summary>
     public class BusMessageSample : Sample
     {
@@ -54,52 +54,52 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// (api:app=2.10.2) Bus channel type
+        /// Bus channel type
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.10.2) 总线通道类型
+        /// 总线通道类型
         /// </summary>
 		public BusChannelType Type { get; set; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.10.2) Data state (mainly for transmitting)
+        /// Data state (mainly for transmitting)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.10.2) 总线数据的(发送)状态
+        /// 总线数据的(发送)状态
         /// </summary>
 		public BusRawDataState State { get; set; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.10.2) Time offset of scheduled transmitting, 0 means invalid
+        /// Time offset of scheduled transmitting, 0 means invalid
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.10.2) 预约发送的时间偏置，0表示无效
+        /// 预约发送的时间偏置，0表示无效
         /// </summary>
 		public double ScheduleTimeOffset { get; set; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.10.2) Server posix time of scheduled transmitting, 0 means invalid
+        /// Server posix time of scheduled transmitting, 0 means invalid
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.10.2) 预约发送的授时服务器时间，单位纳秒，0表示无效
+        /// 预约发送的授时服务器时间，单位纳秒，0表示无效
         /// </summary>
 		public ulong SchedulePosixTime { get; set; }
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Pack of bus message data
+    /// (api:app=3.0.0) Pack of bus message data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 总线报文样本集合
+    /// (api:app=3.0.0) 总线报文样本集合
     /// </summary>
     public class BusDataPack
     {

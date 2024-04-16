@@ -8,11 +8,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Resource loader
+    /// (api:app=3.0.0) Resource loader
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 资源读取器
+    /// (api:app=3.0.0) 资源读取器
     /// </summary>
     public class ResourceLoader
     {
@@ -42,13 +42,13 @@ namespace ASEva.Utility
 
         /// \~English
         /// <summary>
-        /// (api:app=2.0.8) Load the resource with the name (UTF-8 data), and convert to text
+        /// Load the resource with the name (UTF-8 data), and convert to text
         /// </summary>
         /// <param name="name">Resource name</param>
         /// <returns>Loaded text, null if not found</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.0.8) 按指定名称读取资源（UTF-8文本），并转为文本
+        /// 按指定名称读取资源（UTF-8文本），并转为文本
         /// </summary>
         /// <param name="name">资源名称</param>
         /// <returns>文本数据，若找不到资源则返回null</returns>

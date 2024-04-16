@@ -6,11 +6,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.11.2) Controlling operation's time interval
+    /// (api:app=3.0.0) Controlling operation's time interval
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.11.2) 执行操作的间隔控制
+    /// (api:app=3.0.0) 执行操作的间隔控制
     /// </summary>
     public class IntervalControl
     {

@@ -5,11 +5,11 @@ namespace ASEva.Graph
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Validation of whether the data is inside the outline
+    /// (api:app=3.0.0) Validation of whether the data is inside the outline
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 图表数据的轮廓内验证方式
+    /// (api:app=3.0.0) 图表数据的轮廓内验证方式
     /// </summary>
     public class OutlineInsideValidation : GraphValidation
     {

@@ -9,11 +9,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.7.0) Sync status of time offset
+    /// (api:app=3.0.0) Sync status of time offset
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.7.0) 时间偏置同步状态
+    /// (api:app=3.0.0) 时间偏置同步状态
     /// </summary>
     public enum TimeOffsetSync
     {
@@ -50,11 +50,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.7.0) Session ID
+    /// (api:app=3.0.0) Session ID
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.7.0) Session标识符
+    /// (api:app=3.0.0) Session标识符
     /// </summary>
     public struct SessionIdentifier
     {
@@ -84,11 +84,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.2) Create from string
+        /// Create from string
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.2) 通过字符串创建
+        /// 通过字符串创建
         /// </summary>
         public static SessionIdentifier FromString(String str)
         {
@@ -115,11 +115,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.3) Whether it's valid
+        /// Whether it's valid
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.3) 是否有效
+        /// 是否有效
         /// </summary>
         public bool IsValid()
         {
@@ -195,11 +195,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.7.0) Session independent time info
+    /// (api:app=3.0.0) Session independent time info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.7.0) Session无关时间信息
+    /// (api:app=3.0.0) Session无关时间信息
     /// </summary>
     public class IndependentTimeInfo
     {
@@ -287,11 +287,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.7.0) Timestamp
+    /// (api:app=3.0.0) Timestamp
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.7.0) 时间戳
+    /// (api:app=3.0.0) 时间戳
     /// </summary>
     public struct Timestamp
     {
@@ -347,21 +347,21 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Base class of sample data
+    /// (api:app=3.0.0) Base class of sample data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 数据样本基类
+    /// (api:app=3.0.0) 数据样本基类
     /// </summary>
     public class Sample : IComparable<Sample>
     {
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Timestamp
+        /// Timestamp
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 时间戳
+        /// 时间戳
         /// </summary>
         public Timestamp Timestamp
         {
@@ -370,11 +370,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.2) The session that sample belongs to
+        /// The session that sample belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.2) 所属Session标识符
+        /// 所属Session标识符
         /// </summary>
         public SessionIdentifier Session
         {
@@ -491,7 +491,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Constructor based on time information
+        /// Constructor based on time information
         /// </summary>
         /// <param name="session">The session that sample belongs to</param>
         /// <param name="offset">Time offset, in seconds</param>
@@ -499,7 +499,7 @@ namespace ASEva
         /// <param name="timeline">Timeline point</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 按指定时间信息进行初始化
+        /// 按指定时间信息进行初始化
         /// </summary>
         /// <param name="session">所属session ID</param>
         /// <param name="offset">时间偏置，单位秒</param>
@@ -513,7 +513,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Set time information
+        /// Set time information
         /// </summary>
         /// <param name="session">The session that sample belongs to</param>
         /// <param name="offset">Time offset, in seconds</param>
@@ -521,7 +521,7 @@ namespace ASEva
         /// <param name="timeline">Timeline point</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 设置当前样本的时间戳和时间线位置
+        /// 设置当前样本的时间戳和时间线位置
         /// </summary>
         /// <param name="session">所属session ID</param>
         /// <param name="offset">时间偏置，单位秒</param>
@@ -535,13 +535,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.2) Set time information
+        /// Set time information
         /// </summary>
         /// <param name="timestamp">Timestamp</param>
         /// <param name="timeline">Timeline point</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.2) 设置当前样本的时间戳和时间线位置
+        /// 设置当前样本的时间戳和时间线位置
         /// </summary>
         /// <param name="timestamp">时间戳</param>
         /// <param name="timeline">在时间线上的位置</param>
@@ -553,12 +553,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Set time to the same as the sample
+        /// Set time to the same as the sample
         /// </summary>
         /// <param name="timeRef">Time reference sample</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 按时间参考样本设置当前样本的时间戳和时间线位置
+        /// 按时间参考样本设置当前样本的时间戳和时间线位置
         /// </summary>
         /// <param name="timeRef">时间参考样本</param>
         public void SetTime(Sample timeRef)
@@ -1041,11 +1041,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Type of an element in general sample
+    /// (api:app=3.0.0) Type of an element in general sample
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 通用样本中值的类型
+    /// (api:app=3.0.0) 通用样本中值的类型
     /// </summary>
     public enum GeneralSampleValueMode
     {
@@ -1082,11 +1082,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) General sample value
+    /// (api:app=3.0.0) General sample value
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 通用样本值
+    /// (api:app=3.0.0) 通用样本值
     /// </summary>
     public struct GeneralSampleValue
     {
@@ -1160,11 +1160,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) General sample
+    /// (api:app=3.0.0) General sample
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 通用样本
+    /// (api:app=3.0.0) 通用样本
     /// </summary>
     public class GeneralSample : Sample
     {

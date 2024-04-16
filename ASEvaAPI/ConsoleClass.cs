@@ -7,11 +7,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.15.0) Base class for console component definition
+    /// (api:app=3.0.0) Base class for console component definition
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.15.0) 控制台组件定义的基类
+    /// (api:app=3.0.0) 控制台组件定义的基类
     /// </summary>
     public class ConsoleClass
     {
@@ -53,37 +53,37 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.15.1) [Required] Called while getting configuration status of related components
+        /// [Required] Called while getting configuration status of related components
         /// </summary>
         /// <returns>Configuration status</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.15.1) [必须实现] 获取控制台组件相关的配置状态时被调用
+        /// [必须实现] 获取控制台组件相关的配置状态时被调用
         /// </summary>
         /// <returns>配置状态</returns>
         public virtual ConfigStatus GetRelatedConfigStatus() { return ConfigStatus.Disabled; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.15.1) [Optional] Called while getting child configuration status of related components
+        /// [Optional] Called while getting child configuration status of related components
         /// </summary>
         /// <returns>Child configuration status</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.15.1) [可选实现] 查询控制台组件相关的各子功能配置状态时被调用
+        /// [可选实现] 查询控制台组件相关的各子功能配置状态时被调用
         /// </summary>
         /// <returns>各子功能的配置状态</returns>
         public virtual ConfigStatus[] GetRelatedChildConfigStatus() { return null; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.15.3) [Required] Called while running console procedure
+        /// [Required] Called while running console procedure
         /// </summary>
         /// <param name="io">Console interaction interface. The procedure should end immediately if any method of this interface that returns false (interrupted)</param>
         /// <param name="machineText">Whether the text of messages and options given to the interaction interface should be ID or JSON string that is easy to parse by the machine. Otherwise it should be text that is easy to read by humans</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.15.3) [必须实现] 运行控制台过程时被调用
+        /// [必须实现] 运行控制台过程时被调用
         /// </summary>
         /// <param name="io">控制台交互接口，在运行过程中次此接口的任何方法返回false(中断)都应该立即结束</param>
         /// <param name="machineText">输入至交互接口的消息、选项等文本是否应该为便于机器解析的ID或JSON字符串等，否则为便于人阅读的文本</param>
@@ -92,11 +92,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.15.4) Result of saving or loading file data through console
+    /// (api:app=3.0.0) Result of saving or loading file data through console
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.15.4) 通过控制台读写文件的结果
+    /// (api:app=3.0.0) 通过控制台读写文件的结果
     /// </summary>
     public class ConsoleFileResult
     {
@@ -133,11 +133,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.15.0) Console interaction interface
+    /// (api:app=3.0.0) Console interaction interface
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.15.0) 控制台交互接口
+    /// (api:app=3.0.0) 控制台交互接口
     /// </summary>
     public interface ConsoleIO
     {

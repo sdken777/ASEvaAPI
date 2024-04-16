@@ -4,11 +4,11 @@ namespace ASEva.Samples
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Special camera's type
+    /// (api:app=3.0.0) Special camera's type
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 特殊摄像头类型
+    /// (api:app=3.0.0) 特殊摄像头类型
     /// </summary>
     public enum SpecialCameraType
     {
@@ -84,42 +84,42 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// (api:app=2.1.2) Camera with no position info (Fisheye model), use FisheyeCameraMeta
+        /// Camera with no position info (Fisheye model), use FisheyeCameraMeta
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.1.2) 无位置摄像头（鱼眼模型），使用 FisheyeCameraMeta
+        /// 无位置摄像头（鱼眼模型），使用 FisheyeCameraMeta
         /// </summary>
         NormalFisheyeCamera = 7,
 
         /// \~English
         /// <summary>
-        /// (api:app=2.1.2) Front camera (Fisheye model), use FisheyeCameraMeta
+        /// Front camera (Fisheye model), use FisheyeCameraMeta
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.1.2) 前向摄像头（鱼眼模型），使用 FisheyeCameraMeta
+        /// 前向摄像头（鱼眼模型），使用 FisheyeCameraMeta
         /// </summary>
         FrontFisheyeCamera = 8,
 
         /// \~English
         /// <summary>
-        /// (api:app=2.1.2) Camera at any position (Fisheye model), use FisheyeCameraMeta
+        /// Camera at any position (Fisheye model), use FisheyeCameraMeta
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.1.2) 任意位置摄像头（鱼眼模型），使用 FisheyeCameraMeta
+        /// 任意位置摄像头（鱼眼模型），使用 FisheyeCameraMeta
         /// </summary>
         AnyFisheyeCamera = 9,
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Common part of camera info (Pinhole model)
+    /// (api:app=3.0.0) Common part of camera info (Pinhole model)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 摄像头信息共通部分（标准模型）
+    /// (api:app=3.0.0) 摄像头信息共通部分（标准模型）
     /// </summary>
     public class CommonCameraMeta
     {
@@ -155,11 +155,11 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// (api:app=2.12.2) Horizontal FOV of ideal pinhole model after undistorted [deg]
+        /// Horizontal FOV of ideal pinhole model after undistorted [deg]
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.12.2) 去畸变后的理想针孔模型图像的横向视场角 [deg]
+        /// 去畸变后的理想针孔模型图像的横向视场角 [deg]
         /// </summary>
         public double UndistortedHFOV { get; set; }
 
@@ -235,52 +235,52 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// (api:app=2.2.4) Distortion coefficient K3
+        /// Distortion coefficient K3
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.2.4) 畸变参数K3
+        /// 畸变参数K3
         /// </summary>
         public double K3 { get; set; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.2.4) Distortion coefficient K4
+        /// Distortion coefficient K4
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.2.4) 畸变参数K4
+        /// 畸变参数K4
         /// </summary>
         public double K4 { get; set; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.2.4) Distortion coefficient K5
+        /// Distortion coefficient K5
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.2.4) 畸变参数K5
+        /// 畸变参数K5
         /// </summary>
         public double K5 { get; set; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.2.4) Distortion coefficient K6
+        /// Distortion coefficient K6
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.2.4) 畸变参数K6
+        /// 畸变参数K6
         /// </summary>
         public double K6 { get; set; }
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Related information of default camera (Pinhole model)
+    /// (api:app=3.0.0) Related information of default camera (Pinhole model)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 默认摄像头关联信息（标准模型）
+    /// (api:app=3.0.0) 默认摄像头关联信息（标准模型）
     /// </summary>
     public class DefaultCameraMeta
     {
@@ -297,11 +297,11 @@ namespace ASEva.Samples
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Related information of generic parameterized camera (Pinhole model)
+    /// (api:app=3.0.0) Related information of generic parameterized camera (Pinhole model)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 泛用参数摄像头关联信息（标准模型）
+    /// (api:app=3.0.0) 泛用参数摄像头关联信息（标准模型）
     /// </summary>
     public class GenericCameraMeta
     {
@@ -438,11 +438,11 @@ namespace ASEva.Samples
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Related information of lane line camera (Pinhole model)
+    /// (api:app=3.0.0) Related information of lane line camera (Pinhole model)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 车道线摄像头关联信息（标准模型）
+    /// (api:app=3.0.0) 车道线摄像头关联信息（标准模型）
     /// </summary>
     public class LaneLineCameraMeta
     {
@@ -509,11 +509,11 @@ namespace ASEva.Samples
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Related information of blind spot camera (Pinhole model)
+    /// (api:app=3.0.0) Related information of blind spot camera (Pinhole model)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 盲区摄像头关联信息（标准模型）
+    /// (api:app=3.0.0) 盲区摄像头关联信息（标准模型）
     /// </summary>
     public class BlindSpotCameraMeta
     {
@@ -620,11 +620,11 @@ namespace ASEva.Samples
 
     /// \~English
     /// <summary>
-    /// (api:app=2.1.2) Related information of fisheye camera (Fisheye model)
+    /// (api:app=3.0.0) Related information of fisheye camera (Fisheye model)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.1.2) 鱼眼摄像头关联信息（鱼眼模型）
+    /// (api:app=3.0.0) 鱼眼摄像头关联信息（鱼眼模型）
     /// </summary>
     public class FisheyeCameraMeta
     {
@@ -660,11 +660,11 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// (api:app=2.12.2) Horizontal FOV of ideal pinhole model after undistorted [deg]
+        /// Horizontal FOV of ideal pinhole model after undistorted [deg]
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.12.2) 去畸变后的理想针孔模型图像的横向视场角 [deg]
+        /// 去畸变后的理想针孔模型图像的横向视场角 [deg]
         /// </summary>
         public double UndistortedHFOV { get; set; }
 
@@ -881,11 +881,11 @@ namespace ASEva.Samples
 
     /// \~English
     /// <summary>
-    /// (api:app=2.9.0) Camera information
+    /// (api:app=3.0.0) Camera information
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.9.0) 摄像头信息
+    /// (api:app=3.0.0) 摄像头信息
     /// </summary>
     public class CameraInfo
     {

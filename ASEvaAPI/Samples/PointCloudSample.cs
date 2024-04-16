@@ -5,11 +5,11 @@ namespace ASEva.Samples
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Point cloud sample
+    /// (api:app=3.0.0) Point cloud sample
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 点云样本
+    /// (api:app=3.0.0) 点云样本
     /// </summary>
     public class PointCloudSample : Sample
     {
@@ -35,11 +35,11 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// (api:app=2.11.4) Whether the data is released (for purpose of memory usage control)
+        /// Whether the data is released (for purpose of memory usage control)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.11.4) 数据是否已被释放（出于内存用量控制等目的）
+        /// 数据是否已被释放（出于内存用量控制等目的）
         /// </summary>
         public bool DataReleased { get; set; }
 
@@ -115,31 +115,31 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// (api:app=2.0.9) Dictionary for byte values. The key is field ID (See document of point-cloud-v2), the value is array whose size is number of points, storing byte values of the field
+        /// Dictionary for byte values. The key is field ID (See document of point-cloud-v2), the value is array whose size is number of points, storing byte values of the field
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.0.9) byte字段数组的表，键为字段ID（具体请参考点云数据格式文档），值为长度为N的数组，存放该字段ID对应byte数值
+        /// byte字段数组的表，键为字段ID（具体请参考点云数据格式文档），值为长度为N的数组，存放该字段ID对应byte数值
         /// </summary>
         public Dictionary<int, byte[]> ByteValues { get; set; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.0.9) Dictionary for short values. The key is field ID (See document of point-cloud-v2), the value is array whose size is number of points, storing short values of the field
+        /// Dictionary for short values. The key is field ID (See document of point-cloud-v2), the value is array whose size is number of points, storing short values of the field
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.0.9) short字段数组的表，键为字段ID（具体请参考点云数据格式文档），值为长度为N的数组，存放该字段ID对应short数值
+        /// short字段数组的表，键为字段ID（具体请参考点云数据格式文档），值为长度为N的数组，存放该字段ID对应short数值
         /// </summary>
         public Dictionary<int, short[]> ShortValues { get; set; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.0.9) Dictionary for float values. The key is field ID (See document of point-cloud-v2), the value is array whose size is number of points, storing float values of the field
+        /// Dictionary for float values. The key is field ID (See document of point-cloud-v2), the value is array whose size is number of points, storing float values of the field
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.0.9) float字段数组的表，键为字段ID（具体请参考点云数据格式文档），值为长度为N的数组，存放该字段ID对应float数值
+        /// float字段数组的表，键为字段ID（具体请参考点云数据格式文档），值为长度为N的数组，存放该字段ID对应float数值
         /// </summary>
         public Dictionary<int, float[]> FloatValues { get; set; }
 

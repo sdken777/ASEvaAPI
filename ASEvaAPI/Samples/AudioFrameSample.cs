@@ -5,11 +5,11 @@ namespace ASEva.Samples
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Audio frame sample, 44100Hz, 16bit, mono channel
+    /// (api:app=3.0.0) Audio frame sample, 44100Hz, 16bit, mono channel
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 音频帧样本，44100Hz，16bit，单通道
+    /// (api:app=3.0.0) 音频帧样本，44100Hz，16bit，单通道
     /// </summary>
     public class AudioFrameSample : Sample
     {
@@ -39,11 +39,11 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.4) MD5 of the sample data
+        /// MD5 of the sample data
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.4) 音频帧数据的MD5
+        /// 音频帧数据的MD5
         /// </summary>
         public String MD5 { get; private set; }
 

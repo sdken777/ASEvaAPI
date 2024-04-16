@@ -5,11 +5,11 @@ namespace ASEva.Utility
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) WebClient with Timeout property
+    /// (api:app=3.0.0) WebClient with Timeout property
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 带Timeout属性的WebClient
+    /// (api:app=3.0.0) 带Timeout属性的WebClient
     /// </summary>
     public class TimeoutWebClient : WebClient
     {

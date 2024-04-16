@@ -11,11 +11,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Graph type
+    /// (api:app=3.0.0) Graph type
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 图表类型
+    /// (api:app=3.0.0) 图表类型
     /// </summary>
     public enum GraphType
     {
@@ -78,11 +78,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Validation type of graph data
+    /// (api:app=3.0.0) Validation type of graph data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 图表数据验证类型
+    /// (api:app=3.0.0) 图表数据验证类型
     /// </summary>
     public enum GraphValidationType
     {
@@ -169,11 +169,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Interface of graph data validation
+    /// (api:app=3.0.0) Interface of graph data validation
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 图表数据验证接口
+    /// (api:app=3.0.0) 图表数据验证接口
     /// </summary>
     public interface GraphValidation
     {
@@ -185,11 +185,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Graph definition
+    /// (api:app=3.0.0) Graph definition
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 图表定义
+    /// (api:app=3.0.0) 图表定义
     /// </summary>
     public class GraphDefinition
     {
@@ -329,11 +329,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Graph data
+    /// (api:app=3.0.0) Graph data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 图表数据
+    /// (api:app=3.0.0) 图表数据
     /// </summary>
     public class GraphData
     {
@@ -744,11 +744,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.8.1) Interface for graph data visualization
+    /// (api:app=3.0.0) Interface for graph data visualization
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.8.1) 图表可视化面板接口
+    /// (api:app=3.0.0) 图表可视化面板接口
     /// </summary>
     public interface GraphPanel
     {
@@ -764,31 +764,31 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.8.2) Get height of the panel (if fixed)
+        /// Get height of the panel (if fixed)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.8.2) 返回面板高度（若为固定高度）
+        /// 返回面板高度（若为固定高度）
         /// </summary>
         int? GetFixedHeight();
 
         /// \~English
         /// <summary>
-        /// (api:app=2.8.3) Release resources
+        /// Release resources
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.8.3) 释放资源
+        /// 释放资源
         /// </summary>
         void ReleaseResources();
 
         /// \~English
         /// <summary>
-        /// (api:app=2.8.4) Bind click event object
+        /// Bind click event object
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.8.4) 绑定点击事件对象
+        /// 绑定点击事件对象
         /// </summary>
         void UseClickEvent(ManualResetEventSlim ev);
     }

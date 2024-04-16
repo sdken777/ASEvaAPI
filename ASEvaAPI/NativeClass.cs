@@ -5,11 +5,11 @@ namespace ASEva
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Base class for native component definition
+    /// (api:app=3.0.0) Base class for native component definition
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 原生组件定义的基类
+    /// (api:app=3.0.0) 原生组件定义的基类
     /// </summary>
     public class NativeClass
     {
@@ -75,12 +75,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.2.0) [Optional] Called while getting the names of file readers and writers
+        /// [Optional] Called while getting the names of file readers and writers
         /// </summary>
         /// <returns>The names of file readers and writers, set to null if file functions unsupported</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.2.0) [可选实现] 获取文件读写相关名称的集合时被调用
+        /// [可选实现] 获取文件读写相关名称的集合时被调用
         /// </summary>
         /// <returns>文件读写相关名称的集合，默认为null，即不提供文件读写功能</returns>
         public virtual FileIONames GetFileIONames() { return null; }

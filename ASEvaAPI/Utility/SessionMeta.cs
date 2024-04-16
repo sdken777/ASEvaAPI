@@ -9,11 +9,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Session's meta info
+    /// (api:app=3.0.0) Session's meta info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) Session的meta信息
+    /// (api:app=3.0.0) Session的meta信息
     /// </summary>
     public class SessionMeta
     {
@@ -320,7 +320,7 @@ namespace ASEva.Utility
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Create session meta object (not write to file)
+        /// Create session meta object (not write to file)
         /// </summary>
         /// <param name="filePath">File path</param>
         /// <param name="id">Session ID</param>
@@ -338,7 +338,7 @@ namespace ASEva.Utility
         /// <returns>Created session meta object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 创建meta文件对象（仅创建对象，不写入文件）
+        /// 创建meta文件对象（仅创建对象，不写入文件）
         /// </summary>
         /// <param name="filePath">文件路径</param>
         /// <param name="id">Session ID</param>
