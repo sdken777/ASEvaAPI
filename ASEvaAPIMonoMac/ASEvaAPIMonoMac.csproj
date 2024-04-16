@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>ASEvaAPIMonoMac</AssemblyName>
     <Version>0.0.0.0</Version>
     <DefineConstants>OSX;Mac64;MONOMAC</DefineConstants>
     <NoWarn>1701;1702;1591</NoWarn>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>..\binm\ASEvaAPIMonoMac.xml</DocumentationFile>
+    <DocumentationFile>..\binma\ASEvaAPIMonoMac.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,25 +19,25 @@
 
   <ItemGroup>
     <Reference Include="ASEvaAPI">
-      <HintPath>..\binm\ASEvaAPI.dll</HintPath>
+      <HintPath>..\binma\ASEvaAPI.dll</HintPath>
     </Reference>
     <Reference Include="ASEvaAPIEto">
-      <HintPath>..\binm\ASEvaAPIEto.dll</HintPath>
+      <HintPath>..\binma\ASEvaAPIEto.dll</HintPath>
     </Reference>
     <Reference Include="Eto">
-      <HintPath>..\binm\Eto.dll</HintPath>
+      <HintPath>..\binma\Eto.dll</HintPath>
     </Reference>
     <Reference Include="Eto.Mac64">
-      <HintPath>..\binm\Eto.Mac64.dll</HintPath>
+      <HintPath>..\binma\Eto.Mac64.dll</HintPath>
     </Reference>
     <Reference Include="MonoMac">
-      <HintPath>..\binm\MonoMac.dll</HintPath>
+      <HintPath>..\binma\MonoMac.dll</HintPath>
     </Reference>
     <Reference Include="PortableSharpGL">
-      <HintPath>..\binm\PortableSharpGL.dll</HintPath>
+      <HintPath>..\binma\PortableSharpGL.dll</HintPath>
     </Reference>
     <Reference Include="SkiaSharp">
-      <HintPath>..\binm\SkiaSharp.dll</HintPath>
+      <HintPath>..\binma\SkiaSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

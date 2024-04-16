@@ -88,6 +88,7 @@ if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/binma/PortableSharpGL.dll $TARGET_DIR/binma/
     cp -vf "$CUR_DIR"/3party/eto-common/* $TARGET_DIR/binma/
     cp -vf "$CUR_DIR"/3party/eto-monomac/* $TARGET_DIR/binma/
+    cp -vf "$CUR_DIR"/3party/eto-monomac-arm64/* $TARGET_DIR/binma/
     cp -vf "$CUR_DIR"/3party/skia-common/* $TARGET_DIR/binma/
     if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-macos-any/* $TARGET_DIR/binma/
@@ -189,6 +190,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/binma/PortableSharpGL.dll $TARGET_DIR/binma/debug/
         cp -vf "$CUR_DIR"/3party/eto-common/* $TARGET_DIR/binma/debug/
         cp -vf "$CUR_DIR"/3party/eto-monomac/* $TARGET_DIR/binma/debug/
+        cp -vf "$CUR_DIR"/3party/eto-monomac-arm64/* $TARGET_DIR/binma/debug/
         cp -vf "$CUR_DIR"/3party/skia-common/* $TARGET_DIR/binma/debug/
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
             cp -vf "$CUR_DIR"/3party/skia-macos-any/* $TARGET_DIR/binma/debug/

@@ -560,6 +560,7 @@ namespace ASEva.UIEto
             case "linuxarm":
                 return new String[] { "gtk" };
             case "macos":
+            case "macosarm":
                 return new String[] { "monomac" };
             default:
                 return null;

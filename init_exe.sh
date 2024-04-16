@@ -52,6 +52,8 @@ cp -vf "$CUR_DIR"/3party/eto-gtk/*.* "$CUR_DIR"/binxa/debug/
 
 cp -vf "$CUR_DIR"/3party/eto-monomac/*.* "$CUR_DIR"/binma/
 cp -vf "$CUR_DIR"/3party/eto-monomac/*.* "$CUR_DIR"/binma/debug/
+cp -vf "$CUR_DIR"/3party/eto-monomac-arm64/*.* "$CUR_DIR"/binma/
+cp -vf "$CUR_DIR"/3party/eto-monomac-arm64/*.* "$CUR_DIR"/binma/debug/
 
 cp -vf "$CUR_DIR"/3party/skia-common/*.* "$CUR_DIR"/bin64/
 cp -vf "$CUR_DIR"/3party/skia-common/*.* "$CUR_DIR"/bin64/debug/
