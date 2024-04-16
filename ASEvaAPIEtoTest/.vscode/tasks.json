@@ -28,19 +28,6 @@
                 ]
             }
         },
-        {
-            "id": "helper_osx_version",
-            "type": "command",
-            "command": "shell-command.run",
-            "args": {
-                "cmd": "dotnet",
-                "args": [
-                    "../bin/VSCodeHelper.dll",
-                    "shell_command",
-                    "osx_version"
-                ]
-            }
-        },
     ],
     "presentation": {
         "echo": true,
@@ -124,7 +111,15 @@
             "label": "Subtask: Build for host (Debug)",
             "hide": true,
             "command": "dotnet",
-            "problemMatcher": "$msCompile",
+            "args": [
+                "build",
+                "./ASEvaAPIEtoTest.csproj",
+                "-o",
+                "../${input:helper_platform_bin_name}/debug",
+                "/property:OutputType=Exe",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
             "windows": {
                 "args": [
                     "build",
@@ -132,43 +127,28 @@
                     "-o",
                     "../${input:helper_platform_bin_name}/debug",
                     "/property:OutputType=WinExe",
-                    "/property:UseWindowsForms=true",
                     "/property:GenerateFullPaths=true",
                     "/consoleloggerparameters:NoSummary"
                 ],
             },
-            "linux": {
-                "args": [
-                    "build",
-                    "./ASEvaAPIEtoTest.csproj",
-                    "-o",
-                    "../${input:helper_platform_bin_name}/debug",
-                    "/property:OutputType=Exe",
-                    "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary"
-                ],
-            },
-            "osx": {
-                "args": [
-                    "publish",
-                    "./ASEvaAPIEtoTest.csproj",
-                    "-r",
-                    "${input:helper_osx_version}",
-                    "--no-self-contained",
-                    "-o",
-                    "../${input:helper_platform_bin_name}/debug",
-                    "/property:OutputType=Exe",
-                    "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary"
-                ],
-            }
+            "problemMatcher": "$msCompile",
         },
         {
             "type": "process",
             "label": "Subtask: Build for host (Release)",
             "hide": true,
             "command": "dotnet",
-            "problemMatcher": "$msCompile",
+            "args": [
+                "build",
+                "./ASEvaAPIEtoTest.csproj",
+                "-c",
+                "Release",
+                "-o",
+                "../${input:helper_platform_bin_name}",
+                "/property:OutputType=Exe",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
             "windows": {
                 "args": [
                     "build",
@@ -179,40 +159,11 @@
                     "../${input:helper_platform_bin_name}",
                     "/property:OutputType=WinExe",
                     "/property:ApplicationIcon=Resources/icon.ico",
-                    "/property:UseWindowsForms=true",
                     "/property:GenerateFullPaths=true",
                     "/consoleloggerparameters:NoSummary"
                 ],
             },
-            "linux": {
-                "args": [
-                    "build",
-                    "./ASEvaAPIEtoTest.csproj",
-                    "-c",
-                    "Release",
-                    "-o",
-                    "../${input:helper_platform_bin_name}",
-                    "/property:OutputType=Exe",
-                    "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary"
-                ],
-            },
-            "osx": {
-                "args": [
-                    "publish",
-                    "./ASEvaAPIEtoTest.csproj",
-                    "-c",
-                    "Release",
-                    "-r",
-                    "${input:helper_osx_version}",
-                    "--no-self-contained",
-                    "-o",
-                    "../${input:helper_platform_bin_name}",
-                    "/property:OutputType=Exe",
-                    "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary"
-                ],
-            }
+            "problemMatcher": "$msCompile",
         },
         {
             "type": "process",
@@ -226,7 +177,7 @@
                 "bin64",
                 "binx",
                 "binxa",
-                "binm",
+                "binma",
             ],
         },
     ]

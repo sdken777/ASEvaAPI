@@ -13,11 +13,11 @@ namespace ASEva.UIGtk
 
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Histogram and poly line graph control
+    /// (api:gtk=3.0.0) Histogram and poly line graph control
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 柱状折线图可视化控件
+    /// (api:gtk=3.0.0) 柱状折线图可视化控件
     /// </summary>
     public class HistLineGraph : BaseGraph
     {
@@ -48,11 +48,11 @@ namespace ASEva.UIGtk
 
         /// \~English
         /// <summary>
-        /// (api:gtk=2.0.8) Release resources
+        /// Release resources
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:gtk=2.0.8) 释放相关资源
+        /// 释放相关资源
         /// </summary>
         public override void Close()
 		{

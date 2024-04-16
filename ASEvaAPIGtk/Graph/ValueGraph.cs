@@ -10,11 +10,11 @@ namespace ASEva.UIGtk
 
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Single value graph control
+    /// (api:gtk=3.0.0) Single value graph control
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 单值数据可视化窗口
+    /// (api:gtk=3.0.0) 单值数据可视化窗口
     /// </summary>
     public class ValueGraph : BaseGraph
     {

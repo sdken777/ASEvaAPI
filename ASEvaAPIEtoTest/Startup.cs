@@ -3,6 +3,7 @@ using System.Threading;
 using ASEva.UIEto;
 using Eto.Forms;
 using Eto.Drawing;
+using ASEva;
 
 namespace ASEvaAPIEtoTest
 {
@@ -47,7 +48,7 @@ namespace ASEvaAPIEtoTest
 
         public override void OnClosing()
         {
-            StringResult = radiosLanguage.SelectedIndex == 1 ? "ch" : "en";
+            IntResult = (int)(radiosLanguage.SelectedIndex == 1 ? Language.Chinese : Language.English);
             BoolResult = radiosRendering.SelectedIndex == 1;
         }
 

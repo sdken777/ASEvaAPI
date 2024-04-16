@@ -7,11 +7,11 @@ namespace ASEva.UIGtk
 {
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) The image object of ASEva.Samples.VideoFrameSample
+    /// (api:gtk=3.0.0) The image object of ASEva.Samples.VideoFrameSample
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) ASEva.Samples.VideoFrameSample 中的图像对象
+    /// (api:gtk=3.0.0) ASEva.Samples.VideoFrameSample 中的图像对象
     /// </summary>
     public class VideoFrameSampleImage
     {
@@ -35,11 +35,11 @@ namespace ASEva.UIGtk
 
         /// \~English
         /// <summary>
-        /// (api:gtk=2.1.0) Bind to common image object
+        /// Bind to common image object
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:gtk=2.1.0) 绑定通用图像，共享数据
+        /// 绑定通用图像，共享数据
         /// </summary>
         public static VideoFrameSampleImage FromCommonImage(CommonImage image)
         {
@@ -109,11 +109,11 @@ namespace ASEva.UIGtk
 
         /// \~English
         /// <summary>
-        /// (api:gtk=2.1.0) Whether it contains alpha channel
+        /// Whether it contains alpha channel
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:gtk=2.1.0) 是否含alpha通道
+        /// 是否含alpha通道
         /// </summary>
         public bool WithAlpha
         {
@@ -122,11 +122,11 @@ namespace ASEva.UIGtk
 
         /// \~English
         /// <summary>
-        /// (api:gtk=2.5.6) Whether it's BGR inverted (i.e. RGB or RGBA)
+        /// Whether it's BGR inverted (i.e. RGB or RGBA)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:gtk=2.5.6) BGR是否逆序 (即RGB或RGBA)
+        /// BGR是否逆序 (即RGB或RGBA)
         /// </summary>
         public bool BgrInverted
         {

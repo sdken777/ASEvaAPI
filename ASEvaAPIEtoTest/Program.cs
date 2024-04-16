@@ -1,5 +1,5 @@
 ﻿using System;
-using Eto.Forms;
+using ASEva;
 using ASEva.UIEto;
 
 namespace ASEvaAPIEtoTest
@@ -19,7 +19,7 @@ namespace ASEvaAPIEtoTest
             var startup = new Startup();
             App.RunDialog(startup);
 
-            var window = new TestWindow(startup.StringResult, startup.BoolResult);
+            var window = new TestWindow((Language)startup.IntResult, startup.BoolResult);
             App.Run(window);
         }
     }

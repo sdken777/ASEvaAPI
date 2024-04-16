@@ -5,11 +5,11 @@ namespace ASEva.UIGtk
 {
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Extension methods for tree view
+    /// (api:gtk=3.0.0) Extension methods for tree view
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 树和表视图框扩展方法
+    /// (api:gtk=3.0.0) 树和表视图框扩展方法
     /// </summary>
     public static class TreeViewExtension
     {

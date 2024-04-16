@@ -6,11 +6,11 @@ namespace ASEva.UIGtk
 {
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Used to disable widget's scroll
+    /// (api:gtk=3.0.0) Used to disable widget's scroll
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 用于禁用控件的鼠标滚动
+    /// (api:gtk=3.0.0) 用于禁用控件的鼠标滚动
     /// </summary>
     public class ScrollDisabler
     {

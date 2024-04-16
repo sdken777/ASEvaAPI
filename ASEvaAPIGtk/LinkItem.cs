@@ -9,11 +9,11 @@ namespace ASEva.UIGtk
 
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Compact link item
+    /// (api:gtk=3.0.0) Compact link item
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 带下划线的蓝色文字
+    /// (api:gtk=3.0.0) 带下划线的蓝色文字
     /// </summary>
     public class LinkItem : Box
     {

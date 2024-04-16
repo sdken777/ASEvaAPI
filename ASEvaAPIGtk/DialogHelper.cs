@@ -9,11 +9,11 @@ namespace ASEva.UIGtk
 {
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Dialog helper class
+    /// (api:gtk=3.0.0) Dialog helper class
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 对话框辅助类
+    /// (api:gtk=3.0.0) 对话框辅助类
     /// </summary>
     public class DialogHelper
     {
@@ -21,8 +21,7 @@ namespace ASEva.UIGtk
         {
             if (message == null) return;
 
-            var lang = Agency.GetAppLanguage();
-            var ch = lang != null && lang == "ch";
+            var ch = Agency.GetAppLanguage() == Language.Chinese;
 
             var msgbox = new MessageDialog(TopWindow, DialogFlags.Modal, MessageType.Info, ButtonsType.Ok, "{0:s}", message);
             msgbox.Title = ch ? "消息" : "Notice";
@@ -44,8 +43,7 @@ namespace ASEva.UIGtk
         {
             if (message == null) return;
 
-            var lang = Agency.GetAppLanguage();
-            var ch = lang != null && lang == "ch";
+            var ch = Agency.GetAppLanguage() == Language.Chinese;
 
             var msgbox = new MessageDialog(TopWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "{0:s}", message);
             msgbox.Title = ch ? "错误" : "Error";
@@ -57,8 +55,7 @@ namespace ASEva.UIGtk
         {
             if (message == null) return false;
 
-            var lang = Agency.GetAppLanguage();
-            var ch = lang != null && lang == "ch";
+            var ch = Agency.GetAppLanguage() == Language.Chinese;
             var res = false;
 
             var msgbox = new MessageDialog(TopWindow, DialogFlags.Modal, MessageType.Question, ButtonsType.YesNo, "{0:s}", message);
@@ -75,8 +72,7 @@ namespace ASEva.UIGtk
 
         public static String[] OpenFile(String title, Dictionary<String, String> filters = null, String origin = null, bool multiple = false)
         {
-            var lang = Agency.GetAppLanguage();
-            var ch = lang != null && lang == "ch";
+            var ch = Agency.GetAppLanguage() == Language.Chinese;
 
             FileChooserDialog target = new FileChooserDialog(title == null ? "" : title, TopWindow, FileChooserAction.Open, ch ? "取消" : "Cancel", ResponseType.Cancel, ch ? "打开" : "Open", ResponseType.Ok);
 
@@ -105,8 +101,7 @@ namespace ASEva.UIGtk
 
         public static String SaveFile(String title, KeyValuePair<String, String>? filter = null, String origin = null)
         {
-            var lang = Agency.GetAppLanguage();
-            var ch = lang != null && lang == "ch";
+            var ch = Agency.GetAppLanguage() == Language.Chinese;
 
             FileChooserDialog target = new FileChooserDialog(title == null ? "" : title, TopWindow, FileChooserAction.Save, ch ? "取消" : "Cancel", ResponseType.Cancel, ch ? "保存" : "Save", ResponseType.Ok);
 
@@ -151,8 +146,7 @@ namespace ASEva.UIGtk
 
         public static String OpenDir(String title, String origin = null)
         {
-            var lang = Agency.GetAppLanguage();
-            var ch = lang != null && lang == "ch";
+            var ch = Agency.GetAppLanguage() == Language.Chinese;
 
             var dialog = new FileChooserDialog(title == null ? "" : title, TopWindow, FileChooserAction.SelectFolder, ch ? "取消" : "Cancel", ResponseType.Cancel, ch ? "打开" : "Open", ResponseType.Ok);
             dialog.CreateFolders = true;
@@ -203,11 +197,11 @@ namespace ASEva.UIGtk
 
         /// \~English
         /// <summary>
-        /// (api:gtk=2.4.3) Other main windows
+        /// Other main windows
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:gtk=2.4.3) 其他主窗口
+        /// 其他主窗口
         /// </summary>
         public static Window[] OtherMainWindows { get; set; }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using ASEva;
 using ASEva.Utility;
 using ASEva.Samples;
 using ASEva.UIEto;
@@ -9,9 +10,9 @@ namespace ASEvaAPIEtoTest
 {
     partial class TestWindow : Form
     {
-        public TestWindow(String languageCode, bool onscreenRendering)
+        public TestWindow(Language language, bool onscreenRendering)
         {
-            t = TextResource.Load("test.xml", languageCode);
+            t = TextResource.Load("test.xml", language);
 
             var title = t["title"] + " (OS:" + ASEva.APIInfo.GetRunningOS() + " / UI:" + App.GetRunningUI();
             if (!String.IsNullOrEmpty(App.GetUIBackend())) title += "." + App.GetUIBackend();

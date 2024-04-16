@@ -9,11 +9,11 @@ namespace ASEva.UIGtk
 
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Event box helper class
+    /// (api:gtk=3.0.0) Event box helper class
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 事件框辅助类
+    /// (api:gtk=3.0.0) 事件框辅助类
     /// </summary>
     public class EventBoxHelper
     {
@@ -50,11 +50,11 @@ namespace ASEva.UIGtk
 
         /// \~English
         /// <summary>
-        /// (api:gtk=2.5.4) Whether the event can be received by lower controls, default is false
+        /// Whether the event can be received by lower controls, default is false
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:gtk=2.5.4) 事件是否允许下层控件接收，默认false
+        /// 事件是否允许下层控件接收，默认false
         /// </summary>
         public bool PassEvents { get; set; }
 

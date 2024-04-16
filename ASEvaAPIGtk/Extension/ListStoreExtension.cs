@@ -5,11 +5,11 @@ namespace ASEva.UIGtk
 {
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Extension methods for list store
+    /// (api:gtk=3.0.0) Extension methods for list store
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 表数据模型扩展方法
+    /// (api:gtk=3.0.0) 表数据模型扩展方法
     /// </summary>
     public static class ListStoreExtension
     {

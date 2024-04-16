@@ -5,11 +5,11 @@ namespace ASEva.UIGtk
 {
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Extension methods for list box
+    /// (api:gtk=3.0.0) Extension methods for list box
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 列表框扩展方法
+    /// (api:gtk=3.0.0) 列表框扩展方法
     /// </summary>
     public static class ListBoxExtension
     {

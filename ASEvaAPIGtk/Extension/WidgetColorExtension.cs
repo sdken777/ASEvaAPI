@@ -7,11 +7,11 @@ namespace ASEva.UIGtk
 
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Extension methods for setting control's color
+    /// (api:gtk=3.0.0) Extension methods for setting control's color
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 控件颜色设置扩展方法
+    /// (api:gtk=3.0.0) 控件颜色设置扩展方法
     /// </summary>
     public static class WidgetColorExtension
     {

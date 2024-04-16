@@ -5,11 +5,11 @@ namespace ASEva.UIGtk
 {
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Extension methods for Cairo painting
+    /// (api:gtk=3.0.0) Extension methods for Cairo painting
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) Cairo绘图工具扩展方法
+    /// (api:gtk=3.0.0) Cairo绘图工具扩展方法
     /// </summary>
     public static class CairoContextExtension
     {
