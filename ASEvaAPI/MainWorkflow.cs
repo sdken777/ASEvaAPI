@@ -366,17 +366,17 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.15.9) [Optional][OK for modal] Deprecated, implement OnRunStandaloneTask(title, taskClassID, basicCallback, detailsCallback)
+        /// (api:app=2.15.9) [Optional][OK for modal] Deprecated, implement OnRunStandaloneTask(title, taskClassID, basicCallback, detailsCallback)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.15.9) [可选实现][可含模态] 已弃用，应实现OnRunStandaloneTask(title, taskClassID, basicCallback, detailsCallback)
+        /// (api:app=2.15.9) [可选实现][可含模态] 已弃用，应实现OnRunStandaloneTask(title, taskClassID, basicCallback, detailsCallback)
         /// </summary>
         public virtual bool OnRunStandaloneTask(String title, MainWorkflowTaskCallback basicCallback, MainWorkflowTaskIODetailsCallback detailsCallback) { return false; }
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.16.2) [Optional][OK for modal] Show running standalone task
+        /// (api:app=2.16.2) [Optional][OK for modal] Show running standalone task
         /// </summary>
         /// <param name="title">Title of standalone task</param>
         /// <param name="taskClassID">The standalone task's class ID</param>
@@ -385,7 +385,7 @@ namespace ASEva
         /// <returns>Always return true, or else the legacy OnRunStandaloneTask will be called</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.16.2) [可选实现][可含模态] 显示正在进行的独立任务
+        /// (api:app=2.16.2) [可选实现][可含模态] 显示正在进行的独立任务
         /// </summary>
         /// <param name="title">独立任务标题</param>
         /// <param name="taskClassID">独立任务类别ID</param>
