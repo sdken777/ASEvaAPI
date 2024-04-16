@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 0, 0, 0); // Update log / 更新记录: 基于.NET8
+            return new Version(3, 0, 0, 1); // Update log / 更新记录: 移除废弃部分
         }
     }
 }
