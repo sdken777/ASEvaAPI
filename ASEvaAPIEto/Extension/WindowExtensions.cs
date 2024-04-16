@@ -8,11 +8,11 @@ namespace ASEva.UIEto
     
     /// \~English
     /// <summary>
-    /// (api:eto=2.0.9) Extensions for window
+    /// (api:eto=3.0.0) Extensions for window
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.0.9) 方便操作窗口的扩展
+    /// (api:eto=3.0.0) 方便操作窗口的扩展
     /// </summary>
     public static class WindowExtensions
     {

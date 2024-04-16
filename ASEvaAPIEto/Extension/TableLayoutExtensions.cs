@@ -8,11 +8,11 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.0.2) Extensions for table layout
+    /// (api:eto=3.0.0) Extensions for table layout
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.0.2) 方便操作表布局的扩展
+    /// (api:eto=3.0.0) 方便操作表布局的扩展
     /// </summary>
     public static class TableLayoutExtensions
     {
@@ -156,7 +156,7 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.0.4) Add image button
+        /// Add image button
         /// </summary>
         /// <param name="tableRow">Row object of table layout</param>
         /// <param name="image">Image</param>
@@ -167,7 +167,7 @@ namespace ASEva.UIEto
         /// <returns>Created image button object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.0.4) 添加图像按键至表布局的行
+        /// 添加图像按键至表布局的行
         /// </summary>
         /// <param name="tableRow">表布局的行</param>
         /// <param name="image">图像</param>
@@ -341,7 +341,7 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.14.3) Add combo box
+        /// Add combo box
         /// </summary>
         /// <param name="tableRow">Row object of table layout</param>
         /// <param name="texts">Text of each item (can be null)</param>
@@ -351,7 +351,7 @@ namespace ASEva.UIEto
         /// <returns>Created combo box object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.14.3) 添加组合框至表布局的行
+        /// 添加组合框至表布局的行
         /// </summary>
         /// <param name="tableRow">表布局的行</param>
         /// <param name="texts">组合框各选项的文字，可为空</param>

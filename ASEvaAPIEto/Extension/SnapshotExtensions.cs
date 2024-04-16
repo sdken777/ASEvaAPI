@@ -9,11 +9,11 @@ namespace ASEva.UIEto
     
     /// \~English
     /// <summary>
-    /// (api:eto=2.10.3) Extensions for querying control's snapshot
+    /// (api:eto=3.0.0) Extensions for querying control's snapshot
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.10.3) 获取控件快照的扩展
+    /// (api:eto=3.0.0) 获取控件快照的扩展
     /// </summary>
     public static class SnapshotExtensions
     {
@@ -37,13 +37,13 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.11.6) Query snapshot by downloading data from screen buffer
+        /// Query snapshot by downloading data from screen buffer
         /// </summary>
         /// <param name="control">Target control object</param>
         /// <returns>Queried snapshot, return null if unsupported or query failed</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.11.6) 获取控件快照（从屏幕缓存下载方式）
+        /// 获取控件快照（从屏幕缓存下载方式）
         /// </summary>
         /// <param name="control">目标控件</param>
         /// <returns>控件快照图像，若不支持或获取失败则返回null</returns>

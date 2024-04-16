@@ -9,23 +9,23 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.0.3) Extensions for creating context menu
+    /// (api:eto=3.0.0) Extensions for creating context menu
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.0.3) 方便操作右键菜单的扩展
+    /// (api:eto=3.0.0) 方便操作右键菜单的扩展
     /// </summary>
     public static class ContextMenuExtensions
     {
         /// \~English
         /// <summary>
-        /// (api:eto=2.0.8) Create a new context menu for the panel
+        /// Create a new context menu for the panel
         /// </summary>
         /// <param name="panel">Target panel</param>
         /// <returns>Context menu object, null if it already exists</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.0.8) 设置面板右键菜单
+        /// 设置面板右键菜单
         /// </summary>
         /// <param name="panel">面板</param>
         /// <returns>右键菜单对象，若已存在则返回null</returns>
@@ -65,7 +65,7 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.0.4) Add button item
+        /// Add button item
         /// </summary>
         /// <param name="menu">Context menu</param>
         /// <param name="text">Item text</param>
@@ -73,7 +73,7 @@ namespace ASEva.UIEto
         /// <returns>Created button item object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.0.4) 添加按键项
+        /// 添加按键项
         /// </summary>
         /// <param name="menu">右键菜单</param>
         /// <param name="text">菜单项文字</param>
@@ -142,12 +142,12 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.8.10) Add separator item in sub menu
+        /// Add separator item in sub menu
         /// </summary>
         /// <param name="subMenu">Sub menu</param>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.8.10) 在子菜单中添加分割线
+        /// 在子菜单中添加分割线
         /// </summary>
         /// <param name="subMenu">子菜单</param>
         public static void AddSeparator(this ButtonMenuItem subMenu)
@@ -157,7 +157,7 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.8.10) Add button item in sub menu
+        /// Add button item in sub menu
         /// </summary>
         /// <param name="subMenu">Sub menu</param>
         /// <param name="text">Item text</param>
@@ -165,7 +165,7 @@ namespace ASEva.UIEto
         /// <returns>Button item object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.8.10) 在子菜单中添加按键项
+        /// 在子菜单中添加按键项
         /// </summary>
         /// <param name="subMenu">子菜单</param>
         /// <param name="text">菜单项文字</param>
@@ -182,14 +182,14 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.8.10) Add check box item in sub menu
+        /// Add check box item in sub menu
         /// </summary>
         /// <param name="subMenu">Sub menu</param>
         /// <param name="text">Item text</param>
         /// <returns>Check box item object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.8.10) 在子菜单中添加多选项
+        /// 在子菜单中添加多选项
         /// </summary>
         /// <param name="subMenu">子菜单</param>
         /// <param name="text">菜单项文字</param>
@@ -204,14 +204,14 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.8.10) Add radio box items in sub menu
+        /// Add radio box items in sub menu
         /// </summary>
         /// <param name="subMenu">Sub menu</param>
         /// <param name="texts">Text of each item</param>
         /// <returns>A group of radio box item objects</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.8.10) 在子菜单中添加一组单选项
+        /// 在子菜单中添加一组单选项
         /// </summary>
         /// <param name="subMenu">子菜单</param>
         /// <param name="texts">各菜单项文字</param>

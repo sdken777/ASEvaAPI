@@ -9,11 +9,11 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.13.5) Extensions for make window full screen
+    /// (api:eto=3.0.0) Extensions for make window full screen
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.13.5) 全屏化窗口的扩展
+    /// (api:eto=3.0.0) 全屏化窗口的扩展
     /// </summary>
     public static class FullScreenExtensions
     {

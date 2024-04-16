@@ -10,11 +10,11 @@ namespace ASEva.UIEto
 	
 	/// \~English
 	/// <summary>
-	/// (api:eto=2.6.0) Anchor position of a text
+	/// (api:eto=3.0.0) Anchor position of a text
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=2.6.0) 文本锚点坐标位置类型
+	/// (api:eto=3.0.0) 文本锚点坐标位置类型
 	/// </summary>
     public enum TextAnchor
     {
@@ -111,11 +111,11 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=2.6.0) OpenGL text drawing task
+	/// (api:eto=3.0.0) OpenGL text drawing task
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=2.6.0) OpenGL文本绘制任务
+	/// (api:eto=3.0.0) OpenGL文本绘制任务
 	/// </summary>
     public struct GLTextTask
     {
@@ -232,11 +232,11 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=2.6.0) OpenGL text drawing task list
+	/// (api:eto=3.0.0) OpenGL text drawing task list
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=2.6.0) OpenGL文本绘制任务对象
+	/// (api:eto=3.0.0) OpenGL文本绘制任务对象
 	/// </summary>
     public class GLTextTasks
     {
@@ -291,11 +291,11 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=2.6.0) OpenGL rendering size info
+	/// (api:eto=3.0.0) OpenGL rendering size info
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=2.6.0) OpenGL绘制尺寸信息
+	/// (api:eto=3.0.0) OpenGL绘制尺寸信息
 	/// </summary>
     public class GLSizeInfo
     {
@@ -361,11 +361,11 @@ namespace ASEva.UIEto
 
 		/// \~English
 		/// <summary>
-		/// (api:eto=2.8.8) Whether the coordinate system is inverted
+		/// Whether the coordinate system is inverted
 		/// </summary>
 		/// \~Chinese
 		/// <summary>
-		/// (api:eto=2.8.8) 图像坐标系垂直方向是否反转
+		/// 图像坐标系垂直方向是否反转
 		/// </summary>
 		public bool VerticalInverted { get; private set; }
 
@@ -390,11 +390,11 @@ namespace ASEva.UIEto
 
 		/// \~English
 		/// <summary>
-		/// (api:eto=2.8.8) Constructor
+		/// Constructor
 		/// </summary>
 		/// \~Chinese
 		/// <summary>
-		/// (api:eto=2.8.8) 构造函数
+		/// 构造函数
 		/// </summary>
 		public GLSizeInfo(int logicalWidth, int logicalHeight, int realWidth, int realHeight, double realPixelScale, float aspectRatio, bool verticalInverted)
         {
@@ -410,11 +410,11 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=2.6.0) GLView event argument base class
+	/// (api:eto=3.0.0) GLView event argument base class
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=2.6.0) GLView事件参数基类
+	/// (api:eto=3.0.0) GLView事件参数基类
 	/// </summary>
 	public class GLEventArgs : EventArgs
 	{
@@ -436,11 +436,11 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=2.6.0) GLView resize event argument
+	/// (api:eto=3.0.0) GLView resize event argument
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=2.6.0) GLView缩放事件参数
+	/// (api:eto=3.0.0) GLView缩放事件参数
 	/// </summary>
 	public class GLResizeEventArgs : GLEventArgs
 	{
@@ -462,11 +462,11 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=2.6.0) GLView render event argument
+	/// (api:eto=3.0.0) GLView render event argument
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=2.6.0) GLView渲染事件参数
+	/// (api:eto=3.0.0) GLView渲染事件参数
 	/// </summary>
 	public class GLRenderEventArgs : GLEventArgs
 	{
@@ -488,11 +488,11 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=2.6.1) OpenGL context info
+	/// (api:eto=3.0.0) OpenGL context info
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=2.6.1) OpenGL上下文信息
+	/// (api:eto=3.0.0) OpenGL上下文信息
 	/// </summary>
 	public struct GLContextInfo
 	{
@@ -538,11 +538,11 @@ namespace ASEva.UIEto
 
 		/// \~English
 		/// <summary>
-		/// (api:eto=2.8.5) Convert to a list of extension strings
+		/// Convert to a list of extension strings
 		/// </summary>
 		/// \~Chinese
 		/// <summary>
-		/// (api:eto=2.8.5) 转换为扩展字符串的列表
+		/// 转换为扩展字符串的列表
 		/// </summary>
 		public List<String> ToExtensionList()
 		{
@@ -561,11 +561,11 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=2.9.4) Antialias option
+	/// (api:eto=3.0.0) Antialias option
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=2.9.4) 抗锯齿选项
+	/// (api:eto=3.0.0) 抗锯齿选项
 	/// </summary>
 	public enum GLAntialias
 	{
@@ -622,11 +622,11 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=2.6.0) OpenGL view
+	/// (api:eto=3.0.0) OpenGL view
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=2.6.0) OpenGL绘制视图
+	/// (api:eto=3.0.0) OpenGL绘制视图
 	/// </summary>
 	public class GLView : Panel, GLCallback
 	{
@@ -681,12 +681,12 @@ namespace ASEva.UIEto
 
 		/// \~English
 		/// <summary>
-		/// (api:eto=2.8.3) Constructor
+		/// Constructor
 		/// </summary>
 		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
 		/// \~Chinese
 		/// <summary>
-		/// (api:eto=2.8.3) 构造函数
+		/// 构造函数
 		/// </summary>
 		/// <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈</param>
 		public GLView(String moduleID)
@@ -702,7 +702,7 @@ namespace ASEva.UIEto
 
 		/// \~English
 		/// <summary>
-		/// (api:eto=2.8.7) Constructor
+		/// Constructor
 		/// </summary>
 		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
 		/// <param name="requestOnscreenRendering">Whether to request onscreen rendering (Use offscreen if unsupported), default is false</param>
@@ -710,7 +710,7 @@ namespace ASEva.UIEto
 		/// <param name="useLegacyAPI">Whether to use OpenGL legacy API, default is true</param>
 		/// \~Chinese
 		/// <summary>
-		/// (api:eto=2.8.7) 构造函数
+		/// 构造函数
 		/// </summary>
 		/// <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
 		/// <param name="requestOnscreenRendering">是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
@@ -729,7 +729,7 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.9.4) Constructor
+        /// Constructor
         /// </summary>
         /// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
         /// <param name="requestAntialias">Antialias option (Use the nearest option if not supported), default is 4x sampling</param>
@@ -739,7 +739,7 @@ namespace ASEva.UIEto
         /// <param name="useLegacyAPI">Whether to use OpenGL legacy API, default is true</param>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.9.4) 构造函数
+        /// 构造函数
         /// </summary>
         /// <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
         /// <param name="requestAntialias">请求抗锯齿选项(若不满足条件则使用最接近的选项)，默认为4倍抗锯齿</param>
@@ -794,21 +794,21 @@ namespace ASEva.UIEto
 
 		/// \~English
 		/// <summary>
-		/// (api:eto=2.6.1) Context info (null if not initialized yet)
+		/// Context info (null if not initialized yet)
 		/// </summary>
 		/// \~Chinese
 		/// <summary>
-		/// (api:eto=2.6.1) 上下文信息 (null表示还未初始化完成)
+		/// 上下文信息 (null表示还未初始化完成)
 		/// </summary>
 		public GLContextInfo? ContextInfo { get; private set; }
 
 		/// \~English
 		/// <summary>
-		/// (api:eto=2.6.1) Frame rate (for the latest 3 seconds)
+		/// Frame rate (for the latest 3 seconds)
 		/// </summary>
 		/// \~Chinese
 		/// <summary>
-		/// (api:eto=2.6.1) 渲染帧率（统计最近3秒）
+		/// 渲染帧率（统计最近3秒）
 		/// </summary>
 		public float FPS
 		{
@@ -825,11 +825,11 @@ namespace ASEva.UIEto
 
 		/// \~English
 		/// <summary>
-		/// (api:eto=2.8.7) Whether overlay is supported
+		/// Whether overlay is supported
 		/// </summary>
 		/// \~Chinese
 		/// <summary>
-		/// (api:eto=2.8.7) 是否支持被其他控件覆盖
+		/// 是否支持被其他控件覆盖
 		/// </summary>
 		public bool SupportOverlay
 		{

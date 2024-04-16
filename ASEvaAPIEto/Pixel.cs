@@ -6,11 +6,11 @@ namespace ASEva.UIEto
 {
     /// \~English
     /// <summary>
-    /// (api:eto=2.4.0) Conversion of pixel units
+    /// (api:eto=3.0.0) Conversion of pixel units
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.4.0) 像素单位转换
+    /// (api:eto=3.0.0) 像素单位转换
     /// </summary>
     public class Pixel
     {
@@ -120,11 +120,11 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.9.7) Whether logical unit is 1:1 to the physical pixel
+        /// Whether logical unit is 1:1 to the physical pixel
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.9.7) 逻辑像素与物理像素是否为1:1
+        /// 逻辑像素与物理像素是否为1:1
         /// </summary>
         public static bool RealConsistency
         {

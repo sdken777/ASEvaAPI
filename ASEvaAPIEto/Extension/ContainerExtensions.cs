@@ -8,11 +8,11 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.8.4) Extensions for container object
+    /// (api:eto=3.0.0) Extensions for container object
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.8.4) 方便操作控件容器的扩展
+    /// (api:eto=3.0.0) 方便操作控件容器的扩展
     /// </summary>
     public static class ContainerExtensions
     {

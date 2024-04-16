@@ -10,11 +10,11 @@ namespace ASEva.UIEto
     
     /// \~English
     /// <summary>
-    /// (api:eto=2.13.1) Plain text table control
+    /// (api:eto=3.0.0) Plain text table control
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.13.1) 纯文字的表格控件
+    /// (api:eto=3.0.0) 纯文字的表格控件
     /// </summary>
     public class TextTableView : Panel, TextTableViewCallback
     {
@@ -80,11 +80,11 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.13.2) Get the selected row's index, -1 means not selected
+        /// Get the selected row's index, -1 means not selected
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.13.2) 获取当前选中行的序号，-1表示未选中
+        /// 获取当前选中行的序号，-1表示未选中
         /// </summary>
         public int SelectedRow
         {
@@ -308,11 +308,11 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.13.2) Occurs when the selected row is changed
+        /// Occurs when the selected row is changed
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.13.2) 选中行变更事件
+        /// 选中行变更事件
         /// </summary>
         public event EventHandler<EventArgs> SelectedRowsChanged;
 
@@ -323,11 +323,11 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.13.2) Occurs after a cell has been edited
+        /// Occurs after a cell has been edited
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.13.2) 文本框编辑事件
+        /// 文本框编辑事件
         /// </summary>
         public event EventHandler<GridViewCellEventArgs> CellEdited;
 

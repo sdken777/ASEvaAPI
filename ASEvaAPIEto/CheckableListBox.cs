@@ -10,11 +10,11 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.13.1) List box of checkboxes
+    /// (api:eto=3.0.0) List box of checkboxes
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.13.1) 多选框组
+    /// (api:eto=3.0.0) 多选框组
     /// </summary>
     public class CheckableListBox : Panel, CheckableListBoxCallback
     {
@@ -67,11 +67,11 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.13.2) Get the selected row's index, -1 means not selected
+        /// Get the selected row's index, -1 means not selected
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.13.2) 获取当前选中行的序号，-1表示未选中
+        /// 获取当前选中行的序号，-1表示未选中
         /// </summary>
         public int SelectedRow
         {

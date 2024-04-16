@@ -14,11 +14,11 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=2.7.0) Skia view render event argument
+	/// (api:eto=3.0.0) Skia view render event argument
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=2.7.0) SkiaView渲染事件参数
+	/// (api:eto=3.0.0) SkiaView渲染事件参数
 	/// </summary>
     public class SkiaRenderEventArgs : EventArgs
     {
@@ -51,11 +51,11 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=2.7.0) Skia view
+	/// (api:eto=3.0.0) Skia view
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=2.7.0) Skia绘制视图
+	/// (api:eto=3.0.0) Skia绘制视图
 	/// </summary>
 	public class SkiaView : Panel, GLCallback
 	{
@@ -88,12 +88,12 @@ namespace ASEva.UIEto
 
 		/// \~English
 		/// <summary>
-		/// (api:eto=2.8.2) Constructor
+		/// Constructor
 		/// </summary>
 		/// <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
 		/// \~Chinese
 		/// <summary>
-		/// (api:eto=2.8.2) 构造函数
+		/// 构造函数
 		/// </summary>
 		/// <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
 		public SkiaView(bool disableGLRendering)
@@ -107,13 +107,13 @@ namespace ASEva.UIEto
 
 		/// \~English
 		/// <summary>
-		/// (api:eto=2.8.3) Constructor
+		/// Constructor
 		/// </summary>
 		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
 		/// <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
 		/// \~Chinese
 		/// <summary>
-		/// (api:eto=2.8.3) 构造函数
+		/// 构造函数
 		/// </summary>
 		/// <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈</param>
 		/// <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
@@ -128,14 +128,14 @@ namespace ASEva.UIEto
 
 		/// \~English
 		/// <summary>
-		/// (api:eto=2.8.7) Constructor
+		/// Constructor
 		/// </summary>
 		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
 		/// <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
 		/// <param name="requestOnscreenRendering">Whether to request onscreen rendering when OpenGL rendering is not disabled (offscreen rendering is still used if unsupported), the default is false</param>
 		/// \~Chinese
 		/// <summary>
-		/// (api:eto=2.8.7) 构造函数
+		/// 构造函数
 		/// </summary>
 		/// <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
 		/// <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
@@ -151,7 +151,7 @@ namespace ASEva.UIEto
 
 		/// \~English
 		/// <summary>
-		/// (api:eto=2.9.4) Constructor
+		/// Constructor
 		/// </summary>
 		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
 		/// <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
@@ -159,7 +159,7 @@ namespace ASEva.UIEto
 		/// <param name="requestOverlay">Whether to request support of overlay (SupportOverlay will be false if unsupported), default is true</param>
 		/// \~Chinese
 		/// <summary>
-		/// (api:eto=2.9.4) 构造函数
+		/// 构造函数
 		/// </summary>
 		/// <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
 		/// <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
@@ -270,11 +270,11 @@ namespace ASEva.UIEto
 
 		/// \~English
 		/// <summary>
-		/// (api:eto=2.8.7)  Whether overlay is supported
+		///  Whether overlay is supported
 		/// </summary>
 		/// \~Chinese
 		/// <summary>
-		/// (api:eto=2.8.7) 是否支持被其他控件覆盖
+		/// 是否支持被其他控件覆盖
 		/// </summary>
 		public bool SupportOverlay
 		{

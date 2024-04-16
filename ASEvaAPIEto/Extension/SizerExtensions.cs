@@ -8,11 +8,11 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.0.0) Extensions for conversion between logical size and pixel size
+    /// (api:eto=3.0.0) Extensions for conversion between logical size and pixel size
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.0.0) 提供逻辑尺寸与实际像素值转换的扩展
+    /// (api:eto=3.0.0) 提供逻辑尺寸与实际像素值转换的扩展
     /// </summary>
     public static class SizerExtensions
     {
@@ -69,13 +69,13 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.3.5) Get control's logical width
+        /// Get control's logical width
         /// </summary>
         /// <param name="control">Control object</param>
         /// <returns>Logical width</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.3.5) 获取控件逻辑宽度
+        /// 获取控件逻辑宽度
         /// </summary>
         /// <param name="control">控件</param>
         /// <returns>逻辑宽度</returns>
@@ -88,13 +88,13 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.3.5) Get control's logical height
+        /// Get control's logical height
         /// </summary>
         /// <param name="control">Control object</param>
         /// <returns>Logical height</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.3.5) 获取控件逻辑高度
+        /// 获取控件逻辑高度
         /// </summary>
         /// <param name="control">控件</param>
         /// <returns>逻辑高度</returns>
@@ -107,13 +107,13 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.5.1) Get control's logical size
+        /// Get control's logical size
         /// </summary>
         /// <param name="control">Control object</param>
         /// <returns>Logical size</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.5.1) 获取控件逻辑尺寸
+        /// 获取控件逻辑尺寸
         /// </summary>
         /// <param name="control">控件</param>
         /// <returns>逻辑尺寸</returns>
@@ -197,13 +197,13 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.5.1) Get mouse's logical position in the MouseEventArgs object
+        /// Get mouse's logical position in the MouseEventArgs object
         /// </summary>
         /// <param name="args">MouseEventArgs object</param>
         /// <returns>Mouse's logical position</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.5.1) 获取鼠标事件中鼠标位置的逻辑坐标
+        /// 获取鼠标事件中鼠标位置的逻辑坐标
         /// </summary>
         /// <param name="args">鼠标事件</param>
         /// <returns>鼠标位置的逻辑坐标</returns>
@@ -216,13 +216,13 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.6.2) Get mouse's logical position to the control's origin
+        /// Get mouse's logical position to the control's origin
         /// </summary>
         /// <param name="control">Control object</param>
         /// <returns>Mouse's logical position to the control's origin</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.6.2) 获取鼠标相对于当前控件的逻辑坐标
+        /// 获取鼠标相对于当前控件的逻辑坐标
         /// </summary>
         /// <param name="control">控件</param>
         /// <returns>鼠标相对于当前控件的逻辑坐标</returns>

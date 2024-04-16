@@ -9,11 +9,11 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.10.0) Simple tree view
+    /// (api:eto=3.0.0) Simple tree view
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.10.0) 简易树状视图
+    /// (api:eto=3.0.0) 简易树状视图
     /// </summary>
     public class SimpleTreeView : Panel, SimpleTreeViewCallback
     {
@@ -81,12 +81,12 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.10.1) Select the item with the key object
+        /// Select the item with the key object
         /// </summary>
         /// <param name="key">Key object</param>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.10.1) 选中键对象对应的条目
+        /// 选中键对象对应的条目
         /// </summary>
         /// <param name="key">键对象</param>
         public void SelectItem(object key)
@@ -131,11 +131,11 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.10.0) Node of simple tree view
+    /// (api:eto=3.0.0) Node of simple tree view
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.10.0) 简易树状视图的内容节点
+    /// (api:eto=3.0.0) 简易树状视图的内容节点
     /// </summary>
     public class SimpleTreeNode
     {
@@ -204,11 +204,11 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.10.0) Task of updating node content
+    /// (api:eto=3.0.0) Task of updating node content
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.10.0) 更新简易树状视图内容节点的任务
+    /// (api:eto=3.0.0) 更新简易树状视图内容节点的任务
     /// </summary>
     public class SimpleTreeNodeUpdateTask
     {
