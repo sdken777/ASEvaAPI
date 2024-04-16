@@ -113,7 +113,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Called while getting all definitions of device components
+        /// (api:app=2.8.0) [Optional] Called while getting all definitions of device components
         /// </summary>
         /// <returns>All definitions of device components</returns>
         /// \~Chinese
