@@ -10,11 +10,11 @@ namespace ASEva.UICoreWF
 
     /// \~English
     /// <summary>
-    /// (api:corewf=2.0.0) Base class of graph control
+    /// (api:corewf=3.0.0) Base class of graph control
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:corewf=2.0.0) 图表显示控件基类
+    /// (api:corewf=3.0.0) 图表显示控件基类
     /// </summary>
     public partial class BaseGraph : UserControl, GraphPanel
     {

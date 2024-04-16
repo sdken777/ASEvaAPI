@@ -1,0 +1,856 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ASEvaAPICoreWF</name>
+    </assembly>
+    <members>
+        <member name="T:ASEva.UICoreWF.APIInfo">
+            <summary>
+            version=3.0.0
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.APIInfo.GetAPIVersion">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Get API version
+            </summary>
+            <returns>The API version</returns>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 获取API版本
+            </summary>
+            <returns>API版本</returns>
+        </member>
+        <member name="F:ASEva.UICoreWF.AppDialogCoreWF.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.AppDialogCoreWF.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.AppDialogCoreWF.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.BaseGraph">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Base class of graph control
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 图表显示控件基类
+            </summary>
+        </member>
+        <member name="P:ASEva.UICoreWF.BaseGraph.Data">
+            \~English
+            <summary>
+            Graph data
+            </summary>
+            \~Chinese
+            <summary>
+            图表数据
+            </summary>
+        </member>
+        <member name="E:ASEva.UICoreWF.BaseGraph.GraphSelected">
+            \~English
+            <summary>
+            Event of graph selecting
+            </summary>
+            \~Chinese
+            <summary>
+            图表控件被选择事件
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.BaseGraph.SetSize(System.Int32)">
+            \~English
+            <summary>
+            Set control's scale
+            </summary>
+            <param name="scale">Control's scale, which ranges 1~8</param>
+            \~Chinese
+            <summary>
+            设置图表控件大小
+            </summary>
+            <param name="scale">控件大小，1为最小，8为最大</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.BaseGraph.CreateGraphControl(ASEva.GraphDefinition,System.Int32)">
+            \~English
+            <summary>
+            Create graph control
+            </summary>
+            <param name="definition">Graph definition</param>
+            <param name="scale">Scale, which ranges 1~8</param>
+            <returns>Created graph control</returns>
+            \~Chinese
+            <summary>
+            创建图表控件
+            </summary>
+            <param name="definition">图表定义</param>
+            <param name="scale">控件大小，1为最小，8为最大</param>
+            <returns>新创建的图表控件</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.BaseGraph.RegisterGraphControl(System.Int32,System.Type)">
+            \~English
+            <summary>
+            Register to use the specified type of control for graph data visualization
+            </summary>
+            <param name="graphDefinitionID">Graph definition ID</param>
+            <param name="controlType">Control type, which should be derived class of ASEva.UICoreWF.BaseGraph </param>
+            \~Chinese
+            <summary>
+            注册指定ID的图表使用自定义可视化控件
+            </summary>
+            <param name="graphDefinitionID">图表定义ID</param>
+            <param name="controlType">控件类型，必须为 ASEva.UICoreWF.BaseGraph 的子类</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.BaseGraph.IsHeightFixed">
+            \~English
+            <summary>
+            Whether control's height is fixed
+            </summary>
+            <returns>Whether control's height is fixed</returns>
+            \~Chinese
+            <summary>
+            控件高度是否固定
+            </summary>
+            <returns>控件高度是否固定</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.BaseGraph.UpdateUIWithData">
+            \~English
+            <summary>
+            Update UI
+            </summary>
+            \~Chinese
+            <summary>
+            控件显示更新
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.BaseGraph.HandleGraphSelected">
+            \~English
+            <summary>
+            Select the control
+            </summary>
+            \~Chinese
+            <summary>
+            选择图表控件
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.ChannelSelector">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Channel selector
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 通道选择器
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.ChannelSelector.SetChannelAvailables(System.Boolean[])">
+            \~English
+            <summary>
+            Set whether the data of each channel is available
+            </summary>
+            \~Chinese
+            <summary>
+            设置各通道数据是否有效
+            </summary>
+        </member>
+        <member name="P:ASEva.UICoreWF.ChannelSelector.ChannelCount">
+            \~English
+            <summary>
+            Number of channels
+            </summary>
+            \~Chinese
+            <summary>
+            通道数量
+            </summary>
+        </member>
+        <member name="P:ASEva.UICoreWF.ChannelSelector.TargetChannel">
+            \~English
+            <summary>
+            The selected channel
+            </summary>
+            \~Chinese
+            <summary>
+            选中通道
+            </summary>
+        </member>
+        <member name="P:ASEva.UICoreWF.ChannelSelector.ChannelProtocol">
+            \~English
+            <summary>
+            Channel protocol, without '@x' 
+            </summary>
+            \~Chinese
+            <summary>
+            通道协议，不需要加'@x' 
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.CircleIndicator">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Circle indicator
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 圆形指示器
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.ColorConv">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Color type conversion
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 颜色类型转换
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.ComboSelector">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) A channel selector based on combo box, which can display channel alias and whether the channel is available
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 基于组合框的通道选择器，集成输入通道别名和有效性显示
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.ConfigPanel">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) UI panel for configuration
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 配置界面控件，用于实现可视化配置
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.ConfigPanel.OnInitSize(System.String)">
+            \~English
+            <summary>
+            [Optional] Called while initializing panel's size
+            </summary>
+            <param name="config">Configuration string</param>
+            \~Chinese
+            <summary>
+            [可选实现] 在初始化控件尺寸时被调用
+            </summary>
+            <param name="config">配置字符串</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.ConfigPanel.OnInit(System.String)">
+            \~English
+            <summary>
+            [Optional] Called while initializing the panel
+            </summary>
+            <param name="config">Configuration string</param>
+            \~Chinese
+            <summary>
+            [可选实现] 在配置界面控件初始化时被调用
+            </summary>
+            <param name="config">配置字符串</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.ConfigPanel.OnRelease">
+            \~English
+            <summary>
+            [Optional] Called before destroying the panel
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 在配置界面控件销毁前被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.ConfigPanel.OnUpdateUI">
+            \~English
+            <summary>
+            [Optional] Called while updating the panel's UI
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 在需要更新界面时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.ConfigPanel.OnHandleModal">
+            \~English
+            <summary>
+            [Optional] Called in the main loop, for running modal dialog
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 在主循环中被调用，可进行模态对话
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.ConfigPanel.Close">
+            \~English
+            <summary>
+            Close the container holding the panel
+            </summary>
+            \~Chinese
+            <summary>
+            关闭配置界面
+            </summary>
+        </member>
+        <member name="E:ASEva.UICoreWF.ConfigPanel.CloseRequested">
+            \~English
+            <summary>
+            Implement closing the panel container in this event
+            </summary>
+            \~Chinese
+            <summary>
+            在此事件中实现配置界面的关闭
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.DeviceCoordView">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) A control to visualize sensor's coordinate system and position
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 传感器坐标系及位置等的可视化控件
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.DoubleBufferListView">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Double buffered ListView
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 双缓存ListView
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.WinformIconExtensions">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Extension for icon object generation
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 方便生成图标的扩展
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.FlowPanelManager">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Wrapper of FlowLayoutPanel
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) FlowLayoutPanel封装
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.FlowPanelResizer">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Auto resize child controls of FlowLayoutPanel
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) FlowLayoutPanel子控件宽度自适应
+            </summary>
+        </member>
+        <member name="F:ASEva.UICoreWF.OpenGLControl.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.OpenGLControl.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.OpenGLControl.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:ASEva.UICoreWF.OpenGLOnscreenControl.components">
+            <summary> 
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.OpenGLOnscreenControl.Dispose(System.Boolean)">
+            <summary> 
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.OpenGLOnscreenControl.InitializeComponent">
+            <summary> 
+            Required method for Designer support - do not modify 
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.#ctor">
+            <summary>
+            Creates an empty instance of DataObject.
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.Finalize">
+            <summary>
+            Releases unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.ClearStorage">
+            <summary>
+            Clears the internal storage array.
+            </summary>
+            <remarks>
+            ClearStorage is called by the IDisposable.Dispose method implementation
+            to make sure all unmanaged references are released properly.
+            </remarks>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.Dispose">
+            <summary>
+            Releases resources.
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.Dispose(System.Boolean)">
+            <summary>
+            Releases resources.
+            </summary>
+            <param name="disposing">Indicates if the call was made by a managed caller, or the garbage collector.
+            True indicates that someone called the Dispose method directly. False indicates that the garbage collector
+            is finalizing the release of the object instance.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.DAdvise(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.ADVF,System.Runtime.InteropServices.ComTypes.IAdviseSink,System.Int32@)">
+            <summary>
+            Adds an advisory connection for the specified format.
+            </summary>
+            <param name="pFormatetc">The format for which this sink is called for changes.</param>
+            <param name="advf">Advisory flags to specify callback behavior.</param>
+            <param name="adviseSink">The IAdviseSink to call for this connection.</param>
+            <param name="connection">Returns the new connection's ID.</param>
+            <returns>An HRESULT.</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.DUnadvise(System.Int32)">
+            <summary>
+            Removes an advisory connection.
+            </summary>
+            <param name="connection">The connection id to remove.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.EnumFormatEtc(System.Runtime.InteropServices.ComTypes.DATADIR)">
+            <summary>
+            Gets an enumerator for the formats contained in this DataObject.
+            </summary>
+            <param name="direction">The direction of the data.</param>
+            <returns>An instance of the IEnumFORMATETC interface.</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.GetData(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@)">
+            <summary>
+            Gets the specified data.
+            </summary>
+            <param name="format">The requested data format.</param>
+            <param name="medium">When the function returns, contains the requested data.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.GetDataHere(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@)">
+            <summary>
+            Gets the specified data.
+            </summary>
+            <param name="format">The requested data format.</param>
+            <param name="medium">When the function returns, contains the requested data.</param>
+            <remarks>Differs from GetData only in that the STGMEDIUM storage is
+            allocated and owned by the caller.</remarks>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.QueryGetData(System.Runtime.InteropServices.ComTypes.FORMATETC@)">
+            <summary>
+            Determines if data of the requested format is present.
+            </summary>
+            <param name="format">The request data format.</param>
+            <returns>Returns the status of the request. If the data is present, S_OK is returned.
+            If the data is not present, an error code with the best guess as to the reason is returned.</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.SetData(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@,System.Boolean)">
+            <summary>
+            Sets data in the specified format into storage.
+            </summary>
+            <param name="formatIn">The format of the data.</param>
+            <param name="medium">The data.</param>
+            <param name="release">If true, ownership of the medium's memory will be transferred
+            to this object. If false, a copy of the medium will be created and maintained, and
+            the caller is responsible for the memory of the medium it provided.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.CopyMedium(System.Runtime.InteropServices.ComTypes.STGMEDIUM@)">
+            <summary>
+            Creates a copy of the STGMEDIUM structure.
+            </summary>
+            <param name="medium">The data to copy.</param>
+            <returns>The copied data.</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.GetDataEntry(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Collections.Generic.KeyValuePair{System.Runtime.InteropServices.ComTypes.FORMATETC,System.Runtime.InteropServices.ComTypes.STGMEDIUM}@)">
+            <summary>
+            Gets a data entry by the specified format.
+            </summary>
+            <param name="pFormatetc">The format to locate the data entry for.</param>
+            <param name="dataEntry">The located data entry.</param>
+            <returns>True if the data entry was found, otherwise False.</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.RaiseDataChanged(System.Int32,System.Collections.Generic.KeyValuePair{System.Runtime.InteropServices.ComTypes.FORMATETC,System.Runtime.InteropServices.ComTypes.STGMEDIUM}@)">
+            <summary>
+            Raises the DataChanged event for the specified connection.
+            </summary>
+            <param name="connection">The connection id.</param>
+            <param name="dataEntry">The data entry for which to raise the event.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.RaiseDataChanged(System.Collections.Generic.KeyValuePair{System.Runtime.InteropServices.ComTypes.FORMATETC,System.Runtime.InteropServices.ComTypes.STGMEDIUM}@)">
+            <summary>
+            Raises the DataChanged event for any advisory connections that
+            are listening for it.
+            </summary>
+            <param name="dataEntry">The relevant data entry.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.IsFormatCompatible(System.Runtime.InteropServices.ComTypes.FORMATETC,System.Runtime.InteropServices.ComTypes.FORMATETC)">
+            <summary>
+            Determines if the formats are compatible.
+            </summary>
+            <param name="format1">A FORMATETC.</param>
+            <param name="format2">A FORMATETC.</param>
+            <returns>True if the formats are compatible, otherwise False.</returns>
+            <remarks>Compatible formats have the same DVASPECT, same format ID, and share
+            at least one TYMED.</remarks>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.IsFormatCompatible(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.FORMATETC@)">
+            <summary>
+            Determines if the formats are compatible.
+            </summary>
+            <param name="format1">A FORMATETC.</param>
+            <param name="format2">A FORMATETC.</param>
+            <returns>True if the formats are compatible, otherwise False.</returns>
+            <remarks>Compatible formats have the same DVASPECT, same format ID, and share
+            at least one TYMED.</remarks>
+        </member>
+        <member name="T:ASEva.UICoreWF.DragDropLib.DataObject.EnumFORMATETC">
+            <summary>
+            Helps enumerate the formats available in our DataObject class.
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.EnumFORMATETC.#ctor(System.Collections.Generic.IList{System.Collections.Generic.KeyValuePair{System.Runtime.InteropServices.ComTypes.FORMATETC,System.Runtime.InteropServices.ComTypes.STGMEDIUM}})">
+            <summary>
+            Creates an instance from a list of key value pairs.
+            </summary>
+            <param name="storage">List of FORMATETC/STGMEDIUM key value pairs</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.EnumFORMATETC.#ctor(System.Runtime.InteropServices.ComTypes.FORMATETC[])">
+            <summary>
+            Creates an instance from an array of FORMATETC's.
+            </summary>
+            <param name="formats">Array of formats to enumerate.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.EnumFORMATETC.Clone(System.Runtime.InteropServices.ComTypes.IEnumFORMATETC@)">
+            <summary>
+            Creates a clone of this enumerator.
+            </summary>
+            <param name="newEnum">When this function returns, contains a new instance of IEnumFORMATETC.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.EnumFORMATETC.Next(System.Int32,System.Runtime.InteropServices.ComTypes.FORMATETC[],System.Int32[])">
+            <summary>
+            Retrieves the next elements from the enumeration.
+            </summary>
+            <param name="celt">The number of elements to retrieve.</param>
+            <param name="rgelt">An array to receive the formats requested.</param>
+            <param name="pceltFetched">An array to receive the number of element fetched.</param>
+            <returns>If the fetched number of formats is the same as the requested number, S_OK is returned.
+            There are several reasons S_FALSE may be returned: (1) The requested number of elements is less than
+            or equal to zero. (2) The rgelt parameter equals null. (3) There are no more elements to enumerate.
+            (4) The requested number of elements is greater than one and pceltFetched equals null or does not
+            have at least one element in it. (5) The number of fetched elements is less than the number of
+            requested elements.</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.EnumFORMATETC.Reset">
+            <summary>
+            Resets the state of enumeration.
+            </summary>
+            <returns>S_OK</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.DragDropLib.DataObject.EnumFORMATETC.Skip(System.Int32)">
+            <summary>
+            Skips the number of elements requested.
+            </summary>
+            <param name="celt">The number of elements to skip.</param>
+            <returns>If there are not enough remaining elements to skip, returns S_FALSE. Otherwise, S_OK is returned.</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.DrawableHandler.#ctor(ASEva.UICoreWF.DrawableHandler.EtoDrawable)">
+            <summary>
+            This is to allow instantiating a DrawableHandler
+            from an existing control.
+            </summary>
+        </member>
+        <member name="F:ASEva.UICoreWF.WebView2Handler.CoreWebView2Environment">
+            <summary>
+            The default environment to use if none is specified with <see cref="P:ASEva.UICoreWF.WebView2Handler.Environment"/>.
+            </summary>
+        </member>
+        <member name="F:ASEva.UICoreWF.WebView2Handler.GetCoreWebView2Environment">
+            <summary>
+            Specifies a function to call when we need the default environment, if not already specified
+            </summary>
+        </member>
+        <member name="P:ASEva.UICoreWF.WebView2Handler.Environment">
+            <summary>
+            Gets or sets the environment to use, defaulting to <see cref="F:ASEva.UICoreWF.WebView2Handler.CoreWebView2Environment"/>.
+            This can only be set once during construction or with a style for this handler.
+            </summary>
+            <value>Environment to use to initialize WebView2</value>
+        </member>
+        <member name="M:ASEva.UICoreWF.WebView2Handler.OnInitializeWebView2Async">
+            <summary>
+            Override to use your own WebView2 initialization, if necessary
+            </summary>
+            <returns>Task</returns>
+        </member>
+        <member name="T:ASEva.UICoreWF.HistLineGraph">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Histogram and poly line graph control
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 柱状折线图可视化控件
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.ImageConverter">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Conversion of image object
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 图像对象转换
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.ImageShow">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) A window to show image
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 图像显示窗口
+            </summary>
+        </member>
+        <member name="F:ASEva.UICoreWF.ImageShow.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.ImageShow.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.ImageShow.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.LabelTableGraph">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Label table graph control
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 标签热力图数据可视化窗口
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.MatrixTableGraph">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Matrix table graph control
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 矩阵热力图数据可视化窗口
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.NameEditor">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Name editor control
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 名称编辑控件
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.NumericSetter">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Set value to NumericUpDown control
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) NumericUpDown控件设置值
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.ScatterPointsGraph">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Scatter points graph control
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 散点图数据可视化窗口
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.TimelineIndicator">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Timeline visualization control (horizontal)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 时间线显示控件（横向）
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.TimelineIndicatorV">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Timeline visualization control (vertical)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 时间线显示控件（纵向）
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.ValueGraph">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) Single value graph control
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 单值数据可视化窗口
+            </summary>
+        </member>
+        <member name="T:ASEva.UICoreWF.WindowPanel">
+            \~English
+            <summary>
+            (api:corewf=3.0.0) UI panel for child window
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.0.0) 窗口控件，用于实现窗口组件的实际功能
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnInitSize(System.String)">
+            \~English
+            <summary>
+            [Optional] Called while initializing panel's size
+            </summary>
+            <param name="config">Configuration string</param>
+            \~Chinese
+            <summary>
+            [可选实现] 在初始化控件尺寸时被调用
+            </summary>
+            <param name="config">配置字符串</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnInit(System.String)">
+            \~English
+            <summary>
+            [Optional] Called while initializing the panel
+            </summary>
+            <param name="config">Configuration string</param>
+            \~Chinese
+            <summary>
+            [可选实现] 在配置界面控件初始化时被调用
+            </summary>
+            <param name="config">配置字符串</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnGetConfig">
+            \~English
+            <summary>
+            [Optional] Called while getting the configuration string
+            </summary>
+            <returns>Configuration string</returns>
+            \~Chinese
+            <summary>
+            [可选实现] 获取配置字符串时被调用
+            </summary>
+            <returns>配置字符串</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnInputData(System.Object)">
+            \~English
+            <summary>
+            [Optional] Called while new data arrived. If there's a sample buffer, use ASEva.Sample.ClipWithBufferBegin to remove data outside the buffer range after adding new sample. In addition, since ASEva.WindowPanel.OnUpdateUI won't be called while the child window is hidden, you can use ASEva.Samples.ManualTriggerSample to perform background processing (ManualTriggerSample's frequency is 50Hz)
+            </summary>
+            <param name="data">New data, can be ASEva.GeneralSample , ASEva.Samples.ManualTriggerSample , ASEva.Samples.AudioFrameSample , ASEva.Samples.PointCloudSample , ASEva.Samples.BusDataPack , ASEva.Samples.SignalsData , ASEva.EventData , ASEva.SceneData , etc.</param>
+            \~Chinese
+            <summary>
+            [可选实现] 在获得新数据时被调用。如果存在样本缓存，则需要在添加至缓存后使用 ASEva.Sample.ClipWithBufferBegin 将缓存范围外数据移除。另外，由于窗口隐藏时将不会调用 ASEva.WindowPanel.OnUpdateUI ，所以可以在此函数中的data为 ASEva.Samples.ManualTriggerSample 时进行后台处理（ManualTriggerSample频率为50Hz）
+            </summary>
+            <param name="data">新数据，包括通用样本 ASEva.GeneralSample , 手动触发器样本 ASEva.Samples.ManualTriggerSample , 音频帧样本 ASEva.Samples.AudioFrameSample , 点云帧样本 ASEva.Samples.PointCloudSample , 总线数据 ASEva.Samples.BusDataPack , 信号数据 ASEva.Samples.SignalsData , 事件数据 ASEva.EventData , 场景片段描述 ASEva.SceneData 等类型</param>
+        </member>
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnResetData">
+            \~English
+            <summary>
+            [Optional] Called while needed to reset data buffer
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 在需要重置数据缓存时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnStartSession">
+            \~English
+            <summary>
+            [Optional] Called while starting a session
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 在每轮开始时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnStopSession">
+            \~English
+            <summary>
+            [Optional] Called while stopping a session
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 在每轮结束时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnUpdateUI">
+            \~English
+            <summary>
+            [Optional] Called while updating the panel's UI. All UI related updating should be put here. Note that this function won't be called when the child window is hidden
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 在需要更新界面时被调用。所有与界面相关的更新应全部放在此函数内实现。需要注意，窗口隐藏时将不会调用此函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnHandleModal">
+            \~English
+            <summary>
+            [Optional] Called in the main loop, for running modal dialog
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 在主循环中被调用，可进行模态对话
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnRelease">
+            \~English
+            <summary>
+            [Optional] Called before destroying the panel
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 在窗口控件销毁前被调用
+            </summary>
+        </member>
+    </members>
+</doc>

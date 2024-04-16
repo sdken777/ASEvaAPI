@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <RootNamespace>ASEva.UICoreWF</RootNamespace>
     <Configurations>Release;Debug</Configurations>
     <UseWindowsForms>True</UseWindowsForms>
@@ -37,9 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Graphic\OpenGLOnscreenControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Update="Graphic\OpenGLOnscreenControl.cs" />
     <Compile Update="Resource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

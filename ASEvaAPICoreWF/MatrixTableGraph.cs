@@ -9,11 +9,11 @@ namespace ASEva.UICoreWF
 {
     /// \~English
     /// <summary>
-    /// (api:corewf=2.0.0) Matrix table graph control
+    /// (api:corewf=3.0.0) Matrix table graph control
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:corewf=2.0.0) 矩阵热力图数据可视化窗口
+    /// (api:corewf=3.0.0) 矩阵热力图数据可视化窗口
     /// </summary>
     public partial class MatrixTableGraph : BaseGraph
     {

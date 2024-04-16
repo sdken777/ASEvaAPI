@@ -6,11 +6,11 @@ namespace ASEva.UICoreWF
 {
     /// \~English
     /// <summary>
-    /// (api:corewf=2.0.0) A window to show image
+    /// (api:corewf=3.0.0) A window to show image
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:corewf=2.0.0) 图像显示窗口
+    /// (api:corewf=3.0.0) 图像显示窗口
     /// </summary>
     public partial class ImageShow : Form
     {

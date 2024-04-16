@@ -7,11 +7,11 @@ namespace ASEva.UICoreWF
 {
     /// \~English
     /// <summary>
-    /// (api:corewf=2.0.0) Circle indicator
+    /// (api:corewf=3.0.0) Circle indicator
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:corewf=2.0.0) 圆形指示器
+    /// (api:corewf=3.0.0) 圆形指示器
     /// </summary>
     public partial class CircleIndicator : UserControl
     {

@@ -7,11 +7,11 @@ namespace ASEva.UIWpf
     
     /// \~English
     /// <summary>
-    /// (api:wpf=1.0.0) UI panel for configuration
+    /// (api:wpf=2.0.0) UI panel for configuration
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:wpf=1.0.0) 配置界面控件，用于实现可视化配置
+    /// (api:wpf=2.0.0) 配置界面控件，用于实现可视化配置
     /// </summary>
     public class ConfigPanel : UserControl
     {
@@ -61,21 +61,21 @@ namespace ASEva.UIWpf
 
         /// \~English
         /// <summary>
-        /// (api:wpf=1.4.6) [Optional] Called in the main loop, for running modal dialog
+        /// [Optional] Called in the main loop, for running modal dialog
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:wpf=1.4.6) [可选实现] 在主循环中被调用，可进行模态对话
+        /// [可选实现] 在主循环中被调用，可进行模态对话
         /// </summary>
         public virtual void OnHandleModal() { }
 
         /// \~English
         /// <summary>
-        /// (api:wpf=1.4.3) Close the container holding the panel
+        /// Close the container holding the panel
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:wpf=1.4.3) 关闭配置界面
+        /// 关闭配置界面
         /// </summary>
         public void Close()
         {
@@ -84,11 +84,11 @@ namespace ASEva.UIWpf
 
         /// \~English
         /// <summary>
-        /// (api:wpf=1.4.3) Implement closing the panel container in this event
+        /// Implement closing the panel container in this event
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:wpf=1.4.3) 在此事件中实现配置界面的关闭
+        /// 在此事件中实现配置界面的关闭
         /// </summary>
         public event EventHandler CloseRequested;
     }
