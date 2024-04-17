@@ -534,10 +534,11 @@ API (stencil buffer, FBO id, etc) objects necessary will be managed.
             <summary>Call to ensure all drawing to the context has been issued to the underlying 3D API.</summary>
             <remarks />
         </member>
-        <member name="M:SkiaSharp.GRContext.Flush(SkiaSharp.GRContextFlushBits)">
-            <param name="flagsBitfield">Flags that control the flushing behavior. (This is ignored)</param>
-            <summary>Call to ensure all drawing to the context has been issued to the underlying 3D API.</summary>
-            <remarks />
+        <member name="M:SkiaSharp.GRContext.Flush(System.Boolean,System.Boolean)">
+            <param name="submit">To be added.</param>
+            <param name="synchronous">To be added.</param>
+            <summary>To be added.</summary>
+            <remarks>To be added.</remarks>
         </member>
         <member name="M:SkiaSharp.GRContext.GetMaxSurfaceSampleCount(SkiaSharp.SKColorType)">
             <param name="colorType">The color type.</param>
@@ -620,15 +621,10 @@ API (stencil buffer, FBO id, etc) objects necessary will be managed.
             <summary>Specify the GPU resource cache limits.</summary>
             <remarks>If the current cache exceeds either of these, it will be purged (LRU) to keep the cache within these limits.</remarks>
         </member>
-        <member name="T:SkiaSharp.GRContextFlushBits">
-            <summary />
-            <remarks />
-        </member>
-        <member name="F:SkiaSharp.GRContextFlushBits.Discard">
-            <summary>A client may reach a point where it has partially rendered a frame through a GRContext that it knows the user will never see. This flag causes the flush to skip submission of deferred content to the 3D API during the flush.</summary>
-        </member>
-        <member name="F:SkiaSharp.GRContextFlushBits.None">
-            <summary>No flags.</summary>
+        <member name="M:SkiaSharp.GRContext.Submit(System.Boolean)">
+            <param name="synchronous">To be added.</param>
+            <summary>To be added.</summary>
+            <remarks>To be added.</remarks>
         </member>
         <member name="T:SkiaSharp.GRContextOptions">
             <summary>Represents the collection of options for the construction of a context.</summary>
@@ -653,25 +649,10 @@ API (stencil buffer, FBO id, etc) objects necessary will be managed.
             <value />
             <remarks>A value of -1 means the context should deduce the optimal value for this platform. Default is -1.</remarks>
         </member>
-        <member name="P:SkiaSharp.GRContextOptions.ClipBatchToBounds">
-            <summary>Gets or sets a value indicating whether to turn each batch bounds into a clip rect.</summary>
-            <value />
-            <remarks>For debugging purposes. This is used to verify that the clip bounds are conservative. Default is false.</remarks>
-        </member>
-        <member name="P:SkiaSharp.GRContextOptions.ClipDrawOpsToBounds">
-            <summary>Gets or sets a value indicating whether to turn each draw operation's bounds into a clip rectangle.</summary>
-            <value />
-            <remarks>For debugging purposes. This is used to verify that the clip bounds are conservative. Default is false.</remarks>
-        </member>
         <member name="P:SkiaSharp.GRContextOptions.Default">
             <summary>Gets a new instance with the values set to the defaults.</summary>
             <value />
             <remarks />
-        </member>
-        <member name="P:SkiaSharp.GRContextOptions.DisableDistanceFieldPaths">
-            <summary>Gets or sets a value indicating whether to disable distance field rendering for paths.</summary>
-            <value />
-            <remarks>Distance field computation can be expensive and yields no benefit if a path is not rendered multiple times with different transforms. Default is false.</remarks>
         </member>
         <member name="P:SkiaSharp.GRContextOptions.DisableGpuYuvConversion">
             <summary>Gets or sets a value indicating whether the GPU will be used to perform YUV -&gt; RGB conversion when generating textures from codec-backed images.</summary>
@@ -683,25 +664,10 @@ API (stencil buffer, FBO id, etc) objects necessary will be managed.
             <value />
             <remarks>This is used when the driver's implementation (glGenerateMipmap) contains bugs. This requires mipmap level and LOD control (for example, desktop or ES3). Default is false.</remarks>
         </member>
-        <member name="P:SkiaSharp.GRContextOptions.DrawBatchBounds">
-            <summary>Gets or sets a value indicating whether to draw a wireframe device bounds rectangle for each batch.</summary>
-            <value />
-            <remarks>For debugging purposes. The wireframe rectangle is drawn before the batch in order to visualize batches that draw outside of their intended bounds. Default is false.</remarks>
-        </member>
         <member name="P:SkiaSharp.GRContextOptions.EnableInstancedRendering">
             <summary>Gets or sets a value indicating whether to enable instanced rendering as long as all required functionality is supported by the hardware.</summary>
             <value />
             <remarks>Instanced rendering is still experimental at this point and disabled by default. Default is false.</remarks>
-        </member>
-        <member name="P:SkiaSharp.GRContextOptions.ForceSoftwarePathMasks">
-            <summary>Gets or sets a value indicating whether to force all path draws to go through through the software-rasterize-to-texture code path.</summary>
-            <value />
-            <remarks>This assumes the path is not recognized as a simpler shape (e.g. a rounded rectangle). This is intended for testing purposes. Default is false.</remarks>
-        </member>
-        <member name="P:SkiaSharp.GRContextOptions.ForceSWPathMasks">
-            <summary>Gets or sets a value indicating whether to force all path draws to go through through the software-rasterize-to-texture code path.</summary>
-            <value />
-            <remarks>This assumes the path is not recognized as a simpler shape (e.g. a rounded rectangle). This is intended for testing purposes. Default is false.</remarks>
         </member>
         <member name="P:SkiaSharp.GRContextOptions.GlyphCacheTextureMaximumBytes">
             <summary>Gets or sets the maximum size of cache textures used for the SkiaSharp Glyph cache.</summary>
@@ -717,26 +683,6 @@ API (stencil buffer, FBO id, etc) objects necessary will be managed.
             <summary>Gets or sets a value indicating whether the context operates in immediate mode.</summary>
             <value />
             <remarks>The context will issue all draws to the backend API immediately. Intended to ease debugging. Default is false.</remarks>
-        </member>
-        <member name="P:SkiaSharp.GRContextOptions.MaxBatchLookahead">
-            <summary>Gets or sets a value overriding the default maximum look-ahead window for batch combing.</summary>
-            <value />
-            <remarks>For debugging purposes. Default is -1.</remarks>
-        </member>
-        <member name="P:SkiaSharp.GRContextOptions.MaxBatchLookback">
-            <summary>Gets or sets a value overriding the default maximum look-back window for batch combing.</summary>
-            <value />
-            <remarks>For debugging purposes. Default is -1.</remarks>
-        </member>
-        <member name="P:SkiaSharp.GRContextOptions.MaxOpCombineLookahead">
-            <summary>Gets or sets a value overriding the default maximum look-ahead window for operation combing.</summary>
-            <value />
-            <remarks>For debugging purposes. Default is -1.</remarks>
-        </member>
-        <member name="P:SkiaSharp.GRContextOptions.MaxOpCombineLookback">
-            <summary>Gets or sets a value overriding the default maximum look-back window for operation combing.</summary>
-            <value />
-            <remarks>For debugging purposes. Default is -1.</remarks>
         </member>
         <member name="P:SkiaSharp.GRContextOptions.MaxTextureSizeOverride">
             <summary>Gets or sets the maximum size of a texture.</summary>
@@ -810,17 +756,11 @@ API (stencil buffer, FBO id, etc) objects necessary will be managed.
         <member name="F:SkiaSharp.GRContextOptionsGpuPathRenderers.Default">
             <summary>To be added.</summary>
         </member>
-        <member name="F:SkiaSharp.GRContextOptionsGpuPathRenderers.DistanceField">
-            <summary>To be added.</summary>
-        </member>
         <member name="F:SkiaSharp.GRContextOptionsGpuPathRenderers.Msaa">
             <summary>To be added.</summary>
         </member>
         <member name="F:SkiaSharp.GRContextOptionsGpuPathRenderers.None">
             <summary>Always use software masks.</summary>
-        </member>
-        <member name="F:SkiaSharp.GRContextOptionsGpuPathRenderers.Pls">
-            <summary>To be added.</summary>
         </member>
         <member name="F:SkiaSharp.GRContextOptionsGpuPathRenderers.Small">
             <summary>To be added.</summary>
@@ -1146,11 +1086,6 @@ API (stencil buffer, FBO id, etc) objects necessary will be managed.
             <returns>Returns the new <see cref="T:SkiaSharp.GRGlInterface" />, or <see langword="null" /> if one could not be created.</returns>
             <remarks />
         </member>
-        <member name="M:SkiaSharp.GRGlInterface.CreateNativeInterface">
-            <summary>Create a <see cref="T:SkiaSharp.GRGlInterface" /> using the platform OpenGL implementation.</summary>
-            <returns>Returns the new <see cref="T:SkiaSharp.GRGlInterface" />, or <see langword="null" /> if one could not be created.</returns>
-            <remarks />
-        </member>
         <member name="M:SkiaSharp.GRGlInterface.CreateOpenGl(SkiaSharp.GRGlGetProcedureAddressDelegate)">
             <param name="get">To be added.</param>
             <summary>To be added.</summary>
@@ -1268,14 +1203,8 @@ API (stencil buffer, FBO id, etc) objects necessary will be managed.
         <member name="F:SkiaSharp.GRPixelConfig.AlphaHalfAsRed">
             <summary>To be added.</summary>
         </member>
-        <member name="F:SkiaSharp.GRPixelConfig.Astc12x12">
-            <summary>12x12 ASTC Compressed Data.</summary>
-        </member>
         <member name="F:SkiaSharp.GRPixelConfig.Bgra8888">
             <summary>Premultiplied 32-bit channel. Byte order is BGRA.</summary>
-        </member>
-        <member name="F:SkiaSharp.GRPixelConfig.Etc1">
-            <summary>ETC1 Compressed Data.</summary>
         </member>
         <member name="F:SkiaSharp.GRPixelConfig.Gray8">
             <summary>8-bit grayscale color channel.</summary>
@@ -1285,12 +1214,6 @@ API (stencil buffer, FBO id, etc) objects necessary will be managed.
         </member>
         <member name="F:SkiaSharp.GRPixelConfig.Gray8AsRed">
             <summary>To be added.</summary>
-        </member>
-        <member name="F:SkiaSharp.GRPixelConfig.Latc">
-            <summary>LATC/RGTC/3Dc/BC4 Compressed Data.</summary>
-        </member>
-        <member name="F:SkiaSharp.GRPixelConfig.R11Eac">
-            <summary>R11 EAC Compressed Data. (Corresponds to section C.3.5 of the OpenGL 4.4 core profile spec)</summary>
         </member>
         <member name="F:SkiaSharp.GRPixelConfig.Rg1616">
             <summary>To be added.</summary>
@@ -1348,6 +1271,21 @@ API (stencil buffer, FBO id, etc) objects necessary will be managed.
         </member>
         <member name="F:SkiaSharp.GRPixelConfig.Unknown">
             <summary>The pixel configuration is not known or not set.</summary>
+        </member>
+        <member name="T:SkiaSharp.GRRecordingContext">
+            <summary>To be added.</summary>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="P:SkiaSharp.GRRecordingContext.Backend">
+            <summary>To be added.</summary>
+            <value>To be added.</value>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.GRRecordingContext.GetMaxSurfaceSampleCount(SkiaSharp.SKColorType)">
+            <param name="colorType">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
         </member>
         <member name="T:SkiaSharp.GRSurfaceOrigin">
             <summary>The origin of a texture.</summary>
@@ -2128,56 +2066,6 @@ using (new SKAutoCanvasRestore(canvas)) {
             <summary>Uninitializes COM.</summary>
             <remarks />
         </member>
-        <member name="T:SkiaSharp.SKAutoLockPixels">
-            <summary>Convenience class used to lock and unlock the bitmap pixels in a using statement.</summary>
-            <remarks>
-                <format type="text/markdown"><![CDATA[
-## Remarks
-
-This class can be used in a using statement to lock the pixels of the bitmap
-allowing you to read those pixels. The pixels are automatically unlocked by
-virtue of having the <xref:SkiaSharp.SKAutoLockPixels.Dispose> method unlock
-the bitmap pixels.
-
-## Examples
-
-```csharp
-SKBitmap bitmap = ...;
-
-using (new SKAutoLockPixels(bitmap)) {
-    // get a pointer to the pixels
-    bitmap.GetPixels();
-
-    // use the pointer
-
-    // automatically unlock the pixels
-}
-```
-]]></format>
-            </remarks>
-        </member>
-        <member name="C:SkiaSharp.SKAutoLockPixels(SkiaSharp.SKBitmap)">
-            <param name="bitmap">The bitmap whose pixels to lock.</param>
-            <summary>Lock the bitmaps pixels.</summary>
-            <remarks />
-        </member>
-        <member name="C:SkiaSharp.SKAutoLockPixels(SkiaSharp.SKBitmap,System.Boolean)">
-            <param name="bitmap">The bitmap whose pixels to lock.</param>
-            <param name="doLock">Whether or not to invoke <see cref="M:SkiaSharp.SKBitmap.LockPixels" /> method at this point.</param>
-            <summary>Lock the bitmaps pixels.</summary>
-            <remarks />
-        </member>
-        <member name="M:SkiaSharp.SKAutoLockPixels.Dispose">
-            <summary>
-                <para>Disposes the pixel locker, unlocking the pixels of the bitmap. </para>
-                <para>This operation will not do anything if you had previously manually called the <see cref="M:SkiaSharp.SKAutoLockPixels.Unlock" /> method.</para>
-            </summary>
-            <remarks />
-        </member>
-        <member name="M:SkiaSharp.SKAutoLockPixels.Unlock">
-            <summary>Unlocks the pixels of the bitmap.</summary>
-            <remarks />
-        </member>
         <member name="T:SkiaSharp.SKAutoMaskFreeImage">
             <summary>Convenience class used to automatically free the image data for a mask in a using statement.</summary>
             <remarks>
@@ -2331,15 +2219,6 @@ using (new SKAutoMaskFreeImage(mask.Image)) {
             <summary>Copies the contents of the bitmap with the specified color type and returns the copy.</summary>
             <returns>The copy of the bitmap, or <paramref name="null" /> on error.</returns>
             <remarks />
-        </member>
-        <member name="M:SkiaSharp.SKBitmap.CopyPixelsTo(System.IntPtr,System.Int32,System.Int32,System.Boolean)">
-            <param name="dst">The location of destination buffer.</param>
-            <param name="dstSize">The size of destination buffer. Must be large enough to hold pixels using indicated stride.</param>
-            <param name="dstRowBytes">The width of each line in the buffer. If 0, uses bitmap's internal stride.</param>
-            <param name="preserveDstPad">Whether or not to preserve padding in the destination.</param>
-            <summary>Copies the pixels of the bitmap to the specified memory location.</summary>
-            <returns>Returns true if possible, returns false otherwise.</returns>
-            <remarks>In the case when the <paramref name="dstRowBytes" /> matches the bitmap's <paramref name="rowBytes" />, the copy may be made faster by copying over the <paramref name="dst" />'s per-row padding (for all rows but the last). By setting <paramref name="preserveDstPad" /> to true the caller can disable this optimization and ensure that pixels in the padding are not overwritten.</remarks>
         </member>
         <member name="M:SkiaSharp.SKBitmap.CopyTo(SkiaSharp.SKBitmap)">
             <param name="destination">The bitmap to received the copied contents.</param>
@@ -2732,13 +2611,6 @@ using (new SKAutoMaskFreeImage(mask.Image)) {
             <value />
             <remarks />
         </member>
-        <member name="M:SkiaSharp.SKBitmap.LockPixels">
-            <summary>Call this to ensure that the bitmap points to the current pixel address in the pixelref.</summary>
-            <remarks>
-                <para>This allows pixel references that implement cached/deferred image decoding to know when there are active clients of a given image.</para>
-                <para>Balance it with a call to <see cref="M:SkiaSharp.SKBitmap.UnlockPixels" />. These calls are harmless if there is no pixelref.</para>
-            </remarks>
-        </member>
         <member name="M:SkiaSharp.SKBitmap.NotifyPixelsChanged">
             <summary>Indicates to consumers of the bitmap that the pixel data has changed.</summary>
             <remarks />
@@ -2941,10 +2813,6 @@ Filter Quality:
             <summary>Allocates the memory for the bitmap using the specified image information.</summary>
             <returns>Returns true if the allocation was successful, otherwise false.</returns>
             <remarks />
-        </member>
-        <member name="M:SkiaSharp.SKBitmap.UnlockPixels">
-            <summary>Call this to balance a previous call to <see cref="M:SkiaSharp.SKBitmap.LockPixels" />.</summary>
-            <remarks>When you are finished access the pixel memory, call this to balance a previous call to <see cref="M:SkiaSharp.SKBitmap.LockPixels" />. This allows pixel references that implement cached/deferred image decoding to know when there are active clients of a given image.</remarks>
         </member>
         <member name="P:SkiaSharp.SKBitmap.Width">
             <summary>Gets the width of the bitmap.</summary>
@@ -3411,15 +3279,10 @@ using (var surface = SKSurface.Create(info)) {
             <summary>Replaces all the pixels in the canvas' current clip with the specified color.</summary>
             <remarks />
         </member>
-        <member name="P:SkiaSharp.SKCanvas.ClipBounds">
-            <summary>Gets the bounds of the current clip (in local coordinates).</summary>
-            <value />
-            <remarks />
-        </member>
-        <member name="P:SkiaSharp.SKCanvas.ClipDeviceBounds">
-            <summary>Gets the bounds of the current clip (in device coordinates).</summary>
-            <value />
-            <remarks />
+        <member name="M:SkiaSharp.SKCanvas.Clear(SkiaSharp.SKColorF)">
+            <param name="color">To be added.</param>
+            <summary>To be added.</summary>
+            <remarks>To be added.</remarks>
         </member>
         <member name="M:SkiaSharp.SKCanvas.ClipPath(SkiaSharp.SKPath,SkiaSharp.SKClipOperation,System.Boolean)">
             <param name="path">The path to combine with the current clip.</param>
@@ -3428,23 +3291,9 @@ using (var surface = SKSurface.Create(info)) {
             <summary>Modify the current clip with the specified path.</summary>
             <remarks />
         </member>
-        <member name="M:SkiaSharp.SKCanvas.ClipPath(SkiaSharp.SKPath,SkiaSharp.SKRegionOperation,System.Boolean)">
-            <param name="path">The path to combine with the current clip.</param>
-            <param name="operation">The region operator to apply to the current clip</param>
-            <param name="antialias">Whether or not the clip should be antialiased.</param>
-            <summary>Modify the current clip with the specified path.</summary>
-            <remarks />
-        </member>
         <member name="M:SkiaSharp.SKCanvas.ClipRect(SkiaSharp.SKRect,SkiaSharp.SKClipOperation,System.Boolean)">
             <param name="rect">The rectangle to combine with the current clip.</param>
             <param name="operation">The clip operator to apply to the current clip.</param>
-            <param name="antialias">Whether or not the clip should be antialiased.</param>
-            <summary>Modify the current clip with the specified rectangle.</summary>
-            <remarks />
-        </member>
-        <member name="M:SkiaSharp.SKCanvas.ClipRect(SkiaSharp.SKRect,SkiaSharp.SKRegionOperation,System.Boolean)">
-            <param name="rect">The rectangle to combine with the current clip.</param>
-            <param name="operation">The region operator to apply to the current clip.</param>
             <param name="antialias">Whether or not the clip should be antialiased.</param>
             <summary>Modify the current clip with the specified rectangle.</summary>
             <remarks />
@@ -3629,11 +3478,11 @@ this information.
             <summary>Fills the current clipping area with the specified color using the specified color and blend mode.</summary>
             <remarks />
         </member>
-        <member name="M:SkiaSharp.SKCanvas.DrawColor(SkiaSharp.SKColor,SkiaSharp.SKXferMode)">
-            <param name="color">The color to use to paint the clipping region.</param>
-            <param name="mode">The transfer mode for the color.</param>
-            <summary>Fills the current clipping area with the specified color using the specified color and transfer mode.</summary>
-            <remarks />
+        <member name="M:SkiaSharp.SKCanvas.DrawColor(SkiaSharp.SKColorF,SkiaSharp.SKBlendMode)">
+            <param name="color">To be added.</param>
+            <param name="mode">To be added.</param>
+            <summary>To be added.</summary>
+            <remarks>To be added.</remarks>
         </member>
         <member name="M:SkiaSharp.SKCanvas.DrawDrawable(SkiaSharp.SKDrawable,SkiaSharp.SKMatrix@)">
             <param name="drawable">The drawable to draw.</param>
@@ -4024,13 +3873,6 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
             <summary>Draws text on the canvas at the specified coordinates.</summary>
             <remarks />
         </member>
-        <member name="M:SkiaSharp.SKCanvas.DrawText(System.String,SkiaSharp.SKPoint[],SkiaSharp.SKPaint)">
-            <param name="text">The text to draw.</param>
-            <param name="points">The positions for each glyph in the <paramref name="text" /> string.</param>
-            <param name="paint">The paint to use when drawing the text.</param>
-            <summary>Draws glyphs of the text at specified locations on the canvas.</summary>
-            <remarks />
-        </member>
         <member name="M:SkiaSharp.SKCanvas.DrawText(SkiaSharp.SKTextBlob,System.Single,System.Single,SkiaSharp.SKPaint)">
             <param name="text">The text blob to draw.</param>
             <param name="x">The x-coordinate of the origin of the text being drawn.</param>
@@ -4055,29 +3897,12 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
             <summary>Draws text encoded in a UTF-8 buffer on the canvas at the specified coordinates.</summary>
             <remarks />
         </member>
-        <member name="M:SkiaSharp.SKCanvas.DrawText(System.IntPtr,System.Int32,SkiaSharp.SKPoint[],SkiaSharp.SKPaint)">
-            <param name="buffer">The pointer to a region holding UTF-8 encoded text to draw.</param>
-            <param name="length">The number of bytes to read from the <paramref name="buffer." /></param>
-            <param name="points">The positions for each glyph in the <paramref name="buffer." /></param>
-            <param name="paint">The paint to use when drawing the text.</param>
-            <summary>Draws text from a UTF-8 buffer at specified locations on the canvas.</summary>
-            <remarks />
-        </member>
         <member name="M:SkiaSharp.SKCanvas.DrawText(System.String,System.Single,System.Single,SkiaSharp.SKPaint)">
             <param name="text">The text to draw.</param>
             <param name="x">The x-coordinate of the origin of the text being drawn.</param>
             <param name="y">The y-coordinate of the origin of the text being drawn.</param>
             <param name="paint">The paint to use when drawing the text.</param>
             <summary>Draws text on the canvas at the specified coordinates.</summary>
-            <remarks />
-        </member>
-        <member name="M:SkiaSharp.SKCanvas.DrawText(System.Byte[],SkiaSharp.SKPath,System.Single,System.Single,SkiaSharp.SKPaint)">
-            <param name="text">The text to draw.</param>
-            <param name="path">The path the text should follow for its baseline.</param>
-            <param name="hOffset">The distance along the path to add to the text's starting position.</param>
-            <param name="vOffset">The distance above (-) or below (+) the path to position the text.</param>
-            <param name="paint">The paint to use when drawing the text.</param>
-            <summary>Draws text on the canvas following a path.</summary>
             <remarks />
         </member>
         <member name="M:SkiaSharp.SKCanvas.DrawText(System.IntPtr,System.Int32,System.Single,System.Single,SkiaSharp.SKPaint)">
@@ -4089,15 +3914,6 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
             <summary>Draws text encoded in a UTF-8 buffer on the canvas at the specified coordinates.</summary>
             <remarks />
         </member>
-        <member name="M:SkiaSharp.SKCanvas.DrawText(System.String,SkiaSharp.SKPath,System.Single,System.Single,SkiaSharp.SKPaint)">
-            <param name="text">The text to draw.</param>
-            <param name="path">The path the text should follow for its baseline.</param>
-            <param name="hOffset">The distance along the path to add to the text's starting position.</param>
-            <param name="vOffset">The distance above (-) or below (+) the path to position the text.</param>
-            <param name="paint">The paint to use when drawing the text.</param>
-            <summary>Draws text on the canvas following a path.</summary>
-            <remarks />
-        </member>
         <member name="M:SkiaSharp.SKCanvas.DrawText(System.String,System.Single,System.Single,SkiaSharp.SKFont,SkiaSharp.SKPaint)">
             <param name="text">To be added.</param>
             <param name="x">To be added.</param>
@@ -4106,16 +3922,6 @@ contours intersect each other (think <xref:SkiaSharp.SKBlendMode.Xor>).
             <param name="paint">To be added.</param>
             <summary>To be added.</summary>
             <remarks>To be added.</remarks>
-        </member>
-        <member name="M:SkiaSharp.SKCanvas.DrawText(System.IntPtr,System.Int32,SkiaSharp.SKPath,System.Single,System.Single,SkiaSharp.SKPaint)">
-            <param name="buffer">The pointer to a region holding UTF-8 encoded text to draw.</param>
-            <param name="length">The number of bytes to read from the <paramref name="buffer." /></param>
-            <param name="path">The path the text should follow for its baseline.</param>
-            <param name="hOffset">The distance along the path to add to the text's starting position.</param>
-            <param name="vOffset">The distance above (-) or below (+) the path to position the text.</param>
-            <param name="paint">The paint to use when drawing the text.</param>
-            <summary>Draws text encoded in a UTF-8 buffer on the canvas following a path.</summary>
-            <remarks />
         </member>
         <member name="M:SkiaSharp.SKCanvas.DrawTextOnPath(System.Byte[],SkiaSharp.SKPath,SkiaSharp.SKPoint,SkiaSharp.SKPaint)">
             <param name="text">The text to draw.</param>
@@ -4259,18 +4065,6 @@ safely ignored.
         <member name="M:SkiaSharp.SKCanvas.Flush">
             <summary>Triggers the immediate execution of all pending draw operations.</summary>
             <remarks>For the GPU backend this will resolve all rendering to the GPU surface backing the surface that owns this canvas.</remarks>
-        </member>
-        <member name="M:SkiaSharp.SKCanvas.GetClipBounds(SkiaSharp.SKRect@)">
-            <param name="bounds">The resulting clip bounds.</param>
-            <summary>Returns the bounds of the current clip (in local coordinates).</summary>
-            <returns>Returns true if the clip bounds are non-empty, otherwise false.</returns>
-            <remarks>This can be useful in that it tells you that drawing outside of these bounds will be clipped out.</remarks>
-        </member>
-        <member name="M:SkiaSharp.SKCanvas.GetClipDeviceBounds(SkiaSharp.SKRectI@)">
-            <param name="bounds">The resulting clip bounds.</param>
-            <summary>Returns the bounds of the current clip (in device coordinates).</summary>
-            <returns>Returns true if the clip bounds are non-empty, otherwise false.</returns>
-            <remarks />
         </member>
         <member name="M:SkiaSharp.SKCanvas.GetDeviceClipBounds(SkiaSharp.SKRectI@)">
             <param name="bounds">The resulting clip bounds.</param>
@@ -4455,16 +4249,6 @@ guaranteed to happen. If exact clipping is desired, use
         </member>
         <member name="F:SkiaSharp.SKClipOperation.Intersect">
             <summary>Intersect the two regions.</summary>
-        </member>
-        <member name="T:SkiaSharp.SKClipType">
-            <summary />
-            <remarks />
-        </member>
-        <member name="F:SkiaSharp.SKClipType.Difference">
-            <summary />
-        </member>
-        <member name="F:SkiaSharp.SKClipType.Intersect">
-            <summary />
         </member>
         <member name="T:SkiaSharp.SKCodec">
             <summary>An abstraction layer directly on top of an image codec.</summary>
@@ -5587,27 +5371,6 @@ If set to -1, the codec will decode any necessary required frame(s) first.
             <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />, or <see langword="null" /> if the mode will have no effect.</returns>
             <remarks>If the <paramref name="mode" /> is <see cref="F:SkiaSharp.SKBlendMode.Dst" />, this function will return <see langword="null" /> (since that mode will have no effect on the result).</remarks>
         </member>
-        <member name="M:SkiaSharp.SKColorFilter.CreateBlendMode(SkiaSharp.SKColor,SkiaSharp.SKXferMode)">
-            <param name="c">The source color used with the specified mode.</param>
-            <param name="mode">The blend mode mode that is applied to each color.</param>
-            <summary>Creates a new color filter that uses the specified color and mode.</summary>
-            <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />, or <see langword="null" /> if the mode will have no effect.</returns>
-            <remarks>If the <paramref name="mode" /> is <see cref="F:SkiaSharp.SKXferMode.Dst" />, this function will return <see langword="null" /> (since that mode will have no effect on the result).</remarks>
-        </member>
-        <member name="M:SkiaSharp.SKColorFilter.CreateColorCube(SkiaSharp.SKData,System.Int32)">
-            <param name="cubeData">The cube data in the form of a 3D cube.</param>
-            <param name="cubeDimension">The cube's dimension, between <see cref="F:SkiaSharp.SKColorFilter.MinCubeSize" /> and <see cref="F:SkiaSharp.SKColorFilter.MaxCubeSize" /> inclusive.</param>
-            <summary>Creates a new color cube look-up table color filter, where (x, y, z) maps to the (R, G, B).</summary>
-            <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
-            <remarks>The alpha components of the colors must be 255, or opaque.</remarks>
-        </member>
-        <member name="M:SkiaSharp.SKColorFilter.CreateColorCube(System.Byte[],System.Int32)">
-            <param name="cubeData">The cube data in the form of a 3D cube.</param>
-            <param name="cubeDimension">The cube's dimension, between <see cref="F:SkiaSharp.SKColorFilter.MinCubeSize" /> and <see cref="F:SkiaSharp.SKColorFilter.MaxCubeSize" /> inclusive.</param>
-            <summary>Creates a new color cube look-up table color filter, where (x, y, z) maps to the (R, G, B).</summary>
-            <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
-            <remarks>The alpha components of the colors must be 255, or opaque.</remarks>
-        </member>
         <member name="M:SkiaSharp.SKColorFilter.CreateColorMatrix(System.Single[])">
             <param name="matrix">An array of <see cref="F:SkiaSharp.SKColorFilter.ColorMatrixSize" /> elements.</param>
             <summary>Creates a new color filter that transforms a color by a 4x5 (row-major) matrix.</summary>
@@ -5620,12 +5383,6 @@ If set to -1, the codec will decode any necessary required frame(s) first.
             <summary>Creates a new composition color filter, whose effect is to first apply the inner filter and then apply the outer filter to the result of the inner.</summary>
             <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
             <remarks />
-        </member>
-        <member name="M:SkiaSharp.SKColorFilter.CreateGamma(System.Single)">
-            <param name="gamma">The gamma to use.</param>
-            <summary>Creates a new gamma color filter which can be used to perform pixel-by-pixel conversion between linear and power-law color spaces.</summary>
-            <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
-            <remarks>A gamma of 2.2 is interpreted to mean convert from sRGB to linear while a gamma of 1/2.2 is interpreted to mean convert from linear to sRGB. Any other values are just directly applied (i.e., out = in ^ gamma).</remarks>
         </member>
         <member name="M:SkiaSharp.SKColorFilter.CreateHighContrast(SkiaSharp.SKHighContrastConfig)">
             <param name="config">The high contrast configuration settings.</param>
@@ -5668,55 +5425,15 @@ If set to -1, the codec will decode any necessary required frame(s) first.
             <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
             <remarks />
         </member>
-        <member name="M:SkiaSharp.SKColorFilter.CreateXferMode(SkiaSharp.SKColor,SkiaSharp.SKXferMode)">
-            <param name="c">The source color.</param>
-            <param name="mode">The transfer/blend mode to apply to each color.</param>
-            <summary>Creates a new transfer mode color filter that uses the specified color and transfer/blend mode.</summary>
-            <returns>Returns the new <see cref="T:SkiaSharp.SKColorFilter" />.</returns>
-            <remarks />
-        </member>
         <member name="M:SkiaSharp.SKColorFilter.Dispose(System.Boolean)">
             <param name="disposing">
                 <see langword="true" /> to release both managed and unmanaged resources; <see langword="false" /> to release only unmanaged resources.</param>
             <summary>Releases the unmanaged resources used by the <see cref="T:SkiaSharp.SKColorFilter" /> and optionally releases the managed resources.</summary>
             <remarks>Always dispose the object before you release your last reference to the <see cref="T:SkiaSharp.SKColorFilter" />. Otherwise, the resources it is using will not be freed until the garbage collector calls the finalizer.</remarks>
         </member>
-        <member name="M:SkiaSharp.SKColorFilter.IsValid3DColorCube(SkiaSharp.SKData,System.Int32)">
-            <param name="cubeData">must contain a 3D data in the form of cube of the size: cubeDimension * cubeDimension * cubeDimension * sizeof(SKColor).</param>
-            <param name="cubeDimension">Cube dimensions.</param>
-            <summary>Determines if the provided cube data and dimensions represent a valid color cube.</summary>
-            <returns>Returns true if the cube data and dimensions represent a valid color cube, otherwise false.</returns>
-            <remarks />
-        </member>
-        <member name="F:SkiaSharp.SKColorFilter.MaxColorCubeDimension">
-            <summary>The maximum dimension for the color cube.</summary>
-            <remarks />
-        </member>
-        <member name="F:SkiaSharp.SKColorFilter.MaxCubeSize">
-            <summary>The maximum dimension for the color cube.</summary>
-            <remarks />
-        </member>
-        <member name="F:SkiaSharp.SKColorFilter.MinColorCubeDimension">
-            <summary>The minimum dimension for the color cube.</summary>
-            <remarks />
-        </member>
-        <member name="F:SkiaSharp.SKColorFilter.MinCubeSize">
-            <summary>The minimum dimension for the color cube.</summary>
-            <remarks />
-        </member>
         <member name="F:SkiaSharp.SKColorFilter.TableMaxLength">
             <summary>The size of a color table for a color component.</summary>
             <remarks />
-        </member>
-        <member name="T:SkiaSharp.SKColorProfileType">
-            <summary />
-            <remarks />
-        </member>
-        <member name="F:SkiaSharp.SKColorProfileType.Linear">
-            <summary />
-        </member>
-        <member name="F:SkiaSharp.SKColorProfileType.SRGB">
-            <summary />
         </member>
         <member name="T:SkiaSharp.SKColors">
             <summary>Definitions for some common color names.</summary>
@@ -6293,19 +6010,6 @@ If set to -1, the codec will decode any necessary required frame(s) first.
         </member>
         <member name="T:SkiaSharp.SKColorSpace">
             <summary>Represents a color space.</summary>
-            <remarks />
-        </member>
-        <member name="M:SkiaSharp.SKColorSpace.ConvertPrimariesToXyzD50(SkiaSharp.SKColorSpacePrimaries)">
-            <param name="primaries">The primaries.</param>
-            <summary>Converts primaries and a white point to a XYZ D50 matrix, the preferred color gamut representation of <see cref="T:SkiaSharp.SKColorSpace" />.</summary>
-            <returns>Returns the XYZ D50 matrix, or <see langword="null" /> if the conversion is not possible.</returns>
-            <remarks />
-        </member>
-        <member name="M:SkiaSharp.SKColorSpace.ConvertPrimariesToXyzD50(SkiaSharp.SKColorSpacePrimaries,SkiaSharp.SKMatrix44)">
-            <param name="primaries">The primaries.</param>
-            <param name="toXyzD50">The XYZ D50 matrix.</param>
-            <summary>Converts primaries and a white point to a XYZ D50 matrix, the preferred color gamut representation of <see cref="T:SkiaSharp.SKColorSpace" />.</summary>
-            <returns>Returns <see langword="true" /> if the conversion succeeded, otherwise <see langword="false" /> if the conversion is not possible.</returns>
             <remarks />
         </member>
         <member name="M:SkiaSharp.SKColorSpace.CreateIcc(SkiaSharp.SKColorSpaceIccProfile)">
@@ -7200,27 +6904,6 @@ If set to -1, the codec will decode any necessary required frame(s) first.
                 <para>The <see cref="M:SkiaSharp.SKData.AsStream" /> method can be used to return a <see cref="T:System.IO.Stream" /> that wraps this <see cref="T:SkiaSharp.SKData" /> and allows for .NET APIs to scan the contents of the <see cref="T:SkiaSharp.SKData" /> as a stream.</para>
             </remarks>
         </member>
-        <member name="C:SkiaSharp.SKData">
-            <summary>Creates an empty <see cref="T:SkiaSharp.SKData" /> object.</summary>
-            <remarks />
-        </member>
-        <member name="C:SkiaSharp.SKData(System.Byte[])">
-            <param name="bytes">The array of bytes that will be copied.</param>
-            <summary>Creates an <see cref="T:SkiaSharp.SKData" /> by copying the provided byte array.</summary>
-            <remarks />
-        </member>
-        <member name="C:SkiaSharp.SKData(System.Byte[],System.UInt64)">
-            <param name="bytes">The array of bytes that will be copied.</param>
-            <param name="length">The size of the buffer to create.</param>
-            <summary>Creates an <see cref="T:SkiaSharp.SKData" /> by copying the provided byte array for the specified size.</summary>
-            <remarks />
-        </member>
-        <member name="C:SkiaSharp.SKData(System.IntPtr,System.UInt64)">
-            <param name="bytes">The pointer to a buffer.</param>
-            <param name="length">The length of the buffer.</param>
-            <summary>Creates an <see cref="T:SkiaSharp.SKData" /> by copying the provided byte buffer for the specified length.</summary>
-            <remarks />
-        </member>
         <member name="M:SkiaSharp.SKData.AsSpan">
             <summary>Returns a span that wraps the underlying data.</summary>
             <returns>Returns the data as a span.</returns>
@@ -7393,13 +7076,6 @@ If set to -1, the codec will decode any necessary required frame(s) first.
             <summary>Gets a reference to the empty data instance.</summary>
             <value />
             <remarks />
-        </member>
-        <member name="M:SkiaSharp.SKData.FromMallocMemory(System.IntPtr,System.UInt64)">
-            <param name="bytes">Pointer to memory that has been allocated with the operating system's "malloc" or <see cref="M:System.Runtime.InteropServices.Marshal.AllocHGlobal(System.Int32)" /> method.</param>
-            <param name="length">The size of the buffer allocated.</param>
-            <summary>Creates an <see cref="T:SkiaSharp.SKData" /> from a buffer that was previously allocated with the operating system "malloc" (or <see cref="M:System.Runtime.InteropServices.Marshal.AllocHGlobal(System.Int32)" /> method.</summary>
-            <returns>An <see cref="T:SkiaSharp.SKData" /> instance that wraps a memory block.</returns>
-            <remarks>When this <see cref="T:SkiaSharp.SKData" /> instance is cleared, the free method will be called on the provided buffer.</remarks>
         </member>
         <member name="P:SkiaSharp.SKData.IsEmpty">
             <summary>Gets a value indicating whether or not the data is empty.</summary>
@@ -7919,6 +7595,9 @@ all possible states.
         </member>
         <member name="F:SkiaSharp.SKEncodedImageFormat.Astc">
             <summary>The ASTC image format.</summary>
+        </member>
+        <member name="F:SkiaSharp.SKEncodedImageFormat.Avif">
+            <summary>To be added.</summary>
         </member>
         <member name="F:SkiaSharp.SKEncodedImageFormat.Bmp">
             <summary>The BMP image format.</summary>
@@ -9029,9 +8708,6 @@ in the system fallback.]]></format>
         <member name="F:SkiaSharp.SKFontStyleWidth.SemiExpanded">
             <summary>An expanded font width of 6.</summary>
         </member>
-        <member name="F:SkiaSharp.SKFontStyleWidth.UltaExpanded">
-            <summary />
-        </member>
         <member name="F:SkiaSharp.SKFontStyleWidth.UltraCondensed">
             <summary>A condensed font width of 1.</summary>
         </member>
@@ -9606,6 +9282,17 @@ in the system fallback.]]></format>
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
         </member>
+        <member name="M:SkiaSharp.SKImage.ApplyImageFilter(SkiaSharp.GRRecordingContext,SkiaSharp.SKImageFilter,SkiaSharp.SKRectI,SkiaSharp.SKRectI,SkiaSharp.SKRectI@,SkiaSharp.SKPointI@)">
+            <param name="context">To be added.</param>
+            <param name="filter">To be added.</param>
+            <param name="subset">To be added.</param>
+            <param name="clipBounds">To be added.</param>
+            <param name="outSubset">To be added.</param>
+            <param name="outOffset">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
         <member name="P:SkiaSharp.SKImage.ColorSpace">
             <summary>Gets the image color space.</summary>
             <value />
@@ -9645,13 +9332,6 @@ in the system fallback.]]></format>
             <summary>Encodes the image using the specified format.</summary>
             <returns>Returns the <see cref="T:SkiaSharp.SKData" /> wrapping the encoded image.</returns>
             <remarks>The quality is a suggestion, and not all formats (for example, PNG) respect or support it.</remarks>
-        </member>
-        <member name="M:SkiaSharp.SKImage.Encode(SkiaSharp.SKImageEncodeFormat,System.Int32)">
-            <param name="format">The file format used to encode the image.</param>
-            <param name="quality">The quality level to use for the image.</param>
-            <summary>Encodes the image using the specified format.</summary>
-            <returns>Returns the <see cref="T:SkiaSharp.SKData" /> wrapping the encoded image.</returns>
-            <remarks />
         </member>
         <member name="P:SkiaSharp.SKImage.EncodedData">
             <summary>Gets the encoded image pixels as a <see cref="T:SkiaSharp.SKData" />, if the image was created from supported encoded stream format.</summary>
@@ -9696,6 +9376,14 @@ in the system fallback.]]></format>
             <returns>Returns the new image, or <see langword="null" /> if the specified descriptor is unsupported.</returns>
             <remarks>SkiaSharp will delete or recycle the texture when the image is released.</remarks>
         </member>
+        <member name="M:SkiaSharp.SKImage.FromAdoptedTexture(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.SKColorType)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
         <member name="M:SkiaSharp.SKImage.FromAdoptedTexture(SkiaSharp.GRContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)">
             <param name="context">The graphics context.</param>
             <param name="texture">The description of the existing backend texture.</param>
@@ -9704,6 +9392,15 @@ in the system fallback.]]></format>
             <summary>Creates a new image from the specified texture.</summary>
             <returns>Returns the new image, or <see langword="null" /> if the specified texture is unsupported.</returns>
             <remarks>SkiaSharp will delete or recycle the texture when the image is released.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKImage.FromAdoptedTexture(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
         </member>
         <member name="M:SkiaSharp.SKImage.FromAdoptedTexture(SkiaSharp.GRContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKAlphaType)">
             <param name="context">The graphics context.</param>
@@ -9714,6 +9411,16 @@ in the system fallback.]]></format>
             <summary>Creates a new image from the specified texture.</summary>
             <returns>Returns the new image, or <see langword="null" /> if the specified texture is unsupported.</returns>
             <remarks>SkiaSharp will delete or recycle the texture when the image is released.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKImage.FromAdoptedTexture(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKAlphaType)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <param name="alpha">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
         </member>
         <member name="M:SkiaSharp.SKImage.FromAdoptedTexture(SkiaSharp.GRContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKAlphaType,SkiaSharp.SKColorSpace)">
             <param name="context">The graphics context.</param>
@@ -9726,24 +9433,22 @@ in the system fallback.]]></format>
             <returns>Returns the new image, or <see langword="null" /> if the specified texture is unsupported.</returns>
             <remarks>SkiaSharp will delete or recycle the texture when the image is released.</remarks>
         </member>
+        <member name="M:SkiaSharp.SKImage.FromAdoptedTexture(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKAlphaType,SkiaSharp.SKColorSpace)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <param name="alpha">To be added.</param>
+            <param name="colorspace">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
         <member name="M:SkiaSharp.SKImage.FromBitmap(SkiaSharp.SKBitmap)">
             <param name="bitmap">The bitmap that will be used as the source for the image.</param>
             <summary>Creates a new image from the provided <see cref="T:SkiaSharp.SKBitmap" />.</summary>
             <returns>An image whose contents are the contents of the specified bitmap.</returns>
             <remarks>If the bitmap is marked immutable, and its pixel memory is shareable, it may be shared instead of copied.</remarks>
-        </member>
-        <member name="M:SkiaSharp.SKImage.FromData(SkiaSharp.SKData)">
-            <param name="data">The data holding the encoded image.</param>
-            <summary>Creates a new image from an encoded image wrapped by the data.</summary>
-            <returns>The decoded image, or <see langword="null" /> on error.</returns>
-            <remarks />
-        </member>
-        <member name="M:SkiaSharp.SKImage.FromData(SkiaSharp.SKData,SkiaSharp.SKRectI)">
-            <param name="data">The data holding the encoded image.</param>
-            <param name="subset">The bounds for a subset of the image.</param>
-            <summary>Creates a new image from an encoded image wrapped by the data.</summary>
-            <returns>The decoded image, or <see langword="null" /> on error.</returns>
-            <remarks />
         </member>
         <member name="M:SkiaSharp.SKImage.FromEncodedData(SkiaSharp.SKData)">
             <param name="data">The data holding the encoded image.</param>
@@ -10007,6 +9712,14 @@ in the system fallback.]]></format>
             <returns>Returns the new image, or <see langword="null" /> if the specified descriptor is unsupported.</returns>
             <remarks />
         </member>
+        <member name="M:SkiaSharp.SKImage.FromTexture(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.SKColorType)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
         <member name="M:SkiaSharp.SKImage.FromTexture(SkiaSharp.GRContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)">
             <param name="context">The graphics context.</param>
             <param name="texture">The description of the existing backend texture.</param>
@@ -10033,6 +9746,15 @@ in the system fallback.]]></format>
             <summary>Creates a new image from the specified OpenGL texture descriptor.</summary>
             <returns>Returns the new image, or <see langword="null" /> if the specified descriptor is unsupported.</returns>
             <remarks />
+        </member>
+        <member name="M:SkiaSharp.SKImage.FromTexture(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
         </member>
         <member name="M:SkiaSharp.SKImage.FromTexture(SkiaSharp.GRContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKAlphaType)">
             <param name="context">The graphics context.</param>
@@ -10064,6 +9786,16 @@ in the system fallback.]]></format>
             <returns>Returns the new image, or <see langword="null" /> if the specified descriptor is unsupported</returns>
             <remarks />
         </member>
+        <member name="M:SkiaSharp.SKImage.FromTexture(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKAlphaType)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <param name="alpha">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
         <member name="M:SkiaSharp.SKImage.FromTexture(SkiaSharp.GRContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKAlphaType,SkiaSharp.SKColorSpace)">
             <param name="context">The graphics context.</param>
             <param name="texture">The description of the existing backend texture.</param>
@@ -10074,6 +9806,17 @@ in the system fallback.]]></format>
             <summary>Creates a new image from the specified texture.</summary>
             <returns>Returns the new image, or <see langword="null" /> if the specified texture is unsupported</returns>
             <remarks />
+        </member>
+        <member name="M:SkiaSharp.SKImage.FromTexture(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKAlphaType,SkiaSharp.SKColorSpace)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <param name="alpha">To be added.</param>
+            <param name="colorspace">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
         </member>
         <member name="M:SkiaSharp.SKImage.FromTexture(SkiaSharp.GRContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKAlphaType,SkiaSharp.SKColorSpace,SkiaSharp.SKImageTextureReleaseDelegate)">
             <param name="context">The graphics context.</param>
@@ -10087,6 +9830,18 @@ in the system fallback.]]></format>
             <returns>Returns the new image, or <see langword="null" /> if the specified texture is unsupported</returns>
             <remarks />
         </member>
+        <member name="M:SkiaSharp.SKImage.FromTexture(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKAlphaType,SkiaSharp.SKColorSpace,SkiaSharp.SKImageTextureReleaseDelegate)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <param name="alpha">To be added.</param>
+            <param name="colorspace">To be added.</param>
+            <param name="releaseProc">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
         <member name="M:SkiaSharp.SKImage.FromTexture(SkiaSharp.GRContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKAlphaType,SkiaSharp.SKColorSpace,SkiaSharp.SKImageTextureReleaseDelegate,System.Object)">
             <param name="context">The graphics context.</param>
             <param name="texture">The description of the existing backend texture.</param>
@@ -10099,6 +9854,19 @@ in the system fallback.]]></format>
             <summary>Creates a new image from the specified texture.</summary>
             <returns>Returns the new image, or <see langword="null" /> if the specified texture is unsupported</returns>
             <remarks />
+        </member>
+        <member name="M:SkiaSharp.SKImage.FromTexture(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKAlphaType,SkiaSharp.SKColorSpace,SkiaSharp.SKImageTextureReleaseDelegate,System.Object)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <param name="alpha">To be added.</param>
+            <param name="colorspace">To be added.</param>
+            <param name="releaseProc">To be added.</param>
+            <param name="releaseContext">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
         </member>
         <member name="P:SkiaSharp.SKImage.Height">
             <summary>Gets the image height.</summary>
@@ -10126,6 +9894,12 @@ in the system fallback.]]></format>
             <remarks />
         </member>
         <member name="M:SkiaSharp.SKImage.IsValid(SkiaSharp.GRContext)">
+            <param name="context">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKImage.IsValid(SkiaSharp.GRRecordingContext)">
             <param name="context">To be added.</param>
             <summary>To be added.</summary>
             <returns>To be added.</returns>
@@ -10293,37 +10067,6 @@ in the system fallback.]]></format>
         <member name="F:SkiaSharp.SKImageCachingHint.Disallow">
             <summary>Caching should be avoided</summary>
         </member>
-        <member name="T:SkiaSharp.SKImageEncodeFormat">
-            <summary>Format to use when encoding an image with the <see cref="M:SkiaSharp.SKImage.Encode" /> method.</summary>
-            <remarks />
-        </member>
-        <member name="F:SkiaSharp.SKImageEncodeFormat.Bmp">
-            <summary>The BMP image format.</summary>
-        </member>
-        <member name="F:SkiaSharp.SKImageEncodeFormat.Gif">
-            <summary>The GIF image format.</summary>
-        </member>
-        <member name="F:SkiaSharp.SKImageEncodeFormat.Ico">
-            <summary>The ICO image format.</summary>
-        </member>
-        <member name="F:SkiaSharp.SKImageEncodeFormat.Jpeg">
-            <summary>The JPEG image format.</summary>
-        </member>
-        <member name="F:SkiaSharp.SKImageEncodeFormat.Ktx">
-            <summary>The KTX image format.</summary>
-        </member>
-        <member name="F:SkiaSharp.SKImageEncodeFormat.Png">
-            <summary>The PNG image format.</summary>
-        </member>
-        <member name="F:SkiaSharp.SKImageEncodeFormat.Unknown">
-            <summary>The image format is unknown.</summary>
-        </member>
-        <member name="F:SkiaSharp.SKImageEncodeFormat.Wbmp">
-            <summary>The WBMP image format.</summary>
-        </member>
-        <member name="F:SkiaSharp.SKImageEncodeFormat.Webp">
-            <summary>The WEBP image format.</summary>
-        </member>
         <member name="T:SkiaSharp.SKImageFilter">
             <summary>Image filters for use with the <see cref="P:SkiaSharp.SKPaint.ImageFilter" /> property of a <see cref="T:SkiaSharp.SKPaint" />.</summary>
             <remarks />
@@ -10402,17 +10145,6 @@ in the system fallback.]]></format>
             <returns>Returns the new <see cref="T:SkiaSharp.SKImageFilter" />, or null on error.</returns>
             <remarks />
         </member>
-        <member name="M:SkiaSharp.SKImageFilter.CreateCompose(SkiaSharp.SKDisplacementMapEffectChannelSelectorType,SkiaSharp.SKDisplacementMapEffectChannelSelectorType,System.Single,SkiaSharp.SKImageFilter,SkiaSharp.SKImageFilter,SkiaSharp.SKImageFilter+CropRect)">
-            <param name="xChannelSelector" />
-            <param name="yChannelSelector" />
-            <param name="scale" />
-            <param name="displacement" />
-            <param name="input" />
-            <param name="cropRect" />
-            <summary />
-            <returns />
-            <remarks />
-        </member>
         <member name="M:SkiaSharp.SKImageFilter.CreateDilate(System.Int32,System.Int32,SkiaSharp.SKImageFilter,SkiaSharp.SKImageFilter+CropRect)">
             <param name="radiusX">The amount of dilation in the x-direction.</param>
             <param name="radiusY">The amount of dilation in the y-direction.</param>
@@ -10421,6 +10153,15 @@ in the system fallback.]]></format>
             <summary>Creates an image filter that applies a dilation to pixels of a bitmap.</summary>
             <returns>Returns the new <see cref="T:SkiaSharp.SKImageFilter" />, or null on error.</returns>
             <remarks />
+        </member>
+        <member name="M:SkiaSharp.SKImageFilter.CreateDilate(System.Single,System.Single,SkiaSharp.SKImageFilter,SkiaSharp.SKImageFilter+CropRect)">
+            <param name="radiusX">To be added.</param>
+            <param name="radiusY">To be added.</param>
+            <param name="input">To be added.</param>
+            <param name="cropRect">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
         </member>
         <member name="M:SkiaSharp.SKImageFilter.CreateDisplacementMapEffect(SkiaSharp.SKColorChannel,SkiaSharp.SKColorChannel,System.Single,SkiaSharp.SKImageFilter,SkiaSharp.SKImageFilter,SkiaSharp.SKImageFilter+CropRect)">
             <param name="xChannelSelector">To be added.</param>
@@ -10513,6 +10254,15 @@ in the system fallback.]]></format>
             <returns>Returns the new <see cref="T:SkiaSharp.SKImageFilter" />, or null on error.</returns>
             <remarks />
         </member>
+        <member name="M:SkiaSharp.SKImageFilter.CreateErode(System.Single,System.Single,SkiaSharp.SKImageFilter,SkiaSharp.SKImageFilter+CropRect)">
+            <param name="radiusX">To be added.</param>
+            <param name="radiusY">To be added.</param>
+            <param name="input">To be added.</param>
+            <param name="cropRect">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
         <member name="M:SkiaSharp.SKImageFilter.CreateImage(SkiaSharp.SKImage)">
             <param name="image">The image to draw.</param>
             <summary>Creates an image filter that draws an image.</summary>
@@ -10525,14 +10275,6 @@ in the system fallback.]]></format>
             <param name="dst">The rectangle of the destination area.</param>
             <param name="filterQuality">The filter quality.</param>
             <summary>Creates an image filter that draws an image.</summary>
-            <returns>Returns the new <see cref="T:SkiaSharp.SKImageFilter" />, or null on error.</returns>
-            <remarks />
-        </member>
-        <member name="M:SkiaSharp.SKImageFilter.CreateMagnifier(SkiaSharp.SKRect,System.Single,SkiaSharp.SKImageFilter)">
-            <param name="src">The rectangle area to magnify.</param>
-            <param name="inset">The amount of magnification to apply.</param>
-            <param name="input">The input filter to use.</param>
-            <summary>Creates an image filter that magnifies an area of a bitmap.</summary>
             <returns>Returns the new <see cref="T:SkiaSharp.SKImageFilter" />, or null on error.</returns>
             <remarks />
         </member>
@@ -11943,13 +11685,6 @@ give unspecified results.
             <summary>Apply the to the array of vectors and return the mapped results..</summary>
             <remarks>Mapping vectors ignores the translation component in the matrix. Use <see cref="M:SkiaSharp.SKMatrix.MapPoints(SkiaSharp.SKPoint[],SkiaSharp.SKPoint[])" /> to take the translation into consideration.</remarks>
         </member>
-        <member name="M:SkiaSharp.SKMatrix.MapXY(System.Single,System.Single)">
-            <param name="x">The x-coordinate.</param>
-            <param name="y">The y-coordinate.</param>
-            <summary>Applies the matrix to a point.</summary>
-            <returns>Returns the mapped point.</returns>
-            <remarks>Mapping uses all components in the matrix. Use <see cref="M:SkiaSharp.SKMatrix.MapVector(System.Single,System.Single)" /> to ignore the translation.</remarks>
-        </member>
         <member name="M:SkiaSharp.SKMatrix.op_Equality(SkiaSharp.SKMatrix,SkiaSharp.SKMatrix)">
             <param name="left">To be added.</param>
             <param name="right">To be added.</param>
@@ -11985,13 +11720,13 @@ give unspecified results.
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
         </member>
-        <member name="M:SkiaSharp.SKMatrix.PostConcat(SkiaSharp.SKMatrix@,SkiaSharp.SKMatrix@)">
+        <member name="M:SkiaSharp.SKMatrix.PostConcat(SkiaSharp.SKMatrix@,SkiaSharp.SKMatrix)">
             <param name="target">The target matrix.</param>
             <param name="matrix">The matrix to be post-concatenated.</param>
             <summary>Post-concatenates the matrix to the target matrix.</summary>
             <remarks>This represents: result = matrix * target</remarks>
         </member>
-        <member name="M:SkiaSharp.SKMatrix.PostConcat(SkiaSharp.SKMatrix@,SkiaSharp.SKMatrix)">
+        <member name="M:SkiaSharp.SKMatrix.PostConcat(SkiaSharp.SKMatrix@,SkiaSharp.SKMatrix@)">
             <param name="target">The target matrix.</param>
             <param name="matrix">The matrix to be post-concatenated.</param>
             <summary>Post-concatenates the matrix to the target matrix.</summary>
@@ -13952,11 +13687,6 @@ consumes up to `length` bytes from the buffer.
             <value />
             <remarks />
         </member>
-        <member name="P:SkiaSharp.SKPaint.StrikeThruText">
-            <summary>Gets or sets a value indicating whether to strike through text.</summary>
-            <value />
-            <remarks />
-        </member>
         <member name="P:SkiaSharp.SKPaint.StrokeCap">
             <summary>Gets or sets a value indicating how the start and end of stroked lines and paths are treated.</summary>
             <value />
@@ -14019,16 +13749,6 @@ consumes up to `length` bytes from the buffer.
         </member>
         <member name="P:SkiaSharp.SKPaint.Typeface">
             <summary>Gets or sets the typeface used when painting text. May be <see langword="null" />.</summary>
-            <value />
-            <remarks />
-        </member>
-        <member name="P:SkiaSharp.SKPaint.UnderlineText">
-            <summary>Gets or sets a value indicating whether to underline text.</summary>
-            <value />
-            <remarks />
-        </member>
-        <member name="P:SkiaSharp.SKPaint.XferMode">
-            <summary>Gets or sets the transfer mode.</summary>
             <value />
             <remarks />
         </member>
@@ -14108,23 +13828,10 @@ stroked.
             <summary>Adds a closed oval contour to the path.</summary>
             <remarks />
         </member>
-        <member name="M:SkiaSharp.SKPath.AddPath(SkiaSharp.SKPath,SkiaSharp.SKPath+AddMode)">
-            <param name="other">The path containing the elements to be added to the current path.</param>
-            <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPath.AddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPath.AddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
-            <summary>Extends the current path with the path elements from another path, using the specified extension mode.</summary>
-            <remarks />
-        </member>
         <member name="M:SkiaSharp.SKPath.AddPath(SkiaSharp.SKPath,SkiaSharp.SKPathAddMode)">
             <param name="other">The path containing the elements to be added to the current path.</param>
             <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPathAddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPathAddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
             <summary>Extends the current path with the path elements from another path, using the specified extension mode.</summary>
-            <remarks />
-        </member>
-        <member name="M:SkiaSharp.SKPath.AddPath(SkiaSharp.SKPath,SkiaSharp.SKMatrix@,SkiaSharp.SKPath+AddMode)">
-            <param name="other">The path containing the elements to be added to the current path.</param>
-            <param name="matrix">Transformation matrix applied to the <paramref name="other" /> path.</param>
-            <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPath.AddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPath.AddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
-            <summary>Extends the current path with the path elements from another path, by applying the specified transformation matrix, using the specified extension mode.</summary>
             <remarks />
         </member>
         <member name="M:SkiaSharp.SKPath.AddPath(SkiaSharp.SKPath,SkiaSharp.SKMatrix@,SkiaSharp.SKPathAddMode)">
@@ -14132,14 +13839,6 @@ stroked.
             <param name="matrix">Transformation matrix applied to the <paramref name="other" /> path.</param>
             <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPathAddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPathAddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
             <summary>Extends the current path with the path elements from another path, by applying the specified transformation matrix, using the specified extension mode.</summary>
-            <remarks />
-        </member>
-        <member name="M:SkiaSharp.SKPath.AddPath(SkiaSharp.SKPath,System.Single,System.Single,SkiaSharp.SKPath+AddMode)">
-            <param name="other">The path containing the elements to be added to the current path.</param>
-            <param name="dx">The amount to translate the path in X as it is added.</param>
-            <param name="dy">The amount to translate the path in Y as it is added.</param>
-            <param name="mode">Determines how the <paramref name="other" /> path contours are added to the path. On <see cref="F:SkiaSharp.SKPath.AddMode.Append" /> mode, contours are added as new contours. On <see cref="F:SkiaSharp.SKPath.AddMode.Extend" /> mode, the last contour of the path is extended with the first contour of the <paramref name="other" /> path.</param>
-            <summary>Extends the current path with the path elements from another path offset by (<paramref name="dx" />, <paramref name="dy" />), using the specified extension mode.</summary>
             <remarks />
         </member>
         <member name="M:SkiaSharp.SKPath.AddPath(SkiaSharp.SKPath,System.Single,System.Single,SkiaSharp.SKPathAddMode)">
@@ -14851,16 +14550,6 @@ the first point is automatically set to (0, 0).
             <value />
             <remarks />
         </member>
-        <member name="T:SkiaSharp.SKPath+AddMode">
-            <summary>Controls how a path is added to another path.</summary>
-            <remarks />
-        </member>
-        <member name="F:SkiaSharp.SKPath+AddMode.Append">
-            <summary>Source path contours are added as new contours.</summary>
-        </member>
-        <member name="F:SkiaSharp.SKPath+AddMode.Extend">
-            <summary>The path is added by extending the last contour of the destination path with the first contour of the source path. If the last contour of the destination path is closed, then it will not be extended. Instead, the start of source path will be extended by a straight line to the end point of the destination path.</summary>
-        </member>
         <member name="T:SkiaSharp.SKPath+Iterator">
             <summary>Iterator object to scan the all of the segments (lines, quadratics, cubics) of each contours in a path.</summary>
             <remarks>
@@ -14998,31 +14687,6 @@ method.
             <returns>Returns the verb for the next segment.</returns>
             <remarks />
         </member>
-        <member name="T:SkiaSharp.SKPath+Verb">
-            <summary>Verbs contained in an <see cref="T:SkiaSharp.SKPath" />.</summary>
-            <remarks>In the description below, the number of points returned represents the number of valid entries on the return array of points that is passed to <see cref="M:SkiaSharp.SKPath.Iterator.Next(SkiaSharp.SKPoint[],System.Boolean,System.Boolean)" /> or <see cref="M:SkiaSharp.SKPath.RawIterator.Next(SkiaSharp.SKPoint[])" />.</remarks>
-        </member>
-        <member name="F:SkiaSharp.SKPath+Verb.Close">
-            <summary>Close path, a call to <see cref="M:SkiaSharp.SKPath.Iterator.Next(SkiaSharp.SKPoint[],System.Boolean,System.Boolean)" /> or <see cref="M:SkiaSharp.SKPath.RawIterator.Next(SkiaSharp.SKPoint[])" /> will return one point (contour's <see cref="M:SkiaSharp.SKPath.MoveTo(SkiaSharp.SKPoint)" /> point).</summary>
-        </member>
-        <member name="F:SkiaSharp.SKPath+Verb.Conic">
-            <summary>Conic path, a call to <see cref="M:SkiaSharp.SKPath.Iterator.Next(SkiaSharp.SKPoint[],System.Boolean,System.Boolean)" /> or <see cref="M:SkiaSharp.SKPath.RawIterator.Next(SkiaSharp.SKPoint[])" /> will return three points, plus the <see cref="M:SkiaSharp.SKPath.RawIterator.ConicWeight" /> point.</summary>
-        </member>
-        <member name="F:SkiaSharp.SKPath+Verb.Cubic">
-            <summary>Cubic path, a call to <see cref="M:SkiaSharp.SKPath.Iterator.Next(SkiaSharp.SKPoint[],System.Boolean,System.Boolean)" /> or <see cref="M:SkiaSharp.SKPath.RawIterator.Next(SkiaSharp.SKPoint[])" /> will return four points.</summary>
-        </member>
-        <member name="F:SkiaSharp.SKPath+Verb.Done">
-            <summary>The path is completed, points will not contain any data.</summary>
-        </member>
-        <member name="F:SkiaSharp.SKPath+Verb.Line">
-            <summary>Line path, a call to <see cref="M:SkiaSharp.SKPath.Iterator.Next(SkiaSharp.SKPoint[],System.Boolean,System.Boolean)" /> or <see cref="M:SkiaSharp.SKPath.RawIterator.Next(SkiaSharp.SKPoint[])" /> will return two points.</summary>
-        </member>
-        <member name="F:SkiaSharp.SKPath+Verb.Move">
-            <summary>Move command, a call to <see cref="M:SkiaSharp.SKPath.Iterator.Next(SkiaSharp.SKPoint[],System.Boolean,System.Boolean)" /> or <see cref="M:SkiaSharp.SKPath.RawIterator.Next(SkiaSharp.SKPoint[])" /> will return a single point.</summary>
-        </member>
-        <member name="F:SkiaSharp.SKPath+Verb.Quad">
-            <summary>Quad command, a call to <see cref="M:SkiaSharp.SKPath.Iterator.Next(SkiaSharp.SKPoint[],System.Boolean,System.Boolean)" /> or <see cref="M:SkiaSharp.SKPath.RawIterator.Next(SkiaSharp.SKPoint[])" /> will return three points.</summary>
-        </member>
         <member name="T:SkiaSharp.SKPath1DPathEffectStyle">
             <summary>How to transform path at each point (based on the current position and tangent).</summary>
             <remarks />
@@ -15081,15 +14745,6 @@ method.
         </member>
         <member name="T:SkiaSharp.SKPathEffect">
             <summary>The base class for objects in the <see cref="T:SkiaSharp.SKPaint" /> that affect the geometry of a drawing primitive before it is transformed by the canvas' matrix and drawn.</summary>
-            <remarks />
-        </member>
-        <member name="M:SkiaSharp.SKPathEffect.Create1DPath(SkiaSharp.SKPath,System.Single,System.Single,SkiaSharp.SkPath1DPathEffectStyle)">
-            <param name="path">The path to replicate (dash).</param>
-            <param name="advance">The space between instances of path.</param>
-            <param name="phase">The distance (mod advance) along path for its initial position.</param>
-            <param name="style">How to transform path at each point (based on the current position and tangent).</param>
-            <summary>Creates a dash path effect by replicating the specified path.</summary>
-            <returns>Returns the new <see cref="T:SkiaSharp.SKPathEffect" />, or null on error.</returns>
             <remarks />
         </member>
         <member name="M:SkiaSharp.SKPathEffect.Create1DPath(SkiaSharp.SKPath,System.Single,System.Single,SkiaSharp.SKPath1DPathEffectStyle)">
@@ -15228,14 +14883,6 @@ method.
             <returns>To be added.</returns>
             <remarks>To be added.</remarks>
         </member>
-        <member name="M:SkiaSharp.SKPathMeasure.GetMatrix(System.Single,SkiaSharp.SKMatrix@,SkiaSharp.SKPathMeasure+MatrixFlags)">
-            <param name="distance">The distance to use.</param>
-            <param name="matrix">The computed matrix.</param>
-            <param name="flags">Flags to indicate how to compute the matrix.</param>
-            <summary>Computes a <see cref="T:SkiaSharp.SKMatrix" /> from the specified distance along the path.</summary>
-            <returns>Returns false if there is no path, or a zero-length path was specified, in which case matrix is unchanged.</returns>
-            <remarks>Distance is pinned to 0 &lt;= distance &lt;= <see cref="P:SkiaSharp.SKPathMeasure.Length" />.</remarks>
-        </member>
         <member name="M:SkiaSharp.SKPathMeasure.GetMatrix(System.Single,SkiaSharp.SKMatrix@,SkiaSharp.SKPathMeasureMatrixFlags)">
             <param name="distance">The distance to use.</param>
             <param name="matrix">The computed matrix.</param>
@@ -15321,19 +14968,6 @@ method.
             <summary>Reset the path measure with the specified path.</summary>
             <remarks>The path must remain valid for the lifetime of the measure object, or until <see cref="M:SkiaSharp.SKPathMeasure.SetPath(SkiaSharp.SKPath,System.Boolean)" /> is called with a different path (or null), since the measure object keeps a reference to the path object (does not copy its data).</remarks>
         </member>
-        <member name="T:SkiaSharp.SKPathMeasure+MatrixFlags">
-            <summary>Flags to indicate how to compute a matrix from a position along a path.</summary>
-            <remarks>This is used with <see cref="M:SkiaSharp.SKPathMeasure.GetMatrix(System.Single,SkiaSharp.SKMatrix@,SkiaSharp.SKPathMeasure.MatrixFlags)" />.</remarks>
-        </member>
-        <member name="F:SkiaSharp.SKPathMeasure+MatrixFlags.GetPosition">
-            <summary>Use the coordinates of the point along the path.</summary>
-        </member>
-        <member name="F:SkiaSharp.SKPathMeasure+MatrixFlags.GetPositionAndTangent">
-            <summary>Use the coordinates of the point and the tangent along the path.</summary>
-        </member>
-        <member name="F:SkiaSharp.SKPathMeasure+MatrixFlags.GetTangent">
-            <summary>Use the coordinates of the tangent along the path.</summary>
-        </member>
         <member name="T:SkiaSharp.SKPathMeasureMatrixFlags">
             <summary>Flags to indicate how to compute a matrix from a position along a path.</summary>
             <remarks>This is used with <see cref="M:SkiaSharp.SKPathMeasure.GetMatrix(System.Single,SkiaSharp.SKMatrix@,SkiaSharp.SKPathMeasureMatrixFlags)" />.</remarks>
@@ -15410,11 +15044,6 @@ method.
         <member name="T:SkiaSharp.SKPicture">
             <summary>Recorded drawing operations made to a <see cref="T:SkiaSharp.SKCanvas" /> to be played back at a later time.</summary>
             <remarks>This base class handles serialization and a few other miscellany.</remarks>
-        </member>
-        <member name="P:SkiaSharp.SKPicture.Bounds">
-            <summary>Gets the culling rectangle for this picture.</summary>
-            <value />
-            <remarks>Operations recorded into this picture that attempt to draw outside the culling rectangle might not be drawn.</remarks>
         </member>
         <member name="P:SkiaSharp.SKPicture.CullRect">
             <summary>Gets the culling rectangle for this picture.</summary>
@@ -15876,6 +15505,14 @@ source data.
         </member>
         <member name="M:SkiaSharp.SKPixmap.Erase(SkiaSharp.SKColorF,SkiaSharp.SKRectI)">
             <param name="color">To be added.</param>
+            <param name="subset">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKPixmap.Erase(SkiaSharp.SKColorF,SkiaSharp.SKColorSpace,SkiaSharp.SKRectI)">
+            <param name="color">To be added.</param>
+            <param name="colorspace">To be added.</param>
             <param name="subset">To be added.</param>
             <summary>To be added.</summary>
             <returns>To be added.</returns>
@@ -18619,14 +18256,6 @@ be colorized using the color on the paint.
             <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. This function never returns null.</returns>
             <remarks />
         </member>
-        <member name="M:SkiaSharp.SKShader.CreateCompose(SkiaSharp.SKShader,SkiaSharp.SKShader,SkiaSharp.SKXferMode)">
-            <param name="shaderA">The colors from this shader are seen as the destination by the transfer mode.</param>
-            <param name="shaderB">The colors from this shader are seen as the source by the transfer mode.</param>
-            <param name="mode">The transfer mode that combines the two shaders.</param>
-            <summary>Create a new compose shader, which combines two shaders by a transfer mode.</summary>
-            <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. This function never returns null.</returns>
-            <remarks />
-        </member>
         <member name="M:SkiaSharp.SKShader.CreateEmpty">
             <summary>Creates a new "empty" shader that will not draw anything.</summary>
             <returns>Returns a new <see cref="T:SkiaSharp.SKShader" />, or an empty shader on error. This function never returns null.</returns>
@@ -19576,9 +19205,6 @@ the local matrix and does not imply scaling (only translation and cropping).
         <member name="F:SkiaSharp.SKStrokeJoin.Miter">
             <summary>Connect path segments with a sharp join.</summary>
         </member>
-        <member name="F:SkiaSharp.SKStrokeJoin.Mitter">
-            <summary>Connect path segments with a sharp join.</summary>
-        </member>
         <member name="F:SkiaSharp.SKStrokeJoin.Round">
             <summary>Connect path segments with a round join.</summary>
         </member>
@@ -19639,6 +19265,11 @@ The example above produces the following:
             <summary>Gets the canvas for this surface which can be used for drawing into it.</summary>
             <value />
             <remarks />
+        </member>
+        <member name="P:SkiaSharp.SKSurface.Context">
+            <summary>To be added.</summary>
+            <value>To be added.</value>
+            <remarks>To be added.</remarks>
         </member>
         <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKImageInfo)">
             <param name="info">Contains the image configuration parameters.</param>
@@ -19763,6 +19394,30 @@ The example above produces the following:
             <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
             <remarks />
         </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.SKColorType)">
+            <param name="context">To be added.</param>
+            <param name="renderTarget">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.SKColorType)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,System.Boolean,SkiaSharp.SKImageInfo)">
+            <param name="context">To be added.</param>
+            <param name="budgeted">To be added.</param>
+            <param name="info">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
         <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKImageInfo,System.Int32,SkiaSharp.SKSurfaceProperties)">
             <param name="info">The image configuration parameters.</param>
             <param name="rowBytes">The number of bytes per row in the pixel buffer.</param>
@@ -19840,6 +19495,60 @@ The example above produces the following:
             <summary>Creates a new surface whose contents will be drawn to an offscreen render target, allocated by the surface.</summary>
             <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
             <remarks />
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)">
+            <param name="context">To be added.</param>
+            <param name="renderTarget">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.SKColorType,SkiaSharp.SKSurfaceProperties)">
+            <param name="context">To be added.</param>
+            <param name="renderTarget">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <param name="props">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.SKColorType,SkiaSharp.SKSurfaceProperties)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <param name="props">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,System.Boolean,SkiaSharp.SKImageInfo,SkiaSharp.SKSurfaceProperties)">
+            <param name="context">To be added.</param>
+            <param name="budgeted">To be added.</param>
+            <param name="info">To be added.</param>
+            <param name="props">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,System.Boolean,SkiaSharp.SKImageInfo,System.Int32)">
+            <param name="context">To be added.</param>
+            <param name="budgeted">To be added.</param>
+            <param name="info">To be added.</param>
+            <param name="sampleCount">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
         </member>
         <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKImageInfo,System.IntPtr,System.Int32,SkiaSharp.SKSurfaceProperties)">
             <param name="info">The image configuration parameters.</param>
@@ -19938,6 +19647,66 @@ The example above produces the following:
             <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
             <remarks />
         </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKColorSpace)">
+            <param name="context">To be added.</param>
+            <param name="renderTarget">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <param name="colorspace">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKSurfaceProperties)">
+            <param name="context">To be added.</param>
+            <param name="renderTarget">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <param name="props">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKSurfaceProperties)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <param name="props">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,System.Int32,SkiaSharp.SKColorType)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="sampleCount">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,System.Boolean,SkiaSharp.SKImageInfo,System.Int32,SkiaSharp.GRSurfaceOrigin)">
+            <param name="context">To be added.</param>
+            <param name="budgeted">To be added.</param>
+            <param name="info">To be added.</param>
+            <param name="sampleCount">To be added.</param>
+            <param name="origin">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,System.Boolean,SkiaSharp.SKImageInfo,System.Int32,SkiaSharp.SKSurfaceProperties)">
+            <param name="context">To be added.</param>
+            <param name="budgeted">To be added.</param>
+            <param name="info">To be added.</param>
+            <param name="sampleCount">To be added.</param>
+            <param name="props">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
         <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKImageInfo,System.IntPtr,System.Int32,SkiaSharp.SKSurfaceReleaseDelegate,System.Object)">
             <param name="info">The image configuration parameters.</param>
             <param name="pixels">The pointer to an in memory-buffer that can hold the image as specified.</param>
@@ -19991,6 +19760,39 @@ The example above produces the following:
             <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
             <remarks />
         </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendRenderTarget,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKColorType,SkiaSharp.SKColorSpace,SkiaSharp.SKSurfaceProperties)">
+            <param name="context">To be added.</param>
+            <param name="renderTarget">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <param name="colorspace">To be added.</param>
+            <param name="props">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,System.Int32,SkiaSharp.SKColorType,SkiaSharp.SKColorSpace)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="sampleCount">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <param name="colorspace">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,System.Int32,SkiaSharp.SKColorType,SkiaSharp.SKSurfaceProperties)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="sampleCount">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <param name="props">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
         <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.SKImageInfo,System.IntPtr,System.Int32,SkiaSharp.SKSurfaceReleaseDelegate,System.Object,SkiaSharp.SKSurfaceProperties)">
             <param name="info">The image configuration parameters.</param>
             <param name="pixels">The pointer to an in memory-buffer that can hold the image as specified.</param>
@@ -20036,6 +19838,30 @@ The example above produces the following:
             <summary>Creates a new surface whose contents will be drawn to an offscreen render target, allocated by the surface.</summary>
             <returns>Returns the new surface if it could be created and the configuration is supported, otherwise <see langword="null" />.</returns>
             <remarks />
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,SkiaSharp.GRBackendTexture,SkiaSharp.GRSurfaceOrigin,System.Int32,SkiaSharp.SKColorType,SkiaSharp.SKColorSpace,SkiaSharp.SKSurfaceProperties)">
+            <param name="context">To be added.</param>
+            <param name="texture">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="sampleCount">To be added.</param>
+            <param name="colorType">To be added.</param>
+            <param name="colorspace">To be added.</param>
+            <param name="props">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Create(SkiaSharp.GRRecordingContext,System.Boolean,SkiaSharp.SKImageInfo,System.Int32,SkiaSharp.GRSurfaceOrigin,SkiaSharp.SKSurfaceProperties,System.Boolean)">
+            <param name="context">To be added.</param>
+            <param name="budgeted">To be added.</param>
+            <param name="info">To be added.</param>
+            <param name="sampleCount">To be added.</param>
+            <param name="origin">To be added.</param>
+            <param name="props">To be added.</param>
+            <param name="shouldCreateWithMips">To be added.</param>
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
         </member>
         <member name="M:SkiaSharp.SKSurface.Create(System.Int32,System.Int32,SkiaSharp.SKColorType,SkiaSharp.SKAlphaType,System.IntPtr,System.Int32,SkiaSharp.SKSurfaceProps)">
             <param name="width">The desired width for the surface.</param>
@@ -20181,6 +20007,12 @@ The example above produces the following:
             <remarks />
         </member>
         <member name="M:SkiaSharp.SKSurface.Flush">
+            <summary>To be added.</summary>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.SKSurface.Flush(System.Boolean,System.Boolean)">
+            <param name="submit">To be added.</param>
+            <param name="synchronous">To be added.</param>
             <summary>To be added.</summary>
             <remarks>To be added.</remarks>
         </member>
@@ -20702,6 +20534,16 @@ The example above produces the following:
             <summary>Adds a new horizontally-positioned run to the builder.</summary>
             <remarks>The number of positions, characters and clusters must be the same as the number of glyphs.</remarks>
         </member>
+        <member name="M:SkiaSharp.SKTextBlobBuilder.AddHorizontalRun(SkiaSharp.SKPaint,System.Single,System.UInt16[],System.Single[],System.Byte[],System.UInt32[])">
+            <param name="font">The font to be used for this run.</param>
+            <param name="y">The vertical offset within the blob.</param>
+            <param name="glyphs">The glyphs for this run.</param>
+            <param name="positions">The horizontal positions of each glyph.</param>
+            <param name="text">The UTF-8 chacracter information for this run.</param>
+            <param name="clusters">The glyph's cluster information.</param>
+            <summary>Adds a new horizontally-positioned run to the builder.</summary>
+            <remarks>The number of positions, characters and clusters must be the same as the number of glyphs.</remarks>
+        </member>
         <member name="M:SkiaSharp.SKTextBlobBuilder.AddHorizontalRun(SkiaSharp.SKPaint,System.Single,System.UInt16[],System.Single[],System.String,System.UInt32[])">
             <param name="font">The font to be used for this run.</param>
             <param name="y">The vertical offset within the blob.</param>
@@ -20723,14 +20565,14 @@ The example above produces the following:
             <summary>Adds a new horizontally-positioned run to the builder.</summary>
             <remarks>The number of positions, characters and clusters must be the same as the number of glyphs.</remarks>
         </member>
-        <member name="M:SkiaSharp.SKTextBlobBuilder.AddHorizontalRun(SkiaSharp.SKPaint,System.Single,System.UInt16[],System.Single[],System.Byte[],System.Byte[],System.UInt32[])">
+        <member name="M:SkiaSharp.SKTextBlobBuilder.AddHorizontalRun(SkiaSharp.SKPaint,System.Single,System.UInt16[],System.Single[],System.Byte[],System.UInt32[],SkiaSharp.SKRect)">
             <param name="font">The font to be used for this run.</param>
             <param name="y">The vertical offset within the blob.</param>
             <param name="glyphs">The glyphs for this run.</param>
             <param name="positions">The horizontal positions of each glyph.</param>
-            <param name="utf8Text">The UTF-8 chacracter information for this run.</param>
             <param name="text">The UTF-8 chacracter information for this run.</param>
             <param name="clusters">The glyph's cluster information.</param>
+            <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
             <summary>Adds a new horizontally-positioned run to the builder.</summary>
             <remarks>The number of positions, characters and clusters must be the same as the number of glyphs.</remarks>
         </member>
@@ -20740,18 +20582,6 @@ The example above produces the following:
             <param name="glyphs">The glyphs for this run.</param>
             <param name="positions">The horizontal positions of each glyph.</param>
             <param name="text">The chacracter information for this run.</param>
-            <param name="clusters">The glyph's cluster information.</param>
-            <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
-            <summary>Adds a new horizontally-positioned run to the builder.</summary>
-            <remarks>The number of positions, characters and clusters must be the same as the number of glyphs.</remarks>
-        </member>
-        <member name="M:SkiaSharp.SKTextBlobBuilder.AddHorizontalRun(SkiaSharp.SKPaint,System.Single,System.UInt16[],System.Single[],System.Byte[],System.Byte[],System.UInt32[],SkiaSharp.SKRect)">
-            <param name="font">The font to be used for this run.</param>
-            <param name="y">The vertical offset within the blob.</param>
-            <param name="glyphs">The glyphs for this run.</param>
-            <param name="positions">The horizontal positions of each glyph.</param>
-            <param name="utf8Text">The UTF-8 chacracter information for this run.</param>
-            <param name="text">The UTF-8 chacracter information for this run.</param>
             <param name="clusters">The glyph's cluster information.</param>
             <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
             <summary>Adds a new horizontally-positioned run to the builder.</summary>
@@ -20813,6 +20643,15 @@ The example above produces the following:
             <summary>Adds a new fully-positioned run to the builder.</summary>
             <remarks>The number of positions, characters and clusters must be the same as the number of glyphs.</remarks>
         </member>
+        <member name="M:SkiaSharp.SKTextBlobBuilder.AddPositionedRun(SkiaSharp.SKPaint,System.UInt16[],SkiaSharp.SKPoint[],System.Byte[],System.UInt32[])">
+            <param name="font">The font to be used for this run.</param>
+            <param name="glyphs">The glyphs for this run.</param>
+            <param name="positions">The positions of each glyph.</param>
+            <param name="text">The UTF-8 chacracter information for this run.</param>
+            <param name="clusters">The glyph's cluster information.</param>
+            <summary>Adds a new fully-positioned run to the builder.</summary>
+            <remarks>The number of positions, characters and clusters must be the same as the number of glyphs.</remarks>
+        </member>
         <member name="M:SkiaSharp.SKTextBlobBuilder.AddPositionedRun(SkiaSharp.SKPaint,System.UInt16[],SkiaSharp.SKPoint[],System.String,System.UInt32[])">
             <param name="font">The font to be used for this run.</param>
             <param name="glyphs">The glyphs for this run.</param>
@@ -20832,13 +20671,13 @@ The example above produces the following:
             <summary>Adds a new fully-positioned run to the builder.</summary>
             <remarks>The number of positions, characters and clusters must be the same as the number of glyphs.</remarks>
         </member>
-        <member name="M:SkiaSharp.SKTextBlobBuilder.AddPositionedRun(SkiaSharp.SKPaint,System.UInt16[],SkiaSharp.SKPoint[],System.Byte[],System.Byte[],System.UInt32[])">
+        <member name="M:SkiaSharp.SKTextBlobBuilder.AddPositionedRun(SkiaSharp.SKPaint,System.UInt16[],SkiaSharp.SKPoint[],System.Byte[],System.UInt32[],SkiaSharp.SKRect)">
             <param name="font">The font to be used for this run.</param>
             <param name="glyphs">The glyphs for this run.</param>
             <param name="positions">The positions of each glyph.</param>
-            <param name="utf8Text">The UTF-8 chacracter information for this run.</param>
             <param name="text">The UTF-8 chacracter information for this run.</param>
             <param name="clusters">The glyph's cluster information.</param>
+            <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
             <summary>Adds a new fully-positioned run to the builder.</summary>
             <remarks>The number of positions, characters and clusters must be the same as the number of glyphs.</remarks>
         </member>
@@ -20847,17 +20686,6 @@ The example above produces the following:
             <param name="glyphs">The glyphs for this run.</param>
             <param name="positions">The positions of each glyph.</param>
             <param name="text">The chacracter information for this run.</param>
-            <param name="clusters">The glyph's cluster information.</param>
-            <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
-            <summary>Adds a new fully-positioned run to the builder.</summary>
-            <remarks>The number of positions, characters and clusters must be the same as the number of glyphs.</remarks>
-        </member>
-        <member name="M:SkiaSharp.SKTextBlobBuilder.AddPositionedRun(SkiaSharp.SKPaint,System.UInt16[],SkiaSharp.SKPoint[],System.Byte[],System.Byte[],System.UInt32[],SkiaSharp.SKRect)">
-            <param name="font">The font to be used for this run.</param>
-            <param name="glyphs">The glyphs for this run.</param>
-            <param name="positions">The positions of each glyph.</param>
-            <param name="utf8Text">The UTF-8 chacracter information for this run.</param>
-            <param name="text">The UTF-8 chacracter information for this run.</param>
             <param name="clusters">The glyph's cluster information.</param>
             <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
             <summary>Adds a new fully-positioned run to the builder.</summary>
@@ -20921,6 +20749,16 @@ The example above produces the following:
             <summary>Adds a new deafult-positioned run to the builder.</summary>
             <remarks>The number of characters and clusters must be the same as the number of glyphs.</remarks>
         </member>
+        <member name="M:SkiaSharp.SKTextBlobBuilder.AddRun(SkiaSharp.SKPaint,System.Single,System.Single,System.UInt16[],System.Byte[],System.UInt32[])">
+            <param name="font">The font to be used for this run.</param>
+            <param name="x">The x-position of the origin of this run.</param>
+            <param name="y">The y-position of the origin of this run.</param>
+            <param name="glyphs">The glyphs for this run.</param>
+            <param name="text">The UTF-8 chacracter information for this run.</param>
+            <param name="clusters">The glyph's cluster information.</param>
+            <summary>Adds a new deafult-positioned run to the builder.</summary>
+            <remarks>The number of characters and clusters must be the same as the number of glyphs.</remarks>
+        </member>
         <member name="M:SkiaSharp.SKTextBlobBuilder.AddRun(SkiaSharp.SKPaint,System.Single,System.Single,System.UInt16[],System.String,System.UInt32[])">
             <param name="font">The font to be used for this run.</param>
             <param name="x">The x-position of the origin of this run.</param>
@@ -20942,14 +20780,14 @@ The example above produces the following:
             <summary>Adds a new deafult-positioned run to the builder.</summary>
             <remarks>The number of characters and clusters must be the same as the number of glyphs.</remarks>
         </member>
-        <member name="M:SkiaSharp.SKTextBlobBuilder.AddRun(SkiaSharp.SKPaint,System.Single,System.Single,System.UInt16[],System.Byte[],System.Byte[],System.UInt32[])">
+        <member name="M:SkiaSharp.SKTextBlobBuilder.AddRun(SkiaSharp.SKPaint,System.Single,System.Single,System.UInt16[],System.Byte[],System.UInt32[],SkiaSharp.SKRect)">
             <param name="font">The font to be used for this run.</param>
             <param name="x">The x-position of the origin of this run.</param>
             <param name="y">The y-position of the origin of this run.</param>
             <param name="glyphs">The glyphs for this run.</param>
-            <param name="utf8Text">The UTF-8 chacracter information for this run.</param>
             <param name="text">The UTF-8 chacracter information for this run.</param>
             <param name="clusters">The glyph's cluster information.</param>
+            <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
             <summary>Adds a new deafult-positioned run to the builder.</summary>
             <remarks>The number of characters and clusters must be the same as the number of glyphs.</remarks>
         </member>
@@ -20959,18 +20797,6 @@ The example above produces the following:
             <param name="y">The y-position of the origin of this run.</param>
             <param name="glyphs">The glyphs for this run.</param>
             <param name="text">The chacracter information for this run.</param>
-            <param name="clusters">The glyph's cluster information.</param>
-            <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
-            <summary>Adds a new deafult-positioned run to the builder.</summary>
-            <remarks>The number of characters and clusters must be the same as the number of glyphs.</remarks>
-        </member>
-        <member name="M:SkiaSharp.SKTextBlobBuilder.AddRun(SkiaSharp.SKPaint,System.Single,System.Single,System.UInt16[],System.Byte[],System.Byte[],System.UInt32[],SkiaSharp.SKRect)">
-            <param name="font">The font to be used for this run.</param>
-            <param name="x">The x-position of the origin of this run.</param>
-            <param name="y">The y-position of the origin of this run.</param>
-            <param name="glyphs">The glyphs for this run.</param>
-            <param name="utf8Text">The UTF-8 chacracter information for this run.</param>
-            <param name="text">The UTF-8 chacracter information for this run.</param>
             <param name="clusters">The glyph's cluster information.</param>
             <param name="bounds">The bounding box of the run, used when computing the blob bounds to avoid re-measuring.</param>
             <summary>Adds a new deafult-positioned run to the builder.</summary>
@@ -21933,113 +21759,6 @@ A typeface is understood to be italic when it has a slant of either
             <returns>Returns true if the write succeeded, otherwise false.</returns>
             <remarks />
         </member>
-        <member name="T:SkiaSharp.SKXferMode">
-            <summary>Predefined blend modes.</summary>
-            <remarks>
-                <format type="text/markdown"><![CDATA[
-## Remarks
-
-- **Porter Duff Compositing Operators**  
-  Defined algebra of compositing.  
-  These operators control the results of mixing the four sub-pixel regions
-  formed by the overlapping of graphical objects that have an alpha or
-  pixel coverage channel/value.
-- **Separable Blend Mode**  
-  Each component of the result color is completely determined by the
-  corresponding components of the constituent backdrop and source colors.
-- **Non-Separable Blend Mode**  
-  Considers all color components in combination as opposed to the
-  separable ones that look at each component individually.
-]]></format>
-            </remarks>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Clear">
-            <summary>No regions are enabled. [Porter Duff Compositing Operators] (https://drafts.fxtf.org/compositing-1/examples/PD_clr.svg)</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Color">
-            <summary>Creates a color with the hue and saturation of the source color and the luminosity of the backdrop color. [Non-Separable Blend Modes]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.ColorBurn">
-            <summary>Darkens the backdrop color to reflect the source color. [Separable Blend Modes]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.ColorDodge">
-            <summary>Brightens the backdrop color to reflect the source color. [Separable Blend Modes]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Darken">
-            <summary>Selects the darker of the backdrop and source colors. [Separable Blend Modes]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Difference">
-            <summary>Subtracts the darker of the two constituent colors from the lighter color. [Separable Blend Modes]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Dst">
-            <summary>Only the destination will be present. [Porter Duff Compositing Operators] (https://drafts.fxtf.org/compositing-1/examples/PD_dst.svg)</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.DstATop">
-            <summary>Destination which overlaps the source replaces the source. [Porter Duff Compositing Operators] (https://drafts.fxtf.org/compositing-1/examples/PD_dst-atop.svg)</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.DstIn">
-            <summary>Destination which overlaps the source, replaces the source. [Porter Duff Compositing Operators] (https://drafts.fxtf.org/compositing-1/examples/PD_dst-in.svg)</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.DstOut">
-            <summary>Destination is placed, where it falls outside of the source. [Porter Duff Compositing Operators] (https://drafts.fxtf.org/compositing-1/examples/PD_dst-out.svg)</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.DstOver">
-            <summary>Destination is placed over the source. [Porter Duff Compositing Operators] (https://drafts.fxtf.org/compositing-1/examples/PD_dst-over.svg)</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Exclusion">
-            <summary>Produces an effect similar to that of the Difference mode but lower in contrast. [Separable Blend Modes]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.HardLight">
-            <summary>Multiplies or screens the colors, depending on the source color value. [Separable Blend Modes]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Hue">
-            <summary>Creates a color with the hue of the source color and the saturation and luminosity of the backdrop color. [Non-Separable Blend Modes]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Lighten">
-            <summary>Selects the lighter of the backdrop and source colors. [Separable Blend Modes]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Luminosity">
-            <summary>Creates a color with the luminosity of the source color and the hue and saturation of the backdrop color. [Non-Separable Blend Modes]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Modulate">
-            <summary>Multiplies all components (= alpha and color). [Separable Blend Modes]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Multiply">
-            <summary>The source color is multiplied by the destination color and replaces the destination [Separable Blend Modes]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Overlay">
-            <summary>Multiplies or screens the colors, depending on the backdrop color value. [Separable Blend Modes]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Plus">
-            <summary>Display the sum of the source image and destination image. [Porter Duff Compositing Operators]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Saturation">
-            <summary>Creates a color with the saturation of the source color and the hue and luminosity of the backdrop color. [Non-Separable Blend Modes]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Screen">
-            <summary>Multiplies the complements of the backdrop and source color values, then complements the result. [Separable Blend Modes]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.SoftLight">
-            <summary>Darkens or lightens the colors, depending on the source color value. [Separable Blend Modes]</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Src">
-            <summary>Only the source will be present. [Porter Duff Compositing Operators] (https://drafts.fxtf.org/compositing-1/examples/PD_src.svg)</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.SrcATop">
-            <summary>Source which overlaps the destination, replaces the destination. [Porter Duff Compositing Operators] (https://drafts.fxtf.org/compositing-1/examples/PD_src-atop.svg)</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.SrcIn">
-            <summary>The source that overlaps the destination, replaces the destination. [Porter Duff Compositing Operators] (https://drafts.fxtf.org/compositing-1/examples/PD_src-in.svg)</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.SrcOut">
-            <summary>Source is placed, where it falls outside of the destination. [Porter Duff Compositing Operators] (https://drafts.fxtf.org/compositing-1/examples/PD_src-out.svg)</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.SrcOver">
-            <summary>Source is placed over the destination. [Porter Duff Compositing Operators] (https://drafts.fxtf.org/compositing-1/examples/PD_src-over.svg)</summary>
-        </member>
-        <member name="F:SkiaSharp.SKXferMode.Xor">
-            <summary>The non-overlapping regions of source and destination are combined. [Porter Duff Compositing Operators] (https://drafts.fxtf.org/compositing-1/examples/PD_xor.svg)</summary>
-        </member>
         <member name="T:SkiaSharp.SKXmlStreamWriter">
             <summary>A stream-based XML writer.</summary>
             <remarks />
@@ -22144,6 +21863,97 @@ A typeface is understood to be italic when it has a slant of either
             <summary>Returns the Unicode character code for the specified character.</summary>
             <returns>Returns the Unicode character code.</returns>
             <remarks />
+        </member>
+        <member name="T:SkiaSharp.Internals.IPlatformLock">
+            <summary>To be added.</summary>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.Internals.IPlatformLock.EnterReadLock">
+            <summary>To be added.</summary>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.Internals.IPlatformLock.EnterUpgradeableReadLock">
+            <summary>To be added.</summary>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.Internals.IPlatformLock.EnterWriteLock">
+            <summary>To be added.</summary>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.Internals.IPlatformLock.ExitReadLock">
+            <summary>To be added.</summary>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.Internals.IPlatformLock.ExitUpgradeableReadLock">
+            <summary>To be added.</summary>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.Internals.IPlatformLock.ExitWriteLock">
+            <summary>To be added.</summary>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="T:SkiaSharp.Internals.PlatformConfiguration">
+            <summary>To be added.</summary>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="P:SkiaSharp.Internals.PlatformConfiguration.Is64Bit">
+            <summary>To be added.</summary>
+            <value>To be added.</value>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="P:SkiaSharp.Internals.PlatformConfiguration.IsArm">
+            <summary>To be added.</summary>
+            <value>To be added.</value>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="P:SkiaSharp.Internals.PlatformConfiguration.IsGlibc">
+            <summary>To be added.</summary>
+            <value>To be added.</value>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="P:SkiaSharp.Internals.PlatformConfiguration.IsLinux">
+            <summary>To be added.</summary>
+            <value>To be added.</value>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="P:SkiaSharp.Internals.PlatformConfiguration.IsMac">
+            <summary>To be added.</summary>
+            <value>To be added.</value>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="P:SkiaSharp.Internals.PlatformConfiguration.IsUnix">
+            <summary>To be added.</summary>
+            <value>To be added.</value>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="P:SkiaSharp.Internals.PlatformConfiguration.IsWindows">
+            <summary>To be added.</summary>
+            <value>To be added.</value>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="P:SkiaSharp.Internals.PlatformConfiguration.LinuxFlavor">
+            <summary>To be added.</summary>
+            <value>To be added.</value>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="T:SkiaSharp.Internals.PlatformLock">
+            <summary>To be added.</summary>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.Internals.PlatformLock.Create">
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="M:SkiaSharp.Internals.PlatformLock.DefaultFactory">
+            <summary>To be added.</summary>
+            <returns>To be added.</returns>
+            <remarks>To be added.</remarks>
+        </member>
+        <member name="P:SkiaSharp.Internals.PlatformLock.Factory">
+            <summary>To be added.</summary>
+            <value>To be added.</value>
+            <remarks>To be added.</remarks>
         </member>
     </members>
 </doc>
