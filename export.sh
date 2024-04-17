@@ -82,7 +82,7 @@ fi
 mkdir -vp $TARGET_DIR/binm
 cp -vf "$CUR_DIR"/binm/ASEvaAPI.dll $TARGET_DIR/binm/
 cp -vf "$CUR_DIR"/3party/common/* $TARGET_DIR/binm/
-if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
+if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/binm/ASEvaAPIEto.dll $TARGET_DIR/binm/
     cp -vf "$CUR_DIR"/binm/ASEvaAPIMonoMac.dll $TARGET_DIR/binm/
     cp -vf "$CUR_DIR"/binm/PortableSharpGL.dll $TARGET_DIR/binm/
@@ -142,7 +142,7 @@ if [ "$EXPORT_DEVELOPER" = "y" ]; then
 
     mkdir -vp $TARGET_DIR/binm/debug
     cp -vf "$CUR_DIR"/binm/ASEvaAPI.xml $TARGET_DIR/binm/
-    if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
+    if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/eto-doc/* $TARGET_DIR/binm/
         cp -vf "$CUR_DIR"/3party/skia-doc/* $TARGET_DIR/binm/
         cp -vf "$CUR_DIR"/binm/ASEvaAPIEto.xml $TARGET_DIR/binm/
@@ -209,7 +209,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
     mkdir -vp $TARGET_DIR/binm/debug
     cp -vf "$CUR_DIR"/binm/ASEvaAPI.dll $TARGET_DIR/binm/debug/
     cp -vf "$CUR_DIR"/3party/common/* $TARGET_DIR/binm/debug/
-    if [ "$EXPORT_UI_LIBRARY" = "y" ]; then
+    if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
         cp -vf "$CUR_DIR"/binm/ASEvaAPIEto.dll $TARGET_DIR/binm/debug/
         cp -vf "$CUR_DIR"/binm/ASEvaAPIMonoMac.dll $TARGET_DIR/binm/debug/
         cp -vf "$CUR_DIR"/binm/PortableSharpGL.dll $TARGET_DIR/binm/debug/
