@@ -9,11 +9,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Generation's processing status
+    /// (api:app=3.0.0) Generation's processing status
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) Generation的状态信息
+    /// (api:app=3.0.0) Generation的状态信息
     /// </summary>
     public enum GenerationProcessStatus
     {
@@ -50,11 +50,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Object for reading and writing generation's info file (info.xml)
+    /// (api:app=3.0.0) Object for reading and writing generation's info file (info.xml)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 读写Generation的信息文件(info.xml)
+    /// (api:app=3.0.0) 读写Generation的信息文件(info.xml)
     /// </summary>
     public class GenerationInfo
     {
@@ -120,31 +120,31 @@ namespace ASEva.Utility
 
         /// \~English
         /// <summary>
-        /// (api:app=2.12.0) Satellite posix time model used while creating the generation
+        /// Satellite posix time model used while creating the generation
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.12.0) Generation生成时使用或覆盖的卫星Posix时间模型
+        /// Generation生成时使用或覆盖的卫星Posix时间模型
         /// </summary>
         public PosixTimeModel GNSSPosixModel { get; set; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.12.0) Whether host machine is synchronized with time server while creating the generation
+        /// Whether host machine is synchronized with time server while creating the generation
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.12.0) Generation生成时主机是否配置为与授时服务器同步
+        /// Generation生成时主机是否配置为与授时服务器同步
         /// </summary>
         public bool HostSync { get; set; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.12.0) IDs of the guest synchronized with time server while creating the generation
+        /// IDs of the guest synchronized with time server while creating the generation
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.12.0) Generation生成时被配置为与授时服务器同步的所有客机同步ID
+        /// Generation生成时被配置为与授时服务器同步的所有客机同步ID
         /// </summary>
         public String[] GuestSyncIDs { get; set; }
 
@@ -204,7 +204,7 @@ namespace ASEva.Utility
 
         /// \~English
         /// <summary>
-        /// (api:app=2.12.0) Create generation info object (Not write to file)
+        /// Create generation info object (Not write to file)
         /// </summary>
         /// <param name="filePath">File path</param>
         /// <param name="generationID">Generation ID</param>
@@ -218,7 +218,7 @@ namespace ASEva.Utility
         /// <returns>Created generation info object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.12.0) 创建信息文件对象（仅创建对象，不写入文件）
+        /// 创建信息文件对象（仅创建对象，不写入文件）
         /// </summary>
         /// <param name="filePath">文件路径</param>
         /// <param name="generationID">Generation ID</param>

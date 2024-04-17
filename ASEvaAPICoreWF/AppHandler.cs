@@ -36,6 +36,7 @@ namespace ASEva.UICoreWF
             platform.Add<ComboBox.IHandler>(() => new ComboBoxHandler());
             platform.Add<Drawable.IHandler>(() => new DrawableHandler());
             platform.Add<PasswordBox.IHandler>(() => new PasswordBoxHandler());
+            platform.Add<Bitmap.IHandler>(() => new SafeBitmapHandler());
 
             // 改为使用Wpf版的Handler，Eto-2.6.0已修正
             //platform.Add<DataObject.IHandler>(() => new DataObjectHandler());
@@ -92,7 +93,7 @@ namespace ASEva.UICoreWF
             }
         }
 
-        public void RunApp(Application application, Form window)
+        public void RunApp(Application application, Form window, Form[] subWindows)
         {
             // CHECK: 修正application.Run之前不触发MouseDown等事件
             System.Windows.Forms.Application.RemoveMessageFilter(TempBubbleEventFilter);

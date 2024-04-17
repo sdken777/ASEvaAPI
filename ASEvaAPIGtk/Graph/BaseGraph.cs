@@ -9,11 +9,11 @@ namespace ASEva.UIGtk
 
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Base class of graph control
+    /// (api:gtk=3.0.0) Base class of graph control
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 图表显示控件基类
+    /// (api:gtk=3.0.0) 图表显示控件基类
     /// </summary>
     public class BaseGraph : Box, GraphPanel
     {
@@ -190,11 +190,11 @@ namespace ASEva.UIGtk
 
         /// \~English
         /// <summary>
-        /// (api:gtk=2.0.8) Release resources
+        /// Release resources
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:gtk=2.0.8) 释放相关资源
+        /// 释放相关资源
         /// </summary>
         public virtual void Close() { }
 

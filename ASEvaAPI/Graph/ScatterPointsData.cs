@@ -6,11 +6,11 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Single axis' range of scatter points graph
+    /// (api:app=3.0.0) Single axis' range of scatter points graph
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 散点图单轴范围
+    /// (api:app=3.0.0) 散点图单轴范围
     /// </summary>
     public struct ScatterRange
     {
@@ -26,11 +26,11 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Additional options for definition of scatter points graph
+    /// (api:app=3.0.0) Additional options for definition of scatter points graph
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 散点图定义的附加选项
+    /// (api:app=3.0.0) 散点图定义的附加选项
     /// </summary>
     public class ScatterOptions
     {
@@ -57,11 +57,11 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Scatter points graph data
+    /// (api:app=3.0.0) Scatter points graph data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 散点图数据
+    /// (api:app=3.0.0) 散点图数据
     /// </summary>
     public class ScatterPointsData : GraphData
     {

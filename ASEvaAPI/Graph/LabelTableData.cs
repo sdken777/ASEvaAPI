@@ -6,11 +6,11 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Mode of statistics for label table
+    /// (api:app=3.0.0) Mode of statistics for label table
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 标签表统计模式
+    /// (api:app=3.0.0) 标签表统计模式
     /// </summary>
     public enum LabelTableMode
     {
@@ -67,11 +67,11 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Value direction of label table
+    /// (api:app=3.0.0) Value direction of label table
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 标签表数值方向
+    /// (api:app=3.0.0) 标签表数值方向
     /// </summary>
     public enum LabelTableValueDirection
     {
@@ -108,11 +108,11 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Label table graph data
+    /// (api:app=3.0.0) Label table graph data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 标签表数据
+    /// (api:app=3.0.0) 标签表数据
     /// </summary>
     public class LabelTableData : GraphData
     {

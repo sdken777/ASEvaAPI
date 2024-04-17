@@ -7,11 +7,11 @@ namespace ASEva.UIEto
     
     /// \~English
     /// <summary>
-    /// (api:eto=2.9.10) Extension for determining whether the window or dialog that contains the specified control is top most
+    /// (api:eto=3.0.0) Extension for determining whether the window or dialog that contains the specified control is top most
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.9.10) 方便获取控件所在窗口或对话框是否在顶层的扩展
+    /// (api:eto=3.0.0) 方便获取控件所在窗口或对话框是否在顶层的扩展
     /// </summary>
     public static class TopMostExtensions
     {

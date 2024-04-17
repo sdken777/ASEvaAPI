@@ -7,11 +7,11 @@ namespace ASEva.UIWpf
 {
     /// \~English
     /// <summary>
-    /// (api:wpf=1.0.0) Conversion of image object
+    /// (api:wpf=2.0.0) Conversion of image object
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:wpf=1.0.0) 图像对象转换
+    /// (api:wpf=2.0.0) 图像对象转换
     /// </summary>
     public class ImageConverter
     {

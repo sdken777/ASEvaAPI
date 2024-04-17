@@ -6,11 +6,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Conversion of map coordinates
+    /// (api:app=3.0.0) Conversion of map coordinates
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 地图坐标系转换
+    /// (api:app=3.0.0) 地图坐标系转换
     /// </summary>
     public class MapCoordination
     {

@@ -21,12 +21,12 @@ namespace ASEva.UIMonoMac
     {
         /// \~English
         /// <summary>
-        /// (api:monomac=1.0.0) Get API version
+        /// (api:monomac=2.0.0) Get API version
         /// </summary>
         /// <returns>The API version</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:monomac=1.0.0) 获取API版本
+        /// (api:monomac=2.0.0) 获取API版本
         /// </summary>
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()

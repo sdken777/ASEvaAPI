@@ -8,11 +8,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Sample synchronization
+    /// (api:app=3.0.0) Sample synchronization
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 样本同步
+    /// (api:app=3.0.0) 样本同步
     /// </summary>
     public class SampleSync
     {

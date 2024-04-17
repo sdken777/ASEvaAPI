@@ -7,11 +7,11 @@ namespace ASEva.UIWpf
     
     /// \~English
     /// <summary>
-    /// (api:wpf=1.0.0) UI panel for child window
+    /// (api:wpf=2.0.0) UI panel for child window
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:wpf=1.0.0) 窗口控件，用于实现窗口组件的实际功能
+    /// (api:wpf=2.0.0) 窗口控件，用于实现窗口组件的实际功能
     /// </summary>
     public class WindowPanel : UserControl
     {
@@ -105,11 +105,11 @@ namespace ASEva.UIWpf
 
         /// \~English
         /// <summary>
-        /// (api:wpf=1.4.6) [Optional] Called in the main loop, for running modal dialog
+        /// [Optional] Called in the main loop, for running modal dialog
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:wpf=1.4.6) [可选实现] 在主循环中被调用，可进行模态对话
+        /// [可选实现] 在主循环中被调用，可进行模态对话
         /// </summary>
         public virtual void OnHandleModal() { }
 

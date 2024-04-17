@@ -9,11 +9,11 @@ namespace ASEva
     
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Scenario segment
+    /// (api:app=3.0.0) Scenario segment
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 场景片段描述
+    /// (api:app=3.0.0) 场景片段描述
     /// </summary>
     public class SceneData
     {

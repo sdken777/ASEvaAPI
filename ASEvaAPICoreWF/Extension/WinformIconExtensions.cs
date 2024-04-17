@@ -9,11 +9,11 @@ namespace ASEva.UICoreWF
 {
     /// \~English
     /// <summary>
-    /// (api:corewf=2.5.4) Extension for icon object generation
+    /// (api:corewf=3.0.0) Extension for icon object generation
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:corewf=2.5.4) 方便生成图标的扩展
+    /// (api:corewf=3.0.0) 方便生成图标的扩展
     /// </summary>
     public static class WinformIconExtensions
     {

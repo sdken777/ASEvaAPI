@@ -7,11 +7,11 @@ namespace ASEva.UICoreWF
 {
     /// \~English
     /// <summary>
-    /// (api:corewf=2.0.0) Channel selector
+    /// (api:corewf=3.0.0) Channel selector
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:corewf=2.0.0) 通道选择器
+    /// (api:corewf=3.0.0) 通道选择器
     /// </summary>
     public partial class ChannelSelector : UserControl
     {

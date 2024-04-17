@@ -7,11 +7,11 @@ namespace ASEva
     
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Component configuration's status
+    /// (api:app=3.0.0) Component configuration's status
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 组件配置的状态
+    /// (api:app=3.0.0) 组件配置的状态
     /// </summary>
     public enum ConfigStatus
     {
@@ -58,11 +58,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Title of general sample's fields
+    /// (api:app=3.0.0) Title of general sample's fields
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 通用样本的标题部分
+    /// (api:app=3.0.0) 通用样本的标题部分
     /// </summary>
     public class GeneralSampleTitle
     {
@@ -88,15 +88,29 @@ namespace ASEva
         {
             Titles = new List<string>();
         }
+
+        /// \~English
+        /// <summary>
+        /// Constructor with input of comma-separated title string
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 输入逗号分隔的标题字符串的构造函数
+        /// </summary>
+        public GeneralSampleTitle(String titleString)
+        {
+            Titles = new List<string>();
+            if (!String.IsNullOrWhiteSpace(titleString)) Titles.AddRange(titleString.Split(','));
+        }
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Title of scenario's properties
+    /// (api:app=3.0.0) Title of scenario's properties
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 场景属性标题
+    /// (api:app=3.0.0) 场景属性标题
     /// </summary>
     public class SceneTitle
     {
@@ -122,15 +136,29 @@ namespace ASEva
         {
             Titles = new List<string>();
         }
+
+        /// \~English
+        /// <summary>
+        /// Constructor with input of comma-separated title string
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 输入逗号分隔的标题字符串的构造函数
+        /// </summary>
+        public SceneTitle(String titleString)
+        {
+            Titles = new List<string>();
+            if (!String.IsNullOrWhiteSpace(titleString)) Titles.AddRange(titleString.Split(','));
+        }
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Sample alias
+    /// (api:app=3.0.0) Sample alias
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 样本通道别名
+    /// (api:app=3.0.0) 样本通道别名
     /// </summary>
     public class ChannelAlias
     {
@@ -157,11 +185,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Using video channel in processing
+    /// (api:app=3.0.0) Using video channel in processing
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 数据处理使用的视频通道
+    /// (api:app=3.0.0) 数据处理使用的视频通道
     /// </summary>
     public enum UsingVideoChannel
     {
@@ -287,121 +315,121 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.1.3) Channel M
+        /// Channel M
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.1.3) 通道M
+        /// 通道M
         /// </summary>
         ChannelM = 12,
 
         /// \~English
         /// <summary>
-        /// (api:app=2.1.3) Channel N
+        /// Channel N
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.1.3) 通道N
+        /// 通道N
         /// </summary>
         ChannelN = 13,
 
         /// \~English
         /// <summary>
-        /// (api:app=2.1.3) Channel O
+        /// Channel O
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.1.3) 通道O
+        /// 通道O
         /// </summary>
         ChannelO = 14,
 
         /// \~English
         /// <summary>
-        /// (api:app=2.1.3) Channel P
+        /// Channel P
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.1.3) 通道P
+        /// 通道P
         /// </summary>
         ChannelP = 15,
 
         /// \~English
         /// <summary>
-        /// (api:app=2.1.3) Channel Q
+        /// Channel Q
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.1.3) 通道Q
+        /// 通道Q
         /// </summary>
         ChannelQ = 16,
 
         /// \~English
         /// <summary>
-        /// (api:app=2.1.3) Channel R
+        /// Channel R
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.1.3) 通道R
+        /// 通道R
         /// </summary>
         ChannelR = 17,
 
         /// \~English
         /// <summary>
-        /// (api:app=2.1.3) Channel S
+        /// Channel S
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.1.3) 通道S
+        /// 通道S
         /// </summary>
         ChannelS = 18,
 
         /// \~English
         /// <summary>
-        /// (api:app=2.1.3) Channel T
+        /// Channel T
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.1.3) 通道T
+        /// 通道T
         /// </summary>
         ChannelT = 19,
 
         /// \~English
         /// <summary>
-        /// (api:app=2.1.3) Channel U
+        /// Channel U
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.1.3) 通道U
+        /// 通道U
         /// </summary>
         ChannelU = 20,
 
         /// \~English
         /// <summary>
-        /// (api:app=2.1.3) Channel V
+        /// Channel V
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.1.3) 通道V
+        /// 通道V
         /// </summary>
         ChannelV = 21,
 
         /// \~English
         /// <summary>
-        /// (api:app=2.1.3) Channel W
+        /// Channel W
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.1.3) 通道W
+        /// 通道W
         /// </summary>
         ChannelW = 22,
 
         /// \~English
         /// <summary>
-        /// (api:app=2.1.3) Channel X
+        /// Channel X
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.1.3) 通道X
+        /// 通道X
         /// </summary>
         ChannelX = 23,
 
@@ -457,22 +485,22 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.1.2) Special camera: Front (Fisheye model)
+        /// Special camera: Front (Fisheye model)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.1.2) 特殊摄像头：前向（鱼眼模型）
+        /// 特殊摄像头：前向（鱼眼模型）
         /// </summary>
         SpecialFisheyeFront = 105,
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Configuration for a signal in packing
+    /// (api:app=3.0.0) Configuration for a signal in packing
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 信号打包中单个信号的配置
+    /// (api:app=3.0.0) 信号打包中单个信号的配置
     /// </summary>
     public class SignalPackConfigElem
     {
@@ -491,11 +519,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Signal packing configuration
+    /// (api:app=3.0.0) Signal packing configuration
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 信号打包配置
+    /// (api:app=3.0.0) 信号打包配置
     /// </summary>
     public class SignalPackConfig
     {
@@ -514,11 +542,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Base class of component configuration
+    /// (api:app=3.0.0) Base class of component configuration
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 组件配置的基类
+    /// (api:app=3.0.0) 组件配置的基类
     /// </summary>
     public class ModuleConfig
     {
@@ -548,23 +576,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Required] Deprecated, implement GetConfigStatus(errorHint)
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// [必须实现] 已弃用，应实现GetConfigStatus(errorHint)
-        /// </summary>
-        public virtual ConfigStatus GetConfigStatus() { return ConfigStatus.Disabled; }
-
-        /// \~English
-        /// <summary>
-        /// (api:app=2.16.0) [Required] Called while getting configuration's status
+        /// [Required] Called while getting configuration's status
         /// </summary>
         /// <param name="errorHint">Error hint, should be available while the status is EnabledWithError or EnabledWithWarning</param>
         /// <returns>Configuration's status</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.16.0) [必须实现] 查询配置状态时被调用
+        /// [必须实现] 查询配置状态时被调用
         /// </summary>
         /// <param name="errorHint">错误提示，当配置状态为EnabledWithError或EnabledWithWarning时应有效</param>
         /// <returns>配置状态</returns>
@@ -680,25 +698,15 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.2.1) [Optional. Only for NativeClass] Called while getting required data types for file recording
+        /// [Optional. Only for NativeClass] Called while getting required data types for file recording
         /// </summary>
         /// <returns>Required data types for file recording</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.2.1) [Optional；仅限NativeClass] 获取文件写入需要的所有数据类型
+        /// [Optional；仅限NativeClass] 获取文件写入需要的所有数据类型
         /// </summary>
         /// <returns>文件写入需要的所有数据类型</returns>
         public virtual List<RecordDataType> GetRecordDataTypes() { return null; }
-
-        /// \~English
-        /// <summary>
-        /// (api:app=2.3.2) Deprecated. Use ASEva.FileIONames.RemoteReaderNames for remote data acquisition
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// (api:app=2.3.2) 已弃用，远程采集应使用 ASEva.FileIONames.RemoteReaderNames
-        /// </summary>
-        public virtual bool MayCauseLowSpeed() { return false; }
 
         /// \~English
         /// <summary>

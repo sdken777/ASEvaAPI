@@ -7,11 +7,11 @@ namespace ASEva.UICoreWF
 {
     /// \~English
     /// <summary>
-    /// (api:corewf=2.0.0) Timeline visualization control (vertical)
+    /// (api:corewf=3.0.0) Timeline visualization control (vertical)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:corewf=2.0.0) 时间线显示控件（纵向）
+    /// (api:corewf=3.0.0) 时间线显示控件（纵向）
     /// </summary>
     public partial class TimelineIndicatorV : UserControl
     {

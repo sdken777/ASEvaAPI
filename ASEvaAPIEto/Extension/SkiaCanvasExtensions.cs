@@ -7,11 +7,11 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.7.0) Extensions for Skia canvas
+    /// (api:eto=3.0.0) Extensions for Skia canvas
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.7.0) 方便操作Skia画布的扩展
+    /// (api:eto=3.0.0) 方便操作Skia画布的扩展
     /// </summary>
     public static class SkiaCanvasExtensions
     {
@@ -30,17 +30,17 @@ namespace ASEva.UIEto
         public static SKFont GetDefaultFont(this SKCanvas canvas, float sizeScale = 1.0f)
         {
             if (sizeScale <= 0) sizeScale = 1;
-            if (String.IsNullOrEmpty(DefaultFontName)) return FontLibrary.GetSKFont();
+            if (String.IsNullOrEmpty(DefaultFontName)) return FontLibrarySkia.GetSKFont();
             else
             {
-                if (DefaultFontSize == 0) return FontLibrary.GetSKFont(DefaultFontName);
-                else return FontLibrary.GetSKFont(DefaultFontName, DefaultFontSize * sizeScale, SKFontStyleWeight.Normal, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
+                if (DefaultFontSize == 0) return FontLibrarySkia.GetSKFont(DefaultFontName);
+                else return FontLibrarySkia.GetSKFont(DefaultFontName, DefaultFontSize * sizeScale, SKFontStyleWeight.Normal, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
             }
         }
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.8.16) Get the specified font object
+        /// Get the specified font object
         /// </summary>
         /// <param name="canvas">Skia canvas object</param>
         /// <param name="fontName">Font name</param>
@@ -51,7 +51,7 @@ namespace ASEva.UIEto
         /// <returns>Font object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.8.16) 获取指定字体
+        /// 获取指定字体
         /// </summary>
         /// <param name="canvas">Skia画布</param>
         /// <param name="fontName">字体名称</param>
@@ -63,17 +63,17 @@ namespace ASEva.UIEto
         public static SKFont GetFont(this SKCanvas canvas, String fontName, float sizeScale = 1.0f, SKFontStyleWeight weight = SKFontStyleWeight.Normal, SKFontStyleWidth width = SKFontStyleWidth.Normal, SKFontStyleSlant slant = SKFontStyleSlant.Upright)
         {
             if (sizeScale <= 0) sizeScale = 1;
-            if (String.IsNullOrEmpty(fontName)) return FontLibrary.GetSKFont();
+            if (String.IsNullOrEmpty(fontName)) return FontLibrarySkia.GetSKFont();
             else
             {
-                if (DefaultFontSize == 0) return FontLibrary.GetSKFont(fontName);
-                else return FontLibrary.GetSKFont(fontName, DefaultFontSize * sizeScale, weight, width, slant);
+                if (DefaultFontSize == 0) return FontLibrarySkia.GetSKFont(fontName);
+                else return FontLibrarySkia.GetSKFont(fontName, DefaultFontSize * sizeScale, weight, width, slant);
             }
         }
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.7.1) Draw text with the specified anchor
+        /// Draw text with the specified anchor
         /// </summary>
         /// <param name="canvas">Skia canvas object</param>
         /// <param name="text">Text</param>
@@ -84,7 +84,7 @@ namespace ASEva.UIEto
         /// <param name="logicalY">Y-coordinate of anchor point</param>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.7.1) 指定锚点绘制文本
+        /// 指定锚点绘制文本
         /// </summary>
         /// <param name="canvas">Skia画布</param>
         /// <param name="text">文本</param>
@@ -144,7 +144,7 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.7.1) Measure text's size
+        /// Measure text's size
         /// </summary>
         /// <param name="canvas">Skia canvas object</param>
         /// <param name="text">Text</param>
@@ -152,7 +152,7 @@ namespace ASEva.UIEto
         /// <returns>Text's logical size</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.7.1) 测量文本的尺寸
+        /// 测量文本的尺寸
         /// </summary>
         /// <param name="canvas">Skia画布</param>
         /// <param name="text">文本</param>

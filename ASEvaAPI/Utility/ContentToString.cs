@@ -4,11 +4,11 @@ namespace ASEva.Utility
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Convert object's info to string
+    /// (api:app=3.0.0) Convert object's info to string
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 递归的将对象信息转化为字符串
+    /// (api:app=3.0.0) 递归的将对象信息转化为字符串
     /// </summary>
     public class ContentToString
     {

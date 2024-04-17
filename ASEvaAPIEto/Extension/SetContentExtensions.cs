@@ -8,11 +8,11 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.0.0) Extensions for setting panel's content
+    /// (api:eto=3.0.0) Extensions for setting panel's content
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.0.0) 方便设置面板Content的扩展 
+    /// (api:eto=3.0.0) 方便设置面板Content的扩展 
     /// </summary>
     public static class SetContentExtensions
     {
@@ -126,13 +126,13 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.11.5) Set content as OverlayLayout object
+        /// Set content as OverlayLayout object
         /// </summary>
         /// <param name="panel">Panel object</param>
         /// <returns>Created OverlayLayout object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.11.5) 设置可覆盖布局至面板Content
+        /// 设置可覆盖布局至面板Content
         /// </summary>
         /// <param name="panel">面板</param>
         /// <returns>创建的可覆盖布局</returns>
@@ -147,7 +147,7 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.12.2) Set content as a control object
+        /// Set content as a control object
         /// </summary>
         /// <param name="panel">Panel object</param>
         /// <param name="control">The control object to set as content</param>
@@ -155,7 +155,7 @@ namespace ASEva.UIEto
         /// <returns>The control object set as content</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.12.2) 设置控件至面板Content
+        /// 设置控件至面板Content
         /// </summary>
         /// <param name="panel">面板</param>
         /// <param name="control">目标控件</param>

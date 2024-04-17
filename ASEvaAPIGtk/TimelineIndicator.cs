@@ -9,11 +9,11 @@ namespace ASEva.UIGtk
 
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Timeline visualization control
+    /// (api:gtk=3.0.0) Timeline visualization control
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 时间线显示控件
+    /// (api:gtk=3.0.0) 时间线显示控件
     /// </summary>
     public class TimelineIndicator : Box
     {

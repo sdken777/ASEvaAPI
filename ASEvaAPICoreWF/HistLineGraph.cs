@@ -10,11 +10,11 @@ namespace ASEva.UICoreWF
 {
     /// \~English
     /// <summary>
-    /// (api:corewf=2.0.0) Histogram and poly line graph control
+    /// (api:corewf=3.0.0) Histogram and poly line graph control
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:corewf=2.0.0) 柱状折线图可视化控件
+    /// (api:corewf=3.0.0) 柱状折线图可视化控件
     /// </summary>
 	public partial class HistLineGraph : BaseGraph
 	{

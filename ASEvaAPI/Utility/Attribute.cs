@@ -7,11 +7,11 @@ namespace ASEva.Utility
     
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) XML attribute parsing
+    /// (api:app=3.0.0) XML attribute parsing
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) XML属性解析
+    /// (api:app=3.0.0) XML属性解析
     /// </summary>
     public class AttributeParser
     {
@@ -144,11 +144,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) XML attribute writer
+    /// (api:app=3.0.0) XML attribute writer
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) XML属性输出
+    /// (api:app=3.0.0) XML属性输出
     /// </summary>
     public class AttributeWriter
     {

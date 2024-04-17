@@ -4,11 +4,11 @@ namespace ASEva.Samples
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Manual trigger sample
+    /// (api:app=3.0.0) Manual trigger sample
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 手动触发器样本
+    /// (api:app=3.0.0) 手动触发器样本
     /// </summary>
     public class ManualTriggerSample : Sample
     {

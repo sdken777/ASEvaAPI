@@ -7,11 +7,11 @@ namespace ASEva.UIEto
     
     /// \~English
     /// <summary>
-    /// (api:eto=2.9.6) Text bitmap, alternative to Graphics.DrawString for increased efficiency
+    /// (api:eto=3.0.0) Text bitmap, alternative to Graphics.DrawString for increased efficiency
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.9.6) 文本位图，可替代Graphics.DrawString以提高效率
+    /// (api:eto=3.0.0) 文本位图，可替代Graphics.DrawString以提高效率
     /// </summary>
     public class TextBitmap
     {
@@ -156,11 +156,11 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.9.8) The ratio to the default size
+        /// The ratio to the default size
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.9.8) 获取当前字体相对于默认大小比例
+        /// 获取当前字体相对于默认大小比例
         /// </summary>
         public float SizeRatio { get { return sizeRatio; }}
 

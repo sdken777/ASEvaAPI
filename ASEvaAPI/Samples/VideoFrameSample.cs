@@ -9,21 +9,21 @@ namespace ASEva.Samples
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Video frame sample
+    /// (api:app=3.0.0) Video frame sample
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 视频帧样本
+    /// (api:app=3.0.0) 视频帧样本
     /// </summary>
     public class VideoFrameSample : Sample
     {
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Common image data (in order of BGR)
+        /// Common image data (in order of BGR)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 通用图像数据(BGR不逆序)
+        /// 通用图像数据(BGR不逆序)
         /// </summary>
         public CommonImage CommonImage { get; set; }
 
@@ -39,7 +39,7 @@ namespace ASEva.Samples
         {
             get
             {
-                if (platformImage == null && CommonImage != null) platformImage = Agency.ConvertImageToPlatform(CommonImage, false);
+                if (platformImage == null && CommonImage != null) platformImage = Agency.ConvertImageToPlatform(CommonImage, PlatformImageType.Native);
                 return platformImage;
             }
             set
@@ -53,7 +53,7 @@ namespace ASEva.Samples
                 {
                     CommonImage = Agency.ConvertImageToCommon(value);
                     if (CommonImage == null) platformImage = null;
-                    else platformImage = Agency.ConvertImageToPlatform(CommonImage, false);
+                    else platformImage = Agency.ConvertImageToPlatform(CommonImage, PlatformImageType.Native);
                 }
             }
         }
@@ -206,7 +206,7 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Default constructor
+        /// Default constructor
         /// </summary>
         /// <param name="image">Common image object</param>
         /// <param name="rawSize">Raw resolution</param>
@@ -216,7 +216,7 @@ namespace ASEva.Samples
         /// <param name="timeline">Timeline point</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 默认构造函数
+        /// 默认构造函数
         /// </summary>
         /// <param name="image">通用图像对象</param>
         /// <param name="rawSize">图像的原始大小</param>

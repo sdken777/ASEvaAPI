@@ -12,11 +12,11 @@ namespace ASEva.UIGtk
 
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Scatter points graph control
+    /// (api:gtk=3.0.0) Scatter points graph control
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 散点图数据可视化窗口
+    /// (api:gtk=3.0.0) 散点图数据可视化窗口
     /// </summary>
     public class ScatterPointsGraph : BaseGraph
     {
@@ -37,8 +37,7 @@ namespace ASEva.UIGtk
             eventBoxHelper.Add(eventBox);
             drawSwap = new DrawSwap(draw, "ASEva.UIGtk.ScatterPointsGraph");
 
-            var lang = Agency.GetAppLanguage();
-            if (lang != null) chinese = lang == "ch";
+            chinese = Agency.GetAppLanguage() == Language.Chinese;
 
             eventBoxHelper.LeftDown += eventBox_LeftDown;
             drawSwap.Paint += draw_Paint;
@@ -51,11 +50,11 @@ namespace ASEva.UIGtk
 
         /// \~English
         /// <summary>
-        /// (api:gtk=2.0.8) Release resources
+        /// Release resources
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:gtk=2.0.8) 释放相关资源
+        /// 释放相关资源
         /// </summary>
         public override void Close()
 		{

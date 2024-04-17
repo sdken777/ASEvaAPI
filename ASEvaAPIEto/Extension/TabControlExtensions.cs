@@ -8,11 +8,11 @@ namespace ASEva.UIEto
     
     /// \~English
     /// <summary>
-    /// (api:eto=2.0.2) Extensions for tab control
+    /// (api:eto=3.0.0) Extensions for tab control
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.0.2) 方便操作选项卡控件的扩展
+    /// (api:eto=3.0.0) 方便操作选项卡控件的扩展
     /// </summary>
     public static class TabControlExtensions
     {

@@ -5,11 +5,11 @@ namespace ASEva.UIGtk
 {
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Extension methods for combo box
+    /// (api:gtk=3.0.0) Extension methods for combo box
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 组合框扩展方法
+    /// (api:gtk=3.0.0) 组合框扩展方法
     /// </summary>
     public static class ComboBoxTextExtension
     {

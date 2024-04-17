@@ -9,52 +9,72 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.7.0) Sync status of time offset
+    /// (api:app=3.0.0) Sync status of time offset
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.7.0) 时间偏置同步状态
+    /// (api:app=3.0.0) 时间偏置同步状态
     /// </summary>
     public enum TimeOffsetSync
     {
         /// \~English
         /// <summary>
-        /// Not synchronized or the sync source is unknown
+        /// Host arrival time, not synchronized
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 未同步或同步源未知
+        /// 到达主机的时间，未同步
         /// </summary>
-		None = 0,
+		HostArrival = 0,
 
         /// \~English
         /// <summary>
-        /// Synchronized with time server
+        /// Sampling time, synchronized with the time server
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 已与授时服务器时间同步
+        /// 采样时间，已与授时服务器同步
         /// </summary>
 		Server = 1,
 
         /// \~English
         /// <summary>
-        /// Synchronized with satellite time
+        /// Sampling time, synchronized with satellite
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 已与卫星时间同步
+        /// 采样时间，已与卫星同步
         /// </summary>
 		Gnss = 2,
+
+        /// \~English
+        /// <summary>
+        /// Bus receiver arrival time, synchronized with the time server
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 到达总线设备的时间，已与授时服务器同步
+        /// </summary>
+        BusReceiverArrival = 3,
+
+        /// \~English
+        /// <summary>
+        /// The time obtained by interpolating two samples with different synchronization status
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 同步状态不同的两个样本插值得到的时间
+        /// </summary>
+        Interpolated = 4,
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=2.7.0) Session ID
+    /// (api:app=3.0.0) Session ID
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.7.0) Session标识符
+    /// (api:app=3.0.0) Session标识符
     /// </summary>
     public struct SessionIdentifier
     {
@@ -84,11 +104,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.2) Create from string
+        /// Create from string
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.2) 通过字符串创建
+        /// 通过字符串创建
         /// </summary>
         public static SessionIdentifier FromString(String str)
         {
@@ -115,11 +135,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.3) Whether it's valid
+        /// Whether it's valid
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.3) 是否有效
+        /// 是否有效
         /// </summary>
         public bool IsValid()
         {
@@ -195,11 +215,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.7.0) Session independent time info
+    /// (api:app=3.0.0) Session independent time info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.7.0) Session无关时间信息
+    /// (api:app=3.0.0) Session无关时间信息
     /// </summary>
     public class IndependentTimeInfo
     {
@@ -245,16 +265,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Time server's posix time while data sampling, in nanoseconds, 0 means invalid
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 采样时授时服务器Posix时间，单位纳秒，0表示无效
-        /// </summary>
-        public ulong ServerPosix { get { return serverPosix; }}
-
-        /// \~English
-        /// <summary>
         /// Satellite posix time while data sampling, in nanoseconds, 0 means invalid
         /// </summary>
         /// \~Chinese
@@ -271,27 +281,26 @@ namespace ASEva
         /// <summary>
         /// 默认构造函数
         /// </summary>
-        public IndependentTimeInfo(TimeOffsetSync offsetSync, ulong cpuTick, ulong hostPosix, ulong guestPosix, ulong serverPosix, ulong gnssPosix)
+        public IndependentTimeInfo(TimeOffsetSync offsetSync, ulong cpuTick, ulong hostPosix, ulong guestPosix, ulong gnssPosix)
         {
             this.offsetSync = offsetSync;
             this.cpuTick = cpuTick;
             this.hostPosix = hostPosix;
             this.guestPosix = guestPosix;
-            this.serverPosix = serverPosix;
             this.gnssPosix = gnssPosix;
         }
 
         private TimeOffsetSync offsetSync;
-        private ulong cpuTick, hostPosix, guestPosix, serverPosix, gnssPosix;
+        private ulong cpuTick, hostPosix, guestPosix, gnssPosix;
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=2.7.0) Timestamp
+    /// (api:app=3.0.0) Timestamp
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.7.0) 时间戳
+    /// (api:app=3.0.0) 时间戳
     /// </summary>
     public struct Timestamp
     {
@@ -347,21 +356,21 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Base class of sample data
+    /// (api:app=3.0.0) Base class of sample data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 数据样本基类
+    /// (api:app=3.0.0) 数据样本基类
     /// </summary>
     public class Sample : IComparable<Sample>
     {
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Timestamp
+        /// Timestamp
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 时间戳
+        /// 时间戳
         /// </summary>
         public Timestamp Timestamp
         {
@@ -370,11 +379,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.2) The session that sample belongs to
+        /// The session that sample belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.2) 所属Session标识符
+        /// 所属Session标识符
         /// </summary>
         public SessionIdentifier Session
         {
@@ -491,7 +500,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Constructor based on time information
+        /// Constructor based on time information
         /// </summary>
         /// <param name="session">The session that sample belongs to</param>
         /// <param name="offset">Time offset, in seconds</param>
@@ -499,7 +508,7 @@ namespace ASEva
         /// <param name="timeline">Timeline point</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 按指定时间信息进行初始化
+        /// 按指定时间信息进行初始化
         /// </summary>
         /// <param name="session">所属session ID</param>
         /// <param name="offset">时间偏置，单位秒</param>
@@ -513,7 +522,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Set time information
+        /// Set time information
         /// </summary>
         /// <param name="session">The session that sample belongs to</param>
         /// <param name="offset">Time offset, in seconds</param>
@@ -521,7 +530,7 @@ namespace ASEva
         /// <param name="timeline">Timeline point</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 设置当前样本的时间戳和时间线位置
+        /// 设置当前样本的时间戳和时间线位置
         /// </summary>
         /// <param name="session">所属session ID</param>
         /// <param name="offset">时间偏置，单位秒</param>
@@ -535,13 +544,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.2) Set time information
+        /// Set time information
         /// </summary>
         /// <param name="timestamp">Timestamp</param>
         /// <param name="timeline">Timeline point</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.2) 设置当前样本的时间戳和时间线位置
+        /// 设置当前样本的时间戳和时间线位置
         /// </summary>
         /// <param name="timestamp">时间戳</param>
         /// <param name="timeline">在时间线上的位置</param>
@@ -553,12 +562,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Set time to the same as the sample
+        /// Set time to the same as the sample
         /// </summary>
         /// <param name="timeRef">Time reference sample</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 按时间参考样本设置当前样本的时间戳和时间线位置
+        /// 按时间参考样本设置当前样本的时间戳和时间线位置
         /// </summary>
         /// <param name="timeRef">时间参考样本</param>
         public void SetTime(Sample timeRef)
@@ -951,19 +960,17 @@ namespace ASEva
                 {
                     var t1 = result.s1.timestamp.TimeInfo;
                     var t2 = result.s2.timestamp.TimeInfo;
-                    if (t1.OffsetSync == t2.OffsetSync)
-                    {
-                        var t1Comps = new ulong[] { t1.CPUTick, t1.HostPosix, t1.GuestPosix, t1.ServerPosix, t1.GNSSPosix };
-                        var t2Comps = new ulong[] { t2.CPUTick, t2.HostPosix, t2.GuestPosix, t2.ServerPosix, t2.GNSSPosix };
-                        var outComps = new ulong[5];
-                        for (int i = 0; i < 5; i++)
-                        {
-                            long diffTime = (long)t2Comps[i] - (long)t1Comps[i];
-                            outComps[i] = (ulong)((long)t1Comps[i] + (long)(result.w2 * diffTime));
-                        }
 
-                        timeInfo = new IndependentTimeInfo(t1.OffsetSync, outComps[0], outComps[1], outComps[2], outComps[3], outComps[4]);
+                    var t1Comps = new ulong[] { t1.CPUTick, t1.HostPosix, t1.GuestPosix, t1.GNSSPosix };
+                    var t2Comps = new ulong[] { t2.CPUTick, t2.HostPosix, t2.GuestPosix, t2.GNSSPosix };
+                    var outComps = new ulong[4];
+                    for (int i = 0; i < 4; i++)
+                    {
+                        long diffTime = (long)t2Comps[i] - (long)t1Comps[i];
+                        outComps[i] = (ulong)((long)t1Comps[i] + (long)(result.w2 * diffTime));
                     }
+
+                    timeInfo = new IndependentTimeInfo(t1.OffsetSync == t2.OffsetSync ? t1.OffsetSync : TimeOffsetSync.Interpolated, outComps[0], outComps[1], outComps[2], outComps[3]);
                 }
 
                 buf.SetTime(result.s1.Base, result.s1.Offset * result.w1 + result.s2.Offset * result.w2, timeInfo, targetTimeline);
@@ -1041,11 +1048,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Type of an element in general sample
+    /// (api:app=3.0.0) Type of an element in general sample
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 通用样本中值的类型
+    /// (api:app=3.0.0) 通用样本中值的类型
     /// </summary>
     public enum GeneralSampleValueMode
     {
@@ -1082,11 +1089,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) General sample value
+    /// (api:app=3.0.0) General sample value
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 通用样本值
+    /// (api:app=3.0.0) 通用样本值
     /// </summary>
     public struct GeneralSampleValue
     {
@@ -1160,11 +1167,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) General sample
+    /// (api:app=3.0.0) General sample
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 通用样本
+    /// (api:app=3.0.0) 通用样本
     /// </summary>
     public class GeneralSample : Sample
     {

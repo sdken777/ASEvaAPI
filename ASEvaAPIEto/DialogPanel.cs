@@ -8,11 +8,11 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.8.0) Dialog panel (Use ASEva.UIEto.App.RunDialog to run dialog)
+    /// (api:eto=3.0.0) Dialog panel (Use ASEva.UIEto.App.RunDialog to run dialog)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.8.0) 对话框主面板（使用 ASEva.UIEto.App.RunDialog 弹出对话框）
+    /// (api:eto=3.0.0) 对话框主面板（使用 ASEva.UIEto.App.RunDialog 弹出对话框）
     /// </summary>
     public class DialogPanel : Panel
     {

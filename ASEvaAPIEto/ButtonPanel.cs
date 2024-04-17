@@ -8,11 +8,11 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.3.3) Button panel
+    /// (api:eto=3.0.0) Button panel
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.3.3) 面板式按钮
+    /// (api:eto=3.0.0) 面板式按钮
     /// </summary>
     public class ButtonPanel : Panel
     {
@@ -58,12 +58,12 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.8.17) Update image
+        /// Update image
         /// </summary>
         /// <param name="image">New image, whose size should be the same as origin (Or else it won't update)</param>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.8.17) 更新图像
+        /// 更新图像
         /// </summary>
         /// <param name="image">新图像，尺寸应与原图像一致，否则不更新</param>
         public void UpdateImage(Bitmap image)
@@ -78,11 +78,11 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.13.4) Font of text button panel
+        /// Font of text button panel
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.13.4) 面板式文字按钮的字体
+        /// 面板式文字按钮的字体
         /// </summary>
         public Font Font
         {
@@ -189,11 +189,11 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.8.11) Tool tip text
+        /// Tool tip text
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.8.11) 提示文字
+        /// 提示文字
         /// </summary>
         public override string ToolTip
         {

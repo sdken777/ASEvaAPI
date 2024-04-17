@@ -9,11 +9,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Use this interface to output audio data while collecting
+    /// (api:app=3.0.0) Use this interface to output audio data while collecting
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 在音频采集到数据后调用此接口
+    /// (api:app=3.0.0) 在音频采集到数据后调用此接口
     /// </summary>
     public interface WaveReceiver
     {
@@ -34,11 +34,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Use this interface to input audio data while replaying
+    /// (api:app=3.0.0) Use this interface to input audio data while replaying
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 在音频回放需要数据时调用此接口
+    /// (api:app=3.0.0) 在音频回放需要数据时调用此接口
     /// </summary>
     public interface WaveProvider
     {
@@ -59,11 +59,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Audio device information
+    /// (api:app=3.0.0) Audio device information
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 音频设备信息
+    /// (api:app=3.0.0) 音频设备信息
     /// </summary>
     public class AudioDeviceInfo
     {
@@ -90,11 +90,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Audio recorder interface
+    /// (api:app=3.0.0) Audio recorder interface
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 音频采集设备接口
+    /// (api:app=3.0.0) 音频采集设备接口
     /// </summary>
     public interface AudioRecorder
     {
@@ -141,11 +141,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Audio player interface
+    /// (api:app=3.0.0) Audio player interface
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 音频回放设备接口
+    /// (api:app=3.0.0) 音频回放设备接口
     /// </summary>
     public interface AudioReplayer
     {
@@ -192,11 +192,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Audio driver information
+    /// (api:app=3.0.0) Audio driver information
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 音频驱动信息
+    /// (api:app=3.0.0) 音频驱动信息
     /// </summary>
     public class AudioDriverInfo
     {

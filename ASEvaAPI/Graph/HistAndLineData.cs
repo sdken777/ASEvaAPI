@@ -6,11 +6,11 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Mode of statistics for histogram and poly line
+    /// (api:app=3.0.0) Mode of statistics for histogram and poly line
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 直方折线图统计模式
+    /// (api:app=3.0.0) 直方折线图统计模式
     /// </summary>
     public enum HistLineMode
     {
@@ -157,11 +157,11 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Numerical definition of histogram and poly line graph's X-axis
+    /// (api:app=3.0.0) Numerical definition of histogram and poly line graph's X-axis
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 直方折线图中X轴数值描述
+    /// (api:app=3.0.0) 直方折线图中X轴数值描述
     /// </summary>
     public class HistLineXValues //（Validation supported / 图表数据验证有效）
     {
@@ -172,11 +172,11 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Literal definition of histogram and poly line graph's X-axis
+    /// (api:app=3.0.0) Literal definition of histogram and poly line graph's X-axis
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 直方折线图中X轴文字描述
+    /// (api:app=3.0.0) 直方折线图中X轴文字描述
     /// </summary>
     public class HistLineXLabels //（Validation unsupported / 图表数据验证无效）
     {
@@ -185,11 +185,11 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Sample of histogram and poly line graph
+    /// (api:app=3.0.0) Sample of histogram and poly line graph
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 直方折线图中的样本
+    /// (api:app=3.0.0) 直方折线图中的样本
     /// </summary>
     public class HistLineSample
     {
@@ -200,11 +200,11 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Histogram and poly line graph data
+    /// (api:app=3.0.0) Histogram and poly line graph data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 直方折线图数据
+    /// (api:app=3.0.0) 直方折线图数据
     /// </summary>
     public class HistAndLineData : GraphData
     {

@@ -9,6 +9,7 @@ namespace ASEva
     
     public interface AgencyHandler
     {
+        String GetAppID();
         String GetConfigFilesRoot();
         String GetAppFilesRoot();
         String GetTempFilesRoot();
@@ -25,16 +26,10 @@ namespace ASEva
         ApplicationStatus GetAppStatus();
         ApplicationMode GetAppMode();
         bool IsFileOutputEnabled();
-        String GetAppLanguage();
+        Language GetAppLanguage();
         GraphData GetGraphData(DateTime session, int graphID);
         void AddSceneData(SceneData scene);
         List<String> GetSampleTitle(String channelID);
-        DateTime? GetStartTimeLocal(DateTime session);
-        DateTime? GetStartTimeUTC(DateTime session);
-        DateTime? GetTimestampLocal(DateTime session, double timeOffset);
-        DateTime? GetTimestampUTC(DateTime session, double timeOffset);
-        double GetTimeRatioToLocal(DateTime session);
-        double GetTimeRatioToUTC(DateTime session);
         void AddSignalReference(String signalID);
         void RemoveSignalReference(String signalID);
         bool DeleteToRecycleBin(String path);
@@ -160,7 +155,6 @@ namespace ASEva
         SignalConfig SelectSignal(SignalConfig origin, bool withScale, bool withSignBit, String unit);
         String SelectBusMessage(String originMessageID);
         void SelectSignals(SelectSignalHandler handler, List<String> existSignalIDList);
-        List<String> SelectBusFloat32Signal(List<String> existSignalIDList);
         void ConfigDataEncryption();
         void ConfigOfflineMapPath();
         void OpenDialog(object caller, String dialogClassID, String config);
@@ -226,7 +220,6 @@ namespace ASEva
         bool GetSessionHostSync(DateTime session);
         void SetSessionHostSync(DateTime session, bool hostSync);
         void SetAudioVolume(double volume);
-        void SetCPURateScale(int scale);
         String GetLicenseInfo();
         double GetRawChannelDelayConfig(String id);
         double GetBusChannelDelayConfig(int channel);
@@ -261,7 +254,7 @@ namespace ASEva
         CreatePanelResult CreateConfigPanel(object caller, String dialogClassID, String transformID, out object panel, out DialogClassInfo info);
         void UnregisterPanel(object panel);
         CommonImage ConvertImageToCommon(object image);
-        object ConvertImageToPlatform(CommonImage image, bool eto);
+        object ConvertImageToPlatform(CommonImage image, PlatformImageType type);
         WindowClassInfo GetWindowClassInfo(String windowClassID);
         WindowClassInfo GetWindowClassInfo(String windowClassID, String transformID);
         DialogClassInfo GetDialogClassInfo(String dialogClassID);
@@ -319,11 +312,11 @@ namespace ASEva
     
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Include all main APIs
+    /// (api:app=3.0.0) Include all main APIs
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 集合了所有主要API
+    /// (api:app=3.0.0) 集合了所有主要API
     /// </summary>
     public partial class Agency
     {
@@ -339,6 +332,21 @@ namespace ASEva
             {
                 if (value != null) handler = value;
             }
+        }
+
+        /// \~English
+        /// <summary>
+        /// Get application's ID
+        /// </summary>
+        /// <returns>Application's ID</returns>
+        /// \~Chinese
+        /// <summary>
+        /// 获取应用程序ID
+        /// </summary>
+        /// <returns>应用程序ID</returns>
+        public static String GetAppID()
+        {
+            return handler.GetAppID();
         }
 
         /// \~English
@@ -388,15 +396,15 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get application's language code
+        /// Get application's language
         /// </summary>
-        /// <returns>Application's language code, "en" means English, "ch" means Chinese</returns>
+        /// <returns>Application's language</returns>
         /// \~Chinese
         /// <summary>
-        /// 获取应用程序当前的显示语言
+        /// 获取应用程序的显示语言
         /// </summary>
-        /// <returns>语言ID，如en表示英文，ch表示中文等</returns>
-        public static String GetAppLanguage()
+        /// <returns>应用程序的显示语言</returns>
+        public static Language GetAppLanguage()
         {
             return Handler.GetAppLanguage();
         }
@@ -433,12 +441,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get the interest target
+        /// Get the interest target
         /// </summary>
         /// <returns>The interest target (in seconds), which could be out of the buffer range</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取兴趣时间点目标
+        /// 获取兴趣时间点目标
         /// </summary>
         /// <returns>兴趣时间点目标(秒单位)，可能超出数据缓存范围</returns>
         public static double GetInterestTarget()
@@ -542,13 +550,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.0) Get the data layer to which a session belongs
+        /// Get the data layer to which a session belongs
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>The data layer, while '.' means the layer of sessions under data path, '..' means the layer of data path which is a session</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.0) 获取某个session所属数据层级
+        /// 获取某个session所属数据层级
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>数据层级，其中'.'表示根路径下的session，'..'表示根路径即session</returns>
@@ -559,13 +567,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.0) Get the folder name of a session
+        /// Get the folder name of a session
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>Folder name</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.0) 获取某个session的文件夹名
+        /// 获取某个session的文件夹名
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>文件夹名</returns>
@@ -595,14 +603,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.2) Get the status of generation with the specified generation ID and under the specified session
+        /// Get the status of generation with the specified generation ID and under the specified session
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="generation">Generation ID</param>
         /// <returns>Generation's status, null if it doesn't exist</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.2) 获取某个session中的某个generation的处理状态
+        /// 获取某个session中的某个generation的处理状态
         /// </summary>
         /// <param name="session">希望获取generation所属的session ID</param>
         /// <param name="generation">希望获取的generation ID</param>
@@ -631,11 +639,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.5) Refresh the sessions under the current layer
+        /// Refresh the sessions under the current layer
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.5) 刷新当前层级下所有session
+        /// 刷新当前层级下所有session
         /// </summary>
         public static void RefreshSessions()
         {
@@ -687,84 +695,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Deprecated, use ASEva.Agency.GetHostPosixTimeModel
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.GetHostPosixTimeModel
-        /// </summary>
-        public static DateTime? GetStartTimeLocal(DateTime session)
-        {
-            return Handler.GetStartTimeLocal(session);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Deprecated, use ASEva.Agency.GetGNSSPosixTimeModel
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.GetGNSSPosixTimeModel
-        /// </summary>
-        public static DateTime? GetStartTimeUTC(DateTime session)
-        {
-            return Handler.GetStartTimeUTC(session);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Deprecated, use ASEva.Agency.GetLocalDateTime
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.GetLocalDateTime
-        /// </summary>
-        public static DateTime? GetTimestampLocal(DateTime session, double timeOffset)
-        {
-            return Handler.GetTimestampLocal(session, timeOffset);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Deprecated, use ASEva.Agency.GetUTCDateTime
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.GetUTCDateTime
-        /// </summary>
-        public static DateTime? GetTimestampUTC(DateTime session, double timeOffset)
-        {
-            return Handler.GetTimestampUTC(session, timeOffset);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Deprecated, use ASEva.Agency.GetHostPosixTimeModel
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.GetHostPosixTimeModel
-        /// </summary>
-        public static double GetTimeRatioToLocal(DateTime session)
-        {
-            return Handler.GetTimeRatioToLocal(session);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Deprecated, use ASEva.Agency.GetGNSSPosixTimeModel
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.GetGNSSPosixTimeModel
-        /// </summary>
-        public static double GetTimeRatioToUTC(DateTime session)
-        {
-            return Handler.GetTimeRatioToUTC(session);
-        }
-
-        /// \~English
-        /// <summary>
         /// Get the current data path
         /// </summary>
         /// <returns>The data path, null if not configured</returns>
@@ -780,25 +710,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.0) Deprecated, use ASEva.Agency.GetSubDataPaths
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// (api:app=2.4.0) 已弃用，应使用 ASEva.Agency.GetSubDataPaths
-        /// </summary>
-        public static String[] GetSubDataPathes()
-        {
-            return Handler.GetSubDataPaths();
-        }
-
-        /// \~English
-        /// <summary>
-        /// (api:app=2.6.12) Get all sub data paths
+        /// Get all sub data paths
         /// </summary>
         /// <returns>Sub data paths, null if they don't exist</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.12) 获取所有子数据目录的路径
+        /// 获取所有子数据目录的路径
         /// </summary>
         /// <returns>所有子数据目录的路径，目录不存在则为null</returns>
         public static String[] GetSubDataPaths()
@@ -808,13 +725,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.0) Set sub data path
+        /// Set sub data path
         /// </summary>
         /// <param name="subIndex">Index, ranges 0~3</param>
         /// <param name="path">Sub data path</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.0) 设置子数据目录的路径
+        /// 设置子数据目录的路径
         /// </summary>
         /// <param name="subIndex">子数据目录序号，0~3</param>
         /// <param name="path">子数据目录的路径</param>
@@ -825,12 +742,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.0) Get all data layers
+        /// Get all data layers
         /// </summary>
         /// <returns>Data layers, while '.' means the layer of sessions under data path, '..' means the layer of data path which is session</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.0) 获取所有有效的数据层级
+        /// 获取所有有效的数据层级
         /// </summary>
         /// <returns>数据层级列表，其中'.'表示根路径下的session，'..'表示根路径即session</returns>
         public static String[] GetDataLayers()
@@ -840,12 +757,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.0) Add a new data layer
+        /// Add a new data layer
         /// </summary>
         /// <param name="layer">Data layer</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.0) 添加新的数据层级
+        /// 添加新的数据层级
         /// </summary>
         /// <param name="layer">数据层级</param>
         public static void AddDataLayer(String layer)
@@ -855,12 +772,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.0) Remove data layer, and delete files to recycle bin
+        /// Remove data layer, and delete files to recycle bin
         /// </summary>
         /// <param name="layer">Data layer</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.0) 移除数据层级，并删除所有文件至回收站
+        /// 移除数据层级，并删除所有文件至回收站
         /// </summary>
         /// <param name="layer">数据层级</param>
         public static void DeleteDataLayer(String layer)
@@ -870,12 +787,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.0) Get current data layer
+        /// Get current data layer
         /// </summary>
         /// <returns>The current data layer, while null means all layers, '.' means the layer of sessions under data path, '..' means the layer of data path which is session</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.0) 获取当前的数据层级
+        /// 获取当前的数据层级
         /// </summary>
         /// <returns>数据层级，其中null表示所有层级，'.'表示根路径下的session，'..'表示根路径即session</returns>
         public static String GetCurrentDataLayer()
@@ -885,12 +802,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.5) Get the path of current data layer
+        /// Get the path of current data layer
         /// </summary>
         /// <returns>The path of current data layer, returns null if the data path is not configured or the current data layer is '..', return data path if the current data layer is null (all layers)</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.5) 获取当前数据层级的路径
+        /// 获取当前数据层级的路径
         /// </summary>
         /// <returns>当前数据层级的路径，若数据目录未设置或数据层级为'..'则返回null，若当前数据层级为null(所有层级)则返回数据目录根路径</returns>
         public static String GetCurrentDataLayerPath()
@@ -900,12 +817,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.0) Set current data layer
+        /// Set current data layer
         /// </summary>
         /// <param name="layer">The current data layer, while null means all layers, '.' means the layer of sessions under data path, '..' means the layer of data path which is session</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.0) 设置当前的数据层级
+        /// 设置当前的数据层级
         /// </summary>
         /// <param name="layer">数据层级，其中null表示所有层级，'.'表示根路径下的session，'..'表示根路径即session</param>
         public static void SetCurrentDataLayer(String layer)
@@ -1007,14 +924,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.15) Transmit bound bus message, either periodically or once (only available in online mode)
+        /// Transmit bound bus message, either periodically or once (only available in online mode)
         /// </summary>
         /// <param name="messageID">Message ID of bound bus message</param>
         /// <param name="interval">Transmit period, in milliseconds (at least 10). If it is set to null, it is transmitted only once</param>
         /// <param name="data">Generated bus message data, null if not bound</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.15) 发送总线报文（该报文需设置绑定），可周期性发送，也可单次发送（仅在线模式可用）
+        /// 发送总线报文（该报文需设置绑定），可周期性发送，也可单次发送（仅在线模式可用）
         /// </summary>
         /// <param name="messageID">绑定的报文ID</param>
         /// <param name="interval">报文发送周期，单位毫秒（至少为10），若设为null则只发送一次</param>
@@ -1045,7 +962,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.8.0) Transmitted received general raw data (only available in online mode)
+        /// Transmitted received general raw data (only available in online mode)
         /// </summary>
         /// <param name="cpuTick">CPU tick while data arriving</param>
         /// <param name="channelID">General raw data's channel ID, corresponding to the first column of input/raw/raw.csv</param>
@@ -1053,7 +970,7 @@ namespace ASEva
         /// <param name="binary">Binary data</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.8.0) 发送已获取的原始数据信息（仅在线模式可用）
+        /// 发送已获取的原始数据信息（仅在线模式可用）
         /// </summary>
         /// <param name="cpuTick">数据的到达时CPU计数</param>
         /// <param name="channelID">原始数据协议名称，对应input/raw/raw.csv首列文字</param>
@@ -1132,12 +1049,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get all general devices' status
+        /// Get all general devices' status
         /// </summary>
         /// <returns>The Dictionary. The key is type ID of general device</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取所有设备状态
+        /// 获取所有设备状态
         /// </summary>
         /// <returns>设备状态表，键为设备的类型ID</returns>
         public static Dictionary<String, DeviceStatusDetail> GetAllDeviceStatus()
@@ -1317,7 +1234,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.0.4) Call Web API (POST) asynchronously with the specified content type
+        /// Call Web API (POST) asynchronously with the specified content type
         /// </summary>
         /// <param name="request">The request</param>
         /// <param name="body">Binary data body</param>
@@ -1325,7 +1242,7 @@ namespace ASEva
         /// <param name="context">The context of calling. Since this function is non-blocking, the context needs to be used to get the status and response at a future time after it ends</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.0.4) 非阻塞调用Web API (POST)，指定内容类型
+        /// 非阻塞调用Web API (POST)，指定内容类型
         /// </summary>
         /// <param name="request">调用请求</param>
         /// <param name="body">提交的二进制数据body</param>
@@ -1355,12 +1272,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.4) Get all data channels' alias name
+        /// Get all data channels' alias name
         /// </summary>
         /// <returns>The Dictionary. The key is data channel ID</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.4) 获取数据通道别名
+        /// 获取数据通道别名
         /// </summary>
         /// <returns>数据所有通道的别名表</returns>
         public static Dictionary<String, String> GetChannelAliasTable()
@@ -1370,13 +1287,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get whether there're multiple components outputting data with the same sample channel ID
+        /// Get whether there're multiple components outputting data with the same sample channel ID
         /// </summary>
         /// <param name="channelID">Sample channel ID, with format as "protocol@channel". Channel is starting from 0. Protocol with "v" version number is with backward compatibility</param>
         /// <returns>Whether conflict exists</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 检查样本数据通道是否冲突（有多个组件输出相同协议和通道的样本数据）
+        /// 检查样本数据通道是否冲突（有多个组件输出相同协议和通道的样本数据）
         /// </summary>
         /// <param name="channelID">样本通道协议，格式为"协议名@通道序号"，通道序号从0开始，协议名中带"v"字版本号的可向下兼容</param>
         /// <returns>是否冲突</returns>
@@ -1570,12 +1487,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.1) Get all keys of global variable
+        /// Get all keys of global variable
         /// </summary>
         /// <returns>All keys of global variable</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.1) 获取所有全局变量的键
+        /// 获取所有全局变量的键
         /// </summary>
         /// <returns>所有全局变量的键</returns>
         public static String[] GetGlobalVariableKeys()
@@ -1585,12 +1502,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.1) Get all keys of global parameter
+        /// Get all keys of global parameter
         /// </summary>
         /// <returns>All keys of global parameter</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.1) 获取所有全局参数的键
+        /// 获取所有全局参数的键
         /// </summary>
         /// <returns>所有全局参数的键</returns>
         public static String[] GetGlobalParameterKeys()
@@ -1600,12 +1517,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.1) Get all keys of global path
+        /// Get all keys of global path
         /// </summary>
         /// <returns>All keys of global path</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.1) 获取所有全局路径的键
+        /// 获取所有全局路径的键
         /// </summary>
         /// <returns>所有全局路径的键</returns>
         public static String[] GetGlobalPathKeys()
@@ -1823,26 +1740,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Deprecated, use ASEva.Agency.IsBusMessageBound
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，应使用 ASEva.Agency.IsBusMessageBound
-        /// </summary>
-        public static bool IsBusMessageBinded(string busMessageID)
-        {
-            return Handler.IsBusMessageBound(busMessageID);
-        }
-
-        /// \~English
-        /// <summary>
-        /// (api:app=2.3.0) Get whether the bus message is bound
+        /// Get whether the bus message is bound
         /// </summary>
         /// <param name="busMessageID">Bus message ID</param>
         /// <returns>Whether the bus message is bound</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取总线报文是否已绑定发送
+        /// 获取总线报文是否已绑定发送
         /// </summary>
         /// <param name="busMessageID">总线报文ID</param>
         /// <returns>是否已绑定</returns>
@@ -1934,7 +1838,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Switch to replay mode and start replay
+        /// Switch to replay mode and start replay
         /// </summary>
         /// <param name="force">Whether to force to start, switching mode could cost a lot of time</param>
         /// <param name="startTimeline">The timeline point from which to start replay, in seconds</param>
@@ -1942,7 +1846,7 @@ namespace ASEva
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 切换至回放模式并开始回放
+        /// 切换至回放模式并开始回放
         /// </summary>
         /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
         /// <param name="startTimeline">时间线上的回放开始时间，单位秒</param>
@@ -1993,7 +1897,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.0) Switch to online mode and start
+        /// Switch to online mode and start
         /// </summary>
         /// <param name="force">Whether to force to start, switching mode could cost a lot of time</param>
         /// <param name="previewOnly">Whether previewing, otherwise recording</param>
@@ -2001,7 +1905,7 @@ namespace ASEva
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.0) 切换至在线模式并开始预览或采集
+        /// 切换至在线模式并开始预览或采集
         /// </summary>
         /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
         /// <param name="previewOnly">是否为预览</param>
@@ -2033,7 +1937,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.3) Switch to offline processing mode and start
+        /// Switch to offline processing mode and start
         /// </summary>
         /// <param name="force">Whether to force to start, switching mode could cost a lot of time</param>
         /// <param name="previewOnly">Whether previewing, otherwise generating</param>
@@ -2041,7 +1945,7 @@ namespace ASEva
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.3) 切换至离线模式并开始预览或后处理
+        /// 切换至离线模式并开始预览或后处理
         /// </summary>
         /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
         /// <param name="previewOnly">是否为预览</param>
@@ -2054,7 +1958,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.10.0) Switch to remote mode and start
+        /// Switch to remote mode and start
         /// </summary>
         /// <param name="force">Whether to force to start, switching mode could cost a lot of time</param>
         /// <param name="previewOnly">Whether previewing, otherwise recording</param>
@@ -2063,7 +1967,7 @@ namespace ASEva
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.10.0) 切换至远程模式并开始预览或采集
+        /// 切换至远程模式并开始预览或采集
         /// </summary>
         /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
         /// <param name="previewOnly">是否为预览</param>
@@ -2077,7 +1981,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.15.4) Switch to remote mode and start
+        /// Switch to remote mode and start
         /// </summary>
         /// <param name="controllerName">Controller name, for exclusive control</param>
         /// <param name="previewOnly">Whether previewing, otherwise recording</param>
@@ -2085,7 +1989,7 @@ namespace ASEva
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.15.4) 切换至远程模式并开始预览或采集
+        /// 切换至远程模式并开始预览或采集
         /// </summary>
         /// <param name="controllerName">控制者名称，用于独占控制模式</param>
         /// <param name="previewOnly">是否为预览</param>
@@ -2381,12 +2285,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.4) Get time synchronization status of all channels
+        /// Get time synchronization status of all channels
         /// </summary>
         /// <returns>Dictionary. The key is channel ID</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.4) 获取所有通道的时间同步状态
+        /// 获取所有通道的时间同步状态
         /// </summary>
         /// <returns>返回各通道的时间同步状态，key为通道ID</returns>
         public static Dictionary<String, TimeOffsetSync> GetChannelSyncTable()
@@ -2453,13 +2357,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.7) Disable processor/native/device component component
+        /// Disable processor/native/device component component
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
         /// <param name="classID">Component's class ID</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.7) 禁用数据处理/原生/设备组件
+        /// 禁用数据处理/原生/设备组件
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
         /// <param name="classID">组件的类别ID</param>
@@ -2470,12 +2374,18 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Deprecated, use GetModuleConfigStatus(caller, classID, errorHint)
+        /// Get status of processor/native/device component's configuration
         /// </summary>
+        /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
+        /// <param name="classID">Component's class ID</param>
+        /// <returns>Status of component's configuration, returns ASEva.ConfigStatus.Disabled if not found</returns>
         /// \~Chinese
         /// <summary>
-        /// 已弃用，应使用GetModuleConfigStatus(caller, classID, errorHint)
+        /// 获取数据处理/原生/设备组件配置的状态
         /// </summary>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
+        /// <param name="classID">组件的类别ID</param>
+        /// <returns>组件配置的状态，若找不到类别ID对应的组件则返回 ASEva.ConfigStatus.Disabled </returns>
         public static ConfigStatus GetModuleConfigStatus(object caller, String classID)
         {
             return Handler.GetModuleConfigStatus(caller, classID);
@@ -2483,7 +2393,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.16.0) Get status of processor/native/device component's configuration
+        /// Get status of processor/native/device component's configuration
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
         /// <param name="classID">Component's class ID</param>
@@ -2491,7 +2401,7 @@ namespace ASEva
         /// <returns>Status of component's configuration, returns ASEva.ConfigStatus.Disabled if not found</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.16.0) 获取数据处理/原生/设备组件配置的状态
+        /// 获取数据处理/原生/设备组件配置的状态
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
         /// <param name="classID">组件的类别ID</param>
@@ -2553,12 +2463,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get all bus protocol file IDs
+        /// Get all bus protocol file IDs
         /// </summary>
         /// <returns>All bus protocol file IDs</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取总线协议文件ID列表
+        /// 获取总线协议文件ID列表
         /// </summary>
         /// <returns>总线协议文件ID列表</returns>
         public static BusProtocolFileID[] GetBusProtocolFileIDList()
@@ -2568,13 +2478,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get the path of bus protocol file
+        /// Get the path of bus protocol file
         /// </summary>
         /// <param name="fileID">Bus protocol file ID</param>
         /// <returns>The path of bus protocol file, null if not found</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取总线协议对应文件的路径
+        /// 获取总线协议对应文件的路径
         /// </summary>
         /// <param name="fileID">总线协议文件ID</param>
         /// <returns>总线协议文件路径，若未找到返回null</returns>
@@ -2585,14 +2495,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Update the path of bus protocol file (Only single channel protocol supported)
+        /// Update the path of bus protocol file (Only single channel protocol supported)
         /// </summary>
         /// <param name="fileID">Bus protocol file ID</param>
         /// <param name="filePath">New path</param>
         /// <returns>Whether successfull, false if the file is not found or MD5 doesn't match</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 更新总线协议文件路径(仅支持单通道的情况)
+        /// 更新总线协议文件路径(仅支持单通道的情况)
         /// </summary>
         /// <param name="fileID">总线协议文件ID</param>
         /// <param name="filePath">新路径</param>
@@ -2621,14 +2531,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Add bus protocol file (For multiple channel protocol, only the first channel will be added)
+        /// Add bus protocol file (For multiple channel protocol, only the first channel will be added)
         /// </summary>
         /// <param name="filePath">File path of bus protocol file</param>
         /// <param name="fileID">Output bus protocol file ID, null if the file doesn't exist</param>
         /// <returns>Whether it's a new protocol, or else it already exists</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 添加新的总线协议文件(多通道协议文件将按单通道处理，输出首个通道)
+        /// 添加新的总线协议文件(多通道协议文件将按单通道处理，输出首个通道)
         /// </summary>
         /// <param name="filePath">总线协议文件路径</param>
         /// <param name="fileID">总线协议文件ID，若文件存在则输出该ID，否则输出null</param>
@@ -2640,13 +2550,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.3) Add bus protocol file
+        /// Add bus protocol file
         /// </summary>
         /// <param name="filePath">File path of bus protocol file</param>
         /// <returns>The result</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.3) 添加新的总线协议文件
+        /// 添加新的总线协议文件
         /// </summary>
         /// <param name="filePath">总线协议文件路径</param>
         /// <returns>添加结果</returns>
@@ -2657,12 +2567,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Remove bus protocol
+        /// Remove bus protocol
         /// </summary>
         /// <param name="fileID">Bus protocol file ID</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 移除总线协议
+        /// 移除总线协议
         /// </summary>
         /// <param name="fileID">总线协议文件ID</param>
         public static void RemoveBusProtocolFile(BusProtocolFileID fileID)
@@ -2689,13 +2599,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get version of all native plugins
+        /// Get version of all native plugins
         /// </summary>
         /// <param name="type">Type of native plugin</param>
         /// <returns>Dictionary. The key is plugin's type ID</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取原生插件插件版本列表
+        /// 获取原生插件插件版本列表
         /// </summary>
         /// <param name="type">原生库类别</param>
         /// <returns>版本列表，键为原生插件的类型ID</returns>
@@ -2724,7 +2634,7 @@ namespace ASEva
         /// <param name="imageSize">Image size</param>
         /// <param name="centerLocation">Location of the image's center</param>
         /// <param name="zoom">Scale, ranges 0~24</param>
-        /// <returns>Platform image of offline map, null if failed to query</returns>
+        /// <returns>Platform native image of offline map, null if failed to query</returns>
         /// \~Chinese
         /// <summary>
         /// 获取离线地图图像
@@ -2732,7 +2642,7 @@ namespace ASEva
         /// <param name="imageSize">指定图像大小</param>
         /// <param name="centerLocation">图像中心的经纬度</param>
         /// <param name="zoom">图像的尺度，0~24</param>
-        /// <returns>离线地图图像（平台特化），空表示获取失败</returns>
+        /// <returns>离线地图图像（平台原生图像），空表示获取失败</returns>
         public static object GetOfflineMapImage(IntSize imageSize, LocPoint centerLocation, int zoom)
         {
             return Handler.GetOfflineMapImage(imageSize, centerLocation, zoom);
@@ -2740,7 +2650,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Query offline map's image
+        /// Query offline map's image
         /// </summary>
         /// <param name="imageSize">Image size</param>
         /// <param name="centerLocation">Location of the image's center</param>
@@ -2748,7 +2658,7 @@ namespace ASEva
         /// <returns>Common image of offline map, null if failed to query</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取离线地图图像
+        /// 获取离线地图图像
         /// </summary>
         /// <param name="imageSize">指定图像大小</param>
         /// <param name="centerLocation">图像中心的经纬度</param>
@@ -2858,12 +2768,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.9.0) Create a video frame getter (updated)
+        /// Create a video frame getter (updated)
         /// </summary>
         /// <returns>Video frame getter (updated)</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.9.0) 创建视频帧获取器(扩展版)
+        /// 创建视频帧获取器(扩展版)
         /// </summary>
         /// <returns>视频帧获取器(扩展版)</returns>
         public static VideoFrameGetterX CreateVideoFrameGetterX()
@@ -2873,7 +2783,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.15.4) Get the nearest video frame's preview JPEG data from the specified time
+        /// Get the nearest video frame's preview JPEG data from the specified time
         /// </summary>
         /// <param name="channel">Video channel, ranges 0~23</param>
         /// <param name="timeline">Target timeline point, in seconds</param>
@@ -2883,7 +2793,7 @@ namespace ASEva
         /// <returns>Video frame's preview JPEG data, image width is 640 pix, null if failed to query</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.15.4) 获取距离指定时间最近的视频帧的预览JPEG图像数据
+        /// 获取距离指定时间最近的视频帧的预览JPEG图像数据
         /// </summary>
         /// <param name="channel">视频通道，0~23</param>
         /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
@@ -2911,17 +2821,6 @@ namespace ASEva
         public static void SelectSignals(SelectSignalHandler handler, List<String> existSignalIDList)
         {
             Handler.SelectSignals(handler, existSignalIDList);
-        }
-
-        /// \~English
-        /// Deprecated, unnecessary to configure
-        /// \~Chinese
-        /// <summary>
-        /// 已弃用，无需再配置
-        /// </summary>
-        public static List<String> SelectBusFloat32Signal(List<String> existSignalIDList)
-        {
-            return Handler.SelectBusFloat32Signal(existSignalIDList);
         }
 
         /// \~English
@@ -2966,13 +2865,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.15.0) Run console procedure
+        /// Run console procedure
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , WindowPanel, etc.</param>
         /// <param name="consoleClassID">Console class ID</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.15.0) 运行控制台过程
+        /// 运行控制台过程
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , WindowPanel等</param>
         /// <param name="consoleClassID">控制台组件ID</param>
@@ -3117,12 +3016,12 @@ namespace ASEva
         
         /// \~English
         /// <summary>
-        /// (api:app=2.0.6) Get CPU time (starting from host machine powered on)
+        /// Get CPU time (starting from host machine powered on)
         /// </summary>
         /// <returns>CPU time, in seconds, 0 means invalid</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.0.6) 获取CPU时间（从开机起算的时间）
+        /// 获取CPU时间（从开机起算的时间）
         /// </summary>
         /// <returns>CPU时间，单位秒，返回0表示无效</returns>
         public static double GetCPUTime()
@@ -3132,12 +3031,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.2.3) Get list of all event types (include not enabled)
+        /// Get list of all event types (include not enabled)
         /// </summary>
         /// <returns>List of all event types</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.2.3) 获取事件类型名称列表（包括未启用的）
+        /// 获取事件类型名称列表（包括未启用的）
         /// </summary>
         /// <returns>事件类型名称列表</returns>
         public static String[] GetEventTypeNames()
@@ -3147,13 +3046,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.2.3) Parse bus message data, and get signal values
+        /// Parse bus message data, and get signal values
         /// </summary>
         /// <param name="busMessage">Bus message data</param>
         /// <returns>Signal values and other information</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.2.3) 解析总线报文，获取信号值等信息
+        /// 解析总线报文，获取信号值等信息
         /// </summary>
         /// <param name="busMessage">总线报文</param>
         /// <returns>所有信号值及相关信息</returns>
@@ -3164,25 +3063,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Deprecated, use ASEva.Agency.GetRecentProjectPaths
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// (api:app=2.3.0) 已弃用，应使用 ASEva.Agency.GetRecentProjectPaths
-        /// </summary>
-        public static String[] GetRecentProjectPathes()
-        {
-            return Handler.GetRecentProjectPaths();
-        }
-
-        /// \~English
-        /// <summary>
-        /// (api:app=2.6.12) Get paths of recent project files
+        /// Get paths of recent project files
         /// </summary>
         /// <returns>Paths of recent project files</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.12) 获取最近项目文件路径列表
+        /// 获取最近项目文件路径列表
         /// </summary>
         /// <returns>最近项目文件路径列表</returns>
         public static String[] GetRecentProjectPaths()
@@ -3192,14 +3078,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Try to terminate application
+        /// Try to terminate application
         /// </summary>
         /// <param name="force">Whether forced to terminate</param>
         /// <param name="autosave">Whether to save current project to autosave in the folder of application's configuration files</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 尝试终止应用程序
+        /// 尝试终止应用程序
         /// </summary>
         /// <param name="force">是否强制终止</param>
         /// <param name="autosave">是否保存当前工程至autosave至应用程序的配置文件目录</param>
@@ -3211,12 +3097,12 @@ namespace ASEva
         
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Show a modal dialog to display error message
+        /// Show a modal dialog to display error message
         /// </summary>
         /// <param name="msg">Error message</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 弹出模态框显示错误信息
+        /// 弹出模态框显示错误信息
         /// </summary>
         /// <param name="msg">错误信息</param>
         public static void PopupError(String msg)
@@ -3226,12 +3112,12 @@ namespace ASEva
         
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Show a modal dialog to display notice
+        /// Show a modal dialog to display notice
         /// </summary>
         /// <param name="msg">Notice</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 弹出模态框显示提示信息
+        /// 弹出模态框显示提示信息
         /// </summary>
         /// <param name="msg">提示信息</param>
         public static void PopupNotice(String msg)
@@ -3241,13 +3127,13 @@ namespace ASEva
         
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Show a modal dialog for user to confirm
+        /// Show a modal dialog for user to confirm
         /// </summary>
         /// <param name="msg">Message for user to confirm</param>
         /// <returns>Whether confirmed</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 弹出模态框显示确认信息
+        /// 弹出模态框显示确认信息
         /// </summary>
         /// <param name="msg">确认信息</param>
         /// <returns>是否得到确认</returns>
@@ -3258,12 +3144,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Add checkpoint for main thread
+        /// Add checkpoint for main thread
         /// </summary>
         /// <param name="location">Checkpoint location</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 添加主线程检查点
+        /// 添加主线程检查点
         /// </summary>
         /// <param name="location">主线程检查点位置</param>
         public static void AddMainThreadCheckpoint(String location)
@@ -3273,13 +3159,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Create blank project
+        /// Create blank project
         /// </summary>
         /// <param name="force">Whether forced to create new project</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 新建空白项目
+        /// 新建空白项目
         /// </summary>
         /// <param name="force">是否强制新建空白项目</param>
         /// <returns>是否成功新建项目</returns>
@@ -3290,13 +3176,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Open project
+        /// Open project
         /// </summary>
         /// <param name="projectFile">Path of project file, set to null to load autosaved in the folder of application's configuration files</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 打开项目
+        /// 打开项目
         /// </summary>
         /// <param name="projectFile">项目文件路径，若设为null则从autosave读取</param>
         /// <returns>是否成功打开项目</returns>
@@ -3307,14 +3193,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.15.8) Open project
+        /// Open project
         /// </summary>
         /// <param name="projectFile">Path of project file, set to null to load autosaved in the folder of application's configuration files</param>
         /// <param name="force">Whether forced to open the project</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.15.8) 打开项目
+        /// 打开项目
         /// </summary>
         /// <param name="projectFile">项目文件路径，若设为null则从autosave读取</param>
         /// <param name="force">是否强制打开项目</param>
@@ -3326,13 +3212,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Save project
+        /// Save project
         /// </summary>
         /// <param name="projectFile">Path of project file, set to null to write to autosave in the folder of application's configuration files</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 保存当前项目
+        /// 保存当前项目
         /// </summary>
         /// <param name="projectFile">项目文件路径，null表示保存至当前项目文件</param>
         /// <returns>是否成功保存项目</returns>
@@ -3343,12 +3229,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get current project file's path
+        /// Get current project file's path
         /// </summary>
         /// <returns>Current project file's path, null if it's a new project or loaded from autosaved</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取当前项目文件
+        /// 获取当前项目文件
         /// </summary>
         /// <returns>当前项目文件，新项目或从autosave读取的项目都为null</returns>
         public static String GetCurrentProject()
@@ -3358,12 +3244,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Play mp3 audio
+        /// Play mp3 audio
         /// </summary>
         /// <param name="mp3FileData">MP3 audio data</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 播放MP3音频
+        /// 播放MP3音频
         /// </summary>
         /// <param name="mp3FileData">MP3音频文件数据</param>
         public static void PlayMp3(byte[] mp3FileData)
@@ -3373,13 +3259,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Start a process to open file, folder or web site
+        /// Start a process to open file, folder or web site
         /// </summary>
         /// <param name="target">Path of file, folder or web site</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 启动进程以默认方式打开文件、文件夹或网址
+        /// 启动进程以默认方式打开文件、文件夹或网址
         /// </summary>
         /// <param name="target">目标文件、文件夹或网址</param>
         /// <returns>是否成功打开</returns>
@@ -3390,12 +3276,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get application's version info
+        /// Get application's version info
         /// </summary>
         /// <returns>Dictionary. The key is version title</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取软件版本信息总表
+        /// 获取软件版本信息总表
         /// </summary>
         /// <returns>软件版本信息总表</returns>
         public static Dictionary<String, Version> GetVersionTable()
@@ -3405,13 +3291,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get system status
+        /// Get system status
         /// </summary>
         /// <param name="status">Type of system status</param>
         /// <returns>Information of system status, null if no available info</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取系统状态信息
+        /// 获取系统状态信息
         /// </summary>
         /// <param name="status">系统状态类别</param>
         /// <returns>系统状态信息，若无有效信息则返回null</returns>
@@ -3422,13 +3308,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get details of system status
+        /// Get details of system status
         /// </summary>
         /// <param name="status">Type of system status</param>
         /// <returns>Details of system status, null if no available info</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取系统状态详情
+        /// 获取系统状态详情
         /// </summary>
         /// <param name="status">系统状态类别</param>
         /// <returns>系统状态详情，若无有效信息则返回null</returns>
@@ -3439,12 +3325,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get all licensed function indices
+        /// Get all licensed function indices
         /// </summary>
         /// <returns>All licensed function indices</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取被许可的功能序号列表
+        /// 获取被许可的功能序号列表
         /// </summary>
         /// <returns>被许可的功能序号列表</returns>
         public static int[] GetLicensedFunctionIndices()
@@ -3454,7 +3340,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Switch application's mode
+        /// Switch application's mode
         /// </summary>
         /// <param name="controllerName">Controller name, for exclusive control</param>
         /// <param name="mode">Target mode</param>
@@ -3462,7 +3348,7 @@ namespace ASEva
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 切换应用程序当前的运行模式
+        /// 切换应用程序当前的运行模式
         /// </summary>
         /// <param name="controllerName">控制者名称，用于独占控制模式</param>
         /// <param name="mode">目标运行模式</param>
@@ -3475,12 +3361,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Set data path
+        /// Set data path
         /// </summary>
         /// <param name="path">The data path</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 设置数据目录的路径
+        /// 设置数据目录的路径
         /// </summary>
         /// <param name="path">数据目录的路径</param>
         public static void SetDataPath(String path)
@@ -3490,12 +3376,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get information of all window classes
+        /// Get information of all window classes
         /// </summary>
         /// <returns>Dictionary. The key is window class ID</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取窗口组件信息表
+        /// 获取窗口组件信息表
         /// </summary>
         /// <returns>窗口组件信息表，键为组件ID</returns>
         public static Dictionary<String, WindowClassInfo> GetWindowClassTable()
@@ -3505,12 +3391,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get information of all dialog classes
+        /// Get information of all dialog classes
         /// </summary>
         /// <returns>Dictionary. The key is dialog class ID</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取对话框组件信息表
+        /// 获取对话框组件信息表
         /// </summary>
         /// <returns>对话框组件信息表，键为组件ID</returns>
         public static Dictionary<String, DialogClassInfo> GetDialogClassTable()
@@ -3520,12 +3406,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get information of all app-layer processor classes
+        /// Get information of all app-layer processor classes
         /// </summary>
         /// <returns>Dictionary. The key is processor class ID</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取数据处理组件信息表
+        /// 获取数据处理组件信息表
         /// </summary>
         /// <returns>数据处理组件信息表，键为组件ID</returns>
         public static Dictionary<String, ProcessorClassInfo> GetProcessorClassTable()
@@ -3535,12 +3421,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get information of all native-layer component classes
+        /// Get information of all native-layer component classes
         /// </summary>
         /// <returns>Dictionary. The key is native-layer component's class ID</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取原生组件信息表
+        /// 获取原生组件信息表
         /// </summary>
         /// <returns>原生组件信息表，键为组件ID</returns>
         public static Dictionary<String, NativeClassInfo> GetNativeClassTable()
@@ -3550,12 +3436,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get information of all standalone task classes
+        /// Get information of all standalone task classes
         /// </summary>
         /// <returns>Dictionary. The key is task class ID</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取独立任务组件信息表
+        /// 获取独立任务组件信息表
         /// </summary>
         /// <returns>独立任务组件信息表，键为组件ID</returns>
         public static Dictionary<String, TaskClassInfo> GetTaskClassTable()
@@ -3565,12 +3451,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.8.0) Get information of all app-layer device classes
+        /// Get information of all app-layer device classes
         /// </summary>
         /// <returns>Dictionary. The key is device class ID</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.8.0) 获取设备组件信息表
+        /// 获取设备组件信息表
         /// </summary>
         /// <returns>设备组件信息表，键为组件ID</returns>
         public static Dictionary<String, DeviceClassInfo> GetDeviceClassTable()
@@ -3580,12 +3466,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.15.2) Get information of all console classes
+        /// Get information of all console classes
         /// </summary>
         /// <returns>Dictionary. The key is console class ID</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.15.2) 获取控制台组件信息表
+        /// 获取控制台组件信息表
         /// </summary>
         /// <returns>控制台组件信息表，键为组件ID</returns>
         public static Dictionary<string, ConsoleClassInfo> GetConsoleClassTable()
@@ -3595,14 +3481,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Register transformed window class through configuration string
+        /// Register transformed window class through configuration string
         /// </summary>
         /// <param name="windowClassID">Original window class's ID</param>
         /// <param name="config">Configuration string</param>
         /// <returns>Information of transformed window class</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 通过配置注册分化窗口组件
+        /// 通过配置注册分化窗口组件
         /// </summary>
         /// <param name="windowClassID">原窗口组件ID</param>
         /// <param name="config">用于分化的配置字符串</param>
@@ -3614,7 +3500,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.5.0) Register transformed window class directly
+        /// Register transformed window class directly
         /// </summary>
         /// <param name="windowClassID">Original window class's ID</param>
         /// <param name="transformWindowClass">Transformed window class object</param>
@@ -3622,7 +3508,7 @@ namespace ASEva
         /// <returns>Information of transformed window class</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.5.0) 直接注册分化窗口组件
+        /// 直接注册分化窗口组件
         /// </summary>
         /// <param name="windowClassID">原窗口组件ID</param>
         /// <param name="transformWindowClass">分化窗口组件类</param>
@@ -3635,14 +3521,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Register transformed dialog class through configuration string
+        /// Register transformed dialog class through configuration string
         /// </summary>
         /// <param name="dialogClassID">Original dialog class's ID</param>
         /// <param name="config">Configuration string</param>
         /// <returns>Information of transformed dialog class</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 通过配置注册分化对话框组件
+        /// 通过配置注册分化对话框组件
         /// </summary>
         /// <param name="dialogClassID">原对话框组件ID</param>
         /// <param name="config">用于分化的配置字符串</param>
@@ -3654,7 +3540,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.5.0) Register transformed dialog class directly
+        /// Register transformed dialog class directly
         /// </summary>
         /// <param name="dialogClassID">Original dialog class's ID</param>
         /// <param name="transformDialogClass">Transformed dialog class object</param>
@@ -3662,7 +3548,7 @@ namespace ASEva
         /// <returns>Information of transformed dialog class</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.5.0) 直接注册分化对话框组件
+        /// 直接注册分化对话框组件
         /// </summary>
         /// <param name="dialogClassID">原对话框组件ID</param>
         /// <param name="transformDialogClass">分化对话框组件类</param>
@@ -3675,7 +3561,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get status of components related to the dialog
+        /// Get status of components related to the dialog
         /// </summary>
         /// <param name="dialogClassID">Dialog component's class ID</param>
         /// <param name="transformID">Transform ID</param>
@@ -3683,7 +3569,7 @@ namespace ASEva
         /// <returns>The main status</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取对话框相关组件配置状态
+        /// 获取对话框相关组件配置状态
         /// </summary>
         /// <param name="dialogClassID">对话框组件ID</param>
         /// <param name="transformID">分化ID</param>
@@ -3696,14 +3582,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.15.1) Get status of components related to the console
+        /// Get status of components related to the console
         /// </summary>
         /// <param name="dialogClassID">Console component's class ID</param>
         /// <param name="childrenStatus">Output child status</param>
         /// <returns>The main status</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.15.1) 获取控制台相关组件配置状态
+        /// 获取控制台相关组件配置状态
         /// </summary>
         /// <param name="dialogClassID">控制台组件ID</param>
         /// <param name="childrenStatus">子配置状态</param>
@@ -3715,11 +3601,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Disable all components (Some may not be able to disabled)
+        /// Disable all components (Some may not be able to disabled)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 禁用所有组件配置
+        /// 禁用所有组件配置
         /// </summary>
         public static void DisableAllConfigs()
         {
@@ -3728,13 +3614,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.2) Get all generations of the session under current data layer
+        /// Get all generations of the session under current data layer
         /// </summary>
         /// <param name="sessionID">Session ID</param>
         /// <returns>Generation IDs</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.2) 获取当前层级下指定session下的所有generation ID
+        /// 获取当前层级下指定session下的所有generation ID
         /// </summary>
         /// <param name="sessionID">Session ID</param>
         /// <returns>Generation ID列表</returns>
@@ -3745,13 +3631,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get all sessions that contain generation with the specified ID under current data layer
+        /// Get all sessions that contain generation with the specified ID under current data layer
         /// </summary>
         /// <param name="generationID">Generation ID</param>
         /// <returns>Session IDs</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取当前层级下含有指定generation ID的所有session
+        /// 获取当前层级下含有指定generation ID的所有session
         /// </summary>
         /// <param name="generationID">Generation ID</param>
         /// <returns>Session ID列表</returns>
@@ -3762,12 +3648,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Set target replay speed for replaying or offline processing
+        /// Set target replay speed for replaying or offline processing
         /// </summary>
         /// <param name="speed">Target replay speed</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 设置目标回放速度，用于回放或离线处理
+        /// 设置目标回放速度，用于回放或离线处理
         /// </summary>
         /// <param name="speed">目标回放速度</param>
         public static void SetTargetReplaySpeed(double speed)
@@ -3777,12 +3663,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Set search keyword for session filtering
+        /// Set search keyword for session filtering
         /// </summary>
         /// <param name="keyword">Search keyword for session filtering</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 设置session搜索关键字
+        /// 设置session搜索关键字
         /// </summary>
         /// <param name="keyword">session搜索关键字</param>
         public static void SetSessionSearchKeyword(String keyword)
@@ -3792,12 +3678,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get filter flags of all sessions
+        /// Get filter flags of all sessions
         /// </summary>
         /// <returns>Filter flags of all sessions</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取所有session的筛选标志位
+        /// 获取所有session的筛选标志位
         /// </summary>
         /// <returns>session的筛选标志位表</returns>
         public static Dictionary<DateTime, SessionFilterFlags> GetSessionFilterTable()
@@ -3807,12 +3693,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get ID of the session currently recording or previewing in online mode or remote mode
+        /// Get ID of the session currently recording or previewing in online mode or remote mode
         /// </summary>
         /// <returns>Session ID, null if neither in online mode nor in remote mode</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取采集模式(在线/远程)下正在预览或采集的session
+        /// 获取采集模式(在线/远程)下正在预览或采集的session
         /// </summary>
         /// <returns>采集模式(在线/远程)下正在预览或采集的session，若非采集模式则返回null</returns>
         public static DateTime? GetCurrentOnlineSession()
@@ -3822,12 +3708,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get total length of all sessions (not filtered)
+        /// Get total length of all sessions (not filtered)
         /// </summary>
         /// <returns>Total length of all sessions</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取当前层级下所有session的总时长（未筛选）
+        /// 获取当前层级下所有session的总时长（未筛选）
         /// </summary>
         /// <returns>所有session的总时长</returns>
         public static double GetSessionListTotalLength()
@@ -3837,11 +3723,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get current session search key
+        /// Get current session search key
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取当前的session搜索关键字
+        /// 获取当前的session搜索关键字
         /// </summary>
          public static String GetSessionSearchKey()
         {
@@ -3850,14 +3736,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Remove session and delete files to recycle bin
+        /// Remove session and delete files to recycle bin
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="force">Whether forced to remove</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 移除session及相关文件至回收站
+        /// 移除session及相关文件至回收站
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="force">是否强制移除</param>
@@ -3869,13 +3755,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Set session's check filter
+        /// Set session's check filter
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="check">Whether checked</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 设置session是否框选
+        /// 设置session是否框选
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="check">是否框选</param>
@@ -3886,13 +3772,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Remove generation and delete files to recycle bin
+        /// Remove generation and delete files to recycle bin
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="genID">Generation ID</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 移除generation及相关文件至回收站
+        /// 移除generation及相关文件至回收站
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="genID">Generation ID</param>
@@ -3903,13 +3789,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get session's comment
+        /// Get session's comment
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>Session's comment</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取session的注释说明
+        /// 获取session的注释说明
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>Session的注释说明</returns>
@@ -3920,13 +3806,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Set session's comment
+        /// Set session's comment
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="comment">Session's comment</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 设置session的注释说明
+        /// 设置session的注释说明
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="comment">Session的注释说明</param>
@@ -3937,13 +3823,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get session's properties
+        /// Get session's properties
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>Dictionary. The key is session's property title</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取session的属性表
+        /// 获取session的属性表
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>Session的属性表</returns>
@@ -3954,13 +3840,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Set session's properties
+        /// Set session's properties
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="properties">Dictionary. The key is session's property title</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 设置session的属性表
+        /// 设置session的属性表
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="properties">Session的属性表</param>
@@ -3971,13 +3857,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Get whether the host machine is synchronized with time server while the session is being recorded
+        /// Get whether the host machine is synchronized with time server while the session is being recorded
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>Whether the host machine is synchronized with time server</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 获取session采集时主机是否与授时服务器同步
+        /// 获取session采集时主机是否与授时服务器同步
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>主机是否与授时服务器同步</returns>
@@ -3988,13 +3874,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Set whether the host machine is synchronized with time server while the session is being recorded
+        /// Set whether the host machine is synchronized with time server while the session is being recorded
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="hostSync">Whether the host machine is synchronized with time server</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 设置session采集时主机是否与授时服务器同步
+        /// 设置session采集时主机是否与授时服务器同步
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="hostSync">主机是否与授时服务器同步</param>
@@ -4005,12 +3891,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Set audio volume
+        /// Set audio volume
         /// </summary>
         /// <param name="volume">Audio volume (times)</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 设置音量
+        /// 设置音量
         /// </summary>
         /// <param name="volume">音量（倍数）</param>
         public static void SetAudioVolume(double volume)
@@ -4020,25 +3906,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Deprecated, no need to use
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// (api:app=2.3.0) 已弃用，无需再调用
-        /// </summary>
-        public static void SetCPURateScale(int scale)
-        {
-            Handler.SetCPURateScale(scale);
-        }
-
-        /// \~English
-        /// <summary>
-        /// (api:app=2.3.0) Get license information
+        /// Get license information
         /// </summary>
         /// <returns>License information</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取许可证的详细信息
+        /// 获取许可证的详细信息
         /// </summary>
         /// <returns>许可证的详细信息</returns>
         public static String GetLicenseInfo()
@@ -4048,13 +3921,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get time shift configuration for general raw data channel
+        /// Get time shift configuration for general raw data channel
         /// </summary>
         /// <param name="id">General raw data's channel ID</param>
         /// <returns>Time shift, in milliseconds</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取原始数据通道延迟配置
+        /// 获取原始数据通道延迟配置
         /// </summary>
         /// <param name="id">原始数据通道ID</param>
         /// <returns>延迟配置，单位毫秒</returns>
@@ -4065,13 +3938,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get time shift configuration for bus raw data channel
+        /// Get time shift configuration for bus raw data channel
         /// </summary>
         /// <param name="channel">Bus channel, ranges 1~16</param>
         /// <returns>Time shift, in milliseconds</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取总线数据通道延迟配置
+        /// 获取总线数据通道延迟配置
         /// </summary>
         /// <param name="channel">总线通道，1~16</param>
         /// <returns>延迟配置，单位毫秒</returns>
@@ -4082,13 +3955,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get time shift configuration for video raw data channel
+        /// Get time shift configuration for video raw data channel
         /// </summary>
         /// <param name="channel">Video channel, ranges 0~23</param>
         /// <returns>Time shift, in milliseconds</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取视频数据通道延迟配置
+        /// 获取视频数据通道延迟配置
         /// </summary>
         /// <param name="channel">视频通道，0~23</param>
         /// <returns>延迟配置，单位毫秒</returns>
@@ -4099,12 +3972,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get time shift configuration for audio data channel
+        /// Get time shift configuration for audio data channel
         /// </summary>
         /// <returns>Time shift, in milliseconds</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取音频数据通道延迟配置
+        /// 获取音频数据通道延迟配置
         /// </summary>
         /// <returns>延迟配置，单位毫秒</returns>
         public static double GetAudioChannelDelayConfig()
@@ -4114,12 +3987,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get time shift configuration for all raw data channels
+        /// Get time shift configuration for all raw data channels
         /// </summary>
         /// <returns>Dictionary. The key is channel ID and the value is time shift (in milliseconds)</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取所有原始数据通道延迟配置
+        /// 获取所有原始数据通道延迟配置
         /// </summary>
         /// <returns>所有原始数据通道的延迟配置，单位毫秒</returns>
         public static Dictionary<string, double> GetAllRawChannelDelayConfigs()
@@ -4129,13 +4002,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Set time shift for general raw data channel
+        /// Set time shift for general raw data channel
         /// </summary>
         /// <param name="id">General raw data's channel ID</param>
         /// <param name="delay">Time shift, in milliseconds</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 设置原始数据通道延迟配置
+        /// 设置原始数据通道延迟配置
         /// </summary>
         /// <param name="id">原始数据通道ID</param>
         /// <param name="delay">延迟配置，单位毫秒</param>
@@ -4146,13 +4019,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Set time shift for bus raw data channel
+        /// Set time shift for bus raw data channel
         /// </summary>
         /// <param name="channel">Bus channel, ranges 1~16</param>
         /// <param name="delay">Time shift, in milliseconds</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 设置总线数据通道延迟配置
+        /// 设置总线数据通道延迟配置
         /// </summary>
         /// <param name="channel">总线通道，1~16</param>
         /// <param name="delay">延迟配置，单位毫秒</param>
@@ -4163,13 +4036,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Set time shift for video raw data channel
+        /// Set time shift for video raw data channel
         /// </summary>
         /// <param name="channel">Video channel, ranges 0~23</param>
         /// <param name="delay">Time shift, in milliseconds</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 设置视频数据通道延迟配置
+        /// 设置视频数据通道延迟配置
         /// </summary>
         /// <param name="channel">视频通道，0~23</param>
         /// <param name="delay">延迟配置，单位毫秒</param>
@@ -4180,12 +4053,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Set time shift for audio data channel
+        /// Set time shift for audio data channel
         /// </summary>
         /// <param name="delay">Time shift, in milliseconds</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 设置音频数据通道延迟配置
+        /// 设置音频数据通道延迟配置
         /// </summary>
         /// <param name="delay">延迟配置，单位毫秒</param>
         public static void SetAudioChannelDelayConfig(double delay)
@@ -4195,13 +4068,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get whether to monitor that there's data in the specified channel
+        /// Get whether to monitor that there's data in the specified channel
         /// </summary>
         /// <param name="id">Monitor ID, like bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0, etc.</param>
         /// <returns>Whether to monitor</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取是否监控指定通道有无数据
+        /// 获取是否监控指定通道有无数据
         /// </summary>
         /// <param name="id">监控ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
         /// <returns>是否监控有无数据</returns>
@@ -4212,13 +4085,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Set whether to monitor that there's data in the specified channel
+        /// Set whether to monitor that there's data in the specified channel
         /// </summary>
         /// <param name="id">Monitor ID, like bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0, etc.</param>
         /// <param name="monitoring">Whether to monitor (The function should be implemented by plugins, like audio alarm, UI flashing, etc.)</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 设置是否监控指定通道有无数据
+        /// 设置是否监控指定通道有无数据
         /// </summary>
         /// <param name="id">监控ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
         /// <param name="monitoring">是否监控有无数据，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
@@ -4229,12 +4102,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get monitor IDs of all the channels being monitored that there's data in the channel
+        /// Get monitor IDs of all the channels being monitored that there's data in the channel
         /// </summary>
         /// <returns>Monitor IDs of all the channels being monitored</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取所有正在监控有无数据的通道ID
+        /// 获取所有正在监控有无数据的通道ID
         /// </summary>
         /// <returns>正在监控有无数据的通道ID列表</returns>
         public static string[] GetAllChannelMonitoringKeys()
@@ -4244,13 +4117,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.12.1) Get whether to monitor that the specified channel's data is synchronized with time server
+        /// Get whether to monitor that the specified channel's data is synchronized with time server
         /// </summary>
         /// <param name="id">Monitor ID, like bus@1, video@0, sample@xxx-v2@0, etc.</param>
         /// <returns>Whether to monitor</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.12.1) 获取是否监控指定通道数据与授时服务器同步
+        /// 获取是否监控指定通道数据与授时服务器同步
         /// </summary>
         /// <param name="id">监控ID，如bus@1, video@0, sample@xxx-v2@0等</param>
         /// <returns>是否监控指定通道数据与授时服务器同步</returns>
@@ -4261,13 +4134,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.12.1) Set whether to monitor that the specified channel's data is synchronized with time server
+        /// Set whether to monitor that the specified channel's data is synchronized with time server
         /// </summary>
         /// <param name="id">Monitor ID, like bus@1, video@0, sample@xxx-v2@0, etc.</param>
         /// <param name="monitoring">Whether to monitor (The function should be implemented by plugins, like audio alarm, UI flashing, etc.)</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.12.1) 设置是否监控指定通道数据与授时服务器同步
+        /// 设置是否监控指定通道数据与授时服务器同步
         /// </summary>
         /// <param name="id">监控ID，如bus@1, video@0, sample@xxx-v2@0等</param>
         /// <param name="monitoring">是否监控数据与授时服务器同步，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
@@ -4278,12 +4151,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.12.1) Get monitor IDs of all the channels being monitored that the channel's data is synchronized with time server
+        /// Get monitor IDs of all the channels being monitored that the channel's data is synchronized with time server
         /// </summary>
         /// <returns>Monitor IDs of all the channels being monitored</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.12.1) 获取所有正在监控数据与授时服务器同步的监控ID
+        /// 获取所有正在监控数据与授时服务器同步的监控ID
         /// </summary>
         /// <returns>正在监控数据与授时服务器同步的通道ID列表</returns>
         public static String[] GetAllChannelServerSyncMonitoringKeys()
@@ -4293,13 +4166,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.6) Get whether the channel is configured as guest synchronized
+        /// Get whether the channel is configured as guest synchronized
         /// </summary>
         /// <param name="id">Guest synchronization ID, like bus.1, video.0, xxx.yyy(xxx is native plugin's type ID，yyy is channel name)</param>
         /// <returns>Whether the channel is configured as guest synchronized</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.6) 获取指定通道是否已配置为客机同步
+        /// 获取指定通道是否已配置为客机同步
         /// </summary>
         /// <param name="id">客机同步ID，如bus.1, video.0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
         /// <returns>是否已配置为客机同步</returns>
@@ -4310,13 +4183,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.6) Set whether the channel is configured as guest synchronized
+        /// Set whether the channel is configured as guest synchronized
         /// </summary>
         /// <param name="id">Guest synchronization ID, like bus.1, video.0, xxx.yyy(xxx is native plugin's type ID，yyy is channel name)</param>
         /// <param name="guestSync">Whether the channel is configured as guest synchronized</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.6) 设置指定通道是否配置为客机同步
+        /// 设置指定通道是否配置为客机同步
         /// </summary>
         /// <param name="id">客机同步ID，如bus.1, video.0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
         /// <param name="guestSync">是否配置为客机同步</param>
@@ -4327,12 +4200,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.6) Get guest synchronization IDs of all channels being configured as guest synchronized
+        /// Get guest synchronization IDs of all channels being configured as guest synchronized
         /// </summary>
         /// <returns>Guest synchronization IDs of all channels being configured as guest synchronized</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.6) 获取已配置为客机同步的所有ID
+        /// 获取已配置为客机同步的所有ID
         /// </summary>
         /// <returns>已配置为客机同步的所有ID列表</returns>
         public static string[] GetAllChannelGuestSyncKeys()
@@ -4342,14 +4215,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get whether there's data in a bus channel
+        /// Get whether there's data in a bus channel
         /// </summary>
         /// <param name="channel">Bus channel, ranges 1~16</param>
         /// <param name="toleranceMillisecond">How many milliseconds (realistic time) can be tolerated without data</param>
         /// <returns>Whether there's data</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取总线数据通道状态
+        /// 获取总线数据通道状态
         /// </summary>
         /// <param name="channel">总线通道，1~16</param>
         /// <param name="toleranceMillisecond">无数据的容忍时长</param>
@@ -4361,7 +4234,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get whether there's data in a video channel, and the interval and delay information
+        /// Get whether there's data in a video channel, and the interval and delay information
         /// </summary>
         /// <param name="channel">Video channel, ranges 0~23</param>
         /// <param name="toleranceMillisecond">How many milliseconds (realistic time) can be tolerated without data</param>
@@ -4370,7 +4243,7 @@ namespace ASEva
         /// <returns>Whether there's data</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取视频数据通道状态
+        /// 获取视频数据通道状态
         /// </summary>
         /// <param name="channel">视频通道，0~23</param>
         /// <param name="toleranceMillisecond">无数据的容忍时长</param>
@@ -4384,7 +4257,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get whether there's data in audio channel, and the interval and delay information
+        /// Get whether there's data in audio channel, and the interval and delay information
         /// </summary>
         /// <param name="toleranceMillisecond">How many milliseconds (realistic time) can be tolerated without data</param>
         /// <param name="interval">Output the interval (time between frames) curve, in seconds</param>
@@ -4392,7 +4265,7 @@ namespace ASEva
         /// <returns>Whether there's data</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取音频数据通道状态
+        /// 获取音频数据通道状态
         /// </summary>
         /// <param name="toleranceMillisecond">无数据的容忍时长</param>
         /// <param name="interval">输出每帧数据之间的时间间隔曲线，单位秒</param>
@@ -4405,14 +4278,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get whether there's data in general raw data channel
+        /// Get whether there's data in general raw data channel
         /// </summary>
         /// <param name="channelID">General raw data's channel ID</param>
         /// <param name="toleranceMillisecond">How many milliseconds (realistic time) can be tolerated without data</param>
         /// <returns>Whether there's data</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取原始数据通道状态
+        /// 获取原始数据通道状态
         /// </summary>
         /// <param name="channelID">原始数据通道ID</param>
         /// <param name="toleranceMillisecond">无数据的容忍时长</param>
@@ -4424,7 +4297,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get whether there's data in sample channel, and the interval and delay information
+        /// Get whether there's data in sample channel, and the interval and delay information
         /// </summary>
         /// <param name="channelID">Sample's channel ID</param>
         /// <param name="toleranceMillisecond">How many milliseconds (realistic time) can be tolerated without data</param>
@@ -4433,7 +4306,7 @@ namespace ASEva
         /// <returns>Whether there's data</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取样本数据通道状态
+        /// 获取样本数据通道状态
         /// </summary>
         /// <param name="channelID">样本数据通道ID</param>
         /// <param name="toleranceMillisecond">无数据的容忍时长</param>
@@ -4447,12 +4320,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get all bus channels with data
+        /// Get all bus channels with data
         /// </summary>
         /// <returns>Bus channels with data, value ranges 1~16</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取所有有效的总线通道
+        /// 获取所有有效的总线通道
         /// </summary>
         /// <returns>有效的总线通道列表，值为1~16</returns>
         public static int[] GetAvailableBusChannels()
@@ -4462,12 +4335,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get all video channels with data
+        /// Get all video channels with data
         /// </summary>
         /// <returns>Video channels with data, value ranges 0~23</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取所有有效的视频通道
+        /// 获取所有有效的视频通道
         /// </summary>
         /// <returns>有效的视频通道列表，值为0~23</returns>
         public static int[] GetAvailableVideoChannels()
@@ -4477,12 +4350,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get all general raw data channels with data
+        /// Get all general raw data channels with data
         /// </summary>
         /// <returns>Channels IDs of all general raw data channels with data</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取所有有效的原始数据通道
+        /// 获取所有有效的原始数据通道
         /// </summary>
         /// <returns>有效的原始数据通道列表，值为通道ID</returns>
         public static String[] GetAvailableRawChannels()
@@ -4492,12 +4365,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get all sample channels with data
+        /// Get all sample channels with data
         /// </summary>
         /// <returns>Channel IDs of all sample channels with data</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取所有有效的样本数据通道
+        /// 获取所有有效的样本数据通道
         /// </summary>
         /// <returns>有效的样本数据通道列表，值为通道ID</returns>
         public static String[] GetAvailableSampleChannels()
@@ -4507,13 +4380,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get payload of bus channel
+        /// Get payload of bus channel
         /// </summary>
         /// <param name="channel">Bus channel, ranges 1~16</param>
         /// <returns>Payload in percentages, null if unavailable</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取指定总线通道的负载百分比
+        /// 获取指定总线通道的负载百分比
         /// </summary>
         /// <param name="channel">总线通道，1~16</param>
         /// <returns>总线通道的负载百分比，若无效则返回null</returns>
@@ -4524,7 +4397,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Create window panel
+        /// Create window panel
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , WindowPanel, etc.</param>
         /// <param name="windowClassID">Window class ID</param>
@@ -4534,7 +4407,7 @@ namespace ASEva
         /// <returns>Result of creating (After you're done using the panel, call ASEva.Agency.UnregisterPanel )</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 创建窗口面板对象
+        /// 创建窗口面板对象
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , WindowPanel等</param>
         /// <param name="windowClassID">窗口组件ID</param>
@@ -4549,7 +4422,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Create config panel
+        /// Create config panel
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , WindowPanel, etc.</param>
         /// <param name="dialogClassID">Dialog class ID</param>
@@ -4559,7 +4432,7 @@ namespace ASEva
         /// <returns>Result of creating (After you're done using the panel, call ASEva.Agency.UnregisterPanel )</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 创建配置面板对象
+        /// 创建配置面板对象
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , WindowPanel等</param>
         /// <param name="dialogClassID">对话框组件ID</param>
@@ -4574,12 +4447,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Unregister window panel or config panel
+        /// Unregister window panel or config panel
         /// </summary>
         /// <param name="panel">Window panel or config panel object</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 注销窗口面板或配置面板对象
+        /// 注销窗口面板或配置面板对象
         /// </summary>
         /// <param name="panel">窗口面板或配置面板对象</param>
         public static void UnregisterPanel(object panel)
@@ -4589,13 +4462,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Convert platform image to common image
+        /// Convert platform image to common image
         /// </summary>
         /// <param name="image">Platform image</param>
         /// <returns>Common image, null if failed to convert</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 转换平台特化图像对象至通用图像数据
+        /// 转换平台特化图像对象至通用图像数据
         /// </summary>
         /// <param name="image">平台特化图像</param>
         /// <returns>通用图像数据(BGR不逆序)，转换失败则返回null</returns>
@@ -4606,32 +4479,32 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Convert common image to platform image
+        /// Convert common image to platform image
         /// </summary>
         /// <param name="image">Common image</param>
-        /// <param name="eto">Whether to convert to Eto bitmap image, or else platform image</param>
+        /// <param name="type">Platform image type</param>
         /// <returns>Platform image, null if failed to convert</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 转换通用图像数据至平台特化图像
+        /// 转换通用图像数据至平台特化图像
         /// </summary>
         /// <param name="image">通用图像数据</param>
-        /// <param name="eto">是否转换至Eto图像，否则转换为当前UI框架对应的图像对象</param>
+        /// <param name="type">平台特化图像类型</param>
         /// <returns>平台特化图像，转换失败则返回null</returns>
-        public static object ConvertImageToPlatform(CommonImage image, bool eto)
+        public static object ConvertImageToPlatform(CommonImage image, PlatformImageType type)
         {
-            return Handler.ConvertImageToPlatform(image, eto);
+            return Handler.ConvertImageToPlatform(image, type);
         }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get information of window class
+        /// Get information of window class
         /// </summary>
         /// <param name="windowClassID">Window class ID</param>
         /// <returns>Information of window class, null if not found</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取窗口组件信息
+        /// 获取窗口组件信息
         /// </summary>
         /// <param name="windowClassID">窗口组件ID</param>
         /// <returns>窗口组件信息，若未找到返回null</returns>
@@ -4642,14 +4515,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.5.0) Get information of transformed window class
+        /// Get information of transformed window class
         /// </summary>
         /// <param name="windowClassID">Window class ID</param>
         /// <param name="transformID">Transform ID</param>
         /// <returns>Information of transformed window class, null if not found</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.5.0) 获取分化窗口组件信息
+        /// 获取分化窗口组件信息
         /// </summary>
         /// <param name="windowClassID">窗口组件ID</param>
         /// <param name="transformID">分化ID</param>
@@ -4661,13 +4534,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get information of dialog class
+        /// Get information of dialog class
         /// </summary>
         /// <param name="dialogClassID">Dialog class ID</param>
         /// <returns>Information of dialog class, null if not found</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取对话框组件信息
+        /// 获取对话框组件信息
         /// </summary>
         /// <param name="dialogClassID">对话框组件ID</param>
         /// <returns>对话框组件信息，若未找到返回null</returns>
@@ -4678,14 +4551,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.5.0) Get information of transformed dialog class
+        /// Get information of transformed dialog class
         /// </summary>
         /// <param name="dialogClassID">Dialog class ID</param>
         /// <param name="transformID">Transform ID</param>
         /// <returns>Information of transformed dialog class, null if not found</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.5.0) 获取分化对话框组件信息
+        /// 获取分化对话框组件信息
         /// </summary>
         /// <param name="dialogClassID">对话框组件ID</param>
         /// <param name="transformID">分化ID</param>
@@ -4697,13 +4570,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.2) Get information of standalone task class
+        /// Get information of standalone task class
         /// </summary>
         /// <param name="taskClassID">Task class ID</param>
         /// <returns>Information of standalone task class, null if not found</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.2) 获取独立任务组件信息
+        /// 获取独立任务组件信息
         /// </summary>
         /// <param name="taskClassID">独立任务组件ID</param>
         /// <returns>独立任务组件信息，若未找到返回null</returns>
@@ -4714,13 +4587,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.15.0) Get information of console class
+        /// Get information of console class
         /// </summary>
         /// <param name="consoleClassID">Console class ID</param>
         /// <returns>Information of console class, null if not found</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.15.0) 获取控制台组件信息
+        /// 获取控制台组件信息
         /// </summary>
         /// <param name="consoleClassID">控制台组件ID</param>
         /// <returns>控制台组件信息，若未找到返回null</returns>
@@ -4731,13 +4604,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Decode image
+        /// Decode image
         /// </summary>
         /// <param name="imageData">JPG or PNG binary data</param>
         /// <returns>Decoded common image, null if failed to decode</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 解码图像数据
+        /// 解码图像数据
         /// </summary>
         /// <param name="imageData">JPG或PNG二进制数据</param>
         /// <returns>解码后的通用图像数据(BGR不逆序)，若失败则返回null</returns>
@@ -4748,14 +4621,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Encode image
+        /// Encode image
         /// </summary>
         /// <param name="image">Common image</param>
         /// <param name="format">Target format, only "jpg" and "png" supported</param>
         /// <returns>Encoded data, null, if failed to encode</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 编码图像数据
+        /// 编码图像数据
         /// </summary>
         /// <param name="image">通用图像数据</param>
         /// <param name="format">编码格式，目前支持"jpg", "png"</param>
@@ -4767,12 +4640,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get signal tree
+        /// Get signal tree
         /// </summary>
         /// <returns>All child nodes under the root of tree</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取信号树
+        /// 获取信号树
         /// </summary>
         /// <returns>信号树根节点下的所有子节点</returns>
         public static SignalTreeNode[] GetSignalTree()
@@ -4782,12 +4655,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get all plugin pack IDs
+        /// Get all plugin pack IDs
         /// </summary>
         /// <returns>All plugin pack IDs</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取插件包ID列表
+        /// 获取插件包ID列表
         /// </summary>
         /// <returns>插件包ID列表</returns>
         public static String[] GetPluginPackIDList()
@@ -4797,13 +4670,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get information of plugin pack
+        /// Get information of plugin pack
         /// </summary>
         /// <param name="packID">Plugin pack ID</param>
         /// <returns>Information of plugin pack, null if the plugin pack is not found</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取插件包信息
+        /// 获取插件包信息
         /// </summary>
         /// <param name="packID">插件包ID</param>
         /// <returns>插件包信息，若无对应插件包则返回null</returns>
@@ -4814,13 +4687,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Install plugin (After installation, restart is still needed to activated it)
+        /// Install plugin (After installation, restart is still needed to activated it)
         /// </summary>
         /// <param name="dirPath">The directory containing plugin files</param>
         /// <returns>Whether any installation is performed</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 安装插件（安装完毕后也需要重启才生效）
+        /// 安装插件（安装完毕后也需要重启才生效）
         /// </summary>
         /// <param name="dirPath">插件包文件夹，或包含若干插件包的文件夹</param>
         /// <returns>是否安装了插件</returns>
@@ -4831,13 +4704,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Uninstall plugin
+        /// Uninstall plugin
         /// </summary>
         /// <param name="packID">Plugin pack ID</param>
         /// <returns>Whether uninstalled</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 卸载插件
+        /// 卸载插件
         /// </summary>
         /// <param name="packID">插件包ID</param>
         /// <returns>是否卸载了插件</returns>
@@ -4848,12 +4721,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) Get all log messages
+        /// Get all log messages
         /// </summary>
         /// <returns>All log messages</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) 获取所有清单信息
+        /// 获取所有清单信息
         /// </summary>
         /// <returns>清单信息列表</returns>
         public static LogMessage[] GetLogMessages()
@@ -4863,12 +4736,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.1) Get whether the system is ready for saving project file, starting session, etc.
+        /// Get whether the system is ready for saving project file, starting session, etc.
         /// </summary>
         /// <returns>Whether the system is ready for saving project file, starting session, etc.</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.1) 返回是否允许进行保存工程项目和开始session等操作
+        /// 返回是否允许进行保存工程项目和开始session等操作
         /// </summary>
         /// <returns>是否允许进行保存工程项目和开始session等操作</returns>
         public static bool IsReady()
@@ -4878,13 +4751,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.13.1) Get whether the system is ready for saving project file, starting session, and output the reason why it's not ready
+        /// Get whether the system is ready for saving project file, starting session, and output the reason why it's not ready
         /// </summary>
         /// <param name="busyReason">The ready why the system is not ready, empty means unknown</param>
         /// <returns>Whether the system is ready for saving project file, starting session, etc.</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.13.1) 返回是否允许进行保存工程项目和开始session等操作，若不允许则输出繁忙原因
+        /// 返回是否允许进行保存工程项目和开始session等操作，若不允许则输出繁忙原因
         /// </summary>
         /// <param name="busyReason">系统繁忙原因，空表示原因未知</param>
         /// <returns>是否允许进行保存工程项目和开始session等操作</returns>
@@ -4895,12 +4768,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.4) Disable plugin
+        /// Disable plugin
         /// </summary>
         /// <param name="packID">Plugin pack ID</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.4) 禁用插件
+        /// 禁用插件
         /// </summary>
         /// <param name="packID">插件包ID</param>
         public static void DisablePlugin(String packID)
@@ -4910,11 +4783,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.18) Disable all plugins (except for the main workflow plugin)
+        /// Disable all plugins (except for the main workflow plugin)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.18) 禁用所有插件（除当前主流程插件外）
+        /// 禁用所有插件（除当前主流程插件外）
         /// </summary>
         public static void DisableAllPlugins()
         {
@@ -4923,12 +4796,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.4) Enable plugin (restart is still needed to activate it)
+        /// Enable plugin (restart is still needed to activate it)
         /// </summary>
         /// <param name="packID">Plugin pack ID</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.4) 启用插件（需要重启应用程序后生效）
+        /// 启用插件（需要重启应用程序后生效）
         /// </summary>
         /// <param name="packID">插件包ID</param>
         public static void EnablePlugin(String packID)
@@ -4938,7 +4811,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.0) Send data to native plugins
+        /// Send data to native plugins
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , etc.</param>
         /// <param name="nativeClassID">Native class ID</param>
@@ -4946,7 +4819,7 @@ namespace ASEva
         /// <param name="data">Binary data, should not be null</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.0) 发送数据至原生插件
+        /// 发送数据至原生插件
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
@@ -4959,7 +4832,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.0) Receive data from native plugins
+        /// Receive data from native plugins
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , etc.</param>
         /// <param name="nativeClassID">Native class ID</param>
@@ -4967,7 +4840,7 @@ namespace ASEva
         /// <returns>All received binary data</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.0) 接收所有从原生插件发来的新数据
+        /// 接收所有从原生插件发来的新数据
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
@@ -4980,7 +4853,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.0) Call native plugin's function
+        /// Call native plugin's function
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , etc.</param>
         /// <param name="nativeClassID">Native class ID</param>
@@ -4989,7 +4862,7 @@ namespace ASEva
         /// <returns>Output data from the function, null if the function is not found</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.0) 调用原生插件中的函数
+        /// 调用原生插件中的函数
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
@@ -5003,7 +4876,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.0) Set handler for function calling from native plugins
+        /// Set handler for function calling from native plugins
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , etc.</param>
         /// <param name="nativeClassID">Native class ID</param>
@@ -5011,7 +4884,7 @@ namespace ASEva
         /// <param name="handler">Handler for function calling</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.0) 设置供原生插件调用的应用层函数
+        /// 设置供原生插件调用的应用层函数
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
@@ -5024,14 +4897,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.0) Reset the handler for function calling from native plugins
+        /// Reset the handler for function calling from native plugins
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , etc.</param>
         /// <param name="nativeClassID">Native class ID</param>
         /// <param name="funcID">Function ID</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.0) 移除供原生插件调用的应用层函数
+        /// 移除供原生插件调用的应用层函数
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
@@ -5043,12 +4916,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.8) Get whether GPU rendering is disabled
+        /// Get whether GPU rendering is disabled
         /// </summary>
         /// <returns>Whether GPU rendering is disabled</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.8) 获取是否全局禁用GPU渲染
+        /// 获取是否全局禁用GPU渲染
         /// </summary>
         /// <returns>是否全局禁用GPU渲染</returns>
         public static bool IsGPURenderingDisabled()
@@ -5058,12 +4931,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.13) Get whether GPU onscreen rendering is enabled
+        /// Get whether GPU onscreen rendering is enabled
         /// </summary>
         /// <returns>Whether GPU onscreen rendering is enabled (always return false while GPU rendering is disabled)</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.13) 获取是否全局启用在屏GPU渲染
+        /// 获取是否全局启用在屏GPU渲染
         /// </summary>
         /// <returns>是否全局启用在屏GPU渲染（若已全局禁用GPU渲染则返回false）</returns>
         public static bool IsOnscreenGPURenderingEnabled()
@@ -5073,11 +4946,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.13.1) Reset GPU decoder test results
+        /// Reset GPU decoder test results
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.13.1) 重置GPU解码测试结果
+        /// 重置GPU解码测试结果
         /// </summary>
         public static void ResetGPUDecoderTestResults()
         {
@@ -5086,7 +4959,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.19) Subscribe data from other app layer components
+        /// Subscribe data from other app layer components
         /// </summary>
         /// <param name="dataID">Data ID, should not be null or empty</param>
         /// <param name="bufferLength">Buffer length, ranges 1~1000</param>
@@ -5094,7 +4967,7 @@ namespace ASEva
         /// <returns>Data subscriber object, null if failed to initialize</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.19) 订阅来自应用层其他组件的数据
+        /// 订阅来自应用层其他组件的数据
         /// </summary>
         /// <param name="dataID">数据ID，不可为null或空字符串</param>
         /// <param name="bufferLength">缓存长度，范围在1~1000</param>
@@ -5107,13 +4980,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.19) Public data
+        /// Public data
         /// </summary>
         /// <param name="dataID">Data ID, should not be null or empty</param>
         /// <param name="data">Binary data, should not be null</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.19) 发布数据
+        /// 发布数据
         /// </summary>
         /// <param name="dataID">数据ID，不可为null或空字符串</param>
         /// <param name="data">数据，不可为null</param>
@@ -5124,13 +4997,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Get session's CPU time model
+        /// Get session's CPU time model
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>CPU time model</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 获取session的CPU时间模型
+        /// 获取session的CPU时间模型
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>CPU时间模型</returns>
@@ -5141,13 +5014,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Get session's host machine posix time model
+        /// Get session's host machine posix time model
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>Host machine posix time model</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 获取session的主机Posix时间模型
+        /// 获取session的主机Posix时间模型
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>主机Posix时间模型</returns>
@@ -5158,13 +5031,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Get session's satellite posix time model
+        /// Get session's satellite posix time model
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>Satellite posix time model</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 获取session的卫星Posix时间模型
+        /// 获取session的卫星Posix时间模型
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>卫星Posix时间模型</returns>
@@ -5175,7 +5048,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Convert time offset in session to local date and time
+        /// Convert time offset in session to local date and time
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="timeOffset">Time offset, in seconds</param>
@@ -5183,7 +5056,7 @@ namespace ASEva
         /// <returns>Local date and time</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 计算session中某个时间偏置对应的本地时间
+        /// 计算session中某个时间偏置对应的本地时间
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="timeOffset">时间偏置，单位秒</param>
@@ -5196,7 +5069,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Convert time offset in session to UTC date and time
+        /// Convert time offset in session to UTC date and time
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="timeOffset">Time offset, in seconds</param>
@@ -5204,7 +5077,7 @@ namespace ASEva
         /// <returns>UTC date and time</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 计算session中某个时间偏置对应的UTC时间
+        /// 计算session中某个时间偏置对应的UTC时间
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="timeOffset">时间偏置，单位秒</param>
@@ -5217,12 +5090,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Get current CPU tick on host machine
+        /// Get current CPU tick on host machine
         /// </summary>
         /// <returns>Current CPU tick on host machine</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 获取主机当前的CPU计数
+        /// 获取主机当前的CPU计数
         /// </summary>
         /// <returns>当前的CPU计数</returns>
         public static ulong GetCPUTick()
@@ -5232,12 +5105,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.0) Get CPU ticks per second on host machine
+        /// Get CPU ticks per second on host machine
         /// </summary>
         /// <returns>CPU ticks per second on host machine</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.0) 获取主机上每秒增加的CPU计数
+        /// 获取主机上每秒增加的CPU计数
         /// </summary>
         /// <returns>每秒增加的CPU计数</returns>
         public static ulong GetCPUTicksPerSecond()
@@ -5247,13 +5120,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.7.4) Get the latest several timestamps of the specified channel
+        /// Get the latest several timestamps of the specified channel
         /// </summary>
         /// <param name="channelID">Data channel ID, with format as "protocol@channel". Channel is starting from 0. The video channel's protocol is "video". The audio channel's ID is "audio"</param>
         /// <returns>the latest several timestamps, null if the channel is not found</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.7.4) 获取数据通道上最近的若干帧时间戳
+        /// 获取数据通道上最近的若干帧时间戳
         /// </summary>
         /// <param name="channelID">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始。视频协议名为video，音频协议名为audio</param>
         /// <returns>指定数据通道上最近的若干帧时间戳，若该通道未找到或最近无数据则返回null</returns>
@@ -5264,14 +5137,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.8.1) Register graph panel type for the specified graph type
+        /// Register graph panel type for the specified graph type
         /// </summary>
         /// <param name="graphType">Graph type</param>
         /// <param name="styleName">Style name to register</param>
         /// <param name="panelType">Graph panel type, which should be derived from UI framework's control base class, and implement ASEva.GraphPanel </param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.8.1) 注册针对指定图表类型的可视化面板
+        /// 注册针对指定图表类型的可视化面板
         /// </summary>
         /// <param name="graphType">指定图表类型</param>
         /// <param name="styleName">面板样式名</param>
@@ -5283,14 +5156,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.8.1) Register graph panel type for the specified graph ID (higher priority than graph type)
+        /// Register graph panel type for the specified graph ID (higher priority than graph type)
         /// </summary>
         /// <param name="graphID">Graph ID</param>
         /// <param name="styleName">Style name to register</param>
         /// <param name="panelType">Graph panel type, which should be derived from UI framework's control base class, and implement ASEva.GraphPanel </param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.8.1) 注册针对指定图表ID的可视化面板（比按图表类型注册的优先级更高）
+        /// 注册针对指定图表ID的可视化面板（比按图表类型注册的优先级更高）
         /// </summary>
         /// <param name="graphID">图表报告ID</param>
         /// <param name="styleName">面板样式名</param>
@@ -5302,13 +5175,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.8.2) Get all available style names for the specified graph ID
+        /// Get all available style names for the specified graph ID
         /// </summary>
         /// <param name="graphID">Graph ID</param>
         /// <returns>All available style names</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.8.2) 获取符合图表报告的所有可视化面板样式名
+        /// 获取符合图表报告的所有可视化面板样式名
         /// </summary>
         /// <param name="graphID">图表报告ID</param>
         /// <returns>可视化面板样式名列表</returns>
@@ -5319,14 +5192,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.8.2) Create graph panel
+        /// Create graph panel
         /// </summary>
         /// <param name="graphID">Graph ID</param>
         /// <param name="styleName">Style name, set to null to use the first style</param>
         /// <returns>Created graph panel, null if failed to create</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.8.2) 创建图表可视化面板
+        /// 创建图表可视化面板
         /// </summary>
         /// <param name="graphID">图表报告ID</param>
         /// <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
@@ -5338,13 +5211,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.10.3) Get all available style names for the specified graph type
+        /// Get all available style names for the specified graph type
         /// </summary>
         /// <param name="graphType">Graph type</param>
         /// <returns>All available style names</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.10.3) 获取符合图表报告的所有可视化面板样式名
+        /// 获取符合图表报告的所有可视化面板样式名
         /// </summary>
         /// <param name="graphType">图表类型</param>
         /// <returns>可视化面板样式名列表</returns>
@@ -5355,14 +5228,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.10.3) Create graph panel
+        /// Create graph panel
         /// </summary>
         /// <param name="graphType">Graph type</param>
         /// <param name="styleName">Style name, set to null to use the first style</param>
         /// <returns>Created graph panel, null if failed to create</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.10.3) 创建图表可视化面板
+        /// 创建图表可视化面板
         /// </summary>
         /// <param name="graphType">图表类型</param>
         /// <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
@@ -5374,12 +5247,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.11.4) Get the UTC date and time queried from Internet NTP server
+        /// Get the UTC date and time queried from Internet NTP server
         /// </summary>
         /// <returns>The UTC date and time queried from Internet NTP server, null if Internet is not connected or querying failed</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.11.4) 获取从互联网获取的当前时间
+        /// 获取从互联网获取的当前时间
         /// </summary>
         /// <returns>从互联网获取的当前时间(UTC时间)，若未联网或获取失败则返回空</returns>
         public static DateTime? GetInternetNTPTime()
@@ -5389,12 +5262,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.12.0) Get all guest synchronization IDs and title of each ID
+        /// Get all guest synchronization IDs and title of each ID
         /// </summary>
         /// <returns>Dictionary. The key is guest synchronization ID and the value is the title</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.12.0) 获取所有插件的客机同步ID以及对应的标题
+        /// 获取所有插件的客机同步ID以及对应的标题
         /// </summary>
         /// <returns>客机同步标题表，键为客机同步ID，值为对应的标题</returns>
         public static Dictionary<String, String> GetPluginGuestSyncTable()
@@ -5404,12 +5277,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.13.2) Get information of all dedicated graphic card
+        /// Get information of all dedicated graphic card
         /// </summary>
         /// <returns>Information of all dedicated graphic card</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.13.2) 获取主机上所有独立显卡信息
+        /// 获取主机上所有独立显卡信息
         /// </summary>
         /// <returns>独立显卡信息列表</returns>
         public static GraphicCardInfo[] GetGraphicCardInfos()
@@ -5419,12 +5292,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.14.0) Get third part license notices of software used by framework
+        /// Get third part license notices of software used by framework
         /// </summary>
         /// <returns>Dictionary. The key is title</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.14.0) 获取框架软件使用的第三方软件版权声明
+        /// 获取框架软件使用的第三方软件版权声明
         /// </summary>
         /// <returns>键为标题，值为版权声明</returns>
         public static Dictionary<String, String> GetFrameworkThirdPartyNotices()
@@ -5434,12 +5307,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.14.0) Get all third party license notices of software used by plugins
+        /// Get all third party license notices of software used by plugins
         /// </summary>
         /// <returns>Dictionary. The key is plugin pack ID and the value is the information corresponding to the plugin (which is a dictionary with key as third party software's title)</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.14.0) 获取所有插件使用的第三方软件版权声明
+        /// 获取所有插件使用的第三方软件版权声明
         /// </summary>
         /// <returns>键为插件ID，值为该插件使用的第三方软件版权声明(其中键为标题，值为版权声明)</returns>
         public static Dictionary<String, Dictionary<String, String> > GetPluginThirdPartyNotices()
@@ -5449,12 +5322,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.14.0) Get copyright information of offline map
+        /// Get copyright information of offline map
         /// </summary>
         /// <returns>Copyright information of offline map</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.14.0) 获取离线地图的版权信息
+        /// 获取离线地图的版权信息
         /// </summary>
         /// <returns>离线地图的版权信息</returns>
         public static String GetOfflineMapCopyrightInfo()
@@ -5464,12 +5337,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.14.0) Get whether to use PRC web service
+        /// Get whether to use PRC web service
         /// </summary>
         /// <returns>Whether to use PRC web service</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.14.0) 获取是否使用境内网络服务
+        /// 获取是否使用境内网络服务
         /// </summary>
         /// <returns>是否使用境内网络服务</returns>
         public static bool IsPRCWebPreferred()
@@ -5479,13 +5352,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.15.5) Gets information about all bus channels of a specified session
+        /// Gets information about all bus channels of a specified session
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>Information about all bus channels of this session. Return null if none exist</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.15.5) 获取指定session的所有总线通道的信息
+        /// 获取指定session的所有总线通道的信息
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>该session的所有总线通道的信息，若不存在则返回null</returns>
@@ -5496,13 +5369,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.15.5) Gets information about all video channels of a specified session
+        /// Gets information about all video channels of a specified session
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>Information about all video channels of this session. Return null if none exist</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.15.5) 获取指定session的所有视频通道的信息
+        /// 获取指定session的所有视频通道的信息
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>该session的所有视频通道的信息，若不存在则返回null</returns>
@@ -5513,12 +5386,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.16.0) Gets details about the processor/native/device component
+        /// Gets details about the processor/native/device component
         /// </summary>
         /// <returns>Component details. Return null if none exist</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.16.0) 获取数据处理/原生/设备组件的详情
+        /// 获取数据处理/原生/设备组件的详情
         /// </summary>
         /// <returns>组件详情，若不存在则返回null</returns>
         public static ModuleDetails GetModuleDetails(String classID)

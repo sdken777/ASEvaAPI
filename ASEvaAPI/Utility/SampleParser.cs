@@ -7,11 +7,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Sample parser, automatically convert ASEva.GeneralSample to sample of any type
+    /// (api:app=3.0.0) Sample parser, automatically convert ASEva.GeneralSample to sample of any type
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 样本解析，自动将 ASEva.GeneralSample 转化为特化样本
+    /// (api:app=3.0.0) 样本解析，自动将 ASEva.GeneralSample 转化为特化样本
     /// </summary>
     public class SampleParser
     {

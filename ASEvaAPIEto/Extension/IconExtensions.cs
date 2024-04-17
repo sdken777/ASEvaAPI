@@ -8,11 +8,11 @@ namespace ASEva.UIEto
 {
     /// \~English
     /// <summary>
-    /// (api:eto=2.11.3) Extensions for creating icon
+    /// (api:eto=3.0.0) Extensions for creating icon
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.11.3) 方便生成图标的扩展
+    /// (api:eto=3.0.0) 方便生成图标的扩展
     /// </summary>
     public static class IconExtensions
     {

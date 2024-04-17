@@ -8,11 +8,11 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.0.2) Extensions for stack layout
+    /// (api:eto=3.0.0) Extensions for stack layout
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.0.2) 方便操作堆叠布局的扩展
+    /// (api:eto=3.0.0) 方便操作堆叠布局的扩展
     /// </summary>
     public static class StackLayoutExtensions
     {
@@ -33,13 +33,13 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.10.4) Add a panel with the specified size
+        /// Add a panel with the specified size
         /// </summary>
         /// <param name="stackLayout">Stack layout object</param>
         /// <param name="logicalSize">Space size</param>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.10.4) 延布局方向添加指定大小空间
+        /// 延布局方向添加指定大小空间
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="logicalSize">指定大小空间</param>
@@ -57,12 +57,12 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.3.3) Add separator
+        /// Add separator
         /// </summary>
         /// <param name="stackLayout">Stack layout object</param>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.3.3) 添加分割线
+        /// 添加分割线
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         public static void AddSeparator(this StackLayout stackLayout)
@@ -164,7 +164,7 @@ namespace ASEva.UIEto
         }
         /// \~English
         /// <summary>
-        /// (api:eto=2.0.4) Add image button
+        /// Add image button
         /// </summary>
         /// <param name="stackLayout">Stack layout object</param>
         /// <param name="image">Image</param>
@@ -174,7 +174,7 @@ namespace ASEva.UIEto
         /// <returns>Created image button object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.0.4) 添加图像按键至堆叠布局
+        /// 添加图像按键至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="image">图像</param>
@@ -205,7 +205,7 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.3.3) Add text button panel
+        /// Add text button panel
         /// </summary>
         /// <param name="stackLayout">Stack layout object</param>
         /// <param name="text">Test</param>
@@ -216,7 +216,7 @@ namespace ASEva.UIEto
         /// <returns>Created button panel object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.3.3) 添加面板式文字按键至堆叠布局
+        /// 添加面板式文字按键至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="text">文字</param>
@@ -234,7 +234,7 @@ namespace ASEva.UIEto
         }
         /// \~English
         /// <summary>
-        /// (api:eto=2.3.3) Add image button panel
+        /// Add image button panel
         /// </summary>
         /// <param name="stackLayout">Stack layout object</param>
         /// <param name="image">Image</param>
@@ -245,7 +245,7 @@ namespace ASEva.UIEto
         /// <returns>Created button panel object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.3.3) 添加面板式图像按键至堆叠布局
+        /// 添加面板式图像按键至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="image">图像</param>
@@ -387,6 +387,40 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
+        /// Add combo box
+        /// </summary>
+        /// <param name="stackLayout">Stack layout object</param>
+        /// <param name="texts">Text of each item (can be null)</param>
+        /// <param name="logicalWidth">Initial logical width, 0 as not to set</param>
+        /// <param name="selectedIndex">Initial selected index</param>
+        /// <returns>Created combo box object</returns>
+        /// \~Chinese
+        /// <summary>
+        /// 添加组合框至堆叠布局
+        /// </summary>
+        /// <param name="stackLayout">堆叠布局</param>
+        /// <param name="texts">组合框各选项的文字，可为空</param>
+        /// <param name="logicalWidth">初始宽度，0表示不设置</param>
+        /// <param name="selectedIndex">初始的选项序号</param>
+        /// <returns>创建的组合框对象</returns>
+        public static ComboBox AddComboBox(this StackLayout stackLayout, String[] texts, int logicalWidth, int selectedIndex = 0)
+        {
+            if (texts == null) texts = new String[0];
+
+            var comboBox = new ComboBox { ReadOnly = true };
+            foreach (var text in texts) comboBox.Items.Add(text);
+
+            if (logicalWidth > 0) comboBox.SetLogicalWidth(logicalWidth);
+
+            if (selectedIndex >= 0 && selectedIndex < texts.Length) comboBox.SelectedIndex = selectedIndex;
+            else if (texts.Length > 0) comboBox.SelectedIndex = 0;
+
+            stackLayout.Items.Add(new StackLayoutItem(comboBox, false));
+            return comboBox;
+        }
+
+        /// \~English
+        /// <summary>
         /// Add group box
         /// </summary>
         /// <param name="stackLayout">Stack layout</param>
@@ -469,7 +503,7 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.4.0) Add horizontal child stack layout with the specified size
+        /// Add horizontal child stack layout with the specified size
         /// </summary>
         /// <param name="stackLayout">Parent stack layout object</param>
         /// <param name="expand">Whether to expand</param>
@@ -480,7 +514,7 @@ namespace ASEva.UIEto
         /// <returns>Created child StackLayout object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.4.0) 添加横向堆叠布局至堆叠布局
+        /// 添加横向堆叠布局至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="expand">是否延布局方向撑满</param>
@@ -527,7 +561,7 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.4.0) Add vertical child stack layout with the specified size
+        /// Add vertical child stack layout with the specified size
         /// </summary>
         /// <param name="stackLayout">Parent stack layout object</param>
         /// <param name="expand">Whether to expand</param>
@@ -538,7 +572,7 @@ namespace ASEva.UIEto
         /// <returns>Created StackLayout object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.4.0) 添加纵向堆叠布局至堆叠布局
+        /// 添加纵向堆叠布局至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="expand">是否延布局方向撑满</param>
@@ -585,7 +619,7 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.4.0) Add table layout with the specified size
+        /// Add table layout with the specified size
         /// </summary>
         /// <param name="stackLayout">Stack layout object</param>
         /// <param name="expand">Whether to expand</param>
@@ -596,7 +630,7 @@ namespace ASEva.UIEto
         /// <returns>Created TableLayout object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.4.0) 添加表布局至堆叠布局
+        /// 添加表布局至堆叠布局
         /// </summary>
         /// <param name="stackLayout">堆叠布局</param>
         /// <param name="expand">是否延布局方向撑满</param>

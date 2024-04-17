@@ -7,22 +7,22 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.0.0) UI panel for child window
+    /// (api:eto=3.0.0) UI panel for child window
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.0.0) 窗口控件，用于实现窗口组件的实际功能
+    /// (api:eto=3.0.0) 窗口控件，用于实现窗口组件的实际功能
     /// </summary>
     public class WindowPanel : Panel
     {
         /// \~English
         /// <summary>
-        /// (api:eto=2.2.1) [Optional] Called while initializing panel's size
+        /// [Optional] Called while initializing panel's size
         /// </summary>
         /// <param name="config">Configuration string</param>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.2.1) [可选实现] 在初始化控件尺寸时被调用
+        /// [可选实现] 在初始化控件尺寸时被调用
         /// </summary>
         /// <param name="config">配置字符串</param>
         public virtual void OnInitSize(String config) { }
@@ -129,22 +129,22 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.9.5) [Optional] Called in the main loop, for running modal dialog
+        /// [Optional] Called in the main loop, for running modal dialog
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.9.5) [可选实现] 在主循环中被调用，可进行模态对话
+        /// [可选实现] 在主循环中被调用，可进行模态对话
         /// </summary>
         public virtual void OnHandleModal() { }
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.7.2) [Optional] Called while the size of the window container changed
+        /// [Optional] Called while the size of the window container changed
         /// </summary>
         /// <param name="containerSize">Changed container size</param>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.7.2) [可选实现] 在容器尺寸变化后被调用
+        /// [可选实现] 在容器尺寸变化后被调用
         /// </summary>
         /// <param name="containerSize">变化后的容器尺寸</param>
         public virtual void OnUpdateContainerSize(IntSize containerSize) { }

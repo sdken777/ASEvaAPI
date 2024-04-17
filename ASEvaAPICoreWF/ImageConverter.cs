@@ -8,11 +8,11 @@ namespace ASEva.UICoreWF
 {
     /// \~English
     /// <summary>
-    /// (api:corewf=2.1.0) Conversion of image object
+    /// (api:corewf=3.0.0) Conversion of image object
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:corewf=2.1.0) 图像对象转换
+    /// (api:corewf=3.0.0) 图像对象转换
     /// </summary>
     public class ImageConverter
     {

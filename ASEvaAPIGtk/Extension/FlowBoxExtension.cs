@@ -6,11 +6,11 @@ namespace ASEva.UIGtk
 {
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Extension methods for flow box
+    /// (api:gtk=3.0.0) Extension methods for flow box
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) Flow框扩展方法
+    /// (api:gtk=3.0.0) Flow框扩展方法
     /// </summary>
     public static class FlowBoxExtension
     {

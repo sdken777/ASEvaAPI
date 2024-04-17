@@ -7,11 +7,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) XML utility
+    /// (api:app=3.0.0) XML utility
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) XML相关功能类
+    /// (api:app=3.0.0) XML相关功能类
     /// </summary>
     public class Xml
     {

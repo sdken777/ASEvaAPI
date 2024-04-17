@@ -7,11 +7,11 @@ namespace ASEva.UIGtk
 
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Extension methods for getting mouse location in widget
+    /// (api:gtk=3.0.0) Extension methods for getting mouse location in widget
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 获取鼠标在控件内坐标的扩展方法
+    /// (api:gtk=3.0.0) 获取鼠标在控件内坐标的扩展方法
     /// </summary>
     public static class WidgetPointerExtension
     {

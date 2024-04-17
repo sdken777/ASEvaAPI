@@ -28,12 +28,12 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// (api:app=2.0.0) Get API version
+        /// (api:app=3.0.0) Get API version
         /// </summary>
         /// <returns>The API version</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.0.0) 获取API版本
+        /// (api:app=3.0.0) 获取API版本
         /// </summary>
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
@@ -43,12 +43,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.0.0) Get the currently running OS code
+        /// (api:app=3.0.0) Get the currently running OS code
         /// </summary>
         /// <returns>OS code, null if not recognized</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.0.0) 返回当前运行的OS代号
+        /// (api:app=3.0.0) 返回当前运行的OS代号
         /// </summary>
         /// <returns>OS代号，若无法识别返回null</returns>
         public static String GetRunningOS()

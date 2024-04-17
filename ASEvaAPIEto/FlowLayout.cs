@@ -9,11 +9,11 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.9.0) Vertical flow layout
+    /// (api:eto=3.0.0) Vertical flow layout
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.9.0) 沿纵向添加的控件列表
+    /// (api:eto=3.0.0) 沿纵向添加的控件列表
     /// </summary>
     public class FlowLayout : Panel, FlowLayoutCallback
     {
@@ -242,11 +242,11 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.13.3) Whether selectable
+        /// Whether selectable
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.13.3) 是否可选中控件
+        /// 是否可选中控件
         /// </summary>
         public bool Selectable { get; set; }
 

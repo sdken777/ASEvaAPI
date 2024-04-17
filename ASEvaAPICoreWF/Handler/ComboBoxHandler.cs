@@ -19,11 +19,10 @@ namespace ASEva.UICoreWF
 			// CHECK: 修正选项内容可被删除问题
 			Control.DropDownStyle = swf.ComboBoxStyle.DropDownList;
 
-			// CHECK: 修正高DPI显示时控件显示不全的问题
-			var dpiRatio = (float)Control.DeviceDpi / 96;
-			Control.MinSize = new sd.Size(0, (int)Math.Ceiling(10 + 14 * dpiRatio));
+            // CHECK: 修正高DPI显示时控件显示不全的问题
+            Control.MinSize = new sd.Size(0, (int)Math.Ceiling(8 + 15.25 * Control.DeviceDpi / 96));
 
-			Control.TextChanged += ControlOnTextChanged;
+            Control.TextChanged += ControlOnTextChanged;
 		}
 
 		// CHECK: 修正无法设置宽度问题

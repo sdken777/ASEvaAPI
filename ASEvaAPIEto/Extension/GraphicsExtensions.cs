@@ -8,11 +8,11 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.0.4) Extensions for graphics object
+    /// (api:eto=3.0.0) Extensions for graphics object
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.0.4) 方便操作图形对象的扩展
+    /// (api:eto=3.0.0) 方便操作图形对象的扩展
     /// </summary>
     public static class GraphicsExtensions
     {
@@ -48,19 +48,19 @@ namespace ASEva.UIEto
         public static Font ScaledFont(this Graphics g, Font f)
         {
             if (Pixel.Scale == 1) return f;
-            else return FontLibrary.GetFont(f.Family, f.Size / Pixel.Scale, f.FontStyle, f.FontDecoration);
+            else return FontLibraryEto.GetFont(f.Family, f.Size / Pixel.Scale, f.FontStyle, f.FontDecoration);
         }
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.0.6) After calling SetScaleForLogical, if you want to use default font, use returned Font object by this function to draw texts
+        /// After calling SetScaleForLogical, if you want to use default font, use returned Font object by this function to draw texts
         /// </summary>
         /// <param name="g">Graphics object</param>
         /// <param name="sizeRatio">Ratio to the default scale, default is 1</param>
         /// <returns>Scaled font object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.0.6) 调用SetScaleForLogical后，以默认字体绘制需要使用此函数返回的字体
+        /// 调用SetScaleForLogical后，以默认字体绘制需要使用此函数返回的字体
         /// </summary>
         /// <param name="g">图形对象</param>
         /// <param name="sizeRatio">相对字体默认大小的比例，默认为1</param>
@@ -69,12 +69,12 @@ namespace ASEva.UIEto
         {
             var f = App.DefaultFont(sizeRatio);
             if (Pixel.Scale == 1) return f;
-            else return FontLibrary.GetFont(f, f.Size / Pixel.Scale);
+            else return FontLibraryEto.GetFont(f, f.Size / Pixel.Scale);
         }
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.8.12) Draw text with the specified anchor point
+        /// Draw text with the specified anchor point
         /// </summary>
         /// <param name="g">Graphics object</param>
         /// <param name="text">Text</param>
@@ -85,7 +85,7 @@ namespace ASEva.UIEto
         /// <param name="logicalY">Y-coordinate of anchor point</param>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.8.12) 指定锚点绘制文本
+        /// 指定锚点绘制文本
         /// </summary>
         /// <param name="g">图形对象</param>
         /// <param name="text">文本</param>

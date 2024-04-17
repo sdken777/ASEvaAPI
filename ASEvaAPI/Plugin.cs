@@ -7,11 +7,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Base class for plugin entry. In the C\# class library project, you can implement a class that's derived from Plugin as a dll entry. As long as the dll file name, the namespace where the class is located, and the class name are consistent, the dll can be loaded by the framework as a plugin
+    /// (api:app=3.0.0) Base class for plugin entry. In the C\# class library project, you can implement a class that's derived from Plugin as a dll entry. As long as the dll file name, the namespace where the class is located, and the class name are consistent, the dll can be loaded by the framework as a plugin
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 插件入口基类。在C\#类库项目中可实现一个继承Plugin的类作为dll入口，只要保证dll文件名、类所在命名空间、类名三者一致，即可被框架软件作为插件加载
+    /// (api:app=3.0.0) 插件入口基类。在C\#类库项目中可实现一个继承Plugin的类作为dll入口，只要保证dll文件名、类所在命名空间、类名三者一致，即可被框架软件作为插件加载
     /// </summary>
     public class Plugin
     {
@@ -29,12 +29,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.20) [Optional] Called while getting plugin's release date
+        /// [Optional] Called while getting plugin's release date
         /// </summary>
         /// <returns>Plugin's release date</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.20) [可选实现] 获取当前版本发布日期时被调用
+        /// [可选实现] 获取当前版本发布日期时被调用
         /// </summary>
         /// <returns>当前版本发布日期</returns>
         public virtual DateTime? GetVersionReleaseDate() { return null; }
@@ -65,12 +65,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.15.2) [Optional] Called while getting all definitions of console components
+        /// [Optional] Called while getting all definitions of console components
         /// </summary>
         /// <returns>All definitions of console components</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.15.2) [可选实现] 获取插件包含的所有控制台组件的定义对象时被调用
+        /// [可选实现] 获取插件包含的所有控制台组件的定义对象时被调用
         /// </summary>
         /// <returns>控制台组件定义对象的列表</returns>
         public virtual ConsoleClass[] GetConsoleClasses() { return null; }
@@ -118,19 +118,19 @@ namespace ASEva
         /// <returns>All definitions of device components</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.8.0) [可选实现] 获取插件包含的所有设备组件的定义对象时被调用
+        /// [可选实现] 获取插件包含的所有设备组件的定义对象时被调用
         /// </summary>
         /// <returns>设备组件定义对象的列表</returns>
         public virtual DeviceClass[] GetDeviceClasses() { return null; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.3.0) [Optional] Called while getting main workflow object
+        /// [Optional] Called while getting main workflow object
         /// </summary>
         /// <returns>The main workflow object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.3.0) [可选实现] 获取插件包含的主流程时被调用
+        /// [可选实现] 获取插件包含的主流程时被调用
         /// </summary>
         /// <returns>主流程对象</returns>
         public virtual MainWorkflow GetMainWorkflow() { return null; }
@@ -149,72 +149,72 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.6.6) [Optional] Called while getting all related native class IDs (No need to include the ones supplied by self plugin)
+        /// [Optional] Called while getting all related native class IDs (No need to include the ones supplied by self plugin)
         /// </summary>
         /// <returns>Related native class IDs</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.6.6) [可选实现] 获取插件相关的原生组件ID时被调用（无需考虑本插件内的原生组件）
+        /// [可选实现] 获取插件相关的原生组件ID时被调用（无需考虑本插件内的原生组件）
         /// </summary>
         /// <returns>原生组件ID列表</returns>
         public virtual String[] GetRelatedNativeModules() { return null; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.12.0) [Optional] Called while getting titles of guest synchronization IDs
+        /// [Optional] Called while getting titles of guest synchronization IDs
         /// </summary>
         /// <returns>Dictionary. The key is guest synchronization ID</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.12.0) [可选实现] 获取插件相关的客机同步通道标题表时被调用
+        /// [可选实现] 获取插件相关的客机同步通道标题表时被调用
         /// </summary>
         /// <returns>客机同步通道标题表，键为客机同步ID，值为其标题</returns>
         public virtual Dictionary<String, String> GetGuestSyncTitleTable() { return null; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.12.3) [Optional] Called while getting the library files that should be preloaded
+        /// [Optional] Called while getting the library files that should be preloaded
         /// </summary>
         /// <returns>List of library file names (not absolute path)</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.12.3) [可选实现] 获取需要提前加载的库文件列表时被调用
+        /// [可选实现] 获取需要提前加载的库文件列表时被调用
         /// </summary>
         /// <returns>库文件名的列表，不需要绝对路径</returns>
         public virtual String[] GetPreloadLibFiles() { return null; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.14.0) [Optional] Called while getting license notices of third party software that used by the plugin
+        /// [Optional] Called while getting license notices of third party software that used by the plugin
         /// </summary>
         /// <returns>Dictionary. The key is third party software's title</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.14.0) [可选实现] 获取插件使用的第三方软件版权声明时被调用
+        /// [可选实现] 获取插件使用的第三方软件版权声明时被调用
         /// </summary>
         /// <returns>键为标题，值为版权声明</returns>
         public virtual Dictionary<String, String> GetThirdPartyNotices() { return null; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.14.2) [Optional] Called while get the executable paths needed to be run with auto root privilege
+        /// [Optional] Called while get the executable paths needed to be run with auto root privilege
         /// </summary>
         /// <returns>The executable paths, only programs without GUI are supported</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.14.2) [可选实现] 获取Linux系统下需要自动root权限的可执行程序路径时被调用
+        /// [可选实现] 获取Linux系统下需要自动root权限的可执行程序路径时被调用
         /// </summary>
         /// <returns>可执行程序路径列表，仅限无界面程序</returns>
         public virtual String[] GetAutoRootTargets() { return null; }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.11.0) [Optional] Called while setting logger for debug info
+        /// [Optional] Called while setting logger for debug info
         /// </summary>
         /// <param name="logger">Debug info logger. You can print messages with source using the logger</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.11.0) [可选实现] 设置用于记录调试信息的接口时被调用
+        /// [可选实现] 设置用于记录调试信息的接口时被调用
         /// </summary>
         /// <param name="logger">记录调试信息的接口，基于此接口记录可带上来源信息</param>
         public virtual void UseLogger(Logger logger) { }
@@ -261,21 +261,21 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.0) [Optional] Called while data path changed
+        /// [Optional] Called while data path changed
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.0) [可选实现] 在数据根目录切换后被调用
+        /// [可选实现] 在数据根目录切换后被调用
         /// </summary>
         public virtual void OnDataPathSwitched() { }
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.0) [Optional] Called while data layer changed
+        /// [Optional] Called while data layer changed
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.0) [可选实现] 在数据层级切换后被调用
+        /// [可选实现] 在数据层级切换后被调用
         /// </summary>
         public virtual void OnDataLayerSwitched() { }
 
@@ -311,12 +311,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.14.3) [Optional] Called while checking whether the plugin is busy with some time-consuming operation
+        /// [Optional] Called while checking whether the plugin is busy with some time-consuming operation
         /// </summary>
         /// <returns>Description of the time-consuming operation, null if none</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.14.3) [可选实现] 在检查插件是否忙于长耗时操作时被调用
+        /// [可选实现] 在检查插件是否忙于长耗时操作时被调用
         /// </summary>
         /// <returns>长耗时操作的描述，若无则返回null</returns>
         public virtual String OnCheckBusy() { return null;}

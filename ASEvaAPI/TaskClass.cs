@@ -5,11 +5,11 @@ namespace ASEva
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Base class for task component definition
+    /// (api:app=3.0.0) Base class for task component definition
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 独立任务组件定义的基类
+    /// (api:app=3.0.0) 独立任务组件定义的基类
     /// </summary>
     public class TaskClass
     {
@@ -59,7 +59,7 @@ namespace ASEva
         /// [非原生模式下必须实现] 创建独立任务对象
         /// </summary>
         /// <returns>独立任务对象</returns>
-        public virtual Task CreateTask() { return null; }
+        public virtual StandaloneTask CreateTask() { return null; }
 
         /// \~English
         /// <summary>
@@ -87,12 +87,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.5.1) [Optional] Called while getting the task's default configuration string
+        /// [Optional] Called while getting the task's default configuration string
         /// </summary>
         /// <returns>Default configuration string, set to null if unsupported</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.5.1) [可选实现] 获取独立任务的默认配置时被调用
+        /// [可选实现] 获取独立任务的默认配置时被调用
         /// </summary>
         /// <returns>独立任务的默认配置字符串，若不支持则为null</returns>
         public virtual String GetDefaultConfig() { return null;}

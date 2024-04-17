@@ -6,11 +6,11 @@ namespace ASEva.UICoreWF
 {
     /// \~English
     /// <summary>
-    /// (api:corewf=2.0.0) Color type conversion
+    /// (api:corewf=3.0.0) Color type conversion
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:corewf=2.0.0) 颜色类型转换
+    /// (api:corewf=3.0.0) 颜色类型转换
     /// </summary>
     public class ColorConv
     {

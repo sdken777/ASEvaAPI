@@ -104,9 +104,18 @@ namespace ASEva.UIGtk
             return SystemFonts.Default(9.5f);
         }
 
-        public void RunApp(Application application, Form window)
+        public void RunApp(Application application, Form window, Form[] subWindows)
         {
             if (window.ControlObject is Gtk.Window) DialogHelper.MainWindow = window.ControlObject as Gtk.Window;
+            if (subWindows != null)
+            {
+                var list = new List<Gtk.Window>();
+                foreach (var subWindow in subWindows)
+                {
+                    if (subWindow.ControlObject is Gtk.Window) list.Add(subWindow.ControlObject as Gtk.Window);
+                }
+                DialogHelper.OtherMainWindows = list.ToArray();
+            }
             application.Run(window);
         }
 

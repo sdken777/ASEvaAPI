@@ -5,11 +5,11 @@ namespace ASEva.UICoreWF
 {
     /// \~English
     /// <summary>
-    /// (api:corewf=2.0.0) Set value to NumericUpDown control
+    /// (api:corewf=3.0.0) Set value to NumericUpDown control
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:corewf=2.0.0) NumericUpDown控件设置值
+    /// (api:corewf=3.0.0) NumericUpDown控件设置值
     /// </summary>
     public class NumericSetter
     {

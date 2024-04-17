@@ -25,12 +25,12 @@ namespace ASEva.UIEto
     {
         /// \~English
         /// <summary>
-        /// (api:eto=2.0.0) Get API version
+        /// (api:eto=3.0.0) Get API version
         /// </summary>
         /// <returns>The API version</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.0.0) 获取API版本
+        /// (api:eto=3.0.0) 获取API版本
         /// </summary>
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
@@ -40,12 +40,12 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.10.5) Get Eto.Forms library's version
+        /// (api:eto=3.0.0) Get Eto.Forms library's version
         /// </summary>
         /// <returns>The Eto.Forms library's version</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.10.5) 获取Eto.Forms库版本
+        /// (api:eto=3.0.0) 获取Eto.Forms库版本
         /// </summary>
         /// <returns>Eto.Forms库版本</returns>
         public static Version GetEtoLibVersion()
@@ -64,12 +64,12 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.11.0) Get 3rd party software license notices
+        /// (api:eto=3.0.0) Get 3rd party software license notices
         /// </summary>
         /// <returns>The 3rd party software license notices</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.11.0) 获取使用的第三方软件版权声明
+        /// (api:eto=3.0.0) 获取使用的第三方软件版权声明
         /// </summary>
         /// <returns>键为标题，值为版权声明</returns>
         public static Dictionary<String, String> GetThirdPartyNotices()

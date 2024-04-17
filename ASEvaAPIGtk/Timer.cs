@@ -8,11 +8,11 @@ namespace ASEva.UIGtk
 {
     /// \~English
     /// <summary>
-    /// (api:gtk=2.8.2) Timer
+    /// (api:gtk=3.0.0) Timer
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.8.2) 计时器
+    /// (api:gtk=3.0.0) 计时器
     /// </summary>
     public class Timer
     {

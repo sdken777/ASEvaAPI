@@ -7,11 +7,11 @@ namespace ASEva.UIEto
     
     /// \~English
     /// <summary>
-    /// (api:eto=2.3.2) Extensions for settings client size of window or dialog
+    /// (api:eto=3.0.0) Extensions for settings client size of window or dialog
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.3.2) 方便设置窗口或对话框的用户区域
+    /// (api:eto=3.0.0) 方便设置窗口或对话框的用户区域
     /// </summary>
     public static class SetClientSizeExtensions
     {

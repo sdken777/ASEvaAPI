@@ -4,11 +4,11 @@ namespace ASEva.Utility
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Result of miss detection / false detection
+    /// (api:app=3.0.0) Result of miss detection / false detection
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 漏检/误检结果
+    /// (api:app=3.0.0) 漏检/误检结果
     /// </summary>
     public struct MissFalseResult
     {
@@ -18,11 +18,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Statistics of miss detection / false detection
+    /// (api:app=3.0.0) Statistics of miss detection / false detection
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 漏检/误检分析与统计
+    /// (api:app=3.0.0) 漏检/误检分析与统计
     /// </summary>
     public class MissFalseStat
     {

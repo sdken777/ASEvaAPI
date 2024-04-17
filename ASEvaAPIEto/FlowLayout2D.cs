@@ -10,11 +10,11 @@ namespace ASEva.UIEto
 
     /// \~English
     /// <summary>
-    /// (api:eto=2.9.1) Vertical flow layout with 2D
+    /// (api:eto=3.0.0) Vertical flow layout with 2D
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.9.1) 沿纵向添加的二维控件列表
+    /// (api:eto=3.0.0) 沿纵向添加的二维控件列表
     /// </summary>
     public class FlowLayout2D : Panel, FlowLayoutCallback
     {
@@ -274,12 +274,12 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.9.2) Get index of control where the mouse is
+        /// Get index of control where the mouse is
         /// </summary>
         /// <returns>Index of the control, -1 while mouse is not inside any control</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.9.2) 获取鼠标所在控件的序号位置
+        /// 获取鼠标所在控件的序号位置
         /// </summary>
         /// <returns>鼠标所在控件的序号位置，-1表示鼠标未在任何控件上</returns>
         public int GetControlWithMouse()
@@ -338,11 +338,11 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.13.3) Whether selectable
+        /// Whether selectable
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.13.3) 是否可选中控件
+        /// 是否可选中控件
         /// </summary>
         public bool Selectable { get; set; }
 

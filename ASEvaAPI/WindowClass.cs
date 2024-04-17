@@ -7,11 +7,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Base class for window component definition
+    /// (api:app=3.0.0) Base class for window component definition
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 窗口组件定义的基类
+    /// (api:app=3.0.0) 窗口组件定义的基类
     /// </summary>
     public class WindowClass
     {

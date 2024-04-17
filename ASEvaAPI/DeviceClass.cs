@@ -7,11 +7,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.8.0) Base class for device component definition
+    /// (api:app=3.0.0) Base class for device component definition
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.8.0) 设备组件定义的基类
+    /// (api:app=3.0.0) 设备组件定义的基类
     /// </summary>
     public class DeviceClass
     {

@@ -8,11 +8,11 @@ namespace ASEva.Samples
 
     /// \~English
     /// <summary>
-    /// (api:app=2.3.0) Common image data
+    /// (api:app=3.0.0) Common image data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.3.0) 通用图像数据
+    /// (api:app=3.0.0) 通用图像数据
     /// </summary>
     public class CommonImage
     {
@@ -48,11 +48,11 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// (api:app=2.8.5) Whether BGR inverted
+        /// Whether BGR inverted
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.8.5) BGR是否逆序
+        /// BGR是否逆序
         /// </summary>
         public bool BgrInverted { get { return bgrInverted; } }
 
@@ -202,13 +202,13 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.1) [Depend on Agency] Create from image binary data
+        /// [Depend on Agency] Create from image binary data
         /// </summary>
         /// <param name="binary">Image binary data, like jpeg, png, etc.</param>
         /// <returns>Common image object</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.1) [依赖Agency] 从图像二进制数据转换
+        /// [依赖Agency] 从图像二进制数据转换
         /// </summary>
         /// <param name="binary">图像二进制数据，如jpeg、png等</param>
         /// <returns>通用图像数据</returns>
@@ -257,13 +257,13 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// (api:app=2.4.1) [Depend on Agency] Convert to image binary data
+        /// [Depend on Agency] Convert to image binary data
         /// </summary>
         /// <param name="format">Target format, only "jpg" and "png" supported</param>
         /// <returns>Image binary data</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.4.1) [依赖Agency] 转为图像二进制数据
+        /// [依赖Agency] 转为图像二进制数据
         /// </summary>
         /// <param name="format">编码格式，目前支持"jpg", "png"</param>
         /// <returns>图像二进制数据</returns>
@@ -276,13 +276,13 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// (api:app=2.8.6) Convert to/from BGR inverted image
+        /// Convert to/from BGR inverted image
         /// </summary>
         /// <param name="targetInverted">Whether BGR inverted</param>
         /// <returns>Converted image</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.8.6) 转换为BGR逆序或不逆序的图像对象
+        /// 转换为BGR逆序或不逆序的图像对象
         /// </summary>
         /// <param name="targetInverted">BGR是否逆序</param>
         /// <returns>转换后的图像对象</returns>
@@ -326,13 +326,13 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// (api:app=2.14.4) Resize image (keep the ratio of width to height)
+        /// Resize image (keep the ratio of width to height)
         /// </summary>
         /// <param name="targetWidth">Width of resized image, in pixels, at least 8 (height will be calculated automatically)</param>
         /// <returns>Resized image, return null if the source image's width is less than 8</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.14.4) 缩放图像（保持宽高比）
+        /// 缩放图像（保持宽高比）
         /// </summary>
         /// <param name="targetWidth">缩放后的图像宽度，高度自动计算，至少为8</param>
         /// <returns>缩放后的图像，原图像尺寸小于8像素则返回null</returns>

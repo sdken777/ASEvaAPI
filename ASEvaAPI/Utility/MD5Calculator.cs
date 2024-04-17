@@ -9,11 +9,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) MD5 calculator
+    /// (api:app=3.0.0) MD5 calculator
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) MD5计算
+    /// (api:app=3.0.0) MD5计算
     /// </summary>
     public class MD5Calculator
     {
@@ -33,8 +33,9 @@ namespace ASEva.Utility
         {
             try
             {
+                
                 var file = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-                var md5 = new MD5CryptoServiceProvider();
+                var md5 = MD5.Create();
                 var retVal = md5.ComputeHash(file);
                 file.Close();
  
@@ -65,7 +66,7 @@ namespace ASEva.Utility
         {
             try
             {
-                var md5 = new MD5CryptoServiceProvider();
+                var md5 = MD5.Create();
                 var retVal = md5.ComputeHash(data);
 
                 var sb = new StringBuilder();

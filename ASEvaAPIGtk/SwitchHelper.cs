@@ -6,11 +6,11 @@ namespace ASEva.UIGtk
 {
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Switch helper class
+    /// (api:gtk=3.0.0) Switch helper class
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 开关框辅助类
+    /// (api:gtk=3.0.0) 开关框辅助类
     /// </summary>
     public class SwitchHelper
     {

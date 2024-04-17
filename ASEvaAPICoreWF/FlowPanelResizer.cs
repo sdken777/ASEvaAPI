@@ -5,11 +5,11 @@ namespace ASEva.UICoreWF
 {
     /// \~English
     /// <summary>
-    /// (api:corewf=2.0.0) Auto resize child controls of FlowLayoutPanel
+    /// (api:corewf=3.0.0) Auto resize child controls of FlowLayoutPanel
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:corewf=2.0.0) FlowLayoutPanel子控件宽度自适应
+    /// (api:corewf=3.0.0) FlowLayoutPanel子控件宽度自适应
     /// </summary>
     public class FlowPanelResizer
     {

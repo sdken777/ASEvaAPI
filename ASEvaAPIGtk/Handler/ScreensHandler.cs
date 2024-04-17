@@ -66,8 +66,6 @@ namespace ASEva.UIGtk
 #endif
 			}
 		}
-
-		public static bool LegacyMode { get; private set; } // Deprecated
 	}
 }
 

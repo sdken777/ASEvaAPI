@@ -9,11 +9,11 @@ namespace ASEva.UIGtk
 
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.8) Pre-render object
+    /// (api:gtk=3.0.0) Pre-render object
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.8) 预绘制对象
+    /// (api:gtk=3.0.0) 预绘制对象
     /// </summary>
     public class DrawSwap
     {

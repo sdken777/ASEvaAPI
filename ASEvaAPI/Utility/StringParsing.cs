@@ -6,11 +6,11 @@ namespace ASEva.Utility
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Conversion of string
+    /// (api:app=3.0.0) Conversion of string
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 字符串与数据相互转换
+    /// (api:app=3.0.0) 字符串与数据相互转换
     /// </summary>
     public class StringParsing
     {

@@ -6,11 +6,11 @@ namespace ASEva.UIGtk
 {
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Color type conversion
+    /// (api:gtk=3.0.0) Color type conversion
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 颜色类型转换
+    /// (api:gtk=3.0.0) 颜色类型转换
     /// </summary>
     public class ColorConv
     {

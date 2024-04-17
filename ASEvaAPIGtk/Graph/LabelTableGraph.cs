@@ -11,11 +11,11 @@ namespace ASEva.UIGtk
 
     /// \~English
     /// <summary>
-    /// (api:gtk=2.0.0) Label table graph control
+    /// (api:gtk=3.0.0) Label table graph control
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=2.0.0) 标签热力图数据可视化窗口
+    /// (api:gtk=3.0.0) 标签热力图数据可视化窗口
     /// </summary>
     public class LabelTableGraph : BaseGraph
     {
@@ -46,11 +46,11 @@ namespace ASEva.UIGtk
 
         /// \~English
         /// <summary>
-        /// (api:gtk=2.0.8) Release resources
+        /// Release resources
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:gtk=2.0.8) 释放相关资源
+        /// 释放相关资源
         /// </summary>
         public override void Close()
 		{

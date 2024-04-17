@@ -59,7 +59,7 @@ namespace ASEva.UIWpf
             return SystemFonts.Default();
         }
 
-        public void RunApp(Application application, Form window)
+        public void RunApp(Application application, Form window, Form[] subWindows)
         {
             try
             {

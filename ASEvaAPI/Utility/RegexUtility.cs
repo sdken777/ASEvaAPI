@@ -5,11 +5,11 @@ namespace ASEva.Utility
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Regular expression utility
+    /// (api:app=3.0.0) Regular expression utility
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 正则表达式工具
+    /// (api:app=3.0.0) 正则表达式工具
     /// </summary>
     public class RegexUtil
     {
@@ -69,24 +69,11 @@ namespace ASEva.Utility
 
         /// \~English
         /// <summary>
-        /// Deprecated, use ASEva.Utility.RegexUtil.IsNotNegative
+        /// Whether it's non-negative numeric string
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 已弃用，应使用 ASEva.Utility.RegexUtil.IsNotNegative
-        /// </summary>
-        public static bool IsNotNagtive(string input)
-        {
-            return IsMatch(@"^\d+$", input);
-        }
-
-        /// \~English
-        /// <summary>
-        /// (api:app=2.3.0) Whether it's non-negative numeric string
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// (api:app=2.3.0) 是否为非负数值字符串
+        /// 是否为非负数值字符串
         /// </summary>
         public static bool IsNotNegative(string input)
         {
