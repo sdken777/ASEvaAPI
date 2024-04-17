@@ -12,12 +12,12 @@
         <member name="M:ASEva.UICoreWF.APIInfo.GetAPIVersion">
             \~English
             <summary>
-            (api:corewf=2.0.0) Get API version
+            (api:corewf=3.0.0) Get API version
             </summary>
             <returns>The API version</returns>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 获取API版本
+            (api:corewf=3.0.0) 获取API版本
             </summary>
             <returns>API版本</returns>
         </member>
@@ -41,11 +41,11 @@
         <member name="T:ASEva.UICoreWF.BaseGraph">
             \~English
             <summary>
-            (api:corewf=2.0.0) Base class of graph control
+            (api:corewf=3.0.0) Base class of graph control
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 图表显示控件基类
+            (api:corewf=3.0.0) 图表显示控件基类
             </summary>
         </member>
         <member name="P:ASEva.UICoreWF.BaseGraph.Data">
@@ -145,11 +145,11 @@
         <member name="T:ASEva.UICoreWF.ChannelSelector">
             \~English
             <summary>
-            (api:corewf=2.0.0) Channel selector
+            (api:corewf=3.0.0) Channel selector
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 通道选择器
+            (api:corewf=3.0.0) 通道选择器
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.ChannelSelector.SetChannelAvailables(System.Boolean[])">
@@ -195,52 +195,52 @@
         <member name="T:ASEva.UICoreWF.CircleIndicator">
             \~English
             <summary>
-            (api:corewf=2.0.0) Circle indicator
+            (api:corewf=3.0.0) Circle indicator
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 圆形指示器
+            (api:corewf=3.0.0) 圆形指示器
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.ColorConv">
             \~English
             <summary>
-            (api:corewf=2.0.0) Color type conversion
+            (api:corewf=3.0.0) Color type conversion
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 颜色类型转换
+            (api:corewf=3.0.0) 颜色类型转换
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.ComboSelector">
             \~English
             <summary>
-            (api:corewf=2.0.0) A channel selector based on combo box, which can display channel alias and whether the channel is available
+            (api:corewf=3.0.0) A channel selector based on combo box, which can display channel alias and whether the channel is available
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 基于组合框的通道选择器，集成输入通道别名和有效性显示
+            (api:corewf=3.0.0) 基于组合框的通道选择器，集成输入通道别名和有效性显示
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.ConfigPanel">
             \~English
             <summary>
-            (api:corewf=2.0.0) UI panel for configuration
+            (api:corewf=3.0.0) UI panel for configuration
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 配置界面控件，用于实现可视化配置
+            (api:corewf=3.0.0) 配置界面控件，用于实现可视化配置
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.ConfigPanel.OnInitSize(System.String)">
             \~English
             <summary>
-            (api:corewf=2.1.1) [Optional] Called while initializing panel's size
+            [Optional] Called while initializing panel's size
             </summary>
             <param name="config">Configuration string</param>
             \~Chinese
             <summary>
-            (api:corewf=2.1.1) [可选实现] 在初始化控件尺寸时被调用
+            [可选实现] 在初始化控件尺寸时被调用
             </summary>
             <param name="config">配置字符串</param>
         </member>
@@ -279,81 +279,81 @@
         <member name="M:ASEva.UICoreWF.ConfigPanel.OnHandleModal">
             \~English
             <summary>
-            (api:corewf=2.4.10) [Optional] Called in the main loop, for running modal dialog
+            [Optional] Called in the main loop, for running modal dialog
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.4.10) [可选实现] 在主循环中被调用，可进行模态对话
+            [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.ConfigPanel.Close">
             \~English
             <summary>
-            (api:corewf=2.3.6) Close the container holding the panel
+            Close the container holding the panel
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.3.6) 关闭配置界面
+            关闭配置界面
             </summary>
         </member>
         <member name="E:ASEva.UICoreWF.ConfigPanel.CloseRequested">
             \~English
             <summary>
-            (api:corewf=2.3.6) Implement closing the panel container in this event
+            Implement closing the panel container in this event
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.3.6) 在此事件中实现配置界面的关闭
+            在此事件中实现配置界面的关闭
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.DeviceCoordView">
             \~English
             <summary>
-            (api:corewf=2.0.0) A control to visualize sensor's coordinate system and position
+            (api:corewf=3.0.0) A control to visualize sensor's coordinate system and position
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 传感器坐标系及位置等的可视化控件
+            (api:corewf=3.0.0) 传感器坐标系及位置等的可视化控件
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.DoubleBufferListView">
             \~English
             <summary>
-            (api:corewf=2.0.0) Double buffered ListView
+            (api:corewf=3.0.0) Double buffered ListView
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 双缓存ListView
+            (api:corewf=3.0.0) 双缓存ListView
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.WinformIconExtensions">
             \~English
             <summary>
-            (api:corewf=2.5.4) Extension for icon object generation
+            (api:corewf=3.0.0) Extension for icon object generation
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.5.4) 方便生成图标的扩展
+            (api:corewf=3.0.0) 方便生成图标的扩展
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.FlowPanelManager">
             \~English
             <summary>
-            (api:corewf=2.0.0) Wrapper of FlowLayoutPanel
+            (api:corewf=3.0.0) Wrapper of FlowLayoutPanel
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) FlowLayoutPanel封装
+            (api:corewf=3.0.0) FlowLayoutPanel封装
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.FlowPanelResizer">
             \~English
             <summary>
-            (api:corewf=2.0.0) Auto resize child controls of FlowLayoutPanel
+            (api:corewf=3.0.0) Auto resize child controls of FlowLayoutPanel
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) FlowLayoutPanel子控件宽度自适应
+            (api:corewf=3.0.0) FlowLayoutPanel子控件宽度自适应
             </summary>
         </member>
         <member name="F:ASEva.UICoreWF.OpenGLControl.components">
@@ -610,31 +610,31 @@
         <member name="T:ASEva.UICoreWF.HistLineGraph">
             \~English
             <summary>
-            (api:corewf=2.0.0) Histogram and poly line graph control
+            (api:corewf=3.0.0) Histogram and poly line graph control
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 柱状折线图可视化控件
+            (api:corewf=3.0.0) 柱状折线图可视化控件
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.ImageConverter">
             \~English
             <summary>
-            (api:corewf=2.1.0) Conversion of image object
+            (api:corewf=3.0.0) Conversion of image object
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.1.0) 图像对象转换
+            (api:corewf=3.0.0) 图像对象转换
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.ImageShow">
             \~English
             <summary>
-            (api:corewf=2.0.0) A window to show image
+            (api:corewf=3.0.0) A window to show image
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 图像显示窗口
+            (api:corewf=3.0.0) 图像显示窗口
             </summary>
         </member>
         <member name="F:ASEva.UICoreWF.ImageShow.components">
@@ -657,102 +657,102 @@
         <member name="T:ASEva.UICoreWF.LabelTableGraph">
             \~English
             <summary>
-            (api:corewf=2.0.0) Label table graph control
+            (api:corewf=3.0.0) Label table graph control
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 标签热力图数据可视化窗口
+            (api:corewf=3.0.0) 标签热力图数据可视化窗口
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.MatrixTableGraph">
             \~English
             <summary>
-            (api:corewf=2.0.0) Matrix table graph control
+            (api:corewf=3.0.0) Matrix table graph control
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 矩阵热力图数据可视化窗口
+            (api:corewf=3.0.0) 矩阵热力图数据可视化窗口
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.NameEditor">
             \~English
             <summary>
-            (api:corewf=2.0.0) Name editor control
+            (api:corewf=3.0.0) Name editor control
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 名称编辑控件
+            (api:corewf=3.0.0) 名称编辑控件
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.NumericSetter">
             \~English
             <summary>
-            (api:corewf=2.0.0) Set value to NumericUpDown control
+            (api:corewf=3.0.0) Set value to NumericUpDown control
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) NumericUpDown控件设置值
+            (api:corewf=3.0.0) NumericUpDown控件设置值
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.ScatterPointsGraph">
             \~English
             <summary>
-            (api:corewf=2.0.0) Scatter points graph control
+            (api:corewf=3.0.0) Scatter points graph control
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 散点图数据可视化窗口
+            (api:corewf=3.0.0) 散点图数据可视化窗口
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.TimelineIndicator">
             \~English
             <summary>
-            (api:corewf=2.0.0) Timeline visualization control (horizontal)
+            (api:corewf=3.0.0) Timeline visualization control (horizontal)
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 时间线显示控件（横向）
+            (api:corewf=3.0.0) 时间线显示控件（横向）
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.TimelineIndicatorV">
             \~English
             <summary>
-            (api:corewf=2.0.0) Timeline visualization control (vertical)
+            (api:corewf=3.0.0) Timeline visualization control (vertical)
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 时间线显示控件（纵向）
+            (api:corewf=3.0.0) 时间线显示控件（纵向）
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.ValueGraph">
             \~English
             <summary>
-            (api:corewf=2.0.0) Single value graph control
+            (api:corewf=3.0.0) Single value graph control
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 单值数据可视化窗口
+            (api:corewf=3.0.0) 单值数据可视化窗口
             </summary>
         </member>
         <member name="T:ASEva.UICoreWF.WindowPanel">
             \~English
             <summary>
-            (api:corewf=2.0.0) UI panel for child window
+            (api:corewf=3.0.0) UI panel for child window
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.0.0) 窗口控件，用于实现窗口组件的实际功能
+            (api:corewf=3.0.0) 窗口控件，用于实现窗口组件的实际功能
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.WindowPanel.OnInitSize(System.String)">
             \~English
             <summary>
-            (api:corewf=2.1.1) [Optional] Called while initializing panel's size
+            [Optional] Called while initializing panel's size
             </summary>
             <param name="config">Configuration string</param>
             \~Chinese
             <summary>
-            (api:corewf=2.1.1) [可选实现] 在初始化控件尺寸时被调用
+            [可选实现] 在初始化控件尺寸时被调用
             </summary>
             <param name="config">配置字符串</param>
         </member>
@@ -835,11 +835,11 @@
         <member name="M:ASEva.UICoreWF.WindowPanel.OnHandleModal">
             \~English
             <summary>
-            (api:corewf=2.4.10) [Optional] Called in the main loop, for running modal dialog
+            [Optional] Called in the main loop, for running modal dialog
             </summary>
             \~Chinese
             <summary>
-            (api:corewf=2.4.10) [可选实现] 在主循环中被调用，可进行模态对话
+            [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.WindowPanel.OnRelease">
