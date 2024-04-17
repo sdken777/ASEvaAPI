@@ -19,6 +19,7 @@ output.bmp
 external.avi
 .vs
 netcoreapp3.1/
+net8.0-windows/
 *.o
 macapp/
 
