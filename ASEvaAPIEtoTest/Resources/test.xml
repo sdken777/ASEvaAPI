@@ -2,350 +2,350 @@
 <text_resource>
   <t id="basic-button">
     <en>Button</en>
-    <ch>按钮</ch>
+    <zh>按钮</zh>
   </t>
   <t id="basic-cases">
     <en>Cases:</en>
-    <ch>特例:</ch>
+    <zh>特例:</zh>
   </t>
   <t id="basic-checkbox">
     <en>Save file</en>
-    <ch>保存文件</ch>
+    <zh>保存文件</zh>
   </t>
   <t id="basic-checklist-check-all">
     <en>Check all</en>
-    <ch>全选</ch>
+    <zh>全选</zh>
   </t>
   <t id="basic-checklist-get-check">
     <en>Get checked</en>
-    <ch>是否选中</ch>
+    <zh>是否选中</zh>
   </t>
   <t id="basic-checklist-get-enable">
     <en>Get enabled</en>
-    <ch>是否启用</ch>
+    <zh>是否启用</zh>
   </t>
   <t id="basic-checklist-remove">
     <en>Remove</en>
-    <ch>移除</ch>
+    <zh>移除</zh>
   </t>
   <t id="basic-checklist-set-check">
     <en>Set checked</en>
-    <ch>切换选中</ch>
+    <zh>切换选中</zh>
   </t>
   <t id="basic-checklist-set-enable">
     <en>Set enabled</en>
-    <ch>切换启用</ch>
+    <zh>切换启用</zh>
   </t>
   <t id="basic-checklist-set-text">
     <en>Set text</en>
-    <ch>设置文本</ch>
+    <zh>设置文本</zh>
   </t>
   <t id="basic-checklist-uncheck-all">
     <en>Clear all</en>
-    <ch>清空</ch>
+    <zh>清空</zh>
   </t>
   <t id="basic-client-size">
     <en>Client Size</en>
-    <ch>用户区域</ch>
+    <zh>用户区域</zh>
   </t>
   <t id="basic-close">
     <en>Close</en>
-    <ch>关闭</ch>
+    <zh>关闭</zh>
   </t>
   <t id="basic-combobox">
     <en>Option {0}</en>
-    <ch>选项{0}</ch>
+    <zh>选项{0}</zh>
   </t>
   <t id="basic-dialog-no-border">
     <en>Dialog without border</en>
-    <ch>无边框对话框</ch>
+    <zh>无边框对话框</zh>
   </t>
   <t id="basic-dialog-with-border">
     <en>Dialog with border</en>
-    <ch>带边框对话框</ch>
+    <zh>带边框对话框</zh>
   </t>
   <t id="basic-dialog-with-border-fix">
     <en>Dialog with fixed border</en>
-    <ch>带固定边框对话框</ch>
+    <zh>带固定边框对话框</zh>
   </t>
   <t id="basic-flow-add">
     <en>Add</en>
-    <ch>添加项</ch>
+    <zh>添加项</zh>
   </t>
   <t id="basic-flow-bigger">
     <en>Bigger</en>
-    <ch>放大</ch>
+    <zh>放大</zh>
   </t>
   <t id="basic-flow-hide">
     <en>Hide</en>
-    <ch>隐藏项</ch>
+    <zh>隐藏项</zh>
   </t>
   <t id="basic-flow-insert">
     <en>Insert</en>
-    <ch>插入项</ch>
+    <zh>插入项</zh>
   </t>
   <t id="basic-flow-remove">
     <en>Remove</en>
-    <ch>移除项</ch>
+    <zh>移除项</zh>
   </t>
   <t id="basic-flow-select">
     <en>Select</en>
-    <ch>选中项</ch>
+    <zh>选中项</zh>
   </t>
   <t id="basic-flow-selected">
     <en>Selected item: {0} {1}</en>
-    <ch>已选中项：{0} {1}</ch>
+    <zh>已选中项：{0} {1}</zh>
   </t>
   <t id="basic-flow-show">
     <en>Show</en>
-    <ch>显示项</ch>
+    <zh>显示项</zh>
   </t>
   <t id="basic-flow-smaller">
     <en>Smaller</en>
-    <ch>缩小</ch>
+    <zh>缩小</zh>
   </t>
   <t id="basic-freeze-size">
     <en>Freeze size</en>
-    <ch>固定尺寸</ch>
+    <zh>固定尺寸</zh>
   </t>
   <t id="basic-grid-add-row">
     <en>Add row</en>
-    <ch>添加行</ch>
+    <zh>添加行</zh>
   </t>
   <t id="basic-grid-change-color">
     <en>Change color</en>
-    <ch>改变颜色</ch>
+    <zh>改变颜色</zh>
   </t>
   <t id="basic-grid-column">
     <en>C{0}</en>
-    <ch>{0}列</ch>
+    <zh>{0}列</zh>
   </t>
   <t id="basic-grid-edited">
     <en>Edited: ({0}, {1})</en>
-    <ch>已编辑: ({0}, {1})</ch>
+    <zh>已编辑: ({0}, {1})</zh>
   </t>
   <t id="basic-grid-index-title">
     <en>Index</en>
-    <ch>序号</ch>
+    <zh>序号</zh>
   </t>
   <t id="basic-grid-key-title">
     <en>Key</en>
-    <ch>键</ch>
+    <zh>键</zh>
   </t>
   <t id="basic-grid-reload">
     <en>Reload</en>
-    <ch>重加载</ch>
+    <zh>重加载</zh>
   </t>
   <t id="basic-grid-remove-row">
     <en>Remove row</en>
-    <ch>移除行</ch>
+    <zh>移除行</zh>
   </t>
   <t id="basic-grid-value-title">
     <en>Value</en>
-    <ch>值</ch>
+    <zh>值</zh>
   </t>
   <t id="basic-group-title">
     <en>Basic Controls</en>
-    <ch>基本控件</ch>
+    <zh>基本控件</zh>
   </t>
   <t id="basic-label-row">
     <en>Row-{0:D}:</en>
-    <ch>第{0:D}行：</ch>
+    <zh>第{0:D}行：</zh>
   </t>
   <t id="basic-linkbutton">
     <en>Browse</en>
-    <ch>浏览</ch>
+    <zh>浏览</zh>
   </t>
   <t id="basic-list-item">
     <en>List Option {0}</en>
-    <ch>列表项{0}</ch>
+    <zh>列表项{0}</zh>
   </t>
   <t id="basic-list-item-short">
     <en>Option {0}</en>
-    <ch>列表项{0}</ch>
+    <zh>列表项{0}</zh>
   </t>
   <t id="basic-menu-notice">
     <en>Context menu is available</en>
-    <ch>右键菜单可用</ch>
+    <zh>右键菜单可用</zh>
   </t>
   <t id="basic-radiobutton-dir">
     <en>Directory</en>
-    <ch>文件夹</ch>
+    <zh>文件夹</zh>
   </t>
   <t id="basic-radiobutton-file">
     <en>File</en>
-    <ch>文件</ch>
+    <zh>文件</zh>
   </t>
   <t id="basic-save-file-filter">
     <en>Text file</en>
-    <ch>文本文件</ch>
+    <zh>文本文件</zh>
   </t>
   <t id="basic-tabpage-title">
     <en>Tabpage {0}</en>
-    <ch>标签页{0}</ch>
+    <zh>标签页{0}</zh>
   </t>
   <t id="basic-text">
     <en>Text</en>
-    <ch>文本</ch>
+    <zh>文本</zh>
   </t>
   <t id="basic-tooltip">
     <en>Tooltip {0:D}</en>
-    <ch>提示{0:D}</ch>
+    <zh>提示{0:D}</zh>
   </t>
   <t id="basic-tree-change-color">
     <en>Change color</en>
-    <ch>改变颜色</ch>
+    <zh>改变颜色</zh>
   </t>
   <t id="basic-tree-child">
     <en>Child Node {0:D}</en>
-    <ch>子节点{0:D}</ch>
+    <zh>子节点{0:D}</zh>
   </t>
   <t id="basic-tree-parent">
     <en>Parent Node {0:D}</en>
-    <ch>父节点{0:D}</ch>
+    <zh>父节点{0:D}</zh>
   </t>
   <t id="basic-tree-select-first">
     <en>Select</en>
-    <ch>选首项</ch>
+    <zh>选首项</zh>
   </t>
   <t id="draw-gl-detail">
     <en>Show details</en>
-    <ch>显示详情</ch>
+    <zh>显示详情</zh>
   </t>
   <t id="draw-gl-info-extensions">
     <en>Extensions: {0}</en>
-    <ch>扩展：{0}</ch>
+    <zh>扩展：{0}</zh>
   </t>
   <t id="draw-gl-info-renderer">
     <en>Renderer: {0}</en>
-    <ch>渲染器：{0}</ch>
+    <zh>渲染器：{0}</zh>
   </t>
   <t id="draw-gl-info-title">
     <en>Details</en>
-    <ch>详情</ch>
+    <zh>详情</zh>
   </t>
   <t id="draw-gl-info-vendor">
     <en>Vendor: {0}</en>
-    <ch>厂商：{0}</ch>
+    <zh>厂商：{0}</zh>
   </t>
   <t id="draw-gl-info-version">
     <en>Version: {0}</en>
-    <ch>版本：{0}</ch>
+    <zh>版本：{0}</zh>
   </t>
   <t id="draw-gl-loop-interval">
     <en>Max loop interval:</en>
-    <ch>最大循环间隔:</ch>
+    <zh>最大循环间隔:</zh>
   </t>
   <t id="draw-gl-pause-render">
     <en>Pause render</en>
-    <ch>暂停渲染</ch>
+    <zh>暂停渲染</zh>
   </t>
   <t id="draw-gl-resume-render">
     <en>Resume render</en>
-    <ch>恢复渲染</ch>
+    <zh>恢复渲染</zh>
   </t>
   <t id="draw-group-title">
     <en>Drawing Controls</en>
-    <ch>绘图控件</ch>
+    <zh>绘图控件</zh>
   </t>
   <t id="draw-skia-anti-alias">
     <en>Anti-alias Test</en>
-    <ch>反锯齿测试</ch>
+    <zh>反锯齿测试</zh>
   </t>
   <t id="draw-tabpage-default">
     <en>Default</en>
-    <ch>默认</ch>
+    <zh>默认</zh>
   </t>
   <t id="draw-tabpage-skia-cpu">
     <en>S-CPU</en>
-    <ch>S-CPU</ch>
+    <zh>S-CPU</zh>
   </t>
   <t id="draw-tabpage-skia-gl">
     <en>S-GL</en>
-    <ch>S-GL</ch>
+    <zh>S-GL</zh>
   </t>
   <t id="draw-text">
     <en>Hello World</en>
-    <ch>天气不错</ch>
+    <zh>天气不错</zh>
   </t>
   <t id="empty">
     <en>Empty</en>
-    <ch>空</ch>
+    <zh>空</zh>
   </t>
   <t id="exit-confirm">
     <en>Exit?</en>
-    <ch>是否退出？</ch>
+    <zh>是否退出？</zh>
   </t>
   <t id="menu-button">
     <en>Message box</en>
-    <ch>消息框</ch>
+    <zh>消息框</zh>
   </t>
   <t id="menu-check">
     <en>Check item {0}</en>
-    <ch>多选项{0}</ch>
+    <zh>多选项{0}</zh>
   </t>
   <t id="menu-exception-main">
     <en>Exception (main thread)</en>
-    <ch>制造异常（主线程）</ch>
+    <zh>制造异常（主线程）</zh>
   </t>
   <t id="menu-exception-sub">
     <en>Exception (sub thread)</en>
-    <ch>制造异常（子线程）</ch>
+    <zh>制造异常（子线程）</zh>
   </t>
   <t id="menu-exit">
     <en>Exit</en>
-    <ch>退出</ch>
+    <zh>退出</zh>
   </t>
   <t id="menu-fullscreen">
     <en>Fullscreen</en>
-    <ch>全屏</ch>
+    <zh>全屏</zh>
   </t>
   <t id="menu-radio">
     <en>Radio item {0}</en>
-    <ch>单选项{0}</ch>
+    <zh>单选项{0}</zh>
   </t>
   <t id="menu-snapshot">
     <en>Snapshot (render)</en>
-    <ch>快照（渲染）</ch>
+    <zh>快照（渲染）</zh>
   </t>
   <t id="menu-snapshot-failed">
     <en>Failed to get snapshot.</en>
-    <ch>获取快照失败。</ch>
+    <zh>获取快照失败。</zh>
   </t>
   <t id="menu-snapshot-screen">
     <en>Snapshot (screen)</en>
-    <ch>快照（屏幕）</ch>
+    <zh>快照（屏幕）</zh>
   </t>
   <t id="menu-sub">
     <en>Sub menu</en>
-    <ch>子菜单</ch>
+    <zh>子菜单</zh>
   </t>
   <t id="menu-sub-item">
     <en>Sub item {0}</en>
-    <ch>子菜单项{0}</ch>
+    <zh>子菜单项{0}</zh>
   </t>
   <t id="reserved">
     <en>Reserved</en>
-    <ch>保留</ch>
+    <zh>保留</zh>
   </t>
   <t id="title">
     <en>Test Window</en>
-    <ch>测试窗口</ch>
+    <zh>测试窗口</zh>
   </t>
   <t id="title-dialog">
     <en>Test Dialog</en>
-    <ch>测试对话框</ch>
+    <zh>测试对话框</zh>
   </t>
   <t id="util-group-title">
     <en>Utility Controls</en>
-    <ch>实用控件</ch>
+    <zh>实用控件</zh>
   </t>
   <t id="util-web-call-script">
     <en>Call script</en>
-    <ch>调用脚本</ch>
+    <zh>调用脚本</zh>
   </t>
   <t id="util-web-go-url">
     <en>Go</en>
-    <ch>打开</ch>
+    <zh>打开</zh>
   </t>
 </text_resource>
