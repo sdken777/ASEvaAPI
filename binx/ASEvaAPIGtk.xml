@@ -12,44 +12,44 @@
         <member name="M:ASEva.UIGtk.APIInfo.GetAPIVersion">
             \~English
             <summary>
-            (api:gtk=2.0.0) Get API version
+            (api:gtk=3.0.0) Get API version
             </summary>
             <returns>The API version</returns>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 获取API版本
+            (api:gtk=3.0.0) 获取API版本
             </summary>
             <returns>API版本</returns>
         </member>
         <member name="T:ASEva.UIGtk.ColorConv">
             \~English
             <summary>
-            (api:gtk=2.0.0) Color type conversion
+            (api:gtk=3.0.0) Color type conversion
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 颜色类型转换
+            (api:gtk=3.0.0) 颜色类型转换
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.ConfigPanel">
             \~English
             <summary>
-            (api:gtk=2.0.0) UI panel for configuration
+            (api:gtk=3.0.0) UI panel for configuration
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 配置界面控件，用于实现可视化配置
+            (api:gtk=3.0.0) 配置界面控件，用于实现可视化配置
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.ConfigPanel.OnInitSize(System.String)">
             \~English
             <summary>
-            (api:gtk=2.1.1) [Optional] Called while initializing panel's size
+            [Optional] Called while initializing panel's size
             </summary>
             <param name="config">Configuration string</param>
             \~Chinese
             <summary>
-            (api:gtk=2.1.1) [可选实现] 在初始化控件尺寸时被调用
+            [可选实现] 在初始化控件尺寸时被调用
             </summary>
             <param name="config">配置字符串</param>
         </member>
@@ -88,41 +88,41 @@
         <member name="M:ASEva.UIGtk.ConfigPanel.OnHandleModal">
             \~English
             <summary>
-            (api:gtk=2.5.10) [Optional] Called in the main loop, for running modal dialog
+            [Optional] Called in the main loop, for running modal dialog
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.5.10) [可选实现] 在主循环中被调用，可进行模态对话
+            [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.ConfigPanel.Close">
             \~English
             <summary>
-            (api:gtk=2.4.5) Close the container holding the panel
+            Close the container holding the panel
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.4.5) 关闭配置界面
+            关闭配置界面
             </summary>
         </member>
         <member name="E:ASEva.UIGtk.ConfigPanel.CloseRequested">
             \~English
             <summary>
-            (api:gtk=2.4.5) Implement closing the panel container in this event
+            Implement closing the panel container in this event
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.4.5) 在此事件中实现配置界面的关闭
+            在此事件中实现配置界面的关闭
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.DialogHelper">
             \~English
             <summary>
-            (api:gtk=2.0.0) Dialog helper class
+            (api:gtk=3.0.0) Dialog helper class
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 对话框辅助类
+            (api:gtk=3.0.0) 对话框辅助类
             </summary>
         </member>
         <member name="P:ASEva.UIGtk.DialogHelper.TopWindow">
@@ -148,21 +148,21 @@
         <member name="P:ASEva.UIGtk.DialogHelper.OtherMainWindows">
             \~English
             <summary>
-            (api:gtk=2.4.3) Other main windows
+            Other main windows
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.4.3) 其他主窗口
+            其他主窗口
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.DrawSwap">
             \~English
             <summary>
-            (api:gtk=2.0.8) Pre-render object
+            (api:gtk=3.0.0) Pre-render object
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.8) 预绘制对象
+            (api:gtk=3.0.0) 预绘制对象
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.DrawSwap.#ctor(Gtk.Widget,System.String)">
@@ -202,11 +202,11 @@
         <member name="T:ASEva.UIGtk.EventBoxHelper">
             \~English
             <summary>
-            (api:gtk=2.0.0) Event box helper class
+            (api:gtk=3.0.0) Event box helper class
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 事件框辅助类
+            (api:gtk=3.0.0) 事件框辅助类
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.EventBoxHelper.Add(Gtk.EventBox,Gtk.Menu,System.Boolean)">
@@ -228,101 +228,101 @@
         <member name="P:ASEva.UIGtk.EventBoxHelper.PassEvents">
             \~English
             <summary>
-            (api:gtk=2.5.4) Whether the event can be received by lower controls, default is false
+            Whether the event can be received by lower controls, default is false
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.5.4) 事件是否允许下层控件接收，默认false
+            事件是否允许下层控件接收，默认false
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.CairoContextExtension">
             \~English
             <summary>
-            (api:gtk=2.0.0) Extension methods for Cairo painting
+            (api:gtk=3.0.0) Extension methods for Cairo painting
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) Cairo绘图工具扩展方法
+            (api:gtk=3.0.0) Cairo绘图工具扩展方法
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.ComboBoxTextExtension">
             \~English
             <summary>
-            (api:gtk=2.0.0) Extension methods for combo box
+            (api:gtk=3.0.0) Extension methods for combo box
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 组合框扩展方法
+            (api:gtk=3.0.0) 组合框扩展方法
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.FlowBoxExtension">
             \~English
             <summary>
-            (api:gtk=2.0.0) Extension methods for flow box
+            (api:gtk=3.0.0) Extension methods for flow box
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) Flow框扩展方法
+            (api:gtk=3.0.0) Flow框扩展方法
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.ListBoxExtension">
             \~English
             <summary>
-            (api:gtk=2.0.0) Extension methods for list box
+            (api:gtk=3.0.0) Extension methods for list box
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 列表框扩展方法
+            (api:gtk=3.0.0) 列表框扩展方法
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.ListStoreExtension">
             \~English
             <summary>
-            (api:gtk=2.0.0) Extension methods for list store
+            (api:gtk=3.0.0) Extension methods for list store
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 表数据模型扩展方法
+            (api:gtk=3.0.0) 表数据模型扩展方法
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.TreeViewExtension">
             \~English
             <summary>
-            (api:gtk=2.0.0) Extension methods for tree view
+            (api:gtk=3.0.0) Extension methods for tree view
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 树和表视图框扩展方法
+            (api:gtk=3.0.0) 树和表视图框扩展方法
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.WidgetColorExtension">
             \~English
             <summary>
-            (api:gtk=2.0.0) Extension methods for setting control's color
+            (api:gtk=3.0.0) Extension methods for setting control's color
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 控件颜色设置扩展方法
+            (api:gtk=3.0.0) 控件颜色设置扩展方法
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.WidgetPointerExtension">
             \~English
             <summary>
-            (api:gtk=2.0.0) Extension methods for getting mouse location in widget
+            (api:gtk=3.0.0) Extension methods for getting mouse location in widget
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 获取鼠标在控件内坐标的扩展方法
+            (api:gtk=3.0.0) 获取鼠标在控件内坐标的扩展方法
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.BaseGraph">
             \~English
             <summary>
-            (api:gtk=2.0.0) Base class of graph control
+            (api:gtk=3.0.0) Base class of graph control
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 图表显示控件基类
+            (api:gtk=3.0.0) 图表显示控件基类
             </summary>
         </member>
         <member name="P:ASEva.UIGtk.BaseGraph.Data">
@@ -412,11 +412,11 @@
         <member name="M:ASEva.UIGtk.BaseGraph.Close">
             \~English
             <summary>
-            (api:gtk=2.0.8) Release resources
+            Release resources
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.8) 释放相关资源
+            释放相关资源
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.BaseGraph.HandleGraphSelected">
@@ -432,91 +432,91 @@
         <member name="T:ASEva.UIGtk.HistLineGraph">
             \~English
             <summary>
-            (api:gtk=2.0.0) Histogram and poly line graph control
+            (api:gtk=3.0.0) Histogram and poly line graph control
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 柱状折线图可视化控件
+            (api:gtk=3.0.0) 柱状折线图可视化控件
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.HistLineGraph.Close">
             \~English
             <summary>
-            (api:gtk=2.0.8) Release resources
+            Release resources
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.8) 释放相关资源
+            释放相关资源
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.LabelTableGraph">
             \~English
             <summary>
-            (api:gtk=2.0.0) Label table graph control
+            (api:gtk=3.0.0) Label table graph control
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 标签热力图数据可视化窗口
+            (api:gtk=3.0.0) 标签热力图数据可视化窗口
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.LabelTableGraph.Close">
             \~English
             <summary>
-            (api:gtk=2.0.8) Release resources
+            Release resources
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.8) 释放相关资源
+            释放相关资源
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.MatrixTableGraph">
             \~English
             <summary>
-            (api:gtk=2.0.0) Matrix table graph control
+            (api:gtk=3.0.0) Matrix table graph control
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 矩阵热力图数据可视化窗口
+            (api:gtk=3.0.0) 矩阵热力图数据可视化窗口
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.MatrixTableGraph.Close">
             \~English
             <summary>
-            (api:gtk=2.0.8) Release resources
+            Release resources
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.8) 释放相关资源
+            释放相关资源
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.ScatterPointsGraph">
             \~English
             <summary>
-            (api:gtk=2.0.0) Scatter points graph control
+            (api:gtk=3.0.0) Scatter points graph control
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 散点图数据可视化窗口
+            (api:gtk=3.0.0) 散点图数据可视化窗口
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.ScatterPointsGraph.Close">
             \~English
             <summary>
-            (api:gtk=2.0.8) Release resources
+            Release resources
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.8) 释放相关资源
+            释放相关资源
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.ValueGraph">
             \~English
             <summary>
-            (api:gtk=2.0.0) Single value graph control
+            (api:gtk=3.0.0) Single value graph control
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 单值数据可视化窗口
+            (api:gtk=3.0.0) 单值数据可视化窗口
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.ButtonHandler`3">
@@ -541,71 +541,71 @@
         <member name="T:ASEva.UIGtk.ImageConverter">
             \~English
             <summary>
-            (api:gtk=2.1.0) Conversion of image object
+            (api:gtk=3.0.0) Conversion of image object
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.1.0) 图像对象转换 
+            (api:gtk=3.0.0) 图像对象转换 
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.LinkItem">
             \~English
             <summary>
-            (api:gtk=2.0.0) Compact link item
+            (api:gtk=3.0.0) Compact link item
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 带下划线的蓝色文字
+            (api:gtk=3.0.0) 带下划线的蓝色文字
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.ScrollDisabler">
             \~English
             <summary>
-            (api:gtk=2.0.0) Used to disable widget's scroll
+            (api:gtk=3.0.0) Used to disable widget's scroll
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 用于禁用控件的鼠标滚动
+            (api:gtk=3.0.0) 用于禁用控件的鼠标滚动
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.SwitchHelper">
             \~English
             <summary>
-            (api:gtk=2.0.0) Switch helper class
+            (api:gtk=3.0.0) Switch helper class
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 开关框辅助类
+            (api:gtk=3.0.0) 开关框辅助类
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.TimelineIndicator">
             \~English
             <summary>
-            (api:gtk=2.0.0) Timeline visualization control
+            (api:gtk=3.0.0) Timeline visualization control
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 时间线显示控件
+            (api:gtk=3.0.0) 时间线显示控件
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.Timer">
             \~English
             <summary>
-            (api:gtk=2.8.2) Timer
+            (api:gtk=3.0.0) Timer
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.8.2) 计时器
+            (api:gtk=3.0.0) 计时器
             </summary>
         </member>
         <member name="T:ASEva.UIGtk.VideoFrameSampleImage">
             \~English
             <summary>
-            (api:gtk=2.0.0) The image object of ASEva.Samples.VideoFrameSample
+            (api:gtk=3.0.0) The image object of ASEva.Samples.VideoFrameSample
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) ASEva.Samples.VideoFrameSample 中的图像对象
+            (api:gtk=3.0.0) ASEva.Samples.VideoFrameSample 中的图像对象
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.VideoFrameSampleImage.#ctor(System.Int32,System.Int32)">
@@ -621,11 +621,11 @@
         <member name="M:ASEva.UIGtk.VideoFrameSampleImage.FromCommonImage(ASEva.Samples.CommonImage)">
             \~English
             <summary>
-            (api:gtk=2.1.0) Bind to common image object
+            Bind to common image object
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.1.0) 绑定通用图像，共享数据
+            绑定通用图像，共享数据
             </summary>
         </member>
         <member name="P:ASEva.UIGtk.VideoFrameSampleImage.Width">
@@ -671,21 +671,21 @@
         <member name="P:ASEva.UIGtk.VideoFrameSampleImage.WithAlpha">
             \~English
             <summary>
-            (api:gtk=2.1.0) Whether it contains alpha channel
+            Whether it contains alpha channel
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.1.0) 是否含alpha通道
+            是否含alpha通道
             </summary>
         </member>
         <member name="P:ASEva.UIGtk.VideoFrameSampleImage.BgrInverted">
             \~English
             <summary>
-            (api:gtk=2.5.6) Whether it's BGR inverted (i.e. RGB or RGBA)
+            Whether it's BGR inverted (i.e. RGB or RGBA)
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.5.6) BGR是否逆序 (即RGB或RGBA)
+            BGR是否逆序 (即RGB或RGBA)
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.VideoFrameSampleImage.ToPixbuf">
@@ -711,22 +711,22 @@
         <member name="T:ASEva.UIGtk.WindowPanel">
             \~English
             <summary>
-            (api:gtk=2.0.0) UI panel for child window
+            (api:gtk=3.0.0) UI panel for child window
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.0.0) 窗口控件，用于实现窗口组件的实际功能
+            (api:gtk=3.0.0) 窗口控件，用于实现窗口组件的实际功能
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.WindowPanel.OnInitSize(System.String)">
             \~English
             <summary>
-            (api:gtk=2.1.1) [Optional] Called while initializing panel's size
+            [Optional] Called while initializing panel's size
             </summary>
             <param name="config">Configuration string</param>
             \~Chinese
             <summary>
-            (api:gtk=2.1.1) [可选实现] 在初始化控件尺寸时被调用
+            [可选实现] 在初始化控件尺寸时被调用
             </summary>
             <param name="config">配置字符串</param>
         </member>
@@ -821,11 +821,11 @@
         <member name="M:ASEva.UIGtk.WindowPanel.OnHandleModal">
             \~English
             <summary>
-            (api:gtk=2.5.10) [Optional] Called in the main loop, for running modal dialog
+            [Optional] Called in the main loop, for running modal dialog
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=2.5.10) [可选实现] 在主循环中被调用，可进行模态对话
+            [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.WindowPanel.OnRelease">
