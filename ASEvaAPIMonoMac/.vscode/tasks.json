@@ -92,6 +92,7 @@
                 "Release",
                 "-o",
                 "../${input:helper_platform_bin_name}",
+                "/property:DocumentationFile=../${input:helper_platform_bin_name}/ASEvaAPIMonoMac.xml",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

@@ -7,7 +7,6 @@
     <DefineConstants>GTK3;GTKCORE</DefineConstants>
     <NoWarn>1701;1702;1591</NoWarn>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>..\binx\ASEvaAPIGtk.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

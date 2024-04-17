@@ -5,7 +5,6 @@
     <AssemblyName>ASEvaAPIEto</AssemblyName>
     <Version>0.0.0.0</Version>
     <NoWarn>1701;1702;1591</NoWarn>
-    <DocumentationFile>..\bin64\ASEvaAPIEto.xml</DocumentationFile>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 
