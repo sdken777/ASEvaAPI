@@ -893,11 +893,11 @@ namespace ASEva.UIEto
 
 		private void initContent()
 		{
-			if (!Agency.IsGPURenderingDisabled() && Factory != null)
+			if (!GPUOptions.IsGPURenderingDisabled && Factory != null)
 			{
 				var options = new GLOptions
 				{
-					EnableOnscreenRendering = requestOnscreenRendering || Agency.IsOnscreenGPURenderingEnabled(),
+					EnableOnscreenRendering = requestOnscreenRendering || GPUOptions.IsOnscreenGPURenderingEnabled,
 					UseTextTasks = drawText,
 					UseLegacyAPI = useLegacyAPI,
 					RequestAntialias = requestAntialias,

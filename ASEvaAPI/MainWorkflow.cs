@@ -201,30 +201,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Get whether to disable GPU rendering
-        /// </summary>
-        /// <returns>Whether to disable GPU rendering</returns>
-        /// \~Chinese
-        /// <summary>
-        /// [可选实现] 返回是否禁用GPU渲染
-        /// </summary>
-        /// <returns>是否禁用GPU渲染</returns>
-        public virtual bool OnCheckDisableGPURendering() { return false; }
-
-        /// \~English
-        /// <summary>
-        /// [Optional] Get whether to enable GPU onscreen rendering
-        /// </summary>
-        /// <returns>Whether to enable GPU onscreen rendering (always false if GPU rendering is disabled)</returns>
-        /// \~Chinese
-        /// <summary>
-        /// [可选实现] 返回是否启用GPU在屏渲染
-        /// </summary>
-        /// <returns>是否启用GPU在屏渲染（若已禁用GPU渲染则无效）</returns>
-        public virtual bool OnCheckEnableOnscreenGPURendering() { return false; }
-
-        /// \~English
-        /// <summary>
         /// [Optional] Get whether to disable GPU decoding
         /// </summary>
         /// <returns>Whether to disable GPU decoding</returns>

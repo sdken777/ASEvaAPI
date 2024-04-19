@@ -1223,16 +1223,6 @@ namespace ASEva
         {
         }
 
-        public bool IsGPURenderingDisabled()
-        {
-            return false;
-        }
-
-        public bool IsOnscreenGPURenderingEnabled()
-        {
-            return false;
-        }
-
         public void SendBusMessage(string messageID, uint? interval, out byte[] data)
         {
             data = null;

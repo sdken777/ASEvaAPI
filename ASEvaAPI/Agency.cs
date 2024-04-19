@@ -279,8 +279,6 @@ namespace ASEva
         byte[] CallNativeFunction(object caller, String nativeClassID, String funcID, byte[] input);
         void SetAppFunctionHandler(object caller, String nativeClassID, String funcID, AppFunctionHandler handler);
         void ResetAppFunctionHandler(object caller, String nativeClassID, String funcID);
-        bool IsGPURenderingDisabled();
-        bool IsOnscreenGPURenderingEnabled();
         void ResetGPUDecoderTestResults();
         DataSubscriber SubscribeData(String dataID, int bufferLength, int timeout);
         void PublishData(String dataID, byte[] data);
@@ -4912,36 +4910,6 @@ namespace ASEva
         public static void ResetAppFunctionHandler(object caller, String nativeClassID, String funcID)
         {
             Handler.ResetAppFunctionHandler(caller, nativeClassID, funcID);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Get whether GPU rendering is disabled
-        /// </summary>
-        /// <returns>Whether GPU rendering is disabled</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取是否全局禁用GPU渲染
-        /// </summary>
-        /// <returns>是否全局禁用GPU渲染</returns>
-        public static bool IsGPURenderingDisabled()
-        {
-            return Handler.IsGPURenderingDisabled();
-        }
-
-        /// \~English
-        /// <summary>
-        /// Get whether GPU onscreen rendering is enabled
-        /// </summary>
-        /// <returns>Whether GPU onscreen rendering is enabled (always return false while GPU rendering is disabled)</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取是否全局启用在屏GPU渲染
-        /// </summary>
-        /// <returns>是否全局启用在屏GPU渲染（若已全局禁用GPU渲染则返回false）</returns>
-        public static bool IsOnscreenGPURenderingEnabled()
-        {
-            return Handler.IsOnscreenGPURenderingEnabled();
         }
 
         /// \~English
