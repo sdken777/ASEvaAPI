@@ -1671,41 +1671,6 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Interface for getting video frame
-    /// </summary>
-    /// \~Chinese
-    /// <summary>
-    /// (api:app=3.0.0) 获取视频帧的接口
-    /// </summary>
-    public interface VideoFrameGetter
-    {
-        /// \~English
-        /// <summary>
-        /// Gets the nearest video frame on the timeline with the specified parameters
-        /// </summary>
-        /// <param name="channel">Video channel, ranges 0~23</param>
-        /// <param name="timeline">Target timeline point, in seconds</param>
-        /// <param name="maxGap">Max time gap, in seconds</param>
-        /// <param name="targetSize">Output image's size</param>
-        /// <param name="hires">Whether to prefer to output HD images, otherwise image with the size no greater than VGA is output</param>
-        /// <param name="scale">Scaling configuration, set to null to output full image</param>
-        /// <returns>Video frame sample</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 按指定参数获取时间轴上最近的视频帧
-        /// </summary>
-        /// <param name="channel">视频通道，0~23</param>
-        /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
-        /// <param name="maxGap">容许的最大间隔，单位秒</param>
-        /// <param name="targetSize">输出图像的尺寸</param>
-        /// <param name="hires">是否优先输出高清图像，否则固定输出不大于VGA分辨率的图像</param>
-        /// <param name="scale">缩放设置，若按整幅输出则设为null</param>
-        /// <returns>图像帧</returns>
-        VideoFrameSample GetVideoFrame(int channel, double timeline, double maxGap, IntSize targetSize, bool hires, VideoFrameGetScale scale);
-    }
-
-    /// \~English
-    /// <summary>
     /// (api:app=3.0.0) Related names of file readers and recorders
     /// </summary>
     /// \~Chinese
@@ -3656,13 +3621,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Interface for getting video frame (updated)
+    /// (api:app=3.0.0) Interface for getting video frame
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 获取视频帧的接口（扩展版）
+    /// (api:app=3.0.0) 获取视频帧的接口
     /// </summary>
-    public interface VideoFrameGetterX
+    public interface VideoFrameGetter
     {
         /// \~English
         /// <summary>
@@ -4274,37 +4239,6 @@ namespace ASEva
         public ModuleRelatedUIEntry[] RelatedUIEntries { get; set; }
     }
 
-    /// \~English
-    /// <summary>
-    /// (api:app=3.0.0) Platform image type
-    /// </summary>
-    /// \~Chinese
-    /// <summary>
-    /// (api:app=3.0.0) 平台特化图像类型
-    /// </summary>
-    public enum PlatformImageType
-    {
-        /// \~English
-        /// <summary>
-        /// Native image, like Winform Bitmap, Gtk VideoFrameSampleImage object (Can be converted to Pixbuf or ImageSurface), Wpf BitmapSource, etc.
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 原生图像，如Winform的Bitmap，Gtk的VideoFrameSampleImage对象(可转Pixbuf或ImageSurface)，Wpf的BitmapSource等
-        /// </summary>
-        Native = 0,
-
-        /// \~English
-        /// <summary>
-        /// Eto Bitmap object
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// Eto的Bitmap对象
-        /// </summary>
-        Eto = 1,
-    }
-    
     /// \~English
     /// <summary>
     /// (api:app=3.0.0) Language
