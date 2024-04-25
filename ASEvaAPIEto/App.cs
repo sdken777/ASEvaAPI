@@ -52,7 +52,6 @@ namespace ASEva.UIEto
                 if (availableUICodes == null) return false;
 
                 initApp(availableUICodes[0]);
-                AppDomain.CurrentDomain.UnhandledException += (o, args) => { TriggerFatalException(args); };
             }
             return application != null;
         }
@@ -632,7 +631,11 @@ namespace ASEva.UIEto
             if (handler != null && application == null)
             {
                 application = handler.CreateApp(out uiBackend, out webViewBackend);
-                if (application != null) runningUI = uiCode;
+                if (application != null)
+                {
+                    runningUI = uiCode;
+                    AppDomain.CurrentDomain.UnhandledException += (o, args) => { TriggerFatalException(args); };
+                }
             }
         }
 
