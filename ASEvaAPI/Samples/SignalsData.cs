@@ -6,11 +6,11 @@ namespace ASEva.Samples
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Single signal data
+    /// (api:app=3.0.3) Single signal data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 单个信号数据
+    /// (api:app=3.0.3) 单个信号数据
     /// </summary>
     public struct SignalData
     {
@@ -23,6 +23,17 @@ namespace ASEva.Samples
         /// 时间偏置，单位秒
         /// </summary>
         public double Offset { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Time offset synchronization status
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 时间偏置同步状态
+        /// </summary>
+        public TimeOffsetSync OffsetSync { get; set; }
+
         /// \~English
         /// <summary>
         /// Signal value
@@ -38,16 +49,19 @@ namespace ASEva.Samples
         /// Default constructor
         /// </summary>
         /// <param name="offset">Time offset, in seconds</param>
+        /// <param name="offsetSync">Time offset synchronization status</param>
         /// <param name="value">Signal value</param>
         /// \~Chinese
         /// <summary>
         /// 默认构造函数
         /// </summary>
         /// <param name="offset">时间偏置，单位秒</param>
+        /// <param name="offsetSync">时间偏置同步状态</param>
         /// <param name="value">信号值</param>
-        public SignalData(double offset, double value)
+        public SignalData(double offset, TimeOffsetSync offsetSync, double value)
         {
             Offset = offset;
+            OffsetSync = offsetSync;
             Value = value;
         }
     }

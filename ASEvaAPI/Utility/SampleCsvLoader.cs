@@ -186,7 +186,7 @@ namespace ASEva.Utility
                 if (gnssPosixIndex > 0) UInt64.TryParse(comps[gnssPosixIndex], out gnssPosix);
 
                 var sample = new GeneralSample();
-                sample.SetTime(session, offset, new IndependentTimeInfo(syncState, cpuTick, hostPosix, guestPosix, gnssPosix), offset);
+                sample.SetTime(session, offset, syncState, new IndependentTimeInfo(cpuTick, hostPosix, guestPosix, gnssPosix), offset);
                 sample.Channel = channel;
                 sample.NumberOfSignificants = comps.Length - (timeColumnIndex + 1);
                 sample.Protocol = protocol;
@@ -354,7 +354,7 @@ namespace ASEva.Utility
                     if (gnssPosixIndex > 0) UInt64.TryParse(comps[gnssPosixIndex], out gnssPosix);
 
                     var sample = new GeneralSample();
-                    sample.SetTime(session, offset, new IndependentTimeInfo(syncState, cpuTick, hostPosix, guestPosix, gnssPosix), offset);
+                    sample.SetTime(session, offset, syncState, new IndependentTimeInfo(cpuTick, hostPosix, guestPosix, gnssPosix), offset);
                     sample.Channel = channel;
                     sample.NumberOfSignificants = comps.Length - (timeColumnIndex + 1);
                     sample.Protocol = protocol;

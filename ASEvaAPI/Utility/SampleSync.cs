@@ -36,15 +36,17 @@ namespace ASEva.Utility
         /// <returns>需要保留返回false，否则返回true</returns>
         static public bool Sync(double timeline, DateTime session, List<List<Sample>> sampleLists, out List<Sample> outputs)
         {
-            bool pass = false;
-            bool disc = true;
+            var sessionID = SessionIdentifier.FromDateTime(session);
+
+            bool early = false;
+            bool late = true;
             outputs = new List<Sample>();
 
             foreach (var list in sampleLists)
             {
-                disc &= (list.Count == 0 || Sample.IsOutRangeLower(list, timeline));  //所有list均为disc 返回true
+                late &= list.Count == 0 || Sample.IsOutRangeLower(list, timeline);  // 所有list均为late则返回true
             }
-            if (disc)
+            if (late)
             {
                 foreach (var dummy in sampleLists)
                 {
@@ -55,9 +57,9 @@ namespace ASEva.Utility
 
             foreach (var list in sampleLists)
             {
-                pass |= (Sample.IsOutRangeUpper(list, timeline));  //只要有一个list为pass 返回false
+                early |= Sample.IsOutRangeUpper(list, timeline);  // 只要有一个list为early则返回false
             }
-            if (pass) return false;
+            if (early) return false;
 
             foreach (var list in sampleLists)
             {
@@ -65,7 +67,7 @@ namespace ASEva.Utility
                 {
                     var s = Sample.SearchAndInterpolate(list, timeline);
 
-                    if (s == null || s.Base != session) outputs.Add(null);
+                    if (s == null || s.Session != sessionID) outputs.Add(null);
                     else outputs.Add(s);
                 }
                 else if (Sample.IsInRange(list, timeline) && list.Count != 0 && !list.First().SupportInterpolation())
