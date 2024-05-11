@@ -31,7 +31,7 @@ namespace ASEva.UIMonoMac
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 7, 5, 0); // Update log / 更新记录: 支持App.Run新接口
+            return new Version(1, 7, 5, 1); // Update log / 更新记录: 修正SimpleTreeView偶尔崩溃问题
         }
     }
 }
