@@ -1574,9 +1574,7 @@ namespace ExampleLibrary
                 FractionUnit = Math.PI,
                 FractionUnitSymbol = "π",
                 Minimum = 0,
-                Maximum = 2 * Math.PI,
-                StartAngle = 0,
-                EndAngle = 359.999,
+                Maximum = 2 * Math.PI
             });
 
             model.Axes.Add(new MagnitudeAxis
@@ -1694,9 +1692,7 @@ namespace ExampleLibrary
                 FractionUnit = Math.PI,
                 FractionUnitSymbol = "π",
                 Minimum = 0,
-                Maximum = 2 * Math.PI,
-                StartAngle = 0,
-                EndAngle = 359.999,
+                Maximum = 2 * Math.PI
             });
 
             model.Axes.Add(new MagnitudeAxis

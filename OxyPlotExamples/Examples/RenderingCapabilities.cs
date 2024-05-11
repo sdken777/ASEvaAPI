@@ -69,12 +69,12 @@ namespace ExampleLibrary
                 double y = 20 - D;
 
                 rc.DrawText(new ScreenPoint(X, y += D), "Default font", OxyColors.Black, null, FontSize);
-                // rc.DrawText(new ScreenPoint(X, y += D), "Helvetica", OxyColors.Black, "Helvetica", FontSize);
-                // rc.DrawText(new ScreenPoint(X, y += D), "Arial", OxyColors.Black, "Arial", FontSize);
-                // rc.DrawText(new ScreenPoint(X, y += D), "Courier", OxyColors.Black, "Courier", FontSize);
-                // rc.DrawText(new ScreenPoint(X, y += D), "Courier New", OxyColors.Black, "Courier New", FontSize);
-                // rc.DrawText(new ScreenPoint(X, y += D), "Times", OxyColors.Black, "Times", FontSize);
-                // rc.DrawText(new ScreenPoint(X, y + D), "Times New Roman", OxyColors.Black, "Times New Roman", FontSize);
+                rc.DrawText(new ScreenPoint(X, y += D), "Helvetica", OxyColors.Black, "Helvetica", FontSize);
+                rc.DrawText(new ScreenPoint(X, y += D), "Arial", OxyColors.Black, "Arial", FontSize);
+                rc.DrawText(new ScreenPoint(X, y += D), "Courier", OxyColors.Black, "Courier", FontSize);
+                rc.DrawText(new ScreenPoint(X, y += D), "Courier New", OxyColors.Black, "Courier New", FontSize);
+                rc.DrawText(new ScreenPoint(X, y += D), "Times", OxyColors.Black, "Times", FontSize);
+                rc.DrawText(new ScreenPoint(X, y + D), "Times New Roman", OxyColors.Black, "Times New Roman", FontSize);
             }));
             return model;
         }
