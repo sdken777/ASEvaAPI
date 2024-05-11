@@ -324,6 +324,10 @@
     <en>Sub item {0}</en>
     <ch>子菜单项{0}</ch>
   </t>
+  <t id="plot-group-title">
+    <en>Plot Controls</en>
+    <ch>图表控件</ch>
+  </t>
   <t id="reserved">
     <en>Reserved</en>
     <ch>保留</ch>

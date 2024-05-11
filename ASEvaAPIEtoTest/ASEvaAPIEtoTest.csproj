@@ -30,6 +30,15 @@
     <Reference Include="SkiaSharp">
       <HintPath>..\bin64\SkiaSharp.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot">
+      <HintPath>..\bin64\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Eto">
+      <HintPath>..\bin64\OxyPlot.Eto.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlotExamples">
+      <HintPath>..\bin64\OxyPlotExamples.dll</HintPath>
+    </Reference>
   </ItemGroup>
   
 </Project>
