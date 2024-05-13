@@ -43,12 +43,7 @@ namespace ASEvaAPIEtoTest
             treeView.SelectedItemChanged += delegate
             {
                 var selected = treeView.GetSelectedKey();
-                if (selected is ExampleInfo)
-                {
-                    var model = (selected as ExampleInfo).PlotModel;
-                    model.DefaultFont = model.TitleFont = model.SubtitleFont = App.DefaultFont().FamilyName;
-                    plotView.Model = model;
-                }
+                if (selected is ExampleInfo) plotView.Model = (selected as ExampleInfo).PlotModel;
             };
 
             treeView.SelectItem(targetKey);

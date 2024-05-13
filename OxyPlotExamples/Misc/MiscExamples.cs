@@ -293,7 +293,9 @@ namespace ExampleLibrary
                 });
 
             // Read the train schedule from a .csv resource
-            using (var reader = new StreamReader(GetResourceStream("Bergensbanen.csv")))
+            var assembly = typeof(MiscExamples).GetTypeInfo().Assembly;
+            using (var reader = new StreamReader(assembly.GetManifestResourceStream("Bergensbanen.csv")))
+            // using (var reader = new StreamReader(GetResourceStream("Bergensbanen.csv")))
             {
                 string header = reader.ReadLine();
                 var headerFields = header.Split(';');
