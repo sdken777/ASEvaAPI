@@ -17,16 +17,8 @@ namespace OxyPlot.GtkSharp
     using Point = Cairo.Point;
     using Rectangle = Cairo.Rectangle;
 
-    /// <summary>
-    /// Extension method used to convert to/from Windows/Windows.Media classes.
-    /// </summary>
-    public static class ConverterExtensions
+    static class ConverterExtensions
     {
-        /// <summary>
-        /// Converts an <see cref="OxyPlot.LineJoin" /> to a <see cref="LineJoin" />.
-        /// </summary>
-        /// <param name="lineJoin">The <see cref="OxyPlot.LineJoin" /> to convert.</param>
-        /// <returns>The converted value.</returns>
         public static LineJoin ToLineJoin(this OxyPlot.LineJoin lineJoin)
         {
             switch (lineJoin)
@@ -40,22 +32,11 @@ namespace OxyPlot.GtkSharp
             }
         }
 
-        /// <summary>
-        /// Sets the source color for the Cairo context.
-        /// </summary>
-        /// <param name="g">The Cairo context.</param>
-        /// <param name="c">The color.</param>
         public static void SetSourceColor(this Context g, OxyColor c)
         {
             g.SetSourceRGBA(c.R / 256.0, c.G / 256.0, c.B / 256.0, c.A / 256.0);
         }
 
-        /// <summary>
-        /// Converts a <see cref="ScreenPoint" /> to a Cairo <see cref="PointD" />.
-        /// </summary>
-        /// <param name="pt">The point to convert.</param>
-        /// <param name="aliased">Alias if set to <c>true</c>.</param>
-        /// <returns>The converted point.</returns>
         public static PointD ToPointD(this ScreenPoint pt, bool aliased)
         {
             if (aliased)
@@ -66,12 +47,6 @@ namespace OxyPlot.GtkSharp
             return new PointD(pt.X, pt.Y);
         }
 
-        /// <summary>
-        /// Converts an <see cref="OxyRect" /> to a <see cref="Cairo.Rectangle" />.
-        /// </summary>
-        /// <param name="r">The rectangle.</param>
-        /// <param name="aliased">Use pixel alignment if set to <c>true</c>.</param>
-        /// <returns>The converted rectangle.</returns>
         public static Rectangle ToRect(this OxyRect r, bool aliased = false)
         {
             if (aliased)
@@ -86,12 +61,6 @@ namespace OxyPlot.GtkSharp
             return new Rectangle(r.Left, r.Top, r.Width, r.Height);
         }
 
-        /// <summary>
-        /// Converts an <see cref="Gdk.Rectangle" /> to a <see cref="OxyRect" />.
-        /// </summary>
-        /// <param name="r">The rectangle.</param>
-        /// <param name="aliased">Use pixel alignment if set to <c>true</c>.</param>
-        /// <returns>The converted rectangle.</returns>
         public static OxyRect ToOxyRect(this Gdk.Rectangle r, bool aliased = false)
         {
             if (aliased)
@@ -106,21 +75,11 @@ namespace OxyPlot.GtkSharp
             return new OxyRect(r.Left, r.Top, r.Width, r.Height);
         }
 
-        /// <summary>
-        /// Converts a point to a ScreenPoint.
-        /// </summary>
-        /// <param name="pt">The point.</param>
-        /// <returns>A screen point.</returns>
         public static ScreenPoint ToScreenPoint(this Point pt)
         {
             return new ScreenPoint(pt.X, pt.Y);
         }
 
-        /// <summary>
-        /// Creates the mouse down event arguments.
-        /// </summary>
-        /// <param name="e">The instance containing the event data.</param>
-        /// <returns>Mouse event arguments.</returns>
         public static OxyMouseDownEventArgs ToMouseDownEventArgs(this EventButton e)
         {
             return new OxyMouseDownEventArgs
@@ -132,11 +91,6 @@ namespace OxyPlot.GtkSharp
             };
         }
 
-        /// <summary>
-        /// Creates the mouse up event arguments.
-        /// </summary>
-        /// <param name="e">The instance containing the event data.</param>
-        /// <returns>Mouse event arguments.</returns>
         public static OxyMouseEventArgs ToMouseUpEventArgs(this EventButton e)
         {
             return new OxyMouseEventArgs
@@ -146,11 +100,6 @@ namespace OxyPlot.GtkSharp
             };
         }
 
-        /// <summary>
-        /// Creates the mouse event arguments.
-        /// </summary>
-        /// <param name="e">The motion event args.</param>
-        /// <returns>Mouse event arguments.</returns>
         public static OxyMouseEventArgs ToMouseEventArgs(this EventMotion e)
         {
             return new OxyMouseEventArgs
@@ -160,11 +109,6 @@ namespace OxyPlot.GtkSharp
             };
         }
 
-        /// <summary>
-        /// Creates the mouse event arguments for an enter/leave event.
-        /// </summary>
-        /// <param name="e">The event crossing args.</param>
-        /// <returns>Mouse event arguments.</returns>
         public static OxyMouseEventArgs ToMouseEventArgs(this EventCrossing e)
         {
             return new OxyMouseEventArgs
@@ -174,21 +118,11 @@ namespace OxyPlot.GtkSharp
             };
         }
 
-        /// <summary>
-        /// Creates the key event arguments.
-        /// </summary>
-        /// <param name="e">The key event args.</param>
-        /// <returns>Key event arguments.</returns>
         public static OxyKeyEventArgs ToKeyEventArgs(this EventKey e)
         {
             return new OxyKeyEventArgs { ModifierKeys = GetModifiers(e.State), Key = e.Key.Convert() };
         }
 
-        /// <summary>
-        /// Converts the specified key.
-        /// </summary>
-        /// <param name="k">The key to convert.</param>
-        /// <returns>The converted key.</returns>
         public static OxyKey Convert(this Key k)
         {
             switch (k)
@@ -390,11 +324,6 @@ namespace OxyPlot.GtkSharp
             }
         }
 
-        /// <summary>
-        /// Converts the changed button.
-        /// </summary>
-        /// <param name="e">The instance containing the event data.</param>
-        /// <returns>The mouse button.</returns>
         private static OxyMouseButton ConvertButton(EventButton e)
         {
             switch (e.Button)
@@ -414,11 +343,6 @@ namespace OxyPlot.GtkSharp
             return OxyMouseButton.Left;
         }
 
-        /// <summary>
-        /// Converts a <see cref="ModifierType" /> to a <see cref="OxyModifierKeys" />.
-        /// </summary>
-        /// <param name="state">The state.</param>
-        /// <returns>The modifier keys.</returns>
         public static OxyModifierKeys GetModifiers(ModifierType state)
         {
             var result = OxyModifierKeys.None;

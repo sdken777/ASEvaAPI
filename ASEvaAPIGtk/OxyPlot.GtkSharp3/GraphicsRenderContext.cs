@@ -19,47 +19,22 @@ namespace OxyPlot.GtkSharp
 
     using Gdk;
 
-    /// <summary>
-    /// The graphics render context.
-    /// </summary>
-    public class GraphicsRenderContext : RenderContextBase
+    class GraphicsRenderContext : RenderContextBase
     {
-        /// <summary>
-        /// The image cache.
-        /// </summary>
         private readonly Dictionary<OxyImage, Pixbuf> imageCache = new Dictionary<OxyImage, Pixbuf>();
 
-        /// <summary>
-        /// The images in use.
-        /// </summary>
         private readonly HashSet<OxyImage> imagesInUse = new HashSet<OxyImage>();
 
-        /// <summary>
-        /// The GDI+ drawing surface.
-        /// </summary>
         private Cairo.Context g;
 
 #if GTKSHARP3
-        /// <summary>
-        /// The text layout context
-        /// </summary>
         private Pango.Context c;
 #endif
 
-        /// <summary>
-        /// The number of nested clips applied to the graphics context.
-        /// </summary>
         private int clipCount;
 
-        /// <summary>
-        /// The number of nested clips applied to the graphics context.
-        /// </summary>
         public override int ClipCount => clipCount;
 
-        /// <summary>
-        /// Sets the graphics target.
-        /// </summary>
-        /// <param name="graphics">The graphics surface.</param>
         public void SetGraphicsTarget(Cairo.Context graphics)
         {
             this.g = graphics;
@@ -69,17 +44,6 @@ namespace OxyPlot.GtkSharp
 #endif
         }
 
-        /// <summary>
-        /// Draws an ellipse.
-        /// </summary>
-        /// <param name="rect">The rectangle.</param>
-        /// <param name="fill">The fill color.</param>
-        /// <param name="stroke">The stroke color.</param>
-        /// <param name="thickness">The thickness.</param>
-        /// <param name="edgeRenderingMode">The edge rendering mode.</param>
-        /// <remarks>
-        /// todo: implement edge rendering modes
-        /// </remarks>
         public override void DrawEllipse(OxyRect rect, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
         {
             // center of ellipse
@@ -154,16 +118,6 @@ namespace OxyPlot.GtkSharp
             }
         }
 
-        /// <summary>
-        /// Draws the polygon.
-        /// </summary>
-        /// <param name="points">The points.</param>
-        /// <param name="fill">The fill.</param>
-        /// <param name="stroke">The stroke.</param>
-        /// <param name="thickness">The thickness.</param>
-        /// <param name="renderingMode">The edge rendering mode.</param>
-        /// <param name="dashArray">The dash array.</param>
-        /// <param name="lineJoin">The line join.</param>
         public override void DrawPolygon(
             IList<ScreenPoint> points,
             OxyColor fill,
@@ -222,14 +176,6 @@ namespace OxyPlot.GtkSharp
             }
         }
 
-        /// <summary>
-        /// Draws the rectangle.
-        /// </summary>
-        /// <param name="rect">The rectangle.</param>
-        /// <param name="fill">The fill color.</param>
-        /// <param name="stroke">The stroke color.</param>
-        /// <param name="thickness">The stroke thickness.</param>
-        /// <param name="renderingMode">The edge rendering mode.</param>
         public override void DrawRectangle(OxyRect rect, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode renderingMode)
         {
             bool aliased = !ShouldUseAntiAliasingForRect(renderingMode);
@@ -253,19 +199,6 @@ namespace OxyPlot.GtkSharp
             }
         }
 
-        /// <summary>
-        /// Draws the text.
-        /// </summary>
-        /// <param name="p">The p.</param>
-        /// <param name="text">The text.</param>
-        /// <param name="fill">The fill color.</param>
-        /// <param name="fontFamily">The font family.</param>
-        /// <param name="fontSize">Size of the font.</param>
-        /// <param name="fontWeight">The font weight.</param>
-        /// <param name="rotate">The rotation angle.</param>
-        /// <param name="halign">The horizontal alignment.</param>
-        /// <param name="valign">The vertical alignment.</param>
-        /// <param name="maxSize">The maximum size of the text.</param>
         public override void DrawText(
             ScreenPoint p,
             string text,
@@ -340,14 +273,6 @@ namespace OxyPlot.GtkSharp
             this.g.Restore();
         }
 
-        /// <summary>
-        /// The measure text.
-        /// </summary>
-        /// <param name="text">The text.</param>
-        /// <param name="fontFamily">The font family.</param>
-        /// <param name="fontSize">The font size.</param>
-        /// <param name="fontWeight">The font weight.</param>
-        /// <returns>The size of the text.</returns>
         public override OxySize MeasureText(string text, string fontFamily, double fontSize, double fontWeight)
         {
             if (text == null)
@@ -374,9 +299,6 @@ namespace OxyPlot.GtkSharp
             return new OxySize(logicalRect.Width / Pango.Scale.PangoScale, logicalRect.Height / Pango.Scale.PangoScale);
         }
 
-        /// <summary>
-        /// The clean up.
-        /// </summary>
         public override void CleanUp()
         {
             var imagesToRelease = this.imageCache.Keys.Where(i => !this.imagesInUse.Contains(i)).ToList();
@@ -393,20 +315,6 @@ namespace OxyPlot.GtkSharp
 #endif
         }
 
-        /// <summary>
-        /// Draws the image.
-        /// </summary>
-        /// <param name="source">The source.</param>
-        /// <param name="srcX">The source executable.</param>
-        /// <param name="srcY">The source asynchronous.</param>
-        /// <param name="srcWidth">Width of the source.</param>
-        /// <param name="srcHeight">Height of the source.</param>
-        /// <param name="x">The executable.</param>
-        /// <param name="y">The asynchronous.</param>
-        /// <param name="w">The forward.</param>
-        /// <param name="h">The authentication.</param>
-        /// <param name="opacity">The opacity.</param>
-        /// <param name="interpolate">Interpolate if set to <c>true</c>.</param>
         public override void DrawImage(
             OxyImage source,
             double srcX,
@@ -471,11 +379,6 @@ namespace OxyPlot.GtkSharp
             }
         }
 
-        /// <summary>
-        /// Sets the clip rectangle.
-        /// </summary>
-        /// <param name="rect">The clip rectangle.</param>
-        /// <returns>True if the clip rectangle was set.</returns>
         public override void PushClip(OxyRect rect)
         {
             clipCount++;
@@ -484,9 +387,6 @@ namespace OxyPlot.GtkSharp
             this.g.Clip();
         }
 
-        /// <summary>
-        /// Resets the clip rectangle.
-        /// </summary>
         public override void PopClip()
         {
             if (clipCount < 1)
@@ -495,11 +395,6 @@ namespace OxyPlot.GtkSharp
             this.g.Restore();
         }
 
-        /// <summary>
-        /// Gets the cached <see cref="Pixbuf" /> of the specified <see cref="OxyImage" />.
-        /// </summary>
-        /// <param name="source">The source image.</param>
-        /// <returns>The <see cref="Pixbuf" />.</returns>
         private Pixbuf GetImage(OxyImage source)
         {
             if (source == null)

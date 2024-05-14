@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIMonoMac.APIInfo">
             <summary>
-            version=1.7.5
+            version=1.8.0
             </summary>
         </member>
         <member name="M:ASEva.UIMonoMac.APIInfo.GetAPIVersion">

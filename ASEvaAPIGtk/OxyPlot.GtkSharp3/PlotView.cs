@@ -20,78 +20,36 @@ namespace OxyPlot.GtkSharp
 
     #pragma warning disable CS0612
 
-    /// <summary>
-    /// Represents a control that displays a <see cref="PlotModel" />.
-    /// </summary>
     [Serializable]
     [System.ComponentModel.ToolboxItem(true)]
-    public partial class PlotView : Layout, IPlotView
+    partial class PlotView : Layout, IPlotView
     {
-        /// <summary>
-        /// The category for the properties of this control.
-        /// </summary>
         private const string OxyPlotCategory = "OxyPlot";
 
-        /// <summary>
-        /// The invalidate lock.
-        /// </summary>
         private readonly object invalidateLock = new object();
 
-        /// <summary>
-        /// The model lock.
-        /// </summary>
         private readonly object modelLock = new object();
 
-        /// <summary>
-        /// The rendering lock.
-        /// </summary>
         private readonly object renderingLock = new object();
 
-        /// <summary>
-        /// The render context.
-        /// </summary>
         private readonly GraphicsRenderContext renderContext;
 
-        /// <summary>
-        /// The tracker label
-        /// </summary>
         [NonSerialized]
         private Gtk.Label trackerLabel = null;
 
-        /// <summary>
-        /// The current model (holding a reference to this plot view).
-        /// </summary>
         [NonSerialized]
         private PlotModel currentModel;
 
-        /// <summary>
-        /// The is model invalidated.
-        /// </summary>
         private bool isModelInvalidated;
 
-        /// <summary>
-        /// The model.
-        /// </summary>
         private PlotModel model;
 
-        /// <summary>
-        /// The update data flag.
-        /// </summary>
         private bool updateDataFlag = true;
 
-        /// <summary>
-        /// The zoom rectangle.
-        /// </summary>
         private OxyRect? zoomRectangle;
 
-        /// <summary>
-        /// The default controller
-        /// </summary>
         private IPlotController defaultController;
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PlotView" /> class.
-        /// </summary>
         public PlotView() : base(null, null)
         {
             this.renderContext = new GraphicsRenderContext();
@@ -107,9 +65,6 @@ namespace OxyPlot.GtkSharp
             this.CanFocus = true;
         }
 
-        /// <summary>
-        /// Gets or sets the model.
-        /// </summary>
         [Browsable(false)]
         [DefaultValue(null)]
         [Category(OxyPlotCategory)]
@@ -130,9 +85,6 @@ namespace OxyPlot.GtkSharp
             }
         }
 
-        /// <summary>
-        /// Gets the actual <see cref="OxyPlot.Model" /> of the control.
-        /// </summary>
         Model IView.ActualModel
         {
             get
@@ -141,9 +93,6 @@ namespace OxyPlot.GtkSharp
             }
         }
 
-        /// <summary>
-        /// Gets the actual <see cref="PlotModel" /> of the control.
-        /// </summary>
         public PlotModel ActualModel
         {
             get
@@ -152,12 +101,6 @@ namespace OxyPlot.GtkSharp
             }
         }
 
-        /// <summary>
-        /// Gets the actual controller.
-        /// </summary>
-        /// <value>
-        /// The actual <see cref="IController" />.
-        /// </value>
         IController IView.ActualController
         {
             get
@@ -166,9 +109,6 @@ namespace OxyPlot.GtkSharp
             }
         }
 
-        /// <summary>
-        /// Gets the coordinates of the client area of the view.
-        /// </summary>
         public OxyRect ClientArea
         {
             get
@@ -177,10 +117,6 @@ namespace OxyPlot.GtkSharp
             }
         }
 
-        /// <summary>
-        /// Gets the actual plot controller.
-        /// </summary>
-        /// <value>The actual plot controller.</value>
         public IPlotController ActualController
         {
             get
@@ -189,58 +125,32 @@ namespace OxyPlot.GtkSharp
             }
         }
 
-        /// <summary>
-        /// Gets or sets the plot controller.
-        /// </summary>
-        /// <value>The controller.</value>
         public IPlotController Controller { get; set; }
 
-        /// <summary>
-        /// Gets or sets the pan cursor.
-        /// </summary>
         [Category(OxyPlotCategory)]
         public Cursor PanCursor { get; set; }
 
-        /// <summary>
-        /// Gets or sets the horizontal zoom cursor.
-        /// </summary>
         [Category(OxyPlotCategory)]
         public Cursor ZoomHorizontalCursor { get; set; }
 
-        /// <summary>
-        /// Gets or sets the rectangle zoom cursor.
-        /// </summary>
         [Category(OxyPlotCategory)]
         public Cursor ZoomRectangleCursor { get; set; }
 
-        /// <summary>
-        /// Gets or sets the vertical zoom cursor.
-        /// </summary>
         [Category(OxyPlotCategory)]
         public Cursor ZoomVerticalCursor { get; set; }
 
-        /// <summary>
-        /// Hides the tracker.
-        /// </summary>
         public void HideTracker()
         {
             if (this.trackerLabel != null)
                 this.trackerLabel.Parent.Visible = false;
         }
 
-        /// <summary>
-        /// Hides the zoom rectangle.
-        /// </summary>
         public void HideZoomRectangle()
         {
             this.zoomRectangle = null;
             this.QueueDraw();
         }
 
-        /// <summary>
-        /// Invalidates the plot (not blocking the UI thread)
-        /// </summary>
-        /// <param name="updateData">if set to <c>true</c>, all data collections will be updated.</param>
         public void InvalidatePlot(bool updateData)
         {
             lock (this.invalidateLock)
@@ -252,9 +162,6 @@ namespace OxyPlot.GtkSharp
             this.QueueDraw();
         }
 
-        /// <summary>
-        /// Called when the Model property has been changed.
-        /// </summary>
         public void OnModelChanged()
         {
             lock (this.modelLock)
@@ -275,10 +182,6 @@ namespace OxyPlot.GtkSharp
             this.InvalidatePlot(true);
         }
 
-        /// <summary>
-        /// Shows the tracker.
-        /// </summary>
-        /// <param name="data">The data.</param>
         public void ShowTracker(TrackerHitResult data)
         {
             if (this.trackerLabel == null)
@@ -304,20 +207,12 @@ namespace OxyPlot.GtkSharp
             this.Move(trackerLabel.Parent, xPos, yPos);
         }
 
-        /// <summary>
-        /// Shows the zoom rectangle.
-        /// </summary>
-        /// <param name="rectangle">The rectangle.</param>
         public void ShowZoomRectangle(OxyRect rectangle)
         {
             this.zoomRectangle = rectangle;
             this.QueueDraw();
         }
 
-        /// <summary>
-        /// Sets the clipboard text.
-        /// </summary>
-        /// <param name="text">The text.</param>
         public void SetClipboardText(string text)
         {
             try
@@ -333,11 +228,6 @@ namespace OxyPlot.GtkSharp
             }
         }
 
-        /// <summary>
-        /// Called when the mouse button is pressed.
-        /// </summary>
-        /// <param name="e">An instance that contains the event data.</param>
-        /// <returns><c>true</c> if the event was handled.</returns>
         protected override bool OnButtonPressEvent(EventButton e)
         {
             this.GrabFocus();
@@ -345,46 +235,21 @@ namespace OxyPlot.GtkSharp
             return this.ActualController.HandleMouseDown(this, e.ToMouseDownEventArgs());
         }
 
-        /// <summary>
-        /// Called on mouse move events.
-        /// </summary>
-        /// <param name="e">An instance that contains the event data.</param>
-        /// <returns><c>true</c> if the event was handled.</returns>
         protected override bool OnMotionNotifyEvent(EventMotion e)
         {
             return this.ActualController.HandleMouseMove(this, e.ToMouseEventArgs());
         }
 
-        /// <summary>
-        /// Called when the mouse button is released.
-        /// </summary>
-        /// <param name="e">An instance that contains the event data.</param>
-        /// <returns><c>true</c> if the event was handled.</returns>
         protected override bool OnButtonReleaseEvent(EventButton e)
         {
             return this.ActualController.HandleMouseUp(this, e.ToMouseUpEventArgs());
         }
 
-        /// <summary>
-        /// Called when the mouse wheel is scrolled.
-        /// </summary>
-        /// <param name="e">An instance that contains the event data.</param>
-        /// <returns><c>true</c> if the event was handled.</returns>
-        /// <remarks>
-        /// The way that scroll direction is determined is different between
-        /// gtk2 and gtk3, hence the need for version-specific imlementations of
-        /// GetMouseWheelEventArgs(Gdk.EventScroll) function.
-        /// </remarks>
         protected override bool OnScrollEvent(EventScroll e)
         {
             return this.ActualController.HandleMouseWheel(this, GetMouseWheelEventArgs(e));
         }
 
-        /// <summary>
-        /// Called when the mouse enters the widget.
-        /// </summary>
-        /// <param name="e">An instance that contains the event data.</param>
-        /// <returns><c>true</c> if the event was handled.</returns>
         protected override bool OnEnterNotifyEvent(EventCrossing e)
         {
             // If mouse has entered from an inferior window (ie the tracker label),
@@ -396,11 +261,6 @@ namespace OxyPlot.GtkSharp
             return this.ActualController.HandleMouseEnter(this, e.ToMouseEventArgs());
         }
 
-        /// <summary>
-        /// Called when the mouse leaves the widget.
-        /// </summary>
-        /// <param name="e">An instance that contains the event data.</param>
-        /// <returns><c>true</c> if the event was handled.</returns>
         protected override bool OnLeaveNotifyEvent(EventCrossing e)
         {
             // If mouse has left via an inferior window (ie the tracker label),
@@ -412,20 +272,11 @@ namespace OxyPlot.GtkSharp
             return this.ActualController.HandleMouseLeave(this, e.ToMouseEventArgs());
         }
 
-        /// <summary>
-        /// Called on KeyPress event.
-        /// </summary>
-        /// <param name="e">An instance that contains the event data.</param>
-        /// <returns>True if event was handled?</returns>
         protected override bool OnKeyPressEvent(EventKey e)
         {
             return this.ActualController.HandleKeyDown(this, e.ToKeyEventArgs());
         }
 
-        /// <summary>
-        /// Draws the plot to a cairo context within the specified bounds.
-        /// </summary>
-        /// <param name="cr">The cairo context to use for drawing.</param>
         void DrawPlot (Cairo.Context cr)
         {
             try

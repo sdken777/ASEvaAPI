@@ -93,6 +93,7 @@ namespace ASEva.UIMonoMac
             TextTableView.Factory = new TextTableViewFactoryMonoMac();
             SimpleTreeView.Factory = new SimpleTreeViewFactoryMonoMac();
             TopMostExtensions.QueryInterface = new TopMostHandlerMonoMac();
+            OxyPlotView.Factory = new OxyPlotViewFactoryMonoMac();
 
             uiBackend = null;
             webViewBackend = "webkit2";

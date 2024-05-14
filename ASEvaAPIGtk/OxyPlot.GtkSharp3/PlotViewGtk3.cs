@@ -6,12 +6,8 @@
 
 namespace OxyPlot.GtkSharp
 {
-    public partial class PlotView
+    partial class PlotView
     {
-        /// <summary>
-        /// Sets the cursor type.
-        /// </summary>
-        /// <param name="cursorType">The cursor type.</param>
         public void SetCursorType(OxyPlot.CursorType cursorType)
         {
             switch (cursorType)
@@ -33,23 +29,13 @@ namespace OxyPlot.GtkSharp
                     break;
             }
         }
-        
-        /// <summary>
-                 /// Called when the view is drawn.
-                 /// </summary>
-                 /// <param name="cr">The drawing context.</param>
-                 /// <returns><c>true</c> if handled, <c>false</c> otherwise.</returns>
+
         protected override bool OnDrawn (Cairo.Context cr)
         {
             this.DrawPlot (cr);
             return base.OnDrawn (cr);
         }
 
-        /// <summary>
-        /// Creates the mouse wheel event arguments.
-        /// </summary>
-        /// <param name="e">The scroll event args.</param>
-        /// <returns>Mouse event arguments.</returns>
         private static OxyMouseWheelEventArgs GetMouseWheelEventArgs(Gdk.EventScroll e)
         {
             int delta;
