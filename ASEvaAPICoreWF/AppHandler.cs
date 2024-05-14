@@ -68,6 +68,7 @@ namespace ASEva.UICoreWF
             IconExtensions.FinalFrameOnly = true;
             OverlayLayout.ExpandControlSize = true;
             FullScreenExtensions.Handler = new FullScreenHandler();
+            OxyPlotView.Factory = new OxyPlotViewFactoryCoreWF();
 
             // CHECK: 修正application.Run之前不触发MouseDown等事件
             System.Windows.Forms.Application.AddMessageFilter(TempBubbleEventFilter);

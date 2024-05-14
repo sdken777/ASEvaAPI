@@ -29,6 +29,9 @@
     <Compile Update="Graphic\OpenGLControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="HandlerFreestyle\OxyPlotViewCoreWF.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="HandlerFreestyle\SimpleTreeViewBackendCoreWF.cs">
       <SubType>Component</SubType>
     </Compile>

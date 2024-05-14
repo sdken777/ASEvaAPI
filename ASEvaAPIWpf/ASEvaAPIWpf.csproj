@@ -44,6 +44,15 @@
     <Reference Include="SkiaSharp">
       <HintPath>..\bin64\SkiaSharp.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot">
+      <HintPath>..\bin64\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf">
+      <HintPath>..\bin64\OxyPlot.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Wpf.Shared">
+      <HintPath>..\bin64\OxyPlot.Wpf.Shared.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
