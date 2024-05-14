@@ -634,7 +634,13 @@ namespace ASEva.UIEto
                 if (application != null)
                 {
                     runningUI = uiCode;
+
                     AppDomain.CurrentDomain.UnhandledException += (o, args) => { TriggerFatalException(args); };
+
+                    FuncManager.Register("GetEtoAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
+                    FuncManager.Register("GetEtoLibVersion", delegate { return APIInfo.GetEtoLibVersion(); });
+                    FuncManager.Register("GetEtoAPIThirdPartyNotices", delegate { return APIInfo.GetThirdPartyNotices(); });
+                    FuncManager.Register("GetUIBackendAPIThirdPartyNotices", delegate { return handler.GetThirdPartyNotices(); });
                 }
             }
         }

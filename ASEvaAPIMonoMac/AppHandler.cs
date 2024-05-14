@@ -95,6 +95,8 @@ namespace ASEva.UIMonoMac
             TopMostExtensions.QueryInterface = new TopMostHandlerMonoMac();
             OxyPlotView.Factory = new OxyPlotViewFactoryMonoMac();
 
+            FuncManager.Register("GetUIBackendAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
+
             uiBackend = null;
             webViewBackend = "webkit2";
             return app;

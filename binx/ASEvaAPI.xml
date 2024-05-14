@@ -4286,7 +4286,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.16.4
+            version=2.16.5
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -6003,6 +6003,16 @@
             \~Chinese
             <summary>
             事件session记录状态
+            </summary>
+        </member>
+        <member name="T:ASEva.FuncManager">
+            \~English
+            <summary>
+            (api:app=2.16.5) For registering and running any functions
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=2.16.5) 用于注册和运行任意函数
             </summary>
         </member>
         <member name="T:ASEva.GraphType">
