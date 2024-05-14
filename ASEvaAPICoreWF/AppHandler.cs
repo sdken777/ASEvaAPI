@@ -68,9 +68,17 @@ namespace ASEva.UICoreWF
             IconExtensions.FinalFrameOnly = true;
             OverlayLayout.ExpandControlSize = true;
             FullScreenExtensions.Handler = new FullScreenHandler();
+            OxyPlotView.Factory = new OxyPlotViewFactoryCoreWF();
 
             // CHECK: 修正application.Run之前不触发MouseDown等事件
             System.Windows.Forms.Application.AddMessageFilter(TempBubbleEventFilter);
+
+            FuncManager.Register("GetUIBackendAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
+            FuncManager.Register("RegisterLegacyValueGraph", delegate { Agency.RegisterGraphPanel(GraphType.SingleValue, getLegacyStyleName(), typeof(ValueGraph)); return null; });
+            FuncManager.Register("RegisterLegacyHistLineGraph", delegate { Agency.RegisterGraphPanel(GraphType.HistAndLine, getLegacyStyleName(), typeof(HistLineGraph)); return null; });
+            FuncManager.Register("RegisterLegacyScatterPointsGraph", delegate { Agency.RegisterGraphPanel(GraphType.ScatterPoints, getLegacyStyleName(), typeof(ScatterPointsGraph)); return null; });
+            FuncManager.Register("RegisterLegacyMatrixTableGraph", delegate { Agency.RegisterGraphPanel(GraphType.MatrixTable, getLegacyStyleName(), typeof(MatrixTableGraph)); return null; });
+            FuncManager.Register("RegisterLegacyLabelTableGraph", delegate { Agency.RegisterGraphPanel(GraphType.LabelTable, getLegacyStyleName(), typeof(LabelTableGraph)); return null; });
 
             uiBackend = null;
             webViewBackend = "webview2";
@@ -166,6 +174,12 @@ namespace ASEva.UICoreWF
         public bool ShouldPassParent()
         {
             return false;
+        }
+
+        private String getLegacyStyleName()
+        {
+            var lang = Agency.GetAppLanguage();
+            return lang != null && lang == "ch" ? "旧图表" : "Legacy Graph";
         }
 
         private BubbleEventFilter TempBubbleEventFilter
