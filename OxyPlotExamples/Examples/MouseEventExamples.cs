@@ -212,6 +212,7 @@ namespace ExampleLibrary
             model.Series.Add(new FunctionSeries(x => Math.Sin(x / 4) * Math.Acos(Math.Sin(x)), 0, Math.PI * 8, 2000, "sin(x/4)*acos(sin(x))"));
 
             ArrowAnnotation tmp = null;
+            bool added = false;
 
             // Add handlers to the PlotModel's mouse events
             model.MouseDown += (s, e) =>
@@ -221,7 +222,6 @@ namespace ExampleLibrary
                     // Create a new arrow annotation
                     tmp = new ArrowAnnotation();
                     tmp.StartPoint = tmp.EndPoint = xaxis.InverseTransform(e.Position.X, e.Position.Y, yaxis);
-                    model.Annotations.Add(tmp);
                     e.Handled = true;
                 }
             };
@@ -234,6 +234,11 @@ namespace ExampleLibrary
                     // Modify the end point
                     tmp.EndPoint = xaxis.InverseTransform(e.Position.X, e.Position.Y, yaxis);
                     tmp.Text = string.Format("Y = {0:0.###}", tmp.EndPoint.Y);
+                    if (!added)
+                    {
+                        model.Annotations.Add(tmp);
+                        added = true;
+                    }
 
                     // Redraw the plot
                     model.InvalidatePlot(false);
@@ -246,6 +251,7 @@ namespace ExampleLibrary
                     if (tmp != null)
                     {
                         tmp = null;
+                        added = false;
                         e.Handled = true;
                     }
                 };
