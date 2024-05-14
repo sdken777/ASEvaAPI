@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using ASEva.UIEto;
 using Eto.Forms;
-using OxyPlot.Eto;
 using ExampleLibrary;
 
 namespace ASEvaAPIEtoTest
@@ -13,7 +12,7 @@ namespace ASEvaAPIEtoTest
         {
             var mainLayout = groupBox.SetContentAsRowLayout(8, 8, VerticalAlignment.Stretch);
             var treeView = mainLayout.AddControl(new SimpleTreeView(), false, 200) as SimpleTreeView;
-            var plotView = mainLayout.AddControl(new PlotView(), true) as PlotView;
+            var plotView = mainLayout.AddControl(new OxyPlotView(), true) as OxyPlotView;
 
             var exampleTable = new Dictionary<String, List<ExampleInfo>>();
             foreach (var example in Examples.GetList())
@@ -43,7 +42,7 @@ namespace ASEvaAPIEtoTest
             treeView.SelectedItemChanged += delegate
             {
                 var selected = treeView.GetSelectedKey();
-                if (selected is ExampleInfo) plotView.Model = (selected as ExampleInfo).PlotModel;
+                if (selected is ExampleInfo) plotView.SetModel((selected as ExampleInfo).PlotModel);
             };
 
             treeView.SelectItem(targetKey);

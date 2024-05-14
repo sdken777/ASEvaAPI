@@ -1,8 +1,8 @@
 ﻿/*! \mainpage
  * \~English This library contains the APIs for Eto.Forms. See ASEva.UIEto for details. \n
  * \~Chinese 此类库为ASEva-API中基于Eto.Forms的部分。详见 ASEva.UIEto \n
- * \~English This document corresponds to API version: 2.14.4 \n\n
- * \~Chinese 本文档对应API版本：2.14.4 \n\n
+ * \~English This document corresponds to API version: 2.15.0 \n\n
+ * \~Chinese 本文档对应API版本：2.15.0 \n\n
  * 
  * \~English Eto.Forms official repository: https://github.com/picoe/Eto \n
  * \~Chinese Eto.Forms官方仓库: https://github.com/picoe/Eto \n
@@ -19,7 +19,7 @@ using ASEva.Utility;
 namespace ASEva.UIEto
 {
     /// <summary>
-    /// version=2.14.4
+    /// version=2.15.0
     /// </summary>
     public class APIInfo
     {
@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 14, 4, 3); // Update log / 更新记录: 修正SimpleTreeView根节点未排序问题
+            return new Version(2, 15, 0, 0); // Update log / 更新记录: 新增OxyPlotView
         }
 
         /// \~English
@@ -78,6 +78,7 @@ namespace ASEva.UIEto
             table["Eto"] = ResourceLoader.LoadText("Eto.LICENSE");
             table["SharpGL"] = ResourceLoader.LoadText("SharpGL.LICENSE");
             table["SkiaSharp"] = ResourceLoader.LoadText("SkiaSharp.LICENSE");
+            table["OxyPlot"] = ResourceLoader.LoadText("OxyPlot.LICENSE");
             return table;
         }
     }
