@@ -178,8 +178,7 @@ namespace ASEva.UICoreWF
 
         private String getLegacyStyleName()
         {
-            var lang = Agency.GetAppLanguage();
-            return lang != null && lang == "ch" ? "旧图表" : "Legacy Graph";
+            return Agency.GetAppLanguage() == Language.Chinese ? "旧图表" : "Legacy Graph";
         }
 
         private BubbleEventFilter TempBubbleEventFilter

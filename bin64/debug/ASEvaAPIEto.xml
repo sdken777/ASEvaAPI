@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=3.0.0
+            version=3.0.3
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -67,19 +67,35 @@
             </summary>
             <returns>是否成功</returns>
         </member>
-        <member name="M:ASEva.UIEto.App.Init(System.String)">
+        <member name="M:ASEva.UIEto.App.Init(System.String,System.Boolean)">
             \~English
             <summary>
-            Initialize application with the specified UI framework
+            (app:eto=3.0.2) Initialize application with the specified UI framework
             </summary>
-            <param name="uiCode">UI framework code</param>
+            <param name="uiCode">UI framework code, set to null to use default framework</param>
+            <param name="attach">Set this argument to true if not invoking ASEva.UIEto.App.Run to execute the GUI main loop</param>
             <returns>Whether initialization is successfull</returns>
             \~Chinese
             <summary>
-            以指定UI框架初始化应用程序
+            (app:eto=3.0.2) 以指定UI框架初始化应用程序
             </summary>
-            <param name="uiCode">UI框架代号</param>
+            <param name="uiCode">UI框架代号，设置为空则使用默认框架</param>
+            <param name="attach">若不调用 ASEva.UIEto.App.Run 执行界面主循环，则设置为true</param>
             <returns>是否成功</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.InitGPUOptions(System.Boolean,System.Boolean)">
+            \~English
+            <summary>
+            (api:app=3.0.1) Initialize GPU rendering options (Only the first call is valid)
+            </summary>
+            <param name="renderingDisabled">Whether to disable GPU rendering</param>
+            <param name="onscreenRenderingEnabled">Whether to enable GPU onscreen rendering (If renderingDisabled is true, this setting is invalid)</param>
+            \~Chinese
+            <summary>
+            (api:app=3.0.1) 初始化GPU渲染选项，仅第一次调用有效
+            </summary>
+            <param name="renderingDisabled">是否禁用GPU渲染</param>
+            <param name="onscreenRenderingEnabled">是否启用GPU在屏渲染，若renderingDisabled为true则此设定无效</param>
         </member>
         <member name="M:ASEva.UIEto.App.Run(Eto.Forms.Form)">
             \~English
@@ -3844,6 +3860,38 @@
             更新控件位置（一般在手动修改控件大小后调用）
             </summary>
             <param name="control">控件</param>
+        </member>
+        <member name="T:ASEva.UIEto.OxyPlotView">
+            \~English
+            <summary>
+            (api:eto=3.0.4) OxyPlot graph control
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.0.4) OxyPlot图表控件
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.OxyPlotView.#ctor">
+            \~English
+            <summary>
+            Constructor
+            </summary>
+            \~Chinese
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.OxyPlotView.SetModel(OxyPlot.PlotModel)">
+            \~English
+            <summary>
+            Set OxyPlot model
+            </summary>
+            <param name="model">OxyPlot model</param>
+            \~Chinese
+            <summary>
+            设置OxyPlot模型
+            </summary>
+            <param name="model">OxyPlot模型</param>
         </member>
         <member name="T:ASEva.UIEto.Pixel">
             \~English
