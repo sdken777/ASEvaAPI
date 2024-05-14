@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=3.0.2
+            version=3.0.3
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -3860,6 +3860,38 @@
             更新控件位置（一般在手动修改控件大小后调用）
             </summary>
             <param name="control">控件</param>
+        </member>
+        <member name="T:ASEva.UIEto.OxyPlotView">
+            \~English
+            <summary>
+            (api:eto=3.0.4) OxyPlot graph control
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.0.4) OxyPlot图表控件
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.OxyPlotView.#ctor">
+            \~English
+            <summary>
+            Constructor
+            </summary>
+            \~Chinese
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.OxyPlotView.SetModel(OxyPlot.PlotModel)">
+            \~English
+            <summary>
+            Set OxyPlot model
+            </summary>
+            <param name="model">OxyPlot model</param>
+            \~Chinese
+            <summary>
+            设置OxyPlot模型
+            </summary>
+            <param name="model">OxyPlot模型</param>
         </member>
         <member name="T:ASEva.UIEto.Pixel">
             \~English

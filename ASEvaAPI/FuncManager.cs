@@ -5,11 +5,11 @@ namespace ASEva
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.16.5) For registering and running any functions
+    /// (api:app=3.0.4) For registering and running any functions
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.16.5) 用于注册和运行任意函数
+    /// (api:app=3.0.4) 用于注册和运行任意函数
     /// </summary>
     public class FuncManager
     {

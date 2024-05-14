@@ -4088,7 +4088,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.0.2
+            version=3.0.4
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -5785,6 +5785,16 @@
             \~Chinese
             <summary>
             事件session记录状态
+            </summary>
+        </member>
+        <member name="T:ASEva.FuncManager">
+            \~English
+            <summary>
+            (api:app=3.0.4) For registering and running any functions
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.4) 用于注册和运行任意函数
             </summary>
         </member>
         <member name="T:ASEva.GraphType">
@@ -9390,21 +9400,11 @@
         <member name="T:ASEva.IndependentTimeInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Session independent time info
+            (api:app=3.0.3) Session independent time info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) Session无关时间信息
-            </summary>
-        </member>
-        <member name="P:ASEva.IndependentTimeInfo.OffsetSync">
-            \~English
-            <summary>
-            Time offset synchronization status
-            </summary>
-            \~Chinese
-            <summary>
-            时间偏置同步状态
+            (api:app=3.0.3) Session无关时间信息
             </summary>
         </member>
         <member name="P:ASEva.IndependentTimeInfo.CPUTick">
@@ -9447,7 +9447,7 @@
             采样时卫星Posix时间，单位纳秒，0表示无效
             </summary>
         </member>
-        <member name="M:ASEva.IndependentTimeInfo.#ctor(ASEva.TimeOffsetSync,System.UInt64,System.UInt64,System.UInt64,System.UInt64)">
+        <member name="M:ASEva.IndependentTimeInfo.#ctor(System.UInt64,System.UInt64,System.UInt64,System.UInt64)">
             \~English
             <summary>
             Default constructor
@@ -9460,11 +9460,11 @@
         <member name="T:ASEva.Timestamp">
             \~English
             <summary>
-            (api:app=3.0.0) Timestamp
+            (api:app=3.0.3) Timestamp
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 时间戳
+            (api:app=3.0.3) 时间戳
             </summary>
         </member>
         <member name="P:ASEva.Timestamp.Session">
@@ -9487,6 +9487,16 @@
             时间偏置，单位秒
             </summary>
         </member>
+        <member name="P:ASEva.Timestamp.OffsetSync">
+            \~English
+            <summary>
+            Time offset synchronization status
+            </summary>
+            \~Chinese
+            <summary>
+            时间偏置同步状态
+            </summary>
+        </member>
         <member name="P:ASEva.Timestamp.TimeInfo">
             \~English
             <summary>
@@ -9497,7 +9507,7 @@
             Session无关时间信息
             </summary>
         </member>
-        <member name="M:ASEva.Timestamp.#ctor(ASEva.SessionIdentifier,System.Double,ASEva.IndependentTimeInfo)">
+        <member name="M:ASEva.Timestamp.#ctor(ASEva.SessionIdentifier,System.Double,ASEva.TimeOffsetSync,ASEva.IndependentTimeInfo)">
             \~English
             <summary>
             Default constructor
@@ -9537,24 +9547,24 @@
             所属Session标识符
             </summary>
         </member>
-        <member name="P:ASEva.Sample.Base">
-            \~English
-            <summary>
-            The session that sample belongs to (Be aware that "set" operation will clear session independent time info)
-            </summary>
-            \~Chinese
-            <summary>
-            所属session ID（注意，set操作将清除Session无关时间信息）
-            </summary>
-        </member>
         <member name="P:ASEva.Sample.Offset">
             \~English
             <summary>
-            Time offset, in seconds (Be aware that "set" operation will clear session independent time info)
+            Time offset, in seconds
             </summary>
             \~Chinese
             <summary>
-            时间偏置，单位秒（注意，set操作将清除Session无关时间信息）
+            时间偏置，单位秒
+            </summary>
+        </member>
+        <member name="P:ASEva.Sample.OffsetSync">
+            \~English
+            <summary>
+            (api:app=3.0.3) Time offset synchronization status
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.3) 时间偏置同步状态
             </summary>
         </member>
         <member name="P:ASEva.Sample.Timeline">
@@ -9613,39 +9623,43 @@
             <param name="offset">时间偏置，单位秒</param>
             <param name="timeline">在时间线上的位置</param>
         </member>
-        <member name="M:ASEva.Sample.#ctor(System.DateTime,System.Double,ASEva.IndependentTimeInfo,System.Double)">
+        <member name="M:ASEva.Sample.#ctor(System.DateTime,System.Double,ASEva.TimeOffsetSync,ASEva.IndependentTimeInfo,System.Double)">
             \~English
             <summary>
-            Constructor based on time information
+            (api:app=3.0.3) Constructor based on time information
             </summary>
             <param name="session">The session that sample belongs to</param>
             <param name="offset">Time offset, in seconds</param>
+            <param name="offsetSync">Time offset synchronization status</param>
             <param name="timeInfo">Session independent time info</param>
             <param name="timeline">Timeline point</param>
             \~Chinese
             <summary>
-            按指定时间信息进行初始化
+            (api:app=3.0.3) 按指定时间信息进行初始化
             </summary>
             <param name="session">所属session ID</param>
             <param name="offset">时间偏置，单位秒</param>
+            <param name="offsetSync">时间偏置同步状态</param>
             <param name="timeInfo">Session无关时间信息</param>
             <param name="timeline">在时间线上的位置</param>
         </member>
-        <member name="M:ASEva.Sample.SetTime(System.DateTime,System.Double,ASEva.IndependentTimeInfo,System.Double)">
+        <member name="M:ASEva.Sample.SetTime(System.DateTime,System.Double,ASEva.TimeOffsetSync,ASEva.IndependentTimeInfo,System.Double)">
             \~English
             <summary>
-            Set time information
+            (api:app=3.0.3) Set time information
             </summary>
             <param name="session">The session that sample belongs to</param>
             <param name="offset">Time offset, in seconds</param>
+            <param name="offsetSync">Time offset synchronization status</param>
             <param name="timeInfo">Session independent time info</param>
             <param name="timeline">Timeline point</param>
             \~Chinese
             <summary>
-            设置当前样本的时间戳和时间线位置
+            (api:app=3.0.3) 设置当前样本的时间戳和时间线位置
             </summary>
             <param name="session">所属session ID</param>
             <param name="offset">时间偏置，单位秒</param>
+            <param name="offsetSync">时间偏置同步状态</param>
             <param name="timeInfo">Session无关时间信息</param>
             <param name="timeline">在时间线上的位置</param>
         </member>
@@ -10568,11 +10582,11 @@
         <member name="T:ASEva.Samples.SignalData">
             \~English
             <summary>
-            (api:app=3.0.0) Single signal data
+            (api:app=3.0.3) Single signal data
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 单个信号数据
+            (api:app=3.0.3) 单个信号数据
             </summary>
         </member>
         <member name="P:ASEva.Samples.SignalData.Offset">
@@ -10585,6 +10599,16 @@
             时间偏置，单位秒
             </summary>
         </member>
+        <member name="P:ASEva.Samples.SignalData.OffsetSync">
+            \~English
+            <summary>
+            Time offset synchronization status
+            </summary>
+            \~Chinese
+            <summary>
+            时间偏置同步状态
+            </summary>
+        </member>
         <member name="P:ASEva.Samples.SignalData.Value">
             \~English
             <summary>
@@ -10595,18 +10619,20 @@
             信号值
             </summary>
         </member>
-        <member name="M:ASEva.Samples.SignalData.#ctor(System.Double,System.Double)">
+        <member name="M:ASEva.Samples.SignalData.#ctor(System.Double,ASEva.TimeOffsetSync,System.Double)">
             \~English
             <summary>
             Default constructor
             </summary>
             <param name="offset">Time offset, in seconds</param>
+            <param name="offsetSync">Time offset synchronization status</param>
             <param name="value">Signal value</param>
             \~Chinese
             <summary>
             默认构造函数
             </summary>
             <param name="offset">时间偏置，单位秒</param>
+            <param name="offsetSync">时间偏置同步状态</param>
             <param name="value">信号值</param>
         </member>
         <member name="T:ASEva.Samples.SignalsData">

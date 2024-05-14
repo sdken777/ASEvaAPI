@@ -8,11 +8,11 @@ namespace ASEva.UIEto
     
     /// \~English
     /// <summary>
-    /// (api:eto=2.15.0) OxyPlot graph control
+    /// (api:eto=3.0.4) OxyPlot graph control
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=2.15.0) OxyPlot图表控件
+    /// (api:eto=3.0.4) OxyPlot图表控件
     /// </summary>
     public class OxyPlotView : Panel
     {

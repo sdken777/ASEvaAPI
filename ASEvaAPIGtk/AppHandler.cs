@@ -208,8 +208,7 @@ namespace ASEva.UIGtk
 
         private String getLegacyStyleName()
         {
-            var lang = Agency.GetAppLanguage();
-            return lang != null && lang == "ch" ? "旧图表" : "Legacy Graph";
+            return Agency.GetAppLanguage() == Language.Chinese ? "旧图表" : "Legacy Graph";
         }
 
 		[DllImport("libgdk-3.so.0", SetLastError = true)]
