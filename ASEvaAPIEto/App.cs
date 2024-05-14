@@ -325,6 +325,7 @@ namespace ASEva.UIEto
         public static Control ConvertControlToEto(object platformControl)
         {
             if (handler == null || platformControl == null) return null;
+            if (platformControl is Control) return platformControl as Control;
             return handler.ConvertControlToEto(platformControl);
         }
 

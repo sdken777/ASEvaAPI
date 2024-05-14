@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 15, 1, 0); // Update log / 更新记录: 注册信息获取函数
+            return new Version(2, 15, 1, 1); // Update log / 更新记录: 修正App.ConvertControlToEto无法转换Eto Control问题
         }
 
         /// \~English
