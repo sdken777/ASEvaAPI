@@ -5,6 +5,8 @@ using Eto.Mac.Drawing;
 using System.Text.RegularExpressions;
 using System.Linq;
 
+#pragma warning disable CS8981
+
 #if XAMMAC2
 using AppKit;
 using Foundation;

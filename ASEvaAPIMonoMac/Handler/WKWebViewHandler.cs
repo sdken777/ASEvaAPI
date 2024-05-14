@@ -4,6 +4,9 @@ using System.Linq;
 using Eto.Drawing;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
+
+#pragma warning disable CS8981
+
 #if MONOMAC
 using MonoMac.AppKit;
 using MonoMac.Foundation;

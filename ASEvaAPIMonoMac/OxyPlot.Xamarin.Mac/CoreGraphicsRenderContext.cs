@@ -7,6 +7,8 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
+#pragma warning disable CS8981
+
 namespace OxyPlot.Xamarin.Mac
 {
     using System;

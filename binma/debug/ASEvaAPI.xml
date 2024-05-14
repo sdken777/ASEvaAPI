@@ -1102,18 +1102,6 @@
             <param name="protocolName">总线协议名称（多通道的情况下包括通道名）</param>
             <returns>总线通道（1~16），若未配置则返回null</returns>
         </member>
-        <member name="M:ASEva.Agency.GetBusFloat32Signals">
-            \~English
-            <summary>
-            Get all bus signals should be parsed as a 32bit floating number
-            </summary>
-            <returns>Signal IDs</returns>
-            \~Chinese
-            <summary>
-            获取所有作为32位浮点解析的信号列表
-            </summary>
-            <returns>信号ID列表</returns>
-        </member>
         <member name="M:ASEva.Agency.GetBusMessageFPS(System.Int32,System.UInt32)">
             \~English
             <summary>
@@ -1896,24 +1884,6 @@
             弹出对话框配置离线地图路径
             </summary>
         </member>
-        <member name="M:ASEva.Agency.GetOfflineMapImage(ASEva.IntSize,ASEva.Utility.LocPoint,System.Int32)">
-            \~English
-            <summary>
-            Query offline map's image
-            </summary>
-            <param name="imageSize">Image size</param>
-            <param name="centerLocation">Location of the image's center</param>
-            <param name="zoom">Scale, ranges 0~24</param>
-            <returns>Platform native image of offline map, null if failed to query</returns>
-            \~Chinese
-            <summary>
-            获取离线地图图像
-            </summary>
-            <param name="imageSize">指定图像大小</param>
-            <param name="centerLocation">图像中心的经纬度</param>
-            <param name="zoom">图像的尺度，0~24</param>
-            <returns>离线地图图像（平台原生图像），空表示获取失败</returns>
-        </member>
         <member name="M:ASEva.Agency.GetOfflineMapCommonImage(ASEva.IntSize,ASEva.Utility.LocPoint,System.Int32)">
             \~English
             <summary>
@@ -2013,18 +1983,6 @@
             创建视频帧获取器
             </summary>
             <returns>视频帧获取器</returns>
-        </member>
-        <member name="M:ASEva.Agency.CreateVideoFrameGetterX">
-            \~English
-            <summary>
-            Create a video frame getter (updated)
-            </summary>
-            <returns>Video frame getter (updated)</returns>
-            \~Chinese
-            <summary>
-            创建视频帧获取器(扩展版)
-            </summary>
-            <returns>视频帧获取器(扩展版)</returns>
         </member>
         <member name="M:ASEva.Agency.GetPreviewJpeg(System.Int32,System.Double,System.Double,System.Nullable{ASEva.Timestamp}@,ASEva.Samples.CameraInfo@)">
             \~English
@@ -3408,36 +3366,6 @@
             </summary>
             <param name="panel">窗口面板或配置面板对象</param>
         </member>
-        <member name="M:ASEva.Agency.ConvertImageToCommon(System.Object)">
-            \~English
-            <summary>
-            Convert platform image to common image
-            </summary>
-            <param name="image">Platform image</param>
-            <returns>Common image, null if failed to convert</returns>
-            \~Chinese
-            <summary>
-            转换平台特化图像对象至通用图像数据
-            </summary>
-            <param name="image">平台特化图像</param>
-            <returns>通用图像数据(BGR不逆序)，转换失败则返回null</returns>
-        </member>
-        <member name="M:ASEva.Agency.ConvertImageToPlatform(ASEva.Samples.CommonImage,ASEva.PlatformImageType)">
-            \~English
-            <summary>
-            Convert common image to platform image
-            </summary>
-            <param name="image">Common image</param>
-            <param name="type">Platform image type</param>
-            <returns>Platform image, null if failed to convert</returns>
-            \~Chinese
-            <summary>
-            转换通用图像数据至平台特化图像
-            </summary>
-            <param name="image">通用图像数据</param>
-            <param name="type">平台特化图像类型</param>
-            <returns>平台特化图像，转换失败则返回null</returns>
-        </member>
         <member name="M:ASEva.Agency.GetWindowClassInfo(System.String)">
             \~English
             <summary>
@@ -3783,30 +3711,6 @@
             <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel等</param>
             <param name="nativeClassID">原生组件ID</param>
             <param name="funcID">函数ID</param>
-        </member>
-        <member name="M:ASEva.Agency.IsGPURenderingDisabled">
-            \~English
-            <summary>
-            Get whether GPU rendering is disabled
-            </summary>
-            <returns>Whether GPU rendering is disabled</returns>
-            \~Chinese
-            <summary>
-            获取是否全局禁用GPU渲染
-            </summary>
-            <returns>是否全局禁用GPU渲染</returns>
-        </member>
-        <member name="M:ASEva.Agency.IsOnscreenGPURenderingEnabled">
-            \~English
-            <summary>
-            Get whether GPU onscreen rendering is enabled
-            </summary>
-            <returns>Whether GPU onscreen rendering is enabled (always return false while GPU rendering is disabled)</returns>
-            \~Chinese
-            <summary>
-            获取是否全局启用在屏GPU渲染
-            </summary>
-            <returns>是否全局启用在屏GPU渲染（若已全局禁用GPU渲染则返回false）</returns>
         </member>
         <member name="M:ASEva.Agency.ResetGPUDecoderTestResults">
             \~English
@@ -4184,7 +4088,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.0.0
+            version=3.0.4
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -5881,6 +5785,16 @@
             \~Chinese
             <summary>
             事件session记录状态
+            </summary>
+        </member>
+        <member name="T:ASEva.FuncManager">
+            \~English
+            <summary>
+            (api:app=3.0.4) For registering and running any functions
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.4) 用于注册和运行任意函数
             </summary>
         </member>
         <member name="T:ASEva.GraphType">
@@ -7973,30 +7887,6 @@
             </summary>
             <returns>是否允许多个实例同时运行</returns>
         </member>
-        <member name="M:ASEva.MainWorkflow.OnCheckDisableGPURendering">
-            \~English
-            <summary>
-            [Optional] Get whether to disable GPU rendering
-            </summary>
-            <returns>Whether to disable GPU rendering</returns>
-            \~Chinese
-            <summary>
-            [可选实现] 返回是否禁用GPU渲染
-            </summary>
-            <returns>是否禁用GPU渲染</returns>
-        </member>
-        <member name="M:ASEva.MainWorkflow.OnCheckEnableOnscreenGPURendering">
-            \~English
-            <summary>
-            [Optional] Get whether to enable GPU onscreen rendering
-            </summary>
-            <returns>Whether to enable GPU onscreen rendering (always false if GPU rendering is disabled)</returns>
-            \~Chinese
-            <summary>
-            [可选实现] 返回是否启用GPU在屏渲染
-            </summary>
-            <returns>是否启用GPU在屏渲染（若已禁用GPU渲染则无效）</returns>
-        </member>
         <member name="M:ASEva.MainWorkflow.OnCheckDisableGPUDecoding">
             \~English
             <summary>
@@ -9510,21 +9400,11 @@
         <member name="T:ASEva.IndependentTimeInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Session independent time info
+            (api:app=3.0.3) Session independent time info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) Session无关时间信息
-            </summary>
-        </member>
-        <member name="P:ASEva.IndependentTimeInfo.OffsetSync">
-            \~English
-            <summary>
-            Time offset synchronization status
-            </summary>
-            \~Chinese
-            <summary>
-            时间偏置同步状态
+            (api:app=3.0.3) Session无关时间信息
             </summary>
         </member>
         <member name="P:ASEva.IndependentTimeInfo.CPUTick">
@@ -9567,7 +9447,7 @@
             采样时卫星Posix时间，单位纳秒，0表示无效
             </summary>
         </member>
-        <member name="M:ASEva.IndependentTimeInfo.#ctor(ASEva.TimeOffsetSync,System.UInt64,System.UInt64,System.UInt64,System.UInt64)">
+        <member name="M:ASEva.IndependentTimeInfo.#ctor(System.UInt64,System.UInt64,System.UInt64,System.UInt64)">
             \~English
             <summary>
             Default constructor
@@ -9580,11 +9460,11 @@
         <member name="T:ASEva.Timestamp">
             \~English
             <summary>
-            (api:app=3.0.0) Timestamp
+            (api:app=3.0.3) Timestamp
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 时间戳
+            (api:app=3.0.3) 时间戳
             </summary>
         </member>
         <member name="P:ASEva.Timestamp.Session">
@@ -9607,6 +9487,16 @@
             时间偏置，单位秒
             </summary>
         </member>
+        <member name="P:ASEva.Timestamp.OffsetSync">
+            \~English
+            <summary>
+            Time offset synchronization status
+            </summary>
+            \~Chinese
+            <summary>
+            时间偏置同步状态
+            </summary>
+        </member>
         <member name="P:ASEva.Timestamp.TimeInfo">
             \~English
             <summary>
@@ -9617,7 +9507,7 @@
             Session无关时间信息
             </summary>
         </member>
-        <member name="M:ASEva.Timestamp.#ctor(ASEva.SessionIdentifier,System.Double,ASEva.IndependentTimeInfo)">
+        <member name="M:ASEva.Timestamp.#ctor(ASEva.SessionIdentifier,System.Double,ASEva.TimeOffsetSync,ASEva.IndependentTimeInfo)">
             \~English
             <summary>
             Default constructor
@@ -9657,24 +9547,24 @@
             所属Session标识符
             </summary>
         </member>
-        <member name="P:ASEva.Sample.Base">
-            \~English
-            <summary>
-            The session that sample belongs to (Be aware that "set" operation will clear session independent time info)
-            </summary>
-            \~Chinese
-            <summary>
-            所属session ID（注意，set操作将清除Session无关时间信息）
-            </summary>
-        </member>
         <member name="P:ASEva.Sample.Offset">
             \~English
             <summary>
-            Time offset, in seconds (Be aware that "set" operation will clear session independent time info)
+            Time offset, in seconds
             </summary>
             \~Chinese
             <summary>
-            时间偏置，单位秒（注意，set操作将清除Session无关时间信息）
+            时间偏置，单位秒
+            </summary>
+        </member>
+        <member name="P:ASEva.Sample.OffsetSync">
+            \~English
+            <summary>
+            (api:app=3.0.3) Time offset synchronization status
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.3) 时间偏置同步状态
             </summary>
         </member>
         <member name="P:ASEva.Sample.Timeline">
@@ -9733,39 +9623,43 @@
             <param name="offset">时间偏置，单位秒</param>
             <param name="timeline">在时间线上的位置</param>
         </member>
-        <member name="M:ASEva.Sample.#ctor(System.DateTime,System.Double,ASEva.IndependentTimeInfo,System.Double)">
+        <member name="M:ASEva.Sample.#ctor(System.DateTime,System.Double,ASEva.TimeOffsetSync,ASEva.IndependentTimeInfo,System.Double)">
             \~English
             <summary>
-            Constructor based on time information
+            (api:app=3.0.3) Constructor based on time information
             </summary>
             <param name="session">The session that sample belongs to</param>
             <param name="offset">Time offset, in seconds</param>
+            <param name="offsetSync">Time offset synchronization status</param>
             <param name="timeInfo">Session independent time info</param>
             <param name="timeline">Timeline point</param>
             \~Chinese
             <summary>
-            按指定时间信息进行初始化
+            (api:app=3.0.3) 按指定时间信息进行初始化
             </summary>
             <param name="session">所属session ID</param>
             <param name="offset">时间偏置，单位秒</param>
+            <param name="offsetSync">时间偏置同步状态</param>
             <param name="timeInfo">Session无关时间信息</param>
             <param name="timeline">在时间线上的位置</param>
         </member>
-        <member name="M:ASEva.Sample.SetTime(System.DateTime,System.Double,ASEva.IndependentTimeInfo,System.Double)">
+        <member name="M:ASEva.Sample.SetTime(System.DateTime,System.Double,ASEva.TimeOffsetSync,ASEva.IndependentTimeInfo,System.Double)">
             \~English
             <summary>
-            Set time information
+            (api:app=3.0.3) Set time information
             </summary>
             <param name="session">The session that sample belongs to</param>
             <param name="offset">Time offset, in seconds</param>
+            <param name="offsetSync">Time offset synchronization status</param>
             <param name="timeInfo">Session independent time info</param>
             <param name="timeline">Timeline point</param>
             \~Chinese
             <summary>
-            设置当前样本的时间戳和时间线位置
+            (api:app=3.0.3) 设置当前样本的时间戳和时间线位置
             </summary>
             <param name="session">所属session ID</param>
             <param name="offset">时间偏置，单位秒</param>
+            <param name="offsetSync">时间偏置同步状态</param>
             <param name="timeInfo">Session无关时间信息</param>
             <param name="timeline">在时间线上的位置</param>
         </member>
@@ -10688,11 +10582,11 @@
         <member name="T:ASEva.Samples.SignalData">
             \~English
             <summary>
-            (api:app=3.0.0) Single signal data
+            (api:app=3.0.3) Single signal data
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 单个信号数据
+            (api:app=3.0.3) 单个信号数据
             </summary>
         </member>
         <member name="P:ASEva.Samples.SignalData.Offset">
@@ -10705,6 +10599,16 @@
             时间偏置，单位秒
             </summary>
         </member>
+        <member name="P:ASEva.Samples.SignalData.OffsetSync">
+            \~English
+            <summary>
+            Time offset synchronization status
+            </summary>
+            \~Chinese
+            <summary>
+            时间偏置同步状态
+            </summary>
+        </member>
         <member name="P:ASEva.Samples.SignalData.Value">
             \~English
             <summary>
@@ -10715,18 +10619,20 @@
             信号值
             </summary>
         </member>
-        <member name="M:ASEva.Samples.SignalData.#ctor(System.Double,System.Double)">
+        <member name="M:ASEva.Samples.SignalData.#ctor(System.Double,ASEva.TimeOffsetSync,System.Double)">
             \~English
             <summary>
             Default constructor
             </summary>
             <param name="offset">Time offset, in seconds</param>
+            <param name="offsetSync">Time offset synchronization status</param>
             <param name="value">Signal value</param>
             \~Chinese
             <summary>
             默认构造函数
             </summary>
             <param name="offset">时间偏置，单位秒</param>
+            <param name="offsetSync">时间偏置同步状态</param>
             <param name="value">信号值</param>
         </member>
         <member name="T:ASEva.Samples.SignalsData">
@@ -11678,190 +11584,6 @@
             <summary>
             标准针孔模型下的横向视场角（未去畸变时为空）
             </summary>
-        </member>
-        <member name="T:ASEva.Samples.VideoFrameSample">
-            \~English
-            <summary>
-            (api:app=3.0.0) Video frame sample
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.0.0) 视频帧样本
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.VideoFrameSample.CommonImage">
-            \~English
-            <summary>
-            Common image data (in order of BGR)
-            </summary>
-            \~Chinese
-            <summary>
-            通用图像数据(BGR不逆序)
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.VideoFrameSample.Image">
-            \~English
-            <summary>
-            [Depend on Agency] Get platform image
-            </summary>
-            \~Chinese
-            <summary>
-            [依赖Agency] 获取视频帧的位图图像（平台特化对象）
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.VideoFrameSample.ChannelIndex">
-            \~English
-            <summary>
-            Video channel (0~23)
-            </summary>
-            \~Chinese
-            <summary>
-            视频帧所属通道（0~23）
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.VideoFrameSample.SpecialCameraType">
-            \~English
-            <summary>
-            Special camera type
-            </summary>
-            \~Chinese
-            <summary>
-            特殊摄像头类型
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.VideoFrameSample.SpecialCameraInfo">
-            \~English
-            <summary>
-            Information of special camera, could be ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta
-            </summary>
-            \~Chinese
-            <summary>
-            特殊摄像头信息，可以为 ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.VideoFrameSample.HorizontalFov">
-            \~English
-            <summary>
-            Horizontal FOV of ideal pinhole model (null if not undistorted)
-            </summary>
-            \~Chinese
-            <summary>
-            标准针孔模型下的横向视场角（未去畸变时为空）
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.VideoFrameSample.Scaled">
-            \~English
-            <summary>
-            Whether it's scaled, false means fitting to the size
-            </summary>
-            \~Chinese
-            <summary>
-            是否对图像进行了放大，false表示按可贴合的最小尺寸缩放
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.VideoFrameSample.RawResolution">
-            \~English
-            <summary>
-            Raw image's resolution
-            </summary>
-            \~Chinese
-            <summary>
-            原始图像的原分辨率
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.VideoFrameSample.RawCenter">
-            \~English
-            <summary>
-            The image center in the raw image's coordinate system
-            </summary>
-            \~Chinese
-            <summary>
-            在原始图像坐标系下的实际截取框中心
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.VideoFrameSample.RawScale">
-            \~English
-            <summary>
-            Scaling ratio to the raw image's size
-            </summary>
-            \~Chinese
-            <summary>
-            相对与原始图像大小的实际缩放比率
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.VideoFrameSample.ActualResolution">
-            \~English
-            <summary>
-            Medium image's resolution
-            </summary>
-            \~Chinese
-            <summary>
-            实际图像的原分辨率
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.VideoFrameSample.ActualCenter">
-            \~English
-            <summary>
-            The image center in the medium image's coordinate system
-            </summary>
-            \~Chinese
-            <summary>
-            在实际图像坐标系下的实际截取框中心
-            </summary>
-        </member>
-        <member name="P:ASEva.Samples.VideoFrameSample.ActualScale">
-            \~English
-            <summary>
-            Scaling ratio to the medium image's size
-            </summary>
-            \~Chinese
-            <summary>
-            相对与实际图像大小的实际缩放比率
-            </summary>
-        </member>
-        <member name="M:ASEva.Samples.VideoFrameSample.#ctor(System.Object,ASEva.IntSize,System.Int32,System.DateTime,System.Double,System.Double)">
-            \~English
-            <summary>
-            [Depend on Agency] Default constructor
-            </summary>
-            <param name="image">The platform image</param>
-            <param name="rawSize">Raw resolution</param>
-            <param name="channelIndex">Video channel</param>
-            <param name="session">Session ID</param>
-            <param name="offset">Time offset, in secodns</param>
-            <param name="timeline">Timeline point</param>
-            \~Chinese
-            <summary>
-            [依赖Agency] 默认构造函数
-            </summary>
-            <param name="image">平台特化图像</param>
-            <param name="rawSize">图像的原始大小</param>
-            <param name="channelIndex">通道</param>
-            <param name="session">Session ID</param>
-            <param name="offset">时间偏置，单位秒</param>
-            <param name="timeline">时间线上的目标时间点</param>
-        </member>
-        <member name="M:ASEva.Samples.VideoFrameSample.#ctor(ASEva.Samples.CommonImage,ASEva.IntSize,System.Int32,System.DateTime,System.Double,System.Double)">
-            \~English
-            <summary>
-            Default constructor
-            </summary>
-            <param name="image">Common image object</param>
-            <param name="rawSize">Raw resolution</param>
-            <param name="channelIndex">Video channel</param>
-            <param name="session">Session ID</param>
-            <param name="offset">Time offset, in secodns</param>
-            <param name="timeline">Timeline point</param>
-            \~Chinese
-            <summary>
-            默认构造函数
-            </summary>
-            <param name="image">通用图像对象</param>
-            <param name="rawSize">图像的原始大小</param>
-            <param name="channelIndex">通道</param>
-            <param name="session">Session ID</param>
-            <param name="offset">时间偏置，单位秒</param>
-            <param name="timeline">时间线上的目标时间点</param>
         </member>
         <member name="T:ASEva.SceneData">
             \~English
@@ -13574,40 +13296,6 @@
             <summary>
             是否在图像上方绘制缩略图（若实际进行了放大）
             </summary>
-        </member>
-        <member name="T:ASEva.VideoFrameGetter">
-            \~English
-            <summary>
-            (api:app=3.0.0) Interface for getting video frame
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.0.0) 获取视频帧的接口
-            </summary>
-        </member>
-        <member name="M:ASEva.VideoFrameGetter.GetVideoFrame(System.Int32,System.Double,System.Double,ASEva.IntSize,System.Boolean,ASEva.VideoFrameGetScale)">
-            \~English
-            <summary>
-            Gets the nearest video frame on the timeline with the specified parameters
-            </summary>
-            <param name="channel">Video channel, ranges 0~23</param>
-            <param name="timeline">Target timeline point, in seconds</param>
-            <param name="maxGap">Max time gap, in seconds</param>
-            <param name="targetSize">Output image's size</param>
-            <param name="hires">Whether to prefer to output HD images, otherwise image with the size no greater than VGA is output</param>
-            <param name="scale">Scaling configuration, set to null to output full image</param>
-            <returns>Video frame sample</returns>
-            \~Chinese
-            <summary>
-            按指定参数获取时间轴上最近的视频帧
-            </summary>
-            <param name="channel">视频通道，0~23</param>
-            <param name="timeline">获取视频帧的目标时间线，单位秒</param>
-            <param name="maxGap">容许的最大间隔，单位秒</param>
-            <param name="targetSize">输出图像的尺寸</param>
-            <param name="hires">是否优先输出高清图像，否则固定输出不大于VGA分辨率的图像</param>
-            <param name="scale">缩放设置，若按整幅输出则设为null</param>
-            <returns>图像帧</returns>
         </member>
         <member name="T:ASEva.FileIONames">
             \~English
@@ -15515,17 +15203,17 @@
             输出按原始尺寸1/4缩小后的图像数据(若条件不满足则退化为Preview)
             </summary>
         </member>
-        <member name="T:ASEva.VideoFrameGetterX">
+        <member name="T:ASEva.VideoFrameGetter">
             \~English
             <summary>
-            (api:app=3.0.0) Interface for getting video frame (updated)
+            (api:app=3.0.0) Interface for getting video frame
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 获取视频帧的接口（扩展版）
+            (api:app=3.0.0) 获取视频帧的接口
             </summary>
         </member>
-        <member name="M:ASEva.VideoFrameGetterX.GetVideoRawSize(System.Int32,System.Double)">
+        <member name="M:ASEva.VideoFrameGetter.GetVideoRawSize(System.Int32,System.Double)">
             \~English
             <summary>
             Get the video raw size at the specified time at the specified channel
@@ -15541,7 +15229,7 @@
             <param name="timeline">获取视频帧的目标时间线，单位秒</param>
             <returns>原始尺寸，若无数据则返回null</returns>
         </member>
-        <member name="M:ASEva.VideoFrameGetterX.GetVideoFrameImage(System.Int32,System.Double,System.Double,ASEva.VideoFrameGetMode,System.Nullable{ASEva.IntRect},System.Boolean,System.Nullable{ASEva.Timestamp}@,ASEva.Samples.CameraInfo@)">
+        <member name="M:ASEva.VideoFrameGetter.GetVideoFrameImage(System.Int32,System.Double,System.Double,ASEva.VideoFrameGetMode,System.Nullable{ASEva.IntRect},System.Boolean,System.Nullable{ASEva.Timestamp}@,ASEva.Samples.CameraInfo@)">
             \~English
             <summary>
             Get the nearest video frame data from the specified time
@@ -15569,7 +15257,7 @@
             <param name="cameraInfo">摄像头信息，获取失败则为null</param>
             <returns>视频帧数据，图像实际大小由mode和clip决定，获取失败则返回null</returns>
         </member>
-        <member name="M:ASEva.VideoFrameGetterX.GetVideoFrameThumbnail(System.Int32,System.Double,System.Double,System.Boolean)">
+        <member name="M:ASEva.VideoFrameGetter.GetVideoFrameThumbnail(System.Int32,System.Double,System.Double,System.Boolean)">
             \~English
             <summary>
             Get the nearest thumbnail data from the specified time
@@ -16119,36 +15807,6 @@
             \~Chinese
             <summary>
             相关用户界面的入口参数
-            </summary>
-        </member>
-        <member name="T:ASEva.PlatformImageType">
-            \~English
-            <summary>
-            (api:app=3.0.0) Platform image type
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.0.0) 平台特化图像类型
-            </summary>
-        </member>
-        <member name="F:ASEva.PlatformImageType.Native">
-            \~English
-            <summary>
-            Native image, like Winform Bitmap, Gtk VideoFrameSampleImage object (Can be converted to Pixbuf or ImageSurface), Wpf BitmapSource, etc.
-            </summary>
-            \~Chinese
-            <summary>
-            原生图像，如Winform的Bitmap，Gtk的VideoFrameSampleImage对象(可转Pixbuf或ImageSurface)，Wpf的BitmapSource等
-            </summary>
-        </member>
-        <member name="F:ASEva.PlatformImageType.Eto">
-            \~English
-            <summary>
-            Eto Bitmap object
-            </summary>
-            \~Chinese
-            <summary>
-            Eto的Bitmap对象
             </summary>
         </member>
         <member name="T:ASEva.Language">

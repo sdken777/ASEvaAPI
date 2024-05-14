@@ -39,7 +39,7 @@
       <HintPath>..\binma\SkiaSharp.dll</HintPath>
     </Reference>
     <Reference Include="OxyPlot">
-      <HintPath>..\binm\OxyPlot.dll</HintPath>
+      <HintPath>..\binma\OxyPlot.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>
