@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Eto.Forms;
 using Eto.Drawing;
+using System.Linq;
 
 namespace ASEva.UIEto
 {
@@ -338,6 +339,13 @@ namespace ASEva.UIEto
             var model = new TreeGridItemCollection();
             if(rootNodes != null)
             {
+                if (sort)
+                {
+                    var sortList = rootNodes.ToList();
+                    sortList.Sort((n1, n2) => n1.Text.CompareTo(n2.Text));
+                    rootNodes = sortList.ToArray();
+                }
+
                 foreach (var node in rootNodes)
                 {
                     if (node.Key == null || nodeMap.ContainsKey(node.Key)) continue;
