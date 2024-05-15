@@ -11,6 +11,11 @@ namespace ASEva.UIWpf
         {
             Model = model;
         }
+
+        public void InvalidatePlot()
+        {
+            InvalidatePlot(true);
+        }
     }
 
     class OxyPlotViewFactoryWpf : OxyPlotViewFactory
