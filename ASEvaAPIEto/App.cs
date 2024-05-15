@@ -642,8 +642,21 @@ namespace ASEva.UIEto
                     FuncManager.Register("GetEtoLibVersion", delegate { return APIInfo.GetEtoLibVersion(); });
                     FuncManager.Register("GetEtoAPIThirdPartyNotices", delegate { return APIInfo.GetThirdPartyNotices(); });
                     FuncManager.Register("GetUIBackendAPIThirdPartyNotices", delegate { return handler.GetThirdPartyNotices(); });
+
+                    FuncManager.Register("RegisterEtoSingleValueGraph", delegate { Agency.RegisterGraphPanel(GraphType.SingleValue, getStyleName("Eto单值", "Eto Single Value"), typeof(ValueGraph)); return null; });
+                    FuncManager.Register("RegisterEtoHistLineGraph", delegate { Agency.RegisterGraphPanel(GraphType.HistAndLine, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(HistLineGraph)); return null; });
+                    FuncManager.Register("RegisterEtoScatterPointsGraph", delegate { Agency.RegisterGraphPanel(GraphType.ScatterPoints, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(ScatterPointsGraph)); return null; });
+                    FuncManager.Register("RegisterEtoMatrixTableGraph", delegate { Agency.RegisterGraphPanel(GraphType.MatrixTable, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(MatrixTableGraph)); return null; });
+                    FuncManager.Register("RegisterEtoLabelTableGraph", delegate { Agency.RegisterGraphPanel(GraphType.LabelTable, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(LabelTableGraph)); return null; });
+                    FuncManager.Register("RegisterEtoHistogramValueGraph", delegate { Agency.RegisterGraphPanel(GraphType.HistAndLine, getStyleName("Eto柱状图值", "Eto Histogram Value"), typeof(HistogramValueGraph)); return null; });
                 }
             }
+        }
+
+        private static String getStyleName(String chinese, String english)
+        {
+            var lang = Agency.GetAppLanguage();
+            return lang != null && lang == "ch" ? chinese : english;
         }
 
         private static AppHandler handler = null;
