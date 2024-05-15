@@ -33,17 +33,30 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// Set OxyPlot model
+        /// Set OxyPlot model, and refresh drawing
         /// </summary>
         /// <param name="model">OxyPlot model</param>
         /// \~Chinese
         /// <summary>
-        /// 设置OxyPlot模型
+        /// 设置OxyPlot模型，并刷新显示
         /// </summary>
         /// <param name="model">OxyPlot模型</param>
         public void SetModel(PlotModel model)
         {
             if (backend != null) backend.SetModel(model);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=2.15.2) Refresh drawing
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.15.2) 刷新绘制
+        /// </summary>
+        public void InvalidatePlot()
+        {
+            if (backend != null) backend.InvalidatePlot();
         }
 
         public static OxyPlotViewFactory Factory { private get; set; }
@@ -54,6 +67,7 @@ namespace ASEva.UIEto
 	public interface OxyPlotViewBackend
 	{
         void SetModel(PlotModel model);
+        void InvalidatePlot();
 	}
 
 	public interface OxyPlotViewFactory
