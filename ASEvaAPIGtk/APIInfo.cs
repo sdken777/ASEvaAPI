@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 11, 2, 0); // Update log / 更新记录: 支持OxyPlotView.InvalidatePlot
+            return new Version(2, 11, 2, 1); // Update log / 更新记录: 修正无数据时HistLineGraph显示异常
         }
     }
 }

@@ -450,7 +450,7 @@ namespace ASEva.UIGtk
 							ptList.Add(new FloatPoint(left, bottom));
 						}
 					}
-					else if (Data.Definition.Validation is PolyAboveValidation)
+					else if (Data.Definition.Validation is PolyAboveValidation && Data.HasData())
 					{
 						var thresholds = (Data.Definition.Validation as PolyAboveValidation).GetHistLineValuesThreshold((Data as HistAndLineData).GetXValuesOrLabels() as HistLineXValues);
 						for (int i = 0; i < thresholds.Length; i++)
@@ -470,7 +470,7 @@ namespace ASEva.UIGtk
 							ptList.Add(new FloatPoint(thisX + step, thisY));
 						}
 					}
-					else if (Data.Definition.Validation is PolyBelowValidation)
+					else if (Data.Definition.Validation is PolyBelowValidation && Data.HasData())
 					{
 						var thresholds = (Data.Definition.Validation as PolyBelowValidation).GetHistLineValuesThreshold((Data as HistAndLineData).GetXValuesOrLabels() as HistLineXValues);
 						for (int i = 0; i < thresholds.Length; i++)
