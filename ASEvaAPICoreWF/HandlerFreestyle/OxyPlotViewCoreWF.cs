@@ -11,6 +11,11 @@ namespace ASEva.UICoreWF
         {
             Model = model;
         }
+
+        public void InvalidatePlot()
+        {
+            InvalidatePlot(true);
+        }
     }
 
     class OxyPlotViewFactoryCoreWF : OxyPlotViewFactory

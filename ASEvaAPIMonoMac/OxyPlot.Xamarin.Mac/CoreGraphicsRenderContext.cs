@@ -197,65 +197,74 @@ namespace OxyPlot.Xamarin.Mac
             }
 
             var fontName = GetActualFontName (fontFamily, fontWeight);
-
             var font = this.GetCachedFont (fontName, fontSize);
-            using (var attributedString = new NSAttributedString (text, new CTStringAttributes {
-                ForegroundColorFromContext = true,
-                Font = font
-            })) {
-                using (var textLine = new CTLine (attributedString)) {
-                    nfloat width;
-                    nfloat height;
+            this.GetFontMetrics(font, out nfloat lineHeight, out nfloat delta);
 
-                    this.gctx.TextPosition = new CGPoint (0, 0);
+            var rows = text.Split('\n');
+            for (int i = 0; i < rows.Length; i++)
+            {
+                rows[i] = rows[i].TrimEnd('\r');
+            }
 
-                    this.GetFontMetrics(font, out nfloat lineHeight, out nfloat delta);
+            for (int row = 0; row < rows.Length; row++)
+            {
+                using (var attributedString = new NSAttributedString (rows[row], new CTStringAttributes {
+                    ForegroundColorFromContext = true,
+                    Font = font
+                })) {
+                    using (var textLine = new CTLine (attributedString)) {
+                        nfloat width;
+                        nfloat height;
 
-                    var bounds = textLine.GetImageBounds (this.gctx);
+                        this.gctx.TextPosition = new CGPoint (0, 0);
 
-                    var x0 = 0;
-                    var y0 = delta;
+                        var bounds = textLine.GetImageBounds (this.gctx);
 
-                    if (maxSize.HasValue || halign != HorizontalAlignment.Left || valign != VerticalAlignment.Bottom) {
-                        width = bounds.Left + bounds.Width;
-                        height = lineHeight;
-                    } else {
-                        width = height = 0f;
-                    }
+                        var x0 = 0;
+                        var y0 = delta;
 
-                    if (maxSize.HasValue) {
-                        if (width > maxSize.Value.Width) {
-                            width = (float)maxSize.Value.Width;
+                        if (maxSize.HasValue || halign != HorizontalAlignment.Left || valign != VerticalAlignment.Bottom) {
+                            width = bounds.Left + bounds.Width;
+                            height = lineHeight * rows.Length;
+                        } else {
+                            width = height = 0f;
                         }
 
-                        if (height > maxSize.Value.Height) {
-                            height = (float)maxSize.Value.Height;
+                        if (maxSize.HasValue) {
+                            if (width > maxSize.Value.Width) {
+                                width = (float)maxSize.Value.Width;
+                            }
+
+                            if (height > maxSize.Value.Height) {
+                                height = (float)maxSize.Value.Height;
+                            }
                         }
+
+                        var dx = halign == HorizontalAlignment.Left ? 0d : (halign == HorizontalAlignment.Center ? -width * 0.5 : -width);
+                        var dy = valign == VerticalAlignment.Bottom ? 0d : (valign == VerticalAlignment.Middle ? height * 0.5 : height);
+                        dy -= (rows.Length - row - 1) * height / rows.Length;
+
+                        this.SetFill (fill);
+                        this.SetAlias (false);
+
+                        this.gctx.SaveState ();
+                        this.gctx.TranslateCTM ((float)p.X, (float)p.Y);
+                        if (!rotate.Equals (0)) {
+                            this.gctx.RotateCTM ((float)(rotate / 180 * Math.PI));
+                        }
+
+                        this.gctx.TranslateCTM ((float)dx + x0, (float)dy + y0);
+                        this.gctx.ScaleCTM (1f, -1f);
+
+                        if (maxSize.HasValue) {
+                            var clipRect = new CGRect (-x0, y0, (float)Math.Ceiling (width), (float)Math.Ceiling (height / rows.Length));
+                            this.gctx.ClipToRect (clipRect);
+                        }
+
+                        textLine.Draw (this.gctx);
+
+                        this.gctx.RestoreState ();
                     }
-
-                    var dx = halign == HorizontalAlignment.Left ? 0d : (halign == HorizontalAlignment.Center ? -width * 0.5 : -width);
-                    var dy = valign == VerticalAlignment.Bottom ? 0d : (valign == VerticalAlignment.Middle ? height * 0.5 : height);
-
-                    this.SetFill (fill);
-                    this.SetAlias (false);
-
-                    this.gctx.SaveState ();
-                    this.gctx.TranslateCTM ((float)p.X, (float)p.Y);
-                    if (!rotate.Equals (0)) {
-                        this.gctx.RotateCTM ((float)(rotate / 180 * Math.PI));
-                    }
-
-                    this.gctx.TranslateCTM ((float)dx + x0, (float)dy + y0);
-                    this.gctx.ScaleCTM (1f, -1f);
-
-                    if (maxSize.HasValue) {
-                        var clipRect = new CGRect (-x0, y0, (float)Math.Ceiling (width), (float)Math.Ceiling (height));
-                        this.gctx.ClipToRect (clipRect);
-                    }
-
-                    textLine.Draw (this.gctx);
-
-                    this.gctx.RestoreState ();
                 }
             }
         }
@@ -268,22 +277,32 @@ namespace OxyPlot.Xamarin.Mac
 
             var fontName = GetActualFontName (fontFamily, fontWeight);
             var font = this.GetCachedFont (fontName, (float)fontSize);
-            using (var attributedString = new NSAttributedString (text, new CTStringAttributes {
-                ForegroundColorFromContext = true,
-                Font = font
-            })) {
-                using (var textLine = new CTLine (attributedString)) {
-                    this.GetFontMetrics(font, out nfloat lineHeight, out nfloat delta);
+            this.GetFontMetrics(font, out nfloat lineHeight, out nfloat delta);
 
-                    // the text position must be set to get the correct bounds
-                    this.gctx.TextPosition = new CGPoint (0, 0);
+            var rows = text.Split('\n');
+            for (int i = 0; i < rows.Length; i++)
+            {
+                rows[i] = rows[i].TrimEnd('\r');
+            }
 
-                    var bounds = textLine.GetImageBounds (this.gctx);
-                    var width = bounds.Left + bounds.Width;
+            nfloat maxWidth = 0;
+            for (int row = 0; row < rows.Length; row++)
+            {
+                using (var attributedString = new NSAttributedString (rows[row], new CTStringAttributes {
+                    ForegroundColorFromContext = true,
+                    Font = font
+                })) {
+                    using (var textLine = new CTLine (attributedString)) {
+                        // the text position must be set to get the correct bounds
+                        this.gctx.TextPosition = new CGPoint (0, 0);
 
-                    return new OxySize (width, lineHeight);
+                        var bounds = textLine.GetImageBounds (this.gctx);
+                        var width = bounds.Left + bounds.Width;
+                        maxWidth = Math.Max(maxWidth, width);
+                    }
                 }
             }
+            return new OxySize (maxWidth, lineHeight * rows.Length);
         }
 
         public void Dispose ()

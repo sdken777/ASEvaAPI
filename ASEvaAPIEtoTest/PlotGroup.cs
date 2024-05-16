@@ -14,6 +14,8 @@ namespace ASEvaAPIEtoTest
             var treeView = mainLayout.AddControl(new SimpleTreeView(), false, 200) as SimpleTreeView;
             var plotView = mainLayout.AddControl(new OxyPlotView(), true) as OxyPlotView;
 
+            ExampleLibrary.RenderingCapabilities.PixelScale = Pixel.Scale;
+
             var exampleTable = new Dictionary<String, List<ExampleInfo>>();
             foreach (var example in Examples.GetList())
             {

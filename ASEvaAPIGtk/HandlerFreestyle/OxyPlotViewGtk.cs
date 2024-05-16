@@ -11,6 +11,11 @@ namespace ASEva.UIGtk
         {
             Model = model;
         }
+
+        public void InvalidatePlot()
+        {
+            InvalidatePlot(true);
+        }
     }
 
     class OxyPlotViewFactoryGtk : OxyPlotViewFactory

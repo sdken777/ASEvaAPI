@@ -11,6 +11,11 @@ namespace ASEva.UIMonoMac
         {
             Model = model;
         }
+
+        public void InvalidatePlot()
+        {
+            InvalidatePlot(true);
+        }
     }
 
     class OxyPlotViewFactoryMonoMac : OxyPlotViewFactory
