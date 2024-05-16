@@ -28,6 +28,9 @@
     <Reference Include="SkiaSharp">
       <HintPath>..\bin64\SkiaSharp.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot">
+      <HintPath>..\bin64\OxyPlot.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

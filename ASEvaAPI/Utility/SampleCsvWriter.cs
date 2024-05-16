@@ -92,12 +92,12 @@ namespace ASEva.Utility
                 if (channel == null) return false;
                 else if (sample.Channel.Value != channel.Value) return false;
             }
-            if (session != null && sample.Base != session.Value) return false;
+            if (session != null && sample.Session != session.Value) return false;
 
-            session = sample.Base;
+            session = sample.Session;
 
             var list = new List<String>();
-            list.Add(sample.Base.ToString("yyyyMMdd-HH-mm-ss"));
+            list.Add(sample.Session.ToDateTime().ToString("yyyyMMdd-HH-mm-ss"));
 
             if (sample.Timestamp.TimeInfo == null)
             {
@@ -109,13 +109,13 @@ namespace ASEva.Utility
             }
             else
             {
-                var info = sample.Timestamp.TimeInfo;
-                if (info.OffsetSync == TimeOffsetSync.Server) list.Add("SERV");
-                else if (info.OffsetSync == TimeOffsetSync.Gnss) list.Add("GNSS");
-                else if (info.OffsetSync == TimeOffsetSync.BusReceiverArrival) list.Add("RECV");
-                else if (info.OffsetSync == TimeOffsetSync.Interpolated) list.Add("INTR");
+                if (sample.OffsetSync == TimeOffsetSync.Server) list.Add("SERV");
+                else if (sample.OffsetSync == TimeOffsetSync.Gnss) list.Add("GNSS");
+                else if (sample.OffsetSync == TimeOffsetSync.BusReceiverArrival) list.Add("RECV");
+                else if (sample.OffsetSync == TimeOffsetSync.Interpolated) list.Add("INTR");
                 else list.Add("NONE");
 
+                var info = sample.Timestamp.TimeInfo;
                 list.Add(info.CPUTick.ToString());
                 list.Add(info.HostPosix.ToString());
                 list.Add(info.GuestPosix.ToString());
@@ -158,7 +158,7 @@ namespace ASEva.Utility
         private StreamWriter writer = null;
         private String protocol = null;
         private int? channel = null;
-        private DateTime? session = null;
+        private SessionIdentifier? session = null;
 
         private SampleCsvWriter()
         { }

@@ -60,7 +60,7 @@ namespace ASEva.UIMonoMac
         public void SetModel(SimpleTreeNode[] rootNodes, bool sort)
         {
             var treeViewRootNodes = new List<SimpleTreeNode>();
-            addNodes(rootNodes, treeViewRootNodes, sort);
+            addNodes(rootNodes, treeViewRootNodes, null, sort);
 
             var expandIDs = (outlineView.DataSource as SimpleTreeViewDataSource).Reset(treeViewRootNodes);
             outlineView.ReloadData();
@@ -86,10 +86,24 @@ namespace ASEva.UIMonoMac
         public void SelectItem(object key)
         {
             if (!nodeMap.ContainsKey(key)) return;
-            outlineView.SelectRow(outlineView.RowForItem((nodeMap[key] as SimpleTreeViewNode).ID), false);
+
+            var parentLink = new List<object>();
+            var parentKey = (nodeMap[key] as SimpleTreeViewNode).ParentKey;
+            while (parentKey != null)
+            {
+                parentLink.Insert(0, parentKey);
+                if (nodeMap.ContainsKey(parentKey)) parentKey = (nodeMap[parentKey] as SimpleTreeViewNode).ParentKey;
+            }
+
+            foreach (var targetParentKey in parentLink)
+            {
+                outlineView.ExpandItem(new NSString((nodeMap[targetParentKey] as SimpleTreeViewNode).IDValue.ToString()), false);
+            }
+
+            outlineView.SelectRow(outlineView.RowForItem(new NSString((nodeMap[key] as SimpleTreeViewNode).IDValue.ToString())), false);
         }
 
-        private void addNodes(SimpleTreeNode[] inNodes, List<SimpleTreeNode> outNodes, bool sort)
+        private void addNodes(SimpleTreeNode[] inNodes, List<SimpleTreeNode> outNodes, object parentKey, bool sort)
         {
             if (sort)
             {
@@ -101,13 +115,14 @@ namespace ASEva.UIMonoMac
             foreach (var inNode in inNodes)
             {
                 var outNode = new SimpleTreeViewNode();
-                outNode.ID = new NSString((++nodeID).ToString());
+                outNode.IDValue = ++nodeID;
+                outNode.ParentKey = parentKey;
                 outNode.BackgroundColor = inNode.BackgroundColor;
                 outNode.ChildNodesExpanded = inNode.ChildNodesExpanded;
                 outNode.Key = inNode.Key;
                 outNode.Text = inNode.Text;
                 outNode.TextColor = inNode.TextColor;
-                addNodes(inNode.ChildNodes.ToArray(), outNode.ChildNodes, sort);
+                addNodes(inNode.ChildNodes.ToArray(), outNode.ChildNodes, inNode.Key, sort);
                 outNodes.Add(outNode);
                 nodeMap[outNode.Key] = outNode;
             }
@@ -115,7 +130,8 @@ namespace ASEva.UIMonoMac
 
         private class SimpleTreeViewNode : SimpleTreeNode
         {
-            public NSString ID { get; set; }
+            public ulong IDValue { get; set; }
+            public object ParentKey { get; set; }
         }
 
         private class SimpleTreeViewDataSource : NSOutlineViewDataSource
@@ -125,12 +141,12 @@ namespace ASEva.UIMonoMac
 
             public override NSObject GetChild(NSOutlineView outlineView, long childIndex, NSObject item)
             {
-                if (item == null) return new NSString((rootNodes[(int)childIndex] as SimpleTreeViewNode).ID.ToString());
+                if (item == null) return new NSString((rootNodes[(int)childIndex] as SimpleTreeViewNode).IDValue.ToString());
                 else
                 {
                     var idString = new NSString(item.Handle);
                     var id = Convert.ToUInt64(idString.ToString());
-                    return new NSString((nodeMap[id].ChildNodes[(int)childIndex] as SimpleTreeViewNode).ID.ToString());
+                    return new NSString((nodeMap[id].ChildNodes[(int)childIndex] as SimpleTreeViewNode).IDValue.ToString());
                 }
             }
 
@@ -183,8 +199,8 @@ namespace ASEva.UIMonoMac
             {
                 foreach (SimpleTreeViewNode node in nodes)
                 {
-                    nodeMap[Convert.ToUInt64(node.ID.ToString())] = node;
-                    if (node.ChildNodesExpanded) expandIDs.Add(node.ID);
+                    nodeMap[Convert.ToUInt64(node.IDValue.ToString())] = node;
+                    if (node.ChildNodesExpanded) expandIDs.Add(new NSString(node.IDValue.ToString()));
                     addPairs(node.ChildNodes, expandIDs);
                 }
             }

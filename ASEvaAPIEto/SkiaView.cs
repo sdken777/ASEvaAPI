@@ -80,7 +80,7 @@ namespace ASEva.UIEto
 		public SkiaView()
 		{
 			this.moduleID = null;
-			this.useGL = !Agency.IsGPURenderingDisabled();
+			this.useGL = !GPUOptions.IsGPURenderingDisabled;
 			this.requestOnscreenRendering = false;
 			this.requestOverlay = false;
 			initContent();
@@ -99,7 +99,7 @@ namespace ASEva.UIEto
 		public SkiaView(bool disableGLRendering)
 		{
 			this.moduleID = null;
-			this.useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
+			this.useGL = !GPUOptions.IsGPURenderingDisabled && !disableGLRendering;
 			this.requestOnscreenRendering = false;
 			this.requestOverlay = false;
 			initContent();
@@ -120,7 +120,7 @@ namespace ASEva.UIEto
 		public SkiaView(String moduleID, bool disableGLRendering)
 		{
 			this.moduleID = moduleID;
-			this.useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
+			this.useGL = !GPUOptions.IsGPURenderingDisabled && !disableGLRendering;
 			this.requestOnscreenRendering = false;
 			this.requestOverlay = false;
 			initContent();
@@ -143,7 +143,7 @@ namespace ASEva.UIEto
 		public SkiaView(String moduleID, bool disableGLRendering, bool requestOnscreenRendering)
 		{
 			this.moduleID = moduleID;
-			this.useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
+			this.useGL = !GPUOptions.IsGPURenderingDisabled && !disableGLRendering;
 			this.requestOnscreenRendering = useGL && requestOnscreenRendering;
 			this.requestOverlay = false;
 			initContent();
@@ -168,7 +168,7 @@ namespace ASEva.UIEto
 		public SkiaView(String moduleID, bool disableGLRendering, bool requestOnscreenRendering, bool requestOverlay)
 		{
 			this.moduleID = moduleID;
-			this.useGL = !Agency.IsGPURenderingDisabled() && !disableGLRendering;
+			this.useGL = !GPUOptions.IsGPURenderingDisabled && !disableGLRendering;
 			this.requestOnscreenRendering = useGL && requestOnscreenRendering;
 			this.requestOverlay = requestOverlay;
 			initContent();
@@ -435,7 +435,7 @@ namespace ASEva.UIEto
 				{
 					var options = new GLOptions
 					{
-						EnableOnscreenRendering = requestOnscreenRendering || Agency.IsOnscreenGPURenderingEnabled(),
+						EnableOnscreenRendering = requestOnscreenRendering || GPUOptions.IsOnscreenGPURenderingEnabled,
 						UseTextTasks = false,
 						UseLegacyAPI = false,
 						RequestAntialias = GLAntialias.Disabled,

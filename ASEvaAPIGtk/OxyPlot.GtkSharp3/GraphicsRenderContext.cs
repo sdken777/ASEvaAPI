@@ -1,0 +1,426 @@
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="GraphicsRenderContext.cs" company="OxyPlot">
+//   Copyright (c) 2014 OxyPlot contributors
+// </copyright>
+// <summary>
+//   The graphics render context.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace OxyPlot.GtkSharp
+{
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+
+    using Cairo;
+    using Pango;
+
+    using Gdk;
+
+    class GraphicsRenderContext : RenderContextBase
+    {
+        private readonly Dictionary<OxyImage, Pixbuf> imageCache = new Dictionary<OxyImage, Pixbuf>();
+
+        private readonly HashSet<OxyImage> imagesInUse = new HashSet<OxyImage>();
+
+        private Cairo.Context g;
+
+#if GTKSHARP3
+        private Pango.Context c;
+#endif
+
+        private int clipCount;
+
+        public override int ClipCount => clipCount;
+
+        public void SetGraphicsTarget(Cairo.Context graphics)
+        {
+            this.g = graphics;
+            this.g.Antialias = Antialias.Subpixel; // TODO  .TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+#if GTKSHARP3
+            this.c = Pango.CairoHelper.CreateContext(this.g);
+#endif
+        }
+
+        public override void DrawEllipse(OxyRect rect, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode edgeRenderingMode)
+        {
+            // center of ellipse
+            var ex = rect.Left + (rect.Width / 2.0);
+            var ey = rect.Top + (rect.Height / 2.0);
+
+            // ellipse dimensions
+            var ew = rect.Width;
+            var eh = rect.Height;
+            if (ew <= 0 || eh <= 0) return;
+
+            if (fill.IsVisible())
+            {
+                this.g.Save();
+
+                this.g.Translate(ex, ey); // make (ex, ey) == (0, 0)
+                this.g.Scale(ew / 2.0, eh / 2.0); // for width: ew / 2.0 == 1.0, eh / 2.0 == 1.0
+
+                this.g.Arc(0.0, 0.0, 1.0, 0.0, 2.0 * Math.PI); // 'circle' centered at (0, 0)
+                this.g.ClosePath();
+                this.g.SetSourceColor(fill);
+                this.g.Fill();
+                this.g.Restore();
+            }
+
+            if (stroke.IsVisible() && thickness > 0)
+            {
+                this.g.Save();
+
+                // g.SmoothingMode = SmoothingMode.HighQuality; // TODO
+                this.g.Translate(ex, ey); // make (ex, ey) == (0, 0)
+                this.g.Scale(ew / 2.0, eh / 2.0); // for width: ew / 2.0 == 1.0
+
+                // for height: eh / 2.0 == 1.0
+                this.g.Arc(0.0, 0.0, 1.0, 0.0, 2.0 * Math.PI); // 'circle' centered at (0, 0)
+                this.g.SetSourceColor(stroke);
+                this.g.LineWidth = thickness * 2.0 / ew;
+                this.g.Stroke();
+                this.g.Restore();
+            }
+        }
+
+        public override void DrawLine(
+            IList<ScreenPoint> points,
+            OxyColor stroke,
+            double thickness,
+            EdgeRenderingMode edgeRenderingMode,
+            double[] dashArray,
+            OxyPlot.LineJoin lineJoin)
+        {
+            if (stroke.IsVisible() && thickness > 0 && points.Count >= 2)
+            {
+                // g.SmoothingMode = aliased ? SmoothingMode.None : SmoothingMode.HighQuality; // TODO: Smoothing modes
+                this.g.Save();
+                this.g.SetSourceColor(stroke);
+                this.g.LineJoin = lineJoin.ToLineJoin();
+                this.g.LineWidth = thickness;
+                if (dashArray != null)
+                {
+                    this.g.SetDash(dashArray, 0);
+                }
+
+                bool aliased = !ShouldUseAntiAliasingForLine(edgeRenderingMode, points);
+                this.g.MoveTo(points[0].ToPointD(aliased));
+                foreach (var point in points.Skip(1))
+                {
+                    this.g.LineTo(point.ToPointD(aliased));
+                }
+
+                this.g.Stroke();
+                this.g.Restore();
+            }
+        }
+
+        public override void DrawPolygon(
+            IList<ScreenPoint> points,
+            OxyColor fill,
+            OxyColor stroke,
+            double thickness,
+            EdgeRenderingMode renderingMode,
+            double[] dashArray,
+            OxyPlot.LineJoin lineJoin)
+        {
+            bool aliased = !ShouldUseAntiAliasingForEllipse(renderingMode);
+            if (fill.IsVisible() && points.Count >= 2)
+            {
+                // g.SmoothingMode = aliased ? SmoothingMode.None : SmoothingMode.HighQuality; // TODO: Smoothing modes
+                this.g.Save();
+                this.g.SetSourceColor(fill);
+                this.g.LineJoin = lineJoin.ToLineJoin();
+                this.g.LineWidth = thickness;
+                if (dashArray != null)
+                {
+                    this.g.SetDash(dashArray, 0);
+                }
+
+                this.g.MoveTo(points[0].ToPointD(aliased));
+                foreach (var point in points.Skip(1))
+                {
+                    this.g.LineTo(point.ToPointD(aliased));
+                }
+
+                // g.LineTo(points[0].ToPointD(aliased));
+                this.g.ClosePath();
+                this.g.Fill();
+                this.g.Restore();
+            }
+
+            if (stroke.IsVisible() && thickness > 0 && points.Count >= 2)
+            {
+                // g.SmoothingMode = aliased ? SmoothingMode.None : SmoothingMode.HighQuality; // TODO: Smoothing modes
+                this.g.Save();
+                this.g.SetSourceColor(stroke);
+                this.g.LineJoin = lineJoin.ToLineJoin();
+                this.g.LineWidth = thickness;
+                if (dashArray != null)
+                {
+                    this.g.SetDash(dashArray, 0);
+                }
+
+                this.g.MoveTo(points[0].ToPointD(aliased));
+                foreach (var point in points.Skip(1))
+                {
+                    this.g.LineTo(point.ToPointD(aliased));
+                }
+
+                this.g.ClosePath();
+                this.g.Stroke();
+                this.g.Restore();
+            }
+        }
+
+        public override void DrawRectangle(OxyRect rect, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode renderingMode)
+        {
+            bool aliased = !ShouldUseAntiAliasingForRect(renderingMode);
+            if (fill.IsVisible())
+            {
+                this.g.Save();
+                this.g.Rectangle(rect.ToRect(aliased));
+                this.g.SetSourceColor(fill);
+                this.g.Fill();
+                this.g.Restore();
+            }
+
+            if (stroke.IsVisible() && thickness > 0)
+            {
+                this.g.Save();
+                this.g.SetSourceColor(stroke);
+                this.g.LineWidth = thickness;
+                this.g.Rectangle(rect.ToRect(aliased));
+                this.g.Stroke();
+                this.g.Restore();
+            }
+        }
+
+        public override void DrawText(
+            ScreenPoint p,
+            string text,
+            OxyColor fill,
+            string fontFamily,
+            double fontSize,
+            double fontWeight,
+            double rotate,
+            HorizontalAlignment halign,
+            VerticalAlignment valign,
+            OxySize? maxSize)
+        {
+#if GTKSHARP3
+            Pango.Layout layout = new Layout(this.c);
+#else
+            Pango.Layout layout = Pango.CairoHelper.CreateLayout(this.g);
+#endif
+            Pango.FontDescription font = new Pango.FontDescription();
+            font.Family = fontFamily;
+            font.Weight = (fontWeight >= 700) ? Pango.Weight.Bold : Pango.Weight.Normal;
+            font.AbsoluteSize = (int)(fontSize * Pango.Scale.PangoScale);
+            layout.FontDescription = font;
+            layout.SetText(text);
+            Pango.Rectangle inkRect;
+            Pango.Rectangle size;
+            layout.GetExtents(out inkRect, out size);
+            size.Width /= (int)Pango.Scale.PangoScale;
+            size.Height /= (int)Pango.Scale.PangoScale;
+            if (maxSize != null)
+            {
+                int maxWidth = (int)Math.Min((Double)Int32.MaxValue, maxSize.Value.Width);
+                int maxHeight = (int)Math.Min((Double)Int32.MaxValue, maxSize.Value.Height);
+                size.Width = Math.Min(size.Width, maxWidth);
+                size.Height = Math.Min(size.Height, maxHeight);
+            }
+            this.g.Save();
+            double dx = 0;
+            if (halign == HorizontalAlignment.Center)
+            {
+                dx = -size.Width / 2;
+            }
+
+            if (halign == HorizontalAlignment.Right)
+            {
+                dx = -size.Width;
+            }
+
+            double dy = 0;
+            if (valign == VerticalAlignment.Middle)
+            {
+                dy = -size.Height / 2;
+            }
+
+            if (valign == VerticalAlignment.Bottom)
+            {
+                dy = -size.Height;
+            }
+
+            this.g.Translate(p.X, p.Y);
+            if (Math.Abs(rotate) > double.Epsilon)
+            {
+                this.g.Rotate(rotate * Math.PI / 180.0);
+            }
+
+            this.g.Translate(dx, dy);
+
+            g.Rectangle(0, 0, size.Width + 0.1f, size.Height + 0.1f);
+            g.Clip();
+            this.g.SetSourceColor(fill);
+            Pango.CairoHelper.ShowLayout(this.g, layout);
+            layout.Dispose();
+            this.g.Restore();
+        }
+
+        public override OxySize MeasureText(string text, string fontFamily, double fontSize, double fontWeight)
+        {
+            if (text == null)
+            {
+                return OxySize.Empty;
+            }
+            this.g.Save();
+#if GTKSHARP3
+            Pango.Layout layout = new Layout(this.c);
+#else
+            Pango.Layout layout = Pango.CairoHelper.CreateLayout(this.g);
+#endif
+            Pango.FontDescription font = new Pango.FontDescription();
+            font.Family = fontFamily;
+            font.Weight = (fontWeight >= 700) ? Pango.Weight.Bold : Pango.Weight.Normal;
+            font.AbsoluteSize = (int)(fontSize * Pango.Scale.PangoScale);
+            layout.FontDescription = font;
+            layout.SetText(text);
+            Pango.Rectangle inkRect;
+            Pango.Rectangle logicalRect;
+            layout.GetExtents(out inkRect, out logicalRect);
+            this.g.Restore();
+            layout.Dispose();
+            return new OxySize(logicalRect.Width / Pango.Scale.PangoScale, logicalRect.Height / Pango.Scale.PangoScale);
+        }
+
+        public override void CleanUp()
+        {
+            var imagesToRelease = this.imageCache.Keys.Where(i => !this.imagesInUse.Contains(i)).ToList();
+            foreach (var i in imagesToRelease)
+            {
+                var image = this.GetImage(i);
+                image.Dispose();
+                this.imageCache.Remove(i);
+            }
+
+            this.imagesInUse.Clear();
+#if GTKSHARP3
+            this.c.Dispose();
+#endif
+        }
+
+        public override void DrawImage(
+            OxyImage source,
+            double srcX,
+            double srcY,
+            double srcWidth,
+            double srcHeight,
+            double x,
+            double y,
+            double w,
+            double h,
+            double opacity,
+            bool interpolate)
+        {
+            var image = this.GetImage(source);
+            if (image != null)
+            {
+                // TODO: srcX, srcY
+                this.g.Save();
+
+                /*
+                                ImageAttributes ia = null;
+                                if (opacity < 1)
+                                {
+                                    var cm = new ColorMatrix
+                                                 {
+                                                     Matrix00 = 1f,
+                                                     Matrix11 = 1f,
+                                                     Matrix22 = 1f,
+                                                     Matrix33 = 1f,
+                                                     Matrix44 = (float)opacity
+                                                 };
+
+                                    ia = new ImageAttributes();
+                                    ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+                                }
+
+                */
+                double scalex = w / image.Width;
+                double scaley = h / image.Height;
+
+                // This alternative handles opacity, but can exhibit unattractive antialiasing artifacts when scaling up by large factors.
+                // Pixbuf imageScaled = new Pixbuf(image.Colorspace, image.HasAlpha, image.BitsPerSample, (int)w, (int)h);
+                // image.Composite(image, 0, 0, (int)w, (int)h, srcX, srcY, scalex, scaley, interpolate ? InterpType.Bilinear : InterpType.Nearest, (int)(opacity * 255));
+                // image = imageScaled;
+
+                if (!interpolate)
+                {
+                    image = image.ScaleSimple((int)w, (int)h, InterpType.Nearest);
+                    scalex = 1.0;
+                    scaley = 1.0;
+                }
+                this.g.Translate(x, y);
+                this.g.Scale(scalex, scaley);
+                this.g.Rectangle(0, 0, image.Width, image.Height);
+                Gdk.CairoHelper.SetSourcePixbuf(
+                    this.g,
+                    image,
+                    0.0,
+                    0.0);
+                this.g.Fill();
+                this.g.Restore();
+            }
+        }
+
+        public override void PushClip(OxyRect rect)
+        {
+            clipCount++;
+            this.g.Save();
+            this.g.Rectangle(rect.Left, rect.Top, rect.Width, rect.Height);
+            this.g.Clip();
+        }
+
+        public override void PopClip()
+        {
+            if (clipCount < 1)
+                throw new InvalidOperationException($"Clip count is already 0 - programmer may be missing a call to {nameof(PushClip)}");
+            clipCount--;
+            this.g.Restore();
+        }
+
+        private Pixbuf GetImage(OxyImage source)
+        {
+            if (source == null)
+            {
+                return null;
+            }
+
+            if (!this.imagesInUse.Contains(source))
+            {
+                this.imagesInUse.Add(source);
+            }
+
+            Pixbuf src;
+            if (this.imageCache.TryGetValue(source, out src))
+            {
+                return src;
+            }
+
+            Pixbuf btm;
+            using (var ms = new MemoryStream(source.GetData()))
+            {
+                btm = new Pixbuf(ms);
+            }
+
+            this.imageCache.Add(source, btm);
+            return btm;
+        }
+    }
+}

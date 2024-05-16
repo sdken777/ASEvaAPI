@@ -78,6 +78,7 @@ namespace ASEva.UIEto
             table["Eto"] = ResourceLoader.LoadText("Eto.LICENSE");
             table["SharpGL"] = ResourceLoader.LoadText("SharpGL.LICENSE");
             table["SkiaSharp"] = ResourceLoader.LoadText("SkiaSharp.LICENSE");
+            table["OxyPlot"] = ResourceLoader.LoadText("OxyPlot.LICENSE");
             return table;
         }
     }

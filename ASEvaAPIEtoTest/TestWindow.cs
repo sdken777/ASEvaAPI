@@ -40,7 +40,8 @@ namespace ASEvaAPIEtoTest
             var groupDraw = rowSecond.AddGroupBox(t["draw-group-title"], true, true);
             initDrawGroupBox(groupDraw, onscreenRendering);
 
-            rowSecond.AddGroupBox(t["reserved"], true, true, 200, 100);
+            var groupPlot = rowSecond.AddGroupBox(t["plot-group-title"], true, true, 200, 100);
+            initPlotGroupBox(groupPlot);
 
             loopTimer.Interval = 0.015;
             loopTimer.Elapsed += delegate

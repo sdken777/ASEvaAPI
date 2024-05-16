@@ -48,6 +48,9 @@ namespace ASEva.UIWpf
             TextTableView.Factory = new TextTableViewFactoryWpf();
             FullScreenExtensions.Handler = new FullScreenHandler();
             IconExtensions.FinalFrameOnly = true;
+            OxyPlotView.Factory = new OxyPlotViewFactoryWpf();
+
+            FuncManager.Register("GetUIBackendAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
 
             uiBackend = null;
             webViewBackend = "webview2";

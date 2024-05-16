@@ -14,7 +14,8 @@ using swm = System.Windows.Media;
 
 namespace ASEva.UIWpf
 {
-	class MessageBoxHandler : WidgetHandler<Widget>, MessageBox.IHandler
+	#pragma warning disable SYSLIB0003
+    class MessageBoxHandler : WidgetHandler<Widget>, MessageBox.IHandler
 	{
 		public string Text { get; set; }
 

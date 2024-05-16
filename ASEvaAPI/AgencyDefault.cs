@@ -287,11 +287,6 @@ namespace ASEva
             return null;
         }
 
-        public string[] GetBusFloat32Signals()
-        {
-            return null;
-        }
-
         public float GetBusMessageFPS(int channel, uint localID)
         {
             return 0;
@@ -467,16 +462,6 @@ namespace ASEva
         public LocPoint ConvertOfflineMapPixToLoc(LocPoint origin, int zoom, FloatPoint pixel)
         {
             return new LocPoint();
-        }
-
-        public VideoFrameGetter CreateVideoFrameGetter()
-        {
-            return null;
-        }
-
-        public object GetOfflineMapImage(IntSize imageSize, LocPoint centerLocation, int zoom)
-        {
-            return null;
         }
 
         public void OpenDialog(object caller, string dialogClassID, string config)
@@ -966,16 +951,6 @@ namespace ASEva
             return null;
         }
 
-        public CommonImage ConvertImageToCommon(object image)
-        {
-            return null;
-        }
-
-        public object ConvertImageToPlatform(CommonImage image, PlatformImageType type)
-        {
-            return null;
-        }
-
         public WindowClassInfo GetWindowClassInfo(string windowClassID)
         {
             return null;
@@ -1223,16 +1198,6 @@ namespace ASEva
         {
         }
 
-        public bool IsGPURenderingDisabled()
-        {
-            return false;
-        }
-
-        public bool IsOnscreenGPURenderingEnabled()
-        {
-            return false;
-        }
-
         public void SendBusMessage(string messageID, uint? interval, out byte[] data)
         {
             data = null;
@@ -1346,7 +1311,7 @@ namespace ASEva
             return null;
         }
 
-        public VideoFrameGetterX CreateVideoFrameGetterX()
+        public VideoFrameGetter CreateVideoFrameGetter()
         {
             return null;
         }

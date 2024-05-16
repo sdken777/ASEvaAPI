@@ -1,0 +1,80 @@
+{
+    "version": "0.2.0",
+    "inputs": [
+        {
+            "id": "helper_platform_bin_name",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "platform_bin_name"
+                ]
+            }
+        },
+        {
+            "id": "windows_ui",
+            "type": "pickString",
+            "description": "Choose UI Framework",
+            "default": "",
+            "options": [
+                "",
+                "corewf",
+                "wpf"
+            ]
+        },
+        {
+            "id": "gdk_backend",
+            "type": "pickString",
+            "description": "Choose Display Server",
+            "default": "",
+            "options": [
+                "",
+                "x11",
+                "wayland"
+            ]
+        },
+    ],
+    "configurations": [
+        {
+            "name": "Run (Debug)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build (Debug)",
+            "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest",
+            "args": [],
+            "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "windows": {
+                "args": [ "${input:windows_ui}" ]
+            },
+            "linux": {
+                "env": {
+                    "GDK_BACKEND": "${input:gdk_backend}",
+                }
+            },
+        },
+        {
+            "name": "Run (Release)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build (Release)",
+            "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/ASEvaAPIEtoTest",
+            "args": [],
+            "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "windows": {
+                "args": [ "${input:windows_ui}" ]
+            },
+            "linux": {
+                "env": {
+                    "GDK_BACKEND": "${input:gdk_backend}",
+                }
+            },
+        },
+    ]
+}

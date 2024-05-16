@@ -23,7 +23,7 @@ namespace ASEva.Utility
         {
 	        if (lastState != null)
 	        {
-		        if (ts.Base == lastStateTS.Base && ts.Offset <= lastStateTS.Offset)
+		        if (ts.Session == lastStateTS.Session && ts.Offset <= lastStateTS.Offset)
 		        {
 			        return false;
 		        }
@@ -37,7 +37,7 @@ namespace ASEva.Utility
 	        }
 	        else
 	        {
-		        if (filterTS != null && ts.Base == filterTS.Base && ts.Offset - filterTS.Offset < Interval) filterState = true;
+		        if (filterTS != null && ts.Session == filterTS.Session && ts.Offset - filterTS.Offset < Interval) filterState = true;
 		        else filterState = false;
 	        }
 

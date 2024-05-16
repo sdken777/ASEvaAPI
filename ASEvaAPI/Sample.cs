@@ -215,24 +215,14 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Session independent time info
+    /// (api:app=3.0.3) Session independent time info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) Session无关时间信息
+    /// (api:app=3.0.3) Session无关时间信息
     /// </summary>
     public class IndependentTimeInfo
     {
-        /// \~English
-        /// <summary>
-        /// Time offset synchronization status
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 时间偏置同步状态
-        /// </summary>
-        public TimeOffsetSync OffsetSync { get { return offsetSync; }}
-
         /// \~English
         /// <summary>
         /// CPU tick while data arrived, 0 means invalid
@@ -281,26 +271,24 @@ namespace ASEva
         /// <summary>
         /// 默认构造函数
         /// </summary>
-        public IndependentTimeInfo(TimeOffsetSync offsetSync, ulong cpuTick, ulong hostPosix, ulong guestPosix, ulong gnssPosix)
+        public IndependentTimeInfo(ulong cpuTick, ulong hostPosix, ulong guestPosix, ulong gnssPosix)
         {
-            this.offsetSync = offsetSync;
             this.cpuTick = cpuTick;
             this.hostPosix = hostPosix;
             this.guestPosix = guestPosix;
             this.gnssPosix = gnssPosix;
         }
 
-        private TimeOffsetSync offsetSync;
         private ulong cpuTick, hostPosix, guestPosix, gnssPosix;
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Timestamp
+    /// (api:app=3.0.3) Timestamp
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 时间戳
+    /// (api:app=3.0.3) 时间戳
     /// </summary>
     public struct Timestamp
     {
@@ -326,6 +314,16 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// Time offset synchronization status
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 时间偏置同步状态
+        /// </summary>
+        public TimeOffsetSync OffsetSync { get { return offsetSync; }}
+
+        /// \~English
+        /// <summary>
         /// Session independent time info
         /// </summary>
         /// \~Chinese
@@ -342,15 +340,17 @@ namespace ASEva
         /// <summary>
         /// 默认构造函数
         /// </summary>
-        public Timestamp(SessionIdentifier session, double offset, IndependentTimeInfo timeInfo)
+        public Timestamp(SessionIdentifier session, double offset, TimeOffsetSync offsetSync, IndependentTimeInfo timeInfo)
         {
             this.session = session;
             this.offset = offset;
+            this.offsetSync = offsetSync;
             this.timeInfo = timeInfo;
         }
 
         private SessionIdentifier session;
         private double offset;
+        private TimeOffsetSync offsetSync;
         private IndependentTimeInfo timeInfo;
     }
 
@@ -392,30 +392,28 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// The session that sample belongs to (Be aware that "set" operation will clear session independent time info)
+        /// Time offset, in seconds
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 所属session ID（注意，set操作将清除Session无关时间信息）
-        /// </summary>
-        public DateTime Base
-        {
-            get { return timestamp.Session.ToDateTime(); }
-            set { timestamp = new Timestamp(SessionIdentifier.FromDateTime(value), timestamp.Offset, null); }
-        }
-
-        /// \~English
-        /// <summary>
-        /// Time offset, in seconds (Be aware that "set" operation will clear session independent time info)
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 时间偏置，单位秒（注意，set操作将清除Session无关时间信息）
+        /// 时间偏置，单位秒
         /// </summary>
         public double Offset
         {
             get { return timestamp.Offset; }
-            set { timestamp = new Timestamp(timestamp.Session, value, null); }
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.0.3) Time offset synchronization status
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.0.3) 时间偏置同步状态
+        /// </summary>
+        public TimeOffsetSync OffsetSync
+        {
+            get { return timestamp.OffsetSync; }
         }
 
         /// \~English
@@ -444,7 +442,7 @@ namespace ASEva
         {
             get
             {
-                return Agency.GetLocalDateTime(Base, Offset, false);
+                return Agency.GetLocalDateTime(Session.ToDateTime(), Offset, false);
             }
         }
 
@@ -460,7 +458,7 @@ namespace ASEva
         {
             get
             {
-                return Agency.GetUTCDateTime(Base, Offset, true);
+                return Agency.GetUTCDateTime(Session.ToDateTime(), Offset, true);
             }
         }
 
@@ -474,7 +472,7 @@ namespace ASEva
         /// </summary>
         public Sample()
         {
-            timestamp = new Timestamp(new SessionIdentifier(0, 0, 0, 0, 0, 0), 0, null);
+            timestamp = new Timestamp(new SessionIdentifier(0, 0, 0, 0, 0, 0), 0, TimeOffsetSync.HostArrival, null);
             timeline = 0;
         }
 
@@ -494,51 +492,55 @@ namespace ASEva
         /// <param name="timeline">在时间线上的位置</param>
         public Sample(DateTime session, double offset, double timeline)
         {
-            timestamp = new Timestamp(SessionIdentifier.FromDateTime(session), offset, null);
+            timestamp = new Timestamp(SessionIdentifier.FromDateTime(session), offset, TimeOffsetSync.HostArrival, null);
             this.timeline = timeline;
         }
 
         /// \~English
         /// <summary>
-        /// Constructor based on time information
+        /// (api:app=3.0.3) Constructor based on time information
         /// </summary>
         /// <param name="session">The session that sample belongs to</param>
         /// <param name="offset">Time offset, in seconds</param>
+        /// <param name="offsetSync">Time offset synchronization status</param>
         /// <param name="timeInfo">Session independent time info</param>
         /// <param name="timeline">Timeline point</param>
         /// \~Chinese
         /// <summary>
-        /// 按指定时间信息进行初始化
+        /// (api:app=3.0.3) 按指定时间信息进行初始化
         /// </summary>
         /// <param name="session">所属session ID</param>
         /// <param name="offset">时间偏置，单位秒</param>
+        /// <param name="offsetSync">时间偏置同步状态</param>
         /// <param name="timeInfo">Session无关时间信息</param>
         /// <param name="timeline">在时间线上的位置</param>
-        public Sample(DateTime session, double offset, IndependentTimeInfo timeInfo, double timeline)
+        public Sample(DateTime session, double offset, TimeOffsetSync offsetSync, IndependentTimeInfo timeInfo, double timeline)
         {
-            timestamp = new Timestamp(SessionIdentifier.FromDateTime(session), offset, timeInfo);
+            timestamp = new Timestamp(SessionIdentifier.FromDateTime(session), offset, offsetSync, timeInfo);
             this.timeline = timeline;
         }
 
         /// \~English
         /// <summary>
-        /// Set time information
+        /// (api:app=3.0.3) Set time information
         /// </summary>
         /// <param name="session">The session that sample belongs to</param>
         /// <param name="offset">Time offset, in seconds</param>
+        /// <param name="offsetSync">Time offset synchronization status</param>
         /// <param name="timeInfo">Session independent time info</param>
         /// <param name="timeline">Timeline point</param>
         /// \~Chinese
         /// <summary>
-        /// 设置当前样本的时间戳和时间线位置
+        /// (api:app=3.0.3) 设置当前样本的时间戳和时间线位置
         /// </summary>
         /// <param name="session">所属session ID</param>
         /// <param name="offset">时间偏置，单位秒</param>
+        /// <param name="offsetSync">时间偏置同步状态</param>
         /// <param name="timeInfo">Session无关时间信息</param>
         /// <param name="timeline">在时间线上的位置</param>
-        public void SetTime(DateTime session, double offset, IndependentTimeInfo timeInfo, double timeline)
+        public void SetTime(DateTime session, double offset, TimeOffsetSync offsetSync, IndependentTimeInfo timeInfo, double timeline)
         {
-            timestamp = new Timestamp(SessionIdentifier.FromDateTime(session), offset, timeInfo);
+            timestamp = new Timestamp(SessionIdentifier.FromDateTime(session), offset, offsetSync, timeInfo);
             this.timeline = timeline;
         }
 
@@ -877,7 +879,7 @@ namespace ASEva
                 }
                 else if (t1Gap < maxGap && t2Gap < maxGap)
                 {
-                    if (s1.Base == s2.Base)
+                    if (s1.Session == s2.Session)
                     {
                         result.s1Index = s1Index;
                         result.s2Index = s2Index;
@@ -970,10 +972,12 @@ namespace ASEva
                         outComps[i] = (ulong)((long)t1Comps[i] + (long)(result.w2 * diffTime));
                     }
 
-                    timeInfo = new IndependentTimeInfo(t1.OffsetSync == t2.OffsetSync ? t1.OffsetSync : TimeOffsetSync.Interpolated, outComps[0], outComps[1], outComps[2], outComps[3]);
+                    timeInfo = new IndependentTimeInfo(outComps[0], outComps[1], outComps[2], outComps[3]);
                 }
 
-                buf.SetTime(result.s1.Base, result.s1.Offset * result.w1 + result.s2.Offset * result.w2, timeInfo, targetTimeline);
+                var timeOffset = result.s1.Offset * result.w1 + result.s2.Offset * result.w2;
+                var offsetSync = result.s1.OffsetSync == result.s2.OffsetSync ? result.s1.OffsetSync : TimeOffsetSync.Interpolated;
+                buf.SetTime(result.s1.Session.ToDateTime(), timeOffset, offsetSync, timeInfo, targetTimeline);
                 return buf;
             }
             catch (Exception)
@@ -1000,17 +1004,19 @@ namespace ASEva
         /// <returns>最近样本，若无则返回null</returns>
         public static Sample SearchAndGetNearest(List<Sample> samples, double targetTimeline, DateTime targetSession)
         {
+            var targetSessionID = SessionIdentifier.FromDateTime(targetSession);
+            
             if (samples.Count == 0) return null;
             if (samples.Count == 1)
             {
-                if (samples[0].Base == targetSession) return samples[0];
+                if (samples[0].Session == targetSessionID) return samples[0];
                 else return null;
             }
 
             var result = Search(samples, targetTimeline, 10/* support 10 second gap */);
             if (result == null) return null;
 
-            if (result.s1.Base != targetSession) return null;
+            if (result.s1.Session != targetSessionID) return null;
 
             if (Math.Abs(result.s1.Timeline - targetTimeline) < Math.Abs(result.s2.Timeline - targetTimeline)) return result.s1;
             else return result.s2;

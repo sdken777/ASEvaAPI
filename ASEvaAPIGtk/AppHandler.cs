@@ -93,6 +93,14 @@ namespace ASEva.UIGtk
             FlowLayout2D.Factory = new FlowLayout2DFactoryGtk();
             OverlayLayout.DelayHandleControl = true;
             FullScreenExtensions.Handler = new FullScreenHandler();
+            OxyPlotView.Factory = new OxyPlotViewFactoryGtk();
+
+            FuncManager.Register("GetUIBackendAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
+            FuncManager.Register("RegisterLegacyValueGraph", delegate { Agency.RegisterGraphPanel(GraphType.SingleValue, getLegacyStyleName(), typeof(ValueGraph)); return null; });
+            FuncManager.Register("RegisterLegacyHistLineGraph", delegate { Agency.RegisterGraphPanel(GraphType.HistAndLine, getLegacyStyleName(), typeof(HistLineGraph)); return null; });
+            FuncManager.Register("RegisterLegacyScatterPointsGraph", delegate { Agency.RegisterGraphPanel(GraphType.ScatterPoints, getLegacyStyleName(), typeof(ScatterPointsGraph)); return null; });
+            FuncManager.Register("RegisterLegacyMatrixTableGraph", delegate { Agency.RegisterGraphPanel(GraphType.MatrixTable, getLegacyStyleName(), typeof(MatrixTableGraph)); return null; });
+            FuncManager.Register("RegisterLegacyLabelTableGraph", delegate { Agency.RegisterGraphPanel(GraphType.LabelTable, getLegacyStyleName(), typeof(LabelTableGraph)); return null; });
 
             webViewBackend = "webkit2";
 
@@ -196,6 +204,11 @@ namespace ASEva.UIGtk
             }
             catch (Exception) {}
             return "unknown";
+        }
+
+        private String getLegacyStyleName()
+        {
+            return Agency.GetAppLanguage() == Language.Chinese ? "旧图表" : "Legacy Graph";
         }
 
 		[DllImport("libgdk-3.so.0", SetLastError = true)]

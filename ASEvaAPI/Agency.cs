@@ -97,7 +97,6 @@ namespace ASEva
         void SetGlobalPath(String key, String path);
         BusFileInfo[] GetBusProtocolFilesInfo();
         int? GetBusProtocolFileChannel(String protocolName);
-        String[] GetBusFloat32Signals();
         float GetBusMessageFPS(int channel, uint localID);
         BusMessageInfo GetBusMessageInfo(int channel, uint localID);
         bool IsBusMessageBound(String busMessageID);
@@ -143,9 +142,7 @@ namespace ASEva
         Dictionary<String, String> GetNativePluginVersions(String prefix);
         Dictionary<String, Version> GetNativePluginVersions(NativeLibraryType type);
         VideoFrameGetter CreateVideoFrameGetter();
-        VideoFrameGetterX CreateVideoFrameGetterX();
         byte[] GetPreviewJpeg(int channel, double timeline, double maxGap, out Timestamp? timestamp, out CameraInfo cameraInfo);
-        object GetOfflineMapImage(IntSize imageSize, LocPoint centerLocation, int zoom);
         CommonImage GetOfflineMapCommonImage(IntSize imageSize, LocPoint centerLocation, int zoom);
         FloatPoint ConvertOfflineMapLocToPix(LocPoint origin, int zoom, LocPoint point);
         Utility.LocPoint ConvertOfflineMapPixToLoc(LocPoint origin, int zoom, FloatPoint pixel);
@@ -253,8 +250,6 @@ namespace ASEva
         CreatePanelResult CreateWindowPanel(object caller, String windowClassID, String transformID, out object panel, out WindowClassInfo info);
         CreatePanelResult CreateConfigPanel(object caller, String dialogClassID, String transformID, out object panel, out DialogClassInfo info);
         void UnregisterPanel(object panel);
-        CommonImage ConvertImageToCommon(object image);
-        object ConvertImageToPlatform(CommonImage image, PlatformImageType type);
         WindowClassInfo GetWindowClassInfo(String windowClassID);
         WindowClassInfo GetWindowClassInfo(String windowClassID, String transformID);
         DialogClassInfo GetDialogClassInfo(String dialogClassID);
@@ -279,8 +274,6 @@ namespace ASEva
         byte[] CallNativeFunction(object caller, String nativeClassID, String funcID, byte[] input);
         void SetAppFunctionHandler(object caller, String nativeClassID, String funcID, AppFunctionHandler handler);
         void ResetAppFunctionHandler(object caller, String nativeClassID, String funcID);
-        bool IsGPURenderingDisabled();
-        bool IsOnscreenGPURenderingEnabled();
         void ResetGPUDecoderTestResults();
         DataSubscriber SubscribeData(String dataID, int bufferLength, int timeout);
         void PublishData(String dataID, byte[] data);
@@ -1670,21 +1663,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get all bus signals should be parsed as a 32bit floating number
-        /// </summary>
-        /// <returns>Signal IDs</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取所有作为32位浮点解析的信号列表
-        /// </summary>
-        /// <returns>信号ID列表</returns>
-        public static String[] GetBusFloat32Signals()
-        {
-            return Handler.GetBusFloat32Signals();
-        }
-
-        /// \~English
-        /// <summary>
         /// Get frame rate of messages with the same local ID at the same channel
         /// </summary>
         /// <param name="channel">Bus channel, ranges 1~16</param>
@@ -2634,27 +2612,6 @@ namespace ASEva
         /// <param name="imageSize">Image size</param>
         /// <param name="centerLocation">Location of the image's center</param>
         /// <param name="zoom">Scale, ranges 0~24</param>
-        /// <returns>Platform native image of offline map, null if failed to query</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取离线地图图像
-        /// </summary>
-        /// <param name="imageSize">指定图像大小</param>
-        /// <param name="centerLocation">图像中心的经纬度</param>
-        /// <param name="zoom">图像的尺度，0~24</param>
-        /// <returns>离线地图图像（平台原生图像），空表示获取失败</returns>
-        public static object GetOfflineMapImage(IntSize imageSize, LocPoint centerLocation, int zoom)
-        {
-            return Handler.GetOfflineMapImage(imageSize, centerLocation, zoom);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Query offline map's image
-        /// </summary>
-        /// <param name="imageSize">Image size</param>
-        /// <param name="centerLocation">Location of the image's center</param>
-        /// <param name="zoom">Scale, ranges 0~24</param>
         /// <returns>Common image of offline map, null if failed to query</returns>
         /// \~Chinese
         /// <summary>
@@ -2764,21 +2721,6 @@ namespace ASEva
         public static VideoFrameGetter CreateVideoFrameGetter()
         {
             return Handler.CreateVideoFrameGetter();
-        }
-
-        /// \~English
-        /// <summary>
-        /// Create a video frame getter (updated)
-        /// </summary>
-        /// <returns>Video frame getter (updated)</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 创建视频帧获取器(扩展版)
-        /// </summary>
-        /// <returns>视频帧获取器(扩展版)</returns>
-        public static VideoFrameGetterX CreateVideoFrameGetterX()
-        {
-            return Handler.CreateVideoFrameGetterX();
         }
 
         /// \~English
@@ -4462,42 +4404,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Convert platform image to common image
-        /// </summary>
-        /// <param name="image">Platform image</param>
-        /// <returns>Common image, null if failed to convert</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 转换平台特化图像对象至通用图像数据
-        /// </summary>
-        /// <param name="image">平台特化图像</param>
-        /// <returns>通用图像数据(BGR不逆序)，转换失败则返回null</returns>
-        public static CommonImage ConvertImageToCommon(object image)
-        {
-            return Handler.ConvertImageToCommon(image);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Convert common image to platform image
-        /// </summary>
-        /// <param name="image">Common image</param>
-        /// <param name="type">Platform image type</param>
-        /// <returns>Platform image, null if failed to convert</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 转换通用图像数据至平台特化图像
-        /// </summary>
-        /// <param name="image">通用图像数据</param>
-        /// <param name="type">平台特化图像类型</param>
-        /// <returns>平台特化图像，转换失败则返回null</returns>
-        public static object ConvertImageToPlatform(CommonImage image, PlatformImageType type)
-        {
-            return Handler.ConvertImageToPlatform(image, type);
-        }
-
-        /// \~English
-        /// <summary>
         /// Get information of window class
         /// </summary>
         /// <param name="windowClassID">Window class ID</param>
@@ -4912,36 +4818,6 @@ namespace ASEva
         public static void ResetAppFunctionHandler(object caller, String nativeClassID, String funcID)
         {
             Handler.ResetAppFunctionHandler(caller, nativeClassID, funcID);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Get whether GPU rendering is disabled
-        /// </summary>
-        /// <returns>Whether GPU rendering is disabled</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取是否全局禁用GPU渲染
-        /// </summary>
-        /// <returns>是否全局禁用GPU渲染</returns>
-        public static bool IsGPURenderingDisabled()
-        {
-            return Handler.IsGPURenderingDisabled();
-        }
-
-        /// \~English
-        /// <summary>
-        /// Get whether GPU onscreen rendering is enabled
-        /// </summary>
-        /// <returns>Whether GPU onscreen rendering is enabled (always return false while GPU rendering is disabled)</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取是否全局启用在屏GPU渲染
-        /// </summary>
-        /// <returns>是否全局启用在屏GPU渲染（若已全局禁用GPU渲染则返回false）</returns>
-        public static bool IsOnscreenGPURenderingEnabled()
-        {
-            return Handler.IsOnscreenGPURenderingEnabled();
         }
 
         /// \~English

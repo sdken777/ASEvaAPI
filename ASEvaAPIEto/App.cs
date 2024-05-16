@@ -49,39 +49,65 @@ namespace ASEva.UIEto
             if (!initAppInvoked)
             {
                 var availableUICodes = getAvailableUICodes();
-                if (availableUICodes == null) return false;
-
-                initApp(availableUICodes[0]);
-                AppDomain.CurrentDomain.UnhandledException += (o, args) => { TriggerFatalException(args); };
+                if (availableUICodes == null || availableUICodes.Length == 0) return false;
+                initApp(availableUICodes[0], false);
             }
             return application != null;
         }
 
         /// \~English
         /// <summary>
-        /// Initialize application with the specified UI framework
+        /// (app:eto=3.0.2) Initialize application with the specified UI framework
         /// </summary>
-        /// <param name="uiCode">UI framework code</param>
+        /// <param name="uiCode">UI framework code, set to null to use default framework</param>
+        /// <param name="attach">Set this argument to true if not invoking ASEva.UIEto.App.Run to execute the GUI main loop</param>
         /// <returns>Whether initialization is successfull</returns>
         /// \~Chinese
         /// <summary>
-        /// 以指定UI框架初始化应用程序
+        /// (app:eto=3.0.2) 以指定UI框架初始化应用程序
         /// </summary>
-        /// <param name="uiCode">UI框架代号</param>
+        /// <param name="uiCode">UI框架代号，设置为空则使用默认框架</param>
+        /// <param name="attach">若不调用 ASEva.UIEto.App.Run 执行界面主循环，则设置为true</param>
         /// <returns>是否成功</returns>
-        public static bool Init(String uiCode)
+        public static bool Init(String uiCode, bool attach = false)
         {
-            if (String.IsNullOrEmpty(uiCode))
-            {
-                return Init();
-            }
             if (!initAppInvoked)
             {
                 var availableUICodes = getAvailableUICodes();
-                if (availableUICodes == null || !availableUICodes.Contains(uiCode)) return false;
-                initApp(uiCode);
+                if (String.IsNullOrEmpty(uiCode))
+                {
+                    if (availableUICodes == null || availableUICodes.Length == 0) return false;
+                    uiCode = availableUICodes[0];
+                }
+                else
+                {
+                    if (availableUICodes == null || !availableUICodes.Contains(uiCode)) return false;
+                }
+                initApp(uiCode, attach);
             }
             return application != null;
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.0.1) Initialize GPU rendering options (Only the first call is valid)
+        /// </summary>
+        /// <param name="renderingDisabled">Whether to disable GPU rendering</param>
+        /// <param name="onscreenRenderingEnabled">Whether to enable GPU onscreen rendering (If renderingDisabled is true, this setting is invalid)</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.0.1) 初始化GPU渲染选项，仅第一次调用有效
+        /// </summary>
+        /// <param name="renderingDisabled">是否禁用GPU渲染</param>
+        /// <param name="onscreenRenderingEnabled">是否启用GPU在屏渲染，若renderingDisabled为true则此设定无效</param>
+        public static void InitGPUOptions(bool renderingDisabled, bool onscreenRenderingEnabled)
+        {
+            if (!gpuOptionsInitialized)
+            {
+                gpuOptionsInitialized = true;
+                GPUOptions.IsGPURenderingDisabled = renderingDisabled;
+                GPUOptions.IsOnscreenGPURenderingEnabled = onscreenRenderingEnabled;
+            }
         }
 
         /// \~English
@@ -326,6 +352,7 @@ namespace ASEva.UIEto
         public static Control ConvertControlToEto(object platformControl)
         {
             if (handler == null || platformControl == null) return null;
+            if (platformControl is Control) return platformControl as Control;
             return handler.ConvertControlToEto(platformControl);
         }
 
@@ -567,7 +594,7 @@ namespace ASEva.UIEto
             }
         }
 
-        private static void initApp(String uiCode)
+        private static void initApp(String uiCode, bool attach)
         {
             initAppInvoked = true;
 
@@ -633,8 +660,32 @@ namespace ASEva.UIEto
             if (handler != null && application == null)
             {
                 application = handler.CreateApp(out uiBackend, out webViewBackend);
-                if (application != null) runningUI = uiCode;
+                if (application != null)
+                {
+                    runningUI = uiCode;
+
+                    AppDomain.CurrentDomain.UnhandledException += (o, args) => { TriggerFatalException(args); };
+
+                    if (attach) application.Attach();
+
+                    FuncManager.Register("GetEtoAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
+                    FuncManager.Register("GetEtoLibVersion", delegate { return APIInfo.GetEtoLibVersion(); });
+                    FuncManager.Register("GetEtoAPIThirdPartyNotices", delegate { return APIInfo.GetThirdPartyNotices(); });
+                    FuncManager.Register("GetUIBackendAPIThirdPartyNotices", delegate { return handler.GetThirdPartyNotices(); });
+
+                    FuncManager.Register("RegisterEtoSingleValueGraph", delegate { Agency.RegisterGraphPanel(GraphType.SingleValue, getStyleName("Eto单值", "Eto Single Value"), typeof(ValueGraph)); return null; });
+                    FuncManager.Register("RegisterEtoHistLineGraph", delegate { Agency.RegisterGraphPanel(GraphType.HistAndLine, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(HistLineGraph)); return null; });
+                    FuncManager.Register("RegisterEtoScatterPointsGraph", delegate { Agency.RegisterGraphPanel(GraphType.ScatterPoints, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(ScatterPointsGraph)); return null; });
+                    FuncManager.Register("RegisterEtoMatrixTableGraph", delegate { Agency.RegisterGraphPanel(GraphType.MatrixTable, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(MatrixTableGraph)); return null; });
+                    FuncManager.Register("RegisterEtoLabelTableGraph", delegate { Agency.RegisterGraphPanel(GraphType.LabelTable, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(LabelTableGraph)); return null; });
+                    FuncManager.Register("RegisterEtoHistogramValueGraph", delegate { Agency.RegisterGraphPanel(GraphType.HistAndLine, getStyleName("Eto柱状图值", "Eto Histogram Value"), typeof(HistogramValueGraph)); return null; });
+                }
             }
+        }
+
+        private static String getStyleName(String chinese, String english)
+        {
+            return Agency.GetAppLanguage() == Language.Chinese ? chinese : english;
         }
 
         private static AppHandler handler = null;
@@ -648,5 +699,6 @@ namespace ASEva.UIEto
         private static bool initAppInvoked = false;
         private static Exception firstFatalException = null;
         private static UITimer exceptionTimer = null;
+        private static bool gpuOptionsInitialized = false;
     }
 }
