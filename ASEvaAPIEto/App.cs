@@ -685,8 +685,7 @@ namespace ASEva.UIEto
 
         private static String getStyleName(String chinese, String english)
         {
-            var lang = Agency.GetAppLanguage();
-            return lang != null && lang == "ch" ? chinese : english;
+            return Agency.GetAppLanguage() == Language.Chinese ? chinese : english;
         }
 
         private static AppHandler handler = null;

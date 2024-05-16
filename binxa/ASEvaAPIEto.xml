@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=3.0.3
+            version=3.0.4
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -3884,14 +3884,24 @@
         <member name="M:ASEva.UIEto.OxyPlotView.SetModel(OxyPlot.PlotModel)">
             \~English
             <summary>
-            Set OxyPlot model
+            Set OxyPlot model, and refresh drawing
             </summary>
             <param name="model">OxyPlot model</param>
             \~Chinese
             <summary>
-            设置OxyPlot模型
+            设置OxyPlot模型，并刷新显示
             </summary>
             <param name="model">OxyPlot模型</param>
+        </member>
+        <member name="M:ASEva.UIEto.OxyPlotView.InvalidatePlot">
+            \~English
+            <summary>
+            (api:eto=3.0.4) Refresh drawing
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.0.4) 刷新绘制
+            </summary>
         </member>
         <member name="T:ASEva.UIEto.Pixel">
             \~English

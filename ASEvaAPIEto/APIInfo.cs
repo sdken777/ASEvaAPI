@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 0, 4, 0); // Update log / 更新记录: 实现基于Eto和OxyPlot的图表面板
+            return new Version(3, 0, 4, 0); // Update log / 更新记录: 实现基于Eto和OxyPlot的图表面板。新增OxyPlotView.InvalidatePlot
         }
 
         /// \~English

@@ -48,11 +48,11 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:eto=2.15.2) Refresh drawing
+        /// (api:eto=3.0.4) Refresh drawing
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=2.15.2) 刷新绘制
+        /// (api:eto=3.0.4) 刷新绘制
         /// </summary>
         public void InvalidatePlot()
         {
