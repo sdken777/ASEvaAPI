@@ -4286,7 +4286,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.16.5
+            version=2.16.6
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -15309,6 +15309,46 @@
             插件太旧
             </summary>
         </member>
+        <member name="T:ASEva.PluginInstalledStatus">
+            \~English
+            <summary>
+            (api:app=2.16.6) Status of installed plugin
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=2.16.6) 已安装插件的状态
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginInstalledStatus.NotInstalled">
+            \~English
+            <summary>
+            Not installed
+            </summary>
+            \~Chinese
+            <summary>
+            未安装
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginInstalledStatus.InstalledAndEnabled">
+            \~English
+            <summary>
+            Installed and enabled
+            </summary>
+            \~Chinese
+            <summary>
+            已安装且启用中
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginInstalledStatus.InstalledButDisabled">
+            \~English
+            <summary>
+            Installed but disabled
+            </summary>
+            \~Chinese
+            <summary>
+            已安装但被禁用
+            </summary>
+        </member>
         <member name="T:ASEva.InstallPluginLibraryInfo">
             \~English
             <summary>
@@ -15367,6 +15407,16 @@
             \~Chinese
             <summary>
             已安装插件的版本，若未安装则为null
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginLibraryInfo.InstalledStatus">
+            \~English
+            <summary>
+            (api:app=2.16.6) Status of installed plugin
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=2.16.6) 已安装插件的状态
             </summary>
         </member>
         <member name="T:ASEva.InstallPluginDriverInfo">

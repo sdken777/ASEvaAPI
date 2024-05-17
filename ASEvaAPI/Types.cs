@@ -3276,6 +3276,47 @@ namespace ASEva
 
     /// \~English
     /// <summary>
+    /// (api:app=2.16.6) Status of installed plugin
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=2.16.6) 已安装插件的状态
+    /// </summary>
+    public enum PluginInstalledStatus
+    {
+        /// \~English
+        /// <summary>
+        /// Not installed
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 未安装
+        /// </summary>
+        NotInstalled = 0,
+
+        /// \~English
+        /// <summary>
+        /// Installed and enabled
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 已安装且启用中
+        /// </summary>
+        InstalledAndEnabled = 1,
+
+        /// \~English
+        /// <summary>
+        /// Installed but disabled
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 已安装但被禁用
+        /// </summary>
+        InstalledButDisabled = 2,
+    }
+
+    /// \~English
+    /// <summary>
     /// (api:app=2.3.0) Information of plugin related library
     /// </summary>
     /// \~Chinese
@@ -3333,6 +3374,16 @@ namespace ASEva
         /// 已安装插件的版本，若未安装则为null
         /// </summary>
         public Version InstalledVersion { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.16.6) Status of installed plugin
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.16.6) 已安装插件的状态
+        /// </summary>
+        public PluginInstalledStatus InstalledStatus { get; set; }
     }
 
     /// \~English
