@@ -141,8 +141,10 @@ namespace ASEva
         Dictionary<VideoDeviceID, VideoDeviceInfo> GetVideoDevices();
         Dictionary<String, String> GetNativePluginVersions(String prefix);
         Dictionary<String, Version> GetNativePluginVersions(NativeLibraryType type);
-        VideoFrameGetter CreateVideoFrameGetter();
         byte[] GetPreviewJpeg(int channel, double timeline, double maxGap, out Timestamp? timestamp, out CameraInfo cameraInfo);
+        IntSize? GetVideoRawSize(int channel, double timeline);
+        CommonImage GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha, out Timestamp? timestamp, out CameraInfo cameraInfo);
+        CommonImage GetVideoFrameThumbnail(int channel, double timeline, double maxGap, bool withAlpha);
         CommonImage GetOfflineMapCommonImage(IntSize imageSize, LocPoint centerLocation, int zoom);
         FloatPoint ConvertOfflineMapLocToPix(LocPoint origin, int zoom, LocPoint point);
         Utility.LocPoint ConvertOfflineMapPixToLoc(LocPoint origin, int zoom, FloatPoint pixel);
@@ -2710,17 +2712,75 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Create a video frame getter
+        /// (api:app=3.0.5) Get the video raw size at the specified time at the specified channel
         /// </summary>
-        /// <returns>Video frame getter</returns>
+        /// <param name="channel">Video channel, ranges 0~23</param>
+        /// <param name="timeline">Target timeline point, in seconds</param>
+        /// <returns>Raw size, null if no data</returns>
         /// \~Chinese
         /// <summary>
-        /// 创建视频帧获取器
+        /// (api:app=3.0.5) 获取指定通道在指定时间上的视频帧的原始尺寸
         /// </summary>
-        /// <returns>视频帧获取器</returns>
-        public static VideoFrameGetter CreateVideoFrameGetter()
+        /// <param name="channel">视频通道，0~23</param>
+        /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
+        /// <returns>原始尺寸，若无数据则返回null</returns>
+        public static IntSize? GetVideoRawSize(int channel, double timeline)
         {
-            return Handler.CreateVideoFrameGetter();
+            return Handler.GetVideoRawSize(channel, timeline);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.0.5) Get the nearest video frame data from the specified time
+        /// </summary>
+        /// <param name="channel">Video channel, ranges 0~23</param>
+        /// <param name="timeline">Target timeline point, in seconds</param>
+        /// <param name="maxGap">Max time gap, in seconds</param>
+        /// <param name="mode">The mode to query video frame</param>
+        /// <param name="clip">Based on the mode, image is further cropped to the raw coordinate system, at least 16x16, null means the full size</param>
+        /// <param name="withAlpha">Whether to output image with alpha channel (Value fixed to 255)</param>
+        /// <param name="timestamp">Timestamp of output image, null if failed to query</param>
+        /// <param name="cameraInfo">Camera information, null if failed to query</param>
+        /// <returns>Video frame data, size is determined by "mode" and "clip", null if failed to query</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.0.5) 获取距离指定时间最近的视频帧数据
+        /// </summary>
+        /// <param name="channel">视频通道，0~23</param>
+        /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
+        /// <param name="maxGap">容许的最大间隔，单位秒</param>
+        /// <param name="mode">获取视频帧的模式</param>
+        /// <param name="clip">在输出模式基础上进一步裁剪，为原始尺寸坐标系，至少为16x16，null表示完整输出</param>
+        /// <param name="withAlpha">是否输出带Alpha通道的图像(固定赋值255)</param>
+        /// <param name="timestamp">输出图像的时间戳，获取失败则为null</param>
+        /// <param name="cameraInfo">摄像头信息，获取失败则为null</param>
+        /// <returns>视频帧数据，图像实际大小由mode和clip决定，获取失败则返回null</returns>
+        public static CommonImage GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha, out Timestamp? timestamp, out CameraInfo cameraInfo)
+        {
+            return Handler.GetVideoFrameImage(channel, timeline, maxGap, mode, clip, withAlpha, out timestamp, out cameraInfo);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.0.5) Get the nearest thumbnail data from the specified time
+        /// </summary>
+        /// <param name="channel">Video channel, ranges 0~23</param>
+        /// <param name="timeline">Target timeline point, in seconds</param>
+        /// <param name="maxGap">Max time gap, in seconds</param>
+        /// <param name="withAlpha">Whether to output image with alpha channel (Value fixed to 255)</param>
+        /// <returns>Thumbnail data, null if failed to query. The width is fixed to 80</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.0.5) 获取距离指定时间最近的缩略图数据
+        /// </summary>
+        /// <param name="channel">视频通道，0~23</param>
+        /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
+        /// <param name="maxGap">容许的最大间隔，单位秒</param>
+        /// <param name="withAlpha">是否输出带Alpha通道的图像(固定赋值255)</param>
+        /// <returns>缩略图数据，图像宽度固定为80，获取失败则返回null</returns>
+        public static CommonImage GetVideoFrameThumbnail(int channel, double timeline, double maxGap, bool withAlpha)
+        {
+            return Handler.GetVideoFrameThumbnail(channel, timeline, maxGap, withAlpha);
         }
 
         /// \~English

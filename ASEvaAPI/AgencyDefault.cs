@@ -1311,7 +1311,19 @@ namespace ASEva
             return null;
         }
 
-        public VideoFrameGetter CreateVideoFrameGetter()
+        public IntSize? GetVideoRawSize(int channel, double timeline)
+        {
+            return null;
+        }
+
+        public CommonImage GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha, out Timestamp? timestamp, out CameraInfo cameraInfo)
+        {
+            timestamp = null;
+            cameraInfo = null;
+            return null;
+        }
+
+        public CommonImage GetVideoFrameThumbnail(int channel, double timeline, double maxGap, bool withAlpha)
         {
             return null;
         }
