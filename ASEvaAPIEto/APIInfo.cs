@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 16, 0, 0); // Update log / 更新记录: 实现基于Eto和OxyPlot的图表面板
+            return new Version(2, 16, 0, 1); // Update log / 更新记录: 修正SkiaView在CPU模式下的绘制问题
         }
 
         /// \~English
