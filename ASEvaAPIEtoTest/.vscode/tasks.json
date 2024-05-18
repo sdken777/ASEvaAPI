@@ -48,11 +48,9 @@
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.pdb",
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.deps.json",
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
-                "ASEvaAPIEtoTest.WindowsDesktop.csproj",
             ],
             "dependsOrder": "sequence",
             "dependsOn": [
-                "Subtask: Generate Windows project file",
                 "Subtask: Build for host (Debug)",
             ],
         },
@@ -66,11 +64,9 @@
                 "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.pdb",
                 "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.deps.json",
                 "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.runtimeconfig.dev.json",
-                "ASEvaAPIEtoTest.WindowsDesktop.csproj",
             ],
             "dependsOrder": "sequence",
             "dependsOn": [
-                "Subtask: Generate Windows project file",
                 "Subtask: Build for host (Release)",
                 "Subtask: Copy to other folders",
             ],
@@ -97,17 +93,6 @@
 
         {
             "type": "process",
-            "label": "Subtask: Generate Windows project file",
-            "hide": true,
-            "command": "dotnet",
-            "args": [
-                "../bin/VSCodeHelper.dll",
-                "gen_windows_csproj",
-                "ASEvaAPIEtoTest.csproj",
-            ],
-        },
-        {
-            "type": "process",
             "label": "Subtask: Build for host (Debug)",
             "hide": true,
             "command": "dotnet",
@@ -116,21 +101,10 @@
                 "./ASEvaAPIEtoTest.csproj",
                 "-o",
                 "../${input:helper_platform_bin_name}/debug",
-                "/property:OutputType=Exe",
+                "/property:OutputType=WinExe",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "windows": {
-                "args": [
-                    "build",
-                    "./ASEvaAPIEtoTest.WindowsDesktop.csproj",
-                    "-o",
-                    "../${input:helper_platform_bin_name}/debug",
-                    "/property:OutputType=WinExe",
-                    "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary"
-                ],
-            },
             "problemMatcher": "$msCompile",
         },
         {
@@ -145,24 +119,11 @@
                 "Release",
                 "-o",
                 "../${input:helper_platform_bin_name}",
-                "/property:OutputType=Exe",
+                "/property:OutputType=WinExe",
+                "/property:ApplicationIcon=Resources/icon.ico",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "windows": {
-                "args": [
-                    "build",
-                    "./ASEvaAPIEtoTest.WindowsDesktop.csproj",
-                    "-c",
-                    "Release",
-                    "-o",
-                    "../${input:helper_platform_bin_name}",
-                    "/property:OutputType=WinExe",
-                    "/property:ApplicationIcon=Resources/icon.ico",
-                    "/property:GenerateFullPaths=true",
-                    "/consoleloggerparameters:NoSummary"
-                ],
-            },
             "problemMatcher": "$msCompile",
         },
         {
