@@ -101,7 +101,6 @@
                 "./ASEvaAPIEtoTest.csproj",
                 "-o",
                 "../${input:helper_platform_bin_name}/debug",
-                "/property:OutputType=WinExe",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -119,7 +118,6 @@
                 "Release",
                 "-o",
                 "../${input:helper_platform_bin_name}",
-                "/property:OutputType=WinExe",
                 "/property:ApplicationIcon=Resources/icon.ico",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"

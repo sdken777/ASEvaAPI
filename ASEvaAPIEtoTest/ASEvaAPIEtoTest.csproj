@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>ASEvaAPIEtoTest</RootNamespace>
     <AssemblyName>ASEvaAPIEtoTest</AssemblyName>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
