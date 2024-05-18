@@ -1,7 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
+  <PropertyGroup Condition="'$(OS)'=='Windows_NT'">
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <UseWindowsForms>True</UseWindowsForms>
+    <UseWpf>True</UseWpf>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)'!='Windows_NT'">
     <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <RootNamespace>ASEvaAPIEtoTest</RootNamespace>
     <AssemblyName>ASEvaAPIEtoTest</AssemblyName>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
