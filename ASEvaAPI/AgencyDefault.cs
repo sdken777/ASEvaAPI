@@ -507,6 +507,10 @@ namespace ASEva
         {
         }
 
+        public void SelectBusMessages(SelectBusMessageHandler handler, List<String> existBusMessageIDList)
+        {
+        }
+
         public void SetCurrentDialogTitle(string title, object icon)
         {
         }

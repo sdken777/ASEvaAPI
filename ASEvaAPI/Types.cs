@@ -1042,6 +1042,31 @@ namespace ASEva
 
     /// \~English
     /// <summary>
+    /// (api:app=2.16.7) Callback interface for ASEva.Agency.SelectBusMessages
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=2.16.7) 用于 ASEva.Agency.SelectBusMessages 的回调接口
+    /// </summary>
+    public interface SelectBusMessageHandler
+    {
+        /// \~English
+        /// <summary>
+        /// Called while select a new bus message
+        /// </summary>
+        /// <param name="busMessageID">Bus message ID</param>
+        /// <returns>Whether it's available to add more bus messages</returns>
+        /// \~Chinese
+        /// <summary>
+        /// 添加选中总线报文时被调用
+        /// </summary>
+        /// <param name="busMessageID">选中总线报文的ID</param>
+        /// <returns>返回是否仍可添加总线报文</returns>
+        bool SelectBusMessage(String busMessageID);
+    }
+
+    /// \~English
+    /// <summary>
     /// (api:app=2.0.0) Time in a session
     /// </summary>
     /// \~Chinese
