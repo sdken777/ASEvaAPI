@@ -1032,11 +1032,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.16.7) Callback interface for ASEva.Agency.SelectBusMessages
+    /// (api:app=3.0.6) Callback interface for ASEva.Agency.SelectBusMessages
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.16.7) 用于 ASEva.Agency.SelectBusMessages 的回调接口
+    /// (api:app=3.0.6) 用于 ASEva.Agency.SelectBusMessages 的回调接口
     /// </summary>
     public interface SelectBusMessageHandler
     {
@@ -3224,11 +3224,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=2.16.6) Status of installed plugin
+    /// (api:app=3.0.6) Status of installed plugin
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.16.6) 已安装插件的状态
+    /// (api:app=3.0.6) 已安装插件的状态
     /// </summary>
     public enum PluginInstalledStatus
     {
@@ -3325,11 +3325,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.16.6) Status of installed plugin
+        /// (api:app=3.0.6) Status of installed plugin
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.16.6) 已安装插件的状态
+        /// (api:app=3.0.6) 已安装插件的状态
         /// </summary>
         public PluginInstalledStatus InstalledStatus { get; set; }
     }
