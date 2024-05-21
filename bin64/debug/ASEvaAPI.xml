@@ -2136,6 +2136,20 @@
             <param name="handler">选中信号时调用的回调接口</param>
             <param name="existSignalIDList">既存的选中信号ID列表</param>
         </member>
+        <member name="M:ASEva.Agency.SelectBusMessages(ASEva.SelectBusMessageHandler,System.Collections.Generic.List{System.String})">
+            \~English
+            <summary>
+            (api:app=2.16.7) Show a modal dialog to select multiple bus messages at once
+            </summary>
+            <param name="handler">Callback to handle bus message selection</param>
+            <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
+            \~Chinese
+            <summary>
+            (api:app=2.16.7) 打开对话框一次性选择多个总线报文
+            </summary>
+            <param name="handler">选中总线报文时调用的回调接口</param>
+            <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
+        </member>
         <member name="M:ASEva.Agency.SelectBusFloat32Signal(System.Collections.Generic.List{System.String})">
             \~English
             Deprecated, unnecessary to configure
@@ -4286,7 +4300,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.16.5
+            version=2.16.7
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -8224,6 +8238,22 @@
             </summary>
             <param name="originMessageID">初始总线报文配置</param>
             <returns>返回总线报文配置，若删除则返回null</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnSelectBusMessages(ASEva.SelectBusMessageHandler,System.Collections.Generic.List{System.String})">
+            \~English
+            <summary>
+            (api:app=2.16.7) [Optional][OK for modal] Select multiple bus messages at once
+            </summary>
+            <param name="handler">Callback to handle bus message selection</param>
+            <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
+            <returns>Always return true, or else OnSelectBusMessage will be called</returns>
+            \~Chinese
+            <summary>
+            (api:app=2.16.7) [可选实现][可含模态] 一次性选择多个总线报文
+            </summary>
+            <param name="handler">选中总线报文时调用的回调接口</param>
+            <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
+            <returns>应固定返回true，否则将调用OnSelectBusMessage</returns>
         </member>
         <member name="M:ASEva.MainWorkflow.OnSelectSignal(ASEva.SignalConfig,System.Boolean,System.Boolean,System.String)">
             \~English
@@ -13257,6 +13287,30 @@
             <param name="signalID">选中信号的ID</param>
             <returns>返回是否仍可添加信号</returns>
         </member>
+        <member name="T:ASEva.SelectBusMessageHandler">
+            \~English
+            <summary>
+            (api:app=2.16.7) Callback interface for ASEva.Agency.SelectBusMessages
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=2.16.7) 用于 ASEva.Agency.SelectBusMessages 的回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.SelectBusMessageHandler.SelectBusMessage(System.String)">
+            \~English
+            <summary>
+            Called while select a new bus message
+            </summary>
+            <param name="busMessageID">Bus message ID</param>
+            <returns>Whether it's available to add more bus messages</returns>
+            \~Chinese
+            <summary>
+            添加选中总线报文时被调用
+            </summary>
+            <param name="busMessageID">选中总线报文的ID</param>
+            <returns>返回是否仍可添加总线报文</returns>
+        </member>
         <member name="T:ASEva.TimeWithSession">
             \~English
             <summary>
@@ -15309,6 +15363,46 @@
             插件太旧
             </summary>
         </member>
+        <member name="T:ASEva.PluginInstalledStatus">
+            \~English
+            <summary>
+            (api:app=2.16.6) Status of installed plugin
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=2.16.6) 已安装插件的状态
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginInstalledStatus.NotInstalled">
+            \~English
+            <summary>
+            Not installed
+            </summary>
+            \~Chinese
+            <summary>
+            未安装
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginInstalledStatus.InstalledAndEnabled">
+            \~English
+            <summary>
+            Installed and enabled
+            </summary>
+            \~Chinese
+            <summary>
+            已安装且启用中
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginInstalledStatus.InstalledButDisabled">
+            \~English
+            <summary>
+            Installed but disabled
+            </summary>
+            \~Chinese
+            <summary>
+            已安装但被禁用
+            </summary>
+        </member>
         <member name="T:ASEva.InstallPluginLibraryInfo">
             \~English
             <summary>
@@ -15367,6 +15461,16 @@
             \~Chinese
             <summary>
             已安装插件的版本，若未安装则为null
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginLibraryInfo.InstalledStatus">
+            \~English
+            <summary>
+            (api:app=2.16.6) Status of installed plugin
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=2.16.6) 已安装插件的状态
             </summary>
         </member>
         <member name="T:ASEva.InstallPluginDriverInfo">

@@ -12,7 +12,7 @@ namespace ASEva.UIEto
 
     public interface AppHandler
     {
-        Application CreateApp(out String uiBackend, out String webViewBackend);
+        Application CreateApp(bool attach, out String uiBackend, out String webViewBackend);
         void RunApp(Application application, Form mainWindow, Form[] subWindows);
         Font CreateDefaultFont();
         Control ConvertControlToEto(object platformControl);
@@ -51,7 +51,7 @@ namespace ASEva.UIEto
                 var availableUICodes = getAvailableUICodes();
                 if (availableUICodes == null) return false;
 
-                initApp(availableUICodes[0]);
+                initApp(availableUICodes[0], false);
             }
             return application != null;
         }
@@ -78,7 +78,40 @@ namespace ASEva.UIEto
             {
                 var availableUICodes = getAvailableUICodes();
                 if (availableUICodes == null || !availableUICodes.Contains(uiCode)) return false;
-                initApp(uiCode);
+                initApp(uiCode, false);
+            }
+            return application != null;
+        }
+
+        /// \~English
+        /// <summary>
+        /// (app:eto=2.16.1) Initialize application with the specified UI framework
+        /// </summary>
+        /// <param name="uiCode">UI framework code, set to null to use default framework</param>
+        /// <param name="attach">Set this argument to true if not invoking ASEva.UIEto.App.Run to execute the GUI main loop</param>
+        /// <returns>Whether initialization is successfull</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (app:eto=2.16.1) 以指定UI框架初始化应用程序
+        /// </summary>
+        /// <param name="uiCode">UI框架代号，设置为空则使用默认框架</param>
+        /// <param name="attach">若不调用 ASEva.UIEto.App.Run 执行界面主循环，则设置为true</param>
+        /// <returns>是否成功</returns>
+        public static bool Init(String uiCode, bool attach)
+        {
+            if (!initAppInvoked)
+            {
+                var availableUICodes = getAvailableUICodes();
+                if (String.IsNullOrEmpty(uiCode))
+                {
+                    if (availableUICodes == null || availableUICodes.Length == 0) return false;
+                    uiCode = availableUICodes[0];
+                }
+                else
+                {
+                    if (availableUICodes == null || !availableUICodes.Contains(uiCode)) return false;
+                }
+                initApp(uiCode, attach);
             }
             return application != null;
         }
@@ -566,7 +599,7 @@ namespace ASEva.UIEto
             }
         }
 
-        private static void initApp(String uiCode)
+        private static void initApp(String uiCode, bool attach)
         {
             initAppInvoked = true;
 
@@ -631,12 +664,14 @@ namespace ASEva.UIEto
 
             if (handler != null && application == null)
             {
-                application = handler.CreateApp(out uiBackend, out webViewBackend);
+                application = handler.CreateApp(attach, out uiBackend, out webViewBackend);
                 if (application != null)
                 {
                     runningUI = uiCode;
 
                     AppDomain.CurrentDomain.UnhandledException += (o, args) => { TriggerFatalException(args); };
+
+                    if (attach) application.Attach();
 
                     FuncManager.Register("GetEtoAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
                     FuncManager.Register("GetEtoLibVersion", delegate { return APIInfo.GetEtoLibVersion(); });

@@ -19,7 +19,7 @@ namespace ASEva.UICoreWF
 
     class AppHandlerCoreWF : AppHandler
     {
-        public Application CreateApp(out String uiBackend, out String webViewBackend)
+        public Application CreateApp(bool attach, out String uiBackend, out String webViewBackend)
         {
             // CHECK: 支持高DPI显示
             System.Windows.Forms.Application.SetHighDpiMode(System.Windows.Forms.HighDpiMode.SystemAware);
@@ -71,7 +71,7 @@ namespace ASEva.UICoreWF
             OxyPlotView.Factory = new OxyPlotViewFactoryCoreWF();
 
             // CHECK: 修正application.Run之前不触发MouseDown等事件
-            System.Windows.Forms.Application.AddMessageFilter(TempBubbleEventFilter);
+            if (!attach) System.Windows.Forms.Application.AddMessageFilter(TempBubbleEventFilter);
 
             FuncManager.Register("GetUIBackendAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
             FuncManager.Register("RegisterLegacyValueGraph", delegate { Agency.RegisterGraphPanel(GraphType.SingleValue, getLegacyStyleName(), typeof(ValueGraph)); return null; });

@@ -1,8 +1,8 @@
 ﻿/*! \mainpage
  * \~English This library contains the APIs for Eto.Forms. See ASEva.UIEto for details. \n
  * \~Chinese 此类库为ASEva-API中基于Eto.Forms的部分。详见 ASEva.UIEto \n
- * \~English This document corresponds to API version: 2.16.0 \n\n
- * \~Chinese 本文档对应API版本：2.16.0 \n\n
+ * \~English This document corresponds to API version: 2.16.1 \n\n
+ * \~Chinese 本文档对应API版本：2.16.1 \n\n
  * 
  * \~English Eto.Forms official repository: https://github.com/picoe/Eto \n
  * \~Chinese Eto.Forms官方仓库: https://github.com/picoe/Eto \n
@@ -19,7 +19,7 @@ using ASEva.Utility;
 namespace ASEva.UIEto
 {
     /// <summary>
-    /// version=2.16.0
+    /// version=2.16.1
     /// </summary>
     public class APIInfo
     {
@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 16, 0, 1); // Update log / 更新记录: 修正SkiaView在CPU模式下的绘制问题
+            return new Version(2, 16, 1, 0); // Update log / 更新记录: 新增App.Init(uiCode, attach)
         }
 
         /// \~English

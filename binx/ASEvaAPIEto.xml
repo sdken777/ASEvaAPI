@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.16.0
+            version=2.16.1
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -79,6 +79,22 @@
             (api:eto=2.0.7) 以指定UI框架初始化应用程序
             </summary>
             <param name="uiCode">UI框架代号</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:ASEva.UIEto.App.Init(System.String,System.Boolean)">
+            \~English
+            <summary>
+            (app:eto=2.16.1) Initialize application with the specified UI framework
+            </summary>
+            <param name="uiCode">UI framework code, set to null to use default framework</param>
+            <param name="attach">Set this argument to true if not invoking ASEva.UIEto.App.Run to execute the GUI main loop</param>
+            <returns>Whether initialization is successfull</returns>
+            \~Chinese
+            <summary>
+            (app:eto=2.16.1) 以指定UI框架初始化应用程序
+            </summary>
+            <param name="uiCode">UI框架代号，设置为空则使用默认框架</param>
+            <param name="attach">若不调用 ASEva.UIEto.App.Run 执行界面主循环，则设置为true</param>
             <returns>是否成功</returns>
         </member>
         <member name="M:ASEva.UIEto.App.Run(Eto.Forms.Form)">
