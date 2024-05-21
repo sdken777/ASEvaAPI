@@ -1972,17 +1972,69 @@
             <param name="originMessageID">初始总线报文配置</param>
             <returns>返回总线报文配置，若删除则返回null</returns>
         </member>
-        <member name="M:ASEva.Agency.CreateVideoFrameGetter">
+        <member name="M:ASEva.Agency.GetVideoRawSize(System.Int32,System.Double)">
             \~English
             <summary>
-            Create a video frame getter
+            (api:app=3.0.5) Get the video raw size at the specified time at the specified channel
             </summary>
-            <returns>Video frame getter</returns>
+            <param name="channel">Video channel, ranges 0~23</param>
+            <param name="timeline">Target timeline point, in seconds</param>
+            <returns>Raw size, null if no data</returns>
             \~Chinese
             <summary>
-            创建视频帧获取器
+            (api:app=3.0.5) 获取指定通道在指定时间上的视频帧的原始尺寸
             </summary>
-            <returns>视频帧获取器</returns>
+            <param name="channel">视频通道，0~23</param>
+            <param name="timeline">获取视频帧的目标时间线，单位秒</param>
+            <returns>原始尺寸，若无数据则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetVideoFrameImage(System.Int32,System.Double,System.Double,ASEva.VideoFrameGetMode,System.Nullable{ASEva.IntRect},System.Boolean,System.Nullable{ASEva.Timestamp}@,ASEva.Samples.CameraInfo@)">
+            \~English
+            <summary>
+            (api:app=3.0.5) Get the nearest video frame data from the specified time
+            </summary>
+            <param name="channel">Video channel, ranges 0~23</param>
+            <param name="timeline">Target timeline point, in seconds</param>
+            <param name="maxGap">Max time gap, in seconds</param>
+            <param name="mode">The mode to query video frame</param>
+            <param name="clip">Based on the mode, image is further cropped to the raw coordinate system, at least 16x16, null means the full size</param>
+            <param name="withAlpha">Whether to output image with alpha channel (Value fixed to 255)</param>
+            <param name="timestamp">Timestamp of output image, null if failed to query</param>
+            <param name="cameraInfo">Camera information, null if failed to query</param>
+            <returns>Video frame data, size is determined by "mode" and "clip", null if failed to query</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.0.5) 获取距离指定时间最近的视频帧数据
+            </summary>
+            <param name="channel">视频通道，0~23</param>
+            <param name="timeline">获取视频帧的目标时间线，单位秒</param>
+            <param name="maxGap">容许的最大间隔，单位秒</param>
+            <param name="mode">获取视频帧的模式</param>
+            <param name="clip">在输出模式基础上进一步裁剪，为原始尺寸坐标系，至少为16x16，null表示完整输出</param>
+            <param name="withAlpha">是否输出带Alpha通道的图像(固定赋值255)</param>
+            <param name="timestamp">输出图像的时间戳，获取失败则为null</param>
+            <param name="cameraInfo">摄像头信息，获取失败则为null</param>
+            <returns>视频帧数据，图像实际大小由mode和clip决定，获取失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetVideoFrameThumbnail(System.Int32,System.Double,System.Double,System.Boolean)">
+            \~English
+            <summary>
+            (api:app=3.0.5) Get the nearest thumbnail data from the specified time
+            </summary>
+            <param name="channel">Video channel, ranges 0~23</param>
+            <param name="timeline">Target timeline point, in seconds</param>
+            <param name="maxGap">Max time gap, in seconds</param>
+            <param name="withAlpha">Whether to output image with alpha channel (Value fixed to 255)</param>
+            <returns>Thumbnail data, null if failed to query. The width is fixed to 80</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.0.5) 获取距离指定时间最近的缩略图数据
+            </summary>
+            <param name="channel">视频通道，0~23</param>
+            <param name="timeline">获取视频帧的目标时间线，单位秒</param>
+            <param name="maxGap">容许的最大间隔，单位秒</param>
+            <param name="withAlpha">是否输出带Alpha通道的图像(固定赋值255)</param>
+            <returns>缩略图数据，图像宽度固定为80，获取失败则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetPreviewJpeg(System.Int32,System.Double,System.Double,System.Nullable{ASEva.Timestamp}@,ASEva.Samples.CameraInfo@)">
             \~English
@@ -2019,6 +2071,20 @@
             </summary>
             <param name="handler">选中信号时调用的回调接口</param>
             <param name="existSignalIDList">既存的选中信号ID列表</param>
+        </member>
+        <member name="M:ASEva.Agency.SelectBusMessages(ASEva.SelectBusMessageHandler,System.Collections.Generic.List{System.String})">
+            \~English
+            <summary>
+            (api:app=3.0.6) Show a modal dialog to select multiple bus messages at once
+            </summary>
+            <param name="handler">Callback to handle bus message selection</param>
+            <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
+            \~Chinese
+            <summary>
+            (api:app=3.0.6) 打开对话框一次性选择多个总线报文
+            </summary>
+            <param name="handler">选中总线报文时调用的回调接口</param>
+            <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
         </member>
         <member name="M:ASEva.Agency.OpenDialog(System.Object,System.String,System.String)">
             \~English
@@ -4088,7 +4154,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.0.4
+            version=3.0.6
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -7962,6 +8028,22 @@
             </summary>
             <param name="originMessageID">初始总线报文配置</param>
             <returns>返回总线报文配置，若删除则返回null</returns>
+        </member>
+        <member name="M:ASEva.MainWorkflow.OnSelectBusMessages(ASEva.SelectBusMessageHandler,System.Collections.Generic.List{System.String})">
+            \~English
+            <summary>
+            (api:app=3.0.6) [Optional][OK for modal] Select multiple bus messages at once
+            </summary>
+            <param name="handler">Callback to handle bus message selection</param>
+            <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
+            <returns>Always return true, or else OnSelectBusMessage will be called</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.0.6) [可选实现][可含模态] 一次性选择多个总线报文
+            </summary>
+            <param name="handler">选中总线报文时调用的回调接口</param>
+            <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
+            <returns>应固定返回true，否则将调用OnSelectBusMessage</returns>
         </member>
         <member name="M:ASEva.MainWorkflow.OnSelectSignal(ASEva.SignalConfig,System.Boolean,System.Boolean,System.String)">
             \~English
@@ -12807,6 +12889,30 @@
             <param name="signalID">选中信号的ID</param>
             <returns>返回是否仍可添加信号</returns>
         </member>
+        <member name="T:ASEva.SelectBusMessageHandler">
+            \~English
+            <summary>
+            (api:app=3.0.6) Callback interface for ASEva.Agency.SelectBusMessages
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.6) 用于 ASEva.Agency.SelectBusMessages 的回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.SelectBusMessageHandler.SelectBusMessage(System.String)">
+            \~English
+            <summary>
+            Called while select a new bus message
+            </summary>
+            <param name="busMessageID">Bus message ID</param>
+            <returns>Whether it's available to add more bus messages</returns>
+            \~Chinese
+            <summary>
+            添加选中总线报文时被调用
+            </summary>
+            <param name="busMessageID">选中总线报文的ID</param>
+            <returns>返回是否仍可添加总线报文</returns>
+        </member>
         <member name="T:ASEva.TimeWithSession">
             \~English
             <summary>
@@ -14805,6 +14911,46 @@
             插件太旧
             </summary>
         </member>
+        <member name="T:ASEva.PluginInstalledStatus">
+            \~English
+            <summary>
+            (api:app=3.0.6) Status of installed plugin
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.6) 已安装插件的状态
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginInstalledStatus.NotInstalled">
+            \~English
+            <summary>
+            Not installed
+            </summary>
+            \~Chinese
+            <summary>
+            未安装
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginInstalledStatus.InstalledAndEnabled">
+            \~English
+            <summary>
+            Installed and enabled
+            </summary>
+            \~Chinese
+            <summary>
+            已安装且启用中
+            </summary>
+        </member>
+        <member name="F:ASEva.PluginInstalledStatus.InstalledButDisabled">
+            \~English
+            <summary>
+            Installed but disabled
+            </summary>
+            \~Chinese
+            <summary>
+            已安装但被禁用
+            </summary>
+        </member>
         <member name="T:ASEva.InstallPluginLibraryInfo">
             \~English
             <summary>
@@ -14863,6 +15009,16 @@
             \~Chinese
             <summary>
             已安装插件的版本，若未安装则为null
+            </summary>
+        </member>
+        <member name="P:ASEva.InstallPluginLibraryInfo.InstalledStatus">
+            \~English
+            <summary>
+            (api:app=3.0.6) Status of installed plugin
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.6) 已安装插件的状态
             </summary>
         </member>
         <member name="T:ASEva.InstallPluginDriverInfo">
@@ -15202,80 +15358,6 @@
             <summary>
             输出按原始尺寸1/4缩小后的图像数据(若条件不满足则退化为Preview)
             </summary>
-        </member>
-        <member name="T:ASEva.VideoFrameGetter">
-            \~English
-            <summary>
-            (api:app=3.0.0) Interface for getting video frame
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.0.0) 获取视频帧的接口
-            </summary>
-        </member>
-        <member name="M:ASEva.VideoFrameGetter.GetVideoRawSize(System.Int32,System.Double)">
-            \~English
-            <summary>
-            Get the video raw size at the specified time at the specified channel
-            </summary>
-            <param name="channel">Video channel, ranges 0~23</param>
-            <param name="timeline">Target timeline point, in seconds</param>
-            <returns>Raw size, null if no data</returns>
-            \~Chinese
-            <summary>
-            获取指定通道在指定时间上的视频帧的原始尺寸
-            </summary>
-            <param name="channel">视频通道，0~23</param>
-            <param name="timeline">获取视频帧的目标时间线，单位秒</param>
-            <returns>原始尺寸，若无数据则返回null</returns>
-        </member>
-        <member name="M:ASEva.VideoFrameGetter.GetVideoFrameImage(System.Int32,System.Double,System.Double,ASEva.VideoFrameGetMode,System.Nullable{ASEva.IntRect},System.Boolean,System.Nullable{ASEva.Timestamp}@,ASEva.Samples.CameraInfo@)">
-            \~English
-            <summary>
-            Get the nearest video frame data from the specified time
-            </summary>
-            <param name="channel">Video channel, ranges 0~23</param>
-            <param name="timeline">Target timeline point, in seconds</param>
-            <param name="maxGap">Max time gap, in seconds</param>
-            <param name="mode">The mode to query video frame</param>
-            <param name="clip">Based on the mode, image is further cropped to the raw coordinate system, at least 16x16, null means the full size</param>
-            <param name="withAlpha">Whether to output image with alpha channel (Value fixed to 255)</param>
-            <param name="timestamp">Timestamp of output image, null if failed to query</param>
-            <param name="cameraInfo">Camera information, null if failed to query</param>
-            <returns>Video frame data, size is determined by "mode" and "clip", null if failed to query</returns>
-            \~Chinese
-            <summary>
-            获取距离指定时间最近的视频帧数据
-            </summary>
-            <param name="channel">视频通道，0~23</param>
-            <param name="timeline">获取视频帧的目标时间线，单位秒</param>
-            <param name="maxGap">容许的最大间隔，单位秒</param>
-            <param name="mode">获取视频帧的模式</param>
-            <param name="clip">在输出模式基础上进一步裁剪，为原始尺寸坐标系，至少为16x16，null表示完整输出</param>
-            <param name="withAlpha">是否输出带Alpha通道的图像(固定赋值255)</param>
-            <param name="timestamp">输出图像的时间戳，获取失败则为null</param>
-            <param name="cameraInfo">摄像头信息，获取失败则为null</param>
-            <returns>视频帧数据，图像实际大小由mode和clip决定，获取失败则返回null</returns>
-        </member>
-        <member name="M:ASEva.VideoFrameGetter.GetVideoFrameThumbnail(System.Int32,System.Double,System.Double,System.Boolean)">
-            \~English
-            <summary>
-            Get the nearest thumbnail data from the specified time
-            </summary>
-            <param name="channel">Video channel, ranges 0~23</param>
-            <param name="timeline">Target timeline point, in seconds</param>
-            <param name="maxGap">Max time gap, in seconds</param>
-            <param name="withAlpha">Whether to output image with alpha channel (Value fixed to 255)</param>
-            <returns>Thumbnail data, null if failed to query. The width is fixed to 80</returns>
-            \~Chinese
-            <summary>
-            获取距离指定时间最近的缩略图数据
-            </summary>
-            <param name="channel">视频通道，0~23</param>
-            <param name="timeline">获取视频帧的目标时间线，单位秒</param>
-            <param name="maxGap">容许的最大间隔，单位秒</param>
-            <param name="withAlpha">是否输出带Alpha通道的图像(固定赋值255)</param>
-            <returns>缩略图数据，图像宽度固定为80，获取失败则返回null</returns>
         </member>
         <member name="T:ASEva.BusRawDataState">
             \~English
