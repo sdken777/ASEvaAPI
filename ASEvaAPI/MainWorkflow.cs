@@ -277,6 +277,22 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=2.16.7) [Optional][OK for modal] Select multiple bus messages at once
+        /// </summary>
+        /// <param name="handler">Callback to handle bus message selection</param>
+        /// <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
+        /// <returns>Always return true, or else OnSelectBusMessage will be called</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.16.7) [可选实现][可含模态] 一次性选择多个总线报文
+        /// </summary>
+        /// <param name="handler">选中总线报文时调用的回调接口</param>
+        /// <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
+        /// <returns>应固定返回true，否则将调用OnSelectBusMessage</returns>
+        public virtual bool OnSelectBusMessages(SelectBusMessageHandler handler, List<String> existBusMessageIDList) { return false; }
+
+        /// \~English
+        /// <summary>
         /// [Optional][OK for modal] Select signal
         /// </summary>
         /// <param name="origin">Initial signal configuration</param>

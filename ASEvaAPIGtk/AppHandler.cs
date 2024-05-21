@@ -20,7 +20,7 @@ namespace ASEva.UIGtk
     #pragma warning disable 612
     class AppHandlerGtk : AppHandler
     {
-        public Application CreateApp(out String uiBackend, out String webViewBackend)
+        public Application CreateApp(bool attach, out String uiBackend, out String webViewBackend)
         {
             GLib.ExceptionManager.UnhandledException += (args) =>
             {

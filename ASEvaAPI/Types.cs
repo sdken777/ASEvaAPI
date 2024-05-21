@@ -1032,6 +1032,31 @@ namespace ASEva
 
     /// \~English
     /// <summary>
+    /// (api:app=2.16.7) Callback interface for ASEva.Agency.SelectBusMessages
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=2.16.7) 用于 ASEva.Agency.SelectBusMessages 的回调接口
+    /// </summary>
+    public interface SelectBusMessageHandler
+    {
+        /// \~English
+        /// <summary>
+        /// Called while select a new bus message
+        /// </summary>
+        /// <param name="busMessageID">Bus message ID</param>
+        /// <returns>Whether it's available to add more bus messages</returns>
+        /// \~Chinese
+        /// <summary>
+        /// 添加选中总线报文时被调用
+        /// </summary>
+        /// <param name="busMessageID">选中总线报文的ID</param>
+        /// <returns>返回是否仍可添加总线报文</returns>
+        bool SelectBusMessage(String busMessageID);
+    }
+
+    /// \~English
+    /// <summary>
     /// (api:app=3.0.0) Time in a session
     /// </summary>
     /// \~Chinese
@@ -3199,6 +3224,47 @@ namespace ASEva
 
     /// \~English
     /// <summary>
+    /// (api:app=2.16.6) Status of installed plugin
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=2.16.6) 已安装插件的状态
+    /// </summary>
+    public enum PluginInstalledStatus
+    {
+        /// \~English
+        /// <summary>
+        /// Not installed
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 未安装
+        /// </summary>
+        NotInstalled = 0,
+
+        /// \~English
+        /// <summary>
+        /// Installed and enabled
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 已安装且启用中
+        /// </summary>
+        InstalledAndEnabled = 1,
+
+        /// \~English
+        /// <summary>
+        /// Installed but disabled
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 已安装但被禁用
+        /// </summary>
+        InstalledButDisabled = 2,
+    }
+
+    /// \~English
+    /// <summary>
     /// (api:app=3.0.0) Information of plugin related library
     /// </summary>
     /// \~Chinese
@@ -3256,6 +3322,16 @@ namespace ASEva
         /// 已安装插件的版本，若未安装则为null
         /// </summary>
         public Version InstalledVersion { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.16.6) Status of installed plugin
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.16.6) 已安装插件的状态
+        /// </summary>
+        public PluginInstalledStatus InstalledStatus { get; set; }
     }
 
     /// \~English

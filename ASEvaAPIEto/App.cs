@@ -12,7 +12,7 @@ namespace ASEva.UIEto
 
     public interface AppHandler
     {
-        Application CreateApp(out String uiBackend, out String webViewBackend);
+        Application CreateApp(bool attach, out String uiBackend, out String webViewBackend);
         void RunApp(Application application, Form mainWindow, Form[] subWindows);
         Font CreateDefaultFont();
         Control ConvertControlToEto(object platformControl);
@@ -659,7 +659,7 @@ namespace ASEva.UIEto
 
             if (handler != null && application == null)
             {
-                application = handler.CreateApp(out uiBackend, out webViewBackend);
+                application = handler.CreateApp(attach, out uiBackend, out webViewBackend);
                 if (application != null)
                 {
                     runningUI = uiCode;

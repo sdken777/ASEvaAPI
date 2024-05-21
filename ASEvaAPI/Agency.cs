@@ -154,6 +154,7 @@ namespace ASEva
         SignalConfig SelectSignal(SignalConfig origin, bool withScale, bool withSignBit, String unit);
         String SelectBusMessage(String originMessageID);
         void SelectSignals(SelectSignalHandler handler, List<String> existSignalIDList);
+        void SelectBusMessages(SelectBusMessageHandler handler, List<String> existBusMessageIDList);
         void ConfigDataEncryption();
         void ConfigOfflineMapPath();
         void OpenDialog(object caller, String dialogClassID, String config);
@@ -2823,6 +2824,23 @@ namespace ASEva
         public static void SelectSignals(SelectSignalHandler handler, List<String> existSignalIDList)
         {
             Handler.SelectSignals(handler, existSignalIDList);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.16.7) Show a modal dialog to select multiple bus messages at once
+        /// </summary>
+        /// <param name="handler">Callback to handle bus message selection</param>
+        /// <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.16.7) 打开对话框一次性选择多个总线报文
+        /// </summary>
+        /// <param name="handler">选中总线报文时调用的回调接口</param>
+        /// <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
+        public static void SelectBusMessages(SelectBusMessageHandler handler, List<String> existBusMessageIDList)
+        {
+            Handler.SelectBusMessages(handler, existBusMessageIDList);
         }
 
         /// \~English
