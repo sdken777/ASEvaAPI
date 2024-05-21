@@ -31,7 +31,7 @@ namespace ASEva.UIMonoMac
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 8, 2, 0); // Update log / 更新记录: 支持OxyPlotView.InvalidatePlot
+            return new Version(1, 8, 2, 1); // Update log / 更新记录: 支持AppHandler新接口
         }
     }
 }
