@@ -38,6 +38,8 @@ namespace ASEva
         double GetTimeRatioToUTC(DateTime session);
         void AddSignalReference(String signalID);
         void RemoveSignalReference(String signalID);
+        void AddProcessorVideoReference(int videoChannel);
+        void RemoveProcessorVideoReference(int videoChannel);
         bool DeleteToRecycleBin(String path);
         bool IsMessageValid(String messageID, bool optional);
         bool IsSignalValid(String signalID, bool optional);
@@ -1513,6 +1515,36 @@ namespace ASEva
         public static void RemoveSignalReference(String signalID)
         {
             Handler.RemoveSignalReference(signalID);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.17.0) Add video reference (only video with references will be sent to app layer's processors)
+        /// </summary>
+        /// <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.17.0) 添加视频引用，在应用层的数据处理对象才可获得该通道的数据
+        /// </summary>
+        /// <param name="videoChannel">视频通道，0~23对应A~X</param>
+        public static void AddProcessorVideoReference(int videoChannel)
+        {
+            Handler.AddProcessorVideoReference(videoChannel);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=2.17.0) Remove video reference
+        /// </summary>
+        /// <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=2.17.0) 移除视频引用
+        /// </summary>
+        /// <param name="videoChannel">视频通道，0~23对应A~X</param>
+        public static void RemoveProcessorVideoReference(int videoChannel)
+        {
+            Handler.RemoveProcessorVideoReference(videoChannel);
         }
 
         /// \~English

@@ -1491,5 +1491,13 @@ namespace ASEva
         {
             return null;
         }
+
+        public void AddProcessorVideoReference(int videoChannel)
+        {
+        }
+
+        public void RemoveProcessorVideoReference(int videoChannel)
+        {
+        }
     }
 }
