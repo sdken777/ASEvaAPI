@@ -26,6 +26,18 @@
             </summary>
             <returns>应用程序ID</returns>
         </member>
+        <member name="M:ASEva.Agency.GetAppGUI">
+            \~English
+            <summary>
+            (api:app=3.0.7) Get GUI framework that the application based on
+            </summary>
+            <returns>GUI framework</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.0.7) 获取应用程序基于的图形界面框架
+            </summary>
+            <returns>图形界面框架</returns>
+        </member>
         <member name="M:ASEva.Agency.GetAppStatus">
             \~English
             <summary>
@@ -4154,7 +4166,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.0.6
+            version=3.0.7
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -7771,22 +7783,22 @@
             (api:app=3.0.0) 主流程基类
             </summary>
         </member>
-        <member name="M:ASEva.MainWorkflow.OnInit(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.String@)">
+        <member name="M:ASEva.MainWorkflow.OnInit(System.String,System.Collections.Generic.Dictionary{System.String,System.String},ASEva.ApplicationGUI@)">
             \~English
             <summary>
-            [Optional][OK for modal] Initialize main workflow
+            (api:app=3.0.7) [Optional][OK for modal] Initialize main workflow
             </summary>
             <param name="appID">Application ID</param>
             <param name="parameters">Initial parameters</param>
-            <param name="uiCode">Output UI framework code, set to null if not using GUI</param>
+            <param name="gui">Output the GUI framework that the application based on</param>
             <returns>Whether initialization is successful</returns>
             \~Chinese
             <summary>
-            [可选实现][可含模态] 初始化主流程
+            (api:app=3.0.7) [可选实现][可含模态] 初始化主流程
             </summary>
             <param name="appID">应用程序ID</param>
             <param name="parameters">初始化参数</param>
-            <param name="uiCode">输出UI框架代号，若不使用UI则输出null</param>
+            <param name="gui">输出基于的图形界面框架框架</param>
             <returns>初始化是否成功</returns>
         </member>
         <member name="M:ASEva.MainWorkflow.OnRun(ASEva.MainWorkflowLoopCallback,ASEva.MainWorkflowModalCallback,System.String)">
@@ -12195,6 +12207,50 @@
             远程采集模式
             </summary>
         </member>
+        <member name="T:ASEva.ApplicationGUI">
+            \~English
+            <summary>
+            (api:app=3.0.7) GUI framework that the application based on, call ASEva.Agency.GetAppGUI to get
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.7) 应用基于的图形界面框架，调用 ASEva.Agency.GetAppGUI 获取
+            </summary>
+        </member>
+        <member name="F:ASEva.ApplicationGUI.NoGUI">
+            \~English
+            <summary>
+            Not using GUI
+            </summary>
+            \~Chinese
+            <summary>
+            无图形界面
+            </summary>
+        </member>
+        <member name="F:ASEva.ApplicationGUI.WindowsForms">
+            \~
+            <summary>
+            Windows Forms
+            </summary>
+        </member>
+        <member name="F:ASEva.ApplicationGUI.WPF">
+            \~
+            <summary>
+            Windows Presentation Foundation
+            </summary>
+        </member>
+        <member name="F:ASEva.ApplicationGUI.Eto">
+            \~
+            <summary>
+            Eto.Forms
+            </summary>
+        </member>
+        <member name="F:ASEva.ApplicationGUI.Avalonia">
+            \~
+            <summary>
+            Avalonia
+            </summary>
+        </member>
         <member name="T:ASEva.LogLevel">
             \~English
             <summary>
@@ -14714,11 +14770,11 @@
         <member name="T:ASEva.PluginPackError">
             \~English
             <summary>
-            (api:app=3.0.0) Error info of plugin pack
+            (api:app=3.0.7) Error info of plugin pack
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 插件包错误信息
+            (api:app=3.0.7) 插件包错误信息
             </summary>
         </member>
         <member name="F:ASEva.PluginPackError.OK">
@@ -14761,14 +14817,14 @@
             未许可
             </summary>
         </member>
-        <member name="F:ASEva.PluginPackError.PlatformUnsupported">
+        <member name="F:ASEva.PluginPackError.GUIUnsupported">
             \~English
             <summary>
-            Not supported for current UI platform
+            Not supported for current GUI framework
             </summary>
             \~Chinese
             <summary>
-            平台不支持（UI）
+            当前图形界面框架不支持
             </summary>
         </member>
         <member name="T:ASEva.PluginPackInfo">
@@ -14864,11 +14920,11 @@
         <member name="T:ASEva.InstallPluginLibraryStatus">
             \~English
             <summary>
-            (api:app=3.0.0) Installation status of the plugin related library
+            (api:app=3.0.7) Installation status of the plugin related library
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 插件关联的库是否可安装的状态
+            (api:app=3.0.7) 插件关联的库是否可安装的状态
             </summary>
         </member>
         <member name="F:ASEva.InstallPluginLibraryStatus.OK">
@@ -14881,14 +14937,14 @@
             可安装
             </summary>
         </member>
-        <member name="F:ASEva.InstallPluginLibraryStatus.PlatformUnsupported">
+        <member name="F:ASEva.InstallPluginLibraryStatus.GUIUnsupported">
             \~English
             <summary>
-            Not supported by current UI platform
+            Not supported by current GUI framework
             </summary>
             \~Chinese
             <summary>
-            平台不支持（UI）
+            当前图形界面框架不支持
             </summary>
         </member>
         <member name="F:ASEva.InstallPluginLibraryStatus.TooNew">

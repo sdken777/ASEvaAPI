@@ -10,6 +10,7 @@ namespace ASEva
     public interface AgencyHandler
     {
         String GetAppID();
+        ApplicationGUI GetAppGUI();
         String GetConfigFilesRoot();
         String GetAppFilesRoot();
         String GetTempFilesRoot();
@@ -343,6 +344,21 @@ namespace ASEva
         public static String GetAppID()
         {
             return handler.GetAppID();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.0.7) Get GUI framework that the application based on
+        /// </summary>
+        /// <returns>GUI framework</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.0.7) 获取应用程序基于的图形界面框架
+        /// </summary>
+        /// <returns>图形界面框架</returns>
+        public static ApplicationGUI GetAppGUI()
+        {
+            return handler.GetAppGUI();
         }
 
         /// \~English

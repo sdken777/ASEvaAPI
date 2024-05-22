@@ -671,6 +671,8 @@ namespace ASEva.UIEto
                     FuncManager.Register("GetEtoAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
                     FuncManager.Register("GetEtoLibVersion", delegate { return APIInfo.GetEtoLibVersion(); });
                     FuncManager.Register("GetEtoAPIThirdPartyNotices", delegate { return APIInfo.GetThirdPartyNotices(); });
+                    FuncManager.Register("GetUIBackendDirectCode", delegate { return runningUI; });
+                    FuncManager.Register("GetUIBackendFullCode", delegate { return runningUI + (String.IsNullOrEmpty(uiBackend) ? "" : ("." + uiBackend)); });
                     FuncManager.Register("GetUIBackendAPIThirdPartyNotices", delegate { return handler.GetThirdPartyNotices(); });
 
                     FuncManager.Register("RegisterEtoSingleValueGraph", delegate { Agency.RegisterGraphPanel(GraphType.SingleValue, getStyleName("Eto单值", "Eto Single Value"), typeof(ValueGraph)); return null; });

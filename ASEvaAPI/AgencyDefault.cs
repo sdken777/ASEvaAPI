@@ -1468,5 +1468,10 @@ namespace ASEva
         {
             return null;
         }
+
+        public ApplicationGUI GetAppGUI()
+        {
+            return ApplicationGUI.NoGUI;
+        }
     }
 }
