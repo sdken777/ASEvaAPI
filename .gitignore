@@ -22,6 +22,8 @@ netcoreapp3.1/
 net8.0-windows/
 *.o
 macapp/
+libx/
+libxa/
 
 # User-specific files
 *.suo

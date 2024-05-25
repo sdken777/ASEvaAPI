@@ -1,0 +1,35 @@
+{
+    "configurations": [
+        {
+            "name": "X86-Linux Host",
+            "compilerPath": "/opt/clang-15/bin/clang++",
+            "includePath": [
+                "${workspaceFolder}",
+                // "${workspaceFolder}/../includex",
+                "${workspaceFolder}/../include"
+            ],
+            "defines": [
+                "SPADAS_ENV_LINUX",
+                "SPADAS_ARCH_X86"
+            ],
+            "intelliSenseMode": "clang-x64",
+            "cppStandard": "c++17"
+        },
+        {
+            "name": "Arm-Linux Host",
+            "compilerPath": "/opt/clang-15/bin/clang++",
+            "includePath": [
+                "${workspaceFolder}",
+                // "${workspaceFolder}/../includexa",
+                "${workspaceFolder}/../include"
+            ],
+            "defines": [
+                "SPADAS_ENV_LINUX",
+                "SPADAS_ARCH_ARM"
+            ],
+            "intelliSenseMode": "clang-arm64",
+            "cppStandard": "c++17"
+        },
+    ],
+    "version": 4
+}
