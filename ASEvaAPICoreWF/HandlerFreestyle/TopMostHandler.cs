@@ -9,7 +9,11 @@ namespace ASEva.UICoreWF
         public bool IsTopMost(Control control)
         {
             var window = control.ParentWindow;
-            if (window == null) return false;
+            if (window == null)
+            {
+                var winformControl = control.ControlObject as System.Windows.Forms.Control;
+                return AvaloniaAdaptorCoreWF.IsActive(winformControl);
+            }
 
             var form = window.ControlObject as System.Windows.Forms.Form;
             if (form == null) return false;

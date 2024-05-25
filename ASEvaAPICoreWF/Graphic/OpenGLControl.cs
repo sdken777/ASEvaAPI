@@ -34,7 +34,9 @@ namespace ASEva.UICoreWF
 
         public void QueueRender()
         {
-            if (ParentForm != null && ParentForm.WindowState != FormWindowState.Minimized && Visible && DrawBeat.CallerBegin(this))
+            var parentOK = ParentForm != null && ParentForm.WindowState != FormWindowState.Minimized;
+            if (AvaloniaAdaptorCoreWF.UsingAvalonia) parentOK = true;
+            if (parentOK && Visible && DrawBeat.CallerBegin(this))
             {
                 pictureBox.Invalidate();
                 DrawBeat.CallerEnd(this);

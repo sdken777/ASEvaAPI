@@ -205,16 +205,8 @@ namespace ASEva.UIEto
             }
             set
             {
-                if (label != null)
-                {
-                    if (label.ToolTip == value) return;
-                    label.ToolTip = value;
-                }
-                else if (imageView != null)
-                {
-                    if (imageView.ToolTip == value) return;
-                    imageView.ToolTip = value;
-                }
+                if (label != null) label.SetToolTip(value);
+                else if (imageView != null) imageView.SetToolTip(value);
             }
         }
 
@@ -235,45 +227,29 @@ namespace ASEva.UIEto
 
         private void initialize()
         {
-            if (UseInnerEnterLeave)
-            {
-                Control innerControl = null;
-                if (label != null) innerControl = label;
-                if (imageView != null) innerControl = imageView;
-                innerControl.MouseEnter += delegate
-                {
-                    if (!Enabled) return;
-                    mouseInside = true;
-                    BackgroundColor = mouseInsideColor;
-                };
-                innerControl.MouseLeave += delegate
-                {
-                    mouseInside = false;
-                    BackgroundColor = mouseDown ? mouseDownColor : defaultBackgroundColor;
-                };
-            }
-            else
-            {
-                MouseEnter += delegate
-                {
-                    if (!Enabled) return;
-                    mouseInside = true;
-                    BackgroundColor = mouseInsideColor;
-                };
-                MouseLeave += delegate
-                {
-                    mouseInside = false;
-                    BackgroundColor = mouseDown ? mouseDownColor : defaultBackgroundColor;
-                };
-            }
+            Control innerControl = null;
+            if (label != null) innerControl = label;
+            if (imageView != null) innerControl = imageView;
 
-            MouseDown += delegate
+            var targetControl = App.CanParentReceiveChildEvents ? this : innerControl;
+            targetControl.MouseEnter += delegate
+            {
+                if (!Enabled) return;
+                mouseInside = true;
+                BackgroundColor = mouseInsideColor;
+            };
+            targetControl.MouseLeave += delegate
+            {
+                mouseInside = false;
+                BackgroundColor = mouseDown ? mouseDownColor : defaultBackgroundColor;
+            };
+            targetControl.MouseDown += delegate
             {
                 if (!Enabled) return;
                 mouseDown = true;
                 BackgroundColor = mouseDownColor;
             };
-            MouseUp += delegate
+            targetControl.MouseUp += delegate
             {
                 mouseDown = false;
                 BackgroundColor = mouseInside ? mouseInsideColor : defaultBackgroundColor;
@@ -317,7 +293,6 @@ namespace ASEva.UIEto
         private ImageView imageView = null;
         private Bitmap defaultBitmap = null, disableBitmapObj = null;
 
-        public static bool UseInnerEnterLeave { private get; set; }
         public static bool TextAlphaUnsupported { private get; set; }
     }
 }

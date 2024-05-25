@@ -27,7 +27,10 @@ namespace ASEvaAPIEtoTest
 
             layoutButtons.AddLinkButton(t["basic-flow-add"]).Click += delegate
             {
-                flowLayout.AddControl(generateFlowItem(), 80);
+                List<Control> mouseSources = null;
+                var item = generateFlowItem(out mouseSources);
+                flowLayout.AddControl(item, 80);
+                initFlowMouseEvents(flowLayout, item, mouseSources);
             };
             layoutButtons.AddLinkButton(t["basic-flow-remove"]).Click += delegate
             {
@@ -35,7 +38,10 @@ namespace ASEvaAPIEtoTest
             };
             layoutButtons.AddLinkButton(t["basic-flow-insert"]).Click += delegate
             {
-                flowLayout.InsertControl(1, generateFlowItem(), 80);
+                List<Control> mouseSources = null;
+                var item = generateFlowItem(out mouseSources);
+                flowLayout.InsertControl(1, item, 80);
+                initFlowMouseEvents(flowLayout, item, mouseSources);
             };
             layoutButtons.AddLinkButton(t["basic-flow-select"]).Click += delegate
             {
@@ -63,6 +69,18 @@ namespace ASEvaAPIEtoTest
                 for (int i = 0; i < controlCount; i++) controlsHeight[i] = 80;
                 flowLayout.UpdateControlsSize(250, controlsHeight);
             };
+        }
+
+        private void initFlowMouseEvents(FlowLayout2D flowLayout, Panel item, List<Control> mouseSources)
+        {
+            if (App.CanParentReceiveChildEvents) return;
+            foreach (var source in mouseSources)
+            {
+                source.MouseDown += delegate
+                {
+                    flowLayout.SelectControl(flowLayout.GetControlIndex(item), true);
+                };
+            }
         }
     }
 }

@@ -106,7 +106,10 @@ namespace ASEvaAPIEtoTest
 
             layoutButtons.AddLinkButton(t["basic-flow-add"]).Click += delegate
             {
-                flowLayout.AddControl(generateFlowItem(), 80);
+                List<Control> mouseSources = null;
+                var item = generateFlowItem(out mouseSources);
+                flowLayout.AddControl(item, 80);
+                initFlowMouseEvents(flowLayout, item, mouseSources);
             };
             layoutButtons.AddLinkButton(t["basic-flow-remove"]).Click += delegate
             {
@@ -114,7 +117,10 @@ namespace ASEvaAPIEtoTest
             };
             layoutButtons.AddLinkButton(t["basic-flow-insert"]).Click += delegate
             {
-                flowLayout.InsertControl(1, generateFlowItem(), 80);
+                List<Control> mouseSources = null;
+                var item = generateFlowItem(out mouseSources);
+                flowLayout.InsertControl(1, item, 80);
+                initFlowMouseEvents(flowLayout, item, mouseSources);
             };
             layoutButtons.AddLinkButton(t["basic-flow-select"]).Click += delegate
             {
@@ -130,18 +136,36 @@ namespace ASEvaAPIEtoTest
             };
         }
 
-        private Panel generateFlowItem()
+        private Panel generateFlowItem(out List<Control> mouseSources)
         {
             var panel = new Panel();
             panel.BackgroundColor = Colors.LightYellow;
             var table = panel.SetContentAsTableLayout();
-            var row = table.AddRow(true);
-            row.AddLabel(t.Format("basic-label-row", ++flowItemCount));
-            row.AddControl(new SearchBox(), true);
-            row = table.AddRow(true);
-            row.AddLabel(t.Format("basic-label-row", ++flowItemCount));
-            row.AddControl(new NumericStepper(), true);
+            var row1 = table.AddRow(true);
+            var label1 = row1.AddLabel(t.Format("basic-label-row", ++flowItemCount));
+            row1.AddControl(new SearchBox(), true);
+            var row2 = table.AddRow(true);
+            var label2 = row2.AddLabel(t.Format("basic-label-row", ++flowItemCount));
+            row2.AddControl(new NumericStepper(), true);
+
+            mouseSources = new List<Control>();
+            mouseSources.Add(table);
+            mouseSources.Add(label1);
+            mouseSources.Add(label2);
+
             return panel;
+        }
+
+        private void initFlowMouseEvents(FlowLayout flowLayout, Panel item, List<Control> mouseSources)
+        {
+            if (App.CanParentReceiveChildEvents) return;
+            foreach (var source in mouseSources)
+            {
+                source.MouseDown += delegate
+                {
+                    flowLayout.SelectControl(flowLayout.GetControlIndex(item), true);
+                };
+            }
         }
 
         private int flowItemCount = 0;

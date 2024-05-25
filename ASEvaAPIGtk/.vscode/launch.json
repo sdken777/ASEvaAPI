@@ -28,7 +28,7 @@
     ],
     "configurations": [
         {
-            "name": "Run (Debug)",
+            "name": "Run Eto Test (Debug)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build (Debug)",
@@ -39,6 +39,20 @@
             "stopAtEntry": false,
             "env": {
                 "GDK_BACKEND": "${input:gdk_backend}",
+            },
+        },
+        {
+            "name": "Run Avalonia Test (Debug)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build (Debug)",
+            "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIAvaloniaTest",
+            "args": [],
+            "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "env": {
+                "GDK_BACKEND": "x11",
             },
         },
     ]

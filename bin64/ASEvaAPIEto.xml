@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=3.0.6
+            version=3.1.0
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -316,6 +316,16 @@
             </summary>
             <param name="parent">parent参数</param>
             <returns>返回parent或null</returns>
+        </member>
+        <member name="P:ASEva.UIEto.App.CanParentReceiveChildEvents">
+            \~English
+            <summary>
+            (api:eto=3.1.0) Whether the upper level control can receive events from all child controls
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.1.0) 上级控件是否能接收到所有层级子控件的事件
+            </summary>
         </member>
         <member name="E:ASEva.UIEto.App.KeyDown">
             \~English
@@ -1514,6 +1524,16 @@
             <param name="control">目标控件</param>
             <param name="logicalPadding">目标控件的边缘空隙</param>
             <returns>已设置为Content的目标控件</returns>
+        </member>
+        <member name="T:ASEva.UIEto.SetToolTipExtensions">
+            \~English
+            <summary>
+            (api:eto=3.1.0) Extensions for conversion of setting tool tip
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.1.0) 方便设置tool tip的扩展
+            </summary>
         </member>
         <member name="T:ASEva.UIEto.SizerExtensions">
             \~English

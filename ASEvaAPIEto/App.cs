@@ -22,6 +22,7 @@ namespace ASEva.UIEto
         bool RunDialog(DialogPanel panel);
         Dictionary<String, String> GetThirdPartyNotices();
         bool ShouldPassParent();
+        bool CanParentReceiveChildEvents();
     }
 
     /// \~English
@@ -506,6 +507,19 @@ namespace ASEva.UIEto
         {
             if (handler == null || !handler.ShouldPassParent()) return null;
             else return parent;
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=3.1.0) Whether the upper level control can receive events from all child controls
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=3.1.0) 上级控件是否能接收到所有层级子控件的事件
+        /// </summary>
+        public static bool CanParentReceiveChildEvents
+        {
+            get { return handler != null && handler.CanParentReceiveChildEvents(); }
         }
 
 		/// \~English

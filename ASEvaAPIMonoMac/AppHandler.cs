@@ -172,6 +172,11 @@ namespace ASEva.UIMonoMac
             return true;
         }
 
+        public bool CanParentReceiveChildEvents()
+        {
+            return true;
+        }
+
         private bool InBundle
         {
             get

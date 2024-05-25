@@ -10,7 +10,40 @@ using ASEva.Utility;
 
 namespace ASEva.UIMonoMac
 {
-    class OpenGLView : NSOpenGLView, GLBackend
+    class OpenGLViewContainer : NSView, GLBackend
+    {
+        public OpenGLViewContainer(GLCallback callback, GLAntialias antialias, bool useLegacyAPI)
+        {
+            AutoresizesSubviews = true;
+            this.callback = callback;
+            this.antialias = antialias;
+            this.useLegacyAPI = useLegacyAPI;
+        }
+
+        public void QueueRender()
+        {
+            if (view == null)
+            {
+                view = new OpenGLView(callback, antialias, useLegacyAPI);
+                view.Frame = Bounds;
+                view.AutoresizingMask = NSViewResizingMask.WidthSizable | NSViewResizingMask.HeightSizable;
+                AddSubview(view);
+            } 
+            else view.QueueRender();
+        }
+
+        public void ReleaseGL()
+        {
+            if (view != null) view.ReleaseGL();
+        }
+
+        private GLCallback callback;
+        private GLAntialias antialias;
+        private bool useLegacyAPI;
+        private OpenGLView view;
+    }
+
+    class OpenGLView : NSOpenGLView
     {
         public OpenGLView(GLCallback callback, GLAntialias antialias, bool useLegacyAPI) : base(new CGRect(0, 0, 100, 100))
         {

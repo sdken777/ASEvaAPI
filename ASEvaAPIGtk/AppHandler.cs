@@ -191,6 +191,11 @@ namespace ASEva.UIGtk
             return false;
         }
 
+        public bool CanParentReceiveChildEvents()
+        {
+            return true;
+        }
+
         private String queryUIBackend()
         {
             try

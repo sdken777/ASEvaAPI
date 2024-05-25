@@ -449,6 +449,14 @@ namespace ASEva.UIEto
 			{
 				drawable = new Drawable();
 				drawable.Paint += drawable_Paint;
+				if (!App.CanParentReceiveChildEvents)
+				{
+					drawable.MouseDown += (o, e) => { OnMouseDown(e); };
+					drawable.MouseMove += (o, e) => { OnMouseMove(e); };
+					drawable.MouseUp += (o, e) => { OnMouseUp(e); };
+					drawable.MouseWheel += (o, e) => { OnMouseWheel(e); };
+					drawable.MouseDoubleClick += (o, e) => { OnMouseDoubleClick(e); };
+				}
 				Content = drawable;
 			}
 		}

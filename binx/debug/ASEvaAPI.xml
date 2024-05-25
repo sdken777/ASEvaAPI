@@ -906,6 +906,30 @@
             </summary>
             <param name="signalID">信号ID</param>
         </member>
+        <member name="M:ASEva.Agency.AddProcessorVideoReference(System.Int32)">
+            \~English
+            <summary>
+            (api:app=3.0.8) Add video reference (only video with references will be sent to app layer's processors)
+            </summary>
+            <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
+            \~Chinese
+            <summary>
+            (api:app=3.0.8) 添加视频引用，在应用层的数据处理对象才可获得该通道的数据
+            </summary>
+            <param name="videoChannel">视频通道，0~23对应A~X</param>
+        </member>
+        <member name="M:ASEva.Agency.RemoveProcessorVideoReference(System.Int32)">
+            \~English
+            <summary>
+            (api:app=3.0.8) Remove video reference
+            </summary>
+            <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
+            \~Chinese
+            <summary>
+            (api:app=3.0.8) 移除视频引用
+            </summary>
+            <param name="videoChannel">视频通道，0~23对应A~X</param>
+        </member>
         <member name="M:ASEva.Agency.RunStandaloneTask(System.Object,System.String,System.String,System.String@)">
             \~English
             <summary>
@@ -4166,7 +4190,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.0.7
+            version=3.0.8
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -9244,13 +9268,13 @@
             <summary>
             [Required] Called while a new sample arrived
             </summary>
-            <param name="sample">New sample, include ASEva.GeneralSample , ASEva.Samples.ManualTriggerSample , ASEva.Samples.AudioFrameSample , ASEva.Samples.PointCloudSample , etc.</param>
+            <param name="sample">New sample, include ASEva.GeneralSample , ASEva.Samples.ManualTriggerSample , ASEva.Samples.VideoFrameSample , ASEva.Samples.AudioFrameSample , ASEva.Samples.PointCloudSample , etc.</param>
             <returns>List of output samples</returns>
             \~Chinese
             <summary>
             [必须实现] 在到来新数据样本时被调用，进行数据处理
             </summary>
-            <param name="sample">新数据样本，包括通用样本 ASEva.GeneralSample , 手动触发器样本 ASEva.Samples.ManualTriggerSample , 音频帧样本 ASEva.Samples.AudioFrameSample , 点云帧样本 ASEva.Samples.PointCloudSample 等类型</param>
+            <param name="sample">新数据样本，包括通用样本 ASEva.GeneralSample , 手动触发器样本 ASEva.Samples.ManualTriggerSample , 视频帧样本 ASEva.Samples.VideoFrameSample , 音频帧样本 ASEva.Samples.AudioFrameSample , 点云帧样本 ASEva.Samples.PointCloudSample 等类型</param>
             <returns>返回的样本列表</returns>
         </member>
         <member name="M:ASEva.Processor.OnInputSignalsData(ASEva.Samples.SignalsData)">
@@ -11677,6 +11701,46 @@
             \~Chinese
             <summary>
             标准针孔模型下的横向视场角（未去畸变时为空）
+            </summary>
+        </member>
+        <member name="T:ASEva.Samples.VideoFrameSample">
+            \~English
+            <summary>
+            (api:app=3.0.8) Video frame sample
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.8) 视频帧样本
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.VideoFrameSample.CommonImage">
+            \~English
+            <summary>
+            Common image data (in order of BGR)
+            </summary>
+            \~Chinese
+            <summary>
+            通用图像数据(BGR不逆序)
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.VideoFrameSample.ChannelIndex">
+            \~English
+            <summary>
+            Video channel (0~23)
+            </summary>
+            \~Chinese
+            <summary>
+            视频帧所属通道（0~23）
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.VideoFrameSample.CameraInfo">
+            \~English
+            <summary>
+            Camera information
+            </summary>
+            \~Chinese
+            <summary>
+            摄像头信息
             </summary>
         </member>
         <member name="T:ASEva.SceneData">

@@ -27,6 +27,8 @@ namespace ASEva.UICoreWF
             this.useLegacyAPI = useLegacyAPI;
 
             if (gl == null) gl = OpenGL.Create(new WindowsFuncLoader());
+
+            MouseWheel += OpenGLOnscreenControl_MouseWheel;
         }
 
         public void ReleaseGL()
@@ -36,7 +38,9 @@ namespace ASEva.UICoreWF
 
         public void QueueRender()
         {
-            if (ParentForm != null && ParentForm.WindowState != FormWindowState.Minimized && Visible && DrawBeat.CallerBegin(this))
+            var parentOK = ParentForm != null && ParentForm.WindowState != FormWindowState.Minimized;
+            if (AvaloniaAdaptorCoreWF.UsingAvalonia) parentOK = true;
+            if (parentOK && Visible && DrawBeat.CallerBegin(this))
             {
                 Invalidate();
                 DrawBeat.CallerEnd(this);
@@ -321,6 +325,31 @@ namespace ASEva.UICoreWF
             }
 
             return context != IntPtr.Zero;
+        }
+
+        private void OpenGLOnscreenControl_MouseDown(object sender, MouseEventArgs e)
+        {
+            callback.OnRaiseMouseDown(e.ToEto(this));
+        }
+
+        private void OpenGLOnscreenControl_MouseMove(object sender, MouseEventArgs e)
+        {
+            callback.OnRaiseMouseMove(e.ToEto(this));
+        }
+
+        private void OpenGLOnscreenControl_MouseUp(object sender, MouseEventArgs e)
+        {
+            callback.OnRaiseMouseUp(e.ToEto(this));
+        }
+
+        private void OpenGLOnscreenControl_MouseWheel(object sender, MouseEventArgs e)
+        {
+            callback.OnRaiseMouseWheel(e.ToEto(this));
+        }
+
+        private void OpenGLOnscreenControl_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            callback.OnRaiseMouseDoubleClick(e.ToEto(this));
         }
 
         private GLCallback callback = null;
