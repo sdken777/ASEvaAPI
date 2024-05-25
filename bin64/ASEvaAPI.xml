@@ -909,24 +909,24 @@
         <member name="M:ASEva.Agency.AddProcessorVideoReference(System.Int32)">
             \~English
             <summary>
-            (api:app=2.17.0) Add video reference (only video with references will be sent to app layer's processors)
+            (api:app=3.0.8) Add video reference (only video with references will be sent to app layer's processors)
             </summary>
             <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
             \~Chinese
             <summary>
-            (api:app=2.17.0) 添加视频引用，在应用层的数据处理对象才可获得该通道的数据
+            (api:app=3.0.8) 添加视频引用，在应用层的数据处理对象才可获得该通道的数据
             </summary>
             <param name="videoChannel">视频通道，0~23对应A~X</param>
         </member>
         <member name="M:ASEva.Agency.RemoveProcessorVideoReference(System.Int32)">
             \~English
             <summary>
-            (api:app=2.17.0) Remove video reference
+            (api:app=3.0.8) Remove video reference
             </summary>
             <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
             \~Chinese
             <summary>
-            (api:app=2.17.0) 移除视频引用
+            (api:app=3.0.8) 移除视频引用
             </summary>
             <param name="videoChannel">视频通道，0~23对应A~X</param>
         </member>
@@ -11703,17 +11703,17 @@
             标准针孔模型下的横向视场角（未去畸变时为空）
             </summary>
         </member>
-        <member name="T:ASEva.Samples.VideoFrameSampleX">
+        <member name="T:ASEva.Samples.VideoFrameSample">
             \~English
             <summary>
-            (api:app=2.17.0) Video frame sample
+            (api:app=3.0.8) Video frame sample
             </summary>
             \~Chinese
             <summary>
-            (api:app=2.17.0) 视频帧样本
+            (api:app=3.0.8) 视频帧样本
             </summary>
         </member>
-        <member name="P:ASEva.Samples.VideoFrameSampleX.CommonImage">
+        <member name="P:ASEva.Samples.VideoFrameSample.CommonImage">
             \~English
             <summary>
             Common image data (in order of BGR)
@@ -11723,7 +11723,7 @@
             通用图像数据(BGR不逆序)
             </summary>
         </member>
-        <member name="P:ASEva.Samples.VideoFrameSampleX.ChannelIndex">
+        <member name="P:ASEva.Samples.VideoFrameSample.ChannelIndex">
             \~English
             <summary>
             Video channel (0~23)
@@ -11733,7 +11733,7 @@
             视频帧所属通道（0~23）
             </summary>
         </member>
-        <member name="P:ASEva.Samples.VideoFrameSampleX.CameraInfo">
+        <member name="P:ASEva.Samples.VideoFrameSample.CameraInfo">
             \~English
             <summary>
             Camera information

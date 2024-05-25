@@ -7,13 +7,13 @@ namespace ASEva.Samples
 {
     /// \~English
     /// <summary>
-    /// (api:app=2.17.0) Video frame sample
+    /// (api:app=3.0.8) Video frame sample
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.17.0) 视频帧样本
+    /// (api:app=3.0.8) 视频帧样本
     /// </summary>
-    public class VideoFrameSampleX : Sample
+    public class VideoFrameSample : Sample
     {
         /// \~English
         /// <summary>

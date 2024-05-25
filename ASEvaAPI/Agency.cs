@@ -1431,12 +1431,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.17.0) Add video reference (only video with references will be sent to app layer's processors)
+        /// (api:app=3.0.8) Add video reference (only video with references will be sent to app layer's processors)
         /// </summary>
         /// <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.17.0) 添加视频引用，在应用层的数据处理对象才可获得该通道的数据
+        /// (api:app=3.0.8) 添加视频引用，在应用层的数据处理对象才可获得该通道的数据
         /// </summary>
         /// <param name="videoChannel">视频通道，0~23对应A~X</param>
         public static void AddProcessorVideoReference(int videoChannel)
@@ -1446,12 +1446,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=2.17.0) Remove video reference
+        /// (api:app=3.0.8) Remove video reference
         /// </summary>
         /// <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.17.0) 移除视频引用
+        /// (api:app=3.0.8) 移除视频引用
         /// </summary>
         /// <param name="videoChannel">视频通道，0~23对应A~X</param>
         public static void RemoveProcessorVideoReference(int videoChannel)
