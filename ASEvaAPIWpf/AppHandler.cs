@@ -134,5 +134,10 @@ namespace ASEva.UIWpf
         {
             return true;
         }
+
+        public bool CanParentReceiveChildEvents()
+        {
+            return true;
+        }
     }
 }
