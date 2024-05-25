@@ -95,13 +95,13 @@ namespace ASEva
         /// <summary>
         /// [Required] Called while a new sample arrived
         /// </summary>
-        /// <param name="sample">New sample, include ASEva.GeneralSample , ASEva.Samples.ManualTriggerSample , ASEva.Samples.AudioFrameSample , ASEva.Samples.PointCloudSample , etc.</param>
+        /// <param name="sample">New sample, include ASEva.GeneralSample , ASEva.Samples.ManualTriggerSample , ASEva.Samples.VideoFrameSampleX , ASEva.Samples.AudioFrameSample , ASEva.Samples.PointCloudSample , etc.</param>
         /// <returns>List of output samples</returns>
         /// \~Chinese
         /// <summary>
         /// [必须实现] 在到来新数据样本时被调用，进行数据处理
         /// </summary>
-        /// <param name="sample">新数据样本，包括通用样本 ASEva.GeneralSample , 手动触发器样本 ASEva.Samples.ManualTriggerSample , 音频帧样本 ASEva.Samples.AudioFrameSample , 点云帧样本 ASEva.Samples.PointCloudSample 等类型</param>
+        /// <param name="sample">新数据样本，包括通用样本 ASEva.GeneralSample , 手动触发器样本 ASEva.Samples.ManualTriggerSample , 视频帧样本 ASEva.Samples.VideoFrameSampleX , 音频帧样本 ASEva.Samples.AudioFrameSample , 点云帧样本 ASEva.Samples.PointCloudSample 等类型</param>
         /// <returns>返回的样本列表</returns>
         public virtual List<ProcessorOutputSample> OnProcessSample(Sample sample) { return null; }
 

@@ -184,7 +184,7 @@ namespace ASEva.UIEto
         /// <returns>序号位置，若不存在则返回-1</returns>
         public int GetControlIndex(Control control)
         {
-            return controls.FindIndex(c => c.Equals(control));
+            return controls.FindIndex(c => c.Control.Equals(control));
         }
 
         /// \~English

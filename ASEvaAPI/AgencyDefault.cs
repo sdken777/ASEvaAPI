@@ -1473,5 +1473,13 @@ namespace ASEva
         {
             return ApplicationGUI.NoGUI;
         }
+
+        public void AddProcessorVideoReference(int videoChannel)
+        {
+        }
+
+        public void RemoveProcessorVideoReference(int videoChannel)
+        {
+        }
     }
 }

@@ -11,9 +11,9 @@
  * 
  * \~English In addition, refer to ASEva.Samples for the definition of samples used in plugin, and ASEva.Graph for graph report definitions. \n\n
  * \~Chinese 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph 。 \n\n
- * 
- * \~English This document corresponds to API version: 3.0.7 \n
- * \~Chinese 本文档对应API版本：3.0.7
+ *
+ * \~English This document corresponds to API version: 3.0.8 \n
+ * \~Chinese 本文档对应API版本：3.0.8
  */
 
 using System;
@@ -22,7 +22,7 @@ using System.Diagnostics;
 namespace ASEva
 {
     /// <summary>
-    /// version=3.0.7
+    /// version=3.0.8
     /// </summary>
     public class APIInfo
     {
@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 0, 7, 0); // Update log / 更新记录: 新增ApplicationGUI，Agency.GetAppGUI。MainWorkflow.OnInit输出该参数。PlatformUnsupported->GUIUnsupported
+            return new Version(3, 0, 8, 0); // Update log / 更新记录: 合并2.17.0
         }
 
         /// \~English

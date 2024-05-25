@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 0, 6, 0); // Update log / 更新记录: FuncManager注册GetUIBackendDirectCode和GetUIBackendFullCode
+            return new Version(3, 0, 6, 1); // Update log / 更新记录: 合并2.16.1.1
         }
 
         /// \~English
