@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 16, 1, 0); // Update log / 更新记录: 新增App.Init(uiCode, attach)
+            return new Version(2, 16, 1, 1); // Update log / 更新记录: 修正FlowLayout/2D.GetControlIndex
         }
 
         /// \~English
