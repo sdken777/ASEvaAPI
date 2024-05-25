@@ -7,6 +7,7 @@ EXPORT_DEVELOPER=y
 EXPORT_RUNTIME_DEBUG=y
 EXPORT_GUI_LIBRARY=y
 EXPORT_SKIA_NATIVE=n
+EXPORT_AVALONIA=n
 if [ "$1" = "" ]; then
     TARGET_DIR=~/Desktop/$CUR_DATE-$TARGET_NAME
     GEN_DESKTOP_ZIP=y
@@ -31,6 +32,10 @@ else
     if [ "$3" = "with-skia-native" ]; then
         EXPORT_SKIA_NATIVE=y
     fi
+    if [ "$3" = "with-avalonia" ]; then
+        EXPORT_SKIA_NATIVE=y
+        EXPORT_AVALONIA=y
+    fi
 fi
 
 mkdir -vp $TARGET_DIR/bin64
@@ -47,6 +52,10 @@ if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
     if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-windows-x64/* $TARGET_DIR/bin64/
     fi
+    if [ "$EXPORT_AVALONIA" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/bin64/
+        cp -vf "$CUR_DIR"/3party/avalonia-windows/* $TARGET_DIR/bin64/
+    fi
 fi
 
 mkdir -vp $TARGET_DIR/binx
@@ -61,6 +70,11 @@ if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/3party/skia-common/* $TARGET_DIR/binx/
     if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-linux-x64/* $TARGET_DIR/binx/
+    fi
+    if [ "$EXPORT_AVALONIA" = "y" ]; then
+        cp -vf "$CUR_DIR"/binx/libXembedSocket.so $TARGET_DIR/binx/
+        cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binx/
+        cp -vf "$CUR_DIR"/3party/avalonia-linux/* $TARGET_DIR/binx/
     fi
 fi
 
@@ -77,6 +91,11 @@ if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
     if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-linux-arm64/* $TARGET_DIR/binxa/
     fi
+    if [ "$EXPORT_AVALONIA" = "y" ]; then
+        cp -vf "$CUR_DIR"/binxa/libXembedSocket.so $TARGET_DIR/binxa/
+        cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binxa/
+        cp -vf "$CUR_DIR"/3party/avalonia-linux/* $TARGET_DIR/binxa/
+    fi
 fi
 
 mkdir -vp $TARGET_DIR/binma
@@ -92,6 +111,10 @@ if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/3party/skia-common/* $TARGET_DIR/binma/
     if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-macos-any/* $TARGET_DIR/binma/
+    fi
+    if [ "$EXPORT_AVALONIA" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binma/
+        cp -vf "$CUR_DIR"/3party/avalonia-macos/* $TARGET_DIR/binma/
     fi
 fi
 
@@ -149,6 +172,10 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
             cp -vf "$CUR_DIR"/3party/skia-windows-x64/* $TARGET_DIR/bin64/debug/
         fi
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/bin64/debug/
+            cp -vf "$CUR_DIR"/3party/avalonia-windows/* $TARGET_DIR/bin64/debug/
+        fi
     fi
 
     mkdir -vp $TARGET_DIR/binx/debug
@@ -163,6 +190,11 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-common/* $TARGET_DIR/binx/debug/
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
             cp -vf "$CUR_DIR"/3party/skia-linux-x64/* $TARGET_DIR/binx/debug/
+        fi
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/binx/libXembedSocket.so $TARGET_DIR/binx/debug/
+            cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binx/debug/
+            cp -vf "$CUR_DIR"/3party/avalonia-linux/* $TARGET_DIR/binx/debug/
         fi
     fi
 
@@ -179,6 +211,11 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
             cp -vf "$CUR_DIR"/3party/skia-linux-arm64/* $TARGET_DIR/binxa/debug/
         fi
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/binxa/libXembedSocket.so $TARGET_DIR/binxa/debug/
+            cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binxa/debug/
+            cp -vf "$CUR_DIR"/3party/avalonia-linux/* $TARGET_DIR/binxa/debug/
+        fi
     fi
 
     mkdir -vp $TARGET_DIR/binma/debug
@@ -194,6 +231,10 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-common/* $TARGET_DIR/binma/debug/
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
             cp -vf "$CUR_DIR"/3party/skia-macos-any/* $TARGET_DIR/binma/debug/
+        fi
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binma/debug/
+            cp -vf "$CUR_DIR"/3party/avalonia-macos/* $TARGET_DIR/binma/debug/
         fi
     fi
 fi

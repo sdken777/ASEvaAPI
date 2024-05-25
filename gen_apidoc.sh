@@ -35,5 +35,10 @@ cp -vf ./index.html ~/Desktop/D01010_ASEvaAPIDoc_Chinese/MonoMac/
 DOCUMENT_LANGUAGE=English doxygen Doxyfile-ASEvaAPIMonoMac
 cp -vf ./index.html ~/Desktop/D01010_ASEvaAPIDoc_English/MonoMac/
 
+DOCUMENT_LANGUAGE=Chinese doxygen Doxyfile-ASEvaAPIAvalonia
+cp -vf ./index.html ~/Desktop/D01010_ASEvaAPIDoc_Chinese/Avalonia/
+DOCUMENT_LANGUAGE=English doxygen Doxyfile-ASEvaAPIAvalonia
+cp -vf ./index.html ~/Desktop/D01010_ASEvaAPIDoc_English/Avalonia/
+
 echo "Done. (ASEvaAPI/gen_apidoc.sh)"
 sleep 1
