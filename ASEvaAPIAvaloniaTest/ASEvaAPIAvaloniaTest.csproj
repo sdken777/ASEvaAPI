@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup Condition="'$(OS)'=='Windows_NT'">
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>True</UseWindowsForms>
+    <UseWpf>True</UseWpf>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)'!='Windows_NT'">
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ASEvaAPIAvaloniaTest</RootNamespace>
+    <AssemblyName>ASEvaAPIAvaloniaTest</AssemblyName>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\*.*" />
+    <EmbeddedResource Include="Resources\*.*">
+      <LogicalName>%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ASEvaAPI">
+      <HintPath>../bin64/ASEvaAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="ASEvaAPIEto">
+      <HintPath>../bin64/ASEvaAPIEto.dll</HintPath>
+    </Reference>
+    <Reference Include="ASEvaAPIAvalonia">
+      <HintPath>../bin64/ASEvaAPIAvalonia.dll</HintPath>
+    </Reference>
+    <Reference Include="ASEvaAPIEtoTest">
+      <HintPath>../bin64/ASEvaAPIEtoTest.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto">
+      <HintPath>../bin64/Eto.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10" />
+  </ItemGroup>
+
+</Project>

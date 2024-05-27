@@ -1,0 +1,125 @@
+{
+    "version": "2.0.0",
+    "inputs": [
+        {
+            "id": "helper_platform_bin_name",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "platform_bin_name"
+                ]
+            }
+        },
+    ],
+    "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+    },
+    "tasks": [
+        {
+            "type": "process",
+            "label": "Build (Debug)",
+            "group": "build",
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvaloniaTest",
+                "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvaloniaTest.dll",
+                "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvaloniaTest.runtimeconfig.json",
+                "../${input:helper_platform_bin_name}/debug/"
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Subtask: Build for host (Debug)",
+            ],
+        },
+        {
+            "type": "process",
+            "label": "Build (Release)",
+            "group": "build",
+            "command": "dotnet",
+            "args": [
+                "../bin/VSCodeHelper.dll",
+                "copy_outputs",
+                "ASEvaAPIAvaloniaTest",
+                "bin64",
+                "binx",
+                "binxa",
+                "binma",
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Subtask: Build for host (Release)",
+                "Subtask: Copy built files",
+            ],
+        },
+        {
+            "type": "process",
+            "label": "Clean",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "./obj",
+                "./bin"
+            ],
+            "problemMatcher": [],
+        },
+
+        // Subtasks:
+
+        {
+            "type": "process",
+            "label": "Subtask: Build for host (Debug)",
+            "hide": true,
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIAvaloniaTest.csproj",
+                "-o",
+                "../${input:helper_platform_bin_name}/debug/bin",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+        },
+        {
+            "type": "process",
+            "label": "Subtask: Build for host (Release)",
+            "hide": true,
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIAvaloniaTest.csproj",
+                "-c",
+                "Release",
+                "-o",
+                "../${input:helper_platform_bin_name}/bin",
+                "/property:ApplicationIcon=Resources/icon.ico",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+        },
+        {
+            "type": "process",
+            "label": "Subtask: Copy built files",
+            "hide": true,
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../${input:helper_platform_bin_name}/bin/ASEvaAPIAvaloniaTest",
+                "../${input:helper_platform_bin_name}/bin/ASEvaAPIAvaloniaTest.dll",
+                "../${input:helper_platform_bin_name}/bin/ASEvaAPIAvaloniaTest.runtimeconfig.json",
+                "../${input:helper_platform_bin_name}/"
+            ],
+        },
+    ]
+}

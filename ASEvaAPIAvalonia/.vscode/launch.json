@@ -1,0 +1,36 @@
+{
+    "version": "0.2.0",
+    "inputs": [
+        {
+            "id": "helper_platform_bin_name",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "platform_bin_name"
+                ]
+            }
+        },
+    ],
+    "configurations": [
+        {
+            "name": "Run (Debug)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build (Debug)",
+            "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIAvaloniaTest",
+            "args": [],
+            "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "linux": {
+                "env": {
+                    "GDK_BACKEND": "x11",
+                }
+            },
+        },
+    ]
+}

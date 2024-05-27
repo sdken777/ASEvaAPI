@@ -24,6 +24,7 @@ net8.0-windows/
 macapp/
 libx/
 libxa/
+**/bin/
 
 # User-specific files
 *.suo
