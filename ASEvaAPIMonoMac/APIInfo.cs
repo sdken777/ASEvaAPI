@@ -31,7 +31,7 @@ namespace ASEva.UIMonoMac
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 0, 0); // Update log / 更新记录: 支持嵌入至Avalonia
+            return new Version(2, 1, 0, 1); // Update log / 更新记录: 修正嵌入至Avalonia的控件无背景颜色问题
         }
     }
 }

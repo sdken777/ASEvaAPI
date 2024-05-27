@@ -1,6 +1,9 @@
 using System;
 using ASEva.UIEto;
 using Eto.Forms;
+using Eto.Mac;
+using MonoMac.AppKit;
+using MonoMac.CoreGraphics;
 
 namespace ASEva.UIMonoMac
 {
@@ -9,6 +12,8 @@ namespace ASEva.UIMonoMac
         public nint CreateContainer(nint parent, Control control, out object context)
         {
             var nsView = MonoMac64Helpers.ToNative(control, true);
+            nsView.WantsLayer = true;
+            nsView.Layer.BackgroundColor = new CGColor(0.975, 0.975, 0.975, 1.0);
             context = null;
             return nsView.Handle;
         }
