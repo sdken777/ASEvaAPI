@@ -27,10 +27,7 @@ namespace ASEvaAPIEtoTest
 
             layoutButtons.AddLinkButton(t["basic-flow-add"]).Click += delegate
             {
-                List<Control> mouseSources = null;
-                var item = generateFlowItem(out mouseSources);
-                flowLayout.AddControl(item, 80);
-                initFlowMouseEvents(flowLayout, item, mouseSources);
+                flowLayout.AddControl(generateFlowItem(), 80);
             };
             layoutButtons.AddLinkButton(t["basic-flow-remove"]).Click += delegate
             {
@@ -38,10 +35,7 @@ namespace ASEvaAPIEtoTest
             };
             layoutButtons.AddLinkButton(t["basic-flow-insert"]).Click += delegate
             {
-                List<Control> mouseSources = null;
-                var item = generateFlowItem(out mouseSources);
-                flowLayout.InsertControl(1, item, 80);
-                initFlowMouseEvents(flowLayout, item, mouseSources);
+                flowLayout.InsertControl(1, generateFlowItem(), 80);
             };
             layoutButtons.AddLinkButton(t["basic-flow-select"]).Click += delegate
             {

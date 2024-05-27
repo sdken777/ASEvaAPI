@@ -88,6 +88,7 @@ namespace ASEva.UIEto
         /// <param name="logicalHeight">目标控件的高度，至少为4</param>
         public void AddControl(Control control, int logicalHeight)
         {
+            if (control == null) return;
             if (controls.Exists(c => c.Control.Equals(control))) return;
             logicalHeight = Math.Max(4, logicalHeight);
             controls.Add(new ControlContext{ Control = control, Visible = true });
@@ -95,6 +96,38 @@ namespace ASEva.UIEto
             {
                 backend.AddControl(control, logicalHeight);
                 backend.UpdateControlsLayout(this.GetLogicalSize());
+            }
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=3.1.1) Add control
+        /// </summary>
+        /// <param name="control">Target control object, do nothing if it's already in the layout</param>
+        /// <param name="logicalHeight">Target logical height, at least 4</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=3.1.1) 在底部添加控件
+        /// </summary>
+        /// <param name="control">目标控件，若已存在则不添加</param>
+        /// <param name="logicalHeight">目标控件的高度，至少为4</param>
+        public void AddControl(ControlAndMouseSources control, int logicalHeight)
+        {
+            if (control == null || control.Control == null) return;
+            if (controls.Exists(c => c.Control.Equals(control.Control))) return;
+            logicalHeight = Math.Max(4, logicalHeight);
+            controls.Add(new ControlContext{ Control = control.Control, Visible = true });
+            if (backend != null)
+            {
+                backend.AddControl(control.Control, logicalHeight);
+                backend.UpdateControlsLayout(this.GetLogicalSize());
+                if (control.MouseSources != null && !App.CanParentReceiveChildEvents)
+                {
+                    foreach (var source in control.MouseSources)
+                    {
+                        source.MouseDown += delegate { SelectControl(GetControlIndex(control.Control), true); };
+                    }
+                }
             }
         }
 
@@ -114,6 +147,7 @@ namespace ASEva.UIEto
         /// <param name="logicalHeight">目标控件的高度，至少为4</param>
         public void InsertControl(int index, Control control, int logicalHeight)
         {
+            if (control == null) return;
             if (controls.Exists(c => c.Control.Equals(control))) return;
             if (index >= controls.Count) AddControl(control, logicalHeight);
             else
@@ -125,6 +159,45 @@ namespace ASEva.UIEto
                 {
                     backend.InsertControl(index, control, logicalHeight);
                     backend.UpdateControlsLayout(this.GetLogicalSize());
+                }
+            }
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=3.1.1) Insert control at index
+        /// </summary>
+        /// <param name="index">Specified control index (If it's over the bound, insert to index 0 or add to last position)</param>
+        /// <param name="control">Target control object, do nothing if it's already in the layout</param>
+        /// <param name="logicalHeight">Target logical height, at least 4</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=3.1.1) 在指定序号位置添加控件
+        /// </summary>
+        /// <param name="index">指定序号位置，超出范围则添加至顶部或底部</param>
+        /// <param name="control">目标控件，若已存在则不添加</param>
+        /// <param name="logicalHeight">目标控件的高度，至少为4</param>
+        public void InsertControl(int index, ControlAndMouseSources control, int logicalHeight)
+        {
+            if (control == null || control.Control == null) return;
+            if (controls.Exists(c => c.Control.Equals(control.Control))) return;
+            if (index >= controls.Count) AddControl(control, logicalHeight);
+            else
+            {
+                index = Math.Max(0, index);
+                logicalHeight = Math.Max(4, logicalHeight);
+                controls.Insert(index, new ControlContext{ Control = control.Control, Visible = true });
+                if (backend != null)
+                {
+                    backend.InsertControl(index, control.Control, logicalHeight);
+                    backend.UpdateControlsLayout(this.GetLogicalSize());
+                    if (control.MouseSources != null && !App.CanParentReceiveChildEvents)
+                    {
+                        foreach (var source in control.MouseSources)
+                        {
+                            source.MouseDown += delegate { SelectControl(GetControlIndex(control.Control), true); };
+                        }
+                    }
                 }
             }
         }

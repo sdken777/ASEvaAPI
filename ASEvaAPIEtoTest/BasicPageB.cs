@@ -106,10 +106,7 @@ namespace ASEvaAPIEtoTest
 
             layoutButtons.AddLinkButton(t["basic-flow-add"]).Click += delegate
             {
-                List<Control> mouseSources = null;
-                var item = generateFlowItem(out mouseSources);
-                flowLayout.AddControl(item, 80);
-                initFlowMouseEvents(flowLayout, item, mouseSources);
+                flowLayout.AddControl(generateFlowItem(), 80);
             };
             layoutButtons.AddLinkButton(t["basic-flow-remove"]).Click += delegate
             {
@@ -117,10 +114,7 @@ namespace ASEvaAPIEtoTest
             };
             layoutButtons.AddLinkButton(t["basic-flow-insert"]).Click += delegate
             {
-                List<Control> mouseSources = null;
-                var item = generateFlowItem(out mouseSources);
-                flowLayout.InsertControl(1, item, 80);
-                initFlowMouseEvents(flowLayout, item, mouseSources);
+                flowLayout.InsertControl(1, generateFlowItem(), 80);
             };
             layoutButtons.AddLinkButton(t["basic-flow-select"]).Click += delegate
             {
@@ -136,7 +130,7 @@ namespace ASEvaAPIEtoTest
             };
         }
 
-        private Panel generateFlowItem(out List<Control> mouseSources)
+        private ControlAndMouseSources generateFlowItem()
         {
             var panel = new Panel();
             panel.BackgroundColor = Colors.LightYellow;
@@ -148,24 +142,16 @@ namespace ASEvaAPIEtoTest
             var label2 = row2.AddLabel(t.Format("basic-label-row", ++flowItemCount));
             row2.AddControl(new NumericStepper(), true);
 
-            mouseSources = new List<Control>();
+            var mouseSources = new List<Control>();
             mouseSources.Add(table);
             mouseSources.Add(label1);
             mouseSources.Add(label2);
 
-            return panel;
-        }
-
-        private void initFlowMouseEvents(FlowLayout flowLayout, Panel item, List<Control> mouseSources)
-        {
-            if (App.CanParentReceiveChildEvents) return;
-            foreach (var source in mouseSources)
+            return new ControlAndMouseSources
             {
-                source.MouseDown += delegate
-                {
-                    flowLayout.SelectControl(flowLayout.GetControlIndex(item), true);
-                };
-            }
+                Control = panel,
+                MouseSources = mouseSources,
+            };
         }
 
         private int flowItemCount = 0;
