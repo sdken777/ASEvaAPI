@@ -7,7 +7,7 @@ using SkiaSharp;
 
 namespace ASEvaAPIEtoTest
 {
-    partial class TestWindow
+    partial class EtoTestPanel
     {
         private void initDrawSkia2D(TabPage tabPage, bool disableGPU, bool onscreenRendering = false)
         {

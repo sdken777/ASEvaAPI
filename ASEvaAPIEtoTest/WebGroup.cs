@@ -7,9 +7,9 @@ using Eto.Drawing;
 
 namespace ASEvaAPIEtoTest
 {
-    partial class TestWindow
+    partial class EtoTestPanel
     {
-        private void initUtilGroupBox(GroupBox groupBox)
+        private void initWebGroupBox(GroupBox groupBox)
         {
             var layout = groupBox.SetContentAsColumnLayout();
             var layoutRow = layout.AddRowLayout();
@@ -19,9 +19,9 @@ namespace ASEvaAPIEtoTest
             layoutRow.AddButtonPanel(Bitmap.FromResource("forward.png")).Click += delegate { webView.GoForward(); };
             layoutRow.AddSeparator();
             var textBox = layoutRow.AddControl(new TextBox(), true) as TextBox;
-            var buttonGo = layoutRow.AddButtonPanel(t["util-web-go-url"]);
+            var buttonGo = layoutRow.AddButtonPanel(t["web-go-url"]);
             layoutRow.AddSeparator();
-            layoutRow.AddButtonPanel(t["util-web-call-script"]).Click += delegate { webView.ExecuteScriptAsync("callScript()"); };
+            layoutRow.AddButtonPanel(t["web-call-script"]).Click += delegate { webView.ExecuteScriptAsync("callScript()"); };
 
             buttonGo.Enabled = false;
             buttonGo.DefaultBackgroundColor = Colors.LightGrey;

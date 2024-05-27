@@ -7,7 +7,7 @@ using Eto.Drawing;
 
 namespace ASEvaAPIEtoTest
 {
-    partial class TestWindow
+    partial class EtoTestPanel
     {
         private void initBasicTabPageC(TabPage tabPage)
         {

@@ -7,7 +7,7 @@ using ASEva.UIEto;
 
 namespace ASEvaAPIEtoTest
 {
-    partial class TestWindow
+    partial class EtoTestPanel
     {
         private void initDrawDefault2D(TabPage tabPage)
         {

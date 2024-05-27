@@ -5,12 +5,15 @@ using Eto.Forms;
 
 namespace ASEvaAPIEtoTest
 {
-    partial class TestWindow
+    partial class EtoTestPanel
     {
+        public event EventHandler RequestFullScreen;
+        public event EventHandler RequestClose;
+
         private void initContextMenu(ContextMenu menu)
         {
-            menu.AddButtonItem(t["menu-fullscreen"]).Click += delegate { this.MaximizeToFullScreen(); };
-            menu.AddButtonItem(t["menu-exit"]).Click += delegate { Close(); };
+            menu.AddButtonItem(t["menu-fullscreen"]).Click += delegate { RequestFullScreen?.Invoke(this, null); };
+            menu.AddButtonItem(t["menu-exit"]).Click += delegate { RequestClose?.Invoke(this, null); };
             menu.AddSeparator();
             var subMenu = menu.AddButtonItem(t["menu-sub"]);
             subMenu.AddButtonItem(t.Format("menu-sub-item", "A"));

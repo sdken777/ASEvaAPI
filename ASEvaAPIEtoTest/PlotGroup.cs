@@ -6,7 +6,7 @@ using ExampleLibrary;
 
 namespace ASEvaAPIEtoTest
 {
-    partial class TestWindow
+    partial class EtoTestPanel
     {
         private void initPlotGroupBox(GroupBox groupBox)
         {

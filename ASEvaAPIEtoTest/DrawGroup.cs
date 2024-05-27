@@ -4,7 +4,7 @@ using Eto.Forms;
 
 namespace ASEvaAPIEtoTest
 {
-    partial class TestWindow
+    partial class EtoTestPanel
     {
         private void initDrawGroupBox(GroupBox groupBox, bool onscreenRendering)
         {

@@ -7,7 +7,7 @@ using Eto.Drawing;
 
 namespace ASEvaAPIEtoTest
 {
-    partial class TestWindow
+    partial class EtoTestPanel
     {
         private void initBasicTabPageA(TabPage tabPage)
         {
@@ -109,7 +109,7 @@ namespace ASEvaAPIEtoTest
                 form.Resizable = form.Maximizable = false;
                 form.Title = "";
                 form.Content = new Panel();
-                form.Owner = App.PassParent(this);
+                form.Owner = App.PassParent(this)?.ParentWindow;
                 form.Show();
             };
 

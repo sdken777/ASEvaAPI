@@ -6,7 +6,7 @@ using ASEva.Samples;
 
 namespace ASEvaAPIEtoTest
 {
-    partial class TestWindow
+    partial class EtoTestPanel
     {
         private void initDrawImages(StackLayout layout)
         {

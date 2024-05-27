@@ -340,15 +340,15 @@
     <en>Test Dialog</en>
     <zh>测试对话框</zh>
   </t>
-  <t id="util-group-title">
-    <en>Utility Controls</en>
-    <zh>实用控件</zh>
+  <t id="web-group-title">
+    <en>Web View</en>
+    <zh>Web视图</zh>
   </t>
-  <t id="util-web-call-script">
+  <t id="web-call-script">
     <en>Call script</en>
     <zh>调用脚本</zh>
   </t>
-  <t id="util-web-go-url">
+  <t id="web-go-url">
     <en>Go</en>
     <zh>打开</zh>
   </t>
