@@ -5,7 +5,7 @@ namespace ASEva.UIGtk
 {
     class HolderBoundCorrection
     {
-        public static void Correct(uint container, double scale)
+        public static void Correct(uint container, double scale, int logicalWidth, int logicalHeight)
         {
             var x11Display = XOpenDisplay(null);
 
@@ -18,13 +18,15 @@ namespace ASEva.UIGtk
             {
                 var attribs = new uint[36];
                 XGetWindowAttributes(x11Display, holder[0], attribs);
-
-                var targetX = (int)(attribs[0] * scale);
-                var targetY = (int)(attribs[1] * scale);
-                var targetWidth = (uint)(attribs[2] * scale);
-                var targetHeight = (uint)(attribs[3] * scale);
-                XMoveResizeWindow(x11Display, holder[0], targetX, targetY, targetWidth, targetHeight);
-                XMoveResizeWindow(x11Display, container, 0, 0, targetWidth, targetHeight);
+                if (Math.Abs(attribs[2] - logicalWidth) <= 1 && Math.Abs(attribs[3] - logicalHeight) <= 1)
+                {
+                    var targetX = (int)(attribs[0] * scale);
+                    var targetY = (int)(attribs[1] * scale);
+                    var targetWidth = (uint)(attribs[2] * scale);
+                    var targetHeight = (uint)(attribs[3] * scale);
+                    XMoveResizeWindow(x11Display, holder[0], targetX, targetY, targetWidth, targetHeight);
+                    XMoveResizeWindow(x11Display, container, 0, 0, targetWidth, targetHeight);
+                }
             }
 
             XCloseDisplay(x11Display);

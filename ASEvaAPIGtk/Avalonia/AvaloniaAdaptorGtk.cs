@@ -30,8 +30,6 @@ namespace ASEva.UIGtk
                 {
                     if (ctx.ParentXID != 0)
                     {
-                        if (scale != null && scale.Value != 1) HolderBoundCorrection.Correct((uint)ctx.ParentXID, scale.Value);
-
                         ctx.Socket = XembedSocket.xembed_socket_create((uint)ctx.ParentXID, 1);
                         var socketID = XembedSocket.xembed_socket_get_socket_id(ctx.Socket);
 
@@ -99,6 +97,10 @@ namespace ASEva.UIGtk
         public void HandleControlResize(object context, double width, double height)
         {
             var ctx = context as Context;
+            if (!ctx.CorrectionInvoked && scale != null && scale.Value != 1)
+            {
+                HolderBoundCorrection.Correct((uint)ctx.ParentXID, scale.Value, (int)width, (int)height);
+            }
             XembedSocket.xembed_socket_update_both_allocation(ctx.Socket);
         }
 
@@ -109,6 +111,7 @@ namespace ASEva.UIGtk
             public Gtk.Plug Plug { get; set; }
             public Eto.Forms.Control Control { get; set; }
             public int Active { get; set; }
+            public bool CorrectionInvoked { get; set; }
         }
 
         private List<Context> ctxs = new List<Context>();
