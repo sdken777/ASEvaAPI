@@ -2,12 +2,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Test"
         xmlns:aseva="clr-namespace:ASEva.UIAvalonia;assembly=ASEvaAPIAvalonia"
-        mc:Ignorable="d" d:DesignWidth="1300" d:DesignHeight="800"
-        Width="1300" Height="800" MinWidth="1300" MinHeight="800"
-        x:Class="ASEvaAPIAvaloniaTest.SubWindow"
-        Title="Avalonia Window">
+        x:Class="ASEvaAPIAvaloniaTest.EtoEmbedWindow"
+        Title="Avalonia Window"
+        Width="1300" Height="800" MinWidth="1300" MinHeight="800">
     <Grid x:Name="grid" Background="PaleGreen">
         <aseva:EtoEmbedder x:Name="embedder" Margin="8" />
     </Grid>

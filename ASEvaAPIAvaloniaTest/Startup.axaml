@@ -1,0 +1,15 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        x:Class="ASEvaAPIAvaloniaTest.Startup"
+        Title="" Icon="resm:icon.png" WindowStartupLocation="CenterScreen"
+        SizeToContent="WidthAndHeight" CanResize="False"
+        SystemDecorations="None">
+    <Grid Margin="8" ColumnDefinitions="Auto,8,Auto,8,Auto,16,80">
+        <Label Grid.Column="0" Content="Language:" VerticalAlignment="Center" />
+        <RadioButton Grid.Column="2" x:Name="radioEnglish" Content="English" IsChecked="True" />
+        <RadioButton Grid.Column="4" x:Name="radioChinese" Content="中文" />
+        <Button Grid.Column="6" x:Name="buttonOK" Content="OK" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Click="Button_Click" />
+    </Grid>
+</Window>

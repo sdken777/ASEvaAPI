@@ -5,14 +5,14 @@ using Avalonia.Controls;
 
 namespace ASEvaAPIAvaloniaTest
 {
-    partial class SubWindow : Window
+    partial class EtoEmbedWindow : Window
     {
-        public SubWindow() // For designer
+        public EtoEmbedWindow() // For designer
         {
             InitializeComponent();
         }
 
-        public SubWindow(Language language, bool onscreenRendering)
+        public EtoEmbedWindow(Language language, bool onscreenRendering)
         {
             InitializeComponent();
 

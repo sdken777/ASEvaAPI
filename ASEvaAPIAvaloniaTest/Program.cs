@@ -10,7 +10,7 @@ namespace ASEvaAPIAvaloniaTest
         public static void Main(string[] args)
         {
             if (!App.Init()) return;
-            App.Run(new TestDialog());
+            App.Run(new Startup());
             App.Run(new MainWindow());
         }
 

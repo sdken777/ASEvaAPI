@@ -2,17 +2,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Test"
-        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="200"
-        Width="400" Height="200" MinWidth="400" MinHeight="200"
         x:Class="ASEvaAPIAvaloniaTest.MainWindow"
         Title="Test"
-        Closed="mainWindow_Closed">
+        Width="400" Height="200" MinWidth="400" MinHeight="200">
     <StackPanel Margin="8">
         <CheckBox x:Name="checkChineseLanguage" Content="Chinese" />
         <CheckBox x:Name="checkOnscreenRendering" Content="Onscreen Rendering" />
         <Button x:Name="buttonShowEtoWindow" Content="Show Eto Window" Click="buttonShowEtoWindow_Click" />
-        <Button x:Name="buttonShowAvaloniaWindow" Content="Show Avalonia Window with Eto Panel" Click="buttonShowAvaloniaWindow_Click" />
-        <Button x:Name="buttonShowTestDialog" Content="Show Test Dialog" Click="buttonShowTestDialog_Click" />
+        <Button x:Name="buttonShowEtoDialog" Content="Show Eto Dialog" Click="buttonShowEtoDialog_Click" />
+        <Button x:Name="buttonShowEtoEmbedWindow" Content="Show Eto Embed Window" Click="buttonShowEtoEmbedWindow_Click" />
+        
     </StackPanel>
 </Window>
