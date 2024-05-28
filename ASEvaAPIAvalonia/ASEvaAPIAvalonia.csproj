@@ -34,6 +34,9 @@
     <Reference Include="Eto">
       <HintPath>../bin64/Eto.dll</HintPath>
     </Reference>
+    <Reference Include="CustomMessageBox.Avalonia">
+      <HintPath>../bin64/CustomMessageBox.Avalonia.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

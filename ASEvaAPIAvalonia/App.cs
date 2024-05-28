@@ -4,7 +4,9 @@ using System.Reflection;
 using System.Threading;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Threading;
+using CustomMessageBox.Avalonia;
 
 namespace ASEva.UIAvalonia
 {
@@ -40,7 +42,9 @@ namespace ASEva.UIAvalonia
                     appBuilder = AppBuilder.Configure<AvaloniaApplication>().UsePlatformDetect().WithInterFont();
                     if (appBuilder != null)
                     {
-                        appBuilder.SetupWithoutStarting();
+                        appLifetime = new ClassicDesktopStyleApplicationLifetime();
+                        appLifetime.ShutdownMode = ShutdownMode.OnMainWindowClose;
+                        appBuilder.SetupWithLifetime(appLifetime);
                         EtoInitializer.Initialize();
 
                         AppDomain.CurrentDomain.UnhandledException += (o, args) => { TriggerFatalException(args); };
@@ -89,6 +93,7 @@ namespace ASEva.UIAvalonia
             try
             {
                 if (!mainWindow.IsVisible) mainWindow.Show();
+                appLifetime.MainWindow = mainWindow;
                 appBuilder.Instance.Run(token.Token);
             }
             catch (Exception ex)
@@ -96,13 +101,13 @@ namespace ASEva.UIAvalonia
                 if (fatalException == null) fatalException = ex;
             }
 
+            appLifetime.MainWindow = null;
             exceptionTimer.Stop();
             exceptionTimer = null;
 
             if (fatalException != null)
             {
-                // TODO
-                // MessageBox.Show(fatalException.Message + "\n" + fatalException.StackTrace, MessageBoxType.Error);
+                MessageBox.Show(fatalException.Message + "\n" + fatalException.StackTrace, "");
             }
         }
 
@@ -169,6 +174,7 @@ namespace ASEva.UIAvalonia
 
         private static bool initAppInvoked = false;
         private static AppBuilder appBuilder = null;
+        private static ClassicDesktopStyleApplicationLifetime appLifetime = null;
         private static DispatcherTimer exceptionTimer = null;
         private static Exception fatalException = null;
     }
