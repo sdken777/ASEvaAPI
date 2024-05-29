@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.0.2
+            version=1.0.3
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -223,6 +223,16 @@
             \~Chinese
             <summary>
             无需直接调用
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.TextResourceExtensions">
+            \~English
+            <summary>
+            (api:avalonia=1.0.3) Extensions for adding text resource
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.3) 方便添加文本资源的扩展
             </summary>
         </member>
         <member name="T:ASEva.UIAvalonia.WindowPanel">

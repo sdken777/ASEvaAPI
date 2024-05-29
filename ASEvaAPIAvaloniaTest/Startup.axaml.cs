@@ -1,4 +1,5 @@
 using System;
+using ASEva;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 
@@ -11,9 +12,9 @@ namespace ASEvaAPIAvaloniaTest
             InitializeComponent();
         }
 
-        public bool Chinese
+        public Language Language
         {
-            get { return radioChinese.IsChecked.Value; }
+            get { return radioChinese.IsChecked.Value ? Language.Chinese : Language.English; }
         }
 
         private void Button_Click(object sender, RoutedEventArgs args)

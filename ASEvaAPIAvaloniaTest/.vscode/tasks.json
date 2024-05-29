@@ -14,6 +14,20 @@
                 ]
             }
         },
+        {
+            "id": "helper_platform_exe_text_resource_editor",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "platform_console_exe",
+                    "TextResourceEditor",
+                ]
+            }
+        },
     ],
     "presentation": {
         "echo": true,
@@ -70,6 +84,12 @@
                 "./obj",
                 "./bin"
             ],
+            "problemMatcher": [],
+        },
+        {
+            "type": "process",
+            "label": "Run Text Resource Editor",
+            "command": "../${input:helper_platform_bin_name}/${input:helper_platform_exe_text_resource_editor}",
             "problemMatcher": [],
         },
 

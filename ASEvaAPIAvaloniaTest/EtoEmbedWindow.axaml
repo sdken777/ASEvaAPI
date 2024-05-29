@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:aseva="clr-namespace:ASEva.UIAvalonia;assembly=ASEvaAPIAvalonia"
         x:Class="ASEvaAPIAvaloniaTest.EtoEmbedWindow"
-        Title="Avalonia Window"
+        Title="Eto Embed Window"
         Width="1300" Height="800" MinWidth="1300" MinHeight="800">
     <Grid x:Name="grid" Background="PaleGreen">
         <aseva:EtoEmbedder x:Name="embedder" Margin="8" />

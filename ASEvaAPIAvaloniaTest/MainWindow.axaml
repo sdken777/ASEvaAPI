@@ -3,14 +3,67 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Class="ASEvaAPIAvaloniaTest.MainWindow"
-        Title="Test"
-        Width="400" Height="200" MinWidth="400" MinHeight="200">
-    <StackPanel Margin="8">
-        <CheckBox x:Name="checkChineseLanguage" Content="Chinese" />
-        <CheckBox x:Name="checkOnscreenRendering" Content="Onscreen Rendering" />
-        <Button x:Name="buttonShowEtoWindow" Content="Show Eto Window" Click="buttonShowEtoWindow_Click" />
-        <Button x:Name="buttonShowEtoDialog" Content="Show Eto Dialog" Click="buttonShowEtoDialog_Click" />
-        <Button x:Name="buttonShowEtoEmbedWindow" Content="Show Eto Embed Window" Click="buttonShowEtoEmbedWindow_Click" />
-        
-    </StackPanel>
+        Title="Test" Icon="resm:icon.png" WindowStartupLocation="CenterScreen" 
+        Width="1300" Height="800" MinWidth="1300" MinHeight="800">
+    <Grid Margin="8" ColumnDefinitions="*,8,*" RowDefinitions="*,8,*">
+        <Grid Grid.Row="0" Grid.Column="0" RowDefinitions="Auto,*">
+            <Label Grid.Row="0" Content="{DynamicResource basic-group-title}" Padding="8,0,0,0" FontSize="12" />
+            <Border Grid.Row="1" CornerRadius="3" Background="WhiteSmoke" />
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="2" RowDefinitions="Auto,*">
+            <Label Grid.Row="0" Content="{DynamicResource web-group-title}" Padding="8,0,0,0" FontSize="12" />
+            <Border Grid.Row="1" CornerRadius="3" Background="WhiteSmoke" />
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0" RowDefinitions="Auto,*">
+            <Label Grid.Row="0" Content="{DynamicResource draw-group-title}" Padding="8,0,0,0" FontSize="12" />
+            <Border Grid.Row="1" CornerRadius="3" Background="WhiteSmoke" />
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="2" RowDefinitions="Auto,*">
+            <Label Grid.Row="0" Content="{DynamicResource plot-group-title}" Padding="8,0,0,0" FontSize="12" />
+            <Border Grid.Row="1" CornerRadius="3" Background="WhiteSmoke" />
+        </Grid>
+    </Grid>
+    <Window.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="{DynamicResource menu-fullscreen}" Click="itemFullScreen_Click" />
+            <MenuItem Header="{DynamicResource menu-exit}" Click="itemExit_Click" />
+            <Separator />
+            <MenuItem Header="{DynamicResource menu-sub}">
+                <MenuItem x:Name="itemSubA" Header="menu-sub-item" />
+                <Separator />
+                <MenuItem x:Name="itemSubB" Header="menu-sub-item" />
+            </MenuItem>
+            <Separator />
+            <MenuItem x:Name="itemCheckA" Header="menu-check" Click="itemCheckA_Click">
+                <MenuItem.Icon>
+                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding CheckedA}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="itemCheckB" Header="menu-check" Click="itemCheckB_Click">
+                <MenuItem.Icon>
+                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding CheckedB}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
+            <MenuItem x:Name="itemRadioA" Header="menu-radio" Click="itemRadioA_Click">
+                <MenuItem.Icon>
+                    <RadioButton IsHitTestVisible="False" IsChecked="{Binding !SelectedB}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="itemRadioB" Header="menu-radio" Click="itemRadioB_Click">
+                <MenuItem.Icon>
+                    <RadioButton IsHitTestVisible="False" IsChecked="{Binding SelectedB}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="{DynamicResource menu-snapshot}" Click="itemSnapshot_Click" />
+            <Separator />
+            <MenuItem Header="{DynamicResource menu-exception-main}" Click="itemExceptionMain_Click" />
+            <MenuItem Header="{DynamicResource menu-exception-sub}" Click="itemExceptionSub_Click" />
+            <Separator />
+            <MenuItem Header="{DynamicResource menu-eto-window}" Click="itemShowEtoWindow_Click" />
+            <MenuItem Header="{DynamicResource menu-eto-dialog}" Click="itemShowEtoDialog_Click" />
+            <MenuItem Header="{DynamicResource menu-eto-embed-window}" Click="itemShowEtoEmbedWindow_Click" />
+        </ContextMenu>
+    </Window.ContextMenu>
 </Window>

@@ -10,8 +10,11 @@ namespace ASEvaAPIAvaloniaTest
         public static void Main(string[] args)
         {
             if (!App.Init()) return;
-            App.Run(new Startup());
-            App.Run(new MainWindow());
+
+            var startup = new Startup();
+            App.Run(startup);
+
+            App.Run(new MainWindow(startup.Language));
         }
 
         public static AppBuilder BuildAvaloniaApp()

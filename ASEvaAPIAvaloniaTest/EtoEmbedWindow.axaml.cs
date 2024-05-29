@@ -12,11 +12,11 @@ namespace ASEvaAPIAvaloniaTest
             InitializeComponent();
         }
 
-        public EtoEmbedWindow(Language language, bool onscreenRendering)
+        public EtoEmbedWindow(Language language)
         {
             InitializeComponent();
 
-            var panel = new ASEvaAPIEtoTest.EtoTestPanel(language, onscreenRendering);
+            var panel = new ASEvaAPIEtoTest.EtoTestPanel(language, false);
             embedder.EtoControl = panel;
 
             panel.RequestClose += delegate { this.Close(); };
