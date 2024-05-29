@@ -19,7 +19,7 @@ namespace ASEvaAPIAvaloniaTest
             etoWebView = new Eto.Forms.WebView();
             webView.EtoControl = etoWebView;
 
-            etoWebView.LoadHtml(ResourceLoader.LoadText("index.html"));
+            Loaded += delegate { etoWebView.LoadHtml(ResourceLoader.LoadText("index.html")); };
         }
 
         private void buttonBackward_Click(object sender, RoutedEventArgs e)
