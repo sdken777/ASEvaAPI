@@ -121,12 +121,21 @@ namespace ASEva.UIAvalonia
         /// </summary>
         public static void ShowMessageBox(String message, String caption = "", MessageBoxIcon icon = MessageBoxIcon.None, MessageBoxButtons buttons = MessageBoxButtons.OK)
         {
+            if (appBuilder == null || appBuilder.Instance == null || message == null) return;
+
             var box = new MessageBox(message, caption, icon);
             if (appLifetime.MainWindow == null)
             {
+                var token = new CancellationTokenSource();
+                box.Closed += delegate { token.Cancel(); };
                 box.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-                box.Show(null, buttons);
-                App.Run(box);
+
+                try
+                {
+                    box.Show(null, buttons);
+                    appBuilder.Instance.Run(token.Token);
+                }
+                catch (Exception) {}
             }
             else
             {

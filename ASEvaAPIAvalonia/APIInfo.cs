@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 0, 2, 1); // Update log / 更新记录: ShowMessageBox无主窗口时在屏幕中央显示
+            return new Version(1, 0, 2, 2); // Update log / 更新记录: 完善ShowMessageBox
         }
 
         /// \~English
