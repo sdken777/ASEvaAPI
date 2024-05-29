@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 1, 1, 0); // Update log / 更新记录: 新增ControlWithMouseSources
+            return new Version(3, 1, 1, 1); // Update log / 更新记录: 仅在非attach时响应UnhandledException
         }
 
         /// \~English

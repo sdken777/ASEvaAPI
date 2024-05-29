@@ -678,9 +678,8 @@ namespace ASEva.UIEto
                 {
                     runningUI = uiCode;
 
-                    AppDomain.CurrentDomain.UnhandledException += (o, args) => { TriggerFatalException(args); };
-
                     if (attach) application.Attach();
+                    else AppDomain.CurrentDomain.UnhandledException += (o, args) => { TriggerFatalException(args); };
 
                     FuncManager.Register("GetEtoAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
                     FuncManager.Register("GetEtoLibVersion", delegate { return APIInfo.GetEtoLibVersion(); });

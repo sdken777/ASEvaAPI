@@ -47,7 +47,7 @@ namespace ASEva.UIAvalonia
                         appBuilder.SetupWithLifetime(appLifetime);
                         EtoInitializer.Initialize();
 
-                        AppDomain.CurrentDomain.UnhandledException += (o, args) => { TriggerFatalException(args); };
+                        AppDomain.CurrentDomain.UnhandledException += (o, args) => { triggerFatalException(args); };
 
                         FuncManager.Register("GetAvaloniaAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
                         FuncManager.Register("GetAvaloniaLibVersion", delegate { return APIInfo.GetAvaloniaLibVersion(); });
@@ -107,38 +107,30 @@ namespace ASEva.UIAvalonia
 
             if (fatalException != null)
             {
-                MessageBox.Show(fatalException.Message + "\n" + fatalException.StackTrace, "");
+                ShowMessageBox(fatalException.Message + "\n" + fatalException.StackTrace, "", MessageBoxIcon.Error);
             }
         }
 
-        public static void TriggerFatalException(UnhandledExceptionEventArgs args)
+        /// \~English
+        /// <summary>
+        /// (api:avalonia=1.0.2) Show message box (mainly for calling outside App.Run)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.0.2) 显示消息框（主要针对App.Run之外时使用）
+        /// </summary>
+        public static void ShowMessageBox(String message, String caption = "", MessageBoxIcon icon = MessageBoxIcon.None, MessageBoxButtons buttons = MessageBoxButtons.OK)
         {
-            var exObj = args.ExceptionObject;
-            if (exObj is TargetInvocationException) exObj = (exObj as TargetInvocationException).InnerException;
-
-            Exception ex = null;
-            if (exObj is Exception) ex = exObj as Exception;
-            else ex = new Exception("Unknown exception.");
-
-            if (args.IsTerminating)
+            var box = new MessageBox(message, caption, icon);
+            if (appLifetime.MainWindow == null)
             {
-                try
-                {
-                    var sep = Path.DirectorySeparatorChar;
-                    var logDirPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + sep + "SpadasFiles" + sep + "log";
-                    if (!Directory.Exists(logDirPath)) Directory.CreateDirectory(logDirPath);
-
-                    var errorFilePath = logDirPath + sep + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_Exception.txt";
-                    using (var writer = new StreamWriter(errorFilePath))
-                    {
-                        writer.WriteLine(ex.Message + "\n" + ex.StackTrace);
-                    }
-
-                    Console.WriteLine("Exception message written to: " + errorFilePath);
-                }
-                catch (Exception) {}
+                box.Show(null, buttons);
+                App.Run(box);
             }
-            else if (fatalException == null) fatalException = ex;
+            else
+            {
+                box.Show(appLifetime.MainWindow, buttons);
+            }
         }
 
         /// \~English
@@ -170,6 +162,36 @@ namespace ASEva.UIAvalonia
                 }
                 return workDir;
             }
+        }
+
+        private static void triggerFatalException(UnhandledExceptionEventArgs args)
+        {
+            var exObj = args.ExceptionObject;
+            if (exObj is TargetInvocationException) exObj = (exObj as TargetInvocationException).InnerException;
+
+            Exception ex = null;
+            if (exObj is Exception) ex = exObj as Exception;
+            else ex = new Exception("Unknown exception.");
+
+            if (args.IsTerminating)
+            {
+                try
+                {
+                    var sep = Path.DirectorySeparatorChar;
+                    var logDirPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + sep + "SpadasFiles" + sep + "log";
+                    if (!Directory.Exists(logDirPath)) Directory.CreateDirectory(logDirPath);
+
+                    var errorFilePath = logDirPath + sep + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_Exception.txt";
+                    using (var writer = new StreamWriter(errorFilePath))
+                    {
+                        writer.WriteLine(ex.Message + "\n" + ex.StackTrace);
+                    }
+
+                    Console.WriteLine("Exception message written to: " + errorFilePath);
+                }
+                catch (Exception) {}
+            }
+            else if (fatalException == null) fatalException = ex;
         }
 
         private static bool initAppInvoked = false;

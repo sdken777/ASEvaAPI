@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.0.1
+            version=1.0.2
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -78,6 +78,16 @@
             运行应用程序
             </summary>
             <param name="mainWindow">主窗口</param>
+        </member>
+        <member name="M:ASEva.UIAvalonia.App.ShowMessageBox(System.String,System.String,CustomMessageBox.Avalonia.MessageBoxIcon,CustomMessageBox.Avalonia.MessageBoxButtons)">
+            \~English
+            <summary>
+            (api:avalonia=1.0.2) Show message box (mainly for calling outside App.Run)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.2) 显示消息框（主要针对App.Run之外时使用）
+            </summary>
         </member>
         <member name="P:ASEva.UIAvalonia.App.WorkPath">
             \~English

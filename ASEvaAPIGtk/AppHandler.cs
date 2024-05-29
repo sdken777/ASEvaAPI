@@ -22,10 +22,13 @@ namespace ASEva.UIGtk
     {
         public Application CreateApp(bool attach, out String uiBackend, out String webViewBackend)
         {
-            GLib.ExceptionManager.UnhandledException += (args) =>
+            if (!attach)
             {
-                App.TriggerFatalException(args);
-            };
+                GLib.ExceptionManager.UnhandledException += (args) =>
+                {
+                    App.TriggerFatalException(args);
+                };
+            }
 
             if (ASEva.APIInfo.GetRunningOS() == "linuxarm")
             {

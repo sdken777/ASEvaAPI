@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 1, 0, 1); // Update log / 更新记录: 完善HolderBoundCorrection
+            return new Version(3, 1, 0, 2); // Update log / 更新记录: 仅在非attach时处理UnhandledException
         }
     }
 }
