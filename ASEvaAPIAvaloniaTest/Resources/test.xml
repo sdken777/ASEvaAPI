@@ -272,6 +272,18 @@
     <en>Empty</en>
     <zh>空</zh>
   </t>
+  <t id="eto-dialog">
+    <en>Eto Dialog</en>
+    <zh>Eto对话框</zh>
+  </t>
+  <t id="eto-embed-window">
+    <en>Eto-embed Window</en>
+    <zh>嵌入Eto的窗口</zh>
+  </t>
+  <t id="eto-window">
+    <en>Eto Window</en>
+    <zh>Eto窗口</zh>
+  </t>
   <t id="exit-confirm">
     <en>Exit?</en>
     <zh>是否退出？</zh>

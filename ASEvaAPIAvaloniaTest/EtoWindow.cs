@@ -9,7 +9,7 @@ namespace ASEvaAPIAvaloniaTest
     {
         public EtoWindow(Language language)
         {
-            Title = "Eto Window";
+            Title = MainWindow.Texts["eto-window"];
             Icon = Icon.FromResource("icon.png");
             this.SetClientSize(1300, 800);
             this.SetMinimumClientSize(1300, 800);
@@ -27,7 +27,7 @@ namespace ASEvaAPIAvaloniaTest
     {
         public EtoDialog(Language language)
         {
-            Title = "Eto Dialog";
+            Title = MainWindow.Texts["eto-dialog"];
             Icon = Icon.FromResource("icon.png");
             this.SetResizableMode(1300, 800, 1300, 800);
 

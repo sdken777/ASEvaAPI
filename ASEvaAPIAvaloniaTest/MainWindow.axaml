@@ -3,7 +3,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Class="ASEvaAPIAvaloniaTest.MainWindow"
-        Title="Test" Icon="resm:icon.png" WindowStartupLocation="CenterScreen" 
+        Title="{DynamicResource title}" Icon="resm:icon.png" WindowStartupLocation="CenterScreen" 
         Width="1300" Height="800" MinWidth="1300" MinHeight="800">
     <Grid Margin="8" ColumnDefinitions="*,8,*" RowDefinitions="*,8,*">
         <Grid Grid.Row="0" Grid.Column="0" RowDefinitions="Auto,*">

@@ -1,5 +1,6 @@
 using System;
 using ASEva;
+using ASEva.UIAvalonia;
 using Avalonia;
 using Avalonia.Controls;
 
@@ -10,11 +11,13 @@ namespace ASEvaAPIAvaloniaTest
         public EtoEmbedWindow() // For designer
         {
             InitializeComponent();
+            this.AddToResources(MainWindow.Texts);
         }
 
         public EtoEmbedWindow(Language language)
         {
             InitializeComponent();
+            this.AddToResources(MainWindow.Texts);
 
             var panel = new ASEvaAPIEtoTest.EtoTestPanel(language, false);
             embedder.EtoControl = panel;
