@@ -2,7 +2,7 @@
 <!-- Generated with glade 3.22.1 -->
 <interface>
   <requires lib="gtk+" version="3.18"/>
-  <object class="GtkDialog" id="AppDialogWayland">
+  <object class="GtkDialog" id="AppDialogDefault">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes"></property>
     <property name="resizable">False</property>

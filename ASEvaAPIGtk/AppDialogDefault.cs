@@ -8,11 +8,11 @@ using SO = System.Reflection.ObfuscationAttribute;
 namespace ASEva.UIGtk
 {
     #pragma warning disable CS0612, CS0649
-    partial class AppDialogWayland : Dialog
+    partial class AppDialogDefault : Dialog
     {
         [UI] [SO] Overlay overlay;
 
-        public AppDialogWayland(Widget widget, DialogPanel dialogPanel) : this(new Builder("AppDialogWayland.glade"))
+        public AppDialogDefault(Widget widget, DialogPanel dialogPanel) : this(new Builder("AppDialogDefault.glade"))
         {
             DefaultResponse = ResponseType.Cancel;
             ActionArea.Hide();
@@ -49,7 +49,7 @@ namespace ASEva.UIGtk
             dialogPanel.OnDialogClose += OnDialogClose;
         }
 
-        private AppDialogWayland(Builder builder) : base(builder.GetRawOwnedObject("AppDialogWayland"))
+        private AppDialogDefault(Builder builder) : base(builder.GetRawOwnedObject("AppDialogDefault"))
         {
             builder.Autoconnect(this);
         }

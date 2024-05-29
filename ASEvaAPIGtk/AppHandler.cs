@@ -22,6 +22,7 @@ namespace ASEva.UIGtk
     {
         public Application CreateApp(bool attach, out String uiBackend, out String webViewBackend)
         {
+            this.attach = attach;
             if (!attach)
             {
                 GLib.ExceptionManager.UnhandledException += (args) =>
@@ -161,7 +162,7 @@ namespace ASEva.UIGtk
             if (widget == null) return false;
 
             var uiBackend = App.GetUIBackend();
-            if (uiBackend != null && uiBackend == "x11")
+            if (uiBackend != null && uiBackend == "x11" && !attach)
             {
                 var appDialog = new AppDialogX11(widget, panel);
                 var ev = new AutoResetEvent(false);
@@ -173,7 +174,7 @@ namespace ASEva.UIGtk
             }
             else
             {
-                var appDialog = new AppDialogWayland(widget, panel);
+                var appDialog = new AppDialogDefault(widget, panel);
                 appDialog.TransientFor = DialogHelper.TopWindow;
                 appDialog.Run();
                 appDialog.Dispose();
@@ -218,6 +219,8 @@ namespace ASEva.UIGtk
         {
             return Agency.GetAppLanguage() == Language.Chinese ? "旧图表" : "Legacy Graph";
         }
+
+        private bool attach;
 
 		[DllImport("libgdk-3.so.0", SetLastError = true)]
 		private static extern IntPtr gdk_x11_monitor_get_type();
