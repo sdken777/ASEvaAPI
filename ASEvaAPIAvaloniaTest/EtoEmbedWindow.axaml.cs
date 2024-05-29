@@ -8,18 +8,13 @@ namespace ASEvaAPIAvaloniaTest
 {
     partial class EtoEmbedWindow : Window
     {
-        public EtoEmbedWindow() // For designer
+        public EtoEmbedWindow()
         {
             InitializeComponent();
-            this.AddToResources(MainWindow.Texts);
-        }
 
-        public EtoEmbedWindow(Language language)
-        {
-            InitializeComponent();
-            this.AddToResources(MainWindow.Texts);
+            this.AddToResources(Program.Texts);
 
-            var panel = new ASEvaAPIEtoTest.EtoTestPanel(language, false);
+            var panel = new ASEvaAPIEtoTest.EtoTestPanel(Program.Language, false);
             embedder.EtoControl = panel;
 
             panel.RequestClose += delegate { this.Close(); };

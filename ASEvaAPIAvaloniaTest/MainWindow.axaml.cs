@@ -12,33 +12,24 @@ namespace ASEvaAPIAvaloniaTest
 {
     partial class MainWindow : Window
     {
-        public MainWindow() // For designer
+        public MainWindow()
         {
             InitializeComponent();
-            this.language = Language.English;
-            this.initialize();
-        }
 
-        public MainWindow(Language language)
-        {
-            InitializeComponent();
-            this.language = language;
-            this.initialize();
-        }
+            var texts = Program.Texts;
+            this.AddToResources(texts);
 
-        public static TextResource Texts { get; private set; }
-
-        private void initialize()
-        {
-            Texts = TextResource.Load("test.xml", language);
-            this.AddToResources(Texts);
-
-            itemSubA.Header = Texts.Format(itemSubA.Header as String, "A");
-            itemSubB.Header = Texts.Format(itemSubB.Header as String, "B");
-            itemCheckA.Header = Texts.Format(itemCheckA.Header as String, "A");
-            itemCheckB.Header = Texts.Format(itemCheckB.Header as String, "B");
-            itemRadioA.Header = Texts.Format(itemRadioA.Header as String, "A");
-            itemRadioB.Header = Texts.Format(itemRadioB.Header as String, "B");
+            tabA.Header = texts.Format(tabA.Header as String, "A");
+            tabB.Header = texts.Format(tabB.Header as String, "B");
+            tabC.Header = texts.Format(tabC.Header as String, "C");
+            tabD.Header = texts.Format(tabD.Header as String, "D");
+            tabE.Header = texts.Format(tabE.Header as String, "E");
+            itemSubA.Header = texts.Format(itemSubA.Header as String, "A");
+            itemSubB.Header = texts.Format(itemSubB.Header as String, "B");
+            itemCheckA.Header = texts.Format(itemCheckA.Header as String, "A");
+            itemCheckB.Header = texts.Format(itemCheckB.Header as String, "B");
+            itemRadioA.Header = texts.Format(itemRadioA.Header as String, "A");
+            itemRadioB.Header = texts.Format(itemRadioB.Header as String, "B");
 
             DataContext = new Model();
         }
@@ -100,19 +91,19 @@ namespace ASEvaAPIAvaloniaTest
 
         private void itemShowEtoEmbedWindow_Click(object sender, RoutedEventArgs e)
         {
-            var window = new EtoEmbedWindow(language);
+            var window = new EtoEmbedWindow();
             window.Show();
         }
 
         private void itemShowEtoWindow_Click(object sender, RoutedEventArgs e)
         {
-            var window = new EtoWindow(language);
+            var window = new EtoWindow();
             window.Show();
         }
 
         private void itemShowEtoDialog_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new EtoDialog(language);
+            var dialog = new EtoDialog();
             ASEva.UIEto.App.RunDialog(dialog);
         }
 
@@ -142,7 +133,5 @@ namespace ASEvaAPIAvaloniaTest
             private bool checkedB;
             private bool selectedB;
         }
-
-        private Language language;
     }
 }

@@ -17,7 +17,7 @@ namespace ASEvaAPIAvaloniaTest
             get { return radioChinese.IsChecked.Value ? Language.Chinese : Language.English; }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs args)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }

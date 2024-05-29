@@ -7,14 +7,14 @@ namespace ASEvaAPIAvaloniaTest
 {
     class EtoWindow : Eto.Forms.Form
     {
-        public EtoWindow(Language language)
+        public EtoWindow()
         {
-            Title = MainWindow.Texts["eto-window"];
+            Title = Program.Texts["eto-window"];
             Icon = Icon.FromResource("icon.png");
             this.SetClientSize(1300, 800);
             this.SetMinimumClientSize(1300, 800);
 
-            var panel = new ASEvaAPIEtoTest.EtoTestPanel(language, false);
+            var panel = new ASEvaAPIEtoTest.EtoTestPanel(Program.Language, false);
             Content = panel;
 
             panel.RequestClose += delegate { this.Close(); };
@@ -25,13 +25,13 @@ namespace ASEvaAPIAvaloniaTest
 
     class EtoDialog : DialogPanel
     {
-        public EtoDialog(Language language)
+        public EtoDialog()
         {
-            Title = MainWindow.Texts["eto-dialog"];
+            Title = Program.Texts["eto-dialog"];
             Icon = Icon.FromResource("icon.png");
             this.SetResizableMode(1300, 800, 1300, 800);
 
-            panel = new ASEvaAPIEtoTest.EtoTestPanel(language, false);
+            panel = new ASEvaAPIEtoTest.EtoTestPanel(Program.Language, false);
             Content = panel;
 
             panel.RequestClose += delegate { this.Close(); };
