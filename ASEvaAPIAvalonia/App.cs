@@ -124,6 +124,7 @@ namespace ASEva.UIAvalonia
             var box = new MessageBox(message, caption, icon);
             if (appLifetime.MainWindow == null)
             {
+                box.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                 box.Show(null, buttons);
                 App.Run(box);
             }
