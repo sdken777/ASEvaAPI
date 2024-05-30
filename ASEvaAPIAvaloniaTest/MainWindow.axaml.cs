@@ -7,6 +7,7 @@ using ASEva.Utility;
 using Avalonia.Controls;
 using Avalonia.Data.Converters;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
 
 namespace ASEvaAPIAvaloniaTest
 {
@@ -32,6 +33,14 @@ namespace ASEvaAPIAvaloniaTest
             itemRadioB.Header = texts.Format(itemRadioB.Header as String, "B");
 
             DataContext = new Model();
+
+            var timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromMilliseconds(15);
+            timer.Tick += delegate
+            {
+                if (tabControl.SelectedContent == basicPageA) basicPageA.OnLoop();
+            };
+            timer.Start();
         }
 
         private void itemFullScreen_Click(object sender, RoutedEventArgs e)

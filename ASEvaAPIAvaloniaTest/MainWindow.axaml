@@ -5,14 +5,14 @@
         xmlns:local="clr-namespace:ASEvaAPIAvaloniaTest"
         x:Class="ASEvaAPIAvaloniaTest.MainWindow"
         Title="{DynamicResource title}" Icon="resm:icon.png" WindowStartupLocation="CenterScreen" 
-        Width="1300" Height="800" MinWidth="1300" MinHeight="800">
+        Width="1350" Height="800" MinWidth="1350" MinHeight="800">
     <Grid Margin="8" ColumnDefinitions="*,8,*" RowDefinitions="*,8,*">
         <Grid Grid.Row="0" Grid.Column="0" RowDefinitions="Auto,*">
             <Label Grid.Row="0" Content="{DynamicResource basic-group-title}" Padding="8,0,0,0" FontSize="12" />
             <Border Grid.Row="1" CornerRadius="3" Background="WhiteSmoke">
-                <TabControl>
+                <TabControl x:Name="tabControl">
                     <TabItem x:Name="tabA" Header="basic-tabpage-title" FontSize="18">
-                        <local:BasicPageA Margin="0,0,0,10" />
+                        <local:BasicPageA x:Name="basicPageA" Margin="0,0,0,10" />
                     </TabItem>
                     <TabItem x:Name="tabB" Header="basic-tabpage-title" FontSize="18">
                         <local:BasicPageB Margin="0,0,0,10" />

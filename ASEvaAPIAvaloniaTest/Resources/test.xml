@@ -352,6 +352,10 @@
     <en>Reserved</en>
     <zh>保留</zh>
   </t>
+  <t id="search">
+    <en>Search</en>
+    <zh>搜索</zh>
+  </t>
   <t id="title">
     <en>Test Window</en>
     <zh>测试窗口</zh>
