@@ -6,11 +6,11 @@ namespace ASEva.UIAvalonia
 {
     /// \~English
     /// <summary>
-    /// (api:avalonia=1.0.0) For opening designer in project
+    /// (api:avalonia=1.0.0) Default application object
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:avalonia=1.0.0) 用于在项目中打开设计器
+    /// (api:avalonia=1.0.0) 默认的应用程序对象
     /// </summary>
     public partial class AvaloniaApplication : Application
     {

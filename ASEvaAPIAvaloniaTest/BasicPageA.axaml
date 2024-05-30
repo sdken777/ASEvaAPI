@@ -5,8 +5,25 @@
         x:Class="ASEvaAPIAvaloniaTest.BasicPageA"
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="300"
         Background="LightYellow">
-    <Grid RowDefinitions="Auto,8,Auto">
+    <Grid Margin="8" RowDefinitions="Auto,8,Auto,8,Auto,8,Auto,8,Auto,8,Auto,8,Auto">
         <Label Grid.Row="0" Content="{DynamicResource basic-menu-notice}" />
+        <Grid Grid.Row="2" ColumnDefinitions="Auto,8,Auto,8,Auto,8,Auto,*,Auto">
+            <Label Grid.Column="0" x:Name="labelRow1" Content="basic-label-row" VerticalAlignment="Center" />
+            <CheckBox Grid.Column="2" x:Name="checkSaveFile" Content="{DynamicResource basic-checkbox}" />
+            <RadioButton Grid.Column="4" x:Name="radioFile" Content="{DynamicResource basic-radiobutton-file}" IsChecked="True" />
+            <RadioButton Grid.Column="6" x:Name="radioDir" Content="{DynamicResource basic-radiobutton-dir}" />
+            <Button Grid.Column="8" Classes="hyperlink" Content="{DynamicResource basic-linkbutton}" Click="linkBrowse_Click" />
+        </Grid>
+        <Grid Grid.Row="4" Background="Tomato">
+        </Grid>
+        <Grid Grid.Row="6" Background="LimeGreen">
+        </Grid>
+        <Grid Grid.Row="8" Background="Tomato">
+        </Grid>
+        <Grid Grid.Row="10" Background="LimeGreen">
+        </Grid>
+        <Grid Grid.Row="12" Background="Tomato">
+        </Grid>
     </Grid>
     <Control.ContextMenu>
         <ContextMenu>

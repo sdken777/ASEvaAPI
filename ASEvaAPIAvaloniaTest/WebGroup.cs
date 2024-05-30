@@ -16,20 +16,23 @@ namespace ASEvaAPIAvaloniaTest
             var texts = Program.Texts;
             this.AddToResources(texts);
             
-            etoWebView = new Eto.Forms.WebView();
-            webView.EtoControl = etoWebView;
+            if (!Program.DesignerMode)
+            {
+                etoWebView = new Eto.Forms.WebView();
+                webView.EtoControl = etoWebView;
 
-            Loaded += delegate { etoWebView.LoadHtml(ResourceLoader.LoadText("index.html")); };
+                Loaded += delegate { etoWebView.LoadHtml(ResourceLoader.LoadText("index.html")); };
+            }
         }
 
         private void buttonBackward_Click(object sender, RoutedEventArgs e)
         {
-            etoWebView.GoBack();
+            etoWebView?.GoBack();
         }
 
         private void buttonForward_Click(object sender, RoutedEventArgs e)
         {
-            etoWebView.GoForward();
+            etoWebView?.GoForward();
         }
 
         private void textUrl_TextChanged(object sender, TextChangedEventArgs e)
@@ -39,7 +42,7 @@ namespace ASEvaAPIAvaloniaTest
 
         private void buttonGoUrl_Click(object sender, RoutedEventArgs e)
         {
-            if (!String.IsNullOrEmpty(textUrl.Text))
+            if (etoWebView!= null && !String.IsNullOrEmpty(textUrl.Text))
             {
                 etoWebView.Url = new Uri(textUrl.Text.StartsWith("http") ? textUrl.Text : ("http://" + textUrl.Text));
             }
@@ -47,7 +50,7 @@ namespace ASEvaAPIAvaloniaTest
 
         private void buttonCallScript_Click(object sender, RoutedEventArgs e)
         {
-            etoWebView.ExecuteScriptAsync("callScript()");
+            etoWebView?.ExecuteScriptAsync("callScript()");
         }
 
         private Eto.Forms.WebView etoWebView;

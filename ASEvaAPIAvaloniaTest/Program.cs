@@ -22,10 +22,12 @@ namespace ASEvaAPIAvaloniaTest
 
         public static AppBuilder BuildAvaloniaApp() // Designer entry point
         {
+            DesignerMode = true;
             commonInitialization(Language.English);
             return AppBuilder.Configure<AvaloniaApplication>().UsePlatformDetect().WithInterFont().LogToTrace();
         }
 
+        public static bool DesignerMode { get; private set; }
         public static Language Language { get; private set; }
         public static TextResource Texts { get; private set; }
 

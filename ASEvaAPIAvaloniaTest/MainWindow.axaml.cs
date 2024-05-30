@@ -91,18 +91,21 @@ namespace ASEvaAPIAvaloniaTest
 
         private void itemShowEtoEmbedWindow_Click(object sender, RoutedEventArgs e)
         {
+            if (Program.DesignerMode) return;
             var window = new EtoEmbedWindow();
             window.Show();
         }
 
         private void itemShowEtoWindow_Click(object sender, RoutedEventArgs e)
         {
+            if (Program.DesignerMode) return;
             var window = new EtoWindow();
             window.Show();
         }
 
         private void itemShowEtoDialog_Click(object sender, RoutedEventArgs e)
         {
+            if (Program.DesignerMode) return;
             var dialog = new EtoDialog();
             ASEva.UIEto.App.RunDialog(dialog);
         }
