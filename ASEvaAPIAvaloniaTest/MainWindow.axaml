@@ -11,19 +11,19 @@
             <Label Grid.Row="0" Content="{DynamicResource basic-group-title}" Padding="8,0,0,0" FontSize="12" />
             <Border Grid.Row="1" CornerRadius="3" Background="WhiteSmoke">
                 <TabControl x:Name="tabControl">
-                    <TabItem x:Name="tabA" Header="basic-tabpage-title" FontSize="18">
+                    <TabItem Header="{DynamicResource basic-tabpage-title-a}" FontSize="18">
                         <local:BasicPageA x:Name="basicPageA" Margin="0,0,0,10" />
                     </TabItem>
-                    <TabItem x:Name="tabB" Header="basic-tabpage-title" FontSize="18">
+                    <TabItem Header="{DynamicResource basic-tabpage-title-b}" FontSize="18">
                         <local:BasicPageB Margin="0,0,0,10" />
                     </TabItem>
-                    <TabItem x:Name="tabC" Header="basic-tabpage-title" FontSize="18">
+                    <TabItem Header="{DynamicResource basic-tabpage-title-c}" FontSize="18">
                         <local:BasicPageC Margin="0,0,0,10" />
                     </TabItem>
-                    <TabItem x:Name="tabD" Header="basic-tabpage-title" FontSize="18">
+                    <TabItem Header="{DynamicResource basic-tabpage-title-d}" FontSize="18">
                         <local:BasicPageD Margin="0,0,0,10" />
                     </TabItem>
-                    <TabItem x:Name="tabE" Header="basic-tabpage-title" FontSize="18">
+                    <TabItem Header="{DynamicResource basic-tabpage-title-e}" FontSize="18">
                         <local:BasicPageE Margin="0,0,0,10" />
                     </TabItem>
                 </TabControl>
@@ -54,28 +54,28 @@
             <MenuItem Header="{DynamicResource menu-exit}" Click="itemExit_Click" />
             <Separator />
             <MenuItem Header="{DynamicResource menu-sub}">
-                <MenuItem x:Name="itemSubA" Header="menu-sub-item" />
+                <MenuItem Header="{DynamicResource menu-sub-item-a}" />
                 <Separator />
-                <MenuItem x:Name="itemSubB" Header="menu-sub-item" />
+                <MenuItem Header="{DynamicResource menu-sub-item-b}" />
             </MenuItem>
             <Separator />
-            <MenuItem x:Name="itemCheckA" Header="menu-check" Click="itemCheckA_Click">
+            <MenuItem Header="{DynamicResource menu-check-a}" Click="itemCheckA_Click">
                 <MenuItem.Icon>
                     <CheckBox IsHitTestVisible="False" IsChecked="{Binding CheckedA}" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem x:Name="itemCheckB" Header="menu-check" Click="itemCheckB_Click">
+            <MenuItem Header="{DynamicResource menu-check-b}" Click="itemCheckB_Click">
                 <MenuItem.Icon>
                     <CheckBox IsHitTestVisible="False" IsChecked="{Binding CheckedB}" />
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
-            <MenuItem x:Name="itemRadioA" Header="menu-radio" Click="itemRadioA_Click">
+            <MenuItem Header="{DynamicResource menu-radio-a}" Click="itemRadioA_Click">
                 <MenuItem.Icon>
                     <RadioButton IsHitTestVisible="False" IsChecked="{Binding !SelectedB}" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem x:Name="itemRadioB" Header="menu-radio" Click="itemRadioB_Click">
+            <MenuItem Header="{DynamicResource menu-radio-b}" Click="itemRadioB_Click">
                 <MenuItem.Icon>
                     <RadioButton IsHitTestVisible="False" IsChecked="{Binding SelectedB}" />
                 </MenuItem.Icon>

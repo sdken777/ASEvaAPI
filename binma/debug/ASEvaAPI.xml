@@ -4190,7 +4190,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.0.8
+            version=3.0.9
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -17592,6 +17592,16 @@
             <param name="xmlFileData">XML文件数据</param>
             <param name="language">语言，设置为Language.Invalid则通过 ASEva.Agency.GetAppLanguage 获取</param>
             <returns>多语言文本资源对象，获取失败则返回null</returns>
+        </member>
+        <member name="P:ASEva.Utility.TextResource.IDs">
+            \~English
+            <summary>
+            (api:app=3.0.9) Get all IDs
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.9) 获取所有ID
+            </summary>
         </member>
         <member name="P:ASEva.Utility.TextResource.Item(System.String)">
             \~English

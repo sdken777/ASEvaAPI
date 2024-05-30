@@ -15,21 +15,11 @@ namespace ASEvaAPIAvaloniaTest
         public BasicPageA()
         {
             InitializeComponent();
-
-            var texts = Program.Texts;
-            this.AddToResources(texts);
-
-            labelRow1.Content = texts.Format(labelRow1.Content as String, 1);
-            labelRow2.Content = texts.Format(labelRow2.Content as String, 2);
-            labelRow3.Content = texts.Format(labelRow3.Content as String, 3);
-            labelRow4.Content = texts.Format(labelRow4.Content as String, 4);
-            labelRow5.Content = texts.Format(labelRow5.Content as String, 5);
-            comboA.Content = texts.Format(comboA.Content as String, "A");
-            comboB.Content = texts.Format(comboB.Content as String, "B");
+            
+            this.AddToResources(Program.Texts);
+            DataContext = new Model();
 
             searchBox.ItemsSource = new string[]{ "Cat", "Camel", "Cow", "Chameleon", "Mouse", "Lion", "Zebra", "大象" }.OrderBy(x => x);
-
-            DataContext = new Model();
         }
 
         public void OnLoop()

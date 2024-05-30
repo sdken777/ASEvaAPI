@@ -17,21 +17,7 @@ namespace ASEvaAPIAvaloniaTest
         {
             InitializeComponent();
 
-            var texts = Program.Texts;
-            this.AddToResources(texts);
-
-            tabA.Header = texts.Format(tabA.Header as String, "A");
-            tabB.Header = texts.Format(tabB.Header as String, "B");
-            tabC.Header = texts.Format(tabC.Header as String, "C");
-            tabD.Header = texts.Format(tabD.Header as String, "D");
-            tabE.Header = texts.Format(tabE.Header as String, "E");
-            itemSubA.Header = texts.Format(itemSubA.Header as String, "A");
-            itemSubB.Header = texts.Format(itemSubB.Header as String, "B");
-            itemCheckA.Header = texts.Format(itemCheckA.Header as String, "A");
-            itemCheckB.Header = texts.Format(itemCheckB.Header as String, "B");
-            itemRadioA.Header = texts.Format(itemRadioA.Header as String, "A");
-            itemRadioB.Header = texts.Format(itemRadioB.Header as String, "B");
-
+            this.AddToResources(Program.Texts);
             DataContext = new Model();
 
             var timer = new DispatcherTimer();

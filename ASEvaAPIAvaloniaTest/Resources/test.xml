@@ -52,9 +52,13 @@
     <en>Close</en>
     <zh>关闭</zh>
   </t>
-  <t id="basic-combobox">
-    <en>Option {0}</en>
-    <zh>选项{0}</zh>
+  <t id="basic-combobox-a">
+    <en>Option A</en>
+    <zh>选项A</zh>
+  </t>
+  <t id="basic-combobox-b">
+    <en>Option B</en>
+    <zh>选项B</zh>
   </t>
   <t id="basic-dialog-no-border">
     <en>Dialog without border</en>
@@ -148,9 +152,29 @@
     <en>Basic Controls</en>
     <zh>基本控件</zh>
   </t>
-  <t id="basic-label-row">
-    <en>Row-{0:D}:</en>
-    <zh>第{0:D}行：</zh>
+  <t id="basic-label-row-1">
+    <en>Row-1:</en>
+    <zh>第1行：</zh>
+  </t>
+  <t id="basic-label-row-2">
+    <en>Row-2:</en>
+    <zh>第2行：</zh>
+  </t>
+  <t id="basic-label-row-3">
+    <en>Row-3:</en>
+    <zh>第3行：</zh>
+  </t>
+  <t id="basic-label-row-4">
+    <en>Row-4:</en>
+    <zh>第4行：</zh>
+  </t>
+  <t id="basic-label-row-5">
+    <en>Row-5:</en>
+    <zh>第5行：</zh>
+  </t>
+  <t id="basic-label-row-6">
+    <en>Row-6:</en>
+    <zh>第6行：</zh>
   </t>
   <t id="basic-linkbutton">
     <en>Browse</en>
@@ -180,9 +204,25 @@
     <en>Text file</en>
     <zh>文本文件</zh>
   </t>
-  <t id="basic-tabpage-title">
-    <en>Tabpage {0}</en>
-    <zh>标签页{0}</zh>
+  <t id="basic-tabpage-title-a">
+    <en>Tabpage A</en>
+    <zh>标签页A</zh>
+  </t>
+  <t id="basic-tabpage-title-b">
+    <en>Tabpage B</en>
+    <zh>标签页B</zh>
+  </t>
+  <t id="basic-tabpage-title-c">
+    <en>Tabpage C</en>
+    <zh>标签页C</zh>
+  </t>
+  <t id="basic-tabpage-title-d">
+    <en>Tabpage D</en>
+    <zh>标签页D</zh>
+  </t>
+  <t id="basic-tabpage-title-e">
+    <en>Tabpage E</en>
+    <zh>标签页E</zh>
   </t>
   <t id="basic-text">
     <en>Text</en>
@@ -292,9 +332,13 @@
     <en>Message box</en>
     <zh>消息框</zh>
   </t>
-  <t id="menu-check">
-    <en>Check item {0}</en>
-    <zh>多选项{0}</zh>
+  <t id="menu-check-a">
+    <en>Check item A</en>
+    <zh>多选项A</zh>
+  </t>
+  <t id="menu-check-b">
+    <en>Check item B</en>
+    <zh>多选项B</zh>
   </t>
   <t id="menu-eto-dialog">
     <en>Show Eto dialog</en>
@@ -324,9 +368,13 @@
     <en>Fullscreen</en>
     <zh>全屏</zh>
   </t>
-  <t id="menu-radio">
-    <en>Radio item {0}</en>
-    <zh>单选项{0}</zh>
+  <t id="menu-radio-a">
+    <en>Radio item A</en>
+    <zh>单选项A</zh>
+  </t>
+  <t id="menu-radio-b">
+    <en>Radio item B</en>
+    <zh>单选项B</zh>
   </t>
   <t id="menu-snapshot">
     <en>Snapshot</en>
@@ -340,9 +388,13 @@
     <en>Sub menu</en>
     <zh>子菜单</zh>
   </t>
-  <t id="menu-sub-item">
-    <en>Sub item {0}</en>
-    <zh>子菜单项{0}</zh>
+  <t id="menu-sub-item-a">
+    <en>Sub item A</en>
+    <zh>子菜单项A</zh>
+  </t>
+  <t id="menu-sub-item-b">
+    <en>Sub item B</en>
+    <zh>子菜单项B</zh>
   </t>
   <t id="plot-group-title">
     <en>Plot Controls</en>
