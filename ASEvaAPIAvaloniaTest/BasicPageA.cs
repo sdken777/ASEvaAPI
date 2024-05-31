@@ -84,6 +84,30 @@ namespace ASEvaAPIAvaloniaTest
             window.ShowDialog(TopLevel.GetTopLevel(this) as Window);
         }
 
+        private void linkShowDialogNoBorder_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new TestDialogNoBorder();
+            dialog.ShowDialog(TopLevel.GetTopLevel(this) as Window);
+        }
+        
+        private void linkShowDialogWithBorder_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new TestDialogWithBorder();
+            dialog.ShowDialog(TopLevel.GetTopLevel(this) as Window);
+        }
+
+        private void linkShowDialogWithFixBorder_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new TestDialogWithFixBorder();
+            dialog.ShowDialog(TopLevel.GetTopLevel(this) as Window);
+        }
+
+        private void linkClientSize_Click(object sender, RoutedEventArgs e)
+        {
+            var size = (TopLevel.GetTopLevel(this) as Window).ClientSize;
+            linkClientSize.Content = size.Width + "x" + size.Height;
+        }
+
         private class Model : INotifyPropertyChanged
         {
             public event PropertyChangedEventHandler PropertyChanged;

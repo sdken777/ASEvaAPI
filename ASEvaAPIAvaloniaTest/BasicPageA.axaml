@@ -12,7 +12,7 @@
             <CheckBox Grid.Column="2" x:Name="checkSaveFile" Content="{DynamicResource basic-checkbox}" />
             <RadioButton Grid.Column="4" x:Name="radioFile" Content="{DynamicResource basic-radiobutton-file}" IsChecked="True" />
             <RadioButton Grid.Column="6" x:Name="radioDir" Content="{DynamicResource basic-radiobutton-dir}" />
-            <Button Grid.Column="8" Classes="hyperlink" Content="{DynamicResource basic-linkbutton}" Click="linkBrowse_Click" />
+            <Button Classes="hyperlink" Grid.Column="8" Content="{DynamicResource basic-linkbutton}" Click="linkBrowse_Click" />
         </Grid>
         <Grid Grid.Row="4" ColumnDefinitions="Auto,8,*,8,*,8,Auto">
             <Label Grid.Column="0" Content="{DynamicResource basic-label-row-2}" VerticalAlignment="Center" />
@@ -44,7 +44,12 @@
             <ColorPicker Grid.Column="6" Width="120" Color="Red" />
             <Label Grid.Column="8" x:Name="labelActive" Content="O" VerticalAlignment="Center" />
         </Grid>
-        <Grid Grid.Row="10" Background="Tomato">
+        <Grid Grid.Row="10" ColumnDefinitions="Auto,8,Auto,8,Auto,8,Auto,8,Auto">
+            <Label Grid.Column="0" Content="{DynamicResource basic-label-row-6}" VerticalAlignment="Center" />
+            <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-dialog-no-border}" Click="linkShowDialogNoBorder_Click" />
+            <Button Classes="hyperlink" Grid.Column="4" Content="{DynamicResource basic-dialog-with-border}" Click="linkShowDialogWithBorder_Click" />
+            <Button Classes="hyperlink" Grid.Column="6" Content="{DynamicResource basic-dialog-with-border-fix}" Click="linkShowDialogWithFixBorder_Click" />
+            <Button Classes="hyperlink" Grid.Column="8" x:Name="linkClientSize" Content="{DynamicResource basic-client-size}" Click="linkClientSize_Click" />
         </Grid>
     </Grid>
     <Control.ContextMenu>
