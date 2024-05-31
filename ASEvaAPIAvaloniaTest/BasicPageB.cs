@@ -8,6 +8,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
+using Avalonia.Threading;
 using CustomMessageBox.Avalonia;
 
 namespace ASEvaAPIAvaloniaTest
@@ -55,11 +56,7 @@ namespace ASEvaAPIAvaloniaTest
         private void treeView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var node = treeView.SelectedItem as Node;
-            if (node != null && node != selectedNode)
-            {
-                MessageBox.Show(node.Key, "");
-                selectedNode = node;
-            }
+            DispatcherTimer.RunOnce(delegate { MessageBox.Show(node.Key, ""); }, TimeSpan.FromMilliseconds(100));
         }
 
         private void linkSelectFirst_Click(object sender, RoutedEventArgs e)
@@ -198,6 +195,5 @@ namespace ASEvaAPIAvaloniaTest
         }
 
         private Model model = new Model();
-        private Node selectedNode = null;
     }
 }
