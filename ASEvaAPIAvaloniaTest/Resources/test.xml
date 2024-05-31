@@ -152,6 +152,10 @@
     <en>Basic Controls</en>
     <zh>基本控件</zh>
   </t>
+  <t id="basic-label-row">
+    <en>Row-{0:D}:</en>
+    <zh>第{0:D}行：</zh>
+  </t>
   <t id="basic-label-row-1">
     <en>Row-1:</en>
     <zh>第1行：</zh>

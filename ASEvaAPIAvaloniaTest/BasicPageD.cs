@@ -11,8 +11,7 @@ namespace ASEvaAPIAvaloniaTest
         {
             InitializeComponent();
 
-            var texts = Program.Texts;
-            this.AddToResources(texts);
+            this.AddToResources(Program.Texts);
         }
     }
 }
