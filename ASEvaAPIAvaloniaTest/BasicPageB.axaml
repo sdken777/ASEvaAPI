@@ -40,7 +40,7 @@
                 </Grid>
                 <Grid Grid.Column="2" RowDefinitions="*,2,Auto">
                     <Border Grid.Row="0" BorderThickness="1" BorderBrush="Gray">
-                        <TreeView x:Name="treeView" Background="WhiteSmoke" ItemsSource="{Binding TreeNodes}" SelectionChanged="treeView_SelectionChanged">
+                        <TreeView x:Name="treeView" Background="WhiteSmoke" ItemsSource="{Binding TreeNodes}" PointerReleased="treeView_PointerReleased">
                             <TreeView.ItemTemplate>
                                 <TreeDataTemplate ItemsSource="{Binding SubNodes}">
                                     <Border HorizontalAlignment="Left" CornerRadius="3" Padding="3" Background="{Binding Background}">
@@ -76,7 +76,7 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Border Margin="4" BorderThickness="2" BorderBrush="{Binding BorderBrush}" IsVisible="{Binding IsVisible}">
-                                        <local:TestControl Height="80" />
+                                        <local:TestControl Height="80" PointerReleased="testControl_PointerReleased" />
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
