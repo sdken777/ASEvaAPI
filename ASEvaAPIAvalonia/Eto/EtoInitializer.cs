@@ -15,7 +15,7 @@ namespace ASEva.UIAvalonia
             return true;
         }
 
-        public static void Initialize()
+        public static void Initialize(RunDialogHandler runDialogHandler)
         {
             timer.Interval = TimeSpan.FromMilliseconds(10);
             timer.Tick += delegate
@@ -23,6 +23,7 @@ namespace ASEva.UIAvalonia
                 if (initResult == null)
                 {
                     initResult = UIEto.App.Init(getUICode(), true);
+                    if (initResult.Value) UIEto.App.RunDialogHandler = runDialogHandler;
                 }
                 else if (initResult.Value == true)
                 {

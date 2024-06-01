@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using ASEva.UIEto;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -45,7 +46,7 @@ namespace ASEva.UIAvalonia
                         appLifetime = new ClassicDesktopStyleApplicationLifetime();
                         appLifetime.ShutdownMode = ShutdownMode.OnMainWindowClose;
                         appBuilder.SetupWithLifetime(appLifetime);
-                        EtoInitializer.Initialize();
+                        EtoInitializer.Initialize(new EtoRunDialogHandler());
 
                         AppDomain.CurrentDomain.UnhandledException += (o, args) => { triggerFatalException(args); };
 
@@ -202,6 +203,19 @@ namespace ASEva.UIAvalonia
                 catch (Exception) {}
             }
             else if (fatalException == null) fatalException = ex;
+        }
+
+        private class EtoRunDialogHandler : RunDialogHandler
+        {
+            public bool RunDialog(DialogPanel panel)
+            {
+                if (App.appBuilder == null) return false;
+
+                var dialog = new EtoEmbedDialog(panel);
+                if (App.appLifetime.MainWindow == null) App.Run(dialog);
+                else dialog.ShowDialog(App.appLifetime.MainWindow);
+                return true;
+            }
         }
 
         private static bool initAppInvoked = false;

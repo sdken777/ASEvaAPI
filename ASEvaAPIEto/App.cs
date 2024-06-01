@@ -427,7 +427,11 @@ namespace ASEva.UIEto
         /// <returns>是否成功弹出，对话框的运行结果应通过主面板的各Result属性获取</returns>
         public static bool RunDialog(DialogPanel panel)
         {
-            if (handler == null || panel == null || firstFatalException != null) return false;
+            if (panel == null) return false;
+
+            if (RunDialogHandler != null) return RunDialogHandler.RunDialog(panel);
+
+            if (handler == null || firstFatalException != null) return false;
 
             UITimer localTimer = null;
             if (exceptionTimer == null)
@@ -715,5 +719,12 @@ namespace ASEva.UIEto
         private static Exception firstFatalException = null;
         private static UITimer exceptionTimer = null;
         private static bool gpuOptionsInitialized = false;
+
+        public static RunDialogHandler RunDialogHandler { private get; set; }
+    }
+
+    public interface RunDialogHandler
+    {
+        bool RunDialog(DialogPanel panel);
     }
 }

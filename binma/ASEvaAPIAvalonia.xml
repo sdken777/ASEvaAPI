@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.0.5
+            version=1.0.6
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -224,6 +224,12 @@
             <summary>
             无需直接调用
             </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.EtoEmbedDialog.InitializeComponent(System.Boolean)">
+            <summary>
+            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
+            </summary>
+            <param name="loadXaml">Should the XAML be loaded into the component.</param>
         </member>
         <member name="T:ASEva.UIAvalonia.TextResourceExtensions">
             \~English
