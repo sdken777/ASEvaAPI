@@ -10,6 +10,8 @@ using System.Text;
 using Eto.Forms;
 using Eto.GtkSharp;
 using Eto.GtkSharp.Forms;
+using Gtk;
+using ASEva.UIEto;
 
 namespace ASEva.UIGtk
 {
@@ -77,6 +79,7 @@ namespace ASEva.UIGtk
 			Control.Realized += delegate
 			{
 				var settings = NativeMethods.webkit_settings_new();
+				if (settings == IntPtr.Zero) return;
 
 				var uiBackend = ASEva.UIEto.App.GetUIBackend();
 				if (uiBackend != null && uiBackend == "wayland") // Wayland下使用OpenGL可能导致花屏，或令WaylandOffscreenView卡死
@@ -369,9 +372,113 @@ namespace ASEva.UIGtk
 
 		static class NativeMethods
 		{
-			static class NM4
+			static class NM40
 			{
 				public const string libwebkit = "libwebkit2gtk-4.0.so.37";
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static IntPtr webkit_web_view_new();
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static IntPtr webkit_web_view_new_with_settings(IntPtr settings);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static IntPtr webkit_settings_new();
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static void webkit_settings_set_enable_accelerated_2d_canvas(IntPtr settings, bool enable);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static void webkit_settings_set_enable_webgl(IntPtr settings, bool enable);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static void webkit_settings_set_hardware_acceleration_policy(IntPtr settings, int policy);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static void webkit_web_view_load_uri(IntPtr web_view, string uri);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static IntPtr webkit_web_view_get_uri(IntPtr web_view);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static void webkit_web_view_load_html(IntPtr web_view, string content, string base_uri);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static IntPtr webkit_web_view_get_title(IntPtr web_view);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static void webkit_web_view_reload(IntPtr web_view);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static void webkit_web_view_stop_loading(IntPtr web_view);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static bool webkit_web_view_can_go_back(IntPtr web_view);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static void webkit_web_view_go_back(IntPtr web_view);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static bool webkit_web_view_can_go_forward(IntPtr web_view);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static void webkit_web_view_go_forward(IntPtr web_view);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static void webkit_web_view_run_javascript(IntPtr web_view, string script, IntPtr cancellable, Delegate callback, IntPtr user_data);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static IntPtr webkit_web_view_run_javascript_finish(IntPtr web_view, IntPtr result, IntPtr error);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static IntPtr webkit_javascript_result_get_global_context(IntPtr js_result);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static IntPtr webkit_javascript_result_get_value(IntPtr js_result);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static IntPtr JSValueToStringCopy(IntPtr context, IntPtr value, IntPtr idk);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static int JSStringGetMaximumUTF8CStringSize(IntPtr js_str_value);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static void JSStringGetUTF8CString(IntPtr js_str_value, IntPtr str_value, int str_length);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static void JSStringRelease(IntPtr js_str_value);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static IntPtr webkit_navigation_policy_decision_get_request(IntPtr decision);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static IntPtr webkit_uri_request_get_uri(IntPtr request);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static bool webkit_response_policy_decision_is_mime_type_supported(IntPtr decision);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static void webkit_policy_decision_download(IntPtr decision);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static IntPtr webkit_response_policy_decision_get_request(IntPtr decision);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static void webkit_javascript_result_unref(IntPtr result);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static IntPtr webkit_web_view_get_inspector(IntPtr web_view);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static void webkit_web_inspector_show(IntPtr inspector);
+
+				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
+				public extern static void webkit_web_inspector_detach(IntPtr inspector);
+			}
+
+			static class NM41
+			{
+				public const string libwebkit = "libwebkit2gtk-4.1.so.0";
 
 				[DllImport(libwebkit, CallingConvention = CallingConvention.Cdecl)]
 				public extern static IntPtr webkit_web_view_new();
@@ -489,168 +596,284 @@ namespace ASEva.UIGtk
 
 			public static IntPtr webkit_web_view_new()
 			{
-				return NM4.webkit_web_view_new();
+				checkVer();
+				if (ver == TargetVersion.NM40) return NM40.webkit_web_view_new();
+				else if (ver == TargetVersion.NM41) return NM41.webkit_web_view_new();
+				else return IntPtr.Zero;
 			}
 
 			public static IntPtr webkit_web_view_new_with_settings(IntPtr settings)
 			{
-				return NM4.webkit_web_view_new_with_settings(settings);
+				checkVer();
+				if (ver == TargetVersion.NM40) return NM40.webkit_web_view_new_with_settings(settings);
+				else if (ver == TargetVersion.NM41) return NM41.webkit_web_view_new_with_settings(settings);
+				else return IntPtr.Zero;
 			}
 
 			public static IntPtr webkit_settings_new()
 			{
-				return NM4.webkit_settings_new();
+				checkVer();
+				if (ver == TargetVersion.NM40) return NM40.webkit_settings_new();
+				else if (ver == TargetVersion.NM41) return NM41.webkit_settings_new();
+				else return IntPtr.Zero;
 			}
 
 			public static void webkit_settings_set_enable_accelerated_2d_canvas(IntPtr settings, bool enable)
 			{
-				NM4.webkit_settings_set_enable_accelerated_2d_canvas(settings, enable);
+				checkVer();
+				if (ver == TargetVersion.NM40) NM40.webkit_settings_set_enable_accelerated_2d_canvas(settings, enable);
+				else if (ver == TargetVersion.NM41) NM41.webkit_settings_set_enable_accelerated_2d_canvas(settings, enable);
 			}
 
 			public static void webkit_settings_set_enable_webgl(IntPtr settings, bool enable)
 			{
-				NM4.webkit_settings_set_enable_webgl(settings, enable);
+				checkVer();
+				if (ver == TargetVersion.NM40) NM40.webkit_settings_set_enable_webgl(settings, enable);
+				else if (ver == TargetVersion.NM41) NM41.webkit_settings_set_enable_webgl(settings, enable);
 			}
 
 			public static void webkit_settings_set_hardware_acceleration_policy(IntPtr settings, int policy)
 			{
-				NM4.webkit_settings_set_hardware_acceleration_policy(settings, policy);
+				checkVer();
+				if (ver == TargetVersion.NM40) NM40.webkit_settings_set_hardware_acceleration_policy(settings, policy);
+				else if (ver == TargetVersion.NM41) NM41.webkit_settings_set_hardware_acceleration_policy(settings, policy);
 			}
 
 			public static void webkit_web_view_load_uri(IntPtr web_view, string uri)
 			{
-				NM4.webkit_web_view_load_uri(web_view, uri);
+				checkVer();
+				if (ver == TargetVersion.NM40) NM40.webkit_web_view_load_uri(web_view, uri);
+				else if (ver == TargetVersion.NM41) NM41.webkit_web_view_load_uri(web_view, uri);
 			}
 
 			public static string webkit_web_view_get_uri(IntPtr web_view)
 			{
-				return GetString(NM4.webkit_web_view_get_uri(web_view));
+				checkVer();
+				if (ver == TargetVersion.NM40) return GetString(NM40.webkit_web_view_get_uri(web_view));
+				else if (ver == TargetVersion.NM41) return GetString(NM41.webkit_web_view_get_uri(web_view));
+				else return null;
 			}
 
 			public static void webkit_web_view_load_html(IntPtr web_view, string content, string base_uri)
 			{
-				NM4.webkit_web_view_load_html(web_view, content, base_uri);
+				checkVer();
+				if (ver == TargetVersion.NM40) NM40.webkit_web_view_load_html(web_view, content, base_uri);
+				else if (ver == TargetVersion.NM41) NM41.webkit_web_view_load_html(web_view, content, base_uri);
 			}
 
 			public static string webkit_web_view_get_title(IntPtr web_view)
 			{
-				return GetString(NM4.webkit_web_view_get_title(web_view));
+				checkVer();
+				if (ver == TargetVersion.NM40) return GetString(NM40.webkit_web_view_get_title(web_view));
+				else if (ver == TargetVersion.NM41) return GetString(NM41.webkit_web_view_get_title(web_view));
+				else return null;
 			}
 
 			public static void webkit_web_view_reload(IntPtr web_view)
 			{
-				NM4.webkit_web_view_reload(web_view);
+				checkVer();
+				if (ver == TargetVersion.NM40) NM40.webkit_web_view_reload(web_view);
+				else if (ver == TargetVersion.NM41) NM41.webkit_web_view_reload(web_view);
 			}
 
 			public static void webkit_web_view_stop_loading(IntPtr web_view)
 			{
-				NM4.webkit_web_view_stop_loading(web_view);
+				checkVer();
+				if (ver == TargetVersion.NM40) NM40.webkit_web_view_stop_loading(web_view);
+				else if (ver == TargetVersion.NM41) NM41.webkit_web_view_stop_loading(web_view);
 			}
 
 			public static bool webkit_web_view_can_go_back(IntPtr web_view)
 			{
-				return NM4.webkit_web_view_can_go_back(web_view);
+				checkVer();
+				if (ver == TargetVersion.NM40) return NM40.webkit_web_view_can_go_back(web_view);
+				else if (ver == TargetVersion.NM41) return NM41.webkit_web_view_can_go_back(web_view);
+				else return false;
 			}
 
 			public static void webkit_web_view_go_back(IntPtr web_view)
 			{
-				NM4.webkit_web_view_go_back(web_view);
+				checkVer();
+				if (ver == TargetVersion.NM40) NM40.webkit_web_view_go_back(web_view);
+				else if (ver == TargetVersion.NM41) NM41.webkit_web_view_go_back(web_view);
 			}
 
 			public static bool webkit_web_view_can_go_forward(IntPtr web_view)
 			{
-				return NM4.webkit_web_view_can_go_forward(web_view);
+				checkVer();
+				if (ver == TargetVersion.NM40) return NM40.webkit_web_view_can_go_forward(web_view);
+				else if (ver == TargetVersion.NM41) return NM41.webkit_web_view_can_go_forward(web_view);
+				else return false;
 			}
 
 			public static void webkit_web_view_go_forward(IntPtr web_view)
 			{
-				NM4.webkit_web_view_go_forward(web_view);
+				checkVer();
+				if (ver == TargetVersion.NM40) NM40.webkit_web_view_go_forward(web_view);
+				else if (ver == TargetVersion.NM41) NM41.webkit_web_view_go_forward(web_view);
 			}
 
 			public static void webkit_web_view_run_javascript(IntPtr web_view, string script, IntPtr cancellable, Delegate callback, IntPtr user_data)
 			{
-				NM4.webkit_web_view_run_javascript(web_view, script, cancellable, callback, user_data);
+				checkVer();
+				if (ver == TargetVersion.NM40) NM40.webkit_web_view_run_javascript(web_view, script, cancellable, callback, user_data);
+				else if (ver == TargetVersion.NM41) NM41.webkit_web_view_run_javascript(web_view, script, cancellable, callback, user_data);
 			}
 
 			public static IntPtr webkit_web_view_run_javascript_finish(IntPtr web_view, IntPtr result, IntPtr error)
 			{
-				return NM4.webkit_web_view_run_javascript_finish(web_view, result, error);
+				checkVer();
+				if (ver == TargetVersion.NM40) return NM40.webkit_web_view_run_javascript_finish(web_view, result, error);
+				else if (ver == TargetVersion.NM41) return NM41.webkit_web_view_run_javascript_finish(web_view, result, error);
+				else return IntPtr.Zero;
 			}
 
 			public static IntPtr webkit_javascript_result_get_global_context(IntPtr js_result)
 			{
-				return NM4.webkit_javascript_result_get_global_context(js_result);
+				checkVer();
+				if (ver == TargetVersion.NM40) return NM40.webkit_javascript_result_get_global_context(js_result);
+				else if (ver == TargetVersion.NM41) return NM41.webkit_javascript_result_get_global_context(js_result);
+				else return IntPtr.Zero;
 			}
 
 			public static IntPtr webkit_javascript_result_get_value(IntPtr js_result)
 			{
-				return NM4.webkit_javascript_result_get_value(js_result);
+				checkVer();
+				if (ver == TargetVersion.NM40) return NM40.webkit_javascript_result_get_value(js_result);
+				else if (ver == TargetVersion.NM41) return NM41.webkit_javascript_result_get_value(js_result);
+				else return IntPtr.Zero;
 			}
 
 			public static IntPtr JSValueToStringCopy(IntPtr context, IntPtr value, IntPtr idk)
 			{
-				return NM4.JSValueToStringCopy(context, value, idk);
+				checkVer();
+				if (ver == TargetVersion.NM40) return NM40.JSValueToStringCopy(context, value, idk);
+				else if (ver == TargetVersion.NM41) return NM41.JSValueToStringCopy(context, value, idk);
+				else return IntPtr.Zero;
 			}
 
 			public static int JSStringGetMaximumUTF8CStringSize(IntPtr js_str_value)
 			{
-				return NM4.JSStringGetMaximumUTF8CStringSize(js_str_value);
+				checkVer();
+				if (ver == TargetVersion.NM40) return NM40.JSStringGetMaximumUTF8CStringSize(js_str_value);
+				else if (ver == TargetVersion.NM41) return NM41.JSStringGetMaximumUTF8CStringSize(js_str_value);
+				else return 0;
 			}
 
 			public static void JSStringGetUTF8CString(IntPtr js_str_value, IntPtr str_value, int str_length)
 			{
-				NM4.JSStringGetUTF8CString(js_str_value, str_value, str_length);
+				checkVer();
+				if (ver == TargetVersion.NM40) NM40.JSStringGetUTF8CString(js_str_value, str_value, str_length);
+				else if (ver == TargetVersion.NM41) NM41.JSStringGetUTF8CString(js_str_value, str_value, str_length);
 			}
 
 			public static void JSStringRelease(IntPtr js_str_value)
 			{
-				NM4.JSStringRelease(js_str_value);
+				checkVer();
+				if (ver == TargetVersion.NM40) NM40.JSStringRelease(js_str_value);
+				else if (ver == TargetVersion.NM41) NM41.JSStringRelease(js_str_value);
 			}
 
 			public static IntPtr webkit_navigation_policy_decision_get_request(IntPtr decision)
 			{
-				return NM4.webkit_navigation_policy_decision_get_request(decision);
+				checkVer();
+				if (ver == TargetVersion.NM40) return NM40.webkit_navigation_policy_decision_get_request(decision);
+				else if (ver == TargetVersion.NM41) return NM41.webkit_navigation_policy_decision_get_request(decision);
+				else return IntPtr.Zero;
 			}
 
 			public static string webkit_uri_request_get_uri(IntPtr request)
 			{
-				return GetString(NM4.webkit_uri_request_get_uri(request));
+				checkVer();
+				if (ver == TargetVersion.NM40) return GetString(NM40.webkit_uri_request_get_uri(request));
+				else if (ver == TargetVersion.NM41) return GetString(NM41.webkit_uri_request_get_uri(request));
+				else return null;
 			}
 
 			public static bool webkit_response_policy_decision_is_mime_type_supported(IntPtr decision)
 			{
-				return NM4.webkit_response_policy_decision_is_mime_type_supported(decision);
+				checkVer();
+				if (ver == TargetVersion.NM40) return NM40.webkit_response_policy_decision_is_mime_type_supported(decision);
+				else if (ver == TargetVersion.NM41) return NM41.webkit_response_policy_decision_is_mime_type_supported(decision);
+				else return false;
 			}
 
 			public static void webkit_policy_decision_download(IntPtr decision)
 			{
-				NM4.webkit_policy_decision_download(decision);
+				checkVer();
+				if (ver == TargetVersion.NM40) NM40.webkit_policy_decision_download(decision);
+				else if (ver == TargetVersion.NM41) NM41.webkit_policy_decision_download(decision);
 			}
 
 			public static IntPtr webkit_response_policy_decision_get_request(IntPtr decision)
 			{
-				return NM4.webkit_response_policy_decision_get_request(decision);
+				checkVer();
+				if (ver == TargetVersion.NM40) return NM40.webkit_response_policy_decision_get_request(decision);
+				else if (ver == TargetVersion.NM41) return NM41.webkit_response_policy_decision_get_request(decision);
+				else return IntPtr.Zero;
 			}
 
 			public static void webkit_javascript_result_unref(IntPtr result)
 			{
-				NM4.webkit_javascript_result_unref(result);
+				checkVer();
+				if (ver == TargetVersion.NM40) NM40.webkit_javascript_result_unref(result);
+				else if (ver == TargetVersion.NM41) NM41.webkit_javascript_result_unref(result);
 			}
 
 			public static IntPtr webkit_web_view_get_inspector(IntPtr web_view)
 			{
-				return NM4.webkit_web_view_get_inspector(web_view);
+				checkVer();
+				if (ver == TargetVersion.NM40) return NM40.webkit_web_view_get_inspector(web_view);
+				else if (ver == TargetVersion.NM41) return NM41.webkit_web_view_get_inspector(web_view);
+				else return IntPtr.Zero;
 			}
 
 			public static void webkit_web_inspector_show(IntPtr inspector)
 			{
-				NM4.webkit_web_inspector_show(inspector);
+				checkVer();
+				if (ver == TargetVersion.NM40) NM40.webkit_web_inspector_show(inspector);
+				else if (ver == TargetVersion.NM41) NM41.webkit_web_inspector_show(inspector);
 			}
 
 			public static void webkit_web_inspector_detach(IntPtr inspector)
 			{
-				NM4.webkit_web_inspector_detach(inspector);
+				checkVer();
+				if (ver == TargetVersion.NM40) NM40.webkit_web_inspector_detach(inspector);
+				else if (ver == TargetVersion.NM41) NM41.webkit_web_inspector_detach(inspector);
 			}
+
+			private enum TargetVersion
+			{
+				Unknown,
+				None,
+				NM40,
+				NM41,
+			}
+
+			private static void checkVer()
+			{
+				if (ver != TargetVersion.Unknown) return;
+
+				String archID = null;
+				switch (ASEva.APIInfo.GetRunningOS())
+				{
+					case "linux":
+						archID = "x86_64-linux-gnu";
+						break;
+					case "linuxarm":
+						archID = "aarch64-linux-gnu";
+						break;
+					default:
+						ver = TargetVersion.None;
+						return;
+				}
+
+				if (File.Exists("/usr/lib/" + archID + "/libwebkit2gtk-4.0.so.37")) ver = TargetVersion.NM40;
+				else if (File.Exists("/usr/lib/" + archID + "/libwebkit2gtk-4.1.so.0")) ver = TargetVersion.NM41;
+				else ver = TargetVersion.None;
+			}
+
+			private static TargetVersion ver = TargetVersion.Unknown;
 		}
 	}
 }
