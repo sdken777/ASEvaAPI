@@ -3,10 +3,10 @@ using System.ComponentModel;
 using System.Threading;
 using ASEva;
 using ASEva.UIAvalonia;
-using ASEva.Utility;
+using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Data.Converters;
 using Avalonia.Interactivity;
+using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 
 namespace ASEvaAPIAvaloniaTest
@@ -63,9 +63,14 @@ namespace ASEvaAPIAvaloniaTest
             model.SelectedB = true;
         }
 
-        private void itemSnapshot_Click(object sender, RoutedEventArgs e)
+        private async void itemSnapshot_Click(object sender, RoutedEventArgs e)
         {
-            // TODO
+            using (var bitmap = new RenderTargetBitmap(new PixelSize((int)Width, (int)Height), new Vector(96, 96)))
+            {
+                bitmap.Render(this);
+                var dialog = new ImageDialog(bitmap);
+                await dialog.ShowDialog(this);
+            }
         }
 
         private void itemExceptionMain_Click(object sender, RoutedEventArgs e)
