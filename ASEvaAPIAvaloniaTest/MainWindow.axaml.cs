@@ -8,6 +8,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media.Imaging;
 using Avalonia.Threading;
+using CustomMessageBox.Avalonia;
 
 namespace ASEvaAPIAvaloniaTest
 {
@@ -28,6 +29,16 @@ namespace ASEvaAPIAvaloniaTest
             };
             timer.Start();
         }
+
+        private async void MainWindow_Closing(object sender, WindowClosingEventArgs e)
+        {
+            if (exitConfirmed || e.CloseReason != WindowCloseReason.WindowClosing) return;
+
+            e.Cancel = true;
+            exitConfirmed = await MessageBox.Show(Program.Texts["exit-confirm"], "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == MessageBoxResult.Yes;
+            if (exitConfirmed) Close();
+        }
+        private bool exitConfirmed = false;
 
         private void itemFullScreen_Click(object sender, RoutedEventArgs e)
         {

@@ -109,7 +109,7 @@ namespace ASEvaAPIAvaloniaTest
             model.SelectedControlItem = item;
 
             var itemIndex = model.ControlItems.IndexOf(item);
-            MessageBox.Show(Program.Texts.Format("basic-flow-selected", itemIndex, ""), "");
+            MessageBox.Show(Program.Texts.Format("basic-flow-selected", itemIndex), "");
         }
 
         private class Node : INotifyPropertyChanged

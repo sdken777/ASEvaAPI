@@ -97,8 +97,8 @@
     <zh>选中项</zh>
   </t>
   <t id="basic-flow-selected">
-    <en>Selected item: {0} {1}</en>
-    <zh>已选中项：{0} {1}</zh>
+    <en>Selected item: {0}</en>
+    <zh>已选中项：{0}</zh>
   </t>
   <t id="basic-flow-show">
     <en>Show</en>

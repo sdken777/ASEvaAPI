@@ -5,6 +5,21 @@
         x:Class="ASEvaAPIAvaloniaTest.BasicPageE"
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="300"
         Background="White">
-    <Grid Margin="8">
+    <Grid Margin="8" RowDefinitions="Auto,8,*">
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,8,Auto,8,Auto,8,Auto,8,Auto,8,Auto,8,Auto,8,Auto">
+            <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-flow-add}" Click="linkAdd_Click" />
+            <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-flow-remove}" Click="linkRemove_Click" />
+            <Button Classes="hyperlink" Grid.Column="4" Content="{DynamicResource basic-flow-insert}" Click="linkInsert_Click" />
+            <Button Classes="hyperlink" Grid.Column="6" Content="{DynamicResource basic-flow-select}" Click="linkSelect_Click" />
+            <Button Classes="hyperlink" Grid.Column="8" Content="{DynamicResource basic-flow-show}" Click="linkShow_Click" />
+            <Button Classes="hyperlink" Grid.Column="10" Content="{DynamicResource basic-flow-hide}" Click="linkHide_Click" />
+            <Button Classes="hyperlink" Grid.Column="12" Content="{DynamicResource basic-flow-bigger}" Click="linkBigger_Click" />
+            <Button Classes="hyperlink" Grid.Column="14" Content="{DynamicResource basic-flow-smaller}" Click="linkSmaller_Click" />
+        </Grid>
+        <Border Grid.Row="2" BorderThickness="1" BorderBrush="Gray">
+            <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+                <WrapPanel x:Name="flowLayout" Orientation="Vertical" /> 
+            </ScrollViewer>
+        </Border>
     </Grid>
 </Panel>
