@@ -12,19 +12,19 @@
             <Border Grid.Row="1" CornerRadius="3" Background="WhiteSmoke">
                 <TabControl x:Name="tabControl">
                     <TabItem Header="{DynamicResource basic-tabpage-title-a}" FontSize="18">
-                        <local:BasicPageA x:Name="basicPageA" Margin="0,0,0,10" />
+                        <local:BasicPageA x:Name="basicPageA" Margin="0,0,0,8" />
                     </TabItem>
                     <TabItem Header="{DynamicResource basic-tabpage-title-b}" FontSize="18">
-                        <local:BasicPageB Margin="0,0,0,10" />
+                        <local:BasicPageB Margin="0,0,0,8" />
                     </TabItem>
                     <TabItem Header="{DynamicResource basic-tabpage-title-c}" FontSize="18">
-                        <local:BasicPageC Margin="0,0,0,10" />
+                        <local:BasicPageC Margin="0,0,0,8" />
                     </TabItem>
                     <TabItem Header="{DynamicResource basic-tabpage-title-d}" FontSize="18">
-                        <local:BasicPageD Margin="0,0,0,10" />
+                        <local:BasicPageD Margin="0,0,0,8" />
                     </TabItem>
                     <TabItem Header="{DynamicResource basic-tabpage-title-e}" FontSize="18">
-                        <local:BasicPageE Margin="0,0,0,10" />
+                        <local:BasicPageE Margin="0,0,0,8" />
                     </TabItem>
                 </TabControl>
             </Border>
