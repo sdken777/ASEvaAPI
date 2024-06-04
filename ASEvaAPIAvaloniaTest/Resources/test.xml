@@ -232,9 +232,29 @@
     <en>Text</en>
     <zh>文本</zh>
   </t>
-  <t id="basic-tooltip">
-    <en>Tooltip {0:D}</en>
-    <zh>提示{0:D}</zh>
+  <t id="basic-tooltip-1">
+    <en>Tooltip 1</en>
+    <zh>提示1</zh>
+  </t>
+  <t id="basic-tooltip-2">
+    <en>Tooltip 2</en>
+    <zh>提示2</zh>
+  </t>
+  <t id="basic-tooltip-3">
+    <en>Tooltip 3</en>
+    <zh>提示3</zh>
+  </t>
+  <t id="basic-tooltip-4">
+    <en>Tooltip 4</en>
+    <zh>提示4</zh>
+  </t>
+  <t id="basic-tooltip-5">
+    <en>Tooltip 5</en>
+    <zh>提示5</zh>
+  </t>
+  <t id="basic-tooltip-6">
+    <en>Tooltip 6</en>
+    <zh>提示6</zh>
   </t>
   <t id="basic-tree-change-color">
     <en>Change color</en>
