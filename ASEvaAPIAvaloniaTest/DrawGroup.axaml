@@ -3,7 +3,19 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Class="ASEvaAPIAvaloniaTest.DrawGroup"
-        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="300">
-    <Grid>
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="350">
+    <Grid ColumnDefinitions="Auto,8,Auto,8,*">
+        <Grid Grid.Column="0" RowDefinitions="*,8,*,8,*">
+            <Image Grid.Row="0" x:Name="imageView3" Width="100" Height="100" />
+            <Image Grid.Row="2" x:Name="imageView4" Width="100" Height="100" />
+            <Image Grid.Row="4" Width="100" Height="100" Source="resm:picture.png?assembly=ASEvaAPIAvaloniaTest" />
+        </Grid>
+        <TabControl Grid.Column="2" Width="220">
+            <TabItem Header="{DynamicResource draw-tabpage-default}" FontSize="18">
+                <Canvas />
+            </TabItem>
+            <TabItem Header="{DynamicResource draw-tabpage-skia}" FontSize="18">
+            </TabItem>
+        </TabControl>
     </Grid>
 </Panel>

@@ -320,13 +320,9 @@
     <en>Default</en>
     <zh>默认</zh>
   </t>
-  <t id="draw-tabpage-skia-cpu">
-    <en>S-CPU</en>
-    <zh>S-CPU</zh>
-  </t>
-  <t id="draw-tabpage-skia-gl">
-    <en>S-GL</en>
-    <zh>S-GL</zh>
+  <t id="draw-tabpage-skia">
+    <en>Skia</en>
+    <zh>Skia</zh>
   </t>
   <t id="draw-text">
     <en>Hello World</en>

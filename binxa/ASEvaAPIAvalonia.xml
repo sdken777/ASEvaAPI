@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.0.7
+            version=1.0.8
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -230,6 +230,180 @@
             Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
             </summary>
             <param name="loadXaml">Should the XAML be loaded into the component.</param>
+        </member>
+        <member name="T:ASEva.UIAvalonia.CommonImageAvaloniaExtensions">
+            \~English
+            <summary>
+            (api:avalonia=1.0.8) Extensions for common image object
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.8) 方便使用通用图像数据的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.CommonImageAvaloniaExtensions.ToAvaloniaBitmap(ASEva.Samples.CommonImage)">
+            \~English
+            <summary>
+            Convert to Avalonia bitmap object
+            </summary>
+            <param name="image">Common image object</param>
+            <returns>Avalonia bitmap object</returns>
+            \~Chinese
+            <summary>
+            转为Avalonia位图对象
+            </summary>
+            <param name="image">通用图像数据</param>
+            <returns>Avalonia位图对象</returns>
+        </member>
+        <member name="M:ASEva.UIAvalonia.CommonImageAvaloniaExtensions.ToCommonImage(Avalonia.Media.Imaging.Bitmap)">
+            \~English
+            <summary>
+            Convert to common image object
+            </summary>
+            <param name="bitmap">Avalonia bitmap object</param>
+            <returns>Common image object</returns>
+            \~Chinese
+            <summary>
+            转为通用图像数据
+            </summary>
+            <param name="bitmap">Avalonia位图对象</param>
+            <returns>通用图像数据</returns>
+        </member>
+        <member name="T:ASEva.UIAvalonia.CommonImageSkiaExtensions">
+            \~English
+            <summary>
+            (api:avalonia=1.0.8) Extensions for common image object
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.8) 方便使用通用图像数据的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.CommonImageSkiaExtensions.ToSKImage(ASEva.Samples.CommonImage)">
+            \~English
+            <summary>
+            Convert to Skia image object
+            </summary>
+            <param name="image">Common image object</param>
+            <returns>Skia image object (After you're done using it, it's recommended to call "Dispose" immediately to reduce memory usage)</returns>
+            \~Chinese
+            <summary>
+            转为Skia图像对象
+            </summary>
+            <param name="image">通用图像数据</param>
+            <returns>Skia图像对象（使用完毕后建议及时调用Dispose，可减少内存占用）</returns>
+        </member>
+        <member name="T:ASEva.UIAvalonia.ConvertAvaloniaExtensions">
+            \~English
+            <summary>
+            (api:avalonia=1.0.8) Extensions for conversion between structures
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.8) 方便进行结构体转换操作的扩展
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.ConvertSkiaExtensions">
+            \~English
+            <summary>
+            (api:avalonia=1.0.8) Extensions for conversion between structures
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.8) 方便进行结构体转换操作的扩展
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.SkiaCanvasExtensions">
+            \~English
+            <summary>
+            (api:avalonia=1.0.8) Extensions for Skia canvas
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.8) 方便操作Skia画布的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.SkiaCanvasExtensions.GetDefaultFont(SkiaSharp.SKCanvas,System.Single)">
+            \~English
+            <summary>
+            Get default font
+            </summary>
+            <param name="canvas">Skia canvas object</param>
+            <param name="sizeScale">Ratio to the default size</param>
+            \~Chinese
+            <summary>
+            获取默认字体
+            </summary>
+            <param name="canvas">Skia画布</param>
+            <param name="sizeScale">相对于默认尺寸的比例</param>
+        </member>
+        <member name="M:ASEva.UIAvalonia.SkiaCanvasExtensions.GetFont(SkiaSharp.SKCanvas,System.String,System.Single,SkiaSharp.SKFontStyleWeight,SkiaSharp.SKFontStyleWidth,SkiaSharp.SKFontStyleSlant)">
+            \~English
+            <summary>
+            Get the specified font object
+            </summary>
+            <param name="canvas">Skia canvas object</param>
+            <param name="fontName">Font name</param>
+            <param name="sizeScale">Ratio to the default size</param>
+            <param name="weight">Font weight</param>
+            <param name="width">Font width</param>
+            <param name="slant">Font slant</param>
+            <returns>Font object</returns>
+            \~Chinese
+            <summary>
+            获取指定字体
+            </summary>
+            <param name="canvas">Skia画布</param>
+            <param name="fontName">字体名称</param>
+            <param name="sizeScale">相对于默认尺寸的比例</param>
+            <param name="weight">字重</param>
+            <param name="width">宽度</param>
+            <param name="slant">倾斜度</param>
+            <returns>字体对象</returns>
+        </member>
+        <member name="M:ASEva.UIAvalonia.SkiaCanvasExtensions.DrawString(SkiaSharp.SKCanvas,System.String,SkiaSharp.SKFont,SkiaSharp.SKColor,Avalonia.Media.AlignmentX,Avalonia.Media.AlignmentY,System.Int32,System.Int32)">
+            \~English
+            <summary>
+            Draw text with the specified anchor
+            </summary>
+            <param name="canvas">Skia canvas object</param>
+            <param name="text">Text</param>
+            <param name="font">Font</param>
+            <param name="color">Text color</param>
+            <param name="anchorX">Anchor point's type along X-coordinate</param>
+            <param name="anchorY">Anchor point's type along Y-coordinate</param>
+            <param name="posX">X-coordinate of anchor point</param>
+            <param name="posY">Y-coordinate of anchor point</param>
+            \~Chinese
+            <summary>
+            指定锚点绘制文本
+            </summary>
+            <param name="canvas">Skia画布</param>
+            <param name="text">文本</param>
+            <param name="font">字体</param>
+            <param name="color">文字颜色</param>
+            <param name="anchorX">X轴上的文本锚点坐标位置类型</param>
+            <param name="anchorY">Y轴上的文本锚点坐标位置类型</param>
+            <param name="posX">文本锚点X轴逻辑坐标</param>
+            <param name="posY">文本锚点Y轴逻辑坐标</param>
+        </member>
+        <member name="M:ASEva.UIAvalonia.SkiaCanvasExtensions.MeasureString(SkiaSharp.SKCanvas,System.String,SkiaSharp.SKFont)">
+            \~English
+            <summary>
+            Measure text's size
+            </summary>
+            <param name="canvas">Skia canvas object</param>
+            <param name="text">Text</param>
+            <param name="font">Font</param>
+            <returns>Text's logical size</returns>
+            \~Chinese
+            <summary>
+            测量文本的尺寸
+            </summary>
+            <param name="canvas">Skia画布</param>
+            <param name="text">文本</param>
+            <param name="font">字体</param>
+            <returns>文本的逻辑尺寸</returns>
         </member>
         <member name="T:ASEva.UIAvalonia.TextResourceExtensions">
             \~English

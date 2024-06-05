@@ -46,12 +46,12 @@ namespace ASEvaAPIAvaloniaTest
 
         private void linkShow_Click(object sender, RoutedEventArgs e)
         {
-            flowLayout.Children[0].IsVisible = true;
+            if (flowLayout.Children.Count > 0) flowLayout.Children[0].IsVisible = true;
         }
 
         private void linkHide_Click(object sender, RoutedEventArgs e)
         {
-            flowLayout.Children[0].IsVisible = false;
+            if (flowLayout.Children.Count > 0) flowLayout.Children[0].IsVisible = false;
         }
 
         private void linkBigger_Click(object sender, RoutedEventArgs e)
