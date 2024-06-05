@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.0.8
+            version=1.0.9
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -414,6 +414,62 @@
             <summary>
             (api:avalonia=1.0.3) 方便添加文本资源的扩展
             </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.SkiaRenderEventArgs">
+            \~English
+            <summary>
+            (api:avalonia=1.0.9) Skia view render event argument
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.9) SkiaView渲染事件参数
+            </summary>
+        </member>
+        <member name="P:ASEva.UIAvalonia.SkiaRenderEventArgs.Canvas">
+            \~English
+            <summary>
+            Skia canvas object
+            </summary>
+            \~Chinese
+            <summary>
+            Skia画布对象
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.SkiaView">
+            \~English
+            <summary>
+            (api:avalonia=1.0.9) Skia view
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.9) Skia绘制视图
+            </summary>
+        </member>
+        <member name="E:ASEva.UIAvalonia.SkiaView.RenderSkia">
+            \~English
+            <summary>
+            Render event
+            </summary>
+            \~Chinese
+            <summary>
+            渲染事件
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.SkiaView.#ctor">
+            \~English
+            <summary>
+            Constructor
+            </summary>
+            \~Chinese
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.SkiaView.InitializeComponent(System.Boolean)">
+            <summary>
+            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
+            </summary>
+            <param name="loadXaml">Should the XAML be loaded into the component.</param>
         </member>
         <member name="T:ASEva.UIAvalonia.WindowPanel">
             \~English

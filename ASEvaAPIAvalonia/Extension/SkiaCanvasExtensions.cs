@@ -31,11 +31,7 @@ namespace ASEva.UIAvalonia
         /// <param name="sizeScale">相对于默认尺寸的比例</param>
         public static SKFont GetDefaultFont(this SKCanvas canvas, float sizeScale = 1.0f)
         {
-            if (sizeScale <= 0) sizeScale = 1;
-
-            var defaultFont = getDefaultSKFont();
-            if (sizeScale == 1) return defaultFont;
-            else return getSKFont(defaultFont.Typeface.FamilyName, defaultFont.Size * sizeScale, SKFontStyleWeight.Normal, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright);
+            return ASEva.UIEto.SkiaCanvasExtensions.GetDefaultFont(canvas, sizeScale);
         }
 
         /// \~English
@@ -62,10 +58,7 @@ namespace ASEva.UIAvalonia
         /// <returns>字体对象</returns>
         public static SKFont GetFont(this SKCanvas canvas, String fontName, float sizeScale = 1.0f, SKFontStyleWeight weight = SKFontStyleWeight.Normal, SKFontStyleWidth width = SKFontStyleWidth.Normal, SKFontStyleSlant slant = SKFontStyleSlant.Upright)
         {
-            if (sizeScale <= 0) sizeScale = 1;
-            
-            var defaultFont = getDefaultSKFont();
-            return getSKFont(fontName, defaultFont.Size * sizeScale, weight, width, slant);
+            return ASEva.UIEto.SkiaCanvasExtensions.GetFont(canvas, fontName, sizeScale, weight, width, slant);
         }
 
         /// \~English
@@ -155,32 +148,6 @@ namespace ASEva.UIAvalonia
             return new SKSize(textRect.Width, testTextRect.Height);
         }
 
-        private static SKFont getDefaultSKFont()
-        {
-            if (skDefault == null) skDefault = new SKFont();
-            return skDefault;
-        }
-
-        private static SKFont getSKFont(String fontName, float size, SKFontStyleWeight weight, SKFontStyleWidth width, SKFontStyleSlant slant)
-        {
-            var key = fontName + ":" + size + ":" + weight.ToString() + ":" + width.ToString() + ":" + slant.ToString();
-            if (!skLibrary.ContainsKey(key))
-            {
-                try
-                {
-                    var newFont = new SKFont(SKTypeface.FromFamilyName(fontName, weight, width, slant), size);
-                    skLibrary[key] = newFont;
-                }
-                catch (Exception)
-                {
-                    skLibrary[key] = null;
-                }
-            }
-            return skLibrary[key];
-        }
-
-        private static SKFont skDefault = null;
-        private static Dictionary<String, SKFont> skLibrary = new Dictionary<String, SKFont>();
         private static String testText = "0O口";
     }
 }

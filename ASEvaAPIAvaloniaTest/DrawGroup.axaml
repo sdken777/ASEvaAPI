@@ -12,7 +12,7 @@
                 <local:DrawDefault x:Name="drawDefault" />
             </TabItem>
             <TabItem Header="{DynamicResource draw-tabpage-skia}" FontSize="18">
-                <local:DrawSkia />
+                <local:DrawSkia x:Name="drawSkia" />
             </TabItem>
         </TabControl>
         <local:DrawGL Grid.Column="4" />

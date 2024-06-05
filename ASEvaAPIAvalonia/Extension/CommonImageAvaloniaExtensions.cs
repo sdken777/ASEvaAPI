@@ -90,9 +90,8 @@ namespace ASEva.UIAvalonia
         public static CommonImage ToCommonImage(this Bitmap bitmap)
         {
             if (bitmap.Format != PixelFormat.Bgra8888 && bitmap.Format != PixelFormat.Rgba8888) return null;
-            if (bitmap.AlphaFormat != AlphaFormat.Unpremul && bitmap.AlphaFormat != AlphaFormat.Opaque) return null;
 
-            var image = CommonImage.Create(bitmap.PixelSize.Width, bitmap.PixelSize.Height, bitmap.AlphaFormat == AlphaFormat.Unpremul, bitmap.Format == PixelFormat.Rgba8888);
+            var image = CommonImage.Create(bitmap.PixelSize.Width, bitmap.PixelSize.Height, bitmap.AlphaFormat != AlphaFormat.Opaque, bitmap.Format == PixelFormat.Rgba8888);
             if (image.WithAlpha)
             {
                 unsafe
@@ -100,6 +99,34 @@ namespace ASEva.UIAvalonia
                     fixed (byte* dataPtr = &image.Data[0])
                     {
                         bitmap.CopyPixels(new PixelRect(0, 0, image.Width, image.Height), (nint)dataPtr, image.RowBytes * image.Height, image.RowBytes);
+
+                        if (bitmap.AlphaFormat == AlphaFormat.Premul)
+                        {
+                            var width = image.Width;
+                            var height = image.Height;
+                            var rowBytes = image.RowBytes;
+                            for (int v = 0; v < height; v++)
+                            {
+                                uint* row = (uint*)(dataPtr + v * rowBytes);
+                                for (int u = 0; u < width; u++)
+                                {
+                                    uint cell = *row;
+                                    uint scale = (cell & 0xff000000) >> 24;
+                                    if (scale == 0)
+                                    {
+                                        cell = 0;
+                                    }
+                                    else
+                                    {
+                                        uint b1 = ((cell & 0x000000ff) << 8) / scale;
+                                        uint b2 = (cell & 0x0000ff00) / scale;
+                                        uint b3 = ((cell & 0x00ff0000) >> 8) / scale;
+                                        cell = b1 | (b2 << 8) | (b3 << 16) | (scale << 24);
+                                    }
+                                    *row++ = cell;
+                                }
+                            }
+                        }
                     }
                 }
             }

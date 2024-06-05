@@ -31,10 +31,10 @@ namespace ASEvaAPIAvaloniaTest
         {
             var pieAngle = (DateTime.Now - startTime).TotalMilliseconds * 0.1;
             pieAngle -= Math.Floor(pieAngle / 360) * 360;
-            var pieAngleRad = pieAngle * Math.PI / 180;
+            var pieAngleRad = pieAngle * Math.PI / 180 - Math.PI / 2;
 
             var figure = new PathFigure{ IsClosed = true };
-            figure.Segments.Add(new LineSegment{ Point = new Point(90, 0) });
+            figure.Segments.Add(new LineSegment{ Point = new Point(0, -90) });
             figure.Segments.Add(new ArcSegment{ Point = new Point(90.0 * Math.Cos(pieAngleRad), 90.0 * Math.Sin(pieAngleRad)), Size = new Size(90, 90), IsLargeArc = pieAngle > 180 });
             pie.Data = new PathGeometry{ Figures = { figure } };
         }
