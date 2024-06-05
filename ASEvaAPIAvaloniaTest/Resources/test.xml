@@ -276,6 +276,10 @@
     <en>Show details</en>
     <zh>显示详情</zh>
   </t>
+  <t id="draw-gl-info">
+    <en>OpenGL info</en>
+    <zh>OpenGL信息</zh>
+  </t>
   <t id="draw-gl-info-extensions">
     <en>Extensions: {0}</en>
     <zh>扩展：{0}</zh>
@@ -301,12 +305,12 @@
     <zh>最大循环间隔:</zh>
   </t>
   <t id="draw-gl-pause-render">
-    <en>Pause render</en>
-    <zh>暂停渲染</zh>
+    <en>Pause</en>
+    <zh>暂停</zh>
   </t>
   <t id="draw-gl-resume-render">
-    <en>Resume render</en>
-    <zh>恢复渲染</zh>
+    <en>Resume</en>
+    <zh>恢复</zh>
   </t>
   <t id="draw-group-title">
     <en>Drawing Controls</en>

@@ -2,9 +2,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ASEvaAPIAvaloniaTest"
+        xmlns:aseva="clr-namespace:ASEva.UIAvalonia;assembly=ASEvaAPIAvalonia"
         x:Class="ASEvaAPIAvaloniaTest.DrawGL"
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="400">
-    <Grid>
+    <Grid RowDefinitions="Auto,8,*,8,Auto">
+        <Grid ColumnDefinitions="Auto,*,Auto">
+            <Label Grid.Column="0" Content="{DynamicResource draw-gl-loop-interval}" />
+            <Label Grid.Column="2" x:Name="labelLoopInterval" />
+        </Grid>
+        <aseva:GLView Grid.Row="2" x:Name="glView" GLInitialize="glView_Initialize" GLResize="glView_Resize" GLRender="glView_Render" PointerPressed="glView_PointerPressed" PointerWheelChanged="glView_PointerWheelChanged" />
+        <Grid Grid.Row="4" ColumnDefinitions="Auto,8,Auto,8,Auto,*,Auto">
+            <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource draw-gl-pause-render}" Click="linkPause_Click" />
+            <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource draw-gl-resume-render}" Click="linkResume_Click" />
+            <Button Classes="hyperlink" Grid.Column="4" Content="{DynamicResource draw-gl-info}" Click="linkInfo_Click" />
+            <Label Grid.Column="6" x:Name="labelMouseCount" Content="0" />
+        </Grid>
     </Grid>
 </Panel>

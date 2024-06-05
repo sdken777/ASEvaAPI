@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.0.9
+            version=1.0.10
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -413,6 +413,362 @@
             \~Chinese
             <summary>
             (api:avalonia=1.0.3) 方便添加文本资源的扩展
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.GLView">
+            \~English
+            <summary>
+            (api:avalonia=1.0.10) OpenGL view
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.10) OpenGL绘制视图
+            </summary>
+        </member>
+        <member name="E:ASEva.UIAvalonia.GLView.GLInitialize">
+            \~English
+            <summary>
+            Initialization event
+            </summary>
+            \~Chinese
+            <summary>
+            初始化事件
+            </summary>
+        </member>
+        <member name="E:ASEva.UIAvalonia.GLView.GLResize">
+            \~English
+            <summary>
+            Resize event
+            </summary>
+            \~Chinese
+            <summary>
+            缩放事件
+            </summary>
+        </member>
+        <member name="E:ASEva.UIAvalonia.GLView.GLRender">
+            \~English
+            <summary>
+            Render event
+            </summary>
+            \~Chinese
+            <summary>
+            渲染事件
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.GLView.#ctor">
+            \~English
+            <summary>
+            Constructor
+            </summary>
+            \~Chinese
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.GLView.QueueRender">
+            \~English
+            <summary>
+            Request new rendering
+            </summary>
+            \~Chinese
+            <summary>
+            提交新的渲染请求
+            </summary>
+        </member>
+        <member name="P:ASEva.UIAvalonia.GLView.FPS">
+            \~English
+            <summary>
+            Frame rate (for the latest 3 seconds)
+            </summary>
+            \~Chinese
+            <summary>
+            渲染帧率（统计最近3秒）
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.GLView.InitializeComponent(System.Boolean)">
+            <summary>
+            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
+            </summary>
+            <param name="loadXaml">Should the XAML be loaded into the component.</param>
+        </member>
+        <member name="T:ASEva.UIAvalonia.GLTextTask">
+            \~English
+            <summary>
+            (api:avalonia=1.0.10) OpenGL text drawing task
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.10) OpenGL文本绘制任务
+            </summary>
+        </member>
+        <member name="F:ASEva.UIAvalonia.GLTextTask.text">
+            \~English
+            <summary>
+            Text
+            </summary>
+            \~Chinese
+            <summary>
+            文本
+            </summary>
+        </member>
+        <member name="F:ASEva.UIAvalonia.GLTextTask.posX">
+            \~English
+            <summary>
+            X-coordinate of anchor point
+            </summary>
+            \~Chinese
+            <summary>
+            文本锚点X轴坐标
+            </summary>
+        </member>
+        <member name="F:ASEva.UIAvalonia.GLTextTask.posY">
+            \~English
+            <summary>
+            Y-coordinate of anchor point
+            </summary>
+            \~Chinese
+            <summary>
+            文本锚点Y轴坐标
+            </summary>
+        </member>
+        <member name="F:ASEva.UIAvalonia.GLTextTask.isRealPos">
+            \~English
+            <summary>
+            Whether the coordination of anchor point is in physical pixels, or else logical units
+            </summary>
+            \~Chinese
+            <summary>
+            文本锚点坐标是否为物理像素坐标系，否则为逻辑坐标
+            </summary>
+        </member>
+        <member name="F:ASEva.UIAvalonia.GLTextTask.anchorX">
+            \~English
+            <summary>
+            Anchor point's type along X-axis
+            </summary>
+            \~Chinese
+            <summary>
+            X轴上的文本锚点坐标位置类型
+            </summary>
+        </member>
+        <member name="F:ASEva.UIAvalonia.GLTextTask.anchorY">
+            \~English
+            <summary>
+            Anchor point's type along Y-axis
+            </summary>
+            \~Chinese
+            <summary>
+            Y轴上的文本锚点坐标位置类型
+            </summary>
+        </member>
+        <member name="F:ASEva.UIAvalonia.GLTextTask.red">
+            \~English
+            <summary>
+            Red component of text color
+            </summary>
+            \~Chinese
+            <summary>
+            文本绘制颜色红色分量
+            </summary>
+        </member>
+        <member name="F:ASEva.UIAvalonia.GLTextTask.green">
+            \~English
+            <summary>
+            Green component of text color
+            </summary>
+            \~Chinese
+            <summary>
+            文本绘制颜色绿色分量
+            </summary>
+        </member>
+        <member name="F:ASEva.UIAvalonia.GLTextTask.blue">
+            \~English
+            <summary>
+            Blue component of text color
+            </summary>
+            \~Chinese
+            <summary>
+            文本绘制颜色蓝色分量
+            </summary>
+        </member>
+        <member name="F:ASEva.UIAvalonia.GLTextTask.alpha">
+            \~English
+            <summary>
+            Alpha component of text color, 0 as 255
+            </summary>
+            \~Chinese
+            <summary>
+            文本绘制颜色Alpha通道分量，0将被视为255
+            </summary>
+        </member>
+        <member name="F:ASEva.UIAvalonia.GLTextTask.fontName">
+            \~English
+            <summary>
+            Font name, null as default font
+            </summary>
+            \~Chinese
+            <summary>
+            文本字体，空则使用默认字体
+            </summary>
+        </member>
+        <member name="F:ASEva.UIAvalonia.GLTextTask.sizeScale">
+            \~English
+            <summary>
+            Ratio to the default size, 0 as 1
+            </summary>
+            \~Chinese
+            <summary>
+            文本相对于默认尺寸的比例，0将被视为1
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.GLTextTasks">
+            \~English
+            <summary>
+            (api:avalonia=1.0.10) OpenGL text drawing task list
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.10) OpenGL文本绘制任务对象
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.GLTextTasks.Add(System.String,System.Int32,System.Int32,System.Byte,System.Byte,System.Byte,System.Single)">
+            \~English
+            <summary>
+            Add task
+            </summary>
+            \~Chinese
+            <summary>
+            添加文本绘制任务
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.GLTextTasks.Add(ASEva.UIAvalonia.GLTextTask)">
+            \~English
+            <summary>
+            Add task
+            </summary>
+            \~Chinese
+            <summary>
+            添加文本绘制任务
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.GLSizeInfo">
+            \~English
+            <summary>
+            (api:avalonia=1.0.10) OpenGL rendering size info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.10) OpenGL绘制尺寸信息
+            </summary>
+        </member>
+        <member name="P:ASEva.UIAvalonia.GLSizeInfo.RealWidth">
+            \~English
+            <summary>
+            Width in physical pixels
+            </summary>
+            \~Chinese
+            <summary>
+            物理像素宽度
+            </summary>
+        </member>
+        <member name="P:ASEva.UIAvalonia.GLSizeInfo.RealHeight">
+            \~English
+            <summary>
+            Height in physical pixels
+            </summary>
+            \~Chinese
+            <summary>
+            物理像素高度
+            </summary>
+        </member>
+        <member name="P:ASEva.UIAvalonia.GLSizeInfo.AspectRatio">
+            \~English
+            <summary>
+            Ratio of width to height
+            </summary>
+            \~Chinese
+            <summary>
+            宽度与高度之比
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.GLSizeInfo.#ctor(System.Int32,System.Int32,System.Single)">
+            \~English
+            <summary>
+            Constructor
+            </summary>
+            \~Chinese
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.GLEventArgs">
+            \~English
+            <summary>
+            (api:avalonia=1.0.10) GLView event argument base class
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.10) GLView事件参数基类
+            </summary>
+        </member>
+        <member name="P:ASEva.UIAvalonia.GLEventArgs.GL">
+            \~English
+            <summary>
+            OpenGL object
+            </summary>
+            \~Chinese
+            <summary>
+            OpenGL对象
+            </summary>
+        </member>
+        <member name="P:ASEva.UIAvalonia.GLEventArgs.FB">
+            \~English
+            <summary>
+            Framebuffer ID
+            </summary>
+            \~Chinese
+            <summary>
+            帧缓冲ID
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.GLResizeEventArgs">
+            \~English
+            <summary>
+            (api:avalonia=1.0.10) GLView resize event argument
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.10) GLView缩放事件参数
+            </summary>
+        </member>
+        <member name="P:ASEva.UIAvalonia.GLResizeEventArgs.SizeInfo">
+            \~English
+            <summary>
+            Resized size info
+            </summary>
+            \~Chinese
+            <summary>
+            缩放后的尺寸信息
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.GLRenderEventArgs">
+            \~English
+            <summary>
+            (api:avalonia=1.0.10) GLView render event argument
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.10) GLView渲染事件参数
+            </summary>
+        </member>
+        <member name="P:ASEva.UIAvalonia.GLRenderEventArgs.TextTasks">
+            \~English
+            <summary>
+            Text drawing task list
+            </summary>
+            \~Chinese
+            <summary>
+            文本绘制任务对象
             </summary>
         </member>
         <member name="T:ASEva.UIAvalonia.SkiaRenderEventArgs">

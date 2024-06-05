@@ -1,8 +1,8 @@
 ﻿/*! \mainpage
  * \~English This library contains the APIs for Avalonia. See ASEva.UIAvalonia for details. \n
  * \~Chinese 此类库为ASEva-API中基于Avalonia的部分。详见 ASEva.UIAvalonia \n
- * \~English This document corresponds to API version: 1.0.9 \n\n
- * \~Chinese 本文档对应API版本：1.0.9 \n\n
+ * \~English This document corresponds to API version: 1.0.10 \n\n
+ * \~Chinese 本文档对应API版本：1.0.10 \n\n
  * 
  * \~English Official documents: https://docs.avaloniaui.net \n
  * \~Chinese 官方文档: https://docs.avaloniaui.net
@@ -17,7 +17,7 @@ using ASEva.Utility;
 namespace ASEva.UIAvalonia
 {
     /// <summary>
-    /// version=1.0.9
+    /// version=1.0.10
     /// </summary>
     public class APIInfo
     {
@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 0, 9, 1); // Update log / 更新记录: 补上SkiaView.QueueRender
+            return new Version(1, 0, 10, 0); // Update log / 更新记录: 新增GLView
         }
 
         /// \~English

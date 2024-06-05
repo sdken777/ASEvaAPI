@@ -42,6 +42,12 @@
     <Reference Include="CustomMessageBox.Avalonia">
       <HintPath>../bin64/CustomMessageBox.Avalonia.dll</HintPath>
     </Reference>
+    <Reference Include="SkiaSharp">
+      <HintPath>../bin64/SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PortableSharpGL">
+      <HintPath>../bin64/PortableSharpGL.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
