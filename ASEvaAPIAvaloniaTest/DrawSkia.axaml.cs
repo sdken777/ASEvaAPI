@@ -26,7 +26,7 @@ namespace ASEvaAPIAvaloniaTest
 
         public void OnLoop()
         {
-            skiaView.InvalidateVisual();
+            skiaView.QueueRender();
         }
 
         private void skiaView_Render(object sender, SkiaRenderEventArgs e)

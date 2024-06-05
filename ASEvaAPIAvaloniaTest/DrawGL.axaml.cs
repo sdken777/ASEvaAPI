@@ -11,6 +11,13 @@ namespace ASEvaAPIAvaloniaTest
         public DrawGL()
         {
             InitializeComponent();
+
+            this.AddToResources(Program.Texts);
+        }
+
+        public void OnLoop()
+        {
+            // glView.QueueRender();
         }
     }
 }

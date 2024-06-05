@@ -18,6 +18,7 @@ namespace ASEvaAPIAvaloniaTest
         {
             drawDefault.OnLoop();
             drawSkia.OnLoop();
+            drawGL.OnLoop();
         }
     }
 }

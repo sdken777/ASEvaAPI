@@ -15,6 +15,6 @@
                 <local:DrawSkia x:Name="drawSkia" />
             </TabItem>
         </TabControl>
-        <local:DrawGL Grid.Column="4" />
+        <local:DrawGL Grid.Column="4" x:Name="drawGL" />
     </Grid>
 </Panel>

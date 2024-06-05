@@ -71,6 +71,19 @@ namespace ASEva.UIAvalonia
             renderingLogic.OnRender += (canvas) => RenderSkia?.Invoke(this, new SkiaRenderEventArgs(canvas));
         }
 
+		/// \~English
+		/// <summary>
+		/// Request new rendering
+		/// </summary>
+		/// \~Chinese
+		/// <summary>
+		/// 提交新的渲染请求
+		/// </summary>
+        public void QueueRender()
+        {
+            InvalidateVisual();
+        }    
+
         public override void Render(DrawingContext context)
         {
             if (Bounds.Width > 0 && Bounds.Height > 0)

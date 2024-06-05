@@ -465,6 +465,16 @@
             构造函数
             </summary>
         </member>
+        <member name="M:ASEva.UIAvalonia.SkiaView.QueueRender">
+            \~English
+            <summary>
+            Request new rendering
+            </summary>
+            \~Chinese
+            <summary>
+            提交新的渲染请求
+            </summary>
+        </member>
         <member name="M:ASEva.UIAvalonia.SkiaView.InitializeComponent(System.Boolean)">
             <summary>
             Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
