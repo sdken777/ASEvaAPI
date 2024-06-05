@@ -10,7 +10,7 @@
             <Label Grid.Column="0" Content="{DynamicResource draw-gl-loop-interval}" />
             <Label Grid.Column="2" x:Name="labelLoopInterval" />
         </Grid>
-        <aseva:GLView Grid.Row="2" x:Name="glView" GLInitialize="glView_Initialize" GLResize="glView_Resize" GLRender="glView_Render" PointerPressed="glView_PointerPressed" PointerWheelChanged="glView_PointerWheelChanged" />
+        <aseva:EtoEmbedder Grid.Row="2" x:Name="etoEmbedder" />
         <Grid Grid.Row="4" ColumnDefinitions="Auto,8,Auto,8,Auto,*,Auto">
             <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource draw-gl-pause-render}" Click="linkPause_Click" />
             <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource draw-gl-resume-render}" Click="linkResume_Click" />
