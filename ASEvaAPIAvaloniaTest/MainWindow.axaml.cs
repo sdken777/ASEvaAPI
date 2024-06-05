@@ -21,18 +21,22 @@ namespace ASEvaAPIAvaloniaTest
             this.AddToResources(Program.Texts);
             DataContext = new Model();
 
-            var timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(15);
             timer.Tick += delegate
             {
                 if (tabControl.SelectedContent == basicPageA) basicPageA.OnLoop();
+                drawGroup.OnLoop();
             };
             timer.Start();
         }
 
         private async void MainWindow_Closing(object sender, WindowClosingEventArgs e)
         {
-            if (exitConfirmed || e.CloseReason != WindowCloseReason.WindowClosing) return;
+            if (exitConfirmed || e.CloseReason != WindowCloseReason.WindowClosing)
+            {
+                timer.Stop();
+                return;
+            }
 
             e.Cancel = true;
             exitConfirmed = await MessageBox.Show(Program.Texts["exit-confirm"], "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == MessageBoxResult.Yes;
@@ -147,5 +151,7 @@ namespace ASEvaAPIAvaloniaTest
             private bool checkedB;
             private bool selectedB;
         }
+
+        private DispatcherTimer timer = new DispatcherTimer();
     }
 }

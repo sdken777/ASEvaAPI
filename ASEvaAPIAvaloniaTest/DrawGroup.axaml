@@ -2,20 +2,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ASEvaAPIAvaloniaTest"
         x:Class="ASEvaAPIAvaloniaTest.DrawGroup"
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="350">
     <Grid ColumnDefinitions="Auto,8,Auto,8,*">
-        <Grid Grid.Column="0" RowDefinitions="*,8,*,8,*">
-            <Image Grid.Row="0" x:Name="imageView3" Width="100" Height="100" />
-            <Image Grid.Row="2" x:Name="imageView4" Width="100" Height="100" />
-            <Image Grid.Row="4" Width="100" Height="100" Source="resm:picture.png?assembly=ASEvaAPIAvaloniaTest" />
-        </Grid>
+        <local:DrawImage Grid.Column="0" />
         <TabControl Grid.Column="2" Width="220">
             <TabItem Header="{DynamicResource draw-tabpage-default}" FontSize="18">
-                <Canvas />
+                <local:DrawDefault x:Name="drawDefault" />
             </TabItem>
             <TabItem Header="{DynamicResource draw-tabpage-skia}" FontSize="18">
+                <local:DrawSkia />
             </TabItem>
         </TabControl>
+        <local:DrawGL Grid.Column="4" />
     </Grid>
 </Panel>
