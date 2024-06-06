@@ -188,7 +188,9 @@ namespace ASEvaAPIAvaloniaTest
             rowTexts.Add(Program.Texts.Format("draw-gl-info-vendor", info.vendor));
             rowTexts.Add(Program.Texts.Format("draw-gl-info-renderer", info.renderer));
             rowTexts.Add(Program.Texts.Format("draw-gl-info-extensions", String.Join('\n', info.ToExtensionList())));
-            Console.WriteLine(String.Join('\n', rowTexts)); // TODO
+            
+            var dialog = new InfoDialog(Program.Texts["draw-gl-info-title"], String.Join('\n', rowTexts));
+            dialog.ShowDialog(TopLevel.GetTopLevel(this) as Window);
         }
 
         private class LoopIntervalStat

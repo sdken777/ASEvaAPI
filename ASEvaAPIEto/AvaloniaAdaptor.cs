@@ -12,5 +12,6 @@ namespace ASEva.UIEto
         void ReleaseResource(object context);
         void HandleWindowActive(object context, bool active);
         void HandleControlResize(object context, double width, double height);
+        bool ShouldOverrideRunDialog();
     }
 }

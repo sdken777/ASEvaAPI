@@ -43,5 +43,10 @@ namespace ASEva.UIMonoMac
         {
             context = null;
         }
+
+        public bool ShouldOverrideRunDialog()
+        {
+            return false;
+        }
     }
 }

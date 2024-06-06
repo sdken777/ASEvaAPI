@@ -104,6 +104,11 @@ namespace ASEva.UIGtk
             XembedSocket.xembed_socket_update_both_allocation(ctx.Socket);
         }
 
+        public bool ShouldOverrideRunDialog()
+        {
+            return true;
+        }
+
         private class Context
         {
             public nint ParentXID { get; set; }
