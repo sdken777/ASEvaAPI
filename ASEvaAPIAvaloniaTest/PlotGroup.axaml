@@ -2,24 +2,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:oxyplot="clr-namespace:OxyPlot.Avalonia;assembly=OxyPlot.Avalonia"
+        xmlns:local="clr-namespace:ASEvaAPIAvaloniaTest"
         x:Class="ASEvaAPIAvaloniaTest.PlotGroup"
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="300">
-    <Grid ColumnDefinitions="Auto,8,*">
-        <TreeView Grid.Row="0" x:Name="treeView" Width="250" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" ItemsSource="{Binding TreeNodes}" SelectionChanged="treeView_SelectionChanged">
-            <TreeView.ItemTemplate>
-                <TreeDataTemplate ItemsSource="{Binding SubNodes}">
-                    <Border HorizontalAlignment="Left" CornerRadius="3" Padding="3">
-                        <TextBlock Text="{Binding Title}" />
-                    </Border>
-                </TreeDataTemplate>
-            </TreeView.ItemTemplate>
-            <TreeView.Styles>
-                <Style Selector="TreeViewItem">
-                    <Setter Property="IsExpanded" Value="{Binding IsExpanded}"/>
-                </Style>
-            </TreeView.Styles>
-        </TreeView>
-        <oxyplot:PlotView Grid.Column="2" x:Name="plotView" />
-    </Grid>
+    <TabControl>
+        <TabItem Header="OxyPlot" FontSize="18">
+            <local:PlotOxy />
+        </TabItem>
+        <TabItem Header="LiveCharts" FontSize="18">
+        </TabItem>
+    </TabControl>
 </Panel>

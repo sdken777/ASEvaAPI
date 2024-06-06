@@ -57,6 +57,9 @@
     <Reference Include="OxyPlotExamples">
       <HintPath>../bin64/OxyPlotExamples.dll</HintPath>
     </Reference>
+    <Reference Include="LiveChartsExamples">
+      <HintPath>../bin64/LiveChartsExamples.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
