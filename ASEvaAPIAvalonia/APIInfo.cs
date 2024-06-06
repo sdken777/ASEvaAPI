@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 0, 10, 1); // Update log / 更新记录: EtoEmbedDialog响应OnDialogClose
+            return new Version(1, 0, 10, 2); // Update log / 更新记录: 修正EtoEmbedDialog打开有可能全黑的问题
         }
 
         /// \~English

@@ -4,6 +4,7 @@ using System.Linq;
 using ASEva.UIEto;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Threading;
 
 namespace ASEva.UIAvalonia
 {
@@ -28,8 +29,10 @@ namespace ASEva.UIAvalonia
                 stream.Close();
             }
 
+            var defaultWidth = panel.DefaultSize.Width;
+
             Title = panel.Title;
-            Width = panel.DefaultSize.Width;
+            Width = defaultWidth + 1;
             Height = panel.DefaultSize.Height;
             MinWidth = panel.MinSize.Width;
             MinHeight = panel.MinSize.Height;
@@ -41,6 +44,8 @@ namespace ASEva.UIAvalonia
             }
 
             panel.OnDialogClose += delegate { Close(); };
+            
+            DispatcherTimer.RunOnce(() => Width = defaultWidth, TimeSpan.FromMilliseconds(1)); // 触发一次resize
         }
     }
 }
