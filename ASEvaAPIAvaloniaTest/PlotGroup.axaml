@@ -10,6 +10,7 @@
             <local:PlotOxy />
         </TabItem>
         <TabItem Header="LiveCharts" FontSize="18">
+            <local:PlotLiveCharts />
         </TabItem>
     </TabControl>
 </Panel>

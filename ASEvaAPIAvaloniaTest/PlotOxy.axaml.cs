@@ -17,7 +17,6 @@ namespace ASEvaAPIAvaloniaTest
         {
             InitializeComponent();
 
-            this.AddToResources(Program.Texts);
             DataContext = model;
 
             RenderingCapabilities.PixelScale = 1;
