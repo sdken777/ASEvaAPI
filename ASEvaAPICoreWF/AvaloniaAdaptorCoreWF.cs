@@ -49,6 +49,11 @@ namespace ASEva.UICoreWF
             context = null;
         }
 
+        public bool ShouldOverrideRunDialog()
+        {
+            return false;
+        }
+
         public static bool IsActive(System.Windows.Forms.Control control)
         {
             var target = control;
