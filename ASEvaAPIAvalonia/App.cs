@@ -35,12 +35,29 @@ namespace ASEva.UIAvalonia
         /// <returns>是否成功</returns>
         public static bool Init()
         {
+            return Init(() => AppBuilder.Configure<AvaloniaApplication>().UsePlatformDetect().WithInterFont());
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:avalonia=1.0.12) Initialize application with the specified AppBuilder
+        /// </summary>
+        /// <param name="appBuilderCreation">The function to create AppBuilder object</param>
+        /// <returns>Whether initialization is successfull</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.0.12) 使用指定的AppBuilder进行应用程序初始化
+        /// </summary>
+        /// <param name="appBuilderCreation">创建AppBuilder对象的函数</param>
+        /// <returns>是否成功</returns>
+        public static bool Init(Func<AppBuilder> appBuilderCreation)
+        {
             if (!initAppInvoked)
             {
                 initAppInvoked = true;
                 if (EtoInitializer.Validate())
                 {
-                    appBuilder = AppBuilder.Configure<AvaloniaApplication>().UsePlatformDetect().WithInterFont();
+                    appBuilder = appBuilderCreation?.Invoke();
                     if (appBuilder != null)
                     {
                         appLifetime = new ClassicDesktopStyleApplicationLifetime();

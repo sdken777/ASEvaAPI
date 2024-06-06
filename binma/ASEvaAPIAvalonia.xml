@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.0.11
+            version=1.0.12
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -65,6 +65,20 @@
             <summary>
             应用程序初始化
             </summary>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:ASEva.UIAvalonia.App.Init(System.Func{Avalonia.AppBuilder})">
+            \~English
+            <summary>
+            (api:avalonia=1.0.12) Initialize application with the specified AppBuilder
+            </summary>
+            <param name="appBuilderCreation">The function to create AppBuilder object</param>
+            <returns>Whether initialization is successfull</returns>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.12) 使用指定的AppBuilder进行应用程序初始化
+            </summary>
+            <param name="appBuilderCreation">创建AppBuilder对象的函数</param>
             <returns>是否成功</returns>
         </member>
         <member name="M:ASEva.UIAvalonia.App.Run(Avalonia.Controls.Window)">
