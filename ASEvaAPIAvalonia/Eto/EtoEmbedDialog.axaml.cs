@@ -39,6 +39,8 @@ namespace ASEva.UIAvalonia
                 CanResize = false;
                 if (!panel.WithBorder) SystemDecorations = SystemDecorations.None;
             }
+
+            panel.OnDialogClose += delegate { Close(); };
         }
     }
 }
