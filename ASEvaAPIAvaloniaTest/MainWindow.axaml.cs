@@ -46,6 +46,7 @@ namespace ASEvaAPIAvaloniaTest
 
         private void itemFullScreen_Click(object sender, RoutedEventArgs e)
         {
+            if (WindowState == WindowState.Maximized) WindowState = WindowState.Normal;
             WindowState = WindowState.FullScreen;
         }
 

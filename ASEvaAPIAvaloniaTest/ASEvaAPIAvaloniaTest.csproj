@@ -48,6 +48,15 @@
     <Reference Include="PortableSharpGL">
       <HintPath>../bin64/PortableSharpGL.dll</HintPath>
     </Reference>
+    <Reference Include="OxyPlot">
+      <HintPath>../bin64/OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.Avalonia">
+      <HintPath>../bin64/OxyPlot.Avalonia.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlotExamples">
+      <HintPath>../bin64/OxyPlotExamples.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
