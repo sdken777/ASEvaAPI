@@ -326,5 +326,43 @@
             (api:wpf=2.0.0) 动态加载xaml
             </summary>
         </member>
+        <member name="T:ASEva.UIEto.CommonImageWpfExtensions">
+            \~English
+            <summary>
+            (api:wpf=2.0.4) Extensions for common image object
+            </summary>
+            \~Chinese
+            <summary>
+            (api:wpf=2.0.4) 方便使用通用图像数据的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.CommonImageWpfExtensions.ToBitmapSource(ASEva.Samples.CommonImage)">
+            \~English
+            <summary>
+            Convert to BitmapSource object
+            </summary>
+            <param name="image">Common image object</param>
+            <returns>BitmapSource object</returns>
+            \~Chinese
+            <summary>
+            转为BitmapSource对象
+            </summary>
+            <param name="image">通用图像数据</param>
+            <returns>BitmapSource对象</returns>
+        </member>
+        <member name="M:ASEva.UIEto.CommonImageWpfExtensions.ToCommonImage(System.Windows.Media.Imaging.BitmapSource)">
+            \~English
+            <summary>
+            Convert to common image object
+            </summary>
+            <param name="bitmap">BitmapSource object</param>
+            <returns>Common image object</returns>
+            \~Chinese
+            <summary>
+            转为通用图像数据
+            </summary>
+            <param name="bitmap">BitmapSource对象</param>
+            <returns>通用图像数据</returns>
+        </member>
     </members>
 </doc>

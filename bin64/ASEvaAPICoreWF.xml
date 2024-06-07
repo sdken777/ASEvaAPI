@@ -326,6 +326,44 @@
             (api:corewf=3.0.0) 双缓存ListView
             </summary>
         </member>
+        <member name="T:ASEva.UICoreWF.CommonImageCoreWFExtensions">
+            \~English
+            <summary>
+            (api:corewf=3.1.1) Extensions for common image object
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.1.1) 方便使用通用图像数据的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.CommonImageCoreWFExtensions.ToWinformBitmap(ASEva.Samples.CommonImage)">
+            \~English
+            <summary>
+            Convert to Winform bitmap object
+            </summary>
+            <param name="image">Common image object</param>
+            <returns>Winform bitmap object</returns>
+            \~Chinese
+            <summary>
+            转为Winform位图对象
+            </summary>
+            <param name="image">通用图像数据</param>
+            <returns>Winform位图对象</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.CommonImageCoreWFExtensions.ToCommonImage(System.Drawing.Bitmap)">
+            \~English
+            <summary>
+            Convert to common image object
+            </summary>
+            <param name="bitmap">Winform bitmap object</param>
+            <returns>Common image object</returns>
+            \~Chinese
+            <summary>
+            转为通用图像数据
+            </summary>
+            <param name="bitmap">Winform位图对象</param>
+            <returns>通用图像数据</returns>
+        </member>
         <member name="T:ASEva.UICoreWF.WinformIconExtensions">
             \~English
             <summary>
