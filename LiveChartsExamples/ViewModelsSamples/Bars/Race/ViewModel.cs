@@ -81,7 +81,7 @@ public partial class ViewModel : ObservableObject
     private Axis[] _xAxes = { new Axis { SeparatorsPaint = new SolidColorPaint(new SKColor(220, 220, 220)) } };
 
     [ObservableProperty]
-    private Axis[] _yAxes = { new Axis { ShowSeparatorLines = false, Labels = new string[] { "7", "6", "5", "4", "3", "2", "1" } } };
+    private Axis[] _yAxes = { new Axis { ShowSeparatorLines = false, ForceStepToMin = true, Labels = new string[] { "7", "6", "5", "4", "3", "2", "1" } } };
 
     public bool IsReading { get; set; } = true;
 
