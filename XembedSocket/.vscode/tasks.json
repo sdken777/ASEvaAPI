@@ -2,7 +2,7 @@
     "options": {
         "env": {
             "TYPE": "lib",
-            "COMPILE": "local",
+            "COMPILE": "cross",
             "TARGET": "XembedSocket",
             "DEPENDS_X86_LINUX": "X11",
             "DEPENDS_ARM_LINUX": "X11",
@@ -71,20 +71,23 @@
                 "PLATFORM=${input:helper_platform_code}",
                 "DEPENDS=${input:helper_platform_env_var_depends}",
             ],
+            // "dependsOn": [
+            //     "Subtask: Generate resource code",
+            // ],
             "problemMatcher":"$gcc",
         },
         {
             "type": "process",
             "label": "Build (Release)",
             "group": "build",
-            "command": "make",
-            "args": [
-                "-j${input:helper_thread_count}",
-                "MODE=release",
-                "PLATFORM=${input:helper_platform_code}",
-                "DEPENDS=${input:helper_platform_env_var_depends}",
+            "command": "echo",
+            "args": [ "Done." ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                // "Subtask: Generate resource code",
+                "Subtask: Build for X86-Ubuntu1804 target (Release)",
+                "Subtask: Build for Arm-Ubuntu1604 target (Release)",
             ],
-            "problemMatcher":"$gcc",
         },
         {
             "type": "process",
@@ -94,6 +97,45 @@
                 "clean",
             ],
             "problemMatcher": []
+        },
+
+        // Subtasks:
+
+        {
+            "type": "process",
+            "label": "Subtask: Generate resource code",
+            "hide": true,
+            "command": "dotnet",
+            "args": [
+                "../bin/VSCodeHelper.dll",
+                "gen_resource_code",
+            ],
+        },
+        {
+            "type": "process",
+            "label": "Subtask: Build for X86-Ubuntu1804 target (Release)",
+            "hide": true,
+            "command": "make",
+            "args": [
+                "-j${input:helper_thread_count}",
+                "MODE=release",
+                "PLATFORM=linux",
+                "DEPENDS=$(DEPENDS_X86_LINUX)",
+            ],
+            "problemMatcher":"$gcc",
+        },
+        {
+            "type": "process",
+            "label": "Subtask: Build for Arm-Ubuntu1604 target (Release)",
+            "hide": true,
+            "command": "make",
+            "args": [
+                "-j${input:helper_thread_count}",
+                "MODE=release",
+                "PLATFORM=linuxarm",
+                "DEPENDS=$(DEPENDS_ARM_LINUX)",
+            ],
+            "problemMatcher":"$gcc",
         },
     ],
     "version": "2.0.0"

@@ -8,5 +8,10 @@
         "*.vcxproj": true,
         "*.vcxproj.user": true,
         "*.vcxproj.filters": true
+    },
+    "files.associations": {
+        "xlib.h": "c",
+        "stdlib.h": "c",
+        "xembed.h": "c"
     }
 }

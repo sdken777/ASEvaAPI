@@ -2,7 +2,7 @@
 # Parameter Description
 # [Required] TYPE: Output target type (lib: library file, exe: executable file)
 # [Required] MODE: Compile mode (debug, release)
-# [Required] PLATFORM: Target running platform (linux: Linux 64bit X86, linuxarm: Linux 64bit Arm, windows: Windows 64bit X86, macosarm: MacOS 64bit Arm)
+# [Required] PLATFORM: Target running platform (linux: Linux 64bit X86, linuxarm: Linux 64bit Arm, windows: Windows 64bit X86, macos: MacOS 64bit X86, macosarm: MacOS 64bit Arm)
 # [Required] COMPILE: Compile toolchain (local: native compile, cross: cross-compile)
 # [Required] TARGET: The target name. Prefix and suffix are not required
 # [Optional] TARGET_VERSION: Target version number. Only for.so and .dylib library files
@@ -42,6 +42,9 @@ ifeq ($(HOST_NAME), linux-aarch64)
 endif
 ifeq ($(HOST_NAME), msys_nt-x86_64)
 	HOST=windows
+endif
+ifeq ($(HOST_NAME), darwin-x86_64)
+	HOST=macos
 endif
 ifeq ($(HOST_NAME), darwin-arm64)
 	HOST=macosarm
@@ -91,6 +94,24 @@ ifeq ($(PLATFORM), windows)
 	ENV_DEFINE=SPADAS_ENV_WINDOWS
 	ARCH_DEFINE=SPADAS_ARCH_X86
 	OBJS=$(SRCS_CPP:.cpp=.o) $(SRCS_CC:.cc=.o) $(SRCS_C:.c=.o)
+endif
+ifeq ($(PLATFORM), macos)
+	USE_CLANG=yes
+	INCLUDE_DIR=includem
+	LIB_DIR=libm
+	BIN_DIR=binm
+	LIB_PREFIX=lib
+	LIB_EXT=.dylib
+	ifdef TARGET_VERSION
+		BIN_EXT=.$(TARGET_VERSION).dylib
+	else
+		BIN_EXT=.dylib
+	endif
+	EXE_EXT=
+	ENV_DEFINE=SPADAS_ENV_MACOS
+	ARCH_DEFINE=SPADAS_ARCH_X86
+	SRCS_MM=$(filter-out $(FILTEROUT_MM), $(wildcard *.mm **/*.mm **/**/*.mm **/**/**/*.mm))
+	OBJS=$(SRCS_CPP:.cpp=.o) $(SRCS_CC:.cc=.o) $(SRCS_C:.c=.o) $(SRCS_MM:.mm=.o)
 endif
 ifeq ($(PLATFORM), macosarm)
 	INCLUDE_DIR=includema
@@ -147,7 +168,7 @@ XTOOLS_PATH=/opt/xtools-uni
 CLANG_PATH=/opt/clang-15
 
 # Compile toolchain related
-COMPILE_OPTION_CPP=-std=c++17
+COMPILE_OPTION_CPP=-std=c++11
 COMPILER_C_EXE=$(CLANG_PATH)/bin/clang
 COMPILER_CPP_EXE=$(CLANG_PATH)/bin/clang++
 COMPILER_OBJC_EXE=$(CLANG_PATH)/bin/clang++
@@ -158,13 +179,16 @@ endif
 ifeq ($(COMPILE), cross)
 	LINK_OPTION:=$(LINK_OPTION) -fuse-ld=lld
 	ifeq ($(PLATFORM), linux)
-		SYSROOT_OPTION=--sysroot=$(XTOOLS_PATH)/x86-ubuntu2204 --target=x86_64-ubuntu22.04-linux-gnu
+		SYSROOT_OPTION=--sysroot=$(XTOOLS_PATH)/x86-ubuntu1804 --target=x86_64-ubuntu18.04-linux-gnu
 	endif
 	ifeq ($(PLATFORM), linuxarm)
-		SYSROOT_OPTION=--sysroot=$(XTOOLS_PATH)/arm-ubuntu2204 --target=aarch64-ubuntu22.04-linux-gnu
+		SYSROOT_OPTION=--sysroot=$(XTOOLS_PATH)/arm-ubuntu1604 --target=aarch64-ubuntu16.04-linux-gnu
 	endif
 	ifeq ($(PLATFORM), windows)
-		SYSROOT_OPTION=--sysroot=$(XTOOLS_PATH)/x86-windows10 --target=x86_64-w64-mingw32
+		SYSROOT_OPTION=--sysroot=$(XTOOLS_PATH)/x86-windows7 --target=x86_64-w64-mingw32
+	endif
+	ifeq ($(PLATFORM), macos)
+		SYSROOT_OPTION=--sysroot=$(XTOOLS_PATH)/x86-macos1013 --target=x86_64-apple-darwin14
 	endif
 	ifeq ($(PLATFORM), macosarm)
 		SYSROOT_OPTION=--sysroot=$(XTOOLS_PATH)/arm-macos1203 --target=arm64-apple-darwin21.4.0
@@ -190,6 +214,9 @@ ifeq ($(PLATFORM), linuxarm)
 endif
 ifeq ($(PLATFORM), windows)
 	WL_OPTION=-Wl
+endif
+ifeq ($(PLATFORM), macos)
+	WL_OPTION=-Wl,-rpath,./
 endif
 ifeq ($(PLATFORM), macosarm)
 	WL_OPTION=-Wl,-rpath,./
@@ -219,6 +246,12 @@ ifeq ($(TYPE), lib)
 	ifeq ($(PLATFORM), windows)
 		ifeq ($(MODE), release)
 			WL_OPTION:=$(WL_OPTION),--out-implib,$(LIB_PATH)/$(LIB_NAME)
+		endif
+	endif
+	ifeq ($(PLATFORM), macos)
+		WL_OPTION:=$(WL_OPTION),-install_name,$(OUT_NAME)
+		ifeq ($(MODE), release)
+			POSTLIB_COMMAND=cp -vf $(OUT_PATH)/$(OUT_NAME) $(LIB_PATH)/$(LIB_NAME)
 		endif
 	endif
 	ifeq ($(PLATFORM), macosarm)

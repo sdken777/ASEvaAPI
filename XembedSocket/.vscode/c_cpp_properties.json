@@ -1,11 +1,14 @@
 {
     "configurations": [
         {
-            "name": "X86-Linux Host",
+            "name": "General Host / X86-Ubuntu1804 Target",
             "compilerPath": "/opt/clang-15/bin/clang++",
+            "compilerArgs": [
+                "--sysroot=/opt/xtools-uni/x86-ubuntu1804",
+                "--target=x86_64-ubuntu18.04-linux-gnu"
+            ],
             "includePath": [
                 "${workspaceFolder}",
-                // "${workspaceFolder}/../includex",
                 "${workspaceFolder}/../include"
             ],
             "defines": [
@@ -13,14 +16,17 @@
                 "SPADAS_ARCH_X86"
             ],
             "intelliSenseMode": "clang-x64",
-            "cppStandard": "c++17"
+            "cppStandard": "c++11"
         },
         {
-            "name": "Arm-Linux Host",
+            "name": "General Host / Arm-Ubuntu1604 Target",
             "compilerPath": "/opt/clang-15/bin/clang++",
+            "compilerArgs": [
+                "--sysroot=/opt/xtools-uni/arm-ubuntu1604",
+                "--target=aarch64-ubuntu16.04-linux-gnu"
+            ],
             "includePath": [
                 "${workspaceFolder}",
-                // "${workspaceFolder}/../includexa",
                 "${workspaceFolder}/../include"
             ],
             "defines": [
@@ -28,8 +34,8 @@
                 "SPADAS_ARCH_ARM"
             ],
             "intelliSenseMode": "clang-arm64",
-            "cppStandard": "c++17"
-        },
+            "cppStandard": "c++11"
+        }
     ],
     "version": 4
 }
