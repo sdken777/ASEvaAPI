@@ -114,11 +114,11 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// (api:app=2.17.1) Camera at any position with customized model, use CustomizedCameraMeta
+        /// (api:app=3.0.10) Camera at any position with customized model, use CustomizedCameraMeta
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=2.17.1) 自定义模型的任意位置摄像头，使用 CustomizedCameraMeta
+        /// (api:app=3.0.10) 自定义模型的任意位置摄像头，使用 CustomizedCameraMeta
         /// </summary>
         CustomizedCamera = 10,
     }
@@ -891,11 +891,11 @@ namespace ASEva.Samples
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Related information of customized camera
+    /// (api:app=3.0.10) Related information of customized camera
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 自定义摄像头关联信息
+    /// (api:app=3.0.10) 自定义摄像头关联信息
     /// </summary>
     public class CustomizedCameraMeta
     {

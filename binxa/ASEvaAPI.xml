@@ -4190,7 +4190,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.0.9
+            version=3.0.10
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -10903,6 +10903,16 @@
             任意位置摄像头（鱼眼模型），使用 FisheyeCameraMeta
             </summary>
         </member>
+        <member name="F:ASEva.Samples.SpecialCameraType.CustomizedCamera">
+            \~English
+            <summary>
+            (api:app=3.0.10) Camera at any position with customized model, use CustomizedCameraMeta
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.10) 自定义模型的任意位置摄像头，使用 CustomizedCameraMeta
+            </summary>
+        </member>
         <member name="T:ASEva.Samples.CommonCameraMeta">
             \~English
             <summary>
@@ -11663,6 +11673,166 @@
             抖动偏置俯仰角（仅部分摄像头有效）
             </summary>
         </member>
+        <member name="T:ASEva.Samples.CustomizedCameraMeta">
+            \~English
+            <summary>
+            (api:app=3.0.10) Related information of customized camera
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.10) 自定义摄像头关联信息
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CustomizedCameraMeta.Inverted">
+            \~English
+            <summary>
+            Whether inverted
+            </summary>
+            \~Chinese
+            <summary>
+            是否作了翻转
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CustomizedCameraMeta.VFlipped">
+            \~English
+            <summary>
+            Whether vertical flipped
+            </summary>
+            \~Chinese
+            <summary>
+            是否作了镜像
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CustomizedCameraMeta.Undistorted">
+            \~English
+            <summary>
+            Whether undistorted
+            </summary>
+            \~Chinese
+            <summary>
+            是否作了去畸变
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CustomizedCameraMeta.UndistortedHFOV">
+            \~English
+            <summary>
+            Horizontal FOV of ideal pinhole model after undistorted [deg]
+            </summary>
+            \~Chinese
+            <summary>
+            去畸变后的理想针孔模型图像的横向视场角 [deg]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CustomizedCameraMeta.MapHandle">
+            \~English
+            <summary>
+            Handle of the customized model's map table
+            </summary>
+            \~Chinese
+            <summary>
+            自定义模型映射表句柄
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CustomizedCameraMeta.PositionX">
+            \~English
+            <summary>
+            X coordinate of position [m]
+            </summary>
+            \~Chinese
+            <summary>
+            位置坐标X轴分量 [m]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CustomizedCameraMeta.PositionY">
+            \~English
+            <summary>
+            Y coordinate of position [m]
+            </summary>
+            \~Chinese
+            <summary>
+            位置坐标Y轴分量 [m]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CustomizedCameraMeta.PositionZ">
+            \~English
+            <summary>
+            Z coordinate of position [m]
+            </summary>
+            \~Chinese
+            <summary>
+            位置坐标Z轴分量 [m]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CustomizedCameraMeta.YawRectified">
+            \~English
+            <summary>
+            Whether yaw rectified
+            </summary>
+            \~Chinese
+            <summary>
+            是否作了横摆对正
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CustomizedCameraMeta.OriginYaw">
+            \~English
+            <summary>
+            Original yaw angle [°]
+            </summary>
+            \~Chinese
+            <summary>
+            原横摆角 [°]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CustomizedCameraMeta.RectifiedYaw">
+            \~English
+            <summary>
+            Yaw angle after rectified [°]
+            </summary>
+            \~Chinese
+            <summary>
+            对正后的横摆角 [°]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CustomizedCameraMeta.PitchRectified">
+            \~English
+            <summary>
+            Whether pitch rectified
+            </summary>
+            \~Chinese
+            <summary>
+            是否作了俯仰对正
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CustomizedCameraMeta.OriginPitch">
+            \~English
+            <summary>
+            Original pitch angle
+            </summary>
+            \~Chinese
+            <summary>
+            原俯仰角 [°]
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CustomizedCameraMeta.RollRectified">
+            \~English
+            <summary>
+            Whether roll rectified
+            </summary>
+            \~Chinese
+            <summary>
+            是否作了横滚对正
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.CustomizedCameraMeta.OriginRoll">
+            \~English
+            <summary>
+            Original roll angle
+            </summary>
+            \~Chinese
+            <summary>
+            原横滚角 [°]
+            </summary>
+        </member>
         <member name="T:ASEva.Samples.CameraInfo">
             \~English
             <summary>
@@ -11686,11 +11856,11 @@
         <member name="P:ASEva.Samples.CameraInfo.SpecialCameraInfo">
             \~English
             <summary>
-            Information of special camera, could be ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta
+            Information of special camera, could be ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta , ASEva.Samples.CustomizedCameraMeta
             </summary>
             \~Chinese
             <summary>
-            特殊摄像头信息，可以为 ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta
+            特殊摄像头信息，可以为 ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta , ASEva.Samples.CustomizedCameraMeta
             </summary>
         </member>
         <member name="P:ASEva.Samples.CameraInfo.HorizontalFov">
