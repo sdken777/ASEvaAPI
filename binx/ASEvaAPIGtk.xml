@@ -255,6 +255,58 @@
             (api:gtk=3.0.0) 组合框扩展方法
             </summary>
         </member>
+        <member name="T:ASEva.UIGtk.CommonImageGtkExtensions">
+            \~English
+            <summary>
+            (api:gtk=3.2.1) Extensions for common image object
+            </summary>
+            \~Chinese
+            <summary>
+            (api:gtk=3.2.1) 方便使用通用图像数据的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIGtk.CommonImageGtkExtensions.ToPixbuf(ASEva.Samples.CommonImage)">
+            \~English
+            <summary>
+            Convert to Gdk.Pixbuf object
+            </summary>
+            <param name="image">Common image object</param>
+            <returns>Gdk.Pixbuf object</returns>
+            \~Chinese
+            <summary>
+            转为Gdk.Pixbuf对象
+            </summary>
+            <param name="image">通用图像数据</param>
+            <returns>Gdk.Pixbuf对象</returns>
+        </member>
+        <member name="M:ASEva.UIGtk.CommonImageGtkExtensions.ToImageSurface(ASEva.Samples.CommonImage)">
+            \~English
+            <summary>
+            Convert to Cairo.ImageSurface object
+            </summary>
+            <param name="image">Common image object</param>
+            <returns>Cairo.ImageSurface object</returns>
+            \~Chinese
+            <summary>
+            转为Cairo.ImageSurface对象
+            </summary>
+            <param name="image">通用图像数据</param>
+            <returns>Cairo.ImageSurface对象</returns>
+        </member>
+        <member name="M:ASEva.UIGtk.CommonImageGtkExtensions.ToCommonImage(Gdk.Pixbuf)">
+            \~English
+            <summary>
+            Convert to common image object
+            </summary>
+            <param name="pixbuf">Gdk.Pixbuf object</param>
+            <returns>Common image object</returns>
+            \~Chinese
+            <summary>
+            转为通用图像数据
+            </summary>
+            <param name="pixbuf">Gdk.Pixbuf对象</param>
+            <returns>通用图像数据</returns>
+        </member>
         <member name="T:ASEva.UIGtk.FlowBoxExtension">
             \~English
             <summary>
@@ -601,11 +653,11 @@
         <member name="T:ASEva.UIGtk.VideoFrameSampleImage">
             \~English
             <summary>
-            (api:gtk=3.0.0) The image object of ASEva.Samples.VideoFrameSample
+            (api:gtk=3.0.0) The converted image object of ASEva.UIGtk.ImageConverter
             </summary>
             \~Chinese
             <summary>
-            (api:gtk=3.0.0) ASEva.Samples.VideoFrameSample 中的图像对象
+            (api:gtk=3.0.0) ASEva.UIGtk.ImageConverter 转换的图像对象
             </summary>
         </member>
         <member name="M:ASEva.UIGtk.VideoFrameSampleImage.#ctor(System.Int32,System.Int32)">

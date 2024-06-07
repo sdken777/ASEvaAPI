@@ -42,7 +42,7 @@ namespace ASEvaAPIAvaloniaTest
                     var options = new FilePickerSaveOptions
                     {
                         DefaultExtension = ".txt",
-                        FileTypeChoices = [ new FilePickerFileType(Program.Texts["basic-save-file-filter"]) { Patterns = ["*.txt"] } ]
+                        FileTypeChoices = new[] { new FilePickerFileType(Program.Texts["basic-save-file-filter"]) { Patterns = new[] {"*.txt"} } },
                     };
                     var file = await topLevel.StorageProvider.SaveFilePickerAsync(options);
                     if (file != null) await MessageBox.Show(file.Path, "");

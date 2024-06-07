@@ -137,6 +137,15 @@ if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
     if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-macos-any/* $TARGET_DIR/binm/
     fi
+    if [ "$EXPORT_AVALONIA" = "y" ]; then
+        cp -vf "$CUR_DIR"/binm/ASEvaAPIAvalonia.dll $TARGET_DIR/binm/
+        cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binm/
+        cp -vf "$CUR_DIR"/3party/avalonia-macos/* $TARGET_DIR/binm/
+    fi
+    if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/livecharts-common/* $TARGET_DIR/binm/
+        cp -vf "$CUR_DIR"/3party/livecharts-avalonia/* $TARGET_DIR/binm/
+    fi
 fi
 
 mkdir -vp $TARGET_DIR/binma
@@ -218,6 +227,12 @@ if [ "$EXPORT_DEVELOPER" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-doc/* $TARGET_DIR/binm/
         cp -vf "$CUR_DIR"/binm/ASEvaAPIEto.xml $TARGET_DIR/binm/
         cp -vf "$CUR_DIR"/binm/ASEvaAPIMonoMac.xml $TARGET_DIR/binm/
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/binm/ASEvaAPIAvalonia.xml $TARGET_DIR/binm/
+        fi
+        if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/livecharts-doc/* $TARGET_DIR/binm/
+        fi
     fi
 
     mkdir -vp $TARGET_DIR/binma/debug
@@ -328,6 +343,15 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-common/* $TARGET_DIR/binm/debug/
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
             cp -vf "$CUR_DIR"/3party/skia-macos-any/* $TARGET_DIR/binm/debug/
+        fi
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/binm/ASEvaAPIAvalonia.dll $TARGET_DIR/binm/debug/
+            cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binm/debug/
+            cp -vf "$CUR_DIR"/3party/avalonia-macos/* $TARGET_DIR/binm/debug/
+        fi
+        if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/livecharts-common/* $TARGET_DIR/binm/debug/
+            cp -vf "$CUR_DIR"/3party/livecharts-avalonia/* $TARGET_DIR/binm/debug/
         fi
     fi
 

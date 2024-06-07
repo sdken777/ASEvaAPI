@@ -317,6 +317,16 @@
             <param name="parent">parent参数</param>
             <returns>返回parent或null</returns>
         </member>
+        <member name="P:ASEva.UIEto.App.CanParentReceiveChildEvents">
+            \~English
+            <summary>
+            (api:eto=3.1.0) Whether the upper level control can receive events from all child controls
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.1.0) 上级控件是否能接收到所有层级子控件的事件
+            </summary>
+        </member>
         <member name="E:ASEva.UIEto.App.KeyDown">
             \~English
             <summary>
@@ -1033,6 +1043,20 @@
             <param name="image">通用图像数据</param>
             <returns>Eto位图对象</returns>
         </member>
+        <member name="M:ASEva.UIEto.CommonImageEtoExtensions.ToCommonImage(Eto.Drawing.Bitmap)">
+            \~English
+            <summary>
+            (api:eto=3.1.3) Convert to common image object
+            </summary>
+            <param name="bitmap">Eto bitmap object</param>
+            <returns>Common image object</returns>
+            \~Chinese
+            <summary>
+            (api:eto=3.1.3) 转为通用图像数据
+            </summary>
+            <param name="bitmap">Eto位图对象</param>
+            <returns>通用图像数据</returns>
+        </member>
         <member name="T:ASEva.UIEto.CommonImageSkiaExtensions">
             \~English
             <summary>
@@ -1514,6 +1538,16 @@
             <param name="control">目标控件</param>
             <param name="logicalPadding">目标控件的边缘空隙</param>
             <returns>已设置为Content的目标控件</returns>
+        </member>
+        <member name="T:ASEva.UIEto.SetToolTipExtensions">
+            \~English
+            <summary>
+            (api:eto=3.1.0) Extensions for conversion of setting tool tip
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.1.0) 方便设置tool tip的扩展
+            </summary>
         </member>
         <member name="T:ASEva.UIEto.SizerExtensions">
             \~English
@@ -2765,6 +2799,20 @@
             <param name="control">目标控件，若已存在则不添加</param>
             <param name="logicalHeight">目标控件的高度，至少为4</param>
         </member>
+        <member name="M:ASEva.UIEto.FlowLayout.AddControl(ASEva.UIEto.ControlAndMouseSources,System.Int32)">
+            \~English
+            <summary>
+            (api:eto=3.1.1) Add control
+            </summary>
+            <param name="control">Target control object, do nothing if it's already in the layout</param>
+            <param name="logicalHeight">Target logical height, at least 4</param>
+            \~Chinese
+            <summary>
+            (api:eto=3.1.1) 在底部添加控件
+            </summary>
+            <param name="control">目标控件，若已存在则不添加</param>
+            <param name="logicalHeight">目标控件的高度，至少为4</param>
+        </member>
         <member name="M:ASEva.UIEto.FlowLayout.InsertControl(System.Int32,Eto.Forms.Control,System.Int32)">
             \~English
             <summary>
@@ -2776,6 +2824,22 @@
             \~Chinese
             <summary>
             在指定序号位置添加控件
+            </summary>
+            <param name="index">指定序号位置，超出范围则添加至顶部或底部</param>
+            <param name="control">目标控件，若已存在则不添加</param>
+            <param name="logicalHeight">目标控件的高度，至少为4</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.InsertControl(System.Int32,ASEva.UIEto.ControlAndMouseSources,System.Int32)">
+            \~English
+            <summary>
+            (api:eto=3.1.1) Insert control at index
+            </summary>
+            <param name="index">Specified control index (If it's over the bound, insert to index 0 or add to last position)</param>
+            <param name="control">Target control object, do nothing if it's already in the layout</param>
+            <param name="logicalHeight">Target logical height, at least 4</param>
+            \~Chinese
+            <summary>
+            (api:eto=3.1.1) 在指定序号位置添加控件
             </summary>
             <param name="index">指定序号位置，超出范围则添加至顶部或底部</param>
             <param name="control">目标控件，若已存在则不添加</param>
@@ -2949,6 +3013,20 @@
             <param name="control">目标控件，若已存在则不添加</param>
             <param name="logicalHeight">目标控件的高度，至少为4</param>
         </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.AddControl(ASEva.UIEto.ControlAndMouseSources,System.Int32)">
+            \~English
+            <summary>
+            (api:eto=3.1.1) Add control
+            </summary>
+            <param name="control">Target control object, do nothing if it's already in the layout</param>
+            <param name="logicalHeight">Target logical height, at least 4</param>
+            \~Chinese
+            <summary>
+            (api:eto=3.1.1) 在底部添加控件
+            </summary>
+            <param name="control">目标控件，若已存在则不添加</param>
+            <param name="logicalHeight">目标控件的高度，至少为4</param>
+        </member>
         <member name="M:ASEva.UIEto.FlowLayout2D.InsertControl(System.Int32,Eto.Forms.Control,System.Int32)">
             \~English
             <summary>
@@ -2960,6 +3038,22 @@
             \~Chinese
             <summary>
             在指定序号位置添加控件
+            </summary>
+            <param name="index">指定序号位置，超出范围则添加至顶部或底部</param>
+            <param name="control">目标控件，若已存在则不添加</param>
+            <param name="logicalHeight">目标控件的高度，至少为4</param>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout2D.InsertControl(System.Int32,ASEva.UIEto.ControlAndMouseSources,System.Int32)">
+            \~English
+            <summary>
+            (api:eto=3.1.1) Insert control at index
+            </summary>
+            <param name="index">Specified control index (If it's over the bound, insert to index 0 or add to last position)</param>
+            <param name="control">Target control object, do nothing if it's already in the layout</param>
+            <param name="logicalHeight">Target logical height, at least 4</param>
+            \~Chinese
+            <summary>
+            (api:eto=3.1.1) 在指定序号位置添加控件
             </summary>
             <param name="index">指定序号位置，超出范围则添加至顶部或底部</param>
             <param name="control">目标控件，若已存在则不添加</param>
@@ -3803,6 +3897,16 @@
             \~Chinese
             <summary>
             (api:eto=3.0.0) 图像对象转换
+            </summary>
+        </member>
+        <member name="T:ASEva.UIEto.ControlAndMouseSources">
+            \~English
+            <summary>
+            (api:eto=3.1.1) Control and its mouse event source controls
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.1.1) 控件及其鼠标事件源控件
             </summary>
         </member>
         <member name="T:ASEva.UIEto.OverlayLayout">

@@ -111,6 +111,8 @@ cp -vf "$CUR_DIR"/3party/avalonia-common/*.* "$CUR_DIR"/binx/
 cp -vf "$CUR_DIR"/3party/avalonia-common/*.* "$CUR_DIR"/binx/debug/
 cp -vf "$CUR_DIR"/3party/avalonia-common/*.* "$CUR_DIR"/binxa/
 cp -vf "$CUR_DIR"/3party/avalonia-common/*.* "$CUR_DIR"/binxa/debug/
+cp -vf "$CUR_DIR"/3party/avalonia-common/*.* "$CUR_DIR"/binm/
+cp -vf "$CUR_DIR"/3party/avalonia-common/*.* "$CUR_DIR"/binm/debug/
 cp -vf "$CUR_DIR"/3party/avalonia-common/*.* "$CUR_DIR"/binma/
 cp -vf "$CUR_DIR"/3party/avalonia-common/*.* "$CUR_DIR"/binma/debug/
 
@@ -123,6 +125,9 @@ cp -vf "$CUR_DIR"/3party/avalonia-linux/*.* "$CUR_DIR"/binx/debug/
 cp -vf "$CUR_DIR"/3party/avalonia-linux/*.* "$CUR_DIR"/binxa/
 cp -vf "$CUR_DIR"/3party/avalonia-linux/*.* "$CUR_DIR"/binxa/debug/
 
+cp -vf "$CUR_DIR"/3party/avalonia-macos/*.* "$CUR_DIR"/binm/
+cp -vf "$CUR_DIR"/3party/avalonia-macos/*.* "$CUR_DIR"/binm/debug/
+
 cp -vf "$CUR_DIR"/3party/avalonia-macos/*.* "$CUR_DIR"/binma/
 cp -vf "$CUR_DIR"/3party/avalonia-macos/*.* "$CUR_DIR"/binma/debug/
 
@@ -132,6 +137,8 @@ cp -vf "$CUR_DIR"/3party/livecharts-common/*.* "$CUR_DIR"/binx/
 cp -vf "$CUR_DIR"/3party/livecharts-common/*.* "$CUR_DIR"/binx/debug/
 cp -vf "$CUR_DIR"/3party/livecharts-common/*.* "$CUR_DIR"/binxa/
 cp -vf "$CUR_DIR"/3party/livecharts-common/*.* "$CUR_DIR"/binxa/debug/
+cp -vf "$CUR_DIR"/3party/livecharts-common/*.* "$CUR_DIR"/binm/
+cp -vf "$CUR_DIR"/3party/livecharts-common/*.* "$CUR_DIR"/binm/debug/
 cp -vf "$CUR_DIR"/3party/livecharts-common/*.* "$CUR_DIR"/binma/
 cp -vf "$CUR_DIR"/3party/livecharts-common/*.* "$CUR_DIR"/binma/debug/
 
@@ -141,6 +148,8 @@ cp -vf "$CUR_DIR"/3party/livecharts-doc/*.* "$CUR_DIR"/binx/
 cp -vf "$CUR_DIR"/3party/livecharts-doc/*.* "$CUR_DIR"/binx/debug/
 cp -vf "$CUR_DIR"/3party/livecharts-doc/*.* "$CUR_DIR"/binxa/
 cp -vf "$CUR_DIR"/3party/livecharts-doc/*.* "$CUR_DIR"/binxa/debug/
+cp -vf "$CUR_DIR"/3party/livecharts-doc/*.* "$CUR_DIR"/binm/
+cp -vf "$CUR_DIR"/3party/livecharts-doc/*.* "$CUR_DIR"/binm/debug/
 cp -vf "$CUR_DIR"/3party/livecharts-doc/*.* "$CUR_DIR"/binma/
 cp -vf "$CUR_DIR"/3party/livecharts-doc/*.* "$CUR_DIR"/binma/debug/
 
@@ -150,6 +159,8 @@ cp -vf "$CUR_DIR"/3party/livecharts-avalonia/*.* "$CUR_DIR"/binx/
 cp -vf "$CUR_DIR"/3party/livecharts-avalonia/*.* "$CUR_DIR"/binx/debug/
 cp -vf "$CUR_DIR"/3party/livecharts-avalonia/*.* "$CUR_DIR"/binxa/
 cp -vf "$CUR_DIR"/3party/livecharts-avalonia/*.* "$CUR_DIR"/binxa/debug/
+cp -vf "$CUR_DIR"/3party/livecharts-avalonia/*.* "$CUR_DIR"/binm/
+cp -vf "$CUR_DIR"/3party/livecharts-avalonia/*.* "$CUR_DIR"/binm/debug/
 cp -vf "$CUR_DIR"/3party/livecharts-avalonia/*.* "$CUR_DIR"/binma/
 cp -vf "$CUR_DIR"/3party/livecharts-avalonia/*.* "$CUR_DIR"/binma/debug/
 
