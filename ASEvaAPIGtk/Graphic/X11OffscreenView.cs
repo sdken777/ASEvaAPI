@@ -21,8 +21,8 @@ namespace ASEva.UIGtk
             dummyArea.HeightRequest = 1;
 
             PackStart(realArea, true, true, 0);
-
-            var dummyBox = new Box(Orientation.Horizontal, 0);
+            
+            dummyBox = new Box(Orientation.Horizontal, 0);
             dummyBox.PackStart(dummyArea, false, false, 0);
             PackStart(dummyBox, false, false, 0);
 
@@ -303,6 +303,11 @@ namespace ASEva.UIGtk
 
                 var textTasks = new GLTextTasks();
                 callback.OnGLRender(gl, textTasks);
+
+                var clearColor = new float[4];
+                gl.GetFloat(OpenGL.GL_COLOR_CLEAR_VALUE, clearColor);
+                dummyBox.OverrideBackgroundColor(StateFlags.Normal, new Gdk.RGBA{ Red = clearColor[0], Green = clearColor[1], Blue = clearColor[2], Alpha = clearColor[3] });
+
                 gl.Finish();
 
                 if (antialias != GLAntialias.Disabled)
@@ -519,6 +524,7 @@ namespace ASEva.UIGtk
         private bool drawQueued = false;
         private DrawingArea realArea = new DrawingArea();
         private DrawingArea dummyArea = new DrawingArea();
+        private Box dummyBox;
         private GLAntialias antialias;
         private bool useLegacyAPI;
     }

@@ -1,0 +1,20 @@
+<Panel xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ASEvaAPIAvaloniaTest"
+        x:Class="ASEvaAPIAvaloniaTest.DrawGroup"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="350">
+    <Grid ColumnDefinitions="Auto,8,Auto,8,*">
+        <local:DrawImage Grid.Column="0" />
+        <TabControl Grid.Column="2" Width="220">
+            <TabItem Header="{DynamicResource draw-tabpage-default}" FontSize="18">
+                <local:DrawDefault x:Name="drawDefault" />
+            </TabItem>
+            <TabItem Header="{DynamicResource draw-tabpage-skia}" FontSize="18">
+                <local:DrawSkia x:Name="drawSkia" />
+            </TabItem>
+        </TabControl>
+        <local:DrawGL Grid.Column="4" x:Name="drawGL" />
+    </Grid>
+</Panel>

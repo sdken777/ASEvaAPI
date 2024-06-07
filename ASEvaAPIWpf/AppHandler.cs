@@ -18,7 +18,7 @@ namespace ASEva.UIWpf
 
     class AppHandlerWpf : AppHandler
     {
-        public Application CreateApp(out String uiBackend, out String webViewBackend)
+        public Application CreateApp(bool attach, out String uiBackend, out String webViewBackend)
         {
             // CHECK: 初始化WebView2环境
             WebView2Handler.InitCoreWebView2Environment();
@@ -131,6 +131,11 @@ namespace ASEva.UIWpf
         }
 
         public bool ShouldPassParent()
+        {
+            return true;
+        }
+
+        public bool CanParentReceiveChildEvents()
         {
             return true;
         }

@@ -10,6 +10,7 @@ namespace ASEva
     public interface AgencyHandler
     {
         String GetAppID();
+        ApplicationGUI GetAppGUI();
         String GetConfigFilesRoot();
         String GetAppFilesRoot();
         String GetTempFilesRoot();
@@ -32,6 +33,8 @@ namespace ASEva
         List<String> GetSampleTitle(String channelID);
         void AddSignalReference(String signalID);
         void RemoveSignalReference(String signalID);
+        void AddProcessorVideoReference(int videoChannel);
+        void RemoveProcessorVideoReference(int videoChannel);
         bool DeleteToRecycleBin(String path);
         bool IsMessageValid(String messageID, bool optional);
         bool IsSignalValid(String signalID, bool optional);
@@ -154,6 +157,7 @@ namespace ASEva
         SignalConfig SelectSignal(SignalConfig origin, bool withScale, bool withSignBit, String unit);
         String SelectBusMessage(String originMessageID);
         void SelectSignals(SelectSignalHandler handler, List<String> existSignalIDList);
+        void SelectBusMessages(SelectBusMessageHandler handler, List<String> existBusMessageIDList);
         void ConfigDataEncryption();
         void ConfigOfflineMapPath();
         void OpenDialog(object caller, String dialogClassID, String config);
@@ -342,6 +346,21 @@ namespace ASEva
         public static String GetAppID()
         {
             return handler.GetAppID();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.0.7) Get GUI framework that the application based on
+        /// </summary>
+        /// <returns>GUI framework</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.0.7) 获取应用程序基于的图形界面框架
+        /// </summary>
+        /// <returns>图形界面框架</returns>
+        public static ApplicationGUI GetAppGUI()
+        {
+            return handler.GetAppGUI();
         }
 
         /// \~English
@@ -1408,6 +1427,36 @@ namespace ASEva
         public static void RemoveSignalReference(String signalID)
         {
             Handler.RemoveSignalReference(signalID);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.0.8) Add video reference (only video with references will be sent to app layer's processors)
+        /// </summary>
+        /// <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.0.8) 添加视频引用，在应用层的数据处理对象才可获得该通道的数据
+        /// </summary>
+        /// <param name="videoChannel">视频通道，0~23对应A~X</param>
+        public static void AddProcessorVideoReference(int videoChannel)
+        {
+            Handler.AddProcessorVideoReference(videoChannel);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.0.8) Remove video reference
+        /// </summary>
+        /// <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.0.8) 移除视频引用
+        /// </summary>
+        /// <param name="videoChannel">视频通道，0~23对应A~X</param>
+        public static void RemoveProcessorVideoReference(int videoChannel)
+        {
+            Handler.RemoveProcessorVideoReference(videoChannel);
         }
 
         /// \~English
@@ -2823,6 +2872,23 @@ namespace ASEva
         public static void SelectSignals(SelectSignalHandler handler, List<String> existSignalIDList)
         {
             Handler.SelectSignals(handler, existSignalIDList);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.0.6) Show a modal dialog to select multiple bus messages at once
+        /// </summary>
+        /// <param name="handler">Callback to handle bus message selection</param>
+        /// <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.0.6) 打开对话框一次性选择多个总线报文
+        /// </summary>
+        /// <param name="handler">选中总线报文时调用的回调接口</param>
+        /// <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
+        public static void SelectBusMessages(SelectBusMessageHandler handler, List<String> existBusMessageIDList)
+        {
+            Handler.SelectBusMessages(handler, existBusMessageIDList);
         }
 
         /// \~English

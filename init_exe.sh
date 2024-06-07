@@ -105,5 +105,56 @@ cp -vf "$CUR_DIR"/3party/skia-macos-any/*.* "$CUR_DIR"/binm/debug/
 cp -vf "$CUR_DIR"/3party/skia-macos-any/*.* "$CUR_DIR"/binma/
 cp -vf "$CUR_DIR"/3party/skia-macos-any/*.* "$CUR_DIR"/binma/debug/
 
+cp -vf "$CUR_DIR"/3party/avalonia-common/*.* "$CUR_DIR"/bin64/
+cp -vf "$CUR_DIR"/3party/avalonia-common/*.* "$CUR_DIR"/bin64/debug/
+cp -vf "$CUR_DIR"/3party/avalonia-common/*.* "$CUR_DIR"/binx/
+cp -vf "$CUR_DIR"/3party/avalonia-common/*.* "$CUR_DIR"/binx/debug/
+cp -vf "$CUR_DIR"/3party/avalonia-common/*.* "$CUR_DIR"/binxa/
+cp -vf "$CUR_DIR"/3party/avalonia-common/*.* "$CUR_DIR"/binxa/debug/
+cp -vf "$CUR_DIR"/3party/avalonia-common/*.* "$CUR_DIR"/binma/
+cp -vf "$CUR_DIR"/3party/avalonia-common/*.* "$CUR_DIR"/binma/debug/
+
+cp -vf "$CUR_DIR"/3party/avalonia-windows/*.* "$CUR_DIR"/bin64/
+cp -vf "$CUR_DIR"/3party/avalonia-windows/*.* "$CUR_DIR"/bin64/debug/
+
+cp -vf "$CUR_DIR"/3party/avalonia-linux/*.* "$CUR_DIR"/binx/
+cp -vf "$CUR_DIR"/3party/avalonia-linux/*.* "$CUR_DIR"/binx/debug/
+
+cp -vf "$CUR_DIR"/3party/avalonia-linux/*.* "$CUR_DIR"/binxa/
+cp -vf "$CUR_DIR"/3party/avalonia-linux/*.* "$CUR_DIR"/binxa/debug/
+
+cp -vf "$CUR_DIR"/3party/avalonia-macos/*.* "$CUR_DIR"/binma/
+cp -vf "$CUR_DIR"/3party/avalonia-macos/*.* "$CUR_DIR"/binma/debug/
+
+cp -vf "$CUR_DIR"/3party/livecharts-common/*.* "$CUR_DIR"/bin64/
+cp -vf "$CUR_DIR"/3party/livecharts-common/*.* "$CUR_DIR"/bin64/debug/
+cp -vf "$CUR_DIR"/3party/livecharts-common/*.* "$CUR_DIR"/binx/
+cp -vf "$CUR_DIR"/3party/livecharts-common/*.* "$CUR_DIR"/binx/debug/
+cp -vf "$CUR_DIR"/3party/livecharts-common/*.* "$CUR_DIR"/binxa/
+cp -vf "$CUR_DIR"/3party/livecharts-common/*.* "$CUR_DIR"/binxa/debug/
+cp -vf "$CUR_DIR"/3party/livecharts-common/*.* "$CUR_DIR"/binma/
+cp -vf "$CUR_DIR"/3party/livecharts-common/*.* "$CUR_DIR"/binma/debug/
+
+cp -vf "$CUR_DIR"/3party/livecharts-doc/*.* "$CUR_DIR"/bin64/
+cp -vf "$CUR_DIR"/3party/livecharts-doc/*.* "$CUR_DIR"/bin64/debug/
+cp -vf "$CUR_DIR"/3party/livecharts-doc/*.* "$CUR_DIR"/binx/
+cp -vf "$CUR_DIR"/3party/livecharts-doc/*.* "$CUR_DIR"/binx/debug/
+cp -vf "$CUR_DIR"/3party/livecharts-doc/*.* "$CUR_DIR"/binxa/
+cp -vf "$CUR_DIR"/3party/livecharts-doc/*.* "$CUR_DIR"/binxa/debug/
+cp -vf "$CUR_DIR"/3party/livecharts-doc/*.* "$CUR_DIR"/binma/
+cp -vf "$CUR_DIR"/3party/livecharts-doc/*.* "$CUR_DIR"/binma/debug/
+
+cp -vf "$CUR_DIR"/3party/livecharts-avalonia/*.* "$CUR_DIR"/bin64/
+cp -vf "$CUR_DIR"/3party/livecharts-avalonia/*.* "$CUR_DIR"/bin64/debug/
+cp -vf "$CUR_DIR"/3party/livecharts-avalonia/*.* "$CUR_DIR"/binx/
+cp -vf "$CUR_DIR"/3party/livecharts-avalonia/*.* "$CUR_DIR"/binx/debug/
+cp -vf "$CUR_DIR"/3party/livecharts-avalonia/*.* "$CUR_DIR"/binxa/
+cp -vf "$CUR_DIR"/3party/livecharts-avalonia/*.* "$CUR_DIR"/binxa/debug/
+cp -vf "$CUR_DIR"/3party/livecharts-avalonia/*.* "$CUR_DIR"/binma/
+cp -vf "$CUR_DIR"/3party/livecharts-avalonia/*.* "$CUR_DIR"/binma/debug/
+
+cp -vf "$CUR_DIR"/3party/livecharts-wpf/*.* "$CUR_DIR"/bin64/
+cp -vf "$CUR_DIR"/3party/livecharts-wpf/*.* "$CUR_DIR"/bin64/debug/
+
 echo "Done. (ASEvaAPI/init_exe.sh)"
 sleep 1

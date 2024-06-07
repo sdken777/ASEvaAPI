@@ -8,7 +8,7 @@ using Eto.Drawing;
 
 namespace ASEvaAPIEtoTest
 {
-    partial class TestWindow
+    partial class EtoTestPanel
     {
         private void initBasicTabPageB(TabPage tabPage)
         {
@@ -130,18 +130,28 @@ namespace ASEvaAPIEtoTest
             };
         }
 
-        private Panel generateFlowItem()
+        private ControlAndMouseSources generateFlowItem()
         {
             var panel = new Panel();
             panel.BackgroundColor = Colors.LightYellow;
             var table = panel.SetContentAsTableLayout();
-            var row = table.AddRow(true);
-            row.AddLabel(t.Format("basic-label-row", ++flowItemCount));
-            row.AddControl(new SearchBox(), true);
-            row = table.AddRow(true);
-            row.AddLabel(t.Format("basic-label-row", ++flowItemCount));
-            row.AddControl(new NumericStepper(), true);
-            return panel;
+            var row1 = table.AddRow(true);
+            var label1 = row1.AddLabel(t.Format("basic-label-row", ++flowItemCount));
+            row1.AddControl(new SearchBox(), true);
+            var row2 = table.AddRow(true);
+            var label2 = row2.AddLabel(t.Format("basic-label-row", ++flowItemCount));
+            row2.AddControl(new NumericStepper(), true);
+
+            var mouseSources = new List<Control>();
+            mouseSources.Add(table);
+            mouseSources.Add(label1);
+            mouseSources.Add(label2);
+
+            return new ControlAndMouseSources
+            {
+                Control = panel,
+                MouseSources = mouseSources,
+            };
         }
 
         private int flowItemCount = 0;

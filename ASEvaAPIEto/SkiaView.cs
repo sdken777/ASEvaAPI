@@ -228,11 +228,11 @@ namespace ASEva.UIEto
 			}
 			else
 			{
-				if (!drawableInvalidated && DrawBeat.CallerBegin(this))
+				if (!drawableInvalidated && DrawBeat.CallerBegin(drawable))
 				{
 					drawable.Invalidate();
 					drawableInvalidated = true;
-					DrawBeat.CallerEnd(this);
+					DrawBeat.CallerEnd(drawable);
 				}
 			}
 		}
@@ -363,7 +363,7 @@ namespace ASEva.UIEto
         {
 			if (closed) return;
 
-			DrawBeat.CallbackBegin(this, moduleID);
+			DrawBeat.CallbackBegin(drawable, moduleID);
 
 			var targetSize = drawable.GetLogicalSize();
 			if (commonImage == null || commonImage.Width != targetSize.Width || commonImage.Height != targetSize.Height)
@@ -394,7 +394,7 @@ namespace ASEva.UIEto
 			}
 			drawableInvalidated = false;
 
-			DrawBeat.CallbackEnd(this);
+			DrawBeat.CallbackEnd(drawable);
         }
 
 		public void OnRaiseMouseDown(MouseEventArgs args)
@@ -449,6 +449,14 @@ namespace ASEva.UIEto
 			{
 				drawable = new Drawable();
 				drawable.Paint += drawable_Paint;
+				if (!App.CanParentReceiveChildEvents)
+				{
+					drawable.MouseDown += (o, e) => { OnMouseDown(e); };
+					drawable.MouseMove += (o, e) => { OnMouseMove(e); };
+					drawable.MouseUp += (o, e) => { OnMouseUp(e); };
+					drawable.MouseWheel += (o, e) => { OnMouseWheel(e); };
+					drawable.MouseDoubleClick += (o, e) => { OnMouseDoubleClick(e); };
+				}
 				Content = drawable;
 			}
 		}

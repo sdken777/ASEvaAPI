@@ -1,0 +1,15 @@
+<Panel xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ASEvaAPIAvaloniaTest"
+        x:Class="ASEvaAPIAvaloniaTest.TestControl"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="150"
+        Background="Transparent">
+    <Grid Margin="8" RowDefinitions="*,8,*" ColumnDefinitions="Auto,8,*">
+        <Label Grid.Row="0" Grid.Column="0" x:Name="labelRow1" Content="basic-label-row" VerticalAlignment="Center" />
+        <TextBox Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" />
+        <Label Grid.Row="2" Grid.Column="0" x:Name="labelRow2" Content="basic-label-row" VerticalAlignment="Center" />
+        <NumericUpDown Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" />
+    </Grid>
+</Panel>

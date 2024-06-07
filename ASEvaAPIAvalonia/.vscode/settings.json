@@ -1,0 +1,8 @@
+{
+    "files.exclude": {
+        "obj": true,
+        "bin*": true,
+        "Properties": true,
+        "*.ico": true,
+    },
+}

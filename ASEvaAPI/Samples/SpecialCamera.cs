@@ -111,6 +111,16 @@ namespace ASEva.Samples
         /// 任意位置摄像头（鱼眼模型），使用 FisheyeCameraMeta
         /// </summary>
         AnyFisheyeCamera = 9,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.0.10) Camera at any position with customized model, use CustomizedCameraMeta
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.0.10) 自定义模型的任意位置摄像头，使用 CustomizedCameraMeta
+        /// </summary>
+        CustomizedCamera = 10,
     }
 
     /// \~English
@@ -881,6 +891,167 @@ namespace ASEva.Samples
 
     /// \~English
     /// <summary>
+    /// (api:app=3.0.10) Related information of customized camera
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.0.10) 自定义摄像头关联信息
+    /// </summary>
+    public class CustomizedCameraMeta
+    {
+        /// \~English
+        /// <summary>
+        /// Whether inverted
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 是否作了翻转
+        /// </summary>
+        public bool Inverted { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Whether vertical flipped
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 是否作了镜像
+        /// </summary>
+        public bool VFlipped { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Whether undistorted
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 是否作了去畸变
+        /// </summary>
+        public bool Undistorted { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Horizontal FOV of ideal pinhole model after undistorted [deg]
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 去畸变后的理想针孔模型图像的横向视场角 [deg]
+        /// </summary>
+        public double UndistortedHFOV { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Handle of the customized model's map table
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 自定义模型映射表句柄
+        /// </summary>
+        public ulong MapHandle { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// X coordinate of position [m]
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 位置坐标X轴分量 [m]
+        /// </summary>
+        public double PositionX { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Y coordinate of position [m]
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 位置坐标Y轴分量 [m]
+        /// </summary>
+        public double PositionY { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Z coordinate of position [m]
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 位置坐标Z轴分量 [m]
+        /// </summary>
+        public double PositionZ { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Whether yaw rectified
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 是否作了横摆对正
+        /// </summary>
+        public bool YawRectified { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Original yaw angle [°]
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 原横摆角 [°]
+        /// </summary>
+        public double OriginYaw { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Yaw angle after rectified [°]
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 对正后的横摆角 [°]
+        /// </summary>
+        public double RectifiedYaw { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Whether pitch rectified
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 是否作了俯仰对正
+        /// </summary>
+        public bool PitchRectified { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Original pitch angle
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 原俯仰角 [°]
+        /// </summary>
+        public double OriginPitch { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Whether roll rectified
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 是否作了横滚对正
+        /// </summary>
+        public bool RollRectified { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Original roll angle
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 原横滚角 [°]
+        /// </summary>
+        public double OriginRoll { get; set; }
+    }
+
+    /// \~English
+    /// <summary>
     /// (api:app=3.0.0) Camera information
     /// </summary>
     /// \~Chinese
@@ -901,11 +1072,11 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// Information of special camera, could be ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta
+        /// Information of special camera, could be ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta , ASEva.Samples.CustomizedCameraMeta
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 特殊摄像头信息，可以为 ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta
+        /// 特殊摄像头信息，可以为 ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta , ASEva.Samples.CustomizedCameraMeta
         /// </summary>
         public object SpecialCameraInfo { get; set; }
 

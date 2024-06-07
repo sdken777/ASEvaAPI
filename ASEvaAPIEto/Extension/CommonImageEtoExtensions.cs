@@ -33,5 +33,22 @@ namespace ASEva.UIEto
         {
             return ImageConverter.ConvertToBitmap(image) as Bitmap;
         }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=3.1.3) Convert to common image object
+        /// </summary>
+        /// <param name="bitmap">Eto bitmap object</param>
+        /// <returns>Common image object</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=3.1.3) 转为通用图像数据
+        /// </summary>
+        /// <param name="bitmap">Eto位图对象</param>
+        /// <returns>通用图像数据</returns>
+        public static CommonImage ToCommonImage(this Bitmap bitmap)
+        {
+            return ImageConverter.ConvertFromBitmap(bitmap);
+        }
     }
 }

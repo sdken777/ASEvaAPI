@@ -1,0 +1,13 @@
+<Panel xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ASEvaAPIAvaloniaTest"
+        x:Class="ASEvaAPIAvaloniaTest.DrawImage"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="400">
+    <Grid RowDefinitions="*,8,*,8,*">
+        <Image Grid.Row="0" x:Name="imageView3" Width="100" Height="100" />
+        <Image Grid.Row="2" x:Name="imageView4" Width="100" Height="100" />
+        <Image Grid.Row="4" Width="100" Height="100" Source="resm:picture.png?assembly=ASEvaAPIAvaloniaTest" />
+    </Grid>
+</Panel>

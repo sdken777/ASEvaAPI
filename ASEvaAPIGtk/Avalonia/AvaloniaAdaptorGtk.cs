@@ -1,0 +1,125 @@
+using System;
+using System.Collections.Generic;
+using ASEva.UIEto;
+using Gtk;
+
+namespace ASEva.UIGtk
+{
+    public class AvaloniaAdaptorGtk : AvaloniaAdaptor
+    {
+        public AvaloniaAdaptorGtk()
+        {
+            String screenName = null;
+            scale = ScaleFactorQuery.Query(out screenName);
+            if (!String.IsNullOrEmpty(screenName) && scale != null)
+            {
+                Environment.SetEnvironmentVariable("AVALONIA_SCREEN_SCALE_FACTORS", screenName + "=" + scale.Value);
+            }
+        }
+
+        public void RunIteration()
+        {
+            while (Gtk.Application.EventsPending())
+            {
+                Gtk.Main.IterationDo(false);
+            }
+
+            foreach (var ctx in ctxs)
+            {
+                if (ctx.Socket == 0)
+                {
+                    if (ctx.ParentXID != 0)
+                    {
+                        ctx.Socket = XembedSocket.xembed_socket_create((uint)ctx.ParentXID, 1);
+                        var socketID = XembedSocket.xembed_socket_get_socket_id(ctx.Socket);
+
+                        XembedSocket.xembed_socket_update_both_allocation(ctx.Socket);
+                        for (int i = 0; i < 3; i++) XembedSocket.xembed_socket_iteration(ctx.Socket, 0, 0);
+
+                        ctx.Plug = new Gtk.Plug((ulong)socketID);
+                        ctx.Plug.Add(Eto.Forms.Gtk3Helpers.ToNative(ctx.Control, true));
+                        ctx.Plug.ShowAll();
+                    }
+                }
+                else
+                {
+                    XembedSocket.xembed_socket_iteration(ctx.Socket, ctx.Active, ctx.Active);
+                }
+            }
+        }
+
+        public bool ShouldCreateContainer()
+        {
+            return false;
+        }
+
+        public nint CreateContainer(nint parent, Eto.Forms.Control control, out object context)
+        {
+            context = null;
+            return 0;
+        }
+
+        public void UseContainer(nint container, Eto.Forms.Control control, out object context)
+        {
+            var ctx = new Context();
+            ctx.ParentXID = container;
+            ctx.Control = control;
+            ctxs.Add(ctx);
+            context = ctx;
+        }
+
+        public void ReleaseResource(object context)
+        {
+            var ctx = context as Context;
+            if (ctx.Socket != 0)
+            {
+                ctx.Plug.Hide();
+                ctx.Plug.Destroy();
+                for (int i = 0; i < 3; i++)
+                {
+                    while (Gtk.Application.EventsPending()) Gtk.Main.IterationDo(false);
+                    XembedSocket.xembed_socket_iteration(ctx.Socket, ctx.Active, ctx.Active);
+                }
+                ctx.Plug = null;
+                ctx.Socket = 0;
+            }
+            ctxs.Remove(ctx);
+        }
+
+        public void HandleWindowActive(object context, bool active)
+        {
+            var ctx = context as Context;
+            ctx.Active = active ? 1 : 0;
+            XembedSocket.xembed_socket_update_focus_in(ctx.Socket, ctx.Active);
+            XembedSocket.xembed_socket_update_active(ctx.Socket, ctx.Active);
+        }
+
+        public void HandleControlResize(object context, double width, double height)
+        {
+            var ctx = context as Context;
+            if (!ctx.CorrectionInvoked && scale != null && scale.Value != 1)
+            {
+                HolderBoundCorrection.Correct((uint)ctx.ParentXID, scale.Value, (int)width, (int)height);
+            }
+            XembedSocket.xembed_socket_update_both_allocation(ctx.Socket);
+        }
+
+        public bool ShouldOverrideRunDialog()
+        {
+            return true;
+        }
+
+        private class Context
+        {
+            public nint ParentXID { get; set; }
+            public nint Socket { get; set; }
+            public Gtk.Plug Plug { get; set; }
+            public Eto.Forms.Control Control { get; set; }
+            public int Active { get; set; }
+            public bool CorrectionInvoked { get; set; }
+        }
+
+        private List<Context> ctxs = new List<Context>();
+        private double? scale = null;
+    }
+}

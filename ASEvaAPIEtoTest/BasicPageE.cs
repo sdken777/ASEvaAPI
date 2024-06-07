@@ -6,7 +6,7 @@ using Eto.Drawing;
 
 namespace ASEvaAPIEtoTest
 {
-    partial class TestWindow
+    partial class EtoTestPanel
     {
         private void initBasicTabPageE(TabPage tabPage)
         {
@@ -63,6 +63,18 @@ namespace ASEvaAPIEtoTest
                 for (int i = 0; i < controlCount; i++) controlsHeight[i] = 80;
                 flowLayout.UpdateControlsSize(250, controlsHeight);
             };
+        }
+
+        private void initFlowMouseEvents(FlowLayout2D flowLayout, Panel item, List<Control> mouseSources)
+        {
+            if (App.CanParentReceiveChildEvents) return;
+            foreach (var source in mouseSources)
+            {
+                source.MouseDown += delegate
+                {
+                    flowLayout.SelectControl(flowLayout.GetControlIndex(item), true);
+                };
+            }
         }
     }
 }

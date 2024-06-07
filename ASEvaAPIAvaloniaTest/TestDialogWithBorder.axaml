@@ -1,0 +1,14 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ASEvaAPIAvaloniaTest"
+        x:Class="ASEvaAPIAvaloniaTest.TestDialogWithBorder"
+        Title="{DynamicResource title-dialog}" Icon="resm:icon.png" WindowStartupLocation="CenterScreen" 
+        Width="800" Height="400" MinWidth="600" MinHeight="300">
+    <Grid Margin="8" ColumnDefinitions="Auto,8,Auto,*,Auto">
+        <Button Classes="hyperlink" Grid.Column="0" x:Name="linkClientSize" Content="{DynamicResource basic-client-size}" Click="linkClientSize_Click" />
+        <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-dialog-with-border}" Click="linkShowDialogWithBorder_Click" />
+        <Button Grid.Column="4" Content="{DynamicResource basic-close}" Click="buttonClose_Click" />
+    </Grid>
+</Window>

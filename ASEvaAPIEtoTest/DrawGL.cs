@@ -7,7 +7,7 @@ using SharpGL;
 
 namespace ASEvaAPIEtoTest
 {
-    partial class TestWindow
+    partial class EtoTestPanel
     {
         private void initDrawGL(StackLayout layout, bool onscreenRendering)
         {

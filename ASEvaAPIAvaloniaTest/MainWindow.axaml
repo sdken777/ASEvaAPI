@@ -1,0 +1,95 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ASEvaAPIAvaloniaTest"
+        x:Class="ASEvaAPIAvaloniaTest.MainWindow"
+        Title="{DynamicResource title}" Icon="resm:icon.png" WindowStartupLocation="CenterScreen" 
+        Width="1350" Height="800" MinWidth="1350" MinHeight="800"
+        Closing="MainWindow_Closing">
+    <Grid Margin="8" ColumnDefinitions="*,8,*" RowDefinitions="*,8,*">
+        <Grid Grid.Row="0" Grid.Column="0" RowDefinitions="Auto,*">
+            <Label Grid.Row="0" Content="{DynamicResource basic-group-title}" Padding="8,0,0,0" FontSize="12" />
+            <Border Grid.Row="1" CornerRadius="3" Background="WhiteSmoke">
+                <TabControl x:Name="tabControl">
+                    <TabItem Header="{DynamicResource basic-tabpage-title-a}" FontSize="18">
+                        <local:BasicPageA x:Name="basicPageA" Margin="0,0,0,8" />
+                    </TabItem>
+                    <TabItem Header="{DynamicResource basic-tabpage-title-b}" FontSize="18">
+                        <local:BasicPageB Margin="0,0,0,8" />
+                    </TabItem>
+                    <TabItem Header="{DynamicResource basic-tabpage-title-c}" FontSize="18">
+                        <local:BasicPageC Margin="0,0,0,8" />
+                    </TabItem>
+                    <TabItem Header="{DynamicResource basic-tabpage-title-d}" FontSize="18">
+                        <local:BasicPageD Margin="0,0,0,8" />
+                    </TabItem>
+                    <TabItem Header="{DynamicResource basic-tabpage-title-e}" FontSize="18">
+                        <local:BasicPageE Margin="0,0,0,8" />
+                    </TabItem>
+                </TabControl>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="0" Grid.Column="2" RowDefinitions="Auto,*">
+            <Label Grid.Row="0" Content="{DynamicResource web-group-title}" Padding="8,0,0,0" FontSize="12" />
+            <Border Grid.Row="1" CornerRadius="3" Background="WhiteSmoke">
+                <local:WebGroup Margin="8" />
+            </Border>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="0" RowDefinitions="Auto,*">
+            <Label Grid.Row="0" Content="{DynamicResource draw-group-title}" Padding="8,0,0,0" FontSize="12" />
+            <Border Grid.Row="1" CornerRadius="3" Background="WhiteSmoke">
+                <local:DrawGroup x:Name="drawGroup" Margin="8" />
+            </Border>
+        </Grid>
+        <Grid Grid.Row="2" Grid.Column="2" RowDefinitions="Auto,*">
+            <Label Grid.Row="0" Content="{DynamicResource plot-group-title}" Padding="8,0,0,0" FontSize="12" />
+            <Border Grid.Row="1" CornerRadius="3" Background="WhiteSmoke">
+                <local:PlotGroup Margin="8" />
+            </Border>
+        </Grid>
+    </Grid>
+    <Window.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="{DynamicResource menu-fullscreen}" Click="itemFullScreen_Click" />
+            <MenuItem Header="{DynamicResource menu-exit}" Click="itemExit_Click" />
+            <Separator />
+            <MenuItem Header="{DynamicResource menu-sub}">
+                <MenuItem Header="{DynamicResource menu-sub-item-a}" />
+                <Separator />
+                <MenuItem Header="{DynamicResource menu-sub-item-b}" />
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="{DynamicResource menu-check-a}" Click="itemCheckA_Click">
+                <MenuItem.Icon>
+                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding CheckedA}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="{DynamicResource menu-check-b}" Click="itemCheckB_Click">
+                <MenuItem.Icon>
+                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding CheckedB}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="{DynamicResource menu-radio-a}" Click="itemRadioA_Click">
+                <MenuItem.Icon>
+                    <RadioButton IsHitTestVisible="False" IsChecked="{Binding !SelectedB}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="{DynamicResource menu-radio-b}" Click="itemRadioB_Click">
+                <MenuItem.Icon>
+                    <RadioButton IsHitTestVisible="False" IsChecked="{Binding SelectedB}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator />
+            <MenuItem Header="{DynamicResource menu-snapshot}" Click="itemSnapshot_Click" />
+            <Separator />
+            <MenuItem Header="{DynamicResource menu-exception-main}" Click="itemExceptionMain_Click" />
+            <MenuItem Header="{DynamicResource menu-exception-sub}" Click="itemExceptionSub_Click" />
+            <Separator />
+            <MenuItem Header="{DynamicResource menu-eto-window}" Click="itemShowEtoWindow_Click" />
+            <MenuItem Header="{DynamicResource menu-eto-dialog}" Click="itemShowEtoDialog_Click" />
+            <MenuItem Header="{DynamicResource menu-eto-embed-window}" Click="itemShowEtoEmbedWindow_Click" />
+        </ContextMenu>
+    </Window.ContextMenu>
+</Window>

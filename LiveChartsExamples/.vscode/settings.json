@@ -1,0 +1,15 @@
+{
+    "files.exclude": {
+        // "*Windows*": true,
+        // "*CoreWF*": true,
+        // "*Wpf*": true,
+        // "*Linux*": true,
+        // "*Gtk*": true,
+        // "*MacOS*": true,
+        // "*MonoMac*": true,
+        "obj": true,
+        "bin*": true,
+        "*.ico": true,
+        "Properties": true
+    }
+}

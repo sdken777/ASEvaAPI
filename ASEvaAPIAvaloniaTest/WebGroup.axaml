@@ -1,0 +1,26 @@
+<Panel xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:aseva="clr-namespace:ASEva.UIAvalonia;assembly=ASEvaAPIAvalonia"
+        x:Class="ASEvaAPIAvaloniaTest.WebGroup"
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="300">
+    <Grid RowDefinitions="Auto,8,*">
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,8,Auto,8,1,8,*,8,Auto,8,1,8,Auto">
+            <Button Grid.Column="0" Click="buttonBackward_Click">
+                <Image Source="resm:backward.png?assembly=ASEvaAPIAvaloniaTest" />
+            </Button>
+            <Button Grid.Column="2" Click="buttonForward_Click">
+                <Image Source="resm:forward.png?assembly=ASEvaAPIAvaloniaTest" />
+            </Button>
+            <Rectangle Grid.Column="4" Fill="Gray" />
+            <TextBox Grid.Column="6" x:Name="textUrl" TextChanged="textUrl_TextChanged" />
+            <Button Grid.Column="8" x:Name="buttonGoUrl" Content="{DynamicResource web-go-url}" IsEnabled="False" Click="buttonGoUrl_Click" />
+            <Rectangle Grid.Column="10" Fill="Gray" />
+            <Button Grid.Column="12" Content="{DynamicResource web-call-script}" Click="buttonCallScript_Click" />
+        </Grid>
+        <Border Grid.Row="2" Background="White" BorderThickness="1" BorderBrush="Gray" CornerRadius="3" Padding="1">
+            <aseva:EtoEmbedder x:Name="webView" />
+        </Border>
+    </Grid>
+</Panel>

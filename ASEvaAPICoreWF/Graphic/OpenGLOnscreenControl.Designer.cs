@@ -37,6 +37,10 @@
             this.Name = "OpenGLOnscreenControl";
             this.SizeChanged += new System.EventHandler(this.pictureBox_SizeChanged);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.OpenGLOnscreenControl_Paint);
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.OpenGLOnscreenControl_MouseDoubleClick);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.OpenGLOnscreenControl_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.OpenGLOnscreenControl_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OpenGLOnscreenControl_MouseUp);
             this.ResumeLayout(false);
 
         }

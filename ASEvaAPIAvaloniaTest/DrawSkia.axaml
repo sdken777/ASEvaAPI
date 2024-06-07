@@ -1,0 +1,12 @@
+<Panel xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ASEvaAPIAvaloniaTest"
+        xmlns:aseva="clr-namespace:ASEva.UIAvalonia;assembly=ASEvaAPIAvalonia"
+        x:Class="ASEvaAPIAvaloniaTest.DrawSkia"
+        mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="300" Width="200">
+    <Border CornerRadius="3" Background="LightYellow">
+        <aseva:SkiaView x:Name="skiaView" RenderSkia="skiaView_Render" PointerPressed="skiaView_PointerPressed" />
+    </Border>
+</Panel>

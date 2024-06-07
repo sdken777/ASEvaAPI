@@ -492,6 +492,10 @@ namespace ASEva
         {
         }
 
+        public void SelectBusMessages(SelectBusMessageHandler handler, List<String> existBusMessageIDList)
+        {
+        }
+
         public void SetCurrentDialogTitle(string title, object icon)
         {
         }
@@ -1463,6 +1467,19 @@ namespace ASEva
         public string GetAppID()
         {
             return null;
+        }
+
+        public ApplicationGUI GetAppGUI()
+        {
+            return ApplicationGUI.NoGUI;
+        }
+
+        public void AddProcessorVideoReference(int videoChannel)
+        {
+        }
+
+        public void RemoveProcessorVideoReference(int videoChannel)
+        {
         }
     }
 }

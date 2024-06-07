@@ -24,55 +24,30 @@ namespace ASEvaAPIEtoTest
             this.SetMinimumClientSize(1200, 700);
             Resizable = true;
 
-            var contextMenu = this.SetContextMenuAsNew();
-            initContextMenu(contextMenu);
-
-            var layout = this.SetContentAsTableLayout();
-            var rowFirst = layout.AddRow(true);
-            var rowSecond = layout.AddRow(true);
-
-            var groupBasic = rowFirst.AddGroupBox(t["basic-group-title"], true, true);
-            initBasicGroupBox(groupBasic);
-
-            var groupWeb = rowFirst.AddGroupBox(t["util-group-title"], true, true);
-            initUtilGroupBox(groupWeb);
-
-            var groupDraw = rowSecond.AddGroupBox(t["draw-group-title"], true, true);
-            initDrawGroupBox(groupDraw, onscreenRendering);
-
-            var groupPlot = rowSecond.AddGroupBox(t["plot-group-title"], true, true, 200, 100);
-            initPlotGroupBox(groupPlot);
-
-            loopTimer.Interval = 0.015;
-            loopTimer.Elapsed += delegate
-            {
-                loopBasicPageA();
-                loopDrawDefault2D();
-                loopDrawSkia2D();
-                loopDrawGL();
-            };
-            loopTimer.Start();
-
-            KeyDown += (o, e) =>
-            {
-                if (e.Control && e.Key != Keys.Control && e.Key != Keys.LeftControl && e.Key != Keys.RightControl && e.Key != Keys.Space && e.Key != Keys.None)
-                {
-                    MessageBox.Show("Ctrl+" + e.Key.ToString());
-                }
-            };
+            testPanel = new EtoTestPanel(language, onscreenRendering);
+            this.SetContentAsControl(testPanel, 0);
 
             Closing += (o, e) =>
             {
                 if (App.FatalException || MessageBox.Show(t["exit-confirm"], MessageBoxButtons.YesNo, MessageBoxType.Question) == DialogResult.Yes)
                 {
-                    loopTimer.Stop();
+                    testPanel.StopTimer();
                 }
                 else e.Cancel = true;
+            };
+
+            testPanel.RequestClose += delegate
+            {
+                this.Close();
+            };
+
+            testPanel.RequestFullScreen += delegate
+            {
+                this.MaximizeToFullScreen();
             };
         }
 
         private TextResource t;
-        private DateTime startTime = DateTime.Now;
-        private UITimer loopTimer = new UITimer();
+        private EtoTestPanel testPanel;
     }
 }

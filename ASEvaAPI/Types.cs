@@ -318,6 +318,51 @@ namespace ASEva
 
     /// \~English
     /// <summary>
+    /// (api:app=3.0.7) GUI framework that the application based on, call ASEva.Agency.GetAppGUI to get
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.0.7) 应用基于的图形界面框架，调用 ASEva.Agency.GetAppGUI 获取
+    /// </summary>
+    public enum ApplicationGUI
+    {
+        /// \~English
+        /// <summary>
+        /// Not using GUI
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 无图形界面
+        /// </summary>
+        NoGUI,
+
+        /// \~
+        /// <summary>
+        /// Windows Forms
+        /// </summary>
+        WindowsForms,
+
+        /// \~
+        /// <summary>
+        /// Windows Presentation Foundation
+        /// </summary>
+        WPF,
+
+        /// \~
+        /// <summary>
+        /// Eto.Forms
+        /// </summary>
+        Eto,
+
+        /// \~
+        /// <summary>
+        /// Avalonia
+        /// </summary>
+        Avalonia,
+    }
+
+    /// \~English
+    /// <summary>
     /// (api:app=3.0.0) Log level, as the input argument of ASEva.Agency.Log
     /// </summary>
     /// \~Chinese
@@ -1028,6 +1073,31 @@ namespace ASEva
         /// <param name="signalID">选中信号的ID</param>
         /// <returns>返回是否仍可添加信号</returns>
         bool SelectSignal(String signalID);
+    }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.0.6) Callback interface for ASEva.Agency.SelectBusMessages
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.0.6) 用于 ASEva.Agency.SelectBusMessages 的回调接口
+    /// </summary>
+    public interface SelectBusMessageHandler
+    {
+        /// \~English
+        /// <summary>
+        /// Called while select a new bus message
+        /// </summary>
+        /// <param name="busMessageID">Bus message ID</param>
+        /// <returns>Whether it's available to add more bus messages</returns>
+        /// \~Chinese
+        /// <summary>
+        /// 添加选中总线报文时被调用
+        /// </summary>
+        /// <param name="busMessageID">选中总线报文的ID</param>
+        /// <returns>返回是否仍可添加总线报文</returns>
+        bool SelectBusMessage(String busMessageID);
     }
 
     /// \~English
@@ -2996,11 +3066,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Error info of plugin pack
+    /// (api:app=3.0.7) Error info of plugin pack
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 插件包错误信息
+    /// (api:app=3.0.7) 插件包错误信息
     /// </summary>
     public enum PluginPackError
     {
@@ -3046,13 +3116,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Not supported for current UI platform
+        /// Not supported for current GUI framework
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 平台不支持（UI）
+        /// 当前图形界面框架不支持
         /// </summary>
-        PlatformUnsupported = 4,
+        GUIUnsupported = 4,
     }
 
     /// \~English
@@ -3148,11 +3218,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Installation status of the plugin related library
+    /// (api:app=3.0.7) Installation status of the plugin related library
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 插件关联的库是否可安装的状态
+    /// (api:app=3.0.7) 插件关联的库是否可安装的状态
     /// </summary>
     public enum InstallPluginLibraryStatus
     {
@@ -3168,13 +3238,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Not supported by current UI platform
+        /// Not supported by current GUI framework
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 平台不支持（UI）
+        /// 当前图形界面框架不支持
         /// </summary>
-        PlatformUnsupported,
+        GUIUnsupported,
 
         /// \~English
         /// <summary>
@@ -3195,6 +3265,47 @@ namespace ASEva
         /// 插件太旧
         /// </summary>
         TooOld,
+    }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.0.6) Status of installed plugin
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.0.6) 已安装插件的状态
+    /// </summary>
+    public enum PluginInstalledStatus
+    {
+        /// \~English
+        /// <summary>
+        /// Not installed
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 未安装
+        /// </summary>
+        NotInstalled = 0,
+
+        /// \~English
+        /// <summary>
+        /// Installed and enabled
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 已安装且启用中
+        /// </summary>
+        InstalledAndEnabled = 1,
+
+        /// \~English
+        /// <summary>
+        /// Installed but disabled
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 已安装但被禁用
+        /// </summary>
+        InstalledButDisabled = 2,
     }
 
     /// \~English
@@ -3256,6 +3367,16 @@ namespace ASEva
         /// 已安装插件的版本，若未安装则为null
         /// </summary>
         public Version InstalledVersion { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.0.6) Status of installed plugin
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.0.6) 已安装插件的状态
+        /// </summary>
+        public PluginInstalledStatus InstalledStatus { get; set; }
     }
 
     /// \~English

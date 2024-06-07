@@ -7,11 +7,11 @@ namespace ASEva.UIGtk
 {
     /// \~English
     /// <summary>
-    /// (api:gtk=3.0.0) The image object of ASEva.Samples.VideoFrameSample
+    /// (api:gtk=3.0.0) The converted image object of ASEva.UIGtk.ImageConverter
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:gtk=3.0.0) ASEva.Samples.VideoFrameSample 中的图像对象
+    /// (api:gtk=3.0.0) ASEva.UIGtk.ImageConverter 转换的图像对象
     /// </summary>
     public class VideoFrameSampleImage
     {

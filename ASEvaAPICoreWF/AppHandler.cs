@@ -19,13 +19,16 @@ namespace ASEva.UICoreWF
 
     class AppHandlerCoreWF : AppHandler
     {
-        public Application CreateApp(out String uiBackend, out String webViewBackend)
+        public Application CreateApp(bool attach, out String uiBackend, out String webViewBackend)
         {
             // CHECK: 支持高DPI显示
             System.Windows.Forms.Application.SetHighDpiMode(System.Windows.Forms.HighDpiMode.SystemAware);
 
             // CHECK: 初始化WebView2环境
             WebView2Handler.InitCoreWebView2Environment();
+
+            ApplicationHandler.BubbleKeyEvents = false;
+            ApplicationHandler.BubbleMouseEvents = false;
 
             var platform = new global::Eto.WinForms.Platform();
             platform.Add<GroupBox.IHandler>(() => new GroupBoxHandler());
@@ -47,7 +50,6 @@ namespace ASEva.UICoreWF
             var app = new Application(platform);
 
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerCoreWF();
-            ButtonPanel.UseInnerEnterLeave = true;
             ButtonPanel.TextAlphaUnsupported = true;
             Pixel.CalculateByScreenRealScale = true;
             ASEva.UIEto.ImageConverter.Mode = ASEva.UIEto.ImageConverter.ConvertMode.AlphaScale;
@@ -69,9 +71,7 @@ namespace ASEva.UICoreWF
             OverlayLayout.ExpandControlSize = true;
             FullScreenExtensions.Handler = new FullScreenHandler();
             OxyPlotView.Factory = new OxyPlotViewFactoryCoreWF();
-
-            // CHECK: 修正application.Run之前不触发MouseDown等事件
-            System.Windows.Forms.Application.AddMessageFilter(TempBubbleEventFilter);
+            SetToolTipExtensions.Handler = new ToolTipHandler();
 
             FuncManager.Register("GetUIBackendAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
             FuncManager.Register("RegisterLegacyValueGraph", delegate { Agency.RegisterGraphPanel(GraphType.SingleValue, getLegacyStyleName(), typeof(ValueGraph)); return null; });
@@ -103,9 +103,6 @@ namespace ASEva.UICoreWF
 
         public void RunApp(Application application, Form window, Form[] subWindows)
         {
-            // CHECK: 修正application.Run之前不触发MouseDown等事件
-            System.Windows.Forms.Application.RemoveMessageFilter(TempBubbleEventFilter);
-
             window.Closed += delegate { findAndHideWebViews(window); };
 
             try
@@ -176,54 +173,14 @@ namespace ASEva.UICoreWF
             return false;
         }
 
+        public bool CanParentReceiveChildEvents()
+        {
+            return false;
+        }
+
         private String getLegacyStyleName()
         {
             return Agency.GetAppLanguage() == Language.Chinese ? "旧图表" : "Legacy Graph";
         }
-
-        private BubbleEventFilter TempBubbleEventFilter
-        {
-            get
-            {
-                if (tempBubbleEventFilter == null)
-                {
-                    var bubble = new BubbleEventFilter();
-                    bubble.AddBubbleMouseEvent((c, cb, e) => cb.OnMouseWheel(c, e), null, Win32.WM.MOUSEWHEEL);
-                    bubble.AddBubbleMouseEvent((c, cb, e) => cb.OnMouseMove(c, e), null, Win32.WM.MOUSEMOVE);
-                    bubble.AddBubbleMouseEvents((c, cb, e) =>
-                    {
-                        cb.OnMouseDown(c, e);
-                        if (e.Handled && c.Handler is IWindowsControl handler && handler.ShouldCaptureMouse)
-                        {
-                            handler.ContainerControl.Capture = true;
-                            handler.MouseCaptured = true;
-                        }
-                    }, true, Win32.WM.LBUTTONDOWN, Win32.WM.RBUTTONDOWN, Win32.WM.MBUTTONDOWN);
-                    bubble.AddBubbleMouseEvents((c, cb, e) =>
-                    {
-                        cb.OnMouseDoubleClick(c, e);
-                        if (!e.Handled)
-                            cb.OnMouseDown(c, e);
-                    }, null, Win32.WM.LBUTTONDBLCLK, Win32.WM.RBUTTONDBLCLK, Win32.WM.MBUTTONDBLCLK);
-                    void OnMouseUpHandler(Control c, Control.ICallback cb, MouseEventArgs e)
-                    {
-                        if (c.Handler is IWindowsControl handler && handler.MouseCaptured)
-                        {
-                            handler.MouseCaptured = false;
-                            handler.ContainerControl.Capture = false;
-                        }
-                        cb.OnMouseUp(c, e);
-                    }
-                    bubble.AddBubbleMouseEvent(OnMouseUpHandler, false, Win32.WM.LBUTTONUP, b => MouseButtons.Primary);
-                    bubble.AddBubbleMouseEvent(OnMouseUpHandler, false, Win32.WM.RBUTTONUP, b => MouseButtons.Alternate);
-                    bubble.AddBubbleMouseEvent(OnMouseUpHandler, false, Win32.WM.MBUTTONUP, b => MouseButtons.Middle);
-                    tempBubbleEventFilter = bubble;
-                }
-                return tempBubbleEventFilter;
-            }
-        }
-        private BubbleEventFilter tempBubbleEventFilter;
     }
-
-
 }

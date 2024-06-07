@@ -7,6 +7,9 @@ EXPORT_DEVELOPER=y
 EXPORT_RUNTIME_DEBUG=y
 EXPORT_GUI_LIBRARY=y
 EXPORT_SKIA_NATIVE=n
+EXPORT_AVALONIA=n
+EXPORT_LIVECHARTS_WPF=n
+EXPORT_LIVECHARTS_AVALONIA=n
 if [ "$1" = "" ]; then
     TARGET_DIR=~/Desktop/$CUR_DATE-$TARGET_NAME
     GEN_DESKTOP_ZIP=y
@@ -28,8 +31,17 @@ else
         EXPORT_RUNTIME_DEBUG=n
         EXPORT_GUI_LIBRARY=n
     fi
-    if [ "$3" = "with-skia-native" ]; then
-        EXPORT_SKIA_NATIVE=y
+    if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
+        if [ "$3" = "with-skia-native" ]; then
+            EXPORT_SKIA_NATIVE=y
+            EXPORT_LIVECHARTS_WPF=y
+        fi
+        if [ "$3" = "with-avalonia" ]; then
+            EXPORT_SKIA_NATIVE=y
+            EXPORT_AVALONIA=y
+            EXPORT_LIVECHARTS_WPF=y
+            EXPORT_LIVECHARTS_AVALONIA=y
+        fi
     fi
 fi
 
@@ -47,6 +59,18 @@ if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
     if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-windows-x64/* $TARGET_DIR/bin64/
     fi
+    if [ "$EXPORT_AVALONIA" = "y" ]; then
+        cp -vf "$CUR_DIR"/bin64/ASEvaAPIAvalonia.dll $TARGET_DIR/bin64/
+        cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/bin64/
+        cp -vf "$CUR_DIR"/3party/avalonia-windows/* $TARGET_DIR/bin64/
+    fi
+    if [ "$EXPORT_LIVECHARTS_WPF" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/livecharts-common/* $TARGET_DIR/bin64/
+        cp -vf "$CUR_DIR"/3party/livecharts-wpf/* $TARGET_DIR/bin64/
+    fi
+    if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/livecharts-avalonia/* $TARGET_DIR/bin64/
+    fi
 fi
 
 mkdir -vp $TARGET_DIR/binx
@@ -62,6 +86,16 @@ if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
     if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-linux-x64/* $TARGET_DIR/binx/
     fi
+    if [ "$EXPORT_AVALONIA" = "y" ]; then
+        cp -vf "$CUR_DIR"/binx/ASEvaAPIAvalonia.dll $TARGET_DIR/binx/
+        cp -vf "$CUR_DIR"/binx/libXembedSocket.so $TARGET_DIR/binx/
+        cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binx/
+        cp -vf "$CUR_DIR"/3party/avalonia-linux/* $TARGET_DIR/binx/
+    fi
+    if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/livecharts-common/* $TARGET_DIR/binx/
+        cp -vf "$CUR_DIR"/3party/livecharts-avalonia/* $TARGET_DIR/binx/
+    fi
 fi
 
 mkdir -vp $TARGET_DIR/binxa
@@ -76,6 +110,16 @@ if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/3party/skia-common/* $TARGET_DIR/binxa/
     if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-linux-arm64/* $TARGET_DIR/binxa/
+    fi
+    if [ "$EXPORT_AVALONIA" = "y" ]; then
+        cp -vf "$CUR_DIR"/binxa/ASEvaAPIAvalonia.dll $TARGET_DIR/binxa/
+        cp -vf "$CUR_DIR"/binxa/libXembedSocket.so $TARGET_DIR/binxa/
+        cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binxa/
+        cp -vf "$CUR_DIR"/3party/avalonia-linux/* $TARGET_DIR/binxa/
+    fi
+    if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/livecharts-common/* $TARGET_DIR/binxa/
+        cp -vf "$CUR_DIR"/3party/livecharts-avalonia/* $TARGET_DIR/binxa/
     fi
 fi
 
@@ -109,6 +153,15 @@ if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
     if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-macos-any/* $TARGET_DIR/binma/
     fi
+    if [ "$EXPORT_AVALONIA" = "y" ]; then
+        cp -vf "$CUR_DIR"/binma/ASEvaAPIAvalonia.dll $TARGET_DIR/binma/
+        cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binma/
+        cp -vf "$CUR_DIR"/3party/avalonia-macos/* $TARGET_DIR/binma/
+    fi
+    if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/livecharts-common/* $TARGET_DIR/binma/
+        cp -vf "$CUR_DIR"/3party/livecharts-avalonia/* $TARGET_DIR/binma/
+    fi
 fi
 
 if [ "$EXPORT_DEVELOPER" = "y" ]; then
@@ -120,6 +173,12 @@ if [ "$EXPORT_DEVELOPER" = "y" ]; then
         cp -vf "$CUR_DIR"/bin64/ASEvaAPIEto.xml $TARGET_DIR/bin64/
         cp -vf "$CUR_DIR"/bin64/ASEvaAPICoreWF.xml $TARGET_DIR/bin64/
         cp -vf "$CUR_DIR"/bin64/ASEvaAPIWpf.xml $TARGET_DIR/bin64/
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/bin64/ASEvaAPIAvalonia.xml $TARGET_DIR/bin64/
+        fi
+        if [ "$EXPORT_LIVECHARTS_WPF" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/livecharts-doc/* $TARGET_DIR/bin64/
+        fi
     fi
 
     mkdir -vp $TARGET_DIR/binx/debug
@@ -129,6 +188,12 @@ if [ "$EXPORT_DEVELOPER" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-doc/* $TARGET_DIR/binx/
         cp -vf "$CUR_DIR"/binx/ASEvaAPIEto.xml $TARGET_DIR/binx/
         cp -vf "$CUR_DIR"/binx/ASEvaAPIGtk.xml $TARGET_DIR/binx/
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/binx/ASEvaAPIAvalonia.xml $TARGET_DIR/binx/
+        fi
+        if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/livecharts-doc/* $TARGET_DIR/binx/
+        fi
     fi
 
     mkdir -vp $TARGET_DIR/binxa/debug
@@ -138,6 +203,12 @@ if [ "$EXPORT_DEVELOPER" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-doc/* $TARGET_DIR/binxa/
         cp -vf "$CUR_DIR"/binxa/ASEvaAPIEto.xml $TARGET_DIR/binxa/
         cp -vf "$CUR_DIR"/binxa/ASEvaAPIGtk.xml $TARGET_DIR/binxa/
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/binxa/ASEvaAPIAvalonia.xml $TARGET_DIR/binxa/
+        fi
+        if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/livecharts-doc/* $TARGET_DIR/binxa/
+        fi
     fi
 
     mkdir -vp $TARGET_DIR/binm/debug
@@ -156,6 +227,12 @@ if [ "$EXPORT_DEVELOPER" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-doc/* $TARGET_DIR/binma/
         cp -vf "$CUR_DIR"/binma/ASEvaAPIEto.xml $TARGET_DIR/binma/
         cp -vf "$CUR_DIR"/binma/ASEvaAPIMonoMac.xml $TARGET_DIR/binma/
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/binma/ASEvaAPIAvalonia.xml $TARGET_DIR/binma/
+        fi
+        if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/livecharts-doc/* $TARGET_DIR/binma/
+        fi
     fi
 fi
 
@@ -174,6 +251,18 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
             cp -vf "$CUR_DIR"/3party/skia-windows-x64/* $TARGET_DIR/bin64/debug/
         fi
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/bin64/ASEvaAPIAvalonia.dll $TARGET_DIR/bin64/debug/
+            cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/bin64/debug/
+            cp -vf "$CUR_DIR"/3party/avalonia-windows/* $TARGET_DIR/bin64/debug/
+        fi
+        if [ "$EXPORT_LIVECHARTS_WPF" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/livecharts-common/* $TARGET_DIR/bin64/debug/
+            cp -vf "$CUR_DIR"/3party/livecharts-wpf/* $TARGET_DIR/bin64/debug/
+        fi
+        if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/livecharts-avalonia/* $TARGET_DIR/bin64/debug/
+        fi
     fi
 
     mkdir -vp $TARGET_DIR/binx/debug
@@ -189,6 +278,16 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
             cp -vf "$CUR_DIR"/3party/skia-linux-x64/* $TARGET_DIR/binx/debug/
         fi
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/binx/ASEvaAPIAvalonia.dll $TARGET_DIR/binx/debug/
+            cp -vf "$CUR_DIR"/binx/libXembedSocket.so $TARGET_DIR/binx/debug/
+            cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binx/debug/
+            cp -vf "$CUR_DIR"/3party/avalonia-linux/* $TARGET_DIR/binx/debug/
+        fi
+        if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/livecharts-common/* $TARGET_DIR/binx/debug/
+            cp -vf "$CUR_DIR"/3party/livecharts-avalonia/* $TARGET_DIR/binx/debug/
+        fi
     fi
 
     mkdir -vp $TARGET_DIR/binxa/debug
@@ -203,6 +302,16 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-common/* $TARGET_DIR/binxa/debug/
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
             cp -vf "$CUR_DIR"/3party/skia-linux-arm64/* $TARGET_DIR/binxa/debug/
+        fi
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/binxa/ASEvaAPIAvalonia.dll $TARGET_DIR/binxa/debug/
+            cp -vf "$CUR_DIR"/binxa/libXembedSocket.so $TARGET_DIR/binxa/debug/
+            cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binxa/debug/
+            cp -vf "$CUR_DIR"/3party/avalonia-linux/* $TARGET_DIR/binxa/debug/
+        fi
+        if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/livecharts-common/* $TARGET_DIR/binxa/debug/
+            cp -vf "$CUR_DIR"/3party/livecharts-avalonia/* $TARGET_DIR/binxa/debug/
         fi
     fi
 
@@ -235,6 +344,15 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/skia-common/* $TARGET_DIR/binma/debug/
         if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
             cp -vf "$CUR_DIR"/3party/skia-macos-any/* $TARGET_DIR/binma/debug/
+        fi
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/binma/ASEvaAPIAvalonia.dll $TARGET_DIR/binma/debug/
+            cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binma/debug/
+            cp -vf "$CUR_DIR"/3party/avalonia-macos/* $TARGET_DIR/binma/debug/
+        fi
+        if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/livecharts-common/* $TARGET_DIR/binma/debug/
+            cp -vf "$CUR_DIR"/3party/livecharts-avalonia/* $TARGET_DIR/binma/debug/
         fi
     fi
 fi

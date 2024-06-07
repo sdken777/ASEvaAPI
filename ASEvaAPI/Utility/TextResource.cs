@@ -4,6 +4,7 @@ using System.Xml;
 using System.Reflection;
 using System.Text;
 using ASEva;
+using System.Linq;
 
 namespace ASEva.Utility
 {
@@ -121,6 +122,22 @@ namespace ASEva.Utility
         private TextResource()
         {
             dict = new Dictionary<string, string>();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.0.9) Get all IDs
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.0.9) 获取所有ID
+        /// </summary>
+        public String[] IDs
+        {
+            get
+            {
+                return dict.Keys.ToArray();
+            }
         }
 
         /// \~English

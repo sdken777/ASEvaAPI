@@ -1,0 +1,159 @@
+{
+    "version": "2.0.0",
+    "inputs": [
+        {
+            "id": "helper_platform_bin_name",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "platform_bin_name"
+                ]
+            }
+        },
+        {
+            "id": "helper_platform_exe_text_resource_editor",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "platform_console_exe",
+                    "TextResourceEditor",
+                ]
+            }
+        },
+    ],
+    "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+    },
+    "tasks": [
+        {
+            "type": "process",
+            "label": "Build (Debug)",
+            "group": "build",
+            "command": "${command:dotnet.restartServer}",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Subtask: Build for host (Debug)",
+                "Subtask: Copy built files (Debug)",
+            ],
+        },
+        {
+            "type": "process",
+            "label": "Build (Release)",
+            "group": "build",
+            "command": "${command:dotnet.restartServer}",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Subtask: Build for host (Release)",
+                "Subtask: Copy built files (Release)",
+                "Subtask: Copy to other folders",
+            ],
+        },
+        {
+            "type": "process",
+            "label": "Clean",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "./obj",
+                "./bin"
+            ],
+            "problemMatcher": [],
+        },
+        {
+            "type": "process",
+            "label": "Run Text Resource Editor",
+            "command": "../${input:helper_platform_bin_name}/${input:helper_platform_exe_text_resource_editor}",
+            "problemMatcher": [],
+        },
+
+        // Subtasks:
+
+        {
+            "type": "process",
+            "label": "Subtask: Build for host (Debug)",
+            "hide": true,
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIAvaloniaTest.csproj",
+                "-o",
+                "../${input:helper_platform_bin_name}/debug/bin",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+        },
+        {
+            "type": "process",
+            "label": "Subtask: Build for host (Release)",
+            "hide": true,
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIAvaloniaTest.csproj",
+                "-c",
+                "Release",
+                "-o",
+                "../${input:helper_platform_bin_name}/bin",
+                "/property:ApplicationIcon=Resources/icon.ico",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+        },
+        {
+            "type": "process",
+            "label": "Subtask: Copy built files (Debug)",
+            "hide": true,
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvaloniaTest",
+                "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvaloniaTest.dll",
+                "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvaloniaTest.runtimeconfig.json",
+                "../${input:helper_platform_bin_name}/debug/"
+            ],
+        },
+        {
+            "type": "process",
+            "label": "Subtask: Copy built files (Release)",
+            "hide": true,
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../${input:helper_platform_bin_name}/bin/ASEvaAPIAvaloniaTest",
+                "../${input:helper_platform_bin_name}/bin/ASEvaAPIAvaloniaTest.dll",
+                "../${input:helper_platform_bin_name}/bin/ASEvaAPIAvaloniaTest.runtimeconfig.json",
+                "../${input:helper_platform_bin_name}/"
+            ],
+        },
+        {
+            "type": "process",
+            "label": "Subtask: Copy to other folders",
+            "hide": true,
+            "command": "dotnet",
+            "args": [
+                "../bin/VSCodeHelper.dll",
+                "copy_outputs",
+                "ASEvaAPIAvaloniaTest",
+                "bin64",
+                "binx",
+                "binxa",
+                "binma",
+            ],
+        },
+    ]
+}

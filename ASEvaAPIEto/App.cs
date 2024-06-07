@@ -12,7 +12,7 @@ namespace ASEva.UIEto
 
     public interface AppHandler
     {
-        Application CreateApp(out String uiBackend, out String webViewBackend);
+        Application CreateApp(bool attach, out String uiBackend, out String webViewBackend);
         void RunApp(Application application, Form mainWindow, Form[] subWindows);
         Font CreateDefaultFont();
         Control ConvertControlToEto(object platformControl);
@@ -22,6 +22,7 @@ namespace ASEva.UIEto
         bool RunDialog(DialogPanel panel);
         Dictionary<String, String> GetThirdPartyNotices();
         bool ShouldPassParent();
+        bool CanParentReceiveChildEvents();
     }
 
     /// \~English
@@ -426,7 +427,11 @@ namespace ASEva.UIEto
         /// <returns>是否成功弹出，对话框的运行结果应通过主面板的各Result属性获取</returns>
         public static bool RunDialog(DialogPanel panel)
         {
-            if (handler == null || panel == null || firstFatalException != null) return false;
+            if (panel == null) return false;
+
+            if (RunDialogHandler != null) return RunDialogHandler.RunDialog(panel);
+
+            if (handler == null || firstFatalException != null) return false;
 
             UITimer localTimer = null;
             if (exceptionTimer == null)
@@ -506,6 +511,19 @@ namespace ASEva.UIEto
         {
             if (handler == null || !handler.ShouldPassParent()) return null;
             else return parent;
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=3.1.0) Whether the upper level control can receive events from all child controls
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=3.1.0) 上级控件是否能接收到所有层级子控件的事件
+        /// </summary>
+        public static bool CanParentReceiveChildEvents
+        {
+            get { return handler != null && handler.CanParentReceiveChildEvents(); }
         }
 
 		/// \~English
@@ -659,18 +677,19 @@ namespace ASEva.UIEto
 
             if (handler != null && application == null)
             {
-                application = handler.CreateApp(out uiBackend, out webViewBackend);
+                application = handler.CreateApp(attach, out uiBackend, out webViewBackend);
                 if (application != null)
                 {
                     runningUI = uiCode;
 
-                    AppDomain.CurrentDomain.UnhandledException += (o, args) => { TriggerFatalException(args); };
-
                     if (attach) application.Attach();
+                    else AppDomain.CurrentDomain.UnhandledException += (o, args) => { TriggerFatalException(args); };
 
                     FuncManager.Register("GetEtoAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
                     FuncManager.Register("GetEtoLibVersion", delegate { return APIInfo.GetEtoLibVersion(); });
                     FuncManager.Register("GetEtoAPIThirdPartyNotices", delegate { return APIInfo.GetThirdPartyNotices(); });
+                    FuncManager.Register("GetUIBackendDirectCode", delegate { return runningUI; });
+                    FuncManager.Register("GetUIBackendFullCode", delegate { return runningUI + (String.IsNullOrEmpty(uiBackend) ? "" : ("." + uiBackend)); });
                     FuncManager.Register("GetUIBackendAPIThirdPartyNotices", delegate { return handler.GetThirdPartyNotices(); });
 
                     FuncManager.Register("RegisterEtoSingleValueGraph", delegate { Agency.RegisterGraphPanel(GraphType.SingleValue, getStyleName("Eto单值", "Eto Single Value"), typeof(ValueGraph)); return null; });
@@ -700,5 +719,12 @@ namespace ASEva.UIEto
         private static Exception firstFatalException = null;
         private static UITimer exceptionTimer = null;
         private static bool gpuOptionsInitialized = false;
+
+        public static RunDialogHandler RunDialogHandler { private get; set; }
+    }
+
+    public interface RunDialogHandler
+    {
+        bool RunDialog(DialogPanel panel);
     }
 }

@@ -7,7 +7,7 @@ using ASEva.UIEto;
 
 namespace ASEvaAPIEtoTest
 {
-    partial class TestWindow
+    partial class EtoTestPanel
     {
         private void initDrawDefault2D(TabPage tabPage)
         {
@@ -17,7 +17,8 @@ namespace ASEvaAPIEtoTest
 
             Button buttonA = new Button { Text = "A" }, buttonB = new Button { Text = "B" }, buttonC = new Button { Text = "C" }, buttonD = new Button { Text = "D" };
             buttonA.SetLogicalWidth(30); buttonB.SetLogicalWidth(30); buttonC.SetLogicalWidth(30); buttonD.SetLogicalWidth(30);
-            var linkButton = new LinkButton{ Text = "ABCD", ToolTip = "ABCD", BackgroundColor = Colors.LightYellow };
+            var linkButton = new LinkButton{ Text = "ABCD", BackgroundColor = Colors.LightYellow };
+            linkButton.SetToolTip("ABCD");
             overlay.AddControl(buttonA, 10, null, 10, null);
 
             buttonA.Click += delegate
