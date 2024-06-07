@@ -11,11 +11,6 @@ chmod -v +x "$CUR_DIR"/binxa/ASEvaAPIEtoTest
 chmod -v +x "$CUR_DIR"/binm/ASEvaAPIEtoTest
 chmod -v +x "$CUR_DIR"/binma/ASEvaAPIEtoTest
 
-chmod -v +x "$CUR_DIR"/binx/TextResourceEditor
-chmod -v +x "$CUR_DIR"/binxa/TextResourceEditor
-chmod -v +x "$CUR_DIR"/binm/TextResourceEditor
-chmod -v +x "$CUR_DIR"/binma/TextResourceEditor
-
 cp -vf "$CUR_DIR"/3party/common/*.* "$CUR_DIR"/bin64/
 cp -vf "$CUR_DIR"/3party/common/*.* "$CUR_DIR"/bin64/debug/
 cp -vf "$CUR_DIR"/3party/common/*.* "$CUR_DIR"/binx/
