@@ -53,6 +53,7 @@ namespace ASEva.UIAvalonia
                 case "linux":
                 case "linuxarm":
                     return "gtk";
+                case "macos":
                 case "macosarm":
                     return "monomac";
                 default:
@@ -87,6 +88,7 @@ namespace ASEva.UIAvalonia
                         case "linuxarm":
                             postfix = "Gtk";
                             break;
+                        case "macos":
                         case "macosarm":
                             postfix = "MonoMac";
                             break;
