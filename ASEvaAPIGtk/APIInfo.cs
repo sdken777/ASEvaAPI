@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 2, 2, 0); // Update log / 更新记录: 添加ShouldOverrideRunDialog
+            return new Version(3, 2, 2, 1); // Update log / 更新记录: 修正X11OffscreenView的dummy box背景色问题
         }
     }
 }
