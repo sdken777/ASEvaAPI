@@ -3,66 +3,67 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Class="ASEvaAPIAvaloniaTest.BasicPageD"
-        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="300"
-        Background="LightYellow">
-    <Grid Margin="8" RowDefinitions="Auto,8,Auto">
-        <Grid Grid.Row="0" ColumnDefinitions="1,8,*,8,1">
-            <Rectangle Grid.Column="0" Fill="Gray" />
-            <Grid Grid.Column="2" RowDefinitions="Auto,8,Auto,8,Auto,8,Auto,8,Auto,8,Auto">
-                <Grid Grid.Row="0" ColumnDefinitions="*,8,1,8,*,8,1,8,*">
-                    <Label Grid.Column="0" Content="{DynamicResource basic-text}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Red" />
-                    <Rectangle Grid.Column="2" Fill="Gray" />
-                    <Label Grid.Column="4" Content="{DynamicResource basic-text}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" />
-                    <Rectangle Grid.Column="6" Fill="Gray" />
-                    <Label Grid.Column="8" Content="{DynamicResource basic-text}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" />
+        mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="300">
+    <Border CornerRadius="3" Background="LightYellow">
+        <Grid Margin="8" RowDefinitions="Auto,8,Auto">
+            <Grid Grid.Row="0" ColumnDefinitions="1,8,*,8,1">
+                <Rectangle Grid.Column="0" Fill="Gray" />
+                <Grid Grid.Column="2" RowDefinitions="Auto,8,Auto,8,Auto,8,Auto,8,Auto,8,Auto">
+                    <Grid Grid.Row="0" ColumnDefinitions="*,8,1,8,*,8,1,8,*">
+                        <Label Grid.Column="0" Content="{DynamicResource basic-text}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Red" />
+                        <Rectangle Grid.Column="2" Fill="Gray" />
+                        <Label Grid.Column="4" Content="{DynamicResource basic-text}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="10" />
+                        <Rectangle Grid.Column="6" Fill="Gray" />
+                        <Label Grid.Column="8" Content="{DynamicResource basic-text}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" />
+                    </Grid>
+                    <Grid Grid.Row="2" ColumnDefinitions="*,8,1,8,*,8,1,8,*">
+                        <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-text}" Foreground="Red" />
+                        <Rectangle Grid.Column="2" Fill="Gray" />
+                        <Button Classes="hyperlink" Grid.Column="4" Content="{DynamicResource basic-text}" FontSize="10" />
+                        <Rectangle Grid.Column="6" Fill="Gray" />
+                        <Button Classes="hyperlink" Grid.Column="8" Content="{DynamicResource basic-text}" FontSize="18" />
+                    </Grid>
+                    <Grid Grid.Row="4" ColumnDefinitions="*,8,1,8,*,8,1,8,*">
+                        <CheckBox Grid.Column="0" Content="{DynamicResource basic-text}" Foreground="Red" />
+                        <Rectangle Grid.Column="2" Fill="Gray" />
+                        <CheckBox Grid.Column="4" Content="{DynamicResource basic-text}" FontSize="10" />
+                        <Rectangle Grid.Column="6" Fill="Gray" />
+                        <CheckBox Grid.Column="8" Content="{DynamicResource basic-text}" FontSize="18" />
+                    </Grid>
+                    <Grid Grid.Row="6" ColumnDefinitions="*,8,1,8,*,8,1,8,*">
+                        <RadioButton Grid.Column="0" Content="{DynamicResource basic-text}" Foreground="Red" />
+                        <Rectangle Grid.Column="2" Fill="Gray" />
+                        <RadioButton Grid.Column="4" Content="{DynamicResource basic-text}" FontSize="10" />
+                        <Rectangle Grid.Column="6" Fill="Gray" />
+                        <RadioButton Grid.Column="8" Content="{DynamicResource basic-text}" FontSize="18" />
+                    </Grid>
+                    <Grid Grid.Row="8" ColumnDefinitions="*,8,1,8,*,8,1,8,*">
+                        <TextBox Grid.Column="0" Text="{DynamicResource basic-text}" VerticalContentAlignment="Center" Foreground="Red" />
+                        <Rectangle Grid.Column="2" Fill="Gray" />
+                        <TextBox Grid.Column="4" Text="{DynamicResource basic-text}" VerticalContentAlignment="Center" FontSize="10" />
+                        <Rectangle Grid.Column="6" Fill="Gray" />
+                        <TextBox Grid.Column="8" Text="{DynamicResource basic-text}" VerticalContentAlignment="Center" FontSize="18" />
+                    </Grid>
+                    <Grid Grid.Row="10" ColumnDefinitions="*,8,1,8,*,8,1,8,*">
+                        <Button Grid.Column="0" Content="{DynamicResource basic-text}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Foreground="Red" />
+                        <Rectangle Grid.Column="2" Fill="Gray" />
+                        <Button Grid.Column="4" Content="{DynamicResource basic-text}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="10" />
+                        <Rectangle Grid.Column="6" Fill="Gray" />
+                        <Button Grid.Column="8" Content="{DynamicResource basic-text}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="18" />
+                    </Grid>
                 </Grid>
-                <Grid Grid.Row="2" ColumnDefinitions="*,8,1,8,*,8,1,8,*">
-                    <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-text}" Foreground="Red" />
-                    <Rectangle Grid.Column="2" Fill="Gray" />
-                    <Button Classes="hyperlink" Grid.Column="4" Content="{DynamicResource basic-text}" FontSize="10" />
-                    <Rectangle Grid.Column="6" Fill="Gray" />
-                    <Button Classes="hyperlink" Grid.Column="8" Content="{DynamicResource basic-text}" FontSize="18" />
-                </Grid>
-                <Grid Grid.Row="4" ColumnDefinitions="*,8,1,8,*,8,1,8,*">
-                    <CheckBox Grid.Column="0" Content="{DynamicResource basic-text}" Foreground="Red" />
-                    <Rectangle Grid.Column="2" Fill="Gray" />
-                    <CheckBox Grid.Column="4" Content="{DynamicResource basic-text}" FontSize="10" />
-                    <Rectangle Grid.Column="6" Fill="Gray" />
-                    <CheckBox Grid.Column="8" Content="{DynamicResource basic-text}" FontSize="18" />
-                </Grid>
-                <Grid Grid.Row="6" ColumnDefinitions="*,8,1,8,*,8,1,8,*">
-                    <RadioButton Grid.Column="0" Content="{DynamicResource basic-text}" Foreground="Red" />
-                    <Rectangle Grid.Column="2" Fill="Gray" />
-                    <RadioButton Grid.Column="4" Content="{DynamicResource basic-text}" FontSize="10" />
-                    <Rectangle Grid.Column="6" Fill="Gray" />
-                    <RadioButton Grid.Column="8" Content="{DynamicResource basic-text}" FontSize="18" />
-                </Grid>
-                <Grid Grid.Row="8" ColumnDefinitions="*,8,1,8,*,8,1,8,*">
-                    <TextBox Grid.Column="0" Text="{DynamicResource basic-text}" VerticalContentAlignment="Center" Foreground="Red" />
-                    <Rectangle Grid.Column="2" Fill="Gray" />
-                    <TextBox Grid.Column="4" Text="{DynamicResource basic-text}" VerticalContentAlignment="Center" FontSize="10" />
-                    <Rectangle Grid.Column="6" Fill="Gray" />
-                    <TextBox Grid.Column="8" Text="{DynamicResource basic-text}" VerticalContentAlignment="Center" FontSize="18" />
-                </Grid>
-                <Grid Grid.Row="10" ColumnDefinitions="*,8,1,8,*,8,1,8,*">
-                    <Button Grid.Column="0" Content="{DynamicResource basic-text}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Foreground="Red" />
-                    <Rectangle Grid.Column="2" Fill="Gray" />
-                    <Button Grid.Column="4" Content="{DynamicResource basic-text}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="10" />
-                    <Rectangle Grid.Column="6" Fill="Gray" />
-                    <Button Grid.Column="8" Content="{DynamicResource basic-text}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="18" />
-                </Grid>
+                <Rectangle Grid.Column="4" Fill="Gray" />
             </Grid>
-            <Rectangle Grid.Column="4" Fill="Gray" />
+            <Grid Grid.Row="2" ColumnDefinitions="Auto,8,Auto,8,Auto,8,Auto,8,Auto,8,Auto">
+                <Label Grid.Column="0" Content="{DynamicResource basic-tooltip-1}" ToolTip.Tip="{DynamicResource basic-tooltip-1}" VerticalAlignment="Center" />
+                <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-tooltip-2}" ToolTip.Tip="{DynamicResource basic-tooltip-2}" />
+                <CheckBox Grid.Column="4" Content="{DynamicResource basic-tooltip-3}" ToolTip.Tip="{DynamicResource basic-tooltip-3}" />
+                <Button Grid.Column="6" Content="{DynamicResource basic-tooltip-4}" ToolTip.Tip="{DynamicResource basic-tooltip-4}" />
+                <Button Grid.Column="8" Content="{DynamicResource basic-tooltip-5}" ToolTip.Tip="{DynamicResource basic-tooltip-5}" FontSize="18" />
+                <Button Grid.Column="10" ToolTip.Tip="{DynamicResource basic-tooltip-6}">
+                    <Image Source="resm:button.png?assembly=ASEvaAPIAvaloniaTest" />
+                </Button>
+            </Grid>
         </Grid>
-        <Grid Grid.Row="2" ColumnDefinitions="Auto,8,Auto,8,Auto,8,Auto,8,Auto,8,Auto">
-            <Label Grid.Column="0" Content="{DynamicResource basic-tooltip-1}" ToolTip.Tip="{DynamicResource basic-tooltip-1}" VerticalAlignment="Center" />
-            <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-tooltip-2}" ToolTip.Tip="{DynamicResource basic-tooltip-2}" />
-            <CheckBox Grid.Column="4" Content="{DynamicResource basic-tooltip-3}" ToolTip.Tip="{DynamicResource basic-tooltip-3}" />
-            <Button Grid.Column="6" Content="{DynamicResource basic-tooltip-4}" ToolTip.Tip="{DynamicResource basic-tooltip-4}" />
-            <Button Grid.Column="8" Content="{DynamicResource basic-tooltip-5}" ToolTip.Tip="{DynamicResource basic-tooltip-5}" FontSize="18" />
-            <Button Grid.Column="10" ToolTip.Tip="{DynamicResource basic-tooltip-6}">
-                <Image Source="resm:button.png?assembly=ASEvaAPIAvaloniaTest" />
-            </Button>
-        </Grid>
-    </Grid>
+    </Border>
 </Panel>

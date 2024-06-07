@@ -93,8 +93,10 @@ namespace ASEvaAPIAvaloniaTest
             public ControlWithBorder()
             {
                 Margin = new Thickness(4);
+                Background = new SolidColorBrush(Colors.LightYellow);
                 BorderThickness = new Thickness(2);
                 BorderBrush = new SolidColorBrush(Colors.LightGray);
+                CornerRadius = new CornerRadius(3);
                 Child = new TestControl{ Width = 250, Height = 80 };
             }
 

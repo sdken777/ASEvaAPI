@@ -11,17 +11,17 @@
             <ColumnDefinition Width="4" />
             <ColumnDefinition Width="*" MinWidth="200" />
         </Grid.ColumnDefinitions>
-        <Panel Grid.Column="0" Background="PaleGreen">
+        <Border Grid.Column="0" CornerRadius="3" Background="PaleGreen">
             <Grid Margin="8" ColumnDefinitions="Auto,8,*">
                 <Grid Grid.Column="0" Width="130" RowDefinitions="*,8,*">
-                    <ListBox Grid.Row="0" x:Name="listBox" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray">
+                    <ListBox Grid.Row="0" x:Name="listBox" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
                         <ListBox.Styles>
                             <Style Selector="ListBoxItem">
                                 <Setter Property="Padding" Value="8,4,8,4" />
                             </Style>
                         </ListBox.Styles>
                     </ListBox>
-                    <ListBox Grid.Row="2" x:Name="checkListBox" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray">
+                    <ListBox Grid.Row="2" x:Name="checkListBox" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
                         <ListBox.Styles>
                             <Style Selector="ListBoxItem">
                                 <Setter Property="Padding" Value="8,0,8,0" />
@@ -35,41 +35,43 @@
                     </ListBox>
                 </Grid>
                 <Grid Grid.Column="2" RowDefinitions="*,2,Auto">
-                    <TreeView Grid.Row="0" x:Name="treeView" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" ItemsSource="{Binding TreeNodes}" PointerReleased="treeView_PointerReleased">
-                        <TreeView.ItemTemplate>
-                            <TreeDataTemplate ItemsSource="{Binding SubNodes}">
-                                <Border HorizontalAlignment="Left" CornerRadius="3" Padding="3" Background="{Binding Background}">
-                                    <TextBlock Text="{Binding Title}" Foreground="{Binding Foreground}" />
-                                </Border>
-                            </TreeDataTemplate>
-                        </TreeView.ItemTemplate>
-                        <TreeView.Styles>
-                            <Style Selector="TreeViewItem">
-                                <Setter Property="IsExpanded" Value="{Binding IsExpanded}"/>
-                            </Style>
-                        </TreeView.Styles>
-                    </TreeView>
+                    <Border Grid.Row="0" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
+                        <TreeView x:Name="treeView" ItemsSource="{Binding TreeNodes}" PointerReleased="treeView_PointerReleased">
+                            <TreeView.ItemTemplate>
+                                <TreeDataTemplate ItemsSource="{Binding SubNodes}">
+                                    <Border HorizontalAlignment="Left" CornerRadius="3" Padding="3" Background="{Binding Background}">
+                                        <TextBlock Text="{Binding Title}" Foreground="{Binding Foreground}" />
+                                    </Border>
+                                </TreeDataTemplate>
+                            </TreeView.ItemTemplate>
+                            <TreeView.Styles>
+                                <Style Selector="TreeViewItem">
+                                    <Setter Property="IsExpanded" Value="{Binding IsExpanded}"/>
+                                </Style>
+                            </TreeView.Styles>
+                        </TreeView>
+                    </Border>
                     <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto">
                         <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-tree-select-first}" Click="linkSelectFirst_Click" />
                         <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-tree-change-color}" Click="linkChangeColor_Click" />
                     </Grid>
                 </Grid>
             </Grid>
-        </Panel>
+        </Border>
         <GridSplitter Grid.Column="1" ResizeDirection="Columns" />
-        <Panel Grid.Column="2" Background="Pink">
+        <Border Grid.Column="2" CornerRadius="3" Background="Pink">
             <Grid Margin="8" RowDefinitions="Auto,2,*,2,Auto">
                 <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto,*,Auto">
                     <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-flow-add}" Click="linkAddControl_Click" />
                     <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-flow-insert}" Click="linkInsertControl_Click" />
                     <Button Classes="hyperlink" Grid.Column="4" Content="{DynamicResource basic-flow-remove}" Click="linkRemoveControl_Click" />
                 </Grid>
-                <Border Grid.Row="2" BorderThickness="1" BorderBrush="Gray">
+                <Border Grid.Row="2" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
                     <ScrollViewer>
-                        <ItemsControl x:Name="flowLayout" Background="WhiteSmoke" ItemsSource="{Binding ControlItems}">
+                        <ItemsControl x:Name="flowLayout" ItemsSource="{Binding ControlItems}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Margin="4" BorderThickness="2" BorderBrush="{Binding BorderBrush}" IsVisible="{Binding IsVisible}">
+                                    <Border Margin="4" CornerRadius="3" Background="LightYellow" BorderThickness="2" BorderBrush="{Binding BorderBrush}" IsVisible="{Binding IsVisible}">
                                         <local:TestControl Height="80" PointerReleased="testControl_PointerReleased" />
                                     </Border>
                                 </DataTemplate>
@@ -83,6 +85,6 @@
                     <Button Classes="hyperlink" Grid.Column="4" Content="{DynamicResource basic-flow-select}" Click="linkSelectControl_Click" />
                 </Grid>
             </Grid>
-        </Panel>
+        </Border>
     </Grid>
 </Panel>

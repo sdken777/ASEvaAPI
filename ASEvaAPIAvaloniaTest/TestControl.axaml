@@ -5,7 +5,7 @@
         xmlns:local="clr-namespace:ASEvaAPIAvaloniaTest"
         x:Class="ASEvaAPIAvaloniaTest.TestControl"
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="150"
-        Background="LightYellow">
+        Background="Transparent">
     <Grid Margin="8" RowDefinitions="*,8,*" ColumnDefinitions="Auto,8,*">
         <Label Grid.Row="0" Grid.Column="0" x:Name="labelRow1" Content="basic-label-row" VerticalAlignment="Center" />
         <TextBox Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" />

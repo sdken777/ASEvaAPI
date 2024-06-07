@@ -38,7 +38,6 @@ namespace ASEvaAPIAvaloniaTest
             var textBoundPaint = new SKPaint{ Color = SKColors.Green, Style = SKPaintStyle.Stroke, IsAntialias = true };
             var pointPaint = new SKPaint{ Color = SKColors.DarkBlue, StrokeWidth = 2, IsAntialias = true };
 
-            c.Clear(SKColors.LightYellow);
             c.DrawLine(10, 100, 190, 100, blackPaint);
             c.DrawLine(10, 120, 190, 120, blackPaint);
             c.DrawLine(100, 10, 100, 190, blackPaint);
