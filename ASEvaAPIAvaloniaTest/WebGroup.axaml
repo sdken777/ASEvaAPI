@@ -19,6 +19,8 @@
             <Rectangle Grid.Column="10" Fill="Gray" />
             <Button Grid.Column="12" Content="{DynamicResource web-call-script}" Click="buttonCallScript_Click" />
         </Grid>
-        <aseva:EtoEmbedder Grid.Row="2" x:Name="webView" />
+        <Border Grid.Row="2" BorderThickness="1" BorderBrush="Gray">
+            <aseva:EtoEmbedder x:Name="webView" />
+        </Border>
     </Grid>
 </Panel>

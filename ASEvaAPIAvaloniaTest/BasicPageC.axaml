@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Class="ASEvaAPIAvaloniaTest.BasicPageC"
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="300"
-        Background="White">
+        Background="LightYellow">
     <Grid Margin="8" ColumnDefinitions="Auto,8,Auto,8,1,8,*">
         <TextBox Grid.Column="0" Width="150" AcceptsReturn="True" TextWrapping="Wrap" />
         <Grid Grid.Column="2" Width="180" RowDefinitions="Auto,2,*,2,Auto,2,Auto,2,Auto">
@@ -12,7 +12,7 @@
                 <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-checklist-check-all}" Click="linkCheckAll_Click" />
                 <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-checklist-uncheck-all}" Click="linkUncheckAll_Click" />
             </Grid>
-            <ListBox Grid.Row="2" x:Name="checkListBox" BorderThickness="1" BorderBrush="Gray" ItemsSource="{Binding CheckItems}" PointerReleased="checkListBox_PointerReleased">
+            <ListBox Grid.Row="2" x:Name="checkListBox" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" ItemsSource="{Binding CheckItems}" PointerReleased="checkListBox_PointerReleased">
                 <ListBox.Styles>
                     <Style Selector="ListBoxItem">
                         <Setter Property="Padding" Value="8,0,8,0" />
@@ -43,7 +43,7 @@
                 <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-grid-add-row}" Click="linkAddTableRow_Click" />
                 <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-grid-remove-row}" Click="linkRemoveTableRow_Click" />
             </Grid>
-            <DataGrid Grid.Row="2" x:Name="mainTableView" BorderThickness="1" BorderBrush="Gray" GridLinesVisibility="All" ItemsSource="{Binding MainTableItems}" SelectionChanged="mainTableView_SelectionChanged">
+            <DataGrid Grid.Row="2" x:Name="mainTableView" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" GridLinesVisibility="All" ItemsSource="{Binding MainTableItems}" SelectionChanged="mainTableView_SelectionChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="{DynamicResource basic-grid-index-title}" Width="75" IsReadOnly="True" Binding="{Binding Index}" />
                     <DataGridTemplateColumn Header="{DynamicResource basic-grid-key-title}" Width="*" >
@@ -66,7 +66,7 @@
                 <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-grid-change-color}" Click="linkChangeTableGridColor_Click" />
                 <Label Grid.Column="2" x:Name="labelChangedRow" />
             </Grid>
-            <DataGrid Grid.Row="6" x:Name="subTableView" Height="80" BorderThickness="1" BorderBrush="Gray" GridLinesVisibility="All">
+            <DataGrid Grid.Row="6" x:Name="subTableView" Background="WhiteSmoke" Height="80" BorderThickness="1" BorderBrush="Gray" GridLinesVisibility="All">
             </DataGrid>
         </Grid>
     </Grid>

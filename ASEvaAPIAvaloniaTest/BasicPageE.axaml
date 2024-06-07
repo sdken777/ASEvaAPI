@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Class="ASEvaAPIAvaloniaTest.BasicPageE"
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="300"
-        Background="White">
+        Background="LightYellow">
     <Grid Margin="8" RowDefinitions="Auto,8,*">
         <Grid Grid.Row="0" ColumnDefinitions="Auto,8,Auto,8,Auto,8,Auto,8,Auto,8,Auto,8,Auto,8,Auto">
             <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-flow-add}" Click="linkAdd_Click" />
@@ -18,7 +18,7 @@
         </Grid>
         <Border Grid.Row="2" BorderThickness="1" BorderBrush="Gray">
             <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
-                <WrapPanel x:Name="flowLayout" Orientation="Vertical" /> 
+                <WrapPanel x:Name="flowLayout" Orientation="Vertical" Background="WhiteSmoke" /> 
             </ScrollViewer>
         </Border>
     </Grid>

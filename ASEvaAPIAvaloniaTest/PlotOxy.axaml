@@ -7,7 +7,7 @@
         x:Class="ASEvaAPIAvaloniaTest.PlotOxy"
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="400">
     <Grid ColumnDefinitions="Auto,8,*">
-        <TreeView Grid.Row="0" x:Name="treeView" Width="250" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" ItemsSource="{Binding TreeNodes}" SelectionChanged="treeView_SelectionChanged">
+        <TreeView Grid.Row="0" x:Name="treeView" Width="250" Background="White" BorderThickness="1" BorderBrush="Gray" ItemsSource="{Binding TreeNodes}" SelectionChanged="treeView_SelectionChanged">
             <TreeView.ItemTemplate>
                 <TreeDataTemplate ItemsSource="{Binding SubNodes}">
                     <Border HorizontalAlignment="Left" CornerRadius="3" Padding="3">
@@ -21,6 +21,6 @@
                 </Style>
             </TreeView.Styles>
         </TreeView>
-        <oxyplot:PlotView Grid.Column="2" x:Name="plotView" />
+        <oxyplot:PlotView Grid.Column="2" x:Name="plotView" Background="Transparent" />
     </Grid>
 </Panel>
