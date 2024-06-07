@@ -6,7 +6,7 @@
         x:Class="ASEvaAPIAvaloniaTest.InfoDialog"
         Title="" Icon="resm:icon.png" WindowStartupLocation="CenterScreen" 
         Width="400" Height="600" MinWidth="400" MinHeight="600">
-    <Border Margin="8" BorderThickness="1" BorderBrush="Gray">
+    <Border Margin="8" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
         <ScrollViewer>
             <SelectableTextBlock x:Name="textBlock" Margin="8" />
         </ScrollViewer>

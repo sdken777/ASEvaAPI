@@ -6,7 +6,7 @@
         x:Class="ASEvaAPIAvaloniaTest.DrawDefault"
         mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="300" Width="200">
     <Border CornerRadius="3" Background="LightYellow">
-        <Canvas x:Name="canvas" PointerPressed="canvas_PointerPressed">
+        <Canvas x:Name="canvas" Background="Transparent" PointerPressed="canvas_PointerPressed">
             <Line StartPoint="10,100" EndPoint="190,100" Stroke="Black" />
             <Line StartPoint="10,120" EndPoint="190,120" Stroke="Black" />
             <Line StartPoint="100,10" EndPoint="100,190" Stroke="Black" />
