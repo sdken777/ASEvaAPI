@@ -25,7 +25,7 @@ namespace ASEvaAPIEtoTest
             Resizable = true;
 
             testPanel = new EtoTestPanel(language, onscreenRendering);
-            this.Content = testPanel;
+            this.SetContentAsControl(testPanel, 0);
 
             Closing += (o, e) =>
             {
