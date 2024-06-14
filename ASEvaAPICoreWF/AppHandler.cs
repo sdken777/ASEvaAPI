@@ -106,6 +106,7 @@ namespace ASEva.UICoreWF
             // CHECK: 修正application.Run之前不触发MouseDown等事件
             System.Windows.Forms.Application.RemoveMessageFilter(TempBubbleEventFilter);
 
+            if (window.Content == null) window.Content = new Panel();
             window.Closed += delegate { findAndHideWebViews(window); };
 
             try
