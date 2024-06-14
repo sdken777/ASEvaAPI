@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 3, 1); // Update log / 更新记录: 修正window.Content为空时RunApp异常
+            return new Version(2, 9, 3, 2); // Update log / 更新记录: 修正vertical StackLayout中无控件时初始化异常
         }
     }
 }

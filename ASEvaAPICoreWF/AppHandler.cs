@@ -101,12 +101,34 @@ namespace ASEva.UICoreWF
             }
         }
 
+        // CHECK: 修正vertical StackLayout中无控件时初始化异常
+        private void fixVerticalStackLayoutIssue(Control rootControl)
+        {
+            if (rootControl is StackLayout)
+            {
+                var stackLayout = rootControl as StackLayout;
+                if (stackLayout.Orientation == Orientation.Vertical && stackLayout.Items.Count == 0)
+                {
+                    stackLayout.AddSpace(1);
+                    return;
+                }
+            }
+            if (rootControl is Container)
+            {
+                foreach (var control in (rootControl as Container).Children)
+                {
+                    fixVerticalStackLayoutIssue(control);
+                }
+            }
+        }
+
         public void RunApp(Application application, Form window, Form[] subWindows)
         {
             // CHECK: 修正application.Run之前不触发MouseDown等事件
             System.Windows.Forms.Application.RemoveMessageFilter(TempBubbleEventFilter);
 
             if (window.Content == null) window.Content = new Panel();
+            fixVerticalStackLayoutIssue(window.Content);
             window.Closed += delegate { findAndHideWebViews(window); };
 
             try
@@ -147,6 +169,8 @@ namespace ASEva.UICoreWF
         public bool RunDialog(DialogPanel panel)
         {
             if (panel.Mode == DialogPanel.DialogMode.Invalid) return false;
+
+            fixVerticalStackLayoutIssue(panel);
 
             var winformControl = (System.Windows.Forms.Control)panel.ToNative(true);
             if (winformControl == null) return false;
