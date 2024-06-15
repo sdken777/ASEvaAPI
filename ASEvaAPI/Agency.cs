@@ -1136,29 +1136,29 @@ namespace ASEva
         /// <summary>
         /// Get status of a general device
         /// </summary>
-        /// <param name="type">Related native plugin's type ID, the same as the "type" field in info.txt</param>
+        /// <param name="id">Device native type ID, or device class ID</param>
         /// <returns>Status of the general device</returns>
         /// \~Chinese
         /// <summary>
         /// 获取设备状态
         /// </summary>
-        /// <param name="type">设备的类型ID，在插件的info.txt中以type字段描述</param>
+        /// <param name="id">设备原生类型ID，或设备组件ID</param>
         /// <returns>返回设备状态</returns>
-        public static GeneralDeviceStatus GetDeviceStatus(String type)
+        public static GeneralDeviceStatus GetDeviceStatus(String id)
         {
-            return Handler.GetDeviceStatus(type);
+            return Handler.GetDeviceStatus(id);
         }
 
         /// \~English
         /// <summary>
         /// (api:app=2.3.0) Get all general devices' status
         /// </summary>
-        /// <returns>The Dictionary. The key is type ID of general device</returns>
+        /// <returns>The Dictionary. The key is native type ID or class ID of the general device</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.3.0) 获取所有设备状态
         /// </summary>
-        /// <returns>设备状态表，键为设备的类型ID</returns>
+        /// <returns>设备状态表，键为设备的原生类型ID或组件ID</returns>
         public static Dictionary<String, DeviceStatusDetail> GetAllDeviceStatus()
         {
             return Handler.GetAllDeviceStatus();
@@ -1168,17 +1168,17 @@ namespace ASEva
         /// <summary>
         /// Get status of a general device's sub devices
         /// </summary>
-        /// <param name="type">Related native plugin's type ID, the same as the "type" field in info.txt</param>
+        /// <param name="id">Device native type ID, or device class ID</param>
         /// <returns>Status of a general device's sub devices</returns>
         /// \~Chinese
         /// <summary>
         /// 获取各子设备的设备状态
         /// </summary>
-        /// <param name="type">设备的类型ID，在插件的info.txt中以type字段描述</param>
+        /// <param name="id">设备原生类型ID，或设备组件ID</param>
         /// <returns>各子设备的设备状态</returns>
-        public static GeneralDeviceStatus[] GetChildDeviceStatus(String type)
+        public static GeneralDeviceStatus[] GetChildDeviceStatus(String id)
         {
-            return Handler.GetChildDeviceStatus(type);
+            return Handler.GetChildDeviceStatus(id);
         }
 
         /// \~English
@@ -3764,19 +3764,19 @@ namespace ASEva
         /// <summary>
         /// (api:app=2.15.1) Get status of components related to the console
         /// </summary>
-        /// <param name="dialogClassID">Console component's class ID</param>
+        /// <param name="consoleClassID">Console component's class ID</param>
         /// <param name="childrenStatus">Output child status</param>
         /// <returns>The main status</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=2.15.1) 获取控制台相关组件配置状态
         /// </summary>
-        /// <param name="dialogClassID">控制台组件ID</param>
+        /// <param name="consoleClassID">控制台组件ID</param>
         /// <param name="childrenStatus">子配置状态</param>
         /// <returns>配置状态</returns>
-        public static ConfigStatus GetConsoleRelatedModulesConfigStatus(String dialogClassID, out ConfigStatus[] childrenStatus)
+        public static ConfigStatus GetConsoleRelatedModulesConfigStatus(String consoleClassID, out ConfigStatus[] childrenStatus)
         {
-            return Handler.GetConsoleRelatedModulesConfigStatus(dialogClassID, out childrenStatus);
+            return Handler.GetConsoleRelatedModulesConfigStatus(consoleClassID, out childrenStatus);
         }
 
         /// \~English
