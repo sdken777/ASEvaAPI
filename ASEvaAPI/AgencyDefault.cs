@@ -1481,5 +1481,78 @@ namespace ASEva
         public void RemoveProcessorVideoReference(int videoChannel)
         {
         }
+
+        public AddBusProtocolResult AddBusProtocolFile(string filePath, out BusProtocolFileID[] fileIDs)
+        {
+            fileIDs = null;
+            return AddBusProtocolResult.Invalid;
+        }
+
+        public void SendBusMessageBound(string messageID, uint? interval, out byte[] data)
+        {
+            data = null;
+        }
+
+        public void SendRawDataWithCPUTick(ulong cpuTick, string channelID, double[] values, byte[] binary)
+        {
+        }
+
+        public BusMessageInfo GetBusMessageInfoByLocalID(int channel, uint localID)
+        {
+            return null;
+        }
+
+        public bool StartOnlineWithController(string controllerName, bool previewOnly)
+        {
+            return false;
+        }
+
+        public bool StartRemoteWithController(string controllerName, bool previewOnly, ulong startPosixTime)
+        {
+            return false;
+        }
+
+        public bool StopRunningWithController(string controllerID)
+        {
+            return false;
+        }
+
+        public WindowClassInfo RegisterTransformWindowClassDirectly(string windowClassID, WindowClass transformWindowClass, string defaultConfig)
+        {
+            return null;
+        }
+
+        public DialogClassInfo RegisterTransformDialogClassDirectly(string dialogClassID, DialogClass transformDialogClass, string defaultConfig)
+        {
+            return null;
+        }
+
+        public void RegisterGraphPanelForType(GraphType graphType, string styleName, Type panelType)
+        {
+        }
+
+        public void RegisterGraphPanelForID(int graphID, string styleName, Type panelType)
+        {
+        }
+
+        public string[] GetGraphPanelStylesForType(GraphType graphType)
+        {
+            return null;
+        }
+
+        public string[] GetGraphPanelStylesForID(int graphID)
+        {
+            return null;
+        }
+
+        public GraphPanel CreateGraphPanelForType(GraphType graphID, string styleName)
+        {
+            return null;
+        }
+
+        public GraphPanel CreateGraphPanelForID(int graphID, string styleName)
+        {
+            return null;
+        }
     }
 }

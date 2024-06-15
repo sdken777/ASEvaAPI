@@ -45,7 +45,7 @@ namespace ASEva
         bool UpdateBusProtocolFilePath(BusProtocolFileID fileID, String filePath);
         BusProtocolFileState GetBusProtocolFileState(BusProtocolFileID fileID);
         bool AddBusProtocolFile(String filePath, out BusProtocolFileID fileID);
-        AddBusProtocolResult AddBusProtocolFile(String filePath);
+        AddBusProtocolResult AddBusProtocolFile(String filePath, out BusProtocolFileID[] fileIDs);
         void RemoveBusProtocolFile(BusProtocolFileID fileID);
         String GetChannelAliasName(String channelID);
         Dictionary<String, String> GetChannelAliasTable();
@@ -53,9 +53,9 @@ namespace ASEva
         BusSignalValue[] ParseBusMessage(BusMessageSample busMessage);
         void SendBusMessage(BusMessage msg);
         void SendBusMessage(String messageID, uint? interval);
-        void SendBusMessage(String messageID, uint? interval, out byte[] data);
+        void SendBusMessageBound(String messageID, uint? interval, out byte[] data);
         void SendRawData(String channelID, double[] values, byte[] binary);
-        void SendRawData(ulong cpuTick, String channelID, double[] values, byte[] binary);
+        void SendRawDataWithCPUTick(ulong cpuTick, String channelID, double[] values, byte[] binary);
         void SendManualTrigger(int channel);
         String GetDataPath();
         String[] GetSubDataPaths();
@@ -101,7 +101,7 @@ namespace ASEva
         BusFileInfo[] GetBusProtocolFilesInfo();
         int? GetBusProtocolFileChannel(String protocolName);
         float GetBusMessageFPS(int channel, uint localID);
-        BusMessageInfo GetBusMessageInfo(int channel, uint localID);
+        BusMessageInfo GetBusMessageInfoByLocalID(int channel, uint localID);
         bool IsBusMessageBound(String busMessageID);
         object[] GetEventHandles();
         EventInfo GetEventInfo(object eventHandle);
@@ -109,15 +109,15 @@ namespace ASEva
         void SetEventComment(object eventHandle, String comment);
         void StartReplay(double startTimeline, double? interestTarget);
         bool StartReplay(bool force, double startTimeline, double? interestTarget);
-        bool StartOnline(String controllerName, bool previewOnly);
+        bool StartOnlineWithController(String controllerName, bool previewOnly);
         bool StartOnline(bool force, bool previewOnly);
         bool StartOnline(bool force, bool previewOnly, String sessionDirName);
         bool StartOffline(bool force, bool previewOnly);
         bool StartOffline(bool force, bool previewOnly, String genDirName);
         bool StartRemote(bool force, bool previewOnly, String sessionDirName, ulong startPosixTime);
-        bool StartRemote(String controllerName, bool previewOnly, ulong startPosixTime);
+        bool StartRemoteWithController(String controllerName, bool previewOnly, ulong startPosixTime);
         void StopRunning();
-        bool StopRunning(String controllerID);
+        bool StopRunningWithController(String controllerID);
         bool StopRunning(bool force, bool editRecordedSession);
         double? GetSessionTimeline(DateTime session);
         double? GetSessionLength(DateTime session);
@@ -197,9 +197,9 @@ namespace ASEva
         Dictionary<String, TaskClassInfo> GetTaskClassTable();
         Dictionary<String, ConsoleClassInfo> GetConsoleClassTable();
         WindowClassInfo RegisterTransformWindowClass(String windowClassID, String config);
-        WindowClassInfo RegisterTransformWindowClass(String windowClassID, WindowClass transformWindowClass, String defaultConfig);
+        WindowClassInfo RegisterTransformWindowClassDirectly(String windowClassID, WindowClass transformWindowClass, String defaultConfig);
         DialogClassInfo RegisterTransformDialogClass(String dialogClassID, String config);
-        DialogClassInfo RegisterTransformDialogClass(String dialogClassID, DialogClass transformDialogClass, String defaultConfig);
+        DialogClassInfo RegisterTransformDialogClassDirectly(String dialogClassID, DialogClass transformDialogClass, String defaultConfig);
         ConfigStatus GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID, out ConfigStatus[] childrenStatus);
         ConfigStatus GetConsoleRelatedModulesConfigStatus(String consoleClassID, out ConfigStatus[] childrenStatus);
         void DisableAllConfigs();
@@ -291,12 +291,12 @@ namespace ASEva
         ulong GetCPUTick();
         ulong GetCPUTicksPerSecond();
         Timestamp[] GetChannelLatestTimestamps(String channelID);
-        void RegisterGraphPanel(GraphType graphType, String styleName, Type panelType);
-        void RegisterGraphPanel(int graphID, String styleName, Type panelType);
-        String[] GetGraphPanelStyles(GraphType graphType);
-        String[] GetGraphPanelStyles(int graphID);
-        GraphPanel CreateGraphPanel(GraphType graphID, String styleName);
-        GraphPanel CreateGraphPanel(int graphID, String styleName);
+        void RegisterGraphPanelForType(GraphType graphType, String styleName, Type panelType);
+        void RegisterGraphPanelForID(int graphID, String styleName, Type panelType);
+        String[] GetGraphPanelStylesForType(GraphType graphType);
+        String[] GetGraphPanelStylesForID(int graphID);
+        GraphPanel CreateGraphPanelForType(GraphType graphID, String styleName);
+        GraphPanel CreateGraphPanelForID(int graphID, String styleName);
         DateTime? GetInternetNTPTime();
         Dictionary<String, String> GetPluginGuestSyncTable();
         GraphicCardInfo[] GetGraphicCardInfos();
@@ -338,35 +338,18 @@ namespace ASEva
         /// Add bus protocol file
         /// </summary>
         /// <param name="filePath">File path of bus protocol file</param>
+        /// <param name="fileIDs">Output bus protocol file IDs, null if the file doesn't exist</param>
         /// <returns>The result</returns>
         /// \~Chinese
         /// <summary>
         /// 添加新的总线协议文件
         /// </summary>
         /// <param name="filePath">总线协议文件路径</param>
+        /// <param name="fileIDs">若文件存在则输出关联的总线协议文件ID列表，否则输出null</param>
         /// <returns>添加结果</returns>
-        public static AddBusProtocolResult AddBusProtocolFile(String filePath)
+        public static AddBusProtocolResult AddBusProtocolFile(String filePath, out BusProtocolFileID[] fileIDs)
         {
-            return Handler.AddBusProtocolFile(filePath);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Add bus protocol file (For multiple channel protocol, only the first channel will be added)
-        /// </summary>
-        /// <param name="filePath">File path of bus protocol file</param>
-        /// <param name="fileID">Output bus protocol file ID, null if the file doesn't exist</param>
-        /// <returns>Whether it's a new protocol, or else it already exists</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 添加新的总线协议文件(多通道协议文件将按单通道处理，输出首个通道)
-        /// </summary>
-        /// <param name="filePath">总线协议文件路径</param>
-        /// <param name="fileID">总线协议文件ID，若文件存在则输出该ID，否则输出null</param>
-        /// <returns>是否为新添加的总线协议</returns>
-        public static bool AddBusProtocolFile(String filePath, out BusProtocolFileID fileID)
-        {
-            return Handler.AddBusProtocolFile(filePath, out fileID);
+            return Handler.AddBusProtocolFile(filePath, out fileIDs);
         }
 
         /// \~English
@@ -507,25 +490,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Call Web API (POST) asynchronously, default content type is ASEva.WebPostContentType.WWWFormUrlEncoded
-        /// </summary>
-        /// <param name="request">The request</param>
-        /// <param name="body">Binary data body</param>
-        /// <param name="context">The context of calling. Since this function is non-blocking, the context needs to be used to get the status and response at a future time after it ends</param>
-        /// \~Chinese
-        /// <summary>
-        /// 非阻塞调用Web API (POST)，内容类型默认为 ASEva.WebPostContentType.WWWFormUrlEncoded
-        /// </summary>
-        /// <param name="request">调用请求</param>
-        /// <param name="body">提交的二进制数据body</param>
-        /// <param name="context">调用上下文。由于本函数为非阻塞，在结束后需要通过该对象在未来时刻获取调用状态和响应字符串</param>
-        public static void CallWebApiPost(String request, byte[] body, WebApiContext context)
-        {
-            Handler.CallWebApiPost(request, body, context);
-        }
-
-        /// \~English
-        /// <summary>
         /// Call Web API (POST) asynchronously with the specified content type
         /// </summary>
         /// <param name="request">The request</param>
@@ -657,40 +621,40 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Create graph panel
+        /// (api:app=3.1.0) Create graph panel
         /// </summary>
         /// <param name="graphType">Graph type</param>
         /// <param name="styleName">Style name, set to null to use the first style</param>
         /// <returns>Created graph panel, null if failed to create</returns>
         /// \~Chinese
         /// <summary>
-        /// 创建图表可视化面板
+        /// (api:app=3.1.0) 创建图表可视化面板
         /// </summary>
         /// <param name="graphType">图表类型</param>
         /// <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
         /// <returns>可视化面板对象，若创建失败则返回null</returns>
-        public static GraphPanel CreateGraphPanel(GraphType graphType, String styleName)
+        public static GraphPanel CreateGraphPanelForType(GraphType graphType, String styleName)
         {
-            return Handler.CreateGraphPanel(graphType, styleName);
+            return Handler.CreateGraphPanelForType(graphType, styleName);
         }
 
         /// \~English
         /// <summary>
-        /// Create graph panel
+        /// (api:app=3.1.0) Create graph panel
         /// </summary>
         /// <param name="graphID">Graph ID</param>
         /// <param name="styleName">Style name, set to null to use the first style</param>
         /// <returns>Created graph panel, null if failed to create</returns>
         /// \~Chinese
         /// <summary>
-        /// 创建图表可视化面板
+        /// (api:app=3.1.0) 创建图表可视化面板
         /// </summary>
         /// <param name="graphID">图表报告ID</param>
         /// <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
         /// <returns>可视化面板对象，若创建失败则返回null</returns>
-        public static GraphPanel CreateGraphPanel(int graphID, String styleName)
+        public static GraphPanel CreateGraphPanelForID(int graphID, String styleName)
         {
-            return Handler.CreateGraphPanel(graphID, styleName);
+            return Handler.CreateGraphPanelForID(graphID, styleName);
         }
 
         /// \~English
@@ -1315,21 +1279,21 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get information of message with the specified local ID at the specified channel
+        /// (api:app=3.1.0) Get information of message with the specified local ID at the specified channel
         /// </summary>
         /// <param name="channel">Bus channel, ranges 1~16</param>
         /// <param name="localID">Local ID of bus message</param>
         /// <returns>Message information, null if not found</returns>
         /// \~Chinese
         /// <summary>
-        /// 获取指定通道上指定ID报文信息
+        /// (api:app=3.1.0) 获取指定通道上指定ID报文信息
         /// </summary>
         /// <param name="channel">总线通道，1~16</param>
         /// <param name="localID">通道内的报文ID</param>
         /// <returns>总线报文信息，无信息则返回null</returns>
-        public static BusMessageInfo GetBusMessageInfo(int channel, uint localID)
+        public static BusMessageInfo GetBusMessageInfoByLocalID(int channel, uint localID)
         {
-            return Handler.GetBusMessageInfo(channel, localID);
+            return Handler.GetBusMessageInfoByLocalID(channel, localID);
         }
 
         /// \~English
@@ -1899,32 +1863,15 @@ namespace ASEva
         /// Get information of dialog class
         /// </summary>
         /// <param name="dialogClassID">Dialog class ID</param>
+        /// <param name="transformID">Transform ID, can be null</param>
         /// <returns>Information of dialog class, null if not found</returns>
         /// \~Chinese
         /// <summary>
         /// 获取对话框组件信息
         /// </summary>
         /// <param name="dialogClassID">对话框组件ID</param>
+        /// <param name="transformID">分化ID，可为null</param>
         /// <returns>对话框组件信息，若未找到返回null</returns>
-        public static DialogClassInfo GetDialogClassInfo(String dialogClassID)
-        {
-            return Handler.GetDialogClassInfo(dialogClassID);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Get information of transformed dialog class
-        /// </summary>
-        /// <param name="dialogClassID">Dialog class ID</param>
-        /// <param name="transformID">Transform ID</param>
-        /// <returns>Information of transformed dialog class, null if not found</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取分化对话框组件信息
-        /// </summary>
-        /// <param name="dialogClassID">对话框组件ID</param>
-        /// <param name="transformID">分化ID</param>
-        /// <returns>分化对话框组件信息，若未找到返回null</returns>
         public static DialogClassInfo GetDialogClassInfo(String dialogClassID, String transformID)
         {
             return Handler.GetDialogClassInfo(dialogClassID, transformID);
@@ -2345,36 +2292,36 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get all available style names for the specified graph ID
+        /// (api:app=3.1.0) Get all available style names for the specified graph ID
         /// </summary>
         /// <param name="graphID">Graph ID</param>
         /// <returns>All available style names</returns>
         /// \~Chinese
         /// <summary>
-        /// 获取符合图表报告的所有可视化面板样式名
+        /// (api:app=3.1.0) 获取符合图表报告的所有可视化面板样式名
         /// </summary>
         /// <param name="graphID">图表报告ID</param>
         /// <returns>可视化面板样式名列表</returns>
-        public static String[] GetGraphPanelStyles(int graphID)
+        public static String[] GetGraphPanelStylesForID(int graphID)
         {
-            return Handler.GetGraphPanelStyles(graphID);
+            return Handler.GetGraphPanelStylesForID(graphID);
         }
 
         /// \~English
         /// <summary>
-        /// Get all available style names for the specified graph type
+        /// (api:app=3.1.0) Get all available style names for the specified graph type
         /// </summary>
         /// <param name="graphType">Graph type</param>
         /// <returns>All available style names</returns>
         /// \~Chinese
         /// <summary>
-        /// 获取符合图表报告的所有可视化面板样式名
+        /// (api:app=3.1.0) 获取符合图表报告的所有可视化面板样式名
         /// </summary>
         /// <param name="graphType">图表类型</param>
         /// <returns>可视化面板样式名列表</returns>
-        public static String[] GetGraphPanelStyles(GraphType graphType)
+        public static String[] GetGraphPanelStylesForType(GraphType graphType)
         {
-            return Handler.GetGraphPanelStyles(graphType);
+            return Handler.GetGraphPanelStylesForType(graphType);
         }
 
         /// \~English
@@ -2628,25 +2575,6 @@ namespace ASEva
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
         /// <param name="classID">Component's class ID</param>
-        /// <returns>Status of component's configuration, returns ASEva.ConfigStatus.Disabled if not found</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取数据处理/原生/设备组件配置的状态
-        /// </summary>
-        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
-        /// <param name="classID">组件的类别ID</param>
-        /// <returns>组件配置的状态，若找不到类别ID对应的组件则返回 ASEva.ConfigStatus.Disabled </returns>
-        public static ConfigStatus GetModuleConfigStatus(object caller, String classID)
-        {
-            return Handler.GetModuleConfigStatus(caller, classID);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Get status of processor/native/device component's configuration
-        /// </summary>
-        /// <param name="caller">The caller who calls this API, can be object of ASEva.MainWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
-        /// <param name="classID">Component's class ID</param>
         /// <param name="errorHint">Error hint, available while the status is EnabledWithError or EnabledWithWarning</param>
         /// <returns>Status of component's configuration, returns ASEva.ConfigStatus.Disabled if not found</returns>
         /// \~Chinese
@@ -2690,23 +2618,6 @@ namespace ASEva
         public static Dictionary<String, NativeClassInfo> GetNativeClassTable()
         {
             return Handler.GetNativeClassTable();
-        }
-
-        /// \~English
-        /// <summary>
-        /// Get version of all native plugins
-        /// </summary>
-        /// <param name="prefix">Prefix, like "bus", "video", "proc", "dev", etc.</param>
-        /// <returns>Dictionary. The key is plugin's type ID</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取原生插件版本列表
-        /// </summary>
-        /// <param name="prefix">插件前缀，如bus、video、proc、dev等</param>
-        /// <returns>版本列表，键为原生插件的类型ID，值为版本字符串</returns>
-        public static Dictionary<String, String> GetNativePluginVersions(String prefix)
-        {
-            return Handler.GetNativePluginVersions(prefix);
         }
 
         /// \~English
@@ -3563,32 +3474,15 @@ namespace ASEva
         /// Get information of window class
         /// </summary>
         /// <param name="windowClassID">Window class ID</param>
+        /// <param name="transformID">Transform ID, can be null</param>
         /// <returns>Information of window class, null if not found</returns>
         /// \~Chinese
         /// <summary>
         /// 获取窗口组件信息
         /// </summary>
         /// <param name="windowClassID">窗口组件ID</param>
+        /// <param name="transformID">分化ID，可为null</param>
         /// <returns>窗口组件信息，若未找到返回null</returns>
-        public static WindowClassInfo GetWindowClassInfo(String windowClassID)
-        {
-            return Handler.GetWindowClassInfo(windowClassID);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Get information of transformed window class
-        /// </summary>
-        /// <param name="windowClassID">Window class ID</param>
-        /// <param name="transformID">Transform ID</param>
-        /// <returns>Information of transformed window class, null if not found</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取分化窗口组件信息
-        /// </summary>
-        /// <param name="windowClassID">窗口组件ID</param>
-        /// <param name="transformID">分化ID</param>
-        /// <returns>分化窗口组件信息，若未找到返回null</returns>
         public static WindowClassInfo GetWindowClassInfo(String windowClassID, String transformID)
         {
             return Handler.GetWindowClassInfo(windowClassID, transformID);
@@ -3726,21 +3620,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get whether the system is ready for saving project file, starting session, etc.
-        /// </summary>
-        /// <returns>Whether the system is ready for saving project file, starting session, etc.</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 返回是否允许进行保存工程项目和开始session等操作
-        /// </summary>
-        /// <returns>是否允许进行保存工程项目和开始session等操作</returns>
-        public static bool IsReady()
-        {
-            return Handler.IsReady();
-        }
-
-        /// \~English
-        /// <summary>
         /// Get whether the system is ready for saving project file, starting session, and output the reason why it's not ready
         /// </summary>
         /// <param name="busyReason">The ready why the system is not ready, empty means unknown</param>
@@ -3862,23 +3741,6 @@ namespace ASEva
         public static void OpenDialog(object caller, String dialogClassID, String config)
         {
             Handler.OpenDialog(caller, dialogClassID, config);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Open project
-        /// </summary>
-        /// <param name="projectFile">Path of project file, set to null to load autosaved in the folder of application's configuration files</param>
-        /// <returns>Whether successful</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 打开项目
-        /// </summary>
-        /// <param name="projectFile">项目文件路径，若设为null则从autosave读取</param>
-        /// <returns>是否成功打开项目</returns>
-        public static bool OpenProject(String projectFile)
-        {
-            return Handler.OpenProject(projectFile);
         }
 
         /// \~English
@@ -4058,40 +3920,40 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Register graph panel type for the specified graph type
+        /// (api:app=3.1.0) Register graph panel type for the specified graph type
         /// </summary>
         /// <param name="graphType">Graph type</param>
         /// <param name="styleName">Style name to register</param>
         /// <param name="panelType">Graph panel type, which should be derived from UI framework's control base class, and implement ASEva.GraphPanel </param>
         /// \~Chinese
         /// <summary>
-        /// 注册针对指定图表类型的可视化面板
+        /// (api:app=3.1.0) 注册针对指定图表类型的可视化面板
         /// </summary>
         /// <param name="graphType">指定图表类型</param>
         /// <param name="styleName">面板样式名</param>
         /// <param name="panelType">面板类型，需要继承UI框架的控件基类，并实现 ASEva.GraphPanel </param>
-        public static void RegisterGraphPanel(GraphType graphType, String styleName, Type panelType)
+        public static void RegisterGraphPanelForType(GraphType graphType, String styleName, Type panelType)
         {
-            Handler.RegisterGraphPanel(graphType, styleName, panelType);
+            Handler.RegisterGraphPanelForType(graphType, styleName, panelType);
         }
 
         /// \~English
         /// <summary>
-        /// Register graph panel type for the specified graph ID (higher priority than graph type)
+        /// (api:app=3.1.0) Register graph panel type for the specified graph ID (higher priority than graph type)
         /// </summary>
         /// <param name="graphID">Graph ID</param>
         /// <param name="styleName">Style name to register</param>
         /// <param name="panelType">Graph panel type, which should be derived from UI framework's control base class, and implement ASEva.GraphPanel </param>
         /// \~Chinese
         /// <summary>
-        /// 注册针对指定图表ID的可视化面板（比按图表类型注册的优先级更高）
+        /// (api:app=3.1.0) 注册针对指定图表ID的可视化面板（比按图表类型注册的优先级更高）
         /// </summary>
         /// <param name="graphID">图表报告ID</param>
         /// <param name="styleName">面板样式名</param>
         /// <param name="panelType">面板类型，需要继承UI框架的控件基类，并实现 ASEva.GraphPanel </param>
-        public static void RegisterGraphPanel(int graphID, String styleName, Type panelType)
+        public static void RegisterGraphPanelForID(int graphID, String styleName, Type panelType)
         {
-            Handler.RegisterGraphPanel(graphID, styleName, panelType);
+            Handler.RegisterGraphPanelForID(graphID, styleName, panelType);
         }
 
         /// \~English
@@ -4115,7 +3977,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Register transformed dialog class directly
+        /// (api:app=3.1.0) Register transformed dialog class directly
         /// </summary>
         /// <param name="dialogClassID">Original dialog class's ID</param>
         /// <param name="transformDialogClass">Transformed dialog class object</param>
@@ -4123,15 +3985,15 @@ namespace ASEva
         /// <returns>Information of transformed dialog class</returns>
         /// \~Chinese
         /// <summary>
-        /// 直接注册分化对话框组件
+        /// (api:app=3.1.0) 直接注册分化对话框组件
         /// </summary>
         /// <param name="dialogClassID">原对话框组件ID</param>
         /// <param name="transformDialogClass">分化对话框组件类</param>
         /// <param name="defaultConfig">默认的可用于分化的配置字符串</param>
         /// <returns>分化后的对话框组件信息</returns>
-        public static DialogClassInfo RegisterTransformDialogClass(String dialogClassID, DialogClass transformDialogClass, String defaultConfig)
+        public static DialogClassInfo RegisterTransformDialogClassDirectly(String dialogClassID, DialogClass transformDialogClass, String defaultConfig)
         {
-            return Handler.RegisterTransformDialogClass(dialogClassID, transformDialogClass, defaultConfig);
+            return Handler.RegisterTransformDialogClassDirectly(dialogClassID, transformDialogClass, defaultConfig);
         }
 
         /// \~English
@@ -4155,7 +4017,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Register transformed window class directly
+        /// (api:app=3.1.0) Register transformed window class directly
         /// </summary>
         /// <param name="windowClassID">Original window class's ID</param>
         /// <param name="transformWindowClass">Transformed window class object</param>
@@ -4163,15 +4025,15 @@ namespace ASEva
         /// <returns>Information of transformed window class</returns>
         /// \~Chinese
         /// <summary>
-        /// 直接注册分化窗口组件
+        /// (api:app=3.1.0) 直接注册分化窗口组件
         /// </summary>
         /// <param name="windowClassID">原窗口组件ID</param>
         /// <param name="transformWindowClass">分化窗口组件类</param>
         /// <param name="defaultConfig">默认的可用于分化的配置字符串</param>
         /// <returns>分化后的窗口组件信息</returns>
-        public static WindowClassInfo RegisterTransformWindowClass(String windowClassID, WindowClass transformWindowClass, String defaultConfig)
+        public static WindowClassInfo RegisterTransformWindowClassDirectly(String windowClassID, WindowClass transformWindowClass, String defaultConfig)
         {
-            return Handler.RegisterTransformWindowClass(windowClassID, transformWindowClass, defaultConfig);
+            return Handler.RegisterTransformWindowClassDirectly(windowClassID, transformWindowClass, defaultConfig);
         }
 
         /// \~English
@@ -4467,38 +4329,21 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Transmit bound bus message, either periodically or once (only available in online mode)
-        /// </summary>
-        /// <param name="messageID">Message ID of bound bus message</param>
-        /// <param name="interval">Transmit period, in milliseconds (at least 10). If it is set to null, it is transmitted only once</param>
-        /// \~Chinese
-        /// <summary>
-        /// 发送总线报文（该报文需设置绑定），可周期性发送，也可单次发送（仅在线模式可用）
-        /// </summary>
-        /// <param name="messageID">绑定的报文ID</param>
-        /// <param name="interval">报文发送周期，单位毫秒（至少为10），若设为null则只发送一次</param>
-        public static void SendBusMessage(String messageID, uint? interval)
-        {
-            Handler.SendBusMessage(messageID, interval);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Transmit bound bus message, either periodically or once (only available in online mode)
+        /// (api:app=3.1.0) Transmit bound bus message, either periodically or once (only available in online mode)
         /// </summary>
         /// <param name="messageID">Message ID of bound bus message</param>
         /// <param name="interval">Transmit period, in milliseconds (at least 10). If it is set to null, it is transmitted only once</param>
         /// <param name="data">Generated bus message data, null if not bound</param>
         /// \~Chinese
         /// <summary>
-        /// 发送总线报文（该报文需设置绑定），可周期性发送，也可单次发送（仅在线模式可用）
+        /// (api:app=3.1.0) 发送总线报文（该报文需设置绑定），可周期性发送，也可单次发送（仅在线模式可用）
         /// </summary>
         /// <param name="messageID">绑定的报文ID</param>
         /// <param name="interval">报文发送周期，单位毫秒（至少为10），若设为null则只发送一次</param>
         /// <param name="data">输出生成的报文数据，若未绑定则输出null</param>
-        public static void SendBusMessage(String messageID, uint? interval, out byte[] data)
+        public static void SendBusMessageBound(String messageID, uint? interval, out byte[] data)
         {
-            Handler.SendBusMessage(messageID, interval, out data);
+            Handler.SendBusMessageBound(messageID, interval, out data);
         }
 
         /// \~English
@@ -4537,7 +4382,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Transmitted received general raw data (only available in online mode)
+        /// (api:app=3.1.0) Transmitted received general raw data (only available in online mode)
         /// </summary>
         /// <param name="cpuTick">CPU tick while data arriving</param>
         /// <param name="channelID">General raw data's channel ID, corresponding to the first column of input/raw/raw.csv</param>
@@ -4545,15 +4390,15 @@ namespace ASEva
         /// <param name="binary">Binary data</param>
         /// \~Chinese
         /// <summary>
-        /// 发送已获取的原始数据信息（仅在线模式可用）
+        /// (api:app=3.1.0) 发送已获取的原始数据信息（仅在线模式可用）
         /// </summary>
         /// <param name="cpuTick">数据的到达时CPU计数</param>
         /// <param name="channelID">原始数据协议名称，对应input/raw/raw.csv首列文字</param>
         /// <param name="values">数值数据</param>
         /// <param name="binary">二进制数据</param>
-        public static void SendRawData(ulong cpuTick, String channelID, double[] values, byte[] binary)
+        public static void SendRawDataWithCPUTick(ulong cpuTick, String channelID, double[] values, byte[] binary)
         {
-            Handler.SendRawData(cpuTick, channelID, values, binary);
+            Handler.SendRawDataWithCPUTick(cpuTick, channelID, values, binary);
         }
 
         /// \~English
@@ -5049,6 +4894,7 @@ namespace ASEva
         /// </summary>
         /// <param name="force">Whether to force to start, switching mode could cost a lot of time</param>
         /// <param name="previewOnly">Whether previewing, otherwise generating</param>
+        /// <param name="genDirName">The folder name for generation recording, can be null (If the folder already exists and "force" is true, it will use default date and time format)</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
@@ -5056,27 +4902,7 @@ namespace ASEva
         /// </summary>
         /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
         /// <param name="previewOnly">是否为预览</param>
-        /// <returns>是否成功</returns>
-        public static bool StartOffline(bool force, bool previewOnly)
-        {
-            return Handler.StartOffline(force, previewOnly);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Switch to offline processing mode and start
-        /// </summary>
-        /// <param name="force">Whether to force to start, switching mode could cost a lot of time</param>
-        /// <param name="previewOnly">Whether previewing, otherwise generating</param>
-        /// <param name="genDirName">The folder name for generation recording (If the folder already exists and "force" is true, it will use default date and time format)</param>
-        /// <returns>Whether successful</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 切换至离线模式并开始预览或后处理
-        /// </summary>
-        /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
-        /// <param name="previewOnly">是否为预览</param>
-        /// <param name="genDirName">后处理输出时，写入generation数据的文件夹名（若已存在且强制开始时，则使用默认的日期格式）</param>
+        /// <param name="genDirName">后处理输出时，写入generation数据的文件夹名，可为null（若已存在且强制开始时，则使用默认的日期格式）</param>
         /// <returns>是否成功</returns>
         public static bool StartOffline(bool force, bool previewOnly, String genDirName)
         {
@@ -5085,21 +4911,21 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Switch to online mode and start
+        /// (api:app=3.1.0) Switch to online mode and start
         /// </summary>
         /// <param name="controllerName">Controller name, for exclusive control</param>
         /// <param name="previewOnly">Whether previewing, otherwise recording</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// 切换至在线模式并开始预览或采集
+        /// (api:app=3.1.0) 切换至在线模式并开始预览或采集
         /// </summary>
         /// <param name="controllerName">控制者名称，用于独占控制模式</param>
         /// <param name="previewOnly">是否为预览</param>
         /// <returns>是否成功</returns>
-        public static bool StartOnline(String controllerName, bool previewOnly)
+        public static bool StartOnlineWithController(String controllerName, bool previewOnly)
         {
-            return Handler.StartOnline(controllerName, previewOnly);
+            return Handler.StartOnlineWithController(controllerName, previewOnly);
         }
 
         /// \~English
@@ -5108,6 +4934,7 @@ namespace ASEva
         /// </summary>
         /// <param name="force">Whether to force to start, switching mode could cost a lot of time</param>
         /// <param name="previewOnly">Whether previewing, otherwise recording</param>
+        /// <param name="sessionDirName">The folder name for session recording, can be null (If the folder already exists and "force" is true, it will use default date and time format)</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
@@ -5115,27 +4942,7 @@ namespace ASEva
         /// </summary>
         /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
         /// <param name="previewOnly">是否为预览</param>
-        /// <returns>是否成功</returns>
-        public static bool StartOnline(bool force, bool previewOnly)
-        {
-            return Handler.StartOnline(force, previewOnly);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Switch to online mode and start
-        /// </summary>
-        /// <param name="force">Whether to force to start, switching mode could cost a lot of time</param>
-        /// <param name="previewOnly">Whether previewing, otherwise recording</param>
-        /// <param name="sessionDirName">The folder name for session recording (If the folder already exists and "force" is true, it will use default date and time format)</param>
-        /// <returns>Whether successful</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 切换至在线模式并开始预览或采集
-        /// </summary>
-        /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
-        /// <param name="previewOnly">是否为预览</param>
-        /// <param name="sessionDirName">采集时，写入session数据的文件夹名（若已存在且强制开始时，则使用默认的日期格式）</param>
+        /// <param name="sessionDirName">采集时，写入session数据的文件夹名，可为null（若已存在且强制开始时，则使用默认的日期格式）</param>
         /// <returns>是否成功</returns>
         public static bool StartOnline(bool force, bool previewOnly, String sessionDirName)
         {
@@ -5165,7 +4972,7 @@ namespace ASEva
         /// </summary>
         /// <param name="force">Whether to force to start, switching mode could cost a lot of time</param>
         /// <param name="previewOnly">Whether previewing, otherwise recording</param>
-        /// <param name="sessionDirName">The folder name for session recording (If the folder already exists and "force" is true, it will use default date and time format)</param>
+        /// <param name="sessionDirName">The folder name for session recording, can be null (If the folder already exists and "force" is true, it will use default date and time format)</param>
         /// <param name="startPosixTime">Start time on the remote machine, in posix milliseconds</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
@@ -5174,7 +4981,7 @@ namespace ASEva
         /// </summary>
         /// <param name="force">是否强制开始，强制切换模式可能等候相当长时间</param>
         /// <param name="previewOnly">是否为预览</param>
-        /// <param name="sessionDirName">采集时，写入session数据的文件夹名（若已存在且强制开始时，则使用默认的日期格式，时间为本机时间，非远程主机时间）</param>
+        /// <param name="sessionDirName">采集时，写入session数据的文件夹名，可为null（若已存在且强制开始时，则使用默认的日期格式，时间为本机时间，非远程主机时间）</param>
         /// <param name="startPosixTime">远程主机的开始时间，单位毫秒</param>
         /// <returns>是否成功</returns>
         public static bool StartRemote(bool force, bool previewOnly, String sessionDirName, ulong startPosixTime)
@@ -5184,7 +4991,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Switch to remote mode and start
+        /// (api:app=3.1.0) Switch to remote mode and start
         /// </summary>
         /// <param name="controllerName">Controller name, for exclusive control</param>
         /// <param name="previewOnly">Whether previewing, otherwise recording</param>
@@ -5192,32 +4999,15 @@ namespace ASEva
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// 切换至远程模式并开始预览或采集
+        /// (api:app=3.1.0) 切换至远程模式并开始预览或采集
         /// </summary>
         /// <param name="controllerName">控制者名称，用于独占控制模式</param>
         /// <param name="previewOnly">是否为预览</param>
         /// <param name="startPosixTime">远程主机的开始时间，单位毫秒</param>
         /// <returns>是否成功</returns>
-        public static bool StartRemote(String controllerName, bool previewOnly, ulong startPosixTime)
+        public static bool StartRemoteWithController(String controllerName, bool previewOnly, ulong startPosixTime)
         {
-            return Handler.StartRemote(controllerName, previewOnly, startPosixTime);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Switch to replay mode and start replay
-        /// </summary>
-        /// <param name="startTimeline">The timeline point from which to start replay, in seconds</param>
-        /// <param name="interestTarget">The timeline point of replay target, in seconds (null means replaying to end of timeline)</param>
-        /// \~Chinese
-        /// <summary>
-        /// 切换至回放模式并开始回放
-        /// </summary>
-        /// <param name="startTimeline">时间线上的回放开始时间，单位秒</param>
-        /// <param name="interestTarget">时间线上的目标兴趣点，单位秒（空表示不设置兴趣点）</param>
-        public static void StartReplay(double startTimeline, double? interestTarget)
-        {
-            Handler.StartReplay(startTimeline, interestTarget);
+            return Handler.StartRemoteWithController(controllerName, previewOnly, startPosixTime);
         }
 
         /// \~English
@@ -5243,32 +5033,19 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Stop the session
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 停止Session
-        /// </summary>
-        public static void StopRunning()
-        {
-            Handler.StopRunning();
-        }
-
-        /// \~English
-        /// <summary>
-        /// Stop the session
+        /// (api:app=3.1.0) Stop the session
         /// </summary>
         /// <param name="controllerName">Controller name, for exclusive control</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// 停止Session
+        /// (api:app=3.1.0) 停止Session
         /// </summary>
         /// <param name="controllerName">控制者名称，用于独占控制模式</param>
         /// <returns>是否成功</returns>
-        public static bool StopRunning(String controllerName)
+        public static bool StopRunningWithController(String controllerName)
         {
-            return Handler.StopRunning(controllerName);
+            return Handler.StopRunningWithController(controllerName);
         }
 
         /// \~English
