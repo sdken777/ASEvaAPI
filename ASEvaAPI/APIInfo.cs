@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 1, 0, 0); // Update log / 更新记录: Agency API精简。Agency底层使用AgencyLocal和AgencyAsync。除MainWorkflow.OnInit/OnRun外的模态函数改为异步。Agency.AddBusProtocolFile输出BusProtocolFileID数组。
+            return new Version(3, 1, 0, 0); // Update log / 更新记录: Agency API精简。Agency底层使用AgencyLocal和AgencyAsync。除MainWorkflow.OnInit/OnRun外的模态函数改为异步。Agency.AddBusProtocolFile输出BusProtocolFileID数组。新增CurrentThreadSyncContext
         }
 
         /// \~English
