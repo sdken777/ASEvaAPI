@@ -126,15 +126,15 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Called while getting main workflow object
+        /// (api:app=3.1.0) [Optional] Called while getting workflow object
         /// </summary>
-        /// <returns>The main workflow object</returns>
+        /// <returns>The workflow object</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 获取插件包含的主流程时被调用
+        /// (api:app=3.1.0) [可选实现] 获取插件包含的流程对象时被调用
         /// </summary>
-        /// <returns>主流程对象</returns>
-        public virtual MainWorkflow GetMainWorkflow() { return null; }
+        /// <returns>流程对象</returns>
+        public virtual CommonWorkflow GetWorkflow() { return null; }
 
         /// \~English
         /// <summary>

@@ -10,48 +10,14 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.1.0) Base class of main workflow
+    /// (api:app=3.1.0) Base class of common workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.1.0) 主流程基类
+    /// (api:app=3.1.0) 通用流程基类
     /// </summary>
-    public class MainWorkflow
+    public class CommonWorkflow
     {
-        /// \~English
-        /// <summary>
-        /// [Optional][OK for modal] Initialize main workflow
-        /// </summary>
-        /// <param name="appID">Application ID</param>
-        /// <param name="parameters">Initial parameters</param>
-        /// <param name="gui">Output the GUI framework that the application based on</param>
-        /// <returns>Whether initialization is successful</returns>
-        /// \~Chinese
-        /// <summary>
-        /// [可选实现][可含模态] 初始化主流程
-        /// </summary>
-        /// <param name="appID">应用程序ID</param>
-        /// <param name="parameters">初始化参数</param>
-        /// <param name="gui">输出基于的图形界面框架框架</param>
-        /// <returns>初始化是否成功</returns>
-        public virtual bool OnInit(String appID, Dictionary<String, String> parameters, out ApplicationGUI gui) { gui = ApplicationGUI.NoGUI; return true; }
-
-        /// \~English
-        /// <summary>
-        /// [Required][OK for modal] Run the main workflow, you should guarantee ASEva.MainWorkflowLoopCallback.OnLoop and ASEva.MainWorkflowModalCallback.OnHandleModal is called in the main loop
-        /// </summary>
-        /// <param name="loopCallback">Loop callback interface</param>
-        /// <param name="modalCallback">Modal callback interface</param>
-        /// <param name="startupProject">Startup project file path</param>
-        /// \~Chinese
-        /// <summary>
-        /// [必须实现][可含模态] 运行主流程，需要在其主循环中确保执行了 ASEva.MainWorkflowLoopCallback.OnLoop 和 ASEva.MainWorkflowModalCallback.OnHandleModal
-        /// </summary>
-        /// <param name="loopCallback">主循环回调接口</param>
-        /// <param name="modalCallback">模态对话回调接口</param>
-        /// <param name="startupProject">初始项目文件路径</param>
-        public virtual void OnRun(MainWorkflowLoopCallback loopCallback, MainWorkflowModalCallback modalCallback, String startupProject) {}
-
         /// \~English
         /// <summary>
         /// [Optional] Notify the application's basic info
@@ -66,24 +32,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Called after license validation failed
-        /// </summary>
-        /// <param name="reason">Reason why validation failed</param>
-        /// <param name="mac">Machine code</param>
-        /// <param name="callback">Framework callback interface</param>
-        /// <returns>Whether a new request is accepted, if yes you should guarantee ASEva.MainWorkflowLicenseCallback.OnRevalidateLicense is called </returns>
-        /// \~Chinese
-        /// <summary>
-        /// [可选实现][可含模态] 许可证验证失败后发起新的请求
-        /// </summary>
-        /// <param name="reason">验证失败原因</param>
-        /// <param name="mac">机器码</param>
-        /// <param name="callback">框架软件的回调接口</param>
-        /// <returns>是否接受请求，如接受需确保已调用 ASEva.MainWorkflowLicenseCallback.OnRevalidateLicense </returns>
-        public virtual Task<bool> OnLicenseRequest(LicenseRequestReason reason, String mac, MainWorkflowLicenseCallback callback) { return Task.FromResult(false); }
-
-        /// \~English
-        /// <summary>
         /// [Optional] Notify the initialization phase of framework
         /// </summary>
         /// <param name="phaseDescription">Initialization phase of framework</param>
@@ -92,7 +40,7 @@ namespace ASEva
         /// [可选实现] 通知框架软件的初始化阶段
         /// </summary>
         /// <param name="phaseDescription">当前初始化阶段的描述</param>
-        public virtual void OnCoreInitPhase(String phaseDescription) {}
+        public virtual void OnInitPhase(String phaseDescription) {}
 
         /// \~English
         /// <summary>
@@ -106,7 +54,7 @@ namespace ASEva
         /// </summary>
         /// <param name="result">框架软件的初始化结果</param>
         /// <param name="revisionUpdated">是否更新了发行号</param>
-        public virtual Task OnCoreInitResult(CoreInitResult result, bool revisionUpdated) { return Task.CompletedTask; }
+        public virtual Task OnInitResult(CoreInitResult result, bool revisionUpdated) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
@@ -188,63 +136,23 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Get whether to allow multiple application instances running
+        /// [Optional] Get default global parameters (default is empty)
         /// </summary>
-        /// <returns>Whether to allow multiple application instances running</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 返回是否允许多个实例同时运行
+        /// [可选实现] 获取默认全局参数（默认空）
         /// </summary>
-        /// <returns>是否允许多个实例同时运行</returns>
-        public virtual bool OnCheckMultiInstance() { return false; }
+        public virtual Dictionary<String, String> OnGetDefaultGlobalParameters() { return null; }
 
         /// \~English
         /// <summary>
-        /// [Optional] Get whether to disable GPU decoding
+        /// [Optional] Get whether to support calling web API. You can still directly call web API in plugins even if this is false (default is true)
         /// </summary>
-        /// <returns>Whether to disable GPU decoding</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 返回是否禁用GPU解码
+        /// [可选实现] 获取是否需要支持Web API调用，不影响在插件内部直接使用Web API（默认true）
         /// </summary>
-        /// <returns>是否禁用GPU解码</returns>
-        public virtual bool OnCheckDisableGPUDecoding() { return false; }
-
-        /// \~English
-        /// <summary>
-        /// [Optional] Get whether to enable GPU specialized decoding
-        /// </summary>
-        /// <returns>Whether to enable GPU specialized decoding (always false if GPU decoding is disabled)</returns>
-        /// \~Chinese
-        /// <summary>
-        /// [可选实现] 返回是否启用GPU专用解码
-        /// </summary>
-        /// <returns>是否启用GPU专用解码（若已禁用GPU解码则无效）</returns>
-        public virtual bool OnCheckEnableSpecializedGPUDecoding() { return false; }
-
-        /// \~English
-        /// <summary>
-        /// [Optional] Get whether to use PRC web service
-        /// </summary>
-        /// <returns>Whether to use PRC web service</returns>
-        /// \~Chinese
-        /// <summary>
-        /// [可选实现] 返回是否使用境内网络服务
-        /// </summary>
-        /// <returns>是否使用境内网络服务</returns>
-        public virtual bool OnCheckPreferPRCWeb() { return true; }
-
-        /// \~English
-        /// <summary>
-        /// [Optional] Get whether to request auto root privilege (Only for Linux)
-        /// </summary>
-        /// <returns>Whether to request auto root privilege</returns>
-        /// \~Chinese
-        /// <summary>
-        /// [可选实现] 返回是否请求自动root权限 (仅针对Linux操作系统)
-        /// </summary>
-        /// <returns>是否请求自动root权限</returns>
-        public virtual bool OnCheckRequestAutoRoot() { return false; }
+        public virtual bool OnGetWebAPIAvailability() { return true; }
 
         /// \~English
         /// <summary>
@@ -336,7 +244,274 @@ namespace ASEva
         /// <param name="title">独立任务标题</param>
         /// <param name="taskClassID">独立任务类别ID</param>
         /// <param name="callback">回调接口</param>
-        public virtual Task OnRunStandaloneTask(String title, String taskClassID, MainWorkflowTaskCallback callback) { return Task.CompletedTask; }
+        public virtual Task OnRunStandaloneTask(String title, String taskClassID, WorkflowTaskCallback callback) { return Task.CompletedTask; }
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Notify to reset data
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 通知重置数据
+        /// </summary>
+        public virtual void OnResetData() {}
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Input new data
+        /// </summary>
+        /// <param name="data">New data</param>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 输入新数据
+        /// </summary>
+        /// <param name="data">新数据</param>
+        public virtual void OnInputData(object data) { }
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Notify that the session is starting
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 通知正在开始session
+        /// </summary>
+        public virtual void OnStartSession() { }
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Notify that the session is stopping
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 通知正在结束session
+        /// </summary>
+        public virtual void OnStopSession() { }
+
+        /// \~English
+        /// <summary>
+        /// [Optional][OK for modal] Edit the information of lately recorded session
+        /// </summary>
+        /// <param name="recordSessionID">Lately recorded session's ID</param>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现][可含模态] 编辑新采集的session信息
+        /// </summary>
+        /// <param name="recordSessionID">新采集的session ID</param>
+        public virtual Task OnEditRecordedSession(DateTime recordSessionID) { return Task.CompletedTask; }
+
+        /// \~English
+        /// <summary>
+        /// [Optional][OK for modal] Install plugins
+        /// </summary>
+        /// <param name="libs">Information of related library files</param>
+        /// <param name="drivers">Information of related driver or environment pack</param>
+        /// <param name="callback">Framework callback interface</param>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现][可含模态] 安装插件
+        /// </summary>
+        /// <param name="libs">插件关联的库信息列表</param>
+        /// <param name="drivers">插件关联的驱动和环境信息列表</param>
+        /// <param name="callback">框架软件的回调接口</param>
+        public virtual Task OnInstallPlugin(InstallPluginLibraryInfo[] libs, InstallPluginDriverInfo[] drivers, WorkflowInstallCallback callback) { return Task.CompletedTask; }
+
+        /// \~English
+        /// <summary>
+        /// [Optional][OK for modal] Notify that the application is exiting
+        /// </summary>
+        /// <param name="force">Whether forced to exit</param>
+        /// <returns>Whether it's OK to exist (no use while forced to exit)</returns>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现][可含模态] 通知正在退出应用程序
+        /// </summary>
+        /// <param name="force">是否为强制结束</param>
+        /// <returns>返回是否可退出，强制结束时将不起作用</returns>
+        public virtual Task<bool> OnExiting(bool force) { return Task.FromResult(true); }
+
+        /// \~English
+        /// <summary>
+        /// [Required] Exit workflow
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// [必须实现] 退出流程
+        /// </summary>
+        public virtual void OnExit() {}
+    }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.1.0) Base class of core workflow
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.1.0) 核心流程基类
+    /// </summary>
+    public class CoreWorkflow : CommonWorkflow
+    {
+        /// \~English
+        /// <summary>
+        /// [Optional][OK for modal] Initialize workflow
+        /// </summary>
+        /// <param name="appID">Application ID</param>
+        /// <param name="parameters">Initial parameters</param>
+        /// <param name="gui">Output the GUI framework that the application based on</param>
+        /// <returns>Whether initialization is successful</returns>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现][可含模态] 初始化流程
+        /// </summary>
+        /// <param name="appID">应用程序ID</param>
+        /// <param name="parameters">初始化参数</param>
+        /// <param name="gui">输出基于的图形界面框架框架</param>
+        /// <returns>初始化是否成功</returns>
+        public virtual bool OnInit(String appID, Dictionary<String, String> parameters, out ApplicationGUI gui) { gui = ApplicationGUI.NoGUI; return true; }
+
+        /// \~English
+        /// <summary>
+        /// [Required][OK for modal] Run the workflow, you should guarantee ASEva.WorkflowLoopCallback.OnLoop and ASEva.WorkflowModalCallback.OnHandleModal is called in the main loop
+        /// </summary>
+        /// <param name="loopCallback">Loop callback interface</param>
+        /// <param name="modalCallback">Modal callback interface</param>
+        /// <param name="startupProject">Startup project file path</param>
+        /// \~Chinese
+        /// <summary>
+        /// [必须实现][可含模态] 运行流程，需要在其主循环中确保执行了 ASEva.WorkflowLoopCallback.OnLoop 和 ASEva.WorkflowModalCallback.OnHandleModal
+        /// </summary>
+        /// <param name="loopCallback">主循环回调接口</param>
+        /// <param name="modalCallback">模态对话回调接口</param>
+        /// <param name="startupProject">初始项目文件路径</param>
+        public virtual void OnRun(WorkflowLoopCallback loopCallback, WorkflowModalCallback modalCallback, String startupProject) {}
+
+        /// \~English
+        /// <summary>
+        /// [Optional][OK for modal] Called after license validation failed
+        /// </summary>
+        /// <param name="reason">Reason why validation failed</param>
+        /// <param name="mac">Machine code</param>
+        /// <param name="callback">Framework callback interface</param>
+        /// <returns>Whether a new request is accepted, if yes you should guarantee ASEva.WorkflowLicenseCallback.OnRevalidateLicense is called </returns>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现][可含模态] 许可证验证失败后发起新的请求
+        /// </summary>
+        /// <param name="reason">验证失败原因</param>
+        /// <param name="mac">机器码</param>
+        /// <param name="callback">框架软件的回调接口</param>
+        /// <returns>是否接受请求，如接受需确保已调用 ASEva.WorkflowLicenseCallback.OnRevalidateLicense </returns>
+        public virtual Task<bool> OnLicenseRequest(LicenseRequestReason reason, String mac, WorkflowLicenseCallback callback) { return Task.FromResult(false); }
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Get whether to support video (default is true)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 获取是否需要支持视频（默认true）
+        /// </summary>
+        public virtual bool OnGetVideoAvailability() { return true; }
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Get whether to support audio (default is true)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 获取是否需要支持音频（默认true）
+        /// </summary>
+        public virtual bool OnGetAudioAvailability() { return true; }
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Get whether to support resource monitoring (default is true)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 获取是否需要支持资源监控（默认true）
+        /// </summary>
+        public virtual bool OnGetResourceMonitorAvailability() { return true; }
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Get whether to support offline map (default is true)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 获取是否需要支持离线地图（默认true）
+        /// </summary>
+        public virtual bool OnGetOfflineMapAvailability() { return true; }
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Get whether to prevent system sleeping (default is true)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 返回是否阻止系统进入睡眠（默认true）
+        /// </summary>
+        public virtual bool OnCheckSystemSleepPrevention() { return true; }
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Get whether to allow multiple application instances running
+        /// </summary>
+        /// <returns>Whether to allow multiple application instances running</returns>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 返回是否允许多个实例同时运行
+        /// </summary>
+        /// <returns>是否允许多个实例同时运行</returns>
+        public virtual bool OnCheckMultiInstance() { return false; }
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Get whether to disable GPU decoding
+        /// </summary>
+        /// <returns>Whether to disable GPU decoding</returns>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 返回是否禁用GPU解码
+        /// </summary>
+        /// <returns>是否禁用GPU解码</returns>
+        public virtual bool OnCheckDisableGPUDecoding() { return false; }
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Get whether to enable GPU specialized decoding
+        /// </summary>
+        /// <returns>Whether to enable GPU specialized decoding (always false if GPU decoding is disabled)</returns>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 返回是否启用GPU专用解码
+        /// </summary>
+        /// <returns>是否启用GPU专用解码（若已禁用GPU解码则无效）</returns>
+        public virtual bool OnCheckEnableSpecializedGPUDecoding() { return false; }
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Get whether to use PRC web service
+        /// </summary>
+        /// <returns>Whether to use PRC web service</returns>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 返回是否使用境内网络服务
+        /// </summary>
+        /// <returns>是否使用境内网络服务</returns>
+        public virtual bool OnCheckPreferPRCWeb() { return true; }
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Get whether to request auto root privilege (Only for Linux)
+        /// </summary>
+        /// <returns>Whether to request auto root privilege</returns>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 返回是否请求自动root权限 (仅针对Linux操作系统)
+        /// </summary>
+        /// <returns>是否请求自动root权限</returns>
+        public virtual bool OnCheckRequestAutoRoot() { return false; }
 
         /// \~English
         /// <summary>
@@ -420,60 +595,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Notify to reset data
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// [可选实现] 通知重置数据
-        /// </summary>
-        public virtual void OnResetData() {}
-
-        /// \~English
-        /// <summary>
-        /// [Optional] Input new data
-        /// </summary>
-        /// <param name="data">New data</param>
-        /// \~Chinese
-        /// <summary>
-        /// [可选实现] 输入新数据
-        /// </summary>
-        /// <param name="data">新数据</param>
-        public virtual void OnInputData(object data) { }
-
-        /// \~English
-        /// <summary>
-        /// [Optional] Notify that the session is starting
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// [可选实现] 通知正在开始session
-        /// </summary>
-        public virtual void OnStartSession() { }
-
-        /// \~English
-        /// <summary>
-        /// [Optional] Notify that the session is stopping
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// [可选实现] 通知正在结束session
-        /// </summary>
-        public virtual void OnStopSession() { }
-
-        /// \~English
-        /// <summary>
-        /// [Optional][OK for modal] Edit the information of lately recorded session
-        /// </summary>
-        /// <param name="recordSessionID">Lately recorded session's ID</param>
-        /// \~Chinese
-        /// <summary>
-        /// [可选实现][可含模态] 编辑新采集的session信息
-        /// </summary>
-        /// <param name="recordSessionID">新采集的session ID</param>
-        public virtual Task OnEditRecordedSession(DateTime recordSessionID) { return Task.CompletedTask; }
-
-        /// \~English
-        /// <summary>
         /// [Optional][OK for modal] Configure path of offline map file
         /// </summary>
         /// <param name="originPath">The original path, null if not configured</param>
@@ -496,23 +617,7 @@ namespace ASEva
         /// [可选实现][可含模态] 编辑数据加密选项
         /// </summary>
         /// <param name="callback">框架软件的回调接口</param>
-        public virtual Task OnEditDataEncryption(MainWorkflowEncryptionCallback callback) { return Task.CompletedTask; }
-
-        /// \~English
-        /// <summary>
-        /// [Optional][OK for modal] Install plugins
-        /// </summary>
-        /// <param name="libs">Information of related library files</param>
-        /// <param name="drivers">Information of related driver or environment pack</param>
-        /// <param name="callback">Framework callback interface</param>
-        /// \~Chinese
-        /// <summary>
-        /// [可选实现][可含模态] 安装插件
-        /// </summary>
-        /// <param name="libs">插件关联的库信息列表</param>
-        /// <param name="drivers">插件关联的驱动和环境信息列表</param>
-        /// <param name="callback">框架软件的回调接口</param>
-        public virtual Task OnInstallPlugin(InstallPluginLibraryInfo[] libs, InstallPluginDriverInfo[] drivers, MainWorkflowInstallCallback callback) { return Task.CompletedTask; }
+        public virtual Task OnEditDataEncryption(WorkflowEncryptionCallback callback) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
@@ -550,39 +655,15 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Get whether it's allowed by main workflow to save project, start session, etc.
+        /// [Optional] Get whether it's allowed by workflow to save project, start session, etc.
         /// </summary>
-        /// <returns>Whether it's allowed by main workflow to save project, start session, etc.</returns>
+        /// <returns>Whether it's allowed by workflow to save project, start session, etc.</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 返回主流程端是否允许进行保存工程项目和开始session等操作
+        /// [可选实现] 返回流程端是否允许进行保存工程项目和开始session等操作
         /// </summary>
-        /// <returns>主流程端是否允许进行保存工程项目和开始session等操作</returns>
+        /// <returns>流程端是否允许进行保存工程项目和开始session等操作</returns>
         public virtual bool OnCheckReady() { return true; }
-
-        /// \~English
-        /// <summary>
-        /// [Optional][OK for modal] Notify that the application is exiting
-        /// </summary>
-        /// <param name="force">Whether forced to exit</param>
-        /// <returns>Whether it's OK to exist (no use while forced to exit)</returns>
-        /// \~Chinese
-        /// <summary>
-        /// [可选实现][可含模态] 通知正在退出应用程序
-        /// </summary>
-        /// <param name="force">是否为强制结束</param>
-        /// <returns>返回是否可退出，强制结束时将不起作用</returns>
-        public virtual Task<bool> OnExiting(bool force) { return Task.FromResult(true); }
-
-        /// \~English
-        /// <summary>
-        /// [Required] Exit main workflow
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// [必须实现] 退出主流程
-        /// </summary>
-        public virtual void OnExit() {}
     }
 
     /// \~English
@@ -770,13 +851,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Loop callback interface used by main workflow
+    /// (api:app=3.0.0) Loop callback interface used by workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 在主流程中使用的主循环回调接口
+    /// (api:app=3.0.0) 在流程中使用的主循环回调接口
     /// </summary>
-    public interface MainWorkflowLoopCallback
+    public interface WorkflowLoopCallback
     {
         /// \~English
         /// <summary>
@@ -791,13 +872,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.1.0) Modal callback interface used by main workflow
+    /// (api:app=3.1.0) Modal callback interface used by workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.1.0) 在主流程中使用的模态对话回调接口
+    /// (api:app=3.1.0) 在流程中使用的模态对话回调接口
     /// </summary>
-    public interface MainWorkflowModalCallback
+    public interface WorkflowModalCallback
     {
         /// \~English
         /// <summary>
@@ -812,13 +893,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) License validation callback used by main workflow
+    /// (api:app=3.0.0) License validation callback used by workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 在主流程中使用的许可证验证回调接口
+    /// (api:app=3.0.0) 在流程中使用的许可证验证回调接口
     /// </summary>
-    public interface MainWorkflowLicenseCallback
+    public interface WorkflowLicenseCallback
     {
         /// \~English
         /// <summary>
@@ -837,13 +918,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.1.0) Standalone task callback interface used my main workflow
+    /// (api:app=3.1.0) Standalone task callback interface used my workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.1.0) 在主流程中使用的获取独立任务状态回调接口
+    /// (api:app=3.1.0) 在流程中使用的获取独立任务状态回调接口
     /// </summary>
-    public interface MainWorkflowTaskCallback
+    public interface WorkflowTaskCallback
     {
         /// \~English
         /// <summary>
@@ -908,13 +989,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Data encryption callback used by main workflow
+    /// (api:app=3.0.0) Data encryption callback used by workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 在主流程中使用的配置数据加密选项的回调接口
+    /// (api:app=3.0.0) 在流程中使用的配置数据加密选项的回调接口
     /// </summary>
-    public interface MainWorkflowEncryptionCallback
+    public interface WorkflowEncryptionCallback
     {
         /// \~English
         /// <summary>
@@ -945,13 +1026,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Plugin installation callback used by main workflow
+    /// (api:app=3.0.0) Plugin installation callback used by workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 在主流程中使用的安装插件的回调接口
+    /// (api:app=3.0.0) 在流程中使用的安装插件的回调接口
     /// </summary>
-    public interface MainWorkflowInstallCallback
+    public interface WorkflowInstallCallback
     {
         /// \~English
         /// <summary>
