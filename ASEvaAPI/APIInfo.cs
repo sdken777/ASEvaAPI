@@ -12,17 +12,17 @@
  * \~English In addition, refer to ASEva.Samples for the definition of samples used in plugin, and ASEva.Graph for graph report definitions. \n\n
  * \~Chinese 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph 。 \n\n
  *
- * \~English This document corresponds to API version: 3.1.0 \n
- * \~Chinese 本文档对应API版本：3.1.0
+ * \~English This document corresponds to API version: 3.1.1 \n
+ * \~Chinese 本文档对应API版本：3.1.1
  */
 
 using System;
-using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace ASEva
 {
     /// <summary>
-    /// version=3.1.0
+    /// version=3.1.1
     /// </summary>
     public class APIInfo
     {
@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 1, 0, 0); // Update log / 更新记录: Agency API精简。Agency底层使用AgencyLocal和AgencyAsync。MainWorkflow拆分为CommonWorkflow和CoreWorkflow，并添加原AppoxCore中Theme类的部分接口。除MainWorkflow.OnInit/OnRun外的模态函数改为异步。Agency.AddBusProtocolFile输出BusProtocolFileID数组。新增CurrentThreadSyncContext。合并MainWorkflowTaskCallback和MainWorkflowTaskIODetailsCallback。Plugin.OnApplicationPrepareStopping支持取消退出。
+            return new Version(3, 1, 1, 0); // Update log / 更新记录: 简化GetRunningOS
         }
 
         /// \~English
@@ -56,43 +56,19 @@ namespace ASEva
             if (osCode == null)
             {
                 osCode = "unknown";
-                switch (Environment.OSVersion.Platform)
+                if (OperatingSystem.IsWindows())
                 {
-                    case PlatformID.Win32NT:
-                    case PlatformID.Win32S:
-                    case PlatformID.Win32Windows:
-                    case PlatformID.WinCE:
-                        osCode = "windows";
-                        break;
-                    case PlatformID.Unix:
-                        {
-                            var pi = new ProcessStartInfo();
-                            pi.FileName = "uname";
-                            pi.Arguments = "-sm";
-                            pi.RedirectStandardOutput = true;
-                            var proc = Process.Start(pi);
-                            var s = proc.StandardOutput.ReadToEnd();
-                            proc.WaitForExit();
-
-                            var comps = s.Split(' ');
-                            if (comps.Length != 2) break;
-
-                            var osName = comps[0].ToLower();
-                            var archName = comps[1].ToLower().TrimEnd('\r', '\n');
-                            if (osName == "linux")
-                            {
-                                if (archName == "x86_64") osCode = "linux";
-                                else if (archName == "aarch64") osCode = "linuxarm";
-                            }
-                            else if (osName == "darwin")
-                            {
-                                if (archName == "x86_64") osCode = "macos";
-                                else if (archName == "arm64") osCode = "macosarm";
-                            }
-                        }
-                        break;
-                    default:
-                        break;
+                    osCode = "windows";
+                }
+                else if (OperatingSystem.IsLinux())
+                {
+                    if (RuntimeInformation.OSArchitecture == Architecture.X64) osCode = "linux";
+                    else if (RuntimeInformation.OSArchitecture == Architecture.Arm64) osCode = "linuxarm";
+                }
+                else if (OperatingSystem.IsMacOS())
+                {
+                    if (RuntimeInformation.OSArchitecture == Architecture.X64) osCode = "macos";
+                    else if (RuntimeInformation.OSArchitecture == Architecture.Arm64) osCode = "macosarm";
                 }
             }
             return osCode;
