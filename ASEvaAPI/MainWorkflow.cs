@@ -637,8 +637,8 @@ namespace ASEva
         /// <summary>
         /// [Optional][OK for modal] Notify that the application is exiting
         /// </summary>
-        /// <param name="force">Whether forced to exist</param>
-        /// <returns>Whether it's OK to exist (no use while forced to exist)</returns>
+        /// <param name="force">Whether forced to exit</param>
+        /// <returns>Whether it's OK to exit (no use while forced to exit)</returns>
         /// \~Chinese
         /// <summary>
         /// [可选实现][可含模态] 通知正在退出应用程序
