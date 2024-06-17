@@ -158,13 +158,13 @@ namespace ASEva.UICoreWF
             DrawBeat.CallbackEnd(this);
         }
 
-        private void ChannelSelector_MouseMove(object sender, MouseEventArgs e)
+        private async void ChannelSelector_MouseMove(object sender, MouseEventArgs e)
         {
             var channel = this.PointToClient(Cursor.Position).X / gridSize;
             var text = "Channel " + (char)('A' + channel);
             if (!String.IsNullOrWhiteSpace(ChannelProtocol))
             {
-                var name = Agency.GetChannelAliasName(ChannelProtocol + "@" + channel);
+                var name = await AgencyAsync.GetChannelAliasName(ChannelProtocol + "@" + channel);
                 if (!String.IsNullOrWhiteSpace(name)) text = name;
             }
             tooltip.SetToolTip(this, text);

@@ -35,7 +35,7 @@ namespace ASEva.UICoreWF
         {
             InitializeComponent();
 
-            chinese = Agency.GetAppLanguage() == Language.Chinese;
+            chinese = AgencyLocal.GetAppLanguage() == Language.Chinese;
         }
 
         public override void UpdateUIWithData()
