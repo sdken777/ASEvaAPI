@@ -932,7 +932,8 @@ namespace ASEva
         /// <returns>该session的所有总线通道的信息，若不存在则返回null</returns>
         public static BusChannelInfo[] GetBusChannelsInfo(DateTime session)
         {
-            return AgencyAsync.GetBusChannelsInfo(session);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetBusChannelsInfo(session).Result;
         }
 
         /// \~English
@@ -951,7 +952,8 @@ namespace ASEva
         /// <returns>是否有数据</returns>
         public static bool GetBusChannelStatus(int channel/* 1~16 */, uint? toleranceMillisecond)
         {
-            return AgencyAsync.GetBusChannelStatus(channel, toleranceMillisecond);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.GetBusChannelStatus(channel, toleranceMillisecond).Result;
         }
 
         /// \~English
@@ -966,7 +968,8 @@ namespace ASEva
         /// <returns>总线设备列表，键为设备ID，值为对应的设备信息</returns>
         public static Dictionary<BusDeviceID, BusDeviceInfo> GetBusDevices()
         {
-            return AgencyAsync.GetBusDevices();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetBusDevices().Result;
         }
 
         /// \~English
@@ -985,7 +988,8 @@ namespace ASEva
         /// <returns>每秒帧率，0表示无效</returns>
         public static float GetBusMessageFPS(int channel, uint localID)
         {
-            return AgencyAsync.GetBusMessageFPS(channel, localID);
+            if (!AgencyAsync.SyncMode) return 0;
+            return AgencyAsync.GetBusMessageFPS(channel, localID).Result;
         }
 
         /// \~English
@@ -1004,7 +1008,8 @@ namespace ASEva
         /// <returns>总线报文信息，无信息则返回null</returns>
         public static BusMessageInfo GetBusMessageInfoByLocalID(int channel, uint localID)
         {
-            return AgencyAsync.GetBusMessageInfoByLocalID(channel, localID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetBusMessageInfoByLocalID(channel, localID).Result;
         }
 
         /// \~English
@@ -1021,7 +1026,8 @@ namespace ASEva
         /// <returns>总线报文的信息，报文不存在则返回null</returns>
         public static BusMessageInfo GetBusMessageInfo(String busMessageID)
         {
-            return AgencyAsync.GetBusMessageInfo(busMessageID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetBusMessageInfo(busMessageID).Result;
         }
 
         /// \~English
@@ -1038,7 +1044,8 @@ namespace ASEva
         /// <returns>总线通道的负载百分比，若无效则返回null</returns>
         public static double? GetBusPayloadPercentage(int channel)
         {
-            return AgencyAsync.GetBusPayloadPercentage(channel);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetBusPayloadPercentage(channel).Result;
         }
 
         /// \~English
@@ -1055,7 +1062,8 @@ namespace ASEva
         /// <returns>总线通道（1~16），若未配置则返回null</returns>
         public static int? GetBusProtocolFileChannel(String protocolName)
         {
-            return AgencyAsync.GetBusProtocolFileChannel(protocolName);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetBusProtocolFileChannel(protocolName).Result;
         }
 
         /// \~English
@@ -1070,7 +1078,8 @@ namespace ASEva
         /// <returns>总线协议文件ID列表</returns>
         public static BusProtocolFileID[] GetBusProtocolFileIDList()
         {
-            return AgencyAsync.GetBusProtocolFileIDList();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetBusProtocolFileIDList().Result;
         }
 
         /// \~English
@@ -1119,7 +1128,8 @@ namespace ASEva
         /// <returns>文件状态</returns>
         public static BusProtocolFileState GetBusProtocolFileState(BusProtocolFileID fileID)
         {
-            return AgencyAsync.GetBusProtocolFileState(fileID);
+            if (!AgencyAsync.SyncMode) return BusProtocolFileState.OK;
+            return AgencyAsync.GetBusProtocolFileState(fileID).Result;
         }
 
         /// \~English
@@ -1136,7 +1146,8 @@ namespace ASEva
         /// <returns>总线信号的信息，信号不存在或信号非总线信号则返回null</returns>
         public static BusSignalInfo GetBusSignalInfo(String busSignalID)
         {
-            return AgencyAsync.GetBusSignalInfo(busSignalID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetBusSignalInfo(busSignalID).Result;
         }
 
 
@@ -1154,7 +1165,8 @@ namespace ASEva
         /// <returns>数据通道别名，若未找到返回null</returns>
         public static String GetChannelAliasName(String channelID)
         {
-            return AgencyAsync.GetChannelAliasName(channelID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetChannelAliasName(channelID).Result;
         }
 
         /// \~English
@@ -1169,7 +1181,8 @@ namespace ASEva
         /// <returns>数据所有通道的别名表</returns>
         public static Dictionary<String, String> GetChannelAliasTable()
         {
-            return AgencyAsync.GetChannelAliasTable();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetChannelAliasTable().Result;
         }
 
         /// \~English
@@ -1186,7 +1199,8 @@ namespace ASEva
         /// <returns>是否已配置为客机同步</returns>
         public static bool GetChannelGuestSyncFlag(String id)
         {
-            return AgencyAsync.GetChannelGuestSyncFlag(id);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.GetChannelGuestSyncFlag(id).Result;
         }
 
         /// \~English
@@ -1203,7 +1217,8 @@ namespace ASEva
         /// <returns>指定数据通道上最近的若干帧时间戳，若该通道未找到或最近无数据则返回null</returns>
         public static Timestamp[] GetChannelLatestTimestamps(String channelID)
         {
-            return AgencyAsync.GetChannelLatestTimestamps(channelID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetChannelLatestTimestamps(channelID).Result;
         }
 
         /// \~English
@@ -1254,7 +1269,8 @@ namespace ASEva
         /// <returns>返回各通道的数据状态，key为通道ID</returns>
         public static Dictionary<String, bool> GetChannelStatusTable(uint? tolerance)
         {
-            return AgencyAsync.GetChannelStatusTable(tolerance);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetChannelStatusTable(tolerance).Result;
         }
 
         /// \~English
@@ -1269,7 +1285,8 @@ namespace ASEva
         /// <returns>返回各通道的时间同步状态，key为通道ID</returns>
         public static Dictionary<String, TimeOffsetSync> GetChannelSyncTable()
         {
-            return AgencyAsync.GetChannelSyncTable();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetChannelSyncTable().Result;
         }
 
         /// \~English
@@ -1286,7 +1303,8 @@ namespace ASEva
         /// <returns>各子设备的设备状态</returns>
         public static GeneralDeviceStatus[] GetChildDeviceStatus(String id)
         {
-            return AgencyAsync.GetChildDeviceStatus(id);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetChildDeviceStatus(id).Result;
         }
 
         /// \~English
@@ -1301,6 +1319,7 @@ namespace ASEva
         /// <returns>配置文件根目录路径</returns>
         public static String GetConfigFilesRoot()
         {
+            if (!AgencyAsync.SyncMode) return null;
             return AgencyLocal.GetConfigFilesRoot();
         }
 
@@ -1318,7 +1337,8 @@ namespace ASEva
         /// <returns>控制台组件信息，若未找到返回null</returns>
         public static ConsoleClassInfo GetConsoleClassInfo(String consoleClassID)
         {
-            return AgencyAsync.GetConsoleClassInfo(consoleClassID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetConsoleClassInfo(consoleClassID).Result;
         }
 
         /// \~English
@@ -1333,7 +1353,8 @@ namespace ASEva
         /// <returns>控制台组件信息表，键为组件ID</returns>
         public static Dictionary<string, ConsoleClassInfo> GetConsoleClassTable()
         {
-            return AgencyAsync.GetConsoleClassTable();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetConsoleClassTable().Result;
         }
 
         /// \~English
@@ -1352,7 +1373,14 @@ namespace ASEva
         /// <returns>配置状态</returns>
         public static ConfigStatus GetConsoleRelatedModulesConfigStatus(String consoleClassID, out ConfigStatus[] childrenStatus)
         {
-            return AgencyAsync.GetConsoleRelatedModulesConfigStatus(consoleClassID, out childrenStatus);
+            if (!AgencyAsync.SyncMode)
+            {
+                childrenStatus = null;
+                return ConfigStatus.Disabled;
+            }
+            var result = AgencyAsync.GetConsoleRelatedModulesConfigStatus(consoleClassID).Result;
+            childrenStatus = result.Item2;
+            return result.Item1;
         }
 
         /// \~English
@@ -1367,7 +1395,8 @@ namespace ASEva
         /// <returns>当前的CPU计数</returns>
         public static ulong GetCPUTick()
         {
-            return AgencyAsync.GetCPUTick();
+            if (!AgencyAsync.SyncMode) return 0;
+            return AgencyAsync.GetCPUTick().Result;
         }
 
         /// \~English
@@ -1382,7 +1411,8 @@ namespace ASEva
         /// <returns>每秒增加的CPU计数</returns>
         public static ulong GetCPUTicksPerSecond()
         {
-            return AgencyAsync.GetCPUTicksPerSecond();
+            if (!AgencyAsync.SyncMode) return 0;
+            return AgencyAsync.GetCPUTicksPerSecond().Result;
         }
 
         /// \~English
@@ -1397,7 +1427,8 @@ namespace ASEva
         /// <returns>CPU时间，单位秒，返回0表示无效</returns>
         public static double GetCPUTime()
         {
-            return AgencyAsync.GetCPUTime();
+            if (!AgencyAsync.SyncMode) return 0;
+            return AgencyAsync.GetCPUTime().Result;
         }
 
         /// \~English
@@ -1414,7 +1445,8 @@ namespace ASEva
         /// <returns>CPU时间模型</returns>
         public static CPUTimeModel GetCPUTimeModel(DateTime session)
         {
-            return AgencyAsync.GetCPUTimeModel(session);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetCPUTimeModel(session).Result;
         }
 
         /// \~English
@@ -1429,7 +1461,8 @@ namespace ASEva
         /// <returns>当前输入数据的generation ID，空表示输入数据为原始数据</returns>
         public static String GetCurrentDataGeneration()
         {
-            return AgencyAsync.GetCurrentDataGeneration();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetCurrentDataGeneration().Result;
         }
 
         /// \~English
@@ -1444,7 +1477,8 @@ namespace ASEva
         /// <returns>数据层级，其中null表示所有层级，'.'表示根路径下的session，'..'表示根路径即session</returns>
         public static String GetCurrentDataLayer()
         {
-            return AgencyAsync.GetCurrentDataLayer();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetCurrentDataLayer().Result;
         }
 
         /// \~English
@@ -1474,7 +1508,8 @@ namespace ASEva
         /// <returns>采集模式(在线/远程)下正在预览或采集的session，若非采集模式则返回null</returns>
         public static DateTime? GetCurrentOnlineSession()
         {
-            return AgencyAsync.GetCurrentOnlineSession();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetCurrentOnlineSession().Result;
         }
 
         /// \~English
@@ -1504,7 +1539,8 @@ namespace ASEva
         /// <returns>当前session的GUID，若未运行则返回null</returns>
         public static String GetCurrentSessionGUID()
         {
-            return AgencyAsync.GetCurrentSessionGUID();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetCurrentSessionGUID().Result;
         }
 
         /// \~English
@@ -1519,7 +1555,8 @@ namespace ASEva
         /// <returns>数据层级列表，其中'.'表示根路径下的session，'..'表示根路径即session</returns>
         public static String[] GetDataLayers()
         {
-            return AgencyAsync.GetDataLayers();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetDataLayers().Result;
         }
 
         /// \~English
@@ -1549,7 +1586,8 @@ namespace ASEva
         /// <returns>设备组件信息表，键为组件ID</returns>
         public static Dictionary<String, DeviceClassInfo> GetDeviceClassTable()
         {
-            return AgencyAsync.GetDeviceClassTable();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetDeviceClassTable().Result;
         }
 
         /// \~English
@@ -1566,7 +1604,8 @@ namespace ASEva
         /// <returns>返回设备状态</returns>
         public static GeneralDeviceStatus GetDeviceStatus(String id)
         {
-            return AgencyAsync.GetDeviceStatus(id);
+            if (!AgencyAsync.SyncMode) return GeneralDeviceStatus.None;
+            return AgencyAsync.GetDeviceStatus(id).Result;
         }
 
         /// \~English
@@ -1621,7 +1660,14 @@ namespace ASEva
         /// <returns>配置状态</returns>
         public static ConfigStatus GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID, out ConfigStatus[] childrenStatus)
         {
-            return AgencyAsync.GetDialogRelatedModulesConfigStatus(dialogClassID, transformID, out childrenStatus);
+            if (!AgencyAsync.SyncMode)
+            {
+                childrenStatus = null;
+                return ConfigStatus.Disabled;
+            }
+            var result = AgencyAsync.GetDialogRelatedModulesConfigStatus(dialogClassID, transformID).Result;
+            childrenStatus = result.Item2;
+            return result.Item1;
         }
 
         /// \~English
@@ -1636,7 +1682,8 @@ namespace ASEva
         /// <returns>事件对象列表</returns>
         public static object[] GetEventHandles()
         {
-            return AgencyAsync.GetEventHandles();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetEventHandles().Result;
         }
 
         /// \~English
@@ -1653,7 +1700,8 @@ namespace ASEva
         /// <returns>事件完整信息，null表示事件对象无效或信息不完整</returns>
         public static EventInfo GetEventInfo(object eventHandle)
         {
-            return AgencyAsync.GetEventInfo(eventHandle);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetEventInfo(eventHandle).Result;
         }
 
         /// \~English
@@ -1668,7 +1716,8 @@ namespace ASEva
         /// <returns>事件类型名称列表</returns>
         public static String[] GetEventTypeNames()
         {
-            return AgencyAsync.GetEventTypeNames();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetEventTypeNames().Result;
         }
 
         /// \~English
@@ -1683,7 +1732,8 @@ namespace ASEva
         /// <returns>Session ID列表</returns>
         public static DateTime[] GetFilteredSessionList()
         {
-            return AgencyAsync.GetFilteredSessionList();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetFilteredSessionList().Result;
         }
 
         /// \~English
@@ -1698,7 +1748,8 @@ namespace ASEva
         /// <returns>筛选后的所有session的时长总长</returns>
         public static double GetFilteredSessionListTotalLength()
         {
-            return AgencyAsync.GetFilteredSessionListTotalLength();
+            if (!AgencyAsync.SyncMode) return 0;
+            return AgencyAsync.GetFilteredSessionListTotalLength().Result;
         }
 
         /// \~English
@@ -1715,7 +1766,8 @@ namespace ASEva
         /// <returns>处理完毕的session ID列表</returns>
         public static DateTime[] GetFinishedSessions(String generation)
         {
-            return AgencyAsync.GetFinishedSessions(generation);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetFinishedSessions(generation).Result;
         }
 
         /// \~English
@@ -1745,7 +1797,8 @@ namespace ASEva
         /// <returns>Generation ID列表</returns>
         public static String[] GetGenerationList()
         {
-            return AgencyAsync.GetGenerationList();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetGenerationList().Result;
         }
 
         /// \~English
@@ -1783,7 +1836,8 @@ namespace ASEva
         /// <returns>Generation的处理状态，若generation不存在则返回null</returns>
         public static GenerationProcessStatus? GetGenerationProcessStatus(DateTime session, String generation)
         {
-            return AgencyAsync.GetGenerationProcessStatus(session, generation);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetGenerationProcessStatus(session, generation).Result;
         }
 
         /// \~English
@@ -1800,7 +1854,8 @@ namespace ASEva
         /// <returns>Session ID列表</returns>
         public static DateTime[] GetGenerationSessions(String generationID)
         {
-            return AgencyAsync.GetGenerationSessions(generationID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetGenerationSessions(generationID).Result;
         }
 
         /// \~English
@@ -1819,7 +1874,8 @@ namespace ASEva
         /// <returns>全局参数value</returns>
         public static String GetGlobalParameter(String key, String defaultValue)
         {
-            return AgencyAsync.GetGlobalParameter(key, defaultValue);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetGlobalParameter(key, defaultValue).Result;
         }
 
         /// \~English
@@ -1834,7 +1890,8 @@ namespace ASEva
         /// <returns>所有全局参数的键</returns>
         public static String[] GetGlobalParameterKeys()
         {
-            return AgencyAsync.GetGlobalParameterKeys();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetGlobalParameterKeys().Result;
         }
 
         /// \~English
@@ -1932,7 +1989,8 @@ namespace ASEva
         /// <returns>卫星Posix时间模型</returns>
         public static PosixTimeModel GetGNSSPosixTimeModel(DateTime session)
         {
-            return AgencyAsync.GetGNSSPosixTimeModel(session);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetGNSSPosixTimeModel(session).Result;
         }
 
         /// \~English
@@ -1951,7 +2009,8 @@ namespace ASEva
         /// <returns>图表对象，若不存在或不属于当前层级则返回null</returns>
         public static GraphData GetGraphData(DateTime session, int graphID)
         {
-            return AgencyAsync.GetGraphData(session, graphID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetGraphData(session, graphID).Result;
         }
 
         /// \~English
@@ -1966,7 +2025,8 @@ namespace ASEva
         /// <returns>独立显卡信息列表</returns>
         public static GraphicCardInfo[] GetGraphicCardInfos()
         {
-            return AgencyAsync.GetGraphicCardInfos();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetGraphicCardInfos().Result;
         }
 
         /// \~English
@@ -1981,7 +2041,8 @@ namespace ASEva
         /// <returns>图表报告ID列表</returns>
         public static int[] GetGraphIDList()
         {
-            return AgencyAsync.GetGraphIDList();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetGraphIDList().Result;
         }
 
         /// \~English
@@ -1998,7 +2059,8 @@ namespace ASEva
         /// <returns>图表报告ID</returns>
         public static int? GetGraphIDWithTitle(String title)
         {
-            return AgencyAsync.GetGraphIDWithTitle(title);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetGraphIDWithTitle(title).Result;
         }
 
         /// \~English
@@ -2049,7 +2111,8 @@ namespace ASEva
         /// <returns>图表报告标题，若不存在则返回null</returns>
         public static String GetGraphTitle(int graphID)
         {
-            return AgencyAsync.GetGraphTitle(graphID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetGraphTitle(graphID).Result;
         }
 
         /// \~English
@@ -2066,7 +2129,8 @@ namespace ASEva
         /// <returns>主机Posix时间模型</returns>
         public static PosixTimeModel GetHostPosixTimeModel(DateTime session)
         {
-            return AgencyAsync.GetHostPosixTimeModel(session);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetHostPosixTimeModel(session).Result;
         }
 
         /// \~English
@@ -2081,7 +2145,8 @@ namespace ASEva
         /// <returns>兴趣时间点目标(秒单位)，可能超出数据缓存范围</returns>
         public static double GetInterestTarget()
         {
-            return AgencyAsync.GetInterestTarget();
+            if (!AgencyAsync.SyncMode) return 0;
+            return AgencyAsync.GetInterestTarget().Result;
         }
 
         /// \~English
@@ -2096,7 +2161,8 @@ namespace ASEva
         /// <returns>在时间线上的兴趣点，单位秒</returns>
         public static double GetInterestTime()
         {
-            return AgencyAsync.GetInterestTime();
+            if (!AgencyAsync.SyncMode) return 0;
+            return AgencyAsync.GetInterestTime().Result;
         }
 
         /// \~English
@@ -2111,7 +2177,8 @@ namespace ASEva
         /// <returns>兴趣点的本地时间，若无数据则返回null</returns>
         public static DateTime? GetInterestTimestamp()
         {
-            return AgencyAsync.GetInterestTimestamp();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetInterestTimestamp().Result;
         }
 
         /// \~English
@@ -2141,7 +2208,8 @@ namespace ASEva
         /// <returns>被许可的功能序号列表</returns>
         public static int[] GetLicensedFunctionIndices()
         {
-            return AgencyAsync.GetLicensedFunctionIndices();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetLicensedFunctionIndices().Result;
         }
 
         /// \~English
@@ -2156,7 +2224,8 @@ namespace ASEva
         /// <returns>许可证的详细信息</returns>
         public static String GetLicenseInfo()
         {
-            return AgencyAsync.GetLicenseInfo();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetLicenseInfo().Result;
         }
 
         /// \~English
@@ -2177,7 +2246,8 @@ namespace ASEva
         /// <returns>对应的本地时间</returns>
         public static DateTime? GetLocalDateTime(DateTime session, double timeOffset, bool useGNSS)
         {
-            return AgencyAsync.GetLocalDateTime(session, timeOffset, useGNSS);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetLocalDateTime(session, timeOffset, useGNSS).Result;
         }
 
         /// \~English
@@ -2207,7 +2277,8 @@ namespace ASEva
         /// <returns>名称列表</returns>
         public static String[] GetManualTriggerNames()
         {
-            return AgencyAsync.GetManualTriggerNames();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetManualTriggerNames().Result;
         }
 
         /// \~English
@@ -2224,7 +2295,8 @@ namespace ASEva
         /// <returns>手动触发器通道的名称，若序号超出范围则返回null</returns>
         public static String GetManualTriggerName(int index)
         {
-            return AgencyAsync.GetManualTriggerName(index);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetManualTriggerName(index).Result;
         }
 
         /// \~English
@@ -2239,7 +2311,8 @@ namespace ASEva
         /// <returns>内存容量，单位为字节，获取失败时返回0</returns>
         public static ulong GetMemoryCapacity()
         {
-            return AgencyAsync.GetMemoryCapacity();
+            if (!AgencyAsync.SyncMode) return 0;
+            return AgencyAsync.GetMemoryCapacity().Result;
         }
 
         /// \~English
@@ -2258,7 +2331,8 @@ namespace ASEva
         /// <returns>各子功能配置的状态，若找不到类别ID对应的组件或无子功能配置则返回null</returns>
         public static ConfigStatus[] GetModuleChildConfigStatus(object caller, String classID)
         {
-            return AgencyAsync.GetModuleChildConfigStatus(caller, classID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetModuleChildConfigStatus(caller, classID).Result;
         }
 
         /// \~English
@@ -2277,7 +2351,8 @@ namespace ASEva
         /// <returns>配置的字符串描述，null表示找不到类别ID对应的组件</returns>
         public static String GetModuleConfig(object caller, String classID)
         {
-            return AgencyAsync.GetModuleConfig(caller, classID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetModuleConfig(caller, classID).Result;
         }
 
         /// \~English
@@ -2298,7 +2373,14 @@ namespace ASEva
         /// <returns>组件配置的状态，若找不到类别ID对应的组件则返回 ASEva.ConfigStatus.Disabled </returns>
         public static ConfigStatus GetModuleConfigStatus(object caller, String classID, out String errorHint)
         {
-            return AgencyAsync.GetModuleConfigStatus(caller, classID, out errorHint);
+            if (!AgencyAsync.SyncMode)
+            {
+                errorHint = null;
+                return ConfigStatus.Disabled;
+            }
+            var result = AgencyAsync.GetModuleConfigStatus(caller, classID).Result;
+            errorHint = result.Item2;
+            return result.Item1;
         }
 
         /// \~English
@@ -2313,7 +2395,8 @@ namespace ASEva
         /// <returns>组件详情，若不存在则返回null</returns>
         public static ModuleDetails GetModuleDetails(String classID)
         {
-            return AgencyAsync.GetModuleDetails(classID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetModuleDetails(classID).Result;
         }
 
         /// \~English
@@ -2328,7 +2411,8 @@ namespace ASEva
         /// <returns>原生组件信息表，键为组件ID</returns>
         public static Dictionary<String, NativeClassInfo> GetNativeClassTable()
         {
-            return AgencyAsync.GetNativeClassTable();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetNativeClassTable().Result;
         }
 
         /// \~English
@@ -2345,7 +2429,8 @@ namespace ASEva
         /// <returns>版本列表，键为原生插件的类型ID</returns>
         public static Dictionary<String, Version> GetNativePluginVersions(NativeLibraryType type)
         {
-            return AgencyAsync.GetNativePluginVersions(type);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetNativePluginVersions(type).Result;
         }
 
         /// \~English
@@ -2396,7 +2481,8 @@ namespace ASEva
         /// <returns>客机同步标题表，键为客机同步ID，值为对应的标题</returns>
         public static Dictionary<String, String> GetPluginGuestSyncTable()
         {
-            return AgencyAsync.GetPluginGuestSyncTable();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetPluginGuestSyncTable().Result;
         }
 
         /// \~English
@@ -2468,7 +2554,16 @@ namespace ASEva
         /// <returns>视频帧的预览JPEG数据，图像宽度为640像素，获取失败则返回null</returns>
         public static byte[] GetPreviewJpeg(int channel, double timeline, double maxGap, out Timestamp? timestamp, out CameraInfo cameraInfo)
         {
-            return AgencyAsync.GetPreviewJpeg(channel, timeline, maxGap, out timestamp, out cameraInfo);
+            if (!AgencyAsync.SyncMode)
+            {
+                timestamp = null;
+                cameraInfo = null;
+                return null;
+            }
+            var result = AgencyAsync.GetPreviewJpeg(channel, timeline, maxGap).Result;
+            timestamp = result.Item2;
+            cameraInfo = result.Item3;
+            return result.Item1;
         }
 
         /// \~English
@@ -2483,7 +2578,8 @@ namespace ASEva
         /// <returns>数据处理组件信息表，键为组件ID</returns>
         public static Dictionary<String, ProcessorClassInfo> GetProcessorClassTable()
         {
-            return AgencyAsync.GetProcessorClassTable();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetProcessorClassTable().Result;
         }
 
         /// \~English
@@ -2500,7 +2596,8 @@ namespace ASEva
         /// <returns>延迟配置，单位毫秒</returns>
         public static double GetRawChannelDelayConfig(String id)
         {
-            return AgencyAsync.GetRawChannelDelayConfig(id);
+            if (!AgencyAsync.SyncMode) return 0;
+            return AgencyAsync.GetRawChannelDelayConfig(id).Result;
         }
 
         /// \~English
@@ -2519,7 +2616,8 @@ namespace ASEva
         /// <returns>是否有数据</returns>
         public static bool GetRawChannelStatus(String channelID, uint? toleranceMillisecond)
         {
-            return AgencyAsync.GetRawChannelStatus(channelID, toleranceMillisecond);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.GetRawChannelStatus(channelID, toleranceMillisecond).Result;
         }
 
         /// \~English
@@ -2557,7 +2655,16 @@ namespace ASEva
         /// <returns>是否有数据</returns>
         public static bool GetSampleChannelStatus(String channelID, uint? toleranceMillisecond, out List<double> interval, out List<double> delay)
         {
-            return AgencyAsync.GetSampleChannelStatus(channelID, toleranceMillisecond, out interval, out delay);
+            if (!AgencyAsync.SyncMode)
+            {
+                interval = null;
+                delay = null;
+                return false;
+            }
+            var result = AgencyAsync.GetSampleChannelStatus(channelID, toleranceMillisecond).Result;
+            interval = result.Item2?.ToList();
+            delay = result.Item3?.ToList();
+            return result.Item1;
         }
 
         /// \~English
@@ -2574,7 +2681,8 @@ namespace ASEva
         /// <returns>样本标题，null表示通道不存在或该样本通道无标题</returns>
         public static List<String> GetSampleTitle(String channelID)
         {
-            return AgencyAsync.GetSampleTitle(channelID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSampleTitle(channelID).Result;
         }
 
         /// \~English
@@ -2589,7 +2697,8 @@ namespace ASEva
         /// <returns>场景ID列表</returns>
         public static String[] GetSceneIDList()
         {
-            return AgencyAsync.GetSceneIDList();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSceneIDList().Result;
         }
 
         /// \~English
@@ -2604,7 +2713,8 @@ namespace ASEva
         /// <returns>场景标题表</returns>
         public static Dictionary<String, SceneTitle> GetSceneTitleTable()
         {
-            return AgencyAsync.GetSceneTitleTable();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSceneTitleTable().Result;
         }
 
         /// \~English
@@ -2621,7 +2731,8 @@ namespace ASEva
         /// <returns>Session的注释说明</returns>
         public static String GetSessionComment(DateTime session)
         {
-            return AgencyAsync.GetSessionComment(session);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSessionComment(session).Result;
         }
 
         /// \~English
@@ -2636,7 +2747,8 @@ namespace ASEva
         /// <returns>session的筛选标志位表</returns>
         public static Dictionary<DateTime, SessionFilterFlags> GetSessionFilterTable()
         {
-            return AgencyAsync.GetSessionFilterTable();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSessionFilterTable().Result;
         }
 
         /// \~English
@@ -2653,7 +2765,8 @@ namespace ASEva
         /// <returns>文件夹名</returns>
         public static String GetSessionFolderName(DateTime session)
         {
-            return AgencyAsync.GetSessionFolderName(session);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSessionFolderName(session).Result;
         }
 
         /// \~English
@@ -2670,7 +2783,8 @@ namespace ASEva
         /// <returns>Generation ID列表</returns>
         public static String[] GetSessionGenerations(DateTime sessionID)
         {
-            return AgencyAsync.GetSessionGenerations(sessionID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSessionGenerations(sessionID).Result;
         }
 
         /// \~English
@@ -2687,7 +2801,8 @@ namespace ASEva
         /// <returns>主机是否与授时服务器同步</returns>
         public static bool GetSessionHostSync(DateTime session)
         {
-            return AgencyAsync.GetSessionHostSync(session);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.GetSessionHostSync(session).Result;
         }
 
         /// \~English
@@ -2704,7 +2819,8 @@ namespace ASEva
         /// <returns>数据层级，其中'.'表示根路径下的session，'..'表示根路径即session</returns>
         public static String GetSessionLayer(DateTime session)
         {
-            return AgencyAsync.GetSessionLayer(session);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSessionLayer(session).Result;
         }
 
         /// \~English
@@ -2721,7 +2837,8 @@ namespace ASEva
         /// <returns>Session长度，单位秒，session不存在或不属于当前层级则返回null</returns>
         public static double? GetSessionLength(DateTime session)
         {
-            return AgencyAsync.GetSessionLength(session);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSessionLength(session).Result;
         }
 
         /// \~English
@@ -2736,7 +2853,8 @@ namespace ASEva
         /// <returns>Session ID列表</returns>
         public static DateTime[] GetSessionList()
         {
-            return AgencyAsync.GetSessionList();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSessionList().Result;
         }
 
         /// \~English
@@ -2751,7 +2869,8 @@ namespace ASEva
         /// <returns>所有session的总时长</returns>
         public static double GetSessionListTotalLength()
         {
-            return AgencyAsync.GetSessionListTotalLength();
+            if (!AgencyAsync.SyncMode) return 0;
+            return AgencyAsync.GetSessionListTotalLength().Result;
         }
 
         /// \~English
@@ -2785,7 +2904,8 @@ namespace ASEva
         /// <returns>Session的属性表</returns>
         public static Dictionary<String, String> GetSessionProperties(DateTime session)
         {
-            return AgencyAsync.GetSessionProperties(session);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSessionProperties(session).Result;
         }
 
         /// \~English
@@ -2815,7 +2935,8 @@ namespace ASEva
         /// </summary>
          public static String GetSessionSearchKey()
         {
-            return AgencyAsync.GetSessionSearchKey();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSessionSearchKey().Result;
         }
 
         /// \~English
@@ -2832,7 +2953,8 @@ namespace ASEva
         /// <returns>在时间线上的开始时间点，session不存在或不属于当前层级则返回null</returns>
         public static double? GetSessionTimeline(DateTime session)
         {
-            return AgencyAsync.GetSessionTimeline(session);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSessionTimeline(session).Result;
         }
 
         /// \~English
@@ -2851,7 +2973,8 @@ namespace ASEva
         /// <returns>信号名称，若无该ID信号则返回null</returns>
         public static String GetSignalName(String signalID, bool fullName)
         {
-            return AgencyAsync.GetSignalName(signalID, fullName);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSignalName(signalID, fullName).Result;
         }
 
         /// \~English
@@ -2868,7 +2991,8 @@ namespace ASEva
         /// <returns>信号列表，若该报文不存在则返回null</returns>
         public static String[] GetSignalNamesOfBusMessage(String messageID)
         {
-            return AgencyAsync.GetSignalNamesOfBusMessage(messageID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSignalNamesOfBusMessage(messageID).Result;
         }
 
         /// \~English
@@ -2883,7 +3007,8 @@ namespace ASEva
         /// <returns>信号树根节点下的所有子节点</returns>
         public static SignalTreeNode[] GetSignalTree()
         {
-            return AgencyAsync.GetSignalTree();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSignalTree().Result;
         }
 
         /// \~English
@@ -2915,7 +3040,8 @@ namespace ASEva
         /// <returns>系统状态信息，若无有效信息则返回null</returns>
         public static String GetSystemStatus(SystemStatus status)
         {
-            return AgencyAsync.GetSystemStatus(status);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSystemStatus(status).Result;
         }
 
         /// \~English
@@ -2932,7 +3058,8 @@ namespace ASEva
         /// <returns>系统状态详情，若无有效信息则返回null</returns>
         public static String GetSystemStatusDetails(SystemStatus status)
         {
-            return AgencyAsync.GetSystemStatusDetails(status);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetSystemStatusDetails(status).Result;
         }
 
         /// \~English
@@ -2949,7 +3076,8 @@ namespace ASEva
         /// <returns>独立任务组件信息，若未找到返回null</returns>
         public static TaskClassInfo GetTaskClassInfo(String taskClassID)
         {
-            return AgencyAsync.GetTaskClassInfo(taskClassID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetTaskClassInfo(taskClassID).Result;
         }
 
         /// \~English
@@ -2964,7 +3092,8 @@ namespace ASEva
         /// <returns>独立任务组件信息表，键为组件ID</returns>
         public static Dictionary<String, TaskClassInfo> GetTaskClassTable()
         {
-            return AgencyAsync.GetTaskClassTable();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetTaskClassTable().Result;
         }
 
         /// \~English
@@ -3000,7 +3129,8 @@ namespace ASEva
         /// <returns>对应的UTC时间</returns>
         public static DateTime? GetUTCDateTime(DateTime session, double timeOffset, bool useGNSS)
         {
-            return AgencyAsync.GetUTCDateTime(session, timeOffset, useGNSS);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetUTCDateTime(session, timeOffset, useGNSS).Result;
         }
 
         /// \~English
@@ -3032,7 +3162,8 @@ namespace ASEva
         /// <returns>延迟配置，单位毫秒</returns>
         public static double GetVideoChannelDelayConfig(int channel)
         {
-            return AgencyAsync.GetVideoChannelDelayConfig(channel);
+            if (!AgencyAsync.SyncMode) return 0;
+            return AgencyAsync.GetVideoChannelDelayConfig(channel).Result;
         }
 
         /// \~English
@@ -3049,7 +3180,8 @@ namespace ASEva
         /// <returns>该session的所有视频通道的信息，若不存在则返回null</returns>
         public static VideoChannelInfo[] GetVideoChannelsInfo(DateTime session)
         {
-            return AgencyAsync.GetVideoChannelsInfo(session);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetVideoChannelsInfo(session).Result;
         }
 
         /// \~English
@@ -3072,7 +3204,16 @@ namespace ASEva
         /// <returns>是否有数据</returns>
         public static bool GetVideoChannelStatus(int channel, uint? toleranceMillisecond, out List<double> interval, out List<double> delay)
         {
-            return AgencyAsync.GetVideoChannelStatus(channel, toleranceMillisecond, out interval, out delay);
+            if (!AgencyAsync.SyncMode)
+            {
+                interval = null;
+                delay = null;
+                return false;
+            }
+            var result = AgencyAsync.GetVideoChannelStatus(channel, toleranceMillisecond).Result;
+            interval = result.Item2?.ToList();
+            delay = result.Item3?.ToList();
+            return result.Item1;
         }
 
         /// \~English
@@ -3087,7 +3228,8 @@ namespace ASEva
         /// <returns>视频设备列表，键为设备ID，值为对应的设备信息</returns>
         public static Dictionary<VideoDeviceID, VideoDeviceInfo> GetVideoDevices()
         {
-            return AgencyAsync.GetVideoDevices();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetVideoDevices().Result;
         }
 
         /// \~English
@@ -3118,7 +3260,16 @@ namespace ASEva
         /// <returns>视频帧数据，图像实际大小由mode和clip决定，获取失败则返回null</returns>
         public static CommonImage GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha, out Timestamp? timestamp, out CameraInfo cameraInfo)
         {
-            return AgencyAsync.GetVideoFrameImage(channel, timeline, maxGap, mode, clip, withAlpha, out timestamp, out cameraInfo);
+            if (!AgencyAsync.SyncMode)
+            {
+                timestamp = null;
+                cameraInfo = null;
+                return null;
+            }
+            var result = AgencyAsync.GetVideoFrameImage(channel, timeline, maxGap, mode, clip, withAlpha).Result;
+            timestamp = result.Item2;
+            cameraInfo = result.Item3;
+            return result.Item1;
         }
 
         /// \~English
@@ -3141,7 +3292,8 @@ namespace ASEva
         /// <returns>缩略图数据，图像宽度固定为80，获取失败则返回null</returns>
         public static CommonImage GetVideoFrameThumbnail(int channel, double timeline, double maxGap, bool withAlpha)
         {
-            return AgencyAsync.GetVideoFrameThumbnail(channel, timeline, maxGap, withAlpha);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetVideoFrameThumbnail(channel, timeline, maxGap, withAlpha).Result;
         }
 
         /// \~English
@@ -3160,7 +3312,8 @@ namespace ASEva
         /// <returns>原始尺寸，若无数据则返回null</returns>
         public static IntSize? GetVideoRawSize(int channel, double timeline)
         {
-            return AgencyAsync.GetVideoRawSize(channel, timeline);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetVideoRawSize(channel, timeline).Result;
         }
 
         /// \~English
@@ -3175,9 +3328,10 @@ namespace ASEva
         /// </summary>
         /// <param name="channel">视频通道，0~23</param>
         /// <returns>特殊摄像头类型</returns>
-        public static Samples.SpecialCameraType GetVideoSpecialType(int channel)
+        public static SpecialCameraType GetVideoSpecialType(int channel)
         {
-            return AgencyAsync.GetVideoSpecialType(channel);
+            if (!AgencyAsync.SyncMode) return SpecialCameraType.Normal;
+            return AgencyAsync.GetVideoSpecialType(channel).Result;
         }
 
         /// \~English
@@ -3245,7 +3399,8 @@ namespace ASEva
         /// <returns>是否已绑定</returns>
         public static bool IsBusMessageBound(string busMessageID)
         {
-            return AgencyAsync.IsBusMessageBound(busMessageID);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.IsBusMessageBound(busMessageID).Result;
         }
 
         /// \~English
@@ -3260,7 +3415,8 @@ namespace ASEva
         /// <returns>是否为在线采集或离线处理生成模式</returns>
         public static bool IsFileOutputEnabled()
         {
-            return AgencyAsync.IsFileOutputEnabled();
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.IsFileOutputEnabled().Result;
         }
 
         /// \~English
@@ -3277,7 +3433,8 @@ namespace ASEva
         /// <returns>该通道是否可用</returns>
         public static bool IsInputChannelAvailable(String channelID)
         {
-            return AgencyAsync.IsInputChannelAvailable(channelID);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.IsInputChannelAvailable(channelID).Result;
         }
 
         /// \~English
@@ -3311,7 +3468,8 @@ namespace ASEva
         /// <returns>是否有效</returns>
         public static bool IsMessageValid(String messageID, bool optional)
         {
-            return AgencyAsync.IsMessageValid(messageID, optional);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.IsMessageValid(messageID, optional).Result;
         }
 
         /// \~English
@@ -3326,7 +3484,8 @@ namespace ASEva
         /// <returns>是否使用境内网络服务</returns>
         public static bool IsPRCWebPreferred()
         {
-            return AgencyAsync.IsPRCWebPreferred();
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.IsPRCWebPreferred().Result;
         }
 
         /// \~English
@@ -3343,7 +3502,14 @@ namespace ASEva
         /// <returns>是否允许进行保存工程项目和开始session等操作</returns>
         public static bool IsReady(out String busyReason)
         {
-            return AgencyAsync.IsReady(out busyReason);
+            if (!AgencyAsync.SyncMode)
+            {
+                busyReason = null;
+                return false;
+            }
+            var result = AgencyAsync.IsReady().Result;
+            busyReason = result.Item2;
+            return result.Item1;
         }
 
         /// \~English
@@ -3360,7 +3526,8 @@ namespace ASEva
         /// <returns>是否冲突</returns>
         public static bool IsSampleChannelConflict(string channelID)
         {
-            return AgencyAsync.IsSampleChannelConflict(channelID);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.IsSampleChannelConflict(channelID).Result;
         }
 
         /// \~English
@@ -3379,7 +3546,8 @@ namespace ASEva
         /// <returns>是否有效</returns>
         public static bool IsSignalValid(String signalID, bool optional)
         {
-            return AgencyAsync.IsSignalValid(signalID, optional);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.IsSignalValid(signalID, optional).Result;
         }
 
         /// \~English
@@ -3398,7 +3566,8 @@ namespace ASEva
         /// <returns>是否有数据可供显示</returns>
         public static bool IsVideoDataAvailable(int channel, uint? tolerance)
         {
-            return AgencyAsync.IsVideoDataAvailable(channel, tolerance);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.IsVideoDataAvailable(channel, tolerance).Result;
         }
 
         /// \~English
@@ -3487,7 +3656,8 @@ namespace ASEva
         /// <returns>所有信号值及相关信息</returns>
         public static BusSignalValue[] ParseBusMessage(BusMessageSample busMessage)
         {
-            return AgencyAsync.ParseBusMessage(busMessage);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.ParseBusMessage(busMessage).Result;
         }
 
         /// \~English
@@ -3825,7 +3995,8 @@ namespace ASEva
         /// <returns>是否成功移除</returns>
         public static bool RemoveSession(DateTime session, bool force)
         {
-            return AgencyAsync.RemoveSession(session, force);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.RemoveSession(session, force).Result;
         }
 
         /// \~English
@@ -3912,7 +4083,14 @@ namespace ASEva
         /// <returns>任务运行结果</returns>
         public static TaskResult RunStandaloneTask(object caller, String taskClassID, String config, out String returnValue)
         {
-            return AgencyAsync.RunStandaloneTask(caller, taskClassID, config, out returnValue);
+            if (!AgencyAsync.SyncMode)
+            {
+                returnValue = null;
+                return TaskResult.TaskInitFailed;
+            }
+            var result = AgencyAsync.RunStandaloneTask(caller, taskClassID, config).Result;
+            returnValue = result.Item2;
+            return result.Item1;
         }
 
         /// \~English
@@ -3946,7 +4124,8 @@ namespace ASEva
         /// <returns>返回总线报文配置，若删除则返回null</returns>
         public static String SelectBusMessage(String originMessageID)
         {
-            return AgencyAsync.SelectBusMessage(originMessageID);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.SelectBusMessage(originMessageID).Result;
         }
 
         /// \~English
@@ -3980,7 +4159,8 @@ namespace ASEva
         /// <returns>新选择的总线协议文件</returns>
         public static BusProtocolFileID[] SelectBusProtocolFiles(BusProtocolFileID[] selected)
         {
-            return AgencyAsync.SelectBusProtocolFiles(selected);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.SelectBusProtocolFiles(selected).Result;
         }
 
         /// \~English
@@ -4003,7 +4183,8 @@ namespace ASEva
         /// <returns>返回信号配置，若删除则返回null</returns>
         public static SignalConfig SelectSignal(SignalConfig origin, bool withScale, bool withSignBit, String unit)
         {
-            return AgencyAsync.SelectSignal(origin, withScale, withSignBit, unit);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.SelectSignal(origin, withScale, withSignBit, unit).Result;
         }
 
         /// \~English
@@ -4054,7 +4235,8 @@ namespace ASEva
         /// <returns>输出生成的报文数据，若未绑定则输出null</param>
         public static byte[] SendBusMessageBound(String messageID, uint? interval)
         {
-            return AgencyAsync.SendBusMessageBound(messageID, interval);
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.SendBusMessageBound(messageID, interval).Result;
         }
 
         /// \~English
@@ -4247,7 +4429,8 @@ namespace ASEva
         /// <returns>开启或关闭是否成功</returns>
         public static bool SetControlFlag(String controllerName, bool enabled)
         {
-            return AgencyAsync.SetControlFlag(controllerName, enabled);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.SetControlFlag(controllerName, enabled).Result;
         }
 
         /// \~English
@@ -4617,7 +4800,8 @@ namespace ASEva
         /// <returns>是否成功</returns>
         public static bool StartOffline(bool force, bool previewOnly, String genDirName)
         {
-            return AgencyAsync.StartOffline(force, previewOnly, genDirName);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.StartOffline(force, previewOnly, genDirName).Result;
         }
 
         /// \~English
@@ -4636,7 +4820,8 @@ namespace ASEva
         /// <returns>是否成功</returns>
         public static bool StartOnlineWithController(String controllerName, bool previewOnly)
         {
-            return AgencyAsync.StartOnlineWithController(controllerName, previewOnly);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.StartOnlineWithController(controllerName, previewOnly).Result;
         }
 
         /// \~English
@@ -4657,7 +4842,8 @@ namespace ASEva
         /// <returns>是否成功</returns>
         public static bool StartOnline(bool force, bool previewOnly, String sessionDirName)
         {
-            return AgencyAsync.StartOnline(force, previewOnly, sessionDirName);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.StartOnline(force, previewOnly, sessionDirName).Result;
         }
 
         /// \~English
@@ -4697,7 +4883,8 @@ namespace ASEva
         /// <returns>是否成功</returns>
         public static bool StartRemote(bool force, bool previewOnly, String sessionDirName, ulong startPosixTime)
         {
-            return AgencyAsync.StartRemote(force, previewOnly, sessionDirName, startPosixTime);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.StartRemote(force, previewOnly, sessionDirName, startPosixTime).Result;
         }
 
         /// \~English
@@ -4718,7 +4905,8 @@ namespace ASEva
         /// <returns>是否成功</returns>
         public static bool StartRemoteWithController(String controllerName, bool previewOnly, ulong startPosixTime)
         {
-            return AgencyAsync.StartRemoteWithController(controllerName, previewOnly, startPosixTime);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.StartRemoteWithController(controllerName, previewOnly, startPosixTime).Result;
         }
 
         /// \~English
@@ -4739,7 +4927,8 @@ namespace ASEva
         /// <returns>是否成功</returns>
         public static bool StartReplay(bool force, double startTimeline, double? interestTarget)
         {
-            return AgencyAsync.StartReplay(force, startTimeline, interestTarget);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.StartReplay(force, startTimeline, interestTarget).Result;
         }
 
         /// \~English
@@ -4756,7 +4945,8 @@ namespace ASEva
         /// <returns>是否成功</returns>
         public static bool StopRunningWithController(String controllerName)
         {
-            return AgencyAsync.StopRunningWithController(controllerName);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.StopRunningWithController(controllerName).Result;
         }
 
         /// \~English
@@ -4775,7 +4965,8 @@ namespace ASEva
         /// <returns>是否成功</returns>
         public static bool StopRunning(bool force, bool editRecordedSession)
         {
-            return AgencyAsync.StopRunning(force, editRecordedSession);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.StopRunning(force, editRecordedSession).Result;
         }
 
         /// \~English
@@ -4817,7 +5008,8 @@ namespace ASEva
         /// <returns>是否成功切换</returns>
         public static bool SwitchAppMode(String controllerName, ApplicationMode mode, int waitSecond)
         {
-            return AgencyAsync.SwitchAppMode(controllerName, mode, waitSecond);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.SwitchAppMode(controllerName, mode, waitSecond).Result;
         }
 
         /// \~English
