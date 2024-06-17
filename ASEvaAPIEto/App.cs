@@ -543,7 +543,7 @@ namespace ASEva.UIEto
         /// </summary>
 		/// \~Chinese
         /// <summary>
-        /// 主流程应使用此函数手动触发KeyDown事件
+        /// 流程应使用此函数手动触发KeyDown事件
         /// </summary>
         public static void TriggerKeyDown(object sender, KeyEventArgs args)
         {
