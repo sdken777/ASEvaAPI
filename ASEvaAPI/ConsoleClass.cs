@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ASEva
 {
@@ -77,17 +78,17 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Required] Called while running console procedure
+        /// (api:app=3.1.0) [Required] Called while running console procedure
         /// </summary>
         /// <param name="io">Console interaction interface. The procedure should end immediately if any method of this interface that returns false (interrupted)</param>
         /// <param name="machineText">Whether the text of messages and options given to the interaction interface should be ID or JSON string that is easy to parse by the machine. Otherwise it should be text that is easy to read by humans</param>
         /// \~Chinese
         /// <summary>
-        /// [必须实现] 运行控制台过程时被调用
+        /// (api:app=3.1.0) [必须实现] 运行控制台过程时被调用
         /// </summary>
         /// <param name="io">控制台交互接口，在运行过程中次此接口的任何方法返回false(中断)都应该立即结束</param>
         /// <param name="machineText">输入至交互接口的消息、选项等文本是否应该为便于机器解析的ID或JSON字符串等，否则为便于人阅读的文本</param>
-        public virtual void RunConsole(ConsoleIO io, bool machineText) { }
+        public virtual Task RunConsole(ConsoleIO io, bool machineText) { return Task.CompletedTask; }
     }
 
     /// \~English
@@ -133,11 +134,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Console interaction interface
+    /// (api:app=3.1.0) Console interaction interface
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 控制台交互接口
+    /// (api:app=3.1.0) 控制台交互接口
     /// </summary>
     public interface ConsoleIO
     {
@@ -158,48 +159,46 @@ namespace ASEva
         /// Get text input
         /// </summary>
         /// <param name="message">Title message</param>
-        /// <param name="result">Input default string, output the text input by user (the object remains the same if no input)</param>
-        /// <returns>False if interrupted</returns>
+        /// <param name="defaultString">Default string</param>
+        /// <returns>1. False if interrupted. 2. The text input by user (return the default string if no input)</returns>
         /// \~Chinese
         /// <summary>
         /// 获取字符串输入
         /// </summary>
         /// <param name="message">提示消息</param>
-        /// <param name="result">输入默认字符串，输出用户输入的字符串(若不输入则保持其默认值)</param>
-        /// <returns>若中断则返回false</returns>
-        bool InputString(String message, ref String result);
+        /// <param name="defaultString">默认字符串</param>
+        /// <returns>1. 若中断则返回false; 2. 用户输入的字符串(若不输入则为其默认值)</returns>
+        Task<Tuple<bool, String>> InputString(String message, String defaultString);
 
         /// \~English
         /// <summary>
         /// Get number input
         /// </summary>
         /// <param name="message">Title message</param>
-        /// <param name="result">Input default value, output the number input by user (the value remains the same if no input or the input is invalid)</param>
-        /// <returns>False if interrupted</returns>
+        /// <param name="defaultNumber">Default value</param>
+        /// <returns>1. False if interrupted. 2. The number input by user (return the default value if no input or the input is invalid)</returns>
         /// \~Chinese
         /// <summary>
         /// 获取数值输入
         /// </summary>
         /// <param name="message">提示消息</param>
-        /// <param name="result">输入默认值，输出用户输入的数值(若不输入或输入无效则保持其默认值)</param>
-        /// <returns>若中断则返回false</returns>
-        bool InputNumber(String message, ref double result);
+        /// <param name="defaultNumber">默认值</param>
+        /// <returns>1. 若中断则返回false; 2. 用户输入的数值(若不输入或输入无效则为其默认值)</returns>
+        Task<Tuple<bool, double>> InputNumber(String message, double defaultNumber);
 
         /// \~English
         /// <summary>
         /// Request user to confirm
         /// </summary>
         /// <param name="message">Title message</param>
-        /// <param name="result">Whether user confirmed</param>
-        /// <returns>False if interrupted</returns>
+        /// <returns>1. False if interrupted. 2. Whether user confirmed</returns>
         /// \~Chinese
         /// <summary>
         /// 请求用户确认
         /// </summary>
         /// <param name="message">提示消息</param>
-        /// <param name="result">用户是否确认</param>
-        /// <returns>若中断则返回false</returns>
-        bool Confirm(String message, out bool result);
+        /// <returns>1. 若中断则返回false; 2. 用户是否确认</returns>
+        Task<Tuple<bool, bool>> Confirm(String message);
 
         /// \~English
         /// <summary>
@@ -207,17 +206,17 @@ namespace ASEva
         /// </summary>
         /// <param name="message">Title message</param>
         /// <param name="options">All options</param>
-        /// <param name="result">Input index of initial selected option, output the index of option selected by user (-1 only when options is empty)</param>
-        /// <returns>False if interrupted</returns>
+        /// <param name="defaultIndex">Index of initial selected option</param>
+        /// <returns>1. False if interrupted. 2. The index of option selected by user (-1 only when options is empty)</returns>
         /// \~Chinese
         /// <summary>
         /// 单项选择
         /// </summary>
         /// <param name="message">提示消息</param>
         /// <param name="options">所有选项</param>
-        /// <param name="result">输入开始时即选中的选项序号，输出用户勾选的选项序号(仅当options为空时返回-1)</param>
-        /// <returns>若中断则返回false</returns>
-        bool SingleSelect(String message, String[] options, ref int result);
+        /// <param name="defaultIndex">开始时即选中的选项序号</param>
+        /// <returns>1. 若中断则返回false; 2. 用户勾选的选项序号(仅当options为空时返回-1)</returns>
+        Task<Tuple<bool, int>> SingleSelect(String message, String[] options, int defaultIndex);
 
         /// \~English
         /// <summary>
@@ -225,17 +224,17 @@ namespace ASEva
         /// </summary>
         /// <param name="message">Title message</param>
         /// <param name="options">All options</param>
-        /// <param name="result">Input index of all options selected by the user, output the index of all options selected by the user</param>
-        /// <returns>False if interrupted</returns>
+        /// <param name="defaultIndices">Index of all options selected by the user</param>
+        /// <returns>1. False if interrupted. 2. The index of all options selected by the user</returns>
         /// \~Chinese
         /// <summary>
         /// 多项选择
         /// </summary>
         /// <param name="message">提示消息</param>
         /// <param name="options">所有选项</param>
-        /// <param name="result">输入开始时即选中的所有选项序号，输出用户勾选的所有选项序号</param>
-        /// <returns>若中断则返回false</returns>
-        bool MultiSelect(String message, String[] options, ref int[] result);
+        /// <param name="defaultIndices">开始时即选中的所有选项序号</param>
+        /// <returns>1. 若中断则返回false; 2. 用户勾选的所有选项序号</returns>
+        Task<Tuple<bool, int[]>> MultiSelect(String message, String[] options, int[] defaultIndices);
 
         /// \~English
         /// <summary>
@@ -243,17 +242,15 @@ namespace ASEva
         /// </summary>
         /// <param name="message">Title message</param>
         /// <param name="extensions">Suffix filtering, starts with '.', or set to null not specified</param>
-        /// <param name="result">Selected file's path, null if user cancelled</param>
-        /// <returns>False if interrupted</returns>
+        /// <returns>1. False if interrupted. 2. Selected file's path, null if user cancelled</returns>
         /// \~Chinese
         /// <summary>
         /// 选择文件用于打开
         /// </summary>
         /// <param name="message">提示消息</param>
         /// <param name="extensions">后缀名筛选，以'.'开头，若不限后缀则设为null</param>
-        /// <param name="result">用户选中文件的路径，若取消则为null</param>
-        /// <returns>若中断则返回false</returns>
-        bool SelectOpenFile(String message, String[] extensions, out String result);
+        /// <returns>1. 若中断则返回false; 2. 用户选中文件的路径，若取消则为null</returns>
+        Task<Tuple<bool, String>> SelectOpenFile(String message, String[] extensions);
 
         /// \~English
         /// <summary>
@@ -261,33 +258,29 @@ namespace ASEva
         /// </summary>
         /// <param name="message">Title message</param>
         /// <param name="extension">Suffix of the file to save, starts with '.', or set to null not specified</param>
-        /// <param name="result">Selected file's path, null if user cancelled</param>
-        /// <returns>False if interrupted</returns>
+        /// <returns>1. False if interrupted. 2. Selected file's path, null if user cancelled</returns>
         /// \~Chinese
         /// <summary>
         /// 选择文件用于保存
         /// </summary>
         /// <param name="message">提示消息</param>
         /// <param name="extension">保存文件的后缀名，以'.'开头，若不考虑后缀则设为null</param>
-        /// <param name="result">用户选中文件的路径，若取消则为null</param>
-        /// <returns>若中断则返回false</returns>
-        bool SelectSaveFile(String message, String extension, out String result);
+        /// <returns>1. 若中断则返回false; 2. 用户选中文件的路径，若取消则为null</returns>
+        Task<Tuple<bool, String>> SelectSaveFile(String message, String extension);
 
         /// \~English
         /// <summary>
         /// Select folder
         /// </summary>
         /// <param name="message">Title message</param>
-        /// <param name="result">Selected folder's path, null if user cancelled</param>
-        /// <returns>False if interrupted</returns>
+        /// <returns>1. False if interrupted. 2. Selected folder's path, null if user cancelled</returns>
         /// \~Chinese
         /// <summary>
         /// 选择文件夹
         /// </summary>
         /// <param name="message">提示消息</param>
-        /// <param name="result">用户选中文件夹的路径，若取消则为null</param>
-        /// <returns>若中断则返回false</returns>
-        bool SelectFolder(String message, out String result);
+        /// <returns>1. 若中断则返回false; 2. 用户选中文件夹的路径，若取消则为null</returns>
+        Task<Tuple<bool, String>> SelectFolder(String message);
 
         /// \~English
         /// <summary>
@@ -295,19 +288,15 @@ namespace ASEva
         /// </summary>
         /// <param name="message">Title message</param>
         /// <param name="extensions">Suffix filtering, starts with '.', or set to null not specified</param>
-        /// <param name="data">Binary data of the file selected by user, null if user cancelled</param>
-        /// <param name="result">Result of loading file</param>
-        /// <returns>False if interrupted</returns>
+        /// <returns>1. False if interrupted. 2. Binary data of the file selected by user, null if user cancelled. 3. Result of loading file</returns>
         /// \~Chinese
         /// <summary>
         /// 选择文件并读取内容，仅适用于小文件
         /// </summary>
         /// <param name="message">提示消息</param>
         /// <param name="extensions">后缀名筛选，以'.'开头，若不限后缀则设为null</param>
-        /// <param name="data">用户选中文件的二进制数据，若取消则输出null</param>
-        /// <param name="result">读文件结果</param>
-        /// <returns>若中断则返回false</returns>
-        bool LoadFileData(String message, String[] extensions, out byte[] data, out ConsoleFileResult result);
+        /// <returns>1. 若中断则返回false; 2. 用户选中文件的二进制数据，若取消则输出null; 3. 读文件结果</returns>
+        Tuple<bool, byte[], ConsoleFileResult> LoadFileData(String message, String[] extensions);
 
         /// \~English
         /// <summary>
@@ -316,8 +305,7 @@ namespace ASEva
         /// <param name="message">Title message</param>
         /// <param name="extension">Suffix of the file to save, starts with '.', or set to null not specified</param>
         /// <param name="data">Binary data to save to the file</param>
-        /// <param name="result">Result of saving file</param>
-        /// <returns>False if interrupted</returns>
+        /// <returns>1. False if interrupted. 2. Result of saving file</returns>
         /// \~Chinese
         /// <summary>
         /// 选择文件并保存内容，仅适用于小文件
@@ -325,8 +313,7 @@ namespace ASEva
         /// <param name="message">提示消息</param>
         /// <param name="extension">保存文件的后缀名，以'.'开头，若不考虑后缀则设为null</param>
         /// <param name="data">需要保存的二进制数据</param>
-        /// <param name="result">写文件结果</param>
-        /// <returns>若中断则返回false</returns>
-        bool SaveFileData(String message, String extension, byte[] data, out ConsoleFileResult result);
+        /// <returns>1. 若中断则返回false; 2. 写文件结果</returns>
+        Tuple<bool, ConsoleFileResult> SaveFileData(String message, String extension, byte[] data);
     }
 }

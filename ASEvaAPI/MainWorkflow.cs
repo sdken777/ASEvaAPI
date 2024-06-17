@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Xml;
 using ASEva.Samples;
 
@@ -9,17 +10,17 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Base class of main workflow
+    /// (api:app=3.1.0) Base class of main workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 主流程基类
+    /// (api:app=3.1.0) 主流程基类
     /// </summary>
     public class MainWorkflow
     {
         /// \~English
         /// <summary>
-        /// (api:app=3.0.7) [Optional][OK for modal] Initialize main workflow
+        /// [Optional][OK for modal] Initialize main workflow
         /// </summary>
         /// <param name="appID">Application ID</param>
         /// <param name="parameters">Initial parameters</param>
@@ -27,7 +28,7 @@ namespace ASEva
         /// <returns>Whether initialization is successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.0.7) [可选实现][可含模态] 初始化主流程
+        /// [可选实现][可含模态] 初始化主流程
         /// </summary>
         /// <param name="appID">应用程序ID</param>
         /// <param name="parameters">初始化参数</param>
@@ -42,7 +43,6 @@ namespace ASEva
         /// <param name="loopCallback">Loop callback interface</param>
         /// <param name="modalCallback">Modal callback interface</param>
         /// <param name="startupProject">Startup project file path</param>
-        /// <returns>Always return true, or else the legacy OnRun will be called</returns>
         /// \~Chinese
         /// <summary>
         /// [必须实现][可含模态] 运行主流程，需要在其主循环中确保执行了 ASEva.MainWorkflowLoopCallback.OnLoop 和 ASEva.MainWorkflowModalCallback.OnHandleModal
@@ -50,7 +50,6 @@ namespace ASEva
         /// <param name="loopCallback">主循环回调接口</param>
         /// <param name="modalCallback">模态对话回调接口</param>
         /// <param name="startupProject">初始项目文件路径</param>
-        /// <returns>应固定返回true，否则将继续调用旧版OnRun</returns>
         public virtual void OnRun(MainWorkflowLoopCallback loopCallback, MainWorkflowModalCallback modalCallback, String startupProject) {}
 
         /// \~English
@@ -81,7 +80,7 @@ namespace ASEva
         /// <param name="mac">机器码</param>
         /// <param name="callback">框架软件的回调接口</param>
         /// <returns>是否接受请求，如接受需确保已调用 ASEva.MainWorkflowLicenseCallback.OnRevalidateLicense </returns>
-        public virtual bool OnLicenseRequest(LicenseRequestReason reason, String mac, MainWorkflowLicenseCallback callback) { return false; }
+        public virtual Task<bool> OnLicenseRequest(LicenseRequestReason reason, String mac, MainWorkflowLicenseCallback callback) { return Task.FromResult(false); }
 
         /// \~English
         /// <summary>
@@ -107,7 +106,7 @@ namespace ASEva
         /// </summary>
         /// <param name="result">框架软件的初始化结果</param>
         /// <param name="revisionUpdated">是否更新了发行号</param>
-        public virtual void OnCoreInitResult(CoreInitResult result, bool revisionUpdated) {}
+        public virtual Task OnCoreInitResult(CoreInitResult result, bool revisionUpdated) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
@@ -119,7 +118,7 @@ namespace ASEva
         /// [可选实现][可含模态] 输出错误消息
         /// </summary>
         /// <param name="message">消息</param>
-        public virtual void OnError(String message) {}
+        public virtual Task OnError(String message) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
@@ -131,7 +130,7 @@ namespace ASEva
         /// [可选实现][可含模态] 输出一般消息
         /// </summary>
         /// <param name="message">消息</param>
-        public virtual void OnNotice(String message) {}
+        public virtual Task OnNotice(String message) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
@@ -145,7 +144,7 @@ namespace ASEva
         /// </summary>
         /// <param name="message">消息</param>
         /// <returns>是否确认</returns>
-        public virtual bool OnConfirm(String message) { return true; }
+        public virtual Task<bool> OnConfirm(String message) { return Task.FromResult(true); }
 
         /// \~English
         /// <summary>
@@ -259,7 +258,7 @@ namespace ASEva
         /// </summary>
         /// <param name="selected">已选择的总线协议文件</param>
         /// <returns>新选择的总线协议文件</returns>
-        public virtual BusProtocolFileID[] OnSelectBusProtocolFiles(BusProtocolFileID[] selected) { return null; }
+        public virtual Task<BusProtocolFileID[]> OnSelectBusProtocolFiles(BusProtocolFileID[] selected) { return Task.FromResult<BusProtocolFileID[]>(null); }
 
         /// \~English
         /// <summary>
@@ -273,23 +272,21 @@ namespace ASEva
         /// </summary>
         /// <param name="originMessageID">初始总线报文配置</param>
         /// <returns>返回总线报文配置，若删除则返回null</returns>
-        public virtual String OnSelectBusMessage(String originMessageID) { return originMessageID; }
+        public virtual Task<String> OnSelectBusMessage(String originMessageID) { return Task.FromResult(originMessageID); }
 
         /// \~English
         /// <summary>
-        /// (api:app=3.0.6) [Optional][OK for modal] Select multiple bus messages at once
+        /// [Optional][OK for modal] Select multiple bus messages at once
         /// </summary>
         /// <param name="handler">Callback to handle bus message selection</param>
         /// <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
-        /// <returns>Always return true, or else OnSelectBusMessage will be called</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.0.6) [可选实现][可含模态] 一次性选择多个总线报文
+        /// [可选实现][可含模态] 一次性选择多个总线报文
         /// </summary>
         /// <param name="handler">选中总线报文时调用的回调接口</param>
         /// <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
-        /// <returns>应固定返回true，否则将调用OnSelectBusMessage</returns>
-        public virtual bool OnSelectBusMessages(SelectBusMessageHandler handler, List<String> existBusMessageIDList) { return false; }
+        public virtual Task OnSelectBusMessages(SelectBusMessageHandler handler, List<String> existBusMessageIDList) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
@@ -309,7 +306,7 @@ namespace ASEva
         /// <param name="withSignBit">是否包含符号位信号的配置</param>
         /// <param name="unit">该信号的单位显示，仅当包含乘数配置时有效</param>
         /// <returns>返回信号配置，若删除则返回null</returns>
-        public virtual SignalConfig OnSelectSignal(SignalConfig origin, bool withScale, bool withSignBit, String unit) { return origin; }
+        public virtual Task<SignalConfig> OnSelectSignal(SignalConfig origin, bool withScale, bool withSignBit, String unit) { return Task.FromResult(origin); }
 
         /// \~English
         /// <summary>
@@ -323,7 +320,7 @@ namespace ASEva
         /// </summary>
         /// <param name="handler">选中信号时调用的回调接口</param>
         /// <param name="existSignalIDList">既存的选中信号ID列表</param>
-        public virtual void OnSelectSignals(SelectSignalHandler handler, List<String> existSignalIDList) {}
+        public virtual Task OnSelectSignals(SelectSignalHandler handler, List<String> existSignalIDList) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
@@ -331,19 +328,15 @@ namespace ASEva
         /// </summary>
         /// <param name="title">Title of standalone task</param>
         /// <param name="taskClassID">The standalone task's class ID</param>
-        /// <param name="basicCallback">Basic callback interface</param>
-        /// <param name="detailsCallback">I/O details getter callback interface</param>
-        /// <returns>Always return true, or else the legacy OnRunStandaloneTask will be called</returns>
+        /// <param name="callback">Callback interface</param>
         /// \~Chinese
         /// <summary>
         /// [可选实现][可含模态] 显示正在进行的独立任务
         /// </summary>
         /// <param name="title">独立任务标题</param>
         /// <param name="taskClassID">独立任务类别ID</param>
-        /// <param name="basicCallback">基础回调接口</param>
-        /// <param name="detailsCallback">获取I/O详情的回调接口</param>
-        /// <returns>应固定返回true，否则将继续调用旧版OnRunStandaloneTask</returns>
-        public virtual void OnRunStandaloneTask(String title, String taskClassID, MainWorkflowTaskCallback basicCallback, MainWorkflowTaskIODetailsCallback detailsCallback) {}
+        /// <param name="callback">回调接口</param>
+        public virtual Task OnRunStandaloneTask(String title, String taskClassID, MainWorkflowTaskCallback callback) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
@@ -359,7 +352,7 @@ namespace ASEva
         /// <param name="dialog">配置面板对象，继承ConfigPanel</param>
         /// <param name="info">对话框组件信息</param>
         /// <param name="config">对话框初始配置</param>
-        public virtual void OnOpenDialog(object dialog, DialogClassInfo info, String config) {}
+        public virtual Task OnOpenDialog(object dialog, DialogClassInfo info, String config) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
@@ -393,7 +386,7 @@ namespace ASEva
         /// </summary>
         /// <param name="consoleClass">控制台对象</param>
         /// <param name="info">控制台组件信息</param>
-        public virtual void OnRunConsole(ConsoleClass consoleClass, ConsoleClassInfo info) {}
+        public virtual Task OnRunConsole(ConsoleClass consoleClass, ConsoleClassInfo info) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
@@ -477,7 +470,7 @@ namespace ASEva
         /// [可选实现][可含模态] 编辑新采集的session信息
         /// </summary>
         /// <param name="recordSessionID">新采集的session ID</param>
-        public virtual void OnEditRecordedSession(DateTime recordSessionID) { }
+        public virtual Task OnEditRecordedSession(DateTime recordSessionID) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
@@ -491,7 +484,7 @@ namespace ASEva
         /// </summary>
         /// <param name="originPath">原始路径，若未设置则为null</param>
         /// <returns>新路径，若未设置则为null</returns>
-        public virtual String OnEditOfflineMapPath(String originPath) { return originPath; }
+        public virtual Task<String> OnEditOfflineMapPath(String originPath) { return Task.FromResult(originPath); }
 
         /// \~English
         /// <summary>
@@ -503,7 +496,7 @@ namespace ASEva
         /// [可选实现][可含模态] 编辑数据加密选项
         /// </summary>
         /// <param name="callback">框架软件的回调接口</param>
-        public virtual void OnEditDataEncryption(MainWorkflowEncryptionCallback callback) {}
+        public virtual Task OnEditDataEncryption(MainWorkflowEncryptionCallback callback) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
@@ -519,7 +512,7 @@ namespace ASEva
         /// <param name="libs">插件关联的库信息列表</param>
         /// <param name="drivers">插件关联的驱动和环境信息列表</param>
         /// <param name="callback">框架软件的回调接口</param>
-        public virtual void OnInstallPlugin(InstallPluginLibraryInfo[] libs, InstallPluginDriverInfo[] drivers, MainWorkflowInstallCallback callback) {}
+        public virtual Task OnInstallPlugin(InstallPluginLibraryInfo[] libs, InstallPluginDriverInfo[] drivers, MainWorkflowInstallCallback callback) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
@@ -571,15 +564,15 @@ namespace ASEva
         /// <summary>
         /// [Optional][OK for modal] Notify that the application is exiting
         /// </summary>
-        /// <param name="force">Whether forced to exist</param>
-        /// <returns>Whether it's OK to exist (no use while forced to exist)</returns>
+        /// <param name="force">Whether forced to exit</param>
+        /// <returns>Whether it's OK to exist (no use while forced to exit)</returns>
         /// \~Chinese
         /// <summary>
         /// [可选实现][可含模态] 通知正在退出应用程序
         /// </summary>
         /// <param name="force">是否为强制结束</param>
         /// <returns>返回是否可退出，强制结束时将不起作用</returns>
-        public virtual bool OnExiting(bool force) { return true; }
+        public virtual Task<bool> OnExiting(bool force) { return Task.FromResult(true); }
 
         /// \~English
         /// <summary>
@@ -798,11 +791,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Modal callback interface used by main workflow
+    /// (api:app=3.1.0) Modal callback interface used by main workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 在主流程中使用的模态对话回调接口
+    /// (api:app=3.1.0) 在主流程中使用的模态对话回调接口
     /// </summary>
     public interface MainWorkflowModalCallback
     {
@@ -814,7 +807,7 @@ namespace ASEva
         /// <summary>
         /// 执行框架软件中可能产生模态对话的程序
         /// </summary>
-        void OnHandleModal();
+        Task OnHandleModal();
     }
 
     /// \~English
@@ -844,11 +837,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Standalone task callback interface used my main workflow
+    /// (api:app=3.1.0) Standalone task callback interface used my main workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 在主流程中使用的获取独立任务状态回调接口
+    /// (api:app=3.1.0) 在主流程中使用的获取独立任务状态回调接口
     /// </summary>
     public interface MainWorkflowTaskCallback
     {
@@ -860,7 +853,7 @@ namespace ASEva
         /// <summary>
         /// 获取独立任务状态
         /// </summary>
-        TaskState GetTaskState();
+        Task<TaskState> GetTaskState();
 
         /// \~English
         /// <summary>
@@ -870,7 +863,7 @@ namespace ASEva
         /// <summary>
         /// 获取当前状态描述
         /// </summary>
-        String GetTaskStateDescription();
+        Task<String> GetTaskStateDescription();
 
         /// \~English
         /// <summary>
@@ -880,7 +873,27 @@ namespace ASEva
         /// <summary>
         /// 获取任务进度，单位百分比
         /// </summary>
-        double GetTaskProgress();
+        Task<double> GetTaskProgress();
+
+        /// \~English
+        /// <summary>
+        /// Get task config
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 获取任务配置
+        /// </summary>
+        Task<String> GetTaskConfig();
+
+        /// \~English
+        /// <summary>
+        /// Get task return value
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 获取任务返回值
+        /// </summary>
+        Task<String> GetTaskReturnValue();
 
         /// \~English
         /// <summary>
@@ -891,37 +904,6 @@ namespace ASEva
         /// 取消任务
         /// </summary>
         void CancelTask();
-    }
-
-    /// \~English
-    /// <summary>
-    /// (api:app=3.0.0) Task I/O details getter callback interface used my main workflow
-    /// </summary>
-    /// \~Chinese
-    /// <summary>
-    /// (api:app=3.0.0) 在主流程中使用的获取独立任务I/O详情的回调接口
-    /// </summary>
-    public interface MainWorkflowTaskIODetailsCallback
-    {
-        /// \~English
-        /// <summary>
-        /// Get task config
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 获取任务配置
-        /// </summary>
-        String GetTaskConfig();
-
-        /// \~English
-        /// <summary>
-        /// Get task return value
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 获取任务返回值
-        /// </summary>
-        String GetTaskReturnValue();
     }
 
     /// \~English
