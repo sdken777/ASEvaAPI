@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.0.12
+            version=1.0.13
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -115,6 +115,16 @@
             </summary>
             <value>工作路径</value>
         </member>
+        <member name="P:ASEva.UIAvalonia.App.MainWindow">
+            \~English
+            <summary>
+            (api:avalonia=1.0.13) Get current main window
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.13) 获取当前主窗口
+            </summary>
+        </member>
         <member name="T:ASEva.UIAvalonia.AvaloniaApplication">
             \~English
             <summary>
@@ -182,11 +192,11 @@
         <member name="M:ASEva.UIAvalonia.ConfigPanel.OnHandleModal">
             \~English
             <summary>
-            [Optional] Called in the main loop, for running modal dialog
+            (api:avalonia=1.0.13) [Optional] Called in the main loop, for running modal dialog
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 在主循环中被调用，可进行模态对话
+            (api:avalonia=1.0.13) [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.ConfigPanel.Close">
@@ -596,11 +606,11 @@
         <member name="M:ASEva.UIAvalonia.WindowPanel.OnHandleModal">
             \~English
             <summary>
-            [Optional] Called in the main loop, for running modal dialog
+            (api:avalonia=1.0.13) [Optional] Called in the main loop, for running modal dialog
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 在主循环中被调用，可进行模态对话
+            (api:avalonia=1.0.13) [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.WindowPanel.OnRelease">

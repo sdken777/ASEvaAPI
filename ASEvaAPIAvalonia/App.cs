@@ -192,6 +192,22 @@ namespace ASEva.UIAvalonia
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:avalonia=1.0.13) Get current main window
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.0.13) 获取当前主窗口
+        /// </summary>
+        public static Window MainWindow
+        {
+            get
+            {
+                return appLifetime?.MainWindow;
+            }
+        } 
+
         private static void triggerFatalException(UnhandledExceptionEventArgs args)
         {
             var exObj = args.ExceptionObject;
