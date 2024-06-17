@@ -119,11 +119,11 @@ namespace ASEvaAPIAvaloniaTest
             window.Show();
         }
 
-        private void itemShowEtoDialog_Click(object sender, RoutedEventArgs e)
+        private async void itemShowEtoDialog_Click(object sender, RoutedEventArgs e)
         {
             if (Program.DesignerMode) return;
             var dialog = new EtoDialog();
-            ASEva.UIEto.App.RunDialog(dialog);
+            await ASEva.UIEto.App.RunDialog(dialog);
         }
 
         private class Model : INotifyPropertyChanged

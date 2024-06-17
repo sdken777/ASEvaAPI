@@ -51,7 +51,7 @@ namespace ASEva.UIEto
         }
 
         protected PlotModel model = new PlotModel();
-        protected bool chinese = Agency.GetAppLanguage() == Language.Chinese;
+        protected bool chinese = AgencyLocal.GetAppLanguage() == Language.Chinese;
 
         private ManualResetEventSlim click;
     }

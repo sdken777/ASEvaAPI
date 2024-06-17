@@ -24,14 +24,14 @@ namespace ASEva.Utility
         /// Load the resource
         /// </summary>
         /// <param name="xmlFileName">Resource name</param>
-        /// <param name="language">Language, set to Language.Invalid to get by ASEva.Agency.GetAppLanguage internally</param>
+        /// <param name="language">Language, set to Language.Invalid to get by ASEva.AgencyLocal.GetAppLanguage internally</param>
         /// <returns>Multi-language text resource object, null if failed to load</returns>
         /// \~Chinese
         /// <summary>
         /// 加载多语言文本资源
         /// </summary>
         /// <param name="xmlFileName">资源文件名</param>
-        /// <param name="language">语言，设置为Language.Invalid则通过 ASEva.Agency.GetAppLanguage 获取</param>
+        /// <param name="language">语言，设置为Language.Invalid则通过 ASEva.AgencyLocal.GetAppLanguage 获取</param>
         /// <returns>多语言文本资源对象，获取失败则返回null</returns>
         public static TextResource Load(String xmlFileName, Language language = Language.Invalid)
         {
@@ -50,14 +50,14 @@ namespace ASEva.Utility
         /// Load from binary data
         /// </summary>
         /// <param name="xmlFileData">XML binary data</param>
-        /// <param name="language">Language, set to Language.Invalid to get by ASEva.Agency.GetAppLanguage internally</param>
+        /// <param name="language">Language, set to Language.Invalid to get by ASEva.AgencyLocal.GetAppLanguage internally</param>
         /// <returns>Multi-language text resource object, null if failed to load</returns>
         /// \~Chinese
         /// <summary>
         /// 从XML文件数据加载多语言文本资源
         /// </summary>
         /// <param name="xmlFileData">XML文件数据</param>
-        /// <param name="language">语言，设置为Language.Invalid则通过 ASEva.Agency.GetAppLanguage 获取</param>
+        /// <param name="language">语言，设置为Language.Invalid则通过 ASEva.AgencyLocal.GetAppLanguage 获取</param>
         /// <returns>多语言文本资源对象，获取失败则返回null</returns>
         public static TextResource Load(byte[] xmlFileData, Language language = Language.Invalid)
         {
@@ -75,7 +75,7 @@ namespace ASEva.Utility
 
             var langCodes = new List<String>();
 
-            var lang = language == Language.Invalid ? Agency.GetAppLanguage() : language;
+            var lang = language == Language.Invalid ? AgencyLocal.GetAppLanguage() : language;
             if (lang == Language.Invalid || lang == Language.English)
             {
                 langCodes.Add("en");

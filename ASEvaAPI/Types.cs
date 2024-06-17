@@ -206,11 +206,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Current status of application, call ASEva.Agency.GetAppStatus to get
+    /// (api:app=3.0.0) Current status of application, call ASEva.AgencyAsync.GetAppStatus to get
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 应用当前的运行状态，调用 ASEva.Agency.GetAppStatus 获取
+    /// (api:app=3.0.0) 应用当前的运行状态，调用 ASEva.AgencyAsync.GetAppStatus 获取
     /// </summary>
     public enum ApplicationStatus
     {
@@ -267,11 +267,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Current mode of application, call ASEva.Agency.GetAppMode to get
+    /// (api:app=3.0.0) Current mode of application, call ASEva.AgencyAsync.GetAppMode to get
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 应用当前的运行模式，调用 ASEva.Agency.GetAppMode 获取
+    /// (api:app=3.0.0) 应用当前的运行模式，调用 ASEva.AgencyAsync.GetAppMode 获取
     /// </summary>
     public enum ApplicationMode
     {
@@ -318,11 +318,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.7) GUI framework that the application based on, call ASEva.Agency.GetAppGUI to get
+    /// (api:app=3.0.7) GUI framework that the application based on, call ASEva.AgencyLocal.GetAppGUI to get
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.7) 应用基于的图形界面框架，调用 ASEva.Agency.GetAppGUI 获取
+    /// (api:app=3.0.7) 应用基于的图形界面框架，调用 ASEva.AgencyLocal.GetAppGUI 获取
     /// </summary>
     public enum ApplicationGUI
     {
@@ -363,11 +363,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Log level, as the input argument of ASEva.Agency.Log
+    /// (api:app=3.0.0) Log level, as the input argument of ASEva.AgencyLocal.Log
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 清单信息等级，为 ASEva.Agency.Log 函数的输入参数
+    /// (api:app=3.0.0) 清单信息等级，为 ASEva.AgencyLocal.Log 函数的输入参数
     /// </summary>
     public enum LogLevel
     {
@@ -404,11 +404,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Global buffer range on the timeline, use ASEva.Agency.GetBufferRange to get
+    /// (api:app=3.0.0) Global buffer range on the timeline, use ASEva.AgencyAsync.GetBufferRange to get
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 当前全局缓存数据在时间线上的范围，调用 ASEva.Agency.GetBufferRange 获取
+    /// (api:app=3.0.0) 当前全局缓存数据在时间线上的范围，调用 ASEva.AgencyAsync.GetBufferRange 获取
     /// </summary>
     public struct BufferRange
     {
@@ -435,11 +435,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Bus message data for transmitting, use ASEva.Agency.SendBusMessage to transmit
+    /// (api:app=3.0.0) Bus message data for transmitting, use ASEva.AgencyAsync.SendBusMessage to transmit
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 用于发送的总线报文数据，可调用 ASEva.Agency.SendBusMessage 进行报文发送
+    /// (api:app=3.0.0) 用于发送的总线报文数据，可调用 ASEva.AgencyAsync.SendBusMessage 进行报文发送
     /// </summary>
     public class BusMessage
     {
@@ -651,11 +651,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Context for Web API calling, as an argument to ASEva.Agency.CallWebApi
+    /// (api:app=3.0.0) Context for Web API calling, as an argument to ASEva.AgencyLocal.CallWebApi
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) Web API调用的上下文，作为 ASEva.Agency.CallWebApi 参数传入
+    /// (api:app=3.0.0) Web API调用的上下文，作为 ASEva.AgencyLocal.CallWebApi 参数传入
     /// </summary>
     public class WebApiContext
     {
@@ -682,11 +682,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) General device's status, call ASEva.Agency.GetDeviceStatus to get
+    /// (api:app=3.0.0) General device's status, call ASEva.AgencyAsync.GetDeviceStatus to get
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 设备状态，调用 ASEva.Agency.GetDeviceStatus 获取
+    /// (api:app=3.0.0) 设备状态，调用 ASEva.AgencyAsync.GetDeviceStatus 获取
     /// </summary>
     public enum GeneralDeviceStatus
     {
@@ -1052,11 +1052,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Callback interface for ASEva.Agency.SelectSignals
+    /// (api:app=3.0.0) Callback interface for ASEva.AgencyAsync.SelectSignals
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 用于 ASEva.Agency.SelectSignals 的回调接口
+    /// (api:app=3.0.0) 用于 ASEva.AgencyAsync.SelectSignals 的回调接口
     /// </summary>
     public interface SelectSignalHandler
     {
@@ -1077,11 +1077,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.6) Callback interface for ASEva.Agency.SelectBusMessages
+    /// (api:app=3.0.6) Callback interface for ASEva.AgencyAsync.SelectBusMessages
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.6) 用于 ASEva.Agency.SelectBusMessages 的回调接口
+    /// (api:app=3.0.6) 用于 ASEva.AgencyAsync.SelectBusMessages 的回调接口
     /// </summary>
     public interface SelectBusMessageHandler
     {
@@ -3553,11 +3553,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Data subscriber object, call ASEva.Agency.SubscribeData to get
+    /// (api:app=3.0.0) Data subscriber object, call ASEva.AgencyLocal.SubscribeData to get
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 数据订阅对象，调用 ASEva.Agency.SubscribeData 获取
+    /// (api:app=3.0.0) 数据订阅对象，调用 ASEva.AgencyLocal.SubscribeData 获取
     /// </summary>
     public class DataSubscriber
     {
@@ -3873,12 +3873,12 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// Print for debugging, use ASEva.Agency.Print when you don't need to specify the source
+        /// Print for debugging, use ASEva.AgencyLocal.Print when you don't need to specify the source
         /// </summary>
         /// <param name="text">想要打印的文本</param>
         /// \~Chinese
         /// <summary>
-        /// 打印信息用于调试，不需要指定来源时可使用 ASEva.Agency.Print
+        /// 打印信息用于调试，不需要指定来源时可使用 ASEva.AgencyLocal.Print
         /// </summary>
         /// <param name="text">想要打印的文本</param>
         void Print(String text);

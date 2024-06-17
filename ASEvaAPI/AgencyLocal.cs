@@ -360,7 +360,7 @@ namespace ASEva
         /// <param name="transformID">Transform ID, set to null if not to transform</param>
         /// <param name="panel">The created config panel, null if failed to create</param>
         /// <param name="info">Information of the created config panel, null if failed to create</param>
-        /// <returns>Result of creating (After you're done using the panel, call ASEva.Agency.UnregisterPanel )</returns>
+        /// <returns>Result of creating (After you're done using the panel, call ASEva.AgencyLocal.UnregisterPanel )</returns>
         /// \~Chinese
         /// <summary>
         /// 创建配置面板对象
@@ -370,7 +370,7 @@ namespace ASEva
         /// <param name="transformID">分化ID，null表示不分化</param>
         /// <param name="panel">新建的配置面板对象，创建失败则为null</param>
         /// <param name="info">新建配置面板的组件信息，创建失败则为null</param>
-        /// <returns>创建结果，若成功则在释放窗口时需要调用 ASEva.Agency.UnregisterPanel </returns>
+        /// <returns>创建结果，若成功则在释放窗口时需要调用 ASEva.AgencyLocal.UnregisterPanel </returns>
         public static CreatePanelResult CreateConfigPanel(object caller, String dialogClassID, String transformID, out object panel, out DialogClassInfo info)
         {
             return Handler.CreateConfigPanel(caller, dialogClassID, transformID, out panel, out info);
@@ -423,7 +423,7 @@ namespace ASEva
         /// <param name="transformID">Transform ID, set to null if not to transform</param>
         /// <param name="panel">The created window panel, null if failed to create</param>
         /// <param name="info">Information of the created window panel, null if failed to create</param>
-        /// <returns>Result of creating (After you're done using the panel, call ASEva.Agency.UnregisterPanel )</returns>
+        /// <returns>Result of creating (After you're done using the panel, call ASEva.AgencyLocal.UnregisterPanel )</returns>
         /// \~Chinese
         /// <summary>
         /// 创建窗口面板对象
@@ -433,7 +433,7 @@ namespace ASEva
         /// <param name="transformID">分化ID，null表示不分化</param>
         /// <param name="panel">新建的窗口面板对象，创建失败则为null</param>
         /// <param name="info">新建窗口面板的组件信息，创建失败则为null</param>
-        /// <returns>创建结果，若成功则在释放窗口时需要调用 ASEva.Agency.UnregisterPanel </returns>
+        /// <returns>创建结果，若成功则在释放窗口时需要调用 ASEva.AgencyLocal.UnregisterPanel </returns>
         public static CreatePanelResult CreateWindowPanel(object caller, String windowClassID, String transformID, out object panel, out WindowClassInfo info)
         {
             return Handler.CreateWindowPanel(caller, windowClassID, transformID, out panel, out info);

@@ -537,7 +537,7 @@ namespace ASEva
         /// <param name="info">Information of window component</param>
         /// <param name="config">Initial configuration string</param>
         /// <param name="newWorkspaceIfNeeded">Whether to add to a new workspace (if available) if there's no space in the current workspace</param>
-        /// <returns>Whether successful. After you're done using the panel, call ASEva.Agency.UnregisterPanel</returns>
+        /// <returns>Whether successful. After you're done using the panel, call ASEva.AgencyLocal.UnregisterPanel</returns>
         /// \~Chinese
         /// <summary>
         /// [可选实现] 添加窗口至工作空间
@@ -546,7 +546,7 @@ namespace ASEva
         /// <param name="info">窗口组件信息</param>
         /// <param name="config">窗口初始配置</param>
         /// <param name="newWorkspaceIfNeeded">工作空间无足够空间时，是否在新工作空间添加（若不支持工作空间，则无视此选项）</param>
-        /// <returns>是否成功添加，若成功添加，在释放窗口时需要调用 ASEva.Agency.UnregisterPanel </returns>
+        /// <returns>是否成功添加，若成功添加，在释放窗口时需要调用 ASEva.AgencyLocal.UnregisterPanel </returns>
         public virtual bool OnAddWindow(object window, WindowClassInfo info, String config, bool newWorkspaceIfNeeded) { return false; }
 
         /// \~English

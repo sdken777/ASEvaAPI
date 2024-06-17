@@ -101,7 +101,7 @@ namespace ASEva.UIGtk
                 var etoBitmapSize = etoBitmap.Size;
                 if (Math.Abs(windowSize.Width * etoBitmapSize.Height - windowSize.Height * etoBitmapSize.Width) > 0.001)
                 {
-                    Agency.Print("Wayland screenshot: Choose 'Grab the current window' and 'Take screenshot'.");
+                    AgencyLocal.Print("Wayland screenshot: Choose 'Grab the current window' and 'Take screenshot'.");
                     return null;
                 }
 

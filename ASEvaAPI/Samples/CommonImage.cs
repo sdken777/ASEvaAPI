@@ -146,13 +146,13 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// [Depend on Agency] Load from file
+        /// [Depend on AgencyLocal] Load from file
         /// </summary>
         /// <param name="filePath">File path</param>
         /// <returns>Common image object</returns>
         /// \~Chinese
         /// <summary>
-        /// [依赖Agency] 从文件读取图像
+        /// [依赖AgencyLocal] 从文件读取图像
         /// </summary>
         /// <param name="filePath">文件路径</param>
         /// <returns>通用图像数据</returns>
@@ -178,13 +178,13 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// [Depend on Agency] Load from resource
+        /// [Depend on AgencyLocal] Load from resource
         /// </summary>
         /// <param name="resourceName">Resource name</param>
         /// <returns>Common image object</returns>
         /// \~Chinese
         /// <summary>
-        /// [依赖Agency] 从资源读取图像
+        /// [依赖AgencyLocal] 从资源读取图像
         /// </summary>
         /// <param name="resourceName">资源名称</param>
         /// <returns>通用图像数据</returns>
@@ -202,31 +202,31 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// [Depend on Agency] Create from image binary data
+        /// [Depend on AgencyLocal] Create from image binary data
         /// </summary>
         /// <param name="binary">Image binary data, like jpeg, png, etc.</param>
         /// <returns>Common image object</returns>
         /// \~Chinese
         /// <summary>
-        /// [依赖Agency] 从图像二进制数据转换
+        /// [依赖AgencyLocal] 从图像二进制数据转换
         /// </summary>
         /// <param name="binary">图像二进制数据，如jpeg、png等</param>
         /// <returns>通用图像数据</returns>
         public static CommonImage FromBinary(byte[] binary)
         {
             if (binary == null || binary.Length == 0) return null;
-            return Agency.DecodeImage(binary);
+            return AgencyLocal.DecodeImage(binary);
         }
 
         /// \~English
         /// <summary>
-        /// [Depend on Agency] Save to file
+        /// [Depend on AgencyLocal] Save to file
         /// </summary>
         /// <param name="filePath">File path</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// [依赖Agency] 保存至文件
+        /// [依赖AgencyLocal] 保存至文件
         /// </summary>
         /// <param name="filePath">文件路径</param>
         /// <returns>是否成功保存</returns>
@@ -257,20 +257,20 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// [Depend on Agency] Convert to image binary data
+        /// [Depend on AgencyLocal] Convert to image binary data
         /// </summary>
         /// <param name="format">Target format, only "jpg" and "png" supported</param>
         /// <returns>Image binary data</returns>
         /// \~Chinese
         /// <summary>
-        /// [依赖Agency] 转为图像二进制数据
+        /// [依赖AgencyLocal] 转为图像二进制数据
         /// </summary>
         /// <param name="format">编码格式，目前支持"jpg", "png"</param>
         /// <returns>图像二进制数据</returns>
         public byte[] ToBinary(String format)
         {
             if (format == null) return null;
-            if (format == "png" || format == "jpg") return Agency.EncodeImage(this, format);
+            if (format == "png" || format == "jpg") return AgencyLocal.EncodeImage(this, format);
             else return null;
         }
 

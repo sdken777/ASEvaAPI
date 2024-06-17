@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace ASEva
 {
@@ -432,33 +433,33 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Depend on Agency] Calculate local date and time based on host machine posix time model
+        /// (api:app=3.1.2) [Depend on AgencyAsync] Calculate local date and time based on host machine posix time model
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// [依赖Agency] 获取通过主机Posix时间模型计算得到的本地时间
+        /// (api:app=3.1.2) [依赖AgencyAsync] 获取通过主机Posix时间模型计算得到的本地时间
         /// </summary>
-        public DateTime? TimestampLocal
+        public Task<DateTime?> TimestampLocal
         {
             get
             {
-                return Agency.GetLocalDateTime(Session.ToDateTime(), Offset, false);
+                return AgencyAsync.GetLocalDateTime(Session.ToDateTime(), Offset, false);
             }
         }
 
         /// \~English
         /// <summary>
-        /// [Depend on Agency] Calculate UTC date and time based on satellite posix time model
+        /// (api:app=3.1.2) [Depend on AgencyAsync] Calculate UTC date and time based on satellite posix time model
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// [依赖Agency] 获取通过卫星Posix时间模型得到的计算UTC时间
+        /// (api:app=3.1.2) [依赖AgencyAsync] 获取通过卫星Posix时间模型得到的计算UTC时间
         /// </summary>
-        public DateTime? TimestampUTC
+        public Task<DateTime?> TimestampUTC
         {
             get
             {
-                return Agency.GetUTCDateTime(Session.ToDateTime(), Offset, true);
+                return AgencyAsync.GetUTCDateTime(Session.ToDateTime(), Offset, true);
             }
         }
 

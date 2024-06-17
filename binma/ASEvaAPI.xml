@@ -7010,7 +7010,7 @@
             <param name="transformID">Transform ID, set to null if not to transform</param>
             <param name="panel">The created config panel, null if failed to create</param>
             <param name="info">Information of the created config panel, null if failed to create</param>
-            <returns>Result of creating (After you're done using the panel, call ASEva.Agency.UnregisterPanel )</returns>
+            <returns>Result of creating (After you're done using the panel, call ASEva.AgencyLocal.UnregisterPanel )</returns>
             \~Chinese
             <summary>
             创建配置面板对象
@@ -7020,7 +7020,7 @@
             <param name="transformID">分化ID，null表示不分化</param>
             <param name="panel">新建的配置面板对象，创建失败则为null</param>
             <param name="info">新建配置面板的组件信息，创建失败则为null</param>
-            <returns>创建结果，若成功则在释放窗口时需要调用 ASEva.Agency.UnregisterPanel </returns>
+            <returns>创建结果，若成功则在释放窗口时需要调用 ASEva.AgencyLocal.UnregisterPanel </returns>
         </member>
         <member name="M:ASEva.AgencyLocal.CreateGraphPanelForType(ASEva.GraphType,System.String)">
             \~English
@@ -7064,7 +7064,7 @@
             <param name="transformID">Transform ID, set to null if not to transform</param>
             <param name="panel">The created window panel, null if failed to create</param>
             <param name="info">Information of the created window panel, null if failed to create</param>
-            <returns>Result of creating (After you're done using the panel, call ASEva.Agency.UnregisterPanel )</returns>
+            <returns>Result of creating (After you're done using the panel, call ASEva.AgencyLocal.UnregisterPanel )</returns>
             \~Chinese
             <summary>
             创建窗口面板对象
@@ -7074,7 +7074,7 @@
             <param name="transformID">分化ID，null表示不分化</param>
             <param name="panel">新建的窗口面板对象，创建失败则为null</param>
             <param name="info">新建窗口面板的组件信息，创建失败则为null</param>
-            <returns>创建结果，若成功则在释放窗口时需要调用 ASEva.Agency.UnregisterPanel </returns>
+            <returns>创建结果，若成功则在释放窗口时需要调用 ASEva.AgencyLocal.UnregisterPanel </returns>
         </member>
         <member name="M:ASEva.AgencyLocal.DecodeImage(System.Byte[])">
             \~English
@@ -8258,7 +8258,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.1.1
+            version=3.1.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -12380,7 +12380,7 @@
             <param name="info">Information of window component</param>
             <param name="config">Initial configuration string</param>
             <param name="newWorkspaceIfNeeded">Whether to add to a new workspace (if available) if there's no space in the current workspace</param>
-            <returns>Whether successful. After you're done using the panel, call ASEva.Agency.UnregisterPanel</returns>
+            <returns>Whether successful. After you're done using the panel, call ASEva.AgencyLocal.UnregisterPanel</returns>
             \~Chinese
             <summary>
             [可选实现] 添加窗口至工作空间
@@ -12389,7 +12389,7 @@
             <param name="info">窗口组件信息</param>
             <param name="config">窗口初始配置</param>
             <param name="newWorkspaceIfNeeded">工作空间无足够空间时，是否在新工作空间添加（若不支持工作空间，则无视此选项）</param>
-            <returns>是否成功添加，若成功添加，在释放窗口时需要调用 ASEva.Agency.UnregisterPanel </returns>
+            <returns>是否成功添加，若成功添加，在释放窗口时需要调用 ASEva.AgencyLocal.UnregisterPanel </returns>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnRunConsole(ASEva.ConsoleClass,ASEva.ConsoleClassInfo)">
             \~English
@@ -13818,21 +13818,21 @@
         <member name="P:ASEva.Sample.TimestampLocal">
             \~English
             <summary>
-            [Depend on Agency] Calculate local date and time based on host machine posix time model
+            (api:app=3.1.2) [Depend on AgencyAsync] Calculate local date and time based on host machine posix time model
             </summary>
             \~Chinese
             <summary>
-            [依赖Agency] 获取通过主机Posix时间模型计算得到的本地时间
+            (api:app=3.1.2) [依赖AgencyAsync] 获取通过主机Posix时间模型计算得到的本地时间
             </summary>
         </member>
         <member name="P:ASEva.Sample.TimestampUTC">
             \~English
             <summary>
-            [Depend on Agency] Calculate UTC date and time based on satellite posix time model
+            (api:app=3.1.2) [Depend on AgencyAsync] Calculate UTC date and time based on satellite posix time model
             </summary>
             \~Chinese
             <summary>
-            [依赖Agency] 获取通过卫星Posix时间模型得到的计算UTC时间
+            (api:app=3.1.2) [依赖AgencyAsync] 获取通过卫星Posix时间模型得到的计算UTC时间
             </summary>
         </member>
         <member name="M:ASEva.Sample.#ctor">
@@ -14502,13 +14502,13 @@
         <member name="M:ASEva.Samples.CommonImage.LoadFile(System.String)">
             \~English
             <summary>
-            [Depend on Agency] Load from file
+            [Depend on AgencyLocal] Load from file
             </summary>
             <param name="filePath">File path</param>
             <returns>Common image object</returns>
             \~Chinese
             <summary>
-            [依赖Agency] 从文件读取图像
+            [依赖AgencyLocal] 从文件读取图像
             </summary>
             <param name="filePath">文件路径</param>
             <returns>通用图像数据</returns>
@@ -14516,13 +14516,13 @@
         <member name="M:ASEva.Samples.CommonImage.LoadResource(System.String)">
             \~English
             <summary>
-            [Depend on Agency] Load from resource
+            [Depend on AgencyLocal] Load from resource
             </summary>
             <param name="resourceName">Resource name</param>
             <returns>Common image object</returns>
             \~Chinese
             <summary>
-            [依赖Agency] 从资源读取图像
+            [依赖AgencyLocal] 从资源读取图像
             </summary>
             <param name="resourceName">资源名称</param>
             <returns>通用图像数据</returns>
@@ -14530,13 +14530,13 @@
         <member name="M:ASEva.Samples.CommonImage.FromBinary(System.Byte[])">
             \~English
             <summary>
-            [Depend on Agency] Create from image binary data
+            [Depend on AgencyLocal] Create from image binary data
             </summary>
             <param name="binary">Image binary data, like jpeg, png, etc.</param>
             <returns>Common image object</returns>
             \~Chinese
             <summary>
-            [依赖Agency] 从图像二进制数据转换
+            [依赖AgencyLocal] 从图像二进制数据转换
             </summary>
             <param name="binary">图像二进制数据，如jpeg、png等</param>
             <returns>通用图像数据</returns>
@@ -14544,13 +14544,13 @@
         <member name="M:ASEva.Samples.CommonImage.Save(System.String)">
             \~English
             <summary>
-            [Depend on Agency] Save to file
+            [Depend on AgencyLocal] Save to file
             </summary>
             <param name="filePath">File path</param>
             <returns>Whether successful</returns>
             \~Chinese
             <summary>
-            [依赖Agency] 保存至文件
+            [依赖AgencyLocal] 保存至文件
             </summary>
             <param name="filePath">文件路径</param>
             <returns>是否成功保存</returns>
@@ -14558,13 +14558,13 @@
         <member name="M:ASEva.Samples.CommonImage.ToBinary(System.String)">
             \~English
             <summary>
-            [Depend on Agency] Convert to image binary data
+            [Depend on AgencyLocal] Convert to image binary data
             </summary>
             <param name="format">Target format, only "jpg" and "png" supported</param>
             <returns>Image binary data</returns>
             \~Chinese
             <summary>
-            [依赖Agency] 转为图像二进制数据
+            [依赖AgencyLocal] 转为图像二进制数据
             </summary>
             <param name="format">编码格式，目前支持"jpg", "png"</param>
             <returns>图像二进制数据</returns>
@@ -16454,11 +16454,11 @@
         <member name="T:ASEva.ApplicationStatus">
             \~English
             <summary>
-            (api:app=3.0.0) Current status of application, call ASEva.Agency.GetAppStatus to get
+            (api:app=3.0.0) Current status of application, call ASEva.AgencyAsync.GetAppStatus to get
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 应用当前的运行状态，调用 ASEva.Agency.GetAppStatus 获取
+            (api:app=3.0.0) 应用当前的运行状态，调用 ASEva.AgencyAsync.GetAppStatus 获取
             </summary>
         </member>
         <member name="F:ASEva.ApplicationStatus.Idle">
@@ -16514,11 +16514,11 @@
         <member name="T:ASEva.ApplicationMode">
             \~English
             <summary>
-            (api:app=3.0.0) Current mode of application, call ASEva.Agency.GetAppMode to get
+            (api:app=3.0.0) Current mode of application, call ASEva.AgencyAsync.GetAppMode to get
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 应用当前的运行模式，调用 ASEva.Agency.GetAppMode 获取
+            (api:app=3.0.0) 应用当前的运行模式，调用 ASEva.AgencyAsync.GetAppMode 获取
             </summary>
         </member>
         <member name="F:ASEva.ApplicationMode.Online">
@@ -16564,11 +16564,11 @@
         <member name="T:ASEva.ApplicationGUI">
             \~English
             <summary>
-            (api:app=3.0.7) GUI framework that the application based on, call ASEva.Agency.GetAppGUI to get
+            (api:app=3.0.7) GUI framework that the application based on, call ASEva.AgencyLocal.GetAppGUI to get
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.7) 应用基于的图形界面框架，调用 ASEva.Agency.GetAppGUI 获取
+            (api:app=3.0.7) 应用基于的图形界面框架，调用 ASEva.AgencyLocal.GetAppGUI 获取
             </summary>
         </member>
         <member name="F:ASEva.ApplicationGUI.NoGUI">
@@ -16608,11 +16608,11 @@
         <member name="T:ASEva.LogLevel">
             \~English
             <summary>
-            (api:app=3.0.0) Log level, as the input argument of ASEva.Agency.Log
+            (api:app=3.0.0) Log level, as the input argument of ASEva.AgencyLocal.Log
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 清单信息等级，为 ASEva.Agency.Log 函数的输入参数
+            (api:app=3.0.0) 清单信息等级，为 ASEva.AgencyLocal.Log 函数的输入参数
             </summary>
         </member>
         <member name="F:ASEva.LogLevel.Info">
@@ -16648,11 +16648,11 @@
         <member name="T:ASEva.BufferRange">
             \~English
             <summary>
-            (api:app=3.0.0) Global buffer range on the timeline, use ASEva.Agency.GetBufferRange to get
+            (api:app=3.0.0) Global buffer range on the timeline, use ASEva.AgencyAsync.GetBufferRange to get
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 当前全局缓存数据在时间线上的范围，调用 ASEva.Agency.GetBufferRange 获取
+            (api:app=3.0.0) 当前全局缓存数据在时间线上的范围，调用 ASEva.AgencyAsync.GetBufferRange 获取
             </summary>
         </member>
         <member name="F:ASEva.BufferRange.begin">
@@ -16678,11 +16678,11 @@
         <member name="T:ASEva.BusMessage">
             \~English
             <summary>
-            (api:app=3.0.0) Bus message data for transmitting, use ASEva.Agency.SendBusMessage to transmit
+            (api:app=3.0.0) Bus message data for transmitting, use ASEva.AgencyAsync.SendBusMessage to transmit
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 用于发送的总线报文数据，可调用 ASEva.Agency.SendBusMessage 进行报文发送
+            (api:app=3.0.0) 用于发送的总线报文数据，可调用 ASEva.AgencyAsync.SendBusMessage 进行报文发送
             </summary>
         </member>
         <member name="P:ASEva.BusMessage.Channel">
@@ -16888,11 +16888,11 @@
         <member name="T:ASEva.WebApiContext">
             \~English
             <summary>
-            (api:app=3.0.0) Context for Web API calling, as an argument to ASEva.Agency.CallWebApi
+            (api:app=3.0.0) Context for Web API calling, as an argument to ASEva.AgencyLocal.CallWebApi
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) Web API调用的上下文，作为 ASEva.Agency.CallWebApi 参数传入
+            (api:app=3.0.0) Web API调用的上下文，作为 ASEva.AgencyLocal.CallWebApi 参数传入
             </summary>
         </member>
         <member name="P:ASEva.WebApiContext.Result">
@@ -16918,11 +16918,11 @@
         <member name="T:ASEva.GeneralDeviceStatus">
             \~English
             <summary>
-            (api:app=3.0.0) General device's status, call ASEva.Agency.GetDeviceStatus to get
+            (api:app=3.0.0) General device's status, call ASEva.AgencyAsync.GetDeviceStatus to get
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 设备状态，调用 ASEva.Agency.GetDeviceStatus 获取
+            (api:app=3.0.0) 设备状态，调用 ASEva.AgencyAsync.GetDeviceStatus 获取
             </summary>
         </member>
         <member name="F:ASEva.GeneralDeviceStatus.None">
@@ -17278,11 +17278,11 @@
         <member name="T:ASEva.SelectSignalHandler">
             \~English
             <summary>
-            (api:app=3.0.0) Callback interface for ASEva.Agency.SelectSignals
+            (api:app=3.0.0) Callback interface for ASEva.AgencyAsync.SelectSignals
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 用于 ASEva.Agency.SelectSignals 的回调接口
+            (api:app=3.0.0) 用于 ASEva.AgencyAsync.SelectSignals 的回调接口
             </summary>
         </member>
         <member name="M:ASEva.SelectSignalHandler.SelectSignal(System.String)">
@@ -17302,11 +17302,11 @@
         <member name="T:ASEva.SelectBusMessageHandler">
             \~English
             <summary>
-            (api:app=3.0.6) Callback interface for ASEva.Agency.SelectBusMessages
+            (api:app=3.0.6) Callback interface for ASEva.AgencyAsync.SelectBusMessages
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.6) 用于 ASEva.Agency.SelectBusMessages 的回调接口
+            (api:app=3.0.6) 用于 ASEva.AgencyAsync.SelectBusMessages 的回调接口
             </summary>
         </member>
         <member name="M:ASEva.SelectBusMessageHandler.SelectBusMessage(System.String)">
@@ -19602,11 +19602,11 @@
         <member name="T:ASEva.DataSubscriber">
             \~English
             <summary>
-            (api:app=3.0.0) Data subscriber object, call ASEva.Agency.SubscribeData to get
+            (api:app=3.0.0) Data subscriber object, call ASEva.AgencyLocal.SubscribeData to get
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 数据订阅对象，调用 ASEva.Agency.SubscribeData 获取
+            (api:app=3.0.0) 数据订阅对象，调用 ASEva.AgencyLocal.SubscribeData 获取
             </summary>
         </member>
         <member name="M:ASEva.DataSubscriber.Dequeue">
@@ -19902,12 +19902,12 @@
         <member name="M:ASEva.Logger.Print(System.String)">
             \~English
             <summary>
-            Print for debugging, use ASEva.Agency.Print when you don't need to specify the source
+            Print for debugging, use ASEva.AgencyLocal.Print when you don't need to specify the source
             </summary>
             <param name="text">想要打印的文本</param>
             \~Chinese
             <summary>
-            打印信息用于调试，不需要指定来源时可使用 ASEva.Agency.Print
+            打印信息用于调试，不需要指定来源时可使用 ASEva.AgencyLocal.Print
             </summary>
             <param name="text">想要打印的文本</param>
         </member>
@@ -21917,14 +21917,14 @@
             Load the resource
             </summary>
             <param name="xmlFileName">Resource name</param>
-            <param name="language">Language, set to Language.Invalid to get by ASEva.Agency.GetAppLanguage internally</param>
+            <param name="language">Language, set to Language.Invalid to get by ASEva.AgencyLocal.GetAppLanguage internally</param>
             <returns>Multi-language text resource object, null if failed to load</returns>
             \~Chinese
             <summary>
             加载多语言文本资源
             </summary>
             <param name="xmlFileName">资源文件名</param>
-            <param name="language">语言，设置为Language.Invalid则通过 ASEva.Agency.GetAppLanguage 获取</param>
+            <param name="language">语言，设置为Language.Invalid则通过 ASEva.AgencyLocal.GetAppLanguage 获取</param>
             <returns>多语言文本资源对象，获取失败则返回null</returns>
         </member>
         <member name="M:ASEva.Utility.TextResource.Load(System.Byte[],ASEva.Language)">
@@ -21933,14 +21933,14 @@
             Load from binary data
             </summary>
             <param name="xmlFileData">XML binary data</param>
-            <param name="language">Language, set to Language.Invalid to get by ASEva.Agency.GetAppLanguage internally</param>
+            <param name="language">Language, set to Language.Invalid to get by ASEva.AgencyLocal.GetAppLanguage internally</param>
             <returns>Multi-language text resource object, null if failed to load</returns>
             \~Chinese
             <summary>
             从XML文件数据加载多语言文本资源
             </summary>
             <param name="xmlFileData">XML文件数据</param>
-            <param name="language">语言，设置为Language.Invalid则通过 ASEva.Agency.GetAppLanguage 获取</param>
+            <param name="language">语言，设置为Language.Invalid则通过 ASEva.AgencyLocal.GetAppLanguage 获取</param>
             <returns>多语言文本资源对象，获取失败则返回null</returns>
         </member>
         <member name="P:ASEva.Utility.TextResource.IDs">
