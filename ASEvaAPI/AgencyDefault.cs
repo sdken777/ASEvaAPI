@@ -962,11 +962,6 @@ namespace ASEva
             return Task.FromResult<string[]>(null);
         }
 
-        public Task<ulong> GetMemoryCapacity()
-        {
-            return Task.FromResult<ulong>(0);
-        }
-
         public Task<ConfigStatus[]> GetModuleChildConfigStatus(object caller, string classID)
         {
             return Task.FromResult<ConfigStatus[]>(null);

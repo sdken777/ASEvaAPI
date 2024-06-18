@@ -105,7 +105,6 @@ namespace ASEva
         Task<LogMessage[]> GetLogMessages();
         Task<String[]> GetManualTriggerNames();
         Task<String> GetManualTriggerName(int index);
-        Task<ulong> GetMemoryCapacity();
         Task<ConfigStatus[]> GetModuleChildConfigStatus(object caller, String classID);
         Task<String> GetModuleConfig(object caller, String classID);
         Task<Tuple<ConfigStatus, String>> GetModuleConfigStatus(object caller, String classID);
@@ -1758,21 +1757,6 @@ namespace ASEva
         public static Task<String> GetManualTriggerName(int index)
         {
             return Handler.GetManualTriggerName(index);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Get memory capacity
-        /// </summary>
-        /// <returns>Memory capacity, in bytes, zero if failed to query</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取内存容量
-        /// </summary>
-        /// <returns>内存容量，单位为字节，获取失败时返回0</returns>
-        public static Task<ulong> GetMemoryCapacity()
-        {
-            return Handler.GetMemoryCapacity();
         }
 
         /// \~English

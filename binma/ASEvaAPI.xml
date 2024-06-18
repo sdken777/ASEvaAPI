@@ -1800,18 +1800,6 @@
             <param name="index">通道序号，0~15</param>
             <returns>手动触发器通道的名称，若序号超出范围则返回null</returns>
         </member>
-        <member name="M:ASEva.Agency.GetMemoryCapacity">
-            \~English
-            <summary>
-            Get memory capacity
-            </summary>
-            <returns>Memory capacity, in bytes, zero if failed to query</returns>
-            \~Chinese
-            <summary>
-            获取内存容量
-            </summary>
-            <returns>内存容量，单位为字节，获取失败时返回0</returns>
-        </member>
         <member name="M:ASEva.Agency.GetModuleChildConfigStatus(System.Object,System.String)">
             \~English
             <summary>
@@ -5246,18 +5234,6 @@
             <param name="index">通道序号，0~15</param>
             <returns>手动触发器通道的名称，若序号超出范围则返回null</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetMemoryCapacity">
-            \~English
-            <summary>
-            Get memory capacity
-            </summary>
-            <returns>Memory capacity, in bytes, zero if failed to query</returns>
-            \~Chinese
-            <summary>
-            获取内存容量
-            </summary>
-            <returns>内存容量，单位为字节，获取失败时返回0</returns>
-        </member>
         <member name="M:ASEva.AgencyAsync.GetModuleChildConfigStatus(System.Object,System.String)">
             \~English
             <summary>
@@ -8258,7 +8234,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.1.2
+            version=3.1.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -11850,1048 +11826,6 @@
             <summary>
             (api:app=3.0.0) 图表数据的范围区间内验证方式
             </summary>
-        </member>
-        <member name="T:ASEva.CommonWorkflow">
-            \~English
-            <summary>
-            (api:app=3.1.0) Base class of common workflow
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.1.0) 通用流程基类
-            </summary>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnAppBasicInfo(ASEva.AppBasicInfo)">
-            \~English
-            <summary>
-            [Optional] Notify the application's basic info
-            </summary>
-            <param name="info">Application's basic info</param>
-            \~Chinese
-            <summary>
-            [可选实现] 通知应用程序的基本信息
-            </summary>
-            <param name="info">应用程序的基本信息</param>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnInitPhase(System.String)">
-            \~English
-            <summary>
-            [Optional] Notify the initialization phase of framework
-            </summary>
-            <param name="phaseDescription">Initialization phase of framework</param>
-            \~Chinese
-            <summary>
-            [可选实现] 通知框架软件的初始化阶段
-            </summary>
-            <param name="phaseDescription">当前初始化阶段的描述</param>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnInitResult(ASEva.CoreInitResult,System.Boolean)">
-            \~English
-            <summary>
-            [Optional][OK for modal] Notify the result of framework's initialization
-            </summary>
-            <param name="result">Result of framework's initialization</param>
-            <param name="revisionUpdated">Whether release revision is updated</param>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 通知框架软件的初始化结果
-            </summary>
-            <param name="result">框架软件的初始化结果</param>
-            <param name="revisionUpdated">是否更新了发行号</param>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnError(System.String)">
-            \~English
-            <summary>
-            [Optional][OK for modal] Handle error message
-            </summary>
-            <param name="message">The message</param>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 输出错误消息
-            </summary>
-            <param name="message">消息</param>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnNotice(System.String)">
-            \~English
-            <summary>
-            [Optional][OK for modal] Handle general message
-            </summary>
-            <param name="message">The message</param>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 输出一般消息
-            </summary>
-            <param name="message">消息</param>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnConfirm(System.String)">
-            \~English
-            <summary>
-            [Optional][OK for modal] Request user to confirm
-            </summary>
-            <param name="message">The message</param>
-            <returns>Whether it's confirmed</returns>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 输出确认消息，并返回是否确认
-            </summary>
-            <param name="message">消息</param>
-            <returns>是否确认</returns>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnLog(System.String,ASEva.LogLevel)">
-            \~English
-            <summary>
-            [Optional] Output log message
-            </summary>
-            <param name="message">The message</param>
-            <param name="level">Log level</param>
-            \~Chinese
-            <summary>
-            [可选实现] 输出清单消息
-            </summary>
-            <param name="message">消息</param>
-            <param name="level">消息级别</param>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnDebugMessage(System.String,System.String)">
-            \~English
-            <summary>
-            [Optional] Output message for debugging
-            </summary>
-            <param name="message">Message</param>
-            <param name="source">Source</param>
-            \~Chinese
-            <summary>
-            [可选实现] 输出调试用消息
-            </summary>
-            <param name="message">消息</param>
-            <param name="source">来源</param>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnGetAppLanguage">
-            \~English
-            <summary>
-            [Optional] Get application's language
-            </summary>
-            <returns>Language</returns>
-            \~Chinese
-            <summary>
-            [可选实现] 获取语言
-            </summary>
-            <returns>语言</returns>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnGetDefaultGlobalParameters">
-            \~English
-            <summary>
-            [Optional] Get default global parameters (default is empty)
-            </summary>
-            \~Chinese
-            <summary>
-            [可选实现] 获取默认全局参数（默认空）
-            </summary>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnGetWebAPIAvailability">
-            \~English
-            <summary>
-            [Optional] Get whether to support calling web API. You can still directly call web API in plugins even if this is false (default is true)
-            </summary>
-            \~Chinese
-            <summary>
-            [可选实现] 获取是否需要支持Web API调用，不影响在插件内部直接使用Web API（默认true）
-            </summary>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnSelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
-            \~English
-            <summary>
-            [Optional][OK for modal] Select (multiple) bus protocols
-            </summary>
-            <param name="selected">Bus protocols already selected</param>
-            <returns>Newly selected bus protocols</returns>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 选择总线协议文件（可多个）
-            </summary>
-            <param name="selected">已选择的总线协议文件</param>
-            <returns>新选择的总线协议文件</returns>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnSelectBusMessage(System.String)">
-            \~English
-            <summary>
-            [Optional][OK for modal] Select bus message
-            </summary>
-            <param name="originMessageID">Initial bus message configuration</param>
-            <returns>Bus message configuration result, null if requested to delete</returns>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 选择总线报文
-            </summary>
-            <param name="originMessageID">初始总线报文配置</param>
-            <returns>返回总线报文配置，若删除则返回null</returns>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnSelectBusMessages(ASEva.SelectBusMessageHandler,System.Collections.Generic.List{System.String})">
-            \~English
-            <summary>
-            [Optional][OK for modal] Select multiple bus messages at once
-            </summary>
-            <param name="handler">Callback to handle bus message selection</param>
-            <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 一次性选择多个总线报文
-            </summary>
-            <param name="handler">选中总线报文时调用的回调接口</param>
-            <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnSelectSignal(ASEva.SignalConfig,System.Boolean,System.Boolean,System.String)">
-            \~English
-            <summary>
-            [Optional][OK for modal] Select signal
-            </summary>
-            <param name="origin">Initial signal configuration</param>
-            <param name="withScale">Whether to enable the configuration of value scale</param>
-            <param name="withSignBit">Whether to enable the configuration of sign bit signal</param>
-            <param name="unit">The unit to display, only available while the configuration of value scale is enabled</param>
-            <returns>Signal configuration result, null if requested to delete</returns>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 选择信号
-            </summary>
-            <param name="origin">初始信号配置</param>
-            <param name="withScale">是否包含乘数的配置</param>
-            <param name="withSignBit">是否包含符号位信号的配置</param>
-            <param name="unit">该信号的单位显示，仅当包含乘数配置时有效</param>
-            <returns>返回信号配置，若删除则返回null</returns>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnSelectSignals(ASEva.SelectSignalHandler,System.Collections.Generic.List{System.String})">
-            \~English
-            <summary>
-            [Optional][OK for modal] Select multiple signals at once
-            </summary>
-            <param name="handler">Callback to handle signal selection</param>
-            <param name="existSignalIDList">List of all signal IDs that already exist</param>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 一次性选择多个信号
-            </summary>
-            <param name="handler">选中信号时调用的回调接口</param>
-            <param name="existSignalIDList">既存的选中信号ID列表</param>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnRunStandaloneTask(System.String,System.String,ASEva.WorkflowTaskCallback)">
-            \~English
-            <summary>
-            [Optional][OK for modal] Show running standalone task
-            </summary>
-            <param name="title">Title of standalone task</param>
-            <param name="taskClassID">The standalone task's class ID</param>
-            <param name="callback">Callback interface</param>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 显示正在进行的独立任务
-            </summary>
-            <param name="title">独立任务标题</param>
-            <param name="taskClassID">独立任务类别ID</param>
-            <param name="callback">回调接口</param>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnResetData">
-            \~English
-            <summary>
-            [Optional] Notify to reset data
-            </summary>
-            \~Chinese
-            <summary>
-            [可选实现] 通知重置数据
-            </summary>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnInputData(System.Object)">
-            \~English
-            <summary>
-            [Optional] Input new data
-            </summary>
-            <param name="data">New data</param>
-            \~Chinese
-            <summary>
-            [可选实现] 输入新数据
-            </summary>
-            <param name="data">新数据</param>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnStartSession">
-            \~English
-            <summary>
-            [Optional] Notify that the session is starting
-            </summary>
-            \~Chinese
-            <summary>
-            [可选实现] 通知正在开始session
-            </summary>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnStopSession">
-            \~English
-            <summary>
-            [Optional] Notify that the session is stopping
-            </summary>
-            \~Chinese
-            <summary>
-            [可选实现] 通知正在结束session
-            </summary>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnEditRecordedSession(System.DateTime)">
-            \~English
-            <summary>
-            [Optional][OK for modal] Edit the information of lately recorded session
-            </summary>
-            <param name="recordSessionID">Lately recorded session's ID</param>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 编辑新采集的session信息
-            </summary>
-            <param name="recordSessionID">新采集的session ID</param>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnInstallPlugin(ASEva.InstallPluginLibraryInfo[],ASEva.InstallPluginDriverInfo[],ASEva.WorkflowInstallCallback)">
-            \~English
-            <summary>
-            [Optional][OK for modal] Install plugins
-            </summary>
-            <param name="libs">Information of related library files</param>
-            <param name="drivers">Information of related driver or environment pack</param>
-            <param name="callback">Framework callback interface</param>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 安装插件
-            </summary>
-            <param name="libs">插件关联的库信息列表</param>
-            <param name="drivers">插件关联的驱动和环境信息列表</param>
-            <param name="callback">框架软件的回调接口</param>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnExiting(System.Boolean)">
-            \~English
-            <summary>
-            [Optional][OK for modal] Notify that the application is exiting
-            </summary>
-            <param name="force">Whether forced to exit</param>
-            <returns>Whether it's OK to exist (no use while forced to exit)</returns>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 通知正在退出应用程序
-            </summary>
-            <param name="force">是否为强制结束</param>
-            <returns>返回是否可退出，强制结束时将不起作用</returns>
-        </member>
-        <member name="M:ASEva.CommonWorkflow.OnExit">
-            \~English
-            <summary>
-            [Required] Exit workflow
-            </summary>
-            \~Chinese
-            <summary>
-            [必须实现] 退出流程
-            </summary>
-        </member>
-        <member name="T:ASEva.CoreWorkflow">
-            \~English
-            <summary>
-            (api:app=3.1.0) Base class of core workflow
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.1.0) 核心流程基类
-            </summary>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnInit(System.String,System.Collections.Generic.Dictionary{System.String,System.String},ASEva.ApplicationGUI@)">
-            \~English
-            <summary>
-            [Optional][OK for modal] Initialize workflow
-            </summary>
-            <param name="appID">Application ID</param>
-            <param name="parameters">Initial parameters</param>
-            <param name="gui">Output the GUI framework that the application based on</param>
-            <returns>Whether initialization is successful</returns>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 初始化流程
-            </summary>
-            <param name="appID">应用程序ID</param>
-            <param name="parameters">初始化参数</param>
-            <param name="gui">输出基于的图形界面框架框架</param>
-            <returns>初始化是否成功</returns>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnRun(ASEva.WorkflowLoopCallback,ASEva.WorkflowModalCallback,System.String)">
-            \~English
-            <summary>
-            [Required][OK for modal] Run the workflow, you should guarantee ASEva.WorkflowLoopCallback.OnLoop and ASEva.WorkflowModalCallback.OnHandleModal is called in the main loop
-            </summary>
-            <param name="loopCallback">Loop callback interface</param>
-            <param name="modalCallback">Modal callback interface</param>
-            <param name="startupProject">Startup project file path</param>
-            \~Chinese
-            <summary>
-            [必须实现][可含模态] 运行流程，需要在其主循环中确保执行了 ASEva.WorkflowLoopCallback.OnLoop 和 ASEva.WorkflowModalCallback.OnHandleModal
-            </summary>
-            <param name="loopCallback">主循环回调接口</param>
-            <param name="modalCallback">模态对话回调接口</param>
-            <param name="startupProject">初始项目文件路径</param>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnLicenseRequest(ASEva.LicenseRequestReason,System.String,ASEva.WorkflowLicenseCallback)">
-            \~English
-            <summary>
-            [Optional][OK for modal] Called after license validation failed
-            </summary>
-            <param name="reason">Reason why validation failed</param>
-            <param name="mac">Machine code</param>
-            <param name="callback">Framework callback interface</param>
-            <returns>Whether a new request is accepted, if yes you should guarantee ASEva.WorkflowLicenseCallback.OnRevalidateLicense is called </returns>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 许可证验证失败后发起新的请求
-            </summary>
-            <param name="reason">验证失败原因</param>
-            <param name="mac">机器码</param>
-            <param name="callback">框架软件的回调接口</param>
-            <returns>是否接受请求，如接受需确保已调用 ASEva.WorkflowLicenseCallback.OnRevalidateLicense </returns>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnGetVideoAvailability">
-            \~English
-            <summary>
-            [Optional] Get whether to support video (default is true)
-            </summary>
-            \~Chinese
-            <summary>
-            [可选实现] 获取是否需要支持视频（默认true）
-            </summary>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnGetAudioAvailability">
-            \~English
-            <summary>
-            [Optional] Get whether to support audio (default is true)
-            </summary>
-            \~Chinese
-            <summary>
-            [可选实现] 获取是否需要支持音频（默认true）
-            </summary>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnGetResourceMonitorAvailability">
-            \~English
-            <summary>
-            [Optional] Get whether to support resource monitoring (default is true)
-            </summary>
-            \~Chinese
-            <summary>
-            [可选实现] 获取是否需要支持资源监控（默认true）
-            </summary>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnGetOfflineMapAvailability">
-            \~English
-            <summary>
-            [Optional] Get whether to support offline map (default is true)
-            </summary>
-            \~Chinese
-            <summary>
-            [可选实现] 获取是否需要支持离线地图（默认true）
-            </summary>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnCheckSystemSleepPrevention">
-            \~English
-            <summary>
-            [Optional] Get whether to prevent system sleeping (default is true)
-            </summary>
-            \~Chinese
-            <summary>
-            [可选实现] 返回是否阻止系统进入睡眠（默认true）
-            </summary>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnCheckMultiInstance">
-            \~English
-            <summary>
-            [Optional] Get whether to allow multiple application instances running
-            </summary>
-            <returns>Whether to allow multiple application instances running</returns>
-            \~Chinese
-            <summary>
-            [可选实现] 返回是否允许多个实例同时运行
-            </summary>
-            <returns>是否允许多个实例同时运行</returns>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnCheckDisableGPUDecoding">
-            \~English
-            <summary>
-            [Optional] Get whether to disable GPU decoding
-            </summary>
-            <returns>Whether to disable GPU decoding</returns>
-            \~Chinese
-            <summary>
-            [可选实现] 返回是否禁用GPU解码
-            </summary>
-            <returns>是否禁用GPU解码</returns>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnCheckEnableSpecializedGPUDecoding">
-            \~English
-            <summary>
-            [Optional] Get whether to enable GPU specialized decoding
-            </summary>
-            <returns>Whether to enable GPU specialized decoding (always false if GPU decoding is disabled)</returns>
-            \~Chinese
-            <summary>
-            [可选实现] 返回是否启用GPU专用解码
-            </summary>
-            <returns>是否启用GPU专用解码（若已禁用GPU解码则无效）</returns>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnCheckPreferPRCWeb">
-            \~English
-            <summary>
-            [Optional] Get whether to use PRC web service
-            </summary>
-            <returns>Whether to use PRC web service</returns>
-            \~Chinese
-            <summary>
-            [可选实现] 返回是否使用境内网络服务
-            </summary>
-            <returns>是否使用境内网络服务</returns>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnCheckRequestAutoRoot">
-            \~English
-            <summary>
-            [Optional] Get whether to request auto root privilege (Only for Linux)
-            </summary>
-            <returns>Whether to request auto root privilege</returns>
-            \~Chinese
-            <summary>
-            [可选实现] 返回是否请求自动root权限 (仅针对Linux操作系统)
-            </summary>
-            <returns>是否请求自动root权限</returns>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnOpenDialog(System.Object,ASEva.DialogClassInfo,System.String)">
-            \~English
-            <summary>
-            [Optional][OK for modal] Open dialog
-            </summary>
-            <param name="dialog">Configuration panel object, derived from ConfigPanel</param>
-            <param name="info">Information of dialog component</param>
-            <param name="config">Initial configuration string</param>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 打开对话框
-            </summary>
-            <param name="dialog">配置面板对象，继承ConfigPanel</param>
-            <param name="info">对话框组件信息</param>
-            <param name="config">对话框初始配置</param>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnAddWindow(System.Object,ASEva.WindowClassInfo,System.String,System.Boolean)">
-            \~English
-            <summary>
-            [Optional] Add window to workspace
-            </summary>
-            <param name="window">Window panel object, derived from WindowPanel</param>
-            <param name="info">Information of window component</param>
-            <param name="config">Initial configuration string</param>
-            <param name="newWorkspaceIfNeeded">Whether to add to a new workspace (if available) if there's no space in the current workspace</param>
-            <returns>Whether successful. After you're done using the panel, call ASEva.AgencyLocal.UnregisterPanel</returns>
-            \~Chinese
-            <summary>
-            [可选实现] 添加窗口至工作空间
-            </summary>
-            <param name="window">窗口面板对象，继承WindowPanel</param>
-            <param name="info">窗口组件信息</param>
-            <param name="config">窗口初始配置</param>
-            <param name="newWorkspaceIfNeeded">工作空间无足够空间时，是否在新工作空间添加（若不支持工作空间，则无视此选项）</param>
-            <returns>是否成功添加，若成功添加，在释放窗口时需要调用 ASEva.AgencyLocal.UnregisterPanel </returns>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnRunConsole(ASEva.ConsoleClass,ASEva.ConsoleClassInfo)">
-            \~English
-            <summary>
-            [Optional][OK for modal] Run console procedure
-            </summary>
-            <param name="consoleClass">Console object</param>
-            <param name="info">Information of console component</param>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 运行控制台过程
-            </summary>
-            <param name="consoleClass">控制台对象</param>
-            <param name="info">控制台组件信息</param>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnSetCurrentDialogTitle(System.String,ASEva.Samples.CommonImage)">
-            \~English
-            <summary>
-            [Optional] Set current dialog's title and icon
-            </summary>
-            <param name="title">Title</param>
-            <param name="icon">Icon (size should be 16x16)</param>
-            \~Chinese
-            <summary>
-            [可选实现] 设置当前对话框的标题和图标
-            </summary>
-            <param name="title">标题</param>
-            <param name="icon">图标，分辨率为16x16</param>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnSetWindowTitle(System.Object,System.String,ASEva.Samples.CommonImage)">
-            \~English
-            <summary>
-            [Optional] Set window's title and icon
-            </summary>
-            <param name="window">Window panel object, derived from WindowPanel</param>
-            <param name="title">Title</param>
-            <param name="icon">Icon (size should be 16x16)</param>
-            \~Chinese
-            <summary>
-            [可选实现] 设置窗口的标题和图标
-            </summary>
-            <param name="window">窗口面板对象，继承WindowPanel</param>
-            <param name="title">标题</param>
-            <param name="icon">图标，分辨率为16x16</param>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnEditOfflineMapPath(System.String)">
-            \~English
-            <summary>
-            [Optional][OK for modal] Configure path of offline map file
-            </summary>
-            <param name="originPath">The original path, null if not configured</param>
-            <returns>New path, set to null if not configured</returns>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 编辑离线地图文件路径
-            </summary>
-            <param name="originPath">原始路径，若未设置则为null</param>
-            <returns>新路径，若未设置则为null</returns>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnEditDataEncryption(ASEva.WorkflowEncryptionCallback)">
-            \~English
-            <summary>
-            [Optional][OK for modal] Configure data encryption
-            </summary>
-            <param name="callback">Framework callback interface</param>
-            \~Chinese
-            <summary>
-            [可选实现][可含模态] 编辑数据加密选项
-            </summary>
-            <param name="callback">框架软件的回调接口</param>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnNewProject">
-            \~English
-            <summary>
-            [Optional] Notify that a new project is being loading
-            </summary>
-            \~Chinese
-            <summary>
-            [可选实现] 通知正在新建工程项目
-            </summary>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnLoadProject(System.Xml.XmlDocument)">
-            \~English
-            <summary>
-            [Optional] Notify that a project is loaded
-            </summary>
-            <param name="xml">XML of the loaded project</param>
-            \~Chinese
-            <summary>
-            [可选实现] 通知新加载的工程项目
-            </summary>
-            <param name="xml">工程项目xml</param>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnSaveProject(System.Xml.XmlDocument)">
-            \~English
-            <summary>
-            [Optional] Notify that the current project is being saved
-            </summary>
-            <param name="xml">XML of the current project</param>
-            \~Chinese
-            <summary>
-            [可选实现] 通知正在保存工程项目
-            </summary>
-            <param name="xml">工程项目xml</param>
-        </member>
-        <member name="M:ASEva.CoreWorkflow.OnCheckReady">
-            \~English
-            <summary>
-            [Optional] Get whether it's allowed by workflow to save project, start session, etc.
-            </summary>
-            <returns>Whether it's allowed by workflow to save project, start session, etc.</returns>
-            \~Chinese
-            <summary>
-            [可选实现] 返回流程端是否允许进行保存工程项目和开始session等操作
-            </summary>
-            <returns>流程端是否允许进行保存工程项目和开始session等操作</returns>
-        </member>
-        <member name="T:ASEva.AppBasicInfo">
-            \~English
-            <summary>
-            (api:app=3.0.0) Application's basic info
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.0.0) 应用程序的基本信息
-            </summary>
-        </member>
-        <member name="P:ASEva.AppBasicInfo.AppName">
-            \~English
-            <summary>
-            Application name
-            </summary>
-            \~Chinese
-            <summary>
-            应用程序名称
-            </summary>
-        </member>
-        <member name="P:ASEva.AppBasicInfo.AppIconPNG">
-            \~English
-            <summary>
-            Application's icon, which is PNG binary data
-            </summary>
-            \~Chinese
-            <summary>
-            应用程序的图标，为PNG文件二进制数据
-            </summary>
-        </member>
-        <member name="P:ASEva.AppBasicInfo.AppVersion">
-            \~English
-            <summary>
-            Application's version
-            </summary>
-            \~Chinese
-            <summary>
-            应用程序版本
-            </summary>
-        </member>
-        <member name="P:ASEva.AppBasicInfo.AppRevision">
-            \~English
-            <summary>
-            Application's release revision, which can be null (Applications with the same version can be distributed in different configurations)
-            </summary>
-            \~Chinese
-            <summary>
-            应用程序发行号，可为空（相同应用程序版本下可按不同配置发行）
-            </summary>
-        </member>
-        <member name="P:ASEva.AppBasicInfo.AppRevisionShort">
-            \~English
-            <summary>
-            Application's release revision in short, which can be null (Applications with the same version can be distributed in different configurations)
-            </summary>
-            \~Chinese
-            <summary>
-            缩略的应用程序发行号，可为空（相同应用程序版本下可按不同配置发行）
-            </summary>
-        </member>
-        <member name="P:ASEva.AppBasicInfo.CoreVersion">
-            \~English
-            <summary>
-            Framework's version
-            </summary>
-            \~Chinese
-            <summary>
-            框架软件的版本
-            </summary>
-        </member>
-        <member name="T:ASEva.LicenseRequestReason">
-            \~English
-            <summary>
-            (api:app=3.0.0) The reason for requesting license
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.0.0) 许可证请求原因
-            </summary>
-        </member>
-        <member name="F:ASEva.LicenseRequestReason.InvalidLicense">
-            \~English
-            <summary>
-            Can't find valid license
-            </summary>
-            \~Chinese
-            <summary>
-            未找到有效许可证
-            </summary>
-        </member>
-        <member name="F:ASEva.LicenseRequestReason.WrongMAC">
-            \~English
-            <summary>
-            Machine code is wrong
-            </summary>
-            \~Chinese
-            <summary>
-            当前许可证机器码错误
-            </summary>
-        </member>
-        <member name="F:ASEva.LicenseRequestReason.WrongVersion">
-            \~English
-            <summary>
-            Framework version unsupported
-            </summary>
-            \~Chinese
-            <summary>
-            当前许可证版本不支持
-            </summary>
-        </member>
-        <member name="F:ASEva.LicenseRequestReason.Expired">
-            \~English
-            <summary>
-            Current license is expired
-            </summary>
-            \~Chinese
-            <summary>
-            当前许可证已过期
-            </summary>
-        </member>
-        <member name="T:ASEva.CoreInitResult">
-            \~English
-            <summary>
-            (api:app=3.0.0) Initialization result of framework software
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.0.0) 框架软件的初始化结果
-            </summary>
-        </member>
-        <member name="F:ASEva.CoreInitResult.OK">
-            \~English
-            <summary>
-            Success
-            </summary>
-            \~Chinese
-            <summary>
-            成功
-            </summary>
-        </member>
-        <member name="F:ASEva.CoreInitResult.LoadLibraryFailed">
-            \~English
-            <summary>
-            Failed to load library
-            </summary>
-            \~Chinese
-            <summary>
-            加载库失败
-            </summary>
-        </member>
-        <member name="F:ASEva.CoreInitResult.InvalidComponent">
-            \~English
-            <summary>
-            Invalid component included
-            </summary>
-            \~Chinese
-            <summary>
-            含非法或失效组件
-            </summary>
-        </member>
-        <member name="F:ASEva.CoreInitResult.LicenseFailed">
-            \~English
-            <summary>
-            Failed to validate license
-            </summary>
-            \~Chinese
-            <summary>
-            许可证验证失败
-            </summary>
-        </member>
-        <member name="F:ASEva.CoreInitResult.InstallComponentFailed">
-            \~English
-            <summary>
-            Failed to install component
-            </summary>
-            \~Chinese
-            <summary>
-            安装组件失败
-            </summary>
-        </member>
-        <member name="T:ASEva.WorkflowLoopCallback">
-            \~English
-            <summary>
-            (api:app=3.0.0) Loop callback interface used by workflow
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.0.0) 在流程中使用的主循环回调接口
-            </summary>
-        </member>
-        <member name="M:ASEva.WorkflowLoopCallback.OnLoop">
-            \~English
-            <summary>
-            Run framework's main loop function
-            </summary>
-            \~Chinese
-            <summary>
-            执行框架软件中的主循环程序
-            </summary>
-        </member>
-        <member name="T:ASEva.WorkflowModalCallback">
-            \~English
-            <summary>
-            (api:app=3.1.0) Modal callback interface used by workflow
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.1.0) 在流程中使用的模态对话回调接口
-            </summary>
-        </member>
-        <member name="M:ASEva.WorkflowModalCallback.OnHandleModal">
-            \~English
-            <summary>
-            Run framework's functions that may be modal
-            </summary>
-            \~Chinese
-            <summary>
-            执行框架软件中可能产生模态对话的程序
-            </summary>
-        </member>
-        <member name="T:ASEva.WorkflowLicenseCallback">
-            \~English
-            <summary>
-            (api:app=3.0.0) License validation callback used by workflow
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.0.0) 在流程中使用的许可证验证回调接口
-            </summary>
-        </member>
-        <member name="M:ASEva.WorkflowLicenseCallback.OnRevalidateLicense(System.String,System.String)">
-            \~English
-            <summary>
-            Revalidate a new license
-            </summary>
-            <param name="license">Base64 string of license, set to null to abort</param>
-            <param name="pluginCode">Base64 string of plugin code</param>
-            \~Chinese
-            <summary>
-            重新验证许可证
-            </summary>
-            <param name="license">许可证的Base64字符串，设为null表示放弃验证</param>
-            <param name="pluginCode">插件码的Base64字符串</param>
-        </member>
-        <member name="T:ASEva.WorkflowTaskCallback">
-            \~English
-            <summary>
-            (api:app=3.1.0) Standalone task callback interface used my workflow
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.1.0) 在流程中使用的获取独立任务状态回调接口
-            </summary>
-        </member>
-        <member name="M:ASEva.WorkflowTaskCallback.GetTaskState">
-            \~English
-            <summary>
-            Get task's state
-            </summary>
-            \~Chinese
-            <summary>
-            获取独立任务状态
-            </summary>
-        </member>
-        <member name="M:ASEva.WorkflowTaskCallback.GetTaskStateDescription">
-            \~English
-            <summary>
-            Get description of task's current state
-            </summary>
-            \~Chinese
-            <summary>
-            获取当前状态描述
-            </summary>
-        </member>
-        <member name="M:ASEva.WorkflowTaskCallback.GetTaskProgress">
-            \~English
-            <summary>
-            Get progress, in percentages
-            </summary>
-            \~Chinese
-            <summary>
-            获取任务进度，单位百分比
-            </summary>
-        </member>
-        <member name="M:ASEva.WorkflowTaskCallback.GetTaskConfig">
-            \~English
-            <summary>
-            Get task config
-            </summary>
-            \~Chinese
-            <summary>
-            获取任务配置
-            </summary>
-        </member>
-        <member name="M:ASEva.WorkflowTaskCallback.GetTaskReturnValue">
-            \~English
-            <summary>
-            Get task return value
-            </summary>
-            \~Chinese
-            <summary>
-            获取任务返回值
-            </summary>
-        </member>
-        <member name="M:ASEva.WorkflowTaskCallback.CancelTask">
-            \~English
-            <summary>
-            Cancel the task
-            </summary>
-            \~Chinese
-            <summary>
-            取消任务
-            </summary>
-        </member>
-        <member name="T:ASEva.WorkflowEncryptionCallback">
-            \~English
-            <summary>
-            (api:app=3.0.0) Data encryption callback used by workflow
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.0.0) 在流程中使用的配置数据加密选项的回调接口
-            </summary>
-        </member>
-        <member name="M:ASEva.WorkflowEncryptionCallback.UnlockDataKey(System.String)">
-            \~English
-            <summary>
-            Try to unlock
-            </summary>
-            <param name="key">The old password, set to null to use default password</param>
-            <returns>Whether successful to unlock</returns>
-            \~Chinese
-            <summary>
-            尝试解锁
-            </summary>
-            <param name="key">旧密码，空表示使用默认密码</param>
-            <returns>是否成功解锁</returns>
-        </member>
-        <member name="M:ASEva.WorkflowEncryptionCallback.UpdateDataKey(System.String)">
-            \~English
-            <summary>
-            Update password
-            </summary>
-            <param name="key">New password, set to null to use default password</param>
-            \~Chinese
-            <summary>
-            更新密码
-            </summary>
-            <param name="key">新密码，空表示使用默认密码</param>
-        </member>
-        <member name="T:ASEva.WorkflowInstallCallback">
-            \~English
-            <summary>
-            (api:app=3.0.0) Plugin installation callback used by workflow
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.0.0) 在流程中使用的安装插件的回调接口
-            </summary>
-        </member>
-        <member name="M:ASEva.WorkflowInstallCallback.InstallLibrary(System.String)">
-            \~English
-            <summary>
-            Install library files
-            </summary>
-            <param name="libraryID">Related library ID</param>
-            \~Chinese
-            <summary>
-            安装库文件
-            </summary>
-            <param name="libraryID">插件关联的库ID</param>
-        </member>
-        <member name="M:ASEva.WorkflowInstallCallback.PrepareDriver(System.String)">
-            \~English
-            <summary>
-            Prepare driver or environment pack, and return the executable path for installation
-            </summary>
-            <param name="driverID">Related driver ID</param>
-            <returns>Executable path for installation</returns>
-            \~Chinese
-            <summary>
-            准备驱动和环境等的文件，并返回安装文件的运行路径
-            </summary>
-            <param name="driverID">插件关联的驱动ID</param>
-            <returns>安装文件的运行路径</returns>
         </member>
         <member name="T:ASEva.NativeClass">
             \~English
@@ -22134,6 +21068,1048 @@
             [分化的窗口组件必须实现] 获取分化标识ID时被调用
             </summary>
             <returns>分化标识ID</returns>
+        </member>
+        <member name="T:ASEva.CommonWorkflow">
+            \~English
+            <summary>
+            (api:app=3.1.0) Base class of common workflow
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.1.0) 通用流程基类
+            </summary>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnAppBasicInfo(ASEva.AppBasicInfo)">
+            \~English
+            <summary>
+            [Optional] Notify the application's basic info
+            </summary>
+            <param name="info">Application's basic info</param>
+            \~Chinese
+            <summary>
+            [可选实现] 通知应用程序的基本信息
+            </summary>
+            <param name="info">应用程序的基本信息</param>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnInitPhase(System.String)">
+            \~English
+            <summary>
+            [Optional] Notify the initialization phase of framework
+            </summary>
+            <param name="phaseDescription">Initialization phase of framework</param>
+            \~Chinese
+            <summary>
+            [可选实现] 通知框架软件的初始化阶段
+            </summary>
+            <param name="phaseDescription">当前初始化阶段的描述</param>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnInitResult(ASEva.CoreInitResult,System.Boolean)">
+            \~English
+            <summary>
+            [Optional][OK for modal] Notify the result of framework's initialization
+            </summary>
+            <param name="result">Result of framework's initialization</param>
+            <param name="revisionUpdated">Whether release revision is updated</param>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 通知框架软件的初始化结果
+            </summary>
+            <param name="result">框架软件的初始化结果</param>
+            <param name="revisionUpdated">是否更新了发行号</param>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnError(System.String)">
+            \~English
+            <summary>
+            [Optional][OK for modal] Handle error message
+            </summary>
+            <param name="message">The message</param>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 输出错误消息
+            </summary>
+            <param name="message">消息</param>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnNotice(System.String)">
+            \~English
+            <summary>
+            [Optional][OK for modal] Handle general message
+            </summary>
+            <param name="message">The message</param>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 输出一般消息
+            </summary>
+            <param name="message">消息</param>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnConfirm(System.String)">
+            \~English
+            <summary>
+            [Optional][OK for modal] Request user to confirm
+            </summary>
+            <param name="message">The message</param>
+            <returns>Whether it's confirmed</returns>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 输出确认消息，并返回是否确认
+            </summary>
+            <param name="message">消息</param>
+            <returns>是否确认</returns>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnLog(System.String,ASEva.LogLevel)">
+            \~English
+            <summary>
+            [Optional] Output log message
+            </summary>
+            <param name="message">The message</param>
+            <param name="level">Log level</param>
+            \~Chinese
+            <summary>
+            [可选实现] 输出清单消息
+            </summary>
+            <param name="message">消息</param>
+            <param name="level">消息级别</param>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnDebugMessage(System.String,System.String)">
+            \~English
+            <summary>
+            [Optional] Output message for debugging
+            </summary>
+            <param name="message">Message</param>
+            <param name="source">Source</param>
+            \~Chinese
+            <summary>
+            [可选实现] 输出调试用消息
+            </summary>
+            <param name="message">消息</param>
+            <param name="source">来源</param>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnGetAppLanguage">
+            \~English
+            <summary>
+            [Optional] Get application's language
+            </summary>
+            <returns>Language</returns>
+            \~Chinese
+            <summary>
+            [可选实现] 获取语言
+            </summary>
+            <returns>语言</returns>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnGetDefaultGlobalParameters">
+            \~English
+            <summary>
+            [Optional] Get default global parameters (default is empty)
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 获取默认全局参数（默认空）
+            </summary>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnGetWebAPIAvailability">
+            \~English
+            <summary>
+            [Optional] Get whether to support calling web API. You can still directly call web API in plugins even if this is false (default is true)
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 获取是否需要支持Web API调用，不影响在插件内部直接使用Web API（默认true）
+            </summary>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnSelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
+            \~English
+            <summary>
+            [Optional][OK for modal] Select (multiple) bus protocols
+            </summary>
+            <param name="selected">Bus protocols already selected</param>
+            <returns>Newly selected bus protocols</returns>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 选择总线协议文件（可多个）
+            </summary>
+            <param name="selected">已选择的总线协议文件</param>
+            <returns>新选择的总线协议文件</returns>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnSelectBusMessage(System.String)">
+            \~English
+            <summary>
+            [Optional][OK for modal] Select bus message
+            </summary>
+            <param name="originMessageID">Initial bus message configuration</param>
+            <returns>Bus message configuration result, null if requested to delete</returns>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 选择总线报文
+            </summary>
+            <param name="originMessageID">初始总线报文配置</param>
+            <returns>返回总线报文配置，若删除则返回null</returns>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnSelectBusMessages(ASEva.SelectBusMessageHandler,System.Collections.Generic.List{System.String})">
+            \~English
+            <summary>
+            [Optional][OK for modal] Select multiple bus messages at once
+            </summary>
+            <param name="handler">Callback to handle bus message selection</param>
+            <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 一次性选择多个总线报文
+            </summary>
+            <param name="handler">选中总线报文时调用的回调接口</param>
+            <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnSelectSignal(ASEva.SignalConfig,System.Boolean,System.Boolean,System.String)">
+            \~English
+            <summary>
+            [Optional][OK for modal] Select signal
+            </summary>
+            <param name="origin">Initial signal configuration</param>
+            <param name="withScale">Whether to enable the configuration of value scale</param>
+            <param name="withSignBit">Whether to enable the configuration of sign bit signal</param>
+            <param name="unit">The unit to display, only available while the configuration of value scale is enabled</param>
+            <returns>Signal configuration result, null if requested to delete</returns>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 选择信号
+            </summary>
+            <param name="origin">初始信号配置</param>
+            <param name="withScale">是否包含乘数的配置</param>
+            <param name="withSignBit">是否包含符号位信号的配置</param>
+            <param name="unit">该信号的单位显示，仅当包含乘数配置时有效</param>
+            <returns>返回信号配置，若删除则返回null</returns>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnSelectSignals(ASEva.SelectSignalHandler,System.Collections.Generic.List{System.String})">
+            \~English
+            <summary>
+            [Optional][OK for modal] Select multiple signals at once
+            </summary>
+            <param name="handler">Callback to handle signal selection</param>
+            <param name="existSignalIDList">List of all signal IDs that already exist</param>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 一次性选择多个信号
+            </summary>
+            <param name="handler">选中信号时调用的回调接口</param>
+            <param name="existSignalIDList">既存的选中信号ID列表</param>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnRunStandaloneTask(System.String,System.String,ASEva.WorkflowTaskCallback)">
+            \~English
+            <summary>
+            [Optional][OK for modal] Show running standalone task
+            </summary>
+            <param name="title">Title of standalone task</param>
+            <param name="taskClassID">The standalone task's class ID</param>
+            <param name="callback">Callback interface</param>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 显示正在进行的独立任务
+            </summary>
+            <param name="title">独立任务标题</param>
+            <param name="taskClassID">独立任务类别ID</param>
+            <param name="callback">回调接口</param>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnResetData">
+            \~English
+            <summary>
+            [Optional] Notify to reset data
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 通知重置数据
+            </summary>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnInputData(System.Object)">
+            \~English
+            <summary>
+            [Optional] Input new data
+            </summary>
+            <param name="data">New data</param>
+            \~Chinese
+            <summary>
+            [可选实现] 输入新数据
+            </summary>
+            <param name="data">新数据</param>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnStartSession">
+            \~English
+            <summary>
+            [Optional] Notify that the session is starting
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 通知正在开始session
+            </summary>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnStopSession">
+            \~English
+            <summary>
+            [Optional] Notify that the session is stopping
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 通知正在结束session
+            </summary>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnEditRecordedSession(System.DateTime)">
+            \~English
+            <summary>
+            [Optional][OK for modal] Edit the information of lately recorded session
+            </summary>
+            <param name="recordSessionID">Lately recorded session's ID</param>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 编辑新采集的session信息
+            </summary>
+            <param name="recordSessionID">新采集的session ID</param>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnInstallPlugin(ASEva.InstallPluginLibraryInfo[],ASEva.InstallPluginDriverInfo[],ASEva.WorkflowInstallCallback)">
+            \~English
+            <summary>
+            [Optional][OK for modal] Install plugins
+            </summary>
+            <param name="libs">Information of related library files</param>
+            <param name="drivers">Information of related driver or environment pack</param>
+            <param name="callback">Framework callback interface</param>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 安装插件
+            </summary>
+            <param name="libs">插件关联的库信息列表</param>
+            <param name="drivers">插件关联的驱动和环境信息列表</param>
+            <param name="callback">框架软件的回调接口</param>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnExiting(System.Boolean)">
+            \~English
+            <summary>
+            [Optional][OK for modal] Notify that the application is exiting
+            </summary>
+            <param name="force">Whether forced to exit</param>
+            <returns>Whether it's OK to exist (no use while forced to exit)</returns>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 通知正在退出应用程序
+            </summary>
+            <param name="force">是否为强制结束</param>
+            <returns>返回是否可退出，强制结束时将不起作用</returns>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnExit">
+            \~English
+            <summary>
+            [Required] Exit workflow
+            </summary>
+            \~Chinese
+            <summary>
+            [必须实现] 退出流程
+            </summary>
+        </member>
+        <member name="T:ASEva.CoreWorkflow">
+            \~English
+            <summary>
+            (api:app=3.1.0) Base class of core workflow
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.1.0) 核心流程基类
+            </summary>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnInit(System.String,System.Collections.Generic.Dictionary{System.String,System.String},ASEva.ApplicationGUI@)">
+            \~English
+            <summary>
+            [Optional][OK for modal] Initialize workflow
+            </summary>
+            <param name="appID">Application ID</param>
+            <param name="parameters">Initial parameters</param>
+            <param name="gui">Output the GUI framework that the application based on</param>
+            <returns>Whether initialization is successful</returns>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 初始化流程
+            </summary>
+            <param name="appID">应用程序ID</param>
+            <param name="parameters">初始化参数</param>
+            <param name="gui">输出基于的图形界面框架框架</param>
+            <returns>初始化是否成功</returns>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnRun(ASEva.WorkflowLoopCallback,ASEva.WorkflowModalCallback,System.String)">
+            \~English
+            <summary>
+            [Required][OK for modal] Run the workflow, you should guarantee ASEva.WorkflowLoopCallback.OnLoop and ASEva.WorkflowModalCallback.OnHandleModal is called in the main loop
+            </summary>
+            <param name="loopCallback">Loop callback interface</param>
+            <param name="modalCallback">Modal callback interface</param>
+            <param name="startupProject">Startup project file path</param>
+            \~Chinese
+            <summary>
+            [必须实现][可含模态] 运行流程，需要在其主循环中确保执行了 ASEva.WorkflowLoopCallback.OnLoop 和 ASEva.WorkflowModalCallback.OnHandleModal
+            </summary>
+            <param name="loopCallback">主循环回调接口</param>
+            <param name="modalCallback">模态对话回调接口</param>
+            <param name="startupProject">初始项目文件路径</param>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnLicenseRequest(ASEva.LicenseRequestReason,System.String,ASEva.WorkflowLicenseCallback)">
+            \~English
+            <summary>
+            [Optional][OK for modal] Called after license validation failed
+            </summary>
+            <param name="reason">Reason why validation failed</param>
+            <param name="mac">Machine code</param>
+            <param name="callback">Framework callback interface</param>
+            <returns>Whether a new request is accepted, if yes you should guarantee ASEva.WorkflowLicenseCallback.OnRevalidateLicense is called </returns>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 许可证验证失败后发起新的请求
+            </summary>
+            <param name="reason">验证失败原因</param>
+            <param name="mac">机器码</param>
+            <param name="callback">框架软件的回调接口</param>
+            <returns>是否接受请求，如接受需确保已调用 ASEva.WorkflowLicenseCallback.OnRevalidateLicense </returns>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnGetVideoAvailability">
+            \~English
+            <summary>
+            [Optional] Get whether to support video (default is true)
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 获取是否需要支持视频（默认true）
+            </summary>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnGetAudioAvailability">
+            \~English
+            <summary>
+            [Optional] Get whether to support audio (default is true)
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 获取是否需要支持音频（默认true）
+            </summary>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnGetResourceMonitorAvailability">
+            \~English
+            <summary>
+            [Optional] Get whether to support resource monitoring (default is true)
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 获取是否需要支持资源监控（默认true）
+            </summary>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnGetOfflineMapAvailability">
+            \~English
+            <summary>
+            [Optional] Get whether to support offline map (default is true)
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 获取是否需要支持离线地图（默认true）
+            </summary>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnCheckSystemSleepPrevention">
+            \~English
+            <summary>
+            [Optional] Get whether to prevent system sleeping (default is true)
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 返回是否阻止系统进入睡眠（默认true）
+            </summary>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnCheckMultiInstance">
+            \~English
+            <summary>
+            [Optional] Get whether to allow multiple application instances running
+            </summary>
+            <returns>Whether to allow multiple application instances running</returns>
+            \~Chinese
+            <summary>
+            [可选实现] 返回是否允许多个实例同时运行
+            </summary>
+            <returns>是否允许多个实例同时运行</returns>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnCheckDisableGPUDecoding">
+            \~English
+            <summary>
+            [Optional] Get whether to disable GPU decoding
+            </summary>
+            <returns>Whether to disable GPU decoding</returns>
+            \~Chinese
+            <summary>
+            [可选实现] 返回是否禁用GPU解码
+            </summary>
+            <returns>是否禁用GPU解码</returns>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnCheckEnableSpecializedGPUDecoding">
+            \~English
+            <summary>
+            [Optional] Get whether to enable GPU specialized decoding
+            </summary>
+            <returns>Whether to enable GPU specialized decoding (always false if GPU decoding is disabled)</returns>
+            \~Chinese
+            <summary>
+            [可选实现] 返回是否启用GPU专用解码
+            </summary>
+            <returns>是否启用GPU专用解码（若已禁用GPU解码则无效）</returns>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnCheckPreferPRCWeb">
+            \~English
+            <summary>
+            [Optional] Get whether to use PRC web service
+            </summary>
+            <returns>Whether to use PRC web service</returns>
+            \~Chinese
+            <summary>
+            [可选实现] 返回是否使用境内网络服务
+            </summary>
+            <returns>是否使用境内网络服务</returns>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnCheckRequestAutoRoot">
+            \~English
+            <summary>
+            [Optional] Get whether to request auto root privilege (Only for Linux)
+            </summary>
+            <returns>Whether to request auto root privilege</returns>
+            \~Chinese
+            <summary>
+            [可选实现] 返回是否请求自动root权限 (仅针对Linux操作系统)
+            </summary>
+            <returns>是否请求自动root权限</returns>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnOpenDialog(System.Object,ASEva.DialogClassInfo,System.String)">
+            \~English
+            <summary>
+            [Optional][OK for modal] Open dialog
+            </summary>
+            <param name="dialog">Configuration panel object, derived from ConfigPanel</param>
+            <param name="info">Information of dialog component</param>
+            <param name="config">Initial configuration string</param>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 打开对话框
+            </summary>
+            <param name="dialog">配置面板对象，继承ConfigPanel</param>
+            <param name="info">对话框组件信息</param>
+            <param name="config">对话框初始配置</param>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnAddWindow(System.Object,ASEva.WindowClassInfo,System.String,System.Boolean)">
+            \~English
+            <summary>
+            [Optional] Add window to workspace
+            </summary>
+            <param name="window">Window panel object, derived from WindowPanel</param>
+            <param name="info">Information of window component</param>
+            <param name="config">Initial configuration string</param>
+            <param name="newWorkspaceIfNeeded">Whether to add to a new workspace (if available) if there's no space in the current workspace</param>
+            <returns>Whether successful. After you're done using the panel, call ASEva.AgencyLocal.UnregisterPanel</returns>
+            \~Chinese
+            <summary>
+            [可选实现] 添加窗口至工作空间
+            </summary>
+            <param name="window">窗口面板对象，继承WindowPanel</param>
+            <param name="info">窗口组件信息</param>
+            <param name="config">窗口初始配置</param>
+            <param name="newWorkspaceIfNeeded">工作空间无足够空间时，是否在新工作空间添加（若不支持工作空间，则无视此选项）</param>
+            <returns>是否成功添加，若成功添加，在释放窗口时需要调用 ASEva.AgencyLocal.UnregisterPanel </returns>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnRunConsole(ASEva.ConsoleClass,ASEva.ConsoleClassInfo)">
+            \~English
+            <summary>
+            [Optional][OK for modal] Run console procedure
+            </summary>
+            <param name="consoleClass">Console object</param>
+            <param name="info">Information of console component</param>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 运行控制台过程
+            </summary>
+            <param name="consoleClass">控制台对象</param>
+            <param name="info">控制台组件信息</param>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnSetCurrentDialogTitle(System.String,ASEva.Samples.CommonImage)">
+            \~English
+            <summary>
+            [Optional] Set current dialog's title and icon
+            </summary>
+            <param name="title">Title</param>
+            <param name="icon">Icon (size should be 16x16)</param>
+            \~Chinese
+            <summary>
+            [可选实现] 设置当前对话框的标题和图标
+            </summary>
+            <param name="title">标题</param>
+            <param name="icon">图标，分辨率为16x16</param>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnSetWindowTitle(System.Object,System.String,ASEva.Samples.CommonImage)">
+            \~English
+            <summary>
+            [Optional] Set window's title and icon
+            </summary>
+            <param name="window">Window panel object, derived from WindowPanel</param>
+            <param name="title">Title</param>
+            <param name="icon">Icon (size should be 16x16)</param>
+            \~Chinese
+            <summary>
+            [可选实现] 设置窗口的标题和图标
+            </summary>
+            <param name="window">窗口面板对象，继承WindowPanel</param>
+            <param name="title">标题</param>
+            <param name="icon">图标，分辨率为16x16</param>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnEditOfflineMapPath(System.String)">
+            \~English
+            <summary>
+            [Optional][OK for modal] Configure path of offline map file
+            </summary>
+            <param name="originPath">The original path, null if not configured</param>
+            <returns>New path, set to null if not configured</returns>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 编辑离线地图文件路径
+            </summary>
+            <param name="originPath">原始路径，若未设置则为null</param>
+            <returns>新路径，若未设置则为null</returns>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnEditDataEncryption(ASEva.WorkflowEncryptionCallback)">
+            \~English
+            <summary>
+            [Optional][OK for modal] Configure data encryption
+            </summary>
+            <param name="callback">Framework callback interface</param>
+            \~Chinese
+            <summary>
+            [可选实现][可含模态] 编辑数据加密选项
+            </summary>
+            <param name="callback">框架软件的回调接口</param>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnNewProject">
+            \~English
+            <summary>
+            [Optional] Notify that a new project is being loading
+            </summary>
+            \~Chinese
+            <summary>
+            [可选实现] 通知正在新建工程项目
+            </summary>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnLoadProject(System.Xml.XmlDocument)">
+            \~English
+            <summary>
+            [Optional] Notify that a project is loaded
+            </summary>
+            <param name="xml">XML of the loaded project</param>
+            \~Chinese
+            <summary>
+            [可选实现] 通知新加载的工程项目
+            </summary>
+            <param name="xml">工程项目xml</param>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnSaveProject(System.Xml.XmlDocument)">
+            \~English
+            <summary>
+            [Optional] Notify that the current project is being saved
+            </summary>
+            <param name="xml">XML of the current project</param>
+            \~Chinese
+            <summary>
+            [可选实现] 通知正在保存工程项目
+            </summary>
+            <param name="xml">工程项目xml</param>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnCheckReady">
+            \~English
+            <summary>
+            [Optional] Get whether it's allowed by workflow to save project, start session, etc.
+            </summary>
+            <returns>Whether it's allowed by workflow to save project, start session, etc.</returns>
+            \~Chinese
+            <summary>
+            [可选实现] 返回流程端是否允许进行保存工程项目和开始session等操作
+            </summary>
+            <returns>流程端是否允许进行保存工程项目和开始session等操作</returns>
+        </member>
+        <member name="T:ASEva.AppBasicInfo">
+            \~English
+            <summary>
+            (api:app=3.0.0) Application's basic info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.0) 应用程序的基本信息
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.AppName">
+            \~English
+            <summary>
+            Application name
+            </summary>
+            \~Chinese
+            <summary>
+            应用程序名称
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.AppIconPNG">
+            \~English
+            <summary>
+            Application's icon, which is PNG binary data
+            </summary>
+            \~Chinese
+            <summary>
+            应用程序的图标，为PNG文件二进制数据
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.AppVersion">
+            \~English
+            <summary>
+            Application's version
+            </summary>
+            \~Chinese
+            <summary>
+            应用程序版本
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.AppRevision">
+            \~English
+            <summary>
+            Application's release revision, which can be null (Applications with the same version can be distributed in different configurations)
+            </summary>
+            \~Chinese
+            <summary>
+            应用程序发行号，可为空（相同应用程序版本下可按不同配置发行）
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.AppRevisionShort">
+            \~English
+            <summary>
+            Application's release revision in short, which can be null (Applications with the same version can be distributed in different configurations)
+            </summary>
+            \~Chinese
+            <summary>
+            缩略的应用程序发行号，可为空（相同应用程序版本下可按不同配置发行）
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.CoreVersion">
+            \~English
+            <summary>
+            Framework's version
+            </summary>
+            \~Chinese
+            <summary>
+            框架软件的版本
+            </summary>
+        </member>
+        <member name="T:ASEva.LicenseRequestReason">
+            \~English
+            <summary>
+            (api:app=3.0.0) The reason for requesting license
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.0) 许可证请求原因
+            </summary>
+        </member>
+        <member name="F:ASEva.LicenseRequestReason.InvalidLicense">
+            \~English
+            <summary>
+            Can't find valid license
+            </summary>
+            \~Chinese
+            <summary>
+            未找到有效许可证
+            </summary>
+        </member>
+        <member name="F:ASEva.LicenseRequestReason.WrongMAC">
+            \~English
+            <summary>
+            Machine code is wrong
+            </summary>
+            \~Chinese
+            <summary>
+            当前许可证机器码错误
+            </summary>
+        </member>
+        <member name="F:ASEva.LicenseRequestReason.WrongVersion">
+            \~English
+            <summary>
+            Framework version unsupported
+            </summary>
+            \~Chinese
+            <summary>
+            当前许可证版本不支持
+            </summary>
+        </member>
+        <member name="F:ASEva.LicenseRequestReason.Expired">
+            \~English
+            <summary>
+            Current license is expired
+            </summary>
+            \~Chinese
+            <summary>
+            当前许可证已过期
+            </summary>
+        </member>
+        <member name="T:ASEva.CoreInitResult">
+            \~English
+            <summary>
+            (api:app=3.0.0) Initialization result of framework software
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.0) 框架软件的初始化结果
+            </summary>
+        </member>
+        <member name="F:ASEva.CoreInitResult.OK">
+            \~English
+            <summary>
+            Success
+            </summary>
+            \~Chinese
+            <summary>
+            成功
+            </summary>
+        </member>
+        <member name="F:ASEva.CoreInitResult.LoadLibraryFailed">
+            \~English
+            <summary>
+            Failed to load library
+            </summary>
+            \~Chinese
+            <summary>
+            加载库失败
+            </summary>
+        </member>
+        <member name="F:ASEva.CoreInitResult.InvalidComponent">
+            \~English
+            <summary>
+            Invalid component included
+            </summary>
+            \~Chinese
+            <summary>
+            含非法或失效组件
+            </summary>
+        </member>
+        <member name="F:ASEva.CoreInitResult.LicenseFailed">
+            \~English
+            <summary>
+            Failed to validate license
+            </summary>
+            \~Chinese
+            <summary>
+            许可证验证失败
+            </summary>
+        </member>
+        <member name="F:ASEva.CoreInitResult.InstallComponentFailed">
+            \~English
+            <summary>
+            Failed to install component
+            </summary>
+            \~Chinese
+            <summary>
+            安装组件失败
+            </summary>
+        </member>
+        <member name="T:ASEva.WorkflowLoopCallback">
+            \~English
+            <summary>
+            (api:app=3.0.0) Loop callback interface used by workflow
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.0) 在流程中使用的主循环回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.WorkflowLoopCallback.OnLoop">
+            \~English
+            <summary>
+            Run framework's main loop function
+            </summary>
+            \~Chinese
+            <summary>
+            执行框架软件中的主循环程序
+            </summary>
+        </member>
+        <member name="T:ASEva.WorkflowModalCallback">
+            \~English
+            <summary>
+            (api:app=3.1.0) Modal callback interface used by workflow
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.1.0) 在流程中使用的模态对话回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.WorkflowModalCallback.OnHandleModal">
+            \~English
+            <summary>
+            Run framework's functions that may be modal
+            </summary>
+            \~Chinese
+            <summary>
+            执行框架软件中可能产生模态对话的程序
+            </summary>
+        </member>
+        <member name="T:ASEva.WorkflowLicenseCallback">
+            \~English
+            <summary>
+            (api:app=3.0.0) License validation callback used by workflow
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.0) 在流程中使用的许可证验证回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.WorkflowLicenseCallback.OnRevalidateLicense(System.String,System.String)">
+            \~English
+            <summary>
+            Revalidate a new license
+            </summary>
+            <param name="license">Base64 string of license, set to null to abort</param>
+            <param name="pluginCode">Base64 string of plugin code</param>
+            \~Chinese
+            <summary>
+            重新验证许可证
+            </summary>
+            <param name="license">许可证的Base64字符串，设为null表示放弃验证</param>
+            <param name="pluginCode">插件码的Base64字符串</param>
+        </member>
+        <member name="T:ASEva.WorkflowTaskCallback">
+            \~English
+            <summary>
+            (api:app=3.1.0) Standalone task callback interface used my workflow
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.1.0) 在流程中使用的获取独立任务状态回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.WorkflowTaskCallback.GetTaskState">
+            \~English
+            <summary>
+            Get task's state
+            </summary>
+            \~Chinese
+            <summary>
+            获取独立任务状态
+            </summary>
+        </member>
+        <member name="M:ASEva.WorkflowTaskCallback.GetTaskStateDescription">
+            \~English
+            <summary>
+            Get description of task's current state
+            </summary>
+            \~Chinese
+            <summary>
+            获取当前状态描述
+            </summary>
+        </member>
+        <member name="M:ASEva.WorkflowTaskCallback.GetTaskProgress">
+            \~English
+            <summary>
+            Get progress, in percentages
+            </summary>
+            \~Chinese
+            <summary>
+            获取任务进度，单位百分比
+            </summary>
+        </member>
+        <member name="M:ASEva.WorkflowTaskCallback.GetTaskConfig">
+            \~English
+            <summary>
+            Get task config
+            </summary>
+            \~Chinese
+            <summary>
+            获取任务配置
+            </summary>
+        </member>
+        <member name="M:ASEva.WorkflowTaskCallback.GetTaskReturnValue">
+            \~English
+            <summary>
+            Get task return value
+            </summary>
+            \~Chinese
+            <summary>
+            获取任务返回值
+            </summary>
+        </member>
+        <member name="M:ASEva.WorkflowTaskCallback.CancelTask">
+            \~English
+            <summary>
+            Cancel the task
+            </summary>
+            \~Chinese
+            <summary>
+            取消任务
+            </summary>
+        </member>
+        <member name="T:ASEva.WorkflowEncryptionCallback">
+            \~English
+            <summary>
+            (api:app=3.0.0) Data encryption callback used by workflow
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.0) 在流程中使用的配置数据加密选项的回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.WorkflowEncryptionCallback.UnlockDataKey(System.String)">
+            \~English
+            <summary>
+            Try to unlock
+            </summary>
+            <param name="key">The old password, set to null to use default password</param>
+            <returns>Whether successful to unlock</returns>
+            \~Chinese
+            <summary>
+            尝试解锁
+            </summary>
+            <param name="key">旧密码，空表示使用默认密码</param>
+            <returns>是否成功解锁</returns>
+        </member>
+        <member name="M:ASEva.WorkflowEncryptionCallback.UpdateDataKey(System.String)">
+            \~English
+            <summary>
+            Update password
+            </summary>
+            <param name="key">New password, set to null to use default password</param>
+            \~Chinese
+            <summary>
+            更新密码
+            </summary>
+            <param name="key">新密码，空表示使用默认密码</param>
+        </member>
+        <member name="T:ASEva.WorkflowInstallCallback">
+            \~English
+            <summary>
+            (api:app=3.0.0) Plugin installation callback used by workflow
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.0.0) 在流程中使用的安装插件的回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.WorkflowInstallCallback.InstallLibrary(System.String)">
+            \~English
+            <summary>
+            Install library files
+            </summary>
+            <param name="libraryID">Related library ID</param>
+            \~Chinese
+            <summary>
+            安装库文件
+            </summary>
+            <param name="libraryID">插件关联的库ID</param>
+        </member>
+        <member name="M:ASEva.WorkflowInstallCallback.PrepareDriver(System.String)">
+            \~English
+            <summary>
+            Prepare driver or environment pack, and return the executable path for installation
+            </summary>
+            <param name="driverID">Related driver ID</param>
+            <returns>Executable path for installation</returns>
+            \~Chinese
+            <summary>
+            准备驱动和环境等的文件，并返回安装文件的运行路径
+            </summary>
+            <param name="driverID">插件关联的驱动ID</param>
+            <returns>安装文件的运行路径</returns>
         </member>
     </members>
 </doc>

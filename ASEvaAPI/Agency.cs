@@ -2301,22 +2301,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get memory capacity
-        /// </summary>
-        /// <returns>Memory capacity, in bytes, zero if failed to query</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取内存容量
-        /// </summary>
-        /// <returns>内存容量，单位为字节，获取失败时返回0</returns>
-        public static ulong GetMemoryCapacity()
-        {
-            if (!AgencyAsync.SyncMode) return 0;
-            return AgencyAsync.GetMemoryCapacity().Result;
-        }
-
-        /// \~English
-        /// <summary>
         /// Get child status of processor/native/device component's configuration
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.CommonWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
