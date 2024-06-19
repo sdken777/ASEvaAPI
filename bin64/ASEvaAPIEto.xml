@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=3.1.5
+            version=3.1.6
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -86,13 +86,13 @@
         <member name="M:ASEva.UIEto.App.InitGPUOptions(System.Boolean,System.Boolean)">
             \~English
             <summary>
-            (api:app=3.0.1) Initialize GPU rendering options (Only the first call is valid)
+            (api:eto=3.0.1) Initialize GPU rendering options (Only the first call is valid)
             </summary>
             <param name="renderingDisabled">Whether to disable GPU rendering</param>
             <param name="onscreenRenderingEnabled">Whether to enable GPU onscreen rendering (If renderingDisabled is true, this setting is invalid)</param>
             \~Chinese
             <summary>
-            (api:app=3.0.1) 初始化GPU渲染选项，仅第一次调用有效
+            (api:eto=3.0.1) 初始化GPU渲染选项，仅第一次调用有效
             </summary>
             <param name="renderingDisabled">是否禁用GPU渲染</param>
             <param name="onscreenRenderingEnabled">是否启用GPU在屏渲染，若renderingDisabled为true则此设定无效</param>
@@ -783,6 +783,16 @@
             \~Chinese
             <summary>
             [可选实现] 在主循环中被调用，可进行模态对话
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ConfigPanel.OnHandleAsync">
+            \~English
+            <summary>
+            (api:eto=3.1.6) [Optional] Called in the main loop, for asynchronous calls
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.1.6) [可选实现] 在主循环中被调用，可进行异步调用
             </summary>
         </member>
         <member name="M:ASEva.UIEto.ConfigPanel.Close">
@@ -4873,6 +4883,16 @@
             \~Chinese
             <summary>
             [可选实现] 在主循环中被调用，可进行模态对话
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnHandleAsync">
+            \~English
+            <summary>
+            (api:eto=3.1.6) [Optional] Called in the main loop, for asynchronous calls
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.1.6) [可选实现] 在主循环中被调用，可进行异步调用
             </summary>
         </member>
         <member name="M:ASEva.UIEto.WindowPanel.OnUpdateContainerSize(ASEva.IntSize)">

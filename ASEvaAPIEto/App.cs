@@ -92,13 +92,13 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:app=3.0.1) Initialize GPU rendering options (Only the first call is valid)
+        /// (api:eto=3.0.1) Initialize GPU rendering options (Only the first call is valid)
         /// </summary>
         /// <param name="renderingDisabled">Whether to disable GPU rendering</param>
         /// <param name="onscreenRenderingEnabled">Whether to enable GPU onscreen rendering (If renderingDisabled is true, this setting is invalid)</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.0.1) 初始化GPU渲染选项，仅第一次调用有效
+        /// (api:eto=3.0.1) 初始化GPU渲染选项，仅第一次调用有效
         /// </summary>
         /// <param name="renderingDisabled">是否禁用GPU渲染</param>
         /// <param name="onscreenRenderingEnabled">是否启用GPU在屏渲染，若renderingDisabled为true则此设定无效</param>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Eto.Forms;
 
 namespace ASEva.UIEto
@@ -136,6 +137,16 @@ namespace ASEva.UIEto
         /// [可选实现] 在主循环中被调用，可进行模态对话
         /// </summary>
         public virtual void OnHandleModal() { }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=3.1.6) [Optional] Called in the main loop, for asynchronous calls
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=3.1.6) [可选实现] 在主循环中被调用，可进行异步调用
+        /// </summary>
+        public virtual Task OnHandleAsync() { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
