@@ -585,7 +585,7 @@ namespace ASEva
         /// (api:app=3.1.4) [必须实现] 查询配置状态时被调用
         /// </summary>
         /// <returns>1. 配置状态; 2. 错误提示，当配置状态为EnabledWithError或EnabledWithWarning时应有效</returns>
-        public virtual Task<Tuple<ConfigStatus, String>> GetConfigStatus() { return Task.FromResult(new Tuple<ConfigStatus, String>(ConfigStatus.Disabled, null)); }
+        public virtual Task<(ConfigStatus, String)> GetConfigStatus() { return Task.FromResult((ConfigStatus.Disabled, (String)null)); }
 
         /// \~English
         /// <summary>

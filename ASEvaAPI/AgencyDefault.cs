@@ -592,9 +592,9 @@ namespace ASEva
             return Task.FromResult<double>(0);
         }
 
-        public Task<Tuple<bool, double[], double[]>> GetAudioChannelStatus(uint? toleranceMillisecond)
+        public Task<(bool, double[], double[])> GetAudioChannelStatus(uint? toleranceMillisecond)
         {
-            return Task.FromResult<Tuple<bool, double[], double[]>>(null);
+            return Task.FromResult<(bool, double[], double[])>((false, null, null));
         }
 
         public Task<AudioDriverInfo[]> GetAudioDrivers()
@@ -742,9 +742,9 @@ namespace ASEva
             return Task.FromResult<Dictionary<string, ConsoleClassInfo>>(null);
         }
 
-        public Task<Tuple<ConfigStatus, ConfigStatus[]>> GetConsoleRelatedModulesConfigStatus(string consoleClassID)
+        public Task<(ConfigStatus, ConfigStatus[])> GetConsoleRelatedModulesConfigStatus(string consoleClassID)
         {
-            return Task.FromResult<Tuple<ConfigStatus, ConfigStatus[]>>(null);
+            return Task.FromResult<(ConfigStatus, ConfigStatus[])>((ConfigStatus.Disabled, null));
         }
 
         public Task<ulong> GetCPUTick()
@@ -802,9 +802,9 @@ namespace ASEva
             return Task.FromResult<GeneralDeviceStatus>(GeneralDeviceStatus.None);
         }
 
-        public Task<Tuple<ConfigStatus, ConfigStatus[]>> GetDialogRelatedModulesConfigStatus(string dialogClassID, string transformID)
+        public Task<(ConfigStatus, ConfigStatus[])> GetDialogRelatedModulesConfigStatus(string dialogClassID, string transformID)
         {
-            return Task.FromResult<Tuple<ConfigStatus, ConfigStatus[]>>(null);
+            return Task.FromResult<(ConfigStatus, ConfigStatus[])>((ConfigStatus.Disabled, null));
         }
 
         public Task<object[]> GetEventHandles()
@@ -972,9 +972,9 @@ namespace ASEva
             return Task.FromResult<string>(null);
         }
 
-        public Task<Tuple<ConfigStatus, string>> GetModuleConfigStatus(object caller, string classID)
+        public Task<(ConfigStatus, string)> GetModuleConfigStatus(object caller, string classID)
         {
-            return Task.FromResult<Tuple<ConfigStatus, string>>(null);
+            return Task.FromResult<(ConfigStatus, string)>((ConfigStatus.Disabled, null));
         }
 
         public Task<ModuleDetails> GetModuleDetails(string classID)
@@ -1012,9 +1012,9 @@ namespace ASEva
             return Task.FromResult<Dictionary<string, Dictionary<string, string>>>(null);
         }
 
-        public Task<Tuple<byte[], Timestamp?, CameraInfo>> GetPreviewJpeg(int channel, double timeline, double maxGap)
+        public Task<(byte[], Timestamp?, CameraInfo)> GetPreviewJpeg(int channel, double timeline, double maxGap)
         {
-            return Task.FromResult<Tuple<byte[], Timestamp?, CameraInfo>>(null);
+            return Task.FromResult<(byte[], Timestamp?, CameraInfo)>((null, null, null));
         }
 
         public Task<Dictionary<string, ProcessorClassInfo>> GetProcessorClassTable()
@@ -1032,9 +1032,9 @@ namespace ASEva
             return Task.FromResult<bool>(false);
         }
 
-        public Task<Tuple<bool, double[], double[]>> GetSampleChannelStatus(string channelID, uint? toleranceMillisecond)
+        public Task<(bool, double[], double[])> GetSampleChannelStatus(string channelID, uint? toleranceMillisecond)
         {
-            return Task.FromResult<Tuple<bool, double[], double[]>>(null);
+            return Task.FromResult<(bool, double[], double[])>((false, null, null));
         }
 
         public Task<List<string>> GetSampleTitle(string channelID)
@@ -1167,9 +1167,9 @@ namespace ASEva
             return Task.FromResult<VideoChannelInfo[]>(null);
         }
 
-        public Task<Tuple<bool, double[], double[]>> GetVideoChannelStatus(int channel, uint? toleranceMillisecond)
+        public Task<(bool, double[], double[])> GetVideoChannelStatus(int channel, uint? toleranceMillisecond)
         {
-            return Task.FromResult<Tuple<bool, double[], double[]>>(null);
+            return Task.FromResult<(bool, double[], double[])>((false, null, null));
         }
 
         public Task<Dictionary<VideoDeviceID, VideoDeviceInfo>> GetVideoDevices()
@@ -1177,9 +1177,9 @@ namespace ASEva
             return Task.FromResult<Dictionary<VideoDeviceID, VideoDeviceInfo>>(null);
         }
 
-        public Task<Tuple<CommonImage, Timestamp?, CameraInfo>> GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha)
+        public Task<(CommonImage, Timestamp?, CameraInfo)> GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha)
         {
-            return Task.FromResult<Tuple<CommonImage, Timestamp?, CameraInfo>>(null);
+            return Task.FromResult<(CommonImage, Timestamp?, CameraInfo)>((null, null, null));
         }
 
         public Task<CommonImage> GetVideoFrameThumbnail(int channel, double timeline, double maxGap, bool withAlpha)
@@ -1227,9 +1227,9 @@ namespace ASEva
             return Task.FromResult<bool>(false);
         }
 
-        public Task<Tuple<bool, string>> IsReady()
+        public Task<(bool, string)> IsReady()
         {
-            return Task.FromResult<Tuple<bool, string>>(null);
+            return Task.FromResult<(bool, string)>((false, null));
         }
 
         public Task<bool> IsSampleChannelConflict(string channelID)
@@ -1297,9 +1297,9 @@ namespace ASEva
             return Task.CompletedTask;
         }
 
-        public Task<Tuple<TaskResult, string>> RunStandaloneTask(object caller, string taskClassID, string config)
+        public Task<(TaskResult, string)> RunStandaloneTask(object caller, string taskClassID, string config)
         {
-            return Task.FromResult<Tuple<TaskResult, string>>(null);
+            return Task.FromResult<(TaskResult, string)>((TaskResult.TaskInitFailed, null));
         }
 
         public Task<string> SelectBusMessage(string originMessageID)

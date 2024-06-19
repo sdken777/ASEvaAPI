@@ -134,11 +134,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.1.0) Console interaction interface
+    /// (api:app=3.1.5) Console interaction interface
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.1.0) 控制台交互接口
+    /// (api:app=3.1.5) 控制台交互接口
     /// </summary>
     public interface ConsoleIO
     {
@@ -168,7 +168,7 @@ namespace ASEva
         /// <param name="message">提示消息</param>
         /// <param name="defaultString">默认字符串</param>
         /// <returns>1. 若中断则返回false; 2. 用户输入的字符串(若不输入则为其默认值)</returns>
-        Task<Tuple<bool, String>> InputString(String message, String defaultString);
+        Task<(bool, String)> InputString(String message, String defaultString);
 
         /// \~English
         /// <summary>
@@ -184,7 +184,7 @@ namespace ASEva
         /// <param name="message">提示消息</param>
         /// <param name="defaultNumber">默认值</param>
         /// <returns>1. 若中断则返回false; 2. 用户输入的数值(若不输入或输入无效则为其默认值)</returns>
-        Task<Tuple<bool, double>> InputNumber(String message, double defaultNumber);
+        Task<(bool, double)> InputNumber(String message, double defaultNumber);
 
         /// \~English
         /// <summary>
@@ -198,7 +198,7 @@ namespace ASEva
         /// </summary>
         /// <param name="message">提示消息</param>
         /// <returns>1. 若中断则返回false; 2. 用户是否确认</returns>
-        Task<Tuple<bool, bool>> Confirm(String message);
+        Task<(bool, bool)> Confirm(String message);
 
         /// \~English
         /// <summary>
@@ -216,7 +216,7 @@ namespace ASEva
         /// <param name="options">所有选项</param>
         /// <param name="defaultIndex">开始时即选中的选项序号</param>
         /// <returns>1. 若中断则返回false; 2. 用户勾选的选项序号(仅当options为空时返回-1)</returns>
-        Task<Tuple<bool, int>> SingleSelect(String message, String[] options, int defaultIndex);
+        Task<(bool, int)> SingleSelect(String message, String[] options, int defaultIndex);
 
         /// \~English
         /// <summary>
@@ -234,7 +234,7 @@ namespace ASEva
         /// <param name="options">所有选项</param>
         /// <param name="defaultIndices">开始时即选中的所有选项序号</param>
         /// <returns>1. 若中断则返回false; 2. 用户勾选的所有选项序号</returns>
-        Task<Tuple<bool, int[]>> MultiSelect(String message, String[] options, int[] defaultIndices);
+        Task<(bool, int[])> MultiSelect(String message, String[] options, int[] defaultIndices);
 
         /// \~English
         /// <summary>
@@ -250,7 +250,7 @@ namespace ASEva
         /// <param name="message">提示消息</param>
         /// <param name="extensions">后缀名筛选，以'.'开头，若不限后缀则设为null</param>
         /// <returns>1. 若中断则返回false; 2. 用户选中文件的路径，若取消则为null</returns>
-        Task<Tuple<bool, String>> SelectOpenFile(String message, String[] extensions);
+        Task<(bool, String)> SelectOpenFile(String message, String[] extensions);
 
         /// \~English
         /// <summary>
@@ -266,7 +266,7 @@ namespace ASEva
         /// <param name="message">提示消息</param>
         /// <param name="extension">保存文件的后缀名，以'.'开头，若不考虑后缀则设为null</param>
         /// <returns>1. 若中断则返回false; 2. 用户选中文件的路径，若取消则为null</returns>
-        Task<Tuple<bool, String>> SelectSaveFile(String message, String extension);
+        Task<(bool, String)> SelectSaveFile(String message, String extension);
 
         /// \~English
         /// <summary>
@@ -280,7 +280,7 @@ namespace ASEva
         /// </summary>
         /// <param name="message">提示消息</param>
         /// <returns>1. 若中断则返回false; 2. 用户选中文件夹的路径，若取消则为null</returns>
-        Task<Tuple<bool, String>> SelectFolder(String message);
+        Task<(bool, String)> SelectFolder(String message);
 
         /// \~English
         /// <summary>
@@ -296,7 +296,7 @@ namespace ASEva
         /// <param name="message">提示消息</param>
         /// <param name="extensions">后缀名筛选，以'.'开头，若不限后缀则设为null</param>
         /// <returns>1. 若中断则返回false; 2. 用户选中文件的二进制数据，若取消则输出null; 3. 读文件结果</returns>
-        Tuple<bool, byte[], ConsoleFileResult> LoadFileData(String message, String[] extensions);
+        Task<(bool, byte[], ConsoleFileResult)> LoadFileData(String message, String[] extensions);
 
         /// \~English
         /// <summary>
@@ -314,6 +314,6 @@ namespace ASEva
         /// <param name="extension">保存文件的后缀名，以'.'开头，若不考虑后缀则设为null</param>
         /// <param name="data">需要保存的二进制数据</param>
         /// <returns>1. 若中断则返回false; 2. 写文件结果</returns>
-        Tuple<bool, ConsoleFileResult> SaveFileData(String message, String extension, byte[] data);
+        Task<(bool, ConsoleFileResult)> SaveFileData(String message, String extension, byte[] data);
     }
 }

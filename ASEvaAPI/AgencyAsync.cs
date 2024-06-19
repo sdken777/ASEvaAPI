@@ -31,7 +31,7 @@ namespace ASEva
         Task<ApplicationMode> GetAppMode();
         Task<ApplicationStatus> GetAppStatus();
         Task<double> GetAudioChannelDelayConfig();
-        Task<Tuple<bool, double[], double[]>> GetAudioChannelStatus(uint? toleranceMillisecond);
+        Task<(bool, double[], double[])> GetAudioChannelStatus(uint? toleranceMillisecond);
         Task<AudioDriverInfo[]> GetAudioDrivers();
         Task<AudioDeviceInfo[]> GetAudioRecordDevices(String driverID);
         Task<AudioDeviceInfo[]> GetAudioReplayDevices(String driverID);
@@ -61,7 +61,7 @@ namespace ASEva
         Task<GeneralDeviceStatus[]> GetChildDeviceStatus(String id);
         Task<ConsoleClassInfo> GetConsoleClassInfo(String consoleClassID);
         Task<Dictionary<string, ConsoleClassInfo>> GetConsoleClassTable();
-        Task<Tuple<ConfigStatus, ConfigStatus[]>> GetConsoleRelatedModulesConfigStatus(String consoleClassID);
+        Task<(ConfigStatus, ConfigStatus[])> GetConsoleRelatedModulesConfigStatus(String consoleClassID);
         Task<ulong> GetCPUTick();
         Task<ulong> GetCPUTicksPerSecond();
         Task<double> GetCPUTime();
@@ -73,7 +73,7 @@ namespace ASEva
         Task<String[]> GetDataLayers();
         Task<Dictionary<String, DeviceClassInfo>> GetDeviceClassTable();
         Task<GeneralDeviceStatus> GetDeviceStatus(String id);
-        Task<Tuple<ConfigStatus, ConfigStatus[]>> GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID);
+        Task<(ConfigStatus, ConfigStatus[])> GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID);
         Task<object[]> GetEventHandles();
         Task<EventInfo> GetEventInfo(object eventHandle);
         Task<String[]> GetEventTypeNames();
@@ -107,7 +107,7 @@ namespace ASEva
         Task<String> GetManualTriggerName(int index);
         Task<ConfigStatus[]> GetModuleChildConfigStatus(object caller, String classID);
         Task<String> GetModuleConfig(object caller, String classID);
-        Task<Tuple<ConfigStatus, String>> GetModuleConfigStatus(object caller, String classID);
+        Task<(ConfigStatus, String)> GetModuleConfigStatus(object caller, String classID);
         Task<ModuleDetails> GetModuleDetails(String classID);
         Task<Dictionary<String, NativeClassInfo>> GetNativeClassTable();
         Task<Dictionary<String, Version>> GetNativePluginVersions(NativeLibraryType type);
@@ -115,11 +115,11 @@ namespace ASEva
         Task<String[]> GetPluginPackIDList();
         Task<PluginPackInfo> GetPluginPackInfo(String packID);
         Task<Dictionary<String, Dictionary<String, String>>> GetPluginThirdPartyNotices();
-        Task<Tuple<byte[], Timestamp?, CameraInfo>> GetPreviewJpeg(int channel, double timeline, double maxGap);
+        Task<(byte[], Timestamp?, CameraInfo)> GetPreviewJpeg(int channel, double timeline, double maxGap);
         Task<Dictionary<String, ProcessorClassInfo>> GetProcessorClassTable();
         Task<double> GetRawChannelDelayConfig(String id);
         Task<bool> GetRawChannelStatus(String channelID, uint? toleranceMillisecond);
-        Task<Tuple<bool, double[], double[]>> GetSampleChannelStatus(String channelID, uint? toleranceMillisecond);
+        Task<(bool, double[], double[])> GetSampleChannelStatus(String channelID, uint? toleranceMillisecond);
         Task<List<String>> GetSampleTitle(String channelID);
         Task<String[]> GetSceneIDList();
         Task<Dictionary<String, SceneTitle>> GetSceneTitleTable();
@@ -146,9 +146,9 @@ namespace ASEva
         Task<Dictionary<String, Version>> GetVersionTable();
         Task<double> GetVideoChannelDelayConfig(int channel);
         Task<VideoChannelInfo[]> GetVideoChannelsInfo(DateTime session);
-        Task<Tuple<bool, double[], double[]>> GetVideoChannelStatus(int channel, uint? toleranceMillisecond);
+        Task<(bool, double[], double[])> GetVideoChannelStatus(int channel, uint? toleranceMillisecond);
         Task<Dictionary<VideoDeviceID, VideoDeviceInfo>> GetVideoDevices();
-        Task<Tuple<CommonImage, Timestamp?, CameraInfo>> GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha);
+        Task<(CommonImage, Timestamp?, CameraInfo)> GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha);
         Task<CommonImage> GetVideoFrameThumbnail(int channel, double timeline, double maxGap, bool withAlpha);
         Task<IntSize?> GetVideoRawSize(int channel, double timeline);
         Task<Samples.SpecialCameraType> GetVideoSpecialType(int channel);
@@ -158,7 +158,7 @@ namespace ASEva
         Task<bool> IsInternetConnected();
         Task<bool> IsMessageValid(String messageID, bool optional);
         Task<bool> IsPRCWebPreferred();
-        Task<Tuple<bool, String>> IsReady();
+        Task<(bool, String)> IsReady();
         Task<bool> IsSampleChannelConflict(string channelID);
         Task<bool> IsSignalValid(String signalID, bool optional);
         Task<bool> IsVideoDataAvailable(int channel, uint? tolerance);
@@ -172,7 +172,7 @@ namespace ASEva
         Task RemoveSignalReference(String signalID);
         Task ResetGPUDecoderTestResults();
         Task RunConsole(object caller, string consoleClassID);
-        Task<Tuple<TaskResult, String>> RunStandaloneTask(object caller, String taskClassID, String config);
+        Task<(TaskResult, String)> RunStandaloneTask(object caller, String taskClassID, String config);
         Task<String> SelectBusMessage(String originMessageID);
         Task SelectBusMessages(SelectBusMessageHandler handler, List<String> existBusMessageIDList);
         Task<BusProtocolFileID[]> SelectBusProtocolFiles(BusProtocolFileID[] selected);
@@ -568,7 +568,7 @@ namespace ASEva
         /// </summary>
         /// <param name="toleranceMillisecond">无数据的容忍时长</param>
         /// <returns>1. 是否有数据; 2. 每帧数据之间的时间间隔曲线，单位秒; 3. 每帧数据的延迟曲线，单位秒</returns>
-        public static Task<Tuple<bool, double[], double[]>> GetAudioChannelStatus(uint? toleranceMillisecond)
+        public static Task<(bool, double[], double[])> GetAudioChannelStatus(uint? toleranceMillisecond)
         {
             return Handler.GetAudioChannelStatus(toleranceMillisecond);
         }
@@ -1063,7 +1063,7 @@ namespace ASEva
         /// </summary>
         /// <param name="consoleClassID">控制台组件ID</param>
         /// <returns>1. 配置状态; 2. 子配置状态</returns>
-        public static Task<Tuple<ConfigStatus, ConfigStatus[]>> GetConsoleRelatedModulesConfigStatus(String consoleClassID)
+        public static Task<(ConfigStatus, ConfigStatus[])> GetConsoleRelatedModulesConfigStatus(String consoleClassID)
         {
             return Handler.GetConsoleRelatedModulesConfigStatus(consoleClassID);
         }
@@ -1251,7 +1251,7 @@ namespace ASEva
         /// <param name="dialogClassID">对话框组件ID</param>
         /// <param name="transformID">分化ID</param>
         /// <returns>1. 配置状态; 2. 子配置状态</returns>
-        public static Task<Tuple<ConfigStatus, ConfigStatus[]>> GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID)
+        public static Task<(ConfigStatus, ConfigStatus[])> GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID)
         {
             return Handler.GetDialogRelatedModulesConfigStatus(dialogClassID, transformID);
         }
@@ -1811,7 +1811,7 @@ namespace ASEva
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.CommonWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
         /// <param name="classID">组件的类别ID</param>
         /// <returns>1. 组件配置的状态，若找不到类别ID对应的组件则返回 ASEva.ConfigStatus.Disabled ; 2. 错误提示，当配置状态为EnabledWithError或EnabledWithWarning时有效</returns>
-        public static Task<Tuple<ConfigStatus, String>> GetModuleConfigStatus(object caller, String classID)
+        public static Task<(ConfigStatus, String)> GetModuleConfigStatus(object caller, String classID)
         {
             return Handler.GetModuleConfigStatus(caller, classID);
         }
@@ -1941,7 +1941,7 @@ namespace ASEva
         /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
         /// <param name="maxGap">容许的最大间隔，单位秒</param>
         /// <returns>1. 视频帧的预览JPEG数据，图像宽度为640像素，获取失败则返回null; 2. 图像的时间戳，获取失败则为null; 3. 摄像头信息，获取失败则为null</returns>
-        public static Task<Tuple<byte[], Timestamp?, CameraInfo>> GetPreviewJpeg(int channel, double timeline, double maxGap)
+        public static Task<(byte[], Timestamp?, CameraInfo)> GetPreviewJpeg(int channel, double timeline, double maxGap)
         {
             return Handler.GetPreviewJpeg(channel, timeline, maxGap);
         }
@@ -2011,7 +2011,7 @@ namespace ASEva
         /// <param name="channelID">样本数据通道ID</param>
         /// <param name="toleranceMillisecond">无数据的容忍时长</param>
         /// <returns>1. 是否有数据; 2. 每帧数据之间的时间间隔曲线，单位秒; 3. 每帧数据的延迟曲线，单位秒</returns>
-        public static Task<Tuple<bool, double[], double[]>> GetSampleChannelStatus(String channelID, uint? toleranceMillisecond)
+        public static Task<(bool, double[], double[])> GetSampleChannelStatus(String channelID, uint? toleranceMillisecond)
         {
             return Handler.GetSampleChannelStatus(channelID, toleranceMillisecond);
         }
@@ -2458,7 +2458,7 @@ namespace ASEva
         /// <param name="channel">视频通道，0~23</param>
         /// <param name="toleranceMillisecond">无数据的容忍时长</param>
         /// <returns>1. 是否有数据; 2. 每帧数据之间的时间间隔曲线，单位秒; 3. 每帧数据的延迟曲线，单位秒</returns>
-        public static Task<Tuple<bool, double[], double[]>> GetVideoChannelStatus(int channel, uint? toleranceMillisecond)
+        public static Task<(bool, double[], double[])> GetVideoChannelStatus(int channel, uint? toleranceMillisecond)
         {
             return Handler.GetVideoChannelStatus(channel, toleranceMillisecond);
         }
@@ -2500,7 +2500,7 @@ namespace ASEva
         /// <param name="clip">在输出模式基础上进一步裁剪，为原始尺寸坐标系，至少为16x16，null表示完整输出</param>
         /// <param name="withAlpha">是否输出带Alpha通道的图像(固定赋值255)</param>
         /// <returns>1. 视频帧数据，图像实际大小由mode和clip决定，获取失败则返回null; 2. 图像的时间戳，获取失败则为null; 3. 摄像头信息，获取失败则为null</returns>
-        public static Task<Tuple<CommonImage, Timestamp?, CameraInfo>> GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha)
+        public static Task<(CommonImage, Timestamp?, CameraInfo)> GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha)
         {
             return Handler.GetVideoFrameImage(channel, timeline, maxGap, mode, clip, withAlpha);
         }
@@ -2672,7 +2672,7 @@ namespace ASEva
         /// 返回是否允许进行保存工程项目和开始session等操作，若不允许则输出繁忙原因
         /// </summary>
         /// <returns>1. 是否允许进行保存工程项目和开始session等操作; 2. 系统繁忙原因，空表示原因未知</returns>
-        public static Task<Tuple<bool, String>> IsReady()
+        public static Task<(bool, String)> IsReady()
         {
             return Handler.IsReady();
         }
@@ -2904,7 +2904,7 @@ namespace ASEva
         /// <param name="taskClassID">任务组件的类别ID</param>
         /// <param name="config">配置的字符串描述</param>
         /// <returns>1. 任务运行结果; 2. 任务的返回值信息</returns>
-        public static Task<Tuple<TaskResult, String>> RunStandaloneTask(object caller, String taskClassID, String config)
+        public static Task<(TaskResult, String)> RunStandaloneTask(object caller, String taskClassID, String config)
         {
             return Handler.RunStandaloneTask(caller, taskClassID, config);
         }
