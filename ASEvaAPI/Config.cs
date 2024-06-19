@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ASEva
 {
@@ -576,29 +577,27 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Required] Called while getting configuration's status
+        /// (api:app=3.1.4) [Required] Called while getting configuration's status
         /// </summary>
-        /// <param name="errorHint">Error hint, should be available while the status is EnabledWithError or EnabledWithWarning</param>
-        /// <returns>Configuration's status</returns>
+        /// <returns>1. Configuration's status. 2. Error hint, should be available while the status is EnabledWithError or EnabledWithWarning</returns>
         /// \~Chinese
         /// <summary>
-        /// [必须实现] 查询配置状态时被调用
+        /// (api:app=3.1.4) [必须实现] 查询配置状态时被调用
         /// </summary>
-        /// <param name="errorHint">错误提示，当配置状态为EnabledWithError或EnabledWithWarning时应有效</param>
-        /// <returns>配置状态</returns>
-        public virtual ConfigStatus GetConfigStatus(out String errorHint) { errorHint = null; return ConfigStatus.Disabled; }
+        /// <returns>1. 配置状态; 2. 错误提示，当配置状态为EnabledWithError或EnabledWithWarning时应有效</returns>
+        public virtual Task<Tuple<ConfigStatus, String>> GetConfigStatus() { return Task.FromResult(new Tuple<ConfigStatus, String>(ConfigStatus.Disabled, null)); }
 
         /// \~English
         /// <summary>
-        /// [Optional] Called while getting configuration's child status
+        /// (api:app=3.1.4) [Optional] Called while getting configuration's child status
         /// </summary>
         /// <returns>Configuration's child status</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 查询各子功能配置状态时被调用
+        /// (api:app=3.1.4) [可选实现] 查询各子功能配置状态时被调用
         /// </summary>
         /// <returns>各子功能的配置状态</returns>
-        public virtual ConfigStatus[] GetChildConfigStatus() { return null; }
+        public virtual Task<ConfigStatus[]> GetChildConfigStatus() { return Task.FromResult<ConfigStatus[]>(null); }
 
         /// \~English
         /// <summary>
@@ -720,12 +719,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Disable error parts of the component functions. No need to implement if ASEva.ModuleConfig.GetConfigStatus won't return ASEva.ConfigStatus.EnabledWithWarning
+        /// (api:app=3.1.4) [Optional] Disable error parts of the component functions. No need to implement if ASEva.ModuleConfig.GetConfigStatus won't return ASEva.ConfigStatus.EnabledWithWarning
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 禁用存在错误的部分功能时被调用。若 ASEva.ModuleConfig.GetConfigStatus 不会返回 ASEva.ConfigStatus.EnabledWithWarning 则不需要实现
+        /// (api:app=3.1.4) [可选实现] 禁用存在错误的部分功能时被调用。若 ASEva.ModuleConfig.GetConfigStatus 不会返回 ASEva.ConfigStatus.EnabledWithWarning 则不需要实现
         /// </summary>
-        public virtual void DisableErrorPart() { }
+        public virtual Task DisableErrorPart() { return Task.CompletedTask; }
     }
 }
