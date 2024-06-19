@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 1, 3, 0); // Update log / 更新记录: 使用AgencyLocal和AgencyAsync
+            return new Version(3, 1, 3, 1); // Update log / 更新记录: 合并2.9.3.2
         }
     }
 }
