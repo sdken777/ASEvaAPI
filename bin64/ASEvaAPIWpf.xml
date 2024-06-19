@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIWpf.APIInfo">
             <summary>
-            version=2.0.5
+            version=2.0.6
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.APIInfo.GetAPIVersion">
@@ -93,6 +93,16 @@
             \~Chinese
             <summary>
             [可选实现] 在主循环中被调用，可进行模态对话
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.ConfigPanel.OnHandleAsync">
+            \~English
+            <summary>
+            (api:wpf=2.0.6) [Optional] Called in the main loop, for asynchronous calls
+            </summary>
+            \~Chinese
+            <summary>
+            (api:wpf=2.0.6) [可选实现] 在主循环中被调用，可进行异步调用
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.ConfigPanel.Close">
@@ -304,6 +314,16 @@
             \~Chinese
             <summary>
             [可选实现] 在主循环中被调用，可进行模态对话
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.WindowPanel.OnHandleAsync">
+            \~English
+            <summary>
+            (api:wpf=2.0.6) [Optional] Called in the main loop, for asynchronous calls
+            </summary>
+            \~Chinese
+            <summary>
+            (api:wpf=2.0.6) [可选实现] 在主循环中被调用，可进行异步调用
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.WindowPanel.OnRelease">
