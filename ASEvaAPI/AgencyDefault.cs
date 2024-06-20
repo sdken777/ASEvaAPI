@@ -312,9 +312,9 @@ namespace ASEva
             return null;
         }
 
-        public bool InstallPlugin(string dirPath)
+        public Task<bool> InstallPlugin(string dirPath)
         {
-            return false;
+            return Task.FromResult(false);
         }
 
         public bool IsInternetConnected()
@@ -326,27 +326,27 @@ namespace ASEva
         {
         }
 
-        public bool NewProject(bool force)
+        public Task<bool> NewProject(bool force)
         {
-            return false;
+            return Task.FromResult(false);
         }
 
         public void OpenDialog(object caller, string dialogClassID, string config)
         {
         }
 
-        public bool OpenProject(string projectFile, bool force)
+        public Task<bool> OpenProject(string projectFile, bool force)
         {
-            return false;
+            return Task.FromResult(false);
         }
 
         public void PlayMp3(byte[] mp3FileData)
         {
         }
 
-        public bool PopupConfirm(string msg)
+        public Task<bool> PopupConfirm(string msg)
         {
-            return false;
+            return Task.FromResult(false);
         }
 
         public void PopupError(string msg)
@@ -468,9 +468,9 @@ namespace ASEva
             return null;
         }
 
-        public bool TerminateApp(bool force, bool autosave)
+        public Task<bool> TerminateApp(bool force, bool autosave)
         {
-            return false;
+            return Task.FromResult(false);
         }
 
         public bool UninstallPlugin(string packID)

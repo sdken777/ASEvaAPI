@@ -10,11 +10,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.2.0) Wrap ASEva.AgencyLocal and ASEva.AgencyAsync, you can use this class if not considering cross end
+    /// (api:app=3.2.0) Wrap ASEva.AgencyLocal and ASEva.AgencyAsync, you can use this class if neither considering cross-end nor using Avalonia
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.2.0) 打包了 ASEva.AgencyLocal 和 ASEva.AgencyAsync ，不考虑跨端时可直接使用此类
+    /// (api:app=3.2.0) 打包了 ASEva.AgencyLocal 和 ASEva.AgencyAsync ，不考虑跨端且不使用Avalonia时可直接使用此类
     /// </summary>
     public class Agency
     {
@@ -3366,7 +3366,8 @@ namespace ASEva
         /// <returns>是否安装了插件</returns>
         public static bool InstallPlugin(String dirPath)
         {
-            return AgencyLocal.InstallPlugin(dirPath);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyLocal.InstallPlugin(dirPath).Result;
         }
 
         /// \~English
@@ -3585,7 +3586,8 @@ namespace ASEva
         /// <returns>是否成功新建项目</returns>
         public static bool NewProject(bool force)
         {
-            return AgencyLocal.NewProject(force);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyLocal.NewProject(force).Result;
         }
 
         /// \~English
@@ -3623,7 +3625,8 @@ namespace ASEva
         /// <returns>是否成功打开项目</returns>
         public static bool OpenProject(String projectFile, bool force)
         {
-            return AgencyLocal.OpenProject(projectFile, force);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyLocal.OpenProject(projectFile, force).Result;
         }
 
         /// \~English
@@ -3673,7 +3676,8 @@ namespace ASEva
         /// <returns>是否得到确认</returns>
         public static bool PopupConfirm(String msg)
         {
-            return AgencyLocal.PopupConfirm(msg);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyLocal.PopupConfirm(msg).Result;
         }
 
         /// \~English
@@ -5012,7 +5016,8 @@ namespace ASEva
         /// <returns>是否成功终止</returns>
         public static bool TerminateApp(bool force, bool autosave)
         {
-            return AgencyLocal.TerminateApp(force, autosave);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyLocal.TerminateApp(force, autosave).Result;
         }
 
         /// \~English

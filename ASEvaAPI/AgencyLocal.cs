@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ASEva.Samples;
 using ASEva.Utility;
 
@@ -71,14 +72,14 @@ namespace ASEva
         Dictionary<String, Version> GetVersionTable();
         WindowClassInfo GetWindowClassInfo(String windowClassID, String transformID);
         Dictionary<String, WindowClassInfo> GetWindowClassTable();
-        bool InstallPlugin(String dirPath);
+        Task<bool> InstallPlugin(String dirPath);
         bool IsInternetConnected();
         void Log(String text, LogLevel level);
-        bool NewProject(bool force);
+        Task<bool> NewProject(bool force);
         void OpenDialog(object caller, String dialogClassID, String config);
-        bool OpenProject(String projectFile, bool force);
+        Task<bool> OpenProject(String projectFile, bool force);
         void PlayMp3(byte[] mp3FileData);
-        bool PopupConfirm(String msg);
+        Task<bool> PopupConfirm(String msg);
         void PopupError(String msg);
         void PopupNotice(String msg);
         void Print(String text);
@@ -107,7 +108,7 @@ namespace ASEva
         void SetWindowTitle(object window, String title, object icon);
         bool StartProcess(String target);
         DataSubscriber SubscribeData(String dataID, int bufferLength, int timeout);
-        bool TerminateApp(bool force, bool autosave);
+        Task<bool> TerminateApp(bool force, bool autosave);
         bool UninstallPlugin(String packID);
         void UnregisterPanel(object panel);
         bool UpdateBusProtocolFilePath(BusProtocolFileID fileID, String filePath);
@@ -1177,17 +1178,17 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Install plugin (After installation, restart is still needed to activated it)
+        /// (api:app=3.2.1) Install plugin (After installation, restart is still needed to activated it)
         /// </summary>
         /// <param name="dirPath">The directory containing plugin files</param>
         /// <returns>Whether any installation is performed</returns>
         /// \~Chinese
         /// <summary>
-        /// 安装插件（安装完毕后也需要重启才生效）
+        /// (api:app=3.2.1) 安装插件（安装完毕后也需要重启才生效）
         /// </summary>
         /// <param name="dirPath">插件包文件夹，或包含若干插件包的文件夹</param>
         /// <returns>是否安装了插件</returns>
-        public static bool InstallPlugin(String dirPath)
+        public static Task<bool> InstallPlugin(String dirPath)
         {
             return Handler.InstallPlugin(dirPath);
         }
@@ -1226,17 +1227,17 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Create blank project
+        /// (api:app=3.2.1) Create blank project
         /// </summary>
         /// <param name="force">Whether forced to create new project</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// 新建空白项目
+        /// (api:app=3.2.1) 新建空白项目
         /// </summary>
         /// <param name="force">是否强制新建空白项目</param>
         /// <returns>是否成功新建项目</returns>
-        public static bool NewProject(bool force)
+        public static Task<bool> NewProject(bool force)
         {
             return Handler.NewProject(force);
         }
@@ -1262,19 +1263,19 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Open project
+        /// (api:app=3.2.1) Open project
         /// </summary>
         /// <param name="projectFile">Path of project file, set to null to load autosaved in the folder of application's configuration files</param>
         /// <param name="force">Whether forced to open the project</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// 打开项目
+        /// (api:app=3.2.1) 打开项目
         /// </summary>
         /// <param name="projectFile">项目文件路径，若设为null则从autosave读取</param>
         /// <param name="force">是否强制打开项目</param>
         /// <returns>是否成功打开项目</returns>
-        public static bool OpenProject(String projectFile, bool force)
+        public static Task<bool> OpenProject(String projectFile, bool force)
         {
             return Handler.OpenProject(projectFile, force);
         }
@@ -1296,17 +1297,17 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Show a modal dialog for user to confirm
+        /// (api:app=3.2.1) Show a modal dialog for user to confirm
         /// </summary>
         /// <param name="msg">Message for user to confirm</param>
         /// <returns>Whether confirmed</returns>
         /// \~Chinese
         /// <summary>
-        /// 弹出模态框显示确认信息
+        /// (api:app=3.2.1) 弹出模态框显示确认信息
         /// </summary>
         /// <param name="msg">确认信息</param>
         /// <returns>是否得到确认</returns>
-        public static bool PopupConfirm(String msg)
+        public static Task<bool> PopupConfirm(String msg)
         {
             return Handler.PopupConfirm(msg);
         }
@@ -1809,19 +1810,19 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Try to terminate application
+        /// (api:app=3.2.1) Try to terminate application
         /// </summary>
         /// <param name="force">Whether forced to terminate</param>
         /// <param name="autosave">Whether to save current project to autosave in the folder of application's configuration files</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// 尝试终止应用程序
+        /// (api:app=3.2.1) 尝试终止应用程序
         /// </summary>
         /// <param name="force">是否强制终止</param>
         /// <param name="autosave">是否保存当前工程至autosave至应用程序的配置文件目录</param>
         /// <returns>是否成功终止</returns>
-        public static bool TerminateApp(bool force, bool autosave)
+        public static Task<bool> TerminateApp(bool force, bool autosave)
         {
             return Handler.TerminateApp(force, autosave);
         }
