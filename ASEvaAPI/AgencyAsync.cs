@@ -212,8 +212,6 @@ namespace ASEva
         Task<bool> StopRunning(bool force, bool editRecordedSession);
         Task<DataSubscriber> SubscribeData(String dataID, int bufferLength, int timeout);
         Task<bool> SwitchAppMode(String controllerName, ApplicationMode mode, int waitSecond);
-        Task<bool> TerminateApp(bool force, bool autosave);
-        Task<bool> UninstallPlugin(String packID);
     }
 
     /// \~English
@@ -3602,42 +3600,6 @@ namespace ASEva
         public static Task<bool> SwitchAppMode(String controllerName, ApplicationMode mode, int waitSecond)
         {
             return Handler.SwitchAppMode(controllerName, mode, waitSecond);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Try to terminate application
-        /// </summary>
-        /// <param name="force">Whether forced to terminate</param>
-        /// <param name="autosave">Whether to save current project to autosave in the folder of application's configuration files</param>
-        /// <returns>Whether successful</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 尝试终止应用程序
-        /// </summary>
-        /// <param name="force">是否强制终止</param>
-        /// <param name="autosave">是否保存当前工程至autosave至应用程序的配置文件目录</param>
-        /// <returns>是否成功终止</returns>
-        public static Task<bool> TerminateApp(bool force, bool autosave)
-        {
-            return Handler.TerminateApp(force, autosave);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Uninstall plugin
-        /// </summary>
-        /// <param name="packID">Plugin pack ID</param>
-        /// <returns>Whether uninstalled</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 卸载插件
-        /// </summary>
-        /// <param name="packID">插件包ID</param>
-        /// <returns>是否卸载了插件</returns>
-        public static Task<bool> UninstallPlugin(String packID)
-        {
-            return Handler.UninstallPlugin(packID);
         }
     }
 }

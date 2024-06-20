@@ -12,8 +12,8 @@
  * \~English In addition, refer to ASEva.Samples for the definition of samples used in plugin, and ASEva.Graph for graph report definitions. \n\n
  * \~Chinese 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph 。 \n\n
  *
- * \~English This document corresponds to API version: 3.2.1 \n
- * \~Chinese 本文档对应API版本：3.2.1
+ * \~English This document corresponds to API version: 3.2.2 \n
+ * \~Chinese 本文档对应API版本：3.2.2
  */
 
 using System;
@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 namespace ASEva
 {
     /// <summary>
-    /// version=3.2.1
+    /// version=3.2.2
     /// </summary>
     public class APIInfo
     {
@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 2, 1, 0); // Update log / 更新记录: AgencyLocal中涉及模态的部分也改为异步
+            return new Version(3, 2, 2, 0); // Update log / 更新记录: 移除AgencyAsync.UninstallPlugin/TerminateApp
         }
 
         /// \~English
