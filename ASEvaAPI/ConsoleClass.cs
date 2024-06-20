@@ -18,15 +18,13 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// [Required] Called while getting component's name
+        /// (api:app=3.1.6) [Required] Called while getting component's name
         /// </summary>
-        /// <returns>Dictionary. The key 'en' is English, 'ch' is Chinese</returns>
         /// \~Chinese
         /// <summary>
-        /// [必须实现] 获取控制台组件的名称时被调用
+        /// (api:app=3.1.6) [必须实现] 获取控制台组件的名称时被调用
         /// </summary>
-        /// <returns>控制台组件名称表，键'en'表示英文，'ch'表示中文</returns>
-        public virtual Dictionary<String, String> GetConsoleName() { return null; }
+        public virtual Dictionary<Language, String> GetConsoleName() { return null; }
 
         /// \~English
         /// <summary>

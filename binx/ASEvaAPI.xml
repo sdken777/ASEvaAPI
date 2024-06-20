@@ -8234,7 +8234,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.1.5
+            version=3.1.6
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -9168,14 +9168,12 @@
         <member name="M:ASEva.ConsoleClass.GetConsoleName">
             \~English
             <summary>
-            [Required] Called while getting component's name
+            (api:app=3.1.6) [Required] Called while getting component's name
             </summary>
-            <returns>Dictionary. The key 'en' is English, 'ch' is Chinese</returns>
             \~Chinese
             <summary>
-            [必须实现] 获取控制台组件的名称时被调用
+            (api:app=3.1.6) [必须实现] 获取控制台组件的名称时被调用
             </summary>
-            <returns>控制台组件名称表，键'en'表示英文，'ch'表示中文</returns>
         </member>
         <member name="M:ASEva.ConsoleClass.GetConsoleClassID">
             \~English
@@ -9476,14 +9474,12 @@
         <member name="M:ASEva.DeviceClass.GetDeviceName">
             \~English
             <summary>
-            [Required] Called while getting component's name
+            (api:app=3.1.6) [Required] Called while getting component's name
             </summary>
-            <returns>Dictionary. The key 'en' is English, 'ch' is Chinese</returns>
             \~Chinese
             <summary>
-            [必须实现] 获取设备组件的名称时被调用
+            (api:app=3.1.6) [必须实现] 获取设备组件的名称时被调用
             </summary>
-            <returns>设备组件名称表，键'en'表示英文，'ch'表示中文</returns>
         </member>
         <member name="M:ASEva.DeviceClass.GetDeviceClassID">
             \~English
@@ -9570,14 +9566,12 @@
         <member name="M:ASEva.DialogClass.GetDialogName">
             \~English
             <summary>
-            [Required] Called while getting component's name
+            (api:app=3.1.6) [Required] Called while getting component's name
             </summary>
-            <returns>Dictionary. The key 'en' is English, 'ch' is Chinese</returns>
             \~Chinese
             <summary>
-            [必须实现] 获取对话框组件的名称时被调用
+            (api:app=3.1.6) [必须实现] 获取对话框组件的名称时被调用
             </summary>
-            <returns>对话框组件名称表，键'en'表示英文，'ch'表示中文</returns>
         </member>
         <member name="M:ASEva.DialogClass.GetDialogClassID">
             \~English
@@ -11838,14 +11832,12 @@
         <member name="M:ASEva.NativeClass.GetNativeName">
             \~English
             <summary>
-            [Required] Called while getting component's name
+            (api:app=3.1.6) [Required] Called while getting component's name
             </summary>
-            <returns>Dictionary. The key 'en' is English, 'ch' is Chinese</returns>
             \~Chinese
             <summary>
-            [必须实现] 获取原生组件的名称时被调用
+            (api:app=3.1.6) [必须实现] 获取原生组件的名称时被调用
             </summary>
-            <returns>原生组件名称表，键'en'表示英文，'ch'表示中文</returns>
         </member>
         <member name="M:ASEva.NativeClass.GetNativeClassID">
             \~English
@@ -12388,14 +12380,12 @@
         <member name="M:ASEva.ProcessorClass.GetProcessorName">
             \~English
             <summary>
-            [Required] Called while getting component's name
+            (api:app=3.1.6) [Required] Called while getting component's name
             </summary>
-            <returns>Dictionary. The key 'en' is English, 'ch' is Chinese</returns>
             \~Chinese
             <summary>
-            [必须实现] 获取数据处理组件的名称时被调用
+            (api:app=3.1.6) [必须实现] 获取数据处理组件的名称时被调用
             </summary>
-            <returns>数据处理组件名称表，键'en'表示英文，'ch'表示中文</returns>
         </member>
         <member name="M:ASEva.ProcessorClass.GetProcessorClassID">
             \~English
@@ -15254,14 +15244,12 @@
         <member name="M:ASEva.TaskClass.GetTaskTitle">
             \~English
             <summary>
-            [Required] Called while getting component's name
+            (api:app=3.1.6) [Required] Called while getting component's name
             </summary>
-            <returns>Dictionary. The key 'en' is English, 'ch' is Chinese</returns>
             \~Chinese
             <summary>
-            [必须实现] 获取独立任务的标题时被调用
+            (api:app=3.1.6) [必须实现] 获取独立任务的标题时被调用
             </summary>
-            <returns>独立任务的标题表，键'en'表示英文，'ch'表示中文</returns>
         </member>
         <member name="M:ASEva.TaskClass.IsNativeTask">
             \~English
@@ -19266,11 +19254,11 @@
         <member name="F:ASEva.Language.Chinese">
             \~English
             <summary>
-            Chinese, language code is "zh"
+            Chinese, language code is "zh", default is simplified chinese
             </summary>
             \~Chinese
             <summary>
-            中文，语言代号为"zh"
+            中文，语言代号为"zh"，默认为简体中文
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">
@@ -20960,14 +20948,12 @@
         <member name="M:ASEva.WindowClass.GetWindowName">
             \~English
             <summary>
-            [Required] Called while getting component's name
+            (api:app=3.1.6) [Required] Called while getting component's name
             </summary>
-            <returns>Dictionary. The key 'en' is English, 'ch' is Chinese</returns>
             \~Chinese
             <summary>
-            [必须实现] 获取窗口组件的名称时被调用
+            (api:app=3.1.6) [必须实现] 获取窗口组件的名称时被调用
             </summary>
-            <returns>窗口组件名称表，键'en'表示英文，'ch'表示中文</returns>
         </member>
         <member name="M:ASEva.WindowClass.GetWindowClassID">
             \~English

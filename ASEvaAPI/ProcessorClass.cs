@@ -17,15 +17,13 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// [Required] Called while getting component's name
+        /// (api:app=3.1.6) [Required] Called while getting component's name
         /// </summary>
-        /// <returns>Dictionary. The key 'en' is English, 'ch' is Chinese</returns>
         /// \~Chinese
         /// <summary>
-        /// [必须实现] 获取数据处理组件的名称时被调用
+        /// (api:app=3.1.6) [必须实现] 获取数据处理组件的名称时被调用
         /// </summary>
-        /// <returns>数据处理组件名称表，键'en'表示英文，'ch'表示中文</returns>
-        public virtual Dictionary<String, String> GetProcessorName() { return null; }
+        public virtual Dictionary<Language, String> GetProcessorName() { return null; }
 
         /// \~English
         /// <summary>

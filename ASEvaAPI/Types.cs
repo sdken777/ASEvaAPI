@@ -4317,11 +4317,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Chinese, language code is "zh"
+        /// Chinese, language code is "zh", default is simplified chinese
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 中文，语言代号为"zh"
+        /// 中文，语言代号为"zh"，默认为简体中文
         /// </summary>
         Chinese = 2,
     }
