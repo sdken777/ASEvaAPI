@@ -1102,11 +1102,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Time in a session
+    /// (api:app=3.2.0) Time in a session
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 在session中的时间
+    /// (api:app=3.2.0) 在session中的时间
     /// </summary>
     public class TimeWithSession
     {
@@ -1128,7 +1128,7 @@ namespace ASEva
         /// <summary>
         /// 所在Session
         /// </summary>
-        public DateTime Session { get; set; }
+        public SessionIdentifier Session { get; set; }
     }
 
     /// \~English

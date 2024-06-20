@@ -290,15 +290,15 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Edit the information of lately recorded session
+        /// (api:app=3.2.0) [Optional][OK for modal] Edit the information of lately recorded session
         /// </summary>
         /// <param name="recordSessionID">Lately recorded session's ID</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 编辑新采集的session信息
+        /// (api:app=3.2.0) [可选实现][可含模态] 编辑新采集的session信息
         /// </summary>
         /// <param name="recordSessionID">新采集的session ID</param>
-        public virtual Task OnEditRecordedSession(DateTime recordSessionID) { return Task.CompletedTask; }
+        public virtual Task OnEditRecordedSession(SessionIdentifier recordSessionID) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>

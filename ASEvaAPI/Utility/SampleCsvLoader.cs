@@ -166,7 +166,7 @@ namespace ASEva.Utility
                 var comps = lineText.Split(',');
                 if (comps.Length < timeColumnIndex + 2) continue;
 
-                var session = DateTime.ParseExact(comps[0], "yyyyMMdd-HH-mm-ss", null);
+                var sessionDateTime = DateTime.ParseExact(comps[0], "yyyyMMdd-HH-mm-ss", null);
 
                 double offset;
                 if (!Double.TryParse(comps[timeColumnIndex], out offset)) return null;
@@ -186,7 +186,7 @@ namespace ASEva.Utility
                 if (gnssPosixIndex > 0) UInt64.TryParse(comps[gnssPosixIndex], out gnssPosix);
 
                 var sample = new GeneralSample();
-                sample.SetTime(session, offset, syncState, new IndependentTimeInfo(cpuTick, hostPosix, guestPosix, gnssPosix), offset);
+                sample.SetTime(SessionIdentifier.FromDateTime(sessionDateTime), offset, syncState, new IndependentTimeInfo(cpuTick, hostPosix, guestPosix, gnssPosix), offset);
                 sample.Channel = channel;
                 sample.NumberOfSignificants = comps.Length - (timeColumnIndex + 1);
                 sample.Protocol = protocol;
@@ -334,7 +334,7 @@ namespace ASEva.Utility
                     var comps = lineText.Split(',');
                     if (comps.Length < timeColumnIndex + 2) continue;
 
-                    var session = DateTime.ParseExact(comps[0], "yyyyMMdd-HH-mm-ss", null);
+                    var sessionDateTime = DateTime.ParseExact(comps[0], "yyyyMMdd-HH-mm-ss", null);
 
                     double offset;
                     if (!Double.TryParse(comps[timeColumnIndex], out offset)) continue;
@@ -354,7 +354,7 @@ namespace ASEva.Utility
                     if (gnssPosixIndex > 0) UInt64.TryParse(comps[gnssPosixIndex], out gnssPosix);
 
                     var sample = new GeneralSample();
-                    sample.SetTime(session, offset, syncState, new IndependentTimeInfo(cpuTick, hostPosix, guestPosix, gnssPosix), offset);
+                    sample.SetTime(SessionIdentifier.FromDateTime(sessionDateTime), offset, syncState, new IndependentTimeInfo(cpuTick, hostPosix, guestPosix, gnssPosix), offset);
                     sample.Channel = channel;
                     sample.NumberOfSignificants = comps.Length - (timeColumnIndex + 1);
                     sample.Protocol = protocol;

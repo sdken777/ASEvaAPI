@@ -197,7 +197,7 @@ namespace ASEva
             return null;
         }
 
-        public string GetGenerationPath(DateTime session, string generation)
+        public string GetGenerationPath(SessionIdentifier session, string generation)
         {
             return null;
         }
@@ -277,12 +277,12 @@ namespace ASEva
             return null;
         }
 
-        public string GetSessionPath(DateTime session)
+        public string GetSessionPath(SessionIdentifier session)
         {
             return null;
         }
 
-        public string GetSessionPublicDataPath(DateTime session)
+        public string GetSessionPublicDataPath(SessionIdentifier session)
         {
             return null;
         }
@@ -642,7 +642,7 @@ namespace ASEva
             return Task.FromResult<double>(0);
         }
 
-        public Task<BusChannelInfo[]> GetBusChannelsInfo(DateTime session)
+        public Task<BusChannelInfo[]> GetBusChannelsInfo(SessionIdentifier session)
         {
             return Task.FromResult<BusChannelInfo[]>(null);
         }
@@ -762,7 +762,7 @@ namespace ASEva
             return Task.FromResult<double>(0);
         }
 
-        public Task<CPUTimeModel> GetCPUTimeModel(DateTime session)
+        public Task<CPUTimeModel> GetCPUTimeModel(SessionIdentifier session)
         {
             return Task.FromResult<CPUTimeModel>(null);
         }
@@ -777,9 +777,9 @@ namespace ASEva
             return Task.FromResult<string>(null);
         }
 
-        public Task<DateTime?> GetCurrentOnlineSession()
+        public Task<SessionIdentifier?> GetCurrentOnlineSession()
         {
-            return Task.FromResult<DateTime?>(null);
+            return Task.FromResult<SessionIdentifier?>(null);
         }
 
         public Task<string> GetCurrentSessionGUID()
@@ -822,9 +822,9 @@ namespace ASEva
             return Task.FromResult<string[]>(null);
         }
 
-        public Task<DateTime[]> GetFilteredSessionList()
+        public Task<SessionIdentifier[]> GetFilteredSessionList()
         {
-            return Task.FromResult<DateTime[]>(null);
+            return Task.FromResult<SessionIdentifier[]>(null);
         }
 
         public Task<double> GetFilteredSessionListTotalLength()
@@ -832,9 +832,9 @@ namespace ASEva
             return Task.FromResult<double>(0);
         }
 
-        public Task<DateTime[]> GetFinishedSessions(string generation)
+        public Task<SessionIdentifier[]> GetFinishedSessions(string generation)
         {
-            return Task.FromResult<DateTime[]>(null);
+            return Task.FromResult<SessionIdentifier[]>(null);
         }
 
         public Task<Dictionary<string, string>> GetFrameworkThirdPartyNotices()
@@ -847,14 +847,14 @@ namespace ASEva
             return Task.FromResult<string[]>(null);
         }
 
-        public Task<GenerationProcessStatus?> GetGenerationProcessStatus(DateTime session, string generation)
+        public Task<GenerationProcessStatus?> GetGenerationProcessStatus(SessionIdentifier session, string generation)
         {
             return Task.FromResult<GenerationProcessStatus?>(null);
         }
 
-        public Task<DateTime[]> GetGenerationSessions(string generationID)
+        public Task<SessionIdentifier[]> GetGenerationSessions(string generationID)
         {
-            return Task.FromResult<DateTime[]>(null);
+            return Task.FromResult<SessionIdentifier[]>(null);
         }
 
         public Task<string> GetGlobalParameter(string key, string defaultValue)
@@ -877,12 +877,12 @@ namespace ASEva
             return Task.FromResult<string[]>(null);
         }
 
-        public Task<PosixTimeModel> GetGNSSPosixTimeModel(DateTime session)
+        public Task<PosixTimeModel> GetGNSSPosixTimeModel(SessionIdentifier session)
         {
             return Task.FromResult<PosixTimeModel>(null);
         }
 
-        public Task<GraphData> GetGraphData(DateTime session, int graphID)
+        public Task<GraphData> GetGraphData(SessionIdentifier session, int graphID)
         {
             return Task.FromResult<GraphData>(null);
         }
@@ -907,7 +907,7 @@ namespace ASEva
             return Task.FromResult<string>(null);
         }
 
-        public Task<PosixTimeModel> GetHostPosixTimeModel(DateTime session)
+        public Task<PosixTimeModel> GetHostPosixTimeModel(SessionIdentifier session)
         {
             return Task.FromResult<PosixTimeModel>(null);
         }
@@ -942,7 +942,7 @@ namespace ASEva
             return Task.FromResult<string>(null);
         }
 
-        public Task<DateTime?> GetLocalDateTime(DateTime session, double timeOffset, bool useGNSS)
+        public Task<DateTime?> GetLocalDateTime(SessionIdentifier session, double timeOffset, bool useGNSS)
         {
             return Task.FromResult<DateTime?>(null);
         }
@@ -1052,44 +1052,44 @@ namespace ASEva
             return Task.FromResult<Dictionary<string, SceneTitle>>(null);
         }
 
-        public Task<string> GetSessionComment(DateTime session)
+        public Task<string> GetSessionComment(SessionIdentifier session)
         {
             return Task.FromResult<string>(null);
         }
 
-        public Task<Dictionary<DateTime, SessionFilterFlags>> GetSessionFilterTable()
+        public Task<Dictionary<SessionIdentifier, SessionFilterFlags>> GetSessionFilterTable()
         {
-            return Task.FromResult<Dictionary<DateTime, SessionFilterFlags>>(null);
+            return Task.FromResult<Dictionary<SessionIdentifier, SessionFilterFlags>>(null);
         }
 
-        public Task<string> GetSessionFolderName(DateTime session)
+        public Task<string> GetSessionFolderName(SessionIdentifier session)
         {
             return Task.FromResult<string>(null);
         }
 
-        public Task<string[]> GetSessionGenerations(DateTime sessionID)
+        public Task<string[]> GetSessionGenerations(SessionIdentifier session)
         {
             return Task.FromResult<string[]>(null);
         }
 
-        public Task<bool> GetSessionHostSync(DateTime session)
+        public Task<bool> GetSessionHostSync(SessionIdentifier session)
         {
             return Task.FromResult<bool>(false);
         }
 
-        public Task<string> GetSessionLayer(DateTime session)
+        public Task<string> GetSessionLayer(SessionIdentifier session)
         {
             return Task.FromResult<string>(null);
         }
 
-        public Task<double?> GetSessionLength(DateTime session)
+        public Task<double?> GetSessionLength(SessionIdentifier session)
         {
             return Task.FromResult<double?>(null);
         }
 
-        public Task<DateTime[]> GetSessionList()
+        public Task<SessionIdentifier[]> GetSessionList()
         {
-            return Task.FromResult<DateTime[]>(null);
+            return Task.FromResult<SessionIdentifier[]>(null);
         }
 
         public Task<double> GetSessionListTotalLength()
@@ -1097,7 +1097,7 @@ namespace ASEva
             return Task.FromResult<double>(0);
         }
 
-        public Task<Dictionary<string, string>> GetSessionProperties(DateTime session)
+        public Task<Dictionary<string, string>> GetSessionProperties(SessionIdentifier session)
         {
             return Task.FromResult<Dictionary<string, string>>(null);
         }
@@ -1107,7 +1107,7 @@ namespace ASEva
             return Task.FromResult<string>(null);
         }
 
-        public Task<double?> GetSessionTimeline(DateTime session)
+        public Task<double?> GetSessionTimeline(SessionIdentifier session)
         {
             return Task.FromResult<double?>(null);
         }
@@ -1147,7 +1147,7 @@ namespace ASEva
             return Task.FromResult<Dictionary<string, TaskClassInfo>>(null);
         }
 
-        public Task<DateTime?> GetUTCDateTime(DateTime session, double timeOffset, bool useGNSS)
+        public Task<DateTime?> GetUTCDateTime(SessionIdentifier session, double timeOffset, bool useGNSS)
         {
             return Task.FromResult<DateTime?>(null);
         }
@@ -1162,7 +1162,7 @@ namespace ASEva
             return Task.FromResult<double>(0);
         }
 
-        public Task<VideoChannelInfo[]> GetVideoChannelsInfo(DateTime session)
+        public Task<VideoChannelInfo[]> GetVideoChannelsInfo(SessionIdentifier session)
         {
             return Task.FromResult<VideoChannelInfo[]>(null);
         }
@@ -1272,12 +1272,12 @@ namespace ASEva
             return Task.CompletedTask;
         }
 
-        public Task RemoveGeneration(DateTime session, string genID)
+        public Task RemoveGeneration(SessionIdentifier session, string genID)
         {
             return Task.CompletedTask;
         }
 
-        public Task<bool> RemoveSession(DateTime session, bool force)
+        public Task<bool> RemoveSession(SessionIdentifier session, bool force)
         {
             return Task.FromResult<bool>(false);
         }
@@ -1412,22 +1412,22 @@ namespace ASEva
             return Task.CompletedTask;
         }
 
-        public Task SetSessionChecker(DateTime session, bool check)
+        public Task SetSessionChecker(SessionIdentifier session, bool check)
         {
             return Task.CompletedTask;
         }
 
-        public Task SetSessionComment(DateTime session, string comment)
+        public Task SetSessionComment(SessionIdentifier session, string comment)
         {
             return Task.CompletedTask;
         }
 
-        public Task SetSessionHostSync(DateTime session, bool hostSync)
+        public Task SetSessionHostSync(SessionIdentifier session, bool hostSync)
         {
             return Task.CompletedTask;
         }
 
-        public Task SetSessionProperties(DateTime session, Dictionary<string, string> properties)
+        public Task SetSessionProperties(SessionIdentifier session, Dictionary<string, string> properties)
         {
             return Task.CompletedTask;
         }

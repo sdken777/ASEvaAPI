@@ -62,14 +62,14 @@ namespace ASEva.Utility
                     var sceneID = comps[3];
                     if (sceneID.Length == 0) continue;
 
-                    var session = DateTime.ParseExact(comps[0], "yyyyMMdd-HH-mm-ss", null);
+                    var sessionDateTime = DateTime.ParseExact(comps[0], "yyyyMMdd-HH-mm-ss", null);
 
                     double startTime, length;
                     if (!Double.TryParse(comps[1], out startTime) || !Double.TryParse(comps[2], out length)) continue;
 
                     var scene = new SceneData();
                     scene.SceneID = sceneID;
-                    scene.BeginBase = session;
+                    scene.Session = SessionIdentifier.FromDateTime(sessionDateTime);
                     scene.BeginOffset = startTime;
                     scene.TimeLength = length;
                     scene.PropertyValues = new string[comps.Length - 4];
@@ -108,7 +108,7 @@ namespace ASEva.Utility
                     foreach (var scene in Segments)
                     {
                         var list = new List<String>();
-                        list.Add(scene.BeginBase.ToString("yyyyMMdd-HH-mm-ss"));
+                        list.Add(scene.Session.ToDateTime().ToString("yyyyMMdd-HH-mm-ss"));
                         list.Add(scene.BeginOffset.ToString());
                         list.Add(scene.TimeLength.ToString());
                         list.Add(scene.SceneID);

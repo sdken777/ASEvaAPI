@@ -48,7 +48,7 @@ namespace ASEva
         DialogClassInfo GetDialogClassInfo(String dialogClassID, String transformID);
         Dictionary<String, DialogClassInfo> GetDialogClassTable();
         Dictionary<String, String> GetFrameworkThirdPartyNotices();
-        String GetGenerationPath(DateTime session, String generation);
+        String GetGenerationPath(SessionIdentifier session, String generation);
         String GetGlobalPath(String key);
         String[] GetGlobalPathKeys();
         String GetGlobalPublicDataPath();
@@ -64,8 +64,8 @@ namespace ASEva
         PluginPackInfo GetPluginPackInfo(String packID);
         Dictionary<String, Dictionary<String, String> > GetPluginThirdPartyNotices();
         String[] GetRecentProjectPaths();
-        String GetSessionPath(DateTime session);
-        String GetSessionPublicDataPath(DateTime session);
+        String GetSessionPath(SessionIdentifier session);
+        String GetSessionPublicDataPath(SessionIdentifier session);
         String[] GetSubDataPaths();
         String GetTempFilesRoot();
         Dictionary<String, Version> GetVersionTable();
@@ -814,7 +814,7 @@ namespace ASEva
         /// <param name="session">希望获取generation所属的session ID</param>
         /// <param name="generation">希望获取的generation ID</param>
         /// <returns>Generation数据的根路径，若不存在或不属于当前层级则返回null</returns>
-        public static String GetGenerationPath(DateTime session, String generation)
+        public static String GetGenerationPath(SessionIdentifier session, String generation)
         {
             return Handler.GetGenerationPath(session, generation);
         }
@@ -1074,7 +1074,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">希望获取的session ID</param>
         /// <returns>Session数据的根路径，若不存在或不属于当前层级则返回null</returns>
-        public static String GetSessionPath(DateTime session)
+        public static String GetSessionPath(SessionIdentifier session)
         {
             return Handler.GetSessionPath(session);
         }
@@ -1091,7 +1091,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">希望获取的session ID</param>
         /// <returns>Session公共数据的根路径，若不存在或不属于当前层级则返回null</returns>
-        public static String GetSessionPublicDataPath(DateTime session)
+        public static String GetSessionPublicDataPath(SessionIdentifier session)
         {
             return Handler.GetSessionPublicDataPath(session);
         }

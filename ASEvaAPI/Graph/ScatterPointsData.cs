@@ -454,19 +454,19 @@ namespace ASEva.Graph
 
         /// \~English
         /// <summary>
-        /// Add sample point with time info
+        /// (api:app=3.2.0) Add sample point with time info
         /// </summary>
         /// <param name="point">Sample point, do nothing if over the range</param>
         /// <param name="session">The session that it belongs to</param>
         /// <param name="offset">The time offset of the sample in the session</param>
         /// \~Chinese
         /// <summary>
-        /// 添加含时间信息的样本点
+        /// (api:app=3.2.0) 添加含时间信息的样本点
         /// </summary>
         /// <param name="point">样本点，若超出范围则不添加</param>
         /// <param name="session">样本点所在session</param>
         /// <param name="offset">样本点在该session中的时间戳</param>
-        public void AddPointWithTimeInfo(FloatPoint point, DateTime session, double offset)
+        public void AddPointWithTimeInfo(FloatPoint point, SessionIdentifier session, double offset)
         {
             var xRange = GetXRange();
             var yRange = GetYRange();
@@ -495,7 +495,7 @@ namespace ASEva.Graph
 
             Data[count, 0] = point.X;
             Data[count, 1] = point.Y;
-            Data[count, 2] = (long)((session - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds);
+            Data[count, 2] = (long)(session.ToDateTime() - new DateTime(1970, 1, 1, 0, 0, 0)).TotalSeconds;
             Data[count, 3] = offset;
 
             Params[0] = (count + 1).ToString();
@@ -530,7 +530,7 @@ namespace ASEva.Graph
 
         /// \~English
         /// <summary>
-        /// Get time info of a scatter point
+        /// (api:app=3.2.0) Get time info of a scatter point
         /// </summary>
         /// <param name="index">Index of scatter point</param>
         /// <param name="session">Output the session that it belongs to</param>
@@ -538,13 +538,13 @@ namespace ASEva.Graph
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// 获取某个散点样本的时间信息
+        /// (api:app=3.2.0) 获取某个散点样本的时间信息
         /// </summary>
         /// <param name="index">样本在数组中的序号</param>
         /// <param name="session">输出样本点所在session</param>
         /// <param name="offset">输出样本点在该session中的时间戳</param>
         /// <returns>是否成功获取时间信息</returns>
-        public bool GetPointTimeInfo(int index, ref DateTime session, ref double offset)
+        public bool GetPointTimeInfo(int index, ref SessionIdentifier session, ref double offset)
         {
             uint count = 0;
             if (!UInt32.TryParse(Params[0], out count)) return false;
@@ -553,7 +553,7 @@ namespace ASEva.Graph
             if (Data.GetLength(1) != 4) return false;
             if (Data[index, 2] == 0) return false;
 
-            session = (new DateTime(1970, 1, 1, 0, 0, 0)).AddSeconds(Data[index, 2]);
+            session = SessionIdentifier.FromDateTime(new DateTime(1970, 1, 1, 0, 0, 0).AddSeconds(Data[index, 2]));
             offset = Data[index, 3];
             return true;
         }

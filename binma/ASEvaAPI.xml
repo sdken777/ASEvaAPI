@@ -7,11 +7,11 @@
         <member name="T:ASEva.Agency">
             \~English
             <summary>
-            (api:app=3.0.0) Wrap ASEva.AgencyLocal and ASEva.AgencyAsync, you can use this class if not considering cross end
+            (api:app=3.2.0) Wrap ASEva.AgencyLocal and ASEva.AgencyAsync, you can use this class if not considering cross end
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 打包了 ASEva.AgencyLocal 和 ASEva.AgencyAsync ，不考虑跨端时可直接使用此类
+            (api:app=3.2.0) 打包了 ASEva.AgencyLocal 和 ASEva.AgencyAsync ，不考虑跨端时可直接使用此类
             </summary>
         </member>
         <member name="M:ASEva.Agency.AddBusProtocolFile(System.String,ASEva.BusProtocolFileID[]@)">
@@ -57,12 +57,12 @@
         <member name="M:ASEva.Agency.AddProcessorVideoReference(System.Int32)">
             \~English
             <summary>
-            (api:app=3.0.8) Add video reference (only video with references will be sent to app layer's processors)
+            Add video reference (only video with references will be sent to app layer's processors)
             </summary>
             <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
             \~Chinese
             <summary>
-            (api:app=3.0.8) 添加视频引用，在应用层的数据处理对象才可获得该通道的数据
+            添加视频引用，在应用层的数据处理对象才可获得该通道的数据
             </summary>
             <param name="videoChannel">视频通道，0~23对应A~X</param>
         </member>
@@ -255,14 +255,14 @@
         <member name="M:ASEva.Agency.CreateGraphPanelForType(ASEva.GraphType,System.String)">
             \~English
             <summary>
-            (api:app=3.1.0) Create graph panel
+            Create graph panel
             </summary>
             <param name="graphType">Graph type</param>
             <param name="styleName">Style name, set to null to use the first style</param>
             <returns>Created graph panel, null if failed to create</returns>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 创建图表可视化面板
+            创建图表可视化面板
             </summary>
             <param name="graphType">图表类型</param>
             <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
@@ -271,14 +271,14 @@
         <member name="M:ASEva.Agency.CreateGraphPanelForID(System.Int32,System.String)">
             \~English
             <summary>
-            (api:app=3.1.0) Create graph panel
+            Create graph panel
             </summary>
             <param name="graphID">Graph ID</param>
             <param name="styleName">Style name, set to null to use the first style</param>
             <returns>Created graph panel, null if failed to create</returns>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 创建图表可视化面板
+            创建图表可视化面板
             </summary>
             <param name="graphID">图表报告ID</param>
             <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
@@ -531,12 +531,12 @@
         <member name="M:ASEva.Agency.GetAppGUI">
             \~English
             <summary>
-            (api:app=3.0.7) Get GUI framework that the application based on
+            Get GUI framework that the application based on
             </summary>
             <returns>GUI framework</returns>
             \~Chinese
             <summary>
-            (api:app=3.0.7) 获取应用程序基于的图形界面框架
+            获取应用程序基于的图形界面框架
             </summary>
             <returns>图形界面框架</returns>
         </member>
@@ -732,7 +732,7 @@
             <param name="channel">总线通道，1~16</param>
             <returns>延迟配置，单位毫秒</returns>
         </member>
-        <member name="M:ASEva.Agency.GetBusChannelsInfo(System.DateTime)">
+        <member name="M:ASEva.Agency.GetBusChannelsInfo(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Gets information about all bus channels of a specified session
@@ -793,14 +793,14 @@
         <member name="M:ASEva.Agency.GetBusMessageInfoByLocalID(System.Int32,System.UInt32)">
             \~English
             <summary>
-            (api:app=3.1.0) Get information of message with the specified local ID at the specified channel
+            Get information of message with the specified local ID at the specified channel
             </summary>
             <param name="channel">Bus channel, ranges 1~16</param>
             <param name="localID">Local ID of bus message</param>
             <returns>Message information, null if not found</returns>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 获取指定通道上指定ID报文信息
+            获取指定通道上指定ID报文信息
             </summary>
             <param name="channel">总线通道，1~16</param>
             <param name="localID">通道内的报文ID</param>
@@ -1126,7 +1126,7 @@
             </summary>
             <returns>CPU时间，单位秒，返回0表示无效</returns>
         </member>
-        <member name="M:ASEva.Agency.GetCPUTimeModel(System.DateTime)">
+        <member name="M:ASEva.Agency.GetCPUTimeModel(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get session's CPU time model
@@ -1408,7 +1408,7 @@
             </summary>
             <returns>Generation ID列表</returns>
         </member>
-        <member name="M:ASEva.Agency.GetGenerationPath(System.DateTime,System.String)">
+        <member name="M:ASEva.Agency.GetGenerationPath(ASEva.SessionIdentifier,System.String)">
             \~English
             <summary>
             Get the path of a generation with the specified generation ID and under the specified session
@@ -1424,7 +1424,7 @@
             <param name="generation">希望获取的generation ID</param>
             <returns>Generation数据的根路径，若不存在或不属于当前层级则返回null</returns>
         </member>
-        <member name="M:ASEva.Agency.GetGenerationProcessStatus(System.DateTime,System.String)">
+        <member name="M:ASEva.Agency.GetGenerationProcessStatus(ASEva.SessionIdentifier,System.String)">
             \~English
             <summary>
             Get the status of generation with the specified generation ID and under the specified session
@@ -1548,7 +1548,7 @@
             </summary>
             <returns>所有全局变量的键</returns>
         </member>
-        <member name="M:ASEva.Agency.GetGNSSPosixTimeModel(System.DateTime)">
+        <member name="M:ASEva.Agency.GetGNSSPosixTimeModel(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get session's satellite posix time model
@@ -1562,7 +1562,7 @@
             <param name="session">Session ID</param>
             <returns>卫星Posix时间模型</returns>
         </member>
-        <member name="M:ASEva.Agency.GetGraphData(System.DateTime,System.Int32)">
+        <member name="M:ASEva.Agency.GetGraphData(ASEva.SessionIdentifier,System.Int32)">
             \~English
             <summary>
             Get graph's data
@@ -1619,13 +1619,13 @@
         <member name="M:ASEva.Agency.GetGraphPanelStylesForID(System.Int32)">
             \~English
             <summary>
-            (api:app=3.1.0) Get all available style names for the specified graph ID
+            Get all available style names for the specified graph ID
             </summary>
             <param name="graphID">Graph ID</param>
             <returns>All available style names</returns>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 获取符合图表报告的所有可视化面板样式名
+            获取符合图表报告的所有可视化面板样式名
             </summary>
             <param name="graphID">图表报告ID</param>
             <returns>可视化面板样式名列表</returns>
@@ -1633,13 +1633,13 @@
         <member name="M:ASEva.Agency.GetGraphPanelStylesForType(ASEva.GraphType)">
             \~English
             <summary>
-            (api:app=3.1.0) Get all available style names for the specified graph type
+            Get all available style names for the specified graph type
             </summary>
             <param name="graphType">Graph type</param>
             <returns>All available style names</returns>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 获取符合图表报告的所有可视化面板样式名
+            获取符合图表报告的所有可视化面板样式名
             </summary>
             <param name="graphType">图表类型</param>
             <returns>可视化面板样式名列表</returns>
@@ -1658,7 +1658,7 @@
             <param name="graphID">图表报告ID</param>
             <returns>图表报告标题，若不存在则返回null</returns>
         </member>
-        <member name="M:ASEva.Agency.GetHostPosixTimeModel(System.DateTime)">
+        <member name="M:ASEva.Agency.GetHostPosixTimeModel(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get session's host machine posix time model
@@ -1744,7 +1744,7 @@
             </summary>
             <returns>许可证的详细信息</returns>
         </member>
-        <member name="M:ASEva.Agency.GetLocalDateTime(System.DateTime,System.Double,System.Boolean)">
+        <member name="M:ASEva.Agency.GetLocalDateTime(ASEva.SessionIdentifier,System.Double,System.Boolean)">
             \~English
             <summary>
             Convert time offset in session to local date and time
@@ -2102,7 +2102,7 @@
             </summary>
             <returns>场景标题表</returns>
         </member>
-        <member name="M:ASEva.Agency.GetSessionComment(System.DateTime)">
+        <member name="M:ASEva.Agency.GetSessionComment(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get session's comment
@@ -2128,7 +2128,7 @@
             </summary>
             <returns>session的筛选标志位表</returns>
         </member>
-        <member name="M:ASEva.Agency.GetSessionFolderName(System.DateTime)">
+        <member name="M:ASEva.Agency.GetSessionFolderName(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get the folder name of a session
@@ -2142,21 +2142,21 @@
             <param name="session">Session ID</param>
             <returns>文件夹名</returns>
         </member>
-        <member name="M:ASEva.Agency.GetSessionGenerations(System.DateTime)">
+        <member name="M:ASEva.Agency.GetSessionGenerations(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get all generations of the session under current data layer
             </summary>
-            <param name="sessionID">Session ID</param>
+            <param name="session">Session ID</param>
             <returns>Generation IDs</returns>
             \~Chinese
             <summary>
             获取当前层级下指定session下的所有generation ID
             </summary>
-            <param name="sessionID">Session ID</param>
+            <param name="session">Session ID</param>
             <returns>Generation ID列表</returns>
         </member>
-        <member name="M:ASEva.Agency.GetSessionHostSync(System.DateTime)">
+        <member name="M:ASEva.Agency.GetSessionHostSync(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get whether the host machine is synchronized with time server while the session is being recorded
@@ -2170,7 +2170,7 @@
             <param name="session">Session ID</param>
             <returns>主机是否与授时服务器同步</returns>
         </member>
-        <member name="M:ASEva.Agency.GetSessionLayer(System.DateTime)">
+        <member name="M:ASEva.Agency.GetSessionLayer(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get the data layer to which a session belongs
@@ -2184,7 +2184,7 @@
             <param name="session">Session ID</param>
             <returns>数据层级，其中'.'表示根路径下的session，'..'表示根路径即session</returns>
         </member>
-        <member name="M:ASEva.Agency.GetSessionLength(System.DateTime)">
+        <member name="M:ASEva.Agency.GetSessionLength(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get session's duration
@@ -2222,7 +2222,7 @@
             </summary>
             <returns>所有session的总时长</returns>
         </member>
-        <member name="M:ASEva.Agency.GetSessionPath(System.DateTime)">
+        <member name="M:ASEva.Agency.GetSessionPath(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get the path of a session's data
@@ -2236,7 +2236,7 @@
             <param name="session">希望获取的session ID</param>
             <returns>Session数据的根路径，若不存在或不属于当前层级则返回null</returns>
         </member>
-        <member name="M:ASEva.Agency.GetSessionProperties(System.DateTime)">
+        <member name="M:ASEva.Agency.GetSessionProperties(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get session's properties
@@ -2250,7 +2250,7 @@
             <param name="session">Session ID</param>
             <returns>Session的属性表</returns>
         </member>
-        <member name="M:ASEva.Agency.GetSessionPublicDataPath(System.DateTime)">
+        <member name="M:ASEva.Agency.GetSessionPublicDataPath(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get the path of a session's public data
@@ -2274,7 +2274,7 @@
             获取当前的session搜索关键字
             </summary>
         </member>
-        <member name="M:ASEva.Agency.GetSessionTimeline(System.DateTime)">
+        <member name="M:ASEva.Agency.GetSessionTimeline(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get session's start time as a timeline point
@@ -2408,7 +2408,7 @@
             </summary>
             <returns>临时文件根目录路径</returns>
         </member>
-        <member name="M:ASEva.Agency.GetUTCDateTime(System.DateTime,System.Double,System.Boolean)">
+        <member name="M:ASEva.Agency.GetUTCDateTime(ASEva.SessionIdentifier,System.Double,System.Boolean)">
             \~English
             <summary>
             Convert time offset in session to UTC date and time
@@ -2452,7 +2452,7 @@
             <param name="channel">视频通道，0~23</param>
             <returns>延迟配置，单位毫秒</returns>
         </member>
-        <member name="M:ASEva.Agency.GetVideoChannelsInfo(System.DateTime)">
+        <member name="M:ASEva.Agency.GetVideoChannelsInfo(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Gets information about all video channels of a specified session
@@ -2501,7 +2501,7 @@
         <member name="M:ASEva.Agency.GetVideoFrameImage(System.Int32,System.Double,System.Double,ASEva.VideoFrameGetMode,System.Nullable{ASEva.IntRect},System.Boolean,System.Nullable{ASEva.Timestamp}@,ASEva.Samples.CameraInfo@)">
             \~English
             <summary>
-            (api:app=3.0.5) Get the nearest video frame data from the specified time
+            Get the nearest video frame data from the specified time
             </summary>
             <param name="channel">Video channel, ranges 0~23</param>
             <param name="timeline">Target timeline point, in seconds</param>
@@ -2514,7 +2514,7 @@
             <returns>Video frame data, size is determined by "mode" and "clip", null if failed to query</returns>
             \~Chinese
             <summary>
-            (api:app=3.0.5) 获取距离指定时间最近的视频帧数据
+            获取距离指定时间最近的视频帧数据
             </summary>
             <param name="channel">视频通道，0~23</param>
             <param name="timeline">获取视频帧的目标时间线，单位秒</param>
@@ -2529,7 +2529,7 @@
         <member name="M:ASEva.Agency.GetVideoFrameThumbnail(System.Int32,System.Double,System.Double,System.Boolean)">
             \~English
             <summary>
-            (api:app=3.0.5) Get the nearest thumbnail data from the specified time
+            Get the nearest thumbnail data from the specified time
             </summary>
             <param name="channel">Video channel, ranges 0~23</param>
             <param name="timeline">Target timeline point, in seconds</param>
@@ -2538,7 +2538,7 @@
             <returns>Thumbnail data, null if failed to query. The width is fixed to 80</returns>
             \~Chinese
             <summary>
-            (api:app=3.0.5) 获取距离指定时间最近的缩略图数据
+            获取距离指定时间最近的缩略图数据
             </summary>
             <param name="channel">视频通道，0~23</param>
             <param name="timeline">获取视频帧的目标时间线，单位秒</param>
@@ -2549,14 +2549,14 @@
         <member name="M:ASEva.Agency.GetVideoRawSize(System.Int32,System.Double)">
             \~English
             <summary>
-            (api:app=3.0.5) Get the video raw size at the specified time at the specified channel
+            Get the video raw size at the specified time at the specified channel
             </summary>
             <param name="channel">Video channel, ranges 0~23</param>
             <param name="timeline">Target timeline point, in seconds</param>
             <returns>Raw size, null if no data</returns>
             \~Chinese
             <summary>
-            (api:app=3.0.5) 获取指定通道在指定时间上的视频帧的原始尺寸
+            获取指定通道在指定时间上的视频帧的原始尺寸
             </summary>
             <param name="channel">视频通道，0~23</param>
             <param name="timeline">获取视频帧的目标时间线，单位秒</param>
@@ -2947,14 +2947,14 @@
         <member name="M:ASEva.Agency.RegisterGraphPanelForType(ASEva.GraphType,System.String,System.Type)">
             \~English
             <summary>
-            (api:app=3.1.0) Register graph panel type for the specified graph type
+            Register graph panel type for the specified graph type
             </summary>
             <param name="graphType">Graph type</param>
             <param name="styleName">Style name to register</param>
             <param name="panelType">Graph panel type, which should be derived from UI framework's control base class, and implement ASEva.GraphPanel </param>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 注册针对指定图表类型的可视化面板
+            注册针对指定图表类型的可视化面板
             </summary>
             <param name="graphType">指定图表类型</param>
             <param name="styleName">面板样式名</param>
@@ -2963,14 +2963,14 @@
         <member name="M:ASEva.Agency.RegisterGraphPanelForID(System.Int32,System.String,System.Type)">
             \~English
             <summary>
-            (api:app=3.1.0) Register graph panel type for the specified graph ID (higher priority than graph type)
+            Register graph panel type for the specified graph ID (higher priority than graph type)
             </summary>
             <param name="graphID">Graph ID</param>
             <param name="styleName">Style name to register</param>
             <param name="panelType">Graph panel type, which should be derived from UI framework's control base class, and implement ASEva.GraphPanel </param>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 注册针对指定图表ID的可视化面板（比按图表类型注册的优先级更高）
+            注册针对指定图表ID的可视化面板（比按图表类型注册的优先级更高）
             </summary>
             <param name="graphID">图表报告ID</param>
             <param name="styleName">面板样式名</param>
@@ -2995,7 +2995,7 @@
         <member name="M:ASEva.Agency.RegisterTransformDialogClassDirectly(System.String,ASEva.DialogClass,System.String)">
             \~English
             <summary>
-            (api:app=3.1.0) Register transformed dialog class directly
+            Register transformed dialog class directly
             </summary>
             <param name="dialogClassID">Original dialog class's ID</param>
             <param name="transformDialogClass">Transformed dialog class object</param>
@@ -3003,7 +3003,7 @@
             <returns>Information of transformed dialog class</returns>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 直接注册分化对话框组件
+            直接注册分化对话框组件
             </summary>
             <param name="dialogClassID">原对话框组件ID</param>
             <param name="transformDialogClass">分化对话框组件类</param>
@@ -3029,7 +3029,7 @@
         <member name="M:ASEva.Agency.RegisterTransformWindowClassDirectly(System.String,ASEva.WindowClass,System.String)">
             \~English
             <summary>
-            (api:app=3.1.0) Register transformed window class directly
+            Register transformed window class directly
             </summary>
             <param name="windowClassID">Original window class's ID</param>
             <param name="transformWindowClass">Transformed window class object</param>
@@ -3037,7 +3037,7 @@
             <returns>Information of transformed window class</returns>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 直接注册分化窗口组件
+            直接注册分化窗口组件
             </summary>
             <param name="windowClassID">原窗口组件ID</param>
             <param name="transformWindowClass">分化窗口组件类</param>
@@ -3068,7 +3068,7 @@
             </summary>
             <param name="eventHandle">事件对象</param>
         </member>
-        <member name="M:ASEva.Agency.RemoveGeneration(System.DateTime,System.String)">
+        <member name="M:ASEva.Agency.RemoveGeneration(ASEva.SessionIdentifier,System.String)">
             \~English
             <summary>
             Remove generation and delete files to recycle bin
@@ -3085,16 +3085,16 @@
         <member name="M:ASEva.Agency.RemoveProcessorVideoReference(System.Int32)">
             \~English
             <summary>
-            (api:app=3.0.8) Remove video reference
+            Remove video reference
             </summary>
             <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
             \~Chinese
             <summary>
-            (api:app=3.0.8) 移除视频引用
+            移除视频引用
             </summary>
             <param name="videoChannel">视频通道，0~23对应A~X</param>
         </member>
-        <member name="M:ASEva.Agency.RemoveSession(System.DateTime,System.Boolean)">
+        <member name="M:ASEva.Agency.RemoveSession(ASEva.SessionIdentifier,System.Boolean)">
             \~English
             <summary>
             Remove session and delete files to recycle bin
@@ -3213,13 +3213,13 @@
         <member name="M:ASEva.Agency.SelectBusMessages(ASEva.SelectBusMessageHandler,System.Collections.Generic.List{System.String})">
             \~English
             <summary>
-            (api:app=3.0.6) Show a modal dialog to select multiple bus messages at once
+            Show a modal dialog to select multiple bus messages at once
             </summary>
             <param name="handler">Callback to handle bus message selection</param>
             <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
             \~Chinese
             <summary>
-            (api:app=3.0.6) 打开对话框一次性选择多个总线报文
+            打开对话框一次性选择多个总线报文
             </summary>
             <param name="handler">选中总线报文时调用的回调接口</param>
             <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
@@ -3287,14 +3287,14 @@
         <member name="M:ASEva.Agency.SendBusMessageBound(System.String,System.Nullable{System.UInt32})">
             \~English
             <summary>
-            (api:app=3.1.0) Transmit bound bus message, either periodically or once (only available in online mode)
+            Transmit bound bus message, either periodically or once (only available in online mode)
             </summary>
             <param name="messageID">Message ID of bound bus message</param>
             <param name="interval">Transmit period, in milliseconds (at least 10). If it is set to null, it is transmitted only once</param>
             <returns>Generated bus message data, null if not bound</returns>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 发送总线报文（该报文需设置绑定），可周期性发送，也可单次发送（仅在线模式可用）
+            发送总线报文（该报文需设置绑定），可周期性发送，也可单次发送（仅在线模式可用）
             </summary>
             <param name="messageID">绑定的报文ID</param>
             <param name="interval">报文发送周期，单位毫秒（至少为10），若设为null则只发送一次</param>
@@ -3331,7 +3331,7 @@
         <member name="M:ASEva.Agency.SendRawDataWithCPUTick(System.UInt64,System.String,System.Double[],System.Byte[])">
             \~English
             <summary>
-            (api:app=3.1.0) Transmitted received general raw data (only available in online mode)
+            Transmitted received general raw data (only available in online mode)
             </summary>
             <param name="cpuTick">CPU tick while data arriving</param>
             <param name="channelID">General raw data's channel ID, corresponding to the first column of input/raw/raw.csv</param>
@@ -3339,7 +3339,7 @@
             <param name="binary">Binary data</param>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 发送已获取的原始数据信息（仅在线模式可用）
+            发送已获取的原始数据信息（仅在线模式可用）
             </summary>
             <param name="cpuTick">数据的到达时CPU计数</param>
             <param name="channelID">原始数据协议名称，对应input/raw/raw.csv首列文字</param>
@@ -3622,7 +3622,7 @@
             <param name="id">原始数据通道ID</param>
             <param name="delay">延迟配置，单位毫秒</param>
         </member>
-        <member name="M:ASEva.Agency.SetSessionChecker(System.DateTime,System.Boolean)">
+        <member name="M:ASEva.Agency.SetSessionChecker(ASEva.SessionIdentifier,System.Boolean)">
             \~English
             <summary>
             Set session's check filter
@@ -3636,7 +3636,7 @@
             <param name="session">Session ID</param>
             <param name="check">是否框选</param>
         </member>
-        <member name="M:ASEva.Agency.SetSessionComment(System.DateTime,System.String)">
+        <member name="M:ASEva.Agency.SetSessionComment(ASEva.SessionIdentifier,System.String)">
             \~English
             <summary>
             Set session's comment
@@ -3650,7 +3650,7 @@
             <param name="session">Session ID</param>
             <param name="comment">Session的注释说明</param>
         </member>
-        <member name="M:ASEva.Agency.SetSessionHostSync(System.DateTime,System.Boolean)">
+        <member name="M:ASEva.Agency.SetSessionHostSync(ASEva.SessionIdentifier,System.Boolean)">
             \~English
             <summary>
             Set whether the host machine is synchronized with time server while the session is being recorded
@@ -3664,7 +3664,7 @@
             <param name="session">Session ID</param>
             <param name="hostSync">主机是否与授时服务器同步</param>
         </member>
-        <member name="M:ASEva.Agency.SetSessionProperties(System.DateTime,System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:ASEva.Agency.SetSessionProperties(ASEva.SessionIdentifier,System.Collections.Generic.Dictionary{System.String,System.String})">
             \~English
             <summary>
             Set session's properties
@@ -3767,14 +3767,14 @@
         <member name="M:ASEva.Agency.StartOnlineWithController(System.String,System.Boolean)">
             \~English
             <summary>
-            (api:app=3.1.0) Switch to online mode and start
+            Switch to online mode and start
             </summary>
             <param name="controllerName">Controller name, for exclusive control</param>
             <param name="previewOnly">Whether previewing, otherwise recording</param>
             <returns>Whether successful</returns>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 切换至在线模式并开始预览或采集
+            切换至在线模式并开始预览或采集
             </summary>
             <param name="controllerName">控制者名称，用于独占控制模式</param>
             <param name="previewOnly">是否为预览</param>
@@ -3835,7 +3835,7 @@
         <member name="M:ASEva.Agency.StartRemoteWithController(System.String,System.Boolean,System.UInt64)">
             \~English
             <summary>
-            (api:app=3.1.0) Switch to remote mode and start
+            Switch to remote mode and start
             </summary>
             <param name="controllerName">Controller name, for exclusive control</param>
             <param name="previewOnly">Whether previewing, otherwise recording</param>
@@ -3843,7 +3843,7 @@
             <returns>Whether successful</returns>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 切换至远程模式并开始预览或采集
+            切换至远程模式并开始预览或采集
             </summary>
             <param name="controllerName">控制者名称，用于独占控制模式</param>
             <param name="previewOnly">是否为预览</param>
@@ -3871,13 +3871,13 @@
         <member name="M:ASEva.Agency.StopRunningWithController(System.String)">
             \~English
             <summary>
-            (api:app=3.1.0) Stop the session
+            Stop the session
             </summary>
             <param name="controllerName">Controller name, for exclusive control</param>
             <returns>Whether successful</returns>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 停止Session
+            停止Session
             </summary>
             <param name="controllerName">控制者名称，用于独占控制模式</param>
             <returns>是否成功</returns>
@@ -3995,11 +3995,11 @@
         <member name="T:ASEva.AgencyAsync">
             \~English
             <summary>
-            (api:app=3.1.0) Include all main asynchronous APIs 
+            (api:app=3.2.0) Include all main asynchronous APIs 
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 集合了所有主要异步API
+            (api:app=3.2.0) 集合了所有主要异步API
             </summary>
         </member>
         <member name="M:ASEva.AgencyAsync.AddDataLayer(System.String)">
@@ -4382,7 +4382,7 @@
             <param name="channel">总线通道，1~16</param>
             <returns>延迟配置，单位毫秒</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetBusChannelsInfo(System.DateTime)">
+        <member name="M:ASEva.AgencyAsync.GetBusChannelsInfo(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Gets information about all bus channels of a specified session
@@ -4708,7 +4708,7 @@
             </summary>
             <returns>CPU时间，单位秒，返回0表示无效</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetCPUTimeModel(System.DateTime)">
+        <member name="M:ASEva.AgencyAsync.GetCPUTimeModel(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get session's CPU time model
@@ -4924,7 +4924,7 @@
             </summary>
             <returns>Generation ID列表</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetGenerationProcessStatus(System.DateTime,System.String)">
+        <member name="M:ASEva.AgencyAsync.GetGenerationProcessStatus(ASEva.SessionIdentifier,System.String)">
             \~English
             <summary>
             Get the status of generation with the specified generation ID and under the specified session
@@ -5010,7 +5010,7 @@
             </summary>
             <returns>所有全局变量的键</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetGNSSPosixTimeModel(System.DateTime)">
+        <member name="M:ASEva.AgencyAsync.GetGNSSPosixTimeModel(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get session's satellite posix time model
@@ -5024,7 +5024,7 @@
             <param name="session">Session ID</param>
             <returns>卫星Posix时间模型</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetGraphData(System.DateTime,System.Int32)">
+        <member name="M:ASEva.AgencyAsync.GetGraphData(ASEva.SessionIdentifier,System.Int32)">
             \~English
             <summary>
             Get graph's data
@@ -5092,7 +5092,7 @@
             <param name="graphID">图表报告ID</param>
             <returns>图表报告标题，若不存在则返回null</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetHostPosixTimeModel(System.DateTime)">
+        <member name="M:ASEva.AgencyAsync.GetHostPosixTimeModel(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get session's host machine posix time model
@@ -5178,7 +5178,7 @@
             </summary>
             <returns>许可证的详细信息</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetLocalDateTime(System.DateTime,System.Double,System.Boolean)">
+        <member name="M:ASEva.AgencyAsync.GetLocalDateTime(ASEva.SessionIdentifier,System.Double,System.Boolean)">
             \~English
             <summary>
             Convert time offset in session to local date and time
@@ -5484,7 +5484,7 @@
             </summary>
             <returns>场景标题表</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetSessionComment(System.DateTime)">
+        <member name="M:ASEva.AgencyAsync.GetSessionComment(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get session's comment
@@ -5510,7 +5510,7 @@
             </summary>
             <returns>session的筛选标志位表</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetSessionFolderName(System.DateTime)">
+        <member name="M:ASEva.AgencyAsync.GetSessionFolderName(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get the folder name of a session
@@ -5524,21 +5524,21 @@
             <param name="session">Session ID</param>
             <returns>文件夹名</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetSessionGenerations(System.DateTime)">
+        <member name="M:ASEva.AgencyAsync.GetSessionGenerations(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get all generations of the session under current data layer
             </summary>
-            <param name="sessionID">Session ID</param>
+            <param name="session">Session ID</param>
             <returns>Generation IDs</returns>
             \~Chinese
             <summary>
             获取当前层级下指定session下的所有generation ID
             </summary>
-            <param name="sessionID">Session ID</param>
+            <param name="session">Session ID</param>
             <returns>Generation ID列表</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetSessionHostSync(System.DateTime)">
+        <member name="M:ASEva.AgencyAsync.GetSessionHostSync(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get whether the host machine is synchronized with time server while the session is being recorded
@@ -5552,7 +5552,7 @@
             <param name="session">Session ID</param>
             <returns>主机是否与授时服务器同步</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetSessionLayer(System.DateTime)">
+        <member name="M:ASEva.AgencyAsync.GetSessionLayer(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get the data layer to which a session belongs
@@ -5566,7 +5566,7 @@
             <param name="session">Session ID</param>
             <returns>数据层级，其中'.'表示根路径下的session，'..'表示根路径即session</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetSessionLength(System.DateTime)">
+        <member name="M:ASEva.AgencyAsync.GetSessionLength(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get session's duration
@@ -5604,7 +5604,7 @@
             </summary>
             <returns>所有session的总时长</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetSessionProperties(System.DateTime)">
+        <member name="M:ASEva.AgencyAsync.GetSessionProperties(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get session's properties
@@ -5628,7 +5628,7 @@
             获取当前的session搜索关键字
             </summary>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetSessionTimeline(System.DateTime)">
+        <member name="M:ASEva.AgencyAsync.GetSessionTimeline(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get session's start time as a timeline point
@@ -5738,7 +5738,7 @@
             </summary>
             <returns>独立任务组件信息表，键为组件ID</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetUTCDateTime(System.DateTime,System.Double,System.Boolean)">
+        <member name="M:ASEva.AgencyAsync.GetUTCDateTime(ASEva.SessionIdentifier,System.Double,System.Boolean)">
             \~English
             <summary>
             Convert time offset in session to UTC date and time
@@ -5782,7 +5782,7 @@
             <param name="channel">视频通道，0~23</param>
             <returns>延迟配置，单位毫秒</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.GetVideoChannelsInfo(System.DateTime)">
+        <member name="M:ASEva.AgencyAsync.GetVideoChannelsInfo(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Gets information about all video channels of a specified session
@@ -6096,7 +6096,7 @@
             </summary>
             <param name="eventHandle">事件对象</param>
         </member>
-        <member name="M:ASEva.AgencyAsync.RemoveGeneration(System.DateTime,System.String)">
+        <member name="M:ASEva.AgencyAsync.RemoveGeneration(ASEva.SessionIdentifier,System.String)">
             \~English
             <summary>
             Remove generation and delete files to recycle bin
@@ -6110,7 +6110,7 @@
             <param name="session">Session ID</param>
             <param name="genID">Generation ID</param>
         </member>
-        <member name="M:ASEva.AgencyAsync.RemoveSession(System.DateTime,System.Boolean)">
+        <member name="M:ASEva.AgencyAsync.RemoveSession(ASEva.SessionIdentifier,System.Boolean)">
             \~English
             <summary>
             Remove session and delete files to recycle bin
@@ -6490,7 +6490,7 @@
             <param name="id">原始数据通道ID</param>
             <param name="delay">延迟配置，单位毫秒</param>
         </member>
-        <member name="M:ASEva.AgencyAsync.SetSessionChecker(System.DateTime,System.Boolean)">
+        <member name="M:ASEva.AgencyAsync.SetSessionChecker(ASEva.SessionIdentifier,System.Boolean)">
             \~English
             <summary>
             Set session's check filter
@@ -6504,7 +6504,7 @@
             <param name="session">Session ID</param>
             <param name="check">是否框选</param>
         </member>
-        <member name="M:ASEva.AgencyAsync.SetSessionComment(System.DateTime,System.String)">
+        <member name="M:ASEva.AgencyAsync.SetSessionComment(ASEva.SessionIdentifier,System.String)">
             \~English
             <summary>
             Set session's comment
@@ -6518,7 +6518,7 @@
             <param name="session">Session ID</param>
             <param name="comment">Session的注释说明</param>
         </member>
-        <member name="M:ASEva.AgencyAsync.SetSessionHostSync(System.DateTime,System.Boolean)">
+        <member name="M:ASEva.AgencyAsync.SetSessionHostSync(ASEva.SessionIdentifier,System.Boolean)">
             \~English
             <summary>
             Set whether the host machine is synchronized with time server while the session is being recorded
@@ -6532,7 +6532,7 @@
             <param name="session">Session ID</param>
             <param name="hostSync">主机是否与授时服务器同步</param>
         </member>
-        <member name="M:ASEva.AgencyAsync.SetSessionProperties(System.DateTime,System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:ASEva.AgencyAsync.SetSessionProperties(ASEva.SessionIdentifier,System.Collections.Generic.Dictionary{System.String,System.String})">
             \~English
             <summary>
             Set session's properties
@@ -7344,7 +7344,7 @@
             </summary>
             <returns>键为标题，值为版权声明</returns>
         </member>
-        <member name="M:ASEva.AgencyLocal.GetGenerationPath(System.DateTime,System.String)">
+        <member name="M:ASEva.AgencyLocal.GetGenerationPath(ASEva.SessionIdentifier,System.String)">
             \~English
             <summary>
             Get the path of a generation with the specified generation ID and under the specified session
@@ -7558,7 +7558,7 @@
             </summary>
             <returns>最近项目文件路径列表</returns>
         </member>
-        <member name="M:ASEva.AgencyLocal.GetSessionPath(System.DateTime)">
+        <member name="M:ASEva.AgencyLocal.GetSessionPath(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get the path of a session's data
@@ -7572,7 +7572,7 @@
             <param name="session">希望获取的session ID</param>
             <returns>Session数据的根路径，若不存在或不属于当前层级则返回null</returns>
         </member>
-        <member name="M:ASEva.AgencyLocal.GetSessionPublicDataPath(System.DateTime)">
+        <member name="M:ASEva.AgencyLocal.GetSessionPublicDataPath(ASEva.SessionIdentifier)">
             \~English
             <summary>
             Get the path of a session's public data
@@ -8234,7 +8234,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.1.6
+            version=3.2.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -9691,14 +9691,14 @@
             事件名称
             </summary>
         </member>
-        <member name="P:ASEva.EventData.Base">
+        <member name="P:ASEva.EventData.Session">
             \~English
             <summary>
-            The session that event belongs to
+            (api:app=3.2.0) The session that event belongs to
             </summary>
             \~Chinese
             <summary>
-            所属session ID
+            (api:app=3.2.0) 所属session ID
             </summary>
         </member>
         <member name="P:ASEva.EventData.Offset">
@@ -11667,17 +11667,17 @@
             </summary>
             <param name="point">样本点，若超出范围则不添加</param>
         </member>
-        <member name="M:ASEva.Graph.ScatterPointsData.AddPointWithTimeInfo(ASEva.FloatPoint,System.DateTime,System.Double)">
+        <member name="M:ASEva.Graph.ScatterPointsData.AddPointWithTimeInfo(ASEva.FloatPoint,ASEva.SessionIdentifier,System.Double)">
             \~English
             <summary>
-            Add sample point with time info
+            (api:app=3.2.0) Add sample point with time info
             </summary>
             <param name="point">Sample point, do nothing if over the range</param>
             <param name="session">The session that it belongs to</param>
             <param name="offset">The time offset of the sample in the session</param>
             \~Chinese
             <summary>
-            添加含时间信息的样本点
+            (api:app=3.2.0) 添加含时间信息的样本点
             </summary>
             <param name="point">样本点，若超出范围则不添加</param>
             <param name="session">样本点所在session</param>
@@ -11695,10 +11695,10 @@
             </summary>
             <returns>散点样本数组</returns>
         </member>
-        <member name="M:ASEva.Graph.ScatterPointsData.GetPointTimeInfo(System.Int32,System.DateTime@,System.Double@)">
+        <member name="M:ASEva.Graph.ScatterPointsData.GetPointTimeInfo(System.Int32,ASEva.SessionIdentifier@,System.Double@)">
             \~English
             <summary>
-            Get time info of a scatter point
+            (api:app=3.2.0) Get time info of a scatter point
             </summary>
             <param name="index">Index of scatter point</param>
             <param name="session">Output the session that it belongs to</param>
@@ -11706,7 +11706,7 @@
             <returns>Whether successful</returns>
             \~Chinese
             <summary>
-            获取某个散点样本的时间信息
+            (api:app=3.2.0) 获取某个散点样本的时间信息
             </summary>
             <param name="index">样本在数组中的序号</param>
             <param name="session">输出样本点所在session</param>
@@ -12767,26 +12767,26 @@
             默认构造函数
             </summary>
         </member>
-        <member name="M:ASEva.Sample.#ctor(System.DateTime,System.Double,System.Double)">
+        <member name="M:ASEva.Sample.#ctor(ASEva.SessionIdentifier,System.Double,System.Double)">
             \~English
             <summary>
-            Constructor based on time information
+            (api:app=3.2.0) Constructor based on time information
             </summary>
             <param name="session">The session that sample belongs to</param>
             <param name="offset">Time offset, in seconds</param>
             <param name="timeline">Timeline point</param>
             \~Chinese
             <summary>
-            按指定时间信息进行初始化
+            (api:app=3.2.0) 按指定时间信息进行初始化
             </summary>
             <param name="session">所属session ID</param>
             <param name="offset">时间偏置，单位秒</param>
             <param name="timeline">在时间线上的位置</param>
         </member>
-        <member name="M:ASEva.Sample.#ctor(System.DateTime,System.Double,ASEva.TimeOffsetSync,ASEva.IndependentTimeInfo,System.Double)">
+        <member name="M:ASEva.Sample.#ctor(ASEva.SessionIdentifier,System.Double,ASEva.TimeOffsetSync,ASEva.IndependentTimeInfo,System.Double)">
             \~English
             <summary>
-            (api:app=3.0.3) Constructor based on time information
+            (api:app=3.2.0) Constructor based on time information
             </summary>
             <param name="session">The session that sample belongs to</param>
             <param name="offset">Time offset, in seconds</param>
@@ -12795,7 +12795,7 @@
             <param name="timeline">Timeline point</param>
             \~Chinese
             <summary>
-            (api:app=3.0.3) 按指定时间信息进行初始化
+            (api:app=3.2.0) 按指定时间信息进行初始化
             </summary>
             <param name="session">所属session ID</param>
             <param name="offset">时间偏置，单位秒</param>
@@ -12803,10 +12803,10 @@
             <param name="timeInfo">Session无关时间信息</param>
             <param name="timeline">在时间线上的位置</param>
         </member>
-        <member name="M:ASEva.Sample.SetTime(System.DateTime,System.Double,ASEva.TimeOffsetSync,ASEva.IndependentTimeInfo,System.Double)">
+        <member name="M:ASEva.Sample.SetTime(ASEva.SessionIdentifier,System.Double,ASEva.TimeOffsetSync,ASEva.IndependentTimeInfo,System.Double)">
             \~English
             <summary>
-            (api:app=3.0.3) Set time information
+            (api:app=3.2.0) Set time information
             </summary>
             <param name="session">The session that sample belongs to</param>
             <param name="offset">Time offset, in seconds</param>
@@ -12815,7 +12815,7 @@
             <param name="timeline">Timeline point</param>
             \~Chinese
             <summary>
-            (api:app=3.0.3) 设置当前样本的时间戳和时间线位置
+            (api:app=3.2.0) 设置当前样本的时间戳和时间线位置
             </summary>
             <param name="session">所属session ID</param>
             <param name="offset">时间偏置，单位秒</param>
@@ -13041,7 +13041,7 @@
             <param name="targetTimeline">在时间线上的目标时间点</param>
             <returns>插值后的样本</returns>
         </member>
-        <member name="M:ASEva.Sample.SearchAndGetNearest(System.Collections.Generic.List{ASEva.Sample},System.Double,System.DateTime)">
+        <member name="M:ASEva.Sample.SearchAndGetNearest(System.Collections.Generic.List{ASEva.Sample},System.Double,ASEva.SessionIdentifier)">
             \~English
             <summary>
             Search in the sample buffer and get the nearest sample (time gap is 10 seconds)
@@ -13798,14 +13798,14 @@
         <member name="T:ASEva.Samples.SignalsData">
             \~English
             <summary>
-            (api:app=3.0.0) Input signal data (For one signal ID)
+            (api:app=3.2.0) Input signal data (For one signal ID)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 输入的信号数据列表（单个信号类别）
+            (api:app=3.2.0) 输入的信号数据列表（单个信号类别）
             </summary>
         </member>
-        <member name="P:ASEva.Samples.SignalsData.Base">
+        <member name="P:ASEva.Samples.SignalsData.Session">
             \~English
             <summary>
             The session that data belongs to
@@ -14975,14 +14975,14 @@
             场景ID
             </summary>
         </member>
-        <member name="P:ASEva.SceneData.BeginBase">
+        <member name="P:ASEva.SceneData.Session">
             \~English
             <summary>
-            The session that scenario belongs to
+            (api:app=3.2.0) The session that scenario belongs to
             </summary>
             \~Chinese
             <summary>
-            场景所属session ID
+            (api:app=3.2.0) 场景所属session ID
             </summary>
         </member>
         <member name="P:ASEva.SceneData.BeginOffset">
@@ -16246,11 +16246,11 @@
         <member name="T:ASEva.TimeWithSession">
             \~English
             <summary>
-            (api:app=3.0.0) Time in a session
+            (api:app=3.2.0) Time in a session
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 在session中的时间
+            (api:app=3.2.0) 在session中的时间
             </summary>
         </member>
         <member name="P:ASEva.TimeWithSession.Time">
@@ -20404,14 +20404,14 @@
         <member name="T:ASEva.Utility.SampleSync">
             \~English
             <summary>
-            (api:app=3.0.0) Sample synchronization
+            (api:app=3.2.0) Sample synchronization
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 样本同步
+            (api:app=3.2.0) 样本同步
             </summary>
         </member>
-        <member name="M:ASEva.Utility.SampleSync.Sync(System.Double,System.DateTime,System.Collections.Generic.List{System.Collections.Generic.List{ASEva.Sample}},System.Collections.Generic.List{ASEva.Sample}@)">
+        <member name="M:ASEva.Utility.SampleSync.Sync(System.Double,ASEva.SessionIdentifier,System.Collections.Generic.List{System.Collections.Generic.List{ASEva.Sample}},System.Collections.Generic.List{ASEva.Sample}@)">
             \~English
             <summary>
             Synchronize samples according to the target timeline point, output interpolated or nearest samples
@@ -20534,11 +20534,11 @@
         <member name="T:ASEva.Utility.SessionMeta">
             \~English
             <summary>
-            (api:app=3.0.0) Session's meta info
+            (api:app=3.2.0) Session's meta info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) Session的meta信息
+            (api:app=3.2.0) Session的meta信息
             </summary>
         </member>
         <member name="P:ASEva.Utility.SessionMeta.FilePath">
@@ -20711,7 +20711,7 @@
             卫星Posix时间模型的时间比例
             </summary>
         </member>
-        <member name="M:ASEva.Utility.SessionMeta.Create(System.String,System.DateTime,System.String,System.Nullable{System.Double},System.Nullable{System.DateTime},System.Double,System.Nullable{System.DateTime},System.Double,System.String,System.Collections.Generic.Dictionary{System.String,System.Version},System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:ASEva.Utility.SessionMeta.Create(System.String,ASEva.SessionIdentifier,System.String,System.Nullable{System.Double},System.Nullable{System.DateTime},System.Double,System.Nullable{System.DateTime},System.Double,System.String,System.Collections.Generic.Dictionary{System.String,System.Version},System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
             \~English
             <summary>
             Create session meta object (not write to file)
@@ -20749,7 +20749,7 @@
             <param name="pickProps">Session的截取属性列表</param>
             <returns>返回创建的对象</returns>
         </member>
-        <member name="M:ASEva.Utility.SessionMeta.Create(System.String,System.DateTime,System.String,System.Nullable{System.Double},ASEva.CPUTimeModel,ASEva.PosixTimeModel,ASEva.PosixTimeModel,System.Boolean,System.String,System.Collections.Generic.Dictionary{System.String,System.Version},System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+        <member name="M:ASEva.Utility.SessionMeta.Create(System.String,ASEva.SessionIdentifier,System.String,System.Nullable{System.Double},ASEva.CPUTimeModel,ASEva.PosixTimeModel,ASEva.PosixTimeModel,System.Boolean,System.String,System.Collections.Generic.Dictionary{System.String,System.Version},System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
             \~English
             <summary>
             Create session meta object (not write to file)
@@ -21333,15 +21333,15 @@
             [可选实现] 通知正在结束session
             </summary>
         </member>
-        <member name="M:ASEva.CommonWorkflow.OnEditRecordedSession(System.DateTime)">
+        <member name="M:ASEva.CommonWorkflow.OnEditRecordedSession(ASEva.SessionIdentifier)">
             \~English
             <summary>
-            [Optional][OK for modal] Edit the information of lately recorded session
+            (api:app=3.2.0) [Optional][OK for modal] Edit the information of lately recorded session
             </summary>
             <param name="recordSessionID">Lately recorded session's ID</param>
             \~Chinese
             <summary>
-            [可选实现][可含模态] 编辑新采集的session信息
+            (api:app=3.2.0) [可选实现][可含模态] 编辑新采集的session信息
             </summary>
             <param name="recordSessionID">新采集的session ID</param>
         </member>

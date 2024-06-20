@@ -29,13 +29,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// The session that scenario belongs to
+        /// (api:app=3.2.0) The session that scenario belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 场景所属session ID
+        /// (api:app=3.2.0) 场景所属session ID
         /// </summary>
-        public DateTime BeginBase { get; set; }
+        public SessionIdentifier Session { get; set; }
 
         /// \~English
         /// <summary>
@@ -93,7 +93,7 @@ namespace ASEva
         public void Clone(SceneData data)
         {
             SceneID = data.SceneID;
-            BeginBase = data.BeginBase;
+            Session = data.Session;
             BeginOffset = data.BeginOffset;
             TimeLength = data.TimeLength;
             PropertyValues = (string[])data.PropertyValues.Clone();

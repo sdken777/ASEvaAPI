@@ -10,11 +10,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Wrap ASEva.AgencyLocal and ASEva.AgencyAsync, you can use this class if not considering cross end
+    /// (api:app=3.2.0) Wrap ASEva.AgencyLocal and ASEva.AgencyAsync, you can use this class if not considering cross end
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 打包了 ASEva.AgencyLocal 和 ASEva.AgencyAsync ，不考虑跨端时可直接使用此类
+    /// (api:app=3.2.0) 打包了 ASEva.AgencyLocal 和 ASEva.AgencyAsync ，不考虑跨端时可直接使用此类
     /// </summary>
     public class Agency
     {
@@ -69,12 +69,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.0.8) Add video reference (only video with references will be sent to app layer's processors)
+        /// Add video reference (only video with references will be sent to app layer's processors)
         /// </summary>
         /// <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.0.8) 添加视频引用，在应用层的数据处理对象才可获得该通道的数据
+        /// 添加视频引用，在应用层的数据处理对象才可获得该通道的数据
         /// </summary>
         /// <param name="videoChannel">视频通道，0~23对应A~X</param>
         public static void AddProcessorVideoReference(int videoChannel)
@@ -307,14 +307,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.1.0) Create graph panel
+        /// Create graph panel
         /// </summary>
         /// <param name="graphType">Graph type</param>
         /// <param name="styleName">Style name, set to null to use the first style</param>
         /// <returns>Created graph panel, null if failed to create</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.1.0) 创建图表可视化面板
+        /// 创建图表可视化面板
         /// </summary>
         /// <param name="graphType">图表类型</param>
         /// <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
@@ -326,14 +326,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.1.0) Create graph panel
+        /// Create graph panel
         /// </summary>
         /// <param name="graphID">Graph ID</param>
         /// <param name="styleName">Style name, set to null to use the first style</param>
         /// <returns>Created graph panel, null if failed to create</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.1.0) 创建图表可视化面板
+        /// 创建图表可视化面板
         /// </summary>
         /// <param name="graphID">图表报告ID</param>
         /// <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
@@ -647,12 +647,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.0.7) Get GUI framework that the application based on
+        /// Get GUI framework that the application based on
         /// </summary>
         /// <returns>GUI framework</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.0.7) 获取应用程序基于的图形界面框架
+        /// 获取应用程序基于的图形界面框架
         /// </summary>
         /// <returns>图形界面框架</returns>
         public static ApplicationGUI GetAppGUI()
@@ -930,7 +930,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>该session的所有总线通道的信息，若不存在则返回null</returns>
-        public static BusChannelInfo[] GetBusChannelsInfo(DateTime session)
+        public static BusChannelInfo[] GetBusChannelsInfo(SessionIdentifier session)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetBusChannelsInfo(session).Result;
@@ -994,14 +994,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.1.0) Get information of message with the specified local ID at the specified channel
+        /// Get information of message with the specified local ID at the specified channel
         /// </summary>
         /// <param name="channel">Bus channel, ranges 1~16</param>
         /// <param name="localID">Local ID of bus message</param>
         /// <returns>Message information, null if not found</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.1.0) 获取指定通道上指定ID报文信息
+        /// 获取指定通道上指定ID报文信息
         /// </summary>
         /// <param name="channel">总线通道，1~16</param>
         /// <param name="localID">通道内的报文ID</param>
@@ -1443,7 +1443,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>CPU时间模型</returns>
-        public static CPUTimeModel GetCPUTimeModel(DateTime session)
+        public static CPUTimeModel GetCPUTimeModel(SessionIdentifier session)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetCPUTimeModel(session).Result;
@@ -1506,7 +1506,7 @@ namespace ASEva
         /// 获取采集模式(在线/远程)下正在预览或采集的session
         /// </summary>
         /// <returns>采集模式(在线/远程)下正在预览或采集的session，若非采集模式则返回null</returns>
-        public static DateTime? GetCurrentOnlineSession()
+        public static SessionIdentifier? GetCurrentOnlineSession()
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetCurrentOnlineSession().Result;
@@ -1730,7 +1730,7 @@ namespace ASEva
         /// 获取当前数据层级下筛选后的所有session
         /// </summary>
         /// <returns>Session ID列表</returns>
-        public static DateTime[] GetFilteredSessionList()
+        public static SessionIdentifier[] GetFilteredSessionList()
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetFilteredSessionList().Result;
@@ -1764,7 +1764,7 @@ namespace ASEva
         /// </summary>
         /// <param name="generation">目标generation</param>
         /// <returns>处理完毕的session ID列表</returns>
-        public static DateTime[] GetFinishedSessions(String generation)
+        public static SessionIdentifier[] GetFinishedSessions(String generation)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetFinishedSessions(generation).Result;
@@ -1815,7 +1815,7 @@ namespace ASEva
         /// <param name="session">希望获取generation所属的session ID</param>
         /// <param name="generation">希望获取的generation ID</param>
         /// <returns>Generation数据的根路径，若不存在或不属于当前层级则返回null</returns>
-        public static String GetGenerationPath(DateTime session, String generation)
+        public static String GetGenerationPath(SessionIdentifier session, String generation)
         {
             return AgencyLocal.GetGenerationPath(session, generation);
         }
@@ -1834,7 +1834,7 @@ namespace ASEva
         /// <param name="session">希望获取generation所属的session ID</param>
         /// <param name="generation">希望获取的generation ID</param>
         /// <returns>Generation的处理状态，若generation不存在则返回null</returns>
-        public static GenerationProcessStatus? GetGenerationProcessStatus(DateTime session, String generation)
+        public static GenerationProcessStatus? GetGenerationProcessStatus(SessionIdentifier session, String generation)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetGenerationProcessStatus(session, generation).Result;
@@ -1852,7 +1852,7 @@ namespace ASEva
         /// </summary>
         /// <param name="generationID">Generation ID</param>
         /// <returns>Session ID列表</returns>
-        public static DateTime[] GetGenerationSessions(String generationID)
+        public static SessionIdentifier[] GetGenerationSessions(String generationID)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetGenerationSessions(generationID).Result;
@@ -1987,7 +1987,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>卫星Posix时间模型</returns>
-        public static PosixTimeModel GetGNSSPosixTimeModel(DateTime session)
+        public static PosixTimeModel GetGNSSPosixTimeModel(SessionIdentifier session)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetGNSSPosixTimeModel(session).Result;
@@ -2007,7 +2007,7 @@ namespace ASEva
         /// <param name="session">想要获取图表的session ID</param>
         /// <param name="graphID">图表报告ID，通过 ASEva.GraphDefinition.GetID 获取</param>
         /// <returns>图表对象，若不存在或不属于当前层级则返回null</returns>
-        public static GraphData GetGraphData(DateTime session, int graphID)
+        public static GraphData GetGraphData(SessionIdentifier session, int graphID)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetGraphData(session, graphID).Result;
@@ -2065,13 +2065,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.1.0) Get all available style names for the specified graph ID
+        /// Get all available style names for the specified graph ID
         /// </summary>
         /// <param name="graphID">Graph ID</param>
         /// <returns>All available style names</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.1.0) 获取符合图表报告的所有可视化面板样式名
+        /// 获取符合图表报告的所有可视化面板样式名
         /// </summary>
         /// <param name="graphID">图表报告ID</param>
         /// <returns>可视化面板样式名列表</returns>
@@ -2082,13 +2082,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.1.0) Get all available style names for the specified graph type
+        /// Get all available style names for the specified graph type
         /// </summary>
         /// <param name="graphType">Graph type</param>
         /// <returns>All available style names</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.1.0) 获取符合图表报告的所有可视化面板样式名
+        /// 获取符合图表报告的所有可视化面板样式名
         /// </summary>
         /// <param name="graphType">图表类型</param>
         /// <returns>可视化面板样式名列表</returns>
@@ -2127,7 +2127,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>主机Posix时间模型</returns>
-        public static PosixTimeModel GetHostPosixTimeModel(DateTime session)
+        public static PosixTimeModel GetHostPosixTimeModel(SessionIdentifier session)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetHostPosixTimeModel(session).Result;
@@ -2244,7 +2244,7 @@ namespace ASEva
         /// <param name="timeOffset">时间偏置，单位秒</param>
         /// <param name="useGNSS">是否使用卫星Posix时间模型计算，否则使用主机Posix时间模型</param>
         /// <returns>对应的本地时间</returns>
-        public static DateTime? GetLocalDateTime(DateTime session, double timeOffset, bool useGNSS)
+        public static DateTime? GetLocalDateTime(SessionIdentifier session, double timeOffset, bool useGNSS)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetLocalDateTime(session, timeOffset, useGNSS).Result;
@@ -2713,7 +2713,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>Session的注释说明</returns>
-        public static String GetSessionComment(DateTime session)
+        public static String GetSessionComment(SessionIdentifier session)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetSessionComment(session).Result;
@@ -2729,7 +2729,7 @@ namespace ASEva
         /// 获取所有session的筛选标志位
         /// </summary>
         /// <returns>session的筛选标志位表</returns>
-        public static Dictionary<DateTime, SessionFilterFlags> GetSessionFilterTable()
+        public static Dictionary<SessionIdentifier, SessionFilterFlags> GetSessionFilterTable()
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetSessionFilterTable().Result;
@@ -2747,7 +2747,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>文件夹名</returns>
-        public static String GetSessionFolderName(DateTime session)
+        public static String GetSessionFolderName(SessionIdentifier session)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetSessionFolderName(session).Result;
@@ -2757,18 +2757,18 @@ namespace ASEva
         /// <summary>
         /// Get all generations of the session under current data layer
         /// </summary>
-        /// <param name="sessionID">Session ID</param>
+        /// <param name="session">Session ID</param>
         /// <returns>Generation IDs</returns>
         /// \~Chinese
         /// <summary>
         /// 获取当前层级下指定session下的所有generation ID
         /// </summary>
-        /// <param name="sessionID">Session ID</param>
+        /// <param name="session">Session ID</param>
         /// <returns>Generation ID列表</returns>
-        public static String[] GetSessionGenerations(DateTime sessionID)
+        public static String[] GetSessionGenerations(SessionIdentifier session)
         {
             if (!AgencyAsync.SyncMode) return null;
-            return AgencyAsync.GetSessionGenerations(sessionID).Result;
+            return AgencyAsync.GetSessionGenerations(session).Result;
         }
 
         /// \~English
@@ -2783,7 +2783,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>主机是否与授时服务器同步</returns>
-        public static bool GetSessionHostSync(DateTime session)
+        public static bool GetSessionHostSync(SessionIdentifier session)
         {
             if (!AgencyAsync.SyncMode) return false;
             return AgencyAsync.GetSessionHostSync(session).Result;
@@ -2801,7 +2801,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>数据层级，其中'.'表示根路径下的session，'..'表示根路径即session</returns>
-        public static String GetSessionLayer(DateTime session)
+        public static String GetSessionLayer(SessionIdentifier session)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetSessionLayer(session).Result;
@@ -2819,7 +2819,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>Session长度，单位秒，session不存在或不属于当前层级则返回null</returns>
-        public static double? GetSessionLength(DateTime session)
+        public static double? GetSessionLength(SessionIdentifier session)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetSessionLength(session).Result;
@@ -2835,7 +2835,7 @@ namespace ASEva
         /// 获取当前数据层级下的所有session
         /// </summary>
         /// <returns>Session ID列表</returns>
-        public static DateTime[] GetSessionList()
+        public static SessionIdentifier[] GetSessionList()
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetSessionList().Result;
@@ -2869,7 +2869,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">希望获取的session ID</param>
         /// <returns>Session数据的根路径，若不存在或不属于当前层级则返回null</returns>
-        public static String GetSessionPath(DateTime session)
+        public static String GetSessionPath(SessionIdentifier session)
         {
             return AgencyLocal.GetSessionPath(session);
         }
@@ -2886,7 +2886,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>Session的属性表</returns>
-        public static Dictionary<String, String> GetSessionProperties(DateTime session)
+        public static Dictionary<String, String> GetSessionProperties(SessionIdentifier session)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetSessionProperties(session).Result;
@@ -2904,7 +2904,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">希望获取的session ID</param>
         /// <returns>Session公共数据的根路径，若不存在或不属于当前层级则返回null</returns>
-        public static String GetSessionPublicDataPath(DateTime session)
+        public static String GetSessionPublicDataPath(SessionIdentifier session)
         {
             return AgencyLocal.GetSessionPublicDataPath(session);
         }
@@ -2935,7 +2935,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>在时间线上的开始时间点，session不存在或不属于当前层级则返回null</returns>
-        public static double? GetSessionTimeline(DateTime session)
+        public static double? GetSessionTimeline(SessionIdentifier session)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetSessionTimeline(session).Result;
@@ -3111,7 +3111,7 @@ namespace ASEva
         /// <param name="timeOffset">时间偏置，单位秒</param>
         /// <param name="useGNSS">是否使用卫星Posix时间模型计算，否则使用主机Posix时间模型</param>
         /// <returns>对应的UTC时间</returns>
-        public static DateTime? GetUTCDateTime(DateTime session, double timeOffset, bool useGNSS)
+        public static DateTime? GetUTCDateTime(SessionIdentifier session, double timeOffset, bool useGNSS)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetUTCDateTime(session, timeOffset, useGNSS).Result;
@@ -3162,7 +3162,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>该session的所有视频通道的信息，若不存在则返回null</returns>
-        public static VideoChannelInfo[] GetVideoChannelsInfo(DateTime session)
+        public static VideoChannelInfo[] GetVideoChannelsInfo(SessionIdentifier session)
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetVideoChannelsInfo(session).Result;
@@ -3218,7 +3218,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.0.5) Get the nearest video frame data from the specified time
+        /// Get the nearest video frame data from the specified time
         /// </summary>
         /// <param name="channel">Video channel, ranges 0~23</param>
         /// <param name="timeline">Target timeline point, in seconds</param>
@@ -3231,7 +3231,7 @@ namespace ASEva
         /// <returns>Video frame data, size is determined by "mode" and "clip", null if failed to query</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.0.5) 获取距离指定时间最近的视频帧数据
+        /// 获取距离指定时间最近的视频帧数据
         /// </summary>
         /// <param name="channel">视频通道，0~23</param>
         /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
@@ -3258,7 +3258,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.0.5) Get the nearest thumbnail data from the specified time
+        /// Get the nearest thumbnail data from the specified time
         /// </summary>
         /// <param name="channel">Video channel, ranges 0~23</param>
         /// <param name="timeline">Target timeline point, in seconds</param>
@@ -3267,7 +3267,7 @@ namespace ASEva
         /// <returns>Thumbnail data, null if failed to query. The width is fixed to 80</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.0.5) 获取距离指定时间最近的缩略图数据
+        /// 获取距离指定时间最近的缩略图数据
         /// </summary>
         /// <param name="channel">视频通道，0~23</param>
         /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
@@ -3282,14 +3282,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.0.5) Get the video raw size at the specified time at the specified channel
+        /// Get the video raw size at the specified time at the specified channel
         /// </summary>
         /// <param name="channel">Video channel, ranges 0~23</param>
         /// <param name="timeline">Target timeline point, in seconds</param>
         /// <returns>Raw size, null if no data</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.0.5) 获取指定通道在指定时间上的视频帧的原始尺寸
+        /// 获取指定通道在指定时间上的视频帧的原始尺寸
         /// </summary>
         /// <param name="channel">视频通道，0~23</param>
         /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
@@ -3785,14 +3785,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.1.0) Register graph panel type for the specified graph type
+        /// Register graph panel type for the specified graph type
         /// </summary>
         /// <param name="graphType">Graph type</param>
         /// <param name="styleName">Style name to register</param>
         /// <param name="panelType">Graph panel type, which should be derived from UI framework's control base class, and implement ASEva.GraphPanel </param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.1.0) 注册针对指定图表类型的可视化面板
+        /// 注册针对指定图表类型的可视化面板
         /// </summary>
         /// <param name="graphType">指定图表类型</param>
         /// <param name="styleName">面板样式名</param>
@@ -3804,14 +3804,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.1.0) Register graph panel type for the specified graph ID (higher priority than graph type)
+        /// Register graph panel type for the specified graph ID (higher priority than graph type)
         /// </summary>
         /// <param name="graphID">Graph ID</param>
         /// <param name="styleName">Style name to register</param>
         /// <param name="panelType">Graph panel type, which should be derived from UI framework's control base class, and implement ASEva.GraphPanel </param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.1.0) 注册针对指定图表ID的可视化面板（比按图表类型注册的优先级更高）
+        /// 注册针对指定图表ID的可视化面板（比按图表类型注册的优先级更高）
         /// </summary>
         /// <param name="graphID">图表报告ID</param>
         /// <param name="styleName">面板样式名</param>
@@ -3842,7 +3842,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.1.0) Register transformed dialog class directly
+        /// Register transformed dialog class directly
         /// </summary>
         /// <param name="dialogClassID">Original dialog class's ID</param>
         /// <param name="transformDialogClass">Transformed dialog class object</param>
@@ -3850,7 +3850,7 @@ namespace ASEva
         /// <returns>Information of transformed dialog class</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.1.0) 直接注册分化对话框组件
+        /// 直接注册分化对话框组件
         /// </summary>
         /// <param name="dialogClassID">原对话框组件ID</param>
         /// <param name="transformDialogClass">分化对话框组件类</param>
@@ -3882,7 +3882,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.1.0) Register transformed window class directly
+        /// Register transformed window class directly
         /// </summary>
         /// <param name="windowClassID">Original window class's ID</param>
         /// <param name="transformWindowClass">Transformed window class object</param>
@@ -3890,7 +3890,7 @@ namespace ASEva
         /// <returns>Information of transformed window class</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.1.0) 直接注册分化窗口组件
+        /// 直接注册分化窗口组件
         /// </summary>
         /// <param name="windowClassID">原窗口组件ID</param>
         /// <param name="transformWindowClass">分化窗口组件类</param>
@@ -3943,19 +3943,19 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="genID">Generation ID</param>
-        public static void RemoveGeneration(DateTime session, String genID)
+        public static void RemoveGeneration(SessionIdentifier session, String genID)
         {
             AgencyAsync.RemoveGeneration(session, genID);
         }
 
         /// \~English
         /// <summary>
-        /// (api:app=3.0.8) Remove video reference
+        /// Remove video reference
         /// </summary>
         /// <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.0.8) 移除视频引用
+        /// 移除视频引用
         /// </summary>
         /// <param name="videoChannel">视频通道，0~23对应A~X</param>
         public static void RemoveProcessorVideoReference(int videoChannel)
@@ -3977,7 +3977,7 @@ namespace ASEva
         /// <param name="session">Session ID</param>
         /// <param name="force">是否强制移除</param>
         /// <returns>是否成功移除</returns>
-        public static bool RemoveSession(DateTime session, bool force)
+        public static bool RemoveSession(SessionIdentifier session, bool force)
         {
             if (!AgencyAsync.SyncMode) return false;
             return AgencyAsync.RemoveSession(session, force).Result;
@@ -4114,13 +4114,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.0.6) Show a modal dialog to select multiple bus messages at once
+        /// Show a modal dialog to select multiple bus messages at once
         /// </summary>
         /// <param name="handler">Callback to handle bus message selection</param>
         /// <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.0.6) 打开对话框一次性选择多个总线报文
+        /// 打开对话框一次性选择多个总线报文
         /// </summary>
         /// <param name="handler">选中总线报文时调用的回调接口</param>
         /// <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
@@ -4205,14 +4205,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.1.0) Transmit bound bus message, either periodically or once (only available in online mode)
+        /// Transmit bound bus message, either periodically or once (only available in online mode)
         /// </summary>
         /// <param name="messageID">Message ID of bound bus message</param>
         /// <param name="interval">Transmit period, in milliseconds (at least 10). If it is set to null, it is transmitted only once</param>
         /// <returns>Generated bus message data, null if not bound</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.1.0) 发送总线报文（该报文需设置绑定），可周期性发送，也可单次发送（仅在线模式可用）
+        /// 发送总线报文（该报文需设置绑定），可周期性发送，也可单次发送（仅在线模式可用）
         /// </summary>
         /// <param name="messageID">绑定的报文ID</param>
         /// <param name="interval">报文发送周期，单位毫秒（至少为10），若设为null则只发送一次</param>
@@ -4259,7 +4259,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.1.0) Transmitted received general raw data (only available in online mode)
+        /// Transmitted received general raw data (only available in online mode)
         /// </summary>
         /// <param name="cpuTick">CPU tick while data arriving</param>
         /// <param name="channelID">General raw data's channel ID, corresponding to the first column of input/raw/raw.csv</param>
@@ -4267,7 +4267,7 @@ namespace ASEva
         /// <param name="binary">Binary data</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.1.0) 发送已获取的原始数据信息（仅在线模式可用）
+        /// 发送已获取的原始数据信息（仅在线模式可用）
         /// </summary>
         /// <param name="cpuTick">数据的到达时CPU计数</param>
         /// <param name="channelID">原始数据协议名称，对应input/raw/raw.csv首列文字</param>
@@ -4627,7 +4627,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="check">是否框选</param>
-        public static void SetSessionChecker(DateTime session, bool check)
+        public static void SetSessionChecker(SessionIdentifier session, bool check)
         {
             AgencyAsync.SetSessionChecker(session, check);
         }
@@ -4644,7 +4644,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="comment">Session的注释说明</param>
-        public static void SetSessionComment(DateTime session, String comment)
+        public static void SetSessionComment(SessionIdentifier session, String comment)
         {
             AgencyAsync.SetSessionComment(session, comment);
         }
@@ -4661,7 +4661,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="hostSync">主机是否与授时服务器同步</param>
-        public static void SetSessionHostSync(DateTime session, bool hostSync)
+        public static void SetSessionHostSync(SessionIdentifier session, bool hostSync)
         {
             AgencyAsync.SetSessionHostSync(session, hostSync);
         }
@@ -4678,7 +4678,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="properties">Session的属性表</param>
-        public static void SetSessionProperties(DateTime session, Dictionary<String, String> properties)
+        public static void SetSessionProperties(SessionIdentifier session, Dictionary<String, String> properties)
         {
             AgencyAsync.SetSessionProperties(session, properties);
         }
@@ -4790,14 +4790,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.1.0) Switch to online mode and start
+        /// Switch to online mode and start
         /// </summary>
         /// <param name="controllerName">Controller name, for exclusive control</param>
         /// <param name="previewOnly">Whether previewing, otherwise recording</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.1.0) 切换至在线模式并开始预览或采集
+        /// 切换至在线模式并开始预览或采集
         /// </summary>
         /// <param name="controllerName">控制者名称，用于独占控制模式</param>
         /// <param name="previewOnly">是否为预览</param>
@@ -4873,7 +4873,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.1.0) Switch to remote mode and start
+        /// Switch to remote mode and start
         /// </summary>
         /// <param name="controllerName">Controller name, for exclusive control</param>
         /// <param name="previewOnly">Whether previewing, otherwise recording</param>
@@ -4881,7 +4881,7 @@ namespace ASEva
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.1.0) 切换至远程模式并开始预览或采集
+        /// 切换至远程模式并开始预览或采集
         /// </summary>
         /// <param name="controllerName">控制者名称，用于独占控制模式</param>
         /// <param name="previewOnly">是否为预览</param>
@@ -4917,13 +4917,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.1.0) Stop the session
+        /// Stop the session
         /// </summary>
         /// <param name="controllerName">Controller name, for exclusive control</param>
         /// <returns>Whether successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.1.0) 停止Session
+        /// 停止Session
         /// </summary>
         /// <param name="controllerName">控制者名称，用于独占控制模式</param>
         /// <returns>是否成功</returns>

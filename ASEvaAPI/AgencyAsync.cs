@@ -41,7 +41,7 @@ namespace ASEva
         Task<int[]> GetAvailableVideoChannels();
         Task<BufferRange> GetBufferRange();
         Task<double> GetBusChannelDelayConfig(int channel);
-        Task<BusChannelInfo[]> GetBusChannelsInfo(DateTime session);
+        Task<BusChannelInfo[]> GetBusChannelsInfo(SessionIdentifier session);
         Task<bool> GetBusChannelStatus(int channel/* 1~16 */, uint? toleranceMillisecond);
         Task<Dictionary<BusDeviceID, BusDeviceInfo>> GetBusDevices();
         Task<float> GetBusMessageFPS(int channel, uint localID);
@@ -65,10 +65,10 @@ namespace ASEva
         Task<ulong> GetCPUTick();
         Task<ulong> GetCPUTicksPerSecond();
         Task<double> GetCPUTime();
-        Task<CPUTimeModel> GetCPUTimeModel(DateTime session);
+        Task<CPUTimeModel> GetCPUTimeModel(SessionIdentifier session);
         Task<String> GetCurrentDataGeneration();
         Task<String> GetCurrentDataLayer();
-        Task<DateTime?> GetCurrentOnlineSession();
+        Task<SessionIdentifier?> GetCurrentOnlineSession();
         Task<String> GetCurrentSessionGUID();
         Task<String[]> GetDataLayers();
         Task<Dictionary<String, DeviceClassInfo>> GetDeviceClassTable();
@@ -77,31 +77,31 @@ namespace ASEva
         Task<object[]> GetEventHandles();
         Task<EventInfo> GetEventInfo(object eventHandle);
         Task<String[]> GetEventTypeNames();
-        Task<DateTime[]> GetFilteredSessionList();
+        Task<SessionIdentifier[]> GetFilteredSessionList();
         Task<double> GetFilteredSessionListTotalLength();
-        Task<DateTime[]> GetFinishedSessions(String generation);
+        Task<SessionIdentifier[]> GetFinishedSessions(String generation);
         Task<Dictionary<String, String>> GetFrameworkThirdPartyNotices();
         Task<String[]> GetGenerationList();
-        Task<GenerationProcessStatus?> GetGenerationProcessStatus(DateTime session, String generation);
-        Task<DateTime[]> GetGenerationSessions(String generationID);
+        Task<GenerationProcessStatus?> GetGenerationProcessStatus(SessionIdentifier session, String generation);
+        Task<SessionIdentifier[]> GetGenerationSessions(String generationID);
         Task<String> GetGlobalParameter(String key, String defaultValue);
         Task<String[]> GetGlobalParameterKeys();
         Task<String> GetGlobalVariable(String key, String defaultValue);
         Task<String[]> GetGlobalVariableKeys();
-        Task<PosixTimeModel> GetGNSSPosixTimeModel(DateTime session);
-        Task<GraphData> GetGraphData(DateTime session, int graphID);
+        Task<PosixTimeModel> GetGNSSPosixTimeModel(SessionIdentifier session);
+        Task<GraphData> GetGraphData(SessionIdentifier session, int graphID);
         Task<GraphicCardInfo[]> GetGraphicCardInfos();
         Task<int[]> GetGraphIDList();
         Task<int?> GetGraphIDWithTitle(String title);
         Task<String> GetGraphTitle(int graphID);
-        Task<PosixTimeModel> GetHostPosixTimeModel(DateTime session);
+        Task<PosixTimeModel> GetHostPosixTimeModel(SessionIdentifier session);
         Task<double> GetInterestTarget();
         Task<double> GetInterestTime();
         Task<DateTime?> GetInterestTimestamp();
         Task<DateTime?> GetInternetNTPTime();
         Task<int[]> GetLicensedFunctionIndices();
         Task<String> GetLicenseInfo();
-        Task<DateTime?> GetLocalDateTime(DateTime session, double timeOffset, bool useGNSS);
+        Task<DateTime?> GetLocalDateTime(SessionIdentifier session, double timeOffset, bool useGNSS);
         Task<LogMessage[]> GetLogMessages();
         Task<String[]> GetManualTriggerNames();
         Task<String> GetManualTriggerName(int index);
@@ -123,18 +123,18 @@ namespace ASEva
         Task<List<String>> GetSampleTitle(String channelID);
         Task<String[]> GetSceneIDList();
         Task<Dictionary<String, SceneTitle>> GetSceneTitleTable();
-        Task<String> GetSessionComment(DateTime session);
-        Task<Dictionary<DateTime, SessionFilterFlags>> GetSessionFilterTable();
-        Task<String> GetSessionFolderName(DateTime session);
-        Task<String[]> GetSessionGenerations(DateTime sessionID);
-        Task<bool> GetSessionHostSync(DateTime session);
-        Task<String> GetSessionLayer(DateTime session);
-        Task<double?> GetSessionLength(DateTime session);
-        Task<DateTime[]> GetSessionList();
+        Task<String> GetSessionComment(SessionIdentifier session);
+        Task<Dictionary<SessionIdentifier, SessionFilterFlags>> GetSessionFilterTable();
+        Task<String> GetSessionFolderName(SessionIdentifier session);
+        Task<String[]> GetSessionGenerations(SessionIdentifier session);
+        Task<bool> GetSessionHostSync(SessionIdentifier session);
+        Task<String> GetSessionLayer(SessionIdentifier session);
+        Task<double?> GetSessionLength(SessionIdentifier session);
+        Task<SessionIdentifier[]> GetSessionList();
         Task<double> GetSessionListTotalLength();
-        Task<Dictionary<String, String>> GetSessionProperties(DateTime session);
+        Task<Dictionary<String, String>> GetSessionProperties(SessionIdentifier session);
         Task<String> GetSessionSearchKey();
-        Task<double?> GetSessionTimeline(DateTime session);
+        Task<double?> GetSessionTimeline(SessionIdentifier session);
         Task<String> GetSignalName(String signalID, bool fullName);
         Task<String[]> GetSignalNamesOfBusMessage(String messageID);
         Task<SignalTreeNode[]> GetSignalTree();
@@ -142,10 +142,10 @@ namespace ASEva
         Task<String> GetSystemStatusDetails(SystemStatus status);
         Task<TaskClassInfo> GetTaskClassInfo(String taskClassID);
         Task<Dictionary<String, TaskClassInfo>> GetTaskClassTable();
-        Task<DateTime?> GetUTCDateTime(DateTime session, double timeOffset, bool useGNSS);
+        Task<DateTime?> GetUTCDateTime(SessionIdentifier session, double timeOffset, bool useGNSS);
         Task<Dictionary<String, Version>> GetVersionTable();
         Task<double> GetVideoChannelDelayConfig(int channel);
-        Task<VideoChannelInfo[]> GetVideoChannelsInfo(DateTime session);
+        Task<VideoChannelInfo[]> GetVideoChannelsInfo(SessionIdentifier session);
         Task<(bool, double[], double[])> GetVideoChannelStatus(int channel, uint? toleranceMillisecond);
         Task<Dictionary<VideoDeviceID, VideoDeviceInfo>> GetVideoDevices();
         Task<(CommonImage, Timestamp?, CameraInfo)> GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha);
@@ -167,8 +167,8 @@ namespace ASEva
         Task RefreshGenerations();
         Task RefreshSessions();
         Task RemoveEvent(object eventHandle);
-        Task RemoveGeneration(DateTime session, String genID);
-        Task<bool> RemoveSession(DateTime session, bool force);
+        Task RemoveGeneration(SessionIdentifier session, String genID);
+        Task<bool> RemoveSession(SessionIdentifier session, bool force);
         Task RemoveSignalReference(String signalID);
         Task ResetGPUDecoderTestResults();
         Task RunConsole(object caller, string consoleClassID);
@@ -195,10 +195,10 @@ namespace ASEva
         Task SetManualTriggerName(int index, String name);
         Task SetModuleConfig(object caller, String classID, String config);
         Task SetRawChannelDelayConfig(String id, double delay);
-        Task SetSessionChecker(DateTime session, bool check);
-        Task SetSessionComment(DateTime session, String comment);
-        Task SetSessionHostSync(DateTime session, bool hostSync);
-        Task SetSessionProperties(DateTime session, Dictionary<String, String> properties);
+        Task SetSessionChecker(SessionIdentifier session, bool check);
+        Task SetSessionComment(SessionIdentifier session, String comment);
+        Task SetSessionHostSync(SessionIdentifier session, bool hostSync);
+        Task SetSessionProperties(SessionIdentifier session, Dictionary<String, String> properties);
         Task SetSessionSearchKeyword(String keyword);
         Task SetTargetReplaySpeed(double speed);
         Task SetVideoChannelDelayConfig(int channel, double delay);
@@ -218,11 +218,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.1.0) Include all main asynchronous APIs 
+    /// (api:app=3.2.0) Include all main asynchronous APIs 
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.1.0) 集合了所有主要异步API
+    /// (api:app=3.2.0) 集合了所有主要异步API
     /// </summary>
     public class AgencyAsync
     {
@@ -726,7 +726,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>该session的所有总线通道的信息，若不存在则返回null</returns>
-        public static Task<BusChannelInfo[]> GetBusChannelsInfo(DateTime session)
+        public static Task<BusChannelInfo[]> GetBusChannelsInfo(SessionIdentifier session)
         {
             return Handler.GetBusChannelsInfo(session);
         }
@@ -1125,7 +1125,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>CPU时间模型</returns>
-        public static Task<CPUTimeModel> GetCPUTimeModel(DateTime session)
+        public static Task<CPUTimeModel> GetCPUTimeModel(SessionIdentifier session)
         {
             return Handler.GetCPUTimeModel(session);
         }
@@ -1170,7 +1170,7 @@ namespace ASEva
         /// 获取采集模式(在线/远程)下正在预览或采集的session
         /// </summary>
         /// <returns>采集模式(在线/远程)下正在预览或采集的session，若非采集模式则返回null</returns>
-        public static Task<DateTime?> GetCurrentOnlineSession()
+        public static Task<SessionIdentifier?> GetCurrentOnlineSession()
         {
             return Handler.GetCurrentOnlineSession();
         }
@@ -1313,7 +1313,7 @@ namespace ASEva
         /// 获取当前数据层级下筛选后的所有session
         /// </summary>
         /// <returns>Session ID列表</returns>
-        public static Task<DateTime[]> GetFilteredSessionList()
+        public static Task<SessionIdentifier[]> GetFilteredSessionList()
         {
             return Handler.GetFilteredSessionList();
         }
@@ -1345,7 +1345,7 @@ namespace ASEva
         /// </summary>
         /// <param name="generation">目标generation</param>
         /// <returns>处理完毕的session ID列表</returns>
-        public static Task<DateTime[]> GetFinishedSessions(String generation)
+        public static Task<SessionIdentifier[]> GetFinishedSessions(String generation)
         {
             return Handler.GetFinishedSessions(generation);
         }
@@ -1394,7 +1394,7 @@ namespace ASEva
         /// <param name="session">希望获取generation所属的session ID</param>
         /// <param name="generation">希望获取的generation ID</param>
         /// <returns>Generation的处理状态，若generation不存在则返回null</returns>
-        public static Task<GenerationProcessStatus?> GetGenerationProcessStatus(DateTime session, String generation)
+        public static Task<GenerationProcessStatus?> GetGenerationProcessStatus(SessionIdentifier session, String generation)
         {
             return Handler.GetGenerationProcessStatus(session, generation);
         }
@@ -1411,7 +1411,7 @@ namespace ASEva
         /// </summary>
         /// <param name="generationID">Generation ID</param>
         /// <returns>Session ID列表</returns>
-        public static Task<DateTime[]> GetGenerationSessions(String generationID)
+        public static Task<SessionIdentifier[]> GetGenerationSessions(String generationID)
         {
             return Handler.GetGenerationSessions(generationID);
         }
@@ -1496,7 +1496,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>卫星Posix时间模型</returns>
-        public static Task<PosixTimeModel> GetGNSSPosixTimeModel(DateTime session)
+        public static Task<PosixTimeModel> GetGNSSPosixTimeModel(SessionIdentifier session)
         {
             return Handler.GetGNSSPosixTimeModel(session);
         }
@@ -1515,7 +1515,7 @@ namespace ASEva
         /// <param name="session">想要获取图表的session ID</param>
         /// <param name="graphID">图表报告ID，通过 ASEva.GraphDefinition.GetID 获取</param>
         /// <returns>图表对象，若不存在或不属于当前层级则返回null</returns>
-        public static Task<GraphData> GetGraphData(DateTime session, int graphID)
+        public static Task<GraphData> GetGraphData(SessionIdentifier session, int graphID)
         {
             return Handler.GetGraphData(session, graphID);
         }
@@ -1596,7 +1596,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>主机Posix时间模型</returns>
-        public static Task<PosixTimeModel> GetHostPosixTimeModel(DateTime session)
+        public static Task<PosixTimeModel> GetHostPosixTimeModel(SessionIdentifier session)
         {
             return Handler.GetHostPosixTimeModel(session);
         }
@@ -1707,7 +1707,7 @@ namespace ASEva
         /// <param name="timeOffset">时间偏置，单位秒</param>
         /// <param name="useGNSS">是否使用卫星Posix时间模型计算，否则使用主机Posix时间模型</param>
         /// <returns>对应的本地时间</returns>
-        public static Task<DateTime?> GetLocalDateTime(DateTime session, double timeOffset, bool useGNSS)
+        public static Task<DateTime?> GetLocalDateTime(SessionIdentifier session, double timeOffset, bool useGNSS)
         {
             return Handler.GetLocalDateTime(session, timeOffset, useGNSS);
         }
@@ -2075,7 +2075,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>Session的注释说明</returns>
-        public static Task<String> GetSessionComment(DateTime session)
+        public static Task<String> GetSessionComment(SessionIdentifier session)
         {
             return Handler.GetSessionComment(session);
         }
@@ -2090,7 +2090,7 @@ namespace ASEva
         /// 获取所有session的筛选标志位
         /// </summary>
         /// <returns>session的筛选标志位表</returns>
-        public static Task<Dictionary<DateTime, SessionFilterFlags>> GetSessionFilterTable()
+        public static Task<Dictionary<SessionIdentifier, SessionFilterFlags>> GetSessionFilterTable()
         {
             return Handler.GetSessionFilterTable();
         }
@@ -2107,7 +2107,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>文件夹名</returns>
-        public static Task<String> GetSessionFolderName(DateTime session)
+        public static Task<String> GetSessionFolderName(SessionIdentifier session)
         {
             return Handler.GetSessionFolderName(session);
         }
@@ -2116,17 +2116,17 @@ namespace ASEva
         /// <summary>
         /// Get all generations of the session under current data layer
         /// </summary>
-        /// <param name="sessionID">Session ID</param>
+        /// <param name="session">Session ID</param>
         /// <returns>Generation IDs</returns>
         /// \~Chinese
         /// <summary>
         /// 获取当前层级下指定session下的所有generation ID
         /// </summary>
-        /// <param name="sessionID">Session ID</param>
+        /// <param name="session">Session ID</param>
         /// <returns>Generation ID列表</returns>
-        public static Task<String[]> GetSessionGenerations(DateTime sessionID)
+        public static Task<String[]> GetSessionGenerations(SessionIdentifier session)
         {
-            return Handler.GetSessionGenerations(sessionID);
+            return Handler.GetSessionGenerations(session);
         }
 
         /// \~English
@@ -2141,7 +2141,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>主机是否与授时服务器同步</returns>
-        public static Task<bool> GetSessionHostSync(DateTime session)
+        public static Task<bool> GetSessionHostSync(SessionIdentifier session)
         {
             return Handler.GetSessionHostSync(session);
         }
@@ -2158,7 +2158,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>数据层级，其中'.'表示根路径下的session，'..'表示根路径即session</returns>
-        public static Task<String> GetSessionLayer(DateTime session)
+        public static Task<String> GetSessionLayer(SessionIdentifier session)
         {
             return Handler.GetSessionLayer(session);
         }
@@ -2175,7 +2175,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>Session长度，单位秒，session不存在或不属于当前层级则返回null</returns>
-        public static Task<double?> GetSessionLength(DateTime session)
+        public static Task<double?> GetSessionLength(SessionIdentifier session)
         {
             return Handler.GetSessionLength(session);
         }
@@ -2190,7 +2190,7 @@ namespace ASEva
         /// 获取当前数据层级下的所有session
         /// </summary>
         /// <returns>Session ID列表</returns>
-        public static Task<DateTime[]> GetSessionList()
+        public static Task<SessionIdentifier[]> GetSessionList()
         {
             return Handler.GetSessionList();
         }
@@ -2222,7 +2222,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>Session的属性表</returns>
-        public static Task<Dictionary<String, String>> GetSessionProperties(DateTime session)
+        public static Task<Dictionary<String, String>> GetSessionProperties(SessionIdentifier session)
         {
             return Handler.GetSessionProperties(session);
         }
@@ -2252,7 +2252,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>在时间线上的开始时间点，session不存在或不属于当前层级则返回null</returns>
-        public static Task<double?> GetSessionTimeline(DateTime session)
+        public static Task<double?> GetSessionTimeline(SessionIdentifier session)
         {
             return Handler.GetSessionTimeline(session);
         }
@@ -2390,7 +2390,7 @@ namespace ASEva
         /// <param name="timeOffset">时间偏置，单位秒</param>
         /// <param name="useGNSS">是否使用卫星Posix时间模型计算，否则使用主机Posix时间模型</param>
         /// <returns>对应的UTC时间</returns>
-        public static Task<DateTime?> GetUTCDateTime(DateTime session, double timeOffset, bool useGNSS)
+        public static Task<DateTime?> GetUTCDateTime(SessionIdentifier session, double timeOffset, bool useGNSS)
         {
             return Handler.GetUTCDateTime(session, timeOffset, useGNSS);
         }
@@ -2439,7 +2439,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>该session的所有视频通道的信息，若不存在则返回null</returns>
-        public static Task<VideoChannelInfo[]> GetVideoChannelsInfo(DateTime session)
+        public static Task<VideoChannelInfo[]> GetVideoChannelsInfo(SessionIdentifier session)
         {
             return Handler.GetVideoChannelsInfo(session);
         }
@@ -2819,7 +2819,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="genID">Generation ID</param>
-        public static Task RemoveGeneration(DateTime session, String genID)
+        public static Task RemoveGeneration(SessionIdentifier session, String genID)
         {
             return Handler.RemoveGeneration(session, genID);
         }
@@ -2838,7 +2838,7 @@ namespace ASEva
         /// <param name="session">Session ID</param>
         /// <param name="force">是否强制移除</param>
         /// <returns>是否成功移除</returns>
-        public static Task<bool> RemoveSession(DateTime session, bool force)
+        public static Task<bool> RemoveSession(SessionIdentifier session, bool force)
         {
             return Handler.RemoveSession(session, force);
         }
@@ -3297,7 +3297,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="check">是否框选</param>
-        public static Task SetSessionChecker(DateTime session, bool check)
+        public static Task SetSessionChecker(SessionIdentifier session, bool check)
         {
             return Handler.SetSessionChecker(session, check);
         }
@@ -3314,7 +3314,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="comment">Session的注释说明</param>
-        public static Task SetSessionComment(DateTime session, String comment)
+        public static Task SetSessionComment(SessionIdentifier session, String comment)
         {
             return Handler.SetSessionComment(session, comment);
         }
@@ -3331,7 +3331,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="hostSync">主机是否与授时服务器同步</param>
-        public static Task SetSessionHostSync(DateTime session, bool hostSync)
+        public static Task SetSessionHostSync(SessionIdentifier session, bool hostSync)
         {
             return Handler.SetSessionHostSync(session, hostSync);
         }
@@ -3348,7 +3348,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <param name="properties">Session的属性表</param>
-        public static Task SetSessionProperties(DateTime session, Dictionary<String, String> properties)
+        public static Task SetSessionProperties(SessionIdentifier session, Dictionary<String, String> properties)
         {
             return Handler.SetSessionProperties(session, properties);
         }

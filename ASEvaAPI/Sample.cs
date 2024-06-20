@@ -443,7 +443,7 @@ namespace ASEva
         {
             get
             {
-                return AgencyAsync.GetLocalDateTime(Session.ToDateTime(), Offset, false);
+                return AgencyAsync.GetLocalDateTime(Session, Offset, false);
             }
         }
 
@@ -459,7 +459,7 @@ namespace ASEva
         {
             get
             {
-                return AgencyAsync.GetUTCDateTime(Session.ToDateTime(), Offset, true);
+                return AgencyAsync.GetUTCDateTime(Session, Offset, true);
             }
         }
 
@@ -479,27 +479,27 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Constructor based on time information
+        /// (api:app=3.2.0) Constructor based on time information
         /// </summary>
         /// <param name="session">The session that sample belongs to</param>
         /// <param name="offset">Time offset, in seconds</param>
         /// <param name="timeline">Timeline point</param>
         /// \~Chinese
         /// <summary>
-        /// 按指定时间信息进行初始化
+        /// (api:app=3.2.0) 按指定时间信息进行初始化
         /// </summary>
         /// <param name="session">所属session ID</param>
         /// <param name="offset">时间偏置，单位秒</param>
         /// <param name="timeline">在时间线上的位置</param>
-        public Sample(DateTime session, double offset, double timeline)
+        public Sample(SessionIdentifier session, double offset, double timeline)
         {
-            timestamp = new Timestamp(SessionIdentifier.FromDateTime(session), offset, TimeOffsetSync.HostArrival, null);
+            timestamp = new Timestamp(session, offset, TimeOffsetSync.HostArrival, null);
             this.timeline = timeline;
         }
 
         /// \~English
         /// <summary>
-        /// (api:app=3.0.3) Constructor based on time information
+        /// (api:app=3.2.0) Constructor based on time information
         /// </summary>
         /// <param name="session">The session that sample belongs to</param>
         /// <param name="offset">Time offset, in seconds</param>
@@ -508,22 +508,22 @@ namespace ASEva
         /// <param name="timeline">Timeline point</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.0.3) 按指定时间信息进行初始化
+        /// (api:app=3.2.0) 按指定时间信息进行初始化
         /// </summary>
         /// <param name="session">所属session ID</param>
         /// <param name="offset">时间偏置，单位秒</param>
         /// <param name="offsetSync">时间偏置同步状态</param>
         /// <param name="timeInfo">Session无关时间信息</param>
         /// <param name="timeline">在时间线上的位置</param>
-        public Sample(DateTime session, double offset, TimeOffsetSync offsetSync, IndependentTimeInfo timeInfo, double timeline)
+        public Sample(SessionIdentifier session, double offset, TimeOffsetSync offsetSync, IndependentTimeInfo timeInfo, double timeline)
         {
-            timestamp = new Timestamp(SessionIdentifier.FromDateTime(session), offset, offsetSync, timeInfo);
+            timestamp = new Timestamp(session, offset, offsetSync, timeInfo);
             this.timeline = timeline;
         }
 
         /// \~English
         /// <summary>
-        /// (api:app=3.0.3) Set time information
+        /// (api:app=3.2.0) Set time information
         /// </summary>
         /// <param name="session">The session that sample belongs to</param>
         /// <param name="offset">Time offset, in seconds</param>
@@ -532,16 +532,16 @@ namespace ASEva
         /// <param name="timeline">Timeline point</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.0.3) 设置当前样本的时间戳和时间线位置
+        /// (api:app=3.2.0) 设置当前样本的时间戳和时间线位置
         /// </summary>
         /// <param name="session">所属session ID</param>
         /// <param name="offset">时间偏置，单位秒</param>
         /// <param name="offsetSync">时间偏置同步状态</param>
         /// <param name="timeInfo">Session无关时间信息</param>
         /// <param name="timeline">在时间线上的位置</param>
-        public void SetTime(DateTime session, double offset, TimeOffsetSync offsetSync, IndependentTimeInfo timeInfo, double timeline)
+        public void SetTime(SessionIdentifier session, double offset, TimeOffsetSync offsetSync, IndependentTimeInfo timeInfo, double timeline)
         {
-            timestamp = new Timestamp(SessionIdentifier.FromDateTime(session), offset, offsetSync, timeInfo);
+            timestamp = new Timestamp(session, offset, offsetSync, timeInfo);
             this.timeline = timeline;
         }
 
@@ -978,7 +978,7 @@ namespace ASEva
 
                 var timeOffset = result.s1.Offset * result.w1 + result.s2.Offset * result.w2;
                 var offsetSync = result.s1.OffsetSync == result.s2.OffsetSync ? result.s1.OffsetSync : TimeOffsetSync.Interpolated;
-                buf.SetTime(result.s1.Session.ToDateTime(), timeOffset, offsetSync, timeInfo, targetTimeline);
+                buf.SetTime(result.s1.Session, timeOffset, offsetSync, timeInfo, targetTimeline);
                 return buf;
             }
             catch (Exception)
@@ -1003,21 +1003,19 @@ namespace ASEva
         /// <param name="targetTimeline">在时间线上的目标时间点</param>
         /// <param name="targetSession">目标的session ID</param>
         /// <returns>最近样本，若无则返回null</returns>
-        public static Sample SearchAndGetNearest(List<Sample> samples, double targetTimeline, DateTime targetSession)
+        public static Sample SearchAndGetNearest(List<Sample> samples, double targetTimeline, SessionIdentifier targetSession)
         {
-            var targetSessionID = SessionIdentifier.FromDateTime(targetSession);
-            
             if (samples.Count == 0) return null;
             if (samples.Count == 1)
             {
-                if (samples[0].Session == targetSessionID) return samples[0];
+                if (samples[0].Session == targetSession) return samples[0];
                 else return null;
             }
 
             var result = Search(samples, targetTimeline, 10/* support 10 second gap */);
             if (result == null) return null;
 
-            if (result.s1.Session != targetSessionID) return null;
+            if (result.s1.Session != targetSession) return null;
 
             if (Math.Abs(result.s1.Timeline - targetTimeline) < Math.Abs(result.s2.Timeline - targetTimeline)) return result.s1;
             else return result.s2;
