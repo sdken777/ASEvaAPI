@@ -6893,21 +6893,21 @@
         <member name="M:ASEva.AgencyLocal.ConfigDataEncryption">
             \~English
             <summary>
-            Show modal dialog to configure data encryption
+            (api:app=3.2.3) Show modal dialog to configure data encryption
             </summary>
             \~Chinese
             <summary>
-            打开对话框配置文件加密选项
+            (api:app=3.2.3) 打开对话框配置文件加密选项
             </summary>
         </member>
         <member name="M:ASEva.AgencyLocal.ConfigOfflineMapPath">
             \~English
             <summary>
-            Show a modal dialog to configure offline map's path
+            (api:app=3.2.3) Show a modal dialog to configure offline map's path
             </summary>
             \~Chinese
             <summary>
-            弹出对话框配置离线地图路径
+            (api:app=3.2.3) 弹出对话框配置离线地图路径
             </summary>
         </member>
         <member name="M:ASEva.AgencyLocal.ConvertOfflineMapLocToPix(ASEva.Utility.LocPoint,System.Int32,ASEva.Utility.LocPoint)">
@@ -7677,14 +7677,14 @@
         <member name="M:ASEva.AgencyLocal.OpenDialog(System.Object,System.String,System.String)">
             \~English
             <summary>
-            Open a dialog
+            (api:app=3.2.3) Open a dialog
             </summary>
             <param name="caller">The caller who calls this API, can be object of ASEva.CommonWorkflow , ASEva.WindowClass , WindowPanel, etc.</param>
             <param name="dialogClassID">Dialog class ID</param>
             <param name="config">Configuration string</param>
             \~Chinese
             <summary>
-            打开对话框
+            (api:app=3.2.3) 打开对话框
             </summary>
             <param name="caller">调用此API的对象，可为以下类型： ASEva.CommonWorkflow , ASEva.WindowClass , WindowPanel等</param>
             <param name="dialogClassID">对话框组件ID</param>
@@ -7735,24 +7735,24 @@
         <member name="M:ASEva.AgencyLocal.PopupError(System.String)">
             \~English
             <summary>
-            Show a modal dialog to display error message
+            (api:app=3.2.3) Show a modal dialog to display error message
             </summary>
             <param name="msg">Error message</param>
             \~Chinese
             <summary>
-            弹出模态框显示错误信息
+            (api:app=3.2.3) 弹出模态框显示错误信息
             </summary>
             <param name="msg">错误信息</param>
         </member>
         <member name="M:ASEva.AgencyLocal.PopupNotice(System.String)">
             \~English
             <summary>
-            Show a modal dialog to display notice
+            (api:app=3.2.3) Show a modal dialog to display notice
             </summary>
             <param name="msg">Notice</param>
             \~Chinese
             <summary>
-            弹出模态框显示提示信息
+            (api:app=3.2.3) 弹出模态框显示提示信息
             </summary>
             <param name="msg">提示信息</param>
         </member>
@@ -8204,7 +8204,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.2.2
+            version=3.2.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">

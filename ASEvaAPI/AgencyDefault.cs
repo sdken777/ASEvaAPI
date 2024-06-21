@@ -43,12 +43,14 @@ namespace ASEva
         {
         }
 
-        public void ConfigDataEncryption()
+        public Task ConfigDataEncryption()
         {
+            return Task.CompletedTask;
         }
 
-        public void ConfigOfflineMapPath()
+        public Task ConfigOfflineMapPath()
         {
+            return Task.CompletedTask;
         }
 
         public FloatPoint ConvertOfflineMapLocToPix(LocPoint origin, int zoom, LocPoint point)
@@ -331,8 +333,9 @@ namespace ASEva
             return Task.FromResult(false);
         }
 
-        public void OpenDialog(object caller, string dialogClassID, string config)
+        public Task OpenDialog(object caller, string dialogClassID, string config)
         {
+            return Task.CompletedTask;
         }
 
         public Task<bool> OpenProject(string projectFile, bool force)
@@ -349,12 +352,14 @@ namespace ASEva
             return Task.FromResult(false);
         }
 
-        public void PopupError(string msg)
+        public Task PopupError(string msg)
         {
+            return Task.CompletedTask;
         }
 
-        public void PopupNotice(string msg)
+        public Task PopupNotice(string msg)
         {
+            return Task.CompletedTask;
         }
 
         public void Print(string text)

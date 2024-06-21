@@ -204,7 +204,8 @@ namespace ASEva
         /// </summary>
         public static void ConfigDataEncryption()
         {
-            AgencyLocal.ConfigDataEncryption();
+            if (!AgencyAsync.SyncMode) return;
+            AgencyLocal.ConfigDataEncryption().Wait();
         }
 
         /// \~English
@@ -217,7 +218,8 @@ namespace ASEva
         /// </summary>
         public static void ConfigOfflineMapPath()
         {
-            AgencyLocal.ConfigOfflineMapPath();
+            if (!AgencyAsync.SyncMode) return;
+            AgencyLocal.ConfigOfflineMapPath().Wait();
         }
 
         /// \~English
@@ -3606,7 +3608,8 @@ namespace ASEva
         /// <param name="config">初始化配置</param>
         public static void OpenDialog(object caller, String dialogClassID, String config)
         {
-            AgencyLocal.OpenDialog(caller, dialogClassID, config);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyLocal.OpenDialog(caller, dialogClassID, config).Wait();
         }
 
         /// \~English
@@ -3692,7 +3695,8 @@ namespace ASEva
         /// <param name="msg">错误信息</param>
         public static void PopupError(String msg)
         {
-            AgencyLocal.PopupError(msg);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyLocal.PopupError(msg).Wait();
         }
 
         /// \~English
@@ -3707,7 +3711,8 @@ namespace ASEva
         /// <param name="msg">提示信息</param>
         public static void PopupNotice(String msg)
         {
-            AgencyLocal.PopupNotice(msg);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyLocal.PopupNotice(msg).Wait();
         }
 
         /// \~English

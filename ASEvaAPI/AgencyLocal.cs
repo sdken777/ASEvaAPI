@@ -18,8 +18,8 @@ namespace ASEva
         byte[] CallNativeFunction(object caller, String nativeClassID, String funcID, byte[] input);
         void CallWebApi(String request, WebApiContext context);
         void CallWebApiPost(String request, byte[] body, WebPostContentType contentType, WebApiContext context);
-        void ConfigDataEncryption();
-        void ConfigOfflineMapPath();
+        Task ConfigDataEncryption();
+        Task ConfigOfflineMapPath();
         FloatPoint ConvertOfflineMapLocToPix(LocPoint origin, int zoom, LocPoint point);
         LocPoint ConvertOfflineMapPixToLoc(LocPoint origin, int zoom, FloatPoint pixel);
         CreatePanelResult CreateConfigPanel(object caller, String dialogClassID, String transformID, out object panel, out DialogClassInfo info);
@@ -76,12 +76,12 @@ namespace ASEva
         bool IsInternetConnected();
         void Log(String text, LogLevel level);
         Task<bool> NewProject(bool force);
-        void OpenDialog(object caller, String dialogClassID, String config);
+        Task OpenDialog(object caller, String dialogClassID, String config);
         Task<bool> OpenProject(String projectFile, bool force);
         void PlayMp3(byte[] mp3FileData);
         Task<bool> PopupConfirm(String msg);
-        void PopupError(String msg);
-        void PopupNotice(String msg);
+        Task PopupError(String msg);
+        Task PopupNotice(String msg);
         void Print(String text);
         void PublishData(String dataID, byte[] data);
         void RegisterAudioDriver(AudioDriverInfo driver, AudioRecorder recorder, AudioReplayer replayer);
@@ -286,28 +286,28 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Show modal dialog to configure data encryption
+        /// (api:app=3.2.3) Show modal dialog to configure data encryption
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 打开对话框配置文件加密选项
+        /// (api:app=3.2.3) 打开对话框配置文件加密选项
         /// </summary>
-        public static void ConfigDataEncryption()
+        public static Task ConfigDataEncryption()
         {
-            Handler.ConfigDataEncryption();
+            return Handler.ConfigDataEncryption();
         }
 
         /// \~English
         /// <summary>
-        /// Show a modal dialog to configure offline map's path
+        /// (api:app=3.2.3) Show a modal dialog to configure offline map's path
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 弹出对话框配置离线地图路径
+        /// (api:app=3.2.3) 弹出对话框配置离线地图路径
         /// </summary>
-        public static void ConfigOfflineMapPath()
+        public static Task ConfigOfflineMapPath()
         {
-            Handler.ConfigOfflineMapPath();
+            return Handler.ConfigOfflineMapPath();
         }
 
         /// \~English
@@ -1244,21 +1244,21 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Open a dialog
+        /// (api:app=3.2.3) Open a dialog
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.CommonWorkflow , ASEva.WindowClass , WindowPanel, etc.</param>
         /// <param name="dialogClassID">Dialog class ID</param>
         /// <param name="config">Configuration string</param>
         /// \~Chinese
         /// <summary>
-        /// 打开对话框
+        /// (api:app=3.2.3) 打开对话框
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.CommonWorkflow , ASEva.WindowClass , WindowPanel等</param>
         /// <param name="dialogClassID">对话框组件ID</param>
         /// <param name="config">初始化配置</param>
-        public static void OpenDialog(object caller, String dialogClassID, String config)
+        public static Task OpenDialog(object caller, String dialogClassID, String config)
         {
-            Handler.OpenDialog(caller, dialogClassID, config);
+            return Handler.OpenDialog(caller, dialogClassID, config);
         }
 
         /// \~English
@@ -1314,32 +1314,32 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Show a modal dialog to display error message
+        /// (api:app=3.2.3) Show a modal dialog to display error message
         /// </summary>
         /// <param name="msg">Error message</param>
         /// \~Chinese
         /// <summary>
-        /// 弹出模态框显示错误信息
+        /// (api:app=3.2.3) 弹出模态框显示错误信息
         /// </summary>
         /// <param name="msg">错误信息</param>
-        public static void PopupError(String msg)
+        public static Task PopupError(String msg)
         {
-            Handler.PopupError(msg);
+            return Handler.PopupError(msg);
         }
 
         /// \~English
         /// <summary>
-        /// Show a modal dialog to display notice
+        /// (api:app=3.2.3) Show a modal dialog to display notice
         /// </summary>
         /// <param name="msg">Notice</param>
         /// \~Chinese
         /// <summary>
-        /// 弹出模态框显示提示信息
+        /// (api:app=3.2.3) 弹出模态框显示提示信息
         /// </summary>
         /// <param name="msg">提示信息</param>
-        public static void PopupNotice(String msg)
+        public static Task PopupNotice(String msg)
         {
-            Handler.PopupNotice(msg);
+            return Handler.PopupNotice(msg);
         }
 
         /// \~English
