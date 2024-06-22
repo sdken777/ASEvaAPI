@@ -328,11 +328,11 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// Not using GUI
+        /// Not using GUI, the implementation of workflow should be all synchronous (Not asynchronous)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 无图形界面
+        /// 无图形界面，流程的实现应确保是同步的（非异步）
         /// </summary>
         NoGUI,
 
