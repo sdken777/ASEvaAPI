@@ -8204,7 +8204,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.2.3
+            version=3.2.4
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -22032,11 +22032,11 @@
         <member name="T:ASEva.WorkflowInstallCallback">
             \~English
             <summary>
-            (api:app=3.0.0) Plugin installation callback used by workflow
+            (api:app=3.2.4) Plugin installation callback used by workflow
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 在流程中使用的安装插件的回调接口
+            (api:app=3.2.4) 在流程中使用的安装插件的回调接口
             </summary>
         </member>
         <member name="M:ASEva.WorkflowInstallCallback.InstallLibrary(System.String)">

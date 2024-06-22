@@ -1026,11 +1026,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Plugin installation callback used by workflow
+    /// (api:app=3.2.4) Plugin installation callback used by workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 在流程中使用的安装插件的回调接口
+    /// (api:app=3.2.4) 在流程中使用的安装插件的回调接口
     /// </summary>
     public interface WorkflowInstallCallback
     {
@@ -1044,7 +1044,7 @@ namespace ASEva
         /// 安装库文件
         /// </summary>
         /// <param name="libraryID">插件关联的库ID</param>
-        void InstallLibrary(String libraryID);
+        Task InstallLibrary(String libraryID);
 
         /// \~English
         /// <summary>
@@ -1058,6 +1058,6 @@ namespace ASEva
         /// </summary>
         /// <param name="driverID">插件关联的驱动ID</param>
         /// <returns>安装文件的运行路径</returns>
-        String PrepareDriver(String driverID);
+        Task<String> PrepareDriver(String driverID);
     }
 }
