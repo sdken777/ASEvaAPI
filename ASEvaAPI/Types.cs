@@ -3116,11 +3116,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Not supported for current GUI framework
+        /// Not supported for current GUI framework, but non-GUI functions can still be used
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 当前图形界面框架不支持
+        /// 当前图形界面框架不支持，但非界面功能仍可使用
         /// </summary>
         GUIUnsupported = 4,
     }
@@ -3265,6 +3265,16 @@ namespace ASEva
         /// 插件太旧
         /// </summary>
         TooOld,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.2.5) Asynchronous call unsupported but required by current application
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.2.5) 不支持异步调用但当前应用需要
+        /// </summary>
+        AsyncUnsupported,
     }
 
     /// \~English
