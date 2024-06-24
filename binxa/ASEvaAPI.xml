@@ -4002,6 +4002,16 @@
             (api:app=3.2.0) 集合了所有主要异步API
             </summary>
         </member>
+        <member name="P:ASEva.AgencyAsync.SyncMode">
+            \~English
+            <summary>
+            (api:app=3.2.0) Whether the implementations are all synchronous call
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.2.0) 是否底层实现都为同步调用
+            </summary>
+        </member>
         <member name="M:ASEva.AgencyAsync.AddDataLayer(System.String)">
             \~English
             <summary>
@@ -6768,6 +6778,16 @@
             (api:app=3.1.0) 集合了所有主要本地API
             </summary>
         </member>
+        <member name="P:ASEva.AgencyLocal.ClientSide">
+            \~English
+            <summary>
+            (api:app=3.2.6) Whether the application is on client side
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.2.6) 是否当前应用是在客户端运行
+            </summary>
+        </member>
         <member name="M:ASEva.AgencyLocal.AddBusProtocolFile(System.String,ASEva.BusProtocolFileID[]@)">
             \~English
             <summary>
@@ -8204,7 +8224,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.2.5
+            version=3.2.6
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">

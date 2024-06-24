@@ -10,6 +10,7 @@ namespace ASEva
 
     public interface AgencyLocalHandler
     {
+        bool ClientSide { get; }
         AddBusProtocolResult AddBusProtocolFile(String filePath, out BusProtocolFileID[] fileIDs);
         void AddMainThreadCheckpoint(String location);
         void AddProcessorVideoReference(int videoChannel);
@@ -136,6 +137,19 @@ namespace ASEva
             {
                 if (value != null) handler = value;
             }
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.2.6) Whether the application is on client side
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.2.6) 是否当前应用是在客户端运行
+        /// </summary>
+        public static bool ClientSide
+        {
+            get { return Handler.ClientSide; }
         }
 
         /// \~English

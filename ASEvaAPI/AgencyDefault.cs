@@ -8,6 +8,8 @@ namespace ASEva
 {
     class AgencyLocalDefault : AgencyLocalHandler
     {
+        public bool ClientSide => false;
+
         public AddBusProtocolResult AddBusProtocolFile(string filePath, out BusProtocolFileID[] fileIDs)
         {
             fileIDs = null;

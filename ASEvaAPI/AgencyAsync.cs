@@ -237,6 +237,15 @@ namespace ASEva
                 if (value != null) handler = value;
             }
         }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.2.0) Whether the implementations are all synchronous call
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.2.0) 是否底层实现都为同步调用
+        /// </summary>
         public static bool SyncMode
         {
             get { return Handler.SyncMode; }
