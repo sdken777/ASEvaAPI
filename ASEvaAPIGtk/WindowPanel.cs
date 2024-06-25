@@ -2,6 +2,7 @@
 using Gtk;
 using ASEva;
 using Eto.Forms;
+using System.Threading.Tasks;
 
 namespace ASEva.UIGtk
 {
@@ -129,6 +130,16 @@ namespace ASEva.UIGtk
         /// [可选实现] 在主循环中被调用，可进行模态对话
         /// </summary>
         public virtual void OnHandleModal() { }
+
+        /// \~English
+        /// <summary>
+        /// (api:gtk=3.2.4) [Optional] Called in the main loop, for asynchronous calls
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:gtk=3.2.4) [可选实现] 在主循环中被调用，可进行异步调用
+        /// </summary>
+        public virtual Task OnHandleAsync() { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>

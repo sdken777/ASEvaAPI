@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ASEva
 {
@@ -17,15 +18,13 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// [Required] Called while getting component's name
+        /// (api:app=3.1.6) [Required] Called while getting component's name
         /// </summary>
-        /// <returns>Dictionary. The key 'en' is English, 'ch' is Chinese</returns>
         /// \~Chinese
         /// <summary>
-        /// [必须实现] 获取对话框组件的名称时被调用
+        /// (api:app=3.1.6) [必须实现] 获取对话框组件的名称时被调用
         /// </summary>
-        /// <returns>对话框组件名称表，键'en'表示英文，'ch'表示中文</returns>
-        public virtual Dictionary<String, String> GetDialogName() { return null; }
+        public virtual Dictionary<Language, String> GetDialogName() { return null; }
 
         /// \~English
         /// <summary>
@@ -65,27 +64,27 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Required] Called while getting configuration status of related components
+        /// (api:app=3.1.4) [Required] Called while getting configuration status of related components
         /// </summary>
         /// <returns>Configuration status</returns>
         /// \~Chinese
         /// <summary>
-        /// [必须实现] 获取对话框组件相关的配置状态时被调用
+        /// (api:app=3.1.4) [必须实现] 获取对话框组件相关的配置状态时被调用
         /// </summary>
         /// <returns>配置状态</returns>
-        public virtual ConfigStatus GetRelatedConfigStatus() { return ConfigStatus.Disabled; }
+        public virtual Task<ConfigStatus> GetRelatedConfigStatus() { return Task.FromResult(ConfigStatus.Disabled); }
 
         /// \~English
         /// <summary>
-        /// [Optional] Called while getting child configuration status of related components
+        /// (api:app=3.1.4) [Optional] Called while getting child configuration status of related components
         /// </summary>
         /// <returns>Child configuration status</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 查询对话框组件相关的各子功能配置状态时被调用
+        /// (api:app=3.1.4) [可选实现] 查询对话框组件相关的各子功能配置状态时被调用
         /// </summary>
         /// <returns>各子功能的配置状态</returns>
-        public virtual ConfigStatus[] GetRelatedChildConfigStatus() { return null; }
+        public virtual Task<ConfigStatus[]> GetRelatedChildConfigStatus() { return Task.FromResult<ConfigStatus[]>(null); }
 
         /// \~English
         /// <summary>

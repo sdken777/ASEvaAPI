@@ -18,7 +18,7 @@ namespace ASEva.UICoreWF
             InitializeComponent();
         }
 
-        public void Init()
+        public async void Init()
         {
             if (SelectedChannel < 0)
             {
@@ -37,7 +37,7 @@ namespace ASEva.UICoreWF
             {
                 var channelChar = (char)((char)'A' + i);
 
-                var alias = Agency.GetChannelAliasName(Protocol + "@" + i);
+                var alias = await AgencyAsync.GetChannelAliasName(Protocol + "@" + i);
                 if (alias == null || alias.Length == 0) comboBox1.Items.Add(channelChar + ": (Not available)");
                 else comboBox1.Items.Add(channelChar + ": " + alias);
             }

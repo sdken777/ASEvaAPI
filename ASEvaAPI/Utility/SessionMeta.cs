@@ -9,11 +9,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Session's meta info
+    /// (api:app=3.2.0) Session's meta info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) Session的meta信息
+    /// (api:app=3.2.0) Session的meta信息
     /// </summary>
     public class SessionMeta
     {
@@ -35,7 +35,7 @@ namespace ASEva.Utility
         /// <summary>
         /// Session ID
         /// </summary>
-        public DateTime ID { get; set; }
+        public SessionIdentifier ID { get; set; }
 
         /// \~English
         /// <summary>
@@ -293,7 +293,7 @@ namespace ASEva.Utility
         /// <param name="pick">Session的截取ID，origin表示原始数据</param>
         /// <param name="pickProps">Session的截取属性列表</param>
         /// <returns>返回创建的对象</returns>
-        public static SessionMeta Create(String filePath, DateTime id, String guid, double? length, DateTime? startTimeUTC, double timeRatioToUTC, DateTime? startTimeLocal, double timeRatioToLocal, String comment, Dictionary<String, Version> versions, Dictionary<String, String> props, String pick, Dictionary<String, String> pickProps)
+        public static SessionMeta Create(String filePath, SessionIdentifier id, String guid, double? length, DateTime? startTimeUTC, double timeRatioToUTC, DateTime? startTimeLocal, double timeRatioToLocal, String comment, Dictionary<String, Version> versions, Dictionary<String, String> props, String pick, Dictionary<String, String> pickProps)
         {
             if (filePath == null || filePath.Length == 0) return null;
 
@@ -354,7 +354,7 @@ namespace ASEva.Utility
         /// <param name="pick">Session的截取ID，origin表示原始数据</param>
         /// <param name="pickProps">Session的截取属性列表</param>
         /// <returns>返回创建的对象</returns>
-        public static SessionMeta Create(String filePath, DateTime id, String guid, double? length, CPUTimeModel cpuTimeModel, PosixTimeModel hostPosixModel, PosixTimeModel gnssPosixModel, bool hostSync, String comment, Dictionary<String, Version> versions, Dictionary<String, String> props, String pick, Dictionary<String, String> pickProps)
+        public static SessionMeta Create(String filePath, SessionIdentifier id, String guid, double? length, CPUTimeModel cpuTimeModel, PosixTimeModel hostPosixModel, PosixTimeModel gnssPosixModel, bool hostSync, String comment, Dictionary<String, Version> versions, Dictionary<String, String> props, String pick, Dictionary<String, String> pickProps)
         {
             if (filePath == null || filePath.Length == 0) return null;
 
@@ -411,7 +411,7 @@ namespace ASEva.Utility
                 {
                     var id = DateTime.ParseExact(attribs["session_id"].Value, "yyyy-MM-dd-HH-mm-ss", null);
                     var length = Convert.ToDouble(attribs["length"].Value);
-                    meta.ID = id;
+                    meta.ID = SessionIdentifier.FromDateTime(id);
                     meta.Length = length;
                     found = true;
                 }
@@ -425,7 +425,7 @@ namespace ASEva.Utility
                         var end = DateTime.ParseExact(attribs["end"].Value, "yyyy-MM-dd-HH-mm-ss-fff", null);
                         if (end >= begin)
                         {
-                            meta.ID = begin;
+                            meta.ID = SessionIdentifier.FromDateTime(begin);
                             meta.Length = (end - begin).TotalSeconds;
                             found = true;
                         }
@@ -504,7 +504,7 @@ namespace ASEva.Utility
                 {
                     meta.HostPosixModel = new PosixTimeModel
                     {
-                        StartPosix = (ulong)(TimeZoneInfo.ConvertTimeToUtc(meta.ID, TimeZoneInfo.Local) - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds,
+                        StartPosix = (ulong)(TimeZoneInfo.ConvertTimeToUtc(meta.ID.ToDateTime(), TimeZoneInfo.Local) - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds,
                         TimeRatio = 1,
                     };
                     meta.HostSync = false;
@@ -624,7 +624,7 @@ namespace ASEva.Utility
 
             if (GUID != null) cw.WriteString("guid", GUID);
 
-            cw.WriteString("session_id", ID.ToString("yyyy-MM-dd-HH-mm-ss"));
+            cw.WriteString("session_id", ID.ToString());
             cw.WriteString("length", Length == null ? "0" : Length.Value.ToString("F3"));
 
             if (CPUTimeModel != null)

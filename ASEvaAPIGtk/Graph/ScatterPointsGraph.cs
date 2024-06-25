@@ -37,7 +37,7 @@ namespace ASEva.UIGtk
             eventBoxHelper.Add(eventBox);
             drawSwap = new DrawSwap(draw, "ASEva.UIGtk.ScatterPointsGraph");
 
-            chinese = Agency.GetAppLanguage() == Language.Chinese;
+            chinese = AgencyLocal.GetAppLanguage() == Language.Chinese;
 
             eventBoxHelper.LeftDown += eventBox_LeftDown;
             drawSwap.Paint += draw_Paint;

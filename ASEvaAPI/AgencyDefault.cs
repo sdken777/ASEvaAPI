@@ -1,457 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ASEva.Samples;
 using ASEva.Utility;
 
 namespace ASEva
 {
-    class AgencyDefault : AgencyHandler
+    class AgencyLocalDefault : AgencyLocalHandler
     {
-        public string GetConfigFilesRoot()
+        public bool ClientSide => false;
+
+        public AddBusProtocolResult AddBusProtocolFile(string filePath, out BusProtocolFileID[] fileIDs)
         {
-            return null;
+            fileIDs = null;
+            return AddBusProtocolResult.Invalid;
         }
 
-        public string GetAppFilesRoot()
-        {
-            return null;
-        }
-
-        public string GetTempFilesRoot()
-        {
-            return null;
-        }
-
-        public string GetGlobalPath(string key)
-        {
-            return null;
-        }
-
-        public void Print(string text)
+        public void AddMainThreadCheckpoint(string location)
         {
         }
 
-        public void Log(string text, LogLevel level)
+        public void AddProcessorVideoReference(int videoChannel)
         {
-        }
-
-        public ApplicationStatus GetAppStatus()
-        {
-            return ApplicationStatus.Idle;
-        }
-
-        public ApplicationMode GetAppMode()
-        {
-            return ApplicationMode.Replay;
-        }
-
-        public bool IsFileOutputEnabled()
-        {
-            return false;
-        }
-
-        public Language GetAppLanguage()
-        {
-            return Language.Invalid;
-        }
-
-        public GraphData GetGraphData(DateTime session, int id)
-        {
-            return null;
         }
 
         public void AddSceneData(SceneData scene)
         {
         }
 
-        public List<string> GetSampleTitle(string protocol)
+        public void AddWindow(object caller, string windowClassID, string config, bool newWorkspaceIfNeeded)
+        {
+        }
+
+        public byte[] CallNativeFunction(object caller, string nativeClassID, string funcID, byte[] input)
         {
             return null;
-        }
-
-        public DateTime? GetStartTimeLocal(DateTime session)
-        {
-            return null;
-        }
-
-        public DateTime? GetStartTimeUTC(DateTime session)
-        {
-            return null;
-        }
-
-        public DateTime? GetTimestampLocal(DateTime session, double timeOffset)
-        {
-            return null;
-        }
-
-        public DateTime? GetTimestampUTC(DateTime session, double timeOffset)
-        {
-            return null;
-        }
-
-        public double GetTimeRatioToLocal(DateTime session)
-        {
-            return 0;
-        }
-
-        public double GetTimeRatioToUTC(DateTime session)
-        {
-            return 0;
-        }
-
-        public bool DeleteToRecycleBin(string path)
-        {
-            return false;
-        }
-
-        public bool IsMessageValid(string messageID, bool optional)
-        {
-            return false;
-        }
-
-        public bool IsSignalValid(string signalID, bool optional)
-        {
-            return false;
-        }
-
-        public BusMessageInfo GetBusMessageInfo(string busMessageID)
-        {
-            return null;
-        }
-
-        public BusSignalInfo GetBusSignalInfo(string busSignalID)
-        {
-            return null;
-        }
-
-        public BusProtocolFileState GetBusProtocolFileState(BusProtocolFileID fileID)
-        {
-            return BusProtocolFileState.OK;
-        }
-
-        public string GetChannelAliasName(string key)
-        {
-            return null;
-        }
-
-        public void SetGlobalVariable(String key, String value)
-        {
-
-        }
-
-        public String GetGlobalVariable(String key, String defaultValue)
-        {
-            return null;
-        }
-
-        public void SetGlobalParameter(String key, String value)
-        {
-
-        }
-
-        public String GetGlobalParameter(String key, String defaultValue)
-        {
-            return null;
-        }
-
-        public void AddSignalReference(String signalID)
-        {
-        }
-
-        public void RemoveSignalReference(String signalID)
-        {
-        }
-
-        public bool IsInputChannelAvailable(String protocol)
-        {
-            return false;
-        }
-
-        public BusSignalValue[] ParseBusMessage(BusMessageSample busMessage)
-        {
-            return null;
-        }
-
-        public void SendBusMessage(BusMessage msg)
-        {
-        }
-
-        public void SendBusMessage(string messageID, uint? interval)
-        {
-        }
-
-        public void SendRawData(string protocol, double[] values, byte[] binary)
-        {
-        }
-
-        public void SendManualTrigger(int channel)
-        {
-        }
-
-        public string GetDataPath()
-        {
-            return null;
-        }
-
-        public string[] GetGenerationList()
-        {
-            return null;
-        }
-
-        public string GetGenerationPath(DateTime session, string generation)
-        {
-            return null;
-        }
-
-        public DateTime[] GetFinishedSessions(string generation)
-        {
-            return null;
-        }
-
-        public void RefreshGenerations()
-        {
-        }
-
-        public double GetInterestTime()
-        {
-            return 0;
-        }
-
-        public DateTime? GetInterestTimestamp()
-        {
-            return null;
-        }
-
-        public void SetInterestTime(double time)
-        {
-        }
-
-        public void SetInterestTimestamp(DateTime timestamp)
-        {
-        }
-
-        public BufferRange GetBufferRange()
-        {
-            return new BufferRange();
-        }
-
-        public GeneralDeviceStatus GetDeviceStatus(string type)
-        {
-            return GeneralDeviceStatus.None;
-        }
-
-        public GeneralDeviceStatus[] GetChildDeviceStatus(string type)
-        {
-            return null;
-        }
-
-        public bool IsInternetConnected()
-        {
-            return false;
         }
 
         public void CallWebApi(string request, WebApiContext context)
         {
         }
 
-        public string[] GetManualTriggerNames()
-        {
-            return null;
-        }
-
-        public void SetManualTriggerName(int index, string name)
+        public void CallWebApiPost(string request, byte[] body, WebPostContentType contentType, WebApiContext context)
         {
         }
 
-        public DateTime[] GetFilteredSessionList()
+        public Task ConfigDataEncryption()
         {
-            return null;
+            return Task.CompletedTask;
         }
 
-        public string GetCurrentDataGeneration()
+        public Task ConfigOfflineMapPath()
         {
-            return null;
-        }
-
-        public string[] GetSignalNamesOfBusMessage(string messageID)
-        {
-            return null;
-        }
-
-        public void SetGlobalPath(string key, string path)
-        {
-        }
-
-        public BusFileInfo[] GetBusProtocolFilesInfo()
-        {
-            return null;
-        }
-
-        public float GetBusMessageFPS(int channel, uint localID)
-        {
-            return 0;
-        }
-
-        public bool IsBusMessageBound(string busMessageID)
-        {
-            return false;
-        }
-
-        public object[] GetEventHandles()
-        {
-            return null;
-        }
-
-        public EventInfo GetEventInfo(object eventHandle)
-        {
-            return null;
-        }
-
-        public void RemoveEvent(object eventHandle)
-        {
-        }
-
-        public void SetEventComment(object eventHandle, string comment)
-        {
-        }
-
-        public double? GetSessionTimeline(DateTime session)
-        {
-            return null;
-        }
-
-        public double? GetSessionLength(DateTime session)
-        {
-            return null;
-        }
-
-        public int[] GetGraphIDList()
-        {
-            return null;
-        }
-
-        public string GetGraphTitle(int id)
-        {
-            return null;
-        }
-
-        public string GetSignalName(string signalID, bool fullName)
-        {
-            return null;
-        }
-
-        public bool IsVideoDataAvailable(int channel, uint? tolerance)
-        {
-            return false;
-        }
-
-        public BusMessageInfo GetBusMessageInfo(int channel, uint localID)
-        {
-            return null;
-        }
-
-        public DateTime[] GetSessionList()
-        {
-            return null;
-        }
-
-        public double GetFilteredSessionListTotalLength()
-        {
-            return 0;
-        }
-
-        public string[] GetSceneIDList()
-        {
-            return null;
-        }
-
-        public Dictionary<string, SceneTitle> GetSceneTitleTable()
-        {
-            return null;
-        }
-
-        public string GetCurrentSessionGUID()
-        {
-            return null;
-        }
-
-        public void CallWebApiPost(String request, byte[] body, WebApiContext context)
-        {
-        }
-
-        public void CallWebApiPost(string request, byte[] body, WebPostContentType type, WebApiContext context)
-        {
-        }
-
-        public Dictionary<string, bool> GetChannelStatusTable(uint? tolerance)
-        {
-            return null;
-        }
-
-        public bool SetControlFlag(string controllerID, bool enabled)
-        {
-            return false;
-        }
-
-        public string GetModuleConfig(object caller, string classID)
-        {
-            return null;
-        }
-
-        public void SetModuleConfig(object caller, string classID, string config)
-        {
-        }
-
-        public ConfigStatus GetModuleConfigStatus(object caller, string classID)
-        {
-            return ConfigStatus.Disabled;
-        }
-
-        public ConfigStatus[] GetModuleChildConfigStatus(object caller, string classID)
-        {
-            return null;
-        }
-
-        public Samples.SpecialCameraType GetVideoSpecialType(int channel)
-        {
-            return Samples.SpecialCameraType.Normal;
-        }
-
-        public ulong GetMemoryCapacity()
-        {
-            return 0;
-        }
-
-        public Dictionary<BusDeviceID, BusDeviceInfo> GetBusDevices()
-        {
-            return null;
-        }
-
-        public Dictionary<VideoDeviceID, VideoDeviceInfo> GetVideoDevices()
-        {
-            return null;
-        }
-
-        public Dictionary<string, string> GetNativePluginVersions(string prefix)
-        {
-            return null;
-        }
-
-        public int? GetBusProtocolFileChannel(string fileID)
-        {
-            return null;
-        }
-
-        public void AddWindow(object caller, string windowClassID, string config, bool newWorkspaceIfNeeded)
-        {
-        }
-
-        public void ConfigDataEncryption()
-        {
-        }
-
-        public void ConfigOfflineMapPath()
-        {
+            return Task.CompletedTask;
         }
 
         public FloatPoint ConvertOfflineMapLocToPix(LocPoint origin, int zoom, LocPoint point)
@@ -464,472 +65,21 @@ namespace ASEva
             return new LocPoint();
         }
 
-        public void OpenDialog(object caller, string dialogClassID, string config)
+        public CreatePanelResult CreateConfigPanel(object caller, string dialogClassID, string transformID, out object panel, out DialogClassInfo info)
         {
+            panel = null;
+            info = null;
+            return CreatePanelResult.CreateFailed;
         }
 
-        public List<string> SelectBusFloat32Signal(List<string> existSignalIDList)
-        {
-            return null;
-        }
-
-        public string SelectBusMessage(string originMessageID)
+        public GraphPanel CreateGraphPanelForID(int graphID, string styleName)
         {
             return null;
         }
 
-        public BusProtocolFileID[] SelectBusProtocolFiles(BusProtocolFileID[] selected)
+        public GraphPanel CreateGraphPanelForType(GraphType graphType, string styleName)
         {
             return null;
-        }
-
-        public SignalConfig SelectSignal(SignalConfig origin, bool withScale, bool withSignBit, string unit)
-        {
-            return null;
-        }
-
-        public void SelectSignals(SelectSignalHandler handler, List<string> existSignalIDList)
-        {
-        }
-
-        public void SelectBusMessages(SelectBusMessageHandler handler, List<String> existBusMessageIDList)
-        {
-        }
-
-        public void SetCurrentDialogTitle(string title, object icon)
-        {
-        }
-
-        public void SetWindowTitle(object window, string title, object icon)
-        {
-        }
-
-        public void RegisterAudioDriver(AudioDriverInfo driver, AudioRecorder recorder, AudioReplayer replayer)
-        {
-        }
-
-        public AudioDriverInfo[] GetAudioDrivers()
-        {
-            return null;
-        }
-
-        public AudioDeviceInfo[] GetAudioRecordDevices(string driverID)
-        {
-            return null;
-        }
-
-        public AudioDeviceInfo[] GetAudioReplayDevices(string driverID)
-        {
-            return null;
-        }
-
-        public double GetCPUTime()
-        {
-            return 0;
-        }
-
-        public String GetSessionPath(DateTime session)
-        {
-            return null;
-        }
-
-        public String GetSessionPublicDataPath(DateTime session)
-        {
-            return null;
-        }
-
-        public String GetGlobalPublicDataPath()
-        {
-            return null;
-        }
-
-        public String GetManualTriggerName(int index)
-        {
-            return null;
-        }
-
-        public TaskResult RunStandaloneTask(object caller, String taskClassID, String config, out String returnValue)
-        {
-            returnValue = null;
-            return TaskResult.TaskInitFailed;
-        }
-
-        public void StartReplay(double startTimeline, double? interestTarget)
-        {
-        }
-
-        public bool StartOnline(String controllerName, bool previewOnly)
-        {
-            return false;
-        }
-
-        public void StopRunning()
-        {
-        }
-
-        public bool StopRunning(String controllerID)
-        {
-            return false;
-        }
-
-        public int? GetGraphIDWithTitle(String title)
-        {
-            return null;
-        }
-
-        public TimeWithSession ConvertTimeIntoSession(double timeline)
-        {
-            return null;
-        }
-
-        public String[] GetEventTypeNames()
-        {
-            return null;
-        }
-
-        public string[] GetRecentProjectPaths()
-        {
-            return null;
-        }
-
-        public bool TerminateApp(bool force, bool autosave)
-        {
-            return false;
-        }
-
-        public void PopupError(string msg)
-        {
-        }
-
-        public void PopupNotice(string msg)
-        {
-        }
-
-        public bool PopupConfirm(string msg)
-        {
-            return false;
-        }
-
-        public void AddMainThreadCheckpoint(string location)
-        {
-        }
-
-        public bool NewProject(bool force)
-        {
-            return false;
-        }
-
-        public bool OpenProject(string projectFile)
-        {
-            return false;
-        }
-
-        public bool SaveCurrentProject(string projectFile)
-        {
-            return false;
-        }
-
-        public string GetCurrentProject()
-        {
-            return null;
-        }
-
-        public void PlayMp3(byte[] mp3FileData)
-        {
-        }
-
-        public bool StartProcess(string target)
-        {
-            return false;
-        }
-
-        public Dictionary<string, Version> GetVersionTable()
-        {
-            return null;
-        }
-
-        public string GetSystemStatus(SystemStatus status)
-        {
-            return null;
-        }
-
-        public string GetSystemStatusDetails(SystemStatus status)
-        {
-            return null;
-        }
-
-        public int[] GetLicensedFunctionIndices()
-        {
-            return null;
-        }
-
-        public bool SwitchAppMode(string controllerName, ApplicationMode mode, int waitSecond)
-        {
-            return false;
-        }
-
-        public void SetDataPath(string path)
-        {
-        }
-
-        public Dictionary<string, WindowClassInfo> GetWindowClassTable()
-        {
-            return null;
-        }
-
-        public Dictionary<string, DialogClassInfo> GetDialogClassTable()
-        {
-            return null;
-        }
-
-        public Dictionary<string, ProcessorClassInfo> GetProcessorClassTable()
-        {
-            return null;
-        }
-
-        public Dictionary<string, NativeClassInfo> GetNativeClassTable()
-        {
-            return null;
-        }
-
-        public Dictionary<string, TaskClassInfo> GetTaskClassTable()
-        {
-            return null;
-        }
-
-        public Dictionary<string, Version> GetNativePluginVersions(NativeLibraryType type)
-        {
-            return null;
-        }
-
-        public WindowClassInfo RegisterTransformWindowClass(string windowClassID, string config)
-        {
-            return null;
-        }
-
-        public DialogClassInfo RegisterTransformDialogClass(string dialogClassID, string config)
-        {
-            return null;
-        }
-
-        public ConfigStatus GetDialogRelatedModulesConfigStatus(string dialogClassID, string transformID, out ConfigStatus[] childrenStatus)
-        {
-            childrenStatus = null;
-            return ConfigStatus.Disabled;
-        }
-
-        public void DisableAllConfigs()
-        {
-        }
-
-        public DateTime[] GetGenerationSessions(string generationID)
-        {
-            return null;
-        }
-
-        public double GetInterestTarget()
-        {
-            return 0;
-        }
-
-        public Dictionary<string, DeviceStatusDetail> GetAllDeviceStatus()
-        {
-            return null;
-        }
-
-        public void SetTargetReplaySpeed(double speed)
-        {
-        }
-
-        public void SetSessionSearchKeyword(string keyword)
-        {
-        }
-
-        public Dictionary<DateTime, SessionFilterFlags> GetSessionFilterTable()
-        {
-            return null;
-        }
-
-        public DateTime? GetCurrentOnlineSession()
-        {
-            return null;
-        }
-
-        public double GetSessionListTotalLength()
-        {
-            return 0;
-        }
-
-        public string GetSessionSearchKey()
-        {
-            return null;
-        }
-
-        public bool RemoveSession(DateTime session, bool force)
-        {
-            return false;
-        }
-
-        public void SetSessionChecker(DateTime session, bool check)
-        {
-        }
-
-        public void RemoveGeneration(DateTime session, string genID)
-        {
-        }
-
-        public string GetSessionComment(DateTime session)
-        {
-            return null;
-        }
-
-        public void SetAudioVolume(double volume)
-        {
-        }
-
-        public void SetCPURateScale(int scale)
-        {
-        }
-
-        public string GetLicenseInfo()
-        {
-            return null;
-        }
-
-        public double GetRawChannelDelayConfig(string id)
-        {
-            return 0;
-        }
-
-        public double GetBusChannelDelayConfig(int channel)
-        {
-            return 0;
-        }
-
-        public double GetVideoChannelDelayConfig(int channel)
-        {
-            return 0;
-        }
-
-        public void SetRawChannelDelayConfig(string id, double delay)
-        {
-        }
-
-        public void SetBusChannelDelayConfig(int channel, double delay)
-        {
-        }
-
-        public void SetVideoChannelDelayConfig(int channel, double delay)
-        {
-        }
-
-        public bool GetChannelMonitoringFlag(string key)
-        {
-            return false;
-        }
-
-        public void SetChannelMonitoringFlag(string key, bool monitoring)
-        {
-        }
-
-        public bool GetBusChannelStatus(int channel, uint? toleranceMillisecond)
-        {
-            return false;
-        }
-
-        public bool GetVideoChannelStatus(int channel, uint? toleranceMillisecond, out List<double> interval, out List<double> delay)
-        {
-            interval = null;
-            delay = null;
-            return false;
-        }
-
-        public bool GetAudioChannelStatus(uint? toleranceMillisecond, out List<double> interval, out List<double> delay)
-        {
-            interval = null;
-            delay = null;
-            return false;
-        }
-
-        public bool GetRawChannelStatus(string protocol, uint? toleranceMillisecond)
-        {
-            return false;
-        }
-
-        public bool GetSampleChannelStatus(string protocol, uint? toleranceMillisecond, out List<double> interval, out List<double> delay)
-        {
-            interval = null;
-            delay = null;
-            return false;
-        }
-
-        public int[] GetAvailableBusChannels()
-        {
-            return null;
-        }
-
-        public int[] GetAvailableVideoChannels()
-        {
-            return null;
-        }
-
-        public string[] GetAvailableRawChannels()
-        {
-            return null;
-        }
-
-        public string[] GetAvailableSampleChannels()
-        {
-            return null;
-        }
-
-        public double? GetBusPayloadPercentage(int channel)
-        {
-            return null;
-        }
-
-        public double GetAudioChannelDelayConfig()
-        {
-            return 0;
-        }
-
-        public Dictionary<string, double> GetAllRawChannelDelayConfigs()
-        {
-            return null;
-        }
-
-        public void SetAudioChannelDelayConfig(double delay)
-        {
-        }
-
-        public string[] GetAllChannelMonitoringKeys()
-        {
-            return null;
-        }
-
-        public bool IsSampleChannelConflict(string protocol)
-        {
-            return false;
-        }
-
-        public bool StartReplay(bool force, double startTimeline, double? interestTarget)
-        {
-            return false;
-        }
-
-        public bool StartOnline(bool force, bool previewOnly)
-        {
-            return false;
-        }
-
-        public bool StartOffline(bool force, bool previewOnly)
-        {
-            return false;
-        }
-
-        public bool StopRunning(bool force, bool editRecordedSession)
-        {
-            return false;
         }
 
         public CreatePanelResult CreateWindowPanel(object caller, string windowClassID, string transformID, out object panel, out WindowClassInfo info)
@@ -939,40 +89,26 @@ namespace ASEva
             return CreatePanelResult.CreateFailed;
         }
 
-        public CreatePanelResult CreateConfigPanel(object caller, string dialogClassID, string transformID, out object panel, out DialogClassInfo info)
-        {
-            panel = null;
-            info = null;
-            return CreatePanelResult.CreateFailed;
-        }
-
-        public void UnregisterPanel(object panel)
-        {
-        }
-
-        public CommonImage GetOfflineMapCommonImage(IntSize imageSize, LocPoint centerLocation, int zoom)
-        {
-            return null;
-        }
-
-        public WindowClassInfo GetWindowClassInfo(string windowClassID)
-        {
-            return null;
-        }
-
-        public DialogClassInfo GetDialogClassInfo(string dialogClassID)
-        {
-            return null;
-        }
-
-        public TaskClassInfo GetTaskClassInfo(string taskClassID)
-        {
-            return null;
-        }
-
         public CommonImage DecodeImage(byte[] imageData)
         {
             return null;
+        }
+
+        public bool DeleteToRecycleBin(string path)
+        {
+            return false;
+        }
+
+        public void DisableAllPlugins()
+        {
+        }
+
+        public void DisablePlugin(string packID)
+        {
+        }
+
+        public void EnablePlugin(string packID)
+        {
         }
 
         public byte[] EncodeImage(CommonImage image, string format)
@@ -980,14 +116,34 @@ namespace ASEva
             return null;
         }
 
-        public SignalTreeNode[] GetSignalTree()
+        public string[] GetAllChannelMonitoringKeys()
         {
             return null;
         }
 
-        public BusProtocolFileID[] GetBusProtocolFileIDList()
+        public string[] GetAllChannelServerSyncMonitoringKeys()
         {
             return null;
+        }
+
+        public string GetAppFilesRoot()
+        {
+            return null;
+        }
+
+        public ApplicationGUI GetAppGUI()
+        {
+            return ApplicationGUI.NoGUI;
+        }
+
+        public string GetAppID()
+        {
+            return null;
+        }
+
+        public Language GetAppLanguage()
+        {
+            return Language.Invalid;
         }
 
         public string GetBusProtocolFilePath(BusProtocolFileID fileID)
@@ -995,32 +151,114 @@ namespace ASEva
             return null;
         }
 
-        public bool UpdateBusProtocolFilePath(BusProtocolFileID fileID, string filePath)
-        {
-            return false;
-        }
-
-        public bool AddBusProtocolFile(String filePath, out BusProtocolFileID fileID)
-        {
-            fileID = null;
-            return false;
-        }
-
-        public void RemoveBusProtocolFile(BusProtocolFileID fileID)
-        {
-        }
-
-        public void SetSessionComment(DateTime session, string comment)
-        {
-        }
-
-        public Dictionary<string, string> GetSessionProperties(DateTime session)
+        public BusFileInfo[] GetBusProtocolFilesInfo()
         {
             return null;
         }
 
-        public void SetSessionProperties(DateTime session, Dictionary<string, string> properties)
+        public bool GetChannelMonitoringFlag(string id)
         {
+            return false;
+        }
+
+        public bool GetChannelServerSyncMonitoringFlag(string id)
+        {
+            return false;
+        }
+
+        public string GetConfigFilesRoot()
+        {
+            return null;
+        }
+
+        public string GetCurrentDataLayerPath()
+        {
+            return null;
+        }
+
+        public string GetCurrentProject()
+        {
+            return null;
+        }
+
+        public string GetDataPath()
+        {
+            return null;
+        }
+
+        public DialogClassInfo GetDialogClassInfo(string dialogClassID, string transformID)
+        {
+            return null;
+        }
+
+        public Dictionary<string, DialogClassInfo> GetDialogClassTable()
+        {
+            return null;
+        }
+
+        public Dictionary<string, string> GetFrameworkThirdPartyNotices()
+        {
+            return null;
+        }
+
+        public string GetGenerationPath(SessionIdentifier session, string generation)
+        {
+            return null;
+        }
+
+        public string GetGlobalPath(string key)
+        {
+            return null;
+        }
+
+        public string[] GetGlobalPathKeys()
+        {
+            return null;
+        }
+
+        public string GetGlobalPublicDataPath()
+        {
+            return null;
+        }
+
+        public string GetGlobalVariable(string key, string defaultValue)
+        {
+            return null;
+        }
+
+        public string[] GetGlobalVariableKeys()
+        {
+            return null;
+        }
+
+        public string[] GetGraphPanelStylesForID(int graphID)
+        {
+            return null;
+        }
+
+        public string[] GetGraphPanelStylesForType(GraphType graphType)
+        {
+            return null;
+        }
+
+        public DateTime? GetInternetNTPTime()
+        {
+            return null;
+        }
+
+        public LogMessage[] GetLogMessages()
+        {
+            return null;
+        }
+
+        public CommonImage GetOfflineMapCommonImage(IntSize imageSize, LocPoint centerLocation, int zoom)
+        {
+            return null;
+        }
+
+        public string GetOfflineMapCopyrightInfo()
+        {
+            return null;
         }
 
         public string[] GetPluginPackIDList()
@@ -1033,32 +271,24 @@ namespace ASEva
             return null;
         }
 
-        public bool InstallPlugin(string dirPath)
-        {
-            return false;
-        }
-
-        public bool UninstallPlugin(string packID)
-        {
-            return false;
-        }
-
-        public LogMessage[] GetLogMessages()
+        public Dictionary<string, Dictionary<string, string>> GetPluginThirdPartyNotices()
         {
             return null;
         }
 
-        public bool IsReady()
+        public string[] GetRecentProjectPaths()
         {
-            return false;
+            return null;
         }
 
-        public void DisablePlugin(string packID)
+        public string GetSessionPath(SessionIdentifier session)
         {
+            return null;
         }
 
-        public void EnablePlugin(string packID)
+        public string GetSessionPublicDataPath(SessionIdentifier session)
         {
+            return null;
         }
 
         public string[] GetSubDataPaths()
@@ -1066,73 +296,12 @@ namespace ASEva
             return null;
         }
 
-        public string[] GetDataLayers()
+        public string GetTempFilesRoot()
         {
             return null;
         }
 
-        public string GetCurrentDataLayer()
-        {
-            return null;
-        }
-
-        public void SetCurrentDataLayer(String layer)
-        {
-        }
-
-        public void SetSubDataPath(int subIndex, string path)
-        {
-        }
-
-        public void AddDataLayer(string layer)
-        {
-        }
-
-        public void DeleteDataLayer(string layer)
-        {
-        }
-
-        public string GetSessionLayer(DateTime session)
-        {
-            return null;
-        }
-
-        public bool StartOnline(bool force, bool previewOnly, string sessionDirName)
-        {
-            return false;
-        }
-
-        public string GetSessionFolderName(DateTime session)
-        {
-            return null;
-        }
-
-        public GenerationProcessStatus? GetGenerationProcessStatus(DateTime session, string generation)
-        {
-            return null;
-        }
-
-        public string[] GetSessionGenerations(DateTime sessionID)
-        {
-            return null;
-        }
-
-        public bool StartOffline(bool force, bool previewOnly, string genDirName)
-        {
-            return false;
-        }
-
-        public Dictionary<string, string> GetChannelAliasTable()
-        {
-            return null;
-        }
-
-        public WindowClassInfo RegisterTransformWindowClass(string windowClassID, WindowClass transformWindowClass, String defaultConfig)
-        {
-            return null;
-        }
-
-        public DialogClassInfo RegisterTransformDialogClass(string dialogClassID, DialogClass transformDialogClass, String defaultConfig)
+        public Dictionary<string, Version> GetVersionTable()
         {
             return null;
         }
@@ -1142,26 +311,104 @@ namespace ASEva
             return null;
         }
 
-        public DialogClassInfo GetDialogClassInfo(string dialogClassID, string transformID)
+        public Dictionary<string, WindowClassInfo> GetWindowClassTable()
         {
             return null;
         }
 
-        public void EnqueueDataToNative(object caller, string nativeClassID, string dataID, byte[] data)
+        public Task<bool> InstallPlugin(string dirPath)
+        {
+            return Task.FromResult(false);
+        }
+
+        public bool IsInternetConnected()
+        {
+            return false;
+        }
+
+        public void Log(string text, LogLevel level)
         {
         }
 
-        public byte[][] DequeueDataFromNative(object caller, string nativeClassID, string dataID)
+        public Task<bool> NewProject(bool force)
+        {
+            return Task.FromResult(false);
+        }
+
+        public Task OpenDialog(object caller, string dialogClassID, string config)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<bool> OpenProject(string projectFile, bool force)
+        {
+            return Task.FromResult(false);
+        }
+
+        public void PlayMp3(byte[] mp3FileData)
+        {
+        }
+
+        public Task<bool> PopupConfirm(string msg)
+        {
+            return Task.FromResult(false);
+        }
+
+        public Task PopupError(string msg)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task PopupNotice(string msg)
+        {
+            return Task.CompletedTask;
+        }
+
+        public void Print(string text)
+        {
+        }
+
+        public void PublishData(string dataID, byte[] data)
+        {
+        }
+
+        public void RegisterAudioDriver(AudioDriverInfo driver, AudioRecorder recorder, AudioReplayer replayer)
+        {
+        }
+
+        public void RegisterGraphPanelForID(int graphID, string styleName, Type panelType)
+        {
+        }
+
+        public void RegisterGraphPanelForType(GraphType graphType, string styleName, Type panelType)
+        {
+        }
+
+        public DialogClassInfo RegisterTransformDialogClass(string dialogClassID, string config)
         {
             return null;
         }
 
-        public byte[] CallNativeFunction(object caller, string nativeClassID, string funcID, byte[] input)
+        public DialogClassInfo RegisterTransformDialogClassDirectly(string dialogClassID, DialogClass transformDialogClass, string defaultConfig)
         {
             return null;
         }
 
-        public void SetAppFunctionHandler(object caller, string nativeClassID, string funcID, AppFunctionHandler handler)
+        public WindowClassInfo RegisterTransformWindowClass(string windowClassID, string config)
+        {
+            return null;
+        }
+
+        public WindowClassInfo RegisterTransformWindowClassDirectly(string windowClassID, WindowClass transformWindowClass, string defaultConfig)
+        {
+            return null;
+        }
+
+        public void RemoveBusProtocolFile(BusProtocolFileID fileID)
+        {
+        }
+
+        public void RemoveProcessorVideoReference(int videoChannel)
         {
         }
 
@@ -1169,46 +416,58 @@ namespace ASEva
         {
         }
 
-        public string[] GetGlobalVariableKeys()
+        public bool SaveCurrentProject(string projectFile)
         {
-            return null;
+            return false;
         }
 
-        public string[] GetGlobalParameterKeys()
-        {
-            return null;
-        }
-
-        public string[] GetGlobalPathKeys()
-        {
-            return null;
-        }
-
-        public AddBusProtocolResult AddBusProtocolFile(string filePath)
-        {
-            return AddBusProtocolResult.Invalid;
-        }
-
-        public void RefreshSessions()
+        public void SendRawDataWithCPUTick(ulong cpuTick, string channelID, double[] values, byte[] binary)
         {
         }
 
-        public string GetCurrentDataLayerPath()
-        {
-            return null;
-        }
-
-        public void DisableModule(object caller, string classID)
+        public void SetAppFunctionHandler(object caller, string nativeClassID, string funcID, AppFunctionHandler handler)
         {
         }
 
-        public void SendBusMessage(string messageID, uint? interval, out byte[] data)
+        public void SetAudioVolume(double volume)
         {
-            data = null;
         }
 
-        public void DisableAllPlugins()
+        public void SetChannelMonitoringFlag(string id, bool monitoring)
         {
+        }
+
+        public void SetChannelServerSyncMonitoringFlag(string id, bool monitoring)
+        {
+        }
+
+        public void SetCurrentDialogTitle(string title, object icon)
+        {
+        }
+
+        public void SetDataPath(string path)
+        {
+        }
+
+        public void SetGlobalPath(string key, string path)
+        {
+        }
+
+        public void SetGlobalVariable(string key, string value)
+        {
+        }
+
+        public void SetSubDataPath(int subIndex, string path)
+        {
+        }
+
+        public void SetWindowTitle(object window, string title, object icon)
+        {
+        }
+
+        public bool StartProcess(string target)
+        {
+            return false;
         }
 
         public DataSubscriber SubscribeData(string dataID, int bufferLength, int timeout)
@@ -1216,270 +475,1043 @@ namespace ASEva
             return null;
         }
 
-        public void PublishData(string dataID, byte[] data)
+        public Task<bool> TerminateApp(bool force, bool autosave)
         {
+            return Task.FromResult(false);
         }
 
-        public CPUTimeModel GetCPUTimeModel(DateTime session)
-        {
-            return null;
-        }
-
-        public PosixTimeModel GetHostPosixTimeModel(DateTime session)
-        {
-            return null;
-        }
-
-        public PosixTimeModel GetGNSSPosixTimeModel(DateTime session)
-        {
-            return null;
-        }
-
-        public DateTime? GetLocalDateTime(DateTime session, double timeOffset, bool useGNSS)
-        {
-            return null;
-        }
-
-        public DateTime? GetUTCDateTime(DateTime session, double timeOffset, bool useGNSS)
-        {
-            return null;
-        }
-
-        public ulong GetCPUTick()
-        {
-            return 0;
-        }
-
-        public ulong GetCPUTicksPerSecond()
-        {
-            return 0;
-        }
-
-        public bool GetSessionHostSync(DateTime session)
+        public bool UninstallPlugin(string packID)
         {
             return false;
         }
 
-        public void SetSessionHostSync(DateTime session, bool hostSync)
+        public void UnregisterPanel(object panel)
         {
         }
 
-        public Dictionary<string, TimeOffsetSync> GetChannelSyncTable()
-        {
-            return null;
-        }
-
-        public Timestamp[] GetChannelLatestTimestamps(string key)
-        {
-            return null;
-        }
-
-        public bool GetChannelGuestSyncFlag(string key)
+        public bool UpdateBusProtocolFilePath(BusProtocolFileID fileID, string filePath)
         {
             return false;
         }
+    }
 
-        public void SetChannelGuestSyncFlag(string key, bool guestSync)
+    class AgencyAsyncDefault : AgencyAsyncHandler
+    {
+        public bool SyncMode => false;
+
+        public Task AddDataLayer(string layer)
         {
+            return Task.CompletedTask;
         }
 
-        public string[] GetAllChannelGuestSyncKeys()
+        public Task AddSignalReference(string signalID)
         {
-            return null;
+            return Task.CompletedTask;
         }
 
-        public void SendRawData(ulong cpuTick, string protocol, double[] values, byte[] binary)
+        public Task<TimeWithSession> ConvertTimeIntoSession(double timeline)
         {
+            return Task.FromResult<TimeWithSession>(null);
         }
 
-        public Dictionary<string, DeviceClassInfo> GetDeviceClassTable()
+        public Task DeleteDataLayer(string layer)
         {
-            return null;
+            return Task.CompletedTask;
         }
 
-        public void RegisterGraphPanel(GraphType graphType, string styleName, Type panelType)
+        public Task<byte[][]> DequeueDataFromNative(object caller, string nativeClassID, string dataID)
         {
+            return Task.FromResult<byte[][]>(null);
         }
 
-        public void RegisterGraphPanel(int graphID, string styleName, Type panelType)
+        public Task DisableAllConfigs()
         {
+            return Task.CompletedTask;
         }
 
-        public string[] GetGraphPanelStyles(int graphID)
+        public Task DisableAllPlugins()
         {
-            return null;
+            return Task.CompletedTask;
         }
 
-        public GraphPanel CreateGraphPanel(int graphID, string styleName)
+        public Task DisableModule(object caller, string classID)
         {
-            return null;
+            return Task.CompletedTask;
         }
 
-        public IntSize? GetVideoRawSize(int channel, double timeline)
+        public Task DisablePlugin(string packID)
         {
-            return null;
+            return Task.CompletedTask;
         }
 
-        public CommonImage GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha, out Timestamp? timestamp, out CameraInfo cameraInfo)
+        public Task EnablePlugin(string packID)
         {
-            timestamp = null;
-            cameraInfo = null;
-            return null;
+            return Task.CompletedTask;
         }
 
-        public CommonImage GetVideoFrameThumbnail(int channel, double timeline, double maxGap, bool withAlpha)
+        public Task EnqueueDataToNative(object caller, string nativeClassID, string dataID, byte[] data)
         {
-            return null;
+            return Task.CompletedTask;
         }
 
-        public bool StartRemote(bool force, bool previewOnly, string sessionDirName, ulong startPosixTime)
+        public Task<string[]> GetAllChannelGuestSyncKeys()
         {
-            return false;
+            return Task.FromResult<string[]>(null);
         }
 
-        public string[] GetGraphPanelStyles(GraphType graphType)
+        public Task<Dictionary<string, DeviceStatusDetail>> GetAllDeviceStatus()
         {
-            return null;
+            return Task.FromResult<Dictionary<string, DeviceStatusDetail>>(null);
         }
 
-        public GraphPanel CreateGraphPanel(GraphType graphID, string styleName)
+        public Task<Dictionary<string, double>> GetAllRawChannelDelayConfigs()
         {
-            return null;
+            return Task.FromResult<Dictionary<string, double>>(null);
         }
 
-        public DateTime? GetInternetNTPTime()
+        public Task<ApplicationGUI> GetAppGUI()
         {
-            return null;
+            return Task.FromResult<ApplicationGUI>(ApplicationGUI.NoGUI);
         }
 
-        public Dictionary<string, string> GetPluginGuestSyncTable()
+        public Task<string> GetAppID()
         {
-            return null;
+            return Task.FromResult<string>(null);
         }
 
-        public bool GetChannelServerSyncMonitoringFlag(string key)
+        public Task<Language> GetAppLanguage()
         {
-            return false;
+            return Task.FromResult<Language>(Language.Invalid);
         }
 
-        public void SetChannelServerSyncMonitoringFlag(string key, bool monitoring)
+        public Task<ApplicationMode> GetAppMode()
         {
+            return Task.FromResult<ApplicationMode>(ApplicationMode.Replay);
         }
 
-        public string[] GetAllChannelServerSyncMonitoringKeys()
+        public Task<ApplicationStatus> GetAppStatus()
         {
-            return null;
+            return Task.FromResult<ApplicationStatus>(ApplicationStatus.Idle);
         }
 
-        public bool IsReady(out string busyReason)
+        public Task<double> GetAudioChannelDelayConfig()
         {
-            busyReason = null;
-            return false;
+            return Task.FromResult<double>(0);
         }
 
-        public void ResetGPUDecoderTestResults()
+        public Task<(bool, double[], double[])> GetAudioChannelStatus(uint? toleranceMillisecond)
         {
+            return Task.FromResult<(bool, double[], double[])>((false, null, null));
         }
 
-        public GraphicCardInfo[] GetGraphicCardInfos()
+        public Task<AudioDriverInfo[]> GetAudioDrivers()
         {
-            return null;
+            return Task.FromResult<AudioDriverInfo[]>(null);
         }
 
-        public Dictionary<string, string> GetFrameworkThirdPartyNotices()
+        public Task<AudioDeviceInfo[]> GetAudioRecordDevices(string driverID)
         {
-            return null;
+            return Task.FromResult<AudioDeviceInfo[]>(null);
         }
 
-        public Dictionary<string, Dictionary<string, string>> GetPluginThirdPartyNotices()
+        public Task<AudioDeviceInfo[]> GetAudioReplayDevices(string driverID)
         {
-            return null;
+            return Task.FromResult<AudioDeviceInfo[]>(null);
         }
 
-        public string GetOfflineMapCopyrightInfo()
+        public Task<int[]> GetAvailableBusChannels()
         {
-            return null;
+            return Task.FromResult<int[]>(null);
         }
 
-        public bool IsPRCWebPreferred()
+        public Task<string[]> GetAvailableRawChannels()
         {
-            return false;
+            return Task.FromResult<string[]>(null);
         }
 
-        public void RunConsole(object caller, string consoleClassID)
+        public Task<string[]> GetAvailableSampleChannels()
         {
+            return Task.FromResult<string[]>(null);
         }
 
-        public Dictionary<string, ConsoleClassInfo> GetConsoleClassTable()
+        public Task<int[]> GetAvailableVideoChannels()
         {
-            return null;
+            return Task.FromResult<int[]>(null);
         }
 
-        public ConsoleClassInfo GetConsoleClassInfo(string consoleClassID)
+        public Task<BufferRange> GetBufferRange()
         {
-            return null;
+            return Task.FromResult<BufferRange>(new BufferRange());
         }
 
-        public ConfigStatus GetConsoleRelatedModulesConfigStatus(string consoleClassID, out ConfigStatus[] childrenStatus)
+        public Task<double> GetBusChannelDelayConfig(int channel)
         {
-            childrenStatus = null;
-            return ConfigStatus.Disabled;
+            return Task.FromResult<double>(0);
         }
 
-        public bool StartRemote(string controllerName, bool previewOnly, ulong startPosixTime)
+        public Task<BusChannelInfo[]> GetBusChannelsInfo(SessionIdentifier session)
         {
-            return false;
+            return Task.FromResult<BusChannelInfo[]>(null);
         }
 
-        public byte[] GetPreviewJpeg(int channel, double timeline, double maxGap, out Timestamp? timestamp, out CameraInfo cameraInfo)
+        public Task<bool> GetBusChannelStatus(int channel, uint? toleranceMillisecond)
         {
-            timestamp = null;
-            cameraInfo = null;
-            return null;
+            return Task.FromResult<bool>(false);
         }
 
-        public BusChannelInfo[] GetBusChannelsInfo(DateTime session)
+        public Task<Dictionary<BusDeviceID, BusDeviceInfo>> GetBusDevices()
         {
-            return null;
+            return Task.FromResult<Dictionary<BusDeviceID, BusDeviceInfo>>(null);
         }
 
-        public VideoChannelInfo[] GetVideoChannelsInfo(DateTime session)
+        public Task<float> GetBusMessageFPS(int channel, uint localID)
         {
-            return null;
+            return Task.FromResult<float>(0);
         }
 
-        public bool OpenProject(string projectFile, bool force)
+        public Task<BusMessageInfo> GetBusMessageInfo(string busMessageID)
         {
-            return false;
+            return Task.FromResult<BusMessageInfo>(null);
         }
 
-        public ConfigStatus GetModuleConfigStatus(object caller, string classID, out string errorHint)
+        public Task<BusMessageInfo> GetBusMessageInfoByLocalID(int channel, uint localID)
         {
-            errorHint = null;
-            return ConfigStatus.Disabled;
+            return Task.FromResult<BusMessageInfo>(null);
         }
 
-        public ModuleDetails GetModuleDetails(string classID)
+        public Task<double?> GetBusPayloadPercentage(int channel)
         {
-            return null;
+            return Task.FromResult<double?>(null);
         }
 
-        public string GetAppID()
+        public Task<int?> GetBusProtocolFileChannel(string protocolName)
         {
-            return null;
+            return Task.FromResult<int?>(null);
         }
 
-        public ApplicationGUI GetAppGUI()
+        public Task<BusProtocolFileID[]> GetBusProtocolFileIDList()
         {
-            return ApplicationGUI.NoGUI;
+            return Task.FromResult<BusProtocolFileID[]>(null);
         }
 
-        public void AddProcessorVideoReference(int videoChannel)
+        public Task<BusProtocolFileState> GetBusProtocolFileState(BusProtocolFileID fileID)
         {
+            return Task.FromResult<BusProtocolFileState>(BusProtocolFileState.OK);
         }
 
-        public void RemoveProcessorVideoReference(int videoChannel)
+        public Task<BusSignalInfo> GetBusSignalInfo(string busSignalID)
         {
+            return Task.FromResult<BusSignalInfo>(null);
+        }
+
+        public Task<string> GetChannelAliasName(string channelID)
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<Dictionary<string, string>> GetChannelAliasTable()
+        {
+            return Task.FromResult<Dictionary<string, string>>(null);
+        }
+
+        public Task<bool> GetChannelGuestSyncFlag(string id)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<Timestamp[]> GetChannelLatestTimestamps(string channelID)
+        {
+            return Task.FromResult<Timestamp[]>(null);
+        }
+
+        public Task<Dictionary<string, bool>> GetChannelStatusTable(uint? tolerance)
+        {
+            return Task.FromResult<Dictionary<string, bool>>(null);
+        }
+
+        public Task<Dictionary<string, TimeOffsetSync>> GetChannelSyncTable()
+        {
+            return Task.FromResult<Dictionary<string, TimeOffsetSync>>(null);
+        }
+
+        public Task<GeneralDeviceStatus[]> GetChildDeviceStatus(string id)
+        {
+            return Task.FromResult<GeneralDeviceStatus[]>(null);
+        }
+
+        public Task<ConsoleClassInfo> GetConsoleClassInfo(string consoleClassID)
+        {
+            return Task.FromResult<ConsoleClassInfo>(null);
+        }
+
+        public Task<Dictionary<string, ConsoleClassInfo>> GetConsoleClassTable()
+        {
+            return Task.FromResult<Dictionary<string, ConsoleClassInfo>>(null);
+        }
+
+        public Task<(ConfigStatus, ConfigStatus[])> GetConsoleRelatedModulesConfigStatus(string consoleClassID)
+        {
+            return Task.FromResult<(ConfigStatus, ConfigStatus[])>((ConfigStatus.Disabled, null));
+        }
+
+        public Task<ulong> GetCPUTick()
+        {
+            return Task.FromResult<ulong>(0);
+        }
+
+        public Task<ulong> GetCPUTicksPerSecond()
+        {
+            return Task.FromResult<ulong>(0);
+        }
+
+        public Task<double> GetCPUTime()
+        {
+            return Task.FromResult<double>(0);
+        }
+
+        public Task<CPUTimeModel> GetCPUTimeModel(SessionIdentifier session)
+        {
+            return Task.FromResult<CPUTimeModel>(null);
+        }
+
+        public Task<string> GetCurrentDataGeneration()
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<string> GetCurrentDataLayer()
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<SessionIdentifier?> GetCurrentOnlineSession()
+        {
+            return Task.FromResult<SessionIdentifier?>(null);
+        }
+
+        public Task<string> GetCurrentSessionGUID()
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<string[]> GetDataLayers()
+        {
+            return Task.FromResult<string[]>(null);
+        }
+
+        public Task<Dictionary<string, DeviceClassInfo>> GetDeviceClassTable()
+        {
+            return Task.FromResult<Dictionary<string, DeviceClassInfo>>(null);
+        }
+
+        public Task<GeneralDeviceStatus> GetDeviceStatus(string id)
+        {
+            return Task.FromResult<GeneralDeviceStatus>(GeneralDeviceStatus.None);
+        }
+
+        public Task<(ConfigStatus, ConfigStatus[])> GetDialogRelatedModulesConfigStatus(string dialogClassID, string transformID)
+        {
+            return Task.FromResult<(ConfigStatus, ConfigStatus[])>((ConfigStatus.Disabled, null));
+        }
+
+        public Task<object[]> GetEventHandles()
+        {
+            return Task.FromResult<object[]>(null);
+        }
+
+        public Task<EventInfo> GetEventInfo(object eventHandle)
+        {
+            return Task.FromResult<EventInfo>(null);
+        }
+
+        public Task<string[]> GetEventTypeNames()
+        {
+            return Task.FromResult<string[]>(null);
+        }
+
+        public Task<SessionIdentifier[]> GetFilteredSessionList()
+        {
+            return Task.FromResult<SessionIdentifier[]>(null);
+        }
+
+        public Task<double> GetFilteredSessionListTotalLength()
+        {
+            return Task.FromResult<double>(0);
+        }
+
+        public Task<SessionIdentifier[]> GetFinishedSessions(string generation)
+        {
+            return Task.FromResult<SessionIdentifier[]>(null);
+        }
+
+        public Task<Dictionary<string, string>> GetFrameworkThirdPartyNotices()
+        {
+            return Task.FromResult<Dictionary<string, string>>(null);
+        }
+
+        public Task<string[]> GetGenerationList()
+        {
+            return Task.FromResult<string[]>(null);
+        }
+
+        public Task<GenerationProcessStatus?> GetGenerationProcessStatus(SessionIdentifier session, string generation)
+        {
+            return Task.FromResult<GenerationProcessStatus?>(null);
+        }
+
+        public Task<SessionIdentifier[]> GetGenerationSessions(string generationID)
+        {
+            return Task.FromResult<SessionIdentifier[]>(null);
+        }
+
+        public Task<string> GetGlobalParameter(string key, string defaultValue)
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<string[]> GetGlobalParameterKeys()
+        {
+            return Task.FromResult<string[]>(null);
+        }
+
+        public Task<string> GetGlobalVariable(string key, string defaultValue)
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<string[]> GetGlobalVariableKeys()
+        {
+            return Task.FromResult<string[]>(null);
+        }
+
+        public Task<PosixTimeModel> GetGNSSPosixTimeModel(SessionIdentifier session)
+        {
+            return Task.FromResult<PosixTimeModel>(null);
+        }
+
+        public Task<GraphData> GetGraphData(SessionIdentifier session, int graphID)
+        {
+            return Task.FromResult<GraphData>(null);
+        }
+
+        public Task<GraphicCardInfo[]> GetGraphicCardInfos()
+        {
+            return Task.FromResult<GraphicCardInfo[]>(null);
+        }
+
+        public Task<int[]> GetGraphIDList()
+        {
+            return Task.FromResult<int[]>(null);
+        }
+
+        public Task<int?> GetGraphIDWithTitle(string title)
+        {
+            return Task.FromResult<int?>(null);
+        }
+
+        public Task<string> GetGraphTitle(int graphID)
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<PosixTimeModel> GetHostPosixTimeModel(SessionIdentifier session)
+        {
+            return Task.FromResult<PosixTimeModel>(null);
+        }
+
+        public Task<double> GetInterestTarget()
+        {
+            return Task.FromResult<double>(0);
+        }
+
+        public Task<double> GetInterestTime()
+        {
+            return Task.FromResult<double>(0);
+        }
+
+        public Task<DateTime?> GetInterestTimestamp()
+        {
+            return Task.FromResult<DateTime?>(null);
+        }
+
+        public Task<DateTime?> GetInternetNTPTime()
+        {
+            return Task.FromResult<DateTime?>(null);
+        }
+
+        public Task<int[]> GetLicensedFunctionIndices()
+        {
+            return Task.FromResult<int[]>(null);
+        }
+
+        public Task<string> GetLicenseInfo()
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<DateTime?> GetLocalDateTime(SessionIdentifier session, double timeOffset, bool useGNSS)
+        {
+            return Task.FromResult<DateTime?>(null);
+        }
+
+        public Task<LogMessage[]> GetLogMessages()
+        {
+            return Task.FromResult<LogMessage[]>(null);
+        }
+
+        public Task<string> GetManualTriggerName(int index)
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<string[]> GetManualTriggerNames()
+        {
+            return Task.FromResult<string[]>(null);
+        }
+
+        public Task<ConfigStatus[]> GetModuleChildConfigStatus(object caller, string classID)
+        {
+            return Task.FromResult<ConfigStatus[]>(null);
+        }
+
+        public Task<string> GetModuleConfig(object caller, string classID)
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<(ConfigStatus, string)> GetModuleConfigStatus(object caller, string classID)
+        {
+            return Task.FromResult<(ConfigStatus, string)>((ConfigStatus.Disabled, null));
+        }
+
+        public Task<ModuleDetails> GetModuleDetails(string classID)
+        {
+            return Task.FromResult<ModuleDetails>(null);
+        }
+
+        public Task<Dictionary<string, NativeClassInfo>> GetNativeClassTable()
+        {
+            return Task.FromResult<Dictionary<string, NativeClassInfo>>(null);
+        }
+
+        public Task<Dictionary<string, Version>> GetNativePluginVersions(NativeLibraryType type)
+        {
+            return Task.FromResult<Dictionary<string, Version>>(null);
+        }
+
+        public Task<Dictionary<string, string>> GetPluginGuestSyncTable()
+        {
+            return Task.FromResult<Dictionary<string, string>>(null);
+        }
+
+        public Task<string[]> GetPluginPackIDList()
+        {
+            return Task.FromResult<string[]>(null);
+        }
+
+        public Task<PluginPackInfo> GetPluginPackInfo(string packID)
+        {
+            return Task.FromResult<PluginPackInfo>(null);
+        }
+
+        public Task<Dictionary<string, Dictionary<string, string>>> GetPluginThirdPartyNotices()
+        {
+            return Task.FromResult<Dictionary<string, Dictionary<string, string>>>(null);
+        }
+
+        public Task<(byte[], Timestamp?, CameraInfo)> GetPreviewJpeg(int channel, double timeline, double maxGap)
+        {
+            return Task.FromResult<(byte[], Timestamp?, CameraInfo)>((null, null, null));
+        }
+
+        public Task<Dictionary<string, ProcessorClassInfo>> GetProcessorClassTable()
+        {
+            return Task.FromResult<Dictionary<string, ProcessorClassInfo>>(null);
+        }
+
+        public Task<double> GetRawChannelDelayConfig(string id)
+        {
+            return Task.FromResult<double>(0);
+        }
+
+        public Task<bool> GetRawChannelStatus(string channelID, uint? toleranceMillisecond)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<(bool, double[], double[])> GetSampleChannelStatus(string channelID, uint? toleranceMillisecond)
+        {
+            return Task.FromResult<(bool, double[], double[])>((false, null, null));
+        }
+
+        public Task<List<string>> GetSampleTitle(string channelID)
+        {
+            return Task.FromResult<List<string>>(null);
+        }
+
+        public Task<string[]> GetSceneIDList()
+        {
+            return Task.FromResult<string[]>(null);
+        }
+
+        public Task<Dictionary<string, SceneTitle>> GetSceneTitleTable()
+        {
+            return Task.FromResult<Dictionary<string, SceneTitle>>(null);
+        }
+
+        public Task<string> GetSessionComment(SessionIdentifier session)
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<Dictionary<SessionIdentifier, SessionFilterFlags>> GetSessionFilterTable()
+        {
+            return Task.FromResult<Dictionary<SessionIdentifier, SessionFilterFlags>>(null);
+        }
+
+        public Task<string> GetSessionFolderName(SessionIdentifier session)
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<string[]> GetSessionGenerations(SessionIdentifier session)
+        {
+            return Task.FromResult<string[]>(null);
+        }
+
+        public Task<bool> GetSessionHostSync(SessionIdentifier session)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<string> GetSessionLayer(SessionIdentifier session)
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<double?> GetSessionLength(SessionIdentifier session)
+        {
+            return Task.FromResult<double?>(null);
+        }
+
+        public Task<SessionIdentifier[]> GetSessionList()
+        {
+            return Task.FromResult<SessionIdentifier[]>(null);
+        }
+
+        public Task<double> GetSessionListTotalLength()
+        {
+            return Task.FromResult<double>(0);
+        }
+
+        public Task<Dictionary<string, string>> GetSessionProperties(SessionIdentifier session)
+        {
+            return Task.FromResult<Dictionary<string, string>>(null);
+        }
+
+        public Task<string> GetSessionSearchKey()
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<double?> GetSessionTimeline(SessionIdentifier session)
+        {
+            return Task.FromResult<double?>(null);
+        }
+
+        public Task<string> GetSignalName(string signalID, bool fullName)
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<string[]> GetSignalNamesOfBusMessage(string messageID)
+        {
+            return Task.FromResult<string[]>(null);
+        }
+
+        public Task<SignalTreeNode[]> GetSignalTree()
+        {
+            return Task.FromResult<SignalTreeNode[]>(null);
+        }
+
+        public Task<string> GetSystemStatus(SystemStatus status)
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<string> GetSystemStatusDetails(SystemStatus status)
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task<TaskClassInfo> GetTaskClassInfo(string taskClassID)
+        {
+            return Task.FromResult<TaskClassInfo>(null);
+        }
+
+        public Task<Dictionary<string, TaskClassInfo>> GetTaskClassTable()
+        {
+            return Task.FromResult<Dictionary<string, TaskClassInfo>>(null);
+        }
+
+        public Task<DateTime?> GetUTCDateTime(SessionIdentifier session, double timeOffset, bool useGNSS)
+        {
+            return Task.FromResult<DateTime?>(null);
+        }
+
+        public Task<Dictionary<string, Version>> GetVersionTable()
+        {
+            return Task.FromResult<Dictionary<string, Version>>(null);
+        }
+
+        public Task<double> GetVideoChannelDelayConfig(int channel)
+        {
+            return Task.FromResult<double>(0);
+        }
+
+        public Task<VideoChannelInfo[]> GetVideoChannelsInfo(SessionIdentifier session)
+        {
+            return Task.FromResult<VideoChannelInfo[]>(null);
+        }
+
+        public Task<(bool, double[], double[])> GetVideoChannelStatus(int channel, uint? toleranceMillisecond)
+        {
+            return Task.FromResult<(bool, double[], double[])>((false, null, null));
+        }
+
+        public Task<Dictionary<VideoDeviceID, VideoDeviceInfo>> GetVideoDevices()
+        {
+            return Task.FromResult<Dictionary<VideoDeviceID, VideoDeviceInfo>>(null);
+        }
+
+        public Task<(CommonImage, Timestamp?, CameraInfo)> GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha)
+        {
+            return Task.FromResult<(CommonImage, Timestamp?, CameraInfo)>((null, null, null));
+        }
+
+        public Task<CommonImage> GetVideoFrameThumbnail(int channel, double timeline, double maxGap, bool withAlpha)
+        {
+            return Task.FromResult<CommonImage>(null);
+        }
+
+        public Task<IntSize?> GetVideoRawSize(int channel, double timeline)
+        {
+            return Task.FromResult<IntSize?>(null);
+        }
+
+        public Task<SpecialCameraType> GetVideoSpecialType(int channel)
+        {
+            return Task.FromResult<SpecialCameraType>(SpecialCameraType.Normal);
+        }
+
+        public Task<bool> IsBusMessageBound(string busMessageID)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> IsFileOutputEnabled()
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> IsInputChannelAvailable(string channelID)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> IsInternetConnected()
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> IsMessageValid(string messageID, bool optional)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> IsPRCWebPreferred()
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<(bool, string)> IsReady()
+        {
+            return Task.FromResult<(bool, string)>((false, null));
+        }
+
+        public Task<bool> IsSampleChannelConflict(string channelID)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> IsSignalValid(string signalID, bool optional)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> IsVideoDataAvailable(int channel, uint? tolerance)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<BusSignalValue[]> ParseBusMessage(BusMessageSample busMessage)
+        {
+            return Task.FromResult<BusSignalValue[]>(null);
+        }
+
+        public Task PublishData(string dataID, byte[] data)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task RefreshGenerations()
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task RefreshSessions()
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task RemoveEvent(object eventHandle)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task RemoveGeneration(SessionIdentifier session, string genID)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<bool> RemoveSession(SessionIdentifier session, bool force)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task RemoveSignalReference(string signalID)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task ResetGPUDecoderTestResults()
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task RunConsole(object caller, string consoleClassID)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<(TaskResult, string)> RunStandaloneTask(object caller, string taskClassID, string config)
+        {
+            return Task.FromResult<(TaskResult, string)>((TaskResult.TaskInitFailed, null));
+        }
+
+        public Task<string> SelectBusMessage(string originMessageID)
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task SelectBusMessages(SelectBusMessageHandler handler, List<string> existBusMessageIDList)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<BusProtocolFileID[]> SelectBusProtocolFiles(BusProtocolFileID[] selected)
+        {
+            return Task.FromResult<BusProtocolFileID[]>(null);
+        }
+
+        public Task<SignalConfig> SelectSignal(SignalConfig origin, bool withScale, bool withSignBit, string unit)
+        {
+            return Task.FromResult<SignalConfig>(null);
+        }
+
+        public Task SelectSignals(SelectSignalHandler handler, List<string> existSignalIDList)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SendBusMessage(BusMessage message)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<byte[]> SendBusMessageBound(string messageID, uint? interval)
+        {
+            return Task.FromResult<byte[]>(null);
+        }
+
+        public Task SendManualTrigger(int channel)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SendRawData(string channelID, double[] values, byte[] binary)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetAudioChannelDelayConfig(double delay)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetBusChannelDelayConfig(int channel, double delay)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetChannelGuestSyncFlag(string id, bool guestSync)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<bool> SetControlFlag(string controllerName, bool enabled)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task SetCurrentDataLayer(string layer)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetEventComment(object eventHandle, string comment)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetGlobalParameter(string key, string value)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetGlobalVariable(string key, string value)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetInterestTime(double targetTimeline)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetInterestTimestamp(DateTime targetTimestamp)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetManualTriggerName(int index, string name)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetModuleConfig(object caller, string classID, string config)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetRawChannelDelayConfig(string id, double delay)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetSessionChecker(SessionIdentifier session, bool check)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetSessionComment(SessionIdentifier session, string comment)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetSessionHostSync(SessionIdentifier session, bool hostSync)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetSessionProperties(SessionIdentifier session, Dictionary<string, string> properties)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetSessionSearchKeyword(string keyword)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetTargetReplaySpeed(double speed)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetVideoChannelDelayConfig(int channel, double delay)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<bool> StartOffline(bool force, bool previewOnly, string genDirName)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> StartOnline(bool force, bool previewOnly, string sessionDirName)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> StartOnlineWithController(string controllerName, bool previewOnly)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> StartRemote(bool force, bool previewOnly, string sessionDirName, ulong startPosixTime)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> StartRemoteWithController(string controllerName, bool previewOnly, ulong startPosixTime)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> StartReplay(bool force, double startTimeline, double? interestTarget)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> StopRunning(bool force, bool editRecordedSession)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> StopRunningWithController(string controllerName)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<DataSubscriber> SubscribeData(string dataID, int bufferLength, int timeout)
+        {
+            return Task.FromResult<DataSubscriber>(null);
+        }
+
+        public Task<bool> SwitchAppMode(string controllerName, ApplicationMode mode, int waitSecond)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> TerminateApp(bool force, bool autosave)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> UninstallPlugin(string packID)
+        {
+            return Task.FromResult<bool>(false);
         }
     }
 }

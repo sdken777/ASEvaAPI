@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using ASEva.UIEto;
 using Avalonia;
 using Avalonia.Controls;
@@ -192,6 +193,22 @@ namespace ASEva.UIAvalonia
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:avalonia=1.0.13) Get current main window
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.0.13) 获取当前主窗口
+        /// </summary>
+        public static Window MainWindow
+        {
+            get
+            {
+                return appLifetime?.MainWindow;
+            }
+        } 
+
         private static void triggerFatalException(UnhandledExceptionEventArgs args)
         {
             var exObj = args.ExceptionObject;
@@ -224,13 +241,13 @@ namespace ASEva.UIAvalonia
 
         private class EtoRunDialogHandler : RunDialogHandler
         {
-            public bool RunDialog(DialogPanel panel)
+            public async Task<bool> RunDialog(DialogPanel panel)
             {
                 if (App.appBuilder == null) return false;
 
                 var dialog = new EtoEmbedDialog(panel);
                 if (App.appLifetime.MainWindow == null) App.Run(dialog);
-                else dialog.ShowDialog(App.appLifetime.MainWindow);
+                else await dialog.ShowDialog(App.appLifetime.MainWindow);
                 return true;
             }
         }

@@ -74,11 +74,11 @@ namespace ASEva.UICoreWF
             SetToolTipExtensions.Handler = new ToolTipHandler();
 
             FuncManager.Register("GetUIBackendAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
-            FuncManager.Register("RegisterLegacyValueGraph", delegate { Agency.RegisterGraphPanel(GraphType.SingleValue, getLegacyStyleName(), typeof(ValueGraph)); return null; });
-            FuncManager.Register("RegisterLegacyHistLineGraph", delegate { Agency.RegisterGraphPanel(GraphType.HistAndLine, getLegacyStyleName(), typeof(HistLineGraph)); return null; });
-            FuncManager.Register("RegisterLegacyScatterPointsGraph", delegate { Agency.RegisterGraphPanel(GraphType.ScatterPoints, getLegacyStyleName(), typeof(ScatterPointsGraph)); return null; });
-            FuncManager.Register("RegisterLegacyMatrixTableGraph", delegate { Agency.RegisterGraphPanel(GraphType.MatrixTable, getLegacyStyleName(), typeof(MatrixTableGraph)); return null; });
-            FuncManager.Register("RegisterLegacyLabelTableGraph", delegate { Agency.RegisterGraphPanel(GraphType.LabelTable, getLegacyStyleName(), typeof(LabelTableGraph)); return null; });
+            FuncManager.Register("RegisterLegacyValueGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.SingleValue, getLegacyStyleName(), typeof(ValueGraph)); return null; });
+            FuncManager.Register("RegisterLegacyHistLineGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.HistAndLine, getLegacyStyleName(), typeof(HistLineGraph)); return null; });
+            FuncManager.Register("RegisterLegacyScatterPointsGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.ScatterPoints, getLegacyStyleName(), typeof(ScatterPointsGraph)); return null; });
+            FuncManager.Register("RegisterLegacyMatrixTableGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.MatrixTable, getLegacyStyleName(), typeof(MatrixTableGraph)); return null; });
+            FuncManager.Register("RegisterLegacyLabelTableGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.LabelTable, getLegacyStyleName(), typeof(LabelTableGraph)); return null; });
 
             uiBackend = null;
             webViewBackend = "webview2";
@@ -101,8 +101,31 @@ namespace ASEva.UICoreWF
             }
         }
 
+        // CHECK: 修正vertical StackLayout中无控件时初始化异常
+        private void fixVerticalStackLayoutIssue(Control rootControl)
+        {
+            if (rootControl is StackLayout)
+            {
+                var stackLayout = rootControl as StackLayout;
+                if (stackLayout.Orientation == Orientation.Vertical && stackLayout.Items.Count == 0)
+                {
+                    stackLayout.AddSpace(1);
+                    return;
+                }
+            }
+            if (rootControl is Container)
+            {
+                foreach (var control in (rootControl as Container).Children)
+                {
+                    fixVerticalStackLayoutIssue(control);
+                }
+            }
+        }
+
         public void RunApp(Application application, Form window, Form[] subWindows)
         {
+            if (window.Content == null) window.Content = new Panel();
+            fixVerticalStackLayoutIssue(window.Content);
             window.Closed += delegate { findAndHideWebViews(window); };
 
             try
@@ -144,6 +167,8 @@ namespace ASEva.UICoreWF
         {
             if (panel.Mode == DialogPanel.DialogMode.Invalid) return false;
 
+            fixVerticalStackLayoutIssue(panel);
+
             var winformControl = (System.Windows.Forms.Control)panel.ToNative(true);
             if (winformControl == null) return false;
 
@@ -180,7 +205,7 @@ namespace ASEva.UICoreWF
 
         private String getLegacyStyleName()
         {
-            return Agency.GetAppLanguage() == Language.Chinese ? "旧图表" : "Legacy Graph";
+            return AgencyLocal.GetAppLanguage() == Language.Chinese ? "旧图表" : "Legacy Graph";
         }
     }
 }

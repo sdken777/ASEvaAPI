@@ -44,7 +44,7 @@ namespace ASEva.UICoreWF
 
 		private void updatePlaceholder()
         {
-			if (Control.Enabled) Control.PlaceholderText = Agency.GetAppLanguage() == Language.Chinese ? "搜索" : "Search";
+			if (Control.Enabled) Control.PlaceholderText = AgencyLocal.GetAppLanguage() == Language.Chinese ? "搜索" : "Search";
 			else Control.PlaceholderText = "";
 		}
 	}

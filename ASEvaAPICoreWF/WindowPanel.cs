@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ASEva.UICoreWF
@@ -112,6 +113,16 @@ namespace ASEva.UICoreWF
         /// [可选实现] 在主循环中被调用，可进行模态对话
         /// </summary>
         public virtual void OnHandleModal() { }
+
+        /// \~English
+        /// <summary>
+        /// (api:corewf=3.1.4) [Optional] Called in the main loop, for asynchronous calls
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:corewf=3.1.4) [可选实现] 在主循环中被调用，可进行异步调用
+        /// </summary>
+        public virtual Task OnHandleAsync() { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>

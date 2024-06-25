@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Avalonia.Controls;
 
 namespace ASEva.UIAvalonia
@@ -61,13 +62,23 @@ namespace ASEva.UIAvalonia
 
         /// \~English
         /// <summary>
-        /// [Optional] Called in the main loop, for running modal dialog
+        /// (api:avalonia=1.0.13) [Optional] Called in the main loop, for running modal dialog
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 在主循环中被调用，可进行模态对话
+        /// (api:avalonia=1.0.13) [可选实现] 在主循环中被调用，可进行模态对话
         /// </summary>
-        public virtual void OnHandleModal() { }
+        public virtual Task OnHandleModal() { return Task.CompletedTask; }
+
+        /// \~English
+        /// <summary>
+        /// (api:avalonia=1.0.15) [Optional] Called in the main loop, for asynchronous calls
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.0.15) [可选实现] 在主循环中被调用，可进行异步调用
+        /// </summary>
+        public virtual Task OnHandleAsync() { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>

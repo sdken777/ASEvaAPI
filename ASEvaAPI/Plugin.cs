@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ASEva
 {
@@ -125,15 +126,15 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Called while getting main workflow object
+        /// (api:app=3.1.0) [Optional] Called while getting workflow object
         /// </summary>
-        /// <returns>The main workflow object</returns>
+        /// <returns>The workflow object</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 获取插件包含的主流程时被调用
+        /// (api:app=3.1.0) [可选实现] 获取插件包含的流程对象时被调用
         /// </summary>
-        /// <returns>主流程对象</returns>
-        public virtual MainWorkflow GetMainWorkflow() { return null; }
+        /// <returns>流程对象</returns>
+        public virtual CommonWorkflow GetWorkflow() { return null; }
 
         /// \~English
         /// <summary>
@@ -231,13 +232,17 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Called while the application is about to exit (Background threads should be notified to stop here)
+        /// (api:app=3.1.0) [Optional] Called while the application is about to exit (Background threads should be notified to stop here)
         /// </summary>
+        /// <param name="force">Whether forced to exit</param>
+        /// <returns>Whether it's OK to exit (no use while forced to exit)</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 在应用程序准备关闭时被调用（用于发送停止线程指令等）
+        /// (api:app=3.1.0) [可选实现] 在应用程序准备关闭时被调用（用于发送停止线程指令等）
         /// </summary>
-        public virtual void OnApplicationPrepareStopping() { }
+        /// <param name="force">是否为强制关闭</param>
+        /// <returns>返回是否可关闭，强制关闭时将不起作用</returns>
+        public virtual Task<bool> OnApplicationPrepareStopping(bool force) { return Task.FromResult(true); }
 
         /// \~English
         /// <summary>
@@ -319,6 +324,6 @@ namespace ASEva
         /// [可选实现] 在检查插件是否忙于长耗时操作时被调用
         /// </summary>
         /// <returns>长耗时操作的描述，若无则返回null</returns>
-        public virtual String OnCheckBusy() { return null;}
+        public virtual String OnCheckBusy() { return null; }
     }
 }

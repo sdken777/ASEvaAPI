@@ -100,11 +100,11 @@ namespace ASEva.UIGtk
             OxyPlotView.Factory = new OxyPlotViewFactoryGtk();
 
             FuncManager.Register("GetUIBackendAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
-            FuncManager.Register("RegisterLegacyValueGraph", delegate { Agency.RegisterGraphPanel(GraphType.SingleValue, getLegacyStyleName(), typeof(ValueGraph)); return null; });
-            FuncManager.Register("RegisterLegacyHistLineGraph", delegate { Agency.RegisterGraphPanel(GraphType.HistAndLine, getLegacyStyleName(), typeof(HistLineGraph)); return null; });
-            FuncManager.Register("RegisterLegacyScatterPointsGraph", delegate { Agency.RegisterGraphPanel(GraphType.ScatterPoints, getLegacyStyleName(), typeof(ScatterPointsGraph)); return null; });
-            FuncManager.Register("RegisterLegacyMatrixTableGraph", delegate { Agency.RegisterGraphPanel(GraphType.MatrixTable, getLegacyStyleName(), typeof(MatrixTableGraph)); return null; });
-            FuncManager.Register("RegisterLegacyLabelTableGraph", delegate { Agency.RegisterGraphPanel(GraphType.LabelTable, getLegacyStyleName(), typeof(LabelTableGraph)); return null; });
+            FuncManager.Register("RegisterLegacyValueGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.SingleValue, getLegacyStyleName(), typeof(ValueGraph)); return null; });
+            FuncManager.Register("RegisterLegacyHistLineGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.HistAndLine, getLegacyStyleName(), typeof(HistLineGraph)); return null; });
+            FuncManager.Register("RegisterLegacyScatterPointsGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.ScatterPoints, getLegacyStyleName(), typeof(ScatterPointsGraph)); return null; });
+            FuncManager.Register("RegisterLegacyMatrixTableGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.MatrixTable, getLegacyStyleName(), typeof(MatrixTableGraph)); return null; });
+            FuncManager.Register("RegisterLegacyLabelTableGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.LabelTable, getLegacyStyleName(), typeof(LabelTableGraph)); return null; });
 
             webViewBackend = "webkit2";
 
@@ -217,7 +217,7 @@ namespace ASEva.UIGtk
 
         private String getLegacyStyleName()
         {
-            return Agency.GetAppLanguage() == Language.Chinese ? "旧图表" : "Legacy Graph";
+            return AgencyLocal.GetAppLanguage() == Language.Chinese ? "旧图表" : "Legacy Graph";
         }
 
         private bool attach;

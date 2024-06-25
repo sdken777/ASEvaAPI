@@ -24,13 +24,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// The session that event belongs to
+        /// (api:app=3.2.0) The session that event belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 所属session ID
+        /// (api:app=3.2.0) 所属session ID
         /// </summary>
-        public DateTime Base { get; set; }
+        public SessionIdentifier Session { get; set; }
 
         /// \~English
         /// <summary>

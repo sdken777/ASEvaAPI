@@ -8,11 +8,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Sample synchronization
+    /// (api:app=3.2.0) Sample synchronization
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 样本同步
+    /// (api:app=3.2.0) 样本同步
     /// </summary>
     public class SampleSync
     {
@@ -34,10 +34,8 @@ namespace ASEva.Utility
         /// <param name="sampleLists">输入的样本缓存，可以是多个缓存</param>
         /// <param name="outputs">各个缓存按指定时间点输出插值或最近样本</param>
         /// <returns>需要保留返回false，否则返回true</returns>
-        static public bool Sync(double timeline, DateTime session, List<List<Sample>> sampleLists, out List<Sample> outputs)
+        static public bool Sync(double timeline, SessionIdentifier session, List<List<Sample>> sampleLists, out List<Sample> outputs)
         {
-            var sessionID = SessionIdentifier.FromDateTime(session);
-
             bool early = false;
             bool late = true;
             outputs = new List<Sample>();
@@ -67,7 +65,7 @@ namespace ASEva.Utility
                 {
                     var s = Sample.SearchAndInterpolate(list, timeline);
 
-                    if (s == null || s.Session != sessionID) outputs.Add(null);
+                    if (s == null || s.Session != session) outputs.Add(null);
                     else outputs.Add(s);
                 }
                 else if (Sample.IsInRange(list, timeline) && list.Count != 0 && !list.First().SupportInterpolation())

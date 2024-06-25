@@ -3,6 +3,7 @@ using System.Reflection;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Eto.Forms;
 using Eto.Drawing;
 
@@ -91,13 +92,13 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// (api:app=3.0.1) Initialize GPU rendering options (Only the first call is valid)
+        /// (api:eto=3.0.1) Initialize GPU rendering options (Only the first call is valid)
         /// </summary>
         /// <param name="renderingDisabled">Whether to disable GPU rendering</param>
         /// <param name="onscreenRenderingEnabled">Whether to enable GPU onscreen rendering (If renderingDisabled is true, this setting is invalid)</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.0.1) 初始化GPU渲染选项，仅第一次调用有效
+        /// (api:eto=3.0.1) 初始化GPU渲染选项，仅第一次调用有效
         /// </summary>
         /// <param name="renderingDisabled">是否禁用GPU渲染</param>
         /// <param name="onscreenRenderingEnabled">是否启用GPU在屏渲染，若renderingDisabled为true则此设定无效</param>
@@ -415,23 +416,23 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// Run dialog
+        /// (api:eto=3.1.5) Run dialog
         /// </summary>
         /// <param name="panel">Target dialog panel object</param>
         /// <returns>Whether the dialog is shown. You should use "Result" properties of the dialog panel object to get result</returns>
         /// \~Chinese
         /// <summary>
-        /// 弹出对话框
+        /// (api:eto=3.1.5) 弹出对话框
         /// </summary>
         /// <param name="panel">对话框主面板</param>
         /// <returns>是否成功弹出，对话框的运行结果应通过主面板的各Result属性获取</returns>
-        public static bool RunDialog(DialogPanel panel)
+        public static Task<bool> RunDialog(DialogPanel panel)
         {
-            if (panel == null) return false;
+            if (panel == null) return Task.FromResult(false);
 
             if (RunDialogHandler != null) return RunDialogHandler.RunDialog(panel);
 
-            if (handler == null || firstFatalException != null) return false;
+            if (handler == null || firstFatalException != null) return Task.FromResult(false);
 
             UITimer localTimer = null;
             if (exceptionTimer == null)
@@ -474,7 +475,7 @@ namespace ASEva.UIEto
                 }
             }
 
-            return firstFatalException == null;
+            return Task.FromResult(firstFatalException == null);
         }
 
         /// \~English
@@ -542,7 +543,7 @@ namespace ASEva.UIEto
         /// </summary>
 		/// \~Chinese
         /// <summary>
-        /// 主流程应使用此函数手动触发KeyDown事件
+        /// 流程应使用此函数手动触发KeyDown事件
         /// </summary>
         public static void TriggerKeyDown(object sender, KeyEventArgs args)
         {
@@ -692,19 +693,19 @@ namespace ASEva.UIEto
                     FuncManager.Register("GetUIBackendFullCode", delegate { return runningUI + (String.IsNullOrEmpty(uiBackend) ? "" : ("." + uiBackend)); });
                     FuncManager.Register("GetUIBackendAPIThirdPartyNotices", delegate { return handler.GetThirdPartyNotices(); });
 
-                    FuncManager.Register("RegisterEtoSingleValueGraph", delegate { Agency.RegisterGraphPanel(GraphType.SingleValue, getStyleName("Eto单值", "Eto Single Value"), typeof(ValueGraph)); return null; });
-                    FuncManager.Register("RegisterEtoHistLineGraph", delegate { Agency.RegisterGraphPanel(GraphType.HistAndLine, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(HistLineGraph)); return null; });
-                    FuncManager.Register("RegisterEtoScatterPointsGraph", delegate { Agency.RegisterGraphPanel(GraphType.ScatterPoints, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(ScatterPointsGraph)); return null; });
-                    FuncManager.Register("RegisterEtoMatrixTableGraph", delegate { Agency.RegisterGraphPanel(GraphType.MatrixTable, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(MatrixTableGraph)); return null; });
-                    FuncManager.Register("RegisterEtoLabelTableGraph", delegate { Agency.RegisterGraphPanel(GraphType.LabelTable, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(LabelTableGraph)); return null; });
-                    FuncManager.Register("RegisterEtoHistogramValueGraph", delegate { Agency.RegisterGraphPanel(GraphType.HistAndLine, getStyleName("Eto柱状图值", "Eto Histogram Value"), typeof(HistogramValueGraph)); return null; });
+                    FuncManager.Register("RegisterEtoSingleValueGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.SingleValue, getStyleName("Eto单值", "Eto Single Value"), typeof(ValueGraph)); return null; });
+                    FuncManager.Register("RegisterEtoHistLineGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.HistAndLine, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(HistLineGraph)); return null; });
+                    FuncManager.Register("RegisterEtoScatterPointsGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.ScatterPoints, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(ScatterPointsGraph)); return null; });
+                    FuncManager.Register("RegisterEtoMatrixTableGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.MatrixTable, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(MatrixTableGraph)); return null; });
+                    FuncManager.Register("RegisterEtoLabelTableGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.LabelTable, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(LabelTableGraph)); return null; });
+                    FuncManager.Register("RegisterEtoHistogramValueGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.HistAndLine, getStyleName("Eto柱状图值", "Eto Histogram Value"), typeof(HistogramValueGraph)); return null; });
                 }
             }
         }
 
         private static String getStyleName(String chinese, String english)
         {
-            return Agency.GetAppLanguage() == Language.Chinese ? chinese : english;
+            return AgencyLocal.GetAppLanguage() == Language.Chinese ? chinese : english;
         }
 
         private static AppHandler handler = null;
@@ -725,6 +726,6 @@ namespace ASEva.UIEto
 
     public interface RunDialogHandler
     {
-        bool RunDialog(DialogPanel panel);
+        Task<bool> RunDialog(DialogPanel panel);
     }
 }
