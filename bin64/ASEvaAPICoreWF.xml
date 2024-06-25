@@ -286,6 +286,16 @@
             [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
+        <member name="M:ASEva.UICoreWF.ConfigPanel.OnHandleAsync">
+            \~English
+            <summary>
+            (api:corewf=3.1.4) [Optional] Called in the main loop, for asynchronous calls
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.1.4) [可选实现] 在主循环中被调用，可进行异步调用
+            </summary>
+        </member>
         <member name="M:ASEva.UICoreWF.ConfigPanel.Close">
             \~English
             <summary>
@@ -878,6 +888,16 @@
             \~Chinese
             <summary>
             [可选实现] 在主循环中被调用，可进行模态对话
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.WindowPanel.OnHandleAsync">
+            \~English
+            <summary>
+            (api:corewf=3.1.4) [Optional] Called in the main loop, for asynchronous calls
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.1.4) [可选实现] 在主循环中被调用，可进行异步调用
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.WindowPanel.OnRelease">
