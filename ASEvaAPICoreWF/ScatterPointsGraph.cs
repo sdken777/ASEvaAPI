@@ -169,11 +169,11 @@ namespace ASEva.UICoreWF
                 String secondText = "";
                 if (mouseAtPointIndex >= 0)
                 {
-                    DateTime session = DateTime.Now;
+                    var session = new SessionIdentifier();
                     double offset = 0;
                     if (D.GetPointTimeInfo(mouseAtPointIndex, ref session, ref offset))
                     {
-                        secondText = session.ToString(chinese ? "yyyy/MM/dd HH:mm:ss" : "MM/dd/yyyy HH:mm:ss") + " + " + offset.ToString("F3");
+                        secondText = session.ToDateTime().ToString(chinese ? "yyyy/MM/dd HH:mm:ss" : "MM/dd/yyyy HH:mm:ss") + " + " + offset.ToString("F3");
                     }
                 }
 
