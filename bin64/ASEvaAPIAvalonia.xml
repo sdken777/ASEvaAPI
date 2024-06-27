@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.0.15
+            version=1.0.16
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -447,6 +447,16 @@
             \~Chinese
             <summary>
             (api:avalonia=1.0.3) 方便添加文本资源的扩展
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.ImageConverter">
+            \~English
+            <summary>
+            (api:avalonia=1.0.16) Conversion of image object
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.16) 图像对象转换
             </summary>
         </member>
         <member name="T:ASEva.UIAvalonia.SkiaRenderEventArgs">
