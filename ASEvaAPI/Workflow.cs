@@ -735,6 +735,16 @@ namespace ASEva
         /// 框架软件的版本
         /// </summary>
         public Version CoreVersion { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.2.8) End-user license agreement (EULA)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.2.8) 用户许可 (EULA)
+        /// </summary>
+        public String Agreement { get; set; }
     }
 
     /// \~English

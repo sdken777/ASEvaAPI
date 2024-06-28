@@ -8224,7 +8224,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.2.7
+            version=3.2.8
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -21791,6 +21791,16 @@
             \~Chinese
             <summary>
             框架软件的版本
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.Agreement">
+            \~English
+            <summary>
+            (api:app=3.2.8) End-user license agreement (EULA)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.2.8) 用户许可 (EULA)
             </summary>
         </member>
         <member name="T:ASEva.LicenseRequestReason">
