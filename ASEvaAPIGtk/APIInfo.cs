@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 11, 2, 2); // Update log / 更新记录: 支持AppHandler新接口
+            return new Version(2, 11, 2, 3); // Update log / 更新记录: ScreensHandler改为public
         }
     }
 }
