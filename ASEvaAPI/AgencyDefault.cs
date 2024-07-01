@@ -426,6 +426,31 @@ namespace ASEva
             return false;
         }
 
+        public Task<string> SelectBusMessage(string originMessageID)
+        {
+            return Task.FromResult<string>(null);
+        }
+
+        public Task SelectBusMessages(SelectBusMessageHandler handler, List<string> existBusMessageIDList)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<BusProtocolFileID[]> SelectBusProtocolFiles(BusProtocolFileID[] selected)
+        {
+            return Task.FromResult<BusProtocolFileID[]>(null);
+        }
+
+        public Task<SignalConfig> SelectSignal(SignalConfig origin, bool withScale, bool withSignBit, string unit)
+        {
+            return Task.FromResult<SignalConfig>(null);
+        }
+
+        public Task SelectSignals(SelectSignalHandler handler, List<string> existSignalIDList)
+        {
+            return Task.CompletedTask;
+        }
+
         public void SendRawDataWithCPUTick(ulong cpuTick, string channelID, double[] values, byte[] binary)
         {
         }
@@ -1312,31 +1337,6 @@ namespace ASEva
         public Task<(TaskResult, string)> RunStandaloneTask(object caller, string taskClassID, string config)
         {
             return Task.FromResult<(TaskResult, string)>((TaskResult.TaskInitFailed, null));
-        }
-
-        public Task<string> SelectBusMessage(string originMessageID)
-        {
-            return Task.FromResult<string>(null);
-        }
-
-        public Task SelectBusMessages(SelectBusMessageHandler handler, List<string> existBusMessageIDList)
-        {
-            return Task.CompletedTask;
-        }
-
-        public Task<BusProtocolFileID[]> SelectBusProtocolFiles(BusProtocolFileID[] selected)
-        {
-            return Task.FromResult<BusProtocolFileID[]>(null);
-        }
-
-        public Task<SignalConfig> SelectSignal(SignalConfig origin, bool withScale, bool withSignBit, string unit)
-        {
-            return Task.FromResult<SignalConfig>(null);
-        }
-
-        public Task SelectSignals(SelectSignalHandler handler, List<string> existSignalIDList)
-        {
-            return Task.CompletedTask;
         }
 
         public Task SendBusMessage(BusMessage message)

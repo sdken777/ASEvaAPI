@@ -6190,82 +6190,6 @@
             <param name="config">配置的字符串描述</param>
             <returns>1. 任务运行结果; 2. 任务的返回值信息</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.SelectBusMessage(System.String)">
-            \~English
-            <summary>
-            Show a modal dialog to select bus message
-            </summary>
-            <param name="originMessageID">Initial bus message configuration</param>
-            <returns>Bus message configuration result, null if requested to delete</returns>
-            \~Chinese
-            <summary>
-            打开对话框选择总线报文
-            </summary>
-            <param name="originMessageID">初始总线报文配置</param>
-            <returns>返回总线报文配置，若删除则返回null</returns>
-        </member>
-        <member name="M:ASEva.AgencyAsync.SelectBusMessages(ASEva.SelectBusMessageHandler,System.Collections.Generic.List{System.String})">
-            \~English
-            <summary>
-            Show a modal dialog to select multiple bus messages at once
-            </summary>
-            <param name="handler">Callback to handle bus message selection</param>
-            <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
-            \~Chinese
-            <summary>
-            打开对话框一次性选择多个总线报文
-            </summary>
-            <param name="handler">选中总线报文时调用的回调接口</param>
-            <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
-        </member>
-        <member name="M:ASEva.AgencyAsync.SelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
-            \~English
-            <summary>
-            Show modal dialog to select (multiple) bus protocols
-            </summary>
-            <param name="selected">Bus protocols already selected</param>
-            <returns>Newly selected bus protocols</returns>
-            \~Chinese
-            <summary>
-            打开对话框选择总线协议文件（可多个）
-            </summary>
-            <param name="selected">已选择的总线协议文件</param>
-            <returns>新选择的总线协议文件</returns>
-        </member>
-        <member name="M:ASEva.AgencyAsync.SelectSignal(ASEva.SignalConfig,System.Boolean,System.Boolean,System.String)">
-            \~English
-            <summary>
-            Show a modal dialog to select signal
-            </summary>
-            <param name="origin">Initial signal configuration</param>
-            <param name="withScale">Whether to enable the configuration of value scale</param>
-            <param name="withSignBit">Whether to enable the configuration of sign bit signal</param>
-            <param name="unit">The unit to display, only available while the configuration of value scale is enabled</param>
-            <returns>Signal configuration result, null if requested to delete</returns>
-            \~Chinese
-            <summary>
-            打开对话框选择信号
-            </summary>
-            <param name="origin">初始信号配置</param>
-            <param name="withScale">是否包含乘数的配置</param>
-            <param name="withSignBit">是否包含符号位信号的配置</param>
-            <param name="unit">该信号的单位显示，仅当包含乘数配置时有效</param>
-            <returns>返回信号配置，若删除则返回null</returns>
-        </member>
-        <member name="M:ASEva.AgencyAsync.SelectSignals(ASEva.SelectSignalHandler,System.Collections.Generic.List{System.String})">
-            \~English
-            <summary>
-            Show a modal dialog to select multiple signals at once
-            </summary>
-            <param name="handler">Callback to handle signal selection</param>
-            <param name="existSignalIDList">List of all signal IDs that already exist</param>
-            \~Chinese
-            <summary>
-            打开对话框一次性选择多个信号
-            </summary>
-            <param name="handler">选中信号时调用的回调接口</param>
-            <param name="existSignalIDList">既存的选中信号ID列表</param>
-        </member>
         <member name="M:ASEva.AgencyAsync.SendBusMessage(ASEva.BusMessage)">
             \~English
             <summary>
@@ -7984,6 +7908,82 @@
             <param name="projectFile">项目文件路径，null表示保存至当前项目文件</param>
             <returns>是否成功保存项目</returns>
         </member>
+        <member name="M:ASEva.AgencyLocal.SelectBusMessage(System.String)">
+            \~English
+            <summary>
+            (api:app=3.2.10) Show a modal dialog to select bus message
+            </summary>
+            <param name="originMessageID">Initial bus message configuration</param>
+            <returns>Bus message configuration result, null if requested to delete</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.2.10) 打开对话框选择总线报文
+            </summary>
+            <param name="originMessageID">初始总线报文配置</param>
+            <returns>返回总线报文配置，若删除则返回null</returns>
+        </member>
+        <member name="M:ASEva.AgencyLocal.SelectBusMessages(ASEva.SelectBusMessageHandler,System.Collections.Generic.List{System.String})">
+            \~English
+            <summary>
+            (api:app=3.2.10) Show a modal dialog to select multiple bus messages at once
+            </summary>
+            <param name="handler">Callback to handle bus message selection</param>
+            <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
+            \~Chinese
+            <summary>
+            (api:app=3.2.10) 打开对话框一次性选择多个总线报文
+            </summary>
+            <param name="handler">选中总线报文时调用的回调接口</param>
+            <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
+        </member>
+        <member name="M:ASEva.AgencyLocal.SelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
+            \~English
+            <summary>
+            (api:app=3.2.10) Show modal dialog to select (multiple) bus protocols
+            </summary>
+            <param name="selected">Bus protocols already selected</param>
+            <returns>Newly selected bus protocols</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.2.10) 打开对话框选择总线协议文件（可多个）
+            </summary>
+            <param name="selected">已选择的总线协议文件</param>
+            <returns>新选择的总线协议文件</returns>
+        </member>
+        <member name="M:ASEva.AgencyLocal.SelectSignal(ASEva.SignalConfig,System.Boolean,System.Boolean,System.String)">
+            \~English
+            <summary>
+            (api:app=3.2.10) Show a modal dialog to select signal
+            </summary>
+            <param name="origin">Initial signal configuration</param>
+            <param name="withScale">Whether to enable the configuration of value scale</param>
+            <param name="withSignBit">Whether to enable the configuration of sign bit signal</param>
+            <param name="unit">The unit to display, only available while the configuration of value scale is enabled</param>
+            <returns>Signal configuration result, null if requested to delete</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.2.10) 打开对话框选择信号
+            </summary>
+            <param name="origin">初始信号配置</param>
+            <param name="withScale">是否包含乘数的配置</param>
+            <param name="withSignBit">是否包含符号位信号的配置</param>
+            <param name="unit">该信号的单位显示，仅当包含乘数配置时有效</param>
+            <returns>返回信号配置，若删除则返回null</returns>
+        </member>
+        <member name="M:ASEva.AgencyLocal.SelectSignals(ASEva.SelectSignalHandler,System.Collections.Generic.List{System.String})">
+            \~English
+            <summary>
+            (api:app=3.2.10) Show a modal dialog to select multiple signals at once
+            </summary>
+            <param name="handler">Callback to handle signal selection</param>
+            <param name="existSignalIDList">List of all signal IDs that already exist</param>
+            \~Chinese
+            <summary>
+            (api:app=3.2.10) 打开对话框一次性选择多个信号
+            </summary>
+            <param name="handler">选中信号时调用的回调接口</param>
+            <param name="existSignalIDList">既存的选中信号ID列表</param>
+        </member>
         <member name="M:ASEva.AgencyLocal.SendRawDataWithCPUTick(System.UInt64,System.String,System.Double[],System.Byte[])">
             \~English
             <summary>
@@ -8236,7 +8236,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.2.9
+            version=3.2.10
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
