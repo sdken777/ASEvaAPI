@@ -326,6 +326,11 @@ namespace ASEva
             return false;
         }
 
+        public bool IsPRCWebPreferred()
+        {
+            return false;
+        }
+
         public void Log(string text, LogLevel level)
         {
         }

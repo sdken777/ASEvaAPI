@@ -7666,6 +7666,18 @@
             </summary>
             <returns>是否已连接互联网</returns>
         </member>
+        <member name="M:ASEva.AgencyLocal.IsPRCWebPreferred">
+            \~English
+            <summary>
+            (api:app=3.2.9) Get whether to use PRC web service
+            </summary>
+            <returns>Whether to use PRC web service</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.2.9) 获取是否使用境内网络服务
+            </summary>
+            <returns>是否使用境内网络服务</returns>
+        </member>
         <member name="M:ASEva.AgencyLocal.Log(System.String,ASEva.LogLevel)">
             \~English
             <summary>
@@ -8224,7 +8236,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.2.8
+            version=3.2.9
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">

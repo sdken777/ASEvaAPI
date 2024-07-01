@@ -75,6 +75,7 @@ namespace ASEva
         Dictionary<String, WindowClassInfo> GetWindowClassTable();
         Task<bool> InstallPlugin(String dirPath);
         bool IsInternetConnected();
+        bool IsPRCWebPreferred();
         void Log(String text, LogLevel level);
         Task<bool> NewProject(bool force);
         Task OpenDialog(object caller, String dialogClassID, String config);
@@ -1220,6 +1221,21 @@ namespace ASEva
         public static bool IsInternetConnected()
         {
             return Handler.IsInternetConnected();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.2.9) Get whether to use PRC web service
+        /// </summary>
+        /// <returns>Whether to use PRC web service</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.2.9) 获取是否使用境内网络服务
+        /// </summary>
+        /// <returns>是否使用境内网络服务</returns>
+        public static bool IsPRCWebPreferred()
+        {
+            return Handler.IsPRCWebPreferred();
         }
 
         /// \~English

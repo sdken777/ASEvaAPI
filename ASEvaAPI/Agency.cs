@@ -3471,8 +3471,7 @@ namespace ASEva
         /// <returns>是否使用境内网络服务</returns>
         public static bool IsPRCWebPreferred()
         {
-            if (!AgencyAsync.SyncMode) return false;
-            return AgencyAsync.IsPRCWebPreferred().Result;
+            return AgencyLocal.IsPRCWebPreferred();
         }
 
         /// \~English
