@@ -20,6 +20,12 @@
     <Compile Update="ConfigPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Cross\ConfigPanelEto.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Cross\WindowPanelEto.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="DeviceCoordView.cs">
       <SubType>UserControl</SubType>
     </Compile>
