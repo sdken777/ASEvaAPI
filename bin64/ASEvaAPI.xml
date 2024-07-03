@@ -8236,7 +8236,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.2.10
+            version=3.2.11
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
