@@ -2,6 +2,12 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="Cross\ConfigPanelEto.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Cross\WindowPanelEto.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Graphic\TextDraw.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -10,6 +16,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Cross\ConfigPanelEto.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Cross\WindowPanelEto.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Graphic\OpenGLBlitControlWpf.xaml">
       <SubType>Designer</SubType>
     </Page>

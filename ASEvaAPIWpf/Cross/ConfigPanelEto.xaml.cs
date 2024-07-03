@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Windows.Controls;
 using Eto.Forms;
 
-namespace ASEva.UICoreWF
+namespace ASEva.UIWpf
 {
-    class ConfigPanelEto : ConfigPanel
+    /// <summary>
+    /// ConfigPanelEto.xaml 的交互逻辑
+    /// </summary>
+    public partial class ConfigPanelEto : ConfigPanel
     {
-        public ConfigPanelEto(UIEto.ConfigPanel etoConfigPanel)
+        public ConfigPanelEto()
         {
-            this.etoConfigPanel = etoConfigPanel;
+            InitializeComponent();
+        }
 
-            var winformPanel = etoConfigPanel.ToNative(true);
-            Controls.Add(winformPanel);
-            winformPanel.Dock = DockStyle.Fill;
-
-            etoConfigPanel.CloseRequested += delegate { Close(); };
+        public void SetEtoConfigPanel(UIEto.ConfigPanel configPanel)
+        {
+            etoConfigPanel = configPanel;
+            Content = configPanel.ToNative(true);
+            configPanel.CloseRequested += delegate { Close(); };
         }
 
         public override void OnInitSize(String config)
@@ -23,8 +27,8 @@ namespace ASEva.UICoreWF
             etoConfigPanel.OnInitSize(config);
 
             var size = etoConfigPanel.OnGetSize();
-            Width = Math.Max(200, size.Width) * DeviceDpi / 96;
-            Height = Math.Max(50, size.Height) * DeviceDpi / 96;
+            Width = Math.Max(200, size.Width);
+            Height = Math.Max(50, size.Height);
         }
 
         public override void OnInit(String config)
@@ -33,7 +37,7 @@ namespace ASEva.UICoreWF
         }
 
         public override void OnRelease()
-        {
+        { 
             etoConfigPanel.OnRelease();
             UIEto.ContainerExtensions.CloseRecursively(etoConfigPanel);
         }

@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Drawing;
+using System.Windows.Controls;
 using Eto.Forms;
+using Eto.Wpf.Forms.Controls;
 
-namespace ASEva.UICoreWF
+namespace ASEva.UIWpf
 {
-    class WindowPanelEto : WindowPanel
+    /// <summary>
+    /// WindowPanelEto.xaml 的交互逻辑
+    /// </summary>
+    public partial class WindowPanelEto : WindowPanel
     {
-        public WindowPanelEto(UIEto.WindowPanel etoWindowPanel)
+        public WindowPanelEto()
         {
-            this.etoWindowPanel = etoWindowPanel;
+            InitializeComponent();
+        }
 
-            var winformPanel = etoWindowPanel.ToNative(true);
-            Controls.Add(winformPanel);
-            winformPanel.Dock = DockStyle.Fill;
+        public void SetEtoWindowPanel(UIEto.WindowPanel windowPanel)
+        {
+            etoWindowPanel = windowPanel;
+            Content = windowPanel.ToNative(true);
         }
 
         public override void OnInitSize(String config)
@@ -25,9 +30,10 @@ namespace ASEva.UICoreWF
             var minSize = etoWindowPanel.OnGetMinimumSize();
             minSize = new IntSize(Math.Max(100, minSize.Width), Math.Max(50, minSize.Height));
 
-            Width = Math.Max(defaultSize.Width, minSize.Width) * DeviceDpi / 96;
-            Height = Math.Max(defaultSize.Height, minSize.Height) * DeviceDpi / 96;
-            MinimumSize = new Size(minSize.Width * DeviceDpi / 96, minSize.Height * DeviceDpi / 96);
+            Width = Math.Max(defaultSize.Width, minSize.Width);
+            Height = Math.Max(defaultSize.Height, minSize.Height);
+            MinWidth = minSize.Width;
+            MinHeight = minSize.Height;
         }
 
         public override void OnInit(String config)
@@ -45,7 +51,7 @@ namespace ASEva.UICoreWF
             etoWindowPanel.OnInputData(data);
         }
 
-        public override void OnResetData() 
+        public override void OnResetData()
         {
             etoWindowPanel.OnResetData();
         }
@@ -62,8 +68,7 @@ namespace ASEva.UICoreWF
 
         public override void OnUpdateUI()
         {
-            var dpiScale = (float)DeviceDpi / 96;
-            var newContainerSize = new IntSize((int)(Width / dpiScale), (int)(Height / dpiScale));
+            var newContainerSize = new IntSize((int)Width, (int)Height);
             if (newContainerSize.Width > 0 && newContainerSize.Height > 0 &&
                 (newContainerSize.Width != containerSize.Width || newContainerSize.Height != containerSize.Height))
             {
