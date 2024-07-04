@@ -103,7 +103,7 @@ namespace ASEva.UIGtk
         {
             this.gtkConfigPanel = gtkConfigPanel;
             Content = gtkConfigPanel.ToEto();
-            CloseRequested += delegate { Close(); };
+            gtkConfigPanel.CloseRequested += delegate { Close(); };
         }
 
         public override IntSize OnGetSize()
