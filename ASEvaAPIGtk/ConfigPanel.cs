@@ -147,6 +147,11 @@ namespace ASEva.UIGtk
             gtkConfigPanel.OnUpdateUI();
         }
 
+        public override Task OnHandleAsync()
+        {
+            return gtkConfigPanel.OnHandleAsync();
+        }
+
         private ConfigPanel gtkConfigPanel;
     }
 }

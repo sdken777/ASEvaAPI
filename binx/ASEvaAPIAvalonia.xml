@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.0.16
+            version=1.1.0
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -228,6 +228,56 @@
             <summary>
             在此事件中实现配置界面的关闭
             </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.EtoConfigPanel.InitializeComponent(System.Boolean)">
+            <summary>
+            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
+            </summary>
+            <param name="loadXaml">Should the XAML be loaded into the component.</param>
+        </member>
+        <member name="M:ASEva.UIAvalonia.EtoWindowPanel.InitializeComponent(System.Boolean)">
+            <summary>
+            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
+            </summary>
+            <param name="loadXaml">Should the XAML be loaded into the component.</param>
+        </member>
+        <member name="T:ASEva.UIAvalonia.CrossConverter">
+            \~English
+            <summary>
+            (api:avalonia=1.1.0) Panel conversion tool
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.1.0) 面板转换工具
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.CrossConverter.ConvertWindowPanel(System.Object)">
+            \~English
+            <summary>
+            Convert any window panel to Avalonia window panel
+            </summary>
+            <param name="anyWindowPanel">Any window panel</param>
+            <returns>Avalonia window panel, null if conversion failed</returns>
+            \~Chinese
+            <summary>
+            将任意窗口面板转化为Avalonia窗口面板
+            </summary>
+            <param name="anyWindowPanel">任意窗口面板</param>
+            <returns>Avalonia窗口面板，若转化失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIAvalonia.CrossConverter.ConvertConfigPanel(System.Object)">
+            \~English
+            <summary>
+            Convert any config panel to Avalonia config panel
+            </summary>
+            <param name="anyConfigPanel">Any config panel</param>
+            <returns>Avalonia config panel, null if conversion failed</returns>
+            \~Chinese
+            <summary>
+            将任意配置面板转化为Avalonia配置面板
+            </summary>
+            <param name="anyConfigPanel">任意配置面板</param>
+            <returns>Avalonia配置面板，若转化失败则返回null</returns>
         </member>
         <member name="T:ASEva.UIAvalonia.EtoEmbedder">
             \~English
