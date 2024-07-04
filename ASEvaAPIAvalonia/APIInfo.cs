@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 1, 0, 0); // Update log / 更新记录: 新增CrossConverter
+            return new Version(1, 1, 0, 1); // Update log / 更新记录: 完善EtoWindow/ConfigPanel
         }
 
         /// \~English

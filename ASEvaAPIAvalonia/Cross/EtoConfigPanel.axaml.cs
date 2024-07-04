@@ -37,13 +37,14 @@ namespace ASEva.UIAvalonia
             etoConfigPanel.OnInitSize(config);
             
             var size = etoConfigPanel.OnGetSize();
-            this.Width = size.Width;
-            this.Height=  size.Height;
+            this.Width = Math.Max(200, size.Width);
+            this.Height = Math.Max(50, size.Height);
         }
 
         public override void OnRelease()
         {
             etoConfigPanel.OnRelease();
+            UIEto.ContainerExtensions.CloseRecursively(etoConfigPanel);
         }
 
         public override void OnUpdateUI()
