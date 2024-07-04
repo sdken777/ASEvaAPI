@@ -1,0 +1,55 @@
+using System;
+
+namespace ASEva.UIEto
+{
+    #pragma warning disable CS1571
+
+    /// \~English
+    /// <summary>
+    /// (api:eto=3.2.0) Panel conversion tool
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:eto=3.2.0) 面板转换工具
+    /// </summary>
+    public class CrossConverter
+    {
+        /// \~English
+        /// <summary>
+        /// Convert any window panel to Eto window panel
+        /// </summary>
+        /// <param name="anyWindowPanel">Any window panel</param>
+        /// <returns>Eto window panel, null if conversion failed</returns>
+        /// \~Chinese
+        /// <summary>
+        /// 将任意窗口面板转化为Eto窗口面板
+        /// </summary>
+        /// <param name="anyWindowPanel">任意窗口面板</param>
+        /// <returns>Eto窗口面板，若转化失败则返回null</returns>
+        public static WindowPanel ConvertWindowPanel(object anyWindowPanel)
+        {
+            if (anyWindowPanel == null) return null;
+            if (anyWindowPanel is WindowPanel) return anyWindowPanel as WindowPanel;
+            else return App.ConvertWindowPanelToEto(anyWindowPanel);
+        }
+
+        /// \~English
+        /// <summary>
+        /// Convert any config panel to Eto config panel
+        /// </summary>
+        /// <param name="anyConfigPanel">Any config panel</param>
+        /// <returns>Eto config panel, null if conversion failed</returns>
+        /// \~Chinese
+        /// <summary>
+        /// 将任意配置面板转化为Eto配置面板
+        /// </summary>
+        /// <param name="anyConfigPanel">任意配置面板</param>
+        /// <returns>Eto配置面板，若转化失败则返回null</returns>
+        public static ConfigPanel ConvertConfigPanel(object anyConfigPanel)
+        {
+            if (anyConfigPanel == null) return null;
+            if (anyConfigPanel is ConfigPanel) return anyConfigPanel as ConfigPanel;
+            else return App.ConvertConfigPanelToEto(anyConfigPanel);
+        }
+    }
+}

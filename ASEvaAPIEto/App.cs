@@ -378,16 +378,12 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// Convert platform window panel to Eto window panel
+        /// Deprecated. Please use ASEva.UIEto.CrossConverter
         /// </summary>
-        /// <param name="platformWindowPanel">Platform window panel</param>
-        /// <returns>Eto window panel, null if conversion failed</returns>
         /// \~Chinese
         /// <summary>
-        /// 将平台特化窗口控件转化为Eto窗口控件
+        /// 已弃用，应使用 ASEva.UIEto.CrossConverter
         /// </summary>
-        /// <param name="platformWindowPanel">平台特化窗口控件</param>
-        /// <returns>Eto窗口控件，若转化失败则返回null</returns>
         public static WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
         {
             if (handler == null || platformWindowPanel == null) return null;
@@ -397,16 +393,12 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
-        /// Convert platform config panel to Eto config panel
+        /// Deprecated. Please use ASEva.UIEto.CrossConverter
         /// </summary>
-        /// <param name="platformConfigPanel">Platform config panel</param>
-        /// <returns>Eto config panel, null if conversion failed</returns>
         /// \~Chinese
         /// <summary>
-        /// 将平台特化配置界面控件转化为Eto配置界面控件
+        /// 已弃用，应使用 ASEva.UIEto.CrossConverter
         /// </summary>
-        /// <param name="platformConfigPanel">平台特化配置界面控件</param>
-        /// <returns>Eto配置界面控件，若转化失败则返回null</returns>
         public static ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
         {
             if (handler == null || platformConfigPanel == null) return null;
