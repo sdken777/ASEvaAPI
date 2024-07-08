@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="WinformEmbedderConfigPanel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="WinformEmbedderWindowPanel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="WpfEmbedderConfigPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="WpfEmbedderWindowPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="WinformEmbedderConfigPanel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="WinformEmbedderWindowPanel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>
