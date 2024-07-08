@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIWpf.APIInfo">
             <summary>
-            version=2.1.2
+            version=2.1.3
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.APIInfo.GetAPIVersion">
@@ -209,6 +209,44 @@
             InitializeComponent
             </summary>
         </member>
+        <member name="T:ASEva.UIWpf.CommonImageWpfExtensions">
+            \~English
+            <summary>
+            (api:wpf=2.1.3) Extensions for common image object
+            </summary>
+            \~Chinese
+            <summary>
+            (api:wpf=2.1.3) 方便使用通用图像数据的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.CommonImageWpfExtensions.ToBitmapSource(ASEva.Samples.CommonImage)">
+            \~English
+            <summary>
+            Convert to BitmapSource object
+            </summary>
+            <param name="image">Common image object</param>
+            <returns>BitmapSource object</returns>
+            \~Chinese
+            <summary>
+            转为BitmapSource对象
+            </summary>
+            <param name="image">通用图像数据</param>
+            <returns>BitmapSource对象</returns>
+        </member>
+        <member name="M:ASEva.UIWpf.CommonImageWpfExtensions.ToCommonImage(System.Windows.Media.Imaging.BitmapSource)">
+            \~English
+            <summary>
+            Convert to common image object
+            </summary>
+            <param name="bitmap">BitmapSource object</param>
+            <returns>Common image object</returns>
+            \~Chinese
+            <summary>
+            转为通用图像数据
+            </summary>
+            <param name="bitmap">BitmapSource对象</param>
+            <returns>通用图像数据</returns>
+        </member>
         <member name="T:ASEva.UIWpf.OpenGLBlitControlWpf">
             <summary>
             OpenGLBlitControlWpf
@@ -249,12 +287,12 @@
             Gets or sets the spacing between the image and the label when both are present
             </summary>
         </member>
-        <member name="T:ASEva.UIWpf.Handler.PeekablePasswordBox">
+        <member name="T:ASEva.UIWpf.PeekablePasswordBox">
             <summary>
             PeekablePasswordBox
             </summary>
         </member>
-        <member name="M:ASEva.UIWpf.Handler.PeekablePasswordBox.InitializeComponent">
+        <member name="M:ASEva.UIWpf.PeekablePasswordBox.InitializeComponent">
             <summary>
             InitializeComponent
             </summary>
@@ -429,44 +467,6 @@
             <summary>
             (api:wpf=2.0.0) 动态加载xaml
             </summary>
-        </member>
-        <member name="T:ASEva.UIEto.CommonImageWpfExtensions">
-            \~English
-            <summary>
-            (api:wpf=2.0.4) Extensions for common image object
-            </summary>
-            \~Chinese
-            <summary>
-            (api:wpf=2.0.4) 方便使用通用图像数据的扩展
-            </summary>
-        </member>
-        <member name="M:ASEva.UIEto.CommonImageWpfExtensions.ToBitmapSource(ASEva.Samples.CommonImage)">
-            \~English
-            <summary>
-            Convert to BitmapSource object
-            </summary>
-            <param name="image">Common image object</param>
-            <returns>BitmapSource object</returns>
-            \~Chinese
-            <summary>
-            转为BitmapSource对象
-            </summary>
-            <param name="image">通用图像数据</param>
-            <returns>BitmapSource对象</returns>
-        </member>
-        <member name="M:ASEva.UIEto.CommonImageWpfExtensions.ToCommonImage(System.Windows.Media.Imaging.BitmapSource)">
-            \~English
-            <summary>
-            Convert to common image object
-            </summary>
-            <param name="bitmap">BitmapSource object</param>
-            <returns>Common image object</returns>
-            \~Chinese
-            <summary>
-            转为通用图像数据
-            </summary>
-            <param name="bitmap">BitmapSource对象</param>
-            <returns>通用图像数据</returns>
         </member>
     </members>
 </doc>

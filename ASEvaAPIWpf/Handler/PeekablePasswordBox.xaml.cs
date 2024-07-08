@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ASEva.UIWpf.Handler
+namespace ASEva.UIWpf
 {
     partial class PeekablePasswordBox : UserControl
     {
