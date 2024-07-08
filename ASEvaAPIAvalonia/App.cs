@@ -66,11 +66,23 @@ namespace ASEva.UIAvalonia
                         appBuilder.SetupWithLifetime(appLifetime);
                         EtoInitializer.Initialize(new EtoRunDialogHandler());
 
-                        AppDomain.CurrentDomain.UnhandledException += (o, args) => { triggerFatalException(args); };
+                        var etoInitWindow = new EtoInitWindow();
+                        etoInitWindow.Show();
+                        var token = new CancellationTokenSource();
+                        etoInitWindow.Closed += delegate { token.Cancel(); };
+                        appLifetime.MainWindow = etoInitWindow;
+                        appBuilder.Instance.Run(token.Token);
+                        appLifetime.MainWindow = null;
 
-                        FuncManager.Register("GetAvaloniaAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
-                        FuncManager.Register("GetAvaloniaLibVersion", delegate { return APIInfo.GetAvaloniaLibVersion(); });
-                        FuncManager.Register("GetAvaloniaAPIThirdPartyNotices", delegate { return APIInfo.GetThirdPartyNotices(); });
+                        if (EtoInitializer.InitializeResult.Value)
+                        {
+                            AppDomain.CurrentDomain.UnhandledException += (o, args) => { triggerFatalException(args); };
+
+                            FuncManager.Register("GetAvaloniaAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
+                            FuncManager.Register("GetAvaloniaLibVersion", delegate { return APIInfo.GetAvaloniaLibVersion(); });
+                            FuncManager.Register("GetAvaloniaAPIThirdPartyNotices", delegate { return APIInfo.GetThirdPartyNotices(); });
+                        }
+                        else appBuilder = null;
                     }
                 }
             }
