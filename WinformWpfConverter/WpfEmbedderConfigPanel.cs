@@ -11,7 +11,10 @@ namespace WinformWpfConverter
         public WpfEmbedderConfigPanel(ASEva.UIWpf.ConfigPanel wpfConfigPanel)
         {
             InitializeComponent();
+
             this.wpfConfigPanel = wpfConfigPanel;
+            this.wpfConfigPanelWidth = wpfConfigPanel.Width;
+            this.wpfConfigPanelHeight = wpfConfigPanel.Height;
 
             var elementHost = new ElementHost();
             elementHost.Dock = DockStyle.Fill;
@@ -25,8 +28,11 @@ namespace WinformWpfConverter
         {
             wpfConfigPanel.OnInitSize(config);
 
-            Width = (int)(Math.Max(200, wpfConfigPanel.Width) * DeviceDpi / 96);
-            Height = (int)(Math.Max(50, wpfConfigPanel.Height) * DeviceDpi / 96);
+            if (wpfConfigPanel.Width > 0 && wpfConfigPanel.Width < 10000) wpfConfigPanelWidth = wpfConfigPanel.Width;
+            if (wpfConfigPanel.Height > 0 && wpfConfigPanel.Height < 10000) wpfConfigPanelHeight = wpfConfigPanel.Height;
+
+            Width = (int)(Math.Max(200, wpfConfigPanelWidth) * DeviceDpi / 96);
+            Height = (int)(Math.Max(50, wpfConfigPanelHeight) * DeviceDpi / 96);
         }
 
         public override void OnInit(string config)
@@ -55,5 +61,6 @@ namespace WinformWpfConverter
         }
 
         private ASEva.UIWpf.ConfigPanel wpfConfigPanel;
+        private double wpfConfigPanelWidth, wpfConfigPanelHeight;
     }
 }

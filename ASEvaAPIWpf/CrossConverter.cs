@@ -18,13 +18,13 @@ namespace ASEva.UIWpf
     {
         /// \~English
         /// <summary>
-        /// (api:wpf=2.1.2) Enable converting Winform panel to WPF panel
+        /// (api:wpf=2.1.4) Enable converting Winform panel to WPF panel
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:wpf=2.1.2) 启用Winform面板转WPF面板功能
+        /// (api:wpf=2.1.4) 启用Winform面板转WPF面板功能
         /// </summary>
-        public static bool EnableWpfEmbedder()
+        public static bool EnableWinformEmbedder()
         {
             if (wpfHostType != null) return true;
 
