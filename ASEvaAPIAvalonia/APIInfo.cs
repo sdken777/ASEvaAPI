@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 1, 2, 0); // Update log / 更新记录: 在App.Init中完成Eto初始化
+            return new Version(1, 1, 2, 1); // Update log / 更新记录: EtoInitWindow正常显示
         }
 
         /// \~English
