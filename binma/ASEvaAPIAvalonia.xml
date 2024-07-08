@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.1.0
+            version=1.1.1
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -123,6 +123,16 @@
             \~Chinese
             <summary>
             (api:avalonia=1.0.13) 获取当前主窗口
+            </summary>
+        </member>
+        <member name="P:ASEva.UIAvalonia.App.EtoInitializeResult">
+            \~English
+            <summary>
+            (api:avalonia=1.1.1) Get initialization result of Eto framework, null means not initialized yet
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.1.1) 获取Eto初始化结果，null表示还未进行初始化
             </summary>
         </member>
         <member name="T:ASEva.UIAvalonia.AvaloniaApplication">

@@ -34,6 +34,11 @@ namespace ASEva.UIAvalonia
             timer.Start();
         }
 
+        public static bool? InitializeResult
+        {
+            get { return initResult; }
+        }
+
         public static bool Initialized
         {
             get { return initResult != null && initResult.Value; }

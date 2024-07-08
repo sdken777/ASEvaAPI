@@ -209,6 +209,22 @@ namespace ASEva.UIAvalonia
             }
         } 
 
+        /// \~English
+        /// <summary>
+        /// (api:avalonia=1.1.1) Get initialization result of Eto framework, null means not initialized yet
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.1.1) 获取Eto初始化结果，null表示还未进行初始化
+        /// </summary>
+        public static bool? EtoInitializeResult
+        {
+            get
+            {
+                return EtoInitializer.InitializeResult;
+            }
+        }
+
         private static void triggerFatalException(UnhandledExceptionEventArgs args)
         {
             var exObj = args.ExceptionObject;
