@@ -5,7 +5,7 @@
         xmlns:local="clr-namespace:ASEva.UIAvalonia"
         x:Class="ASEva.UIAvalonia.EtoInitWindow"
         Title="" WindowStartupLocation="CenterScreen"
-        Width="180" Height="18" MinWidth="180" MinHeight="18" CanResize="False"
+        Width="180" Height="24" MinWidth="180" MinHeight="24" CanResize="False"
         SystemDecorations="None">
     <Grid>
         <Label Content="Initializing GUI" HorizontalAlignment="Center" VerticalAlignment="Center" />
