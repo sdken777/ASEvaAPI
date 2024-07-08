@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace ASEva.UICoreWF
 {
@@ -16,6 +18,37 @@ namespace ASEva.UICoreWF
     {
         /// \~English
         /// <summary>
+        /// (api:corewf=3.2.2) Enable converting WPF panel to Winform panel
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:corewf=3.2.2) 启用WPF面板转Winform面板功能
+        /// </summary>
+        public static bool EnableWpfEmbedder()
+        {
+            if (winformHostType != null) return true;
+
+            var dllPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + "WinformWpfConverter.dll";
+            if (!File.Exists(dllPath)) return false;
+
+            var assembly = Assembly.LoadFrom(dllPath);
+            if (assembly == null) return false;
+
+            var type = assembly.GetType("WinformWpfConverter.WinformHost");
+            if (type != null)
+            {
+                var registerMethod = type.GetMethod("RegisterWpfFunctions");
+                if (registerMethod == null) return false;
+
+                registerMethod.Invoke(null, null);
+            }
+
+            winformHostType = type;
+            return true;
+        }
+
+        /// \~English
+        /// <summary>
         /// Convert any window panel to Winform window panel
         /// </summary>
         /// <param name="anyWindowPanel">Any window panel</param>
@@ -31,6 +64,15 @@ namespace ASEva.UICoreWF
             if (anyWindowPanel == null) return null;
             if (anyWindowPanel is WindowPanel) return anyWindowPanel as WindowPanel;
             if (anyWindowPanel is UIEto.WindowPanel) return new WindowPanelEto(anyWindowPanel as UIEto.WindowPanel);
+            if (winformHostType != null)
+            {
+                var convertMethod = winformHostType.GetMethod("ConvertWindowPanel");
+                if (convertMethod != null)
+                {
+                    var convertedPanel = convertMethod.Invoke(null, [anyWindowPanel]) as WindowPanel;
+                    if (convertedPanel != null) return convertedPanel;
+                }
+            }
             return null;
         }
 
@@ -51,7 +93,18 @@ namespace ASEva.UICoreWF
             if (anyConfigPanel == null) return null;
             if (anyConfigPanel is ConfigPanel) return anyConfigPanel as ConfigPanel;
             if (anyConfigPanel is UIEto.ConfigPanel) return new ConfigPanelEto(anyConfigPanel as UIEto.ConfigPanel);
+            if (winformHostType != null)
+            {
+                var convertMethod = winformHostType.GetMethod("ConvertConfigPanel");
+                if (convertMethod != null)
+                {
+                    var convertedPanel = convertMethod.Invoke(null, [anyConfigPanel]) as ConfigPanel;
+                    if (convertedPanel != null) return convertedPanel;
+                }
+            }
             return null;
         }
+
+        private static Type winformHostType = null;
     }
 }

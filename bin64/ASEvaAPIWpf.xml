@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIWpf.APIInfo">
             <summary>
-            version=2.1.1
+            version=2.1.2
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.APIInfo.GetAPIVersion">
@@ -143,6 +143,16 @@
             \~Chinese
             <summary>
             (api:wpf=2.1.0) 面板转换工具
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.CrossConverter.EnableWpfEmbedder">
+            \~English
+            <summary>
+            (api:wpf=2.1.2) Enable converting Winform panel to WPF panel
+            </summary>
+            \~Chinese
+            <summary>
+            (api:wpf=2.1.2) 启用Winform面板转WPF面板功能
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.CrossConverter.ConvertWindowPanel(System.Object)">
@@ -457,36 +467,6 @@
             </summary>
             <param name="bitmap">BitmapSource对象</param>
             <returns>通用图像数据</returns>
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
-            </summary>
         </member>
     </members>
 </doc>

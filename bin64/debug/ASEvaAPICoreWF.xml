@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UICoreWF.APIInfo">
             <summary>
-            version=3.2.1
+            version=3.2.2
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.APIInfo.GetAPIVersion">
@@ -334,6 +334,16 @@
             \~Chinese
             <summary>
             (api:corewf=3.2.0) 面板转换工具
+            </summary>
+        </member>
+        <member name="M:ASEva.UICoreWF.CrossConverter.EnableWpfEmbedder">
+            \~English
+            <summary>
+            (api:corewf=3.2.2) Enable converting WPF panel to Winform panel
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.2.2) 启用WPF面板转Winform面板功能
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.CrossConverter.ConvertWindowPanel(System.Object)">

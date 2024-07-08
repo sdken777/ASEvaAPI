@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace ASEva.UIWpf
 {
@@ -14,6 +16,37 @@ namespace ASEva.UIWpf
     /// </summary>
     public class CrossConverter
     {
+        /// \~English
+        /// <summary>
+        /// (api:wpf=2.1.2) Enable converting Winform panel to WPF panel
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:wpf=2.1.2) 启用Winform面板转WPF面板功能
+        /// </summary>
+        public static bool EnableWpfEmbedder()
+        {
+            if (wpfHostType != null) return true;
+
+            var dllPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + "WinformWpfConverter.dll";
+            if (!File.Exists(dllPath)) return false;
+
+            var assembly = Assembly.LoadFrom(dllPath);
+            if (assembly == null) return false;
+
+            var type = assembly.GetType("WinformWpfConverter.WpfHost");
+            if (type != null)
+            {
+                var registerMethod = type.GetMethod("RegisterWinformFunctions");
+                if (registerMethod == null) return false;
+
+                registerMethod.Invoke(null, null);
+            }
+
+            wpfHostType = type;
+            return true;
+        }
+
         /// \~English
         /// <summary>
         /// Convert any window panel to WPF window panel
@@ -35,6 +68,15 @@ namespace ASEva.UIWpf
                 var etoWindowPanelContainer = new WindowPanelEto();
                 etoWindowPanelContainer.SetEtoWindowPanel(anyWindowPanel as UIEto.WindowPanel);
                 return etoWindowPanelContainer;
+            }
+            if (wpfHostType != null)
+            {
+                var convertMethod = wpfHostType.GetMethod("ConvertWindowPanel");
+                if (convertMethod != null)
+                {
+                    var convertedPanel = convertMethod.Invoke(null, [anyWindowPanel]) as WindowPanel;
+                    if (convertedPanel != null) return convertedPanel;
+                }
             }
             return null;
         }
@@ -61,7 +103,18 @@ namespace ASEva.UIWpf
                 etoConfigPanelContainer.SetEtoConfigPanel(anyConfigPanel as UIEto.ConfigPanel);
                 return etoConfigPanelContainer;
             }
+            if (wpfHostType != null)
+            {
+                var convertMethod = wpfHostType.GetMethod("ConvertConfigPanel");
+                if (convertMethod != null)
+                {
+                    var convertedPanel = convertMethod.Invoke(null, [anyConfigPanel]) as ConfigPanel;
+                    if (convertedPanel != null) return convertedPanel;
+                }
+            }
             return null;
         }
+
+        private static Type wpfHostType = null;
     }
 }
