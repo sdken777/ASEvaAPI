@@ -42,7 +42,11 @@
             "type": "process",
             "label": "Build (Debug)",
             "group": "build",
-            "command": "${command:dotnet.restartServer}",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "../${input:helper_platform_bin_name}/debug/bin"
+            ],
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Subtask: Build for host (Debug)",
@@ -53,7 +57,11 @@
             "type": "process",
             "label": "Build (Release)",
             "group": "build",
-            "command": "${command:dotnet.restartServer}",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "../${input:helper_platform_bin_name}/bin"
+            ],
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Subtask: Build for host (Release)",
@@ -113,19 +121,6 @@
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile",
-        },
-        {
-            "type": "process",
-            "label": "Subtask: Copy built files (Debug)",
-            "hide": true,
-            "command": "cp",
-            "args": [
-                "-vf",
-                "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvaloniaTest",
-                "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvaloniaTest.dll",
-                "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvaloniaTest.runtimeconfig.json",
-                "../${input:helper_platform_bin_name}/debug/"
-            ],
         },
         {
             "type": "process",
