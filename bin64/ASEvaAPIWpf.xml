@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIWpf.APIInfo">
             <summary>
-            version=2.1.0
+            version=2.1.1
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.APIInfo.GetAPIVersion">
@@ -20,6 +20,16 @@
             (api:wpf=2.0.0) 获取API版本
             </summary>
             <returns>API版本</returns>
+        </member>
+        <member name="M:ASEva.UIWpf.APIInfo.GetThirdPartyNotices">
+            \~English
+            <summary>
+            (api:wpf=2.1.1) Get third party license notices of software used by this library
+            </summary>
+            \~Chinese
+            <summary>
+            (api:wpf=2.1.1) 获取此类库使用的第三方软件版权声明
+            </summary>
         </member>
         <member name="T:ASEva.UIWpf.AppDialogWpf">
             <summary>
@@ -447,6 +457,36 @@
             </summary>
             <param name="bitmap">BitmapSource对象</param>
             <returns>通用图像数据</returns>
+        </member>
+        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
+            <summary>
+            GeneratedInternalTypeHelper
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
+            <summary>
+            CreateInstance
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            GetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            SetPropertyValue
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
+            <summary>
+            CreateDelegate
+            </summary>
+        </member>
+        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
+            <summary>
+            AddEventHandler
+            </summary>
         </member>
     </members>
 </doc>

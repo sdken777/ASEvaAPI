@@ -808,7 +808,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get third part license notices of software used by framework
+        /// Get thirt party license notices of software used by framework
         /// </summary>
         /// <returns>Dictionary. The key is title</returns>
         /// \~Chinese

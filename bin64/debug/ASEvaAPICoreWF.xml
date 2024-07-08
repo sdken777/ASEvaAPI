@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UICoreWF.APIInfo">
             <summary>
-            version=3.2.0
+            version=3.2.1
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.APIInfo.GetAPIVersion">
@@ -20,6 +20,16 @@
             (api:corewf=3.0.0) 获取API版本
             </summary>
             <returns>API版本</returns>
+        </member>
+        <member name="M:ASEva.UICoreWF.APIInfo.GetThirdPartyNotices">
+            \~English
+            <summary>
+            (api:corewf=3.2.1) Get third party license notices of software used by this library
+            </summary>
+            \~Chinese
+            <summary>
+            (api:corewf=3.2.1) 获取此类库使用的第三方软件版权声明
+            </summary>
         </member>
         <member name="F:ASEva.UICoreWF.AppDialogCoreWF.components">
             <summary>

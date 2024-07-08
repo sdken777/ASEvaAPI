@@ -188,9 +188,7 @@ namespace ASEva.UICoreWF
 
         public Dictionary<string, string> GetThirdPartyNotices()
         {
-            var table = new Dictionary<String, String>();
-            table["WebView2"] = Encoding.UTF8.GetString(Resource.WebView2);
-            return table;
+            return APIInfo.GetThirdPartyNotices();
         }
 
         public bool ShouldPassParent()
