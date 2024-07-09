@@ -52,6 +52,7 @@ if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
     cp -vf "$CUR_DIR"/bin64/ASEvaAPIEto.dll $TARGET_DIR/bin64/
     cp -vf "$CUR_DIR"/bin64/ASEvaAPICoreWF.dll $TARGET_DIR/bin64/
     cp -vf "$CUR_DIR"/bin64/ASEvaAPIWpf.dll $TARGET_DIR/bin64/
+    cp -vf "$CUR_DIR"/bin64/WinformWpfConverter.dll $TARGET_DIR/bin64/
     cp -vf "$CUR_DIR"/bin64/PortableSharpGL.dll $TARGET_DIR/bin64/
     cp -vf "$CUR_DIR"/3party/eto-common/* $TARGET_DIR/bin64/
     cp -vf "$CUR_DIR"/3party/eto-corewf-wpf/* $TARGET_DIR/bin64/
@@ -219,6 +220,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         cp -vf "$CUR_DIR"/bin64/ASEvaAPIEto.dll $TARGET_DIR/bin64/debug/
         cp -vf "$CUR_DIR"/bin64/ASEvaAPICoreWF.dll $TARGET_DIR/bin64/debug/
         cp -vf "$CUR_DIR"/bin64/ASEvaAPIWpf.dll $TARGET_DIR/bin64/debug/
+        cp -vf "$CUR_DIR"/bin64/WinformWpfConverter.dll $TARGET_DIR/bin64/debug/
         cp -vf "$CUR_DIR"/bin64/PortableSharpGL.dll $TARGET_DIR/bin64/debug/
         cp -vf "$CUR_DIR"/3party/eto-common/* $TARGET_DIR/bin64/debug/
         cp -vf "$CUR_DIR"/3party/eto-corewf-wpf/* $TARGET_DIR/bin64/debug/
