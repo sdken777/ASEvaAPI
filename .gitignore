@@ -25,6 +25,7 @@ macapp/
 libx/
 libxa/
 **/bin/
+.na/
 
 # User-specific files
 *.suo

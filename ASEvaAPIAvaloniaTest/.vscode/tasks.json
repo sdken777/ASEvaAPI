@@ -10,7 +10,7 @@
                 "args": [
                     "../bin/VSCodeHelper.dll",
                     "shell_command",
-                    "platform_bin_name"
+                    "platform_bin_name_for_appox5_exe"
                 ]
             }
         },
