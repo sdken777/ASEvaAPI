@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.1.2
+            version=1.1.3
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -259,6 +259,16 @@
             \~Chinese
             <summary>
             (api:avalonia=1.1.0) 面板转换工具
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.CrossConverter.EnableWpfEmbedder">
+            \~English
+            <summary>
+            (api:avalonia=1.1.3) Enable converting WPF panel to Avalonia panel
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.1.3) 启用WPF面板转Avalonia面板功能
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.CrossConverter.ConvertWindowPanel(System.Object)">

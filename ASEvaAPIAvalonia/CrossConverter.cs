@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace ASEva.UIAvalonia
 {
@@ -14,6 +16,37 @@ namespace ASEva.UIAvalonia
     /// </summary>
     public class CrossConverter
     {
+        /// \~English
+        /// <summary>
+        /// (api:avalonia=1.1.3) Enable converting WPF panel to Avalonia panel
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.1.3) 启用WPF面板转Avalonia面板功能
+        /// </summary>
+        public static bool EnableWpfEmbedder()
+        {
+            if (winformHostType != null) return true;
+
+            var dllPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + "WinformWpfConverter.dll";
+            if (!File.Exists(dllPath)) return false;
+
+            var assembly = Assembly.LoadFrom(dllPath);
+            if (assembly == null) return false;
+
+            var type = assembly.GetType("WinformWpfConverter.WinformHost");
+            if (type != null)
+            {
+                var registerMethod = type.GetMethod("RegisterWpfFunctions");
+                if (registerMethod == null) return false;
+
+                registerMethod.Invoke(null, null);
+            }
+
+            winformHostType = type;
+            return true;
+        }
+
         /// \~English
         /// <summary>
         /// Convert any window panel to Avalonia window panel
@@ -37,6 +70,25 @@ namespace ASEva.UIAvalonia
                 var etoWindowPanelContainer = new EtoWindowPanel();
                 etoWindowPanelContainer.SetEtoWindowPanel(etoWindowPanel);
                 return etoWindowPanelContainer;
+            }
+
+            if (winformHostType != null)
+            {
+                var convertMethod = winformHostType.GetMethod("ConvertWindowPanel");
+                if (convertMethod != null)
+                {
+                    var winformPanel = convertMethod.Invoke(null, [anyWindowPanel]);
+                    if (winformPanel != null)
+                    {
+                        etoWindowPanel = UIEto.App.ConvertWindowPanelToEto(winformPanel);
+                        if (etoWindowPanel != null)
+                        {
+                            var etoWindowPanelContainer = new EtoWindowPanel();
+                            etoWindowPanelContainer.SetEtoWindowPanel(etoWindowPanel);
+                            return etoWindowPanelContainer;
+                        }
+                    }
+                }
             }
 
             return null;
@@ -67,7 +119,28 @@ namespace ASEva.UIAvalonia
                 return etoConfigPanelContainer;
             }
 
+            if (winformHostType != null)
+            {
+                var convertMethod = winformHostType.GetMethod("ConvertConfigPanel");
+                if (convertMethod != null)
+                {
+                    var winformPanel = convertMethod.Invoke(null, [anyConfigPanel]);
+                    if (winformPanel != null)
+                    {
+                        etoConfigPanel = UIEto.App.ConvertConfigPanelToEto(winformPanel);
+                        if (etoConfigPanel != null)
+                        {
+                            var etoConfigPanelContainer = new EtoConfigPanel();
+                            etoConfigPanelContainer.SetEtoConfigPanel(etoConfigPanel);
+                            return etoConfigPanelContainer;
+                        }
+                    }
+                }
+            }
+
             return null;
         }
+
+        private static Type winformHostType = null;
     }
 }
