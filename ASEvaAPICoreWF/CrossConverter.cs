@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// </summary>
         public static bool EnableWpfEmbedder()
         {
-            if (winformHostType != null) return true;
+            if (winformHostTypeForWpf != null) return true;
 
             var dllPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + "WinformWpfConverter.dll";
             if (!File.Exists(dllPath)) return false;
@@ -43,7 +43,38 @@ namespace ASEva.UICoreWF
                 registerMethod.Invoke(null, null);
             }
 
-            winformHostType = type;
+            winformHostTypeForWpf = type;
+            return true;
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:corewf=3.2.3) Enable converting Avalonia panel to Winform panel
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:corewf=3.2.3) 启用Avalonia面板转Winform面板功能
+        /// </summary>
+        public static bool EnableAvaloniaEmbedder()
+        {
+            if (winformHostTypeForAvalonia != null) return true;
+
+            var dllPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + "HwndHostAvalonia.dll";
+            if (!File.Exists(dllPath)) return false;
+
+            var assembly = Assembly.LoadFrom(dllPath);
+            if (assembly == null) return false;
+
+            var type = assembly.GetType("HwndHostAvalonia.WinformHost");
+            if (type != null)
+            {
+                var initMethod = type.BaseType.GetMethod("InitAvaloniaEnvironment");
+                if (initMethod == null) return false;
+
+                initMethod.Invoke(null, null);
+            }
+
+            winformHostTypeForAvalonia = type;
             return true;
         }
 
@@ -64,9 +95,18 @@ namespace ASEva.UICoreWF
             if (anyWindowPanel == null) return null;
             if (anyWindowPanel is WindowPanel) return anyWindowPanel as WindowPanel;
             if (anyWindowPanel is UIEto.WindowPanel) return new WindowPanelEto(anyWindowPanel as UIEto.WindowPanel);
-            if (winformHostType != null)
+            if (winformHostTypeForWpf != null)
             {
-                var convertMethod = winformHostType.GetMethod("ConvertWindowPanel");
+                var convertMethod = winformHostTypeForWpf.GetMethod("ConvertWindowPanel");
+                if (convertMethod != null)
+                {
+                    var convertedPanel = convertMethod.Invoke(null, [anyWindowPanel]) as WindowPanel;
+                    if (convertedPanel != null) return convertedPanel;
+                }
+            }
+            if (winformHostTypeForAvalonia != null)
+            {
+                var convertMethod = winformHostTypeForAvalonia.GetMethod("ConvertWindowPanel");
                 if (convertMethod != null)
                 {
                     var convertedPanel = convertMethod.Invoke(null, [anyWindowPanel]) as WindowPanel;
@@ -93,9 +133,18 @@ namespace ASEva.UICoreWF
             if (anyConfigPanel == null) return null;
             if (anyConfigPanel is ConfigPanel) return anyConfigPanel as ConfigPanel;
             if (anyConfigPanel is UIEto.ConfigPanel) return new ConfigPanelEto(anyConfigPanel as UIEto.ConfigPanel);
-            if (winformHostType != null)
+            if (winformHostTypeForWpf != null)
             {
-                var convertMethod = winformHostType.GetMethod("ConvertConfigPanel");
+                var convertMethod = winformHostTypeForWpf.GetMethod("ConvertConfigPanel");
+                if (convertMethod != null)
+                {
+                    var convertedPanel = convertMethod.Invoke(null, [anyConfigPanel]) as ConfigPanel;
+                    if (convertedPanel != null) return convertedPanel;
+                }
+            }
+            if (winformHostTypeForAvalonia != null)
+            {
+                var convertMethod = winformHostTypeForAvalonia.GetMethod("ConvertConfigPanel");
                 if (convertMethod != null)
                 {
                     var convertedPanel = convertMethod.Invoke(null, [anyConfigPanel]) as ConfigPanel;
@@ -105,6 +154,7 @@ namespace ASEva.UICoreWF
             return null;
         }
 
-        private static Type winformHostType = null;
+        private static Type winformHostTypeForWpf = null;
+        private static Type winformHostTypeForAvalonia = null;
     }
 }

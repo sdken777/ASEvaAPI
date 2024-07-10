@@ -26,7 +26,7 @@ namespace ASEva.UIWpf
         /// </summary>
         public static bool EnableWinformEmbedder()
         {
-            if (wpfHostType != null) return true;
+            if (wpfHostTypeForWinform != null) return true;
 
             var dllPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + "WinformWpfConverter.dll";
             if (!File.Exists(dllPath)) return false;
@@ -43,7 +43,38 @@ namespace ASEva.UIWpf
                 registerMethod.Invoke(null, null);
             }
 
-            wpfHostType = type;
+            wpfHostTypeForWinform = type;
+            return true;
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:wpf=2.1.5) Enable converting Avalonia panel to WPF panel
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:wpf=2.1.5) 启用Avalonia面板转WPF面板功能
+        /// </summary>
+        public static bool EnableAvaloniaEmbedder()
+        {
+            if (wpfHostTypeForAvalonia != null) return true;
+
+            var dllPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + "HwndHostAvalonia.dll";
+            if (!File.Exists(dllPath)) return false;
+
+            var assembly = Assembly.LoadFrom(dllPath);
+            if (assembly == null) return false;
+
+            var type = assembly.GetType("HwndHostAvalonia.WpfHost");
+            if (type != null)
+            {
+                var initMethod = type.BaseType.GetMethod("InitAvaloniaEnvironment");
+                if (initMethod == null) return false;
+
+                initMethod.Invoke(null, null);
+            }
+
+            wpfHostTypeForAvalonia = type;
             return true;
         }
 
@@ -69,9 +100,18 @@ namespace ASEva.UIWpf
                 etoWindowPanelContainer.SetEtoWindowPanel(anyWindowPanel as UIEto.WindowPanel);
                 return etoWindowPanelContainer;
             }
-            if (wpfHostType != null)
+            if (wpfHostTypeForWinform != null)
             {
-                var convertMethod = wpfHostType.GetMethod("ConvertWindowPanel");
+                var convertMethod = wpfHostTypeForWinform.GetMethod("ConvertWindowPanel");
+                if (convertMethod != null)
+                {
+                    var convertedPanel = convertMethod.Invoke(null, [anyWindowPanel]) as WindowPanel;
+                    if (convertedPanel != null) return convertedPanel;
+                }
+            }
+            if (wpfHostTypeForAvalonia != null)
+            {
+                var convertMethod = wpfHostTypeForAvalonia.GetMethod("ConvertWindowPanel");
                 if (convertMethod != null)
                 {
                     var convertedPanel = convertMethod.Invoke(null, [anyWindowPanel]) as WindowPanel;
@@ -103,9 +143,18 @@ namespace ASEva.UIWpf
                 etoConfigPanelContainer.SetEtoConfigPanel(anyConfigPanel as UIEto.ConfigPanel);
                 return etoConfigPanelContainer;
             }
-            if (wpfHostType != null)
+            if (wpfHostTypeForWinform != null)
             {
-                var convertMethod = wpfHostType.GetMethod("ConvertConfigPanel");
+                var convertMethod = wpfHostTypeForWinform.GetMethod("ConvertConfigPanel");
+                if (convertMethod != null)
+                {
+                    var convertedPanel = convertMethod.Invoke(null, [anyConfigPanel]) as ConfigPanel;
+                    if (convertedPanel != null) return convertedPanel;
+                }
+            }
+            if (wpfHostTypeForAvalonia != null)
+            {
+                var convertMethod = wpfHostTypeForAvalonia.GetMethod("ConvertConfigPanel");
                 if (convertMethod != null)
                 {
                     var convertedPanel = convertMethod.Invoke(null, [anyConfigPanel]) as ConfigPanel;
@@ -115,6 +164,7 @@ namespace ASEva.UIWpf
             return null;
         }
 
-        private static Type wpfHostType = null;
+        private static Type wpfHostTypeForWinform = null;
+        private static Type wpfHostTypeForAvalonia = null;
     }
 }
