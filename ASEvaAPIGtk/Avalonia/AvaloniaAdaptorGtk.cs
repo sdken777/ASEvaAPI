@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using ASEva.UIEto;
-using Gtk;
 
 namespace ASEva.UIGtk
 {
@@ -40,7 +39,7 @@ namespace ASEva.UIGtk
                         if (uiBackend != null && uiBackend == "x11")
                         {
                             ctx.Plug = new Gtk.Plug((ulong)socketID);
-                            ctx.Plug.Add(Eto.Forms.Gtk3Helpers.ToNative(ctx.Control, true));
+                            ctx.Plug.Add(ctx.Control is Gtk.Widget ? (ctx.Control as Gtk.Widget) : Eto.Forms.Gtk3Helpers.ToNative(ctx.Control as Eto.Forms.Control, true));
                             ctx.Plug.ShowAll();
                         }
                     }
@@ -57,13 +56,21 @@ namespace ASEva.UIGtk
             return false;
         }
 
-        public nint CreateContainer(nint parent, Eto.Forms.Control control, out object context)
+        public bool IsControlValid(object control)
+        {
+            if (control == null) return false;
+            if (control is Eto.Forms.Control) return true;
+            if (control is Gtk.Widget) return true;
+            return false;
+        }
+
+        public nint CreateContainer(nint parent, object control, out object context)
         {
             context = null;
             return 0;
         }
 
-        public void UseContainer(nint container, Eto.Forms.Control control, out object context)
+        public void UseContainer(nint container, object control, out object context)
         {
             var ctx = new Context();
             ctx.ParentXID = container;
@@ -121,7 +128,7 @@ namespace ASEva.UIGtk
             public nint ParentXID { get; set; }
             public nint Socket { get; set; }
             public Gtk.Plug Plug { get; set; }
-            public Eto.Forms.Control Control { get; set; }
+            public object Control { get; set; }
             public int Active { get; set; }
             public bool CorrectionInvoked { get; set; }
         }

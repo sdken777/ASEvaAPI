@@ -18,13 +18,23 @@ namespace ASEva.UIAvalonia
     {
         /// \~English
         /// <summary>
-        /// The Eto control to be embedded. Should be set just after calling constructor's InitializeComponent
+        /// The Eto control to be embedded. Either this or NativeControl should be set just after calling constructor's InitializeComponent
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 待嵌入的Eto控件，需要在构造函数调用InitializeComponent后立即设置
+        /// 待嵌入的Eto控件，需要在构造函数调用InitializeComponent后立即设置 (与NativeControl二选一)
         /// </summary>
         public Eto.Forms.Control EtoControl { protected get; set; }
+
+        /// \~English
+        /// <summary>
+        /// The native control to be embedded. Either this or EtoControl should be set just after calling constructor's InitializeComponent
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 待嵌入的原生控件，需要在构造函数调用InitializeComponent后立即设置 (与EtoControl二选一)
+        /// </summary>
+        public object NativeControl { protected get; set; }
 
         /// \~English
         /// <summary>
@@ -56,13 +66,13 @@ namespace ASEva.UIAvalonia
 
         protected override IPlatformHandle CreateNativeControlCore(IPlatformHandle parent)
         {
-            if (EtoInitializer.Adaptor == null || !EtoInitializer.Initialized || EtoControl == null) return base.CreateNativeControlCore(parent);
+            if (!canCreateNativeControlCore()) return base.CreateNativeControlCore(parent);
 
             PlatformHandle ret = null;
             if (EtoInitializer.Adaptor.ShouldCreateContainer())
             {
                 object context = null;
-                var container = EtoInitializer.Adaptor.CreateContainer(parent.Handle, EtoControl, out context);
+                var container = EtoInitializer.Adaptor.CreateContainer(parent.Handle, EtoControl ?? NativeControl, out context);
                 ret = new PlatformHandle
                 {
                     Handle = container,
@@ -74,7 +84,7 @@ namespace ASEva.UIAvalonia
             {
                 object context = null;
                 var container = base.CreateNativeControlCore(parent);
-                EtoInitializer.Adaptor.UseContainer(container.Handle, EtoControl, out context);
+                EtoInitializer.Adaptor.UseContainer(container.Handle, EtoControl ?? NativeControl, out context);
                 ret = new PlatformHandle
                 {
                     Handle = container.Handle,
@@ -105,6 +115,14 @@ namespace ASEva.UIAvalonia
             while (parentWindow.Parent != null) parentWindow = parentWindow.Parent;
             if (parentWindow == null || parentWindow is not Window) return false;
             return (parentWindow as Window).IsActive;
+        }
+
+        private bool canCreateNativeControlCore()
+        {
+            if (EtoInitializer.Adaptor == null || !EtoInitializer.Initialized) return false;
+            if (EtoControl != null) return true;
+            if (NativeControl == null) return false;
+            return EtoInitializer.Adaptor.IsControlValid(NativeControl);
         }
 
         private class PlatformHandle : IPlatformHandle
