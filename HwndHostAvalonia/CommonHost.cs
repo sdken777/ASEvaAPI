@@ -12,7 +12,7 @@ namespace HwndHostAvalonia
 
             avaloniaEnvInitialized = true;
 
-            var appBuilder = AppBuilder.Configure<AvaloniaApplication>().UsePlatformDetect().WithInterFont();
+            var appBuilder = AppBuilder.Configure<AvaloniaApplicationSimpleTheme>().UsePlatformDetect().WithInterFont();
             var appLifetime = new ClassicDesktopStyleApplicationLifetime();
             appBuilder.SetupWithLifetime(appLifetime);
 
