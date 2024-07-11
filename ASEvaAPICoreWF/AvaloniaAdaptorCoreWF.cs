@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using ASEva.UIEto;
-using Eto.Forms;
 
 namespace ASEva.UICoreWF
 {
@@ -12,9 +11,18 @@ namespace ASEva.UICoreWF
             UsingAvalonia = true;
         }
 
-        public nint CreateContainer(nint parent, Control control, out object context)
+        public bool IsControlValid(object control)
         {
-            var winformControl = WinFormsHelpers.ToNative(control, true);
+            if (control == null) return false;
+            if (control is Eto.Forms.Control) return true;
+            if (control is System.Windows.Forms.Control) return true;
+            return false;
+        }
+
+        public nint CreateContainer(nint parent, object control, out object context)
+        {
+            var winformControl = control is System.Windows.Forms.Control ? control as System.Windows.Forms.Control :
+                Eto.Forms.WinFormsHelpers.ToNative(control as Eto.Forms.Control, true);
             winformControl.Parent = System.Windows.Forms.Control.FromHandle(parent);
             context = winformControl;
             return winformControl.Handle;
@@ -44,7 +52,7 @@ namespace ASEva.UICoreWF
             return true;
         }
 
-        public void UseContainer(nint container, Control control, out object context)
+        public void UseContainer(nint container, object control, out object context)
         {
             context = null;
         }
