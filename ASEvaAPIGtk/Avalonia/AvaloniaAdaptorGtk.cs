@@ -36,9 +36,13 @@ namespace ASEva.UIGtk
                         XembedSocket.xembed_socket_update_both_allocation(ctx.Socket);
                         for (int i = 0; i < 3; i++) XembedSocket.xembed_socket_iteration(ctx.Socket, 0, 0);
 
-                        ctx.Plug = new Gtk.Plug((ulong)socketID);
-                        ctx.Plug.Add(Eto.Forms.Gtk3Helpers.ToNative(ctx.Control, true));
-                        ctx.Plug.ShowAll();
+                        var uiBackend = App.GetUIBackend();
+                        if (uiBackend != null && uiBackend == "x11")
+                        {
+                            ctx.Plug = new Gtk.Plug((ulong)socketID);
+                            ctx.Plug.Add(Eto.Forms.Gtk3Helpers.ToNative(ctx.Control, true));
+                            ctx.Plug.ShowAll();
+                        }
                     }
                 }
                 else
@@ -73,14 +77,17 @@ namespace ASEva.UIGtk
             var ctx = context as Context;
             if (ctx.Socket != 0)
             {
-                ctx.Plug.Hide();
-                ctx.Plug.Destroy();
-                for (int i = 0; i < 3; i++)
+                if (ctx.Plug != null)
                 {
-                    while (Gtk.Application.EventsPending()) Gtk.Main.IterationDo(false);
-                    XembedSocket.xembed_socket_iteration(ctx.Socket, ctx.Active, ctx.Active);
+                    ctx.Plug.Hide();
+                    ctx.Plug.Destroy();
+                    for (int i = 0; i < 3; i++)
+                    {
+                        while (Gtk.Application.EventsPending()) Gtk.Main.IterationDo(false);
+                        XembedSocket.xembed_socket_iteration(ctx.Socket, ctx.Active, ctx.Active);
+                    }
+                    ctx.Plug = null;
                 }
-                ctx.Plug = null;
                 ctx.Socket = 0;
             }
             ctxs.Remove(ctx);

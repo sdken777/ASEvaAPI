@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 3, 0, 0); // Update log / 更新记录: WebView实现大部分改为使用WebkitGtkSharp
+            return new Version(3, 3, 0, 1); // Update log / 更新记录: 修正wayland下AvaloniaAdaptorGtk直接崩溃问题
         }
     }
 }
