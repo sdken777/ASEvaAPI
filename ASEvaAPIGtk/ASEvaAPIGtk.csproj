@@ -57,6 +57,9 @@
     <Reference Include="PangoSharp">
       <HintPath>..\binx\PangoSharp.dll</HintPath>
     </Reference>
+    <Reference Include="WebkitGtkSharp">
+      <HintPath>..\binx\WebkitGtkSharp.dll</HintPath>
+    </Reference>
     <Reference Include="PortableSharpGL">
       <HintPath>..\binx\PortableSharpGL.dll</HintPath>
     </Reference>
