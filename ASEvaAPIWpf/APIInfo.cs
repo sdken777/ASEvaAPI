@@ -1,8 +1,8 @@
 ﻿/*! \mainpage
  * \~English This library contains the APIs for .NET Core Wpf. See ASEva.UIWpf for details. \n
  * \~Chinese 此类库为ASEva-API中基于.NET Core Wpf的部分。详见 ASEva.UIWpf \n
- * \~English This document corresponds to API version: 2.1.5
- * \~Chinese 本文档对应API版本：2.1.5
+ * \~English This document corresponds to API version: 2.1.6
+ * \~Chinese 本文档对应API版本：2.1.6
  */
 
 using System;
@@ -12,7 +12,7 @@ using System.Text;
 namespace ASEva.UIWpf
 {
     /// <summary>
-    /// version=2.1.5
+    /// version=2.1.6
     /// </summary>
     public class APIInfo
     {
@@ -28,7 +28,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 5, 0); // Update log / 更新记录: 新增CrossConverter.EnableAvaloniaEmbedder
+            return new Version(2, 1, 6, 0); // Update log / 更新记录: WebView2更新
         }
 
         /// \~English

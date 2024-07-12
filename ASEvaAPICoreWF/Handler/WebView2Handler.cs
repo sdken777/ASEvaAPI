@@ -131,10 +131,23 @@ namespace ASEva.UICoreWF
 			{
 				throw new WebView2InitializationException("Failed to initialze WebView2", e.InitializationException);
 			}
-			
+
 			// can't actually do anything here, so execute them in the main loop
-			Application.Instance.AsyncInvoke(RunDelayedActions);
+			// CHECK: 使用Timer确保执行
+			//Application.Instance.AsyncInvoke(RunDelayedActions);
+			if (runDelayedActionTimer != null)
+			{
+				runDelayedActionTimer.Tick += delegate
+				{
+					runDelayedActionTimer.Stop();
+					runDelayedActionTimer = null;
+					RunDelayedActions();
+				};
+				runDelayedActionTimer.Start();
+			}
 		}
+
+		private System.Windows.Forms.Timer runDelayedActionTimer = new System.Windows.Forms.Timer() { Interval = 100 };
 
 		private void RunDelayedActions()
 		{
