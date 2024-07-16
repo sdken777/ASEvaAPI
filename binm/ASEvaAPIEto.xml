@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.16.1
+            version=2.16.2
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -4386,6 +4386,16 @@
             <param name="anchor">文本锚点坐标位置类型</param>
             <param name="logicalX">文本锚点X轴逻辑坐标</param>
             <param name="logicalY">文本锚点Y轴逻辑坐标</param>
+        </member>
+        <member name="M:ASEva.UIEto.TextBitmap.ReleaseResources">
+            \~English
+            <summary>
+            (api:eto=2.16.2) Release resources
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=2.16.2) 释放资源
+            </summary>
         </member>
         <member name="P:ASEva.UIEto.TextBitmap.Text">
             \~English

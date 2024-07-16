@@ -146,6 +146,19 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
+        /// (api:eto=2.16.2) Release resources
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.16.2) 释放资源
+        /// </summary>
+        public void ReleaseResources()
+        {
+            bitmap.Dispose();
+        }
+
+        /// \~English
+        /// <summary>
         /// The text
         /// </summary>
         /// \~Chinese
