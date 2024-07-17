@@ -8236,7 +8236,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.2.11
+            version=3.2.12
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -8951,6 +8951,46 @@
             特殊摄像头：前向（鱼眼模型）
             </summary>
         </member>
+        <member name="T:ASEva.SignalPackMode">
+            \~English
+            <summary>
+            (api:app=3.2.12) Interpolation mode for a signal in packing
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.2.12) 信号打包中单个信号的插值模式
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalPackMode.Default">
+            \~English
+            <summary>
+            Normal interpolation
+            </summary>
+            \~Chinese
+            <summary>
+            正常插值
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalPackMode.Nearest">
+            \~English
+            <summary>
+            Use value of the nearest frame
+            </summary>
+            \~Chinese
+            <summary>
+            使用前后帧中时间较近的值
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalPackMode.Latest">
+            \~English
+            <summary>
+            Use the buffered value (Unnecessary to wait for later frame)
+            </summary>
+            \~Chinese
+            <summary>
+            使用缓存下来的最后数值（无需等待后一帧）
+            </summary>
+        </member>
         <member name="T:ASEva.SignalPackConfigElem">
             \~English
             <summary>
@@ -8961,6 +9001,66 @@
             (api:app=3.0.0) 信号打包中单个信号的配置
             </summary>
         </member>
+        <member name="P:ASEva.SignalPackConfigElem.ValueID">
+            \~English
+            <summary>
+            Value signal ID
+            </summary>
+            \~Chinese
+            <summary>
+            数值信号ID
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfigElem.SignID">
+            \~English
+            <summary>
+            Sign bit signal ID
+            </summary>
+            \~Chinese
+            <summary>
+            符号位信号ID
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfigElem.Scale">
+            \~English
+            <summary>
+            Multiplier
+            </summary>
+            \~Chinese
+            <summary>
+            乘数
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfigElem.Timeout">
+            \~English
+            <summary>
+            Output null if no data for a while, in milliseconds
+            </summary>
+            \~Chinese
+            <summary>
+            超过一段时间无数据则输出空，单位毫秒
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfigElem.Mode">
+            \~English
+            <summary>
+            (api:app=3.2.12) Interpolation mode for one signal, only available while IsInterpolationMode is true
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.2.12) 单个信号的插值模式，仅当打包配置中IsInterpolationMode为true时有效
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfigElem.IsNearestMode">
+            \~English
+            <summary>
+            Deprecated. Please use Mode
+            </summary>
+            \~Chinese
+            <summary>
+            已弃用，应使用Mode
+            </summary>
+        </member>
         <member name="T:ASEva.SignalPackConfig">
             \~English
             <summary>
@@ -8969,6 +9069,56 @@
             \~Chinese
             <summary>
             (api:app=3.0.0) 信号打包配置
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfig.Protocol">
+            \~English
+            <summary>
+            The output sample protocol for signal packing
+            </summary>
+            \~Chinese
+            <summary>
+            信号打包输出的样本协议名
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfig.IsInterpolationMode">
+            \~English
+            <summary>
+            Whether in interpolation mode, otherwise bus message packing mode
+            </summary>
+            \~Chinese
+            <summary>
+            是否为插值模式，否则为总线报文打包模式
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfig.FinalMessageID">
+            \~English
+            <summary>
+            Final message, only available for bus message packing mode
+            </summary>
+            \~Chinese
+            <summary>
+            帧尾报文，进在总线报文打包模式下有效
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfig.SamplingRate">
+            \~English
+            <summary>
+            Sampling rate, only available for interpolation mode
+            </summary>
+            \~Chinese
+            <summary>
+            采样率，进在插值模式下有效
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfig.SignalConfigs">
+            \~English
+            <summary>
+            Configuration for each signal
+            </summary>
+            \~Chinese
+            <summary>
+            每个信号的配置
             </summary>
         </member>
         <member name="T:ASEva.ModuleConfig">

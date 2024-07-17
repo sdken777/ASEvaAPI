@@ -497,6 +497,47 @@ namespace ASEva
 
     /// \~English
     /// <summary>
+    /// (api:app=3.2.12) Interpolation mode for a signal in packing
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.2.12) 信号打包中单个信号的插值模式
+    /// </summary>
+    public enum SignalPackMode
+    {
+        /// \~English
+        /// <summary>
+        /// Normal interpolation
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 正常插值
+        /// </summary>
+        Default = 0,
+
+        /// \~English
+        /// <summary>
+        /// Use value of the nearest frame
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 使用前后帧中时间较近的值
+        /// </summary>
+        Nearest = 1,
+
+        /// \~English
+        /// <summary>
+        /// Use the buffered value (Unnecessary to wait for later frame)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 使用缓存下来的最后数值（无需等待后一帧）
+        /// </summary>
+        Latest = 2,
+    }
+
+    /// \~English
+    /// <summary>
     /// (api:app=3.0.0) Configuration for a signal in packing
     /// </summary>
     /// \~Chinese
@@ -505,11 +546,70 @@ namespace ASEva
     /// </summary>
     public class SignalPackConfigElem
     {
+        /// \~English
+        /// <summary>
+        /// Value signal ID
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 数值信号ID
+        /// </summary>
         public String ValueID { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Sign bit signal ID
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 符号位信号ID
+        /// </summary>
         public String SignID { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Multiplier
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 乘数
+        /// </summary>
         public double Scale { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Output null if no data for a while, in milliseconds
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 超过一段时间无数据则输出空，单位毫秒
+        /// </summary>
         public double Timeout { get; set; }
-        public bool IsNearestMode { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.2.12) Interpolation mode for one signal, only available while IsInterpolationMode is true
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.2.12) 单个信号的插值模式，仅当打包配置中IsInterpolationMode为true时有效
+        /// </summary>
+        public SignalPackMode Mode { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Deprecated. Please use Mode
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 已弃用，应使用Mode
+        /// </summary>
+        public bool IsNearestMode
+        {
+            get { return Mode == SignalPackMode.Nearest; }
+            set { Mode = value ? SignalPackMode.Nearest : SignalPackMode.Default; }
+        }
+
         public SignalPackConfigElem()
         {
             Scale = 1;
@@ -528,11 +628,56 @@ namespace ASEva
     /// </summary>
     public class SignalPackConfig
     {
+        /// \~English
+        /// <summary>
+        /// The output sample protocol for signal packing
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 信号打包输出的样本协议名
+        /// </summary>
         public String Protocol { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Whether in interpolation mode, otherwise bus message packing mode
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 是否为插值模式，否则为总线报文打包模式
+        /// </summary>
         public bool IsInterpolationMode { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Final message, only available for bus message packing mode
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 帧尾报文，进在总线报文打包模式下有效
+        /// </summary>
         public String FinalMessageID { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Sampling rate, only available for interpolation mode
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 采样率，进在插值模式下有效
+        /// </summary>
         public int SamplingRate { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Configuration for each signal
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 每个信号的配置
+        /// </summary>
         public List<SignalPackConfigElem> SignalConfigs { get; set; }
+
         public SignalPackConfig()
         {
             IsInterpolationMode = false;
