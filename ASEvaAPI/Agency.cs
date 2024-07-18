@@ -1774,7 +1774,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get third part license notices of software used by framework
+        /// Get thirt party license notices of software used by framework
         /// </summary>
         /// <returns>Dictionary. The key is title</returns>
         /// \~Chinese
@@ -3471,8 +3471,7 @@ namespace ASEva
         /// <returns>是否使用境内网络服务</returns>
         public static bool IsPRCWebPreferred()
         {
-            if (!AgencyAsync.SyncMode) return false;
-            return AgencyAsync.IsPRCWebPreferred().Result;
+            return AgencyLocal.IsPRCWebPreferred();
         }
 
         /// \~English
@@ -4117,8 +4116,7 @@ namespace ASEva
         /// <returns>返回总线报文配置，若删除则返回null</returns>
         public static String SelectBusMessage(String originMessageID)
         {
-            if (!AgencyAsync.SyncMode) return null;
-            return AgencyAsync.SelectBusMessage(originMessageID).Result;
+            return AgencyLocal.SelectBusMessage(originMessageID).Result;
         }
 
         /// \~English
@@ -4135,7 +4133,7 @@ namespace ASEva
         /// <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
         public static void SelectBusMessages(SelectBusMessageHandler handler, List<String> existBusMessageIDList)
         {
-            AgencyAsync.SelectBusMessages(handler, existBusMessageIDList);
+            AgencyLocal.SelectBusMessages(handler, existBusMessageIDList);
         }
 
         /// \~English
@@ -4152,8 +4150,7 @@ namespace ASEva
         /// <returns>新选择的总线协议文件</returns>
         public static BusProtocolFileID[] SelectBusProtocolFiles(BusProtocolFileID[] selected)
         {
-            if (!AgencyAsync.SyncMode) return null;
-            return AgencyAsync.SelectBusProtocolFiles(selected).Result;
+            return AgencyLocal.SelectBusProtocolFiles(selected).Result;
         }
 
         /// \~English
@@ -4176,8 +4173,7 @@ namespace ASEva
         /// <returns>返回信号配置，若删除则返回null</returns>
         public static SignalConfig SelectSignal(SignalConfig origin, bool withScale, bool withSignBit, String unit)
         {
-            if (!AgencyAsync.SyncMode) return null;
-            return AgencyAsync.SelectSignal(origin, withScale, withSignBit, unit).Result;
+            return AgencyLocal.SelectSignal(origin, withScale, withSignBit, unit).Result;
         }
 
         /// \~English
@@ -4194,7 +4190,7 @@ namespace ASEva
         /// <param name="existSignalIDList">既存的选中信号ID列表</param>
         public static void SelectSignals(SelectSignalHandler handler, List<String> existSignalIDList)
         {
-            AgencyAsync.SelectSignals(handler, existSignalIDList);
+            AgencyLocal.SelectSignals(handler, existSignalIDList);
         }
 
         /// \~English

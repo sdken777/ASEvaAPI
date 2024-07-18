@@ -173,11 +173,6 @@ namespace ASEva
         Task ResetGPUDecoderTestResults();
         Task RunConsole(object caller, string consoleClassID);
         Task<(TaskResult, String)> RunStandaloneTask(object caller, String taskClassID, String config);
-        Task<String> SelectBusMessage(String originMessageID);
-        Task SelectBusMessages(SelectBusMessageHandler handler, List<String> existBusMessageIDList);
-        Task<BusProtocolFileID[]> SelectBusProtocolFiles(BusProtocolFileID[] selected);
-        Task<SignalConfig> SelectSignal(SignalConfig origin, bool withScale, bool withSignBit, String unit);
-        Task SelectSignals(SelectSignalHandler handler, List<String> existSignalIDList);
         Task SendBusMessage(BusMessage message);
         Task<byte[]> SendBusMessageBound(String messageID, uint? interval);
         Task SendManualTrigger(int channel);
@@ -1359,7 +1354,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get third part license notices of software used by framework
+        /// Get thirt party license notices of software used by framework
         /// </summary>
         /// <returns>Dictionary. The key is title</returns>
         /// \~Chinese
@@ -2914,97 +2909,6 @@ namespace ASEva
         public static Task<(TaskResult, String)> RunStandaloneTask(object caller, String taskClassID, String config)
         {
             return Handler.RunStandaloneTask(caller, taskClassID, config);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Show a modal dialog to select bus message
-        /// </summary>
-        /// <param name="originMessageID">Initial bus message configuration</param>
-        /// <returns>Bus message configuration result, null if requested to delete</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 打开对话框选择总线报文
-        /// </summary>
-        /// <param name="originMessageID">初始总线报文配置</param>
-        /// <returns>返回总线报文配置，若删除则返回null</returns>
-        public static Task<String> SelectBusMessage(String originMessageID)
-        {
-            return Handler.SelectBusMessage(originMessageID);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Show a modal dialog to select multiple bus messages at once
-        /// </summary>
-        /// <param name="handler">Callback to handle bus message selection</param>
-        /// <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
-        /// \~Chinese
-        /// <summary>
-        /// 打开对话框一次性选择多个总线报文
-        /// </summary>
-        /// <param name="handler">选中总线报文时调用的回调接口</param>
-        /// <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
-        public static Task SelectBusMessages(SelectBusMessageHandler handler, List<String> existBusMessageIDList)
-        {
-            return Handler.SelectBusMessages(handler, existBusMessageIDList);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Show modal dialog to select (multiple) bus protocols
-        /// </summary>
-        /// <param name="selected">Bus protocols already selected</param>
-        /// <returns>Newly selected bus protocols</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 打开对话框选择总线协议文件（可多个）
-        /// </summary>
-        /// <param name="selected">已选择的总线协议文件</param>
-        /// <returns>新选择的总线协议文件</returns>
-        public static Task<BusProtocolFileID[]> SelectBusProtocolFiles(BusProtocolFileID[] selected)
-        {
-            return Handler.SelectBusProtocolFiles(selected);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Show a modal dialog to select signal
-        /// </summary>
-        /// <param name="origin">Initial signal configuration</param>
-        /// <param name="withScale">Whether to enable the configuration of value scale</param>
-        /// <param name="withSignBit">Whether to enable the configuration of sign bit signal</param>
-        /// <param name="unit">The unit to display, only available while the configuration of value scale is enabled</param>
-        /// <returns>Signal configuration result, null if requested to delete</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 打开对话框选择信号
-        /// </summary>
-        /// <param name="origin">初始信号配置</param>
-        /// <param name="withScale">是否包含乘数的配置</param>
-        /// <param name="withSignBit">是否包含符号位信号的配置</param>
-        /// <param name="unit">该信号的单位显示，仅当包含乘数配置时有效</param>
-        /// <returns>返回信号配置，若删除则返回null</returns>
-        public static Task<SignalConfig> SelectSignal(SignalConfig origin, bool withScale, bool withSignBit, String unit)
-        {
-            return Handler.SelectSignal(origin, withScale, withSignBit, unit);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Show a modal dialog to select multiple signals at once
-        /// </summary>
-        /// <param name="handler">Callback to handle signal selection</param>
-        /// <param name="existSignalIDList">List of all signal IDs that already exist</param>
-        /// \~Chinese
-        /// <summary>
-        /// 打开对话框一次性选择多个信号
-        /// </summary>
-        /// <param name="handler">选中信号时调用的回调接口</param>
-        /// <param name="existSignalIDList">既存的选中信号ID列表</param>
-        public static Task SelectSignals(SelectSignalHandler handler, List<String> existSignalIDList)
-        {
-            return Handler.SelectSignals(handler, existSignalIDList);
         }
 
         /// \~English

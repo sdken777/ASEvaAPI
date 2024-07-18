@@ -1387,7 +1387,7 @@
         <member name="M:ASEva.Agency.GetFrameworkThirdPartyNotices">
             \~English
             <summary>
-            Get third part license notices of software used by framework
+            Get thirt party license notices of software used by framework
             </summary>
             <returns>Dictionary. The key is title</returns>
             \~Chinese
@@ -4913,7 +4913,7 @@
         <member name="M:ASEva.AgencyAsync.GetFrameworkThirdPartyNotices">
             \~English
             <summary>
-            Get third part license notices of software used by framework
+            Get thirt party license notices of software used by framework
             </summary>
             <returns>Dictionary. The key is title</returns>
             \~Chinese
@@ -6190,82 +6190,6 @@
             <param name="config">配置的字符串描述</param>
             <returns>1. 任务运行结果; 2. 任务的返回值信息</returns>
         </member>
-        <member name="M:ASEva.AgencyAsync.SelectBusMessage(System.String)">
-            \~English
-            <summary>
-            Show a modal dialog to select bus message
-            </summary>
-            <param name="originMessageID">Initial bus message configuration</param>
-            <returns>Bus message configuration result, null if requested to delete</returns>
-            \~Chinese
-            <summary>
-            打开对话框选择总线报文
-            </summary>
-            <param name="originMessageID">初始总线报文配置</param>
-            <returns>返回总线报文配置，若删除则返回null</returns>
-        </member>
-        <member name="M:ASEva.AgencyAsync.SelectBusMessages(ASEva.SelectBusMessageHandler,System.Collections.Generic.List{System.String})">
-            \~English
-            <summary>
-            Show a modal dialog to select multiple bus messages at once
-            </summary>
-            <param name="handler">Callback to handle bus message selection</param>
-            <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
-            \~Chinese
-            <summary>
-            打开对话框一次性选择多个总线报文
-            </summary>
-            <param name="handler">选中总线报文时调用的回调接口</param>
-            <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
-        </member>
-        <member name="M:ASEva.AgencyAsync.SelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
-            \~English
-            <summary>
-            Show modal dialog to select (multiple) bus protocols
-            </summary>
-            <param name="selected">Bus protocols already selected</param>
-            <returns>Newly selected bus protocols</returns>
-            \~Chinese
-            <summary>
-            打开对话框选择总线协议文件（可多个）
-            </summary>
-            <param name="selected">已选择的总线协议文件</param>
-            <returns>新选择的总线协议文件</returns>
-        </member>
-        <member name="M:ASEva.AgencyAsync.SelectSignal(ASEva.SignalConfig,System.Boolean,System.Boolean,System.String)">
-            \~English
-            <summary>
-            Show a modal dialog to select signal
-            </summary>
-            <param name="origin">Initial signal configuration</param>
-            <param name="withScale">Whether to enable the configuration of value scale</param>
-            <param name="withSignBit">Whether to enable the configuration of sign bit signal</param>
-            <param name="unit">The unit to display, only available while the configuration of value scale is enabled</param>
-            <returns>Signal configuration result, null if requested to delete</returns>
-            \~Chinese
-            <summary>
-            打开对话框选择信号
-            </summary>
-            <param name="origin">初始信号配置</param>
-            <param name="withScale">是否包含乘数的配置</param>
-            <param name="withSignBit">是否包含符号位信号的配置</param>
-            <param name="unit">该信号的单位显示，仅当包含乘数配置时有效</param>
-            <returns>返回信号配置，若删除则返回null</returns>
-        </member>
-        <member name="M:ASEva.AgencyAsync.SelectSignals(ASEva.SelectSignalHandler,System.Collections.Generic.List{System.String})">
-            \~English
-            <summary>
-            Show a modal dialog to select multiple signals at once
-            </summary>
-            <param name="handler">Callback to handle signal selection</param>
-            <param name="existSignalIDList">List of all signal IDs that already exist</param>
-            \~Chinese
-            <summary>
-            打开对话框一次性选择多个信号
-            </summary>
-            <param name="handler">选中信号时调用的回调接口</param>
-            <param name="existSignalIDList">既存的选中信号ID列表</param>
-        </member>
         <member name="M:ASEva.AgencyAsync.SendBusMessage(ASEva.BusMessage)">
             \~English
             <summary>
@@ -7325,7 +7249,7 @@
         <member name="M:ASEva.AgencyLocal.GetFrameworkThirdPartyNotices">
             \~English
             <summary>
-            Get third part license notices of software used by framework
+            Get thirt party license notices of software used by framework
             </summary>
             <returns>Dictionary. The key is title</returns>
             \~Chinese
@@ -7666,6 +7590,18 @@
             </summary>
             <returns>是否已连接互联网</returns>
         </member>
+        <member name="M:ASEva.AgencyLocal.IsPRCWebPreferred">
+            \~English
+            <summary>
+            (api:app=3.2.9) Get whether to use PRC web service
+            </summary>
+            <returns>Whether to use PRC web service</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.2.9) 获取是否使用境内网络服务
+            </summary>
+            <returns>是否使用境内网络服务</returns>
+        </member>
         <member name="M:ASEva.AgencyLocal.Log(System.String,ASEva.LogLevel)">
             \~English
             <summary>
@@ -7971,6 +7907,82 @@
             </summary>
             <param name="projectFile">项目文件路径，null表示保存至当前项目文件</param>
             <returns>是否成功保存项目</returns>
+        </member>
+        <member name="M:ASEva.AgencyLocal.SelectBusMessage(System.String)">
+            \~English
+            <summary>
+            (api:app=3.2.10) Show a modal dialog to select bus message
+            </summary>
+            <param name="originMessageID">Initial bus message configuration</param>
+            <returns>Bus message configuration result, null if requested to delete</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.2.10) 打开对话框选择总线报文
+            </summary>
+            <param name="originMessageID">初始总线报文配置</param>
+            <returns>返回总线报文配置，若删除则返回null</returns>
+        </member>
+        <member name="M:ASEva.AgencyLocal.SelectBusMessages(ASEva.SelectBusMessageHandler,System.Collections.Generic.List{System.String})">
+            \~English
+            <summary>
+            (api:app=3.2.10) Show a modal dialog to select multiple bus messages at once
+            </summary>
+            <param name="handler">Callback to handle bus message selection</param>
+            <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
+            \~Chinese
+            <summary>
+            (api:app=3.2.10) 打开对话框一次性选择多个总线报文
+            </summary>
+            <param name="handler">选中总线报文时调用的回调接口</param>
+            <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
+        </member>
+        <member name="M:ASEva.AgencyLocal.SelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
+            \~English
+            <summary>
+            (api:app=3.2.10) Show modal dialog to select (multiple) bus protocols
+            </summary>
+            <param name="selected">Bus protocols already selected</param>
+            <returns>Newly selected bus protocols</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.2.10) 打开对话框选择总线协议文件（可多个）
+            </summary>
+            <param name="selected">已选择的总线协议文件</param>
+            <returns>新选择的总线协议文件</returns>
+        </member>
+        <member name="M:ASEva.AgencyLocal.SelectSignal(ASEva.SignalConfig,System.Boolean,System.Boolean,System.String)">
+            \~English
+            <summary>
+            (api:app=3.2.10) Show a modal dialog to select signal
+            </summary>
+            <param name="origin">Initial signal configuration</param>
+            <param name="withScale">Whether to enable the configuration of value scale</param>
+            <param name="withSignBit">Whether to enable the configuration of sign bit signal</param>
+            <param name="unit">The unit to display, only available while the configuration of value scale is enabled</param>
+            <returns>Signal configuration result, null if requested to delete</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.2.10) 打开对话框选择信号
+            </summary>
+            <param name="origin">初始信号配置</param>
+            <param name="withScale">是否包含乘数的配置</param>
+            <param name="withSignBit">是否包含符号位信号的配置</param>
+            <param name="unit">该信号的单位显示，仅当包含乘数配置时有效</param>
+            <returns>返回信号配置，若删除则返回null</returns>
+        </member>
+        <member name="M:ASEva.AgencyLocal.SelectSignals(ASEva.SelectSignalHandler,System.Collections.Generic.List{System.String})">
+            \~English
+            <summary>
+            (api:app=3.2.10) Show a modal dialog to select multiple signals at once
+            </summary>
+            <param name="handler">Callback to handle signal selection</param>
+            <param name="existSignalIDList">List of all signal IDs that already exist</param>
+            \~Chinese
+            <summary>
+            (api:app=3.2.10) 打开对话框一次性选择多个信号
+            </summary>
+            <param name="handler">选中信号时调用的回调接口</param>
+            <param name="existSignalIDList">既存的选中信号ID列表</param>
         </member>
         <member name="M:ASEva.AgencyLocal.SendRawDataWithCPUTick(System.UInt64,System.String,System.Double[],System.Byte[])">
             \~English
@@ -8939,6 +8951,46 @@
             特殊摄像头：前向（鱼眼模型）
             </summary>
         </member>
+        <member name="T:ASEva.SignalPackMode">
+            \~English
+            <summary>
+            (api:app=3.2.12) Interpolation mode for a signal in packing
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.2.12) 信号打包中单个信号的插值模式
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalPackMode.Default">
+            \~English
+            <summary>
+            Normal interpolation
+            </summary>
+            \~Chinese
+            <summary>
+            正常插值
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalPackMode.Nearest">
+            \~English
+            <summary>
+            Use value of the nearest frame
+            </summary>
+            \~Chinese
+            <summary>
+            使用前后帧中时间较近的值
+            </summary>
+        </member>
+        <member name="F:ASEva.SignalPackMode.Latest">
+            \~English
+            <summary>
+            Use the buffered value (Unnecessary to wait for later frame)
+            </summary>
+            \~Chinese
+            <summary>
+            使用缓存下来的最后数值（无需等待后一帧）
+            </summary>
+        </member>
         <member name="T:ASEva.SignalPackConfigElem">
             \~English
             <summary>
@@ -8949,6 +9001,66 @@
             (api:app=3.0.0) 信号打包中单个信号的配置
             </summary>
         </member>
+        <member name="P:ASEva.SignalPackConfigElem.ValueID">
+            \~English
+            <summary>
+            Value signal ID
+            </summary>
+            \~Chinese
+            <summary>
+            数值信号ID
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfigElem.SignID">
+            \~English
+            <summary>
+            Sign bit signal ID
+            </summary>
+            \~Chinese
+            <summary>
+            符号位信号ID
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfigElem.Scale">
+            \~English
+            <summary>
+            Multiplier
+            </summary>
+            \~Chinese
+            <summary>
+            乘数
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfigElem.Timeout">
+            \~English
+            <summary>
+            Output null if no data for a while, in milliseconds
+            </summary>
+            \~Chinese
+            <summary>
+            超过一段时间无数据则输出空，单位毫秒
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfigElem.Mode">
+            \~English
+            <summary>
+            (api:app=3.2.12) Interpolation mode for one signal, only available while IsInterpolationMode is true
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.2.12) 单个信号的插值模式，仅当打包配置中IsInterpolationMode为true时有效
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfigElem.IsNearestMode">
+            \~English
+            <summary>
+            Deprecated. Please use Mode
+            </summary>
+            \~Chinese
+            <summary>
+            已弃用，应使用Mode
+            </summary>
+        </member>
         <member name="T:ASEva.SignalPackConfig">
             \~English
             <summary>
@@ -8957,6 +9069,56 @@
             \~Chinese
             <summary>
             (api:app=3.0.0) 信号打包配置
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfig.Protocol">
+            \~English
+            <summary>
+            The output sample protocol for signal packing
+            </summary>
+            \~Chinese
+            <summary>
+            信号打包输出的样本协议名
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfig.IsInterpolationMode">
+            \~English
+            <summary>
+            Whether in interpolation mode, otherwise bus message packing mode
+            </summary>
+            \~Chinese
+            <summary>
+            是否为插值模式，否则为总线报文打包模式
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfig.FinalMessageID">
+            \~English
+            <summary>
+            Final message, only available for bus message packing mode
+            </summary>
+            \~Chinese
+            <summary>
+            帧尾报文，进在总线报文打包模式下有效
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfig.SamplingRate">
+            \~English
+            <summary>
+            Sampling rate, only available for interpolation mode
+            </summary>
+            \~Chinese
+            <summary>
+            采样率，进在插值模式下有效
+            </summary>
+        </member>
+        <member name="P:ASEva.SignalPackConfig.SignalConfigs">
+            \~English
+            <summary>
+            Configuration for each signal
+            </summary>
+            \~Chinese
+            <summary>
+            每个信号的配置
             </summary>
         </member>
         <member name="T:ASEva.ModuleConfig">
@@ -9216,13 +9378,13 @@
         <member name="M:ASEva.ConsoleClass.RunConsole(ASEva.ConsoleIO,System.Boolean)">
             \~English
             <summary>
-            (api:app=3.1.0) [Required] Called while running console procedure
+            (api:app=3.2.7) [Required] Called while running console procedure
             </summary>
             <param name="io">Console interaction interface. The procedure should end immediately if any method of this interface that returns false (interrupted)</param>
             <param name="machineText">Whether the text of messages and options given to the interaction interface should be ID or JSON string that is easy to parse by the machine. Otherwise it should be text that is easy to read by humans</param>
             \~Chinese
             <summary>
-            (api:app=3.1.0) [必须实现] 运行控制台过程时被调用
+            (api:app=3.2.7) [必须实现] 运行控制台过程时被调用
             </summary>
             <param name="io">控制台交互接口，在运行过程中次此接口的任何方法返回false(中断)都应该立即结束</param>
             <param name="machineText">输入至交互接口的消息、选项等文本是否应该为便于机器解析的ID或JSON字符串等，否则为便于人阅读的文本</param>
@@ -9270,11 +9432,11 @@
         <member name="T:ASEva.ConsoleIO">
             \~English
             <summary>
-            (api:app=3.1.5) Console interaction interface
+            (api:app=3.2.7) Console interaction interface
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.1.5) 控制台交互接口
+            (api:app=3.2.7) 控制台交互接口
             </summary>
         </member>
         <member name="M:ASEva.ConsoleIO.Print(System.String)">
@@ -9289,151 +9451,163 @@
             </summary>
             <param name="message">消息</param>
         </member>
-        <member name="M:ASEva.ConsoleIO.InputString(System.String,System.String)">
+        <member name="M:ASEva.ConsoleIO.InputString(System.String,System.String@)">
             \~English
             <summary>
             Get text input
             </summary>
             <param name="message">Title message</param>
-            <param name="defaultString">Default string</param>
-            <returns>1. False if interrupted. 2. The text input by user (return the default string if no input)</returns>
+            <param name="result">Input default string, output the text input by user (the object remains the same if no input)</param>
+            <returns>False if interrupted</returns>
             \~Chinese
             <summary>
             获取字符串输入
             </summary>
             <param name="message">提示消息</param>
-            <param name="defaultString">默认字符串</param>
-            <returns>1. 若中断则返回false; 2. 用户输入的字符串(若不输入则为其默认值)</returns>
+            <param name="result">输入默认字符串，输出用户输入的字符串(若不输入则保持其默认值)</param>
+            <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.InputNumber(System.String,System.Double)">
+        <member name="M:ASEva.ConsoleIO.InputNumber(System.String,System.Double@)">
             \~English
             <summary>
             Get number input
             </summary>
             <param name="message">Title message</param>
-            <param name="defaultNumber">Default value</param>
-            <returns>1. False if interrupted. 2. The number input by user (return the default value if no input or the input is invalid)</returns>
+            <param name="result">Input default value, output the number input by user (the value remains the same if no input or the input is invalid)</param>
+            <returns>False if interrupted</returns>
             \~Chinese
             <summary>
             获取数值输入
             </summary>
             <param name="message">提示消息</param>
-            <param name="defaultNumber">默认值</param>
-            <returns>1. 若中断则返回false; 2. 用户输入的数值(若不输入或输入无效则为其默认值)</returns>
+            <param name="result">输入默认值，输出用户输入的数值(若不输入或输入无效则保持其默认值)</param>
+            <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.Confirm(System.String)">
+        <member name="M:ASEva.ConsoleIO.Confirm(System.String,System.Boolean@)">
             \~English
             <summary>
             Request user to confirm
             </summary>
             <param name="message">Title message</param>
-            <returns>1. False if interrupted. 2. Whether user confirmed</returns>
+            <param name="result">Whether user confirmed</param>
+            <returns>False if interrupted</returns>
             \~Chinese
             <summary>
             请求用户确认
             </summary>
             <param name="message">提示消息</param>
-            <returns>1. 若中断则返回false; 2. 用户是否确认</returns>
+            <param name="result">用户是否确认</param>
+            <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.SingleSelect(System.String,System.String[],System.Int32)">
+        <member name="M:ASEva.ConsoleIO.SingleSelect(System.String,System.String[],System.Int32@)">
             \~English
             <summary>
             Single selection
             </summary>
             <param name="message">Title message</param>
             <param name="options">All options</param>
-            <param name="defaultIndex">Index of initial selected option</param>
-            <returns>1. False if interrupted. 2. The index of option selected by user (-1 only when options is empty)</returns>
+            <param name="result">Input index of initial selected option, output the index of option selected by user (-1 only when options is empty)</param>
+            <returns>False if interrupted</returns>
             \~Chinese
             <summary>
             单项选择
             </summary>
             <param name="message">提示消息</param>
             <param name="options">所有选项</param>
-            <param name="defaultIndex">开始时即选中的选项序号</param>
-            <returns>1. 若中断则返回false; 2. 用户勾选的选项序号(仅当options为空时返回-1)</returns>
+            <param name="result">输入开始时即选中的选项序号，输出用户勾选的选项序号(仅当options为空时返回-1)</param>
+            <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.MultiSelect(System.String,System.String[],System.Int32[])">
+        <member name="M:ASEva.ConsoleIO.MultiSelect(System.String,System.String[],System.Int32[]@)">
             \~English
             <summary>
             Multiple selection
             </summary>
             <param name="message">Title message</param>
             <param name="options">All options</param>
-            <param name="defaultIndices">Index of all options selected by the user</param>
-            <returns>1. False if interrupted. 2. The index of all options selected by the user</returns>
+            <param name="result">Input index of all options selected by the user, output the index of all options selected by the user</param>
+            <returns>False if interrupted</returns>
             \~Chinese
             <summary>
             多项选择
             </summary>
             <param name="message">提示消息</param>
             <param name="options">所有选项</param>
-            <param name="defaultIndices">开始时即选中的所有选项序号</param>
-            <returns>1. 若中断则返回false; 2. 用户勾选的所有选项序号</returns>
+            <param name="result">输入开始时即选中的所有选项序号，输出用户勾选的所有选项序号</param>
+            <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.SelectOpenFile(System.String,System.String[])">
+        <member name="M:ASEva.ConsoleIO.SelectOpenFile(System.String,System.String[],System.String@)">
             \~English
             <summary>
             Select file for opening
             </summary>
             <param name="message">Title message</param>
             <param name="extensions">Suffix filtering, starts with '.', or set to null not specified</param>
-            <returns>1. False if interrupted. 2. Selected file's path, null if user cancelled</returns>
+            <param name="result">Selected file's path, null if user cancelled</param>
+            <returns>False if interrupted</returns>
             \~Chinese
             <summary>
             选择文件用于打开
             </summary>
             <param name="message">提示消息</param>
             <param name="extensions">后缀名筛选，以'.'开头，若不限后缀则设为null</param>
-            <returns>1. 若中断则返回false; 2. 用户选中文件的路径，若取消则为null</returns>
+            <param name="result">用户选中文件的路径，若取消则为null</param>
+            <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.SelectSaveFile(System.String,System.String)">
+        <member name="M:ASEva.ConsoleIO.SelectSaveFile(System.String,System.String,System.String@)">
             \~English
             <summary>
             Select file for saving
             </summary>
             <param name="message">Title message</param>
             <param name="extension">Suffix of the file to save, starts with '.', or set to null not specified</param>
-            <returns>1. False if interrupted. 2. Selected file's path, null if user cancelled</returns>
+            <param name="result">Selected file's path, null if user cancelled</param>
+            <returns>False if interrupted</returns>
             \~Chinese
             <summary>
             选择文件用于保存
             </summary>
             <param name="message">提示消息</param>
             <param name="extension">保存文件的后缀名，以'.'开头，若不考虑后缀则设为null</param>
-            <returns>1. 若中断则返回false; 2. 用户选中文件的路径，若取消则为null</returns>
+            <param name="result">用户选中文件的路径，若取消则为null</param>
+            <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.SelectFolder(System.String)">
+        <member name="M:ASEva.ConsoleIO.SelectFolder(System.String,System.String@)">
             \~English
             <summary>
             Select folder
             </summary>
             <param name="message">Title message</param>
-            <returns>1. False if interrupted. 2. Selected folder's path, null if user cancelled</returns>
+            <param name="result">Selected folder's path, null if user cancelled</param>
+            <returns>False if interrupted</returns>
             \~Chinese
             <summary>
             选择文件夹
             </summary>
             <param name="message">提示消息</param>
-            <returns>1. 若中断则返回false; 2. 用户选中文件夹的路径，若取消则为null</returns>
+            <param name="result">用户选中文件夹的路径，若取消则为null</param>
+            <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.LoadFileData(System.String,System.String[])">
+        <member name="M:ASEva.ConsoleIO.LoadFileData(System.String,System.String[],System.Byte[]@,ASEva.ConsoleFileResult@)">
             \~English
             <summary>
             Select a file and load the data, only for small files
             </summary>
             <param name="message">Title message</param>
             <param name="extensions">Suffix filtering, starts with '.', or set to null not specified</param>
-            <returns>1. False if interrupted. 2. Binary data of the file selected by user, null if user cancelled. 3. Result of loading file</returns>
+            <param name="data">Binary data of the file selected by user, null if user cancelled</param>
+            <param name="result">Result of loading file</param>
+            <returns>False if interrupted</returns>
             \~Chinese
             <summary>
             选择文件并读取内容，仅适用于小文件
             </summary>
             <param name="message">提示消息</param>
             <param name="extensions">后缀名筛选，以'.'开头，若不限后缀则设为null</param>
-            <returns>1. 若中断则返回false; 2. 用户选中文件的二进制数据，若取消则输出null; 3. 读文件结果</returns>
+            <param name="data">用户选中文件的二进制数据，若取消则输出null</param>
+            <param name="result">读文件结果</param>
+            <returns>若中断则返回false</returns>
         </member>
-        <member name="M:ASEva.ConsoleIO.SaveFileData(System.String,System.String,System.Byte[])">
+        <member name="M:ASEva.ConsoleIO.SaveFileData(System.String,System.String,System.Byte[],ASEva.ConsoleFileResult@)">
             \~English
             <summary>
             Select a file and save the data, only for small files
@@ -9441,7 +9615,8 @@
             <param name="message">Title message</param>
             <param name="extension">Suffix of the file to save, starts with '.', or set to null not specified</param>
             <param name="data">Binary data to save to the file</param>
-            <returns>1. False if interrupted. 2. Result of saving file</returns>
+            <param name="result">Result of saving file</param>
+            <returns>False if interrupted</returns>
             \~Chinese
             <summary>
             选择文件并保存内容，仅适用于小文件
@@ -9449,7 +9624,8 @@
             <param name="message">提示消息</param>
             <param name="extension">保存文件的后缀名，以'.'开头，若不考虑后缀则设为null</param>
             <param name="data">需要保存的二进制数据</param>
-            <returns>1. 若中断则返回false; 2. 写文件结果</returns>
+            <param name="result">写文件结果</param>
+            <returns>若中断则返回false</returns>
         </member>
         <member name="T:ASEva.DeviceClass">
             \~English
@@ -21777,6 +21953,16 @@
             \~Chinese
             <summary>
             框架软件的版本
+            </summary>
+        </member>
+        <member name="P:ASEva.AppBasicInfo.Agreement">
+            \~English
+            <summary>
+            (api:app=3.2.8) End-user license agreement (EULA)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.2.8) 用户许可 (EULA)
             </summary>
         </member>
         <member name="T:ASEva.LicenseRequestReason">

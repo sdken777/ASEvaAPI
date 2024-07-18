@@ -203,6 +203,11 @@ namespace ASEva.UIWpf
             wpfWindowPanel.OnUpdateUI();
         }
 
+        public override Task OnHandleAsync()
+        {
+            return wpfWindowPanel.OnHandleAsync();
+        }
+
         private WindowPanel wpfWindowPanel;
     }
 }

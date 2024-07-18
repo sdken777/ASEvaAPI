@@ -6,6 +6,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace ASEva.UICoreWF
 {
@@ -27,6 +29,21 @@ namespace ASEva.UICoreWF
         public static Version GetAPIVersion()
         {
             return new Version(0, 0, 0, 0);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:corewf=3.2.1) Get third party license notices of software used by this library
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:corewf=3.2.1) 获取此类库使用的第三方软件版权声明
+        /// </summary>
+        public static Dictionary<string, string> GetThirdPartyNotices()
+        {
+            var table = new Dictionary<String, String>();
+            table["WebView2"] = Encoding.UTF8.GetString(Resource.WebView2);
+            return table;
         }
     }
 }

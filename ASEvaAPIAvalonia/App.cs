@@ -66,11 +66,23 @@ namespace ASEva.UIAvalonia
                         appBuilder.SetupWithLifetime(appLifetime);
                         EtoInitializer.Initialize(new EtoRunDialogHandler());
 
-                        AppDomain.CurrentDomain.UnhandledException += (o, args) => { triggerFatalException(args); };
+                        var etoInitWindow = new EtoInitWindow();
+                        etoInitWindow.Show();
+                        var token = new CancellationTokenSource();
+                        etoInitWindow.Closed += delegate { token.Cancel(); };
+                        appLifetime.MainWindow = etoInitWindow;
+                        appBuilder.Instance.Run(token.Token);
+                        appLifetime.MainWindow = null;
 
-                        FuncManager.Register("GetAvaloniaAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
-                        FuncManager.Register("GetAvaloniaLibVersion", delegate { return APIInfo.GetAvaloniaLibVersion(); });
-                        FuncManager.Register("GetAvaloniaAPIThirdPartyNotices", delegate { return APIInfo.GetThirdPartyNotices(); });
+                        if (EtoInitializer.InitializeResult.Value)
+                        {
+                            AppDomain.CurrentDomain.UnhandledException += (o, args) => { triggerFatalException(args); };
+
+                            FuncManager.Register("GetAvaloniaAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
+                            FuncManager.Register("GetAvaloniaLibVersion", delegate { return APIInfo.GetAvaloniaLibVersion(); });
+                            FuncManager.Register("GetAvaloniaAPIThirdPartyNotices", delegate { return APIInfo.GetThirdPartyNotices(); });
+                        }
+                        else appBuilder = null;
                     }
                 }
             }
@@ -208,6 +220,22 @@ namespace ASEva.UIAvalonia
                 return appLifetime?.MainWindow;
             }
         } 
+
+        /// \~English
+        /// <summary>
+        /// (api:avalonia=1.1.1) Get initialization result of Eto framework, null means not initialized yet
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.1.1) 获取Eto初始化结果，null表示还未进行初始化
+        /// </summary>
+        public static bool? EtoInitializeResult
+        {
+            get
+            {
+                return EtoInitializer.InitializeResult;
+            }
+        }
 
         private static void triggerFatalException(UnhandledExceptionEventArgs args)
         {

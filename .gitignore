@@ -26,6 +26,7 @@ net6.0-windows/
 libx/
 libxa/
 **/bin/
+.na/
 
 # User-specific files
 *.suo

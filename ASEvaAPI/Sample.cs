@@ -77,7 +77,7 @@ namespace ASEva
     /// <summary>
     /// (api:app=3.0.0) Session标识符
     /// </summary>
-    public struct SessionIdentifier
+    public struct SessionIdentifier : IComparable
     {
         /// \~English
         /// <summary>
@@ -189,6 +189,11 @@ namespace ASEva
         public override int GetHashCode()
         {
             return (int)value;
+        }
+
+        public int CompareTo(object obj)
+        {
+            return value.CompareTo(((SessionIdentifier)obj).value);
         }
 
         public static bool operator ==(SessionIdentifier id1, SessionIdentifier id2)

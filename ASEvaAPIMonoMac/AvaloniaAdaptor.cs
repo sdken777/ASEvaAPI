@@ -1,7 +1,5 @@
 using System;
 using ASEva.UIEto;
-using Eto.Forms;
-using Eto.Mac;
 using MonoMac.AppKit;
 using MonoMac.CoreGraphics;
 
@@ -9,9 +7,17 @@ namespace ASEva.UIMonoMac
 {
     public class AvaloniaAdaptorMonoMac : AvaloniaAdaptor
     {
-        public nint CreateContainer(nint parent, Control control, out object context)
+        public bool IsControlValid(object control)
         {
-            var nsView = MonoMac64Helpers.ToNative(control, true);
+            if (control is null) return false;
+            if (control is Eto.Forms.Control) return true;
+            if (control is NSView) return true;
+            return false;
+        }
+
+        public nint CreateContainer(nint parent, object control, out object context)
+        {
+            var nsView = control is NSView ? (control as NSView) : Eto.Forms.MonoMac64Helpers.ToNative(control as Eto.Forms.Control, true);
             nsView.WantsLayer = true;
             nsView.Layer.BackgroundColor = new CGColor(0.975, 0.975, 0.975, 1.0);
             context = null;
@@ -39,7 +45,7 @@ namespace ASEva.UIMonoMac
             return true;
         }
 
-        public void UseContainer(nint container, Control control, out object context)
+        public void UseContainer(nint container, object control, out object context)
         {
             context = null;
         }

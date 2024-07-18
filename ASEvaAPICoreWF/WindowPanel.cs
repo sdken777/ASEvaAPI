@@ -207,6 +207,11 @@ namespace ASEva.UICoreWF
             winformWindowPanel.OnUpdateUI();
         }
 
+        public override Task OnHandleAsync()
+        {
+            return winformWindowPanel.OnHandleAsync();
+        }
+
         private WindowPanel winformWindowPanel;
     }
 }

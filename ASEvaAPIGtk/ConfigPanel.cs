@@ -114,7 +114,7 @@ namespace ASEva.UIGtk
         {
             this.gtkConfigPanel = gtkConfigPanel;
             Content = gtkConfigPanel.ToEto();
-            CloseRequested += delegate { Close(); };
+            gtkConfigPanel.CloseRequested += delegate { Close(); };
         }
 
         public override IntSize OnGetSize()
@@ -145,6 +145,11 @@ namespace ASEva.UIGtk
         public override void OnUpdateUI()
         {
             gtkConfigPanel.OnUpdateUI();
+        }
+
+        public override Task OnHandleAsync()
+        {
+            return gtkConfigPanel.OnHandleAsync();
         }
 
         private ConfigPanel gtkConfigPanel;

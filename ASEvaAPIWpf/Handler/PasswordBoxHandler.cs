@@ -8,7 +8,7 @@ using Eto.Wpf.Forms;
 namespace ASEva.UIWpf
 {
     // CHECK: 改为支持show password的版本
-    class PasswordBoxHandler : WpfControl<Handler.PeekablePasswordBox, PasswordBox, PasswordBox.ICallback>, PasswordBox.IHandler
+    class PasswordBoxHandler : WpfControl<PeekablePasswordBox, PasswordBox, PasswordBox.ICallback>, PasswordBox.IHandler
 	{
         protected override sw.Size DefaultSize => new sw.Size(80, 23);
 
@@ -16,7 +16,7 @@ namespace ASEva.UIWpf
 
         public PasswordBoxHandler()
 		{
-			Control = new Handler.PeekablePasswordBox();
+			Control = new PeekablePasswordBox();
 		}
 
         public override bool UseMousePreview { get { return true; } }

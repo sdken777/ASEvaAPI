@@ -6,6 +6,8 @@
  */
 
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace ASEva.UIWpf
 {
@@ -27,6 +29,23 @@ namespace ASEva.UIWpf
         public static Version GetAPIVersion()
         {
             return new Version(0, 0, 0, 0);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:wpf=2.1.1) Get third party license notices of software used by this library
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:wpf=2.1.1) 获取此类库使用的第三方软件版权声明
+        /// </summary>
+        public static Dictionary<string, string> GetThirdPartyNotices()
+        {
+            var table = new Dictionary<string, string>();
+            table["WebView2"] = Encoding.UTF8.GetString(Resource.WebView2);
+            table["SharpDX"] = Encoding.UTF8.GetString(Resource.SharpDX);
+            table["Extended WPF Toolkit version 3.6.0"] = Encoding.UTF8.GetString(Resource.Extended_WPF_Toolkit__3_6_);
+            return table;
         }
     }
 }

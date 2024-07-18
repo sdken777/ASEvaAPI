@@ -2,17 +2,17 @@
 using System.Windows.Media.Imaging;
 using ASEva.Samples;
 
-namespace ASEva.UIEto
+namespace ASEva.UIWpf
 {
 #pragma warning disable CS1571
 
     /// \~English
     /// <summary>
-    /// (api:wpf=2.0.4) Extensions for common image object
+    /// (api:wpf=2.1.3) Extensions for common image object
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:wpf=2.0.4) 方便使用通用图像数据的扩展
+    /// (api:wpf=2.1.3) 方便使用通用图像数据的扩展
     /// </summary>
     public static class CommonImageWpfExtensions
     {

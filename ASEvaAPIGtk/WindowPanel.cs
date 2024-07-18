@@ -180,6 +180,11 @@ namespace ASEva.UIGtk
             gtkWindowPanel.OnHandleModal();
         }
 
+        public override Task OnHandleAsync()
+        {
+            return gtkWindowPanel.OnHandleAsync();
+        }
+
         public override void OnInit(string config)
         {
             gtkWindowPanel.OnInit(config);

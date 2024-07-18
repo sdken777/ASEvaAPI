@@ -123,11 +123,7 @@ namespace ASEva.UIWpf
 
         public Dictionary<string, string> GetThirdPartyNotices()
         {
-            var table = new Dictionary<string, string>();
-            table["WebView2"] = Encoding.UTF8.GetString(Resource.WebView2);
-            table["SharpDX"] = Encoding.UTF8.GetString(Resource.SharpDX);
-            table["Extended WPF Toolkit version 3.6.0"] = Encoding.UTF8.GetString(Resource.Extended_WPF_Toolkit__3_6_);
-            return table;
+            return APIInfo.GetThirdPartyNotices();
         }
 
         public bool ShouldPassParent()

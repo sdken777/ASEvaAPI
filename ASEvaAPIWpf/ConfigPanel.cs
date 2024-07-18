@@ -143,6 +143,11 @@ namespace ASEva.UIWpf
             wpfConfigPanel.OnUpdateUI();
         }
 
+        public override Task OnHandleAsync()
+        {
+            return wpfConfigPanel.OnHandleAsync();
+        }
+
         private ConfigPanel wpfConfigPanel;
     }
 }
