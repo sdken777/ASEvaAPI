@@ -100,7 +100,7 @@ namespace ASEva.UICoreWF
                 var convertMethod = winformHostTypeForWpf.GetMethod("ConvertWindowPanel");
                 if (convertMethod != null)
                 {
-                    var convertedPanel = convertMethod.Invoke(null, [anyWindowPanel]) as WindowPanel;
+                    var convertedPanel = convertMethod.Invoke(null, new[] { anyWindowPanel }) as WindowPanel;
                     if (convertedPanel != null) return convertedPanel;
                 }
             }
@@ -109,7 +109,7 @@ namespace ASEva.UICoreWF
                 var convertMethod = winformHostTypeForAvalonia.GetMethod("ConvertWindowPanel");
                 if (convertMethod != null)
                 {
-                    var convertedPanel = convertMethod.Invoke(null, [anyWindowPanel]) as WindowPanel;
+                    var convertedPanel = convertMethod.Invoke(null, new[] { anyWindowPanel }) as WindowPanel;
                     if (convertedPanel != null) return convertedPanel;
                 }
             }
@@ -138,7 +138,7 @@ namespace ASEva.UICoreWF
                 var convertMethod = winformHostTypeForWpf.GetMethod("ConvertConfigPanel");
                 if (convertMethod != null)
                 {
-                    var convertedPanel = convertMethod.Invoke(null, [anyConfigPanel]) as ConfigPanel;
+                    var convertedPanel = convertMethod.Invoke(null, new[] { anyConfigPanel }) as ConfigPanel;
                     if (convertedPanel != null) return convertedPanel;
                 }
             }
@@ -147,7 +147,7 @@ namespace ASEva.UICoreWF
                 var convertMethod = winformHostTypeForAvalonia.GetMethod("ConvertConfigPanel");
                 if (convertMethod != null)
                 {
-                    var convertedPanel = convertMethod.Invoke(null, [anyConfigPanel]) as ConfigPanel;
+                    var convertedPanel = convertMethod.Invoke(null, new[] { anyConfigPanel }) as ConfigPanel;
                     if (convertedPanel != null) return convertedPanel;
                 }
             }

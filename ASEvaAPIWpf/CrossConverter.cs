@@ -105,7 +105,7 @@ namespace ASEva.UIWpf
                 var convertMethod = wpfHostTypeForWinform.GetMethod("ConvertWindowPanel");
                 if (convertMethod != null)
                 {
-                    var convertedPanel = convertMethod.Invoke(null, [anyWindowPanel]) as WindowPanel;
+                    var convertedPanel = convertMethod.Invoke(null, new[] { anyWindowPanel }) as WindowPanel;
                     if (convertedPanel != null) return convertedPanel;
                 }
             }
@@ -114,7 +114,7 @@ namespace ASEva.UIWpf
                 var convertMethod = wpfHostTypeForAvalonia.GetMethod("ConvertWindowPanel");
                 if (convertMethod != null)
                 {
-                    var convertedPanel = convertMethod.Invoke(null, [anyWindowPanel]) as WindowPanel;
+                    var convertedPanel = convertMethod.Invoke(null, new[] { anyWindowPanel }) as WindowPanel;
                     if (convertedPanel != null) return convertedPanel;
                 }
             }
@@ -148,7 +148,7 @@ namespace ASEva.UIWpf
                 var convertMethod = wpfHostTypeForWinform.GetMethod("ConvertConfigPanel");
                 if (convertMethod != null)
                 {
-                    var convertedPanel = convertMethod.Invoke(null, [anyConfigPanel]) as ConfigPanel;
+                    var convertedPanel = convertMethod.Invoke(null, new[] { anyConfigPanel }) as ConfigPanel;
                     if (convertedPanel != null) return convertedPanel;
                 }
             }
@@ -157,7 +157,7 @@ namespace ASEva.UIWpf
                 var convertMethod = wpfHostTypeForAvalonia.GetMethod("ConvertConfigPanel");
                 if (convertMethod != null)
                 {
-                    var convertedPanel = convertMethod.Invoke(null, [anyConfigPanel]) as ConfigPanel;
+                    var convertedPanel = convertMethod.Invoke(null, new[] { anyConfigPanel }) as ConfigPanel;
                     if (convertedPanel != null) return convertedPanel;
                 }
             }

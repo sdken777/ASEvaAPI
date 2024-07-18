@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <Configurations>Release;Debug</Configurations>
     <UseWindowsForms>True</UseWindowsForms>
     <UseWpf>True</UseWpf>

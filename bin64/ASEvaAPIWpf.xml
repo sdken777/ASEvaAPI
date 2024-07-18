@@ -21,6 +21,16 @@
             </summary>
             <returns>API版本</returns>
         </member>
+        <member name="M:ASEva.UIWpf.APIInfo.GetThirdPartyNotices">
+            \~English
+            <summary>
+            (api:wpf=2.1.1) Get third party license notices of software used by this library
+            </summary>
+            \~Chinese
+            <summary>
+            (api:wpf=2.1.1) 获取此类库使用的第三方软件版权声明
+            </summary>
+        </member>
         <member name="T:ASEva.UIWpf.AppDialogWpf">
             <summary>
             AppDialogWpf
@@ -125,6 +135,128 @@
             在此事件中实现配置界面的关闭
             </summary>
         </member>
+        <member name="T:ASEva.UIWpf.CrossConverter">
+            \~English
+            <summary>
+            (api:wpf=2.1.0) Panel conversion tool
+            </summary>
+            \~Chinese
+            <summary>
+            (api:wpf=2.1.0) 面板转换工具
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.CrossConverter.EnableWinformEmbedder">
+            \~English
+            <summary>
+            (api:wpf=2.1.4) Enable converting Winform panel to WPF panel
+            </summary>
+            \~Chinese
+            <summary>
+            (api:wpf=2.1.4) 启用Winform面板转WPF面板功能
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.CrossConverter.EnableAvaloniaEmbedder">
+            \~English
+            <summary>
+            (api:wpf=2.1.5) Enable converting Avalonia panel to WPF panel
+            </summary>
+            \~Chinese
+            <summary>
+            (api:wpf=2.1.5) 启用Avalonia面板转WPF面板功能
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.CrossConverter.ConvertWindowPanel(System.Object)">
+            \~English
+            <summary>
+            Convert any window panel to WPF window panel
+            </summary>
+            <param name="anyWindowPanel">Any window panel</param>
+            <returns>WPF window panel, null if conversion failed</returns>
+            \~Chinese
+            <summary>
+            将任意窗口面板转化为WPF窗口面板
+            </summary>
+            <param name="anyWindowPanel">任意窗口面板</param>
+            <returns>WPF窗口面板，若转化失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIWpf.CrossConverter.ConvertConfigPanel(System.Object)">
+            \~English
+            <summary>
+            Convert any config panel to WPF config panel
+            </summary>
+            <param name="anyConfigPanel">Any config panel</param>
+            <returns>WPF config panel, null if conversion failed</returns>
+            \~Chinese
+            <summary>
+            将任意配置面板转化为WPF配置面板
+            </summary>
+            <param name="anyConfigPanel">任意配置面板</param>
+            <returns>WPF配置面板，若转化失败则返回null</returns>
+        </member>
+        <member name="T:ASEva.UIWpf.ConfigPanelEto">
+            <summary>
+            ConfigPanelEto.xaml 的交互逻辑
+            </summary>
+            <summary>
+            ConfigPanelEto
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.ConfigPanelEto.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ASEva.UIWpf.WindowPanelEto">
+            <summary>
+            WindowPanelEto.xaml 的交互逻辑
+            </summary>
+            <summary>
+            WindowPanelEto
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.WindowPanelEto.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:ASEva.UIWpf.CommonImageWpfExtensions">
+            \~English
+            <summary>
+            (api:wpf=2.1.3) Extensions for common image object
+            </summary>
+            \~Chinese
+            <summary>
+            (api:wpf=2.1.3) 方便使用通用图像数据的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.CommonImageWpfExtensions.ToBitmapSource(ASEva.Samples.CommonImage)">
+            \~English
+            <summary>
+            Convert to BitmapSource object
+            </summary>
+            <param name="image">Common image object</param>
+            <returns>BitmapSource object</returns>
+            \~Chinese
+            <summary>
+            转为BitmapSource对象
+            </summary>
+            <param name="image">通用图像数据</param>
+            <returns>BitmapSource对象</returns>
+        </member>
+        <member name="M:ASEva.UIWpf.CommonImageWpfExtensions.ToCommonImage(System.Windows.Media.Imaging.BitmapSource)">
+            \~English
+            <summary>
+            Convert to common image object
+            </summary>
+            <param name="bitmap">BitmapSource object</param>
+            <returns>Common image object</returns>
+            \~Chinese
+            <summary>
+            转为通用图像数据
+            </summary>
+            <param name="bitmap">BitmapSource对象</param>
+            <returns>通用图像数据</returns>
+        </member>
         <member name="T:ASEva.UIWpf.OpenGLBlitControlWpf">
             <summary>
             OpenGLBlitControlWpf
@@ -165,12 +297,12 @@
             Gets or sets the spacing between the image and the label when both are present
             </summary>
         </member>
-        <member name="T:ASEva.UIWpf.Handler.PeekablePasswordBox">
+        <member name="T:ASEva.UIWpf.PeekablePasswordBox">
             <summary>
             PeekablePasswordBox
             </summary>
         </member>
-        <member name="M:ASEva.UIWpf.Handler.PeekablePasswordBox.InitializeComponent">
+        <member name="M:ASEva.UIWpf.PeekablePasswordBox.InitializeComponent">
             <summary>
             InitializeComponent
             </summary>
@@ -345,44 +477,6 @@
             <summary>
             (api:wpf=2.0.0) 动态加载xaml
             </summary>
-        </member>
-        <member name="T:ASEva.UIEto.CommonImageWpfExtensions">
-            \~English
-            <summary>
-            (api:wpf=2.0.4) Extensions for common image object
-            </summary>
-            \~Chinese
-            <summary>
-            (api:wpf=2.0.4) 方便使用通用图像数据的扩展
-            </summary>
-        </member>
-        <member name="M:ASEva.UIEto.CommonImageWpfExtensions.ToBitmapSource(ASEva.Samples.CommonImage)">
-            \~English
-            <summary>
-            Convert to BitmapSource object
-            </summary>
-            <param name="image">Common image object</param>
-            <returns>BitmapSource object</returns>
-            \~Chinese
-            <summary>
-            转为BitmapSource对象
-            </summary>
-            <param name="image">通用图像数据</param>
-            <returns>BitmapSource对象</returns>
-        </member>
-        <member name="M:ASEva.UIEto.CommonImageWpfExtensions.ToCommonImage(System.Windows.Media.Imaging.BitmapSource)">
-            \~English
-            <summary>
-            Convert to common image object
-            </summary>
-            <param name="bitmap">BitmapSource object</param>
-            <returns>Common image object</returns>
-            \~Chinese
-            <summary>
-            转为通用图像数据
-            </summary>
-            <param name="bitmap">BitmapSource对象</param>
-            <returns>通用图像数据</returns>
         </member>
     </members>
 </doc>
