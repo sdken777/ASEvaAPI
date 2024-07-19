@@ -83,6 +83,7 @@ namespace ASEva.UICoreWF
             var width = pictureBox1.Width;
             var height = pictureBox1.Height;
             PointF originPoint = new PointF((float)width / 4, (float)height / 3 * 2);
+            var margin = 15.0f * DeviceDpi / 96;
 
             //画坐标轴
             PointF pointx1 = new PointF(0, originPoint.Y);
@@ -91,8 +92,8 @@ namespace ASEva.UICoreWF
             PointF pointy2 = new PointF(originPoint.X, height);
             g.DrawLine(blackPen, pointx1, pointx2);
             g.DrawLine(blackPen, pointy1, pointy2);
-            g.DrawLine(grayPen, new PointF(originPoint.X, originPoint.Y + 15), new PointF(width - 1, originPoint.Y + 15));
-            g.DrawLine(grayPen, new PointF(originPoint.X - 15, originPoint.Y), new PointF(originPoint.X - 15, 0));
+            g.DrawLine(grayPen, new PointF(originPoint.X, originPoint.Y + margin), new PointF(width - 1, originPoint.Y + margin));
+            g.DrawLine(grayPen, new PointF(originPoint.X - margin, originPoint.Y), new PointF(originPoint.X - margin, 0));
             String xTitle = null;
             String yTitle = null;
             var D = Data as LabelTableData;
@@ -101,7 +102,7 @@ namespace ASEva.UICoreWF
             var xTitleWidth = g.MeasureString(xTitle, font7f).Width;
             var yTitleWidth = g.MeasureString(yTitle, font7f).Width;
             PointF xTitlePoint = new PointF((width + originPoint.X - xTitleWidth) / 2, originPoint.Y);
-            PointF yTitlePoint = new PointF(originPoint.X - 15, (originPoint.Y - yTitleWidth) / 2);
+            PointF yTitlePoint = new PointF(originPoint.X - margin, (originPoint.Y - yTitleWidth) / 2);
             g.DrawString(xTitle, font7f, brushBlue, xTitlePoint);
             g.DrawString(yTitle, font7f, brushBlue, yTitlePoint, new StringFormat(StringFormatFlags.DirectionVertical));
 
@@ -119,6 +120,7 @@ namespace ASEva.UICoreWF
             var D = Data as LabelTableData;
             var xLabels = D.GetXLabels();
             var yLabels = D.GetYLabels();
+            var margin = 15.0f * DeviceDpi / 96;
 
             int barXOffset = 0;
 
@@ -132,10 +134,10 @@ namespace ASEva.UICoreWF
             {
                 Brush brush = xHeights[i] >= 0 ? brushBlue : brushPurple;
                 var ax = originPoint.X + histWidth * i;
-				if (maxHeightx > 0) g.FillRectangle(brush, barXOffset + ax, originPoint.Y + 15, histWidth, (float)Math.Abs(xHeights[i]) / (float)maxHeightx * (height - originPoint.Y - 15));
+				if (maxHeightx > 0) g.FillRectangle(brush, barXOffset + ax, originPoint.Y + margin, histWidth, (float)Math.Abs(xHeights[i]) / (float)maxHeightx * (height - originPoint.Y - margin));
 
                 var text = xLabels[i];
-                g.DrawString(text, font7f, brushBlack, new PointF(ax, originPoint.Y + 15), new StringFormat(StringFormatFlags.DirectionVertical));
+                g.DrawString(text, font7f, brushBlack, new PointF(ax, originPoint.Y + margin), new StringFormat(StringFormatFlags.DirectionVertical));
             }
 
             //Y轴柱状图生成
@@ -148,11 +150,11 @@ namespace ASEva.UICoreWF
             {
                 Brush brush = yHeights[i] >= 0 ? brushBlue : brushPurple;
                 var ay = originPoint.Y - histHeight * (i + 1);
-				if (maxHeighty > 0) g.FillRectangle(brush, barXOffset + originPoint.X - 15 - (originPoint.X - 15) * ((float)Math.Abs(yHeights[i]) / (float)maxHeighty), ay, (originPoint.X - 15) * ((float)Math.Abs(yHeights[i]) / (float)maxHeighty), histHeight);
+				if (maxHeighty > 0) g.FillRectangle(brush, barXOffset + originPoint.X - margin - (originPoint.X - margin) * ((float)Math.Abs(yHeights[i]) / (float)maxHeighty), ay, (originPoint.X - margin) * ((float)Math.Abs(yHeights[i]) / (float)maxHeighty), histHeight);
 
                 var text = yLabels[i];
                 var textWidth = g.MeasureString(text, font7f).Width;
-                g.DrawString(text, font7f, brushBlack, new PointF(originPoint.X - textWidth - 15, ay));
+                g.DrawString(text, font7f, brushBlack, new PointF(originPoint.X - textWidth - margin, ay));
             }
         }
 
@@ -238,6 +240,7 @@ namespace ASEva.UICoreWF
             var intervalX = Xlength / Xcount;
             var Ylength = originPoint.Y;
             var intervalY = originPoint.Y / Ycount;
+            var margin = 15.0f * DeviceDpi / 96;
 
             //格子框
             int xIndex = (int)((curPoint.X - originPoint.X) / intervalX);
@@ -254,7 +257,7 @@ namespace ASEva.UICoreWF
                 var bx = originPoint.X + (i + 1) * intervalX;
                 if (curPoint.Y > originPoint.Y && curPoint.Y < height - 1 && curPoint.X >= ax && curPoint.X < bx)
                 {
-                    g.DrawRectangle(grayPen, i * intervalX + originPoint.X, originPoint.Y + 15, intervalX, height - originPoint.Y - 15 - 1);
+                    g.DrawRectangle(grayPen, i * intervalX + originPoint.X, originPoint.Y + margin, intervalX, height - originPoint.Y - margin - 1);
                 }
             }
 
@@ -265,7 +268,7 @@ namespace ASEva.UICoreWF
                 var by = originPoint.Y - (i + 1) * intervalY;
                 if (curPoint.X < originPoint.X && curPoint.X > 0 && curPoint.Y >= by && curPoint.Y < ay)
                 {
-                    g.DrawRectangle(grayPen, 0, originPoint.Y - (i + 1) * intervalY, originPoint.X - 15, intervalY);
+                    g.DrawRectangle(grayPen, 0, originPoint.Y - (i + 1) * intervalY, originPoint.X - margin, intervalY);
                 }
             }
         }

@@ -258,6 +258,7 @@ namespace ASEva.UICoreWF
             var width = pictureBox2.Width;
             var height = pictureBox2.Height;
             PointF originPoint = new PointF((float)width / 4, (float)height / 3 * 2);
+            var margin = 15.0f * DeviceDpi / 96;
 
             //画坐标轴
             PointF pointx1 = new PointF(0, originPoint.Y);
@@ -266,8 +267,8 @@ namespace ASEva.UICoreWF
             PointF pointy2 = new PointF(originPoint.X, height);
             g.DrawLine(blackPen, pointx1, pointx2);
             g.DrawLine(blackPen, pointy1, pointy2);
-            g.DrawLine(grayPen, new PointF(originPoint.X, originPoint.Y + 15),new PointF(width-1, originPoint.Y + 15));
-            g.DrawLine(grayPen, new PointF(originPoint.X-15, originPoint.Y), new PointF(originPoint.X - 15,0));
+            g.DrawLine(grayPen, new PointF(originPoint.X, originPoint.Y + margin),new PointF(width-1, originPoint.Y + margin));
+            g.DrawLine(grayPen, new PointF(originPoint.X - margin, originPoint.Y), new PointF(originPoint.X - margin, 0));
             String xTitle = null;
             String yTitle = null;
             var D = Data as ScatterPointsData;
@@ -276,7 +277,7 @@ namespace ASEva.UICoreWF
             var xTitleWidth = g.MeasureString(xTitle, font7f).Width;
             var yTitleWidth = g.MeasureString(yTitle, font7f).Width;
             PointF xTitlePoint = new PointF((width + originPoint.X - xTitleWidth) / 2, originPoint.Y);
-            PointF yTitlePoint = new PointF(originPoint.X - 15, (originPoint.Y - yTitleWidth) / 2);
+            PointF yTitlePoint = new PointF(originPoint.X - margin, (originPoint.Y - yTitleWidth) / 2);
             g.DrawString(xTitle, font7f, brushBlue, xTitlePoint);
             g.DrawString(yTitle, font7f, brushBlue, yTitlePoint, new StringFormat(StringFormatFlags.DirectionVertical));
 
@@ -287,8 +288,8 @@ namespace ASEva.UICoreWF
             g.DrawLine(blackPen, new PointF(width-1, originPoint.Y), new PointF(width-1, originPoint.Y+2));
             g.DrawString((new Decimal(xrange.upper)).ToString(), font7f, brushBlack, new PointF(width-20, originPoint.Y));
             g.DrawString((new Decimal(xrange.lower)).ToString(), font7f, brushBlack, new PointF(originPoint.X, originPoint.Y));
-            g.DrawString((new Decimal(yrange.upper)).ToString(), font7f, brushBlack, new PointF(originPoint.X - 15, 0), new StringFormat(StringFormatFlags.DirectionVertical));
-            g.DrawString((new Decimal(yrange.lower)).ToString(), font7f, brushBlack, new PointF(originPoint.X - 15, originPoint.Y - g.MeasureString(yrange.lower.ToString(), font7f).Width), new StringFormat(StringFormatFlags.DirectionVertical));
+            g.DrawString((new Decimal(yrange.upper)).ToString(), font7f, brushBlack, new PointF(originPoint.X - margin, 0), new StringFormat(StringFormatFlags.DirectionVertical));
+            g.DrawString((new Decimal(yrange.lower)).ToString(), font7f, brushBlack, new PointF(originPoint.X - margin, originPoint.Y - g.MeasureString(yrange.lower.ToString(), font7f).Width), new StringFormat(StringFormatFlags.DirectionVertical));
         }
 
         private void pic_drawPoint(object sender, PaintEventArgs e)
@@ -325,6 +326,7 @@ namespace ASEva.UICoreWF
             var height = pictureBox2.Height;
             PointF originPoint = new PointF((float)width / 4, (float)height / 3 * 2);
             var D = Data as ScatterPointsData;
+            var margin = 15.0f * DeviceDpi / 96;
 
             var xRangeLow = D.GetXRange().lower;
             var xRangeUpper = D.GetXRange().upper;
@@ -341,14 +343,14 @@ namespace ASEva.UICoreWF
             for (int i = 0; i < xHeights.Length; i++)
             {
                 var ax = originPoint.X + histWidth * i;
-				g.FillRectangle(brushBlue, ax + barXOffset, originPoint.Y + 1 + 15, histWidth, (float)xHeights[i] / maxHeightx * (height - originPoint.Y - 1 - 15));
+				g.FillRectangle(brushBlue, ax + barXOffset, originPoint.Y + 1 + margin, histWidth, (float)xHeights[i] / maxHeightx * (height - originPoint.Y - 1 - margin));
 
                 if (histWidth > 12)
                 {
                     var a = i * xStep + xRangeLow;
                     var b = (i + 1) * xStep + xRangeLow;
                     var text = (new Decimal(a)).ToString() + " " + (new Decimal(b)).ToString();
-                    g.DrawString(text, font7f, brushBlack, new PointF(ax, originPoint.Y + 15), new StringFormat(StringFormatFlags.DirectionVertical));
+                    g.DrawString(text, font7f, brushBlack, new PointF(ax, originPoint.Y + margin), new StringFormat(StringFormatFlags.DirectionVertical));
                 }
             }
 
@@ -360,7 +362,7 @@ namespace ASEva.UICoreWF
             for (int i = 0; i < YHeights.Length; i++)
             {
                 var ay = originPoint.Y - histHeight * (i + 1);
-				g.FillRectangle(brushBlue, originPoint.X - ((float)YHeights[i] / maxHeighty * (originPoint.X - 1 - 15)) - 15 + barXOffset, ay, (float)YHeights[i] / maxHeighty * (originPoint.X - 1 - 15) - 1, histHeight);
+				g.FillRectangle(brushBlue, originPoint.X - ((float)YHeights[i] / maxHeighty * (originPoint.X - 1 - margin)) - margin + barXOffset, ay, (float)YHeights[i] / maxHeighty * (originPoint.X - 1 - margin) - 1, histHeight);
 
                 if (histHeight > 12)
                 {
@@ -368,7 +370,7 @@ namespace ASEva.UICoreWF
                     var b = (i + 1) * yStep + yRangeLow;
                     var text = (new Decimal(a)).ToString() + " " + (new Decimal(b)).ToString();
                     var textWidth = g.MeasureString(text, font7f).Width;
-                    g.DrawString(text, font7f, brushBlack, new PointF(originPoint.X - textWidth - 15, ay));
+                    g.DrawString(text, font7f, brushBlack, new PointF(originPoint.X - textWidth - margin, ay));
                 }
             }
         }
@@ -388,6 +390,7 @@ namespace ASEva.UICoreWF
             var width = pictureBox2.Width;
             var height = pictureBox2.Height;
             PointF originPoint = new PointF((float)width / 4, (float)height / 3 * 2);
+            var margin = 15.0f * DeviceDpi / 96;
 
             //十字虚线
             if (curPoint.X > originPoint.X && curPoint.X < width - 1 && curPoint.Y < originPoint.Y && curPoint.Y > 0)
@@ -405,7 +408,7 @@ namespace ASEva.UICoreWF
                 var bx = originPoint.X + histWidth * (i + 1);
                 if (curPoint.Y > originPoint.Y && curPoint.Y < height - 1 && curPoint.X >= ax && curPoint.X <= bx)
                 {
-                    g.DrawRectangle(grayPen, ax, originPoint.Y + 15, histWidth - (i == Xcount - 1 ? 1 : 0), height - originPoint.Y - 15 - 1);
+                    g.DrawRectangle(grayPen, ax, originPoint.Y + margin, histWidth - (i == Xcount - 1 ? 1 : 0), height - originPoint.Y - margin - 1);
                 }
             }
 
@@ -418,7 +421,7 @@ namespace ASEva.UICoreWF
                 var by = originPoint.Y - histHeight * i;
                 if (curPoint.X < originPoint.X && curPoint.X > 0 && curPoint.Y >= ay && curPoint.Y <= by)
                 {
-                    g.DrawRectangle(grayPen, 0, ay, originPoint.X - 15, histHeight);
+                    g.DrawRectangle(grayPen, 0, ay, originPoint.X - margin, histHeight);
                 }
             }
         }

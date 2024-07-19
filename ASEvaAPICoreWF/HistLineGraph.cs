@@ -79,8 +79,8 @@ namespace ASEva.UICoreWF
 
 			DrawBeat.CallbackBegin(pictureBox1, "ASEva.UICoreWF.HistLineGraph");
 
-			try
-			{
+			//try
+			//{
 				var g = e.Graphics;
 				g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 				g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
@@ -201,10 +201,10 @@ namespace ASEva.UICoreWF
 				var smallFontHeight = g.MeasureString(samples[0].Name, smallFont).Height;
 
 				// 计算坐标转换参数
-				float left = (float)15 + yGridTextsMaxWidth;
-				float right = (float)pictureBox1.Width - (isEnableLine ? 16 : 1);
+				float left = (float)15 * DeviceDpi / 96 + yGridTextsMaxWidth;
+				float right = (float)pictureBox1.Width - (isEnableLine ? 16 : 1) * DeviceDpi / 96;
 				float top = 0;
-				float bottom = (float)pictureBox1.Height - 15 - xGridTextsMaxWidth;
+				float bottom = (float)pictureBox1.Height - 15 * DeviceDpi / 96 - xGridTextsMaxWidth;
 				float step = (right - left) / samples.Length;
 
 				//double yFactor = -(bottom - top) / (maximum - minimum);
@@ -260,7 +260,7 @@ namespace ASEva.UICoreWF
 				}
 
 				// 绘制折线图
-				if (hasValue && isEnableLine)
+				if (hasValue && isEnableLine && maximum > minimum)
 				{
 					double yFactor = -(bottom - top) / (maximum - minimum);
 					double yBase = -maximum * yFactor;
@@ -301,7 +301,7 @@ namespace ASEva.UICoreWF
 
 				// 绘制x轴标题
 				var xTitleWidth = g.MeasureString(xTitle, largeFont).Width;
-				g.DrawString(xTitle, largeFont, blackBrush, (float)(left + right - xTitleWidth) * 0.5f, pictureBox1.Height - 15);
+				g.DrawString(xTitle, largeFont, blackBrush, (float)(left + right - xTitleWidth) * 0.5f, pictureBox1.Height - 15 * DeviceDpi / 96);
 
 				// 绘制左y轴标题
 				var histTitleWith = g.MeasureString(histTitle, largeFont).Width;
@@ -311,7 +311,7 @@ namespace ASEva.UICoreWF
 				if (isEnableLine)
 				{
 					var lineTitleWith = g.MeasureString(lineTitle, largeFont).Width;
-					g.DrawString(lineTitle, largeFont, lineBrush, pictureBox1.Width - 15, (float)(top + bottom - lineTitleWith) * 0.5f, new StringFormat(StringFormatFlags.DirectionVertical));
+					g.DrawString(lineTitle, largeFont, lineBrush, pictureBox1.Width - 15 * DeviceDpi / 96, (float)(top + bottom - lineTitleWith) * 0.5f, new StringFormat(StringFormatFlags.DirectionVertical));
 				}
 
 				if (hasValue)
@@ -417,8 +417,8 @@ namespace ASEva.UICoreWF
 				{
 					g.DrawPolygon(pen, ptList.ToArray());
 				}
-			}
-			catch (Exception) { }
+			//}
+			//catch (Exception) { }
 
 			DrawBeat.CallbackEnd(pictureBox1);
 		}
