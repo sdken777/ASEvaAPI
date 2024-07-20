@@ -1,12 +1,7 @@
 {
     "files.exclude": {
-        "Debug": true,
-        "Release": true,
-        ".project": true,
-        ".cproject": true,
-        ".settings": true,
-        "*.vcxproj": true,
-        "*.vcxproj.user": true,
-        "*.vcxproj.filters": true
+        "obj": true,
+        "bin*": true,
+        ".gitignore": true
     }
 }
