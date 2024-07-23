@@ -208,7 +208,7 @@ namespace ASEva.UIEto
 
 		~SkiaView()
 		{
-			Close();
+			if (!closed) Agency.Print("SkiaView.Close not called. Memory leaking.");
 		}
 
 		/// \~English

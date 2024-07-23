@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 16, 2, 0); // Update log / 更新记录: 新增TextBitmap.ReleaseResources
+            return new Version(2, 16, 2, 1); // Update log / 更新记录: GLView/SkiaView仍需要显式调用Close
         }
 
         /// \~English

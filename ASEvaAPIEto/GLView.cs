@@ -775,7 +775,7 @@ namespace ASEva.UIEto
 
 		~GLView()
 		{
-			Close();
+			if (!closed) Agency.Print("GLView.Close not called. Memory leaking.");
 		}
 
 		/// \~English
