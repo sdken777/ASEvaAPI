@@ -44,6 +44,7 @@ namespace ASEva.UICoreWF
 
             platform.Add<Slider.IHandler>(() => new SliderHandler());
             platform.Add<MessageBox.IHandler>(() => new MessageBoxHandler());
+            platform.Add<SelectFolderDialog.IHandler>(() => new SelectFolderDialogHandler());
             var app = new Application(platform);
 
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerCoreWF();

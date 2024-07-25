@@ -4,6 +4,7 @@ using ASEva.UIEto;
 using Eto.Forms;
 using Eto.Drawing;
 using Eto.Wpf;
+using Eto.Wpf.Forms;
 using System.Collections.Generic;
 
 namespace ASEva.UIWpf
@@ -31,6 +32,7 @@ namespace ASEva.UIWpf
             platform.Add<MessageBox.IHandler>(() => new MessageBoxHandler());
             platform.Add<PasswordBox.IHandler>(() => new PasswordBoxHandler());
             platform.Add<LinkButton.IHandler>(() => new SafeLinkButtonHandler());
+            platform.Add<SelectFolderDialog.IHandler>(() => new SelectFolderDialogHandler());
             var app = new Application(platform);
 
             SetContentExtensions.WindowInitializer = new InitWindowHandlerWpf();
