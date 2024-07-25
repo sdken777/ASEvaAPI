@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 4, 1); // Update log / 更新记录: 使用系统默认的文件夹选择对话框
+            return new Version(2, 9, 4, 2); // Update log / 更新记录: 优化文件夹选择对话框标题显示
         }
     }
 }

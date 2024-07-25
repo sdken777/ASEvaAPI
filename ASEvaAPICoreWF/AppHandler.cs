@@ -42,9 +42,16 @@ namespace ASEva.UICoreWF
             //platform.Add<DataObject.IHandler>(() => new DataObjectHandler());
             //platform.Add<DataFormats.IHandler>(() => new DataFormatsHandler());
 
+            // CHECK: 使用默认文件夹选择对话框，避免COM异常
+            platform.Add<SelectFolderDialog.IHandler>(() =>
+            {
+                var handler = new SelectFolderDialogHandler();
+                handler.Control.UseDescriptionForTitle = true;
+                return handler;
+            });
+
             platform.Add<Slider.IHandler>(() => new SliderHandler());
             platform.Add<MessageBox.IHandler>(() => new MessageBoxHandler());
-            platform.Add<SelectFolderDialog.IHandler>(() => new SelectFolderDialogHandler());
             var app = new Application(platform);
 
             SetClientSizeExtensions.ClientSizeSetter = new SetClientSizeHandlerCoreWF();
