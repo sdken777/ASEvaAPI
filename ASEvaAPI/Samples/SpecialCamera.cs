@@ -54,7 +54,7 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// Camera for left blind spot (Pinhole model), use LaneLineCameraMeta
+        /// Camera for left blind spot (Pinhole model), use BlindSpotCameraMeta
         /// </summary>
         /// \~Chinese
         /// <summary>
@@ -64,7 +64,7 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// Camera for right blind spot (Pinhole model), use LaneLineCameraMeta
+        /// Camera for right blind spot (Pinhole model), use BlindSpotCameraMeta
         /// </summary>
         /// \~Chinese
         /// <summary>
