@@ -336,29 +336,65 @@ namespace ASEva
         /// </summary>
         NoGUI,
 
-        /// \~
+        /// \~English
         /// <summary>
-        /// Windows Forms
+        /// Windows Forms, Windows only
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// Windows Forms，仅限Windows
         /// </summary>
         WindowsForms,
 
-        /// \~
+        /// \~English
         /// <summary>
-        /// Windows Presentation Foundation
+        /// Windows Presentation Foundation, Windows only
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// Windows Presentation Foundation，仅限Windows
         /// </summary>
         WPF,
 
-        /// \~
+        /// \~English
         /// <summary>
-        /// Eto.Forms
+        /// Eto.Forms, for desktop application. Windows, Linux, MacOS supported
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// Eto.Forms，面向桌面应用，支持Windows、Linux、MacOS
         /// </summary>
         Eto,
 
-        /// \~
+        /// \~English
         /// <summary>
-        /// Avalonia
+        /// Avalonia, for desktop application. Windows, Linux, MacOS supported
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// Avalonia，面向桌面应用，支持Windows、Linux、MacOS
         /// </summary>
         Avalonia,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.3.0) Multi-platform App UI, for mobile application. iOS, Android supported
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.3.0) Multi-platform App UI，面向移动应用，支持iOS、安卓
+        /// </summary>
+        MAUI,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.3.0) Blazor WebAssembly, for browser application
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.3.0) Blazor WebAssembly，面向浏览器应用
+        /// </summary>
+        Blazor,
     }
 
     /// \~English
@@ -2654,6 +2690,16 @@ namespace ASEva
         /// 绑定的各原生库版本
         /// </summary>
         public Dictionary<NativeLibraryType, Version> LibraryVersions { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.3.0) Corresponding native plugin's debug ID
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.3.0) 绑定的各原生库的调试编号
+        /// </summary>
+        public Dictionary<NativeLibraryType, uint> LibraryDebugIDs { get; set; }
     }
 
     /// \~English

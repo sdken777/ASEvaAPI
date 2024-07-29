@@ -8,6 +8,7 @@ namespace ASEva
 {
     class AgencyLocalDefault : AgencyLocalHandler
     {
+        public bool BundleMode => false;
         public bool ClientSide => false;
 
         public AddBusProtocolResult AddBusProtocolFile(string filePath, out BusProtocolFileID[] fileIDs)
@@ -322,6 +323,11 @@ namespace ASEva
         }
 
         public bool IsInternetConnected()
+        {
+            return false;
+        }
+
+        public bool IsMainThreadFunction(String funcName)
         {
             return false;
         }

@@ -12,8 +12,8 @@
  * \~English In addition, refer to ASEva.Samples for the definition of samples used in plugin, and ASEva.Graph for graph report definitions. \n\n
  * \~Chinese 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph 。 \n\n
  *
- * \~English This document corresponds to API version: 3.2.12 \n
- * \~Chinese 本文档对应API版本：3.2.12
+ * \~English This document corresponds to API version: 3.3.0 \n
+ * \~Chinese 本文档对应API版本：3.3.0
  */
 
 using System;
@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 namespace ASEva
 {
     /// <summary>
-    /// version=3.2.12
+    /// version=3.3.0
     /// </summary>
     public class APIInfo
     {
@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 2, 12, 0); // Update log / 更新记录: 新增SignalPackMode
+            return new Version(3, 3, 0, 0); // Update log / 更新记录: GetRunningOS新增代号ios, android, wasm。新增ApplicationGUI.MAUI和Blazor。新增AgencyLocal.BundleMode。新增AgencyLocal.IsMainThreadFunction。新增NativeClassInfo.LibraryDebugIDs
         }
 
         /// \~English
@@ -69,6 +69,18 @@ namespace ASEva
                 {
                     if (RuntimeInformation.OSArchitecture == Architecture.X64) osCode = "macos";
                     else if (RuntimeInformation.OSArchitecture == Architecture.Arm64) osCode = "macosarm";
+                }
+                else if (OperatingSystem.IsIOS())
+                {
+                    osCode = "ios";
+                }
+                else if (OperatingSystem.IsAndroid())
+                {
+                    osCode = "android";
+                }
+                else if (OperatingSystem.IsBrowser())
+                {
+                    osCode = "wasm";
                 }
             }
             return osCode;

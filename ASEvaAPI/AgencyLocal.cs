@@ -10,6 +10,7 @@ namespace ASEva
 
     public interface AgencyLocalHandler
     {
+        bool BundleMode { get; }
         bool ClientSide { get; }
         AddBusProtocolResult AddBusProtocolFile(String filePath, out BusProtocolFileID[] fileIDs);
         void AddMainThreadCheckpoint(String location);
@@ -75,6 +76,7 @@ namespace ASEva
         Dictionary<String, WindowClassInfo> GetWindowClassTable();
         Task<bool> InstallPlugin(String dirPath);
         bool IsInternetConnected();
+        bool IsMainThreadFunction(String funcName);
         bool IsPRCWebPreferred();
         void Log(String text, LogLevel level);
         Task<bool> NewProject(bool force);
@@ -143,6 +145,19 @@ namespace ASEva
             {
                 if (value != null) handler = value;
             }
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.3.0) Whether the application is a bundle
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.3.0) 是否当前应用是在Bundle中运行
+        /// </summary>
+        public static bool BundleMode
+        {
+            get { return Handler.BundleMode; }
         }
 
         /// \~English
@@ -1226,6 +1241,19 @@ namespace ASEva
         public static bool IsInternetConnected()
         {
             return Handler.IsInternetConnected();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.3.0) Get whether the function of ASEva.AgencyLocal or ASEva.AgencyAsync will be executed in main thread (unavailable for client side applications)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.3.0) 获取 ASEva.AgencyLocal 或 ASEva.AgencyAsync 中的函数是否在主线程中执行（客户端应用程序下不可用）
+        /// </summary>
+        public static bool IsMainThreadFunction(String funcName)
+        {
+            return Handler.IsMainThreadFunction(funcName);
         }
 
         /// \~English

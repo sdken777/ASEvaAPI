@@ -6702,6 +6702,16 @@
             (api:app=3.1.0) 集合了所有主要本地API
             </summary>
         </member>
+        <member name="P:ASEva.AgencyLocal.BundleMode">
+            \~English
+            <summary>
+            (api:app=3.3.0) Whether the application is a bundle
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.3.0) 是否当前应用是在Bundle中运行
+            </summary>
+        </member>
         <member name="P:ASEva.AgencyLocal.ClientSide">
             \~English
             <summary>
@@ -7590,6 +7600,16 @@
             </summary>
             <returns>是否已连接互联网</returns>
         </member>
+        <member name="M:ASEva.AgencyLocal.IsMainThreadFunction(System.String)">
+            \~English
+            <summary>
+            (api:app=3.3.0) Get whether the function of ASEva.AgencyLocal or ASEva.AgencyAsync will be executed in main thread (unavailable for client side applications)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.3.0) 获取 ASEva.AgencyLocal 或 ASEva.AgencyAsync 中的函数是否在主线程中执行（客户端应用程序下不可用）
+            </summary>
+        </member>
         <member name="M:ASEva.AgencyLocal.IsPRCWebPreferred">
             \~English
             <summary>
@@ -8236,7 +8256,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.2.12
+            version=3.3.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -15668,27 +15688,63 @@
             </summary>
         </member>
         <member name="F:ASEva.ApplicationGUI.WindowsForms">
-            \~
+            \~English
             <summary>
-            Windows Forms
+            Windows Forms, Windows only
+            </summary>
+            \~Chinese
+            <summary>
+            Windows Forms，仅限Windows
             </summary>
         </member>
         <member name="F:ASEva.ApplicationGUI.WPF">
-            \~
+            \~English
             <summary>
-            Windows Presentation Foundation
+            Windows Presentation Foundation, Windows only
+            </summary>
+            \~Chinese
+            <summary>
+            Windows Presentation Foundation，仅限Windows
             </summary>
         </member>
         <member name="F:ASEva.ApplicationGUI.Eto">
-            \~
+            \~English
             <summary>
-            Eto.Forms
+            Eto.Forms, for desktop application. Windows, Linux, MacOS supported
+            </summary>
+            \~Chinese
+            <summary>
+            Eto.Forms，面向桌面应用，支持Windows、Linux、MacOS
             </summary>
         </member>
         <member name="F:ASEva.ApplicationGUI.Avalonia">
-            \~
+            \~English
             <summary>
-            Avalonia
+            Avalonia, for desktop application. Windows, Linux, MacOS supported
+            </summary>
+            \~Chinese
+            <summary>
+            Avalonia，面向桌面应用，支持Windows、Linux、MacOS
+            </summary>
+        </member>
+        <member name="F:ASEva.ApplicationGUI.MAUI">
+            \~English
+            <summary>
+            (api:app=3.3.0) Multi-platform App UI, for mobile application. iOS, Android supported
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.3.0) Multi-platform App UI，面向移动应用，支持iOS、安卓
+            </summary>
+        </member>
+        <member name="F:ASEva.ApplicationGUI.Blazor">
+            \~English
+            <summary>
+            (api:app=3.3.0) Blazor WebAssembly, for browser application
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.3.0) Blazor WebAssembly，面向浏览器应用
             </summary>
         </member>
         <member name="T:ASEva.LogLevel">
@@ -17805,6 +17861,16 @@
             \~Chinese
             <summary>
             绑定的各原生库版本
+            </summary>
+        </member>
+        <member name="P:ASEva.NativeClassInfo.LibraryDebugIDs">
+            \~English
+            <summary>
+            (api:app=3.3.0) Corresponding native plugin's debug ID
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.3.0) 绑定的各原生库的调试编号
             </summary>
         </member>
         <member name="T:ASEva.DeviceClassInfo">
