@@ -28,7 +28,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 6, 0); // Update log / 更新记录: WebView2更新
+            return new Version(2, 1, 6, 1); // Update log / 更新记录: 合并1.9.2.3
         }
 
         /// \~English

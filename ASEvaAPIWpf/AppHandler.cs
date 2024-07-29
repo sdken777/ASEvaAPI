@@ -4,6 +4,7 @@ using ASEva.UIEto;
 using Eto.Forms;
 using Eto.Drawing;
 using Eto.Wpf;
+using Eto.Wpf.Forms;
 using System.Collections.Generic;
 
 namespace ASEva.UIWpf
@@ -31,6 +32,15 @@ namespace ASEva.UIWpf
             platform.Add<MessageBox.IHandler>(() => new MessageBoxHandler());
             platform.Add<PasswordBox.IHandler>(() => new PasswordBoxHandler());
             platform.Add<LinkButton.IHandler>(() => new SafeLinkButtonHandler());
+
+            // CHECK: 使用默认文件夹选择对话框，避免COM异常
+            platform.Add<SelectFolderDialog.IHandler>(() =>
+            {
+                var handler = new SelectFolderDialogHandler();
+                handler.Control.UseDescriptionForTitle = true;
+                return handler;
+            });
+
             var app = new Application(platform);
 
             SetContentExtensions.WindowInitializer = new InitWindowHandlerWpf();
