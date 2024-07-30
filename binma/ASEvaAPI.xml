@@ -2670,6 +2670,16 @@
             </summary>
             <returns>是否已连接互联网</returns>
         </member>
+        <member name="M:ASEva.Agency.IsMainThreadFunction(System.String)">
+            \~English
+            <summary>
+            (api:app=3.3.1) Get whether the function of ASEva.Agency will be executed in main thread (unavailable for client side applications)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.3.1) 获取 ASEva.Agency 中的函数是否在主线程中执行（客户端应用程序下不可用）
+            </summary>
+        </member>
         <member name="M:ASEva.Agency.IsMessageValid(System.String,System.Boolean)">
             \~English
             <summary>
@@ -8256,7 +8266,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.3.0
+            version=3.3.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">

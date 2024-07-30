@@ -3441,6 +3441,19 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.3.1) Get whether the function of ASEva.Agency will be executed in main thread (unavailable for client side applications)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.3.1) 获取 ASEva.Agency 中的函数是否在主线程中执行（客户端应用程序下不可用）
+        /// </summary>
+        public static bool IsMainThreadFunction(String funcName)
+        {
+            return AgencyLocal.IsMainThreadFunction(funcName);
+        }
+
+        /// \~English
+        /// <summary>
         /// Whether the bus message ID is valid, for example, it's invalid if corresponding dbc file isn't loaded correctly
         /// </summary>
         /// <param name="messageID">Bus message ID</param>

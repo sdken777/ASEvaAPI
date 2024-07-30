@@ -1253,6 +1253,7 @@ namespace ASEva
         /// </summary>
         public static bool IsMainThreadFunction(String funcName)
         {
+            if (AgencyLocal.ClientSide) return false;
             return Handler.IsMainThreadFunction(funcName);
         }
 
