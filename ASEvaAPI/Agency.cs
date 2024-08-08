@@ -3806,6 +3806,23 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.4.0) Register audio players on the client side
+        /// </summary>
+        /// <param name="driver">Driver</param>
+        /// <param name="replayer">Players, set to null if there's none</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.0) 在客户端注册音频回放接口
+        /// </summary>
+        /// <param name="driver">驱动信息</param>
+        /// <param name="replayer">回放接口，若无则设置额null</param>
+        public static void RegisterAudioReplayers(AudioDriverInfo driver, AudioReplayer replayer)
+        {
+            AgencyLocal.RegisterAudioReplayers(driver, replayer);
+        }
+
+        /// \~English
+        /// <summary>
         /// Register graph panel type for the specified graph type
         /// </summary>
         /// <param name="graphType">Graph type</param>

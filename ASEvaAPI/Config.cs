@@ -724,7 +724,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=3.1.4) [Required] Called while getting configuration's status
         /// </summary>
-        /// <returns>1. Configuration's status. 2. Error hint, should be available while the status is EnabledWithError or EnabledWithWarning</returns>
+        /// <returns>1) Configuration's status. 2) Error hint, should be available while the status is EnabledWithError or EnabledWithWarning</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=3.1.4) [必须实现] 查询配置状态时被调用

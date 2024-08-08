@@ -563,7 +563,7 @@ namespace ASEva
         /// Get whether there's data in audio channel, and the interval and delay information
         /// </summary>
         /// <param name="toleranceMillisecond">How many milliseconds (realistic time) can be tolerated without data</param>
-        /// <returns>1. Whether there's data. 2. The interval (time between frames) curve, in seconds. 3. The delay curve, in seconds</returns>
+        /// <returns>1) Whether there's data. 2) The interval (time between frames) curve, in seconds. 3) The delay curve, in seconds</returns>
         /// \~Chinese
         /// <summary>
         /// 获取音频数据通道状态
@@ -1058,7 +1058,7 @@ namespace ASEva
         /// Get status of components related to the console
         /// </summary>
         /// <param name="consoleClassID">Console component's class ID</param>
-        /// <returns>1. The main status. 2. Children status</returns>
+        /// <returns>1) The main status. 2) Children status</returns>
         /// \~Chinese
         /// <summary>
         /// 获取控制台相关组件配置状态
@@ -1245,7 +1245,7 @@ namespace ASEva
         /// </summary>
         /// <param name="dialogClassID">Dialog component's class ID</param>
         /// <param name="transformID">Transform ID</param>
-        /// <returns>1. The main status. 2. Children status</returns>
+        /// <returns>1) The main status. 2) Children status</returns>
         /// \~Chinese
         /// <summary>
         /// 获取对话框相关组件配置状态
@@ -1805,7 +1805,7 @@ namespace ASEva
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.CommonWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
         /// <param name="classID">Component's class ID</param>
-        /// <returns>1. Status of component's configuration, returns ASEva.ConfigStatus.Disabled if not found. 2. Error hint, available while the status is EnabledWithError or EnabledWithWarning</returns>
+        /// <returns>1) Status of component's configuration, returns ASEva.ConfigStatus.Disabled if not found. 2) Error hint, available while the status is EnabledWithError or EnabledWithWarning</returns>
         /// \~Chinese
         /// <summary>
         /// 获取数据处理/原生/设备组件配置的状态
@@ -1934,7 +1934,7 @@ namespace ASEva
         /// <param name="channel">Video channel, ranges 0~23</param>
         /// <param name="timeline">Target timeline point, in seconds</param>
         /// <param name="maxGap">Max time gap, in seconds</param>
-        /// <returns>1. Video frame's preview JPEG data, image width is 640 pix, null if failed to query. 2. Timestamp of output image, null if failed to query. 3. Camera information, null if failed to query</returns>
+        /// <returns>1) Video frame's preview JPEG data, image width is 640 pix, null if failed to query. 2) Timestamp of output image, null if failed to query. 3) Camera information, null if failed to query</returns>
         /// \~Chinese
         /// <summary>
         /// 获取距离指定时间最近的视频帧的预览JPEG图像数据
@@ -2005,7 +2005,7 @@ namespace ASEva
         /// </summary>
         /// <param name="channelID">Sample's channel ID</param>
         /// <param name="toleranceMillisecond">How many milliseconds (realistic time) can be tolerated without data</param>
-        /// <returns>1. Whether there's data. 2. The interval (time between frames) curve, in seconds. 3. The delay curve, in seconds</returns>
+        /// <returns>1) Whether there's data. 2) The interval (time between frames) curve, in seconds. 3) The delay curve, in seconds</returns>
         /// \~Chinese
         /// <summary>
         /// 获取样本数据通道状态
@@ -2452,7 +2452,7 @@ namespace ASEva
         /// </summary>
         /// <param name="channel">Video channel, ranges 0~23</param>
         /// <param name="toleranceMillisecond">How many milliseconds (realistic time) can be tolerated without data</param>
-        /// <returns>1. Whether there's data. 2. The interval (time between frames) curve, in seconds. 3. The delay curve, in seconds</returns>
+        /// <returns>1) Whether there's data. 2) The interval (time between frames) curve, in seconds. 3) The delay curve, in seconds</returns>
         /// \~Chinese
         /// <summary>
         /// 获取视频数据通道状态
@@ -2490,7 +2490,7 @@ namespace ASEva
         /// <param name="mode">The mode to query video frame</param>
         /// <param name="clip">Based on the mode, image is further cropped to the raw coordinate system, at least 16x16, null means the full size</param>
         /// <param name="withAlpha">Whether to output image with alpha channel (Value fixed to 255)</param>
-        /// <returns>1. Video frame data, size is determined by "mode" and "clip", null if failed to query. 2. Timestamp of output image, null if failed to query. 3. Camera information, null if failed to query</returns>
+        /// <returns>1) Video frame data, size is determined by "mode" and "clip", null if failed to query. 2) Timestamp of output image, null if failed to query. 3) Camera information, null if failed to query</returns>
         /// \~Chinese
         /// <summary>
         /// 获取距离指定时间最近的视频帧数据
@@ -2668,7 +2668,7 @@ namespace ASEva
         /// <summary>
         /// Get whether the system is ready for saving project file, starting session, and output the reason why it's not ready
         /// </summary>
-        /// <returns>1. Whether the system is ready for saving project file, starting session, etc. 2. The ready why the system is not ready, empty means unknown</returns>
+        /// <returns>1) Whether the system is ready for saving project file, starting session, etc. 2) The ready why the system is not ready, empty means unknown</returns>
         /// \~Chinese
         /// <summary>
         /// 返回是否允许进行保存工程项目和开始session等操作，若不允许则输出繁忙原因
@@ -2897,7 +2897,7 @@ namespace ASEva
         /// <param name="caller">The caller who calls this API, can be object of ASEva.CommonWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , etc.</param>
         /// <param name="taskClassID">Task class ID</param>
         /// <param name="config">Configuration string</param>
-        /// <returns>1. Result of the task. 2. Return value string</returns>
+        /// <returns>1) Result of the task. 2) Return value string</returns>
         /// \~Chinese
         /// <summary>
         /// 运行一个独立处理任务，仅限空闲时运行

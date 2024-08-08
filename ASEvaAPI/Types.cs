@@ -4381,4 +4381,116 @@ namespace ASEva
         /// </summary>
         Chinese = 2,
     }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.4.0) Data stream types of transfer to client side
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.4.0) 往客户端传输的数据流类型
+    /// </summary>
+    public enum TransferStreamType
+    {
+        /// \~English
+        /// <summary>
+        /// Manual trigger data
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 触发器数据
+        /// </summary>
+        ManualTrigger = 1,
+
+        /// \~English
+        /// <summary>
+        /// Bus message data
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 总线报文数据
+        /// </summary>
+        BusMessage = 2,
+
+        /// \~English
+        /// <summary>
+        /// Video frame data
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 视频帧数据
+        /// </summary>
+        VideoFrame = 3,
+
+        /// \~English
+        /// <summary>
+        /// Audio frame data
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 音频帧数据
+        /// </summary>
+        AudioFrame = 4,
+
+        /// \~English
+        /// <summary>
+        /// Signal data
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 信号数据
+        /// </summary>
+        Signal = 5,
+
+        /// \~English
+        /// <summary>
+        /// General sample data
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 通用样本数据
+        /// </summary>
+        GeneralSample = 6,
+
+        /// \~English
+        /// <summary>
+        /// Point cloud data
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 点云数据
+        /// </summary>
+        PointCloud = 7,
+    }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.4.0) Data stream transfer statistics
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.4.0) 数据流传输统计信息
+    /// </summary>
+    public class TransferStatistics
+    {
+        /// \~English
+        /// <summary>
+        /// Successfully transferred data bytes per second
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 每秒传输成功字节数
+        /// </summary>
+        public ulong SuccessBytesPerSecond { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Transfer failing data bytes per second
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 每秒传输失败字节数
+        /// </summary>
+        public ulong FailBytesPerSecond { get; set; }
+    }
 }

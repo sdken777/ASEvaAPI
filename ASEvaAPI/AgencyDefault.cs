@@ -387,6 +387,10 @@ namespace ASEva
         {
         }
 
+        public void RegisterAudioReplayers(AudioDriverInfo driver, AudioReplayer replayer)
+        {
+        }
+
         public void RegisterGraphPanelForID(int graphID, string styleName, Type panelType)
         {
         }

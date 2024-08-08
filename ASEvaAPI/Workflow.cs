@@ -20,12 +20,12 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// [Optional] Notify the application's basic info
+        /// [Required] Notify the application's basic info
         /// </summary>
         /// <param name="info">Application's basic info</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 通知应用程序的基本信息
+        /// [必须实现] 通知应用程序的基本信息
         /// </summary>
         /// <param name="info">应用程序的基本信息</param>
         public virtual void OnAppBasicInfo(AppBasicInfo info) {}
@@ -44,13 +44,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Notify the result of framework's initialization
+        /// [Required][OK for modal] Notify the result of framework's initialization
         /// </summary>
         /// <param name="result">Result of framework's initialization</param>
         /// <param name="revisionUpdated">Whether release revision is updated</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 通知框架软件的初始化结果
+        /// [必须实现][可含模态] 通知框架软件的初始化结果
         /// </summary>
         /// <param name="result">框架软件的初始化结果</param>
         /// <param name="revisionUpdated">是否更新了发行号</param>
@@ -58,37 +58,37 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Handle error message
+        /// [Required][OK for modal] Handle error message
         /// </summary>
         /// <param name="message">The message</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 输出错误消息
+        /// [必须实现][可含模态] 输出错误消息
         /// </summary>
         /// <param name="message">消息</param>
         public virtual Task OnError(String message) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Handle general message
+        /// [Required][OK for modal] Handle general message
         /// </summary>
         /// <param name="message">The message</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 输出一般消息
+        /// [必须实现][可含模态] 输出一般消息
         /// </summary>
         /// <param name="message">消息</param>
         public virtual Task OnNotice(String message) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Request user to confirm
+        /// [Required][OK for modal] Request user to confirm
         /// </summary>
         /// <param name="message">The message</param>
         /// <returns>Whether it's confirmed</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 输出确认消息，并返回是否确认
+        /// [必须实现][可含模态] 输出确认消息，并返回是否确认
         /// </summary>
         /// <param name="message">消息</param>
         /// <returns>是否确认</returns>
@@ -96,13 +96,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Output log message
+        /// [Required] Output log message
         /// </summary>
         /// <param name="message">The message</param>
         /// <param name="level">Log level</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 输出清单消息
+        /// [必须实现] 输出清单消息
         /// </summary>
         /// <param name="message">消息</param>
         /// <param name="level">消息级别</param>
@@ -124,12 +124,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Get application's language
+        /// [Required] Get application's language
         /// </summary>
         /// <returns>Language</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 获取语言
+        /// [必须实现] 获取语言
         /// </summary>
         /// <returns>语言</returns>
         public virtual Language OnGetAppLanguage() { return Language.Invalid; }
@@ -156,13 +156,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Select (multiple) bus protocols
+        /// [Required][OK for modal] Select (multiple) bus protocols
         /// </summary>
         /// <param name="selected">Bus protocols already selected</param>
         /// <returns>Newly selected bus protocols</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 选择总线协议文件（可多个）
+        /// [必须实现][可含模态] 选择总线协议文件（可多个）
         /// </summary>
         /// <param name="selected">已选择的总线协议文件</param>
         /// <returns>新选择的总线协议文件</returns>
@@ -170,13 +170,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Select bus message
+        /// [Required][OK for modal] Select bus message
         /// </summary>
         /// <param name="originMessageID">Initial bus message configuration</param>
         /// <returns>Bus message configuration result, null if requested to delete</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 选择总线报文
+        /// [必须实现][可含模态] 选择总线报文
         /// </summary>
         /// <param name="originMessageID">初始总线报文配置</param>
         /// <returns>返回总线报文配置，若删除则返回null</returns>
@@ -184,13 +184,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Select multiple bus messages at once
+        /// [Required][OK for modal] Select multiple bus messages at once
         /// </summary>
         /// <param name="handler">Callback to handle bus message selection</param>
         /// <param name="existBusMessageIDList">List of all bus message IDs that already exist</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 一次性选择多个总线报文
+        /// [必须实现][可含模态] 一次性选择多个总线报文
         /// </summary>
         /// <param name="handler">选中总线报文时调用的回调接口</param>
         /// <param name="existBusMessageIDList">既存的选中总线报文ID列表</param>
@@ -198,7 +198,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Select signal
+        /// [Required][OK for modal] Select signal
         /// </summary>
         /// <param name="origin">Initial signal configuration</param>
         /// <param name="withScale">Whether to enable the configuration of value scale</param>
@@ -207,7 +207,7 @@ namespace ASEva
         /// <returns>Signal configuration result, null if requested to delete</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 选择信号
+        /// [必须实现][可含模态] 选择信号
         /// </summary>
         /// <param name="origin">初始信号配置</param>
         /// <param name="withScale">是否包含乘数的配置</param>
@@ -218,13 +218,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Select multiple signals at once
+        /// [Required][OK for modal] Select multiple signals at once
         /// </summary>
         /// <param name="handler">Callback to handle signal selection</param>
         /// <param name="existSignalIDList">List of all signal IDs that already exist</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 一次性选择多个信号
+        /// [必须实现][可含模态] 一次性选择多个信号
         /// </summary>
         /// <param name="handler">选中信号时调用的回调接口</param>
         /// <param name="existSignalIDList">既存的选中信号ID列表</param>
@@ -232,14 +232,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Show running standalone task
+        /// [Required][OK for modal] Show running standalone task
         /// </summary>
         /// <param name="title">Title of standalone task</param>
         /// <param name="taskClassID">The standalone task's class ID</param>
         /// <param name="callback">Callback interface</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 显示正在进行的独立任务
+        /// [必须实现][可含模态] 显示正在进行的独立任务
         /// </summary>
         /// <param name="title">独立任务标题</param>
         /// <param name="taskClassID">独立任务类别ID</param>
@@ -248,68 +248,68 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Notify to reset data
+        /// [Required] Notify to reset data
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 通知重置数据
+        /// [必须实现] 通知重置数据
         /// </summary>
         public virtual void OnResetData() {}
 
         /// \~English
         /// <summary>
-        /// [Optional] Input new data
+        /// [Required] Input new data
         /// </summary>
         /// <param name="data">New data</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 输入新数据
+        /// [必须实现] 输入新数据
         /// </summary>
         /// <param name="data">新数据</param>
         public virtual void OnInputData(object data) { }
 
         /// \~English
         /// <summary>
-        /// [Optional] Notify that the session is starting
+        /// [Required] Notify that the session is starting
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 通知正在开始session
+        /// [必须实现] 通知正在开始session
         /// </summary>
         public virtual void OnStartSession() { }
 
         /// \~English
         /// <summary>
-        /// [Optional] Notify that the session is stopping
+        /// [Required] Notify that the session is stopping
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 通知正在结束session
+        /// [必须实现] 通知正在结束session
         /// </summary>
         public virtual void OnStopSession() { }
 
         /// \~English
         /// <summary>
-        /// (api:app=3.2.0) [Optional][OK for modal] Edit the information of lately recorded session
+        /// (api:app=3.2.0) [Required][OK for modal] Edit the information of lately recorded session
         /// </summary>
         /// <param name="recordSessionID">Lately recorded session's ID</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.2.0) [可选实现][可含模态] 编辑新采集的session信息
+        /// (api:app=3.2.0) [必须实现][可含模态] 编辑新采集的session信息
         /// </summary>
         /// <param name="recordSessionID">新采集的session ID</param>
         public virtual Task OnEditRecordedSession(SessionIdentifier recordSessionID) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Install plugins
+        /// [Required][OK for modal] Install plugins
         /// </summary>
         /// <param name="libs">Information of related library files</param>
         /// <param name="drivers">Information of related driver or environment pack</param>
         /// <param name="callback">Framework callback interface</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 安装插件
+        /// [必须实现][可含模态] 安装插件
         /// </summary>
         /// <param name="libs">插件关联的库信息列表</param>
         /// <param name="drivers">插件关联的驱动和环境信息列表</param>
@@ -353,7 +353,7 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Initialize workflow
+        /// [Required][OK for modal] Initialize workflow
         /// </summary>
         /// <param name="appID">Application ID</param>
         /// <param name="parameters">Initial parameters</param>
@@ -361,7 +361,7 @@ namespace ASEva
         /// <returns>Whether initialization is successful</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 初始化流程
+        /// [必须实现][可含模态] 初始化流程
         /// </summary>
         /// <param name="appID">应用程序ID</param>
         /// <param name="parameters">初始化参数</param>
@@ -387,7 +387,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Called after license validation failed
+        /// [Required][OK for modal] Called after license validation failed
         /// </summary>
         /// <param name="reason">Reason why validation failed</param>
         /// <param name="mac">Machine code</param>
@@ -395,7 +395,7 @@ namespace ASEva
         /// <returns>Whether a new request is accepted, if yes you should guarantee ASEva.WorkflowLicenseCallback.OnRevalidateLicense is called </returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 许可证验证失败后发起新的请求
+        /// [必须实现][可含模态] 许可证验证失败后发起新的请求
         /// </summary>
         /// <param name="reason">验证失败原因</param>
         /// <param name="mac">机器码</param>
@@ -515,14 +515,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Open dialog
+        /// [Required][OK for modal] Open dialog
         /// </summary>
         /// <param name="dialog">Configuration panel object, derived from ConfigPanel</param>
         /// <param name="info">Information of dialog component</param>
         /// <param name="config">Initial configuration string</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 打开对话框
+        /// [必须实现][可含模态] 打开对话框
         /// </summary>
         /// <param name="dialog">配置面板对象，继承ConfigPanel</param>
         /// <param name="info">对话框组件信息</param>
@@ -551,13 +551,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Run console procedure
+        /// [Required][OK for modal] Run console procedure
         /// </summary>
         /// <param name="consoleClass">Console object</param>
         /// <param name="info">Information of console component</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 运行控制台过程
+        /// [必须实现][可含模态] 运行控制台过程
         /// </summary>
         /// <param name="consoleClass">控制台对象</param>
         /// <param name="info">控制台组件信息</param>
@@ -565,13 +565,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Set current dialog's title and icon
+        /// [Required] Set current dialog's title and icon
         /// </summary>
         /// <param name="title">Title</param>
         /// <param name="icon">Icon (size should be 16x16)</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 设置当前对话框的标题和图标
+        /// [必须实现] 设置当前对话框的标题和图标
         /// </summary>
         /// <param name="title">标题</param>
         /// <param name="icon">图标，分辨率为16x16</param>
@@ -579,14 +579,14 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Set window's title and icon
+        /// [Required] Set window's title and icon
         /// </summary>
         /// <param name="window">Window panel object, derived from WindowPanel</param>
         /// <param name="title">Title</param>
         /// <param name="icon">Icon (size should be 16x16)</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 设置窗口的标题和图标
+        /// [必须实现] 设置窗口的标题和图标
         /// </summary>
         /// <param name="window">窗口面板对象，继承WindowPanel</param>
         /// <param name="title">标题</param>
@@ -595,13 +595,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Configure path of offline map file
+        /// [Required][OK for modal] Configure path of offline map file
         /// </summary>
         /// <param name="originPath">The original path, null if not configured</param>
         /// <returns>New path, set to null if not configured</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 编辑离线地图文件路径
+        /// [必须实现][可含模态] 编辑离线地图文件路径
         /// </summary>
         /// <param name="originPath">原始路径，若未设置则为null</param>
         /// <returns>新路径，若未设置则为null</returns>
@@ -609,12 +609,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional][OK for modal] Configure data encryption
+        /// [Required][OK for modal] Configure data encryption
         /// </summary>
         /// <param name="callback">Framework callback interface</param>
         /// \~Chinese
         /// <summary>
-        /// [可选实现][可含模态] 编辑数据加密选项
+        /// [必须实现][可含模态] 编辑数据加密选项
         /// </summary>
         /// <param name="callback">框架软件的回调接口</param>
         public virtual Task OnEditDataEncryption(WorkflowEncryptionCallback callback) { return Task.CompletedTask; }
@@ -664,6 +664,211 @@ namespace ASEva
         /// </summary>
         /// <returns>流程端是否允许进行保存工程项目和开始session等操作</returns>
         public virtual bool OnCheckReady() { return true; }
+    }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.4.0) Base class of client workflow
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.4.0) 客户端流程基类
+    /// </summary>
+    public class ClientWorkflow : CommonWorkflow
+    {
+        /// \~English
+        /// <summary>
+        /// [Required][OK for modal] Initialize workflow
+        /// </summary>
+        /// <param name="appID">Application ID</param>
+        /// <param name="parameters">Initial parameters</param>
+        /// <param name="gui">Output the GUI framework that the application based on</param>
+        /// <returns>Whether initialization is successful</returns>
+        /// \~Chinese
+        /// <summary>
+        /// [必须实现][可含模态] 初始化流程
+        /// </summary>
+        /// <param name="appID">应用程序ID</param>
+        /// <param name="parameters">初始化参数</param>
+        /// <param name="gui">输出基于的图形界面框架框架</param>
+        /// <returns>初始化是否成功</returns>
+        public virtual Task<bool> OnInit(String appID, Dictionary<String, String> parameters, out ApplicationGUI gui) { gui = ApplicationGUI.NoGUI; return Task.FromResult(true); }
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Get whether to support audio player (default is true)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 获取是否需要支持音频播放（默认true）
+        /// </summary>
+        public virtual bool OnGetAudioPlayerAvailability() { return true; }
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Get whether to use PRC web service on client side software
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 返回是否在客户端软件使用境内网络服务
+        /// </summary>
+        public virtual bool OnCheckPreferPRCWeb() { return true; }
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Notify the connection state changed
+        /// </summary>
+        /// <param name="connected">Whether it's connected or disconnected</param>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 通知连接状态改变
+        /// </summary>
+        /// <param name="connected">连上或断开</param>
+        public virtual void OnConnectionChanged(bool connected) {}
+
+        /// \~English
+        /// <summary>
+        /// [Optional] Provide the latest statistics of data stream transfer
+        /// </summary>
+        /// <param name="stat">The latest statistics of data stream transfer</param>
+        /// \~Chinese
+        /// <summary>
+        /// [可选实现] 提供最近的数据流传输统计信息
+        /// </summary>
+        /// <param name="stat">最近的数据流传输统计信息</param>
+        public virtual void OnTransferStatistics(Dictionary<TransferStreamType, TransferStatistics> stat) {}
+
+        /// \~English
+        /// <summary>
+        /// [Required] Request to input number
+        /// </summary>
+        /// <param name="message">Title message</param>
+        /// <param name="defaultValue">Default value</param>
+        /// <returns>Input value</returns> 
+        /// \~Chinese
+        /// <summary>
+        /// [必须实现] 请求输入数值
+        /// </summary>
+        /// <param name="message">提示消息</param>
+        /// <param name="defaultValue">默认值</param>
+        /// <returns>输入的值</returns> 
+        public virtual Task<double> OnRequestInputNumber(String message, double defaultValue) { return Task.FromResult(defaultValue); }
+
+        /// \~English
+        /// <summary>
+        /// [Required] Request to input string
+        /// </summary>
+        /// <param name="message">Title message</param>
+        /// <param name="defaultValue">Default value</param>
+        /// <returns>Input value</returns> 
+        /// \~Chinese
+        /// <summary>
+        /// [必须实现] 请求输入字符串
+        /// </summary>
+        /// <param name="message">提示消息</param>
+        /// <param name="defaultValue">默认值</param>
+        /// <returns>输入的值</returns> 
+        public virtual Task<String> OnRequestInputString(String message, String defaultValue) { return Task.FromResult(defaultValue); }
+
+        /// \~English
+        /// <summary>
+        /// [Required] Request single selection
+        /// </summary>
+        /// <param name="message">Title message</param>
+        /// <param name="options">All options</param>
+        /// <param name="defaultSelectIndex">Default selected index</param>
+        /// <returns>Selected index</returns>
+        /// \~Chinese
+        /// <summary>
+        /// [必须实现] 请求单项选择
+        /// </summary>
+        /// <param name="message">提示消息</param>
+        /// <param name="options">所有选项</param>
+        /// <param name="defaultSelectIndex">默认的选中序号</param>
+        /// <returns>选中的序号</returns>
+        public virtual Task<int> OnRequestSingleSelect(String message, String[] options, int defaultSelectIndex) { return Task.FromResult(defaultSelectIndex); }
+
+        /// \~English
+        /// <summary>
+        /// [Required] Request multiple selection
+        /// </summary>
+        /// <param name="message">Title message</param>
+        /// <param name="options">All options</param>
+        /// <param name="defaultSelectIndices">Default selected indices</param>
+        /// <returns>Selected indices</returns>
+        /// \~Chinese
+        /// <summary>
+        /// [必须实现] 请求多项选择
+        /// </summary>
+        /// <param name="message">提示消息</param>
+        /// <param name="options">所有选项</param>
+        /// <param name="defaultSelectIndices">默认的选中序号</param>
+        /// <returns>选中的序号</returns>
+        public virtual Task<int[]> OnRequestMultiSelect(String message, String[] options, int[] defaultSelectIndices) { return Task.FromResult(defaultSelectIndices); }
+
+        /// \~English
+        /// <summary>
+        /// [Required] Request to select a file and load the data, only for small files
+        /// </summary>
+        /// <param name="message">Title message</param>
+        /// <param name="extensions">Suffix filtering, starts with '.', or set to null not specified</param>
+        /// <returns>1) Binary data of the file selected by user, null if user cancelled. 2) File path, null if user cancelled</returns>
+        /// \~Chinese
+        /// <summary>
+        /// [必须实现] 请求选择文件并读取内容，仅适用于小文件
+        /// </summary>
+        /// <param name="message">提示消息</param>
+        /// <param name="extensions">后缀名筛选，以'.'开头，若不限后缀则设为null</param>
+        /// <returns>1. 用户选中文件的二进制数据，若取消则输出null; 2. 文件路径，若取消则输出null</returns>
+        public virtual Task<(byte[], String)> OnRequestLoadFileData(String message, String[] extensions) { return Task.FromResult(((byte[])null, (String)null)); }
+
+        /// \~English
+        /// <summary>
+        /// [Required] Request to select a file and save the data, only for small files
+        /// </summary>
+        /// <param name="message">Title message</param>
+        /// <param name="extension">Suffix of the file to save, starts with '.', or set to null not specified</param>
+        /// <param name="data">Binary data to save to the file</param>
+        /// <returns>File path, null if user cancelled</returns>
+        /// \~Chinese
+        /// <summary>
+        /// [必须实现] 请求选择文件并保存内容，仅适用于小文件
+        /// </summary>
+        /// <param name="message">提示消息</param>
+        /// <param name="extension">保存文件的后缀名，以'.'开头，若不考虑后缀则设为null</param>
+        /// <param name="data">需要保存的二进制数据</param>
+        /// <returns>文件路径，若取消则输出null</returns>
+        public virtual Task<String> OnRequestSaveFileData(String message, String extension, byte[] data) { return Task.FromResult((String)null); }
+
+        /// \~English
+        /// <summary>
+        /// [Required] Set current dialog's title and icon
+        /// </summary>
+        /// <param name="title">Title</param>
+        /// <param name="icon">Icon (size should be 16x16)</param>
+        /// \~Chinese
+        /// <summary>
+        /// [必须实现] 设置当前对话框的标题和图标
+        /// </summary>
+        /// <param name="title">标题</param>
+        /// <param name="icon">图标，分辨率为16x16</param>
+        public virtual void OnSetCurrentDialogTitle(String title, CommonImage icon) {}
+
+        /// \~English
+        /// <summary>
+        /// [Required] Set window's title and icon
+        /// </summary>
+        /// <param name="window">Window panel object, derived from WindowPanel</param>
+        /// <param name="title">Title</param>
+        /// <param name="icon">Icon (size should be 16x16)</param>
+        /// \~Chinese
+        /// <summary>
+        /// [必须实现] 设置窗口的标题和图标
+        /// </summary>
+        /// <param name="window">窗口面板对象，继承WindowPanel</param>
+        /// <param name="title">标题</param>
+        /// <param name="icon">图标，分辨率为16x16</param>
+        public virtual void OnSetWindowTitle(object window, String title, CommonImage icon) {}
     }
 
     /// \~English
