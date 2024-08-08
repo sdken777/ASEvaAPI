@@ -1245,11 +1245,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.3.0) Get whether the function of ASEva.AgencyLocal or ASEva.AgencyAsync will be executed in main thread (unavailable for client side applications)
+        /// (api:app=3.3.0) Get whether the function of ASEva.AgencyLocal or ASEva.AgencyAsync should be executed in main thread (all return false for client side applications)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.3.0) 获取 ASEva.AgencyLocal 或 ASEva.AgencyAsync 中的函数是否在主线程中执行（客户端应用程序下不可用）
+        /// (api:app=3.3.0) 获取 ASEva.AgencyLocal 或 ASEva.AgencyAsync 中的函数是否应在主线程中执行（客户端应用程序下全部为false）
         /// </summary>
         public static bool IsMainThreadFunction(String funcName)
         {
