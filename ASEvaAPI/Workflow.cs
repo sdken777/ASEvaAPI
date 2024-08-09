@@ -136,11 +136,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Get default global parameters (default is empty)
+        /// [Optional] Get default global parameters, unavailable for client side software (default is empty)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 获取默认全局参数（默认空）
+        /// [可选实现] 获取默认全局参数，客户端软件无效（默认空）
         /// </summary>
         public virtual Dictionary<String, String> OnGetDefaultGlobalParameters() { return null; }
 
