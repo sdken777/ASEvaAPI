@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 4, 0, 0); // Update log / 更新记录: 新增ClientWorkflow。AgencyLocal函数检查ClientSide和BundleMode。新增Agency/Local.RegisterAudioReplayers
+            return new Version(3, 4, 0, 1); // Update log / 更新记录: 修正ClientWorkflow.OnInit
         }
 
         /// \~English

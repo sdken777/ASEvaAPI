@@ -682,17 +682,15 @@ namespace ASEva
         /// </summary>
         /// <param name="appID">Application ID</param>
         /// <param name="parameters">Initial parameters</param>
-        /// <param name="gui">Output the GUI framework that the application based on</param>
-        /// <returns>Whether initialization is successful</returns>
+        /// <returns>The GUI framework that the application based on</returns>
         /// \~Chinese
         /// <summary>
         /// [必须实现][可含模态] 初始化流程
         /// </summary>
         /// <param name="appID">应用程序ID</param>
         /// <param name="parameters">初始化参数</param>
-        /// <param name="gui">输出基于的图形界面框架框架</param>
-        /// <returns>初始化是否成功</returns>
-        public virtual Task<bool> OnInit(String appID, Dictionary<String, String> parameters, out ApplicationGUI gui) { gui = ApplicationGUI.NoGUI; return Task.FromResult(true); }
+        /// <returns>基于的图形界面框架框架</returns>
+        public virtual Task<ApplicationGUI> OnInit(String appID, Dictionary<String, String> parameters) { return Task.FromResult(ApplicationGUI.NoGUI); }
 
         /// \~English
         /// <summary>
