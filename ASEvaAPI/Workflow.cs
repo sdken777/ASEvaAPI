@@ -716,12 +716,12 @@ namespace ASEva
         /// <summary>
         /// (api:app=3.4.1) [Required] Get the connection config
         /// </summary>
-        /// <returns>Connection config. 1) Dual-port mode (ip/url:port-in:port-out)</returns>
+        /// <returns>Connection config. 1) Dual-port mode (ip:port-in:port-out)</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=3.4.1) [必须实现] 返回连接配置
         /// </summary>
-        /// <returns>连接配置，含以下模式：1. 双端口模式（ip/url:port-in:port-out）</returns>
+        /// <returns>连接配置，含以下模式：1. 双端口模式（ip:port-in:port-out）</returns>
         public virtual String OnGetConnectionConfig() { return null; }
 
         /// \~English
