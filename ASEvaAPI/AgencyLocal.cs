@@ -2046,7 +2046,6 @@ namespace ASEva
         /// <returns>是否成功终止</returns>
         public static Task<bool> TerminateApp(bool force, bool autosave)
         {
-            if (Handler.ClientSide && Handler.BundleMode) return Task.FromResult(false);
             return Handler.TerminateApp(force, autosave);
         }
 
