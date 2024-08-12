@@ -694,6 +694,16 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.4.2) [Required for desktop mode][OK for modal] Run the workflow
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.2) [桌面模式下必须实现][可含模态] 运行流程
+        /// </summary>
+        public virtual Task OnRunDesktop() { return Task.CompletedTask; }
+
+        /// \~English
+        /// <summary>
         /// [Optional] Get whether to support audio player (default is true)
         /// </summary>
         /// \~Chinese
