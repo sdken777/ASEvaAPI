@@ -1562,6 +1562,16 @@
             <param name="session">Session ID</param>
             <returns>卫星Posix时间模型</returns>
         </member>
+        <member name="M:ASEva.Agency.GetGPUDecoderTestResults">
+            \~English
+            <summary>
+            (api:app=3.2.13) Get GPU decoder test results
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.2.13) 获取GPU解码测试结果
+            </summary>
+        </member>
         <member name="M:ASEva.Agency.GetGraphData(ASEva.SessionIdentifier,System.Int32)">
             \~English
             <summary>
@@ -5058,6 +5068,16 @@
             <param name="session">Session ID</param>
             <returns>卫星Posix时间模型</returns>
         </member>
+        <member name="M:ASEva.AgencyAsync.GetGPUDecoderTestResults">
+            \~English
+            <summary>
+            (api:app=3.2.13) Get GPU decoder test results
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.2.13) 获取GPU解码测试结果
+            </summary>
+        </member>
         <member name="M:ASEva.AgencyAsync.GetGraphData(ASEva.SessionIdentifier,System.Int32)">
             \~English
             <summary>
@@ -8294,7 +8314,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.4.2
+            version=3.4.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -19649,6 +19669,36 @@
             \~Chinese
             <summary>
             每秒传输失败字节数
+            </summary>
+        </member>
+        <member name="T:ASEva.GPUDecoderTestResults">
+            \~English
+            <summary>
+            (api:app=3.2.13) GPU decoder test results
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.2.13) GPU解码测试结果
+            </summary>
+        </member>
+        <member name="P:ASEva.GPUDecoderTestResults.TestDataAvailable">
+            \~English
+            <summary>
+            Whether the data for testing is available (key is the codec, like mjpeg, h264, m265, etc.)
+            </summary>
+            \~Chinese
+            <summary>
+            测试用数据是否可用（键为编码格式，如mjpeg, h264, h265等）
+            </summary>
+        </member>
+        <member name="P:ASEva.GPUDecoderTestResults.TestResults">
+            \~English
+            <summary>
+            Test result table. Key is the test item, value is the processable pixels per second (while null means not tested, 0 means failed)
+            </summary>
+            \~Chinese
+            <summary>
+            测试结果，键为测试项，值为每秒可处理像素数（null表示未测试，0表示失败）
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">
