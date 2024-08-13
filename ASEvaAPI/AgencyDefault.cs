@@ -919,6 +919,11 @@ namespace ASEva
             return Task.FromResult<PosixTimeModel>(null);
         }
 
+        public Task<GPUDecoderTestResults> GetGPUDecoderTestResults()
+        {
+            return Task.FromResult((GPUDecoderTestResults)null);
+        }
+
         public Task<GraphData> GetGraphData(SessionIdentifier session, int graphID)
         {
             return Task.FromResult<GraphData>(null);
@@ -1322,11 +1327,6 @@ namespace ASEva
         public Task RemoveSignalReference(string signalID)
         {
             return Task.CompletedTask;
-        }
-
-        public Task<GPUDecoderTestResults> GetGPUDecoderTestResults()
-        {
-            return Task.FromResult((GPUDecoderTestResults)null);
         }
 
         public Task ResetGPUDecoderTestResults()

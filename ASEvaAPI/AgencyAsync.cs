@@ -89,6 +89,7 @@ namespace ASEva
         Task<String> GetGlobalVariable(String key, String defaultValue);
         Task<String[]> GetGlobalVariableKeys();
         Task<PosixTimeModel> GetGNSSPosixTimeModel(SessionIdentifier session);
+        Task<GPUDecoderTestResults> GetGPUDecoderTestResults();
         Task<GraphData> GetGraphData(SessionIdentifier session, int graphID);
         Task<GraphicCardInfo[]> GetGraphicCardInfos();
         Task<int[]> GetGraphIDList();
@@ -170,7 +171,6 @@ namespace ASEva
         Task RemoveGeneration(SessionIdentifier session, String genID);
         Task<bool> RemoveSession(SessionIdentifier session, bool force);
         Task RemoveSignalReference(String signalID);
-        Task<GPUDecoderTestResults> GetGPUDecoderTestResults();
         Task ResetGPUDecoderTestResults();
         Task RunConsole(object caller, string consoleClassID);
         Task<(TaskResult, String)> RunStandaloneTask(object caller, String taskClassID, String config);
@@ -1502,6 +1502,19 @@ namespace ASEva
         public static Task<PosixTimeModel> GetGNSSPosixTimeModel(SessionIdentifier session)
         {
             return Handler.GetGNSSPosixTimeModel(session);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.2.13) Get GPU decoder test results
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.2.13) 获取GPU解码测试结果
+        /// </summary>
+        public static Task<GPUDecoderTestResults> GetGPUDecoderTestResults()
+        {
+            return Handler.GetGPUDecoderTestResults();
         }
 
         /// \~English
@@ -2859,19 +2872,6 @@ namespace ASEva
         public static Task RemoveSignalReference(String signalID)
         {
             return Handler.RemoveSignalReference(signalID);
-        }
-
-        /// \~English
-        /// <summary>
-        /// (api:app=3.2.13) Get GPU decoder test results
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// (api:app=3.2.13) 获取GPU解码测试结果
-        /// </summary>
-        public static Task<GPUDecoderTestResults> GetGPUDecoderTestResults()
-        {
-            return Handler.GetGPUDecoderTestResults();
         }
 
         /// \~English

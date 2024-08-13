@@ -1562,6 +1562,16 @@
             <param name="session">Session ID</param>
             <returns>卫星Posix时间模型</returns>
         </member>
+        <member name="M:ASEva.Agency.GetGPUDecoderTestResults">
+            \~English
+            <summary>
+            (api:app=3.2.13) Get GPU decoder test results
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.2.13) 获取GPU解码测试结果
+            </summary>
+        </member>
         <member name="M:ASEva.Agency.GetGraphData(ASEva.SessionIdentifier,System.Int32)">
             \~English
             <summary>
@@ -3137,16 +3147,6 @@
             <param name="caller">调用此API的对象，可为以下类型： ASEva.CommonWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel等</param>
             <param name="nativeClassID">原生组件ID</param>
             <param name="funcID">函数ID</param>
-        </member>
-        <member name="M:ASEva.Agency.GetGPUDecoderTestResults">
-            \~English
-            <summary>
-            (api:app=3.2.13) Get GPU decoder test results
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.2.13) 获取GPU解码测试结果
-            </summary>
         </member>
         <member name="M:ASEva.Agency.ResetGPUDecoderTestResults">
             \~English
@@ -5044,6 +5044,16 @@
             <param name="session">Session ID</param>
             <returns>卫星Posix时间模型</returns>
         </member>
+        <member name="M:ASEva.AgencyAsync.GetGPUDecoderTestResults">
+            \~English
+            <summary>
+            (api:app=3.2.13) Get GPU decoder test results
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.2.13) 获取GPU解码测试结果
+            </summary>
+        </member>
         <member name="M:ASEva.AgencyAsync.GetGraphData(ASEva.SessionIdentifier,System.Int32)">
             \~English
             <summary>
@@ -6157,16 +6167,6 @@
             移除信号引用
             </summary>
             <param name="signalID">信号ID</param>
-        </member>
-        <member name="M:ASEva.AgencyAsync.GetGPUDecoderTestResults">
-            \~English
-            <summary>
-            (api:app=3.2.13) Get GPU decoder test results
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.2.13) 获取GPU解码测试结果
-            </summary>
         </member>
         <member name="M:ASEva.AgencyAsync.ResetGPUDecoderTestResults">
             \~English
