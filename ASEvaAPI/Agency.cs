@@ -4027,6 +4027,20 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.2.13) Get GPU decoder test results
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.2.13) 获取GPU解码测试结果
+        /// </summary>
+        public static GPUDecoderTestResults GetGPUDecoderTestResults()
+        {
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetGPUDecoderTestResults().Result;
+        }
+
+        /// \~English
+        /// <summary>
         /// Reset GPU decoder test results
         /// </summary>
         /// \~Chinese

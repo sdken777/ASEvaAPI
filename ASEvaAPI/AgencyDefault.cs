@@ -1324,6 +1324,11 @@ namespace ASEva
             return Task.CompletedTask;
         }
 
+        public Task<GPUDecoderTestResults> GetGPUDecoderTestResults()
+        {
+            return Task.FromResult((GPUDecoderTestResults)null);
+        }
+
         public Task ResetGPUDecoderTestResults()
         {
             return Task.CompletedTask;

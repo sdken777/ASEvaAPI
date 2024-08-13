@@ -4335,4 +4335,35 @@ namespace ASEva
         /// </summary>
         Chinese = 2,
     }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.2.13) GPU decoder test results
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.2.13) GPU解码测试结果
+    /// </summary>
+    public class GPUDecoderTestResults
+    {
+        /// \~English
+        /// <summary>
+        /// Whether the data for testing is available (key is the codec, like mjpeg, h264, m265, etc.)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 测试用数据是否可用（键为编码格式，如mjpeg, h264, h265等）
+        /// </summary>
+        public Dictionary<String, bool> TestDataAvailable { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Test result table. Key is the test item, value is the processable pixels per second (while null means not tested, 0 means failed)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 测试结果，键为测试项，值为每秒可处理像素数（null表示未测试，0表示失败）
+        /// </summary>
+        public Dictionary<String, ulong?> TestResults { get; set; }
+    }
 }
