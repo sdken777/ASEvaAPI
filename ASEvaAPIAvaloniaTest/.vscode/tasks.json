@@ -124,6 +124,19 @@
         },
         {
             "type": "process",
+            "label": "Subtask: Copy built files (Debug)",
+            "hide": true,
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvaloniaTest",
+                "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvaloniaTest.dll",
+                "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvaloniaTest.runtimeconfig.json",
+                "../${input:helper_platform_bin_name}/debug/"
+            ],
+        },
+        {
+            "type": "process",
             "label": "Subtask: Copy built files (Release)",
             "hide": true,
             "command": "cp",
