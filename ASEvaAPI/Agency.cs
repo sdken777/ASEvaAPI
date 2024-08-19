@@ -704,7 +704,7 @@ namespace ASEva
         /// <returns>应用程序运行模式</returns>
         public static ApplicationMode GetAppMode()
         {
-            if (!AgencyAsync.SyncMode) return ApplicationMode.Replay;
+            if (!AgencyAsync.SyncMode) return ApplicationMode.Unknown;
             return AgencyAsync.GetAppMode().Result;
         }
 
@@ -720,7 +720,7 @@ namespace ASEva
         /// <returns>应用程序运行状态</returns>
         public static ApplicationStatus GetAppStatus()
         {
-            if (!AgencyAsync.SyncMode) return ApplicationStatus.Idle;
+            if (!AgencyAsync.SyncMode) return ApplicationStatus.Unknown;
             return AgencyAsync.GetAppStatus().Result;
         }
 
@@ -1130,7 +1130,7 @@ namespace ASEva
         /// <returns>文件状态</returns>
         public static BusProtocolFileState GetBusProtocolFileState(BusProtocolFileID fileID)
         {
-            if (!AgencyAsync.SyncMode) return BusProtocolFileState.OK;
+            if (!AgencyAsync.SyncMode) return BusProtocolFileState.Unknown;
             return AgencyAsync.GetBusProtocolFileState(fileID).Result;
         }
 
@@ -3330,7 +3330,7 @@ namespace ASEva
         /// <returns>特殊摄像头类型</returns>
         public static SpecialCameraType GetVideoSpecialType(int channel)
         {
-            if (!AgencyAsync.SyncMode) return SpecialCameraType.Normal;
+            if (!AgencyAsync.SyncMode) return SpecialCameraType.Unknown;
             return AgencyAsync.GetVideoSpecialType(channel).Result;
         }
 
@@ -4122,7 +4122,7 @@ namespace ASEva
             if (!AgencyAsync.SyncMode)
             {
                 returnValue = null;
-                return TaskResult.TaskInitFailed;
+                return TaskResult.Unknown;
             }
             var result = AgencyAsync.RunStandaloneTask(caller, taskClassID, config).Result;
             returnValue = result.Item2;

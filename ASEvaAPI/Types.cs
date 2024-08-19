@@ -263,6 +263,16 @@ namespace ASEva
         /// 运行独立任务中
         /// </summary>
         Tasking,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.4.4) Unknown (For circumstances like getting failed)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.4) 未知（获取失败等情况）
+        /// </summary>
+        Unknown,
     }
 
     /// \~English
@@ -314,6 +324,16 @@ namespace ASEva
         /// 远程采集模式
         /// </summary>
         Remote,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.4.4) Unknown (For circumstances like getting failed)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.4) 未知（获取失败等情况）
+        /// </summary>
+        Unknown,
     }
 
     /// \~English
@@ -395,6 +415,16 @@ namespace ASEva
         /// (api:app=3.3.0) Blazor WebAssembly，面向浏览器应用
         /// </summary>
         Blazor,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.4.4) Unknown (For circumstances like getting failed)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.4) 未知（获取失败等情况）
+        /// </summary>
+        Unknown,
     }
 
     /// \~English
@@ -1268,6 +1298,16 @@ namespace ASEva
         /// 协议文件内容不匹配
         /// </summary>
         MD5NotCorrect,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.4.4) Unknown (For circumstances like getting failed)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.4) 未知（获取失败等情况）
+        /// </summary>
+        Unknown,
     }
 
     /// \~English

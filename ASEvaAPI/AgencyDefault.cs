@@ -134,7 +134,7 @@ namespace ASEva
 
         public ApplicationGUI GetAppGUI()
         {
-            return ApplicationGUI.NoGUI;
+            return ApplicationGUI.Unknown;
         }
 
         public string GetAppID()
@@ -611,7 +611,7 @@ namespace ASEva
 
         public Task<ApplicationGUI> GetAppGUI()
         {
-            return Task.FromResult<ApplicationGUI>(ApplicationGUI.NoGUI);
+            return Task.FromResult<ApplicationGUI>(ApplicationGUI.Unknown);
         }
 
         public Task<string> GetAppID()
@@ -626,12 +626,12 @@ namespace ASEva
 
         public Task<ApplicationMode> GetAppMode()
         {
-            return Task.FromResult<ApplicationMode>(ApplicationMode.Replay);
+            return Task.FromResult<ApplicationMode>(ApplicationMode.Unknown);
         }
 
         public Task<ApplicationStatus> GetAppStatus()
         {
-            return Task.FromResult<ApplicationStatus>(ApplicationStatus.Idle);
+            return Task.FromResult<ApplicationStatus>(ApplicationStatus.Unknown);
         }
 
         public Task<double> GetAudioChannelDelayConfig()
@@ -736,7 +736,7 @@ namespace ASEva
 
         public Task<BusProtocolFileState> GetBusProtocolFileState(BusProtocolFileID fileID)
         {
-            return Task.FromResult<BusProtocolFileState>(BusProtocolFileState.OK);
+            return Task.FromResult<BusProtocolFileState>(BusProtocolFileState.Unknown);
         }
 
         public Task<BusSignalInfo> GetBusSignalInfo(string busSignalID)
@@ -1246,7 +1246,7 @@ namespace ASEva
 
         public Task<SpecialCameraType> GetVideoSpecialType(int channel)
         {
-            return Task.FromResult<SpecialCameraType>(SpecialCameraType.Normal);
+            return Task.FromResult<SpecialCameraType>(SpecialCameraType.Unknown);
         }
 
         public Task<bool> IsBusMessageBound(string busMessageID)
@@ -1351,7 +1351,7 @@ namespace ASEva
 
         public Task<(TaskResult, string)> RunStandaloneTask(object caller, string taskClassID, string config)
         {
-            return Task.FromResult<(TaskResult, string)>((TaskResult.TaskInitFailed, null));
+            return Task.FromResult<(TaskResult, string)>((TaskResult.Unknown, null));
         }
 
         public Task SendBusMessage(BusMessage message)

@@ -367,7 +367,7 @@ namespace ASEva
         /// <param name="parameters">初始化参数</param>
         /// <param name="gui">输出基于的图形界面框架框架</param>
         /// <returns>初始化是否成功</returns>
-        public virtual bool OnInit(String appID, Dictionary<String, String> parameters, out ApplicationGUI gui) { gui = ApplicationGUI.NoGUI; return true; }
+        public virtual bool OnInit(String appID, Dictionary<String, String> parameters, out ApplicationGUI gui) { gui = ApplicationGUI.Unknown; return true; }
 
         /// \~English
         /// <summary>
@@ -690,7 +690,7 @@ namespace ASEva
         /// <param name="appID">应用程序ID</param>
         /// <param name="parameters">初始化参数</param>
         /// <returns>基于的图形界面框架框架</returns>
-        public virtual Task<ApplicationGUI> OnInit(String appID, Dictionary<String, String> parameters) { return Task.FromResult(ApplicationGUI.NoGUI); }
+        public virtual Task<ApplicationGUI> OnInit(String appID, Dictionary<String, String> parameters) { return Task.FromResult(ApplicationGUI.Unknown); }
 
         /// \~English
         /// <summary>

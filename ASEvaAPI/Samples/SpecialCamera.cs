@@ -121,6 +121,16 @@ namespace ASEva.Samples
         /// (api:app=3.0.10) 自定义模型的任意位置摄像头，使用 CustomizedCameraMeta
         /// </summary>
         CustomizedCamera = 10,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.4.4) Unknown (For circumstances like getting failed)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.4) 未知（获取失败等情况）
+        /// </summary>
+        Unknown = 100,
     }
 
     /// \~English
@@ -1089,5 +1099,18 @@ namespace ASEva.Samples
         /// 标准针孔模型下的横向视场角（未去畸变时为空）
         /// </summary>
         public double? HorizontalFov { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 默认构造函数
+        /// </summary>
+        public CameraInfo()
+        {
+            SpecialCameraType = SpecialCameraType.Unknown;
+        }
     }
 }
