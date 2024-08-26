@@ -14,7 +14,11 @@ namespace ForDesigner
 
         public static AppBuilder BuildAvaloniaApp()
         {
+#if ASEVA_API_BUNDLE_MODE
+            return null;
+#else
             return AppBuilder.Configure<AvaloniaApplication>().UsePlatformDetect().WithInterFont().LogToTrace();
+#endif
         }
     }
 }

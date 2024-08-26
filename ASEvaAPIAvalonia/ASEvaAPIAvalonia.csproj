@@ -17,7 +17,7 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(ASEvaAPIBundleMode)' != 'true'">
     <PackageReference Include="Avalonia" Version="11.0.10" />
     <PackageReference Include="Avalonia.Desktop" Version="11.0.10" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10" />
@@ -27,7 +27,7 @@
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.10" />
   </ItemGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(ASEvaAPIBundleMode)' != 'true'">
     <Reference Include="ASEvaAPI">
       <HintPath>../bin64/ASEvaAPI.dll</HintPath>
     </Reference>
@@ -43,6 +43,44 @@
     <Reference Include="OxyPlot.Avalonia">
       <HintPath>../bin64/OxyPlot.Avalonia.dll</HintPath>
     </Reference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(ASEvaAPIBundleMode)' != 'true'">
+    <AvaloniaXaml Remove="AvaloniaApplicationBundle.axaml" />
+    <Compile Remove="AvaloniaApplicationBundle.axaml.cs" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(ASEvaAPIBundleMode)' == 'true'">
+    <DefineConstants>ASEVA_API_BUNDLE_MODE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(ASEvaAPIBundleMode)' == 'true'">
+    <PackageReference Include="Avalonia" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Themes.Simple" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.10" />
+    <PackageReference Include="Avalonia.Skia" Version="11.0.10" />
+    <PackageReference Include="SkiaSharp" Version="2.88.7" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(ASEvaAPIBundleMode)' == 'true'">
+    <Reference Include="ASEvaAPI">
+      <HintPath>../binb/ASEvaAPI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(ASEvaAPIBundleMode)' == 'true'">
+    <Compile Remove="App.cs" />
+    <AvaloniaXaml Remove="AvaloniaApplication.axaml" />
+    <Compile Remove="AvaloniaApplication.axaml.cs" />
+    <AvaloniaXaml Remove="AvaloniaApplicationSimpleTheme.axaml" />
+    <Compile Remove="AvaloniaApplicationSimpleTheme.axaml.cs" />
+    <AvaloniaXaml Remove="Cross\*.axaml" />
+    <Compile Remove="Cross\*.*" />
+    <AvaloniaXaml Remove="Eto\*.axaml" />
+    <Compile Remove="Eto\*.*" />
   </ItemGroup>
 
 </Project>

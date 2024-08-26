@@ -1,8 +1,8 @@
 ﻿/*! \mainpage
  * \~English This library contains the APIs for Avalonia. See ASEva.UIAvalonia for details. \n
  * \~Chinese 此类库为ASEva-API中基于Avalonia的部分。详见 ASEva.UIAvalonia \n
- * \~English This document corresponds to API version: 1.1.6 \n\n
- * \~Chinese 本文档对应API版本：1.1.6 \n\n
+ * \~English This document corresponds to API version: 1.2.0 \n\n
+ * \~Chinese 本文档对应API版本：1.2.0 \n\n
  * 
  * \~English Official documents: https://docs.avaloniaui.net \n
  * \~Chinese 官方文档: https://docs.avaloniaui.net
@@ -17,7 +17,7 @@ using ASEva.Utility;
 namespace ASEva.UIAvalonia
 {
     /// <summary>
-    /// version=1.1.6
+    /// version=1.2.0
     /// </summary>
     public class APIInfo
     {
@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 1, 6, 0); // Update log / 更新记录:新增WindowExtensions
+            return new Version(1, 2, 0, 0); // Update log / 更新记录: 支持编译Bundle模式dll。改良GetAvaloniaLibVersion
         }
 
         /// \~English
@@ -48,16 +48,21 @@ namespace ASEva.UIAvalonia
         /// <returns>Avalonia库版本</returns>
         public static Version GetAvaloniaLibVersion()
         {
-            var apiAvaloniaPath = Assembly.GetExecutingAssembly().Location;
-            var avaloniaLibPath = Path.GetDirectoryName(apiAvaloniaPath) + Path.DirectorySeparatorChar + "Avalonia.dll";
-
-            try
+            Version avaloniaLibVersion = null;
+            foreach (var name in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
             {
-                var avaloniaLib = Assembly.LoadFrom(avaloniaLibPath);
-                var avaloniaLibVersion = avaloniaLib.GetName().Version;
-                return avaloniaLibVersion == null ? null : new Version(avaloniaLibVersion.Major, avaloniaLibVersion.Minor);
+                if (name.Name == "Avalonia.Controls")
+                {
+                    avaloniaLibVersion = name.Version;
+                    break;
+                }
+                if (name.Name == "Avalonia.Base")
+                {
+                    avaloniaLibVersion = name.Version;
+                    break;
+                }
             }
-            catch (Exception) { return null;}
+            return avaloniaLibVersion == null ? null : new Version(avaloniaLibVersion.Major, avaloniaLibVersion.Minor);
         }
 
         /// \~English

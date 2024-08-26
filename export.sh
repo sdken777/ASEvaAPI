@@ -211,6 +211,22 @@ if [ "$EXPORT_DEVELOPER" = "y" ]; then
             cp -vf "$CUR_DIR"/3party/livecharts-doc/* $TARGET_DIR/binma/
         fi
     fi
+
+    mkdir -vp $TARGET_DIR/binb
+    cp -vf "$CUR_DIR"/binb/ASEvaAPI.dll $TARGET_DIR/binb/
+    cp -vf "$CUR_DIR"/binb/ASEvaAPI.xml $TARGET_DIR/binb/
+    if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/common/* $TARGET_DIR/binb/
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/binb/ASEvaAPIAvalonia.dll $TARGET_DIR/binb/
+            cp -vf "$CUR_DIR"/binb/ASEvaAPIAvalonia.xml $TARGET_DIR/binb/
+        fi
+        if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/livecharts-common/* $TARGET_DIR/binb/
+            cp -vf "$CUR_DIR"/3party/livecharts-avalonia/* $TARGET_DIR/binb/
+            cp -vf "$CUR_DIR"/3party/livecharts-doc/* $TARGET_DIR/binb/
+        fi
+    fi
 fi
 
 if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then

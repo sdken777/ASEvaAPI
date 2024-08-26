@@ -46,13 +46,16 @@
             "command": "rm",
             "args": [
                 "-rf",
-                "../${input:helper_platform_bin_name}/bin"
+                "../${input:helper_platform_bin_name}/bin",
+                "../binb/bin"
             ],
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Subtask: Build for host (Release)",
+                "Subtask: Build for bundle (Release)",
                 "Subtask: Copy built files (Release)",
                 "Subtask: Copy to other folders",
+                "Subtask: Copy built files for bundle (Release)",
             ],
         },
         {
@@ -106,6 +109,26 @@
         },
         {
             "type": "process",
+            "label": "Subtask: Build for bundle (Release)",
+            "hide": true,
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./ASEvaAPIAvalonia.csproj",
+                "-c",
+                "Release",
+                "-o",
+                "../binb/bin",
+                "/property:DocumentationFile=../binb/ASEvaAPIAvalonia.xml",
+                "/property:OutputType=Library",
+                "/property:GenerateFullPaths=true",
+                "/property:ASEvaAPIBundleMode=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+        },
+        {
+            "type": "process",
             "label": "Subtask: Copy built files (Debug)",
             "hide": true,
             "command": "cp",
@@ -124,6 +147,17 @@
                 "-vf",
                 "../${input:helper_platform_bin_name}/bin/ASEvaAPIAvalonia.dll",
                 "../${input:helper_platform_bin_name}/",
+            ],
+        },
+        {
+            "type": "process",
+            "label": "Subtask: Copy built files for bundle (Release)",
+            "hide": true,
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../binb/bin/ASEvaAPIAvalonia.dll",
+                "../binb/",
             ],
         },
         {
