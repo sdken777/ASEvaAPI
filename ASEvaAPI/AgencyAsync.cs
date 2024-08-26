@@ -11,7 +11,9 @@ namespace ASEva
     public interface AgencyAsyncHandler
     {
         bool SyncMode { get; }
+        Task AddBusMessageReference(int busChannel);
         Task AddDataLayer(String layer);
+        Task AddPointCloudReference(int channel);
         Task AddSignalReference(String signalID);
         Task<TimeWithSession> ConvertTimeIntoSession(double timeline);
         Task DeleteDataLayer(String layer);
@@ -40,14 +42,14 @@ namespace ASEva
         Task<String[]> GetAvailableSampleChannels();
         Task<int[]> GetAvailableVideoChannels();
         Task<BufferRange> GetBufferRange();
-        Task<double> GetBusChannelDelayConfig(int channel);
+        Task<double> GetBusChannelDelayConfig(int busChannel);
         Task<BusChannelInfo[]> GetBusChannelsInfo(SessionIdentifier session);
-        Task<bool> GetBusChannelStatus(int channel/* 1~16 */, uint? toleranceMillisecond);
+        Task<bool> GetBusChannelStatus(int busChannel, uint? toleranceMillisecond);
         Task<Dictionary<BusDeviceID, BusDeviceInfo>> GetBusDevices();
-        Task<float> GetBusMessageFPS(int channel, uint localID);
-        Task<BusMessageInfo> GetBusMessageInfoByLocalID(int channel, uint localID);
+        Task<float> GetBusMessageFPS(int busChannel, uint localID);
+        Task<BusMessageInfo> GetBusMessageInfoByLocalID(int busChannel, uint localID);
         Task<BusMessageInfo> GetBusMessageInfo(String busMessageID);
-        Task<double?> GetBusPayloadPercentage(int channel);
+        Task<double?> GetBusPayloadPercentage(int busChannel);
         Task<int?> GetBusProtocolFileChannel(String protocolName);
         Task<BusProtocolFileID[]> GetBusProtocolFileIDList();
         Task<BusProtocolFileState> GetBusProtocolFileState(BusProtocolFileID fileID);
@@ -167,8 +169,10 @@ namespace ASEva
         Task PublishData(String dataID, byte[] data);
         Task RefreshGenerations();
         Task RefreshSessions();
+        Task RemoveBusMessageReference(int busChannel);
         Task RemoveEvent(object eventHandle);
         Task RemoveGeneration(SessionIdentifier session, String genID);
+        Task RemovePointCloudReference(int channel);
         Task<bool> RemoveSession(SessionIdentifier session, bool force);
         Task RemoveSignalReference(String signalID);
         Task ResetGPUDecoderTestResults();
@@ -179,7 +183,7 @@ namespace ASEva
         Task SendManualTrigger(int channel);
         Task SendRawData(String channelID, double[] values, byte[] binary);
         Task SetAudioChannelDelayConfig(double delay);
-        Task SetBusChannelDelayConfig(int channel, double delay);
+        Task SetBusChannelDelayConfig(int busChannel, double delay);
         Task SetChannelGuestSyncFlag(String id, bool guestSync);
         Task<bool> SetControlFlag(String controllerName, bool enabled);
         Task SetCurrentDataLayer(String layer);
@@ -249,6 +253,21 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.4.5) Add bus channel reference (only data with references will be sent to client side)
+        /// </summary>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.5) 添加总线通道引用，在客户端才可获得该总线通道的数据
+        /// </summary>
+        /// <param name="busChannel">总线通道，1~16</param>
+        public static Task AddBusMessageReference(int busChannel)
+        {
+            return Handler.AddBusMessageReference(busChannel);
+        }
+
+        /// \~English
+        /// <summary>
         /// Add a new data layer
         /// </summary>
         /// <param name="layer">Data layer</param>
@@ -260,6 +279,21 @@ namespace ASEva
         public static Task AddDataLayer(String layer)
         {
             return Handler.AddDataLayer(layer);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.4.5) Add point cloud channel reference (only data with references will be sent to client side)
+        /// </summary>
+        /// <param name="channel">Point cloud data channel. Channel is starting from 0</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.5) 添加点云通道引用，在客户端才可获得该通道的点云数据
+        /// </summary>
+        /// <param name="channel">点云数据通道。通道序号从0开始</param>
+        public static Task AddPointCloudReference(int channel)
+        {
+            return Handler.AddPointCloudReference(channel);
         }
 
         /// \~English
@@ -704,17 +738,17 @@ namespace ASEva
         /// <summary>
         /// Get time shift configuration for bus raw data channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <returns>Time shift, in milliseconds</returns>
         /// \~Chinese
         /// <summary>
         /// 获取总线数据通道延迟配置
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <returns>延迟配置，单位毫秒</returns>
-        public static Task<double> GetBusChannelDelayConfig(int channel)
+        public static Task<double> GetBusChannelDelayConfig(int busChannel)
         {
-            return Handler.GetBusChannelDelayConfig(channel);
+            return Handler.GetBusChannelDelayConfig(busChannel);
         }
 
         /// \~English
@@ -738,19 +772,19 @@ namespace ASEva
         /// <summary>
         /// Get whether there's data in a bus channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <param name="toleranceMillisecond">How many milliseconds (realistic time) can be tolerated without data</param>
         /// <returns>Whether there's data</returns>
         /// \~Chinese
         /// <summary>
         /// 获取总线数据通道状态
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <param name="toleranceMillisecond">无数据的容忍时长</param>
         /// <returns>是否有数据</returns>
-        public static Task<bool> GetBusChannelStatus(int channel/* 1~16 */, uint? toleranceMillisecond)
+        public static Task<bool> GetBusChannelStatus(int busChannel, uint? toleranceMillisecond)
         {
-            return Handler.GetBusChannelStatus(channel, toleranceMillisecond);
+            return Handler.GetBusChannelStatus(busChannel, toleranceMillisecond);
         }
 
         /// \~English
@@ -772,38 +806,38 @@ namespace ASEva
         /// <summary>
         /// Get frame rate of messages with the same local ID at the same channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <param name="localID">Local ID of bus message</param>
         /// <returns>Frame rate, 0 means invalid</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定通道收到的指定ID报文的帧率
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <param name="localID">通道内的报文ID</param>
         /// <returns>每秒帧率，0表示无效</returns>
-        public static Task<float> GetBusMessageFPS(int channel, uint localID)
+        public static Task<float> GetBusMessageFPS(int busChannel, uint localID)
         {
-            return Handler.GetBusMessageFPS(channel, localID);
+            return Handler.GetBusMessageFPS(busChannel, localID);
         }
 
         /// \~English
         /// <summary>
         /// Get information of message with the specified local ID at the specified channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <param name="localID">Local ID of bus message</param>
         /// <returns>Message information, null if not found</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定通道上指定ID报文信息
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <param name="localID">通道内的报文ID</param>
         /// <returns>总线报文信息，无信息则返回null</returns>
-        public static Task<BusMessageInfo> GetBusMessageInfoByLocalID(int channel, uint localID)
+        public static Task<BusMessageInfo> GetBusMessageInfoByLocalID(int busChannel, uint localID)
         {
-            return Handler.GetBusMessageInfoByLocalID(channel, localID);
+            return Handler.GetBusMessageInfoByLocalID(busChannel, localID);
         }
 
         /// \~English
@@ -827,17 +861,17 @@ namespace ASEva
         /// <summary>
         /// Get payload of bus channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <returns>Payload in percentages, null if unavailable</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定总线通道的负载百分比
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <returns>总线通道的负载百分比，若无效则返回null</returns>
-        public static Task<double?> GetBusPayloadPercentage(int channel)
+        public static Task<double?> GetBusPayloadPercentage(int busChannel)
         {
-            return Handler.GetBusPayloadPercentage(channel);
+            return Handler.GetBusPayloadPercentage(busChannel);
         }
 
         /// \~English
@@ -2810,6 +2844,21 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.4.5) Remove bus channel reference
+        /// </summary>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.5) 移除总线通道引用
+        /// </summary>
+        /// <param name="busChannel">总线通道，1~16</param>
+        public static Task RemoveBusMessageReference(int busChannel)
+        {
+            return Handler.RemoveBusMessageReference(busChannel);
+        }
+
+        /// \~English
+        /// <summary>
         /// Remove event
         /// </summary>
         /// <param name="eventHandle">Event handle</param>
@@ -2838,6 +2887,21 @@ namespace ASEva
         public static Task RemoveGeneration(SessionIdentifier session, String genID)
         {
             return Handler.RemoveGeneration(session, genID);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.4.5) Remove point cloud channel reference
+        /// </summary>
+        /// <param name="channel">Point cloud data channel. Channel is starting from 0</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.5) 移除点云通道引用
+        /// </summary>
+        /// <param name="channel">点云数据通道。通道序号从0开始</param>
+        public static Task RemovePointCloudReference(int channel)
+        {
+            return Handler.RemovePointCloudReference(channel);
         }
 
         /// \~English
@@ -3012,17 +3076,17 @@ namespace ASEva
         /// <summary>
         /// Set time shift for bus raw data channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <param name="delay">Time shift, in milliseconds</param>
         /// \~Chinese
         /// <summary>
         /// 设置总线数据通道延迟配置
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <param name="delay">延迟配置，单位毫秒</param>
-        public static Task SetBusChannelDelayConfig(int channel, double delay)
+        public static Task SetBusChannelDelayConfig(int busChannel, double delay)
         {
-            return Handler.SetBusChannelDelayConfig(channel, delay);
+            return Handler.SetBusChannelDelayConfig(busChannel, delay);
         }
 
         /// \~English

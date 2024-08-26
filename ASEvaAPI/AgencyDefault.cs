@@ -539,7 +539,17 @@ namespace ASEva
     {
         public bool SyncMode => false;
 
+        public Task AddBusMessageReference(int busChannel)
+        {
+            return Task.CompletedTask;
+        }
+
         public Task AddDataLayer(string layer)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task AddPointCloudReference(int channel)
         {
             return Task.CompletedTask;
         }
@@ -1319,12 +1329,22 @@ namespace ASEva
             return Task.CompletedTask;
         }
 
+        public Task RemoveBusMessageReference(int busChannel)
+        {
+            return Task.CompletedTask;
+        }
+
         public Task RemoveEvent(object eventHandle)
         {
             return Task.CompletedTask;
         }
 
         public Task RemoveGeneration(SessionIdentifier session, string genID)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task RemovePointCloudReference(int channel)
         {
             return Task.CompletedTask;
         }

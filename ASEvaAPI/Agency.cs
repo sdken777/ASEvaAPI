@@ -912,18 +912,18 @@ namespace ASEva
         /// <summary>
         /// Get time shift configuration for bus raw data channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <returns>Time shift, in milliseconds</returns>
         /// \~Chinese
         /// <summary>
         /// 获取总线数据通道延迟配置
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <returns>延迟配置，单位毫秒</returns>
-        public static double GetBusChannelDelayConfig(int channel)
+        public static double GetBusChannelDelayConfig(int busChannel)
         {
             if (!AgencyAsync.SyncMode) return 0;
-            return AgencyAsync.GetBusChannelDelayConfig(channel).Result;
+            return AgencyAsync.GetBusChannelDelayConfig(busChannel).Result;
         }
 
         /// \~English
@@ -948,20 +948,20 @@ namespace ASEva
         /// <summary>
         /// Get whether there's data in a bus channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <param name="toleranceMillisecond">How many milliseconds (realistic time) can be tolerated without data</param>
         /// <returns>Whether there's data</returns>
         /// \~Chinese
         /// <summary>
         /// 获取总线数据通道状态
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <param name="toleranceMillisecond">无数据的容忍时长</param>
         /// <returns>是否有数据</returns>
-        public static bool GetBusChannelStatus(int channel/* 1~16 */, uint? toleranceMillisecond)
+        public static bool GetBusChannelStatus(int busChannel, uint? toleranceMillisecond)
         {
             if (!AgencyAsync.SyncMode) return false;
-            return AgencyAsync.GetBusChannelStatus(channel, toleranceMillisecond).Result;
+            return AgencyAsync.GetBusChannelStatus(busChannel, toleranceMillisecond).Result;
         }
 
         /// \~English
@@ -984,40 +984,40 @@ namespace ASEva
         /// <summary>
         /// Get frame rate of messages with the same local ID at the same channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <param name="localID">Local ID of bus message</param>
         /// <returns>Frame rate, 0 means invalid</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定通道收到的指定ID报文的帧率
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <param name="localID">通道内的报文ID</param>
         /// <returns>每秒帧率，0表示无效</returns>
-        public static float GetBusMessageFPS(int channel, uint localID)
+        public static float GetBusMessageFPS(int busChannel, uint localID)
         {
             if (!AgencyAsync.SyncMode) return 0;
-            return AgencyAsync.GetBusMessageFPS(channel, localID).Result;
+            return AgencyAsync.GetBusMessageFPS(busChannel, localID).Result;
         }
 
         /// \~English
         /// <summary>
         /// Get information of message with the specified local ID at the specified channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <param name="localID">Local ID of bus message</param>
         /// <returns>Message information, null if not found</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定通道上指定ID报文信息
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <param name="localID">通道内的报文ID</param>
         /// <returns>总线报文信息，无信息则返回null</returns>
-        public static BusMessageInfo GetBusMessageInfoByLocalID(int channel, uint localID)
+        public static BusMessageInfo GetBusMessageInfoByLocalID(int busChannel, uint localID)
         {
             if (!AgencyAsync.SyncMode) return null;
-            return AgencyAsync.GetBusMessageInfoByLocalID(channel, localID).Result;
+            return AgencyAsync.GetBusMessageInfoByLocalID(busChannel, localID).Result;
         }
 
         /// \~English
@@ -1042,18 +1042,18 @@ namespace ASEva
         /// <summary>
         /// Get payload of bus channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <returns>Payload in percentages, null if unavailable</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定总线通道的负载百分比
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <returns>总线通道的负载百分比，若无效则返回null</returns>
-        public static double? GetBusPayloadPercentage(int channel)
+        public static double? GetBusPayloadPercentage(int busChannel)
         {
             if (!AgencyAsync.SyncMode) return null;
-            return AgencyAsync.GetBusPayloadPercentage(channel).Result;
+            return AgencyAsync.GetBusPayloadPercentage(busChannel).Result;
         }
 
         /// \~English
@@ -4398,18 +4398,18 @@ namespace ASEva
         /// <summary>
         /// Set time shift for bus raw data channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <param name="delay">Time shift, in milliseconds</param>
         /// \~Chinese
         /// <summary>
         /// 设置总线数据通道延迟配置
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <param name="delay">延迟配置，单位毫秒</param>
-        public static void SetBusChannelDelayConfig(int channel, double delay)
+        public static void SetBusChannelDelayConfig(int busChannel, double delay)
         {
             if (!AgencyAsync.SyncMode) return;
-            AgencyAsync.SetBusChannelDelayConfig(channel, delay).Wait();
+            AgencyAsync.SetBusChannelDelayConfig(busChannel, delay).Wait();
         }
 
         /// \~English
