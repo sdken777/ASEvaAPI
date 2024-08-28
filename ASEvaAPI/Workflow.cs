@@ -156,6 +156,18 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.4.6) [Optional] Called while getting the list of preference variable ID
+        /// </summary>
+        /// <returns>The list of preference variable ID</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.6) [可选实现] 获取用户偏好变量ID列表时被调用
+        /// </summary>
+        /// <returns>用户偏好变量ID列表</returns>
+        public virtual String[] OnGetPreferenceVariables() { return null; }
+
+        /// \~English
+        /// <summary>
         /// [Required][OK for modal] Select (multiple) bus protocols
         /// </summary>
         /// <param name="selected">Bus protocols already selected</param>

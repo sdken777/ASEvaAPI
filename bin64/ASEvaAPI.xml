@@ -8362,7 +8362,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.4.5
+            version=3.4.6
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -21768,6 +21768,18 @@
             <summary>
             [可选实现] 获取是否需要支持Web API调用，不影响在插件内部直接使用Web API（默认true）
             </summary>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnGetPreferenceVariables">
+            \~English
+            <summary>
+            (api:app=3.4.6) [Optional] Called while getting the list of preference variable ID
+            </summary>
+            <returns>The list of preference variable ID</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.4.6) [可选实现] 获取用户偏好变量ID列表时被调用
+            </summary>
+            <returns>用户偏好变量ID列表</returns>
         </member>
         <member name="M:ASEva.CommonWorkflow.OnSelectBusProtocolFiles(ASEva.BusProtocolFileID[])">
             \~English
