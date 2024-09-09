@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 11, 2, 4); // Update log / 更新记录: 修正EtoConfigPanel
+            return new Version(2, 11, 2, 5); // Update log / 更新记录: 修正柱状折线图崩溃问题
         }
     }
 }
