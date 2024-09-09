@@ -28,7 +28,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 2, 6, 0); // Update log / 更新记录: 合并2.9.4.2
+            return new Version(3, 2, 6, 1); // Update log / 更新记录: 修正柱状折线图崩溃问题
         }
 
         /// \~English

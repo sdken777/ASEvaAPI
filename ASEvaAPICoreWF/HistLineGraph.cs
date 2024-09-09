@@ -198,7 +198,7 @@ namespace ASEva.UICoreWF
 					xGridTextsMaxWidth = Math.Max(xGridTextsMaxWidth, g.MeasureString(text, smallFont).Width);
 				}
 				xGridTextsMaxWidth = Math.Min(100, xGridTextsMaxWidth + 1);
-				var smallFontHeight = g.MeasureString(samples[0].Name, smallFont).Height;
+				var smallFontHeight = g.MeasureString("A", smallFont).Height;
 
 				// 计算坐标转换参数
 				float left = (float)15 * DeviceDpi / 96 + yGridTextsMaxWidth;

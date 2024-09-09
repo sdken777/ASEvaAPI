@@ -223,7 +223,7 @@ namespace ASEva.UIGtk
 					xGridTextsMaxWidth = Math.Max(xGridTextsMaxWidth, (float)cc.TextExtents(text).Width);
 				}
 				xGridTextsMaxWidth = Math.Min(100, xGridTextsMaxWidth + 1);
-				var smallFontHeight = (float)cc.TextExtents(samples[0].Name).Height;
+				var smallFontHeight = (float)cc.TextExtents("A").Height;
 
 				// 计算坐标转换参数
 				float left = (float)15 + yGridTextsMaxWidth;
