@@ -52,11 +52,14 @@ namespace ASEva.UIMonoMac
                 var nsApp = app.ControlObject as NSApplication;
                 nsApp.ActivationPolicy = NSApplicationActivationPolicy.Regular;
 
-                var targetLib = Assembly.GetEntryAssembly();
-                var names = targetLib.GetManifestResourceNames().ToList();
                 String icnsName = null;
-                if (names.Contains("icon.icns")) icnsName = "icon.icns";
-                else icnsName = names.Find(s => s.EndsWith(".icns"));
+                var targetLib = Assembly.GetEntryAssembly();
+                if (targetLib != null)
+                {
+                    var names = targetLib.GetManifestResourceNames().ToList();
+                    if (names.Contains("icon.icns")) icnsName = "icon.icns";
+                    else icnsName = names.Find(s => s.EndsWith(".icns"));
+                }
                 if (icnsName != null)
                 {
                     var instream = targetLib.GetManifestResourceStream(icnsName);

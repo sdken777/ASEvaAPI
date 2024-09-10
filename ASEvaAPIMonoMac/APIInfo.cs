@@ -31,7 +31,7 @@ namespace ASEva.UIMonoMac
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 1, 2, 0); // Update log / 更新记录: 支持AvaloniaAdaptor新接口
+            return new Version(2, 1, 2, 1); // Update log / 更新记录: 针对GetEntryAssembly可能为空的情况
         }
     }
 }

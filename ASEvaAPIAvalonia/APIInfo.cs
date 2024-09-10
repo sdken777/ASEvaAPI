@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 2, 0, 0); // Update log / 更新记录: 支持编译Bundle模式dll。改良GetAvaloniaLibVersion
+            return new Version(1, 2, 0, 1); // Update log / 更新记录: 针对GetEntryAssembly可能为空的情况
         }
 
         /// \~English

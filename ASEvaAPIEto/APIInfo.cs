@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 2, 2, 1); // Update log / 更新记录: 合并2.16.2.1
+            return new Version(3, 2, 2, 2); // Update log / 更新记录: 针对GetEntryAssembly可能为空的情况
         }
 
         /// \~English
