@@ -116,16 +116,6 @@ namespace ASEva
             return null;
         }
 
-        public string[] GetAllChannelMonitoringKeys()
-        {
-            return null;
-        }
-
-        public string[] GetAllChannelServerSyncMonitoringKeys()
-        {
-            return null;
-        }
-
         public string GetAppFilesRoot()
         {
             return null;
@@ -154,16 +144,6 @@ namespace ASEva
         public BusFileInfo[] GetBusProtocolFilesInfo()
         {
             return null;
-        }
-
-        public bool GetChannelMonitoringFlag(string id)
-        {
-            return false;
-        }
-
-        public bool GetChannelServerSyncMonitoringFlag(string id)
-        {
-            return false;
         }
 
         public string GetConfigFilesRoot()
@@ -463,14 +443,6 @@ namespace ASEva
         {
         }
 
-        public void SetChannelMonitoringFlag(string id, bool monitoring)
-        {
-        }
-
-        public void SetChannelServerSyncMonitoringFlag(string id, bool monitoring)
-        {
-        }
-
         public void SetCurrentDialogTitle(string title, object icon)
         {
         }
@@ -585,6 +557,16 @@ namespace ASEva
         }
 
         public Task<string[]> GetAllChannelGuestSyncKeys()
+        {
+            return Task.FromResult<string[]>(null);
+        }
+
+        public Task<string[]> GetAllChannelMonitoringKeys()
+        {
+            return Task.FromResult<string[]>(null);
+        }
+
+        public Task<string[]> GetAllChannelServerSyncMonitoringKeys()
         {
             return Task.FromResult<string[]>(null);
         }
@@ -752,6 +734,16 @@ namespace ASEva
         public Task<Timestamp[]> GetChannelLatestTimestamps(string channelID)
         {
             return Task.FromResult<Timestamp[]>(null);
+        }
+
+        public Task<bool> GetChannelMonitoringFlag(string id)
+        {
+            return Task.FromResult(false);
+        }
+
+        public Task<bool> GetChannelServerSyncMonitoringFlag(string id)
+        {
+            return Task.FromResult(false);
         }
 
         public Task<Dictionary<string, bool>> GetChannelStatusTable(uint? tolerance)
@@ -1375,6 +1367,16 @@ namespace ASEva
         }
 
         public Task SetChannelGuestSyncFlag(string id, bool guestSync)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetChannelMonitoringFlag(string id, bool monitoring)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetChannelServerSyncMonitoringFlag(string id, bool monitoring)
         {
             return Task.CompletedTask;
         }

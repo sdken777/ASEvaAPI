@@ -33,16 +33,12 @@ namespace ASEva
         void DisablePlugin(String packID);
         void EnablePlugin(String packID);
         byte[] EncodeImage(CommonImage image, String format);
-        string[] GetAllChannelMonitoringKeys();
-        String[] GetAllChannelServerSyncMonitoringKeys();
         String GetAppFilesRoot();
         ApplicationGUI GetAppGUI();
         String GetAppID();
         Language GetAppLanguage();
         String GetBusProtocolFilePath(BusProtocolFileID fileID);
         BusFileInfo[] GetBusProtocolFilesInfo();
-        bool GetChannelMonitoringFlag(String id);
-        bool GetChannelServerSyncMonitoringFlag(String id);
         String GetConfigFilesRoot();
         String GetCurrentDataLayerPath();
         String GetCurrentProject();
@@ -105,8 +101,6 @@ namespace ASEva
         void SendRawDataWithCPUTick(ulong cpuTick, String channelID, double[] values, byte[] binary);
         void SetAppFunctionHandler(object caller, String nativeClassID, String funcID, AppFunctionHandler handler);
         void SetAudioVolume(double volume);
-        void SetChannelMonitoringFlag(String id, bool monitoring);
-        void SetChannelServerSyncMonitoringFlag(String id, bool monitoring);
         void SetCurrentDialogTitle(String title, object icon);
         void SetDataPath(String path);
         void SetGlobalPath(String key, String path);
@@ -558,36 +552,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get monitor IDs of all the channels being monitored that there's data in the channel
-        /// </summary>
-        /// <returns>Monitor IDs of all the channels being monitored</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取所有正在监控有无数据的通道ID
-        /// </summary>
-        /// <returns>正在监控有无数据的通道ID列表</returns>
-        public static string[] GetAllChannelMonitoringKeys()
-        {
-            return Handler.GetAllChannelMonitoringKeys();
-        }
-
-        /// \~English
-        /// <summary>
-        /// Get monitor IDs of all the channels being monitored that the channel's data is synchronized with time server
-        /// </summary>
-        /// <returns>Monitor IDs of all the channels being monitored</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取所有正在监控数据与授时服务器同步的监控ID
-        /// </summary>
-        /// <returns>正在监控数据与授时服务器同步的通道ID列表</returns>
-        public static String[] GetAllChannelServerSyncMonitoringKeys()
-        {
-            return Handler.GetAllChannelServerSyncMonitoringKeys();
-        }
-
-        /// \~English
-        /// <summary>
         /// Get the path of current application's data and document files
         /// </summary>
         /// <returns>The path of current application's data and document files</returns>
@@ -676,40 +640,6 @@ namespace ASEva
         public static BusFileInfo[] GetBusProtocolFilesInfo()
         {
             return Handler.GetBusProtocolFilesInfo();
-        }
-
-        /// \~English
-        /// <summary>
-        /// Get whether to monitor that there's data in the specified channel
-        /// </summary>
-        /// <param name="id">Monitor ID, like bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0, etc.</param>
-        /// <returns>Whether to monitor</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取是否监控指定通道有无数据
-        /// </summary>
-        /// <param name="id">监控ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
-        /// <returns>是否监控有无数据</returns>
-        public static bool GetChannelMonitoringFlag(String id)
-        {
-            return Handler.GetChannelMonitoringFlag(id);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Get whether to monitor that the specified channel's data is synchronized with time server
-        /// </summary>
-        /// <param name="id">Monitor ID, like bus@1, video@0, sample@xxx-v2@0, etc.</param>
-        /// <returns>Whether to monitor</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取是否监控指定通道数据与授时服务器同步
-        /// </summary>
-        /// <param name="id">监控ID，如bus@1, video@0, sample@xxx-v2@0等</param>
-        /// <returns>是否监控指定通道数据与授时服务器同步</returns>
-        public static bool GetChannelServerSyncMonitoringFlag(String id)
-        {
-            return Handler.GetChannelServerSyncMonitoringFlag(id);
         }
 
         /// \~English
@@ -1758,40 +1688,6 @@ namespace ASEva
         public static void SetAudioVolume(double volume)
         {
             Handler.SetAudioVolume(volume);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Set whether to monitor that there's data in the specified channel
-        /// </summary>
-        /// <param name="id">Monitor ID, like bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0, etc.</param>
-        /// <param name="monitoring">Whether to monitor (The function should be implemented by plugins, like audio alarm, UI flashing, etc.)</param>
-        /// \~Chinese
-        /// <summary>
-        /// 设置是否监控指定通道有无数据
-        /// </summary>
-        /// <param name="id">监控ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
-        /// <param name="monitoring">是否监控有无数据，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
-        public static void SetChannelMonitoringFlag(String id, bool monitoring)
-        {
-            Handler.SetChannelMonitoringFlag(id, monitoring);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Set whether to monitor that the specified channel's data is synchronized with time server
-        /// </summary>
-        /// <param name="id">Monitor ID, like bus@1, video@0, sample@xxx-v2@0, etc.</param>
-        /// <param name="monitoring">Whether to monitor (The function should be implemented by plugins, like audio alarm, UI flashing, etc.)</param>
-        /// \~Chinese
-        /// <summary>
-        /// 设置是否监控指定通道数据与授时服务器同步
-        /// </summary>
-        /// <param name="id">监控ID，如bus@1, video@0, sample@xxx-v2@0等</param>
-        /// <param name="monitoring">是否监控数据与授时服务器同步，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
-        public static void SetChannelServerSyncMonitoringFlag(String id, bool monitoring)
-        {
-            Handler.SetChannelServerSyncMonitoringFlag(id, monitoring);
         }
 
         /// \~English

@@ -582,7 +582,8 @@ namespace ASEva
         /// <returns>正在监控有无数据的通道ID列表</returns>
         public static string[] GetAllChannelMonitoringKeys()
         {
-            return AgencyLocal.GetAllChannelMonitoringKeys();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetAllChannelMonitoringKeys().Result;
         }
 
         /// \~English
@@ -597,7 +598,8 @@ namespace ASEva
         /// <returns>正在监控数据与授时服务器同步的通道ID列表</returns>
         public static String[] GetAllChannelServerSyncMonitoringKeys()
         {
-            return AgencyLocal.GetAllChannelServerSyncMonitoringKeys();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetAllChannelServerSyncMonitoringKeys().Result;
         }
 
         /// \~English
@@ -1237,7 +1239,8 @@ namespace ASEva
         /// <returns>是否监控有无数据</returns>
         public static bool GetChannelMonitoringFlag(String id)
         {
-            return AgencyLocal.GetChannelMonitoringFlag(id);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.GetChannelMonitoringFlag(id).Result;
         }
 
         /// \~English
@@ -1254,7 +1257,8 @@ namespace ASEva
         /// <returns>是否监控指定通道数据与授时服务器同步</returns>
         public static bool GetChannelServerSyncMonitoringFlag(String id)
         {
-            return AgencyLocal.GetChannelServerSyncMonitoringFlag(id);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.GetChannelServerSyncMonitoringFlag(id).Result;
         }
 
         /// \~English
@@ -4396,7 +4400,7 @@ namespace ASEva
         /// <param name="monitoring">是否监控有无数据，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
         public static void SetChannelMonitoringFlag(String id, bool monitoring)
         {
-            AgencyLocal.SetChannelMonitoringFlag(id, monitoring);
+            AgencyAsync.SetChannelMonitoringFlag(id, monitoring);
         }
 
         /// \~English
@@ -4413,7 +4417,7 @@ namespace ASEva
         /// <param name="monitoring">是否监控数据与授时服务器同步，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
         public static void SetChannelServerSyncMonitoringFlag(String id, bool monitoring)
         {
-            AgencyLocal.SetChannelServerSyncMonitoringFlag(id, monitoring);
+            AgencyAsync.SetChannelServerSyncMonitoringFlag(id, monitoring);
         }
 
         /// \~English
