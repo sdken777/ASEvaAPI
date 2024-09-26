@@ -4094,6 +4094,26 @@
             </summary>
             <param name="signalID">信号ID</param>
         </member>
+        <member name="M:ASEva.AgencyAsync.CallNativeFunction(System.Object,System.String,System.String,System.Byte[])">
+            \~English
+            <summary>
+            (api:app=3.5.0) Call native plugin's function
+            </summary>
+            <param name="caller">The caller who calls this API, can be object of ASEva.CommonWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , etc.</param>
+            <param name="nativeClassID">Native class ID</param>
+            <param name="funcID">Function ID</param>
+            <param name="input">Input data for the function</param>
+            <returns>Output data from the function, null if the function is not found</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.5.0) 调用原生插件中的函数
+            </summary>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.CommonWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel等</param>
+            <param name="nativeClassID">原生组件ID</param>
+            <param name="funcID">函数ID</param>
+            <param name="input">函数输入数据</param>
+            <returns>函数输出数据，若未找到相应插件或函数ID无响应则返回null</returns>
+        </member>
         <member name="M:ASEva.AgencyAsync.ConvertTimeIntoSession(System.Double)">
             \~English
             <summary>
@@ -4225,6 +4245,30 @@
             获取已配置为客机同步的所有ID
             </summary>
             <returns>已配置为客机同步的所有ID列表</returns>
+        </member>
+        <member name="M:ASEva.AgencyAsync.GetAllChannelMonitoringKeys">
+            \~English
+            <summary>
+            (api:app=3.2.14) Get monitor IDs of all the channels being monitored that there's data in the channel
+            </summary>
+            <returns>Monitor IDs of all the channels being monitored</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.2.14) 获取所有正在监控有无数据的通道ID
+            </summary>
+            <returns>正在监控有无数据的通道ID列表</returns>
+        </member>
+        <member name="M:ASEva.AgencyAsync.GetAllChannelServerSyncMonitoringKeys">
+            \~English
+            <summary>
+            (api:app=3.2.14) Get monitor IDs of all the channels being monitored that the channel's data is synchronized with time server
+            </summary>
+            <returns>Monitor IDs of all the channels being monitored</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.2.14) 获取所有正在监控数据与授时服务器同步的监控ID
+            </summary>
+            <returns>正在监控数据与授时服务器同步的通道ID列表</returns>
         </member>
         <member name="M:ASEva.AgencyAsync.GetAllDeviceStatus">
             \~English
@@ -4659,6 +4703,34 @@
             </summary>
             <param name="channelID">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始。视频协议名为video，音频协议名为audio</param>
             <returns>指定数据通道上最近的若干帧时间戳，若该通道未找到或最近无数据则返回null</returns>
+        </member>
+        <member name="M:ASEva.AgencyAsync.GetChannelMonitoringFlag(System.String)">
+            \~English
+            <summary>
+            (api:app=3.2.14) Get whether to monitor that there's data in the specified channel
+            </summary>
+            <param name="id">Monitor ID, like bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0, etc.</param>
+            <returns>Whether to monitor</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.2.14) 获取是否监控指定通道有无数据
+            </summary>
+            <param name="id">监控ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
+            <returns>是否监控有无数据</returns>
+        </member>
+        <member name="M:ASEva.AgencyAsync.GetChannelServerSyncMonitoringFlag(System.String)">
+            \~English
+            <summary>
+            (api:app=3.2.14) Get whether to monitor that the specified channel's data is synchronized with time server
+            </summary>
+            <param name="id">Monitor ID, like bus@1, video@0, sample@xxx-v2@0, etc.</param>
+            <returns>Whether to monitor</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.2.14) 获取是否监控指定通道数据与授时服务器同步
+            </summary>
+            <param name="id">监控ID，如bus@1, video@0, sample@xxx-v2@0等</param>
+            <returns>是否监控指定通道数据与授时服务器同步</returns>
         </member>
         <member name="M:ASEva.AgencyAsync.GetChannelStatusTable(System.Nullable{System.UInt32})">
             \~English
@@ -6378,6 +6450,34 @@
             <param name="id">客机同步ID，如bus.1, video.0, xxx.yyy(xxx为原生插件类型ID，yyy为通道名称)等</param>
             <param name="guestSync">是否配置为客机同步</param>
         </member>
+        <member name="M:ASEva.AgencyAsync.SetChannelMonitoringFlag(System.String,System.Boolean)">
+            \~English
+            <summary>
+            (api:app=3.2.14) Set whether to monitor that there's data in the specified channel
+            </summary>
+            <param name="id">Monitor ID, like bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0, etc.</param>
+            <param name="monitoring">Whether to monitor (The function should be implemented by plugins, like audio alarm, UI flashing, etc.)</param>
+            \~Chinese
+            <summary>
+            (api:app=3.2.14) 设置是否监控指定通道有无数据
+            </summary>
+            <param name="id">监控ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
+            <param name="monitoring">是否监控有无数据，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
+        </member>
+        <member name="M:ASEva.AgencyAsync.SetChannelServerSyncMonitoringFlag(System.String,System.Boolean)">
+            \~English
+            <summary>
+            (api:app=3.2.14) Set whether to monitor that the specified channel's data is synchronized with time server
+            </summary>
+            <param name="id">Monitor ID, like bus@1, video@0, sample@xxx-v2@0, etc.</param>
+            <param name="monitoring">Whether to monitor (The function should be implemented by plugins, like audio alarm, UI flashing, etc.)</param>
+            \~Chinese
+            <summary>
+            (api:app=3.2.14) 设置是否监控指定通道数据与授时服务器同步
+            </summary>
+            <param name="id">监控ID，如bus@1, video@0, sample@xxx-v2@0等</param>
+            <param name="monitoring">是否监控数据与授时服务器同步，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
+        </member>
         <member name="M:ASEva.AgencyAsync.SetControlFlag(System.String,System.Boolean)">
             \~English
             <summary>
@@ -7146,30 +7246,6 @@
             <param name="format">编码格式，目前支持"jpg", "png"</param>
             <returns>编码后的二进制数据，若失败则返回null</returns>
         </member>
-        <member name="M:ASEva.AgencyLocal.GetAllChannelMonitoringKeys">
-            \~English
-            <summary>
-            Get monitor IDs of all the channels being monitored that there's data in the channel
-            </summary>
-            <returns>Monitor IDs of all the channels being monitored</returns>
-            \~Chinese
-            <summary>
-            获取所有正在监控有无数据的通道ID
-            </summary>
-            <returns>正在监控有无数据的通道ID列表</returns>
-        </member>
-        <member name="M:ASEva.AgencyLocal.GetAllChannelServerSyncMonitoringKeys">
-            \~English
-            <summary>
-            Get monitor IDs of all the channels being monitored that the channel's data is synchronized with time server
-            </summary>
-            <returns>Monitor IDs of all the channels being monitored</returns>
-            \~Chinese
-            <summary>
-            获取所有正在监控数据与授时服务器同步的监控ID
-            </summary>
-            <returns>正在监控数据与授时服务器同步的通道ID列表</returns>
-        </member>
         <member name="M:ASEva.AgencyLocal.GetAppFilesRoot">
             \~English
             <summary>
@@ -7218,6 +7294,18 @@
             </summary>
             <returns>应用程序的显示语言</returns>
         </member>
+        <member name="M:ASEva.AgencyLocal.GetBufferRange">
+            \~English
+            <summary>
+            (api:app=3.5.0) Get the buffer range
+            </summary>
+            <returns>The buffer range</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.5.0) 获取应用程序当前的数据缓存范围
+            </summary>
+            <returns>数据缓存范围</returns>
+        </member>
         <member name="M:ASEva.AgencyLocal.GetBusProtocolFilePath(ASEva.BusProtocolFileID)">
             \~English
             <summary>
@@ -7243,34 +7331,6 @@
             获取所有总线通道上的协议信息
             </summary>
             <returns>总线协议信息列表</returns>
-        </member>
-        <member name="M:ASEva.AgencyLocal.GetChannelMonitoringFlag(System.String)">
-            \~English
-            <summary>
-            Get whether to monitor that there's data in the specified channel
-            </summary>
-            <param name="id">Monitor ID, like bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0, etc.</param>
-            <returns>Whether to monitor</returns>
-            \~Chinese
-            <summary>
-            获取是否监控指定通道有无数据
-            </summary>
-            <param name="id">监控ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
-            <returns>是否监控有无数据</returns>
-        </member>
-        <member name="M:ASEva.AgencyLocal.GetChannelServerSyncMonitoringFlag(System.String)">
-            \~English
-            <summary>
-            Get whether to monitor that the specified channel's data is synchronized with time server
-            </summary>
-            <param name="id">Monitor ID, like bus@1, video@0, sample@xxx-v2@0, etc.</param>
-            <returns>Whether to monitor</returns>
-            \~Chinese
-            <summary>
-            获取是否监控指定通道数据与授时服务器同步
-            </summary>
-            <param name="id">监控ID，如bus@1, video@0, sample@xxx-v2@0等</param>
-            <returns>是否监控指定通道数据与授时服务器同步</returns>
         </member>
         <member name="M:ASEva.AgencyLocal.GetConfigFilesRoot">
             \~English
@@ -7470,6 +7530,18 @@
             <param name="graphType">图表类型</param>
             <returns>可视化面板样式名列表</returns>
         </member>
+        <member name="M:ASEva.AgencyLocal.GetInterestTime">
+            \~English
+            <summary>
+            (api:app=3.5.0) Get the timeline point of current interest
+            </summary>
+            <returns>Timeline point of current interest, in seconds</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.5.0) 获取应用程序当前兴趣点在时间线上的位置
+            </summary>
+            <returns>在时间线上的兴趣点，单位秒</returns>
+        </member>
         <member name="M:ASEva.AgencyLocal.GetInternetNTPTime">
             \~English
             <summary>
@@ -7561,6 +7633,24 @@
             获取所有插件使用的第三方软件版权声明
             </summary>
             <returns>键为插件ID，值为该插件使用的第三方软件版权声明(其中键为标题，值为版权声明)</returns>
+        </member>
+        <member name="M:ASEva.AgencyLocal.GetPreviewJpeg(System.Int32,System.Double,System.Double)">
+            \~English
+            <summary>
+            (api:app=3.5.0) Get the nearest video frame's preview JPEG data from the specified time
+            </summary>
+            <param name="channel">Video channel, ranges 0~23</param>
+            <param name="timeline">Target timeline point, in seconds</param>
+            <param name="maxGap">Max time gap, in seconds</param>
+            <returns>1) Video frame's preview JPEG data, image width is 640 pix, null if failed to query. 2) Timestamp of output image, null if failed to query. 3) Camera information, null if failed to query</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.5.0) 获取距离指定时间最近的视频帧的预览JPEG图像数据
+            </summary>
+            <param name="channel">视频通道，0~23</param>
+            <param name="timeline">获取视频帧的目标时间线，单位秒</param>
+            <param name="maxGap">容许的最大间隔，单位秒</param>
+            <returns>1. 视频帧的预览JPEG数据，图像宽度为640像素，获取失败则返回null; 2. 图像的时间戳，获取失败则为null; 3. 摄像头信息，获取失败则为null</returns>
         </member>
         <member name="M:ASEva.AgencyLocal.GetRecentProjectPaths">
             \~English
@@ -8158,34 +8248,6 @@
             </summary>
             <param name="volume">音量（倍数）</param>
         </member>
-        <member name="M:ASEva.AgencyLocal.SetChannelMonitoringFlag(System.String,System.Boolean)">
-            \~English
-            <summary>
-            Set whether to monitor that there's data in the specified channel
-            </summary>
-            <param name="id">Monitor ID, like bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0, etc.</param>
-            <param name="monitoring">Whether to monitor (The function should be implemented by plugins, like audio alarm, UI flashing, etc.)</param>
-            \~Chinese
-            <summary>
-            设置是否监控指定通道有无数据
-            </summary>
-            <param name="id">监控ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
-            <param name="monitoring">是否监控有无数据，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
-        </member>
-        <member name="M:ASEva.AgencyLocal.SetChannelServerSyncMonitoringFlag(System.String,System.Boolean)">
-            \~English
-            <summary>
-            Set whether to monitor that the specified channel's data is synchronized with time server
-            </summary>
-            <param name="id">Monitor ID, like bus@1, video@0, sample@xxx-v2@0, etc.</param>
-            <param name="monitoring">Whether to monitor (The function should be implemented by plugins, like audio alarm, UI flashing, etc.)</param>
-            \~Chinese
-            <summary>
-            设置是否监控指定通道数据与授时服务器同步
-            </summary>
-            <param name="id">监控ID，如bus@1, video@0, sample@xxx-v2@0等</param>
-            <param name="monitoring">是否监控数据与授时服务器同步，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
-        </member>
         <member name="M:ASEva.AgencyLocal.SetCurrentDialogTitle(System.String,System.Object)">
             \~English
             <summary>
@@ -8362,7 +8424,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.4.6
+            version=3.5.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">

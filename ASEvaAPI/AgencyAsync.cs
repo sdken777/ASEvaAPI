@@ -15,6 +15,7 @@ namespace ASEva
         Task AddDataLayer(String layer);
         Task AddPointCloudReference(int channel);
         Task AddSignalReference(String signalID);
+        Task<byte[]> CallNativeFunction(object caller, String nativeClassID, String funcID, byte[] input);
         Task<TimeWithSession> ConvertTimeIntoSession(double timeline);
         Task DeleteDataLayer(String layer);
         Task<byte[][]> DequeueDataFromNative(object caller, String nativeClassID, String dataID);
@@ -25,6 +26,8 @@ namespace ASEva
         Task EnablePlugin(String packID);
         Task EnqueueDataToNative(object caller, String nativeClassID, String dataID, byte[] data);
         Task<string[]> GetAllChannelGuestSyncKeys();
+        Task<string[]> GetAllChannelMonitoringKeys();
+        Task<string[]> GetAllChannelServerSyncMonitoringKeys();
         Task<Dictionary<String, DeviceStatusDetail>> GetAllDeviceStatus();
         Task<Dictionary<string, double>> GetAllRawChannelDelayConfigs();
         Task<ApplicationGUI> GetAppGUI();
@@ -58,6 +61,8 @@ namespace ASEva
         Task<Dictionary<String, String>> GetChannelAliasTable();
         Task<bool> GetChannelGuestSyncFlag(String id);
         Task<Timestamp[]> GetChannelLatestTimestamps(String channelID);
+        Task<bool> GetChannelMonitoringFlag(String id);
+        Task<bool> GetChannelServerSyncMonitoringFlag(String id);
         Task<Dictionary<String, bool>> GetChannelStatusTable(uint? tolerance);
         Task<Dictionary<String, TimeOffsetSync>> GetChannelSyncTable();
         Task<GeneralDeviceStatus[]> GetChildDeviceStatus(String id);
@@ -185,6 +190,8 @@ namespace ASEva
         Task SetAudioChannelDelayConfig(double delay);
         Task SetBusChannelDelayConfig(int busChannel, double delay);
         Task SetChannelGuestSyncFlag(String id, bool guestSync);
+        Task SetChannelMonitoringFlag(String id, bool monitoring);
+        Task SetChannelServerSyncMonitoringFlag(String id, bool monitoring);
         Task<bool> SetControlFlag(String controllerName, bool enabled);
         Task SetCurrentDataLayer(String layer);
         Task SetEventComment(object eventHandle, String comment);
@@ -309,6 +316,29 @@ namespace ASEva
         public static Task AddSignalReference(String signalID)
         {
             return Handler.AddSignalReference(signalID);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.5.0) Call native plugin's function
+        /// </summary>
+        /// <param name="caller">The caller who calls this API, can be object of ASEva.CommonWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , etc.</param>
+        /// <param name="nativeClassID">Native class ID</param>
+        /// <param name="funcID">Function ID</param>
+        /// <param name="input">Input data for the function</param>
+        /// <returns>Output data from the function, null if the function is not found</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.5.0) 调用原生插件中的函数
+        /// </summary>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.CommonWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel等</param>
+        /// <param name="nativeClassID">原生组件ID</param>
+        /// <param name="funcID">函数ID</param>
+        /// <param name="input">函数输入数据</param>
+        /// <returns>函数输出数据，若未找到相应插件或函数ID无响应则返回null</returns>
+        public static Task<byte[]> CallNativeFunction(object caller, String nativeClassID, String funcID, byte[] input)
+        {
+            return Handler.CallNativeFunction(caller, nativeClassID, funcID, input);
         }
 
         /// \~English
@@ -471,6 +501,36 @@ namespace ASEva
         public static Task<string[]> GetAllChannelGuestSyncKeys()
         {
             return Handler.GetAllChannelGuestSyncKeys();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.2.14) Get monitor IDs of all the channels being monitored that there's data in the channel
+        /// </summary>
+        /// <returns>Monitor IDs of all the channels being monitored</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.2.14) 获取所有正在监控有无数据的通道ID
+        /// </summary>
+        /// <returns>正在监控有无数据的通道ID列表</returns>
+        public static Task<string[]> GetAllChannelMonitoringKeys()
+        {
+            return Handler.GetAllChannelMonitoringKeys();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.2.14) Get monitor IDs of all the channels being monitored that the channel's data is synchronized with time server
+        /// </summary>
+        /// <returns>Monitor IDs of all the channels being monitored</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.2.14) 获取所有正在监控数据与授时服务器同步的监控ID
+        /// </summary>
+        /// <returns>正在监控数据与授时服务器同步的通道ID列表</returns>
+        public static Task<string[]> GetAllChannelServerSyncMonitoringKeys()
+        {
+            return Handler.GetAllChannelServerSyncMonitoringKeys();
         }
 
         /// \~English
@@ -1005,6 +1065,40 @@ namespace ASEva
         public static Task<Timestamp[]> GetChannelLatestTimestamps(String channelID)
         {
             return Handler.GetChannelLatestTimestamps(channelID);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.2.14) Get whether to monitor that there's data in the specified channel
+        /// </summary>
+        /// <param name="id">Monitor ID, like bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0, etc.</param>
+        /// <returns>Whether to monitor</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.2.14) 获取是否监控指定通道有无数据
+        /// </summary>
+        /// <param name="id">监控ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
+        /// <returns>是否监控有无数据</returns>
+        public static Task<bool> GetChannelMonitoringFlag(String id)
+        {
+            return Handler.GetChannelMonitoringFlag(id);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.2.14) Get whether to monitor that the specified channel's data is synchronized with time server
+        /// </summary>
+        /// <param name="id">Monitor ID, like bus@1, video@0, sample@xxx-v2@0, etc.</param>
+        /// <returns>Whether to monitor</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.2.14) 获取是否监控指定通道数据与授时服务器同步
+        /// </summary>
+        /// <param name="id">监控ID，如bus@1, video@0, sample@xxx-v2@0等</param>
+        /// <returns>是否监控指定通道数据与授时服务器同步</returns>
+        public static Task<bool> GetChannelServerSyncMonitoringFlag(String id)
+        {
+            return Handler.GetChannelServerSyncMonitoringFlag(id);
         }
 
         /// \~English
@@ -3104,6 +3198,40 @@ namespace ASEva
         public static Task SetChannelGuestSyncFlag(String id, bool guestSync)
         {
             return Handler.SetChannelGuestSyncFlag(id, guestSync);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.2.14) Set whether to monitor that there's data in the specified channel
+        /// </summary>
+        /// <param name="id">Monitor ID, like bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0, etc.</param>
+        /// <param name="monitoring">Whether to monitor (The function should be implemented by plugins, like audio alarm, UI flashing, etc.)</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.2.14) 设置是否监控指定通道有无数据
+        /// </summary>
+        /// <param name="id">监控ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
+        /// <param name="monitoring">是否监控有无数据，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
+        public static Task SetChannelMonitoringFlag(String id, bool monitoring)
+        {
+            return Handler.SetChannelMonitoringFlag(id, monitoring);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.2.14) Set whether to monitor that the specified channel's data is synchronized with time server
+        /// </summary>
+        /// <param name="id">Monitor ID, like bus@1, video@0, sample@xxx-v2@0, etc.</param>
+        /// <param name="monitoring">Whether to monitor (The function should be implemented by plugins, like audio alarm, UI flashing, etc.)</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.2.14) 设置是否监控指定通道数据与授时服务器同步
+        /// </summary>
+        /// <param name="id">监控ID，如bus@1, video@0, sample@xxx-v2@0等</param>
+        /// <param name="monitoring">是否监控数据与授时服务器同步，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
+        public static Task SetChannelServerSyncMonitoringFlag(String id, bool monitoring)
+        {
+            return Handler.SetChannelServerSyncMonitoringFlag(id, monitoring);
         }
 
         /// \~English

@@ -588,7 +588,8 @@ namespace ASEva
         /// <returns>正在监控有无数据的通道ID列表</returns>
         public static string[] GetAllChannelMonitoringKeys()
         {
-            return AgencyLocal.GetAllChannelMonitoringKeys();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetAllChannelMonitoringKeys().Result;
         }
 
         /// \~English
@@ -603,7 +604,8 @@ namespace ASEva
         /// <returns>正在监控数据与授时服务器同步的通道ID列表</returns>
         public static String[] GetAllChannelServerSyncMonitoringKeys()
         {
-            return AgencyLocal.GetAllChannelServerSyncMonitoringKeys();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetAllChannelServerSyncMonitoringKeys().Result;
         }
 
         /// \~English
@@ -904,8 +906,7 @@ namespace ASEva
         /// <returns>数据缓存范围</returns>
         public static BufferRange GetBufferRange()
         {
-            if (!AgencyAsync.SyncMode) return new BufferRange();
-            return AgencyAsync.GetBufferRange().Result;
+            return AgencyLocal.GetBufferRange();
         }
 
         /// \~English
@@ -1243,7 +1244,8 @@ namespace ASEva
         /// <returns>是否监控有无数据</returns>
         public static bool GetChannelMonitoringFlag(String id)
         {
-            return AgencyLocal.GetChannelMonitoringFlag(id);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.GetChannelMonitoringFlag(id).Result;
         }
 
         /// \~English
@@ -1260,7 +1262,8 @@ namespace ASEva
         /// <returns>是否监控指定通道数据与授时服务器同步</returns>
         public static bool GetChannelServerSyncMonitoringFlag(String id)
         {
-            return AgencyLocal.GetChannelServerSyncMonitoringFlag(id);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.GetChannelServerSyncMonitoringFlag(id).Result;
         }
 
         /// \~English
@@ -2182,8 +2185,7 @@ namespace ASEva
         /// <returns>在时间线上的兴趣点，单位秒</returns>
         public static double GetInterestTime()
         {
-            if (!AgencyAsync.SyncMode) return 0;
-            return AgencyAsync.GetInterestTime().Result;
+            return AgencyLocal.GetInterestTime();
         }
 
         /// \~English
@@ -2559,13 +2561,7 @@ namespace ASEva
         /// <returns>视频帧的预览JPEG数据，图像宽度为640像素，获取失败则返回null</returns>
         public static byte[] GetPreviewJpeg(int channel, double timeline, double maxGap, out Timestamp? timestamp, out CameraInfo cameraInfo)
         {
-            if (!AgencyAsync.SyncMode)
-            {
-                timestamp = null;
-                cameraInfo = null;
-                return null;
-            }
-            var result = AgencyAsync.GetPreviewJpeg(channel, timeline, maxGap).Result;
+            var result = AgencyLocal.GetPreviewJpeg(channel, timeline, maxGap);
             timestamp = result.Item2;
             cameraInfo = result.Item3;
             return result.Item1;
@@ -4444,7 +4440,8 @@ namespace ASEva
         /// <param name="monitoring">是否监控有无数据，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
         public static void SetChannelMonitoringFlag(String id, bool monitoring)
         {
-            AgencyLocal.SetChannelMonitoringFlag(id, monitoring);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetChannelMonitoringFlag(id, monitoring).Wait();
         }
 
         /// \~English
@@ -4461,7 +4458,8 @@ namespace ASEva
         /// <param name="monitoring">是否监控数据与授时服务器同步，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
         public static void SetChannelServerSyncMonitoringFlag(String id, bool monitoring)
         {
-            AgencyLocal.SetChannelServerSyncMonitoringFlag(id, monitoring);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetChannelServerSyncMonitoringFlag(id, monitoring).Wait();
         }
 
         /// \~English
