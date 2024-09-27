@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 5, 0, 0); // Update log / 更新记录: 新增AgencyLocal.GetInterestTime/BufferRange/PreviewJpeg。新增AgencyAsync.CallNativeFunction。合并3.2.14
+            return new Version(3, 5, 0, 1); // Update log / 更新记录: 修正DrawBeat.CallerBegin
         }
 
         /// \~English
