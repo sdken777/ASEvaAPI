@@ -51,7 +51,12 @@ namespace ASEva.Utility
             }
             if (!ctxs[id].Ongoing && !ctxs[id].InCaller)
             {
-                if (ctxs[id].IdleTimer != null && (DateTime.Now - ctxs[id].IdleTimer.Value).TotalMilliseconds < ctxs[id].DrawInterval) return false;
+                var now = DateTime.Now;
+                if (ctxs[id].IdleTimer != null)
+                {
+                    if (now < ctxs[id].IdleTimer.Value) ctxs[id].IdleTimer = now;
+                    if ((now - ctxs[id].IdleTimer.Value).TotalMilliseconds < ctxs[id].DrawInterval) return false;
+                }
                 ctxs[id].Ongoing = true;
                 ctxs[id].InCaller = true;
                 return true;
