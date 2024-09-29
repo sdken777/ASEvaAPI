@@ -71,16 +71,7 @@ namespace ASEva.UIGtk
 			Control = new Gtk.ScrolledWindow();
 			Control.Realized += delegate
 			{
-				var settings = new WebKit.Settings();
-				settings.EnableDeveloperExtras = true;
-
-				var uiBackend = ASEva.UIEto.App.GetUIBackend();
-				if (uiBackend != null && uiBackend == "wayland") // Wayland下使用OpenGL可能导致花屏，或令WaylandOffscreenView卡死
-				{
-					settings.EnableAccelerated2dCanvas = false;
-					settings.EnableWebgl = false;
-					settings.HardwareAccelerationPolicy = WebKit.HardwareAccelerationPolicy.Never;
-				}
+				PreInitializeSettings();
 
 				webView = new WebKit.WebView(settings) { Visible = true };
 
@@ -132,6 +123,24 @@ namespace ASEva.UIGtk
 				}
 			};
 		}
+
+		public static void PreInitializeSettings()
+		{
+			if (settings == null)
+			{
+				settings = new WebKit.Settings();
+				settings.EnableDeveloperExtras = true;
+
+				var uiBackend = ASEva.UIEto.App.GetUIBackend();
+				if (uiBackend != null && uiBackend == "wayland") // Wayland下使用OpenGL可能导致花屏，或令WaylandOffscreenView卡死
+				{
+					settings.EnableAccelerated2dCanvas = false;
+					settings.EnableWebgl = false;
+					settings.HardwareAccelerationPolicy = WebKit.HardwareAccelerationPolicy.Never;
+				}
+			}
+		}
+		private static WebKit.Settings settings = null;
 
 		private void WebViewHandler_TitleChanged(object o, GLib.SignalArgs args)
 		{

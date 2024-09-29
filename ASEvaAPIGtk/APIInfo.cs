@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 3, 1, 1); // Update log / 更新记录: 修正柱状折线图崩溃问题
+            return new Version(3, 3, 1, 2); // Update log / 更新记录: 合并2.11.3
         }
     }
 }
