@@ -76,18 +76,7 @@ namespace ASEva.UIGtk
 			Control = new Gtk.ScrolledWindow();
 			Control.Realized += delegate
 			{
-				var settings = NativeMethods.webkit_settings_new();
-
-				var uiBackend = ASEva.UIEto.App.GetUIBackend();
-				if (uiBackend != null && uiBackend == "wayland") // Wayland下使用OpenGL可能导致花屏，或令WaylandOffscreenView卡死
-				{
-					NativeMethods.webkit_settings_set_enable_accelerated_2d_canvas(settings, false);
-					NativeMethods.webkit_settings_set_enable_webgl(settings, false);
-					NativeMethods.webkit_settings_set_hardware_acceleration_policy(settings, 2/* WEBKIT_HARDWARE_ACCELERATION_POLICY_NEVER */);
-				}
-				
-				var settingsObject = GLib.Object.GetObject(settings);
-				settingsObject.SetProperty("enable-developer-extras", new GLib.Value(true));
+				PreInitializeSettings();
 
 				webView = new Gtk.Widget(NativeMethods.webkit_web_view_new_with_settings(settings)) { Visible = true };
 
@@ -139,6 +128,26 @@ namespace ASEva.UIGtk
 				}
 			};
 		}
+
+		public static void PreInitializeSettings()
+		{
+			if (settings == IntPtr.Zero)
+			{
+				settings = NativeMethods.webkit_settings_new();
+
+				var uiBackend = ASEva.UIEto.App.GetUIBackend();
+				if (uiBackend != null && uiBackend == "wayland") // Wayland下使用OpenGL可能导致花屏，或令WaylandOffscreenView卡死
+				{
+					NativeMethods.webkit_settings_set_enable_accelerated_2d_canvas(settings, false);
+					NativeMethods.webkit_settings_set_enable_webgl(settings, false);
+					NativeMethods.webkit_settings_set_hardware_acceleration_policy(settings, 2/* WEBKIT_HARDWARE_ACCELERATION_POLICY_NEVER */);
+				}
+				
+				var settingsObject = GLib.Object.GetObject(settings);
+				settingsObject.SetProperty("enable-developer-extras", new GLib.Value(true));
+			}
+		}
+		private static IntPtr settings = IntPtr.Zero;
 
 		private void WebViewHandler_TitleChanged(object o, GLib.SignalArgs args)
 		{
