@@ -86,13 +86,13 @@
         <member name="M:ASEva.UIEto.App.InitGPUOptions(System.Boolean,System.Boolean)">
             \~English
             <summary>
-            (api:app=3.0.1) Initialize GPU rendering options (Only the first call is valid)
+            (api:eto=3.0.1) Initialize GPU rendering options (Only the first call is valid)
             </summary>
             <param name="renderingDisabled">Whether to disable GPU rendering</param>
             <param name="onscreenRenderingEnabled">Whether to enable GPU onscreen rendering (If renderingDisabled is true, this setting is invalid)</param>
             \~Chinese
             <summary>
-            (api:app=3.0.1) 初始化GPU渲染选项，仅第一次调用有效
+            (api:eto=3.0.1) 初始化GPU渲染选项，仅第一次调用有效
             </summary>
             <param name="renderingDisabled">是否禁用GPU渲染</param>
             <param name="onscreenRenderingEnabled">是否启用GPU在屏渲染，若renderingDisabled为true则此设定无效</param>
@@ -250,41 +250,33 @@
         <member name="M:ASEva.UIEto.App.ConvertWindowPanelToEto(System.Object)">
             \~English
             <summary>
-            Convert platform window panel to Eto window panel
+            Deprecated. Please use ASEva.UIEto.CrossConverter
             </summary>
-            <param name="platformWindowPanel">Platform window panel</param>
-            <returns>Eto window panel, null if conversion failed</returns>
             \~Chinese
             <summary>
-            将平台特化窗口控件转化为Eto窗口控件
+            已弃用，应使用 ASEva.UIEto.CrossConverter
             </summary>
-            <param name="platformWindowPanel">平台特化窗口控件</param>
-            <returns>Eto窗口控件，若转化失败则返回null</returns>
         </member>
         <member name="M:ASEva.UIEto.App.ConvertConfigPanelToEto(System.Object)">
             \~English
             <summary>
-            Convert platform config panel to Eto config panel
+            Deprecated. Please use ASEva.UIEto.CrossConverter
             </summary>
-            <param name="platformConfigPanel">Platform config panel</param>
-            <returns>Eto config panel, null if conversion failed</returns>
             \~Chinese
             <summary>
-            将平台特化配置界面控件转化为Eto配置界面控件
+            已弃用，应使用 ASEva.UIEto.CrossConverter
             </summary>
-            <param name="platformConfigPanel">平台特化配置界面控件</param>
-            <returns>Eto配置界面控件，若转化失败则返回null</returns>
         </member>
         <member name="M:ASEva.UIEto.App.RunDialog(ASEva.UIEto.DialogPanel)">
             \~English
             <summary>
-            Run dialog
+            (api:eto=3.1.5) Run dialog
             </summary>
             <param name="panel">Target dialog panel object</param>
             <returns>Whether the dialog is shown. You should use "Result" properties of the dialog panel object to get result</returns>
             \~Chinese
             <summary>
-            弹出对话框
+            (api:eto=3.1.5) 弹出对话框
             </summary>
             <param name="panel">对话框主面板</param>
             <returns>是否成功弹出，对话框的运行结果应通过主面板的各Result属性获取</returns>
@@ -344,7 +336,7 @@
             </summary>
             \~Chinese
             <summary>
-            主流程应使用此函数手动触发KeyDown事件
+            流程应使用此函数手动触发KeyDown事件
             </summary>
         </member>
         <member name="P:ASEva.UIEto.App.FatalException">
@@ -785,6 +777,16 @@
             [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
+        <member name="M:ASEva.UIEto.ConfigPanel.OnHandleAsync">
+            \~English
+            <summary>
+            (api:eto=3.1.6) [Optional] Called in the main loop, for asynchronous calls
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.1.6) [可选实现] 在主循环中被调用，可进行异步调用
+            </summary>
+        </member>
         <member name="M:ASEva.UIEto.ConfigPanel.Close">
             \~English
             <summary>
@@ -804,6 +806,44 @@
             <summary>
             在此事件中实现配置界面的关闭
             </summary>
+        </member>
+        <member name="T:ASEva.UIEto.CrossConverter">
+            \~English
+            <summary>
+            (api:eto=3.2.0) Panel conversion tool
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.2.0) 面板转换工具
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.CrossConverter.ConvertWindowPanel(System.Object)">
+            \~English
+            <summary>
+            Convert any window panel to Eto window panel
+            </summary>
+            <param name="anyWindowPanel">Any window panel</param>
+            <returns>Eto window panel, null if conversion failed</returns>
+            \~Chinese
+            <summary>
+            将任意窗口面板转化为Eto窗口面板
+            </summary>
+            <param name="anyWindowPanel">任意窗口面板</param>
+            <returns>Eto窗口面板，若转化失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIEto.CrossConverter.ConvertConfigPanel(System.Object)">
+            \~English
+            <summary>
+            Convert any config panel to Eto config panel
+            </summary>
+            <param name="anyConfigPanel">Any config panel</param>
+            <returns>Eto config panel, null if conversion failed</returns>
+            \~Chinese
+            <summary>
+            将任意配置面板转化为Eto配置面板
+            </summary>
+            <param name="anyConfigPanel">任意配置面板</param>
+            <returns>Eto配置面板，若转化失败则返回null</returns>
         </member>
         <member name="T:ASEva.UIEto.DialogPanel">
             \~English
@@ -4511,6 +4551,16 @@
             <param name="logicalX">文本锚点X轴逻辑坐标</param>
             <param name="logicalY">文本锚点Y轴逻辑坐标</param>
         </member>
+        <member name="M:ASEva.UIEto.TextBitmap.ReleaseResources">
+            \~English
+            <summary>
+            (api:eto=3.2.2) Release resources
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.2.2) 释放资源
+            </summary>
+        </member>
         <member name="P:ASEva.UIEto.TextBitmap.Text">
             \~English
             <summary>
@@ -4873,6 +4923,16 @@
             \~Chinese
             <summary>
             [可选实现] 在主循环中被调用，可进行模态对话
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.WindowPanel.OnHandleAsync">
+            \~English
+            <summary>
+            (api:eto=3.1.6) [Optional] Called in the main loop, for asynchronous calls
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.1.6) [可选实现] 在主循环中被调用，可进行异步调用
             </summary>
         </member>
         <member name="M:ASEva.UIEto.WindowPanel.OnUpdateContainerSize(ASEva.IntSize)">

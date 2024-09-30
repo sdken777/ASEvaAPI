@@ -45,116 +45,6 @@
             </summary>
             <returns>键为标题，值为版权声明</returns>
         </member>
-        <member name="T:ASEva.UIAvalonia.App">
-            \~English
-            <summary>
-            (api:avalonia=1.0.0) Utility functions for Avalonia application
-            </summary>
-            \~Chinese
-            <summary>
-            (api:avalonia=1.0.0) Avalonia应用程序相关的实用函数
-            </summary>
-        </member>
-        <member name="M:ASEva.UIAvalonia.App.Init">
-            \~English
-            <summary>
-            Initialize application
-            </summary>
-            <returns>Whether initialization is successfull</returns>
-            \~Chinese
-            <summary>
-            应用程序初始化
-            </summary>
-            <returns>是否成功</returns>
-        </member>
-        <member name="M:ASEva.UIAvalonia.App.Init(System.Func{Avalonia.AppBuilder})">
-            \~English
-            <summary>
-            (api:avalonia=1.0.12) Initialize application with the specified AppBuilder
-            </summary>
-            <param name="appBuilderCreation">The function to create AppBuilder object</param>
-            <returns>Whether initialization is successfull</returns>
-            \~Chinese
-            <summary>
-            (api:avalonia=1.0.12) 使用指定的AppBuilder进行应用程序初始化
-            </summary>
-            <param name="appBuilderCreation">创建AppBuilder对象的函数</param>
-            <returns>是否成功</returns>
-        </member>
-        <member name="M:ASEva.UIAvalonia.App.Run(Avalonia.Controls.Window)">
-            \~English
-            <summary>
-            Run application
-            </summary>
-            <param name="mainWindow">The main window</param>
-            \~Chinese
-            <summary>
-            运行应用程序
-            </summary>
-            <param name="mainWindow">主窗口</param>
-        </member>
-        <member name="M:ASEva.UIAvalonia.App.ShowMessageBox(System.String,System.String,CustomMessageBox.Avalonia.MessageBoxIcon,CustomMessageBox.Avalonia.MessageBoxButtons)">
-            \~English
-            <summary>
-            (api:avalonia=1.0.2) Show message box (mainly for calling outside App.Run)
-            </summary>
-            \~Chinese
-            <summary>
-            (api:avalonia=1.0.2) 显示消息框（主要针对App.Run之外时使用）
-            </summary>
-        </member>
-        <member name="P:ASEva.UIAvalonia.App.WorkPath">
-            \~English
-            <summary>
-            Get application's work path
-            </summary>
-            <value>Work path</value>
-            \~Chinese
-            <summary>
-            获取应用程序的工作路径
-            </summary>
-            <value>工作路径</value>
-        </member>
-        <member name="P:ASEva.UIAvalonia.App.MainWindow">
-            \~English
-            <summary>
-            (api:avalonia=1.0.13) Get current main window
-            </summary>
-            \~Chinese
-            <summary>
-            (api:avalonia=1.0.13) 获取当前主窗口
-            </summary>
-        </member>
-        <member name="P:ASEva.UIAvalonia.App.EtoInitializeResult">
-            \~English
-            <summary>
-            (api:avalonia=1.1.1) Get initialization result of Eto framework, null means not initialized yet
-            </summary>
-            \~Chinese
-            <summary>
-            (api:avalonia=1.1.1) 获取Eto初始化结果，null表示还未进行初始化
-            </summary>
-        </member>
-        <member name="T:ASEva.UIAvalonia.AvaloniaApplication">
-            \~English
-            <summary>
-            (api:avalonia=1.0.0) Default application object
-            </summary>
-            \~Chinese
-            <summary>
-            (api:avalonia=1.0.0) 默认的应用程序对象
-            </summary>
-        </member>
-        <member name="T:ASEva.UIAvalonia.AvaloniaApplicationSimpleTheme">
-            \~English
-            <summary>
-            (api:avalonia=1.1.4) Application object using simple style
-            </summary>
-            \~Chinese
-            <summary>
-            (api:avalonia=1.1.4) 使用简易样式的应用程序对象
-            </summary>
-        </member>
         <member name="T:ASEva.UIAvalonia.ConfigPanel">
             \~English
             <summary>
@@ -249,18 +139,6 @@
             在此事件中实现配置界面的关闭
             </summary>
         </member>
-        <member name="M:ASEva.UIAvalonia.EtoConfigPanel.InitializeComponent(System.Boolean)">
-            <summary>
-            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
-            </summary>
-            <param name="loadXaml">Should the XAML be loaded into the component.</param>
-        </member>
-        <member name="M:ASEva.UIAvalonia.EtoWindowPanel.InitializeComponent(System.Boolean)">
-            <summary>
-            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
-            </summary>
-            <param name="loadXaml">Should the XAML be loaded into the component.</param>
-        </member>
         <member name="T:ASEva.UIAvalonia.CrossConverter">
             \~English
             <summary>
@@ -308,58 +186,6 @@
             </summary>
             <param name="anyConfigPanel">任意配置面板</param>
             <returns>Avalonia配置面板，若转化失败则返回null</returns>
-        </member>
-        <member name="T:ASEva.UIAvalonia.EtoEmbedder">
-            \~English
-            <summary>
-            (api:avalonia=1.0.0) For embedding Eto control in Avalonia GUI
-            </summary>
-            \~Chinese
-            <summary>
-            (api:avalonia=1.0.0) 用于在Avalonia界面中嵌入Eto控件
-            </summary>
-        </member>
-        <member name="P:ASEva.UIAvalonia.EtoEmbedder.EtoControl">
-            \~English
-            <summary>
-            The Eto control to be embedded. Either this or NativeControl should be set just after calling constructor's InitializeComponent
-            </summary>
-            \~Chinese
-            <summary>
-            待嵌入的Eto控件，需要在构造函数调用InitializeComponent后立即设置 (与NativeControl二选一)
-            </summary>
-        </member>
-        <member name="P:ASEva.UIAvalonia.EtoEmbedder.NativeControl">
-            \~English
-            <summary>
-            The native control to be embedded. Either this or EtoControl should be set just after calling constructor's InitializeComponent
-            </summary>
-            \~Chinese
-            <summary>
-            待嵌入的原生控件，需要在构造函数调用InitializeComponent后立即设置 (与EtoControl二选一)
-            </summary>
-        </member>
-        <member name="M:ASEva.UIAvalonia.EtoEmbedder.RunIteration">
-            \~English
-            <summary>
-            Not for user
-            </summary>
-            \~Chinese
-            <summary>
-            无需直接调用
-            </summary>
-        </member>
-        <member name="M:ASEva.UIAvalonia.EtoEmbedDialog.InitializeComponent(System.Boolean)">
-            <summary>
-            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
-            </summary>
-            <param name="loadXaml">Should the XAML be loaded into the component.</param>
-        </member>
-        <member name="M:ASEva.UIAvalonia.EtoInitWindow.InitializeComponent(System.Boolean)">
-            <summary>
-            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
-            </summary>
-            <param name="loadXaml">Should the XAML be loaded into the component.</param>
         </member>
         <member name="T:ASEva.UIAvalonia.CommonImageAvaloniaExtensions">
             \~English

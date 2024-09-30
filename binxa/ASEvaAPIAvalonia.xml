@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.1.5
+            version=1.2.0
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -543,6 +543,26 @@
             \~Chinese
             <summary>
             (api:avalonia=1.0.3) 方便添加文本资源的扩展
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.WindowExtensions">
+            \~English
+            <summary>
+            (api:avalonia=1.1.6) Extensions for getting window information
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.1.6) 方便获取窗口信息的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.WindowExtensions.GetActiveDialog(Avalonia.Controls.Window)">
+            \~English
+            <summary>
+            Get the top active dialog of the specified window
+            </summary>
+            \~Chinese
+            <summary>
+            获取窗口的最顶层活动对话框
             </summary>
         </member>
         <member name="T:ASEva.UIAvalonia.ImageConverter">
