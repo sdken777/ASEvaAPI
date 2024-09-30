@@ -184,8 +184,8 @@ namespace ASEva.UIMonoMac
         {
             get
             {
-                var executableFolderDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                return Path.GetFileName(executableFolderDir) == "MacOS";
+                var executableFolderDir = EntryFolder.Path;
+                return executableFolderDir != null && Path.GetFileName(executableFolderDir) == "MacOS";
             }
         }
 

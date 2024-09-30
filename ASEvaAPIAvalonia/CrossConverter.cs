@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Reflection;
+using ASEva.Utility;
 
 namespace ASEva.UIAvalonia
 {
@@ -31,7 +32,10 @@ namespace ASEva.UIAvalonia
 #else
             if (winformHostType != null) return true;
 
-            var dllPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + "WinformWpfConverter.dll";
+            var entryFolder = EntryFolder.Path;
+            if (entryFolder == null) return false;
+
+            var dllPath = entryFolder + Path.DirectorySeparatorChar + "WinformWpfConverter.dll";
             if (!File.Exists(dllPath)) return false;
 
             var assembly = Assembly.LoadFrom(dllPath);

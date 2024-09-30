@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Eto.Forms;
 using Eto.Drawing;
+using ASEva.Utility;
 
 namespace ASEva.UIEto
 {
@@ -322,7 +323,9 @@ namespace ASEva.UIEto
         {
             get
             {
-                var workDir = Path.GetDirectoryName((Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()).Location);
+                var workDir = EntryFolder.Path;
+                if (workDir == null) return null;
+                
                 if (Path.GetFileName(workDir) == "MacOS")
                 {
                     var parentDir1 = Path.GetDirectoryName(workDir);
@@ -633,9 +636,9 @@ namespace ASEva.UIEto
                     break;
                 }
 
-                if (dllFileName != null)
+                var workPath = EntryFolder.Path;
+                if (dllFileName != null && workPath != null)
                 {
-                    var workPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
                     var dllFilePath = workPath + Path.DirectorySeparatorChar + dllFileName;
                     if (File.Exists(dllFilePath))
                     {

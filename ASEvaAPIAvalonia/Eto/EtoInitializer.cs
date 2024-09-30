@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using ASEva.UIEto;
+using ASEva.Utility;
 using Avalonia.Threading;
 
 namespace ASEva.UIAvalonia
@@ -99,7 +100,9 @@ namespace ASEva.UIAvalonia
                             return;
                     }
 
-                    var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    var dir = EntryFolder.Path;
+                    if (dir == null) return;
+                    
                     var targetDll = dir + Path.DirectorySeparatorChar + "ASEvaAPI" + postfix + ".dll";
                     if (!File.Exists(targetDll)) return;
 

@@ -28,7 +28,10 @@ namespace ASEva.UICoreWF
         {
             if (winformHostTypeForWpf != null) return true;
 
-            var dllPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + "WinformWpfConverter.dll";
+            var entryFolder = EntryFolder.Path;
+            if (entryFolder == null) return false;
+
+            var dllPath = entryFolder + Path.DirectorySeparatorChar + "WinformWpfConverter.dll";
             if (!File.Exists(dllPath)) return false;
 
             var assembly = Assembly.LoadFrom(dllPath);
@@ -59,7 +62,10 @@ namespace ASEva.UICoreWF
         {
             if (winformHostTypeForAvalonia != null) return true;
 
-            var dllPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + "HwndHostAvalonia.dll";
+            var entryFolder = EntryFolder.Path;
+            if (entryFolder == null) return false;
+
+            var dllPath = entryFolder + Path.DirectorySeparatorChar + "HwndHostAvalonia.dll";
             if (!File.Exists(dllPath)) return false;
 
             var assembly = Assembly.LoadFrom(dllPath);

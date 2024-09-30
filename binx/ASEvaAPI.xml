@@ -8424,7 +8424,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.5.0
+            version=3.5.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -20209,6 +20209,26 @@
             \~Chinese
             <summary>
             设置各绘图对象的绘制时间间隔
+            </summary>
+        </member>
+        <member name="T:ASEva.Utility.EntryFolder">
+            \~English
+            <summary>
+            (api:app=3.5.1) For getting the directory of entry module
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.5.1) 用于获取入口模块所在路径
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.EntryFolder.SpecifyEntryFolder(System.String)">
+            \~English
+            <summary>
+            Explicitly specify the path
+            </summary>
+            \~Chinese
+            <summary>
+            显式指定路径
             </summary>
         </member>
         <member name="T:ASEva.Utility.GenerationProcessStatus">

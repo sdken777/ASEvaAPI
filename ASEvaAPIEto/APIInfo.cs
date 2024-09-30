@@ -1,8 +1,8 @@
 ﻿/*! \mainpage
  * \~English This library contains the APIs for Eto.Forms. See ASEva.UIEto for details. \n
  * \~Chinese 此类库为ASEva-API中基于Eto.Forms的部分。详见 ASEva.UIEto \n
- * \~English This document corresponds to API version: 3.2.2 \n\n
- * \~Chinese 本文档对应API版本：3.2.2 \n\n
+ * \~English This document corresponds to API version: 3.2.3 \n\n
+ * \~Chinese 本文档对应API版本：3.2.3 \n\n
  * 
  * \~English Eto.Forms official repository: https://github.com/picoe/Eto \n
  * \~Chinese Eto.Forms官方仓库: https://github.com/picoe/Eto \n
@@ -19,7 +19,7 @@ using ASEva.Utility;
 namespace ASEva.UIEto
 {
     /// <summary>
-    /// version=3.2.2
+    /// version=3.2.3
     /// </summary>
     public class APIInfo
     {
@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 2, 2, 2); // Update log / 更新记录: 针对GetEntryAssembly可能为空的情况
+            return new Version(3, 2, 3, 0); // Update log / 更新记录: 使用EntryFolder
         }
 
         /// \~English
@@ -50,8 +50,10 @@ namespace ASEva.UIEto
         /// <returns>Eto.Forms库版本</returns>
         public static Version GetEtoLibVersion()
         {
-            var apiEtoPath = Assembly.GetExecutingAssembly().Location;
-            var etoLibPath = Path.GetDirectoryName(apiEtoPath) + Path.DirectorySeparatorChar + "Eto.dll";
+            var entryFolder = EntryFolder.Path;
+            if (entryFolder == null) return null;
+
+            var etoLibPath = entryFolder + Path.DirectorySeparatorChar + "Eto.dll";
 
             try
             {

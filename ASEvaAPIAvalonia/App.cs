@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using ASEva.UIEto;
+using ASEva.Utility;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -188,7 +189,9 @@ namespace ASEva.UIAvalonia
         {
             get
             {
-                var workDir = Path.GetDirectoryName((Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()).Location);
+                var workDir = EntryFolder.Path;
+                if (workDir == null) return null;
+                
                 if (Path.GetFileName(workDir) == "MacOS")
                 {
                     var parentDir1 = Path.GetDirectoryName(workDir);
