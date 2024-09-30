@@ -70,6 +70,18 @@ namespace ASEva
                     if (RuntimeInformation.OSArchitecture == Architecture.X64) osCode = "macos";
                     else if (RuntimeInformation.OSArchitecture == Architecture.Arm64) osCode = "macosarm";
                 }
+                else if (OperatingSystem.IsIOS())
+                {
+                    osCode = "ios";
+                }
+                else if (OperatingSystem.IsAndroid())
+                {
+                    osCode = "android";
+                }
+                else if (OperatingSystem.IsBrowser())
+                {
+                    osCode = "wasm";
+                }
             }
             return osCode;
         }

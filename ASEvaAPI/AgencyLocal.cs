@@ -10,6 +10,7 @@ namespace ASEva
 
     public interface AgencyLocalHandler
     {
+        bool BundleMode { get; }
         bool ClientSide { get; }
         AddBusProtocolResult AddBusProtocolFile(String filePath, out BusProtocolFileID[] fileIDs);
         void AddMainThreadCheckpoint(String location);
@@ -33,16 +34,13 @@ namespace ASEva
         void DisablePlugin(String packID);
         void EnablePlugin(String packID);
         byte[] EncodeImage(CommonImage image, String format);
-        string[] GetAllChannelMonitoringKeys();
-        String[] GetAllChannelServerSyncMonitoringKeys();
         String GetAppFilesRoot();
         ApplicationGUI GetAppGUI();
         String GetAppID();
         Language GetAppLanguage();
+        BufferRange GetBufferRange();
         String GetBusProtocolFilePath(BusProtocolFileID fileID);
         BusFileInfo[] GetBusProtocolFilesInfo();
-        bool GetChannelMonitoringFlag(String id);
-        bool GetChannelServerSyncMonitoringFlag(String id);
         String GetConfigFilesRoot();
         String GetCurrentDataLayerPath();
         String GetCurrentProject();
@@ -58,6 +56,7 @@ namespace ASEva
         String[] GetGlobalVariableKeys();
         String[] GetGraphPanelStylesForID(int graphID);
         String[] GetGraphPanelStylesForType(GraphType graphType);
+        double GetInterestTime();
         DateTime? GetInternetNTPTime();
         LogMessage[] GetLogMessages();
         CommonImage GetOfflineMapCommonImage(IntSize imageSize, LocPoint centerLocation, int zoom);
@@ -65,6 +64,7 @@ namespace ASEva
         String[] GetPluginPackIDList();
         PluginPackInfo GetPluginPackInfo(String packID);
         Dictionary<String, Dictionary<String, String> > GetPluginThirdPartyNotices();
+        (byte[], Timestamp?, CameraInfo) GetPreviewJpeg(int channel, double timeline, double maxGap);
         String[] GetRecentProjectPaths();
         String GetSessionPath(SessionIdentifier session);
         String GetSessionPublicDataPath(SessionIdentifier session);
@@ -75,6 +75,7 @@ namespace ASEva
         Dictionary<String, WindowClassInfo> GetWindowClassTable();
         Task<bool> InstallPlugin(String dirPath);
         bool IsInternetConnected();
+        bool IsMainThreadFunction(String funcName);
         bool IsPRCWebPreferred();
         void Log(String text, LogLevel level);
         Task<bool> NewProject(bool force);
@@ -87,6 +88,7 @@ namespace ASEva
         void Print(String text);
         void PublishData(String dataID, byte[] data);
         void RegisterAudioDriver(AudioDriverInfo driver, AudioRecorder recorder, AudioReplayer replayer);
+        void RegisterAudioReplayers(AudioDriverInfo driver, AudioReplayer replayer);
         void RegisterGraphPanelForType(GraphType graphType, String styleName, Type panelType);
         void RegisterGraphPanelForID(int graphID, String styleName, Type panelType);
         DialogClassInfo RegisterTransformDialogClass(String dialogClassID, String config);
@@ -105,8 +107,6 @@ namespace ASEva
         void SendRawDataWithCPUTick(ulong cpuTick, String channelID, double[] values, byte[] binary);
         void SetAppFunctionHandler(object caller, String nativeClassID, String funcID, AppFunctionHandler handler);
         void SetAudioVolume(double volume);
-        void SetChannelMonitoringFlag(String id, bool monitoring);
-        void SetChannelServerSyncMonitoringFlag(String id, bool monitoring);
         void SetCurrentDialogTitle(String title, object icon);
         void SetDataPath(String path);
         void SetGlobalPath(String key, String path);
@@ -147,6 +147,19 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.3.0) Whether the application is a bundle
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.3.0) 是否当前应用是在Bundle中运行
+        /// </summary>
+        public static bool BundleMode
+        {
+            get { return Handler.BundleMode; }
+        }
+
+        /// \~English
+        /// <summary>
         /// (api:app=3.2.6) Whether the application is on client side
         /// </summary>
         /// \~Chinese
@@ -174,6 +187,11 @@ namespace ASEva
         /// <returns>添加结果</returns>
         public static AddBusProtocolResult AddBusProtocolFile(String filePath, out BusProtocolFileID[] fileIDs)
         {
+            if (Handler.ClientSide)
+            {
+                fileIDs = null;
+                return AddBusProtocolResult.Invalid;
+            }
             return Handler.AddBusProtocolFile(filePath, out fileIDs);
         }
 
@@ -189,6 +207,7 @@ namespace ASEva
         /// <param name="location">主线程检查点位置</param>
         public static void AddMainThreadCheckpoint(String location)
         {
+            if (Handler.ClientSide) return;
             Handler.AddMainThreadCheckpoint(location);
         }
 
@@ -204,6 +223,7 @@ namespace ASEva
         /// <param name="videoChannel">视频通道，0~23对应A~X</param>
         public static void AddProcessorVideoReference(int videoChannel)
         {
+            if (Handler.ClientSide) return;
             Handler.AddProcessorVideoReference(videoChannel);
         }
 
@@ -219,6 +239,7 @@ namespace ASEva
         /// <param name="scene">想要添加的场景片段描述</param>
         public static void AddSceneData(SceneData scene)
         {
+            if (Handler.ClientSide) return;
             Handler.AddSceneData(scene);
         }
 
@@ -240,6 +261,7 @@ namespace ASEva
         /// <param name="newWorkspaceIfNeeded">如果当前工作空间位置不足，是否添加至新工作空间（如果支持）</param>
         public static void AddWindow(object caller, String windowClassID, String config, bool newWorkspaceIfNeeded)
         {
+            if (Handler.ClientSide) return;
             Handler.AddWindow(caller, windowClassID, config, newWorkspaceIfNeeded);
         }
 
@@ -263,6 +285,7 @@ namespace ASEva
         /// <returns>函数输出数据，若未找到相应插件或函数ID无响应则返回null</returns>
         public static byte[] CallNativeFunction(object caller, String nativeClassID, String funcID, byte[] input)
         {
+            if (Handler.ClientSide) return null;
             return Handler.CallNativeFunction(caller, nativeClassID, funcID, input);
         }
 
@@ -314,6 +337,7 @@ namespace ASEva
         /// </summary>
         public static Task ConfigDataEncryption()
         {
+            if (Handler.ClientSide) return Task.CompletedTask;
             return Handler.ConfigDataEncryption();
         }
 
@@ -327,6 +351,7 @@ namespace ASEva
         /// </summary>
         public static Task ConfigOfflineMapPath()
         {
+            if (Handler.ClientSide) return Task.CompletedTask;
             return Handler.ConfigOfflineMapPath();
         }
 
@@ -348,6 +373,7 @@ namespace ASEva
         /// <returns>该经纬度对应的像素坐标</returns>
         public static FloatPoint ConvertOfflineMapLocToPix(LocPoint origin, int zoom, LocPoint point)
         {
+            if (Handler.ClientSide) return new FloatPoint();
             return Handler.ConvertOfflineMapLocToPix(origin, zoom, point);
         }
 
@@ -369,6 +395,7 @@ namespace ASEva
         /// <returns>该像素坐标对应的经纬度坐标</returns>
         public static LocPoint ConvertOfflineMapPixToLoc(LocPoint origin, int zoom, FloatPoint pixel)
         {
+            if (Handler.ClientSide) return new LocPoint();
             return Handler.ConvertOfflineMapPixToLoc(origin, zoom, pixel);
         }
 
@@ -491,6 +518,7 @@ namespace ASEva
         /// <returns>是否成功</returns>
         public static bool DeleteToRecycleBin(String path)
         {
+            if (Handler.ClientSide && Handler.BundleMode) return false;
             return Handler.DeleteToRecycleBin(path);
         }
 
@@ -558,36 +586,6 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get monitor IDs of all the channels being monitored that there's data in the channel
-        /// </summary>
-        /// <returns>Monitor IDs of all the channels being monitored</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取所有正在监控有无数据的通道ID
-        /// </summary>
-        /// <returns>正在监控有无数据的通道ID列表</returns>
-        public static string[] GetAllChannelMonitoringKeys()
-        {
-            return Handler.GetAllChannelMonitoringKeys();
-        }
-
-        /// \~English
-        /// <summary>
-        /// Get monitor IDs of all the channels being monitored that the channel's data is synchronized with time server
-        /// </summary>
-        /// <returns>Monitor IDs of all the channels being monitored</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取所有正在监控数据与授时服务器同步的监控ID
-        /// </summary>
-        /// <returns>正在监控数据与授时服务器同步的通道ID列表</returns>
-        public static String[] GetAllChannelServerSyncMonitoringKeys()
-        {
-            return Handler.GetAllChannelServerSyncMonitoringKeys();
-        }
-
-        /// \~English
-        /// <summary>
         /// Get the path of current application's data and document files
         /// </summary>
         /// <returns>The path of current application's data and document files</returns>
@@ -598,6 +596,7 @@ namespace ASEva
         /// <returns>应用数据和文档文件根目录路径</returns>
         public static String GetAppFilesRoot()
         {
+            if (Handler.ClientSide && Handler.BundleMode) return null;
             return Handler.GetAppFilesRoot();
         }
 
@@ -648,6 +647,21 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.5.0) Get the buffer range
+        /// </summary>
+        /// <returns>The buffer range</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.5.0) 获取应用程序当前的数据缓存范围
+        /// </summary>
+        /// <returns>数据缓存范围</returns>
+        public static BufferRange GetBufferRange()
+        {
+            return Handler.GetBufferRange();
+        }
+
+        /// \~English
+        /// <summary>
         /// Get the path of bus protocol file
         /// </summary>
         /// <param name="fileID">Bus protocol file ID</param>
@@ -660,6 +674,7 @@ namespace ASEva
         /// <returns>总线协议文件路径，若未找到返回null</returns>
         public static String GetBusProtocolFilePath(BusProtocolFileID fileID)
         {
+            if (Handler.ClientSide) return null;
             return Handler.GetBusProtocolFilePath(fileID);
         }
 
@@ -675,41 +690,8 @@ namespace ASEva
         /// <returns>总线协议信息列表</returns>
         public static BusFileInfo[] GetBusProtocolFilesInfo()
         {
+            if (Handler.ClientSide) return null;
             return Handler.GetBusProtocolFilesInfo();
-        }
-
-        /// \~English
-        /// <summary>
-        /// Get whether to monitor that there's data in the specified channel
-        /// </summary>
-        /// <param name="id">Monitor ID, like bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0, etc.</param>
-        /// <returns>Whether to monitor</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取是否监控指定通道有无数据
-        /// </summary>
-        /// <param name="id">监控ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
-        /// <returns>是否监控有无数据</returns>
-        public static bool GetChannelMonitoringFlag(String id)
-        {
-            return Handler.GetChannelMonitoringFlag(id);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Get whether to monitor that the specified channel's data is synchronized with time server
-        /// </summary>
-        /// <param name="id">Monitor ID, like bus@1, video@0, sample@xxx-v2@0, etc.</param>
-        /// <returns>Whether to monitor</returns>
-        /// \~Chinese
-        /// <summary>
-        /// 获取是否监控指定通道数据与授时服务器同步
-        /// </summary>
-        /// <param name="id">监控ID，如bus@1, video@0, sample@xxx-v2@0等</param>
-        /// <returns>是否监控指定通道数据与授时服务器同步</returns>
-        public static bool GetChannelServerSyncMonitoringFlag(String id)
-        {
-            return Handler.GetChannelServerSyncMonitoringFlag(id);
         }
 
         /// \~English
@@ -724,6 +706,7 @@ namespace ASEva
         /// <returns>配置文件根目录路径</returns>
         public static String GetConfigFilesRoot()
         {
+            if (Handler.ClientSide && Handler.BundleMode) return null;
             return Handler.GetConfigFilesRoot();
         }
 
@@ -739,6 +722,7 @@ namespace ASEva
         /// <returns>当前数据层级的路径，若数据目录未设置或数据层级为'..'则返回null，若当前数据层级为null(所有层级)则返回数据目录根路径</returns>
         public static String GetCurrentDataLayerPath()
         {
+            if (Handler.ClientSide) return null;
             return Handler.GetCurrentDataLayerPath();
         }
 
@@ -754,6 +738,7 @@ namespace ASEva
         /// <returns>当前项目文件，新项目或从autosave读取的项目都为null</returns>
         public static String GetCurrentProject()
         {
+            if (Handler.ClientSide) return null;
             return Handler.GetCurrentProject();
         }
 
@@ -769,6 +754,7 @@ namespace ASEva
         /// <returns>当前数据目录的路径，若未设置返回null</returns>
         public static String GetDataPath()
         {
+            if (Handler.ClientSide) return null;
             return Handler.GetDataPath();
         }
 
@@ -837,6 +823,7 @@ namespace ASEva
         /// <returns>Generation数据的根路径，若不存在或不属于当前层级则返回null</returns>
         public static String GetGenerationPath(SessionIdentifier session, String generation)
         {
+            if (Handler.ClientSide) return null;
             return Handler.GetGenerationPath(session, generation);
         }
 
@@ -854,6 +841,7 @@ namespace ASEva
         /// <returns>以分号分割的全局路径value（仅返回存在的部分），若key为null、""则返回null</returns>
         public static String GetGlobalPath(String key)
         {
+            if (Handler.ClientSide && Handler.BundleMode) return null;
             return Handler.GetGlobalPath(key);
         }
 
@@ -869,6 +857,7 @@ namespace ASEva
         /// <returns>所有全局路径的键</returns>
         public static String[] GetGlobalPathKeys()
         {
+            if (Handler.ClientSide && Handler.BundleMode) return null;
             return Handler.GetGlobalPathKeys();
         }
 
@@ -884,6 +873,7 @@ namespace ASEva
         /// <returns>当前全局公共数据目录的路径，若未设置返回null</returns>
         public static String GetGlobalPublicDataPath()
         {
+            if (Handler.ClientSide) return null;
             return Handler.GetGlobalPublicDataPath();
         }
 
@@ -957,6 +947,21 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.5.0) Get the timeline point of current interest
+        /// </summary>
+        /// <returns>Timeline point of current interest, in seconds</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.5.0) 获取应用程序当前兴趣点在时间线上的位置
+        /// </summary>
+        /// <returns>在时间线上的兴趣点，单位秒</returns>
+        public static double GetInterestTime()
+        {
+            return Handler.GetInterestTime();
+        }
+
+        /// \~English
+        /// <summary>
         /// Get the UTC date and time queried from Internet NTP server
         /// </summary>
         /// <returns>The UTC date and time queried from Internet NTP server, null if Internet is not connected or querying failed</returns>
@@ -1003,6 +1008,7 @@ namespace ASEva
         /// <returns>离线地图图像（通用图像数据，BGR不逆序），空表示获取失败</returns>
         public static CommonImage GetOfflineMapCommonImage(IntSize imageSize, LocPoint centerLocation, int zoom)
         {
+            if (Handler.ClientSide) return null;
             return Handler.GetOfflineMapCommonImage(imageSize, centerLocation, zoom);
         }
 
@@ -1018,6 +1024,7 @@ namespace ASEva
         /// <returns>离线地图的版权信息</returns>
         public static String GetOfflineMapCopyrightInfo()
         {
+            if (Handler.ClientSide) return null;
             return Handler.GetOfflineMapCopyrightInfo();
         }
 
@@ -1070,6 +1077,27 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.5.0) Get the nearest video frame's preview JPEG data from the specified time
+        /// </summary>
+        /// <param name="channel">Video channel, ranges 0~23</param>
+        /// <param name="timeline">Target timeline point, in seconds</param>
+        /// <param name="maxGap">Max time gap, in seconds</param>
+        /// <returns>1) Video frame's preview JPEG data, image width is 640 pix, null if failed to query. 2) Timestamp of output image, null if failed to query. 3) Camera information, null if failed to query</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.5.0) 获取距离指定时间最近的视频帧的预览JPEG图像数据
+        /// </summary>
+        /// <param name="channel">视频通道，0~23</param>
+        /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
+        /// <param name="maxGap">容许的最大间隔，单位秒</param>
+        /// <returns>1. 视频帧的预览JPEG数据，图像宽度为640像素，获取失败则返回null; 2. 图像的时间戳，获取失败则为null; 3. 摄像头信息，获取失败则为null</returns>
+        public static (byte[], Timestamp?, CameraInfo) GetPreviewJpeg(int channel, double timeline, double maxGap)
+        {
+            return Handler.GetPreviewJpeg(channel, timeline, maxGap);
+        }
+
+        /// \~English
+        /// <summary>
         /// Get paths of recent project files
         /// </summary>
         /// <returns>Paths of recent project files</returns>
@@ -1080,6 +1108,7 @@ namespace ASEva
         /// <returns>最近项目文件路径列表</returns>
         public static String[] GetRecentProjectPaths()
         {
+            if (Handler.ClientSide) return null;
             return Handler.GetRecentProjectPaths();
         }
 
@@ -1097,6 +1126,7 @@ namespace ASEva
         /// <returns>Session数据的根路径，若不存在或不属于当前层级则返回null</returns>
         public static String GetSessionPath(SessionIdentifier session)
         {
+            if (Handler.ClientSide) return null;
             return Handler.GetSessionPath(session);
         }
 
@@ -1114,6 +1144,7 @@ namespace ASEva
         /// <returns>Session公共数据的根路径，若不存在或不属于当前层级则返回null</returns>
         public static String GetSessionPublicDataPath(SessionIdentifier session)
         {
+            if (Handler.ClientSide) return null;
             return Handler.GetSessionPublicDataPath(session);
         }
 
@@ -1129,6 +1160,7 @@ namespace ASEva
         /// <returns>所有子数据目录的路径，目录不存在则为null</returns>
         public static String[] GetSubDataPaths()
         {
+            if (Handler.ClientSide) return null;
             return Handler.GetSubDataPaths();
         }
 
@@ -1144,6 +1176,7 @@ namespace ASEva
         /// <returns>临时文件根目录路径</returns>
         public static String GetTempFilesRoot()
         {
+            if (Handler.ClientSide && Handler.BundleMode) return null;
             return Handler.GetTempFilesRoot();
         }
 
@@ -1210,6 +1243,7 @@ namespace ASEva
         /// <returns>是否安装了插件</returns>
         public static Task<bool> InstallPlugin(String dirPath)
         {
+            if (Handler.ClientSide && Handler.BundleMode) return Task.FromResult(false);
             return Handler.InstallPlugin(dirPath);
         }
 
@@ -1226,6 +1260,20 @@ namespace ASEva
         public static bool IsInternetConnected()
         {
             return Handler.IsInternetConnected();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.3.0) Get whether the function of ASEva.AgencyLocal or ASEva.AgencyAsync should be executed in main thread (all return false for client side applications)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.3.0) 获取 ASEva.AgencyLocal 或 ASEva.AgencyAsync 中的函数是否应在主线程中执行（客户端应用程序下全部为false）
+        /// </summary>
+        public static bool IsMainThreadFunction(String funcName)
+        {
+            if (Handler.ClientSide) return false;
+            return Handler.IsMainThreadFunction(funcName);
         }
 
         /// \~English
@@ -1274,6 +1322,7 @@ namespace ASEva
         /// <returns>是否成功新建项目</returns>
         public static Task<bool> NewProject(bool force)
         {
+            if (Handler.ClientSide) return Task.FromResult(false);
             return Handler.NewProject(force);
         }
 
@@ -1293,6 +1342,7 @@ namespace ASEva
         /// <param name="config">初始化配置</param>
         public static Task OpenDialog(object caller, String dialogClassID, String config)
         {
+            if (Handler.ClientSide) return Task.CompletedTask;
             return Handler.OpenDialog(caller, dialogClassID, config);
         }
 
@@ -1312,6 +1362,7 @@ namespace ASEva
         /// <returns>是否成功打开项目</returns>
         public static Task<bool> OpenProject(String projectFile, bool force)
         {
+            if (Handler.ClientSide) return Task.FromResult(false);
             return Handler.OpenProject(projectFile, force);
         }
 
@@ -1425,7 +1476,26 @@ namespace ASEva
         /// <param name="replayer">回放接口，若无则设置额null</param>
         public static void RegisterAudioDriver(AudioDriverInfo driver, AudioRecorder recorder, AudioReplayer replayer)
         {
+            if (Handler.ClientSide) return;
             Handler.RegisterAudioDriver(driver, recorder, replayer);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.4.0) Register audio players on the client side
+        /// </summary>
+        /// <param name="driver">Driver</param>
+        /// <param name="replayer">Players, set to null if there's none</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.0) 在客户端注册音频回放接口
+        /// </summary>
+        /// <param name="driver">驱动信息</param>
+        /// <param name="replayer">回放接口，若无则设置额null</param>
+        public static void RegisterAudioReplayers(AudioDriverInfo driver, AudioReplayer replayer)
+        {
+            if (!Handler.ClientSide) return;
+            Handler.RegisterAudioReplayers(driver, replayer);
         }
 
         /// \~English
@@ -1558,6 +1628,7 @@ namespace ASEva
         /// <param name="fileID">总线协议文件ID</param>
         public static void RemoveBusProtocolFile(BusProtocolFileID fileID)
         {
+            if (Handler.ClientSide) return;
             Handler.RemoveBusProtocolFile(fileID);
         }
 
@@ -1573,6 +1644,7 @@ namespace ASEva
         /// <param name="videoChannel">视频通道，0~23对应A~X</param>
         public static void RemoveProcessorVideoReference(int videoChannel)
         {
+            if (Handler.ClientSide) return;
             Handler.RemoveProcessorVideoReference(videoChannel);
         }
 
@@ -1592,6 +1664,7 @@ namespace ASEva
         /// <param name="funcID">函数ID</param>
         public static void ResetAppFunctionHandler(object caller, String nativeClassID, String funcID)
         {
+            if (Handler.ClientSide) return;
             Handler.ResetAppFunctionHandler(caller, nativeClassID, funcID);
         }
 
@@ -1609,6 +1682,7 @@ namespace ASEva
         /// <returns>是否成功保存项目</returns>
         public static bool SaveCurrentProject(String projectFile)
         {
+            if (Handler.ClientSide) return false;
             return Handler.SaveCurrentProject(projectFile);
         }
 
@@ -1721,6 +1795,7 @@ namespace ASEva
         /// <param name="binary">二进制数据</param>
         public static void SendRawDataWithCPUTick(ulong cpuTick, String channelID, double[] values, byte[] binary)
         {
+            if (Handler.ClientSide) return;
             Handler.SendRawDataWithCPUTick(cpuTick, channelID, values, binary);
         }
 
@@ -1742,6 +1817,7 @@ namespace ASEva
         /// <param name="handler">函数接口</param>
         public static void SetAppFunctionHandler(object caller, String nativeClassID, String funcID, AppFunctionHandler handler)
         {
+            if (Handler.ClientSide) return;
             Handler.SetAppFunctionHandler(caller, nativeClassID, funcID, handler);
         }
 
@@ -1758,40 +1834,6 @@ namespace ASEva
         public static void SetAudioVolume(double volume)
         {
             Handler.SetAudioVolume(volume);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Set whether to monitor that there's data in the specified channel
-        /// </summary>
-        /// <param name="id">Monitor ID, like bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0, etc.</param>
-        /// <param name="monitoring">Whether to monitor (The function should be implemented by plugins, like audio alarm, UI flashing, etc.)</param>
-        /// \~Chinese
-        /// <summary>
-        /// 设置是否监控指定通道有无数据
-        /// </summary>
-        /// <param name="id">监控ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
-        /// <param name="monitoring">是否监控有无数据，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
-        public static void SetChannelMonitoringFlag(String id, bool monitoring)
-        {
-            Handler.SetChannelMonitoringFlag(id, monitoring);
-        }
-
-        /// \~English
-        /// <summary>
-        /// Set whether to monitor that the specified channel's data is synchronized with time server
-        /// </summary>
-        /// <param name="id">Monitor ID, like bus@1, video@0, sample@xxx-v2@0, etc.</param>
-        /// <param name="monitoring">Whether to monitor (The function should be implemented by plugins, like audio alarm, UI flashing, etc.)</param>
-        /// \~Chinese
-        /// <summary>
-        /// 设置是否监控指定通道数据与授时服务器同步
-        /// </summary>
-        /// <param name="id">监控ID，如bus@1, video@0, sample@xxx-v2@0等</param>
-        /// <param name="monitoring">是否监控数据与授时服务器同步，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
-        public static void SetChannelServerSyncMonitoringFlag(String id, bool monitoring)
-        {
-            Handler.SetChannelServerSyncMonitoringFlag(id, monitoring);
         }
 
         /// \~English
@@ -1823,6 +1865,7 @@ namespace ASEva
         /// <param name="path">数据目录的路径</param>
         public static void SetDataPath(String path)
         {
+            if (Handler.ClientSide) return;
             Handler.SetDataPath(path);
         }
 
@@ -1840,6 +1883,7 @@ namespace ASEva
         /// <param name="path">以分号分割的全局路径value，不存在的部分将被忽略</param>
         public static void SetGlobalPath(String key, String path)
         {
+            if (Handler.ClientSide && Handler.BundleMode) return;
             Handler.SetGlobalPath(key, path);
         }
 
@@ -1874,6 +1918,7 @@ namespace ASEva
         /// <param name="path">子数据目录的路径</param>
         public static void SetSubDataPath(int subIndex, String path)
         {
+            if (Handler.ClientSide) return;
             Handler.SetSubDataPath(subIndex, path);
         }
 
@@ -1910,6 +1955,7 @@ namespace ASEva
         /// <returns>是否成功打开</returns>
         public static bool StartProcess(String target)
         {
+            if (Handler.ClientSide && Handler.BundleMode) return false;
             return Handler.StartProcess(target);
         }
 
@@ -1967,6 +2013,7 @@ namespace ASEva
         /// <returns>是否卸载了插件</returns>
         public static bool UninstallPlugin(String packID)
         {
+            if (Handler.ClientSide && Handler.BundleMode) return false;
             return Handler.UninstallPlugin(packID);
         }
 
@@ -2001,6 +2048,7 @@ namespace ASEva
         /// <returns>是否成功更新，false表示未找到文件或MD5不匹配</returns>
         public static bool UpdateBusProtocolFilePath(BusProtocolFileID fileID, String filePath)
         {
+            if (Handler.ClientSide) return false;
             return Handler.UpdateBusProtocolFilePath(fileID, filePath);
         }
     }

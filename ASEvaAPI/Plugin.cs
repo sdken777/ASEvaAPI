@@ -198,7 +198,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Called while get the executable paths needed to be run with auto root privilege
+        /// [Optional] Called while getting the executable paths needed to be run with auto root privilege
         /// </summary>
         /// <returns>The executable paths, only programs without GUI are supported</returns>
         /// \~Chinese
@@ -207,6 +207,18 @@ namespace ASEva
         /// </summary>
         /// <returns>可执行程序路径列表，仅限无界面程序</returns>
         public virtual String[] GetAutoRootTargets() { return null; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.4.5) [Optional] Called while getting the list of preference variable ID
+        /// </summary>
+        /// <returns>The list of preference variable ID</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.5) [可选实现] 获取用户偏好变量ID列表时被调用
+        /// </summary>
+        /// <returns>用户偏好变量ID列表</returns>
+        public virtual String[] GetPreferenceVariables() { return null; }
 
         /// \~English
         /// <summary>

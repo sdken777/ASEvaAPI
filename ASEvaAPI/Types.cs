@@ -263,6 +263,16 @@ namespace ASEva
         /// 运行独立任务中
         /// </summary>
         Tasking,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.4.4) Unknown (For circumstances like getting failed)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.4) 未知（获取失败等情况）
+        /// </summary>
+        Unknown,
     }
 
     /// \~English
@@ -314,6 +324,16 @@ namespace ASEva
         /// 远程采集模式
         /// </summary>
         Remote,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.4.4) Unknown (For circumstances like getting failed)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.4) 未知（获取失败等情况）
+        /// </summary>
+        Unknown,
     }
 
     /// \~English
@@ -336,29 +356,75 @@ namespace ASEva
         /// </summary>
         NoGUI,
 
-        /// \~
+        /// \~English
         /// <summary>
-        /// Windows Forms
+        /// Windows Forms, Windows only
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// Windows Forms，仅限Windows
         /// </summary>
         WindowsForms,
 
-        /// \~
+        /// \~English
         /// <summary>
-        /// Windows Presentation Foundation
+        /// Windows Presentation Foundation, Windows only
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// Windows Presentation Foundation，仅限Windows
         /// </summary>
         WPF,
 
-        /// \~
+        /// \~English
         /// <summary>
-        /// Eto.Forms
+        /// Eto.Forms, for desktop application. Windows, Linux, MacOS supported
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// Eto.Forms，面向桌面应用，支持Windows、Linux、MacOS
         /// </summary>
         Eto,
 
-        /// \~
+        /// \~English
         /// <summary>
-        /// Avalonia
+        /// Avalonia, for desktop application. Windows, Linux, MacOS supported
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// Avalonia，面向桌面应用，支持Windows、Linux、MacOS
         /// </summary>
         Avalonia,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.3.0) Multi-platform App UI, for mobile application. iOS, Android supported
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.3.0) Multi-platform App UI，面向移动应用，支持iOS、安卓
+        /// </summary>
+        MAUI,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.3.0) Blazor WebAssembly, for browser application
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.3.0) Blazor WebAssembly，面向浏览器应用
+        /// </summary>
+        Blazor,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.4.4) Unknown (For circumstances like getting failed)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.4) 未知（获取失败等情况）
+        /// </summary>
+        Unknown,
     }
 
     /// \~English
@@ -1232,6 +1298,16 @@ namespace ASEva
         /// 协议文件内容不匹配
         /// </summary>
         MD5NotCorrect,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.4.4) Unknown (For circumstances like getting failed)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.4) 未知（获取失败等情况）
+        /// </summary>
+        Unknown,
     }
 
     /// \~English
@@ -2654,6 +2730,16 @@ namespace ASEva
         /// 绑定的各原生库版本
         /// </summary>
         public Dictionary<NativeLibraryType, Version> LibraryVersions { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.3.0) Corresponding native plugin's debug ID
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.3.0) 绑定的各原生库的调试编号
+        /// </summary>
+        public Dictionary<NativeLibraryType, uint> LibraryDebugIDs { get; set; }
     }
 
     /// \~English
@@ -4334,5 +4420,148 @@ namespace ASEva
         /// 中文，语言代号为"zh"，默认为简体中文
         /// </summary>
         Chinese = 2,
+    }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.4.0) Data stream types of transfer to client side
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.4.0) 往客户端传输的数据流类型
+    /// </summary>
+    public enum TransferStreamType
+    {
+        /// \~English
+        /// <summary>
+        /// Manual trigger data
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 触发器数据
+        /// </summary>
+        ManualTrigger = 1,
+
+        /// \~English
+        /// <summary>
+        /// Bus message data
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 总线报文数据
+        /// </summary>
+        BusMessage = 2,
+
+        /// \~English
+        /// <summary>
+        /// Video frame data
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 视频帧数据
+        /// </summary>
+        VideoFrame = 3,
+
+        /// \~English
+        /// <summary>
+        /// Audio frame data
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 音频帧数据
+        /// </summary>
+        AudioFrame = 4,
+
+        /// \~English
+        /// <summary>
+        /// Signal data
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 信号数据
+        /// </summary>
+        Signal = 5,
+
+        /// \~English
+        /// <summary>
+        /// General sample data
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 通用样本数据
+        /// </summary>
+        GeneralSample = 6,
+
+        /// \~English
+        /// <summary>
+        /// Point cloud data
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 点云数据
+        /// </summary>
+        PointCloud = 7,
+    }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.4.0) Data stream transfer statistics
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.4.0) 数据流传输统计信息
+    /// </summary>
+    public class TransferStatistics
+    {
+        /// \~English
+        /// <summary>
+        /// Successfully transferred data bytes per second
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 每秒传输成功字节数
+        /// </summary>
+        public ulong SuccessBytesPerSecond { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Transfer failing data bytes per second
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 每秒传输失败字节数
+        /// </summary>
+        public ulong FailBytesPerSecond { get; set; }
+    }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.2.13) GPU decoder test results
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.2.13) GPU解码测试结果
+    /// </summary>
+    public class GPUDecoderTestResults
+    {
+        /// \~English
+        /// <summary>
+        /// Whether the data for testing is available (key is the codec, like mjpeg, h264, m265, etc.)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 测试用数据是否可用（键为编码格式，如mjpeg, h264, h265等）
+        /// </summary>
+        public Dictionary<String, bool> TestDataAvailable { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Test result table. Key is the test item, value is the processable pixels per second (while null means not tested, 0 means failed)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 测试结果，键为测试项，值为每秒可处理像素数（null表示未测试，0表示失败）
+        /// </summary>
+        public Dictionary<String, ulong?> TestResults { get; set; }
     }
 }

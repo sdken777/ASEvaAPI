@@ -188,7 +188,7 @@ namespace ASEva.UIAvalonia
         {
             get
             {
-                var workDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+                var workDir = Path.GetDirectoryName((Assembly.GetEntryAssembly() ?? Assembly.GetExecutingAssembly()).Location);
                 if (Path.GetFileName(workDir) == "MacOS")
                 {
                     var parentDir1 = Path.GetDirectoryName(workDir);

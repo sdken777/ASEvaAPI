@@ -114,6 +114,16 @@ namespace ASEva
         /// 非空闲状态无法运行
         /// </summary> 
         NotIdle = 4,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.4.4) Unknown (For circumstances like getting failed)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.4) 未知（获取失败等情况）
+        /// </summary>
+        Unknown = 5,
     }
 
     /// \~English

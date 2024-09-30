@@ -8,6 +8,7 @@ namespace ASEva
 {
     class AgencyLocalDefault : AgencyLocalHandler
     {
+        public bool BundleMode => false;
         public bool ClientSide => false;
 
         public AddBusProtocolResult AddBusProtocolFile(string filePath, out BusProtocolFileID[] fileIDs)
@@ -116,16 +117,6 @@ namespace ASEva
             return null;
         }
 
-        public string[] GetAllChannelMonitoringKeys()
-        {
-            return null;
-        }
-
-        public string[] GetAllChannelServerSyncMonitoringKeys()
-        {
-            return null;
-        }
-
         public string GetAppFilesRoot()
         {
             return null;
@@ -133,7 +124,7 @@ namespace ASEva
 
         public ApplicationGUI GetAppGUI()
         {
-            return ApplicationGUI.NoGUI;
+            return ApplicationGUI.Unknown;
         }
 
         public string GetAppID()
@@ -146,6 +137,11 @@ namespace ASEva
             return Language.Invalid;
         }
 
+        public BufferRange GetBufferRange()
+        {
+            return new BufferRange();
+        }
+
         public string GetBusProtocolFilePath(BusProtocolFileID fileID)
         {
             return null;
@@ -154,16 +150,6 @@ namespace ASEva
         public BusFileInfo[] GetBusProtocolFilesInfo()
         {
             return null;
-        }
-
-        public bool GetChannelMonitoringFlag(string id)
-        {
-            return false;
-        }
-
-        public bool GetChannelServerSyncMonitoringFlag(string id)
-        {
-            return false;
         }
 
         public string GetConfigFilesRoot()
@@ -241,6 +227,11 @@ namespace ASEva
             return null;
         }
 
+        public double GetInterestTime()
+        {
+            return 0;
+        }
+
         public DateTime? GetInternetNTPTime()
         {
             return null;
@@ -274,6 +265,11 @@ namespace ASEva
         public Dictionary<string, Dictionary<string, string>> GetPluginThirdPartyNotices()
         {
             return null;
+        }
+
+        public (byte[], Timestamp?, CameraInfo) GetPreviewJpeg(int channel, double timeline, double maxGap)
+        {
+            return (null, null, null);
         }
 
         public string[] GetRecentProjectPaths()
@@ -322,6 +318,11 @@ namespace ASEva
         }
 
         public bool IsInternetConnected()
+        {
+            return false;
+        }
+
+        public bool IsMainThreadFunction(String funcName)
         {
             return false;
         }
@@ -378,6 +379,10 @@ namespace ASEva
         }
 
         public void RegisterAudioDriver(AudioDriverInfo driver, AudioRecorder recorder, AudioReplayer replayer)
+        {
+        }
+
+        public void RegisterAudioReplayers(AudioDriverInfo driver, AudioReplayer replayer)
         {
         }
 
@@ -463,14 +468,6 @@ namespace ASEva
         {
         }
 
-        public void SetChannelMonitoringFlag(string id, bool monitoring)
-        {
-        }
-
-        public void SetChannelServerSyncMonitoringFlag(string id, bool monitoring)
-        {
-        }
-
         public void SetCurrentDialogTitle(string title, object icon)
         {
         }
@@ -529,7 +526,17 @@ namespace ASEva
     {
         public bool SyncMode => false;
 
+        public Task AddBusMessageReference(int busChannel)
+        {
+            return Task.CompletedTask;
+        }
+
         public Task AddDataLayer(string layer)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task AddPointCloudReference(int channel)
         {
             return Task.CompletedTask;
         }
@@ -537,6 +544,11 @@ namespace ASEva
         public Task AddSignalReference(string signalID)
         {
             return Task.CompletedTask;
+        }
+
+        public Task<byte[]> CallNativeFunction(object caller, string nativeClassID, string funcID, byte[] input)
+        {
+            return Task.FromResult<byte[]>(null);
         }
 
         public Task<TimeWithSession> ConvertTimeIntoSession(double timeline)
@@ -589,6 +601,16 @@ namespace ASEva
             return Task.FromResult<string[]>(null);
         }
 
+        public Task<string[]> GetAllChannelMonitoringKeys()
+        {
+            return Task.FromResult<string[]>(null);
+        }
+
+        public Task<string[]> GetAllChannelServerSyncMonitoringKeys()
+        {
+            return Task.FromResult<string[]>(null);
+        }
+
         public Task<Dictionary<string, DeviceStatusDetail>> GetAllDeviceStatus()
         {
             return Task.FromResult<Dictionary<string, DeviceStatusDetail>>(null);
@@ -601,7 +623,7 @@ namespace ASEva
 
         public Task<ApplicationGUI> GetAppGUI()
         {
-            return Task.FromResult<ApplicationGUI>(ApplicationGUI.NoGUI);
+            return Task.FromResult<ApplicationGUI>(ApplicationGUI.Unknown);
         }
 
         public Task<string> GetAppID()
@@ -616,12 +638,12 @@ namespace ASEva
 
         public Task<ApplicationMode> GetAppMode()
         {
-            return Task.FromResult<ApplicationMode>(ApplicationMode.Replay);
+            return Task.FromResult<ApplicationMode>(ApplicationMode.Unknown);
         }
 
         public Task<ApplicationStatus> GetAppStatus()
         {
-            return Task.FromResult<ApplicationStatus>(ApplicationStatus.Idle);
+            return Task.FromResult<ApplicationStatus>(ApplicationStatus.Unknown);
         }
 
         public Task<double> GetAudioChannelDelayConfig()
@@ -726,7 +748,7 @@ namespace ASEva
 
         public Task<BusProtocolFileState> GetBusProtocolFileState(BusProtocolFileID fileID)
         {
-            return Task.FromResult<BusProtocolFileState>(BusProtocolFileState.OK);
+            return Task.FromResult<BusProtocolFileState>(BusProtocolFileState.Unknown);
         }
 
         public Task<BusSignalInfo> GetBusSignalInfo(string busSignalID)
@@ -752,6 +774,16 @@ namespace ASEva
         public Task<Timestamp[]> GetChannelLatestTimestamps(string channelID)
         {
             return Task.FromResult<Timestamp[]>(null);
+        }
+
+        public Task<bool> GetChannelMonitoringFlag(string id)
+        {
+            return Task.FromResult(false);
+        }
+
+        public Task<bool> GetChannelServerSyncMonitoringFlag(string id)
+        {
+            return Task.FromResult(false);
         }
 
         public Task<Dictionary<string, bool>> GetChannelStatusTable(uint? tolerance)
@@ -917,6 +949,11 @@ namespace ASEva
         public Task<PosixTimeModel> GetGNSSPosixTimeModel(SessionIdentifier session)
         {
             return Task.FromResult<PosixTimeModel>(null);
+        }
+
+        public Task<GPUDecoderTestResults> GetGPUDecoderTestResults()
+        {
+            return Task.FromResult((GPUDecoderTestResults)null);
         }
 
         public Task<GraphData> GetGraphData(SessionIdentifier session, int graphID)
@@ -1231,7 +1268,7 @@ namespace ASEva
 
         public Task<SpecialCameraType> GetVideoSpecialType(int channel)
         {
-            return Task.FromResult<SpecialCameraType>(SpecialCameraType.Normal);
+            return Task.FromResult<SpecialCameraType>(SpecialCameraType.Unknown);
         }
 
         public Task<bool> IsBusMessageBound(string busMessageID)
@@ -1304,12 +1341,22 @@ namespace ASEva
             return Task.CompletedTask;
         }
 
+        public Task RemoveBusMessageReference(int busChannel)
+        {
+            return Task.CompletedTask;
+        }
+
         public Task RemoveEvent(object eventHandle)
         {
             return Task.CompletedTask;
         }
 
         public Task RemoveGeneration(SessionIdentifier session, string genID)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task RemovePointCloudReference(int channel)
         {
             return Task.CompletedTask;
         }
@@ -1336,7 +1383,7 @@ namespace ASEva
 
         public Task<(TaskResult, string)> RunStandaloneTask(object caller, string taskClassID, string config)
         {
-            return Task.FromResult<(TaskResult, string)>((TaskResult.TaskInitFailed, null));
+            return Task.FromResult<(TaskResult, string)>((TaskResult.Unknown, null));
         }
 
         public Task SendBusMessage(BusMessage message)
@@ -1370,6 +1417,16 @@ namespace ASEva
         }
 
         public Task SetChannelGuestSyncFlag(string id, bool guestSync)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetChannelMonitoringFlag(string id, bool monitoring)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task SetChannelServerSyncMonitoringFlag(string id, bool monitoring)
         {
             return Task.CompletedTask;
         }

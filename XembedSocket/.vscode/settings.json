@@ -1,17 +1,7 @@
 {
     "files.exclude": {
-        "Debug": true,
-        "Release": true,
-        ".project": true,
-        ".cproject": true,
-        ".settings": true,
-        "*.vcxproj": true,
-        "*.vcxproj.user": true,
-        "*.vcxproj.filters": true
-    },
-    "files.associations": {
-        "xlib.h": "c",
-        "stdlib.h": "c",
-        "xembed.h": "c"
+        "obj": true,
+        "bin*": true,
+        ".gitignore": true
     }
 }

@@ -64,6 +64,7 @@ namespace ASEva.UIGtk
             }
             if (context != IntPtr.Zero)
             {
+                WebViewHandler.PreInitializeSettings();
                 Linux.glXDestroyContext(display, context);
                 context = IntPtr.Zero;
             }

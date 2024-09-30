@@ -49,7 +49,8 @@ namespace ASEva
         /// <param name="layer">数据层级</param>
         public static void AddDataLayer(String layer)
         {
-            AgencyAsync.AddDataLayer(layer);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.AddDataLayer(layer).Wait();
         }
 
         /// \~English
@@ -109,7 +110,8 @@ namespace ASEva
         /// <param name="signalID">信号ID</param>
         public static void AddSignalReference(String signalID)
         {
-            AgencyAsync.AddSignalReference(signalID);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.AddSignalReference(signalID).Wait();
         }
 
         /// \~English
@@ -399,7 +401,8 @@ namespace ASEva
         /// <param name="layer">数据层级</param>
         public static void DeleteDataLayer(String layer)
         {
-            AgencyAsync.DeleteDataLayer(layer);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.DeleteDataLayer(layer).Wait();
         }
 
         /// \~English
@@ -451,7 +454,8 @@ namespace ASEva
         /// </summary>
         public static void DisableAllConfigs()
         {
-            AgencyAsync.DisableAllConfigs();
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.DisableAllConfigs().Wait();
         }
 
         /// \~English
@@ -481,7 +485,8 @@ namespace ASEva
         /// <param name="classID">组件的类别ID</param>
         public static void DisableModule(object caller, String classID)
         {
-            AgencyAsync.DisableModule(caller, classID);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.DisableModule(caller, classID).Wait();
         }
 
         /// \~English
@@ -551,7 +556,8 @@ namespace ASEva
         /// <param name="data">数据，不可为null</param>
         public static void EnqueueDataToNative(object caller, String nativeClassID, String dataID, byte[] data)
         {
-            AgencyAsync.EnqueueDataToNative(caller, nativeClassID, dataID, data);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.EnqueueDataToNative(caller, nativeClassID, dataID, data).Wait();
         }
 
         /// \~English
@@ -582,7 +588,8 @@ namespace ASEva
         /// <returns>正在监控有无数据的通道ID列表</returns>
         public static string[] GetAllChannelMonitoringKeys()
         {
-            return AgencyLocal.GetAllChannelMonitoringKeys();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetAllChannelMonitoringKeys().Result;
         }
 
         /// \~English
@@ -597,7 +604,8 @@ namespace ASEva
         /// <returns>正在监控数据与授时服务器同步的通道ID列表</returns>
         public static String[] GetAllChannelServerSyncMonitoringKeys()
         {
-            return AgencyLocal.GetAllChannelServerSyncMonitoringKeys();
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetAllChannelServerSyncMonitoringKeys().Result;
         }
 
         /// \~English
@@ -704,7 +712,7 @@ namespace ASEva
         /// <returns>应用程序运行模式</returns>
         public static ApplicationMode GetAppMode()
         {
-            if (!AgencyAsync.SyncMode) return ApplicationMode.Replay;
+            if (!AgencyAsync.SyncMode) return ApplicationMode.Unknown;
             return AgencyAsync.GetAppMode().Result;
         }
 
@@ -720,7 +728,7 @@ namespace ASEva
         /// <returns>应用程序运行状态</returns>
         public static ApplicationStatus GetAppStatus()
         {
-            if (!AgencyAsync.SyncMode) return ApplicationStatus.Idle;
+            if (!AgencyAsync.SyncMode) return ApplicationStatus.Unknown;
             return AgencyAsync.GetAppStatus().Result;
         }
 
@@ -898,26 +906,25 @@ namespace ASEva
         /// <returns>数据缓存范围</returns>
         public static BufferRange GetBufferRange()
         {
-            if (!AgencyAsync.SyncMode) return new BufferRange();
-            return AgencyAsync.GetBufferRange().Result;
+            return AgencyLocal.GetBufferRange();
         }
 
         /// \~English
         /// <summary>
         /// Get time shift configuration for bus raw data channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <returns>Time shift, in milliseconds</returns>
         /// \~Chinese
         /// <summary>
         /// 获取总线数据通道延迟配置
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <returns>延迟配置，单位毫秒</returns>
-        public static double GetBusChannelDelayConfig(int channel)
+        public static double GetBusChannelDelayConfig(int busChannel)
         {
             if (!AgencyAsync.SyncMode) return 0;
-            return AgencyAsync.GetBusChannelDelayConfig(channel).Result;
+            return AgencyAsync.GetBusChannelDelayConfig(busChannel).Result;
         }
 
         /// \~English
@@ -942,20 +949,20 @@ namespace ASEva
         /// <summary>
         /// Get whether there's data in a bus channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <param name="toleranceMillisecond">How many milliseconds (realistic time) can be tolerated without data</param>
         /// <returns>Whether there's data</returns>
         /// \~Chinese
         /// <summary>
         /// 获取总线数据通道状态
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <param name="toleranceMillisecond">无数据的容忍时长</param>
         /// <returns>是否有数据</returns>
-        public static bool GetBusChannelStatus(int channel/* 1~16 */, uint? toleranceMillisecond)
+        public static bool GetBusChannelStatus(int busChannel, uint? toleranceMillisecond)
         {
             if (!AgencyAsync.SyncMode) return false;
-            return AgencyAsync.GetBusChannelStatus(channel, toleranceMillisecond).Result;
+            return AgencyAsync.GetBusChannelStatus(busChannel, toleranceMillisecond).Result;
         }
 
         /// \~English
@@ -978,40 +985,40 @@ namespace ASEva
         /// <summary>
         /// Get frame rate of messages with the same local ID at the same channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <param name="localID">Local ID of bus message</param>
         /// <returns>Frame rate, 0 means invalid</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定通道收到的指定ID报文的帧率
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <param name="localID">通道内的报文ID</param>
         /// <returns>每秒帧率，0表示无效</returns>
-        public static float GetBusMessageFPS(int channel, uint localID)
+        public static float GetBusMessageFPS(int busChannel, uint localID)
         {
             if (!AgencyAsync.SyncMode) return 0;
-            return AgencyAsync.GetBusMessageFPS(channel, localID).Result;
+            return AgencyAsync.GetBusMessageFPS(busChannel, localID).Result;
         }
 
         /// \~English
         /// <summary>
         /// Get information of message with the specified local ID at the specified channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <param name="localID">Local ID of bus message</param>
         /// <returns>Message information, null if not found</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定通道上指定ID报文信息
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <param name="localID">通道内的报文ID</param>
         /// <returns>总线报文信息，无信息则返回null</returns>
-        public static BusMessageInfo GetBusMessageInfoByLocalID(int channel, uint localID)
+        public static BusMessageInfo GetBusMessageInfoByLocalID(int busChannel, uint localID)
         {
             if (!AgencyAsync.SyncMode) return null;
-            return AgencyAsync.GetBusMessageInfoByLocalID(channel, localID).Result;
+            return AgencyAsync.GetBusMessageInfoByLocalID(busChannel, localID).Result;
         }
 
         /// \~English
@@ -1036,18 +1043,18 @@ namespace ASEva
         /// <summary>
         /// Get payload of bus channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <returns>Payload in percentages, null if unavailable</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定总线通道的负载百分比
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <returns>总线通道的负载百分比，若无效则返回null</returns>
-        public static double? GetBusPayloadPercentage(int channel)
+        public static double? GetBusPayloadPercentage(int busChannel)
         {
             if (!AgencyAsync.SyncMode) return null;
-            return AgencyAsync.GetBusPayloadPercentage(channel).Result;
+            return AgencyAsync.GetBusPayloadPercentage(busChannel).Result;
         }
 
         /// \~English
@@ -1130,7 +1137,7 @@ namespace ASEva
         /// <returns>文件状态</returns>
         public static BusProtocolFileState GetBusProtocolFileState(BusProtocolFileID fileID)
         {
-            if (!AgencyAsync.SyncMode) return BusProtocolFileState.OK;
+            if (!AgencyAsync.SyncMode) return BusProtocolFileState.Unknown;
             return AgencyAsync.GetBusProtocolFileState(fileID).Result;
         }
 
@@ -1237,7 +1244,8 @@ namespace ASEva
         /// <returns>是否监控有无数据</returns>
         public static bool GetChannelMonitoringFlag(String id)
         {
-            return AgencyLocal.GetChannelMonitoringFlag(id);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.GetChannelMonitoringFlag(id).Result;
         }
 
         /// \~English
@@ -1254,7 +1262,8 @@ namespace ASEva
         /// <returns>是否监控指定通道数据与授时服务器同步</returns>
         public static bool GetChannelServerSyncMonitoringFlag(String id)
         {
-            return AgencyLocal.GetChannelServerSyncMonitoringFlag(id);
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.GetChannelServerSyncMonitoringFlag(id).Result;
         }
 
         /// \~English
@@ -1321,7 +1330,6 @@ namespace ASEva
         /// <returns>配置文件根目录路径</returns>
         public static String GetConfigFilesRoot()
         {
-            if (!AgencyAsync.SyncMode) return null;
             return AgencyLocal.GetConfigFilesRoot();
         }
 
@@ -1997,6 +2005,20 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.2.13) Get GPU decoder test results
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.2.13) 获取GPU解码测试结果
+        /// </summary>
+        public static GPUDecoderTestResults GetGPUDecoderTestResults()
+        {
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetGPUDecoderTestResults().Result;
+        }
+
+        /// \~English
+        /// <summary>
         /// Get graph's data
         /// </summary>
         /// <param name="session">Session ID</param>
@@ -2163,8 +2185,7 @@ namespace ASEva
         /// <returns>在时间线上的兴趣点，单位秒</returns>
         public static double GetInterestTime()
         {
-            if (!AgencyAsync.SyncMode) return 0;
-            return AgencyAsync.GetInterestTime().Result;
+            return AgencyLocal.GetInterestTime();
         }
 
         /// \~English
@@ -2540,13 +2561,7 @@ namespace ASEva
         /// <returns>视频帧的预览JPEG数据，图像宽度为640像素，获取失败则返回null</returns>
         public static byte[] GetPreviewJpeg(int channel, double timeline, double maxGap, out Timestamp? timestamp, out CameraInfo cameraInfo)
         {
-            if (!AgencyAsync.SyncMode)
-            {
-                timestamp = null;
-                cameraInfo = null;
-                return null;
-            }
-            var result = AgencyAsync.GetPreviewJpeg(channel, timeline, maxGap).Result;
+            var result = AgencyLocal.GetPreviewJpeg(channel, timeline, maxGap);
             timestamp = result.Item2;
             cameraInfo = result.Item3;
             return result.Item1;
@@ -3316,7 +3331,7 @@ namespace ASEva
         /// <returns>特殊摄像头类型</returns>
         public static SpecialCameraType GetVideoSpecialType(int channel)
         {
-            if (!AgencyAsync.SyncMode) return SpecialCameraType.Normal;
+            if (!AgencyAsync.SyncMode) return SpecialCameraType.Unknown;
             return AgencyAsync.GetVideoSpecialType(channel).Result;
         }
 
@@ -3437,6 +3452,19 @@ namespace ASEva
         public static bool IsInternetConnected()
         {
             return AgencyLocal.IsInternetConnected();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.3.1) Get whether the function of ASEva.Agency will be executed in main thread (unavailable for client side applications)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.3.1) 获取 ASEva.Agency 中的函数是否在主线程中执行（客户端应用程序下不可用）
+        /// </summary>
+        public static bool IsMainThreadFunction(String funcName)
+        {
+            return AgencyLocal.IsMainThreadFunction(funcName);
         }
 
         /// \~English
@@ -3756,7 +3784,8 @@ namespace ASEva
         /// </summary>
         public static void RefreshGenerations()
         {
-            AgencyAsync.RefreshGenerations();
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.RefreshGenerations().Wait();
         }
 
         /// \~English
@@ -3769,7 +3798,8 @@ namespace ASEva
         /// </summary>
         public static void RefreshSessions()
         {
-            AgencyAsync.RefreshSessions();
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.RefreshSessions().Wait();
         }
 
         /// \~English
@@ -3789,6 +3819,23 @@ namespace ASEva
         public static void RegisterAudioDriver(AudioDriverInfo driver, AudioRecorder recorder, AudioReplayer replayer)
         {
             AgencyLocal.RegisterAudioDriver(driver, recorder, replayer);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.4.0) Register audio players on the client side
+        /// </summary>
+        /// <param name="driver">Driver</param>
+        /// <param name="replayer">Players, set to null if there's none</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.4.0) 在客户端注册音频回放接口
+        /// </summary>
+        /// <param name="driver">驱动信息</param>
+        /// <param name="replayer">回放接口，若无则设置额null</param>
+        public static void RegisterAudioReplayers(AudioDriverInfo driver, AudioReplayer replayer)
+        {
+            AgencyLocal.RegisterAudioReplayers(driver, replayer);
         }
 
         /// \~English
@@ -3936,7 +3983,8 @@ namespace ASEva
         /// <param name="eventHandle">事件对象</param>
         public static void RemoveEvent(object eventHandle)
         {
-            AgencyAsync.RemoveEvent(eventHandle);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.RemoveEvent(eventHandle).Wait();
         }
 
         /// \~English
@@ -3953,7 +4001,8 @@ namespace ASEva
         /// <param name="genID">Generation ID</param>
         public static void RemoveGeneration(SessionIdentifier session, String genID)
         {
-            AgencyAsync.RemoveGeneration(session, genID);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.RemoveGeneration(session, genID).Wait();
         }
 
         /// \~English
@@ -4003,7 +4052,8 @@ namespace ASEva
         /// <param name="signalID">信号ID</param>
         public static void RemoveSignalReference(String signalID)
         {
-            AgencyAsync.RemoveSignalReference(signalID);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.RemoveSignalReference(signalID).Wait();
         }
 
         /// \~English
@@ -4035,7 +4085,8 @@ namespace ASEva
         /// </summary>
         public static void ResetGPUDecoderTestResults()
         {
-            AgencyAsync.ResetGPUDecoderTestResults();
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.ResetGPUDecoderTestResults().Wait();
         }
 
         /// \~English
@@ -4052,7 +4103,8 @@ namespace ASEva
         /// <param name="consoleClassID">控制台组件ID</param>
         public static void RunConsole(object caller, string consoleClassID)
         {
-            AgencyAsync.RunConsole(caller, consoleClassID);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.RunConsole(caller, consoleClassID).Wait();
         }
 
         /// \~English
@@ -4078,7 +4130,7 @@ namespace ASEva
             if (!AgencyAsync.SyncMode)
             {
                 returnValue = null;
-                return TaskResult.TaskInitFailed;
+                return TaskResult.Unknown;
             }
             var result = AgencyAsync.RunStandaloneTask(caller, taskClassID, config).Result;
             returnValue = result.Item2;
@@ -4205,7 +4257,8 @@ namespace ASEva
         /// <param name="message">想要发送的报文信息</param>
         public static void SendBusMessage(BusMessage message)
         {
-            AgencyAsync.SendBusMessage(message);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SendBusMessage(message).Wait();
         }
 
         /// \~English
@@ -4240,7 +4293,8 @@ namespace ASEva
         /// <param name="channel">手动触发器通道，0~15</param>
         public static void SendManualTrigger(int channel)
         {
-            AgencyAsync.SendManualTrigger(channel);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SendManualTrigger(channel).Wait();
         }
 
         /// \~English
@@ -4259,7 +4313,8 @@ namespace ASEva
         /// <param name="binary">二进制数据</param>
         public static void SendRawData(String channelID, double[] values, byte[] binary)
         {
-            AgencyAsync.SendRawData(channelID, values, binary);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SendRawData(channelID, values, binary).Wait();
         }
 
         /// \~English
@@ -4316,7 +4371,8 @@ namespace ASEva
         /// <param name="delay">延迟配置，单位毫秒</param>
         public static void SetAudioChannelDelayConfig(double delay)
         {
-            AgencyAsync.SetAudioChannelDelayConfig(delay);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetAudioChannelDelayConfig(delay).Wait();
         }
 
         /// \~English
@@ -4338,17 +4394,18 @@ namespace ASEva
         /// <summary>
         /// Set time shift for bus raw data channel
         /// </summary>
-        /// <param name="channel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// <param name="delay">Time shift, in milliseconds</param>
         /// \~Chinese
         /// <summary>
         /// 设置总线数据通道延迟配置
         /// </summary>
-        /// <param name="channel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~16</param>
         /// <param name="delay">延迟配置，单位毫秒</param>
-        public static void SetBusChannelDelayConfig(int channel, double delay)
+        public static void SetBusChannelDelayConfig(int busChannel, double delay)
         {
-            AgencyAsync.SetBusChannelDelayConfig(channel, delay);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetBusChannelDelayConfig(busChannel, delay).Wait();
         }
 
         /// \~English
@@ -4365,7 +4422,8 @@ namespace ASEva
         /// <param name="guestSync">是否配置为客机同步</param>
         public static void SetChannelGuestSyncFlag(String id, bool guestSync)
         {
-            AgencyAsync.SetChannelGuestSyncFlag(id, guestSync);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetChannelGuestSyncFlag(id, guestSync).Wait();
         }
 
         /// \~English
@@ -4382,7 +4440,8 @@ namespace ASEva
         /// <param name="monitoring">是否监控有无数据，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
         public static void SetChannelMonitoringFlag(String id, bool monitoring)
         {
-            AgencyLocal.SetChannelMonitoringFlag(id, monitoring);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetChannelMonitoringFlag(id, monitoring).Wait();
         }
 
         /// \~English
@@ -4399,7 +4458,8 @@ namespace ASEva
         /// <param name="monitoring">是否监控数据与授时服务器同步，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
         public static void SetChannelServerSyncMonitoringFlag(String id, bool monitoring)
         {
-            AgencyLocal.SetChannelServerSyncMonitoringFlag(id, monitoring);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetChannelServerSyncMonitoringFlag(id, monitoring).Wait();
         }
 
         /// \~English
@@ -4434,7 +4494,8 @@ namespace ASEva
         /// <param name="layer">数据层级，其中null表示所有层级，'.'表示根路径下的session，'..'表示根路径即session</param>
         public static void SetCurrentDataLayer(String layer)
         {
-            AgencyAsync.SetCurrentDataLayer(layer);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetCurrentDataLayer(layer).Wait();
         }
 
         /// \~English
@@ -4483,7 +4544,8 @@ namespace ASEva
         /// <param name="comment">事件注释</param>
         public static void SetEventComment(object eventHandle, String comment)
         {
-            AgencyAsync.SetEventComment(eventHandle, comment);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetEventComment(eventHandle, comment).Wait();
         }
 
         /// \~English
@@ -4500,7 +4562,8 @@ namespace ASEva
         /// <param name="value">全局参数value，若为null则忽略</param>
         public static void SetGlobalParameter(String key, String value)
         {
-            AgencyAsync.SetGlobalParameter(key, value);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetGlobalParameter(key, value).Wait();
         }
 
         /// \~English
@@ -4549,7 +4612,8 @@ namespace ASEva
         /// <param name="targetTimeline">时间线</param>
         public static void SetInterestTime(double targetTimeline)
         {
-            AgencyAsync.SetInterestTime(targetTimeline);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetInterestTime(targetTimeline).Wait();
         }
 
         /// \~English
@@ -4564,7 +4628,8 @@ namespace ASEva
         /// <param name="targetTimestamp">本地日期时间</param>
         public static void SetInterestTimestamp(DateTime targetTimestamp)
         {
-            AgencyAsync.SetInterestTimestamp(targetTimestamp);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetInterestTimestamp(targetTimestamp).Wait();
         }
 
         /// \~English
@@ -4581,7 +4646,8 @@ namespace ASEva
         /// <param name="name">手动触发器通道的名称，若值为空则忽略</param>
         public static void SetManualTriggerName(int index, String name)
         {
-            AgencyAsync.SetManualTriggerName(index, name);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetManualTriggerName(index, name).Wait();
         }
 
         /// \~English
@@ -4600,7 +4666,8 @@ namespace ASEva
         /// <param name="config">配置的字符串描述</param>
         public static void SetModuleConfig(object caller, String classID, String config)
         {
-            AgencyAsync.SetModuleConfig(caller, classID, config);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetModuleConfig(caller, classID, config).Wait();
         }
 
         /// \~English
@@ -4617,7 +4684,8 @@ namespace ASEva
         /// <param name="delay">延迟配置，单位毫秒</param>
         public static void SetRawChannelDelayConfig(String id, double delay)
         {
-            AgencyAsync.SetRawChannelDelayConfig(id, delay);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetRawChannelDelayConfig(id, delay).Wait();
         }
 
         /// \~English
@@ -4634,7 +4702,8 @@ namespace ASEva
         /// <param name="check">是否框选</param>
         public static void SetSessionChecker(SessionIdentifier session, bool check)
         {
-            AgencyAsync.SetSessionChecker(session, check);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetSessionChecker(session, check).Wait();
         }
 
         /// \~English
@@ -4651,7 +4720,8 @@ namespace ASEva
         /// <param name="comment">Session的注释说明</param>
         public static void SetSessionComment(SessionIdentifier session, String comment)
         {
-            AgencyAsync.SetSessionComment(session, comment);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetSessionComment(session, comment).Wait();
         }
 
         /// \~English
@@ -4668,7 +4738,8 @@ namespace ASEva
         /// <param name="hostSync">主机是否与授时服务器同步</param>
         public static void SetSessionHostSync(SessionIdentifier session, bool hostSync)
         {
-            AgencyAsync.SetSessionHostSync(session, hostSync);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetSessionHostSync(session, hostSync).Wait();
         }
 
         /// \~English
@@ -4685,7 +4756,8 @@ namespace ASEva
         /// <param name="properties">Session的属性表</param>
         public static void SetSessionProperties(SessionIdentifier session, Dictionary<String, String> properties)
         {
-            AgencyAsync.SetSessionProperties(session, properties);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetSessionProperties(session, properties).Wait();
         }
 
         /// \~English
@@ -4700,7 +4772,8 @@ namespace ASEva
         /// <param name="keyword">session搜索关键字</param>
         public static void SetSessionSearchKeyword(String keyword)
         {
-            AgencyAsync.SetSessionSearchKeyword(keyword);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetSessionSearchKeyword(keyword).Wait();
         }
 
         /// \~English
@@ -4732,7 +4805,8 @@ namespace ASEva
         /// <param name="speed">目标回放速度</param>
         public static void SetTargetReplaySpeed(double speed)
         {
-            AgencyAsync.SetTargetReplaySpeed(speed);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetTargetReplaySpeed(speed).Wait();
         }
 
         /// \~English
@@ -4749,7 +4823,8 @@ namespace ASEva
         /// <param name="delay">延迟配置，单位毫秒</param>
         public static void SetVideoChannelDelayConfig(int channel, double delay)
         {
-            AgencyAsync.SetVideoChannelDelayConfig(channel, delay);
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.SetVideoChannelDelayConfig(channel, delay).Wait();
         }
 
         /// \~English

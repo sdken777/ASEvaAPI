@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace ASEva.UIAvalonia
 {
-    #pragma warning disable CS1571
+    #pragma warning disable CS1571, CS0414
 
     /// \~English
     /// <summary>
@@ -26,6 +26,9 @@ namespace ASEva.UIAvalonia
         /// </summary>
         public static bool EnableWpfEmbedder()
         {
+#if ASEVA_API_BUNDLE_MODE
+            return false;
+#else
             if (winformHostType != null) return true;
 
             var dllPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + Path.DirectorySeparatorChar + "WinformWpfConverter.dll";
@@ -45,6 +48,7 @@ namespace ASEva.UIAvalonia
 
             winformHostType = type;
             return true;
+#endif
         }
 
         /// \~English
@@ -64,6 +68,7 @@ namespace ASEva.UIAvalonia
             if (anyWindowPanel == null) return null;
             if (anyWindowPanel is WindowPanel) return anyWindowPanel as WindowPanel;
             
+#if !ASEVA_API_BUNDLE_MODE
             var etoWindowPanel = UIEto.App.ConvertWindowPanelToEto(anyWindowPanel);
             if (etoWindowPanel != null)
             {
@@ -90,7 +95,7 @@ namespace ASEva.UIAvalonia
                     }
                 }
             }
-
+#endif
             return null;
         }
 
@@ -111,6 +116,7 @@ namespace ASEva.UIAvalonia
             if (anyConfigPanel == null) return null;
             if (anyConfigPanel is ConfigPanel) return anyConfigPanel as ConfigPanel;
             
+#if !ASEVA_API_BUNDLE_MODE
             var etoConfigPanel = UIEto.App.ConvertConfigPanelToEto(anyConfigPanel);
             if (etoConfigPanel != null)
             {
@@ -137,7 +143,7 @@ namespace ASEva.UIAvalonia
                     }
                 }
             }
-
+#endif
             return null;
         }
 
