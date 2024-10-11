@@ -314,19 +314,29 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Required][OK for modal] Install plugins
+        /// Deprecated. Please implement OnInstallPlugin(libs, drivers, WorkflowInstallPluginCallback callback)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 已弃用，应实现OnInstallPlugin(libs, drivers, WorkflowInstallPluginCallback callback)
+        /// </summary>
+        public virtual Task OnInstallPlugin(InstallPluginLibraryInfo[] libs, InstallPluginDriverInfo[] drivers, WorkflowInstallCallback callback) { return Task.CompletedTask; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.5.2) [Required][OK for modal] Install plugins
         /// </summary>
         /// <param name="libs">Information of related library files</param>
         /// <param name="drivers">Information of related driver or environment pack</param>
         /// <param name="callback">Framework callback interface</param>
         /// \~Chinese
         /// <summary>
-        /// [必须实现][可含模态] 安装插件
+        /// (api:app=3.5.2) [必须实现][可含模态] 安装插件
         /// </summary>
         /// <param name="libs">插件关联的库信息列表</param>
         /// <param name="drivers">插件关联的驱动和环境信息列表</param>
         /// <param name="callback">框架软件的回调接口</param>
-        public virtual Task OnInstallPlugin(InstallPluginLibraryInfo[] libs, InstallPluginDriverInfo[] drivers, WorkflowInstallCallback callback) { return Task.CompletedTask; }
+        public virtual Task OnInstallPlugin(InstallPluginLibraryInfo[] libs, InstallPluginDriverInfo[] drivers, WorkflowInstallPluginCallback callback) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
@@ -1283,38 +1293,54 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.2.4) Plugin installation callback used by workflow
+    /// (api:app=3.2.4) Deprecated. Please implement OnInstallPlugin(libs, drivers, WorkflowInstallPluginCallback callback)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.2.4) 在流程中使用的安装插件的回调接口
+    /// (api:app=3.2.4) 已弃用，应实现OnInstallPlugin(libs, drivers, WorkflowInstallPluginCallback callback)
     /// </summary>
     public interface WorkflowInstallCallback
+    {
+        Task InstallLibrary(String libraryID);
+        Task<String> PrepareDriver(String driverID);
+    }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.5.2) Plugin installation callback used by workflow
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.5.2) 在流程中使用的安装插件的回调接口
+    /// </summary>
+    public interface WorkflowInstallPluginCallback
     {
         /// \~English
         /// <summary>
         /// Install library files
         /// </summary>
         /// <param name="libraryID">Related library ID</param>
+        /// <returns>Error message, null if succeeded</returns>
         /// \~Chinese
         /// <summary>
         /// 安装库文件
         /// </summary>
         /// <param name="libraryID">插件关联的库ID</param>
-        Task InstallLibrary(String libraryID);
+        /// <returns>错误信息，若安装成功则为null</returns>
+        String InstallLibrary(String libraryID);
 
         /// \~English
         /// <summary>
         /// Prepare driver or environment pack, and return the executable path for installation
         /// </summary>
         /// <param name="driverID">Related driver ID</param>
-        /// <returns>Executable path for installation</returns>
+        /// <returns>1) Executable path for installation. 2) Error message, null if succeeded</returns>
         /// \~Chinese
         /// <summary>
         /// 准备驱动和环境等的文件，并返回安装文件的运行路径
         /// </summary>
         /// <param name="driverID">插件关联的驱动ID</param>
-        /// <returns>安装文件的运行路径</returns>
-        Task<String> PrepareDriver(String driverID);
+        /// <returns>1. 安装文件的运行路径; 2. 错误信息，若安装成功则为null</returns>
+        (String, String) PrepareDriver(String driverID);
     }
 }
