@@ -8424,7 +8424,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.5.2
+            version=3.5.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -9566,16 +9566,24 @@
         <member name="M:ASEva.ConsoleClass.RunConsole(ASEva.ConsoleIO,System.Boolean)">
             \~English
             <summary>
-            (api:app=3.2.7) [Required] Called while running console procedure
+            (api:app=3.2.7) Deprecated. Please implement RunConsole(ConsoleIO)
             </summary>
-            <param name="io">Console interaction interface. The procedure should end immediately if any method of this interface that returns false (interrupted)</param>
-            <param name="machineText">Whether the text of messages and options given to the interaction interface should be ID or JSON string that is easy to parse by the machine. Otherwise it should be text that is easy to read by humans</param>
             \~Chinese
             <summary>
-            (api:app=3.2.7) [必须实现] 运行控制台过程时被调用
+            (api:app=3.2.7) 已弃用，应实现RunConsole(ConsoleIO)
+            </summary>
+        </member>
+        <member name="M:ASEva.ConsoleClass.RunConsole(ASEva.ConsoleIO)">
+            \~English
+            <summary>
+            (api:app=3.5.3) [Required] Called while running console procedure
+            </summary>
+            <param name="io">Console interaction interface. The procedure should end immediately if any method of this interface that returns false (interrupted)</param>
+            \~Chinese
+            <summary>
+            (api:app=3.5.3) [必须实现] 运行控制台过程时被调用
             </summary>
             <param name="io">控制台交互接口，在运行过程中次此接口的任何方法返回false(中断)都应该立即结束</param>
-            <param name="machineText">输入至交互接口的消息、选项等文本是否应该为便于机器解析的ID或JSON字符串等，否则为便于人阅读的文本</param>
         </member>
         <member name="T:ASEva.ConsoleFileResult">
             \~English
@@ -21942,14 +21950,24 @@
         <member name="M:ASEva.CommonWorkflow.OnRunStandaloneTask(System.String,System.String,ASEva.WorkflowTaskCallback)">
             \~English
             <summary>
-            [Required][OK for modal] Show running standalone task
+            Deprecated. Please implement OnRunStandaloneTask(title, taskClassID, WorkflowRunTaskCallback callback)
+            </summary>
+            \~Chinese
+            <summary>
+            已弃用，应实现OnRunStandaloneTask(title, taskClassID, WorkflowRunTaskCallback callback)
+            </summary>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnRunStandaloneTask(System.String,System.String,ASEva.WorkflowRunTaskCallback)">
+            \~English
+            <summary>
+            (api:app=3.5.3) [Required][OK for modal] Show running standalone task
             </summary>
             <param name="title">Title of standalone task</param>
             <param name="taskClassID">The standalone task's class ID</param>
             <param name="callback">Callback interface</param>
             \~Chinese
             <summary>
-            [必须实现][可含模态] 显示正在进行的独立任务
+            (api:app=3.5.3) [必须实现][可含模态] 显示正在进行的独立任务
             </summary>
             <param name="title">独立任务标题</param>
             <param name="taskClassID">独立任务类别ID</param>
@@ -22874,14 +22892,24 @@
         <member name="T:ASEva.WorkflowTaskCallback">
             \~English
             <summary>
-            (api:app=3.1.0) Standalone task callback interface used my workflow
+            (api:app=3.1.0) Deprecated. Please implement OnRunStandaloneTask(title, taskClassID, WorkflowRunTaskCallback callback)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 在流程中使用的获取独立任务状态回调接口
+            (api:app=3.1.0) 已弃用，应实现OnRunStandaloneTask(title, taskClassID, WorkflowRunTaskCallback callback)
             </summary>
         </member>
-        <member name="M:ASEva.WorkflowTaskCallback.GetTaskState">
+        <member name="T:ASEva.WorkflowRunTaskCallback">
+            \~English
+            <summary>
+            (api:app=3.5.3) Standalone task callback interface used my workflow
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.5.3) 在流程中使用的获取独立任务状态回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.WorkflowRunTaskCallback.GetTaskState">
             \~English
             <summary>
             Get task's state
@@ -22891,7 +22919,7 @@
             获取独立任务状态
             </summary>
         </member>
-        <member name="M:ASEva.WorkflowTaskCallback.GetTaskStateDescription">
+        <member name="M:ASEva.WorkflowRunTaskCallback.GetTaskStateDescription">
             \~English
             <summary>
             Get description of task's current state
@@ -22901,7 +22929,7 @@
             获取当前状态描述
             </summary>
         </member>
-        <member name="M:ASEva.WorkflowTaskCallback.GetTaskProgress">
+        <member name="M:ASEva.WorkflowRunTaskCallback.GetTaskProgress">
             \~English
             <summary>
             Get progress, in percentages
@@ -22911,7 +22939,7 @@
             获取任务进度，单位百分比
             </summary>
         </member>
-        <member name="M:ASEva.WorkflowTaskCallback.GetTaskConfig">
+        <member name="M:ASEva.WorkflowRunTaskCallback.GetTaskConfig">
             \~English
             <summary>
             Get task config
@@ -22921,7 +22949,7 @@
             获取任务配置
             </summary>
         </member>
-        <member name="M:ASEva.WorkflowTaskCallback.GetTaskReturnValue">
+        <member name="M:ASEva.WorkflowRunTaskCallback.GetTaskReturnValue">
             \~English
             <summary>
             Get task return value
@@ -22931,15 +22959,17 @@
             获取任务返回值
             </summary>
         </member>
-        <member name="M:ASEva.WorkflowTaskCallback.CancelTask">
+        <member name="M:ASEva.WorkflowRunTaskCallback.CancelTask">
             \~English
             <summary>
             Cancel the task
             </summary>
+            <returns>Whether the task is cancelled</returns>
             \~Chinese
             <summary>
             取消任务
             </summary>
+            <returns>是否成功取消</returns>
         </member>
         <member name="T:ASEva.WorkflowEncryptionCallback">
             \~English

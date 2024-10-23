@@ -76,17 +76,25 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.2.7) [Required] Called while running console procedure
+        /// (api:app=3.2.7) Deprecated. Please implement RunConsole(ConsoleIO)
         /// </summary>
-        /// <param name="io">Console interaction interface. The procedure should end immediately if any method of this interface that returns false (interrupted)</param>
-        /// <param name="machineText">Whether the text of messages and options given to the interaction interface should be ID or JSON string that is easy to parse by the machine. Otherwise it should be text that is easy to read by humans</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.2.7) [必须实现] 运行控制台过程时被调用
+        /// (api:app=3.2.7) 已弃用，应实现RunConsole(ConsoleIO)
+        /// </summary>
+        public virtual void RunConsole(ConsoleIO io, bool machineText) { }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.5.3) [Required] Called while running console procedure
+        /// </summary>
+        /// <param name="io">Console interaction interface. The procedure should end immediately if any method of this interface that returns false (interrupted)</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.5.3) [必须实现] 运行控制台过程时被调用
         /// </summary>
         /// <param name="io">控制台交互接口，在运行过程中次此接口的任何方法返回false(中断)都应该立即结束</param>
-        /// <param name="machineText">输入至交互接口的消息、选项等文本是否应该为便于机器解析的ID或JSON字符串等，否则为便于人阅读的文本</param>
-        public virtual void RunConsole(ConsoleIO io, bool machineText) { }
+        public virtual void RunConsole(ConsoleIO io) { }
     }
 
     /// \~English

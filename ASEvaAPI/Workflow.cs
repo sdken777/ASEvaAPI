@@ -244,19 +244,29 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Required][OK for modal] Show running standalone task
+        /// Deprecated. Please implement OnRunStandaloneTask(title, taskClassID, WorkflowRunTaskCallback callback)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 已弃用，应实现OnRunStandaloneTask(title, taskClassID, WorkflowRunTaskCallback callback)
+        /// </summary>
+        public virtual Task OnRunStandaloneTask(String title, String taskClassID, WorkflowTaskCallback callback) { return Task.CompletedTask; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.5.3) [Required][OK for modal] Show running standalone task
         /// </summary>
         /// <param name="title">Title of standalone task</param>
         /// <param name="taskClassID">The standalone task's class ID</param>
         /// <param name="callback">Callback interface</param>
         /// \~Chinese
         /// <summary>
-        /// [必须实现][可含模态] 显示正在进行的独立任务
+        /// (api:app=3.5.3) [必须实现][可含模态] 显示正在进行的独立任务
         /// </summary>
         /// <param name="title">独立任务标题</param>
         /// <param name="taskClassID">独立任务类别ID</param>
         /// <param name="callback">回调接口</param>
-        public virtual Task OnRunStandaloneTask(String title, String taskClassID, WorkflowTaskCallback callback) { return Task.CompletedTask; }
+        public virtual Task OnRunStandaloneTask(String title, String taskClassID, WorkflowRunTaskCallback callback) { return Task.CompletedTask; }
 
         /// \~English
         /// <summary>
@@ -1185,13 +1195,31 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.1.0) Standalone task callback interface used my workflow
+    /// (api:app=3.1.0) Deprecated. Please implement OnRunStandaloneTask(title, taskClassID, WorkflowRunTaskCallback callback)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.1.0) 在流程中使用的获取独立任务状态回调接口
+    /// (api:app=3.1.0) 已弃用，应实现OnRunStandaloneTask(title, taskClassID, WorkflowRunTaskCallback callback)
     /// </summary>
     public interface WorkflowTaskCallback
+    {
+        Task<TaskState> GetTaskState();
+        Task<String> GetTaskStateDescription();
+        Task<double> GetTaskProgress();
+        Task<String> GetTaskConfig();
+        Task<String> GetTaskReturnValue();
+        void CancelTask();
+    }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.5.3) Standalone task callback interface used my workflow
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.5.3) 在流程中使用的获取独立任务状态回调接口
+    /// </summary>
+    public interface WorkflowRunTaskCallback
     {
         /// \~English
         /// <summary>
@@ -1201,7 +1229,7 @@ namespace ASEva
         /// <summary>
         /// 获取独立任务状态
         /// </summary>
-        Task<TaskState> GetTaskState();
+        TaskState GetTaskState();
 
         /// \~English
         /// <summary>
@@ -1211,7 +1239,7 @@ namespace ASEva
         /// <summary>
         /// 获取当前状态描述
         /// </summary>
-        Task<String> GetTaskStateDescription();
+        String GetTaskStateDescription();
 
         /// \~English
         /// <summary>
@@ -1221,7 +1249,7 @@ namespace ASEva
         /// <summary>
         /// 获取任务进度，单位百分比
         /// </summary>
-        Task<double> GetTaskProgress();
+        double GetTaskProgress();
 
         /// \~English
         /// <summary>
@@ -1231,7 +1259,7 @@ namespace ASEva
         /// <summary>
         /// 获取任务配置
         /// </summary>
-        Task<String> GetTaskConfig();
+        String GetTaskConfig();
 
         /// \~English
         /// <summary>
@@ -1241,17 +1269,19 @@ namespace ASEva
         /// <summary>
         /// 获取任务返回值
         /// </summary>
-        Task<String> GetTaskReturnValue();
+        String GetTaskReturnValue();
 
         /// \~English
         /// <summary>
         /// Cancel the task
         /// </summary>
+        /// <returns>Whether the task is cancelled</returns>
         /// \~Chinese
         /// <summary>
         /// 取消任务
         /// </summary>
-        void CancelTask();
+        /// <returns>是否成功取消</returns>
+        Task<bool> CancelTask();
     }
 
     /// \~English
