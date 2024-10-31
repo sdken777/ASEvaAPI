@@ -74,11 +74,11 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// Time offset of scheduled transmitting, 0 means invalid
+        /// Deprecated
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 预约发送的时间偏置，0表示无效
+        /// 已弃用
         /// </summary>
 		public double ScheduleTimeOffset { get; set; }
 
