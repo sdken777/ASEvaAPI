@@ -93,11 +93,11 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=2.0.0) Conversion of orthogonal coordinates
+    /// (api:app=2.0.0) Conversion of orthogonal coordinates (Use with caution, as there may be an error of up to 0.2%)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=2.0.0) 正交坐标系变换
+    /// (api:app=2.0.0) 正交坐标系变换（谨慎使用，可能存在高达0.2%的误差）
     /// </summary>
     public class OrthoTransform
     {
