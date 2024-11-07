@@ -522,7 +522,6 @@ namespace ASEva.UIEto
             if (controlY > 0)
             {
                 this.ScrollPosition = new Point(0, Math.Min(this.ScrollSize.Height, controlY));
-                Console.WriteLine(controlY);
                 return;
             }
 

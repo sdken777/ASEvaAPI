@@ -8424,7 +8424,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.5.1
+            version=3.5.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -9566,16 +9566,24 @@
         <member name="M:ASEva.ConsoleClass.RunConsole(ASEva.ConsoleIO,System.Boolean)">
             \~English
             <summary>
-            (api:app=3.2.7) [Required] Called while running console procedure
+            (api:app=3.2.7) Deprecated. Please implement RunConsole(ConsoleIO)
             </summary>
-            <param name="io">Console interaction interface. The procedure should end immediately if any method of this interface that returns false (interrupted)</param>
-            <param name="machineText">Whether the text of messages and options given to the interaction interface should be ID or JSON string that is easy to parse by the machine. Otherwise it should be text that is easy to read by humans</param>
             \~Chinese
             <summary>
-            (api:app=3.2.7) [必须实现] 运行控制台过程时被调用
+            (api:app=3.2.7) 已弃用，应实现RunConsole(ConsoleIO)
+            </summary>
+        </member>
+        <member name="M:ASEva.ConsoleClass.RunConsole(ASEva.ConsoleIO)">
+            \~English
+            <summary>
+            (api:app=3.5.3) [Required] Called while running console procedure
+            </summary>
+            <param name="io">Console interaction interface. The procedure should end immediately if any method of this interface that returns false (interrupted)</param>
+            \~Chinese
+            <summary>
+            (api:app=3.5.3) [必须实现] 运行控制台过程时被调用
             </summary>
             <param name="io">控制台交互接口，在运行过程中次此接口的任何方法返回false(中断)都应该立即结束</param>
-            <param name="machineText">输入至交互接口的消息、选项等文本是否应该为便于机器解析的ID或JSON字符串等，否则为便于人阅读的文本</param>
         </member>
         <member name="T:ASEva.ConsoleFileResult">
             \~English
@@ -13642,11 +13650,11 @@
         <member name="P:ASEva.Samples.BusMessageSample.ScheduleTimeOffset">
             \~English
             <summary>
-            Time offset of scheduled transmitting, 0 means invalid
+            Deprecated
             </summary>
             \~Chinese
             <summary>
-            预约发送的时间偏置，0表示无效
+            已弃用
             </summary>
         </member>
         <member name="P:ASEva.Samples.BusMessageSample.SchedulePosixTime">
@@ -20668,11 +20676,11 @@
         <member name="T:ASEva.Utility.OrthoTransform">
             \~English
             <summary>
-            (api:app=3.0.0) Conversion of orthogonal coordinates
+            (api:app=3.0.0) Conversion of orthogonal coordinates (Use with caution, as there may be an error of up to 0.2%)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 正交坐标系变换
+            (api:app=3.0.0) 正交坐标系变换（谨慎使用，可能存在高达0.2%的误差）
             </summary>
         </member>
         <member name="M:ASEva.Utility.OrthoTransform.#ctor(ASEva.Utility.OrthoParameters)">
@@ -21942,14 +21950,24 @@
         <member name="M:ASEva.CommonWorkflow.OnRunStandaloneTask(System.String,System.String,ASEva.WorkflowTaskCallback)">
             \~English
             <summary>
-            [Required][OK for modal] Show running standalone task
+            Deprecated. Please implement OnRunStandaloneTask(title, taskClassID, WorkflowRunTaskCallback callback)
+            </summary>
+            \~Chinese
+            <summary>
+            已弃用，应实现OnRunStandaloneTask(title, taskClassID, WorkflowRunTaskCallback callback)
+            </summary>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnRunStandaloneTask(System.String,System.String,ASEva.WorkflowRunTaskCallback)">
+            \~English
+            <summary>
+            (api:app=3.5.3) [Required][OK for modal] Show running standalone task
             </summary>
             <param name="title">Title of standalone task</param>
             <param name="taskClassID">The standalone task's class ID</param>
             <param name="callback">Callback interface</param>
             \~Chinese
             <summary>
-            [必须实现][可含模态] 显示正在进行的独立任务
+            (api:app=3.5.3) [必须实现][可含模态] 显示正在进行的独立任务
             </summary>
             <param name="title">独立任务标题</param>
             <param name="taskClassID">独立任务类别ID</param>
@@ -22012,14 +22030,24 @@
         <member name="M:ASEva.CommonWorkflow.OnInstallPlugin(ASEva.InstallPluginLibraryInfo[],ASEva.InstallPluginDriverInfo[],ASEva.WorkflowInstallCallback)">
             \~English
             <summary>
-            [Required][OK for modal] Install plugins
+            Deprecated. Please implement OnInstallPlugin(libs, drivers, WorkflowInstallPluginCallback callback)
+            </summary>
+            \~Chinese
+            <summary>
+            已弃用，应实现OnInstallPlugin(libs, drivers, WorkflowInstallPluginCallback callback)
+            </summary>
+        </member>
+        <member name="M:ASEva.CommonWorkflow.OnInstallPlugin(ASEva.InstallPluginLibraryInfo[],ASEva.InstallPluginDriverInfo[],ASEva.WorkflowInstallPluginCallback)">
+            \~English
+            <summary>
+            (api:app=3.5.2) [Required][OK for modal] Install plugins
             </summary>
             <param name="libs">Information of related library files</param>
             <param name="drivers">Information of related driver or environment pack</param>
             <param name="callback">Framework callback interface</param>
             \~Chinese
             <summary>
-            [必须实现][可含模态] 安装插件
+            (api:app=3.5.2) [必须实现][可含模态] 安装插件
             </summary>
             <param name="libs">插件关联的库信息列表</param>
             <param name="drivers">插件关联的驱动和环境信息列表</param>
@@ -22864,14 +22892,24 @@
         <member name="T:ASEva.WorkflowTaskCallback">
             \~English
             <summary>
-            (api:app=3.1.0) Standalone task callback interface used my workflow
+            (api:app=3.1.0) Deprecated. Please implement OnRunStandaloneTask(title, taskClassID, WorkflowRunTaskCallback callback)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 在流程中使用的获取独立任务状态回调接口
+            (api:app=3.1.0) 已弃用，应实现OnRunStandaloneTask(title, taskClassID, WorkflowRunTaskCallback callback)
             </summary>
         </member>
-        <member name="M:ASEva.WorkflowTaskCallback.GetTaskState">
+        <member name="T:ASEva.WorkflowRunTaskCallback">
+            \~English
+            <summary>
+            (api:app=3.5.3) Standalone task callback interface used my workflow
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.5.3) 在流程中使用的获取独立任务状态回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.WorkflowRunTaskCallback.GetTaskState">
             \~English
             <summary>
             Get task's state
@@ -22881,7 +22919,7 @@
             获取独立任务状态
             </summary>
         </member>
-        <member name="M:ASEva.WorkflowTaskCallback.GetTaskStateDescription">
+        <member name="M:ASEva.WorkflowRunTaskCallback.GetTaskStateDescription">
             \~English
             <summary>
             Get description of task's current state
@@ -22891,7 +22929,7 @@
             获取当前状态描述
             </summary>
         </member>
-        <member name="M:ASEva.WorkflowTaskCallback.GetTaskProgress">
+        <member name="M:ASEva.WorkflowRunTaskCallback.GetTaskProgress">
             \~English
             <summary>
             Get progress, in percentages
@@ -22901,7 +22939,7 @@
             获取任务进度，单位百分比
             </summary>
         </member>
-        <member name="M:ASEva.WorkflowTaskCallback.GetTaskConfig">
+        <member name="M:ASEva.WorkflowRunTaskCallback.GetTaskConfig">
             \~English
             <summary>
             Get task config
@@ -22911,7 +22949,7 @@
             获取任务配置
             </summary>
         </member>
-        <member name="M:ASEva.WorkflowTaskCallback.GetTaskReturnValue">
+        <member name="M:ASEva.WorkflowRunTaskCallback.GetTaskReturnValue">
             \~English
             <summary>
             Get task return value
@@ -22921,15 +22959,17 @@
             获取任务返回值
             </summary>
         </member>
-        <member name="M:ASEva.WorkflowTaskCallback.CancelTask">
+        <member name="M:ASEva.WorkflowRunTaskCallback.CancelTask">
             \~English
             <summary>
             Cancel the task
             </summary>
+            <returns>Whether the task is cancelled</returns>
             \~Chinese
             <summary>
             取消任务
             </summary>
+            <returns>是否成功取消</returns>
         </member>
         <member name="T:ASEva.WorkflowEncryptionCallback">
             \~English
@@ -22970,38 +23010,50 @@
         <member name="T:ASEva.WorkflowInstallCallback">
             \~English
             <summary>
-            (api:app=3.2.4) Plugin installation callback used by workflow
+            (api:app=3.2.4) Deprecated. Please implement OnInstallPlugin(libs, drivers, WorkflowInstallPluginCallback callback)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.2.4) 在流程中使用的安装插件的回调接口
+            (api:app=3.2.4) 已弃用，应实现OnInstallPlugin(libs, drivers, WorkflowInstallPluginCallback callback)
             </summary>
         </member>
-        <member name="M:ASEva.WorkflowInstallCallback.InstallLibrary(System.String)">
+        <member name="T:ASEva.WorkflowInstallPluginCallback">
+            \~English
+            <summary>
+            (api:app=3.5.2) Plugin installation callback used by workflow
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.5.2) 在流程中使用的安装插件的回调接口
+            </summary>
+        </member>
+        <member name="M:ASEva.WorkflowInstallPluginCallback.InstallLibrary(System.String)">
             \~English
             <summary>
             Install library files
             </summary>
             <param name="libraryID">Related library ID</param>
+            <returns>Error message, null if succeeded</returns>
             \~Chinese
             <summary>
             安装库文件
             </summary>
             <param name="libraryID">插件关联的库ID</param>
+            <returns>错误信息，若安装成功则为null</returns>
         </member>
-        <member name="M:ASEva.WorkflowInstallCallback.PrepareDriver(System.String)">
+        <member name="M:ASEva.WorkflowInstallPluginCallback.PrepareDriver(System.String)">
             \~English
             <summary>
             Prepare driver or environment pack, and return the executable path for installation
             </summary>
             <param name="driverID">Related driver ID</param>
-            <returns>Executable path for installation</returns>
+            <returns>1) Executable path for installation. 2) Error message, null if succeeded</returns>
             \~Chinese
             <summary>
             准备驱动和环境等的文件，并返回安装文件的运行路径
             </summary>
             <param name="driverID">插件关联的驱动ID</param>
-            <returns>安装文件的运行路径</returns>
+            <returns>1. 安装文件的运行路径; 2. 错误信息，若安装成功则为null</returns>
         </member>
     </members>
 </doc>
