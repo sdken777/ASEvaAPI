@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 16, 3, 0); // Update log / 更新记录: 新增FlowLayout.ScrollToControl
+            return new Version(2, 16, 3, 1); // Update log / 更新记录: 实现DefaultFlowLayoutBackend.ScrollToClient
         }
 
         /// \~English

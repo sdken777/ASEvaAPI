@@ -442,7 +442,28 @@ namespace ASEva.UIEto
 
         public void ScrollToControl(int index)
         {
-            // TODO
+            if (index == 0)
+            {
+                this.ScrollPosition = new Point(0, 0);
+            }
+
+            var controlY = ctxs[index].Item.Control.Location.Y;
+            if (controlY > 0)
+            {
+                this.ScrollPosition = new Point(0, Math.Min(this.ScrollSize.Height, controlY));
+                return;
+            }
+
+            var timer = new UITimer();
+            timer.Interval = 0.005;
+            timer.Elapsed += delegate
+            {
+                var controlY = ctxs[index].Item.Control.Location.Y;
+                if (controlY <= 0) return;
+                this.ScrollPosition = new Point(0, Math.Min(this.ScrollSize.Height, controlY));
+                timer.Stop();
+            };
+            timer.Start();
         }
 
         private class ControlContext
