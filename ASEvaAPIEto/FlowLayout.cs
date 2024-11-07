@@ -454,16 +454,19 @@ namespace ASEva.UIEto
                 return;
             }
 
-            var timer = new UITimer();
-            timer.Interval = 0.005;
-            timer.Elapsed += delegate
+            if (scrollTimer != null) scrollTimer.Stop();
+
+            scrollTimer = new UITimer();
+            scrollTimer.Interval = 0.005;
+            scrollTimer.Elapsed += delegate
             {
                 var controlY = ctxs[index].Item.Control.Location.Y;
                 if (controlY <= 0) return;
                 this.ScrollPosition = new Point(0, Math.Min(this.ScrollSize.Height, controlY));
-                timer.Stop();
+                scrollTimer.Stop();
+                scrollTimer = null;
             };
-            timer.Start();
+            scrollTimer.Start();
         }
 
         private class ControlContext
@@ -477,5 +480,6 @@ namespace ASEva.UIEto
         private StackLayout layout;
         private List<ControlContext> ctxs = new List<ControlContext>();
         private Control selectedControl;
+        private UITimer scrollTimer = null;
     }
 }
