@@ -107,6 +107,7 @@ namespace ASEvaAPIEtoTest
             layoutButtons.AddLinkButton(t["basic-flow-add"]).Click += delegate
             {
                 flowLayout.AddControl(generateFlowItem(), 80);
+                flowLayout.ScrollToControl(flowLayout.GetControlCount() - 1);
             };
             layoutButtons.AddLinkButton(t["basic-flow-remove"]).Click += delegate
             {

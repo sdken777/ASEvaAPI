@@ -303,6 +303,24 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
+        /// (api:eto=3.2.4) Scroll to the position of the control at the index
+        /// </summary>
+        /// <param name="index">Index of the control</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=3.2.4) 滚动至指定序号的控件位置
+        /// </summary>
+        /// <param name="index">控件的序号</param>
+        public void ScrollToControl(int index)
+        {
+            if (index >= 0 && index < controls.Count)
+            {
+                if (backend != null) backend.ScrollToControl(index);
+            }
+        }
+
+        /// \~English
+        /// <summary>
         /// Trigger event while newly selected
         /// </summary>
         /// \~Chinese
@@ -353,6 +371,7 @@ namespace ASEva.UIEto
         void RemoveAllControls();
         void SetControlVisible(int index, bool visible);
         void SelectControl(int index);
+        void ScrollToControl(int index);
 	}
 
 	public interface FlowLayoutFactory
@@ -492,6 +511,36 @@ namespace ASEva.UIEto
             }
         }
 
+        public void ScrollToControl(int index)
+        {
+            if (index == 0)
+            {
+                this.ScrollPosition = new Point(0, 0);
+            }
+
+            var controlY = ctxs[index].Item.Control.Location.Y;
+            if (controlY > 0)
+            {
+                this.ScrollPosition = new Point(0, Math.Min(this.ScrollSize.Height, controlY));
+                Console.WriteLine(controlY);
+                return;
+            }
+
+            if (scrollTimer != null) scrollTimer.Stop();
+
+            scrollTimer = new UITimer();
+            scrollTimer.Interval = 0.005;
+            scrollTimer.Elapsed += delegate
+            {
+                var controlY = ctxs[index].Item.Control.Location.Y;
+                if (controlY <= 0) return;
+                this.ScrollPosition = new Point(0, Math.Min(this.ScrollSize.Height, controlY));
+                scrollTimer.Stop();
+                scrollTimer = null;
+            };
+            scrollTimer.Start();
+        }
+
         private class ControlContext
         {
             public StackLayoutItem Item { get; set; }
@@ -503,5 +552,6 @@ namespace ASEva.UIEto
         private StackLayout layout;
         private List<ControlContext> ctxs = new List<ControlContext>();
         private Control selectedControl;
+        private UITimer scrollTimer = null;
     }
 }

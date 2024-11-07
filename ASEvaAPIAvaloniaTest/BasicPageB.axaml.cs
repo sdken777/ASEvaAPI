@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using ASEva;
 using ASEva.UIAvalonia;
 using Avalonia.Controls;
@@ -72,9 +73,12 @@ namespace ASEvaAPIAvaloniaTest
             }
         }
 
-        private void linkAddControl_Click(object sender, RoutedEventArgs e)
+        private async void linkAddControl_Click(object sender, RoutedEventArgs e)
         {
-            model.ControlItems.Add(new Item(model));
+            var item = new Item(model);
+            model.ControlItems.Add(item);
+            await Task.Delay(100);
+            flowLayout.ScrollIntoView(item);
         }
 
         private void linkInsertControl_Click(object sender, RoutedEventArgs e)

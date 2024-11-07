@@ -21,6 +21,7 @@ namespace ASEva.UIGtk
     #pragma warning disable CS0612, CS0649
     class FlowLayoutBackendGtk : Gtk.Box, FlowLayoutBackend
     {
+        [UI] Gtk.ScrolledWindow mainScroll;
         [UI] Gtk.Box mainBox;
 
         public FlowLayoutBackendGtk(FlowLayoutCallback callback) : this(new Gtk.Builder("FlowLayoutBackendGtk.glade"))
@@ -132,6 +133,26 @@ namespace ASEva.UIGtk
             }
 
             ctxs[index].Visible = visible;
+        }
+
+        public void ScrollToControl(int index)
+        {
+            var controlY = ctxs[index].Container.Allocation.Y;
+            if (controlY > 0)
+            {
+                var adjustment = (mainScroll.VScrollbar as Gtk.Scrollbar).Adjustment;
+                adjustment.Value = Math.Min(controlY, adjustment.Upper);
+                return;
+            }
+
+            GLib.Timeout.Add(5, () =>
+            {
+                var controlY = ctxs[index].Container.Allocation.Y;
+                if (controlY <= 0) return true;
+                var adjustment = (mainScroll.VScrollbar as Gtk.Scrollbar).Adjustment;
+                adjustment.Value = Math.Min(controlY, adjustment.Upper);
+                return false;
+            });
         }
 
         private class ControlContext
