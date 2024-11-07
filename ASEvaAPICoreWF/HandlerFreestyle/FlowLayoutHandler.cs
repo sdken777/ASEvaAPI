@@ -148,6 +148,18 @@ namespace ASEva.UICoreWF
                     ctx.EtoControl.Width = lastSize.Width - 6 - (VerticalScroll.Visible ? System.Windows.Forms.SystemInformation.VerticalScrollBarWidth : 0);
                 }
             }
+
+            if (scrollTarget >= ctxs.Count) scrollTarget = -1;
+            else if (scrollTarget >= 0 && Controls.Contains(ctxs[scrollTarget].WinformControl))
+            {
+                this.ScrollControlIntoView(ctxs[scrollTarget].WinformControl);
+                scrollTarget = -1;
+            }
+        }
+
+        public void ScrollToControl(int index)
+        {
+            scrollTarget = index;
         }
 
         private class ControlContext
@@ -163,5 +175,6 @@ namespace ASEva.UICoreWF
         private System.Windows.Forms.Panel selectedControl = null;
         private bool removedFromPanel = false;
         private System.Drawing.Size lastSize;
+        private int scrollTarget = -1;
     }
 }

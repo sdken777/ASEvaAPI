@@ -653,13 +653,13 @@
             <summary>
             Get status of a general device
             </summary>
-            <param name="type">Related native plugin's type ID, the same as the "type" field in info.txt</param>
+            <param name="id">Device native type ID, or device class ID</param>
             <returns>Status of the general device</returns>
             \~Chinese
             <summary>
             获取设备状态
             </summary>
-            <param name="type">设备的类型ID，在插件的info.txt中以type字段描述</param>
+            <param name="id">设备原生类型ID，或设备组件ID</param>
             <returns>返回设备状态</returns>
         </member>
         <member name="M:ASEva.Agency.GetAllDeviceStatus">
@@ -667,25 +667,25 @@
             <summary>
             (api:app=2.3.0) Get all general devices' status
             </summary>
-            <returns>The Dictionary. The key is type ID of general device</returns>
+            <returns>The Dictionary. The key is native type ID or class ID of the general device</returns>
             \~Chinese
             <summary>
             (api:app=2.3.0) 获取所有设备状态
             </summary>
-            <returns>设备状态表，键为设备的类型ID</returns>
+            <returns>设备状态表，键为设备的原生类型ID或组件ID</returns>
         </member>
         <member name="M:ASEva.Agency.GetChildDeviceStatus(System.String)">
             \~English
             <summary>
             Get status of a general device's sub devices
             </summary>
-            <param name="type">Related native plugin's type ID, the same as the "type" field in info.txt</param>
+            <param name="id">Device native type ID, or device class ID</param>
             <returns>Status of a general device's sub devices</returns>
             \~Chinese
             <summary>
             获取各子设备的设备状态
             </summary>
-            <param name="type">设备的类型ID，在插件的info.txt中以type字段描述</param>
+            <param name="id">设备原生类型ID，或设备组件ID</param>
             <returns>各子设备的设备状态</returns>
         </member>
         <member name="M:ASEva.Agency.Print(System.String)">
@@ -2819,14 +2819,14 @@
             <summary>
             (api:app=2.15.1) Get status of components related to the console
             </summary>
-            <param name="dialogClassID">Console component's class ID</param>
+            <param name="consoleClassID">Console component's class ID</param>
             <param name="childrenStatus">Output child status</param>
             <returns>The main status</returns>
             \~Chinese
             <summary>
             (api:app=2.15.1) 获取控制台相关组件配置状态
             </summary>
-            <param name="dialogClassID">控制台组件ID</param>
+            <param name="consoleClassID">控制台组件ID</param>
             <param name="childrenStatus">子配置状态</param>
             <returns>配置状态</returns>
         </member>
@@ -8580,8 +8580,8 @@
             <summary>
             [Optional][OK for modal] Notify that the application is exiting
             </summary>
-            <param name="force">Whether forced to exist</param>
-            <returns>Whether it's OK to exist (no use while forced to exist)</returns>
+            <param name="force">Whether forced to exit</param>
+            <returns>Whether it's OK to exit (no use while forced to exit)</returns>
             \~Chinese
             <summary>
             [可选实现][可含模态] 通知正在退出应用程序
@@ -11038,7 +11038,7 @@
         <member name="F:ASEva.Samples.SpecialCameraType.LeftBlindSpotCamera">
             \~English
             <summary>
-            Camera for left blind spot (Pinhole model), use LaneLineCameraMeta
+            Camera for left blind spot (Pinhole model), use BlindSpotCameraMeta
             </summary>
             \~Chinese
             <summary>
@@ -11048,7 +11048,7 @@
         <member name="F:ASEva.Samples.SpecialCameraType.RightBlindSpotCamera">
             \~English
             <summary>
-            Camera for right blind spot (Pinhole model), use LaneLineCameraMeta
+            Camera for right blind spot (Pinhole model), use BlindSpotCameraMeta
             </summary>
             \~Chinese
             <summary>
@@ -17346,11 +17346,11 @@
         <member name="T:ASEva.Utility.OrthoTransform">
             \~English
             <summary>
-            (api:app=2.0.0) Conversion of orthogonal coordinates
+            (api:app=2.0.0) Conversion of orthogonal coordinates (Use with caution, as there may be an error of up to 0.2%)
             </summary>
             \~Chinese
             <summary>
-            (api:app=2.0.0) 正交坐标系变换
+            (api:app=2.0.0) 正交坐标系变换（谨慎使用，可能存在高达0.2%的误差）
             </summary>
         </member>
         <member name="M:ASEva.Utility.OrthoTransform.#ctor(ASEva.Utility.OrthoParameters)">
