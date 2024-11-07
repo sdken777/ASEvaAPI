@@ -232,6 +232,24 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
+        /// (api:eto=2.16.3) Scroll to the position of the control at the index
+        /// </summary>
+        /// <param name="index">Index of the control</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=2.16.3) 滚动至指定序号的控件位置
+        /// </summary>
+        /// <param name="index">控件的序号</param>
+        public void ScrollToControl(int index)
+        {
+            if (index >= 0 && index < controls.Count)
+            {
+                if (backend != null) backend.ScrollToControl(index);
+            }
+        }
+
+        /// \~English
+        /// <summary>
         /// Trigger event while newly selected
         /// </summary>
         /// \~Chinese
@@ -282,6 +300,7 @@ namespace ASEva.UIEto
         void RemoveAllControls();
         void SetControlVisible(int index, bool visible);
         void SelectControl(int index);
+        void ScrollToControl(int index);
 	}
 
 	public interface FlowLayoutFactory
@@ -419,6 +438,11 @@ namespace ASEva.UIEto
                 layout.Items.Remove(ctxs[index].Item);
                 ctxs[index].Visible = false;
             }
+        }
+
+        public void ScrollToControl(int index)
+        {
+            // TODO
         }
 
         private class ControlContext

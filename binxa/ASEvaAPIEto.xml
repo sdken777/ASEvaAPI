@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=2.16.2
+            version=2.16.3
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -2862,6 +2862,18 @@
             获取选中控件所在序号位置
             </summary>
             <returns>序号位置，若无选中则返回-1</returns>
+        </member>
+        <member name="M:ASEva.UIEto.FlowLayout.ScrollToControl(System.Int32)">
+            \~English
+            <summary>
+            (api:eto=2.16.3) Scroll to the position of the control at the index
+            </summary>
+            <param name="index">Index of the control</param>
+            \~Chinese
+            <summary>
+            (api:eto=2.16.3) 滚动至指定序号的控件位置
+            </summary>
+            <param name="index">控件的序号</param>
         </member>
         <member name="E:ASEva.UIEto.FlowLayout.ControlSelected">
             \~English
