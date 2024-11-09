@@ -44,6 +44,7 @@ namespace ASEva.UIAvalonia
             }
 
             panel.OnDialogClose += delegate { Close(); };
+            Closing += delegate { panel.OnClosing(); };
             
             DispatcherTimer.RunOnce(() => Width = defaultWidth, TimeSpan.FromMilliseconds(1)); // 触发一次resize
         }

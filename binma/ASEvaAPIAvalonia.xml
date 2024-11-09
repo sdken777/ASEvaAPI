@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.2.1
+            version=1.2.2
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -563,6 +563,16 @@
             \~Chinese
             <summary>
             获取窗口的最顶层活动对话框
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.WindowExtensions.GetActiveDialog(Avalonia.Controls.Control)">
+            \~English
+            <summary>
+            (api:avalonia=1.2.2) Get the top active dialog of the window owning the specified control
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.2.2) 获取控件所属窗口的最顶层活动对话框
             </summary>
         </member>
         <member name="T:ASEva.UIAvalonia.ImageConverter">

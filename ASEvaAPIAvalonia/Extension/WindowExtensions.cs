@@ -32,6 +32,20 @@ namespace ASEva.UIAvalonia
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:avalonia=1.2.2) Get the top active dialog of the window owning the specified control
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.2.2) 获取控件所属窗口的最顶层活动对话框
+        /// </summary>
+        public static Window GetActiveDialog(this Control control)
+        {
+            var window = TopLevel.GetTopLevel(control) as Window;
+            return window == null ? null : GetActiveDialog(window);
+        }
+
         private static Window getFirstActiveDialog(Window window)
         {
             foreach (var dialog in window.OwnedWindows)
