@@ -178,7 +178,7 @@ namespace ASEvaAPIAvaloniaTest
             showInfo();
         }
 
-        private void showInfo()
+        private async void showInfo()
         {
             if (glView == null || glView.ContextInfo == null) return;
 
@@ -190,7 +190,7 @@ namespace ASEvaAPIAvaloniaTest
             rowTexts.Add(Program.Texts.Format("draw-gl-info-extensions", String.Join('\n', info.ToExtensionList())));
             
             var dialog = new InfoDialog(Program.Texts["draw-gl-info-title"], String.Join('\n', rowTexts));
-            dialog.ShowDialog(TopLevel.GetTopLevel(this) as Window);
+            await dialog.ShowDialog(await this.GetActiveWindow());
         }
 
         private class LoopIntervalStat

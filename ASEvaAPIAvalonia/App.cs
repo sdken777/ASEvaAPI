@@ -278,7 +278,7 @@ namespace ASEva.UIAvalonia
 
                 var dialog = new EtoEmbedDialog(panel);
                 if (App.appLifetime.MainWindow == null) App.Run(dialog);
-                else await dialog.ShowDialog(App.appLifetime.MainWindow.GetActiveDialog());
+                else await dialog.ShowDialog(await App.appLifetime.MainWindow.GetActiveWindow());
                 return true;
             }
         }

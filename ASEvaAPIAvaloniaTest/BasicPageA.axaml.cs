@@ -24,7 +24,7 @@ namespace ASEvaAPIAvaloniaTest
 
         public void OnLoop()
         {
-            labelActive.Content = (TopLevel.GetTopLevel(this) as Window).IsActive ? "O" : "X";
+            labelActive.Content = this.GetParentWindow().IsActive ? "O" : "X";
         }
 
         private void itemMenu_Click(object sender, RoutedEventArgs e)
@@ -34,7 +34,6 @@ namespace ASEvaAPIAvaloniaTest
 
         private async void linkBrowse_Click(object sender, RoutedEventArgs e)
         {
-            var topLevel = TopLevel.GetTopLevel(this);
             if (radioFile.IsChecked.Value)
             {
                 if (checkSaveFile.IsChecked.Value)
@@ -44,18 +43,18 @@ namespace ASEvaAPIAvaloniaTest
                         DefaultExtension = ".txt",
                         FileTypeChoices = [ new FilePickerFileType(Program.Texts["basic-save-file-filter"]) { Patterns = ["*.txt"] } ]
                     };
-                    var file = await topLevel.StorageProvider.SaveFilePickerAsync(options);
+                    var file = await this.GetParentWindow().StorageProvider.SaveFilePickerAsync(options);
                     if (file != null) await MessageBox.Show(file.Path, "");
                 }
                 else
                 {
-                    var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions());
+                    var files = await this.GetParentWindow().StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions());
                     if (files.Count > 0) await MessageBox.Show(files[0].Path, "");
                 }
             }
             else // radioDir
             {
-                var folders = await topLevel.StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions());
+                var folders = await this.GetParentWindow().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions());
                 if (folders.Count > 0) await MessageBox.Show(folders[0].Path, "");
             }
         }
@@ -74,37 +73,37 @@ namespace ASEvaAPIAvaloniaTest
             window.Show();
         }
 
-        private void buttonShowDialog_Click(object sender, RoutedEventArgs e)
+        private async void buttonShowDialog_Click(object sender, RoutedEventArgs e)
         {
             var window = new Window();
             window.SizeToContent = SizeToContent.WidthAndHeight;
             window.CanResize = false;
             window.Content = new Panel{ MinWidth = 300, MinHeight = 300};
             window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            window.ShowDialog(TopLevel.GetTopLevel(this) as Window);
+            await window.ShowDialog(await this.GetActiveWindow());
         }
 
-        private void linkShowDialogNoBorder_Click(object sender, RoutedEventArgs e)
+        private async void linkShowDialogNoBorder_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new TestDialogNoBorder();
-            dialog.ShowDialog(TopLevel.GetTopLevel(this) as Window);
+            await dialog.ShowDialog(await this.GetActiveWindow());
         }
         
-        private void linkShowDialogWithBorder_Click(object sender, RoutedEventArgs e)
+        private async void linkShowDialogWithBorder_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new TestDialogWithBorder();
-            dialog.ShowDialog(TopLevel.GetTopLevel(this) as Window);
+            await dialog.ShowDialog(await this.GetActiveWindow());
         }
 
-        private void linkShowDialogWithFixBorder_Click(object sender, RoutedEventArgs e)
+        private async void linkShowDialogWithFixBorder_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new TestDialogWithFixBorder();
-            dialog.ShowDialog(TopLevel.GetTopLevel(this) as Window);
+            await dialog.ShowDialog(await this.GetActiveWindow());
         }
 
         private void linkClientSize_Click(object sender, RoutedEventArgs e)
         {
-            var size = (TopLevel.GetTopLevel(this) as Window).ClientSize;
+            var size = this.GetParentWindow().ClientSize;
             linkClientSize.Content = size.Width + "x" + size.Height;
         }
 

@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.2.2
+            version=1.2.3
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -548,31 +548,41 @@
         <member name="T:ASEva.UIAvalonia.WindowExtensions">
             \~English
             <summary>
-            (api:avalonia=1.1.6) Extensions for getting window information
+            (api:avalonia=1.2.3) Extensions for getting window information
             </summary>
             \~Chinese
             <summary>
-            (api:avalonia=1.1.6) 方便获取窗口信息的扩展
+            (api:avalonia=1.2.3) 方便获取窗口信息的扩展
             </summary>
         </member>
-        <member name="M:ASEva.UIAvalonia.WindowExtensions.GetActiveDialog(Avalonia.Controls.Window)">
+        <member name="M:ASEva.UIAvalonia.WindowExtensions.GetParentWindow(Avalonia.Controls.Control)">
             \~English
             <summary>
-            Get the top active dialog of the specified window
+            Get the parent window of the specified control
             </summary>
             \~Chinese
             <summary>
-            获取窗口的最顶层活动对话框
+            获取控件所属窗口
             </summary>
         </member>
-        <member name="M:ASEva.UIAvalonia.WindowExtensions.GetActiveDialog(Avalonia.Controls.Control)">
+        <member name="M:ASEva.UIAvalonia.WindowExtensions.GetActiveWindow(Avalonia.Controls.Window)">
             \~English
             <summary>
-            (api:avalonia=1.2.2) Get the top active dialog of the window owning the specified control
+            Get the top active window (dialog) of the specified window
             </summary>
             \~Chinese
             <summary>
-            (api:avalonia=1.2.2) 获取控件所属窗口的最顶层活动对话框
+            获取窗口的最顶层活动窗口(对话框)
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.WindowExtensions.GetActiveWindow(Avalonia.Controls.Control)">
+            \~English
+            <summary>
+            Get the top active window (dialog) of the window owning the specified control
+            </summary>
+            \~Chinese
+            <summary>
+            获取控件所属窗口的最顶层活动窗口(对话框)
             </summary>
         </member>
         <member name="T:ASEva.UIAvalonia.ImageConverter">
