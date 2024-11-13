@@ -64,6 +64,35 @@ namespace ASEva.UIAvalonia
             }
         }
 
+        public static Eto.Forms.Control[] ExtractControls(Window window)
+        {
+            var list = new List<Eto.Forms.Control>();
+            if (window.Content != null)
+            {
+                if (window.Content is EtoEmbedder)
+                {
+                    var etoControl = (window.Content as EtoEmbedder).EtoControl;
+                    if (etoControl != null) list.Add(etoControl);
+                }
+                else if (window.Content is Panel) extractFromPanel(window.Content as Panel, list);
+            }
+            return list.ToArray();
+        }
+
+        private static void extractFromPanel(Panel panel, List<Eto.Forms.Control> list)
+        {
+            if (panel.Children == null) return;
+            foreach (var child in panel.Children)
+            {
+                if (child is EtoEmbedder)
+                {
+                    var etoControl = (child as EtoEmbedder).EtoControl;
+                    if (etoControl != null) list.Add(etoControl);
+                }
+                else if (child is Panel) extractFromPanel(child as Panel, list);
+            }
+        }
+
         protected override IPlatformHandle CreateNativeControlCore(IPlatformHandle parent)
         {
             if (!canCreateNativeControlCore()) return base.CreateNativeControlCore(parent);

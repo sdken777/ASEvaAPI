@@ -279,7 +279,18 @@ namespace ASEva.UIAvalonia
 
                 var dialog = new EtoEmbedDialog(panel);
                 if (App.appLifetime.MainWindow == null) App.Run(dialog);
-                else await dialog.ShowDialog(await App.appLifetime.MainWindow.GetActiveWindow());
+                else
+                {
+                    var activeWindow = await App.appLifetime.MainWindow.GetActiveWindow();
+                    var etoControls = new Eto.Forms.Control[0];
+                    if (activeWindow != null)
+                    {
+                        etoControls = EtoEmbedder.ExtractControls(activeWindow);
+                        foreach (var control in etoControls) control.Enabled = false;
+                    }
+                    await dialog.ShowDialog(activeWindow);
+                    foreach (var control in etoControls) control.Enabled = true;
+                }
                 return true;
             }
         }
