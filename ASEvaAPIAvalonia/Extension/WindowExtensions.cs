@@ -40,13 +40,13 @@ namespace ASEva.UIAvalonia
         {
             if (window == null) return null;
 
-            var activeWindow = getActiveWindow(window);
+            var activeWindow = getFirstActiveWindow(window);
             if (activeWindow == null) return null;
 
             if (lastActiveWindow != null && lastActiveWindow != activeWindow)
             {
                 await Task.Delay(DelayTime);
-                activeWindow = getActiveWindow(window);
+                activeWindow = getFirstActiveWindow(window);
                 if (activeWindow == null) return null;
             }
 
@@ -69,23 +69,16 @@ namespace ASEva.UIAvalonia
             return window == null ? null : await window.GetActiveWindow();
         }
 
-        private static Window getActiveWindow(Window window)
-        {
-            var target = window;
-            while (true)
-            {
-                var firstActiveWindow = getFirstActiveWindow(target);
-                if (firstActiveWindow == null) return target;
-                else target = firstActiveWindow;
-            }
-        }
-
         private static Window getFirstActiveWindow(Window window)
         {
-            if (window == null || window.OwnedWindows == null) return null;
+            if (window == null) return null;
+            if (window.IsActive) return window;
+
+            if (window.OwnedWindows == null) return null;
             foreach (var dialog in window.OwnedWindows)
             {
-                if (dialog.IsActive) return dialog;
+                var activeWindow = getFirstActiveWindow(dialog);
+                if (activeWindow != null) return activeWindow;
             }
             return null;
         }
