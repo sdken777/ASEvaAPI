@@ -204,8 +204,9 @@ namespace ASEva.UICoreWF
                     e.Graphics.DrawString(task.text, font, brush, posX, posY);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 initOK = false;
             }
 
@@ -337,8 +338,9 @@ namespace ASEva.UICoreWF
 
                 gl.Flush();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 onDestroy();
                 return;
             }

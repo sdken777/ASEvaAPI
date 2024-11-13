@@ -96,7 +96,7 @@ namespace ASEva.UICoreWF
                 pic_drawAnnotation(sender, e);
                 pic_drawGuide(sender, e);
             }
-            catch (Exception) { }
+            catch (Exception ex) { Dump.Exception(ex); }
 
             DrawBeat.CallbackEnd(pictureBox2);
         }

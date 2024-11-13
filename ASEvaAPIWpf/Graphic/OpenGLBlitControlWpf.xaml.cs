@@ -161,8 +161,9 @@ namespace ASEva.UIWpf
                     d3dimg.Unlock();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 onDestroy();
                 initOK = false;
                 return;
@@ -204,7 +205,7 @@ namespace ASEva.UIWpf
             if (!createContext()) return;
 
             try { d3d = new Direct3DEx(); }
-            catch (Exception) { }
+            catch (Exception ex) { Dump.Exception(ex); }
             if (d3d == null)
             {
                 onDestroy();
@@ -312,8 +313,9 @@ namespace ASEva.UIWpf
 
                 gl.Flush();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 onDestroy();
                 return;
             }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Navigation;
+using ASEva.Utility;
 
 namespace ASEva.UIWpf
 {
@@ -33,8 +34,8 @@ namespace ASEva.UIWpf
                 };
                 typeof(XamlReader).GetMethod("LoadBaml", BindingFlags.NonPublic | BindingFlags.Static).Invoke(null, new object[] { stream, parserContext, self, true });
             }
-            catch (Exception)
-            { }
+            catch (Exception ex)
+            { Dump.Exception(ex); }
         }
     }
 }

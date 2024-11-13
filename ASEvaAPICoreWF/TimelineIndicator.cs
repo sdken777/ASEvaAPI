@@ -83,7 +83,7 @@ namespace ASEva.UICoreWF
                     e.Graphics.FillRectangle(new SolidBrush(valueColor), (float)(value * width) - 2.5f, -1.0f, 4.0f, (float)height + 1.0f);
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex) { Dump.Exception(ex); }
 
             DrawBeat.CallbackEnd(pictureBox1);
         }

@@ -7,6 +7,7 @@ using Eto.WinForms;
 using Eto.WinForms.Drawing;
 using Eto.WinForms.Forms;
 using ASEva.UIEto;
+using ASEva.Utility;
 
 namespace ASEva.UICoreWF
 {
@@ -154,7 +155,7 @@ namespace ASEva.UICoreWF
 				{
 					contentControl.BackColor = sd.Color.Transparent;
 				}
-				catch (ArgumentException) { }
+				catch (ArgumentException ex) { Dump.Exception(ex); }
 			}
 			base.SetContent(control, contentControl);
 		}

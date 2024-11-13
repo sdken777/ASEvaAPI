@@ -70,7 +70,7 @@ namespace ASEva.UICoreWF
                 e.Graphics.FillEllipse(new SolidBrush(BorderColor), new Rectangle(1, 1, sizeLarge, sizeLarge));
                 e.Graphics.FillEllipse(new SolidBrush(IndicatorColor), new Rectangle(1 + sizeBorder, 1 + sizeBorder, sizeSmall, sizeSmall));
             }
-            catch (Exception) { }
+            catch (Exception ex) { Dump.Exception(ex); }
 
             DrawBeat.CallbackEnd(pictureBox1);
         }

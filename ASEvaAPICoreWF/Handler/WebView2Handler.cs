@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.Web.WebView2.Core;
 using System.Reflection;
 using Eto.WinForms.Forms.Controls;
-
+using ASEva.Utility;
 
 #if WINFORMS
 using WebView2Control = Microsoft.Web.WebView2.WinForms.WebView2;
@@ -93,9 +93,10 @@ namespace ASEva.UICoreWF
 			{
 				await Control.EnsureCoreWebView2Async(env);
 			}
-			catch (Exception)
+			catch (Exception ex)
             {
-				failed = true;
+                Dump.Exception(ex);
+                failed = true;
             }
 		}
 		
@@ -177,9 +178,10 @@ namespace ASEva.UICoreWF
 								lastBound = curBound;
 							}
 						}
-						catch (Exception)
+						catch (Exception ex)
 						{
-							timer.Stop();
+                            Dump.Exception(ex);
+                            timer.Stop();
 							timer = null;
 						}
 					};
@@ -199,9 +201,10 @@ namespace ASEva.UICoreWF
 					delayedActions = null;
 				}
 			}
-			catch (Exception)
+			catch (Exception ex)
             {
-				failed = true;
+                Dump.Exception(ex);
+                failed = true;
             }
 		}
 

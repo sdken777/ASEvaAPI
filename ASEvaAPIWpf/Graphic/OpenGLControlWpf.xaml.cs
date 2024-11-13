@@ -183,8 +183,9 @@ namespace ASEva.UIWpf
                     drawingContext.DrawText(text, new Point(posX, posY));
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 initOK = false;
             }
 
@@ -300,8 +301,9 @@ namespace ASEva.UIWpf
 
                 gl.Flush();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 onDestroy();
                 return;
             }

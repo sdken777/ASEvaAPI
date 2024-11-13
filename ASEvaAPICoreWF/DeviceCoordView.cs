@@ -124,7 +124,7 @@ namespace ASEva.UICoreWF
                     }
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex) { Dump.Exception(ex); }
 
             DrawBeat.CallbackEnd(pictureBox1);
         }

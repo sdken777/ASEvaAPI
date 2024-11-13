@@ -5,6 +5,7 @@ using ASEva.UIEto;
 using Eto;
 using Eto.Forms;
 using Eto.Drawing;
+using ASEva.Utility;
 
 namespace ASEva.UICoreWF
 {
@@ -143,8 +144,9 @@ namespace ASEva.UICoreWF
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 if (timer != null)
                 {
                     timer.Stop();

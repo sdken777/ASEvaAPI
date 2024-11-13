@@ -153,7 +153,7 @@ namespace ASEva.UICoreWF
                     e.Graphics.DrawString(text, font, fontBrush, gridSize * i + gridSize / 2 - 0.5f - e.Graphics.MeasureString(text, font).Width * 0.5f, dpiRatio * 2.0f);
                 }
             }
-            catch (Exception) { }
+            catch (Exception ex) { Dump.Exception(ex); }
 
             DrawBeat.CallbackEnd(this);
         }

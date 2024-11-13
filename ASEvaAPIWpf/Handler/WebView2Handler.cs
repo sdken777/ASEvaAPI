@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.Web.WebView2.Core;
 using System.Reflection;
 using Eto.Wpf.Forms.Controls;
-
+using ASEva.Utility;
 
 #if WINFORMS
 using WebView2Control = Microsoft.Web.WebView2.WinForms.WebView2;
@@ -93,9 +93,10 @@ namespace ASEva.UIWpf
 			{
 				await Control.EnsureCoreWebView2Async(env);
 			}
-			catch (Exception)
+			catch (Exception ex)
             {
-				failed = true;
+                Dump.Exception(ex);
+                failed = true;
             }
 		}
 		
@@ -164,9 +165,10 @@ namespace ASEva.UIWpf
 								lastPos = curPos;
 							}
 						}
-						catch (Exception)
+						catch (Exception ex)
 						{
-							timer.Stop();
+                            Dump.Exception(ex);
+                            timer.Stop();
 							timer = null;
 						}
 					};
@@ -186,9 +188,10 @@ namespace ASEva.UIWpf
 					delayedActions = null;
 				}
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
-				failed = true;
+                Dump.Exception(ex);
+                failed = true;
 			}
 		}
 

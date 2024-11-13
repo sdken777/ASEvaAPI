@@ -80,8 +80,9 @@ namespace ASEva.UICoreWF
                 callback.OnGLRender(gl, dummy);
                 gl.Finish();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 onDestroy();
             }
 
@@ -139,8 +140,9 @@ namespace ASEva.UICoreWF
 
                 gl.Flush();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 onDestroy();
                 return;
             }
@@ -260,7 +262,7 @@ namespace ASEva.UICoreWF
                     {
                         if (gl.ChoosePixelFormatARB(tempHDC, intAttribList, floatAttribList, 1, format, dummy)) formats.Add(format[0]);
                     }
-                    catch (Exception) { break; }
+                    catch (Exception ex) { Dump.Exception(ex); break; }
                 }
             }
             formats.Add(basicPixelformat);

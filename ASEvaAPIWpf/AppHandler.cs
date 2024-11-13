@@ -6,6 +6,7 @@ using Eto.Drawing;
 using Eto.Wpf;
 using Eto.Wpf.Forms;
 using System.Collections.Generic;
+using ASEva.Utility;
 
 namespace ASEva.UIWpf
 {
@@ -80,6 +81,7 @@ namespace ASEva.UIWpf
             }
             catch (Exception ex)
             {
+                Dump.Exception(ex);
                 App.TriggerFatalException(new UnhandledExceptionEventArgs(ex, false));
                 window.Close();
             }
@@ -125,6 +127,7 @@ namespace ASEva.UIWpf
             }
             catch (Exception ex)
             {
+                Dump.Exception(ex);
                 App.TriggerFatalException(new UnhandledExceptionEventArgs(ex, false));
                 panel.Close();
                 return false;

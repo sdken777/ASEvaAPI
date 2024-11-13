@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using System.Drawing;
+using ASEva.Utility;
 
 namespace ASEva.UIWpf
 {
@@ -9,8 +10,8 @@ namespace ASEva.UIWpf
 	{
         static Win32()
         {
-			try { HandleOpengl32 = Win32.LoadLibrary(OpenGL32); } catch (Exception) {}
-			try { HandleGlu32 = Win32.LoadLibrary(Glu32); } catch (Exception) {}
+			try { HandleOpengl32 = Win32.LoadLibrary(OpenGL32); } catch (Exception ex) { Dump.Exception(ex); }
+			try { HandleGlu32 = Win32.LoadLibrary(Glu32); } catch (Exception ex) { Dump.Exception(ex); }
 		}
 
 		public static IntPtr HandleOpengl32 { get; private set; }

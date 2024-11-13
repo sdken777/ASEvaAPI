@@ -6,6 +6,7 @@ using Eto.Drawing;
 using Eto.WinForms;
 using System.Collections.Generic;
 using Eto.WinForms.Forms;
+using ASEva.Utility;
 
 namespace ASEva.UICoreWF
 {
@@ -142,6 +143,7 @@ namespace ASEva.UICoreWF
             }
             catch (Exception ex)
             {
+                Dump.Exception(ex);
                 App.TriggerFatalException(new UnhandledExceptionEventArgs(ex, false));
             }
         }
@@ -189,6 +191,7 @@ namespace ASEva.UICoreWF
             }
             catch (Exception ex)
             {
+                Dump.Exception(ex);
                 App.TriggerFatalException(new UnhandledExceptionEventArgs(ex, false));
                 return false;
             }
