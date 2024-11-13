@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 3, 4, 0); // Update log / 更新记录: wayland时设置FontLibraryOption.EtoSkipGetFamily
+            return new Version(3, 3, 4, 1); // Update log / 更新记录: 添加avalonia wayland兼容性警告
         }
     }
 }

@@ -6,8 +6,11 @@ namespace ASEva.UIGtk
 {
     public class AvaloniaAdaptorGtk : AvaloniaAdaptor
     {
+        public static bool AvaloniaApp { get; private set; }
+
         public AvaloniaAdaptorGtk()
         {
+            AvaloniaApp = true;
             String screenName = null;
             scale = ScaleFactorQuery.Query(out screenName);
             if (!String.IsNullOrEmpty(screenName) && scale != null)

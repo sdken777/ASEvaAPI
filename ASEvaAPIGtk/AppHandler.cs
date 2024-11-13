@@ -109,6 +109,12 @@ namespace ASEva.UIGtk
 
             webViewBackend = "webkit2";
 
+            if (AvaloniaAdaptorGtk.AvaloniaApp && uiBackend == "wayland")
+            {
+                var warningMsg = "[ASEvaAPIGtk] For Avalonia app on wayland backend, Eto controls won't show.";
+                Console.WriteLine(warningMsg);
+            }
+
             return app;
         }
 
