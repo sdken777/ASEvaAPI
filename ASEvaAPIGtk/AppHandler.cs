@@ -98,6 +98,7 @@ namespace ASEva.UIGtk
             OverlayLayout.DelayHandleControl = true;
             FullScreenExtensions.Handler = new FullScreenHandler();
             OxyPlotView.Factory = new OxyPlotViewFactoryGtk();
+            if (uiBackend == "wayland") FontLibraryOption.EtoSkipGetFamily = true;
 
             FuncManager.Register("GetUIBackendAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
             FuncManager.Register("RegisterLegacyValueGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.SingleValue, getLegacyStyleName(), typeof(ValueGraph)); return null; });

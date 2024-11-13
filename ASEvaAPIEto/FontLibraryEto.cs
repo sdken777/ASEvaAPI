@@ -10,8 +10,11 @@ namespace ASEva.UIEto
         public static Font GetFont(Font defaultFont, float size)
         {
             FontFamily family = null;
-            try { family = defaultFont.Family; }
-            catch (Exception ex) { Dump.Exception(ex); }
+            if (!FontLibraryOption.EtoSkipGetFamily)
+            {
+                try { family = defaultFont.Family; }
+                catch (Exception ex) { Dump.Exception(ex); }
+            }
 
             if (family == null)
             {
@@ -54,5 +57,10 @@ namespace ASEva.UIEto
 
         private static Dictionary<String, Font> library = new Dictionary<String, Font>();
         private static Dictionary<float, Font> libraryDefault = new Dictionary<float, Font>();
+    }
+
+    public class FontLibraryOption
+    {
+        public static bool EtoSkipGetFamily { get; set; }
     }
 }
