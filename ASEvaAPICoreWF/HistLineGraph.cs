@@ -79,9 +79,9 @@ namespace ASEva.UICoreWF
 
 			DrawBeat.CallbackBegin(pictureBox1, "ASEva.UICoreWF.HistLineGraph");
 
-			//try
-			//{
-				var g = e.Graphics;
+            try
+            {
+                var g = e.Graphics;
 				g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 				g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
 
@@ -417,8 +417,8 @@ namespace ASEva.UICoreWF
 				{
 					g.DrawPolygon(pen, ptList.ToArray());
 				}
-			//}
-			//catch (Exception) { }
+			}
+			catch (Exception) { }
 
 			DrawBeat.CallbackEnd(pictureBox1);
 		}

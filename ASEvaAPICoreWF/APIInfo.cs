@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 5, 0); // Update log / 更新记录: 支持FlowLayout.ScrollToControl
+            return new Version(2, 9, 5, 1); // Update log / 更新记录: 恢复HistLineGraph异常捕获
         }
     }
 }
