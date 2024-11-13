@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Threading;
+using ASEva.Utility;
 
 namespace ASEva
 {
@@ -532,7 +533,7 @@ namespace ASEva
 
                 return true;
             }
-            catch (Exception) { return false; }
+            catch (Exception ex) { Dump.Exception(ex); return false; }
         }
 
         /// \~English
@@ -649,7 +650,7 @@ namespace ASEva
 
                 return CreateGraphDataEncapsulation(rawOutput);
             }
-            catch (Exception) { return null; }
+            catch (Exception ex) { Dump.Exception(ex); return null; }
         }
 
         private static GraphValidation RowStringToValidation(String rowText)

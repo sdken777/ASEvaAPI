@@ -173,6 +173,7 @@ namespace ASEva.UIEto
                 }
                 catch (Exception ex)
                 {
+                     Dump.Exception(ex);
                     if (firstFatalException == null) firstFatalException = ex;
                 }
 
@@ -457,6 +458,7 @@ namespace ASEva.UIEto
             }
             catch (Exception ex)
             {
+                Dump.Exception(ex);
                 if (firstFatalException == null) firstFatalException = ex;
             }
 
@@ -583,7 +585,7 @@ namespace ASEva.UIEto
 
                     Console.WriteLine("Exception message written to: " + errorFilePath);
                 }
-                catch (Exception) {}
+                catch (Exception e) { Dump.Exception(e); }
             }
             else if (firstFatalException == null) firstFatalException = ex;
         }
@@ -650,13 +652,13 @@ namespace ASEva.UIEto
                             if (target.FullName.StartsWith("Microsoft.GeneratedCode")) continue;
                             String assemblyLocation = null;
                             try { assemblyLocation = target.Location; }
-                            catch (Exception) { continue; }
+                            catch (Exception ex) { Dump.Exception(ex); continue; }
                             if (assemblyLocation == dllFilePath || assemblyLocation == dllFileName) assembly = target;
                         }
                         if (assembly == null) 
                         {
                             try { assembly = Assembly.LoadFrom(dllFilePath); }
-                            catch {}
+                            catch (Exception ex) { Dump.Exception(ex); }
                         }
 
                         if (assembly != null)

@@ -1,6 +1,7 @@
 ﻿using System;
 using Eto.Forms;
 using Eto.Drawing;
+using ASEva.Utility;
 
 namespace ASEva.UIEto
 {
@@ -35,7 +36,7 @@ namespace ASEva.UIEto
             if (screen != null)
             {
                 try { bound = screen.Bounds; }
-                catch (Exception) {}
+                catch (Exception ex) { Dump.Exception(ex); }
             }
             if (bound == null)
             {

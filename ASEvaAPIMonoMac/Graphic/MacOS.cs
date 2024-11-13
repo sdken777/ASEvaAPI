@@ -9,14 +9,14 @@ namespace ASEva.UIMonoMac
 	{
         static MacOS()
         {
-			try { HandleGL = MacOS.dlopen(libGL, 0x0a); } catch (Exception) {}
-			try { HandleGLU = MacOS.dlopen(libGLU, 0x0a); } catch (Exception) {}
+			try { HandleGL = MacOS.dlopen(libGL, 0x0a); } catch (Exception ex) { Dump.Exception(ex); }
+			try { HandleGLU = MacOS.dlopen(libGLU, 0x0a); } catch (Exception ex) { Dump.Exception(ex); }
 
 			var entryFolder = EntryFolder.Path;
 			if (entryFolder != null)
 			{
 				var glewFilePath = entryFolder + Path.DirectorySeparatorChar + libGLEW;
-				try { HandleGLEW = MacOS.dlopen(glewFilePath, 0x0a); } catch (Exception) {}
+				try { HandleGLEW = MacOS.dlopen(glewFilePath, 0x0a); } catch (Exception ex) { Dump.Exception(ex); }
 			}
 		}
 

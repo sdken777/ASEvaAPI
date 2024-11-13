@@ -1,5 +1,6 @@
 ﻿using System;
 using ASEva.UIEto;
+using ASEva.Utility;
 using Eto.Forms;
 using Eto.GtkSharp;
 
@@ -70,8 +71,9 @@ namespace ASEva.UIGtk
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 etoControl = null;
                 glViewBackend = null;
                 supportOverlay = true;

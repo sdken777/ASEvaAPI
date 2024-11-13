@@ -116,7 +116,7 @@ namespace ASEva.UIGtk
                         }
                     }
                 }
-                catch (Exception) {}
+                catch (Exception ex) { Dump.Exception(ex); }
             }
             if (!contextCreated)
             {
@@ -145,8 +145,9 @@ namespace ASEva.UIGtk
 
                 gl.Flush();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 onDestroy();
                 return;
             }
@@ -176,8 +177,9 @@ namespace ASEva.UIGtk
                 callback.OnGLRender(gl, dummy);
                 gl.Finish();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 onDestroy();
             }
 
@@ -187,8 +189,9 @@ namespace ASEva.UIGtk
                 {
                     Linux.glXSwapIntervalEXT(display, xid, 0);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Dump.Exception(ex);
                     swapIntervalFailed = true;
                 }
             }

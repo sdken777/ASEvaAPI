@@ -415,7 +415,7 @@ namespace ASEva.Utility
                     meta.Length = length;
                     found = true;
                 }
-                catch (Exception) { }
+                catch (Exception ex) { Dump.Exception(ex); }
 
                 if (!found)
                 {
@@ -430,7 +430,7 @@ namespace ASEva.Utility
                             found = true;
                         }
                     }
-                    catch (Exception) { }
+                    catch (Exception ex) { Dump.Exception(ex); }
                 }
 
                 if (!found) return null;
@@ -453,7 +453,7 @@ namespace ASEva.Utility
                     }
                     else meta.Comment = "";
                 }
-                catch (Exception) { meta.Comment = ""; }
+                catch (Exception ex) { Dump.Exception(ex); meta.Comment = ""; }
 
                 try
                 {
@@ -467,7 +467,7 @@ namespace ASEva.Utility
                     }
                     else meta.CPUTimeModel = null;
                 }
-                catch (Exception) { meta.CPUTimeModel = null; }
+                catch (Exception ex) { Dump.Exception(ex); meta.CPUTimeModel = null; }
 
                 try
                 {
@@ -495,8 +495,9 @@ namespace ASEva.Utility
                         meta.HostSync = false;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Dump.Exception(ex);
                     meta.HostPosixModel = null;
                     meta.HostSync = false;
                 }
@@ -540,7 +541,7 @@ namespace ASEva.Utility
                     }
                     else meta.GNSSPosixModel = null;
                 }
-                catch (Exception) { meta.GNSSPosixModel = null; }
+                catch (Exception ex) { Dump.Exception(ex); meta.GNSSPosixModel = null; }
 
                 var pickNodes = root.GetElementsByTagName("pick");
                 foreach (XmlElement pickNode in pickNodes)
@@ -576,7 +577,7 @@ namespace ASEva.Utility
                     {
                         meta.Versions[attribs["software"].Value] = Version.Parse(attribs["software_version"].Value);
                     }
-                    catch (Exception) { }
+                    catch (Exception ex) { Dump.Exception(ex); }
                 }
                 else
                 {
@@ -587,13 +588,13 @@ namespace ASEva.Utility
                         {
                             meta.Versions[versionNode.Attributes["key"].Value] = Version.Parse(versionNode.InnerText);
                         }
-                        catch (Exception) { }
+                        catch (Exception ex) { Dump.Exception(ex); }
                     }
                 }
 
                 meta.FilePath = filePath;
             }
-            catch (Exception) { }
+            catch (Exception ex) { Dump.Exception(ex); }
 
             return meta;
         }
@@ -615,7 +616,7 @@ namespace ASEva.Utility
                 var root = Path.GetDirectoryName(FilePath);
                 if (!Directory.Exists(root)) Directory.CreateDirectory(root);
             }
-            catch (Exception) { return; }
+            catch (Exception ex) { Dump.Exception(ex); return; }
 
             var xml = new XmlDocument();
             xml.AppendChild(xml.CreateXmlDeclaration("1.0", "utf-8", null));
@@ -690,7 +691,7 @@ namespace ASEva.Utility
                 xml.Save(FilePath);
                 return;
             }
-            catch (Exception) {}
+            catch (Exception ex) { Dump.Exception(ex);}
 
             if (File.Exists(FilePath))
             {
@@ -699,7 +700,7 @@ namespace ASEva.Utility
                     File.Delete(FilePath);
                     xml.Save(FilePath);
                 }
-                catch (Exception) {}
+                catch (Exception ex) { Dump.Exception(ex); }
             }
         }
     }

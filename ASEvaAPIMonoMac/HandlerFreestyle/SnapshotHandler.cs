@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using ASEva;
 using ASEva.Samples;
+using ASEva.Utility;
 using ASEva.UIEto;
 using Eto.Forms;
 using Eto.Drawing;
@@ -44,8 +45,9 @@ namespace ASEva.UIMonoMac
                 if (rawImage.Width == logicalWidth) return rawImage;
                 else return rawImage.Resize(logicalWidth);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 return null;
             }
         }
@@ -92,8 +94,9 @@ namespace ASEva.UIMonoMac
                 if (rawImage.Width == logicalWidth) return rawImage;
                 else return rawImage.Resize(logicalWidth);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 return null;
             }
         }

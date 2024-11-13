@@ -3,7 +3,6 @@ using Gtk;
 using SharpGL;
 using ASEva.UIEto;
 using ASEva.Utility;
-using System.Runtime.InteropServices;
 
 namespace ASEva.UIGtk
 {
@@ -44,7 +43,7 @@ namespace ASEva.UIGtk
             if (Window == null) return;
 
             try { glContext = Window.CreateGlContext(); }
-            catch (Exception) {}
+            catch (Exception ex) { Dump.Exception(ex); }
             if (glContext == null) return;
 
             glContext.SetUseEs(0);
@@ -124,8 +123,9 @@ namespace ASEva.UIGtk
                 
                 gl.Flush();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 onDestroy();
                 return;
             }
@@ -154,8 +154,9 @@ namespace ASEva.UIGtk
                 {
                     Linux.gdk_cairo_draw_from_gl(args.Cr.Handle, Window.Handle, (int)colorBuffer[antialias == GLAntialias.Disabled ? 0 : 1], (int)OpenGL.GL_RENDERBUFFER, (int)curSize.RealPixelScale, 0, 0, curSize.RealWidth, curSize.RealHeight);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Dump.Exception(ex);
                     rendererStatusOK = false;
                 }
             }
@@ -211,8 +212,9 @@ namespace ASEva.UIGtk
 
                     Linux.gdk_cairo_draw_from_gl(args.Cr.Handle, Window.Handle, (int)colorBuffer[antialias == GLAntialias.Disabled ? 0 : 1], (int)OpenGL.GL_RENDERBUFFER, (int)curSize.RealPixelScale, 0, 0, curSize.RealWidth, curSize.RealHeight);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Dump.Exception(ex);
                     rendererStatusOK = false;
                 }
             }

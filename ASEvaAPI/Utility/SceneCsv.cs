@@ -83,8 +83,9 @@ namespace ASEva.Utility
                 output.Segments = sceneBuf;
                 return output;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 if (reader != null) reader.Close();
                 return null;
             }
@@ -120,8 +121,9 @@ namespace ASEva.Utility
 
                 writer.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 if (writer != null) writer.Close();
             }
         }

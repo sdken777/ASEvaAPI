@@ -74,8 +74,9 @@ namespace ASEva.Utility
             {
                 if (!output.FromGeneralSample(input)) return null;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 return null;
             }
 

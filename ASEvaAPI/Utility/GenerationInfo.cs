@@ -327,7 +327,7 @@ namespace ASEva.Utility
                     }
                     else info.GNSSPosixModel = null;
                 }
-                catch (Exception) { info.GNSSPosixModel = null; }
+                catch (Exception ex) { Dump.Exception(ex); info.GNSSPosixModel = null; }
 
                 if (attribs["host_sync"] != null)
                 {
@@ -342,7 +342,7 @@ namespace ASEva.Utility
                 }
                 info.GuestSyncIDs = guestSyncList.ToArray();
             }
-            catch (Exception) { }
+            catch (Exception ex) { Dump.Exception(ex); }
 
             if (info == null)
             {
@@ -375,7 +375,7 @@ namespace ASEva.Utility
                 var root = Path.GetDirectoryName(FilePath);
                 if (!Directory.Exists(root)) Directory.CreateDirectory(root);
             }
-            catch (Exception) { return; }
+            catch (Exception ex) { Dump.Exception(ex); return; }
 
             var xml = new XmlDocument();
             xml.AppendChild(xml.CreateXmlDeclaration("1.0", "utf-8", null));
@@ -435,7 +435,7 @@ namespace ASEva.Utility
                 xml.Save(FilePath);
                 return;
             }
-            catch (Exception) {}
+            catch (Exception ex) { Dump.Exception(ex); }
 
             if (File.Exists(FilePath))
             {
@@ -444,7 +444,7 @@ namespace ASEva.Utility
                     File.Delete(FilePath);
                     xml.Save(FilePath);
                 }
-                catch (Exception) {}
+                catch (Exception ex) { Dump.Exception(ex); }
             }
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SkiaSharp;
 using Avalonia.Media;
+using ASEva.Utility;
 
 namespace ASEva.UIAvalonia
 {
@@ -181,8 +182,9 @@ namespace ASEva.UIAvalonia
                         var newFont = new SKFont(SKTypeface.FromFamilyName(fontName, weight, width, slant), size);
                         skLibrary[key] = newFont;
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        Dump.Exception(ex);
                         skLibrary[key] = null;
                     }
                 }

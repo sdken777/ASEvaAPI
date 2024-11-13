@@ -8424,7 +8424,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.5.3
+            version=3.6.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -20218,6 +20218,38 @@
             <summary>
             设置各绘图对象的绘制时间间隔
             </summary>
+        </member>
+        <member name="T:ASEva.Utility.Dump">
+            \~English
+            <summary>
+            (api:app=3.6.0) For buffering dumped info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.6.0) 用于缓存被丢弃的信息
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.Dump.Exception(System.Exception)">
+            \~English
+            <summary>
+            Dump exception
+            </summary>
+            \~Chinese
+            <summary>
+            丢弃异常
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.Dump.ClearExceptions">
+            \~English
+            <summary>
+            Clear dumped exceptions
+            </summary>
+            <returns>Info of dumped exceptions</returns>
+            \~Chinese
+            <summary>
+            清空被丢弃的异常
+            </summary>
+            <returns>被丢弃的异常信息</returns>
         </member>
         <member name="T:ASEva.Utility.EntryFolder">
             \~English

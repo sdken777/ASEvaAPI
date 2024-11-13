@@ -120,8 +120,9 @@ namespace ASEva.UIMonoMac
                     callback.OnGLInitialize(gl, ctxInfo);
                     gl.Flush();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Dump.Exception(ex);
                     ClearGLContext();
                     initStatus = InitStatus.InitFailed;
                     return;
@@ -151,8 +152,9 @@ namespace ASEva.UIMonoMac
                 callback.OnGLRender(gl, texts);
                 gl.Finish();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 ClearGLContext();
                 initStatus = InitStatus.InitFailed;
                 DrawBeat.CallbackEnd(this);

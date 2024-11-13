@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using ASEva.Utility;
 
 namespace ASEva.Samples
 {
@@ -169,7 +170,7 @@ namespace ASEva.Samples
                 int length = file.Read(data, 0, (int)file.Length);
                 if (length != file.Length) data = null;
             }
-            catch (Exception) {}
+            catch (Exception ex) { Dump.Exception(ex); }
             if (file != null) file.Close();
             if (data == null) return null;
 
@@ -249,7 +250,7 @@ namespace ASEva.Samples
                 file.Write(data);
                 ok = true;
             }
-            catch (Exception) {}
+            catch (Exception ex) { Dump.Exception(ex); }
             if (file != null) file.Close();
 
             return ok;

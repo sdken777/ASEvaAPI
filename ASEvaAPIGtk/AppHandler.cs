@@ -74,7 +74,7 @@ namespace ASEva.UIGtk
                     Gtk.StyleContext.AddProviderForScreen(gdkMonitor.Display.DefaultScreen, cssProvider, Gtk.StyleProviderPriority.Settings);
                 }
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { Dump.Exception(ex); }
 
             uiBackend = queryUIBackend();
             if (uiBackend == "wayland") LinuxFuncLoader.UseEGL = true;
@@ -211,7 +211,7 @@ namespace ASEva.UIGtk
                 var waylandMonitorType = new GLib.GType(gdk_wayland_monitor_get_type());
                 if (waylandMonitorType.IsInstance(monitor.Handle)) return "wayland";
             }
-            catch (Exception) {}
+            catch (Exception ex) { Dump.Exception(ex); }
             return "unknown";
         }
 

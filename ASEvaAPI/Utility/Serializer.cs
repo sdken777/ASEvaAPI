@@ -39,7 +39,7 @@ namespace ASEva.Utility
                     }
                 }
             }
-            catch (Exception) { return null; }
+            catch (Exception ex) { Dump.Exception(ex); return null; }
         }
 
         /// \~English
@@ -60,7 +60,7 @@ namespace ASEva.Utility
                     return serialize.Deserialize(memory);
                 }
             }
-            catch (Exception) { return null; }
+            catch (Exception ex) { Dump.Exception(ex); return null; }
         }
 
         /// \~English
@@ -81,7 +81,7 @@ namespace ASEva.Utility
                 fs.Close();
                 return true;
             }
-            catch (Exception) { return false; }
+            catch (Exception ex) { Dump.Exception(ex); return false; }
         }
 
         /// \~English
@@ -102,7 +102,7 @@ namespace ASEva.Utility
                 stream.Close();
                 return data;
             }
-            catch (Exception) { return null; }
+            catch (Exception ex) { Dump.Exception(ex); return null; }
         }
 
         /// \~English
@@ -128,7 +128,7 @@ namespace ASEva.Utility
                     }
                 }
             }
-            catch (Exception) { return null; }
+            catch (Exception ex) { Dump.Exception(ex); return null; }
         }
 
         /// \~English
@@ -149,7 +149,7 @@ namespace ASEva.Utility
                     return serialize.ReadObject(memory);
                 }
             }
-            catch (Exception) { return null; }
+            catch (Exception ex) { Dump.Exception(ex); return null; }
         }
 
         /// \~English
@@ -170,7 +170,7 @@ namespace ASEva.Utility
                 fs.Close();
                 return true;
             }
-            catch (Exception) { return false; }
+            catch (Exception ex) { Dump.Exception(ex); return false; }
         }
 
         /// \~English
@@ -191,7 +191,7 @@ namespace ASEva.Utility
                 stream.Close();
                 return data;
             }
-            catch (Exception) { return null; }
+            catch (Exception ex) { Dump.Exception(ex); return null; }
         }
     }
 }

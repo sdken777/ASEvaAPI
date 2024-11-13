@@ -111,7 +111,7 @@ namespace ASEva.Utility
                 var obj = Enum.Parse(type, a[key].Value);
                 return obj == null ? defaultValue : obj;
             }
-            catch (Exception) { return defaultValue; }
+            catch (Exception ex) { Dump.Exception(ex); return defaultValue; }
         }
 
         public FloatPoint? ParsePoint(String key, FloatPoint? defaultPoint)

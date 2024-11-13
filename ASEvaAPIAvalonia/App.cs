@@ -117,7 +117,7 @@ namespace ASEva.UIAvalonia
                 {
                     exceptionTimer.Stop();
                     try { mainWindow.Close(); }
-                    catch (Exception) { token.Cancel(); }
+                    catch (Exception ex) { Dump.Exception(ex); token.Cancel(); }
                 }
             };
             exceptionTimer.Start();
@@ -130,6 +130,7 @@ namespace ASEva.UIAvalonia
             }
             catch (Exception ex)
             {
+                Dump.Exception(ex);
                 if (fatalException == null) fatalException = ex;
             }
 
@@ -167,7 +168,7 @@ namespace ASEva.UIAvalonia
                     box.Show(null, buttons);
                     appBuilder.Instance.Run(token.Token);
                 }
-                catch (Exception) {}
+                catch (Exception ex) { Dump.Exception(ex); }
             }
             else
             {
@@ -265,7 +266,7 @@ namespace ASEva.UIAvalonia
 
                     Console.WriteLine("Exception message written to: " + errorFilePath);
                 }
-                catch (Exception) {}
+                catch (Exception e) { Dump.Exception(e);}
             }
             else if (fatalException == null) fatalException = ex;
         }

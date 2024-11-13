@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Eto;
 using Eto.Forms;
 using Eto.GtkSharp.Forms;
+using ASEva.Utility;
 
 namespace ASEva.UIGtk
 {
@@ -33,7 +34,7 @@ namespace ASEva.UIGtk
 						list.Add(new Screen(new ScreenHandler(monitor)));
 					}
 				}
-				catch (Exception) {}
+				catch (Exception ex) { Dump.Exception(ex); }
 				return list;
 
 #else
@@ -60,7 +61,7 @@ namespace ASEva.UIGtk
 					if (monitor == null) monitor = Gdk.Display.Default.GetMonitor(0);
 					return new Screen(new ScreenHandler(monitor));
 				}
-				catch (Exception) { return null; }
+				catch (Exception ex) { Dump.Exception(ex); return null; }
 #else
 				return new Screen(new ScreenHandler(Gdk.Display.Default.DefaultScreen, 0));
 #endif

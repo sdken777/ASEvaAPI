@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SkiaSharp;
+using ASEva.Utility;
 
 namespace ASEva.UIEto
 {
@@ -22,8 +23,9 @@ namespace ASEva.UIEto
                     var newFont = new SKFont(SKTypeface.FromFamilyName(fontName));
                     skLibraryWithDefault[key] = newFont;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Dump.Exception(ex);
                     skLibraryWithDefault[key] = null;
                 }
             }
@@ -40,8 +42,9 @@ namespace ASEva.UIEto
                     var newFont = new SKFont(SKTypeface.FromFamilyName(fontName, weight, width, slant), size);
                     skLibrary[key] = newFont;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Dump.Exception(ex);
                     skLibrary[key] = null;
                 }
             }

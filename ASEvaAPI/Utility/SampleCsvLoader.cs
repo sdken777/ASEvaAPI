@@ -116,8 +116,9 @@ namespace ASEva.Utility
                     return loader;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 if (reader != null) reader.Close();
                 return null;
             }
@@ -374,8 +375,9 @@ namespace ASEva.Utility
                 reader.Close();
                 return list.ToArray();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 if (reader != null) reader.Close();
                 return null;
             }

@@ -104,7 +104,7 @@ namespace ASEva.UIGtk
                 cc.Rectangle(0, 0, drawWidth, drawHeight);
                 cc.Stroke();
             }
-            catch (Exception) {}
+            catch (Exception ex) { Dump.Exception(ex); }
 
             DrawBeat.CallbackEnd(draw);
         }

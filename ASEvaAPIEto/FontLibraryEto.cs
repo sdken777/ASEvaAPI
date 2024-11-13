@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Eto.Drawing;
+using ASEva.Utility;
 
 namespace ASEva.UIEto
 {
@@ -10,7 +11,7 @@ namespace ASEva.UIEto
         {
             FontFamily family = null;
             try { family = defaultFont.Family; }
-            catch (Exception) {}
+            catch (Exception ex) { Dump.Exception(ex); }
 
             if (family == null)
             {
@@ -21,8 +22,9 @@ namespace ASEva.UIEto
                         var newFont = new Font(SystemFont.Default, size);
                         libraryDefault[size] = newFont;
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
+                        Dump.Exception(ex);
                         libraryDefault[size] = null;
                     }
                 }
@@ -41,8 +43,9 @@ namespace ASEva.UIEto
                     var newFont = new Font(family, size, style, decoration);
                     library[key] = newFont;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Dump.Exception(ex);
                     library[key] = null;
                 }
             }

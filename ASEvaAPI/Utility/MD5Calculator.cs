@@ -46,7 +46,7 @@ namespace ASEva.Utility
                 }
                 return sb.ToString();
             }
-            catch (Exception) {}
+            catch (Exception ex) { Dump.Exception(ex); }
             return null;
         }
 
@@ -76,7 +76,7 @@ namespace ASEva.Utility
                 }
                 return sb.ToString();
             }
-            catch (Exception) { }
+            catch (Exception ex) { Dump.Exception(ex); }
             return null;
         }
     }

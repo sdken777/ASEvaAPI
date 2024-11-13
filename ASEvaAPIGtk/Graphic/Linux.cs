@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
-using System.Reflection;
-using System.IO;
+using ASEva.Utility;
 
 namespace ASEva.UIGtk
 {
@@ -9,8 +8,8 @@ namespace ASEva.UIGtk
 	{
         static Linux()
         {
-			try { HandleGL = Linux.dlopen(libGL, 0x0a); } catch (Exception) {}
-			try { HandleGLU = Linux.dlopen(libGLU, 0x0a); } catch (Exception) {}
+			try { HandleGL = Linux.dlopen(libGL, 0x0a); } catch (Exception ex) { Dump.Exception(ex); }
+			try { HandleGLU = Linux.dlopen(libGLU, 0x0a); } catch (Exception ex) { Dump.Exception(ex); }
 		}
 
 		public static IntPtr HandleGL { get; private set; }

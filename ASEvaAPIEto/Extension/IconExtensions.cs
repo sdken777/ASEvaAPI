@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ASEva;
 using ASEva.Samples;
+using ASEva.Utility;
 using Eto.Drawing;
 
 namespace ASEva.UIEto
@@ -24,8 +25,9 @@ namespace ASEva.UIEto
                 if (bitmap == null) return null;
                 else return ToIcon(bitmap);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 return null;
             }
         }

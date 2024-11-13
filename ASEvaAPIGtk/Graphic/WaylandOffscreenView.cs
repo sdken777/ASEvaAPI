@@ -259,8 +259,9 @@ namespace ASEva.UIGtk
                 
                 gl.Flush();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 onDestroy();
                 return;
             }
@@ -362,8 +363,9 @@ namespace ASEva.UIGtk
 
                 CairoDrawText.Draw(cairo, textTasks.Clear(), size);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 onDestroy();
             }
 

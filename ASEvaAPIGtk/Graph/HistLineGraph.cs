@@ -500,7 +500,7 @@ namespace ASEva.UIGtk
 					cc.Stroke();
 				}
 			}
-			catch (Exception) {}
+			catch (Exception ex) { Dump.Exception(ex); }
         }
     }
 }

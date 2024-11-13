@@ -60,8 +60,9 @@ namespace ASEva.Utility
                 output.writer = writer;
                 return output;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Dump.Exception(ex);
                 if (writer != null) writer.Close();
                 return null;
             }

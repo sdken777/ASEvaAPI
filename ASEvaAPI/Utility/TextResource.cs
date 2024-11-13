@@ -92,7 +92,7 @@ namespace ASEva.Utility
 
             var xml = new XmlDocument();
             try { xml.LoadXml(xmlString); }
-            catch (Exception) { return null; }
+            catch (Exception ex) { Dump.Exception(ex); return null; }
 
             var output = new TextResource();
             foreach (XmlElement elem in xml.DocumentElement.GetElementsByTagName("t"))

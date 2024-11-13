@@ -10,7 +10,7 @@ using System.Text;
 using Eto.Forms;
 using Eto.GtkSharp;
 using Eto.GtkSharp.Forms;
-using ASEva.UIEto;
+using ASEva.Utility;
 
 namespace ASEva.UIGtk
 {
@@ -231,7 +231,7 @@ namespace ASEva.UIGtk
 					startInfo.UseShellExecute = true;
 					Process.Start(startInfo);
 				}
-				catch (Exception) { }
+				catch (Exception ex) { Dump.Exception(ex); }
 			}
             return false;
         }

@@ -350,7 +350,7 @@ namespace ASEva.UIGtk
                     }
                 }
             }
-            catch (Exception) {}
+            catch (Exception ex) { Dump.Exception(ex); }
         }
     }
 }

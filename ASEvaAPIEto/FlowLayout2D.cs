@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Eto.Forms;
 using Eto.Drawing;
+using ASEva.Utility;
 
 namespace ASEva.UIEto
 {
@@ -502,7 +503,7 @@ namespace ASEva.UIEto
                     containerWidth = Math.Min(containerLogicalSize.Width, (int)(VisibleRect.Width / Pixel.Scale - 6));
                     containerHeight = Math.Min(containerLogicalSize.Height, (int)(VisibleRect.Height / Pixel.Scale - 6));
                 }
-                catch (Exception) {}
+                catch (Exception ex) { Dump.Exception(ex); }
             }
             if (containerWidth < 8 || containerHeight < 8) return;
 

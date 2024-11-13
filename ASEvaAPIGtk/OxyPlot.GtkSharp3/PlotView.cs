@@ -316,21 +316,9 @@ namespace OxyPlot.GtkSharp
                     }
                 }
             }
-            catch (Exception paintException)
+            catch (Exception ex)
             {
-                var trace = new StackTrace(paintException);
-                Debug.WriteLine(paintException);
-                Debug.WriteLine(trace);
-
-                // using (var font = new Font("Arial", 10))
-                {
-                    // int width; int height;
-                    // this.GetSizeRequest(out width, out height);
-                    Debug.Assert(false, "OxyPlot paint exception: " + paintException.Message);
-
-                    // g.ResetTransform();
-                    // g.DrawString(, font, Brushes.Red, width / 2, height / 2, new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
-                }
+                ASEva.Utility.Dump.Exception(ex);
             }
         }
     }
