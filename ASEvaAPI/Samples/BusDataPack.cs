@@ -91,6 +91,11 @@ namespace ASEva.Samples
         /// 预约发送的授时服务器时间，单位纳秒，0表示无效
         /// </summary>
 		public ulong SchedulePosixTime { get; set; }
+
+        public BusMessageSample()
+        {
+            Data = [];
+        }
     }
 
     /// \~English
@@ -112,5 +117,10 @@ namespace ASEva.Samples
         /// 总线报文样本列表
         /// </summary>
         public BusMessageSample[] Samples { get; set; }
+
+        public BusDataPack()
+        {
+            Samples = [];
+        }
     }
 }

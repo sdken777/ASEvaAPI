@@ -105,5 +105,11 @@ namespace ASEva.Samples
         /// 信号列表
         /// </summary>
         public SignalData[] Signals { get; set; }
+
+        public SignalsData()
+        {
+            SignalID = "";
+            Signals = [];
+        }
     }
 }

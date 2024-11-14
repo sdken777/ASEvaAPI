@@ -169,7 +169,7 @@ namespace ASEva.Graph
         /// <param name="valueRefRange">矩阵表数据参考范围</param>
         /// <param name="defaultValue">矩阵表数据初始值</param>
         /// <returns>图表定义对象</returns>
-        public static GraphDefinition CreateDefinitionWithValidation(String title, String xTitle, String yTitle, MatrixTableMode mode, GraphValidation validation, MatrixTableRange xRange, MatrixTableRange yRange, MatrixTableValueRefRange valueRefRange, double defaultValue = 0)
+        public static GraphDefinition CreateDefinitionWithValidation(String title, String xTitle, String yTitle, MatrixTableMode mode, GraphValidation? validation, MatrixTableRange xRange, MatrixTableRange yRange, MatrixTableValueRefRange valueRefRange, double defaultValue = 0)
         {
             var def = new GraphDefinition();
             def.Type = GraphType.MatrixTable;
@@ -264,7 +264,7 @@ namespace ASEva.Graph
         /// 获取x轴范围
         /// </summary>
         /// <returns>x轴范围</returns>
-        public MatrixTableRange GetXRange()
+        public MatrixTableRange? GetXRange()
         {
             double b, s;
             int c;
@@ -290,7 +290,7 @@ namespace ASEva.Graph
         /// 获取y轴范围
         /// </summary>
         /// <returns>y轴范围</returns>
-        public MatrixTableRange GetYRange()
+        public MatrixTableRange? GetYRange()
         {
             double b, s;
             int c;
@@ -339,8 +339,8 @@ namespace ASEva.Graph
             var mode = (MatrixTableMode)Enum.Parse(typeof(MatrixTableMode), Definition.Config[0]);
             double defaultValue;
             Double.TryParse(Definition.Config[11], out defaultValue);
-            var xcount = GetXRange().Count;
-            var ycount = GetYRange().Count;
+            var xcount = GetXRange()?.Count ?? 0;
+            var ycount = GetYRange()?.Count ?? 0;
 
             if (mode == MatrixTableMode.Percentage)
             {
@@ -427,8 +427,8 @@ namespace ASEva.Graph
             var mode = (MatrixTableMode)Enum.Parse(typeof(MatrixTableMode), Definition.Config[0]);
             double defaultValue;
             Double.TryParse(Definition.Config[11], out defaultValue);
-            var xcount = GetXRange().Count;
-            var ycount = GetYRange().Count;
+            var xcount = GetXRange()?.Count ?? 0;
+            var ycount = GetYRange()?.Count ?? 0;
 
             if (mode == MatrixTableMode.Percentage)
             {
@@ -535,6 +535,7 @@ namespace ASEva.Graph
         {
             var xr = GetXRange();
             var yr = GetYRange();
+            if (xr == null || yr == null) return;
 
             x = (x - xr.Base) / xr.Step;
             y = (y - yr.Base) / yr.Step;
@@ -585,8 +586,8 @@ namespace ASEva.Graph
         /// <returns>统计数据</returns>
         public double[,] GetValues()
         {
-            var xc = GetXRange().Count;
-            var yc = GetYRange().Count;
+            var xc = GetXRange()?.Count ?? 0;
+            var yc = GetYRange()?.Count ?? 0;
 
             double k = 1;
             var mode = (MatrixTableMode)Enum.Parse(typeof(MatrixTableMode), Definition.Config[0]);
@@ -616,8 +617,8 @@ namespace ASEva.Graph
 
         public override void InitParamsAndData()
         {
-            var xr = GetXRange().Count;
-            var yr = GetYRange().Count;
+            var xr = GetXRange()?.Count ?? 0;
+            var yr = GetYRange()?.Count ?? 0;
             Data = new double[xr, yr * 2];
 
             double defaultValue;
@@ -633,8 +634,8 @@ namespace ASEva.Graph
 
         public override void MergeWith(GraphData data)
         {
-            var xc = GetXRange().Count;
-            var yc = GetYRange().Count;
+            var xc = GetXRange()?.Count ?? 0;
+            var yc = GetYRange()?.Count ?? 0;
 
             var mode = (MatrixTableMode)Enum.Parse(typeof(MatrixTableMode), Definition.Config[0]);
             switch (mode)
@@ -692,8 +693,8 @@ namespace ASEva.Graph
         public override bool HasData()
         {
             if (Data.Length == 0) return false;
-            var xr = GetXRange().Count;
-            var yr = GetYRange().Count;
+            var xr = GetXRange()?.Count ?? 0;
+            var yr = GetYRange()?.Count ?? 0;
             double defaultValue;
             Double.TryParse(Definition.Config[11], out defaultValue);
             for (int x = 0; x < xr; x++)

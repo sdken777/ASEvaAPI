@@ -69,9 +69,9 @@ namespace ASEva.Graph
         {
             if (data.HasData())
             {
-                if (data is SingleValueData)
+                if (data is SingleValueData svData)
                 {
-                    var val = (data as SingleValueData).GetValue();
+                    var val = svData.GetValue();
                     if (val >= lower && val <= upper)
                     {
                         percentage = null;

@@ -120,10 +120,8 @@ namespace ASEva.Graph
         {
             if (data.HasData())
             {
-                if (data is HistAndLineData)
+                if (data is HistAndLineData hist && hist.GetXValuesOrLabels() is HistLineXValues xValues)
                 {
-                    var hist = data as HistAndLineData;
-                    var xValues = hist.GetXValuesOrLabels() as HistLineXValues;
                     var samples = hist.GetSamples();
                     var thresholds = GetHistLineValuesThreshold(xValues);
 

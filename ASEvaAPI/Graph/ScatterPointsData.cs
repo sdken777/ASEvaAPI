@@ -141,7 +141,7 @@ namespace ASEva.Graph
         /// <param name="validation">数据验证方式，null表示不验证。支持OutlineInside, OutlineOutside</param>
         /// <param name="options">附加选项</param>
         /// <returns>图表定义对象</returns>
-        public static GraphDefinition CreateDefinitionWithValidationAndOptions(String title, String xTitle, String yTitle, ScatterRange xRange, ScatterRange yRange, GraphValidation validation, ScatterOptions options)
+        public static GraphDefinition CreateDefinitionWithValidationAndOptions(String title, String xTitle, String yTitle, ScatterRange xRange, ScatterRange yRange, GraphValidation? validation, ScatterOptions? options)
         {
             var def = new GraphDefinition();
             def.Type = GraphType.ScatterPoints;
@@ -181,7 +181,7 @@ namespace ASEva.Graph
         /// <returns>x轴标题</returns>
         public String GetXTitle()
         {
-            return Definition.ColumnTitles[0];
+            return Definition.ColumnTitles[0] ?? "";
         }
 
         /// \~English
@@ -196,7 +196,7 @@ namespace ASEva.Graph
         /// <returns>y轴标题</returns>
         public String GetYTitle()
         {
-            return Definition.ColumnTitles[1];
+            return Definition.ColumnTitles[1] ?? "";
         }
 
         /// \~English

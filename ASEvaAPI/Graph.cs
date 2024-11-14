@@ -232,7 +232,7 @@ namespace ASEva
         /// <summary>
         /// 各列数据标题
         /// </summary>
-        public List<String> ColumnTitles { get; set; }
+        public List<String?> ColumnTitles { get; set; }
 
         /// \~English
         /// <summary>
@@ -242,14 +242,14 @@ namespace ASEva
         /// <summary>
         /// 图表数据验证方式
         /// </summary>
-        public GraphValidation Validation { get; set; }
+        public GraphValidation? Validation { get; set; }
 
         public GraphDefinition()
         {
             Type = GraphType.Invalid;
             Config = new List<string>();
             MainTitle = "";
-            ColumnTitles = new List<string>();
+            ColumnTitles = new List<string?>();
             Validation = null;
         }
 
@@ -303,11 +303,11 @@ namespace ASEva
             return target;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            if (obj is GraphDefinition)
+            if (obj is GraphDefinition def)
             {
-                return (obj as GraphDefinition).ToString() == this.ToString();
+                return def.ToString() == this.ToString();
             }
             else return false;
         }
@@ -468,6 +468,7 @@ namespace ASEva
             try
             {
                 var root = Path.GetDirectoryName(file);
+                if (root == null) return false;
                 if (!Directory.Exists(root)) Directory.CreateDirectory(root);
                 if (!Directory.Exists(root)) return false;
 
@@ -510,7 +511,7 @@ namespace ASEva
                 var columnsText = "";
                 foreach (var title in Definition.ColumnTitles)
                 {
-                    columnsText += (columnsText.Length == 0 ? "" : ",") + (title == null ? "" : title);
+                    columnsText += (columnsText.Length == 0 ? "" : ",") + (title ?? "");
                 }
                 writer.WriteLine(columnsText);
 
@@ -548,7 +549,7 @@ namespace ASEva
         /// </summary>
         /// <param name="definition">图表定义</param>
         /// <returns>图表数据对象</returns>
-        public static GraphData Create(GraphDefinition definition)
+        public static GraphData? Create(GraphDefinition definition)
         {
             var rawData = new GraphData();
             rawData.ID = definition.GetID();
@@ -573,15 +574,15 @@ namespace ASEva
         /// </summary>
         /// <param name="file">文件路径</param>
         /// <returns>图表数据对象</returns>
-        public static GraphData Load(String file)
+        public static GraphData? Load(String file)
         {
             try
             {
                 var reader = new StreamReader(file);
 
                 // 第一行：header，ID，标题，数据参数
-                var comps = reader.ReadLine().Split(',');
-                if (comps.Length < 3 || (comps[0] != "ASEva Report" && comps[0] != "ASEva Report v2")) return null;
+                var comps = reader.ReadLine()?.Split(',');
+                if (comps == null || comps.Length < 3 || (comps[0] != "ASEva Report" && comps[0] != "ASEva Report v2")) return null;
 
                 bool isV2 = comps[0] == "ASEva Report v2";
                 int id;
@@ -595,10 +596,10 @@ namespace ASEva
                 }
 
                 // 第二行：类型，配置
-                comps = reader.ReadLine().Split(',');
+                comps = reader.ReadLine()?.Split(',');
 
                 GraphType type = GraphType.Invalid;
-                if (!Enum.TryParse<GraphType>(comps[0], out type)) return null;
+                if (comps == null || !Enum.TryParse<GraphType>(comps[0], out type)) return null;
 
                 var configList = new List<String>();
                 for (int i = 1; i < comps.Length; i++)
@@ -607,14 +608,14 @@ namespace ASEva
                 }
 
                 // 第三行：数据验证
-                GraphValidation validation = null;
+                GraphValidation? validation = null;
                 if (isV2)
                 {
-                    validation = RowStringToValidation(reader.ReadLine());
+                    validation = RowStringToValidation(reader.ReadLine() ?? "");
                 }
 
                 // 第四行：列标题
-                var columnList = reader.ReadLine().Split(',');
+                var columnList = reader.ReadLine()?.Split(',');
 
                 // 数据
                 var rowTexts = new List<String>();
@@ -643,7 +644,7 @@ namespace ASEva
                 rawOutput.Definition.Type = type;
                 rawOutput.Definition.MainTitle = title;
                 rawOutput.Definition.Config = configList;
-                rawOutput.Definition.ColumnTitles.AddRange(columnList);
+                if (columnList != null) rawOutput.Definition.ColumnTitles.AddRange(columnList);
                 rawOutput.Definition.Validation = validation;
                 rawOutput.Params = paramList;
                 rawOutput.Data = data;
@@ -653,7 +654,7 @@ namespace ASEva
             catch (Exception ex) { Dump.Exception(ex); return null; }
         }
 
-        private static GraphValidation RowStringToValidation(String rowText)
+        private static GraphValidation? RowStringToValidation(String rowText)
         {
             var commaIndex = rowText.IndexOf(',');
             if (commaIndex <= 0) return null;
@@ -709,11 +710,11 @@ namespace ASEva
             return null;
         }
 
-        private static GraphData CreateGraphDataEncapsulation(GraphData data)
+        private static GraphData? CreateGraphDataEncapsulation(GraphData data)
         {
             if (data == null) return null;
 
-            GraphData output = null;
+            GraphData output;
             switch (data.Definition.Type)
             {
                 case GraphType.SingleValue:

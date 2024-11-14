@@ -20,7 +20,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 信号ID的前缀，输出时无需赋值（由系统赋值）
         /// </summary>
-        public String Prefix { get; set; }
+        public String? Prefix { get; set; }
 
         /// \~English
         /// <summary>
@@ -50,7 +50,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 信号的全局唯一ID（仅get）
         /// </summary>
-        public String SignalID
+        public String? SignalID
         {
             get
             {
@@ -58,6 +58,11 @@ namespace ASEva.Samples
                 else if (Name.IndexOf(':') >= 0) return Prefix.Split(':')[0] + ":" + Name;
                 else return Prefix + ":" + Name;
             }
+        }
+
+        public SignalSample()
+        {
+            Name = "";
         }
     }
 }

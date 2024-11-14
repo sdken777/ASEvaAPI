@@ -181,6 +181,11 @@ namespace ASEva.Graph
     public class HistLineXLabels //（Validation unsupported / 图表数据验证无效）
     {
         public String[] Labels { get; set; }
+
+        public HistLineXLabels()
+        {
+            Labels = [];
+        }
     }
 
     /// \~English
@@ -196,6 +201,11 @@ namespace ASEva.Graph
         public String Name { get; set; }
         public double HistValue { get; set; }
         public double LineValue { get; set; }
+
+        public HistLineSample()
+        {
+            Name = "";
+        }
     }
 
     /// \~English
@@ -235,7 +245,7 @@ namespace ASEva.Graph
         /// <param name="lineTitle">折线图标题</param>
         /// <param name="defaultLineValue">折线图初始值</param>
         /// <returns>图表定义对象</returns>
-        public static GraphDefinition CreateDefinition(String title, String xTitle, object xValuesOrLabels, HistLineMode mode, String histTitle, double defaultHistValue = 0, String lineTitle = null, double defaultLineValue = 0)
+        public static GraphDefinition? CreateDefinition(String title, String xTitle, object xValuesOrLabels, HistLineMode mode, String histTitle, double defaultHistValue = 0, String? lineTitle = null, double defaultLineValue = 0)
         {
             return CreateDefinitionWithValidation(title, xTitle, xValuesOrLabels, mode, null, histTitle, defaultHistValue, lineTitle, defaultLineValue);
         }
@@ -268,7 +278,7 @@ namespace ASEva.Graph
         /// <param name="lineTitle">折线图标题</param>
         /// <param name="defaultLineValue">折线图初始值</param>
         /// <returns>图表定义对象</returns>
-        public static GraphDefinition CreateDefinitionWithValidation(String title, String xTitle, object xValuesOrLabels, HistLineMode mode, GraphValidation validation, String histTitle, double defaultHistValue = 0, String lineTitle = null, double defaultLineValue = 0)
+        public static GraphDefinition? CreateDefinitionWithValidation(String title, String xTitle, object xValuesOrLabels, HistLineMode mode, GraphValidation? validation, String histTitle, double defaultHistValue = 0, String? lineTitle = null, double defaultLineValue = 0)
         {
             if (!IsHistogramOnlyMode(mode) && (lineTitle == null || lineTitle.Length == 0)) return null;
 
@@ -280,17 +290,15 @@ namespace ASEva.Graph
             def.Config.Add(xTitle); // 1
             def.Config.Add(defaultHistValue.ToString()); // 2
             def.Config.Add(defaultLineValue.ToString()); // 3
-            if (xValuesOrLabels is HistLineXValues)
+            if (xValuesOrLabels is HistLineXValues values)
             {
-                var values = xValuesOrLabels as HistLineXValues;
                 def.Config.Add("XValues"); // 4
                 def.Config.Add(values.Base.ToString()); // 5
                 def.Config.Add(values.Step.ToString()); // 6
                 def.Config.Add(values.Count.ToString()); // 7
             }
-            else if (xValuesOrLabels is HistLineXLabels)
+            else if (xValuesOrLabels is HistLineXLabels labels)
             {
-                var labels = xValuesOrLabels as HistLineXLabels;
                 def.Config.Add("XLabels"); // 4
                 foreach (var label in labels.Labels)
                 {
@@ -354,7 +362,7 @@ namespace ASEva.Graph
         /// <returns>柱状图标题</returns>
         public String GetHistTitle()
         {
-            return Definition.ColumnTitles[0];
+            return Definition.ColumnTitles[0] ?? "";
         }
 
         /// \~English
@@ -367,7 +375,7 @@ namespace ASEva.Graph
         /// 获取折线图标题
         /// </summary>
         /// <returns>折线图标题</returns>
-        public String GetLineTitle()
+        public String? GetLineTitle()
         {
             return Definition.ColumnTitles.Count > 2 ? Definition.ColumnTitles[2] : null;
         }
@@ -398,7 +406,7 @@ namespace ASEva.Graph
         /// 获取x轴的值或文字描述
         /// </summary>
         /// <returns>x轴的值或文字描述</returns>
-        public object GetXValuesOrLabels()
+        public object? GetXValuesOrLabels()
         {
             if (Definition.Config[4] == "XValues")
             {

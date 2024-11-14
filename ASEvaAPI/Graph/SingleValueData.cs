@@ -45,7 +45,7 @@ namespace ASEva.Graph
         /// <param name="title">标题</param>
         /// <param name="validation">数据验证方式，null表示不验证。支持ValueAbove, ValueBelow, ValueInRange</param>
         /// <returns>图表定义对象</returns>
-        public static GraphDefinition CreateDefinitionWithValidation(String title, GraphValidation validation)
+        public static GraphDefinition CreateDefinitionWithValidation(String title, GraphValidation? validation)
         {
             var def = new GraphDefinition();
             def.Type = GraphType.SingleValue;
@@ -118,6 +118,7 @@ namespace ASEva.Graph
         public override void MergeWith(GraphData data)
         {
             var D = data as SingleValueData;
+            if (D == null) return;
 
             var srcVal = Data[0, 0];
             var targetVal = D.GetValue();

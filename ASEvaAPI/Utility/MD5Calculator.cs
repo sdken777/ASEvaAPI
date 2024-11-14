@@ -29,7 +29,7 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="fileName">文件路径</param>
         /// <returns>MD5字符串</returns>
-        public static string Calculate(string fileName)
+        public static string? Calculate(string fileName)
         {
             try
             {
@@ -62,7 +62,7 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="data">二进制数据块</param>
         /// <returns>MD5字符串</returns>
-        public static string Calculate(byte[] data)
+        public static string? Calculate(byte[] data)
         {
             try
             {

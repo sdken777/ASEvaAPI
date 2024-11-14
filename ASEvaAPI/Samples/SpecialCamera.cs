@@ -313,6 +313,11 @@ namespace ASEva.Samples
         /// 共同部分
         /// </summary>
         public CommonCameraMeta Common { get; set; }
+
+        public DefaultCameraMeta()
+        {
+            Common = new CommonCameraMeta();
+        }
     }
 
     /// \~English
@@ -454,6 +459,11 @@ namespace ASEva.Samples
         /// 抖动偏置俯仰角（仅部分摄像头有效）
         /// </summary>
         public double ShakePitch { get; set; }
+
+        public GenericCameraMeta()
+        {
+            Common = new CommonCameraMeta();
+        }
     }
 
     /// \~English
@@ -525,6 +535,11 @@ namespace ASEva.Samples
         /// 半长占比
         /// </summary>
         public float FiftyRatio { get; set; }
+
+        public LaneLineCameraMeta()
+        {
+            Common = new CommonCameraMeta();
+        }
     }
 
     /// \~English
@@ -636,6 +651,11 @@ namespace ASEva.Samples
         /// Ph4半长占比
         /// </summary>
         public float PH4Ratio { get; set; }
+
+        public BlindSpotCameraMeta()
+        {
+            Common = new CommonCameraMeta();
+        }
     }
 
     /// \~English
@@ -1088,7 +1108,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 特殊摄像头信息，可以为 ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta , ASEva.Samples.CustomizedCameraMeta
         /// </summary>
-        public object SpecialCameraInfo { get; set; }
+        public object? SpecialCameraInfo { get; set; }
 
         /// \~English
         /// <summary>

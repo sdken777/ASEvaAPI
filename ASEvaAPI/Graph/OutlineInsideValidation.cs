@@ -108,9 +108,9 @@ namespace ASEva.Graph
         {
             if (data.HasData())
             {
-                if (data is ScatterPointsData)
+                if (data is ScatterPointsData spData)
                 {
-                    var pts = (data as ScatterPointsData).GetPoints();
+                    var pts = spData.GetPoints();
                     int insideCount = 0;
                     foreach (var pt in pts)
                     {
@@ -119,21 +119,24 @@ namespace ASEva.Graph
                     percentage = (double)insideCount * 100 / pts.Length;
                     return okPercentage == null ? null : (bool?)(percentage >= okPercentage);
                 }
-                else if (data is MatrixTableData)
+                else if (data is MatrixTableData mtData)
                 {
-                    var vals = (data as MatrixTableData).GetValues();
-                    var xRange = (data as MatrixTableData).GetXRange();
-                    var yRange = (data as MatrixTableData).GetYRange();
+                    var vals = mtData.GetValues();
+                    var xRange = mtData.GetXRange();
+                    var yRange = mtData.GetYRange();
                     double insideSum = 0;
                     double totalSum = 0;
-                    for (int i = 0; i < xRange.Count; i++)
+                    if (xRange != null && yRange != null)
                     {
-                        var x = (float)(((double)i + 0.5) * xRange.Step + xRange.Base);
-                        for (int j = 0; j < yRange.Count; j++)
+                        for (int i = 0; i < xRange.Count; i++)
                         {
-                            var y = (float)(((double)j + 0.5) * yRange.Step + yRange.Base);
-                            if (IsPointInPolygon(outline, new FloatPoint(x, y))) insideSum += vals[i, j];
-                            totalSum += vals[i, j];
+                            var x = (float)(((double)i + 0.5) * xRange.Step + xRange.Base);
+                            for (int j = 0; j < yRange.Count; j++)
+                            {
+                                var y = (float)(((double)j + 0.5) * yRange.Step + yRange.Base);
+                                if (IsPointInPolygon(outline, new FloatPoint(x, y))) insideSum += vals[i, j];
+                                totalSum += vals[i, j];
+                            }
                         }
                     }
                     if (totalSum <= 0)
