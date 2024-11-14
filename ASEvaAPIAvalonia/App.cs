@@ -146,15 +146,52 @@ namespace ASEva.UIAvalonia
 
         /// \~English
         /// <summary>
-        /// (api:avalonia=1.0.2) Show message box (mainly for calling outside App.Run)
+        /// (api:avalonia=1.2.5) Run the dialog action
+        /// </summary>
+        /// <param name="action">The dialog action, with the active window as argument</param>
+        /// <param name="owner">Owner of the dialog, null to use main window</param>
+        /// <returns>Whether the dialog action is invoked</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.2.5) 运行对话框函数
+        /// </summary>
+        /// <param name="action">对话框函数，最顶层活动窗口作为输入参数</param>
+        /// <param name="owner">对话框所有者，若使用主窗口则设为null</param>
+        /// <returns>对话框函数是否已执行</returns>
+        public static async Task<bool> RunDialog(Func<Window, Task> action, object owner = null)
+        {
+            Window activeWindow = null;
+            if (owner == null)
+            {
+                if (App.MainWindow != null) activeWindow = await App.MainWindow.GetActiveWindow();
+            }
+            else if (owner is Control) activeWindow = await (owner as Control).GetActiveWindow();
+            else if (owner is Window) activeWindow = await (owner as Window).GetActiveWindow();
+            if (activeWindow == null) return false;
+
+            var etoControls = new Eto.Forms.Control[0];
+            if (activeWindow != null)
+            {
+                etoControls = EtoEmbedder.ExtractControls(activeWindow);
+                foreach (var control in etoControls) control.Enabled = false;
+            }
+            await action.Invoke(activeWindow);
+            foreach (var control in etoControls) control.Enabled = true;
+            return true;
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:avalonia=1.0.2) Show message box (only for calling outside App.Run)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:avalonia=1.0.2) 显示消息框（主要针对App.Run之外时使用）
+        /// (api:avalonia=1.0.2) 显示消息框（仅支持在App.Run之外时使用）
         /// </summary>
         public static void ShowMessageBox(String message, String caption = "", MessageBoxIcon icon = MessageBoxIcon.None, MessageBoxButtons buttons = MessageBoxButtons.OK)
         {
             if (appBuilder == null || appBuilder.Instance == null || message == null) return;
+            if (MainWindow != null) return;
 
             var box = new MessageBox(message, caption, icon);
             if (appLifetime.MainWindow == null)
@@ -279,18 +316,7 @@ namespace ASEva.UIAvalonia
 
                 var dialog = new EtoEmbedDialog(panel);
                 if (App.appLifetime.MainWindow == null) App.Run(dialog);
-                else
-                {
-                    var activeWindow = await App.appLifetime.MainWindow.GetActiveWindow();
-                    var etoControls = new Eto.Forms.Control[0];
-                    if (activeWindow != null)
-                    {
-                        etoControls = EtoEmbedder.ExtractControls(activeWindow);
-                        foreach (var control in etoControls) control.Enabled = false;
-                    }
-                    await dialog.ShowDialog(activeWindow);
-                    foreach (var control in etoControls) control.Enabled = true;
-                }
+                else await App.RunDialog(dialog.ShowDialog);
                 return true;
             }
         }

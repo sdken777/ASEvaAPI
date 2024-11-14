@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.2.4
+            version=1.2.5
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -93,14 +93,30 @@
             </summary>
             <param name="mainWindow">主窗口</param>
         </member>
+        <member name="M:ASEva.UIAvalonia.App.RunDialog(System.Func{Avalonia.Controls.Window,System.Threading.Tasks.Task},System.Object)">
+            \~English
+            <summary>
+            (api:avalonia=1.2.5) Run the dialog action
+            </summary>
+            <param name="action">The dialog action, with the active window as argument</param>
+            <param name="owner">Owner of the dialog, null to use main window</param>
+            <returns>Whether the dialog action is invoked</returns>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.2.5) 运行对话框函数
+            </summary>
+            <param name="action">对话框函数，最顶层活动窗口作为输入参数</param>
+            <param name="owner">对话框所有者，若使用主窗口则设为null</param>
+            <returns>对话框函数是否已执行</returns>
+        </member>
         <member name="M:ASEva.UIAvalonia.App.ShowMessageBox(System.String,System.String,CustomMessageBox.Avalonia.MessageBoxIcon,CustomMessageBox.Avalonia.MessageBoxButtons)">
             \~English
             <summary>
-            (api:avalonia=1.0.2) Show message box (mainly for calling outside App.Run)
+            (api:avalonia=1.0.2) Show message box (only for calling outside App.Run)
             </summary>
             \~Chinese
             <summary>
-            (api:avalonia=1.0.2) 显示消息框（主要针对App.Run之外时使用）
+            (api:avalonia=1.0.2) 显示消息框（仅支持在App.Run之外时使用）
             </summary>
         </member>
         <member name="P:ASEva.UIAvalonia.App.WorkPath">

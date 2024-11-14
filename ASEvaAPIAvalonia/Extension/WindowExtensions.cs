@@ -41,9 +41,7 @@ namespace ASEva.UIAvalonia
             if (window == null) return null;
 
             var activeWindow = getFirstActiveWindow(window);
-            if (activeWindow == null) return null;
-
-            if (lastActiveWindow != null && lastActiveWindow != activeWindow)
+            if (activeWindow == null || (lastActiveWindow != null && lastActiveWindow != activeWindow))
             {
                 await Task.Delay(DelayTime);
                 activeWindow = getFirstActiveWindow(window);

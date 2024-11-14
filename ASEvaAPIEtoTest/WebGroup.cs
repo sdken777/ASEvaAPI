@@ -22,6 +22,15 @@ namespace ASEvaAPIEtoTest
             var buttonGo = layoutRow.AddButtonPanel(t["web-go-url"]);
             layoutRow.AddSeparator();
             layoutRow.AddButtonPanel(t["web-call-script"]).Click += delegate { webView.ExecuteScriptAsync("callScript()"); };
+            layoutRow.AddButtonPanel(t["web-exception-test"]).Click += delegate
+            {
+                try
+                {
+                    String str = null;
+                    str.Split(',');
+                }
+                catch (Exception) {}
+            };
 
             buttonGo.Enabled = false;
             buttonGo.DefaultBackgroundColor = Colors.LightGrey;

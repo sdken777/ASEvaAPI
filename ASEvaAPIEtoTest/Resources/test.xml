@@ -326,7 +326,7 @@
   </t>
   <t id="plot-group-title">
     <en>Plot Controls</en>
-    <ch>图表控件</ch>
+    <zh>图表控件</zh>
   </t>
   <t id="reserved">
     <en>Reserved</en>
@@ -340,16 +340,20 @@
     <en>Test Dialog</en>
     <zh>测试对话框</zh>
   </t>
-  <t id="web-group-title">
-    <en>Web View</en>
-    <zh>Web视图</zh>
-  </t>
   <t id="web-call-script">
     <en>Call script</en>
     <zh>调用脚本</zh>
   </t>
+  <t id="web-exception-test">
+    <en>Exception test</en>
+    <zh>异常测试</zh>
+  </t>
   <t id="web-go-url">
     <en>Go</en>
     <zh>打开</zh>
+  </t>
+  <t id="web-group-title">
+    <en>Web View</en>
+    <zh>Web视图</zh>
   </t>
 </text_resource>
