@@ -74,12 +74,12 @@ namespace ASEvaAPIAvaloniaTest
             }
         }
 
-        private void control_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private async void control_PointerReleased(object sender, PointerReleasedEventArgs e)
         {
             var target = sender as ControlWithBorder;
             var targetIndex = flowLayout.Children.IndexOf(target);
             selectControl(targetIndex);
-            MessageBox.Show(Program.Texts.Format("basic-flow-selected", targetIndex), "");
+            await App.RunDialog(async (window) => await MessageBox.Show(window, Program.Texts.Format("basic-flow-selected", targetIndex), ""));
         }
 
         private void selectControl(int index)

@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 2, 5, 0); // Update log / 更新记录: 增加App.RunDialog。修正GetActiveWindow
+            return new Version(1, 2, 5, 1); // Update log / 更新记录: 完善ExtractControls
         }
 
         /// \~English

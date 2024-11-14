@@ -53,10 +53,10 @@ namespace ASEvaAPIAvaloniaTest
             }
         }
 
-        private void treeView_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private async void treeView_PointerReleased(object sender, PointerReleasedEventArgs e)
         {
             var node = treeView.SelectedItem as Node;
-            if (node != null) MessageBox.Show((treeView.SelectedItem as Node).Key, "");
+            if (node != null) await App.RunDialog(async (window) => await MessageBox.Show(window, (treeView.SelectedItem as Node).Key, ""));
         }
 
         private void linkSelectFirst_Click(object sender, RoutedEventArgs e)
@@ -107,13 +107,13 @@ namespace ASEvaAPIAvaloniaTest
             if (model.ControlItems.Count > 0) model.SelectedControlItem = model.ControlItems[0];
         }
 
-        private void testControl_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private async void testControl_PointerReleased(object sender, PointerReleasedEventArgs e)
         {
             var item = (sender as TestControl).DataContext as Item;
             model.SelectedControlItem = item;
 
             var itemIndex = model.ControlItems.IndexOf(item);
-            MessageBox.Show(Program.Texts.Format("basic-flow-selected", itemIndex), "");
+            await App.RunDialog(async (window) => await MessageBox.Show(window, Program.Texts.Format("basic-flow-selected", itemIndex), ""));
         }
 
         private class Node : INotifyPropertyChanged

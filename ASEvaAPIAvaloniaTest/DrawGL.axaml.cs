@@ -190,7 +190,7 @@ namespace ASEvaAPIAvaloniaTest
             rowTexts.Add(Program.Texts.Format("draw-gl-info-extensions", String.Join('\n', info.ToExtensionList())));
             
             var dialog = new InfoDialog(Program.Texts["draw-gl-info-title"], String.Join('\n', rowTexts));
-            await dialog.ShowDialog(await this.GetActiveWindow());
+            await ASEva.UIAvalonia.App.RunDialog(dialog.ShowDialog);
         }
 
         private class LoopIntervalStat

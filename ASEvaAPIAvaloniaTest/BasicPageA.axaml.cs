@@ -27,9 +27,9 @@ namespace ASEvaAPIAvaloniaTest
             labelActive.Content = this.GetParentWindow().IsActive ? "O" : "X";
         }
 
-        private void itemMenu_Click(object sender, RoutedEventArgs e)
+        private async void itemMenu_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(App.WorkPath, "");
+            await App.RunDialog(async (window) => await MessageBox.Show(window, App.WorkPath, ""));
         }
 
         private async void linkBrowse_Click(object sender, RoutedEventArgs e)
@@ -44,18 +44,18 @@ namespace ASEvaAPIAvaloniaTest
                         FileTypeChoices = [ new FilePickerFileType(Program.Texts["basic-save-file-filter"]) { Patterns = ["*.txt"] } ]
                     };
                     var file = await this.GetParentWindow().StorageProvider.SaveFilePickerAsync(options);
-                    if (file != null) await MessageBox.Show(file.Path, "");
+                    if (file != null) await App.RunDialog(async (window) => await MessageBox.Show(window, file.Path, ""));
                 }
                 else
                 {
                     var files = await this.GetParentWindow().StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions());
-                    if (files.Count > 0) await MessageBox.Show(files[0].Path, "");
+                    if (files.Count > 0) await App.RunDialog(async (window) => await MessageBox.Show(window, files[0].Path, ""));
                 }
             }
             else // radioDir
             {
                 var folders = await this.GetParentWindow().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions());
-                if (folders.Count > 0) await MessageBox.Show(folders[0].Path, "");
+                if (folders.Count > 0) await App.RunDialog(async (window) => await MessageBox.Show(window, folders[0].Path, ""));
             }
         }
 
@@ -80,25 +80,25 @@ namespace ASEvaAPIAvaloniaTest
             window.CanResize = false;
             window.Content = new Panel{ MinWidth = 300, MinHeight = 300};
             window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            await window.ShowDialog(await this.GetActiveWindow());
+            await App.RunDialog(window.ShowDialog);
         }
 
         private async void linkShowDialogNoBorder_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new TestDialogNoBorder();
-            await dialog.ShowDialog(await this.GetActiveWindow());
+            await App.RunDialog(dialog.ShowDialog);
         }
         
         private async void linkShowDialogWithBorder_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new TestDialogWithBorder();
-            await dialog.ShowDialog(await this.GetActiveWindow());
+            await App.RunDialog(dialog.ShowDialog);
         }
 
         private async void linkShowDialogWithFixBorder_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new TestDialogWithFixBorder();
-            await dialog.ShowDialog(await this.GetActiveWindow());
+            await App.RunDialog(dialog.ShowDialog);
         }
 
         private void linkClientSize_Click(object sender, RoutedEventArgs e)

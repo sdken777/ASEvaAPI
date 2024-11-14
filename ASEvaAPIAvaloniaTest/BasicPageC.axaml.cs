@@ -41,10 +41,10 @@ namespace ASEvaAPIAvaloniaTest
             }
         }
 
-        private void checkListBox_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private async void checkListBox_PointerReleased(object sender, PointerReleasedEventArgs e)
         {
             var selectedIndex = checkListBox.SelectedIndex;
-            if (selectedIndex >= 0) MessageBox.Show(selectedIndex + ": " + model.CheckItems[selectedIndex].IsChecked, "");
+            if (selectedIndex >= 0) await App.RunDialog(async (window) => await MessageBox.Show(window, selectedIndex + ": " + model.CheckItems[selectedIndex].IsChecked, ""));
         }
 
         private void linkCheckAll_Click(object sender, RoutedEventArgs e)
@@ -74,9 +74,9 @@ namespace ASEvaAPIAvaloniaTest
             if (checkListTarget < 99) checkListTarget++;
         }
 
-        private void linkGetCheck_Click(object sender, RoutedEventArgs e)
+        private async void linkGetCheck_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(checkListTarget + ": " + model.CheckItems[checkListTarget].IsChecked, "");
+            await App.RunDialog(async (window) => await MessageBox.Show(window, checkListTarget + ": " + model.CheckItems[checkListTarget].IsChecked, ""));
         }
 
         private void linkSetCheck_Click(object sender, RoutedEventArgs e)
@@ -85,9 +85,9 @@ namespace ASEvaAPIAvaloniaTest
             if (checkListTarget < 99) checkListTarget++;
         }
 
-        private void linkGetEnable_Click(object sender, RoutedEventArgs e)
+        private async void linkGetEnable_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(checkListTarget + ": " + model.CheckItems[checkListTarget].IsEnabled, "");
+            await App.RunDialog(async (window) => await MessageBox.Show(window, checkListTarget + ": " + model.CheckItems[checkListTarget].IsEnabled, ""));
         }
 
         private void linkSetEnable_Click(object sender, RoutedEventArgs e)

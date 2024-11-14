@@ -67,29 +67,51 @@ namespace ASEva.UIAvalonia
         public static Eto.Forms.Control[] ExtractControls(Window window)
         {
             var list = new List<Eto.Forms.Control>();
-            if (window.Content != null)
-            {
-                if (window.Content is EtoEmbedder)
-                {
-                    var etoControl = (window.Content as EtoEmbedder).EtoControl;
-                    if (etoControl != null) list.Add(etoControl);
-                }
-                else if (window.Content is Panel) extractFromPanel(window.Content as Panel, list);
-            }
+            extractFrom(window, list);
             return list.ToArray();
         }
 
-        private static void extractFromPanel(Panel panel, List<Eto.Forms.Control> list)
+        private static void extractFrom(Control control, List<Eto.Forms.Control> list)
         {
-            if (panel.Children == null) return;
-            foreach (var child in panel.Children)
+            if (control is Panel)
             {
-                if (child is EtoEmbedder)
+                var panel = control as Panel;
+                if (panel.Children == null) return;
+                foreach (var child in panel.Children)
                 {
-                    var etoControl = (child as EtoEmbedder).EtoControl;
-                    if (etoControl != null) list.Add(etoControl);
+                    if (child is EtoEmbedder)
+                    {
+                        var etoControl = (child as EtoEmbedder).EtoControl;
+                        if (etoControl != null) list.Add(etoControl);
+                    }
+                    else if (child is Panel || child is ContentControl || child is Decorator) extractFrom(child as Control, list);
                 }
-                else if (child is Panel) extractFromPanel(child as Panel, list);
+            }
+            else if (control is ContentControl)
+            {
+                var cc = control as ContentControl;
+                if (cc.Content != null)
+                {
+                    if (cc.Content is EtoEmbedder)
+                    {
+                        var etoControl = (cc.Content as EtoEmbedder).EtoControl;
+                        if (etoControl != null) list.Add(etoControl);
+                    }
+                    else if (cc.Content is Panel || cc.Content is ContentControl || cc.Content is Decorator) extractFrom(cc.Content as Control, list);
+                }
+            }
+            else if (control is Decorator)
+            {
+                var decorator = control as Decorator;
+                if (decorator.Child != null)
+                {
+                    if (decorator.Child is EtoEmbedder)
+                    {
+                        var etoControl = (decorator.Child as EtoEmbedder).EtoControl;
+                        if (etoControl != null) list.Add(etoControl);
+                    }
+                    else if (decorator.Child is Panel || decorator.Child is ContentControl || decorator.Child is Decorator) extractFrom(decorator.Child as Control, list);
+                }
             }
         }
 
