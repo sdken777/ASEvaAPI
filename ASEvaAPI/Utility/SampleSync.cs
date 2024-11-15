@@ -34,11 +34,11 @@ namespace ASEva.Utility
         /// <param name="sampleLists">输入的样本缓存，可以是多个缓存</param>
         /// <param name="outputs">各个缓存按指定时间点输出插值或最近样本</param>
         /// <returns>需要保留返回false，否则返回true</returns>
-        static public bool Sync(double timeline, SessionIdentifier session, List<List<Sample>> sampleLists, out List<Sample> outputs)
+        static public bool Sync(double timeline, SessionIdentifier session, List<List<Sample>> sampleLists, out List<Sample?> outputs)
         {
             bool early = false;
             bool late = true;
-            outputs = new List<Sample>();
+            outputs = new List<Sample?>();
 
             foreach (var list in sampleLists)
             {

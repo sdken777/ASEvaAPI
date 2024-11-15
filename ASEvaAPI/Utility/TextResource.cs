@@ -33,7 +33,7 @@ namespace ASEva.Utility
         /// <param name="xmlFileName">资源文件名</param>
         /// <param name="language">语言，设置为Language.Invalid则通过 ASEva.AgencyLocal.GetAppLanguage 获取</param>
         /// <returns>多语言文本资源对象，获取失败则返回null</returns>
-        public static TextResource Load(String xmlFileName, Language language = Language.Invalid)
+        public static TextResource? Load(String xmlFileName, Language language = Language.Invalid)
         {
             var instream = Assembly.GetCallingAssembly().GetManifestResourceStream(xmlFileName);
             if (instream == null) return null;
@@ -59,7 +59,7 @@ namespace ASEva.Utility
         /// <param name="xmlFileData">XML文件数据</param>
         /// <param name="language">语言，设置为Language.Invalid则通过 ASEva.AgencyLocal.GetAppLanguage 获取</param>
         /// <returns>多语言文本资源对象，获取失败则返回null</returns>
-        public static TextResource Load(byte[] xmlFileData, Language language = Language.Invalid)
+        public static TextResource? Load(byte[] xmlFileData, Language language = Language.Invalid)
         {
             if (xmlFileData == null || xmlFileData.Length <= 3) return null;
 
@@ -94,21 +94,23 @@ namespace ASEva.Utility
             try { xml.LoadXml(xmlString); }
             catch (Exception ex) { Dump.Exception(ex); return null; }
 
+            if (xml.DocumentElement == null) return null;
+
             var output = new TextResource();
             foreach (XmlElement elem in xml.DocumentElement.GetElementsByTagName("t"))
             {
                 if (elem.Attributes["id"] == null) continue;
 
-                var id = elem.Attributes["id"].Value;
+                var id = elem.Attributes["id"]?.Value;
                 if (String.IsNullOrEmpty(id) || output.dict.ContainsKey(id)) continue;
 
-                String text = null;
+                String? text = null;
                 foreach (var code in langCodes)
                 {
                     var codeNodes = elem.GetElementsByTagName(code);
                     if (codeNodes.Count > 0)
                     {
-                        text = codeNodes[0].InnerText;
+                        text = codeNodes[0]?.InnerText;
                         break;
                     }
                 }
@@ -150,7 +152,7 @@ namespace ASEva.Utility
         /// 获取指定ID对应的文本
         /// </summary>
         /// <value>指定ID对应的文本</value>
-        public String this[String id]
+        public String? this[String id]
         {
             get
             {
@@ -173,7 +175,7 @@ namespace ASEva.Utility
         /// <param name="id">指定ID</param>
         /// <param name="args">格式描述中的参数值</param>
         /// <returns>输出文本</returns>
-        public String Format(String id, params object[] args)
+        public String? Format(String id, params object[] args)
         {
             if (dict.ContainsKey(id))
             {

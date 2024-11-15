@@ -24,16 +24,16 @@ namespace ASEva.Utility
             Segments = new List<SceneData>();
         }
 
-        public static SceneCsv Load(String file)
+        public static SceneCsv? Load(String file)
         {
-            StreamReader reader = null;
+            StreamReader? reader = null;
             try
             {
                 if (!File.Exists(file)) return null;
 
                 reader = new StreamReader(file);
                 var firstLine = reader.ReadLine();
-                if (!firstLine.StartsWith("Scene Table,v2"))
+                if (firstLine == null || !firstLine.StartsWith("Scene Table,v2"))
                 {
                     reader.Close();
                     return null;
@@ -42,8 +42,8 @@ namespace ASEva.Utility
                 var output = new SceneCsv();
                 output.Title = new SceneTitle();
 
-                var titleComps = reader.ReadLine().Split(',');
-                if (titleComps.Length > 4)
+                var titleComps = reader.ReadLine()?.Split(',');
+                if (titleComps != null && titleComps.Length > 4)
                 {
                     var titleElemCount = titleComps.Length - 4;
                     for (int i = 0; i < titleElemCount; i++) output.Title.Titles.Add(titleComps[i + 4]);
@@ -93,7 +93,7 @@ namespace ASEva.Utility
 
         public void Save(String file)
         {
-            StreamWriter writer = null;
+            StreamWriter? writer = null;
             try
             {
                 writer = new StreamWriter(file, false, Encoding.UTF8);

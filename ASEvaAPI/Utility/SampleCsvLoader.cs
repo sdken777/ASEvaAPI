@@ -29,91 +29,107 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="file">文件路径</param>
         /// <returns>csv读取器，若文件不存在或创建失败则返回空</returns>
-        public static SampleCsvLoader CreateLoader(String file)
+        public static SampleCsvLoader? CreateLoader(String file)
         {
-            StreamReader reader = null;
+            StreamReader? reader = null;
             try
             {
                 if (!File.Exists(file)) return null;
 
-                var loader = new SampleCsvLoader();
-
                 var fileNameComps = Path.GetFileNameWithoutExtension(file).Split('@');
-                loader.protocol = fileNameComps[0];
+                var protocol = fileNameComps[0];
+
+                int? channel = null;
                 if (fileNameComps.Length >= 2)
                 {
-                    int channel;
-                    if (!Int32.TryParse(fileNameComps[1], out channel)) return null;
-                    loader.channel = channel;
+                    int outChannel;
+                    if (!Int32.TryParse(fileNameComps[1], out outChannel)) return null;
+                    channel = outChannel;
                 }
+
+                String[]? title = null;
+                int timeColumnIndex = 0;
+                int  syncStateIndex = 0;
+                int cpuTickIndex = 0;
+                int hostPosixIndex = 0;
+                int guestPosixIndex = 0;
+                int gnssPosixIndex = 0;
 
                 reader = new StreamReader(file);
                 var firstLine = reader.ReadLine();
-                if (firstLine.StartsWith("Sample Table,v2")) // v2
+                if (firstLine != null && firstLine.StartsWith("Sample Table,v2")) // v2
                 {
-                    var titleComps = reader.ReadLine().Split(',');
-                    if (titleComps.Length > 2)
+                    var titleComps = reader.ReadLine()?.Split(',');
+                    if (titleComps?.Length > 2)
                     {
                         var titleElemCount = titleComps.Length - 2;
-                        loader.title = new string[titleElemCount];
-                        for (int i = 0; i < titleElemCount; i++) loader.title[i] = titleComps[i + 2];
+                        title = new string[titleElemCount];
+                        for (int i = 0; i < titleElemCount; i++) title[i] = titleComps[i + 2];
                     }
-                    loader.timeColumnIndex = 1;
+                    timeColumnIndex = 1;
                 }
-                else if (firstLine.StartsWith("Session")) // v3
+                else if (firstLine != null && firstLine.StartsWith("Session")) // v3
                 {
                     var titleComps = firstLine.Split(',');
                     for (int i = 1; i < titleComps.Length; i++)
                     {
                         if (titleComps[i] == "Time")
                         {
-                            loader.timeColumnIndex = i;
+                            timeColumnIndex = i;
                             break;
                         }
                     }
                     for (int i = 1; i < titleComps.Length; i++)
                     {
-                        if (loader.syncStateIndex == 0 && titleComps[i] == "Sync State")
+                        if (syncStateIndex == 0 && titleComps[i] == "Sync State")
                         {
-                            loader.syncStateIndex = i;
+                            syncStateIndex = i;
                         }
-                        if (loader.cpuTickIndex == 0 && titleComps[i] == "CPU Tick")
+                        if (cpuTickIndex == 0 && titleComps[i] == "CPU Tick")
                         {
-                            loader.cpuTickIndex = i;
+                            cpuTickIndex = i;
                         }
-                        if (loader.hostPosixIndex == 0 && titleComps[i] == "Host Posix")
+                        if (hostPosixIndex == 0 && titleComps[i] == "Host Posix")
                         {
-                            loader.hostPosixIndex = i;
+                            hostPosixIndex = i;
                         }
-                        if (loader.guestPosixIndex == 0 && titleComps[i] == "Guest Posix")
+                        if (guestPosixIndex == 0 && titleComps[i] == "Guest Posix")
                         {
-                            loader.guestPosixIndex = i;
+                            guestPosixIndex = i;
                         }
-                        if (loader.gnssPosixIndex == 0 && titleComps[i] == "Gnss Posix")
+                        if (gnssPosixIndex == 0 && titleComps[i] == "Gnss Posix")
                         {
-                            loader.gnssPosixIndex = i;
+                            gnssPosixIndex = i;
                         }
                     }
-                    if (loader.timeColumnIndex > 0)
+                    if (timeColumnIndex > 0)
                     {
-                        if (titleComps.Length > loader.timeColumnIndex + 1)
+                        if (titleComps.Length > timeColumnIndex + 1)
                         {
-                            var titleElemCount = titleComps.Length - (loader.timeColumnIndex + 1);
-                            loader.title = new string[titleElemCount];
-                            for (int i = 0; i < titleElemCount; i++) loader.title[i] = titleComps[i + loader.timeColumnIndex + 1];
+                            var titleElemCount = titleComps.Length - (timeColumnIndex + 1);
+                            title = new string[titleElemCount];
+                            for (int i = 0; i < titleElemCount; i++) title[i] = titleComps[i + timeColumnIndex + 1];
                         }
                     }
                 }
                 
-                if (loader.timeColumnIndex <= 0)
+                if (timeColumnIndex <= 0)
                 {
                     reader.Close();
                     return null;
                 }
                 else
                 {
-                    loader.reader = reader;
-                    return loader;
+                    var output = new SampleCsvLoader(reader, protocol);
+                    output.channel = channel;
+                    output.title = title;
+                    output.timeColumnIndex = timeColumnIndex;
+                    output.syncStateIndex = syncStateIndex;
+                    output.cpuTickIndex = cpuTickIndex;
+                    output.hostPosixIndex = hostPosixIndex;
+                    output.guestPosixIndex = guestPosixIndex;
+                    output.gnssPosixIndex = gnssPosixIndex;
+                    return output;
                 }
             }
             catch (Exception ex)
@@ -134,7 +150,7 @@ namespace ASEva.Utility
         /// 获取样本标题 
         /// </summary>
         /// <returns>样本标题，null表示无标题</returns>
-        public List<String> GetSampleTitle()
+        public List<String>? GetSampleTitle()
         {
             if (title == null) return null;
             else return title.ToList();
@@ -150,9 +166,9 @@ namespace ASEva.Utility
         /// 读取下一个样本
         /// </summary>
         /// <returns>样本对象</returns>
-        public GeneralSample ReadNext()
+        public GeneralSample? ReadNext()
         {
-            if (reader == null) return null;
+            if (readerClosed) return null;
 
             while (true)
             {
@@ -160,7 +176,7 @@ namespace ASEva.Utility
                 if (lineText == null || lineText.Length == 0)
                 {
                     reader.Close();
-                    reader = null;
+                    readerClosed = true;
                     return null;
                 }
 
@@ -220,17 +236,18 @@ namespace ASEva.Utility
 
         public void Dispose()
         {
-            if (reader != null)
+            if (!readerClosed)
             {
                 reader.Close();
-                reader = null;
+                readerClosed = true;
             }
         }
 
-        private StreamReader reader = null;
-        private String protocol = null;
+        private StreamReader reader;
+        private bool readerClosed = false;
+        private String protocol;
         private int? channel = null;
-        private String[] title = null;
+        private String[]? title = null;
         private int timeColumnIndex = 0; // 0表示无效
         private int  syncStateIndex = 0;
         private int cpuTickIndex = 0;
@@ -238,8 +255,11 @@ namespace ASEva.Utility
         private int guestPosixIndex = 0;
         private int gnssPosixIndex = 0;
 
-        private SampleCsvLoader()
-        { }
+        private SampleCsvLoader(StreamReader reader, String protocol)
+        {
+            this.reader = reader;
+            this.protocol = protocol;
+        }
 
         /// \~English
         /// <summary>
@@ -253,9 +273,9 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="file">文件路径</param>
         /// <returns>返回的样本数组，若文件不存在或协议不正确或异常则返回null</returns>
-        public static GeneralSample[] Load(String file)
+        public static GeneralSample[]? Load(String file)
         {
-            StreamReader reader = null;
+            StreamReader? reader = null;
             try
             {
                 if (!File.Exists(file)) return null;
@@ -279,12 +299,12 @@ namespace ASEva.Utility
 
                 reader = new StreamReader(file);
                 var firstLine = reader.ReadLine();
-                if (firstLine.StartsWith("Sample Table,v2")) // v2
+                if (firstLine != null && firstLine.StartsWith("Sample Table,v2")) // v2
                 {
                     reader.ReadLine(); // 读标题
                     timeColumnIndex = 1;
                 }
-                else if (firstLine.StartsWith("Session")) // v3
+                else if (firstLine != null && firstLine.StartsWith("Session")) // v3
                 {
                     var titleComps = firstLine.Split(',');
                     for (int i = 1; i < titleComps.Length; i++)

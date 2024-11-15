@@ -21,7 +21,7 @@ namespace ASEva.Utility
 
         public bool Update(bool state, Sample ts)
         {
-	        if (lastState != null)
+	        if (lastState != null && lastStateTS != null)
 	        {
 		        if (ts.Session == lastStateTS.Session && ts.Offset <= lastStateTS.Offset)
 		        {
@@ -49,7 +49,7 @@ namespace ASEva.Utility
         }
 
 		private bool? lastState;
-		private Sample lastStateTS;
-		private Sample filterTS;
+		private Sample? lastStateTS;
+		private Sample? filterTS;
     }
 }
