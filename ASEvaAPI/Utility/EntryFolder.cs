@@ -14,7 +14,7 @@ namespace ASEva.Utility
     /// </summary>
     public class EntryFolder
     {
-        public static String Path
+        public static String? Path
         {
             get
             {
@@ -39,6 +39,6 @@ namespace ASEva.Utility
             if (folderPath != null && Directory.Exists(folderPath)) specifiedEntryFolder = folderPath;
         }
 
-        private static String specifiedEntryFolder = null;
+        private static String? specifiedEntryFolder = null;
     }
 }

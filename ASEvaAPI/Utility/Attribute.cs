@@ -24,68 +24,77 @@ namespace ASEva.Utility
 
         public bool ParseBool(String key, String trueValue, bool defaultValue)
         {
-            if (a[key] == null) return defaultValue;
-            else return a[key].Value == trueValue;
+            var v = a[key];
+            if (v == null) return defaultValue;
+            else return v.Value == trueValue;
         }
 
         public int ParseInt(String key, int defaultValue)
         {
-            if (a[key] == null) return defaultValue;
+            var v = a[key];
+            if (v == null) return defaultValue;
             int output;
-            if (Int32.TryParse(a[key].Value, out output)) return output;
+            if (Int32.TryParse(v.Value, out output)) return output;
             else return defaultValue;
         }
 
         public long ParseLong(String key, long defaultValue)
         {
-            if (a[key] == null) return defaultValue;
+            var v = a[key];
+            if (v == null) return defaultValue;
             long output;
-            if (Int64.TryParse(a[key].Value, out output)) return output;
+            if (Int64.TryParse(v.Value, out output)) return output;
             else return defaultValue;
         }
 
         public double ParseDouble(String key, double defaultValue)
         {
-            if (a[key] == null) return defaultValue;
+            var v = a[key];
+            if (v == null) return defaultValue;
             double output;
-            if (Double.TryParse(a[key].Value, out output)) return output;
+            if (Double.TryParse(v.Value, out output)) return output;
             else return defaultValue;
         }
 
-        public String ParseString(String key, String defaultValue)
+        public String? ParseString(String key, String? defaultValue)
         {
-            if (a[key] == null) return defaultValue;
-            var text = a[key].Value;
+            var v = a[key];
+            if (v == null) return defaultValue;
+            var text = v.Value;
             return text == "null" ? null : text;
         }
 
-        public String ParseMessageID(String key)
+        public String? ParseMessageID(String key)
         {
-            if (a[key] == null) return null;
-            var text = a[key].Value;
+            var v = a[key];
+            if (v == null) return null;
+            var text = v.Value;
             if (text.Length == 0 || text == "null") return null;
             var comps = text.Split(':', StringSplitOptions.RemoveEmptyEntries);
             if (comps.Length != 2) return null;
             return text;
         }
 
-        public String ParseSignalID(String key)
+        public String? ParseSignalID(String key)
         {
-            if (a[key] == null) return null;
-            var text = a[key].Value;
+            var v = a[key];
+            if (v == null) return null;
+            var text = v.Value;
             if (text.Length == 0 || text == "null") return null;
             var comps = text.Split(':', StringSplitOptions.RemoveEmptyEntries);
             if (comps.Length != 3) return null;
             return text;
         }
 
-        public double[] ParseSignalValue(String key, bool optional)
+        public double[]? ParseSignalValue(String key, bool optional)
         {
-            double[] ret = null;
-            if (!optional) ret = new double[1] { 0 };
-            if (a[key] == null) return ret;
+            var v = a[key];
 
-            String text = a[key].Value;
+            double[]? ret = null;
+            if (!optional) ret = [0];
+            if (v == null) return ret;
+
+            String text = v.Value;
             if (text.Length == 0 || text == "null") return ret;
 
             var values = text.Split(',');
@@ -105,10 +114,11 @@ namespace ASEva.Utility
 
         public object ParseEnum(String key, Type type, object defaultValue)
         {
-            if (a[key] == null) return defaultValue;
+            var v = a[key];
+            if (v == null) return defaultValue;
             try
             {
-                var obj = Enum.Parse(type, a[key].Value);
+                var obj = Enum.Parse(type, v.Value);
                 return obj == null ? defaultValue : obj;
             }
             catch (Exception ex) { Dump.Exception(ex); return defaultValue; }
@@ -116,9 +126,10 @@ namespace ASEva.Utility
 
         public FloatPoint? ParsePoint(String key, FloatPoint? defaultPoint)
         {
-            if (a[key] == null) return defaultPoint;
+            var v = a[key];
+            if (v == null) return defaultPoint;
 
-            var comps = a[key].Value.Split(',');
+            var comps = v.Value.Split(',');
             if (comps.Length < 2) return defaultPoint;
 
             float x, y;
@@ -129,9 +140,10 @@ namespace ASEva.Utility
 
         public ColorRGBA ParseColor(String key, ColorRGBA defaultColor)
         {
-            if (a[key] == null) return defaultColor;
+            var v = a[key];
+            if (v == null) return defaultColor;
 
-            var comps = a[key].Value.Split(',');
+            var comps = v.Value.Split(',');
             if (comps.Length < 3) return defaultColor;
 
             int r, g, b;
@@ -197,12 +209,12 @@ namespace ASEva.Utility
             a.Append(x.CreateAttribute(key)).Value = value.ToString();
         }
 
-        public void WriteString(String key, String value)
+        public void WriteString(String key, String? value)
         {
             a.Append(x.CreateAttribute(key)).Value = value == null ? "null" : value;
         }
 
-        public void WriteSignalValue(String key, double[] values)
+        public void WriteSignalValue(String key, double[]? values)
         {
             if (values == null) a.Append(x.CreateAttribute(key)).Value = "null";
             else
