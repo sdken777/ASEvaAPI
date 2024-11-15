@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 2, 6, 0); // Update log / 更新记录: 增加FontLibraryOption.EtoSkipGetFamily选项
+            return new Version(3, 2, 6, 1); // Update log / 更新记录: 修正ImageConverter.ConvertFromBitmap不支持输入indexed图像问题
         }
 
         /// \~English
