@@ -94,6 +94,7 @@ namespace ASEva.UIEto
             if (!(bitmapObject is Bitmap)) return null;
             
             var bitmap = bitmapObject as Bitmap;
+            bool etoUnsupported = false;
             using (var bitmapData = bitmap.Lock())
             {
                 if (bitmapData.BytesPerPixel == 3)
@@ -150,8 +151,23 @@ namespace ASEva.UIEto
                     }
                     return image;
                 }
+                else if (bitmapData.BytesPerPixel == 1)
+                {
+                    etoUnsupported = true;
+                }
                 else return null;
             }
+
+            if (etoUnsupported)
+            {
+                try
+                {
+                    return CommonImage.FromBinary(bitmap.ToByteArray(ImageFormat.Png));
+                }
+                catch (Exception) {}
+            }
+
+            return null;
         }
 
         private static unsafe void convert3Default(byte *srcData, byte *dstData, int srcStep, int dstStep, int width, int height)

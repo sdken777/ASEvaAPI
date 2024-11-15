@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 16, 3, 2); // Update log / 更新记录: 修正DefaultFlowLayoutBackend.ScrollToControl
+            return new Version(2, 16, 3, 3); // Update log / 更新记录: 修正ImageConverter.ConvertFromBitmap不支持输入indexed图像问题
         }
 
         /// \~English
