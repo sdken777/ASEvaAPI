@@ -137,6 +137,31 @@ if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
     fi
 fi
 
+mkdir -vp $TARGET_DIR/binm
+cp -vf "$CUR_DIR"/binm/ASEvaAPI.dll $TARGET_DIR/binm/
+cp -vf "$CUR_DIR"/3party/common/* $TARGET_DIR/binm/
+if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
+    cp -vf "$CUR_DIR"/binm/ASEvaAPIEto.dll $TARGET_DIR/binm/
+    cp -vf "$CUR_DIR"/binm/ASEvaAPIMonoMac.dll $TARGET_DIR/binm/
+    cp -vf "$CUR_DIR"/binm/PortableSharpGL.dll $TARGET_DIR/binm/
+    cp -vf "$CUR_DIR"/3party/eto-common/* $TARGET_DIR/binm/
+    cp -vf "$CUR_DIR"/3party/eto-monomac/* $TARGET_DIR/binm/
+    cp -vf "$CUR_DIR"/3party/eto-monomac-x64/* $TARGET_DIR/binm/
+    cp -vf "$CUR_DIR"/3party/skia-common/* $TARGET_DIR/binm/
+    if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/skia-macos-any/* $TARGET_DIR/binm/
+    fi
+    if [ "$EXPORT_AVALONIA" = "y" ]; then
+        cp -vf "$CUR_DIR"/binm/ASEvaAPIAvalonia.dll $TARGET_DIR/binm/
+        cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binm/
+        cp -vf "$CUR_DIR"/3party/avalonia-macos/* $TARGET_DIR/binm/
+    fi
+    if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/livecharts-common/* $TARGET_DIR/binm/
+        cp -vf "$CUR_DIR"/3party/livecharts-avalonia/* $TARGET_DIR/binm/
+    fi
+fi
+
 mkdir -vp $TARGET_DIR/binma
 cp -vf "$CUR_DIR"/binma/ASEvaAPI.dll $TARGET_DIR/binma/
 cp -vf "$CUR_DIR"/3party/common/* $TARGET_DIR/binma/
@@ -203,6 +228,20 @@ if [ "$EXPORT_DEVELOPER" = "y" ]; then
         fi
         if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
             cp -vf "$CUR_DIR"/3party/livecharts-doc/* $TARGET_DIR/binxa/
+        fi
+    fi
+
+    cp -vf "$CUR_DIR"/binm/ASEvaAPI.xml $TARGET_DIR/binm/
+    if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
+        cp -vf "$CUR_DIR"/3party/eto-doc/* $TARGET_DIR/binm/
+        cp -vf "$CUR_DIR"/3party/skia-doc/* $TARGET_DIR/binm/
+        cp -vf "$CUR_DIR"/binm/ASEvaAPIEto.xml $TARGET_DIR/binm/
+        cp -vf "$CUR_DIR"/binm/ASEvaAPIMonoMac.xml $TARGET_DIR/binm/
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/binm/ASEvaAPIAvalonia.xml $TARGET_DIR/binm/
+        fi
+        if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+            cp -vf "$CUR_DIR"/3party/livecharts-doc/* $TARGET_DIR/binm/
         fi
     fi
 
@@ -315,6 +354,31 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
             create_debug_links "$CUR_DIR"/3party/livecharts-common $TARGET_DIR/binxa
             create_debug_links "$CUR_DIR"/3party/livecharts-avalonia $TARGET_DIR/binxa
+        fi
+    fi
+
+    mkdir -vp $TARGET_DIR/binm/debug
+    ln -svf ../ASEvaAPI.dll $TARGET_DIR/binm/debug/ASEvaAPI.dll
+    create_debug_links "$CUR_DIR"/3party/common $TARGET_DIR/binm
+    if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
+        ln -svf ../ASEvaAPIEto.dll $TARGET_DIR/binm/debug/ASEvaAPIEto.dll
+        ln -svf ../ASEvaAPIMonoMac.dll $TARGET_DIR/binm/debug/ASEvaAPIMonoMac.dll
+        ln -svf ../PortableSharpGL.dll $TARGET_DIR/binm/debug/PortableSharpGL.dll
+        create_debug_links "$CUR_DIR"/3party/eto-common $TARGET_DIR/binm
+        create_debug_links "$CUR_DIR"/3party/eto-monomac $TARGET_DIR/binm
+        create_debug_links "$CUR_DIR"/3party/eto-monomac-x64 $TARGET_DIR/binm
+        create_debug_links "$CUR_DIR"/3party/skia-common $TARGET_DIR/binm
+        if [ "$EXPORT_SKIA_NATIVE" = "y" ]; then
+            create_debug_links "$CUR_DIR"/3party/skia-macos-any $TARGET_DIR/binm
+        fi
+        if [ "$EXPORT_AVALONIA" = "y" ]; then
+            ln -svf ../ASEvaAPIAvalonia.dll $TARGET_DIR/binm/debug/ASEvaAPIAvalonia.dll
+            create_debug_links "$CUR_DIR"/3party/avalonia-common $TARGET_DIR/binm
+            create_debug_links "$CUR_DIR"/3party/avalonia-macos $TARGET_DIR/binm
+        fi
+        if [ "$EXPORT_LIVECHARTS_AVALONIA" = "y" ]; then
+            create_debug_links "$CUR_DIR"/3party/livecharts-common $TARGET_DIR/binm
+            create_debug_links "$CUR_DIR"/3party/livecharts-avalonia $TARGET_DIR/binm
         fi
     fi
 
