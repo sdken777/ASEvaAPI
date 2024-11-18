@@ -82,33 +82,27 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Numeric range of matrix table
+    /// (api:app=3.7.0) Numeric range of matrix table
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 矩阵表中数值的范围
+    /// (api:app=3.7.0) 矩阵表中数值的范围
     /// </summary>
-    public struct MatrixTableValueRefRange
+    public struct MatrixTableValueRefRange(double lower, double upper)
     {
-        public double lower;
-        public double upper;
-
-        public MatrixTableValueRefRange(double lower, double upper)
-        {
-            this.lower = lower;
-            this.upper = upper;
-        }
+        public double lower = lower;
+        public double upper = upper;
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Matrix table graph data
+    /// (api:app=3.7.0) Matrix table graph data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 矩阵表数据
+    /// (api:app=3.7.0) 矩阵表数据
     /// </summary>
-    public class MatrixTableData : GraphData
+    public class MatrixTableData(GraphDefinition def) : GraphData(def)
     {
         /// \~English
         /// <summary>
@@ -171,9 +165,7 @@ namespace ASEva.Graph
         /// <returns>图表定义对象</returns>
         public static GraphDefinition CreateDefinitionWithValidation(String title, String xTitle, String yTitle, MatrixTableMode mode, GraphValidation? validation, MatrixTableRange xRange, MatrixTableRange yRange, MatrixTableValueRefRange valueRefRange, double defaultValue = 0)
         {
-            var def = new GraphDefinition();
-            def.Type = GraphType.MatrixTable;
-            def.MainTitle = title;
+            var def = new GraphDefinition(GraphType.MatrixTable, title);
             def.Config.Add(mode.ToString()); // 0
             def.Config.Add(xRange.Base.ToString()); // 1
             def.Config.Add(xRange.Step.ToString()); // 2

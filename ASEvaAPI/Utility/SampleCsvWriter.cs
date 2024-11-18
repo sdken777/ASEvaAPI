@@ -156,16 +156,16 @@ namespace ASEva.Utility
             }
         }
 
-        private StreamWriter writer;
-        private bool writerClosed = false;
-        private String protocol;
-        private int? channel = null;
-        private SessionIdentifier? session = null;
-
         private SampleCsvWriter(StreamWriter writer, String protocol)
         {
             this.writer = writer;
             this.protocol = protocol;
         }
+
+        private StreamWriter writer;
+        private bool writerClosed = false;
+        private String protocol;
+        private int? channel = null;
+        private SessionIdentifier? session = null;
     }
 }

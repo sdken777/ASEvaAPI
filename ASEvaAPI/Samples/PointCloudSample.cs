@@ -121,7 +121,7 @@ namespace ASEva.Samples
         /// <summary>
         /// byte字段数组的表，键为字段ID（具体请参考点云数据格式文档），值为长度为N的数组，存放该字段ID对应byte数值
         /// </summary>
-        public Dictionary<int, byte[]> ByteValues { get; set; }
+        public Dictionary<int, byte[]> ByteValues { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -131,7 +131,7 @@ namespace ASEva.Samples
         /// <summary>
         /// short字段数组的表，键为字段ID（具体请参考点云数据格式文档），值为长度为N的数组，存放该字段ID对应short数值
         /// </summary>
-        public Dictionary<int, short[]> ShortValues { get; set; }
+        public Dictionary<int, short[]> ShortValues { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -141,13 +141,6 @@ namespace ASEva.Samples
         /// <summary>
         /// float字段数组的表，键为字段ID（具体请参考点云数据格式文档），值为长度为N的数组，存放该字段ID对应float数值
         /// </summary>
-        public Dictionary<int, float[]> FloatValues { get; set; }
-
-        public PointCloudSample()
-        {
-            ByteValues = new Dictionary<int, byte[]>();
-            ShortValues = new Dictionary<int, short[]>();
-            FloatValues = new Dictionary<int, float[]>();
-        }
+        public Dictionary<int, float[]> FloatValues { get; set; } = [];
     }
 }

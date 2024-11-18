@@ -15,14 +15,8 @@ namespace ASEva.Utility
     /// </summary>
     public class SceneCsv
     {
-        public SceneTitle Title { get; set; }
-        public List<SceneData> Segments { get; set; }
-
-        public SceneCsv()
-        {
-            Title = new SceneTitle();
-            Segments = new List<SceneData>();
-        }
+        public SceneTitle Title { get; set; } = new SceneTitle();
+        public List<SceneData> Segments { get; set; } = [];
 
         public static SceneCsv? Load(String file)
         {

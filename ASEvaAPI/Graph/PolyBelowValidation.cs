@@ -16,14 +16,14 @@ namespace ASEva.Graph
     {
         public PolyBelowValidation()
         {
-            poly = new FloatPoint[0];
+            poly = [];
         }
 
         public PolyBelowValidation(FloatPoint[] polyline)
         {
             if (polyline == null || polyline.Length == 0)
             {
-                poly = new FloatPoint[0];
+                poly = [];
                 return;
             }
 
@@ -48,7 +48,7 @@ namespace ASEva.Graph
         {
             if (polyline == null || polyline.Length == 0)
             {
-                poly = new FloatPoint[0];
+                poly = [];
                 return;
             }
 

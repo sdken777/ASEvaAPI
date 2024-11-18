@@ -68,13 +68,13 @@ namespace ASEva.Samples
 
     /// \~English
     /// <summary>
-    /// (api:app=3.2.0) Input signal data (For one signal ID)
+    /// (api:app=3.7.0) Input signal data (For one signal ID)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.2.0) 输入的信号数据列表（单个信号类别）
+    /// (api:app=3.7.0) 输入的信号数据列表（单个信号类别）
     /// </summary>
-    public class SignalsData
+    public class SignalsData(String signalID)
     {
         /// \~English
         /// <summary>
@@ -94,7 +94,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 信号的全局唯一ID
         /// </summary>
-        public String SignalID { get; set; }
+        public String SignalID { get; set; } = signalID;
 
         /// \~English
         /// <summary>
@@ -104,12 +104,6 @@ namespace ASEva.Samples
         /// <summary>
         /// 信号列表
         /// </summary>
-        public SignalData[] Signals { get; set; }
-
-        public SignalsData()
-        {
-            SignalID = "";
-            Signals = [];
-        }
+        public SignalData[] Signals { get; set; } = [];
     }
 }

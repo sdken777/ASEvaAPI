@@ -6,22 +6,16 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Single axis' range of scatter points graph
+    /// (api:app=3.7.0) Single axis' range of scatter points graph
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 散点图单轴范围
+    /// (api:app=3.7.0) 散点图单轴范围
     /// </summary>
-    public struct ScatterRange
+    public struct ScatterRange(double lower, double upper)
     {
-        public double lower;
-        public double upper;
-
-        public ScatterRange(double lower, double upper)
-        {
-            this.lower = lower;
-            this.upper = upper;
-        }
+        public double lower = lower;
+        public double upper = upper;
     }
 
     /// \~English
@@ -57,13 +51,13 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Scatter points graph data
+    /// (api:app=3.7.0) Scatter points graph data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 散点图数据
+    /// (api:app=3.7.0) 散点图数据
     /// </summary>
-    public class ScatterPointsData : GraphData
+    public class ScatterPointsData(GraphDefinition def) : GraphData(def)
     {
         /// \~English
         /// <summary>
@@ -143,9 +137,7 @@ namespace ASEva.Graph
         /// <returns>图表定义对象</returns>
         public static GraphDefinition CreateDefinitionWithValidationAndOptions(String title, String xTitle, String yTitle, ScatterRange xRange, ScatterRange yRange, GraphValidation? validation, ScatterOptions? options)
         {
-            var def = new GraphDefinition();
-            def.Type = GraphType.ScatterPoints;
-            def.MainTitle = title;
+            var def = new GraphDefinition(GraphType.ScatterPoints, title);
             def.Config.Add(xRange.lower.ToString());
             def.Config.Add(xRange.upper.ToString());
             def.Config.Add(yRange.lower.ToString());

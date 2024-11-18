@@ -15,11 +15,6 @@ namespace ASEva.Utility
     /// </summary>
     public class CurrentThreadSyncContext : SynchronizationContext
     {
-        private CurrentThreadSyncContext()
-        {
-            threadID = Thread.CurrentThread.ManagedThreadId;
-        }
-
         /// \~English
         /// <summary>
         /// Enable for current thread
@@ -126,7 +121,7 @@ namespace ASEva.Utility
             }
         }
 
-        private int threadID;
+        private int threadID = Thread.CurrentThread.ManagedThreadId;
         private ConcurrentQueue<CallbackContext> contexts = new ConcurrentQueue<CallbackContext>();
     }
 }

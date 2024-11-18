@@ -15,14 +15,14 @@ namespace ASEva.Graph
     {
         public OutlineInsideValidation()
         {
-            outline = new FloatPoint[0];
+            outline = [];
         }
 
         public OutlineInsideValidation(FloatPoint[] outline)
         {
             if (outline == null)
             {
-                this.outline = new FloatPoint[0];
+                this.outline = [];
                 return;
             }
 
@@ -38,7 +38,7 @@ namespace ASEva.Graph
         {
             if (outline == null)
             {
-                this.outline = new FloatPoint[0];
+                this.outline = [];
                 return;
             }
 

@@ -225,13 +225,21 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.3) Session independent time info
+    /// (api:app=3.7.0) Session independent time info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.3) Session无关时间信息
+    /// (api:app=3.7.0) Session无关时间信息
     /// </summary>
-    public class IndependentTimeInfo
+    /// \~English
+    /// <remarks>
+    /// Default constructor
+    /// </remarks>
+    /// \~Chinese
+    /// <remarks>
+    /// 默认构造函数
+    /// </remarks>
+    public class IndependentTimeInfo(ulong cpuTick, ulong hostPosix, ulong guestPosix, ulong gnssPosix)
     {
         /// \~English
         /// <summary>
@@ -273,34 +281,26 @@ namespace ASEva
         /// </summary>
         public ulong GNSSPosix { get { return gnssPosix; }}
 
-        /// \~English
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 默认构造函数
-        /// </summary>
-        public IndependentTimeInfo(ulong cpuTick, ulong hostPosix, ulong guestPosix, ulong gnssPosix)
-        {
-            this.cpuTick = cpuTick;
-            this.hostPosix = hostPosix;
-            this.guestPosix = guestPosix;
-            this.gnssPosix = gnssPosix;
-        }
-
-        private ulong cpuTick, hostPosix, guestPosix, gnssPosix;
+        private ulong cpuTick = cpuTick, hostPosix = hostPosix, guestPosix = guestPosix, gnssPosix = gnssPosix;
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.3) Timestamp
+    /// (api:app=3.7.0) Timestamp
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.3) 时间戳
+    /// (api:app=3.7.0) 时间戳
     /// </summary>
-    public struct Timestamp
+    /// \~English
+    /// <remarks>
+    /// Default constructor
+    /// </remarks>
+    /// \~Chinese
+    /// <remarks>
+    /// 默认构造函数
+    /// </remarks>
+    public struct Timestamp(SessionIdentifier session, double offset, TimeOffsetSync offsetSync, IndependentTimeInfo? timeInfo)
     {
         /// \~English
         /// <summary>
@@ -342,26 +342,10 @@ namespace ASEva
         /// </summary>
         public IndependentTimeInfo? TimeInfo { get { return timeInfo; }}
 
-        /// \~English
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 默认构造函数
-        /// </summary>
-        public Timestamp(SessionIdentifier session, double offset, TimeOffsetSync offsetSync, IndependentTimeInfo? timeInfo)
-        {
-            this.session = session;
-            this.offset = offset;
-            this.offsetSync = offsetSync;
-            this.timeInfo = timeInfo;
-        }
-
-        private SessionIdentifier session;
-        private double offset;
-        private TimeOffsetSync offsetSync;
-        private IndependentTimeInfo? timeInfo;
+        private SessionIdentifier session = session;
+        private double offset = offset;
+        private TimeOffsetSync offsetSync = offsetSync;
+        private IndependentTimeInfo? timeInfo = timeInfo;
     }
 
     /// \~English
@@ -1139,13 +1123,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) General sample
+    /// (api:app=3.7.0) General sample
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 通用样本
+    /// (api:app=3.7.0) 通用样本
     /// </summary>
-    public class GeneralSample : Sample
+    public class GeneralSample(String protocol) : Sample
     {
         /// \~English
         /// <summary>
@@ -1155,7 +1139,7 @@ namespace ASEva
         /// <summary>
         /// 样本协议
         /// </summary>
-        public String Protocol { get; set; }
+        public String Protocol { get; set; } = protocol;
 
         /// \~English
         /// <summary>
@@ -1175,8 +1159,8 @@ namespace ASEva
         /// <summary>
         /// 值列表
         /// </summary>
-        public List<GeneralSampleValue> Values { get; set; }
-        
+        public List<GeneralSampleValue> Values { get; set; } = new List<GeneralSampleValue>();
+
         /// \~English
         /// <summary>
         /// Number of significant values (Generally for recording, not significant values will not be recorded)
@@ -1186,12 +1170,6 @@ namespace ASEva
         /// 值列表中关键数值的个数（一般用于采集，非关键的将不保存）
         /// </summary>
         public int NumberOfSignificants { get; set; }
-
-        public GeneralSample()
-        {
-            Protocol = "";
-            Values = new List<GeneralSampleValue>();
-        }
 
         public override string ToString()
         {

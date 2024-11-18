@@ -43,11 +43,6 @@ namespace ASEva.Samples
         /// <summary>
         /// 摄像头信息
         /// </summary>
-        public CameraInfo CameraInfo { get; set; }
-
-        public VideoFrameSample()
-        {
-            CameraInfo = new CameraInfo();
-        }
+        public CameraInfo CameraInfo { get; set; } = new CameraInfo();
     }
 }

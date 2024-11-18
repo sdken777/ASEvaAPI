@@ -4,13 +4,13 @@ namespace ASEva.Samples
 {
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Signal sample output by processor
+    /// (api:app=3.7.0) Signal sample output by processor
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 数据处理组件输出的信号样本
+    /// (api:app=3.7.0) 数据处理组件输出的信号样本
     /// </summary>
-    public class SignalSample : Sample
+    public class SignalSample(String name) : Sample
     {
         /// \~English
         /// <summary>
@@ -30,7 +30,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 信号的名称，应为 ASEva.ProcessorClass.GetProcessorOutputSignalNames 返回列表中的名称
         /// </summary>
-        public String Name { get; set; }
+        public String Name { get; set; } = name;
 
         /// \~English
         /// <summary>
@@ -58,11 +58,6 @@ namespace ASEva.Samples
                 else if (Name.IndexOf(':') >= 0) return Prefix.Split(':')[0] + ":" + Name;
                 else return Prefix + ":" + Name;
             }
-        }
-
-        public SignalSample()
-        {
-            Name = "";
         }
     }
 }

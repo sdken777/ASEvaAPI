@@ -82,6 +82,6 @@ namespace ASEva.Utility
             return output;
         }
 
-        private Dictionary<String, Type> table = new Dictionary<string, Type>();
+        private Dictionary<String, Type> table = [];
     }
 }

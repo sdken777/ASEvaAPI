@@ -8424,7 +8424,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.6.0
+            version=3.7.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -8502,11 +8502,21 @@
         <member name="T:ASEva.AudioDeviceInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Audio device information
+            (api:app=3.7.0) Audio device information
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 音频设备信息
+            (api:app=3.7.0) 音频设备信息
+            </summary>
+        </member>
+        <member name="M:ASEva.AudioDeviceInfo.#ctor(System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Audio device information
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 音频设备信息
             </summary>
         </member>
         <member name="P:ASEva.AudioDeviceInfo.DeviceID">
@@ -8632,11 +8642,21 @@
         <member name="T:ASEva.AudioDriverInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Audio driver information
+            (api:app=3.7.0) Audio driver information
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 音频驱动信息
+            (api:app=3.7.0) 音频驱动信息
+            </summary>
+        </member>
+        <member name="M:ASEva.AudioDriverInfo.#ctor(System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Audio driver information
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 音频驱动信息
             </summary>
         </member>
         <member name="P:ASEva.AudioDriverInfo.DriverID">
@@ -10888,21 +10908,41 @@
         <member name="T:ASEva.Graph.HistLineSample">
             \~English
             <summary>
-            (api:app=3.0.0) Sample of histogram and poly line graph
+            (api:app=3.7.0) Sample of histogram and poly line graph
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 直方折线图中的样本
+            (api:app=3.7.0) 直方折线图中的样本
+            </summary>
+        </member>
+        <member name="M:ASEva.Graph.HistLineSample.#ctor(System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Sample of histogram and poly line graph
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 直方折线图中的样本
             </summary>
         </member>
         <member name="T:ASEva.Graph.HistAndLineData">
             \~English
             <summary>
-            (api:app=3.0.0) Histogram and poly line graph data
+            (api:app=3.7.0) Histogram and poly line graph data
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 直方折线图数据
+            (api:app=3.7.0) 直方折线图数据
+            </summary>
+        </member>
+        <member name="M:ASEva.Graph.HistAndLineData.#ctor(ASEva.GraphDefinition)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Histogram and poly line graph data
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 直方折线图数据
             </summary>
         </member>
         <member name="M:ASEva.Graph.HistAndLineData.CreateDefinition(System.String,System.String,System.Object,ASEva.Graph.HistLineMode,System.String,System.Double,System.String,System.Double)">
@@ -11268,11 +11308,21 @@
         <member name="T:ASEva.Graph.LabelTableData">
             \~English
             <summary>
-            (api:app=3.0.0) Label table graph data
+            (api:app=3.7.0) Label table graph data
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 标签表数据
+            (api:app=3.7.0) 标签表数据
+            </summary>
+        </member>
+        <member name="M:ASEva.Graph.LabelTableData.#ctor(ASEva.GraphDefinition)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Label table graph data
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 标签表数据
             </summary>
         </member>
         <member name="M:ASEva.Graph.LabelTableData.CreateDefinition(System.String,System.String,System.String,ASEva.Graph.LabelTableMode,System.String[],System.String[],ASEva.Graph.LabelTableValueDirection,System.Double)">
@@ -11546,21 +11596,41 @@
         <member name="T:ASEva.Graph.MatrixTableValueRefRange">
             \~English
             <summary>
-            (api:app=3.0.0) Numeric range of matrix table
+            (api:app=3.7.0) Numeric range of matrix table
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 矩阵表中数值的范围
+            (api:app=3.7.0) 矩阵表中数值的范围
+            </summary>
+        </member>
+        <member name="M:ASEva.Graph.MatrixTableValueRefRange.#ctor(System.Double,System.Double)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Numeric range of matrix table
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 矩阵表中数值的范围
             </summary>
         </member>
         <member name="T:ASEva.Graph.MatrixTableData">
             \~English
             <summary>
-            (api:app=3.0.0) Matrix table graph data
+            (api:app=3.7.0) Matrix table graph data
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 矩阵表数据
+            (api:app=3.7.0) 矩阵表数据
+            </summary>
+        </member>
+        <member name="M:ASEva.Graph.MatrixTableData.#ctor(ASEva.GraphDefinition)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Matrix table graph data
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 矩阵表数据
             </summary>
         </member>
         <member name="M:ASEva.Graph.MatrixTableData.CreateDefinition(System.String,System.String,System.String,ASEva.Graph.MatrixTableMode,ASEva.Graph.MatrixTableRange,ASEva.Graph.MatrixTableRange,ASEva.Graph.MatrixTableValueRefRange,System.Double)">
@@ -11802,11 +11872,21 @@
         <member name="T:ASEva.Graph.ScatterRange">
             \~English
             <summary>
-            (api:app=3.0.0) Single axis' range of scatter points graph
+            (api:app=3.7.0) Single axis' range of scatter points graph
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 散点图单轴范围
+            (api:app=3.7.0) 散点图单轴范围
+            </summary>
+        </member>
+        <member name="M:ASEva.Graph.ScatterRange.#ctor(System.Double,System.Double)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Single axis' range of scatter points graph
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 散点图单轴范围
             </summary>
         </member>
         <member name="T:ASEva.Graph.ScatterOptions">
@@ -11842,11 +11922,21 @@
         <member name="T:ASEva.Graph.ScatterPointsData">
             \~English
             <summary>
-            (api:app=3.0.0) Scatter points graph data
+            (api:app=3.7.0) Scatter points graph data
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 散点图数据
+            (api:app=3.7.0) 散点图数据
+            </summary>
+        </member>
+        <member name="M:ASEva.Graph.ScatterPointsData.#ctor(ASEva.GraphDefinition)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Scatter points graph data
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 散点图数据
             </summary>
         </member>
         <member name="M:ASEva.Graph.ScatterPointsData.CreateDefinition(System.String,System.String,System.String,ASEva.Graph.ScatterRange,ASEva.Graph.ScatterRange)">
@@ -12078,11 +12168,21 @@
         <member name="T:ASEva.Graph.SingleValueData">
             \~English
             <summary>
-            (api:app=3.0.0) Single value graph data
+            (api:app=3.7.0) Single value graph data
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 单值数据
+            (api:app=3.7.0) 单值数据
+            </summary>
+        </member>
+        <member name="M:ASEva.Graph.SingleValueData.#ctor(ASEva.GraphDefinition)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Single value graph data
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 单值数据
             </summary>
         </member>
         <member name="M:ASEva.Graph.SingleValueData.CreateDefinition(System.String)">
@@ -12934,12 +13034,38 @@
         <member name="T:ASEva.IndependentTimeInfo">
             \~English
             <summary>
-            (api:app=3.0.3) Session independent time info
+            (api:app=3.7.0) Session independent time info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.3) Session无关时间信息
+            (api:app=3.7.0) Session无关时间信息
             </summary>
+            \~English
+            <remarks>
+            Default constructor
+            </remarks>
+            \~Chinese
+            <remarks>
+            默认构造函数
+            </remarks>
+        </member>
+        <member name="M:ASEva.IndependentTimeInfo.#ctor(System.UInt64,System.UInt64,System.UInt64,System.UInt64)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Session independent time info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) Session无关时间信息
+            </summary>
+            \~English
+            <remarks>
+            Default constructor
+            </remarks>
+            \~Chinese
+            <remarks>
+            默认构造函数
+            </remarks>
         </member>
         <member name="P:ASEva.IndependentTimeInfo.CPUTick">
             \~English
@@ -12981,25 +13107,41 @@
             采样时卫星Posix时间，单位纳秒，0表示无效
             </summary>
         </member>
-        <member name="M:ASEva.IndependentTimeInfo.#ctor(System.UInt64,System.UInt64,System.UInt64,System.UInt64)">
-            \~English
-            <summary>
-            Default constructor
-            </summary>
-            \~Chinese
-            <summary>
-            默认构造函数
-            </summary>
-        </member>
         <member name="T:ASEva.Timestamp">
             \~English
             <summary>
-            (api:app=3.0.3) Timestamp
+            (api:app=3.7.0) Timestamp
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.3) 时间戳
+            (api:app=3.7.0) 时间戳
             </summary>
+            \~English
+            <remarks>
+            Default constructor
+            </remarks>
+            \~Chinese
+            <remarks>
+            默认构造函数
+            </remarks>
+        </member>
+        <member name="M:ASEva.Timestamp.#ctor(ASEva.SessionIdentifier,System.Double,ASEva.TimeOffsetSync,ASEva.IndependentTimeInfo)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Timestamp
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 时间戳
+            </summary>
+            \~English
+            <remarks>
+            Default constructor
+            </remarks>
+            \~Chinese
+            <remarks>
+            默认构造函数
+            </remarks>
         </member>
         <member name="P:ASEva.Timestamp.Session">
             \~English
@@ -13039,16 +13181,6 @@
             \~Chinese
             <summary>
             Session无关时间信息
-            </summary>
-        </member>
-        <member name="M:ASEva.Timestamp.#ctor(ASEva.SessionIdentifier,System.Double,ASEva.TimeOffsetSync,ASEva.IndependentTimeInfo)">
-            \~English
-            <summary>
-            Default constructor
-            </summary>
-            \~Chinese
-            <summary>
-            默认构造函数
             </summary>
         </member>
         <member name="T:ASEva.Sample">
@@ -13500,11 +13632,21 @@
         <member name="T:ASEva.GeneralSample">
             \~English
             <summary>
-            (api:app=3.0.0) General sample
+            (api:app=3.7.0) General sample
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 通用样本
+            (api:app=3.7.0) 通用样本
+            </summary>
+        </member>
+        <member name="M:ASEva.GeneralSample.#ctor(System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) General sample
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 通用样本
             </summary>
         </member>
         <member name="P:ASEva.GeneralSample.Protocol">
@@ -13913,16 +14055,6 @@
             手动触发器状态列表，长度16
             </summary>
         </member>
-        <member name="M:ASEva.Samples.ManualTriggerSample.#ctor">
-            \~English
-            <summary>
-            Default constructor
-            </summary>
-            \~Chinese
-            <summary>
-            默认构造函数
-            </summary>
-        </member>
         <member name="T:ASEva.Samples.PointCloudSample">
             \~English
             <summary>
@@ -14066,11 +14198,21 @@
         <member name="T:ASEva.Samples.SignalSample">
             \~English
             <summary>
-            (api:app=3.0.0) Signal sample output by processor
+            (api:app=3.7.0) Signal sample output by processor
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 数据处理组件输出的信号样本
+            (api:app=3.7.0) 数据处理组件输出的信号样本
+            </summary>
+        </member>
+        <member name="M:ASEva.Samples.SignalSample.#ctor(System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Signal sample output by processor
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 数据处理组件输出的信号样本
             </summary>
         </member>
         <member name="P:ASEva.Samples.SignalSample.Prefix">
@@ -14172,11 +14314,21 @@
         <member name="T:ASEva.Samples.SignalsData">
             \~English
             <summary>
-            (api:app=3.2.0) Input signal data (For one signal ID)
+            (api:app=3.7.0) Input signal data (For one signal ID)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.2.0) 输入的信号数据列表（单个信号类别）
+            (api:app=3.7.0) 输入的信号数据列表（单个信号类别）
+            </summary>
+        </member>
+        <member name="M:ASEva.Samples.SignalsData.#ctor(System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Input signal data (For one signal ID)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 输入的信号数据列表（单个信号类别）
             </summary>
         </member>
         <member name="P:ASEva.Samples.SignalsData.Session">
@@ -15297,16 +15449,6 @@
             \~Chinese
             <summary>
             标准针孔模型下的横向视场角（未去畸变时为空）
-            </summary>
-        </member>
-        <member name="M:ASEva.Samples.CameraInfo.#ctor">
-            \~English
-            <summary>
-            Default constructor
-            </summary>
-            \~Chinese
-            <summary>
-            默认构造函数
             </summary>
         </member>
         <member name="T:ASEva.Samples.VideoFrameSample">
@@ -19904,34 +20046,42 @@
         <member name="T:ASEva.Utility.AttributeParser">
             \~English
             <summary>
-            (api:app=3.0.0) XML attribute parsing
+            (api:app=3.7.0) XML attribute parsing
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) XML属性解析
+            (api:app=3.7.0) XML属性解析
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.AttributeParser.#ctor(System.Xml.XmlElement)">
+            \~English
+            <summary>
+            (api:app=3.7.0) XML attribute parsing
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) XML属性解析
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeWriter">
             \~English
             <summary>
-            (api:app=3.0.0) XML attribute writer
+            (api:app=3.7.0) XML attribute writer
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) XML属性输出
+            (api:app=3.7.0) XML属性输出
             </summary>
         </member>
         <member name="M:ASEva.Utility.AttributeWriter.#ctor(System.Xml.XmlElement)">
             \~English
             <summary>
-            Create based on XML element
+            (api:app=3.7.0) XML attribute writer
             </summary>
-            <param name="element">XML element</param>
             \~Chinese
             <summary>
-            基于XML元素节点创建
+            (api:app=3.7.0) XML属性输出
             </summary>
-            <param name="element">XML元素节点</param>
         </member>
         <member name="T:ASEva.Utility.ContentToString">
             \~English
@@ -21326,11 +21476,11 @@
         <member name="P:ASEva.Utility.SessionMeta.Pick">
             \~English
             <summary>
-            Session's pick ID, "origin" means it's the original data
+            Session's pick ID, null or "origin" means it's the original data
             </summary>
             \~Chinese
             <summary>
-            Session的截取ID，origin表示原始数据
+            Session的截取ID，null或origin表示原始数据
             </summary>
         </member>
         <member name="P:ASEva.Utility.SessionMeta.PickProperties">

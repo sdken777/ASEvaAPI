@@ -105,7 +105,7 @@ namespace ASEva.Utility
         /// <summary>
         /// Session的注释说明
         /// </summary>
-        public String Comment { get; set; }
+        public String Comment { get; set; } = "";
 
         /// \~English
         /// <summary>
@@ -125,7 +125,7 @@ namespace ASEva.Utility
         /// <summary>
         /// Session的截取属性列表
         /// </summary>
-        public Dictionary<String, String> PickProperties { get; set; }
+        public Dictionary<String, String> PickProperties { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -135,7 +135,7 @@ namespace ASEva.Utility
         /// <summary>
         /// Session的属性
         /// </summary>
-        public Dictionary<string, string> Properties { get; set; }
+        public Dictionary<string, string> Properties { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -145,7 +145,7 @@ namespace ASEva.Utility
         /// <summary>
         /// 采集Session的软件版本信息（用于回溯）
         /// </summary>
-        public Dictionary<string, Version> Versions { get; set; }
+        public Dictionary<string, Version> Versions { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -251,16 +251,6 @@ namespace ASEva.Utility
             {
                 if (GNSSPosixModel != null) GNSSPosixModel.TimeRatio = value;
             }
-        }
-
-        private SessionMeta(String filePath, String guid)
-        {
-            FilePath = filePath;
-            GUID = guid;
-            Comment = "";
-            PickProperties = [];
-            Properties = [];
-            Versions = [];
         }
 
         /// \~English
@@ -654,7 +644,7 @@ namespace ASEva.Utility
             var pickNode = rootNode.AppendChild(xml.CreateElement("pick")) as XmlElement;
             if (pickNode != null)
             {
-                cw = new AttributeWriter(xml, pickNode);
+                cw = new AttributeWriter(pickNode);
                 cw.WriteString("id", Pick == null ? "origin" : Pick);
 
                 if (PickProperties != null)
@@ -663,7 +653,7 @@ namespace ASEva.Utility
                     {
                         var propNode = pickNode.AppendChild(xml.CreateElement("property")) as XmlElement;
                         if (propNode == null) continue;
-                        cw = new AttributeWriter(xml, propNode);
+                        cw = new AttributeWriter(propNode);
                         cw.WriteString("key", item.Key);
                         cw.WriteString("value", item.Value);
                     }
@@ -682,7 +672,7 @@ namespace ASEva.Utility
                 {
                     var propNode = rootNode.AppendChild(xml.CreateElement("property")) as XmlElement;
                     if (propNode == null) continue;
-                    cw = new AttributeWriter(xml, propNode);
+                    cw = new AttributeWriter(propNode);
                     cw.WriteString("key", item.Key);
                     cw.WriteString("value", item.Value);
                 }
@@ -715,6 +705,12 @@ namespace ASEva.Utility
                 }
                 catch (Exception ex) { Dump.Exception(ex); }
             }
+        }
+
+        private SessionMeta(String filePath, String guid)
+        {
+            FilePath = filePath;
+            GUID = guid;
         }
     }
 }

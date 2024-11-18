@@ -379,11 +379,6 @@ namespace ASEva.Samples
             }
         }
 
-        private CommonImage()
-        {
-            data = [];
-        }
-
         private CommonImage processImageSub(CommonImage srcImage, float scale, IntRect clipRect)
         {
             var newImage = CommonImage.Create(clipRect.Width, clipRect.Height, srcImage.WithAlpha);
@@ -431,7 +426,7 @@ namespace ASEva.Samples
         }
 
         private int width, height;
-        private byte[] data;
+        private byte[] data = [];
         private bool withAlpha;
         private bool bgrInverted;
         private int rowBytes;

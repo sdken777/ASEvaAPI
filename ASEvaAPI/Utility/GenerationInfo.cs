@@ -86,7 +86,7 @@ namespace ASEva.Utility
         /// <summary>
         /// 状态信息
         /// </summary>
-        public GenerationProcessStatus ProcessStatus { get; set; }
+        public GenerationProcessStatus ProcessStatus { get; set; } = GenerationProcessStatus.Unknown;
 
         /// \~English
         /// <summary>
@@ -96,7 +96,7 @@ namespace ASEva.Utility
         /// <summary>
         /// 样本别名表
         /// </summary>
-        public Dictionary<string, string> SampleAlias { get; set; }
+        public Dictionary<string, string> SampleAlias { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -106,7 +106,7 @@ namespace ASEva.Utility
         /// <summary>
         /// 创建Generation的软件版本信息（用于回溯）
         /// </summary>
-        public Dictionary<string, Version> Versions { get; set; }
+        public Dictionary<string, Version> Versions { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -116,7 +116,7 @@ namespace ASEva.Utility
         /// <summary>
         /// Generation更新记录
         /// </summary>
-        public Dictionary<DateTime, string> UpdateLogs { get; set; }
+        public Dictionary<DateTime, string> UpdateLogs { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -146,18 +146,7 @@ namespace ASEva.Utility
         /// <summary>
         /// Generation生成时被配置为与授时服务器同步的所有客机同步ID
         /// </summary>
-        public String[] GuestSyncIDs { get; set; }
-
-        private GenerationInfo(String filePath, String generationID)
-        {
-            FilePath = filePath;
-            GenerationID = generationID;
-            ProcessStatus = GenerationProcessStatus.Unknown;
-            SampleAlias = [];
-            Versions = [];
-            UpdateLogs = [];
-            GuestSyncIDs = [];
-        }
+        public String[] GuestSyncIDs { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -450,6 +439,12 @@ namespace ASEva.Utility
                 }
                 catch (Exception ex) { Dump.Exception(ex); }
             }
+        }
+
+        private GenerationInfo(String filePath, String generationID)
+        {
+            FilePath = filePath;
+            GenerationID = generationID;
         }
     }
 }

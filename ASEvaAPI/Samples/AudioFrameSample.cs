@@ -47,11 +47,6 @@ namespace ASEva.Samples
         /// </summary>
         public String? MD5 { get; private set; }
 
-        public AudioFrameSample()
-        {
-            data = [];
-        }
-
-        private short[] data;
+        private short[] data = [];
     }
 }

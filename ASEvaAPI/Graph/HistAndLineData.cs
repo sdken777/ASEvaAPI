@@ -180,45 +180,34 @@ namespace ASEva.Graph
     /// </summary>
     public class HistLineXLabels //（Validation unsupported / 图表数据验证无效）
     {
-        public String[] Labels { get; set; }
-
-        public HistLineXLabels()
-        {
-            Labels = [];
-        }
+        public String[] Labels { get; set; } = [];
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Sample of histogram and poly line graph
+    /// (api:app=3.7.0) Sample of histogram and poly line graph
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 直方折线图中的样本
+    /// (api:app=3.7.0) 直方折线图中的样本
     /// </summary>
-    public class HistLineSample
+    public class HistLineSample(String name)
     {
-        public String Name { get; set; }
+        public String Name { get; set; } = name;
         public double HistValue { get; set; }
         public double LineValue { get; set; }
-
-        public HistLineSample()
-        {
-            Name = "";
-        }
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Histogram and poly line graph data
+    /// (api:app=3.7.0) Histogram and poly line graph data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 直方折线图数据
+    /// (api:app=3.7.0) 直方折线图数据
     /// </summary>
-    public class HistAndLineData : GraphData
+    public class HistAndLineData(GraphDefinition def) : GraphData(def)
     {
-
         /// \~English
         /// <summary>
         /// Create graph definition (without validation)
@@ -282,9 +271,7 @@ namespace ASEva.Graph
         {
             if (!IsHistogramOnlyMode(mode) && (lineTitle == null || lineTitle.Length == 0)) return null;
 
-            var def = new GraphDefinition();
-            def.Type = GraphType.HistAndLine;
-            def.MainTitle = title;
+            var def = new GraphDefinition(GraphType.HistAndLine, title);
 
             def.Config.Add(mode.ToString()); // 0
             def.Config.Add(xTitle); // 1
@@ -587,16 +574,11 @@ namespace ASEva.Graph
         public HistLineSample[] GetSamples()
         {
             var samples = new HistLineSample[Data.GetLength(0)];
-            for (int i = 0; i < samples.Length; i++)
-            {
-                samples[i] = new HistLineSample();
-            }
-
             if (Definition.Config[4] == "XLabels")
             {
                 for (int i = 0; i < samples.Length; i++)
                 {
-                    samples[i].Name = Definition.Config[5 + i];
+                    samples[i] = new HistLineSample(Definition.Config[5 + i]);
                 }
             }
             else
@@ -610,7 +592,7 @@ namespace ASEva.Graph
                 {
                     var lower = baseDecimal + stepDecimal * i;
                     var upper = baseDecimal + stepDecimal * (i + 1);
-                    samples[i].Name = lower + "~" + upper;
+                    samples[i] = new HistLineSample(lower + "~" + upper);
                 }
             }
 

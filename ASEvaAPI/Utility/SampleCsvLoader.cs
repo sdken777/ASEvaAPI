@@ -202,11 +202,10 @@ namespace ASEva.Utility
                 if (guestPosixIndex > 0) UInt64.TryParse(comps[guestPosixIndex], out guestPosix);
                 if (gnssPosixIndex > 0) UInt64.TryParse(comps[gnssPosixIndex], out gnssPosix);
 
-                var sample = new GeneralSample();
+                var sample = new GeneralSample(protocol);
                 sample.SetTime(SessionIdentifier.FromDateTime(sessionDateTime), offset, syncState, new IndependentTimeInfo(cpuTick, hostPosix, guestPosix, gnssPosix), offset);
                 sample.Channel = channel;
                 sample.NumberOfSignificants = comps.Length - (timeColumnIndex + 1);
-                sample.Protocol = protocol;
                 sample.Values = new List<GeneralSampleValue>();
 
                 for (int i = timeColumnIndex + 1; i < comps.Length; i++)
@@ -374,11 +373,10 @@ namespace ASEva.Utility
                     if (guestPosixIndex > 0) UInt64.TryParse(comps[guestPosixIndex], out guestPosix);
                     if (gnssPosixIndex > 0) UInt64.TryParse(comps[gnssPosixIndex], out gnssPosix);
 
-                    var sample = new GeneralSample();
+                    var sample = new GeneralSample(protocol);
                     sample.SetTime(SessionIdentifier.FromDateTime(sessionDateTime), offset, syncState, new IndependentTimeInfo(cpuTick, hostPosix, guestPosix, gnssPosix), offset);
                     sample.Channel = channel;
                     sample.NumberOfSignificants = comps.Length - (timeColumnIndex + 1);
-                    sample.Protocol = protocol;
                     sample.Values = new List<GeneralSampleValue>();
 
                     for (int i = timeColumnIndex + 1; i < comps.Length; i++)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection.Emit;
 
 namespace ASEva.Graph
 {
@@ -108,13 +109,13 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Label table graph data
+    /// (api:app=3.7.0) Label table graph data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 标签表数据
+    /// (api:app=3.7.0) 标签表数据
     /// </summary>
-    public class LabelTableData : GraphData
+    public class LabelTableData(GraphDefinition def) : GraphData(def)
     {
         /// \~English
         /// <summary>
@@ -144,9 +145,7 @@ namespace ASEva.Graph
         /// <returns>图表定义对象</returns>
         public static GraphDefinition CreateDefinition(String title, String xTitle, String yTitle, LabelTableMode mode, String[] xLabels, String[] yLabels, LabelTableValueDirection valueDirection, double defaultValue = 0)
         {
-            var def = new GraphDefinition();
-            def.Type = GraphType.LabelTable;
-            def.MainTitle = title;
+            var def = new GraphDefinition(GraphType.LabelTable, title);
             def.Config.Add(mode.ToString()); // 0
             def.Config.Add(xLabels.Length.ToString()); // 1
             def.Config.Add(yLabels.Length.ToString()); // 2

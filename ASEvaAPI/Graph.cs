@@ -244,11 +244,11 @@ namespace ASEva
         /// </summary>
         public GraphValidation? Validation { get; set; }
 
-        public GraphDefinition()
+        public GraphDefinition(GraphType type, String mainTitle)
         {
-            Type = GraphType.Invalid;
+            Type = type;
+            MainTitle = mainTitle;
             Config = new List<string>();
-            MainTitle = "";
             ColumnTitles = new List<string?>();
             Validation = null;
         }
@@ -378,10 +378,10 @@ namespace ASEva
         /// </summary>
         public double[,] Data { get; set; }
 
-        public GraphData()
+        public GraphData(GraphDefinition def)
         {
             ID = 0;
-            Definition = new GraphDefinition();
+            Definition = def;
             Params = new List<string>();
             Data = new double[0, 0];
         }
@@ -551,9 +551,8 @@ namespace ASEva
         /// <returns>图表数据对象</returns>
         public static GraphData? Create(GraphDefinition definition)
         {
-            var rawData = new GraphData();
+            var rawData = new GraphData(definition);
             rawData.ID = definition.GetID();
-            rawData.Definition = definition;
 
             var output = CreateGraphDataEncapsulation(rawData);
             if (output == null) return null;
@@ -639,13 +638,13 @@ namespace ASEva
                     }
                 }
 
-                var rawOutput = new GraphData();
+                var definition = new GraphDefinition(type, title);
+                definition.Config = configList;
+                if (columnList != null) definition.ColumnTitles.AddRange(columnList);
+                definition.Validation = validation;
+
+                var rawOutput = new GraphData(definition);
                 rawOutput.ID = id;
-                rawOutput.Definition.Type = type;
-                rawOutput.Definition.MainTitle = title;
-                rawOutput.Definition.Config = configList;
-                if (columnList != null) rawOutput.Definition.ColumnTitles.AddRange(columnList);
-                rawOutput.Definition.Validation = validation;
                 rawOutput.Params = paramList;
                 rawOutput.Data = data;
 
@@ -718,19 +717,19 @@ namespace ASEva
             switch (data.Definition.Type)
             {
                 case GraphType.SingleValue:
-                    output = new Graph.SingleValueData();
+                    output = new Graph.SingleValueData(data.Definition);
                     break;
                 case GraphType.ScatterPoints:
-                    output = new Graph.ScatterPointsData();
+                    output = new Graph.ScatterPointsData(data.Definition);
                     break;
                 case GraphType.HistAndLine:
-                    output = new Graph.HistAndLineData();
+                    output = new Graph.HistAndLineData(data.Definition);
                     break;
                 case GraphType.MatrixTable:
-                    output = new Graph.MatrixTableData();
+                    output = new Graph.MatrixTableData(data.Definition);
                     break;
                 case GraphType.LabelTable:
-                    output = new Graph.LabelTableData();
+                    output = new Graph.LabelTableData(data.Definition);
                     break;
                 default:
                     return null;

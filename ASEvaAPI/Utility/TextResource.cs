@@ -121,11 +121,6 @@ namespace ASEva.Utility
             return output;
         }
 
-        private TextResource()
-        {
-            dict = new Dictionary<string, string>();
-        }
-
         /// \~English
         /// <summary>
         /// (api:app=3.0.9) Get all IDs
@@ -184,6 +179,9 @@ namespace ASEva.Utility
             else return null;
         }
 
-        private Dictionary<String, String> dict;
+        private TextResource()
+        {}
+
+        private Dictionary<String, String> dict = [];
     }
 }

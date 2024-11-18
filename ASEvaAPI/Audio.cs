@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 
@@ -59,13 +60,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Audio device information
+    /// (api:app=3.7.0) Audio device information
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 音频设备信息
+    /// (api:app=3.7.0) 音频设备信息
     /// </summary>
-    public class AudioDeviceInfo
+    public class AudioDeviceInfo(String id, String name)
     {
         /// \~English
         /// <summary>
@@ -75,7 +76,7 @@ namespace ASEva
         /// <summary>
         /// 设备ID
         /// </summary>
-        public String DeviceID { get; set; }
+        public String DeviceID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -85,7 +86,7 @@ namespace ASEva
         /// <summary>
         /// 设备名称
         /// </summary>
-        public String DeviceName { get; set; }
+        public String DeviceName { get; set; } = name;
     }
 
     /// \~English
@@ -124,7 +125,7 @@ namespace ASEva
         /// <param name="deviceID">设备ID</param>
         /// <param name="receiver">回调接口</param>
         /// <returns>设备对象，若启动失败返回null</returns>
-        object StartRecordDevice(String deviceID, WaveReceiver receiver);
+        object? StartRecordDevice(String deviceID, WaveReceiver receiver);
 
         /// \~English
         /// <summary>
@@ -175,7 +176,7 @@ namespace ASEva
         /// <param name="deviceID">设备ID</param>
         /// <param name="provider">回调接口</param>
         /// <returns>设备对象，若启动失败返回null</returns>
-        object StartReplayDevice(String deviceID, WaveProvider provider);
+        object? StartReplayDevice(String deviceID, WaveProvider provider);
 
         /// \~English
         /// <summary>
@@ -192,13 +193,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Audio driver information
+    /// (api:app=3.7.0) Audio driver information
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 音频驱动信息
+    /// (api:app=3.7.0) 音频驱动信息
     /// </summary>
-    public class AudioDriverInfo
+    public class AudioDriverInfo(String id, String name)
     {
         /// \~English
         /// <summary>
@@ -208,7 +209,7 @@ namespace ASEva
         /// <summary>
         /// 驱动ID
         /// </summary>
-        public String DriverID { get; set; }
+        public String DriverID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -218,7 +219,6 @@ namespace ASEva
         /// <summary>
         /// 驱动名称
         /// </summary>
-        public String DriverName { get; set; }
-
+        public String DriverName { get; set; } = name;
     }
 }

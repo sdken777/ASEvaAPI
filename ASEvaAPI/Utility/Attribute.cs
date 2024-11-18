@@ -7,20 +7,15 @@ namespace ASEva.Utility
     
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) XML attribute parsing
+    /// (api:app=3.7.0) XML attribute parsing
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) XML属性解析
+    /// (api:app=3.7.0) XML属性解析
     /// </summary>
-    public class AttributeParser
+    public class AttributeParser(XmlElement element)
     {
-        private XmlAttributeCollection a;
-
-        public AttributeParser(XmlElement root)
-        {
-            a = root.Attributes;
-        }
+        private XmlAttributeCollection a = element.Attributes;
 
         public bool ParseBool(String key, String trueValue, bool defaultValue)
         {
@@ -156,38 +151,16 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) XML attribute writer
+    /// (api:app=3.7.0) XML attribute writer
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) XML属性输出
+    /// (api:app=3.7.0) XML属性输出
     /// </summary>
-    public class AttributeWriter
+    public class AttributeWriter(XmlElement element)
     {
-        private XmlDocument x;
-        private XmlAttributeCollection a;
-
-        /// \~English
-        /// <summary>
-        /// Create based on XML element
-        /// </summary>
-        /// <param name="element">XML element</param>
-        /// \~Chinese
-        /// <summary>
-        /// 基于XML元素节点创建
-        /// </summary>
-        /// <param name="element">XML元素节点</param>
-        public AttributeWriter(XmlElement element)
-        {
-            x = element.OwnerDocument;
-            a = element.Attributes;
-        }
-
-        public AttributeWriter(XmlDocument xml, XmlElement root)
-        {
-            x = xml;
-            a = root.Attributes;
-        }
+        private XmlDocument x = element.OwnerDocument;
+        private XmlAttributeCollection a = element.Attributes;
 
         public void WriteBool(String key, bool value, String trueValue, String falseValue)
         {
