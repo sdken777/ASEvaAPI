@@ -206,7 +206,7 @@ namespace ASEva.Utility
                 sample.SetTime(SessionIdentifier.FromDateTime(sessionDateTime), offset, syncState, new IndependentTimeInfo(cpuTick, hostPosix, guestPosix, gnssPosix), offset);
                 sample.Channel = channel;
                 sample.NumberOfSignificants = comps.Length - (timeColumnIndex + 1);
-                sample.Values = new List<GeneralSampleValue>();
+                sample.Values = [];
 
                 for (int i = timeColumnIndex + 1; i < comps.Length; i++)
                 {
@@ -377,7 +377,7 @@ namespace ASEva.Utility
                     sample.SetTime(SessionIdentifier.FromDateTime(sessionDateTime), offset, syncState, new IndependentTimeInfo(cpuTick, hostPosix, guestPosix, gnssPosix), offset);
                     sample.Channel = channel;
                     sample.NumberOfSignificants = comps.Length - (timeColumnIndex + 1);
-                    sample.Values = new List<GeneralSampleValue>();
+                    sample.Values = [];
 
                     for (int i = timeColumnIndex + 1; i < comps.Length; i++)
                     {

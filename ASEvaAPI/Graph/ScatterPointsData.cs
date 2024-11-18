@@ -508,7 +508,7 @@ namespace ASEva.Graph
             uint count = 0;
             if (!UInt32.TryParse(Params[0], out count))
             {
-                return new FloatPoint[0];
+                return [];
             }
 
             var pts = new FloatPoint[count];

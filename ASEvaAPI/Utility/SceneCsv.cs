@@ -61,8 +61,7 @@ namespace ASEva.Utility
                     double startTime, length;
                     if (!Double.TryParse(comps[1], out startTime) || !Double.TryParse(comps[2], out length)) continue;
 
-                    var scene = new SceneData();
-                    scene.SceneID = sceneID;
+                    var scene = new SceneData(sceneID);
                     scene.Session = SessionIdentifier.FromDateTime(sessionDateTime);
                     scene.BeginOffset = startTime;
                     scene.TimeLength = length;

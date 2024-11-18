@@ -282,7 +282,7 @@ namespace ASEva.Utility
                         info.ProcessStatus = GenerationProcessStatus.Unknown;
                     }
 
-                    info.SampleAlias = new Dictionary<string, string>();
+                    info.SampleAlias = [];
                     var aliasNodes = xml.DocumentElement?.GetElementsByTagName("alias");
                     if (aliasNodes != null)
                     {
@@ -293,7 +293,7 @@ namespace ASEva.Utility
                         }
                     }
 
-                    info.Versions = new Dictionary<string, Version>();
+                    info.Versions = [];
                     var versionNodes = xml.DocumentElement?.GetElementsByTagName("version");
                     if (versionNodes != null)
                     {
@@ -304,7 +304,7 @@ namespace ASEva.Utility
                         }
                     }
 
-                    info.UpdateLogs = new Dictionary<DateTime, string>();
+                    info.UpdateLogs = [];
                     var updateNodes = xml.DocumentElement?.GetElementsByTagName("update");
                     if (updateNodes != null)
                     {

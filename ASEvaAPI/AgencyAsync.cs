@@ -231,7 +231,7 @@ namespace ASEva
     /// </summary>
     public class AgencyAsync
     {
-        private static AgencyAsyncHandler handler = null;
+        private static AgencyAsyncHandler? handler = null;
         public static AgencyAsyncHandler Handler
         {
             private get
@@ -575,7 +575,7 @@ namespace ASEva
         /// <returns>图形界面框架</returns>
         public static Task<ApplicationGUI> GetAppGUI()
         {
-            return handler.GetAppGUI();
+            return Handler.GetAppGUI();
         }
 
         /// \~English
@@ -590,7 +590,7 @@ namespace ASEva
         /// <returns>应用程序ID</returns>
         public static Task<String> GetAppID()
         {
-            return handler.GetAppID();
+            return Handler.GetAppID();
         }
 
         /// \~English

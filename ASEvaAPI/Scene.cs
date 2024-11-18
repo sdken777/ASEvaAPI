@@ -9,13 +9,13 @@ namespace ASEva
     
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Scenario segment
+    /// (api:app=3.7.0) Scenario segment
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 场景片段描述
+    /// (api:app=3.7.0) 场景片段描述
     /// </summary>
-    public class SceneData
+    public class SceneData(String sceneID)
     {
         /// \~English
         /// <summary>
@@ -25,15 +25,15 @@ namespace ASEva
         /// <summary>
         /// 场景ID
         /// </summary>
-        public String SceneID { get; set; }
+        public String SceneID { get; set; } = sceneID;
 
         /// \~English
         /// <summary>
-        /// (api:app=3.2.0) The session that scenario belongs to
+        /// The session that scenario belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.2.0) 场景所属session ID
+        /// 场景所属session ID
         /// </summary>
         public SessionIdentifier Session { get; set; }
 
@@ -65,20 +65,7 @@ namespace ASEva
         /// <summary>
         /// 场景属性列表
         /// </summary>
-        public String[] PropertyValues { get; set; }
-
-        /// \~English
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 默认构造函数
-        /// </summary>
-        public SceneData()
-        {
-            PropertyValues = new string[0];
-        }
+        public String[] PropertyValues { get; set; } = [];
 
         /// \~English
         /// <summary>

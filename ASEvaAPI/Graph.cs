@@ -248,8 +248,8 @@ namespace ASEva
         {
             Type = type;
             MainTitle = mainTitle;
-            Config = new List<string>();
-            ColumnTitles = new List<string?>();
+            Config = [];
+            ColumnTitles = [];
             Validation = null;
         }
 
@@ -382,7 +382,7 @@ namespace ASEva
         {
             ID = 0;
             Definition = def;
-            Params = new List<string>();
+            Params = [];
             Data = new double[0, 0];
         }
 

@@ -38,7 +38,7 @@ namespace ASEva.Utility
         {
             bool early = false;
             bool late = true;
-            outputs = new List<Sample?>();
+            outputs = [];
 
             foreach (var list in sampleLists)
             {

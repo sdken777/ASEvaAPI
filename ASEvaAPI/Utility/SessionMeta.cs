@@ -542,7 +542,7 @@ namespace ASEva.Utility
                     if (pickID == null) pickID = c.ParseString("pick_time", null);
                     meta.Pick = pickID;
 
-                    meta.PickProperties = new Dictionary<string, string>();
+                    meta.PickProperties = [];
                     var pickPropertyNodes = pickNode.GetElementsByTagName("property");
                     foreach (XmlElement propertyNode in pickPropertyNodes)
                     {
@@ -553,7 +553,7 @@ namespace ASEva.Utility
                     break; // 仅一个pick节点
                 }
 
-                meta.Properties = new Dictionary<string, string>();
+                meta.Properties = [];
                 var propertyNodes = xml.DocumentElement.GetElementsByTagName("property");
                 foreach (XmlElement propertyNode in propertyNodes)
                 {
@@ -561,7 +561,7 @@ namespace ASEva.Utility
                     meta.Properties[cp.ParseString("key", null) ?? ""] = cp.ParseString("value", null) ?? "";
                 }
 
-                meta.Versions = new Dictionary<string, Version>();
+                meta.Versions = [];
                 if (attribs["software"] != null && attribs["software_version"] != null)
                 {
                     try

@@ -183,7 +183,7 @@ namespace ASEva.Utility
                 if (!ctx.InCaller)
                 {
                     var category = ctx.Category;
-                    if (!recentOutCallerCallbackRanges.ContainsKey(category)) recentOutCallerCallbackRanges[category] = new List<DateTimeRange>();
+                    if (!recentOutCallerCallbackRanges.ContainsKey(category)) recentOutCallerCallbackRanges[category] = [];
 
                     var list = recentOutCallerCallbackRanges[category];
                     list.Add(range);
@@ -342,13 +342,13 @@ namespace ASEva.Utility
             public DrawBeatContext()
             {
                 Category = "";
-                RecentCallbackRanges = new List<DateTimeRange>();
+                RecentCallbackRanges = [];
                 DrawInterval = 100;
             }
         }
 
-        private static Dictionary<int, DrawBeatContext> ctxs = new Dictionary<int, DrawBeatContext>();
-        private static Dictionary<String, List<DateTimeRange>> recentOutCallerCallbackRanges = new Dictionary<string, List<DateTimeRange>>();
+        private static Dictionary<int, DrawBeatContext> ctxs = [];
+        private static Dictionary<String, List<DateTimeRange>> recentOutCallerCallbackRanges = [];
         private static bool enabled = false;
     }
 }

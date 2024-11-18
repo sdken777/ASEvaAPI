@@ -1159,7 +1159,7 @@ namespace ASEva
         /// <summary>
         /// 值列表
         /// </summary>
-        public List<GeneralSampleValue> Values { get; set; } = new List<GeneralSampleValue>();
+        public List<GeneralSampleValue> Values { get; set; } = [];
 
         /// \~English
         /// <summary>

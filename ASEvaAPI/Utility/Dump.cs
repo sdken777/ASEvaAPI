@@ -51,7 +51,7 @@ namespace ASEva.Utility
             }
         }
 
-        private static List<String> exceptions = new List<String>();
+        private static List<String> exceptions = [];
         private const int ExceptionSizeLimit = 10000;
     }
 }

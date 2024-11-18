@@ -131,7 +131,7 @@ namespace ASEva
     /// </summary>
     public class AgencyLocal
     {
-        private static AgencyLocalHandler handler = null;
+        private static AgencyLocalHandler? handler = null;
         public static AgencyLocalHandler Handler
         {
             private get
@@ -612,7 +612,7 @@ namespace ASEva
         /// <returns>图形界面框架</returns>
         public static ApplicationGUI GetAppGUI()
         {
-            return handler.GetAppGUI();
+            return Handler.GetAppGUI();
         }
 
         /// \~English
@@ -627,7 +627,7 @@ namespace ASEva
         /// <returns>应用程序ID</returns>
         public static String GetAppID()
         {
-            return handler.GetAppID();
+            return Handler.GetAppID();
         }
 
         /// \~English

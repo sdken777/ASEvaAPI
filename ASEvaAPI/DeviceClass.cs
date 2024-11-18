@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ASEva
 {
@@ -23,7 +24,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=3.1.6) [必须实现] 获取设备组件的名称时被调用
         /// </summary>
-        public virtual Dictionary<Language, String> GetDeviceName() { return null; }
+        public virtual Dictionary<Language, String> GetDeviceName() { return []; }
 
         /// \~English
         /// <summary>
@@ -35,19 +36,19 @@ namespace ASEva
         /// [必须实现] 获取设备组件的类别ID时被调用
         /// </summary>
         /// <returns>设备组件类别ID</returns>
-        public virtual String GetDeviceClassID() { return null; }
+        public virtual String GetDeviceClassID() { return ""; }
 
         /// \~English
         /// <summary>
-        /// [Required] Called to create configuration object
+        /// [Optional] Called to create configuration object. It will be empty configuration if not implemented, that is always enabled
         /// </summary>
         /// <returns>Configuration object</returns>
         /// \~Chinese
         /// <summary>
-        /// [必须实现] 创建配置对象时被调用
+        /// [可选实现] 创建配置对象时被调用。若不实现则为空配置，常时启用状态
         /// </summary>
         /// <returns>配置对象</returns>
-        public virtual ModuleConfig CreateConfig() { return null; }
+        public virtual ModuleConfig? CreateConfig() { return null; }
 
         /// \~English
         /// <summary>
@@ -83,7 +84,7 @@ namespace ASEva
         /// </summary>
         /// <param name="info">输出设备连接信息</param>
         /// <returns>返回设备状态信息</returns>
-		public virtual GeneralDeviceStatus GetDeviceStatus(out String info) { info = null; return GeneralDeviceStatus.None; }
+		public virtual GeneralDeviceStatus GetDeviceStatus(out String info) { info = ""; return GeneralDeviceStatus.None; }
 
         /// \~English
         /// <summary>
@@ -95,6 +96,6 @@ namespace ASEva
         /// [可选实现] 获取各子设备的连接状态
         /// </summary>
         /// <returns>返回各子设备的连接状态，数组长度即子设备数量</returns>
-		public virtual GeneralDeviceStatus[] GetChildDeviceStatus() { return null; }
+		public virtual GeneralDeviceStatus[] GetChildDeviceStatus() { return []; }
     }
 }

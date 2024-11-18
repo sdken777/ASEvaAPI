@@ -8,106 +8,74 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Size (Integer)
+    /// (api:app=3.7.0) Size (Integer)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 尺寸大小（整型）
+    /// (api:app=3.7.0) 尺寸大小（整型）
     /// </summary>
-    public struct IntSize
+    public struct IntSize(int width, int height)
     {
-        public int Width { get; set; }
-        public int Height { get; set; }
-
-        public IntSize(int width, int height)
-        {
-            Width = width;
-            Height = height;
-        }
+        public int Width { get; set; } = width;
+        public int Height { get; set; } = height;
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Size (Floating)
+    /// (api:app=3.7.0) Size (Floating)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 尺寸大小（浮点型）
+    /// (api:app=3.7.0) 尺寸大小（浮点型）
     /// </summary>
-    public struct FloatSize
+    public struct FloatSize(float width, float height)
     {
-        public float Width { get; set; }
-        public float Height { get; set; }
-
-        public FloatSize(float width, float height)
-        {
-            Width = width;
-            Height = height;
-        }
+        public float Width { get; set; } = width;
+        public float Height { get; set; } = height;
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Point (Integer)
+    /// (api:app=3.7.0) Point (Integer)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 点坐标（整型）
+    /// (api:app=3.7.0) 点坐标（整型）
     /// </summary>
-    public struct IntPoint
+    public struct IntPoint(int x, int y)
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-
-        public IntPoint(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
+        public int X { get; set; } = x;
+        public int Y { get; set; } = y;
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Point (Floating)
+    /// (api:app=3.7.0) Point (Floating)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 点坐标（浮点型）
+    /// (api:app=3.7.0) 点坐标（浮点型）
     /// </summary>
-    public struct FloatPoint
+    public struct FloatPoint(float x, float y)
     {
-        public float X { get; set; }
-        public float Y { get; set; }
-
-        public FloatPoint(float x, float y)
-        {
-            X = x;
-            Y = y;
-        }
+        public float X { get; set; } = x;
+        public float Y { get; set; } = y;
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Rectangle (Integer)
+    /// (api:app=3.7.0) Rectangle (Integer)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 矩形（整型）
+    /// (api:app=3.7.0) 矩形（整型）
     /// </summary>
-    public struct IntRect
+    public struct IntRect(int x, int y, int width, int height)
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
-
-        public IntRect(int x, int y, int width, int height)
-        {
-            X = x;
-            Y = y;
-            Width = width;
-            Height = height;
-        }
+        public int X { get; set; } = x;
+        public int Y { get; set; } = y;
+        public int Width { get; set; } = width;
+        public int Height { get; set; } = height;
 
         public int Left
         {
@@ -147,26 +115,18 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Rectangle (Floating)
+    /// (api:app=3.7.0) Rectangle (Floating)
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 矩形（浮点型）
+    /// (api:app=3.7.0) 矩形（浮点型）
     /// </summary>
-    public struct FloatRect
+    public struct FloatRect(float x, float y, float width, float height)
     {
-        public float X { get; set; }
-        public float Y { get; set; }
-        public float Width { get; set; }
-        public float Height { get; set; }
-
-        public FloatRect(float x, float y, float width, float height)
-        {
-            X = x;
-            Y = y;
-            Width = width;
-            Height = height;
-        }
+        public float X { get; set; } = x;
+        public float Y { get; set; } = y;
+        public float Width { get; set; } = width;
+        public float Height { get; set; } = height;
 
         public float Left
         {
@@ -537,7 +497,7 @@ namespace ASEva
         /// <summary>
         /// 报文数据
         /// </summary>
-        public byte[] Data { get; set; }
+        public byte[] Data { get; set; } = [];
         
         /// \~English
         /// <summary>
@@ -552,13 +512,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Bus message configuration
+    /// (api:app=3.7.0) Bus message configuration
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 报文配置
+    /// (api:app=3.7.0) 报文配置
     /// </summary>
-    public class MessageConfig
+    public class MessageConfig(String messageID)
     {
         /// \~English
         /// <summary>
@@ -568,18 +528,18 @@ namespace ASEva
         /// <summary>
         /// 报文的全局唯一ID，为xxx.yyy:zzz格式。其中xxx.yyy为协议名称，如vehicle.dbc，zzz为报文ID
         /// </summary>
-        public String MessageID { get; set; }
+        public String MessageID { get; set; } = messageID;
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Signal configuration
+    /// (api:app=3.7.0) Signal configuration
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 信号配置
+    /// (api:app=3.7.0) 信号配置
     /// </summary>
-    public class SignalConfig
+    public class SignalConfig(String signalID)
     {
         /// \~English
         /// <summary>
@@ -589,7 +549,7 @@ namespace ASEva
         /// <summary>
         /// 主信号的全局唯一ID，为xxx:yyy:zzz格式。其中xxx为协议名称或信号分类，yyy为报文ID或信号子分类，zzz为信号名称
         /// </summary>
-        public String SignalID { get; set; }
+        public String SignalID { get; set; } = signalID;
 
         /// \~English
         /// <summary>
@@ -599,7 +559,7 @@ namespace ASEva
         /// <summary>
         /// 符号位信号的全局唯一ID，格式与主信号一致，仅在主信号与符号位信号分别解析的情况使用
         /// </summary>
-        public String SignBitSignalID { get; set; }
+        public String? SignBitSignalID { get; set; }
 
         /// \~English
         /// <summary>
@@ -630,7 +590,7 @@ namespace ASEva
         /// <summary>
         /// 信号值列表
         /// </summary>
-        public double[] Values { get; set; }
+        public double[] Values { get; set; } = [];
     }
 
     /// \~English
@@ -743,7 +703,7 @@ namespace ASEva
         /// <summary>
         /// 响应的字符串
         /// </summary>
-        public String Response { get; set; }
+        public String? Response { get; set; }
     }
 
     /// \~English
@@ -840,13 +800,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Bus signal info
+    /// (api:app=3.7.0) Bus signal info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 总线信号信息
+    /// (api:app=3.7.0) 总线信号信息
     /// </summary>
-    public class BusSignalInfo
+    public class BusSignalInfo(String id, String name)
     {
         /// \~English
         /// <summary>
@@ -856,7 +816,7 @@ namespace ASEva
         /// <summary>
         /// 信号ID
         /// </summary>
-        public String SignalID { get; set; }
+        public String SignalID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -866,7 +826,7 @@ namespace ASEva
         /// <summary>
         /// 信号名称
         /// </summary>
-        public String SignalName { get; set; }
+        public String SignalName { get; set; } = name;
 
         /// \~English
         /// <summary>
@@ -956,7 +916,7 @@ namespace ASEva
         /// <summary>
         /// 单位
         /// </summary>
-        public String Unit { get; set; }
+        public String Unit { get; set; } = "";
 
         /// \~English
         /// <summary>
@@ -986,7 +946,7 @@ namespace ASEva
         /// <summary>
         /// 枚举值
         /// </summary>
-        public Dictionary<long, String> Enums { get; set; }
+        public Dictionary<long, String> Enums { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -996,18 +956,18 @@ namespace ASEva
         /// <summary>
         /// 所属报文
         /// </summary>
-        public BusMessageInfo OwnerMessage { get; set; }
+        public BusMessageInfo? OwnerMessage { get; set; }
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Bus message info
+    /// (api:app=3.7.0) Bus message info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 总线报文信息
+    /// (api:app=3.7.0) 总线报文信息
     /// </summary>
-    public class BusMessageInfo
+    public class BusMessageInfo(String id, String name)
     {
         /// \~English
         /// <summary>
@@ -1017,7 +977,7 @@ namespace ASEva
         /// <summary>
         /// 报文ID
         /// </summary>
-        public String MessageID { get; set; }
+        public String MessageID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -1027,7 +987,7 @@ namespace ASEva
         /// <summary>
         /// 报文名称
         /// </summary>
-        public String MessageName { get; set; }
+        public String MessageName { get; set; } = name;
 
         /// \~English
         /// <summary>
@@ -1057,7 +1017,7 @@ namespace ASEva
         /// <summary>
         /// 信号信息列表
         /// </summary>
-        public BusSignalInfo[] Signals { get; set; }
+        public BusSignalInfo[] Signals { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -1067,18 +1027,18 @@ namespace ASEva
         /// <summary>
         /// 所属总线协议
         /// </summary>
-        public BusFileInfo OwnerFile { get; set; }
+        public BusFileInfo? OwnerFile { get; set; }
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Bus protocol info
+    /// (api:app=3.7.0) Bus protocol info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 总线协议信息
+    /// (api:app=3.7.0) 总线协议信息
     /// </summary>
-    public class BusFileInfo
+    public class BusFileInfo(String id, String path)
     {
         /// \~English
         /// <summary>
@@ -1088,7 +1048,7 @@ namespace ASEva
         /// <summary>
         /// 协议名称（多通道的情况下包括通道名）
         /// </summary>
-        public String FileID { get; set; }
+        public String FileID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -1098,7 +1058,7 @@ namespace ASEva
         /// <summary>
         /// 文件路径
         /// </summary>
-        public String FilePath { get; set; }
+        public String FilePath { get; set; } = path;
 
         /// \~English
         /// <summary>
@@ -1108,7 +1068,7 @@ namespace ASEva
         /// <summary>
         /// 报文信息列表
         /// </summary>
-        public BusMessageInfo[] Messages { get; set; }
+        public BusMessageInfo[] Messages { get; set; } = [];
 
         override public String ToString()
         {
@@ -1199,13 +1159,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Bus protocol file ID
+    /// (api:app=3.7.0) Bus protocol file ID
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 总线协议文件ID
+    /// (api:app=3.7.0) 总线协议文件ID
     /// </summary>
-    public class BusProtocolFileID
+    public class BusProtocolFileID(String fileName, String md5)
     {
         /// \~English
         /// <summary>
@@ -1215,7 +1175,7 @@ namespace ASEva
         /// <summary>
         /// 协议名称（多通道的情况下包括通道名）
         /// </summary>
-        public String FileName { get; set; }
+        public String FileName { get; set; } = fileName;
 
         /// \~English
         /// <summary>
@@ -1225,16 +1185,11 @@ namespace ASEva
         /// <summary>
         /// 文件MD5
         /// </summary>
-        public String MD5 { get; set; }
+        public String MD5 { get; set; } = md5;
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            if (obj is BusProtocolFileID)
-            {
-                var obj2 = obj as BusProtocolFileID;
-                var res = FileName == obj2.FileName && MD5 == obj2.MD5;
-                return res;
-            }
+            if (obj is BusProtocolFileID target) return FileName == target.FileName && MD5 == target.MD5;
             else return false;
         }
 
@@ -1312,24 +1267,17 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Bus device ID
+    /// (api:app=3.7.0) Bus device ID
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 总线设备ID
+    /// (api:app=3.7.0) 总线设备ID
     /// </summary>
-    public class BusDeviceID
+    public class BusDeviceID(String type, long serial, int index)
     {
-        public String Type { get; set; }
-        public long Serial { get; set; }
-        public int Index { get; set; }
-
-        public BusDeviceID()
-        {
-            Type = "";
-            Serial = 0;
-            Index = 0;
-        }
+        public String Type { get; set; } = type;
+        public long Serial { get; set; } = serial;
+        public int Index { get; set; } = index;
 
         public override string ToString()
         {
@@ -1343,13 +1291,9 @@ namespace ASEva
             return text;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            if (obj is BusDeviceID)
-            {
-                var target = obj as BusDeviceID;
-                return Type == target.Type && Index == target.Index && Serial == target.Serial;
-            }
+            if (obj is BusDeviceID target) return Type == target.Type && Index == target.Index && Serial == target.Serial;
             return false;
         }
 
@@ -1451,27 +1395,22 @@ namespace ASEva
     /// </summary>
     public class BusDeviceInfo
     {
-        public BusChannelType[] SupportedTypes { get; set; }
-        public String Description { get; set; }
+        public BusChannelType[] SupportedTypes { get; set; } = [];
+        public String Description { get; set; } = "";
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Video device ID
+    /// (api:app=3.7.0) Video device ID
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 视频设备ID
+    /// (api:app=3.7.0) 视频设备ID
     /// </summary>
-    public class VideoDeviceID
+    public class VideoDeviceID(String type, String localID)
     {
-        public String Type { get; set; }
-        public String LocalID { get; set; }
-
-        public VideoDeviceID()
-        {
-            Type = "";
-        }
+        public String Type { get; set; } = type;
+        public String LocalID { get; set; } = localID;
 
         public override string ToString()
         {
@@ -1483,13 +1422,9 @@ namespace ASEva
             return text;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            if (obj is VideoDeviceID)
-            {
-                var target = obj as VideoDeviceID;
-                return Type == target.Type && LocalID == target.LocalID;
-            }
+            if (obj is VideoDeviceID target) return Type == target.Type && LocalID == target.LocalID;
             return false;
         }
 
@@ -1671,9 +1606,10 @@ namespace ASEva
         /// </summary>
         public IntSize Size { get; set; }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            return obj != null && obj is VideoInputMode && (obj as VideoInputMode).InputCodec == InputCodec && (obj as VideoInputMode).Size.Width == Size.Width && (obj as VideoInputMode).Size.Height == Size.Height;
+            if (obj is VideoInputMode target) return target.InputCodec == InputCodec && target.Size.Width == Size.Width && target.Size.Height == Size.Height;
+            else return false;
         }
 
         public override int GetHashCode()
@@ -1717,9 +1653,10 @@ namespace ASEva
         /// </summary>
         public IntSize Size { get; set; }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            return obj != null && obj is VideoOutputMode && (obj as VideoOutputMode).OutputCodec == OutputCodec && (obj as VideoOutputMode).Size.Width == Size.Width && (obj as VideoOutputMode).Size.Height == Size.Height;
+            if (obj is VideoOutputMode target) return target.OutputCodec == OutputCodec && target.Size.Width == Size.Width && target.Size.Height == Size.Height;
+            else return false;
         }
 
         public override int GetHashCode()
@@ -1751,7 +1688,7 @@ namespace ASEva
         /// <summary>
         /// 设备信息描述
         /// </summary>
-        public String HardwareInfo { get; set; }
+        public String HardwareInfo { get; set; } = "";
 
         /// \~English
         /// <summary>
@@ -1761,7 +1698,7 @@ namespace ASEva
         /// <summary>
         /// 支持的视频输入格式列表
         /// </summary>
-        public VideoInputMode[] InputModes { get; set; }
+        public VideoInputMode[] InputModes { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -1771,7 +1708,7 @@ namespace ASEva
         /// <summary>
         /// 支持的视频输出格式列表
         /// </summary>
-        public VideoOutputMode[] OutputModes { get; set; }
+        public VideoOutputMode[] OutputModes { get; set; } = [];
     }
 
     /// \~English
@@ -1833,7 +1770,7 @@ namespace ASEva
         /// <summary>
         /// 文件读取器的名称列表
         /// </summary>
-        public String[] ReaderNames { get; set; }
+        public String[] ReaderNames { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -1843,7 +1780,7 @@ namespace ASEva
         /// <summary>
         /// 远程文件读取器的名称列表
         /// </summary>
-        public String[] RemoteReaderNames { get; set; }
+        public String[] RemoteReaderNames { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -1853,7 +1790,7 @@ namespace ASEva
         /// <summary>
         /// 文件写入器的名称列表
         /// </summary>
-        public String[] WriterNames { get; set; }
+        public String[] WriterNames { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -1863,7 +1800,7 @@ namespace ASEva
         /// <summary>
         /// 文件数据截取器的名称列表
         /// </summary>
-        public String[] PickerNames { get; set; }
+        public String[] PickerNames { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -1873,7 +1810,7 @@ namespace ASEva
         /// <summary>
         /// 通过文件读取器和写入器组合的方式形成的数据截取器列表，键为读取器名称，值为写入器名称
         /// </summary>
-        public Dictionary<String, String> ComboPickers { get; set; }
+        public Dictionary<String, String> ComboPickers { get; set; } = [];
     }
 
     /// \~English
@@ -1969,13 +1906,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Parsed bus signal value and related info
+    /// (api:app=3.7.0) Parsed bus signal value and related info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 解析总线报文得到的信号值及相关信息
+    /// (api:app=3.7.0) 解析总线报文得到的信号值及相关信息
     /// </summary>
-    public struct BusSignalValue
+    public struct BusSignalValue(String name)
     {
         /// \~English
         /// <summary>
@@ -1985,7 +1922,7 @@ namespace ASEva
         /// <summary>
         /// 信号名
         /// </summary>
-        public String signalName;
+        public String signalName = name;
 
         /// \~English
         /// <summary>
@@ -2005,7 +1942,7 @@ namespace ASEva
         /// <summary>
         /// 单位
         /// </summary>
-        public String unit;
+        public String unit = "";
 
         /// \~English
         /// <summary>
@@ -2015,7 +1952,7 @@ namespace ASEva
         /// <summary>
         /// 对应的枚举值（若存在枚举信息）
         /// </summary>
-        public String enumValue;
+        public String? enumValue;
     }
 
     /// \~English
@@ -2389,13 +2326,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Window component info
+    /// (api:app=3.7.0) Window component info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 窗口组件信息
+    /// (api:app=3.7.0) 窗口组件信息
     /// </summary>
-    public class WindowClassInfo
+    public class WindowClassInfo(String id, String title, String ownerPluginID)
     {
         /// \~English
         /// <summary>
@@ -2405,7 +2342,7 @@ namespace ASEva
         /// <summary>
         /// 所属插件ID
         /// </summary>
-        public String OwnerPluginID { get; set; }
+        public String OwnerPluginID { get; set; } = ownerPluginID;
 
         /// \~English
         /// <summary>
@@ -2415,7 +2352,7 @@ namespace ASEva
         /// <summary>
         /// 组件ID
         /// </summary>
-        public String ID { get; set; }
+        public String ID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -2425,7 +2362,7 @@ namespace ASEva
         /// <summary>
         /// 分化ID
         /// </summary>
-        public String TransformID { get; set; }
+        public String? TransformID { get; set; }
 
         /// \~English
         /// <summary>
@@ -2435,7 +2372,7 @@ namespace ASEva
         /// <summary>
         /// 注册分化窗口组件的配置字符串
         /// </summary>
-        public String TransformConfig { get; set; }
+        public String? TransformConfig { get; set; }
 
         /// \~English
         /// <summary>
@@ -2445,7 +2382,7 @@ namespace ASEva
         /// <summary>
         /// 窗口标题
         /// </summary>
-        public String Title { get; set; }
+        public String Title { get; set; } = title;
 
         /// \~English
         /// <summary>
@@ -2455,7 +2392,7 @@ namespace ASEva
         /// <summary>
         /// 窗口图标，分辨率为16x16
         /// </summary>
-        public CommonImage Icon { get; set; }
+        public CommonImage? Icon { get; set; }
 
         /// \~English
         /// <summary>
@@ -2475,18 +2412,18 @@ namespace ASEva
         /// <summary>
         /// 分化的窗口组件信息
         /// </summary>
-        public Dictionary<String, WindowClassInfo> TransformClasses { get; set; }
+        public Dictionary<String, WindowClassInfo> TransformClasses { get; set; } = [];
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Dialog component info
+    /// (api:app=3.7.0) Dialog component info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 对话框组件信息
+    /// (api:app=3.7.0) 对话框组件信息
     /// </summary>
-    public class DialogClassInfo
+    public class DialogClassInfo(String id, String title, String ownerPluginID)
     {
         /// \~English
         /// <summary>
@@ -2496,7 +2433,7 @@ namespace ASEva
         /// <summary>
         /// 所属插件ID
         /// </summary>
-        public String OwnerPluginID { get; set; }
+        public String OwnerPluginID { get; set; } = ownerPluginID;
 
         /// \~English
         /// <summary>
@@ -2506,7 +2443,7 @@ namespace ASEva
         /// <summary>
         /// 组件ID
         /// </summary>
-        public String ID { get; set; }
+        public String ID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -2516,7 +2453,7 @@ namespace ASEva
         /// <summary>
         /// 分化ID
         /// </summary>
-        public String TransformID { get; set; }
+        public String? TransformID { get; set; }
 
         /// \~English
         /// <summary>
@@ -2526,7 +2463,7 @@ namespace ASEva
         /// <summary>
         /// 注册分化对话框组件的配置字符串
         /// </summary>
-        public String TransformConfig { get; set; }
+        public String? TransformConfig { get; set; }
 
         /// \~English
         /// <summary>
@@ -2536,7 +2473,7 @@ namespace ASEva
         /// <summary>
         /// 对话框标题
         /// </summary>
-        public String Title { get; set; }
+        public String Title { get; set; } = title;
 
         /// \~English
         /// <summary>
@@ -2546,7 +2483,7 @@ namespace ASEva
         /// <summary>
         /// 对话框图标，分辨率为16x16
         /// </summary>
-        public CommonImage Icon { get; set; }
+        public CommonImage? Icon { get; set; }
 
         /// \~English
         /// <summary>
@@ -2556,18 +2493,18 @@ namespace ASEva
         /// <summary>
         /// 分化的对话框组件信息
         /// </summary>
-        public Dictionary<String, DialogClassInfo> TransformClasses { get; set; }
+        public Dictionary<String, DialogClassInfo> TransformClasses { get; set; } = [];
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Processor component info
+    /// (api:app=3.7.0) Processor component info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 数据处理组件信息
+    /// (api:app=3.7.0) 数据处理组件信息
     /// </summary>
-    public class ProcessorClassInfo
+    public class ProcessorClassInfo(String id, String title, String ownerPluginID)
     {
         /// \~English
         /// <summary>
@@ -2577,7 +2514,7 @@ namespace ASEva
         /// <summary>
         /// 所属插件ID
         /// </summary>
-        public String OwnerPluginID { get; set; }
+        public String OwnerPluginID { get; set; } = ownerPluginID;
 
         /// \~English
         /// <summary>
@@ -2587,7 +2524,7 @@ namespace ASEva
         /// <summary>
         /// 组件ID
         /// </summary>
-        public String ID { get; set; }
+        public String ID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -2597,7 +2534,7 @@ namespace ASEva
         /// <summary>
         /// 数据处理组件名称
         /// </summary>
-        public String Title { get; set; }
+        public String Title { get; set; } = title;
     }
 
     /// \~English
@@ -2673,13 +2610,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Native component info
+    /// (api:app=3.7.0) Native component info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 原生组件信息
+    /// (api:app=3.7.0) 原生组件信息
     /// </summary>
-    public class NativeClassInfo
+    public class NativeClassInfo(String id, String title, String nativeType, String ownerPluginID)
     {
         /// \~English
         /// <summary>
@@ -2689,7 +2626,7 @@ namespace ASEva
         /// <summary>
         /// 所属插件ID
         /// </summary>
-        public String OwnerPluginID { get; set; }
+        public String OwnerPluginID { get; set; } = ownerPluginID;
 
         /// \~English
         /// <summary>
@@ -2699,7 +2636,7 @@ namespace ASEva
         /// <summary>
         /// 组件ID
         /// </summary>
-        public String ID { get; set; }
+        public String ID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -2709,7 +2646,7 @@ namespace ASEva
         /// <summary>
         /// 原生组件名称
         /// </summary>
-        public String Title { get; set; }
+        public String Title { get; set; } = title;
 
         /// \~English
         /// <summary>
@@ -2719,7 +2656,7 @@ namespace ASEva
         /// <summary>
         /// 对应的原生插件类型ID
         /// </summary>
-        public String NativeType { get; set; }
+        public String NativeType { get; set; } = nativeType;
 
         /// \~English
         /// <summary>
@@ -2729,28 +2666,28 @@ namespace ASEva
         /// <summary>
         /// 绑定的各原生库版本
         /// </summary>
-        public Dictionary<NativeLibraryType, Version> LibraryVersions { get; set; }
+        public Dictionary<NativeLibraryType, Version> LibraryVersions { get; set; } = [];
 
         /// \~English
         /// <summary>
-        /// (api:app=3.3.0) Corresponding native plugin's debug ID
+        /// Corresponding native plugin's debug ID
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.3.0) 绑定的各原生库的调试编号
+        /// 绑定的各原生库的调试编号
         /// </summary>
-        public Dictionary<NativeLibraryType, uint> LibraryDebugIDs { get; set; }
+        public Dictionary<NativeLibraryType, uint> LibraryDebugIDs { get; set; } = [];
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Device component info
+    /// (api:app=3.7.0) Device component info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 设备组件信息
+    /// (api:app=3.7.0) 设备组件信息
     /// </summary>
-    public class DeviceClassInfo
+    public class DeviceClassInfo(String id, String title, String ownerPluginID)
     {
         /// \~English
         /// <summary>
@@ -2760,7 +2697,7 @@ namespace ASEva
         /// <summary>
         /// 所属插件ID
         /// </summary>
-        public String OwnerPluginID { get; set; }
+        public String OwnerPluginID { get; set; } = ownerPluginID;
 
         /// \~English
         /// <summary>
@@ -2770,7 +2707,7 @@ namespace ASEva
         /// <summary>
         /// 组件ID
         /// </summary>
-        public String ID { get; set; }
+        public String ID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -2780,18 +2717,18 @@ namespace ASEva
         /// <summary>
         /// 设备组件名称
         /// </summary>
-        public String Title { get; set; }
+        public String Title { get; set; } = title;
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Task component info
+    /// (api:app=3.7.0) Task component info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 独立任务组件信息
+    /// (api:app=3.7.0) 独立任务组件信息
     /// </summary>
-    public class TaskClassInfo
+    public class TaskClassInfo(String id, String title, String ownerPluginID)
     {
         /// \~English
         /// <summary>
@@ -2801,7 +2738,7 @@ namespace ASEva
         /// <summary>
         /// 所属插件ID
         /// </summary>
-        public String OwnerPluginID { get; set; }
+        public String OwnerPluginID { get; set; } = ownerPluginID;
 
         /// \~English
         /// <summary>
@@ -2811,7 +2748,7 @@ namespace ASEva
         /// <summary>
         /// 组件ID
         /// </summary>
-        public String ID { get; set; }
+        public String ID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -2821,7 +2758,7 @@ namespace ASEva
         /// <summary>
         /// 独立任务组件名称
         /// </summary>
-        public String Title { get; set; }
+        public String Title { get; set; } = title;
 
         /// \~English
         /// <summary>
@@ -2831,7 +2768,7 @@ namespace ASEva
         /// <summary>
         /// 默认配置字符串，若不支持则为null
         /// </summary>
-        public String DefaultConfig { get; set; }
+        public String? DefaultConfig { get; set; }
     }
 
     /// \~English
@@ -2893,7 +2830,7 @@ namespace ASEva
         /// <summary>
         /// 状态详细描述
         /// </summary>
-        public String Description { get; set; }
+        public String Description { get; set; } = "";
     }
 
     /// \~English
@@ -3060,13 +2997,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Node in signal tree
+    /// (api:app=3.7.0) Node in signal tree
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 信号树节点
+    /// (api:app=3.7.0) 信号树节点
     /// </summary>
-    public class SignalTreeNode
+    public class SignalTreeNode(SignalTreeNodeType type, String id, String name)
     {
         /// \~English
         /// <summary>
@@ -3076,7 +3013,7 @@ namespace ASEva
         /// <summary>
         /// 节点类别
         /// </summary>
-        public SignalTreeNodeType Type { get; set; }
+        public SignalTreeNodeType Type { get; set; } = type;
 
         /// \~English
         /// <summary>
@@ -3086,7 +3023,7 @@ namespace ASEva
         /// <summary>
         /// 节点ID
         /// </summary>
-        public String ID { get; set; }
+        public String ID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -3096,7 +3033,7 @@ namespace ASEva
         /// <summary>
         /// 节点名称
         /// </summary>
-        public String Name { get; set; }
+        public String Name { get; set; } = name;
 
         /// \~English
         /// <summary>
@@ -3106,7 +3043,7 @@ namespace ASEva
         /// <summary>
         /// 子节点
         /// </summary>
-        public SignalTreeNode[] Children { get; set; }
+        public SignalTreeNode[] Children { get; set; } = [];
     }
 
     /// \~English
@@ -3213,13 +3150,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Information of plugin pack
+    /// (api:app=3.7.0) Information of plugin pack
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 插件包信息
+    /// (api:app=3.7.0) 插件包信息
     /// </summary>
-    public class PluginPackInfo
+    public class PluginPackInfo(String id, String name, Version version)
     {
         /// \~English
         /// <summary>
@@ -3229,7 +3166,7 @@ namespace ASEva
         /// <summary>
         /// 插件包ID
         /// </summary>
-        public String ID { get; set; }
+        public String ID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -3239,7 +3176,7 @@ namespace ASEva
         /// <summary>
         /// 插件包名称
         /// </summary>
-        public String Name { get; set; }
+        public String Name { get; set; } = name;
 
         /// \~English
         /// <summary>
@@ -3249,7 +3186,7 @@ namespace ASEva
         /// <summary>
         /// 插件包版本
         /// </summary>
-        public Version Version { get; set; }
+        public Version Version { get; set; } = version;
 
         /// \~English
         /// <summary>
@@ -3259,7 +3196,7 @@ namespace ASEva
         /// <summary>
         /// 插件包简介
         /// </summary>
-        public String Brief { get; set; }
+        public String Brief { get; set; } = "";
 
         /// \~English
         /// <summary>
@@ -3289,7 +3226,7 @@ namespace ASEva
         /// <summary>
         /// 应用层详情
         /// </summary>
-        public String AppLayerDetails { get; set; }
+        public String AppLayerDetails { get; set; } = "";
 
         /// \~English
         /// <summary>
@@ -3299,7 +3236,7 @@ namespace ASEva
         /// <summary>
         /// 原生层详情
         /// </summary>
-        public String NativeLayerDetails { get; set; }
+        public String NativeLayerDetails { get; set; } = "";
     }
 
     /// \~English
@@ -3406,13 +3343,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Information of plugin related library
+    /// (api:app=3.7.0) Information of plugin related library
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 插件关联库的信息
+    /// (api:app=3.7.0) 插件关联库的信息
     /// </summary>
-    public class InstallPluginLibraryInfo
+    public class InstallPluginLibraryInfo(String id, String name, Version version)
     {
         /// \~English
         /// <summary>
@@ -3422,7 +3359,7 @@ namespace ASEva
         /// <summary>
         /// 库ID
         /// </summary>
-        public String LibraryID { get; set; }
+        public String LibraryID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -3432,7 +3369,7 @@ namespace ASEva
         /// <summary>
         /// 名称
         /// </summary>
-        public String Name { get; set; }
+        public String Name { get; set; } = name;
 
         /// \~English
         /// <summary>
@@ -3452,7 +3389,7 @@ namespace ASEva
         /// <summary>
         /// 插件版本
         /// </summary>
-        public Version Version { get; set; }
+        public Version Version { get; set; } = version;
 
         /// \~English
         /// <summary>
@@ -3462,28 +3399,28 @@ namespace ASEva
         /// <summary>
         /// 已安装插件的版本，若未安装则为null
         /// </summary>
-        public Version InstalledVersion { get; set; }
+        public Version? InstalledVersion { get; set; }
 
         /// \~English
         /// <summary>
-        /// (api:app=3.0.6) Status of installed plugin
+        /// Status of installed plugin
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.0.6) 已安装插件的状态
+        /// 已安装插件的状态
         /// </summary>
         public PluginInstalledStatus InstalledStatus { get; set; }
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Information of plugin related driver and environment pack
+    /// (api:app=3.7.0) Information of plugin related driver and environment pack
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 插件关联驱动和环境的信息
+    /// (api:app=3.7.0) 插件关联驱动和环境的信息
     /// </summary>
-    public class InstallPluginDriverInfo
+    public class InstallPluginDriverInfo(String id, String name)
     {
         /// \~English
         /// <summary>
@@ -3493,7 +3430,7 @@ namespace ASEva
         /// <summary>
         /// 驱动ID
         /// </summary>
-        public String DriverID { get; set; }
+        public String DriverID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -3503,7 +3440,7 @@ namespace ASEva
         /// <summary>
         /// 名称
         /// </summary>
-        public String Name { get; set; }
+        public String Name { get; set; } = name;
 
         /// \~English
         /// <summary>
@@ -3518,13 +3455,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Log message
+    /// (api:app=3.7.0) Log message
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 清单信息
+    /// (api:app=3.7.0) 清单信息
     /// </summary>
-    public class LogMessage
+    public class LogMessage(LogLevel type, String text)
     {
         /// \~English
         /// <summary>
@@ -3534,7 +3471,7 @@ namespace ASEva
         /// <summary>
         /// 清单信息级别
         /// </summary>
-        public LogLevel Type { get; set; }
+        public LogLevel Type { get; set; } = type;
 
         /// \~English
         /// <summary>
@@ -3544,7 +3481,7 @@ namespace ASEva
         /// <summary>
         /// 清单信息文本
         /// </summary>
-        public String Text { get; set; }
+        public String Text { get; set; } = text;
 
         /// \~English
         /// <summary>
@@ -3593,7 +3530,7 @@ namespace ASEva
         /// <param name="funcID">被调用的函数ID</param>
         /// <param name="input">输入数据</param>
         /// <returns>输出数据</returns>
-        byte[] OnCrossCall(String nativeClassID, String funcID, byte[] input);
+        byte[]? OnCrossCall(String nativeClassID, String funcID, byte[]? input);
     }
 
     /// \~English
@@ -3667,7 +3604,7 @@ namespace ASEva
         /// </summary>
         public virtual byte[][] Dequeue()
         {
-            return null;
+            return [];
         }
 
         /// \~English
@@ -3713,7 +3650,7 @@ namespace ASEva
         /// <summary>
         /// Session开始时的CPU计数
         /// </summary>
-        public ulong StartCPUTick { get; set; }
+        public ulong StartCPUTick { get; set; } = 0;
 
         /// \~English
         /// <summary>
@@ -3723,21 +3660,7 @@ namespace ASEva
         /// <summary>
         /// 每秒增加的CPU计数
         /// </summary>
-        public ulong CPUTicksPerSecond { get; set; }
-
-        /// \~English
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 默认构造函数
-        /// </summary>
-        public CPUTimeModel()
-        {
-            StartCPUTick = 0;
-            CPUTicksPerSecond = 1000000000;
-        }
+        public ulong CPUTicksPerSecond { get; set; } = 1000000000;
     }
 
     /// \~English
@@ -3758,7 +3681,7 @@ namespace ASEva
         /// <summary>
         /// Session开始时的Posix时间，单位毫秒，0表示无效
         /// </summary>
-        public ulong StartPosix { get; set; }
+        public ulong StartPosix { get; set; } = 0;
 
         /// \~English
         /// <summary>
@@ -3768,21 +3691,7 @@ namespace ASEva
         /// <summary>
         /// CPU时间转为Posix时间的时间比例，应为1.0左右
         /// </summary>
-        public double TimeRatio { get; set; }
-
-        /// \~English
-        /// <summary>
-        /// Default constructor
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 默认构造函数
-        /// </summary>
-        public PosixTimeModel()
-        {
-            StartPosix = 0;
-            TimeRatio = 1;
-        }
+        public double TimeRatio { get; set; } = 1;
     }
 
     /// \~English
@@ -4074,13 +3983,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Console component info
+    /// (api:app=3.7.0) Console component info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 控制台组件信息
+    /// (api:app=3.7.0) 控制台组件信息
     /// </summary>
-    public class ConsoleClassInfo
+    public class ConsoleClassInfo(String id, String title, String ownerPluginID)
     {
         /// \~English
         /// <summary>
@@ -4090,7 +3999,7 @@ namespace ASEva
         /// <summary>
         /// 所属插件ID
         /// </summary>
-        public String OwnerPluginID { get; set; }
+        public String OwnerPluginID { get; set; } = ownerPluginID;
 
         /// \~English
         /// <summary>
@@ -4100,7 +4009,7 @@ namespace ASEva
         /// <summary>
         /// 组件ID
         /// </summary>
-        public String ID { get; set; }
+        public String ID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -4110,7 +4019,7 @@ namespace ASEva
         /// <summary>
         /// 控制台组件标题
         /// </summary>
-        public String Title { get; set; }
+        public String Title { get; set; } = title;
     }
 
     /// \~English
@@ -4152,7 +4061,7 @@ namespace ASEva
         /// <summary>
         /// 输入模式
         /// </summary>
-        public VideoInputMode InputMode { get; set; }
+        public VideoInputMode InputMode { get; set; } = new VideoInputMode();
 
         /// \~English
         /// <summary>
@@ -4173,19 +4082,6 @@ namespace ASEva
         /// 是否按采集文件帧率对齐
         /// </summary>
         public bool RecordFPSAlign { get; set; }
-
-        /// \~English
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// 默认构造函数
-        /// </summary>
-        public VideoChannelInfo()
-        {
-            InputMode = new VideoInputMode();
-        }
     }
 
     /// \~English
@@ -4241,13 +4137,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Entry arguments of component related UI
+    /// (api:app=3.7.0) Entry arguments of component related UI
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 组件相关用户界面的入口参数
+    /// (api:app=3.7.0) 组件相关用户界面的入口参数
     /// </summary>
-    public class ModuleRelatedUIEntry
+    public class ModuleRelatedUIEntry(ModuleRelatedUIType type, String classID, String name)
     {
         /// \~English
         /// <summary>
@@ -4257,7 +4153,7 @@ namespace ASEva
         /// <summary>
         /// UI类别
         /// </summary>
-        public ModuleRelatedUIType Type { get; set; }
+        public ModuleRelatedUIType Type { get; set; } = type;
 
         /// \~English
         /// <summary>
@@ -4267,7 +4163,7 @@ namespace ASEva
         /// <summary>
         /// UI组件的类别ID
         /// </summary>
-        public String ClassID { get; set; }
+        public String ClassID { get; set; } = classID;
 
         /// \~English
         /// <summary>
@@ -4277,7 +4173,7 @@ namespace ASEva
         /// <summary>
         /// UI组件的分化标识ID
         /// </summary>
-        public String TransformID { get; set; }
+        public String? TransformID { get; set; }
 
         /// \~English
         /// <summary>
@@ -4287,7 +4183,7 @@ namespace ASEva
         /// <summary>
         /// 组件名称
         /// </summary>
-        public String Name { get; set; }
+        public String Name { get; set; } = name;
     }
 
     /// \~English
@@ -4308,7 +4204,7 @@ namespace ASEva
         /// <summary>
         /// 输出样本的通道ID和别名
         /// </summary>
-        public Dictionary<String, String> OutputSamples { get; set; }
+        public Dictionary<String, String> OutputSamples { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -4318,7 +4214,7 @@ namespace ASEva
         /// <summary>
         /// 输出场景的ID
         /// </summary>
-        public String[] OutputScenes { get; set; }
+        public String[] OutputScenes { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -4328,7 +4224,7 @@ namespace ASEva
         /// <summary>
         /// 输出信号类别和名称，默认类别使用空字符串
         /// </summary>
-        public Dictionary<String, String[]> OutputSignals { get; set; }
+        public Dictionary<String, String[]> OutputSignals { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -4338,7 +4234,7 @@ namespace ASEva
         /// <summary>
         /// 输出图表的标题
         /// </summary>
-        public String[] OutputGraphs { get; set; }
+        public String[] OutputGraphs { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -4348,7 +4244,7 @@ namespace ASEva
         /// <summary>
         /// 所需信号打包数据通道ID
         /// </summary>
-        public String[] RequiredSignalPackings { get; set; }
+        public String[] RequiredSignalPackings { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -4358,7 +4254,7 @@ namespace ASEva
         /// <summary>
         /// 所需视频通道
         /// </summary>
-        public UsingVideoChannel[] RequiredVideoChannels { get; set; }
+        public UsingVideoChannel[] RequiredVideoChannels { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -4368,7 +4264,7 @@ namespace ASEva
         /// <summary>
         /// 写入数据文件所需的数据类型
         /// </summary>
-        public RecordDataType[] RequiredRecordDataTypes { get; set; }
+        public RecordDataType[] RequiredRecordDataTypes { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -4378,7 +4274,7 @@ namespace ASEva
         /// <summary>
         /// 相关用户界面的入口参数
         /// </summary>
-        public ModuleRelatedUIEntry[] RelatedUIEntries { get; set; }
+        public ModuleRelatedUIEntry[] RelatedUIEntries { get; set; } = [];
     }
 
     /// \~English
@@ -4552,7 +4448,7 @@ namespace ASEva
         /// <summary>
         /// 测试用数据是否可用（键为编码格式，如mjpeg, h264, h265等）
         /// </summary>
-        public Dictionary<String, bool> TestDataAvailable { get; set; }
+        public Dictionary<String, bool> TestDataAvailable { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -4562,6 +4458,6 @@ namespace ASEva
         /// <summary>
         /// 测试结果，键为测试项，值为每秒可处理像素数（null表示未测试，0表示失败）
         /// </summary>
-        public Dictionary<String, ulong?> TestResults { get; set; }
+        public Dictionary<String, ulong?> TestResults { get; set; } = [];
     }
 }

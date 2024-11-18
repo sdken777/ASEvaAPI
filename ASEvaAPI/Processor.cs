@@ -34,7 +34,7 @@ namespace ASEva
         /// <summary>
         /// 时间参考样本，sample的时间戳和时间线位置将被赋值为与此样本一致
         /// </summary>
-        public Sample timeRef;
+        public Sample? timeRef;
 
         /// \~English
         /// <summary>
@@ -103,7 +103,7 @@ namespace ASEva
         /// </summary>
         /// <param name="sample">新数据样本，包括通用样本 ASEva.GeneralSample , 手动触发器样本 ASEva.Samples.ManualTriggerSample , 视频帧样本 ASEva.Samples.VideoFrameSample , 音频帧样本 ASEva.Samples.AudioFrameSample , 点云帧样本 ASEva.Samples.PointCloudSample 等类型</param>
         /// <returns>返回的样本列表</returns>
-        public virtual List<ProcessorOutputSample> OnProcessSample(Sample sample) { return null; }
+        public virtual List<ProcessorOutputSample> OnProcessSample(Sample sample) { return []; }
 
         /// \~English
         /// <summary>

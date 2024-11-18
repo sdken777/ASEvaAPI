@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace ASEva
@@ -75,7 +76,7 @@ namespace ASEva
         /// <summary>
         /// 标题文字列表
         /// </summary>
-        public List<String> Titles { get; set; }
+        public List<String> Titles { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -86,9 +87,7 @@ namespace ASEva
         /// 默认构造函数
         /// </summary>
         public GeneralSampleTitle()
-        {
-            Titles = new List<string>();
-        }
+        {}
 
         /// \~English
         /// <summary>
@@ -100,7 +99,6 @@ namespace ASEva
         /// </summary>
         public GeneralSampleTitle(String titleString)
         {
-            Titles = new List<string>();
             if (!String.IsNullOrWhiteSpace(titleString)) Titles.AddRange(titleString.Split(','));
         }
     }
@@ -123,7 +121,7 @@ namespace ASEva
         /// <summary>
         /// 标题文字列表
         /// </summary>
-        public List<String> Titles { get; set; }
+        public List<String> Titles { get; set; } = [];
 
         /// \~English
         /// <summary>
@@ -134,9 +132,7 @@ namespace ASEva
         /// 默认构造函数
         /// </summary>
         public SceneTitle()
-        {
-            Titles = new List<string>();
-        }
+        {}
 
         /// \~English
         /// <summary>
@@ -148,20 +144,19 @@ namespace ASEva
         /// </summary>
         public SceneTitle(String titleString)
         {
-            Titles = new List<string>();
             if (!String.IsNullOrWhiteSpace(titleString)) Titles.AddRange(titleString.Split(','));
         }
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Sample alias
+    /// (api:app=3.7.0) Sample alias
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 样本通道别名
+    /// (api:app=3.7.0) 样本通道别名
     /// </summary>
-    public class ChannelAlias
+    public class ChannelAlias(String id, String name)
     {
         /// \~English
         /// <summary>
@@ -171,7 +166,7 @@ namespace ASEva
         /// <summary>
         /// 样本通道ID
         /// </summary>
-        public String ChannelID { get; set; }
+        public String ChannelID { get; set; } = id;
 
         /// \~English
         /// <summary>
@@ -181,7 +176,7 @@ namespace ASEva
         /// <summary>
         /// 别名
         /// </summary>
-        public String AliasName { get; set; }
+        public String AliasName { get; set; } = name;
     }
 
     /// \~English
@@ -538,13 +533,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Configuration for a signal in packing
+    /// (api:app=3.7.0) Configuration for a signal in packing
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 信号打包中单个信号的配置
+    /// (api:app=3.7.0) 信号打包中单个信号的配置
     /// </summary>
-    public class SignalPackConfigElem
+    public class SignalPackConfigElem(String valueID)
     {
         /// \~English
         /// <summary>
@@ -554,7 +549,7 @@ namespace ASEva
         /// <summary>
         /// 数值信号ID
         /// </summary>
-        public String ValueID { get; set; }
+        public String ValueID { get; set; } = valueID;
 
         /// \~English
         /// <summary>
@@ -564,7 +559,7 @@ namespace ASEva
         /// <summary>
         /// 符号位信号ID
         /// </summary>
-        public String SignID { get; set; }
+        public String? SignID { get; set; }
 
         /// \~English
         /// <summary>
@@ -574,7 +569,7 @@ namespace ASEva
         /// <summary>
         /// 乘数
         /// </summary>
-        public double Scale { get; set; }
+        public double Scale { get; set; } = 1;
 
         /// \~English
         /// <summary>
@@ -584,7 +579,7 @@ namespace ASEva
         /// <summary>
         /// 超过一段时间无数据则输出空，单位毫秒
         /// </summary>
-        public double Timeout { get; set; }
+        public double Timeout { get; set; } = 1200;
 
         /// \~English
         /// <summary>
@@ -594,7 +589,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=3.2.12) 单个信号的插值模式，仅当打包配置中IsInterpolationMode为true时有效
         /// </summary>
-        public SignalPackMode Mode { get; set; }
+        public SignalPackMode Mode { get; set; } = SignalPackMode.Default;
 
         /// \~English
         /// <summary>
@@ -609,24 +604,17 @@ namespace ASEva
             get { return Mode == SignalPackMode.Nearest; }
             set { Mode = value ? SignalPackMode.Nearest : SignalPackMode.Default; }
         }
-
-        public SignalPackConfigElem()
-        {
-            Scale = 1;
-            Timeout = 1200;
-            IsNearestMode = false;
-        }
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Signal packing configuration
+    /// (api:app=3.7.0) Signal packing configuration
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 信号打包配置
+    /// (api:app=3.7.0) 信号打包配置
     /// </summary>
-    public class SignalPackConfig
+    public class SignalPackConfig(String protocol)
     {
         /// \~English
         /// <summary>
@@ -636,7 +624,7 @@ namespace ASEva
         /// <summary>
         /// 信号打包输出的样本协议名
         /// </summary>
-        public String Protocol { get; set; }
+        public String Protocol { get; set; } = protocol;
 
         /// \~English
         /// <summary>
@@ -646,7 +634,7 @@ namespace ASEva
         /// <summary>
         /// 是否为插值模式，否则为总线报文打包模式
         /// </summary>
-        public bool IsInterpolationMode { get; set; }
+        public bool IsInterpolationMode { get; set; } = false;
 
         /// \~English
         /// <summary>
@@ -656,7 +644,7 @@ namespace ASEva
         /// <summary>
         /// 帧尾报文，进在总线报文打包模式下有效
         /// </summary>
-        public String FinalMessageID { get; set; }
+        public String? FinalMessageID { get; set; }
 
         /// \~English
         /// <summary>
@@ -666,7 +654,7 @@ namespace ASEva
         /// <summary>
         /// 采样率，进在插值模式下有效
         /// </summary>
-        public int SamplingRate { get; set; }
+        public int SamplingRate { get; set; } = 100;
 
         /// \~English
         /// <summary>
@@ -676,14 +664,7 @@ namespace ASEva
         /// <summary>
         /// 每个信号的配置
         /// </summary>
-        public List<SignalPackConfigElem> SignalConfigs { get; set; }
-
-        public SignalPackConfig()
-        {
-            IsInterpolationMode = false;
-            SamplingRate = 100;
-            SignalConfigs = new List<SignalPackConfigElem>();
-        }
+        public List<SignalPackConfigElem> SignalConfigs { get; set; } = [];
     }
 
     /// \~English
@@ -706,7 +687,7 @@ namespace ASEva
         /// [必须实现] 获取配置的字符串描述时被调用
         /// </summary>
         /// <returns>字符串描述，建议使用XML或JSON</returns>
-        public virtual String GetConfig() { return null; }
+        public virtual String GetConfig() { return ""; }
 
         /// \~English
         /// <summary>
@@ -730,7 +711,7 @@ namespace ASEva
         /// (api:app=3.1.4) [必须实现] 查询配置状态时被调用
         /// </summary>
         /// <returns>1. 配置状态; 2. 错误提示，当配置状态为EnabledWithError或EnabledWithWarning时应有效</returns>
-        public virtual Task<(ConfigStatus, String)> GetConfigStatus() { return Task.FromResult((ConfigStatus.Disabled, (String)null)); }
+        public virtual Task<(ConfigStatus, String?)> GetConfigStatus() { return Task.FromResult<(ConfigStatus, String?)>((ConfigStatus.Disabled, null)); }
 
         /// \~English
         /// <summary>
@@ -742,7 +723,7 @@ namespace ASEva
         /// (api:app=3.1.4) [可选实现] 查询各子功能配置状态时被调用
         /// </summary>
         /// <returns>各子功能的配置状态</returns>
-        public virtual Task<ConfigStatus[]> GetChildConfigStatus() { return Task.FromResult<ConfigStatus[]>(null); }
+        public virtual Task<ConfigStatus[]> GetChildConfigStatus() { return Task.FromResult<ConfigStatus[]>([]); }
 
         /// \~English
         /// <summary>
@@ -754,7 +735,7 @@ namespace ASEva
         /// [可选实现；仅限ProcessorClass和NativeClass] 获取输出的样本标题集合时被调用
         /// </summary>
         /// <returns>样本标题集合，key为样本ID，value为标题描述</returns>
-        public virtual Dictionary<String, GeneralSampleTitle> GetProcessorOutputSampleTitles() { return null; }
+        public virtual Dictionary<String, GeneralSampleTitle> GetProcessorOutputSampleTitles() { return []; }
 
         /// \~English
         /// <summary>
@@ -766,7 +747,7 @@ namespace ASEva
         /// [可选实现；仅限ProcessorClass] 获取输出的场景标题集合时被调用
         /// </summary>
         /// <returns>场景标题集合，key为场景ID，value为标题描述</returns>
-        public virtual Dictionary<String, SceneTitle> GetProcessorOutputSceneTitles() { return null; }
+        public virtual Dictionary<String, SceneTitle> GetProcessorOutputSceneTitles() { return []; }
 
         /// \~English
         /// <summary>
@@ -778,7 +759,7 @@ namespace ASEva
         /// [可选实现；仅限ProcessorClass和NativeClass] 获得该组件默认类别下的所有输出信号的名称时被调用
         /// </summary>
         /// <returns>信号名称列表</returns>
-        public virtual String[] GetProcessorOutputSignalNames() { return null; }
+        public virtual String[] GetProcessorOutputSignalNames() { return []; }
 
         /// \~English
         /// <summary>
@@ -790,7 +771,7 @@ namespace ASEva
         /// [可选实现；仅限ProcessorClass] 获得该组件非默认类别下的所有输出信号的名称时被调用
         /// </summary>
         /// <returns>信号名称列表，key为类别名称</returns>
-        public virtual Dictionary<String, String[]> GetProcessorOutputSignalNameTable() { return null; }
+        public virtual Dictionary<String, String[]> GetProcessorOutputSignalNameTable() { return []; }
 
         /// \~English
         /// <summary>
@@ -802,7 +783,7 @@ namespace ASEva
         /// [可选实现；仅限ProcessorClass] 获得该组件所有输出图表的定义时被调用
         /// </summary>
         /// <returns>图表定义列表</returns>
-        public virtual GraphDefinition[] GetProcessorOutputGraphDefinitions() { return null; }
+        public virtual GraphDefinition[] GetProcessorOutputGraphDefinitions() { return []; }
 
         /// \~English
         /// <summary>
@@ -814,7 +795,7 @@ namespace ASEva
         /// [可选实现；仅限ProcessorClass和NativeClass] 获取数据处理需要用到的所有信号打包配置时被调用
         /// </summary>
         /// <returns>信号打包配置列表</returns>
-        public virtual List<SignalPackConfig> GetProcessorRelatedSignalPackings() { return null; }
+        public virtual List<SignalPackConfig> GetProcessorRelatedSignalPackings() { return []; }
 
         /// \~English
         /// <summary>
@@ -826,7 +807,7 @@ namespace ASEva
         /// [可选实现；仅限ProcessorClass和NativeClass] 获取所有输出样本通道的别名列表时被调用
         /// </summary>
         /// <returns>通道别名列表</returns>
-        public virtual List<ChannelAlias> GetChannelAliasList() { return null; }
+        public virtual List<ChannelAlias> GetChannelAliasList() { return []; }
 
         /// \~English
         /// <summary>
@@ -838,7 +819,7 @@ namespace ASEva
         /// [可选实现；仅限ProcessorClass和NativeClass] 获取所有使用的视频通道时被调用
         /// </summary>
         /// <returns>所有使用的视频通道</returns>
-        public virtual List<UsingVideoChannel> GetUsingVideoChannels() { return null; }
+        public virtual List<UsingVideoChannel> GetUsingVideoChannels() { return []; }
 
         /// \~English
         /// <summary>
@@ -850,7 +831,7 @@ namespace ASEva
         /// [Optional；仅限NativeClass] 获取文件写入需要的所有数据类型
         /// </summary>
         /// <returns>文件写入需要的所有数据类型</returns>
-        public virtual List<RecordDataType> GetRecordDataTypes() { return null; }
+        public virtual List<RecordDataType> GetRecordDataTypes() { return []; }
 
         /// \~English
         /// <summary>

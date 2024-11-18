@@ -142,7 +142,7 @@ namespace ASEva
         /// <summary>
         /// [可选实现] 获取默认全局参数，客户端软件无效（默认空）
         /// </summary>
-        public virtual Dictionary<String, String> OnGetDefaultGlobalParameters() { return null; }
+        public virtual Dictionary<String, String> OnGetDefaultGlobalParameters() { return []; }
 
         /// \~English
         /// <summary>
@@ -164,7 +164,7 @@ namespace ASEva
         /// (api:app=3.4.6) [可选实现] 获取用户偏好变量ID列表时被调用
         /// </summary>
         /// <returns>用户偏好变量ID列表</returns>
-        public virtual String[] OnGetPreferenceVariables() { return null; }
+        public virtual String[] OnGetPreferenceVariables() { return []; }
 
         /// \~English
         /// <summary>
@@ -178,7 +178,7 @@ namespace ASEva
         /// </summary>
         /// <param name="selected">已选择的总线协议文件</param>
         /// <returns>新选择的总线协议文件</returns>
-        public virtual Task<BusProtocolFileID[]> OnSelectBusProtocolFiles(BusProtocolFileID[] selected) { return Task.FromResult<BusProtocolFileID[]>(null); }
+        public virtual Task<BusProtocolFileID[]> OnSelectBusProtocolFiles(BusProtocolFileID[] selected) { return Task.FromResult<BusProtocolFileID[]>([]); }
 
         /// \~English
         /// <summary>
@@ -192,7 +192,7 @@ namespace ASEva
         /// </summary>
         /// <param name="originMessageID">初始总线报文配置</param>
         /// <returns>返回总线报文配置，若删除则返回null</returns>
-        public virtual Task<String> OnSelectBusMessage(String originMessageID) { return Task.FromResult(originMessageID); }
+        public virtual Task<String?> OnSelectBusMessage(String? originMessageID) { return Task.FromResult(originMessageID); }
 
         /// \~English
         /// <summary>
@@ -226,7 +226,7 @@ namespace ASEva
         /// <param name="withSignBit">是否包含符号位信号的配置</param>
         /// <param name="unit">该信号的单位显示，仅当包含乘数配置时有效</param>
         /// <returns>返回信号配置，若删除则返回null</returns>
-        public virtual Task<SignalConfig> OnSelectSignal(SignalConfig origin, bool withScale, bool withSignBit, String unit) { return Task.FromResult(origin); }
+        public virtual Task<SignalConfig?> OnSelectSignal(SignalConfig? origin, bool withScale, bool withSignBit, String unit) { return Task.FromResult(origin); }
 
         /// \~English
         /// <summary>
@@ -415,7 +415,7 @@ namespace ASEva
         /// <param name="loopCallback">主循环回调接口</param>
         /// <param name="modalCallback">模态对话回调接口</param>
         /// <param name="startupProject">初始项目文件路径</param>
-        public virtual void OnRun(WorkflowLoopCallback loopCallback, WorkflowModalCallback modalCallback, String startupProject) {}
+        public virtual void OnRun(WorkflowLoopCallback loopCallback, WorkflowModalCallback modalCallback, String? startupProject) {}
 
         /// \~English
         /// <summary>
@@ -607,7 +607,7 @@ namespace ASEva
         /// </summary>
         /// <param name="title">标题</param>
         /// <param name="icon">图标，分辨率为16x16</param>
-        public virtual void OnSetCurrentDialogTitle(String title, CommonImage icon) {}
+        public virtual void OnSetCurrentDialogTitle(String? title, CommonImage? icon) {}
 
         /// \~English
         /// <summary>
@@ -623,7 +623,7 @@ namespace ASEva
         /// <param name="window">窗口面板对象，继承WindowPanel</param>
         /// <param name="title">标题</param>
         /// <param name="icon">图标，分辨率为16x16</param>
-        public virtual void OnSetWindowTitle(object window, String title, CommonImage icon) {}
+        public virtual void OnSetWindowTitle(object window, String? title, CommonImage? icon) {}
 
         /// \~English
         /// <summary>
@@ -637,7 +637,7 @@ namespace ASEva
         /// </summary>
         /// <param name="originPath">原始路径，若未设置则为null</param>
         /// <returns>新路径，若未设置则为null</returns>
-        public virtual Task<String> OnEditOfflineMapPath(String originPath) { return Task.FromResult(originPath); }
+        public virtual Task<String?> OnEditOfflineMapPath(String? originPath) { return Task.FromResult(originPath); }
 
         /// \~English
         /// <summary>
@@ -764,7 +764,7 @@ namespace ASEva
         /// (api:app=3.4.1) [必须实现] 返回连接配置
         /// </summary>
         /// <returns>连接配置，含以下模式：1. 双端口模式（ip:port-in:port-out）</returns>
-        public virtual String OnGetConnectionConfig() { return null; }
+        public virtual String? OnGetConnectionConfig() { return null; }
 
         /// \~English
         /// <summary>
@@ -872,7 +872,7 @@ namespace ASEva
         /// <param name="message">提示消息</param>
         /// <param name="extensions">后缀名筛选，以'.'开头，若不限后缀则设为null</param>
         /// <returns>1. 用户选中文件的二进制数据，若取消则输出null; 2. 文件路径，若取消则输出null</returns>
-        public virtual Task<(byte[], String)> OnRequestLoadFileData(String message, String[] extensions) { return Task.FromResult(((byte[])null, (String)null)); }
+        public virtual Task<(byte[]?, String?)> OnRequestLoadFileData(String message, String[]? extensions) { return Task.FromResult<(byte[]?, String?)>((null, null)); }
 
         /// \~English
         /// <summary>
@@ -890,7 +890,7 @@ namespace ASEva
         /// <param name="extension">保存文件的后缀名，以'.'开头，若不考虑后缀则设为null</param>
         /// <param name="data">需要保存的二进制数据</param>
         /// <returns>文件路径，若取消则输出null</returns>
-        public virtual Task<String> OnRequestSaveFileData(String message, String extension, byte[] data) { return Task.FromResult((String)null); }
+        public virtual Task<String?> OnRequestSaveFileData(String message, String? extension, byte[] data) { return Task.FromResult<String?>(null); }
 
         /// \~English
         /// <summary>
@@ -904,7 +904,7 @@ namespace ASEva
         /// </summary>
         /// <param name="title">标题</param>
         /// <param name="icon">图标，分辨率为16x16</param>
-        public virtual void OnSetCurrentDialogTitle(String title, CommonImage icon) {}
+        public virtual void OnSetCurrentDialogTitle(String? title, CommonImage? icon) {}
 
         /// \~English
         /// <summary>
@@ -920,18 +920,18 @@ namespace ASEva
         /// <param name="window">窗口面板对象，继承WindowPanel</param>
         /// <param name="title">标题</param>
         /// <param name="icon">图标，分辨率为16x16</param>
-        public virtual void OnSetWindowTitle(object window, String title, CommonImage icon) {}
+        public virtual void OnSetWindowTitle(object window, String? title, CommonImage? icon) {}
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Application's basic info
+    /// (api:app=3.7.0) Application's basic info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 应用程序的基本信息
+    /// (api:app=3.7.0) 应用程序的基本信息
     /// </summary>
-    public class AppBasicInfo
+    public class AppBasicInfo(String appName, byte[] appIconPNG, Version appVersion, Version coreVersion, String agreement)
     {
         /// \~English
         /// <summary>
@@ -941,7 +941,7 @@ namespace ASEva
         /// <summary>
         /// 应用程序名称
         /// </summary>
-        public String AppName { get; set; }
+        public String AppName { get; set; } = appName;
 
         /// \~English
         /// <summary>
@@ -951,7 +951,7 @@ namespace ASEva
         /// <summary>
         /// 应用程序的图标，为PNG文件二进制数据
         /// </summary>
-        public byte[] AppIconPNG { get; set; }
+        public byte[] AppIconPNG { get; set; } = appIconPNG;
 
         /// \~English
         /// <summary>
@@ -961,7 +961,7 @@ namespace ASEva
         /// <summary>
         /// 应用程序版本
         /// </summary>
-        public Version AppVersion { get; set; }
+        public Version AppVersion { get; set; } = appVersion;
 
         /// \~English
         /// <summary>
@@ -971,7 +971,7 @@ namespace ASEva
         /// <summary>
         /// 应用程序发行号，可为空（相同应用程序版本下可按不同配置发行）
         /// </summary>
-        public String AppRevision { get; set; }
+        public String? AppRevision { get; set; }
 
         /// \~English
         /// <summary>
@@ -981,7 +981,7 @@ namespace ASEva
         /// <summary>
         /// 缩略的应用程序发行号，可为空（相同应用程序版本下可按不同配置发行）
         /// </summary>
-        public String AppRevisionShort { get; set; }
+        public String? AppRevisionShort { get; set; }
 
         /// \~English
         /// <summary>
@@ -991,7 +991,7 @@ namespace ASEva
         /// <summary>
         /// 框架软件的版本
         /// </summary>
-        public Version CoreVersion { get; set; }
+        public Version CoreVersion { get; set; } = coreVersion;
 
         /// \~English
         /// <summary>
@@ -1001,7 +1001,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=3.2.8) 用户许可 (EULA)
         /// </summary>
-        public String Agreement { get; set; }
+        public String Agreement { get; set; } = agreement;
     }
 
     /// \~English
@@ -1207,7 +1207,7 @@ namespace ASEva
         Task<String> GetTaskStateDescription();
         Task<double> GetTaskProgress();
         Task<String> GetTaskConfig();
-        Task<String> GetTaskReturnValue();
+        Task<String?> GetTaskReturnValue();
         void CancelTask();
     }
 
@@ -1269,7 +1269,7 @@ namespace ASEva
         /// <summary>
         /// 获取任务返回值
         /// </summary>
-        String GetTaskReturnValue();
+        String? GetTaskReturnValue();
 
         /// \~English
         /// <summary>
@@ -1332,7 +1332,7 @@ namespace ASEva
     public interface WorkflowInstallCallback
     {
         Task InstallLibrary(String libraryID);
-        Task<String> PrepareDriver(String driverID);
+        Task<String?> PrepareDriver(String driverID);
     }
 
     /// \~English
@@ -1357,20 +1357,20 @@ namespace ASEva
         /// </summary>
         /// <param name="libraryID">插件关联的库ID</param>
         /// <returns>错误信息，若安装成功则为null</returns>
-        String InstallLibrary(String libraryID);
+        String? InstallLibrary(String libraryID);
 
         /// \~English
         /// <summary>
         /// Prepare driver or environment pack, and return the executable path for installation
         /// </summary>
         /// <param name="driverID">Related driver ID</param>
-        /// <returns>1) Executable path for installation. 2) Error message, null if succeeded</returns>
+        /// <returns>1) Executable path for installation. 2) Error message, null if initialization succeeded</returns>
         /// \~Chinese
         /// <summary>
         /// 准备驱动和环境等的文件，并返回安装文件的运行路径
         /// </summary>
         /// <param name="driverID">插件关联的驱动ID</param>
-        /// <returns>1. 安装文件的运行路径; 2. 错误信息，若安装成功则为null</returns>
-        (String, String) PrepareDriver(String driverID);
+        /// <returns>1. 安装文件的运行路径; 2. 错误信息，若初始化成功则为null</returns>
+        (String?, String?) PrepareDriver(String driverID);
     }
 }

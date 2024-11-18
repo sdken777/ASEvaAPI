@@ -4,13 +4,13 @@ namespace ASEva
 {
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Basic info of event
+    /// (api:app=3.7.0) Basic info of event
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 事件基础信息
+    /// (api:app=3.7.0) 事件基础信息
     /// </summary>
-    public class EventData
+    public class EventData(String name, String configID, String description, object eventHandle)
     {
         /// \~English
         /// <summary>
@@ -20,15 +20,15 @@ namespace ASEva
         /// <summary>
         /// 事件名称
         /// </summary>
-        public String Name { get; set; }
+        public String Name { get; set; } = name;
 
         /// \~English
         /// <summary>
-        /// (api:app=3.2.0) The session that event belongs to
+        /// The session that event belongs to
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.2.0) 所属session ID
+        /// 所属session ID
         /// </summary>
         public SessionIdentifier Session { get; set; }
 
@@ -60,7 +60,7 @@ namespace ASEva
         /// <summary>
         /// 事件触发条件ID
         /// </summary>
-        public String ConfigID { get; set; }
+        public String ConfigID { get; set; } = configID;
 
         /// \~English
         /// <summary>
@@ -70,7 +70,7 @@ namespace ASEva
         /// <summary>
         /// 事件触发条件描述
         /// </summary>
-        public String Description { get; set; }
+        public String Description { get; set; } = description;
 
         /// \~English
         /// <summary>
@@ -80,7 +80,7 @@ namespace ASEva
         /// <summary>
         /// 事件对象
         /// </summary>
-        public object EventHandle { get; set; }
+        public object EventHandle { get; set; } = eventHandle;
     }
 
     /// \~English
@@ -126,13 +126,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Full info of event
+    /// (api:app=3.7.0) Full info of event
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 事件完整信息
+    /// (api:app=3.7.0) 事件完整信息
     /// </summary>
-    public class EventInfo
+    public class EventInfo(EventData data)
     {
         /// \~English
         /// <summary>
@@ -142,7 +142,7 @@ namespace ASEva
         /// <summary>
         /// 基础信息
         /// </summary>
-        public EventData Data { get; set; }
+        public EventData Data { get; set; } = data;
 
         /// \~English
         /// <summary>
@@ -152,7 +152,7 @@ namespace ASEva
         /// <summary>
         /// 注释
         /// </summary>
-        public String Comment { get; set; }
+        public String Comment { get; set; } = "";
 
         /// \~English
         /// <summary>
@@ -162,7 +162,7 @@ namespace ASEva
         /// <summary>
         /// 事件数据的根路径
         /// </summary>
-        public String RootPath { get; set; }
+        public String? RootPath { get; set; }
 
         /// \~English
         /// <summary>
@@ -172,7 +172,7 @@ namespace ASEva
         /// <summary>
         /// info.xml路径
         /// </summary>
-        public String InfoXmlDataPath { get; set; }
+        public String? InfoXmlDataPath { get; set; }
 
         /// \~English
         /// <summary>
@@ -182,7 +182,7 @@ namespace ASEva
         /// <summary>
         /// 快照信号表路径
         /// </summary>
-        public String SnapshotTableDataPath { get; set; }
+        public String? SnapshotTableDataPath { get; set; }
 
         /// \~English
         /// <summary>
@@ -192,7 +192,7 @@ namespace ASEva
         /// <summary>
         /// 快照城市尺度地图图像路径
         /// </summary>
-        public String SnapshotLocationCityImagePath { get; set; }
+        public String? SnapshotLocationCityImagePath { get; set; }
 
         /// \~English
         /// <summary>
@@ -202,7 +202,7 @@ namespace ASEva
         /// <summary>
         /// 快照街道尺度地图图像路径
         /// </summary>
-        public String SnapshotLocationRoadImagePath { get; set; }
+        public String? SnapshotLocationRoadImagePath { get; set; }
 
         /// \~English
         /// <summary>
@@ -212,7 +212,7 @@ namespace ASEva
         /// <summary>
         /// 快照视频图像路径
         /// </summary>
-        public String SnapshotVideoImagePath { get; set; }
+        public String? SnapshotVideoImagePath { get; set; }
 
         /// \~English
         /// <summary>
@@ -222,7 +222,7 @@ namespace ASEva
         /// <summary>
         /// 快照俯瞰图图像路径
         /// </summary>
-        public String SnapshotBirdViewImagePath { get; set; }
+        public String? SnapshotBirdViewImagePath { get; set; }
 
         /// \~English
         /// <summary>
@@ -232,7 +232,7 @@ namespace ASEva
         /// <summary>
         /// 事件session记录路径
         /// </summary>
-        public String SessionRecordPath { get; set; }
+        public String? SessionRecordPath { get; set; }
 
         /// \~English
         /// <summary>

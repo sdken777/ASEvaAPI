@@ -23,7 +23,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=3.1.6) [必须实现] 获取窗口组件的名称时被调用
         /// </summary>
-        public virtual Dictionary<Language, String> GetWindowName() { return null; }
+        public virtual Dictionary<Language, String> GetWindowName() { return []; }
 
         /// \~English
         /// <summary>
@@ -35,7 +35,7 @@ namespace ASEva
         /// [必须实现] 获取窗口组件的类别ID时被调用
         /// </summary>
         /// <returns>窗口组件的类别ID</returns>
-        public virtual String GetWindowClassID() { return null; }
+        public virtual String GetWindowClassID() { return ""; }
 
         /// \~English
         /// <summary>
@@ -47,7 +47,7 @@ namespace ASEva
         /// [可选实现] 获取窗口组件的图标图像时被调用
         /// </summary>
         /// <returns>图标图像（大小一般为16x16）</returns>
-        public virtual object GetWindowImage() { return null; }
+        public virtual object? GetWindowImage() { return null; }
 
         /// \~English
         /// <summary>
@@ -59,7 +59,7 @@ namespace ASEva
         /// [可选实现] 获取窗口组件相关的组件ID
         /// </summary>
         /// <returns>组件ID列表</returns>
-        public virtual String[] GetRelatedModules() { return null; }
+        public virtual String[] GetRelatedModules() { return []; }
 
         /// \~English
         /// <summary>
@@ -71,7 +71,7 @@ namespace ASEva
         /// [必须实现] 创建窗口控件时被调用
         /// </summary>
         /// <returns>窗口控件，该控件将填满显示窗口</returns>
-        public virtual object CreateWindow() { return null; }
+        public virtual object? CreateWindow() { return null; }
 
         /// \~English
         /// <summary>
@@ -95,7 +95,7 @@ namespace ASEva
         /// [可选实现] 获取可直接作为样本输出的原始数据协议列表及对应的样本别名
         /// </summary>
         /// <returns>原始数据协议（键）列表及对应的样本别名（值）</returns>
-        public virtual Dictionary<String, String> GetRawToSampleProtocols() { return null; }
+        public virtual Dictionary<String, String> GetRawToSampleProtocols() { return []; }
 
         /// \~English
         /// <summary>
@@ -109,7 +109,7 @@ namespace ASEva
         /// </summary>
         /// <param name="config">窗口配置</param>
         /// <returns>分化的窗口组件定义</returns>
-        public virtual WindowClass Transform(String config) { return null; }
+        public virtual WindowClass? Transform(String config) { return null; }
 
         /// \~English
         /// <summary>
@@ -121,6 +121,6 @@ namespace ASEva
         /// [分化的窗口组件必须实现] 获取分化标识ID时被调用
         /// </summary>
         /// <returns>分化标识ID</returns>
-        public virtual String GetTransformID() { return null; }
+        public virtual String? GetTransformID() { return null; }
     }
 }

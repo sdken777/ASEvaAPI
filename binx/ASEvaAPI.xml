@@ -8822,11 +8822,21 @@
         <member name="T:ASEva.ChannelAlias">
             \~English
             <summary>
-            (api:app=3.0.0) Sample alias
+            (api:app=3.7.0) Sample alias
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 样本通道别名
+            (api:app=3.7.0) 样本通道别名
+            </summary>
+        </member>
+        <member name="M:ASEva.ChannelAlias.#ctor(System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Sample alias
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 样本通道别名
             </summary>
         </member>
         <member name="P:ASEva.ChannelAlias.ChannelID">
@@ -9202,11 +9212,21 @@
         <member name="T:ASEva.SignalPackConfigElem">
             \~English
             <summary>
-            (api:app=3.0.0) Configuration for a signal in packing
+            (api:app=3.7.0) Configuration for a signal in packing
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 信号打包中单个信号的配置
+            (api:app=3.7.0) 信号打包中单个信号的配置
+            </summary>
+        </member>
+        <member name="M:ASEva.SignalPackConfigElem.#ctor(System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Configuration for a signal in packing
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 信号打包中单个信号的配置
             </summary>
         </member>
         <member name="P:ASEva.SignalPackConfigElem.ValueID">
@@ -9272,11 +9292,21 @@
         <member name="T:ASEva.SignalPackConfig">
             \~English
             <summary>
-            (api:app=3.0.0) Signal packing configuration
+            (api:app=3.7.0) Signal packing configuration
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 信号打包配置
+            (api:app=3.7.0) 信号打包配置
+            </summary>
+        </member>
+        <member name="M:ASEva.SignalPackConfig.#ctor(System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Signal packing configuration
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 信号打包配置
             </summary>
         </member>
         <member name="P:ASEva.SignalPackConfig.Protocol">
@@ -9878,12 +9908,12 @@
         <member name="M:ASEva.DeviceClass.CreateConfig">
             \~English
             <summary>
-            [Required] Called to create configuration object
+            [Optional] Called to create configuration object. It will be empty configuration if not implemented, that is always enabled
             </summary>
             <returns>Configuration object</returns>
             \~Chinese
             <summary>
-            [必须实现] 创建配置对象时被调用
+            [可选实现] 创建配置对象时被调用。若不实现则为空配置，常时启用状态
             </summary>
             <returns>配置对象</returns>
         </member>
@@ -10056,11 +10086,21 @@
         <member name="T:ASEva.EventData">
             \~English
             <summary>
-            (api:app=3.0.0) Basic info of event
+            (api:app=3.7.0) Basic info of event
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 事件基础信息
+            (api:app=3.7.0) 事件基础信息
+            </summary>
+        </member>
+        <member name="M:ASEva.EventData.#ctor(System.String,System.String,System.String,System.Object)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Basic info of event
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 事件基础信息
             </summary>
         </member>
         <member name="P:ASEva.EventData.Name">
@@ -10076,11 +10116,11 @@
         <member name="P:ASEva.EventData.Session">
             \~English
             <summary>
-            (api:app=3.2.0) The session that event belongs to
+            The session that event belongs to
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.2.0) 所属session ID
+            所属session ID
             </summary>
         </member>
         <member name="P:ASEva.EventData.Offset">
@@ -10176,11 +10216,21 @@
         <member name="T:ASEva.EventInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Full info of event
+            (api:app=3.7.0) Full info of event
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 事件完整信息
+            (api:app=3.7.0) 事件完整信息
+            </summary>
+        </member>
+        <member name="M:ASEva.EventInfo.#ctor(ASEva.EventData)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Full info of event
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 事件完整信息
             </summary>
         </member>
         <member name="P:ASEva.EventInfo.Data">
@@ -15494,11 +15544,21 @@
         <member name="T:ASEva.SceneData">
             \~English
             <summary>
-            (api:app=3.0.0) Scenario segment
+            (api:app=3.7.0) Scenario segment
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 场景片段描述
+            (api:app=3.7.0) 场景片段描述
+            </summary>
+        </member>
+        <member name="M:ASEva.SceneData.#ctor(System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Scenario segment
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 场景片段描述
             </summary>
         </member>
         <member name="P:ASEva.SceneData.SceneID">
@@ -15514,11 +15574,11 @@
         <member name="P:ASEva.SceneData.Session">
             \~English
             <summary>
-            (api:app=3.2.0) The session that scenario belongs to
+            The session that scenario belongs to
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.2.0) 场景所属session ID
+            场景所属session ID
             </summary>
         </member>
         <member name="P:ASEva.SceneData.BeginOffset">
@@ -15549,16 +15609,6 @@
             \~Chinese
             <summary>
             场景属性列表
-            </summary>
-        </member>
-        <member name="M:ASEva.SceneData.#ctor">
-            \~English
-            <summary>
-            Default constructor
-            </summary>
-            \~Chinese
-            <summary>
-            默认构造函数
             </summary>
         </member>
         <member name="M:ASEva.SceneData.Clone(ASEva.SceneData)">
@@ -15860,61 +15910,121 @@
         <member name="T:ASEva.IntSize">
             \~English
             <summary>
-            (api:app=3.0.0) Size (Integer)
+            (api:app=3.7.0) Size (Integer)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 尺寸大小（整型）
+            (api:app=3.7.0) 尺寸大小（整型）
+            </summary>
+        </member>
+        <member name="M:ASEva.IntSize.#ctor(System.Int32,System.Int32)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Size (Integer)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 尺寸大小（整型）
             </summary>
         </member>
         <member name="T:ASEva.FloatSize">
             \~English
             <summary>
-            (api:app=3.0.0) Size (Floating)
+            (api:app=3.7.0) Size (Floating)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 尺寸大小（浮点型）
+            (api:app=3.7.0) 尺寸大小（浮点型）
+            </summary>
+        </member>
+        <member name="M:ASEva.FloatSize.#ctor(System.Single,System.Single)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Size (Floating)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 尺寸大小（浮点型）
             </summary>
         </member>
         <member name="T:ASEva.IntPoint">
             \~English
             <summary>
-            (api:app=3.0.0) Point (Integer)
+            (api:app=3.7.0) Point (Integer)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 点坐标（整型）
+            (api:app=3.7.0) 点坐标（整型）
+            </summary>
+        </member>
+        <member name="M:ASEva.IntPoint.#ctor(System.Int32,System.Int32)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Point (Integer)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 点坐标（整型）
             </summary>
         </member>
         <member name="T:ASEva.FloatPoint">
             \~English
             <summary>
-            (api:app=3.0.0) Point (Floating)
+            (api:app=3.7.0) Point (Floating)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 点坐标（浮点型）
+            (api:app=3.7.0) 点坐标（浮点型）
+            </summary>
+        </member>
+        <member name="M:ASEva.FloatPoint.#ctor(System.Single,System.Single)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Point (Floating)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 点坐标（浮点型）
             </summary>
         </member>
         <member name="T:ASEva.IntRect">
             \~English
             <summary>
-            (api:app=3.0.0) Rectangle (Integer)
+            (api:app=3.7.0) Rectangle (Integer)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 矩形（整型）
+            (api:app=3.7.0) 矩形（整型）
+            </summary>
+        </member>
+        <member name="M:ASEva.IntRect.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Rectangle (Integer)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 矩形（整型）
             </summary>
         </member>
         <member name="T:ASEva.FloatRect">
             \~English
             <summary>
-            (api:app=3.0.0) Rectangle (Floating)
+            (api:app=3.7.0) Rectangle (Floating)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 矩形（浮点型）
+            (api:app=3.7.0) 矩形（浮点型）
+            </summary>
+        </member>
+        <member name="M:ASEva.FloatRect.#ctor(System.Single,System.Single,System.Single,System.Single)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Rectangle (Floating)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 矩形（浮点型）
             </summary>
         </member>
         <member name="T:ASEva.ApplicationStatus">
@@ -16260,11 +16370,21 @@
         <member name="T:ASEva.MessageConfig">
             \~English
             <summary>
-            (api:app=3.0.0) Bus message configuration
+            (api:app=3.7.0) Bus message configuration
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 报文配置
+            (api:app=3.7.0) 报文配置
+            </summary>
+        </member>
+        <member name="M:ASEva.MessageConfig.#ctor(System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Bus message configuration
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 报文配置
             </summary>
         </member>
         <member name="P:ASEva.MessageConfig.MessageID">
@@ -16280,11 +16400,21 @@
         <member name="T:ASEva.SignalConfig">
             \~English
             <summary>
-            (api:app=3.0.0) Signal configuration
+            (api:app=3.7.0) Signal configuration
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 信号配置
+            (api:app=3.7.0) 信号配置
+            </summary>
+        </member>
+        <member name="M:ASEva.SignalConfig.#ctor(System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Signal configuration
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 信号配置
             </summary>
         </member>
         <member name="P:ASEva.SignalConfig.SignalID">
@@ -16540,11 +16670,21 @@
         <member name="T:ASEva.BusSignalInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Bus signal info
+            (api:app=3.7.0) Bus signal info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 总线信号信息
+            (api:app=3.7.0) 总线信号信息
+            </summary>
+        </member>
+        <member name="M:ASEva.BusSignalInfo.#ctor(System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Bus signal info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 总线信号信息
             </summary>
         </member>
         <member name="P:ASEva.BusSignalInfo.SignalID">
@@ -16700,11 +16840,21 @@
         <member name="T:ASEva.BusMessageInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Bus message info
+            (api:app=3.7.0) Bus message info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 总线报文信息
+            (api:app=3.7.0) 总线报文信息
+            </summary>
+        </member>
+        <member name="M:ASEva.BusMessageInfo.#ctor(System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Bus message info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 总线报文信息
             </summary>
         </member>
         <member name="P:ASEva.BusMessageInfo.MessageID">
@@ -16770,11 +16920,21 @@
         <member name="T:ASEva.BusFileInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Bus protocol info
+            (api:app=3.7.0) Bus protocol info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 总线协议信息
+            (api:app=3.7.0) 总线协议信息
+            </summary>
+        </member>
+        <member name="M:ASEva.BusFileInfo.#ctor(System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Bus protocol info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 总线协议信息
             </summary>
         </member>
         <member name="P:ASEva.BusFileInfo.FileID">
@@ -16888,11 +17048,21 @@
         <member name="T:ASEva.BusProtocolFileID">
             \~English
             <summary>
-            (api:app=3.0.0) Bus protocol file ID
+            (api:app=3.7.0) Bus protocol file ID
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 总线协议文件ID
+            (api:app=3.7.0) 总线协议文件ID
+            </summary>
+        </member>
+        <member name="M:ASEva.BusProtocolFileID.#ctor(System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Bus protocol file ID
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 总线协议文件ID
             </summary>
         </member>
         <member name="P:ASEva.BusProtocolFileID.FileName">
@@ -16978,11 +17148,21 @@
         <member name="T:ASEva.BusDeviceID">
             \~English
             <summary>
-            (api:app=3.0.0) Bus device ID
+            (api:app=3.7.0) Bus device ID
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 总线设备ID
+            (api:app=3.7.0) 总线设备ID
+            </summary>
+        </member>
+        <member name="M:ASEva.BusDeviceID.#ctor(System.String,System.Int64,System.Int32)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Bus device ID
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 总线设备ID
             </summary>
         </member>
         <member name="T:ASEva.BusChannelType">
@@ -17078,11 +17258,21 @@
         <member name="T:ASEva.VideoDeviceID">
             \~English
             <summary>
-            (api:app=3.0.0) Video device ID
+            (api:app=3.7.0) Video device ID
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 视频设备ID
+            (api:app=3.7.0) 视频设备ID
+            </summary>
+        </member>
+        <member name="M:ASEva.VideoDeviceID.#ctor(System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Video device ID
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 视频设备ID
             </summary>
         </member>
         <member name="T:ASEva.VideoDataCodec">
@@ -17508,11 +17698,21 @@
         <member name="T:ASEva.BusSignalValue">
             \~English
             <summary>
-            (api:app=3.0.0) Parsed bus signal value and related info
+            (api:app=3.7.0) Parsed bus signal value and related info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 解析总线报文得到的信号值及相关信息
+            (api:app=3.7.0) 解析总线报文得到的信号值及相关信息
+            </summary>
+        </member>
+        <member name="M:ASEva.BusSignalValue.#ctor(System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Parsed bus signal value and related info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 解析总线报文得到的信号值及相关信息
             </summary>
         </member>
         <member name="F:ASEva.BusSignalValue.signalName">
@@ -17926,11 +18126,21 @@
         <member name="T:ASEva.WindowClassInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Window component info
+            (api:app=3.7.0) Window component info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 窗口组件信息
+            (api:app=3.7.0) 窗口组件信息
+            </summary>
+        </member>
+        <member name="M:ASEva.WindowClassInfo.#ctor(System.String,System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Window component info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 窗口组件信息
             </summary>
         </member>
         <member name="P:ASEva.WindowClassInfo.OwnerPluginID">
@@ -18016,11 +18226,21 @@
         <member name="T:ASEva.DialogClassInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Dialog component info
+            (api:app=3.7.0) Dialog component info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 对话框组件信息
+            (api:app=3.7.0) 对话框组件信息
+            </summary>
+        </member>
+        <member name="M:ASEva.DialogClassInfo.#ctor(System.String,System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Dialog component info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 对话框组件信息
             </summary>
         </member>
         <member name="P:ASEva.DialogClassInfo.OwnerPluginID">
@@ -18096,11 +18316,21 @@
         <member name="T:ASEva.ProcessorClassInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Processor component info
+            (api:app=3.7.0) Processor component info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 数据处理组件信息
+            (api:app=3.7.0) 数据处理组件信息
+            </summary>
+        </member>
+        <member name="M:ASEva.ProcessorClassInfo.#ctor(System.String,System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Processor component info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 数据处理组件信息
             </summary>
         </member>
         <member name="P:ASEva.ProcessorClassInfo.OwnerPluginID">
@@ -18206,11 +18436,21 @@
         <member name="T:ASEva.NativeClassInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Native component info
+            (api:app=3.7.0) Native component info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 原生组件信息
+            (api:app=3.7.0) 原生组件信息
+            </summary>
+        </member>
+        <member name="M:ASEva.NativeClassInfo.#ctor(System.String,System.String,System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Native component info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 原生组件信息
             </summary>
         </member>
         <member name="P:ASEva.NativeClassInfo.OwnerPluginID">
@@ -18266,21 +18506,31 @@
         <member name="P:ASEva.NativeClassInfo.LibraryDebugIDs">
             \~English
             <summary>
-            (api:app=3.3.0) Corresponding native plugin's debug ID
+            Corresponding native plugin's debug ID
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.3.0) 绑定的各原生库的调试编号
+            绑定的各原生库的调试编号
             </summary>
         </member>
         <member name="T:ASEva.DeviceClassInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Device component info
+            (api:app=3.7.0) Device component info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 设备组件信息
+            (api:app=3.7.0) 设备组件信息
+            </summary>
+        </member>
+        <member name="M:ASEva.DeviceClassInfo.#ctor(System.String,System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Device component info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 设备组件信息
             </summary>
         </member>
         <member name="P:ASEva.DeviceClassInfo.OwnerPluginID">
@@ -18316,11 +18566,21 @@
         <member name="T:ASEva.TaskClassInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Task component info
+            (api:app=3.7.0) Task component info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 独立任务组件信息
+            (api:app=3.7.0) 独立任务组件信息
+            </summary>
+        </member>
+        <member name="M:ASEva.TaskClassInfo.#ctor(System.String,System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Task component info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 独立任务组件信息
             </summary>
         </member>
         <member name="P:ASEva.TaskClassInfo.OwnerPluginID">
@@ -18586,11 +18846,21 @@
         <member name="T:ASEva.SignalTreeNode">
             \~English
             <summary>
-            (api:app=3.0.0) Node in signal tree
+            (api:app=3.7.0) Node in signal tree
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 信号树节点
+            (api:app=3.7.0) 信号树节点
+            </summary>
+        </member>
+        <member name="M:ASEva.SignalTreeNode.#ctor(ASEva.SignalTreeNodeType,System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Node in signal tree
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 信号树节点
             </summary>
         </member>
         <member name="P:ASEva.SignalTreeNode.Type">
@@ -18736,11 +19006,21 @@
         <member name="T:ASEva.PluginPackInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Information of plugin pack
+            (api:app=3.7.0) Information of plugin pack
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 插件包信息
+            (api:app=3.7.0) 插件包信息
+            </summary>
+        </member>
+        <member name="M:ASEva.PluginPackInfo.#ctor(System.String,System.String,System.Version)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Information of plugin pack
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 插件包信息
             </summary>
         </member>
         <member name="P:ASEva.PluginPackInfo.ID">
@@ -18926,11 +19206,21 @@
         <member name="T:ASEva.InstallPluginLibraryInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Information of plugin related library
+            (api:app=3.7.0) Information of plugin related library
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 插件关联库的信息
+            (api:app=3.7.0) 插件关联库的信息
+            </summary>
+        </member>
+        <member name="M:ASEva.InstallPluginLibraryInfo.#ctor(System.String,System.String,System.Version)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Information of plugin related library
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 插件关联库的信息
             </summary>
         </member>
         <member name="P:ASEva.InstallPluginLibraryInfo.LibraryID">
@@ -18986,21 +19276,31 @@
         <member name="P:ASEva.InstallPluginLibraryInfo.InstalledStatus">
             \~English
             <summary>
-            (api:app=3.0.6) Status of installed plugin
+            Status of installed plugin
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.6) 已安装插件的状态
+            已安装插件的状态
             </summary>
         </member>
         <member name="T:ASEva.InstallPluginDriverInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Information of plugin related driver and environment pack
+            (api:app=3.7.0) Information of plugin related driver and environment pack
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 插件关联驱动和环境的信息
+            (api:app=3.7.0) 插件关联驱动和环境的信息
+            </summary>
+        </member>
+        <member name="M:ASEva.InstallPluginDriverInfo.#ctor(System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Information of plugin related driver and environment pack
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 插件关联驱动和环境的信息
             </summary>
         </member>
         <member name="P:ASEva.InstallPluginDriverInfo.DriverID">
@@ -19036,11 +19336,21 @@
         <member name="T:ASEva.LogMessage">
             \~English
             <summary>
-            (api:app=3.0.0) Log message
+            (api:app=3.7.0) Log message
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 清单信息
+            (api:app=3.7.0) 清单信息
+            </summary>
+        </member>
+        <member name="M:ASEva.LogMessage.#ctor(ASEva.LogLevel,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Log message
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 清单信息
             </summary>
         </member>
         <member name="P:ASEva.LogMessage.Type">
@@ -19231,16 +19541,6 @@
             每秒增加的CPU计数
             </summary>
         </member>
-        <member name="M:ASEva.CPUTimeModel.#ctor">
-            \~English
-            <summary>
-            Constructor
-            </summary>
-            \~Chinese
-            <summary>
-            默认构造函数
-            </summary>
-        </member>
         <member name="T:ASEva.PosixTimeModel">
             \~English
             <summary>
@@ -19269,16 +19569,6 @@
             \~Chinese
             <summary>
             CPU时间转为Posix时间的时间比例，应为1.0左右
-            </summary>
-        </member>
-        <member name="M:ASEva.PosixTimeModel.#ctor">
-            \~English
-            <summary>
-            Default constructor
-            </summary>
-            \~Chinese
-            <summary>
-            默认构造函数
             </summary>
         </member>
         <member name="T:ASEva.VideoFrameGetMode">
@@ -19566,11 +19856,21 @@
         <member name="T:ASEva.ConsoleClassInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Console component info
+            (api:app=3.7.0) Console component info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 控制台组件信息
+            (api:app=3.7.0) 控制台组件信息
+            </summary>
+        </member>
+        <member name="M:ASEva.ConsoleClassInfo.#ctor(System.String,System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Console component info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 控制台组件信息
             </summary>
         </member>
         <member name="P:ASEva.ConsoleClassInfo.OwnerPluginID">
@@ -19663,16 +19963,6 @@
             是否按采集文件帧率对齐
             </summary>
         </member>
-        <member name="M:ASEva.VideoChannelInfo.#ctor">
-            \~English
-            <summary>
-            Constructor
-            </summary>
-            \~Chinese
-            <summary>
-            默认构造函数
-            </summary>
-        </member>
         <member name="T:ASEva.ModuleRelatedUIType">
             \~English
             <summary>
@@ -19726,11 +20016,21 @@
         <member name="T:ASEva.ModuleRelatedUIEntry">
             \~English
             <summary>
-            (api:app=3.0.0) Entry arguments of component related UI
+            (api:app=3.7.0) Entry arguments of component related UI
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 组件相关用户界面的入口参数
+            (api:app=3.7.0) 组件相关用户界面的入口参数
+            </summary>
+        </member>
+        <member name="M:ASEva.ModuleRelatedUIEntry.#ctor(ASEva.ModuleRelatedUIType,System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Entry arguments of component related UI
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 组件相关用户界面的入口参数
             </summary>
         </member>
         <member name="P:ASEva.ModuleRelatedUIEntry.Type">
@@ -22810,11 +23110,21 @@
         <member name="T:ASEva.AppBasicInfo">
             \~English
             <summary>
-            (api:app=3.0.0) Application's basic info
+            (api:app=3.7.0) Application's basic info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 应用程序的基本信息
+            (api:app=3.7.0) 应用程序的基本信息
+            </summary>
+        </member>
+        <member name="M:ASEva.AppBasicInfo.#ctor(System.String,System.Byte[],System.Version,System.Version,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Application's basic info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 应用程序的基本信息
             </summary>
         </member>
         <member name="P:ASEva.AppBasicInfo.AppName">
@@ -23229,13 +23539,13 @@
             Prepare driver or environment pack, and return the executable path for installation
             </summary>
             <param name="driverID">Related driver ID</param>
-            <returns>1) Executable path for installation. 2) Error message, null if succeeded</returns>
+            <returns>1) Executable path for installation. 2) Error message, null if initialization succeeded</returns>
             \~Chinese
             <summary>
             准备驱动和环境等的文件，并返回安装文件的运行路径
             </summary>
             <param name="driverID">插件关联的驱动ID</param>
-            <returns>1. 安装文件的运行路径; 2. 错误信息，若安装成功则为null</returns>
+            <returns>1. 安装文件的运行路径; 2. 错误信息，若初始化成功则为null</returns>
         </member>
     </members>
 </doc>
