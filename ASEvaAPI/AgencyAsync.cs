@@ -15,8 +15,8 @@ namespace ASEva
         Task AddDataLayer(String layer);
         Task AddPointCloudReference(int channel);
         Task AddSignalReference(String signalID);
-        Task<byte[]> CallNativeFunction(object caller, String nativeClassID, String funcID, byte[] input);
-        Task<TimeWithSession> ConvertTimeIntoSession(double timeline);
+        Task<byte[]?> CallNativeFunction(object caller, String nativeClassID, String funcID, byte[]? input);
+        Task<TimeWithSession?> ConvertTimeIntoSession(double timeline);
         Task DeleteDataLayer(String layer);
         Task<byte[][]> DequeueDataFromNative(object caller, String nativeClassID, String dataID);
         Task DisableAllConfigs();
@@ -25,139 +25,139 @@ namespace ASEva
         Task DisablePlugin(String packID);
         Task EnablePlugin(String packID);
         Task EnqueueDataToNative(object caller, String nativeClassID, String dataID, byte[] data);
-        Task<string[]> GetAllChannelGuestSyncKeys();
-        Task<string[]> GetAllChannelMonitoringKeys();
-        Task<string[]> GetAllChannelServerSyncMonitoringKeys();
-        Task<Dictionary<String, DeviceStatusDetail>> GetAllDeviceStatus();
-        Task<Dictionary<string, double>> GetAllRawChannelDelayConfigs();
+        Task<string[]?> GetAllChannelGuestSyncKeys();
+        Task<string[]?> GetAllChannelMonitoringKeys();
+        Task<string[]?> GetAllChannelServerSyncMonitoringKeys();
+        Task<Dictionary<String, DeviceStatusDetail>?> GetAllDeviceStatus();
+        Task<Dictionary<string, double>?> GetAllRawChannelDelayConfigs();
         Task<ApplicationGUI> GetAppGUI();
-        Task<String> GetAppID();
+        Task<String?> GetAppID();
         Task<Language> GetAppLanguage();
         Task<ApplicationMode> GetAppMode();
         Task<ApplicationStatus> GetAppStatus();
         Task<double> GetAudioChannelDelayConfig();
         Task<(bool, double[], double[])> GetAudioChannelStatus(uint? toleranceMillisecond);
-        Task<AudioDriverInfo[]> GetAudioDrivers();
-        Task<AudioDeviceInfo[]> GetAudioRecordDevices(String driverID);
-        Task<AudioDeviceInfo[]> GetAudioReplayDevices(String driverID);
-        Task<int[]> GetAvailableBusChannels();
-        Task<String[]> GetAvailableRawChannels();
-        Task<String[]> GetAvailableSampleChannels();
-        Task<int[]> GetAvailableVideoChannels();
+        Task<AudioDriverInfo[]?> GetAudioDrivers();
+        Task<AudioDeviceInfo[]?> GetAudioRecordDevices(String driverID);
+        Task<AudioDeviceInfo[]?> GetAudioReplayDevices(String driverID);
+        Task<int[]?> GetAvailableBusChannels();
+        Task<String[]?> GetAvailableRawChannels();
+        Task<String[]?> GetAvailableSampleChannels();
+        Task<int[]?> GetAvailableVideoChannels();
         Task<BufferRange> GetBufferRange();
         Task<double> GetBusChannelDelayConfig(int busChannel);
-        Task<BusChannelInfo[]> GetBusChannelsInfo(SessionIdentifier session);
+        Task<BusChannelInfo[]?> GetBusChannelsInfo(SessionIdentifier session);
         Task<bool> GetBusChannelStatus(int busChannel, uint? toleranceMillisecond);
-        Task<Dictionary<BusDeviceID, BusDeviceInfo>> GetBusDevices();
+        Task<Dictionary<BusDeviceID, BusDeviceInfo>?> GetBusDevices();
         Task<float> GetBusMessageFPS(int busChannel, uint localID);
-        Task<BusMessageInfo> GetBusMessageInfoByLocalID(int busChannel, uint localID);
-        Task<BusMessageInfo> GetBusMessageInfo(String busMessageID);
+        Task<BusMessageInfo?> GetBusMessageInfoByLocalID(int busChannel, uint localID);
+        Task<BusMessageInfo?> GetBusMessageInfo(String busMessageID);
         Task<double?> GetBusPayloadPercentage(int busChannel);
         Task<int?> GetBusProtocolFileChannel(String protocolName);
-        Task<BusProtocolFileID[]> GetBusProtocolFileIDList();
+        Task<BusProtocolFileID[]?> GetBusProtocolFileIDList();
         Task<BusProtocolFileState> GetBusProtocolFileState(BusProtocolFileID fileID);
-        Task<BusSignalInfo> GetBusSignalInfo(String busSignalID);
-        Task<String> GetChannelAliasName(String channelID);
-        Task<Dictionary<String, String>> GetChannelAliasTable();
+        Task<BusSignalInfo?> GetBusSignalInfo(String busSignalID);
+        Task<String?> GetChannelAliasName(String channelID);
+        Task<Dictionary<String, String>?> GetChannelAliasTable();
         Task<bool> GetChannelGuestSyncFlag(String id);
-        Task<Timestamp[]> GetChannelLatestTimestamps(String channelID);
+        Task<Timestamp[]?> GetChannelLatestTimestamps(String channelID);
         Task<bool> GetChannelMonitoringFlag(String id);
         Task<bool> GetChannelServerSyncMonitoringFlag(String id);
-        Task<Dictionary<String, bool>> GetChannelStatusTable(uint? tolerance);
-        Task<Dictionary<String, TimeOffsetSync>> GetChannelSyncTable();
-        Task<GeneralDeviceStatus[]> GetChildDeviceStatus(String id);
-        Task<ConsoleClassInfo> GetConsoleClassInfo(String consoleClassID);
-        Task<Dictionary<string, ConsoleClassInfo>> GetConsoleClassTable();
+        Task<Dictionary<String, bool>?> GetChannelStatusTable(uint? tolerance);
+        Task<Dictionary<String, TimeOffsetSync>?> GetChannelSyncTable();
+        Task<GeneralDeviceStatus[]?> GetChildDeviceStatus(String id);
+        Task<ConsoleClassInfo?> GetConsoleClassInfo(String consoleClassID);
+        Task<Dictionary<string, ConsoleClassInfo>?> GetConsoleClassTable();
         Task<(ConfigStatus, ConfigStatus[])> GetConsoleRelatedModulesConfigStatus(String consoleClassID);
         Task<ulong> GetCPUTick();
         Task<ulong> GetCPUTicksPerSecond();
         Task<double> GetCPUTime();
-        Task<CPUTimeModel> GetCPUTimeModel(SessionIdentifier session);
-        Task<String> GetCurrentDataGeneration();
-        Task<String> GetCurrentDataLayer();
+        Task<CPUTimeModel?> GetCPUTimeModel(SessionIdentifier session);
+        Task<String?> GetCurrentDataGeneration();
+        Task<String?> GetCurrentDataLayer();
         Task<SessionIdentifier?> GetCurrentOnlineSession();
-        Task<String> GetCurrentSessionGUID();
-        Task<String[]> GetDataLayers();
-        Task<Dictionary<String, DeviceClassInfo>> GetDeviceClassTable();
+        Task<String?> GetCurrentSessionGUID();
+        Task<String[]?> GetDataLayers();
+        Task<Dictionary<String, DeviceClassInfo>?> GetDeviceClassTable();
         Task<GeneralDeviceStatus> GetDeviceStatus(String id);
-        Task<(ConfigStatus, ConfigStatus[])> GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID);
-        Task<object[]> GetEventHandles();
-        Task<EventInfo> GetEventInfo(object eventHandle);
-        Task<String[]> GetEventTypeNames();
-        Task<SessionIdentifier[]> GetFilteredSessionList();
+        Task<(ConfigStatus, ConfigStatus[])> GetDialogRelatedModulesConfigStatus(String dialogClassID, String? transformID);
+        Task<object[]?> GetEventHandles();
+        Task<EventInfo?> GetEventInfo(object eventHandle);
+        Task<String[]?> GetEventTypeNames();
+        Task<SessionIdentifier[]?> GetFilteredSessionList();
         Task<double> GetFilteredSessionListTotalLength();
-        Task<SessionIdentifier[]> GetFinishedSessions(String generation);
-        Task<Dictionary<String, String>> GetFrameworkThirdPartyNotices();
-        Task<String[]> GetGenerationList();
+        Task<SessionIdentifier[]?> GetFinishedSessions(String generation);
+        Task<Dictionary<String, String>?> GetFrameworkThirdPartyNotices();
+        Task<String[]?> GetGenerationList();
         Task<GenerationProcessStatus?> GetGenerationProcessStatus(SessionIdentifier session, String generation);
-        Task<SessionIdentifier[]> GetGenerationSessions(String generationID);
-        Task<String> GetGlobalParameter(String key, String defaultValue);
-        Task<String[]> GetGlobalParameterKeys();
-        Task<String> GetGlobalVariable(String key, String defaultValue);
-        Task<String[]> GetGlobalVariableKeys();
-        Task<PosixTimeModel> GetGNSSPosixTimeModel(SessionIdentifier session);
-        Task<GPUDecoderTestResults> GetGPUDecoderTestResults();
-        Task<GraphData> GetGraphData(SessionIdentifier session, int graphID);
-        Task<GraphicCardInfo[]> GetGraphicCardInfos();
-        Task<int[]> GetGraphIDList();
+        Task<SessionIdentifier[]?> GetGenerationSessions(String generationID);
+        Task<String?> GetGlobalParameter(String key, String? defaultValue);
+        Task<String[]?> GetGlobalParameterKeys();
+        Task<String?> GetGlobalVariable(String key, String? defaultValue);
+        Task<String[]?> GetGlobalVariableKeys();
+        Task<PosixTimeModel?> GetGNSSPosixTimeModel(SessionIdentifier session);
+        Task<GPUDecoderTestResults?> GetGPUDecoderTestResults();
+        Task<GraphData?> GetGraphData(SessionIdentifier session, int graphID);
+        Task<GraphicCardInfo[]?> GetGraphicCardInfos();
+        Task<int[]?> GetGraphIDList();
         Task<int?> GetGraphIDWithTitle(String title);
-        Task<String> GetGraphTitle(int graphID);
-        Task<PosixTimeModel> GetHostPosixTimeModel(SessionIdentifier session);
+        Task<String?> GetGraphTitle(int graphID);
+        Task<PosixTimeModel?> GetHostPosixTimeModel(SessionIdentifier session);
         Task<double> GetInterestTarget();
         Task<double> GetInterestTime();
         Task<DateTime?> GetInterestTimestamp();
         Task<DateTime?> GetInternetNTPTime();
-        Task<int[]> GetLicensedFunctionIndices();
-        Task<String> GetLicenseInfo();
+        Task<int[]?> GetLicensedFunctionIndices();
+        Task<String?> GetLicenseInfo();
         Task<DateTime?> GetLocalDateTime(SessionIdentifier session, double timeOffset, bool useGNSS);
-        Task<LogMessage[]> GetLogMessages();
-        Task<String[]> GetManualTriggerNames();
-        Task<String> GetManualTriggerName(int index);
-        Task<ConfigStatus[]> GetModuleChildConfigStatus(object caller, String classID);
-        Task<String> GetModuleConfig(object caller, String classID);
-        Task<(ConfigStatus, String)> GetModuleConfigStatus(object caller, String classID);
-        Task<ModuleDetails> GetModuleDetails(String classID);
-        Task<Dictionary<String, NativeClassInfo>> GetNativeClassTable();
-        Task<Dictionary<String, Version>> GetNativePluginVersions(NativeLibraryType type);
-        Task<Dictionary<String, String>> GetPluginGuestSyncTable();
-        Task<String[]> GetPluginPackIDList();
-        Task<PluginPackInfo> GetPluginPackInfo(String packID);
-        Task<Dictionary<String, Dictionary<String, String>>> GetPluginThirdPartyNotices();
-        Task<(byte[], Timestamp?, CameraInfo)> GetPreviewJpeg(int channel, double timeline, double maxGap);
-        Task<Dictionary<String, ProcessorClassInfo>> GetProcessorClassTable();
+        Task<LogMessage[]?> GetLogMessages();
+        Task<String[]?> GetManualTriggerNames();
+        Task<String?> GetManualTriggerName(int index);
+        Task<ConfigStatus[]?> GetModuleChildConfigStatus(object caller, String classID);
+        Task<String?> GetModuleConfig(object caller, String classID);
+        Task<(ConfigStatus, String?)> GetModuleConfigStatus(object caller, String classID);
+        Task<ModuleDetails?> GetModuleDetails(String classID);
+        Task<Dictionary<String, NativeClassInfo>?> GetNativeClassTable();
+        Task<Dictionary<String, Version>?> GetNativePluginVersions(NativeLibraryType type);
+        Task<Dictionary<String, String>?> GetPluginGuestSyncTable();
+        Task<String[]?> GetPluginPackIDList();
+        Task<PluginPackInfo?> GetPluginPackInfo(String packID);
+        Task<Dictionary<String, Dictionary<String, String>>?> GetPluginThirdPartyNotices();
+        Task<(byte[]?, Timestamp?, CameraInfo?)> GetPreviewJpeg(int channel, double timeline, double maxGap);
+        Task<Dictionary<String, ProcessorClassInfo>?> GetProcessorClassTable();
         Task<double> GetRawChannelDelayConfig(String id);
         Task<bool> GetRawChannelStatus(String channelID, uint? toleranceMillisecond);
         Task<(bool, double[], double[])> GetSampleChannelStatus(String channelID, uint? toleranceMillisecond);
-        Task<List<String>> GetSampleTitle(String channelID);
-        Task<String[]> GetSceneIDList();
-        Task<Dictionary<String, SceneTitle>> GetSceneTitleTable();
-        Task<String> GetSessionComment(SessionIdentifier session);
-        Task<Dictionary<SessionIdentifier, SessionFilterFlags>> GetSessionFilterTable();
-        Task<String> GetSessionFolderName(SessionIdentifier session);
-        Task<String[]> GetSessionGenerations(SessionIdentifier session);
+        Task<List<String>?> GetSampleTitle(String channelID);
+        Task<String[]?> GetSceneIDList();
+        Task<Dictionary<String, SceneTitle>?> GetSceneTitleTable();
+        Task<String?> GetSessionComment(SessionIdentifier session);
+        Task<Dictionary<SessionIdentifier, SessionFilterFlags>?> GetSessionFilterTable();
+        Task<String?> GetSessionFolderName(SessionIdentifier session);
+        Task<String[]?> GetSessionGenerations(SessionIdentifier session);
         Task<bool> GetSessionHostSync(SessionIdentifier session);
-        Task<String> GetSessionLayer(SessionIdentifier session);
+        Task<String?> GetSessionLayer(SessionIdentifier session);
         Task<double?> GetSessionLength(SessionIdentifier session);
-        Task<SessionIdentifier[]> GetSessionList();
+        Task<SessionIdentifier[]?> GetSessionList();
         Task<double> GetSessionListTotalLength();
-        Task<Dictionary<String, String>> GetSessionProperties(SessionIdentifier session);
-        Task<String> GetSessionSearchKey();
+        Task<Dictionary<String, String>?> GetSessionProperties(SessionIdentifier session);
+        Task<String?> GetSessionSearchKey();
         Task<double?> GetSessionTimeline(SessionIdentifier session);
-        Task<String> GetSignalName(String signalID, bool fullName);
-        Task<String[]> GetSignalNamesOfBusMessage(String messageID);
-        Task<SignalTreeNode[]> GetSignalTree();
-        Task<String> GetSystemStatus(SystemStatus status);
-        Task<String> GetSystemStatusDetails(SystemStatus status);
-        Task<TaskClassInfo> GetTaskClassInfo(String taskClassID);
-        Task<Dictionary<String, TaskClassInfo>> GetTaskClassTable();
+        Task<String?> GetSignalName(String signalID, bool fullName);
+        Task<String[]?> GetSignalNamesOfBusMessage(String messageID);
+        Task<SignalTreeNode[]?> GetSignalTree();
+        Task<String?> GetSystemStatus(SystemStatus status);
+        Task<String?> GetSystemStatusDetails(SystemStatus status);
+        Task<TaskClassInfo?> GetTaskClassInfo(String taskClassID);
+        Task<Dictionary<String, TaskClassInfo>?> GetTaskClassTable();
         Task<DateTime?> GetUTCDateTime(SessionIdentifier session, double timeOffset, bool useGNSS);
-        Task<Dictionary<String, Version>> GetVersionTable();
+        Task<Dictionary<String, Version>?> GetVersionTable();
         Task<double> GetVideoChannelDelayConfig(int channel);
-        Task<VideoChannelInfo[]> GetVideoChannelsInfo(SessionIdentifier session);
+        Task<VideoChannelInfo[]?> GetVideoChannelsInfo(SessionIdentifier session);
         Task<(bool, double[], double[])> GetVideoChannelStatus(int channel, uint? toleranceMillisecond);
-        Task<Dictionary<VideoDeviceID, VideoDeviceInfo>> GetVideoDevices();
-        Task<(CommonImage, Timestamp?, CameraInfo)> GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha);
-        Task<CommonImage> GetVideoFrameThumbnail(int channel, double timeline, double maxGap, bool withAlpha);
+        Task<Dictionary<VideoDeviceID, VideoDeviceInfo>?> GetVideoDevices();
+        Task<(CommonImage?, Timestamp?, CameraInfo?)> GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha);
+        Task<CommonImage?> GetVideoFrameThumbnail(int channel, double timeline, double maxGap, bool withAlpha);
         Task<IntSize?> GetVideoRawSize(int channel, double timeline);
         Task<Samples.SpecialCameraType> GetVideoSpecialType(int channel);
         Task<bool> IsBusMessageBound(string busMessageID);
@@ -166,11 +166,11 @@ namespace ASEva
         Task<bool> IsInternetConnected();
         Task<bool> IsMessageValid(String messageID, bool optional);
         Task<bool> IsPRCWebPreferred();
-        Task<(bool, String)> IsReady();
+        Task<(bool, String?)> IsReady();
         Task<bool> IsSampleChannelConflict(string channelID);
         Task<bool> IsSignalValid(String signalID, bool optional);
         Task<bool> IsVideoDataAvailable(int channel, uint? tolerance);
-        Task<BusSignalValue[]> ParseBusMessage(BusMessageSample busMessage);
+        Task<BusSignalValue[]?> ParseBusMessage(BusMessageSample busMessage);
         Task PublishData(String dataID, byte[] data);
         Task RefreshGenerations();
         Task RefreshSessions();
@@ -182,9 +182,9 @@ namespace ASEva
         Task RemoveSignalReference(String signalID);
         Task ResetGPUDecoderTestResults();
         Task RunConsole(object caller, string consoleClassID);
-        Task<(TaskResult, String)> RunStandaloneTask(object caller, String taskClassID, String config);
+        Task<(TaskResult, String?)> RunStandaloneTask(object caller, String taskClassID, String config);
         Task SendBusMessage(BusMessage message);
-        Task<byte[]> SendBusMessageBound(String messageID, uint? interval);
+        Task<byte[]?> SendBusMessageBound(String messageID, uint? interval);
         Task SendManualTrigger(int channel);
         Task SendRawData(String channelID, double[] values, byte[] binary);
         Task SetAudioChannelDelayConfig(double delay);
@@ -193,7 +193,7 @@ namespace ASEva
         Task SetChannelMonitoringFlag(String id, bool monitoring);
         Task SetChannelServerSyncMonitoringFlag(String id, bool monitoring);
         Task<bool> SetControlFlag(String controllerName, bool enabled);
-        Task SetCurrentDataLayer(String layer);
+        Task SetCurrentDataLayer(String? layer);
         Task SetEventComment(object eventHandle, String comment);
         Task SetGlobalParameter(String key, String value);
         Task SetGlobalVariable(String key, String value);
@@ -209,16 +209,16 @@ namespace ASEva
         Task SetSessionSearchKeyword(String keyword);
         Task SetTargetReplaySpeed(double speed);
         Task SetVideoChannelDelayConfig(int channel, double delay);
-        Task<bool> StartOffline(bool force, bool previewOnly, String genDirName);
+        Task<bool> StartOffline(bool force, bool previewOnly, String? genDirName);
         Task<bool> StartOnlineWithController(String controllerName, bool previewOnly);
-        Task<bool> StartOnline(bool force, bool previewOnly, String sessionDirName);
-        Task<bool> StartRemote(bool force, bool previewOnly, String sessionDirName, ulong startPosixTime);
+        Task<bool> StartOnline(bool force, bool previewOnly, String? sessionDirName);
+        Task<bool> StartRemote(bool force, bool previewOnly, String? sessionDirName, ulong startPosixTime);
         Task<bool> StartRemoteWithController(String controllerName, bool previewOnly, ulong startPosixTime);
         Task<bool> StartReplay(bool force, double startTimeline, double? interestTarget);
         Task<bool> StopRunningWithController(String controllerName);
         Task<bool> StopRunning(bool force, bool editRecordedSession);
-        Task<DataSubscriber> SubscribeData(String dataID, int bufferLength, int timeout);
-        Task<bool> SwitchAppMode(String controllerName, ApplicationMode mode, int waitSecond);
+        Task<DataSubscriber?> SubscribeData(String dataID, int bufferLength, int timeout);
+        Task<bool> SwitchAppMode(String? controllerName, ApplicationMode mode, int waitSecond);
     }
 
     /// \~English
@@ -336,7 +336,7 @@ namespace ASEva
         /// <param name="funcID">函数ID</param>
         /// <param name="input">函数输入数据</param>
         /// <returns>函数输出数据，若未找到相应插件或函数ID无响应则返回null</returns>
-        public static Task<byte[]> CallNativeFunction(object caller, String nativeClassID, String funcID, byte[] input)
+        public static Task<byte[]?> CallNativeFunction(object caller, String nativeClassID, String funcID, byte[]? input)
         {
             return Handler.CallNativeFunction(caller, nativeClassID, funcID, input);
         }
@@ -353,7 +353,7 @@ namespace ASEva
         /// </summary>
         /// <param name="timeline">时间线上的时间点</param>
         /// <returns>在session中的时间，若超出范围则返回null</returns>
-        public static Task<TimeWithSession> ConvertTimeIntoSession(double timeline)
+        public static Task<TimeWithSession?> ConvertTimeIntoSession(double timeline)
         {
             return Handler.ConvertTimeIntoSession(timeline);
         }
@@ -379,7 +379,7 @@ namespace ASEva
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.CommonWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , etc.</param>
         /// <param name="nativeClassID">Native class ID</param>
-        /// <param name="dataID">Data ID, should not be null</param>
+        /// <param name="dataID">Data ID</param>
         /// <returns>All received binary data</returns>
         /// \~Chinese
         /// <summary>
@@ -387,7 +387,7 @@ namespace ASEva
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.CommonWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
-        /// <param name="dataID">数据ID，不可为null</param>
+        /// <param name="dataID">数据ID</param>
         /// <returns>所有新数据</returns>
         public static Task<byte[][]> DequeueDataFromNative(object caller, String nativeClassID, String dataID)
         {
@@ -473,16 +473,16 @@ namespace ASEva
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.CommonWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , etc.</param>
         /// <param name="nativeClassID">Native class ID</param>
-        /// <param name="dataID">Data ID, should not be null</param>
-        /// <param name="data">Binary data, should not be null</param>
+        /// <param name="dataID">Data ID</param>
+        /// <param name="data">Binary data</param>
         /// \~Chinese
         /// <summary>
         /// 发送数据至原生插件
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.CommonWorkflow , ASEva.Plugin , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel等</param>
         /// <param name="nativeClassID">原生组件ID</param>
-        /// <param name="dataID">数据ID，不可为null</param>
-        /// <param name="data">数据，不可为null</param>
+        /// <param name="dataID">数据ID</param>
+        /// <param name="data">数据</param>
         public static Task EnqueueDataToNative(object caller, String nativeClassID, String dataID, byte[] data)
         {
             return Handler.EnqueueDataToNative(caller, nativeClassID, dataID, data);
@@ -498,7 +498,7 @@ namespace ASEva
         /// 获取已配置为客机同步的所有ID
         /// </summary>
         /// <returns>已配置为客机同步的所有ID列表</returns>
-        public static Task<string[]> GetAllChannelGuestSyncKeys()
+        public static Task<string[]?> GetAllChannelGuestSyncKeys()
         {
             return Handler.GetAllChannelGuestSyncKeys();
         }
@@ -513,7 +513,7 @@ namespace ASEva
         /// (api:app=3.2.14) 获取所有正在监控有无数据的通道ID
         /// </summary>
         /// <returns>正在监控有无数据的通道ID列表</returns>
-        public static Task<string[]> GetAllChannelMonitoringKeys()
+        public static Task<string[]?> GetAllChannelMonitoringKeys()
         {
             return Handler.GetAllChannelMonitoringKeys();
         }
@@ -528,7 +528,7 @@ namespace ASEva
         /// (api:app=3.2.14) 获取所有正在监控数据与授时服务器同步的监控ID
         /// </summary>
         /// <returns>正在监控数据与授时服务器同步的通道ID列表</returns>
-        public static Task<string[]> GetAllChannelServerSyncMonitoringKeys()
+        public static Task<string[]?> GetAllChannelServerSyncMonitoringKeys()
         {
             return Handler.GetAllChannelServerSyncMonitoringKeys();
         }
@@ -543,7 +543,7 @@ namespace ASEva
         /// 获取所有设备状态
         /// </summary>
         /// <returns>设备状态表，键为设备的原生类型ID或组件ID</returns>
-        public static Task<Dictionary<String, DeviceStatusDetail>> GetAllDeviceStatus()
+        public static Task<Dictionary<String, DeviceStatusDetail>?> GetAllDeviceStatus()
         {
             return Handler.GetAllDeviceStatus();
         }
@@ -558,7 +558,7 @@ namespace ASEva
         /// 获取所有原始数据通道延迟配置
         /// </summary>
         /// <returns>所有原始数据通道的延迟配置，单位毫秒</returns>
-        public static Task<Dictionary<string, double>> GetAllRawChannelDelayConfigs()
+        public static Task<Dictionary<string, double>?> GetAllRawChannelDelayConfigs()
         {
             return Handler.GetAllRawChannelDelayConfigs();
         }
@@ -588,7 +588,7 @@ namespace ASEva
         /// 获取应用程序ID
         /// </summary>
         /// <returns>应用程序ID</returns>
-        public static Task<String> GetAppID()
+        public static Task<String?> GetAppID()
         {
             return Handler.GetAppID();
         }
@@ -674,13 +674,13 @@ namespace ASEva
         /// <summary>
         /// Get information of all registered audio drivers
         /// </summary>
-        /// <returns>Information of all registered audio drivers, null if none registered</returns>
+        /// <returns>Information of all registered audio drivers</returns>
         /// \~Chinese
         /// <summary>
         /// 获取所有已注册的音频驱动信息
         /// </summary>
-        /// <returns>已注册的音频驱动信息列表，若未注册任何有效驱动则返回null</returns>
-        public static Task<AudioDriverInfo[]> GetAudioDrivers()
+        /// <returns>已注册的音频驱动信息列表</returns>
+        public static Task<AudioDriverInfo[]?> GetAudioDrivers()
         {
             return Handler.GetAudioDrivers();
         }
@@ -690,14 +690,14 @@ namespace ASEva
         /// Get information of all audio recorders related to the specified driver
         /// </summary>
         /// <param name="driverID">Driver ID</param>
-        /// <returns>Information of all audio recorders, null if the driver is not found or there's no recorders related</returns>
+        /// <returns>Information of all audio recorders, null if the driver is not found</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定驱动下的音频采集设备信息列表
         /// </summary>
         /// <param name="driverID">音频驱动ID</param>
-        /// <returns>音频采集设备信息列表，若无该驱动或驱动下无采集设备则返回null</returns>
-        public static Task<AudioDeviceInfo[]> GetAudioRecordDevices(String driverID)
+        /// <returns>音频采集设备信息列表，若无该驱动则返回null</returns>
+        public static Task<AudioDeviceInfo[]?> GetAudioRecordDevices(String driverID)
         {
             return Handler.GetAudioRecordDevices(driverID);
         }
@@ -707,14 +707,14 @@ namespace ASEva
         /// Get information of all audio players related to the specified driver
         /// </summary>
         /// <param name="driverID">Driver ID</param>
-        /// <returns>Information of all audio players, null if the driver is not found or there's no players related</returns>
+        /// <returns>Information of all audio players, null if the driver is not found</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定驱动下的音频回放设备信息列表
         /// </summary>
         /// <param name="driverID">音频驱动ID</param>
-        /// <returns>音频回放设备信息列表，若无该驱动或驱动下无回放设备则返回null</returns>
-        public static Task<AudioDeviceInfo[]> GetAudioReplayDevices(String driverID)
+        /// <returns>音频回放设备信息列表，若无该驱动则返回null</returns>
+        public static Task<AudioDeviceInfo[]?> GetAudioReplayDevices(String driverID)
         {
             return Handler.GetAudioReplayDevices(driverID);
         }
@@ -729,7 +729,7 @@ namespace ASEva
         /// 获取所有有效的总线通道
         /// </summary>
         /// <returns>有效的总线通道列表，值为1~16</returns>
-        public static Task<int[]> GetAvailableBusChannels()
+        public static Task<int[]?> GetAvailableBusChannels()
         {
             return Handler.GetAvailableBusChannels();
         }
@@ -744,7 +744,7 @@ namespace ASEva
         /// 获取所有有效的原始数据通道
         /// </summary>
         /// <returns>有效的原始数据通道列表，值为通道ID</returns>
-        public static Task<String[]> GetAvailableRawChannels()
+        public static Task<String[]?> GetAvailableRawChannels()
         {
             return Handler.GetAvailableRawChannels();
         }
@@ -759,7 +759,7 @@ namespace ASEva
         /// 获取所有有效的样本数据通道
         /// </summary>
         /// <returns>有效的样本数据通道列表，值为通道ID</returns>
-        public static Task<String[]> GetAvailableSampleChannels()
+        public static Task<String[]?> GetAvailableSampleChannels()
         {
             return Handler.GetAvailableSampleChannels();
         }
@@ -774,7 +774,7 @@ namespace ASEva
         /// 获取所有有效的视频通道
         /// </summary>
         /// <returns>有效的视频通道列表，值为0~23</returns>
-        public static Task<int[]> GetAvailableVideoChannels()
+        public static Task<int[]?> GetAvailableVideoChannels()
         {
             return Handler.GetAvailableVideoChannels();   
         }
@@ -823,7 +823,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>该session的所有总线通道的信息，若不存在则返回null</returns>
-        public static Task<BusChannelInfo[]> GetBusChannelsInfo(SessionIdentifier session)
+        public static Task<BusChannelInfo[]?> GetBusChannelsInfo(SessionIdentifier session)
         {
             return Handler.GetBusChannelsInfo(session);
         }
@@ -857,7 +857,7 @@ namespace ASEva
         /// 获取总线设备列表
         /// </summary>
         /// <returns>总线设备列表，键为设备ID，值为对应的设备信息</returns>
-        public static Task<Dictionary<BusDeviceID, BusDeviceInfo>> GetBusDevices()
+        public static Task<Dictionary<BusDeviceID, BusDeviceInfo>?> GetBusDevices()
         {
             return Handler.GetBusDevices();
         }
@@ -895,7 +895,7 @@ namespace ASEva
         /// <param name="busChannel">总线通道，1~16</param>
         /// <param name="localID">通道内的报文ID</param>
         /// <returns>总线报文信息，无信息则返回null</returns>
-        public static Task<BusMessageInfo> GetBusMessageInfoByLocalID(int busChannel, uint localID)
+        public static Task<BusMessageInfo?> GetBusMessageInfoByLocalID(int busChannel, uint localID)
         {
             return Handler.GetBusMessageInfoByLocalID(busChannel, localID);
         }
@@ -912,7 +912,7 @@ namespace ASEva
         /// </summary>
         /// <param name="busMessageID">总线报文ID</param>
         /// <returns>总线报文的信息，报文不存在则返回null</returns>
-        public static Task<BusMessageInfo> GetBusMessageInfo(String busMessageID)
+        public static Task<BusMessageInfo?> GetBusMessageInfo(String busMessageID)
         {
             return Handler.GetBusMessageInfo(busMessageID);
         }
@@ -961,7 +961,7 @@ namespace ASEva
         /// 获取总线协议文件ID列表
         /// </summary>
         /// <returns>总线协议文件ID列表</returns>
-        public static Task<BusProtocolFileID[]> GetBusProtocolFileIDList()
+        public static Task<BusProtocolFileID[]?> GetBusProtocolFileIDList()
         {
             return Handler.GetBusProtocolFileIDList();
         }
@@ -995,7 +995,7 @@ namespace ASEva
         /// </summary>
         /// <param name="busSignalID">总线信号ID</param>
         /// <returns>总线信号的信息，信号不存在或信号非总线信号则返回null</returns>
-        public static Task<BusSignalInfo> GetBusSignalInfo(String busSignalID)
+        public static Task<BusSignalInfo?> GetBusSignalInfo(String busSignalID)
         {
             return Handler.GetBusSignalInfo(busSignalID);
         }
@@ -1013,7 +1013,7 @@ namespace ASEva
         /// </summary>
         /// <param name="channelID">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始，协议名中带"v"字版本号的可向下兼容。视频协议名为video</param>
         /// <returns>数据通道别名，若未找到返回null</returns>
-        public static Task<String> GetChannelAliasName(String channelID)
+        public static Task<String?> GetChannelAliasName(String channelID)
         {
             return Handler.GetChannelAliasName(channelID);
         }
@@ -1028,7 +1028,7 @@ namespace ASEva
         /// 获取数据通道别名
         /// </summary>
         /// <returns>数据所有通道的别名表</returns>
-        public static Task<Dictionary<String, String>> GetChannelAliasTable()
+        public static Task<Dictionary<String, String>?> GetChannelAliasTable()
         {
             return Handler.GetChannelAliasTable();
         }
@@ -1061,8 +1061,8 @@ namespace ASEva
         /// 获取数据通道上最近的若干帧时间戳
         /// </summary>
         /// <param name="channelID">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始。视频协议名为video，音频协议名为audio</param>
-        /// <returns>指定数据通道上最近的若干帧时间戳，若该通道未找到或最近无数据则返回null</returns>
-        public static Task<Timestamp[]> GetChannelLatestTimestamps(String channelID)
+        /// <returns>指定数据通道上最近的若干帧时间戳，若该通道未找到则返回null</returns>
+        public static Task<Timestamp[]?> GetChannelLatestTimestamps(String channelID)
         {
             return Handler.GetChannelLatestTimestamps(channelID);
         }
@@ -1113,7 +1113,7 @@ namespace ASEva
         /// </summary>
         /// <param name="tolerance">可容忍最近多少毫秒（现实时间）无数据</param>
         /// <returns>返回各通道的数据状态，key为通道ID</returns>
-        public static Task<Dictionary<String, bool>> GetChannelStatusTable(uint? tolerance)
+        public static Task<Dictionary<String, bool>?> GetChannelStatusTable(uint? tolerance)
         {
             return Handler.GetChannelStatusTable(tolerance);
         }
@@ -1128,7 +1128,7 @@ namespace ASEva
         /// 获取所有通道的时间同步状态
         /// </summary>
         /// <returns>返回各通道的时间同步状态，key为通道ID</returns>
-        public static Task<Dictionary<String, TimeOffsetSync>> GetChannelSyncTable()
+        public static Task<Dictionary<String, TimeOffsetSync>?> GetChannelSyncTable()
         {
             return Handler.GetChannelSyncTable();
         }
@@ -1138,14 +1138,14 @@ namespace ASEva
         /// Get status of a general device's sub devices
         /// </summary>
         /// <param name="id">Device native type ID, or device class ID</param>
-        /// <returns>Status of a general device's sub devices</returns>
+        /// <returns>Status of a general device's sub devices, null if the general device is not found</returns>
         /// \~Chinese
         /// <summary>
         /// 获取各子设备的设备状态
         /// </summary>
         /// <param name="id">设备原生类型ID，或设备组件ID</param>
-        /// <returns>各子设备的设备状态</returns>
-        public static Task<GeneralDeviceStatus[]> GetChildDeviceStatus(String id)
+        /// <returns>各子设备的设备状态，若未找到则返回null</returns>
+        public static Task<GeneralDeviceStatus[]?> GetChildDeviceStatus(String id)
         {
             return Handler.GetChildDeviceStatus(id);
         }
@@ -1162,7 +1162,7 @@ namespace ASEva
         /// </summary>
         /// <param name="consoleClassID">控制台组件ID</param>
         /// <returns>控制台组件信息，若未找到返回null</returns>
-        public static Task<ConsoleClassInfo> GetConsoleClassInfo(String consoleClassID)
+        public static Task<ConsoleClassInfo?> GetConsoleClassInfo(String consoleClassID)
         {
             return Handler.GetConsoleClassInfo(consoleClassID);
         }
@@ -1177,7 +1177,7 @@ namespace ASEva
         /// 获取控制台组件信息表
         /// </summary>
         /// <returns>控制台组件信息表，键为组件ID</returns>
-        public static Task<Dictionary<string, ConsoleClassInfo>> GetConsoleClassTable()
+        public static Task<Dictionary<string, ConsoleClassInfo>?> GetConsoleClassTable()
         {
             return Handler.GetConsoleClassTable();
         }
@@ -1256,7 +1256,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>CPU时间模型</returns>
-        public static Task<CPUTimeModel> GetCPUTimeModel(SessionIdentifier session)
+        public static Task<CPUTimeModel?> GetCPUTimeModel(SessionIdentifier session)
         {
             return Handler.GetCPUTimeModel(session);
         }
@@ -1271,7 +1271,7 @@ namespace ASEva
         /// 获取当前输入数据的generation ID
         /// </summary>
         /// <returns>当前输入数据的generation ID，空表示输入数据为原始数据</returns>
-        public static Task<String> GetCurrentDataGeneration()
+        public static Task<String?> GetCurrentDataGeneration()
         {
             return Handler.GetCurrentDataGeneration();
         }
@@ -1286,7 +1286,7 @@ namespace ASEva
         /// 获取当前的数据层级
         /// </summary>
         /// <returns>数据层级，其中null表示所有层级，'.'表示根路径下的session，'..'表示根路径即session</returns>
-        public static Task<String> GetCurrentDataLayer()
+        public static Task<String?> GetCurrentDataLayer()
         {
             return Handler.GetCurrentDataLayer();
         }
@@ -1316,7 +1316,7 @@ namespace ASEva
         /// 获取当前session的GUID
         /// </summary>
         /// <returns>当前session的GUID，若未运行则返回null</returns>
-        public static Task<String> GetCurrentSessionGUID()
+        public static Task<String?> GetCurrentSessionGUID()
         {
             return Handler.GetCurrentSessionGUID();
         }
@@ -1331,7 +1331,7 @@ namespace ASEva
         /// 获取所有有效的数据层级
         /// </summary>
         /// <returns>数据层级列表，其中'.'表示根路径下的session，'..'表示根路径即session</returns>
-        public static Task<String[]> GetDataLayers()
+        public static Task<String[]?> GetDataLayers()
         {
             return Handler.GetDataLayers();
         }
@@ -1346,7 +1346,7 @@ namespace ASEva
         /// 获取设备组件信息表
         /// </summary>
         /// <returns>设备组件信息表，键为组件ID</returns>
-        public static Task<Dictionary<String, DeviceClassInfo>> GetDeviceClassTable()
+        public static Task<Dictionary<String, DeviceClassInfo>?> GetDeviceClassTable()
         {
             return Handler.GetDeviceClassTable();
         }
@@ -1382,7 +1382,7 @@ namespace ASEva
         /// <param name="dialogClassID">对话框组件ID</param>
         /// <param name="transformID">分化ID</param>
         /// <returns>1. 配置状态; 2. 子配置状态</returns>
-        public static Task<(ConfigStatus, ConfigStatus[])> GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID)
+        public static Task<(ConfigStatus, ConfigStatus[])> GetDialogRelatedModulesConfigStatus(String dialogClassID, String? transformID)
         {
             return Handler.GetDialogRelatedModulesConfigStatus(dialogClassID, transformID);
         }
@@ -1397,7 +1397,7 @@ namespace ASEva
         /// 返回事件对象列表
         /// </summary>
         /// <returns>事件对象列表</returns>
-        public static Task<object[]> GetEventHandles()
+        public static Task<object[]?> GetEventHandles()
         {
             return Handler.GetEventHandles();
         }
@@ -1414,7 +1414,7 @@ namespace ASEva
         /// </summary>
         /// <param name="eventHandle">事件对象</param>
         /// <returns>事件完整信息，null表示事件对象无效或信息不完整</returns>
-        public static Task<EventInfo> GetEventInfo(object eventHandle)
+        public static Task<EventInfo?> GetEventInfo(object eventHandle)
         {
             return Handler.GetEventInfo(eventHandle);
         }
@@ -1429,7 +1429,7 @@ namespace ASEva
         /// 获取事件类型名称列表（包括未启用的）
         /// </summary>
         /// <returns>事件类型名称列表</returns>
-        public static Task<String[]> GetEventTypeNames()
+        public static Task<String[]?> GetEventTypeNames()
         {
             return Handler.GetEventTypeNames();
         }
@@ -1444,7 +1444,7 @@ namespace ASEva
         /// 获取当前数据层级下筛选后的所有session
         /// </summary>
         /// <returns>Session ID列表</returns>
-        public static Task<SessionIdentifier[]> GetFilteredSessionList()
+        public static Task<SessionIdentifier[]?> GetFilteredSessionList()
         {
             return Handler.GetFilteredSessionList();
         }
@@ -1476,14 +1476,14 @@ namespace ASEva
         /// </summary>
         /// <param name="generation">目标generation</param>
         /// <returns>处理完毕的session ID列表</returns>
-        public static Task<SessionIdentifier[]> GetFinishedSessions(String generation)
+        public static Task<SessionIdentifier[]?> GetFinishedSessions(String generation)
         {
             return Handler.GetFinishedSessions(generation);
         }
 
         /// \~English
         /// <summary>
-        /// Get thirt party license notices of software used by framework
+        /// Get third party license notices of software used by framework
         /// </summary>
         /// <returns>Dictionary. The key is title</returns>
         /// \~Chinese
@@ -1491,7 +1491,7 @@ namespace ASEva
         /// 获取框架软件使用的第三方软件版权声明
         /// </summary>
         /// <returns>键为标题，值为版权声明</returns>
-        public static Task<Dictionary<String, String>> GetFrameworkThirdPartyNotices()
+        public static Task<Dictionary<String, String>?> GetFrameworkThirdPartyNotices()
         {
             return Handler.GetFrameworkThirdPartyNotices();
         }
@@ -1506,7 +1506,7 @@ namespace ASEva
         /// 获取当前数据目录下的所有generation
         /// </summary>
         /// <returns>Generation ID列表</returns>
-        public static Task<String[]> GetGenerationList()
+        public static Task<String[]?> GetGenerationList()
         {
             return Handler.GetGenerationList();
         }
@@ -1542,7 +1542,7 @@ namespace ASEva
         /// </summary>
         /// <param name="generationID">Generation ID</param>
         /// <returns>Session ID列表</returns>
-        public static Task<SessionIdentifier[]> GetGenerationSessions(String generationID)
+        public static Task<SessionIdentifier[]?> GetGenerationSessions(String generationID)
         {
             return Handler.GetGenerationSessions(generationID);
         }
@@ -1552,16 +1552,16 @@ namespace ASEva
         /// Get value of global parameter
         /// </summary>
         /// <param name="key">Key of global parameter</param>
-        /// <param name="defaultValue">Default value, which will be returned while key is null, empty, or doesn't exist</param>
+        /// <param name="defaultValue">Default value, which will be returned while key is empty, or doesn't exist</param>
         /// <returns>Value of global parameter</returns>
         /// \~Chinese
         /// <summary>
         /// 获取全局参数
         /// </summary>
         /// <param name="key">全局参数key</param>
-        /// <param name="defaultValue">默认值，即当key为null、""、或不存在时返回的值</param>
+        /// <param name="defaultValue">默认值，即当key为""、或不存在时返回的值</param>
         /// <returns>全局参数value</returns>
-        public static Task<String> GetGlobalParameter(String key, String defaultValue)
+        public static Task<String?> GetGlobalParameter(String key, String? defaultValue)
         {
             return Handler.GetGlobalParameter(key, defaultValue);
         }
@@ -1576,7 +1576,7 @@ namespace ASEva
         /// 获取所有全局参数的键
         /// </summary>
         /// <returns>所有全局参数的键</returns>
-        public static Task<String[]> GetGlobalParameterKeys()
+        public static Task<String[]?> GetGlobalParameterKeys()
         {
             return Handler.GetGlobalParameterKeys();
         }
@@ -1586,16 +1586,16 @@ namespace ASEva
         /// Get value of global variable
         /// </summary>
         /// <param name="key">Key of global variable</param>
-        /// <param name="defaultValue">Default value, which will be returned while key is null, empty, or doesn't exist</param>
+        /// <param name="defaultValue">Default value, which will be returned while key is empty, or doesn't exist</param>
         /// <returns>Value of global variable</returns>
         /// \~Chinese
         /// <summary>
         /// 获取全局变量
         /// </summary>
         /// <param name="key">全局变量key</param>
-        /// <param name="defaultValue">默认值，即当key为null、""、或不存在时返回的值</param>
+        /// <param name="defaultValue">默认值，即当key为""、或不存在时返回的值</param>
         /// <returns>全局变量value</returns>
-        public static Task<String> GetGlobalVariable(String key, String defaultValue)
+        public static Task<String?> GetGlobalVariable(String key, String? defaultValue)
         {
             return Handler.GetGlobalVariable(key, defaultValue);
         }
@@ -1610,7 +1610,7 @@ namespace ASEva
         /// 获取所有全局变量的键
         /// </summary>
         /// <returns>所有全局变量的键</returns>
-        public static Task<String[]> GetGlobalVariableKeys()
+        public static Task<String[]?> GetGlobalVariableKeys()
         {
             return Handler.GetGlobalVariableKeys();
         }
@@ -1620,14 +1620,14 @@ namespace ASEva
         /// Get session's satellite posix time model
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>Satellite posix time model</returns>
+        /// <returns>Satellite posix time model, null if the session doesn't exist</returns>
         /// \~Chinese
         /// <summary>
         /// 获取session的卫星Posix时间模型
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>卫星Posix时间模型</returns>
-        public static Task<PosixTimeModel> GetGNSSPosixTimeModel(SessionIdentifier session)
+        /// <returns>卫星Posix时间模型，若session不存在则返回null</returns>
+        public static Task<PosixTimeModel?> GetGNSSPosixTimeModel(SessionIdentifier session)
         {
             return Handler.GetGNSSPosixTimeModel(session);
         }
@@ -1640,7 +1640,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=3.2.13) 获取GPU解码测试结果
         /// </summary>
-        public static Task<GPUDecoderTestResults> GetGPUDecoderTestResults()
+        public static Task<GPUDecoderTestResults?> GetGPUDecoderTestResults()
         {
             return Handler.GetGPUDecoderTestResults();
         }
@@ -1659,7 +1659,7 @@ namespace ASEva
         /// <param name="session">想要获取图表的session ID</param>
         /// <param name="graphID">图表报告ID，通过 ASEva.GraphDefinition.GetID 获取</param>
         /// <returns>图表对象，若不存在或不属于当前层级则返回null</returns>
-        public static Task<GraphData> GetGraphData(SessionIdentifier session, int graphID)
+        public static Task<GraphData?> GetGraphData(SessionIdentifier session, int graphID)
         {
             return Handler.GetGraphData(session, graphID);
         }
@@ -1674,7 +1674,7 @@ namespace ASEva
         /// 获取主机上所有独立显卡信息
         /// </summary>
         /// <returns>独立显卡信息列表</returns>
-        public static Task<GraphicCardInfo[]> GetGraphicCardInfos()
+        public static Task<GraphicCardInfo[]?> GetGraphicCardInfos()
         {
             return Handler.GetGraphicCardInfos();
         }
@@ -1689,7 +1689,7 @@ namespace ASEva
         /// 获取图表报告ID列表
         /// </summary>
         /// <returns>图表报告ID列表</returns>
-        public static Task<int[]> GetGraphIDList()
+        public static Task<int[]?> GetGraphIDList()
         {
             return Handler.GetGraphIDList();
         }
@@ -1723,7 +1723,7 @@ namespace ASEva
         /// </summary>
         /// <param name="graphID">图表报告ID</param>
         /// <returns>图表报告标题，若不存在则返回null</returns>
-        public static Task<String> GetGraphTitle(int graphID)
+        public static Task<String?> GetGraphTitle(int graphID)
         {
             return Handler.GetGraphTitle(graphID);
         }
@@ -1733,14 +1733,14 @@ namespace ASEva
         /// Get session's host machine posix time model
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>Host machine posix time model</returns>
+        /// <returns>Host machine posix time model, null if the session doesn't exist</returns>
         /// \~Chinese
         /// <summary>
         /// 获取session的主机Posix时间模型
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>主机Posix时间模型</returns>
-        public static Task<PosixTimeModel> GetHostPosixTimeModel(SessionIdentifier session)
+        /// <returns>主机Posix时间模型，若session不存在则返回null</returns>
+        public static Task<PosixTimeModel?> GetHostPosixTimeModel(SessionIdentifier session)
         {
             return Handler.GetHostPosixTimeModel(session);
         }
@@ -1815,7 +1815,7 @@ namespace ASEva
         /// 获取被许可的功能序号列表
         /// </summary>
         /// <returns>被许可的功能序号列表</returns>
-        public static Task<int[]> GetLicensedFunctionIndices()
+        public static Task<int[]?> GetLicensedFunctionIndices()
         {
             return Handler.GetLicensedFunctionIndices();
         }
@@ -1830,7 +1830,7 @@ namespace ASEva
         /// 获取许可证的详细信息
         /// </summary>
         /// <returns>许可证的详细信息</returns>
-        public static Task<String> GetLicenseInfo()
+        public static Task<String?> GetLicenseInfo()
         {
             return Handler.GetLicenseInfo();
         }
@@ -1866,7 +1866,7 @@ namespace ASEva
         /// 获取所有清单信息
         /// </summary>
         /// <returns>清单信息列表</returns>
-        public static Task<LogMessage[]> GetLogMessages()
+        public static Task<LogMessage[]?> GetLogMessages()
         {
             return Handler.GetLogMessages();
         }
@@ -1881,7 +1881,7 @@ namespace ASEva
         /// 获得手动触发器所有通道的名称
         /// </summary>
         /// <returns>名称列表</returns>
-        public static Task<String[]> GetManualTriggerNames()
+        public static Task<String[]?> GetManualTriggerNames()
         {
             return Handler.GetManualTriggerNames();
         }
@@ -1898,7 +1898,7 @@ namespace ASEva
         /// </summary>
         /// <param name="index">通道序号，0~15</param>
         /// <returns>手动触发器通道的名称，若序号超出范围则返回null</returns>
-        public static Task<String> GetManualTriggerName(int index)
+        public static Task<String?> GetManualTriggerName(int index)
         {
             return Handler.GetManualTriggerName(index);
         }
@@ -1909,15 +1909,15 @@ namespace ASEva
         /// </summary>
         /// <param name="caller">The caller who calls this API, can be object of ASEva.CommonWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
         /// <param name="classID">Component's class ID</param>
-        /// <returns>Child status of component's configuration, null if not found or there's no child functions</returns>
+        /// <returns>Child status of component's configuration, null if not found</returns>
         /// \~Chinese
         /// <summary>
         /// 获取数据处理/原生/设备组件各子功能配置的状态
         /// </summary>
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.CommonWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
         /// <param name="classID">组件的类别ID</param>
-        /// <returns>各子功能配置的状态，若找不到类别ID对应的组件或无子功能配置则返回null</returns>
-        public static Task<ConfigStatus[]> GetModuleChildConfigStatus(object caller, String classID)
+        /// <returns>各子功能配置的状态，若找不到类别ID对应的组件则返回null</returns>
+        public static Task<ConfigStatus[]?> GetModuleChildConfigStatus(object caller, String classID)
         {
             return Handler.GetModuleChildConfigStatus(caller, classID);
         }
@@ -1936,7 +1936,7 @@ namespace ASEva
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.CommonWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
         /// <param name="classID">组件的类别ID</param>
         /// <returns>配置的字符串描述，null表示找不到类别ID对应的组件</returns>
-        public static Task<String> GetModuleConfig(object caller, String classID)
+        public static Task<String?> GetModuleConfig(object caller, String classID)
         {
             return Handler.GetModuleConfig(caller, classID);
         }
@@ -1955,7 +1955,7 @@ namespace ASEva
         /// <param name="caller">调用此API的对象，可为以下类型： ASEva.CommonWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
         /// <param name="classID">组件的类别ID</param>
         /// <returns>1. 组件配置的状态，若找不到类别ID对应的组件则返回 ASEva.ConfigStatus.Disabled ; 2. 错误提示，当配置状态为EnabledWithError或EnabledWithWarning时有效</returns>
-        public static Task<(ConfigStatus, String)> GetModuleConfigStatus(object caller, String classID)
+        public static Task<(ConfigStatus, String?)> GetModuleConfigStatus(object caller, String classID)
         {
             return Handler.GetModuleConfigStatus(caller, classID);
         }
@@ -1970,7 +1970,7 @@ namespace ASEva
         /// 获取数据处理/原生/设备组件的详情
         /// </summary>
         /// <returns>组件详情，若不存在则返回null</returns>
-        public static Task<ModuleDetails> GetModuleDetails(String classID)
+        public static Task<ModuleDetails?> GetModuleDetails(String classID)
         {
             return Handler.GetModuleDetails(classID);
         }
@@ -1985,7 +1985,7 @@ namespace ASEva
         /// 获取原生组件信息表
         /// </summary>
         /// <returns>原生组件信息表，键为组件ID</returns>
-        public static Task<Dictionary<String, NativeClassInfo>> GetNativeClassTable()
+        public static Task<Dictionary<String, NativeClassInfo>?> GetNativeClassTable()
         {
             return Handler.GetNativeClassTable();
         }
@@ -2002,7 +2002,7 @@ namespace ASEva
         /// </summary>
         /// <param name="type">原生库类别</param>
         /// <returns>版本列表，键为原生插件的类型ID</returns>
-        public static Task<Dictionary<String, Version>> GetNativePluginVersions(NativeLibraryType type)
+        public static Task<Dictionary<String, Version>?> GetNativePluginVersions(NativeLibraryType type)
         {
             return Handler.GetNativePluginVersions(type);
         }
@@ -2017,7 +2017,7 @@ namespace ASEva
         /// 获取所有插件的客机同步ID以及对应的标题
         /// </summary>
         /// <returns>客机同步标题表，键为客机同步ID，值为对应的标题</returns>
-        public static Task<Dictionary<String, String>> GetPluginGuestSyncTable()
+        public static Task<Dictionary<String, String>?> GetPluginGuestSyncTable()
         {
             return Handler.GetPluginGuestSyncTable();
         }
@@ -2032,7 +2032,7 @@ namespace ASEva
         /// 获取插件包ID列表
         /// </summary>
         /// <returns>插件包ID列表</returns>
-        public static Task<String[]> GetPluginPackIDList()
+        public static Task<String[]?> GetPluginPackIDList()
         {
             return Handler.GetPluginPackIDList();
         }
@@ -2049,7 +2049,7 @@ namespace ASEva
         /// </summary>
         /// <param name="packID">插件包ID</param>
         /// <returns>插件包信息，若无对应插件包则返回null</returns>
-        public static Task<PluginPackInfo> GetPluginPackInfo(String packID)
+        public static Task<PluginPackInfo?> GetPluginPackInfo(String packID)
         {
             return Handler.GetPluginPackInfo(packID);
         }
@@ -2064,7 +2064,7 @@ namespace ASEva
         /// 获取所有插件使用的第三方软件版权声明
         /// </summary>
         /// <returns>键为插件ID，值为该插件使用的第三方软件版权声明(其中键为标题，值为版权声明)</returns>
-        public static Task<Dictionary<String, Dictionary<String, String>>> GetPluginThirdPartyNotices()
+        public static Task<Dictionary<String, Dictionary<String, String>>?> GetPluginThirdPartyNotices()
         {
             return Handler.GetPluginThirdPartyNotices();
         }
@@ -2085,7 +2085,7 @@ namespace ASEva
         /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
         /// <param name="maxGap">容许的最大间隔，单位秒</param>
         /// <returns>1. 视频帧的预览JPEG数据，图像宽度为640像素，获取失败则返回null; 2. 图像的时间戳，获取失败则为null; 3. 摄像头信息，获取失败则为null</returns>
-        public static Task<(byte[], Timestamp?, CameraInfo)> GetPreviewJpeg(int channel, double timeline, double maxGap)
+        public static Task<(byte[]?, Timestamp?, CameraInfo?)> GetPreviewJpeg(int channel, double timeline, double maxGap)
         {
             return Handler.GetPreviewJpeg(channel, timeline, maxGap);
         }
@@ -2100,7 +2100,7 @@ namespace ASEva
         /// 获取数据处理组件信息表
         /// </summary>
         /// <returns>数据处理组件信息表，键为组件ID</returns>
-        public static Task<Dictionary<String, ProcessorClassInfo>> GetProcessorClassTable()
+        public static Task<Dictionary<String, ProcessorClassInfo>?> GetProcessorClassTable()
         {
             return Handler.GetProcessorClassTable();
         }
@@ -2165,14 +2165,14 @@ namespace ASEva
         /// Get field titles of a general sample
         /// </summary>
         /// <param name="channelID">Sample channel ID, with format as "protocol@channel". Channel is starting from 0. Protocol with "v" version number is with backward compatibility</param>
-        /// <returns>Field title, null if the channel doesn't exist or there's no titles</returns>
+        /// <returns>Field title, null if the channel doesn't exist</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定样本通道对应的标题
         /// </summary>
         /// <param name="channelID">样本通道关键字，格式为"协议名@通道序号"，通道序号从0开始</param>
-        /// <returns>样本标题，null表示通道不存在或该样本通道无标题</returns>
-        public static Task<List<String>> GetSampleTitle(String channelID)
+        /// <returns>样本标题，null表示通道不存在</returns>
+        public static Task<List<String>?> GetSampleTitle(String channelID)
         {
             return Handler.GetSampleTitle(channelID);
         }
@@ -2187,7 +2187,7 @@ namespace ASEva
         /// 获取所有场景ID列表
         /// </summary>
         /// <returns>场景ID列表</returns>
-        public static Task<String[]> GetSceneIDList()
+        public static Task<String[]?> GetSceneIDList()
         {
             return Handler.GetSceneIDList();
         }
@@ -2202,7 +2202,7 @@ namespace ASEva
         /// 获取场景标题表
         /// </summary>
         /// <returns>场景标题表</returns>
-        public static Task<Dictionary<String, SceneTitle>> GetSceneTitleTable()
+        public static Task<Dictionary<String, SceneTitle>?> GetSceneTitleTable()
         {
             return Handler.GetSceneTitleTable();
         }
@@ -2212,14 +2212,14 @@ namespace ASEva
         /// Get session's comment
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>Session's comment</returns>
+        /// <returns>Session's comment, null if the session doesn't exist</returns>
         /// \~Chinese
         /// <summary>
         /// 获取session的注释说明
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>Session的注释说明</returns>
-        public static Task<String> GetSessionComment(SessionIdentifier session)
+        /// <returns>Session的注释说明，null表示session不存在</returns>
+        public static Task<String?> GetSessionComment(SessionIdentifier session)
         {
             return Handler.GetSessionComment(session);
         }
@@ -2234,7 +2234,7 @@ namespace ASEva
         /// 获取所有session的筛选标志位
         /// </summary>
         /// <returns>session的筛选标志位表</returns>
-        public static Task<Dictionary<SessionIdentifier, SessionFilterFlags>> GetSessionFilterTable()
+        public static Task<Dictionary<SessionIdentifier, SessionFilterFlags>?> GetSessionFilterTable()
         {
             return Handler.GetSessionFilterTable();
         }
@@ -2244,14 +2244,14 @@ namespace ASEva
         /// Get the folder name of a session
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>Folder name</returns>
+        /// <returns>Folder name, null if the session doesn't exist</returns>
         /// \~Chinese
         /// <summary>
         /// 获取某个session的文件夹名
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>文件夹名</returns>
-        public static Task<String> GetSessionFolderName(SessionIdentifier session)
+        /// <returns>文件夹名，null表示session不存在</returns>
+        public static Task<String?> GetSessionFolderName(SessionIdentifier session)
         {
             return Handler.GetSessionFolderName(session);
         }
@@ -2261,14 +2261,14 @@ namespace ASEva
         /// Get all generations of the session under current data layer
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>Generation IDs</returns>
+        /// <returns>Generation IDs, null if the session doesn't exist</returns>
         /// \~Chinese
         /// <summary>
         /// 获取当前层级下指定session下的所有generation ID
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>Generation ID列表</returns>
-        public static Task<String[]> GetSessionGenerations(SessionIdentifier session)
+        /// <returns>Generation ID列表，null表示session不存在</returns>
+        public static Task<String[]?> GetSessionGenerations(SessionIdentifier session)
         {
             return Handler.GetSessionGenerations(session);
         }
@@ -2295,14 +2295,14 @@ namespace ASEva
         /// Get the data layer to which a session belongs
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>The data layer, while '.' means the layer of sessions under data path, '..' means the layer of data path which is a session</returns>
+        /// <returns>The data layer, while '.' means the layer of sessions under data path, '..' means the layer of data path which is a session, null means the session doesn't exist</returns>
         /// \~Chinese
         /// <summary>
         /// 获取某个session所属数据层级
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>数据层级，其中'.'表示根路径下的session，'..'表示根路径即session</returns>
-        public static Task<String> GetSessionLayer(SessionIdentifier session)
+        /// <returns>数据层级，其中'.'表示根路径下的session，'..'表示根路径即session，null表示session不存在</returns>
+        public static Task<String?> GetSessionLayer(SessionIdentifier session)
         {
             return Handler.GetSessionLayer(session);
         }
@@ -2334,7 +2334,7 @@ namespace ASEva
         /// 获取当前数据层级下的所有session
         /// </summary>
         /// <returns>Session ID列表</returns>
-        public static Task<SessionIdentifier[]> GetSessionList()
+        public static Task<SessionIdentifier[]?> GetSessionList()
         {
             return Handler.GetSessionList();
         }
@@ -2359,14 +2359,14 @@ namespace ASEva
         /// Get session's properties
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>Dictionary. The key is session's property title</returns>
+        /// <returns>Dictionary, null if the session doesn't exist. The key is session's property title</returns>
         /// \~Chinese
         /// <summary>
         /// 获取session的属性表
         /// </summary>
         /// <param name="session">Session ID</param>
-        /// <returns>Session的属性表</returns>
-        public static Task<Dictionary<String, String>> GetSessionProperties(SessionIdentifier session)
+        /// <returns>Session的属性表，null表示session不存在</returns>
+        public static Task<Dictionary<String, String>?> GetSessionProperties(SessionIdentifier session)
         {
             return Handler.GetSessionProperties(session);
         }
@@ -2379,7 +2379,7 @@ namespace ASEva
         /// <summary>
         /// 获取当前的session搜索关键字
         /// </summary>
-         public static Task<String> GetSessionSearchKey()
+         public static Task<String?> GetSessionSearchKey()
         {
             return Handler.GetSessionSearchKey();
         }
@@ -2415,7 +2415,7 @@ namespace ASEva
         /// <param name="signalID">信号ID</param>
         /// <param name="fullName">是否返回完整名称</param>
         /// <returns>信号名称，若无该ID信号则返回null</returns>
-        public static Task<String> GetSignalName(String signalID, bool fullName)
+        public static Task<String?> GetSignalName(String signalID, bool fullName)
         {
             return Handler.GetSignalName(signalID, fullName);
         }
@@ -2432,7 +2432,7 @@ namespace ASEva
         /// </summary>
         /// <param name="messageID">报文的全局唯一ID</param>
         /// <returns>信号列表，若该报文不存在则返回null</returns>
-        public static Task<String[]> GetSignalNamesOfBusMessage(String messageID)
+        public static Task<String[]?> GetSignalNamesOfBusMessage(String messageID)
         {
             return Handler.GetSignalNamesOfBusMessage(messageID);
         }
@@ -2447,7 +2447,7 @@ namespace ASEva
         /// 获取信号树
         /// </summary>
         /// <returns>信号树根节点下的所有子节点</returns>
-        public static Task<SignalTreeNode[]> GetSignalTree()
+        public static Task<SignalTreeNode[]?> GetSignalTree()
         {
             return Handler.GetSignalTree();
         }
@@ -2457,14 +2457,14 @@ namespace ASEva
         /// Get system status
         /// </summary>
         /// <param name="status">Type of system status</param>
-        /// <returns>Information of system status, null if no available info</returns>
+        /// <returns>Information of system status</returns>
         /// \~Chinese
         /// <summary>
         /// 获取系统状态信息
         /// </summary>
         /// <param name="status">系统状态类别</param>
-        /// <returns>系统状态信息，若无有效信息则返回null</returns>
-        public static Task<String> GetSystemStatus(SystemStatus status)
+        /// <returns>系统状态信息</returns>
+        public static Task<String?> GetSystemStatus(SystemStatus status)
         {
             return Handler.GetSystemStatus(status);
         }
@@ -2474,14 +2474,14 @@ namespace ASEva
         /// Get details of system status
         /// </summary>
         /// <param name="status">Type of system status</param>
-        /// <returns>Details of system status, null if no available info</returns>
+        /// <returns>Details of system status</returns>
         /// \~Chinese
         /// <summary>
         /// 获取系统状态详情
         /// </summary>
         /// <param name="status">系统状态类别</param>
-        /// <returns>系统状态详情，若无有效信息则返回null</returns>
-        public static Task<String> GetSystemStatusDetails(SystemStatus status)
+        /// <returns>系统状态详情</returns>
+        public static Task<String?> GetSystemStatusDetails(SystemStatus status)
         {
             return Handler.GetSystemStatusDetails(status);
         }
@@ -2498,7 +2498,7 @@ namespace ASEva
         /// </summary>
         /// <param name="taskClassID">独立任务组件ID</param>
         /// <returns>独立任务组件信息，若未找到返回null</returns>
-        public static Task<TaskClassInfo> GetTaskClassInfo(String taskClassID)
+        public static Task<TaskClassInfo?> GetTaskClassInfo(String taskClassID)
         {
             return Handler.GetTaskClassInfo(taskClassID);
         }
@@ -2513,7 +2513,7 @@ namespace ASEva
         /// 获取独立任务组件信息表
         /// </summary>
         /// <returns>独立任务组件信息表，键为组件ID</returns>
-        public static Task<Dictionary<String, TaskClassInfo>> GetTaskClassTable()
+        public static Task<Dictionary<String, TaskClassInfo>?> GetTaskClassTable()
         {
             return Handler.GetTaskClassTable();
         }
@@ -2549,7 +2549,7 @@ namespace ASEva
         /// 获取软件版本信息总表
         /// </summary>
         /// <returns>软件版本信息总表</returns>
-        public static Task<Dictionary<String, Version>> GetVersionTable()
+        public static Task<Dictionary<String, Version>?> GetVersionTable()
         {
             return Handler.GetVersionTable();
         }
@@ -2583,7 +2583,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">Session ID</param>
         /// <returns>该session的所有视频通道的信息，若不存在则返回null</returns>
-        public static Task<VideoChannelInfo[]> GetVideoChannelsInfo(SessionIdentifier session)
+        public static Task<VideoChannelInfo[]?> GetVideoChannelsInfo(SessionIdentifier session)
         {
             return Handler.GetVideoChannelsInfo(session);
         }
@@ -2617,7 +2617,7 @@ namespace ASEva
         /// 获取视频设备列表
         /// </summary>
         /// <returns>视频设备列表，键为设备ID，值为对应的设备信息</returns>
-        public static Task<Dictionary<VideoDeviceID, VideoDeviceInfo>> GetVideoDevices()
+        public static Task<Dictionary<VideoDeviceID, VideoDeviceInfo>?> GetVideoDevices()
         {
             return Handler.GetVideoDevices();
         }
@@ -2644,7 +2644,7 @@ namespace ASEva
         /// <param name="clip">在输出模式基础上进一步裁剪，为原始尺寸坐标系，至少为16x16，null表示完整输出</param>
         /// <param name="withAlpha">是否输出带Alpha通道的图像(固定赋值255)</param>
         /// <returns>1. 视频帧数据，图像实际大小由mode和clip决定，获取失败则返回null; 2. 图像的时间戳，获取失败则为null; 3. 摄像头信息，获取失败则为null</returns>
-        public static Task<(CommonImage, Timestamp?, CameraInfo)> GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha)
+        public static Task<(CommonImage?, Timestamp?, CameraInfo?)> GetVideoFrameImage(int channel, double timeline, double maxGap, VideoFrameGetMode mode, IntRect? clip, bool withAlpha)
         {
             return Handler.GetVideoFrameImage(channel, timeline, maxGap, mode, clip, withAlpha);
         }
@@ -2667,7 +2667,7 @@ namespace ASEva
         /// <param name="maxGap">容许的最大间隔，单位秒</param>
         /// <param name="withAlpha">是否输出带Alpha通道的图像(固定赋值255)</param>
         /// <returns>缩略图数据，图像宽度固定为80，获取失败则返回null</returns>
-        public static Task<CommonImage> GetVideoFrameThumbnail(int channel, double timeline, double maxGap, bool withAlpha)
+        public static Task<CommonImage?> GetVideoFrameThumbnail(int channel, double timeline, double maxGap, bool withAlpha)
         {
             return Handler.GetVideoFrameThumbnail(channel, timeline, maxGap, withAlpha);
         }
@@ -2816,7 +2816,7 @@ namespace ASEva
         /// 返回是否允许进行保存工程项目和开始session等操作，若不允许则输出繁忙原因
         /// </summary>
         /// <returns>1. 是否允许进行保存工程项目和开始session等操作; 2. 系统繁忙原因，空表示原因未知</returns>
-        public static Task<(bool, String)> IsReady()
+        public static Task<(bool, String?)> IsReady()
         {
             return Handler.IsReady();
         }
@@ -2888,7 +2888,7 @@ namespace ASEva
         /// </summary>
         /// <param name="busMessage">总线报文</param>
         /// <returns>所有信号值及相关信息</returns>
-        public static Task<BusSignalValue[]> ParseBusMessage(BusMessageSample busMessage)
+        public static Task<BusSignalValue[]?> ParseBusMessage(BusMessageSample busMessage)
         {
             return Handler.ParseBusMessage(busMessage);
         }
@@ -2897,14 +2897,14 @@ namespace ASEva
         /// <summary>
         /// Public data
         /// </summary>
-        /// <param name="dataID">Data ID, should not be null or empty</param>
-        /// <param name="data">Binary data, should not be null</param>
+        /// <param name="dataID">Data ID, should not be empty</param>
+        /// <param name="data">Binary data</param>
         /// \~Chinese
         /// <summary>
         /// 发布数据
         /// </summary>
-        /// <param name="dataID">数据ID，不可为null或空字符串</param>
-        /// <param name="data">数据，不可为null</param>
+        /// <param name="dataID">数据ID，不可为空字符串</param>
+        /// <param name="data">数据</param>
         public static Task PublishData(String dataID, byte[] data)
         {
             return Handler.PublishData(dataID, data);
@@ -3078,7 +3078,7 @@ namespace ASEva
         /// <param name="taskClassID">任务组件的类别ID</param>
         /// <param name="config">配置的字符串描述</param>
         /// <returns>1. 任务运行结果; 2. 任务的返回值信息</returns>
-        public static Task<(TaskResult, String)> RunStandaloneTask(object caller, String taskClassID, String config)
+        public static Task<(TaskResult, String?)> RunStandaloneTask(object caller, String taskClassID, String config)
         {
             return Handler.RunStandaloneTask(caller, taskClassID, config);
         }
@@ -3112,7 +3112,7 @@ namespace ASEva
         /// <param name="messageID">绑定的报文ID</param>
         /// <param name="interval">报文发送周期，单位毫秒（至少为10），若设为null则只发送一次</param>
         /// <returns>输出生成的报文数据，若未绑定则输出null</returns>
-        public static Task<byte[]> SendBusMessageBound(String messageID, uint? interval)
+        public static Task<byte[]?> SendBusMessageBound(String messageID, uint? interval)
         {
             return Handler.SendBusMessageBound(messageID, interval);
         }
@@ -3263,7 +3263,7 @@ namespace ASEva
         /// 设置当前的数据层级
         /// </summary>
         /// <param name="layer">数据层级，其中null表示所有层级，'.'表示根路径下的session，'..'表示根路径即session</param>
-        public static Task SetCurrentDataLayer(String layer)
+        public static Task SetCurrentDataLayer(String? layer)
         {
             return Handler.SetCurrentDataLayer(layer);
         }
@@ -3289,14 +3289,14 @@ namespace ASEva
         /// <summary>
         /// Set value of global parameter
         /// </summary>
-        /// <param name="key">Key of global parameter, do nothing if it's null or empty</param>
-        /// <param name="value">Value of global parameter, do nothing if it's null</param>
+        /// <param name="key">Key of global parameter, do nothing if it's empty</param>
+        /// <param name="value">Value of global parameter</param>
         /// \~Chinese
         /// <summary>
         /// 设置全局参数
         /// </summary>
-        /// <param name="key">全局参数key，若为null或""则忽略</param>
-        /// <param name="value">全局参数value，若为null则忽略</param>
+        /// <param name="key">全局参数key，若为""则忽略</param>
+        /// <param name="value">全局参数value</param>
         public static Task SetGlobalParameter(String key, String value)
         {
             return Handler.SetGlobalParameter(key, value);
@@ -3306,14 +3306,14 @@ namespace ASEva
         /// <summary>
         /// Set value of global variable
         /// </summary>
-        /// <param name="key">Key of global variable, do nothing if it's null or empty</param>
-        /// <param name="value">Value of global variable, do nothing if it's null</param>
+        /// <param name="key">Key of global variable, do nothing if it's empty</param>
+        /// <param name="value">Value of global variable</param>
         /// \~Chinese
         /// <summary>
         /// 设置全局变量
         /// </summary>
-        /// <param name="key">全局变量key，若为null或""则忽略</param>
-        /// <param name="value">全局变量value，若为null则忽略</param>
+        /// <param name="key">全局变量key，若为""则忽略</param>
+        /// <param name="value">全局变量value</param>
         public static Task SetGlobalVariable(String key, String value)
         {
             return Handler.SetGlobalVariable(key, value);
@@ -3354,13 +3354,13 @@ namespace ASEva
         /// Set the name of manual trigger at a channel
         /// </summary>
         /// <param name="index">Channel index, ranges 0~15</param>
-        /// <param name="name">Name of manual trigger, do nothing if it's null</param>
+        /// <param name="name">Name of manual trigger</param>
         /// \~Chinese
         /// <summary>
         /// 设定手动触发器通道的名称
         /// </summary>
         /// <param name="index">通道序号，0~15</param>
-        /// <param name="name">手动触发器通道的名称，若值为空则忽略</param>
+        /// <param name="name">手动触发器通道的名称</param>
         public static Task SetManualTriggerName(int index, String name)
         {
             return Handler.SetManualTriggerName(index, name);
@@ -3533,7 +3533,7 @@ namespace ASEva
         /// <param name="previewOnly">是否为预览</param>
         /// <param name="genDirName">后处理输出时，写入generation数据的文件夹名，可为null（若已存在且强制开始时，则使用默认的日期格式）</param>
         /// <returns>是否成功</returns>
-        public static Task<bool> StartOffline(bool force, bool previewOnly, String genDirName)
+        public static Task<bool> StartOffline(bool force, bool previewOnly, String? genDirName)
         {
             return Handler.StartOffline(force, previewOnly, genDirName);
         }
@@ -3573,7 +3573,7 @@ namespace ASEva
         /// <param name="previewOnly">是否为预览</param>
         /// <param name="sessionDirName">采集时，写入session数据的文件夹名，可为null（若已存在且强制开始时，则使用默认的日期格式）</param>
         /// <returns>是否成功</returns>
-        public static Task<bool> StartOnline(bool force, bool previewOnly, String sessionDirName)
+        public static Task<bool> StartOnline(bool force, bool previewOnly, String? sessionDirName)
         {
             return Handler.StartOnline(force, previewOnly, sessionDirName);
         }
@@ -3596,7 +3596,7 @@ namespace ASEva
         /// <param name="sessionDirName">采集时，写入session数据的文件夹名，可为null（若已存在且强制开始时，则使用默认的日期格式，时间为本机时间，非远程主机时间）</param>
         /// <param name="startPosixTime">远程主机的开始时间，单位毫秒</param>
         /// <returns>是否成功</returns>
-        public static Task<bool> StartRemote(bool force, bool previewOnly, String sessionDirName, ulong startPosixTime)
+        public static Task<bool> StartRemote(bool force, bool previewOnly, String? sessionDirName, ulong startPosixTime)
         {
             return Handler.StartRemote(force, previewOnly, sessionDirName, startPosixTime);
         }
@@ -3695,7 +3695,7 @@ namespace ASEva
         /// <param name="bufferLength">缓存长度，范围在1~1000</param>
         /// <param name="timeout">超过该时间不取出缓存数据则自动关闭订阅，单位秒，范围在10～600</param>
         /// <returns>数据订阅对象，若初始化失败则返回null</returns>
-        public static Task<DataSubscriber> SubscribeData(String dataID, int bufferLength, int timeout)
+        public static Task<DataSubscriber?> SubscribeData(String dataID, int bufferLength, int timeout)
         {
             return Handler.SubscribeData(dataID, bufferLength, timeout);
         }
@@ -3716,7 +3716,7 @@ namespace ASEva
         /// <param name="mode">目标运行模式</param>
         /// <param name="waitSecond">超时，大于0有效，单位秒</param>
         /// <returns>是否成功切换</returns>
-        public static Task<bool> SwitchAppMode(String controllerName, ApplicationMode mode, int waitSecond)
+        public static Task<bool> SwitchAppMode(String? controllerName, ApplicationMode mode, int waitSecond)
         {
             return Handler.SwitchAppMode(controllerName, mode, waitSecond);
         }

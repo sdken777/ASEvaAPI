@@ -17,61 +17,61 @@ namespace ASEva
         void AddProcessorVideoReference(int videoChannel);
         void AddSceneData(SceneData scene);
         void AddWindow(object caller, String windowClassID, String config, bool newWorkspaceIfNeeded);
-        byte[] CallNativeFunction(object caller, String nativeClassID, String funcID, byte[] input);
+        byte[]? CallNativeFunction(object caller, String nativeClassID, String funcID, byte[]? input);
         void CallWebApi(String request, WebApiContext context);
         void CallWebApiPost(String request, byte[] body, WebPostContentType contentType, WebApiContext context);
         Task ConfigDataEncryption();
         Task ConfigOfflineMapPath();
         FloatPoint ConvertOfflineMapLocToPix(LocPoint origin, int zoom, LocPoint point);
         LocPoint ConvertOfflineMapPixToLoc(LocPoint origin, int zoom, FloatPoint pixel);
-        CreatePanelResult CreateConfigPanel(object caller, String dialogClassID, String transformID, out object panel, out DialogClassInfo info);
-        GraphPanel CreateGraphPanelForType(GraphType graphType, String styleName);
-        GraphPanel CreateGraphPanelForID(int graphID, String styleName);
-        CreatePanelResult CreateWindowPanel(object caller, String windowClassID, String transformID, out object panel, out WindowClassInfo info);
-        CommonImage DecodeImage(byte[] imageData);
+        CreatePanelResult CreateConfigPanel(object caller, String dialogClassID, String? transformID, out object? panel, out DialogClassInfo? info);
+        GraphPanel? CreateGraphPanelForType(GraphType graphType, String? styleName);
+        GraphPanel? CreateGraphPanelForID(int graphID, String? styleName);
+        CreatePanelResult CreateWindowPanel(object caller, String windowClassID, String? transformID, out object? panel, out WindowClassInfo? info);
+        CommonImage? DecodeImage(byte[] imageData);
         bool DeleteToRecycleBin(String path);
         void DisableAllPlugins();
         void DisablePlugin(String packID);
         void EnablePlugin(String packID);
-        byte[] EncodeImage(CommonImage image, String format);
-        String GetAppFilesRoot();
+        byte[]? EncodeImage(CommonImage image, String format);
+        String? GetAppFilesRoot();
         ApplicationGUI GetAppGUI();
         String GetAppID();
         Language GetAppLanguage();
         BufferRange GetBufferRange();
-        String GetBusProtocolFilePath(BusProtocolFileID fileID);
+        String? GetBusProtocolFilePath(BusProtocolFileID fileID);
         BusFileInfo[] GetBusProtocolFilesInfo();
-        String GetConfigFilesRoot();
-        String GetCurrentDataLayerPath();
-        String GetCurrentProject();
-        String GetDataPath();
-        DialogClassInfo GetDialogClassInfo(String dialogClassID, String transformID);
+        String? GetConfigFilesRoot();
+        String? GetCurrentDataLayerPath();
+        String? GetCurrentProject();
+        String? GetDataPath();
+        DialogClassInfo? GetDialogClassInfo(String dialogClassID, String? transformID);
         Dictionary<String, DialogClassInfo> GetDialogClassTable();
         Dictionary<String, String> GetFrameworkThirdPartyNotices();
-        String GetGenerationPath(SessionIdentifier session, String generation);
-        String GetGlobalPath(String key);
+        String? GetGenerationPath(SessionIdentifier session, String generation);
+        String? GetGlobalPath(String key);
         String[] GetGlobalPathKeys();
-        String GetGlobalPublicDataPath();
-        String GetGlobalVariable(String key, String defaultValue);
+        String? GetGlobalPublicDataPath();
+        String? GetGlobalVariable(String key, String? defaultValue);
         String[] GetGlobalVariableKeys();
         String[] GetGraphPanelStylesForID(int graphID);
         String[] GetGraphPanelStylesForType(GraphType graphType);
         double GetInterestTime();
         DateTime? GetInternetNTPTime();
         LogMessage[] GetLogMessages();
-        CommonImage GetOfflineMapCommonImage(IntSize imageSize, LocPoint centerLocation, int zoom);
-        String GetOfflineMapCopyrightInfo();
+        CommonImage? GetOfflineMapCommonImage(IntSize imageSize, LocPoint centerLocation, int zoom);
+        String? GetOfflineMapCopyrightInfo();
         String[] GetPluginPackIDList();
-        PluginPackInfo GetPluginPackInfo(String packID);
+        PluginPackInfo? GetPluginPackInfo(String packID);
         Dictionary<String, Dictionary<String, String> > GetPluginThirdPartyNotices();
-        (byte[], Timestamp?, CameraInfo) GetPreviewJpeg(int channel, double timeline, double maxGap);
+        (byte[]?, Timestamp?, CameraInfo?) GetPreviewJpeg(int channel, double timeline, double maxGap);
         String[] GetRecentProjectPaths();
-        String GetSessionPath(SessionIdentifier session);
-        String GetSessionPublicDataPath(SessionIdentifier session);
-        String[] GetSubDataPaths();
-        String GetTempFilesRoot();
+        String? GetSessionPath(SessionIdentifier session);
+        String? GetSessionPublicDataPath(SessionIdentifier session);
+        String?[] GetSubDataPaths();
+        String? GetTempFilesRoot();
         Dictionary<String, Version> GetVersionTable();
-        WindowClassInfo GetWindowClassInfo(String windowClassID, String transformID);
+        WindowClassInfo? GetWindowClassInfo(String windowClassID, String? transformID);
         Dictionary<String, WindowClassInfo> GetWindowClassTable();
         Task<bool> InstallPlugin(String dirPath);
         bool IsInternetConnected();
@@ -80,41 +80,41 @@ namespace ASEva
         void Log(String text, LogLevel level);
         Task<bool> NewProject(bool force);
         Task OpenDialog(object caller, String dialogClassID, String config);
-        Task<bool> OpenProject(String projectFile, bool force);
+        Task<bool> OpenProject(String? projectFile, bool force);
         void PlayMp3(byte[] mp3FileData);
         Task<bool> PopupConfirm(String msg);
         Task PopupError(String msg);
         Task PopupNotice(String msg);
         void Print(String text);
         void PublishData(String dataID, byte[] data);
-        void RegisterAudioDriver(AudioDriverInfo driver, AudioRecorder recorder, AudioReplayer replayer);
+        void RegisterAudioDriver(AudioDriverInfo driver, AudioRecorder? recorder, AudioReplayer? replayer);
         void RegisterAudioReplayers(AudioDriverInfo driver, AudioReplayer replayer);
         void RegisterGraphPanelForType(GraphType graphType, String styleName, Type panelType);
         void RegisterGraphPanelForID(int graphID, String styleName, Type panelType);
-        DialogClassInfo RegisterTransformDialogClass(String dialogClassID, String config);
-        DialogClassInfo RegisterTransformDialogClassDirectly(String dialogClassID, DialogClass transformDialogClass, String defaultConfig);
-        WindowClassInfo RegisterTransformWindowClass(String windowClassID, String config);
-        WindowClassInfo RegisterTransformWindowClassDirectly(String windowClassID, WindowClass transformWindowClass, String defaultConfig);
+        DialogClassInfo? RegisterTransformDialogClass(String dialogClassID, String config);
+        DialogClassInfo? RegisterTransformDialogClassDirectly(String dialogClassID, DialogClass transformDialogClass, String defaultConfig);
+        WindowClassInfo? RegisterTransformWindowClass(String windowClassID, String config);
+        WindowClassInfo? RegisterTransformWindowClassDirectly(String windowClassID, WindowClass transformWindowClass, String defaultConfig);
         void RemoveBusProtocolFile(BusProtocolFileID fileID);
         void RemoveProcessorVideoReference(int videoChannel);
         void ResetAppFunctionHandler(object caller, String nativeClassID, String funcID);
-        bool SaveCurrentProject(String projectFile);
-        Task<String> SelectBusMessage(String originMessageID);
+        bool SaveCurrentProject(String? projectFile);
+        Task<String?> SelectBusMessage(String? originMessageID);
         Task SelectBusMessages(SelectBusMessageHandler handler, List<String> existBusMessageIDList);
         Task<BusProtocolFileID[]> SelectBusProtocolFiles(BusProtocolFileID[] selected);
-        Task<SignalConfig> SelectSignal(SignalConfig origin, bool withScale, bool withSignBit, String unit);
+        Task<SignalConfig?> SelectSignal(SignalConfig? origin, bool withScale, bool withSignBit, String unit);
         Task SelectSignals(SelectSignalHandler handler, List<String> existSignalIDList);
         void SendRawDataWithCPUTick(ulong cpuTick, String channelID, double[] values, byte[] binary);
         void SetAppFunctionHandler(object caller, String nativeClassID, String funcID, AppFunctionHandler handler);
         void SetAudioVolume(double volume);
-        void SetCurrentDialogTitle(String title, object icon);
-        void SetDataPath(String path);
+        void SetCurrentDialogTitle(String? title, object? icon);
+        void SetDataPath(String? path);
         void SetGlobalPath(String key, String path);
         void SetGlobalVariable(String key, String value);
-        void SetSubDataPath(int subIndex, String path);
-        void SetWindowTitle(object window, String title, object icon);
+        void SetSubDataPath(int subIndex, String? path);
+        void SetWindowTitle(object window, String? title, object? icon);
         bool StartProcess(String target);
-        DataSubscriber SubscribeData(String dataID, int bufferLength, int timeout);
+        DataSubscriber? SubscribeData(String dataID, int bufferLength, int timeout);
         Task<bool> TerminateApp(bool force, bool autosave);
         bool UninstallPlugin(String packID);
         void UnregisterPanel(object panel);
@@ -176,20 +176,20 @@ namespace ASEva
         /// Add bus protocol file
         /// </summary>
         /// <param name="filePath">File path of bus protocol file</param>
-        /// <param name="fileIDs">Output bus protocol file IDs, null if the file doesn't exist</param>
-        /// <returns>The result</returns>
+        /// <param name="fileIDs">Output bus protocol file IDs</param>
+        /// <returns>The result (AddBusProtocolResult.Invalid if the file doesn't exist)</returns>
         /// \~Chinese
         /// <summary>
         /// 添加新的总线协议文件
         /// </summary>
         /// <param name="filePath">总线协议文件路径</param>
-        /// <param name="fileIDs">若文件存在则输出关联的总线协议文件ID列表，否则输出null</param>
-        /// <returns>添加结果</returns>
+        /// <param name="fileIDs">输出关联的总线协议文件ID列表</param>
+        /// <returns>添加结果，若文件不存在则返回Invalid</returns>
         public static AddBusProtocolResult AddBusProtocolFile(String filePath, out BusProtocolFileID[] fileIDs)
         {
             if (Handler.ClientSide)
             {
-                fileIDs = null;
+                fileIDs = [];
                 return AddBusProtocolResult.Invalid;
             }
             return Handler.AddBusProtocolFile(filePath, out fileIDs);
@@ -283,7 +283,7 @@ namespace ASEva
         /// <param name="funcID">函数ID</param>
         /// <param name="input">函数输入数据</param>
         /// <returns>函数输出数据，若未找到相应插件或函数ID无响应则返回null</returns>
-        public static byte[] CallNativeFunction(object caller, String nativeClassID, String funcID, byte[] input)
+        public static byte[]? CallNativeFunction(object caller, String nativeClassID, String funcID, byte[]? input)
         {
             if (Handler.ClientSide) return null;
             return Handler.CallNativeFunction(caller, nativeClassID, funcID, input);
@@ -419,7 +419,7 @@ namespace ASEva
         /// <param name="panel">新建的配置面板对象，创建失败则为null</param>
         /// <param name="info">新建配置面板的组件信息，创建失败则为null</param>
         /// <returns>创建结果，若成功则在释放窗口时需要调用 ASEva.AgencyLocal.UnregisterPanel </returns>
-        public static CreatePanelResult CreateConfigPanel(object caller, String dialogClassID, String transformID, out object panel, out DialogClassInfo info)
+        public static CreatePanelResult CreateConfigPanel(object caller, String dialogClassID, String? transformID, out object? panel, out DialogClassInfo? info)
         {
             return Handler.CreateConfigPanel(caller, dialogClassID, transformID, out panel, out info);
         }
@@ -438,7 +438,7 @@ namespace ASEva
         /// <param name="graphType">图表类型</param>
         /// <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
         /// <returns>可视化面板对象，若创建失败则返回null</returns>
-        public static GraphPanel CreateGraphPanelForType(GraphType graphType, String styleName)
+        public static GraphPanel? CreateGraphPanelForType(GraphType graphType, String? styleName)
         {
             return Handler.CreateGraphPanelForType(graphType, styleName);
         }
@@ -457,7 +457,7 @@ namespace ASEva
         /// <param name="graphID">图表报告ID</param>
         /// <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
         /// <returns>可视化面板对象，若创建失败则返回null</returns>
-        public static GraphPanel CreateGraphPanelForID(int graphID, String styleName)
+        public static GraphPanel? CreateGraphPanelForID(int graphID, String? styleName)
         {
             return Handler.CreateGraphPanelForID(graphID, styleName);
         }
@@ -482,7 +482,7 @@ namespace ASEva
         /// <param name="panel">新建的窗口面板对象，创建失败则为null</param>
         /// <param name="info">新建窗口面板的组件信息，创建失败则为null</param>
         /// <returns>创建结果，若成功则在释放窗口时需要调用 ASEva.AgencyLocal.UnregisterPanel </returns>
-        public static CreatePanelResult CreateWindowPanel(object caller, String windowClassID, String transformID, out object panel, out WindowClassInfo info)
+        public static CreatePanelResult CreateWindowPanel(object caller, String windowClassID, String? transformID, out object? panel, out WindowClassInfo? info)
         {
             return Handler.CreateWindowPanel(caller, windowClassID, transformID, out panel, out info);
         }
@@ -499,7 +499,7 @@ namespace ASEva
         /// </summary>
         /// <param name="imageData">JPG或PNG二进制数据</param>
         /// <returns>解码后的通用图像数据(BGR不逆序)，若失败则返回null</returns>
-        public static CommonImage DecodeImage(byte[] imageData)
+        public static CommonImage? DecodeImage(byte[] imageData)
         {
             return Handler.DecodeImage(imageData);
         }
@@ -579,7 +579,7 @@ namespace ASEva
         /// <param name="image">通用图像数据</param>
         /// <param name="format">编码格式，目前支持"jpg", "png"</param>
         /// <returns>编码后的二进制数据，若失败则返回null</returns>
-        public static byte[] EncodeImage(CommonImage image, String format)
+        public static byte[]? EncodeImage(CommonImage image, String format)
         {
             return Handler.EncodeImage(image, format);
         }
@@ -594,7 +594,7 @@ namespace ASEva
         /// 获取应用数据和文档文件根目录路径
         /// </summary>
         /// <returns>应用数据和文档文件根目录路径</returns>
-        public static String GetAppFilesRoot()
+        public static String? GetAppFilesRoot()
         {
             if (Handler.ClientSide && Handler.BundleMode) return null;
             return Handler.GetAppFilesRoot();
@@ -672,7 +672,7 @@ namespace ASEva
         /// </summary>
         /// <param name="fileID">总线协议文件ID</param>
         /// <returns>总线协议文件路径，若未找到返回null</returns>
-        public static String GetBusProtocolFilePath(BusProtocolFileID fileID)
+        public static String? GetBusProtocolFilePath(BusProtocolFileID fileID)
         {
             if (Handler.ClientSide) return null;
             return Handler.GetBusProtocolFilePath(fileID);
@@ -690,7 +690,7 @@ namespace ASEva
         /// <returns>总线协议信息列表</returns>
         public static BusFileInfo[] GetBusProtocolFilesInfo()
         {
-            if (Handler.ClientSide) return null;
+            if (Handler.ClientSide) return [];
             return Handler.GetBusProtocolFilesInfo();
         }
 
@@ -704,7 +704,7 @@ namespace ASEva
         /// 获取当前应用程序的配置文件根目录路径
         /// </summary>
         /// <returns>配置文件根目录路径</returns>
-        public static String GetConfigFilesRoot()
+        public static String? GetConfigFilesRoot()
         {
             if (Handler.ClientSide && Handler.BundleMode) return null;
             return Handler.GetConfigFilesRoot();
@@ -720,7 +720,7 @@ namespace ASEva
         /// 获取当前数据层级的路径
         /// </summary>
         /// <returns>当前数据层级的路径，若数据目录未设置或数据层级为'..'则返回null，若当前数据层级为null(所有层级)则返回数据目录根路径</returns>
-        public static String GetCurrentDataLayerPath()
+        public static String? GetCurrentDataLayerPath()
         {
             if (Handler.ClientSide) return null;
             return Handler.GetCurrentDataLayerPath();
@@ -736,7 +736,7 @@ namespace ASEva
         /// 获取当前项目文件
         /// </summary>
         /// <returns>当前项目文件，新项目或从autosave读取的项目都为null</returns>
-        public static String GetCurrentProject()
+        public static String? GetCurrentProject()
         {
             if (Handler.ClientSide) return null;
             return Handler.GetCurrentProject();
@@ -752,7 +752,7 @@ namespace ASEva
         /// 获取当前数据目录的路径
         /// </summary>
         /// <returns>当前数据目录的路径，若未设置返回null</returns>
-        public static String GetDataPath()
+        public static String? GetDataPath()
         {
             if (Handler.ClientSide) return null;
             return Handler.GetDataPath();
@@ -772,7 +772,7 @@ namespace ASEva
         /// <param name="dialogClassID">对话框组件ID</param>
         /// <param name="transformID">分化ID，可为null</param>
         /// <returns>对话框组件信息，若未找到返回null</returns>
-        public static DialogClassInfo GetDialogClassInfo(String dialogClassID, String transformID)
+        public static DialogClassInfo? GetDialogClassInfo(String dialogClassID, String? transformID)
         {
             return Handler.GetDialogClassInfo(dialogClassID, transformID);
         }
@@ -794,7 +794,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get thirt party license notices of software used by framework
+        /// Get third party license notices of software used by framework
         /// </summary>
         /// <returns>Dictionary. The key is title</returns>
         /// \~Chinese
@@ -821,7 +821,7 @@ namespace ASEva
         /// <param name="session">希望获取generation所属的session ID</param>
         /// <param name="generation">希望获取的generation ID</param>
         /// <returns>Generation数据的根路径，若不存在或不属于当前层级则返回null</returns>
-        public static String GetGenerationPath(SessionIdentifier session, String generation)
+        public static String? GetGenerationPath(SessionIdentifier session, String generation)
         {
             if (Handler.ClientSide) return null;
             return Handler.GetGenerationPath(session, generation);
@@ -839,7 +839,7 @@ namespace ASEva
         /// </summary>
         /// <param name="key">全局路径key</param>
         /// <returns>以分号分割的全局路径value（仅返回存在的部分），若key为null、""则返回null</returns>
-        public static String GetGlobalPath(String key)
+        public static String? GetGlobalPath(String key)
         {
             if (Handler.ClientSide && Handler.BundleMode) return null;
             return Handler.GetGlobalPath(key);
@@ -857,7 +857,7 @@ namespace ASEva
         /// <returns>所有全局路径的键</returns>
         public static String[] GetGlobalPathKeys()
         {
-            if (Handler.ClientSide && Handler.BundleMode) return null;
+            if (Handler.ClientSide && Handler.BundleMode) return [];
             return Handler.GetGlobalPathKeys();
         }
 
@@ -871,7 +871,7 @@ namespace ASEva
         /// 获取当前全局公共数据目录的路径
         /// </summary>
         /// <returns>当前全局公共数据目录的路径，若未设置返回null</returns>
-        public static String GetGlobalPublicDataPath()
+        public static String? GetGlobalPublicDataPath()
         {
             if (Handler.ClientSide) return null;
             return Handler.GetGlobalPublicDataPath();
@@ -882,16 +882,16 @@ namespace ASEva
         /// Get value of global variable
         /// </summary>
         /// <param name="key">Key of global variable</param>
-        /// <param name="defaultValue">Default value, which will be returned while key is null, empty, or doesn't exist</param>
+        /// <param name="defaultValue">Default value, which will be returned while key is empty, or doesn't exist</param>
         /// <returns>Value of global variable</returns>
         /// \~Chinese
         /// <summary>
         /// 获取全局变量
         /// </summary>
         /// <param name="key">全局变量key</param>
-        /// <param name="defaultValue">默认值，即当key为null、""、或不存在时返回的值</param>
+        /// <param name="defaultValue">默认值，即当key为""、或不存在时返回的值</param>
         /// <returns>全局变量value</returns>
-        public static String GetGlobalVariable(String key, String defaultValue)
+        public static String? GetGlobalVariable(String key, String? defaultValue)
         {
             return Handler.GetGlobalVariable(key, defaultValue);
         }
@@ -1006,7 +1006,7 @@ namespace ASEva
         /// <param name="centerLocation">图像中心的经纬度</param>
         /// <param name="zoom">图像的尺度，0~24</param>
         /// <returns>离线地图图像（通用图像数据，BGR不逆序），空表示获取失败</returns>
-        public static CommonImage GetOfflineMapCommonImage(IntSize imageSize, LocPoint centerLocation, int zoom)
+        public static CommonImage? GetOfflineMapCommonImage(IntSize imageSize, LocPoint centerLocation, int zoom)
         {
             if (Handler.ClientSide) return null;
             return Handler.GetOfflineMapCommonImage(imageSize, centerLocation, zoom);
@@ -1022,7 +1022,7 @@ namespace ASEva
         /// 获取离线地图的版权信息
         /// </summary>
         /// <returns>离线地图的版权信息</returns>
-        public static String GetOfflineMapCopyrightInfo()
+        public static String? GetOfflineMapCopyrightInfo()
         {
             if (Handler.ClientSide) return null;
             return Handler.GetOfflineMapCopyrightInfo();
@@ -1055,7 +1055,7 @@ namespace ASEva
         /// </summary>
         /// <param name="packID">插件包ID</param>
         /// <returns>插件包信息，若无对应插件包则返回null</returns>
-        public static PluginPackInfo GetPluginPackInfo(String packID)
+        public static PluginPackInfo? GetPluginPackInfo(String packID)
         {
             return Handler.GetPluginPackInfo(packID);
         }
@@ -1091,7 +1091,7 @@ namespace ASEva
         /// <param name="timeline">获取视频帧的目标时间线，单位秒</param>
         /// <param name="maxGap">容许的最大间隔，单位秒</param>
         /// <returns>1. 视频帧的预览JPEG数据，图像宽度为640像素，获取失败则返回null; 2. 图像的时间戳，获取失败则为null; 3. 摄像头信息，获取失败则为null</returns>
-        public static (byte[], Timestamp?, CameraInfo) GetPreviewJpeg(int channel, double timeline, double maxGap)
+        public static (byte[]?, Timestamp?, CameraInfo?) GetPreviewJpeg(int channel, double timeline, double maxGap)
         {
             return Handler.GetPreviewJpeg(channel, timeline, maxGap);
         }
@@ -1108,7 +1108,7 @@ namespace ASEva
         /// <returns>最近项目文件路径列表</returns>
         public static String[] GetRecentProjectPaths()
         {
-            if (Handler.ClientSide) return null;
+            if (Handler.ClientSide) return [];
             return Handler.GetRecentProjectPaths();
         }
 
@@ -1124,7 +1124,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">希望获取的session ID</param>
         /// <returns>Session数据的根路径，若不存在或不属于当前层级则返回null</returns>
-        public static String GetSessionPath(SessionIdentifier session)
+        public static String? GetSessionPath(SessionIdentifier session)
         {
             if (Handler.ClientSide) return null;
             return Handler.GetSessionPath(session);
@@ -1142,7 +1142,7 @@ namespace ASEva
         /// </summary>
         /// <param name="session">希望获取的session ID</param>
         /// <returns>Session公共数据的根路径，若不存在或不属于当前层级则返回null</returns>
-        public static String GetSessionPublicDataPath(SessionIdentifier session)
+        public static String? GetSessionPublicDataPath(SessionIdentifier session)
         {
             if (Handler.ClientSide) return null;
             return Handler.GetSessionPublicDataPath(session);
@@ -1158,9 +1158,9 @@ namespace ASEva
         /// 获取所有子数据目录的路径
         /// </summary>
         /// <returns>所有子数据目录的路径，目录不存在则为null</returns>
-        public static String[] GetSubDataPaths()
+        public static String?[] GetSubDataPaths()
         {
-            if (Handler.ClientSide) return null;
+            if (Handler.ClientSide) return [];
             return Handler.GetSubDataPaths();
         }
 
@@ -1174,7 +1174,7 @@ namespace ASEva
         /// 获取当前应用程序临时文件根目录路径
         /// </summary>
         /// <returns>临时文件根目录路径</returns>
-        public static String GetTempFilesRoot()
+        public static String? GetTempFilesRoot()
         {
             if (Handler.ClientSide && Handler.BundleMode) return null;
             return Handler.GetTempFilesRoot();
@@ -1209,7 +1209,7 @@ namespace ASEva
         /// <param name="windowClassID">窗口组件ID</param>
         /// <param name="transformID">分化ID，可为null</param>
         /// <returns>窗口组件信息，若未找到返回null</returns>
-        public static WindowClassInfo GetWindowClassInfo(String windowClassID, String transformID)
+        public static WindowClassInfo? GetWindowClassInfo(String windowClassID, String? transformID)
         {
             return Handler.GetWindowClassInfo(windowClassID, transformID);
         }
@@ -1360,7 +1360,7 @@ namespace ASEva
         /// <param name="projectFile">项目文件路径，若设为null则从autosave读取</param>
         /// <param name="force">是否强制打开项目</param>
         /// <returns>是否成功打开项目</returns>
-        public static Task<bool> OpenProject(String projectFile, bool force)
+        public static Task<bool> OpenProject(String? projectFile, bool force)
         {
             if (Handler.ClientSide) return Task.FromResult(false);
             return Handler.OpenProject(projectFile, force);
@@ -1447,14 +1447,14 @@ namespace ASEva
         /// <summary>
         /// Public data
         /// </summary>
-        /// <param name="dataID">Data ID, should not be null or empty</param>
-        /// <param name="data">Binary data, should not be null</param>
+        /// <param name="dataID">Data ID, should not be empty</param>
+        /// <param name="data">Binary data</param>
         /// \~Chinese
         /// <summary>
         /// 发布数据
         /// </summary>
-        /// <param name="dataID">数据ID，不可为null或空字符串</param>
-        /// <param name="data">数据，不可为null</param>
+        /// <param name="dataID">数据ID，不可为空字符串</param>
+        /// <param name="data">数据</param>
         public static void PublishData(String dataID, byte[] data)
         {
             Handler.PublishData(dataID, data);
@@ -1474,7 +1474,7 @@ namespace ASEva
         /// <param name="driver">驱动信息</param>
         /// <param name="recorder">采集接口，若无则设置null</param>
         /// <param name="replayer">回放接口，若无则设置额null</param>
-        public static void RegisterAudioDriver(AudioDriverInfo driver, AudioRecorder recorder, AudioReplayer replayer)
+        public static void RegisterAudioDriver(AudioDriverInfo driver, AudioRecorder? recorder, AudioReplayer? replayer)
         {
             if (Handler.ClientSide) return;
             Handler.RegisterAudioDriver(driver, recorder, replayer);
@@ -1485,13 +1485,13 @@ namespace ASEva
         /// (api:app=3.4.0) Register audio players on the client side
         /// </summary>
         /// <param name="driver">Driver</param>
-        /// <param name="replayer">Players, set to null if there's none</param>
+        /// <param name="replayer">Players</param>
         /// \~Chinese
         /// <summary>
         /// (api:app=3.4.0) 在客户端注册音频回放接口
         /// </summary>
         /// <param name="driver">驱动信息</param>
-        /// <param name="replayer">回放接口，若无则设置额null</param>
+        /// <param name="replayer">回放接口</param>
         public static void RegisterAudioReplayers(AudioDriverInfo driver, AudioReplayer replayer)
         {
             if (!Handler.ClientSide) return;
@@ -1550,7 +1550,7 @@ namespace ASEva
         /// <param name="dialogClassID">原对话框组件ID</param>
         /// <param name="config">用于分化的配置字符串</param>
         /// <returns>分化后的对话框组件信息</returns>
-        public static DialogClassInfo RegisterTransformDialogClass(String dialogClassID, String config)
+        public static DialogClassInfo? RegisterTransformDialogClass(String dialogClassID, String config)
         {
             return Handler.RegisterTransformDialogClass(dialogClassID, config);
         }
@@ -1571,7 +1571,7 @@ namespace ASEva
         /// <param name="transformDialogClass">分化对话框组件类</param>
         /// <param name="defaultConfig">默认的可用于分化的配置字符串</param>
         /// <returns>分化后的对话框组件信息</returns>
-        public static DialogClassInfo RegisterTransformDialogClassDirectly(String dialogClassID, DialogClass transformDialogClass, String defaultConfig)
+        public static DialogClassInfo? RegisterTransformDialogClassDirectly(String dialogClassID, DialogClass transformDialogClass, String defaultConfig)
         {
             return Handler.RegisterTransformDialogClassDirectly(dialogClassID, transformDialogClass, defaultConfig);
         }
@@ -1590,7 +1590,7 @@ namespace ASEva
         /// <param name="windowClassID">原窗口组件ID</param>
         /// <param name="config">用于分化的配置字符串</param>
         /// <returns>分化后的窗口组件信息</returns>
-        public static WindowClassInfo RegisterTransformWindowClass(String windowClassID, String config)
+        public static WindowClassInfo? RegisterTransformWindowClass(String windowClassID, String config)
         {
             return Handler.RegisterTransformWindowClass(windowClassID, config);
         }
@@ -1611,7 +1611,7 @@ namespace ASEva
         /// <param name="transformWindowClass">分化窗口组件类</param>
         /// <param name="defaultConfig">默认的可用于分化的配置字符串</param>
         /// <returns>分化后的窗口组件信息</returns>
-        public static WindowClassInfo RegisterTransformWindowClassDirectly(String windowClassID, WindowClass transformWindowClass, String defaultConfig)
+        public static WindowClassInfo? RegisterTransformWindowClassDirectly(String windowClassID, WindowClass transformWindowClass, String defaultConfig)
         {
             return Handler.RegisterTransformWindowClassDirectly(windowClassID, transformWindowClass, defaultConfig);
         }
@@ -1680,7 +1680,7 @@ namespace ASEva
         /// </summary>
         /// <param name="projectFile">项目文件路径，null表示保存至当前项目文件</param>
         /// <returns>是否成功保存项目</returns>
-        public static bool SaveCurrentProject(String projectFile)
+        public static bool SaveCurrentProject(String? projectFile)
         {
             if (Handler.ClientSide) return false;
             return Handler.SaveCurrentProject(projectFile);
@@ -1698,7 +1698,7 @@ namespace ASEva
         /// </summary>
         /// <param name="originMessageID">初始总线报文配置</param>
         /// <returns>返回总线报文配置，若删除则返回null</returns>
-        public static Task<String> SelectBusMessage(String originMessageID)
+        public static Task<String?> SelectBusMessage(String? originMessageID)
         {
             return Handler.SelectBusMessage(originMessageID);
         }
@@ -1755,7 +1755,7 @@ namespace ASEva
         /// <param name="withSignBit">是否包含符号位信号的配置</param>
         /// <param name="unit">该信号的单位显示，仅当包含乘数配置时有效</param>
         /// <returns>返回信号配置，若删除则返回null</returns>
-        public static Task<SignalConfig> SelectSignal(SignalConfig origin, bool withScale, bool withSignBit, String unit)
+        public static Task<SignalConfig?> SelectSignal(SignalConfig? origin, bool withScale, bool withSignBit, String unit)
         {
             return Handler.SelectSignal(origin, withScale, withSignBit, unit);
         }
@@ -1848,7 +1848,7 @@ namespace ASEva
         /// </summary>
         /// <param name="title">标题，若null则不更改</param>
         /// <param name="icon">图标，若null则不更改</param>
-        public static void SetCurrentDialogTitle(String title, object icon)
+        public static void SetCurrentDialogTitle(String? title, object? icon)
         {
             Handler.SetCurrentDialogTitle(title, icon);
         }
@@ -1863,7 +1863,7 @@ namespace ASEva
         /// 设置数据目录的路径
         /// </summary>
         /// <param name="path">数据目录的路径</param>
-        public static void SetDataPath(String path)
+        public static void SetDataPath(String? path)
         {
             if (Handler.ClientSide) return;
             Handler.SetDataPath(path);
@@ -1873,13 +1873,13 @@ namespace ASEva
         /// <summary>
         /// Set global path
         /// </summary>
-        /// <param name="key">Key of global parameter, do nothing if it's null or empty</param>
+        /// <param name="key">Key of global parameter, do nothing if it's empty</param>
         /// <param name="path">Global path(s) separated by ';', while the ones not exist will be ignored</param>
         /// \~Chinese
         /// <summary>
         /// 设置全局路径
         /// </summary>
-        /// <param name="key">全局路径key，若为null或""则忽略</param>
+        /// <param name="key">全局路径key，若为""则忽略</param>
         /// <param name="path">以分号分割的全局路径value，不存在的部分将被忽略</param>
         public static void SetGlobalPath(String key, String path)
         {
@@ -1891,14 +1891,14 @@ namespace ASEva
         /// <summary>
         /// Set value of global variable
         /// </summary>
-        /// <param name="key">Key of global variable, do nothing if it's null or empty</param>
-        /// <param name="value">Value of global variable, do nothing if it's null</param>
+        /// <param name="key">Key of global variable, do nothing if it's empty</param>
+        /// <param name="value">Value of global variable</param>
         /// \~Chinese
         /// <summary>
         /// 设置全局变量
         /// </summary>
-        /// <param name="key">全局变量key，若为null或""则忽略</param>
-        /// <param name="value">全局变量value，若为null则忽略</param>
+        /// <param name="key">全局变量key，若为""则忽略</param>
+        /// <param name="value">全局变量value</param>
         public static void SetGlobalVariable(String key, String value)
         {
             Handler.SetGlobalVariable(key, value);
@@ -1916,7 +1916,7 @@ namespace ASEva
         /// </summary>
         /// <param name="subIndex">子数据目录序号，0~3</param>
         /// <param name="path">子数据目录的路径</param>
-        public static void SetSubDataPath(int subIndex, String path)
+        public static void SetSubDataPath(int subIndex, String? path)
         {
             if (Handler.ClientSide) return;
             Handler.SetSubDataPath(subIndex, path);
@@ -1936,7 +1936,7 @@ namespace ASEva
         /// <param name="window">窗口对象</param>
         /// <param name="title">标题，若null则不更改</param>
         /// <param name="icon">图标，若null则不更改</param>
-        public static void SetWindowTitle(object window, String title, object icon)
+        public static void SetWindowTitle(object window, String? title, object? icon)
         {
             Handler.SetWindowTitle(window, title, icon);
         }
@@ -1963,7 +1963,7 @@ namespace ASEva
         /// <summary>
         /// Subscribe data from other app layer components
         /// </summary>
-        /// <param name="dataID">Data ID, should not be null or empty</param>
+        /// <param name="dataID">Data ID, should not be empty</param>
         /// <param name="bufferLength">Buffer length, ranges 1~1000</param>
         /// <param name="timeout">The subscription will be closed if no dequeue for a along time, ranges 10～600 in seconds</param>
         /// <returns>Data subscriber object, null if failed to initialize</returns>
@@ -1971,11 +1971,11 @@ namespace ASEva
         /// <summary>
         /// 订阅来自应用层其他组件的数据
         /// </summary>
-        /// <param name="dataID">数据ID，不可为null或空字符串</param>
+        /// <param name="dataID">数据ID，不可为空字符串</param>
         /// <param name="bufferLength">缓存长度，范围在1~1000</param>
         /// <param name="timeout">超过该时间不取出缓存数据则自动关闭订阅，单位秒，范围在10～600</param>
         /// <returns>数据订阅对象，若初始化失败则返回null</returns>
-        public static DataSubscriber SubscribeData(String dataID, int bufferLength, int timeout)
+        public static DataSubscriber? SubscribeData(String dataID, int bufferLength, int timeout)
         {
             return Handler.SubscribeData(dataID, bufferLength, timeout);
         }
@@ -2038,7 +2038,7 @@ namespace ASEva
         /// </summary>
         /// <param name="fileID">Bus protocol file ID</param>
         /// <param name="filePath">New path</param>
-        /// <returns>Whether successfull, false if the file is not found or MD5 doesn't match</returns>
+        /// <returns>Whether successful, false if the file is not found or MD5 doesn't match</returns>
         /// \~Chinese
         /// <summary>
         /// 更新总线协议文件路径(仅支持单通道的情况)
