@@ -30,7 +30,6 @@ namespace ASEva.UIEto
         /// <param name="logicalPadding">按钮边框与文字的间距</param>
         public ButtonPanel(String text, int logicalPadding)
         {
-            if (text == null) text = "";
             label = this.SetContentAsColumnLayout(logicalPadding).AddLabel(text, TextAlignment.Center, true);
             label.TextColor = textColor;
             initialize();
@@ -50,7 +49,6 @@ namespace ASEva.UIEto
         /// <param name="logicalPadding">按钮边框与文字的间距</param>
         public ButtonPanel(Bitmap image, int logicalPadding)
         {
-            if (image == null) throw new NullReferenceException("Null image.");
             defaultBitmap = image;
             imageView = this.SetContentAsColumnLayout(logicalPadding).AddControl(new ImageView{ Image = image }, true) as ImageView;
             initialize();
@@ -68,7 +66,8 @@ namespace ASEva.UIEto
         /// <param name="image">新图像，尺寸应与原图像一致，否则不更新</param>
         public void UpdateImage(Bitmap image)
         {
-            if (image == null || image.Width != defaultBitmap.Width || image.Height != defaultBitmap.Height) return;
+            if (imageView == null) return;
+            if (defaultBitmap == null || image.Width != defaultBitmap.Width || image.Height != defaultBitmap.Height) return;
             if (image == defaultBitmap) return;
 
             defaultBitmap = image;
@@ -84,7 +83,7 @@ namespace ASEva.UIEto
         /// <summary>
         /// 面板式文字按钮的字体
         /// </summary>
-        public Font Font
+        public Font? Font
         {
             get
             {
@@ -93,7 +92,7 @@ namespace ASEva.UIEto
             }
             set
             {
-                if (label == null) return;
+                if (label == null || value == null) return;
                 label.Font = value;
             }
         }
@@ -106,7 +105,7 @@ namespace ASEva.UIEto
         /// <summary>
         /// 点击按钮事件
         /// </summary>
-        public event EventHandler Click;
+        public event EventHandler? Click;
 
         /// \~English
         /// <summary>
@@ -201,7 +200,7 @@ namespace ASEva.UIEto
             {
                 if (label != null) return label.ToolTip;
                 else if (imageView != null) return imageView.ToolTip;
-                else return null;
+                else throw new Exception("Can't get tooltip.");
             }
             set
             {
@@ -212,6 +211,7 @@ namespace ASEva.UIEto
 
         private void setLabelTextColor()
         {
+            if (label == null) return;
             if (Enabled) label.TextColor = textColor;
             else
             {
@@ -227,9 +227,10 @@ namespace ASEva.UIEto
 
         private void initialize()
         {
-            Control innerControl = null;
+            Control? innerControl = null;
             if (label != null) innerControl = label;
             if (imageView != null) innerControl = imageView;
+            if (innerControl == null) return;
 
             var targetControl = App.CanParentReceiveChildEvents ? this : innerControl;
             targetControl.MouseEnter += delegate
@@ -253,13 +254,13 @@ namespace ASEva.UIEto
             {
                 mouseDown = false;
                 BackgroundColor = mouseInside ? mouseInsideColor : defaultBackgroundColor;
-                if (Enabled && Click != null) Click(this, null);
+                if (Enabled && Click != null) Click.Invoke(this, EventArgs.Empty);
             };
 
             EnabledChanged += delegate
             {
                 if (label != null) setLabelTextColor();
-                if (imageView != null) imageView.Image = Enabled ? defaultBitmap : disableBitmap;
+                if (imageView != null && defaultBitmap != null) imageView.Image = Enabled ? defaultBitmap : disableBitmap;
             };
         }
 
@@ -269,6 +270,7 @@ namespace ASEva.UIEto
             {
                 if (disableBitmapObj == null)
                 {
+                    if (defaultBitmap == null) throw new NullReferenceException("Null defaultBitmap.");
                     disableBitmapObj = defaultBitmap.Clone();
                     for (int i = 0; i < disableBitmapObj.Width; i++)
                     {
@@ -289,9 +291,9 @@ namespace ASEva.UIEto
         private Color mouseInsideColor = Colors.LightSteelBlue;
         private Color mouseDownColor = Colors.SteelBlue;
         private Color textColor = Colors.Black;
-        private Label label = null;
-        private ImageView imageView = null;
-        private Bitmap defaultBitmap = null, disableBitmapObj = null;
+        private Label? label = null;
+        private ImageView? imageView = null;
+        private Bitmap? defaultBitmap = null, disableBitmapObj = null;
 
         public static bool TextAlphaUnsupported { private get; set; }
     }

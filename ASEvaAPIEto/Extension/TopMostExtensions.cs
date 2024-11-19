@@ -29,7 +29,6 @@ namespace ASEva.UIEto
         /// <returns>所在窗口或对话框是否在顶层</returns>
         public static bool IsTopMost(this Control control)
         {
-            if (control == null) return false;
             if (QueryInterface != null) return QueryInterface.IsTopMost(control);
             else return control.ParentWindow != null && control.ParentWindow.Topmost;
         }
@@ -39,6 +38,6 @@ namespace ASEva.UIEto
             bool IsTopMost(Control control);
         }
 
-        public static QueryTopMost QueryInterface { private get; set; }
+        public static QueryTopMost? QueryInterface { private get; set; }
     }
 }

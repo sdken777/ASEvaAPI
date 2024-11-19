@@ -24,7 +24,7 @@ namespace ASEva.UIEto
         /// <summary>
         /// 对话框图标
         /// </summary>
-        public Icon Icon { get; protected set; }
+        public Icon? Icon { get; protected set; }
 
         /// \~English
         /// <summary>
@@ -34,7 +34,7 @@ namespace ASEva.UIEto
         /// <summary>
         /// 对话框标题
         /// </summary>
-        public String Title { get; protected set; }
+        public String? Title { get; protected set; }
 
         /// \~English
         /// <summary>
@@ -98,7 +98,7 @@ namespace ASEva.UIEto
         /// </summary>
         public void Close()
         {
-            if (OnDialogClose != null) OnDialogClose(this, null);
+            OnDialogClose?.Invoke(this, EventArgs.Empty);
         }
 
         /// \~English
@@ -151,7 +151,7 @@ namespace ASEva.UIEto
         /// <summary>
         /// 字符串类型的对话框运行结果
         /// </summary>
-        public String StringResult { get; protected set; }
+        public String? StringResult { get; protected set; }
 
         /// \~English
         /// <summary>
@@ -161,7 +161,7 @@ namespace ASEva.UIEto
         /// <summary>
         /// 任意类型的对话框运行结果
         /// </summary>
-        public object ObjectResult { get; protected set; }
+        public object? ObjectResult { get; protected set; }
 
         /// \~English
         /// <summary>
@@ -256,7 +256,7 @@ namespace ASEva.UIEto
             get { return withBorder; }
         }
 
-        public event EventHandler OnDialogClose;
+        public event EventHandler? OnDialogClose;
 
         private DialogMode mode = DialogMode.Invalid;
         private int minWidth;

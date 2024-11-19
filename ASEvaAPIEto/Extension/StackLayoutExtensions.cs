@@ -95,7 +95,6 @@ namespace ASEva.UIEto
         /// <returns>创建的文字标签对象</returns>
         public static Label AddLabel(this StackLayout stackLayout, String text, bool expand = false)
         {
-            if (text == null) text = "";
             var label = new Label { Text = text, Wrap = WrapMode.None };
             stackLayout.Items.Add(new StackLayoutItem(label, expand));
             return label;
@@ -125,7 +124,6 @@ namespace ASEva.UIEto
         /// <returns>创建的文字标签对象</returns>
         public static Label AddLabel(this StackLayout stackLayout, String text, TextAlignment alignment, bool expand = false, int logicalWidth = 0, int logicalHeight = 0)
         {
-            if (text == null) text = "";
             var label = new Label { Text = text, Wrap = WrapMode.None, TextAlignment = alignment, VerticalAlignment = VerticalAlignment.Center };
             if (logicalWidth > 0) label.SetLogicalWidth(logicalWidth);
             if (logicalHeight > 0) label.SetLogicalHeight(logicalHeight);
@@ -155,7 +153,6 @@ namespace ASEva.UIEto
         /// <returns>创建的按键对象</returns>
         public static Button AddButton(this StackLayout stackLayout, String text, bool expand = false, int logicalWidth = 0, int logicalHeight = 0)
         {
-            if (text == null) text = "";
             var button = new Button { Text = text };
             if (logicalWidth > 0) button.SetLogicalWidth(logicalWidth);
             if (logicalHeight > 0) button.SetLogicalHeight(logicalHeight);
@@ -185,18 +182,14 @@ namespace ASEva.UIEto
         public static Button AddButton(this StackLayout stackLayout, Image image, bool expand = false, int logicalWidth = 0, int logicalHeight = 0)
         {
             var button = new Button();
-            if (image != null)
+            if (Pixel.Scale == 1) button.Image = image;
+            else
             {
-                if (Pixel.Scale == 1) button.Image = image;
-                else
-                {
-                    var w = Math.Max(1, (int)(image.Width * Pixel.Scale));
-                    var h = Math.Max(1, (int)(image.Height * Pixel.Scale));
-                    button.Image = new Bitmap(image, w, h, ImageInterpolation.High);
-                }
-                button.ImagePosition = ButtonImagePosition.Above;
+                var w = Math.Max(1, (int)(image.Width * Pixel.Scale));
+                var h = Math.Max(1, (int)(image.Height * Pixel.Scale));
+                button.Image = new Bitmap(image, w, h, ImageInterpolation.High);
             }
-            else button.Text = "";
+            button.ImagePosition = ButtonImagePosition.Above;
             if (logicalWidth > 0) button.SetLogicalWidth(logicalWidth);
             if (logicalHeight > 0) button.SetLogicalHeight(logicalHeight);
             stackLayout.Items.Add(new StackLayoutItem(button, expand));
@@ -227,7 +220,6 @@ namespace ASEva.UIEto
         /// <returns>创建的面板式按钮对象</returns>
         public static ButtonPanel AddButtonPanel(this StackLayout stackLayout, String text, bool expand = false, int logicalWidth = 0, int logicalHeight = 0, int logicalPadding = 4)
         {
-            if (text == null) text = "";
             var panel = new ButtonPanel(text, logicalPadding);
             stackLayout.AddControl(panel, expand, logicalWidth, logicalHeight);
             return panel;
@@ -256,7 +248,6 @@ namespace ASEva.UIEto
         /// <returns>创建的面板式按钮对象</returns>
         public static ButtonPanel AddButtonPanel(this StackLayout stackLayout, Bitmap image, bool expand = false, int logicalWidth = 0, int logicalHeight = 0, int logicalPadding = 4)
         {
-            if (image == null) return AddButtonPanel(stackLayout, "", expand, logicalWidth, logicalHeight);
             if (Pixel.Scale != 1)
             {
                 var w = Math.Max(1, (int)(image.Width * Pixel.Scale));
@@ -286,7 +277,6 @@ namespace ASEva.UIEto
         /// <returns>创建的链接式按键对象</returns>
         public static LinkButton AddLinkButton(this StackLayout stackLayout, String text, bool expand = false)
         {
-            if (text == null) text = "";
             var button = new LinkButton { Text = text };
             stackLayout.Items.Add(new StackLayoutItem(button, expand));
             return button;
@@ -312,7 +302,6 @@ namespace ASEva.UIEto
         /// <returns>创建的多选框对象</returns>
         public static CheckBox AddCheckBox(this StackLayout stackLayout, String text, bool expand = false, bool isChecked = false)
         {
-            if (text == null) text = "";
             var checkBox = new CheckBox { Text = text, Checked = isChecked };
             stackLayout.Items.Add(new StackLayoutItem(checkBox, expand));
             return checkBox;
@@ -340,8 +329,6 @@ namespace ASEva.UIEto
         /// <returns>创建的单选框组对象</returns>
         public static RadioButtonList AddRadioButtonList(this StackLayout stackLayout, String[] texts, bool expand = false, int selectedIndex = 0, int logicalSpacing = 8)
         {
-            if (texts == null || texts.Length == 0) return null;
-
             var radioButtonList = new RadioButtonList();
             radioButtonList.Spacing = new Size(radioButtonList.Sizer(logicalSpacing), radioButtonList.Sizer(logicalSpacing));
             foreach (var text in texts) radioButtonList.Items.Add(text);
@@ -358,7 +345,7 @@ namespace ASEva.UIEto
         /// Add combo box
         /// </summary>
         /// <param name="stackLayout">Stack layout object</param>
-        /// <param name="texts">Text of each item (can be null)</param>
+        /// <param name="texts">Text of each item (can be empty)</param>
         /// <param name="expand">Whether to expand</param>
         /// <param name="selectedIndex">Initial selected index</param>
         /// <returns>Created combo box object</returns>
@@ -373,8 +360,6 @@ namespace ASEva.UIEto
         /// <returns>创建的组合框对象</returns>
         public static ComboBox AddComboBox(this StackLayout stackLayout, String[] texts, bool expand = false, int selectedIndex = 0)
         {
-            if (texts == null) texts = new String[0];
-
             var comboBox = new ComboBox { ReadOnly = true };
             foreach (var text in texts) comboBox.Items.Add(text);
 
@@ -390,7 +375,7 @@ namespace ASEva.UIEto
         /// Add combo box
         /// </summary>
         /// <param name="stackLayout">Stack layout object</param>
-        /// <param name="texts">Text of each item (can be null)</param>
+        /// <param name="texts">Text of each item (can be empty)</param>
         /// <param name="logicalWidth">Initial logical width, 0 as not to set</param>
         /// <param name="selectedIndex">Initial selected index</param>
         /// <returns>Created combo box object</returns>
@@ -405,8 +390,6 @@ namespace ASEva.UIEto
         /// <returns>创建的组合框对象</returns>
         public static ComboBox AddComboBox(this StackLayout stackLayout, String[] texts, int logicalWidth, int selectedIndex = 0)
         {
-            if (texts == null) texts = new String[0];
-
             var comboBox = new ComboBox { ReadOnly = true };
             foreach (var text in texts) comboBox.Items.Add(text);
 
@@ -441,7 +424,6 @@ namespace ASEva.UIEto
         /// <returns>创建的分组框对象</returns>
         public static GroupBox AddGroupBox(this StackLayout stackLayout, String title, bool expand = false, int logicalWidth = 0, int logicalHeight = 0)
         {
-            if (title == null) title = "";
             var groupBox = new GroupBox { Text = title };
             if (logicalWidth > 0) groupBox.SetLogicalWidth(logicalWidth);
             if (logicalHeight > 0) groupBox.SetLogicalHeight(logicalHeight);

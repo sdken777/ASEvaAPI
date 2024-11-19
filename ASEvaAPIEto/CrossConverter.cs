@@ -26,9 +26,8 @@ namespace ASEva.UIEto
         /// </summary>
         /// <param name="anyWindowPanel">任意窗口面板</param>
         /// <returns>Eto窗口面板，若转化失败则返回null</returns>
-        public static WindowPanel ConvertWindowPanel(object anyWindowPanel)
+        public static WindowPanel? ConvertWindowPanel(object anyWindowPanel)
         {
-            if (anyWindowPanel == null) return null;
             if (anyWindowPanel is WindowPanel) return anyWindowPanel as WindowPanel;
             else return App.ConvertWindowPanelToEto(anyWindowPanel);
         }
@@ -45,9 +44,8 @@ namespace ASEva.UIEto
         /// </summary>
         /// <param name="anyConfigPanel">任意配置面板</param>
         /// <returns>Eto配置面板，若转化失败则返回null</returns>
-        public static ConfigPanel ConvertConfigPanel(object anyConfigPanel)
+        public static ConfigPanel? ConvertConfigPanel(object anyConfigPanel)
         {
-            if (anyConfigPanel == null) return null;
             if (anyConfigPanel is ConfigPanel) return anyConfigPanel as ConfigPanel;
             else return App.ConvertConfigPanelToEto(anyConfigPanel);
         }

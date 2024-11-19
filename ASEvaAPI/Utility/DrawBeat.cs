@@ -50,7 +50,6 @@ namespace ASEva.Utility
                 ctxs[id].Category = "";
             }
             var ctx = ctxs[id];
-            if (ctx == null) return false;
             if (!ctx.Ongoing && !ctx.InCaller)
             {
                 var now = DateTime.Now;
@@ -81,7 +80,6 @@ namespace ASEva.Utility
         public static bool CallerBegin(object target)
         {
             if (!enabled) return true;
-            if (target == null) return false;
             else return CallerBegin(target.GetHashCode());
         }
 
@@ -115,7 +113,7 @@ namespace ASEva.Utility
         public static void CallerEnd(object target)
         {
             if (!enabled) return;
-            if (target != null) CallerEnd(target.GetHashCode());
+            CallerEnd(target.GetHashCode());
         }
 
         /// \~English
@@ -130,11 +128,11 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="id">绘图对象ID</param>
         /// <param name="category">类别，设为空表示不归类</param>
-        public static void CallbackBegin(int id, String category)
+        public static void CallbackBegin(int id, String? category)
         {
             if (!enabled) return;
             if (!ctxs.ContainsKey(id)) ctxs[id] = new DrawBeatContext();
-            ctxs[id].Category = category == null ? "" : category;
+            ctxs[id].Category = category ?? "";
             if (ctxs[id].CallbackBeginTime == null) ctxs[id].CallbackBeginTime = DateTime.Now;
         }
 
@@ -150,10 +148,10 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="target">绘图对象</param>
         /// <param name="category">类别，设为空表示不归类</param>
-        public static void CallbackBegin(object target, String category)
+        public static void CallbackBegin(object target, String? category)
         {
             if (!enabled) return;
-            if (target != null) CallbackBegin(target.GetHashCode(), category);
+            CallbackBegin(target.GetHashCode(), category);
         }
 
         /// \~English
@@ -170,7 +168,6 @@ namespace ASEva.Utility
         {
             if (!enabled) return;
             var ctx = ctxs[id];
-            if (ctx == null) return;
             if (ctx.CallbackBeginTime != null)
             {
                 DateTimeRange range;
@@ -209,7 +206,7 @@ namespace ASEva.Utility
         public static void CallbackEnd(object target)
         {
             if (!enabled) return;
-            if (target != null) CallbackEnd(target.GetHashCode());
+            CallbackEnd(target.GetHashCode());
         }
 
         /// \~English

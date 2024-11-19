@@ -32,7 +32,6 @@ namespace ASEva.UIEto
         /// <returns>页对象</returns>
         public static TabPage AddPage(this TabControl tabControl, String title)
         {
-            if (title == null) title = "";
             var page = new TabPage { Text = title };
             tabControl.Pages.Add(page);
             return page;

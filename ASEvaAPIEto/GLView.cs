@@ -217,7 +217,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本字体，空则使用默认字体
 		/// </summary>
-        public String fontName;
+        public String? fontName;
 
 		/// \~English
 		/// <summary>
@@ -286,7 +286,7 @@ namespace ASEva.UIEto
             return output;
         }
 
-        private List<GLTextTask> tasks = new List<GLTextTask>();
+        private List<GLTextTask> tasks = [];
     }
 
 	/// \~English
@@ -638,7 +638,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 初始化事件
 		/// </summary>
-		public event EventHandler<GLEventArgs> GLInitialize;
+		public event EventHandler<GLEventArgs>? GLInitialize;
 
 		/// \~English
 		/// <summary>
@@ -648,7 +648,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 缩放事件
 		/// </summary>
-		public event EventHandler<GLResizeEventArgs> GLResize;
+		public event EventHandler<GLResizeEventArgs>? GLResize;
 
 		/// \~English
 		/// <summary>
@@ -658,7 +658,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 渲染事件
 		/// </summary>
-		public event EventHandler<GLRenderEventArgs> GLRender;
+		public event EventHandler<GLRenderEventArgs>? GLRender;
 
 		/// \~English
 		/// <summary>
@@ -704,7 +704,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
+		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
 		/// <param name="requestOnscreenRendering">Whether to request onscreen rendering (Use offscreen if unsupported), default is false</param>
 		/// <param name="drawText">Whether to request drawing text, default is true</param>
 		/// <param name="useLegacyAPI">Whether to use OpenGL legacy API, default is true</param>
@@ -716,7 +716,7 @@ namespace ASEva.UIEto
 		/// <param name="requestOnscreenRendering">是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
 		/// <param name="drawText">是否需要绘制文本，默认为true</param>
 		/// <param name="useLegacyAPI">是否需要使用OpenGL传统API，默认为true</param>
-		public GLView(String moduleID, bool requestOnscreenRendering, bool drawText = true, bool useLegacyAPI = true)
+		public GLView(String? moduleID, bool requestOnscreenRendering, bool drawText = true, bool useLegacyAPI = true)
 		{
 			this.moduleID = moduleID;
 			this.requestAntialias = GLAntialias.Sample4x;
@@ -731,7 +731,7 @@ namespace ASEva.UIEto
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
+        /// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
         /// <param name="requestAntialias">Antialias option (Use the nearest option if not supported), default is 4x sampling</param>
         /// <param name="requestOnscreenRendering">Whether to request onscreen rendering (Use offscreen if unsupported), default is false</param>
         /// <param name="requestOverlay">Whether to request support of overlay (SupportOverlay will be false if unsupported), default is true</param>
@@ -747,7 +747,7 @@ namespace ASEva.UIEto
         /// <param name="requestOverlay">是否需要支持被其他控件覆盖(若不支持则SupportOverlay属性为false)，默认为true</param>
         /// <param name="drawText">是否需要绘制文本，默认为true</param>
         /// <param name="useLegacyAPI">是否需要使用OpenGL传统API，默认为true</param>
-        public GLView(String moduleID, GLAntialias requestAntialias, bool requestOnscreenRendering = false, bool requestOverlay = true, bool drawText = true, bool useLegacyAPI = true)
+        public GLView(String? moduleID, GLAntialias requestAntialias, bool requestOnscreenRendering = false, bool requestOverlay = true, bool drawText = true, bool useLegacyAPI = true)
 		{
 			this.moduleID = moduleID;
 			this.requestAntialias = requestAntialias;
@@ -775,7 +775,7 @@ namespace ASEva.UIEto
 
 		~GLView()
 		{
-			if (!closed) Agency.Print("GLView.Close not called. Memory leaking.");
+			if (!closed) AgencyLocal.Print("GLView.Close not called. Memory leaking.");
 		}
 
 		/// \~English
@@ -838,23 +838,18 @@ namespace ASEva.UIEto
 
         public void OnGLInitialize(OpenGL gl, GLContextInfo contextInfo)
         {
-			if (contextInfo.version == null) contextInfo.version = "";
-			if (contextInfo.vendor == null) contextInfo.vendor = "";
-			if (contextInfo.renderer == null) contextInfo.renderer = "";
-			if (contextInfo.extensions == null) contextInfo.extensions = "";
 			ContextInfo = contextInfo;
-
-            if (GLInitialize != null) GLInitialize(this, new GLEventArgs(gl));
+            GLInitialize?.Invoke(this, new GLEventArgs(gl));
         }
 
         public void OnGLResize(OpenGL gl, GLSizeInfo sizeInfo)
         {
-            if (GLResize != null) GLResize(this, new GLResizeEventArgs(gl, sizeInfo));
+            GLResize?.Invoke(this, new GLResizeEventArgs(gl, sizeInfo));
         }
 
         public void OnGLRender(OpenGL gl, GLTextTasks textTasks)
         {
-            if (GLRender != null) GLRender(this, new GLRenderEventArgs(gl, textTasks));
+            GLRender?.Invoke(this, new GLRenderEventArgs(gl, textTasks));
 			lock (renderTime)
 			{
 				renderTime.Add(DateTime.Now);
@@ -886,7 +881,7 @@ namespace ASEva.UIEto
 			OnMouseDoubleClick(args);
 		}
 
-        public string OnGetModuleID()
+        public string? OnGetModuleID()
         {
             return moduleID;
         }
@@ -904,16 +899,16 @@ namespace ASEva.UIEto
 					RequestOverlay = requestOverlay,
 				};
 				Factory.CreateGLBackend(this, options, out etoControl, out glBackend, out supportOverlay);
-				if (etoControl != null) Content = etoControl;
+				Content = etoControl;
 			}
 		}
 
-        public static GLBackendFactory Factory { private get; set; }
+        public static GLBackendFactory? Factory { private get; set; }
 
-		private Control etoControl;
-		private GLBackend glBackend;
-		private List<DateTime> renderTime = new List<DateTime>();
-		private String moduleID;
+		private Control? etoControl;
+		private GLBackend? glBackend;
+		private List<DateTime> renderTime = [];
+		private String? moduleID;
 		private GLAntialias requestAntialias;
 		private bool requestOnscreenRendering;
 		private bool requestOverlay;
@@ -933,7 +928,7 @@ namespace ASEva.UIEto
 		void OnRaiseMouseUp(MouseEventArgs args);
 		void OnRaiseMouseWheel(MouseEventArgs args);
 		void OnRaiseMouseDoubleClick(MouseEventArgs args);
-		String OnGetModuleID();
+		String? OnGetModuleID();
 	}
 
 	public interface GLBackend

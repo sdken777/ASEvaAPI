@@ -21,7 +21,7 @@ namespace ASEva.UIEto
             labelValue2 = rowLayout.AddLabel("", TextAlignment.Left, false, 90);
             labelValue2.Font = App.DefaultFont(1.4f);
             
-            MouseDown += delegate { click.Set(); };
+            MouseDown += delegate { click?.Set(); };
         }
         
         public int? GetFixedHeight()
@@ -42,7 +42,7 @@ namespace ASEva.UIEto
         {
             // 标题显示
             labelTitle.Text = data == null ? "" : data.Definition.MainTitle;
-            if (data == null || !(data is SingleValueData) || !data.HasData())
+            if (data == null || !(data is SingleValueData singleValueData) || !data.HasData())
             {
                 labelValue1.TextColor = Colors.Black;
                 labelValue1.Text = "No data.";
@@ -51,7 +51,7 @@ namespace ASEva.UIEto
             }
 
             // 数据显示
-            double val = (data as SingleValueData).GetValue();
+            double val = singleValueData.GetValue();
 
             var valAbs = Math.Abs(val);
             var valAbsInt = (ulong)Math.Floor(valAbs);
@@ -84,18 +84,18 @@ namespace ASEva.UIEto
             else
             {
                 var vd = data.Definition.Validation;
-                if (vd is ValueBelowValidation)
+                if (vd is ValueBelowValidation vbv)
                 {
-                    labelValidation.Text = "≤ " + (vd as ValueBelowValidation).GetThreshold();
+                    labelValidation.Text = "≤ " + vbv.GetThreshold();
                 }
-                else if (vd is ValueAboveValidation)
+                else if (vd is ValueAboveValidation vav)
                 {
-                    labelValidation.Text = "≥ " + (vd as ValueAboveValidation).GetThreshold();
+                    labelValidation.Text = "≥ " + vav.GetThreshold();
                 }
-                else if (vd is ValueInRangeValidation)
+                else if (vd is ValueInRangeValidation vrv)
                 {
                     double lower = 0, upper = 0;
-                    (vd as ValueInRangeValidation).GetRange(out lower, out upper);
+                    vrv.GetRange(out lower, out upper);
                     labelValidation.Text = "[ " + lower + " , " + upper + " ]";
                 }
             }
@@ -133,6 +133,6 @@ namespace ASEva.UIEto
         }
 
         private Label labelTitle, labelValue1, labelValue2, labelValidation;
-        private ManualResetEventSlim click;
+        private ManualResetEventSlim? click;
     }
 }

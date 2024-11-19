@@ -17,9 +17,7 @@ namespace ASEva.UIEto
     {
         public static object ConvertToBitmap(CommonImage image)
         {
-            if (image == null) return null;
-
-            Bitmap bitmap = null;
+            Bitmap bitmap;
             if (image.WithAlpha)
             {
                 bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppRgba);
@@ -89,18 +87,18 @@ namespace ASEva.UIEto
             return bitmap;
         }
 
-        public static CommonImage ConvertFromBitmap(object bitmapObject)
+        public static CommonImage? ConvertFromBitmap(object bitmapObject)
         {
-            if (bitmapObject == null) return null;
-            if (!(bitmapObject is Bitmap)) return null;
-            
             var bitmap = bitmapObject as Bitmap;
+            if (bitmap == null) return null;
+
             bool etoUnsupported = false;
             using (var bitmapData = bitmap.Lock())
             {
                 if (bitmapData.BytesPerPixel == 3)
                 {
                     var image = CommonImage.Create(bitmap.Width, bitmap.Height, false, false);
+                    if (image == null) return null;
                     unsafe
                     {
                         var srcData = (byte*)bitmapData.Data;
@@ -128,6 +126,7 @@ namespace ASEva.UIEto
                 else if (bitmapData.BytesPerPixel == 4)
                 {
                     var image = CommonImage.Create(bitmap.Width, bitmap.Height, true, false);
+                    if (image == null) return null;
                     unsafe
                     {
                         var srcData = (byte*)bitmapData.Data;

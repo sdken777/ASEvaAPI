@@ -29,7 +29,7 @@ namespace ASEva.UIEto
         /// </summary>
         /// <param name="panel">面板</param>
         /// <returns>右键菜单对象，若已存在则返回null</returns>
-        public static ContextMenu SetContextMenuAsNew(this Panel panel)
+        public static ContextMenu? SetContextMenuAsNew(this Panel panel)
         {
             if (panel.ContextMenu != null) return null;
             var menu = new ContextMenu();
@@ -79,9 +79,8 @@ namespace ASEva.UIEto
         /// <param name="text">菜单项文字</param>
         /// <param name="image">菜单项文字前的图标，默认为null</param>
         /// <returns>按键项对象</returns>
-        public static ButtonMenuItem AddButtonItem(this ContextMenu menu, String text, Image image = null)
+        public static ButtonMenuItem AddButtonItem(this ContextMenu menu, String text, Image? image = null)
         {
-            if (text == null) text = "";
             var item = new ButtonMenuItem { Text = text };
             if (image != null) item.Image = image;
             menu.Items.Add(item);
@@ -104,7 +103,6 @@ namespace ASEva.UIEto
         /// <returns>多选项对象</returns>
         public static CheckMenuItem AddCheckItem(this ContextMenu menu, String text)
         {
-            if (text == null) text = "";
             var item = new CheckMenuItem { Text = text };
             menu.Items.Add(item);
             return item;
@@ -126,13 +124,11 @@ namespace ASEva.UIEto
         /// <returns>一组单选项对象</returns>
         public static RadioMenuItem[] AddRadioItems(this ContextMenu menu, String[] texts)
         {
-            if (texts == null) return null;
-
             var list = new List<RadioMenuItem>();
-            RadioMenuItem lastRadioItem = null;
+            RadioMenuItem? lastRadioItem = null;
             foreach (var text in texts)
             {
-                var item = new RadioMenuItem(lastRadioItem) { Text = text == null ? "" : text };
+                var item = new RadioMenuItem(lastRadioItem) { Text = text };
                 menu.Items.Add(item);
                 list.Add(item);
                 lastRadioItem = item;
@@ -171,9 +167,8 @@ namespace ASEva.UIEto
         /// <param name="text">菜单项文字</param>
         /// <param name="image">菜单项文字前的图标，默认为null</param>
         /// <returns>按键项对象</returns>
-        public static ButtonMenuItem AddButtonItem(this ButtonMenuItem subMenu, String text, Image image = null)
+        public static ButtonMenuItem AddButtonItem(this ButtonMenuItem subMenu, String text, Image? image = null)
         {
-            if (text == null) text = "";
             var item = new ButtonMenuItem { Text = text };
             if (image != null) item.Image = image;
             subMenu.Items.Add(item);
@@ -196,7 +191,6 @@ namespace ASEva.UIEto
         /// <returns>多选项对象</returns>
         public static CheckMenuItem AddCheckItem(this ButtonMenuItem subMenu, String text)
         {
-            if (text == null) text = "";
             var item = new CheckMenuItem { Text = text };
             subMenu.Items.Add(item);
             return item;
@@ -218,13 +212,11 @@ namespace ASEva.UIEto
         /// <returns>一组单选项对象</returns>
         public static RadioMenuItem[] AddRadioItems(this ButtonMenuItem subMenu, String[] texts)
         {
-            if (texts == null) return null;
-
             var list = new List<RadioMenuItem>();
-            RadioMenuItem lastRadioItem = null;
+            RadioMenuItem? lastRadioItem = null;
             foreach (var text in texts)
             {
-                var item = new RadioMenuItem(lastRadioItem) { Text = text == null ? "" : text };
+                var item = new RadioMenuItem(lastRadioItem) { Text = text };
                 subMenu.Items.Add(item);
                 list.Add(item);
                 lastRadioItem = item;

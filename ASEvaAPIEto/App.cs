@@ -14,13 +14,13 @@ namespace ASEva.UIEto
 
     public interface AppHandler
     {
-        Application CreateApp(bool attach, out String uiBackend, out String webViewBackend);
+        Application? CreateApp(bool attach, out String uiBackend, out String webViewBackend);
         void RunApp(Application application, Form mainWindow, Form[] subWindows);
         Font CreateDefaultFont();
-        Control ConvertControlToEto(object platformControl);
-        object ConvertControlToPlatform(Control etoControl);
-        WindowPanel ConvertWindowPanelToEto(object platformWindowPanel);
-        ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel);
+        Control? ConvertControlToEto(object platformControl);
+        object? ConvertControlToPlatform(Control etoControl);
+        WindowPanel? ConvertWindowPanelToEto(object platformWindowPanel);
+        ConfigPanel? ConvertConfigPanelToEto(object platformConfigPanel);
         bool RunDialog(DialogPanel panel);
         Dictionary<String, String> GetThirdPartyNotices();
         bool ShouldPassParent();
@@ -52,7 +52,7 @@ namespace ASEva.UIEto
             if (!initAppInvoked)
             {
                 var availableUICodes = getAvailableUICodes();
-                if (availableUICodes == null || availableUICodes.Length == 0) return false;
+                if (availableUICodes.Length == 0) return false;
                 initApp(availableUICodes[0], false);
             }
             return application != null;
@@ -72,19 +72,19 @@ namespace ASEva.UIEto
         /// <param name="uiCode">UI框架代号，设置为空则使用默认框架</param>
         /// <param name="attach">若不调用 ASEva.UIEto.App.Run 执行界面主循环，则设置为true</param>
         /// <returns>是否成功</returns>
-        public static bool Init(String uiCode, bool attach = false)
+        public static bool Init(String? uiCode, bool attach = false)
         {
             if (!initAppInvoked)
             {
                 var availableUICodes = getAvailableUICodes();
                 if (String.IsNullOrEmpty(uiCode))
                 {
-                    if (availableUICodes == null || availableUICodes.Length == 0) return false;
+                    if (availableUICodes.Length == 0) return false;
                     uiCode = availableUICodes[0];
                 }
                 else
                 {
-                    if (availableUICodes == null || !availableUICodes.Contains(uiCode)) return false;
+                    if (!availableUICodes.Contains(uiCode)) return false;
                 }
                 initApp(uiCode, attach);
             }
@@ -125,7 +125,7 @@ namespace ASEva.UIEto
         /// <param name="mainWindow">主窗口</param>
         public static void Run(Form mainWindow)
         {
-            Run(mainWindow, null);
+            Run(mainWindow, []);
         }
 
         /// \~English
@@ -142,7 +142,7 @@ namespace ASEva.UIEto
         /// <param name="subWindows"></param>
         public static void Run(Form mainWindow, Form[] subWindows)
         {
-            if (handler != null && application != null && mainWindow != null && firstFatalException == null)
+            if (handler != null && application != null && firstFatalException == null)
             {
                 mainWindow.Closed += delegate { mainWindow.CloseRecursively(); };
 
@@ -159,12 +159,9 @@ namespace ASEva.UIEto
                 exceptionTimer.Start();
 
                 var validSubWindows = new List<Form>();
-                if (subWindows != null)
+                foreach (var form in subWindows)
                 {
-                    foreach (var form in subWindows)
-                    {
-                        if (form != null) validSubWindows.Add(form);
-                    }
+                    validSubWindows.Add(form);
                 }
 
                 try
@@ -191,12 +188,12 @@ namespace ASEva.UIEto
         /// <summary>
         /// Get current running OS's code, which is the same as ASEva.APIInfo.GetRunningOS
         /// </summary>
-        /// <returns>OS code, null if unrecognized</returns>
+        /// <returns>OS code, "unknown" if unrecognized</returns>
         /// \~Chinese
         /// <summary>
         /// 返回当前运行的OS代号，与 ASEva.APIInfo.GetRunningOS 结果一致
         /// </summary>
-        /// <returns>OS代号，若无法识别返回null</returns>
+        /// <returns>OS代号，若无法识别返回"unknown"</returns>
         public static String GetRunningOS()
         {
             return ASEva.APIInfo.GetRunningOS();
@@ -206,15 +203,15 @@ namespace ASEva.UIEto
         /// <summary>
         /// Get current running UI framework's code
         /// </summary>
-        /// <returns>UI framework code, null if ASEva.UIEto.App.Init is not called or initialization failed</returns>
+        /// <returns>UI framework code, "unknown" if ASEva.UIEto.App.Init is not called or initialization failed</returns>
         /// \~Chinese
         /// <summary>
         /// 返回当前运行的UI框架代号
         /// </summary>
-        /// <returns>UI框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回null</returns>
+        /// <returns>UI框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回"unknown"</returns>
         public static String GetRunningUI()
         {
-            return runningUI;
+            return runningUI ?? "unknown";
         }
 
         /// \~English
@@ -227,7 +224,7 @@ namespace ASEva.UIEto
         /// 返回当前运行UI的后端代号
         /// </summary>
         /// <returns>UI的后端代号，若未运行 ASEva.UIEto.App.Init 、或初始化失败、或当前运行UI无后端则返回null</returns>
-        public static String GetUIBackend()
+        public static String? GetUIBackend()
         {
             return uiBackend;
         }
@@ -244,22 +241,23 @@ namespace ASEva.UIEto
         /// <returns>键为标题，值为版权声明</returns>
         public static Dictionary<String, String> GetUIBackendThirdPartyNotices()
         {
-            return handler == null ? null : handler.GetThirdPartyNotices();
+            if (handler == null) return [];
+            return handler.GetThirdPartyNotices();
         }
 
         /// \~English
         /// <summary>
         /// Get current WebView backend code
         /// </summary>
-        /// <returns>WebView backend code, null if ASEva.UIEto.App.Init is not called or initialization failed</returns>
+        /// <returns>WebView backend code, "unknown" if ASEva.UIEto.App.Init is not called or initialization failed</returns>
         /// \~Chinese
         /// <summary>
         /// 返回当前WebView使用的后台框架代号
         /// </summary>
-        /// <returns>当前WebView使用的后台框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回null</returns>
+        /// <returns>当前WebView使用的后台框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回"unknown"</returns>
         public static String GetWebViewBackend()
         {
-            return webViewBackend;
+            return webViewBackend ?? "unknown";
         }
 
         /// \~English
@@ -270,7 +268,7 @@ namespace ASEva.UIEto
         /// <summary>
         /// 应用程序对象
         /// </summary>
-        public static Application Instance
+        public static Application? Instance
         {
             get { return application; }
         }
@@ -289,7 +287,9 @@ namespace ASEva.UIEto
         /// <returns>默认字体</returns>
         public static Font DefaultFont(float sizeRatio = 1)
         {
-            if (handler != null && defaultFont == null)
+            if (handler == null) throw new InvalidOperationException("Call App.Init first.");
+
+            if (defaultFont == null)
             {
                 defaultFont = handler.CreateDefaultFont();
                 defaultFontSize = defaultFont.Size;
@@ -325,7 +325,7 @@ namespace ASEva.UIEto
             get
             {
                 var workDir = EntryFolder.Path;
-                if (workDir == null) return null;
+                if (workDir == null) throw new Exception("Invalid EntryFolder.Path. Framework broken.");
                 
                 if (Path.GetFileName(workDir) == "MacOS")
                 {
@@ -338,7 +338,9 @@ namespace ASEva.UIEto
                             workDir = Path.GetDirectoryName(parentDir2);
                         }
                     }
+                    if (workDir == null) throw new Exception("Failed to query work path on MacOS.");
                 }
+                
                 return workDir;
             }
         }
@@ -355,9 +357,9 @@ namespace ASEva.UIEto
         /// </summary>
         /// <param name="platformControl">平台特化控件</param>
         /// <returns>Eto控件，若转化失败则返回null</returns>
-        public static Control ConvertControlToEto(object platformControl)
+        public static Control? ConvertControlToEto(object platformControl)
         {
-            if (handler == null || platformControl == null) return null;
+            if (handler == null) return null;
             if (platformControl is Control) return platformControl as Control;
             return handler.ConvertControlToEto(platformControl);
         }
@@ -374,9 +376,9 @@ namespace ASEva.UIEto
         /// </summary>
         /// <param name="etoControl">Eto控件</param>
         /// <returns>平台特化控件，若转化失败则返回null</returns>
-        public static object ConvertControlToPlatform(Control etoControl)
+        public static object? ConvertControlToPlatform(Control etoControl)
         {
-            if (handler == null || etoControl == null) return null;
+            if (handler == null) return null;
             return handler.ConvertControlToPlatform(etoControl);
         }
 
@@ -388,9 +390,9 @@ namespace ASEva.UIEto
         /// <summary>
         /// 已弃用，应使用 ASEva.UIEto.CrossConverter
         /// </summary>
-        public static WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
+        public static WindowPanel? ConvertWindowPanelToEto(object platformWindowPanel)
         {
-            if (handler == null || platformWindowPanel == null) return null;
+            if (handler == null) return null;
             if (platformWindowPanel is WindowPanel) return platformWindowPanel as WindowPanel;
             else return handler.ConvertWindowPanelToEto(platformWindowPanel);
         }
@@ -403,9 +405,9 @@ namespace ASEva.UIEto
         /// <summary>
         /// 已弃用，应使用 ASEva.UIEto.CrossConverter
         /// </summary>
-        public static ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
+        public static ConfigPanel? ConvertConfigPanelToEto(object platformConfigPanel)
         {
-            if (handler == null || platformConfigPanel == null) return null;
+            if (handler == null) return null;
             if (platformConfigPanel is ConfigPanel) return platformConfigPanel as ConfigPanel;
             else return handler.ConvertConfigPanelToEto(platformConfigPanel);
         }
@@ -424,13 +426,11 @@ namespace ASEva.UIEto
         /// <returns>是否成功弹出，对话框的运行结果应通过主面板的各Result属性获取</returns>
         public static Task<bool> RunDialog(DialogPanel panel)
         {
-            if (panel == null) return Task.FromResult(false);
-
             if (RunDialogHandler != null) return RunDialogHandler.RunDialog(panel);
 
             if (handler == null || firstFatalException != null) return Task.FromResult(false);
 
-            UITimer localTimer = null;
+            UITimer? localTimer = null;
             if (exceptionTimer == null)
             {
                 localTimer = new UITimer();
@@ -487,7 +487,7 @@ namespace ASEva.UIEto
         /// </summary>
         /// <param name="parent">parent参数</param>
         /// <returns>返回parent或null</returns>
-        public static Window PassParent(Window parent)
+        public static Window? PassParent(Window parent)
         {
             if (handler == null || !handler.ShouldPassParent()) return null;
             else return parent;
@@ -505,7 +505,7 @@ namespace ASEva.UIEto
         /// </summary>
         /// <param name="parent">parent参数</param>
         /// <returns>返回parent或null</returns>
-        public static Control PassParent(Control parent)
+        public static Control? PassParent(Control parent)
         {
             if (handler == null || !handler.ShouldPassParent()) return null;
             else return parent;
@@ -532,7 +532,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 主窗口的按键事件（一般仅供插件使用）
 		/// </summary>
-		public static event EventHandler<KeyEventArgs> KeyDown;
+		public static event EventHandler<KeyEventArgs>? KeyDown;
 
 		/// \~English
 		/// <summary>
@@ -563,11 +563,9 @@ namespace ASEva.UIEto
         public static void TriggerFatalException(UnhandledExceptionEventArgs args)
         {
             var exObj = args.ExceptionObject;
-            if (exObj is TargetInvocationException) exObj = (exObj as TargetInvocationException).InnerException;
+            if (exObj is TargetInvocationException tie) exObj = tie.InnerException;
 
-            Exception ex = null;
-            if (exObj is Exception) ex = exObj as Exception;
-            else ex = new Exception("Unknown exception.");
+            Exception ex = exObj as Exception ?? new Exception("Unknown exception.");
 
             if (args.IsTerminating)
             {
@@ -592,21 +590,18 @@ namespace ASEva.UIEto
 
         private static String[] getAvailableUICodes()
         {
-            var osCode = GetRunningOS();
-            if (osCode == null) return null;
-
-            switch (osCode)
+            switch (GetRunningOS())
             {
             case "windows":
-                return new String[] { "corewf", "wpf" };
+                return [ "corewf", "wpf" ];
             case "linux":
             case "linuxarm":
-                return new String[] { "gtk" };
+                return [ "gtk" ];
             case "macos":
             case "macosarm":
-                return new String[] { "monomac" };
+                return [ "monomac" ];
             default:
-                return null;
+                return [];
             }
         }
 
@@ -616,8 +611,8 @@ namespace ASEva.UIEto
 
             if (handler == null)
             {
-                String dllFileName = null;
-                String uiNamespace =  null;
+                String? dllFileName = null;
+                String? uiNamespace =  null;
                 switch (uiCode)
                 {
                 case "corewf":
@@ -646,11 +641,11 @@ namespace ASEva.UIEto
                     {
                         var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().ToList();
 
-                        Assembly assembly = null;
+                        Assembly? assembly = null;
                         foreach (var target in loadedAssemblies)
                         {
-                            if (target.FullName.StartsWith("Microsoft.GeneratedCode")) continue;
-                            String assemblyLocation = null;
+                            if (target.FullName?.StartsWith("Microsoft.GeneratedCode") ?? false) continue;
+                            String? assemblyLocation = null;
                             try { assemblyLocation = target.Location; }
                             catch (Exception ex) { Dump.Exception(ex); continue; }
                             if (assemblyLocation == dllFilePath || assemblyLocation == dllFileName) assembly = target;
@@ -666,7 +661,7 @@ namespace ASEva.UIEto
                             var handlerCreator = assembly.GetType("ASEva." + uiNamespace + ".AppHandlerCreator");
                             if (handlerCreator != null)
                             {
-                                handler = (AppHandler)handlerCreator.InvokeMember("Create", BindingFlags.Default | BindingFlags.InvokeMethod, null, null, new object[] { });
+                                handler = (AppHandler?)handlerCreator.InvokeMember("Create", BindingFlags.Default | BindingFlags.InvokeMethod, null, null, []);
                             }
                         }
                     }
@@ -697,6 +692,13 @@ namespace ASEva.UIEto
                     FuncManager.Register("RegisterEtoLabelTableGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.LabelTable, getStyleName("Eto OxyPlot图表", "Eto OxyPlot Graph"), typeof(LabelTableGraph)); return null; });
                     FuncManager.Register("RegisterEtoHistogramValueGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.HistAndLine, getStyleName("Eto柱状图值", "Eto Histogram Value"), typeof(HistogramValueGraph)); return null; });
                 }
+                else
+                {
+                    handler = null;
+                    runningUI = null;
+                    uiBackend = null;
+                    webViewBackend = null;
+                }
             }
         }
 
@@ -705,20 +707,20 @@ namespace ASEva.UIEto
             return AgencyLocal.GetAppLanguage() == Language.Chinese ? chinese : english;
         }
 
-        private static AppHandler handler = null;
-        private static Application application = null;
-        private static String runningUI = null;
-        private static String uiBackend = null;
-        private static String webViewBackend = null;
-        private static Font defaultFont = null;
+        private static AppHandler? handler = null;
+        private static Application? application = null;
+        private static String? runningUI = null;
+        private static String? uiBackend = null;
+        private static String? webViewBackend = null;
+        private static Font? defaultFont = null;
         private static float defaultFontSize = 0;
         private static bool newFontFailed = false;
         private static bool initAppInvoked = false;
-        private static Exception firstFatalException = null;
-        private static UITimer exceptionTimer = null;
+        private static Exception? firstFatalException = null;
+        private static UITimer? exceptionTimer = null;
         private static bool gpuOptionsInitialized = false;
 
-        public static RunDialogHandler RunDialogHandler { private get; set; }
+        public static RunDialogHandler? RunDialogHandler { private get; set; } = null;
     }
 
     public interface RunDialogHandler

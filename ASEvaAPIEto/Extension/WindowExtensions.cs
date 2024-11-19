@@ -29,7 +29,7 @@ namespace ASEva.UIEto
         /// </summary>
         /// <param name="window">窗口</param>
         /// <param name="screen">目标屏幕，空表示主屏幕</param>
-        public static void MoveToCenter(this Window window, Screen screen = null)
+        public static void MoveToCenter(this Window window, Screen? screen = null)
         {
             RectangleF? bound = null;
             if (screen == null) screen = Screen.PrimaryScreen;

@@ -45,7 +45,7 @@ namespace ASEva.UIEto
         /// <param name="g">图形对象</param>
         /// <param name="f">原字体</param>
         /// <returns>可用于绘制的字体</returns>
-        public static Font ScaledFont(this Graphics g, Font f)
+        public static Font? ScaledFont(this Graphics g, Font f)
         {
             if (Pixel.Scale == 1) return f;
             else return FontLibraryEto.GetFont(f.Family, f.Size / Pixel.Scale, f.FontStyle, f.FontDecoration);
@@ -65,7 +65,7 @@ namespace ASEva.UIEto
         /// <param name="g">图形对象</param>
         /// <param name="sizeRatio">相对字体默认大小的比例，默认为1</param>
         /// <returns>可用于绘制的默认字体</returns>
-        public static Font ScaledDefaultFont(this Graphics g, float sizeRatio = 1)
+        public static Font? ScaledDefaultFont(this Graphics g, float sizeRatio = 1)
         {
             var f = App.DefaultFont(sizeRatio);
             if (Pixel.Scale == 1) return f;

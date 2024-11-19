@@ -49,71 +49,79 @@ namespace ASEva.UIEto
 
         protected override void UpdateModel(GraphData data)
         {
+            var heatMapSeries = model.Series[0] as HeatMapSeries;
+            if (heatMapSeries == null) return;
+
             model.Title = data == null ? "" : data.Definition.MainTitle;
-            if (data == null || !(data is MatrixTableData) || !data.HasData())
+            if (data == null || !(data is MatrixTableData matrixData) || !data.HasData())
             {
                 model.Subtitle = "No data.";
                 model.SubtitleColor = OxyColors.Black;
                 model.Axes[0].Reset();
                 model.Axes[1].Reset();
                 model.Axes[2].Reset();
-                (model.Series[0] as HeatMapSeries).Data = dummyData;
-                (model.Annotations[0] as PolygonAnnotation).Points.Clear();
+                heatMapSeries.Data = dummyData;
+                (model.Annotations[0] as PolygonAnnotation)?.Points.Clear();
                 InvalidatePlot();
                 return;
             }
 
-            var matrixData = data as MatrixTableData;
             model.Axes[0].Title = matrixData.GetXTitle();
             model.Axes[1].Title = matrixData.GetYTitle();
 
             var xRange = matrixData.GetXRange();
-            double xMin = xRange.Base, xMax = xRange.Base + xRange.Step * xRange.Count;
-            model.Axes[0].Minimum = xMin;
-            model.Axes[0].Maximum = xMax;
-            (model.Series[0] as HeatMapSeries).X0 = xMin;
-            (model.Series[0] as HeatMapSeries).X1 = xMax;
+            if (xRange != null)
+            {
+                double xMin = xRange.Base, xMax = xRange.Base + xRange.Step * xRange.Count;
+                model.Axes[0].Minimum = xMin;
+                model.Axes[0].Maximum = xMax;
+                heatMapSeries.X0 = xMin;
+                heatMapSeries.X1 = xMax;
+            }
 
             var yRange = matrixData.GetYRange();
-            double yMin = yRange.Base, yMax = yRange.Base + yRange.Step * yRange.Count;
-            model.Axes[1].Minimum = yMin;
-            model.Axes[1].Maximum = yMax;
-            (model.Series[0] as HeatMapSeries).Y0 = yMin;
-            (model.Series[0] as HeatMapSeries).Y1 = yMax;
+            if (yRange != null)
+            {
+                double yMin = yRange.Base, yMax = yRange.Base + yRange.Step * yRange.Count;
+                model.Axes[1].Minimum = yMin;
+                model.Axes[1].Maximum = yMax;
+                heatMapSeries.Y0 = yMin;
+                heatMapSeries.Y1 = yMax;
+            }
 
             var values = matrixData.GetValues();
-            (model.Series[0] as HeatMapSeries).Data = values;
+            heatMapSeries.Data = values;
 
             OxyColor color = OxyColors.Black;
-            FloatPoint[] outline = null;
+            FloatPoint[]? outline = null;
             String subTitlePrefix = "";
             if (data.Definition.Validation != null)
             {
-                if (data.Definition.Validation is OutlineInsideValidation)
+                if (data.Definition.Validation is OutlineInsideValidation oiv)
                 {
                     color = OxyColors.LimeGreen;
-                    outline = (data.Definition.Validation as OutlineInsideValidation).GetOutline();
+                    outline = oiv.GetOutline();
                 }
-                else if (data.Definition.Validation is OutlineOutsideValidation)
+                else if (data.Definition.Validation is OutlineOutsideValidation oov)
                 {
                     color = OxyColors.Red;
-                    outline = (data.Definition.Validation as OutlineOutsideValidation).GetOutline();
+                    outline = oov.GetOutline();
                 }
-                else if (data.Definition.Validation is ValueBelowValidation)
+                else if (data.Definition.Validation is ValueBelowValidation vbv)
                 {
-                    subTitlePrefix = "≤ " + (data.Definition.Validation as ValueBelowValidation).GetThreshold() + " : ";
+                    subTitlePrefix = "≤ " + vbv.GetThreshold() + " : ";
                 }
-                else if (data.Definition.Validation is ValueAboveValidation)
+                else if (data.Definition.Validation is ValueAboveValidation vav)
                 {
-                    subTitlePrefix = "≥ " + (data.Definition.Validation as ValueAboveValidation).GetThreshold() + " : ";
+                    subTitlePrefix = "≥ " + vav.GetThreshold() + " : ";
                 }
             }
-            (model.Annotations[0] as PolygonAnnotation).Points.Clear();
+            (model.Annotations[0] as PolygonAnnotation)?.Points.Clear();
             if (outline != null)
             {
                 var polygon = model.Annotations[0] as PolygonAnnotation;
-                polygon.Stroke = color;
-                foreach (var pt in outline) polygon.Points.Add(new DataPoint(pt.X, pt.Y));
+                if (polygon != null) polygon.Stroke = color;
+                foreach (var pt in outline) polygon?.Points.Add(new DataPoint(pt.X, pt.Y));
             }
 
             double? percentage = null;

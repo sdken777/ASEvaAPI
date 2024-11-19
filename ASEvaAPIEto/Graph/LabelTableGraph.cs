@@ -45,28 +45,30 @@ namespace ASEva.UIEto
 
         protected override void UpdateModel(GraphData data)
         {
+            var heatMapSeries = model.Series[0] as HeatMapSeries;
+            if (heatMapSeries == null) return;
+
             model.Title = data == null ? "" : data.Definition.MainTitle;
-            if (data == null || !(data is LabelTableData) || !data.HasData())
+            if (data == null || !(data is LabelTableData labelData) || !data.HasData())
             {
                 model.Axes[0].Reset();
                 model.Axes[1].Reset();
                 model.Axes[2].Reset();
-                (model.Series[0] as HeatMapSeries).Data = dummyData;
+                heatMapSeries.Data = dummyData;
                 InvalidatePlot();
                 return;
             }
 
-            var labelData = data as LabelTableData;
             model.Axes[0].Title = labelData.GetXTitle();
             model.Axes[1].Title = labelData.GetYTitle();
 
-            (model.Axes[0] as CategoryAxis).Labels.Clear();
-            (model.Axes[0] as CategoryAxis).Labels.AddRange(labelData.GetXLabels());
-            (model.Series[0] as HeatMapSeries).X1 = labelData.GetXLabelCount() - 0.5;
+            (model.Axes[0] as CategoryAxis)?.Labels.Clear();
+            (model.Axes[0] as CategoryAxis)?.Labels.AddRange(labelData.GetXLabels());
+            heatMapSeries.X1 = labelData.GetXLabelCount() - 0.5;
 
-            (model.Axes[1] as CategoryAxis).Labels.Clear();
-            (model.Axes[1] as CategoryAxis).Labels.AddRange(labelData.GetYLabels());
-            (model.Series[0] as HeatMapSeries).Y1 = labelData.GetYLabelCount() - 0.5;
+            (model.Axes[1] as CategoryAxis)?.Labels.Clear();
+            (model.Axes[1] as CategoryAxis)?.Labels.AddRange(labelData.GetYLabels());
+            heatMapSeries.Y1 = labelData.GetYLabelCount() - 0.5;
 
             switch (labelData.GetValueDirection())
             {
@@ -89,7 +91,7 @@ namespace ASEva.UIEto
                     break;
             }
 
-            (model.Series[0] as HeatMapSeries).Data = labelData.GetValues();
+            heatMapSeries.Data = labelData.GetValues();
         }
 
         private OxyPalette genPalette()

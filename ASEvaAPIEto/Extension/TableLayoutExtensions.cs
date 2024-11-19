@@ -70,7 +70,6 @@ namespace ASEva.UIEto
         /// <returns>创建的文字标签对象</returns>
         public static Label AddLabel(this TableRow tableRow, String text, bool expandWidth = false)
         {
-            if (text == null) text = "";
             var label = new Label { Text = text, Wrap = WrapMode.None };
 
             var stackLayout = new StackLayout() { Orientation = Orientation.Horizontal };
@@ -106,7 +105,6 @@ namespace ASEva.UIEto
         /// <returns>创建的文字标签对象</returns>
         public static Label AddLabel(this TableRow tableRow, String text, TextAlignment alignment, bool expandWidth = false, bool fillHeight = false, int logicalWidth = 0, int logicalHeight = 0)
         {
-            if (text == null) text = "";
             var label = new Label { Text = text, Wrap = WrapMode.None, TextAlignment = alignment, VerticalAlignment = VerticalAlignment.Center };
             if (logicalWidth > 0) label.SetLogicalWidth(logicalWidth);
             if (logicalHeight > 0) label.SetLogicalHeight(logicalHeight);
@@ -142,7 +140,6 @@ namespace ASEva.UIEto
         /// <returns>创建的按键对象</returns>
         public static Button AddButton(this TableRow tableRow, String text, bool expandWidth = false, bool fillHeight = false, int logicalWidth = 0, int logicalHeight = 0)
         {
-            if (text == null) text = "";
             var button = new Button { Text = text };
             if (logicalWidth > 0) button.SetLogicalWidth(logicalWidth);
             if (logicalHeight > 0) button.SetLogicalHeight(logicalHeight);
@@ -179,18 +176,14 @@ namespace ASEva.UIEto
         public static Button AddButton(this TableRow tableRow, Image image, bool expandWidth = false, bool fillHeight = false, int logicalWidth = 0, int logicalHeight = 0)
         {
             var button = new Button();
-            if (image != null)
+            if (Pixel.Scale == 1) button.Image = image;
+            else
             {
-                if (Pixel.Scale == 1) button.Image = image;
-                else
-                {
-                    var w = Math.Max(1, (int)(image.Width * Pixel.Scale));
-                    var h = Math.Max(1, (int)(image.Height * Pixel.Scale));
-                    button.Image = new Bitmap(image, w, h, ImageInterpolation.High);
-                }
-                button.ImagePosition = ButtonImagePosition.Above;
+                var w = Math.Max(1, (int)(image.Width * Pixel.Scale));
+                var h = Math.Max(1, (int)(image.Height * Pixel.Scale));
+                button.Image = new Bitmap(image, w, h, ImageInterpolation.High);
             }
-            else button.Text = "";
+            button.ImagePosition = ButtonImagePosition.Above;
             if (logicalWidth > 0) button.SetLogicalWidth(logicalWidth);
             if (logicalHeight > 0) button.SetLogicalHeight(logicalHeight);
 
@@ -221,7 +214,6 @@ namespace ASEva.UIEto
         /// <returns>创建的链接式按键对象</returns>
         public static LinkButton AddLinkButton(this TableRow tableRow, String text, bool expandWidth = false, bool fillHeight = false)
         {
-            if (text == null) text = "";
             var button = new LinkButton { Text = text };
 
             var stackLayout = new StackLayout() { Orientation = Orientation.Horizontal };
@@ -253,7 +245,6 @@ namespace ASEva.UIEto
         /// <returns>创建的多选框对象</returns>
         public static CheckBox AddCheckBox(this TableRow tableRow, String text, bool expandWidth = false, bool fillHeight = false, bool isChecked = false)
         {
-            if (text == null) text = "";
             var checkBox = new CheckBox { Text = text, Checked = isChecked };
 
             var stackLayout = new StackLayout() { Orientation = Orientation.Horizontal };
@@ -287,8 +278,6 @@ namespace ASEva.UIEto
         /// <returns>创建的单选框组对象</returns>
         public static RadioButtonList AddRadioButtonList(this TableRow tableRow, String[] texts, bool expandWidth = false, bool fillHeight = false, int selectedIndex = 0, int logicalSpacing = 8)
         {
-            if (texts == null || texts.Length == 0) return null;
-
             var radioButtonList = new RadioButtonList();
             radioButtonList.Spacing = new Size(radioButtonList.Sizer(logicalSpacing), radioButtonList.Sizer(logicalSpacing));
             foreach (var text in texts) radioButtonList.Items.Add(text);
@@ -307,7 +296,7 @@ namespace ASEva.UIEto
         /// Add combo box
         /// </summary>
         /// <param name="tableRow">Row object of table layout</param>
-        /// <param name="texts">Text of each item (can be null)</param>
+        /// <param name="texts">Text of each item (can be empty)</param>
         /// <param name="expandWidth">Whether to expand horizontally</param>
         /// <param name="fillHeight">Whether to fill vertically</param>
         /// <param name="selectedIndex">Initial selected index</param>
@@ -324,8 +313,6 @@ namespace ASEva.UIEto
         /// <returns>创建的组合框对象</returns>
         public static ComboBox AddComboBox(this TableRow tableRow, String[] texts, bool expandWidth = false, bool fillHeight = false, int selectedIndex = 0)
         {
-            if (texts == null) texts = new String[0];
-
             var comboBox = new ComboBox { ReadOnly = true };
             foreach (var text in texts) comboBox.Items.Add(text);
             
@@ -344,7 +331,7 @@ namespace ASEva.UIEto
         /// Add combo box
         /// </summary>
         /// <param name="tableRow">Row object of table layout</param>
-        /// <param name="texts">Text of each item (can be null)</param>
+        /// <param name="texts">Text of each item (can be empty)</param>
         /// <param name="logicalWidth">Initial logical width, 0 as not to set</param>
         /// <param name="fillHeight">Whether to fill vertically</param>
         /// <param name="selectedIndex">Initial selected index</param>
@@ -361,8 +348,6 @@ namespace ASEva.UIEto
         /// <returns>创建的组合框对象</returns>
         public static ComboBox AddComboBox(this TableRow tableRow, String[] texts, int logicalWidth, bool fillHeight = false, int selectedIndex = 0)
         {
-            if (texts == null) texts = new String[0];
-
             var comboBox = new ComboBox { ReadOnly = true };
             foreach (var text in texts) comboBox.Items.Add(text);
 
@@ -402,7 +387,6 @@ namespace ASEva.UIEto
         /// <returns>创建的分组框对象</returns>
         public static GroupBox AddGroupBox(this TableRow tableRow, String title, bool expandWidth = false, bool fillHeight = false, int logicalWidth = 0, int logicalHeight = 0)
         {
-            if (title == null) title = "";
             var groupBox = new GroupBox { Text = title };
             if (logicalWidth > 0) groupBox.SetLogicalWidth(logicalWidth);
             if (logicalHeight > 0) groupBox.SetLogicalHeight(logicalHeight);

@@ -13,7 +13,7 @@ namespace ASEva.UIEto
             return skDefault;
         }
 
-        public static SKFont GetSKFont(String fontName)
+        public static SKFont? GetSKFont(String fontName)
         {
             var key = fontName;
             if (!skLibraryWithDefault.ContainsKey(key))
@@ -32,7 +32,7 @@ namespace ASEva.UIEto
             return skLibraryWithDefault[key];
         }
 
-        public static SKFont GetSKFont(String fontName, float size, SKFontStyleWeight weight, SKFontStyleWidth width, SKFontStyleSlant slant)
+        public static SKFont? GetSKFont(String fontName, float size, SKFontStyleWeight weight, SKFontStyleWidth width, SKFontStyleSlant slant)
         {
             var key = fontName + ":" + size + ":" + weight.ToString() + ":" + width.ToString() + ":" + slant.ToString();
             if (!skLibrary.ContainsKey(key))
@@ -51,8 +51,8 @@ namespace ASEva.UIEto
             return skLibrary[key];
         }
 
-        private static SKFont skDefault = null;
-        private static Dictionary<String, SKFont> skLibrary = new Dictionary<String, SKFont>();
-        private static Dictionary<String, SKFont> skLibraryWithDefault = new Dictionary<String, SKFont>();
+        private static SKFont? skDefault = null;
+        private static Dictionary<String, SKFont?> skLibrary = new Dictionary<String, SKFont?>();
+        private static Dictionary<String, SKFont?> skLibraryWithDefault = new Dictionary<String, SKFont?>();
     }
 }

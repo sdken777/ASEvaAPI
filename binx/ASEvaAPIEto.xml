@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=3.2.6
+            version=3.3.0
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -128,24 +128,24 @@
             <summary>
             Get current running OS's code, which is the same as ASEva.APIInfo.GetRunningOS
             </summary>
-            <returns>OS code, null if unrecognized</returns>
+            <returns>OS code, "unknown" if unrecognized</returns>
             \~Chinese
             <summary>
             返回当前运行的OS代号，与 ASEva.APIInfo.GetRunningOS 结果一致
             </summary>
-            <returns>OS代号，若无法识别返回null</returns>
+            <returns>OS代号，若无法识别返回"unknown"</returns>
         </member>
         <member name="M:ASEva.UIEto.App.GetRunningUI">
             \~English
             <summary>
             Get current running UI framework's code
             </summary>
-            <returns>UI framework code, null if ASEva.UIEto.App.Init is not called or initialization failed</returns>
+            <returns>UI framework code, "unknown" if ASEva.UIEto.App.Init is not called or initialization failed</returns>
             \~Chinese
             <summary>
             返回当前运行的UI框架代号
             </summary>
-            <returns>UI框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回null</returns>
+            <returns>UI框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回"unknown"</returns>
         </member>
         <member name="M:ASEva.UIEto.App.GetUIBackend">
             \~English
@@ -176,12 +176,12 @@
             <summary>
             Get current WebView backend code
             </summary>
-            <returns>WebView backend code, null if ASEva.UIEto.App.Init is not called or initialization failed</returns>
+            <returns>WebView backend code, "unknown" if ASEva.UIEto.App.Init is not called or initialization failed</returns>
             \~Chinese
             <summary>
             返回当前WebView使用的后台框架代号
             </summary>
-            <returns>当前WebView使用的后台框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回null</returns>
+            <returns>当前WebView使用的后台框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回"unknown"</returns>
         </member>
         <member name="P:ASEva.UIEto.App.Instance">
             \~English
@@ -2171,7 +2171,7 @@
             Add combo box
             </summary>
             <param name="stackLayout">Stack layout object</param>
-            <param name="texts">Text of each item (can be null)</param>
+            <param name="texts">Text of each item (can be empty)</param>
             <param name="expand">Whether to expand</param>
             <param name="selectedIndex">Initial selected index</param>
             <returns>Created combo box object</returns>
@@ -2191,7 +2191,7 @@
             Add combo box
             </summary>
             <param name="stackLayout">Stack layout object</param>
-            <param name="texts">Text of each item (can be null)</param>
+            <param name="texts">Text of each item (can be empty)</param>
             <param name="logicalWidth">Initial logical width, 0 as not to set</param>
             <param name="selectedIndex">Initial selected index</param>
             <returns>Created combo box object</returns>
@@ -2607,7 +2607,7 @@
             Add combo box
             </summary>
             <param name="tableRow">Row object of table layout</param>
-            <param name="texts">Text of each item (can be null)</param>
+            <param name="texts">Text of each item (can be empty)</param>
             <param name="expandWidth">Whether to expand horizontally</param>
             <param name="fillHeight">Whether to fill vertically</param>
             <param name="selectedIndex">Initial selected index</param>
@@ -2629,7 +2629,7 @@
             Add combo box
             </summary>
             <param name="tableRow">Row object of table layout</param>
-            <param name="texts">Text of each item (can be null)</param>
+            <param name="texts">Text of each item (can be empty)</param>
             <param name="logicalWidth">Initial logical width, 0 as not to set</param>
             <param name="fillHeight">Whether to fill vertically</param>
             <param name="selectedIndex">Initial selected index</param>
@@ -3856,7 +3856,7 @@
             <summary>
             Constructor
             </summary>
-            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
+            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
             <param name="requestOnscreenRendering">Whether to request onscreen rendering (Use offscreen if unsupported), default is false</param>
             <param name="drawText">Whether to request drawing text, default is true</param>
             <param name="useLegacyAPI">Whether to use OpenGL legacy API, default is true</param>
@@ -3874,7 +3874,7 @@
             <summary>
             Constructor
             </summary>
-            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
+            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
             <param name="requestAntialias">Antialias option (Use the nearest option if not supported), default is 4x sampling</param>
             <param name="requestOnscreenRendering">Whether to request onscreen rendering (Use offscreen if unsupported), default is false</param>
             <param name="requestOverlay">Whether to request support of overlay (SupportOverlay will be false if unsupported), default is true</param>
@@ -3954,11 +3954,21 @@
         <member name="T:ASEva.UIEto.ControlAndMouseSources">
             \~English
             <summary>
-            (api:eto=3.1.1) Control and its mouse event source controls
+            (api:eto=3.3.0) Control and its mouse event source controls
             </summary>
             \~Chinese
             <summary>
-            (api:eto=3.1.1) 控件及其鼠标事件源控件
+            (api:eto=3.3.0) 控件及其鼠标事件源控件
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.ControlAndMouseSources.#ctor(Eto.Forms.Control)">
+            \~English
+            <summary>
+            (api:eto=3.3.0) Control and its mouse event source controls
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.3.0) 控件及其鼠标事件源控件
             </summary>
         </member>
         <member name="T:ASEva.UIEto.OverlayLayout">
@@ -3981,7 +3991,7 @@
             <param name="bottomLogicalPadding">Space between bottom bound and the control, null as not related</param>
             <param name="leftLogicalPadding">Space between left bound and the control, null as not related</param>
             <param name="rightLogicalPadding">Space between right bound and the control, null as not related</param>
-            <returns>新添加的控件</returns>
+            <returns>Added control, null if failed</returns>
             \~Chinese
             <summary>
             添加控件
@@ -3991,7 +4001,7 @@
             <param name="bottomLogicalPadding">控件与底部间隔，null表示不关联</param>
             <param name="leftLogicalPadding">控件与左侧间隔，null表示不关联</param>
             <param name="rightLogicalPadding">控件与右侧间隔，null表示不关联</param>
-            <returns>新添加的控件</returns>
+            <returns>新添加的控件，若添加失败则返回null</returns>
         </member>
         <member name="M:ASEva.UIEto.OverlayLayout.RemoveControl(Eto.Forms.Control)">
             \~English
@@ -4240,11 +4250,21 @@
         <member name="T:ASEva.UIEto.SimpleTreeNode">
             \~English
             <summary>
-            (api:eto=3.0.0) Node of simple tree view
+            (api:eto=3.3.0) Node of simple tree view
             </summary>
             \~Chinese
             <summary>
-            (api:eto=3.0.0) 简易树状视图的内容节点
+            (api:eto=3.3.0) 简易树状视图的内容节点
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SimpleTreeNode.#ctor(System.Object,System.String)">
+            \~English
+            <summary>
+            (api:eto=3.3.0) Node of simple tree view
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.3.0) 简易树状视图的内容节点
             </summary>
         </member>
         <member name="P:ASEva.UIEto.SimpleTreeNode.Key">
@@ -4310,11 +4330,21 @@
         <member name="T:ASEva.UIEto.SimpleTreeNodeUpdateTask">
             \~English
             <summary>
-            (api:eto=3.0.0) Task of updating node content
+            (api:eto=3.3.0) Task of updating node content
             </summary>
             \~Chinese
             <summary>
-            (api:eto=3.0.0) 更新简易树状视图内容节点的任务
+            (api:eto=3.3.0) 更新简易树状视图内容节点的任务
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SimpleTreeNodeUpdateTask.#ctor(System.Object)">
+            \~English
+            <summary>
+            (api:eto=3.3.0) Task of updating node content
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.3.0) 更新简易树状视图内容节点的任务
             </summary>
         </member>
         <member name="P:ASEva.UIEto.SimpleTreeNodeUpdateTask.Key">
@@ -4424,13 +4454,13 @@
             <summary>
             Constructor
             </summary>
-            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
+            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
             <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
             \~Chinese
             <summary>
             构造函数
             </summary>
-            <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈</param>
+            <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
             <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
         </member>
         <member name="M:ASEva.UIEto.SkiaView.#ctor(System.String,System.Boolean,System.Boolean)">
@@ -4438,7 +4468,7 @@
             <summary>
             Constructor
             </summary>
-            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
+            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
             <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
             <param name="requestOnscreenRendering">Whether to request onscreen rendering when OpenGL rendering is not disabled (offscreen rendering is still used if unsupported), the default is false</param>
             \~Chinese
@@ -4454,7 +4484,7 @@
             <summary>
             Constructor
             </summary>
-            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
+            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
             <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
             <param name="requestOnscreenRendering">Whether to request onscreen rendering when OpenGL rendering is not disabled (offscreen rendering is still used if unsupported), the default is false</param>
             <param name="requestOverlay">Whether to request support of overlay (SupportOverlay will be false if unsupported), default is true</param>

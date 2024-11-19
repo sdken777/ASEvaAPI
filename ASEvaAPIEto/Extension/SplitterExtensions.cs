@@ -30,7 +30,7 @@ namespace ASEva.UIEto
         /// <returns>面板1对象</returns>
         public static Panel SetPanel1(this Splitter splitter)
         {
-            if (splitter.Panel1 != null) return null;
+            if (splitter.Panel1 != null) throw new InvalidOperationException("Panel1 already set.");
             var panel = new Panel();
             splitter.Panel1 = panel;
             return panel;
@@ -50,7 +50,7 @@ namespace ASEva.UIEto
         /// <returns>面板2对象</returns>
         public static Panel SetPanel2(this Splitter splitter)
         {
-            if (splitter.Panel2 != null) return null;
+            if (splitter.Panel2 != null) throw new InvalidOperationException("Panel2 already set.");
             var panel = new Panel();
             splitter.Panel2 = panel;
             return panel;

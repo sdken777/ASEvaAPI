@@ -36,8 +36,8 @@ namespace ASEva.UIEto
         /// <returns>创建的横向堆叠布局</returns>
         public static StackLayout SetContentAsRowLayout(this Panel panel, int logicalPadding = 8, int logicalSpacing = 8, VerticalAlignment alignment = VerticalAlignment.Center)
         {
-            if (panel.Content != null) return null;
-            if (panel is Window && WindowInitializer != null) WindowInitializer.InitWindow(panel as Window);
+            if (panel.Content != null) throw new InvalidOperationException("Content already set.");
+            if (panel is Window window && WindowInitializer != null) WindowInitializer.InitWindow(window);
             var layout = new StackLayout { Orientation = Orientation.Horizontal, VerticalContentAlignment = alignment };
             layout.Padding = layout.Sizer(logicalPadding);
             layout.Spacing = layout.Sizer(logicalSpacing);
@@ -65,8 +65,8 @@ namespace ASEva.UIEto
         /// <returns>创建的纵向堆叠布局</returns>
         public static StackLayout SetContentAsColumnLayout(this Panel panel, int logicalPadding = 8, int logicalSpacing = 8, HorizontalAlignment alignment = HorizontalAlignment.Stretch)
         {
-            if (panel.Content != null) return null;
-            if (panel is Window && WindowInitializer != null) WindowInitializer.InitWindow(panel as Window);
+            if (panel.Content != null) throw new InvalidOperationException("Content already set.");
+            if (panel is Window window && WindowInitializer != null) WindowInitializer.InitWindow(window);
             var layout = new StackLayout { Orientation = Orientation.Vertical, HorizontalContentAlignment = alignment };
             layout.Padding = layout.Sizer(logicalPadding);
             layout.Spacing = layout.Sizer(logicalSpacing);
@@ -94,8 +94,8 @@ namespace ASEva.UIEto
         /// <returns>创建的表布局</returns>
         public static TableLayout SetContentAsTableLayout(this Panel panel, int logicalPadding = 8, int logicalSpacingX = 8, int logicalSpacingY = 8)
         {
-            if (panel.Content != null) return null;
-            if (panel is Window && WindowInitializer != null) WindowInitializer.InitWindow(panel as Window);
+            if (panel.Content != null) throw new InvalidOperationException("Content already set.");
+            if (panel is Window window && WindowInitializer != null) WindowInitializer.InitWindow(window);
             var layout = new TableLayout();
             layout.Padding = layout.Sizer(logicalPadding);
             layout.Spacing = new Size(layout.Sizer(logicalSpacingX), layout.Sizer(logicalSpacingY));
@@ -117,8 +117,8 @@ namespace ASEva.UIEto
         /// <returns>创建的像素布局</returns>
         public static PixelLayout SetContentAsPixelLayout(this Panel panel)
         {
-            if (panel.Content != null) return null;
-            if (panel is Window && WindowInitializer != null) WindowInitializer.InitWindow(panel as Window);
+            if (panel.Content != null) throw new InvalidOperationException("Content already set.");
+            if (panel is Window window && WindowInitializer != null) WindowInitializer.InitWindow(window);
             var layout = new PixelLayout();
             panel.Content = layout;
             return layout;
@@ -138,8 +138,8 @@ namespace ASEva.UIEto
         /// <returns>创建的可覆盖布局</returns>
         public static OverlayLayout SetContentAsOverlayLayout(this Panel panel)
         {
-            if (panel.Content != null) return null;
-            if (panel is Window && WindowInitializer != null) WindowInitializer.InitWindow(panel as Window);
+            if (panel.Content != null) throw new InvalidOperationException("Content already set.");
+            if (panel is Window window && WindowInitializer != null) WindowInitializer.InitWindow(window);
             var layout = new OverlayLayout();
             panel.Content = layout;
             return layout;
@@ -164,11 +164,10 @@ namespace ASEva.UIEto
         public static Control SetContentAsControl(this Panel panel, Control control, int logicalPadding = 8)
         {
             var layout = SetContentAsColumnLayout(panel, logicalPadding);
-            if (layout == null) return null;
             return layout.AddControl(control, true);
         }
 
-        public static InitWindowHandler WindowInitializer { private get; set; }
+        public static InitWindowHandler? WindowInitializer { private get; set; }
     }
 
     public interface InitWindowHandler

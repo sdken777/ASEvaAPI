@@ -27,7 +27,7 @@ namespace ASEva.UIEto
         /// </summary>
         /// <param name="canvas">Skia画布</param>
         /// <param name="sizeScale">相对于默认尺寸的比例</param>
-        public static SKFont GetDefaultFont(this SKCanvas canvas, float sizeScale = 1.0f)
+        public static SKFont? GetDefaultFont(this SKCanvas canvas, float sizeScale = 1.0f)
         {
             if (sizeScale <= 0) sizeScale = 1;
             if (String.IsNullOrEmpty(DefaultFontName)) return FontLibrarySkia.GetSKFont();
@@ -60,7 +60,7 @@ namespace ASEva.UIEto
         /// <param name="width">宽度</param>
         /// <param name="slant">倾斜度</param>
         /// <returns>字体对象</returns>
-        public static SKFont GetFont(this SKCanvas canvas, String fontName, float sizeScale = 1.0f, SKFontStyleWeight weight = SKFontStyleWeight.Normal, SKFontStyleWidth width = SKFontStyleWidth.Normal, SKFontStyleSlant slant = SKFontStyleSlant.Upright)
+        public static SKFont? GetFont(this SKCanvas canvas, String fontName, float sizeScale = 1.0f, SKFontStyleWeight weight = SKFontStyleWeight.Normal, SKFontStyleWidth width = SKFontStyleWidth.Normal, SKFontStyleSlant slant = SKFontStyleSlant.Upright)
         {
             if (sizeScale <= 0) sizeScale = 1;
             if (String.IsNullOrEmpty(fontName)) return FontLibrarySkia.GetSKFont();
@@ -168,7 +168,7 @@ namespace ASEva.UIEto
             return new SKSize(textRect.Width, testTextRect.Height);
         }
 
-		public static String DefaultFontName { private get; set; }
+		public static String? DefaultFontName { private get; set; }
 		public static float DefaultFontSize { private get; set; }
 
         private static String testText = "0O口";

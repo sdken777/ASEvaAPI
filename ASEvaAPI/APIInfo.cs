@@ -38,19 +38,19 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 7, 0, 0); // Update log / 更新记录: 启用Nullable，并相应优化代码
+            return new Version(3, 7, 0, 1); // Update log / 更新记录: 完善DrawBeat
         }
 
         /// \~English
         /// <summary>
         /// (api:app=3.0.0) Get the currently running OS code
         /// </summary>
-        /// <returns>OS code, null if not recognized</returns>
+        /// <returns>OS code, "unknown" if not recognized</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=3.0.0) 返回当前运行的OS代号
         /// </summary>
-        /// <returns>OS代号，若无法识别返回null</returns>
+        /// <returns>OS代号，若无法识别返回"unknown"</returns>
         public static String GetRunningOS()
         {
             if (osCode == null)

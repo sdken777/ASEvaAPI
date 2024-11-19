@@ -31,9 +31,9 @@ namespace ASEva.UIEto
             
             if (Factory == null) Factory = new DefaultFlowLayoutFactory();
 
-            Control etoControl = null;
+            Control etoControl;
             Factory.CreateFlowLayoutBackend(this, out etoControl, out backend);
-            if (etoControl != null) Content = etoControl;
+            Content = etoControl;
         }
 
         /// \~English
@@ -50,11 +50,10 @@ namespace ASEva.UIEto
         /// <param name="logicalHeight">目标控件的高度，至少为4</param>
         public void AddControl(Control control, int logicalHeight)
         {
-            if (control == null) return;
             if (controls.Exists(c => c.Control.Equals(control))) return;
             logicalHeight = Math.Max(4, logicalHeight);
-            controls.Add(new ControlContext{ Control = control, Visible = true });
-            if (backend != null) backend.AddControl(control, logicalHeight);
+            controls.Add(new ControlContext(control, true));
+            backend.AddControl(control, logicalHeight);
         }
 
         /// \~English
@@ -71,19 +70,15 @@ namespace ASEva.UIEto
         /// <param name="logicalHeight">目标控件的高度，至少为4</param>
         public void AddControl(ControlAndMouseSources control, int logicalHeight)
         {
-            if (control == null || control.Control == null) return;
             if (controls.Exists(c => c.Control.Equals(control.Control))) return;
             logicalHeight = Math.Max(4, logicalHeight);
-            controls.Add(new ControlContext{ Control = control.Control, Visible = true });
-            if (backend != null)
+            controls.Add(new ControlContext(control.Control, true));
+            backend.AddControl(control.Control, logicalHeight);
+            if (!App.CanParentReceiveChildEvents)
             {
-                backend.AddControl(control.Control, logicalHeight);
-                if (control.MouseSources != null && !App.CanParentReceiveChildEvents)
+                foreach (var source in control.MouseSources)
                 {
-                    foreach (var source in control.MouseSources)
-                    {
-                        source.MouseDown += delegate { SelectControl(GetControlIndex(control.Control), true); };
-                    }
+                    source.MouseDown += delegate { SelectControl(GetControlIndex(control.Control), true); };
                 }
             }
         }
@@ -104,15 +99,14 @@ namespace ASEva.UIEto
         /// <param name="logicalHeight">目标控件的高度，至少为4</param>
         public void InsertControl(int index, Control control, int logicalHeight)
         {
-            if (control == null) return;
             if (controls.Exists(c => c.Control.Equals(control))) return;
             if (index >= controls.Count) AddControl(control, logicalHeight);
             else
             {
                 index = Math.Max(0, index);
                 logicalHeight = Math.Max(4, logicalHeight);
-                controls.Insert(index, new ControlContext{ Control = control, Visible = true });
-                if (backend != null) backend.InsertControl(index, control, logicalHeight);
+                controls.Insert(index, new ControlContext(control, true));
+                backend.InsertControl(index, control, logicalHeight);
             }
         }
 
@@ -132,23 +126,19 @@ namespace ASEva.UIEto
         /// <param name="logicalHeight">目标控件的高度，至少为4</param>
         public void InsertControl(int index, ControlAndMouseSources control, int logicalHeight)
         {
-            if (control == null || control.Control == null) return;
             if (controls.Exists(c => c.Control.Equals(control.Control))) return;
             if (index >= controls.Count) AddControl(control, logicalHeight);
             else
             {
                 index = Math.Max(0, index);
                 logicalHeight = Math.Max(4, logicalHeight);
-                controls.Insert(index, new ControlContext{ Control = control.Control, Visible = true });
-                if (backend != null) 
+                controls.Insert(index, new ControlContext(control.Control, true));
+                backend.InsertControl(index, control.Control, logicalHeight);
+                if (!App.CanParentReceiveChildEvents)
                 {
-                    backend.InsertControl(index, control.Control, logicalHeight);
-                    if (control.MouseSources != null && !App.CanParentReceiveChildEvents)
+                    foreach (var source in control.MouseSources)
                     {
-                        foreach (var source in control.MouseSources)
-                        {
-                            source.MouseDown += delegate { SelectControl(GetControlIndex(control.Control), true); };
-                        }
+                        source.MouseDown += delegate { SelectControl(GetControlIndex(control.Control), true); };
                     }
                 }
             }
@@ -198,7 +188,7 @@ namespace ASEva.UIEto
         /// </summary>
         /// <param name="index">指定序号位置</param>
         /// <returns>目标控件，若超出范围则返回null</returns>
-        public Control GetControlAt(int index)
+        public Control? GetControlAt(int index)
         {
             if (index >= 0 && index < controls.Count)
             {
@@ -223,7 +213,7 @@ namespace ASEva.UIEto
             {
                 if (controls[index].Control.Equals(selectedControl)) selectedControl = null;
                 controls.RemoveAt(index);
-                if (backend != null) backend.RemoveControl(index);
+                backend.RemoveControl(index);
             }
         }
 
@@ -239,7 +229,7 @@ namespace ASEva.UIEto
         {
             controls.Clear();
             selectedControl = null;
-            if (backend != null) backend.RemoveAllControls();
+            backend.RemoveAllControls();
         }
 
         /// \~English
@@ -259,7 +249,7 @@ namespace ASEva.UIEto
             if (index >= 0 && index < controls.Count && controls[index].Visible != visible)
             {
                 controls[index].Visible = visible;
-                if (backend != null) backend.SetControlVisible(index, visible);
+                backend.SetControlVisible(index, visible);
             }
         }
 
@@ -280,8 +270,8 @@ namespace ASEva.UIEto
             if (Selectable && index >= 0 && index < controls.Count && index != GetSelectedControlIndex())
             {
                 selectedControl = controls[index].Control;
-                if (backend != null) backend.SelectControl(index);
-                if (invokeEvent && ControlSelected != null) ControlSelected(this, null);
+                backend.SelectControl(index);
+                if (invokeEvent && ControlSelected != null) ControlSelected.Invoke(this, EventArgs.Empty);
             }
         }
         
@@ -315,7 +305,7 @@ namespace ASEva.UIEto
         {
             if (index >= 0 && index < controls.Count)
             {
-                if (backend != null) backend.ScrollToControl(index);
+                backend.ScrollToControl(index);
             }
         }
 
@@ -327,7 +317,7 @@ namespace ASEva.UIEto
         /// <summary>
         /// 新选中控件后触发事件
         /// </summary>
-        public event EventHandler ControlSelected;
+        public event EventHandler? ControlSelected;
 
         /// \~English
         /// <summary>
@@ -344,18 +334,18 @@ namespace ASEva.UIEto
             if (Selectable) SelectControl(index, true);
         }
 
-        public static FlowLayoutFactory Factory { private get; set; }
+        public static FlowLayoutFactory? Factory { private get; set; }
 
 		private FlowLayoutBackend backend;
 
-        class ControlContext
+        class ControlContext(Control control, bool visible)
         {
-            public Control Control { get; set; }
-            public bool Visible { get; set; }
+            public Control Control { get; set; } = control;
+            public bool Visible { get; set; } = visible;
         }
 
-        private List<ControlContext> controls = new List<ControlContext>();
-        private Control selectedControl = null;
+        private List<ControlContext> controls = [];
+        private Control? selectedControl = null;
     }
 
 	public interface FlowLayoutCallback
@@ -412,7 +402,7 @@ namespace ASEva.UIEto
             borders[3] = cLayout.AddControl(new Panel(), false, 0, 1);
 
             var item = new StackLayoutItem(panel);
-            ctxs.Add(new ControlContext{ Item = item, Visible = true, Borders = borders });
+            ctxs.Add(new ControlContext(item, true, borders));
             layout.Items.Add(item);
             panel.MouseDown += (obj, args) =>
             {
@@ -442,7 +432,7 @@ namespace ASEva.UIEto
             borders[3] = cLayout.AddControl(new Panel(), false, 0, 1);
 
             var item = new StackLayoutItem(panel);
-            ctxs.Insert(index, new ControlContext{ Item = item, Visible = true, Borders = borders });
+            ctxs.Insert(index, new ControlContext(item, true, borders));
             int visibleIndex = 0;
             foreach (var ctx in ctxs)
             {
@@ -540,17 +530,17 @@ namespace ASEva.UIEto
             scrollTimer.Start();
         }
 
-        private class ControlContext
+        private class ControlContext(StackLayoutItem item, bool visible, Control[] borders)
         {
-            public StackLayoutItem Item { get; set; }
-            public bool Visible { get; set; }
-            public Control[] Borders { get; set; }
+            public StackLayoutItem Item { get; set; } = item;
+            public bool Visible { get; set; } = visible;
+            public Control[] Borders { get; set; } = borders;
         }
 
         private FlowLayoutCallback callback;
         private StackLayout layout;
-        private List<ControlContext> ctxs = new List<ControlContext>();
-        private Control selectedControl;
-        private UITimer scrollTimer = null;
+        private List<ControlContext> ctxs = [];
+        private Control? selectedControl;
+        private UITimer? scrollTimer = null;
     }
 }

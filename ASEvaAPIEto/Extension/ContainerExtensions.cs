@@ -30,9 +30,9 @@ namespace ASEva.UIEto
         {
             foreach (var control in container.Controls)
             {
-                if (control is GLView) (control as GLView).Close();
-                else if (control is SkiaView) (control as SkiaView).Close();
-                else if (control is Container) (control as Container).CloseRecursively();
+                if (control is GLView glView) glView.Close();
+                else if (control is SkiaView skiaView) skiaView.Close();
+                else if (control is Container subContainer) subContainer.CloseRecursively();
             }
         }
     }

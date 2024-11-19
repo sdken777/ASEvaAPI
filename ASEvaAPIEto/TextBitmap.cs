@@ -33,7 +33,7 @@ namespace ASEva.UIEto
         /// <param name="color">绘制颜色</param>
         public TextBitmap(Graphics g, String text, float sizeRatio, Color color)
         {
-            if (String.IsNullOrEmpty(text)) text = " ";
+            if (text.Length == 0) text = " ";
             sizeRatio = Math.Max(0.1f, sizeRatio);
 
             fastMode = Pixel.RealConsistency;
@@ -51,7 +51,7 @@ namespace ASEva.UIEto
             using (var bitmapGraphics = new Graphics(bitmap))
             {
                 if (ModifyInterface != null) ModifyInterface.Modify(bitmapGraphics);
-                bitmapGraphics.DrawString(text, font, color, TextAnchor.Center, bitmapWidth / 2, bitmapHeight / 2);
+                if (font != null) bitmapGraphics.DrawString(text, font, color, TextAnchor.Center, bitmapWidth / 2, bitmapHeight / 2);
             }
 
             this.text = text;
@@ -201,7 +201,7 @@ namespace ASEva.UIEto
             void Modify(Graphics graphics);
         }
 
-        public static ModifyBitmapGraphics ModifyInterface { private get; set; }
+        public static ModifyBitmapGraphics? ModifyInterface { private get; set; }
 
         public static ImageInterpolation? ImageInterpolationMode { private get; set; }
 

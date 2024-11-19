@@ -30,9 +30,9 @@ namespace ASEva.UIEto
         {
             if (Factory == null) Factory = new DefaultSimpleTreeViewFactory();
 
-            Control etoControl = null;
+            Control etoControl;
             Factory.CreateSimpleTreeViewBackend(this, out etoControl, out backend);
-            if (etoControl != null) Content = etoControl;
+            Content = etoControl;
         }
 
         /// \~English
@@ -49,7 +49,7 @@ namespace ASEva.UIEto
         /// <param name="sort">是否对条目排序</param>
         public void SetModel(SimpleTreeNode[] rootNodes, bool sort)
         {
-            if (backend != null) backend.SetModel(rootNodes, sort);
+            backend.SetModel(rootNodes, sort);
         }
 
         /// \~English
@@ -64,7 +64,7 @@ namespace ASEva.UIEto
         /// <param name="tasks">更新内容节点的任务</param>
         public void UpdateNodes(SimpleTreeNodeUpdateTask[] tasks)
         {
-            if (backend != null) backend.UpdateNodes(tasks);
+            backend.UpdateNodes(tasks);
         }
 
         /// \~English
@@ -75,9 +75,9 @@ namespace ASEva.UIEto
         /// <summary>
         /// 获取当前选中条目的键对象
         /// </summary>
-        public object GetSelectedKey()
+        public object? GetSelectedKey()
         {
-            return backend == null ? null : backend.GetSelectedKey();
+            return backend.GetSelectedKey();
         }
 
         /// \~English
@@ -92,7 +92,7 @@ namespace ASEva.UIEto
         /// <param name="key">键对象</param>
         public void SelectItem(object key)
         {
-            if (backend != null) backend.SelectItem(key);
+            backend.SelectItem(key);
         }
 
         /// \~English
@@ -103,7 +103,7 @@ namespace ASEva.UIEto
         /// <summary>
         /// 选中条目切换事件
         /// </summary>
-        public event EventHandler SelectedItemChanged;
+        public event EventHandler? SelectedItemChanged;
 
         /// \~English
         /// <summary>
@@ -113,32 +113,32 @@ namespace ASEva.UIEto
         /// <summary>
         /// 选中条目双击或回车事件
         /// </summary>
-        public event EventHandler SelectedItemActivated;
+        public event EventHandler? SelectedItemActivated;
 
         public void OnSelectedItemChanged()
         {
-            if (SelectedItemChanged != null) SelectedItemChanged(this, null);
+            SelectedItemChanged?.Invoke(this, EventArgs.Empty);
         }
 
         public void OnSelectedItemActivated()
         {
-            if (SelectedItemActivated != null) SelectedItemActivated(this, null);
+            SelectedItemActivated?.Invoke(this, EventArgs.Empty);
         }
 
-        public static SimpleTreeViewFactory Factory { private get; set; }
+        public static SimpleTreeViewFactory? Factory { private get; set; }
 
 		private SimpleTreeViewBackend backend;
     }
 
     /// \~English
     /// <summary>
-    /// (api:eto=3.0.0) Node of simple tree view
+    /// (api:eto=3.3.0) Node of simple tree view
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=3.0.0) 简易树状视图的内容节点
+    /// (api:eto=3.3.0) 简易树状视图的内容节点
     /// </summary>
-    public class SimpleTreeNode
+    public class SimpleTreeNode(object key, String text)
     {
         /// \~English
         /// <summary>
@@ -148,7 +148,7 @@ namespace ASEva.UIEto
         /// <summary>
         /// 条目的键对象
         /// </summary>
-        public object Key { get; set; }
+        public object Key { get; set; } = key;
 
         /// \~English
         /// <summary>
@@ -158,7 +158,7 @@ namespace ASEva.UIEto
         /// <summary>
         /// 显示文本内容
         /// </summary>
-        public String Text { get; set; }
+        public String Text { get; set; } = text;
 
         /// \~English
         /// <summary>
@@ -200,18 +200,18 @@ namespace ASEva.UIEto
         /// </summary>
         public bool ChildNodesExpanded { get; set; }
 
-        private List<SimpleTreeNode> childNodes = new List<SimpleTreeNode>();
+        private List<SimpleTreeNode> childNodes = [];
     }
 
     /// \~English
     /// <summary>
-    /// (api:eto=3.0.0) Task of updating node content
+    /// (api:eto=3.3.0) Task of updating node content
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:eto=3.0.0) 更新简易树状视图内容节点的任务
+    /// (api:eto=3.3.0) 更新简易树状视图内容节点的任务
     /// </summary>
-    public class SimpleTreeNodeUpdateTask
+    public class SimpleTreeNodeUpdateTask(object key)
     {
         /// \~English
         /// <summary>
@@ -221,7 +221,7 @@ namespace ASEva.UIEto
         /// <summary>
         /// 条目的键对象
         /// </summary>
-        public object Key { get; set; }
+        public object Key { get; set; } = key;
 
         /// \~English
         /// <summary>
@@ -254,7 +254,7 @@ namespace ASEva.UIEto
 	{
         void SetModel(SimpleTreeNode[] rootNodes, bool sort);
         void UpdateNodes(SimpleTreeNodeUpdateTask[] tasks);
-        object GetSelectedKey();
+        object? GetSelectedKey();
         void SelectItem(object key);
 	}
 
@@ -296,7 +296,8 @@ namespace ASEva.UIEto
 
             CellFormatting += (o, e) =>
             {
-                var node = (e.Item as TreeGridItem).Tag as SimpleTreeNode;
+                var node = (e.Item as TreeGridItem)?.Tag as SimpleTreeNode;
+                if (node == null) return;
                 if (node.TextColor != Colors.Transparent) e.ForegroundColor = node.TextColor;
                 else e.ForegroundColor = DefaultTextColor == null ? SystemColors.ControlText : DefaultTextColor.Value;
                 if (node.BackgroundColor != Colors.Transparent) e.BackgroundColor = node.BackgroundColor;
@@ -337,34 +338,32 @@ namespace ASEva.UIEto
             itemMap.Clear();
 
             var model = new TreeGridItemCollection();
-            if(rootNodes != null)
+
+            if (sort)
             {
-                if (sort)
-                {
-                    var sortList = rootNodes.ToList();
-                    sortList.Sort((n1, n2) => n1.Text.CompareTo(n2.Text));
-                    rootNodes = sortList.ToArray();
-                }
+                var sortList = rootNodes.ToList();
+                sortList.Sort((n1, n2) => n1.Text.CompareTo(n2.Text));
+                rootNodes = sortList.ToArray();
+            }
 
-                foreach (var node in rootNodes)
-                {
-                    if (node.Key == null || nodeMap.ContainsKey(node.Key)) continue;
-                    if (String.IsNullOrEmpty(node.Text)) continue;
+            foreach (var node in rootNodes)
+            {
+                if (nodeMap.ContainsKey(node.Key)) continue;
+                if (node.Text.Length == 0) continue;
 
-                    var rootItem = new TreeGridItem{ Tag = node, Values = new String[] { node.Text } };
-                    nodeMap[node.Key] = node;
-                    itemMap[node.Key] = rootItem;
-                    if (node.ChildNodes != null && node.ChildNodes.Count > 0)
+                var rootItem = new TreeGridItem{ Tag = node, Values = [node.Text] };
+                nodeMap[node.Key] = node;
+                itemMap[node.Key] = rootItem;
+                if (node.ChildNodes.Count > 0)
+                {
+                    addChildNodes(rootItem, node.ChildNodes, sort);
+                    if (rootItem.Children.Count > 0)
                     {
-                        addChildNodes(rootItem, node.ChildNodes, sort);
-                        if (rootItem.Children.Count > 0)
-                        {
-                            if (node.ChildNodesExpanded) rootItem.Expanded = true;
-                            if (sort) rootItem.Children.Sort(sortFunc);
-                        }
+                        if (node.ChildNodesExpanded) rootItem.Expanded = true;
+                        if (sort) rootItem.Children.Sort(sortFunc);
                     }
-                    model.Add(rootItem);
                 }
+                model.Add(rootItem);
             }
 
             DataStore = model;
@@ -372,12 +371,12 @@ namespace ASEva.UIEto
 
         public void UpdateNodes(SimpleTreeNodeUpdateTask[] tasks)
         {
-            if (tasks == null || tasks.Length == 0) return;
+            if (tasks.Length == 0) return;
 
             bool updated = false;
             foreach (var task in tasks)
             {
-                if (task.Key == null || !nodeMap.ContainsKey(task.Key)) continue;
+                if (!nodeMap.ContainsKey(task.Key)) continue;
 
                 var node = nodeMap[task.Key];
                 if (task.TextColor != null && task.TextColor != node.TextColor)
@@ -395,15 +394,15 @@ namespace ASEva.UIEto
             if (updated) ReloadData();
         }
 
-        public object GetSelectedKey()
+        public object? GetSelectedKey()
         {
             if (SelectedItem == null) return null;
-            else return ((SelectedItem as TreeGridItem).Tag as SimpleTreeNode).Key;
+            else return ((SelectedItem as TreeGridItem)?.Tag as SimpleTreeNode)?.Key;
         }
 
         public void SelectItem(object key)
         {
-            if (key != null && itemMap.ContainsKey(key)) SelectedItem = itemMap[key];
+            if (itemMap.ContainsKey(key)) SelectedItem = itemMap[key];
         }
 
         private void addChildNodes(TreeGridItem parentItem, List<SimpleTreeNode> childNodes, bool sort)
@@ -411,12 +410,12 @@ namespace ASEva.UIEto
             foreach (var node in childNodes)
             {
                 if (nodeMap.ContainsKey(node.Key)) continue;
-                if (String.IsNullOrEmpty(node.Text)) continue;
+                if (node.Text.Length == 0) continue;
 
-                var childItem = new TreeGridItem{ Tag = node, Values = new String[] { node.Text } };
+                var childItem = new TreeGridItem{ Tag = node, Values = [node.Text] };
                 nodeMap[node.Key] = node;
                 itemMap[node.Key] = childItem;
-                if (node.ChildNodes != null && node.ChildNodes.Count > 0)
+                if (node.ChildNodes.Count > 0)
                 {
                     addChildNodes(childItem, node.ChildNodes, sort);
                     if (childItem.Children.Count > 0)
@@ -431,16 +430,16 @@ namespace ASEva.UIEto
 
         private int sortFunc(ITreeGridItem x, ITreeGridItem y)
         {
-            var xs = (x as TreeGridItem).GetValue(0) as String;
-            var ys = (y as TreeGridItem).GetValue(0) as String;
-            return xs.CompareTo(ys);
+            var xs = (x as TreeGridItem)?.GetValue(0) as String;
+            var ys = (y as TreeGridItem)?.GetValue(0) as String;
+            return xs == null || ys == null ? 0 : xs.CompareTo(ys);
         }
 
         private SimpleTreeViewCallback callback;
         private GridColumn column;
-        private Dictionary<object, SimpleTreeNode> nodeMap = new Dictionary<object, SimpleTreeNode>();
-        private Dictionary<object, TreeGridItem> itemMap = new Dictionary<object, TreeGridItem>();
-        private UITimer setWidthTimer;
+        private Dictionary<object, SimpleTreeNode> nodeMap = [];
+        private Dictionary<object, TreeGridItem> itemMap = [];
+        private UITimer? setWidthTimer = null;
 
         public static Color? DefaultTextColor { private get; set; }
         public static Color? DefaultBackgroundColor { private get; set; }

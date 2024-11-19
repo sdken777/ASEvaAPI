@@ -55,7 +55,7 @@ namespace ASEva.UIEto
             else window.MinimumSize = window.Sizer(logicalWidth, logicalHeight);
         }
 
-        public static SetClientSizeHandler ClientSizeSetter { private get; set; }
+        public static SetClientSizeHandler? ClientSizeSetter { private get; set; }
     }
 
     public interface SetClientSizeHandler
