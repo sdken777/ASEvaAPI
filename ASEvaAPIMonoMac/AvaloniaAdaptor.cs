@@ -20,7 +20,7 @@ namespace ASEva.UIMonoMac
             var nsView = control is NSView view ? view : Eto.Forms.MonoMac64Helpers.ToNative(control as Eto.Forms.Control, true);
             nsView.WantsLayer = true;
             nsView.Layer.BackgroundColor = new CGColor(0.975, 0.975, 0.975, 1.0);
-            context = null;
+            context = new object();
             return nsView.Handle;
         }
 
