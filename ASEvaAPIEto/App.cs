@@ -14,7 +14,7 @@ namespace ASEva.UIEto
 
     public interface AppHandler
     {
-        Application? CreateApp(bool attach, out String uiBackend, out String webViewBackend);
+        Application? CreateApp(bool attach, out String? uiBackend, out String webViewBackend);
         void RunApp(Application application, Form mainWindow, Form[] subWindows);
         Font CreateDefaultFont();
         Control? ConvertControlToEto(object platformControl);

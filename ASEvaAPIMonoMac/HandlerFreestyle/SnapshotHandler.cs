@@ -14,18 +14,18 @@ namespace ASEva.UIMonoMac
 {
     class SnapshotHandler : SnapshotExtensions.SnapshotHandler
     {
-        public CommonImage Snapshot(Control control)
+        public CommonImage? Snapshot(Control control)
         {
             if (control.ControlObject == null) return null;
 
-            NSView view = null;
+            NSView? view = null;
             var logicalWidth = control.GetLogicalWidth();
-            if (control.ControlObject is NSWindow) 
+            if (control.ControlObject is NSWindow nsWindow) 
             {
-                view = (control.ControlObject as NSWindow).ContentView;
+                view = nsWindow.ContentView;
                 logicalWidth = (int)view.Frame.Width;
             }
-            else if (control.ControlObject is NSView) view = control.ControlObject as NSView;
+            else if (control.ControlObject is NSView nsView) view = nsView;
             if (view == null) return null;
 
             var bitmap = view.BitmapImageRepForCachingDisplayInRect(view.Bounds);
@@ -55,7 +55,7 @@ namespace ASEva.UIMonoMac
 
     class ScreenSnapshotHandler : SnapshotExtensions.SnapshotHandler
     {
-        public CommonImage Snapshot(Control control)
+        public CommonImage? Snapshot(Control control)
         {
             if (control.ControlObject == null) return null;
 

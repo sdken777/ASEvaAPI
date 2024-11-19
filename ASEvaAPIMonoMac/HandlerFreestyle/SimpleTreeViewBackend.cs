@@ -114,13 +114,10 @@ namespace ASEva.UIMonoMac
 
             foreach (var inNode in inNodes)
             {
-                var outNode = new SimpleTreeViewNode();
+                var outNode = new SimpleTreeViewNode(inNode.Key, inNode.Text, parentKey);
                 outNode.IDValue = ++nodeID;
-                outNode.ParentKey = parentKey;
                 outNode.BackgroundColor = inNode.BackgroundColor;
                 outNode.ChildNodesExpanded = inNode.ChildNodesExpanded;
-                outNode.Key = inNode.Key;
-                outNode.Text = inNode.Text;
                 outNode.TextColor = inNode.TextColor;
                 addNodes(inNode.ChildNodes.ToArray(), outNode.ChildNodes, inNode.Key, sort);
                 outNodes.Add(outNode);
@@ -128,10 +125,10 @@ namespace ASEva.UIMonoMac
             }
         }
 
-        private class SimpleTreeViewNode : SimpleTreeNode
+        private class SimpleTreeViewNode(object key, String text, object parentKey) : SimpleTreeNode(key, text)
         {
             public ulong IDValue { get; set; }
-            public object ParentKey { get; set; }
+            public object ParentKey { get; set; } = parentKey;
         }
 
         private class SimpleTreeViewDataSource : NSOutlineViewDataSource

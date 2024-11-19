@@ -74,7 +74,7 @@ namespace ASEva.UIMonoMac
 			Font = NormalFont;
 		}
 
-		public override Cursor CurrentCursor
+		public override Cursor? CurrentCursor
 		{
 			get { return Enabled ? Cursor : null; }
 		}
@@ -106,12 +106,12 @@ namespace ASEva.UIMonoMac
 			base.Font = new Font(Font.Typeface, Font.Size, FontDecoration.Underline);
 		}
 
-		void HandleMouseLeave(object sender, MouseEventArgs e)
+		void HandleMouseLeave(object? sender, MouseEventArgs e)
 		{
 			Font = NormalFont;
 		}
 
-		void HandleMouseEnter(object sender, MouseEventArgs e)
+		void HandleMouseEnter(object? sender, MouseEventArgs e)
 		{
 			if (Enabled && HoverFont != null)
 				Font = HoverFont;

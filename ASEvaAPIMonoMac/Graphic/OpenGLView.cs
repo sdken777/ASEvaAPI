@@ -40,7 +40,7 @@ namespace ASEva.UIMonoMac
         private GLCallback callback;
         private GLAntialias antialias;
         private bool useLegacyAPI;
-        private OpenGLView view;
+        private OpenGLView? view;
     }
 
     class OpenGLView : NSOpenGLView
@@ -131,7 +131,7 @@ namespace ASEva.UIMonoMac
                 initStatus = InitStatus.InitOK;
             }
 
-            var moduleID = callback == null ? null : callback.OnGetModuleID();
+            var moduleID = callback.OnGetModuleID();
             DrawBeat.CallbackBegin(this, moduleID);
 
             OpenGLContext.MakeCurrentContext();
@@ -146,11 +146,14 @@ namespace ASEva.UIMonoMac
                 if (size == null || curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight)
                 {
                     size = curSize;
-                    callback.OnGLResize(gl, size);
+                    if (gl != null) callback.OnGLResize(gl, size);
                 }
 
-                callback.OnGLRender(gl, texts);
-                gl.Finish();
+                if (gl != null)
+                {
+                    callback.OnGLRender(gl, texts);
+                    gl.Finish();
+                }
             }
             catch (Exception ex)
             {
@@ -170,11 +173,7 @@ namespace ASEva.UIMonoMac
                 {
                     var newView = new TextView(callback, this) { Editable = false, Selectable = false, DrawsBackground = false, WantsLayer = true };
                     this.AddSubview(newView);
-                    textViews.Add(new TextViewContext
-                    {
-                        TextView = newView,
-                        Task = textTasks[i],
-                    });
+                    textViews.Add(new TextViewContext(newView, textTasks[i]));
                 }
                 else
                 {
@@ -344,10 +343,10 @@ namespace ASEva.UIMonoMac
             }
         }
 
-        private class TextViewContext
+        private class TextViewContext(TextView textView, GLTextTask task)
         {
-            public TextView TextView { get; set; }
-            public GLTextTask Task { get; set; }
+            public TextView TextView { get; set; } = textView;
+            public GLTextTask Task { get; set; } = task;
         }
 
         enum InitStatus
@@ -357,11 +356,11 @@ namespace ASEva.UIMonoMac
             InitFailed = 2,
         }
 
-        private OpenGL gl = null;
-        private GLCallback callback = null;
+        private OpenGL? gl;
+        private GLCallback callback;
         private InitStatus initStatus = InitStatus.NotInitialized;
-        private GLSizeInfo size = null;
-        private List<TextViewContext> textViews = new List<TextViewContext>();
+        private GLSizeInfo? size = null;
+        private List<TextViewContext> textViews = [];
         private bool drawQueued = false;
     }
 }

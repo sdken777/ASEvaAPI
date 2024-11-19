@@ -909,7 +909,7 @@ namespace ASEva
 
         public static List<String>? GetSampleTitle(String channelID)
         {
-            if (!AgencyAsync.SyncMode) return [null];
+            if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetSampleTitle(channelID).Result;
         }
 

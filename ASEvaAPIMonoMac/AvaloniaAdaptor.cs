@@ -15,9 +15,9 @@ namespace ASEva.UIMonoMac
             return false;
         }
 
-        public nint CreateContainer(nint parent, object control, out object context)
+        public nint CreateContainer(nint parent, object control, out object? context)
         {
-            var nsView = control is NSView ? (control as NSView) : Eto.Forms.MonoMac64Helpers.ToNative(control as Eto.Forms.Control, true);
+            var nsView = control is NSView view ? view : Eto.Forms.MonoMac64Helpers.ToNative(control as Eto.Forms.Control, true);
             nsView.WantsLayer = true;
             nsView.Layer.BackgroundColor = new CGColor(0.975, 0.975, 0.975, 1.0);
             context = null;
@@ -45,7 +45,7 @@ namespace ASEva.UIMonoMac
             return true;
         }
 
-        public void UseContainer(nint container, object control, out object context)
+        public void UseContainer(nint container, object control, out object? context)
         {
             context = null;
         }

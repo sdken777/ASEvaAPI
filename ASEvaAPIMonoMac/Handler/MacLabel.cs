@@ -66,7 +66,7 @@ namespace ASEva.UIMonoMac
 		/// <summary>
 		/// Draws background color manually, using a layer or the base.BackgroundColor does not draw allow us to align the text properly.
 		/// </summary>
-		public NSColor BetterBackgroundColor { get; set; }
+		public NSColor? BetterBackgroundColor { get; set; }
 
 		[Export("verticalAlignment")]
 		public VerticalAlignment VerticalAlignment { get; set; }
@@ -108,11 +108,11 @@ namespace ASEva.UIMonoMac
 
 	class EtoLabel : NSTextField, IMacControl
 	{
-		public WeakReference WeakHandler { get; set; }
+		public WeakReference? WeakHandler { get; set; }
 
-		public object Handler
+		public object? Handler
 		{ 
-			get { return WeakHandler.Target; }
+			get { return WeakHandler?.Target; }
 			set { WeakHandler = new WeakReference(value); } 
 		}
 
@@ -225,7 +225,7 @@ namespace ASEva.UIMonoMac
 
 		protected override TControl CreateControl()
 		{
-			return new EtoLabel() as TControl;
+			return (new EtoLabel() as TControl)!;
 		}
 
 		public Color TextColor
@@ -386,7 +386,7 @@ namespace ASEva.UIMonoMac
 			}
 		}
 
-		protected virtual NSColor CurrentColor
+		protected virtual NSColor? CurrentColor
 		{
 			get { 
 				var col = Widget.Properties.Get<Color?>(MacLabel.TextColorKey);

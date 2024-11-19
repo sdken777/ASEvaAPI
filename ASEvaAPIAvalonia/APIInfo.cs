@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 3, 0, 0); // Update log / 更新记录: 启用Nullable
+            return new Version(1, 3, 0, 1); // Update log / 更新记录: 支持X86-MacOS
         }
 
         /// \~English
