@@ -59,32 +59,30 @@ namespace ASEva.UIAvalonia
                 initAppInvoked = true;
                 if (EtoInitializer.Validate())
                 {
-                    appBuilder = appBuilderCreation?.Invoke();
-                    if (appBuilder != null)
+                    appBuilder = appBuilderCreation.Invoke();
+
+                    appLifetime = new ClassicDesktopStyleApplicationLifetime();
+                    appLifetime.ShutdownMode = ShutdownMode.OnMainWindowClose;
+                    appBuilder.SetupWithLifetime(appLifetime);
+                    EtoInitializer.Initialize(new EtoRunDialogHandler());
+
+                    var etoInitWindow = new EtoInitWindow();
+                    etoInitWindow.Show();
+                    var token = new CancellationTokenSource();
+                    etoInitWindow.Closed += delegate { token.Cancel(); };
+                    appLifetime.MainWindow = etoInitWindow;
+                    appBuilder.Instance?.Run(token.Token);
+                    appLifetime.MainWindow = null;
+
+                    if (EtoInitializer.InitializeResult ?? false)
                     {
-                        appLifetime = new ClassicDesktopStyleApplicationLifetime();
-                        appLifetime.ShutdownMode = ShutdownMode.OnMainWindowClose;
-                        appBuilder.SetupWithLifetime(appLifetime);
-                        EtoInitializer.Initialize(new EtoRunDialogHandler());
+                        AppDomain.CurrentDomain.UnhandledException += (o, args) => { triggerFatalException(args); };
 
-                        var etoInitWindow = new EtoInitWindow();
-                        etoInitWindow.Show();
-                        var token = new CancellationTokenSource();
-                        etoInitWindow.Closed += delegate { token.Cancel(); };
-                        appLifetime.MainWindow = etoInitWindow;
-                        appBuilder.Instance.Run(token.Token);
-                        appLifetime.MainWindow = null;
-
-                        if (EtoInitializer.InitializeResult.Value)
-                        {
-                            AppDomain.CurrentDomain.UnhandledException += (o, args) => { triggerFatalException(args); };
-
-                            FuncManager.Register("GetAvaloniaAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
-                            FuncManager.Register("GetAvaloniaLibVersion", delegate { return APIInfo.GetAvaloniaLibVersion(); });
-                            FuncManager.Register("GetAvaloniaAPIThirdPartyNotices", delegate { return APIInfo.GetThirdPartyNotices(); });
-                        }
-                        else appBuilder = null;
+                        FuncManager.Register("GetAvaloniaAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
+                        FuncManager.Register("GetAvaloniaLibVersion", delegate { return APIInfo.GetAvaloniaLibVersion(); });
+                        FuncManager.Register("GetAvaloniaAPIThirdPartyNotices", delegate { return APIInfo.GetThirdPartyNotices(); });
                     }
+                    else appBuilder = null;
                 }
             }
             return appBuilder != null;
@@ -102,7 +100,7 @@ namespace ASEva.UIAvalonia
         /// <param name="mainWindow">主窗口</param>
         public static void Run(Window mainWindow)
         {
-            if (appBuilder == null || appBuilder.Instance == null || mainWindow == null) return;
+            if (appBuilder == null || appBuilder.Instance == null || appLifetime == null) return;
 
             var token = new CancellationTokenSource();
             mainWindow.Closed += delegate { token.Cancel(); };
@@ -158,23 +156,20 @@ namespace ASEva.UIAvalonia
         /// <param name="action">对话框函数，最顶层活动窗口作为输入参数</param>
         /// <param name="owner">对话框所有者，若使用主窗口则设为null</param>
         /// <returns>对话框函数是否已执行</returns>
-        public static async Task<bool> RunDialog(Func<Window, Task> action, object owner = null)
+        public static async Task<bool> RunDialog(Func<Window, Task> action, object? owner = null)
         {
-            Window activeWindow = null;
+            Window? activeWindow = null;
             if (owner == null)
             {
                 if (App.MainWindow != null) activeWindow = await App.MainWindow.GetActiveWindow();
             }
-            else if (owner is Control) activeWindow = await (owner as Control).GetActiveWindow();
-            else if (owner is Window) activeWindow = await (owner as Window).GetActiveWindow();
+            else if (owner is Control ownerControl) activeWindow = await ownerControl.GetActiveWindow();
+            else if (owner is Window ownerWindow) activeWindow = await ownerWindow.GetActiveWindow();
             if (activeWindow == null) return false;
 
-            var etoControls = new Eto.Forms.Control[0];
-            if (activeWindow != null)
-            {
-                etoControls = EtoEmbedder.ExtractControls(activeWindow);
-                foreach (var control in etoControls) control.Enabled = false;
-            }
+            var etoControls = EtoEmbedder.ExtractControls(activeWindow);
+            foreach (var control in etoControls) control.Enabled = false;
+
             await action.Invoke(activeWindow);
             foreach (var control in etoControls) control.Enabled = true;
             return true;
@@ -182,19 +177,18 @@ namespace ASEva.UIAvalonia
 
         /// \~English
         /// <summary>
-        /// (api:avalonia=1.0.2) Show message box (only for calling outside App.Run)
+        /// (api:avalonia=1.0.2) Show message box
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:avalonia=1.0.2) 显示消息框（仅支持在App.Run之外时使用）
+        /// (api:avalonia=1.0.2) 显示消息框
         /// </summary>
-        public static void ShowMessageBox(String message, String caption = "", MessageBoxIcon icon = MessageBoxIcon.None, MessageBoxButtons buttons = MessageBoxButtons.OK)
+        public static async void ShowMessageBox(String message, String caption = "", MessageBoxIcon icon = MessageBoxIcon.None, MessageBoxButtons buttons = MessageBoxButtons.OK)
         {
-            if (appBuilder == null || appBuilder.Instance == null || message == null) return;
-            if (MainWindow != null) return;
+            if (appBuilder == null || appBuilder.Instance == null) return;
 
             var box = new MessageBox(message, caption, icon);
-            if (appLifetime.MainWindow == null)
+            if (appLifetime?.MainWindow == null)
             {
                 var token = new CancellationTokenSource();
                 box.Closed += delegate { token.Cancel(); };
@@ -202,14 +196,14 @@ namespace ASEva.UIAvalonia
 
                 try
                 {
-                    box.Show(null, buttons);
+                    await box.Show(null, buttons);
                     appBuilder.Instance.Run(token.Token);
                 }
                 catch (Exception ex) { Dump.Exception(ex); }
             }
             else
             {
-                box.Show(appLifetime.MainWindow, buttons);
+                await RunDialog((window) => box.Show(window, buttons));
             }
         }
 
@@ -228,7 +222,7 @@ namespace ASEva.UIAvalonia
             get
             {
                 var workDir = EntryFolder.Path;
-                if (workDir == null) return null;
+                if (workDir == null) throw new Exception("Invalid EntryFolder.Path. Framework broken.");
                 
                 if (Path.GetFileName(workDir) == "MacOS")
                 {
@@ -241,7 +235,9 @@ namespace ASEva.UIAvalonia
                             workDir = Path.GetDirectoryName(parentDir2);
                         }
                     }
+                    if (workDir == null) throw new Exception("Failed to query work path on MacOS.");
                 }
+                
                 return workDir;
             }
         }
@@ -254,7 +250,7 @@ namespace ASEva.UIAvalonia
         /// <summary>
         /// (api:avalonia=1.0.13) 获取当前主窗口
         /// </summary>
-        public static Window MainWindow
+        public static Window? MainWindow
         {
             get
             {
@@ -281,11 +277,9 @@ namespace ASEva.UIAvalonia
         private static void triggerFatalException(UnhandledExceptionEventArgs args)
         {
             var exObj = args.ExceptionObject;
-            if (exObj is TargetInvocationException) exObj = (exObj as TargetInvocationException).InnerException;
+            if (exObj is TargetInvocationException tie) exObj = tie.InnerException;
 
-            Exception ex = null;
-            if (exObj is Exception) ex = exObj as Exception;
-            else ex = new Exception("Unknown exception.");
+            Exception ex = exObj as Exception ?? new Exception("Unknown exception.");
 
             if (args.IsTerminating)
             {
@@ -315,16 +309,16 @@ namespace ASEva.UIAvalonia
                 if (App.appBuilder == null) return false;
 
                 var dialog = new EtoEmbedDialog(panel);
-                if (App.appLifetime.MainWindow == null) App.Run(dialog);
+                if (App.appLifetime?.MainWindow == null) App.Run(dialog);
                 else await App.RunDialog(dialog.ShowDialog);
                 return true;
             }
         }
 
         private static bool initAppInvoked = false;
-        private static AppBuilder appBuilder = null;
-        private static ClassicDesktopStyleApplicationLifetime appLifetime = null;
-        private static DispatcherTimer exceptionTimer = null;
-        private static Exception fatalException = null;
+        private static AppBuilder? appBuilder = null;
+        private static ClassicDesktopStyleApplicationLifetime? appLifetime = null;
+        private static DispatcherTimer? exceptionTimer = null;
+        private static Exception? fatalException = null;
     }
 }

@@ -16,15 +16,12 @@ namespace ASEva.UIAvalonia
     {
         public static object ConvertToBitmap(CommonImage image)
         {
-            return image?.ToAvaloniaBitmap();
+            return image.ToAvaloniaBitmap();
         }
 
-        public static CommonImage ConvertFromBitmap(object bitmapObject)
+        public static CommonImage? ConvertFromBitmap(object bitmapObject)
         {
-            if (bitmapObject == null) return null;
-            if (bitmapObject is not Bitmap) return null;
-
-            var bitmap = bitmapObject as Bitmap;
+            if (bitmapObject is not Bitmap bitmap) return null;
             return bitmap.ToCommonImage();
         }
     }

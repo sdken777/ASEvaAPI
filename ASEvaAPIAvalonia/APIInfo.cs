@@ -1,8 +1,8 @@
 ﻿/*! \mainpage
  * \~English This library contains the APIs for Avalonia. See ASEva.UIAvalonia for details. \n
  * \~Chinese 此类库为ASEva-API中基于Avalonia的部分。详见 ASEva.UIAvalonia \n
- * \~English This document corresponds to API version: 1.2.5 \n\n
- * \~Chinese 本文档对应API版本：1.2.5 \n\n
+ * \~English This document corresponds to API version: 1.3.0 \n\n
+ * \~Chinese 本文档对应API版本：1.3.0 \n\n
  * 
  * \~English Official documents: https://docs.avaloniaui.net \n
  * \~Chinese 官方文档: https://docs.avaloniaui.net
@@ -17,7 +17,7 @@ using ASEva.Utility;
 namespace ASEva.UIAvalonia
 {
     /// <summary>
-    /// version=1.2.5
+    /// version=1.3.0
     /// </summary>
     public class APIInfo
     {
@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 2, 5, 1); // Update log / 更新记录: 完善ExtractControls
+            return new Version(1, 3, 0, 0); // Update log / 更新记录: 启用Nullable
         }
 
         /// \~English
@@ -46,9 +46,9 @@ namespace ASEva.UIAvalonia
         /// (api:avalonia=1.0.0) 获取Avalonia库版本
         /// </summary>
         /// <returns>Avalonia库版本</returns>
-        public static Version GetAvaloniaLibVersion()
+        public static Version? GetAvaloniaLibVersion()
         {
-            Version avaloniaLibVersion = null;
+            Version? avaloniaLibVersion = null;
             foreach (var name in Assembly.GetExecutingAssembly().GetReferencedAssemblies())
             {
                 if (name.Name == "Avalonia.Controls")
@@ -78,8 +78,8 @@ namespace ASEva.UIAvalonia
         public static Dictionary<String, String> GetThirdPartyNotices()
         {
             var table = new Dictionary<String, String>();
-            table["Avalonia"] = ResourceLoader.LoadText("Avalonia.LICENSE");
-            table["CustomMessageBox.Avalonia"] = ResourceLoader.LoadText("CustomMessageBox.Avalonia.LICENSE");
+            table["Avalonia"] = ResourceLoader.LoadText("Avalonia.LICENSE") ?? "";
+            table["CustomMessageBox.Avalonia"] = ResourceLoader.LoadText("CustomMessageBox.Avalonia.LICENSE") ?? "";
             return table;
         }
     }

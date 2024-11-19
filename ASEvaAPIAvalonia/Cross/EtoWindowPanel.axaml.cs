@@ -22,22 +22,24 @@ namespace ASEva.UIAvalonia
 
         public override string OnGetConfig()
         {
-            return etoWindowPanel.OnGetConfig();
+            return etoWindowPanel?.OnGetConfig() ?? "";
         }
 
         public override Task OnHandleModal()
         {
-            etoWindowPanel.OnHandleModal();
+            etoWindowPanel?.OnHandleModal();
             return Task.CompletedTask;
         }
 
         public override void OnInit(string config)
         {
-            etoWindowPanel.OnInit(config);
+            etoWindowPanel?.OnInit(config);
         }
 
         public override void OnInitSize(string config)
         {
+            if (etoWindowPanel == null) return;
+
             etoWindowPanel.OnInitSize(config);
 
             var defaultSize = etoWindowPanel.OnGetDefaultSize();
@@ -52,28 +54,29 @@ namespace ASEva.UIAvalonia
 
         public override void OnInputData(object data)
         {
-            etoWindowPanel.OnInputData(data);
+            etoWindowPanel?.OnInputData(data);
         }
 
         public override void OnRelease()
         {
+            if (etoWindowPanel == null) return;
             etoWindowPanel.OnRelease();
             UIEto.ContainerExtensions.CloseRecursively(etoWindowPanel);
         }
 
         public override void OnResetData()
         {
-            etoWindowPanel.OnResetData();
+            etoWindowPanel?.OnResetData();
         }
 
         public override void OnStartSession()
         {
-            etoWindowPanel.OnStartSession();
+            etoWindowPanel?.OnStartSession();
         }
 
         public override void OnStopSession()
         {
-            etoWindowPanel.OnStopSession();
+            etoWindowPanel?.OnStopSession();
         }
 
         public override void OnUpdateUI()
@@ -82,18 +85,18 @@ namespace ASEva.UIAvalonia
             if (newContainerSize.Width > 0 && newContainerSize.Height > 0 &&
                 (newContainerSize.Width != containerSize.Width || newContainerSize.Height != containerSize.Height))
             {
-                etoWindowPanel.OnUpdateContainerSize(newContainerSize);
+                etoWindowPanel?.OnUpdateContainerSize(newContainerSize);
                 containerSize = newContainerSize;
             }
-            etoWindowPanel.OnUpdateUI();
+            etoWindowPanel?.OnUpdateUI();
         }
 
         public override Task OnHandleAsync()
         {
-            return etoWindowPanel.OnHandleAsync();
+            return etoWindowPanel?.OnHandleAsync() ?? Task.CompletedTask;
         }
 
-        private UIEto.WindowPanel etoWindowPanel;
+        private UIEto.WindowPanel? etoWindowPanel;
         private IntSize containerSize;
     }
 }

@@ -7,6 +7,7 @@
     <AssemblyName>ASEvaAPIAvalonia</AssemblyName>
     <Version>0.0.0.0</Version>
     <NoWarn>1701;1702;1591</NoWarn>
+    <Nullable>Enable</Nullable>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 

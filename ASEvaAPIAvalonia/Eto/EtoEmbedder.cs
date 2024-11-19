@@ -24,7 +24,7 @@ namespace ASEva.UIAvalonia
         /// <summary>
         /// 待嵌入的Eto控件，需要在构造函数调用InitializeComponent后立即设置 (与NativeControl二选一)
         /// </summary>
-        public Eto.Forms.Control EtoControl { protected get; set; }
+        public Eto.Forms.Control? EtoControl { protected get; set; }
 
         /// \~English
         /// <summary>
@@ -34,7 +34,7 @@ namespace ASEva.UIAvalonia
         /// <summary>
         /// 待嵌入的原生控件，需要在构造函数调用InitializeComponent后立即设置 (与EtoControl二选一)
         /// </summary>
-        public object NativeControl { protected get; set; }
+        public object? NativeControl { protected get; set; }
 
         /// \~English
         /// <summary>
@@ -52,14 +52,14 @@ namespace ASEva.UIAvalonia
                 if (curActive != embedder.active)
                 {
                     embedder.active = curActive;
-                    EtoInitializer.Adaptor.HandleWindowActive(embedder.context, curActive);
+                    if (embedder.context != null) EtoInitializer.Adaptor?.HandleWindowActive(embedder.context, curActive);
                 }
 
                 var curSize = embedder.Bounds.Size;
                 if (curSize.Width > 0 && curSize.Height > 0 && curSize != embedder.size)
                 {
                     embedder.size = curSize;
-                    EtoInitializer.Adaptor.HandleControlResize(embedder.context, curSize.Width, curSize.Height);
+                    if (embedder.context != null) EtoInitializer.Adaptor?.HandleControlResize(embedder.context, curSize.Width, curSize.Height);
                 }
             }
         }
@@ -73,44 +73,40 @@ namespace ASEva.UIAvalonia
 
         private static void extractFrom(Control control, List<Eto.Forms.Control> list)
         {
-            if (control is Panel)
+            if (control is Panel panel)
             {
-                var panel = control as Panel;
-                if (panel.Children == null) return;
                 foreach (var child in panel.Children)
                 {
                     if (child is EtoEmbedder)
                     {
-                        var etoControl = (child as EtoEmbedder).EtoControl;
+                        var etoControl = (child as EtoEmbedder)?.EtoControl;
                         if (etoControl != null) list.Add(etoControl);
                     }
                     else if (child is Panel || child is ContentControl || child is Decorator) extractFrom(child as Control, list);
                 }
             }
-            else if (control is ContentControl)
+            else if (control is ContentControl cc)
             {
-                var cc = control as ContentControl;
                 if (cc.Content != null)
                 {
-                    if (cc.Content is EtoEmbedder)
+                    if (cc.Content is EtoEmbedder etoEmbedder)
                     {
-                        var etoControl = (cc.Content as EtoEmbedder).EtoControl;
+                        var etoControl = etoEmbedder.EtoControl;
                         if (etoControl != null) list.Add(etoControl);
                     }
-                    else if (cc.Content is Panel || cc.Content is ContentControl || cc.Content is Decorator) extractFrom(cc.Content as Control, list);
+                    else if (cc.Content is Panel || cc.Content is ContentControl || cc.Content is Decorator) extractFrom((cc.Content as Control)!, list);
                 }
             }
-            else if (control is Decorator)
+            else if (control is Decorator decorator)
             {
-                var decorator = control as Decorator;
                 if (decorator.Child != null)
                 {
-                    if (decorator.Child is EtoEmbedder)
+                    if (decorator.Child is EtoEmbedder etoEmbedder)
                     {
-                        var etoControl = (decorator.Child as EtoEmbedder).EtoControl;
+                        var etoControl = etoEmbedder.EtoControl;
                         if (etoControl != null) list.Add(etoControl);
                     }
-                    else if (decorator.Child is Panel || decorator.Child is ContentControl || decorator.Child is Decorator) extractFrom(decorator.Child as Control, list);
+                    else if (decorator.Child is Panel || decorator.Child is ContentControl || decorator.Child is Decorator) extractFrom(decorator.Child, list);
                 }
             }
         }
@@ -119,28 +115,33 @@ namespace ASEva.UIAvalonia
         {
             if (!canCreateNativeControlCore()) return base.CreateNativeControlCore(parent);
 
-            PlatformHandle ret = null;
+            var targetControl = EtoControl ?? NativeControl;
+            if (targetControl == null || EtoInitializer.Adaptor == null) return base.CreateNativeControlCore(parent);
+
+            PlatformHandle? ret = null;
             if (EtoInitializer.Adaptor.ShouldCreateContainer())
             {
-                object context = null;
-                var container = EtoInitializer.Adaptor.CreateContainer(parent.Handle, EtoControl ?? NativeControl, out context);
-                ret = new PlatformHandle
+                object? context = null;
+                var container = EtoInitializer.Adaptor.CreateContainer(parent.Handle, targetControl, out context);
+                if (context == null) return base.CreateNativeControlCore(parent);
+
+                ret = new PlatformHandle(context)
                 {
                     Handle = container,
                     HandleDescriptor = parent.HandleDescriptor,
-                    Context = context,
                 };
             }
             else
             {
-                object context = null;
+                object? context = null;
                 var container = base.CreateNativeControlCore(parent);
-                EtoInitializer.Adaptor.UseContainer(container.Handle, EtoControl ?? NativeControl, out context);
-                ret = new PlatformHandle
+                EtoInitializer.Adaptor.UseContainer(container.Handle, targetControl, out context);
+                if (context == null) return base.CreateNativeControlCore(parent);
+
+                ret = new PlatformHandle(context)
                 {
                     Handle = container.Handle,
                     HandleDescriptor = container.HandleDescriptor,
-                    Context = context,
                 };
             }
 
@@ -152,20 +153,20 @@ namespace ASEva.UIAvalonia
         protected override void DestroyNativeControlCore(IPlatformHandle control)
         {
             embedders.Remove(this);
-            if (control is PlatformHandle)
+            if (control is PlatformHandle platformHandle)
             {
-                var context = (control as PlatformHandle).Context;
-                EtoInitializer.Adaptor.ReleaseResource(context);
+                var context = platformHandle.Context;
+                EtoInitializer.Adaptor?.ReleaseResource(context);
             }
             else base.DestroyNativeControlCore(control);
         }
 
         private bool isParentWindowActive()
         {
-            StyledElement parentWindow = Parent;
-            while (parentWindow.Parent != null) parentWindow = parentWindow.Parent;
-            if (parentWindow == null || parentWindow is not Window) return false;
-            return (parentWindow as Window).IsActive;
+            StyledElement? parentWindow = Parent;
+            while (parentWindow?.Parent != null) parentWindow = parentWindow.Parent;
+            if (parentWindow == null || parentWindow is not Window targetWindow) return false;
+            return targetWindow.IsActive;
         }
 
         private bool canCreateNativeControlCore()
@@ -176,14 +177,14 @@ namespace ASEva.UIAvalonia
             return EtoInitializer.Adaptor.IsControlValid(NativeControl);
         }
 
-        private class PlatformHandle : IPlatformHandle
+        private class PlatformHandle(object context) : IPlatformHandle
         {
             public IntPtr Handle { get; set; }
-            public string HandleDescriptor { get; set; }
-            public object Context { get; set; }
+            public string? HandleDescriptor { get; set; }
+            public object Context { get; set; } = context;
         }
 
-        private object context = null;
+        private object? context = null;
         private bool active = false;
         private Size size;
 

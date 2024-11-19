@@ -172,6 +172,7 @@
                 "bin64",
                 "binx",
                 "binxa",
+                "binm",
                 "binma",
             ],
         },

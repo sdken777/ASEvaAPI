@@ -23,17 +23,19 @@ namespace ASEva.UIAvalonia
 
         public override Task OnHandleModal()
         {
-            etoConfigPanel.OnHandleModal();
+            etoConfigPanel?.OnHandleModal();
             return Task.CompletedTask;
         }
 
         public override void OnInit(string config)
         {
-            etoConfigPanel.OnInit(config);
+            etoConfigPanel?.OnInit(config);
         }
 
         public override void OnInitSize(string config)
         {
+            if (etoConfigPanel == null) return;
+            
             etoConfigPanel.OnInitSize(config);
             
             var size = etoConfigPanel.OnGetSize();
@@ -43,20 +45,21 @@ namespace ASEva.UIAvalonia
 
         public override void OnRelease()
         {
+            if (etoConfigPanel == null) return;
             etoConfigPanel.OnRelease();
             UIEto.ContainerExtensions.CloseRecursively(etoConfigPanel);
         }
 
         public override void OnUpdateUI()
         {
-            etoConfigPanel.OnUpdateUI();
+            etoConfigPanel?.OnUpdateUI();
         }
 
         public override Task OnHandleAsync()
         {
-            return etoConfigPanel.OnHandleAsync();
+            return etoConfigPanel?.OnHandleAsync() ?? Task.CompletedTask;
         }
 
-        private UIEto.ConfigPanel etoConfigPanel;
+        private UIEto.ConfigPanel? etoConfigPanel;
     }
 }
