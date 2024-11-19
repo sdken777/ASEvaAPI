@@ -125,7 +125,7 @@ namespace ASEva.Utility
         /// <summary>
         /// Get the text with the ID
         /// </summary>
-        /// <value>Text ID</value>
+        /// <value>Text for the specified ID</value>
         /// \~Chinese
         /// <summary>
         /// 获取指定ID对应的文本
