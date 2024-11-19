@@ -10,9 +10,9 @@ namespace ASEva.UIGtk
 	// 继承WindowHandlerGtkWindow，修正GtkWindowConnector异常问题，Eto-2.7.0已修复
 	class DialogHandler : WindowHandlerGtkWindow<Gtk.Dialog, Dialog, Dialog.ICallback>, Dialog.IHandler
 	{
-		Gtk.Container btcontainer;
-		Gtk.Box actionarea;
-		Button defaultButton;
+		Gtk.Container? btcontainer;
+		Gtk.Box? actionarea;
+		Button? defaultButton;
 
 		// CHECK: 修正对话框标题栏高度偏大问题
 		private bool UseHeaderBar = false;
@@ -63,9 +63,9 @@ namespace ASEva.UIGtk
 			content.PackStart(vbox, true, true, 0);
 		}
 
-		public Button AbortButton { get; set; }
+		public Button? AbortButton { get; set; }
 
-		public Button DefaultButton
+		public Button? DefaultButton
 		{
 			get
 			{
@@ -136,6 +136,7 @@ namespace ASEva.UIGtk
 
 		public void CleanupButtons()
 		{
+			if (btcontainer == null) return;
 			var children = btcontainer.Children;
 			foreach (var child in children)
 				btcontainer.Remove(child);
@@ -150,40 +151,40 @@ namespace ASEva.UIGtk
 			{
 				if (!UseHeaderBar)
 				{
-					actionarea.NoShowAll = false;
+					if (actionarea != null) actionarea.NoShowAll = false;
 
 					for (int i = negativeButtons.Count - 1; i >= 0; i--)
-						actionarea.PackStart(negativeButtons[i].ToNative(), false, true, 1);
+						actionarea?.PackStart(negativeButtons[i].ToNative(), false, true, 1);
 
 					foreach (var button in positiveButtons)
-						actionarea.PackStart(button.ToNative(), false, true, 1);
+						actionarea?.PackStart(button.ToNative(), false, true, 1);
 				}
 #if GTKCORE
 				else
 				{
 					for (int i = positiveButtons.Count - 1; i >= 0; i--)
-						(btcontainer as Gtk.HeaderBar).PackEnd(positiveButtons[i].ToNative());
+						(btcontainer as Gtk.HeaderBar)?.PackEnd(positiveButtons[i].ToNative());
 
 					for (int i = negativeButtons.Count - 1; i >= 0; i--)
-						(btcontainer as Gtk.HeaderBar).PackStart(negativeButtons[i].ToNative());
+						(btcontainer as Gtk.HeaderBar)?.PackStart(negativeButtons[i].ToNative());
 				}
 
-				if (btcontainer is Gtk.HeaderBar)
-					(btcontainer as Gtk.HeaderBar).ShowCloseButton = false;
+				if (btcontainer is Gtk.HeaderBar headerBar)
+					headerBar.ShowCloseButton = false;
 #endif
 
-				btcontainer.ShowAll();
+				btcontainer?.ShowAll();
 			}
 			else
 			{
-				actionarea.NoShowAll = true;
+				if (actionarea != null) actionarea.NoShowAll = true;
 				if (!UseHeaderBar)
-					btcontainer.Hide();
+					btcontainer?.Hide();
 #if GTKCORE
 				else
 				{
-					if (btcontainer is Gtk.HeaderBar)
-						(btcontainer as Gtk.HeaderBar).ShowCloseButton = true;
+					if (btcontainer is Gtk.HeaderBar headerBar)
+						headerBar.ShowCloseButton = true;
 				}
 #endif
 			}

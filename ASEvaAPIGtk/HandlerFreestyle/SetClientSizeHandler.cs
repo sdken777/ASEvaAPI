@@ -20,6 +20,7 @@ namespace ASEva.UIGtk
             if (uiBackend != null && uiBackend == "wayland")
             {
                 var gwindow = window.ControlObject as Gtk.Window;
+                if (gwindow == null) return;
                 gwindow.Realized += delegate
                 {
                     if (gwindow.Child != null)
@@ -36,12 +37,12 @@ namespace ASEva.UIGtk
             else
             {
                 if (window is Form) window.MinimumSize = new Size(logicalWidth, logicalHeight);
-                else if (window is Dialog)
+                else if (window is Dialog dialog)
                 {
-                    var dialog = window as Dialog;
                     if (dialog.WindowStyle == WindowStyle.Default)
                     {
                         var gdialog = dialog.ControlObject as Gtk.Dialog;
+                        if (gdialog == null) return;
                         gdialog.VisibilityNotifyEvent += delegate
                         {
                             if (!gdialog.Visible) return;

@@ -18,23 +18,23 @@ namespace ASEva.UIGtk
     /// </summary>
     public class ValueGraph : BaseGraph
     {
-        [UI] EventBox eventBox;
-        [UI] Label labelTitle, labelValidation, labelValueMain, labelValueSub;
+        [UI] EventBox? eventBox;
+        [UI] Label? labelTitle, labelValidation, labelValueMain, labelValueSub;
 
         EventBoxHelper eventBoxHelper = new EventBoxHelper();
 
         public ValueGraph() : this(new Builder("ValueGraph.glade"))
-        {
-            eventBoxHelper.Add(eventBox);
-
-            this.SetBackColor(ColorRGBA.White);
-
-            eventBoxHelper.LeftDown += eventBoxHelper_LeftDown;
-        }
+        {}
 
         private ValueGraph(Builder builder) : base(builder.GetRawOwnedObject("ValueGraph"))
         {
             builder.Autoconnect(this);
+
+            if (eventBox != null) eventBoxHelper.Add(eventBox);
+
+            this.SetBackColor(ColorRGBA.White);
+
+            eventBoxHelper.LeftDown += eventBoxHelper_LeftDown;
         }
 
         public override bool IsHeightFixed()
@@ -45,30 +45,33 @@ namespace ASEva.UIGtk
         public override void UpdateUIWithData()
         {
             // 标题显示
-            labelTitle.Text = Data == null ? "" : Data.Definition.MainTitle;
+            if (labelTitle != null) labelTitle.Text = Data == null ? "" : Data.Definition.MainTitle;
             if (Data == null || !(Data is SingleValueData) || !Data.HasData())
             {
-                labelValueMain.SetForeColor(ColorRGBA.Black);
-                labelValueMain.Text = "No Data.";
-                labelValueSub.Text = "";
+                if (labelValueMain != null)
+                {
+                    labelValueMain.SetForeColor(ColorRGBA.Black);
+                    labelValueMain.Text = "No Data.";
+                }
+                if (labelValueSub != null) labelValueSub.Text = "";
                 return;
             }
 
             // 数据显示
             double val = 0;
-            if (Data is SingleValueData)
+            if (Data is SingleValueData svd)
             {
-                val = (Data as SingleValueData).GetValue();
+                val = svd.GetValue();
             }
 
             var valAbs = Math.Abs(val);
             var valAbsInt = (ulong)Math.Floor(valAbs);
-            labelValueMain.Text = (val < 0 ? "-" : "") + valAbsInt + ".";
+            if (labelValueMain != null) labelValueMain.Text = (val < 0 ? "-" : "") + valAbsInt + ".";
 
             long digits = (int)((valAbs - valAbsInt) * 1000000000);
             if (digits == 0 || digits == 1 || digits == 1000000000 - 1)
             {
-                labelValueSub.Text = "0";
+                if (labelValueSub != null) labelValueSub.Text = "0";
                 return;
             }
 
@@ -82,49 +85,55 @@ namespace ASEva.UIGtk
             String target = dst[0];
             if (dst[1].Length < target.Length) target = dst[1];
             if (dst[2].Length < target.Length) target = dst[2];
-            labelValueSub.Text = target;
+            if (labelValueSub != null) labelValueSub.Text = target;
 
             // 验证条件显示
-            if (Data.Definition.Validation == null)
+            if (labelValidation != null)
             {
-                labelValidation.Text = "";
-            }
-            else
-            {
-                var vd = Data.Definition.Validation;
-                if (vd is ValueBelowValidation)
+                if (Data.Definition.Validation == null)
                 {
-                    labelValidation.Text = "≤ " + (vd as ValueBelowValidation).GetThreshold();
+                    labelValidation.Text = "";
                 }
-                else if (vd is ValueAboveValidation)
+                else
                 {
-                    labelValidation.Text = "≥ " + (vd as ValueAboveValidation).GetThreshold();
-                }
-                else if (vd is ValueInRangeValidation)
-                {
-                    double lower = 0, upper = 0;
-                    (vd as ValueInRangeValidation).GetRange(out lower, out upper);
-                    labelValidation.Text = "[ " + lower + " , " + upper + " ]";
+                    var vd = Data.Definition.Validation;
+                    if (vd is ValueBelowValidation vbv)
+                    {
+                        labelValidation.Text = "≤ " + vbv.GetThreshold();
+                    }
+                    else if (vd is ValueAboveValidation vav)
+                    {
+                        labelValidation.Text = "≥ " + vav.GetThreshold();
+                    }
+                    else if (vd is ValueInRangeValidation vrv)
+                    {
+                        double lower = 0, upper = 0;
+                        vrv.GetRange(out lower, out upper);
+                        labelValidation.Text = "[ " + lower + " , " + upper + " ]";
+                    }
                 }
             }
 
             // 验证结果显示
-            double? dummy = null;
-            var vdResult = Data.Validate(out dummy);
-            if (vdResult == null)
+            if (labelValueMain != null && labelValueSub != null)
             {
-                labelValueMain.SetForeColor(ColorRGBA.Black);
-                labelValueSub.SetForeColor(ColorRGBA.Black);
-            }
-            else if (vdResult.Value)
-            {
-                labelValueMain.SetForeColor(ColorRGBA.Green);
-                labelValueSub.SetForeColor(ColorRGBA.Green);
-            }
-            else
-            {
-                labelValueMain.SetForeColor(ColorRGBA.Red);
-                labelValueSub.SetForeColor(ColorRGBA.Red);
+                double? dummy = null;
+                var vdResult = Data.Validate(out dummy);
+                if (vdResult == null)
+                {
+                    labelValueMain.SetForeColor(ColorRGBA.Black);
+                    labelValueSub.SetForeColor(ColorRGBA.Black);
+                }
+                else if (vdResult.Value)
+                {
+                    labelValueMain.SetForeColor(ColorRGBA.Green);
+                    labelValueSub.SetForeColor(ColorRGBA.Green);
+                }
+                else
+                {
+                    labelValueMain.SetForeColor(ColorRGBA.Red);
+                    labelValueSub.SetForeColor(ColorRGBA.Red);
+                }
             }
         }
 

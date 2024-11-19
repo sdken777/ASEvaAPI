@@ -11,7 +11,7 @@ namespace ASEva.UIGtk
         public AvaloniaAdaptorGtk()
         {
             AvaloniaApp = true;
-            String screenName = null;
+            String? screenName = null;
             scale = ScaleFactorQuery.Query(out screenName);
             if (!String.IsNullOrEmpty(screenName) && scale != null)
             {
@@ -67,17 +67,16 @@ namespace ASEva.UIGtk
             return false;
         }
 
-        public nint CreateContainer(nint parent, object control, out object context)
+        public nint CreateContainer(nint parent, object control, out object? context)
         {
             context = null;
             return 0;
         }
 
-        public void UseContainer(nint container, object control, out object context)
+        public void UseContainer(nint container, object control, out object? context)
         {
-            var ctx = new Context();
+            var ctx = new Context(control);
             ctx.ParentXID = container;
-            ctx.Control = control;
             ctxs.Add(ctx);
             context = ctx;
         }
@@ -85,6 +84,8 @@ namespace ASEva.UIGtk
         public void ReleaseResource(object context)
         {
             var ctx = context as Context;
+            if (ctx == null) return;
+            
             if (ctx.Socket != 0)
             {
                 if (ctx.Plug != null)
@@ -106,6 +107,8 @@ namespace ASEva.UIGtk
         public void HandleWindowActive(object context, bool active)
         {
             var ctx = context as Context;
+            if (ctx == null) return;
+
             ctx.Active = active ? 1 : 0;
             XembedSocket.xembed_socket_update_focus_in(ctx.Socket, ctx.Active);
             XembedSocket.xembed_socket_update_active(ctx.Socket, ctx.Active);
@@ -114,6 +117,8 @@ namespace ASEva.UIGtk
         public void HandleControlResize(object context, double width, double height)
         {
             var ctx = context as Context;
+            if (ctx == null) return;
+
             if (!ctx.CorrectionInvoked && scale != null && scale.Value != 1)
             {
                 HolderBoundCorrection.Correct((uint)ctx.ParentXID, scale.Value, (int)width, (int)height);
@@ -126,17 +131,17 @@ namespace ASEva.UIGtk
             return true;
         }
 
-        private class Context
+        private class Context(object control)
         {
             public nint ParentXID { get; set; }
             public nint Socket { get; set; }
-            public Gtk.Plug Plug { get; set; }
-            public object Control { get; set; }
+            public Gtk.Plug? Plug { get; set; }
+            public object Control { get; set; } = control;
             public int Active { get; set; }
             public bool CorrectionInvoked { get; set; }
         }
 
-        private List<Context> ctxs = new List<Context>();
+        private List<Context> ctxs = [];
         private double? scale = null;
     }
 }

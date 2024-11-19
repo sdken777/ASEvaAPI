@@ -38,7 +38,7 @@ namespace ASEva.UIGtk
             }
         }
 
-        private void onRealized(object sender, EventArgs e)
+        private void onRealized(object? sender, EventArgs e)
         {
             if (Window == null) return;
 
@@ -133,17 +133,18 @@ namespace ASEva.UIGtk
             rendererStatusOK = true;
         }
 
-        private void onDraw(object o, DrawnArgs args)
+        private void onDraw(object? o, DrawnArgs args)
         {
             if (!rendererStatusOK) return;
+            if (colorBuffer == null || depthBuffer == null || frameBuffer == null || glContext == null) return;
 
             var passiveDraw = !drawQueued;
 
-            var moduleID = callback == null ? null : callback.OnGetModuleID();
+            var moduleID = callback.OnGetModuleID();
             DrawBeat.CallbackBegin(this, moduleID);
 
             var curSize = new GLSizeInfo(AllocatedWidth, AllocatedHeight, AllocatedWidth * ScaleFactor, AllocatedHeight * ScaleFactor, ScaleFactor, (float)AllocatedWidth / AllocatedHeight);
-            bool resized = curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
+            bool resized = size == null || curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
             size = curSize;
 
             if (resized) passiveDraw = false;
@@ -223,9 +224,9 @@ namespace ASEva.UIGtk
             DrawBeat.CallbackEnd(this);
         }
 
-        private void onDrawText(object o, DrawnArgs args)
+        private void onDrawText(object? o, DrawnArgs args)
         {
-            if (texts.Length == 0) return;
+            if (texts.Length == 0 || size == null) return;
             CairoDrawText.Draw(args.Cr, texts, size);
         }
 
@@ -279,20 +280,20 @@ namespace ASEva.UIGtk
         }
 
         private DrawingArea drawAreaGL = new DrawingArea();
-        private DrawingArea drawAreaText = null;
+        private DrawingArea? drawAreaText = null;
 
-        private GLTextTask[] texts = new GLTextTask[0];
+        private GLTextTask[] texts = [];
 
-        private OpenGL gl = null;
+        private OpenGL gl;
         private GLCallback callback;
         private GLAntialias antialias;
         private bool rendererStatusOK = false;
-        private GLSizeInfo size = null;
+        private GLSizeInfo? size = null;
         private bool drawQueued = false;
 
-        private Gdk.GLContext glContext = null;
-        private uint[] frameBuffer = null;
-        private uint[] colorBuffer = null;
-        private uint[] depthBuffer = null;
+        private Gdk.GLContext? glContext = null;
+        private uint[]? frameBuffer = null;
+        private uint[]? colorBuffer = null;
+        private uint[]? depthBuffer = null;
     }
 }

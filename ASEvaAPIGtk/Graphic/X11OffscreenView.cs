@@ -38,7 +38,7 @@ namespace ASEva.UIGtk
 
         public void QueueRender()
         {
-            if (Toplevel != null && Toplevel is Window && !(Toplevel as Window).Window.State.HasFlag(Gdk.WindowState.Iconified) && !drawQueued && DrawBeat.CallerBegin(this))
+            if (Toplevel != null && Toplevel is Window window && !window.Window.State.HasFlag(Gdk.WindowState.Iconified) && !drawQueued && DrawBeat.CallerBegin(this))
             {
                 QueueDraw();
                 drawQueued = true;
@@ -85,7 +85,7 @@ namespace ASEva.UIGtk
             rendererStatusOK = false;
         }
 
-        private void onRealized(object sender, EventArgs e)
+        private void onRealized(object? sender, EventArgs e)
         {
             IntPtr display = Linux.gdk_x11_display_get_xdisplay(Display.Handle);
             if (display == IntPtr.Zero) return;
@@ -256,15 +256,17 @@ namespace ASEva.UIGtk
             rendererStatusOK = true;
         }
 
-        private void onDraw(object o, DrawnArgs args)
+        private void onDraw(object? o, DrawnArgs args)
         {
             if (!rendererStatusOK) return;
 
-            var moduleID = callback == null ? null : callback.OnGetModuleID();
+            if (colorBuffer == null || depthBuffer == null || frameBuffer == null || cairoSurface == null || hostBuffer == null) return;
+
+            var moduleID = callback.OnGetModuleID();
             DrawBeat.CallbackBegin(this, moduleID);
 
             var curSize = new GLSizeInfo(realArea.AllocatedWidth, realArea.AllocatedHeight, realArea.AllocatedWidth * realArea.ScaleFactor, realArea.AllocatedHeight * realArea.ScaleFactor, realArea.ScaleFactor, (float)realArea.AllocatedWidth / realArea.AllocatedHeight);
-            bool resized = curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
+            bool resized = size == null || curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
             size = curSize;
 
             IntPtr display = Linux.gdk_x11_display_get_xdisplay(Display.Handle);
@@ -329,7 +331,7 @@ namespace ASEva.UIGtk
                 unsafe
                 {
                     byte *surfaceData = (byte*)cairoSurface.DataPtr;
-                    fixed (byte *srcData = &(hostBuffer[0]))
+                    fixed (byte *srcData = &hostBuffer[0])
                     {
                         for (int v = 0; v < cairoHeight; v++)
                         {
@@ -513,17 +515,17 @@ namespace ASEva.UIGtk
             }
         }
 
-        private OpenGL gl = null;
+        private OpenGL gl;
         private GLCallback callback;
         private IntPtr context = IntPtr.Zero;
         private uint xid = 0;
-        private uint[] frameBuffer = null;
-        private uint[] colorBuffer = null;
-        private uint[] depthBuffer = null;
-        private byte[] hostBuffer = null;
-        private Cairo.ImageSurface cairoSurface = null;
+        private uint[]? frameBuffer = null;
+        private uint[]? colorBuffer = null;
+        private uint[]? depthBuffer = null;
+        private byte[]? hostBuffer = null;
+        private Cairo.ImageSurface? cairoSurface = null;
         private bool rendererStatusOK = false;
-        private GLSizeInfo size = null;
+        private GLSizeInfo? size = null;
         private bool drawQueued = false;
         private DrawingArea realArea = new DrawingArea();
         private DrawingArea dummyArea = new DrawingArea();

@@ -12,25 +12,30 @@ namespace ASEva.UIGtk
     #pragma warning disable CS0612, CS0649
     class TextTableViewBackendGtk : Box, TextTableViewBackend
     {
-        [UI] TreeView treeView;
+        [UI] TreeView? treeView;
 
-        public TextTableViewBackendGtk(TextTableViewCallback callback) : this(new Builder("TextTableViewBackendGtk.glade"))
-        {
-            this.callback = callback;
+        public TextTableViewBackendGtk(TextTableViewCallback callback) : this(new Builder("TextTableViewBackendGtk.glade"), callback)
+        {}
 
-            treeView.Selection.Changed += delegate
-            {
-                callback.OnSelectedRowChanged();
-            };
-        }
-
-        private TextTableViewBackendGtk(Builder builder) : base(builder.GetRawOwnedObject("TextTableViewBackendGtk"))
+        private TextTableViewBackendGtk(Builder builder, TextTableViewCallback callback) : base(builder.GetRawOwnedObject("TextTableViewBackendGtk"))
         {
             builder.Autoconnect(this);
+
+            this.callback = callback;
+
+            if (treeView != null)
+            {
+                treeView.Selection.Changed += delegate
+                {
+                    callback.OnSelectedRowChanged();
+                };
+            }
         }
 
         public void AddColumn(string title, int logicalWidth, bool editable)
         {
+            if (treeView == null) return;
+
             treeView.AppendColumn(new TreeViewColumn
             {
                 Title = title,
@@ -51,6 +56,8 @@ namespace ASEva.UIGtk
             renderer.Edited += (o, e) =>
             {
                 var listStore = treeView.Model as ListStore;
+                if (listStore == null) return;
+
                 var iters = getIters();
                 TreeIter iter;
                 if (listStore.GetIter(out iter, new TreePath(e.Path)))
@@ -63,7 +70,9 @@ namespace ASEva.UIGtk
 
         public void AddRows(List<string[]> rowsValues)
         {
-            var listStore = treeView.Model as ListStore;
+            var listStore = treeView?.Model as ListStore;
+            if (listStore == null) return;
+
             foreach (var row in rowsValues)
             {
                 var values = new String[row.Length * 3];
@@ -80,13 +89,15 @@ namespace ASEva.UIGtk
         public int GetSelectedRowIndex()
         {
             TreeIter selected;
-            if (treeView.Selection.GetSelected(out selected)) return getIters().ToList().IndexOf(selected);
+            if (treeView?.Selection.GetSelected(out selected) ?? false) return getIters().ToList().IndexOf(selected);
             else return -1;
         }
 
-        public string GetValue(int rowIndex, int columnIndex)
+        public string? GetValue(int rowIndex, int columnIndex)
         {
-            var listStore = treeView.Model as ListStore;
+            var listStore = treeView?.Model as ListStore;
+            if (listStore == null) return null;
+
             TreeIter iter = getIters(rowIndex + 1)[rowIndex];
             var val = new GLib.Value();
             listStore.GetValue(iter, columnIndex * 3, ref val);
@@ -95,13 +106,15 @@ namespace ASEva.UIGtk
 
         public void RemoveAllRows()
         {
-            var listStore = treeView.Model as ListStore;
-            listStore.Clear();
+            var listStore = treeView?.Model as ListStore;
+            listStore?.Clear();
         }
 
         public void RemoveRows(int[] rowIndices)
         {
-            var listStore = treeView.Model as ListStore;
+            var listStore = treeView?.Model as ListStore;
+            if (listStore == null) return;
+
             var iters = getIters(rowIndices[0] + 1);
             foreach (var index in rowIndices)
             {
@@ -111,21 +124,27 @@ namespace ASEva.UIGtk
 
         public void SetBackgroundColor(int rowIndex, int columnIndex, Color color)
         {
-            var listStore = treeView.Model as ListStore;
+            var listStore = treeView?.Model as ListStore;
+            if (listStore == null) return;
+
             TreeIter iter = getIters(rowIndex + 1)[rowIndex];
             listStore.SetValue(iter, 3 * columnIndex + 2, rgb(color));
         }
 
         public void SetTextColor(int rowIndex, int columnIndex, Color color)
         {
-            var listStore = treeView.Model as ListStore;
+            var listStore = treeView?.Model as ListStore;
+            if (listStore == null) return;
+
             TreeIter iter = getIters(rowIndex + 1)[rowIndex];
             listStore.SetValue(iter, 3 * columnIndex + 1, rgb(color));
         }
 
         public void SetValue(int rowIndex, int columnIndex, string val)
         {
-            var listStore = treeView.Model as ListStore;
+            var listStore = treeView?.Model as ListStore;
+            if (listStore == null) return;
+
             TreeIter iter = getIters(rowIndex + 1)[rowIndex];
             listStore.SetValue(iter, 3 * columnIndex, val);
         }
@@ -133,10 +152,10 @@ namespace ASEva.UIGtk
         private TreeIter[] getIters(int maxCount = Int32.MaxValue)
         {
             var list = new List<TreeIter>();
-            var listStore = (treeView.Model as ListStore);
+            var listStore = treeView?.Model as ListStore;
 
             TreeIter iter;
-            if (!listStore.GetIterFirst(out iter)) return list.ToArray();
+            if (!(listStore?.GetIterFirst(out iter) ?? false)) return list.ToArray();
             list.Add(iter);
             if (list.Count >= maxCount) return list.ToArray();
 

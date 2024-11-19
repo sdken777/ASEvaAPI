@@ -31,10 +31,8 @@ namespace ASEva.UIGtk
         /// <param name="eventBox">事件框</param>
         /// <param name="contextMenu">关联右键菜单</param>
         /// <param name="enableScrolledEvent">是否启用滚轮事件</param>
-        public void Add(EventBox eventBox, Menu contextMenu = null, bool enableScrolledEvent = false)
+        public void Add(EventBox eventBox, Menu? contextMenu = null, bool enableScrolledEvent = false)
         {
-            if (eventBox == null) return;
-
             if (contextMenu != null) menuMap[eventBox] = contextMenu;
 
             eventBox.AddEvents((int)Gdk.EventMask.PointerMotionMask);
@@ -62,105 +60,108 @@ namespace ASEva.UIGtk
         public delegate void MovedHandler(EventBox box, EventMotion ev);
         public delegate void ScrolledHandler(EventBox box, EventScroll ev);
 
-        public event ButtonHandler LeftDown;
-        public event MovedHandler LeftMoved;
-        public event ButtonHandler LeftUp;
-        public event ButtonHandler LeftDoubleClicked;
-        public event ButtonHandler RightDown;
-        public event MovedHandler RightMoved;
-        public event ButtonHandler RightUp;
-        public event EventHandler Enter;
-        public event EventHandler Leave;
-        public event MovedHandler Moved;
-        public event ScrolledHandler Scrolled;
+        public event ButtonHandler? LeftDown;
+        public event MovedHandler? LeftMoved;
+        public event ButtonHandler? LeftUp;
+        public event ButtonHandler? LeftDoubleClicked;
+        public event ButtonHandler? RightDown;
+        public event MovedHandler? RightMoved;
+        public event ButtonHandler? RightUp;
+        public event EventHandler? Enter;
+        public event EventHandler? Leave;
+        public event MovedHandler? Moved;
+        public event ScrolledHandler? Scrolled;
 
-        private void eventBox_Scroll(object o, ScrollEventArgs args)
+        private void eventBox_Scroll(object? o, ScrollEventArgs args)
         {
             if (!PassEvents) args.RetVal = true;
-            if (Scrolled != null) Scrolled(o as EventBox, args.Event);
+            if (o is EventBox box) Scrolled?.Invoke(box, args.Event);
         }
 
-        private void eventBox_LeaveNotify(object o, LeaveNotifyEventArgs args)
+        private void eventBox_LeaveNotify(object? o, LeaveNotifyEventArgs args)
         {
             if (!PassEvents) args.RetVal = true;
             if (args.Event.Detail != Gdk.NotifyType.Inferior)
             {
-                if (Leave != null) Leave(o, args);
+                Leave?.Invoke(o, args);
             }
         }
 
-        private void eventBox_EnterNotify(object o, EnterNotifyEventArgs args)
+        private void eventBox_EnterNotify(object? o, EnterNotifyEventArgs args)
         {
             if (!PassEvents) args.RetVal = true;
-            if (Enter != null) Enter(o, args);
+            Enter?.Invoke(o, args);
         }
 
-        private void eventBox_MotionNotify(object o, MotionNotifyEventArgs args)
+        private void eventBox_MotionNotify(object? o, MotionNotifyEventArgs args)
         {
             if (!PassEvents) args.RetVal = true;
 
             var box = o as EventBox;
+            if (box == null) return;
 
             if (args.Event.State.HasFlag(Gdk.ModifierType.Button1Mask))
             {
-                if (LeftMoved != null) LeftMoved(box, args.Event);
+                LeftMoved?.Invoke(box, args.Event);
             }
             else if (args.Event.State.HasFlag(Gdk.ModifierType.Button3Mask))
             {
-                if (RightMoved != null) RightMoved(box, args.Event);
+                RightMoved?.Invoke(box, args.Event);
             }
 
             var x = args.Event.X;
             var y = args.Event.Y;
             if (x >= 0 && x < box.AllocatedWidth && y >= 0 && y < box.AllocatedHeight)
             {
-                if (Moved != null) Moved(box, args.Event);
+                Moved?.Invoke(box, args.Event);
             }
         }
 
-        private void eventBox_ButtonRelease(object o, ButtonReleaseEventArgs args)
+        private void eventBox_ButtonRelease(object? o, ButtonReleaseEventArgs args)
         {
             if (!PassEvents) args.RetVal = true;
 
             var box = o as EventBox;
+            if (box == null) return;
 
             if (args.Event.Button == 1)
             {
-                if (LeftUp != null) LeftUp(box, args.Event);
+                LeftUp?.Invoke(box, args.Event);
             }
             else if (args.Event.Button == 3)
             {
-                if (RightUp != null) RightUp(box, args.Event);
+                RightUp?.Invoke(box, args.Event);
                 if (menuMap.ContainsKey(box)) menuMap[box].PopupAtPointer(args.Event);
             }
         }
 
-        private void eventBox_ButtonPress(object o, ButtonPressEventArgs args)
+        private void eventBox_ButtonPress(object? o, ButtonPressEventArgs args)
         {
             if (!PassEvents) args.RetVal = true;
 
             var box = o as EventBox;
+            if (box == null) return;
 
             if (args.Event.Button == 1)
             {
                 if (args.Event.Type == Gdk.EventType.ButtonPress)
                 {
-                    if (LeftDown != null) LeftDown(box, args.Event);
+                    LeftDown?.Invoke(box, args.Event);
                 }
                 else if (args.Event.Type == Gdk.EventType.DoubleButtonPress)
                 {
-                    if (LeftDoubleClicked != null) LeftDoubleClicked(box, args.Event);
+                    LeftDoubleClicked?.Invoke(box, args.Event);
                 }
             }
             else if (args.Event.Button == 3)
             {
                 if (args.Event.Type == Gdk.EventType.ButtonPress)
                 {
-                    if (RightDown != null) RightDown(box, args.Event);
+                    RightDown?.Invoke(box, args.Event);
                 }
             }
         }
 
-        private Dictionary<EventBox, Menu> menuMap = new Dictionary<EventBox, Menu>();
+        private Dictionary<EventBox, Menu> menuMap = [];
     }
 }

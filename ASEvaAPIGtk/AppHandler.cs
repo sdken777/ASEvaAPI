@@ -20,7 +20,7 @@ namespace ASEva.UIGtk
     #pragma warning disable 612
     class AppHandlerGtk : AppHandler
     {
-        public Application CreateApp(bool attach, out String uiBackend, out String webViewBackend)
+        public Application? CreateApp(bool attach, out String uiBackend, out String webViewBackend)
         {
             this.attach = attach;
             if (!attach)
@@ -70,8 +70,10 @@ namespace ASEva.UIGtk
                 cssProvider.LoadFromData(ResourceLoader.LoadText("default.css"));
                 foreach (var screen in Screen.Screens)
                 {
-                    var gdkMonitor = screen.ControlObject as Gdk.Monitor;
-                    Gtk.StyleContext.AddProviderForScreen(gdkMonitor.Display.DefaultScreen, cssProvider, Gtk.StyleProviderPriority.Settings);
+                    if (screen.ControlObject is Gdk.Monitor gdkMonitor)
+                    {
+                        Gtk.StyleContext.AddProviderForScreen(gdkMonitor.Display.DefaultScreen, cssProvider, Gtk.StyleProviderPriority.Settings);
+                    }
                 }
             }
             catch (Exception ex) { Dump.Exception(ex); }
@@ -125,39 +127,36 @@ namespace ASEva.UIGtk
 
         public void RunApp(Application application, Form window, Form[] subWindows)
         {
-            if (window.ControlObject is Gtk.Window) DialogHelper.MainWindow = window.ControlObject as Gtk.Window;
-            if (subWindows != null)
+            if (window.ControlObject is Gtk.Window gtkWindow) DialogHelper.MainWindow = gtkWindow;
+            var list = new List<Gtk.Window>();
+            foreach (var subWindow in subWindows)
             {
-                var list = new List<Gtk.Window>();
-                foreach (var subWindow in subWindows)
-                {
-                    if (subWindow.ControlObject is Gtk.Window) list.Add(subWindow.ControlObject as Gtk.Window);
-                }
-                DialogHelper.OtherMainWindows = list.ToArray();
+                if (subWindow.ControlObject is Gtk.Window subGtkWindow) list.Add(subGtkWindow);
             }
+            DialogHelper.OtherMainWindows = list.ToArray();
             application.Run(window);
         }
 
-        public Control ConvertControlToEto(object platformControl)
+        public Control? ConvertControlToEto(object platformControl)
         {
             if (platformControl is Gtk.Widget) return (platformControl as Gtk.Widget).ToEto();
             else return null;
         }
 
-        public object ConvertControlToPlatform(Control etoControl)
+        public object? ConvertControlToPlatform(Control etoControl)
         {
             return etoControl.ToNative(true);
         }
 
-        public UIEto.WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
+        public UIEto.WindowPanel? ConvertWindowPanelToEto(object platformWindowPanel)
         {
-            if (platformWindowPanel is WindowPanel) return new EtoWindowPanel(platformWindowPanel as WindowPanel);
+            if (platformWindowPanel is WindowPanel gtkWindowPanel) return new EtoWindowPanel(gtkWindowPanel);
             else return null;
         }
 
-        public UIEto.ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
+        public UIEto.ConfigPanel? ConvertConfigPanelToEto(object platformConfigPanel)
         {
-            if (platformConfigPanel is ConfigPanel) return new EtoConfigPanel(platformConfigPanel as ConfigPanel);
+            if (platformConfigPanel is ConfigPanel gtkConfigPanel) return new EtoConfigPanel(gtkConfigPanel);
             else return null;
         }
 
@@ -191,9 +190,11 @@ namespace ASEva.UIGtk
 
         public Dictionary<String, String> GetThirdPartyNotices()
         {
-            var table = new Dictionary<String, String>();
-            table["GtkSharp"] = ResourceLoader.LoadText("GtkSharp.LICENSE");
-            table["webkitgtk"] = ResourceLoader.LoadText("webkitgtk.LICENSE");
+            var table = new Dictionary<String, String>
+            {
+                ["GtkSharp"] = ResourceLoader.LoadText("GtkSharp.LICENSE") ?? "",
+                ["webkitgtk"] = ResourceLoader.LoadText("webkitgtk.LICENSE") ?? "",
+            };
             return table;
         }
 

@@ -44,7 +44,7 @@ namespace ASEva.UIGtk
 
 			public new SliderHandler Handler { get { return (SliderHandler)base.Handler; } }
 
-			public void HandleScaleValueChanged(object sender, EventArgs e)
+			public void HandleScaleValueChanged(object? sender, EventArgs e)
 			{
 				var handler = Handler;
 				if (handler == null)

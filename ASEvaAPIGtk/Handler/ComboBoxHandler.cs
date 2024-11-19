@@ -12,8 +12,8 @@ namespace ASEva.UIGtk
 {
 	class ComboBoxHandler : DropDownHandler<Gtk.ComboBox, ComboBox, ComboBox.ICallback>, ComboBox.IHandler
 	{
-		Gtk.Entry entry;
-		Gtk.EntryCompletion completion;
+		Gtk.Entry? entry;
+		Gtk.EntryCompletion? completion;
 
 		protected override void Create()
 		{
@@ -47,7 +47,7 @@ namespace ASEva.UIGtk
 			{
 				textLength = Math.Max(textLength, item.Text.Length);
 			}
-			entry.WidthChars = Math.Min(MaxTextLength, textLength);
+			if (entry != null) entry.WidthChars = Math.Min(MaxTextLength, textLength);
 		}
 		private const int MaxTextLength = 8;
 
@@ -68,7 +68,7 @@ namespace ASEva.UIGtk
 		{
 			public new ComboBoxHandler Handler { get { return (ComboBoxHandler)base.Handler; } }
 
-			public void HandleTextChanged(object sender, EventArgs e)
+			public void HandleTextChanged(object? sender, EventArgs e)
 			{
 				Handler.Callback.OnTextChanged(Handler.Widget, EventArgs.Empty);
 				Handler.UpdateSelectedIndexFromText();
@@ -100,7 +100,7 @@ namespace ASEva.UIGtk
 			switch (id)
 			{
 				case ComboBox.TextChangedEvent:
-					entry.Changed += Connector.HandleTextChanged;
+					if (entry != null) entry.Changed += Connector.HandleTextChanged;
 					break;
 				default:
 					base.AttachEvent(id);
@@ -126,16 +126,16 @@ namespace ASEva.UIGtk
 			}
 		}
 
-		public override string Text
+		public override string? Text
 		{
-			get { return entry.Text; }
-			set { entry.Text = value ?? string.Empty; }
+			get { return entry?.Text; }
+			set { if (entry != null) entry.Text = value ?? string.Empty; }
 		}
 
 		public bool ReadOnly
 		{
-			get { return !entry.IsEditable; }
-			set { entry.IsEditable = !value; }
+			get { return entry == null || !entry.IsEditable; }
+			set { if (entry != null) entry.IsEditable = !value; }
 		}
 
 		public override int SelectedIndex
@@ -168,12 +168,12 @@ namespace ASEva.UIGtk
 						completion.Model = Control.Model;
 						completion.MinimumKeyLength = 1;
 						completion.TextColumn = 0;
-						entry.Completion = completion;
+						if (entry != null) entry.Completion = completion;
 					}
 					else
 					{
 						completion = null;
-						entry.Completion = null;
+						if (entry != null) entry.Completion = null;
 					}
 				}
 			}

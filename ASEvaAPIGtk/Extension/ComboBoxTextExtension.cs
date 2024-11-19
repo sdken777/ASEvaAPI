@@ -18,7 +18,7 @@ namespace ASEva.UIGtk
             return combo.Model.IterNChildren();
         }
 
-        public static String GetItemAt(this ComboBoxText combo, int index)
+        public static String? GetItemAt(this ComboBoxText combo, int index)
         {
             if (index < 0 || index >= combo.Model.IterNChildren()) return null;
             else return combo.GetItems()[index];
@@ -26,7 +26,7 @@ namespace ASEva.UIGtk
 
         public static String[] GetItems(this ComboBoxText combo)
         {
-            if (combo.Model.IterNChildren() == 0) return new string[0];
+            if (combo.Model.IterNChildren() == 0) return [];
 
             var output = new String[combo.Model.IterNChildren()];
 
@@ -35,7 +35,7 @@ namespace ASEva.UIGtk
 
             for (int i = 0; i < output.Length; i++)
             {
-                output[i] = combo.Model.GetValue(iter, 0) as String;
+                output[i] = combo.Model.GetValue(iter, 0) as String ?? "";
                 combo.Model.IterNext(ref iter);
             }
 

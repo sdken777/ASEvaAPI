@@ -35,20 +35,20 @@ namespace OxyPlot.GtkSharp
         private readonly GraphicsRenderContext renderContext;
 
         [NonSerialized]
-        private Gtk.Label trackerLabel = null;
+        private Gtk.Label? trackerLabel = null;
 
         [NonSerialized]
-        private PlotModel currentModel;
+        private PlotModel? currentModel;
 
         private bool isModelInvalidated;
 
-        private PlotModel model;
+        private PlotModel? model;
 
         private bool updateDataFlag = true;
 
         private OxyRect? zoomRectangle;
 
-        private IPlotController defaultController;
+        private IPlotController? defaultController;
 
         public PlotView() : base(null, null)
         {
@@ -68,7 +68,7 @@ namespace OxyPlot.GtkSharp
         [Browsable(false)]
         [DefaultValue(null)]
         [Category(OxyPlotCategory)]
-        public PlotModel Model
+        public PlotModel? Model
         {
             get
             {
@@ -85,7 +85,7 @@ namespace OxyPlot.GtkSharp
             }
         }
 
-        Model IView.ActualModel
+        Model? IView.ActualModel
         {
             get
             {
@@ -93,7 +93,7 @@ namespace OxyPlot.GtkSharp
             }
         }
 
-        public PlotModel ActualModel
+        public PlotModel? ActualModel
         {
             get
             {
@@ -125,7 +125,7 @@ namespace OxyPlot.GtkSharp
             }
         }
 
-        public IPlotController Controller { get; set; }
+        public IPlotController? Controller { get; set; }
 
         [Category(OxyPlotCategory)]
         public Cursor PanCursor { get; set; }

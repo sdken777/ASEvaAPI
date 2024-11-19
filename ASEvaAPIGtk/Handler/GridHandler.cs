@@ -25,15 +25,15 @@ namespace ASEva.UIGtk
 		where TWidget : Grid
 		where TCallback : Grid.ICallback
 	{
-		ColumnCollection columns;
-		Gtk.TreeViewColumn spacingColumn;
-		ContextMenu contextMenu;
+		ColumnCollection? columns;
+		Gtk.TreeViewColumn? spacingColumn;
+		ContextMenu? contextMenu;
 		readonly Dictionary<int, int> columnMap = new Dictionary<int, int>();
 
 		protected bool SkipSelectedChange { get; set; }
 
 		public Gtk.ScrolledWindow ScrolledWindow { get; private set; }
-		public EtoEventBox Box { get; private set; }
+		public EtoEventBox? Box { get; private set; }
 
 		Gtk.TreeView IGridHandler.Tree => Control;
 
@@ -46,8 +46,8 @@ namespace ASEva.UIGtk
 
 		class EtoScrolledWindow : Gtk.ScrolledWindow
 		{
-			WeakReference handler;
-			public IGtkControl Handler { get => handler?.Target as IGtkControl; set => handler = new WeakReference(value); }
+			WeakReference? handler;
+			public IGtkControl? Handler { get => handler?.Target as IGtkControl; set => handler = new WeakReference(value); }
 
 #if GTKCORE			
 
@@ -140,9 +140,9 @@ namespace ASEva.UIGtk
 		{
 			var hscrollbar = ScrolledWindow.HScrollbar as Gtk.Scrollbar;
 			var vscrollbar = ScrolledWindow.VScrollbar as Gtk.Scrollbar;
-			if (state.hscroll != null)
+			if (hscrollbar != null && state.hscroll != null)
 				hscrollbar.Value = state.hscroll.Value;
-			if (state.vscroll != null)
+			if (vscrollbar != null && state.vscroll != null)
 				vscrollbar.Value = state.vscroll.Value;
 		}
 
@@ -166,7 +166,7 @@ namespace ASEva.UIGtk
 			Control.Events |= Gdk.EventMask.ButtonPressMask;
 			Control.ButtonPressEvent += Connector.HandleButtonPress;
 
-			columns = new ColumnCollection { Handler = this };
+			columns = new ColumnCollection(this);
 			columns.Register(Widget.Columns);
 			base.Initialize();
 
@@ -257,7 +257,7 @@ namespace ASEva.UIGtk
 				}
 			}
 
-			int[] selectedRows;
+			int[] selectedRows = [];
 
 			static bool ArraysEqual<T>(T[] a1, T[] a2)
 			{
@@ -279,7 +279,7 @@ namespace ASEva.UIGtk
 				return true;
 			}
 
-			public void HandleGridSelectionChanged(object sender, EventArgs e)
+			public void HandleGridSelectionChanged(object? sender, EventArgs e)
 			{
 				var handler = Handler;
 				if (handler == null)
@@ -296,7 +296,7 @@ namespace ASEva.UIGtk
 			}
 
 			[GLib.ConnectBefore]
-			public virtual void OnTreeButtonPress(object sender, Gtk.ButtonPressEventArgs e)
+			public virtual void OnTreeButtonPress(object? sender, Gtk.ButtonPressEventArgs e)
 			{
 				if (e.Event.Type == Gdk.EventType.TwoButtonPress || e.Event.Type == Gdk.EventType.ThreeButtonPress)
 					return;
@@ -333,7 +333,7 @@ namespace ASEva.UIGtk
 			}
 
 			[GLib.ConnectBefore]
-			public virtual void HandleGridColumnsChanged(object sender, EventArgs e)
+			public virtual void HandleGridColumnsChanged(object? sender, EventArgs e)
 			{
 				var h = Handler;
 				if (h == null)
@@ -431,9 +431,9 @@ namespace ASEva.UIGtk
 			
 		}
 
-		class ColumnCollection : EnumerableChangedHandler<GridColumn, GridColumnCollection>
+		class ColumnCollection(GridHandler<TWidget, TCallback> handler) : EnumerableChangedHandler<GridColumn, GridColumnCollection>
 		{
-			public GridHandler<TWidget, TCallback> Handler { get; set; }
+			public GridHandler<TWidget, TCallback> Handler { get; set; } = handler;
 
 			public override void AddItem(GridColumn item)
 			{
@@ -537,7 +537,7 @@ namespace ASEva.UIGtk
 			columnMap[dataIndex] = column;
 		}
 
-		public ContextMenu ContextMenu
+		public ContextMenu? ContextMenu
 		{
 			get { return contextMenu; }
 			set { contextMenu = value; }
@@ -735,7 +735,7 @@ namespace ASEva.UIGtk
 			set => Widget.Properties.TrySet(GridHandler.AllowEmptySelection_Key, value, true);
 		}
 
-		private void Widget_MouseDown(object sender, MouseEventArgs e)
+		private void Widget_MouseDown(object? sender, MouseEventArgs e)
 		{
 			if (!e.Handled && e.Buttons == MouseButtons.Primary)
 			{

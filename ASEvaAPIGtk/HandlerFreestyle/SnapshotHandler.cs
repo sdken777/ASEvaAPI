@@ -13,30 +13,32 @@ namespace ASEva.UIGtk
 
     class SnapshotHandler : ASEva.UIEto.SnapshotExtensions.SnapshotHandler
     {
-        public CommonImage Snapshot(Eto.Forms.Control control)
+        public CommonImage? Snapshot(Eto.Forms.Control control)
         {
             var widget = control.ControlObject as Widget;
             if (widget == null) return null;
 
             if (widget is Window)
             {
-                widget = (widget as Window).Child;
+                widget = (widget as Window)?.Child;
                 if (widget == null) return null;
             }
 
             var w = widget.AllocatedWidth;
             var h = widget.AllocatedHeight;
 
+            var output = CommonImage.Create(w, h, true);
+            if (output == null) return null;
+
             var surface = new ImageSurface(Format.Argb32, w, h);
             var cc = new Context(surface);
             widget.Draw(cc);
             cc.Dispose();
 
-            var output = CommonImage.Create(w, h, true);
             unsafe
             {
                 byte* srcData = (byte*)surface.DataPtr;
-                fixed (byte* dstData = &(output.Data[0]))
+                fixed (byte* dstData = &output.Data[0])
                 {
                     for (int v = 0; v < h; v++)
                     {
@@ -62,7 +64,7 @@ namespace ASEva.UIGtk
 
     class ScreenSnapshotHandler : ASEva.UIEto.SnapshotExtensions.SnapshotHandler
     {
-        public CommonImage Snapshot(Eto.Forms.Control control)
+        public CommonImage? Snapshot(Eto.Forms.Control control)
         {
             var uiBackend = ASEva.UIEto.App.GetUIBackend();
             if (uiBackend == null) return null;
@@ -72,17 +74,17 @@ namespace ASEva.UIGtk
 
             if (widget is Window)
             {
-                widget = (widget as Window).Child;
+                widget = (widget as Window)?.Child;
                 if (widget == null) return null;
             }
 
-            CommonImage rawImage = null;
+            CommonImage? rawImage = null;
             if (uiBackend == "wayland") // for future use
             {
                 var dbus = new DBus();
                 dbus.Snapshot();
 
-                String uri = null;
+                String? uri = null;
                 while (true)
                 {
                     System.Threading.Thread.Sleep(1);
@@ -106,6 +108,7 @@ namespace ASEva.UIGtk
                 }
 
                 var fullImage = ASEva.UIEto.ImageConverter.ConvertFromBitmap(etoBitmap);
+                if (fullImage == null) return null;
 
                 var loc = widget.Allocation;
                 var factor = (double)etoBitmapSize.Width / windowSize.Width;
@@ -119,6 +122,8 @@ namespace ASEva.UIGtk
                 if (x + width > fullImage.Width || y + height > fullImage.Height) return null;
 
                 rawImage = CommonImage.Create(width, height, fullImage.WithAlpha);
+                if (rawImage == null) return null;
+
                 var cellBytes = fullImage.WithAlpha ? 4 : 3;
                 unsafe
                 {
@@ -157,7 +162,7 @@ namespace ASEva.UIGtk
 
         class XCB
         {
-            public CommonImage Snapshot(ushort x, ushort y, ushort width, ushort height)
+            public CommonImage? Snapshot(ushort x, ushort y, ushort width, ushort height)
             {
                 IntPtr connection = xcb_connect(null, IntPtr.Zero);
                 IntPtr setup = xcb_get_setup(connection);
@@ -177,25 +182,28 @@ namespace ASEva.UIGtk
                     return null;
                 }
 
-                CommonImage commonImage = null;
+                CommonImage? commonImage = null;
                 unsafe
                 {
                     xcb_image_t *imagePtr = (xcb_image_t*)image;
                     byte *srcData = (byte*)imagePtr->data;
 
                     commonImage = CommonImage.Create(imagePtr->width, imagePtr->height, false);
-                    fixed (byte *dstData = &commonImage.Data[0])
+                    if (commonImage != null)
                     {
-                        for (int v = 0; v < imagePtr->height; v++)
+                        fixed (byte *dstData = &commonImage.Data[0])
                         {
-                            byte *srcRow = srcData + v * 4 * imagePtr->width;
-                            byte *dstRow = dstData + v * commonImage.RowBytes;
-                            for (int u = 0; u < imagePtr->width; u++)
+                            for (int v = 0; v < imagePtr->height; v++)
                             {
-                                *(dstRow++) = *(srcRow++);
-                                *(dstRow++) = *(srcRow++);
-                                *(dstRow++) = *(srcRow++);
-                                srcRow++;
+                                byte *srcRow = srcData + v * 4 * imagePtr->width;
+                                byte *dstRow = dstData + v * commonImage.RowBytes;
+                                for (int u = 0; u < imagePtr->width; u++)
+                                {
+                                    *(dstRow++) = *(srcRow++);
+                                    *(dstRow++) = *(srcRow++);
+                                    *(dstRow++) = *(srcRow++);
+                                    srcRow++;
+                                }
                             }
                         }
                     }
@@ -260,7 +268,7 @@ namespace ASEva.UIGtk
             }
 
             [DllImport("libxcb.so.1")]
-            private static extern IntPtr xcb_connect(String displayName, IntPtr screen);
+            private static extern IntPtr xcb_connect(String? displayName, IntPtr screen);
 
             [DllImport("libxcb.so.1")]
             private static extern void xcb_disconnect(IntPtr connection);
@@ -299,7 +307,7 @@ namespace ASEva.UIGtk
 
                 var result = new Variant(g_dbus_proxy_call_sync(proxy.Handle, "Screenshot", parameters.Handle, DBusCallFlags.None, -1, IntPtr.Zero, IntPtr.Zero));
                 
-                String objPath = null;
+                String? objPath = null;
                 g_variant_get(result.Handle, "(o)", ref objPath);
 
                 id = g_dbus_connection_signal_subscribe(connection.Handle, "org.freedesktop.portal.Desktop",
@@ -307,7 +315,7 @@ namespace ASEva.UIGtk
                             null, DBusSignalFlags.None, signalCallback, IntPtr.Zero, IntPtr.Zero);
             }
 
-            public String PopUri()
+            public String? PopUri()
             {
                 var output = uri;
                 uri = null;
@@ -318,6 +326,8 @@ namespace ASEva.UIGtk
             private static GDBusSignalCallback signalCallback = signalCallbackFunc;
             private static void signalCallbackFunc(IntPtr connection, String sender_name, String object_path, String interface_name, String signal_name, IntPtr parameters, IntPtr user_data)
             {
+                if (curInstance == null || curInstance.uri == null || curInstance.connection == null || curInstance.id == null || curInstance.proxy == null) return;
+
                 var variant = new Variant(parameters);
 
                 uint response = 0;
@@ -326,7 +336,7 @@ namespace ASEva.UIGtk
 
                 if (response == 0)
                 {
-                    String uri = null;
+                    String? uri = null;
                     g_variant_lookup(dict, "uri", "s", ref uri);
                     curInstance.uri = uri == null ? "" : uri;
                 }
@@ -339,11 +349,11 @@ namespace ASEva.UIGtk
                 curInstance = null;
             }
 
-            private static DBus curInstance = null;
-            private DBusConnection connection = null;
-            private DBusProxy proxy = null;
+            private static DBus? curInstance = null;
+            private DBusConnection? connection = null;
+            private DBusProxy? proxy = null;
             private uint? id = null;
-            private String uri = null;
+            private String? uri = null;
 
             [DllImport("libgio-2.0.so.0")]
             private static extern IntPtr g_bus_get_sync(BusType type, IntPtr cancel, IntPtr error);
@@ -373,19 +383,19 @@ namespace ASEva.UIGtk
             private static extern IntPtr g_variant_new(String format/* "(sa{sv})" */, String str, IntPtr builder);
 
             [DllImport("libgio-2.0.so.0")]
-            private static extern void g_variant_get(IntPtr variant, String format/* "(o)" */, ref String str);
+            private static extern void g_variant_get(IntPtr variant, String format/* "(o)" */, ref String? str);
 
             [DllImport("libgio-2.0.so.0")]
             private static extern void g_variant_get(IntPtr variant, String format/* "(u@a{sv})" */, ref uint number, ref IntPtr keyValuePairs);
 
             [DllImport("libgio-2.0.so.0")]
-            private static extern uint g_dbus_connection_signal_subscribe(IntPtr connection, String sender, String interface_name, String member, String object_path, String arg0, DBusSignalFlags flags, GDBusSignalCallback callback, IntPtr user_data, IntPtr user_data_free_func);
+            private static extern uint g_dbus_connection_signal_subscribe(IntPtr connection, String sender, String interface_name, String member, String? object_path, String? arg0, DBusSignalFlags flags, GDBusSignalCallback callback, IntPtr user_data, IntPtr user_data_free_func);
 
             [DllImport("libgio-2.0.so.0")]
             private static extern void g_dbus_connection_signal_unsubscribe(IntPtr connection, uint id);
 
             [DllImport("libgio-2.0.so.0")]
-            private static extern bool g_variant_lookup(IntPtr dictionary, String key, String format/* "s" */, ref String str);
+            private static extern bool g_variant_lookup(IntPtr dictionary, String key, String format/* "s" */, ref String? str);
         }
     }
 }

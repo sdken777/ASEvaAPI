@@ -22,16 +22,15 @@ namespace ASEva.UIGtk
     #pragma warning disable CS0612, CS0649
     class FlowLayout2DBackendGtk : Gtk.Box, FlowLayout2DBackend
     {
-        [UI] Gtk.Box mainBox;
+        [UI] Gtk.Box? mainBox;
 
-        public FlowLayout2DBackendGtk(FlowLayoutCallback callback) : this(new Gtk.Builder("FlowLayout2DBackendGtk.glade"))
-        {
-            this.callback = callback;
-        }
+        public FlowLayout2DBackendGtk(FlowLayoutCallback callback) : this(new Gtk.Builder("FlowLayout2DBackendGtk.glade"), callback)
+        {}
  
-        private FlowLayout2DBackendGtk(Gtk.Builder builder) : base(builder.GetRawOwnedObject("FlowLayout2DBackendGtk"))
+        private FlowLayout2DBackendGtk(Gtk.Builder builder, FlowLayoutCallback callback) : base(builder.GetRawOwnedObject("FlowLayout2DBackendGtk"))
         {
             builder.Autoconnect(this);
+            this.callback = callback;
         }
 
         public void SetControlWidth(int logicalWidth)
@@ -83,14 +82,14 @@ namespace ASEva.UIGtk
                 int i = curIdentifiers.Count - 1;
                 while (i >= 0)
                 {
-                    var colBox = mainBox.Children[i] as Gtk.Box;
+                    var colBox = mainBox?.Children[i] as Gtk.Box;
                     if (i >= targetIdentifiers.Count)
                     {
-                        var children = colBox.Children;
-                        foreach (var child in children) colBox.Remove(child);
+                        var children = colBox?.Children;
+                        if (children != null) foreach (var child in children) colBox?.Remove(child);
 
                         curIdentifiers.RemoveAt(i);
-                        mainBox.Remove(mainBox.Children[i]);
+                        mainBox?.Remove(mainBox.Children[i]);
                     }
                     else
                     {
@@ -101,7 +100,7 @@ namespace ASEva.UIGtk
                             if (!targetIdentifiers[i].Contains(curColIdentifiers[j]))
                             {
                                 curColIdentifiers.RemoveAt(j);
-                                colBox.Remove(colBox.Children[j]);
+                                colBox?.Remove(colBox.Children[j]);
                             }
                             j--;
                         }
@@ -115,7 +114,7 @@ namespace ASEva.UIGtk
                 if (i >= curIdentifiers.Count)
                 {
                     var colBox = new Gtk.VBox{ Spacing = 6, Visible = true };
-                    mainBox.PackStart(colBox, false, false, 0);
+                    mainBox?.PackStart(colBox, false, false, 0);
 
                     foreach (var identifier in targetIdentifiers[i])
                     {
@@ -129,7 +128,7 @@ namespace ASEva.UIGtk
                 else
                 {
                     var curColIdentifiers = curIdentifiers[i];
-                    var colBox = mainBox.Children[i] as Gtk.Box;
+                    var colBox = mainBox?.Children[i] as Gtk.Box;
                     int insertIndex = 0;
 
                     foreach (var identifier in targetIdentifiers[i])
@@ -141,15 +140,15 @@ namespace ASEva.UIGtk
                             insertIndex = curColIdentifiers.IndexOf(identifier) + 1;
                             continue;
                         }
-                        if (insertIndex >= colBox.Children.Length)
+                        if (insertIndex >= colBox?.Children.Length)
                         {
                             colBox.PackStart(ctx.Container, false, false, 0);
                             curColIdentifiers.Add(identifier);
                         }
                         else
                         {
-                            colBox.PackStart(ctx.Container, false, false, 0);
-                            colBox.ReorderChild(ctx.Container, insertIndex);
+                            colBox?.PackStart(ctx.Container, false, false, 0);
+                            colBox?.ReorderChild(ctx.Container, insertIndex);
                             curColIdentifiers.Insert(insertIndex, identifier);
                         }
                         insertIndex++;
@@ -170,7 +169,7 @@ namespace ASEva.UIGtk
             container.HeightRequest = logicalHeight + 2;
             container.Add(viewPort);
 
-            ctxs.Add(new ControlContext { Identifier = ++identifierCount, EtoControl = control, Container = container, LogicalHeight = logicalHeight, Visible = true });
+            ctxs.Add(new ControlContext(control, container) { Identifier = ++identifierCount, LogicalHeight = logicalHeight, Visible = true });
             control.MouseDown += (obj, args) =>
             {
                 callback.OnControlClicked(ctxs.FindIndex(c => c.EtoControl.Equals(obj)));
@@ -189,7 +188,7 @@ namespace ASEva.UIGtk
             container.HeightRequest = logicalHeight + 2;
             container.Add(viewPort);
 
-            ctxs.Insert(index, new ControlContext { Identifier = ++identifierCount, EtoControl = control, Container = container, LogicalHeight = logicalHeight, Visible = true });
+            ctxs.Insert(index, new ControlContext(control, container) { Identifier = ++identifierCount, LogicalHeight = logicalHeight, Visible = true });
             control.MouseDown += (obj, args) =>
             {
                 callback.OnControlClicked(ctxs.FindIndex(c => c.EtoControl.Equals(obj)));
@@ -199,8 +198,8 @@ namespace ASEva.UIGtk
         public void RemoveAllControls()
         {
             selectedContainer = null;
-            var children = mainBox.Children;
-            foreach (var child in children) mainBox.Remove(child);
+            var children = mainBox?.Children;
+            if (children != null) foreach (var child in children) mainBox?.Remove(child);
             ctxs.Clear();
             curIdentifiers.Clear();
         }
@@ -240,19 +239,19 @@ namespace ASEva.UIGtk
             return -1;
         }
 
-        private class ControlContext
+        private class ControlContext(Control etoControl, Gtk.ScrolledWindow container)
         {
             public int Identifier { get; set; }
-            public Control EtoControl { get; set; }
-            public Gtk.ScrolledWindow Container { get; set; }
+            public Control EtoControl { get; set; } = etoControl;
+            public Gtk.ScrolledWindow Container { get; set; } = container;
             public int LogicalHeight { get; set; }
             public bool Visible { get; set; }
         }
 
         private FlowLayoutCallback callback;
-        private List<ControlContext> ctxs = new List<ControlContext>();
-        private List<List<int>> curIdentifiers = new List<List<int>>();
-        private Gtk.ScrolledWindow selectedContainer;
+        private List<ControlContext> ctxs = [];
+        private List<List<int>> curIdentifiers = [];
+        private Gtk.ScrolledWindow? selectedContainer;
         private int controlWidth;
 
         private int identifierCount = 0;

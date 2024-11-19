@@ -26,11 +26,11 @@ namespace ASEva.UIGtk
 			get { return webView?.Title ?? ""; }
 		}
 
-		public Uri Url
+		public Uri? Url
 		{
 			get
 			{
-				String uriString = webView?.Uri;
+				String? uriString = webView?.Uri;
 				return String.IsNullOrEmpty(uriString) ? null : new Uri(uriString);
 			}
 			set
@@ -52,17 +52,17 @@ namespace ASEva.UIGtk
 			get { return Control; }
 		}
 
-		EventHandler<WebViewTitleEventArgs> titleChanged;
-		EventHandler<WebViewLoadedEventArgs> navigated;
-		EventHandler<WebViewLoadedEventArgs> documentLoaded;
-		EventHandler<WebViewLoadingEventArgs> documentLoading;
-		EventHandler<WebViewNewWindowEventArgs> openNewWindow;
+		EventHandler<WebViewTitleEventArgs>? titleChanged;
+		EventHandler<WebViewLoadedEventArgs>? navigated;
+		EventHandler<WebViewLoadedEventArgs>? documentLoaded;
+		EventHandler<WebViewLoadingEventArgs>? documentLoading;
+		EventHandler<WebViewNewWindowEventArgs>? openNewWindow;
 
-		Queue<TaskCompletionSource<string>> jsCompletionSources;
-		WebKit.WebView webView;
-		string targetUrl;
-		string targetHtmlString;
-		string targetBaseUrl;
+		Queue<TaskCompletionSource<string?>>? jsCompletionSources;
+		WebKit.WebView? webView;
+		string? targetUrl;
+		string? targetHtmlString;
+		string? targetBaseUrl;
 
 		private static IntPtr webViewGroup = IntPtr.Zero;
 
@@ -140,7 +140,7 @@ namespace ASEva.UIGtk
 				}
 			}
 		}
-		private static WebKit.Settings settings = null;
+		private static WebKit.Settings? settings = null;
 
 		private void WebViewHandler_TitleChanged(object o, GLib.SignalArgs args)
 		{
@@ -178,7 +178,7 @@ namespace ASEva.UIGtk
 			if (type == WebKit.PolicyDecisionType.NavigationAction)
 			{
 				var navigationDecision = args.Args[0] as WebKit.NavigationPolicyDecision;
-				var uriString = navigationDecision.Request.Uri;
+				var uriString = navigationDecision?.Request.Uri;
 				var uri = String.IsNullOrEmpty(uriString) ? null : new Uri(uriString);
 
 				var loadingArgs = new WebViewLoadingEventArgs(uri, true);
@@ -188,7 +188,7 @@ namespace ASEva.UIGtk
 			else if (type == WebKit.PolicyDecisionType.NewWindowAction)
 			{
 				var navigationDecision = args.Args[0] as WebKit.NavigationPolicyDecision;
-				var uriString = navigationDecision.Request.Uri;
+				var uriString = navigationDecision?.Request.Uri;
 				var uri = String.IsNullOrEmpty(uriString) ? null : new Uri(uriString);
 
 				var newWindowArgs = new WebViewNewWindowEventArgs(uri, "");
@@ -198,13 +198,13 @@ namespace ASEva.UIGtk
 			else if (type == WebKit.PolicyDecisionType.Response)
 			{
 				var responseDecision = args.Args[0] as WebKit.ResponsePolicyDecision;
-				var uriString = responseDecision.Request.Uri;
-				var mimeSupport = responseDecision.IsMimeTypeSupported;
+				var uriString = responseDecision?.Request.Uri;
+				var mimeSupport = responseDecision?.IsMimeTypeSupported ?? false;
 
 				if (!mimeSupport && !String.IsNullOrEmpty(uriString))
 				{
 					GLib.Timeout.Add(1, timer_Timeout);
-					responseDecision.Download();
+					responseDecision?.Download();
 					args.RetVal = true;
 					return;
 				}
@@ -215,7 +215,7 @@ namespace ASEva.UIGtk
         {
 			var userDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
 			var downloadDirName = new String[] {"Downloads", "Download", "下载"};
-			String targetDir = null;
+			String? targetDir = null;
 			foreach (var dirName in downloadDirName)
 			{
 				var downloadDir = userDir + "/" + dirName;
@@ -261,7 +261,7 @@ namespace ASEva.UIGtk
 			}
 		}
 
-		public string ExecuteScript(string script)
+		public string? ExecuteScript(string script)
 		{
 			if (webView == null) return null;
 
@@ -275,14 +275,14 @@ namespace ASEva.UIGtk
 			return task.Result;
 		}
 		
-		private Delegate theDelegate = null;
+		private Delegate? theDelegate = null;
 
-		public Task<string> ExecuteScriptAsync(string script)
+		public Task<string?> ExecuteScriptAsync(string script)
 		{
-			if (webView == null) return null;
+			if (webView == null) return Task.FromResult<String?>(null);
 
-			var taskCompletionSource = new TaskCompletionSource<string>();
-			if (jsCompletionSources == null) jsCompletionSources = new Queue<TaskCompletionSource<string>>();
+			var taskCompletionSource = new TaskCompletionSource<string?>();
+			if (jsCompletionSources == null) jsCompletionSources = new Queue<TaskCompletionSource<string?>>();
 			jsCompletionSources.Enqueue(taskCompletionSource);
 
 			if (theDelegate == null) theDelegate = (Delegate)(FinishScriptExecutionDelegate)FinishScriptExecution;
@@ -295,6 +295,8 @@ namespace ASEva.UIGtk
 
 		private void FinishScriptExecution(IntPtr webview, IntPtr result, IntPtr error)
 		{
+			if (webView == null) return;
+
 			var jsResult = NativeMethods.webkit_web_view_run_javascript_finish(webView.Handle, result, IntPtr.Zero);
 			var taskCompletionSource = jsCompletionSources?.Count > 0 ? jsCompletionSources?.Dequeue() : null;
 			if (jsResult != IntPtr.Zero)
@@ -525,7 +527,7 @@ namespace ASEva.UIGtk
 			{
 				if (ver != TargetVersion.Unknown) return;
 
-				String archID = null;
+				String? archID = null;
 				switch (ASEva.APIInfo.GetRunningOS())
 				{
 					case "linux":

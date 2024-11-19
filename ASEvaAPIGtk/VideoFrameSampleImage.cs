@@ -43,8 +43,6 @@ namespace ASEva.UIGtk
         /// </summary>
         public static VideoFrameSampleImage FromCommonImage(CommonImage image)
         {
-            if (image == null) return null;
-
             var output = new VideoFrameSampleImage();
             output.w = image.Width;
             output.h = image.Height;
@@ -312,7 +310,7 @@ namespace ASEva.UIGtk
         private VideoFrameSampleImage()
         {}
 
-        private byte[] data;
+        private byte[] data = [];
         private int w;
         private int h;
         private int rowBytes;

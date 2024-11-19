@@ -24,7 +24,7 @@ namespace OxyPlot.GtkSharp
 
         public OxyColor Background { get; set; }
 
-        public static void Export(IPlotModel model, string fileName, int width, int height, Pattern background = null)
+        public static void Export(IPlotModel model, string fileName, int width, int height, Pattern? background = null)
         {
             using (var bm = new ImageSurface(Format.ARGB32, width, height))
             {

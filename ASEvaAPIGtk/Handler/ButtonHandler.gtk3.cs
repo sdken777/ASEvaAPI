@@ -17,7 +17,7 @@ namespace ASEva.UIGtk
 	{
 		readonly Gtk.AccelLabel label;
 
-		Gtk.Image gtkimage;
+		Gtk.Image? gtkimage;
 
 		protected override Gtk.Widget FontControl => label;
 
@@ -44,7 +44,7 @@ namespace ASEva.UIGtk
 		{
 			new ButtonHandler<TControl, TWidget, TCallback> Handler => (ButtonHandler<TControl, TWidget, TCallback>)base.Handler;
 
-			public virtual void HandleClicked(object sender, EventArgs e)
+			public virtual void HandleClicked(object? sender, EventArgs e)
 			{
 				var h = Handler;
 				if (h == null)
@@ -88,7 +88,7 @@ namespace ASEva.UIGtk
 			(label.Parent as Gtk.Container)?.Remove(label);
 			(gtkimage?.Parent as Gtk.Container)?.Remove(gtkimage);
 
-			Gtk.Widget child = null;
+			Gtk.Widget? child = null;
 			var showImage = Image != null;
 			var showLabel = !string.IsNullOrEmpty(label.Text);
 			if (showImage && showLabel)
@@ -127,7 +127,7 @@ namespace ASEva.UIGtk
 						var grid = new Gtk.Grid();
 						child = grid;
 						label.Hexpand = label.Vexpand = true;
-						gtkimage.Hexpand = gtkimage.Vexpand = true;
+						if (gtkimage != null) gtkimage.Hexpand = gtkimage.Vexpand = true;
 						grid.Attach(label, 0, 0, 1, 1);
 						grid.Attach(gtkimage, 0, 0, 1, 1);
 #endif

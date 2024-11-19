@@ -46,7 +46,7 @@ namespace ASEva.UIGtk
 
         public void QueueRender()
         {
-            if (Toplevel != null && Toplevel is Window && !(Toplevel as Window).Window.State.HasFlag(Gdk.WindowState.Iconified) && !drawQueued && DrawBeat.CallerBegin(this))
+            if (Toplevel != null && Toplevel is Window window && !window.Window.State.HasFlag(Gdk.WindowState.Iconified) && !drawQueued && DrawBeat.CallerBegin(this))
             {
                 QueueDraw();
                 drawQueued = true;
@@ -72,7 +72,7 @@ namespace ASEva.UIGtk
             rendererStatusOK = false;
         }
 
-        private void onRealized(object sender, EventArgs e)
+        private void onRealized(object? sender, EventArgs e)
         {
             if (targetVisualInfo == IntPtr.Zero) return;
 
@@ -155,15 +155,15 @@ namespace ASEva.UIGtk
             rendererStatusOK = true;
         }
 
-        private void onDraw(object o, DrawnArgs args)
+        private void onDraw(object? o, DrawnArgs args)
         {
             if (!rendererStatusOK) return;
 
-            var moduleID = callback == null ? null : callback.OnGetModuleID();
+            var moduleID = callback.OnGetModuleID();
             DrawBeat.CallbackBegin(this, moduleID);
 
             var curSize = new GLSizeInfo(AllocatedWidth, AllocatedHeight, AllocatedWidth * ScaleFactor, AllocatedHeight * ScaleFactor, ScaleFactor, (float)AllocatedWidth / AllocatedHeight);
-            bool resized = curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
+            bool resized = size == null || curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
             size = curSize;
 
             IntPtr display = Linux.gdk_x11_display_get_xdisplay(Display.Handle);
@@ -256,20 +256,20 @@ namespace ASEva.UIGtk
 
             int snumber = Linux.gdk_x11_screen_get_screen_number(Display.DefaultScreen.Handle);
 
-            int[] sampleCounts = null;
+            int[]? sampleCounts = null;
             switch (antialias)
             {
                 case GLAntialias.Sample2x:
-                    sampleCounts = new int[] { 2 };
+                    sampleCounts = [2];
                     break;
                 case GLAntialias.Sample4x:
-                    sampleCounts = new int[] { 4, 2 };
+                    sampleCounts = [4, 2];
                     break;
                 case GLAntialias.Sample8x:
-                    sampleCounts = new int[] { 8, 4, 2 };
+                    sampleCounts = [8, 4, 2];
                     break;
                 case GLAntialias.Sample16x:
-                    sampleCounts = new int[] { 16, 8, 4, 2 };
+                    sampleCounts = [16, 8, 4, 2];
                     break;
             }
 
@@ -492,12 +492,12 @@ namespace ASEva.UIGtk
             return true;
         }
 
-        private OpenGL gl = null;
+        private OpenGL gl;
         private GLCallback callback;
         private IntPtr context = IntPtr.Zero;
         private uint xid = 0;
         private bool rendererStatusOK = false;
-        private GLSizeInfo size = null;
+        private GLSizeInfo? size = null;
         private bool drawQueued = false;
         private bool swapIntervalFailed = false;
         private IntPtr targetVisualInfo = IntPtr.Zero;

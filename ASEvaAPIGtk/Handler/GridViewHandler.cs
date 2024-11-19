@@ -13,17 +13,17 @@ namespace ASEva.UIGtk
 {
 	class GridViewHandler : GridHandler<GridView, GridView.ICallback>, GridView.IHandler, ICellDataSource, IGtkEnumerableModelHandler<object>
 	{
-		GtkEnumerableModel<object> model;
-		CollectionHandler collection;
+		GtkEnumerableModel<object>? model;
+		CollectionHandler? collection;
 		protected override ITreeModelImplementor CreateModelImplementor()
 		{
 			model = new GtkEnumerableModel<object> { Handler = this, Count = collection != null ? collection.Count : 0 };
 			return model;
 		}
 
-		public class CollectionHandler : EnumerableChangedHandler<object>
+		public class CollectionHandler(GridViewHandler handler) : EnumerableChangedHandler<object>
 		{
-			public GridViewHandler Handler { get; set; }
+			public GridViewHandler Handler { get; set; } = handler;
 
 			public override void AddRange(IEnumerable<object> items)
 			{
@@ -32,6 +32,7 @@ namespace ASEva.UIGtk
 
 			public override void AddItem(object item)
 			{
+				if (Handler.model == null) return;
 				var count = Count;
 				var iter = Handler.model.GetIterAtRow(count);
 				var path = Handler.model.GetPathAtRow(count);
@@ -41,6 +42,7 @@ namespace ASEva.UIGtk
 
 			public override void InsertItem(int index, object item)
 			{
+				if (Handler.model == null) return;
 				var iter = Handler.model.GetIterAtRow(index);
 				var path = Handler.model.GetPathAtRow(index);
 				Handler.model.Count++;
@@ -49,6 +51,7 @@ namespace ASEva.UIGtk
 
 			public override void RemoveItem(int index)
 			{
+				if (Handler.model == null) return;
 				var path = Handler.model.GetPathAtRow(index);
 				Handler.model.Count--;
 				Handler.Control.Model.EmitRowDeleted(path);
@@ -60,7 +63,7 @@ namespace ASEva.UIGtk
 			}
 		}
 
-		public IEnumerable<object> DataStore
+		public IEnumerable<object>? DataStore
 		{
 			get => collection?.Collection;
 			set
@@ -68,7 +71,7 @@ namespace ASEva.UIGtk
 				if (collection != null)
 					collection.Unregister();
 				UnselectAll();
-				collection = new CollectionHandler { Handler = this };
+				collection = new CollectionHandler(this);
 				collection.Register(value);
 				EnsureSelection();
 			}
@@ -98,11 +101,13 @@ namespace ASEva.UIGtk
 
 		public override Gtk.TreeIter GetIterAtRow(int row)
 		{
+			if (model == null) throw new NullReferenceException("Null model.");
 			return model.GetIterAtRow(row);
 		}
 
 		public override Gtk.TreePath GetPathAtRow(int row)
 		{
+			if (model == null) throw new NullReferenceException("Null model.");
 			return model.GetPathAtRow(row);
 		}
 
@@ -142,6 +147,7 @@ namespace ASEva.UIGtk
 
 		public override object GetItem(Gtk.TreePath path)
 		{
+			if (model == null) throw new NullReferenceException("Null model.");
 			return model.GetItemAtPath(path);
 		}
 
@@ -157,7 +163,7 @@ namespace ASEva.UIGtk
 				var colHandler = (GridColumnHandler)Widget.Columns[column].Handler;
 				return colHandler.GetValue(item, dataColumn, row);
 			}
-			return new GLib.Value((string)null);
+			return new GLib.Value();
 		}
 
 		public int GetRowOfItem(object item)
@@ -165,7 +171,7 @@ namespace ASEva.UIGtk
 			return collection != null ? collection.IndexOf(item) : -1;
 		}
 
-		public EnumerableChangedHandler<object> Collection
+		public EnumerableChangedHandler<object>? Collection
 		{
 			get { return collection; }
 		}
@@ -186,11 +192,13 @@ namespace ASEva.UIGtk
 		}
 
 
-		public GridCell GetCellAt(PointF location)
+		public GridCell? GetCellAt(PointF location)
 		{
+			if (model == null) return null;
+
 			int columnIndex;
 			int rowIndex;
-			object item;
+			object? item;
 			GridCellType cellType;
 			int headerIndex = -1;
 
@@ -248,19 +256,19 @@ namespace ASEva.UIGtk
 
 		protected class GridViewConnector : GridConnector
 		{
-			GridViewDragInfo _dragInfo;
+			GridViewDragInfo? _dragInfo;
 
 			public new GridViewHandler Handler { get { return (GridViewHandler)base.Handler; } }
 
-			protected override DragEventArgs GetDragEventArgs(Gdk.DragContext context, PointF? location, uint time = 0, object controlObject = null, DataObject data = null)
+			protected override DragEventArgs GetDragEventArgs(Gdk.DragContext context, PointF? location, uint time = 0, object? controlObject = null, DataObject? data = null)
 			{
-				var t = Handler?.Control;
-				GridViewDragInfo dragInfo = _dragInfo;
+				var t = Handler.Control;
+				GridViewDragInfo? dragInfo = _dragInfo;
 				if (dragInfo == null && location != null)
 				{
 					if (t.GetDestRowAtPos((int)location.Value.X, (int)location.Value.Y, out var path, out var pos))
 					{
-						var item = Handler.model.GetItemAtPath(path);
+						var item = Handler.model?.GetItemAtPath(path);
 						var indecies = path.Indices;
 						var index = indecies[indecies.Length - 1];
 						dragInfo = new GridViewDragInfo(Handler.Widget, item, index, pos.ToEto());
@@ -304,9 +312,9 @@ namespace ASEva.UIGtk
 
 		protected override WeakConnector CreateConnector() => new GridViewConnector();
 
-		public GridViewDragInfo GetDragInfo(DragEventArgs e) => e.ControlObject as GridViewDragInfo;
+		public GridViewDragInfo? GetDragInfo(DragEventArgs e) => e.ControlObject as GridViewDragInfo;
 
-		protected override bool HasRows => model.Count > 0;
+		protected override bool HasRows => model != null && model.Count > 0;
 
 	}
 }

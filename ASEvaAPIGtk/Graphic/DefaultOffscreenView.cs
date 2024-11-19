@@ -35,7 +35,7 @@ namespace ASEva.UIGtk
             }
         }
 
-        private void onRealized(object sender, EventArgs e)
+        private void onRealized(object? sender, EventArgs e)
         {
             if (Window == null) return;
 
@@ -141,15 +141,17 @@ namespace ASEva.UIGtk
             rendererStatusOK = true;
         }
 
-        private void onDraw(object o, DrawnArgs args)
+        private void onDraw(object? o, DrawnArgs args)
         {
             if (!rendererStatusOK) return;
 
-            var moduleID = callback == null ? null : callback.OnGetModuleID();
+            if (colorBuffer == null || depthBuffer == null || frameBuffer == null || glContext == null || cairoSurface == null || hostBuffer == null) return;
+
+            var moduleID = callback.OnGetModuleID();
             DrawBeat.CallbackBegin(this, moduleID);
 
             var curSize = new GLSizeInfo(AllocatedWidth, AllocatedHeight, AllocatedWidth * ScaleFactor, AllocatedHeight * ScaleFactor, ScaleFactor, (float)AllocatedWidth / AllocatedHeight);
-            bool resized = curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
+            bool resized = size == null || curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
             size = curSize;
 
             glContext.MakeCurrent();
@@ -211,7 +213,7 @@ namespace ASEva.UIGtk
                 unsafe
                 {
                     byte *surfaceData = (byte*)cairoSurface.DataPtr;
-                    fixed (byte *srcData = &(hostBuffer[0]))
+                    fixed (byte *srcData = &hostBuffer[0])
                     {
                         for (int v = 0; v < cairoHeight; v++)
                         {
@@ -301,18 +303,18 @@ namespace ASEva.UIGtk
             }
         }
 
-        private OpenGL gl = null;
+        private OpenGL gl;
         private GLCallback callback;
         private GLAntialias antialias;
         private bool rendererStatusOK = false;
-        private GLSizeInfo size = null;
+        private GLSizeInfo? size = null;
         private bool drawQueued = false;
 
-        private Gdk.GLContext glContext = null;
-        private uint[] frameBuffer = null;
-        private uint[] colorBuffer = null;
-        private uint[] depthBuffer = null;
-        private byte[] hostBuffer = null;
-        private Cairo.ImageSurface cairoSurface = null;
+        private Gdk.GLContext? glContext = null;
+        private uint[]? frameBuffer = null;
+        private uint[]? colorBuffer = null;
+        private uint[]? depthBuffer = null;
+        private byte[]? hostBuffer = null;
+        private Cairo.ImageSurface? cairoSurface = null;
     }
 }

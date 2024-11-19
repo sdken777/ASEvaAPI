@@ -34,7 +34,7 @@ namespace ASEva.UIGtk
 
         public static void DrawLines(this Cairo.Context cc, FloatPoint[] points)
         {
-            if (points == null || points.Length < 2) return;
+            if (points.Length < 2) return;
 
             cc.MoveTo(points[0].X, points[0].Y);
             for (int i = 1; i < points.Length; i++) cc.LineTo(points[i].X, points[i].Y);
@@ -43,7 +43,7 @@ namespace ASEva.UIGtk
 
         public static void DrawPolygon(this Cairo.Context cc, FloatPoint[] points)
         {
-            if (points == null || points.Length < 2) return;
+            if (points.Length < 2) return;
 
             cc.MoveTo(points[0].X, points[0].Y);
             for (int i = 1; i < points.Length; i++) cc.LineTo(points[i].X, points[i].Y);
@@ -53,7 +53,7 @@ namespace ASEva.UIGtk
 
         public static void FillPolygon(this Cairo.Context cc, FloatPoint[] points)
         {
-            if (points == null || points.Length < 2) return;
+            if (points.Length < 2) return;
 
             cc.MoveTo(points[0].X, points[0].Y);
             for (int i = 1; i < points.Length; i++) cc.LineTo(points[i].X, points[i].Y);

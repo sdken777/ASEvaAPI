@@ -94,7 +94,7 @@ namespace ASEva.UIGtk
         /// </summary>
         public void Close()
         {
-            if (CloseRequested != null) CloseRequested(this, null);
+            CloseRequested?.Invoke(this, EventArgs.Empty);
         }
 
         /// \~English
@@ -105,7 +105,7 @@ namespace ASEva.UIGtk
         /// <summary>
         /// 在此事件中实现配置界面的关闭
         /// </summary>
-        public event EventHandler CloseRequested;
+        public event EventHandler? CloseRequested;
     }
 
     class EtoConfigPanel : ASEva.UIEto.ConfigPanel

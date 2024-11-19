@@ -15,7 +15,6 @@ namespace ASEva.UIGtk
     {
         public static void SetColumnRenderer(this TreeView treeView, int columnIndex, CellRenderer renderer, params object[] attributeIndexMap)
         {
-            if (renderer == null) return;
             if (columnIndex < 0 || columnIndex >= treeView.Columns.Length) return;
 
             treeView.Columns[columnIndex].PackStart(renderer, true);

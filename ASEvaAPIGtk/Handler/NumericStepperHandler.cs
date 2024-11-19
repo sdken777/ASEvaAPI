@@ -54,7 +54,7 @@ namespace ASEva.UIGtk
 		{
 			public new NumericStepperHandler Handler { get { return (NumericStepperHandler)base.Handler; } }
 
-			public void HandleValueChanged(object sender, EventArgs e)
+			public void HandleValueChanged(object? sender, EventArgs e)
 			{
 				var handler = Handler;
 				if (handler == null)
@@ -240,7 +240,7 @@ namespace ASEva.UIGtk
 			}
 		}
 
-		string _formatString;
+		string? _formatString;
 
 		string CurrentFormatString
 		{

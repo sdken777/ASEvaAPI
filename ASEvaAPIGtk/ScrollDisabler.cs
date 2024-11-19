@@ -16,13 +16,12 @@ namespace ASEva.UIGtk
     {
         public static void Disable(Widget widget)
         {
-            if (widget == null) return;
             widget.AddEvents((int)Gdk.EventMask.ScrollMask);
             widget.ScrollEvent += widget_Scroll;
         }
 
         [ConnectBefore]
-        private static void widget_Scroll(object o, ScrollEventArgs args)
+        private static void widget_Scroll(object? o, ScrollEventArgs args)
         {
             args.RetVal = true;
         }

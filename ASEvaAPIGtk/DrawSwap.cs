@@ -29,7 +29,7 @@ namespace ASEva.UIGtk
         /// </summary>
         /// <param name="widget">绘图对象</param>
         /// <param name="category">类别，设为空表示不归类</param>
-        public DrawSwap(Widget widget, String category)
+        public DrawSwap(Widget widget, String? category)
         {
             this.widget = widget;
             this.category = category;
@@ -54,7 +54,7 @@ namespace ASEva.UIGtk
                 surface = new Cairo.ImageSurface(Cairo.Format.Argb32, widget.AllocatedWidth, widget.AllocatedHeight);
 
                 var cc = new Context(surface);
-                Paint(this, cc);
+                Paint.Invoke(this, cc);
                 cc.Dispose();
 
                 drawnRefreshed = false;
@@ -87,9 +87,9 @@ namespace ASEva.UIGtk
 
         public delegate void PaintHandler(DrawSwap swap, Context cc);
 
-        public event PaintHandler Paint;
+        public event PaintHandler? Paint;
 
-        private void widget_Drawn(object o, DrawnArgs args)
+        private void widget_Drawn(object? o, DrawnArgs args)
         {
             if (widget == null || surface == null) return;
 
@@ -102,9 +102,9 @@ namespace ASEva.UIGtk
             DrawBeat.CallbackEnd(widget);
         }
 
-        private Widget widget;
-        private String category;
-        private ImageSurface surface;
+        private Widget? widget;
+        private String? category;
+        private ImageSurface? surface;
         private bool drawnRefreshed = true;
     }
 } 

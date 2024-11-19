@@ -74,9 +74,20 @@ namespace ASEva.UIGtk
             catch (Exception ex)
             {
                 Dump.Exception(ex);
-                etoControl = null;
-                glViewBackend = null;
+                etoControl = new Panel();
+                glViewBackend = new DummyBackend();
                 supportOverlay = true;
+            }
+        }
+
+        private class DummyBackend : GLBackend
+        {
+            public void QueueRender()
+            {
+            }
+
+            public void ReleaseGL()
+            {
             }
         }
 

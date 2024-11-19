@@ -19,8 +19,6 @@ namespace ASEva.UIGtk
     {
         public static void Notice(String message)
         {
-            if (message == null) return;
-
             var ch = AgencyLocal.GetAppLanguage() == Language.Chinese;
 
             var msgbox = new MessageDialog(TopWindow, DialogFlags.Modal, MessageType.Info, ButtonsType.Ok, "{0:s}", message);
@@ -31,18 +29,14 @@ namespace ASEva.UIGtk
 
         public static void NoticeWithTitle(String message, String title)
         {
-            if (message == null) return;
-
             var msgbox = new MessageDialog(TopWindow, DialogFlags.Modal, MessageType.Info, ButtonsType.Ok, "{0:s}", message);
-            msgbox.Title = title == null ? "" : title;
+            msgbox.Title = title;
             msgbox.Run();
             msgbox.Dispose();
         }
 
         public static void Error(String message)
         {
-            if (message == null) return;
-
             var ch = AgencyLocal.GetAppLanguage() == Language.Chinese;
 
             var msgbox = new MessageDialog(TopWindow, DialogFlags.Modal, MessageType.Error, ButtonsType.Ok, "{0:s}", message);
@@ -53,8 +47,6 @@ namespace ASEva.UIGtk
 
         public static bool Confirm(String message)
         {
-            if (message == null) return false;
-
             var ch = AgencyLocal.GetAppLanguage() == Language.Chinese;
             var res = false;
 
@@ -70,11 +62,11 @@ namespace ASEva.UIGtk
             return res;
         }
 
-        public static String[] OpenFile(String title, Dictionary<String, String> filters = null, String origin = null, bool multiple = false)
+        public static String[] OpenFile(String title, Dictionary<String, String>? filters = null, String? origin = null, bool multiple = false)
         {
             var ch = AgencyLocal.GetAppLanguage() == Language.Chinese;
 
-            FileChooserDialog target = new FileChooserDialog(title == null ? "" : title, TopWindow, FileChooserAction.Open, ch ? "取消" : "Cancel", ResponseType.Cancel, ch ? "打开" : "Open", ResponseType.Ok);
+            FileChooserDialog target = new FileChooserDialog(title, TopWindow, FileChooserAction.Open, ch ? "取消" : "Cancel", ResponseType.Cancel, ch ? "打开" : "Open", ResponseType.Ok);
 
             if (filters != null)
             {
@@ -92,24 +84,24 @@ namespace ASEva.UIGtk
             target.SelectMultiple = multiple;
 
             var result = target.Run();
-            var output = result == (int)ResponseType.Ok ? (multiple ? target.Filenames : new String[] {target.Filename}) : null;
+            var output = result == (int)ResponseType.Ok ? (multiple ? target.Filenames : new String[] {target.Filename}) : [];
 
             target.Dispose();
 
             return output;
         }
 
-        public static String SaveFile(String title, KeyValuePair<String, String>? filter = null, String origin = null)
+        public static String? SaveFile(String title, KeyValuePair<String, String>? filter = null, String? origin = null)
         {
             var ch = AgencyLocal.GetAppLanguage() == Language.Chinese;
 
-            FileChooserDialog target = new FileChooserDialog(title == null ? "" : title, TopWindow, FileChooserAction.Save, ch ? "取消" : "Cancel", ResponseType.Cancel, ch ? "保存" : "Save", ResponseType.Ok);
+            FileChooserDialog target = new FileChooserDialog(title, TopWindow, FileChooserAction.Save, ch ? "取消" : "Cancel", ResponseType.Cancel, ch ? "保存" : "Save", ResponseType.Ok);
 
             target.DoOverwriteConfirmation = true;
 
             if (String.IsNullOrEmpty(origin)) origin = ch ? "未命名" : "Untitled";
 
-            String extension = null;
+            String? extension = null;
             if (filter == null)
             {
                 target.CurrentName = origin;
@@ -125,7 +117,7 @@ namespace ASEva.UIGtk
                 target.CurrentName = origin + extension;
             }
 
-            String output = null;
+            String? output = null;
             while (target.Run() == (int)ResponseType.Ok)
             {
                 if (extension == null || target.Filename.EndsWith(extension))
@@ -144,11 +136,11 @@ namespace ASEva.UIGtk
             return output;
         }
 
-        public static String OpenDir(String title, String origin = null)
+        public static String? OpenDir(String title, String? origin = null)
         {
             var ch = AgencyLocal.GetAppLanguage() == Language.Chinese;
 
-            var dialog = new FileChooserDialog(title == null ? "" : title, TopWindow, FileChooserAction.SelectFolder, ch ? "取消" : "Cancel", ResponseType.Cancel, ch ? "打开" : "Open", ResponseType.Ok);
+            var dialog = new FileChooserDialog(title, TopWindow, FileChooserAction.SelectFolder, ch ? "取消" : "Cancel", ResponseType.Cancel, ch ? "打开" : "Open", ResponseType.Ok);
             dialog.CreateFolders = true;
 
             if (origin != null && Directory.Exists(origin)) dialog.SelectFilename(origin);
@@ -169,7 +161,7 @@ namespace ASEva.UIGtk
         /// <summary>
         /// 顶层窗口
         /// </summary>
-        public static Window TopWindow
+        public static Window? TopWindow
         {
             get
             {
@@ -178,7 +170,7 @@ namespace ASEva.UIGtk
                 {
                     if (windows[i].WindowType == WindowType.Popup) continue;
                     if (MainWindow != null && windows[i].Equals(MainWindow)) continue;
-                    if (OtherMainWindows != null && OtherMainWindows.Contains(windows[i])) continue;
+                    if (OtherMainWindows.Contains(windows[i])) continue;
                     if (windows[i].IsActive) return windows[i];
                 }
                 return null;
@@ -193,7 +185,7 @@ namespace ASEva.UIGtk
         /// <summary>
         /// 主窗口
         /// </summary>
-        public static Window MainWindow { get; set; }
+        public static Window? MainWindow { get; set; }
 
         /// \~English
         /// <summary>
@@ -203,6 +195,6 @@ namespace ASEva.UIGtk
         /// <summary>
         /// 其他主窗口
         /// </summary>
-        public static Window[] OtherMainWindows { get; set; }
+        public static Window[] OtherMainWindows { get; set; } = [];
     }
 }

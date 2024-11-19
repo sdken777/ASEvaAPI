@@ -12,8 +12,8 @@ namespace ASEva.UIGtk
 
 		public class EtoButton : Gtk.Button
 		{
-			WeakReference _reference;
-			public ButtonHandler Handler
+			WeakReference? _reference;
+			public ButtonHandler? Handler
 			{
 				get => _reference?.Target as ButtonHandler;
 				set => _reference = new WeakReference(value);
