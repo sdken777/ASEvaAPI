@@ -12,7 +12,7 @@ namespace ASEvaAPIEtoTest
     {
         private void initBasicTabPageB(TabPage tabPage)
         {
-            var splitter = tabPage.SetContentAsControl(new Splitter { Position = this.Sizer(300) }, 0) as Splitter;
+            var splitter = (tabPage.SetContentAsControl(new Splitter { Position = this.Sizer(300) }, 0) as Splitter)!;
             splitter.Panel1MinimumSize = 300;
             splitter.Panel2MinimumSize = 200;
             var panel1 = splitter.SetPanel1();
@@ -32,16 +32,16 @@ namespace ASEvaAPIEtoTest
 
         private void initBasicTabPageBLists(StackLayout layout)
         {
-            var listBox = layout.AddControl(new ListBox(), true) as ListBox;
+            var listBox = (layout.AddControl(new ListBox(), true) as ListBox)!;
             for (int i = 1; i <= 1000; i++) listBox.Items.Add(t.Format("basic-list-item", i.ToString()));
 
-            var checkListBox = layout.AddControl(new CheckableListBox(), true) as CheckableListBox;
+            var checkListBox = (layout.AddControl(new CheckableListBox(), true) as CheckableListBox)!;
             for (int i = 1; i <= 1000; i++) checkListBox.AddItem(t.Format("basic-list-item-short", i.ToString()));
         }
 
         private void initBasicTabPageBTreeView(StackLayout layout)
         {
-            var view = layout.AddControl(new SimpleTreeView(), true) as SimpleTreeView;
+            var view = (layout.AddControl(new SimpleTreeView(), true) as SimpleTreeView)!;
             var buttonLayout = layout.AddRowLayout();
             var buttonSelect = buttonLayout.AddLinkButton(t["basic-tree-select-first"]);
             var buttonChange = buttonLayout.AddLinkButton(t["basic-tree-change-color"]);
@@ -49,16 +49,12 @@ namespace ASEvaAPIEtoTest
             var parentNodes = new List<SimpleTreeNode>();
             for (int i = 1; i <= 99; i++)
             {
-                var parentNode = new SimpleTreeNode();
-                parentNode.Key = i.ToString();
-                parentNode.Text = t.Format("basic-tree-parent", i.ToString("D2"));
+                var parentNode = new SimpleTreeNode(i.ToString(), t.Format("basic-tree-parent", i.ToString("D2")));
                 if (i % 2 == 0) parentNode.BackgroundColor = Colors.LightGrey;
                 if (i > 90) parentNode.ChildNodesExpanded = true;
                 for (int j = 1; j <= 99; j++)
                 {
-                    var childNode = new SimpleTreeNode();
-                    childNode.Key = i + "." + j;
-                    childNode.Text = t.Format("basic-tree-child", j.ToString("D2"));
+                    var childNode = new SimpleTreeNode(i + "." + j, t.Format("basic-tree-child", j.ToString("D2")));
                     if (j % 2 == 0) childNode.TextColor = Colors.Blue;
                     parentNode.ChildNodes.Add(childNode);
                 }
@@ -79,8 +75,7 @@ namespace ASEvaAPIEtoTest
                 {
                     if (i % 2 == 0)
                     {
-                        var task = new SimpleTreeNodeUpdateTask();
-                        task.Key = i.ToString();
+                        var task = new SimpleTreeNodeUpdateTask(i.ToString());
                         task.TextColor = Colors.White;
                         task.BackgroundColor = Colors.DimGray;
                         tasks.Add(task);
@@ -98,7 +93,7 @@ namespace ASEvaAPIEtoTest
         private void initBasicTabPageBFlowItems(StackLayout layout)
         {
             var layoutButtons = layout.AddRowLayout();
-            var flowLayout = layout.AddControl(new FlowLayout(), true) as FlowLayout;
+            var flowLayout = (layout.AddControl(new FlowLayout(), true) as FlowLayout)!;
             flowLayout.ControlSelected += delegate
             {
                 MessageBox.Show(t.Format("basic-flow-selected", flowLayout.GetSelectedControlIndex(), ""));
@@ -148,11 +143,7 @@ namespace ASEvaAPIEtoTest
             mouseSources.Add(label1);
             mouseSources.Add(label2);
 
-            return new ControlAndMouseSources
-            {
-                Control = panel,
-                MouseSources = mouseSources,
-            };
+            return new ControlAndMouseSources(panel) { MouseSources = mouseSources };
         }
 
         private int flowItemCount = 0;

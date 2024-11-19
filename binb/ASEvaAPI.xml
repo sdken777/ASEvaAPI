@@ -17968,14 +17968,14 @@
             </summary>
             <param name="xmlFileName">Resource name</param>
             <param name="language">Language, set to Language.Invalid to get by ASEva.AgencyLocal.GetAppLanguage internally</param>
-            <returns>Multi-language text resource object, null if failed to load</returns>
+            <returns>Multi-language text resource object. If loading failed, returns an object with no resources</returns>
             \~Chinese
             <summary>
             加载多语言文本资源
             </summary>
             <param name="xmlFileName">资源文件名</param>
             <param name="language">语言，设置为Language.Invalid则通过 ASEva.AgencyLocal.GetAppLanguage 获取</param>
-            <returns>多语言文本资源对象，获取失败则返回null</returns>
+            <returns>多语言文本资源对象，获取失败则返回无资源对象</returns>
         </member>
         <member name="M:ASEva.Utility.TextResource.Load(System.Byte[],ASEva.Language)">
             \~English
@@ -17984,14 +17984,14 @@
             </summary>
             <param name="xmlFileData">XML binary data</param>
             <param name="language">Language, set to Language.Invalid to get by ASEva.AgencyLocal.GetAppLanguage internally</param>
-            <returns>Multi-language text resource object, null if failed to load</returns>
+            <returns>Multi-language text resource object. If loading failed, returns an object with no resources</returns>
             \~Chinese
             <summary>
             从XML文件数据加载多语言文本资源
             </summary>
             <param name="xmlFileData">XML文件数据</param>
             <param name="language">语言，设置为Language.Invalid则通过 ASEva.AgencyLocal.GetAppLanguage 获取</param>
-            <returns>多语言文本资源对象，获取失败则返回null</returns>
+            <returns>多语言文本资源对象，获取失败则返回无资源对象</returns>
         </member>
         <member name="P:ASEva.Utility.TextResource.IDs">
             \~English
@@ -18008,12 +18008,12 @@
             <summary>
             Get the text with the ID
             </summary>
-            <value>Text ID</value>
+            <value>Text for the specified ID, "" if not found</value>
             \~Chinese
             <summary>
             获取指定ID对应的文本
             </summary>
-            <value>指定ID对应的文本</value>
+            <value>指定ID对应的文本，若未找到则返回""</value>
         </member>
         <member name="M:ASEva.Utility.TextResource.Format(System.String,System.Object[])">
             \~English
@@ -18022,14 +18022,14 @@
             </summary>
             <param name="id">Text ID</param>
             <param name="args">Arguments for the formats</param>
-            <returns>Output text</returns>
+            <returns>Output text, "" if not found or exception occurred</returns>
             \~Chinese
             <summary>
             以指定ID对应的文本作为格式描述，输出文本
             </summary>
             <param name="id">指定ID</param>
             <param name="args">格式描述中的参数值</param>
-            <returns>输出文本</returns>
+            <returns>输出文本，若未找到或异常则返回""</returns>
         </member>
         <member name="T:ASEva.Utility.TriggerFilter">
             \~English

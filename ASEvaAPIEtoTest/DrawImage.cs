@@ -10,8 +10,8 @@ namespace ASEvaAPIEtoTest
     {
         private void initDrawImages(StackLayout layout)
         {
-            var imageView3 = layout.AddControl(new ImageView(), false, 100, 100) as ImageView;
-            var imageView4 = layout.AddControl(new ImageView(), false, 100, 100) as ImageView;
+            var imageView3 = (layout.AddControl(new ImageView(), false, 100, 100) as ImageView)!;
+            var imageView4 = (layout.AddControl(new ImageView(), false, 100, 100) as ImageView)!;
             layout.AddControl(new ImageView { Image = Bitmap.FromResource("picture.png") }, false, 100, 100);
 
             var image3 = CommonImage.Create(100, 100, false);

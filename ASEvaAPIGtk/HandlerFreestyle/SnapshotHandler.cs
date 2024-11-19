@@ -26,9 +26,9 @@ namespace ASEva.UIGtk
 
             var w = widget.AllocatedWidth;
             var h = widget.AllocatedHeight;
+            if (w <= 0 || h <= 0) return null;
 
             var output = CommonImage.Create(w, h, true);
-            if (output == null) return null;
 
             var surface = new ImageSurface(Format.Argb32, w, h);
             var cc = new Context(surface);
@@ -122,7 +122,6 @@ namespace ASEva.UIGtk
                 if (x + width > fullImage.Width || y + height > fullImage.Height) return null;
 
                 rawImage = CommonImage.Create(width, height, fullImage.WithAlpha);
-                if (rawImage == null) return null;
 
                 var cellBytes = fullImage.WithAlpha ? 4 : 3;
                 unsafe
@@ -189,21 +188,19 @@ namespace ASEva.UIGtk
                     byte *srcData = (byte*)imagePtr->data;
 
                     commonImage = CommonImage.Create(imagePtr->width, imagePtr->height, false);
-                    if (commonImage != null)
+
+                    fixed (byte *dstData = &commonImage.Data[0])
                     {
-                        fixed (byte *dstData = &commonImage.Data[0])
+                        for (int v = 0; v < imagePtr->height; v++)
                         {
-                            for (int v = 0; v < imagePtr->height; v++)
+                            byte *srcRow = srcData + v * 4 * imagePtr->width;
+                            byte *dstRow = dstData + v * commonImage.RowBytes;
+                            for (int u = 0; u < imagePtr->width; u++)
                             {
-                                byte *srcRow = srcData + v * 4 * imagePtr->width;
-                                byte *dstRow = dstData + v * commonImage.RowBytes;
-                                for (int u = 0; u < imagePtr->width; u++)
-                                {
-                                    *(dstRow++) = *(srcRow++);
-                                    *(dstRow++) = *(srcRow++);
-                                    *(dstRow++) = *(srcRow++);
-                                    srcRow++;
-                                }
+                                *(dstRow++) = *(srcRow++);
+                                *(dstRow++) = *(srcRow++);
+                                *(dstRow++) = *(srcRow++);
+                                srcRow++;
                             }
                         }
                     }

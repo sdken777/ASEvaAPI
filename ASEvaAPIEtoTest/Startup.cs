@@ -32,15 +32,15 @@ namespace ASEvaAPIEtoTest
             var menu = this.SetContextMenuAsNew();
             menu.AddButtonItem("Main thread exception").Click += delegate
             {
-                String a = null;
-                Console.WriteLine(a.Length.ToString());
+                String[] arr = [];
+                Console.WriteLine(arr[0]);
             };
             menu.AddButtonItem("Sub thread exception").Click += delegate
             {
                 var thread = new Thread(() =>
                 {
-                    String a = null;
-                    Console.WriteLine(a.Length.ToString());
+                    String[] arr = [];
+                    Console.WriteLine(arr[0]);
                 });
                 thread.Start();
             };

@@ -98,7 +98,6 @@ namespace ASEva.UIEto
                 if (bitmapData.BytesPerPixel == 3)
                 {
                     var image = CommonImage.Create(bitmap.Width, bitmap.Height, false, false);
-                    if (image == null) return null;
                     unsafe
                     {
                         var srcData = (byte*)bitmapData.Data;
@@ -126,7 +125,6 @@ namespace ASEva.UIEto
                 else if (bitmapData.BytesPerPixel == 4)
                 {
                     var image = CommonImage.Create(bitmap.Width, bitmap.Height, true, false);
-                    if (image == null) return null;
                     unsafe
                     {
                         var srcData = (byte*)bitmapData.Data;

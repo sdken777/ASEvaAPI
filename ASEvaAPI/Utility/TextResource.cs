@@ -25,18 +25,18 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="xmlFileName">Resource name</param>
         /// <param name="language">Language, set to Language.Invalid to get by ASEva.AgencyLocal.GetAppLanguage internally</param>
-        /// <returns>Multi-language text resource object, null if failed to load</returns>
+        /// <returns>Multi-language text resource object. If loading failed, returns an object with no resources</returns>
         /// \~Chinese
         /// <summary>
         /// 加载多语言文本资源
         /// </summary>
         /// <param name="xmlFileName">资源文件名</param>
         /// <param name="language">语言，设置为Language.Invalid则通过 ASEva.AgencyLocal.GetAppLanguage 获取</param>
-        /// <returns>多语言文本资源对象，获取失败则返回null</returns>
-        public static TextResource? Load(String xmlFileName, Language language = Language.Invalid)
+        /// <returns>多语言文本资源对象，获取失败则返回无资源对象</returns>
+        public static TextResource Load(String xmlFileName, Language language = Language.Invalid)
         {
             var instream = Assembly.GetCallingAssembly().GetManifestResourceStream(xmlFileName);
-            if (instream == null) return null;
+            if (instream == null) return new TextResource();
 
             var data = new byte[instream.Length];
             instream.Read(data, 0, data.Length);
@@ -51,17 +51,17 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="xmlFileData">XML binary data</param>
         /// <param name="language">Language, set to Language.Invalid to get by ASEva.AgencyLocal.GetAppLanguage internally</param>
-        /// <returns>Multi-language text resource object, null if failed to load</returns>
+        /// <returns>Multi-language text resource object. If loading failed, returns an object with no resources</returns>
         /// \~Chinese
         /// <summary>
         /// 从XML文件数据加载多语言文本资源
         /// </summary>
         /// <param name="xmlFileData">XML文件数据</param>
         /// <param name="language">语言，设置为Language.Invalid则通过 ASEva.AgencyLocal.GetAppLanguage 获取</param>
-        /// <returns>多语言文本资源对象，获取失败则返回null</returns>
-        public static TextResource? Load(byte[] xmlFileData, Language language = Language.Invalid)
+        /// <returns>多语言文本资源对象，获取失败则返回无资源对象</returns>
+        public static TextResource Load(byte[] xmlFileData, Language language = Language.Invalid)
         {
-            if (xmlFileData == null || xmlFileData.Length <= 3) return null;
+            if (xmlFileData == null || xmlFileData.Length <= 3) return new TextResource();
 
             if (xmlFileData[0] == 0xEF && xmlFileData[1] == 0xBB && xmlFileData[2] == 0xBF)
             {
@@ -71,7 +71,7 @@ namespace ASEva.Utility
             }
 
             var xmlString = Encoding.UTF8.GetString(xmlFileData);
-            if (xmlString == null) return null;
+            if (xmlString == null) return new TextResource();
 
             var langCodes = new List<String>();
 
@@ -88,13 +88,13 @@ namespace ASEva.Utility
                 langCodes.Add("ch"); // 兼容旧版本
                 langCodes.Add("en");
             }
-            else return null;
+            else return new TextResource();
 
             var xml = new XmlDocument();
             try { xml.LoadXml(xmlString); }
-            catch (Exception ex) { Dump.Exception(ex); return null; }
+            catch (Exception ex) { Dump.Exception(ex); return new TextResource(); }
 
-            if (xml.DocumentElement == null) return null;
+            if (xml.DocumentElement == null) return new TextResource();
 
             var output = new TextResource();
             foreach (XmlElement elem in xml.DocumentElement.GetElementsByTagName("t"))
@@ -141,18 +141,18 @@ namespace ASEva.Utility
         /// <summary>
         /// Get the text with the ID
         /// </summary>
-        /// <value>Text ID</value>
+        /// <value>Text for the specified ID, "" if not found</value>
         /// \~Chinese
         /// <summary>
         /// 获取指定ID对应的文本
         /// </summary>
-        /// <value>指定ID对应的文本</value>
-        public String? this[String id]
+        /// <value>指定ID对应的文本，若未找到则返回""</value>
+        public String this[String id]
         {
             get
             {
                 if (dict.ContainsKey(id)) return dict[id];
-                else return null;
+                else return "";
             }
         }
 
@@ -162,21 +162,25 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="id">Text ID</param>
         /// <param name="args">Arguments for the formats</param>
-        /// <returns>Output text</returns>
+        /// <returns>Output text, "" if not found or exception occurred</returns>
         /// \~Chinese
         /// <summary>
         /// 以指定ID对应的文本作为格式描述，输出文本
         /// </summary>
         /// <param name="id">指定ID</param>
         /// <param name="args">格式描述中的参数值</param>
-        /// <returns>输出文本</returns>
-        public String? Format(String id, params object[] args)
+        /// <returns>输出文本，若未找到或异常则返回""</returns>
+        public String Format(String id, params object[] args)
         {
             if (dict.ContainsKey(id))
             {
-                return String.Format(dict[id], args);
+                try
+                {
+                    return String.Format(dict[id], args);
+                }
+                catch (Exception ex) { Dump.Exception(ex); return ""; }
             }
-            else return null;
+            else return "";
         }
 
         private TextResource()

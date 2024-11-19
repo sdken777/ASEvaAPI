@@ -50,7 +50,7 @@ namespace ASEvaAPIEtoTest
             {
                 if (radioButtonList.SelectedIndex == 0)
                 {
-                    if (checkBox.Checked.Value)
+                    if (checkBox.Checked ?? false)
                     {
                         var dialog = new SaveFileDialog();
                         dialog.Filters.Add(new FileFilter(t["basic-save-file-filter"], ".txt"));
@@ -83,15 +83,15 @@ namespace ASEvaAPIEtoTest
             layout.AddLabel(t.Format("basic-label-row", 3));
             layout.AddControl(new TextBox(), true);
             layout.AddControl(new SearchBox());
-            var passwordBox = layout.AddControl(new PasswordBox{ PasswordChar = '●' }) as PasswordBox;
-            layout.AddCheckBox("").CheckedChanged += (o, e) => { passwordBox.PasswordChar = (o as CheckBox).Checked.Value ? (char)0 : '●'; };
+            var passwordBox = (layout.AddControl(new PasswordBox{ PasswordChar = '●' }) as PasswordBox)!;
+            layout.AddCheckBox("").CheckedChanged += (o, e) => { passwordBox.PasswordChar = (o as CheckBox)?.Checked ?? false ? (char)0 : '●'; };
         }
 
         private void initBasicTabPageARow4(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 4));
-            var slider = layout.AddControl(new Slider { MinValue = 0, MaxValue = 100, TickFrequency = 10 }, true, 0, 40) as Slider;
-            var progressBar = layout.AddControl(new ProgressBar()) as ProgressBar;
+            var slider = (layout.AddControl(new Slider { MinValue = 0, MaxValue = 100, TickFrequency = 10 }, true, 0, 40) as Slider)!;
+            var progressBar = (layout.AddControl(new ProgressBar()) as ProgressBar)!;
             slider.ValueChanged += delegate { progressBar.Value = slider.Value; };
         }
 
@@ -150,15 +150,15 @@ namespace ASEvaAPIEtoTest
             layout.AddLinkButton(t["basic-client-size"], true).Click += (sender, args) =>
             {
                 var logicalSize = Pixel.ToLogicalSize(ClientSize);
-                (sender as LinkButton).Text = logicalSize.Width + "x" + logicalSize.Height;
+                if (sender is LinkButton linkButton) linkButton.Text = logicalSize.Width + "x" + logicalSize.Height;
             };
         }
 
         private void loopBasicPageA()
         {
-            labelTopMost.Text = labelTopMost.IsTopMost() ? "O" : "X";
+            if (labelTopMost != null) labelTopMost.Text = labelTopMost.IsTopMost() ? "O" : "X";
         }
 
-        private Label labelTopMost;
+        private Label? labelTopMost;
     }
 }

@@ -23,7 +23,6 @@ namespace ASEva.UIGtk
             if (platformImage is VideoFrameSampleImage sampleImage)
             {
                 var image = CommonImage.Create(sampleImage.Width, sampleImage.Height, sampleImage.WithAlpha, false);
-                if (image == null) return null;
                 unsafe
                 {
                     fixed (byte* srcData = &sampleImage.Data[0], dstData = &image.Data[0])
@@ -74,7 +73,6 @@ namespace ASEva.UIGtk
                 if (pixbuf.HasAlpha)
                 {
                     var image = CommonImage.Create(pixbuf.Width, pixbuf.Height, true, false);
-                    if (image == null) return null;
                     unsafe
                     {
                         byte* srcData = (byte*)pixbuf.Pixels;
@@ -99,7 +97,6 @@ namespace ASEva.UIGtk
                 else
                 {
                     var image = CommonImage.Create(pixbuf.Width, pixbuf.Height, false, false);
-                    if (image == null) return null;
                     unsafe
                     {
                         byte* srcData = (byte*)pixbuf.Pixels;

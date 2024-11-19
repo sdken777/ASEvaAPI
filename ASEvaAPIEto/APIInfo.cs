@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 3, 0, 0); // Update log / 更新记录: 启用Nullable，以及相应优化
+            return new Version(3, 3, 0, 1); // Update log / 更新记录: 优化SetContextMenuAsNew。优化CommonImage.Create调用
         }
 
         /// \~English

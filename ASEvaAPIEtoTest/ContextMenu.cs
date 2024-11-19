@@ -7,13 +7,13 @@ namespace ASEvaAPIEtoTest
 {
     partial class EtoTestPanel
     {
-        public event EventHandler RequestFullScreen;
-        public event EventHandler RequestClose;
+        public event EventHandler? RequestFullScreen;
+        public event EventHandler? RequestClose;
 
         private void initContextMenu(ContextMenu menu)
         {
-            menu.AddButtonItem(t["menu-fullscreen"]).Click += delegate { RequestFullScreen?.Invoke(this, null); };
-            menu.AddButtonItem(t["menu-exit"]).Click += delegate { RequestClose?.Invoke(this, null); };
+            menu.AddButtonItem(t["menu-fullscreen"]).Click += delegate { RequestFullScreen?.Invoke(this, EventArgs.Empty); };
+            menu.AddButtonItem(t["menu-exit"]).Click += delegate { RequestClose?.Invoke(this, EventArgs.Empty); };
             menu.AddSeparator();
             var subMenu = menu.AddButtonItem(t["menu-sub"]);
             subMenu.AddButtonItem(t.Format("menu-sub-item", "A"));
@@ -48,15 +48,15 @@ namespace ASEvaAPIEtoTest
             menu.AddSeparator();
             menu.AddButtonItem(t["menu-exception-main"]).Click += delegate
             {
-                String a = null;
-                Console.WriteLine(a.Length.ToString());
+                String[] arr = [];
+                Console.WriteLine(arr[0]);
             };
             menu.AddButtonItem(t["menu-exception-sub"]).Click += delegate
             {
                 var thread = new Thread(() =>
                 {
-                    String a = null;
-                    Console.WriteLine(a.Length.ToString());
+                    String[] arr = [];
+                    Console.WriteLine(arr[0]);
                 });
                 thread.Start();
             };

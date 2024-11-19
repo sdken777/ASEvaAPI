@@ -93,9 +93,10 @@ namespace ASEva.Samples
         /// <param name="height">图像高度</param>
         /// <param name="withAlpha">是否带Alpha通道</param>
         /// <returns>通用图像数据</returns>
-        public static CommonImage? Create(int width, int height, bool withAlpha)
+        public static CommonImage Create(int width, int height, bool withAlpha)
         {
-            if (width <= 0 || height <= 0 || width > 65536 || height > 65536) return null;
+            if (width <= 0 || width > 65536) throw new ArgumentOutOfRangeException("Invalid width: " + width);
+            if (height <= 0 || height > 65536) throw new ArgumentOutOfRangeException("Invalid height: " + height);
 
             var rowBytesValid = width * (withAlpha ? 4 : 3);
             var rowBytes = (((rowBytesValid - 1) >> 2) + 1) << 2;
@@ -128,9 +129,10 @@ namespace ASEva.Samples
         /// <param name="withAlpha">是否带Alpha通道</param>
         /// <param name="bgrInverted">BGR是否逆序</param>
         /// <returns>通用图像数据</returns>
-        public static CommonImage? Create(int width, int height, bool withAlpha, bool bgrInverted)
+        public static CommonImage Create(int width, int height, bool withAlpha, bool bgrInverted)
         {
-            if (width <= 0 || height <= 0 || width > 65536 || height > 65536) return null;
+            if (width <= 0 || width > 65536) throw new ArgumentOutOfRangeException("Invalid width: " + width);
+            if (height <= 0 || height > 65536) throw new ArgumentOutOfRangeException("Invalid height: " + height);
 
             var rowBytesValid = width * (withAlpha ? 4 : 3);
             var rowBytes = (((rowBytesValid - 1) >> 2) + 1) << 2;
@@ -291,7 +293,6 @@ namespace ASEva.Samples
             if (targetInverted == bgrInverted) return this;
 
             var output = CommonImage.Create(width, height, withAlpha, targetInverted);
-            if (output == null) throw new InvalidOperationException("The source image's size is invalid.");
 
             unsafe
             {
@@ -382,7 +383,6 @@ namespace ASEva.Samples
         private CommonImage processImageSub(CommonImage srcImage, float scale, IntRect clipRect)
         {
             var newImage = CommonImage.Create(clipRect.Width, clipRect.Height, srcImage.WithAlpha);
-            if (newImage == null) throw new InvalidOperationException("The source image's size is invalid.");
 
             unsafe
             {

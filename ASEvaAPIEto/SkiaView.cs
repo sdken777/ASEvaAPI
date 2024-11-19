@@ -365,17 +365,12 @@ namespace ASEva.UIEto
 			var targetSize = drawable.GetLogicalSize();
 			if (commonImage == null || commonImage.Width != targetSize.Width || commonImage.Height != targetSize.Height)
 			{
-				commonImage = CommonImage.Create(targetSize.Width, targetSize.Height, true, false);
-				if (commonImage == null)
-				{
-					DrawBeat.CallbackEnd(drawable);
-					return;
-				}
+				commonImage = CommonImage.Create(Math.Max(1, targetSize.Width), Math.Max(1, targetSize.Height), true, false);
 			}
 
 			unsafe
 			{
-				fixed (byte *commonImageData = &(commonImage.Data[0]))
+				fixed (byte *commonImageData = &commonImage.Data[0])
 				{
 					var imageInfo = new SKImageInfo(commonImage.Width, commonImage.Height, SKColorType.Bgra8888, SKAlphaType.Opaque);
 					var surface = SKSurface.Create(imageInfo, (IntPtr)commonImageData, commonImage.RowBytes);

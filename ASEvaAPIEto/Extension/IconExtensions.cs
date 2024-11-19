@@ -72,9 +72,7 @@ namespace ASEva.UIEto
 
         private static CommonImage resizeHalf(CommonImage input)
         {
-            var output = CommonImage.Create(input.Width / 2, input.Height / 2, true);
-            if (output == null) throw new Exception("Failed to create CommonImage.");
-            
+            var output = CommonImage.Create(Math.Max(1, input.Width / 2), Math.Max(1, input.Height / 2), true);
             var inputData = input.Data;
             var inputStep = input.RowBytes;
             var outputData = output.Data;

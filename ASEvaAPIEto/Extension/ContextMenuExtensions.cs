@@ -29,9 +29,9 @@ namespace ASEva.UIEto
         /// </summary>
         /// <param name="panel">面板</param>
         /// <returns>右键菜单对象，若已存在则返回null</returns>
-        public static ContextMenu? SetContextMenuAsNew(this Panel panel)
+        public static ContextMenu SetContextMenuAsNew(this Panel panel)
         {
-            if (panel.ContextMenu != null) return null;
+            if (panel.ContextMenu != null) throw new InvalidOperationException("ContextMenu already set.");
             var menu = new ContextMenu();
             panel.ContextMenu = menu;
             if (ShouldAddMouseDownEvent)

@@ -23,7 +23,7 @@ namespace ASEvaAPIEtoTest
 
             if (glView.SupportOverlay)
             {
-                var overlay = layout.AddControl(new OverlayLayout(), true) as OverlayLayout;
+                var overlay = (layout.AddControl(new OverlayLayout(), true) as OverlayLayout)!;
                 overlay.AddControl(glView, 0, 0, 0, 0);
                 overlay.AddControl(button, null, 10, null, 10);
             }
@@ -73,6 +73,8 @@ namespace ASEvaAPIEtoTest
 
             glView.GLRender += (o, args) =>
             {
+                if (glViewSizeInfo == null) return;
+
                 var gl = args.GL;
                 var texts = args.TextTasks;
 
@@ -190,8 +192,8 @@ namespace ASEvaAPIEtoTest
 
         private void loopDrawGL()
         {
-            glLabelLoopInterval.Text = glLoopIntervalStat.Update() + "ms";
-            if (glRenderSwitch) glView.QueueRender();
+            if (glLabelLoopInterval != null) glLabelLoopInterval.Text = glLoopIntervalStat.Update() + "ms";
+            if (glRenderSwitch) glView?.QueueRender();
         }
 
         private class LoopIntervalStat
@@ -211,11 +213,11 @@ namespace ASEvaAPIEtoTest
             private List<int> loopIntervals = new List<int>();
         }
 
-        private GLView glView;
-        private GLSizeInfo glViewSizeInfo;
+        private GLView? glView;
+        private GLSizeInfo? glViewSizeInfo;
         private bool glRenderSwitch = true;
         private int glMouseCount = 0;
-        private Label glLabelLoopInterval;
+        private Label? glLabelLoopInterval;
         private LoopIntervalStat glLoopIntervalStat = new LoopIntervalStat();
     }
 }
