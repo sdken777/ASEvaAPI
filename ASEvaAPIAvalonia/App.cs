@@ -130,6 +130,9 @@ namespace ASEva.UIAvalonia
             {
                 Dump.Exception(ex);
                 if (fatalException == null) fatalException = ex;
+
+                try { appLifetime.MainWindow?.Hide(); }
+                catch (Exception ex2) { Dump.Exception(ex2); }
             }
 
             appLifetime.MainWindow = null;
@@ -196,7 +199,7 @@ namespace ASEva.UIAvalonia
 
                 try
                 {
-                    await box.Show(null, buttons);
+                    var task = box.Show(null, buttons); // Don't await
                     appBuilder.Instance.Run(token.Token);
                 }
                 catch (Exception ex) { Dump.Exception(ex); }
