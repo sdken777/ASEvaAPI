@@ -24,20 +24,20 @@ namespace ASEva.UICoreWF
             set { linkLabelName.Text = value; }
         }
 
-        public event EventHandler NameChanged;
+        public event EventHandler? NameChanged;
 
         private void updateName()
         {
             if (textBoxName.Text.Length > 0 && linkLabelName.Text != textBoxName.Text)
             {
                 linkLabelName.Text = textBoxName.Text;
-                if (NameChanged != null) NameChanged(this, null);
+                NameChanged?.Invoke(this, EventArgs.Empty);
             }
             textBoxName.Visible = false;
             linkLabelName.Visible = true;
         }
 
-        private void textBoxName_KeyUp(object sender, KeyEventArgs e)
+        private void textBoxName_KeyUp(object? sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -45,12 +45,12 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private void textBoxName_Leave(object sender, EventArgs e)
+        private void textBoxName_Leave(object? sender, EventArgs e)
         {
             updateName();
         }
 
-        private void linkLabelName_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkLabelName_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e)
         {
             textBoxName.Text = linkLabelName.Text;
             linkLabelName.Visible = false;

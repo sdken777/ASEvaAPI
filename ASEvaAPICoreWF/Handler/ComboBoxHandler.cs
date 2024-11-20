@@ -36,7 +36,7 @@ namespace ASEva.UICoreWF
 			}
 		}
 
-        void ControlOnTextChanged(object sender, EventArgs e)
+        void ControlOnTextChanged(object? sender, EventArgs e)
 		{
 			if (suppressTextChanged > 0)
 				return;
@@ -103,7 +103,7 @@ namespace ASEva.UICoreWF
 			}
 		}
 
-		static void ControlOnKeyPress(object sender, swf.KeyPressEventArgs e)
+		static void ControlOnKeyPress(object? sender, swf.KeyPressEventArgs e)
 		{
 			e.Handled = true;
 		}

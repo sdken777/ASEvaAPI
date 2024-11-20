@@ -57,7 +57,7 @@ namespace ASEva.UICoreWF
             control.SetLogicalSize(controlWidth, logicalHeight);
             var winformControl = control.ToNative(true);
             winformControl.Margin = new System.Windows.Forms.Padding(4);
-            ctxs.Add(new ControlContext { EtoControl = control, WinformControl = winformControl, Visible = true });
+            ctxs.Add(new ControlContext(winformControl, control, true));
             control.MouseDown += (obj, args) =>
             {
                 callback.OnControlClicked(ctxs.FindIndex(c => c.EtoControl.Equals(obj)));
@@ -69,7 +69,7 @@ namespace ASEva.UICoreWF
             control.SetLogicalSize(controlWidth, logicalHeight);
             var winformControl = control.ToNative(true);
             winformControl.Margin = new System.Windows.Forms.Padding(4);
-            ctxs.Insert(index, new ControlContext { EtoControl = control, WinformControl = winformControl, Visible = true });
+            ctxs.Insert(index, new ControlContext(winformControl, control, true));
             control.MouseDown += (obj, args) =>
             {
                 callback.OnControlClicked(ctxs.FindIndex(c => c.EtoControl.Equals(obj)));
@@ -157,21 +157,21 @@ namespace ASEva.UICoreWF
 
         private void setBorderStyle(System.Windows.Forms.Control control, System.Windows.Forms.BorderStyle border)
         {
-            if (control is System.Windows.Forms.Panel) (control as System.Windows.Forms.Panel).BorderStyle = border;
-            else if (control is System.Windows.Forms.UserControl) (control as System.Windows.Forms.UserControl).BorderStyle = border;
+            if (control is System.Windows.Forms.Panel panel) panel.BorderStyle = border;
+            else if (control is System.Windows.Forms.UserControl userControl) userControl.BorderStyle = border;
         }
 
-        private class ControlContext
+        private class ControlContext(System.Windows.Forms.Control winformControl, Control etoControl, bool visible)
         {
-            public System.Windows.Forms.Control WinformControl { get; set; }
-            public Control EtoControl { get; set; }
-            public bool Visible { get; set; }
+            public System.Windows.Forms.Control WinformControl { get; set; } = winformControl;
+            public Control EtoControl { get; set; } = etoControl;
+            public bool Visible { get; set; } = visible;
         }
 
         private FlowLayoutCallback callback;
-        private System.Windows.Forms.Timer timer;
-        private List<ControlContext> ctxs = new List<ControlContext>();
-        private System.Windows.Forms.Control selectedControl = null;
+        private System.Windows.Forms.Timer? timer;
+        private List<ControlContext> ctxs = [];
+        private System.Windows.Forms.Control? selectedControl = null;
         private int controlWidth;
     }
 }

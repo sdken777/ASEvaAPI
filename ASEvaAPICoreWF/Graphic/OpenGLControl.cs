@@ -22,7 +22,8 @@ namespace ASEva.UICoreWF
             this.antialias = antialias;
             this.useLegacyAPI = useLegacyAPI;
             
-            if (gl == null) gl = OpenGL.Create(new WindowsFuncLoader());
+            if (globalGL == null) globalGL = OpenGL.Create(new WindowsFuncLoader());
+            gl = globalGL;
 
             pictureBox.MouseWheel += pictureBox_MouseWheel;
         }
@@ -43,12 +44,12 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private void pictureBox_SizeChanged(object sender, EventArgs e)
+        private void pictureBox_SizeChanged(object? sender, EventArgs e)
         {
             QueueRender();
         }
 
-        private void pictureBox_Paint(object sender, PaintEventArgs e)
+        private void pictureBox_Paint(object? sender, PaintEventArgs e)
         {
             if (initOK == null)
             {
@@ -61,12 +62,14 @@ namespace ASEva.UICoreWF
                 return;
             }
 
-            var moduleID = callback == null ? null : callback.OnGetModuleID();
+            if (colorBuffer == null || depthBuffer == null || frameBuffer == null || bitmap == null || hostBuffer == null) return;
+
+            var moduleID = callback.OnGetModuleID();
             DrawBeat.CallbackBegin(this, moduleID);
 
             var pixelScale = (float)DeviceDpi / 96;
             var curSize = new GLSizeInfo((int)(Width / pixelScale), (int)(Height / pixelScale), Width, Height, pixelScale, (float)Width / Height);
-            bool resized = curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
+            bool resized = size == null || curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
             size = curSize;
 
             Win32.wglMakeCurrent(hdc, context);
@@ -121,7 +124,7 @@ namespace ASEva.UICoreWF
                     unsafe
                     {
                         byte* surfaceData = (byte*)bitmapData.Scan0;
-                        fixed (byte* srcData = &(hostBuffer[0]))
+                        fixed (byte* srcData = &hostBuffer[0])
                         {
                             for (int v = 0; v < bitmapHeight; v++)
                             {
@@ -215,27 +218,27 @@ namespace ASEva.UICoreWF
             DrawBeat.CallbackEnd(this);
         }
 
-        private void pictureBox_MouseDown(object sender, MouseEventArgs e)
+        private void pictureBox_MouseDown(object? sender, MouseEventArgs e)
         {
             callback.OnRaiseMouseDown(e.ToEto(this));
         }
 
-        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox_MouseMove(object? sender, MouseEventArgs e)
         {
             callback.OnRaiseMouseMove(e.ToEto(this));
         }
 
-        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
+        private void pictureBox_MouseUp(object? sender, MouseEventArgs e)
         {
             callback.OnRaiseMouseUp(e.ToEto(this));
         }
 
-        private void pictureBox_MouseWheel(object sender, MouseEventArgs e)
+        private void pictureBox_MouseWheel(object? sender, MouseEventArgs e)
         {
             callback.OnRaiseMouseWheel(e.ToEto(this));
         }
 
-        private void pictureBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void pictureBox_MouseDoubleClick(object? sender, MouseEventArgs e)
         {
             callback.OnRaiseMouseDoubleClick(e.ToEto(this));
         }
@@ -457,20 +460,21 @@ namespace ASEva.UICoreWF
             return context != IntPtr.Zero;
         }
 
-        private GLCallback callback = null;
+        private GLCallback callback;
         private GLAntialias antialias;
         private bool useLegacyAPI;
         private bool? initOK = null;
         private IntPtr hdc = IntPtr.Zero;
         private IntPtr context = IntPtr.Zero;
-        private uint[] frameBuffer = null;
-        private uint[] colorBuffer = null;
-        private uint[] depthBuffer = null;
-        private byte[] hostBuffer = null;
-        private Bitmap bitmap = null;
-        private GLSizeInfo size = null;
+        private uint[]? frameBuffer = null;
+        private uint[]? colorBuffer = null;
+        private uint[]? depthBuffer = null;
+        private byte[]? hostBuffer = null;
+        private Bitmap? bitmap = null;
+        private GLSizeInfo? size = null;
+        private OpenGL gl;
 
-        private static OpenGL gl = null;
+        private static OpenGL? globalGL = null;
         private static bool createContextAttribsARBUnsupported = false;
     }
 }

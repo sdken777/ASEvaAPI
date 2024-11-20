@@ -58,7 +58,7 @@ namespace ASEva.UICoreWF
 		{
 		}
 
-		protected override object InnerGetData(string type) => Control.GetData(type);
+		protected override object InnerGetData(string type) => Control.GetData(type) ?? throw new Exception();
 
 		public override void Clear()
 		{
@@ -69,7 +69,7 @@ namespace ASEva.UICoreWF
 			Update();
 		}
 
-		protected override BitmapSource InnerGetImage() => Control.GetImage();
+		protected override BitmapSource InnerGetImage() => Control.GetImage() ?? throw new Exception();
 
 		protected override StringCollection InnerGetFileDropList() => Control.GetFileDropList();
 
@@ -106,14 +106,14 @@ namespace ASEva.UICoreWF
 
 		public abstract bool ContainsText { get; }
 
-		public virtual string Text
+		public virtual string? Text
 		{
 			get { return ContainsText ? Control.GetText() : null; }
 			set
 			{
 				if (IsExtended)
 					Control.SetDataEx(sw.DataFormats.UnicodeText, value);
-				else
+				else if (value != null)
 					Control.SetText(value);
 				Update();
 			}
@@ -121,14 +121,14 @@ namespace ASEva.UICoreWF
 
 		public abstract bool ContainsHtml { get; }
 
-		public virtual string Html
+		public virtual string? Html
 		{
 			get { return ContainsHtml ? Control.GetText(sw.TextDataFormat.Html) : null; }
 			set
 			{
 				if (IsExtended)
 					Control.SetDataEx(sw.DataFormats.Html, value);
-				else
+				else if (value != null)
 					Control.SetText(value, sw.TextDataFormat.Html);
 				Update();
 			}
@@ -139,7 +139,7 @@ namespace ASEva.UICoreWF
 
 		public bool ContainsImage => InnerContainsImage || Contains(sw.DataFormats.Dib);
 
-		public Image Image
+		public Image? Image
 		{
 			get
 			{
@@ -156,7 +156,7 @@ namespace ASEva.UICoreWF
 			}
 			set
 			{
-				var dib = (value as Bitmap).ToDIB();
+				var dib = (value as Bitmap)?.ToDIB();
 				if (dib != null)
 				{
 					// write a DIB here, so we can preserve transparency of the image
@@ -189,7 +189,7 @@ namespace ASEva.UICoreWF
 			|| Contains(UniformResourceLocatorW_Format)
 			|| Contains(UniformResourceLocator_Format);
 
-		public Uri[] Uris
+		public Uri[]? Uris
 		{
 			get
 			{
@@ -197,7 +197,7 @@ namespace ASEva.UICoreWF
 					? InnerGetFileDropList().OfType<string>().Select(s => new Uri(s)) 
 					: null;
 
-				string urlString = null;
+				string? urlString = null;
 				if (Contains(UniformResourceLocatorW_Format))
 					urlString = GetString(UniformResourceLocatorW_Format, Encoding.Unicode);
 				else if (Contains(UniformResourceLocator_Format))
@@ -260,7 +260,7 @@ namespace ASEva.UICoreWF
 
 		protected abstract object InnerGetData(string type);
 
-		public byte[] GetData(string type)
+		public byte[]? GetData(string type)
 		{
 			if (Contains(type))
 			{
@@ -269,7 +269,7 @@ namespace ASEva.UICoreWF
 			return null;
 		}
 
-		protected byte[] GetAsData(object data)
+		protected byte[]? GetAsData(object data)
 		{
 			if (data is byte[] bytes)
 				return bytes;
@@ -304,9 +304,9 @@ namespace ASEva.UICoreWF
 			return null;
 		}
 
-		public string GetString(string type) => GetString(type, Encoding.UTF8);
+		public string? GetString(string type) => GetString(type, Encoding.UTF8);
 
-		protected string GetString(string type, Encoding encoding)
+		protected string? GetString(string type, Encoding encoding)
 		{
 			if (string.IsNullOrEmpty(type))
 				return Text;
@@ -315,7 +315,7 @@ namespace ASEva.UICoreWF
 			return GetAsString(InnerGetData(type), encoding);
 		}
 
-		protected string GetAsString(object data, Encoding encoding)
+		protected string? GetAsString(object data, Encoding encoding)
 		{
 			if (data is string str)
 				return str;
@@ -376,7 +376,7 @@ namespace ASEva.UICoreWF
 			return false;
 		}
 
-		public bool TryGetObject(string type, out object value)
+		public bool TryGetObject(string type, out object? value)
 		{
 			value = null;
 			return false;
@@ -389,7 +389,7 @@ namespace ASEva.UICoreWF
 
 	static class DataObjectWin32
 	{
-		public static Bitmap FromDIB(Stream ms)
+		public static Bitmap? FromDIB(Stream ms)
 		{
 			var header = new byte[40];
 			ms.Read(header, 0, header.Length);
@@ -438,7 +438,7 @@ namespace ASEva.UICoreWF
 
 		static void Write(Stream stream, byte[] val) => stream.Write(val, 0, val.Length);
 
-		public static MemoryStream ToDIB(this Bitmap bitmap, int dpi = 96)
+		public static MemoryStream? ToDIB(this Bitmap bitmap, int dpi = 96)
 		{
 			if (bitmap == null)
 				return null;

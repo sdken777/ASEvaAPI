@@ -30,7 +30,7 @@ namespace ASEva.UICoreWF
         /// <returns>Winform位图对象</returns>
         public static Bitmap ToWinformBitmap(this CommonImage image)
         {
-            return ImageConverter.ConvertToBitmap(image) as Bitmap;
+            return (ImageConverter.ConvertToBitmap(image) as Bitmap)!;
         }
 
         /// \~English
@@ -45,7 +45,7 @@ namespace ASEva.UICoreWF
         /// </summary>
         /// <param name="bitmap">Winform位图对象</param>
         /// <returns>通用图像数据</returns>
-        public static CommonImage ToCommonImage(this Bitmap bitmap)
+        public static CommonImage? ToCommonImage(this Bitmap bitmap)
         {
             return ImageConverter.ConvertFromBitmap(bitmap);
         }

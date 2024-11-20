@@ -43,7 +43,7 @@ namespace ASEva.UICoreWF
             }
 
             // Title display / 标题显示
-            label1.Text = Data == null ? "" : Data.Definition.MainTitle;
+            label1.Text = Data.Definition.MainTitle;
             if (!Data.HasData())
             {
                 label2.ForeColor = Color.Black;
@@ -53,12 +53,12 @@ namespace ASEva.UICoreWF
             else label2.Text = "";
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void pictureBox1_Click(object? sender, EventArgs e)
         {
             HandleGraphSelected();
         }
 
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object? sender, PaintEventArgs e)
         {
             DrawBeat.CallbackBegin(pictureBox1, "ASEva.UICoreWF.LabelTableGraph");
 
@@ -76,7 +76,7 @@ namespace ASEva.UICoreWF
             DrawBeat.CallbackEnd(pictureBox1);
         }
 
-        private void pic_drawAxis(object sender, PaintEventArgs e)
+        private void pic_drawAxis(object? sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
 
@@ -94,11 +94,12 @@ namespace ASEva.UICoreWF
             g.DrawLine(blackPen, pointy1, pointy2);
             g.DrawLine(grayPen, new PointF(originPoint.X, originPoint.Y + margin), new PointF(width - 1, originPoint.Y + margin));
             g.DrawLine(grayPen, new PointF(originPoint.X - margin, originPoint.Y), new PointF(originPoint.X - margin, 0));
-            String xTitle = null;
-            String yTitle = null;
+
             var D = Data as LabelTableData;
-            xTitle = D.GetXTitle();
-            yTitle = D.GetYTitle();
+            if (D == null) return;
+
+            var xTitle = D.GetXTitle();
+            var yTitle = D.GetYTitle();
             var xTitleWidth = g.MeasureString(xTitle, font7f).Width;
             var yTitleWidth = g.MeasureString(yTitle, font7f).Width;
             PointF xTitlePoint = new PointF((width + originPoint.X - xTitleWidth) / 2, originPoint.Y);
@@ -111,13 +112,16 @@ namespace ASEva.UICoreWF
             g.DrawLine(blackPen, new PointF(originPoint.X, 0), new PointF(originPoint.X - 2, 0));
         }
 
-        private void pic_drawBarGraph(object sender, PaintEventArgs e)
+        private void pic_drawBarGraph(object? sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             var width = pictureBox1.Width;
             var height = pictureBox1.Height;
             PointF originPoint = new PointF((float)width / 4, (float)height / 3 * 2);
+
             var D = Data as LabelTableData;
+            if (D == null) return;
+
             var xLabels = D.GetXLabels();
             var yLabels = D.GetYLabels();
             var margin = 15.0f * DeviceDpi / 96;
@@ -158,12 +162,15 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private void pic_drawHeatMap(object sender, PaintEventArgs e)
+        private void pic_drawHeatMap(object? sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             var width = pictureBox1.Width;
             var height = pictureBox1.Height;
+
             var D = Data as LabelTableData;
+            if (D == null) return;
+
             var values = D.GetValues();
             var xrange = values.GetLength(0);
             var yrange = values.GetLength(1);
@@ -219,7 +226,7 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private void pic_drawGuide(object sender, PaintEventArgs e)
+        private void pic_drawGuide(object? sender, PaintEventArgs e)
         {
             if (!mouseInControl()) return;
 
@@ -230,6 +237,8 @@ namespace ASEva.UICoreWF
             crossPen.DashPattern = new float[] { 1f, 1f };
 
             var D = Data as LabelTableData;
+            if (D == null) return;
+
             Point curPoint = pictureBox1.PointToClient(System.Windows.Forms.Cursor.Position);
             var width = pictureBox1.Width;
             var height = pictureBox1.Height;
@@ -272,7 +281,7 @@ namespace ASEva.UICoreWF
                 }
             }
         }
-        private void pic_drawAnnotation(object sender, PaintEventArgs e)
+        private void pic_drawAnnotation(object? sender, PaintEventArgs e)
         {
             if (!mouseInControl()) return;
 
@@ -282,7 +291,10 @@ namespace ASEva.UICoreWF
             var width = pictureBox1.Width;
             var height = pictureBox1.Height;
             PointF originPoint = new PointF((float)width / 4, (float)height / 3 * 2);
+
             var D = Data as LabelTableData;
+            if (D == null) return;
+
             var xLabels = D.GetXLabels();
             var yLabels = D.GetYLabels();
             var intervalX = (width - originPoint.X) / xLabels.Length;

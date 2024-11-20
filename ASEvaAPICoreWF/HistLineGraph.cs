@@ -35,7 +35,7 @@ namespace ASEva.UICoreWF
 			}
 
 			// 标题显示
-			label1.Text = Data == null ? "" : Data.Definition.MainTitle;
+			label1.Text = Data.Definition.MainTitle;
 			if (!Data.HasData())
 			{
 				label2.ForeColor = Color.Black;
@@ -63,19 +63,19 @@ namespace ASEva.UICoreWF
 			}
 		}
 
-		private void Graph_Click(object sender, EventArgs e)
+		private void Graph_Click(object? sender, EventArgs e)
 		{
 			HandleGraphSelected();
 		}
 
-		private void pictureBox1_Click(object sender, EventArgs e)
+		private void pictureBox1_Click(object? sender, EventArgs e)
 		{
 			HandleGraphSelected();
 		}
 
-		private void pictureBox1_Paint(object sender, PaintEventArgs e)
+		private void pictureBox1_Paint(object? sender, PaintEventArgs e)
 		{
-			if (Data == null || !(Data is HistAndLineData)) return;
+			if (Data == null || !(Data is HistAndLineData D)) return;
 
 			DrawBeat.CallbackBegin(pictureBox1, "ASEva.UICoreWF.HistLineGraph");
 
@@ -94,10 +94,9 @@ namespace ASEva.UICoreWF
 				var largeFont = new Font("微软雅黑", 9f);
 				var smallFont = new Font("微软雅黑", 8f);
 
-				var D = Data as HistAndLineData;
 				String xTitle = D.GetXTitle();
 				String histTitle = D.GetHistTitle();
-				String lineTitle = D.GetLineTitle();
+				String? lineTitle = D.GetLineTitle();
 				bool isEnableLine = D.IsLineEnabled();
 				HistLineSample[] samples = D.GetSamples();
 
@@ -329,7 +328,7 @@ namespace ASEva.UICoreWF
 						// 绘制鼠标所在格信息
 						var target = samples[mouseIndex];
 
-						String histText = null, lineText = null;
+						String? histText = null, lineText = null;
 						histText = Math.Abs(target.HistValue) >= 0.1 ? target.HistValue.ToString("F3") : (new Decimal(target.HistValue)).ToString();
 						if (isEnableLine) lineText = Math.Abs(target.LineValue) >= 0.1 ? target.LineValue.ToString("F3") : (new Decimal(target.LineValue)).ToString();
 
@@ -345,11 +344,11 @@ namespace ASEva.UICoreWF
 				var pen = new Pen(Color.LimeGreen, 2);
 				var ptList = new List<PointF>();
 
-				if (Data.Definition.Validation != null && hasValue)
+				if (Data.Definition.Validation != null && hasValue && D.GetXValuesOrLabels() is HistLineXValues xValues)
 				{
-					if (Data.Definition.Validation is ValueAboveValidation)
+					if (Data.Definition.Validation is ValueAboveValidation vav)
 					{
-						var indices = (Data.Definition.Validation as ValueAboveValidation).GetHistLineValuesOKIndices((Data as HistAndLineData).GetXValuesOrLabels() as HistLineXValues);
+						var indices = vav.GetHistLineValuesOKIndices(xValues);
 						if (indices.Length > 0)
 						{
 							float thisLeft = left + step * indices[0];
@@ -359,9 +358,9 @@ namespace ASEva.UICoreWF
 							ptList.Add(new PointF(thisLeft, bottom));
 						}
 					}
-					else if (Data.Definition.Validation is ValueBelowValidation)
+					else if (Data.Definition.Validation is ValueBelowValidation vbv)
 					{
-						var indices = (Data.Definition.Validation as ValueBelowValidation).GetHistLineValuesOKIndices((Data as HistAndLineData).GetXValuesOrLabels() as HistLineXValues);
+						var indices = vbv.GetHistLineValuesOKIndices(xValues);
 						if (indices.Length > 0)
 						{
 							float thisRight = left + step * (indices.Last() + 1);
@@ -371,9 +370,9 @@ namespace ASEva.UICoreWF
 							ptList.Add(new PointF(left, bottom));
 						}
 					}
-					else if (Data.Definition.Validation is PolyAboveValidation)
+					else if (Data.Definition.Validation is PolyAboveValidation pav)
 					{
-						var thresholds = (Data.Definition.Validation as PolyAboveValidation).GetHistLineValuesThreshold((Data as HistAndLineData).GetXValuesOrLabels() as HistLineXValues);
+						var thresholds = pav.GetHistLineValuesThreshold(xValues);
 						for (int i = 0; i < thresholds.Length; i++)
 						{
 							thresholds[i] = Math.Max(minimum, Math.Min(maximum, thresholds[i]));
@@ -391,9 +390,9 @@ namespace ASEva.UICoreWF
 							ptList.Add(new PointF(thisX + step, thisY));
 						}
 					}
-					else if (Data.Definition.Validation is PolyBelowValidation)
+					else if (Data.Definition.Validation is PolyBelowValidation pbv)
 					{
-						var thresholds = (Data.Definition.Validation as PolyBelowValidation).GetHistLineValuesThreshold((Data as HistAndLineData).GetXValuesOrLabels() as HistLineXValues);
+						var thresholds = pbv.GetHistLineValuesThreshold(xValues);
 						for (int i = 0; i < thresholds.Length; i++)
 						{
 							thresholds[i] = Math.Max(minimum, Math.Min(maximum, thresholds[i]));

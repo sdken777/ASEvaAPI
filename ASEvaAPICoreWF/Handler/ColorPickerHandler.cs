@@ -47,7 +47,7 @@ namespace ASEva.UICoreWF
 			}
 		}
 
-		void HandleClick(object sender, EventArgs e)
+		void HandleClick(object? sender, EventArgs e)
 		{
 			using (Widget.Platform.Context)
 			{

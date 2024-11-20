@@ -38,9 +38,9 @@ namespace ASEva.UICoreWF
 
             // 数据显示
             double val = 0;
-            if (Data is SingleValueData)
+            if (Data is SingleValueData svd)
             {
-                val = (Data as SingleValueData).GetValue();
+                val = svd.GetValue();
             }
 
             var valAbs = Math.Abs(val);
@@ -74,18 +74,18 @@ namespace ASEva.UICoreWF
             else
             {
                 var vd = Data.Definition.Validation;
-                if (vd is ValueBelowValidation)
+                if (vd is ValueBelowValidation vbv)
                 {
-                    label4.Text = "≤ " + (vd as ValueBelowValidation).GetThreshold();
+                    label4.Text = "≤ " + vbv.GetThreshold();
                 }
-                else if (vd is ValueAboveValidation)
+                else if (vd is ValueAboveValidation vav)
                 {
-                    label4.Text = "≥ " + (vd as ValueAboveValidation).GetThreshold();
+                    label4.Text = "≥ " + vav.GetThreshold();
                 }
-                else if (vd is ValueInRangeValidation)
+                else if (vd is ValueInRangeValidation vrv)
                 {
                     double lower = 0, upper = 0;
-                    (vd as ValueInRangeValidation).GetRange(out lower, out upper);
+                    vrv.GetRange(out lower, out upper);
                     label4.Text = "[ " + lower + " , " + upper + " ]";
                 }
             }
@@ -107,7 +107,7 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private void ValueGraph_Click(object sender, EventArgs e)
+        private void ValueGraph_Click(object? sender, EventArgs e)
         {
             HandleGraphSelected();
         }

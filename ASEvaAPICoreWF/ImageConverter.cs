@@ -18,9 +18,7 @@ namespace ASEva.UICoreWF
     {
         public static object ConvertToBitmap(CommonImage image)
         {
-            if (image == null) return null;
-
-            Bitmap bitmap = null;
+            Bitmap bitmap;
             if (image.WithAlpha)
             {
                 bitmap = new Bitmap(image.Width, image.Height, PixelFormat.Format32bppArgb);
@@ -93,12 +91,10 @@ namespace ASEva.UICoreWF
             return bitmap;
         }
 
-        public static CommonImage ConvertFromBitmap(object bitmapObject)
+        public static CommonImage? ConvertFromBitmap(object bitmapObject)
         {
-            if (bitmapObject == null) return null;
-            if (!(bitmapObject is Bitmap)) return null;
+            if (!(bitmapObject is Bitmap bitmap)) return null;
 
-            var bitmap = bitmapObject as Bitmap;
             if (bitmap.PixelFormat == PixelFormat.Format32bppArgb)
             {
                 var image = CommonImage.Create(bitmap.Width, bitmap.Height, true, false);

@@ -11,7 +11,7 @@ namespace ASEva.UICoreWF
             if (graphics.ControlObject is System.Drawing.Graphics)
             {
                 var winformGraphics = graphics.ControlObject as System.Drawing.Graphics;
-                winformGraphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+                if (winformGraphics != null) winformGraphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
             }
         }
     }

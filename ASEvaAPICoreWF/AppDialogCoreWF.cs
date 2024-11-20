@@ -38,7 +38,7 @@ namespace ASEva.UICoreWF
             dialogPanel.OnDialogClose += DialogPanel_OnDialogClose;
         }
 
-        private void AppDialogCoreWF_Shown(object sender, EventArgs e)
+        private void AppDialogCoreWF_Shown(object? sender, EventArgs e)
         {
             var dw = Width - panelControl.Width;
             var dh = Height - panelControl.Height;
@@ -49,17 +49,17 @@ namespace ASEva.UICoreWF
             MinimumSize = new Size(minWidth, minHeight);
         }
 
-        private void DialogPanel_OnDialogClose(object sender, EventArgs e)
+        private void DialogPanel_OnDialogClose(object? sender, EventArgs e)
         {
             Close();
         }
 
-        private void AppDialogCoreWF_FormClosing(object sender, FormClosingEventArgs e)
+        private void AppDialogCoreWF_FormClosing(object? sender, FormClosingEventArgs e)
         {
             panel.OnClosing();
         }
 
-        private void AppDialogCoreWF_FormClosed(object sender, FormClosedEventArgs e)
+        private void AppDialogCoreWF_FormClosed(object? sender, FormClosedEventArgs e)
         {
             panel.CloseRecursively();
         }

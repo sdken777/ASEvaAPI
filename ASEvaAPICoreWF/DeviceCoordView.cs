@@ -63,7 +63,7 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object? sender, PaintEventArgs e)
         {
             DrawBeat.CallbackBegin(pictureBox1, "ASEva.UICoreWF.DeviceCoordView");
 
@@ -129,7 +129,7 @@ namespace ASEva.UICoreWF
             DrawBeat.CallbackEnd(pictureBox1);
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object? sender, EventArgs e)
         {
             linkLabelScale.Text = "Scale: " + (largeScale ? "Large" : "Small");
             if (DrawBeat.CallerBegin(pictureBox1))
@@ -139,7 +139,7 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private void linkLabelScale_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void linkLabelScale_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e)
         {
             largeScale = !largeScale;
         }

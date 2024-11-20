@@ -124,7 +124,7 @@ namespace ASEva.UICoreWF.DragDropLib
 
 		public int EnumDAdvise(out IEnumSTATDATA enumAdvise)
 		{
-			throw Marshal.GetExceptionForHR(OLE_E_ADVISENOTSUPPORTED);
+			throw Marshal.GetExceptionForHR(OLE_E_ADVISENOTSUPPORTED) ?? new Exception();
 		}
 
 		public int GetCanonicalFormatEtc(ref FORMATETC formatIn, out FORMATETC formatOut)
@@ -321,7 +321,7 @@ namespace ASEva.UICoreWF.DragDropLib
 			STGMEDIUM sm = new STGMEDIUM();
 			int hr = CopyStgMedium(ref medium, ref sm);
 			if (hr != 0)
-				throw Marshal.GetExceptionForHR(hr);
+				throw Marshal.GetExceptionForHR(hr) ?? new Exception();
 
 			return sm;
 		}

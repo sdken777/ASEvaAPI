@@ -51,10 +51,10 @@ namespace ASEva.UICoreWF
             DrawBeat.CallerEnd(pictureBox1);
         }
 
-        public delegate void CircleIndicatorHandler(object sender);
-        public event CircleIndicatorHandler IndicatorClicked;
+        public delegate void CircleIndicatorHandler(object? sender);
+        public event CircleIndicatorHandler? IndicatorClicked;
 
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object? sender, PaintEventArgs e)
         {
             DrawBeat.CallbackBegin(pictureBox1, "ASEva.UICoreWF.CircleIndicator");
 
@@ -75,9 +75,9 @@ namespace ASEva.UICoreWF
             DrawBeat.CallbackEnd(pictureBox1);
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void pictureBox1_Click(object? sender, EventArgs e)
         {
-            if (IndicatorClicked != null) IndicatorClicked(this);
+            IndicatorClicked?.Invoke(this);
         }
     }
 }

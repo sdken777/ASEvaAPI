@@ -12,7 +12,7 @@ namespace ASEva.UICoreWF
             if (window == null)
             {
                 var winformControl = control.ControlObject as System.Windows.Forms.Control;
-                return AvaloniaAdaptorCoreWF.IsActive(winformControl);
+                return winformControl != null && AvaloniaAdaptorCoreWF.IsActive(winformControl);
             }
 
             var form = window.ControlObject as System.Windows.Forms.Form;

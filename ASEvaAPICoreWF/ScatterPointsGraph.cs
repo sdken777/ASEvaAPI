@@ -50,7 +50,7 @@ namespace ASEva.UICoreWF
             }
 
             // 标题显示
-            label1.Text = Data == null ? "" : Data.Definition.MainTitle;
+            label1.Text = Data.Definition.MainTitle;
             if (!Data.HasData())
             {
                 label2.ForeColor = Color.Black;
@@ -83,7 +83,7 @@ namespace ASEva.UICoreWF
             return percentage >= 100 ? percentage.ToString("F0") : percentage.ToString("F1");
         }
 
-        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        private void pictureBox2_Paint(object? sender, PaintEventArgs e)
         {
             DrawBeat.CallbackBegin(pictureBox2, "ASEva.UICoreWF.ScatterPointsGraph");
 
@@ -101,31 +101,32 @@ namespace ASEva.UICoreWF
             DrawBeat.CallbackEnd(pictureBox2);
         }
 
-        private void pic_drawValidation(object sender, PaintEventArgs e)
+        private void pic_drawValidation(object? sender, PaintEventArgs e)
         {
-            if (Data.Definition.Validation == null) return;
+            if (Data?.Definition.Validation == null) return;
 
             Color color;
             FloatPoint[] genericOutline;
-            if (Data.Definition.Validation is OutlineInsideValidation)
+            if (Data.Definition.Validation is OutlineInsideValidation oiv)
             {
-                var vd = Data.Definition.Validation as OutlineInsideValidation;
                 color = Color.LimeGreen;
-                genericOutline = vd.GetOutline();
+                genericOutline = oiv.GetOutline();
             }
-            else if (Data.Definition.Validation is OutlineOutsideValidation)
+            else if (Data.Definition.Validation is OutlineOutsideValidation oov)
             {
-                var vd = Data.Definition.Validation as OutlineOutsideValidation;
                 color = Color.Red;
-                genericOutline = vd.GetOutline();
+                genericOutline = oov.GetOutline();
             }
             else return;
+
+            var D = Data as ScatterPointsData;
+            if (D == null) return;
 
             var outline = new PointF[genericOutline.Length];
             for (int i = 0; i < outline.Length; i++) outline[i] = new PointF(genericOutline[i].X, genericOutline[i].Y);
 
-            var xRange = (Data as ScatterPointsData).GetXRange();
-            var yRange = (Data as ScatterPointsData).GetYRange();
+            var xRange = D.GetXRange();
+            var yRange = D.GetYRange();
 
             var width = pictureBox2.Width;
             var height = pictureBox2.Height;
@@ -147,7 +148,7 @@ namespace ASEva.UICoreWF
             e.Graphics.SmoothingMode = originMode;
         }
 
-        private void pic_drawAnnotation(object sender, PaintEventArgs e)
+        private void pic_drawAnnotation(object? sender, PaintEventArgs e)
         {
             if (!mouseInControl()) return;
 
@@ -155,7 +156,10 @@ namespace ASEva.UICoreWF
             var width = pictureBox2.Width;
             var height = pictureBox2.Height;
             PointF originPoint = new PointF((float)width / 4, (float)height / 3 * 2);
+
             var D = Data as ScatterPointsData;
+            if (D == null) return;
+
             var xRangeLow = D.GetXRange().lower;
             var xRangeUpper = D.GetXRange().upper;
             var yRangeLow = D.GetYRange().lower;
@@ -251,7 +255,7 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private void pic_drawAxis(object sender, PaintEventArgs e)
+        private void pic_drawAxis(object? sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             var width = pictureBox2.Width;
@@ -268,11 +272,12 @@ namespace ASEva.UICoreWF
             g.DrawLine(blackPen, pointy1, pointy2);
             g.DrawLine(grayPen, new PointF(originPoint.X, originPoint.Y + margin),new PointF(width-1, originPoint.Y + margin));
             g.DrawLine(grayPen, new PointF(originPoint.X - margin, originPoint.Y), new PointF(originPoint.X - margin, 0));
-            String xTitle = null;
-            String yTitle = null;
+
             var D = Data as ScatterPointsData;
-            xTitle = D.GetXTitle();
-            yTitle = D.GetYTitle();
+            if (D == null) return;
+
+            var xTitle = D.GetXTitle();
+            var yTitle = D.GetYTitle();
             var xTitleWidth = g.MeasureString(xTitle, font7f).Width;
             var yTitleWidth = g.MeasureString(yTitle, font7f).Width;
             PointF xTitlePoint = new PointF((width + originPoint.X - xTitleWidth) / 2, originPoint.Y);
@@ -291,13 +296,15 @@ namespace ASEva.UICoreWF
             g.DrawString((new Decimal(yrange.lower)).ToString(), font7f, brushBlack, new PointF(originPoint.X - margin, originPoint.Y - g.MeasureString(yrange.lower.ToString(), font7f).Width), new StringFormat(StringFormatFlags.DirectionVertical));
         }
 
-        private void pic_drawPoint(object sender, PaintEventArgs e)
+        private void pic_drawPoint(object? sender, PaintEventArgs e)
         {
             var originMode = e.Graphics.SmoothingMode;
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
             Graphics g = e.Graphics;
             var D = Data as ScatterPointsData;
+            if (D == null) return;
+
             var points = D.GetPoints();
             processPoint(points);
 
@@ -316,7 +323,7 @@ namespace ASEva.UICoreWF
             e.Graphics.SmoothingMode = originMode;
         }
 
-        private void pic_drawBarGraph(object sender, PaintEventArgs e)
+        private void pic_drawBarGraph(object? sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
@@ -324,8 +331,10 @@ namespace ASEva.UICoreWF
             var width = pictureBox2.Width;
             var height = pictureBox2.Height;
             PointF originPoint = new PointF((float)width / 4, (float)height / 3 * 2);
-            var D = Data as ScatterPointsData;
             var margin = 15.0f * DeviceDpi / 96;
+
+            var D = Data as ScatterPointsData;
+            if (D == null) return;
 
             var xRangeLow = D.GetXRange().lower;
             var xRangeUpper = D.GetXRange().upper;
@@ -374,7 +383,7 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private void pic_drawGuide(object sender, PaintEventArgs e)
+        private void pic_drawGuide(object? sender, PaintEventArgs e)
         {
             if (!mouseInControl()) return;
 
@@ -385,6 +394,8 @@ namespace ASEva.UICoreWF
             crossPen.DashPattern = new float[] { 1f, 1f };
 
             var D = Data as ScatterPointsData;
+            if (D == null) return;
+
             Point curPoint = pictureBox2.PointToClient(System.Windows.Forms.Cursor.Position);
             var width = pictureBox2.Width;
             var height = pictureBox2.Height;
@@ -430,7 +441,10 @@ namespace ASEva.UICoreWF
             var width = pictureBox2.Width;
             var height = pictureBox2.Height;
             var originPoint = new FloatPoint((float)width / 4, (float)height / 3 * 2);
+
             var D = Data as ScatterPointsData;
+            if (D == null) return;
+
             ScatterRange xRange = D.GetXRange();
             ScatterRange yRange = D.GetYRange();
 
@@ -448,7 +462,7 @@ namespace ASEva.UICoreWF
             else return true;
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
+        private void pictureBox2_Click(object? sender, EventArgs e)
         {
             HandleGraphSelected();
         }

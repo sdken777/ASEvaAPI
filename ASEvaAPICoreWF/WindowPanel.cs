@@ -50,7 +50,7 @@ namespace ASEva.UICoreWF
         /// [可选实现] 获取配置字符串时被调用
         /// </summary>
         /// <returns>配置字符串</returns>
-        public virtual String OnGetConfig() { return null; }
+        public virtual String OnGetConfig() { return ""; }
 
         /// \~English
         /// <summary>

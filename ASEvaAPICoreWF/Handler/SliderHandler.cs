@@ -54,7 +54,7 @@ namespace ASEva.UICoreWF
 			Control.ValueChanged += HandleScaleValueChanged;
 		}
 
-		void HandleScaleValueChanged(object sender, EventArgs e)
+		void HandleScaleValueChanged(object? sender, EventArgs e)
 		{
 			var value = Control.Value;
 			var tick = Control.TickFrequency;

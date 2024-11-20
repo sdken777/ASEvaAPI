@@ -9,9 +9,9 @@ namespace ASEva.UICoreWF
 {
 	class MessageBoxHandler : WidgetHandler<Widget>, MessageBox.IHandler
 	{
-		public string Text { get; set; }
+		public string? Text { get; set; }
 
-		public string Caption { get; set; }
+		public string? Caption { get; set; }
 
 		public MessageBoxType Type { get; set; }
 
@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
 				parentWindow.Focus();
 
 			var caption = Caption ?? parentWindow?.Title;
-			swf.Control c = (parent == null) ? null : (swf.Control)parent.ControlObject;
+			swf.Control? c = (parent == null) ? null : parent.ControlObject as swf.Control;
 
 			// CHECK: 修正标题给null则显示"错误"
 			swf.DialogResult result = swf.MessageBox.Show(c, Text, caption == null ? "" : caption, Convert(Buttons), Convert(Type), Convert(DefaultButton, Buttons));

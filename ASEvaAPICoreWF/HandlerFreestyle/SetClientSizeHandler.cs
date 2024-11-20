@@ -14,7 +14,7 @@ namespace ASEva.UICoreWF
             else
             {
                 var form = window.ControlObject as System.Windows.Forms.Form;
-                window.Size = new Size(realSize.Width + form.Width - form.ClientSize.Width, realSize.Height + form.Height - form.ClientSize.Height);
+                if (form != null) window.Size = new Size(realSize.Width + form.Width - form.ClientSize.Width, realSize.Height + form.Height - form.ClientSize.Height);
             }
         }
 
@@ -25,7 +25,7 @@ namespace ASEva.UICoreWF
             else
             {
                 var form = window.ControlObject as System.Windows.Forms.Form;
-                window.MinimumSize = new Size(realSize.Width + form.Width - form.ClientSize.Width, realSize.Height + form.Height - form.ClientSize.Height);
+                if (form != null) window.MinimumSize = new Size(realSize.Width + form.Width - form.ClientSize.Width, realSize.Height + form.Height - form.ClientSize.Height);
             }
         }
     }

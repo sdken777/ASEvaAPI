@@ -6,13 +6,13 @@ namespace ASEva.UICoreWF
 {
     class ToolTipHandler : SetToolTipExtensions.SetToolTipHandler
     {
-        public void SetToolTip(Control control, string tooltip)
+        public void SetToolTip(Control control, string? tooltip)
         {
             if (control is ButtonPanel) return;
             if (control.ParentWindow != null) return;
 
             var winformControl = control.ControlObject as System.Windows.Forms.Control;
-            globalToolTip.SetToolTip(winformControl, tooltip);
+            if (winformControl != null) globalToolTip.SetToolTip(winformControl, tooltip);
         }
 
         private System.Windows.Forms.ToolTip globalToolTip = new System.Windows.Forms.ToolTip();

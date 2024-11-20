@@ -32,7 +32,7 @@ namespace ASEva.UICoreWF
             timer.Enabled = true;
         }
 
-        public void AddItems(string[] itemsText, bool[] itemsChecked, bool[] itemsEnabled)
+        public void AddItems(string[] itemsText, bool[]? itemsChecked, bool[]? itemsEnabled)
         {
             for (int i = 0; i < itemsText.Length; i++)
             {
@@ -108,9 +108,11 @@ namespace ASEva.UICoreWF
             return selectedIndex;
         }
 
-        private void checkBox_CheckedChanged(object sender, EventArgs e)
+        private void checkBox_CheckedChanged(object? sender, EventArgs e)
         {
             var target = sender as System.Windows.Forms.CheckBox;
+            if (target == null) return;
+
             target.BackColor = System.Drawing.Color.LightGray;
             var newSelectedIndex = checkBoxes.IndexOf(target);
             if (selectedIndex >= 0 && selectedIndex != newSelectedIndex) checkBoxes[selectedIndex].BackColor = System.Drawing.Color.Transparent;

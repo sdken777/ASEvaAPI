@@ -136,7 +136,7 @@ namespace ASEva.UICoreWF
 			}
 		}
 
-		private void panel_SizeChanged (object sender, EventArgs e)
+		private void panel_SizeChanged (object? sender, EventArgs e)
 		{
 			resizeControls();
 		}

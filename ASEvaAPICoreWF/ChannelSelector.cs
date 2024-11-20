@@ -90,10 +90,10 @@ namespace ASEva.UICoreWF
         /// <summary>
         /// 通道协议，不需要加'@x' 
         /// </summary>
-        public String ChannelProtocol { get; set; }
+        public String? ChannelProtocol { get; set; }
 
         public delegate void ChannelSelectorHander(ChannelSelector selector, int channel);
-        public event ChannelSelectorHander ChannelClicked;
+        public event ChannelSelectorHander? ChannelClicked;
 
         private int channelCount = 4;
         private int targetChannel = 0;
@@ -103,20 +103,20 @@ namespace ASEva.UICoreWF
 
         private ToolTip tooltip = new ToolTip();
 
-        private void ChannelSelector_MouseClick(object sender, MouseEventArgs e)
+        private void ChannelSelector_MouseClick(object? sender, MouseEventArgs e)
         {
             for (int i = 0; i < channelCount; i++)
             {
                 if (e.X >= i * gridSize && e.X < (i + 1) * gridSize)
                 {
                     TargetChannel = i;
-                    if (ChannelClicked != null) ChannelClicked(this, i);
+                    ChannelClicked?.Invoke(this, i);
                     return;
                 }
             }
         }
 
-        private void ChannelSelector_Paint(object sender, PaintEventArgs e)
+        private void ChannelSelector_Paint(object? sender, PaintEventArgs e)
         {
             DrawBeat.CallbackBegin(this, "ASEva.UICoreWF.ChannelSelector");
 
@@ -135,7 +135,7 @@ namespace ASEva.UICoreWF
 
                 for (int i = 0; i < channelCount; i++)
                 {
-                    Brush brush = null;
+                    Brush? brush = null;
                     if (channelAvailables[i])
                     {
                         if (targetChannel == i) brush = paleGreenBrush;
@@ -158,7 +158,7 @@ namespace ASEva.UICoreWF
             DrawBeat.CallbackEnd(this);
         }
 
-        private async void ChannelSelector_MouseMove(object sender, MouseEventArgs e)
+        private async void ChannelSelector_MouseMove(object? sender, MouseEventArgs e)
         {
             var channel = this.PointToClient(Cursor.Position).X / gridSize;
             var text = "Channel " + (char)('A' + channel);
