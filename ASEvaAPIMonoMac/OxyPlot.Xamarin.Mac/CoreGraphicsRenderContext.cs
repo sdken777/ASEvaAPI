@@ -98,7 +98,7 @@ namespace OxyPlot.Xamarin.Mac
             var imagesToRelease = this.imageCache.Keys.Where (i => !this.imagesInUse.Contains (i)).ToList ();
             foreach (var i in imagesToRelease) {
                 var image = this.GetImage (i);
-                image.Dispose ();
+                image?.Dispose ();
                 this.imageCache.Remove (i);
             }
 
@@ -364,7 +364,7 @@ namespace OxyPlot.Xamarin.Mac
         private CTFont GetCachedFont (string fontName, double fontSize)
         {
             var key = fontName + fontSize.ToString ("0.###");
-            if (this.fonts.TryGetValue(key, out CTFont font))
+            if (this.fonts.TryGetValue(key, out CTFont? font))
             {
                 return font;
             }
@@ -382,7 +382,7 @@ namespace OxyPlot.Xamarin.Mac
             this.gctx.SetFillColor (c.ToCGColor ());
         }
 
-        private void SetStroke (OxyColor c, double thickness, double[] dashArray = null, LineJoin lineJoin = LineJoin.Miter)
+        private void SetStroke (OxyColor c, double thickness, double[]? dashArray = null, LineJoin lineJoin = LineJoin.Miter)
         {
             this.gctx.SetStrokeColor (c.ToCGColor ());
             this.gctx.SetLineWidth ((float)thickness);
@@ -395,7 +395,7 @@ namespace OxyPlot.Xamarin.Mac
             }
         }
 
-        private NSImage GetImage (OxyImage source)
+        private NSImage? GetImage (OxyImage source)
         {
             if (source == null) {
                 return null;
@@ -405,7 +405,7 @@ namespace OxyPlot.Xamarin.Mac
                 this.imagesInUse.Add (source);
             }
 
-            if (!this.imageCache.TryGetValue(source, out NSImage src))
+            if (!this.imageCache.TryGetValue(source, out NSImage? src))
             {
                 using (var ms = new System.IO.MemoryStream(source.GetData()))
                 {

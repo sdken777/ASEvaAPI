@@ -30,11 +30,7 @@ namespace ASEva.UIMonoMac
 			textColumn.Editable = false;
 			textColumn.DataCell = textCell;
 
-            var dataSource = new CheckableListDataSource();
-            dataSource.SwitchColumn = switchColumn;
-            dataSource.TextColumn = textColumn;
-            dataSource.DefaultTextColor = textCell.TextColor;
-            dataSource.Callback = callback;
+            var dataSource = new CheckableListDataSource(switchColumn, textColumn, textCell.TextColor, callback);
 
             tableView = new NSTableView();
 			tableView.AddColumn(switchColumn);
@@ -52,9 +48,11 @@ namespace ASEva.UIMonoMac
 			BorderType = NSBorderType.BezelBorder;
         }
 
-        public void AddItems(string[] itemsText, bool[] itemsChecked, bool[] itemsEnabled)
+        public void AddItems(string[] itemsText, bool[]? itemsChecked, bool[]? itemsEnabled)
         {
-            var items = (tableView.DataSource as CheckableListDataSource).Items;
+            var items = (tableView.DataSource as CheckableListDataSource)?.Items;
+            if (items == null) return;
+            
             var startRowIndex = items.Count;
 
             var indices = new List<int>();
@@ -63,9 +61,8 @@ namespace ASEva.UIMonoMac
                 var text = itemsText[i];
                 bool isChecked = itemsChecked == null ? false : itemsChecked[i];
                 bool isEnabled = itemsEnabled == null ? true : itemsEnabled[i];
-                items.Add(new CheckableItem
+                items.Add(new CheckableItem(text)
                 {
-                    Text = text,
                     IsChecked = isChecked,
                     IsEnabled = isEnabled,
                 });
@@ -77,7 +74,9 @@ namespace ASEva.UIMonoMac
 
         public void RemoveItems(int[] indices)
         {
-            var items = (tableView.DataSource as CheckableListDataSource).Items;
+            var items = (tableView.DataSource as CheckableListDataSource)?.Items;
+            if (items == null) return;
+
             foreach (var index in indices)
             {
                 items.RemoveAt(index);
@@ -88,20 +87,24 @@ namespace ASEva.UIMonoMac
 
         public void RemoveAllItems()
         {
-            var items = (tableView.DataSource as CheckableListDataSource).Items;
+            var items = (tableView.DataSource as CheckableListDataSource)?.Items;
+            if (items == null) return;
+
             items.Clear();
             tableView.ReloadData();
         }
 
         public bool GetChecked(int index)
         {
-            var items = (tableView.DataSource as CheckableListDataSource).Items;
-            return items[index].IsChecked;
+            var items = (tableView.DataSource as CheckableListDataSource)?.Items;
+            return items?[index].IsChecked ?? false;
         }
 
         public void SetChecked(int[] indices, bool isChecked)
         {
-            var items = (tableView.DataSource as CheckableListDataSource).Items;
+            var items = (tableView.DataSource as CheckableListDataSource)?.Items;
+            if (items == null) return;
+
             foreach (var index in indices)
             {
                 items[index].IsChecked = isChecked;
@@ -111,14 +114,18 @@ namespace ASEva.UIMonoMac
 
         public void SetText(int index, string text)
         {
-            var items = (tableView.DataSource as CheckableListDataSource).Items;
+            var items = (tableView.DataSource as CheckableListDataSource)?.Items;
+            if (items == null) return;
+
             items[index].Text = text;
             tableView.ReloadData(NSIndexSet.FromArray(new int[]{ index }), NSIndexSet.FromArray(new int[]{ 1 }));
         }
 
         public void SetEnabled(int index, bool isEnabled)
         {
-            var items = (tableView.DataSource as CheckableListDataSource).Items;
+            var items = (tableView.DataSource as CheckableListDataSource)?.Items;
+            if (items == null) return;
+
             items[index].IsEnabled = isEnabled;
             tableView.ReloadData(NSIndexSet.FromArray(new int[]{ index }), NSIndexSet.FromArray(new int[]{ 0, 1 }));
         }
@@ -126,10 +133,13 @@ namespace ASEva.UIMonoMac
         public int[] GetCheckedIndices()
         {
             var list = new List<int>();
-            var items = (tableView.DataSource as CheckableListDataSource).Items.ToArray();
-            for (int i = 0; i < items.Length; i++)
+            var items = (tableView.DataSource as CheckableListDataSource)?.Items.ToArray();
+            if (items != null)
             {
-                if(items[i].IsChecked) list.Add(i);
+                for (int i = 0; i < items.Length; i++)
+                {
+                    if(items[i].IsChecked) list.Add(i);
+                }
             }
             return list.ToArray();
         }
@@ -139,32 +149,27 @@ namespace ASEva.UIMonoMac
             return (int)tableView.SelectedRow;
         }
 
-        class CheckableItem
+        class CheckableItem(String text)
         {
-            public String Text { get; set; }
+            public String Text { get; set; } = text;
             public bool IsChecked { get; set; }
             public bool IsEnabled { get; set; }
         }
 
-		class CheckableListDataSource : NSTableViewDataSource
+		class CheckableListDataSource(NSTableColumn switchColumn, NSTableColumn textColumn, NSColor defaultTextColor, ASEva.UIEto.CheckableListBoxCallback callback) : NSTableViewDataSource
 		{
-			public List<CheckableItem> Items { get; private set; }
-            public NSTableColumn SwitchColumn { private get; set; }
-            public NSTableColumn TextColumn { private get; set; }
-            public NSColor DefaultTextColor { private get; set; }
-            public ASEva.UIEto.CheckableListBoxCallback Callback { private get; set; }
-
-            public CheckableListDataSource()
-            {
-                Items = new List<CheckableItem>();
-            }
+			public List<CheckableItem> Items { get; private set; } = [];
+            public NSTableColumn SwitchColumn { private get; set; } = switchColumn;
+            public NSTableColumn TextColumn { private get; set; } = textColumn;
+            public NSColor DefaultTextColor { private get; set; } = defaultTextColor;
+            public ASEva.UIEto.CheckableListBoxCallback Callback { private get; set; } = callback;
 
 			public override long GetRowCount(NSTableView tableView)
 			{
 				return Items.Count;
 			}
 
-			public override NSObject GetObjectValue(NSTableView tableView, NSTableColumn tableColumn, long row)
+			public override NSObject? GetObjectValue(NSTableView tableView, NSTableColumn tableColumn, long row)
 			{
 				if (row < 0 || row >= Items.Count) return null;
 

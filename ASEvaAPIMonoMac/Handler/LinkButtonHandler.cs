@@ -35,7 +35,7 @@ namespace ASEva.UIMonoMac
 
 		public class EtoLinkLabel : EtoLabel
 		{
-			new LinkButtonHandler Handler { get { return (LinkButtonHandler)base.Handler; } set { base.Handler = value; } }
+			new LinkButtonHandler? Handler { get { return base.Handler as LinkButtonHandler; } set { base.Handler = value; } }
 
 			public override bool AcceptsFirstResponder()
 			{
@@ -79,7 +79,7 @@ namespace ASEva.UIMonoMac
 			get { return Enabled ? Cursor : null; }
 		}
 
-		protected override NSColor CurrentColor
+		protected override NSColor? CurrentColor
 		{
 			get { return Enabled ? base.CurrentColor : DisabledTextColor.ToNSUI(); }
 		}
