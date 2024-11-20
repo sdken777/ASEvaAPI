@@ -24,7 +24,8 @@ namespace ASEva.UIWpf
             this.antialias = antialias;
             this.useLegacyAPI = useLegacyAPI;
 
-            if (gl == null) gl = OpenGL.Create(new WindowsFuncLoader());
+            if (globalGL == null) globalGL = OpenGL.Create(new WindowsFuncLoader());
+            gl = globalGL;
         }
 
         public void ReleaseGL()
@@ -51,12 +52,14 @@ namespace ASEva.UIWpf
             }
             if (!initOK.Value) return;
 
-            var moduleID = callback == null ? null : callback.OnGetModuleID();
+            if (colorBuffer == null || depthBuffer == null || frameBuffer == null) return;
+
+            var moduleID = callback.OnGetModuleID();
             DrawBeat.CallbackBegin(this, moduleID);
 
             var pixelScale = (float)PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice.M11;
             var curSize = new GLSizeInfo((int)ActualWidth, (int)ActualHeight, (int)(pixelScale * ActualWidth), (int)(pixelScale * ActualHeight), pixelScale, (float)(ActualWidth / ActualHeight), true);
-            bool resized = curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
+            bool resized = size == null || curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
             size = curSize;
 
             Win32.wglMakeCurrent(hdc, context);
@@ -420,20 +423,21 @@ namespace ASEva.UIWpf
             return context != IntPtr.Zero;
         }
 
-        private GLCallback callback = null;
+        private GLCallback callback;
         private GLAntialias antialias;
         private bool useLegacyAPI;
         private bool? initOK = null;
         private IntPtr hwnd = IntPtr.Zero;
         private IntPtr hdc = IntPtr.Zero;
         private IntPtr context = IntPtr.Zero;
-        private uint[] frameBuffer = null;
-        private uint[] colorBuffer = null;
-        private uint[] depthBuffer = null;
-        private byte[] hostBuffer = null;
-        private GLSizeInfo size = null;
+        private uint[]? frameBuffer = null;
+        private uint[]? colorBuffer = null;
+        private uint[]? depthBuffer = null;
+        private byte[]? hostBuffer = null;
+        private GLSizeInfo? size = null;
+        private OpenGL gl;
 
-        private static OpenGL gl = null;
+        private static OpenGL? globalGL = null;
         private static bool createContextAttribsARBUnsupported = false;
     }
 }

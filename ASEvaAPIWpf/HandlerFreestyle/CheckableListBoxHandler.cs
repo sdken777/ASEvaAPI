@@ -14,7 +14,7 @@ namespace ASEva.UIWpf
             MouseUp += CheckableListBoxBackendWpf_MouseUp;
         }
 
-        public void AddItems(string[] itemsText, bool[] itemsChecked, bool[] itemsEnabled)
+        public void AddItems(string[] itemsText, bool[]? itemsChecked, bool[]? itemsEnabled)
         {
             for (int i = 0; i < itemsText.Length; i++)
             {
@@ -45,14 +45,15 @@ namespace ASEva.UIWpf
 
         public bool GetChecked(int index)
         {
-            return ((Items[index] as ListBoxItem).Content as CheckBox).IsChecked.Value;
+            return ((Items[index] as ListBoxItem)?.Content as CheckBox)?.IsChecked ?? false;
         }
 
         public void SetChecked(int[] indices, bool isChecked)
         {
             foreach (var index in indices)
             {
-                var checkBox = (Items[index] as ListBoxItem).Content as CheckBox;
+                var checkBox = (Items[index] as ListBoxItem)?.Content as CheckBox;
+                if (checkBox == null) continue;
                 checkBox.Checked -= CheckBox_Checked;
                 checkBox.Unchecked -= CheckBox_Checked;
                 checkBox.IsChecked = isChecked;
@@ -63,12 +64,14 @@ namespace ASEva.UIWpf
 
         public void SetText(int index, string text)
         {
-            ((Items[index] as ListBoxItem).Content as CheckBox).Content = text;
+            var checkBox = (Items[index] as ListBoxItem)?.Content as CheckBox;
+            if (checkBox != null) checkBox.Content = text;
         }
 
         public void SetEnabled(int index, bool isEnabled)
         {
-            ((Items[index] as ListBoxItem).Content as CheckBox).IsEnabled = isEnabled;
+            var checkBox = (Items[index] as ListBoxItem)?.Content as CheckBox;
+            if (checkBox != null) checkBox.IsEnabled = isEnabled;
         }
 
         public int[] GetCheckedIndices()
@@ -78,7 +81,7 @@ namespace ASEva.UIWpf
             foreach (ListBoxItem item in Items)
             {
                 var checkBox = item.Content as CheckBox;
-                if (checkBox.IsChecked.Value) list.Add(index);
+                if (checkBox?.IsChecked ?? false) list.Add(index);
                 index++;
             }
             return list.ToArray();
@@ -89,12 +92,12 @@ namespace ASEva.UIWpf
             return SelectedIndex;
         }
 
-        private void CheckableListBoxBackendWpf_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void CheckableListBoxBackendWpf_MouseUp(object? sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (SelectedIndex < 0) return;
             
-            var checkBox = (Items[SelectedIndex] as ListBoxItem).Content as CheckBox;
-            if (!checkBox.IsEnabled) return;
+            var checkBox = (Items[SelectedIndex] as ListBoxItem)?.Content as CheckBox;
+            if (checkBox == null || !checkBox.IsEnabled) return;
 
             checkBox.Checked -= CheckBox_Checked;
             checkBox.Unchecked -= CheckBox_Checked;
@@ -104,7 +107,7 @@ namespace ASEva.UIWpf
             callback.OnItemClicked();
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void CheckBox_Checked(object? sender, RoutedEventArgs e)
         {
             int index = 0;
             foreach (ListBoxItem item in Items)

@@ -29,7 +29,8 @@ namespace ASEva.UIWpf
             this.antialias = antialias;
             this.useLegacyAPI = useLegacyAPI;
 
-            if (gl == null) gl = OpenGL.Create(funcLoader);
+            if (globalGL == null) globalGL = OpenGL.Create(funcLoader);
+            gl = globalGL;
 
             CompositionTarget.Rendering += CompositionTarget_Rendering;
         }
@@ -60,7 +61,7 @@ namespace ASEva.UIWpf
             }
         }
 
-        private void CompositionTarget_Rendering(object sender, EventArgs e)
+        private void CompositionTarget_Rendering(object? sender, EventArgs e)
         {
             var ct = sender as CompositionTarget;
             var args = (RenderingEventArgs)e;
@@ -81,12 +82,14 @@ namespace ASEva.UIWpf
             }
             if (!initOK.Value) return;
 
+            if (colorBuffer == null || depthBuffer == null || frameBuffer == null) return;
+
             var pixelScale = textDraw.RealPixelScale;
             var curSize = new GLSizeInfo((int)ActualWidth, (int)ActualHeight, (int)(pixelScale * ActualWidth), (int)(pixelScale * ActualHeight), pixelScale, (float)(ActualWidth / ActualHeight), true);
             bool resized = size == null || curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
             size = curSize;
 
-            var moduleID = callback == null ? null : callback.OnGetModuleID();
+            var moduleID = callback.OnGetModuleID();
             DrawBeat.CallbackBegin(this, moduleID);
 
             Win32.wglMakeCurrent(hdc, context);
@@ -378,9 +381,9 @@ namespace ASEva.UIWpf
             fboFallback = false;
         }
 
-        private DeviceEx createD3DDevice(Direct3DEx d3d, IntPtr hwnd, int adapter)
+        private DeviceEx? createD3DDevice(Direct3DEx d3d, IntPtr hwnd, int adapter)
         {
-            if (d3d == null || hwnd == IntPtr.Zero || adapter < 0) return null;
+            if (hwnd == IntPtr.Zero || adapter < 0) return null;
 
             var caps = d3d.GetDeviceCaps(adapter, DeviceType.Hardware);
             var dwVertexProcessing = caps.DeviceCaps.HasFlag(DeviceCaps.HWTransformAndLight) ? CreateFlags.HardwareVertexProcessing : CreateFlags.SoftwareVertexProcessing;
@@ -395,9 +398,9 @@ namespace ASEva.UIWpf
             return new DeviceEx(d3d, adapter, DeviceType.Hardware, hwnd, dwVertexProcessing | CreateFlags.Multithreaded | CreateFlags.FpuPreserve, d3dpp);
         }
 
-        private Surface createD3DSurface(Direct3DEx d3d, DeviceEx d3dDevice, int adapter, uint surfaceWidth, uint surfaceHeight, ref IntPtr shareHandle)
+        private Surface? createD3DSurface(Direct3DEx d3d, DeviceEx d3dDevice, int adapter, uint surfaceWidth, uint surfaceHeight, ref IntPtr shareHandle)
         {
-            if (d3d == null || d3dDevice == null || adapter < 0) return null;
+            if (adapter < 0) return null;
 
             if (!d3d.CheckDeviceType(adapter, DeviceType.Hardware, Format.X8R8G8B8, Format.X8R8G8B8, true)) return null;
             if (!d3d.CheckDeviceFormat(adapter, DeviceType.Hardware, Format.X8R8G8B8, Usage.RenderTarget | Usage.Dynamic, ResourceType.Surface, Format.X8R8G8B8)) return null;
@@ -411,6 +414,8 @@ namespace ASEva.UIWpf
         private bool createD3DSurfaces(uint frameBufferName, uint colorBufferName, uint depthBufferName, out bool fboComplete)
         {
             fboComplete = false;
+
+            if (d3d == null || d3dDevice == null || size == null) return false;
 
             IntPtr d3dSurfaceBufferSH = IntPtr.Zero, dummy = IntPtr.Zero;
             d3dSurfaceBuffer = createD3DSurface(d3d, d3dDevice, D3DDefaultAdapter, (uint)size.RealWidth, (uint)size.RealHeight, ref d3dSurfaceBufferSH);
@@ -522,30 +527,31 @@ namespace ASEva.UIWpf
         }
 
         private IntPtr hwnd = IntPtr.Zero;
-        private Direct3DEx d3d;
-        private DeviceEx d3dDevice;
-        private Surface d3dSurfaceBuffer;
+        private Direct3DEx? d3d;
+        private DeviceEx? d3dDevice;
+        private Surface? d3dSurfaceBuffer;
         private IntPtr interopDevice = IntPtr.Zero;
         private IntPtr[] interopSurface = new IntPtr[] { IntPtr.Zero };
 
         private WindowsFuncLoader funcLoader = new WindowsFuncLoader();
-        private GLSizeInfo size = null;
+        private GLSizeInfo? size = null;
         private IntPtr hdc = IntPtr.Zero;
         private IntPtr context = IntPtr.Zero;
-        private GLCallback callback = null;
+        private GLCallback callback;
         private GLAntialias antialias;
         private bool useLegacyAPI;
 
-        private uint[] frameBuffer = null; // [interop, fallback/multisample]
-        private uint[] colorBuffer = null; // [interop, fallback/multisample]
-        private uint[] depthBuffer = null; // [interop, fallback/multisample]
+        private uint[]? frameBuffer = null; // [interop, fallback/multisample]
+        private uint[]? colorBuffer = null; // [interop, fallback/multisample]
+        private uint[]? depthBuffer = null; // [interop, fallback/multisample]
         private bool fboFallback = false;
         private bool? initOK = null;
         private int drawQueued = 0;
 
         private TextDraw textDraw = new TextDraw();
+        private OpenGL gl;
 
-        private static OpenGL gl = null;
+        private static OpenGL? globalGL;
         private static bool createContextAttribsARBUnsupported = false;
     }
 }

@@ -75,7 +75,7 @@ namespace ASEva.UIWpf
             var type = assembly.GetType("HwndHostAvalonia.WpfHost");
             if (type != null)
             {
-                var initMethod = type.BaseType.GetMethod("InitAvaloniaEnvironment");
+                var initMethod = type.BaseType?.GetMethod("InitAvaloniaEnvironment");
                 if (initMethod == null) return false;
 
                 initMethod.Invoke(null, null);
@@ -97,14 +97,14 @@ namespace ASEva.UIWpf
         /// </summary>
         /// <param name="anyWindowPanel">任意窗口面板</param>
         /// <returns>WPF窗口面板，若转化失败则返回null</returns>
-        public static WindowPanel ConvertWindowPanel(object anyWindowPanel)
+        public static WindowPanel? ConvertWindowPanel(object anyWindowPanel)
         {
             if (anyWindowPanel == null) return null;
             if (anyWindowPanel is WindowPanel) return anyWindowPanel as WindowPanel;
-            if (anyWindowPanel is UIEto.WindowPanel)
+            if (anyWindowPanel is UIEto.WindowPanel etoWindowPanel)
             {
                 var etoWindowPanelContainer = new WindowPanelEto();
-                etoWindowPanelContainer.SetEtoWindowPanel(anyWindowPanel as UIEto.WindowPanel);
+                etoWindowPanelContainer.SetEtoWindowPanel(etoWindowPanel);
                 return etoWindowPanelContainer;
             }
             if (wpfHostTypeForWinform != null)
@@ -140,14 +140,14 @@ namespace ASEva.UIWpf
         /// </summary>
         /// <param name="anyConfigPanel">任意配置面板</param>
         /// <returns>WPF配置面板，若转化失败则返回null</returns>
-        public static ConfigPanel ConvertConfigPanel(object anyConfigPanel)
+        public static ConfigPanel? ConvertConfigPanel(object anyConfigPanel)
         {
             if (anyConfigPanel == null) return null;
             if (anyConfigPanel is ConfigPanel) return anyConfigPanel as ConfigPanel;
-            if (anyConfigPanel is UIEto.ConfigPanel)
+            if (anyConfigPanel is UIEto.ConfigPanel etoConfigPanel)
             {
                 var etoConfigPanelContainer = new ConfigPanelEto();
-                etoConfigPanelContainer.SetEtoConfigPanel(anyConfigPanel as UIEto.ConfigPanel);
+                etoConfigPanelContainer.SetEtoConfigPanel(etoConfigPanel);
                 return etoConfigPanelContainer;
             }
             if (wpfHostTypeForWinform != null)
@@ -171,7 +171,7 @@ namespace ASEva.UIWpf
             return null;
         }
 
-        private static Type wpfHostTypeForWinform = null;
-        private static Type wpfHostTypeForAvalonia = null;
+        private static Type? wpfHostTypeForWinform = null;
+        private static Type? wpfHostTypeForAvalonia = null;
     }
 }

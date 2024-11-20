@@ -17,19 +17,19 @@ namespace ASEva.UIWpf
             RealPixelScale = 0;
         }
 
-        public GLTextTask[] Texts { private get; set; }
+        public GLTextTask[] Texts { private get; set; } = [];
         public float RealPixelScale { get; private set; }
 
         public void QueueRender()
         {
-            if (lastRenderWithTexts || (Texts != null && Texts.Length > 0)) InvalidateVisual();
+            if (lastRenderWithTexts || Texts.Length > 0) InvalidateVisual();
         }
 
         protected override void OnRender(DrawingContext drawingContext)
         {
             RealPixelScale = (float)PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice.M11;
 
-            if (Texts == null || Texts.Length == 0)
+            if (Texts.Length == 0)
             {
                 lastRenderWithTexts = false;
                 return;

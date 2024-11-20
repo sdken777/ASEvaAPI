@@ -35,10 +35,10 @@ namespace ASEva.UIWpf
 		bool failed;
 		bool webView2Ready;
 		protected bool WebView2Ready => webView2Ready;
-		CoreWebView2Environment _environment;
-		List<Action> delayedActions;
-		CoreWebView2Controller controller;
-		System.Windows.Threading.DispatcherTimer timer;
+		CoreWebView2Environment? _environment;
+		List<Action>? delayedActions;
+		CoreWebView2Controller? controller;
+		System.Windows.Threading.DispatcherTimer? timer;
 		System.Windows.Point lastPos;
 
 		public WebView2Handler()
@@ -59,22 +59,22 @@ namespace ASEva.UIWpf
 		/// <summary>
 		/// The default environment to use if none is specified with <see cref="Environment"/>.
 		/// </summary>
-		public static CoreWebView2Environment CoreWebView2Environment;
+		public static CoreWebView2Environment? CoreWebView2Environment;
 		
 		/// <summary>
 		/// Specifies a function to call when we need the default environment, if not already specified
 		/// </summary>
-		public static Func<Task<CoreWebView2Environment>> GetCoreWebView2Environment;
+		public static Func<Task<CoreWebView2Environment>>? GetCoreWebView2Environment;
 		
 		/// <summary>
 		/// Gets or sets the environment to use, defaulting to <see cref="CoreWebView2Environment"/>.
 		/// This can only be set once during construction or with a style for this handler.
 		/// </summary>
 		/// <value>Environment to use to initialize WebView2</value>
-		public CoreWebView2Environment Environment
+		public CoreWebView2Environment? Environment
 		{
 			get => _environment ?? CoreWebView2Environment;
-			set => _environment = value;
+			set { if (value != null) _environment = value; }
 		}
 
 		/// <summary>
@@ -126,7 +126,7 @@ namespace ASEva.UIWpf
 			};
 		}
 
-		void Control_CoreWebView2Ready(object sender, CoreWebView2InitializationCompletedEventArgs e)
+		void Control_CoreWebView2Ready(object? sender, CoreWebView2InitializationCompletedEventArgs e)
 		{
 			if (!e.IsSuccess)
 			{
@@ -148,7 +148,7 @@ namespace ASEva.UIWpf
 				// CHECK: 修正窗口移动后下拉菜单显示位置不正确问题
 				if (controller == null)
 				{
-					controller = Control.GetType().GetProperty("CoreWebView2Controller", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(Control) as CoreWebView2Controller;
+					controller = Control.GetType().GetProperty("CoreWebView2Controller", BindingFlags.NonPublic | BindingFlags.Instance)?.GetValue(Control) as CoreWebView2Controller;
 				}
 				if (controller != null && timer == null)
 				{
@@ -215,16 +215,16 @@ namespace ASEva.UIWpf
 #endif
 		}
 
-		private void CoreWebView2_NewWindowRequested(object sender, CoreWebView2NewWindowRequestedEventArgs e)
+		private void CoreWebView2_NewWindowRequested(object? sender, CoreWebView2NewWindowRequestedEventArgs e)
 		{
 			var args = new WebViewNewWindowEventArgs(new Uri(e.Uri), null);
 			Callback.OnOpenNewWindow(Widget, args);
 			e.Handled = args.Cancel;
 		}
 
-		private void CoreWebView2_DocumentTitleChanged(object sender, object e)
+		private void CoreWebView2_DocumentTitleChanged(object? sender, object e)
 		{
-			Callback.OnDocumentTitleChanged(Widget, new WebViewTitleEventArgs(CoreWebView2.DocumentTitle));
+			Callback.OnDocumentTitleChanged(Widget, new WebViewTitleEventArgs(CoreWebView2?.DocumentTitle));
 		}
 
 		protected void RunWhenReady(Action action)
@@ -268,20 +268,20 @@ namespace ASEva.UIWpf
 
 		}
 
-		private void Control_ContentLoading(object sender, CoreWebView2ContentLoadingEventArgs e)
+		private void Control_ContentLoading(object? sender, CoreWebView2ContentLoadingEventArgs e)
 		{
 			var args = new WebViewLoadedEventArgs(Control.Source);
 			Callback.OnNavigated(Widget, args);
 		}
 
-		private void Control_NavigationStarting(object sender, CoreWebView2NavigationStartingEventArgs e)
+		private void Control_NavigationStarting(object? sender, CoreWebView2NavigationStartingEventArgs e)
 		{
 			var args = new WebViewLoadingEventArgs(new Uri(e.Uri), true);
 			Callback.OnDocumentLoading(Widget, args);
 			e.Cancel = args.Cancel;
 		}
 
-		private void Control_NavigationCompleted(object sender, CoreWebView2NavigationCompletedEventArgs e)
+		private void Control_NavigationCompleted(object? sender, CoreWebView2NavigationCompletedEventArgs e)
 		{
 			var args = new WebViewLoadedEventArgs(Control.Source);
 			Application.Instance.AsyncInvoke(() => {
@@ -297,9 +297,9 @@ namespace ASEva.UIWpf
 			set { Control.Source = value; }
 		}
 
-		public string DocumentTitle => CoreWebView2?.DocumentTitle;
+		public string? DocumentTitle => CoreWebView2?.DocumentTitle;
 
-		public string ExecuteScript(string script)
+		public string? ExecuteScript(string script)
 		{
 			// CHECK: 初始化异常则不执行
 			if (failed) return null;
@@ -316,7 +316,7 @@ namespace ASEva.UIWpf
 			return Decode(task.Result);
 		}
 
-		public async Task<string> ExecuteScriptAsync(string script)
+		public async Task<string?> ExecuteScriptAsync(string script)
 		{
 			// CHECK: 初始化异常则不执行
 			if (failed) return null;
@@ -326,7 +326,7 @@ namespace ASEva.UIWpf
 			return Decode(result);
 		}
 
-		string Decode(string result)
+		string? Decode(string result)
 		{
 			// result is json-encoded. cool, but why?
 			if (result == null)
@@ -350,7 +350,7 @@ namespace ASEva.UIWpf
 
 		public bool CanGoForward => Control.CanGoForward;
 
-		HttpServer server;
+		HttpServer? server;
 
 		public void LoadHtml(string html, Uri baseUri)
 		{
@@ -376,7 +376,7 @@ namespace ASEva.UIWpf
 
 		}
 
-		protected Microsoft.Web.WebView2.Core.CoreWebView2 CoreWebView2
+		protected Microsoft.Web.WebView2.Core.CoreWebView2? CoreWebView2
 		{
 			get
 			{

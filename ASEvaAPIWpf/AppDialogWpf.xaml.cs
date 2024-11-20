@@ -35,7 +35,7 @@ namespace ASEva.UIWpf
             panel.OnDialogClose += Panel_OnDialogClose;
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+        private void Window_Loaded(object? sender, RoutedEventArgs e)
         {
             var dw = (int)(ActualWidth - panelElement.ActualWidth);
             var dh = (int)(ActualHeight - panelElement.ActualHeight);
@@ -46,17 +46,17 @@ namespace ASEva.UIWpf
             MinHeight = panel.MinSize.Height + dh;
         }
 
-        private void Panel_OnDialogClose(object sender, EventArgs e)
+        private void Panel_OnDialogClose(object? sender, EventArgs e)
         {
             Close();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object? sender, System.ComponentModel.CancelEventArgs e)
         {
             panel.OnClosing();
         }
 
-        private void Window_Closed(object sender, EventArgs e)
+        private void Window_Closed(object? sender, EventArgs e)
         {
             panel.CloseRecursively();
         }

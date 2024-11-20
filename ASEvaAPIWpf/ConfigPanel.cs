@@ -90,7 +90,7 @@ namespace ASEva.UIWpf
         /// </summary>
         public void Close()
         {
-            if (CloseRequested != null) CloseRequested(this, null);
+            CloseRequested?.Invoke(this, EventArgs.Empty);
         }
 
         /// \~English
@@ -101,7 +101,7 @@ namespace ASEva.UIWpf
         /// <summary>
         /// 在此事件中实现配置界面的关闭
         /// </summary>
-        public event EventHandler CloseRequested;
+        public event EventHandler? CloseRequested;
     }
 
     class EtoConfigPanel : UIEto.ConfigPanel
