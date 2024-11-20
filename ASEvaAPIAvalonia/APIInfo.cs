@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 3, 1, 1); // Update log / 更新记录: 修正App.ShowMessageBox
+            return new Version(1, 3, 1, 2); // Update log / 更新记录: 修正CommonImageAvaloniaExtensions.ToCommonImage
         }
 
         /// \~English

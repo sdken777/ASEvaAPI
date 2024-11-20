@@ -118,9 +118,9 @@ namespace ASEva.UIAvalonia
                                     }
                                     else
                                     {
-                                        uint b1 = ((cell & 0x000000ff) << 8) / scale;
-                                        uint b2 = (cell & 0x0000ff00) / scale;
-                                        uint b3 = ((cell & 0x00ff0000) >> 8) / scale;
+                                        uint b1 = (cell & 0x000000ff) * 255 / scale;
+                                        uint b2 = ((cell & 0x0000ff00) >> 8) * 255 / scale;
+                                        uint b3 = ((cell & 0x00ff0000) >> 16) * 255 / scale;
                                         cell = b1 | (b2 << 8) | (b3 << 16) | (scale << 24);
                                     }
                                     *row++ = cell;
