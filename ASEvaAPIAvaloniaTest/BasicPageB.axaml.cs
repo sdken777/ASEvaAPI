@@ -33,47 +33,41 @@ namespace ASEvaAPIAvaloniaTest
 
             for (int i = 1; i <= 99; i++)
             {
-                var parentNode = new Node();
-                parentNode.Key = i.ToString();
-                parentNode.Title = texts.Format("basic-tree-parent", i.ToString("D2"));
-                parentNode.Foreground = new SolidColorBrush(Colors.Black);
-                if (i % 2 == 0) parentNode.Background = new SolidColorBrush(Colors.LightGray);
+                var parentNode = new Node(i.ToString(), texts.Format("basic-tree-parent", i.ToString("D2")));
+                parentNode.Foreground = Brushes.Black;
+                if (i % 2 == 0) parentNode.Background = Brushes.LightGray;
                 if (i > 90) parentNode.IsExpanded = true;
-                parentNode.SubNodes = new ObservableCollection<Node>();
                 for (int j = 1; j <= 99; j++)
                 {
-                    var childNode = new Node();
-                    childNode.Key = i + "." + j;
-                    childNode.Title = texts.Format("basic-tree-child", j.ToString("D2"));
-                    if (j % 2 == 0) childNode.Foreground = new SolidColorBrush(Colors.Blue);
-                    else childNode.Foreground = new SolidColorBrush(Colors.Black);
+                    var childNode = new Node(i + "." + j, texts.Format("basic-tree-child", j.ToString("D2")));
+                    childNode.Foreground = j % 2 == 0 ? Brushes.Blue : Brushes.Black;
                     parentNode.SubNodes.Add(childNode);
                 }
                 model.TreeNodes.Add(parentNode);
             }
         }
 
-        private async void treeView_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private async void treeView_PointerReleased(object? sender, PointerReleasedEventArgs e)
         {
             var node = treeView.SelectedItem as Node;
-            if (node != null) await App.RunDialog(async (window) => await MessageBox.Show(window, (treeView.SelectedItem as Node).Key, ""));
+            if (node != null) await App.RunDialog(async (window) => await MessageBox.Show(window, node.Key, ""));
         }
 
-        private void linkSelectFirst_Click(object sender, RoutedEventArgs e)
+        private void linkSelectFirst_Click(object? sender, RoutedEventArgs e)
         {
             treeView.SelectedItem = model.TreeNodes[0];
         }
 
-        private void linkChangeColor_Click(object sender, RoutedEventArgs e)
+        private void linkChangeColor_Click(object? sender, RoutedEventArgs e)
         {
             for (int i = 1; i <= 97; i += 2)
             {
-                model.TreeNodes[i].Foreground = new SolidColorBrush(Colors.White);
-                model.TreeNodes[i].Background = new SolidColorBrush(Colors.DimGray);
+                model.TreeNodes[i].Foreground = Brushes.White;
+                model.TreeNodes[i].Background = Brushes.DimGray;
             }
         }
 
-        private async void linkAddControl_Click(object sender, RoutedEventArgs e)
+        private async void linkAddControl_Click(object? sender, RoutedEventArgs e)
         {
             var item = new Item(model);
             model.ControlItems.Add(item);
@@ -81,47 +75,49 @@ namespace ASEvaAPIAvaloniaTest
             flowLayout.ScrollIntoView(item);
         }
 
-        private void linkInsertControl_Click(object sender, RoutedEventArgs e)
+        private void linkInsertControl_Click(object? sender, RoutedEventArgs e)
         {
             if (model.ControlItems.Count == 0) model.ControlItems.Add(new Item(model));
             else model.ControlItems.Insert(1, new Item(model));
         }
 
-        private void linkRemoveControl_Click(object sender, RoutedEventArgs e)
+        private void linkRemoveControl_Click(object? sender, RoutedEventArgs e)
         {
             if (model.ControlItems.Count > 0) model.ControlItems.RemoveAt(model.ControlItems.Count / 2);
         }
 
-        private void linkShowControl_Click(object sender, RoutedEventArgs e)
+        private void linkShowControl_Click(object? sender, RoutedEventArgs e)
         {
             if (model.ControlItems.Count > 0) model.ControlItems[0].IsVisible = true;
         }
 
-        private void linkHideControl_Click(object sender, RoutedEventArgs e)
+        private void linkHideControl_Click(object? sender, RoutedEventArgs e)
         {
             if (model.ControlItems.Count > 0) model.ControlItems[0].IsVisible = false;
         }
 
-        private void linkSelectControl_Click(object sender, RoutedEventArgs e)
+        private void linkSelectControl_Click(object? sender, RoutedEventArgs e)
         {
             if (model.ControlItems.Count > 0) model.SelectedControlItem = model.ControlItems[0];
         }
 
-        private async void testControl_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private async void testControl_PointerReleased(object? sender, PointerReleasedEventArgs e)
         {
-            var item = (sender as TestControl).DataContext as Item;
+            var item = (sender as TestControl)?.DataContext as Item;
+            if (item == null) return;
+
             model.SelectedControlItem = item;
 
             var itemIndex = model.ControlItems.IndexOf(item);
             await App.RunDialog(async (window) => await MessageBox.Show(window, Program.Texts.Format("basic-flow-selected", itemIndex), ""));
         }
 
-        private class Node : INotifyPropertyChanged
+        private class Node(String key, String titleArg) : INotifyPropertyChanged
         {
-            public event PropertyChangedEventHandler PropertyChanged;
+            public event PropertyChangedEventHandler? PropertyChanged;
 
-            public String Key { get; set; }
-            public ObservableCollection<Node> SubNodes { get; set; }
+            public String Key { get; set; } = key;
+            public ObservableCollection<Node> SubNodes { get; set; } = [];
 
             public String Title
             {
@@ -129,13 +125,13 @@ namespace ASEvaAPIAvaloniaTest
                 set { title = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Title))); }
             }
 
-            public IBrush Foreground
+            public IBrush? Foreground
             {
                 get => foreground;
                 set { foreground = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Foreground))); }
             }
 
-            public IBrush Background
+            public IBrush? Background
             {
                 get => background;
                 set { background = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Background))); }
@@ -147,14 +143,15 @@ namespace ASEvaAPIAvaloniaTest
                 set { isExpanded = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsExpanded))); }
             }
 
-            private String title;
-            private IBrush foreground, background;
+            private String title = titleArg;
+            private IBrush? foreground;
+            private IBrush? background;
             private bool isExpanded;
         }
 
         private class Item : INotifyPropertyChanged
         {
-            public event PropertyChangedEventHandler PropertyChanged;
+            public event PropertyChangedEventHandler? PropertyChanged;
 
             public Item(Model model)
             {
@@ -169,7 +166,7 @@ namespace ASEvaAPIAvaloniaTest
 
             public IBrush BorderBrush
             {
-                get => new SolidColorBrush(this.Equals(model.SelectedControlItem) ? Colors.Gray : Colors.LightGray);
+                get => this.Equals(model.SelectedControlItem) ? Brushes.Gray : Brushes.LightGray;
             }
 
             public void NotifyPropertyChanged(String name)
@@ -183,16 +180,10 @@ namespace ASEvaAPIAvaloniaTest
 
         private class Model
         {
-            public ObservableCollection<Item> ControlItems { get; private set; }
-            public ObservableCollection<Node> TreeNodes { get; private set; }
+            public ObservableCollection<Item> ControlItems { get; private set; } = [];
+            public ObservableCollection<Node> TreeNodes { get; private set; } = [];
 
-            public Model()
-            {
-                ControlItems = new ObservableCollection<Item>();
-                TreeNodes = new ObservableCollection<Node>();
-            }
-
-            public Item SelectedControlItem
+            public Item? SelectedControlItem
             {
                 get => selectedControlItem;
                 set
@@ -203,9 +194,9 @@ namespace ASEvaAPIAvaloniaTest
                 }
             }
 
-            private Item selectedControlItem = null;
+            private Item? selectedControlItem = null;
         }
 
-        private Model model = new Model();
+        private Model model = new();
     }
 }

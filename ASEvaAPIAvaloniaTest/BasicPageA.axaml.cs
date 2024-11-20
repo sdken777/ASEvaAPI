@@ -24,47 +24,47 @@ namespace ASEvaAPIAvaloniaTest
 
         public void OnLoop()
         {
-            labelActive.Content = this.GetParentWindow().IsActive ? "O" : "X";
+            labelActive.Content = this.GetParentWindow()?.IsActive ?? false ? "O" : "X";
         }
 
-        private async void itemMenu_Click(object sender, RoutedEventArgs e)
+        private async void itemMenu_Click(object? sender, RoutedEventArgs e)
         {
             await App.RunDialog(async (window) => await MessageBox.Show(window, App.WorkPath, ""));
         }
 
-        private async void linkBrowse_Click(object sender, RoutedEventArgs e)
+        private async void linkBrowse_Click(object? sender, RoutedEventArgs e)
         {
-            if (radioFile.IsChecked.Value)
+            if (radioFile.IsChecked ?? false)
             {
-                if (checkSaveFile.IsChecked.Value)
+                if (checkSaveFile.IsChecked ?? false)
                 {
                     var options = new FilePickerSaveOptions
                     {
                         DefaultExtension = ".txt",
                         FileTypeChoices = [ new FilePickerFileType(Program.Texts["basic-save-file-filter"]) { Patterns = ["*.txt"] } ]
                     };
-                    var file = await this.GetParentWindow().StorageProvider.SaveFilePickerAsync(options);
+                    var file = await this.SaveFilePickerAsync(options);
                     if (file != null) await App.RunDialog(async (window) => await MessageBox.Show(window, file.Path, ""));
                 }
                 else
                 {
-                    var files = await this.GetParentWindow().StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions());
+                    var files = await this.OpenFilePickerAsync(new FilePickerOpenOptions());
                     if (files.Count > 0) await App.RunDialog(async (window) => await MessageBox.Show(window, files[0].Path, ""));
                 }
             }
             else // radioDir
             {
-                var folders = await this.GetParentWindow().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions());
+                var folders = await this.OpenFolderPickerAsync(new FolderPickerOpenOptions());
                 if (folders.Count > 0) await App.RunDialog(async (window) => await MessageBox.Show(window, folders[0].Path, ""));
             }
         }
 
-        private void checkShowPassword_IsCheckedChanged(object sender, RoutedEventArgs e)
+        private void checkShowPassword_IsCheckedChanged(object? sender, RoutedEventArgs e)
         {
-            passwordBox.PasswordChar = checkShowPassword.IsChecked.Value ? '\0' : '●';
+            passwordBox.PasswordChar = checkShowPassword.IsChecked ?? false ? '\0' : '●';
         }
 
-        private void buttonShowWindow_Click(object sender, RoutedEventArgs e)
+        private void buttonShowWindow_Click(object? sender, RoutedEventArgs e)
         {
             var window = new Window();
             window.SizeToContent = SizeToContent.WidthAndHeight;
@@ -73,7 +73,7 @@ namespace ASEvaAPIAvaloniaTest
             window.Show();
         }
 
-        private async void buttonShowDialog_Click(object sender, RoutedEventArgs e)
+        private async void buttonShowDialog_Click(object? sender, RoutedEventArgs e)
         {
             var window = new Window();
             window.SizeToContent = SizeToContent.WidthAndHeight;
@@ -83,33 +83,33 @@ namespace ASEvaAPIAvaloniaTest
             await App.RunDialog(window.ShowDialog);
         }
 
-        private async void linkShowDialogNoBorder_Click(object sender, RoutedEventArgs e)
+        private async void linkShowDialogNoBorder_Click(object? sender, RoutedEventArgs e)
         {
             var dialog = new TestDialogNoBorder();
             await App.RunDialog(dialog.ShowDialog);
         }
         
-        private async void linkShowDialogWithBorder_Click(object sender, RoutedEventArgs e)
+        private async void linkShowDialogWithBorder_Click(object? sender, RoutedEventArgs e)
         {
             var dialog = new TestDialogWithBorder();
             await App.RunDialog(dialog.ShowDialog);
         }
 
-        private async void linkShowDialogWithFixBorder_Click(object sender, RoutedEventArgs e)
+        private async void linkShowDialogWithFixBorder_Click(object? sender, RoutedEventArgs e)
         {
             var dialog = new TestDialogWithFixBorder();
             await App.RunDialog(dialog.ShowDialog);
         }
 
-        private void linkClientSize_Click(object sender, RoutedEventArgs e)
+        private void linkClientSize_Click(object? sender, RoutedEventArgs e)
         {
-            var size = this.GetParentWindow().ClientSize;
-            linkClientSize.Content = size.Width + "x" + size.Height;
+            var size = this.GetParentWindow()?.ClientSize;
+            if (size != null) linkClientSize.Content = size.Value.Width + "x" + size.Value.Height;
         }
 
         private class Model : INotifyPropertyChanged
         {
-            public event PropertyChangedEventHandler PropertyChanged;
+            public event PropertyChangedEventHandler? PropertyChanged;
 
             public double Progress
             {

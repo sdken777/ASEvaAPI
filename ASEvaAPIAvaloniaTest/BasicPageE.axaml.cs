@@ -20,63 +20,67 @@ namespace ASEvaAPIAvaloniaTest
             this.AddToResources(Program.Texts);
         }
 
-        private void linkAdd_Click(object sender, RoutedEventArgs e)
+        private void linkAdd_Click(object? sender, RoutedEventArgs e)
         {
             var control = new ControlWithBorder();
             control.PointerReleased += control_PointerReleased;
             flowLayout.Children.Add(control);
         }
 
-        private void linkRemove_Click(object sender, RoutedEventArgs e)
+        private void linkRemove_Click(object? sender, RoutedEventArgs e)
         {
             if (flowLayout.Children.Count > 0) flowLayout.Children.RemoveAt(flowLayout.Children.Count / 2);
         }
 
-        private void linkInsert_Click(object sender, RoutedEventArgs e)
+        private void linkInsert_Click(object? sender, RoutedEventArgs e)
         {
             var control = new ControlWithBorder();
             control.PointerReleased += control_PointerReleased;
             flowLayout.Children.Insert(1, control);
         }
 
-        private void linkSelect_Click(object sender, RoutedEventArgs e)
+        private void linkSelect_Click(object? sender, RoutedEventArgs e)
         {
             selectControl(0);
         }
 
-        private void linkShow_Click(object sender, RoutedEventArgs e)
+        private void linkShow_Click(object? sender, RoutedEventArgs e)
         {
             if (flowLayout.Children.Count > 0) flowLayout.Children[0].IsVisible = true;
         }
 
-        private void linkHide_Click(object sender, RoutedEventArgs e)
+        private void linkHide_Click(object? sender, RoutedEventArgs e)
         {
             if (flowLayout.Children.Count > 0) flowLayout.Children[0].IsVisible = false;
         }
 
-        private void linkBigger_Click(object sender, RoutedEventArgs e)
+        private void linkBigger_Click(object? sender, RoutedEventArgs e)
         {
             foreach (ControlWithBorder border in flowLayout.Children)
             {
                 var control = border.Child;
+                if (control == null) continue;
                 control.Width = 350;
                 control.Height = 120;
             }
         }
 
-        private void linkSmaller_Click(object sender, RoutedEventArgs e)
+        private void linkSmaller_Click(object? sender, RoutedEventArgs e)
         {
             foreach (ControlWithBorder border in flowLayout.Children)
             {
                 var control = border.Child;
+                if (control == null) continue;
                 control.Width = 250;
                 control.Height = 80;
             }
         }
 
-        private async void control_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private async void control_PointerReleased(object? sender, PointerReleasedEventArgs e)
         {
             var target = sender as ControlWithBorder;
+            if (target == null) return;
+            
             var targetIndex = flowLayout.Children.IndexOf(target);
             selectControl(targetIndex);
             await App.RunDialog(async (window) => await MessageBox.Show(window, Program.Texts.Format("basic-flow-selected", targetIndex), ""));
@@ -85,7 +89,10 @@ namespace ASEvaAPIAvaloniaTest
         private void selectControl(int index)
         {
             var children = flowLayout.Children.ToArray();
-            for (int i = 0; i < children.Length; i++) (children[i] as ControlWithBorder).IsSelected = i == index;
+            for (int i = 0; i < children.Length; i++)
+            {
+                if (children[i] is ControlWithBorder controlWithBorder) controlWithBorder.IsSelected = i == index;
+            }
         }
 
         private class ControlWithBorder : Border
@@ -93,9 +100,9 @@ namespace ASEvaAPIAvaloniaTest
             public ControlWithBorder()
             {
                 Margin = new Thickness(4);
-                Background = new SolidColorBrush(Colors.LightYellow);
+                Background = Brushes.LightYellow;
                 BorderThickness = new Thickness(2);
-                BorderBrush = new SolidColorBrush(Colors.LightGray);
+                BorderBrush = Brushes.LightGray;
                 CornerRadius = new CornerRadius(3);
                 Child = new TestControl{ Width = 250, Height = 80 };
             }
@@ -107,7 +114,7 @@ namespace ASEvaAPIAvaloniaTest
                 {
                     if (value == isSelected) return;
                     isSelected = value;
-                    BorderBrush = new SolidColorBrush(value ? Colors.Gray : Colors.LightGray);
+                    BorderBrush = value ? Brushes.Gray : Brushes.LightGray;
                 }
             }
 

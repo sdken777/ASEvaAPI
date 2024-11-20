@@ -163,17 +163,17 @@ namespace ASEvaAPIAvaloniaTest
             if (glView != null && glRenderSwitch) glView.QueueRender();
         }
 
-        private void linkPause_Click(object sender, RoutedEventArgs e)
+        private void linkPause_Click(object? sender, RoutedEventArgs e)
         {
             glRenderSwitch = false;
         }
 
-        private void linkResume_Click(object sender, RoutedEventArgs e)
+        private void linkResume_Click(object? sender, RoutedEventArgs e)
         {
             glRenderSwitch = true;
         }
 
-        private void linkInfo_Click(object sender, RoutedEventArgs e)
+        private void linkInfo_Click(object? sender, RoutedEventArgs e)
         {
             showInfo();
         }
@@ -207,13 +207,13 @@ namespace ASEvaAPIAvaloniaTest
             }
 
             private DateTime glLastLoopTime = DateTime.Now;
-            private List<int> loopIntervals = new List<int>();
+            private List<int> loopIntervals = [];
         }
 
-        private GLView glView;
+        private GLView? glView;
         private bool glRenderSwitch = true;
         private int glMouseCount = 0;
-        private LoopIntervalStat glLoopIntervalStat = new LoopIntervalStat();
+        private LoopIntervalStat glLoopIntervalStat = new();
         private DateTime startTime = DateTime.Now;
     }
 }

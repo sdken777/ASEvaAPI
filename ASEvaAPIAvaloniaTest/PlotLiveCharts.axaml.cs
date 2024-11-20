@@ -26,7 +26,7 @@ namespace ASEvaAPIAvaloniaTest
                 var pathComps = path.Split('/');
                 var category = pathComps[0];
                 var title = pathComps[1];
-                if (!exampleTable.ContainsKey(category)) exampleTable[category] = new List<String>();
+                if (!exampleTable.ContainsKey(category)) exampleTable[category] = [];
                 exampleTable[category].Add(title);
             }
 
@@ -41,17 +41,14 @@ namespace ASEvaAPIAvaloniaTest
             }
             exampleTable = sortedTable;
 
-            Node targetCategoryNode = null, targetExampleNode = null;
+            Node? targetCategoryNode = null, targetExampleNode = null;
             foreach (var pair in exampleTable)
             {
                 var category = pair.Key;
-                var categoryNode = new Node();
-                categoryNode.Title = category;
-                categoryNode.SubNodes = new ObservableCollection<Node>();
+                var categoryNode = new Node(category);
                 foreach (var title in pair.Value)
                 {
-                    var exampleNode = new Node();
-                    exampleNode.Title = title;
+                    var exampleNode = new Node(title);
                     exampleNode.ClassName = "AvaloniaSample." + category + "." + title + ".View";
                     categoryNode.SubNodes.Add(exampleNode);
                     if (title == "Race")
@@ -70,12 +67,12 @@ namespace ASEvaAPIAvaloniaTest
             };
         }
 
-        private void treeView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void treeView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
             if (treeView.SelectedItem != null)
             {
                 var exampleNode = treeView.SelectedItem as Node;
-                if (exampleNode.ClassName == null) return;
+                if (exampleNode?.ClassName == null) return;
 
                 var view = typeof(ViewModelsSamples.Index).Assembly.CreateInstance(exampleNode.ClassName) as ContentControl;
                 if (view == null) return;
@@ -85,12 +82,12 @@ namespace ASEvaAPIAvaloniaTest
             }
         }
 
-        private class Node : INotifyPropertyChanged
+        private class Node(String titleArg) : INotifyPropertyChanged
         {
-            public event PropertyChangedEventHandler PropertyChanged;
+            public event PropertyChangedEventHandler? PropertyChanged;
 
-            public String ClassName { get; set; }
-            public ObservableCollection<Node> SubNodes { get; set; }
+            public String? ClassName { get; set; }
+            public ObservableCollection<Node> SubNodes { get; set; } = [];
 
             public String Title
             {
@@ -104,7 +101,7 @@ namespace ASEvaAPIAvaloniaTest
                 set { isExpanded = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsExpanded))); }
             }
 
-            private String title;
+            private String title = titleArg;
             private bool isExpanded;
         }
 
@@ -114,10 +111,10 @@ namespace ASEvaAPIAvaloniaTest
 
             public Model()
             {
-                TreeNodes = new ObservableCollection<Node>();
+                TreeNodes = [];
             }
         }
 
-        private Model model = new Model();
+        private Model model = new();
     }
 }

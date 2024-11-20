@@ -30,7 +30,7 @@ namespace ASEvaAPIAvaloniaTest
             timer.Start();
         }
 
-        private async void MainWindow_Closing(object sender, WindowClosingEventArgs e)
+        private async void MainWindow_Closing(object? sender, WindowClosingEventArgs e)
         {
             if (exitConfirmed || e.CloseReason != WindowCloseReason.WindowClosing)
             {
@@ -47,82 +47,85 @@ namespace ASEvaAPIAvaloniaTest
         }
         private bool exitConfirmed = false;
 
-        private void itemFullScreen_Click(object sender, RoutedEventArgs e)
+        private void itemFullScreen_Click(object? sender, RoutedEventArgs e)
         {
             if (WindowState == WindowState.Maximized) WindowState = WindowState.Normal;
             WindowState = WindowState.FullScreen;
         }
 
-        private void itemExit_Click(object sender, RoutedEventArgs e)
+        private void itemExit_Click(object? sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        private void itemCheckA_Click(object sender, RoutedEventArgs e)
+        private void itemCheckA_Click(object? sender, RoutedEventArgs e)
         {
             var model = DataContext as Model;
+            if (model == null) return;
             model.CheckedA = !model.CheckedA;
         }
 
-        private void itemCheckB_Click(object sender, RoutedEventArgs e)
+        private void itemCheckB_Click(object? sender, RoutedEventArgs e)
         {
             var model = DataContext as Model;
+            if (model == null) return;
             model.CheckedB = !model.CheckedB;
         }
 
-        private void itemRadioA_Click(object sender, RoutedEventArgs e)
+        private void itemRadioA_Click(object? sender, RoutedEventArgs e)
         {
             var model = DataContext as Model;
+            if (model == null) return;
             model.SelectedB = false;
         }
 
-        private void itemRadioB_Click(object sender, RoutedEventArgs e)
+        private void itemRadioB_Click(object? sender, RoutedEventArgs e)
         {
             var model = DataContext as Model;
+            if (model == null) return;
             model.SelectedB = true;
         }
 
-        private async void itemSnapshot_Click(object sender, RoutedEventArgs e)
+        private async void itemSnapshot_Click(object? sender, RoutedEventArgs e)
         {
-            using (var bitmap = new RenderTargetBitmap(new PixelSize((int)Width, (int)Height), new Vector(96, 96)))
-            {
-                bitmap.Render(this);
-                var dialog = new ImageDialog(bitmap);
-                await dialog.ShowDialog(this);
-            }
+            var image = this.Snapshot();
+            if (image == null) return;
+            
+            var dialog = new ImageDialog(image);
+            await dialog.ShowDialog(this);
         }
 
-        private void itemExceptionMain_Click(object sender, RoutedEventArgs e)
+        private void itemExceptionMain_Click(object? sender, RoutedEventArgs e)
         {
-            String a = null;
-            Console.WriteLine(a.Length.ToString());
+            String[] arr = [];
+            Console.WriteLine(arr[0]);
         }
 
-        private void itemExceptionSub_Click(object sender, RoutedEventArgs e)
+        private void itemExceptionSub_Click(object? sender, RoutedEventArgs e)
         {
             var thread = new Thread(() =>
             {
-                String a = null;
-                Console.WriteLine(a.Length.ToString());
+                String[] arr = [];
+                Console.WriteLine(arr[0]);
             });
             thread.Start();
         }
 
-        private void itemShowEtoEmbedWindow_Click(object sender, RoutedEventArgs e)
+        private void itemShowEtoEmbedWindow_Click(object? sender, RoutedEventArgs e)
         {
             if (Program.DesignerMode) return;
             var window = new EtoEmbedWindow();
             window.Show();
         }
 
-        private void itemShowEtoWindow_Click(object sender, RoutedEventArgs e)
+        private void itemShowEtoWindow_Click(object? sender, RoutedEventArgs e)
         {
             if (Program.DesignerMode) return;
             var window = new EtoWindow();
             window.Show();
         }
 
-        private async void itemShowEtoDialog_Click(object sender, RoutedEventArgs e)
+        private async void itemShowEtoDialog_Click(object? sender, RoutedEventArgs e)
         {
             if (Program.DesignerMode) return;
             var dialog = new EtoDialog();
@@ -131,7 +134,7 @@ namespace ASEvaAPIAvaloniaTest
 
         private class Model : INotifyPropertyChanged
         {
-            public event PropertyChangedEventHandler PropertyChanged;
+            public event PropertyChangedEventHandler? PropertyChanged;
 
             public bool CheckedA
             {
@@ -156,6 +159,6 @@ namespace ASEvaAPIAvaloniaTest
             private bool selectedB;
         }
 
-        private DispatcherTimer timer = new DispatcherTimer();
+        private DispatcherTimer timer = new();
     }
 }

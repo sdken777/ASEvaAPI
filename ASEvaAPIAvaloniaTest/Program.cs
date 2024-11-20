@@ -29,12 +29,14 @@ namespace ASEvaAPIAvaloniaTest
 
         public static bool DesignerMode { get; private set; }
         public static Language Language { get; private set; }
-        public static TextResource Texts { get; private set; }
+        public static TextResource Texts { get { if (texts == null) throw new NullReferenceException("Null texts."); return texts; } }
 
         private static void commonInitialization(Language language)
         {
             Language = language;
-            Texts = TextResource.Load("test.xml", Language);
+            texts = TextResource.Load("test.xml", Language);
         }
+
+        private static TextResource? texts;
     }
 }

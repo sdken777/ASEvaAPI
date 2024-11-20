@@ -41,13 +41,13 @@ namespace ASEvaAPIAvaloniaTest
             }
         }
 
-        private async void checkListBox_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private async void checkListBox_PointerReleased(object? sender, PointerReleasedEventArgs e)
         {
             var selectedIndex = checkListBox.SelectedIndex;
             if (selectedIndex >= 0) await App.RunDialog(async (window) => await MessageBox.Show(window, selectedIndex + ": " + model.CheckItems[selectedIndex].IsChecked, ""));
         }
 
-        private void linkCheckAll_Click(object sender, RoutedEventArgs e)
+        private void linkCheckAll_Click(object? sender, RoutedEventArgs e)
         {
             foreach (var item in model.CheckItems)
             {
@@ -55,7 +55,7 @@ namespace ASEvaAPIAvaloniaTest
             }
         }
 
-        private void linkUncheckAll_Click(object sender, RoutedEventArgs e)
+        private void linkUncheckAll_Click(object? sender, RoutedEventArgs e)
         {
             foreach (var item in model.CheckItems)
             {
@@ -63,85 +63,85 @@ namespace ASEvaAPIAvaloniaTest
             }
         }
 
-        private void linkRemoveCheckRow_Click(object sender, RoutedEventArgs e)
+        private void linkRemoveCheckRow_Click(object? sender, RoutedEventArgs e)
         {
             if (model.CheckItems.Count > 100) model.CheckItems.RemoveAt(model.CheckItems.Count - 1);
         }
 
-        private void linkSetCheckText_Click(object sender, RoutedEventArgs e)
+        private void linkSetCheckText_Click(object? sender, RoutedEventArgs e)
         {
             model.CheckItems[checkListTarget].Content = checkListTarget.ToString();
             if (checkListTarget < 99) checkListTarget++;
         }
 
-        private async void linkGetCheck_Click(object sender, RoutedEventArgs e)
+        private async void linkGetCheck_Click(object? sender, RoutedEventArgs e)
         {
             await App.RunDialog(async (window) => await MessageBox.Show(window, checkListTarget + ": " + model.CheckItems[checkListTarget].IsChecked, ""));
         }
 
-        private void linkSetCheck_Click(object sender, RoutedEventArgs e)
+        private void linkSetCheck_Click(object? sender, RoutedEventArgs e)
         {
             model.CheckItems[checkListTarget].IsChecked = !model.CheckItems[checkListTarget].IsChecked;
             if (checkListTarget < 99) checkListTarget++;
         }
 
-        private async void linkGetEnable_Click(object sender, RoutedEventArgs e)
+        private async void linkGetEnable_Click(object? sender, RoutedEventArgs e)
         {
             await App.RunDialog(async (window) => await MessageBox.Show(window, checkListTarget + ": " + model.CheckItems[checkListTarget].IsEnabled, ""));
         }
 
-        private void linkSetEnable_Click(object sender, RoutedEventArgs e)
+        private void linkSetEnable_Click(object? sender, RoutedEventArgs e)
         {
             model.CheckItems[checkListTarget].IsEnabled = !model.CheckItems[checkListTarget].IsEnabled;
             if (checkListTarget < 99) checkListTarget++;
         }
 
-        private void linkAddTableRow_Click(object sender, RoutedEventArgs e)
+        private void linkAddTableRow_Click(object? sender, RoutedEventArgs e)
         {
             model.MainTableItems.Add(new MainTableItem());
         }
 
-        private void linkRemoveTableRow_Click(object sender, RoutedEventArgs e)
+        private void linkRemoveTableRow_Click(object? sender, RoutedEventArgs e)
         {
             if (mainTableView.SelectedIndex >= 0) model.MainTableItems.RemoveAt(mainTableView.SelectedIndex);
         }
 
-        private void linkChangeTableGridColor_Click(object sender, RoutedEventArgs e)
+        private void linkChangeTableGridColor_Click(object? sender, RoutedEventArgs e)
         {
             if (model.MainTableItems.Count == 0) return;
-            model.MainTableItems[0].KeyForeground = new SolidColorBrush(Colors.Red);
-            model.MainTableItems[0].ValueBackground = new SolidColorBrush(Colors.Green);
+            model.MainTableItems[0].KeyForeground = Brushes.Red;
+            model.MainTableItems[0].ValueBackground = Brushes.Green;
         }
 
-        private void mainTableView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void mainTableView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
             labelChangedRow.Content = mainTableView.SelectedIndex.ToString();
         }
 
-        private void onTableCellLostFocus(object sender, int column)
+        private void onTableCellLostFocus(object? sender, int column)
         {
             if (mainTableView.SelectedIndex > 0)
             {
                 model.MainTableItems[0].Key = Program.Texts.Format("basic-grid-edited", mainTableView.SelectedIndex, column);
-                model.MainTableItems[0].Value = (sender as TextBox).Text;
+                model.MainTableItems[0].Value = (sender as TextBox)?.Text ?? "";
             }
         }
 
-        private void tableKeyCell_LostFocus(object sender, RoutedEventArgs e)
+        private void tableKeyCell_LostFocus(object? sender, RoutedEventArgs e)
         {
             onTableCellLostFocus(sender, 1);
         }
 
-        private void tableValueCell_LostFocus(object sender, RoutedEventArgs e)
+        private void tableValueCell_LostFocus(object? sender, RoutedEventArgs e)
         {
             onTableCellLostFocus(sender, 2);
         }
 
         private class CheckItem : INotifyPropertyChanged
         {
-            public event PropertyChangedEventHandler PropertyChanged;
+            public event PropertyChangedEventHandler? PropertyChanged;
 
-            public String Content
+            public String? Content
             {
                 get => content;
                 set { content = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Content))); }
@@ -159,68 +159,62 @@ namespace ASEvaAPIAvaloniaTest
                 set { isChecked = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsChecked))); }
             }
 
-            private String content;
+            private String? content;
             private bool isEnabled;
             private bool isChecked;
         }
 
         private class MainTableItem : INotifyPropertyChanged
         {
-            public event PropertyChangedEventHandler PropertyChanged;
+            public event PropertyChangedEventHandler? PropertyChanged;
 
             public MainTableItem()
             {
                 Index = (tableItemIndex++).ToString();
-                KeyForeground = new SolidColorBrush(Colors.Black);
+                KeyForeground = Brushes.Black;
             }
 
             public String Index { get; set; }
 
-            public String Key
+            public String? Key
             {
                 get => key;
                 set { key = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Key))); }
             }
 
-            public String Value
+            public String? Value
             {
                 get => val;
                 set { val = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Value))); }
             }
 
-            public IBrush KeyForeground
+            public IBrush? KeyForeground
             {
                 get => keyForeground;
                 set { keyForeground = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(KeyForeground))); }
             }
 
-            public IBrush ValueBackground
+            public IBrush? ValueBackground
             {
                 get => valBackground;
                 set { valBackground = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ValueBackground))); }
             }
 
-            private String key;
-            private String val;
-            private IBrush keyForeground;
-            private IBrush valBackground;
+            private String? key;
+            private String? val;
+            private IBrush? keyForeground;
+            private IBrush? valBackground;
 
             private static int tableItemIndex = 0;
         }
 
         private class Model
         {
-            public ObservableCollection<CheckItem> CheckItems { get; set; }
-            public ObservableCollection<MainTableItem> MainTableItems { get; set; }
-
-            public Model()
-            {
-                CheckItems = new ObservableCollection<CheckItem>();
-                MainTableItems = new ObservableCollection<MainTableItem>();
-            }
+            public ObservableCollection<CheckItem> CheckItems { get; set; } = [];
+            public ObservableCollection<MainTableItem> MainTableItems { get; set; } = [];
         }
 
-        private Model model = new Model();
+        private Model model = new();
         private int checkListTarget = 0;
     }
 }
