@@ -42,7 +42,7 @@ namespace ASEvaAPIEtoTest
         {
             layout.AddLabel(t.Format("basic-label-row", 1));
             var checkBox = layout.AddCheckBox(t["basic-checkbox"]);
-            var radioButtonList = layout.AddRadioButtonList(new string[] { t["basic-radiobutton-file"], t["basic-radiobutton-dir"] });
+            var radioButtonList = layout.AddRadioButtonList([t["basic-radiobutton-file"], t["basic-radiobutton-dir"]]);
             layout.AddSpace();
             var linkButton = layout.AddLinkButton(t["basic-linkbutton"]);
             linkButton.TextColor = Colors.ForestGreen;
@@ -73,7 +73,7 @@ namespace ASEvaAPIEtoTest
         private void initBasicTabPageARow2(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 2));
-            layout.AddComboBox(new string[] { t.Format("basic-combobox", "A"), t.Format("basic-combobox", "B") }).SetLogicalWidth(120);
+            layout.AddComboBox([t.Format("basic-combobox", "A"), t.Format("basic-combobox", "B")]).SetLogicalWidth(120);
             layout.AddControl(new NumericStepper { MinValue = 0, MaxValue = 100 }, false, 120 );
             layout.AddControl(new DateTimePicker(), true);
         }

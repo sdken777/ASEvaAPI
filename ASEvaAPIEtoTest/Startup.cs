@@ -23,11 +23,11 @@ namespace ASEvaAPIEtoTest
 
             var row = optionsLayout.AddRow(true);
             row.AddLabel("Language: ");
-            radiosLanguage = row.AddRadioButtonList(new string[] { "English", "中文" });
+            radiosLanguage = row.AddRadioButtonList(["English", "中文"]);
 
             row = optionsLayout.AddRow(true);
             row.AddLabel("Rendering: ");
-            radiosRendering = row.AddRadioButtonList(new string[] { "Offscreen", "Onscreen" });
+            radiosRendering = row.AddRadioButtonList(["Offscreen", "Onscreen"]);
 
             var menu = this.SetContextMenuAsNew();
             menu.AddButtonItem("Main thread exception").Click += delegate

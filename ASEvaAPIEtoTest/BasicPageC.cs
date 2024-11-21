@@ -108,7 +108,7 @@ namespace ASEvaAPIEtoTest
                 tableView.SetValue(0, 2, tableView.GetValue(e.Row, e.Column) ?? "");
             };
 
-            linkButtonAdd.Click += delegate { tableView.AddRow(new String[]{ (tableItemIndex++).ToString(), "", "" }); };
+            linkButtonAdd.Click += delegate { tableView.AddRow([(tableItemIndex++).ToString(), "", ""]); };
             linkButtonRemove.Click += delegate { tableView.RemoveRow(tableView.SelectedRow); };
             linkButtonChangeColor.Click += delegate
             {

@@ -95,7 +95,7 @@ namespace ASEva.UIEto
         public void AddItem(String text, bool isChecked = false, bool isEnabled = true)
         {
             enableFlags.Add(isEnabled);
-            backend.AddItems(new String[]{ text }, new bool[]{ isChecked }, new bool[]{ isEnabled });
+            backend.AddItems([text], [isChecked], [isEnabled]);
         }
 
         /// \~English
@@ -142,7 +142,7 @@ namespace ASEva.UIEto
         {
             if (index < 0 || index >= enableFlags.Count) return;
             enableFlags.RemoveAt(index);
-            backend.RemoveItems(new int[]{ index });
+            backend.RemoveItems([index]);
         }
 
         /// \~English
@@ -226,7 +226,7 @@ namespace ASEva.UIEto
         public void SetChecked(int index, bool isChecked)
         {
             if (index < 0 || index >= enableFlags.Count) return;
-            backend.SetChecked(new int[]{ index }, isChecked);
+            backend.SetChecked([index], isChecked);
         }
 
         /// \~English

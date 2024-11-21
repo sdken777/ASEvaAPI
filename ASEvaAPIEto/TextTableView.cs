@@ -105,7 +105,7 @@ namespace ASEva.UIEto
         {
             if (colCount == 0) return;
 
-            var valuesToAdd = new String[colCount];
+            var valuesToAdd = new String[colCount].Populate((i) => "");
             int copyCount = values == null ? 0 : Math.Min(values.Length, valuesToAdd.Length);
             for (int i = 0; i < copyCount; i++)
             {
@@ -142,7 +142,7 @@ namespace ASEva.UIEto
             var list = new List<String[]>();
             foreach (var raw in rowsValues)
             {
-                var valuesToAdd = new String[colCount];
+                var valuesToAdd = new String[colCount].Populate((i) => "");
                 int copyCount = raw == null ? 0 : Math.Min(raw.Length, valuesToAdd.Length);
                 for (int i = 0; i < copyCount; i++)
                 {
