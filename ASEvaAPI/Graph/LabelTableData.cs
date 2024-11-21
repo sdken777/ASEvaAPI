@@ -256,11 +256,10 @@ namespace ASEva.Graph
         {
             int count = 0;
             Int32.TryParse(Definition.Config[1], out count);
-            var output = new String[count];
-            for (int i = 0; i < count; i++)
+            var output = new String[count].Populate((i) =>
             {
-                output[i] = Definition.Config[7 + i];
-            }
+                return Definition.Config[7 + i];
+            });
             return output;
         }
 
@@ -279,11 +278,10 @@ namespace ASEva.Graph
             int xcount = 0, ycount = 0;
             Int32.TryParse(Definition.Config[1], out xcount);
             Int32.TryParse(Definition.Config[2], out ycount);
-            var output = new String[ycount];
-            for (int i = 0; i < ycount; i++)
+            var output = new String[ycount].Populate((i) =>
             {
-                output[i] = Definition.Config[7 + xcount + i];
-            }
+                return Definition.Config[7 + xcount + i];
+            });
             return output;
         }
 

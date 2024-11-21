@@ -4412,7 +4412,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.7.1
+            version=3.7.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -4438,6 +4438,16 @@
             (api:app=3.0.0) 返回当前运行的OS代号
             </summary>
             <returns>OS代号，若无法识别返回"unknown"</returns>
+        </member>
+        <member name="M:ASEva.ArrayPopulateExtensions.Populate``1(``0[],System.Func{System.Int32,``0})">
+            \~English
+            <summary>
+            For object array initialization, avoiding null reference
+            </summary>
+            \~Chinese
+            <summary>
+            用于初始化对象数组，避免空引用
+            </summary>
         </member>
         <member name="T:ASEva.WaveReceiver">
             \~English

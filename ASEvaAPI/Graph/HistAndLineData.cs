@@ -573,13 +573,13 @@ namespace ASEva.Graph
         /// <returns>统计数据</returns>
         public HistLineSample[] GetSamples()
         {
-            var samples = new HistLineSample[Data.GetLength(0)];
+            HistLineSample[] samples;
             if (Definition.Config[4] == "XLabels")
             {
-                for (int i = 0; i < samples.Length; i++)
+                samples = new HistLineSample[Data.GetLength(0)].Populate((i) =>
                 {
-                    samples[i] = new HistLineSample(Definition.Config[5 + i]);
-                }
+                    return new HistLineSample(Definition.Config[5 + i]);
+                });
             }
             else
             {
@@ -588,12 +588,12 @@ namespace ASEva.Graph
                 Double.TryParse(Definition.Config[6], out stepDouble);
                 var baseDecimal = new Decimal(baseDouble);
                 var stepDecimal = new Decimal(stepDouble);
-                for (int i = 0; i < samples.Length; i++)
+                samples = new HistLineSample[Data.GetLength(0)].Populate((i) =>
                 {
                     var lower = baseDecimal + stepDecimal * i;
                     var upper = baseDecimal + stepDecimal * (i + 1);
-                    samples[i] = new HistLineSample(lower + "~" + upper);
-                }
+                    return new HistLineSample(lower + "~" + upper);
+                });
             }
 
             double k = 1;
