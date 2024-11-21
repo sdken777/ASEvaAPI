@@ -59,11 +59,7 @@ namespace ASEva.UIWpf
 
             foreach (var values in rowsValues)
             {
-                var rowItem = new TableRowItem(Columns.Count, items);
-                for (int i = 0; i < values.Length; i++)
-                {
-                    rowItem.Cells[i] = new TableCellItem(rowItem, values[i], i, callback);
-                }
+                var rowItem = new TableRowItem(Columns.Count, items, values, callback);
                 items.Add(rowItem);
             }
         }
@@ -178,9 +174,9 @@ namespace ASEva.UIWpf
 
         class TableRowItem : INotifyPropertyChanged
         {
-            public TableRowItem(int columns, ObservableCollection<TableRowItem> items)
+            public TableRowItem(int columns, ObservableCollection<TableRowItem> items, String[] values, ASEva.UIEto.TextTableViewCallback callback)
             {
-                Cells = new TableCellItem[columns];
+                Cells = new TableCellItem[columns].Populate((i) => new TableCellItem(this, values[i], i, callback));
                 this.items = items;
             }
 

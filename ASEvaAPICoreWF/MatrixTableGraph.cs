@@ -301,7 +301,7 @@ namespace ASEva.UICoreWF
 
             Pen crossPen = new Pen(Color.FromArgb(255, 65, 140, 240), 1);
             crossPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
-            crossPen.DashPattern = new float[] { 1f, 1f };
+            crossPen.DashPattern = [1f, 1f];
 
             var D = Data as MatrixTableData;
             Point curPoint = pictureBox1.PointToClient(System.Windows.Forms.Cursor.Position);
@@ -443,25 +443,26 @@ namespace ASEva.UICoreWF
         private Color getColorByValue(double upper, double lower, double value)
         {
             Color color = new Color();
-            Color[] colors = new Color[17];
-            colors[0] = Color.FromArgb(0, 0, 128);
-            colors[1] = Color.FromArgb(0, 0, 192);
-            colors[2] = Color.FromArgb(0, 0, 255);
-            colors[3] = Color.FromArgb(0, 64, 255);
-            colors[4] = Color.FromArgb(0, 128, 255);
-            colors[5] = Color.FromArgb(0, 192, 255);
-            colors[6] = Color.FromArgb(0, 255, 255);
-            colors[7] = Color.FromArgb(64, 255, 192);
-            colors[8] = Color.FromArgb(128, 255, 128);
-            colors[9] = Color.FromArgb(192, 255, 64);
-            colors[10] = Color.FromArgb(255, 255, 0);
-            colors[11] = Color.FromArgb(255, 192, 0);
-            colors[12] = Color.FromArgb(255, 128, 0);
-            colors[13] = Color.FromArgb(255, 64, 0);
-            colors[14] = Color.FromArgb(255, 0, 0);
-            colors[15] = Color.FromArgb(192, 0, 0);
-            colors[16] = Color.FromArgb(128, 0, 0);
-
+            Color[] colors =
+            [
+                Color.FromArgb(0, 0, 128),
+                Color.FromArgb(0, 0, 192),
+                Color.FromArgb(0, 0, 255),
+                Color.FromArgb(0, 64, 255),
+                Color.FromArgb(0, 128, 255),
+                Color.FromArgb(0, 192, 255),
+                Color.FromArgb(0, 255, 255),
+                Color.FromArgb(64, 255, 192),
+                Color.FromArgb(128, 255, 128),
+                Color.FromArgb(192, 255, 64),
+                Color.FromArgb(255, 255, 0),
+                Color.FromArgb(255, 192, 0),
+                Color.FromArgb(255, 128, 0),
+                Color.FromArgb(255, 64, 0),
+                Color.FromArgb(255, 0, 0),
+                Color.FromArgb(192, 0, 0),
+                Color.FromArgb(128, 0, 0),
+            ];
             if (value <= lower)
             {
                 color =  colors[0];

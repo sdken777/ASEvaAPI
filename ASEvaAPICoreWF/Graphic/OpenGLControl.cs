@@ -423,7 +423,7 @@ namespace ASEva.UICoreWF
 
                 if (!createContextAttribsARBUnsupported)
                 {
-                    var glCoreVersions = new Version[]
+                    var glCoreVersions = new[]
                     {
                         new Version(4, 6),
                         new Version(3, 3)

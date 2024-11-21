@@ -108,7 +108,7 @@ namespace ASEva.UICoreWF
 			set { Control.Orientation = value == Orientation.Horizontal ? swf.Orientation.Horizontal : swf.Orientation.Vertical; }
 		}
 
-        static readonly int[] intrinsicEvents = { 0x0201/* Win32.WM.LBUTTONDOWN */, 0x0202/* Win32.WM.LBUTTONUP */, 0x0203/* Win32.WM.LBUTTONDBLCLK */ };
+        static readonly int[] intrinsicEvents = [0x0201/* Win32.WM.LBUTTONDOWN */, 0x0202/* Win32.WM.LBUTTONUP */, 0x0203/* Win32.WM.LBUTTONDBLCLK */];
         public override bool ShouldBubbleEvent(swf.Message msg)
         {
             return !intrinsicEvents.Contains(msg.Msg) && base.ShouldBubbleEvent(msg);

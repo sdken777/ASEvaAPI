@@ -489,7 +489,7 @@ namespace ASEva.UIWpf
 
                 if (!createContextAttribsARBUnsupported)
                 {
-                    var glCoreVersions = new Version[]
+                    var glCoreVersions = new[]
                     {
                         new Version(4, 6),
                         new Version(3, 3)
@@ -531,7 +531,7 @@ namespace ASEva.UIWpf
         private DeviceEx? d3dDevice;
         private Surface? d3dSurfaceBuffer;
         private IntPtr interopDevice = IntPtr.Zero;
-        private IntPtr[] interopSurface = new IntPtr[] { IntPtr.Zero };
+        private IntPtr[] interopSurface = [IntPtr.Zero];
 
         private WindowsFuncLoader funcLoader = new WindowsFuncLoader();
         private GLSizeInfo? size = null;

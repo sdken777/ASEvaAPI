@@ -54,12 +54,8 @@ namespace ASEva.UICoreWF
                 return;
             }
 
-            long[] src = new long[] { digits, digits + 1, digits - 1 };
-            String[] dst = new String[3];
-            for (int i = 0; i < 3; i++)
-            {
-                dst[i] = trimDigits(src[i]);
-            }
+            long[] src = [digits, digits + 1, digits - 1];
+            var dst = new String[3].Populate((i) => trimDigits(src[i]));
 
             String target = dst[0];
             if (dst[1].Length < target.Length) target = dst[1];

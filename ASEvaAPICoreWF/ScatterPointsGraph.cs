@@ -391,7 +391,7 @@ namespace ASEva.UICoreWF
 
             Pen crossPen = new Pen(Color.FromArgb(255, 65, 140, 240), 1);
             crossPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
-            crossPen.DashPattern = new float[] { 1f, 1f };
+            crossPen.DashPattern = [1f, 1f];
 
             var D = Data as ScatterPointsData;
             if (D == null) return;
