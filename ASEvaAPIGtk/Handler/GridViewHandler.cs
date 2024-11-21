@@ -291,7 +291,7 @@ namespace ASEva.UIGtk
 
 				if (info.Index >= 0)
 				{
-					var path = new Gtk.TreePath(new[] { info.Index });
+					var path = new Gtk.TreePath([info.Index]);
 					var pos = info.Position.ToGtk();
 					h.Control.SetDragDestRow(path, pos);
 				}

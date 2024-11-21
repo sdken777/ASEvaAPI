@@ -84,7 +84,7 @@ namespace ASEva.UIGtk
             target.SelectMultiple = multiple;
 
             var result = target.Run();
-            var output = result == (int)ResponseType.Ok ? (multiple ? target.Filenames : new String[] {target.Filename}) : [];
+            var output = result == (int)ResponseType.Ok ? (multiple ? target.Filenames : [target.Filename]) : [];
 
             target.Dispose();
 

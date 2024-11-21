@@ -84,25 +84,26 @@ namespace ASEva.UIGtk
         private ColorRGBA getColorByValue(double upper, double lower, double value)
         {
             var color = new ColorRGBA();
-            ColorRGBA[] colors = new ColorRGBA[17];
-            colors[0] = new ColorRGBA(64, 192, 32);
-            colors[1] = new ColorRGBA(72, 184, 32);
-            colors[2] = new ColorRGBA(80, 176, 32);
-            colors[3] = new ColorRGBA(88, 168, 32);
-            colors[4] = new ColorRGBA(96, 160, 32);
-            colors[5] = new ColorRGBA(104, 152, 32);
-            colors[6] = new ColorRGBA(112, 144, 32);
-            colors[7] = new ColorRGBA(120, 136, 32);
-            colors[8] = new ColorRGBA(128, 128, 32);
-            colors[9] = new ColorRGBA(136, 120, 32);
-            colors[10] = new ColorRGBA(144, 112, 32);
-            colors[11] = new ColorRGBA(152, 104, 32);
-            colors[12] = new ColorRGBA(160, 96, 32);
-            colors[13] = new ColorRGBA(168, 88, 32);
-            colors[14] = new ColorRGBA(176, 80, 32);
-            colors[15] = new ColorRGBA(184, 72, 32);
-            colors[16] = new ColorRGBA(192, 64, 32);
-
+            ColorRGBA[] colors =
+            [
+                new ColorRGBA(64, 192, 32),
+                new ColorRGBA(72, 184, 32),
+                new ColorRGBA(80, 176, 32),
+                new ColorRGBA(88, 168, 32),
+                new ColorRGBA(96, 160, 32),
+                new ColorRGBA(104, 152, 32),
+                new ColorRGBA(112, 144, 32),
+                new ColorRGBA(120, 136, 32),
+                new ColorRGBA(128, 128, 32),
+                new ColorRGBA(136, 120, 32),
+                new ColorRGBA(144, 112, 32),
+                new ColorRGBA(152, 104, 32),
+                new ColorRGBA(160, 96, 32),
+                new ColorRGBA(168, 88, 32),
+                new ColorRGBA(176, 80, 32),
+                new ColorRGBA(184, 72, 32),
+                new ColorRGBA(192, 64, 32),
+            ];
             if (value <= lower)
             {
                 color =  colors[0];

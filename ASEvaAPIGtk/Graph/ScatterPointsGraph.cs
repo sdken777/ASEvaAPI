@@ -373,7 +373,7 @@ namespace ASEva.UIGtk
                             cc.ShowText(secondText);
                         }
 
-                        cc.SetDash(new double[] {1, 1}, 0);
+                        cc.SetDash([1, 1], 0);
                         cc.SetSourceColor(ColorRGBA.DodgerBlue);
 
                         cc.DrawLine(originPoint.X, mouse.Y, width - 1, mouse.Y);

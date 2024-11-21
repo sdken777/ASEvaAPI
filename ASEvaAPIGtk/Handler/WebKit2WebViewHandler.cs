@@ -214,7 +214,7 @@ namespace ASEva.UIGtk
         private bool timer_Timeout()
         {
 			var userDir = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-			var downloadDirName = new String[] {"Downloads", "Download", "下载"};
+			var downloadDirName = new[] {"Downloads", "Download", "下载"};
 			String? targetDir = null;
 			foreach (var dirName in downloadDirName)
 			{

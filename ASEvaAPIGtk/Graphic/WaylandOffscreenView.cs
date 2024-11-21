@@ -139,7 +139,7 @@ namespace ASEva.UIGtk
             bool contextCreated = false;
             if (!useLegacyAPI)
             {
-                var glCoreVersions = new Version[]
+                var glCoreVersions = new[]
                 {
                     new Version(4, 6),
                     new Version(3, 3)
@@ -147,13 +147,13 @@ namespace ASEva.UIGtk
 
                 foreach (var ver in glCoreVersions)
                 {
-                    attribs = new int[]
-                    {
+                    attribs =
+                    [
                         0x3098/*EGL_CONTEXT_MAJOR_VERSION*/, ver.Major,
                         0x30FB/*EGL_CONTEXT_MINOR_VERSION*/, ver.Minor,
                         0x30FD/*EGL_CONTEXT_OPENGL_PROFILE_MASK*/, 1/*EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT*/,
                         0x3038/*EGL_NONE*/
-                    };
+                    ];
                     unsafe
                     {
                         fixed (int *attribsPtr = &(attribs[0]))

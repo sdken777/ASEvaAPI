@@ -156,7 +156,7 @@ namespace ASEva.UIGtk
 
             glContext.MakeCurrent();
 
-            GLTextTask[] texts = new GLTextTask[0];
+            GLTextTask[] texts = [];
             try
             {
                 if (resized)

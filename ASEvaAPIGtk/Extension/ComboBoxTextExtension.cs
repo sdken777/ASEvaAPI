@@ -28,16 +28,15 @@ namespace ASEva.UIGtk
         {
             if (combo.Model.IterNChildren() == 0) return [];
 
-            var output = new String[combo.Model.IterNChildren()];
-
             TreeIter iter;
             combo.Model.GetIterFirst(out iter);
 
-            for (int i = 0; i < output.Length; i++)
+            var output = new String[combo.Model.IterNChildren()].Populate((i) =>
             {
-                output[i] = combo.Model.GetValue(iter, 0) as String ?? "";
+                var ret = combo.Model.GetValue(iter, 0) as String ?? "";
                 combo.Model.IterNext(ref iter);
-            }
+                return ret;
+            });
 
             return output;
         }

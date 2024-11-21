@@ -127,25 +127,26 @@ namespace ASEva.UIGtk
         private ColorRGBA getColorByValue(double upper, double lower, double value)
         {
             var color = new ColorRGBA();
-            ColorRGBA[] colors = new ColorRGBA[17];
-            colors[0] = new ColorRGBA(0, 0, 128);
-            colors[1] = new ColorRGBA(0, 0, 192);
-            colors[2] = new ColorRGBA(0, 0, 255);
-            colors[3] = new ColorRGBA(0, 64, 255);
-            colors[4] = new ColorRGBA(0, 128, 255);
-            colors[5] = new ColorRGBA(0, 192, 255);
-            colors[6] = new ColorRGBA(0, 255, 255);
-            colors[7] = new ColorRGBA(64, 255, 192);
-            colors[8] = new ColorRGBA(128, 255, 128);
-            colors[9] = new ColorRGBA(192, 255, 64);
-            colors[10] = new ColorRGBA(255, 255, 0);
-            colors[11] = new ColorRGBA(255, 192, 0);
-            colors[12] = new ColorRGBA(255, 128, 0);
-            colors[13] = new ColorRGBA(255, 64, 0);
-            colors[14] = new ColorRGBA(255, 0, 0);
-            colors[15] = new ColorRGBA(192, 0, 0);
-            colors[16] = new ColorRGBA(128, 0, 0);
-
+            ColorRGBA[] colors =
+            [
+                new ColorRGBA(0, 0, 128),
+                new ColorRGBA(0, 0, 192),
+                new ColorRGBA(0, 0, 255),
+                new ColorRGBA(0, 64, 255),
+                new ColorRGBA(0, 128, 255),
+                new ColorRGBA(0, 192, 255),
+                new ColorRGBA(0, 255, 255),
+                new ColorRGBA(64, 255, 192),
+                new ColorRGBA(128, 255, 128),
+                new ColorRGBA(192, 255, 64),
+                new ColorRGBA(255, 255, 0),
+                new ColorRGBA(255, 192, 0),
+                new ColorRGBA(255, 128, 0),
+                new ColorRGBA(255, 64, 0),
+                new ColorRGBA(255, 0, 0),
+                new ColorRGBA(192, 0, 0),
+                new ColorRGBA(128, 0, 0),
+            ];
             if (value <= lower)
             {
                 color =  colors[0];
@@ -366,7 +367,7 @@ namespace ASEva.UIGtk
                         cc.SetSourceColor(ColorRGBA.Red);
                         cc.ShowText(fullText);
 
-                        cc.SetDash(new double[] {1, 1}, 0);
+                        cc.SetDash([1, 1], 0);
                         cc.SetSourceColor(ColorRGBA.DodgerBlue);
 
                         cc.DrawLine(originPoint.X, mouse.Y, width - 1, mouse.Y);

@@ -158,20 +158,12 @@ namespace ASEva.UIMonoMac
             public NSColor? BackColor { get; set; }
         }
 
-        class TableRowItem
+        class TableRowItem(String[] values)
         {
-            public TableCellItem[] Cells { get; set; }
-            public TableRowItem(String[] values)
-            {
-                Cells = new TableCellItem[values.Length];
-                for (int i = 0; i < values.Length; i++)
-                {
-                    Cells[i] = new TableCellItem(values[i]);
-                }
-            }
+            public TableCellItem[] Cells { get; set; } = new TableCellItem[values.Length].Populate((i) => new TableCellItem(values[i]));
         }
 
-		class TextTableDataSource(ASEva.UIEto.TextTableViewCallback callback) : NSTableViewDataSource
+        class TextTableDataSource(ASEva.UIEto.TextTableViewCallback callback) : NSTableViewDataSource
 		{
 			public List<TableRowItem> Items { get; private set; } = [];
             public List<NSTableColumn> Columns { get; private set; } = [];
