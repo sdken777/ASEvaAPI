@@ -4412,7 +4412,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.7.0
+            version=3.7.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -18547,17 +18547,17 @@
             [必须实现] 退出流程
             </summary>
         </member>
-        <member name="T:ASEva.CoreWorkflow">
+        <member name="T:ASEva.HostWorkflow">
             \~English
             <summary>
-            (api:app=3.1.0) Base class of core workflow
+            (api:app=3.1.0) Base class of host workflow
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 核心流程基类
+            (api:app=3.1.0) 主机端流程基类
             </summary>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnInit(System.String,System.Collections.Generic.Dictionary{System.String,System.String},ASEva.ApplicationGUI@)">
+        <member name="M:ASEva.HostWorkflow.OnInit(System.String,System.Collections.Generic.Dictionary{System.String,System.String},ASEva.ApplicationGUI@)">
             \~English
             <summary>
             [Required][OK for modal] Initialize workflow
@@ -18575,7 +18575,7 @@
             <param name="gui">输出基于的图形界面框架框架</param>
             <returns>初始化是否成功</returns>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnRun(ASEva.WorkflowLoopCallback,ASEva.WorkflowModalCallback,System.String)">
+        <member name="M:ASEva.HostWorkflow.OnRun(ASEva.WorkflowLoopCallback,ASEva.WorkflowModalCallback,System.String)">
             \~English
             <summary>
             [Required][OK for modal] Run the workflow, you should guarantee ASEva.WorkflowLoopCallback.OnLoop and ASEva.WorkflowModalCallback.OnHandleModal is called in the main loop
@@ -18591,7 +18591,7 @@
             <param name="modalCallback">模态对话回调接口</param>
             <param name="startupProject">初始项目文件路径</param>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnLicenseRequest(ASEva.LicenseRequestReason,System.String,ASEva.WorkflowLicenseCallback)">
+        <member name="M:ASEva.HostWorkflow.OnLicenseRequest(ASEva.LicenseRequestReason,System.String,ASEva.WorkflowLicenseCallback)">
             \~English
             <summary>
             [Required][OK for modal] Called after license validation failed
@@ -18609,7 +18609,7 @@
             <param name="callback">框架软件的回调接口</param>
             <returns>是否接受请求，如接受需确保已调用 ASEva.WorkflowLicenseCallback.OnRevalidateLicense </returns>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnGetVideoAvailability">
+        <member name="M:ASEva.HostWorkflow.OnGetVideoAvailability">
             \~English
             <summary>
             [Optional] Get whether to support video (default is true)
@@ -18619,7 +18619,7 @@
             [可选实现] 获取是否需要支持视频（默认true）
             </summary>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnGetAudioAvailability">
+        <member name="M:ASEva.HostWorkflow.OnGetAudioAvailability">
             \~English
             <summary>
             [Optional] Get whether to support audio (default is true)
@@ -18629,7 +18629,7 @@
             [可选实现] 获取是否需要支持音频（默认true）
             </summary>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnGetResourceMonitorAvailability">
+        <member name="M:ASEva.HostWorkflow.OnGetResourceMonitorAvailability">
             \~English
             <summary>
             [Optional] Get whether to support resource monitoring (default is true)
@@ -18639,7 +18639,7 @@
             [可选实现] 获取是否需要支持资源监控（默认true）
             </summary>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnGetOfflineMapAvailability">
+        <member name="M:ASEva.HostWorkflow.OnGetOfflineMapAvailability">
             \~English
             <summary>
             [Optional] Get whether to support offline map (default is true)
@@ -18649,7 +18649,7 @@
             [可选实现] 获取是否需要支持离线地图（默认true）
             </summary>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnCheckSystemSleepPrevention">
+        <member name="M:ASEva.HostWorkflow.OnCheckSystemSleepPrevention">
             \~English
             <summary>
             [Optional] Get whether to prevent system sleeping (default is true)
@@ -18659,7 +18659,7 @@
             [可选实现] 返回是否阻止系统进入睡眠（默认true）
             </summary>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnCheckMultiInstance">
+        <member name="M:ASEva.HostWorkflow.OnCheckMultiInstance">
             \~English
             <summary>
             [Optional] Get whether to allow multiple application instances running
@@ -18671,7 +18671,7 @@
             </summary>
             <returns>是否允许多个实例同时运行</returns>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnCheckDisableGPUDecoding">
+        <member name="M:ASEva.HostWorkflow.OnCheckDisableGPUDecoding">
             \~English
             <summary>
             [Optional] Get whether to disable GPU decoding
@@ -18683,7 +18683,7 @@
             </summary>
             <returns>是否禁用GPU解码</returns>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnCheckEnableSpecializedGPUDecoding">
+        <member name="M:ASEva.HostWorkflow.OnCheckEnableSpecializedGPUDecoding">
             \~English
             <summary>
             [Optional] Get whether to enable GPU specialized decoding
@@ -18695,7 +18695,7 @@
             </summary>
             <returns>是否启用GPU专用解码（若已禁用GPU解码则无效）</returns>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnCheckPreferPRCWeb">
+        <member name="M:ASEva.HostWorkflow.OnCheckPreferPRCWeb">
             \~English
             <summary>
             [Optional] Get whether to use PRC web service
@@ -18707,7 +18707,7 @@
             </summary>
             <returns>是否使用境内网络服务</returns>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnCheckRequestAutoRoot">
+        <member name="M:ASEva.HostWorkflow.OnCheckRequestAutoRoot">
             \~English
             <summary>
             [Optional] Get whether to request auto root privilege (Only for Linux)
@@ -18719,7 +18719,7 @@
             </summary>
             <returns>是否请求自动root权限</returns>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnOpenDialog(System.Object,ASEva.DialogClassInfo,System.String)">
+        <member name="M:ASEva.HostWorkflow.OnOpenDialog(System.Object,ASEva.DialogClassInfo,System.String)">
             \~English
             <summary>
             [Required][OK for modal] Open dialog
@@ -18735,7 +18735,7 @@
             <param name="info">对话框组件信息</param>
             <param name="config">对话框初始配置</param>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnAddWindow(System.Object,ASEva.WindowClassInfo,System.String,System.Boolean)">
+        <member name="M:ASEva.HostWorkflow.OnAddWindow(System.Object,ASEva.WindowClassInfo,System.String,System.Boolean)">
             \~English
             <summary>
             [Optional] Add window to workspace
@@ -18755,7 +18755,7 @@
             <param name="newWorkspaceIfNeeded">工作空间无足够空间时，是否在新工作空间添加（若不支持工作空间，则无视此选项）</param>
             <returns>是否成功添加，若成功添加，在释放窗口时需要调用 ASEva.AgencyLocal.UnregisterPanel </returns>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnRunConsole(ASEva.ConsoleClass,ASEva.ConsoleClassInfo)">
+        <member name="M:ASEva.HostWorkflow.OnRunConsole(ASEva.ConsoleClass,ASEva.ConsoleClassInfo)">
             \~English
             <summary>
             [Required][OK for modal] Run console procedure
@@ -18769,7 +18769,7 @@
             <param name="consoleClass">控制台对象</param>
             <param name="info">控制台组件信息</param>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnSetCurrentDialogTitle(System.String,ASEva.Samples.CommonImage)">
+        <member name="M:ASEva.HostWorkflow.OnSetCurrentDialogTitle(System.String,ASEva.Samples.CommonImage)">
             \~English
             <summary>
             [Required] Set current dialog's title and icon
@@ -18783,7 +18783,7 @@
             <param name="title">标题</param>
             <param name="icon">图标，分辨率为16x16</param>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnSetWindowTitle(System.Object,System.String,ASEva.Samples.CommonImage)">
+        <member name="M:ASEva.HostWorkflow.OnSetWindowTitle(System.Object,System.String,ASEva.Samples.CommonImage)">
             \~English
             <summary>
             [Required] Set window's title and icon
@@ -18799,7 +18799,7 @@
             <param name="title">标题</param>
             <param name="icon">图标，分辨率为16x16</param>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnEditOfflineMapPath(System.String)">
+        <member name="M:ASEva.HostWorkflow.OnEditOfflineMapPath(System.String)">
             \~English
             <summary>
             [Required][OK for modal] Configure path of offline map file
@@ -18813,7 +18813,7 @@
             <param name="originPath">原始路径，若未设置则为null</param>
             <returns>新路径，若未设置则为null</returns>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnEditDataEncryption(ASEva.WorkflowEncryptionCallback)">
+        <member name="M:ASEva.HostWorkflow.OnEditDataEncryption(ASEva.WorkflowEncryptionCallback)">
             \~English
             <summary>
             [Required][OK for modal] Configure data encryption
@@ -18825,7 +18825,7 @@
             </summary>
             <param name="callback">框架软件的回调接口</param>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnNewProject">
+        <member name="M:ASEva.HostWorkflow.OnNewProject">
             \~English
             <summary>
             [Optional] Notify that a new project is being loading
@@ -18835,7 +18835,7 @@
             [可选实现] 通知正在新建工程项目
             </summary>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnLoadProject(System.Xml.XmlDocument)">
+        <member name="M:ASEva.HostWorkflow.OnLoadProject(System.Xml.XmlDocument)">
             \~English
             <summary>
             [Optional] Notify that a project is loaded
@@ -18847,7 +18847,7 @@
             </summary>
             <param name="xml">工程项目xml</param>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnSaveProject(System.Xml.XmlDocument)">
+        <member name="M:ASEva.HostWorkflow.OnSaveProject(System.Xml.XmlDocument)">
             \~English
             <summary>
             [Optional] Notify that the current project is being saved
@@ -18859,7 +18859,7 @@
             </summary>
             <param name="xml">工程项目xml</param>
         </member>
-        <member name="M:ASEva.CoreWorkflow.OnCheckReady">
+        <member name="M:ASEva.HostWorkflow.OnCheckReady">
             \~English
             <summary>
             [Optional] Get whether it's allowed by workflow to save project, start session, etc.

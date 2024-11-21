@@ -375,13 +375,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.1.0) Base class of core workflow
+    /// (api:app=3.1.0) Base class of host workflow
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.1.0) 核心流程基类
+    /// (api:app=3.1.0) 主机端流程基类
     /// </summary>
-    public class CoreWorkflow : CommonWorkflow
+    public class HostWorkflow : CommonWorkflow
     {
         /// \~English
         /// <summary>
