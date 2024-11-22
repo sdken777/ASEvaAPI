@@ -37,7 +37,7 @@ namespace ASEva.UIGtk
 				if (String.IsNullOrEmpty(rawPath)) return rawPath;
 
 				var dir = Path.GetDirectoryName(rawPath);
-				if (dir?.EndsWith(Path.DirectorySeparatorChar) ?? false) dir = dir.Substring(0, dir.Length - 1);
+				if (dir.EndsWith(Path.DirectorySeparatorChar)) dir = dir.Substring(0, dir.Length - 1);
 				var fullName = Path.GetFileName(rawPath);
 				var name = Path.GetFileNameWithoutExtension(rawPath);
 				var extension = Path.GetExtension(rawPath).ToLower();

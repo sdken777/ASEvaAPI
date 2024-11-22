@@ -30,7 +30,7 @@ namespace ASEva.UIWpf
         /// <returns>BitmapSource对象</returns>
         public static BitmapSource ToBitmapSource(this CommonImage image)
         {
-            return (ImageConverter.ConvertToBitmap(image) as BitmapSource)!;
+            return ImageConverter.ConvertToBitmap(image) as BitmapSource;
         }
 
         /// \~English
@@ -45,7 +45,7 @@ namespace ASEva.UIWpf
         /// </summary>
         /// <param name="bitmap">BitmapSource对象</param>
         /// <returns>通用图像数据</returns>
-        public static CommonImage? ToCommonImage(this BitmapSource bitmap)
+        public static CommonImage ToCommonImage(this BitmapSource bitmap)
         {
             return ImageConverter.ConvertFromBitmap(bitmap);
         }

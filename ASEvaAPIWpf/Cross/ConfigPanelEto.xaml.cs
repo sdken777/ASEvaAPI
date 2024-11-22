@@ -8,7 +8,7 @@ namespace ASEva.UIWpf
     /// <summary>
     /// ConfigPanelEto.xaml 的交互逻辑
     /// </summary>
-    partial class ConfigPanelEto : ConfigPanel
+    public partial class ConfigPanelEto : ConfigPanel
     {
         public ConfigPanelEto()
         {
@@ -24,8 +24,6 @@ namespace ASEva.UIWpf
 
         public override void OnInitSize(String config)
         {
-            if (etoConfigPanel == null) return;
-
             etoConfigPanel.OnInitSize(config);
 
             var size = etoConfigPanel.OnGetSize();
@@ -35,31 +33,30 @@ namespace ASEva.UIWpf
 
         public override void OnInit(String config)
         {
-            etoConfigPanel?.OnInit(config);
+            etoConfigPanel.OnInit(config);
         }
 
         public override void OnRelease()
-        {
-            if (etoConfigPanel == null) return;
+        { 
             etoConfigPanel.OnRelease();
             UIEto.ContainerExtensions.CloseRecursively(etoConfigPanel);
         }
 
         public override void OnUpdateUI()
         {
-            etoConfigPanel?.OnUpdateUI();
+            etoConfigPanel.OnUpdateUI();
         }
 
         public override void OnHandleModal()
         {
-            etoConfigPanel?.OnHandleModal();
+            etoConfigPanel.OnHandleModal();
         }
 
         public override Task OnHandleAsync()
         {
-            return etoConfigPanel?.OnHandleAsync() ?? Task.CompletedTask;
+            return etoConfigPanel.OnHandleAsync();
         }
 
-        private UIEto.ConfigPanel? etoConfigPanel;
+        private UIEto.ConfigPanel etoConfigPanel;
     }
 }

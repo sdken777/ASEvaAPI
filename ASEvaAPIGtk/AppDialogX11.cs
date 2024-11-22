@@ -12,15 +12,10 @@ namespace ASEva.UIGtk
     #pragma warning disable CS0612, CS0649
     partial class AppDialogX11 : Window
     {
-        [UI] [SO] Overlay? overlay;
+        [UI] [SO] Overlay overlay;
 
-        public AppDialogX11(Widget widget, DialogPanel dialogPanel) : this(new Builder("AppDialogX11.glade"), widget, dialogPanel)
-        {}
-
-        private AppDialogX11(Builder builder, Widget widget, DialogPanel dialogPanel) : base(builder.GetRawOwnedObject("AppDialogX11"))
+        public AppDialogX11(Widget widget, DialogPanel dialogPanel) : this(new Builder("AppDialogX11.glade"))
         {
-            builder.Autoconnect(this);
-
             this.panel = dialogPanel;
             this.panelWidget = widget;
 
@@ -34,7 +29,7 @@ namespace ASEva.UIGtk
             if (icon != null)
             {
                 var iconSet = icon.ControlObject as IconSet;
-                var pixbuf = iconSet?.RenderIconPixbuf(StyleContext, IconSize.Dialog);
+                var pixbuf = iconSet.RenderIconPixbuf(StyleContext, IconSize.Dialog);
                 if (pixbuf != null) Icon = pixbuf;
             }
 
@@ -44,12 +39,9 @@ namespace ASEva.UIGtk
             widget.Halign = Align.Start;
             widget.Valign = Align.Start;
 
-            if (overlay != null)
-            {
-                overlay.WidthRequest = dialogPanel.DefaultSize.Width;
-                overlay.HeightRequest = dialogPanel.DefaultSize.Height;
-                overlay.AddOverlay(widget);
-            }
+            overlay.WidthRequest = dialogPanel.DefaultSize.Width;
+            overlay.HeightRequest = dialogPanel.DefaultSize.Height;
+            overlay.AddOverlay(widget);
 
             Shown += OnDialogShown;
             SizeAllocated += OnDialogSizeAllocated;
@@ -58,13 +50,15 @@ namespace ASEva.UIGtk
             dialogPanel.OnDialogClose += delegate { Close(); };
         }
 
-        private void OnDialogShown(object? sender, EventArgs e)
+        private AppDialogX11(Builder builder) : base(builder.GetRawOwnedObject("AppDialogX11"))
         {
-            if (overlay != null)
-            {
-                overlay.WidthRequest = panel.MinSize.Width;
-                overlay.HeightRequest = panel.MinSize.Height;
-            }
+            builder.Autoconnect(this);
+        }
+
+        private void OnDialogShown(object sender, EventArgs e)
+        {
+            overlay.WidthRequest = panel.MinSize.Width;
+            overlay.HeightRequest = panel.MinSize.Height;
 
             if (DialogChain.Count == 0)
             {
@@ -88,19 +82,18 @@ namespace ASEva.UIGtk
         }
 
         [GLib.ConnectBefore]
-        private static void parent_DeleteEvent(object? o, DeleteEventArgs args)
+        private static void parent_DeleteEvent(object o, DeleteEventArgs args)
         {
             args.RetVal = true;
         }
 
-        private void OnDialogSizeAllocated(object? o, SizeAllocatedArgs args)
+        private void OnDialogSizeAllocated(object o, SizeAllocatedArgs args)
         {
-            if (overlay == null) return;
             panelWidget.WidthRequest = overlay.AllocatedWidth;
             panelWidget.HeightRequest = overlay.AllocatedHeight;
         }
 
-        private void OnDialogDelete(object? o, DeleteEventArgs args)
+        private void OnDialogDelete(object o, DeleteEventArgs args)
         {
             panel.OnClosing();
             panel.CloseRecursively();
@@ -129,8 +122,8 @@ namespace ASEva.UIGtk
         private DialogPanel panel;
         private Widget panelWidget;
 
-        private List<Window> mainWindows = [];
+        private List<Window> mainWindows = new List<Window>();
 
-        private static List<Window> DialogChain = [];
+        private static List<Window> DialogChain = new List<Window>();
     }
 }

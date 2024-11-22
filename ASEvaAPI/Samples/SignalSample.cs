@@ -4,13 +4,13 @@ namespace ASEva.Samples
 {
     /// \~English
     /// <summary>
-    /// (api:app=3.7.0) Signal sample output by processor
+    /// (api:app=3.0.0) Signal sample output by processor
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.0) 数据处理组件输出的信号样本
+    /// (api:app=3.0.0) 数据处理组件输出的信号样本
     /// </summary>
-    public class SignalSample(String name) : Sample
+    public class SignalSample : Sample
     {
         /// \~English
         /// <summary>
@@ -20,7 +20,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 信号ID的前缀，输出时无需赋值（由系统赋值）
         /// </summary>
-        public String? Prefix { get; set; }
+        public String Prefix { get; set; }
 
         /// \~English
         /// <summary>
@@ -30,7 +30,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 信号的名称，应为 ASEva.ProcessorClass.GetProcessorOutputSignalNames 返回列表中的名称
         /// </summary>
-        public String Name { get; set; } = name;
+        public String Name { get; set; }
 
         /// \~English
         /// <summary>
@@ -50,7 +50,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 信号的全局唯一ID（仅get）
         /// </summary>
-        public String? SignalID
+        public String SignalID
         {
             get
             {

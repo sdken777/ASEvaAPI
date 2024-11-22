@@ -16,14 +16,14 @@ namespace ASEva.Graph
     {
         public PolyAboveValidation()
         {
-            poly = [];
+            poly = new FloatPoint[0];
         }
 
         public PolyAboveValidation(FloatPoint[] polyline)
         {
             if (polyline == null || polyline.Length == 0)
             {
-                poly = [];
+                poly = new FloatPoint[0];
                 return;
             }
 
@@ -48,7 +48,7 @@ namespace ASEva.Graph
         {
             if (polyline == null || polyline.Length == 0)
             {
-                poly = [];
+                poly = new FloatPoint[0];
                 return;
             }
 
@@ -120,8 +120,10 @@ namespace ASEva.Graph
         {
             if (data.HasData())
             {
-                if (data is HistAndLineData hist && hist.GetXValuesOrLabels() is HistLineXValues xValues)
+                if (data is HistAndLineData)
                 {
+                    var hist = data as HistAndLineData;
+                    var xValues = hist.GetXValuesOrLabels() as HistLineXValues;
                     var samples = hist.GetSamples();
                     var thresholds = GetHistLineValuesThreshold(xValues);
 

@@ -15,14 +15,14 @@ namespace ASEva.Graph
     {
         public OutlineOutsideValidation()
         {
-            outline = [];
+            outline = new FloatPoint[0];
         }
 
         public OutlineOutsideValidation(FloatPoint[] outline)
         {
             if (outline == null)
             {
-                this.outline = [];
+                this.outline = new FloatPoint[0];
                 return;
             }
 
@@ -38,7 +38,7 @@ namespace ASEva.Graph
         {
             if (outline == null)
             {
-                this.outline = [];
+                this.outline = new FloatPoint[0];
                 return;
             }
 
@@ -108,9 +108,9 @@ namespace ASEva.Graph
         {
             if (data.HasData() && outline.Length >= 3)
             {
-                if (data is ScatterPointsData spData)
+                if (data is ScatterPointsData)
                 {
-                    var pts = spData.GetPoints();
+                    var pts = (data as ScatterPointsData).GetPoints();
                     int insideCount = 0;
                     foreach (var pt in pts)
                     {
@@ -119,24 +119,21 @@ namespace ASEva.Graph
                     percentage = (double)(pts.Length - insideCount) * 100 / pts.Length;
                     return okPercentage == null ? null : (bool?)(percentage >= okPercentage);
                 }
-                else if (data is MatrixTableData mtData)
+                else if (data is MatrixTableData)
                 {
-                    var vals = mtData.GetValues();
-                    var xRange = mtData.GetXRange();
-                    var yRange = mtData.GetYRange();
+                    var vals = (data as MatrixTableData).GetValues();
+                    var xRange = (data as MatrixTableData).GetXRange();
+                    var yRange = (data as MatrixTableData).GetYRange();
                     double insideSum = 0;
                     double totalSum = 0;
-                    if (xRange != null && yRange != null)
+                    for (int i = 0; i < xRange.Count; i++)
                     {
-                        for (int i = 0; i < xRange.Count; i++)
+                        var x = (float)(((double)i + 0.5) * xRange.Step + xRange.Base);
+                        for (int j = 0; j < yRange.Count; j++)
                         {
-                            var x = (float)(((double)i + 0.5) * xRange.Step + xRange.Base);
-                            for (int j = 0; j < yRange.Count; j++)
-                            {
-                                var y = (float)(((double)j + 0.5) * yRange.Step + yRange.Base);
-                                if (IsPointInPolygon(outline, new FloatPoint(x, y))) insideSum += vals[i, j];
-                                totalSum += vals[i, j];
-                            }
+                            var y = (float)(((double)j + 0.5) * yRange.Step + yRange.Base);
+                            if (IsPointInPolygon(outline, new FloatPoint(x, y))) insideSum += vals[i, j];
+                            totalSum += vals[i, j];
                         }
                     }
                     if (totalSum <= 0)

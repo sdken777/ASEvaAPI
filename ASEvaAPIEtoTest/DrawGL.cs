@@ -23,7 +23,7 @@ namespace ASEvaAPIEtoTest
 
             if (glView.SupportOverlay)
             {
-                var overlay = (layout.AddControl(new OverlayLayout(), true) as OverlayLayout)!;
+                var overlay = layout.AddControl(new OverlayLayout(), true) as OverlayLayout;
                 overlay.AddControl(glView, 0, 0, 0, 0);
                 overlay.AddControl(button, null, 10, null, 10);
             }
@@ -73,8 +73,6 @@ namespace ASEvaAPIEtoTest
 
             glView.GLRender += (o, args) =>
             {
-                if (glViewSizeInfo == null) return;
-
                 var gl = args.GL;
                 var texts = args.TextTasks;
 
@@ -151,12 +149,13 @@ namespace ASEvaAPIEtoTest
                     }
                 }
 
-                texts.Add(new GLTextTask("FPS: " + glView.FPS.ToString("F1"))
+                texts.Add(new GLTextTask
                 {
-                    PosX = 10,
-                    PosY = glViewSizeInfo.LogicalHeight - 10,
-                    Anchor = TextAnchor.BottomLeft,
-                    Red = 255,
+                    text = "FPS: " + glView.FPS.ToString("F1"),
+                    posX = 10,
+                    posY = glViewSizeInfo.LogicalHeight - 10,
+                    anchor = TextAnchor.BottomLeft,
+                    red = 255,
                 });
             };
 
@@ -178,11 +177,11 @@ namespace ASEvaAPIEtoTest
             {
                 if (glView.ContextInfo != null)
                 {
-                    var info = glView.ContextInfo;
+                    var info = glView.ContextInfo.Value;
                     var rowTexts = new List<String>();
-                    rowTexts.Add(t.Format("draw-gl-info-version", info.Version));
-                    rowTexts.Add(t.Format("draw-gl-info-vendor", info.Vendor));
-                    rowTexts.Add(t.Format("draw-gl-info-renderer", info.Renderer));
+                    rowTexts.Add(t.Format("draw-gl-info-version", info.version));
+                    rowTexts.Add(t.Format("draw-gl-info-vendor", info.vendor));
+                    rowTexts.Add(t.Format("draw-gl-info-renderer", info.renderer));
                     rowTexts.Add(t.Format("draw-gl-info-extensions", String.Join('\n', info.ToExtensionList())));
                     App.RunDialog(new InfoDialog(t["draw-gl-info-title"], String.Join('\n', rowTexts)));
                 }
@@ -191,8 +190,8 @@ namespace ASEvaAPIEtoTest
 
         private void loopDrawGL()
         {
-            if (glLabelLoopInterval != null) glLabelLoopInterval.Text = glLoopIntervalStat.Update() + "ms";
-            if (glRenderSwitch) glView?.QueueRender();
+            glLabelLoopInterval.Text = glLoopIntervalStat.Update() + "ms";
+            if (glRenderSwitch) glView.QueueRender();
         }
 
         private class LoopIntervalStat
@@ -212,11 +211,11 @@ namespace ASEvaAPIEtoTest
             private List<int> loopIntervals = new List<int>();
         }
 
-        private GLView? glView;
-        private GLSizeInfo? glViewSizeInfo;
+        private GLView glView;
+        private GLSizeInfo glViewSizeInfo;
         private bool glRenderSwitch = true;
         private int glMouseCount = 0;
-        private Label? glLabelLoopInterval;
+        private Label glLabelLoopInterval;
         private LoopIntervalStat glLoopIntervalStat = new LoopIntervalStat();
     }
 }

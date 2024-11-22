@@ -18,14 +18,17 @@ namespace ASEva.UIGtk
             return VideoFrameSampleImage.FromCommonImage(image);
         }
 
-        public static CommonImage? ConvertFromPlatformImage(object platformImage)
+        public static CommonImage ConvertFromPlatformImage(object platformImage)
         {
-            if (platformImage is VideoFrameSampleImage sampleImage)
+            if (platformImage == null) return null;
+
+            if (platformImage is VideoFrameSampleImage)
             {
+                var sampleImage = platformImage as VideoFrameSampleImage;
                 var image = CommonImage.Create(sampleImage.Width, sampleImage.Height, sampleImage.WithAlpha, false);
                 unsafe
                 {
-                    fixed (byte* srcData = &sampleImage.Data[0], dstData = &image.Data[0])
+                    fixed (byte* srcData = &(sampleImage.Data[0]), dstData = &(image.Data[0]))
                     {
                         if (sampleImage.BgrInverted)
                         {
@@ -68,15 +71,16 @@ namespace ASEva.UIGtk
                 }
                 return image;
             }
-            else if (platformImage is Gdk.Pixbuf pixbuf)
+            else if (platformImage is Gdk.Pixbuf)
             {
+                var pixbuf = platformImage as Gdk.Pixbuf;
                 if (pixbuf.HasAlpha)
                 {
                     var image = CommonImage.Create(pixbuf.Width, pixbuf.Height, true, false);
                     unsafe
                     {
                         byte* srcData = (byte*)pixbuf.Pixels;
-                        fixed (byte* dstData = &image.Data[0])
+                        fixed (byte* dstData = &(image.Data[0]))
                         {
                             for (int v = 0; v < image.Height; v++)
                             {
@@ -100,7 +104,7 @@ namespace ASEva.UIGtk
                     unsafe
                     {
                         byte* srcData = (byte*)pixbuf.Pixels;
-                        fixed (byte* dstData = &image.Data[0])
+                        fixed (byte* dstData = &(image.Data[0]))
                         {
                             for (int v = 0; v < image.Height; v++)
                             {

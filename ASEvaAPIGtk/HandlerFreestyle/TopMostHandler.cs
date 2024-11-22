@@ -8,10 +8,12 @@ namespace ASEva.UIGtk
     {
         public bool IsTopMost(Control control)
         {
-            if (control.ControlObject is Gtk.Widget widget)
+            if (control.ControlObject is Gtk.Widget)
             {
-                if (widget.Toplevel is Gtk.Window toplevelWindow)
+                var widget = control.ControlObject as Gtk.Widget;
+                if (widget.Toplevel is Gtk.Window)
                 {
+                    var toplevelWindow = widget.Toplevel as Gtk.Window;
                     return toplevelWindow.IsActive;
                 }
             }

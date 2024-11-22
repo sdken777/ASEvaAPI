@@ -21,16 +21,17 @@ namespace ASEva.UIGtk
     #pragma warning disable CS0612, CS0649
     class FlowLayoutBackendGtk : Gtk.Box, FlowLayoutBackend
     {
-        [UI] Gtk.ScrolledWindow? mainScroll;
-        [UI] Gtk.Box? mainBox;
+        [UI] Gtk.ScrolledWindow mainScroll;
+        [UI] Gtk.Box mainBox;
 
-        public FlowLayoutBackendGtk(FlowLayoutCallback callback) : this(new Gtk.Builder("FlowLayoutBackendGtk.glade"), callback)
-        {}
+        public FlowLayoutBackendGtk(FlowLayoutCallback callback) : this(new Gtk.Builder("FlowLayoutBackendGtk.glade"))
+        {
+            this.callback = callback;
+        }
 
-        private FlowLayoutBackendGtk(Gtk.Builder builder, FlowLayoutCallback callback) : base(builder.GetRawOwnedObject("FlowLayoutBackendGtk"))
+        private FlowLayoutBackendGtk(Gtk.Builder builder) : base(builder.GetRawOwnedObject("FlowLayoutBackendGtk"))
         {
             builder.Autoconnect(this);
-            this.callback = callback;
         }
 
         public void AddControl(Control control, int logicalHeight)
@@ -45,9 +46,9 @@ namespace ASEva.UIGtk
             container.HeightRequest = logicalHeight + 2;
             container.Add(viewPort);
 
-            mainBox?.PackStart(container, false, false, 0);
+            mainBox.PackStart(container, false, false, 0);
 
-            ctxs.Add(new ControlContext(container, control) { Visible = true });
+            ctxs.Add(new ControlContext { EtoControl = control, Container = container, Visible = true });
             control.MouseDown += (obj, args) =>
             {
                 callback.OnControlClicked(ctxs.FindIndex(c => c.EtoControl.Equals(obj)));
@@ -66,7 +67,7 @@ namespace ASEva.UIGtk
             container.HeightRequest = logicalHeight + 2;
             container.Add(viewPort);
 
-            mainBox?.PackStart(container, false, false, 0);
+            mainBox.PackStart(container, false, false, 0);
 
             if (index < ctxs.Count)
             {
@@ -75,10 +76,10 @@ namespace ASEva.UIGtk
                 {
                     if (ctxs[i].Visible) position++;
                 }
-                mainBox?.ReorderChild(container, position);
+                mainBox.ReorderChild(container, position);
             }
 
-            ctxs.Insert(index, new ControlContext(container, control) { Visible = true });
+            ctxs.Insert(index, new ControlContext { EtoControl = control, Container = container, Visible = true });
             control.MouseDown += (obj, args) =>
             {
                 callback.OnControlClicked(ctxs.FindIndex(c => c.EtoControl.Equals(obj)));
@@ -87,14 +88,14 @@ namespace ASEva.UIGtk
 
         public void RemoveAllControls()
         {
-            var children = mainBox?.Children;
-            if (children != null) foreach (var child in children) mainBox?.Remove(child);
+            var children = mainBox.Children;
+            foreach (var child in children) mainBox.Remove(child);
             ctxs.Clear();
         }
 
         public void RemoveControl(int index)
         {
-            if (ctxs[index].Visible) mainBox?.Remove(ctxs[index].Container);
+            if (ctxs[index].Visible) mainBox.Remove(ctxs[index].Container);
             ctxs.RemoveAt(index);
         }
 
@@ -115,7 +116,7 @@ namespace ASEva.UIGtk
 
             if (visible)
             {
-                mainBox?.PackStart(ctxs[index].Container, false, false, 0);
+                mainBox.PackStart(ctxs[index].Container, false, false, 0);
                 if (index < ctxs.Count)
                 {
                     int position = 0;
@@ -123,12 +124,12 @@ namespace ASEva.UIGtk
                     {
                         if (ctxs[i].Visible) position++;
                     }
-                    mainBox?.ReorderChild(ctxs[index].Container, position);
+                    mainBox.ReorderChild(ctxs[index].Container, position);
                 }
             }
             else
             {
-                mainBox?.Remove(ctxs[index].Container);
+                mainBox.Remove(ctxs[index].Container);
             }
 
             ctxs[index].Visible = visible;
@@ -139,8 +140,8 @@ namespace ASEva.UIGtk
             var controlY = ctxs[index].Container.Allocation.Y;
             if (controlY > 0)
             {
-                var adjustment = (mainScroll?.VScrollbar as Gtk.Scrollbar)?.Adjustment;
-                if (adjustment != null) adjustment.Value = Math.Min(controlY, adjustment.Upper);
+                var adjustment = (mainScroll.VScrollbar as Gtk.Scrollbar).Adjustment;
+                adjustment.Value = Math.Min(controlY, adjustment.Upper);
                 return;
             }
 
@@ -148,21 +149,21 @@ namespace ASEva.UIGtk
             {
                 var controlY = ctxs[index].Container.Allocation.Y;
                 if (controlY <= 0) return true;
-                var adjustment = (mainScroll?.VScrollbar as Gtk.Scrollbar)?.Adjustment;
-                if (adjustment != null) adjustment.Value = Math.Min(controlY, adjustment.Upper);
+                var adjustment = (mainScroll.VScrollbar as Gtk.Scrollbar).Adjustment;
+                adjustment.Value = Math.Min(controlY, adjustment.Upper);
                 return false;
             });
         }
 
-        private class ControlContext(Gtk.ScrolledWindow container, Control etoControl)
+        private class ControlContext
         {
-            public Gtk.ScrolledWindow Container { get; set; } = container;
-            public Control EtoControl { get; set; } = etoControl;
+            public Gtk.ScrolledWindow Container { get; set; }
+            public Control EtoControl { get; set; }
             public bool Visible { get; set; }
         }
 
         private FlowLayoutCallback callback;
-        private List<ControlContext> ctxs = [];
-        private Gtk.ScrolledWindow? selectedContainer = null;
+        private List<ControlContext> ctxs = new List<ControlContext>();
+        private Gtk.ScrolledWindow selectedContainer = null;
     }
 }

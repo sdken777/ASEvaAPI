@@ -18,7 +18,7 @@ namespace ASEva.UIEto
             model.TitleFontSize = model.TitleFontSize * 0.7;
             model.SubtitleFontSize = model.SubtitleFontSize * 0.8;
             model.Padding = new OxyThickness(0, 4, 4, 0);
-            model.MouseDown += delegate { click?.Set(); };
+            model.MouseDown += delegate { click.Set(); };
             SetModel(model);
         }
 
@@ -53,6 +53,6 @@ namespace ASEva.UIEto
         protected PlotModel model = new PlotModel();
         protected bool chinese = AgencyLocal.GetAppLanguage() == Language.Chinese;
 
-        private ManualResetEventSlim? click;
+        private ManualResetEventSlim click;
     }
 }

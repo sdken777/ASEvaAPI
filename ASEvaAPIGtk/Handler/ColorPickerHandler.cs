@@ -17,9 +17,9 @@ namespace ASEva.UIGtk
 			Control.Clicked += button_Clicked;
 		}
 
-		public event EventHandler? ColorSet;
+		public event EventHandler ColorSet;
 
-        private void button_Clicked(object? sender, EventArgs e)
+        private void button_Clicked(object sender, EventArgs e)
         {
             var dialog = new Gtk.ColorChooserDialog("", DialogHelper.TopWindow);
 			dialog.UseAlpha = AllowAlpha;
@@ -30,7 +30,7 @@ namespace ASEva.UIGtk
 			if (res == (int)Gtk.ResponseType.Ok)
 			{
 				(Control.Child as Gtk.Label).SetBackground(color);
-				if (ColorSet != null) ColorSet(this, EventArgs.Empty);
+				if (ColorSet != null) ColorSet(this, null);
 			}
         }
 
@@ -58,7 +58,7 @@ namespace ASEva.UIGtk
 		{
 			new ColorPickerHandler Handler { get { return (ColorPickerHandler)base.Handler; } }
 
-			public void HandleSelectedColorChanged(object? sender, EventArgs e)
+			public void HandleSelectedColorChanged(object sender, EventArgs e)
 			{
 				Handler?.Callback.OnColorChanged(Handler.Widget, EventArgs.Empty);
 			}

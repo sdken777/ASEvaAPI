@@ -20,6 +20,7 @@ namespace ASEva.UIGtk
 
         public static void SetAttribute(this ListStore model, int rowIndex, int attributeIndex, String value)
         {
+            if (value == null) return;
             if (rowIndex < 0 || rowIndex >= model.IterNChildren()) return;
 
             TreeIter iter;
@@ -35,7 +36,8 @@ namespace ASEva.UIGtk
 
         public static void SetAttribute(this ListStore model, String rowPath, int attributeIndex, String value)
         {
-            if (rowPath.Length == 0) return;
+            if (value == null) return;
+            if (String.IsNullOrEmpty(rowPath)) return;
 
             TreeIter iter;
             if (!model.GetIter(out iter, new TreePath(rowPath))) return;
@@ -43,7 +45,7 @@ namespace ASEva.UIGtk
             model.SetValue(iter, attributeIndex, value);
         }
 
-        public static String? GetAttribute(this ListStore model, int rowIndex, int attributeIndex)
+        public static String GetAttribute(this ListStore model, int rowIndex, int attributeIndex)
         {
             if (rowIndex < 0 || rowIndex >= model.IterNChildren()) return null;
 
@@ -61,9 +63,9 @@ namespace ASEva.UIGtk
             return obj as String;
         }
 
-        public static String? GetAttribute(this ListStore model, String rowPath, int attributeIndex)
+        public static String GetAttribute(this ListStore model, String rowPath, int attributeIndex)
         {
-            if (rowPath.Length == 0) return null;
+            if (String.IsNullOrEmpty(rowPath)) return null;
 
             TreeIter iter;
             if (!model.GetIter(out iter, new TreePath(rowPath))) return null;

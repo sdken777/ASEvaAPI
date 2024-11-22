@@ -13,14 +13,15 @@ namespace ASEva.UICoreWF
 
         public bool IsControlValid(object control)
         {
+            if (control == null) return false;
             if (control is Eto.Forms.Control) return true;
             if (control is System.Windows.Forms.Control) return true;
             return false;
         }
 
-        public nint CreateContainer(nint parent, object control, out object? context)
+        public nint CreateContainer(nint parent, object control, out object context)
         {
-            var winformControl = control is System.Windows.Forms.Control corewfControl ? corewfControl :
+            var winformControl = control is System.Windows.Forms.Control ? control as System.Windows.Forms.Control :
                 Eto.Forms.WinFormsHelpers.ToNative(control as Eto.Forms.Control, true);
             winformControl.Parent = System.Windows.Forms.Control.FromHandle(parent);
             context = winformControl;
@@ -51,7 +52,7 @@ namespace ASEva.UICoreWF
             return true;
         }
 
-        public void UseContainer(nint container, object control, out object? context)
+        public void UseContainer(nint container, object control, out object context)
         {
             context = null;
         }

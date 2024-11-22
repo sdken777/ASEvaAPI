@@ -10,15 +10,10 @@ namespace ASEva.UIGtk
     #pragma warning disable CS0612, CS0649
     partial class AppDialogDefault : Dialog
     {
-        [UI] [SO] Overlay? overlay;
+        [UI] [SO] Overlay overlay;
 
-        public AppDialogDefault(Widget widget, DialogPanel dialogPanel) : this(new Builder("AppDialogDefault.glade"), widget, dialogPanel)
-        {}
-
-        private AppDialogDefault(Builder builder, Widget widget, DialogPanel dialogPanel) : base(builder.GetRawOwnedObject("AppDialogDefault"))
+        public AppDialogDefault(Widget widget, DialogPanel dialogPanel) : this(new Builder("AppDialogDefault.glade"))
         {
-            builder.Autoconnect(this);
-
             DefaultResponse = ResponseType.Cancel;
             ActionArea.Hide();
 
@@ -34,7 +29,7 @@ namespace ASEva.UIGtk
             if (icon != null)
             {
                 var iconSet = icon.ControlObject as IconSet;
-                var pixbuf = iconSet?.RenderIconPixbuf(StyleContext, IconSize.Dialog);
+                var pixbuf = iconSet.RenderIconPixbuf(StyleContext, IconSize.Dialog);
                 if (pixbuf != null) Icon = pixbuf;
             }
 
@@ -44,12 +39,9 @@ namespace ASEva.UIGtk
             widget.Halign = Align.Start;
             widget.Valign = Align.Start;
 
-            if (overlay != null)
-            {
-                overlay.WidthRequest = dialogPanel.DefaultSize.Width;
-                overlay.HeightRequest = dialogPanel.DefaultSize.Height;
-                overlay.AddOverlay(widget);
-            }
+            overlay.WidthRequest = dialogPanel.DefaultSize.Width;
+            overlay.HeightRequest = dialogPanel.DefaultSize.Height;
+            overlay.AddOverlay(widget);
 
             Shown += OnDialogShown;
             SizeAllocated += OnDialogSizeAllocated;
@@ -57,28 +49,31 @@ namespace ASEva.UIGtk
             dialogPanel.OnDialogClose += OnDialogClose;
         }
 
-        private void OnDialogShown(object? sender, EventArgs e)
+        private AppDialogDefault(Builder builder) : base(builder.GetRawOwnedObject("AppDialogDefault"))
         {
-            if (overlay == null) return;
+            builder.Autoconnect(this);
+        }
+
+        private void OnDialogShown(object sender, EventArgs e)
+        {
             overlay.WidthRequest = panel.MinSize.Width;
             overlay.HeightRequest = panel.MinSize.Height;
         }
 
-        private void OnDialogSizeAllocated(object? o, SizeAllocatedArgs args)
+        private void OnDialogSizeAllocated(object o, SizeAllocatedArgs args)
         {
-            if (overlay == null) return;
             panelWidget.WidthRequest = overlay.AllocatedWidth;
             panelWidget.HeightRequest = overlay.AllocatedHeight;
         }
 
-        private void OnDialogClose(object? sender, EventArgs e)
+        private void OnDialogClose(object sender, EventArgs e)
         {
             panel.OnClosing();
             panel.CloseRecursively();
             Hide();
         }
 
-        private void OnDialogResponse(object? o, ResponseArgs args)
+        private void OnDialogResponse(object o, ResponseArgs args)
         {
             panel.OnClosing();
             panel.CloseRecursively();

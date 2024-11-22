@@ -4,7 +4,6 @@ using ASEva.Utility;
 using ASEva.UIGtk;
 using ASEva.Graph;
 using UI = Gtk.Builder.ObjectAttribute;
-using WebKit;
 
 namespace ASEva.UIGtk
 {
@@ -20,29 +19,29 @@ namespace ASEva.UIGtk
     /// </summary>
     public class LabelTableGraph : BaseGraph
     {
-        [UI] Label? labelTitle, labelValidation;
-        [UI] Overlay? overlay;
-        [UI] DrawingArea? draw;
-        [UI] EventBox? eventBox;
+        [UI] Label labelTitle, labelValidation;
+        [UI] Overlay overlay;
+        [UI] DrawingArea draw;
+        [UI] EventBox eventBox;
 
         EventBoxHelper eventBoxHelper = new EventBoxHelper();
-        DrawSwap? drawSwap = null;
+        DrawSwap drawSwap;
 
         public LabelTableGraph() : this(new Builder("LabelTableGraph.glade"))
-        {}
+        {
+            this.SetBackColor(ColorRGBA.White);
+
+            overlay.AddOverlay(labelValidation);
+            eventBoxHelper.Add(eventBox);
+            drawSwap = new DrawSwap(draw, "ASEva.UIGtk.LabelTableGraph");
+
+            eventBoxHelper.LeftDown += eventBox_LeftDown;
+            drawSwap.Paint += draw_Paint;
+        }
 
         private LabelTableGraph(Builder builder) : base(builder.GetRawOwnedObject("LabelTableGraph"))
         {
             builder.Autoconnect(this);
-
-            this.SetBackColor(ColorRGBA.White);
-
-            overlay?.AddOverlay(labelValidation);
-            if (eventBox != null) eventBoxHelper.Add(eventBox);
-            if (draw != null) drawSwap = new DrawSwap(draw, "ASEva.UIGtk.LabelTableGraph");
-
-            eventBoxHelper.LeftDown += eventBox_LeftDown;
-            if (drawSwap != null) drawSwap.Paint += draw_Paint;
         }
 
         /// \~English
@@ -55,7 +54,7 @@ namespace ASEva.UIGtk
         /// </summary>
         public override void Close()
 		{
-			drawSwap?.Close();
+			drawSwap.Close();
 		}
 
         public override void UpdateUIWithData()
@@ -63,47 +62,41 @@ namespace ASEva.UIGtk
             if (Data == null || !(Data is LabelTableData)) return;
 
             // 数据显示
-            drawSwap?.Refresh();
+            drawSwap.Refresh();
 
             // 标题显示
-            if (labelTitle != null) labelTitle.Text = Data.Definition.MainTitle;
-
+            labelTitle.Text = Data == null ? "" : Data.Definition.MainTitle;
             if (!Data.HasData())
             {
-                if (labelValidation != null)
-                {
-                    labelValidation.SetForeColor(ColorRGBA.Black);
-                    labelValidation.Text = "No Data.";
-                }
+                labelValidation.SetForeColor(ColorRGBA.Black);
+                labelValidation.Text = "No Data.";
                 return;
             }
-            
-            if (labelValidation != null) labelValidation.Text = "";
+            else labelValidation.Text = "";
         }
 
         private ColorRGBA getColorByValue(double upper, double lower, double value)
         {
             var color = new ColorRGBA();
-            ColorRGBA[] colors =
-            [
-                new ColorRGBA(64, 192, 32),
-                new ColorRGBA(72, 184, 32),
-                new ColorRGBA(80, 176, 32),
-                new ColorRGBA(88, 168, 32),
-                new ColorRGBA(96, 160, 32),
-                new ColorRGBA(104, 152, 32),
-                new ColorRGBA(112, 144, 32),
-                new ColorRGBA(120, 136, 32),
-                new ColorRGBA(128, 128, 32),
-                new ColorRGBA(136, 120, 32),
-                new ColorRGBA(144, 112, 32),
-                new ColorRGBA(152, 104, 32),
-                new ColorRGBA(160, 96, 32),
-                new ColorRGBA(168, 88, 32),
-                new ColorRGBA(176, 80, 32),
-                new ColorRGBA(184, 72, 32),
-                new ColorRGBA(192, 64, 32),
-            ];
+            ColorRGBA[] colors = new ColorRGBA[17];
+            colors[0] = new ColorRGBA(64, 192, 32);
+            colors[1] = new ColorRGBA(72, 184, 32);
+            colors[2] = new ColorRGBA(80, 176, 32);
+            colors[3] = new ColorRGBA(88, 168, 32);
+            colors[4] = new ColorRGBA(96, 160, 32);
+            colors[5] = new ColorRGBA(104, 152, 32);
+            colors[6] = new ColorRGBA(112, 144, 32);
+            colors[7] = new ColorRGBA(120, 136, 32);
+            colors[8] = new ColorRGBA(128, 128, 32);
+            colors[9] = new ColorRGBA(136, 120, 32);
+            colors[10] = new ColorRGBA(144, 112, 32);
+            colors[11] = new ColorRGBA(152, 104, 32);
+            colors[12] = new ColorRGBA(160, 96, 32);
+            colors[13] = new ColorRGBA(168, 88, 32);
+            colors[14] = new ColorRGBA(176, 80, 32);
+            colors[15] = new ColorRGBA(184, 72, 32);
+            colors[16] = new ColorRGBA(192, 64, 32);
+
             if (value <= lower)
             {
                 color =  colors[0];
@@ -137,9 +130,6 @@ namespace ASEva.UIGtk
 
         private void draw_Paint(DrawSwap swap, Cairo.Context cc)
         {
-            var D = Data as LabelTableData;
-            if (D == null || draw == null) return;
-
             try
             {
                 cc.LineWidth = 1;
@@ -151,6 +141,7 @@ namespace ASEva.UIGtk
                 var height = draw.AllocatedHeight - 2;
                 var originPoint = new FloatPoint((float)width / 4, (float)height / 3 * 2);
 
+                var D = Data as LabelTableData;
                 var xTitle = D.GetXTitle();
                 var yTitle = D.GetYTitle();
                 var xLabels = D.GetXLabels();

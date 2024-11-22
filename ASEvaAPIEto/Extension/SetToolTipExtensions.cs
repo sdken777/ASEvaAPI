@@ -13,7 +13,7 @@ namespace ASEva.UIEto
     /// </summary>
     public static class SetToolTipExtensions
     {
-        public static void SetToolTip(this Control control, String? tooltip)
+        public static void SetToolTip(this Control control, String tooltip)
         {
             if (String.IsNullOrWhiteSpace(tooltip)) tooltip = null;
             if (tooltip == null)
@@ -30,9 +30,9 @@ namespace ASEva.UIEto
 
         public interface SetToolTipHandler
         {
-            void SetToolTip(Control control, String? tooltip);
+            void SetToolTip(Control control, String tooltip);
         }
 
-        public static SetToolTipHandler? Handler { private get; set; }
+        public static SetToolTipHandler Handler { private get; set; }
     }
 }

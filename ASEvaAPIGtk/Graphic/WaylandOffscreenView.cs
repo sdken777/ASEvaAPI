@@ -86,7 +86,7 @@ namespace ASEva.UIGtk
             rendererStatusOK = false;
         }
 
-        private void onRealized(object? sender, EventArgs e)
+        private void onRealized(object sender, EventArgs e)
         {
             IntPtr wlDisplay = Linux.gdk_wayland_display_get_wl_display(Display.Handle);
             if (wlDisplay == IntPtr.Zero) return;
@@ -139,7 +139,7 @@ namespace ASEva.UIGtk
             bool contextCreated = false;
             if (!useLegacyAPI)
             {
-                var glCoreVersions = new[]
+                var glCoreVersions = new Version[]
                 {
                     new Version(4, 6),
                     new Version(3, 3)
@@ -147,13 +147,13 @@ namespace ASEva.UIGtk
 
                 foreach (var ver in glCoreVersions)
                 {
-                    attribs =
-                    [
+                    attribs = new int[]
+                    {
                         0x3098/*EGL_CONTEXT_MAJOR_VERSION*/, ver.Major,
                         0x30FB/*EGL_CONTEXT_MINOR_VERSION*/, ver.Minor,
                         0x30FD/*EGL_CONTEXT_OPENGL_PROFILE_MASK*/, 1/*EGL_CONTEXT_OPENGL_CORE_PROFILE_BIT*/,
                         0x3038/*EGL_NONE*/
-                    ];
+                    };
                     unsafe
                     {
                         fixed (int *attribsPtr = &(attribs[0]))
@@ -178,7 +178,12 @@ namespace ASEva.UIGtk
 
             try
             {
-                var ctxInfo = new GLContextInfo(gl.Version, gl.Vendor, gl.Renderer, String.IsNullOrEmpty(gl.Extensions) ? String.Join(' ', gl.ExtensionList) : gl.Extensions);
+                var ctxInfo = new GLContextInfo();
+                ctxInfo.version = gl.Version;
+                ctxInfo.vendor = gl.Vendor;
+                ctxInfo.renderer = gl.Renderer;
+                ctxInfo.extensions = gl.Extensions;
+                if (String.IsNullOrEmpty(ctxInfo.extensions)) ctxInfo.extensions = String.Join(' ', gl.ExtensionList);
 
                 size = new GLSizeInfo(AllocatedWidth, AllocatedHeight, AllocatedWidth * ScaleFactor, AllocatedHeight * ScaleFactor, ScaleFactor, (float)AllocatedWidth / AllocatedHeight);
 
@@ -264,17 +269,15 @@ namespace ASEva.UIGtk
             rendererStatusOK = true;
         }
 
-        private void onDraw(object? o, DrawnArgs args)
+        private void onDraw(object o, DrawnArgs args)
         {
             if (!rendererStatusOK) return;
 
-            if (colorBuffer == null || depthBuffer == null || frameBuffer == null || cairoSurface == null || hostBuffer == null) return;
-
-            var moduleID = callback.OnGetModuleID();
+            var moduleID = callback == null ? null : callback.OnGetModuleID();
             DrawBeat.CallbackBegin(this, moduleID);
 
             var curSize = new GLSizeInfo(AllocatedWidth, AllocatedHeight, AllocatedWidth * ScaleFactor, AllocatedHeight * ScaleFactor, ScaleFactor, (float)AllocatedWidth / AllocatedHeight);
-            bool resized = size == null || curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
+            bool resized = curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
             size = curSize;
 
             IntPtr wlDisplay = Linux.gdk_wayland_display_get_wl_display(Display.Handle);
@@ -336,7 +339,7 @@ namespace ASEva.UIGtk
                 unsafe
                 {
                     byte *surfaceData = (byte*)cairoSurface.DataPtr;
-                    fixed (byte *srcData = &hostBuffer[0])
+                    fixed (byte *srcData = &(hostBuffer[0]))
                     {
                         for (int v = 0; v < cairoHeight; v++)
                         {
@@ -387,20 +390,20 @@ namespace ASEva.UIGtk
             }
         }
 
-        private OpenGL gl;
+        private OpenGL gl = null;
         private GLCallback callback;
         private GLAntialias antialias;
         private bool useLegacyAPI;
         private IntPtr context = IntPtr.Zero;
         private IntPtr wlEglWindow = IntPtr.Zero;
         private IntPtr eglSurface = IntPtr.Zero;
-        private uint[]? frameBuffer = null;
-        private uint[]? colorBuffer = null;
-        private uint[]? depthBuffer = null;
-        private byte[]? hostBuffer = null;
-        private Cairo.ImageSurface? cairoSurface = null;
+        private uint[] frameBuffer = null;
+        private uint[] colorBuffer = null;
+        private uint[] depthBuffer = null;
+        private byte[] hostBuffer = null;
+        private Cairo.ImageSurface cairoSurface = null;
         private bool rendererStatusOK = false;
-        private GLSizeInfo? size = null;
+        private GLSizeInfo size = null;
         private bool drawQueued = false;
     }
 }

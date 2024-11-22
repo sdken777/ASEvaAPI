@@ -6,7 +6,6 @@
     <Version>0.0.0.0</Version>
     <DefineConstants>OSX;Mac64;MONOMAC</DefineConstants>
     <NoWarn>1701;1702;1591</NoWarn>
-    <Nullable>Enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 

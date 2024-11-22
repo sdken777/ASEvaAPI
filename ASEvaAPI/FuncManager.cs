@@ -13,21 +13,21 @@ namespace ASEva
     /// </summary>
     public class FuncManager
     {
-        public static bool Register(String name, Func<object?, object?> func)
+        public static bool Register(String name, Func<object, object> func)
         {
-            if (String.IsNullOrEmpty(name) || table.ContainsKey(name)) return false;
+            if (String.IsNullOrEmpty(name) || func == null || table.ContainsKey(name)) return false;
             table[name] = func;
             return true;
         }
 
-        public static object? Run(String name, object? input = null)
+        public static object Run(String name, object input = null)
         {
-            object? output = null;
+            object output = null;
             if (Run(name, input, out output)) return output;
             else return null;
         }
 
-        public static bool Run(String name, object? input, out object? output)
+        public static bool Run(String name, object input, out object output)
         {
             output = null;
             if (String.IsNullOrEmpty(name) || !table.ContainsKey(name)) return false;
@@ -35,6 +35,6 @@ namespace ASEva
             return true;
         }
 
-        private static Dictionary<String, Func<object?, object?>> table = [];
+        private static Dictionary<String, Func<object, object>> table = new Dictionary<string, Func<object, object>>();
     }
 }

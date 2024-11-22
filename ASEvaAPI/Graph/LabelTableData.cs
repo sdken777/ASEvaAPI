@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection.Emit;
 
 namespace ASEva.Graph
 {
@@ -109,13 +108,13 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=3.7.0) Label table graph data
+    /// (api:app=3.0.0) Label table graph data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.0) 标签表数据
+    /// (api:app=3.0.0) 标签表数据
     /// </summary>
-    public class LabelTableData(GraphDefinition def) : GraphData(def)
+    public class LabelTableData : GraphData
     {
         /// \~English
         /// <summary>
@@ -145,7 +144,9 @@ namespace ASEva.Graph
         /// <returns>图表定义对象</returns>
         public static GraphDefinition CreateDefinition(String title, String xTitle, String yTitle, LabelTableMode mode, String[] xLabels, String[] yLabels, LabelTableValueDirection valueDirection, double defaultValue = 0)
         {
-            var def = new GraphDefinition(GraphType.LabelTable, title);
+            var def = new GraphDefinition();
+            def.Type = GraphType.LabelTable;
+            def.MainTitle = title;
             def.Config.Add(mode.ToString()); // 0
             def.Config.Add(xLabels.Length.ToString()); // 1
             def.Config.Add(yLabels.Length.ToString()); // 2
@@ -256,10 +257,11 @@ namespace ASEva.Graph
         {
             int count = 0;
             Int32.TryParse(Definition.Config[1], out count);
-            var output = new String[count].Populate((i) =>
+            var output = new String[count];
+            for (int i = 0; i < count; i++)
             {
-                return Definition.Config[7 + i];
-            });
+                output[i] = Definition.Config[7 + i];
+            }
             return output;
         }
 
@@ -278,10 +280,11 @@ namespace ASEva.Graph
             int xcount = 0, ycount = 0;
             Int32.TryParse(Definition.Config[1], out xcount);
             Int32.TryParse(Definition.Config[2], out ycount);
-            var output = new String[ycount].Populate((i) =>
+            var output = new String[ycount];
+            for (int i = 0; i < ycount; i++)
             {
-                return Definition.Config[7 + xcount + i];
-            });
+                output[i] = Definition.Config[7 + xcount + i];
+            }
             return output;
         }
 

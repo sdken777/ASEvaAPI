@@ -17,10 +17,12 @@ namespace ASEva.UIGtk
     /// </summary>
     public class TimelineIndicator : Box
     {
-        [UI] DrawingArea? draw;
+        [UI] DrawingArea draw;
 
         public TimelineIndicator() : this(new Builder("TimelineIndicator.glade"))
-        {}
+        {
+            draw.Drawn += draw_Drawn;
+        }
 
         public double? Lower
         {
@@ -28,12 +30,9 @@ namespace ASEva.UIGtk
             set
             {
                 lower = value;
-                if (draw != null)
-                {
-                    DrawBeat.CallerBegin(draw);
-                    draw.QueueDraw();
-                    DrawBeat.CallerEnd(draw);
-                }
+                DrawBeat.CallerBegin(draw);
+                draw.QueueDraw();
+                DrawBeat.CallerEnd(draw);
             }
         }
 
@@ -43,12 +42,9 @@ namespace ASEva.UIGtk
             set
             {
                 upper = value;
-                if (draw != null)
-                {
-                    DrawBeat.CallerBegin(draw);
-                    draw.QueueDraw();
-                    DrawBeat.CallerEnd(draw);
-                }
+                DrawBeat.CallerBegin(draw);
+                draw.QueueDraw();
+                DrawBeat.CallerEnd(draw);
             }
         }
 
@@ -58,26 +54,19 @@ namespace ASEva.UIGtk
             set
             {
                 val = value;
-                if (draw != null)
-                {
-                    DrawBeat.CallerBegin(draw);
-                    draw.QueueDraw();
-                    DrawBeat.CallerEnd(draw);
-                }
+                DrawBeat.CallerBegin(draw);
+                draw.QueueDraw();
+                DrawBeat.CallerEnd(draw);
             }
         }
 
         private TimelineIndicator(Builder builder) : base(builder.GetRawOwnedObject("TimelineIndicator"))
         {
             builder.Autoconnect(this);
-
-            if (draw != null) draw.Drawn += draw_Drawn;
         }
 
         private void draw_Drawn(object o, DrawnArgs args)
         {
-            if (draw == null) return;
-            
             DrawBeat.CallbackBegin(draw, "ASEva.UIGtk.TimelineIndicator");
 
             var cc = args.Cr;

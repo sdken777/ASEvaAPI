@@ -13,7 +13,6 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>ASEvaAPIAvaloniaTest</RootNamespace>
     <AssemblyName>ASEvaAPIAvaloniaTest</AssemblyName>
-    <Nullable>Enable</Nullable>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 

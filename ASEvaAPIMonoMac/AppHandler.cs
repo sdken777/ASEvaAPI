@@ -35,7 +35,7 @@ namespace ASEva.UIMonoMac
 
     class AppHandlerMonoMac : AppHandler
     {
-        public Application? CreateApp(bool attach, out String? uiBackend, out String webViewBackend)
+        public Application CreateApp(bool attach, out String uiBackend, out String webViewBackend)
         {
             var platform = new global::Eto.Mac.Platform();
             platform.Add<WebView.IHandler>(() => new WKWebViewHandler());
@@ -49,10 +49,10 @@ namespace ASEva.UIMonoMac
             // CHECK: 支持无bundle运行
             if (!InBundle)
             {
-                var nsApp = (app.ControlObject as NSApplication)!;
+                var nsApp = app.ControlObject as NSApplication;
                 nsApp.ActivationPolicy = NSApplicationActivationPolicy.Regular;
 
-                String? icnsName = null;
+                String icnsName = null;
                 var targetLib = Assembly.GetEntryAssembly();
                 if (targetLib != null)
                 {
@@ -62,7 +62,7 @@ namespace ASEva.UIMonoMac
                 }
                 if (icnsName != null)
                 {
-                    var instream = targetLib?.GetManifestResourceStream(icnsName);
+                    var instream = targetLib.GetManifestResourceStream(icnsName);
                     if (instream != null && instream.Length > 0)
                     {
                         var data = new byte[instream.Length];
@@ -75,7 +75,7 @@ namespace ASEva.UIMonoMac
             }
 
             // CHECK: 点击主窗口关闭按钮后令应用程序退出
-            var appHandler = (app.Handler as Eto.Mac.Forms.ApplicationHandler)!;
+            var appHandler = app.Handler as Eto.Mac.Forms.ApplicationHandler;
             appHandler.AppDelegate = new AppDelegate();
 
             SetContentExtensions.WindowInitializer = new InitWindowHandlerMonoMac();
@@ -126,33 +126,33 @@ namespace ASEva.UIMonoMac
                 EtoBundle.Init();
                 // EtoFontManager.Install(); // 会出现"A shared NSFontManager instance already exists"
 
-                var nsApp = (application.ControlObject as NSApplication)!;
-                var nsWindow = (window.ControlObject as NSWindow)!;
+                var nsApp = application.ControlObject as NSApplication;
+                var nsWindow = window.ControlObject as NSWindow;
                 nsWindow.WillClose += delegate { nsApp.AbortModal(); };
                 window.Visible = true;
                 nsApp.RunModalForWindow(nsWindow);
             }
         }
 
-        public Control? ConvertControlToEto(object platformControl)
+        public Control ConvertControlToEto(object platformControl)
         {
             if (platformControl == null) return null;
             if (platformControl is NSView) return (platformControl as NSView).ToEto();
             else return null;
         }
 
-        public object? ConvertControlToPlatform(Control etoControl)
+        public object ConvertControlToPlatform(Control etoControl)
         {
             if (etoControl == null) return null;
             return etoControl.ToNative(true);
         }
 
-        public WindowPanel? ConvertWindowPanelToEto(object platformWindowPanel)
+        public WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
         {
             return null;
         }
 
-        public ConfigPanel? ConvertConfigPanelToEto(object platformConfigPanel)
+        public ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
         {
             return null;
         }
@@ -165,8 +165,8 @@ namespace ASEva.UIMonoMac
         public Dictionary<string, string> GetThirdPartyNotices()
         {
             var table = new Dictionary<string, string>();
-            table["MonoMac"] = ResourceLoader.LoadText("MonoMac.LICENSE") ?? "";
-            table["The OpenGL Extension Wrangler Library"] = ResourceLoader.LoadText("GLEW.LICENSE") ?? "";
+            table["MonoMac"] = ResourceLoader.LoadText("MonoMac.LICENSE");
+            table["The OpenGL Extension Wrangler Library"] = ResourceLoader.LoadText("GLEW.LICENSE");
             return table;
         }
 

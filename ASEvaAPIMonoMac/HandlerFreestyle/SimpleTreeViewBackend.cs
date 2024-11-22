@@ -23,7 +23,9 @@ namespace ASEva.UIMonoMac
     		textColumn.Editable = false;
     		textColumn.DataCell = textCell;
 
-            var dataSource = new SimpleTreeViewDataSource(textCell.TextColor, textCell.BackgroundColor);
+            var dataSource = new SimpleTreeViewDataSource();
+            dataSource.DefaultTextColor = textCell.TextColor;
+            dataSource.DefaultBackColor = textCell.BackgroundColor;
 
             outlineView = new NSOutlineView();
             outlineView.AddColumn(textColumn);
@@ -45,13 +47,13 @@ namespace ASEva.UIMonoMac
             outlineView.DoubleClick += delegate { callback.OnSelectedItemActivated(); };
         }
 
-        public object? GetSelectedKey()
+        public object GetSelectedKey()
         {
             var rowIndex = outlineView.SelectedRow;
             if (rowIndex < 0) return null;
 
             var dataSource = outlineView.DataSource as SimpleTreeViewDataSource;
-            var node = dataSource?.GetNode(outlineView.ItemAtRow(rowIndex));
+            var node = dataSource.GetNode(outlineView.ItemAtRow(rowIndex));
             return node == null ? null : node.Key;
         }
 
@@ -60,10 +62,7 @@ namespace ASEva.UIMonoMac
             var treeViewRootNodes = new List<SimpleTreeNode>();
             addNodes(rootNodes, treeViewRootNodes, null, sort);
 
-            var dataSource = outlineView.DataSource as SimpleTreeViewDataSource;
-            if (dataSource == null) return;
-
-            var expandIDs = dataSource.Reset(treeViewRootNodes);
+            var expandIDs = (outlineView.DataSource as SimpleTreeViewDataSource).Reset(treeViewRootNodes);
             outlineView.ReloadData();
 
             foreach (var id in expandIDs)
@@ -89,22 +88,22 @@ namespace ASEva.UIMonoMac
             if (!nodeMap.ContainsKey(key)) return;
 
             var parentLink = new List<object>();
-            var parentKey = (nodeMap[key] as SimpleTreeViewNode)?.ParentKey;
+            var parentKey = (nodeMap[key] as SimpleTreeViewNode).ParentKey;
             while (parentKey != null)
             {
                 parentLink.Insert(0, parentKey);
-                if (nodeMap.ContainsKey(parentKey)) parentKey = (nodeMap[parentKey] as SimpleTreeViewNode)?.ParentKey;
+                if (nodeMap.ContainsKey(parentKey)) parentKey = (nodeMap[parentKey] as SimpleTreeViewNode).ParentKey;
             }
 
             foreach (var targetParentKey in parentLink)
             {
-                outlineView.ExpandItem(new NSString((nodeMap[targetParentKey] as SimpleTreeViewNode)?.IDValue.ToString()), false);
+                outlineView.ExpandItem(new NSString((nodeMap[targetParentKey] as SimpleTreeViewNode).IDValue.ToString()), false);
             }
 
-            outlineView.SelectRow(outlineView.RowForItem(new NSString((nodeMap[key] as SimpleTreeViewNode)?.IDValue.ToString())), false);
+            outlineView.SelectRow(outlineView.RowForItem(new NSString((nodeMap[key] as SimpleTreeViewNode).IDValue.ToString())), false);
         }
 
-        private void addNodes(SimpleTreeNode[] inNodes, List<SimpleTreeNode> outNodes, object? parentKey, bool sort)
+        private void addNodes(SimpleTreeNode[] inNodes, List<SimpleTreeNode> outNodes, object parentKey, bool sort)
         {
             if (sort)
             {
@@ -115,10 +114,13 @@ namespace ASEva.UIMonoMac
 
             foreach (var inNode in inNodes)
             {
-                var outNode = new SimpleTreeViewNode(inNode.Key, inNode.Text, parentKey);
+                var outNode = new SimpleTreeViewNode();
                 outNode.IDValue = ++nodeID;
+                outNode.ParentKey = parentKey;
                 outNode.BackgroundColor = inNode.BackgroundColor;
                 outNode.ChildNodesExpanded = inNode.ChildNodesExpanded;
+                outNode.Key = inNode.Key;
+                outNode.Text = inNode.Text;
                 outNode.TextColor = inNode.TextColor;
                 addNodes(inNode.ChildNodes.ToArray(), outNode.ChildNodes, inNode.Key, sort);
                 outNodes.Add(outNode);
@@ -126,25 +128,25 @@ namespace ASEva.UIMonoMac
             }
         }
 
-        private class SimpleTreeViewNode(object key, String text, object? parentKey) : SimpleTreeNode(key, text)
+        private class SimpleTreeViewNode : SimpleTreeNode
         {
             public ulong IDValue { get; set; }
-            public object? ParentKey { get; set; } = parentKey;
+            public object ParentKey { get; set; }
         }
 
-        private class SimpleTreeViewDataSource(NSColor defaultTextColor, NSColor defaultBackColor) : NSOutlineViewDataSource
+        private class SimpleTreeViewDataSource : NSOutlineViewDataSource
         {
-            public NSColor DefaultTextColor { private get; set; } = defaultTextColor;
-            public NSColor DefaultBackColor { private get; set; } = defaultBackColor;
+            public NSColor DefaultTextColor { private get; set; }
+            public NSColor DefaultBackColor { private get; set; }
 
             public override NSObject GetChild(NSOutlineView outlineView, long childIndex, NSObject item)
             {
-                if (item == null) return new NSString((rootNodes[(int)childIndex] as SimpleTreeViewNode)?.IDValue.ToString());
+                if (item == null) return new NSString((rootNodes[(int)childIndex] as SimpleTreeViewNode).IDValue.ToString());
                 else
                 {
                     var idString = new NSString(item.Handle);
                     var id = Convert.ToUInt64(idString.ToString());
-                    return new NSString((nodeMap[id].ChildNodes[(int)childIndex] as SimpleTreeViewNode)?.IDValue.ToString());
+                    return new NSString((nodeMap[id].ChildNodes[(int)childIndex] as SimpleTreeViewNode).IDValue.ToString());
                 }
             }
 

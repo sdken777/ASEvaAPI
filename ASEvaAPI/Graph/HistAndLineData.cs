@@ -180,34 +180,35 @@ namespace ASEva.Graph
     /// </summary>
     public class HistLineXLabels //（Validation unsupported / 图表数据验证无效）
     {
-        public String[] Labels { get; set; } = [];
+        public String[] Labels { get; set; }
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.7.0) Sample of histogram and poly line graph
+    /// (api:app=3.0.0) Sample of histogram and poly line graph
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.0) 直方折线图中的样本
+    /// (api:app=3.0.0) 直方折线图中的样本
     /// </summary>
-    public class HistLineSample(String name)
+    public class HistLineSample
     {
-        public String Name { get; set; } = name;
+        public String Name { get; set; }
         public double HistValue { get; set; }
         public double LineValue { get; set; }
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.7.0) Histogram and poly line graph data
+    /// (api:app=3.0.0) Histogram and poly line graph data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.0) 直方折线图数据
+    /// (api:app=3.0.0) 直方折线图数据
     /// </summary>
-    public class HistAndLineData(GraphDefinition def) : GraphData(def)
+    public class HistAndLineData : GraphData
     {
+
         /// \~English
         /// <summary>
         /// Create graph definition (without validation)
@@ -234,7 +235,7 @@ namespace ASEva.Graph
         /// <param name="lineTitle">折线图标题</param>
         /// <param name="defaultLineValue">折线图初始值</param>
         /// <returns>图表定义对象</returns>
-        public static GraphDefinition? CreateDefinition(String title, String xTitle, object xValuesOrLabels, HistLineMode mode, String histTitle, double defaultHistValue = 0, String? lineTitle = null, double defaultLineValue = 0)
+        public static GraphDefinition CreateDefinition(String title, String xTitle, object xValuesOrLabels, HistLineMode mode, String histTitle, double defaultHistValue = 0, String lineTitle = null, double defaultLineValue = 0)
         {
             return CreateDefinitionWithValidation(title, xTitle, xValuesOrLabels, mode, null, histTitle, defaultHistValue, lineTitle, defaultLineValue);
         }
@@ -267,25 +268,29 @@ namespace ASEva.Graph
         /// <param name="lineTitle">折线图标题</param>
         /// <param name="defaultLineValue">折线图初始值</param>
         /// <returns>图表定义对象</returns>
-        public static GraphDefinition? CreateDefinitionWithValidation(String title, String xTitle, object xValuesOrLabels, HistLineMode mode, GraphValidation? validation, String histTitle, double defaultHistValue = 0, String? lineTitle = null, double defaultLineValue = 0)
+        public static GraphDefinition CreateDefinitionWithValidation(String title, String xTitle, object xValuesOrLabels, HistLineMode mode, GraphValidation validation, String histTitle, double defaultHistValue = 0, String lineTitle = null, double defaultLineValue = 0)
         {
             if (!IsHistogramOnlyMode(mode) && (lineTitle == null || lineTitle.Length == 0)) return null;
 
-            var def = new GraphDefinition(GraphType.HistAndLine, title);
+            var def = new GraphDefinition();
+            def.Type = GraphType.HistAndLine;
+            def.MainTitle = title;
 
             def.Config.Add(mode.ToString()); // 0
             def.Config.Add(xTitle); // 1
             def.Config.Add(defaultHistValue.ToString()); // 2
             def.Config.Add(defaultLineValue.ToString()); // 3
-            if (xValuesOrLabels is HistLineXValues values)
+            if (xValuesOrLabels is HistLineXValues)
             {
+                var values = xValuesOrLabels as HistLineXValues;
                 def.Config.Add("XValues"); // 4
                 def.Config.Add(values.Base.ToString()); // 5
                 def.Config.Add(values.Step.ToString()); // 6
                 def.Config.Add(values.Count.ToString()); // 7
             }
-            else if (xValuesOrLabels is HistLineXLabels labels)
+            else if (xValuesOrLabels is HistLineXLabels)
             {
+                var labels = xValuesOrLabels as HistLineXLabels;
                 def.Config.Add("XLabels"); // 4
                 foreach (var label in labels.Labels)
                 {
@@ -349,7 +354,7 @@ namespace ASEva.Graph
         /// <returns>柱状图标题</returns>
         public String GetHistTitle()
         {
-            return Definition.ColumnTitles[0] ?? "";
+            return Definition.ColumnTitles[0];
         }
 
         /// \~English
@@ -362,7 +367,7 @@ namespace ASEva.Graph
         /// 获取折线图标题
         /// </summary>
         /// <returns>折线图标题</returns>
-        public String? GetLineTitle()
+        public String GetLineTitle()
         {
             return Definition.ColumnTitles.Count > 2 ? Definition.ColumnTitles[2] : null;
         }
@@ -393,7 +398,7 @@ namespace ASEva.Graph
         /// 获取x轴的值或文字描述
         /// </summary>
         /// <returns>x轴的值或文字描述</returns>
-        public object? GetXValuesOrLabels()
+        public object GetXValuesOrLabels()
         {
             if (Definition.Config[4] == "XValues")
             {
@@ -573,13 +578,18 @@ namespace ASEva.Graph
         /// <returns>统计数据</returns>
         public HistLineSample[] GetSamples()
         {
-            HistLineSample[] samples;
+            var samples = new HistLineSample[Data.GetLength(0)];
+            for (int i = 0; i < samples.Length; i++)
+            {
+                samples[i] = new HistLineSample();
+            }
+
             if (Definition.Config[4] == "XLabels")
             {
-                samples = new HistLineSample[Data.GetLength(0)].Populate((i) =>
+                for (int i = 0; i < samples.Length; i++)
                 {
-                    return new HistLineSample(Definition.Config[5 + i]);
-                });
+                    samples[i].Name = Definition.Config[5 + i];
+                }
             }
             else
             {
@@ -588,12 +598,12 @@ namespace ASEva.Graph
                 Double.TryParse(Definition.Config[6], out stepDouble);
                 var baseDecimal = new Decimal(baseDouble);
                 var stepDecimal = new Decimal(stepDouble);
-                samples = new HistLineSample[Data.GetLength(0)].Populate((i) =>
+                for (int i = 0; i < samples.Length; i++)
                 {
                     var lower = baseDecimal + stepDecimal * i;
                     var upper = baseDecimal + stepDecimal * (i + 1);
-                    return new HistLineSample(lower + "~" + upper);
-                });
+                    samples[i].Name = lower + "~" + upper;
+                }
             }
 
             double k = 1;

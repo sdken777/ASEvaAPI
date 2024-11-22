@@ -11,7 +11,7 @@ namespace ASEva.UIWpf
 {
     class SnapshotHandler : SnapshotExtensions.SnapshotHandler
     {
-        public CommonImage? Snapshot(Eto.Forms.Control control)
+        public CommonImage Snapshot(Eto.Forms.Control control)
         {
             var element = control.ControlObject as FrameworkElement;
             if (element == null) return null;
@@ -36,14 +36,14 @@ namespace ASEva.UIWpf
 
     class ScreenSnapshotHandler : SnapshotExtensions.SnapshotHandler
     {
-        public CommonImage? Snapshot(Eto.Forms.Control control)
+        public CommonImage Snapshot(Eto.Forms.Control control)
         {
             var element = control.ControlObject as FrameworkElement;
             if (element == null) return null;
 
             if (element is Window)
             {
-                element = (element as Window)?.Content as FrameworkElement;
+                element = (element as Window).Content as FrameworkElement;
                 if (element == null) return null;
             }
 
@@ -59,17 +59,17 @@ namespace ASEva.UIWpf
             }
 
             var rawImage = ConvertFromBitmap(bitmap);
-            if (rawImage == null || rawImage.Width == element.ActualWidth) return rawImage;
+            if (rawImage.Width == element.ActualWidth) return rawImage;
             else return rawImage.Resize((int)element.ActualWidth);
         }
 
-        private static CommonImage? ConvertFromBitmap(object bitmapObject)
+        private static CommonImage ConvertFromBitmap(object bitmapObject)
         {
             if (bitmapObject == null) return null;
             if (!(bitmapObject is System.Drawing.Bitmap)) return null;
 
             var bitmap = bitmapObject as System.Drawing.Bitmap;
-            if (bitmap?.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb)
+            if (bitmap.PixelFormat == System.Drawing.Imaging.PixelFormat.Format32bppArgb)
             {
                 var image = CommonImage.Create(bitmap.Width, bitmap.Height, true, false);
                 var bitmapData = bitmap.LockBits(new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
@@ -80,7 +80,7 @@ namespace ASEva.UIWpf
                 bitmap.UnlockBits(bitmapData);
                 return image;
             }
-            else if (bitmap?.PixelFormat == System.Drawing.Imaging.PixelFormat.Format24bppRgb)
+            else if (bitmap.PixelFormat == System.Drawing.Imaging.PixelFormat.Format24bppRgb)
             {
                 var image = CommonImage.Create(bitmap.Width, bitmap.Height, false, false);
                 var bitmapData = bitmap.LockBits(new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height), System.Drawing.Imaging.ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format24bppRgb);

@@ -10,11 +10,11 @@ namespace ASEva.UIGtk
     {
         public static double? Query()
         {
-            String? dummy = null;
+            String dummy = null;
             return Query(out dummy);
         }
 
-        public static double? Query(out String? screenName)
+        public static double? Query(out String screenName)
         {
             screenName = null;
 
@@ -71,7 +71,7 @@ namespace ASEva.UIGtk
         };
 
         [DllImport("libX11.so.6")]
-        private static extern nint XOpenDisplay(string? display_name);
+        private static extern nint XOpenDisplay(string display_name);
 
         [DllImport("libX11.so.6")]
         private static extern int XCloseDisplay(nint x11_display);

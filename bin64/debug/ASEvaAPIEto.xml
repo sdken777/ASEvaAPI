@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=3.3.2
+            version=3.1.5
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -86,13 +86,13 @@
         <member name="M:ASEva.UIEto.App.InitGPUOptions(System.Boolean,System.Boolean)">
             \~English
             <summary>
-            (api:eto=3.0.1) Initialize GPU rendering options (Only the first call is valid)
+            (api:app=3.0.1) Initialize GPU rendering options (Only the first call is valid)
             </summary>
             <param name="renderingDisabled">Whether to disable GPU rendering</param>
             <param name="onscreenRenderingEnabled">Whether to enable GPU onscreen rendering (If renderingDisabled is true, this setting is invalid)</param>
             \~Chinese
             <summary>
-            (api:eto=3.0.1) 初始化GPU渲染选项，仅第一次调用有效
+            (api:app=3.0.1) 初始化GPU渲染选项，仅第一次调用有效
             </summary>
             <param name="renderingDisabled">是否禁用GPU渲染</param>
             <param name="onscreenRenderingEnabled">是否启用GPU在屏渲染，若renderingDisabled为true则此设定无效</param>
@@ -128,24 +128,24 @@
             <summary>
             Get current running OS's code, which is the same as ASEva.APIInfo.GetRunningOS
             </summary>
-            <returns>OS code, "unknown" if unrecognized</returns>
+            <returns>OS code, null if unrecognized</returns>
             \~Chinese
             <summary>
             返回当前运行的OS代号，与 ASEva.APIInfo.GetRunningOS 结果一致
             </summary>
-            <returns>OS代号，若无法识别返回"unknown"</returns>
+            <returns>OS代号，若无法识别返回null</returns>
         </member>
         <member name="M:ASEva.UIEto.App.GetRunningUI">
             \~English
             <summary>
             Get current running UI framework's code
             </summary>
-            <returns>UI framework code, "unknown" if ASEva.UIEto.App.Init is not called or initialization failed</returns>
+            <returns>UI framework code, null if ASEva.UIEto.App.Init is not called or initialization failed</returns>
             \~Chinese
             <summary>
             返回当前运行的UI框架代号
             </summary>
-            <returns>UI框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回"unknown"</returns>
+            <returns>UI框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回null</returns>
         </member>
         <member name="M:ASEva.UIEto.App.GetUIBackend">
             \~English
@@ -176,12 +176,12 @@
             <summary>
             Get current WebView backend code
             </summary>
-            <returns>WebView backend code, "unknown" if ASEva.UIEto.App.Init is not called or initialization failed</returns>
+            <returns>WebView backend code, null if ASEva.UIEto.App.Init is not called or initialization failed</returns>
             \~Chinese
             <summary>
             返回当前WebView使用的后台框架代号
             </summary>
-            <returns>当前WebView使用的后台框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回"unknown"</returns>
+            <returns>当前WebView使用的后台框架代号，若未运行 ASEva.UIEto.App.Init 或初始化失败则返回null</returns>
         </member>
         <member name="P:ASEva.UIEto.App.Instance">
             \~English
@@ -250,22 +250,30 @@
         <member name="M:ASEva.UIEto.App.ConvertWindowPanelToEto(System.Object)">
             \~English
             <summary>
-            Deprecated. Please use ASEva.UIEto.CrossConverter
+            Convert platform window panel to Eto window panel
             </summary>
+            <param name="platformWindowPanel">Platform window panel</param>
+            <returns>Eto window panel, null if conversion failed</returns>
             \~Chinese
             <summary>
-            已弃用，应使用 ASEva.UIEto.CrossConverter
+            将平台特化窗口控件转化为Eto窗口控件
             </summary>
+            <param name="platformWindowPanel">平台特化窗口控件</param>
+            <returns>Eto窗口控件，若转化失败则返回null</returns>
         </member>
         <member name="M:ASEva.UIEto.App.ConvertConfigPanelToEto(System.Object)">
             \~English
             <summary>
-            Deprecated. Please use ASEva.UIEto.CrossConverter
+            Convert platform config panel to Eto config panel
             </summary>
+            <param name="platformConfigPanel">Platform config panel</param>
+            <returns>Eto config panel, null if conversion failed</returns>
             \~Chinese
             <summary>
-            已弃用，应使用 ASEva.UIEto.CrossConverter
+            将平台特化配置界面控件转化为Eto配置界面控件
             </summary>
+            <param name="platformConfigPanel">平台特化配置界面控件</param>
+            <returns>Eto配置界面控件，若转化失败则返回null</returns>
         </member>
         <member name="M:ASEva.UIEto.App.RunDialog(ASEva.UIEto.DialogPanel)">
             \~English
@@ -336,7 +344,7 @@
             </summary>
             \~Chinese
             <summary>
-            流程应使用此函数手动触发KeyDown事件
+            主流程应使用此函数手动触发KeyDown事件
             </summary>
         </member>
         <member name="P:ASEva.UIEto.App.FatalException">
@@ -777,16 +785,6 @@
             [可选实现] 在主循环中被调用，可进行模态对话
             </summary>
         </member>
-        <member name="M:ASEva.UIEto.ConfigPanel.OnHandleAsync">
-            \~English
-            <summary>
-            (api:eto=3.1.6) [Optional] Called in the main loop, for asynchronous calls
-            </summary>
-            \~Chinese
-            <summary>
-            (api:eto=3.1.6) [可选实现] 在主循环中被调用，可进行异步调用
-            </summary>
-        </member>
         <member name="M:ASEva.UIEto.ConfigPanel.Close">
             \~English
             <summary>
@@ -806,44 +804,6 @@
             <summary>
             在此事件中实现配置界面的关闭
             </summary>
-        </member>
-        <member name="T:ASEva.UIEto.CrossConverter">
-            \~English
-            <summary>
-            (api:eto=3.2.0) Panel conversion tool
-            </summary>
-            \~Chinese
-            <summary>
-            (api:eto=3.2.0) 面板转换工具
-            </summary>
-        </member>
-        <member name="M:ASEva.UIEto.CrossConverter.ConvertWindowPanel(System.Object)">
-            \~English
-            <summary>
-            Convert any window panel to Eto window panel
-            </summary>
-            <param name="anyWindowPanel">Any window panel</param>
-            <returns>Eto window panel, null if conversion failed</returns>
-            \~Chinese
-            <summary>
-            将任意窗口面板转化为Eto窗口面板
-            </summary>
-            <param name="anyWindowPanel">任意窗口面板</param>
-            <returns>Eto窗口面板，若转化失败则返回null</returns>
-        </member>
-        <member name="M:ASEva.UIEto.CrossConverter.ConvertConfigPanel(System.Object)">
-            \~English
-            <summary>
-            Convert any config panel to Eto config panel
-            </summary>
-            <param name="anyConfigPanel">Any config panel</param>
-            <returns>Eto config panel, null if conversion failed</returns>
-            \~Chinese
-            <summary>
-            将任意配置面板转化为Eto配置面板
-            </summary>
-            <param name="anyConfigPanel">任意配置面板</param>
-            <returns>Eto配置面板，若转化失败则返回null</returns>
         </member>
         <member name="T:ASEva.UIEto.DialogPanel">
             \~English
@@ -2171,7 +2131,7 @@
             Add combo box
             </summary>
             <param name="stackLayout">Stack layout object</param>
-            <param name="texts">Text of each item (can be empty)</param>
+            <param name="texts">Text of each item (can be null)</param>
             <param name="expand">Whether to expand</param>
             <param name="selectedIndex">Initial selected index</param>
             <returns>Created combo box object</returns>
@@ -2191,7 +2151,7 @@
             Add combo box
             </summary>
             <param name="stackLayout">Stack layout object</param>
-            <param name="texts">Text of each item (can be empty)</param>
+            <param name="texts">Text of each item (can be null)</param>
             <param name="logicalWidth">Initial logical width, 0 as not to set</param>
             <param name="selectedIndex">Initial selected index</param>
             <returns>Created combo box object</returns>
@@ -2607,7 +2567,7 @@
             Add combo box
             </summary>
             <param name="tableRow">Row object of table layout</param>
-            <param name="texts">Text of each item (can be empty)</param>
+            <param name="texts">Text of each item (can be null)</param>
             <param name="expandWidth">Whether to expand horizontally</param>
             <param name="fillHeight">Whether to fill vertically</param>
             <param name="selectedIndex">Initial selected index</param>
@@ -2629,7 +2589,7 @@
             Add combo box
             </summary>
             <param name="tableRow">Row object of table layout</param>
-            <param name="texts">Text of each item (can be empty)</param>
+            <param name="texts">Text of each item (can be null)</param>
             <param name="logicalWidth">Initial logical width, 0 as not to set</param>
             <param name="fillHeight">Whether to fill vertically</param>
             <param name="selectedIndex">Initial selected index</param>
@@ -2986,18 +2946,6 @@
             获取选中控件所在序号位置
             </summary>
             <returns>序号位置，若无选中则返回-1</returns>
-        </member>
-        <member name="M:ASEva.UIEto.FlowLayout.ScrollToControl(System.Int32)">
-            \~English
-            <summary>
-            (api:eto=3.2.4) Scroll to the position of the control at the index
-            </summary>
-            <param name="index">Index of the control</param>
-            \~Chinese
-            <summary>
-            (api:eto=3.2.4) 滚动至指定序号的控件位置
-            </summary>
-            <param name="index">控件的序号</param>
         </member>
         <member name="E:ASEva.UIEto.FlowLayout.ControlSelected">
             \~English
@@ -3362,24 +3310,14 @@
         <member name="T:ASEva.UIEto.GLTextTask">
             \~English
             <summary>
-            (api:eto=3.3.2) OpenGL text drawing task
+            (api:eto=3.0.0) OpenGL text drawing task
             </summary>
             \~Chinese
             <summary>
-            (api:eto=3.3.2) OpenGL文本绘制任务
+            (api:eto=3.0.0) OpenGL文本绘制任务
             </summary>
         </member>
-        <member name="M:ASEva.UIEto.GLTextTask.#ctor(System.String)">
-            \~English
-            <summary>
-            (api:eto=3.3.2) OpenGL text drawing task
-            </summary>
-            \~Chinese
-            <summary>
-            (api:eto=3.3.2) OpenGL文本绘制任务
-            </summary>
-        </member>
-        <member name="P:ASEva.UIEto.GLTextTask.Text">
+        <member name="F:ASEva.UIEto.GLTextTask.text">
             \~English
             <summary>
             Text
@@ -3389,7 +3327,7 @@
             文本
             </summary>
         </member>
-        <member name="P:ASEva.UIEto.GLTextTask.PosX">
+        <member name="F:ASEva.UIEto.GLTextTask.posX">
             \~English
             <summary>
             X-coordinate of anchor point
@@ -3399,7 +3337,7 @@
             文本锚点X轴坐标
             </summary>
         </member>
-        <member name="P:ASEva.UIEto.GLTextTask.PosY">
+        <member name="F:ASEva.UIEto.GLTextTask.posY">
             \~English
             <summary>
             Y-coordinate of anchor point
@@ -3409,7 +3347,7 @@
             文本锚点Y轴坐标
             </summary>
         </member>
-        <member name="P:ASEva.UIEto.GLTextTask.IsRealPos">
+        <member name="F:ASEva.UIEto.GLTextTask.isRealPos">
             \~English
             <summary>
             Whether the coordination of anchor point is in physical pixels, or else logical units
@@ -3419,7 +3357,7 @@
             文本锚点坐标是否为物理像素坐标系，否则为逻辑坐标
             </summary>
         </member>
-        <member name="P:ASEva.UIEto.GLTextTask.Anchor">
+        <member name="F:ASEva.UIEto.GLTextTask.anchor">
             \~English
             <summary>
             Anchor point's type
@@ -3429,7 +3367,7 @@
             文本锚点坐标位置类型
             </summary>
         </member>
-        <member name="P:ASEva.UIEto.GLTextTask.Red">
+        <member name="F:ASEva.UIEto.GLTextTask.red">
             \~English
             <summary>
             Red component of text color
@@ -3439,7 +3377,7 @@
             文本绘制颜色红色分量
             </summary>
         </member>
-        <member name="P:ASEva.UIEto.GLTextTask.Green">
+        <member name="F:ASEva.UIEto.GLTextTask.green">
             \~English
             <summary>
             Green component of text color
@@ -3449,7 +3387,7 @@
             文本绘制颜色绿色分量
             </summary>
         </member>
-        <member name="P:ASEva.UIEto.GLTextTask.Blue">
+        <member name="F:ASEva.UIEto.GLTextTask.blue">
             \~English
             <summary>
             Blue component of text color
@@ -3459,7 +3397,7 @@
             文本绘制颜色蓝色分量
             </summary>
         </member>
-        <member name="P:ASEva.UIEto.GLTextTask.Alpha">
+        <member name="F:ASEva.UIEto.GLTextTask.alpha">
             \~English
             <summary>
             Alpha component of text color, 0 as 255
@@ -3469,7 +3407,7 @@
             文本绘制颜色Alpha通道分量，0将被视为255
             </summary>
         </member>
-        <member name="P:ASEva.UIEto.GLTextTask.FontName">
+        <member name="F:ASEva.UIEto.GLTextTask.fontName">
             \~English
             <summary>
             Font name, null as default font
@@ -3479,7 +3417,7 @@
             文本字体，空则使用默认字体
             </summary>
         </member>
-        <member name="P:ASEva.UIEto.GLTextTask.SizeScale">
+        <member name="F:ASEva.UIEto.GLTextTask.sizeScale">
             \~English
             <summary>
             Ratio to the default size, 0 as 1
@@ -3492,11 +3430,11 @@
         <member name="T:ASEva.UIEto.GLTextTasks">
             \~English
             <summary>
-            (api:eto=3.3.2) OpenGL text drawing task list
+            (api:eto=3.0.0) OpenGL text drawing task list
             </summary>
             \~Chinese
             <summary>
-            (api:eto=3.3.2) OpenGL文本绘制任务对象
+            (api:eto=3.0.0) OpenGL文本绘制任务对象
             </summary>
         </member>
         <member name="M:ASEva.UIEto.GLTextTasks.Add(System.String,System.Int32,System.Int32,System.Byte,System.Byte,System.Byte,System.Single)">
@@ -3662,11 +3600,11 @@
         <member name="T:ASEva.UIEto.GLRenderEventArgs">
             \~English
             <summary>
-            (api:eto=3.3.2) GLView render event argument
+            (api:eto=3.0.0) GLView render event argument
             </summary>
             \~Chinese
             <summary>
-            (api:eto=3.3.2) GLView渲染事件参数
+            (api:eto=3.0.0) GLView渲染事件参数
             </summary>
         </member>
         <member name="P:ASEva.UIEto.GLRenderEventArgs.TextTasks">
@@ -3682,24 +3620,14 @@
         <member name="T:ASEva.UIEto.GLContextInfo">
             \~English
             <summary>
-            (api:eto=3.3.2) OpenGL context info
+            (api:eto=3.0.0) OpenGL context info
             </summary>
             \~Chinese
             <summary>
-            (api:eto=3.3.2) OpenGL上下文信息
+            (api:eto=3.0.0) OpenGL上下文信息
             </summary>
         </member>
-        <member name="M:ASEva.UIEto.GLContextInfo.#ctor(System.String,System.String,System.String,System.String)">
-            \~English
-            <summary>
-            (api:eto=3.3.2) OpenGL context info
-            </summary>
-            \~Chinese
-            <summary>
-            (api:eto=3.3.2) OpenGL上下文信息
-            </summary>
-        </member>
-        <member name="P:ASEva.UIEto.GLContextInfo.Version">
+        <member name="F:ASEva.UIEto.GLContextInfo.version">
             \~English
             <summary>
             OpenGL version
@@ -3709,7 +3637,7 @@
             OpenGL版本
             </summary>
         </member>
-        <member name="P:ASEva.UIEto.GLContextInfo.Vendor">
+        <member name="F:ASEva.UIEto.GLContextInfo.vendor">
             \~English
             <summary>
             Vendor
@@ -3719,7 +3647,7 @@
             厂商
             </summary>
         </member>
-        <member name="P:ASEva.UIEto.GLContextInfo.Renderer">
+        <member name="F:ASEva.UIEto.GLContextInfo.renderer">
             \~English
             <summary>
             Renderer
@@ -3729,7 +3657,7 @@
             渲染器
             </summary>
         </member>
-        <member name="P:ASEva.UIEto.GLContextInfo.Extensions">
+        <member name="F:ASEva.UIEto.GLContextInfo.extensions">
             \~English
             <summary>
             Extension list
@@ -3876,7 +3804,7 @@
             <summary>
             Constructor
             </summary>
-            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
+            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
             <param name="requestOnscreenRendering">Whether to request onscreen rendering (Use offscreen if unsupported), default is false</param>
             <param name="drawText">Whether to request drawing text, default is true</param>
             <param name="useLegacyAPI">Whether to use OpenGL legacy API, default is true</param>
@@ -3894,7 +3822,7 @@
             <summary>
             Constructor
             </summary>
-            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
+            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
             <param name="requestAntialias">Antialias option (Use the nearest option if not supported), default is 4x sampling</param>
             <param name="requestOnscreenRendering">Whether to request onscreen rendering (Use offscreen if unsupported), default is false</param>
             <param name="requestOverlay">Whether to request support of overlay (SupportOverlay will be false if unsupported), default is true</param>
@@ -3934,11 +3862,11 @@
         <member name="P:ASEva.UIEto.GLView.ContextInfo">
             \~English
             <summary>
-            (api:eto=3.3.2) Context info (null if not initialized yet)
+            Context info (null if not initialized yet)
             </summary>
             \~Chinese
             <summary>
-            (api:eto=3.3.2) 上下文信息 (null表示还未初始化完成)
+            上下文信息 (null表示还未初始化完成)
             </summary>
         </member>
         <member name="P:ASEva.UIEto.GLView.FPS">
@@ -3974,21 +3902,11 @@
         <member name="T:ASEva.UIEto.ControlAndMouseSources">
             \~English
             <summary>
-            (api:eto=3.3.0) Control and its mouse event source controls
+            (api:eto=3.1.1) Control and its mouse event source controls
             </summary>
             \~Chinese
             <summary>
-            (api:eto=3.3.0) 控件及其鼠标事件源控件
-            </summary>
-        </member>
-        <member name="M:ASEva.UIEto.ControlAndMouseSources.#ctor(Eto.Forms.Control)">
-            \~English
-            <summary>
-            (api:eto=3.3.0) Control and its mouse event source controls
-            </summary>
-            \~Chinese
-            <summary>
-            (api:eto=3.3.0) 控件及其鼠标事件源控件
+            (api:eto=3.1.1) 控件及其鼠标事件源控件
             </summary>
         </member>
         <member name="T:ASEva.UIEto.OverlayLayout">
@@ -4011,7 +3929,7 @@
             <param name="bottomLogicalPadding">Space between bottom bound and the control, null as not related</param>
             <param name="leftLogicalPadding">Space between left bound and the control, null as not related</param>
             <param name="rightLogicalPadding">Space between right bound and the control, null as not related</param>
-            <returns>Added control, null if failed</returns>
+            <returns>新添加的控件</returns>
             \~Chinese
             <summary>
             添加控件
@@ -4021,7 +3939,7 @@
             <param name="bottomLogicalPadding">控件与底部间隔，null表示不关联</param>
             <param name="leftLogicalPadding">控件与左侧间隔，null表示不关联</param>
             <param name="rightLogicalPadding">控件与右侧间隔，null表示不关联</param>
-            <returns>新添加的控件，若添加失败则返回null</returns>
+            <returns>新添加的控件</returns>
         </member>
         <member name="M:ASEva.UIEto.OverlayLayout.RemoveControl(Eto.Forms.Control)">
             \~English
@@ -4270,21 +4188,11 @@
         <member name="T:ASEva.UIEto.SimpleTreeNode">
             \~English
             <summary>
-            (api:eto=3.3.0) Node of simple tree view
+            (api:eto=3.0.0) Node of simple tree view
             </summary>
             \~Chinese
             <summary>
-            (api:eto=3.3.0) 简易树状视图的内容节点
-            </summary>
-        </member>
-        <member name="M:ASEva.UIEto.SimpleTreeNode.#ctor(System.Object,System.String)">
-            \~English
-            <summary>
-            (api:eto=3.3.0) Node of simple tree view
-            </summary>
-            \~Chinese
-            <summary>
-            (api:eto=3.3.0) 简易树状视图的内容节点
+            (api:eto=3.0.0) 简易树状视图的内容节点
             </summary>
         </member>
         <member name="P:ASEva.UIEto.SimpleTreeNode.Key">
@@ -4350,21 +4258,11 @@
         <member name="T:ASEva.UIEto.SimpleTreeNodeUpdateTask">
             \~English
             <summary>
-            (api:eto=3.3.0) Task of updating node content
+            (api:eto=3.0.0) Task of updating node content
             </summary>
             \~Chinese
             <summary>
-            (api:eto=3.3.0) 更新简易树状视图内容节点的任务
-            </summary>
-        </member>
-        <member name="M:ASEva.UIEto.SimpleTreeNodeUpdateTask.#ctor(System.Object)">
-            \~English
-            <summary>
-            (api:eto=3.3.0) Task of updating node content
-            </summary>
-            \~Chinese
-            <summary>
-            (api:eto=3.3.0) 更新简易树状视图内容节点的任务
+            (api:eto=3.0.0) 更新简易树状视图内容节点的任务
             </summary>
         </member>
         <member name="P:ASEva.UIEto.SimpleTreeNodeUpdateTask.Key">
@@ -4474,13 +4372,13 @@
             <summary>
             Constructor
             </summary>
-            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
+            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
             <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
             \~Chinese
             <summary>
             构造函数
             </summary>
-            <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
+            <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈</param>
             <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
         </member>
         <member name="M:ASEva.UIEto.SkiaView.#ctor(System.String,System.Boolean,System.Boolean)">
@@ -4488,7 +4386,7 @@
             <summary>
             Constructor
             </summary>
-            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
+            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
             <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
             <param name="requestOnscreenRendering">Whether to request onscreen rendering when OpenGL rendering is not disabled (offscreen rendering is still used if unsupported), the default is false</param>
             \~Chinese
@@ -4504,7 +4402,7 @@
             <summary>
             Constructor
             </summary>
-            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
+            <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
             <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
             <param name="requestOnscreenRendering">Whether to request onscreen rendering when OpenGL rendering is not disabled (offscreen rendering is still used if unsupported), the default is false</param>
             <param name="requestOverlay">Whether to request support of overlay (SupportOverlay will be false if unsupported), default is true</param>
@@ -4612,16 +4510,6 @@
             <param name="anchor">文本锚点坐标位置类型</param>
             <param name="logicalX">文本锚点X轴逻辑坐标</param>
             <param name="logicalY">文本锚点Y轴逻辑坐标</param>
-        </member>
-        <member name="M:ASEva.UIEto.TextBitmap.ReleaseResources">
-            \~English
-            <summary>
-            (api:eto=3.2.2) Release resources
-            </summary>
-            \~Chinese
-            <summary>
-            (api:eto=3.2.2) 释放资源
-            </summary>
         </member>
         <member name="P:ASEva.UIEto.TextBitmap.Text">
             \~English
@@ -4985,16 +4873,6 @@
             \~Chinese
             <summary>
             [可选实现] 在主循环中被调用，可进行模态对话
-            </summary>
-        </member>
-        <member name="M:ASEva.UIEto.WindowPanel.OnHandleAsync">
-            \~English
-            <summary>
-            (api:eto=3.1.6) [Optional] Called in the main loop, for asynchronous calls
-            </summary>
-            \~Chinese
-            <summary>
-            (api:eto=3.1.6) [可选实现] 在主循环中被调用，可进行异步调用
             </summary>
         </member>
         <member name="M:ASEva.UIEto.WindowPanel.OnUpdateContainerSize(ASEva.IntSize)">

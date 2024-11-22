@@ -16,18 +16,18 @@ namespace ASEva.UIGtk
     {
         public void Add(Switch s)
         {
+            if (s == null) return;
             s.AddNotification("active", switch_ActiveNotify);
         }
 
         public delegate void ToggledHandler(Switch s, bool toggled);
 
-        public event ToggledHandler? Toggled;
+        public event ToggledHandler Toggled;
 
         private void switch_ActiveNotify(object o, NotifyArgs args)
         {
             var s = o as Switch;
-            if (s == null) return;
-            Toggled?.Invoke(s, s.Active);
+            if (Toggled != null) Toggled(s, s.Active);
         }
     }
 }

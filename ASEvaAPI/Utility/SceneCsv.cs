@@ -15,19 +15,25 @@ namespace ASEva.Utility
     /// </summary>
     public class SceneCsv
     {
-        public SceneTitle Title { get; set; } = new SceneTitle();
-        public List<SceneData> Segments { get; set; } = [];
+        public SceneTitle Title { get; set; }
+        public List<SceneData> Segments { get; set; }
 
-        public static SceneCsv? Load(String file)
+        public SceneCsv()
         {
-            StreamReader? reader = null;
+            Title = new SceneTitle();
+            Segments = new List<SceneData>();
+        }
+
+        public static SceneCsv Load(String file)
+        {
+            StreamReader reader = null;
             try
             {
                 if (!File.Exists(file)) return null;
 
                 reader = new StreamReader(file);
                 var firstLine = reader.ReadLine();
-                if (firstLine == null || !firstLine.StartsWith("Scene Table,v2"))
+                if (!firstLine.StartsWith("Scene Table,v2"))
                 {
                     reader.Close();
                     return null;
@@ -36,8 +42,8 @@ namespace ASEva.Utility
                 var output = new SceneCsv();
                 output.Title = new SceneTitle();
 
-                var titleComps = reader.ReadLine()?.Split(',');
-                if (titleComps != null && titleComps.Length > 4)
+                var titleComps = reader.ReadLine().Split(',');
+                if (titleComps.Length > 4)
                 {
                     var titleElemCount = titleComps.Length - 4;
                     for (int i = 0; i < titleElemCount; i++) output.Title.Titles.Add(titleComps[i + 4]);
@@ -61,7 +67,8 @@ namespace ASEva.Utility
                     double startTime, length;
                     if (!Double.TryParse(comps[1], out startTime) || !Double.TryParse(comps[2], out length)) continue;
 
-                    var scene = new SceneData(sceneID);
+                    var scene = new SceneData();
+                    scene.SceneID = sceneID;
                     scene.Session = SessionIdentifier.FromDateTime(sessionDateTime);
                     scene.BeginOffset = startTime;
                     scene.TimeLength = length;
@@ -86,7 +93,7 @@ namespace ASEva.Utility
 
         public void Save(String file)
         {
-            StreamWriter? writer = null;
+            StreamWriter writer = null;
             try
             {
                 writer = new StreamWriter(file, false, Encoding.UTF8);

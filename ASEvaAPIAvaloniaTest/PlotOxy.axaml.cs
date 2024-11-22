@@ -24,7 +24,7 @@ namespace ASEvaAPIAvaloniaTest
             var exampleTable = new Dictionary<String, List<ExampleInfo>>();
             foreach (var example in Examples.GetList())
             {
-                if (!exampleTable.ContainsKey(example.Category)) exampleTable[example.Category] = [];
+                if (!exampleTable.ContainsKey(example.Category)) exampleTable[example.Category] = new List<ExampleInfo>();
                 exampleTable[example.Category].Add(example);
             }
 
@@ -39,14 +39,17 @@ namespace ASEvaAPIAvaloniaTest
             }
             exampleTable = sortedTable;
 
-            Node? targetCategoryNode = null, targetExampleNode = null;
+            Node targetCategoryNode = null, targetExampleNode = null;
             foreach (var pair in exampleTable)
             {
-                var categoryNode = new Node(pair.Key);
+                var categoryNode = new Node();
+                categoryNode.Title = pair.Key;
+                categoryNode.SubNodes = new ObservableCollection<Node>();
                 foreach (var example in pair.Value)
                 {
-                    var exampleNode = new Node(example.Title);
+                    var exampleNode = new Node();
                     exampleNode.Example = example;
+                    exampleNode.Title = example.Title;
                     categoryNode.SubNodes.Add(exampleNode);
                     if (example.Title == "Peaks")
                     {
@@ -64,21 +67,21 @@ namespace ASEvaAPIAvaloniaTest
             };
         }
 
-        private void treeView_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+        private void treeView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (treeView.SelectedItem != null)
             {
                 var exampleNode = treeView.SelectedItem as Node;
-                if (exampleNode?.Example != null) plotView.Model = exampleNode.Example.PlotModel;
+                if (exampleNode.Example != null) plotView.Model = exampleNode.Example.PlotModel;
             }
         }
 
-        private class Node(String titleArg) : INotifyPropertyChanged
+        private class Node : INotifyPropertyChanged
         {
-            public event PropertyChangedEventHandler? PropertyChanged;
+            public event PropertyChangedEventHandler PropertyChanged;
 
-            public ExampleInfo? Example { get; set; }
-            public ObservableCollection<Node> SubNodes { get; set; } = [];
+            public ExampleInfo Example { get; set; }
+            public ObservableCollection<Node> SubNodes { get; set; }
 
             public String Title
             {
@@ -92,15 +95,20 @@ namespace ASEvaAPIAvaloniaTest
                 set { isExpanded = value; PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsExpanded))); }
             }
 
-            private String title = titleArg;
+            private String title;
             private bool isExpanded;
         }
 
         private class Model
         {
-            public ObservableCollection<Node> TreeNodes { get; private set; } = [];
+            public ObservableCollection<Node> TreeNodes { get; private set; }
+
+            public Model()
+            {
+                TreeNodes = new ObservableCollection<Node>();
+            }
         }
 
-        private Model model = new();
+        private Model model = new Model();
     }
 }

@@ -12,10 +12,10 @@ namespace ASEva.UIGtk
 	class DateComboBox : BaseComboBox
 	{
 		DateTime? selectedDate;
-		private DateComboBoxDialog? dlg;
+		private DateComboBoxDialog dlg;
 		DateTimePickerMode mode = DateTimePickerMode.DateTime;
 
-		public event EventHandler? DateChanged;
+		public event EventHandler DateChanged;
 
 		protected void OnDateChanged(EventArgs e)
 		{
@@ -132,7 +132,7 @@ namespace ASEva.UIGtk
 			dlg = null;
 		}
 
-		private void Dlg_DateChanged(object? sender, EventArgs e)
+		private void Dlg_DateChanged(object sender, EventArgs e)
 		{
 			if (dlg == null)
 				return;
@@ -147,7 +147,7 @@ namespace ASEva.UIGtk
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void Dlg_DialogClosed(object? sender, EventArgs e)
+		private void Dlg_DialogClosed(object sender, EventArgs e)
 		{
 			CleanDialog();
 		}
@@ -157,14 +157,14 @@ namespace ASEva.UIGtk
 		/// </summary>
 		/// <param name="o"></param>
 		/// <param name="args"></param>
-		private void Entry_FocusOutEvent(object? o, Gtk.FocusOutEventArgs args)
+		private void Entry_FocusOutEvent(object o, Gtk.FocusOutEventArgs args)
 		{
 			// CHECK: 修正Wayland下弹出后立即消失的问题
 			var uiBackend = ASEva.UIEto.App.GetUIBackend();
 			if (uiBackend != null && uiBackend != "wayland") dlg?.CloseDialog();
 		}
 
-		void HandleChanged(object? sender, EventArgs e)
+		void HandleChanged(object sender, EventArgs e)
 		{
 			var isValid = IsDateValid();
 			if (!ValidateDateRange())

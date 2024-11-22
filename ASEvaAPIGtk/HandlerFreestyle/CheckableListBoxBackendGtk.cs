@@ -11,25 +11,20 @@ namespace ASEva.UIGtk
     #pragma warning disable CS0612, CS0649
     class CheckableListBoxBackendGtk : EventBox, CheckableListBoxBackend
     {
-        [UI] TreeView? treeView;
-        [UI] ListStore? listStore;
+        [UI] TreeView treeView;
+        [UI] ListStore listStore;
 
-        public CheckableListBoxBackendGtk(CheckableListBoxCallback callback) : this(new Builder("CheckableListBoxBackendGtk.glade"), callback)
-        {}
-
-        private CheckableListBoxBackendGtk(Builder builder, CheckableListBoxCallback callback) : base(builder.GetRawOwnedObject("CheckableListBoxBackendGtk"))
+        public CheckableListBoxBackendGtk(CheckableListBoxCallback callback) : this(new Builder("CheckableListBoxBackendGtk.glade"))
         {
-            builder.Autoconnect(this);
-
             var toggle = new CellRendererToggle();
             var label = new CellRendererText();
-            treeView?.SetColumnRenderer(0, toggle, "sensitive", 1, "active", 2);
-            treeView?.SetColumnRenderer(1, label, "text", 0, "foreground", 3);
+            treeView.SetColumnRenderer(0, toggle, "sensitive", 1, "active", 2);
+            treeView.SetColumnRenderer(1, label, "text", 0, "foreground", 3);
 
             toggle.Toggled += (o, e) =>
             {
                 TreeIter iter;
-                if (listStore?.GetIter(out iter, new TreePath(e.Path)) ?? false)
+                if (listStore.GetIter(out iter, new TreePath(e.Path)))
                 {
                     var enable = new GLib.Value();
                     listStore.GetValue(iter, 1, ref enable);
@@ -40,7 +35,7 @@ namespace ASEva.UIGtk
                         listStore.SetValue(iter, 2, new GLib.Value(!(bool)active));
                     }
 
-                    treeView?.Selection.SelectIter(iter);
+                    treeView.Selection.SelectIter(iter);
                     callback.OnItemClicked();
 
                     toggled = true;
@@ -59,27 +54,32 @@ namespace ASEva.UIGtk
                 e.RetVal = true;
 
                 TreeIter iter;
-                if (treeView?.Selection.GetSelected(out iter) ?? false)
+                if (treeView.Selection.GetSelected(out iter))
                 {
                     GLib.Value enabled = new GLib.Value(), active = new GLib.Value();
-                    listStore?.GetValue(iter, 1, ref enabled);
-                    listStore?.GetValue(iter, 2, ref active);
+                    listStore.GetValue(iter, 1, ref enabled);
+                    listStore.GetValue(iter, 2, ref active);
                     if ((bool)enabled)
                     {
-                        listStore?.SetValue(iter, 2, new GLib.Value(!(bool)active));
+                        listStore.SetValue(iter, 2, new GLib.Value(!(bool)active));
                         callback.OnItemClicked();
                     }
                 }
             };
         }
 
-        public void AddItems(string[] itemsText, bool[]? itemsChecked, bool[]? itemsEnabled)
+        private CheckableListBoxBackendGtk(Builder builder) : base(builder.GetRawOwnedObject("CheckableListBoxBackendGtk"))
+        {
+            builder.Autoconnect(this);
+        }
+
+        public void AddItems(string[] itemsText, bool[] itemsChecked, bool[] itemsEnabled)
         {
             for (int i = 0; i < itemsText.Length; i++)
             {
                 var enable = itemsEnabled == null ? true : itemsEnabled[i];
                 var active = itemsChecked == null ? false : itemsChecked[i];
-                listStore?.AppendValues(itemsText[i], enable, active, rgb(enable ? Eto.Drawing.Colors.Black : Eto.Drawing.Colors.LightGrey));
+                listStore.AppendValues(itemsText[i], enable, active, rgb(enable ? Eto.Drawing.Colors.Black : Eto.Drawing.Colors.LightGrey));
             }
         }
 
@@ -88,19 +88,19 @@ namespace ASEva.UIGtk
             var iters = getIters(indices[0] + 1);
             foreach (var index in indices)
             {
-                listStore?.Remove(ref iters[index]);
+                listStore.Remove(ref iters[index]);
             }
         }
 
         public void RemoveAllItems()
         {
-            listStore?.Clear();
+            listStore.Clear();
         }
 
         public bool GetChecked(int index)
         {
             var active = new GLib.Value();
-            listStore?.GetValue(getIters(index + 1)[index], 2, ref active);
+            listStore.GetValue(getIters(index + 1)[index], 2, ref active);
             return (bool)active;
         }
 
@@ -109,20 +109,20 @@ namespace ASEva.UIGtk
             var iters = getIters(indices.Last() + 1);
             foreach (var index in indices)
             {
-                listStore?.SetValue(iters[index], 2, new GLib.Value(isChecked));
+                listStore.SetValue(iters[index], 2, new GLib.Value(isChecked));
             }
         }
 
         public void SetText(int index, string text)
         {
-            listStore?.SetValue(getIters(index + 1)[index], 0, new GLib.Value(text));
+            listStore.SetValue(getIters(index + 1)[index], 0, new GLib.Value(text));
         }
 
         public void SetEnabled(int index, bool isEnabled)
         {
             TreeIter iter = getIters(index + 1)[index];
-            listStore?.SetValue(iter, 1, new GLib.Value(isEnabled));
-            listStore?.SetValue(iter, 3, rgb(isEnabled ? Eto.Drawing.Colors.Black : Eto.Drawing.Colors.LightGrey));
+            listStore.SetValue(iter, 1, new GLib.Value(isEnabled));
+            listStore.SetValue(iter, 3, rgb(isEnabled ? Eto.Drawing.Colors.Black : Eto.Drawing.Colors.LightGrey));
         }
 
         public int[] GetCheckedIndices()
@@ -132,7 +132,7 @@ namespace ASEva.UIGtk
             for (int i = 0; i < iters.Length; i++)
             {
                 var active = new GLib.Value();
-                listStore?.GetValue(iters[i], 2, ref active);
+                listStore.GetValue(iters[i], 2, ref active);
                 if ((bool)active) list.Add(i);
             }
             return list.ToArray();
@@ -141,7 +141,7 @@ namespace ASEva.UIGtk
         public int GetSelectedRowIndex()
         {
             TreeIter selected;
-            if (treeView?.Selection.GetSelected(out selected) ?? false) return getIters().ToList().IndexOf(selected);
+            if (treeView.Selection.GetSelected(out selected)) return getIters().ToList().IndexOf(selected);
             else return -1;
         }
 
@@ -150,7 +150,7 @@ namespace ASEva.UIGtk
             var list = new List<TreeIter>();
 
             TreeIter iter;
-            if (!(listStore?.GetIterFirst(out iter) ?? false)) return list.ToArray();
+            if (!listStore.GetIterFirst(out iter)) return list.ToArray();
             list.Add(iter);
             if (list.Count >= maxCount) return list.ToArray();
 

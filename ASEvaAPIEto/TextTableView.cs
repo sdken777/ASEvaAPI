@@ -22,9 +22,9 @@ namespace ASEva.UIEto
         {
             if (Factory == null) Factory = new DefaultTextTableViewFactory();
 
-            Control etoControl;
+            Control etoControl = null;
             Factory.CreateTextTableViewBackend(this, out etoControl, out backend);
-            Content = etoControl;
+            if (etoControl != null) Content = etoControl;
         }
 
         /// \~English
@@ -45,7 +45,7 @@ namespace ASEva.UIEto
         {
             if (rowAdded) return;
             colCount++;
-            backend.AddColumn(title, logicalWidth, editable);
+            backend.AddColumn(title == null ? "" : title, logicalWidth, editable);
         }
 
         /// \~English
@@ -101,15 +101,15 @@ namespace ASEva.UIEto
         /// 添加一行
         /// </summary>
         /// <param name="values">该行的初始文字，设为null则默认为空</param>
-        public void AddRow(String[]? values = null)
+        public void AddRow(String[] values = null)
         {
             if (colCount == 0) return;
 
-            var valuesToAdd = new String[colCount].Populate((i) => "");
+            var valuesToAdd = new String[colCount];
             int copyCount = values == null ? 0 : Math.Min(values.Length, valuesToAdd.Length);
             for (int i = 0; i < copyCount; i++)
             {
-                valuesToAdd[i] = values?[i] == null ? "" : values[i];
+                valuesToAdd[i] = values[i] == null ? "" : values[i];
             }
             for (int i = copyCount; i < valuesToAdd.Length; i++)
             {
@@ -137,16 +137,16 @@ namespace ASEva.UIEto
         public void AddRows(List<String[]> rowsValues)
         {
             if (colCount == 0) return;
-            if (rowsValues.Count == 0) return;
+            if (rowsValues == null || rowsValues.Count == 0) return;
 
             var list = new List<String[]>();
             foreach (var raw in rowsValues)
             {
-                var valuesToAdd = new String[colCount].Populate((i) => "");
+                var valuesToAdd = new String[colCount];
                 int copyCount = raw == null ? 0 : Math.Min(raw.Length, valuesToAdd.Length);
                 for (int i = 0; i < copyCount; i++)
                 {
-                    valuesToAdd[i] = raw?[i] == null ? "" : raw[i];
+                    valuesToAdd[i] = raw[i] == null ? "" : raw[i];
                 }
                 for (int i = copyCount; i < valuesToAdd.Length; i++)
                 {
@@ -175,7 +175,7 @@ namespace ASEva.UIEto
             if (rowIndex < 0 || rowIndex >= rowCount) return;
 
             rowCount--;
-            backend.RemoveRows([rowIndex]);
+            backend.RemoveRows(new int[]{ rowIndex });
         }
 
         /// \~English
@@ -190,7 +190,7 @@ namespace ASEva.UIEto
         /// <param name="rowIndices">各行序号</param>
         public void RemoveRows(int[] rowIndices)
         {
-            if (rowIndices.Length == 0) return;
+            if (rowIndices == null || rowIndices.Length == 0) return;
 
             var flags = new Dictionary<int, bool>();
             foreach (var rowIndex in rowIndices)
@@ -236,7 +236,7 @@ namespace ASEva.UIEto
         /// <param name="rowIndex">行序号</param>
         /// <param name="columnIndex">列序号</param>
         /// <returns>该格文字</returns>
-        public String? GetValue(int rowIndex, int columnIndex)
+        public String GetValue(int rowIndex, int columnIndex)
         {
             if (rowIndex < 0 || rowIndex >= rowCount) return null;
             if (columnIndex < 0 || columnIndex >= colCount) return null;
@@ -261,7 +261,7 @@ namespace ASEva.UIEto
         {
             if (rowIndex < 0 || rowIndex >= rowCount) return;
             if (columnIndex < 0 || columnIndex >= colCount) return;
-            backend.SetValue(rowIndex, columnIndex, val);
+            backend.SetValue(rowIndex, columnIndex, val == null ? "" : val);
         }
 
         /// \~English
@@ -314,11 +314,11 @@ namespace ASEva.UIEto
         /// <summary>
         /// 选中行变更事件
         /// </summary>
-        public event EventHandler<EventArgs>? SelectedRowsChanged;
+        public event EventHandler<EventArgs> SelectedRowsChanged;
 
         public void OnSelectedRowChanged()
         {
-            SelectedRowsChanged?.Invoke(this, EventArgs.Empty);
+            SelectedRowsChanged?.Invoke(this, null);
         }
 
         /// \~English
@@ -329,7 +329,7 @@ namespace ASEva.UIEto
         /// <summary>
         /// 文本框编辑事件
         /// </summary>
-        public event EventHandler<GridViewCellEventArgs>? CellEdited;
+        public event EventHandler<GridViewCellEventArgs> CellEdited;
 
         public void OnCellEdited(int rowIndex, int colIndex)
         {
@@ -340,7 +340,7 @@ namespace ASEva.UIEto
         private int rowCount = 0;
         private bool rowAdded = false;
 
-        public static TextTableViewFactory? Factory { private get; set; }
+        public static TextTableViewFactory Factory { private get; set; }
 
 		private TextTableViewBackend backend;
     }
@@ -357,7 +357,7 @@ namespace ASEva.UIEto
         void AddRows(List<String[]> rowsValues); // not empty, text not null
         void RemoveRows(int[] rowIndices); // validated, not empty, reversed
         void RemoveAllRows();
-        String? GetValue(int rowIndex, int columnIndex); // validated
+        String GetValue(int rowIndex, int columnIndex); // validated
         void SetValue(int rowIndex, int columnIndex, String val); // validated, val not null
         void SetTextColor(int rowIndex, int columnIndex, Color color); // validated
         void SetBackgroundColor(int rowIndex, int columnIndex, Color color); // validated
@@ -404,8 +404,6 @@ namespace ASEva.UIEto
             if (DataStore == null) DataStore = new List<GridItem>();
 
             var list = DataStore as List<GridItem>;
-            if (list == null) return;
-
             foreach (var values in rowsValues)
             {
                 list.Add(new GridItem(values));
@@ -421,8 +419,6 @@ namespace ASEva.UIEto
             if (DataStore == null) return;
 
             var list = DataStore as List<GridItem>;
-            if (list == null) return;
-
             foreach (var rowIndex in rowIndices)
             {
                 list.RemoveAt(rowIndex);
@@ -438,8 +434,6 @@ namespace ASEva.UIEto
             if (DataStore == null) return;
 
             var list = DataStore as List<GridItem>;
-            if (list == null) return;
-
             list.Clear();
             foregroundColors.Clear();
             backgroundColors.Clear();
@@ -447,12 +441,11 @@ namespace ASEva.UIEto
             DataStore = list;
         }
 
-        public string? GetValue(int rowIndex, int columnIndex)
+        public string GetValue(int rowIndex, int columnIndex)
         {
             if (DataStore == null) return null;
 
             var list = DataStore as List<GridItem>;
-            if (list == null) return null;
 
             var values = list[rowIndex].Values;
             return values[columnIndex].ToString();
@@ -463,8 +456,6 @@ namespace ASEva.UIEto
             if (DataStore == null) return;
 
             var list = DataStore as List<GridItem>;
-            if (list == null) return;
-
             var values = list[rowIndex].Values;
             values[columnIndex] = val;
 
@@ -489,7 +480,7 @@ namespace ASEva.UIEto
             return index < 0 ? -1 : index;
         }
 
-        private void TextTableView_CellFormatting(object? sender, GridCellFormatEventArgs e)
+        private void TextTableView_CellFormatting(object sender, GridCellFormatEventArgs e)
         {
             if (e.Row >= 0 && e.Row < foregroundColors.Count)
             {
@@ -505,9 +496,9 @@ namespace ASEva.UIEto
             }
         }
 
-        private void timer_Elapsed(object? sender, EventArgs e)
+        private void timer_Elapsed(object sender, EventArgs e)
         {
-            timer?.Stop();
+            timer.Stop();
             timer = null;
             Invalidate();
         }
@@ -543,9 +534,9 @@ namespace ASEva.UIEto
             }
         }
 
-        private List<Dictionary<GridColumn, Color>> foregroundColors = [];
-        private List<Dictionary<GridColumn, Color>> backgroundColors = [];
-        private UITimer? timer = null;
+        private List<Dictionary<GridColumn, Color>> foregroundColors = new List<Dictionary<GridColumn, Color>>();
+        private List<Dictionary<GridColumn, Color>> backgroundColors = new List<Dictionary<GridColumn, Color>>();
+        private UITimer timer = null;
 
         public enum InvalidateMode
         {

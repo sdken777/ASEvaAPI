@@ -50,7 +50,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 报文数据，长度限定在64以下，可能小于报文的实际长度
         /// </summary>
-        public byte[] Data { get; set; } = [];
+        public byte[] Data { get; set; }
 
         /// \~English
         /// <summary>
@@ -111,6 +111,6 @@ namespace ASEva.Samples
         /// <summary>
         /// 总线报文样本列表
         /// </summary>
-        public BusMessageSample[] Samples { get; set; } = [];
+        public BusMessageSample[] Samples { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace ASEva.UIAvalonia
         /// </summary>
         /// <param name="canvas">Skia画布</param>
         /// <param name="sizeScale">相对于默认尺寸的比例</param>
-        public static SKFont? GetDefaultFont(this SKCanvas canvas, float sizeScale = 1.0f)
+        public static SKFont GetDefaultFont(this SKCanvas canvas, float sizeScale = 1.0f)
         {
 #if ASEVA_API_BUNDLE_MODE
             if (sizeScale <= 0) sizeScale = 1;
@@ -62,7 +62,7 @@ namespace ASEva.UIAvalonia
         /// <param name="width">宽度</param>
         /// <param name="slant">倾斜度</param>
         /// <returns>字体对象</returns>
-        public static SKFont? GetFont(this SKCanvas canvas, String fontName, float sizeScale = 1.0f, SKFontStyleWeight weight = SKFontStyleWeight.Normal, SKFontStyleWidth width = SKFontStyleWidth.Normal, SKFontStyleSlant slant = SKFontStyleSlant.Upright)
+        public static SKFont GetFont(this SKCanvas canvas, String fontName, float sizeScale = 1.0f, SKFontStyleWeight weight = SKFontStyleWeight.Normal, SKFontStyleWidth width = SKFontStyleWidth.Normal, SKFontStyleSlant slant = SKFontStyleSlant.Upright)
         {
 #if ASEVA_API_BUNDLE_MODE
             if (sizeScale <= 0) sizeScale = 1;
@@ -170,7 +170,7 @@ namespace ASEva.UIAvalonia
                 return skDefault;
             }
 
-            public static SKFont? GetSKFont(String? fontName, float scale, SKFontStyleWeight weight, SKFontStyleWidth width, SKFontStyleSlant slant)
+            public static SKFont GetSKFont(String fontName, float scale, SKFontStyleWeight weight, SKFontStyleWidth width, SKFontStyleSlant slant)
             {
                 if (fontName == null) fontName = GetSKFont().Typeface.FamilyName;
                 var size = GetSKFont().Size * scale;
@@ -191,8 +191,8 @@ namespace ASEva.UIAvalonia
                 return skLibrary[key];
             }
 
-            private static SKFont? skDefault = null;
-            private static Dictionary<String, SKFont?> skLibrary = new Dictionary<String, SKFont?>();
+            private static SKFont skDefault = null;
+            private static Dictionary<String, SKFont> skLibrary = new Dictionary<String, SKFont>();
         }
 #endif
     }

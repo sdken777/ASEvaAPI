@@ -43,13 +43,13 @@ namespace ASEva.UIMonoMac
 			{
 			}
 			
-			WeakReference? handler;
-			public WKWebViewHandler? Handler { get => handler?.Target as WKWebViewHandler; set => handler = new WeakReference(value); }
+			WeakReference handler;
+			public WKWebViewHandler Handler { get => handler?.Target as WKWebViewHandler; set => handler = new WeakReference(value); }
 
 			public override void DidFinishNavigation(wk.WKWebView webView, wk.WKNavigation navigation)
 			{
 				// CHECK: 使用系统字体
-				Handler?.ExecuteScript("document.body.style.fontFamily = \"-apple-system\"");
+				Handler.ExecuteScript("document.body.style.fontFamily = \"-apple-system\"");
 
 				var h = Handler;
 				if (h != null)
@@ -67,7 +67,7 @@ namespace ASEva.UIMonoMac
 				DecidePolicy(webView, navigationAction, null, (policy, preferences) => decisionHandler(policy));
 			}
 
-			public override void DecidePolicy(wk.WKWebView webView, wk.WKNavigationAction navigationAction, wk.WKWebpagePreferences? preferences, Action<wk.WKNavigationActionPolicy, wk.WKWebpagePreferences?> decisionHandler)
+			public override void DecidePolicy(wk.WKWebView webView, wk.WKNavigationAction navigationAction, wk.WKWebpagePreferences preferences, Action<wk.WKNavigationActionPolicy, wk.WKWebpagePreferences> decisionHandler)
 			{
 				var h = Handler;
 				if (h == null)
@@ -112,12 +112,12 @@ namespace ASEva.UIMonoMac
 
 		public class EtoWebView : wk.WKWebView, IMacControl
 		{
-			public WeakReference? WeakHandler { get; set; }
+			public WeakReference WeakHandler { get; set; }
 
-			public WKWebViewHandler? Handler { get { return WeakHandler?.Target as WKWebViewHandler; } set { WeakHandler = new WeakReference(value); } }
+			public WKWebViewHandler Handler { get { return (WKWebViewHandler)WeakHandler.Target; } set { WeakHandler = new WeakReference(value); } }
 
-			public EtoWebView(WKWebViewHandler? handler)
-				: base(new CGRect(0, 0, 200, 200), handler?.Configuration)
+			public EtoWebView(WKWebViewHandler handler)
+				: base(new CGRect(0, 0, 200, 200), handler.Configuration)
 			{
 				Handler = handler;
 				UIDelegate = new EtoUIDelegate { Handler = handler };
@@ -182,20 +182,20 @@ namespace ASEva.UIMonoMac
 
 		public class EtoUIDelegate : wk.WKUIDelegate
 		{
-			WeakReference? handler;
+			WeakReference handler;
 
-			public WKWebViewHandler? Handler { get { return handler?.Target as WKWebViewHandler; } set { handler = new WeakReference(value); } }
+			public WKWebViewHandler Handler { get { return (WKWebViewHandler)handler.Target; } set { handler = new WeakReference(value); } }
 
 
 			public override void RunJavaScriptAlertPanel(wk.WKWebView webView, string message, wk.WKFrameInfo frame, Action completionHandler)
 			{
-				MessageBox.Show(Handler?.Widget, message);
+				MessageBox.Show(Handler.Widget, message);
 				completionHandler();
 			}
 
 			public override void RunJavaScriptConfirmPanel(wk.WKWebView webView, string message, wk.WKFrameInfo frame, Action<bool> completionHandler)
 			{
-				var result = MessageBox.Show(Handler?.Widget, message, MessageBoxButtons.YesNo) == DialogResult.Yes;
+				var result = MessageBox.Show(Handler.Widget, message, MessageBoxButtons.YesNo) == DialogResult.Yes;
 				completionHandler(result);
 			}
 
@@ -205,16 +205,16 @@ namespace ASEva.UIMonoMac
 				{
 					Prompt = prompt,
 					Value = defaultText,
-					Title = Handler?.DocumentTitle
+					Title = Handler.DocumentTitle
 				};
-				var result = dialog.ShowModal(Handler?.Widget) ? dialog.Value : string.Empty;
+				var result = dialog.ShowModal(Handler.Widget) ? dialog.Value : string.Empty;
 				completionHandler(result);
 			}
 
-			public override void RunOpenPanel(wk.WKWebView webView, wk.WKOpenPanelParameters parameters, wk.WKFrameInfo frame, Action<NSUrl[]?> completionHandler)
+			public override void RunOpenPanel(wk.WKWebView webView, wk.WKOpenPanelParameters parameters, wk.WKFrameInfo frame, Action<NSUrl[]> completionHandler)
 			{
 				var openDlg = new OpenFileDialog { MultiSelect = parameters.AllowsMultipleSelection };
-				if (openDlg.ShowDialog(Handler?.Widget.ParentWindow) == DialogResult.Ok)
+				if (openDlg.ShowDialog(Handler.Widget.ParentWindow) == DialogResult.Ok)
 				{
 					completionHandler(openDlg.Filenames.Select(r => NSUrl.FromFilename(r)).ToArray());
 				}
@@ -224,7 +224,7 @@ namespace ASEva.UIMonoMac
 				}
 			}
 
-			public override wk.WKWebView? CreateWebView(wk.WKWebView webView, wk.WKWebViewConfiguration configuration, wk.WKNavigationAction navigationAction, wk.WKWindowFeatures windowFeatures)
+			public override wk.WKWebView CreateWebView(wk.WKWebView webView, wk.WKWebViewConfiguration configuration, wk.WKNavigationAction navigationAction, wk.WKWindowFeatures windowFeatures)
 			{
 				var h = Handler;
 				if (h == null)
@@ -285,7 +285,7 @@ namespace ASEva.UIMonoMac
 
 		public string DocumentTitle => Control.Title;
 
-		public string? ExecuteScript(string script)
+		public string ExecuteScript(string script)
 		{
 			var task = ExecuteScriptAsync(script);
 
@@ -297,7 +297,7 @@ namespace ASEva.UIMonoMac
 			return task.Result;
 		}
 
-		public async Task<string?> ExecuteScriptAsync(string script)
+		public async Task<string> ExecuteScriptAsync(string script)
 		{
 			var fullScript = string.Format("var _fn = function() {{ {0} }}; _fn();", script);
 			var result = await Control.EvaluateJavaScriptAsync(fullScript);
@@ -338,7 +338,7 @@ namespace ASEva.UIMonoMac
 				TopMargin = margin, 
 				BottomMargin = margin 
 			};
-			NSPrintOperation? printOperation = null;
+			NSPrintOperation printOperation = null;
 
 			if (Control.RespondsToSelector(s_selGetPrintOperation))
 			{

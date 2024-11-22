@@ -7,7 +7,6 @@
     <UseWpf>True</UseWpf>
     <RootNamespace>HwndHostAvalonia</RootNamespace>
     <AssemblyName>HwndHostAvalonia</AssemblyName>
-    <Nullable>Enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

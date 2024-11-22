@@ -27,15 +27,15 @@ namespace ASEva.Utility
         /// <param name="type">样本协议（不包括通道信息，如'@1'）</param>
         public void Register(Type type)
         {
-            if (type.BaseType?.ToString() != "ASEva.Sample") return;
+            if (type.BaseType.ToString() != "ASEva.Sample") return;
 
             var obj = type.Assembly.CreateInstance(type.ToString());
-            if (obj == null || !(obj is Sample sample)) return;
+            if (obj == null || !(obj is Sample)) return;
 
-            var protocols = sample.GetGeneralSampleProtocols();
+            var protocols = (obj as Sample).GetGeneralSampleProtocols();
             if (protocols == null || protocols.Length == 0)
             {
-                var protocol = sample.GetGeneralSampleProtocol();
+                var protocol = (obj as Sample).GetGeneralSampleProtocol();
                 if (protocol == null || protocol.Length == 0) return;
                 protocols = new string[] { protocol };
             }
@@ -58,15 +58,16 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="input">待解析的 ASEva.GeneralSample 样本</param>
         /// <returns>若解析成功，则返回对应样本，若失败则返回空</returns>
-        public Sample? Parse(GeneralSample input)
+        public Sample Parse(GeneralSample input)
         {
             if (input == null) return null;
             if (input.Protocol == null) return null;
             if (!table.ContainsKey(input.Protocol)) return null;
 
             var obj = table[input.Protocol].Assembly.CreateInstance(table[input.Protocol].ToString());
-            if (obj == null || !(obj is Sample output)) return null;
+            if (obj == null || !(obj is Sample)) return null;
 
+            var output = obj as Sample;
             output.SetTime(input);
 
             try
@@ -82,6 +83,6 @@ namespace ASEva.Utility
             return output;
         }
 
-        private Dictionary<String, Type> table = [];
+        private Dictionary<String, Type> table = new Dictionary<string, Type>();
     }
 }

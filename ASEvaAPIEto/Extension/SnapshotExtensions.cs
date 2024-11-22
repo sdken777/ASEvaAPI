@@ -29,7 +29,7 @@ namespace ASEva.UIEto
         /// </summary>
         /// <param name="control">目标控件</param>
         /// <returns>控件快照图像，若不支持或获取失败则返回null</returns>
-        public static CommonImage? Snapshot(this Control control)
+        public static CommonImage Snapshot(this Control control)
         {
             if (control == null || Handler == null) return null;
             return Handler.Snapshot(control);
@@ -47,7 +47,7 @@ namespace ASEva.UIEto
         /// </summary>
         /// <param name="control">目标控件</param>
         /// <returns>控件快照图像，若不支持或获取失败则返回null</returns>
-        public static CommonImage? SnapshotFromScreen(this Control control)
+        public static CommonImage SnapshotFromScreen(this Control control)
         {
             if (control == null || ScreenModeHandler == null) return null;
             return ScreenModeHandler.Snapshot(control);
@@ -55,10 +55,10 @@ namespace ASEva.UIEto
 
         public interface SnapshotHandler
         {
-            CommonImage? Snapshot(Control control);
+            CommonImage Snapshot(Control control);
         }
 
-        public static SnapshotHandler? Handler { private get; set; }
-        public static SnapshotHandler? ScreenModeHandler { private get; set; }
+        public static SnapshotHandler Handler { private get; set; }
+        public static SnapshotHandler ScreenModeHandler { private get; set; }
     }
 }

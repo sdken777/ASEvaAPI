@@ -16,15 +16,15 @@ namespace ASEva.Utility
     {
         public static double? StringToValue(String text)
         {
-            if (text.Length == 0) return null;
+            if (text == null || text.Length == 0) return null;
             double ret;
             if (!Double.TryParse(text, out ret)) return null;
             return ret;
         }
 
-        public static double[]? StringToSignalValues(String text)
+        public static double[] StringToSignalValues(String text)
         {
-            if (text.Length == 0) return null;
+            if (text == null || text.Length == 0) return null;
             var values = text.Split(',');
             if (values.Length == 0) return null;
             var ret = new double[values.Length];
@@ -35,9 +35,9 @@ namespace ASEva.Utility
             return ret;
         }
 
-        public static String? SignalValuesToString(double[] values)
+        public static String SignalValuesToString(double[] values)
         {
-            if (values.Length == 0) return null;
+            if (values == null || values.Length == 0) return null;
             else
             {
                 var text = "";
@@ -46,9 +46,9 @@ namespace ASEva.Utility
             }
         }
 
-        public static List<String>? StringToSignalValueStrings(String text)
+        public static List<String> StringToSignalValueStrings(String text)
         {
-            if (text.Length == 0) return null;
+            if (text == null || text.Length == 0) return null;
             var comps = text.Split(',');
             if (comps.Length == 0) return null;
             double dummy;
@@ -61,7 +61,7 @@ namespace ASEva.Utility
 
         public static String SignalValueStringsToString(List<String> list)
         {
-            if (list.Count == 0) return "";
+            if (list == null || list.Count == 0) return "";
             var text = "";
             double dummy;
             foreach (var c in list)

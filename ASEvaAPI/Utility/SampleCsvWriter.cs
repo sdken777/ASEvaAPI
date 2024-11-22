@@ -33,21 +33,22 @@ namespace ASEva.Utility
         /// <param name="overwrite">若文件已存在是否覆盖</param>
         /// <param name="titles">样本标题</param>
         /// <returns>csv写入器，若文件创建失败则返回空</returns>
-        public static SampleCsvWriter? CreateWriter(String file, bool overwrite, List<String> titles)
+        public static SampleCsvWriter CreateWriter(String file, bool overwrite, List<String> titles)
         {
             if (File.Exists(file) && !overwrite) return null;
 
-            StreamWriter? writer = null;
+            StreamWriter writer = null;
             try
             {
+                var output = new SampleCsvWriter();
+
                 var fileNameComps = Path.GetFileNameWithoutExtension(file).Split('@');
-                var protocol = fileNameComps[0];
-                int? channel = null;
+                output.protocol = fileNameComps[0];
                 if (fileNameComps.Length >= 2)
                 {
-                    int outChannel;
-                    if (!Int32.TryParse(fileNameComps[1], out outChannel)) return null;
-                    channel = outChannel;
+                    int channel;
+                    if (!Int32.TryParse(fileNameComps[1], out channel)) return null;
+                    output.channel = channel;
                 }
 
                 writer = new StreamWriter(file, false, Encoding.UTF8);
@@ -56,8 +57,7 @@ namespace ASEva.Utility
                 if (titles != null) titleLine += "," + String.Join(",", titles);
                 writer.WriteLine(titleLine);
 
-                var output = new SampleCsvWriter(writer, protocol);
-                output.channel = channel;
+                output.writer = writer;
                 return output;
             }
             catch (Exception ex)
@@ -82,7 +82,7 @@ namespace ASEva.Utility
         /// <returns>若该通用样本协议或session不一致则返回false</returns>
         public bool Write(GeneralSample sample)
         {
-            if (sample.Offset <= 0) return false;
+            if (sample == null || sample.Offset <= 0) return false;
             if (sample.Protocol != protocol) return false;
             if (sample.Channel == null)
             {
@@ -127,7 +127,7 @@ namespace ASEva.Utility
             foreach (var val in sample.Values)
             {
                 if (++count > sample.NumberOfSignificants) break;
-                list.Add(val.mode == GeneralSampleValueMode.Number ? val.number.ToString() : (val.mode == GeneralSampleValueMode.Invalid ? "na" : (val.text ?? "")));
+                list.Add(val.mode == GeneralSampleValueMode.Number ? val.number.ToString() : (val.mode == GeneralSampleValueMode.Invalid ? "na" : val.text));
             }
             writer.WriteLine(String.Join(",", list));
 
@@ -149,23 +149,19 @@ namespace ASEva.Utility
 
         public void Dispose()
         {
-            if (!writerClosed)
+            if (writer != null)
             {
                 writer.Close();
-                writerClosed = true;
+                writer = null;
             }
         }
 
-        private SampleCsvWriter(StreamWriter writer, String protocol)
-        {
-            this.writer = writer;
-            this.protocol = protocol;
-        }
-
-        private StreamWriter writer;
-        private bool writerClosed = false;
-        private String protocol;
+        private StreamWriter writer = null;
+        private String protocol = null;
         private int? channel = null;
         private SessionIdentifier? session = null;
+
+        private SampleCsvWriter()
+        { }
     }
 }

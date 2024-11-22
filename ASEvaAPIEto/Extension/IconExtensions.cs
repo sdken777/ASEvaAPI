@@ -17,7 +17,7 @@ namespace ASEva.UIEto
     /// </summary>
     public static class IconExtensions
     {
-        public static Icon? ToIcon(this byte[] imageData)
+        public static Icon ToIcon(this byte[] imageData)
         {
             try
             {
@@ -32,7 +32,7 @@ namespace ASEva.UIEto
             }
         }
 
-        public static Icon? ToIcon(this Bitmap bitmap)
+        public static Icon ToIcon(this Bitmap bitmap)
         {
             var image = ImageConverter.ConvertFromBitmap(bitmap);
             if (image == null) return null;
@@ -46,7 +46,7 @@ namespace ASEva.UIEto
             else return fineIcon;
         }
 
-        private static Icon? makeFine(CommonImage image)
+        private static Icon makeFine(CommonImage image)
         {
             if (!image.WithAlpha) return null;
 
@@ -72,7 +72,7 @@ namespace ASEva.UIEto
 
         private static CommonImage resizeHalf(CommonImage input)
         {
-            var output = CommonImage.Create(Math.Max(1, input.Width / 2), Math.Max(1, input.Height / 2), true);
+            var output = CommonImage.Create(input.Width / 2, input.Height / 2, true);
             var inputData = input.Data;
             var inputStep = input.RowBytes;
             var outputData = output.Data;

@@ -27,7 +27,7 @@ namespace ASEva.Samples
             set
             {
                 data = value;
-                if (data.Length == 0) MD5 = null;
+                if (data == null) MD5 = null;
                 else
                 {
                     var buffer = new byte[data.Length * 2];
@@ -45,8 +45,8 @@ namespace ASEva.Samples
         /// <summary>
         /// 音频帧数据的MD5
         /// </summary>
-        public String? MD5 { get; private set; }
+        public String MD5 { get; private set; }
 
-        private short[] data = [];
+        private short[] data;
     }
 }

@@ -85,7 +85,7 @@ namespace ASEva.UICoreWF
             Rows.Clear();
         }
 
-        public string? GetValue(int rowIndex, int columnIndex)
+        public string GetValue(int rowIndex, int columnIndex)
         {
             return Rows[rowIndex].Cells[columnIndex].Value.ToString();
         }

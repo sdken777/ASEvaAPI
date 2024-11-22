@@ -32,7 +32,7 @@ namespace ASEva.UIGtk
 		{
 			public new DateTimePickerHandler Handler { get { return (DateTimePickerHandler)base.Handler; } }
 
-			public void HandleDateChanged(object? sender, EventArgs e)
+			public void HandleDateChanged(object sender, EventArgs e)
 			{
 				Handler?.Callback.OnValueChanged(Handler.Widget, EventArgs.Empty);
 			}

@@ -32,7 +32,7 @@ namespace ASEva.UIGtk
         public static Pixbuf ToPixbuf(this CommonImage image)
         {
             var mid = ImageConverter.ConvertToVideoFrameSampleImage(image) as VideoFrameSampleImage;
-            if (mid == null) throw new Exception("Invalid VideoFrameSampleImage.");
+            if (mid == null) return null;
             else return mid.ToPixbuf();
         }
 
@@ -51,7 +51,7 @@ namespace ASEva.UIGtk
         public static ImageSurface ToImageSurface(this CommonImage image)
         {
             var mid = ImageConverter.ConvertToVideoFrameSampleImage(image) as VideoFrameSampleImage;
-            if (mid == null) throw new Exception("Invalid VideoFrameSampleImage.");
+            if (mid == null) return null;
             else return mid.ToImageSurface();
         }
 
@@ -67,7 +67,7 @@ namespace ASEva.UIGtk
         /// </summary>
         /// <param name="pixbuf">Gdk.Pixbuf对象</param>
         /// <returns>通用图像数据</returns>
-        public static CommonImage? ToCommonImage(this Pixbuf pixbuf)
+        public static CommonImage ToCommonImage(this Pixbuf pixbuf)
         {
             return ImageConverter.ConvertFromPlatformImage(pixbuf);
         }

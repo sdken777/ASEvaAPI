@@ -18,6 +18,7 @@ namespace ASEva.Utility
         private static double ee = 0.00669342162296594323;
         private static double x_pi = Math.PI * 3000.0 / 180.0;
 
+
         /// \~English
         /// <summary>
         /// Convert WGS coordinates to Baidu coordinates

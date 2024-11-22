@@ -37,7 +37,7 @@ namespace ASEva.UIMonoMac
 			return textField;
 		}
 
-        private void textField_Changed(object? sender, EventArgs e)
+        private void textField_Changed(object sender, EventArgs e)
         {
 			if (showPassword)
 			{
@@ -86,7 +86,7 @@ namespace ASEva.UIMonoMac
 			}
 		}
 
-		static void HandleChanged(object? sender, EventArgs e)
+		static void HandleChanged(object sender, EventArgs e)
 		{
 			var handler = GetHandler(sender) as PasswordBoxHandler;
 			if (handler != null)
@@ -129,8 +129,6 @@ namespace ASEva.UIMonoMac
 		private void updateBaseText()
 		{
 			var textField = Control as EtoTextField;
-			if (textField == null) return;
-			
 			textField.Changed -= textField_Changed;
 			if (showPassword) base.Text = password;
 			else

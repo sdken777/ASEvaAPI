@@ -42,7 +42,7 @@ namespace ASEvaAPIEtoTest
         {
             layout.AddLabel(t.Format("basic-label-row", 1));
             var checkBox = layout.AddCheckBox(t["basic-checkbox"]);
-            var radioButtonList = layout.AddRadioButtonList([t["basic-radiobutton-file"], t["basic-radiobutton-dir"]]);
+            var radioButtonList = layout.AddRadioButtonList(new string[] { t["basic-radiobutton-file"], t["basic-radiobutton-dir"] });
             layout.AddSpace();
             var linkButton = layout.AddLinkButton(t["basic-linkbutton"]);
             linkButton.TextColor = Colors.ForestGreen;
@@ -50,7 +50,7 @@ namespace ASEvaAPIEtoTest
             {
                 if (radioButtonList.SelectedIndex == 0)
                 {
-                    if (checkBox.Checked ?? false)
+                    if (checkBox.Checked.Value)
                     {
                         var dialog = new SaveFileDialog();
                         dialog.Filters.Add(new FileFilter(t["basic-save-file-filter"], ".txt"));
@@ -73,7 +73,7 @@ namespace ASEvaAPIEtoTest
         private void initBasicTabPageARow2(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 2));
-            layout.AddComboBox([t.Format("basic-combobox", "A"), t.Format("basic-combobox", "B")]).SetLogicalWidth(120);
+            layout.AddComboBox(new string[] { t.Format("basic-combobox", "A"), t.Format("basic-combobox", "B") }).SetLogicalWidth(120);
             layout.AddControl(new NumericStepper { MinValue = 0, MaxValue = 100 }, false, 120 );
             layout.AddControl(new DateTimePicker(), true);
         }
@@ -83,15 +83,15 @@ namespace ASEvaAPIEtoTest
             layout.AddLabel(t.Format("basic-label-row", 3));
             layout.AddControl(new TextBox(), true);
             layout.AddControl(new SearchBox());
-            var passwordBox = (layout.AddControl(new PasswordBox{ PasswordChar = '●' }) as PasswordBox)!;
-            layout.AddCheckBox("").CheckedChanged += (o, e) => { passwordBox.PasswordChar = (o as CheckBox)?.Checked ?? false ? (char)0 : '●'; };
+            var passwordBox = layout.AddControl(new PasswordBox{ PasswordChar = '●' }) as PasswordBox;
+            layout.AddCheckBox("").CheckedChanged += (o, e) => { passwordBox.PasswordChar = (o as CheckBox).Checked.Value ? (char)0 : '●'; };
         }
 
         private void initBasicTabPageARow4(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 4));
-            var slider = (layout.AddControl(new Slider { MinValue = 0, MaxValue = 100, TickFrequency = 10 }, true, 0, 40) as Slider)!;
-            var progressBar = (layout.AddControl(new ProgressBar()) as ProgressBar)!;
+            var slider = layout.AddControl(new Slider { MinValue = 0, MaxValue = 100, TickFrequency = 10 }, true, 0, 40) as Slider;
+            var progressBar = layout.AddControl(new ProgressBar()) as ProgressBar;
             slider.ValueChanged += delegate { progressBar.Value = slider.Value; };
         }
 
@@ -150,15 +150,15 @@ namespace ASEvaAPIEtoTest
             layout.AddLinkButton(t["basic-client-size"], true).Click += (sender, args) =>
             {
                 var logicalSize = Pixel.ToLogicalSize(ClientSize);
-                if (sender is LinkButton linkButton) linkButton.Text = logicalSize.Width + "x" + logicalSize.Height;
+                (sender as LinkButton).Text = logicalSize.Width + "x" + logicalSize.Height;
             };
         }
 
         private void loopBasicPageA()
         {
-            if (labelTopMost != null) labelTopMost.Text = labelTopMost.IsTopMost() ? "O" : "X";
+            labelTopMost.Text = labelTopMost.IsTopMost() ? "O" : "X";
         }
 
-        private Label? labelTopMost;
+        private Label labelTopMost;
     }
 }

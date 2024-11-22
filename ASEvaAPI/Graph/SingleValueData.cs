@@ -2,17 +2,17 @@
 
 namespace ASEva.Graph
 {
-#pragma warning disable CS1571
+    #pragma warning disable CS1571
 
     /// \~English
     /// <summary>
-    /// (api:app=3.7.0) Single value graph data
+    /// (api:app=3.0.0) Single value graph data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.0) 单值数据
+    /// (api:app=3.0.0) 单值数据
     /// </summary>
-    public class SingleValueData(GraphDefinition def) : GraphData(def)
+    public class SingleValueData : GraphData
     {
         /// \~English
         /// <summary>
@@ -45,9 +45,11 @@ namespace ASEva.Graph
         /// <param name="title">标题</param>
         /// <param name="validation">数据验证方式，null表示不验证。支持ValueAbove, ValueBelow, ValueInRange</param>
         /// <returns>图表定义对象</returns>
-        public static GraphDefinition CreateDefinitionWithValidation(String title, GraphValidation? validation)
+        public static GraphDefinition CreateDefinitionWithValidation(String title, GraphValidation validation)
         {
-            var def = new GraphDefinition(GraphType.SingleValue, title);
+            var def = new GraphDefinition();
+            def.Type = GraphType.SingleValue;
+            def.MainTitle = title;
             def.ColumnTitles.Add("Value");
 
             if (validation != null)
@@ -116,7 +118,6 @@ namespace ASEva.Graph
         public override void MergeWith(GraphData data)
         {
             var D = data as SingleValueData;
-            if (D == null) return;
 
             var srcVal = Data[0, 0];
             var targetVal = D.GetValue();

@@ -87,7 +87,7 @@ namespace ASEva.UIAvalonia
         /// </summary>
         /// <param name="bitmap">Avalonia位图对象</param>
         /// <returns>通用图像数据</returns>
-        public static CommonImage? ToCommonImage(this Bitmap bitmap)
+        public static CommonImage ToCommonImage(this Bitmap bitmap)
         {
             if (bitmap.Format != PixelFormat.Bgra8888 && bitmap.Format != PixelFormat.Rgba8888) return null;
 

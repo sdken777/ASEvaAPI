@@ -16,8 +16,6 @@ namespace ASEva.UIMonoMac
         public void SetMinimumClientSize(Window window, int logicalWidth, int logicalHeight)
         {
             var nsWindow = window.ControlObject as NSWindow;
-            if (nsWindow == null) return;
-            
             var contentRect = NSWindow.ContentRectFor(nsWindow.Frame, nsWindow.StyleMask);
             var barHeight = (int)Math.Max(0, nsWindow.Frame.Height - contentRect.Height);
             window.MinimumSize = new Size(logicalWidth, logicalHeight + barHeight);

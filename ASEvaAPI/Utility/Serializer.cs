@@ -24,7 +24,7 @@ namespace ASEva.Utility
         /// <summary>
         /// 对象转XML字符串
         /// </summary>
-        public static string? ObjectToXml(object obj)
+        public static string ObjectToXml(object obj)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace ASEva.Utility
         /// <summary>
         /// XML字符串转对象
         /// </summary>
-        public static object? XmlToObject(string xml, Type objectType)
+        public static object XmlToObject(string xml, Type objectType)
         {
             try
             {
@@ -92,7 +92,7 @@ namespace ASEva.Utility
         /// <summary>
         /// 从XML文件读取对象
         /// </summary>
-        public static object? XmlFileToObject(string file, Type objectType)
+        public static object XmlFileToObject(string file, Type objectType)
         {
             try
             {
@@ -113,7 +113,7 @@ namespace ASEva.Utility
         /// <summary>
         /// 对象转JSON字符串
         /// </summary>
-        public static string? ObjectToJson(object obj)
+        public static string ObjectToJson(object obj)
         {
             try
             {
@@ -139,7 +139,7 @@ namespace ASEva.Utility
         /// <summary>
         /// JSON字符串转对象
         /// </summary>
-        public static object? JsonToObject(string json, Type objectType)
+        public static object JsonToObject(string json, Type objectType)
         {
             try
             {
@@ -181,7 +181,7 @@ namespace ASEva.Utility
         /// <summary>
         /// 从JSON文件读取对象
         /// </summary>
-        public static object? JsonFileToObject(string file, Type objectType)
+        public static object JsonFileToObject(string file, Type objectType)
         {
             try
             {

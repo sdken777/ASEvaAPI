@@ -8,13 +8,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.7.3) Output sample of processor
+    /// (api:app=3.0.0) Output sample of processor
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.3) 数据处理的输出样本
+    /// (api:app=3.0.0) 数据处理的输出样本
     /// </summary>
-    public class ProcessorOutputSample
+    public struct ProcessorOutputSample
     {
         /// \~English
         /// <summary>
@@ -24,7 +24,7 @@ namespace ASEva
         /// <summary>
         /// 输出样本，若timeRef为空则需要手动对时间戳和时间线位置赋值
         /// </summary>
-        public Sample Sample { get; set; }
+        public Sample sample;
 
         /// \~English
         /// <summary>
@@ -34,7 +34,7 @@ namespace ASEva
         /// <summary>
         /// 时间参考样本，sample的时间戳和时间线位置将被赋值为与此样本一致
         /// </summary>
-        public Sample? TimeRef { get; set; }
+        public Sample timeRef;
 
         /// \~English
         /// <summary>
@@ -48,7 +48,8 @@ namespace ASEva
         /// <param name="sample">输出样本</param>
         public ProcessorOutputSample(Sample sample)
         {
-            Sample = sample;
+            this.sample = sample;
+            this.timeRef = null;
         }
 
         /// \~English
@@ -65,18 +66,18 @@ namespace ASEva
         /// <param name="timeRef">时间参考样本</param>
         public ProcessorOutputSample(Sample sample, Sample timeRef)
         {
-            Sample = sample;
-            TimeRef = timeRef;
+            this.sample = sample;
+            this.timeRef = timeRef;
         }
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.7.3) Processor. Created while session starting, released while session stopping
+    /// (api:app=3.0.0) Processor. Created while session starting, released while session stopping
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.3) 数据处理对象。在每轮Session开始时创建，结束时销毁
+    /// (api:app=3.0.0) 数据处理对象。在每轮Session开始时创建，结束时销毁
     /// </summary>
     public class Processor
     {
@@ -102,7 +103,7 @@ namespace ASEva
         /// </summary>
         /// <param name="sample">新数据样本，包括通用样本 ASEva.GeneralSample , 手动触发器样本 ASEva.Samples.ManualTriggerSample , 视频帧样本 ASEva.Samples.VideoFrameSample , 音频帧样本 ASEva.Samples.AudioFrameSample , 点云帧样本 ASEva.Samples.PointCloudSample 等类型</param>
         /// <returns>返回的样本列表</returns>
-        public virtual List<ProcessorOutputSample> OnProcessSample(Sample sample) { return []; }
+        public virtual List<ProcessorOutputSample> OnProcessSample(Sample sample) { return null; }
 
         /// \~English
         /// <summary>

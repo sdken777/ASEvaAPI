@@ -49,17 +49,16 @@ namespace ASEva.Utility
                 ctxs[id] = new DrawBeatContext();
                 ctxs[id].Category = "";
             }
-            var ctx = ctxs[id];
-            if (!ctx.Ongoing && !ctx.InCaller)
+            if (!ctxs[id].Ongoing && !ctxs[id].InCaller)
             {
                 var now = DateTime.Now;
-                if (ctx.IdleTimer != null)
+                if (ctxs[id].IdleTimer != null)
                 {
-                    if (now < ctx.IdleTimer.Value) ctx.IdleTimer = now;
-                    if ((now - ctx.IdleTimer.Value).TotalMilliseconds < ctx.DrawInterval) return false;
+                    if (now < ctxs[id].IdleTimer.Value) ctxs[id].IdleTimer = now;
+                    if ((now - ctxs[id].IdleTimer.Value).TotalMilliseconds < ctxs[id].DrawInterval) return false;
                 }
-                ctx.Ongoing = true;
-                ctx.InCaller = true;
+                ctxs[id].Ongoing = true;
+                ctxs[id].InCaller = true;
                 return true;
             }
             else return false;
@@ -80,6 +79,7 @@ namespace ASEva.Utility
         public static bool CallerBegin(object target)
         {
             if (!enabled) return true;
+            if (target == null) return false;
             else return CallerBegin(target.GetHashCode());
         }
 
@@ -113,7 +113,7 @@ namespace ASEva.Utility
         public static void CallerEnd(object target)
         {
             if (!enabled) return;
-            CallerEnd(target.GetHashCode());
+            if (target != null) CallerEnd(target.GetHashCode());
         }
 
         /// \~English
@@ -128,11 +128,11 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="id">绘图对象ID</param>
         /// <param name="category">类别，设为空表示不归类</param>
-        public static void CallbackBegin(int id, String? category)
+        public static void CallbackBegin(int id, String category)
         {
             if (!enabled) return;
             if (!ctxs.ContainsKey(id)) ctxs[id] = new DrawBeatContext();
-            ctxs[id].Category = category ?? "";
+            ctxs[id].Category = category == null ? "" : category;
             if (ctxs[id].CallbackBeginTime == null) ctxs[id].CallbackBeginTime = DateTime.Now;
         }
 
@@ -148,10 +148,10 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="target">绘图对象</param>
         /// <param name="category">类别，设为空表示不归类</param>
-        public static void CallbackBegin(object target, String? category)
+        public static void CallbackBegin(object target, String category)
         {
             if (!enabled) return;
-            CallbackBegin(target.GetHashCode(), category);
+            if (target != null) CallbackBegin(target.GetHashCode(), category);
         }
 
         /// \~English
@@ -167,29 +167,29 @@ namespace ASEva.Utility
         public static void CallbackEnd(int id)
         {
             if (!enabled) return;
-            var ctx = ctxs[id];
-            if (ctx.CallbackBeginTime != null)
+            if (!ctxs.ContainsKey(id)) return;
+            if (ctxs[id].CallbackBeginTime != null)
             {
                 DateTimeRange range;
-                range.start = 0.0000001 * ctx.CallbackBeginTime.Value.Ticks;
+                range.start = 0.0000001 * ctxs[id].CallbackBeginTime.Value.Ticks;
                 range.end = 0.0000001 * DateTime.Now.Ticks;
 
-                ctx.RecentCallbackRanges.Add(range);
-                while (ctx.RecentCallbackRanges.Count > 0 && ctx.RecentCallbackRanges.Last().end - ctx.RecentCallbackRanges[0].start > 3) ctx.RecentCallbackRanges.RemoveAt(0);
+                ctxs[id].RecentCallbackRanges.Add(range);
+                while (ctxs[id].RecentCallbackRanges.Count > 0 && ctxs[id].RecentCallbackRanges.Last().end - ctxs[id].RecentCallbackRanges[0].start > 3) ctxs[id].RecentCallbackRanges.RemoveAt(0);
 
-                if (!ctx.InCaller)
+                if (!ctxs[id].InCaller)
                 {
-                    var category = ctx.Category;
-                    if (!recentOutCallerCallbackRanges.ContainsKey(category)) recentOutCallerCallbackRanges[category] = [];
+                    var category = ctxs[id].Category;
+                    if (!recentOutCallerCallbackRanges.ContainsKey(category)) recentOutCallerCallbackRanges[category] = new List<DateTimeRange>();
 
                     var list = recentOutCallerCallbackRanges[category];
                     list.Add(range);
                     while (list.Count > 0 && list.Last().end - list[0].start > 3) list.RemoveAt(0);
                 }
 
-                ctx.CallbackBeginTime = null;
-                ctx.IdleTimer = DateTime.Now;
-                ctx.Ongoing = false;
+                ctxs[id].CallbackBeginTime = null;
+                ctxs[id].IdleTimer = DateTime.Now;
+                ctxs[id].Ongoing = false;
             }
         }
 
@@ -206,7 +206,7 @@ namespace ASEva.Utility
         public static void CallbackEnd(object target)
         {
             if (!enabled) return;
-            CallbackEnd(target.GetHashCode());
+            if (target != null) CallbackEnd(target.GetHashCode());
         }
 
         /// \~English
@@ -338,14 +338,13 @@ namespace ASEva.Utility
 
             public DrawBeatContext()
             {
-                Category = "";
-                RecentCallbackRanges = [];
+                RecentCallbackRanges = new List<DateTimeRange>();
                 DrawInterval = 100;
             }
         }
 
-        private static Dictionary<int, DrawBeatContext> ctxs = [];
-        private static Dictionary<String, List<DateTimeRange>> recentOutCallerCallbackRanges = [];
+        private static Dictionary<int, DrawBeatContext> ctxs = new Dictionary<int, DrawBeatContext>();
+        private static Dictionary<String, List<DateTimeRange>> recentOutCallerCallbackRanges = new Dictionary<string, List<DateTimeRange>>();
         private static bool enabled = false;
     }
 }

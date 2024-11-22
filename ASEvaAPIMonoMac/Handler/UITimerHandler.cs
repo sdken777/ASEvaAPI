@@ -11,16 +11,14 @@ using Eto.Mac.Forms;
 
 namespace ASEva.UIMonoMac
 {
-	#pragma warning disable CS8625
-	
 	class UITimerHandler : WidgetHandler<NSTimer, UITimer, UITimer.ICallback>, UITimer.IHandler
 	{
 		double interval = 1f;
 		
 		class Helper
 		{
-			WeakReference? handler;
-			public UITimerHandler? Handler { get { return handler?.Target as UITimerHandler; } set { handler = new WeakReference(value); } }
+			WeakReference handler;
+			public UITimerHandler Handler { get { return (UITimerHandler)handler.Target; } set { handler = new WeakReference(value); } }
 
 			#if MONOMAC
 			public void Elapsed()

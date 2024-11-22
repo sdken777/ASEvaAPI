@@ -40,7 +40,7 @@ namespace ASEva.UIGtk
 		{
 			public new PasswordBoxHandler Handler { get { return (PasswordBoxHandler)base.Handler; } }
 
-			public void HandleTextChanged(object? sender, EventArgs e)
+			public void HandleTextChanged(object sender, EventArgs e)
 			{
 				Handler?.Callback.OnTextChanged(Handler.Widget, EventArgs.Empty);
 			}

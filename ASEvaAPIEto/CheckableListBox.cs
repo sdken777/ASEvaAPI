@@ -30,9 +30,9 @@ namespace ASEva.UIEto
         {
             if (Factory == null) Factory = new DefaultCheckableListBoxFactory();
 
-            Control etoControl;
+            Control etoControl = null;
             Factory.CreateCheckableListBoxBackend(this, out etoControl, out backend);
-            Content = etoControl;
+            if (etoControl != null) Content = etoControl;
         }
 
         /// \~English
@@ -95,7 +95,7 @@ namespace ASEva.UIEto
         public void AddItem(String text, bool isChecked = false, bool isEnabled = true)
         {
             enableFlags.Add(isEnabled);
-            backend.AddItems([text], [isChecked], [isEnabled]);
+            backend.AddItems(new String[]{ text }, new bool[]{ isChecked }, new bool[]{ isEnabled });
         }
 
         /// \~English
@@ -112,9 +112,9 @@ namespace ASEva.UIEto
         /// <param name="itemsText">各多选框的显示文字</param>
         /// <param name="itemsChecked">各多选框的初始勾选状态，若为null则全部为未勾选，若非null则数组大小应与itemsText一致</param>
         /// <param name="itemsEnabled">各多选框的初始启用状态，若为null则全部启用，若非null则数组大小应与itemsText一致</param>
-        public void AddItems(String[] itemsText, bool[]? itemsChecked = null, bool[]? itemsEnabled = null)
+        public void AddItems(String[] itemsText, bool[] itemsChecked = null, bool[] itemsEnabled = null)
         {
-            if (itemsText.Length == 0) return;
+            if (itemsText == null || itemsText.Length == 0) return;
 
             if (itemsChecked != null && itemsChecked.Length != itemsText.Length) return;
             if (itemsEnabled != null && itemsEnabled.Length != itemsText.Length) return;
@@ -142,7 +142,7 @@ namespace ASEva.UIEto
         {
             if (index < 0 || index >= enableFlags.Count) return;
             enableFlags.RemoveAt(index);
-            backend.RemoveItems([index]);
+            backend.RemoveItems(new int[]{ index });
         }
 
         /// \~English
@@ -157,7 +157,7 @@ namespace ASEva.UIEto
         /// <param name="indices">要移除的所有多选框的当前序号</param>
         public void RemoveItems(int[] indices)
         {
-            if (indices.Length == 0) return;
+            if (indices == null || indices.Length == 0) return;
 
             var flags = new Dictionary<int, bool>();
             foreach (var index in indices)
@@ -226,7 +226,7 @@ namespace ASEva.UIEto
         public void SetChecked(int index, bool isChecked)
         {
             if (index < 0 || index >= enableFlags.Count) return;
-            backend.SetChecked([index], isChecked);
+            backend.SetChecked(new int[]{ index }, isChecked);
         }
 
         /// \~English
@@ -283,6 +283,7 @@ namespace ASEva.UIEto
         public void SetText(int index, String text)
         {
             if (index < 0 || index >= enableFlags.Count) return;
+            if (text == null) text = "";
             backend.SetText(index, text);
         }
 
@@ -358,17 +359,17 @@ namespace ASEva.UIEto
         /// <summary>
         /// 多选框点击事件（点中禁用的选项不触发）
         /// </summary>
-        public event EventHandler? ItemClicked;
+        public event EventHandler ItemClicked;
 
         public void OnItemClicked()
         {
             var selectedIndex = backend.GetSelectedRowIndex();
-            if (selectedIndex >= 0 && enableFlags[selectedIndex]) ItemClicked?.Invoke(this, EventArgs.Empty);
+            if (selectedIndex >= 0 && enableFlags[selectedIndex]) ItemClicked?.Invoke(this, null);
         }
 
         private List<bool> enableFlags = new List<bool>();
 
-        public static CheckableListBoxFactory? Factory { private get; set; }
+        public static CheckableListBoxFactory Factory { private get; set; }
 
 		private CheckableListBoxBackend backend;
     }
@@ -380,7 +381,7 @@ namespace ASEva.UIEto
 
 	public interface CheckableListBoxBackend
 	{
-        void AddItems(String[] itemsText, bool[]? itemsChecked, bool[]? itemsEnabled); // not empty, length validated, text not null
+        void AddItems(String[] itemsText, bool[] itemsChecked, bool[] itemsEnabled); // not empty, length validated, text not null
         void RemoveItems(int[] indices); // validated, not empty, reversed
         void RemoveAllItems();
         bool GetChecked(int index); // validated
@@ -420,16 +421,14 @@ namespace ASEva.UIEto
             CellFormatting += CheckableListBox_CellFormatting;
         }
 
-        public void AddItems(String[] itemsText, bool[]? itemsChecked, bool[]? itemsEnabled)
+        public void AddItems(String[] itemsText, bool[] itemsChecked, bool[] itemsEnabled)
         {
             if (DataStore == null) DataStore = new List<GridItem>();
 
             var list = DataStore as List<GridItem>;
-            if (list == null) return;
-
             for (int i = 0; i < itemsText.Length; i++)
             {
-                list.Add(new GridItem(itemsText[i], itemsChecked == null ? false : itemsChecked[i]));
+                list.Add(new GridItem(new object[] { itemsText[i], itemsChecked == null ? false : itemsChecked[i] }));
                 enableFlags.Add(itemsEnabled == null ? true : itemsEnabled[i]);
             }
             
@@ -441,8 +440,6 @@ namespace ASEva.UIEto
             if (DataStore == null) return;
 
             var list = DataStore as List<GridItem>;
-            if (list == null) return;
-
             foreach (var rowIndex in indices)
             {
                 list.RemoveAt(rowIndex);
@@ -457,8 +454,6 @@ namespace ASEva.UIEto
             if (DataStore == null) return;
 
             var list = DataStore as List<GridItem>;
-            if (list == null) return;
-
             list.Clear();
             enableFlags.Clear();
 
@@ -470,7 +465,6 @@ namespace ASEva.UIEto
             if (DataStore == null) return false;
 
             var list = DataStore as List<GridItem>;
-            if (list == null) return false;
 
             var values = list[index].Values;
             if (values == null || values.Length < 2) return false;
@@ -482,16 +476,13 @@ namespace ASEva.UIEto
         {
             if (DataStore == null) return;
 
-            var list = DataStore as List<GridItem>;
-            if (list == null) return;
-
-            var listArray = list.ToArray();
+            var list = (DataStore as List<GridItem>).ToArray();
 
             UnselectAll();
 
             for (int i = 0; i < indices.Length; i++)
             {
-                var values = listArray[indices[i]].Values;
+                var values = list[indices[i]].Values;
                 if (values == null || values.Length < 2) continue;
                 values[1] = isChecked;
             }
@@ -504,7 +495,6 @@ namespace ASEva.UIEto
             if (DataStore == null) return;
 
             var list = DataStore as List<GridItem>;
-            if (list == null) return;
 
             var values = list[index].Values;
             if (values == null || values.Length < 2) return;
@@ -526,14 +516,12 @@ namespace ASEva.UIEto
             var buffer = new List<int>();
 
             if (DataStore == null) return buffer.ToArray();
+            if (!(DataStore is List<GridItem>)) return buffer.ToArray();
 
-            var list = DataStore as List<GridItem>;
-            if (list == null) return buffer.ToArray();
-
-            var listArray = list.ToArray();
-            for (int i = 0; i < listArray.Length; i++)
+            var list = (DataStore as List<GridItem>).ToArray();
+            for (int i = 0; i < list.Length; i++)
             {
-                var values = listArray[i].Values;
+                var values = list[i].Values;
                 if (values == null || values.Length < 2) continue;
                 if ((bool)values[1]) buffer.Add(i);
             }
@@ -546,15 +534,14 @@ namespace ASEva.UIEto
             return index < 0 ? -1 : index;
         }
 
-        private void CheckableListBox_CellClick(object? sender, GridCellMouseEventArgs e)
+        private void CheckableListBox_CellClick(object sender, GridCellMouseEventArgs e)
         {
             if (e.Row >= 0 && e.Row < enableFlags.Count && enableFlags[e.Row])
             {
                 if (DataStore == null) return;
-
+                if (!(DataStore is List<GridItem>)) return;
+                
                 var list = DataStore as List<GridItem>;
-                if (list == null) return;
-
                 if (e.Row >= list.Count) return;
 
                 var values = list[e.Row].Values;
@@ -582,7 +569,7 @@ namespace ASEva.UIEto
             }
         }
 
-        private void CheckableListBox_CellFormatting(object? sender, GridCellFormatEventArgs e)
+        private void CheckableListBox_CellFormatting(object sender, GridCellFormatEventArgs e)
         {
             if (e.Row >= 0 && e.Row < enableFlags.Count)
             {
@@ -627,7 +614,7 @@ namespace ASEva.UIEto
         }
 
         private CheckableListBoxCallback callback;
-        private UITimer? colorTimer = null, clickTimer = null;
+        private UITimer colorTimer = null, clickTimer = null;
         private List<bool> enableFlags = new List<bool>();
 
         public enum InvalidateMode

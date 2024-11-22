@@ -21,29 +21,29 @@ namespace ASEva.UIGtk
     /// </summary>
     public class HistLineGraph : BaseGraph
     {
-        [UI] Label? labelTitle, labelValidation;
-        [UI] Overlay? overlay;
-        [UI] DrawingArea? draw;
-        [UI] EventBox? eventBox;
+        [UI] Label labelTitle, labelValidation;
+        [UI] Overlay overlay;
+        [UI] DrawingArea draw;
+        [UI] EventBox eventBox;
 
         EventBoxHelper eventBoxHelper = new EventBoxHelper();
-		DrawSwap? drawSwap = null;
+		DrawSwap drawSwap;
 
         public HistLineGraph() : this(new Builder("HistLineGraph.glade"))
-        {}
+        {
+            this.SetBackColor(ColorRGBA.White);
+
+            overlay.AddOverlay(labelValidation);
+            eventBoxHelper.Add(eventBox);
+			drawSwap = new DrawSwap(draw, "ASEva.UIGtk.HistLineGraph");
+
+            eventBoxHelper.LeftDown += eventBox_LeftDown;
+            drawSwap.Paint += draw_Paint;
+        }
 
         private HistLineGraph(Builder builder) : base(builder.GetRawOwnedObject("HistLineGraph"))
         {
             builder.Autoconnect(this);
-
-            this.SetBackColor(ColorRGBA.White);
-
-            overlay?.AddOverlay(labelValidation);
-            if (eventBox != null) eventBoxHelper.Add(eventBox);
-			if (draw != null) drawSwap = new DrawSwap(draw, "ASEva.UIGtk.HistLineGraph");
-
-            eventBoxHelper.LeftDown += eventBox_LeftDown;
-            if (drawSwap != null) drawSwap.Paint += draw_Paint;
         }
 
         /// \~English
@@ -56,7 +56,7 @@ namespace ASEva.UIGtk
         /// </summary>
         public override void Close()
 		{
-			drawSwap?.Close();
+			drawSwap.Close();
 		}
 
 		public override void UpdateUIWithData()
@@ -64,40 +64,34 @@ namespace ASEva.UIGtk
 			if (Data == null || !(Data is HistAndLineData)) return;
 
 			// 数据和验证条件显示
-			drawSwap?.Refresh();
+			drawSwap.Refresh();
 
 			// 标题显示
-			if (labelTitle != null) labelTitle.Text = Data.Definition.MainTitle;
+			labelTitle.Text = Data == null ? "" : Data.Definition.MainTitle;
 			if (!Data.HasData())
 			{
-				if (labelValidation != null)
-				{
-					labelValidation.SetForeColor(ColorRGBA.Black);
-					labelValidation.Text = "No Data.";
-				}
+				labelValidation.SetForeColor(ColorRGBA.Black);
+				labelValidation.Text = "No Data.";
 				return;
 			}
 
 			// 验证结果显示
 			double? percentage = null;
 			var vdResult = Data.Validate(out percentage);
-			if (labelValidation != null)
+			if (vdResult == null)
 			{
-				if (vdResult == null)
-				{
-					labelValidation.SetForeColor(ColorRGBA.Black);
-					labelValidation.Text = percentage == null ? "" : (percentage.Value.ToString("F1") + "% OK");
-				}
-				else if (vdResult.Value)
-				{
-					labelValidation.SetForeColor(ColorRGBA.Green);
-					labelValidation.Text = percentage == null ? "OK" : (percentage.Value.ToString("F1") + "% OK");
-				}
-				else
-				{
-					labelValidation.SetForeColor(ColorRGBA.Red);
-					labelValidation.Text = percentage == null ? "NG" : (percentage.Value.ToString("F1") + "% OK");
-				}
+				labelValidation.SetForeColor(ColorRGBA.Black);
+				labelValidation.Text = percentage == null ? "" : (percentage.Value.ToString("F1") + "% OK");
+			}
+			else if (vdResult.Value)
+			{
+				labelValidation.SetForeColor(ColorRGBA.Green);
+				labelValidation.Text = percentage == null ? "OK" : (percentage.Value.ToString("F1") + "% OK");
+			}
+			else
+			{
+				labelValidation.SetForeColor(ColorRGBA.Red);
+				labelValidation.Text = percentage == null ? "NG" : (percentage.Value.ToString("F1") + "% OK");
 			}
 		}
 
@@ -108,7 +102,7 @@ namespace ASEva.UIGtk
 
         private void draw_Paint(DrawSwap swap, Cairo.Context cc)
         {
-			if (Data == null || !(Data is HistAndLineData D) || draw == null) return;
+			if (Data == null || !(Data is HistAndLineData)) return;
 
 			try
 			{
@@ -123,9 +117,10 @@ namespace ASEva.UIGtk
 				// var histBrush = new SolidBrush(Color.DodgerBlue);
 				// var lineBrush = new SolidBrush(Color.Orange);
 
+				var D = Data as HistAndLineData;
 				String xTitle = D.GetXTitle();
 				String histTitle = D.GetHistTitle();
-				String? lineTitle = D.GetLineTitle();
+				String lineTitle = D.GetLineTitle();
 				bool isEnableLine = D.IsLineEnabled();
 				HistLineSample[] samples = D.GetSamples();
 
@@ -409,7 +404,7 @@ namespace ASEva.UIGtk
 						// 绘制鼠标所在格信息
 						var target = samples[mouseIndex];
 
-						String? histText = null, lineText = null;
+						String histText = null, lineText = null;
 						histText = Math.Abs(target.HistValue) >= 0.1 ? target.HistValue.ToString("F3") : (new Decimal(target.HistValue)).ToString();
 						if (isEnableLine) lineText = Math.Abs(target.LineValue) >= 0.1 ? target.LineValue.ToString("F3") : (new Decimal(target.LineValue)).ToString();
 
@@ -429,11 +424,11 @@ namespace ASEva.UIGtk
 				
 				var ptList = new List<FloatPoint>();
 
-				if (Data.Definition.Validation != null && hasValue && D.GetXValuesOrLabels() is HistLineXValues xValues)
+				if (Data.Definition.Validation != null && hasValue)
 				{
-					if (Data.Definition.Validation is ValueAboveValidation vav)
+					if (Data.Definition.Validation is ValueAboveValidation)
 					{
-						var indices = vav.GetHistLineValuesOKIndices(xValues);
+						var indices = (Data.Definition.Validation as ValueAboveValidation).GetHistLineValuesOKIndices((Data as HistAndLineData).GetXValuesOrLabels() as HistLineXValues);
 						if (indices.Length > 0)
 						{
 							float thisLeft = left + step * indices[0];
@@ -443,9 +438,9 @@ namespace ASEva.UIGtk
 							ptList.Add(new FloatPoint(thisLeft, bottom));
 						}
 					}
-					else if (Data.Definition.Validation is ValueBelowValidation vbv)
+					else if (Data.Definition.Validation is ValueBelowValidation)
 					{
-						var indices = vbv.GetHistLineValuesOKIndices(xValues);
+						var indices = (Data.Definition.Validation as ValueBelowValidation).GetHistLineValuesOKIndices((Data as HistAndLineData).GetXValuesOrLabels() as HistLineXValues);
 						if (indices.Length > 0)
 						{
 							float thisRight = left + step * (indices.Last() + 1);
@@ -455,9 +450,9 @@ namespace ASEva.UIGtk
 							ptList.Add(new FloatPoint(left, bottom));
 						}
 					}
-					else if (Data.Definition.Validation is PolyAboveValidation pav && Data.HasData())
+					else if (Data.Definition.Validation is PolyAboveValidation && Data.HasData())
 					{
-						var thresholds = pav.GetHistLineValuesThreshold(xValues);
+						var thresholds = (Data.Definition.Validation as PolyAboveValidation).GetHistLineValuesThreshold((Data as HistAndLineData).GetXValuesOrLabels() as HistLineXValues);
 						for (int i = 0; i < thresholds.Length; i++)
 						{
 							thresholds[i] = Math.Max(minimum, Math.Min(maximum, thresholds[i]));
@@ -475,9 +470,9 @@ namespace ASEva.UIGtk
 							ptList.Add(new FloatPoint(thisX + step, thisY));
 						}
 					}
-					else if (Data.Definition.Validation is PolyBelowValidation pbv && Data.HasData())
+					else if (Data.Definition.Validation is PolyBelowValidation && Data.HasData())
 					{
-						var thresholds = pbv.GetHistLineValuesThreshold(xValues);
+						var thresholds = (Data.Definition.Validation as PolyBelowValidation).GetHistLineValuesThreshold((Data as HistAndLineData).GetXValuesOrLabels() as HistLineXValues);
 						for (int i = 0; i < thresholds.Length; i++)
 						{
 							thresholds[i] = Math.Max(minimum, Math.Min(maximum, thresholds[i]));

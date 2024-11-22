@@ -17,6 +17,8 @@ namespace ASEva.UIWpf
     {
         public static object ConvertToBitmap(CommonImage image)
         {
+            if (image == null) return null;
+
             if (image.WithAlpha)
             {
                 if (image.BgrInverted)
@@ -78,9 +80,12 @@ namespace ASEva.UIWpf
             }
         }
 
-        public static CommonImage? ConvertFromBitmap(object bitmapObject)
+        public static CommonImage ConvertFromBitmap(object bitmapObject)
         {
-            if (!(bitmapObject is BitmapSource bitmap)) return null;
+            if (bitmapObject == null) return null;
+            if (!(bitmapObject is BitmapSource)) return null;
+
+            var bitmap = bitmapObject as BitmapSource;
             if (bitmap.Format == PixelFormats.Bgra32)
             {
                 var image = CommonImage.Create(bitmap.PixelWidth, bitmap.PixelHeight, true, false);

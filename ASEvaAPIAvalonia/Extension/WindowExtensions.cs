@@ -22,7 +22,7 @@ namespace ASEva.UIAvalonia
         /// <summary>
         /// 获取控件所属窗口
         /// </summary>
-        public static Window? GetParentWindow(this Control control)
+        public static Window GetParentWindow(this Control control)
         {
             if (control == null) return null;
             return TopLevel.GetTopLevel(control) as Window;
@@ -36,8 +36,10 @@ namespace ASEva.UIAvalonia
         /// <summary>
         /// 获取窗口的最顶层活动窗口(对话框)
         /// </summary>
-        public static async Task<Window?> GetActiveWindow(this Window window)
+        public static async Task<Window> GetActiveWindow(this Window window)
         {
+            if (window == null) return null;
+
             var activeWindow = getFirstActiveWindow(window);
             if (activeWindow == null || (lastActiveWindow != null && lastActiveWindow != activeWindow))
             {
@@ -58,15 +60,19 @@ namespace ASEva.UIAvalonia
         /// <summary>
         /// 获取控件所属窗口的最顶层活动窗口(对话框)
         /// </summary>
-        public static async Task<Window?> GetActiveWindow(this Control control)
+        public static async Task<Window> GetActiveWindow(this Control control)
         {
+            if (control == null) return null;
             var window = control.GetParentWindow();
             return window == null ? null : await window.GetActiveWindow();
         }
 
-        private static Window? getFirstActiveWindow(Window window)
+        private static Window getFirstActiveWindow(Window window)
         {
+            if (window == null) return null;
             if (window.IsActive) return window;
+
+            if (window.OwnedWindows == null) return null;
             foreach (var dialog in window.OwnedWindows)
             {
                 var activeWindow = getFirstActiveWindow(dialog);
@@ -75,7 +81,7 @@ namespace ASEva.UIAvalonia
             return null;
         }
 
-        private static Window? lastActiveWindow = null;
+        private static Window lastActiveWindow = null;
         private const int DelayTime = 100; // ms
     }
 }

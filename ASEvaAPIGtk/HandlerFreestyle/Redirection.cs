@@ -11,11 +11,11 @@ namespace ASEva.UIGtk
         {
             var d_g_filename_from_utf8 = typeof(GLib.Marshaller).GetNestedType("d_g_filename_from_utf8", BindingFlags.Static | BindingFlags.NonPublic);
             var g_filename_from_utf8 = typeof(GLib.Marshaller).GetField("g_filename_from_utf8", BindingFlags.Static | BindingFlags.NonPublic);
-            if (d_g_filename_from_utf8 != null) g_filename_from_utf8?.SetValue(null, Delegate.CreateDelegate(d_g_filename_from_utf8, typeof(Redirection), "g_filename_from_utf8_wrapper"));
+            g_filename_from_utf8.SetValue(null, Delegate.CreateDelegate(d_g_filename_from_utf8, typeof(Redirection), "g_filename_from_utf8_wrapper"));
 
             var d_g_filename_to_utf8 = typeof(GLib.Marshaller).GetNestedType("d_g_filename_to_utf8", BindingFlags.Static | BindingFlags.NonPublic);
             var g_filename_to_utf8 = typeof(GLib.Marshaller).GetField("g_filename_to_utf8", BindingFlags.Static | BindingFlags.NonPublic);
-            if (d_g_filename_to_utf8 != null) g_filename_to_utf8?.SetValue(null, Delegate.CreateDelegate(d_g_filename_to_utf8, typeof(Redirection), "g_filename_to_utf8_wrapper"));
+            g_filename_to_utf8.SetValue(null, Delegate.CreateDelegate(d_g_filename_to_utf8, typeof(Redirection), "g_filename_to_utf8_wrapper"));
         }
 
         [DllImport("glib-2.0", CallingConvention = CallingConvention.Cdecl)]
@@ -38,7 +38,7 @@ namespace ASEva.UIGtk
         {
             var d_gtk_menu_popup_at_pointer = typeof(Gtk.Menu).GetNestedType("d_gtk_menu_popup_at_pointer", BindingFlags.Static | BindingFlags.NonPublic);
             var gtk_menu_popup_at_pointer = typeof(Gtk.Menu).GetField("gtk_menu_popup_at_pointer", BindingFlags.Static | BindingFlags.NonPublic);
-            if (d_gtk_menu_popup_at_pointer != null) gtk_menu_popup_at_pointer?.SetValue(null, Delegate.CreateDelegate(d_gtk_menu_popup_at_pointer, typeof(Redirection), "gtk_menu_popup_at_pointer"));
+            gtk_menu_popup_at_pointer.SetValue(null, Delegate.CreateDelegate(d_gtk_menu_popup_at_pointer, typeof(Redirection), "gtk_menu_popup_at_pointer"));
         }
 
         private static void gtk_menu_popup_at_pointer(IntPtr menuPtr, IntPtr evPtr)

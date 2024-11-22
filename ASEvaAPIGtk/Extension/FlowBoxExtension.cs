@@ -14,7 +14,7 @@ namespace ASEva.UIGtk
     /// </summary>
     public static class FlowBoxExtension
     {
-        public static Widget? GetItemAt(this FlowBox flowBox, int index)
+        public static Widget GetItemAt(this FlowBox flowBox, int index)
         {
             foreach (FlowBoxChild c in flowBox.Children)
             {
@@ -52,6 +52,7 @@ namespace ASEva.UIGtk
 
         public static void RemoveItem(this FlowBox flowBox, Widget item)
         {
+            if (item == null) return;
             foreach (FlowBoxChild c in flowBox.Children)
             {
                 if (c.Child.Equals(item))

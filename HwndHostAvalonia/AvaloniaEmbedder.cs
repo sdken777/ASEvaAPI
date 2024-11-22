@@ -10,8 +10,8 @@ namespace HwndHostAvalonia
     [ContentProperty("Content")]
     class AvaloniaEmbedder : HwndHost
     {
-        private EmbeddableControlRoot? _root;
-        private Avalonia.Controls.Control? _content;
+        private EmbeddableControlRoot _root;
+        private Avalonia.Controls.Control _content;
 
         public AvaloniaEmbedder()
         {
@@ -23,7 +23,7 @@ namespace HwndHostAvalonia
             if (Content != null) Content.DataContext = e.NewValue;
         }
 
-        public Avalonia.Controls.Control? Content
+        public Avalonia.Controls.Control Content
         {
             get => _content;
             set

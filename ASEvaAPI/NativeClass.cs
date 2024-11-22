@@ -21,7 +21,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=3.1.6) [必须实现] 获取原生组件的名称时被调用
         /// </summary>
-        public virtual Dictionary<Language, String> GetNativeName() { return []; }
+        public virtual Dictionary<Language, String> GetNativeName() { return null; }
 
         /// \~English
         /// <summary>
@@ -33,7 +33,7 @@ namespace ASEva
         /// [必须实现] 获取原生组件的类别ID时被调用
         /// </summary>
         /// <returns>原生组件类别ID</returns>
-        public virtual String GetNativeClassID() { return ""; }
+        public virtual String GetNativeClassID() { return null; }
 
         /// \~English
         /// <summary>
@@ -45,7 +45,7 @@ namespace ASEva
         /// [必须实现] 获取原生插件的类型ID时被调用
         /// </summary>
         /// <returns>原生插件类型ID，需要与插件info.txt中的type字段一致</returns>
-        public virtual String GetNativePluginType() { return ""; }
+        public virtual String GetNativePluginType() { return null; }
 
         /// \~English
         /// <summary>
@@ -57,7 +57,7 @@ namespace ASEva
         /// [可选实现] 创建配置对象时被调用。若不实现则为空配置，常时启用状态
         /// </summary>
         /// <returns>配置对象</returns>
-        public virtual ModuleConfig? CreateConfig() { return null; }
+        public virtual ModuleConfig CreateConfig() { return null; }
 
         /// \~English
         /// <summary>
@@ -81,7 +81,7 @@ namespace ASEva
         /// [可选实现] 获取文件读写相关名称的集合时被调用
         /// </summary>
         /// <returns>文件读写相关名称的集合，默认为null，即不提供文件读写功能</returns>
-        public virtual FileIONames? GetFileIONames() { return null; }
+        public virtual FileIONames GetFileIONames() { return null; }
 
         /// \~English
         /// <summary>
@@ -93,6 +93,6 @@ namespace ASEva
         /// [可选实现] 获取可直接作为样本输出的原始数据协议列表及对应的样本别名
         /// </summary>
         /// <returns>原始数据协议（键）列表及对应的样本别名（值）</returns>
-        public virtual Dictionary<String, String> GetRawToSampleProtocols() { return []; }
+        public virtual Dictionary<String, String> GetRawToSampleProtocols() { return null; }
     }
 }

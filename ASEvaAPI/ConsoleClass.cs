@@ -24,7 +24,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=3.1.6) [必须实现] 获取控制台组件的名称时被调用
         /// </summary>
-        public virtual Dictionary<Language, String> GetConsoleName() { return []; }
+        public virtual Dictionary<Language, String> GetConsoleName() { return null; }
 
         /// \~English
         /// <summary>
@@ -36,7 +36,7 @@ namespace ASEva
         /// [必须实现] 获取控制台组件的类别ID时被调用
         /// </summary>
         /// <returns>控制台组件类别ID</returns>
-        public virtual String GetConsoleClassID() { return ""; }
+        public virtual String GetConsoleClassID() { return null; }
 
         /// \~English
         /// <summary>
@@ -48,7 +48,7 @@ namespace ASEva
         /// [可选实现] 获取控制台组件相关的组件ID
         /// </summary>
         /// <returns>组件ID列表</returns>
-        public virtual String[] GetRelatedModules() { return []; }
+        public virtual String[] GetRelatedModules() { return null; }
 
         /// \~English
         /// <summary>
@@ -72,7 +72,7 @@ namespace ASEva
         /// (api:app=3.1.4) [可选实现] 查询控制台组件相关的各子功能配置状态时被调用
         /// </summary>
         /// <returns>各子功能的配置状态</returns>
-        public virtual Task<ConfigStatus[]> GetRelatedChildConfigStatus() { return Task.FromResult<ConfigStatus[]>([]); }
+        public virtual Task<ConfigStatus[]> GetRelatedChildConfigStatus() { return Task.FromResult<ConfigStatus[]>(null); }
 
         /// \~English
         /// <summary>
@@ -125,7 +125,7 @@ namespace ASEva
         /// <summary>
         /// 目标文件路径
         /// </summary>
-        public String? FilePath { get; set; }
+        public String FilePath { get; set; }
 
         /// \~English
         /// <summary>
@@ -174,7 +174,7 @@ namespace ASEva
         /// <param name="message">提示消息</param>
         /// <param name="result">输入默认字符串，输出用户输入的字符串(若不输入则保持其默认值)</param>
         /// <returns>若中断则返回false</returns>
-        bool InputString(String? message, ref String result);
+        bool InputString(String message, ref String result);
 
         /// \~English
         /// <summary>
@@ -190,7 +190,7 @@ namespace ASEva
         /// <param name="message">提示消息</param>
         /// <param name="result">输入默认值，输出用户输入的数值(若不输入或输入无效则保持其默认值)</param>
         /// <returns>若中断则返回false</returns>
-        bool InputNumber(String? message, ref double result);
+        bool InputNumber(String message, ref double result);
 
         /// \~English
         /// <summary>
@@ -206,7 +206,7 @@ namespace ASEva
         /// <param name="message">提示消息</param>
         /// <param name="result">用户是否确认</param>
         /// <returns>若中断则返回false</returns>
-        bool Confirm(String? message, out bool result);
+        bool Confirm(String message, out bool result);
 
         /// \~English
         /// <summary>
@@ -224,7 +224,7 @@ namespace ASEva
         /// <param name="options">所有选项</param>
         /// <param name="result">输入开始时即选中的选项序号，输出用户勾选的选项序号(仅当options为空时返回-1)</param>
         /// <returns>若中断则返回false</returns>
-        bool SingleSelect(String? message, String[] options, ref int result);
+        bool SingleSelect(String message, String[] options, ref int result);
 
         /// \~English
         /// <summary>
@@ -242,7 +242,7 @@ namespace ASEva
         /// <param name="options">所有选项</param>
         /// <param name="result">输入开始时即选中的所有选项序号，输出用户勾选的所有选项序号</param>
         /// <returns>若中断则返回false</returns>
-        bool MultiSelect(String? message, String[] options, ref int[] result);
+        bool MultiSelect(String message, String[] options, ref int[] result);
 
         /// \~English
         /// <summary>
@@ -260,7 +260,7 @@ namespace ASEva
         /// <param name="extensions">后缀名筛选，以'.'开头，若不限后缀则设为null</param>
         /// <param name="result">用户选中文件的路径，若取消则为null</param>
         /// <returns>若中断则返回false</returns>
-        bool SelectOpenFile(String? message, String[]? extensions, out String? result);
+        bool SelectOpenFile(String message, String[] extensions, out String result);
 
         /// \~English
         /// <summary>
@@ -278,7 +278,7 @@ namespace ASEva
         /// <param name="extension">保存文件的后缀名，以'.'开头，若不考虑后缀则设为null</param>
         /// <param name="result">用户选中文件的路径，若取消则为null</param>
         /// <returns>若中断则返回false</returns>
-        bool SelectSaveFile(String? message, String? extension, out String? result);
+        bool SelectSaveFile(String message, String extension, out String result);
 
         /// \~English
         /// <summary>
@@ -294,7 +294,7 @@ namespace ASEva
         /// <param name="message">提示消息</param>
         /// <param name="result">用户选中文件夹的路径，若取消则为null</param>
         /// <returns>若中断则返回false</returns>
-        bool SelectFolder(String? message, out String? result);
+        bool SelectFolder(String message, out String result);
 
         /// \~English
         /// <summary>
@@ -314,7 +314,7 @@ namespace ASEva
         /// <param name="data">用户选中文件的二进制数据，若取消则输出null</param>
         /// <param name="result">读文件结果</param>
         /// <returns>若中断则返回false</returns>
-        bool LoadFileData(String? message, String[]? extensions, out byte[]? data, out ConsoleFileResult result);
+        bool LoadFileData(String message, String[] extensions, out byte[] data, out ConsoleFileResult result);
 
         /// \~English
         /// <summary>
@@ -334,6 +334,6 @@ namespace ASEva
         /// <param name="data">需要保存的二进制数据</param>
         /// <param name="result">写文件结果</param>
         /// <returns>若中断则返回false</returns>
-        bool SaveFileData(String? message, String? extension, byte[] data, out ConsoleFileResult result);
+        bool SaveFileData(String message, String extension, byte[] data, out ConsoleFileResult result);
     }
 }

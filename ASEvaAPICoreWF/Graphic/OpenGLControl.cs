@@ -22,8 +22,7 @@ namespace ASEva.UICoreWF
             this.antialias = antialias;
             this.useLegacyAPI = useLegacyAPI;
             
-            if (globalGL == null) globalGL = OpenGL.Create(new WindowsFuncLoader());
-            gl = globalGL;
+            if (gl == null) gl = OpenGL.Create(new WindowsFuncLoader());
 
             pictureBox.MouseWheel += pictureBox_MouseWheel;
         }
@@ -44,12 +43,12 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private void pictureBox_SizeChanged(object? sender, EventArgs e)
+        private void pictureBox_SizeChanged(object sender, EventArgs e)
         {
             QueueRender();
         }
 
-        private void pictureBox_Paint(object? sender, PaintEventArgs e)
+        private void pictureBox_Paint(object sender, PaintEventArgs e)
         {
             if (initOK == null)
             {
@@ -62,14 +61,12 @@ namespace ASEva.UICoreWF
                 return;
             }
 
-            if (colorBuffer == null || depthBuffer == null || frameBuffer == null || bitmap == null || hostBuffer == null) return;
-
-            var moduleID = callback.OnGetModuleID();
+            var moduleID = callback == null ? null : callback.OnGetModuleID();
             DrawBeat.CallbackBegin(this, moduleID);
 
             var pixelScale = (float)DeviceDpi / 96;
             var curSize = new GLSizeInfo((int)(Width / pixelScale), (int)(Height / pixelScale), Width, Height, pixelScale, (float)Width / Height);
-            bool resized = size == null || curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
+            bool resized = curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
             size = curSize;
 
             Win32.wglMakeCurrent(hdc, context);
@@ -124,7 +121,7 @@ namespace ASEva.UICoreWF
                     unsafe
                     {
                         byte* surfaceData = (byte*)bitmapData.Scan0;
-                        fixed (byte* srcData = &hostBuffer[0])
+                        fixed (byte* srcData = &(hostBuffer[0]))
                         {
                             for (int v = 0; v < bitmapHeight; v++)
                             {
@@ -146,17 +143,17 @@ namespace ASEva.UICoreWF
 
                 foreach (var task in textTasks.Clear())
                 {
-                    if (String.IsNullOrEmpty(task.Text)) continue;
+                    if (String.IsNullOrEmpty(task.text)) continue;
 
-                    var fontName = String.IsNullOrEmpty(task.FontName) ? "Microsoft Yahei" : task.FontName;
-                    var fontSize = (task.SizeScale <= 0 ? 1.0f : task.SizeScale) * 9.0f;
+                    var fontName = String.IsNullOrEmpty(task.fontName) ? "Microsoft Yahei" : task.fontName;
+                    var fontSize = (task.sizeScale <= 0 ? 1.0f : task.sizeScale) * 9.0f;
                     var font = new Font(fontName, fontSize);
 
-                    var textSize = e.Graphics.MeasureString(task.Text, font);
+                    var textSize = e.Graphics.MeasureString(task.text, font);
 
-                    int posX = task.PosX;
-                    int posY = task.PosY;
-                    if (!task.IsRealPos)
+                    int posX = task.posX;
+                    int posY = task.posY;
+                    if (!task.isRealPos)
                     {
                         posX = (int)(size.RealPixelScale * posX);
                         posY = (int)(size.RealPixelScale * posY);
@@ -166,7 +163,7 @@ namespace ASEva.UICoreWF
                     int fullHeight = (int)textSize.Height;
                     int halfWidth = (int)(textSize.Width / 2);
                     int halfHeight = (int)(textSize.Height / 2);
-                    switch (task.Anchor)
+                    switch (task.anchor)
                     {
                         case TextAnchor.TopLeft:
                             break;
@@ -202,9 +199,9 @@ namespace ASEva.UICoreWF
                             break;
                     }
 
-                    var brush = new SolidBrush(Color.FromArgb(task.Alpha == 0 ? (byte)255 : task.Alpha, task.Red, task.Green, task.Blue));
+                    var brush = new SolidBrush(Color.FromArgb(task.alpha == 0 ? (byte)255 : task.alpha, task.red, task.green, task.blue));
 
-                    e.Graphics.DrawString(task.Text, font, brush, posX, posY);
+                    e.Graphics.DrawString(task.text, font, brush, posX, posY);
                 }
             }
             catch (Exception ex)
@@ -218,27 +215,27 @@ namespace ASEva.UICoreWF
             DrawBeat.CallbackEnd(this);
         }
 
-        private void pictureBox_MouseDown(object? sender, MouseEventArgs e)
+        private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             callback.OnRaiseMouseDown(e.ToEto(this));
         }
 
-        private void pictureBox_MouseMove(object? sender, MouseEventArgs e)
+        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
         {
             callback.OnRaiseMouseMove(e.ToEto(this));
         }
 
-        private void pictureBox_MouseUp(object? sender, MouseEventArgs e)
+        private void pictureBox_MouseUp(object sender, MouseEventArgs e)
         {
             callback.OnRaiseMouseUp(e.ToEto(this));
         }
 
-        private void pictureBox_MouseWheel(object? sender, MouseEventArgs e)
+        private void pictureBox_MouseWheel(object sender, MouseEventArgs e)
         {
             callback.OnRaiseMouseWheel(e.ToEto(this));
         }
 
-        private void pictureBox_MouseDoubleClick(object? sender, MouseEventArgs e)
+        private void pictureBox_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             callback.OnRaiseMouseDoubleClick(e.ToEto(this));
         }
@@ -268,7 +265,12 @@ namespace ASEva.UICoreWF
 
             try
             {
-                var ctxInfo = new GLContextInfo(gl.Version, gl.Vendor, gl.Renderer, String.IsNullOrEmpty(gl.Extensions) ? String.Join(' ', gl.ExtensionList) : gl.Extensions);
+                var ctxInfo = new GLContextInfo();
+                ctxInfo.version = gl.Version;
+                ctxInfo.vendor = gl.Vendor;
+                ctxInfo.renderer = gl.Renderer;
+                ctxInfo.extensions = gl.Extensions;
+                if (String.IsNullOrEmpty(ctxInfo.extensions)) ctxInfo.extensions = String.Join(' ', gl.ExtensionList);
 
                 var pixelScale = (float)DeviceDpi / 96;
                 size = new GLSizeInfo((int)(Width / pixelScale), (int)(Height / pixelScale), Width, Height, pixelScale, (float)Width / Height);
@@ -418,7 +420,7 @@ namespace ASEva.UICoreWF
 
                 if (!createContextAttribsARBUnsupported)
                 {
-                    var glCoreVersions = new[]
+                    var glCoreVersions = new Version[]
                     {
                         new Version(4, 6),
                         new Version(3, 3)
@@ -455,21 +457,20 @@ namespace ASEva.UICoreWF
             return context != IntPtr.Zero;
         }
 
-        private GLCallback callback;
+        private GLCallback callback = null;
         private GLAntialias antialias;
         private bool useLegacyAPI;
         private bool? initOK = null;
         private IntPtr hdc = IntPtr.Zero;
         private IntPtr context = IntPtr.Zero;
-        private uint[]? frameBuffer = null;
-        private uint[]? colorBuffer = null;
-        private uint[]? depthBuffer = null;
-        private byte[]? hostBuffer = null;
-        private Bitmap? bitmap = null;
-        private GLSizeInfo? size = null;
-        private OpenGL gl;
+        private uint[] frameBuffer = null;
+        private uint[] colorBuffer = null;
+        private uint[] depthBuffer = null;
+        private byte[] hostBuffer = null;
+        private Bitmap bitmap = null;
+        private GLSizeInfo size = null;
 
-        private static OpenGL? globalGL = null;
+        private static OpenGL gl = null;
         private static bool createContextAttribsARBUnsupported = false;
     }
 }

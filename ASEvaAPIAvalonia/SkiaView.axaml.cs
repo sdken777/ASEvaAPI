@@ -55,7 +55,7 @@ namespace ASEva.UIAvalonia
 		/// <summary>
 		/// 渲染事件
 		/// </summary>
-        public event EventHandler<SkiaRenderEventArgs>? RenderSkia;
+        public event EventHandler<SkiaRenderEventArgs> RenderSkia;
 
 		/// \~English
 		/// <summary>
@@ -95,10 +95,10 @@ namespace ASEva.UIAvalonia
 
         private class RenderingLogic : ICustomDrawOperation
         {
-            public Action<SKCanvas>? OnRender;
+            public Action<SKCanvas> OnRender;
             public Rect Bounds { get; set; }
             public void Dispose() { }
-            public bool Equals(ICustomDrawOperation? other) => other == this;
+            public bool Equals(ICustomDrawOperation other) => other == this;
             public bool HitTest(Point p) { return false; }
 
             public void Render(ImmediateDrawingContext context)

@@ -7,13 +7,13 @@ namespace ASEvaAPIEtoTest
 {
     partial class EtoTestPanel
     {
-        public event EventHandler? RequestFullScreen;
-        public event EventHandler? RequestClose;
+        public event EventHandler RequestFullScreen;
+        public event EventHandler RequestClose;
 
         private void initContextMenu(ContextMenu menu)
         {
-            menu.AddButtonItem(t["menu-fullscreen"]).Click += delegate { RequestFullScreen?.Invoke(this, EventArgs.Empty); };
-            menu.AddButtonItem(t["menu-exit"]).Click += delegate { RequestClose?.Invoke(this, EventArgs.Empty); };
+            menu.AddButtonItem(t["menu-fullscreen"]).Click += delegate { RequestFullScreen?.Invoke(this, null); };
+            menu.AddButtonItem(t["menu-exit"]).Click += delegate { RequestClose?.Invoke(this, null); };
             menu.AddSeparator();
             var subMenu = menu.AddButtonItem(t["menu-sub"]);
             subMenu.AddButtonItem(t.Format("menu-sub-item", "A"));
@@ -23,7 +23,7 @@ namespace ASEvaAPIEtoTest
             menu.AddCheckItem(t.Format("menu-check", "A"));
             menu.AddCheckItem(t.Format("menu-check", "B"));
             menu.AddSeparator();
-            menu.AddRadioItems([t.Format("menu-radio", "A"), t.Format("menu-radio", "B")]);
+            menu.AddRadioItems(new String[] { t.Format("menu-radio", "A"), t.Format("menu-radio", "B") });
             menu.AddSeparator();
             menu.AddButtonItem(t["menu-snapshot"]).Click += delegate
             {
@@ -48,15 +48,15 @@ namespace ASEvaAPIEtoTest
             menu.AddSeparator();
             menu.AddButtonItem(t["menu-exception-main"]).Click += delegate
             {
-                String[] arr = [];
-                Console.WriteLine(arr[0]);
+                String a = null;
+                Console.WriteLine(a.Length.ToString());
             };
             menu.AddButtonItem(t["menu-exception-sub"]).Click += delegate
             {
                 var thread = new Thread(() =>
                 {
-                    String[] arr = [];
-                    Console.WriteLine(arr[0]);
+                    String a = null;
+                    Console.WriteLine(a.Length.ToString());
                 });
                 thread.Start();
             };

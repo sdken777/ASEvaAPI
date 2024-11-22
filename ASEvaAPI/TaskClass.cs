@@ -23,7 +23,7 @@ namespace ASEva
         /// [必须实现] 获取独立任务组件的类别ID时被调用
         /// </summary>
         /// <returns>独立任务组件的类别ID</returns>
-        public virtual String GetTaskClassID() { return ""; }
+        public virtual String GetTaskClassID() { return null; }
 
         /// \~English
         /// <summary>
@@ -33,7 +33,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=3.1.6) [必须实现] 获取独立任务的标题时被调用
         /// </summary>
-        public virtual Dictionary<Language, String> GetTaskTitle() { return []; }
+        public virtual Dictionary<Language, String> GetTaskTitle() { return null; }
 
         /// \~English
         /// <summary>
@@ -57,7 +57,7 @@ namespace ASEva
         /// [非原生模式下必须实现] 创建独立任务对象
         /// </summary>
         /// <returns>独立任务对象</returns>
-        public virtual StandaloneTask CreateTask() { return new StandaloneTask(); }
+        public virtual StandaloneTask CreateTask() { return null; }
 
         /// \~English
         /// <summary>
@@ -69,7 +69,7 @@ namespace ASEva
         /// [原生模式下必须实现] 获取原生插件的类型ID时被调用
         /// </summary>
         /// <returns>类型ID，需要与插件info.txt中的type字段一致</returns>
-        public virtual String GetNativePluginType() { return ""; }
+        public virtual String GetNativePluginType() { return null; }
 
         /// \~English
         /// <summary>
@@ -81,7 +81,7 @@ namespace ASEva
         /// [原生模式下必须实现] 获取原生独立处理任务名称时被调用
         /// </summary>
         /// <returns>任务名称</returns>
-        public virtual String GetNativeTaskName() { return ""; }
+        public virtual String GetNativeTaskName() { return null; }
 
         /// \~English
         /// <summary>
@@ -93,6 +93,6 @@ namespace ASEva
         /// [可选实现] 获取独立任务的默认配置时被调用
         /// </summary>
         /// <returns>独立任务的默认配置字符串，若不支持则为null</returns>
-        public virtual String? GetDefaultConfig() { return null; }
+        public virtual String GetDefaultConfig() { return null;}
     }
 }

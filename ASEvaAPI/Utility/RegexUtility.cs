@@ -205,6 +205,7 @@ namespace ASEva.Utility
         /// </summary>
         public static bool IsIPv6(string input)
         {
+            string pattern = "";
             string temp = input;
             string[] strs = temp.Split(':');
             if (strs.Length != 8)
@@ -218,19 +219,19 @@ namespace ASEva.Utility
             }
             else if (count == 0)
             {
-                var pattern = @"^([\da-f]{1,4}:){7}[\da-f]{1,4}$";
+                pattern = @"^([\da-f]{1,4}:){7}[\da-f]{1,4}$";
                 return IsMatch(pattern, input);
             }
             else
             {
-                var pattern = @"^([\da-f]{1,4}:){0,5}::([\da-f]{1,4}:){0,5}[\da-f]{1,4}$";
+                pattern = @"^([\da-f]{1,4}:){0,5}::([\da-f]{1,4}:){0,5}[\da-f]{1,4}$";
                 return IsMatch(pattern, input);
             }
         }
 
         private static bool IsMatch(string pattern, string input)
         {
-            if (input.Length == 0) return false;
+            if (input == null || input == "") return false;
             Regex regex = new Regex(pattern);
             return regex.IsMatch(input);
         }

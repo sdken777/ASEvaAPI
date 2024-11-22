@@ -17,24 +17,25 @@ namespace ASEva.UICoreWF
     /// </summary>
     public static class WinformIconExtensions
     {
-        public static Icon? ToWinformIcon(this byte[] imageData)
+        public static Icon ToWinformIcon(this byte[] imageData)
         {
             var etoIcon = imageData.ToIcon();
             if (etoIcon == null) return null;
             else return etoIcon.ControlObject as Icon;
         }
 
-        public static Icon? ToWinformIcon(this Bitmap bitmap)
+        public static Icon ToWinformIcon(this Bitmap bitmap)
         {
             var image = ImageConverter.ConvertFromBitmap(bitmap);
             if (image == null) return null;
             else return ToWinformIcon(image);
         }
 
-        public static Icon? ToWinformIcon(this CommonImage image)
+        public static Icon ToWinformIcon(this CommonImage image)
         {
             var etoIcon = image.ToIcon();
-            return etoIcon.ControlObject as Icon;
+            if (etoIcon == null) return null;
+            else return etoIcon.ControlObject as Icon;
         }
     }
 }

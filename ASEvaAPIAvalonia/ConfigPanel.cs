@@ -90,7 +90,7 @@ namespace ASEva.UIAvalonia
         /// </summary>
         public void Close()
         {
-            CloseRequested?.Invoke(this, EventArgs.Empty);
+            if (CloseRequested != null) CloseRequested(this, null);
         }
 
         /// \~English
@@ -101,6 +101,6 @@ namespace ASEva.UIAvalonia
         /// <summary>
         /// 在此事件中实现配置界面的关闭
         /// </summary>
-        public event EventHandler? CloseRequested;
+        public event EventHandler CloseRequested;
     }
 }

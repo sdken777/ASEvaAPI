@@ -17,19 +17,19 @@ namespace ASEva.UIWpf
             RealPixelScale = 0;
         }
 
-        public GLTextTask[] Texts { private get; set; } = [];
+        public GLTextTask[] Texts { private get; set; }
         public float RealPixelScale { get; private set; }
 
         public void QueueRender()
         {
-            if (lastRenderWithTexts || Texts.Length > 0) InvalidateVisual();
+            if (lastRenderWithTexts || (Texts != null && Texts.Length > 0)) InvalidateVisual();
         }
 
         protected override void OnRender(DrawingContext drawingContext)
         {
             RealPixelScale = (float)PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice.M11;
 
-            if (Texts.Length == 0)
+            if (Texts == null || Texts.Length == 0)
             {
                 lastRenderWithTexts = false;
                 return;
@@ -42,18 +42,18 @@ namespace ASEva.UIWpf
 
             foreach (var task in Texts)
             {
-                if (String.IsNullOrEmpty(task.Text)) continue;
+                if (String.IsNullOrEmpty(task.text)) continue;
 
-                var fontName = String.IsNullOrEmpty(task.FontName) ? "Microsoft Yahei" : task.FontName;
-                var fontSize = (task.SizeScale <= 0 ? 1.0f : task.SizeScale) * 11.0f;
+                var fontName = String.IsNullOrEmpty(task.fontName) ? "Microsoft Yahei" : task.fontName;
+                var fontSize = (task.sizeScale <= 0 ? 1.0f : task.sizeScale) * 11.0f;
 
-                var brush = new SolidColorBrush(Color.FromArgb(task.Alpha == 0 ? (byte)255 : task.Alpha, task.Red, task.Green, task.Blue));
-                var text = new FormattedText(task.Text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(fontName), fontSize, brush, 96);
+                var brush = new SolidColorBrush(Color.FromArgb(task.alpha == 0 ? (byte)255 : task.alpha, task.red, task.green, task.blue));
+                var text = new FormattedText(task.text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(fontName), fontSize, brush, 96);
                 var textSize = new Size((int)text.Width, (int)text.Height);
 
-                int posX = task.PosX;
-                int posY = task.PosY;
-                if (task.IsRealPos)
+                int posX = task.posX;
+                int posY = task.posY;
+                if (task.isRealPos)
                 {
                     posX = (int)((float)posX / RealPixelScale);
                     posY = (int)((float)posY / RealPixelScale);
@@ -63,7 +63,7 @@ namespace ASEva.UIWpf
                 int fullHeight = (int)textSize.Height;
                 int halfWidth = (int)(textSize.Width / 2);
                 int halfHeight = (int)(textSize.Height / 2);
-                switch (task.Anchor)
+                switch (task.anchor)
                 {
                     case TextAnchor.TopLeft:
                         break;

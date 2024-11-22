@@ -5,7 +5,6 @@
     <RootNamespace>ASEva.UICoreWF</RootNamespace>
     <Configurations>Release;Debug</Configurations>
     <UseWindowsForms>True</UseWindowsForms>
-    <Nullable>Enable</Nullable>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
     <Version>0.0.0.0</Version>
   </PropertyGroup>

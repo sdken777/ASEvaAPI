@@ -13,7 +13,7 @@ namespace ASEvaAPIEtoTest
             var layoutImages = layoutRow.AddColumnLayout();
             initDrawImages(layoutImages);
 
-            var tabControl = (layoutRow.AddControl(new TabControl(), false, 220) as TabControl)!;
+            var tabControl = layoutRow.AddControl(new TabControl(), false, 220) as TabControl;
 
             var tabPageDefault2D = tabControl.AddPage(t["draw-tabpage-default"]);
             initDrawDefault2D(tabPageDefault2D);

@@ -9,7 +9,7 @@ namespace ASEva.UICoreWF
 {
     class SnapshotHandler : SnapshotExtensions.SnapshotHandler
     {
-        public CommonImage? Snapshot(Eto.Forms.Control control)
+        public CommonImage Snapshot(Eto.Forms.Control control)
         {
             var winformControl = control.ControlObject as Control;
             if (winformControl == null) return null;
@@ -32,14 +32,14 @@ namespace ASEva.UICoreWF
             if (x > 0 || y > 0) bitmap = bitmap.Clone(new Rectangle(x, y, w, h), bitmap.PixelFormat);
             var rawImage = ImageConverter.ConvertFromBitmap(bitmap);
 
-            if (rawImage == null || rawImage.Width == logicalWidth) return rawImage;
+            if (rawImage.Width == logicalWidth) return rawImage;
             else return rawImage.Resize(logicalWidth);
         }
     }
 
     class ScreenSnapshotHandler : SnapshotExtensions.SnapshotHandler
     {
-        public CommonImage? Snapshot(Eto.Forms.Control control)
+        public CommonImage Snapshot(Eto.Forms.Control control)
         {
             var winformControl = control.ControlObject as Control;
             if (winformControl == null) return null;
@@ -67,7 +67,7 @@ namespace ASEva.UICoreWF
 
             var rawImage = ImageConverter.ConvertFromBitmap(bitmap);
 
-            if (rawImage == null || rawImage.Width == logicalWidth) return rawImage;
+            if (rawImage.Width == logicalWidth) return rawImage;
             else return rawImage.Resize(logicalWidth);
         }
     }

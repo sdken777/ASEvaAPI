@@ -6,16 +6,22 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=3.7.0) Single axis' range of scatter points graph
+    /// (api:app=3.0.0) Single axis' range of scatter points graph
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.0) 散点图单轴范围
+    /// (api:app=3.0.0) 散点图单轴范围
     /// </summary>
-    public struct ScatterRange(double lower, double upper)
+    public struct ScatterRange
     {
-        public double lower = lower;
-        public double upper = upper;
+        public double lower;
+        public double upper;
+
+        public ScatterRange(double lower, double upper)
+        {
+            this.lower = lower;
+            this.upper = upper;
+        }
     }
 
     /// \~English
@@ -51,13 +57,13 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=3.7.0) Scatter points graph data
+    /// (api:app=3.0.0) Scatter points graph data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.0) 散点图数据
+    /// (api:app=3.0.0) 散点图数据
     /// </summary>
-    public class ScatterPointsData(GraphDefinition def) : GraphData(def)
+    public class ScatterPointsData : GraphData
     {
         /// \~English
         /// <summary>
@@ -135,9 +141,11 @@ namespace ASEva.Graph
         /// <param name="validation">数据验证方式，null表示不验证。支持OutlineInside, OutlineOutside</param>
         /// <param name="options">附加选项</param>
         /// <returns>图表定义对象</returns>
-        public static GraphDefinition CreateDefinitionWithValidationAndOptions(String title, String xTitle, String yTitle, ScatterRange xRange, ScatterRange yRange, GraphValidation? validation, ScatterOptions? options)
+        public static GraphDefinition CreateDefinitionWithValidationAndOptions(String title, String xTitle, String yTitle, ScatterRange xRange, ScatterRange yRange, GraphValidation validation, ScatterOptions options)
         {
-            var def = new GraphDefinition(GraphType.ScatterPoints, title);
+            var def = new GraphDefinition();
+            def.Type = GraphType.ScatterPoints;
+            def.MainTitle = title;
             def.Config.Add(xRange.lower.ToString());
             def.Config.Add(xRange.upper.ToString());
             def.Config.Add(yRange.lower.ToString());
@@ -173,7 +181,7 @@ namespace ASEva.Graph
         /// <returns>x轴标题</returns>
         public String GetXTitle()
         {
-            return Definition.ColumnTitles[0] ?? "";
+            return Definition.ColumnTitles[0];
         }
 
         /// \~English
@@ -188,7 +196,7 @@ namespace ASEva.Graph
         /// <returns>y轴标题</returns>
         public String GetYTitle()
         {
-            return Definition.ColumnTitles[1] ?? "";
+            return Definition.ColumnTitles[1];
         }
 
         /// \~English
@@ -508,7 +516,7 @@ namespace ASEva.Graph
             uint count = 0;
             if (!UInt32.TryParse(Params[0], out count))
             {
-                return [];
+                return new FloatPoint[0];
             }
 
             var pts = new FloatPoint[count];

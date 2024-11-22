@@ -55,11 +55,13 @@ namespace ASEva.UIWpf
         public void AddRows(List<string[]> rowsValues)
         {
             var items = ItemsSource as ObservableCollection<TableRowItem>;
-            if (items == null) return;
-
             foreach (var values in rowsValues)
             {
-                var rowItem = new TableRowItem(Columns.Count, items, values, callback);
+                var rowItem = new TableRowItem(Columns.Count, items);
+                for (int i = 0; i < values.Length; i++)
+                {
+                    rowItem.Cells[i] = new TableCellItem(rowItem, values[i], i, callback);
+                }
                 items.Add(rowItem);
             }
         }
@@ -67,8 +69,6 @@ namespace ASEva.UIWpf
         public void RemoveRows(int[] rowIndices)
         {
             var items = ItemsSource as ObservableCollection<TableRowItem>;
-            if (items == null) return;
-
             foreach (var index in rowIndices)
             {
                 items.RemoveAt(index);
@@ -78,34 +78,30 @@ namespace ASEva.UIWpf
         public void RemoveAllRows()
         {
             var items = ItemsSource as ObservableCollection<TableRowItem>;
-            if (items == null) return;
             items.Clear();
         }
 
         public string GetValue(int rowIndex, int columnIndex)
         {
             var items = ItemsSource as ObservableCollection<TableRowItem>;
-            return items?[rowIndex].Cells[columnIndex].Text ?? "";
+            return items[rowIndex].Cells[columnIndex].Text;
         }
 
         public void SetValue(int rowIndex, int columnIndex, string val)
         {
             var items = ItemsSource as ObservableCollection<TableRowItem>;
-            if (items == null) return;
             items[rowIndex].Cells[columnIndex].SetText(val);
         }
 
         public void SetTextColor(int rowIndex, int columnIndex, Eto.Drawing.Color color)
         {
             var items = ItemsSource as ObservableCollection<TableRowItem>;
-            if (items == null) return;
             items[rowIndex].Cells[columnIndex].SetTextColor(color.ToWpf());
         }
 
         public void SetBackgroundColor(int rowIndex, int columnIndex, Eto.Drawing.Color color)
         {
             var items = ItemsSource as ObservableCollection<TableRowItem>;
-            if (items == null) return;
             items[rowIndex].Cells[columnIndex].SetBackColor(color.ToWpf());
         }
 
@@ -174,9 +170,9 @@ namespace ASEva.UIWpf
 
         class TableRowItem : INotifyPropertyChanged
         {
-            public TableRowItem(int columns, ObservableCollection<TableRowItem> items, String[] values, ASEva.UIEto.TextTableViewCallback callback)
+            public TableRowItem(int columns, ObservableCollection<TableRowItem> items)
             {
-                Cells = new TableCellItem[columns].Populate((i) => new TableCellItem(this, values[i], i, callback));
+                Cells = new TableCellItem[columns];
                 this.items = items;
             }
 
@@ -185,7 +181,7 @@ namespace ASEva.UIWpf
             public int RowIndex { get { return items.IndexOf(this); } }
 
 
-            public event PropertyChangedEventHandler? PropertyChanged;
+            public event PropertyChangedEventHandler PropertyChanged;
             public void Notify()
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Cells"));

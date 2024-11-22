@@ -17,7 +17,7 @@ namespace ASEvaAPIAvaloniaTest
         public DrawSkia()
         {
             InitializeComponent();
-            image = ResourceLoader.Load("camera.png")?.ToAvaloniaBitmap()?.ToCommonImage()?.ToSKImage();
+            image = ResourceLoader.Load("camera.png").ToAvaloniaBitmap().ToCommonImage().ToSKImage();
         }
 
         public void OnLoop()
@@ -25,12 +25,9 @@ namespace ASEvaAPIAvaloniaTest
             skiaView.QueueRender();
         }
 
-        private void skiaView_Render(object? sender, SkiaRenderEventArgs e)
+        private void skiaView_Render(object sender, SkiaRenderEventArgs e)
         {
             var c = e.Canvas;
-            var f = c.GetDefaultFont();
-            if (f == null) return;
-
             var blackPaint = new SKPaint{ Color = SKColors.Black, IsAntialias = true };
             var wideLinePaint = new SKPaint{ Color = SKColors.Red, StrokeWidth = 20, StrokeCap = SKStrokeCap.Square, IsAntialias = true };
             var piePaint = new SKPaint{ Color = new SKColor(0, 128, 0, 128), IsAntialias = true };
@@ -41,8 +38,8 @@ namespace ASEvaAPIAvaloniaTest
             c.DrawLine(10, 120, 190, 120, blackPaint);
             c.DrawLine(100, 10, 100, 190, blackPaint);
             c.DrawLine(110, 110, 180, 110, wideLinePaint);
-            c.DrawString(Program.Texts["draw-text"], f, SKColors.Black, AlignmentX.Right, AlignmentY.Bottom, 100, 120);
-            var textSize = c.MeasureString(Program.Texts["draw-text"], f);
+            c.DrawString(Program.Texts["draw-text"], c.GetDefaultFont(), SKColors.Black, AlignmentX.Right, AlignmentY.Bottom, 100, 120);
+            var textSize = c.MeasureString(Program.Texts["draw-text"], c.GetDefaultFont());
             c.DrawRect(100 - textSize.Width, 120 - textSize.Height, textSize.Width, textSize.Height, textBoundPaint);
             c.DrawImage(image, 80, 80);
 
@@ -52,7 +49,7 @@ namespace ASEvaAPIAvaloniaTest
             
             c.DrawLine(10, 210, 190, 215, blackPaint);
             c.DrawLine(10, 235, 190, 240, blackPaint);
-            c.DrawString(Program.Texts["draw-skia-anti-alias"], f, SKColors.Black, AlignmentX.Center, AlignmentY.Center, 100, 225);
+            c.DrawString(Program.Texts["draw-skia-anti-alias"], c.GetDefaultFont(), SKColors.Black, AlignmentX.Center, AlignmentY.Center, 100, 225);
 
             foreach (var pt in drawPoints)
             {
@@ -60,13 +57,13 @@ namespace ASEvaAPIAvaloniaTest
             }
         }
 
-        private void skiaView_PointerPressed(object? sender, PointerPressedEventArgs e)
+        private void skiaView_PointerPressed(object sender, PointerPressedEventArgs e)
         {
             drawPoints.Add(e.GetPosition(skiaView).ToCommon().ToSkia());
         }
 
-        private SKImage? image;
+        private SKImage image;
         private DateTime startTime = DateTime.Now;
-        private List<SKPoint> drawPoints = [];
+        private List<SKPoint> drawPoints = new List<SKPoint>();
     }
 }

@@ -20,7 +20,7 @@ namespace ASEva.UIWpf
 
     class AppHandlerWpf : AppHandler
     {
-        public Application? CreateApp(bool attach, out String? uiBackend, out String webViewBackend)
+        public Application CreateApp(bool attach, out String uiBackend, out String webViewBackend)
         {
             // CHECK: 初始化WebView2环境
             WebView2Handler.InitCoreWebView2Environment();
@@ -87,26 +87,28 @@ namespace ASEva.UIWpf
             }
         }
 
-        public Control? ConvertControlToEto(object platformControl)
+        public Control ConvertControlToEto(object platformControl)
         {
+            if (platformControl == null) return null;
             if (platformControl is System.Windows.FrameworkElement) return (platformControl as System.Windows.FrameworkElement).ToEto();
             else return null;
         }
 
-        public object? ConvertControlToPlatform(Control etoControl)
+        public object ConvertControlToPlatform(Control etoControl)
         {
+            if (etoControl == null) return null;
             return etoControl.ToNative(true);
         }
 
-        public UIEto.WindowPanel? ConvertWindowPanelToEto(object platformWindowPanel)
+        public UIEto.WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
         {
-            if (platformWindowPanel is WindowPanel wpfWindowPanel) return new EtoWindowPanel(wpfWindowPanel);
+            if (platformWindowPanel is WindowPanel) return new EtoWindowPanel(platformWindowPanel as WindowPanel);
             else return null;
         }
 
-        public UIEto.ConfigPanel? ConvertConfigPanelToEto(object platformConfigPanel)
+        public UIEto.ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
         {
-            if (platformConfigPanel is ConfigPanel wpfConfigPanel) return new EtoConfigPanel(wpfConfigPanel);
+            if (platformConfigPanel is ConfigPanel) return new EtoConfigPanel(platformConfigPanel as ConfigPanel);
             else return null;
         }
 

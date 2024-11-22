@@ -9,10 +9,10 @@ namespace ForDesigner
         [STAThread]
         public static void Main(string[] args)
         {
-            BuildAvaloniaApp()?.StartWithClassicDesktopLifetime(args);
+            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
         }
 
-        public static AppBuilder? BuildAvaloniaApp()
+        public static AppBuilder BuildAvaloniaApp()
         {
 #if ASEVA_API_BUNDLE_MODE
             return null;

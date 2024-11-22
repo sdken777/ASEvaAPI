@@ -86,7 +86,7 @@ namespace ASEva.Utility
         /// <summary>
         /// 状态信息
         /// </summary>
-        public GenerationProcessStatus ProcessStatus { get; set; } = GenerationProcessStatus.Unknown;
+        public GenerationProcessStatus ProcessStatus { get; set; }
 
         /// \~English
         /// <summary>
@@ -96,7 +96,7 @@ namespace ASEva.Utility
         /// <summary>
         /// 样本别名表
         /// </summary>
-        public Dictionary<string, string> SampleAlias { get; set; } = [];
+        public Dictionary<string, string> SampleAlias { get; set; }
 
         /// \~English
         /// <summary>
@@ -106,7 +106,7 @@ namespace ASEva.Utility
         /// <summary>
         /// 创建Generation的软件版本信息（用于回溯）
         /// </summary>
-        public Dictionary<string, Version> Versions { get; set; } = [];
+        public Dictionary<string, Version> Versions { get; set; }
 
         /// \~English
         /// <summary>
@@ -116,7 +116,7 @@ namespace ASEva.Utility
         /// <summary>
         /// Generation更新记录
         /// </summary>
-        public Dictionary<DateTime, string> UpdateLogs { get; set; } = [];
+        public Dictionary<DateTime, string> UpdateLogs { get; set; }
 
         /// \~English
         /// <summary>
@@ -126,7 +126,7 @@ namespace ASEva.Utility
         /// <summary>
         /// Generation生成时使用或覆盖的卫星Posix时间模型
         /// </summary>
-        public PosixTimeModel? GNSSPosixModel { get; set; }
+        public PosixTimeModel GNSSPosixModel { get; set; }
 
         /// \~English
         /// <summary>
@@ -146,7 +146,11 @@ namespace ASEva.Utility
         /// <summary>
         /// Generation生成时被配置为与授时服务器同步的所有客机同步ID
         /// </summary>
-        public String[] GuestSyncIDs { get; set; } = [];
+        public String[] GuestSyncIDs { get; set; }
+
+        private GenerationInfo()
+        {
+        }
 
         /// \~English
         /// <summary>
@@ -166,7 +170,7 @@ namespace ASEva.Utility
         /// <param name="status">状态信息</param>
         /// <param name="versions">生成Generation的软件版本信息</param>
         /// <returns>返回创建的对象</returns>
-        public static GenerationInfo? Create(String filePath, String generationID, GenerationProcessStatus status, Dictionary<string, Version>? versions)
+        public static GenerationInfo Create(String filePath, String generationID, GenerationProcessStatus status, Dictionary<string, Version> versions)
         {
             return Create(filePath, generationID, status, null, versions, null, null, false, null);
         }
@@ -193,7 +197,7 @@ namespace ASEva.Utility
         /// <param name="versions">生成Generation的软件版本信息</param>
         /// <param name="updateLogs">Generation更新记录</param>
         /// <returns>返回创建的对象</returns>
-        public static GenerationInfo? Create(String filePath, String generationID, GenerationProcessStatus status, Dictionary<string, string>? sampleAlias, Dictionary<string, Version>? versions, Dictionary<DateTime, string>? updateLogs)
+        public static GenerationInfo Create(String filePath, String generationID, GenerationProcessStatus status, Dictionary<string, string> sampleAlias, Dictionary<string, Version> versions, Dictionary<DateTime, string> updateLogs)
         {
             return Create(filePath, generationID, status, sampleAlias, versions, updateLogs, null, false, null);
         }
@@ -226,18 +230,20 @@ namespace ASEva.Utility
         /// <param name="hostSync">Generation生成时主机是否配置为与授时服务器同步</param>
         /// <param name="guestSyncIDs">Generation生成时被配置为与授时服务器同步的所有客机同步ID</param>
         /// <returns>返回创建的对象</returns>
-        public static GenerationInfo? Create(String filePath, String generationID, GenerationProcessStatus status, Dictionary<string, string>? sampleAlias, Dictionary<string, Version>? versions, Dictionary<DateTime, string>? updateLogs, PosixTimeModel? gnssPosixModel, bool hostSync, String[]? guestSyncIDs)
+        public static GenerationInfo Create(String filePath, String generationID, GenerationProcessStatus status, Dictionary<string, string> sampleAlias, Dictionary<string, Version> versions, Dictionary<DateTime, string> updateLogs, PosixTimeModel gnssPosixModel, bool hostSync, String[] guestSyncIDs)
         {
-            if (filePath.Length == 0 || generationID.Length == 0) return null;
+            if (filePath == null || filePath.Length == 0 || generationID == null || generationID.Length == 0) return null;
 
-            var info = new GenerationInfo(filePath, generationID);
+            var info = new GenerationInfo();
+            info.FilePath = filePath;
+            info.GenerationID = generationID;
             info.ProcessStatus = status;
-            if (sampleAlias != null) info.SampleAlias = sampleAlias;
-            if (versions != null) info.Versions = versions;
-            if (updateLogs != null) info.UpdateLogs = updateLogs;
+            info.SampleAlias = sampleAlias;
+            info.Versions = versions;
+            info.UpdateLogs = updateLogs;
             info.GNSSPosixModel = gnssPosixModel;
             info.HostSync = hostSync;
-            if (guestSyncIDs != null) info.GuestSyncIDs = guestSyncIDs;
+            info.GuestSyncIDs = guestSyncIDs;
 
             return info;
         }
@@ -254,105 +260,100 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="filePath">文件路径</param>
         /// <returns>返回创建的对象</returns>
-        public static GenerationInfo? Load(String filePath)
+        public static GenerationInfo Load(String filePath)
         {
-            if (filePath.Length == 0) return null;
+            if (filePath == null || filePath.Length == 0) return null;
 
             var defaultGenID = Path.GetFileNameWithoutExtension(Path.GetDirectoryName(filePath));
             if (defaultGenID == null || defaultGenID.Length == 0) return null;
 
-            GenerationInfo? info = null;
+            GenerationInfo info = null;
             try
             {
                 var xml = new XmlDocument();
                 xml.Load(filePath);
-                var attribs = xml.DocumentElement?.Attributes;
-                if (attribs != null)
+                var attribs = xml.DocumentElement.Attributes;
+
+                info = new GenerationInfo();
+
+                if (attribs["gen_id"] != null)
                 {
-                    var genIDAttrib = attribs["gen_id"];
-                    var genID = genIDAttrib == null ? defaultGenID : genIDAttrib.Value;
-                    info = new GenerationInfo(filePath, genID);
-
-                    if (attribs["finished"] != null)
-                    {
-                        info.ProcessStatus = attribs["finished"]?.Value == "yes" ? GenerationProcessStatus.Finished : GenerationProcessStatus.NotFinished;
-                    }
-                    else
-                    {
-                        info.ProcessStatus = GenerationProcessStatus.Unknown;
-                    }
-
-                    info.SampleAlias = [];
-                    var aliasNodes = xml.DocumentElement?.GetElementsByTagName("alias");
-                    if (aliasNodes != null)
-                    {
-                        foreach (XmlElement aliasNode in aliasNodes)
-                        {
-                            var id = aliasNode.Attributes["sample"];
-                            if (id != null) info.SampleAlias[id.Value] = aliasNode.InnerText;
-                        }
-                    }
-
-                    info.Versions = [];
-                    var versionNodes = xml.DocumentElement?.GetElementsByTagName("version");
-                    if (versionNodes != null)
-                    {
-                        foreach (XmlElement versionNode in versionNodes)
-                        {
-                            var key = versionNode.Attributes["key"];
-                            if (key != null) info.Versions[key.Value] = Version.Parse(versionNode.InnerText);
-                        }
-                    }
-
-                    info.UpdateLogs = [];
-                    var updateNodes = xml.DocumentElement?.GetElementsByTagName("update");
-                    if (updateNodes != null)
-                    {
-                        foreach (XmlElement updateNode in updateNodes)
-                        {
-                            var time = updateNode.Attributes["time"];
-                            if (time != null) info.UpdateLogs[DateTime.ParseExact(time.Value, "yyyy-MM-dd-HH-mm-ss", null)] = updateNode.InnerText;
-                        }
-                    }
-
-                    try
-                    {
-                        var startPosix = attribs["start_posix_gnss"];
-                        var timeRatio = attribs["time_ratio_gnss"];
-                        if (startPosix != null && timeRatio != null)
-                        {
-                            info.GNSSPosixModel = new PosixTimeModel
-                            {
-                                StartPosix = Convert.ToUInt64(startPosix.Value),
-                                TimeRatio = Convert.ToDouble(timeRatio.Value),
-                            };
-                        }
-                        else info.GNSSPosixModel = null;
-                    }
-                    catch (Exception ex) { Dump.Exception(ex); info.GNSSPosixModel = null; }
-
-                    var hostSyncAttrib = attribs["host_sync"];
-                    if (hostSyncAttrib != null)
-                    {
-                        info.HostSync = hostSyncAttrib.Value == "yes";
-                    }
-                    else info.HostSync = false;
-
-                    var guestSyncList = new List<String>();
-                    var guestSyncNodes = xml.DocumentElement?.GetElementsByTagName("guest_sync");
-                    if (guestSyncNodes != null)
-                    {
-                        foreach (XmlElement guestSyncNode in guestSyncNodes)
-                        {
-                            if (guestSyncNode.InnerText.Length > 0) guestSyncList.Add(guestSyncNode.InnerText);
-                        }
-                    }
-                    info.GuestSyncIDs = guestSyncList.ToArray();
+                    info.GenerationID = attribs["gen_id"].Value;
                 }
+                else
+                {
+                    info.GenerationID = defaultGenID;
+                }
+
+                if (attribs["finished"] != null)
+                {
+                    info.ProcessStatus = attribs["finished"].Value == "yes" ? GenerationProcessStatus.Finished : GenerationProcessStatus.NotFinished;
+                }
+                else
+                {
+                    info.ProcessStatus = GenerationProcessStatus.Unknown;
+                }
+
+                info.SampleAlias = new Dictionary<string, string>();
+                var aliasNodes = xml.DocumentElement.GetElementsByTagName("alias");
+                foreach (XmlElement aliasNode in aliasNodes)
+                {
+                    info.SampleAlias[aliasNode.Attributes["sample"].Value] = aliasNode.InnerText;
+                }
+
+                info.Versions = new Dictionary<string, Version>();
+                var versionNodes = xml.DocumentElement.GetElementsByTagName("version");
+                foreach (XmlElement versionNode in versionNodes)
+                {
+                    info.Versions[versionNode.Attributes["key"].Value] = Version.Parse(versionNode.InnerText);
+                }
+
+                info.UpdateLogs = new Dictionary<DateTime, string>();
+                var updateNodes = xml.DocumentElement.GetElementsByTagName("update");
+                foreach (XmlElement updateNode in updateNodes)
+                {
+                    info.UpdateLogs[DateTime.ParseExact(updateNode.Attributes["time"].Value, "yyyy-MM-dd-HH-mm-ss", null)] = updateNode.InnerText;
+                }
+
+                try
+                {
+                    if (attribs["start_posix_gnss"] != null && attribs["time_ratio_gnss"] != null)
+                    {
+                        info.GNSSPosixModel = new PosixTimeModel
+                        {
+                            StartPosix = Convert.ToUInt64(attribs["start_posix_gnss"].Value),
+                            TimeRatio = Convert.ToDouble(attribs["time_ratio_gnss"].Value),
+                        };
+                    }
+                    else info.GNSSPosixModel = null;
+                }
+                catch (Exception ex) { Dump.Exception(ex); info.GNSSPosixModel = null; }
+
+                if (attribs["host_sync"] != null)
+                {
+                    info.HostSync = attribs["host_sync"].Value == "yes";
+                }
+                else info.HostSync = false;
+
+                var guestSyncList = new List<String>();
+                foreach (XmlElement guestSyncNode in xml.DocumentElement.GetElementsByTagName("guest_sync"))
+                {
+                    if (guestSyncNode.InnerText.Length > 0) guestSyncList.Add(guestSyncNode.InnerText);
+                }
+                info.GuestSyncIDs = guestSyncList.ToArray();
             }
             catch (Exception ex) { Dump.Exception(ex); }
 
-            if (info == null) info = new GenerationInfo(filePath, defaultGenID);
+            if (info == null)
+            {
+                info = new GenerationInfo()
+                {
+                    GenerationID = defaultGenID,
+                    ProcessStatus = GenerationProcessStatus.Unknown,
+                };
+            }
+
+            info.FilePath = filePath;
             return info;
         }
 
@@ -366,45 +367,51 @@ namespace ASEva.Utility
         /// </summary>
         public void Save()
         {
+            if (FilePath == null) return;
             if (ProcessStatus == GenerationProcessStatus.Unknown) return;
 
             try
             {
                 var root = Path.GetDirectoryName(FilePath);
-                if (root != null && !Directory.Exists(root)) Directory.CreateDirectory(root);
+                if (!Directory.Exists(root)) Directory.CreateDirectory(root);
             }
             catch (Exception ex) { Dump.Exception(ex); return; }
 
             var xml = new XmlDocument();
             xml.AppendChild(xml.CreateXmlDeclaration("1.0", "utf-8", null));
             var rootNode = xml.AppendChild(xml.CreateElement("root")) as XmlElement;
-            if (rootNode == null) return;
 
             rootNode.Attributes.Append(xml.CreateAttribute("gen_id")).Value = GenerationID;
             rootNode.Attributes.Append(xml.CreateAttribute("finished")).Value = ProcessStatus == GenerationProcessStatus.Finished ? "yes" : "no";
 
-            foreach (var alias in SampleAlias)
+            if (SampleAlias != null)
             {
-                var aliasNode = rootNode.AppendChild(xml.CreateElement("alias")) as XmlElement;
-                if (aliasNode == null) continue;
-                aliasNode.Attributes.Append(xml.CreateAttribute("sample")).Value = alias.Key;
-                aliasNode.InnerText = alias.Value;
+                foreach (var alias in SampleAlias)
+                {
+                    var aliasNode = rootNode.AppendChild(xml.CreateElement("alias")) as XmlElement;
+                    aliasNode.Attributes.Append(xml.CreateAttribute("sample")).Value = alias.Key;
+                    aliasNode.InnerText = alias.Value;
+                }
             }
 
-            foreach (var item in Versions)
+            if (Versions != null)
             {
-                var versionNode = rootNode.AppendChild(xml.CreateElement("version")) as XmlElement;
-                if (versionNode == null) continue;
-                versionNode.Attributes.Append(xml.CreateAttribute("key")).Value = item.Key;
-                versionNode.InnerText = item.Value.ToString();
+                foreach (var item in Versions)
+                {
+                    var versionNode = rootNode.AppendChild(xml.CreateElement("version")) as XmlElement;
+                    versionNode.Attributes.Append(xml.CreateAttribute("key")).Value = item.Key;
+                    versionNode.InnerText = item.Value.ToString();
+                }
             }
 
-            foreach (var update in UpdateLogs)
+            if (UpdateLogs != null)
             {
-                var updateNode = rootNode.AppendChild(xml.CreateElement("update")) as XmlElement;
-                if (updateNode == null) continue;
-                updateNode.Attributes.Append(xml.CreateAttribute("time")).Value = update.Key.ToString("yyyy-MM-dd-HH-mm-ss");
-                updateNode.InnerText = update.Value;
+                foreach (var update in UpdateLogs)
+                {
+                    var updateNode = rootNode.AppendChild(xml.CreateElement("update")) as XmlElement;
+                    updateNode.Attributes.Append(xml.CreateAttribute("time")).Value = update.Key.ToString("yyyy-MM-dd-HH-mm-ss");
+                    updateNode.InnerText = update.Value;
+                }
             }
 
             if (GNSSPosixModel != null)
@@ -415,12 +422,12 @@ namespace ASEva.Utility
 
             rootNode.Attributes.Append(xml.CreateAttribute("host_sync")).Value = HostSync ? "yes" : "no";
 
-            foreach (var id in GuestSyncIDs)
+            if (GuestSyncIDs != null)
             {
-                if (id.Length == 0) continue;
-                var guestSyncNode = rootNode.AppendChild(xml.CreateElement("guest_sync"));
-                if (guestSyncNode == null) continue;
-                guestSyncNode.InnerText = id;
+                foreach (var id in GuestSyncIDs)
+                {
+                    if (id.Length > 0) rootNode.AppendChild(xml.CreateElement("guest_sync")).InnerText = id;
+                }
             }
 
             try
@@ -439,12 +446,6 @@ namespace ASEva.Utility
                 }
                 catch (Exception ex) { Dump.Exception(ex); }
             }
-        }
-
-        private GenerationInfo(String filePath, String generationID)
-        {
-            FilePath = filePath;
-            GenerationID = generationID;
         }
     }
 }

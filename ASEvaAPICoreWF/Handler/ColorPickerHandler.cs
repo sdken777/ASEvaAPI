@@ -47,7 +47,7 @@ namespace ASEva.UICoreWF
 			}
 		}
 
-		void HandleClick(object? sender, EventArgs e)
+		void HandleClick(object sender, EventArgs e)
 		{
 			using (Widget.Platform.Context)
 			{
@@ -78,7 +78,7 @@ namespace ASEva.UICoreWF
 
 		public bool SupportsAllowAlpha => false;
 
-		static readonly WM[] intrinsicEvents = [WM.LBUTTONDOWN, WM.LBUTTONUP, WM.LBUTTONDBLCLK];
+		static readonly WM[] intrinsicEvents = { WM.LBUTTONDOWN, WM.LBUTTONUP, WM.LBUTTONDBLCLK };
 		public override bool ShouldBubbleEvent(swf.Message msg)
 		{
 			return !intrinsicEvents.Contains((WM)msg.Msg) && base.ShouldBubbleEvent(msg);

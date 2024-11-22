@@ -23,7 +23,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 通用图像数据(BGR不逆序)
         /// </summary>
-        public CommonImage? CommonImage { get; set; }
+        public CommonImage CommonImage { get; set; }
 
         /// \~English
         /// <summary>
@@ -43,6 +43,6 @@ namespace ASEva.Samples
         /// <summary>
         /// 摄像头信息
         /// </summary>
-        public CameraInfo CameraInfo { get; set; } = new CameraInfo();
+        public CameraInfo CameraInfo { get; set; }
     }
 }

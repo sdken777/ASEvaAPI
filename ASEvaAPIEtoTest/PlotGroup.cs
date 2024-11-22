@@ -11,8 +11,8 @@ namespace ASEvaAPIEtoTest
         private void initPlotGroupBox(GroupBox groupBox)
         {
             var mainLayout = groupBox.SetContentAsRowLayout(8, 8, VerticalAlignment.Stretch);
-            var treeView = (mainLayout.AddControl(new SimpleTreeView(), false, 200) as SimpleTreeView)!;
-            var plotView = (mainLayout.AddControl(new OxyPlotView(), true) as OxyPlotView)!;
+            var treeView = mainLayout.AddControl(new SimpleTreeView(), false, 200) as SimpleTreeView;
+            var plotView = mainLayout.AddControl(new OxyPlotView(), true) as OxyPlotView;
 
             ExampleLibrary.RenderingCapabilities.PixelScale = Pixel.Scale;
 
@@ -24,13 +24,16 @@ namespace ASEvaAPIEtoTest
             }
 
             var categoryNodes = new List<SimpleTreeNode>();
-            object? targetKey = null;
+            object targetKey = null;
             foreach (var pair in exampleTable)
             {
-                var categoryNode = new SimpleTreeNode(pair.Key, pair.Key);
+                var categoryNode = new SimpleTreeNode();
+                categoryNode.Key = categoryNode.Text = pair.Key;
                 foreach (var example in pair.Value)
                 {
-                    var exampleNode = new SimpleTreeNode(example, example.Title);
+                    var exampleNode = new SimpleTreeNode();
+                    exampleNode.Key = example;
+                    exampleNode.Text = example.Title;
                     categoryNode.ChildNodes.Add(exampleNode);
                     if (example.Title == "Peaks") targetKey = example;
                 }
@@ -41,10 +44,10 @@ namespace ASEvaAPIEtoTest
             treeView.SelectedItemChanged += delegate
             {
                 var selected = treeView.GetSelectedKey();
-                if (selected is ExampleInfo example) plotView.SetModel(example.PlotModel);
+                if (selected is ExampleInfo) plotView.SetModel((selected as ExampleInfo).PlotModel);
             };
 
-            if (targetKey != null) treeView.SelectItem(targetKey);
+            treeView.SelectItem(targetKey);
         }
     }
 }

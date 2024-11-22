@@ -33,7 +33,7 @@ namespace ASEva.UIGtk
         }
 
         [DllImport("libX11.so.6")]
-        private static extern nint XOpenDisplay(string? display_name);
+        private static extern nint XOpenDisplay(string display_name);
 
         [DllImport("libX11.so.6")]
         private static extern int XCloseDisplay(nint x11_display);

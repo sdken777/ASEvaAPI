@@ -13,12 +13,12 @@ namespace ASEvaAPIEtoTest
         {
             var layout = groupBox.SetContentAsColumnLayout();
             var layoutRow = layout.AddRowLayout();
-            var webView = (layout.AddControl(new WebView(), true, 500, 200) as WebView)!;
+            var webView = layout.AddControl(new WebView(), true, 500, 200) as WebView;
 
             layoutRow.AddButtonPanel(Bitmap.FromResource("backward.png")).Click += delegate { webView.GoBack(); };
             layoutRow.AddButtonPanel(Bitmap.FromResource("forward.png")).Click += delegate { webView.GoForward(); };
             layoutRow.AddSeparator();
-            var textBox = (layoutRow.AddControl(new TextBox(), true) as TextBox)!;
+            var textBox = layoutRow.AddControl(new TextBox(), true) as TextBox;
             var buttonGo = layoutRow.AddButtonPanel(t["web-go-url"]);
             layoutRow.AddSeparator();
             layoutRow.AddButtonPanel(t["web-call-script"]).Click += delegate { webView.ExecuteScriptAsync("callScript()"); };
@@ -26,7 +26,7 @@ namespace ASEvaAPIEtoTest
             {
                 try
                 {
-                    String? str = null;
+                    String str = null;
                     str.Split(',');
                 }
                 catch (Exception) {}

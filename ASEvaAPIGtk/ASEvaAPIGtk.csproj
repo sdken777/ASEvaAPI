@@ -6,8 +6,7 @@
     <Version>0.0.0.0</Version>
     <DefineConstants>GTK3;GTKCORE;GTKSHARP3</DefineConstants>
     <NoWarn>1701;1702;1591</NoWarn>
-    <Nullable>Enable</Nullable>
-    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>

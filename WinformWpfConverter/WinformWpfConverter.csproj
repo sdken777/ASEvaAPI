@@ -7,7 +7,6 @@
     <UseWpf>True</UseWpf>
     <RootNamespace>WinformWpfConverter</RootNamespace>
     <AssemblyName>WinformWpfConverter</AssemblyName>
-    <Nullable>Enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

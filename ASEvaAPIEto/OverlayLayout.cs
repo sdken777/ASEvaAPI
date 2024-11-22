@@ -30,7 +30,7 @@ namespace ASEva.UIEto
         /// <param name="bottomLogicalPadding">Space between bottom bound and the control, null as not related</param>
         /// <param name="leftLogicalPadding">Space between left bound and the control, null as not related</param>
         /// <param name="rightLogicalPadding">Space between right bound and the control, null as not related</param>
-        /// <returns>Added control, null if failed</returns>
+        /// <returns>新添加的控件</returns>
         /// \~Chinese
         /// <summary>
         /// 添加控件
@@ -40,16 +40,16 @@ namespace ASEva.UIEto
         /// <param name="bottomLogicalPadding">控件与底部间隔，null表示不关联</param>
         /// <param name="leftLogicalPadding">控件与左侧间隔，null表示不关联</param>
         /// <param name="rightLogicalPadding">控件与右侧间隔，null表示不关联</param>
-        /// <returns>新添加的控件，若添加失败则返回null</returns>
-        public Control? AddControl(Control control, int? topLogicalPadding, int? bottomLogicalPadding, int? leftLogicalPadding, int? rightLogicalPadding)
+        /// <returns>新添加的控件</returns>
+        public Control AddControl(Control control, int? topLogicalPadding, int? bottomLogicalPadding, int? leftLogicalPadding, int? rightLogicalPadding)
         {
-            if (control is GLView glView)
+            if (control is GLView)
             {
-                if (!glView.SupportOverlay) return null;
+                if (!(control as GLView).SupportOverlay) return null;
             }
-            if (control is SkiaView skiaView)
+            if (control is SkiaView)
             {
-                if (!skiaView.SupportOverlay) return null;
+                if (!(control as SkiaView).SupportOverlay) return null;
             }
 
             if (paddingTable.ContainsKey(control))
@@ -58,13 +58,11 @@ namespace ASEva.UIEto
                 return AddControl(control, topLogicalPadding, bottomLogicalPadding, leftLogicalPadding, rightLogicalPadding);
             }
 
-            var padding = new ControlPadding
-            {
-                Top = topLogicalPadding,
-                Bottom = bottomLogicalPadding,
-                Left = leftLogicalPadding,
-                Right = rightLogicalPadding
-            };
+            var padding = new ControlPadding();
+            padding.Top = topLogicalPadding;
+            padding.Bottom = bottomLogicalPadding;
+            padding.Left = leftLogicalPadding;
+            padding.Right = rightLogicalPadding;
             paddingTable[control] = padding;
             
             if (DelayHandleControl)
@@ -111,7 +109,7 @@ namespace ASEva.UIEto
             if (paddingTable.ContainsKey(control)) handleControl(control, false);
         }
 
-        private void this_SizeChanged(object? sender, EventArgs e)
+        private void this_SizeChanged(object sender, EventArgs e)
         {
             if (sizeInitialized && DelayHandleControl)
             {
@@ -199,8 +197,8 @@ namespace ASEva.UIEto
             public int? Right { get; set; }
         }
 
-        private Dictionary<Control, ControlPadding> paddingTable = [];
-        private UITimer? timer = null;
+        private Dictionary<Control, ControlPadding> paddingTable = new Dictionary<Control, ControlPadding>();
+        private UITimer timer = null;
         private bool sizeInitialized = false;
 
         public static bool DelayHandleControl { private get; set; }

@@ -21,11 +21,11 @@ namespace ASEva.UIWpf
 
             passwordBox.PasswordChanged += delegate
             {
-                if (!useTextBox) PasswordChanged?.Invoke(null, EventArgs.Empty);
+                if (!useTextBox) PasswordChanged?.Invoke(null, null);
             };
             textBox.TextChanged += delegate
             {
-                if (useTextBox) PasswordChanged?.Invoke(null, EventArgs.Empty);
+                if (useTextBox) PasswordChanged?.Invoke(null, null);
             };
         }
 
@@ -82,7 +82,7 @@ namespace ASEva.UIWpf
             }
         }
 
-        public event EventHandler? PasswordChanged;
+        public event EventHandler PasswordChanged;
 
         private bool useTextBox = false;
     }

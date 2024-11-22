@@ -172,7 +172,7 @@ namespace ASEva
         /// [可选实现] 获取任务状态描述
         /// </summary>
         /// <returns>任务状态描述</returns>
-        public virtual String GetDescription() { return ""; }
+        public virtual String GetDescription() { return null; }
 
         /// \~English
         /// <summary>
@@ -196,6 +196,6 @@ namespace ASEva
         /// [可选实现] 获取任务返回值信息
         /// </summary>
         /// <returns>任务返回值</returns>
-        public virtual String? GetReturnValue() { return null; }
+        public virtual String GetReturnValue() { return null; }
     }
 }

@@ -16,7 +16,7 @@ namespace ASEva.UIGtk
                 var vTable = *(VTable*)vTablePtr;
                 Type delegateType = typeof(GdkGlSetFlagsDelegate);
                 var gdkGlSetFlags = Marshal.GetDelegateForFunctionPointer(vTable.gdk_gl_set_flags, delegateType) as GdkGlSetFlagsDelegate;
-                gdkGlSetFlags?.Invoke(1 << 5/* LEGACY */);
+                gdkGlSetFlags(1 << 5/* LEGACY */);
             }
         }
 

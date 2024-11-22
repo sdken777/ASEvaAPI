@@ -25,10 +25,10 @@ namespace OxyPlot.GtkSharp
 
         private readonly HashSet<OxyImage> imagesInUse = new HashSet<OxyImage>();
 
-        private Cairo.Context? g;
+        private Cairo.Context g;
 
 #if GTKSHARP3
-        private Pango.Context? c;
+        private Pango.Context c;
 #endif
 
         private int clipCount;
@@ -54,8 +54,6 @@ namespace OxyPlot.GtkSharp
             var ew = rect.Width;
             var eh = rect.Height;
             if (ew <= 0 || eh <= 0) return;
-
-            if (g == null) return;
 
             if (fill.IsVisible())
             {
@@ -96,8 +94,6 @@ namespace OxyPlot.GtkSharp
             double[] dashArray,
             OxyPlot.LineJoin lineJoin)
         {
-            if (g == null) return;
-
             if (stroke.IsVisible() && thickness > 0 && points.Count >= 2)
             {
                 // g.SmoothingMode = aliased ? SmoothingMode.None : SmoothingMode.HighQuality; // TODO: Smoothing modes
@@ -131,8 +127,6 @@ namespace OxyPlot.GtkSharp
             double[] dashArray,
             OxyPlot.LineJoin lineJoin)
         {
-            if (g == null) return;
-
             bool aliased = !ShouldUseAntiAliasingForEllipse(renderingMode);
             if (fill.IsVisible() && points.Count >= 2)
             {
@@ -184,8 +178,6 @@ namespace OxyPlot.GtkSharp
 
         public override void DrawRectangle(OxyRect rect, OxyColor fill, OxyColor stroke, double thickness, EdgeRenderingMode renderingMode)
         {
-            if (g == null) return;
-            
             bool aliased = !ShouldUseAntiAliasingForRect(renderingMode);
             if (fill.IsVisible())
             {
@@ -219,8 +211,6 @@ namespace OxyPlot.GtkSharp
             VerticalAlignment valign,
             OxySize? maxSize)
         {
-            if (g == null) return;
-
 #if GTKSHARP3
             Pango.Layout layout = new Layout(this.c);
 #else
@@ -285,7 +275,7 @@ namespace OxyPlot.GtkSharp
 
         public override OxySize MeasureText(string text, string fontFamily, double fontSize, double fontWeight)
         {
-            if (text == null || g == null)
+            if (text == null)
             {
                 return OxySize.Empty;
             }
@@ -315,13 +305,13 @@ namespace OxyPlot.GtkSharp
             foreach (var i in imagesToRelease)
             {
                 var image = this.GetImage(i);
-                image?.Dispose();
+                image.Dispose();
                 this.imageCache.Remove(i);
             }
 
             this.imagesInUse.Clear();
 #if GTKSHARP3
-            this.c?.Dispose();
+            this.c.Dispose();
 #endif
         }
 
@@ -338,8 +328,6 @@ namespace OxyPlot.GtkSharp
             double opacity,
             bool interpolate)
         {
-            if (g == null) return;
-            
             var image = this.GetImage(source);
             if (image != null)
             {
@@ -394,13 +382,9 @@ namespace OxyPlot.GtkSharp
         public override void PushClip(OxyRect rect)
         {
             clipCount++;
-
-            if (g != null)
-            {
-                this.g.Save();
-                this.g.Rectangle(rect.Left, rect.Top, rect.Width, rect.Height);
-                this.g.Clip();
-            }
+            this.g.Save();
+            this.g.Rectangle(rect.Left, rect.Top, rect.Width, rect.Height);
+            this.g.Clip();
         }
 
         public override void PopClip()
@@ -408,10 +392,10 @@ namespace OxyPlot.GtkSharp
             if (clipCount < 1)
                 throw new InvalidOperationException($"Clip count is already 0 - programmer may be missing a call to {nameof(PushClip)}");
             clipCount--;
-            this.g?.Restore();
+            this.g.Restore();
         }
 
-        private Pixbuf? GetImage(OxyImage source)
+        private Pixbuf GetImage(OxyImage source)
         {
             if (source == null)
             {
@@ -423,7 +407,7 @@ namespace OxyPlot.GtkSharp
                 this.imagesInUse.Add(source);
             }
 
-            Pixbuf? src;
+            Pixbuf src;
             if (this.imageCache.TryGetValue(source, out src))
             {
                 return src;

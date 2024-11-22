@@ -19,30 +19,30 @@ namespace ASEva.UIGtk
     /// </summary>
     public class MatrixTableGraph : BaseGraph
     {
-        [UI] Label? labelTitle, labelValidation, labelValidationSub;
-        [UI] Overlay? overlay;
-        [UI] DrawingArea? draw;
-        [UI] EventBox? eventBox;
-        [UI] Box? boxValidation;
+        [UI] Label labelTitle, labelValidation, labelValidationSub;
+        [UI] Overlay overlay;
+        [UI] DrawingArea draw;
+        [UI] EventBox eventBox;
+        [UI] Box boxValidation;
 
         EventBoxHelper eventBoxHelper = new EventBoxHelper();
-        DrawSwap? drawSwap = null;
+        DrawSwap drawSwap;
 
         public MatrixTableGraph() : this(new Builder("MatrixTableGraph.glade"))
-        {}
+        {
+            this.SetBackColor(ColorRGBA.White);
+
+            overlay.AddOverlay(boxValidation);
+            eventBoxHelper.Add(eventBox);
+            drawSwap = new DrawSwap(draw, "ASEva.UIGtk.MatrixTableGraph");
+
+            eventBoxHelper.LeftDown += eventBox_LeftDown;
+            drawSwap.Paint += draw_Paint;
+        }
 
         private MatrixTableGraph(Builder builder) : base(builder.GetRawOwnedObject("MatrixTableGraph"))
         {
             builder.Autoconnect(this);
-
-            this.SetBackColor(ColorRGBA.White);
-
-            overlay?.AddOverlay(boxValidation);
-            if (eventBox != null) eventBoxHelper.Add(eventBox);
-            if (draw != null) drawSwap = new DrawSwap(draw, "ASEva.UIGtk.MatrixTableGraph");
-
-            eventBoxHelper.LeftDown += eventBox_LeftDown;
-            if (drawSwap != null) drawSwap.Paint += draw_Paint;
         }
 
         /// \~English
@@ -55,7 +55,7 @@ namespace ASEva.UIGtk
         /// </summary>
         public override void Close()
 		{
-			drawSwap?.Close();
+			drawSwap.Close();
 		}
 
         public override void UpdateUIWithData()
@@ -63,90 +63,80 @@ namespace ASEva.UIGtk
             if (Data == null || !(Data is MatrixTableData)) return;
 
             // 数据和验证条件显示
-            drawSwap?.Refresh();
+            drawSwap.Refresh();
 
-            if (labelValidationSub != null)
+            if (Data.Definition.Validation == null)
             {
-                if (Data.Definition.Validation == null)
+                labelValidationSub.Text = "";
+            }
+            else
+            {
+                var vd = Data.Definition.Validation;
+                if (vd is ValueBelowValidation)
                 {
-                    labelValidationSub.Text = "";
+                    labelValidationSub.Text = "≤ " + (vd as ValueBelowValidation).GetThreshold();
+                }
+                else if (vd is ValueAboveValidation)
+                {
+                    labelValidationSub.Text = "≥ " + (vd as ValueAboveValidation).GetThreshold();
                 }
                 else
                 {
-                    var vd = Data.Definition.Validation;
-                    if (vd is ValueBelowValidation vbv)
-                    {
-                        labelValidationSub.Text = "≤ " + vbv.GetThreshold();
-                    }
-                    else if (vd is ValueAboveValidation vav)
-                    {
-                        labelValidationSub.Text = "≥ " + vav.GetThreshold();
-                    }
-                    else
-                    {
-                        labelValidationSub.Text = "";
-                    }
+                    labelValidationSub.Text = "";
                 }
             }
 
             // 标题显示
-            if (labelTitle != null) labelTitle.Text = Data.Definition.MainTitle;
+            labelTitle.Text = Data == null ? "" : Data.Definition.MainTitle;
             if (!Data.HasData())
             {
-                if (labelValidation != null)
-                {
-                    labelValidation.SetForeColor(ColorRGBA.Black);
-                    labelValidation.Text = "No Data.";
-                }
+                labelValidation.SetForeColor(ColorRGBA.Black);
+                labelValidation.Text = "No Data.";
                 return;
             }
 
             // 验证结果显示
-            if (labelValidation != null)
+            double? percentage = null;
+            var vdResult = Data.Validate(out percentage);
+            if (vdResult == null)
             {
-                double? percentage = null;
-                var vdResult = Data.Validate(out percentage);
-                if (vdResult == null)
-                {
-                    labelValidation.SetForeColor(ColorRGBA.Black);
-                    labelValidation.Text = percentage == null ? "" : (getPercentageText(percentage.Value) + "% OK");
-                }
-                else if (vdResult.Value)
-                {
-                    labelValidation.SetForeColor(ColorRGBA.Green);
-                    labelValidation.Text = percentage == null ? "OK" : (getPercentageText(percentage.Value) + "% OK");
-                }
-                else
-                {
-                    labelValidation.SetForeColor(ColorRGBA.Red);
-                    labelValidation.Text = percentage == null ? "NG" : (getPercentageText(percentage.Value) + "% OK");
-                }
+                labelValidation.SetForeColor(ColorRGBA.Black);
+                labelValidation.Text = percentage == null ? "" : (getPercentageText(percentage.Value) + "% OK");
+            }
+            else if (vdResult.Value)
+            {
+                labelValidation.SetForeColor(ColorRGBA.Green);
+                labelValidation.Text = percentage == null ? "OK" : (getPercentageText(percentage.Value) + "% OK");
+            }
+            else
+            {
+                labelValidation.SetForeColor(ColorRGBA.Red);
+                labelValidation.Text = percentage == null ? "NG" : (getPercentageText(percentage.Value) + "% OK");
             }
         }
 
         private ColorRGBA getColorByValue(double upper, double lower, double value)
         {
             var color = new ColorRGBA();
-            ColorRGBA[] colors =
-            [
-                new ColorRGBA(0, 0, 128),
-                new ColorRGBA(0, 0, 192),
-                new ColorRGBA(0, 0, 255),
-                new ColorRGBA(0, 64, 255),
-                new ColorRGBA(0, 128, 255),
-                new ColorRGBA(0, 192, 255),
-                new ColorRGBA(0, 255, 255),
-                new ColorRGBA(64, 255, 192),
-                new ColorRGBA(128, 255, 128),
-                new ColorRGBA(192, 255, 64),
-                new ColorRGBA(255, 255, 0),
-                new ColorRGBA(255, 192, 0),
-                new ColorRGBA(255, 128, 0),
-                new ColorRGBA(255, 64, 0),
-                new ColorRGBA(255, 0, 0),
-                new ColorRGBA(192, 0, 0),
-                new ColorRGBA(128, 0, 0),
-            ];
+            ColorRGBA[] colors = new ColorRGBA[17];
+            colors[0] = new ColorRGBA(0, 0, 128);
+            colors[1] = new ColorRGBA(0, 0, 192);
+            colors[2] = new ColorRGBA(0, 0, 255);
+            colors[3] = new ColorRGBA(0, 64, 255);
+            colors[4] = new ColorRGBA(0, 128, 255);
+            colors[5] = new ColorRGBA(0, 192, 255);
+            colors[6] = new ColorRGBA(0, 255, 255);
+            colors[7] = new ColorRGBA(64, 255, 192);
+            colors[8] = new ColorRGBA(128, 255, 128);
+            colors[9] = new ColorRGBA(192, 255, 64);
+            colors[10] = new ColorRGBA(255, 255, 0);
+            colors[11] = new ColorRGBA(255, 192, 0);
+            colors[12] = new ColorRGBA(255, 128, 0);
+            colors[13] = new ColorRGBA(255, 64, 0);
+            colors[14] = new ColorRGBA(255, 0, 0);
+            colors[15] = new ColorRGBA(192, 0, 0);
+            colors[16] = new ColorRGBA(128, 0, 0);
+
             if (value <= lower)
             {
                 color =  colors[0];
@@ -185,13 +175,6 @@ namespace ASEva.UIGtk
 
         private void draw_Paint(DrawSwap swap, Cairo.Context cc)
         {
-            var D = Data as MatrixTableData;
-            if (D == null || draw == null) return;
-
-            var xrange = D.GetXRange();
-            var yrange = D.GetYRange();
-            if (xrange == null || yrange == null) return;
-
             try
             {
                 cc.LineWidth = 1;
@@ -203,8 +186,11 @@ namespace ASEva.UIGtk
                 var height = draw.AllocatedHeight - 2;
                 var originPoint = new FloatPoint((float)width / 4, (float)height / 3 * 2);
 
+                var D = Data as MatrixTableData;
                 var xTitle = D.GetXTitle();
                 var yTitle = D.GetYTitle();
+                var xrange = D.GetXRange();
+                var yrange = D.GetYRange();
                 var xHeights = D.GetXHistValues();
                 var yHeights = D.GetYHistValues();
                 var values = D.GetValues();
@@ -310,19 +296,21 @@ namespace ASEva.UIGtk
                 cc.Rotate(-0.5 * Math.PI);
 
                 // 验证框
-                if (D.Definition.Validation != null)
+                if (Data.Definition.Validation != null)
                 {
                     ColorRGBA color = ColorRGBA.Black;
-                    FloatPoint[]? genericOutline = null;
-                    if (D.Definition.Validation is OutlineInsideValidation oiv)
+                    FloatPoint[] genericOutline = null;
+                    if (Data.Definition.Validation is OutlineInsideValidation)
                     {
+                        var vd = Data.Definition.Validation as OutlineInsideValidation;
                         color = ColorRGBA.LimeGreen;
-                        genericOutline = oiv.GetOutline();
+                        genericOutline = vd.GetOutline();
                     }
-                    else if (D.Definition.Validation is OutlineOutsideValidation oov)
+                    else if (Data.Definition.Validation is OutlineOutsideValidation)
                     {
+                        var vd = Data.Definition.Validation as OutlineOutsideValidation;
                         color = ColorRGBA.Red;
-                        genericOutline = oov.GetOutline();
+                        genericOutline = vd.GetOutline();
                     }
 
                     if (genericOutline != null)
@@ -367,7 +355,7 @@ namespace ASEva.UIGtk
                         cc.SetSourceColor(ColorRGBA.Red);
                         cc.ShowText(fullText);
 
-                        cc.SetDash([1, 1], 0);
+                        cc.SetDash(new double[] {1, 1}, 0);
                         cc.SetSourceColor(ColorRGBA.DodgerBlue);
 
                         cc.DrawLine(originPoint.X, mouse.Y, width - 1, mouse.Y);

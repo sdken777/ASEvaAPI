@@ -23,7 +23,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=3.1.6) [必须实现] 获取数据处理组件的名称时被调用
         /// </summary>
-        public virtual Dictionary<Language, String> GetProcessorName() { return []; }
+        public virtual Dictionary<Language, String> GetProcessorName() { return null; }
 
         /// \~English
         /// <summary>
@@ -35,7 +35,7 @@ namespace ASEva
         /// [必须实现] 获取数据处理组件的类别ID时被调用
         /// </summary>
         /// <returns>数据处理组件类别ID</returns>
-        public virtual String GetProcessorClassID() { return ""; }
+        public virtual String GetProcessorClassID() { return null; }
 
         /// \~English
         /// <summary>
@@ -47,7 +47,7 @@ namespace ASEva
         /// [可选实现] 创建配置对象时被调用。若不实现则为空配置，常时启用状态
         /// </summary>
         /// <returns>配置对象</returns>
-        public virtual ModuleConfig? CreateConfig() { return null; }
+        public virtual ModuleConfig CreateConfig() { return null; }
 
         /// \~English
         /// <summary>
@@ -61,7 +61,7 @@ namespace ASEva
         /// </summary>
         /// <param name="config">配置对象，定义数据处理行为</param>
         /// <returns>数据处理对象</returns>
-        public virtual Processor CreateProcessor(ModuleConfig config) { return new Processor(); }
+        public virtual Processor CreateProcessor(ModuleConfig config) { return null; }
 
         /// \~English
         /// <summary>
@@ -73,6 +73,6 @@ namespace ASEva
         /// [可选实现] 获取可直接作为样本输出的原始数据协议列表及对应的样本别名
         /// </summary>
         /// <returns>原始数据协议（键）列表及对应的样本别名（值）</returns>
-        public virtual Dictionary<String, String> GetRawToSampleProtocols() { return []; }
+        public virtual Dictionary<String, String> GetRawToSampleProtocols() { return null; }
     }
 }

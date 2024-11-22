@@ -19,8 +19,10 @@ namespace ASEva.UICoreWF
             MouseDoubleClick += treeView_MouseDoubleClick;
         }
 
-        public object? GetSelectedKey()
+        public object GetSelectedKey()
         {
+            if (SelectedNode == null) return null;
+
             var target = SelectedNode;
             if (target == null || !treeNodeMap.ContainsKey(target)) return null;
 
@@ -37,7 +39,7 @@ namespace ASEva.UICoreWF
             var expandedItemKeys = new List<object>();
             foreach (var node in rootNodes)
             {
-                if (nodeKeyMap.ContainsKey(node.Key)) continue;
+                if (node.Key == null || nodeKeyMap.ContainsKey(node.Key)) continue;
                 if (String.IsNullOrEmpty(node.Text)) continue;
 
                 var textColor = node.TextColor == Eto.Drawing.Colors.Transparent ? Eto.Drawing.SystemColors.ControlText : node.TextColor;
@@ -46,12 +48,14 @@ namespace ASEva.UICoreWF
                 treeNode.ForeColor = textColor.ToSD();
                 treeNode.BackColor = backColor.ToSD();
 
-                var nodeCoreWF = new SimpleTreeNodeCoreWF(node, treeNode);
+                var nodeCoreWF = new SimpleTreeNodeCoreWF();
+                nodeCoreWF.Common = node;
+                nodeCoreWF.TreeNode = treeNode;
 
                 nodeKeyMap[node.Key] = nodeCoreWF;
                 treeNodeMap[treeNode] = nodeCoreWF;
 
-                if (node.ChildNodes.Count > 0)
+                if (node.ChildNodes != null && node.ChildNodes.Count > 0)
                 {
                     if (node.ChildNodesExpanded) expandedItemKeys.Add(node.Key);
                     addChildNodes(treeNode, node.ChildNodes, expandedItemKeys);
@@ -70,11 +74,11 @@ namespace ASEva.UICoreWF
 
         public void UpdateNodes(SimpleTreeNodeUpdateTask[] tasks)
         {
-            if (tasks.Length == 0) return;
+            if (tasks == null || tasks.Length == 0) return;
 
             foreach (var task in tasks)
             {
-                if (!nodeKeyMap.ContainsKey(task.Key)) continue;
+                if (task.Key == null || !nodeKeyMap.ContainsKey(task.Key)) continue;
 
                 var node = nodeKeyMap[task.Key];
                 if (task.TextColor != null && task.TextColor.Value != node.Common.TextColor)
@@ -92,27 +96,27 @@ namespace ASEva.UICoreWF
 
         public void SelectItem(object key)
         {
-            if (nodeKeyMap.ContainsKey(key))
+            if (key != null && nodeKeyMap.ContainsKey(key))
             {
                 SelectedNode = nodeKeyMap[key].TreeNode;
             }
         }
 
-        private void treeView_AfterSelect(object? sender, EventArgs e)
+        private void treeView_AfterSelect(object sender, EventArgs e)
         {
-            callback.OnSelectedItemChanged();
+            if (callback != null) callback.OnSelectedItemChanged();
         }
 
-        private void treeView_MouseDoubleClick(object? sender, EventArgs e)
+        private void treeView_MouseDoubleClick(object sender, EventArgs e)
         {
-            callback.OnSelectedItemActivated();
+            if (callback != null) callback.OnSelectedItemActivated();
         }
 
         private void addChildNodes(TreeNode parentNode, List<SimpleTreeNode> childNodes, List<object> expandedItemKeys)
         {
             foreach (var node in childNodes)
             {
-                if (nodeKeyMap.ContainsKey(node.Key)) continue;
+                if (node.Key == null || nodeKeyMap.ContainsKey(node.Key)) continue;
                 if (String.IsNullOrEmpty(node.Text)) continue;
 
                 var textColor = node.TextColor == Eto.Drawing.Colors.Transparent ? Eto.Drawing.SystemColors.ControlText : node.TextColor;
@@ -121,12 +125,14 @@ namespace ASEva.UICoreWF
                 treeNode.ForeColor = textColor.ToSD();
                 treeNode.BackColor = backColor.ToSD();
 
-                var nodeCoreWF = new SimpleTreeNodeCoreWF(node, treeNode);
+                var nodeCoreWF = new SimpleTreeNodeCoreWF();
+                nodeCoreWF.Common = node;
+                nodeCoreWF.TreeNode = treeNode;
 
                 nodeKeyMap[node.Key] = nodeCoreWF;
                 treeNodeMap[treeNode] = nodeCoreWF;
 
-                if (node.ChildNodes.Count > 0)
+                if (node.ChildNodes != null && node.ChildNodes.Count > 0)
                 {
                     if (node.ChildNodesExpanded) expandedItemKeys.Add(node.Key);
                     addChildNodes(treeNode, node.ChildNodes, expandedItemKeys);
@@ -136,10 +142,10 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private class SimpleTreeNodeCoreWF(SimpleTreeNode common, TreeNode treeNode)
+        private class SimpleTreeNodeCoreWF
         {
-            public SimpleTreeNode Common { get; set; } = common;
-            public TreeNode TreeNode { get; set; } = treeNode;
+            public SimpleTreeNode Common { get; set; }
+            public TreeNode TreeNode { get; set; }
         }
 
         private SimpleTreeViewCallback callback;

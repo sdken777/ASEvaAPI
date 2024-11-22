@@ -29,6 +29,7 @@ namespace ASEva.UIEto
         /// <param name="window">目标窗口</param>
         public static void MaximizeToFullScreen(this Window window)
         {
+            if (window == null) return;
             if (Handler == null)
             {
                 if (window.Maximizable) window.Maximize();
@@ -42,6 +43,6 @@ namespace ASEva.UIEto
             void FullScreen(Window window);
         }
 
-        public static FullScreenHandler? Handler { private get; set; }
+        public static FullScreenHandler Handler { private get; set; }
     }
 }

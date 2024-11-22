@@ -50,7 +50,7 @@ namespace ASEva
         /// [可选实现] 获取插件包含的所有窗口组件的定义对象时被调用
         /// </summary>
         /// <returns>窗口组件定义对象的列表</returns>
-        public virtual WindowClass[] GetWindowClasses() { return []; }
+        public virtual WindowClass[] GetWindowClasses() { return null; }
 
         /// \~English
         /// <summary>
@@ -62,7 +62,7 @@ namespace ASEva
         /// [可选实现] 获取插件包含的所有对话框组件的定义对象时被调用
         /// </summary>
         /// <returns>对话框组件定义对象的列表</returns>
-        public virtual DialogClass[] GetDialogClasses() { return []; }
+        public virtual DialogClass[] GetDialogClasses() { return null; }
 
         /// \~English
         /// <summary>
@@ -74,7 +74,7 @@ namespace ASEva
         /// [可选实现] 获取插件包含的所有控制台组件的定义对象时被调用
         /// </summary>
         /// <returns>控制台组件定义对象的列表</returns>
-        public virtual ConsoleClass[] GetConsoleClasses() { return []; }
+        public virtual ConsoleClass[] GetConsoleClasses() { return null; }
 
         /// \~English
         /// <summary>
@@ -86,7 +86,7 @@ namespace ASEva
         /// [可选实现] 获取插件包含的所有数据处理组件的定义对象时被调用
         /// </summary>
         /// <returns>数据处理组件定义对象的列表</returns>
-        public virtual ProcessorClass[] GetProcessorClasses() { return []; }
+        public virtual ProcessorClass[] GetProcessorClasses() { return null; }
 
         /// \~English
         /// <summary>
@@ -98,7 +98,7 @@ namespace ASEva
         /// [可选实现] 获取插件包含的所有原生组件的定义对象时被调用
         /// </summary>
         /// <returns>原生组件定义对象的列表</returns>
-        public virtual NativeClass[] GetNativeClasses() { return []; }
+        public virtual NativeClass[] GetNativeClasses() { return null; }
 
         /// \~English
         /// <summary>
@@ -110,7 +110,7 @@ namespace ASEva
         /// [可选实现] 获取插件包含的所有独立任务组件的定义对象时被调用
         /// </summary>
         /// <returns>独立任务组件定义对象的列表</returns>
-        public virtual TaskClass[] GetTaskClasses() { return []; }
+        public virtual TaskClass[] GetTaskClasses() { return null; }
 
         /// \~English
         /// <summary>
@@ -122,7 +122,7 @@ namespace ASEva
         /// [可选实现] 获取插件包含的所有设备组件的定义对象时被调用
         /// </summary>
         /// <returns>设备组件定义对象的列表</returns>
-        public virtual DeviceClass[] GetDeviceClasses() { return []; }
+        public virtual DeviceClass[] GetDeviceClasses() { return null; }
 
         /// \~English
         /// <summary>
@@ -134,7 +134,7 @@ namespace ASEva
         /// (api:app=3.1.0) [可选实现] 获取插件包含的流程对象时被调用
         /// </summary>
         /// <returns>流程对象</returns>
-        public virtual CommonWorkflow? GetWorkflow() { return null; }
+        public virtual CommonWorkflow GetWorkflow() { return null; }
 
         /// \~English
         /// <summary>
@@ -146,7 +146,7 @@ namespace ASEva
         /// [可选实现] 获取插件包需要使用的所有全局路径的键时被调用
         /// </summary>
         /// <returns>全局路径键的列表</returns>
-        public virtual String[] GetGlobalPathKeys() { return []; }
+        public virtual String[] GetGlobalPathKeys() { return null; }
 
         /// \~English
         /// <summary>
@@ -158,7 +158,7 @@ namespace ASEva
         /// [可选实现] 获取插件相关的原生组件ID时被调用（无需考虑本插件内的原生组件）
         /// </summary>
         /// <returns>原生组件ID列表</returns>
-        public virtual String[] GetRelatedNativeModules() { return []; }
+        public virtual String[] GetRelatedNativeModules() { return null; }
 
         /// \~English
         /// <summary>
@@ -170,7 +170,7 @@ namespace ASEva
         /// [可选实现] 获取插件相关的客机同步通道标题表时被调用
         /// </summary>
         /// <returns>客机同步通道标题表，键为客机同步ID，值为其标题</returns>
-        public virtual Dictionary<String, String> GetGuestSyncTitleTable() { return []; }
+        public virtual Dictionary<String, String> GetGuestSyncTitleTable() { return null; }
 
         /// \~English
         /// <summary>
@@ -182,7 +182,7 @@ namespace ASEva
         /// [可选实现] 获取需要提前加载的库文件列表时被调用
         /// </summary>
         /// <returns>库文件名的列表，不需要绝对路径</returns>
-        public virtual String[] GetPreloadLibFiles() { return []; }
+        public virtual String[] GetPreloadLibFiles() { return null; }
 
         /// \~English
         /// <summary>
@@ -194,7 +194,7 @@ namespace ASEva
         /// [可选实现] 获取插件使用的第三方软件版权声明时被调用
         /// </summary>
         /// <returns>键为标题，值为版权声明</returns>
-        public virtual Dictionary<String, String> GetThirdPartyNotices() { return []; }
+        public virtual Dictionary<String, String> GetThirdPartyNotices() { return null; }
 
         /// \~English
         /// <summary>
@@ -206,7 +206,7 @@ namespace ASEva
         /// [可选实现] 获取Linux系统下需要自动root权限的可执行程序路径时被调用
         /// </summary>
         /// <returns>可执行程序路径列表，仅限无界面程序</returns>
-        public virtual String[] GetAutoRootTargets() { return []; }
+        public virtual String[] GetAutoRootTargets() { return null; }
 
         /// \~English
         /// <summary>
@@ -218,7 +218,7 @@ namespace ASEva
         /// (api:app=3.4.5) [可选实现] 获取用户偏好变量ID列表时被调用
         /// </summary>
         /// <returns>用户偏好变量ID列表</returns>
-        public virtual String[] GetPreferenceVariables() { return []; }
+        public virtual String[] GetPreferenceVariables() { return null; }
 
         /// \~English
         /// <summary>
@@ -336,6 +336,6 @@ namespace ASEva
         /// [可选实现] 在检查插件是否忙于长耗时操作时被调用
         /// </summary>
         /// <returns>长耗时操作的描述，若无则返回null</returns>
-        public virtual String? OnCheckBusy() { return null; }
+        public virtual String OnCheckBusy() { return null; }
     }
 }

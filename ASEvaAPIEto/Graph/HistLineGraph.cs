@@ -65,7 +65,7 @@ namespace ASEva.UIEto
         protected override void UpdateModel(GraphData data)
         {
             model.Title = data == null ? "" : data.Definition.MainTitle;
-            if (data == null || !(data is HistAndLineData histLineData) || !data.HasData())
+            if (data == null || !(data is HistAndLineData) || !data.HasData())
             {
                 model.Subtitle = "No data.";
                 model.SubtitleColor = OxyColors.Black;
@@ -73,30 +73,33 @@ namespace ASEva.UIEto
                 model.Axes[1].Reset();
                 model.Axes[2].Reset();
                 model.Axes[3].Reset();
-                (model.Series[0] as HistogramSeries)?.Items.Clear();
-                (model.Series[1] as LineSeries)?.Points.Clear();
-                (model.Annotations[0] as PolygonAnnotation)?.Points.Clear();
+                (model.Series[0] as HistogramSeries).Items.Clear();
+                (model.Series[1] as LineSeries).Points.Clear();
+                (model.Annotations[0] as PolygonAnnotation).Points.Clear();
                 InvalidatePlot();
                 return;
             }
 
+            var histLineData = data as HistAndLineData;
             var xValuesOrLabels = histLineData.GetXValuesOrLabels();
-            if (xValuesOrLabels is HistLineXValues xValues)
+            if (xValuesOrLabels is HistLineXValues)
             {
+                var xValues = xValuesOrLabels as HistLineXValues;
                 model.Axes[0].IsAxisVisible = true;
                 model.Axes[1].IsAxisVisible = false;
                 model.Axes[0].Title = histLineData.GetXTitle();
                 model.Axes[0].Minimum = xValues.Base;
                 model.Axes[0].Maximum = xValues.Base + xValues.Count * xValues.Step;
             }
-            else if (xValuesOrLabels is HistLineXLabels xLabels)
+            else // HistLineXLabels
             {
+                var xLabels = xValuesOrLabels as HistLineXLabels;
                 var axis = model.Axes[1] as CategoryAxis;
                 model.Axes[1].IsAxisVisible = true;
                 model.Axes[0].IsAxisVisible = false;
                 model.Axes[1].Title = histLineData.GetXTitle();
-                axis?.Labels.Clear();
-                axis?.Labels.AddRange(xLabels.Labels);
+                axis.Labels.Clear();
+                axis.Labels.AddRange(xLabels.Labels);
             }
 
             model.Axes[2].Title = histLineData.GetHistTitle();
@@ -159,92 +162,94 @@ namespace ASEva.UIEto
             model.Axes[2].Minimum = model.Axes[3].Minimum = minimum;
             model.Axes[2].Maximum = model.Axes[3].Maximum = maximum;
 
-            (model.Series[0] as HistogramSeries)?.Items.Clear();
-            (model.Series[1] as LineSeries)?.Points.Clear();
+            (model.Series[0] as HistogramSeries).Items.Clear();
+            (model.Series[1] as LineSeries).Points.Clear();
             for (int i = 0; i < samples.Length; i++)
             {
                 double x1 = i + 0.1, x2 = i + 0.9;
-                if (xValuesOrLabels is HistLineXValues xValues2)
+                if (xValuesOrLabels is HistLineXValues)
                 {
-                    x1 = xValues2.Base + (i + 0.1) * xValues2.Step;
-                    x2 = xValues2.Base + (i + 0.9) * xValues2.Step;
+                    var xValues = xValuesOrLabels as HistLineXValues;
+                    x1 = xValues.Base + (i + 0.1) * xValues.Step;
+                    x2 = xValues.Base + (i + 0.9) * xValues.Step;
                 }
                 var area = samples[i].HistValue * (x2 - x1);
-                (model.Series[0] as HistogramSeries)?.Items.Add(new HistogramItem(x1, x2, area, 1));
+                (model.Series[0] as HistogramSeries).Items.Add(new HistogramItem(x1, x2, area, 1));
 
-                if (histLineData.IsLineEnabled()) (model.Series[1] as LineSeries)?.Points.Add(new DataPoint(0.5 * (x1 + x2), samples[i].LineValue));
+                if (histLineData.IsLineEnabled()) (model.Series[1] as LineSeries).Points.Add(new DataPoint(0.5 * (x1 + x2), samples[i].LineValue));
             }
 
             var polygon = model.Annotations[0] as PolygonAnnotation;
-            polygon?.Points.Clear();
-            if (data.Definition.Validation != null && xValuesOrLabels is HistLineXValues xValues3)
+            polygon.Points.Clear();
+            if (data.Definition.Validation != null && xValuesOrLabels is HistLineXValues)
             {
-                if (data.Definition.Validation is ValueAboveValidation vav)
+                var xValues = xValuesOrLabels as HistLineXValues;
+                if (data.Definition.Validation is ValueAboveValidation)
                 {
-                    var indices = vav.GetHistLineValuesOKIndices(xValues3);
+                    var indices = (data.Definition.Validation as ValueAboveValidation).GetHistLineValuesOKIndices(xValues);
                     if (indices.Length > 0)
                     {
-                        double thisLeft = xValues3.Base + xValues3.Step * indices[0];
-                        double thisRight = xValues3.Base + xValues3.Step * xValues3.Count;
-                        polygon?.Points.Add(new DataPoint(thisLeft, maximum));
-                        polygon?.Points.Add(new DataPoint(thisRight, maximum));
-                        polygon?.Points.Add(new DataPoint(thisRight, minimum));
-                        polygon?.Points.Add(new DataPoint(thisLeft, minimum));
+                        double thisLeft = xValues.Base + xValues.Step * indices[0];
+                        double thisRight = xValues.Base + xValues.Step * xValues.Count;
+                        polygon.Points.Add(new DataPoint(thisLeft, maximum));
+                        polygon.Points.Add(new DataPoint(thisRight, maximum));
+                        polygon.Points.Add(new DataPoint(thisRight, minimum));
+                        polygon.Points.Add(new DataPoint(thisLeft, minimum));
                     }
                 }
-                else if (data.Definition.Validation is ValueBelowValidation vbv)
+                else if (data.Definition.Validation is ValueBelowValidation)
                 {
-                    var indices = vbv.GetHistLineValuesOKIndices(xValues3);
+                    var indices = (data.Definition.Validation as ValueBelowValidation).GetHistLineValuesOKIndices(xValues);
                     if (indices.Length > 0)
                     {
-                        double thisLeft = xValues3.Base;
-                        double thisRight = xValues3.Base + xValues3.Step * (indices.Last() + 1);
-                        polygon?.Points.Add(new DataPoint(thisLeft, maximum));
-                        polygon?.Points.Add(new DataPoint(thisRight, maximum));
-                        polygon?.Points.Add(new DataPoint(thisRight, minimum));
-                        polygon?.Points.Add(new DataPoint(thisLeft, minimum));
+                        double thisLeft = xValues.Base;
+                        double thisRight = xValues.Base + xValues.Step * (indices.Last() + 1);
+                        polygon.Points.Add(new DataPoint(thisLeft, maximum));
+                        polygon.Points.Add(new DataPoint(thisRight, maximum));
+                        polygon.Points.Add(new DataPoint(thisRight, minimum));
+                        polygon.Points.Add(new DataPoint(thisLeft, minimum));
                     }
                 }
                 else if (data.HasData())
                 {
-                    double left = xValues3.Base;
-                    double right = xValues3.Base + xValues3.Step * xValues3.Count;
-                    if (data.Definition.Validation is PolyAboveValidation pav)
+                    double left = xValues.Base;
+                    double right = xValues.Base + xValues.Step * xValues.Count;
+                    if (data.Definition.Validation is PolyAboveValidation)
                     {
-                        var thresholds = pav.GetHistLineValuesThreshold(xValues3);
+                        var thresholds = (data.Definition.Validation as PolyAboveValidation).GetHistLineValuesThreshold(xValues);
                         for (int i = 0; i < thresholds.Length; i++)
                         {
                             thresholds[i] = Math.Max(minimum, Math.Min(maximum, thresholds[i]));
                         }
 
-                        polygon?.Points.Add(new DataPoint(right, maximum));
-                        polygon?.Points.Add(new DataPoint(left, maximum));
+                        polygon.Points.Add(new DataPoint(right, maximum));
+                        polygon.Points.Add(new DataPoint(left, maximum));
                         for (int i = 0; i < thresholds.Length; i++)
                         {
-                            var thisX = left + xValues3.Step * i;
+                            var thisX = left + xValues.Step * i;
                             var thisY = thresholds[i];
 
-                            if (i == 0 || thresholds[i] != thresholds[i - 1]) polygon?.Points.Add(new DataPoint(thisX, thisY));
-                            polygon?.Points.Add(new DataPoint(thisX + xValues3.Step, thisY));
+                            if (i == 0 || thresholds[i] != thresholds[i - 1]) polygon.Points.Add(new DataPoint(thisX, thisY));
+                            polygon.Points.Add(new DataPoint(thisX + xValues.Step, thisY));
                         }
                     }
-                    else if (data.Definition.Validation is PolyBelowValidation pbv)
+                    else if (data.Definition.Validation is PolyBelowValidation)
                     {
-                        var thresholds = pbv.GetHistLineValuesThreshold(xValues3);
+                        var thresholds = (data.Definition.Validation as PolyBelowValidation).GetHistLineValuesThreshold(xValues);
                         for (int i = 0; i < thresholds.Length; i++)
                         {
                             thresholds[i] = Math.Max(minimum, Math.Min(maximum, thresholds[i]));
                         }
 
-                        polygon?.Points.Add(new DataPoint(right, minimum));
-                        polygon?.Points.Add(new DataPoint(left, minimum));
+                        polygon.Points.Add(new DataPoint(right, minimum));
+                        polygon.Points.Add(new DataPoint(left, minimum));
                         for (int i = 0; i < thresholds.Length; i++)
                         {
-                            var thisX = left + xValues3.Step * i;
+                            var thisX = left + xValues.Step * i;
                             var thisY = thresholds[i];
 
-                            if (i == 0 || thresholds[i] != thresholds[i - 1]) polygon?.Points.Add(new DataPoint(thisX, thisY));
-                            polygon?.Points.Add(new DataPoint(thisX + xValues3.Step, thisY));
+                            if (i == 0 || thresholds[i] != thresholds[i - 1]) polygon.Points.Add(new DataPoint(thisX, thisY));
+                            polygon.Points.Add(new DataPoint(thisX + xValues.Step, thisY));
                         }
                     }
                 }

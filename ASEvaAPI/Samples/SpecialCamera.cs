@@ -312,7 +312,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 共同部分
         /// </summary>
-        public CommonCameraMeta Common { get; set; } = new CommonCameraMeta();
+        public CommonCameraMeta Common { get; set; }
     }
 
     /// \~English
@@ -333,7 +333,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 共通部分
         /// </summary>
-        public CommonCameraMeta Common { get; set; } = new CommonCameraMeta();
+        public CommonCameraMeta Common { get; set; }
 
         /// \~English
         /// <summary>
@@ -484,7 +484,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 共通部分
         /// </summary>
-        public CommonCameraMeta Common { get; set; } = new CommonCameraMeta();
+        public CommonCameraMeta Common { get; set; }
 
         /// \~English
         /// <summary>
@@ -555,7 +555,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 共通部分
         /// </summary>
-        public CommonCameraMeta Common { get; set; } = new CommonCameraMeta();
+        public CommonCameraMeta Common { get; set; }
 
         /// \~English
         /// <summary>
@@ -1078,7 +1078,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 特殊摄像头类型
         /// </summary>
-        public SpecialCameraType SpecialCameraType { get; set; } = SpecialCameraType.Unknown;
+        public SpecialCameraType SpecialCameraType { get; set; }
 
         /// \~English
         /// <summary>
@@ -1088,7 +1088,7 @@ namespace ASEva.Samples
         /// <summary>
         /// 特殊摄像头信息，可以为 ASEva.Samples.DefaultCameraMeta , ASEva.Samples.GenericCameraMeta , ASEva.Samples.LaneLineCameraMeta , ASEva.Samples.BlindSpotCameraMeta , ASEva.Samples.FisheyeCameraMeta , ASEva.Samples.CustomizedCameraMeta
         /// </summary>
-        public object? SpecialCameraInfo { get; set; }
+        public object SpecialCameraInfo { get; set; }
 
         /// \~English
         /// <summary>
@@ -1099,5 +1099,18 @@ namespace ASEva.Samples
         /// 标准针孔模型下的横向视场角（未去畸变时为空）
         /// </summary>
         public double? HorizontalFov { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 默认构造函数
+        /// </summary>
+        public CameraInfo()
+        {
+            SpecialCameraType = SpecialCameraType.Unknown;
+        }
     }
 }

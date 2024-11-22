@@ -17,7 +17,7 @@ namespace ASEvaAPIEtoTest
         private void initBasicTabPageEFlowItems(StackLayout layout)
         {
             var layoutButtons = layout.AddRowLayout();
-            var flowLayout = (layout.AddControl(new FlowLayout2D(250), true) as FlowLayout2D)!;
+            var flowLayout = layout.AddControl(new FlowLayout2D(250), true) as FlowLayout2D;
             flowLayout.ControlSelected += delegate
             {
                 var selectedIndex = flowLayout.GetSelectedControlIndex();

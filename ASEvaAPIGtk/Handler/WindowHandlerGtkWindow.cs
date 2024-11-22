@@ -16,16 +16,16 @@ namespace ASEva.UIGtk
 		where TWidget: Window
 		where TCallback: Window.ICallback
 	{
-		Gtk.VBox? vbox;
+		Gtk.VBox vbox;
 		readonly Gtk.VBox actionvbox;
 		readonly Gtk.Box topToolbarBox;
-		Gtk.Box? menuBox;
-		GtkShrinkableVBox? containerBox;
+		Gtk.Box menuBox;
+		GtkShrinkableVBox containerBox;
 		readonly Gtk.Box bottomToolbarBox;
-		MenuBar? menuBar;
-		Icon? icon;
-		Eto.Forms.ToolBar? toolBar;
-		Gtk.AccelGroup? accelGroup;
+		MenuBar menuBar;
+		Icon icon;
+		Eto.Forms.ToolBar toolBar;
+		Gtk.AccelGroup accelGroup;
 		Rectangle? restoreBounds;
 		Point? currentLocation;
 		Size minimumSize;
@@ -75,7 +75,7 @@ namespace ASEva.UIGtk
 			}
 		}
 
-		public Gtk.Widget? WindowContentControl
+		public Gtk.Widget WindowContentControl
 		{
 			get { return vbox; }
 		}
@@ -85,7 +85,7 @@ namespace ASEva.UIGtk
 			get { return actionvbox; }
 		}
 
-		public override Gtk.Widget? ContainerContentControl
+		public override Gtk.Widget ContainerContentControl
 		{
 			get { return containerBox; }
 		}
@@ -95,7 +95,7 @@ namespace ASEva.UIGtk
 			get { return resizable; }
 			set
 			{
-				if (containerBox != null) containerBox.Resizable = value;
+				containerBox.Resizable = value;
 				resizable = value;
 #if GTK3
 				Control.Resizable = value;
@@ -250,13 +250,12 @@ namespace ASEva.UIGtk
 		{
 			get
 			{
-				if (containerBox == null) throw new NullReferenceException("Null containerBox.");
 				return containerBox.IsRealized ? containerBox.Allocation.Size.ToEto() : containerBox.GetPreferredSize().ToEto();
 			}
 			set
 			{
 				DisableAutoSizeUpdate++;
-				if (Control.IsRealized && vbox != null && containerBox != null)
+				if (Control.IsRealized)
 				{
 					var diff = vbox.Allocation.Size.ToEto() - containerBox.Allocation.Size.ToEto();
 					Control.Resize(value.Width + diff.Width, value.Height + diff.Height);
@@ -286,7 +285,7 @@ namespace ASEva.UIGtk
 			}
 		}
 
-		private void Control_Realized(object? sender, EventArgs e)
+		private void Control_Realized(object sender, EventArgs e)
 		{
 			Control.Realized -= Control_Realized;
 			Size size;
@@ -390,7 +389,7 @@ namespace ASEva.UIGtk
 				args.RetVal = !handler.CloseWindow();
 			}
 
-			public void HandleShownEvent(object? sender, EventArgs e)
+			public void HandleShownEvent(object sender, EventArgs e)
 			{
 				Handler?.Callback.OnShown(Handler.Widget, EventArgs.Empty);
 			}
@@ -480,7 +479,7 @@ namespace ASEva.UIGtk
 				handler.currentLocation = null;
 			}
 
-			internal void Control_Realized(object? sender, EventArgs e) => Handler?.Control_Realized(sender, e);
+			internal void Control_Realized(object sender, EventArgs e) => Handler?.Control_Realized(sender, e);
 
 			internal void ButtonPressEvent_Movable(object o, Gtk.ButtonPressEventArgs args)
 			{
@@ -495,13 +494,13 @@ namespace ASEva.UIGtk
 			}
 		}
 
-		public MenuBar? Menu
+		public MenuBar Menu
 		{
 			get { return menuBar; }
 			set
 			{
 				if (menuBar != null)
-					menuBox?.Remove((Gtk.Widget)menuBar.ControlObject);
+					menuBox.Remove((Gtk.Widget)menuBar.ControlObject);
 				if (accelGroup != null)
 					Control.RemoveAccelGroup(accelGroup);
 				accelGroup = new Gtk.AccelGroup();
@@ -514,7 +513,7 @@ namespace ASEva.UIGtk
 
 				if (value != null)
 				{
-					menuBox?.PackStart((Gtk.Widget)value.ControlObject, true, true, 0);
+					menuBox.PackStart((Gtk.Widget)value.ControlObject, true, true, 0);
 					((Gtk.Widget)value.ControlObject).ShowAll();
 				}
 			}
@@ -522,7 +521,7 @@ namespace ASEva.UIGtk
 
 		protected override void SetContainerContent(Gtk.Widget content)
 		{
-			containerBox?.PackStart(content, true, true, 0);
+			containerBox.PackStart(content, true, true, 0);
 		}
 
 		public string Title
@@ -531,7 +530,7 @@ namespace ASEva.UIGtk
 			set { Control.Title = value; }
 		}
 
-		public bool CloseWindow(Action<CancelEventArgs>? closing = null)
+		public bool CloseWindow(Action<CancelEventArgs> closing = null)
 		{
 			var args = new CancelEventArgs();
 			Callback.OnClosing(Widget, args);
@@ -597,7 +596,7 @@ namespace ASEva.UIGtk
 			base.Dispose(disposing);
 		}
 
-		public Eto.Forms.ToolBar? ToolBar
+		public Eto.Forms.ToolBar ToolBar
 		{
 			get
 			{
@@ -614,13 +613,13 @@ namespace ASEva.UIGtk
 			}
 		}
 
-		public Icon? Icon
+		public Icon Icon
 		{
 			get { return icon; }
 			set
 			{
 				icon = value;
-				if (icon != null) Control.Icon = ((IconHandler)icon.Handler).Pixbuf;
+				Control.Icon = ((IconHandler)icon.Handler).Pixbuf;
 			}
 		}
 
@@ -709,7 +708,7 @@ namespace ASEva.UIGtk
 
 		Gtk.Window IGtkWindow.Control { get { return Control; } }
 
-		public Screen? Screen
+		public Screen Screen
 		{
 			get
 			{

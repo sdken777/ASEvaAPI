@@ -8,7 +8,7 @@ namespace ASEva.UIGtk
 {
 	class DrawableHandler : GtkPanel<Gtk.EventBox, Drawable, Drawable.ICallback>, Drawable.IHandler
 	{
-		Gtk.VBox? content;
+		Gtk.VBox content;
 
 		public bool SupportsCreateGraphics { get { return true; } }
 
@@ -125,7 +125,7 @@ namespace ASEva.UIGtk
 
 		protected override void SetContainerContent(Gtk.Widget content)
 		{
-			this.content?.Add(content);
+			this.content.Add(content);
 		}
 
 #if GTK3

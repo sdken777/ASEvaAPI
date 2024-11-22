@@ -18,8 +18,6 @@ namespace ASEva.UIAvalonia
 
         public static void Initialize(RunDialogHandler runDialogHandler)
         {
-            if (AdaptorManager.Instance == null) return;
-
             timer.Interval = TimeSpan.FromMilliseconds(10);
             timer.Tick += delegate
             {
@@ -47,12 +45,12 @@ namespace ASEva.UIAvalonia
             get { return initResult != null && initResult.Value; }
         }
 
-        public static AvaloniaAdaptor? Adaptor
+        public static AvaloniaAdaptor Adaptor
         {
             get { return AdaptorManager.Instance; }
         }
 
-        private static String? getUICode()
+        private static String getUICode()
         {
             switch (ASEva.APIInfo.GetRunningOS())
             {
@@ -71,7 +69,7 @@ namespace ASEva.UIAvalonia
 
         private class AdaptorManager
         {
-            public static AvaloniaAdaptor? Instance
+            public static AvaloniaAdaptor Instance
             {
                 get
                 {
@@ -117,7 +115,7 @@ namespace ASEva.UIAvalonia
                 }
             }
 
-            private static AvaloniaAdaptor? instance = null;
+            private static AvaloniaAdaptor instance = null;
             private static bool initialized = false;
         }
 

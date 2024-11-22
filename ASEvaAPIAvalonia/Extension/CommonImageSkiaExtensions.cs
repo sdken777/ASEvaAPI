@@ -31,7 +31,7 @@ namespace ASEva.UIAvalonia
         /// <returns>Skia图像对象（使用完毕后建议及时调用Dispose，可减少内存占用）</returns>
         public static SKImage ToSKImage(this CommonImage image)
         {
-            byte[]? targetData = null;
+            byte[] targetData = null;
             SKColorType colorType;
             if (image.WithAlpha)
             {
@@ -75,7 +75,7 @@ namespace ASEva.UIAvalonia
             var context = new SKPixmapContext{ Handle = GCHandle.Alloc(targetData, GCHandleType.Pinned) };
             var info = new SKImageInfo(image.Width, image.Height, colorType, SKAlphaType.Unpremul);
             var pixmap = new SKPixmap(info, context.Handle.AddrOfPinnedObject(), image.Width * 4);
-            return SKImage.FromPixels(pixmap, (p, c) => (c as SKPixmapContext)?.Handle.Free(), context);
+            return SKImage.FromPixels(pixmap, (p, c) => (c as SKPixmapContext).Handle.Free(), context);
         }
 
         private class SKPixmapContext

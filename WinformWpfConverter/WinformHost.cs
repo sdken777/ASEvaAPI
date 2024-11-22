@@ -15,20 +15,20 @@ namespace WinformWpfConverter
             FuncManager.Register("GetUISecondaryBackendAPIThirdPartyNotices", delegate { return ASEva.UIWpf.APIInfo.GetThirdPartyNotices(); });
         }
 
-        public static ASEva.UICoreWF.WindowPanel? ConvertWindowPanel(object windowPanel)
+        public static ASEva.UICoreWF.WindowPanel ConvertWindowPanel(object windowPanel)
         {
             if (!wpfFunctionsRegistered) return null;
             if (windowPanel == null) return null;
-            if (windowPanel is not ASEva.UIWpf.WindowPanel wpfWindowPanel) return null;
-            return new WpfEmbedderWindowPanel(wpfWindowPanel);
+            if (windowPanel is not ASEva.UIWpf.WindowPanel) return null;
+            return new WpfEmbedderWindowPanel(windowPanel as ASEva.UIWpf.WindowPanel);
         }
 
-        public static ASEva.UICoreWF.ConfigPanel? ConvertConfigPanel(object configPanel)
+        public static ASEva.UICoreWF.ConfigPanel ConvertConfigPanel(object configPanel)
         {
             if (!wpfFunctionsRegistered) return null;
             if (configPanel == null) return null;
-            if (configPanel is not ASEva.UIWpf.ConfigPanel wpfConfigPanel) return null;
-            return new WpfEmbedderConfigPanel(wpfConfigPanel);
+            if (configPanel is not ASEva.UIWpf.ConfigPanel) return null;
+            return new WpfEmbedderConfigPanel(configPanel as ASEva.UIWpf.ConfigPanel);
         }
 
         private static bool wpfFunctionsRegistered = false;

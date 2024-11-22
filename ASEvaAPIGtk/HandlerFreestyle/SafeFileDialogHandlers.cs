@@ -11,7 +11,7 @@ namespace ASEva.UIGtk
 	class SafeSaveFileDialogHandler : Eto.GtkSharp.Forms.SaveFileDialogHandler
 	{
 		// CHECK: 修正输入文件名无后缀时未补上的问题
-        public override string? FileName
+        public override string FileName
 		{
 			get => filename;
 			set => base.FileName = value;
@@ -21,14 +21,12 @@ namespace ASEva.UIGtk
 			var rawPath = Control.Filename;
 			if (String.IsNullOrEmpty(rawPath)) return rawPath;
 
-			Gtk.FileFilter? controlFilter = null;
+			Gtk.FileFilter controlFilter = null;
 			if (Control.Filter != null) controlFilter = Control.Filter;
 			else if (Control.Filters != null && Control.Filters.Length > 0 && Control.Filters[0] != null) controlFilter = Control.Filters[0];
 			else return rawPath;
 
 			var dir = Path.GetDirectoryName(rawPath);
-			if (dir == null) return rawPath;
-
 			if (dir.EndsWith(Path.DirectorySeparatorChar)) dir = dir.Substring(0, dir.Length - 1);
 			var fullName = Path.GetFileName(rawPath);
 			var name = Path.GetFileNameWithoutExtension(rawPath);
@@ -66,7 +64,7 @@ namespace ASEva.UIGtk
 			return result;
 		}
 
-		private String? filename = null;
+		private String filename = null;
 	}
 
 	class SafeOpenFileDialogHandler : OpenFileDialogHandler, OpenFileDialog.IHandler
@@ -80,18 +78,18 @@ namespace ASEva.UIGtk
 			Control.Dispose();
 			return result;
 		}
-        public override string? FileName
+        public override string FileName
 		{
 			get => filename;
 			set => base.FileName = value;
 		}
-		private String? filename = null;
+		private String filename = null;
 
 		public new IEnumerable<string> Filenames
 		{
 			get => filenames;
 		}
-		private String[] filenames = [];
+		private String[] filenames = null;
 	}
 
 	class SafeSelectFolderDialogHandler : SelectFolderDialogHandler, SelectFolderDialog.IHandler, CommonDialog.IHandler
@@ -104,11 +102,11 @@ namespace ASEva.UIGtk
 			Control.Dispose();
 			return result;
 		}
-		public new string? Directory
+		public new string Directory
 		{
 			get => currentFolder;
 			set => base.Directory = value;
 		}
-		private String? currentFolder = null;
+		private String currentFolder = null;
 	}
 }

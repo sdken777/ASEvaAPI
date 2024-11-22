@@ -67,7 +67,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 渲染事件
 		/// </summary>
-		public event EventHandler<SkiaRenderEventArgs>? Render;
+		public event EventHandler<SkiaRenderEventArgs> Render;
 
 		/// \~English
 		/// <summary>
@@ -109,15 +109,15 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
+		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
 		/// <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
 		/// \~Chinese
 		/// <summary>
 		/// 构造函数
 		/// </summary>
-		/// <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
+		/// <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈</param>
 		/// <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
-		public SkiaView(String? moduleID, bool disableGLRendering)
+		public SkiaView(String moduleID, bool disableGLRendering)
 		{
 			this.moduleID = moduleID;
 			this.useGL = !GPUOptions.IsGPURenderingDisabled && !disableGLRendering;
@@ -130,7 +130,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
+		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
 		/// <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
 		/// <param name="requestOnscreenRendering">Whether to request onscreen rendering when OpenGL rendering is not disabled (offscreen rendering is still used if unsupported), the default is false</param>
 		/// \~Chinese
@@ -140,7 +140,7 @@ namespace ASEva.UIEto
 		/// <param name="moduleID">所属窗口组件或对话框组件ID，用于绘图时间记录与反馈，若不使用可输入null</param>
 		/// <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
 		/// <param name="requestOnscreenRendering">在未禁用OpenGL渲染时，是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
-		public SkiaView(String? moduleID, bool disableGLRendering, bool requestOnscreenRendering)
+		public SkiaView(String moduleID, bool disableGLRendering, bool requestOnscreenRendering)
 		{
 			this.moduleID = moduleID;
 			this.useGL = !GPUOptions.IsGPURenderingDisabled && !disableGLRendering;
@@ -153,7 +153,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
+		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
 		/// <param name="disableGLRendering">Whether to disable OpenGL rendering (Use CPU to render)</param>
 		/// <param name="requestOnscreenRendering">Whether to request onscreen rendering when OpenGL rendering is not disabled (offscreen rendering is still used if unsupported), the default is false</param>
 		/// <param name="requestOverlay">Whether to request support of overlay (SupportOverlay will be false if unsupported), default is true</param>
@@ -165,7 +165,7 @@ namespace ASEva.UIEto
 		/// <param name="disableGLRendering">是否禁用OpenGL渲染，禁用则使用CPU渲染</param>
 		/// <param name="requestOnscreenRendering">在未禁用OpenGL渲染时，是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
 		/// <param name="requestOverlay">是否需要支持被其他控件覆盖(若不支持则SupportOverlay属性为false)，默认为false</param>
-		public SkiaView(String? moduleID, bool disableGLRendering, bool requestOnscreenRendering, bool requestOverlay)
+		public SkiaView(String moduleID, bool disableGLRendering, bool requestOnscreenRendering, bool requestOverlay)
 		{
 			this.moduleID = moduleID;
 			this.useGL = !GPUOptions.IsGPURenderingDisabled && !disableGLRendering;
@@ -208,7 +208,7 @@ namespace ASEva.UIEto
 
 		~SkiaView()
 		{
-			if (!closed) AgencyLocal.Print("SkiaView.Close not called. Memory leaking.");
+			if (!closed) Agency.Print("SkiaView.Close not called. Memory leaking.");
 		}
 
 		/// \~English
@@ -226,7 +226,7 @@ namespace ASEva.UIEto
 			{
 				if (!closed && glBackend != null) glBackend.QueueRender();
 			}
-			else if (drawable != null)
+			else
 			{
 				if (!drawableInvalidated && DrawBeat.CallerBegin(drawable))
 				{
@@ -283,6 +283,10 @@ namespace ASEva.UIEto
 
         public void OnGLInitialize(OpenGL gl, GLContextInfo contextInfo)
         {
+			if (contextInfo.version == null) contextInfo.version = "";
+			if (contextInfo.vendor == null) contextInfo.vendor = "";
+			if (contextInfo.renderer == null) contextInfo.renderer = "";
+			if (contextInfo.extensions == null) contextInfo.extensions = "";
 			ContextInfo = contextInfo;
 
 			funcLoader = gl.FunctionLoader;
@@ -341,9 +345,9 @@ namespace ASEva.UIEto
 				return;
 			}
 
-            if (skSurface != null && sizeInfo != null)
+            if (Render != null && skSurface != null)
 			{
-				Render?.Invoke(this, new SkiaRenderEventArgs(skSurface.Canvas, new Size(sizeInfo.LogicalWidth, sizeInfo.LogicalHeight)));
+				Render(this, new SkiaRenderEventArgs(skSurface.Canvas, new Size(sizeInfo.LogicalWidth, sizeInfo.LogicalHeight)));
 				skSurface.Canvas.Flush();
 				skSurface.Flush();
 				grContext.Flush();
@@ -355,27 +359,26 @@ namespace ASEva.UIEto
 			}
         }
 
-        private void drawable_Paint(object? sender, PaintEventArgs e)
+        private void drawable_Paint(object sender, PaintEventArgs e)
         {
 			if (closed) return;
-			if (drawable == null) return;
 
 			DrawBeat.CallbackBegin(drawable, moduleID);
 
 			var targetSize = drawable.GetLogicalSize();
 			if (commonImage == null || commonImage.Width != targetSize.Width || commonImage.Height != targetSize.Height)
 			{
-				commonImage = CommonImage.Create(Math.Max(1, targetSize.Width), Math.Max(1, targetSize.Height), true, false);
+				commonImage = CommonImage.Create(targetSize.Width, targetSize.Height, true, false);
 			}
 
 			unsafe
 			{
-				fixed (byte *commonImageData = &commonImage.Data[0])
+				fixed (byte *commonImageData = &(commonImage.Data[0]))
 				{
 					var imageInfo = new SKImageInfo(commonImage.Width, commonImage.Height, SKColorType.Bgra8888, SKAlphaType.Opaque);
 					var surface = SKSurface.Create(imageInfo, (IntPtr)commonImageData, commonImage.RowBytes);
 
-					Render?.Invoke(this, new SkiaRenderEventArgs(surface.Canvas, targetSize));
+					Render(this, new SkiaRenderEventArgs(surface.Canvas, targetSize));
 					surface.Canvas.Flush();
 					surface.Flush();
 
@@ -419,7 +422,7 @@ namespace ASEva.UIEto
 			OnMouseDoubleClick(args);
 		}
 
-        public string? OnGetModuleID()
+        public string OnGetModuleID()
         {
             return moduleID;
         }
@@ -439,7 +442,7 @@ namespace ASEva.UIEto
 						RequestOverlay = requestOverlay,
 					};
 					Factory.CreateGLBackend(this, options, out etoControl, out glBackend, out supportOverlay);
-					Content = etoControl;
+					if (etoControl != null) Content = etoControl;
 				}
 			}
 			else
@@ -458,30 +461,30 @@ namespace ASEva.UIEto
 			}
 		}
 
-        public static GLBackendFactory? Factory { private get; set; }
+        public static GLBackendFactory Factory { private get; set; }
 
-		private Control? etoControl;
-		private GLBackend? glBackend;
-		private Drawable? drawable;
+		private Control etoControl;
+		private GLBackend glBackend;
+		private Drawable drawable;
 		private bool drawableInvalidated = false;
-		private List<DateTime> renderTime = [];
+		private List<DateTime> renderTime = new List<DateTime>();
 
-		private FuncLoader? funcLoader;
-		private GRContext? grContext;
-		private SKSurface? skSurface;
+		private FuncLoader funcLoader;
+		private GRContext grContext;
+		private SKSurface skSurface;
 
-		private GLSizeInfo? sizeInfo;
+		private GLSizeInfo sizeInfo;
 
 		private SKColorType colorType = SKColorType.Rgba8888;
 		private int[] framebuffer = new int[1];
 		private int[] stencil = new int[1];
 		private int[] samples = new int[1];
 
-		private CommonImage? commonImage;
+		private CommonImage commonImage;
 
 		private bool useGL;
 		private bool closed = false;
-		private String? moduleID;
+		private String moduleID;
 		private bool requestOnscreenRendering;
 		private bool requestOverlay;
 		private bool supportOverlay = false;

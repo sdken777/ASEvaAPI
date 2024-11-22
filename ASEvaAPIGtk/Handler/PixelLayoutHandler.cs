@@ -13,7 +13,7 @@ namespace ASEva.UIGtk
 			// CHECK: 改为使用ScrolledWindow，确保主控件和子控件尺寸不关联，并开启计时器随时根据主控件尺寸更新子控件尺寸和位置
 			Control = new Gtk.ScrolledWindow();
 			Control.Add(new Gtk.Viewport());
-			(Control.Child as Gtk.Viewport)?.Add(new EtoFixed { Handler = this });
+			(Control.Child as Gtk.Viewport).Add(new EtoFixed { Handler = this });
 			timer = GLib.Timeout.Add(100, timer_Timeout);
 		}
 
@@ -53,7 +53,7 @@ namespace ASEva.UIGtk
 				((Gtk.Container)widget.Parent).Remove(widget);
 			widget.ShowAll();
 #endif
-			((Control.Child as Gtk.Viewport)?.Child as Gtk.Fixed)?.Put(widget, x, y);
+			((Control.Child as Gtk.Viewport).Child as Gtk.Fixed).Put(widget, x, y);
 			ctl.CurrentLocation = new Point(x, y);
 			InvalidateMeasure();
 		}
@@ -80,7 +80,7 @@ namespace ASEva.UIGtk
 #else
 				var widget = ctl.ContainerControl;
 #endif
-				((Control.Child as Gtk.Viewport)?.Child as Gtk.Fixed)?.Move(widget, x, y);
+				((Control.Child as Gtk.Viewport).Child as Gtk.Fixed).Move(widget, x, y);
 
 				ctl.CurrentLocation = new Point(x, y);
 			}
@@ -90,7 +90,7 @@ namespace ASEva.UIGtk
 		public void Remove(Control child)
 		{
 #if GTK3
-			((Control.Child as Gtk.Viewport)?.Child as Gtk.Fixed)?.Remove(child.GetContainerWidget().Parent);
+			((Control.Child as Gtk.Viewport).Child as Gtk.Fixed).Remove(child.GetContainerWidget().Parent);
 #else
 			Control.Remove(child.GetContainerWidget());
 #endif
@@ -100,7 +100,7 @@ namespace ASEva.UIGtk
 		public void Update()
 		{
 #if GTK3
-			((Control.Child as Gtk.Viewport)?.Child as Gtk.Fixed)?.QueueResize();
+			((Control.Child as Gtk.Viewport).Child as Gtk.Fixed).QueueResize();
 #else
 			Control.ResizeChildren();
 #endif

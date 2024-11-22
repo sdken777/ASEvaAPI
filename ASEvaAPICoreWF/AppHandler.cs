@@ -20,7 +20,7 @@ namespace ASEva.UICoreWF
 
     class AppHandlerCoreWF : AppHandler
     {
-        public Application? CreateApp(bool attach, out String? uiBackend, out String webViewBackend)
+        public Application CreateApp(bool attach, out String uiBackend, out String webViewBackend)
         {
             // CHECK: 支持高DPI显示
             System.Windows.Forms.Application.SetHighDpiMode(System.Windows.Forms.HighDpiMode.SystemAware);
@@ -105,28 +105,26 @@ namespace ASEva.UICoreWF
         {
             foreach (var c in panel.Controls)
             {
-                if (c is WebView webView)
-                {
-                    if (c.ControlObject is Microsoft.Web.WebView2.WinForms.WebView2 webView2) webView2.Visible = false;
-                }
-                else if (c is Container container) findAndHideWebViews(container);
+                if (c is WebView) (c.ControlObject as Microsoft.Web.WebView2.WinForms.WebView2).Visible = false;
+                else if (c is Container) findAndHideWebViews(c as Container);
             }
         }
 
         // CHECK: 修正vertical StackLayout中无控件时初始化异常
         private void fixVerticalStackLayoutIssue(Control rootControl)
         {
-            if (rootControl is StackLayout stackLayout)
+            if (rootControl is StackLayout)
             {
+                var stackLayout = rootControl as StackLayout;
                 if (stackLayout.Orientation == Orientation.Vertical && stackLayout.Items.Count == 0)
                 {
                     stackLayout.AddSpace(1);
                     return;
                 }
             }
-            if (rootControl is Container container)
+            if (rootControl is Container)
             {
-                foreach (var control in container.Children)
+                foreach (var control in (rootControl as Container).Children)
                 {
                     fixVerticalStackLayoutIssue(control);
                 }
@@ -135,6 +133,7 @@ namespace ASEva.UICoreWF
 
         public void RunApp(Application application, Form window, Form[] subWindows)
         {
+            if (window.Content == null) window.Content = new Panel();
             fixVerticalStackLayoutIssue(window.Content);
             window.Closed += delegate { findAndHideWebViews(window); };
 
@@ -149,26 +148,28 @@ namespace ASEva.UICoreWF
             }
         }
 
-        public Control? ConvertControlToEto(object platformControl)
+        public Control ConvertControlToEto(object platformControl)
         {
+            if (platformControl == null) return null;
             if (platformControl is System.Windows.Forms.Control) return (platformControl as System.Windows.Forms.Control).ToEto();
             else return null;
         }
 
-        public object? ConvertControlToPlatform(Control etoControl)
+        public object ConvertControlToPlatform(Control etoControl)
         {
+            if (etoControl == null) return null;
             return etoControl.ToNative(true);
         }
 
-        public UIEto.WindowPanel? ConvertWindowPanelToEto(object platformWindowPanel)
+        public UIEto.WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
         {
-            if (platformWindowPanel is WindowPanel winformWindowPanel) return new EtoWindowPanel(winformWindowPanel);
+            if (platformWindowPanel is WindowPanel) return new EtoWindowPanel(platformWindowPanel as WindowPanel);
             else return null;
         }
 
-        public UIEto.ConfigPanel? ConvertConfigPanelToEto(object platformConfigPanel)
+        public UIEto.ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
         {
-            if (platformConfigPanel is ConfigPanel winformConfigPanel) return new EtoConfigPanel(winformConfigPanel);
+            if (platformConfigPanel is ConfigPanel) return new EtoConfigPanel(platformConfigPanel as ConfigPanel);
             else return null;
         }
 

@@ -15,7 +15,7 @@ namespace ASEva.UIWpf
 {
 	class EtoButton : swc.Button, IEtoWpfControl
 	{
-		public IWpfFrameworkElement? Handler { get; set; }
+		public IWpfFrameworkElement Handler { get; set; }
 
 		protected override wf.Size MeasureOverride(wf.Size constraint)
 		{
@@ -42,9 +42,9 @@ namespace ASEva.UIWpf
 		where TWidget: Button
 		where TCallback: Button.ICallback
 	{
-		public swc.Image? ImagePart { get; private set; }
+		public swc.Image ImagePart { get; private set; }
 
-		public WpfLabel? LabelPart { get; private set; }
+		public WpfLabel LabelPart { get; private set; }
 
 		/// <summary>
 		/// Gets or sets the spacing between the image and the label when both are present
@@ -106,12 +106,11 @@ namespace ASEva.UIWpf
 
 		public override bool UseKeyPreview => true;
 
-		public string? Text
+		public string Text
 		{
-			get { return (LabelPart?.Content as string).ToEtoMnemonic(); }
+			get { return (LabelPart.Content as string).ToEtoMnemonic(); }
 			set
 			{
-				if (LabelPart == null) return;
 				LabelPart.Content = value.ToPlatformMnemonic();
 				SetImagePosition();
 			}
@@ -128,8 +127,6 @@ namespace ASEva.UIWpf
 
 		void SetImage()
 		{
-			if (ImagePart == null) return;
-
 			ImagePart.Source = Image.ToWpf(ParentScale);
 
 			// CHECK: 修正长条按钮使用正方形图像时按钮尺寸异常
@@ -144,7 +141,7 @@ namespace ASEva.UIWpf
 				if (Widget.Properties.TrySet(Image_Key, value))
 				{
 					SetImage();
-					if (ImagePart != null) ImagePart.Visibility = value != null ? sw.Visibility.Visible : sw.Visibility.Collapsed;
+					ImagePart.Visibility = value != null ? sw.Visibility.Visible : sw.Visibility.Collapsed;
 					SetImagePosition();
 				}
 			}
@@ -193,8 +190,8 @@ namespace ASEva.UIWpf
 
 			swc.Grid.SetColumn(ImagePart, col);
 			swc.Grid.SetRow(ImagePart, row);
-			if (LabelPart != null) LabelPart.Visibility = hideLabel ? sw.Visibility.Collapsed : sw.Visibility.Visible;
-			if (LabelPart != null && ImagePart != null) LabelPart.Margin = ImagePart.Visibility == sw.Visibility.Visible ? imageSpacing : new sw.Thickness(0, 0, 0, 0);
+			LabelPart.Visibility = hideLabel ? sw.Visibility.Collapsed : sw.Visibility.Visible;
+			LabelPart.Margin = ImagePart.Visibility == sw.Visibility.Visible ? imageSpacing : new sw.Thickness(0, 0, 0, 0);
 		}
 
 		static readonly object ImagePosition_Key = new object();
@@ -230,8 +227,8 @@ namespace ASEva.UIWpf
 
 		public override  Color TextColor
 		{
-			get { return (LabelPart?.Foreground ?? sw.Media.Brushes.Transparent).ToEtoColor(); }
-			set { if (LabelPart != null) LabelPart.Foreground = value.ToWpfBrush(Control.Foreground); }
+			get { return LabelPart.Foreground.ToEtoColor(); }
+			set { LabelPart.Foreground = value.ToWpfBrush(Control.Foreground); }
 		}
 
 		static readonly object MinimumSize_Key = new object();

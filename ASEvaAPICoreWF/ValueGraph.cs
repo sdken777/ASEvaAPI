@@ -38,9 +38,9 @@ namespace ASEva.UICoreWF
 
             // 数据显示
             double val = 0;
-            if (Data is SingleValueData svd)
+            if (Data is SingleValueData)
             {
-                val = svd.GetValue();
+                val = (Data as SingleValueData).GetValue();
             }
 
             var valAbs = Math.Abs(val);
@@ -54,8 +54,12 @@ namespace ASEva.UICoreWF
                 return;
             }
 
-            long[] src = [digits, digits + 1, digits - 1];
-            var dst = new String[3].Populate((i) => trimDigits(src[i]));
+            long[] src = new long[] { digits, digits + 1, digits - 1 };
+            String[] dst = new String[3];
+            for (int i = 0; i < 3; i++)
+            {
+                dst[i] = trimDigits(src[i]);
+            }
 
             String target = dst[0];
             if (dst[1].Length < target.Length) target = dst[1];
@@ -70,18 +74,18 @@ namespace ASEva.UICoreWF
             else
             {
                 var vd = Data.Definition.Validation;
-                if (vd is ValueBelowValidation vbv)
+                if (vd is ValueBelowValidation)
                 {
-                    label4.Text = "≤ " + vbv.GetThreshold();
+                    label4.Text = "≤ " + (vd as ValueBelowValidation).GetThreshold();
                 }
-                else if (vd is ValueAboveValidation vav)
+                else if (vd is ValueAboveValidation)
                 {
-                    label4.Text = "≥ " + vav.GetThreshold();
+                    label4.Text = "≥ " + (vd as ValueAboveValidation).GetThreshold();
                 }
-                else if (vd is ValueInRangeValidation vrv)
+                else if (vd is ValueInRangeValidation)
                 {
                     double lower = 0, upper = 0;
-                    vrv.GetRange(out lower, out upper);
+                    (vd as ValueInRangeValidation).GetRange(out lower, out upper);
                     label4.Text = "[ " + lower + " , " + upper + " ]";
                 }
             }
@@ -103,7 +107,7 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private void ValueGraph_Click(object? sender, EventArgs e)
+        private void ValueGraph_Click(object sender, EventArgs e)
         {
             HandleGraphSelected();
         }

@@ -80,7 +80,7 @@ namespace HwndHostAvalonia
             }
         }
 
-        static object? ExitFrame(object f)
+        static object ExitFrame(object f)
         {
             ((DispatcherFrame)f).Continue = false;
             return null;

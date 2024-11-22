@@ -42,12 +42,11 @@ namespace ASEva.UICoreWF
                 control = new Panel { Content = control };
                 control.SetLogicalHeight(logicalHeight);
                 winformControl = control.ToNative(true) as System.Windows.Forms.Panel;
-                if (winformControl == null) return;
             }
 
             winformControl.Width = 1;
             winformControl.Margin = new System.Windows.Forms.Padding(2);
-            ctxs.Add(new ControlContext(winformControl, control, true));
+            ctxs.Add(new ControlContext { EtoControl = control, WinformControl = winformControl, Visible = true });
             control.MouseDown += (obj, args) =>
             {
                 callback.OnControlClicked(ctxs.FindIndex(c => c.EtoControl.Equals(obj)));
@@ -64,12 +63,11 @@ namespace ASEva.UICoreWF
                 control = new Panel { Content = control };
                 control.SetLogicalHeight(logicalHeight);
                 winformControl = control.ToNative(true) as System.Windows.Forms.Panel;
-                if (winformControl == null) return;
             }
 
             winformControl.Width = 1;
             winformControl.Margin = new System.Windows.Forms.Padding(2);
-            ctxs.Insert(index, new ControlContext(winformControl, control, true));
+            ctxs.Insert(index, new ControlContext { EtoControl = control, WinformControl = winformControl, Visible = true });
             control.MouseDown += (obj, args) =>
             {
                 callback.OnControlClicked(ctxs.FindIndex(c => c.EtoControl.Equals(obj)));
@@ -164,17 +162,17 @@ namespace ASEva.UICoreWF
             scrollTarget = index;
         }
 
-        private class ControlContext(System.Windows.Forms.Panel winformControl, Control etoControl, bool visible)
+        private class ControlContext
         {
-            public System.Windows.Forms.Panel WinformControl { get; set; } = winformControl;
-            public Control EtoControl { get; set; } = etoControl;
-            public bool Visible { get; set; } = visible;
+            public System.Windows.Forms.Panel WinformControl { get; set; }
+            public Control EtoControl { get; set; }
+            public bool Visible { get; set; }
         }
 
         private FlowLayoutCallback callback;
         private System.Windows.Forms.Timer timer;
-        private List<ControlContext> ctxs = [];
-        private System.Windows.Forms.Panel? selectedControl = null;
+        private List<ControlContext> ctxs = new List<ControlContext>();
+        private System.Windows.Forms.Panel selectedControl = null;
         private bool removedFromPanel = false;
         private System.Drawing.Size lastSize;
         private int scrollTarget = -1;

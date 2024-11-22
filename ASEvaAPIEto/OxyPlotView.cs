@@ -26,7 +26,7 @@ namespace ASEva.UIEto
         /// </summary>
         public OxyPlotView()
         {
-            Control? etoControl = null;
+            Control etoControl = null;
             if (Factory != null) Factory.CreateOxyPlotViewBackend(out etoControl, out backend);
             if (etoControl != null) Content = etoControl;
         }
@@ -59,9 +59,9 @@ namespace ASEva.UIEto
             if (backend != null) backend.InvalidatePlot();
         }
 
-        public static OxyPlotViewFactory? Factory { private get; set; }
+        public static OxyPlotViewFactory Factory { private get; set; }
 
-		private OxyPlotViewBackend? backend;
+		private OxyPlotViewBackend backend;
     }
 
 	public interface OxyPlotViewBackend

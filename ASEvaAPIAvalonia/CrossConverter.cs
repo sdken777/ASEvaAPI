@@ -67,7 +67,7 @@ namespace ASEva.UIAvalonia
         /// </summary>
         /// <param name="anyWindowPanel">任意窗口面板</param>
         /// <returns>Avalonia窗口面板，若转化失败则返回null</returns>
-        public static WindowPanel? ConvertWindowPanel(object anyWindowPanel)
+        public static WindowPanel ConvertWindowPanel(object anyWindowPanel)
         {
             if (anyWindowPanel == null) return null;
             if (anyWindowPanel is WindowPanel) return anyWindowPanel as WindowPanel;
@@ -115,7 +115,7 @@ namespace ASEva.UIAvalonia
         /// </summary>
         /// <param name="anyConfigPanel">任意配置面板</param>
         /// <returns>Avalonia配置面板，若转化失败则返回null</returns>
-        public static ConfigPanel? ConvertConfigPanel(object anyConfigPanel)
+        public static ConfigPanel ConvertConfigPanel(object anyConfigPanel)
         {
             if (anyConfigPanel == null) return null;
             if (anyConfigPanel is ConfigPanel) return anyConfigPanel as ConfigPanel;
@@ -151,6 +151,6 @@ namespace ASEva.UIAvalonia
             return null;
         }
 
-        private static Type? winformHostType = null;
+        private static Type winformHostType = null;
     }
 }

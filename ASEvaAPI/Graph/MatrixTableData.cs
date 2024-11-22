@@ -82,27 +82,33 @@ namespace ASEva.Graph
 
     /// \~English
     /// <summary>
-    /// (api:app=3.7.0) Numeric range of matrix table
+    /// (api:app=3.0.0) Numeric range of matrix table
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.0) 矩阵表中数值的范围
+    /// (api:app=3.0.0) 矩阵表中数值的范围
     /// </summary>
-    public struct MatrixTableValueRefRange(double lower, double upper)
+    public struct MatrixTableValueRefRange
     {
-        public double lower = lower;
-        public double upper = upper;
+        public double lower;
+        public double upper;
+
+        public MatrixTableValueRefRange(double lower, double upper)
+        {
+            this.lower = lower;
+            this.upper = upper;
+        }
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.7.0) Matrix table graph data
+    /// (api:app=3.0.0) Matrix table graph data
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.0) 矩阵表数据
+    /// (api:app=3.0.0) 矩阵表数据
     /// </summary>
-    public class MatrixTableData(GraphDefinition def) : GraphData(def)
+    public class MatrixTableData : GraphData
     {
         /// \~English
         /// <summary>
@@ -163,9 +169,11 @@ namespace ASEva.Graph
         /// <param name="valueRefRange">矩阵表数据参考范围</param>
         /// <param name="defaultValue">矩阵表数据初始值</param>
         /// <returns>图表定义对象</returns>
-        public static GraphDefinition CreateDefinitionWithValidation(String title, String xTitle, String yTitle, MatrixTableMode mode, GraphValidation? validation, MatrixTableRange xRange, MatrixTableRange yRange, MatrixTableValueRefRange valueRefRange, double defaultValue = 0)
+        public static GraphDefinition CreateDefinitionWithValidation(String title, String xTitle, String yTitle, MatrixTableMode mode, GraphValidation validation, MatrixTableRange xRange, MatrixTableRange yRange, MatrixTableValueRefRange valueRefRange, double defaultValue = 0)
         {
-            var def = new GraphDefinition(GraphType.MatrixTable, title);
+            var def = new GraphDefinition();
+            def.Type = GraphType.MatrixTable;
+            def.MainTitle = title;
             def.Config.Add(mode.ToString()); // 0
             def.Config.Add(xRange.Base.ToString()); // 1
             def.Config.Add(xRange.Step.ToString()); // 2
@@ -256,7 +264,7 @@ namespace ASEva.Graph
         /// 获取x轴范围
         /// </summary>
         /// <returns>x轴范围</returns>
-        public MatrixTableRange? GetXRange()
+        public MatrixTableRange GetXRange()
         {
             double b, s;
             int c;
@@ -282,7 +290,7 @@ namespace ASEva.Graph
         /// 获取y轴范围
         /// </summary>
         /// <returns>y轴范围</returns>
-        public MatrixTableRange? GetYRange()
+        public MatrixTableRange GetYRange()
         {
             double b, s;
             int c;
@@ -331,8 +339,8 @@ namespace ASEva.Graph
             var mode = (MatrixTableMode)Enum.Parse(typeof(MatrixTableMode), Definition.Config[0]);
             double defaultValue;
             Double.TryParse(Definition.Config[11], out defaultValue);
-            var xcount = GetXRange()?.Count ?? 0;
-            var ycount = GetYRange()?.Count ?? 0;
+            var xcount = GetXRange().Count;
+            var ycount = GetYRange().Count;
 
             if (mode == MatrixTableMode.Percentage)
             {
@@ -419,8 +427,8 @@ namespace ASEva.Graph
             var mode = (MatrixTableMode)Enum.Parse(typeof(MatrixTableMode), Definition.Config[0]);
             double defaultValue;
             Double.TryParse(Definition.Config[11], out defaultValue);
-            var xcount = GetXRange()?.Count ?? 0;
-            var ycount = GetYRange()?.Count ?? 0;
+            var xcount = GetXRange().Count;
+            var ycount = GetYRange().Count;
 
             if (mode == MatrixTableMode.Percentage)
             {
@@ -527,7 +535,6 @@ namespace ASEva.Graph
         {
             var xr = GetXRange();
             var yr = GetYRange();
-            if (xr == null || yr == null) return;
 
             x = (x - xr.Base) / xr.Step;
             y = (y - yr.Base) / yr.Step;
@@ -578,8 +585,8 @@ namespace ASEva.Graph
         /// <returns>统计数据</returns>
         public double[,] GetValues()
         {
-            var xc = GetXRange()?.Count ?? 0;
-            var yc = GetYRange()?.Count ?? 0;
+            var xc = GetXRange().Count;
+            var yc = GetYRange().Count;
 
             double k = 1;
             var mode = (MatrixTableMode)Enum.Parse(typeof(MatrixTableMode), Definition.Config[0]);
@@ -609,8 +616,8 @@ namespace ASEva.Graph
 
         public override void InitParamsAndData()
         {
-            var xr = GetXRange()?.Count ?? 0;
-            var yr = GetYRange()?.Count ?? 0;
+            var xr = GetXRange().Count;
+            var yr = GetYRange().Count;
             Data = new double[xr, yr * 2];
 
             double defaultValue;
@@ -626,8 +633,8 @@ namespace ASEva.Graph
 
         public override void MergeWith(GraphData data)
         {
-            var xc = GetXRange()?.Count ?? 0;
-            var yc = GetYRange()?.Count ?? 0;
+            var xc = GetXRange().Count;
+            var yc = GetYRange().Count;
 
             var mode = (MatrixTableMode)Enum.Parse(typeof(MatrixTableMode), Definition.Config[0]);
             switch (mode)
@@ -685,8 +692,8 @@ namespace ASEva.Graph
         public override bool HasData()
         {
             if (Data.Length == 0) return false;
-            var xr = GetXRange()?.Count ?? 0;
-            var yr = GetYRange()?.Count ?? 0;
+            var xr = GetXRange().Count;
+            var yr = GetYRange().Count;
             double defaultValue;
             Double.TryParse(Definition.Config[11], out defaultValue);
             for (int x = 0; x < xr; x++)

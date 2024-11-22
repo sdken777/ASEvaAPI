@@ -24,22 +24,22 @@ namespace ASEvaAPIAvaloniaTest
             }
         }
 
-        private void buttonBackward_Click(object? sender, RoutedEventArgs e)
+        private void buttonBackward_Click(object sender, RoutedEventArgs e)
         {
             etoWebView?.GoBack();
         }
 
-        private void buttonForward_Click(object? sender, RoutedEventArgs e)
+        private void buttonForward_Click(object sender, RoutedEventArgs e)
         {
             etoWebView?.GoForward();
         }
 
-        private void textUrl_TextChanged(object? sender, TextChangedEventArgs e)
+        private void textUrl_TextChanged(object sender, TextChangedEventArgs e)
         {
-            buttonGoUrl.IsEnabled = textUrl.Text?.Length > 0;
+            buttonGoUrl.IsEnabled = textUrl.Text.Length > 0;
         }
 
-        private void buttonGoUrl_Click(object? sender, RoutedEventArgs e)
+        private void buttonGoUrl_Click(object sender, RoutedEventArgs e)
         {
             if (etoWebView!= null && !String.IsNullOrEmpty(textUrl.Text))
             {
@@ -47,11 +47,11 @@ namespace ASEvaAPIAvaloniaTest
             }
         }
 
-        private void buttonCallScript_Click(object? sender, RoutedEventArgs e)
+        private void buttonCallScript_Click(object sender, RoutedEventArgs e)
         {
             etoWebView?.ExecuteScriptAsync("callScript()");
         }
 
-        private Eto.Forms.WebView? etoWebView;
+        private Eto.Forms.WebView etoWebView;
     }
 }

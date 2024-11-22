@@ -16,9 +16,12 @@ namespace ASEva.UIAvalonia
     {
         public static void AddToResources(this StyledElement elem, TextResource texts)
         {
-            foreach (var id in texts.IDs)
+            if (texts != null)
             {
-                elem.Resources.Add(id, texts[id]);
+                foreach (var id in texts.IDs)
+                {
+                    elem.Resources.Add(id, texts[id]);
+                }
             }
         }
     }

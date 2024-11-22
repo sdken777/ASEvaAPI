@@ -18,6 +18,8 @@ namespace ASEva.UIGtk
     {
         public Timer(uint interval, TimeoutHandler handler)
         {
+            if (handler == null) return;
+
             interval = Math.Max(1, interval);
             timerID = (long)GLib.Timeout.Add(interval, handler);
         }
@@ -34,6 +36,22 @@ namespace ASEva.UIGtk
         ~Timer()
         {
             Release();
+        }
+
+        public static int Count
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public static String[] Handlers
+        {
+            get
+            {
+                return new String[0];
+            }
         }
 
         private long timerID = -1;

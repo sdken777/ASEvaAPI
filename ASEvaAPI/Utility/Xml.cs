@@ -27,7 +27,7 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="rootTag">根节点的标签名</param>
         /// <returns>新创建的XML文档</returns>
-        public static XmlDocument Create(String? rootTag)
+        public static XmlDocument Create(String rootTag)
         {
             if (rootTag == null || rootTag.Length == 0) rootTag = "root";
 

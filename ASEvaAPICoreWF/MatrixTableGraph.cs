@@ -54,13 +54,13 @@ namespace ASEva.UICoreWF
             else
             {
                 var vd = Data.Definition.Validation;
-                if (vd is ValueBelowValidation vbv)
+                if (vd is ValueBelowValidation)
                 {
-                    label3.Text = "≤ " + vbv.GetThreshold();
+                    label3.Text = "≤ " + (vd as ValueBelowValidation).GetThreshold();
                 }
-                else if (vd is ValueAboveValidation vav)
+                else if (vd is ValueAboveValidation)
                 {
-                    label3.Text = "≥ " + vav.GetThreshold();
+                    label3.Text = "≥ " + (vd as ValueAboveValidation).GetThreshold();
                 }
                 else
                 {
@@ -69,7 +69,7 @@ namespace ASEva.UICoreWF
             }
 
             // 标题显示
-            label1.Text = Data.Definition.MainTitle;
+            label1.Text = Data == null ? "" : Data.Definition.MainTitle;
             if (!Data.HasData())
             {
                 label2.ForeColor = Color.Black;
@@ -102,7 +102,7 @@ namespace ASEva.UICoreWF
             return percentage >= 100 ? percentage.ToString("F0") : percentage.ToString("F1");
         }
 
-        private void pic_drawAxis(object? sender, PaintEventArgs e)
+        private void pic_drawAxis(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
@@ -121,12 +121,11 @@ namespace ASEva.UICoreWF
             g.DrawLine(blackPen, pointy1, pointy2);
             g.DrawLine(grayPen, new PointF(originPoint.X, originPoint.Y + margin), new PointF(width - 1, originPoint.Y + margin));
             g.DrawLine(grayPen, new PointF(originPoint.X - margin, originPoint.Y), new PointF(originPoint.X - margin, 0));
-
+            String xTitle = null;
+            String yTitle = null;
             var D = Data as MatrixTableData;
-            if (D == null) return;
-
-            var xTitle = D.GetXTitle();
-            var yTitle = D.GetYTitle();
+            xTitle = D.GetXTitle();
+            yTitle = D.GetYTitle();
             var xTitleWidth = g.MeasureString(xTitle, font7f).Width;
             var yTitleWidth = g.MeasureString(yTitle, font7f).Width;
             PointF xTitlePoint = new PointF((width + originPoint.X - xTitleWidth) / 2, originPoint.Y);
@@ -137,7 +136,6 @@ namespace ASEva.UICoreWF
             //画坐标
             var xrange = D.GetXRange();
             var yrange = D.GetYRange();
-            if (xrange == null || yrange == null) return;
 
             var intervalX = (width - 1 - originPoint.X) /xrange.Count;
             var xString = (new Decimal(xrange.Base + xrange.Step * xrange.Count)).ToString();
@@ -152,18 +150,17 @@ namespace ASEva.UICoreWF
             g.DrawString((new Decimal(yrange.Base)).ToString(), font7f, brushBlack, new PointF(originPoint.X - margin, originPoint.Y - g.MeasureString(yrange.Base.ToString(), font7f).Width), new StringFormat(StringFormatFlags.DirectionVertical));
         }
 
-        private void pic_drawBarGraph(object? sender, PaintEventArgs e)
+        private void pic_drawBarGraph(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             var width = pictureBox1.Width;
             var height = pictureBox1.Height;
             PointF originPoint = new PointF((float)width / 4, (float)height / 3 * 2);
+            var D = Data as MatrixTableData;
             var margin = 15.0f * DeviceDpi / 96;
+
             int barXOffset = 0;
 
-            var D = Data as MatrixTableData;
-            if (D == null) return;
-            
             //X轴柱状图生成
             double[] xHeights = D.GetXHistValues();
             double maxHeightx = 0;
@@ -193,20 +190,15 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private void pic_drawHeatMap(object? sender, PaintEventArgs e)
+        private void pic_drawHeatMap(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             var width = pictureBox1.Width;
             var height = pictureBox1.Height;
-
             var D = Data as MatrixTableData;
-            if (D == null) return;
-
             var values = D.GetValues();
             var xrange = D.GetXRange();
             var yrange = D.GetYRange();
-            if (xrange == null || yrange == null) return;
-
             var valueRange = D.GetValueRefRange();
             PointF originPoint = new PointF((float)width / 4, (float)height / 3 * 2);
             var Xlength = width - 1 - originPoint.X;
@@ -225,12 +217,12 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private void pictureBox1_Click(object? sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
             HandleGraphSelected();
         }
 
-        private void pictureBox1_Paint(object? sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             DrawBeat.CallbackBegin(pictureBox1, "ASEva.UICoreWF.MatrixTableGraph");
 
@@ -248,30 +240,31 @@ namespace ASEva.UICoreWF
             DrawBeat.CallbackEnd(pictureBox1);
         }
 
-        private void pic_drawValidation(object? sender, PaintEventArgs e)
+        private void pic_drawValidation(object sender, PaintEventArgs e)
         {
-            if (Data?.Definition.Validation == null) return;
+            if (Data.Definition.Validation == null) return;
 
             Color color;
             FloatPoint[] genericOutline;
-            if (Data.Definition.Validation is OutlineInsideValidation oiv)
+            if (Data.Definition.Validation is OutlineInsideValidation)
             {
+                var vd = Data.Definition.Validation as OutlineInsideValidation;
                 color = Color.LimeGreen;
-                genericOutline = oiv.GetOutline();
+                genericOutline = vd.GetOutline();
             }
-            else if (Data.Definition.Validation is OutlineOutsideValidation oov)
+            else if (Data.Definition.Validation is OutlineOutsideValidation)
             {
+                var vd = Data.Definition.Validation as OutlineOutsideValidation;
                 color = Color.Red;
-                genericOutline = oov.GetOutline();
+                genericOutline = vd.GetOutline();
             }
             else return;
 
             var outline = new PointF[genericOutline.Length];
             for (int i = 0; i < outline.Length; i++) outline[i] = new PointF(genericOutline[i].X, genericOutline[i].Y);
 
-            var xRange = (Data as MatrixTableData)?.GetXRange();
-            var yRange = (Data as MatrixTableData)?.GetYRange();
-            if (xRange == null || yRange == null) return;
+            var xRange = (Data as MatrixTableData).GetXRange();
+            var yRange = (Data as MatrixTableData).GetYRange();
 
             var width = pictureBox1.Width;
             var height = pictureBox1.Height;
@@ -293,7 +286,7 @@ namespace ASEva.UICoreWF
             e.Graphics.SmoothingMode = originMode;
         }
 
-        private void pic_drawGuide(object? sender, PaintEventArgs e)
+        private void pic_drawGuide(object sender, PaintEventArgs e)
         {
             if (!mouseInControl()) return;
 
@@ -301,7 +294,7 @@ namespace ASEva.UICoreWF
 
             Pen crossPen = new Pen(Color.FromArgb(255, 65, 140, 240), 1);
             crossPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
-            crossPen.DashPattern = [1f, 1f];
+            crossPen.DashPattern = new float[] { 1f, 1f };
 
             var D = Data as MatrixTableData;
             Point curPoint = pictureBox1.PointToClient(System.Windows.Forms.Cursor.Position);
@@ -318,38 +311,32 @@ namespace ASEva.UICoreWF
             }
 
             //X轴矩形图虚线
-            var Xcount = D?.GetXRange()?.Count;
-            if (Xcount != null)
+            var Xcount = D.GetXRange().Count;
+            float histWidth = (float)(width - originPoint.X) / Xcount;
+            for (int i = 0; i < Xcount; i++)
             {
-                float histWidth = (float)(width - originPoint.X) / Xcount.Value;
-                for (int i = 0; i < Xcount; i++)
+                var ax = originPoint.X + i * histWidth;
+                var bx = originPoint.X + (i + 1) * histWidth;
+                if (curPoint.Y > originPoint.Y && curPoint.Y < height - 1 && curPoint.X >= ax && curPoint.X < bx)
                 {
-                    var ax = originPoint.X + i * histWidth;
-                    var bx = originPoint.X + (i + 1) * histWidth;
-                    if (curPoint.Y > originPoint.Y && curPoint.Y < height - 1 && curPoint.X >= ax && curPoint.X < bx)
-                    {
-                        g.DrawRectangle(grayPen, ax, originPoint.Y + margin, histWidth - (i == Xcount - 1 ? 1 : 0), height - originPoint.Y - margin - 1);
-                    }
+                    g.DrawRectangle(grayPen, ax, originPoint.Y + margin, histWidth - (i == Xcount - 1 ? 1 : 0), height - originPoint.Y - margin - 1);
                 }
             }
 
             //Y轴矩形图虚线
-            var Ycount = D?.GetYRange()?.Count;
-            if (Ycount != null)
+            var Ycount = D.GetYRange().Count;
+            float histHeight = originPoint.Y / Ycount;
+            for (int i = 0; i < Ycount; i++)
             {
-                float histHeight = originPoint.Y / Ycount.Value;
-                for (int i = 0; i < Ycount; i++)
+                var ay = originPoint.Y - i * histHeight;
+                var by = originPoint.Y - (i + 1) * histHeight;
+                if (curPoint.X < originPoint.X && curPoint.X > 0 && curPoint.Y >= by && curPoint.Y < ay)
                 {
-                    var ay = originPoint.Y - i * histHeight;
-                    var by = originPoint.Y - (i + 1) * histHeight;
-                    if (curPoint.X < originPoint.X && curPoint.X > 0 && curPoint.Y >= by && curPoint.Y < ay)
-                    {
-                        g.DrawRectangle(grayPen, 0, by, originPoint.X - margin, histHeight);
-                    }
+                    g.DrawRectangle(grayPen, 0, by, originPoint.X - margin, histHeight);
                 }
             }
         }
-        private void pic_drawAnnotation(object? sender, PaintEventArgs e)
+        private void pic_drawAnnotation(object sender, PaintEventArgs e)
         {
             if (!mouseInControl()) return;
 
@@ -357,18 +344,13 @@ namespace ASEva.UICoreWF
             var width = pictureBox1.Width;
             var height = pictureBox1.Height;
             PointF originPoint = new PointF((float)width / 4, (float)height / 3 * 2);
-
             var D = Data as MatrixTableData;
-            if (D == null) return;
-
             var xrange = D.GetXRange();
             var yrange = D.GetYRange();
-            if (xrange == null || yrange == null) return;
-
-            var xRangeLow = xrange.Base;
-            var xRangeUpper = xRangeLow + xrange.Count * xrange.Step;
-            var yRangeLow = yrange.Base;
-            var yRangeUpper = yRangeLow + yrange.Count * yrange.Step;
+            var xRangeLow = D.GetXRange().Base;
+            var xRangeUpper = xRangeLow + D.GetXRange().Count * D.GetXRange().Step;
+            var yRangeLow = D.GetYRange().Base;
+            var yRangeUpper = yRangeLow + D.GetYRange().Count * D.GetYRange().Step;
             var Xlength = width - 1 - originPoint.X;
             var intervalX = Xlength / xrange.Count;
             var Ylength = originPoint.Y;
@@ -443,26 +425,25 @@ namespace ASEva.UICoreWF
         private Color getColorByValue(double upper, double lower, double value)
         {
             Color color = new Color();
-            Color[] colors =
-            [
-                Color.FromArgb(0, 0, 128),
-                Color.FromArgb(0, 0, 192),
-                Color.FromArgb(0, 0, 255),
-                Color.FromArgb(0, 64, 255),
-                Color.FromArgb(0, 128, 255),
-                Color.FromArgb(0, 192, 255),
-                Color.FromArgb(0, 255, 255),
-                Color.FromArgb(64, 255, 192),
-                Color.FromArgb(128, 255, 128),
-                Color.FromArgb(192, 255, 64),
-                Color.FromArgb(255, 255, 0),
-                Color.FromArgb(255, 192, 0),
-                Color.FromArgb(255, 128, 0),
-                Color.FromArgb(255, 64, 0),
-                Color.FromArgb(255, 0, 0),
-                Color.FromArgb(192, 0, 0),
-                Color.FromArgb(128, 0, 0),
-            ];
+            Color[] colors = new Color[17];
+            colors[0] = Color.FromArgb(0, 0, 128);
+            colors[1] = Color.FromArgb(0, 0, 192);
+            colors[2] = Color.FromArgb(0, 0, 255);
+            colors[3] = Color.FromArgb(0, 64, 255);
+            colors[4] = Color.FromArgb(0, 128, 255);
+            colors[5] = Color.FromArgb(0, 192, 255);
+            colors[6] = Color.FromArgb(0, 255, 255);
+            colors[7] = Color.FromArgb(64, 255, 192);
+            colors[8] = Color.FromArgb(128, 255, 128);
+            colors[9] = Color.FromArgb(192, 255, 64);
+            colors[10] = Color.FromArgb(255, 255, 0);
+            colors[11] = Color.FromArgb(255, 192, 0);
+            colors[12] = Color.FromArgb(255, 128, 0);
+            colors[13] = Color.FromArgb(255, 64, 0);
+            colors[14] = Color.FromArgb(255, 0, 0);
+            colors[15] = Color.FromArgb(192, 0, 0);
+            colors[16] = Color.FromArgb(128, 0, 0);
+
             if (value <= lower)
             {
                 color =  colors[0];

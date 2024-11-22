@@ -18,7 +18,7 @@ namespace ASEvaAPIEtoTest
             var layout = this.SetContentAsRowLayout();
             layout.AddLinkButton(t["basic-client-size"], false).Click += (sender, args) =>
             {
-                if (sender is LinkButton linkButton) linkButton.Text = this.GetLogicalWidth() + "x" + this.GetLogicalHeight();
+                (sender as LinkButton).Text = this.GetLogicalWidth() + "x" + this.GetLogicalHeight();
             };
             layout.AddLinkButton(t["basic-dialog-with-border"], false).Click += delegate
             {

@@ -95,8 +95,7 @@ namespace ASEva.Samples
         /// <returns>通用图像数据</returns>
         public static CommonImage Create(int width, int height, bool withAlpha)
         {
-            if (width <= 0 || width > 65536) throw new ArgumentOutOfRangeException("Invalid width: " + width);
-            if (height <= 0 || height > 65536) throw new ArgumentOutOfRangeException("Invalid height: " + height);
+            if (width <= 0 || height <= 0 || width > 65536 || height > 65536) return null;
 
             var rowBytesValid = width * (withAlpha ? 4 : 3);
             var rowBytes = (((rowBytesValid - 1) >> 2) + 1) << 2;
@@ -131,8 +130,7 @@ namespace ASEva.Samples
         /// <returns>通用图像数据</returns>
         public static CommonImage Create(int width, int height, bool withAlpha, bool bgrInverted)
         {
-            if (width <= 0 || width > 65536) throw new ArgumentOutOfRangeException("Invalid width: " + width);
-            if (height <= 0 || height > 65536) throw new ArgumentOutOfRangeException("Invalid height: " + height);
+            if (width <= 0 || height <= 0 || width > 65536 || height > 65536) return null;
 
             var rowBytesValid = width * (withAlpha ? 4 : 3);
             var rowBytes = (((rowBytesValid - 1) >> 2) + 1) << 2;
@@ -159,12 +157,12 @@ namespace ASEva.Samples
         /// </summary>
         /// <param name="filePath">文件路径</param>
         /// <returns>通用图像数据</returns>
-        public static CommonImage? LoadFile(String filePath)
+        public static CommonImage LoadFile(String filePath)
         {
             if (!File.Exists(filePath)) return null;
             
-            byte[]? data = null;
-            FileStream? file = null;
+            byte[] data = null;
+            FileStream file = null;
             try
             {
                 file = File.Open(filePath, FileMode.Open, FileAccess.Read);
@@ -191,7 +189,7 @@ namespace ASEva.Samples
         /// </summary>
         /// <param name="resourceName">资源名称</param>
         /// <returns>通用图像数据</returns>
-        public static CommonImage? LoadResource(String resourceName)
+        public static CommonImage LoadResource(String resourceName)
         {
             var instream = Assembly.GetCallingAssembly().GetManifestResourceStream(resourceName);
             if (instream == null || instream.Length == 0) return null;
@@ -215,7 +213,7 @@ namespace ASEva.Samples
         /// </summary>
         /// <param name="binary">图像二进制数据，如jpeg、png等</param>
         /// <returns>通用图像数据</returns>
-        public static CommonImage? FromBinary(byte[] binary)
+        public static CommonImage FromBinary(byte[] binary)
         {
             if (binary == null || binary.Length == 0) return null;
             return AgencyLocal.DecodeImage(binary);
@@ -236,7 +234,7 @@ namespace ASEva.Samples
         public bool Save(String filePath)
         {
             var extension = Path.GetExtension(filePath).ToLower();
-            String format;
+            String format = null;
             if (extension == ".jpeg" || extension == ".jpg") format = "jpg";
             else if (extension == ".png") format = "png";
             else return false;
@@ -245,7 +243,7 @@ namespace ASEva.Samples
             if (data == null) return false;
 
             bool ok = false;
-            FileStream? file = null;
+            FileStream file = null;
             try
             {
                 file = File.Open(filePath, FileMode.Create, FileAccess.Write);
@@ -270,8 +268,9 @@ namespace ASEva.Samples
         /// </summary>
         /// <param name="format">编码格式，目前支持"jpg", "png"</param>
         /// <returns>图像二进制数据</returns>
-        public byte[]? ToBinary(String format)
+        public byte[] ToBinary(String format)
         {
+            if (format == null) return null;
             if (format == "png" || format == "jpg") return AgencyLocal.EncodeImage(this, format);
             else return null;
         }
@@ -293,7 +292,6 @@ namespace ASEva.Samples
             if (targetInverted == bgrInverted) return this;
 
             var output = CommonImage.Create(width, height, withAlpha, targetInverted);
-
             unsafe
             {
                 fixed (byte* srcData = &data[0], dstData = &output.data[0])
@@ -339,7 +337,7 @@ namespace ASEva.Samples
         /// </summary>
         /// <param name="targetWidth">缩放后的图像宽度，高度自动计算，至少为8</param>
         /// <returns>缩放后的图像，原图像尺寸小于8像素则返回null</returns>
-        public CommonImage? Resize(int targetWidth)
+        public CommonImage Resize(int targetWidth)
         {
             if (Width < 8 || Height < 8 || targetWidth < 8) return null;
 
@@ -380,10 +378,12 @@ namespace ASEva.Samples
             }
         }
 
+        private CommonImage()
+        {}
+
         private CommonImage processImageSub(CommonImage srcImage, float scale, IntRect clipRect)
         {
             var newImage = CommonImage.Create(clipRect.Width, clipRect.Height, srcImage.WithAlpha);
-
             unsafe
             {
                 int clipWidth = clipRect.Width, clipHeight = clipRect.Height;
@@ -426,7 +426,7 @@ namespace ASEva.Samples
         }
 
         private int width, height;
-        private byte[] data = [];
+        private byte[] data;
         private bool withAlpha;
         private bool bgrInverted;
         private int rowBytes;

@@ -65,7 +65,7 @@ namespace ASEva.Utility
         /// <summary>
         /// CPU时间模型
         /// </summary>
-        public CPUTimeModel? CPUTimeModel { get; set; }
+        public CPUTimeModel CPUTimeModel { get; set; }
 
         /// \~English
         /// <summary>
@@ -75,7 +75,7 @@ namespace ASEva.Utility
         /// <summary>
         /// 主机Posix时间模型
         /// </summary>
-        public PosixTimeModel? HostPosixModel { get; set; }
+        public PosixTimeModel HostPosixModel { get; set; }
 
         /// \~English
         /// <summary>
@@ -85,7 +85,7 @@ namespace ASEva.Utility
         /// <summary>
         /// 卫星Posix时间模型
         /// </summary>
-        public PosixTimeModel? GNSSPosixModel { get; set; }
+        public PosixTimeModel GNSSPosixModel { get; set; }
 
         /// \~English
         /// <summary>
@@ -105,17 +105,17 @@ namespace ASEva.Utility
         /// <summary>
         /// Session的注释说明
         /// </summary>
-        public String Comment { get; set; } = "";
+        public String Comment { get; set; }
 
         /// \~English
         /// <summary>
-        /// Session's pick ID, null or "origin" means it's the original data
+        /// Session's pick ID, "origin" means it's the original data
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// Session的截取ID，null或origin表示原始数据
+        /// Session的截取ID，origin表示原始数据
         /// </summary>
-        public String? Pick { get; set; }
+        public String Pick { get; set; }
 
         /// \~English
         /// <summary>
@@ -125,7 +125,7 @@ namespace ASEva.Utility
         /// <summary>
         /// Session的截取属性列表
         /// </summary>
-        public Dictionary<String, String> PickProperties { get; set; } = [];
+        public Dictionary<String, String> PickProperties { get; set; }
 
         /// \~English
         /// <summary>
@@ -135,7 +135,7 @@ namespace ASEva.Utility
         /// <summary>
         /// Session的属性
         /// </summary>
-        public Dictionary<string, string> Properties { get; set; } = [];
+        public Dictionary<string, string> Properties { get; set; }
 
         /// \~English
         /// <summary>
@@ -145,7 +145,7 @@ namespace ASEva.Utility
         /// <summary>
         /// 采集Session的软件版本信息（用于回溯）
         /// </summary>
-        public Dictionary<string, Version> Versions { get; set; } = [];
+        public Dictionary<string, Version> Versions { get; set; }
 
         /// \~English
         /// <summary>
@@ -253,6 +253,10 @@ namespace ASEva.Utility
             }
         }
 
+        private SessionMeta()
+        {
+        }
+
         /// \~English
         /// <summary>
         /// Create session meta object (not write to file)
@@ -289,22 +293,27 @@ namespace ASEva.Utility
         /// <param name="pick">Session的截取ID，origin表示原始数据</param>
         /// <param name="pickProps">Session的截取属性列表</param>
         /// <returns>返回创建的对象</returns>
-        public static SessionMeta? Create(String filePath, SessionIdentifier id, String? guid, double? length, DateTime? startTimeUTC, double timeRatioToUTC, DateTime? startTimeLocal, double timeRatioToLocal, String? comment, Dictionary<String, Version>? versions, Dictionary<String, String>? props, String? pick, Dictionary<String, String>? pickProps)
+        public static SessionMeta Create(String filePath, SessionIdentifier id, String guid, double? length, DateTime? startTimeUTC, double timeRatioToUTC, DateTime? startTimeLocal, double timeRatioToLocal, String comment, Dictionary<String, Version> versions, Dictionary<String, String> props, String pick, Dictionary<String, String> pickProps)
         {
-            if (filePath.Length == 0) return null;
+            if (filePath == null || filePath.Length == 0) return null;
 
-            var meta = new SessionMeta(filePath, guid ?? Guid.NewGuid().ToString());
+            var meta = new SessionMeta();
+            meta.FilePath = filePath;
             meta.ID = id;
+            meta.GUID = guid;
+            if (meta.GUID == null) meta.GUID = Guid.NewGuid().ToString();
             meta.Length = length;
             meta.StartTimeUTC = startTimeUTC;
             meta.StartTimeLocal = startTimeLocal;
             meta.TimeRatioToUTC = timeRatioToUTC;
             meta.TimeRatioToLocal = timeRatioToLocal;
-            meta.Comment = comment ?? "";
-            if (versions != null) meta.Versions = versions;
-            if (props != null) meta.Properties = props;
+            meta.Comment = comment;
+            meta.Versions = versions;
+            meta.Properties = props;
+            if (meta.Properties == null) meta.Properties = new Dictionary<string, string>();
             meta.Pick = pick;
-            if (pickProps != null) meta.PickProperties = pickProps;
+            meta.PickProperties = pickProps;
+            if (meta.PickProperties == null) meta.PickProperties = new Dictionary<string, string>();
 
             return meta;
         }
@@ -345,22 +354,27 @@ namespace ASEva.Utility
         /// <param name="pick">Session的截取ID，origin表示原始数据</param>
         /// <param name="pickProps">Session的截取属性列表</param>
         /// <returns>返回创建的对象</returns>
-        public static SessionMeta? Create(String filePath, SessionIdentifier id, String? guid, double? length, CPUTimeModel? cpuTimeModel, PosixTimeModel? hostPosixModel, PosixTimeModel? gnssPosixModel, bool hostSync, String? comment, Dictionary<String, Version>? versions, Dictionary<String, String>? props, String? pick, Dictionary<String, String>? pickProps)
+        public static SessionMeta Create(String filePath, SessionIdentifier id, String guid, double? length, CPUTimeModel cpuTimeModel, PosixTimeModel hostPosixModel, PosixTimeModel gnssPosixModel, bool hostSync, String comment, Dictionary<String, Version> versions, Dictionary<String, String> props, String pick, Dictionary<String, String> pickProps)
         {
-            if (filePath.Length == 0) return null;
+            if (filePath == null || filePath.Length == 0) return null;
 
-            var meta = new SessionMeta(filePath, guid ?? Guid.NewGuid().ToString());
+            var meta = new SessionMeta();
+            meta.FilePath = filePath;
             meta.ID = id;
+            meta.GUID = guid;
+            if (meta.GUID == null) meta.GUID = Guid.NewGuid().ToString();
             meta.Length = length;
             meta.CPUTimeModel = cpuTimeModel;
             meta.HostPosixModel = hostPosixModel;
             meta.GNSSPosixModel = gnssPosixModel;
             meta.HostSync = hostSync;
-            meta.Comment = comment ?? "";
-            if (versions != null) meta.Versions = versions;
-            if (props != null) meta.Properties = props;
+            meta.Comment = comment;
+            meta.Versions = versions;
+            meta.Properties = props;
+            if (meta.Properties == null) meta.Properties = new Dictionary<string, string>();
             meta.Pick = pick;
-            if (pickProps != null) meta.PickProperties = pickProps;
+            meta.PickProperties = pickProps;
+            if (meta.PickProperties == null) meta.PickProperties = new Dictionary<string, string>();
 
             return meta;
         }
@@ -377,34 +391,28 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="filePath">文件路径</param>
         /// <returns>返回创建的对象</returns>
-        public static SessionMeta? Load(String filePath)
+        public static SessionMeta Load(String filePath)
         {
             if (!File.Exists(filePath)) return null;
 
-            SessionMeta? meta = null;
+            SessionMeta meta = null;
             try
             {
                 var xml = new XmlDocument();
                 xml.Load(filePath);
 
-                if (xml.DocumentElement == null) return null;
+                var root = xml.DocumentElement;
+                var attribs = root.Attributes;
 
-                var attribs = xml.DocumentElement.Attributes;
-
-                var guidAttrib = attribs["guid"];
-                if (guidAttrib == null) return null;
-
-                var idAttrib = attribs["session_id"];
-                if (idAttrib == null) return null;
-
-                meta = new SessionMeta(filePath, guidAttrib.Value);
+                meta = new SessionMeta();
 
                 bool found = false;
                 try
                 {
-                    var lengthAttrib = attribs["length"];
-                    meta.ID = SessionIdentifier.FromDateTime(DateTime.ParseExact(idAttrib.Value, "yyyy-MM-dd-HH-mm-ss", null));
-                    if (lengthAttrib != null) meta.Length = Convert.ToDouble(lengthAttrib.Value);
+                    var id = DateTime.ParseExact(attribs["session_id"].Value, "yyyy-MM-dd-HH-mm-ss", null);
+                    var length = Convert.ToDouble(attribs["length"].Value);
+                    meta.ID = SessionIdentifier.FromDateTime(id);
+                    meta.Length = length;
                     found = true;
                 }
                 catch (Exception ex) { Dump.Exception(ex); }
@@ -413,18 +421,13 @@ namespace ASEva.Utility
                 {
                     try
                     {
-                        var beginAttrib = attribs["begin"];
-                        var endAttrib = attribs["end"];
-                        if (beginAttrib != null && endAttrib != null)
+                        var begin = DateTime.ParseExact(attribs["begin"].Value, "yyyy-MM-dd-HH-mm-ss", null);
+                        var end = DateTime.ParseExact(attribs["end"].Value, "yyyy-MM-dd-HH-mm-ss-fff", null);
+                        if (end >= begin)
                         {
-                            var begin = DateTime.ParseExact(beginAttrib.Value, "yyyy-MM-dd-HH-mm-ss", null);
-                            var end = DateTime.ParseExact(endAttrib.Value, "yyyy-MM-dd-HH-mm-ss-fff", null);
-                            if (end >= begin)
-                            {
-                                meta.ID = SessionIdentifier.FromDateTime(begin);
-                                meta.Length = (end - begin).TotalSeconds;
-                                found = true;
-                            }
+                            meta.ID = SessionIdentifier.FromDateTime(begin);
+                            meta.Length = (end - begin).TotalSeconds;
+                            found = true;
                         }
                     }
                     catch (Exception ex) { Dump.Exception(ex); }
@@ -432,19 +435,25 @@ namespace ASEva.Utility
 
                 if (!found) return null;
 
+                if (attribs["guid"] != null)
+                {
+                    meta.GUID = attribs["guid"].Value;
+                }
+
                 try
                 {
-                    var commentNodes = xml.DocumentElement.GetElementsByTagName("comment");
+                    var commentNodes = root.GetElementsByTagName("comment");
                     if (commentNodes.Count > 0)
                     {
-                        meta.Comment = commentNodes[0]?.InnerText ?? "";
+                        meta.Comment = commentNodes[0].InnerText;
                     }
                     else if (attribs["comment"] != null)
                     {
-                        meta.Comment = attribs["comment"]?.Value ?? "";
+                        meta.Comment = attribs["comment"].Value;
                     }
+                    else meta.Comment = "";
                 }
-                catch (Exception ex) { Dump.Exception(ex); }
+                catch (Exception ex) { Dump.Exception(ex); meta.Comment = ""; }
 
                 try
                 {
@@ -452,8 +461,8 @@ namespace ASEva.Utility
                     {
                         meta.CPUTimeModel = new CPUTimeModel
                         {
-                            StartCPUTick = Convert.ToUInt64(attribs["start_cpu_tick"]!.Value),
-                            CPUTicksPerSecond = Convert.ToUInt64(attribs["cpu_ticks_per_second"]!.Value),
+                            StartCPUTick = Convert.ToUInt64(attribs["start_cpu_tick"].Value),
+                            CPUTicksPerSecond = Convert.ToUInt64(attribs["cpu_ticks_per_second"].Value),
                         };
                     }
                     else meta.CPUTimeModel = null;
@@ -466,17 +475,17 @@ namespace ASEva.Utility
                     {
                         meta.HostPosixModel = new PosixTimeModel
                         {
-                            StartPosix = Convert.ToUInt64(attribs["start_posix_host"]!.Value),
-                            TimeRatio = Convert.ToDouble(attribs["time_ratio_host"]!.Value),
+                            StartPosix = Convert.ToUInt64(attribs["start_posix_host"].Value),
+                            TimeRatio = Convert.ToDouble(attribs["time_ratio_host"].Value),
                         };
-                        meta.HostSync = attribs["host_sync"]!.Value == "yes";
+                        meta.HostSync = attribs["host_sync"].Value == "yes";
                     }
-                    else if (attribs["start_posix_local"] != null && attribs["start_posix_local"]!.Value != "unknown" && attribs["time_ratio_to_local"] != null)
+                    else if (attribs["start_posix_local"] != null && attribs["start_posix_local"].Value != "unknown" && attribs["time_ratio_to_local"] != null)
                     {
                         meta.HostPosixModel = new PosixTimeModel
                         {
-                            StartPosix = Convert.ToUInt64(attribs["start_posix_local"]!.Value),
-                            TimeRatio = Convert.ToDouble(attribs["time_ratio_to_local"]!.Value),
+                            StartPosix = Convert.ToUInt64(attribs["start_posix_local"].Value),
+                            TimeRatio = Convert.ToDouble(attribs["time_ratio_to_local"].Value),
                         };
                         meta.HostSync = false;
                     }
@@ -508,33 +517,33 @@ namespace ASEva.Utility
                     {
                         meta.GNSSPosixModel = new PosixTimeModel
                         {
-                            StartPosix = Convert.ToUInt64(attribs["start_posix_gnss"]!.Value),
-                            TimeRatio = Convert.ToDouble(attribs["time_ratio_gnss"]!.Value),
+                            StartPosix = Convert.ToUInt64(attribs["start_posix_gnss"].Value),
+                            TimeRatio = Convert.ToDouble(attribs["time_ratio_gnss"].Value),
                         };
                     }
-                    else if (attribs["start_posix_utc"] != null && attribs["start_posix_utc"]!.Value != "unknown" && attribs["time_ratio_to_utc"] != null)
+                    else if (attribs["start_posix_utc"] != null && attribs["start_posix_utc"].Value != "unknown" && attribs["time_ratio_to_utc"] != null)
                     {
                         meta.GNSSPosixModel = new PosixTimeModel
                         {
-                            StartPosix = Convert.ToUInt64(attribs["start_posix_utc"]!.Value),
-                            TimeRatio = Convert.ToDouble(attribs["time_ratio_to_utc"]!.Value),
+                            StartPosix = Convert.ToUInt64(attribs["start_posix_utc"].Value),
+                            TimeRatio = Convert.ToDouble(attribs["time_ratio_to_utc"].Value),
                         };
                     }
-                    else if (attribs["start_time_utc"] != null && attribs["start_time_utc"]!.Value != "unknown" && attribs["time_ratio_to_utc"] != null)
+                    else if (attribs["start_time_utc"] != null && attribs["start_time_utc"].Value != "unknown" && attribs["time_ratio_to_utc"] != null)
                     {
-                        var startTimeUTC = DateTime.ParseExact(attribs["start_time_utc"]!.Value, "yyyy-MM-dd-HH-mm-ss-fff", null);
+                        var startTimeUTC = DateTime.ParseExact(attribs["start_time_utc"].Value, "yyyy-MM-dd-HH-mm-ss-fff", null);
                         var startPosix = (ulong)(startTimeUTC - new DateTime(1970, 1, 1, 0, 0, 0)).TotalMilliseconds;
                         meta.GNSSPosixModel = new PosixTimeModel
                         {
                             StartPosix = startPosix,
-                            TimeRatio = Convert.ToDouble(attribs["time_ratio_to_utc"]!.Value),
+                            TimeRatio = Convert.ToDouble(attribs["time_ratio_to_utc"].Value),
                         };
                     }
                     else meta.GNSSPosixModel = null;
                 }
                 catch (Exception ex) { Dump.Exception(ex); meta.GNSSPosixModel = null; }
 
-                var pickNodes = xml.DocumentElement.GetElementsByTagName("pick");
+                var pickNodes = root.GetElementsByTagName("pick");
                 foreach (XmlElement pickNode in pickNodes)
                 {
                     var c = new AttributeParser(pickNode);
@@ -542,31 +551,31 @@ namespace ASEva.Utility
                     if (pickID == null) pickID = c.ParseString("pick_time", null);
                     meta.Pick = pickID;
 
-                    meta.PickProperties = [];
+                    meta.PickProperties = new Dictionary<string, string>();
                     var pickPropertyNodes = pickNode.GetElementsByTagName("property");
                     foreach (XmlElement propertyNode in pickPropertyNodes)
                     {
                         var cp = new AttributeParser(propertyNode);
-                        meta.PickProperties[cp.ParseString("key", null) ?? ""] = cp.ParseString("value", null) ?? "";
+                        meta.PickProperties[cp.ParseString("key", null)] = cp.ParseString("value", null);
                     }
 
                     break; // 仅一个pick节点
                 }
 
-                meta.Properties = [];
-                var propertyNodes = xml.DocumentElement.GetElementsByTagName("property");
+                meta.Properties = new Dictionary<string, string>();
+                var propertyNodes = root.GetElementsByTagName("property");
                 foreach (XmlElement propertyNode in propertyNodes)
                 {
                     var cp = new AttributeParser(propertyNode);
-                    meta.Properties[cp.ParseString("key", null) ?? ""] = cp.ParseString("value", null) ?? "";
+                    meta.Properties[cp.ParseString("key", null)] = cp.ParseString("value", null);
                 }
 
-                meta.Versions = [];
+                meta.Versions = new Dictionary<string, Version>();
                 if (attribs["software"] != null && attribs["software_version"] != null)
                 {
                     try
                     {
-                        meta.Versions[attribs["software"]?.Value ?? ""] = Version.Parse(attribs["software_version"]?.Value ?? "");
+                        meta.Versions[attribs["software"].Value] = Version.Parse(attribs["software_version"].Value);
                     }
                     catch (Exception ex) { Dump.Exception(ex); }
                 }
@@ -577,7 +586,7 @@ namespace ASEva.Utility
                     {
                         try
                         {
-                            meta.Versions[versionNode.Attributes["key"]?.Value ?? ""] = Version.Parse(versionNode.InnerText);
+                            meta.Versions[versionNode.Attributes["key"].Value] = Version.Parse(versionNode.InnerText);
                         }
                         catch (Exception ex) { Dump.Exception(ex); }
                     }
@@ -605,7 +614,6 @@ namespace ASEva.Utility
             try
             {
                 var root = Path.GetDirectoryName(FilePath);
-                if (root == null) return;
                 if (!Directory.Exists(root)) Directory.CreateDirectory(root);
             }
             catch (Exception ex) { Dump.Exception(ex); return; }
@@ -613,8 +621,6 @@ namespace ASEva.Utility
             var xml = new XmlDocument();
             xml.AppendChild(xml.CreateXmlDeclaration("1.0", "utf-8", null));
             var rootNode = xml.AppendChild(xml.CreateElement("root")) as XmlElement;
-            if (rootNode == null) return;
-
             var cw = new AttributeWriter(rootNode);
 
             if (GUID != null) cw.WriteString("guid", GUID);
@@ -642,37 +648,29 @@ namespace ASEva.Utility
             }
 
             var pickNode = rootNode.AppendChild(xml.CreateElement("pick")) as XmlElement;
-            if (pickNode != null)
-            {
-                cw = new AttributeWriter(pickNode);
-                cw.WriteString("id", Pick == null ? "origin" : Pick);
-
-                if (PickProperties != null)
-                {
-                    foreach (var item in PickProperties)
-                    {
-                        var propNode = pickNode.AppendChild(xml.CreateElement("property")) as XmlElement;
-                        if (propNode == null) continue;
-                        cw = new AttributeWriter(propNode);
-                        cw.WriteString("key", item.Key);
-                        cw.WriteString("value", item.Value);
-                    }
-                }
-            }
+            cw = new AttributeWriter(xml, pickNode);
+            cw.WriteString("id", Pick == null ? "origin" : Pick);
 
             if (Comment != null)
             {
-                var commentNode = rootNode.AppendChild(xml.CreateElement("comment"));
-                if (commentNode != null) commentNode.InnerText = Comment;
+                rootNode.AppendChild(xml.CreateElement("comment")).InnerText = Comment;
+            }
+
+            if (PickProperties != null)
+            {
+                foreach (var item in PickProperties)
+                {
+                    cw = new AttributeWriter(xml, pickNode.AppendChild(xml.CreateElement("property")) as XmlElement);
+                    cw.WriteString("key", item.Key);
+                    cw.WriteString("value", item.Value);
+                }
             }
 
             if (Properties != null)
             {
                 foreach (var item in Properties)
                 {
-                    var propNode = rootNode.AppendChild(xml.CreateElement("property")) as XmlElement;
-                    if (propNode == null) continue;
-                    cw = new AttributeWriter(propNode);
+                    cw = new AttributeWriter(xml, rootNode.AppendChild(xml.CreateElement("property")) as XmlElement);
                     cw.WriteString("key", item.Key);
                     cw.WriteString("value", item.Value);
                 }
@@ -683,7 +681,6 @@ namespace ASEva.Utility
                 foreach (var item in Versions)
                 {
                     var versionNode = rootNode.AppendChild(xml.CreateElement("version")) as XmlElement;
-                    if (versionNode == null) continue;
                     versionNode.Attributes.Append(xml.CreateAttribute("key")).Value = item.Key;
                     versionNode.InnerText = item.Value.ToString();
                 }
@@ -705,12 +702,6 @@ namespace ASEva.Utility
                 }
                 catch (Exception ex) { Dump.Exception(ex); }
             }
-        }
-
-        private SessionMeta(String filePath, String guid)
-        {
-            FilePath = filePath;
-            GUID = guid;
         }
     }
 }

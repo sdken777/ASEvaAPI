@@ -11,8 +11,6 @@ namespace ASEva.UIWpf
             PlaceholderText = AgencyLocal.GetAppLanguage() == Language.Chinese ? " 搜索" : " Search";
 
             var textBox = Control as EtoWatermarkTextBox;
-            if (textBox == null) return;
-
             textBox.MouseRightButtonUp += (o, e) =>
             {
                 textBox.Text = "";

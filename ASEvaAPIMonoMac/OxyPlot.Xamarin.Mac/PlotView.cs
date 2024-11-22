@@ -17,9 +17,9 @@ namespace OxyPlot.Xamarin.Mac
     [Register("PlotView")]
     class PlotView : NSView, IPlotView
     {
-        private PlotModel? model;
+        private PlotModel model;
 
-        private IPlotController? defaultController;
+        private IPlotController defaultController;
 
         public PlotView()
         {
@@ -47,7 +47,7 @@ namespace OxyPlot.Xamarin.Mac
             this.WantsLayer = true;
         }
 
-        public PlotModel? Model
+        public PlotModel Model
         {
             get
             {
@@ -75,9 +75,9 @@ namespace OxyPlot.Xamarin.Mac
             }
         }
 
-        public IPlotController? Controller { get; set; }
+        public IPlotController Controller { get; set; }
 
-        Model? IView.ActualModel
+        Model IView.ActualModel
         {
             get
             {
@@ -85,7 +85,7 @@ namespace OxyPlot.Xamarin.Mac
             }
         }
 
-        public PlotModel? ActualModel
+        public PlotModel ActualModel
         {
             get
             {
@@ -164,7 +164,7 @@ namespace OxyPlot.Xamarin.Mac
             this.AddCursorRect (this.Bounds, cursor);
         }
 
-        public static NSCursor? Convert(CursorType cursorType){
+        public static NSCursor Convert(CursorType cursorType){
             switch (cursorType) {
             case CursorType.Default:
                 return null;

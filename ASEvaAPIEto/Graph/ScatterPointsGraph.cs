@@ -41,18 +41,19 @@ namespace ASEva.UIEto
         protected override void UpdateModel(GraphData data)
         {
             model.Title = data == null ? "" : data.Definition.MainTitle;
-            if (data == null || !(data is ScatterPointsData scatterPointsData) || !data.HasData())
+            if (data == null || !(data is ScatterPointsData) || !data.HasData())
             {
                 model.Subtitle = "No data.";
                 model.SubtitleColor = OxyColors.Black;
                 model.Axes[0].Reset();
                 model.Axes[1].Reset();
-                (model.Series[0] as ScatterSeries)?.Points.Clear();
-                (model.Annotations[0] as PolygonAnnotation)?.Points.Clear();
+                (model.Series[0] as ScatterSeries).Points.Clear();
+                (model.Annotations[0] as PolygonAnnotation).Points.Clear();
                 InvalidatePlot();
                 return;
             }
 
+            var scatterPointsData = data as ScatterPointsData;
             model.Axes[0].Title = scatterPointsData.GetXTitle();
             model.Axes[1].Title = scatterPointsData.GetYTitle();
 
@@ -66,33 +67,33 @@ namespace ASEva.UIEto
 
             var points = scatterPointsData.GetPoints();
             var series = model.Series[0] as ScatterSeries;
-            series?.Points.Clear();
+            series.Points.Clear();
             for (int i = 0; i < points.Length; i++)
             {
-                series?.Points.Add(new ScatterPoint(points[i].X, points[i].Y));
+                series.Points.Add(new ScatterPoint(points[i].X, points[i].Y));
             }
 
             OxyColor color = OxyColors.Black;
-            FloatPoint[]? outline = null;
+            FloatPoint[] outline = null;
             if (data.Definition.Validation != null)
             {
-                if (data.Definition.Validation is OutlineInsideValidation oiv)
+                if (data.Definition.Validation is OutlineInsideValidation)
                 {
                     color = OxyColors.LimeGreen;
-                    outline = oiv.GetOutline();
+                    outline = (data.Definition.Validation as OutlineInsideValidation).GetOutline();
                 }
-                else if (data.Definition.Validation is OutlineOutsideValidation oov)
+                else if (data.Definition.Validation is OutlineOutsideValidation)
                 {
                     color = OxyColors.Red;
-                    outline = oov.GetOutline();
+                    outline = (data.Definition.Validation as OutlineOutsideValidation).GetOutline();
                 }
             }
-            (model.Annotations[0] as PolygonAnnotation)?.Points.Clear();
+            (model.Annotations[0] as PolygonAnnotation).Points.Clear();
             if (outline != null)
             {
                 var polygon = model.Annotations[0] as PolygonAnnotation;
-                if (polygon != null) polygon.Fill = OxyColor.FromAColor(64, color);
-                foreach (var pt in outline) polygon?.Points.Add(new DataPoint(pt.X, pt.Y));
+                polygon.Fill = OxyColor.FromAColor(64, color);
+                foreach (var pt in outline) polygon.Points.Add(new DataPoint(pt.X, pt.Y));
             }
 
             double? percentage = null;

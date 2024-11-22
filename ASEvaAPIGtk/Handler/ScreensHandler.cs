@@ -14,9 +14,9 @@ namespace ASEva.UIGtk
 		{
 		}
 
-		public Widget? Widget { get; set; }
+		public Widget Widget { get; set; }
 
-		public Eto.Platform? Platform { get; set; }
+		public Eto.Platform Platform { get; set; }
 
 		public IEnumerable<Screen> Screens
 		{
@@ -49,7 +49,7 @@ namespace ASEva.UIGtk
 			}
 		}
 
-		public Screen? PrimaryScreen
+		public Screen PrimaryScreen
 		{
 			get
 			{

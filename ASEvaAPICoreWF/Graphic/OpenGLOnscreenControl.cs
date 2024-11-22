@@ -26,8 +26,7 @@ namespace ASEva.UICoreWF
             this.antialias = antialias;
             this.useLegacyAPI = useLegacyAPI;
 
-            if (globalGL == null) globalGL = OpenGL.Create(new WindowsFuncLoader());
-            gl = globalGL;
+            if (gl == null) gl = OpenGL.Create(new WindowsFuncLoader());
 
             MouseWheel += OpenGLOnscreenControl_MouseWheel;
         }
@@ -48,27 +47,27 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private void pictureBox_SizeChanged(object? sender, EventArgs e)
+        private void pictureBox_SizeChanged(object sender, EventArgs e)
         {
             QueueRender();
         }
 
-        private void OpenGLOnscreenControl_Paint(object? sender, PaintEventArgs e)
+        private void OpenGLOnscreenControl_Paint(object sender, PaintEventArgs e)
         {
             if (initOK == null) onInit();
 
-            if (initOK == null || !initOK.Value)
+            if (!initOK.Value)
             {
                 e.Graphics.Clear(Color.Black);
                 return;
             }
 
-            var moduleID = callback.OnGetModuleID();
+            var moduleID = callback == null ? null : callback.OnGetModuleID();
             DrawBeat.CallbackBegin(this, moduleID);
 
             var pixelScale = (float)DeviceDpi / 96;
             var curSize = new GLSizeInfo((int)(Width / pixelScale), (int)(Height / pixelScale), Width, Height, pixelScale, (float)Width / Height);
-            bool resized = size == null || curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
+            bool resized = curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
             size = curSize;
 
             Win32.wglMakeCurrent(hdc, context);
@@ -122,7 +121,12 @@ namespace ASEva.UICoreWF
 
             try
             {
-                var ctxInfo = new GLContextInfo(gl.Version, gl.Vendor, gl.Renderer, String.IsNullOrEmpty(gl.Extensions) ? String.Join(' ', gl.ExtensionList) : gl.Extensions);
+                var ctxInfo = new GLContextInfo();
+                ctxInfo.version = gl.Version;
+                ctxInfo.vendor = gl.Vendor;
+                ctxInfo.renderer = gl.Renderer;
+                ctxInfo.extensions = gl.Extensions;
+                if (String.IsNullOrEmpty(ctxInfo.extensions)) ctxInfo.extensions = String.Join(' ', gl.ExtensionList);
 
                 supportSwapInterval = gl.ExtensionList.Contains("WGL_EXT_swap_control");
 
@@ -181,7 +185,7 @@ namespace ASEva.UICoreWF
             return pfd;
         }
 
-        private static int[]? chooseFormats(GLAntialias antialias, OpenGL gl, IntPtr hwnd)
+        private static int[] chooseFormats(GLAntialias antialias, OpenGL gl, IntPtr hwnd)
         {
             var tempPanel = new Panel();
 
@@ -215,20 +219,20 @@ namespace ASEva.UICoreWF
             var formats = new List<int>();
             if (antialias != GLAntialias.Disabled)
             {
-                int[] sampleCounts = [];
+                int[] sampleCounts = null;
                 switch (antialias)
                 {
                     case GLAntialias.Sample2x:
-                        sampleCounts = [2];
+                        sampleCounts = new int[] { 2 };
                         break;
                     case GLAntialias.Sample4x:
-                        sampleCounts = [4, 2];
+                        sampleCounts = new int[] { 4, 2 };
                         break;
                     case GLAntialias.Sample8x:
-                        sampleCounts = [8, 4, 2];
+                        sampleCounts = new int[] { 8, 4, 2 };
                         break;
                     case GLAntialias.Sample16x:
-                        sampleCounts = [16, 8, 4, 2];
+                        sampleCounts = new int[] { 16, 8, 4, 2 };
                         break;
                 }
 
@@ -288,7 +292,7 @@ namespace ASEva.UICoreWF
 
                 if (!createContextAttribsARBUnsupported)
                 {
-                    var glCoreVersions = new[]
+                    var glCoreVersions = new Version[]
                     {
                         new Version(4, 6),
                         new Version(3, 3)
@@ -325,42 +329,41 @@ namespace ASEva.UICoreWF
             return context != IntPtr.Zero;
         }
 
-        private void OpenGLOnscreenControl_MouseDown(object? sender, MouseEventArgs e)
+        private void OpenGLOnscreenControl_MouseDown(object sender, MouseEventArgs e)
         {
             callback.OnRaiseMouseDown(e.ToEto(this));
         }
 
-        private void OpenGLOnscreenControl_MouseMove(object? sender, MouseEventArgs e)
+        private void OpenGLOnscreenControl_MouseMove(object sender, MouseEventArgs e)
         {
             callback.OnRaiseMouseMove(e.ToEto(this));
         }
 
-        private void OpenGLOnscreenControl_MouseUp(object? sender, MouseEventArgs e)
+        private void OpenGLOnscreenControl_MouseUp(object sender, MouseEventArgs e)
         {
             callback.OnRaiseMouseUp(e.ToEto(this));
         }
 
-        private void OpenGLOnscreenControl_MouseWheel(object? sender, MouseEventArgs e)
+        private void OpenGLOnscreenControl_MouseWheel(object sender, MouseEventArgs e)
         {
             callback.OnRaiseMouseWheel(e.ToEto(this));
         }
 
-        private void OpenGLOnscreenControl_MouseDoubleClick(object? sender, MouseEventArgs e)
+        private void OpenGLOnscreenControl_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             callback.OnRaiseMouseDoubleClick(e.ToEto(this));
         }
 
-        private GLCallback callback;
+        private GLCallback callback = null;
         private GLAntialias antialias;
         private bool useLegacyAPI;
         private bool? initOK = null;
         private IntPtr context = IntPtr.Zero;
-        private GLSizeInfo? size = null;
+        private GLSizeInfo size = null;
         private IntPtr hdc = IntPtr.Zero;
         private bool supportSwapInterval = false;
-        private OpenGL gl;
 
-        private static OpenGL? globalGL = null;
+        private static OpenGL gl = null;
         private static bool createContextAttribsARBUnsupported = false;
     }
 }

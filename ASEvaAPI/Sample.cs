@@ -4,7 +4,6 @@ using System.Linq;
 using System.Globalization;
 using System.Threading.Tasks;
 using ASEva.Utility;
-using System.Security.Claims;
 
 namespace ASEva
 {
@@ -182,9 +181,8 @@ namespace ASEva
             }
         }
 
-        public override bool Equals(object? obj)
+        public override bool Equals(object obj)
         {
-            if (obj == null) return false;
             var target = (SessionIdentifier)obj;
             return value == target.value;
         }
@@ -194,9 +192,8 @@ namespace ASEva
             return (int)value;
         }
 
-        public int CompareTo(object? obj)
+        public int CompareTo(object obj)
         {
-            if (obj == null) throw new ArgumentNullException();
             return value.CompareTo(((SessionIdentifier)obj).value);
         }
 
@@ -225,21 +222,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.7.0) Session independent time info
+    /// (api:app=3.0.3) Session independent time info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.0) Session无关时间信息
+    /// (api:app=3.0.3) Session无关时间信息
     /// </summary>
-    /// \~English
-    /// <remarks>
-    /// Default constructor
-    /// </remarks>
-    /// \~Chinese
-    /// <remarks>
-    /// 默认构造函数
-    /// </remarks>
-    public class IndependentTimeInfo(ulong cpuTick, ulong hostPosix, ulong guestPosix, ulong gnssPosix)
+    public class IndependentTimeInfo
     {
         /// \~English
         /// <summary>
@@ -281,26 +270,34 @@ namespace ASEva
         /// </summary>
         public ulong GNSSPosix { get { return gnssPosix; }}
 
-        private ulong cpuTick = cpuTick, hostPosix = hostPosix, guestPosix = guestPosix, gnssPosix = gnssPosix;
+        /// \~English
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 默认构造函数
+        /// </summary>
+        public IndependentTimeInfo(ulong cpuTick, ulong hostPosix, ulong guestPosix, ulong gnssPosix)
+        {
+            this.cpuTick = cpuTick;
+            this.hostPosix = hostPosix;
+            this.guestPosix = guestPosix;
+            this.gnssPosix = gnssPosix;
+        }
+
+        private ulong cpuTick, hostPosix, guestPosix, gnssPosix;
     }
 
     /// \~English
     /// <summary>
-    /// (api:app=3.7.0) Timestamp
+    /// (api:app=3.0.3) Timestamp
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.0) 时间戳
+    /// (api:app=3.0.3) 时间戳
     /// </summary>
-    /// \~English
-    /// <remarks>
-    /// Default constructor
-    /// </remarks>
-    /// \~Chinese
-    /// <remarks>
-    /// 默认构造函数
-    /// </remarks>
-    public struct Timestamp(SessionIdentifier session, double offset, TimeOffsetSync offsetSync, IndependentTimeInfo? timeInfo)
+    public struct Timestamp
     {
         /// \~English
         /// <summary>
@@ -340,12 +337,28 @@ namespace ASEva
         /// <summary>
         /// Session无关时间信息
         /// </summary>
-        public IndependentTimeInfo? TimeInfo { get { return timeInfo; }}
+        public IndependentTimeInfo TimeInfo { get { return timeInfo; }}
 
-        private SessionIdentifier session = session;
-        private double offset = offset;
-        private TimeOffsetSync offsetSync = offsetSync;
-        private IndependentTimeInfo? timeInfo = timeInfo;
+        /// \~English
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 默认构造函数
+        /// </summary>
+        public Timestamp(SessionIdentifier session, double offset, TimeOffsetSync offsetSync, IndependentTimeInfo timeInfo)
+        {
+            this.session = session;
+            this.offset = offset;
+            this.offsetSync = offsetSync;
+            this.timeInfo = timeInfo;
+        }
+
+        private SessionIdentifier session;
+        private double offset;
+        private TimeOffsetSync offsetSync;
+        private IndependentTimeInfo timeInfo;
     }
 
     /// \~English
@@ -508,7 +521,7 @@ namespace ASEva
         /// <param name="offsetSync">时间偏置同步状态</param>
         /// <param name="timeInfo">Session无关时间信息</param>
         /// <param name="timeline">在时间线上的位置</param>
-        public Sample(SessionIdentifier session, double offset, TimeOffsetSync offsetSync, IndependentTimeInfo? timeInfo, double timeline)
+        public Sample(SessionIdentifier session, double offset, TimeOffsetSync offsetSync, IndependentTimeInfo timeInfo, double timeline)
         {
             timestamp = new Timestamp(session, offset, offsetSync, timeInfo);
             this.timeline = timeline;
@@ -532,7 +545,7 @@ namespace ASEva
         /// <param name="offsetSync">时间偏置同步状态</param>
         /// <param name="timeInfo">Session无关时间信息</param>
         /// <param name="timeline">在时间线上的位置</param>
-        public void SetTime(SessionIdentifier session, double offset, TimeOffsetSync offsetSync, IndependentTimeInfo? timeInfo, double timeline)
+        public void SetTime(SessionIdentifier session, double offset, TimeOffsetSync offsetSync, IndependentTimeInfo timeInfo, double timeline)
         {
             timestamp = new Timestamp(session, offset, offsetSync, timeInfo);
             this.timeline = timeline;
@@ -584,9 +597,8 @@ namespace ASEva
         /// </summary>
         /// <param name="other">另一个数据样本</param>
         /// <returns>比较结果</returns>
-        public int CompareTo(Sample? other)
+        public int CompareTo(Sample other)
         {
-            if (other == null) throw new ArgumentNullException();
             return Timeline.CompareTo(other.Timeline);
         }
 
@@ -606,16 +618,6 @@ namespace ASEva
             public Sample s2 { get; set; }
             public double w1 { get; set; }
             public double w2 { get; set; }
-
-            public SearchResult(int s1Index, int s2Index, Sample s1, Sample s2, double w1, double w2)
-            {
-                this.s1Index = s1Index;
-                this.s2Index = s2Index;
-                this.s1 = s1;
-                this.s2 = s2;
-                this.w1 = w1;
-                this.w2 = w2;
-            }
         }
 
         /// \~English
@@ -626,7 +628,7 @@ namespace ASEva
         /// <summary>
         /// [支持通用样本转换时必须实现] 特化样本转为 ASEva.GeneralSample 的协议名称
         /// </summary>
-        public virtual String? GetGeneralSampleProtocol()
+        public virtual String GetGeneralSampleProtocol()
         {
             return null;
         }
@@ -643,7 +645,7 @@ namespace ASEva
         /// <returns>支持的协议名称列表</returns>
         public virtual String[] GetGeneralSampleProtocols()
         {
-            return [];
+            return null;
         }
 
         /// \~English
@@ -673,7 +675,7 @@ namespace ASEva
         /// [支持通用样本转换时可选实现] 特化样本转为 ASEva.GeneralSample ，该实现需调用SetTime进行时间拷贝
         /// </summary>
         /// <returns>通用样本</returns>
-        public virtual GeneralSample? ToGeneralSample()
+        public virtual GeneralSample ToGeneralSample()
         {
             return null;
         }
@@ -688,7 +690,7 @@ namespace ASEva
         /// [支持通用样本转换时可选实现] 特化样本转为 ASEva.GeneralSample ，该实现需调用SetTime进行时间拷贝并赋值通道
         /// </summary>
         /// <returns>通用样本</returns>
-        public virtual GeneralSample? ToGeneralSample(int channel)
+        public virtual GeneralSample ToGeneralSample(int channel)
         {
             return null;
         }
@@ -720,7 +722,7 @@ namespace ASEva
         /// </summary>
         /// <param name="input">样本缓存的搜索结果</param>
         /// <returns>返回插值后的样本</returns>
-        protected virtual Sample? Interpolate(SearchResult input)
+        protected virtual Sample Interpolate(SearchResult input)
         {
             return null;
         }
@@ -741,7 +743,7 @@ namespace ASEva
         /// <returns>是否在范围内</returns>
         public static bool IsInRange(List<Sample> samples, double targetTimeline)
         {
-            if (samples.Count < 2) return false;
+            if (samples == null || samples.Count < 2) return false;
             return targetTimeline >= samples[0].Timeline && targetTimeline <= samples.Last().Timeline;
         }
 
@@ -761,7 +763,7 @@ namespace ASEva
         /// <returns>是否在范围外，且比所有样本都更早</returns>
         public static bool IsOutRangeLower(List<Sample> samples, double targetTimeline)
         {
-            if (samples.Count == 0) return false;
+            if (samples == null || samples.Count == 0) return false;
             return targetTimeline < samples[0].Timeline;
         }
 
@@ -781,7 +783,7 @@ namespace ASEva
         /// <returns>是否在范围外，且比所有样本都更晚</returns>
         public static bool IsOutRangeUpper(List<Sample> samples, double targetTimeline)
         {
-            if (samples.Count == 0) return false;
+            if (samples == null || samples.Count == 0) return false;
             return targetTimeline > samples.Last().Timeline;
         }
 
@@ -815,14 +817,22 @@ namespace ASEva
         /// <param name="targetTimeline">在时间线上的目标时间点</param>
         /// <param name="maxGap">最大时间间隔，若最近样本的时间间隔大于此值，则不考虑</param>
         /// <returns>返回搜索结果</returns>
-        public static SearchResult? Search(List<Sample> samples, double targetTimeline, double maxGap = 1.0)
+        public static SearchResult Search(List<Sample> samples, double targetTimeline, double maxGap = 1.0)
         {
-            if (samples.Count == 0) return null;
+            if (samples == null || samples.Count == 0) return null;
 
+            var result = new SearchResult();
             if (samples.Count == 1)
             {
                 if (Math.Abs(targetTimeline - samples[0].Timeline) > maxGap) return null;
-                else return new SearchResult(0, 0, samples[0], samples[0], 1, 0);
+                else
+                {
+                    result.s1Index = result.s2Index = 0;
+                    result.s1 = result.s2 = samples[0];
+                    result.w1 = 1;
+                    result.w2 = 0;
+                    return result;
+                }
             }
 
             if (targetTimeline > samples[samples.Count - 1].Timeline + maxGap) return null;
@@ -830,20 +840,30 @@ namespace ASEva
 
             if (targetTimeline > samples[samples.Count - 1].Timeline)
             {
-                var targetSample = samples[samples.Count - 1];
-                return new SearchResult(samples.Count - 1, samples.Count - 1, targetSample, targetSample, 1, 0);
+                result.s1Index = result.s2Index = samples.Count - 1;
+                result.s1 = result.s2 = samples[samples.Count - 1];
+                result.w1 = 1;
+                result.w2 = 0;
+                return result;
             }
             if (targetTimeline < samples[0].Timeline)
             {
-                return new SearchResult(0, 0, samples[0], samples[0], 1, 0);
+                result.s1Index = result.s2Index = 0;
+                result.s1 = result.s2 = samples[0];
+                result.w1 = 1;
+                result.w2 = 0;
+                return result;
             }
 
             int[] range = searchSample(samples, samples.Count / 2, 0, samples.Count - 1, targetTimeline);
             if (range[0] == range[1])
             {
-                var targetSample = samples[range[0]];
-                if (Math.Abs(targetSample.Timeline - targetTimeline) > maxGap) return null;
-                else return new SearchResult(range[0], range[0], targetSample, targetSample, 1, 0);
+                result.s1Index = result.s2Index = range[0];
+                result.s1 = result.s2 = samples[range[0]];
+                result.w1 = 1;
+                result.w2 = 0;
+                if (Math.Abs(result.s1.Timeline - targetTimeline) > maxGap) return null;
+                else return result;
             }
             else
             {
@@ -858,25 +878,61 @@ namespace ASEva
 
                 if (t2 <= t1 && t1Gap < maxGap)
                 {
-                    return new SearchResult(s1Index, s1Index, s1, s1, 1, 0);
+                    result.s1Index = result.s2Index = s1Index;
+                    result.s1 = result.s2 = s1;
+                    result.w1 = 1;
+                    result.w2 = 0;
+                    return result;
                 }
                 else if (t1Gap < maxGap && t2Gap < maxGap)
                 {
                     if (s1.Session == s2.Session)
                     {
+                        result.s1Index = s1Index;
+                        result.s2Index = s2Index;
+                        result.s1 = s1;
+                        result.s2 = s2;
                         double timestampDelta = t2 - t1;
-                        var w1 = t2Gap / timestampDelta;
-                        var w2 = t1Gap / timestampDelta;
-                        return new SearchResult(s1Index, s2Index, s1, s2, w1, w2);
+                        result.w1 = t2Gap / timestampDelta;
+                        result.w2 = t1Gap / timestampDelta;
+                        return result;
                     }
                     else
                     {
-                        if (t1Gap < t2Gap) return new SearchResult(s1Index, s1Index, s1, s1, 1, 0);
-                        else return new SearchResult(s2Index, s2Index, s2, s2, 1, 0);
+                        if (t1Gap < t2Gap)
+                        {
+                            result.s1Index = result.s2Index = s1Index;
+                            result.s1 = result.s2 = s1;
+                            result.w1 = 1;
+                            result.w2 = 0;
+                            return result;
+                        }
+                        else
+                        {
+                            result.s1Index = result.s2Index = s2Index;
+                            result.s1 = result.s2 = s2;
+                            result.w1 = 1;
+                            result.w2 = 0;
+                            return result;
+                        }
                     }
                 }
-                else if (t1Gap < maxGap && t2Gap >= maxGap) return new SearchResult(s1Index, s1Index, s1, s1, 1, 0);
-                else if (t1Gap >= maxGap && t2Gap < maxGap) return new SearchResult(s2Index, s2Index, s2, s2, 1, 0);
+                else if (t1Gap < maxGap && t2Gap >= maxGap)
+                {
+                    result.s1Index = result.s2Index = s1Index;
+                    result.s1 = result.s2 = s1;
+                    result.w1 = 1;
+                    result.w2 = 0;
+                    return result;
+                }
+                else if (t1Gap >= maxGap && t2Gap < maxGap)
+                {
+                    result.s1Index = result.s2Index = s2Index;
+                    result.s1 = result.s2 = s2;
+                    result.w1 = 1;
+                    result.w2 = 0;
+                    return result;
+                }
                 else return null;
             }
         }
@@ -895,7 +951,7 @@ namespace ASEva
         /// <param name="samples">样本缓存</param>
         /// <param name="targetTimeline">在时间线上的目标时间点</param>
         /// <returns>插值后的样本</returns>
-        public static Sample? SearchAndInterpolate(List<Sample> samples, double targetTimeline)
+        public static Sample SearchAndInterpolate(List<Sample> samples, double targetTimeline)
         {
             if (samples.Count == 0) return null;
             if (!samples[0].SupportInterpolation()) return null;
@@ -908,7 +964,7 @@ namespace ASEva
                 var buf = samples[0].Interpolate(result);
                 if (buf == null) return null;
 
-                IndependentTimeInfo? timeInfo = null;
+                IndependentTimeInfo timeInfo = null;
                 if (result.s1.timestamp.TimeInfo != null && result.s2.timestamp.TimeInfo != null)
                 {
                     var t1 = result.s1.timestamp.TimeInfo;
@@ -954,7 +1010,7 @@ namespace ASEva
         /// <param name="targetTimeline">在时间线上的目标时间点</param>
         /// <param name="targetSession">目标的session ID</param>
         /// <returns>最近样本，若无则返回null</returns>
-        public static Sample? SearchAndGetNearest(List<Sample> samples, double targetTimeline, SessionIdentifier targetSession)
+        public static Sample SearchAndGetNearest(List<Sample> samples, double targetTimeline, SessionIdentifier targetSession)
         {
             if (samples.Count == 0) return null;
             if (samples.Count == 1)
@@ -1055,7 +1111,7 @@ namespace ASEva
     {
         public GeneralSampleValueMode mode;
         public double number;
-        public String? text;
+        public String text;
 
         public GeneralSampleValue(double number)
         {
@@ -1123,13 +1179,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.7.0) General sample
+    /// (api:app=3.0.0) General sample
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.0) 通用样本
+    /// (api:app=3.0.0) 通用样本
     /// </summary>
-    public class GeneralSample(String protocol) : Sample
+    public class GeneralSample : Sample
     {
         /// \~English
         /// <summary>
@@ -1139,7 +1195,7 @@ namespace ASEva
         /// <summary>
         /// 样本协议
         /// </summary>
-        public String Protocol { get; set; } = protocol;
+        public String Protocol { get; set; }
 
         /// \~English
         /// <summary>
@@ -1159,8 +1215,8 @@ namespace ASEva
         /// <summary>
         /// 值列表
         /// </summary>
-        public List<GeneralSampleValue> Values { get; set; } = [];
-
+        public List<GeneralSampleValue> Values { get; set; }
+        
         /// \~English
         /// <summary>
         /// Number of significant values (Generally for recording, not significant values will not be recorded)
@@ -1173,12 +1229,12 @@ namespace ASEva
 
         public override string ToString()
         {
-            if (Values.Count > 0)
+            if (Values != null && Values.Count > 0)
             {
-                String? text = null;
+                String text = null;
                 foreach (var val in Values)
                 {
-                    String? valText = null;
+                    String valText = null;
                     switch (val.mode)
                     {
                         case GeneralSampleValueMode.Number:
@@ -1194,7 +1250,7 @@ namespace ASEva
                     if (text == null) text = valText;
                     else text += "," + valText;
                 }
-                return text ?? "";
+                return text;
             }
             else return "";
         }

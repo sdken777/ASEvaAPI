@@ -64,9 +64,9 @@ namespace ASEva.Graph
         {
             if (data.HasData())
             {
-                if (data is SingleValueData svData)
+                if (data is SingleValueData)
                 {
-                    if (svData.GetValue() <= thresh)
+                    if ((data as SingleValueData).GetValue() <= thresh)
                     {
                         percentage = null;
                         return true;
@@ -77,8 +77,10 @@ namespace ASEva.Graph
                         return false;
                     }
                 }
-                else if (data is HistAndLineData hist && hist.GetXValuesOrLabels() is HistLineXValues xValues)
+                else if (data is HistAndLineData)
                 {
+                    var hist = data as HistAndLineData;
+                    var xValues = hist.GetXValuesOrLabels() as HistLineXValues;
                     var samples = hist.GetSamples();
                     var okIndices = GetHistLineValuesOKIndices(xValues);
 
@@ -91,8 +93,9 @@ namespace ASEva.Graph
                     percentage = okSum * 100 / totalSum;
                     return okPercentage == null ? null : (bool?)(percentage >= okPercentage);
                 }
-                else if (data is MatrixTableData mat)
+                else if (data is MatrixTableData)
                 {
+                    var mat = data as MatrixTableData;
                     var values = mat.GetValues();
                     double totalSum = values.Length;
 

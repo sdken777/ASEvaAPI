@@ -16,18 +16,18 @@ namespace ASEvaAPIAvaloniaTest
             this.AddToResources(Program.Texts);
         }
 
-        private void linkClientSize_Click(object? sender, RoutedEventArgs e)
+        private void linkClientSize_Click(object sender, RoutedEventArgs e)
         {
             linkClientSize.Content = ClientSize.Width + "x" + ClientSize.Height;
         }
 
-        private void linkShowDialogWithBorder_Click(object? sender, RoutedEventArgs e)
+        private void linkShowDialogWithBorder_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new TestDialogWithBorder();
             dialog.ShowDialog(this);
         }
 
-        private void buttonClose_Click(object? sender, RoutedEventArgs e)
+        private void buttonClose_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }

@@ -8,8 +8,8 @@ namespace ASEva.UIEto
         void RunIteration();
         bool ShouldCreateContainer();
         bool IsControlValid(object control);
-        nint CreateContainer(nint parent, object control, out object? context);
-        void UseContainer(nint container, object control, out object? context);
+        IntPtr CreateContainer(IntPtr parent, object control, out object context);
+        void UseContainer(IntPtr container, object control, out object context);
         void ReleaseResource(object context);
         void HandleWindowActive(object context, bool active);
         void HandleControlResize(object context, double width, double height);

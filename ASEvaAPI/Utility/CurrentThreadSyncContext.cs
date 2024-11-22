@@ -15,6 +15,11 @@ namespace ASEva.Utility
     /// </summary>
     public class CurrentThreadSyncContext : SynchronizationContext
     {
+        private CurrentThreadSyncContext()
+        {
+            threadID = Thread.CurrentThread.ManagedThreadId;
+        }
+
         /// \~English
         /// <summary>
         /// Enable for current thread
@@ -25,7 +30,7 @@ namespace ASEva.Utility
         /// </summary>
         public static CurrentThreadSyncContext InstallIfNeeded()
         {
-            if (Current is CurrentThreadSyncContext current) return current;
+            if (Current is CurrentThreadSyncContext) return Current as CurrentThreadSyncContext;
 
             var target = new CurrentThreadSyncContext();
             SetSynchronizationContext(target);
@@ -42,8 +47,9 @@ namespace ASEva.Utility
         /// </summary>
         public static void Uninstall()
         {
-            if (Current is CurrentThreadSyncContext target)
+            if (Current is CurrentThreadSyncContext)
             {
+                var target = Current as CurrentThreadSyncContext;
                 target.contexts.Clear();
                 SetSynchronizationContext(null);
             }
@@ -63,7 +69,7 @@ namespace ASEva.Utility
 
             while (!shouldEnd)
             {
-                CallbackContext? ctx;
+                CallbackContext ctx = null;
                 if (!contexts.TryDequeue(out ctx)) break;
                 ctx.Callback(ctx.State);
                 ctx.Finished = true;
@@ -78,9 +84,13 @@ namespace ASEva.Utility
         /// <summary>
         /// 重载方法，请勿直接调用
         /// </summary>
-        public override void Post(SendOrPostCallback d, object? state)
+        public override void Post(SendOrPostCallback d, object state)
         {
-            var ctx = new CallbackContext(d, state);
+            var ctx = new CallbackContext
+            {
+                Callback = d,
+                State = state,
+            };
             contexts.Enqueue(ctx);
         }
 
@@ -92,12 +102,16 @@ namespace ASEva.Utility
         /// <summary>
         /// 重载方法，请勿直接调用
         /// </summary>
-        public override void Send(SendOrPostCallback d, object? state)
+        public override void Send(SendOrPostCallback d, object state)
         {
             if (Thread.CurrentThread.ManagedThreadId == threadID) d(state);
             else
             {
-                var ctx = new CallbackContext(d, state);
+                var ctx = new CallbackContext
+                {
+                    Callback = d,
+                    State = state,
+                };
                 contexts.Enqueue(ctx);
 
                 while (true)
@@ -110,18 +124,12 @@ namespace ASEva.Utility
 
         private class CallbackContext
         {
-            public SendOrPostCallback Callback { get; private set; }
-            public object? State { get; private set; }
+            public SendOrPostCallback Callback { get; set; }
+            public object State { get; set; }
             public bool Finished { get; set; }
-
-            public CallbackContext(SendOrPostCallback callback, object? state)
-            {
-                Callback = callback;
-                State = state;
-            }
         }
 
-        private int threadID = Thread.CurrentThread.ManagedThreadId;
+        private int threadID;
         private ConcurrentQueue<CallbackContext> contexts = new ConcurrentQueue<CallbackContext>();
     }
 }

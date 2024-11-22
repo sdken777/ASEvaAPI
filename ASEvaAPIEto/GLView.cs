@@ -111,13 +111,13 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=3.3.2) OpenGL text drawing task
+	/// (api:eto=3.0.0) OpenGL text drawing task
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=3.3.2) OpenGL文本绘制任务
+	/// (api:eto=3.0.0) OpenGL文本绘制任务
 	/// </summary>
-    public class GLTextTask(String text)
+    public struct GLTextTask
     {
 		/// \~English
 		/// <summary>
@@ -127,7 +127,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本
 		/// </summary>
-        public String Text { get; set; } = text;
+        public String text;
 
 		/// \~English
 		/// <summary>
@@ -137,7 +137,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本锚点X轴坐标
 		/// </summary>
-        public int PosX { get; set; }
+        public int posX;
 
 		/// \~English
 		/// <summary>
@@ -147,7 +147,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本锚点Y轴坐标
 		/// </summary>
-        public int PosY { get; set; }
+        public int posY;
 
 		/// \~English
 		/// <summary>
@@ -157,7 +157,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本锚点坐标是否为物理像素坐标系，否则为逻辑坐标
 		/// </summary>
-        public bool IsRealPos { get; set; }
+        public bool isRealPos;
 
 		/// \~English
 		/// <summary>
@@ -167,7 +167,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本锚点坐标位置类型
 		/// </summary>
-        public TextAnchor Anchor { get; set; }
+        public TextAnchor anchor;
 
 		/// \~English
 		/// <summary>
@@ -177,7 +177,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本绘制颜色红色分量
 		/// </summary>
-        public byte Red { get; set; }
+        public byte red;
 
 		/// \~English
 		/// <summary>
@@ -187,7 +187,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本绘制颜色绿色分量
 		/// </summary>
-        public byte Green { get; set; }
+        public byte green;
 
 		/// \~English
 		/// <summary>
@@ -197,7 +197,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本绘制颜色蓝色分量
 		/// </summary>
-        public byte Blue { get; set; }
+        public byte blue;
 
 		/// \~English
 		/// <summary>
@@ -207,7 +207,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本绘制颜色Alpha通道分量，0将被视为255
 		/// </summary>
-        public byte Alpha { get; set; }
+        public byte alpha;
 
 		/// \~English
 		/// <summary>
@@ -217,7 +217,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本字体，空则使用默认字体
 		/// </summary>
-        public String? FontName { get; set; }
+        public String fontName;
 
 		/// \~English
 		/// <summary>
@@ -227,16 +227,16 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本相对于默认尺寸的比例，0将被视为1
 		/// </summary>
-        public float SizeScale { get; set; }
+        public float sizeScale;
     }
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=3.3.2) OpenGL text drawing task list
+	/// (api:eto=3.0.0) OpenGL text drawing task list
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=3.3.2) OpenGL文本绘制任务对象
+	/// (api:eto=3.0.0) OpenGL文本绘制任务对象
 	/// </summary>
     public class GLTextTasks
     {
@@ -250,18 +250,19 @@ namespace ASEva.UIEto
 		/// </summary>
         public void Add(String text, int posX, int posY, byte red, byte green, byte blue, float sizeScale)
         {
-            tasks.Add(new GLTextTask(text)
+            tasks.Add(new GLTextTask
             {
-                PosX = posX,
-                PosY = posY,
-                IsRealPos = false,
-                Anchor = TextAnchor.Center,
-                Red = red,
-                Green = green,
-                Blue = blue,
-                Alpha = 255,
-                FontName = null,
-                SizeScale = sizeScale,
+                text = text,
+                posX = posX,
+                posY = posY,
+                isRealPos = false,
+                anchor = TextAnchor.Center,
+                red = red,
+                green = green,
+                blue = blue,
+                alpha = 255,
+                fontName = null,
+                sizeScale = sizeScale,
             });
         }
 
@@ -285,7 +286,7 @@ namespace ASEva.UIEto
             return output;
         }
 
-        private List<GLTextTask> tasks = [];
+        private List<GLTextTask> tasks = new List<GLTextTask>();
     }
 
 	/// \~English
@@ -461,11 +462,11 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=3.3.2) GLView render event argument
+	/// (api:eto=3.0.0) GLView render event argument
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=3.3.2) GLView渲染事件参数
+	/// (api:eto=3.0.0) GLView渲染事件参数
 	/// </summary>
 	public class GLRenderEventArgs : GLEventArgs
 	{
@@ -487,13 +488,13 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=3.3.2) OpenGL context info
+	/// (api:eto=3.0.0) OpenGL context info
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=3.3.2) OpenGL上下文信息
+	/// (api:eto=3.0.0) OpenGL上下文信息
 	/// </summary>
-	public class GLContextInfo(String version, String vendor, String renderer, String extensions)
+	public struct GLContextInfo
 	{
 		/// \~English
 		/// <summary>
@@ -503,7 +504,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// OpenGL版本
 		/// </summary>
-        public String Version { get; set; } = version;
+        public String version;
 
 		/// \~English
 		/// <summary>
@@ -513,7 +514,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 厂商
 		/// </summary>
-        public String Vendor { get; set; } = vendor;
+        public String vendor;
 
 		/// \~English
 		/// <summary>
@@ -523,7 +524,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 渲染器
 		/// </summary>
-        public String Renderer { get; set; } = renderer;
+        public String renderer;
 
 		/// \~English
 		/// <summary>
@@ -533,7 +534,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 扩展
 		/// </summary>
-        public String Extensions { get; set; } = extensions;
+        public String extensions;
 
 		/// \~English
 		/// <summary>
@@ -546,9 +547,9 @@ namespace ASEva.UIEto
 		public List<String> ToExtensionList()
 		{
 			var list = new List<String>();
-			if (!String.IsNullOrEmpty(Extensions))
+			if (!String.IsNullOrEmpty(extensions))
 			{
-				foreach (var row in Extensions.Split('\n', StringSplitOptions.RemoveEmptyEntries))
+				foreach (var row in extensions.Split('\n', StringSplitOptions.RemoveEmptyEntries))
 				{
 					list.AddRange(row.Split(' ', StringSplitOptions.RemoveEmptyEntries));
 				}
@@ -637,7 +638,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 初始化事件
 		/// </summary>
-		public event EventHandler<GLEventArgs>? GLInitialize;
+		public event EventHandler<GLEventArgs> GLInitialize;
 
 		/// \~English
 		/// <summary>
@@ -647,7 +648,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 缩放事件
 		/// </summary>
-		public event EventHandler<GLResizeEventArgs>? GLResize;
+		public event EventHandler<GLResizeEventArgs> GLResize;
 
 		/// \~English
 		/// <summary>
@@ -657,7 +658,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 渲染事件
 		/// </summary>
-		public event EventHandler<GLRenderEventArgs>? GLRender;
+		public event EventHandler<GLRenderEventArgs> GLRender;
 
 		/// \~English
 		/// <summary>
@@ -703,7 +704,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
+		/// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
 		/// <param name="requestOnscreenRendering">Whether to request onscreen rendering (Use offscreen if unsupported), default is false</param>
 		/// <param name="drawText">Whether to request drawing text, default is true</param>
 		/// <param name="useLegacyAPI">Whether to use OpenGL legacy API, default is true</param>
@@ -715,7 +716,7 @@ namespace ASEva.UIEto
 		/// <param name="requestOnscreenRendering">是否请求启用在屏渲染(若不支持则仍使用离屏渲染)，默认为false</param>
 		/// <param name="drawText">是否需要绘制文本，默认为true</param>
 		/// <param name="useLegacyAPI">是否需要使用OpenGL传统API，默认为true</param>
-		public GLView(String? moduleID, bool requestOnscreenRendering, bool drawText = true, bool useLegacyAPI = true)
+		public GLView(String moduleID, bool requestOnscreenRendering, bool drawText = true, bool useLegacyAPI = true)
 		{
 			this.moduleID = moduleID;
 			this.requestAntialias = GLAntialias.Sample4x;
@@ -730,7 +731,7 @@ namespace ASEva.UIEto
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time, set to null if not using</param>
+        /// <param name="moduleID">Component ID of owner window or dialog class, for statistics of rendering time</param>
         /// <param name="requestAntialias">Antialias option (Use the nearest option if not supported), default is 4x sampling</param>
         /// <param name="requestOnscreenRendering">Whether to request onscreen rendering (Use offscreen if unsupported), default is false</param>
         /// <param name="requestOverlay">Whether to request support of overlay (SupportOverlay will be false if unsupported), default is true</param>
@@ -746,7 +747,7 @@ namespace ASEva.UIEto
         /// <param name="requestOverlay">是否需要支持被其他控件覆盖(若不支持则SupportOverlay属性为false)，默认为true</param>
         /// <param name="drawText">是否需要绘制文本，默认为true</param>
         /// <param name="useLegacyAPI">是否需要使用OpenGL传统API，默认为true</param>
-        public GLView(String? moduleID, GLAntialias requestAntialias, bool requestOnscreenRendering = false, bool requestOverlay = true, bool drawText = true, bool useLegacyAPI = true)
+        public GLView(String moduleID, GLAntialias requestAntialias, bool requestOnscreenRendering = false, bool requestOverlay = true, bool drawText = true, bool useLegacyAPI = true)
 		{
 			this.moduleID = moduleID;
 			this.requestAntialias = requestAntialias;
@@ -774,7 +775,7 @@ namespace ASEva.UIEto
 
 		~GLView()
 		{
-			if (!closed) AgencyLocal.Print("GLView.Close not called. Memory leaking.");
+			if (!closed) Agency.Print("GLView.Close not called. Memory leaking.");
 		}
 
 		/// \~English
@@ -793,11 +794,11 @@ namespace ASEva.UIEto
 
 		/// \~English
 		/// <summary>
-		/// (api:eto=3.3.2) Context info (null if not initialized yet)
+		/// Context info (null if not initialized yet)
 		/// </summary>
 		/// \~Chinese
 		/// <summary>
-		/// (api:eto=3.3.2) 上下文信息 (null表示还未初始化完成)
+		/// 上下文信息 (null表示还未初始化完成)
 		/// </summary>
 		public GLContextInfo? ContextInfo { get; private set; }
 
@@ -837,18 +838,23 @@ namespace ASEva.UIEto
 
         public void OnGLInitialize(OpenGL gl, GLContextInfo contextInfo)
         {
+			if (contextInfo.version == null) contextInfo.version = "";
+			if (contextInfo.vendor == null) contextInfo.vendor = "";
+			if (contextInfo.renderer == null) contextInfo.renderer = "";
+			if (contextInfo.extensions == null) contextInfo.extensions = "";
 			ContextInfo = contextInfo;
-            GLInitialize?.Invoke(this, new GLEventArgs(gl));
+
+            if (GLInitialize != null) GLInitialize(this, new GLEventArgs(gl));
         }
 
         public void OnGLResize(OpenGL gl, GLSizeInfo sizeInfo)
         {
-            GLResize?.Invoke(this, new GLResizeEventArgs(gl, sizeInfo));
+            if (GLResize != null) GLResize(this, new GLResizeEventArgs(gl, sizeInfo));
         }
 
         public void OnGLRender(OpenGL gl, GLTextTasks textTasks)
         {
-            GLRender?.Invoke(this, new GLRenderEventArgs(gl, textTasks));
+            if (GLRender != null) GLRender(this, new GLRenderEventArgs(gl, textTasks));
 			lock (renderTime)
 			{
 				renderTime.Add(DateTime.Now);
@@ -880,7 +886,7 @@ namespace ASEva.UIEto
 			OnMouseDoubleClick(args);
 		}
 
-        public string? OnGetModuleID()
+        public string OnGetModuleID()
         {
             return moduleID;
         }
@@ -898,16 +904,16 @@ namespace ASEva.UIEto
 					RequestOverlay = requestOverlay,
 				};
 				Factory.CreateGLBackend(this, options, out etoControl, out glBackend, out supportOverlay);
-				Content = etoControl;
+				if (etoControl != null) Content = etoControl;
 			}
 		}
 
-        public static GLBackendFactory? Factory { private get; set; }
+        public static GLBackendFactory Factory { private get; set; }
 
-		private Control? etoControl;
-		private GLBackend? glBackend;
-		private List<DateTime> renderTime = [];
-		private String? moduleID;
+		private Control etoControl;
+		private GLBackend glBackend;
+		private List<DateTime> renderTime = new List<DateTime>();
+		private String moduleID;
 		private GLAntialias requestAntialias;
 		private bool requestOnscreenRendering;
 		private bool requestOverlay;
@@ -927,7 +933,7 @@ namespace ASEva.UIEto
 		void OnRaiseMouseUp(MouseEventArgs args);
 		void OnRaiseMouseWheel(MouseEventArgs args);
 		void OnRaiseMouseDoubleClick(MouseEventArgs args);
-		String? OnGetModuleID();
+		String OnGetModuleID();
 	}
 
 	public interface GLBackend

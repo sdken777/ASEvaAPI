@@ -7,89 +7,85 @@ namespace ASEva.Utility
     
     /// \~English
     /// <summary>
-    /// (api:app=3.7.0) XML attribute parsing
+    /// (api:app=3.0.0) XML attribute parsing
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.0) XML属性解析
+    /// (api:app=3.0.0) XML属性解析
     /// </summary>
-    public class AttributeParser(XmlElement element)
+    public class AttributeParser
     {
-        private XmlAttributeCollection a = element.Attributes;
+        private XmlAttributeCollection a;
+
+        public AttributeParser(XmlElement root)
+        {
+            a = root.Attributes;
+        }
 
         public bool ParseBool(String key, String trueValue, bool defaultValue)
         {
-            var v = a[key];
-            if (v == null) return defaultValue;
-            else return v.Value == trueValue;
+            if (a[key] == null) return defaultValue;
+            else return a[key].Value == trueValue;
         }
 
         public int ParseInt(String key, int defaultValue)
         {
-            var v = a[key];
-            if (v == null) return defaultValue;
+            if (a[key] == null) return defaultValue;
             int output;
-            if (Int32.TryParse(v.Value, out output)) return output;
+            if (Int32.TryParse(a[key].Value, out output)) return output;
             else return defaultValue;
         }
 
         public long ParseLong(String key, long defaultValue)
         {
-            var v = a[key];
-            if (v == null) return defaultValue;
+            if (a[key] == null) return defaultValue;
             long output;
-            if (Int64.TryParse(v.Value, out output)) return output;
+            if (Int64.TryParse(a[key].Value, out output)) return output;
             else return defaultValue;
         }
 
         public double ParseDouble(String key, double defaultValue)
         {
-            var v = a[key];
-            if (v == null) return defaultValue;
+            if (a[key] == null) return defaultValue;
             double output;
-            if (Double.TryParse(v.Value, out output)) return output;
+            if (Double.TryParse(a[key].Value, out output)) return output;
             else return defaultValue;
         }
 
-        public String? ParseString(String key, String? defaultValue)
+        public String ParseString(String key, String defaultValue)
         {
-            var v = a[key];
-            if (v == null) return defaultValue;
-            var text = v.Value;
+            if (a[key] == null) return defaultValue;
+            var text = a[key].Value;
             return text == "null" ? null : text;
         }
 
-        public String? ParseMessageID(String key)
+        public String ParseMessageID(String key)
         {
-            var v = a[key];
-            if (v == null) return null;
-            var text = v.Value;
+            if (a[key] == null) return null;
+            var text = a[key].Value;
             if (text.Length == 0 || text == "null") return null;
             var comps = text.Split(':', StringSplitOptions.RemoveEmptyEntries);
             if (comps.Length != 2) return null;
             return text;
         }
 
-        public String? ParseSignalID(String key)
+        public String ParseSignalID(String key)
         {
-            var v = a[key];
-            if (v == null) return null;
-            var text = v.Value;
+            if (a[key] == null) return null;
+            var text = a[key].Value;
             if (text.Length == 0 || text == "null") return null;
             var comps = text.Split(':', StringSplitOptions.RemoveEmptyEntries);
             if (comps.Length != 3) return null;
             return text;
         }
 
-        public double[]? ParseSignalValue(String key, bool optional)
+        public double[] ParseSignalValue(String key, bool optional)
         {
-            var v = a[key];
+            double[] ret = null;
+            if (!optional) ret = new double[1] { 0 };
+            if (a[key] == null) return ret;
 
-            double[]? ret = null;
-            if (!optional) ret = [0];
-            if (v == null) return ret;
-
-            String text = v.Value;
+            String text = a[key].Value;
             if (text.Length == 0 || text == "null") return ret;
 
             var values = text.Split(',');
@@ -109,11 +105,10 @@ namespace ASEva.Utility
 
         public object ParseEnum(String key, Type type, object defaultValue)
         {
-            var v = a[key];
-            if (v == null) return defaultValue;
+            if (a[key] == null) return defaultValue;
             try
             {
-                var obj = Enum.Parse(type, v.Value);
+                var obj = Enum.Parse(type, a[key].Value);
                 return obj == null ? defaultValue : obj;
             }
             catch (Exception ex) { Dump.Exception(ex); return defaultValue; }
@@ -121,10 +116,9 @@ namespace ASEva.Utility
 
         public FloatPoint? ParsePoint(String key, FloatPoint? defaultPoint)
         {
-            var v = a[key];
-            if (v == null) return defaultPoint;
+            if (a[key] == null) return defaultPoint;
 
-            var comps = v.Value.Split(',');
+            var comps = a[key].Value.Split(',');
             if (comps.Length < 2) return defaultPoint;
 
             float x, y;
@@ -135,10 +129,9 @@ namespace ASEva.Utility
 
         public ColorRGBA ParseColor(String key, ColorRGBA defaultColor)
         {
-            var v = a[key];
-            if (v == null) return defaultColor;
+            if (a[key] == null) return defaultColor;
 
-            var comps = v.Value.Split(',');
+            var comps = a[key].Value.Split(',');
             if (comps.Length < 3) return defaultColor;
 
             int r, g, b;
@@ -151,16 +144,38 @@ namespace ASEva.Utility
 
     /// \~English
     /// <summary>
-    /// (api:app=3.7.0) XML attribute writer
+    /// (api:app=3.0.0) XML attribute writer
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.0) XML属性输出
+    /// (api:app=3.0.0) XML属性输出
     /// </summary>
-    public class AttributeWriter(XmlElement element)
+    public class AttributeWriter
     {
-        private XmlDocument x = element.OwnerDocument;
-        private XmlAttributeCollection a = element.Attributes;
+        private XmlDocument x;
+        private XmlAttributeCollection a;
+
+        /// \~English
+        /// <summary>
+        /// Create based on XML element
+        /// </summary>
+        /// <param name="element">XML element</param>
+        /// \~Chinese
+        /// <summary>
+        /// 基于XML元素节点创建
+        /// </summary>
+        /// <param name="element">XML元素节点</param>
+        public AttributeWriter(XmlElement element)
+        {
+            x = element.OwnerDocument;
+            a = element.Attributes;
+        }
+
+        public AttributeWriter(XmlDocument xml, XmlElement root)
+        {
+            x = xml;
+            a = root.Attributes;
+        }
 
         public void WriteBool(String key, bool value, String trueValue, String falseValue)
         {
@@ -182,12 +197,12 @@ namespace ASEva.Utility
             a.Append(x.CreateAttribute(key)).Value = value.ToString();
         }
 
-        public void WriteString(String key, String? value)
+        public void WriteString(String key, String value)
         {
             a.Append(x.CreateAttribute(key)).Value = value == null ? "null" : value;
         }
 
-        public void WriteSignalValue(String key, double[]? values)
+        public void WriteSignalValue(String key, double[] values)
         {
             if (values == null) a.Append(x.CreateAttribute(key)).Value = "null";
             else

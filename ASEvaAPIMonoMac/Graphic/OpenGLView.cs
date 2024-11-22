@@ -40,7 +40,7 @@ namespace ASEva.UIMonoMac
         private GLCallback callback;
         private GLAntialias antialias;
         private bool useLegacyAPI;
-        private OpenGLView? view;
+        private OpenGLView view;
     }
 
     class OpenGLView : NSOpenGLView
@@ -111,7 +111,12 @@ namespace ASEva.UIMonoMac
 
                 try
                 {
-                    var ctxInfo = new GLContextInfo(gl.Version, gl.Vendor, gl.Renderer, gl.Extensions);
+                    var ctxInfo = new GLContextInfo();
+                    ctxInfo.version = gl.Version;
+                    ctxInfo.vendor = gl.Vendor;
+                    ctxInfo.renderer = gl.Renderer;
+                    ctxInfo.extensions = gl.Extensions;
+
                     callback.OnGLInitialize(gl, ctxInfo);
                     gl.Flush();
                 }
@@ -126,7 +131,7 @@ namespace ASEva.UIMonoMac
                 initStatus = InitStatus.InitOK;
             }
 
-            var moduleID = callback.OnGetModuleID();
+            var moduleID = callback == null ? null : callback.OnGetModuleID();
             DrawBeat.CallbackBegin(this, moduleID);
 
             OpenGLContext.MakeCurrentContext();
@@ -141,14 +146,11 @@ namespace ASEva.UIMonoMac
                 if (size == null || curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight)
                 {
                     size = curSize;
-                    if (gl != null) callback.OnGLResize(gl, size);
+                    callback.OnGLResize(gl, size);
                 }
 
-                if (gl != null)
-                {
-                    callback.OnGLRender(gl, texts);
-                    gl.Finish();
-                }
+                callback.OnGLRender(gl, texts);
+                gl.Finish();
             }
             catch (Exception ex)
             {
@@ -168,7 +170,11 @@ namespace ASEva.UIMonoMac
                 {
                     var newView = new TextView(callback, this) { Editable = false, Selectable = false, DrawsBackground = false, WantsLayer = true };
                     this.AddSubview(newView);
-                    textViews.Add(new TextViewContext(newView, textTasks[i]));
+                    textViews.Add(new TextViewContext
+                    {
+                        TextView = newView,
+                        Task = textTasks[i],
+                    });
                 }
                 else
                 {
@@ -179,20 +185,20 @@ namespace ASEva.UIMonoMac
                 var textView = target.TextView;
                 var task = target.Task;
 
-                var targetText = task.Text;
-                var targetFontName = String.IsNullOrEmpty(task.FontName) ? ".AppleSystemUIFont" : task.FontName;
-                var targetFontSize = (task.SizeScale <= 0 ? 1.0f : task.SizeScale) * 11;
+                var targetText = String.IsNullOrEmpty(task.text) ? "" : task.text;
+                var targetFontName = String.IsNullOrEmpty(task.fontName) ? ".AppleSystemUIFont" : task.fontName;
+                var targetFontSize = (task.sizeScale <= 0 ? 1.0f : task.sizeScale) * 11;
                 var colorCoef = 1.0 / 255;
 
                 textView.TextStorage.SetString(new NSAttributedString(targetText, new CTStringAttributes{ Font = new CTFont(targetFontName, targetFontSize) }));
-                textView.TextColor = NSColor.FromRgba(colorCoef * task.Red, colorCoef * task.Green, colorCoef * task.Blue, task.Alpha == 0 ? 1.0 : (colorCoef * task.Alpha));
+                textView.TextColor = NSColor.FromRgba(colorCoef * task.red, colorCoef * task.green, colorCoef * task.blue, task.alpha == 0 ? 1.0 : (colorCoef * task.alpha));
                 textView.TextContainer.ContainerSize = new CGSize(10000, 10000);
                 textView.LayoutManager.EnsureLayoutForTextContainer(textView.TextContainer);
                 var textSize = textView.LayoutManager.GetUsedRectForTextContainer(textView.TextContainer);
 
-                var posX = (double)task.PosX;
-                var posY = (double)task.PosY;
-                if (task.IsRealPos)
+                var posX = (double)task.posX;
+                var posY = (double)task.posY;
+                if (task.isRealPos)
                 {
                     posX /= size.RealPixelScale;
                     posY /= size.RealPixelScale;
@@ -202,7 +208,7 @@ namespace ASEva.UIMonoMac
                 var fullHeight = textSize.Height;
                 var halfWidth = textSize.Width / 2;
                 var halfHeight = textSize.Height / 2;
-                switch (task.Anchor)
+                switch (task.anchor)
                 {
                 case TextAnchor.TopLeft:
                     posY = size.LogicalHeight - posY - fullHeight;
@@ -338,10 +344,10 @@ namespace ASEva.UIMonoMac
             }
         }
 
-        private class TextViewContext(TextView textView, GLTextTask task)
+        private class TextViewContext
         {
-            public TextView TextView { get; set; } = textView;
-            public GLTextTask Task { get; set; } = task;
+            public TextView TextView { get; set; }
+            public GLTextTask Task { get; set; }
         }
 
         enum InitStatus
@@ -351,11 +357,11 @@ namespace ASEva.UIMonoMac
             InitFailed = 2,
         }
 
-        private OpenGL? gl;
-        private GLCallback callback;
+        private OpenGL gl = null;
+        private GLCallback callback = null;
         private InitStatus initStatus = InitStatus.NotInitialized;
-        private GLSizeInfo? size = null;
-        private List<TextViewContext> textViews = [];
+        private GLSizeInfo size = null;
+        private List<TextViewContext> textViews = new List<TextViewContext>();
         private bool drawQueued = false;
     }
 }

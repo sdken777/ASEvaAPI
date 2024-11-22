@@ -56,7 +56,7 @@ namespace ASEva.UICoreWF
             InitializeComponent();
         }
 
-        private void pictureBox1_Paint(object? sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             DrawBeat.CallbackBegin(pictureBox1, "ASEva.UICoreWF.TimelineIndicatorV");
 

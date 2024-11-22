@@ -24,8 +24,7 @@ namespace ASEva.UIWpf
             this.antialias = antialias;
             this.useLegacyAPI = useLegacyAPI;
 
-            if (globalGL == null) globalGL = OpenGL.Create(new WindowsFuncLoader());
-            gl = globalGL;
+            if (gl == null) gl = OpenGL.Create(new WindowsFuncLoader());
         }
 
         public void ReleaseGL()
@@ -52,14 +51,12 @@ namespace ASEva.UIWpf
             }
             if (!initOK.Value) return;
 
-            if (colorBuffer == null || depthBuffer == null || frameBuffer == null) return;
-
-            var moduleID = callback.OnGetModuleID();
+            var moduleID = callback == null ? null : callback.OnGetModuleID();
             DrawBeat.CallbackBegin(this, moduleID);
 
             var pixelScale = (float)PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice.M11;
             var curSize = new GLSizeInfo((int)ActualWidth, (int)ActualHeight, (int)(pixelScale * ActualWidth), (int)(pixelScale * ActualHeight), pixelScale, (float)(ActualWidth / ActualHeight), true);
-            bool resized = size == null || curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
+            bool resized = curSize.RealWidth != size.RealWidth || curSize.RealHeight != size.RealHeight;
             size = curSize;
 
             Win32.wglMakeCurrent(hdc, context);
@@ -126,18 +123,18 @@ namespace ASEva.UIWpf
 
                 foreach (var task in textTasks.Clear())
                 {
-                    if (String.IsNullOrEmpty(task.Text)) continue;
+                    if (String.IsNullOrEmpty(task.text)) continue;
 
-                    var fontName = String.IsNullOrEmpty(task.FontName) ? "Microsoft Yahei" : task.FontName;
-                    var fontSize = (task.SizeScale <= 0 ? 1.0f : task.SizeScale) * 11.0f;
+                    var fontName = String.IsNullOrEmpty(task.fontName) ? "Microsoft Yahei" : task.fontName;
+                    var fontSize = (task.sizeScale <= 0 ? 1.0f : task.sizeScale) * 11.0f;
 
-                    var brush = new SolidColorBrush(Color.FromArgb(task.Alpha == 0 ? (byte)255 : task.Alpha, task.Red, task.Green, task.Blue));
-                    var text = new FormattedText(task.Text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(fontName), fontSize, brush, 96);
+                    var brush = new SolidColorBrush(Color.FromArgb(task.alpha == 0 ? (byte)255 : task.alpha, task.red, task.green, task.blue));
+                    var text = new FormattedText(task.text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(fontName), fontSize, brush, 96);
                     var textSize = new Size((int)text.Width, (int)text.Height);
 
-                    int posX = task.PosX;
-                    int posY = task.PosY;
-                    if (task.IsRealPos)
+                    int posX = task.posX;
+                    int posY = task.posY;
+                    if (task.isRealPos)
                     {
                         posX = (int)((float)posX / size.RealPixelScale);
                         posY = (int)((float)posY / size.RealPixelScale);
@@ -147,7 +144,7 @@ namespace ASEva.UIWpf
                     int fullHeight = (int)textSize.Height;
                     int halfWidth = (int)(textSize.Width / 2);
                     int halfHeight = (int)(textSize.Height / 2);
-                    switch (task.Anchor)
+                    switch (task.anchor)
                     {
                         case TextAnchor.TopLeft:
                             break;
@@ -229,7 +226,12 @@ namespace ASEva.UIWpf
 
             try
             {
-                var ctxInfo = new GLContextInfo(gl.Version, gl.Vendor, gl.Renderer, String.IsNullOrEmpty(gl.Extensions) ? String.Join(' ', gl.ExtensionList) : gl.Extensions);
+                var ctxInfo = new GLContextInfo();
+                ctxInfo.version = gl.Version;
+                ctxInfo.vendor = gl.Vendor;
+                ctxInfo.renderer = gl.Renderer;
+                ctxInfo.extensions = gl.Extensions;
+                if (String.IsNullOrEmpty(ctxInfo.extensions)) ctxInfo.extensions = String.Join(' ', gl.ExtensionList);
 
                 var pixelScale = (float)PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice.M11;
                 size = new GLSizeInfo((int)ActualWidth, (int)ActualHeight, (int)(pixelScale * ActualWidth), (int)(pixelScale * ActualHeight), pixelScale, (float)(ActualWidth / ActualHeight), true);
@@ -381,7 +383,7 @@ namespace ASEva.UIWpf
 
                 if (!createContextAttribsARBUnsupported)
                 {
-                    var glCoreVersions = new[]
+                    var glCoreVersions = new Version[]
                     {
                         new Version(4, 6),
                         new Version(3, 3)
@@ -418,21 +420,20 @@ namespace ASEva.UIWpf
             return context != IntPtr.Zero;
         }
 
-        private GLCallback callback;
+        private GLCallback callback = null;
         private GLAntialias antialias;
         private bool useLegacyAPI;
         private bool? initOK = null;
         private IntPtr hwnd = IntPtr.Zero;
         private IntPtr hdc = IntPtr.Zero;
         private IntPtr context = IntPtr.Zero;
-        private uint[]? frameBuffer = null;
-        private uint[]? colorBuffer = null;
-        private uint[]? depthBuffer = null;
-        private byte[]? hostBuffer = null;
-        private GLSizeInfo? size = null;
-        private OpenGL gl;
+        private uint[] frameBuffer = null;
+        private uint[] colorBuffer = null;
+        private uint[] depthBuffer = null;
+        private byte[] hostBuffer = null;
+        private GLSizeInfo size = null;
 
-        private static OpenGL? globalGL = null;
+        private static OpenGL gl = null;
         private static bool createContextAttribsARBUnsupported = false;
     }
 }

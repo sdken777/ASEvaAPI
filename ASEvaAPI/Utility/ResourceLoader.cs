@@ -28,7 +28,7 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="name">资源名称</param>
         /// <returns>资源数据，若找不到资源则返回null</returns>
-        public static byte[]? Load(String name)
+        public static byte[] Load(String name)
         {
             var instream = Assembly.GetCallingAssembly().GetManifestResourceStream(name);
             if (instream == null) return null;
@@ -52,7 +52,7 @@ namespace ASEva.Utility
         /// </summary>
         /// <param name="name">资源名称</param>
         /// <returns>文本数据，若找不到资源则返回null</returns>
-        public static String? LoadText(String name)
+        public static String LoadText(String name)
         {
             var instream = Assembly.GetCallingAssembly().GetManifestResourceStream(name);
             if (instream == null) return null;

@@ -21,7 +21,7 @@ namespace ASEva.UIEto
             labelValue1.Font = App.DefaultFont(1.4f);
             labelValue2 = rowLayout.AddLabel("", TextAlignment.Left, false, 90);
             
-            MouseDown += delegate { click?.Set(); };
+            MouseDown += delegate { click.Set(); };
         }
         
         public int? GetFixedHeight()
@@ -42,7 +42,7 @@ namespace ASEva.UIEto
         {
             // 验证
             var mainTitle = data == null ? "" : data.Definition.MainTitle;
-            if (data == null || !(data is HistAndLineData histLineData) || !data.HasData())
+            if (data == null || !(data is HistAndLineData) || !data.HasData())
             {
                 labelTitle.Text = mainTitle;
                 labelSubTitle.Text = "";
@@ -53,6 +53,7 @@ namespace ASEva.UIEto
             }
 
             // 标题显示
+            var histLineData = data as HistAndLineData;
             var xTitle = histLineData.GetXTitle();
             var histTitle = histLineData.GetHistTitle();
             var lineTitle = histLineData.GetLineTitle();
@@ -63,16 +64,18 @@ namespace ASEva.UIEto
             var xValuesOrLabels = histLineData.GetXValuesOrLabels();
             var targetIndex = -1;
             var indexTitle = "";
-            if (xValuesOrLabels is HistLineXValues xValues)
+            if (xValuesOrLabels is HistLineXValues)
             {
+                var xValues = xValuesOrLabels as HistLineXValues;
                 targetIndex = curIndex / (withLine ? 2 : 1) % xValues.Count;
                 
                 var lower = xValues.Base + targetIndex * xValues.Step;
                 var upper = xValues.Base + (targetIndex + 1) * xValues.Step;
                 indexTitle = ((decimal)lower).ToString() + "~" + ((decimal)upper).ToString();
             }
-            else if (xValuesOrLabels is HistLineXLabels xLabels)
+            else // HistLineXLabels
             {
+                var xLabels = xValuesOrLabels as HistLineXLabels;
                 targetIndex = curIndex / (withLine ? 2 : 1) % xLabels.Labels.Length;
                 indexTitle = xLabels.Labels[targetIndex];
             }
@@ -95,8 +98,12 @@ namespace ASEva.UIEto
                 return;
             }
 
-            long[] src = [digits, digits + 1, digits - 1];
-            var dst = new String[3].Populate((i) => trimDigits(src[i]));
+            long[] src = new long[] { digits, digits + 1, digits - 1 };
+            String[] dst = new String[3];
+            for (int i = 0; i < 3; i++)
+            {
+                dst[i] = trimDigits(src[i]);
+            }
 
             String target = dst[0];
             if (dst[1].Length < target.Length) target = dst[1];
@@ -105,34 +112,35 @@ namespace ASEva.UIEto
 
             // 验证条件显示
             bool? vdResult = null;
-            if (data.Definition.Validation == null || !(xValuesOrLabels is HistLineXValues xValues2))
+            if (data.Definition.Validation == null || !(xValuesOrLabels is HistLineXValues))
             {
                 labelValidation.Text = "";
             }
             else
             {
                 var vd = data.Definition.Validation;
-                if (vd is ValueBelowValidation vbv)
+                var xValues = xValuesOrLabels as HistLineXValues;
+                if (vd is ValueBelowValidation && xValuesOrLabels is HistLineXValues)
                 {
-                    var threshold = vbv.GetThreshold();
+                    var threshold = (vd as ValueBelowValidation).GetThreshold();
                     labelValidation.Text = xTitle + " ≤ " + threshold;
-                    vdResult = xValues2.Base + (targetIndex + 1) * xValues2.Step <= threshold;
+                    vdResult = xValues.Base + (targetIndex + 1) * xValues.Step <= threshold;
                 }
-                else if (vd is ValueAboveValidation vav)
+                else if (vd is ValueAboveValidation && xValuesOrLabels is HistLineXValues)
                 {
-                    var threshold = vav.GetThreshold();
+                    var threshold = (vd as ValueAboveValidation).GetThreshold();
                     labelValidation.Text = xTitle + " ≥ " + threshold;
-                    vdResult = xValues2.Base + targetIndex * xValues2.Step >= threshold;
+                    vdResult = xValues.Base + targetIndex * xValues.Step >= threshold;
                 }
-                else if (vd is PolyBelowValidation pbv)
+                else if (vd is PolyBelowValidation && xValuesOrLabels is HistLineXValues)
                 {
-                    var thresholds = pbv.GetHistLineValuesThreshold(xValues2);
+                    var thresholds = (vd as PolyBelowValidation).GetHistLineValuesThreshold(xValues);
                     labelValidation.Text = "≤ " + thresholds[targetIndex];
                     vdResult = val <= thresholds[targetIndex];
                 }
-                else if (vd is PolyAboveValidation pav)
+                else if (vd is PolyAboveValidation && xValuesOrLabels is HistLineXValues)
                 {
-                    var thresholds = pav.GetHistLineValuesThreshold(xValues2);
+                    var thresholds = (vd as PolyAboveValidation).GetHistLineValuesThreshold(xValues);
                     labelValidation.Text = "≥ " + thresholds[targetIndex];
                     vdResult = val >= thresholds[targetIndex];
                 }
@@ -169,7 +177,7 @@ namespace ASEva.UIEto
         }
 
         private Label labelTitle, labelSubTitle, labelValue1, labelValue2, labelValidation;
-        private ManualResetEventSlim? click;
+        private ManualResetEventSlim click;
         private DateTime t0 = DateTime.Now;
     }
 }

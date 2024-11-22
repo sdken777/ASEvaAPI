@@ -43,7 +43,7 @@ namespace ASEva.UICoreWF
             }
 
             // Title display / 标题显示
-            label1.Text = Data.Definition.MainTitle;
+            label1.Text = Data == null ? "" : Data.Definition.MainTitle;
             if (!Data.HasData())
             {
                 label2.ForeColor = Color.Black;
@@ -53,12 +53,12 @@ namespace ASEva.UICoreWF
             else label2.Text = "";
         }
 
-        private void pictureBox1_Click(object? sender, EventArgs e)
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
             HandleGraphSelected();
         }
 
-        private void pictureBox1_Paint(object? sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             DrawBeat.CallbackBegin(pictureBox1, "ASEva.UICoreWF.LabelTableGraph");
 
@@ -76,7 +76,7 @@ namespace ASEva.UICoreWF
             DrawBeat.CallbackEnd(pictureBox1);
         }
 
-        private void pic_drawAxis(object? sender, PaintEventArgs e)
+        private void pic_drawAxis(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
 
@@ -94,12 +94,11 @@ namespace ASEva.UICoreWF
             g.DrawLine(blackPen, pointy1, pointy2);
             g.DrawLine(grayPen, new PointF(originPoint.X, originPoint.Y + margin), new PointF(width - 1, originPoint.Y + margin));
             g.DrawLine(grayPen, new PointF(originPoint.X - margin, originPoint.Y), new PointF(originPoint.X - margin, 0));
-
+            String xTitle = null;
+            String yTitle = null;
             var D = Data as LabelTableData;
-            if (D == null) return;
-
-            var xTitle = D.GetXTitle();
-            var yTitle = D.GetYTitle();
+            xTitle = D.GetXTitle();
+            yTitle = D.GetYTitle();
             var xTitleWidth = g.MeasureString(xTitle, font7f).Width;
             var yTitleWidth = g.MeasureString(yTitle, font7f).Width;
             PointF xTitlePoint = new PointF((width + originPoint.X - xTitleWidth) / 2, originPoint.Y);
@@ -112,16 +111,13 @@ namespace ASEva.UICoreWF
             g.DrawLine(blackPen, new PointF(originPoint.X, 0), new PointF(originPoint.X - 2, 0));
         }
 
-        private void pic_drawBarGraph(object? sender, PaintEventArgs e)
+        private void pic_drawBarGraph(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             var width = pictureBox1.Width;
             var height = pictureBox1.Height;
             PointF originPoint = new PointF((float)width / 4, (float)height / 3 * 2);
-
             var D = Data as LabelTableData;
-            if (D == null) return;
-
             var xLabels = D.GetXLabels();
             var yLabels = D.GetYLabels();
             var margin = 15.0f * DeviceDpi / 96;
@@ -162,15 +158,12 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private void pic_drawHeatMap(object? sender, PaintEventArgs e)
+        private void pic_drawHeatMap(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
             var width = pictureBox1.Width;
             var height = pictureBox1.Height;
-
             var D = Data as LabelTableData;
-            if (D == null) return;
-
             var values = D.GetValues();
             var xrange = values.GetLength(0);
             var yrange = values.GetLength(1);
@@ -226,7 +219,7 @@ namespace ASEva.UICoreWF
             }
         }
 
-        private void pic_drawGuide(object? sender, PaintEventArgs e)
+        private void pic_drawGuide(object sender, PaintEventArgs e)
         {
             if (!mouseInControl()) return;
 
@@ -234,11 +227,9 @@ namespace ASEva.UICoreWF
 
             Pen crossPen = new Pen(Color.FromArgb(255, 65, 140, 240), 1);
             crossPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;
-            crossPen.DashPattern = [1f, 1f];
+            crossPen.DashPattern = new float[] { 1f, 1f };
 
             var D = Data as LabelTableData;
-            if (D == null) return;
-
             Point curPoint = pictureBox1.PointToClient(System.Windows.Forms.Cursor.Position);
             var width = pictureBox1.Width;
             var height = pictureBox1.Height;
@@ -281,7 +272,7 @@ namespace ASEva.UICoreWF
                 }
             }
         }
-        private void pic_drawAnnotation(object? sender, PaintEventArgs e)
+        private void pic_drawAnnotation(object sender, PaintEventArgs e)
         {
             if (!mouseInControl()) return;
 
@@ -291,10 +282,7 @@ namespace ASEva.UICoreWF
             var width = pictureBox1.Width;
             var height = pictureBox1.Height;
             PointF originPoint = new PointF((float)width / 4, (float)height / 3 * 2);
-
             var D = Data as LabelTableData;
-            if (D == null) return;
-
             var xLabels = D.GetXLabels();
             var yLabels = D.GetYLabels();
             var intervalX = (width - originPoint.X) / xLabels.Length;
@@ -359,26 +347,25 @@ namespace ASEva.UICoreWF
         private Color getColorByValue(double upper, double lower, double value)
         {
             Color color = new Color();
-            Color[] colors =
-            [
-                Color.FromArgb(64, 192, 32),
-                Color.FromArgb(72, 184, 32),
-                Color.FromArgb(80, 176, 32),
-                Color.FromArgb(88, 168, 32),
-                Color.FromArgb(96, 160, 32),
-                Color.FromArgb(104, 152, 32),
-                Color.FromArgb(112, 144, 32),
-                Color.FromArgb(120, 136, 32),
-                Color.FromArgb(128, 128, 32),
-                Color.FromArgb(136, 120, 32),
-                Color.FromArgb(144, 112, 32),
-                Color.FromArgb(152, 104, 32),
-                Color.FromArgb(160, 96, 32),
-                Color.FromArgb(168, 88, 32),
-                Color.FromArgb(176, 80, 32),
-                Color.FromArgb(184, 72, 32),
-                Color.FromArgb(192, 64, 32),
-            ];
+            Color[] colors = new Color[17];
+            colors[0] = Color.FromArgb(64, 192, 32);
+            colors[1] = Color.FromArgb(72, 184, 32);
+            colors[2] = Color.FromArgb(80, 176, 32);
+            colors[3] = Color.FromArgb(88, 168, 32);
+            colors[4] = Color.FromArgb(96, 160, 32);
+            colors[5] = Color.FromArgb(104, 152, 32);
+            colors[6] = Color.FromArgb(112, 144, 32);
+            colors[7] = Color.FromArgb(120, 136, 32);
+            colors[8] = Color.FromArgb(128, 128, 32);
+            colors[9] = Color.FromArgb(136, 120, 32);
+            colors[10] = Color.FromArgb(144, 112, 32);
+            colors[11] = Color.FromArgb(152, 104, 32);
+            colors[12] = Color.FromArgb(160, 96, 32);
+            colors[13] = Color.FromArgb(168, 88, 32);
+            colors[14] = Color.FromArgb(176, 80, 32);
+            colors[15] = Color.FromArgb(184, 72, 32);
+            colors[16] = Color.FromArgb(192, 64, 32);
+
             if (value <= lower)
             {
                 color =  colors[0];

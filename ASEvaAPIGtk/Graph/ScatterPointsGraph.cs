@@ -20,32 +20,32 @@ namespace ASEva.UIGtk
     /// </summary>
     public class ScatterPointsGraph : BaseGraph
     {
-        [UI] Label? labelTitle, labelValidation;
-        [UI] Overlay? overlay;
-        [UI] DrawingArea? draw;
-        [UI] EventBox? eventBox;
+        [UI] Label labelTitle, labelValidation;
+        [UI] Overlay overlay;
+        [UI] DrawingArea draw;
+        [UI] EventBox eventBox;
 
         EventBoxHelper eventBoxHelper = new EventBoxHelper();
-        DrawSwap? drawSwap = null;
+        DrawSwap drawSwap;
         bool chinese = false;
 
         public ScatterPointsGraph() : this(new Builder("ScatterPointsGraph.glade"))
-        {}
-
-        private ScatterPointsGraph(Builder builder) : base(builder.GetRawOwnedObject("ScatterPointsGraph"))
         {
-            builder.Autoconnect(this);
-
             this.SetBackColor(ColorRGBA.White);
 
-            overlay?.AddOverlay(labelValidation);
-            if (eventBox != null) eventBoxHelper.Add(eventBox);
-            if (draw != null) drawSwap = new DrawSwap(draw, "ASEva.UIGtk.ScatterPointsGraph");
+            overlay.AddOverlay(labelValidation);
+            eventBoxHelper.Add(eventBox);
+            drawSwap = new DrawSwap(draw, "ASEva.UIGtk.ScatterPointsGraph");
 
             chinese = AgencyLocal.GetAppLanguage() == Language.Chinese;
 
             eventBoxHelper.LeftDown += eventBox_LeftDown;
-            if (drawSwap != null) drawSwap.Paint += draw_Paint;
+            drawSwap.Paint += draw_Paint;
+        }
+
+        private ScatterPointsGraph(Builder builder) : base(builder.GetRawOwnedObject("ScatterPointsGraph"))
+        {
+            builder.Autoconnect(this);
         }
 
         /// \~English
@@ -58,7 +58,7 @@ namespace ASEva.UIGtk
         /// </summary>
         public override void Close()
 		{
-			drawSwap?.Close();
+			drawSwap.Close();
 		}
 
         public override void UpdateUIWithData()
@@ -66,40 +66,34 @@ namespace ASEva.UIGtk
             if (Data == null || !(Data is ScatterPointsData)) return;
 
             // 数据和验证条件显示
-            drawSwap?.Refresh();
+            drawSwap.Refresh();
 
             // 标题显示
-            if (labelTitle != null) labelTitle.Text = Data.Definition.MainTitle;
+            labelTitle.Text = Data == null ? "" : Data.Definition.MainTitle;
             if (!Data.HasData())
             {
-                if (labelValidation != null)
-                {
-                    labelValidation.SetForeColor(ColorRGBA.Black);
-                    labelValidation.Text = "No Data.";
-                }
+                labelValidation.SetForeColor(ColorRGBA.Black);
+                labelValidation.Text = "No Data.";
                 return;
             }
 
             // 验证结果显示
-            if (labelValidation != null)
+            double? percentage = null;
+            var vdResult = Data.Validate(out percentage);
+            if (vdResult == null)
             {
-                double? percentage = null;
-                var vdResult = Data.Validate(out percentage);
-                if (vdResult == null)
-                {
-                    labelValidation.SetForeColor(ColorRGBA.Black);
-                    labelValidation.Text = percentage == null ? "" : (getPercentageText(percentage.Value) + "% OK");
-                }
-                else if (vdResult.Value)
-                {
-                    labelValidation.SetForeColor(ColorRGBA.Green);
-                    labelValidation.Text = percentage == null ? "OK" : (getPercentageText(percentage.Value) + "% OK");
-                }
-                else
-                {
-                    labelValidation.SetForeColor(ColorRGBA.Red);
-                    labelValidation.Text = percentage == null ? "NG" : (getPercentageText(percentage.Value) + "% OK");
-                }
+                labelValidation.SetForeColor(ColorRGBA.Black);
+                labelValidation.Text = percentage == null ? "" : (getPercentageText(percentage.Value) + "% OK");
+            }
+            else if (vdResult.Value)
+            {
+                labelValidation.SetForeColor(ColorRGBA.Green);
+                labelValidation.Text = percentage == null ? "OK" : (getPercentageText(percentage.Value) + "% OK");
+            }
+            else
+            {
+                labelValidation.SetForeColor(ColorRGBA.Red);
+                labelValidation.Text = percentage == null ? "NG" : (getPercentageText(percentage.Value) + "% OK");
             }
         }
 
@@ -115,9 +109,6 @@ namespace ASEva.UIGtk
 
         private void draw_Paint(DrawSwap swap, Cairo.Context cc)
         {
-            var D = Data as ScatterPointsData;
-            if (D == null || draw == null) return;
-
             try
             {
                 cc.LineWidth = 1;
@@ -129,6 +120,7 @@ namespace ASEva.UIGtk
                 var height = draw.AllocatedHeight - 2;
                 var originPoint = new FloatPoint((float)width / 4, (float)height / 3 * 2);
 
+                var D = Data as ScatterPointsData;
                 var points = D.GetPoints();
                 var xRange = D.GetXRange();
                 var yRange = D.GetYRange();
@@ -270,19 +262,21 @@ namespace ASEva.UIGtk
                 cc.Rotate(-0.5 * Math.PI);
                 
                 // 验证框
-                if (D.Definition.Validation != null)
+                if (Data.Definition.Validation != null)
                 {
                     ColorRGBA color = ColorRGBA.Black;
-                    FloatPoint[]? genericOutline = null;
-                    if (D.Definition.Validation is OutlineInsideValidation oiv)
+                    FloatPoint[] genericOutline = null;
+                    if (Data.Definition.Validation is OutlineInsideValidation)
                     {
+                        var vd = Data.Definition.Validation as OutlineInsideValidation;
                         color = ColorRGBA.LimeGreen;
-                        genericOutline = oiv.GetOutline();
+                        genericOutline = vd.GetOutline();
                     }
-                    else if (D.Definition.Validation is OutlineOutsideValidation oov)
+                    else if (Data.Definition.Validation is OutlineOutsideValidation)
                     {
+                        var vd = Data.Definition.Validation as OutlineOutsideValidation;
                         color = ColorRGBA.Red;
-                        genericOutline = oov.GetOutline();
+                        genericOutline = vd.GetOutline();
                     }
 
                     if (genericOutline != null)
@@ -373,7 +367,7 @@ namespace ASEva.UIGtk
                             cc.ShowText(secondText);
                         }
 
-                        cc.SetDash([1, 1], 0);
+                        cc.SetDash(new double[] {1, 1}, 0);
                         cc.SetSourceColor(ColorRGBA.DodgerBlue);
 
                         cc.DrawLine(originPoint.X, mouse.Y, width - 1, mouse.Y);

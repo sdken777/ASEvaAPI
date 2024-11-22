@@ -31,7 +31,7 @@ namespace ASEva.UICoreWF
         /// <summary>
         /// 图表数据
         /// </summary>
-        public GraphData? Data { get; set; }
+        public GraphData Data { get; set; }
 
         /// \~English
         /// <summary>
@@ -41,7 +41,7 @@ namespace ASEva.UICoreWF
         /// <summary>
         /// 图表控件被选择事件
         /// </summary>
-        public event EventHandler? GraphSelected;
+        public event EventHandler GraphSelected;
 
         /// \~English
         /// <summary>
@@ -115,20 +115,20 @@ namespace ASEva.UICoreWF
         /// <param name="definition">图表定义</param>
         /// <param name="scale">控件大小，1为最小，8为最大</param>
         /// <returns>新创建的图表控件</returns>
-        public static BaseGraph? CreateGraphControl(GraphDefinition definition, int scale)
+        public static BaseGraph CreateGraphControl(GraphDefinition definition, int scale)
         {
             var defID = definition.GetID();
             if (ControlTypeTable.ContainsKey(defID))
             {
                 var controlType = ControlTypeTable[defID];
-                var graph = (BaseGraph?)controlType.Assembly.CreateInstance(controlType.ToString());
+                var graph = (BaseGraph)controlType.Assembly.CreateInstance(controlType.ToString());
                 if (graph != null)
                 {
                     graph.SetSize(scale);
                     return graph;
                 }
             }
-            BaseGraph? defaultGraph = null;
+            BaseGraph defaultGraph = null;
             switch (definition.Type)
             {
                 case GraphType.SingleValue:
@@ -168,7 +168,7 @@ namespace ASEva.UICoreWF
         /// <param name="controlType">控件类型，必须为 ASEva.UICoreWF.BaseGraph 的子类</param>
         public static void RegisterGraphControl(int graphDefinitionID, Type controlType)
         {
-            ControlTypeTable[graphDefinitionID] = controlType;
+            if (controlType != null) ControlTypeTable[graphDefinitionID] = controlType;
         }
 
         /// \~English
@@ -204,7 +204,7 @@ namespace ASEva.UICoreWF
         protected void HandleGraphSelected()
         {
             if (clickEvent != null) clickEvent.Set();
-            GraphSelected?.Invoke(this, EventArgs.Empty);
+            if (GraphSelected != null) GraphSelected(this, null);
         }
 
         public void UpdateWithGraphData(GraphData data)
@@ -228,7 +228,7 @@ namespace ASEva.UICoreWF
             clickEvent = ev;
         }
 
-        private ManualResetEventSlim? clickEvent;
+        private ManualResetEventSlim clickEvent;
 
         private static Dictionary<int, Type> ControlTypeTable = new Dictionary<int, Type>();
     }

@@ -17,9 +17,9 @@ namespace ASEva.UIWpf
 	#pragma warning disable SYSLIB0003
     class MessageBoxHandler : WidgetHandler<Widget>, MessageBox.IHandler
 	{
-		public string? Text { get; set; }
+		public string Text { get; set; }
 
-		public string? Caption { get; set; }
+		public string Caption { get; set; }
 
 		public MessageBoxType Type { get; set; }
 
@@ -129,7 +129,7 @@ namespace ASEva.UIWpf
 			}
 		}
 
-		static T? GetVisualParent<T>(sw.DependencyObject control)
+		static T GetVisualParent<T>(sw.DependencyObject control)
 			where T : class
 		{
 			var ce = control as sw.ContentElement;
@@ -206,7 +206,7 @@ namespace ASEva.UIWpf
 					// Pull manifest from the .NET Framework install
 					// directory
 
-					string? assemblyLoc = null;
+					string assemblyLoc = null;
 
 					FileIOPermission fiop = new FileIOPermission(PermissionState.None);
 					fiop.AllFiles = FileIOPermissionAccess.PathDiscovery;
@@ -220,13 +220,13 @@ namespace ASEva.UIWpf
 						CodeAccessPermission.RevertAssert();
 					}
 
-					string? manifestLoc = null;
-					string? installDir = null;
+					string manifestLoc = null;
+					string installDir = null;
 					if (assemblyLoc != null)
 					{
 						installDir = Path.GetDirectoryName(assemblyLoc);
 						const string manifestName = "XPThemes.manifest";
-						if (installDir != null) manifestLoc = Path.Combine(installDir, manifestName);
+						manifestLoc = Path.Combine(installDir, manifestName);
 					}
 
 					if (manifestLoc != null && installDir != null)

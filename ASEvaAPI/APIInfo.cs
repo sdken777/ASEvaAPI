@@ -12,8 +12,8 @@
  * \~English In addition, refer to ASEva.Samples for the definition of samples used in plugin, and ASEva.Graph for graph report definitions. \n\n
  * \~Chinese 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph 。 \n\n
  *
- * \~English This document corresponds to API version: 3.7.3 \n
- * \~Chinese 本文档对应API版本：3.7.3
+ * \~English This document corresponds to API version: 3.6.0 \n
+ * \~Chinese 本文档对应API版本：3.6.0
  */
 
 using System;
@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 namespace ASEva
 {
     /// <summary>
-    /// version=3.7.3
+    /// version=3.6.0
     /// </summary>
     public class APIInfo
     {
@@ -38,19 +38,19 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 7, 3, 1); // Update log / 更新记录: 修正class字段名
+            return new Version(3, 6, 0, 0); // Update log / 更新记录: 添加Dump
         }
 
         /// \~English
         /// <summary>
         /// (api:app=3.0.0) Get the currently running OS code
         /// </summary>
-        /// <returns>OS code, "unknown" if not recognized</returns>
+        /// <returns>OS code, null if not recognized</returns>
         /// \~Chinese
         /// <summary>
         /// (api:app=3.0.0) 返回当前运行的OS代号
         /// </summary>
-        /// <returns>OS代号，若无法识别返回"unknown"</returns>
+        /// <returns>OS代号，若无法识别返回null</returns>
         public static String GetRunningOS()
         {
             if (osCode == null)
@@ -86,6 +86,6 @@ namespace ASEva
             return osCode;
         }
 
-        private static String? osCode = null;
+        private static String osCode = null;
     }
 }

@@ -35,7 +35,7 @@ namespace ASEva.UIMonoMac
 
 		public class EtoLinkLabel : EtoLabel
 		{
-			new LinkButtonHandler? Handler { get { return base.Handler as LinkButtonHandler; } set { base.Handler = value; } }
+			new LinkButtonHandler Handler { get { return (LinkButtonHandler)base.Handler; } set { base.Handler = value; } }
 
 			public override bool AcceptsFirstResponder()
 			{
@@ -74,12 +74,12 @@ namespace ASEva.UIMonoMac
 			Font = NormalFont;
 		}
 
-		public override Cursor? CurrentCursor
+		public override Cursor CurrentCursor
 		{
 			get { return Enabled ? Cursor : null; }
 		}
 
-		protected override NSColor? CurrentColor
+		protected override NSColor CurrentColor
 		{
 			get { return Enabled ? base.CurrentColor : DisabledTextColor.ToNSUI(); }
 		}
@@ -106,12 +106,12 @@ namespace ASEva.UIMonoMac
 			base.Font = new Font(Font.Typeface, Font.Size, FontDecoration.Underline);
 		}
 
-		void HandleMouseLeave(object? sender, MouseEventArgs e)
+		void HandleMouseLeave(object sender, MouseEventArgs e)
 		{
 			Font = NormalFont;
 		}
 
-		void HandleMouseEnter(object? sender, MouseEventArgs e)
+		void HandleMouseEnter(object sender, MouseEventArgs e)
 		{
 			if (Enabled && HoverFont != null)
 				Font = HoverFont;

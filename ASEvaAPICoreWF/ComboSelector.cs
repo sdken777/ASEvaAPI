@@ -50,17 +50,17 @@ namespace ASEva.UICoreWF
 
         public bool CanBeDisabled { get; set; }
 
-        public String? Protocol { get; set; }
+        public String Protocol { get; set; }
 
         public int ChannelCount { get; set; }
 
-        public event EventHandler? SelectedChannelChanged;
+        public event EventHandler SelectedChannelChanged;
 
-        private void comboBox1_SelectedIndexChanged(object? sender, EventArgs e)
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (CanBeDisabled) SelectedChannel = comboBox1.SelectedIndex - 1;
             else SelectedChannel = comboBox1.SelectedIndex;
-            SelectedChannelChanged?.Invoke(this, e);
+            if (SelectedChannelChanged != null) SelectedChannelChanged(this, e);
         }
     }
 }

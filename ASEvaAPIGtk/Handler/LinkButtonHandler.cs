@@ -44,17 +44,16 @@ namespace ASEva.UIGtk
 			set { Control.Text = value; }
 		}
 
-		public override Font? Font
+		public override Font Font
 		{
 			get { return font; }
 			set
 			{
 				font = value;
-				var description = value?.ControlObject as Pango.FontDescription;
-				if (description != null) Control.SetFont(description);
+				Control.SetFont(value.ControlObject as Pango.FontDescription);
 			}
 		}
-		private Font? font;
+		private Font font;
 
 		public override void AttachEvent(string id)
 		{
@@ -80,7 +79,7 @@ namespace ASEva.UIGtk
 		{
 			public new LinkButtonHandler Handler { get { return (LinkButtonHandler)base.Handler; } }
 
-			public void HandleClicked(object? sender, EventArgs e)
+			public void HandleClicked(object sender, EventArgs e)
 			{
 				Handler?.Callback.OnClick(Handler.Widget, EventArgs.Empty);
 			}
