@@ -54,6 +54,7 @@
             "linux": {
                 "env": {
                     "GDK_BACKEND": "${input:gdk_backend}",
+                    "COMPlus_EnableAlternateStackCheck": "1",
                 }
             },
         },

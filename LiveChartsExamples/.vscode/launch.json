@@ -27,7 +27,7 @@
             "stopAtEntry": false,
             "linux": {
                 "env": {
-                    "GDK_BACKEND": "x11",
+                    "COMPlus_EnableAlternateStackCheck": "1",
                 }
             },
         },
@@ -42,7 +42,7 @@
             "stopAtEntry": false,
             "linux": {
                 "env": {
-                    "GDK_BACKEND": "x11",
+                    "COMPlus_EnableAlternateStackCheck": "1",
                 }
             },
         },
