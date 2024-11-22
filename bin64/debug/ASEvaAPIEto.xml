@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=3.3.0
+            version=3.3.2
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -3362,14 +3362,24 @@
         <member name="T:ASEva.UIEto.GLTextTask">
             \~English
             <summary>
-            (api:eto=3.0.0) OpenGL text drawing task
+            (api:eto=3.3.2) OpenGL text drawing task
             </summary>
             \~Chinese
             <summary>
-            (api:eto=3.0.0) OpenGL文本绘制任务
+            (api:eto=3.3.2) OpenGL文本绘制任务
             </summary>
         </member>
-        <member name="F:ASEva.UIEto.GLTextTask.text">
+        <member name="M:ASEva.UIEto.GLTextTask.#ctor(System.String)">
+            \~English
+            <summary>
+            (api:eto=3.3.2) OpenGL text drawing task
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.3.2) OpenGL文本绘制任务
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLTextTask.Text">
             \~English
             <summary>
             Text
@@ -3379,7 +3389,7 @@
             文本
             </summary>
         </member>
-        <member name="F:ASEva.UIEto.GLTextTask.posX">
+        <member name="P:ASEva.UIEto.GLTextTask.PosX">
             \~English
             <summary>
             X-coordinate of anchor point
@@ -3389,7 +3399,7 @@
             文本锚点X轴坐标
             </summary>
         </member>
-        <member name="F:ASEva.UIEto.GLTextTask.posY">
+        <member name="P:ASEva.UIEto.GLTextTask.PosY">
             \~English
             <summary>
             Y-coordinate of anchor point
@@ -3399,7 +3409,7 @@
             文本锚点Y轴坐标
             </summary>
         </member>
-        <member name="F:ASEva.UIEto.GLTextTask.isRealPos">
+        <member name="P:ASEva.UIEto.GLTextTask.IsRealPos">
             \~English
             <summary>
             Whether the coordination of anchor point is in physical pixels, or else logical units
@@ -3409,7 +3419,7 @@
             文本锚点坐标是否为物理像素坐标系，否则为逻辑坐标
             </summary>
         </member>
-        <member name="F:ASEva.UIEto.GLTextTask.anchor">
+        <member name="P:ASEva.UIEto.GLTextTask.Anchor">
             \~English
             <summary>
             Anchor point's type
@@ -3419,7 +3429,7 @@
             文本锚点坐标位置类型
             </summary>
         </member>
-        <member name="F:ASEva.UIEto.GLTextTask.red">
+        <member name="P:ASEva.UIEto.GLTextTask.Red">
             \~English
             <summary>
             Red component of text color
@@ -3429,7 +3439,7 @@
             文本绘制颜色红色分量
             </summary>
         </member>
-        <member name="F:ASEva.UIEto.GLTextTask.green">
+        <member name="P:ASEva.UIEto.GLTextTask.Green">
             \~English
             <summary>
             Green component of text color
@@ -3439,7 +3449,7 @@
             文本绘制颜色绿色分量
             </summary>
         </member>
-        <member name="F:ASEva.UIEto.GLTextTask.blue">
+        <member name="P:ASEva.UIEto.GLTextTask.Blue">
             \~English
             <summary>
             Blue component of text color
@@ -3449,7 +3459,7 @@
             文本绘制颜色蓝色分量
             </summary>
         </member>
-        <member name="F:ASEva.UIEto.GLTextTask.alpha">
+        <member name="P:ASEva.UIEto.GLTextTask.Alpha">
             \~English
             <summary>
             Alpha component of text color, 0 as 255
@@ -3459,7 +3469,7 @@
             文本绘制颜色Alpha通道分量，0将被视为255
             </summary>
         </member>
-        <member name="F:ASEva.UIEto.GLTextTask.fontName">
+        <member name="P:ASEva.UIEto.GLTextTask.FontName">
             \~English
             <summary>
             Font name, null as default font
@@ -3469,7 +3479,7 @@
             文本字体，空则使用默认字体
             </summary>
         </member>
-        <member name="F:ASEva.UIEto.GLTextTask.sizeScale">
+        <member name="P:ASEva.UIEto.GLTextTask.SizeScale">
             \~English
             <summary>
             Ratio to the default size, 0 as 1
@@ -3482,11 +3492,11 @@
         <member name="T:ASEva.UIEto.GLTextTasks">
             \~English
             <summary>
-            (api:eto=3.0.0) OpenGL text drawing task list
+            (api:eto=3.3.2) OpenGL text drawing task list
             </summary>
             \~Chinese
             <summary>
-            (api:eto=3.0.0) OpenGL文本绘制任务对象
+            (api:eto=3.3.2) OpenGL文本绘制任务对象
             </summary>
         </member>
         <member name="M:ASEva.UIEto.GLTextTasks.Add(System.String,System.Int32,System.Int32,System.Byte,System.Byte,System.Byte,System.Single)">
@@ -3652,11 +3662,11 @@
         <member name="T:ASEva.UIEto.GLRenderEventArgs">
             \~English
             <summary>
-            (api:eto=3.0.0) GLView render event argument
+            (api:eto=3.3.2) GLView render event argument
             </summary>
             \~Chinese
             <summary>
-            (api:eto=3.0.0) GLView渲染事件参数
+            (api:eto=3.3.2) GLView渲染事件参数
             </summary>
         </member>
         <member name="P:ASEva.UIEto.GLRenderEventArgs.TextTasks">
@@ -3672,14 +3682,24 @@
         <member name="T:ASEva.UIEto.GLContextInfo">
             \~English
             <summary>
-            (api:eto=3.0.0) OpenGL context info
+            (api:eto=3.3.2) OpenGL context info
             </summary>
             \~Chinese
             <summary>
-            (api:eto=3.0.0) OpenGL上下文信息
+            (api:eto=3.3.2) OpenGL上下文信息
             </summary>
         </member>
-        <member name="F:ASEva.UIEto.GLContextInfo.version">
+        <member name="M:ASEva.UIEto.GLContextInfo.#ctor(System.String,System.String,System.String,System.String)">
+            \~English
+            <summary>
+            (api:eto=3.3.2) OpenGL context info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.3.2) OpenGL上下文信息
+            </summary>
+        </member>
+        <member name="P:ASEva.UIEto.GLContextInfo.Version">
             \~English
             <summary>
             OpenGL version
@@ -3689,7 +3709,7 @@
             OpenGL版本
             </summary>
         </member>
-        <member name="F:ASEva.UIEto.GLContextInfo.vendor">
+        <member name="P:ASEva.UIEto.GLContextInfo.Vendor">
             \~English
             <summary>
             Vendor
@@ -3699,7 +3719,7 @@
             厂商
             </summary>
         </member>
-        <member name="F:ASEva.UIEto.GLContextInfo.renderer">
+        <member name="P:ASEva.UIEto.GLContextInfo.Renderer">
             \~English
             <summary>
             Renderer
@@ -3709,7 +3729,7 @@
             渲染器
             </summary>
         </member>
-        <member name="F:ASEva.UIEto.GLContextInfo.extensions">
+        <member name="P:ASEva.UIEto.GLContextInfo.Extensions">
             \~English
             <summary>
             Extension list
@@ -3914,11 +3934,11 @@
         <member name="P:ASEva.UIEto.GLView.ContextInfo">
             \~English
             <summary>
-            Context info (null if not initialized yet)
+            (api:eto=3.3.2) Context info (null if not initialized yet)
             </summary>
             \~Chinese
             <summary>
-            上下文信息 (null表示还未初始化完成)
+            (api:eto=3.3.2) 上下文信息 (null表示还未初始化完成)
             </summary>
         </member>
         <member name="P:ASEva.UIEto.GLView.FPS">

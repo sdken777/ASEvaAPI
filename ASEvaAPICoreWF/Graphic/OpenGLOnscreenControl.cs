@@ -122,12 +122,7 @@ namespace ASEva.UICoreWF
 
             try
             {
-                var ctxInfo = new GLContextInfo();
-                ctxInfo.version = gl.Version;
-                ctxInfo.vendor = gl.Vendor;
-                ctxInfo.renderer = gl.Renderer;
-                ctxInfo.extensions = gl.Extensions;
-                if (String.IsNullOrEmpty(ctxInfo.extensions)) ctxInfo.extensions = String.Join(' ', gl.ExtensionList);
+                var ctxInfo = new GLContextInfo(gl.Version, gl.Vendor, gl.Renderer, String.IsNullOrEmpty(gl.Extensions) ? String.Join(' ', gl.ExtensionList) : gl.Extensions);
 
                 supportSwapInterval = gl.ExtensionList.Contains("WGL_EXT_swap_control");
 

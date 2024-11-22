@@ -146,17 +146,17 @@ namespace ASEva.UICoreWF
 
                 foreach (var task in textTasks.Clear())
                 {
-                    if (String.IsNullOrEmpty(task.text)) continue;
+                    if (String.IsNullOrEmpty(task.Text)) continue;
 
-                    var fontName = String.IsNullOrEmpty(task.fontName) ? "Microsoft Yahei" : task.fontName;
-                    var fontSize = (task.sizeScale <= 0 ? 1.0f : task.sizeScale) * 9.0f;
+                    var fontName = String.IsNullOrEmpty(task.FontName) ? "Microsoft Yahei" : task.FontName;
+                    var fontSize = (task.SizeScale <= 0 ? 1.0f : task.SizeScale) * 9.0f;
                     var font = new Font(fontName, fontSize);
 
-                    var textSize = e.Graphics.MeasureString(task.text, font);
+                    var textSize = e.Graphics.MeasureString(task.Text, font);
 
-                    int posX = task.posX;
-                    int posY = task.posY;
-                    if (!task.isRealPos)
+                    int posX = task.PosX;
+                    int posY = task.PosY;
+                    if (!task.IsRealPos)
                     {
                         posX = (int)(size.RealPixelScale * posX);
                         posY = (int)(size.RealPixelScale * posY);
@@ -166,7 +166,7 @@ namespace ASEva.UICoreWF
                     int fullHeight = (int)textSize.Height;
                     int halfWidth = (int)(textSize.Width / 2);
                     int halfHeight = (int)(textSize.Height / 2);
-                    switch (task.anchor)
+                    switch (task.Anchor)
                     {
                         case TextAnchor.TopLeft:
                             break;
@@ -202,9 +202,9 @@ namespace ASEva.UICoreWF
                             break;
                     }
 
-                    var brush = new SolidBrush(Color.FromArgb(task.alpha == 0 ? (byte)255 : task.alpha, task.red, task.green, task.blue));
+                    var brush = new SolidBrush(Color.FromArgb(task.Alpha == 0 ? (byte)255 : task.Alpha, task.Red, task.Green, task.Blue));
 
-                    e.Graphics.DrawString(task.text, font, brush, posX, posY);
+                    e.Graphics.DrawString(task.Text, font, brush, posX, posY);
                 }
             }
             catch (Exception ex)
@@ -268,12 +268,7 @@ namespace ASEva.UICoreWF
 
             try
             {
-                var ctxInfo = new GLContextInfo();
-                ctxInfo.version = gl.Version;
-                ctxInfo.vendor = gl.Vendor;
-                ctxInfo.renderer = gl.Renderer;
-                ctxInfo.extensions = gl.Extensions;
-                if (String.IsNullOrEmpty(ctxInfo.extensions)) ctxInfo.extensions = String.Join(' ', gl.ExtensionList);
+                var ctxInfo = new GLContextInfo(gl.Version, gl.Vendor, gl.Renderer, String.IsNullOrEmpty(gl.Extensions) ? String.Join(' ', gl.ExtensionList) : gl.Extensions);
 
                 var pixelScale = (float)DeviceDpi / 96;
                 size = new GLSizeInfo((int)(Width / pixelScale), (int)(Height / pixelScale), Width, Height, pixelScale, (float)Width / Height);

@@ -226,15 +226,10 @@ namespace ASEva.UIWpf
 
             try
             {
-                var ctxInfo = new GLContextInfo();
-                ctxInfo.version = gl.Version;
-                ctxInfo.vendor = gl.Vendor;
-                ctxInfo.renderer = gl.Renderer;
-                ctxInfo.extensions = gl.Extensions;
-                if (String.IsNullOrEmpty(ctxInfo.extensions)) ctxInfo.extensions = String.Join(' ', gl.ExtensionList);
+                var ctxInfo = new GLContextInfo(gl.Version, gl.Vendor, gl.Renderer, String.IsNullOrEmpty(gl.Extensions) ? String.Join(' ', gl.ExtensionList) : gl.Extensions);
 
-                if (!ctxInfo.extensions.Contains("GL_EXT_framebuffer_object") ||
-                    !ctxInfo.extensions.Contains("GL_EXT_framebuffer_blit") ||
+                if (!ctxInfo.Extensions.Contains("GL_EXT_framebuffer_object") ||
+                    !ctxInfo.Extensions.Contains("GL_EXT_framebuffer_blit") ||
                     !gl.IsFunctionSupported("wglDXCloseDeviceNV"))
                 {
                     onDestroy();

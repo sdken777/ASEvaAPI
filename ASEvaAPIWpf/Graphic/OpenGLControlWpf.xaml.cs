@@ -126,18 +126,18 @@ namespace ASEva.UIWpf
 
                 foreach (var task in textTasks.Clear())
                 {
-                    if (String.IsNullOrEmpty(task.text)) continue;
+                    if (String.IsNullOrEmpty(task.Text)) continue;
 
-                    var fontName = String.IsNullOrEmpty(task.fontName) ? "Microsoft Yahei" : task.fontName;
-                    var fontSize = (task.sizeScale <= 0 ? 1.0f : task.sizeScale) * 11.0f;
+                    var fontName = String.IsNullOrEmpty(task.FontName) ? "Microsoft Yahei" : task.FontName;
+                    var fontSize = (task.SizeScale <= 0 ? 1.0f : task.SizeScale) * 11.0f;
 
-                    var brush = new SolidColorBrush(Color.FromArgb(task.alpha == 0 ? (byte)255 : task.alpha, task.red, task.green, task.blue));
-                    var text = new FormattedText(task.text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(fontName), fontSize, brush, 96);
+                    var brush = new SolidColorBrush(Color.FromArgb(task.Alpha == 0 ? (byte)255 : task.Alpha, task.Red, task.Green, task.Blue));
+                    var text = new FormattedText(task.Text, CultureInfo.CurrentCulture, FlowDirection.LeftToRight, new Typeface(fontName), fontSize, brush, 96);
                     var textSize = new Size((int)text.Width, (int)text.Height);
 
-                    int posX = task.posX;
-                    int posY = task.posY;
-                    if (task.isRealPos)
+                    int posX = task.PosX;
+                    int posY = task.PosY;
+                    if (task.IsRealPos)
                     {
                         posX = (int)((float)posX / size.RealPixelScale);
                         posY = (int)((float)posY / size.RealPixelScale);
@@ -147,7 +147,7 @@ namespace ASEva.UIWpf
                     int fullHeight = (int)textSize.Height;
                     int halfWidth = (int)(textSize.Width / 2);
                     int halfHeight = (int)(textSize.Height / 2);
-                    switch (task.anchor)
+                    switch (task.Anchor)
                     {
                         case TextAnchor.TopLeft:
                             break;
@@ -229,12 +229,7 @@ namespace ASEva.UIWpf
 
             try
             {
-                var ctxInfo = new GLContextInfo();
-                ctxInfo.version = gl.Version;
-                ctxInfo.vendor = gl.Vendor;
-                ctxInfo.renderer = gl.Renderer;
-                ctxInfo.extensions = gl.Extensions;
-                if (String.IsNullOrEmpty(ctxInfo.extensions)) ctxInfo.extensions = String.Join(' ', gl.ExtensionList);
+                var ctxInfo = new GLContextInfo(gl.Version, gl.Vendor, gl.Renderer, String.IsNullOrEmpty(gl.Extensions) ? String.Join(' ', gl.ExtensionList) : gl.Extensions);
 
                 var pixelScale = (float)PresentationSource.FromVisual(this).CompositionTarget.TransformToDevice.M11;
                 size = new GLSizeInfo((int)ActualWidth, (int)ActualHeight, (int)(pixelScale * ActualWidth), (int)(pixelScale * ActualHeight), pixelScale, (float)(ActualWidth / ActualHeight), true);
