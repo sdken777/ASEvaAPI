@@ -22,6 +22,8 @@ namespace ASEva.UIGtk
     {
         public Application CreateApp(bool attach, out String uiBackend, out String webViewBackend)
         {
+            if (AvaloniaAdaptorGtk.AvaloniaApp) setenv("GDK_BACKEND", "x11");
+
             this.attach = attach;
             if (!attach)
             {
@@ -108,12 +110,6 @@ namespace ASEva.UIGtk
             FuncManager.Register("RegisterLegacyLabelTableGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.LabelTable, getLegacyStyleName(), typeof(LabelTableGraph)); return null; });
 
             webViewBackend = "webkit2";
-
-            if (AvaloniaAdaptorGtk.AvaloniaApp && uiBackend == "wayland")
-            {
-                var warningMsg = "[ASEvaAPIGtk] For Avalonia app on wayland backend, Eto controls won't show.";
-                Console.WriteLine(warningMsg);
-            }
 
             return app;
         }
@@ -234,5 +230,8 @@ namespace ASEva.UIGtk
 
 		[DllImport("libgdk-3.so.0", SetLastError = true)]
 		private static extern IntPtr gdk_wayland_monitor_get_type();
+
+        [DllImport("libc.so.6")]
+        private static extern void setenv(String key, String val);
     }
 }

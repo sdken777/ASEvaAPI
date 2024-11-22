@@ -51,9 +51,6 @@
             "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
             "console": "internalConsole",
             "stopAtEntry": false,
-            "env": {
-                "GDK_BACKEND": "x11",
-            },
         },
     ]
 }
