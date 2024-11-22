@@ -24,7 +24,7 @@ namespace ASEva
         /// <summary>
         /// 输出样本，若timeRef为空则需要手动对时间戳和时间线位置赋值
         /// </summary>
-        public Sample sample;
+        public Sample Sample { get; set; }
 
         /// \~English
         /// <summary>
@@ -34,7 +34,7 @@ namespace ASEva
         /// <summary>
         /// 时间参考样本，sample的时间戳和时间线位置将被赋值为与此样本一致
         /// </summary>
-        public Sample? timeRef;
+        public Sample? TimeRef { get; set; }
 
         /// \~English
         /// <summary>
@@ -48,8 +48,7 @@ namespace ASEva
         /// <param name="sample">输出样本</param>
         public ProcessorOutputSample(Sample sample)
         {
-            this.sample = sample;
-            this.timeRef = null;
+            Sample = sample;
         }
 
         /// \~English
@@ -66,8 +65,8 @@ namespace ASEva
         /// <param name="timeRef">时间参考样本</param>
         public ProcessorOutputSample(Sample sample, Sample timeRef)
         {
-            this.sample = sample;
-            this.timeRef = timeRef;
+            Sample = sample;
+            TimeRef = timeRef;
         }
     }
 

@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 7, 3, 0); // Update log / 更新记录: 部分struct改为class
+            return new Version(3, 7, 3, 1); // Update log / 更新记录: 修正class字段名
         }
 
         /// \~English

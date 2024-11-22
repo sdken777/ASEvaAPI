@@ -8763,7 +8763,7 @@
             (api:app=3.7.3) 数据处理的输出样本
             </summary>
         </member>
-        <member name="F:ASEva.ProcessorOutputSample.sample">
+        <member name="P:ASEva.ProcessorOutputSample.Sample">
             \~English
             <summary>
             Output sample. If "timeRef" is null, you should set timestamp and timeline point manually
@@ -8773,7 +8773,7 @@
             输出样本，若timeRef为空则需要手动对时间戳和时间线位置赋值
             </summary>
         </member>
-        <member name="F:ASEva.ProcessorOutputSample.timeRef">
+        <member name="P:ASEva.ProcessorOutputSample.TimeRef">
             \~English
             <summary>
             Time reference sample, "sample"'s timestamp and timeline point will be the same as this sample
@@ -13713,7 +13713,7 @@
             (api:app=3.7.3) 解析总线报文得到的信号值及相关信息
             </summary>
         </member>
-        <member name="F:ASEva.BusSignalValue.signalName">
+        <member name="P:ASEva.BusSignalValue.SignalName">
             \~English
             <summary>
             Signal name
@@ -13723,7 +13723,7 @@
             信号名
             </summary>
         </member>
-        <member name="F:ASEva.BusSignalValue.value">
+        <member name="P:ASEva.BusSignalValue.Value">
             \~English
             <summary>
             Signal value
@@ -13733,7 +13733,7 @@
             信号值
             </summary>
         </member>
-        <member name="F:ASEva.BusSignalValue.unit">
+        <member name="P:ASEva.BusSignalValue.Unit">
             \~English
             <summary>
             Unit
@@ -13743,7 +13743,7 @@
             单位
             </summary>
         </member>
-        <member name="F:ASEva.BusSignalValue.enumValue">
+        <member name="P:ASEva.BusSignalValue.EnumValue">
             \~English
             <summary>
             Enumeration value (if exists)

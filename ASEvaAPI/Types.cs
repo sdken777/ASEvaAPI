@@ -1922,7 +1922,7 @@ namespace ASEva
         /// <summary>
         /// 信号名
         /// </summary>
-        public String signalName = name;
+        public String SignalName { get; set; } = name;
 
         /// \~English
         /// <summary>
@@ -1932,7 +1932,7 @@ namespace ASEva
         /// <summary>
         /// 信号值
         /// </summary>
-        public double? value;
+        public double? Value { get; set; }
 
         /// \~English
         /// <summary>
@@ -1942,7 +1942,7 @@ namespace ASEva
         /// <summary>
         /// 单位
         /// </summary>
-        public String unit = "";
+        public String Unit { get; set; } = "";
 
         /// \~English
         /// <summary>
@@ -1952,7 +1952,7 @@ namespace ASEva
         /// <summary>
         /// 对应的枚举值（若存在枚举信息）
         /// </summary>
-        public String? enumValue;
+        public String? EnumValue { get; set; }
     }
 
     /// \~English
