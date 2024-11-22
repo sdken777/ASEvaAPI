@@ -7,11 +7,11 @@
         <member name="T:ASEva.Agency">
             \~English
             <summary>
-            (api:app=3.2.0) Wrap ASEva.AgencyLocal and ASEva.AgencyAsync, you can use this class if neither considering cross-end nor using Avalonia
+            (api:app=3.7.3) Wrap ASEva.AgencyLocal and ASEva.AgencyAsync, you can use this class if neither considering cross-end nor using Avalonia
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.2.0) 打包了 ASEva.AgencyLocal 和 ASEva.AgencyAsync ，不考虑跨端且不使用Avalonia时可直接使用此类
+            (api:app=3.7.3) 打包了 ASEva.AgencyLocal 和 ASEva.AgencyAsync ，不考虑跨端且不使用Avalonia时可直接使用此类
             </summary>
         </member>
         <member name="T:ASEva.AgencyAsync">
@@ -2177,13 +2177,13 @@
         <member name="M:ASEva.AgencyAsync.ParseBusMessage(ASEva.Samples.BusMessageSample)">
             \~English
             <summary>
-            Parse bus message data, and get signal values
+            (api:app=3.7.3) Parse bus message data, and get signal values
             </summary>
             <param name="busMessage">Bus message data</param>
             <returns>Signal values and other information</returns>
             \~Chinese
             <summary>
-            解析总线报文，获取信号值等信息
+            (api:app=3.7.3) 解析总线报文，获取信号值等信息
             </summary>
             <param name="busMessage">总线报文</param>
             <returns>所有信号值及相关信息</returns>
@@ -4412,7 +4412,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.7.2
+            version=3.7.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -8756,11 +8756,11 @@
         <member name="T:ASEva.ProcessorOutputSample">
             \~English
             <summary>
-            (api:app=3.0.0) Output sample of processor
+            (api:app=3.7.3) Output sample of processor
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 数据处理的输出样本
+            (api:app=3.7.3) 数据处理的输出样本
             </summary>
         </member>
         <member name="F:ASEva.ProcessorOutputSample.sample">
@@ -8812,11 +8812,11 @@
         <member name="T:ASEva.Processor">
             \~English
             <summary>
-            (api:app=3.0.0) Processor. Created while session starting, released while session stopping
+            (api:app=3.7.3) Processor. Created while session starting, released while session stopping
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.0.0) 数据处理对象。在每轮Session开始时创建，结束时销毁
+            (api:app=3.7.3) 数据处理对象。在每轮Session开始时创建，结束时销毁
             </summary>
         </member>
         <member name="M:ASEva.Processor.OnInit">
@@ -13696,21 +13696,21 @@
         <member name="T:ASEva.BusSignalValue">
             \~English
             <summary>
-            (api:app=3.7.0) Parsed bus signal value and related info
+            (api:app=3.7.3) Parsed bus signal value and related info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.7.0) 解析总线报文得到的信号值及相关信息
+            (api:app=3.7.3) 解析总线报文得到的信号值及相关信息
             </summary>
         </member>
         <member name="M:ASEva.BusSignalValue.#ctor(System.String)">
             \~English
             <summary>
-            (api:app=3.7.0) Parsed bus signal value and related info
+            (api:app=3.7.3) Parsed bus signal value and related info
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.7.0) 解析总线报文得到的信号值及相关信息
+            (api:app=3.7.3) 解析总线报文得到的信号值及相关信息
             </summary>
         </member>
         <member name="F:ASEva.BusSignalValue.signalName">

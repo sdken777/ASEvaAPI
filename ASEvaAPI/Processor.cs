@@ -8,13 +8,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Output sample of processor
+    /// (api:app=3.7.3) Output sample of processor
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 数据处理的输出样本
+    /// (api:app=3.7.3) 数据处理的输出样本
     /// </summary>
-    public struct ProcessorOutputSample
+    public class ProcessorOutputSample
     {
         /// \~English
         /// <summary>
@@ -73,11 +73,11 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.0.0) Processor. Created while session starting, released while session stopping
+    /// (api:app=3.7.3) Processor. Created while session starting, released while session stopping
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.0.0) 数据处理对象。在每轮Session开始时创建，结束时销毁
+    /// (api:app=3.7.3) 数据处理对象。在每轮Session开始时创建，结束时销毁
     /// </summary>
     public class Processor
     {

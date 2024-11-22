@@ -1906,13 +1906,13 @@ namespace ASEva
 
     /// \~English
     /// <summary>
-    /// (api:app=3.7.0) Parsed bus signal value and related info
+    /// (api:app=3.7.3) Parsed bus signal value and related info
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.7.0) 解析总线报文得到的信号值及相关信息
+    /// (api:app=3.7.3) 解析总线报文得到的信号值及相关信息
     /// </summary>
-    public struct BusSignalValue(String name)
+    public class BusSignalValue(String name)
     {
         /// \~English
         /// <summary>

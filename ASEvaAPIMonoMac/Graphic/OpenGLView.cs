@@ -111,12 +111,7 @@ namespace ASEva.UIMonoMac
 
                 try
                 {
-                    var ctxInfo = new GLContextInfo();
-                    ctxInfo.version = gl.Version;
-                    ctxInfo.vendor = gl.Vendor;
-                    ctxInfo.renderer = gl.Renderer;
-                    ctxInfo.extensions = gl.Extensions;
-
+                    var ctxInfo = new GLContextInfo(gl.Version, gl.Vendor, gl.Renderer, gl.Extensions);
                     callback.OnGLInitialize(gl, ctxInfo);
                     gl.Flush();
                 }
@@ -184,20 +179,20 @@ namespace ASEva.UIMonoMac
                 var textView = target.TextView;
                 var task = target.Task;
 
-                var targetText = String.IsNullOrEmpty(task.text) ? "" : task.text;
-                var targetFontName = String.IsNullOrEmpty(task.fontName) ? ".AppleSystemUIFont" : task.fontName;
-                var targetFontSize = (task.sizeScale <= 0 ? 1.0f : task.sizeScale) * 11;
+                var targetText = task.Text;
+                var targetFontName = String.IsNullOrEmpty(task.FontName) ? ".AppleSystemUIFont" : task.FontName;
+                var targetFontSize = (task.SizeScale <= 0 ? 1.0f : task.SizeScale) * 11;
                 var colorCoef = 1.0 / 255;
 
                 textView.TextStorage.SetString(new NSAttributedString(targetText, new CTStringAttributes{ Font = new CTFont(targetFontName, targetFontSize) }));
-                textView.TextColor = NSColor.FromRgba(colorCoef * task.red, colorCoef * task.green, colorCoef * task.blue, task.alpha == 0 ? 1.0 : (colorCoef * task.alpha));
+                textView.TextColor = NSColor.FromRgba(colorCoef * task.Red, colorCoef * task.Green, colorCoef * task.Blue, task.Alpha == 0 ? 1.0 : (colorCoef * task.Alpha));
                 textView.TextContainer.ContainerSize = new CGSize(10000, 10000);
                 textView.LayoutManager.EnsureLayoutForTextContainer(textView.TextContainer);
                 var textSize = textView.LayoutManager.GetUsedRectForTextContainer(textView.TextContainer);
 
-                var posX = (double)task.posX;
-                var posY = (double)task.posY;
-                if (task.isRealPos)
+                var posX = (double)task.PosX;
+                var posY = (double)task.PosY;
+                if (task.IsRealPos)
                 {
                     posX /= size.RealPixelScale;
                     posY /= size.RealPixelScale;
@@ -207,7 +202,7 @@ namespace ASEva.UIMonoMac
                 var fullHeight = textSize.Height;
                 var halfWidth = textSize.Width / 2;
                 var halfHeight = textSize.Height / 2;
-                switch (task.anchor)
+                switch (task.Anchor)
                 {
                 case TextAnchor.TopLeft:
                     posY = size.LogicalHeight - posY - fullHeight;

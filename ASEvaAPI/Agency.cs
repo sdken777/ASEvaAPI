@@ -8,11 +8,11 @@ namespace ASEva
 {
     /// \~English
     /// <summary>
-    /// (api:app=3.2.0) Wrap ASEva.AgencyLocal and ASEva.AgencyAsync, you can use this class if neither considering cross-end nor using Avalonia
+    /// (api:app=3.7.3) Wrap ASEva.AgencyLocal and ASEva.AgencyAsync, you can use this class if neither considering cross-end nor using Avalonia
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:app=3.2.0) 打包了 ASEva.AgencyLocal 和 ASEva.AgencyAsync ，不考虑跨端且不使用Avalonia时可直接使用此类
+    /// (api:app=3.7.3) 打包了 ASEva.AgencyLocal 和 ASEva.AgencyAsync ，不考虑跨端且不使用Avalonia时可直接使用此类
     /// </summary>
     public class Agency
     {

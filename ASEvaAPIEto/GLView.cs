@@ -111,13 +111,13 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=3.0.0) OpenGL text drawing task
+	/// (api:eto=3.3.2) OpenGL text drawing task
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=3.0.0) OpenGL文本绘制任务
+	/// (api:eto=3.3.2) OpenGL文本绘制任务
 	/// </summary>
-    public struct GLTextTask
+    public class GLTextTask(String text)
     {
 		/// \~English
 		/// <summary>
@@ -127,7 +127,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本
 		/// </summary>
-        public String text;
+        public String Text { get; set; } = text;
 
 		/// \~English
 		/// <summary>
@@ -137,7 +137,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本锚点X轴坐标
 		/// </summary>
-        public int posX;
+        public int PosX { get; set; }
 
 		/// \~English
 		/// <summary>
@@ -147,7 +147,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本锚点Y轴坐标
 		/// </summary>
-        public int posY;
+        public int PosY { get; set; }
 
 		/// \~English
 		/// <summary>
@@ -157,7 +157,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本锚点坐标是否为物理像素坐标系，否则为逻辑坐标
 		/// </summary>
-        public bool isRealPos;
+        public bool IsRealPos { get; set; }
 
 		/// \~English
 		/// <summary>
@@ -167,7 +167,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本锚点坐标位置类型
 		/// </summary>
-        public TextAnchor anchor;
+        public TextAnchor Anchor { get; set; }
 
 		/// \~English
 		/// <summary>
@@ -177,7 +177,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本绘制颜色红色分量
 		/// </summary>
-        public byte red;
+        public byte Red { get; set; }
 
 		/// \~English
 		/// <summary>
@@ -187,7 +187,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本绘制颜色绿色分量
 		/// </summary>
-        public byte green;
+        public byte Green { get; set; }
 
 		/// \~English
 		/// <summary>
@@ -197,7 +197,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本绘制颜色蓝色分量
 		/// </summary>
-        public byte blue;
+        public byte Blue { get; set; }
 
 		/// \~English
 		/// <summary>
@@ -207,7 +207,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本绘制颜色Alpha通道分量，0将被视为255
 		/// </summary>
-        public byte alpha;
+        public byte Alpha { get; set; }
 
 		/// \~English
 		/// <summary>
@@ -217,7 +217,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本字体，空则使用默认字体
 		/// </summary>
-        public String? fontName;
+        public String? FontName { get; set; }
 
 		/// \~English
 		/// <summary>
@@ -227,16 +227,16 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 文本相对于默认尺寸的比例，0将被视为1
 		/// </summary>
-        public float sizeScale;
+        public float SizeScale { get; set; }
     }
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=3.0.0) OpenGL text drawing task list
+	/// (api:eto=3.3.2) OpenGL text drawing task list
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=3.0.0) OpenGL文本绘制任务对象
+	/// (api:eto=3.3.2) OpenGL文本绘制任务对象
 	/// </summary>
     public class GLTextTasks
     {
@@ -250,19 +250,18 @@ namespace ASEva.UIEto
 		/// </summary>
         public void Add(String text, int posX, int posY, byte red, byte green, byte blue, float sizeScale)
         {
-            tasks.Add(new GLTextTask
+            tasks.Add(new GLTextTask(text)
             {
-                text = text,
-                posX = posX,
-                posY = posY,
-                isRealPos = false,
-                anchor = TextAnchor.Center,
-                red = red,
-                green = green,
-                blue = blue,
-                alpha = 255,
-                fontName = null,
-                sizeScale = sizeScale,
+                PosX = posX,
+                PosY = posY,
+                IsRealPos = false,
+                Anchor = TextAnchor.Center,
+                Red = red,
+                Green = green,
+                Blue = blue,
+                Alpha = 255,
+                FontName = null,
+                SizeScale = sizeScale,
             });
         }
 
@@ -462,11 +461,11 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=3.0.0) GLView render event argument
+	/// (api:eto=3.3.2) GLView render event argument
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=3.0.0) GLView渲染事件参数
+	/// (api:eto=3.3.2) GLView渲染事件参数
 	/// </summary>
 	public class GLRenderEventArgs : GLEventArgs
 	{
@@ -488,13 +487,13 @@ namespace ASEva.UIEto
 
 	/// \~English
 	/// <summary>
-	/// (api:eto=3.0.0) OpenGL context info
+	/// (api:eto=3.3.2) OpenGL context info
 	/// </summary>
 	/// \~Chinese
 	/// <summary>
-	/// (api:eto=3.0.0) OpenGL上下文信息
+	/// (api:eto=3.3.2) OpenGL上下文信息
 	/// </summary>
-	public struct GLContextInfo
+	public class GLContextInfo(String version, String vendor, String renderer, String extensions)
 	{
 		/// \~English
 		/// <summary>
@@ -504,7 +503,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// OpenGL版本
 		/// </summary>
-        public String version;
+        public String Version { get; set; } = version;
 
 		/// \~English
 		/// <summary>
@@ -514,7 +513,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 厂商
 		/// </summary>
-        public String vendor;
+        public String Vendor { get; set; } = vendor;
 
 		/// \~English
 		/// <summary>
@@ -524,7 +523,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 渲染器
 		/// </summary>
-        public String renderer;
+        public String Renderer { get; set; } = renderer;
 
 		/// \~English
 		/// <summary>
@@ -534,7 +533,7 @@ namespace ASEva.UIEto
 		/// <summary>
 		/// 扩展
 		/// </summary>
-        public String extensions;
+        public String Extensions { get; set; } = extensions;
 
 		/// \~English
 		/// <summary>
@@ -547,9 +546,9 @@ namespace ASEva.UIEto
 		public List<String> ToExtensionList()
 		{
 			var list = new List<String>();
-			if (!String.IsNullOrEmpty(extensions))
+			if (!String.IsNullOrEmpty(Extensions))
 			{
-				foreach (var row in extensions.Split('\n', StringSplitOptions.RemoveEmptyEntries))
+				foreach (var row in Extensions.Split('\n', StringSplitOptions.RemoveEmptyEntries))
 				{
 					list.AddRange(row.Split(' ', StringSplitOptions.RemoveEmptyEntries));
 				}
@@ -794,11 +793,11 @@ namespace ASEva.UIEto
 
 		/// \~English
 		/// <summary>
-		/// Context info (null if not initialized yet)
+		/// (api:eto=3.3.2) Context info (null if not initialized yet)
 		/// </summary>
 		/// \~Chinese
 		/// <summary>
-		/// 上下文信息 (null表示还未初始化完成)
+		/// (api:eto=3.3.2) 上下文信息 (null表示还未初始化完成)
 		/// </summary>
 		public GLContextInfo? ContextInfo { get; private set; }
 

@@ -51,11 +51,7 @@ namespace ASEva.UIGtk
 
             try
             {
-                var ctxInfo = new GLContextInfo();
-                ctxInfo.version = gl.Version;
-                ctxInfo.vendor = gl.Vendor;
-                ctxInfo.renderer = gl.Renderer;
-                ctxInfo.extensions = String.Join(' ', gl.ExtensionList);
+                var ctxInfo = new GLContextInfo(gl.Version, gl.Vendor, gl.Renderer, String.Join(' ', gl.ExtensionList));
 
                 size = new GLSizeInfo(AllocatedWidth, AllocatedHeight, AllocatedWidth * ScaleFactor, AllocatedHeight * ScaleFactor, ScaleFactor, (float)AllocatedWidth / AllocatedHeight);
 

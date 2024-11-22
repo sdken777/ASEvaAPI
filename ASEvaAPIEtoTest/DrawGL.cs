@@ -151,13 +151,12 @@ namespace ASEvaAPIEtoTest
                     }
                 }
 
-                texts.Add(new GLTextTask
+                texts.Add(new GLTextTask("FPS: " + glView.FPS.ToString("F1"))
                 {
-                    text = "FPS: " + glView.FPS.ToString("F1"),
-                    posX = 10,
-                    posY = glViewSizeInfo.LogicalHeight - 10,
-                    anchor = TextAnchor.BottomLeft,
-                    red = 255,
+                    PosX = 10,
+                    PosY = glViewSizeInfo.LogicalHeight - 10,
+                    Anchor = TextAnchor.BottomLeft,
+                    Red = 255,
                 });
             };
 
@@ -179,11 +178,11 @@ namespace ASEvaAPIEtoTest
             {
                 if (glView.ContextInfo != null)
                 {
-                    var info = glView.ContextInfo.Value;
+                    var info = glView.ContextInfo;
                     var rowTexts = new List<String>();
-                    rowTexts.Add(t.Format("draw-gl-info-version", info.version));
-                    rowTexts.Add(t.Format("draw-gl-info-vendor", info.vendor));
-                    rowTexts.Add(t.Format("draw-gl-info-renderer", info.renderer));
+                    rowTexts.Add(t.Format("draw-gl-info-version", info.Version));
+                    rowTexts.Add(t.Format("draw-gl-info-vendor", info.Vendor));
+                    rowTexts.Add(t.Format("draw-gl-info-renderer", info.Renderer));
                     rowTexts.Add(t.Format("draw-gl-info-extensions", String.Join('\n', info.ToExtensionList())));
                     App.RunDialog(new InfoDialog(t["draw-gl-info-title"], String.Join('\n', rowTexts)));
                 }

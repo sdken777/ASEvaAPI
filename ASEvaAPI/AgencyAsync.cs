@@ -2878,13 +2878,13 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Parse bus message data, and get signal values
+        /// (api:app=3.7.3) Parse bus message data, and get signal values
         /// </summary>
         /// <param name="busMessage">Bus message data</param>
         /// <returns>Signal values and other information</returns>
         /// \~Chinese
         /// <summary>
-        /// 解析总线报文，获取信号值等信息
+        /// (api:app=3.7.3) 解析总线报文，获取信号值等信息
         /// </summary>
         /// <param name="busMessage">总线报文</param>
         /// <returns>所有信号值及相关信息</returns>

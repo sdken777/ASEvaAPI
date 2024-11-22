@@ -9,30 +9,30 @@ namespace ASEva.UIGtk
         {
             foreach (var text in textTasks)
             {
-                if (String.IsNullOrEmpty(text.text)) continue;
+                if (String.IsNullOrEmpty(text.Text)) continue;
 
                 var defaultFontName = "Noto Sans CJK SC";
                 var defaultFontSize = 12.0f;
                 
-                cairo.SetFontSize((text.sizeScale == 0 ? 1.0 : text.sizeScale) * defaultFontSize);
-                cairo.SelectFontFace(String.IsNullOrEmpty(text.fontName) ? defaultFontName : text.fontName, Cairo.FontSlant.Normal, Cairo.FontWeight.Normal);
-                cairo.SetSourceColor(new Cairo.Color((double)text.red / 255, (double)text.green / 255, (double)text.blue / 255, text.alpha == 0 ? 1.0 : ((double)text.alpha / 255)));
+                cairo.SetFontSize((text.SizeScale == 0 ? 1.0 : text.SizeScale) * defaultFontSize);
+                cairo.SelectFontFace(String.IsNullOrEmpty(text.FontName) ? defaultFontName : text.FontName, Cairo.FontSlant.Normal, Cairo.FontWeight.Normal);
+                cairo.SetSourceColor(new Cairo.Color((double)text.Red / 255, (double)text.Green / 255, (double)text.Blue / 255, text.Alpha == 0 ? 1.0 : ((double)text.Alpha / 255)));
                 
-                var posX = text.posX;
-                var posY = text.posY;
-                if (text.isRealPos)
+                var posX = text.PosX;
+                var posY = text.PosY;
+                if (text.IsRealPos)
                 {
                     posX = (int)(posX / size.RealPixelScale);
                     posY = (int)(posY / size.RealPixelScale);
                 }
 
-                var textSize = cairo.TextExtents(text.text);
+                var textSize = cairo.TextExtents(text.Text);
                 int fullWidth = (int)textSize.Width;
                 int halfWidth = (int)(textSize.Width / 2);
                 int topHeightOffset = (int)(0.95 * textSize.Height);
                 int middleHeightOffset = (int)(0.45 * textSize.Height);
                 int bottomHeightOffset = (int)(-0.05 * textSize.Height);
-                switch (text.anchor)
+                switch (text.Anchor)
                 {
                     case TextAnchor.Center:
                         cairo.MoveTo(posX - halfWidth, posY + middleHeightOffset);
@@ -62,7 +62,7 @@ namespace ASEva.UIGtk
                         cairo.MoveTo(posX - halfWidth, posY + bottomHeightOffset);
                         break;
                 }
-                cairo.ShowText(text.text);
+                cairo.ShowText(text.Text);
             }
         }
     }

@@ -19,11 +19,11 @@ namespace ASEvaAPIEtoTest
                 {
                     if (skiaView.ContextInfo != null)
                     {
-                        var info = skiaView.ContextInfo.Value;
+                        var info = skiaView.ContextInfo;
                         var rowTexts = new List<String>();
-                        rowTexts.Add(t.Format("draw-gl-info-version", info.version));
-                        rowTexts.Add(t.Format("draw-gl-info-vendor", info.vendor));
-                        rowTexts.Add(t.Format("draw-gl-info-renderer", info.renderer));
+                        rowTexts.Add(t.Format("draw-gl-info-version", info.Version));
+                        rowTexts.Add(t.Format("draw-gl-info-vendor", info.Vendor));
+                        rowTexts.Add(t.Format("draw-gl-info-renderer", info.Renderer));
                         rowTexts.Add(t.Format("draw-gl-info-extensions", String.Join('\n', info.ToExtensionList())));
                         App.RunDialog(new InfoDialog(t["draw-gl-info-title"], String.Join('\n', rowTexts)));
                     }
