@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.2.5
+            version=1.2.6
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -187,6 +187,16 @@
             <param name="anyConfigPanel">任意配置面板</param>
             <returns>Avalonia配置面板，若转化失败则返回null</returns>
         </member>
+        <member name="T:ASEva.UIAvalonia.BitmapExtensions">
+            \~English
+            <summary>
+            (api:avalonia=1.2.6) Extensions for bitmap operations
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.2.6) 方便图像操作
+            </summary>
+        </member>
         <member name="T:ASEva.UIAvalonia.CommonImageAvaloniaExtensions">
             \~English
             <summary>
@@ -360,6 +370,16 @@
             <param name="text">文本</param>
             <param name="font">字体</param>
             <returns>文本的逻辑尺寸</returns>
+        </member>
+        <member name="T:ASEva.UIAvalonia.SnapshotExtensions">
+            \~English
+            <summary>
+            (api:avalonia=1.2.6) Extensions for control snapshot
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.2.6) 方便控件截图
+            </summary>
         </member>
         <member name="T:ASEva.UIAvalonia.TextResourceExtensions">
             \~English

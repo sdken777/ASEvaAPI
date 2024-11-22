@@ -4,6 +4,7 @@
     <TargetFrameworks>netstandard2.1</TargetFrameworks>
     <AssemblyName>OxyPlotExamples</AssemblyName>
     <Version>0.0.0.0</Version>
+    <NoWarn>CS0618</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

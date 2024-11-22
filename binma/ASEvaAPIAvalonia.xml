@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.2.5
+            version=1.2.6
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -112,11 +112,11 @@
         <member name="M:ASEva.UIAvalonia.App.ShowMessageBox(System.String,System.String,CustomMessageBox.Avalonia.MessageBoxIcon,CustomMessageBox.Avalonia.MessageBoxButtons)">
             \~English
             <summary>
-            (api:avalonia=1.0.2) Show message box (only for calling outside App.Run)
+            (api:avalonia=1.0.2) Show message box
             </summary>
             \~Chinese
             <summary>
-            (api:avalonia=1.0.2) 显示消息框（仅支持在App.Run之外时使用）
+            (api:avalonia=1.0.2) 显示消息框
             </summary>
         </member>
         <member name="P:ASEva.UIAvalonia.App.WorkPath">
@@ -377,6 +377,16 @@
             </summary>
             <param name="loadXaml">Should the XAML be loaded into the component.</param>
         </member>
+        <member name="T:ASEva.UIAvalonia.BitmapExtensions">
+            \~English
+            <summary>
+            (api:avalonia=1.2.6) Extensions for bitmap operations
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.2.6) 方便图像操作
+            </summary>
+        </member>
         <member name="T:ASEva.UIAvalonia.CommonImageAvaloniaExtensions">
             \~English
             <summary>
@@ -550,6 +560,16 @@
             <param name="text">文本</param>
             <param name="font">字体</param>
             <returns>文本的逻辑尺寸</returns>
+        </member>
+        <member name="T:ASEva.UIAvalonia.SnapshotExtensions">
+            \~English
+            <summary>
+            (api:avalonia=1.2.6) Extensions for control snapshot
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.2.6) 方便控件截图
+            </summary>
         </member>
         <member name="T:ASEva.UIAvalonia.TextResourceExtensions">
             \~English

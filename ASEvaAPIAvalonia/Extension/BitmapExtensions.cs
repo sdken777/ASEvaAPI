@@ -8,15 +8,15 @@ namespace ASEva.UIAvalonia
 {
     /// \~English
     /// <summary>
-    /// (api:avalonia=1.3.1) Extensions for bitmap operations
+    /// (api:avalonia=1.2.6) Extensions for bitmap operations
     /// </summary>
     /// \~Chinese
     /// <summary>
-    /// (api:avalonia=1.3.1) 方便图像操作
+    /// (api:avalonia=1.2.6) 方便图像操作
     /// </summary>
     public static class BitmapExtensions
     {
-        public static Bitmap? ToAvaloniaBitmap(this byte[] imageBytes)
+        public static Bitmap ToAvaloniaBitmap(this byte[] imageBytes)
         {
             try
             {

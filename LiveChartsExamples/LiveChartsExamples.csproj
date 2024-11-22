@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <AssemblyName>LiveChartsExamples</AssemblyName>
-    <Nullable>Enable</Nullable>
+    <Nullable>Annotations</Nullable>
   </PropertyGroup>
 
   <ItemGroup>

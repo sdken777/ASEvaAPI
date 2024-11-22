@@ -191,7 +191,7 @@ namespace ASEva.UIAvalonia
         /// <summary>
         /// (api:avalonia=1.0.2) 显示消息框
         /// </summary>
-        public static void ShowMessageBox(String message, String caption = "", MessageBoxIcon icon = MessageBoxIcon.None, MessageBoxButtons buttons = MessageBoxButtons.OK)
+        public static async void ShowMessageBox(String message, String caption = "", MessageBoxIcon icon = MessageBoxIcon.None, MessageBoxButtons buttons = MessageBoxButtons.OK)
         {
             if (appBuilder == null || appBuilder.Instance == null || message == null) return;
 
