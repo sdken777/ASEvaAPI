@@ -1,0 +1,17 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ASEvaAPIAvaloniaTest"
+        xmlns:aseva="clr-namespace:ASEva.UIAvalonia;assembly=ASEvaAPIAvalonia"
+        x:Class="ASEvaAPIAvaloniaTest.CrossAvaloniaWindow"
+        Title="" Icon="resm:icon.ico" WindowStartupLocation="CenterScreen" 
+        Width="700" Height="400" MinWidth="700" MinHeight="400">
+    <Grid Margin="8" RowDefinitions="Auto,8,*">
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,8,Auto">
+            <Button Grid.Column="0" Classes="hyperlink" Content="{DynamicResource menu-avalonia-dialog}" Click="buttonAvaloniaDialog_Click" />
+            <Button Grid.Column="2" Classes="hyperlink" Content="{DynamicResource menu-eto-dialog}" Click="buttonEtoDialog_Click" />
+        </Grid>
+        <aseva:EtoEmbedder Grid.Row="2" x:Name="etoEmbedder" />
+    </Grid>
+</Window>

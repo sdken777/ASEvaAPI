@@ -32,6 +32,25 @@ namespace ASEvaAPIAvaloniaTest
             await App.RunDialog(async (window) => await MessageBox.Show(window, App.WorkPath, ""));
         }
 
+        private void itemMenuAvaloniaWindow_Click(object sender, RoutedEventArgs e)
+        {
+            var avaloniaWindow = new CrossAvaloniaWindow();
+            avaloniaWindow.Title = Program.Texts["menu-avalonia-window"];
+            avaloniaWindow.Show();
+        }
+
+        private async void itemMenuAvaloniaDialog_Click(object sender, RoutedEventArgs e)
+        {
+            var avaloniaDialog = new CrossAvaloniaWindow();
+            avaloniaDialog.Title = Program.Texts["menu-avalonia-dialog"];
+            await App.RunDialog(avaloniaDialog.ShowDialog);
+        }
+
+        private async void itemMenuEtoDialog_Click(object sender, RoutedEventArgs e)
+        {
+            await ASEva.UIEto.App.RunDialog(new CrossEtoPanel());
+        }
+
         private async void linkBrowse_Click(object sender, RoutedEventArgs e)
         {
             if (radioFile.IsChecked.Value)

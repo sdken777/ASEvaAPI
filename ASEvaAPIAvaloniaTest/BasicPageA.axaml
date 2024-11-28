@@ -60,6 +60,10 @@
                     <Image Source="resm:menu-button.png?assembly=ASEvaAPIAvaloniaTest" />
                 </MenuItem.Icon>
             </MenuItem>
+            <Separator />
+            <MenuItem Header="{DynamicResource menu-avalonia-window}" Click="itemMenuAvaloniaWindow_Click" />
+            <MenuItem Header="{DynamicResource menu-avalonia-dialog}" Click="itemMenuAvaloniaDialog_Click" />
+            <MenuItem Header="{DynamicResource menu-eto-dialog}" Click="itemMenuEtoDialog_Click" />
         </ContextMenu>
     </Control.ContextMenu>
 </Panel>

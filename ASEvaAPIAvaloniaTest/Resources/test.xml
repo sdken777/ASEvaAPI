@@ -352,6 +352,14 @@
     <en>Exit?</en>
     <zh>是否退出？</zh>
   </t>
+  <t id="menu-avalonia-dialog">
+    <en>Avalonia dialog</en>
+    <zh>Avalonia对话框</zh>
+  </t>
+  <t id="menu-avalonia-window">
+    <en>Avalonia window</en>
+    <zh>Avalonia窗口</zh>
+  </t>
   <t id="menu-button">
     <en>Message box</en>
     <zh>消息框</zh>
@@ -365,16 +373,16 @@
     <zh>多选项B</zh>
   </t>
   <t id="menu-eto-dialog">
-    <en>Show Eto dialog</en>
-    <zh>显示Eto对话框</zh>
+    <en>Eto dialog</en>
+    <zh>Eto对话框</zh>
   </t>
   <t id="menu-eto-embed-window">
-    <en>Show Eto-embed window</en>
-    <zh>显示嵌入Eto的窗口</zh>
+    <en>Eto-embed Avalonia window</en>
+    <zh>嵌入Eto的Avalonia窗口</zh>
   </t>
   <t id="menu-eto-window">
-    <en>Show Eto window</en>
-    <zh>显示Eto窗口</zh>
+    <en>Eto window</en>
+    <zh>Eto窗口</zh>
   </t>
   <t id="menu-exception-main">
     <en>Exception (main thread)</en>
