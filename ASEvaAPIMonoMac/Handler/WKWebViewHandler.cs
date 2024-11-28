@@ -19,6 +19,7 @@ using wk = WebKit;
 #endif
 using Eto.Mac;
 using Eto.Mac.Forms;
+using ASEva.Utility;
 
 namespace ASEva.UIMonoMac
 {
@@ -319,25 +320,25 @@ namespace ASEva.UIMonoMac
 
 		public string ExecuteScript(string script)
 		{
-			try
+			var task = ExecuteScriptAsync(script);
+
+			while (!task.IsCompleted)
 			{
-				var task = ExecuteScriptAsync(script);
-
-				while (!task.IsCompleted)
-				{
-					Application.Instance.RunIteration();
-				}
-
-				return task.Result;
+				Application.Instance.RunIteration();
 			}
-			catch (Exception) { return null; }
+
+			return task.Result;
 		}
 
 		public async Task<string> ExecuteScriptAsync(string script)
 		{
-			var fullScript = string.Format("var _fn = function() {{ {0} }}; _fn();", script);
-			var result = await Control.EvaluateJavaScriptAsync(fullScript);
-			return result?.ToString();
+			try
+			{
+				var fullScript = string.Format("var _fn = function() {{ {0} }}; _fn();", script);
+				var result = await Control.EvaluateJavaScriptAsync(fullScript);
+				return result?.ToString();
+			}
+			catch (Exception ex) { Dump.Exception(ex); return null; }
 		}
 
 		public void LoadHtml(string html, Uri baseUri)
