@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 2, 6, 0); // Update log / 更新记录: 支持X86-MacOS。新增SnapshotExtensions和BitmapExtensions。修正App.ShowMessageBox。修正CommonImageAvaloniaExtensions.ToCommonImage
+            return new Version(1, 2, 6, 1); // Update log / 更新记录: 完善App.RunDialog
         }
 
         /// \~English

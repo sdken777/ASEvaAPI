@@ -39,13 +39,20 @@ namespace ASEvaAPIAvaloniaTest
             }
 
             e.Cancel = true;
+
+            if (exitConfirming) return;
+            exitConfirming = true;
+
             await App.RunDialog(async (window) => 
             {
                 exitConfirmed = await MessageBox.Show(window, Program.Texts["exit-confirm"], "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == MessageBoxResult.Yes;
             });
             if (exitConfirmed) Close();
+
+            exitConfirming = false;
         }
         private bool exitConfirmed = false;
+        private bool exitConfirming = false;
 
         private void itemFullScreen_Click(object sender, RoutedEventArgs e)
         {

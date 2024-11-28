@@ -178,6 +178,9 @@ namespace ASEva.UIAvalonia
                 etoControls = EtoEmbedder.ExtractControls(activeWindow);
                 foreach (var control in etoControls) control.Enabled = false;
             }
+
+            await Task.Delay(10); // 避免EtoEmbedder加载失败
+
             await action.Invoke(activeWindow);
             foreach (var control in etoControls) control.Enabled = true;
             return true;
