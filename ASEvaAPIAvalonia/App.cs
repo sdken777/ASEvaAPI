@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Threading;
@@ -65,6 +66,7 @@ namespace ASEva.UIAvalonia
                         appLifetime = new ClassicDesktopStyleApplicationLifetime();
                         appLifetime.ShutdownMode = ShutdownMode.OnMainWindowClose;
                         appBuilder.SetupWithLifetime(appLifetime);
+                        subscribeGlobalEvents();
                         EtoInitializer.Initialize(new EtoRunDialogHandler());
 
                         var etoInitWindow = new EtoInitWindow();
@@ -167,9 +169,21 @@ namespace ASEva.UIAvalonia
             if (owner == null)
             {
                 if (App.MainWindow != null) activeWindow = await App.MainWindow.GetActiveWindow();
+                if (activeWindow == null)
+                {
+                    foreach (var window in allWindows)
+                    {
+                        if (window.IsActive)
+                        {
+                            activeWindow = window;
+                            break;
+                        }
+                    }
+                }
             }
             else if (owner is Control) activeWindow = await (owner as Control).GetActiveWindow();
             else if (owner is Window) activeWindow = await (owner as Window).GetActiveWindow();
+
             if (activeWindow == null) return false;
 
             var etoControls = new Eto.Forms.Control[0];
@@ -313,6 +327,20 @@ namespace ASEva.UIAvalonia
             else if (fatalException == null) fatalException = ex;
         }
 
+        private static void subscribeGlobalEvents()
+        {
+            Window.WindowOpenedEvent.AddClassHandler(typeof(Window), (sender, args) =>
+            {
+                Window window = (Window)sender;
+                if (!allWindows.Contains(window)) allWindows.Add(window);
+            });
+            Window.WindowClosedEvent.AddClassHandler(typeof(Window), (sender, args) =>
+            {
+                Window window = (Window)sender;
+                allWindows.Remove(window);
+            });
+        }
+
         private class EtoRunDialogHandler : RunDialogHandler
         {
             public async Task<bool> RunDialog(DialogPanel panel)
@@ -331,5 +359,6 @@ namespace ASEva.UIAvalonia
         private static ClassicDesktopStyleApplicationLifetime appLifetime = null;
         private static DispatcherTimer exceptionTimer = null;
         private static Exception fatalException = null;
+        private static List<Window> allWindows = new List<Window>();
     }
 }
