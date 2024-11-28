@@ -24,7 +24,7 @@ namespace ASEva.UIAvalonia
                 if (initResult == null)
                 {
                     initResult = UIEto.App.Init(getUICode(), true);
-                    if (initResult.Value && AdaptorManager.Instance.ShouldOverrideRunDialog()) UIEto.App.RunDialogHandler = runDialogHandler;
+                    if (initResult.Value) UIEto.App.RunDialogHandler = runDialogHandler;
                 }
                 else if (initResult.Value == true)
                 {
