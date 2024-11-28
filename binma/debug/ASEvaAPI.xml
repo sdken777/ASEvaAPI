@@ -8424,7 +8424,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.5.3
+            version=3.6.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -20219,6 +20219,38 @@
             设置各绘图对象的绘制时间间隔
             </summary>
         </member>
+        <member name="T:ASEva.Utility.Dump">
+            \~English
+            <summary>
+            (api:app=3.6.0) For buffering dumped info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.6.0) 用于缓存被丢弃的信息
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.Dump.Exception(System.Exception)">
+            \~English
+            <summary>
+            Dump exception
+            </summary>
+            \~Chinese
+            <summary>
+            丢弃异常
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.Dump.ClearExceptions">
+            \~English
+            <summary>
+            Clear dumped exceptions
+            </summary>
+            <returns>Info of dumped exceptions</returns>
+            \~Chinese
+            <summary>
+            清空被丢弃的异常
+            </summary>
+            <returns>被丢弃的异常信息</returns>
+        </member>
         <member name="T:ASEva.Utility.EntryFolder">
             \~English
             <summary>
@@ -21481,6 +21513,16 @@
             (api:app=3.0.0) 字符串与数据相互转换
             </summary>
         </member>
+        <member name="T:ASEva.Utility.TaskBeat">
+            \~English
+            <summary>
+            (api:app=3.6.1) Make sure that tasks of the same target are executed in sequence
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.6.1) 确保相同目标的任务依次执行
+            </summary>
+        </member>
         <member name="T:ASEva.Utility.TextResource">
             \~English
             <summary>
@@ -22080,11 +22122,11 @@
         <member name="T:ASEva.CoreWorkflow">
             \~English
             <summary>
-            (api:app=3.1.0) Base class of core workflow
+            (api:app=3.1.0) Base class of host workflow
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.1.0) 核心流程基类
+            (api:app=3.1.0) 主机端流程基类
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnInit(System.String,System.Collections.Generic.Dictionary{System.String,System.String},ASEva.ApplicationGUI@)">
@@ -23047,13 +23089,13 @@
             Prepare driver or environment pack, and return the executable path for installation
             </summary>
             <param name="driverID">Related driver ID</param>
-            <returns>1) Executable path for installation. 2) Error message, null if succeeded</returns>
+            <returns>1) Executable path for installation. 2) Error message, null if initialization succeeded</returns>
             \~Chinese
             <summary>
             准备驱动和环境等的文件，并返回安装文件的运行路径
             </summary>
             <param name="driverID">插件关联的驱动ID</param>
-            <returns>1. 安装文件的运行路径; 2. 错误信息，若安装成功则为null</returns>
+            <returns>1. 安装文件的运行路径; 2. 错误信息，若初始化成功则为null</returns>
         </member>
     </members>
 </doc>

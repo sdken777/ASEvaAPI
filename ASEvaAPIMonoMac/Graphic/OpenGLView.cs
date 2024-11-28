@@ -37,6 +37,11 @@ namespace ASEva.UIMonoMac
             if (view != null) view.ReleaseGL();
         }
 
+        public void SetBackendEnabled(bool enabled)
+        {
+            if (view != null) view.OpenGLViewEnabled = enabled;
+        }
+
         private GLCallback callback;
         private GLAntialias antialias;
         private bool useLegacyAPI;
@@ -169,6 +174,7 @@ namespace ASEva.UIMonoMac
                 if (i >= textViews.Count)
                 {
                     var newView = new TextView(callback, this) { Editable = false, Selectable = false, DrawsBackground = false, WantsLayer = true };
+                    newView.TextViewEnabled = OpenGLViewEnabled;
                     this.AddSubview(newView);
                     textViews.Add(new TextViewContext
                     {
@@ -264,6 +270,41 @@ namespace ASEva.UIMonoMac
             QueueRender();
         }
 
+        public override void ScrollWheel(NSEvent theEvent)
+        {
+            if (OpenGLViewEnabled) base.ScrollWheel(theEvent);
+        }
+
+        public override void MouseDown(NSEvent theEvent)
+        {
+            if (OpenGLViewEnabled) base.MouseDown(theEvent);
+        }
+
+        public override void MouseUp(NSEvent theEvent)
+        {
+            if (OpenGLViewEnabled) base.MouseUp(theEvent);
+        }
+
+        public override void RightMouseDown(NSEvent theEvent)
+        {
+            if (OpenGLViewEnabled) base.RightMouseDown(theEvent);
+        }
+
+        public bool OpenGLViewEnabled
+        {
+            get => openglViewEnabled;
+            set
+            {
+                openglViewEnabled = value;
+                foreach (var textView in textViews)
+                {
+                    textView.TextView.TextViewEnabled = value;
+                }
+            }
+        }
+
+        private bool openglViewEnabled = true;
+
         private class TextView : NSTextView
         {
             public TextView(GLCallback callback, NSView parent)
@@ -274,45 +315,54 @@ namespace ASEva.UIMonoMac
 
             public override void MouseDown(NSEvent ev)
             {
+                if (!TextViewEnabled) return;
                 base.MouseDown(ev);
                 callback.OnRaiseMouseDown(toEto(ev, false));
             }
 
             public override void MouseDragged(NSEvent ev)
             {
+                if (!TextViewEnabled) return;
                 base.MouseDragged(ev);
                 callback.OnRaiseMouseMove(toEto(ev, false));
             }
 
             public override void MouseUp(NSEvent ev)
             {
+                if (!TextViewEnabled) return;
                 base.MouseUp(ev);
                 callback.OnRaiseMouseUp(toEto(ev, false));
             }
 
             public override void RightMouseDown(NSEvent ev)
             {
+                if (!TextViewEnabled) return;
                 base.RightMouseDown(ev);
                 callback.OnRaiseMouseDown(toEto(ev, true));
             }
 
             public override void RightMouseDragged(NSEvent ev)
             {
+                if (!TextViewEnabled) return;
                 base.RightMouseDragged(ev);
                 callback.OnRaiseMouseMove(toEto(ev, true));
             }
 
             public override void RightMouseUp(NSEvent ev)
             {
+                if (!TextViewEnabled) return;
                 base.RightMouseUp(ev);
                 callback.OnRaiseMouseUp(toEto(ev, true));
             }
 
             public override void ScrollWheel(NSEvent ev)
             {
+                if (!TextViewEnabled) return;
                 base.ScrollWheel(ev);
                 callback.OnRaiseMouseWheel(toEto(ev, null));
             }
+
+            public bool TextViewEnabled { get; set; } = true;
 
             private Eto.Forms.MouseEventArgs toEto(NSEvent ev, bool? rightMouse)
             {

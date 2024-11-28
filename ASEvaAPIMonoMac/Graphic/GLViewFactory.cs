@@ -10,6 +10,7 @@ namespace ASEva.UIMonoMac
         {
             var openglView = new OpenGLViewContainer(glView, options.RequestAntialias, options.UseLegacyAPI);
             etoControl = openglView.ToEto();
+            etoControl.EnabledChanged += (o, e) => { openglView.SetBackendEnabled((o as Control).Enabled); };
             glViewBackend = openglView;
             supportOverlay = true;
         }

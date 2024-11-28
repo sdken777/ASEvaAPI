@@ -28,7 +28,17 @@ namespace ASEva.UIMonoMac
 
 		public wk.WKWebViewConfiguration Configuration { get; set; } = new wk.WKWebViewConfiguration();
 
-		protected override wk.WKWebView CreateControl()
+        protected override bool ControlEnabled
+		{
+			get => base.ControlEnabled;
+			set
+			{
+				(Control as EtoWebView).WebViewEnabled = value;
+				base.ControlEnabled = value;
+			}
+		}
+
+        protected override wk.WKWebView CreateControl()
 		{
 			return new EtoWebView(this);
 		}
@@ -130,7 +140,29 @@ namespace ASEva.UIMonoMac
 				: base(handle)
 			{
 			}
-		}
+
+            public override void ScrollWheel(NSEvent theEvent)
+            {
+				if (WebViewEnabled) base.ScrollWheel(theEvent);
+            }
+
+            public override void MouseDown(NSEvent theEvent)
+            {
+                if (WebViewEnabled) base.MouseDown(theEvent);
+            }
+
+            public override void MouseUp(NSEvent theEvent)
+            {
+                if (WebViewEnabled) base.MouseUp(theEvent);
+            }
+
+            public override void RightMouseDown(NSEvent theEvent)
+            {
+                if (WebViewEnabled) base.RightMouseDown(theEvent);
+            }
+
+            public bool WebViewEnabled { get; set; } = true;
+        }
 
 		class PromptDialog : Dialog<bool>
 		{
@@ -287,14 +319,18 @@ namespace ASEva.UIMonoMac
 
 		public string ExecuteScript(string script)
 		{
-			var task = ExecuteScriptAsync(script);
-
-			while (!task.IsCompleted)
+			try
 			{
-				Application.Instance.RunIteration();
-			}
+				var task = ExecuteScriptAsync(script);
 
-			return task.Result;
+				while (!task.IsCompleted)
+				{
+					Application.Instance.RunIteration();
+				}
+
+				return task.Result;
+			}
+			catch (Exception) { return null; }
 		}
 
 		public async Task<string> ExecuteScriptAsync(string script)
