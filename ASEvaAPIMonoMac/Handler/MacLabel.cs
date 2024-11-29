@@ -51,7 +51,7 @@ using Eto.Mac.Forms;
 
 namespace ASEva.UIMonoMac
 {
-
+	// CHECK: 解决Avalonia下文字倒立问题
 	class EtoLabelFieldCell : NSTextFieldCell
 	{
 		public EtoLabelFieldCell()
@@ -94,7 +94,9 @@ namespace ASEva.UIMonoMac
 			rect.Height -= offset;
 			return rect;
 		}
-
+	}
+	class EtoLabelFieldCellFull : EtoLabelFieldCell
+	{
 		public override void DrawWithFrame(CGRect cellFrame, NSView inView)
 		{
 			if (BetterBackgroundColor != null)
@@ -118,7 +120,9 @@ namespace ASEva.UIMonoMac
 
 		public EtoLabel()
 		{
-			Cell = new EtoLabelFieldCell();
+			// CHECK: 解决Avalonia下文字倒立问题
+			Cell = !AvaloniaAdaptorMonoMac.AvaloniaApp || ASEva.APIInfo.GetRunningOS() == "macosarm" ? new EtoLabelFieldCellFull() : new EtoLabelFieldCell();
+
 			DrawsBackground = false;
 			Bordered = false;
 			Bezeled = false;

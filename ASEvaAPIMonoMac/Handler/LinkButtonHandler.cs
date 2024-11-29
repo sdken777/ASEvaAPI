@@ -33,6 +33,7 @@ namespace ASEva.UIMonoMac
 			set { Widget.Properties[NormalFontKey] = value; }
 		}
 
+		// CHECK: 解决Avalonia下文字倒立问题
 		public class EtoLinkLabel : EtoLabel
 		{
 			new LinkButtonHandler Handler { get { return (LinkButtonHandler)base.Handler; } set { base.Handler = value; } }
@@ -42,9 +43,16 @@ namespace ASEva.UIMonoMac
 				return Handler?.Enabled == true;
 			}
 
+			public EtoLinkLabel()
+			{
+				FocusRingType = NSFocusRingType.Exterior;
+			}
+		}
+		public class EtoLinkLabelFull : EtoLinkLabel
+		{
 			public override void DrawRect(CGRect dirtyRect)
 			{
-				var h = Handler;
+				var h = (LinkButtonHandler)base.Handler;
 				if (h != null && h.HasFocus)
 				{
 					NSGraphicsContext.CurrentContext.SaveGraphicsState();
@@ -54,11 +62,6 @@ namespace ASEva.UIMonoMac
 				}
 
 				base.DrawRect(dirtyRect);
-			}
-
-			public EtoLinkLabel()
-			{
-				FocusRingType = NSFocusRingType.Exterior;
 			}
 		}
 
@@ -86,7 +89,8 @@ namespace ASEva.UIMonoMac
 
 		protected override EtoLinkLabel CreateControl()
 		{
-			return new EtoLinkLabel();
+			// CHECK: 解决Avalonia下文字倒立问题
+			return !AvaloniaAdaptorMonoMac.AvaloniaApp || ASEva.APIInfo.GetRunningOS() == "macosarm" ? new EtoLinkLabelFull() : new EtoLinkLabel();
 		}
 
 		public override Font Font

@@ -7,6 +7,11 @@ namespace ASEva.UIMonoMac
 {
     public class AvaloniaAdaptorMonoMac : AvaloniaAdaptor
     {
+        public AvaloniaAdaptorMonoMac()
+        {
+            AvaloniaApp = true;
+        }
+
         public bool IsControlValid(object control)
         {
             if (control is null) return false;
@@ -54,5 +59,7 @@ namespace ASEva.UIMonoMac
         {
             return false;
         }
+
+        public static bool AvaloniaApp { get; private set; }
     }
 }
