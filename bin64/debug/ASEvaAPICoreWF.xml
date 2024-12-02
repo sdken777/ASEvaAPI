@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UICoreWF.APIInfo">
             <summary>
-            version=3.2.9
+            version=3.3.0
             </summary>
         </member>
         <member name="M:ASEva.UICoreWF.APIInfo.GetAPIVersion">
@@ -346,15 +346,19 @@
             (api:corewf=3.2.2) 启用WPF面板转Winform面板功能
             </summary>
         </member>
-        <member name="M:ASEva.UICoreWF.CrossConverter.EnableAvaloniaEmbedder">
+        <member name="M:ASEva.UICoreWF.CrossConverter.EnableAvaloniaEmbedder(System.Func{System.Object})">
             \~English
             <summary>
-            (api:corewf=3.2.3) Enable converting Avalonia panel to Winform panel
+            (api:corewf=3.3.0) Enable converting Avalonia panel to Winform panel
             </summary>
+            <param name="appBuilderCreation">The function to create AppBuilder object</param>
+            <returns>Whether initialization is successful</returns>
             \~Chinese
             <summary>
-            (api:corewf=3.2.3) 启用Avalonia面板转Winform面板功能
+            (api:corewf=3.3.0) 启用Avalonia面板转Winform面板功能
             </summary>
+            <param name="appBuilderCreation">创建AppBuilder对象的函数</param>
+            <returns>是否成功</returns>
         </member>
         <member name="M:ASEva.UICoreWF.CrossConverter.ConvertWindowPanel(System.Object)">
             \~English

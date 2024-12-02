@@ -1,18 +1,21 @@
-﻿using Avalonia;
-using ASEva.UIAvalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
+using ASEva.UIAvalonia;
 
 namespace HwndHostAvalonia
 {
     public class CommonHost
     {
-        public static void InitAvaloniaEnvironment()
+        public static void InitAvaloniaEnvironment(Func<object> appBuilderCreation)
         {
             if (avaloniaEnvInitialized) return;
 
             avaloniaEnvInitialized = true;
 
-            var appBuilder = AppBuilder.Configure<AvaloniaApplicationSimpleTheme>().UsePlatformDetect().WithInterFont();
+            var appBuilder = appBuilderCreation == null ? null : appBuilderCreation.Invoke() as AppBuilder;
+            if (appBuilder == null) appBuilder = AppBuilder.Configure<AvaloniaApplicationSimpleTheme>().UsePlatformDetect().WithInterFont();
+
             var appLifetime = new ClassicDesktopStyleApplicationLifetime();
             appBuilder.SetupWithLifetime(appLifetime);
 

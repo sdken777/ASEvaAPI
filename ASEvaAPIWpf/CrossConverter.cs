@@ -53,13 +53,17 @@ namespace ASEva.UIWpf
 
         /// \~English
         /// <summary>
-        /// (api:wpf=2.1.5) Enable converting Avalonia panel to WPF panel
+        /// (api:wpf=2.2.0) Enable converting Avalonia panel to WPF panel
         /// </summary>
+        /// <param name="appBuilderCreation">The function to create AppBuilder object</param>
+        /// <returns>Whether initialization is successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:wpf=2.1.5) 启用Avalonia面板转WPF面板功能
+        /// (api:wpf=2.2.0) 启用Avalonia面板转WPF面板功能
         /// </summary>
-        public static bool EnableAvaloniaEmbedder()
+        /// <param name="appBuilderCreation">创建AppBuilder对象的函数</param>
+        /// <returns>是否成功</returns>
+        public static bool EnableAvaloniaEmbedder(Func<object> appBuilderCreation = null)
         {
             if (wpfHostTypeForAvalonia != null) return true;
 
@@ -78,7 +82,7 @@ namespace ASEva.UIWpf
                 var initMethod = type.BaseType.GetMethod("InitAvaloniaEnvironment");
                 if (initMethod == null) return false;
 
-                initMethod.Invoke(null, null);
+                initMethod.Invoke(null, [appBuilderCreation]);
             }
 
             wpfHostTypeForAvalonia = type;

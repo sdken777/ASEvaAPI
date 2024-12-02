@@ -30,7 +30,7 @@ namespace ASEva.UIAvalonia
         /// <summary>
         /// Initialize application
         /// </summary>
-        /// <returns>Whether initialization is successfull</returns>
+        /// <returns>Whether initialization is successful</returns>
         /// \~Chinese
         /// <summary>
         /// 应用程序初始化
@@ -46,7 +46,7 @@ namespace ASEva.UIAvalonia
         /// (api:avalonia=1.0.12) Initialize application with the specified AppBuilder
         /// </summary>
         /// <param name="appBuilderCreation">The function to create AppBuilder object</param>
-        /// <returns>Whether initialization is successfull</returns>
+        /// <returns>Whether initialization is successful</returns>
         /// \~Chinese
         /// <summary>
         /// (api:avalonia=1.0.12) 使用指定的AppBuilder进行应用程序初始化
