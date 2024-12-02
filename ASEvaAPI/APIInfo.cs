@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 6, 1, 0); // Update log / 更新记录: 新增TaskBeat
+            return new Version(3, 6, 1, 1); // Update log / 更新记录: 修正MD5Calculator.Calculate(fileName)
         }
 
         /// \~English

@@ -31,9 +31,9 @@ namespace ASEva.Utility
         /// <returns>MD5字符串</returns>
         public static string Calculate(string fileName)
         {
+            if (!File.Exists(fileName)) return null;
             try
             {
-                
                 var file = new FileStream(fileName, FileMode.Open, FileAccess.Read);
                 var md5 = MD5.Create();
                 var retVal = md5.ComputeHash(file);
