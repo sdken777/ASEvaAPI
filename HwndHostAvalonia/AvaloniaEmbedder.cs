@@ -16,6 +16,13 @@ namespace HwndHostAvalonia
         public AvaloniaEmbedder()
         {
             DataContextChanged += AvaloniaHwndHost_DataContextChanged;
+
+            SizeChanged += delegate
+            {
+                if (Content == null) return;
+                Content.Width = Width;
+                Content.Height = Height;
+            };
         }
 
         private void AvaloniaHwndHost_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
