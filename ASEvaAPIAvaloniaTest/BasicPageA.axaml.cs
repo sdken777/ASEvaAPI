@@ -63,18 +63,18 @@ namespace ASEvaAPIAvaloniaTest
                         FileTypeChoices = [ new FilePickerFileType(Program.Texts["basic-save-file-filter"]) { Patterns = ["*.txt"] } ]
                     };
                     var file = await this.GetParentWindow().StorageProvider.SaveFilePickerAsync(options);
-                    if (file != null) await App.RunDialog(async (window) => await MessageBox.Show(window, file.Path, ""));
+                    if (file != null) await App.RunDialog(async (window) => await MessageBox.Show(window, file.Path.LocalPath, ""));
                 }
                 else
                 {
                     var files = await this.GetParentWindow().StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions());
-                    if (files.Count > 0) await App.RunDialog(async (window) => await MessageBox.Show(window, files[0].Path, ""));
+                    if (files.Count > 0) await App.RunDialog(async (window) => await MessageBox.Show(window, files[0].Path.LocalPath, ""));
                 }
             }
             else // radioDir
             {
                 var folders = await this.GetParentWindow().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions());
-                if (folders.Count > 0) await App.RunDialog(async (window) => await MessageBox.Show(window, folders[0].Path, ""));
+                if (folders.Count > 0) await App.RunDialog(async (window) => await MessageBox.Show(window, folders[0].Path.LocalPath, ""));
             }
         }
 

@@ -405,7 +405,7 @@ namespace ASEva.UIAvalonia
                     if (result.Count > 0)
                     {
                         var list = new List<String>();
-                        foreach (var file in result) list.Add(file.Path.AbsolutePath);
+                        foreach (var file in result) list.Add(file.Path.LocalPath);
                         selected = list.ToArray();
                     }
                 });
@@ -435,7 +435,7 @@ namespace ASEva.UIAvalonia
                 {
                     if (startFolder != null) options.SuggestedStartLocation = await window.StorageProvider.TryGetFolderFromPathAsync(new Uri(startFolder));
                     var result = await window.StorageProvider.SaveFilePickerAsync(options);
-                    if (result != null) selected = result.Path.AbsolutePath;
+                    if (result != null) selected = result.Path.LocalPath;
                 });
 
                 if (selected != null && withFilter && !selected.ToLower().EndsWith(filterSuffix.ToLower())) selected += filterSuffix;
@@ -453,7 +453,7 @@ namespace ASEva.UIAvalonia
                 {
                     if (startFolder != null) options.SuggestedStartLocation = await window.StorageProvider.TryGetFolderFromPathAsync(new Uri(startFolder));
                     var result = await window.StorageProvider.OpenFolderPickerAsync(options);
-                    if (result.Count > 0) selected = result[0].Path.AbsolutePath;
+                    if (result.Count > 0) selected = result[0].Path.LocalPath;
                 });
 
                 return selected;
