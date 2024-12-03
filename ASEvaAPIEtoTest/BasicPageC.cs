@@ -40,7 +40,7 @@ namespace ASEvaAPIEtoTest
             checkListBox.ItemClicked += delegate
             {
                 var selectedIndex = checkListBox.SelectedRow;
-                MessageBox.Show(selectedIndex + ": " + checkListBox.GetChecked(selectedIndex));
+                App.ShowMessageBox(selectedIndex + ": " + checkListBox.GetChecked(selectedIndex));
             };
 
             buttonCheckAll.Click += delegate { checkListBox.CheckAll(); };
@@ -61,7 +61,7 @@ namespace ASEvaAPIEtoTest
             buttonRow = layout.AddRowLayout();
             buttonRow.AddLinkButton(t["basic-checklist-get-check"]).Click += delegate
             {
-                MessageBox.Show(checkListTarget + ": " + checkListBox.GetChecked(checkListTarget).ToString());
+                App.ShowMessageBox(checkListTarget + ": " + checkListBox.GetChecked(checkListTarget).ToString());
             };
             buttonRow.AddSpace();
             buttonRow.AddLinkButton(t["basic-checklist-set-check"]).Click += delegate
@@ -73,7 +73,7 @@ namespace ASEvaAPIEtoTest
             buttonRow = layout.AddRowLayout();
             buttonRow.AddLinkButton(t["basic-checklist-get-enable"]).Click += delegate
             {
-                MessageBox.Show(checkListTarget + ": " + checkListBox.GetEnabled(checkListTarget).ToString());
+                App.ShowMessageBox(checkListTarget + ": " + checkListBox.GetEnabled(checkListTarget).ToString());
             };
             buttonRow.AddSpace();
             buttonRow.AddLinkButton(t["basic-checklist-set-enable"]).Click += delegate

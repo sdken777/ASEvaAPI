@@ -22,7 +22,7 @@ namespace ASEvaAPIEtoTest
             {
                 var selectedIndex = flowLayout.GetSelectedControlIndex();
                 var withMouseIndex = flowLayout.GetControlWithMouse();
-                MessageBox.Show(t.Format("basic-flow-selected", selectedIndex, withMouseIndex));
+                App.ShowMessageBox(t.Format("basic-flow-selected", selectedIndex, withMouseIndex));
             };
 
             layoutButtons.AddLinkButton(t["basic-flow-add"]).Click += delegate

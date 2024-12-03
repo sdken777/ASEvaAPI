@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using ASEva;
 using ASEva.UIEto;
 using Eto.Forms;
 
@@ -28,7 +29,7 @@ namespace ASEvaAPIEtoTest
             menu.AddButtonItem(t["menu-snapshot"]).Click += delegate
             {
                 var snapshot = this.Snapshot();
-                if (snapshot == null) MessageBox.Show(t["menu-snapshot-failed"], MessageBoxType.Error);
+                if (snapshot == null) App.ShowMessageBox(t["menu-snapshot-failed"], null, LogLevel.Error);
                 else
                 {
                     var dialog = new ImageDialog(snapshot);
@@ -38,7 +39,7 @@ namespace ASEvaAPIEtoTest
             menu.AddButtonItem(t["menu-snapshot-screen"]).Click += delegate
             {
                 var snapshot = this.SnapshotFromScreen();
-                if (snapshot == null) MessageBox.Show(t["menu-snapshot-failed"], MessageBoxType.Error);
+                if (snapshot == null) App.ShowMessageBox(t["menu-snapshot-failed"], null, LogLevel.Error);
                 else
                 {
                     var dialog = new ImageDialog(snapshot);

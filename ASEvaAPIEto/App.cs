@@ -477,6 +477,287 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
+        /// (api:eto=3.3.0) Show dialog to select files to open
+        /// </summary>
+        /// <param name="parent">The parent control or window, can be null</param>
+        /// <param name="title">Title message</param>
+        /// <param name="multiSelect">Whether to select multiple files</param>
+        /// <param name="startFolder">The startup folder path, can be null</param>
+        /// <param name="filters">File filters, set to null if not using. The key is the filter title, values are the related suffixes (starts with '.')</param>
+        /// <returns>The selected file path(s), null if cancelled</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=3.3.0) 显示对话框选择用于打开的文件路径
+        /// </summary>
+        /// <param name="parent">母控件或窗口，可为null</param>
+        /// <param name="title">标题消息</param>
+        /// <param name="multiSelect">是否多选文件</param>
+        /// <param name="startFolder">开始文件夹路径，可为null</param>
+        /// <param name="filters">文件筛选，设为null表示不筛选。键为标题，值为后缀(以'.'开头)</param>
+        /// <returns>选择的文件路径，null表示已取消</returns>
+        public static Task<String[]> ShowOpenFileDialog(object parent = null, String title = null, bool multiSelect = false, String startFolder = null, Dictionary<String, String[]> filters = null)
+        {
+            if (handler == null) return Task.FromResult<String[]>(null);
+
+            title = title ?? "";
+            if (ShowCommonDialogHandler != null) return ShowCommonDialogHandler.ShowOpenFileDialog(title, multiSelect, startFolder, filters);
+
+            try
+            {
+                var dialog = new OpenFileDialog();
+                dialog.Title = title;
+                dialog.MultiSelect = multiSelect;
+                if (startFolder != null) dialog.Directory = new Uri(startFolder);
+                if (filters != null)
+                {
+                    foreach (var pair in filters)
+                    {
+                        dialog.Filters.Add(new FileFilter(pair.Key, pair.Value));
+                    }
+                }
+
+                DialogResult result = DialogResult.None;
+                if (parent is Window window) result = dialog.ShowDialog(PassParent(window));
+                else if (parent is Control control) result = dialog.ShowDialog(PassParent(control));
+                else result = dialog.ShowDialog(null);
+
+                if (result == DialogResult.Ok)
+                {
+                    if (multiSelect) return Task.FromResult(dialog.Filenames.ToArray());
+                    else return Task.FromResult<String[]>([dialog.FileName]);
+                }
+                else return Task.FromResult<String[]>(null);
+            }
+            catch (Exception ex)
+            {
+                Dump.Exception(ex);
+                return Task.FromResult<String[]>(null);
+            }
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=3.3.0) Show dialog to select file to save
+        /// </summary>
+        /// <param name="parent">The parent control or window, can be null</param>
+        /// <param name="title">Title message</param>
+        /// <param name="startFolder">The startup folder path, can be null</param>
+        /// <param name="initialFileName">The initial file name, can be null</param>
+        /// <param name="filterTitle">Filter title, can be null</param>
+        /// <param name="filterSuffix">Filter suffix (starts with '.')</param>
+        /// <returns>The selected file path, null if cancelled</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=3.3.0) 显示对话框选择用于保存的文件路径
+        /// </summary>
+        /// <param name="parent">母控件或窗口，可为null</param>
+        /// <param name="title">标题消息</param>
+        /// <param name="startFolder">开始文件夹路径，可为null</param>
+        /// <param name="initialFileName">初始文件名，可为null</param>
+        /// <param name="filterTitle">文件筛选标题，可为null</param>
+        /// <param name="filterSuffix">文件筛选后缀(以'.'开头)</param>
+        /// <returns>选择的文件路径，null表示已取消</returns>
+        public static Task<String> ShowSaveFileDialog(object parent = null, String title = null, String startFolder = null, String initialFileName = null, String filterTitle = null, String filterSuffix = null)
+        {
+            if (handler == null) return Task.FromResult<String>(null);
+
+            title = title ?? "";
+            if (ShowCommonDialogHandler != null) return ShowCommonDialogHandler.ShowSaveFileDialog(title, startFolder, initialFileName, filterTitle, filterSuffix);
+
+            try
+            {
+                var dialog = new SaveFileDialog();
+                dialog.Title = title;
+                if (startFolder != null) dialog.Directory = new Uri(startFolder);
+
+                bool withFilter = false;
+                if (filterTitle != null && filterSuffix != null)
+                {
+                    dialog.Filters.Add(new FileFilter(filterTitle, filterSuffix));
+                    withFilter = true;
+                }
+
+                if (initialFileName != null)
+                {
+                    if (withFilter && !initialFileName.ToLower().EndsWith(filterSuffix.ToLower())) initialFileName += filterSuffix;
+                    dialog.FileName = initialFileName;
+                }
+
+                DialogResult result = DialogResult.None;
+                if (parent is Window window) result = dialog.ShowDialog(PassParent(window));
+                else if (parent is Control control) result = dialog.ShowDialog(PassParent(control));
+                else result = dialog.ShowDialog(null);
+
+                if (result == DialogResult.Ok)
+                {
+                    var filePath = dialog.FileName;
+                    if (withFilter && !filePath.ToLower().EndsWith(filterSuffix.ToLower())) filePath += filterSuffix;
+                    return Task.FromResult(filePath);
+                }
+                return Task.FromResult<String>(null);
+            }
+            catch (Exception ex)
+            {
+                Dump.Exception(ex);
+                return Task.FromResult<String>(null);
+            }
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=3.3.0) Show dialog to select folder
+        /// </summary>
+        /// <param name="parent">The parent control or window, can be null</param>
+        /// <param name="title">Title message</param>
+        /// <param name="startFolder">The initial folder path, can be null</param>
+        /// <returns>The selected folder path, null if cancelled</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=3.3.0) 显示对话框选择文件夹
+        /// </summary>
+        /// <param name="parent">母控件或窗口，可为null</param>
+        /// <param name="title">标题消息</param>
+        /// <param name="startFolder">初始文件夹路径，可为null</param>
+        /// <returns>选择的文件夹路径，null表示已取消</returns>
+        public static Task<String> ShowSelectFolderDialog(object parent = null, String title = null, String startFolder = null)
+        {
+            if (handler == null) return Task.FromResult<String>(null);
+
+            title = title ?? "";
+            if (ShowCommonDialogHandler != null) return ShowCommonDialogHandler.ShowSelectFolderDialog(title, startFolder);
+
+            try
+            {
+                var dialog = new SelectFolderDialog();
+                dialog.Title = title;
+                if (startFolder != null) dialog.Directory = startFolder;
+
+                DialogResult result = DialogResult.None;
+                if (parent is Window window) result = dialog.ShowDialog(PassParent(window));
+                else if (parent is Control control) result = dialog.ShowDialog(PassParent(control));
+                else result = dialog.ShowDialog(null);
+
+                if (result == DialogResult.Ok) return Task.FromResult(dialog.Directory);
+                return Task.FromResult<String>(null);
+            }
+            catch (Exception ex)
+            {
+                Dump.Exception(ex);
+                return Task.FromResult<String>(null);
+            }
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=3.3.0) Show dialog to select color
+        /// </summary>
+        /// <param name="parent">The parent control or window, can be null</param>
+        /// <param name="initialColor">The initial color</param>
+        /// <returns>The selected color</returns>
+        /// \~English
+        /// <summary>
+        /// (api:eto=3.3.0) 显示对话框选择颜色
+        /// </summary>
+        /// <param name="parent">母控件或窗口，可为null</param>
+        /// <param name="initialColor">初始颜色</param>
+        /// <returns>选择的颜色</returns>
+        public static Task<Color> ShowColorDialog(object parent = null, Color initialColor = new Color())
+        {
+            if (handler == null) return Task.FromResult(initialColor);
+
+            initialColor.Ab = 255;
+            if (ShowCommonDialogHandler != null) return ShowCommonDialogHandler.ShowColorDialog(initialColor);
+
+            try
+            {
+                var dialog = new ColorDialog();
+                dialog.Color = initialColor;
+
+                DialogResult result = DialogResult.None;
+                if (parent is Window window) result = dialog.ShowDialog(PassParent(window));
+                else if (parent is Control control) result = dialog.ShowDialog(PassParent(control));
+                else result = dialog.ShowDialog(null);
+
+                if (result == DialogResult.Ok) return Task.FromResult(dialog.Color);
+                return Task.FromResult(initialColor);
+            }
+            catch (Exception ex)
+            {
+                Dump.Exception(ex);
+                return Task.FromResult(initialColor);
+            }
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=3.3.0) Show message dialog
+        /// </summary>
+        /// <param name="message">The message</param>
+        /// <param name="title">The title, can be null</param>
+        /// <param name="type">Message type</param>
+        /// <param name="parent">The parent control or window, can be null</param>
+        /// \~English
+        /// <summary>
+        /// (api:eto=3.3.0) 显示消息对话框
+        /// </summary>
+        /// <param name="message">消息</param>
+        /// <param name="title">标题，可为null</param>
+        /// <param name="type">消息类型</param>
+        /// <param name="parent">母控件或窗口，可为null</param>
+        public static Task ShowMessageBox(String message, String title = null, LogLevel type = LogLevel.Info, object parent = null)
+        {
+            if (handler == null) return Task.CompletedTask;
+
+            message = message ?? "";
+            title = title ?? "";
+            if (ShowCommonDialogHandler != null) return ShowCommonDialogHandler.ShowMessageBox(message, title, type);
+
+            var boxType = type switch
+            {
+                LogLevel.Error => MessageBoxType.Error,
+                LogLevel.Warning => MessageBoxType.Warning,
+                _ => MessageBoxType.Information
+            };
+
+            if (parent is Control control) MessageBox.Show(PassParent(control), message, title, boxType);
+            else MessageBox.Show(message, title, boxType);
+
+            return Task.CompletedTask;
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=3.3.0) Show question dialog
+        /// </summary>
+        /// <param name="message">The message</param>
+        /// <param name="title">The title, can be null</param>
+        /// <param name="parent">The parent control or window, can be null</param>
+        /// <returns>Whether confirmed</returns>
+        /// \~English
+        /// <summary>
+        /// (api:eto=3.3.0) 显示询问对话框
+        /// </summary>
+        /// <param name="message">消息</param>
+        /// <param name="title">标题，可为null</param>
+        /// <param name="parent">母控件或窗口，可为null</param>
+        /// <returns>是否确认</returns>
+        public static Task<bool> ShowQuestionBox(String message, String title = null, object parent = null)
+        {
+            if (handler == null) return Task.FromResult(true);
+
+            message = message ?? "";
+            title = title ?? "";
+            if (ShowCommonDialogHandler != null) return ShowCommonDialogHandler.ShowQuestionBox(message, title);
+
+            DialogResult result = DialogResult.None;
+            if (parent is Control control) result = MessageBox.Show(PassParent(control), message, title, MessageBoxButtons.YesNo, MessageBoxType.Question);
+            else result = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxType.Question);
+
+            return Task.FromResult(result == DialogResult.Yes);
+        }
+
+        /// \~English
+        /// <summary>
         /// It's recommended to use this function to pass parent argument while calling ShowDialog
         /// </summary>
         /// <param name="parent">"parent" argument</param>
@@ -719,10 +1000,21 @@ namespace ASEva.UIEto
         private static bool gpuOptionsInitialized = false;
 
         public static RunDialogHandler RunDialogHandler { private get; set; }
+        public static ShowCommonDialogHandler ShowCommonDialogHandler { private get; set; }
     }
 
     public interface RunDialogHandler
     {
         Task<bool> RunDialog(DialogPanel panel);
+    }
+
+    public interface ShowCommonDialogHandler
+    {
+        Task<String[]> ShowOpenFileDialog(String title, bool multiSelect, String startFolder, Dictionary<String, String[]> filters);
+        Task<String> ShowSaveFileDialog(String title, String startFolder, String initialFileName, String filterTitle, String filterSuffix);
+        Task<String> ShowSelectFolderDialog(String title, String startFolder);
+        Task<Color> ShowColorDialog(Color initialColor);
+        Task ShowMessageBox(String message, String title, LogLevel level);
+        Task<bool> ShowQuestionBox(String message, String title);
     }
 }

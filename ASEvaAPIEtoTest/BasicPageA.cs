@@ -35,7 +35,7 @@ namespace ASEvaAPIEtoTest
             initBasicTabPageARow6(layoutRow6);
 
             var contextMenu = layout.SetContextMenuAsNew();
-            contextMenu.AddButtonItem(t["menu-button"], Bitmap.FromResource("menu-button.png")).Click += delegate { MessageBox.Show(App.WorkPath); };
+            contextMenu.AddButtonItem(t["menu-button"], Bitmap.FromResource("menu-button.png")).Click += delegate { App.ShowMessageBox(App.WorkPath); };
         }
 
         private void initBasicTabPageARow1(StackLayout layout)
@@ -46,26 +46,25 @@ namespace ASEvaAPIEtoTest
             layout.AddSpace();
             var linkButton = layout.AddLinkButton(t["basic-linkbutton"]);
             linkButton.TextColor = Colors.ForestGreen;
-            linkButton.Click += delegate
+            linkButton.Click += async delegate
             {
                 if (radioButtonList.SelectedIndex == 0)
                 {
                     if (checkBox.Checked.Value)
                     {
-                        var dialog = new SaveFileDialog();
-                        dialog.Filters.Add(new FileFilter(t["basic-save-file-filter"], ".txt"));
-                        if (dialog.ShowDialog(App.PassParent(this)) == DialogResult.Ok) MessageBox.Show(dialog.FileName);
+                        var selected = await App.ShowSaveFileDialog(this, null, null, null, t["basic-save-file-filter"], ".txt");
+                        if (selected != null) await App.ShowMessageBox(selected);
                     }
                     else
                     {
-                        var dialog = new OpenFileDialog();
-                        if (dialog.ShowDialog(App.PassParent(this)) == DialogResult.Ok) MessageBox.Show(dialog.FileName);
+                        var selected = await App.ShowOpenFileDialog(this);
+                        if (selected != null) await App.ShowMessageBox(selected[0]);
                     }
                 }
                 else
                 {
-                    var dialog = new SelectFolderDialog();
-                    if (dialog.ShowDialog(App.PassParent(this)) == DialogResult.Ok) MessageBox.Show(dialog.Directory);
+                    var selected = await App.ShowSelectFolderDialog(this);
+                    if (selected != null) await App.ShowMessageBox(selected);
                 }
             };
         }

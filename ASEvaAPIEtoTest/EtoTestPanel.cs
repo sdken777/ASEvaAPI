@@ -47,7 +47,7 @@ namespace ASEvaAPIEtoTest
             {
                 if (e.Control && e.Key != Keys.Control && e.Key != Keys.LeftControl && e.Key != Keys.RightControl && e.Key != Keys.Space && e.Key != Keys.None)
                 {
-                    MessageBox.Show("Ctrl+" + e.Key.ToString());
+                    App.ShowMessageBox("Ctrl+" + e.Key.ToString());
                 }
             };
         }

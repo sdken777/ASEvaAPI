@@ -27,9 +27,9 @@ namespace ASEvaAPIEtoTest
             testPanel = new EtoTestPanel(language, onscreenRendering);
             this.SetContentAsControl(testPanel, 0);
 
-            Closing += (o, e) =>
+            Closing += async (o, e) =>
             {
-                if (App.FatalException || MessageBox.Show(t["exit-confirm"], MessageBoxButtons.YesNo, MessageBoxType.Question) == DialogResult.Yes)
+                if (App.FatalException || await App.ShowQuestionBox(t["exit-confirm"]))
                 {
                     testPanel.StopTimer();
                 }

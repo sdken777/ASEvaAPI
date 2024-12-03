@@ -69,7 +69,7 @@ namespace ASEvaAPIEtoTest
             view.SelectedItemActivated += delegate
             {
                 var selectedKey = view.GetSelectedKey();
-                if (selectedKey != null) MessageBox.Show(selectedKey as String);
+                if (selectedKey != null) App.ShowMessageBox(selectedKey as String);
             };
 
             buttonChange.Click += delegate
@@ -101,7 +101,7 @@ namespace ASEvaAPIEtoTest
             var flowLayout = layout.AddControl(new FlowLayout(), true) as FlowLayout;
             flowLayout.ControlSelected += delegate
             {
-                MessageBox.Show(t.Format("basic-flow-selected", flowLayout.GetSelectedControlIndex(), ""));
+                App.ShowMessageBox(t.Format("basic-flow-selected", flowLayout.GetSelectedControlIndex(), ""));
             };
 
             layoutButtons.AddLinkButton(t["basic-flow-add"]).Click += delegate
