@@ -28,10 +28,22 @@ namespace ASEvaAPIAvaloniaTest
                 await App.RunDialog(new CrossEtoPanel());
             };
 
+            topLayout.AddLinkButton(Program.Texts["eto-show-question-box"]).Click += async delegate
+            {
+                await App.ShowMessageBox(await App.ShowQuestionBox(Program.Texts["eto-show-question-msg"]) ? "TRUE" : "FALSE");
+            };
+            
+            topLayout.AddLinkButton(Program.Texts["eto-show-color-picker"]).Click += async delegate
+            {
+                color = await App.ShowColorDialog(null, color);
+            };
+
             LoadComplete += delegate
             {
                 webView.LoadHtml(ResourceLoader.LoadText("index.html"));
             };
         }
+
+        private Eto.Drawing.Color color = new Eto.Drawing.Color();
     }
 }

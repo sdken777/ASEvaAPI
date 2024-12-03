@@ -89,7 +89,6 @@
             <Separator />
             <MenuItem Header="{DynamicResource menu-eto-window}" Click="itemShowEtoWindow_Click" />
             <MenuItem Header="{DynamicResource menu-eto-dialog}" Click="itemShowEtoDialog_Click" />
-            <MenuItem Header="{DynamicResource menu-eto-embed-window}" Click="itemShowEtoEmbedWindow_Click" />
         </ContextMenu>
     </Window.ContextMenu>
 </Window>

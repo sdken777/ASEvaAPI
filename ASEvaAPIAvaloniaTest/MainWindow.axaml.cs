@@ -111,17 +111,10 @@ namespace ASEvaAPIAvaloniaTest
             thread.Start();
         }
 
-        private void itemShowEtoEmbedWindow_Click(object sender, RoutedEventArgs e)
-        {
-            if (Program.DesignerMode) return;
-            var window = new EtoEmbedWindow();
-            window.Show();
-        }
-
         private void itemShowEtoWindow_Click(object sender, RoutedEventArgs e)
         {
             if (Program.DesignerMode) return;
-            var window = new EtoWindow();
+            var window = new EtoEmbedWindow();
             window.Show();
         }
 

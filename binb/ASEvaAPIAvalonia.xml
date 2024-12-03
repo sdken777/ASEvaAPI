@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.2.7
+            version=1.2.8
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -44,6 +44,22 @@
             (api:avalonia=1.0.0) 获取使用的第三方软件版权声明
             </summary>
             <returns>键为标题，值为版权声明</returns>
+        </member>
+        <member name="T:ASEva.UIAvalonia.ColorPickerDialog">
+            \~English
+            <summary>
+            (api:avalonia=1.2.8) Color picker dialog
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.2.8) 颜色选择对话框
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.ColorPickerDialog.InitializeComponent(System.Boolean)">
+            <summary>
+            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
+            </summary>
+            <param name="loadXaml">Should the XAML be loaded into the component.</param>
         </member>
         <member name="T:ASEva.UIAvalonia.ConfigPanel">
             \~English

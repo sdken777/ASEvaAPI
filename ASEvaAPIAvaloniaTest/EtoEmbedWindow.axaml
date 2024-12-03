@@ -4,9 +4,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:aseva="clr-namespace:ASEva.UIAvalonia;assembly=ASEvaAPIAvalonia"
         x:Class="ASEvaAPIAvaloniaTest.EtoEmbedWindow"
-        Title="{DynamicResource eto-embed-window}" Icon="resm:icon.png" 
-        Width="1300" Height="800" MinWidth="1300" MinHeight="800">
-    <Grid x:Name="grid" Background="PaleGreen">
-        <aseva:EtoEmbedder x:Name="embedder" Margin="8" />
+        Title="{DynamicResource eto-window}" Icon="resm:icon.png" 
+        Width="1350" Height="800" MinWidth="1350" MinHeight="800">
+    <Grid x:Name="grid">
+        <aseva:EtoEmbedder x:Name="embedder" />
     </Grid>
 </Window>

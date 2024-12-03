@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +10,9 @@ using ASEva.Utility;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Platform.Storage;
 using Avalonia.Threading;
+using Avalonia.Media;
 using CustomMessageBox.Avalonia;
 
 namespace ASEva.UIAvalonia
@@ -67,7 +70,7 @@ namespace ASEva.UIAvalonia
                         appLifetime.ShutdownMode = ShutdownMode.OnMainWindowClose;
                         appBuilder.SetupWithLifetime(appLifetime);
                         subscribeGlobalEvents();
-                        EtoInitializer.Initialize(new EtoRunDialogHandler());
+                        EtoInitializer.Initialize(new EtoRunDialogHandler(), new EtoShowCommonDialogHandler());
 
                         var etoInitWindow = new EtoInitWindow();
                         etoInitWindow.Show();
@@ -351,6 +354,119 @@ namespace ASEva.UIAvalonia
                 if (App.appLifetime.MainWindow == null) App.Run(dialog);
                 else await App.RunDialog(dialog.ShowDialog);
                 return true;
+            }
+        }
+
+        private class EtoShowCommonDialogHandler : ShowCommonDialogHandler
+        {
+            public async Task ShowMessageBox(string message, string title, LogLevel level)
+            {
+                var icon = level switch
+                {
+                    LogLevel.Error => MessageBoxIcon.Error,
+                    LogLevel.Warning => MessageBoxIcon.Warning,
+                    _ => MessageBoxIcon.Information,
+                };
+                await App.RunDialog(async (window) => await MessageBox.Show(window, message, title, MessageBoxButtons.OK, icon));
+            }
+
+            public async Task<bool> ShowQuestionBox(string message, string title)
+            {
+                bool result = true;
+                await App.RunDialog(async (window) =>
+                {
+                    result = await MessageBox.Show(window, message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == MessageBoxResult.Yes;
+                });
+                return result;
+            }
+
+            public async Task<string[]> ShowOpenFileDialog(string title, bool multiSelect, string startFolder, Dictionary<string, string[]> filters)
+            {
+                var options = new FilePickerOpenOptions();
+                options.Title = title;
+                options.AllowMultiple = multiSelect;
+                if (filters != null)
+                {
+                    options.FileTypeFilter = [];
+                    foreach (var pair in filters)
+                    {
+                        if (pair.Value == null || pair.Value.Length == 0) continue;
+                        var type = new FilePickerFileType(pair.Key){ Patterns = [] };
+                        foreach (var suffix in pair.Value) type.Patterns.Append("*" + suffix);
+                        options.FileTypeFilter.Append(type);
+                    }
+                }
+                
+                String[] selected = null;
+                await App.RunDialog(async (window) =>
+                {
+                    if (startFolder != null) options.SuggestedStartLocation = await window.StorageProvider.TryGetFolderFromPathAsync(new Uri(startFolder));
+                    var result = await window.StorageProvider.OpenFilePickerAsync(options);
+                    if (result.Count > 0)
+                    {
+                        var list = new List<String>();
+                        foreach (var file in result) list.Add(file.Path.AbsolutePath);
+                        selected = list.ToArray();
+                    }
+                });
+
+                return selected;
+            }
+
+            public async Task<string> ShowSaveFileDialog(string title, string startFolder, string initialFileName, string filterTitle, string filterSuffix)
+            {
+                var options = new FilePickerSaveOptions();
+                options.Title = title;
+                options.ShowOverwritePrompt = true;
+                options.SuggestedFileName = initialFileName;
+
+                bool withFilter = false;
+                if (filterTitle != null && filterSuffix != null)
+                {
+                    if (filterSuffix != null) options.DefaultExtension = filterSuffix;
+                    var type = new FilePickerFileType(filterTitle){ Patterns = [] };
+                    type.Patterns.Append("*" + filterSuffix);
+                    options.FileTypeChoices = [type];
+                    withFilter = true;
+                }
+
+                String selected = null;
+                await App.RunDialog(async (window) =>
+                {
+                    if (startFolder != null) options.SuggestedStartLocation = await window.StorageProvider.TryGetFolderFromPathAsync(new Uri(startFolder));
+                    var result = await window.StorageProvider.SaveFilePickerAsync(options);
+                    if (result != null) selected = result.Path.AbsolutePath;
+                });
+
+                if (selected != null && withFilter && !selected.ToLower().EndsWith(filterSuffix.ToLower())) selected += filterSuffix;
+
+                return selected;
+            }
+
+            public async Task<string> ShowSelectFolderDialog(string title, string startFolder)
+            {
+                var options = new FolderPickerOpenOptions();
+                options.Title = title;
+
+                String selected = null;
+                await App.RunDialog(async (window) =>
+                {
+                    if (startFolder != null) options.SuggestedStartLocation = await window.StorageProvider.TryGetFolderFromPathAsync(new Uri(startFolder));
+                    var result = await window.StorageProvider.OpenFolderPickerAsync(options);
+                    if (result.Count > 0) selected = result[0].Path.AbsolutePath;
+                });
+
+                return selected;
+            }
+
+            public async Task<Eto.Drawing.Color> ShowColorDialog(Eto.Drawing.Color initialColor)
+            {
+                var dialog = new ColorPickerDialog();
+                dialog.Title = AgencyLocal.GetAppLanguage() == Language.Chinese ? "选择颜色" : "Color Picker";
+                dialog.SupportAlpha = false;
+                dialog.Color = new Color(255, (byte)initialColor.Rb, (byte)initialColor.Gb, (byte)initialColor.Bb);
+                await App.RunDialog(dialog.ShowDialog);
+                return Eto.Drawing.Color.FromArgb(dialog.Color.R, dialog.Color.G, dialog.Color.B);
             }
         }
 
