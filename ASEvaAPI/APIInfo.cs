@@ -12,8 +12,8 @@
  * \~English In addition, refer to ASEva.Samples for the definition of samples used in plugin, and ASEva.Graph for graph report definitions. \n\n
  * \~Chinese 另外，插件中使用的样本相关定义参考 ASEva.Samples ；图表报告相关定义参考 ASEva.Graph 。 \n\n
  *
- * \~English This document corresponds to API version: 3.6.1 \n
- * \~Chinese 本文档对应API版本：3.6.1
+ * \~English This document corresponds to API version: 3.7.0 \n
+ * \~Chinese 本文档对应API版本：3.7.0
  */
 
 using System;
@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 namespace ASEva
 {
     /// <summary>
-    /// version=3.6.1
+    /// version=3.7.0
     /// </summary>
     public class APIInfo
     {
@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 6, 1, 1); // Update log / 更新记录: 修正MD5Calculator.Calculate(fileName)
+            return new Version(3, 7, 0, 0); // Update log / 更新记录: 新增SecondProfileSample和SecondProfilePack。新增CoreWorkflow.OnCheckAlwaysTransferBusMessage/Signal/PointCloud/ProcessorVideo。新增DataReferenceInfo和AgencyLocal/Async.GetDataReferenceInfo
         }
 
         /// \~English

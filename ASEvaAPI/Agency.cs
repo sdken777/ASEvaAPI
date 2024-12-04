@@ -20,6 +20,22 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
+        /// (api:app=3.7.0) Add bus channel reference
+        /// </summary>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.0) 添加总线通道引用
+        /// </summary>
+        /// <param name="busChannel">总线通道，1~16</param>
+        public static void AddBusMessageReference(int busChannel)
+        {
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.AddBusMessageReference(busChannel).Wait();
+        }
+
+        /// \~English
+        /// <summary>
         /// Add bus protocol file
         /// </summary>
         /// <param name="filePath">File path of bus protocol file</param>
@@ -70,12 +86,28 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Add video reference (only video with references will be sent to app layer's processors)
+        /// (api:app=3.7.0) Add point cloud channel reference
+        /// </summary>
+        /// <param name="channel">Point cloud data channel. Channel is starting from 0</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.0) 添加点云通道引用
+        /// </summary>
+        /// <param name="channel">点云数据通道。通道序号从0开始</param>
+        public static void AddPointCloudReference(int channel)
+        {
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.AddPointCloudReference(channel).Wait();
+        }
+
+        /// \~English
+        /// <summary>
+        /// Add video reference
         /// </summary>
         /// <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
         /// \~Chinese
         /// <summary>
-        /// 添加视频引用，在应用层的数据处理对象才可获得该通道的数据
+        /// 添加视频引用
         /// </summary>
         /// <param name="videoChannel">视频通道，0~23对应A~X</param>
         public static void AddProcessorVideoReference(int videoChannel)
@@ -100,12 +132,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Add signal reference (only signals with references will be sent to app layer)
+        /// Add signal reference
         /// </summary>
         /// <param name="signalID">Signal ID</param>
         /// \~Chinese
         /// <summary>
-        /// 添加信号引用，在应用层才可获得该信号的数据
+        /// 添加信号引用
         /// </summary>
         /// <param name="signalID">信号ID</param>
         public static void AddSignalReference(String signalID)
@@ -1582,6 +1614,21 @@ namespace ASEva
         public static String GetDataPath()
         {
             return AgencyLocal.GetDataPath();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.7.0) Get data reference counter info
+        /// </summary>
+        /// <returns>Data reference counter info</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.0) 获取数据引用计数信息
+        /// </summary>
+        /// <returns>数据引用计数信息</returns>
+        public static DataReferenceInfo GetDataReferenceInfo()
+        {
+            return AgencyLocal.GetDataReferenceInfo();
         }
 
         /// \~English
@@ -3958,6 +4005,22 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.7.0) Remove bus channel reference
+        /// </summary>
+        /// <param name="busChannel">Bus channel, ranges 1~16</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.0) 移除总线通道引用
+        /// </summary>
+        /// <param name="busChannel">总线通道，1~16</param>
+        public static void RemoveBusMessageReference(int busChannel)
+        {
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.RemoveBusMessageReference(busChannel).Wait();
+        }
+
+        /// \~English
+        /// <summary>
         /// Remove bus protocol
         /// </summary>
         /// <param name="fileID">Bus protocol file ID</param>
@@ -4003,6 +4066,22 @@ namespace ASEva
         {
             if (!AgencyAsync.SyncMode) return;
             AgencyAsync.RemoveGeneration(session, genID).Wait();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.7.0) Remove point cloud channel reference
+        /// </summary>
+        /// <param name="channel">Point cloud data channel. Channel is starting from 0</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.0) 移除点云通道引用
+        /// </summary>
+        /// <param name="channel">点云数据通道。通道序号从0开始</param>
+        public static void RemovePointCloudReference(int channel)
+        {
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.RemovePointCloudReference(channel).Wait();
         }
 
         /// \~English

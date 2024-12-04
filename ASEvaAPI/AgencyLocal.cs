@@ -45,6 +45,7 @@ namespace ASEva
         String GetCurrentDataLayerPath();
         String GetCurrentProject();
         String GetDataPath();
+        DataReferenceInfo GetDataReferenceInfo();
         DialogClassInfo GetDialogClassInfo(String dialogClassID, String transformID);
         Dictionary<String, DialogClassInfo> GetDialogClassTable();
         Dictionary<String, String> GetFrameworkThirdPartyNotices();
@@ -213,12 +214,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Add video reference (only video with references will be sent to app layer's processors)
+        /// Add video reference
         /// </summary>
         /// <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
         /// \~Chinese
         /// <summary>
-        /// 添加视频引用，在应用层的数据处理对象才可获得该通道的数据
+        /// 添加视频引用
         /// </summary>
         /// <param name="videoChannel">视频通道，0~23对应A~X</param>
         public static void AddProcessorVideoReference(int videoChannel)
@@ -756,6 +757,21 @@ namespace ASEva
         {
             if (Handler.ClientSide) return null;
             return Handler.GetDataPath();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.7.0) Get data reference counter info
+        /// </summary>
+        /// <returns>Data reference counter info</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.0) 获取数据引用计数信息
+        /// </summary>
+        /// <returns>数据引用计数信息</returns>
+        public static DataReferenceInfo GetDataReferenceInfo()
+        {
+            return Handler.GetDataReferenceInfo();
         }
 
         /// \~English

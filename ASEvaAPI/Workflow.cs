@@ -547,6 +547,46 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.7.0) [Optional] Get whether the bus message data always transferred from native layer
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.0) [可选实现] 返回总线数据是否无条件从原生层传输
+        /// </summary>
+        public virtual bool OnCheckAlwaysTransferBusMessage() { return true; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.7.0) [Optional] Get whether the signal data always transferred from native layer
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.0) [可选实现] 返回信号数据是否无条件从原生层传输
+        /// </summary>
+        public virtual bool OnCheckAlwaysTransferSignal() { return false; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.7.0) [Optional] Get whether the point cloud data always transferred from native layer
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.0) [可选实现] 返回点云数据是否无条件从原生层传输
+        /// </summary>
+        public virtual bool OnCheckAlwaysTransferPointCloud() { return true; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.7.0) [Optional] Get whether the video data for processor always transferred from native layer
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.0) [可选实现] 返回处理用视频数据是否无条件从原生层传输
+        /// </summary>
+        public virtual bool OnCheckAlwaysTransferProcessorVideo() { return false; }
+
+        /// \~English
+        /// <summary>
         /// [Required][OK for modal] Open dialog
         /// </summary>
         /// <param name="dialog">Configuration panel object, derived from ConfigPanel</param>

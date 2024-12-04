@@ -78,6 +78,7 @@ namespace ASEva
         Task<SessionIdentifier?> GetCurrentOnlineSession();
         Task<String> GetCurrentSessionGUID();
         Task<String[]> GetDataLayers();
+        Task<DataReferenceInfo> GetDataReferenceInfo();
         Task<Dictionary<String, DeviceClassInfo>> GetDeviceClassTable();
         Task<GeneralDeviceStatus> GetDeviceStatus(String id);
         Task<(ConfigStatus, ConfigStatus[])> GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID);
@@ -260,12 +261,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.4.5) Add bus channel reference (only data with references will be sent to client side)
+        /// (api:app=3.4.5) Add bus channel reference
         /// </summary>
         /// <param name="busChannel">Bus channel, ranges 1~16</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.4.5) 添加总线通道引用，在客户端才可获得该总线通道的数据
+        /// (api:app=3.4.5) 添加总线通道引用
         /// </summary>
         /// <param name="busChannel">总线通道，1~16</param>
         public static Task AddBusMessageReference(int busChannel)
@@ -290,12 +291,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.4.5) Add point cloud channel reference (only data with references will be sent to client side)
+        /// (api:app=3.4.5) Add point cloud channel reference
         /// </summary>
         /// <param name="channel">Point cloud data channel. Channel is starting from 0</param>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.4.5) 添加点云通道引用，在客户端才可获得该通道的点云数据
+        /// (api:app=3.4.5) 添加点云通道引用
         /// </summary>
         /// <param name="channel">点云数据通道。通道序号从0开始</param>
         public static Task AddPointCloudReference(int channel)
@@ -305,12 +306,12 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Add signal reference (only signals with references will be sent to app layer)
+        /// Add signal reference
         /// </summary>
         /// <param name="signalID">Signal ID</param>
         /// \~Chinese
         /// <summary>
-        /// 添加信号引用，在应用层才可获得该信号的数据
+        /// 添加信号引用
         /// </summary>
         /// <param name="signalID">信号ID</param>
         public static Task AddSignalReference(String signalID)
@@ -1060,7 +1061,7 @@ namespace ASEva
         /// <summary>
         /// 获取数据通道上最近的若干帧时间戳
         /// </summary>
-        /// <param name="channelID">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始。视频协议名为video，音频协议名为audio</param>
+        /// <param name="channelID">数据通道ID，格式为"协议名@通道序号"，通道序号从0开始。视频协议名为video，音频协议名为audio</param>
         /// <returns>指定数据通道上最近的若干帧时间戳，若该通道未找到或最近无数据则返回null</returns>
         public static Task<Timestamp[]> GetChannelLatestTimestamps(String channelID)
         {
@@ -1319,6 +1320,21 @@ namespace ASEva
         public static Task<String> GetCurrentSessionGUID()
         {
             return Handler.GetCurrentSessionGUID();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.7.0) Get data reference counter info
+        /// </summary>
+        /// <returns>Data reference counter info</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.0) 获取数据引用计数信息
+        /// </summary>
+        /// <returns>数据引用计数信息</returns>
+        public static Task<DataReferenceInfo> GetDataReferenceInfo()
+        {
+            return Handler.GetDataReferenceInfo();
         }
 
         /// \~English
@@ -2170,7 +2186,7 @@ namespace ASEva
         /// <summary>
         /// 获取指定样本通道对应的标题
         /// </summary>
-        /// <param name="channelID">样本通道关键字，格式为"协议名@通道序号"，通道序号从0开始</param>
+        /// <param name="channelID">样本通道ID，格式为"协议名@通道序号"，通道序号从0开始</param>
         /// <returns>样本标题，null表示通道不存在或该样本通道无标题</returns>
         public static Task<List<String>> GetSampleTitle(String channelID)
         {
@@ -2750,7 +2766,7 @@ namespace ASEva
         /// <summary>
         /// 检查指定的输入样本通道是否可用
         /// </summary>
-        /// <param name="channelID">样本通道关键字，格式为"协议名@通道序号"，通道序号从0开始，协议名中带"v"字版本号的可向下兼容</param>
+        /// <param name="channelID">样本通道ID，格式为"协议名@通道序号"，通道序号从0开始，协议名中带"v"字版本号的可向下兼容</param>
         /// <returns>该通道是否可用</returns>
         public static Task<bool> IsInputChannelAvailable(String channelID)
         {

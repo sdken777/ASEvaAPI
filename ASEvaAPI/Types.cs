@@ -4564,4 +4564,105 @@ namespace ASEva
         /// </summary>
         public Dictionary<String, ulong?> TestResults { get; set; }
     }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.7.0) Data reference counter info
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.7.0) 数据引用计数信息
+    /// </summary>
+    public class DataReferenceInfo
+    {
+        /// \~English
+        /// <summary>
+        /// Whether bus message data always transferred
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 总线报文数据是否无条件传输
+        /// </summary>
+        public bool AlwaysTransferBusMessage { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Reference counter of each bus message data channel
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 各通道总线报文数据引用计数
+        /// </summary>
+        public int[] BusMessageReferences { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Whether point cloud data always transferred
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 点云数据是否无条件传输
+        /// </summary>
+        public bool AlwaysTransferPointCloud { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Reference counter of each point cloud data channel
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 各通道点云数据引用计数
+        /// </summary>
+        public int[] PointCloudReferences { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Whether video data for processor always transferred (only available on host side)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 用于处理的视频数据是否无条件传输 (仅主机端有效)
+        /// </summary>
+        public bool AlwaysTransferProcessorVideo { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Reference counter of each video data (for processor) channel (only available on host side)
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 各通道视频数据(用于处理)引用计数 (仅主机端有效)
+        /// </summary>
+        public int[] ProcessorVideoReferences { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Whether signal data always transferred
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 信号数据是否无条件传输
+        /// </summary>
+        public bool AlwaysTransferSignal { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Reference counter of each signal data channel, key is signal ID
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 各通道信号数据引用计数，键为信号ID
+        /// </summary>
+        public Dictionary<String, int> SignalReferences { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Reference counter of subscribed data, key is data ID
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 被订阅数据的引用计数，键为数据ID
+        /// </summary>
+        public Dictionary<String, int> SubscriberReferences { get; set; }
+    }
 }

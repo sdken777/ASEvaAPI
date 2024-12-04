@@ -172,6 +172,11 @@ namespace ASEva
             return null;
         }
 
+        public DataReferenceInfo GetDataReferenceInfo()
+        {
+            return null;
+        }
+
         public DialogClassInfo GetDialogClassInfo(string dialogClassID, string transformID)
         {
             return null;
@@ -859,6 +864,11 @@ namespace ASEva
         public Task<string[]> GetDataLayers()
         {
             return Task.FromResult<string[]>(null);
+        }
+
+        public Task<DataReferenceInfo> GetDataReferenceInfo()
+        {
+            return Task.FromResult<DataReferenceInfo>(null);
         }
 
         public Task<Dictionary<string, DeviceClassInfo>> GetDeviceClassTable()
