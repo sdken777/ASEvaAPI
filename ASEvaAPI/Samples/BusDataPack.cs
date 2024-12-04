@@ -44,11 +44,11 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// Bus message data, the length is limited to 64 bytes, so it may be smaller than actual length
+        /// Bus message data. It may be smaller than actual length (for purpose of memory usage control)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 报文数据，长度限定在64以下，可能小于报文的实际长度
+        /// 报文数据。可能小于报文的实际长度（出于内存用量控制等目的）
         /// </summary>
         public byte[] Data { get; set; }
 

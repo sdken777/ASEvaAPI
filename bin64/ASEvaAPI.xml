@@ -8508,7 +8508,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.7.0
+            version=3.7.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -13704,11 +13704,11 @@
         <member name="P:ASEva.Samples.BusMessageSample.Data">
             \~English
             <summary>
-            Bus message data, the length is limited to 64 bytes, so it may be smaller than actual length
+            Bus message data. It may be smaller than actual length (for purpose of memory usage control)
             </summary>
             \~Chinese
             <summary>
-            报文数据，长度限定在64以下，可能小于报文的实际长度
+            报文数据。可能小于报文的实际长度（出于内存用量控制等目的）
             </summary>
         </member>
         <member name="P:ASEva.Samples.BusMessageSample.Type">
@@ -14030,11 +14030,21 @@
         <member name="P:ASEva.Samples.PointCloudSample.PointCount">
             \~English
             <summary>
-            Number of points
+            Available number of points
             </summary>
             \~Chinese
             <summary>
-            点个数
+            可用的点个数
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.PointCloudSample.SourcePointCount">
+            \~English
+            <summary>
+            (api:app=3.7.1) Number of points at data source
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.1) 数据源处的点个数
             </summary>
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.DataReleased">

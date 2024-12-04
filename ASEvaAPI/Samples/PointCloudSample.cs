@@ -25,13 +25,23 @@ namespace ASEva.Samples
 
         /// \~English
         /// <summary>
-        /// Number of points
+        /// Available number of points
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 点个数
+        /// 可用的点个数
         /// </summary>
         public int PointCount { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.7.1) Number of points at data source
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.1) 数据源处的点个数
+        /// </summary>
+        public int SourcePointCount { get; set; }
 
         /// \~English
         /// <summary>
