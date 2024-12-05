@@ -15456,11 +15456,11 @@
         <member name="P:ASEva.SecondProfileSample.ChannelID">
             \~English
             <summary>
-            Data channel ID, with format as "protocol@channel". Channel is starting from 0. The bus channel's protocol is "bus". The video channel's protocol is "video". The audio channel's ID is "audio"
+            Data channel ID, with format as "protocol@channel". Channel is starting from 0. The bus channel's protocol is "bus". The video channel's protocol is "video". The audio channel's ID is "audio". The point cloud's ID is "point-cloud"
             </summary>
             \~Chinese
             <summary>
-            数据通道ID，格式为"协议名@通道序号"，通道序号从0开始。总线协议名为bus，视频协议名为video，音频协议名为audio
+            数据通道ID，格式为"协议名@通道序号"，通道序号从0开始。总线协议名为bus，视频协议名为video，音频协议名为audio，点云协议名为point-cloud
             </summary>
         </member>
         <member name="P:ASEva.SecondProfileSample.Second">
