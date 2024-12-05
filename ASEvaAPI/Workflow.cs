@@ -282,12 +282,12 @@ namespace ASEva
         /// <summary>
         /// [Required] Input new data
         /// </summary>
-        /// <param name="data">New data</param>
+        /// <param name="data">New data, can be ASEva.GeneralSample , ASEva.Samples.ManualTriggerSample , ASEva.Samples.AudioFrameSample , ASEva.Samples.PointCloudSample , ASEva.Samples.BusDataPack , ASEva.Samples.SignalsData , ASEva.EventData , ASEva.SceneData , ASEva.Samples.SecondProfilePack , etc.</param>
         /// \~Chinese
         /// <summary>
         /// [必须实现] 输入新数据
         /// </summary>
-        /// <param name="data">新数据</param>
+        /// <param name="data">新数据，包括通用样本 ASEva.GeneralSample , 手动触发器样本 ASEva.Samples.ManualTriggerSample , 音频帧样本 ASEva.Samples.AudioFrameSample , 点云帧样本 ASEva.Samples.PointCloudSample , 总线数据 ASEva.Samples.BusDataPack , 信号数据 ASEva.Samples.SignalsData , 事件数据 ASEva.EventData , 场景片段描述 ASEva.SceneData , 秒侧写信息 ASEva.Samples.SecondProfilePack 等类型</param>
         public virtual void OnInputData(object data) { }
 
         /// \~English
