@@ -8508,7 +8508,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.7.1
+            version=3.7.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -12993,6 +12993,26 @@
             \~Chinese
             <summary>
             通过日期时间创建
+            </summary>
+        </member>
+        <member name="M:ASEva.SessionIdentifier.FromLongNumber(System.UInt64)">
+            \~English
+            <summary>
+            (api:app=3.7.2) Create by ulong number
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.2) 通过ulong值创建
+            </summary>
+        </member>
+        <member name="P:ASEva.SessionIdentifier.LongNumber">
+            \~English
+            <summary>
+            (api:app=3.7.2) Get the ulong number
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.2) 获取ulong值
             </summary>
         </member>
         <member name="M:ASEva.SessionIdentifier.IsValid">

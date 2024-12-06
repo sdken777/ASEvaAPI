@@ -137,6 +137,38 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.7.2) Create by ulong number
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.2) 通过ulong值创建
+        /// </summary>
+        public static SessionIdentifier FromLongNumber(ulong number)
+        {
+            int year = (int)((number & 0xffff000000000000) >> 48);
+            int month = (int)((number & 0x0000ff0000000000) >> 40);
+            int day = (int)((number & 0x000000ff00000000) >> 32);
+            int hour = (int)((number & 0x0000000000ff0000) >> 16);
+            int minute = (int)((number & 0x000000000000ff00) >> 8);
+            int second = (int)(number & 0x00000000000000ff);
+            return new SessionIdentifier(year, month, day, hour, minute, second);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.7.2) Get the ulong number
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.2) 获取ulong值
+        /// </summary>
+        public ulong LongNumber
+        {
+            get { return value; }
+        }
+
+        /// \~English
+        /// <summary>
         /// Whether it's valid
         /// </summary>
         /// \~Chinese
