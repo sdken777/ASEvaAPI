@@ -76,6 +76,16 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
+        /// (api:app=3.7.3) The session
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.3) 所在session
+        /// </summary>
+        public SessionIdentifier Session { get; set; }
+
+        /// \~English
+        /// <summary>
         /// The second of the profiles, corresponding to data in range of [N, N+1)
         /// </summary>
         /// \~Chinese
