@@ -18,13 +18,13 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(ASEvaAPIBundleMode)' != 'true'">
-    <PackageReference Include="Avalonia" Version="11.0.10" />
-    <PackageReference Include="Avalonia.Desktop" Version="11.0.10" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10" />
-    <PackageReference Include="Avalonia.Themes.Simple" Version="11.0.10" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10" />
-    <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.0.10" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.10" />
+    <PackageReference Include="Avalonia" Version="11.0.*" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.*" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.*" />
+    <PackageReference Include="Avalonia.Themes.Simple" Version="11.0.*" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.*" />
+    <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.0.*" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.*" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(ASEvaAPIBundleMode)' != 'true'">
@@ -55,13 +55,13 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(ASEvaAPIBundleMode)' == 'true'">
-    <PackageReference Include="Avalonia" Version="11.0.10" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10" />
-    <PackageReference Include="Avalonia.Themes.Simple" Version="11.0.10" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10" />
-    <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.0.10" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.10" />
-    <PackageReference Include="Avalonia.Skia" Version="11.0.10" />
+    <PackageReference Include="Avalonia" Version="11.0.*" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.*" />
+    <PackageReference Include="Avalonia.Themes.Simple" Version="11.0.*" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.*" />
+    <PackageReference Include="Avalonia.Controls.ColorPicker" Version="11.0.*" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.*" />
+    <PackageReference Include="Avalonia.Skia" Version="11.0.*" />
     <PackageReference Include="SkiaSharp" Version="2.88.7" />
   </ItemGroup>
 
