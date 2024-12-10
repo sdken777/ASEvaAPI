@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 2, 8, 1); // Update log / 更新记录: 修正输出路径
+            return new Version(1, 2, 8, 2); // Update log / 更新记录: 修正颜色选择对话框无图标问题
         }
 
         /// \~English

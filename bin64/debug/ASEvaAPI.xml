@@ -14,6 +14,18 @@
             (api:app=3.2.0) 打包了 ASEva.AgencyLocal 和 ASEva.AgencyAsync ，不考虑跨端且不使用Avalonia时可直接使用此类
             </summary>
         </member>
+        <member name="M:ASEva.Agency.AddBusMessageReference(System.Int32)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Add bus channel reference
+            </summary>
+            <param name="busChannel">Bus channel, ranges 1~16</param>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 添加总线通道引用
+            </summary>
+            <param name="busChannel">总线通道，1~16</param>
+        </member>
         <member name="M:ASEva.Agency.AddBusProtocolFile(System.String,ASEva.BusProtocolFileID[]@)">
             \~English
             <summary>
@@ -54,15 +66,27 @@
             </summary>
             <param name="location">主线程检查点位置</param>
         </member>
+        <member name="M:ASEva.Agency.AddPointCloudReference(System.Int32)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Add point cloud channel reference
+            </summary>
+            <param name="channel">Point cloud data channel. Channel is starting from 0</param>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 添加点云通道引用
+            </summary>
+            <param name="channel">点云数据通道。通道序号从0开始</param>
+        </member>
         <member name="M:ASEva.Agency.AddProcessorVideoReference(System.Int32)">
             \~English
             <summary>
-            Add video reference (only video with references will be sent to app layer's processors)
+            Add video reference
             </summary>
             <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
             \~Chinese
             <summary>
-            添加视频引用，在应用层的数据处理对象才可获得该通道的数据
+            添加视频引用
             </summary>
             <param name="videoChannel">视频通道，0~23对应A~X</param>
         </member>
@@ -81,12 +105,12 @@
         <member name="M:ASEva.Agency.AddSignalReference(System.String)">
             \~English
             <summary>
-            Add signal reference (only signals with references will be sent to app layer)
+            Add signal reference
             </summary>
             <param name="signalID">Signal ID</param>
             \~Chinese
             <summary>
-            添加信号引用，在应用层才可获得该信号的数据
+            添加信号引用
             </summary>
             <param name="signalID">信号ID</param>
         </member>
@@ -1235,6 +1259,18 @@
             获取当前数据目录的路径
             </summary>
             <returns>当前数据目录的路径，若未设置返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetDataReferenceInfo">
+            \~English
+            <summary>
+            (api:app=3.7.0) Get data reference counter info
+            </summary>
+            <returns>Data reference counter info</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 获取数据引用计数信息
+            </summary>
+            <returns>数据引用计数信息</returns>
         </member>
         <member name="M:ASEva.Agency.GetDeviceClassTable">
             \~English
@@ -3078,6 +3114,18 @@
             <param name="defaultConfig">默认的可用于分化的配置字符串</param>
             <returns>分化后的窗口组件信息</returns>
         </member>
+        <member name="M:ASEva.Agency.RemoveBusMessageReference(System.Int32)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Remove bus channel reference
+            </summary>
+            <param name="busChannel">Bus channel, ranges 1~16</param>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 移除总线通道引用
+            </summary>
+            <param name="busChannel">总线通道，1~16</param>
+        </member>
         <member name="M:ASEva.Agency.RemoveBusProtocolFile(ASEva.BusProtocolFileID)">
             \~English
             <summary>
@@ -3115,6 +3163,18 @@
             </summary>
             <param name="session">Session ID</param>
             <param name="genID">Generation ID</param>
+        </member>
+        <member name="M:ASEva.Agency.RemovePointCloudReference(System.Int32)">
+            \~English
+            <summary>
+            (api:app=3.7.0) Remove point cloud channel reference
+            </summary>
+            <param name="channel">Point cloud data channel. Channel is starting from 0</param>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 移除点云通道引用
+            </summary>
+            <param name="channel">点云数据通道。通道序号从0开始</param>
         </member>
         <member name="M:ASEva.Agency.RemoveProcessorVideoReference(System.Int32)">
             \~English
@@ -4049,12 +4109,12 @@
         <member name="M:ASEva.AgencyAsync.AddBusMessageReference(System.Int32)">
             \~English
             <summary>
-            (api:app=3.4.5) Add bus channel reference (only data with references will be sent to client side)
+            (api:app=3.4.5) Add bus channel reference
             </summary>
             <param name="busChannel">Bus channel, ranges 1~16</param>
             \~Chinese
             <summary>
-            (api:app=3.4.5) 添加总线通道引用，在客户端才可获得该总线通道的数据
+            (api:app=3.4.5) 添加总线通道引用
             </summary>
             <param name="busChannel">总线通道，1~16</param>
         </member>
@@ -4073,24 +4133,24 @@
         <member name="M:ASEva.AgencyAsync.AddPointCloudReference(System.Int32)">
             \~English
             <summary>
-            (api:app=3.4.5) Add point cloud channel reference (only data with references will be sent to client side)
+            (api:app=3.4.5) Add point cloud channel reference
             </summary>
             <param name="channel">Point cloud data channel. Channel is starting from 0</param>
             \~Chinese
             <summary>
-            (api:app=3.4.5) 添加点云通道引用，在客户端才可获得该通道的点云数据
+            (api:app=3.4.5) 添加点云通道引用
             </summary>
             <param name="channel">点云数据通道。通道序号从0开始</param>
         </member>
         <member name="M:ASEva.AgencyAsync.AddSignalReference(System.String)">
             \~English
             <summary>
-            Add signal reference (only signals with references will be sent to app layer)
+            Add signal reference
             </summary>
             <param name="signalID">Signal ID</param>
             \~Chinese
             <summary>
-            添加信号引用，在应用层才可获得该信号的数据
+            添加信号引用
             </summary>
             <param name="signalID">信号ID</param>
         </member>
@@ -4701,7 +4761,7 @@
             <summary>
             获取数据通道上最近的若干帧时间戳
             </summary>
-            <param name="channelID">数据通道关键字，格式为"协议名@通道序号"，通道序号从0开始。视频协议名为video，音频协议名为audio</param>
+            <param name="channelID">数据通道ID，格式为"协议名@通道序号"，通道序号从0开始。视频协议名为video，音频协议名为audio</param>
             <returns>指定数据通道上最近的若干帧时间戳，若该通道未找到或最近无数据则返回null</returns>
         </member>
         <member name="M:ASEva.AgencyAsync.GetChannelMonitoringFlag(System.String)">
@@ -4909,6 +4969,18 @@
             获取当前session的GUID
             </summary>
             <returns>当前session的GUID，若未运行则返回null</returns>
+        </member>
+        <member name="M:ASEva.AgencyAsync.GetDataReferenceInfo">
+            \~English
+            <summary>
+            (api:app=3.7.0) Get data reference counter info
+            </summary>
+            <returns>Data reference counter info</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 获取数据引用计数信息
+            </summary>
+            <returns>数据引用计数信息</returns>
         </member>
         <member name="M:ASEva.AgencyAsync.GetDataLayers">
             \~English
@@ -5607,7 +5679,7 @@
             <summary>
             获取指定样本通道对应的标题
             </summary>
-            <param name="channelID">样本通道关键字，格式为"协议名@通道序号"，通道序号从0开始</param>
+            <param name="channelID">样本通道ID，格式为"协议名@通道序号"，通道序号从0开始</param>
             <returns>样本标题，null表示通道不存在或该样本通道无标题</returns>
         </member>
         <member name="M:ASEva.AgencyAsync.GetSceneIDList">
@@ -6085,7 +6157,7 @@
             <summary>
             检查指定的输入样本通道是否可用
             </summary>
-            <param name="channelID">样本通道关键字，格式为"协议名@通道序号"，通道序号从0开始，协议名中带"v"字版本号的可向下兼容</param>
+            <param name="channelID">样本通道ID，格式为"协议名@通道序号"，通道序号从0开始，协议名中带"v"字版本号的可向下兼容</param>
             <returns>该通道是否可用</returns>
         </member>
         <member name="M:ASEva.AgencyAsync.IsInternetConnected">
@@ -6945,12 +7017,12 @@
         <member name="M:ASEva.AgencyLocal.AddProcessorVideoReference(System.Int32)">
             \~English
             <summary>
-            Add video reference (only video with references will be sent to app layer's processors)
+            Add video reference
             </summary>
             <param name="videoChannel">Video channel, 0~23 corresponding to A~X</param>
             \~Chinese
             <summary>
-            添加视频引用，在应用层的数据处理对象才可获得该通道的数据
+            添加视频引用
             </summary>
             <param name="videoChannel">视频通道，0~23对应A~X</param>
         </member>
@@ -7379,6 +7451,18 @@
             获取当前数据目录的路径
             </summary>
             <returns>当前数据目录的路径，若未设置返回null</returns>
+        </member>
+        <member name="M:ASEva.AgencyLocal.GetDataReferenceInfo">
+            \~English
+            <summary>
+            (api:app=3.7.0) Get data reference counter info
+            </summary>
+            <returns>Data reference counter info</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 获取数据引用计数信息
+            </summary>
+            <returns>数据引用计数信息</returns>
         </member>
         <member name="M:ASEva.AgencyLocal.GetDialogClassInfo(System.String,System.String)">
             \~English
@@ -8424,7 +8508,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.6.1
+            version=3.7.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -12911,6 +12995,26 @@
             通过日期时间创建
             </summary>
         </member>
+        <member name="M:ASEva.SessionIdentifier.FromLongNumber(System.UInt64)">
+            \~English
+            <summary>
+            (api:app=3.7.2) Create by ulong number
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.2) 通过ulong值创建
+            </summary>
+        </member>
+        <member name="P:ASEva.SessionIdentifier.LongNumber">
+            \~English
+            <summary>
+            (api:app=3.7.2) Get the ulong number
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.2) 获取ulong值
+            </summary>
+        </member>
         <member name="M:ASEva.SessionIdentifier.IsValid">
             \~English
             <summary>
@@ -13620,11 +13724,11 @@
         <member name="P:ASEva.Samples.BusMessageSample.Data">
             \~English
             <summary>
-            Bus message data, the length is limited to 64 bytes, so it may be smaller than actual length
+            Bus message data. It may be smaller than actual length (for purpose of memory usage control)
             </summary>
             \~Chinese
             <summary>
-            报文数据，长度限定在64以下，可能小于报文的实际长度
+            报文数据。可能小于报文的实际长度（出于内存用量控制等目的）
             </summary>
         </member>
         <member name="P:ASEva.Samples.BusMessageSample.Type">
@@ -13946,11 +14050,21 @@
         <member name="P:ASEva.Samples.PointCloudSample.PointCount">
             \~English
             <summary>
-            Number of points
+            Available number of points
             </summary>
             \~Chinese
             <summary>
-            点个数
+            可用的点个数
+            </summary>
+        </member>
+        <member name="P:ASEva.Samples.PointCloudSample.SourcePointCount">
+            \~English
+            <summary>
+            (api:app=3.7.1) Number of points at data source
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.1) 数据源处的点个数
             </summary>
         </member>
         <member name="P:ASEva.Samples.PointCloudSample.DataReleased">
@@ -15347,6 +15461,106 @@
             \~Chinese
             <summary>
             摄像头信息
+            </summary>
+        </member>
+        <member name="T:ASEva.SecondProfileSample">
+            \~English
+            <summary>
+            (api:app=3.7.0) Channel data's second profile sample
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 通道数据的秒侧写样本
+            </summary>
+        </member>
+        <member name="P:ASEva.SecondProfileSample.ChannelID">
+            \~English
+            <summary>
+            Data channel ID, with format as "protocol@channel". Channel is starting from 0. The bus channel's protocol is "bus". The video channel's protocol is "video". The audio channel's ID is "audio". The point cloud's ID is "point-cloud"
+            </summary>
+            \~Chinese
+            <summary>
+            数据通道ID，格式为"协议名@通道序号"，通道序号从0开始。总线协议名为bus，视频协议名为video，音频协议名为audio，点云协议名为point-cloud
+            </summary>
+        </member>
+        <member name="P:ASEva.SecondProfileSample.Second">
+            \~English
+            <summary>
+            The second of the profile, corresponding to data in range of [N, N+1), and the profile sample's offset is N+0.5
+            </summary>
+            \~Chinese
+            <summary>
+            侧写所在秒，对应[N, N+1)内的数据，侧写样本的时间偏置为N+0.5
+            </summary>
+        </member>
+        <member name="P:ASEva.SecondProfileSample.SourceCount">
+            \~English
+            <summary>
+            Frame count at data source
+            </summary>
+            \~Chinese
+            <summary>
+            数据源处的帧数
+            </summary>
+        </member>
+        <member name="P:ASEva.SecondProfileSample.AvailableCount">
+            \~English
+            <summary>
+            Available frame count at current side
+            </summary>
+            \~Chinese
+            <summary>
+            当前端可用帧数
+            </summary>
+        </member>
+        <member name="P:ASEva.SecondProfileSample.Offsets">
+            \~English
+            <summary>
+            Channel data's time offsets in the time range, can be null
+            </summary>
+            \~Chinese
+            <summary>
+            通道数据在该时间范围内的所有时间偏置，可为null
+            </summary>
+        </member>
+        <member name="T:ASEva.SecondProfilePack">
+            \~English
+            <summary>
+            (api:app=3.7.0) All profile samples of one second
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 一秒内的所有侧写样本集合
+            </summary>
+        </member>
+        <member name="P:ASEva.SecondProfilePack.Session">
+            \~English
+            <summary>
+            (api:app=3.7.3) The session
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.3) 所在session
+            </summary>
+        </member>
+        <member name="P:ASEva.SecondProfilePack.Second">
+            \~English
+            <summary>
+            The second of the profiles, corresponding to data in range of [N, N+1)
+            </summary>
+            \~Chinese
+            <summary>
+            侧写所在秒，对应[N, N+1)内的数据
+            </summary>
+        </member>
+        <member name="P:ASEva.SecondProfilePack.Profiles">
+            \~English
+            <summary>
+            Sample table, key is data channel ID
+            </summary>
+            \~Chinese
+            <summary>
+            样本表，键为数据通道ID
             </summary>
         </member>
         <member name="T:ASEva.SceneData">
@@ -19901,6 +20115,106 @@
             测试结果，键为测试项，值为每秒可处理像素数（null表示未测试，0表示失败）
             </summary>
         </member>
+        <member name="T:ASEva.DataReferenceInfo">
+            \~English
+            <summary>
+            (api:app=3.7.0) Data reference counter info
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) 数据引用计数信息
+            </summary>
+        </member>
+        <member name="P:ASEva.DataReferenceInfo.AlwaysTransferBusMessage">
+            \~English
+            <summary>
+            Whether bus message data always transferred
+            </summary>
+            \~Chinese
+            <summary>
+            总线报文数据是否无条件传输
+            </summary>
+        </member>
+        <member name="P:ASEva.DataReferenceInfo.BusMessageReferences">
+            \~English
+            <summary>
+            Reference counter of each bus message data channel
+            </summary>
+            \~Chinese
+            <summary>
+            各通道总线报文数据引用计数
+            </summary>
+        </member>
+        <member name="P:ASEva.DataReferenceInfo.AlwaysTransferPointCloud">
+            \~English
+            <summary>
+            Whether point cloud data always transferred
+            </summary>
+            \~Chinese
+            <summary>
+            点云数据是否无条件传输
+            </summary>
+        </member>
+        <member name="P:ASEva.DataReferenceInfo.PointCloudReferences">
+            \~English
+            <summary>
+            Reference counter of each point cloud data channel
+            </summary>
+            \~Chinese
+            <summary>
+            各通道点云数据引用计数
+            </summary>
+        </member>
+        <member name="P:ASEva.DataReferenceInfo.AlwaysTransferProcessorVideo">
+            \~English
+            <summary>
+            Whether video data for processor always transferred (only available on host side)
+            </summary>
+            \~Chinese
+            <summary>
+            用于处理的视频数据是否无条件传输 (仅主机端有效)
+            </summary>
+        </member>
+        <member name="P:ASEva.DataReferenceInfo.ProcessorVideoReferences">
+            \~English
+            <summary>
+            Reference counter of each video data (for processor) channel (only available on host side)
+            </summary>
+            \~Chinese
+            <summary>
+            各通道视频数据(用于处理)引用计数 (仅主机端有效)
+            </summary>
+        </member>
+        <member name="P:ASEva.DataReferenceInfo.AlwaysTransferSignal">
+            \~English
+            <summary>
+            Whether signal data always transferred
+            </summary>
+            \~Chinese
+            <summary>
+            信号数据是否无条件传输
+            </summary>
+        </member>
+        <member name="P:ASEva.DataReferenceInfo.SignalReferences">
+            \~English
+            <summary>
+            Reference counter of each signal data channel, key is signal ID
+            </summary>
+            \~Chinese
+            <summary>
+            各通道信号数据引用计数，键为信号ID
+            </summary>
+        </member>
+        <member name="P:ASEva.DataReferenceInfo.SubscriberReferences">
+            \~English
+            <summary>
+            Reference counter of subscribed data, key is data ID
+            </summary>
+            \~Chinese
+            <summary>
+            被订阅数据的引用计数，键为数据ID
+            </summary>
+        </member>
         <member name="T:ASEva.Utility.AttributeParser">
             \~English
             <summary>
@@ -22030,12 +22344,12 @@
             <summary>
             [Required] Input new data
             </summary>
-            <param name="data">New data</param>
+            <param name="data">New data, can be ASEva.GeneralSample , ASEva.Samples.ManualTriggerSample , ASEva.Samples.AudioFrameSample , ASEva.Samples.PointCloudSample , ASEva.Samples.BusDataPack , ASEva.Samples.SignalsData , ASEva.EventData , ASEva.SceneData , ASEva.Samples.SecondProfilePack , etc.</param>
             \~Chinese
             <summary>
             [必须实现] 输入新数据
             </summary>
-            <param name="data">新数据</param>
+            <param name="data">新数据，包括通用样本 ASEva.GeneralSample , 手动触发器样本 ASEva.Samples.ManualTriggerSample , 音频帧样本 ASEva.Samples.AudioFrameSample , 点云帧样本 ASEva.Samples.PointCloudSample , 总线数据 ASEva.Samples.BusDataPack , 信号数据 ASEva.Samples.SignalsData , 事件数据 ASEva.EventData , 场景片段描述 ASEva.SceneData , 秒侧写信息 ASEva.Samples.SecondProfilePack 等类型</param>
         </member>
         <member name="M:ASEva.CommonWorkflow.OnStartSession">
             \~English
@@ -22290,6 +22604,46 @@
             [可选实现] 返回是否请求自动root权限 (仅针对Linux操作系统)
             </summary>
             <returns>是否请求自动root权限</returns>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnCheckAlwaysTransferBusMessage">
+            \~English
+            <summary>
+            (api:app=3.7.0) [Optional] Get whether the bus message data always transferred from native layer
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) [可选实现] 返回总线数据是否无条件从原生层传输
+            </summary>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnCheckAlwaysTransferSignal">
+            \~English
+            <summary>
+            (api:app=3.7.0) [Optional] Get whether the signal data always transferred from native layer
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) [可选实现] 返回信号数据是否无条件从原生层传输
+            </summary>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnCheckAlwaysTransferPointCloud">
+            \~English
+            <summary>
+            (api:app=3.7.0) [Optional] Get whether the point cloud data always transferred from native layer
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) [可选实现] 返回点云数据是否无条件从原生层传输
+            </summary>
+        </member>
+        <member name="M:ASEva.CoreWorkflow.OnCheckAlwaysTransferProcessorVideo">
+            \~English
+            <summary>
+            (api:app=3.7.0) [Optional] Get whether the video data for processor always transferred from native layer
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.0) [可选实现] 返回处理用视频数据是否无条件从原生层传输
+            </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnOpenDialog(System.Object,ASEva.DialogClassInfo,System.String)">
             \~English

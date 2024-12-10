@@ -19,6 +19,9 @@ namespace ASEva.UIAvalonia
         public ColorPickerDialog()
         {
             InitializeComponent();
+#if !ASEVA_API_BUNDLE_MODE
+            if (App.MainWindow != null) Icon = App.MainWindow.Icon;
+#endif
         }
 
         public Color Color

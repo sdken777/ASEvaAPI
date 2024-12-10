@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ASEva.UIAvalonia"
         x:Class="ASEva.UIAvalonia.ColorPickerDialog"
-        Title="" Icon="" WindowStartupLocation="CenterScreen" 
+        Title="" WindowStartupLocation="CenterScreen" 
         Width="350" Height="450" MinWidth="350" MinHeight="450" CanResize="False">
     <Grid RowDefinitions="400,50">
         <ColorView Grid.Row="0" x:Name="view">

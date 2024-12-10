@@ -1,5 +1,6 @@
 using System;
 using Eto.Forms;
+using Eto.Drawing;
 using ASEva.UIEto;
 using ASEva.Utility;
 
@@ -10,6 +11,7 @@ namespace ASEvaAPIAvaloniaTest
         public CrossEtoPanel()
         {
             Title = Program.Texts["menu-eto-dialog"];
+            Icon = Icon.FromResource("icon.png");
             this.SetFixMode(700, 400, true);
 
             var mainLayout = this.SetContentAsColumnLayout();
