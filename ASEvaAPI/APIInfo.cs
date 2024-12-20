@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 7, 3, 0); // Update log / 更新记录: 新增SecondProfilePack.Session
+            return new Version(3, 7, 3, 1); // Update log / 更新记录: 优化Dump.Exception，避免重复打印
         }
 
         /// \~English

@@ -24,9 +24,14 @@ namespace ASEva.Utility
         public static void Exception(Exception ex)
         {
             if (ex == null) return;
+
+            var msg = ex.Message + "\n" + ex.StackTrace;
+            if (msg == lastMsg) return;
+            else lastMsg = msg;
+
             lock (exceptions)
             {
-                exceptions.Add(ex.Message + "\n" + ex.StackTrace);
+                exceptions.Add(msg);
                 if (exceptions.Count > ExceptionSizeLimit) exceptions.RemoveRange(0, ExceptionSizeLimit / 10);
             }
         }
@@ -52,6 +57,7 @@ namespace ASEva.Utility
         }
 
         private static List<String> exceptions = new List<String>();
+        private static String lastMsg = "";
         private const int ExceptionSizeLimit = 10000;
     }
 }
