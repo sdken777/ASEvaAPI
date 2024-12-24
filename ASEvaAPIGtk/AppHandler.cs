@@ -22,20 +22,23 @@ namespace ASEva.UIGtk
     {
         public Application CreateApp(bool attach, out String uiBackend, out String webViewBackend)
         {
-            GLib.ExceptionManager.UnhandledException += (args) =>
-            {
-                App.TriggerFatalException(args);
-            };
-
             if (ASEva.APIInfo.GetRunningOS() == "linuxarm")
             {
+                // CHECK: 修正Arm下启动时XrmQGetResource崩溃问题
+                XInitThreads();
+
                 // CHECK: 修正在Arm下打开文件对话框异常，Eto-2.8.3已修复
                 Redirection.RedirectMarshaller();
 
                 // 修正打开右键菜单异常，Arm-Ubuntu16.04-X11可重现 (不再支持Ubuntu16.04)
                 // Redirection.RedirectMenu();
             }
-  
+
+            GLib.ExceptionManager.UnhandledException += (args) =>
+            {
+                App.TriggerFatalException(args);
+            };
+
             var platform = new global::Eto.GtkSharp.Platform();
             platform.Add<LinkButton.IHandler>(() => new LinkButtonHandler());
             // platform.Add<NumericStepper.IHandler>(() => new NumericStepperHandler());
@@ -217,5 +220,8 @@ namespace ASEva.UIGtk
 
 		[DllImport("libgdk-3.so.0", SetLastError = true)]
 		private static extern IntPtr gdk_wayland_monitor_get_type();
+
+		[DllImport("libX11.so.6", SetLastError = true)]
+		private static extern int XInitThreads();
     }
 }

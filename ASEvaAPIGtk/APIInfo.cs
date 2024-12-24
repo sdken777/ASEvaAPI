@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 11, 4, 0); // Update log / 更新记录: 支持FlowLayout.ScrollToControl
+            return new Version(2, 11, 4, 1); // Update log / 更新记录: 修正Arm下启动时XrmQGetResource崩溃问题
         }
     }
 }
