@@ -11,8 +11,8 @@ namespace ASEvaAPIEtoTest
         private void initPlotGroupBox(GroupBox groupBox)
         {
             var mainLayout = groupBox.SetContentAsRowLayout(8, 8, VerticalAlignment.Stretch);
-            var treeView = mainLayout.AddControl(new SimpleTreeView(), false, 200) as SimpleTreeView;
-            var plotView = mainLayout.AddControl(new OxyPlotView(), true) as OxyPlotView;
+            var treeView = mainLayout.AddControl(new SimpleTreeView(), false, 200);
+            var plotView = mainLayout.AddControl(new OxyPlotView(), true);
 
             ExampleLibrary.RenderingCapabilities.PixelScale = Pixel.Scale;
 

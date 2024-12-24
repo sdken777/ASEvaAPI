@@ -542,4 +542,40 @@ namespace ASEva.UIEto
             return layout;
         }
     }
+
+    /// \~English
+    /// <summary>
+    /// (api:eto=3.3.1) Extension to add control to a row of table layout
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:eto=3.3.1) 添加控件至表布局行的扩展
+    /// </summary>
+    public static class TableLayoutAddControlExtension
+    {
+        /// \~English
+        /// <summary>
+        /// Add control
+        /// </summary>
+        /// <param name="tableRow">Row object of table layout</param>
+        /// <param name="control">Control object</param>
+        /// <param name="expandWidth">Whether to expand horizontally</param>
+        /// <param name="fillHeight">Whether to fill vertically</param>
+        /// <param name="logicalWidth">Initial logical width, 0 as not to set</param>
+        /// <param name="logicalHeight">Initial logical height, 0 as not to set</param>
+        /// \~Chinese
+        /// <summary>
+        /// 添加控件至表布局的行
+        /// </summary>
+        /// <param name="tableRow">表布局的行</param>
+        /// <param name="control">控件</param>
+        /// <param name="expandWidth">是否横向撑满</param>
+        /// <param name="fillHeight">是否纵向填满</param>
+        /// <param name="logicalWidth">初始宽度，0表示不设置</param>
+        /// <param name="logicalHeight">初始高度，0表示不设置</param>
+        public static T AddControl<T>(this TableRow tableRow, T control, bool expandWidth = false, bool fillHeight = false, int logicalWidth = 0, int logicalHeight = 0) where T : Control
+        {
+            return TableLayoutExtensions.AddControl(tableRow, control, expandWidth, fillHeight, logicalWidth, logicalHeight) as T;
+        }
+    }
 }

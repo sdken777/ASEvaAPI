@@ -35,7 +35,7 @@ namespace ASEvaAPIEtoTest
             buttonRow.AddSpace();
             var buttonUncheckAll = buttonRow.AddLinkButton(t["basic-checklist-uncheck-all"]);
 
-            var checkListBox = layout.AddControl(new CheckableListBox(), true) as CheckableListBox;
+            var checkListBox = layout.AddControl(new CheckableListBox(), true);
             for (int i = 0; i < 1000; i++) checkListBox.AddItem(t.Format("basic-list-item-short", i.ToString()), i % 2 == 0, (i / 2) % 2 == 0);
             checkListBox.ItemClicked += delegate
             {
@@ -90,7 +90,7 @@ namespace ASEvaAPIEtoTest
             layoutGridViewRow.AddSpace();
             var linkButtonRemove = layoutGridViewRow.AddLinkButton(t["basic-grid-remove-row"]);
 
-            var tableView = layout.AddControl(new TextTableView(), true) as TextTableView;
+            var tableView = layout.AddControl(new TextTableView(), true);
             tableView.AddColumn(t["basic-grid-index-title"], 50, false);
             tableView.AddColumn(t["basic-grid-key-title"]);
             tableView.AddColumn(t["basic-grid-value-title"]);
@@ -117,7 +117,7 @@ namespace ASEvaAPIEtoTest
             };
 
             layout.AddSpace(4);
-            var tableView2 = layout.AddControl(new TextTableView(), false, 0, 80) as TextTableView;
+            var tableView2 = layout.AddControl(new TextTableView(), false, 0, 80);
             for (int i = 0; i < 10; i++)
             {
                 tableView2.AddColumn(t.Format("basic-grid-column", i + 1), 50, true);

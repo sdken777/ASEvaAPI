@@ -12,7 +12,7 @@ namespace ASEvaAPIEtoTest
         private void initDrawSkia2D(TabPage tabPage, bool disableGPU, bool onscreenRendering = false)
         {
             var layout = tabPage.SetContentAsColumnLayout();
-            var skiaView = layout.AddControl(new SkiaView(null, disableGPU, onscreenRendering), true, 200, 0) as SkiaView;
+            var skiaView = layout.AddControl(new SkiaView(null, disableGPU, onscreenRendering), true, 200, 0);
             if (!disableGPU)
             {
                 layout.AddLinkButton(t["draw-gl-detail"]).Click += delegate

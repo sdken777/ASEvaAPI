@@ -175,4 +175,36 @@ namespace ASEva.UIEto
     {
         void InitWindow(Window window);
     }
+
+    /// \~English
+    /// <summary>
+    /// (api:eto=3.3.1) Extension to add control to panel
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:eto=3.3.1) 添加控件至面板的扩展
+    /// </summary>
+    public static class SetContentAsControlExtension
+    {
+        /// \~English
+        /// <summary>
+        /// Set content as a control object
+        /// </summary>
+        /// <param name="panel">Panel object</param>
+        /// <param name="control">The control object to set as content</param>
+        /// <param name="logicalPadding">Control's logical padding</param>
+        /// <returns>The control object set as content</returns>
+        /// \~Chinese
+        /// <summary>
+        /// 设置控件至面板Content
+        /// </summary>
+        /// <param name="panel">面板</param>
+        /// <param name="control">目标控件</param>
+        /// <param name="logicalPadding">目标控件的边缘空隙</param>
+        /// <returns>已设置为Content的目标控件</returns>
+        public static T SetContentAsControl<T>(this Panel panel, T control, int logicalPadding = 8) where T : Control
+        {
+            return SetContentExtensions.SetContentAsControl(panel, control, logicalPadding) as T;
+        }
+    }
 }

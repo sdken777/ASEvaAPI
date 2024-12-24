@@ -12,7 +12,7 @@ namespace ASEvaAPIEtoTest
     {
         private void initBasicTabPageB(TabPage tabPage)
         {
-            var splitter = tabPage.SetContentAsControl(new Splitter { Position = this.Sizer(300) }, 0) as Splitter;
+            var splitter = tabPage.SetContentAsControl(new Splitter { Position = this.Sizer(300) }, 0);
             splitter.Panel1MinimumSize = 300;
             splitter.Panel2MinimumSize = 200;
             var panel1 = splitter.SetPanel1();
@@ -32,16 +32,16 @@ namespace ASEvaAPIEtoTest
 
         private void initBasicTabPageBLists(StackLayout layout)
         {
-            var listBox = layout.AddControl(new ListBox(), true) as ListBox;
+            var listBox = layout.AddControl(new ListBox(), true);
             for (int i = 1; i <= 1000; i++) listBox.Items.Add(t.Format("basic-list-item", i.ToString()));
 
-            var checkListBox = layout.AddControl(new CheckableListBox(), true) as CheckableListBox;
+            var checkListBox = layout.AddControl(new CheckableListBox(), true);
             for (int i = 1; i <= 1000; i++) checkListBox.AddItem(t.Format("basic-list-item-short", i.ToString()));
         }
 
         private void initBasicTabPageBTreeView(StackLayout layout)
         {
-            var view = layout.AddControl(new SimpleTreeView(), true) as SimpleTreeView;
+            var view = layout.AddControl(new SimpleTreeView(), true);
             var buttonLayout = layout.AddRowLayout();
             var buttonSelect = buttonLayout.AddLinkButton(t["basic-tree-select-first"]);
             var buttonChange = buttonLayout.AddLinkButton(t["basic-tree-change-color"]);
@@ -98,7 +98,7 @@ namespace ASEvaAPIEtoTest
         private void initBasicTabPageBFlowItems(StackLayout layout)
         {
             var layoutButtons = layout.AddRowLayout();
-            var flowLayout = layout.AddControl(new FlowLayout(), true) as FlowLayout;
+            var flowLayout = layout.AddControl(new FlowLayout(), true);
             flowLayout.ControlSelected += delegate
             {
                 App.ShowMessageBox(t.Format("basic-flow-selected", flowLayout.GetSelectedControlIndex(), ""));

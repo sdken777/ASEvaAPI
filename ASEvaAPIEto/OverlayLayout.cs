@@ -204,4 +204,42 @@ namespace ASEva.UIEto
         public static bool DelayHandleControl { private get; set; }
         public static bool ExpandControlSize { private get; set; }
     }
+
+    /// \~English
+    /// <summary>
+    /// (api:eto=3.3.1) Extension to add control to overlay layout
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:eto=3.3.1) 添加控件至可覆盖布局的扩展
+    /// </summary>
+    public static class OverlayLayoutAddControlExtension
+    {
+        /// \~English
+        /// <summary>
+        /// Add control
+        /// </summary>
+        /// <param name="layout">The overlay layout</param>
+        /// <param name="control">The control object</param>
+        /// <param name="topLogicalPadding">Space between top bound and the control, null as not related</param>
+        /// <param name="bottomLogicalPadding">Space between bottom bound and the control, null as not related</param>
+        /// <param name="leftLogicalPadding">Space between left bound and the control, null as not related</param>
+        /// <param name="rightLogicalPadding">Space between right bound and the control, null as not related</param>
+        /// <returns>新添加的控件</returns>
+        /// \~Chinese
+        /// <summary>
+        /// 添加控件
+        /// </summary>
+        /// <param name="layout">可覆盖布局</param>
+        /// <param name="control">控件</param>
+        /// <param name="topLogicalPadding">控件与顶部间隔，null表示不关联</param>
+        /// <param name="bottomLogicalPadding">控件与底部间隔，null表示不关联</param>
+        /// <param name="leftLogicalPadding">控件与左侧间隔，null表示不关联</param>
+        /// <param name="rightLogicalPadding">控件与右侧间隔，null表示不关联</param>
+        /// <returns>新添加的控件</returns>
+        public static T AddControl<T>(this OverlayLayout layout, T control, int? topLogicalPadding, int? bottomLogicalPadding, int? leftLogicalPadding, int? rightLogicalPadding) where T : Control
+        {
+            return layout.AddControl(control, topLogicalPadding, bottomLogicalPadding, leftLogicalPadding, rightLogicalPadding) as T;
+        }
+    }
 }

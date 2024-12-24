@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=3.3.0
+            version=3.3.1
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -1695,6 +1695,34 @@
             <param name="logicalPadding">目标控件的边缘空隙</param>
             <returns>已设置为Content的目标控件</returns>
         </member>
+        <member name="T:ASEva.UIEto.SetContentAsControlExtension">
+            \~English
+            <summary>
+            (api:eto=3.3.1) Extension to add control to panel
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.3.1) 添加控件至面板的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.SetContentAsControlExtension.SetContentAsControl``1(Eto.Forms.Panel,``0,System.Int32)">
+            \~English
+            <summary>
+            Set content as a control object
+            </summary>
+            <param name="panel">Panel object</param>
+            <param name="control">The control object to set as content</param>
+            <param name="logicalPadding">Control's logical padding</param>
+            <returns>The control object set as content</returns>
+            \~Chinese
+            <summary>
+            设置控件至面板Content
+            </summary>
+            <param name="panel">面板</param>
+            <param name="control">目标控件</param>
+            <param name="logicalPadding">目标控件的边缘空隙</param>
+            <returns>已设置为Content的目标控件</returns>
+        </member>
         <member name="T:ASEva.UIEto.SetToolTipExtensions">
             \~English
             <summary>
@@ -2495,6 +2523,36 @@
             <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
             <returns>创建的表布局</returns>
         </member>
+        <member name="T:ASEva.UIEto.StackLayoutAddControlExtension">
+            \~English
+            <summary>
+            (api:eto=3.3.1) Extension to add control to stack layout
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.3.1) 添加控件至堆叠布局的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.StackLayoutAddControlExtension.AddControl``1(Eto.Forms.StackLayout,``0,System.Boolean,System.Int32,System.Int32)">
+            \~English
+            <summary>
+            Add control
+            </summary>
+            <param name="stackLayout">Stack layout object</param>
+            <param name="control">Control object</param>
+            <param name="expand">Whether to expand</param>
+            <param name="logicalWidth">Initial logical width, 0 as not to set</param>
+            <param name="logicalHeight">Initial logical height, 0 as not to set</param>
+            \~Chinese
+            <summary>
+            添加控件至堆叠布局
+            </summary>
+            <param name="stackLayout">堆叠布局</param>
+            <param name="control">控件</param>
+            <param name="expand">是否延布局方向撑满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
+        </member>
         <member name="T:ASEva.UIEto.TabControlExtensions">
             \~English
             <summary>
@@ -2872,6 +2930,38 @@
             <param name="logicalSpacingX">表布局中各控件的横向间隙</param>
             <param name="logicalSpacingY">表布局中各控件的纵向间隙</param>
             <returns>创建的表布局</returns>
+        </member>
+        <member name="T:ASEva.UIEto.TableLayoutAddControlExtension">
+            \~English
+            <summary>
+            (api:eto=3.3.1) Extension to add control to a row of table layout
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.3.1) 添加控件至表布局行的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.TableLayoutAddControlExtension.AddControl``1(Eto.Forms.TableRow,``0,System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            \~English
+            <summary>
+            Add control
+            </summary>
+            <param name="tableRow">Row object of table layout</param>
+            <param name="control">Control object</param>
+            <param name="expandWidth">Whether to expand horizontally</param>
+            <param name="fillHeight">Whether to fill vertically</param>
+            <param name="logicalWidth">Initial logical width, 0 as not to set</param>
+            <param name="logicalHeight">Initial logical height, 0 as not to set</param>
+            \~Chinese
+            <summary>
+            添加控件至表布局的行
+            </summary>
+            <param name="tableRow">表布局的行</param>
+            <param name="control">控件</param>
+            <param name="expandWidth">是否横向撑满</param>
+            <param name="fillHeight">是否纵向填满</param>
+            <param name="logicalWidth">初始宽度，0表示不设置</param>
+            <param name="logicalHeight">初始高度，0表示不设置</param>
         </member>
         <member name="T:ASEva.UIEto.TopMostExtensions">
             \~English
@@ -4132,6 +4222,40 @@
             更新控件位置（一般在手动修改控件大小后调用）
             </summary>
             <param name="control">控件</param>
+        </member>
+        <member name="T:ASEva.UIEto.OverlayLayoutAddControlExtension">
+            \~English
+            <summary>
+            (api:eto=3.3.1) Extension to add control to overlay layout
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.3.1) 添加控件至可覆盖布局的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIEto.OverlayLayoutAddControlExtension.AddControl``1(ASEva.UIEto.OverlayLayout,``0,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            \~English
+            <summary>
+            Add control
+            </summary>
+            <param name="layout">The overlay layout</param>
+            <param name="control">The control object</param>
+            <param name="topLogicalPadding">Space between top bound and the control, null as not related</param>
+            <param name="bottomLogicalPadding">Space between bottom bound and the control, null as not related</param>
+            <param name="leftLogicalPadding">Space between left bound and the control, null as not related</param>
+            <param name="rightLogicalPadding">Space between right bound and the control, null as not related</param>
+            <returns>新添加的控件</returns>
+            \~Chinese
+            <summary>
+            添加控件
+            </summary>
+            <param name="layout">可覆盖布局</param>
+            <param name="control">控件</param>
+            <param name="topLogicalPadding">控件与顶部间隔，null表示不关联</param>
+            <param name="bottomLogicalPadding">控件与底部间隔，null表示不关联</param>
+            <param name="leftLogicalPadding">控件与左侧间隔，null表示不关联</param>
+            <param name="rightLogicalPadding">控件与右侧间隔，null表示不关联</param>
+            <returns>新添加的控件</returns>
         </member>
         <member name="T:ASEva.UIEto.OxyPlotView">
             \~English

@@ -649,4 +649,38 @@ namespace ASEva.UIEto
             return layout;
         }
     }
+
+    /// \~English
+    /// <summary>
+    /// (api:eto=3.3.1) Extension to add control to stack layout
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:eto=3.3.1) 添加控件至堆叠布局的扩展
+    /// </summary>
+    public static class StackLayoutAddControlExtension
+    {
+        /// \~English
+        /// <summary>
+        /// Add control
+        /// </summary>
+        /// <param name="stackLayout">Stack layout object</param>
+        /// <param name="control">Control object</param>
+        /// <param name="expand">Whether to expand</param>
+        /// <param name="logicalWidth">Initial logical width, 0 as not to set</param>
+        /// <param name="logicalHeight">Initial logical height, 0 as not to set</param>
+        /// \~Chinese
+        /// <summary>
+        /// 添加控件至堆叠布局
+        /// </summary>
+        /// <param name="stackLayout">堆叠布局</param>
+        /// <param name="control">控件</param>
+        /// <param name="expand">是否延布局方向撑满</param>
+        /// <param name="logicalWidth">初始宽度，0表示不设置</param>
+        /// <param name="logicalHeight">初始高度，0表示不设置</param>
+        public static T AddControl<T>(this StackLayout stackLayout, T control, bool expand = false, int logicalWidth = 0, int logicalHeight = 0) where T : Control
+        {
+            return StackLayoutExtensions.AddControl(stackLayout, control, expand, logicalWidth, logicalHeight) as T;
+        }
+    }
 }

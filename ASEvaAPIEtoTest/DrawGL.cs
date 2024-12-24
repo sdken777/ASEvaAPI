@@ -23,7 +23,7 @@ namespace ASEvaAPIEtoTest
 
             if (glView.SupportOverlay)
             {
-                var overlay = layout.AddControl(new OverlayLayout(), true) as OverlayLayout;
+                var overlay = layout.AddControl(new OverlayLayout(), true);
                 overlay.AddControl(glView, 0, 0, 0, 0);
                 overlay.AddControl(button, null, 10, null, 10);
             }

@@ -82,15 +82,15 @@ namespace ASEvaAPIEtoTest
             layout.AddLabel(t.Format("basic-label-row", 3));
             layout.AddControl(new TextBox(), true);
             layout.AddControl(new SearchBox());
-            var passwordBox = layout.AddControl(new PasswordBox{ PasswordChar = '●' }) as PasswordBox;
+            var passwordBox = layout.AddControl(new PasswordBox{ PasswordChar = '●' });
             layout.AddCheckBox("").CheckedChanged += (o, e) => { passwordBox.PasswordChar = (o as CheckBox).Checked.Value ? (char)0 : '●'; };
         }
 
         private void initBasicTabPageARow4(StackLayout layout)
         {
             layout.AddLabel(t.Format("basic-label-row", 4));
-            var slider = layout.AddControl(new Slider { MinValue = 0, MaxValue = 100, TickFrequency = 10 }, true, 0, 40) as Slider;
-            var progressBar = layout.AddControl(new ProgressBar()) as ProgressBar;
+            var slider = layout.AddControl(new Slider { MinValue = 0, MaxValue = 100, TickFrequency = 10 }, true, 0, 40);
+            var progressBar = layout.AddControl(new ProgressBar());
             slider.ValueChanged += delegate { progressBar.Value = slider.Value; };
         }
 
