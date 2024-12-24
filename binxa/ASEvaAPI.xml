@@ -1423,7 +1423,7 @@
         <member name="M:ASEva.Agency.GetFrameworkThirdPartyNotices">
             \~English
             <summary>
-            Get thirt party license notices of software used by framework
+            Get third party license notices of software used by framework
             </summary>
             <returns>Dictionary. The key is title</returns>
             \~Chinese
@@ -4077,7 +4077,7 @@
             </summary>
             <param name="fileID">Bus protocol file ID</param>
             <param name="filePath">New path</param>
-            <returns>Whether successfull, false if the file is not found or MD5 doesn't match</returns>
+            <returns>Whether successful, false if the file is not found or MD5 doesn't match</returns>
             \~Chinese
             <summary>
             更新总线协议文件路径(仅支持单通道的情况)
@@ -5115,7 +5115,7 @@
         <member name="M:ASEva.AgencyAsync.GetFrameworkThirdPartyNotices">
             \~English
             <summary>
-            Get thirt party license notices of software used by framework
+            Get third party license notices of software used by framework
             </summary>
             <returns>Dictionary. The key is title</returns>
             \~Chinese
@@ -7495,7 +7495,7 @@
         <member name="M:ASEva.AgencyLocal.GetFrameworkThirdPartyNotices">
             \~English
             <summary>
-            Get thirt party license notices of software used by framework
+            Get third party license notices of software used by framework
             </summary>
             <returns>Dictionary. The key is title</returns>
             \~Chinese
@@ -8497,7 +8497,7 @@
             </summary>
             <param name="fileID">Bus protocol file ID</param>
             <param name="filePath">New path</param>
-            <returns>Whether successfull, false if the file is not found or MD5 doesn't match</returns>
+            <returns>Whether successful, false if the file is not found or MD5 doesn't match</returns>
             \~Chinese
             <summary>
             更新总线协议文件路径(仅支持单通道的情况)
@@ -21914,7 +21914,7 @@
             <summary>
             Get the text with the ID
             </summary>
-            <value>Text ID</value>
+            <value>Text for the specified ID</value>
             \~Chinese
             <summary>
             获取指定ID对应的文本

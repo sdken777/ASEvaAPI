@@ -1829,7 +1829,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get thirt party license notices of software used by framework
+        /// Get third party license notices of software used by framework
         /// </summary>
         /// <returns>Dictionary. The key is title</returns>
         /// \~Chinese
@@ -5213,7 +5213,7 @@ namespace ASEva
         /// </summary>
         /// <param name="fileID">Bus protocol file ID</param>
         /// <param name="filePath">New path</param>
-        /// <returns>Whether successfull, false if the file is not found or MD5 doesn't match</returns>
+        /// <returns>Whether successful, false if the file is not found or MD5 doesn't match</returns>
         /// \~Chinese
         /// <summary>
         /// 更新总线协议文件路径(仅支持单通道的情况)

@@ -1499,7 +1499,7 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Get thirt party license notices of software used by framework
+        /// Get third party license notices of software used by framework
         /// </summary>
         /// <returns>Dictionary. The key is title</returns>
         /// \~Chinese

@@ -22,6 +22,18 @@ namespace ASEva.UIGtk
     {
         public Application CreateApp(bool attach, out String uiBackend, out String webViewBackend)
         {
+            if (ASEva.APIInfo.GetRunningOS() == "linuxarm")
+            {
+                // CHECK: 修正Arm下启动时XrmQGetResource崩溃问题
+                XInitThreads();
+
+                // CHECK: 修正在Arm下打开文件对话框异常，Eto-2.8.3已修复
+                Redirection.RedirectMarshaller();
+
+                // 修正打开右键菜单异常，Arm-Ubuntu16.04-X11可重现 (不再支持Ubuntu16.04)
+                // Redirection.RedirectMenu();
+            }
+
             if (AvaloniaAdaptorGtk.AvaloniaApp) setenv("GDK_BACKEND", "x11");
 
             this.attach = attach;
@@ -33,15 +45,6 @@ namespace ASEva.UIGtk
                 };
             }
 
-            if (ASEva.APIInfo.GetRunningOS() == "linuxarm")
-            {
-                // CHECK: 修正在Arm下打开文件对话框异常，Eto-2.8.3已修复
-                Redirection.RedirectMarshaller();
-
-                // 修正打开右键菜单异常，Arm-Ubuntu16.04-X11可重现 (不再支持Ubuntu16.04)
-                // Redirection.RedirectMenu();
-            }
-  
             var platform = new global::Eto.GtkSharp.Platform();
             platform.Add<LinkButton.IHandler>(() => new LinkButtonHandler());
             // platform.Add<NumericStepper.IHandler>(() => new NumericStepperHandler());
@@ -233,5 +236,8 @@ namespace ASEva.UIGtk
 
         [DllImport("libc.so.6")]
         private static extern void setenv(String key, String val);
+
+		[DllImport("libX11.so.6", SetLastError = true)]
+		private static extern int XInitThreads();
     }
 }

@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 3, 5, 0); // Update log / 更新记录: Avalonia应用自动设置GDK_BACKEND
+            return new Version(3, 3, 5, 1); // Update log / 更新记录: 修正Arm下启动时XrmQGetResource崩溃问题
         }
     }
 }
