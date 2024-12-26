@@ -3563,12 +3563,7 @@ namespace ASEva
         /// <returns>是否允许进行保存工程项目和开始session等操作</returns>
         public static bool IsReady(out String busyReason)
         {
-            if (!AgencyAsync.SyncMode)
-            {
-                busyReason = null;
-                return false;
-            }
-            var result = AgencyAsync.IsReady().Result;
+            var result = AgencyLocal.IsReady();
             busyReason = result.Item2;
             return result.Item1;
         }

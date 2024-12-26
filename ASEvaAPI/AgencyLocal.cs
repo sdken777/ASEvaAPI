@@ -78,6 +78,7 @@ namespace ASEva
         bool IsInternetConnected();
         bool IsMainThreadFunction(String funcName);
         bool IsPRCWebPreferred();
+        (bool, String) IsReady();
         void Log(String text, LogLevel level);
         Task<bool> NewProject(bool force);
         Task OpenDialog(object caller, String dialogClassID, String config);
@@ -1305,6 +1306,21 @@ namespace ASEva
         public static bool IsPRCWebPreferred()
         {
             return Handler.IsPRCWebPreferred();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.7.5) Get whether the system is ready for saving project file, starting session, and output the reason why it's not ready
+        /// </summary>
+        /// <returns>1) Whether the system is ready for saving project file, starting session, etc. 2) The ready why the system is not ready, empty means unknown</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.5) 返回是否允许进行保存工程项目和开始session等操作，若不允许则输出繁忙原因
+        /// </summary>
+        /// <returns>1. 是否允许进行保存工程项目和开始session等操作; 2. 系统繁忙原因，空表示原因未知</returns>
+        public static (bool, String) IsReady()
+        {
+            return Handler.IsReady();
         }
 
         /// \~English

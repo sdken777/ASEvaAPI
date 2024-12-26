@@ -7888,6 +7888,18 @@
             </summary>
             <returns>是否使用境内网络服务</returns>
         </member>
+        <member name="M:ASEva.AgencyLocal.IsReady">
+            \~English
+            <summary>
+            (api:app=3.7.5) Get whether the system is ready for saving project file, starting session, and output the reason why it's not ready
+            </summary>
+            <returns>1) Whether the system is ready for saving project file, starting session, etc. 2) The ready why the system is not ready, empty means unknown</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.7.5) 返回是否允许进行保存工程项目和开始session等操作，若不允许则输出繁忙原因
+            </summary>
+            <returns>1. 是否允许进行保存工程项目和开始session等操作; 2. 系统繁忙原因，空表示原因未知</returns>
+        </member>
         <member name="M:ASEva.AgencyLocal.Log(System.String,ASEva.LogLevel)">
             \~English
             <summary>
@@ -8508,7 +8520,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.7.4
+            version=3.7.5
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -12552,12 +12564,12 @@
             <summary>
             [Optional] Called while getting the executable paths needed to be run with auto root privilege
             </summary>
-            <returns>The executable paths, only programs without GUI are supported</returns>
+            <returns>The executable paths</returns>
             \~Chinese
             <summary>
             [可选实现] 获取Linux系统下需要自动root权限的可执行程序路径时被调用
             </summary>
-            <returns>可执行程序路径列表，仅限无界面程序</returns>
+            <returns>可执行程序路径列表</returns>
         </member>
         <member name="M:ASEva.Plugin.GetPreferenceVariables">
             \~English

@@ -337,6 +337,11 @@ namespace ASEva
             return false;
         }
 
+        public (bool, String) IsReady()
+        {
+            return (false, null);
+        }
+
         public void Log(string text, LogLevel level)
         {
         }
