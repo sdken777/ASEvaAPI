@@ -9284,12 +9284,12 @@
             <summary>
             (api:app=2.14.2) [Optional] Called while get the executable paths needed to be run with auto root privilege
             </summary>
-            <returns>The executable paths, only programs without GUI are supported</returns>
+            <returns>The executable paths</returns>
             \~Chinese
             <summary>
             (api:app=2.14.2) [可选实现] 获取Linux系统下需要自动root权限的可执行程序路径时被调用
             </summary>
-            <returns>可执行程序路径列表，仅限无界面程序</returns>
+            <returns>可执行程序路径列表</returns>
         </member>
         <member name="M:ASEva.Plugin.UseLogger(ASEva.Logger)">
             \~English
