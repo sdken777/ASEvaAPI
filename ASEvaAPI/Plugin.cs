@@ -200,12 +200,12 @@ namespace ASEva
         /// <summary>
         /// [Optional] Called while getting the executable paths needed to be run with auto root privilege
         /// </summary>
-        /// <returns>The executable paths, only programs without GUI are supported</returns>
+        /// <returns>The executable paths</returns>
         /// \~Chinese
         /// <summary>
         /// [可选实现] 获取Linux系统下需要自动root权限的可执行程序路径时被调用
         /// </summary>
-        /// <returns>可执行程序路径列表，仅限无界面程序</returns>
+        /// <returns>可执行程序路径列表</returns>
         public virtual String[] GetAutoRootTargets() { return null; }
 
         /// \~English
