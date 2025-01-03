@@ -28,7 +28,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 0, 0); // Update log / 更新记录: 嵌入avalonia面板支持自定义app builder
+            return new Version(2, 2, 0, 1); // Update log / 更新记录: 修正WebView关闭后不析构问题
         }
 
         /// \~English
