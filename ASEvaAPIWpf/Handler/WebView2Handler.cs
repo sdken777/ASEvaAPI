@@ -144,7 +144,7 @@ namespace ASEva.UIWpf
 			// CHECK: 截获初始化异常
 			try
 			{
-				// CHECK: 修正窗口移动后下拉菜单显示位置不正确问题
+				// CHECK: 修正窗口移动后下拉菜单显示位置不正确问题，以及关闭后不析构问题
 				if (controller == null)
 				{
 					controller = Control.GetType().GetProperty("CoreWebView2Controller", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(Control) as CoreWebView2Controller;
@@ -168,6 +168,7 @@ namespace ASEva.UIWpf
 						{
 							timer.Stop();
 							timer = null;
+							Control.Dispose();
 						}
 					};
 					timer.Start();

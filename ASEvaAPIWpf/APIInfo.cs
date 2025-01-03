@@ -26,7 +26,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 9, 2, 3); // Update log / 更新记录: 优化文件夹选择对话框标题显示
+            return new Version(1, 9, 2, 4); // Update log / 更新记录: 修正WebView关闭后不析构问题
         }
     }
 }
