@@ -78,6 +78,12 @@ namespace ASEvaAPIAvaloniaTest
             }
         }
 
+        private void linkSwitch_Click(object sender, RoutedEventArgs e)
+        {
+            linkEnableDisable.IsEnabled = !linkEnableDisable.IsEnabled;
+            linkEnableDisable.Content = Program.Texts[linkEnableDisable.IsEnabled ? "basic-linkbutton-enabled" : "basic-linkbutton-disabled"];
+        }
+
         private void checkShowPassword_IsCheckedChanged(object sender, RoutedEventArgs e)
         {
             passwordBox.PasswordChar = checkShowPassword.IsChecked.Value ? '\0' : '●';

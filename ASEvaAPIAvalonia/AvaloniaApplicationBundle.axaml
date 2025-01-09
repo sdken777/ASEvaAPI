@@ -7,6 +7,10 @@
         <StyleInclude Source="avares://Avalonia.Controls.ColorPicker/Themes/Fluent/Fluent.xaml" />
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
         <Style Selector="Button.hyperlink">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Padding" Value="0" />
             <Setter Property="Template">
                 <ControlTemplate>
                     <TextBlock Text="{TemplateBinding Content}" Foreground="{StaticResource SystemAccentColor}" TextDecorations="Underline">
@@ -14,12 +18,13 @@
                             <Style Selector="TextBlock:pointerover">
                                 <Setter Property="Foreground" Value="{StaticResource SystemAccentColorLight1}"/>
                             </Style>
+                            <Style Selector="TextBlock:disabled">
+                                <Setter Property="Foreground" Value="Gray"/>
+                            </Style>
                         </TextBlock.Styles>
                     </TextBlock>
                 </ControlTemplate>
             </Setter>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderThickness" Value="0"/>
         </Style>
     </Application.Styles>
 </Application>

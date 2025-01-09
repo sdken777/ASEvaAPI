@@ -7,12 +7,14 @@
     <Border CornerRadius="3" Background="LightYellow">
         <Grid Margin="8" RowDefinitions="Auto,8,Auto,8,Auto,8,Auto,Auto,Auto,8,Auto">
             <Label Grid.Row="0" Content="{DynamicResource basic-menu-notice}" />
-            <Grid Grid.Row="2" ColumnDefinitions="Auto,8,Auto,8,Auto,8,Auto,*,Auto">
+            <Grid Grid.Row="2" ColumnDefinitions="Auto,8,Auto,8,Auto,8,Auto,8,Auto,*,Auto,8,Auto">
                 <Label Grid.Column="0" Content="{DynamicResource basic-label-row-1}" VerticalAlignment="Center" />
                 <CheckBox Grid.Column="2" x:Name="checkSaveFile" Content="{DynamicResource basic-checkbox}" />
                 <RadioButton Grid.Column="4" x:Name="radioFile" Content="{DynamicResource basic-radiobutton-file}" IsChecked="True" />
                 <RadioButton Grid.Column="6" x:Name="radioDir" Content="{DynamicResource basic-radiobutton-dir}" />
                 <Button Classes="hyperlink" Grid.Column="8" Content="{DynamicResource basic-linkbutton}" Click="linkBrowse_Click" />
+                <Button Classes="hyperlink" Grid.Column="10" x:Name="linkEnableDisable" Content="{DynamicResource basic-linkbutton-enabled}" />
+                <Button Classes="hyperlink" Grid.Column="12" Content="{DynamicResource basic-linkbutton-switch}" Click="linkSwitch_Click" />
             </Grid>
             <Grid Grid.Row="4" ColumnDefinitions="Auto,8,*,8,*,8,Auto">
                 <Label Grid.Column="0" Content="{DynamicResource basic-label-row-2}" VerticalAlignment="Center" />

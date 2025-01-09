@@ -184,6 +184,18 @@
     <en>Browse</en>
     <zh>浏览</zh>
   </t>
+  <t id="basic-linkbutton-disabled">
+    <en>Disabled</en>
+    <zh>已禁用</zh>
+  </t>
+  <t id="basic-linkbutton-enabled">
+    <en>Enabled</en>
+    <zh>已启用</zh>
+  </t>
+  <t id="basic-linkbutton-switch">
+    <en>Switch</en>
+    <zh>切换</zh>
+  </t>
   <t id="basic-list-item">
     <en>List Option {0}</en>
     <zh>列表项{0}</zh>
