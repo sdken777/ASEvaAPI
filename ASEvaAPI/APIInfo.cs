@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 7, 7, 0); // Update log / 更新记录: GraphData.CreateGraphDataEncapsulation改为public
+            return new Version(3, 7, 7, 1); // Update log / 更新记录: IntervalControl最小间隔改为0.01s
         }
 
         /// \~English

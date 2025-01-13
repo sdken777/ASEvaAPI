@@ -20908,14 +20908,14 @@
             <summary>
             Constructor
             </summary>
-            <param name="interval">Time interval of operation, in seconds, at least 0.1 second</param>
+            <param name="interval">Time interval of operation, in seconds, at least 0.01 second</param>
             <param name="manual">Whether in manual mode. If yes, you should call Next method to start next loop</param>
             <param name="immediate">Whether the operation can be performed immediately, or else wait for "interval" time</param>
             \~Chinese
             <summary>
             构造函数
             </summary>
-            <param name="interval">执行操作的间隔时间，单位秒，至少0.1秒</param>
+            <param name="interval">执行操作的间隔时间，单位秒，至少0.01秒</param>
             <param name="manual">是否手动控制计时，手动模式下需要调用Next方法开启下一轮计时</param>
             <param name="immediate">是否可立即执行操作，否则需要等待interval时间后才可进行操作</param>
         </member>
