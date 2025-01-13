@@ -653,6 +653,51 @@ namespace ASEva
             catch (Exception ex) { Dump.Exception(ex); return null; }
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:app=3.7.7) Create graph data derived class object from base class object
+        /// </summary>
+        /// <param name="data">Graph data base class object</param>
+        /// <returns>Graph data derived class object</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.7) 从图表报告基类对象创建子类对象
+        /// </summary>
+        /// <param name="data">图表报告基类对象</param>
+        /// <returns>图表报告子类对象</returns>
+        public static GraphData CreateGraphDataEncapsulation(GraphData data)
+        {
+            if (data == null) return null;
+
+            GraphData output = null;
+            switch (data.Definition.Type)
+            {
+                case GraphType.SingleValue:
+                    output = new Graph.SingleValueData();
+                    break;
+                case GraphType.ScatterPoints:
+                    output = new Graph.ScatterPointsData();
+                    break;
+                case GraphType.HistAndLine:
+                    output = new Graph.HistAndLineData();
+                    break;
+                case GraphType.MatrixTable:
+                    output = new Graph.MatrixTableData();
+                    break;
+                case GraphType.LabelTable:
+                    output = new Graph.LabelTableData();
+                    break;
+                default:
+                    return null;
+            }
+
+            output.ID = data.ID;
+            output.Definition = data.Definition;
+            output.Params = data.Params;
+            output.Data = data.Data;
+            return output;
+        }
+
         private static GraphValidation RowStringToValidation(String rowText)
         {
             var commaIndex = rowText.IndexOf(',');
@@ -707,39 +752,6 @@ namespace ASEva
             }
 
             return null;
-        }
-
-        private static GraphData CreateGraphDataEncapsulation(GraphData data)
-        {
-            if (data == null) return null;
-
-            GraphData output = null;
-            switch (data.Definition.Type)
-            {
-                case GraphType.SingleValue:
-                    output = new Graph.SingleValueData();
-                    break;
-                case GraphType.ScatterPoints:
-                    output = new Graph.ScatterPointsData();
-                    break;
-                case GraphType.HistAndLine:
-                    output = new Graph.HistAndLineData();
-                    break;
-                case GraphType.MatrixTable:
-                    output = new Graph.MatrixTableData();
-                    break;
-                case GraphType.LabelTable:
-                    output = new Graph.LabelTableData();
-                    break;
-                default:
-                    return null;
-            }
-
-            output.ID = data.ID;
-            output.Definition = data.Definition;
-            output.Params = data.Params;
-            output.Data = data.Data;
-            return output;
         }
     }
 

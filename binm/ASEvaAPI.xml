@@ -8544,7 +8544,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.7.6
+            version=3.7.7
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -10784,6 +10784,20 @@
             </summary>
             <param name="file">文件路径</param>
             <returns>图表数据对象</returns>
+        </member>
+        <member name="M:ASEva.GraphData.CreateGraphDataEncapsulation(ASEva.GraphData)">
+            \~English
+            <summary>
+            (api:app=3.7.7) Create graph data derived class object from base class object
+            </summary>
+            <param name="data">Graph data base class object</param>
+            <returns>Graph data derived class object</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.7.7) 从图表报告基类对象创建子类对象
+            </summary>
+            <param name="data">图表报告基类对象</param>
+            <returns>图表报告子类对象</returns>
         </member>
         <member name="T:ASEva.GraphPanel">
             \~English
