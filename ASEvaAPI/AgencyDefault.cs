@@ -996,6 +996,11 @@ namespace ASEva
             return Task.FromResult<string>(null);
         }
 
+        public Task<GraphType> GetGraphType(int graphID)
+        {
+            return Task.FromResult(GraphType.Invalid);
+        }
+
         public Task<PosixTimeModel> GetHostPosixTimeModel(SessionIdentifier session)
         {
             return Task.FromResult<PosixTimeModel>(null);

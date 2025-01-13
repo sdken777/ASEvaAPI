@@ -1704,6 +1704,18 @@
             <param name="graphID">图表报告ID</param>
             <returns>图表报告标题，若不存在则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetGraphType(System.Int32)">
+            \~English
+            <summary>
+            (api:app=3.7.6) Get type of graph with the specified ID
+            </summary>
+            <returns>Graph's type, GraphType.Invalid if the graph doesn't exist</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.7.6) 获取指定ID图表的类别
+            </summary>
+            <returns>图表报告类别，若不存在则返回GraphType.Invalid</returns>
+        </member>
         <member name="M:ASEva.Agency.GetHostPosixTimeModel(ASEva.SessionIdentifier)">
             \~English
             <summary>
@@ -5314,6 +5326,18 @@
             <param name="graphID">图表报告ID</param>
             <returns>图表报告标题，若不存在则返回null</returns>
         </member>
+        <member name="M:ASEva.AgencyAsync.GetGraphType(System.Int32)">
+            \~English
+            <summary>
+            (api:app=3.7.6) Get type of graph with the specified ID
+            </summary>
+            <returns>Graph's type, GraphType.Invalid if the graph doesn't exist</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.7.6) 获取指定ID图表的类别
+            </summary>
+            <returns>图表报告类别，若不存在则返回GraphType.Invalid</returns>
+        </member>
         <member name="M:ASEva.AgencyAsync.GetHostPosixTimeModel(ASEva.SessionIdentifier)">
             \~English
             <summary>
@@ -8520,7 +8544,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.7.5
+            version=3.7.6
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">

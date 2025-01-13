@@ -103,6 +103,7 @@ namespace ASEva
         Task<int[]> GetGraphIDList();
         Task<int?> GetGraphIDWithTitle(String title);
         Task<String> GetGraphTitle(int graphID);
+        Task<GraphType> GetGraphType(int graphID);
         Task<PosixTimeModel> GetHostPosixTimeModel(SessionIdentifier session);
         Task<double> GetInterestTarget();
         Task<double> GetInterestTime();
@@ -1742,6 +1743,21 @@ namespace ASEva
         public static Task<String> GetGraphTitle(int graphID)
         {
             return Handler.GetGraphTitle(graphID);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.7.6) Get type of graph with the specified ID
+        /// </summary>
+        /// <returns>Graph's type, GraphType.Invalid if the graph doesn't exist</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.6) 获取指定ID图表的类别
+        /// </summary>
+        /// <returns>图表报告类别，若不存在则返回GraphType.Invalid</returns>
+        public static Task<GraphType> GetGraphType(int graphID)
+        {
+            return Handler.GetGraphType(graphID);
         }
 
         /// \~English

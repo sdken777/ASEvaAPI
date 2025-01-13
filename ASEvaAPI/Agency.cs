@@ -2188,6 +2188,22 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.7.6) Get type of graph with the specified ID
+        /// </summary>
+        /// <returns>Graph's type, GraphType.Invalid if the graph doesn't exist</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.6) 获取指定ID图表的类别
+        /// </summary>
+        /// <returns>图表报告类别，若不存在则返回GraphType.Invalid</returns>
+        public static GraphType GetGraphType(int graphID)
+        {
+            if (!AgencyAsync.SyncMode) return GraphType.Invalid;
+            return AgencyAsync.GetGraphType(graphID).Result;
+        }
+
+        /// \~English
+        /// <summary>
         /// Get session's host machine posix time model
         /// </summary>
         /// <param name="session">Session ID</param>
