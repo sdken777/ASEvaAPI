@@ -4,6 +4,7 @@ using Eto.Forms;
 using Eto.Drawing;
 using Eto.GtkSharp;
 using Eto.GtkSharp.Forms;
+using ASEva.UIEto;
 
 namespace ASEva.UIGtk
 {
@@ -19,18 +20,26 @@ namespace ASEva.UIGtk
 
 		public event EventHandler ColorSet;
 
-        private void button_Clicked(object sender, EventArgs e)
+        private async void button_Clicked(object sender, EventArgs e)
         {
-            var dialog = new Gtk.ColorChooserDialog("", DialogHelper.TopWindow);
-			dialog.UseAlpha = AllowAlpha;
-			dialog.Rgba = (Control.Child as Gtk.Label).GetBackground().ToRGBA();
-			int res = dialog.Run();
-			var color = dialog.Rgba.ToEto();
-			dialog.Dispose();
-			if (res == (int)Gtk.ResponseType.Ok)
+			// CHECK: 兼容avalonia应用
+			if (AvaloniaAdaptorGtk.AvaloniaApp)
 			{
-				(Control.Child as Gtk.Label).SetBackground(color);
-				if (ColorSet != null) ColorSet(this, null);
+				Color = await App.ShowColorDialog(null, Color);
+			}
+			else
+			{
+				var dialog = new Gtk.ColorChooserDialog("", DialogHelper.TopWindow);
+				dialog.UseAlpha = AllowAlpha;
+				dialog.Rgba = (Control.Child as Gtk.Label).GetBackground().ToRGBA();
+				int res = dialog.Run();
+				var color = dialog.Rgba.ToEto();
+				dialog.Dispose();
+				if (res == (int)Gtk.ResponseType.Ok)
+				{
+					(Control.Child as Gtk.Label).SetBackground(color);
+					if (ColorSet != null) ColorSet(this, null);
+				}
 			}
         }
 

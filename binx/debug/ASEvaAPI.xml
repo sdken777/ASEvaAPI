@@ -1704,6 +1704,18 @@
             <param name="graphID">图表报告ID</param>
             <returns>图表报告标题，若不存在则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.GetGraphType(System.Int32)">
+            \~English
+            <summary>
+            (api:app=3.7.6) Get type of graph with the specified ID
+            </summary>
+            <returns>Graph's type, GraphType.Invalid if the graph doesn't exist</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.7.6) 获取指定ID图表的类别
+            </summary>
+            <returns>图表报告类别，若不存在则返回GraphType.Invalid</returns>
+        </member>
         <member name="M:ASEva.Agency.GetHostPosixTimeModel(ASEva.SessionIdentifier)">
             \~English
             <summary>
@@ -5314,6 +5326,18 @@
             <param name="graphID">图表报告ID</param>
             <returns>图表报告标题，若不存在则返回null</returns>
         </member>
+        <member name="M:ASEva.AgencyAsync.GetGraphType(System.Int32)">
+            \~English
+            <summary>
+            (api:app=3.7.6) Get type of graph with the specified ID
+            </summary>
+            <returns>Graph's type, GraphType.Invalid if the graph doesn't exist</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.7.6) 获取指定ID图表的类别
+            </summary>
+            <returns>图表报告类别，若不存在则返回GraphType.Invalid</returns>
+        </member>
         <member name="M:ASEva.AgencyAsync.GetHostPosixTimeModel(ASEva.SessionIdentifier)">
             \~English
             <summary>
@@ -7888,6 +7912,18 @@
             </summary>
             <returns>是否使用境内网络服务</returns>
         </member>
+        <member name="M:ASEva.AgencyLocal.IsReady">
+            \~English
+            <summary>
+            (api:app=3.7.5) Get whether the system is ready for saving project file, starting session, and output the reason why it's not ready
+            </summary>
+            <returns>1) Whether the system is ready for saving project file, starting session, etc. 2) The ready why the system is not ready, empty means unknown</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.7.5) 返回是否允许进行保存工程项目和开始session等操作，若不允许则输出繁忙原因
+            </summary>
+            <returns>1. 是否允许进行保存工程项目和开始session等操作; 2. 系统繁忙原因，空表示原因未知</returns>
+        </member>
         <member name="M:ASEva.AgencyLocal.Log(System.String,ASEva.LogLevel)">
             \~English
             <summary>
@@ -8508,7 +8544,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.7.4
+            version=3.7.7
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -10749,6 +10785,20 @@
             <param name="file">文件路径</param>
             <returns>图表数据对象</returns>
         </member>
+        <member name="M:ASEva.GraphData.CreateGraphDataEncapsulation(ASEva.GraphData)">
+            \~English
+            <summary>
+            (api:app=3.7.7) Create graph data derived class object from base class object
+            </summary>
+            <param name="data">Graph data base class object</param>
+            <returns>Graph data derived class object</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.7.7) 从图表报告基类对象创建子类对象
+            </summary>
+            <param name="data">图表报告基类对象</param>
+            <returns>图表报告子类对象</returns>
+        </member>
         <member name="T:ASEva.GraphPanel">
             \~English
             <summary>
@@ -12552,12 +12602,12 @@
             <summary>
             [Optional] Called while getting the executable paths needed to be run with auto root privilege
             </summary>
-            <returns>The executable paths, only programs without GUI are supported</returns>
+            <returns>The executable paths</returns>
             \~Chinese
             <summary>
             [可选实现] 获取Linux系统下需要自动root权限的可执行程序路径时被调用
             </summary>
-            <returns>可执行程序路径列表，仅限无界面程序</returns>
+            <returns>可执行程序路径列表</returns>
         </member>
         <member name="M:ASEva.Plugin.GetPreferenceVariables">
             \~English
@@ -20858,14 +20908,14 @@
             <summary>
             Constructor
             </summary>
-            <param name="interval">Time interval of operation, in seconds, at least 0.1 second</param>
+            <param name="interval">Time interval of operation, in seconds, at least 0.01 second</param>
             <param name="manual">Whether in manual mode. If yes, you should call Next method to start next loop</param>
             <param name="immediate">Whether the operation can be performed immediately, or else wait for "interval" time</param>
             \~Chinese
             <summary>
             构造函数
             </summary>
-            <param name="interval">执行操作的间隔时间，单位秒，至少0.1秒</param>
+            <param name="interval">执行操作的间隔时间，单位秒，至少0.01秒</param>
             <param name="manual">是否手动控制计时，手动模式下需要调用Next方法开启下一轮计时</param>
             <param name="immediate">是否可立即执行操作，否则需要等待interval时间后才可进行操作</param>
         </member>
