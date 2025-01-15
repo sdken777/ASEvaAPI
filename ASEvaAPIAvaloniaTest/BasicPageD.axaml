@@ -17,11 +17,11 @@
                         <Label Grid.Column="8" Content="{DynamicResource basic-text}" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="18" />
                     </Grid>
                     <Grid Grid.Row="2" ColumnDefinitions="*,8,1,8,*,8,1,8,*">
-                        <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-text}" Foreground="Red" />
+                        <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-text}" Height="30" Foreground="Red" />
                         <Rectangle Grid.Column="2" Fill="Gray" />
-                        <Button Classes="hyperlink" Grid.Column="4" Content="{DynamicResource basic-text}" FontSize="10" />
+                        <Button Classes="hyperlink" Grid.Column="4" Content="{DynamicResource basic-text}" Height="30" FontSize="10" />
                         <Rectangle Grid.Column="6" Fill="Gray" />
-                        <Button Classes="hyperlink" Grid.Column="8" Content="{DynamicResource basic-text}" FontSize="18" />
+                        <Button Classes="hyperlink" Grid.Column="8" Content="{DynamicResource basic-text}" Height="30" FontSize="18" />
                     </Grid>
                     <Grid Grid.Row="4" ColumnDefinitions="*,8,1,8,*,8,1,8,*">
                         <CheckBox Grid.Column="0" Content="{DynamicResource basic-text}" Foreground="Red" />
