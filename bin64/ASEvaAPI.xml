@@ -8544,7 +8544,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.7.7
+            version=3.7.8
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -16222,11 +16222,11 @@
         <member name="F:ASEva.ApplicationGUI.Avalonia">
             \~English
             <summary>
-            Avalonia, for desktop application. Windows, Linux, MacOS supported
+            Avalonia, for desktop and browser application. Windows, Linux, MacOS, WebAssembly supported
             </summary>
             \~Chinese
             <summary>
-            Avalonia，面向桌面应用，支持Windows、Linux、MacOS
+            Avalonia，面向桌面和浏览器应用，支持Windows、Linux、MacOS、WebAssembly
             </summary>
         </member>
         <member name="F:ASEva.ApplicationGUI.MAUI">
@@ -16237,16 +16237,6 @@
             \~Chinese
             <summary>
             (api:app=3.3.0) Multi-platform App UI，面向移动应用，支持iOS、安卓
-            </summary>
-        </member>
-        <member name="F:ASEva.ApplicationGUI.Blazor">
-            \~English
-            <summary>
-            (api:app=3.3.0) Blazor WebAssembly, for browser application
-            </summary>
-            \~Chinese
-            <summary>
-            (api:app=3.3.0) Blazor WebAssembly，面向浏览器应用
             </summary>
         </member>
         <member name="F:ASEva.ApplicationGUI.Unknown">

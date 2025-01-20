@@ -354,7 +354,7 @@ namespace ASEva
         /// <summary>
         /// 无图形界面，流程的实现应确保是同步的（非异步）
         /// </summary>
-        NoGUI,
+        NoGUI = 0,
 
         /// \~English
         /// <summary>
@@ -364,7 +364,7 @@ namespace ASEva
         /// <summary>
         /// Windows Forms，仅限Windows
         /// </summary>
-        WindowsForms,
+        WindowsForms = 1,
 
         /// \~English
         /// <summary>
@@ -374,7 +374,7 @@ namespace ASEva
         /// <summary>
         /// Windows Presentation Foundation，仅限Windows
         /// </summary>
-        WPF,
+        WPF = 2,
 
         /// \~English
         /// <summary>
@@ -384,17 +384,17 @@ namespace ASEva
         /// <summary>
         /// Eto.Forms，面向桌面应用，支持Windows、Linux、MacOS
         /// </summary>
-        Eto,
+        Eto = 3,
 
         /// \~English
         /// <summary>
-        /// Avalonia, for desktop application. Windows, Linux, MacOS supported
+        /// Avalonia, for desktop and browser application. Windows, Linux, MacOS, WebAssembly supported
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// Avalonia，面向桌面应用，支持Windows、Linux、MacOS
+        /// Avalonia，面向桌面和浏览器应用，支持Windows、Linux、MacOS、WebAssembly
         /// </summary>
-        Avalonia,
+        Avalonia = 4,
 
         /// \~English
         /// <summary>
@@ -404,17 +404,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=3.3.0) Multi-platform App UI，面向移动应用，支持iOS、安卓
         /// </summary>
-        MAUI,
-
-        /// \~English
-        /// <summary>
-        /// (api:app=3.3.0) Blazor WebAssembly, for browser application
-        /// </summary>
-        /// \~Chinese
-        /// <summary>
-        /// (api:app=3.3.0) Blazor WebAssembly，面向浏览器应用
-        /// </summary>
-        Blazor,
+        MAUI = 5,
 
         /// \~English
         /// <summary>
@@ -424,7 +414,7 @@ namespace ASEva
         /// <summary>
         /// (api:app=3.4.4) 未知（获取失败等情况）
         /// </summary>
-        Unknown,
+        Unknown = 7,
     }
 
     /// \~English
