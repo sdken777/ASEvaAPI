@@ -22918,12 +22918,12 @@
             <summary>
             (api:app=3.4.1) [Required] Get the connection config
             </summary>
-            <returns>Connection config. 1) Dual-port mode (ip:port-in:port-out)</returns>
+            <returns>Connection config. 1) Dual-port mode (ip:port-in:port-out); 2) WebSocket mode (ip:port)</returns>
             \~Chinese
             <summary>
             (api:app=3.4.1) [必须实现] 返回连接配置
             </summary>
-            <returns>连接配置，含以下模式：1. 双端口模式（ip:port-in:port-out）</returns>
+            <returns>连接配置，含以下模式：1. 双端口模式（ip:port-in:port-out）；2. WebSocket模式（ip:port）</returns>
         </member>
         <member name="M:ASEva.ClientWorkflow.OnConnectionChanged(System.Boolean)">
             \~English
