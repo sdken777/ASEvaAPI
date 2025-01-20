@@ -264,6 +264,8 @@ if [ "$EXPORT_DEVELOPER" = "y" ]; then
     cp -vf "$CUR_DIR"/binb/ASEvaAPI.xml $TARGET_DIR/binb/
     if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
         cp -vf "$CUR_DIR"/3party/common/* $TARGET_DIR/binb/
+        cp -vf "$CUR_DIR"/3party/skia-common/* $TARGET_DIR/binb/
+        cp -vf "$CUR_DIR"/3party/skia-doc/* $TARGET_DIR/binb/
         if [ "$EXPORT_AVALONIA" = "y" ]; then
             cp -vf "$CUR_DIR"/binb/ASEvaAPIAvalonia.dll $TARGET_DIR/binb/
             cp -vf "$CUR_DIR"/binb/ASEvaAPIAvalonia.xml $TARGET_DIR/binb/
