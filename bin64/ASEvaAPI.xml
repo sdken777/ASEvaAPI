@@ -4056,6 +4056,38 @@
             <param name="autosave">是否保存当前工程至autosave至应用程序的配置文件目录</param>
             <returns>是否成功终止</returns>
         </member>
+        <member name="M:ASEva.Agency.TransformCurrentDialog(System.Object,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.9) Transform current dialog
+            </summary>
+            <param name="dialog">The dialog's configuration panel to transform</param>
+            <param name="transformID">The transform ID, null to transform back</param>
+            <returns>Whether successful</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.7.9) 分化当前对话框
+            </summary>
+            <param name="dialog">将被分化的对话框配置面板</param>
+            <param name="transformID">分化ID，null表示变回未分化状态</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:ASEva.Agency.TransformWindow(System.Object,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.9) Transform the window
+            </summary>
+            <param name="window">The window panel to transform</param>
+            <param name="transformID">The transform ID, null to transform back</param>
+            <returns>Whether successful</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.7.9) 分化窗口
+            </summary>
+            <param name="window">将被分化的窗口面板</param>
+            <param name="transformID">分化ID，null表示变回未分化状态</param>
+            <returns>是否成功</returns>
+        </member>
         <member name="M:ASEva.Agency.UninstallPlugin(System.String)">
             \~English
             <summary>
@@ -8500,6 +8532,38 @@
             <param name="autosave">是否保存当前工程至autosave至应用程序的配置文件目录</param>
             <returns>是否成功终止</returns>
         </member>
+        <member name="M:ASEva.AgencyLocal.TransformCurrentDialog(System.Object,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.9) Transform current dialog
+            </summary>
+            <param name="dialog">The dialog's configuration panel to transform</param>
+            <param name="transformID">The transform ID, null to transform back</param>
+            <returns>Whether successful</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.7.9) 分化当前对话框
+            </summary>
+            <param name="dialog">将被分化的对话框配置面板</param>
+            <param name="transformID">分化ID，null表示变回未分化状态</param>
+            <returns>是否成功</returns>
+        </member>
+        <member name="M:ASEva.AgencyLocal.TransformWindow(System.Object,System.String)">
+            \~English
+            <summary>
+            (api:app=3.7.9) Transform the window
+            </summary>
+            <param name="window">The window panel to transform</param>
+            <param name="transformID">The transform ID, null to transform back</param>
+            <returns>Whether successful</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.7.9) 分化窗口
+            </summary>
+            <param name="window">将被分化的窗口面板</param>
+            <param name="transformID">分化ID，null表示变回未分化状态</param>
+            <returns>是否成功</returns>
+        </member>
         <member name="M:ASEva.AgencyLocal.UninstallPlugin(System.String)">
             \~English
             <summary>
@@ -8544,7 +8608,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.7.8
+            version=3.7.9
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">

@@ -517,6 +517,16 @@ namespace ASEva
             return Task.FromResult(false);
         }
 
+        public bool TransformCurrentDialog(object dialog, string transformID)
+        {
+            return false;
+        }
+
+        public bool TransformWindow(object window, string transformID)
+        {
+            return false;
+        }
+
         public bool UninstallPlugin(string packID)
         {
             return false;

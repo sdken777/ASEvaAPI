@@ -118,6 +118,8 @@ namespace ASEva
         bool StartProcess(String target);
         DataSubscriber SubscribeData(String dataID, int bufferLength, int timeout);
         Task<bool> TerminateApp(bool force, bool autosave);
+        bool TransformCurrentDialog(object dialog, String transformID);
+        bool TransformWindow(object window, String transformID);
         bool UninstallPlugin(String packID);
         void UnregisterPanel(object panel);
         bool UpdateBusProtocolFilePath(BusProtocolFileID fileID, String filePath);
@@ -2029,6 +2031,44 @@ namespace ASEva
         public static Task<bool> TerminateApp(bool force, bool autosave)
         {
             return Handler.TerminateApp(force, autosave);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.7.9) Transform current dialog
+        /// </summary>
+        /// <param name="dialog">The dialog's configuration panel to transform</param>
+        /// <param name="transformID">The transform ID, null to transform back</param>
+        /// <returns>Whether successful</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.9) 分化当前对话框
+        /// </summary>
+        /// <param name="dialog">将被分化的对话框配置面板</param>
+        /// <param name="transformID">分化ID，null表示变回未分化状态</param>
+        /// <returns>是否成功</returns>
+        public static bool TransformCurrentDialog(object dialog, String transformID)
+        {
+            return Handler.TransformCurrentDialog(dialog, transformID);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.7.9) Transform the window
+        /// </summary>
+        /// <param name="window">The window panel to transform</param>
+        /// <param name="transformID">The transform ID, null to transform back</param>
+        /// <returns>Whether successful</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.9) 分化窗口
+        /// </summary>
+        /// <param name="window">将被分化的窗口面板</param>
+        /// <param name="transformID">分化ID，null表示变回未分化状态</param>
+        /// <returns>是否成功</returns>
+        public static bool TransformWindow(object window, String transformID)
+        {
+            return Handler.TransformWindow(window, transformID);
         }
 
         /// \~English
