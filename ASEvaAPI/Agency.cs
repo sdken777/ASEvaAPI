@@ -1266,13 +1266,13 @@ namespace ASEva
         /// <summary>
         /// Get whether to monitor that there's data in the specified channel
         /// </summary>
-        /// <param name="id">Monitor ID, like bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0, etc.</param>
+        /// <param name="id">Monitor ID, like bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v1@0, etc.</param>
         /// <returns>Whether to monitor</returns>
         /// \~Chinese
         /// <summary>
         /// 获取是否监控指定通道有无数据
         /// </summary>
-        /// <param name="id">监控ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
+        /// <param name="id">监控ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v1@0等</param>
         /// <returns>是否监控有无数据</returns>
         public static bool GetChannelMonitoringFlag(String id)
         {
@@ -1284,13 +1284,13 @@ namespace ASEva
         /// <summary>
         /// Get whether to monitor that the specified channel's data is synchronized with time server
         /// </summary>
-        /// <param name="id">Monitor ID, like bus@1, video@0, sample@xxx-v2@0, etc.</param>
+        /// <param name="id">Monitor ID, like bus@1, video@0, sample@xxx-v1@0, etc.</param>
         /// <returns>Whether to monitor</returns>
         /// \~Chinese
         /// <summary>
         /// 获取是否监控指定通道数据与授时服务器同步
         /// </summary>
-        /// <param name="id">监控ID，如bus@1, video@0, sample@xxx-v2@0等</param>
+        /// <param name="id">监控ID，如bus@1, video@0, sample@xxx-v1@0等</param>
         /// <returns>是否监控指定通道数据与授时服务器同步</returns>
         public static bool GetChannelServerSyncMonitoringFlag(String id)
         {
@@ -4520,13 +4520,13 @@ namespace ASEva
         /// <summary>
         /// Set whether to monitor that there's data in the specified channel
         /// </summary>
-        /// <param name="id">Monitor ID, like bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0, etc.</param>
+        /// <param name="id">Monitor ID, like bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v1@0, etc.</param>
         /// <param name="monitoring">Whether to monitor (The function should be implemented by plugins, like audio alarm, UI flashing, etc.)</param>
         /// \~Chinese
         /// <summary>
         /// 设置是否监控指定通道有无数据
         /// </summary>
-        /// <param name="id">监控ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v2@0等</param>
+        /// <param name="id">监控ID，如：bus@1, video@0, audio, raw@xxx-v1, sample@xxx-v1@0等</param>
         /// <param name="monitoring">是否监控有无数据，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
         public static void SetChannelMonitoringFlag(String id, bool monitoring)
         {
@@ -4538,13 +4538,13 @@ namespace ASEva
         /// <summary>
         /// Set whether to monitor that the specified channel's data is synchronized with time server
         /// </summary>
-        /// <param name="id">Monitor ID, like bus@1, video@0, sample@xxx-v2@0, etc.</param>
+        /// <param name="id">Monitor ID, like bus@1, video@0, sample@xxx-v1@0, etc.</param>
         /// <param name="monitoring">Whether to monitor (The function should be implemented by plugins, like audio alarm, UI flashing, etc.)</param>
         /// \~Chinese
         /// <summary>
         /// 设置是否监控指定通道数据与授时服务器同步
         /// </summary>
-        /// <param name="id">监控ID，如bus@1, video@0, sample@xxx-v2@0等</param>
+        /// <param name="id">监控ID，如bus@1, video@0, sample@xxx-v1@0等</param>
         /// <param name="monitoring">是否监控数据与授时服务器同步，通道监控的具体实现应由插件给出，如发出报警音、指示灯闪烁等</param>
         public static void SetChannelServerSyncMonitoringFlag(String id, bool monitoring)
         {

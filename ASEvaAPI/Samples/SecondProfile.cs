@@ -15,11 +15,11 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// Data channel ID, with format as "protocol@channel". Channel is starting from 0. The bus channel's protocol is "bus". The video channel's protocol is "video". The audio channel's ID is "audio". The point cloud's ID is "point-cloud"
+        /// Data channel ID, like bus channel "bus@1", video channel "video@0", audio channel "audio", sample channel "xxx-v1@0", point cloud channel "point-cloud@0", etc.
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 数据通道ID，格式为"协议名@通道序号"，通道序号从0开始。总线协议名为bus，视频协议名为video，音频协议名为audio，点云协议名为point-cloud
+        /// 数据通道ID，如：总线通道bus@1, 视频通道video@0, 音频通道audio, 样本通道xxx-v1@0, 点云通道point-cloud@0等
         /// </summary>
         public String ChannelID { get; set; }
 
