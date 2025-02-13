@@ -8608,7 +8608,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.7.9
+            version=3.7.10
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -21959,6 +21959,26 @@
             \~Chinese
             <summary>
             (api:app=3.6.1) 确保相同目标的任务依次执行
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.TaskBeat.Handle(System.Func{System.Threading.Tasks.Task})">
+            \~English
+            <summary>
+            Loop call this method
+            </summary>
+            \~Chinese
+            <summary>
+            循环调用此方法
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.TaskBeat.MinInterval">
+            \~English
+            <summary>
+            (api:app=3.7.10) The minimum interval between task executions, in seconds
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.7.10) 任务执行的最小间隔，单位秒
             </summary>
         </member>
         <member name="T:ASEva.Utility.TextResource">
