@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 2, 9, 2); // Update log / 更新记录: 修正hyperlink Button显示问题
+            return new Version(1, 2, 9, 3); // Update log / 更新记录: 修正SimpleTheme资源
         }
 
         /// \~English
