@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Text;
+using System.Threading;
 using ASEva.UIEto;
 using Eto.Forms;
 using Eto.Drawing;
@@ -88,6 +88,7 @@ namespace ASEva.UICoreWF
             FuncManager.Register("RegisterLegacyScatterPointsGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.ScatterPoints, getLegacyStyleName(), typeof(ScatterPointsGraph)); return null; });
             FuncManager.Register("RegisterLegacyMatrixTableGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.MatrixTable, getLegacyStyleName(), typeof(MatrixTableGraph)); return null; });
             FuncManager.Register("RegisterLegacyLabelTableGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.LabelTable, getLegacyStyleName(), typeof(LabelTableGraph)); return null; });
+            FuncManager.Register("EnsureEtoSyncContext", delegate { if (SynchronizationContext.Current == null) SynchronizationContext.SetSynchronizationContext(new System.Windows.Forms.WindowsFormsSynchronizationContext()); return null; });
 
             uiBackend = null;
             webViewBackend = "webview2";
