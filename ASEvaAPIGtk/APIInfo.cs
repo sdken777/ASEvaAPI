@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 3, 7, 0); // Update log / 更新记录: 注册EnsureGtkSyncContext函数
+            return new Version(3, 3, 7, 1); // Update log / 更新记录: 改为注册EnsureEtoSyncContext
         }
     }
 }

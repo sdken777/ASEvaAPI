@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 using System.Reflection;
 using System.Linq;
+using System.Threading;
 using ASEva.Utility;
 using ASEva.UIEto;
 using Eto;
@@ -99,6 +100,9 @@ namespace ASEva.UIMonoMac
             OxyPlotView.Factory = new OxyPlotViewFactoryMonoMac();
 
             FuncManager.Register("GetUIBackendAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
+            FuncManager.Register("EnsureEtoSyncContext", delegate { if (SynchronizationContext.Current == null) SynchronizationContext.SetSynchronizationContext(syncContext); return null; });
+
+            if (syncContext == null) syncContext = SynchronizationContext.Current;
 
             uiBackend = null;
             webViewBackend = "webkit2";
@@ -215,5 +219,7 @@ namespace ASEva.UIMonoMac
 				}
 			}
 		}
+
+        private static SynchronizationContext syncContext = null;
     }
 }
