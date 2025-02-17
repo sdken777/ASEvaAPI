@@ -6,6 +6,7 @@ using ASEva.Utility;
 using ASEva.UIEto;
 using Eto.Drawing;
 using Eto.Forms;
+using Eto.GtkSharp.Forms;
 
 namespace ASEva.UIGtk
 {
@@ -111,6 +112,7 @@ namespace ASEva.UIGtk
             FuncManager.Register("RegisterLegacyScatterPointsGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.ScatterPoints, getLegacyStyleName(), typeof(ScatterPointsGraph)); return null; });
             FuncManager.Register("RegisterLegacyMatrixTableGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.MatrixTable, getLegacyStyleName(), typeof(MatrixTableGraph)); return null; });
             FuncManager.Register("RegisterLegacyLabelTableGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.LabelTable, getLegacyStyleName(), typeof(LabelTableGraph)); return null; });
+            FuncManager.Register("EnsureGtkSyncContext", delegate { if (SynchronizationContext.Current == null) SynchronizationContext.SetSynchronizationContext(new GtkSynchronizationContext()); return null; });
 
             webViewBackend = "webkit2";
 
