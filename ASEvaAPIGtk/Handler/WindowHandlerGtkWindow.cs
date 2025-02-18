@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Linq;
+using ASEva.Utility;
 using Eto.Drawing;
 using Eto.Forms;
 using Eto.GtkSharp;
@@ -552,7 +553,16 @@ namespace ASEva.UIGtk
 			}
 			if (!args.Cancel)
 			{
-				Callback.OnClosed(Widget, EventArgs.Empty);
+				// CHECK: 修正异步程序退出时异常
+				try
+				{
+					Callback.OnClosed(Widget, EventArgs.Empty);
+				}
+				catch (Exception ex)
+				{
+					Dump.Exception(ex);
+				}
+
 				if (shouldQuit)
 					Gtk.Application.Quit();
 
