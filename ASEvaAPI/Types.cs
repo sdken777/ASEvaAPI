@@ -4424,11 +4424,11 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// Manual trigger data
+        /// Deprecated. Merged to TransferStreamType.GeneralSample
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 触发器数据
+        /// 已弃用，合并至 TransferStreamType.GeneralSample
         /// </summary>
         ManualTrigger = 1,
 
