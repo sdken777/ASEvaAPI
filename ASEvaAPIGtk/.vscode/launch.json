@@ -28,7 +28,7 @@
     ],
     "configurations": [
         {
-            "name": "Run Eto Test (Debug)",
+            "name": "Debug with Eto Test",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build (Debug)",
@@ -43,7 +43,7 @@
             },
         },
         {
-            "name": "Run Avalonia Test (Debug)",
+            "name": "Debug with Avalonia Test",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build (Debug)",

@@ -59,6 +59,44 @@
             ],
         },
         {
+            "type":"process",
+            "label": "Run (Debug)",
+            "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIAvaloniaTest",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+            },
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Build (Debug)",
+            ],
+            "linux": {
+                "env": {
+                    "COMPlus_EnableAlternateStackCheck": "1",
+                }
+            },
+            "problemMatcher": [],
+        },
+        {
+            "type":"process",
+            "label": "Run (Release)",
+            "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/ASEvaAPIAvaloniaTest",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/",
+            },
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Build (Release)",
+            ],
+            "linux": {
+                "env": {
+                    "COMPlus_EnableAlternateStackCheck": "1",
+                }
+            },
+            "problemMatcher": [],
+        },
+        {
             "type": "process",
             "label": "Clean",
             "command": "rm",

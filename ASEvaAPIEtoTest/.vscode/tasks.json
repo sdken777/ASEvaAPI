@@ -28,6 +28,17 @@
                 ]
             }
         },
+        {
+            "id": "gdk_backend",
+            "type": "pickString",
+            "description": "Choose Display Server",
+            "default": "",
+            "options": [
+                "",
+                "x11",
+                "wayland"
+            ]
+        },
     ],
     "presentation": {
         "echo": true,
@@ -73,6 +84,40 @@
         },
         {
             "type": "process",
+            "label": "Run (Debug)",
+            "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest",
+            "options": {
+                "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+                "env": {
+                    "GDK_BACKEND": "${input:gdk_backend}",
+                    "COMPlus_EnableAlternateStackCheck": "1",
+                }
+            },
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Build (Debug)"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
+            "label": "Run (Release)",
+            "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/ASEvaAPIEtoTest",
+            "options": {
+                "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/",
+                "env": {
+                    "GDK_BACKEND": "${input:gdk_backend}",
+                    "COMPlus_EnableAlternateStackCheck": "1",
+                }
+            },
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Build (Release)"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "process",
             "label": "Clean",
             "command": "rm",
             "args": [
@@ -80,13 +125,13 @@
                 "./obj",
                 "./bin"
             ],
-            "problemMatcher": [],
+            "problemMatcher": []
         },
         {
             "type": "process",
             "label": "Run Text Resource Editor",
             "command": "../${input:helper_platform_bin_name}/${input:helper_platform_exe_text_resource_editor}",
-            "problemMatcher": [],
+            "problemMatcher": []
         },
 
         // Subtasks:

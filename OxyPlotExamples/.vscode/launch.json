@@ -39,33 +39,13 @@
     ],
     "configurations": [
         {
-            "name": "Run (Debug)",
+            "name": "Debug",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build (Debug)",
             "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest",
             "args": [],
             "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
-            "console": "internalConsole",
-            "stopAtEntry": false,
-            "windows": {
-                "args": [ "${input:windows_ui}" ]
-            },
-            "linux": {
-                "env": {
-                    "GDK_BACKEND": "${input:gdk_backend}",
-                    "COMPlus_EnableAlternateStackCheck": "1",
-                }
-            },
-        },
-        {
-            "name": "Run (Release)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "Build (Release)",
-            "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/ASEvaAPIEtoTest",
-            "args": [],
-            "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/",
             "console": "internalConsole",
             "stopAtEntry": false,
             "windows": {

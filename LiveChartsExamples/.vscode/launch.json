@@ -17,27 +17,12 @@
     ],
     "configurations": [
         {
-            "name": "Run (Debug)",
+            "name": "Debug",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build (Debug)",
             "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIAvaloniaTest",
             "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
-            "console": "integratedTerminal",
-            "stopAtEntry": false,
-            "linux": {
-                "env": {
-                    "COMPlus_EnableAlternateStackCheck": "1",
-                }
-            },
-        },
-        {
-            "name": "Run (Release)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "Build (Release)",
-            "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/ASEvaAPIAvaloniaTest",
-            "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/",
             "console": "integratedTerminal",
             "stopAtEntry": false,
             "linux": {

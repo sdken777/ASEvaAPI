@@ -39,7 +39,7 @@
     ],
     "configurations": [
         {
-            "name": "Run (Debug)",
+            "name": "Debug",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build (Debug)",
