@@ -24,7 +24,7 @@
                     "../bin/VSCodeHelper.dll",
                     "shell_command",
                     "platform_console_exe",
-                    "TextResourceEditor",
+                    "TextResourceEditor"
                 ]
             }
         },
@@ -39,6 +39,20 @@
                 "wayland"
             ]
         },
+        {
+            "id": "helper_platform_exe",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "platform_console_exe",
+                    "ASEvaAPIEtoTest"
+                ]
+            }
+        }
     ],
     "presentation": {
         "echo": true,
@@ -58,12 +72,12 @@
                 "-vf",
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.pdb",
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.deps.json",
-                "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json",
+                "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json"
             ],
             "dependsOrder": "sequence",
             "dependsOn": [
-                "Subtask: Build for host (Debug)",
-            ],
+                "Subtask: Build for host (Debug)"
+            ]
         },
         {
             "type": "process",
@@ -74,23 +88,23 @@
                 "-vf",
                 "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.pdb",
                 "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.deps.json",
-                "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.runtimeconfig.dev.json",
+                "../${input:helper_platform_bin_name}/ASEvaAPIEtoTest.runtimeconfig.dev.json"
             ],
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Subtask: Build for host (Release)",
-                "Subtask: Copy to other folders",
-            ],
+                "Subtask: Copy to other folders"
+            ]
         },
         {
             "type": "process",
             "label": "Run (Debug)",
-            "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest",
+            "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/${input:helper_platform_exe}",
             "options": {
                 "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
                 "env": {
                     "GDK_BACKEND": "${input:gdk_backend}",
-                    "COMPlus_EnableAlternateStackCheck": "1",
+                    "COMPlus_EnableAlternateStackCheck": "1"
                 }
             },
             "dependsOrder": "sequence",
@@ -102,12 +116,12 @@
         {
             "type": "process",
             "label": "Run (Release)",
-            "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/ASEvaAPIEtoTest",
+            "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/${input:helper_platform_exe}",
             "options": {
                 "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/",
                 "env": {
                     "GDK_BACKEND": "${input:gdk_backend}",
-                    "COMPlus_EnableAlternateStackCheck": "1",
+                    "COMPlus_EnableAlternateStackCheck": "1"
                 }
             },
             "dependsOrder": "sequence",
@@ -149,7 +163,7 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile",
+            "problemMatcher": "$msCompile"
         },
         {
             "type": "process",
@@ -167,7 +181,7 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile",
+            "problemMatcher": "$msCompile"
         },
         {
             "type": "process",
@@ -182,8 +196,8 @@
                 "binx",
                 "binxa",
                 "binm",
-                "binma",
-            ],
-        },
+                "binma"
+            ]
+        }
     ]
 }

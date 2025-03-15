@@ -15,6 +15,20 @@
             }
         },
         {
+            "id": "helper_platform_exe",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "platform_console_exe",
+                    "ASEvaAPIAvaloniaTest",
+                ]
+            }
+        },
+        {
             "id": "helper_platform_exe_text_resource_editor",
             "type": "command",
             "command": "shell-command.run",
@@ -72,7 +86,7 @@
         {
             "type":"process",
             "label": "Run (Debug)",
-            "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIAvaloniaTest",
+            "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/${input:helper_platform_exe}",
             "args": [],
             "options": {
                 "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
@@ -91,7 +105,7 @@
         {
             "type":"process",
             "label": "Run (Release)",
-            "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/ASEvaAPIAvaloniaTest",
+            "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/${input:helper_platform_exe}",
             "args": [],
             "options": {
                 "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/",

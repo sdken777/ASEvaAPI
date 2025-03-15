@@ -14,6 +14,20 @@
                 ]
             }
         },
+        {
+            "id": "helper_platform_exe",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "platform_console_exe",
+                    "ASEvaAPIAvaloniaTest"
+                ]
+            }
+        }
     ],
     "presentation": {
         "echo": true,
@@ -36,8 +50,8 @@
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Subtask: Build for host (Debug)",
-                "Subtask: Copy built files (Debug)",
-            ],
+                "Subtask: Copy built files (Debug)"
+            ]
         },
         {
             "type": "process",
@@ -55,46 +69,46 @@
                 "Subtask: Build for bundle (Release)",
                 "Subtask: Copy built files (Release)",
                 "Subtask: Copy to other folders",
-                "Subtask: Copy built files for bundle (Release)",
-            ],
+                "Subtask: Copy built files for bundle (Release)"
+            ]
         },
         {
-            "type":"process",
+            "type": "process",
             "label": "Run (Debug)",
-            "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIAvaloniaTest",
+            "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/${input:helper_platform_exe}",
             "args": [],
             "options": {
-                "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+                "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/"
             },
             "dependsOrder": "sequence",
             "dependsOn": [
-                "Build (Debug)",
+                "Build (Debug)"
             ],
             "linux": {
                 "env": {
-                    "COMPlus_EnableAlternateStackCheck": "1",
+                    "COMPlus_EnableAlternateStackCheck": "1"
                 }
             },
-            "problemMatcher": [],
+            "problemMatcher": []
         },
         {
-            "type":"process",
+            "type": "process",
             "label": "Run (Release)",
-            "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/ASEvaAPIAvaloniaTest",
+            "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/${input:helper_platform_exe}",
             "args": [],
             "options": {
-                "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/",
+                "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/"
             },
             "dependsOrder": "sequence",
             "dependsOn": [
-                "Build (Release)",
+                "Build (Release)"
             ],
             "linux": {
                 "env": {
-                    "COMPlus_EnableAlternateStackCheck": "1",
+                    "COMPlus_EnableAlternateStackCheck": "1"
                 }
             },
-            "problemMatcher": [],
+            "problemMatcher": []
         },
         {
             "type": "process",
@@ -124,7 +138,7 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile",
+            "problemMatcher": "$msCompile"
         },
         {
             "type": "process",
@@ -143,7 +157,7 @@
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile",
+            "problemMatcher": "$msCompile"
         },
         {
             "type": "process",
@@ -163,7 +177,7 @@
                 "/property:ASEvaAPIBundleMode=true",
                 "/consoleloggerparameters:NoSummary"
             ],
-            "problemMatcher": "$msCompile",
+            "problemMatcher": "$msCompile"
         },
         {
             "type": "process",
@@ -173,8 +187,8 @@
             "args": [
                 "-vf",
                 "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvalonia.dll",
-                "../${input:helper_platform_bin_name}/debug/",
-            ],
+                "../${input:helper_platform_bin_name}/debug/"
+            ]
         },
         {
             "type": "process",
@@ -184,8 +198,8 @@
             "args": [
                 "-vf",
                 "../${input:helper_platform_bin_name}/bin/ASEvaAPIAvalonia.dll",
-                "../${input:helper_platform_bin_name}/",
-            ],
+                "../${input:helper_platform_bin_name}/"
+            ]
         },
         {
             "type": "process",
@@ -195,8 +209,8 @@
             "args": [
                 "-vf",
                 "../binb/bin/ASEvaAPIAvalonia.dll",
-                "../binb/",
-            ],
+                "../binb/"
+            ]
         },
         {
             "type": "process",
@@ -211,8 +225,8 @@
                 "binx",
                 "binxa",
                 "binm",
-                "binma",
-            ],
-        },
+                "binma"
+            ]
+        }
     ]
 }
