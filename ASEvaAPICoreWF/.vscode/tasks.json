@@ -93,11 +93,6 @@
             "dependsOn": [
                 "Build (Debug)"
             ],
-            "linux": {
-                "env": {
-                    "COMPlus_EnableAlternateStackCheck": "1"
-                }
-            },
             "problemMatcher": []
         },
         {
@@ -112,11 +107,6 @@
             "dependsOn": [
                 "Build (Release)"
             ],
-            "linux": {
-                "env": {
-                    "COMPlus_EnableAlternateStackCheck": "1"
-                }
-            },
             "problemMatcher": []
         },
         {
@@ -131,11 +121,6 @@
             "dependsOn": [
                 "Build (Debug)"
             ],
-            "linux": {
-                "env": {
-                    "COMPlus_EnableAlternateStackCheck": "1"
-                }
-            },
             "problemMatcher": []
         },
         {
@@ -150,11 +135,6 @@
             "dependsOn": [
                 "Build (Release)"
             ],
-            "linux": {
-                "env": {
-                    "COMPlus_EnableAlternateStackCheck": "1"
-                }
-            },
             "problemMatcher": []
         },
         {
