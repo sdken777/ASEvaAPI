@@ -9,14 +9,14 @@
     <AssemblyName>HwndHostAvalonia</AssemblyName>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU' and '$(AppoxVsCodeBuildTask)' != 'true'">
     <OutputPath>..\bin64</OutputPath>
     <Optimize>true</Optimize>
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU' and '$(AppoxVsCodeBuildTask)' != 'true'">
     <OutputPath>..\bin64\debug</OutputPath>
     <Optimize>false</Optimize>
     <DebugType>full</DebugType>
@@ -45,7 +45,7 @@
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.*" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+  <Target Condition="'$(AppoxVsCodeBuildTask)' != 'true'" Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="xcopy /Y $(TargetPath) $(TargetDir)..\" />
   </Target>
 

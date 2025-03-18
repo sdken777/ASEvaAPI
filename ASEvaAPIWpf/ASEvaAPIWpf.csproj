@@ -7,6 +7,8 @@
     <UseWPF>True</UseWPF>
     <UseWindowsForms>True</UseWindowsForms>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <NoWarn>1701;1702;1591;8981</NoWarn>
+    <DefineConstants>WPF</DefineConstants>
     <Version>0.0.0.0</Version>
   </PropertyGroup>
 
@@ -76,25 +78,22 @@
     </Page>
   </ItemGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU' and '$(AppoxVsCodeBuildTask)' != 'true'">
     <OutputPath>..\bin64</OutputPath>
     <DocumentationFile>..\bin64\ASEvaAPIWpf.xml</DocumentationFile>
-    <NoWarn>1701;1702;1591;8981</NoWarn>
-    <DefineConstants>WPF</DefineConstants>
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU' and '$(AppoxVsCodeBuildTask)' != 'true'">
     <OutputPath>..\bin64\debug\</OutputPath>
     <DocumentationFile>..\bin64\debug\ASEvaAPIWpf.xml</DocumentationFile>
-    <NoWarn>1701;1702;1591;8981</NoWarn>
     <DefineConstants>DEBUG;TRACE;WPF</DefineConstants>
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+  <Target Condition="'$(AppoxVsCodeBuildTask)' != 'true'" Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="xcopy /Y $(TargetPath) $(TargetDir)..\" />
   </Target>
 

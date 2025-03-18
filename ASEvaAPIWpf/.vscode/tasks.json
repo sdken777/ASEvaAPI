@@ -27,28 +27,6 @@
                     "ASEvaAPIEtoTest"
                 ]
             }
-        },
-        {
-            "id": "windows_ui",
-            "type": "pickString",
-            "description": "Choose UI Framework",
-            "default": "",
-            "options": [
-                "",
-                "corewf",
-                "wpf"
-            ]
-        },
-        {
-            "id": "gdk_backend",
-            "type": "pickString",
-            "description": "Choose Display Server",
-            "default": "",
-            "options": [
-                "",
-                "x11",
-                "wayland"
-            ]
         }
     ],
     "presentation": {
@@ -67,8 +45,8 @@
             "command": "rm",
             "args": [
                 "-vf",
-                "../${input:helper_platform_bin_name}/debug/ASEvaAPIEto.pdb",
-                "../${input:helper_platform_bin_name}/debug/ASEvaAPIEto.deps.json",
+                "../${input:helper_platform_bin_name}/debug/ASEvaAPIWpf.pdb",
+                "../${input:helper_platform_bin_name}/debug/ASEvaAPIWpf.deps.json",
             ],
             "dependsOn": [
                 "Subtask: Build for host (Debug)",
@@ -81,19 +59,19 @@
             "command": "rm",
             "args": [
                 "-vf",
-                "../${input:helper_platform_bin_name}/ASEvaAPIEto.pdb",
-                "../${input:helper_platform_bin_name}/ASEvaAPIEto.deps.json",
+                "../${input:helper_platform_bin_name}/ASEvaAPIWpf.pdb",
+                "../${input:helper_platform_bin_name}/ASEvaAPIWpf.deps.json",
             ],
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Subtask: Build for host (Release)",
-                "Subtask: Copy to other folders",
             ],
         },
         {
             "type": "process",
             "label": "Run (Debug)",
             "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/${input:helper_platform_exe}",
+            "args": [ "wpf" ],
             "options": {
                 "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/"
             },
@@ -101,12 +79,8 @@
             "dependsOn": [
                 "Build (Debug)"
             ],
-            "windows": {
-                "args": [ "${input:windows_ui}" ]
-            },
             "linux": {
                 "env": {
-                    "GDK_BACKEND": "${input:gdk_backend}",
                     "COMPlus_EnableAlternateStackCheck": "1"
                 }
             },
@@ -116,6 +90,7 @@
             "type": "process",
             "label": "Run (Release)",
             "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/${input:helper_platform_exe}",
+            "args": [ "wpf" ],
             "options": {
                 "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/"
             },
@@ -123,12 +98,8 @@
             "dependsOn": [
                 "Build (Release)"
             ],
-            "windows": {
-                "args": [ "${input:windows_ui}" ]
-            },
             "linux": {
                 "env": {
-                    "GDK_BACKEND": "${input:gdk_backend}",
                     "COMPlus_EnableAlternateStackCheck": "1"
                 }
             },
@@ -155,10 +126,11 @@
             "command": "dotnet",
             "args": [
                 "build",
-                "./ASEvaAPIEto.csproj",
+                "./ASEvaAPIWpf.csproj",
                 "-o",
                 "../${input:helper_platform_bin_name}/debug",
                 "/property:GenerateFullPaths=true",
+                "/property:AppoxVsCodeBuildTask=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile",
@@ -170,32 +142,17 @@
             "command": "dotnet",
             "args": [
                 "build",
-                "./ASEvaAPIEto.csproj",
+                "./ASEvaAPIWpf.csproj",
                 "-c",
                 "Release",
                 "-o",
                 "../${input:helper_platform_bin_name}",
-                "/property:DocumentationFile=../${input:helper_platform_bin_name}/ASEvaAPIEto.xml",
+                "/property:DocumentationFile=../${input:helper_platform_bin_name}/ASEvaAPIWpf.xml",
                 "/property:GenerateFullPaths=true",
+                "/property:AppoxVsCodeBuildTask=true",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile",
-        },
-        {
-            "type": "process",
-            "label": "Subtask: Copy to other folders",
-            "hide": true,
-            "command": "dotnet",
-            "args": [
-                "../bin/VSCodeHelper.dll",
-                "copy_outputs",
-                "ASEvaAPIEto",
-                "bin64",
-                "binx",
-                "binxa",
-                "binm",
-                "binma",
-            ],
         },
     ]
 }
