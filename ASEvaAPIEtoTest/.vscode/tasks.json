@@ -102,6 +102,8 @@
             "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/${input:helper_platform_exe}",
             "options": {
                 "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+            },
+            "linux": {
                 "env": {
                     "GDK_BACKEND": "${input:gdk_backend}",
                     "COMPlus_EnableAlternateStackCheck": "1"
@@ -119,6 +121,8 @@
             "command": "${workspaceFolder}/../${input:helper_platform_bin_name}/${input:helper_platform_exe}",
             "options": {
                 "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/",
+            },
+            "linux": {
                 "env": {
                     "GDK_BACKEND": "${input:gdk_backend}",
                     "COMPlus_EnableAlternateStackCheck": "1"
