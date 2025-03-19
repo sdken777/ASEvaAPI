@@ -14,32 +14,10 @@
                 ]
             }
         },
-        {
-            "id": "windows_ui",
-            "type": "pickString",
-            "description": "Choose UI Framework",
-            "default": "",
-            "options": [
-                "",
-                "corewf",
-                "wpf"
-            ]
-        },
-        {
-            "id": "gdk_backend",
-            "type": "pickString",
-            "description": "Choose Display Server",
-            "default": "",
-            "options": [
-                "",
-                "x11",
-                "wayland"
-            ]
-        },
     ],
     "configurations": [
         {
-            "name": "Debug with official debugger",
+            "name": "Debug with Eto Test and official debugger",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build (Debug)",
@@ -48,18 +26,20 @@
             "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
             "console": "internalConsole",
             "stopAtEntry": false,
-            "windows": {
-                "args": [ "${input:windows_ui}" ]
-            },
-            "linux": {
-                "env": {
-                    "GDK_BACKEND": "${input:gdk_backend}",
-                    "COMPlus_EnableAlternateStackCheck": "1",
-                }
-            },
         },
         {
-            "name": "Debug with free debugger",
+            "name": "Debug with Avalonia Test and official debugger",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build (Debug)",
+            "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIAvaloniaTest",
+            "args": [],
+            "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+        },
+        {
+            "name": "Debug with Eto Test and free debugger",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build (Debug)",
@@ -80,13 +60,27 @@
                     "pipeArgs": ["/c"],
                 }
             },
-            "windows": {
-                "args": [ "${input:windows_ui}" ]
-            },
-            "linux": {
-                "env": {
-                    "GDK_BACKEND": "${input:gdk_backend}",
-                    "COMPlus_EnableAlternateStackCheck": "1",
+        },
+        {
+            "name": "Debug with Avalonia Test and free debugger",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build (Debug)",
+            "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIAvaloniaTest.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+                "pipeProgram": "bash",
+                "pipeArgs": ["-c"],
+                "debuggerPath": "netcoredbg",
+                "debuggerArgs": ["--interpreter=vscode"],
+                "quoteArgs": true,
+                "windows": {
+                    "pipeProgram": "cmd.exe",
+                    "pipeArgs": ["/c"],
                 }
             },
         },

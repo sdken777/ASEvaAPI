@@ -31,7 +31,6 @@
             "command": "rm",
             "args": [
                 "-vf",
-                "../${input:helper_platform_bin_name}/debug/WinformWpfConverter.pdb",
                 "../${input:helper_platform_bin_name}/debug/WinformWpfConverter.deps.json",
             ],
             "dependsOn": [

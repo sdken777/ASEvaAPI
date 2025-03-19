@@ -187,6 +187,7 @@
             "args": [
                 "-vf",
                 "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvalonia.dll",
+                "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvalonia.pdb",
                 "../${input:helper_platform_bin_name}/debug/"
             ]
         },

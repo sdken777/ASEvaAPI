@@ -59,7 +59,6 @@
             "command": "rm",
             "args": [
                 "-vf",
-                "../${input:helper_platform_bin_name}/debug/ASEvaAPICoreWF.pdb",
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPICoreWF.deps.json",
             ],
             "dependsOn": [

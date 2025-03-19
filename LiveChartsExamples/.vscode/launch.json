@@ -17,7 +17,7 @@
     ],
     "configurations": [
         {
-            "name": "Debug",
+            "name": "Debug with official debugger",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build (Debug)",
@@ -25,6 +25,33 @@
             "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
             "console": "integratedTerminal",
             "stopAtEntry": false,
+            "linux": {
+                "env": {
+                    "COMPlus_EnableAlternateStackCheck": "1",
+                }
+            },
+        },
+        {
+            "name": "Debug with free debugger",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build (Debug)",
+            "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIAvaloniaTest.dll",
+            "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+                "pipeProgram": "bash",
+                "pipeArgs": ["-c"],
+                "debuggerPath": "netcoredbg",
+                "debuggerArgs": ["--interpreter=vscode"],
+                "quoteArgs": true,
+                "windows": {
+                    "pipeProgram": "cmd.exe",
+                    "pipeArgs": ["/c"],
+                }
+            },
             "linux": {
                 "env": {
                     "COMPlus_EnableAlternateStackCheck": "1",

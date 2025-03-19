@@ -45,7 +45,6 @@
             "command": "rm",
             "args": [
                 "-vf",
-                "../${input:helper_platform_bin_name}/debug/ASEvaAPIWpf.pdb",
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIWpf.deps.json",
             ],
             "dependsOn": [

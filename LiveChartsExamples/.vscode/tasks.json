@@ -28,7 +28,10 @@
             "type": "process",
             "label": "Build (Debug)",
             "group": "build",
-            "command": "${command:dotnet.restartServer}",
+            "command": "echo",
+            "args": [
+                "Done."
+            ],
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Subtask: Build for host (Debug)",
@@ -39,7 +42,10 @@
             "type": "process",
             "label": "Build (Release)",
             "group": "build",
-            "command": "${command:dotnet.restartServer}",
+            "command": "echo",
+            "args": [
+                "Done."
+            ],
             "dependsOrder": "sequence",
             "dependsOn": [
                 "Subtask: Build for host (Release)",
@@ -101,6 +107,7 @@
             "args": [
                 "-vf",
                 "../${input:helper_platform_bin_name}/debug/bin/LiveChartsExamples.dll",
+                "../${input:helper_platform_bin_name}/debug/bin/LiveChartsExamples.pdb",
                 "../${input:helper_platform_bin_name}/debug/"
             ],
         },
