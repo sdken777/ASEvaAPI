@@ -58,7 +58,11 @@
                 "pipeArgs": ["-c"],
                 "debuggerPath": "netcoredbg",
                 "debuggerArgs": ["--interpreter=vscode"],
-                "quoteArgs": true
+                "quoteArgs": true,
+                "windows": {
+                    "pipeProgram": "cmd.exe",
+                    "pipeArgs": ["/c"],
+                }
             },
             "linux": {
                 "env": {
