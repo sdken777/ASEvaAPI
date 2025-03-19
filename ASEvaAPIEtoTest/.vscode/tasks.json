@@ -70,7 +70,6 @@
             "command": "rm",
             "args": [
                 "-vf",
-                "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.pdb",
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.deps.json",
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.runtimeconfig.dev.json"
             ],

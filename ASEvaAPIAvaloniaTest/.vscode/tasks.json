@@ -183,6 +183,7 @@
                 "-vf",
                 "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvaloniaTest",
                 "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvaloniaTest.dll",
+                "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvaloniaTest.pdb",
                 "../${input:helper_platform_bin_name}/debug/bin/ASEvaAPIAvaloniaTest.runtimeconfig.json",
                 "../${input:helper_platform_bin_name}/debug/"
             ],

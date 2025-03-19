@@ -28,7 +28,7 @@
     ],
     "configurations": [
         {
-            "name": "Debug",
+            "name": "Debug with official debugger",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build (Debug)",
@@ -36,6 +36,30 @@
             "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
             "console": "integratedTerminal",
             "stopAtEntry": false,
+            "linux": {
+                "env": {
+                    "GDK_BACKEND": "${input:gdk_backend}",
+                    "COMPlus_EnableAlternateStackCheck": "1",
+                },
+            },
+        },
+        {
+            "name": "Debug with free debugger",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build (Debug)",
+            "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.dll",
+            "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+                "pipeProgram": "bash",
+                "pipeArgs": ["-c"],
+                "debuggerPath": "netcoredbg",
+                "debuggerArgs": ["--interpreter=vscode"],
+                "quoteArgs": true
+            },
             "linux": {
                 "env": {
                     "GDK_BACKEND": "${input:gdk_backend}",
