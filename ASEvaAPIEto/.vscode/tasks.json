@@ -67,7 +67,6 @@
             "command": "rm",
             "args": [
                 "-vf",
-                "../${input:helper_platform_bin_name}/debug/ASEvaAPIEto.pdb",
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIEto.deps.json",
             ],
             "dependsOn": [
