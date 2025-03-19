@@ -31,7 +31,6 @@
             "command": "rm",
             "args": [
                 "-vf",
-                "../${input:helper_platform_bin_name}/debug/ASEvaAPIMonoMac.pdb",
                 "../${input:helper_platform_bin_name}/debug/ASEvaAPIMonoMac.deps.json",
             ],
             "dependsOn": [

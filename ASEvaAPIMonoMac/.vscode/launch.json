@@ -17,7 +17,7 @@
     ],
     "configurations": [
         {
-            "name": "Run Eto Test (Debug)",
+            "name": "Debug with Eto Test and official debugger",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build (Debug)",
@@ -28,7 +28,7 @@
             "stopAtEntry": false,
         },
         {
-            "name": "Run Avalonia Test (Debug)",
+            "name": "Debug with Avalonia Test and official debugger",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "Build (Debug)",
@@ -37,6 +37,44 @@
             "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
             "console": "internalConsole",
             "stopAtEntry": false,
+        },
+        {
+            "name": "Debug with Eto Test and free debugger",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build (Debug)",
+            "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIEtoTest.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+                "pipeProgram": "bash",
+                "pipeArgs": ["-c"],
+                "debuggerPath": "netcoredbg",
+                "debuggerArgs": ["--interpreter=vscode"],
+                "quoteArgs": true,
+            },
+        },
+        {
+            "name": "Debug with Avalonia Test and free debugger",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build (Debug)",
+            "program": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/ASEvaAPIAvaloniaTest.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+            "console": "internalConsole",
+            "stopAtEntry": false,
+            "pipeTransport": {
+                "pipeCwd": "${workspaceFolder}/../${input:helper_platform_bin_name}/debug/",
+                "pipeProgram": "bash",
+                "pipeArgs": ["-c"],
+                "debuggerPath": "netcoredbg",
+                "debuggerArgs": ["--interpreter=vscode"],
+                "quoteArgs": true,
+            },
         },
     ]
 }
