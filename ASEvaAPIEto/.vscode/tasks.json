@@ -104,9 +104,11 @@
                 "args": [ "${input:windows_ui}" ]
             },
             "linux": {
-                "env": {
-                    "GDK_BACKEND": "${input:gdk_backend}",
-                    "COMPlus_EnableAlternateStackCheck": "1"
+                "options": {
+                    "env": {
+                        "GDK_BACKEND": "${input:gdk_backend}",
+                        "COMPlus_EnableAlternateStackCheck": "1"
+                    }
                 }
             },
             "problemMatcher": []
@@ -126,9 +128,11 @@
                 "args": [ "${input:windows_ui}" ]
             },
             "linux": {
-                "env": {
-                    "GDK_BACKEND": "${input:gdk_backend}",
-                    "COMPlus_EnableAlternateStackCheck": "1"
+                "options": {
+                    "env": {
+                        "GDK_BACKEND": "${input:gdk_backend}",
+                        "COMPlus_EnableAlternateStackCheck": "1"
+                    }
                 }
             },
             "problemMatcher": []
