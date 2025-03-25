@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using ASEva.UIEto;
+using ASEva.Utility;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Threading;
@@ -22,11 +23,26 @@ namespace ASEva.UIAvalonia
 
             if (panel.Icon != null && panel.Icon.Frames.Count() > 0)
             {
-                var stream = new MemoryStream();
-                panel.Icon.Frames.First().Bitmap.Save(stream, Eto.Drawing.ImageFormat.Png);
-                stream.Position = 0;
-                Icon = new WindowIcon(stream);
-                stream.Close();
+                var frame = panel.Icon.Frames.First().Bitmap;
+                if (frame != null)
+                {
+                    try
+                    {
+                        var commonImage = frame.ToCommonImage();
+                        if (commonImage != null)
+                        {
+                            var avaloniaBitmap = commonImage.ToAvaloniaBitmap();
+                            if (avaloniaBitmap != null)
+                            {
+                                Icon = new WindowIcon(avaloniaBitmap);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Dump.Exception(ex);
+                    }
+                }
             }
 
             var defaultWidth = panel.DefaultSize.Width;

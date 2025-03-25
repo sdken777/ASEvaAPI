@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 2, 9, 3); // Update log / 更新记录: 修正SimpleTheme资源
+            return new Version(1, 2, 9, 4); // Update log / 更新记录: 修正EtoEmbedDialog图标处理
         }
 
         /// \~English
