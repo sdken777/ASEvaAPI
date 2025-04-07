@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media;
+using System.Runtime.InteropServices;
+using System.Windows.Interop;
 using ASEva;
 using ASEva.Samples;
 using ASEva.UIEto;
-using Eto.Forms;
 
 namespace ASEva.UIWpf
 {
@@ -18,7 +19,7 @@ namespace ASEva.UIWpf
             this.panelElement = element;
 
             WindowStyle = dialogPanel.WithBorder ? System.Windows.WindowStyle.SingleBorderWindow : System.Windows.WindowStyle.None;
-            ResizeMode = dialogPanel.Mode == DialogPanel.DialogMode.ResizableMode ? ResizeMode.CanResize : ResizeMode.CanMinimize;
+            ResizeMode = dialogPanel.Mode == DialogPanel.DialogMode.ResizableMode ? ResizeMode.CanResize : ResizeMode.NoResize;
 
             if (dialogPanel.Title != null) Title = dialogPanel.Title;
 
@@ -33,6 +34,18 @@ namespace ASEva.UIWpf
             Height = dialogPanel.DefaultSize.Height;
 
             panel.OnDialogClose += Panel_OnDialogClose;
+
+            SourceInitialized += (o, e) =>
+            {
+                if (dialogPanel.Mode == DialogPanel.DialogMode.ResizableMode)
+                {
+                    var windowHandle = new WindowInteropHelper(this).Handle;
+                    if (windowHandle != IntPtr.Zero)
+                    {
+                        SetWindowLong(windowHandle, GWL_STYLE, GetWindowLong(windowHandle, GWL_STYLE) & ~WS_MINIMIZEBOX);
+                    }
+                }
+            };
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -60,6 +73,15 @@ namespace ASEva.UIWpf
         {
             panel.CloseRecursively();
         }
+
+        [DllImport("user32.dll")]
+        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+        private const int GWL_STYLE = -16;
+        private const int WS_MINIMIZEBOX = 0x20000; // minimize button
 
         private DialogPanel panel;
         private FrameworkElement panelElement;

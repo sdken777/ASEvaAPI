@@ -28,7 +28,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 3, 1, 0); // Update log / 更新记录: 注册EnsureEtoSyncContext
+            return new Version(3, 3, 1, 1); // Update log / 更新记录: DialogPanel对话框不可最小化
         }
 
         /// \~English

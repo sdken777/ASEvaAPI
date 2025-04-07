@@ -28,7 +28,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 0, 1); // Update log / 更新记录: 修正WebView关闭后不析构问题
+            return new Version(2, 2, 0, 2); // Update log / 更新记录: DialogPanel对话框不可最小化
         }
 
         /// \~English
