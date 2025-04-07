@@ -26,7 +26,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 9, 5, 1); // Update log / 更新记录: 恢复HistLineGraph异常捕获
+            return new Version(2, 9, 5, 2); // Update log / 更新记录: DialogPanel对话框不可最小化
         }
     }
 }

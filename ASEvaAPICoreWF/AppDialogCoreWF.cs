@@ -23,6 +23,7 @@ namespace ASEva.UICoreWF
                 (dialogPanel.Mode == DialogPanel.DialogMode.ResizableMode ? FormBorderStyle.Sizable : FormBorderStyle.FixedDialog) :
                 FormBorderStyle.None;
             MaximizeBox = dialogPanel.Mode == DialogPanel.DialogMode.ResizableMode;
+            MinimizeBox = false;
 
             if (dialogPanel.Title != null) Text = dialogPanel.Title;
             if (dialogPanel.Icon != null) Icon = dialogPanel.Icon.ControlObject as Icon;
