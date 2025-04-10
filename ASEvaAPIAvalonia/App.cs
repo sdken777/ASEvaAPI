@@ -184,8 +184,26 @@ namespace ASEva.UIAvalonia
                     }
                 }
             }
-            else if (owner is Control) activeWindow = await (owner as Control).GetActiveWindow();
-            else if (owner is Window) activeWindow = await (owner as Window).GetActiveWindow();
+            else if (owner is Control)
+            {
+                var t0 = DateTime.Now;
+                while ((DateTime.Now - t0).TotalSeconds < 1)
+                {
+                    activeWindow = await (owner as Control).GetActiveWindow();
+                    if (activeWindow != null) break;
+                    await Task.Delay(100);
+                }
+            }
+            else if (owner is Window)
+            {
+                var t0 = DateTime.Now;
+                while ((DateTime.Now - t0).TotalSeconds < 1)
+                {
+                    activeWindow = await (owner as Window).GetActiveWindow();
+                    if (activeWindow != null) break;
+                    await Task.Delay(100);
+                }
+            }
 
             if (activeWindow == null) return false;
 
