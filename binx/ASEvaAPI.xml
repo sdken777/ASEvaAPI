@@ -8608,7 +8608,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.7.10
+            version=3.7.11
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -12802,6 +12802,18 @@
             [可选实现] 在检查插件是否忙于长耗时操作时被调用
             </summary>
             <returns>长耗时操作的描述，若无则返回null</returns>
+        </member>
+        <member name="M:ASEva.Plugin.OnSoundWave(System.Int16[])">
+            \~English
+            <summary>
+            (api:app=3.7.11) [Optional] Called while getting new sound wave data
+            </summary>
+            <param name="soundWave">The new sound wave data, 44100Hz, 16bit, mono</param>
+            \~Chinese
+            <summary>
+            (api:app=3.7.11) [可选实现] 在获取到新的声波数据时被调用
+            </summary>
+            <param name="soundWave">新的声波数据，44100Hz，16bit，单通道</param>
         </member>
         <member name="T:ASEva.ProcessorOutputSample">
             \~English

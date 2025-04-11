@@ -337,5 +337,18 @@ namespace ASEva
         /// </summary>
         /// <returns>长耗时操作的描述，若无则返回null</returns>
         public virtual String OnCheckBusy() { return null; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.7.11) [Optional] Called while getting new sound wave data
+        /// </summary>
+        /// <param name="soundWave">The new sound wave data, 44100Hz, 16bit, mono</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.7.11) [可选实现] 在获取到新的声波数据时被调用
+        /// </summary>
+        /// <param name="soundWave">新的声波数据，44100Hz，16bit，单通道</param>
+        public virtual void OnSoundWave(short[] soundWave) { }
+        
     }
 }
