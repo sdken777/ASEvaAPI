@@ -169,40 +169,28 @@ namespace ASEva.UIAvalonia
         public static async Task<bool> RunDialog(Func<Window, Task> action, object owner = null)
         {
             Window activeWindow = null;
-            if (owner == null)
+            var t0 = DateTime.Now;
+            while ((DateTime.Now - t0).TotalSeconds < 1)
             {
-                if (App.MainWindow != null) activeWindow = await App.MainWindow.GetActiveWindow();
-                if (activeWindow == null)
+                if (owner == null)
                 {
-                    foreach (var window in allWindows)
+                    if (App.MainWindow != null) activeWindow = await App.MainWindow.GetActiveWindow();
+                    if (activeWindow == null)
                     {
-                        if (window.IsActive)
+                        foreach (var window in allWindows)
                         {
-                            activeWindow = window;
-                            break;
+                            if (window.IsActive)
+                            {
+                                activeWindow = window;
+                                break;
+                            }
                         }
                     }
                 }
-            }
-            else if (owner is Control)
-            {
-                var t0 = DateTime.Now;
-                while ((DateTime.Now - t0).TotalSeconds < 1)
-                {
-                    activeWindow = await (owner as Control).GetActiveWindow();
-                    if (activeWindow != null) break;
-                    await Task.Delay(100);
-                }
-            }
-            else if (owner is Window)
-            {
-                var t0 = DateTime.Now;
-                while ((DateTime.Now - t0).TotalSeconds < 1)
-                {
-                    activeWindow = await (owner as Window).GetActiveWindow();
-                    if (activeWindow != null) break;
-                    await Task.Delay(100);
-                }
+                else if (owner is Control) activeWindow = await (owner as Control).GetActiveWindow();
+                else if (owner is Window) activeWindow = await (owner as Window).GetActiveWindow();
+                if (activeWindow != null) break;
+                await Task.Delay(100);
             }
 
             if (activeWindow == null) return false;
@@ -238,7 +226,7 @@ namespace ASEva.UIAvalonia
         public static async Task<bool> RunDialog(Window window, object owner = null)
         {
             if (window == null) return false;
-            return await RunDialog(window.ShowDialog, owner);
+            return await RunDialog(async (o) => await window.ShowDialog(o), owner);
         }
 
         /// \~English
