@@ -22,7 +22,7 @@ namespace ASEvaAPIAvaloniaTest
             {
                 var avaloniaDialog = new CrossAvaloniaWindow();
                 avaloniaDialog.Title = Program.Texts["menu-avalonia-dialog"];
-                await ASEva.UIAvalonia.App.RunDialog(avaloniaDialog.ShowDialog);
+                await ASEva.UIAvalonia.App.RunDialog(avaloniaDialog);
             };
 
             topLayout.AddLinkButton(Program.Texts["menu-eto-dialog"]).Click += async delegate

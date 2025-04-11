@@ -43,7 +43,7 @@ namespace ASEvaAPIAvaloniaTest
         {
             var avaloniaDialog = new CrossAvaloniaWindow();
             avaloniaDialog.Title = Program.Texts["menu-avalonia-dialog"];
-            await App.RunDialog(avaloniaDialog.ShowDialog);
+            await App.RunDialog(avaloniaDialog);
         }
 
         private async void itemMenuEtoDialog_Click(object sender, RoutedEventArgs e)
@@ -105,25 +105,22 @@ namespace ASEvaAPIAvaloniaTest
             window.CanResize = false;
             window.Content = new Panel{ MinWidth = 300, MinHeight = 300};
             window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            await App.RunDialog(window.ShowDialog);
+            await App.RunDialog(window);
         }
 
         private async void linkShowDialogNoBorder_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new TestDialogNoBorder();
-            await App.RunDialog(dialog.ShowDialog);
+            await App.RunDialog(new TestDialogNoBorder());
         }
         
         private async void linkShowDialogWithBorder_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new TestDialogWithBorder();
-            await App.RunDialog(dialog.ShowDialog);
+            await App.RunDialog(new TestDialogWithBorder());
         }
 
         private async void linkShowDialogWithFixBorder_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new TestDialogWithFixBorder();
-            await App.RunDialog(dialog.ShowDialog);
+            await App.RunDialog(new TestDialogWithFixBorder());
         }
 
         private void linkClientSize_Click(object sender, RoutedEventArgs e)

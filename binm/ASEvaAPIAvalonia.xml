@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.2.9
+            version=1.2.10
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -106,6 +106,22 @@
             (api:avalonia=1.2.5) 运行对话框函数
             </summary>
             <param name="action">对话框函数，最顶层活动窗口作为输入参数</param>
+            <param name="owner">对话框所有者，若使用主窗口则设为null</param>
+            <returns>对话框函数是否已执行</returns>
+        </member>
+        <member name="M:ASEva.UIAvalonia.App.RunDialog(Avalonia.Controls.Window,System.Object)">
+            \~English
+            <summary>
+            (api:avalonia=1.2.10) Run the dialog action
+            </summary>
+            <param name="window">The dialog window</param>
+            <param name="owner">Owner of the dialog, null to use main window</param>
+            <returns>Whether the dialog action is invoked</returns>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.2.10) 运行对话框函数
+            </summary>
+            <param name="window">对话框窗口</param>
             <param name="owner">对话框所有者，若使用主窗口则设为null</param>
             <returns>对话框函数是否已执行</returns>
         </member>

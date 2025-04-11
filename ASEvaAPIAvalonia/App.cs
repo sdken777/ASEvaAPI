@@ -223,6 +223,26 @@ namespace ASEva.UIAvalonia
 
         /// \~English
         /// <summary>
+        /// (api:avalonia=1.2.10) Run the dialog action
+        /// </summary>
+        /// <param name="window">The dialog window</param>
+        /// <param name="owner">Owner of the dialog, null to use main window</param>
+        /// <returns>Whether the dialog action is invoked</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.2.10) 运行对话框函数
+        /// </summary>
+        /// <param name="window">对话框窗口</param>
+        /// <param name="owner">对话框所有者，若使用主窗口则设为null</param>
+        /// <returns>对话框函数是否已执行</returns>
+        public static async Task<bool> RunDialog(Window window, object owner = null)
+        {
+            if (window == null) return false;
+            return await RunDialog(window.ShowDialog, owner);
+        }
+
+        /// \~English
+        /// <summary>
         /// (api:avalonia=1.0.2) Show message box
         /// </summary>
         /// \~Chinese
