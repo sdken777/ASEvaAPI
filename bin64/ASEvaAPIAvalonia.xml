@@ -297,18 +297,6 @@
             在此事件中实现配置界面的关闭
             </summary>
         </member>
-        <member name="M:ASEva.UIAvalonia.EtoConfigPanel.InitializeComponent(System.Boolean)">
-            <summary>
-            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
-            </summary>
-            <param name="loadXaml">Should the XAML be loaded into the component.</param>
-        </member>
-        <member name="M:ASEva.UIAvalonia.EtoWindowPanel.InitializeComponent(System.Boolean)">
-            <summary>
-            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
-            </summary>
-            <param name="loadXaml">Should the XAML be loaded into the component.</param>
-        </member>
         <member name="T:ASEva.UIAvalonia.CrossConverter">
             \~English
             <summary>
@@ -356,6 +344,18 @@
             </summary>
             <param name="anyConfigPanel">任意配置面板</param>
             <returns>Avalonia配置面板，若转化失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.UIAvalonia.EtoConfigPanel.InitializeComponent(System.Boolean)">
+            <summary>
+            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
+            </summary>
+            <param name="loadXaml">Should the XAML be loaded into the component.</param>
+        </member>
+        <member name="M:ASEva.UIAvalonia.EtoWindowPanel.InitializeComponent(System.Boolean)">
+            <summary>
+            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
+            </summary>
+            <param name="loadXaml">Should the XAML be loaded into the component.</param>
         </member>
         <member name="T:ASEva.UIAvalonia.EtoEmbedder">
             \~English

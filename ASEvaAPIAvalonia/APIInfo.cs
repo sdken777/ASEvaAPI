@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 2, 10, 1); // Update log / 更新记录: 继续完善App.RunDialog
+            return new Version(1, 2, 10, 2); // Update log / 更新记录: 修正EtoShowCommonDialogHandler.ShowOpen/SaveFileDialog
         }
 
         /// \~English

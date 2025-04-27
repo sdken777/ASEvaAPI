@@ -413,14 +413,20 @@ namespace ASEva.UIAvalonia
                 options.AllowMultiple = multiSelect;
                 if (filters != null)
                 {
-                    options.FileTypeFilter = [];
+                    var fileTypeFilters = new List<FilePickerFileType>();   
                     foreach (var pair in filters)
                     {
                         if (pair.Value == null || pair.Value.Length == 0) continue;
-                        var type = new FilePickerFileType(pair.Key){ Patterns = [] };
-                        foreach (var suffix in pair.Value) type.Patterns.Append("*" + suffix);
-                        options.FileTypeFilter.Append(type);
+                        var type = new FilePickerFileType(pair.Key);
+                        var patterns = new List<string>();
+                        foreach (var suffix in pair.Value)
+                        {
+                            patterns.Add("*" + suffix);
+                        }
+                        type.Patterns = patterns.ToArray();
+                        fileTypeFilters.Add(type);
                     }
+                    options.FileTypeFilter = fileTypeFilters.ToArray();
                 }
                 
                 String[] selected = null;
@@ -450,8 +456,7 @@ namespace ASEva.UIAvalonia
                 if (filterTitle != null && filterSuffix != null)
                 {
                     if (filterSuffix != null) options.DefaultExtension = filterSuffix;
-                    var type = new FilePickerFileType(filterTitle){ Patterns = [] };
-                    type.Patterns.Append("*" + filterSuffix);
+                    var type = new FilePickerFileType(filterTitle){ Patterns = ["*" + filterSuffix] };
                     options.FileTypeChoices = [type];
                     withFilter = true;
                 }
