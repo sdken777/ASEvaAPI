@@ -4688,11 +4688,11 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// Title of output general sample, null means not recorded to data file
+        /// Title of output general sample, null means not recorded each element value to data file (GeneralSample.NumberOfSignificants is 0)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 输出的通用样本标题，若为null则不记录至数据文件
+        /// 输出的通用样本标题，若为null则不记录各元素值至数据文件（即GeneralSample.NumberOfSignificants为0）
         /// </summary>
         public String SampleTitle { get; set; }
     }
