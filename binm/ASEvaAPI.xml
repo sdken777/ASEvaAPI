@@ -8608,7 +8608,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.7.11
+            version=3.8.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -9658,6 +9658,18 @@
             [Optional；仅限NativeClass] 获取文件写入需要的所有数据类型
             </summary>
             <returns>文件写入需要的所有数据类型</returns>
+        </member>
+        <member name="M:ASEva.ModuleConfig.GetRawToSampleConfigs">
+            \~English
+            <summary>
+            (api:app=3.8.0) [Optional. Only for NativeClass and DeviceClass] Called while getting configs of auto converting raw data to general sample (for raw data output by this component)
+            </summary>
+            <returns>Configs of auto converting raw data to general sample, the key is raw data protocol, the value is config</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.8.0) [可选实现；仅限NativeClass和DeviceClass] 获取原始数据自动转通用样本的配置（针对本组件输出的原始数据）
+            </summary>
+            <returns>原始数据自动转通用样本的配置，键为原始数据协议，值为配置</returns>
         </member>
         <member name="M:ASEva.ModuleConfig.DisableAll">
             \~English
@@ -12462,14 +12474,12 @@
         <member name="M:ASEva.NativeClass.GetRawToSampleProtocols">
             \~English
             <summary>
-            [Optional] Called while getting the IDs of general raw data channel that the data can be output as general sample directly
+            Deprecated, you should implement ModuleConfig.GetRawToSampleConfigs method
             </summary>
-            <returns>Dictionary. The key is general raw data channel ID, the value is general sample channel ID</returns>
             \~Chinese
             <summary>
-            [可选实现] 获取可直接作为样本输出的原始数据协议列表及对应的样本别名
+            已弃用，应实现ModuleConfig.GetRawToSampleConfigs方法
             </summary>
-            <returns>原始数据协议（键）列表及对应的样本别名（值）</returns>
         </member>
         <member name="T:ASEva.Plugin">
             \~English
@@ -13008,18 +13018,6 @@
             </summary>
             <param name="config">配置对象，定义数据处理行为</param>
             <returns>数据处理对象</returns>
-        </member>
-        <member name="M:ASEva.ProcessorClass.GetRawToSampleProtocols">
-            \~English
-            <summary>
-            [Optional] Called while getting the IDs of general raw data channel that the data can be output as general sample directly
-            </summary>
-            <returns>Dictionary. The key is general raw data channel ID, the value is general sample channel ID</returns>
-            \~Chinese
-            <summary>
-            [可选实现] 获取可直接作为样本输出的原始数据协议列表及对应的样本别名
-            </summary>
-            <returns>原始数据协议（键）列表及对应的样本别名（值）</returns>
         </member>
         <member name="T:ASEva.TimeOffsetSync">
             \~English
@@ -20331,6 +20329,46 @@
             被订阅数据的引用计数，键为数据ID
             </summary>
         </member>
+        <member name="T:ASEva.RawToSampleConfig">
+            \~English
+            <summary>
+            (api:app=3.8.0) Config of auto converting raw data to general sample
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.8.0) 原始数据自动转通用样本的配置
+            </summary>
+        </member>
+        <member name="P:ASEva.RawToSampleConfig.AliasName">
+            \~English
+            <summary>
+            Alias name of output general sample
+            </summary>
+            \~Chinese
+            <summary>
+            输出的通用样本别名
+            </summary>
+        </member>
+        <member name="P:ASEva.RawToSampleConfig.SampleProtocol">
+            \~English
+            <summary>
+            Output protocol of general sample, null means using raw data protocol
+            </summary>
+            \~Chinese
+            <summary>
+            输出的通用样本协议，若为null则使用原始数据协议
+            </summary>
+        </member>
+        <member name="P:ASEva.RawToSampleConfig.SampleTitle">
+            \~English
+            <summary>
+            Title of output general sample, null means not recorded to data file
+            </summary>
+            \~Chinese
+            <summary>
+            输出的通用样本标题，若为null则不记录至数据文件
+            </summary>
+        </member>
         <member name="T:ASEva.Utility.ArrayPopulateExtensions">
             \~English
             <summary>
@@ -22190,14 +22228,24 @@
         <member name="M:ASEva.WindowClass.GetRawToSampleProtocols">
             \~English
             <summary>
-            [Optional] Called while getting the IDs of general raw data channel that the data can be output as general sample directly
+            Deprecated, you should implement GetRawToSampleConfigs method
             </summary>
-            <returns>Dictionary. The key is general raw data channel ID, the value is general sample channel ID</returns>
             \~Chinese
             <summary>
-            [可选实现] 获取可直接作为样本输出的原始数据协议列表及对应的样本别名
+            已弃用，应实现GetRawToSampleConfigs方法
             </summary>
-            <returns>原始数据协议（键）列表及对应的样本别名（值）</returns>
+        </member>
+        <member name="M:ASEva.WindowClass.GetRawToSampleConfigs">
+            \~English
+            <summary>
+            (api:app=3.8.0) [Optional] Called while getting configs of auto converting raw data to general sample (for raw data output by this component)
+            </summary>
+            <returns>Configs of auto converting raw data to general sample, the key is raw data protocol, the value is config</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.8.0) [可选实现] 获取原始数据自动转通用样本的配置（针对本组件输出的原始数据）
+            </summary>
+            <returns>原始数据自动转通用样本的配置，键为原始数据协议，值为配置</returns>
         </member>
         <member name="M:ASEva.WindowClass.Transform(System.String)">
             \~English

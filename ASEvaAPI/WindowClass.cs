@@ -87,15 +87,25 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Called while getting the IDs of general raw data channel that the data can be output as general sample directly
+        /// Deprecated, you should implement GetRawToSampleConfigs method
         /// </summary>
-        /// <returns>Dictionary. The key is general raw data channel ID, the value is general sample channel ID</returns>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 获取可直接作为样本输出的原始数据协议列表及对应的样本别名
+        /// 已弃用，应实现GetRawToSampleConfigs方法
         /// </summary>
-        /// <returns>原始数据协议（键）列表及对应的样本别名（值）</returns>
         public virtual Dictionary<String, String> GetRawToSampleProtocols() { return null; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.8.0) [Optional] Called while getting configs of auto converting raw data to general sample (for raw data output by this component)
+        /// </summary>
+        /// <returns>Configs of auto converting raw data to general sample, the key is raw data protocol, the value is config</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.8.0) [可选实现] 获取原始数据自动转通用样本的配置（针对本组件输出的原始数据）
+        /// </summary>
+        /// <returns>原始数据自动转通用样本的配置，键为原始数据协议，值为配置</returns>
+        public virtual Dictionary<String, RawToSampleConfig> GetRawToSampleConfigs() { return null; }
 
         /// \~English
         /// <summary>

@@ -854,6 +854,18 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.8.0) [Optional. Only for NativeClass and DeviceClass] Called while getting configs of auto converting raw data to general sample (for raw data output by this component)
+        /// </summary>
+        /// <returns>Configs of auto converting raw data to general sample, the key is raw data protocol, the value is config</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.8.0) [可选实现；仅限NativeClass和DeviceClass] 获取原始数据自动转通用样本的配置（针对本组件输出的原始数据）
+        /// </summary>
+        /// <returns>原始数据自动转通用样本的配置，键为原始数据协议，值为配置</returns>
+        public virtual Dictionary<String, RawToSampleConfig> GetRawToSampleConfigs() { return null; }
+
+        /// \~English
+        /// <summary>
         /// [Optional] Disable all component functions by user
         /// </summary>
         /// \~Chinese

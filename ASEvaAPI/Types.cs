@@ -4655,4 +4655,45 @@ namespace ASEva
         /// </summary>
         public Dictionary<String, int> SubscriberReferences { get; set; }
     }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.8.0) Config of auto converting raw data to general sample
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.8.0) 原始数据自动转通用样本的配置
+    /// </summary>
+    public class RawToSampleConfig
+    {
+        /// \~English
+        /// <summary>
+        /// Alias name of output general sample
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 输出的通用样本别名
+        /// </summary>
+        public String AliasName { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Output protocol of general sample, null means using raw data protocol
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 输出的通用样本协议，若为null则使用原始数据协议
+        /// </summary>
+        public String SampleProtocol { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Title of output general sample, null means not recorded to data file
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 输出的通用样本标题，若为null则不记录至数据文件
+        /// </summary>
+        public String SampleTitle { get; set; }
+    }
 }
