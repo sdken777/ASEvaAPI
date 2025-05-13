@@ -1999,7 +1999,7 @@ namespace ASEva
         /// </summary>
         /// <param name="dataID">Data ID, should not be null or empty</param>
         /// <param name="bufferLength">Buffer length, ranges 1~1000</param>
-        /// <param name="timeout">The subscription will be closed if no dequeue for a along time, ranges 10～600 in seconds</param>
+        /// <param name="timeout">The subscription will be closed if no dequeue for a along time, ranges 10~600 in seconds</param>
         /// <returns>Data subscriber object, null if failed to initialize</returns>
         /// \~Chinese
         /// <summary>

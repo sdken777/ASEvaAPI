@@ -1039,7 +1039,7 @@ namespace ASEva
         /// <summary>
         /// Get whether the channel is configured as guest synchronized
         /// </summary>
-        /// <param name="id">Guest synchronization ID, like bus.1, video.0, xxx.yyy(xxx is native plugin's type ID，yyy is channel name)</param>
+        /// <param name="id">Guest synchronization ID, like bus.1, video.0, xxx.yyy(xxx is native plugin's type ID, yyy is channel name)</param>
         /// <returns>Whether the channel is configured as guest synchronized</returns>
         /// \~Chinese
         /// <summary>
@@ -3219,7 +3219,7 @@ namespace ASEva
         /// <summary>
         /// Set whether the channel is configured as guest synchronized
         /// </summary>
-        /// <param name="id">Guest synchronization ID, like bus.1, video.0, xxx.yyy(xxx is native plugin's type ID，yyy is channel name)</param>
+        /// <param name="id">Guest synchronization ID, like bus.1, video.0, xxx.yyy(xxx is native plugin's type ID, yyy is channel name)</param>
         /// <param name="guestSync">Whether the channel is configured as guest synchronized</param>
         /// \~Chinese
         /// <summary>
@@ -3717,7 +3717,7 @@ namespace ASEva
         /// </summary>
         /// <param name="dataID">Data ID, should not be null or empty</param>
         /// <param name="bufferLength">Buffer length, ranges 1~1000</param>
-        /// <param name="timeout">The subscription will be closed if no dequeue for a along time, ranges 10～600 in seconds</param>
+        /// <param name="timeout">The subscription will be closed if no dequeue for a along time, ranges 10~600 in seconds</param>
         /// <returns>Data subscriber object, null if failed to initialize</returns>
         /// \~Chinese
         /// <summary>
