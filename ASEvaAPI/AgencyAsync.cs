@@ -264,12 +264,12 @@ namespace ASEva
         /// <summary>
         /// (api:app=3.4.5) Add bus channel reference
         /// </summary>
-        /// <param name="busChannel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~48</param>
         /// \~Chinese
         /// <summary>
         /// (api:app=3.4.5) 添加总线通道引用
         /// </summary>
-        /// <param name="busChannel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~48</param>
         public static Task AddBusMessageReference(int busChannel)
         {
             return Handler.AddBusMessageReference(busChannel);
@@ -725,12 +725,12 @@ namespace ASEva
         /// <summary>
         /// Get all bus channels with data
         /// </summary>
-        /// <returns>Bus channels with data, value ranges 1~16</returns>
+        /// <returns>Bus channels with data, value ranges 1~48</returns>
         /// \~Chinese
         /// <summary>
         /// 获取所有有效的总线通道
         /// </summary>
-        /// <returns>有效的总线通道列表，值为1~16</returns>
+        /// <returns>有效的总线通道列表，值为1~48</returns>
         public static Task<int[]> GetAvailableBusChannels()
         {
             return Handler.GetAvailableBusChannels();
@@ -800,13 +800,13 @@ namespace ASEva
         /// <summary>
         /// Get time shift configuration for bus raw data channel
         /// </summary>
-        /// <param name="busChannel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~48</param>
         /// <returns>Time shift, in milliseconds</returns>
         /// \~Chinese
         /// <summary>
         /// 获取总线数据通道延迟配置
         /// </summary>
-        /// <param name="busChannel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~48</param>
         /// <returns>延迟配置，单位毫秒</returns>
         public static Task<double> GetBusChannelDelayConfig(int busChannel)
         {
@@ -834,14 +834,14 @@ namespace ASEva
         /// <summary>
         /// Get whether there's data in a bus channel
         /// </summary>
-        /// <param name="busChannel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~48</param>
         /// <param name="toleranceMillisecond">How many milliseconds (realistic time) can be tolerated without data</param>
         /// <returns>Whether there's data</returns>
         /// \~Chinese
         /// <summary>
         /// 获取总线数据通道状态
         /// </summary>
-        /// <param name="busChannel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~48</param>
         /// <param name="toleranceMillisecond">无数据的容忍时长</param>
         /// <returns>是否有数据</returns>
         public static Task<bool> GetBusChannelStatus(int busChannel, uint? toleranceMillisecond)
@@ -868,14 +868,14 @@ namespace ASEva
         /// <summary>
         /// Get frame rate of messages with the same local ID at the same channel
         /// </summary>
-        /// <param name="busChannel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~48</param>
         /// <param name="localID">Local ID of bus message</param>
         /// <returns>Frame rate, 0 means invalid</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定通道收到的指定ID报文的帧率
         /// </summary>
-        /// <param name="busChannel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~48</param>
         /// <param name="localID">通道内的报文ID</param>
         /// <returns>每秒帧率，0表示无效</returns>
         public static Task<float> GetBusMessageFPS(int busChannel, uint localID)
@@ -887,14 +887,14 @@ namespace ASEva
         /// <summary>
         /// Get information of message with the specified local ID at the specified channel
         /// </summary>
-        /// <param name="busChannel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~48</param>
         /// <param name="localID">Local ID of bus message</param>
         /// <returns>Message information, null if not found</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定通道上指定ID报文信息
         /// </summary>
-        /// <param name="busChannel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~48</param>
         /// <param name="localID">通道内的报文ID</param>
         /// <returns>总线报文信息，无信息则返回null</returns>
         public static Task<BusMessageInfo> GetBusMessageInfoByLocalID(int busChannel, uint localID)
@@ -923,13 +923,13 @@ namespace ASEva
         /// <summary>
         /// Get payload of bus channel
         /// </summary>
-        /// <param name="busChannel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~48</param>
         /// <returns>Payload in percentages, null if unavailable</returns>
         /// \~Chinese
         /// <summary>
         /// 获取指定总线通道的负载百分比
         /// </summary>
-        /// <param name="busChannel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~48</param>
         /// <returns>总线通道的负载百分比，若无效则返回null</returns>
         public static Task<double?> GetBusPayloadPercentage(int busChannel)
         {
@@ -941,13 +941,13 @@ namespace ASEva
         /// Get the bound channel of bus protocol
         /// </summary>
         /// <param name="protocolName">Bus protocol name (In the case of multiple channels, the channel name is included)</param>
-        /// <returns>Bus channel (1~16), null if not bound</returns>
+        /// <returns>Bus channel (1~48), null if not bound</returns>
         /// \~Chinese
         /// <summary>
         /// 获取总线协议文件当前配置于哪个通道
         /// </summary>
         /// <param name="protocolName">总线协议名称（多通道的情况下包括通道名）</param>
-        /// <returns>总线通道（1~16），若未配置则返回null</returns>
+        /// <returns>总线通道（1~48），若未配置则返回null</returns>
         public static Task<int?> GetBusProtocolFileChannel(String protocolName)
         {
             return Handler.GetBusProtocolFileChannel(protocolName);
@@ -2972,12 +2972,12 @@ namespace ASEva
         /// <summary>
         /// (api:app=3.4.5) Remove bus channel reference
         /// </summary>
-        /// <param name="busChannel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~48</param>
         /// \~Chinese
         /// <summary>
         /// (api:app=3.4.5) 移除总线通道引用
         /// </summary>
-        /// <param name="busChannel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~48</param>
         public static Task RemoveBusMessageReference(int busChannel)
         {
             return Handler.RemoveBusMessageReference(busChannel);
@@ -3202,13 +3202,13 @@ namespace ASEva
         /// <summary>
         /// Set time shift for bus raw data channel
         /// </summary>
-        /// <param name="busChannel">Bus channel, ranges 1~16</param>
+        /// <param name="busChannel">Bus channel, ranges 1~48</param>
         /// <param name="delay">Time shift, in milliseconds</param>
         /// \~Chinese
         /// <summary>
         /// 设置总线数据通道延迟配置
         /// </summary>
-        /// <param name="busChannel">总线通道，1~16</param>
+        /// <param name="busChannel">总线通道，1~48</param>
         /// <param name="delay">延迟配置，单位毫秒</param>
         public static Task SetBusChannelDelayConfig(int busChannel, double delay)
         {

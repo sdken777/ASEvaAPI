@@ -501,11 +501,11 @@ namespace ASEva
     {
         /// \~English
         /// <summary>
-        /// Bus channel (1~16), the bus message will be transmitted through the mapped device channel
+        /// Bus channel (1~48), the bus message will be transmitted through the mapped device channel
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 总线设备通道序号（1~16），报文将在对应硬件上发送
+        /// 总线设备通道序号（1~48），报文将在对应硬件上发送
         /// </summary>
         public uint Channel { get; set; }
 

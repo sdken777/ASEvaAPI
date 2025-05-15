@@ -14,11 +14,11 @@ namespace ASEva.Samples
     {
         /// \~English
         /// <summary>
-        /// Bus channel, ranges 1~16
+        /// Bus channel, ranges 1~48
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// 接收来源通道或发送目标通道（1~16）
+        /// 接收来源通道或发送目标通道（1~48）
         /// </summary>
         public byte Channel { get; set; }
 
