@@ -8608,7 +8608,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.9.0
+            version=3.9.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -12652,13 +12652,25 @@
         <member name="M:ASEva.Plugin.GetWorkflow">
             \~English
             <summary>
-            (api:app=3.1.0) [Optional] Called while getting workflow object
+            (api:app=3.1.0) Deprecated. Use GetWorkflow(clientSide) instead.
             </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.1.0) 弃用。请使用GetWorkflow(clientSide)替代。
+            </summary>
+        </member>
+        <member name="M:ASEva.Plugin.GetWorkflow(System.Boolean)">
+            \~English
+            <summary>
+            (api:app=3.9.1) [Optional] Called while getting workflow object
+            </summary>  
+            <param name="clientSide">Whether the workflow is client side</param>
             <returns>The workflow object</returns>
             \~Chinese
             <summary>
-            (api:app=3.1.0) [可选实现] 获取插件包含的流程对象时被调用
+            (api:app=3.9.1) [可选实现] 获取插件包含的流程对象时被调用
             </summary>
+            <param name="clientSide">是否为客户端流程</param>
             <returns>流程对象</returns>
         </member>
         <member name="M:ASEva.Plugin.GetGlobalPathKeys">
