@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.2.10
+            version=1.3.0
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -297,6 +297,18 @@
             在此事件中实现配置界面的关闭
             </summary>
         </member>
+        <member name="M:ASEva.UIAvalonia.EtoConfigPanel.InitializeComponent(System.Boolean)">
+            <summary>
+            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
+            </summary>
+            <param name="loadXaml">Should the XAML be loaded into the component.</param>
+        </member>
+        <member name="M:ASEva.UIAvalonia.EtoWindowPanel.InitializeComponent(System.Boolean)">
+            <summary>
+            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
+            </summary>
+            <param name="loadXaml">Should the XAML be loaded into the component.</param>
+        </member>
         <member name="T:ASEva.UIAvalonia.CrossConverter">
             \~English
             <summary>
@@ -344,18 +356,6 @@
             </summary>
             <param name="anyConfigPanel">任意配置面板</param>
             <returns>Avalonia配置面板，若转化失败则返回null</returns>
-        </member>
-        <member name="M:ASEva.UIAvalonia.EtoConfigPanel.InitializeComponent(System.Boolean)">
-            <summary>
-            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
-            </summary>
-            <param name="loadXaml">Should the XAML be loaded into the component.</param>
-        </member>
-        <member name="M:ASEva.UIAvalonia.EtoWindowPanel.InitializeComponent(System.Boolean)">
-            <summary>
-            Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
-            </summary>
-            <param name="loadXaml">Should the XAML be loaded into the component.</param>
         </member>
         <member name="T:ASEva.UIAvalonia.EtoEmbedder">
             \~English
@@ -728,6 +728,186 @@
             Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
             </summary>
             <param name="loadXaml">Should the XAML be loaded into the component.</param>
+        </member>
+        <member name="T:ASEva.UIAvalonia.BackgroundColorSetter">
+            \~English
+            <summary>
+            Set the background color of the control (solve the problem that the background color is invalid when the control is disabled)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.3.0) 设置控件的背景颜色（解决禁用时背景颜色失效问题）
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.AsyncViewModel">
+            \~English
+            <summary>
+            (api:avalonia=1.3.0) The base class of the view model that supports asynchronous operations
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.3.0) 支持异步操作的视图模型基类
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.PropertyAsyncHandler`1">
+            \~English
+            <summary>
+            (api:avalonia=1.3.0) Let the property field of the model support asynchronous operations
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.3.0) 让模型中的属性字段支持异步操作
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.PropertyAsyncHandler`1.#ctor(ASEva.UIAvalonia.AsyncViewModel,System.String,System.String[],System.Func{System.Threading.Tasks.Task{System.ValueTuple{System.Boolean,`0}}},System.Action{`0},System.Double)">
+            \~English
+            <summary>
+            Default constructor
+            </summary>
+            <param name="model">The view model</param>
+            <param name="propertyName">The bound property name</param>
+            <param name="relatedPropertyNames">The related property names</param>
+            <param name="getter">While refreshing, the function for getting the property value from the system asynchronously</param>
+            <param name="setter">While the property value changes, the function for setting the property value to the system asynchronously</param>
+            <param name="minInterval">The minimum interval for refreshing</param>
+            \~Chinese
+            <summary>
+            默认构造函数
+            </summary>
+            <param name="model">视图模型</param>
+            <param name="propertyName">绑定的属性名</param>
+            <param name="relatedPropertyNames">相关的属性名列表</param>
+            <param name="getter">循环刷新时，用于从系统异步获取属性值的函数</param>
+            <param name="setter">属性值变化时，用于将其异步设置给系统的函数</param>
+            <param name="minInterval">循环刷新的最小间隔</param>
+        </member>
+        <member name="M:ASEva.UIAvalonia.PropertyAsyncHandler`1.SetToModel(`0)">
+            \~English
+            <summary>
+            Update the property value directly
+            </summary>
+            <param name="value">The property value</param>
+            \~Chinese
+            <summary>
+            直接更新属性值
+            </summary>
+            <param name="value">属性值</param>
+        </member>
+        <member name="M:ASEva.UIAvalonia.PropertyAsyncHandler`1.UpdateToModel">
+            \~English
+            <summary>
+            Refresh and update the property value from the system
+            </summary>
+            \~Chinese
+            <summary>
+            循环刷新，从系统获取并更新属性值
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.PropertyAsyncHandler`1.UpdateFromModel(System.Boolean)">
+            \~English
+            <summary>
+            Respond to the change of the property value, and set the value to the system
+            </summary>
+            <param name="fromRelatedProperties">Whether it is a related property whose value changes</param>
+            \~Chinese
+            <summary>
+            响应属性值变化，将值设置给系统
+            </summary>
+            <param name="fromRelatedProperties">是否为相关属性值的变化</param>
+        </member>
+        <member name="T:ASEva.UIAvalonia.ElementAsyncHandler`1">
+            \~English
+            <summary>
+            (api:avalonia=1.3.0) Let an element of the ObservableCollection in the model support asynchronous operations
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.3.0) 让模型中ObservableCollection的元素字段支持异步操作
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.ElementAsyncHandler`1.#ctor(ASEva.UIAvalonia.AsyncViewModel,System.String,System.Int32,System.Func{System.Int32,System.Threading.Tasks.Task{System.ValueTuple{System.Boolean,`0}}},System.Action{System.Int32,`0},System.Double)">
+            \~English
+            <summary>
+            Default constructor
+            </summary>
+            <param name="model">The view model</param>
+            <param name="propertyName">The bound property name</param>
+            <param name="elementIndex">The index of the element in the ObservableCollection</param>
+            <param name="getter">While refreshing, the function for getting the element value from the system asynchronously</param>
+            <param name="setter">While the element value changes, the function for setting the element value to the system asynchronously</param>
+            <param name="minInterval">The minimum interval for refreshing</param>
+            \~Chinese
+            <summary>
+            默认构造函数
+            </summary>
+            <param name="model">视图模型</param>
+            <param name="propertyName">绑定的属性名</param>
+            <param name="elementIndex">ObservableCollection中元素的序号</param>
+            <param name="getter">循环刷新时，用于从系统异步获取元素值的函数</param>
+            <param name="setter">元素值变化时，用于将其异步设置给系统的函数</param>
+            <param name="minInterval">循环刷新的最小间隔</param>
+        </member>
+        <member name="M:ASEva.UIAvalonia.ElementAsyncHandler`1.SetToModel(`0)">
+            \~English
+            <summary>
+            Update the element value directly
+            </summary>
+            <param name="value">The element value</param>
+            \~Chinese
+            <summary>
+            直接更新元素值
+            </summary>
+            <param name="value">元素值</param>
+        </member>
+        <member name="M:ASEva.UIAvalonia.ElementAsyncHandler`1.UpdateToModel">
+            \~English
+            <summary>
+            Refresh and update the element value from the system
+            </summary>
+            \~Chinese
+            <summary>
+            循环刷新，从系统获取并更新元素值
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.CollectionAsyncHandler`1">
+            \~English
+            <summary>
+            (api:avalonia=1.3.0) Let the ObservableCollection in the model support asynchronous operations
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.3.0) 让模型中ObservableCollection支持异步操作
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.CollectionAsyncHandler`1.#ctor(ASEva.UIAvalonia.AsyncViewModel,System.String,System.String[],System.Func{System.Threading.Tasks.Task{System.ValueTuple{System.Boolean,`0[]}}},System.Double)">
+            \~English
+            <summary>
+            Default constructor
+            </summary>
+            <param name="model">The view model</param>
+            <param name="propertyName">The bound property name</param>
+            <param name="relatedPropertyNames">The related property names</param>
+            <param name="getter">While refreshing, the function for getting the collection value from the system asynchronously</param>
+            <param name="minInterval">The minimum interval for refreshing</param>
+            \~Chinese
+            <summary>
+            默认构造函数
+            </summary>
+            <param name="model">视图模型</param>
+            <param name="propertyName">绑定的属性名</param>
+            <param name="relatedPropertyNames">相关的属性名列表</param>
+            <param name="getter">循环刷新时，用于从系统异步获取集合值的函数</param>
+            <param name="minInterval">循环刷新的最小间隔</param>
+        </member>
+        <member name="M:ASEva.UIAvalonia.CollectionAsyncHandler`1.UpdateToModel">
+            \~English
+            <summary>
+            Refresh and update the collection value from the system
+            </summary>
+            \~Chinese
+            <summary>
+            循环刷新，从系统获取并更新集合值
+            </summary>
         </member>
         <member name="T:ASEva.UIAvalonia.WindowPanel">
             \~English

@@ -8608,7 +8608,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.9.1
+            version=3.9.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -21304,6 +21304,30 @@
             </summary>
             <param name="src">正交坐标系坐标</param>
             <returns>经纬度坐标</returns>
+        </member>
+        <member name="T:ASEva.Utility.ProcessGetter">
+            \~English
+            <summary>
+            (api:app=3.9.2) Get process by name
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.9.2) 根据进程名获取进程
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.ProcessGetter.Get(System.String)">
+            \~English
+            <summary>
+            Get process by name
+            </summary>
+            <param name="processName">Process name, without .exe suffix</param>
+            <returns>Process object, or null if process does not exist</returns>
+            \~Chinese
+            <summary>
+            根据进程名获取进程
+            </summary>
+            <param name="processName">进程名，不带.exe等后缀</param>
+            <returns>进程对象，如果进程不存在则返回null</returns>
         </member>
         <member name="T:ASEva.Utility.RegexUtil">
             \~English
