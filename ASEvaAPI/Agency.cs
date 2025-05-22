@@ -594,6 +594,30 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.9.3) Generate bus message for transmission by signal values
+        /// </summary>
+        /// <param name="messageID">Bus message ID</param>
+        /// <param name="signalValues">Signal value table. The key is signal name (Signal name list can be queried by Agency.GetSignalNamesOfBusMessage )</param>
+        /// <param name="defaultValue">The default value for those not in the signal value table</param>
+        /// <param name="interval">Transmit period, in milliseconds (at least 10). If it is set to null, it is transmitted only once</param>
+        /// <returns>Bus message for transmission</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.9.3) 按信号值生成用于发送的报文
+        /// </summary>
+        /// <param name="messageID">总线报文ID</param>
+        /// <param name="signalValues">信号值表，键为信号名称，可先通过 Agency.GetSignalNamesOfBusMessage 获取信号名称列表</param>
+        /// <param name="defaultValue">信号值表未提供的信号使用的默认值</param>
+        /// <param name="interval">报文发送周期，单位毫秒（至少为10），若设为null则只发送一次</param>
+        /// <returns>用于发送的报文</returns>
+        public static BusMessage GenerateBusMessage(String messageID, Dictionary<String, double> signalValues, double defaultValue, uint? interval)
+        {
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GenerateBusMessage(messageID, signalValues, defaultValue, interval).Result;
+        }
+
+        /// \~English
+        /// <summary>
         /// Get guest synchronization IDs of all channels being configured as guest synchronized
         /// </summary>
         /// <returns>Guest synchronization IDs of all channels being configured as guest synchronized</returns>

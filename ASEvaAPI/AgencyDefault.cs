@@ -616,6 +616,11 @@ namespace ASEva
             return Task.CompletedTask;
         }
 
+        public Task<BusMessage> GenerateBusMessage(String messageID, Dictionary<String, double> signalValues, double defaultValue, uint? interval)
+        {
+            return Task.FromResult<BusMessage>(null);
+        }
+
         public Task<string[]> GetAllChannelGuestSyncKeys()
         {
             return Task.FromResult<string[]>(null);
