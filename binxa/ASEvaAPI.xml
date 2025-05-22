@@ -2378,6 +2378,26 @@
             <param name="busMessage">总线报文</param>
             <returns>所有信号值及相关信息</returns>
         </member>
+        <member name="M:ASEva.Agency.GenerateBusMessage(System.String,System.Collections.Generic.Dictionary{System.String,System.Double},System.Double,System.Nullable{System.UInt32})">
+            \~English
+            <summary>
+            (api:app=2.17.2) Generate bus message for transmission by signal values
+            </summary>
+            <param name="messageID">Bus message ID</param>
+            <param name="signalValues">Signal value table. The key is signal name (Signal name list can be queried by Agency.GetSignalNamesOfBusMessage )</param>
+            <param name="defaultValue">The default value for those not in the signal value table</param>
+            <param name="interval">Transmit period, in milliseconds (at least 10). If it is set to null, it is transmitted only once</param>
+            <returns>Bus message for transmission</returns>
+            \~Chinese
+            <summary>
+            (api:app=2.17.2) 按信号值生成用于发送的报文
+            </summary>
+            <param name="messageID">总线报文ID</param>
+            <param name="signalValues">信号值表，键为信号名称，可先通过 Agency.GetSignalNamesOfBusMessage 获取信号名称列表</param>
+            <param name="defaultValue">信号值表未提供的信号使用的默认值</param>
+            <param name="interval">报文发送周期，单位毫秒（至少为10），若设为null则只发送一次</param>
+            <returns>用于发送的报文</returns>
+        </member>
         <member name="M:ASEva.Agency.GetRecentProjectPathes">
             \~English
             <summary>
@@ -4324,7 +4344,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=2.17.1
+            version=2.17.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
