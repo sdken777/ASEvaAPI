@@ -4,6 +4,8 @@ using System.Diagnostics;
 
 namespace ASEva.Utility
 {
+    #pragma warning disable CS1571
+    
     /// \~English
     /// <summary>
     /// (api:app=3.9.2) Get process by name

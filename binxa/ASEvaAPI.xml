@@ -8648,7 +8648,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.9.3
+            version=3.9.4
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -20489,6 +20489,36 @@
             \~Chinese
             <summary>
             用于初始化对象数组，避免空引用
+            </summary>
+        </member>
+        <member name="T:ASEva.Utility.Assert">
+            \~English
+            <summary>
+            (api:app=3.9.4) Used to ensure that subsequent code is executed under specified conditions 
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.9.4) 用于确保在指定条件下执行后续代码
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.Assert.HostSide">
+            \~English
+            <summary>
+            Throw an exception if not running on the host side
+            </summary>
+            \~Chinese
+            <summary>
+            若非主机端运行则触发异常
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.Assert.ClientSide">
+            \~English
+            <summary>
+            Throw an exception if not running on the client side
+            </summary>
+            \~Chinese
+            <summary>
+            若非客户端运行则触发异常
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">
