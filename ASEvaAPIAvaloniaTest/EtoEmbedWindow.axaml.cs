@@ -11,8 +11,7 @@ namespace ASEvaAPIAvaloniaTest
         public EtoEmbedWindow()
         {
             InitializeComponent();
-
-            this.AddToResources(Program.Texts);
+            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
 
             var panel = new ASEvaAPIEtoTest.EtoTestPanel(Program.Language, false);
             embedder.EtoControl = panel;

@@ -10,8 +10,6 @@ namespace ASEvaAPIAvaloniaTest
         public PlotGroup()
         {
             InitializeComponent();
-
-            this.AddToResources(Program.Texts);
         }
     }
 }

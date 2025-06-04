@@ -66,4 +66,27 @@
             </Grid>
         </Grid>
     </Border>
+
+    <Panel.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary x:Key="en">
+                <x:String x:Key="basic-text">Text</x:String>
+                <x:String x:Key="basic-tooltip-1">Tooltip 1</x:String>
+                <x:String x:Key="basic-tooltip-2">Tooltip 2</x:String>
+                <x:String x:Key="basic-tooltip-3">Tooltip 3</x:String>
+                <x:String x:Key="basic-tooltip-4">Tooltip 4</x:String>
+                <x:String x:Key="basic-tooltip-5">Tooltip 5</x:String>
+                <x:String x:Key="basic-tooltip-6">Tooltip 6</x:String>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="zh">
+                <x:String x:Key="basic-text">文本</x:String>
+                <x:String x:Key="basic-tooltip-1">提示1</x:String>
+                <x:String x:Key="basic-tooltip-2">提示2</x:String>
+                <x:String x:Key="basic-tooltip-3">提示3</x:String>
+                <x:String x:Key="basic-tooltip-4">提示4</x:String>
+                <x:String x:Key="basic-tooltip-5">提示5</x:String>
+                <x:String x:Key="basic-tooltip-6">提示6</x:String>
+            </ResourceDictionary>
+        </ResourceDictionary>
+    </Panel.Resources>
 </Panel>

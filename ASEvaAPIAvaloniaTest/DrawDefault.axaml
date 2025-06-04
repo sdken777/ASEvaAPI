@@ -24,4 +24,15 @@
     <Button x:Name="buttonC" Content="C" Margin="10" Width="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" IsVisible="False" Click="buttonC_Click" />
     <Button x:Name="buttonD" Content="D" Margin="10" Width="30" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" IsVisible="False" Click="buttonD_Click" />
     <Button Classes="hyperlink" x:Name="link" Content="ABCD" ToolTip.Tip="ABCD" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Bottom" IsVisible="False" />
+
+    <Panel.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary x:Key="en">
+                <x:String x:Key="draw-text">Hello World</x:String>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="zh">
+                <x:String x:Key="draw-text">天气不错</x:String>
+            </ResourceDictionary>
+        </ResourceDictionary>
+    </Panel.Resources>
 </Panel>

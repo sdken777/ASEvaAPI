@@ -18,11 +18,10 @@ namespace ASEvaAPIAvaloniaTest
         public BasicPageB()
         {
             InitializeComponent();
-
-            var texts = Program.Texts;
-            this.AddToResources(texts);
+            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
             DataContext = model;
 
+            var texts = Program.Texts;
             var listBoxItems = new List<String>();
             for (int i = 1; i <= 1000; i++) listBoxItems.Add(texts.Format("basic-list-item", i));
             listBox.ItemsSource = listBoxItems;

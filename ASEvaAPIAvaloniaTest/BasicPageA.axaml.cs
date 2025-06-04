@@ -15,8 +15,7 @@ namespace ASEvaAPIAvaloniaTest
         public BasicPageA()
         {
             InitializeComponent();
-            
-            this.AddToResources(Program.Texts);
+            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
             DataContext = new Model();
 
             searchBox.ItemsSource = new string[]{ "Cat", "Camel", "Cow", "Chameleon", "Mouse", "Lion", "Zebra", "大象" }.OrderBy(x => x);

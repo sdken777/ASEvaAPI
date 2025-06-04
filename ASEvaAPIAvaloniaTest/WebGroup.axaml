@@ -23,4 +23,19 @@
             <aseva:EtoEmbedder x:Name="webView" />
         </Border>
     </Grid>
+
+    <Panel.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary x:Key="en">
+                <x:String x:Key="web-go-url">Go</x:String>
+                <x:String x:Key="web-call-script">Call script</x:String>
+                <x:String x:Key="web-group-title">Web View</x:String>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="zh">
+                <x:String x:Key="web-go-url">打开</x:String>
+                <x:String x:Key="web-call-script">调用脚本</x:String>
+                <x:String x:Key="web-group-title">Web视图</x:String>
+            </ResourceDictionary>
+        </ResourceDictionary>
+    </Panel.Resources>
 </Panel>

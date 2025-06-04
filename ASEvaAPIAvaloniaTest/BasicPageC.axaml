@@ -74,4 +74,41 @@
             </Grid>
         </Grid>
     </Border>
+
+    <Panel.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary x:Key="en">
+                <x:String x:Key="basic-checklist-check-all">Check all</x:String>
+                <x:String x:Key="basic-checklist-uncheck-all">Clear all</x:String>
+                <x:String x:Key="basic-checklist-remove">Remove</x:String>
+                <x:String x:Key="basic-checklist-set-text">Set text</x:String>
+                <x:String x:Key="basic-checklist-get-check">Get checked</x:String>
+                <x:String x:Key="basic-checklist-set-check">Set checked</x:String>
+                <x:String x:Key="basic-checklist-get-enable">Get enabled</x:String>
+                <x:String x:Key="basic-checklist-set-enable">Set enabled</x:String>
+                <x:String x:Key="basic-grid-add-row">Add row</x:String>
+                <x:String x:Key="basic-grid-remove-row">Remove row</x:String>
+                <x:String x:Key="basic-grid-index-title">Index</x:String>
+                <x:String x:Key="basic-grid-key-title">Key</x:String>
+                <x:String x:Key="basic-grid-value-title">Value</x:String>
+                <x:String x:Key="basic-grid-change-color">Change color</x:String>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="zh">
+                <x:String x:Key="basic-checklist-check-all">全选</x:String>
+                <x:String x:Key="basic-checklist-uncheck-all">清空</x:String>
+                <x:String x:Key="basic-checklist-remove">移除</x:String>
+                <x:String x:Key="basic-checklist-set-text">设置文本</x:String>
+                <x:String x:Key="basic-checklist-get-check">是否选中</x:String>
+                <x:String x:Key="basic-checklist-set-check">切换选中</x:String>
+                <x:String x:Key="basic-checklist-get-enable">是否启用</x:String>
+                <x:String x:Key="basic-checklist-set-enable">切换启用</x:String>
+                <x:String x:Key="basic-grid-add-row">添加行</x:String>
+                <x:String x:Key="basic-grid-remove-row">移除行</x:String>
+                <x:String x:Key="basic-grid-index-title">序号</x:String>
+                <x:String x:Key="basic-grid-key-title">键</x:String>
+                <x:String x:Key="basic-grid-value-title">值</x:String>
+                <x:String x:Key="basic-grid-change-color">改变颜色</x:String>
+            </ResourceDictionary>
+        </ResourceDictionary>
+    </Panel.Resources>
 </Panel>

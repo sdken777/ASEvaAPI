@@ -9,4 +9,15 @@
     <Grid x:Name="grid">
         <aseva:EtoEmbedder x:Name="embedder" />
     </Grid>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary x:Key="en">
+                <x:String x:Key="eto-window">Eto Window</x:String>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="zh">
+                <x:String x:Key="eto-window">Eto窗口</x:String>
+            </ResourceDictionary>
+        </ResourceDictionary>
+    </Window.Resources>
 </Window>

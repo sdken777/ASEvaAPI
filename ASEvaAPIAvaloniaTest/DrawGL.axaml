@@ -20,4 +20,21 @@
             <Label Grid.Column="6" x:Name="labelMouseCount" Content="0" />
         </Grid>
     </Grid>
+
+    <Panel.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary x:Key="en">
+                <x:String x:Key="draw-gl-loop-interval">Max loop interval:</x:String>
+                <x:String x:Key="draw-gl-pause-render">Pause</x:String>
+                <x:String x:Key="draw-gl-resume-render">Resume</x:String>
+                <x:String x:Key="draw-gl-info">OpenGL info</x:String>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="zh">
+                <x:String x:Key="draw-gl-loop-interval">最大循环间隔:</x:String>
+                <x:String x:Key="draw-gl-pause-render">暂停</x:String>
+                <x:String x:Key="draw-gl-resume-render">恢复</x:String>
+                <x:String x:Key="draw-gl-info">OpenGL信息</x:String>
+            </ResourceDictionary>
+        </ResourceDictionary>
+    </Panel.Resources>
 </Panel>

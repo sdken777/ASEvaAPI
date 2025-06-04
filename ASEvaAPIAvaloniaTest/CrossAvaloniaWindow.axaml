@@ -14,4 +14,17 @@
         </Grid>
         <aseva:EtoEmbedder Grid.Row="2" x:Name="etoEmbedder" />
     </Grid>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary x:Key="en">
+                <x:String x:Key="menu-avalonia-dialog">Avalonia dialog</x:String>
+                <x:String x:Key="menu-eto-dialog">Eto dialog</x:String>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="zh">
+                <x:String x:Key="menu-avalonia-dialog">Avalonia对话框</x:String>
+                <x:String x:Key="menu-eto-dialog">Eto对话框</x:String>
+            </ResourceDictionary>
+        </ResourceDictionary>
+    </Window.Resources>
 </Window>

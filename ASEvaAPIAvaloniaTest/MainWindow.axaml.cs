@@ -17,8 +17,7 @@ namespace ASEvaAPIAvaloniaTest
         public MainWindow()
         {
             InitializeComponent();
-
-            this.AddToResources(Program.Texts);
+            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
             DataContext = new Model();
 
             timer.Interval = TimeSpan.FromMilliseconds(15);

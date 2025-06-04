@@ -15,8 +15,7 @@ namespace ASEvaAPIAvaloniaTest
         public DrawDefault()
         {
             InitializeComponent();
-
-            this.AddToResources(Program.Texts);
+            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
 
             Loaded += delegate
             {

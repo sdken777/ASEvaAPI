@@ -91,4 +91,63 @@
             <MenuItem Header="{DynamicResource menu-eto-dialog}" Click="itemShowEtoDialog_Click" />
         </ContextMenu>
     </Window.ContextMenu>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary x:Key="en">
+                <x:String x:Key="title">Test Window</x:String>
+                <x:String x:Key="basic-group-title">Basic Controls</x:String>
+                <x:String x:Key="basic-tabpage-title-a">Tabpage A</x:String>
+                <x:String x:Key="basic-tabpage-title-b">Tabpage B</x:String>
+                <x:String x:Key="basic-tabpage-title-c">Tabpage C</x:String>
+                <x:String x:Key="basic-tabpage-title-d">Tabpage D</x:String>
+                <x:String x:Key="basic-tabpage-title-e">Tabpage E</x:String>
+                <x:String x:Key="web-group-title">Web View</x:String>
+                <x:String x:Key="draw-group-title">Drawing Controls</x:String>
+                <x:String x:Key="plot-group-title">Plot Controls</x:String>
+                <x:String x:Key="menu-fullscreen">Fullscreen</x:String>
+                <x:String x:Key="menu-exit">Exit</x:String>
+                <x:String x:Key="menu-sub">Sub menu</x:String>
+                <x:String x:Key="menu-sub-item-a">Sub item A</x:String>
+                <x:String x:Key="menu-sub-item-b">Sub item B</x:String>
+                <x:String x:Key="menu-check-a">Check item A</x:String>
+                <x:String x:Key="menu-check-b">Check item B</x:String>
+                <x:String x:Key="menu-radio-a">Radio item A</x:String>
+                <x:String x:Key="menu-radio-b">Radio item B</x:String>
+                <x:String x:Key="menu-snapshot">Snapshot</x:String>
+                <x:String x:Key="menu-exception-main">Exception (main thread)</x:String>
+                <x:String x:Key="menu-exception-sub">Exception (sub thread)</x:String>
+                <x:String x:Key="menu-eto-window">Eto window</x:String>
+                <x:String x:Key="menu-eto-dialog">Eto dialog</x:String>
+                <x:String x:Key="exit-confirm">Exit?</x:String>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="zh">
+                <x:String x:Key="title">测试窗口</x:String>
+                <x:String x:Key="basic-group-title">基本控件</x:String>
+                <x:String x:Key="basic-tabpage-title-a">标签页A</x:String>
+                <x:String x:Key="basic-tabpage-title-b">标签页B</x:String>
+                <x:String x:Key="basic-tabpage-title-c">标签页C</x:String>
+                <x:String x:Key="basic-tabpage-title-d">标签页D</x:String>
+                <x:String x:Key="basic-tabpage-title-e">标签页E</x:String>
+                <x:String x:Key="web-group-title">Web视图</x:String>
+                <x:String x:Key="draw-group-title">绘图控件</x:String>
+                <x:String x:Key="plot-group-title">图表控件</x:String>
+                <x:String x:Key="menu-fullscreen">全屏</x:String>
+                <x:String x:Key="menu-exit">退出</x:String>
+                <x:String x:Key="menu-sub">子菜单</x:String>
+                <x:String x:Key="menu-sub-item-a">子菜单项A</x:String>
+                <x:String x:Key="menu-sub-item-b">子菜单项B</x:String>
+                <x:String x:Key="menu-check-a">多选项A</x:String>
+                <x:String x:Key="menu-check-b">多选项B</x:String>
+                <x:String x:Key="menu-radio-a">单选项A</x:String>
+                <x:String x:Key="menu-radio-b">单选项B</x:String>
+                <x:String x:Key="menu-snapshot">快照</x:String>
+                <x:String x:Key="menu-exception-main">制造异常（主线程）</x:String>
+                <x:String x:Key="menu-exception-sub">制造异常（子线程）</x:String>
+                <x:String x:Key="menu-eto-window">Eto窗口</x:String>
+                <x:String x:Key="menu-eto-dialog">Eto对话框</x:String>
+                <x:String x:Key="exit-confirm">是否退出？</x:String>
+            </ResourceDictionary>
+        </ResourceDictionary>
+    </Window.Resources>
 </Window>

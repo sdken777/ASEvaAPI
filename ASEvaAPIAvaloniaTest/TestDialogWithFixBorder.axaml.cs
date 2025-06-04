@@ -12,8 +12,7 @@ namespace ASEvaAPIAvaloniaTest
         public TestDialogWithFixBorder()
         {
             InitializeComponent();
-
-            this.AddToResources(Program.Texts);
+            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
         }
 
         private void linkClientSize_Click(object sender, RoutedEventArgs e)

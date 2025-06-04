@@ -87,4 +87,29 @@
             </Grid>
         </Border>
     </Grid>
+
+    <Panel.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary x:Key="en">
+                <x:String x:Key="basic-tree-select-first">Select</x:String>
+                <x:String x:Key="basic-tree-change-color">Change color</x:String>
+                <x:String x:Key="basic-flow-add">Add</x:String>
+                <x:String x:Key="basic-flow-insert">Insert</x:String>
+                <x:String x:Key="basic-flow-remove">Remove</x:String>
+                <x:String x:Key="basic-flow-show">Show</x:String>
+                <x:String x:Key="basic-flow-hide">Hide</x:String>
+                <x:String x:Key="basic-flow-select">Select</x:String>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="zh">
+                <x:String x:Key="basic-tree-select-first">选首项</x:String>
+                <x:String x:Key="basic-tree-change-color">改变颜色</x:String>
+                <x:String x:Key="basic-flow-add">添加项</x:String>
+                <x:String x:Key="basic-flow-insert">插入项</x:String>
+                <x:String x:Key="basic-flow-remove">移除项</x:String>
+                <x:String x:Key="basic-flow-show">显示项</x:String>
+                <x:String x:Key="basic-flow-hide">隐藏项</x:String>
+                <x:String x:Key="basic-flow-select">选中项</x:String>
+            </ResourceDictionary>
+        </ResourceDictionary>
+    </Panel.Resources>
 </Panel>

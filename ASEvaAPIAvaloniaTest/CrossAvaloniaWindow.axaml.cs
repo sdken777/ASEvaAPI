@@ -13,7 +13,7 @@ namespace ASEvaAPIAvaloniaTest
         public CrossAvaloniaWindow()
         {
             InitializeComponent();
-            this.AddToResources(Program.Texts);
+            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
 
             if (!Program.DesignerMode)
             {

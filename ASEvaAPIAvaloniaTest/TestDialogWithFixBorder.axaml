@@ -11,4 +11,21 @@
         <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-dialog-with-border}" Click="linkShowDialogWithBorder_Click" />
         <Button Grid.Column="4" Content="{DynamicResource basic-close}" Click="buttonClose_Click" />
     </Grid>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary x:Key="en">
+                <x:String x:Key="title-dialog">Test Dialog</x:String>
+                <x:String x:Key="basic-client-size">Client Size</x:String>
+                <x:String x:Key="basic-dialog-with-border">Dialog with border</x:String>
+                <x:String x:Key="basic-close">Close</x:String>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="zh">
+                <x:String x:Key="title-dialog">测试对话框</x:String>
+                <x:String x:Key="basic-client-size">用户区域</x:String>
+                <x:String x:Key="basic-dialog-with-border">带边框对话框</x:String>
+                <x:String x:Key="basic-close">关闭</x:String>
+            </ResourceDictionary>
+        </ResourceDictionary>
+    </Window.Resources>
 </Window>

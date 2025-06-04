@@ -68,4 +68,67 @@
             <MenuItem Header="{DynamicResource menu-eto-dialog}" Click="itemMenuEtoDialog_Click" />
         </ContextMenu>
     </Control.ContextMenu>
+
+    <Panel.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary x:Key="en">
+                <x:String x:Key="basic-menu-notice">Context menu is available</x:String>
+                <x:String x:Key="basic-label-row-1">Row-1:</x:String>
+                <x:String x:Key="basic-checkbox">Save file</x:String>
+                <x:String x:Key="basic-radiobutton-file">File</x:String>
+                <x:String x:Key="basic-radiobutton-dir">Directory</x:String>
+                <x:String x:Key="basic-linkbutton">Browse</x:String>
+                <x:String x:Key="basic-linkbutton-enabled">Enabled</x:String>
+                <x:String x:Key="basic-linkbutton-disabled">Disabled</x:String>
+                <x:String x:Key="basic-linkbutton-switch">Switch</x:String>
+                <x:String x:Key="basic-label-row-2">Row-2:</x:String>
+                <x:String x:Key="basic-combobox-a">Option A</x:String>
+                <x:String x:Key="basic-combobox-b">Option B</x:String>
+                <x:String x:Key="basic-label-row-3">Row-3:</x:String>
+                <x:String x:Key="search">Search</x:String>
+                <x:String x:Key="basic-label-row-4">Row-4:</x:String>
+                <x:String x:Key="basic-label-row-5">Row-5:</x:String>
+                <x:String x:Key="basic-button">Button</x:String>
+                <x:String x:Key="basic-label-row-6">Row-6:</x:String>
+                <x:String x:Key="basic-dialog-no-border">Dialog without border</x:String>
+                <x:String x:Key="basic-dialog-with-border">Dialog with border</x:String>
+                <x:String x:Key="basic-dialog-with-border-fix">Dialog with fixed border</x:String>
+                <x:String x:Key="basic-client-size">Client Size</x:String>
+                <x:String x:Key="menu-button">Message box</x:String>
+                <x:String x:Key="menu-avalonia-window">Avalonia window</x:String>
+                <x:String x:Key="menu-avalonia-dialog">Avalonia dialog</x:String>
+                <x:String x:Key="menu-eto-dialog">Eto dialog</x:String>
+                <x:String x:Key="basic-save-file-filter">Text file</x:String>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="zh">
+                <x:String x:Key="basic-menu-notice">右键菜单可用</x:String>
+                <x:String x:Key="basic-label-row-1">第1行：</x:String>
+                <x:String x:Key="basic-checkbox">保存文件</x:String>
+                <x:String x:Key="basic-radiobutton-file">文件</x:String>
+                <x:String x:Key="basic-radiobutton-dir">文件夹</x:String>
+                <x:String x:Key="basic-linkbutton">浏览</x:String>
+                <x:String x:Key="basic-linkbutton-enabled">已启用</x:String>
+                <x:String x:Key="basic-linkbutton-disabled">已禁用</x:String>
+                <x:String x:Key="basic-linkbutton-switch">切换</x:String>
+                <x:String x:Key="basic-label-row-2">第2行：</x:String>
+                <x:String x:Key="basic-combobox-a">选项A</x:String>
+                <x:String x:Key="basic-combobox-b">选项B</x:String>
+                <x:String x:Key="basic-label-row-3">第3行：</x:String>
+                <x:String x:Key="search">搜索</x:String>
+                <x:String x:Key="basic-label-row-4">第4行：</x:String>
+                <x:String x:Key="basic-label-row-5">第5行：</x:String>
+                <x:String x:Key="basic-button">按钮</x:String>
+                <x:String x:Key="basic-label-row-6">第6行：</x:String>
+                <x:String x:Key="basic-dialog-no-border">无边框对话框</x:String>
+                <x:String x:Key="basic-dialog-with-border">带边框对话框</x:String>
+                <x:String x:Key="basic-dialog-with-border-fix">带固定边框对话框</x:String>
+                <x:String x:Key="basic-client-size">用户区域</x:String>
+                <x:String x:Key="menu-button">消息框</x:String>
+                <x:String x:Key="menu-avalonia-window">Avalonia窗口</x:String>
+                <x:String x:Key="menu-avalonia-dialog">Avalonia对话框</x:String>
+                <x:String x:Key="menu-eto-dialog">Eto对话框</x:String>
+                <x:String x:Key="basic-save-file-filter">文本文件</x:String>
+            </ResourceDictionary>
+        </ResourceDictionary>
+    </Panel.Resources>
 </Panel>

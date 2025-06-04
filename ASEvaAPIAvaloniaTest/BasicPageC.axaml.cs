@@ -17,8 +17,7 @@ namespace ASEvaAPIAvaloniaTest
         public BasicPageC()
         {
             InitializeComponent();
-
-            this.AddToResources(Program.Texts);
+            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
             DataContext = model;
 
             for (int i = 0; i < 1000; i++)
