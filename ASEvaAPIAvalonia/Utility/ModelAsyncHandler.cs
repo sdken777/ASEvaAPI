@@ -9,6 +9,8 @@ using ASEva.Utility;
 
 namespace ASEva.UIAvalonia
 {
+    #pragma warning disable CS1571
+
     /// \~English
     /// <summary>
     /// (api:avalonia=1.3.0) The base class of the view model that supports asynchronous operations
@@ -109,7 +111,7 @@ namespace ASEva.UIAvalonia
                 var propertyInfo = model.GetType().GetProperty(propertyName);
                 if (propertyInfo == null) return;
 
-                if (setter != null && DateTime.Now < timeToUpdateProperty) return;
+                if (setter != null && !keeper.CanUpdate) return;
 
                 var curValue = (T)propertyInfo.GetValue(model);
                 if (result.Item2.Equals(curValue)) return;
@@ -143,8 +145,22 @@ namespace ASEva.UIAvalonia
             if (fromRelatedProperties) model.OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
             foreach (var relatedPropertyName in (relatedPropertyNames ?? [])) model.OnPropertyChanged(new PropertyChangedEventArgs(relatedPropertyName));
 
-            if (AgencyLocal.ClientSide) timeToUpdateProperty = DateTime.Now.AddMilliseconds(UpdateToModelInterval);
+            if (AgencyLocal.ClientSide) keeper.Set();
             setter.Invoke((T)propertyInfo.GetValue(model));
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=1.3.1) The time to pause refreshing after an operation, in milliseconds
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=1.3.1) 操作后暂停刷新的时间，单位毫秒
+        /// </summary>
+        public int KeepTime
+        {
+            get => keeper.KeepTime;
+            set => keeper.KeepTime = value;
         }
 
         private AsyncViewModel model;
@@ -152,10 +168,9 @@ namespace ASEva.UIAvalonia
         private String[] relatedPropertyNames;
         private Func<Task<(bool, T)>> getter;
         private Action<T> setter;
-        private DateTime timeToUpdateProperty;
         private bool settingProperty = false;
         private TaskBeat taskBeat;
-        private const int UpdateToModelInterval = 500;
+        private UpdateKeeper keeper = new();
     }
 
     /// \~English
@@ -210,7 +225,7 @@ namespace ASEva.UIAvalonia
 
                 if (setter == null || settingProperty) return;
 
-                if (AgencyLocal.ClientSide) timeToUpdateProperty = DateTime.Now.AddMilliseconds(UpdateToModelInterval);
+                if (AgencyLocal.ClientSide) keeper.Set();
                 setter.Invoke(elementIndex, collection[elementIndex]);
             };
         }
@@ -264,7 +279,7 @@ namespace ASEva.UIAvalonia
                 var collection = propertyInfo.GetValue(model) as ObservableCollection<T>;
                 if (collection == null) return;
 
-                if (setter != null && DateTime.Now < timeToUpdateProperty) return;
+                if (setter != null && !keeper.CanUpdate) return;
 
                 var curValue = collection[elementIndex];
                 if (result.Item2.Equals(curValue)) return;
@@ -275,17 +290,29 @@ namespace ASEva.UIAvalonia
             });
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:app=1.3.1) The time to pause refreshing after an operation, in milliseconds
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=1.3.1) 操作后暂停刷新的时间，单位毫秒
+        /// </summary>
+        public int KeepTime
+        {
+            get => keeper.KeepTime;
+            set => keeper.KeepTime = value;
+        }
+
         private object model;
         private String propertyName;
         private int elementIndex;
         private Func<int, Task<(bool, T)>> getter;
         private Action<int, T> setter;
 
-        private DateTime timeToUpdateProperty;
         private bool settingProperty = false;
         private TaskBeat taskBeat;
-
-        private const int UpdateToModelInterval = 500;
+        private UpdateKeeper keeper = new();
     }
 
     /// \~English

@@ -8648,7 +8648,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.9.4
+            version=3.9.5
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -22275,6 +22275,46 @@
             \~Chinese
             <summary>
             (api:app=3.0.0) 二值化信号滤波并提取上升沿
+            </summary>
+        </member>
+        <member name="T:ASEva.Utility.UpdateKeeper">
+            \~English
+            <summary>
+            (api:app=3.9.5) Asynchronous debouncing for the GUI (pause refreshing the GUI for a period after operations)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.9.5) 实现界面的异步防抖（在操作后一段时间暂停刷新界面）
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.UpdateKeeper.KeepTime">
+            \~English
+            <summary>
+            The time to pause refreshing after an operation, in milliseconds
+            </summary>
+            \~Chinese
+            <summary>
+            操作后暂停刷新的时间，单位毫秒
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.UpdateKeeper.CanUpdate">
+            \~English
+            <summary>
+            Check if the GUI can currently be refreshed
+            </summary>
+            \~Chinese
+            <summary>
+            获取当前是否可以刷新界面
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.UpdateKeeper.Set">
+            \~English
+            <summary>
+            Notify that an operation has been performed
+            </summary>
+            \~Chinese
+            <summary>
+            通知进行了操作
             </summary>
         </member>
         <member name="T:ASEva.Utility.Xml">

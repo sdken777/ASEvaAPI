@@ -22,6 +22,12 @@ namespace ASEva.UIAvalonia
 #if !ASEVA_API_BUNDLE_MODE
             if (App.MainWindow != null) Icon = App.MainWindow.Icon;
 #endif
+
+            buttonOK.Click += delegate
+            {
+                color = view.Color;
+                this.Close();
+            };
         }
 
         public Color Color
@@ -45,11 +51,5 @@ namespace ASEva.UIAvalonia
             }
         }
         private bool supportAlpha = true;
-
-        private void buttonOK_Click(object sender, RoutedEventArgs args)
-        {
-            color = view.Color;
-            this.Close();
-        }
     }
 }

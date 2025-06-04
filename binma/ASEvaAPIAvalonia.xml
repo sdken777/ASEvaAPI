@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.3.0
+            version=1.3.1
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -815,6 +815,16 @@
             </summary>
             <param name="fromRelatedProperties">是否为相关属性值的变化</param>
         </member>
+        <member name="P:ASEva.UIAvalonia.PropertyAsyncHandler`1.KeepTime">
+            \~English
+            <summary>
+            (api:app=1.3.1) The time to pause refreshing after an operation, in milliseconds
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=1.3.1) 操作后暂停刷新的时间，单位毫秒
+            </summary>
+        </member>
         <member name="T:ASEva.UIAvalonia.ElementAsyncHandler`1">
             \~English
             <summary>
@@ -867,6 +877,16 @@
             \~Chinese
             <summary>
             循环刷新，从系统获取并更新元素值
+            </summary>
+        </member>
+        <member name="P:ASEva.UIAvalonia.ElementAsyncHandler`1.KeepTime">
+            \~English
+            <summary>
+            (api:app=1.3.1) The time to pause refreshing after an operation, in milliseconds
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=1.3.1) 操作后暂停刷新的时间，单位毫秒
             </summary>
         </member>
         <member name="T:ASEva.UIAvalonia.CollectionAsyncHandler`1">

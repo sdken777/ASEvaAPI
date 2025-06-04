@@ -9,6 +9,6 @@
     <Grid RowDefinitions="400,50">
         <ColorView Grid.Row="0" x:Name="view">
         </ColorView>
-        <Button Grid.Row="1" Margin="8" Content="OK" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Click="buttonOK_Click" />
+        <Button Grid.Row="1" x:Name="buttonOK" Margin="8" Content="OK" Width="100" HorizontalAlignment="Center" HorizontalContentAlignment="Center" />
     </Grid>
 </Window>
