@@ -41,7 +41,7 @@
                 <Label Grid.Column="0" Content="{DynamicResource basic-label-row-5}" VerticalAlignment="Center" />
                 <Button Grid.Column="2" Width="120" Content="{DynamicResource basic-button}" HorizontalContentAlignment="Center" Foreground="Gold" Background="Green" Click="buttonShowWindow_Click" />
                 <Button Grid.Column="4" Width="120" Background="PaleGreen" Click="buttonShowDialog_Click">
-                    <Image Source="resm:button.png?assembly=ASEvaAPIAvaloniaTest" Stretch="None" />
+                    <Image Source="resm:button.png" Stretch="None" />
                 </Button>
                 <ColorPicker Grid.Column="6" Width="120" Color="Red" />
                 <Label Grid.Column="8" x:Name="labelActive" Content="O" VerticalAlignment="Center" />
@@ -59,7 +59,7 @@
         <ContextMenu>
             <MenuItem Header="{DynamicResource menu-button}" Click="itemMenu_Click">
                 <MenuItem.Icon>
-                    <Image Source="resm:menu-button.png?assembly=ASEvaAPIAvaloniaTest" />
+                    <Image Source="resm:menu-button.png" />
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />

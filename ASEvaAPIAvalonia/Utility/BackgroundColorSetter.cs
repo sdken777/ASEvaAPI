@@ -9,7 +9,7 @@ namespace ASEva.UIAvalonia
 {
     /// \~English
     /// <summary>
-    /// Set the background color of the control (solve the problem that the background color is invalid when the control is disabled)
+    /// (api:avalonia=1.3.0) Set the background color of the control (solve the problem that the background color is invalid when the control is disabled)
     /// </summary>
     /// \~Chinese
     /// <summary>

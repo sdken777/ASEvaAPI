@@ -61,7 +61,7 @@
                 <Button Grid.Column="6" Content="{DynamicResource basic-tooltip-4}" ToolTip.Tip="{DynamicResource basic-tooltip-4}" />
                 <Button Grid.Column="8" Content="{DynamicResource basic-tooltip-5}" ToolTip.Tip="{DynamicResource basic-tooltip-5}" FontSize="18" />
                 <Button Grid.Column="10" ToolTip.Tip="{DynamicResource basic-tooltip-6}">
-                    <Image Source="resm:button.png?assembly=ASEvaAPIAvaloniaTest" />
+                    <Image Source="resm:button.png" />
                 </Button>
             </Grid>
         </Grid>

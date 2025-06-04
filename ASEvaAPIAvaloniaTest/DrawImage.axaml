@@ -8,6 +8,6 @@
     <Grid RowDefinitions="*,8,*,8,*">
         <Image Grid.Row="0" x:Name="imageView3" Width="100" Height="100" />
         <Image Grid.Row="2" x:Name="imageView4" Width="100" Height="100" />
-        <Image Grid.Row="4" Width="100" Height="100" Source="resm:picture.png?assembly=ASEvaAPIAvaloniaTest" />
+        <Image Grid.Row="4" Width="100" Height="100" Source="resm:picture.png" />
     </Grid>
 </Panel>

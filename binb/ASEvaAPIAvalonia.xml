@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.3.1
+            version=1.3.2
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -526,11 +526,47 @@
         <member name="T:ASEva.UIAvalonia.BackgroundColorSetter">
             \~English
             <summary>
-            Set the background color of the control (solve the problem that the background color is invalid when the control is disabled)
+            (api:avalonia=1.3.0) Set the background color of the control (solve the problem that the background color is invalid when the control is disabled)
             </summary>
             \~Chinese
             <summary>
             (api:avalonia=1.3.0) 设置控件的背景颜色（解决禁用时背景颜色失效问题）
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.LanguageSwitch">
+            \~English
+            <summary>
+            (api:avalonia=1.3.2) For using multilingual text from axaml resources
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.3.2) 方便使用axaml资源中的多语言文本
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.LanguageSwitch.#ctor(Avalonia.Controls.IResourceDictionary,System.String)">
+            \~English
+            <summary>
+            For using multilingual text from axaml resources
+            </summary>
+            <param name="mainResource">The main resource of UI element</param>
+            <param name="initialLanguage">Initial language</param>
+            \~Chinese
+            <summary>
+            默认构造函数
+            <param name="mainResource">界面元素的主资源对象</param>
+            <param name="initialLanguage">初始语言</param>
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.LanguageSwitch.SwitchTo(System.String)">
+            \~English
+            <summary>
+            Switch language
+            </summary>
+            <param name="language">Target language</param>
+            \~Chinese
+            <summary>
+            切换语言
+            <param name="language">目标语言</param>
             </summary>
         </member>
         <member name="T:ASEva.UIAvalonia.AsyncViewModel">

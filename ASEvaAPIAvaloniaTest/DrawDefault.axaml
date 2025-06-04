@@ -15,7 +15,7 @@
                 <Label x:Name="label" Content="{DynamicResource draw-text}" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
             </Grid>
             <Rectangle x:Name="labelBound" StrokeThickness="1" Stroke="Green" />
-            <Image Source="resm:camera.png?assembly=ASEvaAPIAvaloniaTest" Canvas.Left="80" Canvas.Top="80" />
+            <Image Source="resm:camera.png" Canvas.Left="80" Canvas.Top="80" />
             <Path x:Name="pie" Canvas.Left="100" Canvas.Top="100" Fill="#80008000" />
         </Canvas>
     </Border>

@@ -8,10 +8,10 @@
     <Grid RowDefinitions="Auto,8,*">
         <Grid Grid.Row="0" ColumnDefinitions="Auto,8,Auto,8,1,8,*,8,Auto,8,1,8,Auto">
             <Button Grid.Column="0" Click="buttonBackward_Click">
-                <Image Source="resm:backward.png?assembly=ASEvaAPIAvaloniaTest" />
+                <Image Source="resm:backward.png" />
             </Button>
             <Button Grid.Column="2" Click="buttonForward_Click">
-                <Image Source="resm:forward.png?assembly=ASEvaAPIAvaloniaTest" />
+                <Image Source="resm:forward.png" />
             </Button>
             <Rectangle Grid.Column="4" Fill="Gray" />
             <TextBox Grid.Column="6" x:Name="textUrl" TextChanged="textUrl_TextChanged" />
