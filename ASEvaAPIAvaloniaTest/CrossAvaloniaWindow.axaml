@@ -9,8 +9,8 @@
         Width="700" Height="400" MinWidth="700" MinHeight="400">
     <Grid Margin="8" RowDefinitions="Auto,8,*">
         <Grid Grid.Row="0" ColumnDefinitions="Auto,8,Auto">
-            <Button Grid.Column="0" Classes="hyperlink" Content="{DynamicResource menu-avalonia-dialog}" Click="buttonAvaloniaDialog_Click" />
-            <Button Grid.Column="2" Classes="hyperlink" Content="{DynamicResource menu-eto-dialog}" Click="buttonEtoDialog_Click" />
+            <Button Grid.Column="0" Classes="hyperlink" x:Name="buttonAvaloniaDialog" Content="{DynamicResource menu-avalonia-dialog}" />
+            <Button Grid.Column="2" Classes="hyperlink" x:Name="buttonEtoDialog" Content="{DynamicResource menu-eto-dialog}" />
         </Grid>
         <aseva:EtoEmbedder Grid.Row="2" x:Name="etoEmbedder" />
     </Grid>

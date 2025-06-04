@@ -15,7 +15,6 @@ namespace ASEvaAPIAvaloniaTest
         public PlotLiveCharts()
         {
             InitializeComponent();
-
             DataContext = model;
 
             ViewModelsSamples.Index.AlwaysUseDefaultFont = ASEva.APIInfo.GetRunningOS() == "linux";
@@ -68,6 +67,8 @@ namespace ASEvaAPIAvaloniaTest
             {
                 if (targetExampleNode != null) treeView.SelectedItem = targetExampleNode;
             };
+
+            treeView.SelectionChanged += treeView_SelectionChanged;
         }
 
         private void treeView_SelectionChanged(object sender, SelectionChangedEventArgs e)

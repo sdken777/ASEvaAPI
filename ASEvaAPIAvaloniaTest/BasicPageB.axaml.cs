@@ -50,6 +50,16 @@ namespace ASEvaAPIAvaloniaTest
                 }
                 model.TreeNodes.Add(parentNode);
             }
+
+            treeView.PointerReleased += treeView_PointerReleased;
+            linkSelectFirst.Click += linkSelectFirst_Click;
+            linkChangeColor.Click += linkChangeColor_Click;
+            linkAddControl.Click += linkAddControl_Click;
+            linkInsertControl.Click += linkInsertControl_Click;
+            linkRemoveControl.Click += linkRemoveControl_Click;
+            linkShowControl.Click += linkShowControl_Click;
+            linkHideControl.Click += linkHideControl_Click;
+            linkSelectControl.Click += linkSelectControl_Click;
         }
 
         private async void treeView_PointerReleased(object sender, PointerReleasedEventArgs e)

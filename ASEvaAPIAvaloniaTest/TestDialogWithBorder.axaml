@@ -7,9 +7,9 @@
         Title="{DynamicResource title-dialog}" Icon="resm:icon.png" WindowStartupLocation="CenterScreen" 
         Width="800" Height="400" MinWidth="600" MinHeight="300">
     <Grid Margin="8" ColumnDefinitions="Auto,8,Auto,*,Auto">
-        <Button Classes="hyperlink" Grid.Column="0" x:Name="linkClientSize" Content="{DynamicResource basic-client-size}" Click="linkClientSize_Click" />
-        <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-dialog-with-border}" Click="linkShowDialogWithBorder_Click" />
-        <Button Grid.Column="4" Content="{DynamicResource basic-close}" Click="buttonClose_Click" />
+        <Button Classes="hyperlink" Grid.Column="0" x:Name="linkClientSize" Content="{DynamicResource basic-client-size}" />
+        <Button Classes="hyperlink" Grid.Column="2" x:Name="linkShowDialogWithBorder" Content="{DynamicResource basic-dialog-with-border}" />
+        <Button Grid.Column="4" x:Name="buttonClose" Content="{DynamicResource basic-close}" />
     </Grid>
 
     <Window.Resources>

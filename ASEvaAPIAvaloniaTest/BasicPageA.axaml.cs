@@ -19,6 +19,20 @@ namespace ASEvaAPIAvaloniaTest
             DataContext = new Model();
 
             searchBox.ItemsSource = new string[]{ "Cat", "Camel", "Cow", "Chameleon", "Mouse", "Lion", "Zebra", "大象" }.OrderBy(x => x);
+
+            linkBrowse.Click += linkBrowse_Click;
+            linkSwitch.Click += linkSwitch_Click;
+            buttonShowWindow.Click += buttonShowWindow_Click;
+            buttonShowDialog.Click += buttonShowDialog_Click;
+            linkShowDialogNoBorder.Click += linkShowDialogNoBorder_Click;
+            linkShowDialogWithBorder.Click += linkShowDialogWithBorder_Click;
+            linkShowDialogWithFixBorder.Click += linkShowDialogWithFixBorder_Click;
+            linkClientSize.Click += linkClientSize_Click;
+            itemMenu.Click += itemMenu_Click;
+            itemMenuAvaloniaWindow.Click += itemMenuAvaloniaWindow_Click;
+            itemMenuAvaloniaDialog.Click += itemMenuAvaloniaDialog_Click;
+            itemMenuEtoDialog.Click += itemMenuEtoDialog_Click;
+            checkShowPassword.IsCheckedChanged += checkShowPassword_IsCheckedChanged;
         }
 
         public void OnLoop()

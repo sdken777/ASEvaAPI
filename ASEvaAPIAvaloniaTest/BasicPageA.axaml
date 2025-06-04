@@ -12,9 +12,9 @@
                 <CheckBox Grid.Column="2" x:Name="checkSaveFile" Content="{DynamicResource basic-checkbox}" />
                 <RadioButton Grid.Column="4" x:Name="radioFile" Content="{DynamicResource basic-radiobutton-file}" IsChecked="True" />
                 <RadioButton Grid.Column="6" x:Name="radioDir" Content="{DynamicResource basic-radiobutton-dir}" />
-                <Button Classes="hyperlink" Grid.Column="8" Content="{DynamicResource basic-linkbutton}" Click="linkBrowse_Click" />
+                <Button Classes="hyperlink" Grid.Column="8" x:Name="linkBrowse" Content="{DynamicResource basic-linkbutton}" />
                 <Button Classes="hyperlink" Grid.Column="10" x:Name="linkEnableDisable" Content="{DynamicResource basic-linkbutton-enabled}" />
-                <Button Classes="hyperlink" Grid.Column="12" Content="{DynamicResource basic-linkbutton-switch}" Click="linkSwitch_Click" />
+                <Button Classes="hyperlink" Grid.Column="12" x:Name="linkSwitch" Content="{DynamicResource basic-linkbutton-switch}" />
             </Grid>
             <Grid Grid.Row="4" ColumnDefinitions="Auto,8,*,8,*,8,Auto">
                 <Label Grid.Column="0" Content="{DynamicResource basic-label-row-2}" VerticalAlignment="Center" />
@@ -29,7 +29,7 @@
                 <Label Grid.Column="0" Content="{DynamicResource basic-label-row-3}" VerticalAlignment="Center" />
                 <TextBox Grid.Column="2" />
                 <AutoCompleteBox Grid.Column="4" x:Name="searchBox" FilterMode="StartsWith" Watermark="{DynamicResource search}" />
-                <CheckBox Grid.Column="6" x:Name="checkShowPassword" IsCheckedChanged="checkShowPassword_IsCheckedChanged" />
+                <CheckBox Grid.Column="6" x:Name="checkShowPassword" />
                 <TextBox Grid.Column="8" x:Name="passwordBox" PasswordChar="●" />
             </Grid>
             <Grid Grid.Row="7" ColumnDefinitions="Auto,8,*,8,*">
@@ -39,8 +39,8 @@
             </Grid>
             <Grid Grid.Row="8" ColumnDefinitions="Auto,8,Auto,8,Auto,8,Auto,8,Auto">
                 <Label Grid.Column="0" Content="{DynamicResource basic-label-row-5}" VerticalAlignment="Center" />
-                <Button Grid.Column="2" Width="120" Content="{DynamicResource basic-button}" HorizontalContentAlignment="Center" Foreground="Gold" Background="Green" Click="buttonShowWindow_Click" />
-                <Button Grid.Column="4" Width="120" Background="PaleGreen" Click="buttonShowDialog_Click">
+                <Button Grid.Column="2" x:Name="buttonShowWindow" Width="120" Content="{DynamicResource basic-button}" HorizontalContentAlignment="Center" Foreground="Gold" Background="Green" />
+                <Button Grid.Column="4" x:Name="buttonShowDialog" Width="120" Background="PaleGreen">
                     <Image Source="resm:button.png" Stretch="None" />
                 </Button>
                 <ColorPicker Grid.Column="6" Width="120" Color="Red" />
@@ -48,24 +48,24 @@
             </Grid>
             <Grid Grid.Row="10" ColumnDefinitions="Auto,8,Auto,8,Auto,8,Auto,8,Auto">
                 <Label Grid.Column="0" Content="{DynamicResource basic-label-row-6}" VerticalAlignment="Center" />
-                <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-dialog-no-border}" Click="linkShowDialogNoBorder_Click" />
-                <Button Classes="hyperlink" Grid.Column="4" Content="{DynamicResource basic-dialog-with-border}" Click="linkShowDialogWithBorder_Click" />
-                <Button Classes="hyperlink" Grid.Column="6" Content="{DynamicResource basic-dialog-with-border-fix}" Click="linkShowDialogWithFixBorder_Click" />
-                <Button Classes="hyperlink" Grid.Column="8" x:Name="linkClientSize" Content="{DynamicResource basic-client-size}" Click="linkClientSize_Click" />
+                <Button Classes="hyperlink" Grid.Column="2" x:Name="linkShowDialogNoBorder" Content="{DynamicResource basic-dialog-no-border}" />
+                <Button Classes="hyperlink" Grid.Column="4" x:Name="linkShowDialogWithBorder" Content="{DynamicResource basic-dialog-with-border}" />
+                <Button Classes="hyperlink" Grid.Column="6" x:Name="linkShowDialogWithFixBorder" Content="{DynamicResource basic-dialog-with-border-fix}" />
+                <Button Classes="hyperlink" Grid.Column="8" x:Name="linkClientSize" Content="{DynamicResource basic-client-size}" />
             </Grid>
         </Grid>
     </Border>
     <Control.ContextMenu>
         <ContextMenu>
-            <MenuItem Header="{DynamicResource menu-button}" Click="itemMenu_Click">
+            <MenuItem Header="{DynamicResource menu-button}" x:Name="itemMenu">
                 <MenuItem.Icon>
                     <Image Source="resm:menu-button.png" />
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
-            <MenuItem Header="{DynamicResource menu-avalonia-window}" Click="itemMenuAvaloniaWindow_Click" />
-            <MenuItem Header="{DynamicResource menu-avalonia-dialog}" Click="itemMenuAvaloniaDialog_Click" />
-            <MenuItem Header="{DynamicResource menu-eto-dialog}" Click="itemMenuEtoDialog_Click" />
+            <MenuItem Header="{DynamicResource menu-avalonia-window}" x:Name="itemMenuAvaloniaWindow" />
+            <MenuItem Header="{DynamicResource menu-avalonia-dialog}" x:Name="itemMenuAvaloniaDialog" />
+            <MenuItem Header="{DynamicResource menu-eto-dialog}" x:Name="itemMenuEtoDialog" />
         </ContextMenu>
     </Control.ContextMenu>
 

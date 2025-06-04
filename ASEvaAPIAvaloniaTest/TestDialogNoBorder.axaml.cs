@@ -13,6 +13,10 @@ namespace ASEvaAPIAvaloniaTest
         {
             InitializeComponent();
             new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+
+            linkClientSize.Click += linkClientSize_Click;
+            linkShowDialogWithBorder.Click += linkShowDialogWithBorder_Click;
+            buttonClose.Click += buttonClose_Click;
         }
 
         private void linkClientSize_Click(object sender, RoutedEventArgs e)

@@ -10,16 +10,16 @@ namespace ASEvaAPIAvaloniaTest
         public Startup()
         {
             InitializeComponent();
+
+            buttonOK.Click += delegate
+            {
+                Close();
+            };
         }
 
         public Language Language
         {
             get { return radioChinese.IsChecked.Value ? Language.Chinese : Language.English; }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
         }
     }
 }

@@ -18,6 +18,9 @@ namespace ASEvaAPIAvaloniaTest
         {
             InitializeComponent();
             image = ResourceLoader.Load("camera.png").ToAvaloniaBitmap().ToCommonImage().ToSKImage();
+
+            skiaView.RenderSkia += skiaView_Render;
+            skiaView.PointerPressed += skiaView_PointerPressed;
         }
 
         public void OnLoop()

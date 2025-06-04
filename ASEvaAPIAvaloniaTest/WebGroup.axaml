@@ -7,17 +7,17 @@
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="300">
     <Grid RowDefinitions="Auto,8,*">
         <Grid Grid.Row="0" ColumnDefinitions="Auto,8,Auto,8,1,8,*,8,Auto,8,1,8,Auto">
-            <Button Grid.Column="0" Click="buttonBackward_Click">
+            <Button Grid.Column="0" x:Name="buttonBackward">
                 <Image Source="resm:backward.png" />
             </Button>
-            <Button Grid.Column="2" Click="buttonForward_Click">
+            <Button Grid.Column="2" x:Name="buttonForward">
                 <Image Source="resm:forward.png" />
             </Button>
             <Rectangle Grid.Column="4" Fill="Gray" />
-            <TextBox Grid.Column="6" x:Name="textUrl" TextChanged="textUrl_TextChanged" />
-            <Button Grid.Column="8" x:Name="buttonGoUrl" Content="{DynamicResource web-go-url}" IsEnabled="False" Click="buttonGoUrl_Click" />
+            <TextBox Grid.Column="6" x:Name="textUrl" />
+            <Button Grid.Column="8" x:Name="buttonGoUrl" Content="{DynamicResource web-go-url}" IsEnabled="False" />
             <Rectangle Grid.Column="10" Fill="Gray" />
-            <Button Grid.Column="12" Content="{DynamicResource web-call-script}" Click="buttonCallScript_Click" />
+            <Button Grid.Column="12" x:Name="buttonCallScript" Content="{DynamicResource web-call-script}" />
         </Grid>
         <Border Grid.Row="2" Background="White" BorderThickness="1" BorderBrush="Gray" CornerRadius="3" Padding="1">
             <aseva:EtoEmbedder x:Name="webView" />

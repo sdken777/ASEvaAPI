@@ -8,7 +8,7 @@
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="400">
     <Grid ColumnDefinitions="Auto,8,*">
         <Border Grid.Row="0" Background="White" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
-            <TreeView x:Name="treeView" Width="250" ItemsSource="{Binding TreeNodes}" SelectionChanged="treeView_SelectionChanged">
+            <TreeView x:Name="treeView" Width="250" ItemsSource="{Binding TreeNodes}">
                 <TreeView.ItemTemplate>
                     <TreeDataTemplate ItemsSource="{Binding SubNodes}">
                         <Border HorizontalAlignment="Left" CornerRadius="3" Padding="3">

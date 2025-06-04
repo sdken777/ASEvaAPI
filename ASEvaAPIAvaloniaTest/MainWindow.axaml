@@ -5,8 +5,7 @@
         xmlns:local="clr-namespace:ASEvaAPIAvaloniaTest"
         x:Class="ASEvaAPIAvaloniaTest.MainWindow"
         Title="{DynamicResource title}" Icon="resm:icon.png" WindowStartupLocation="CenterScreen" 
-        Width="1350" Height="800" MinWidth="1350" MinHeight="800"
-        Closing="MainWindow_Closing">
+        Width="1350" Height="800" MinWidth="1350" MinHeight="800">
     <Grid Margin="8" ColumnDefinitions="*,8,*" RowDefinitions="*,8,*">
         <Grid Grid.Row="0" Grid.Column="0" RowDefinitions="Auto,*">
             <Label Grid.Row="0" Content="{DynamicResource basic-group-title}" Padding="8,0,0,0" FontSize="12" />
@@ -51,8 +50,8 @@
     </Grid>
     <Window.ContextMenu>
         <ContextMenu>
-            <MenuItem Header="{DynamicResource menu-fullscreen}" Click="itemFullScreen_Click" />
-            <MenuItem Header="{DynamicResource menu-exit}" Click="itemExit_Click" />
+            <MenuItem Header="{DynamicResource menu-fullscreen}" x:Name="itemFullScreen" />
+            <MenuItem Header="{DynamicResource menu-exit}" x:Name="itemExit" />
             <Separator />
             <MenuItem Header="{DynamicResource menu-sub}">
                 <MenuItem Header="{DynamicResource menu-sub-item-a}" />
@@ -60,35 +59,35 @@
                 <MenuItem Header="{DynamicResource menu-sub-item-b}" />
             </MenuItem>
             <Separator />
-            <MenuItem Header="{DynamicResource menu-check-a}" Click="itemCheckA_Click">
+            <MenuItem Header="{DynamicResource menu-check-a}" x:Name="itemCheckA">
                 <MenuItem.Icon>
                     <CheckBox IsHitTestVisible="False" IsChecked="{Binding CheckedA}" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="{DynamicResource menu-check-b}" Click="itemCheckB_Click">
+            <MenuItem Header="{DynamicResource menu-check-b}" x:Name="itemCheckB">
                 <MenuItem.Icon>
                     <CheckBox IsHitTestVisible="False" IsChecked="{Binding CheckedB}" />
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
-            <MenuItem Header="{DynamicResource menu-radio-a}" Click="itemRadioA_Click">
+            <MenuItem Header="{DynamicResource menu-radio-a}" x:Name="itemRadioA">
                 <MenuItem.Icon>
                     <RadioButton IsHitTestVisible="False" IsChecked="{Binding !SelectedB}" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="{DynamicResource menu-radio-b}" Click="itemRadioB_Click">
+            <MenuItem Header="{DynamicResource menu-radio-b}" x:Name="itemRadioB">
                 <MenuItem.Icon>
                     <RadioButton IsHitTestVisible="False" IsChecked="{Binding SelectedB}" />
                 </MenuItem.Icon>
             </MenuItem>
             <Separator />
-            <MenuItem Header="{DynamicResource menu-snapshot}" Click="itemSnapshot_Click" />
+            <MenuItem Header="{DynamicResource menu-snapshot}" x:Name="itemSnapshot" />
             <Separator />
-            <MenuItem Header="{DynamicResource menu-exception-main}" Click="itemExceptionMain_Click" />
-            <MenuItem Header="{DynamicResource menu-exception-sub}" Click="itemExceptionSub_Click" />
+            <MenuItem Header="{DynamicResource menu-exception-main}" x:Name="itemExceptionMain" />
+            <MenuItem Header="{DynamicResource menu-exception-sub}" x:Name="itemExceptionSub" />
             <Separator />
-            <MenuItem Header="{DynamicResource menu-eto-window}" Click="itemShowEtoWindow_Click" />
-            <MenuItem Header="{DynamicResource menu-eto-dialog}" Click="itemShowEtoDialog_Click" />
+            <MenuItem Header="{DynamicResource menu-eto-window}" x:Name="itemShowEtoWindow" />
+            <MenuItem Header="{DynamicResource menu-eto-dialog}" x:Name="itemShowEtoDialog" />
         </ContextMenu>
     </Window.ContextMenu>
 

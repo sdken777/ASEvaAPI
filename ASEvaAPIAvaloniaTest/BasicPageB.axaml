@@ -36,7 +36,7 @@
                 </Grid>
                 <Grid Grid.Column="2" RowDefinitions="*,2,Auto">
                     <Border Grid.Row="0" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
-                        <TreeView x:Name="treeView" ItemsSource="{Binding TreeNodes}" PointerReleased="treeView_PointerReleased">
+                        <TreeView x:Name="treeView" ItemsSource="{Binding TreeNodes}">
                             <TreeView.ItemTemplate>
                                 <TreeDataTemplate ItemsSource="{Binding SubNodes}">
                                     <Border HorizontalAlignment="Left" CornerRadius="3" Padding="3" Background="{Binding Background}">
@@ -52,8 +52,8 @@
                         </TreeView>
                     </Border>
                     <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto">
-                        <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-tree-select-first}" Click="linkSelectFirst_Click" />
-                        <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-tree-change-color}" Click="linkChangeColor_Click" />
+                        <Button Classes="hyperlink" Grid.Column="0" x:Name="linkSelectFirst" Content="{DynamicResource basic-tree-select-first}" />
+                        <Button Classes="hyperlink" Grid.Column="2" x:Name="linkChangeColor" Content="{DynamicResource basic-tree-change-color}" />
                     </Grid>
                 </Grid>
             </Grid>
@@ -62,9 +62,9 @@
         <Border Grid.Column="2" CornerRadius="3" Background="Pink">
             <Grid Margin="8" RowDefinitions="Auto,2,*,2,Auto">
                 <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto,*,Auto">
-                    <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-flow-add}" Click="linkAddControl_Click" />
-                    <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-flow-insert}" Click="linkInsertControl_Click" />
-                    <Button Classes="hyperlink" Grid.Column="4" Content="{DynamicResource basic-flow-remove}" Click="linkRemoveControl_Click" />
+                    <Button Classes="hyperlink" Grid.Column="0" x:Name="linkAddControl" Content="{DynamicResource basic-flow-add}" />
+                    <Button Classes="hyperlink" Grid.Column="2" x:Name="linkInsertControl" Content="{DynamicResource basic-flow-insert}" />
+                    <Button Classes="hyperlink" Grid.Column="4" x:Name="linkRemoveControl" Content="{DynamicResource basic-flow-remove}" />
                 </Grid>
                 <Border Grid.Row="2" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
                     <ScrollViewer>
@@ -72,7 +72,7 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Border Margin="4" CornerRadius="3" Background="LightYellow" BorderThickness="2" BorderBrush="{Binding BorderBrush}" IsVisible="{Binding IsVisible}">
-                                        <local:TestControl Height="80" PointerReleased="testControl_PointerReleased" />
+                                        <local:TestControl Height="80" x:Name="testControl" PointerReleased="testControl_PointerReleased" />
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -80,9 +80,9 @@
                     </ScrollViewer>
                 </Border>
                 <Grid Grid.Row="4" ColumnDefinitions="Auto,*,Auto,*,Auto">
-                    <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-flow-show}" Click="linkShowControl_Click" />
-                    <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-flow-hide}" Click="linkHideControl_Click" />
-                    <Button Classes="hyperlink" Grid.Column="4" Content="{DynamicResource basic-flow-select}" Click="linkSelectControl_Click" />
+                    <Button Classes="hyperlink" Grid.Column="0" x:Name="linkShowControl" Content="{DynamicResource basic-flow-show}" />
+                    <Button Classes="hyperlink" Grid.Column="2" x:Name="linkHideControl" Content="{DynamicResource basic-flow-hide}" />
+                    <Button Classes="hyperlink" Grid.Column="4" x:Name="linkSelectControl" Content="{DynamicResource basic-flow-select}" />
                 </Grid>
             </Grid>
         </Border>

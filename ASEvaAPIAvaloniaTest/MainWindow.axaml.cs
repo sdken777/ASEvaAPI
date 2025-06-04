@@ -20,6 +20,19 @@ namespace ASEvaAPIAvaloniaTest
             new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
             DataContext = new Model();
 
+            Closing += MainWindow_Closing;
+            itemFullScreen.Click += itemFullScreen_Click;
+            itemExit.Click += itemExit_Click;
+            itemCheckA.Click += itemCheckA_Click;
+            itemCheckB.Click += itemCheckB_Click;
+            itemRadioA.Click += itemRadioA_Click;
+            itemRadioB.Click += itemRadioB_Click;
+            itemSnapshot.Click += itemSnapshot_Click;
+            itemExceptionMain.Click += itemExceptionMain_Click;
+            itemExceptionSub.Click += itemExceptionSub_Click;
+            itemShowEtoWindow.Click += itemShowEtoWindow_Click;
+            itemShowEtoDialog.Click += itemShowEtoDialog_Click;
+
             timer.Interval = TimeSpan.FromMilliseconds(15);
             timer.Tick += delegate
             {

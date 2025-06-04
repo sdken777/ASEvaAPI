@@ -21,6 +21,12 @@ namespace ASEvaAPIAvaloniaTest
 
                 Loaded += delegate { etoWebView.LoadHtml(ResourceLoader.LoadText("index.html")); };
             }
+
+            buttonBackward.Click += buttonBackward_Click;
+            buttonForward.Click += buttonForward_Click;
+            textUrl.TextChanged += textUrl_TextChanged;
+            buttonGoUrl.Click += buttonGoUrl_Click;
+            buttonCallScript.Click += buttonCallScript_Click;
         }
 
         private void buttonBackward_Click(object sender, RoutedEventArgs e)

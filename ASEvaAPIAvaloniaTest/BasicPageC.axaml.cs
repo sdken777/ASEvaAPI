@@ -38,6 +38,20 @@ namespace ASEvaAPIAvaloniaTest
                     Width = new DataGridLength(75),
                 });
             }
+
+            linkCheckAll.Click += linkCheckAll_Click;
+            linkUncheckAll.Click += linkUncheckAll_Click;
+            linkRemoveCheckRow.Click += linkRemoveCheckRow_Click;
+            linkSetCheckText.Click += linkSetCheckText_Click;
+            linkGetCheck.Click += linkGetCheck_Click;
+            linkSetCheck.Click += linkSetCheck_Click;
+            linkGetEnable.Click += linkGetEnable_Click;
+            linkSetEnable.Click += linkSetEnable_Click;
+            linkAddTableRow.Click += linkAddTableRow_Click;
+            linkRemoveTableRow.Click += linkRemoveTableRow_Click;
+            linkChangeTableGridColor.Click += linkChangeTableGridColor_Click;
+            checkListBox.PointerReleased += checkListBox_PointerReleased;
+            mainTableView.SelectionChanged += mainTableView_SelectionChanged;
         }
 
         private async void checkListBox_PointerReleased(object sender, PointerReleasedEventArgs e)

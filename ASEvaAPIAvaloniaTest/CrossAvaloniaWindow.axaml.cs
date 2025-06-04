@@ -21,6 +21,9 @@ namespace ASEvaAPIAvaloniaTest
                 etoEmbedder.EtoControl = webView;
                 Loaded += delegate { webView.LoadHtml(ResourceLoader.LoadText("index.html")); };
             }
+
+            buttonAvaloniaDialog.Click += buttonAvaloniaDialog_Click;
+            buttonEtoDialog.Click += buttonEtoDialog_Click;
         }
 
         private async void buttonAvaloniaDialog_Click(object sender, RoutedEventArgs args)

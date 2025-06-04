@@ -16,7 +16,6 @@ namespace ASEvaAPIAvaloniaTest
         public PlotOxy()
         {
             InitializeComponent();
-
             DataContext = model;
 
             RenderingCapabilities.PixelScale = 1;
@@ -65,6 +64,8 @@ namespace ASEvaAPIAvaloniaTest
             {
                 if (targetExampleNode != null) treeView.SelectedItem = targetExampleNode;
             };
+
+            treeView.SelectionChanged += treeView_SelectionChanged;
         }
 
         private void treeView_SelectionChanged(object sender, SelectionChangedEventArgs e)

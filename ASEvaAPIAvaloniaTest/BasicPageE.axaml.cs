@@ -17,6 +17,15 @@ namespace ASEvaAPIAvaloniaTest
         {
             InitializeComponent();
             new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+
+            linkAdd.Click += linkAdd_Click;
+            linkRemove.Click += linkRemove_Click;
+            linkInsert.Click += linkInsert_Click;
+            linkSelect.Click += linkSelect_Click;
+            linkShow.Click += linkShow_Click;
+            linkHide.Click += linkHide_Click;
+            linkBigger.Click += linkBigger_Click;
+            linkSmaller.Click += linkSmaller_Click;
         }
 
         private void linkAdd_Click(object sender, RoutedEventArgs e)

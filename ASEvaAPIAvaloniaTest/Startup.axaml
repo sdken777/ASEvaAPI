@@ -10,6 +10,6 @@
         <Label Grid.Column="0" Content="Language:" VerticalAlignment="Center" />
         <RadioButton Grid.Column="2" x:Name="radioEnglish" Content="English" IsChecked="True" />
         <RadioButton Grid.Column="4" x:Name="radioChinese" Content="中文" />
-        <Button Grid.Column="6" x:Name="buttonOK" Content="OK" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Click="Button_Click" />
+        <Button Grid.Column="6" x:Name="buttonOK" Content="OK" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" />
     </Grid>
 </Window>

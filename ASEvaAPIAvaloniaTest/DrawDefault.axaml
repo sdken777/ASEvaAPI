@@ -6,7 +6,7 @@
         x:Class="ASEvaAPIAvaloniaTest.DrawDefault"
         mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="300" Width="200">
     <Border CornerRadius="3" Background="LightYellow">
-        <Canvas x:Name="canvas" Background="Transparent" PointerPressed="canvas_PointerPressed">
+        <Canvas x:Name="canvas" Background="Transparent">
             <Line StartPoint="10,100" EndPoint="190,100" Stroke="Black" />
             <Line StartPoint="10,120" EndPoint="190,120" Stroke="Black" />
             <Line StartPoint="100,10" EndPoint="100,190" Stroke="Black" />
@@ -19,10 +19,10 @@
             <Path x:Name="pie" Canvas.Left="100" Canvas.Top="100" Fill="#80008000" />
         </Canvas>
     </Border>
-    <Button x:Name="buttonA" Content="A" Margin="10" Width="30" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" Click="buttonA_Click" />
-    <Button x:Name="buttonB" Content="B" Margin="10" Width="30" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" IsVisible="False" Click="buttonB_Click" />
-    <Button x:Name="buttonC" Content="C" Margin="10" Width="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" IsVisible="False" Click="buttonC_Click" />
-    <Button x:Name="buttonD" Content="D" Margin="10" Width="30" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" IsVisible="False" Click="buttonD_Click" />
+    <Button x:Name="buttonA" Content="A" Margin="10" Width="30" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" />
+    <Button x:Name="buttonB" Content="B" Margin="10" Width="30" HorizontalAlignment="Left" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" IsVisible="False" />
+    <Button x:Name="buttonC" Content="C" Margin="10" Width="30" HorizontalAlignment="Right" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" IsVisible="False" />
+    <Button x:Name="buttonD" Content="D" Margin="10" Width="30" HorizontalAlignment="Right" VerticalAlignment="Top" HorizontalContentAlignment="Center" IsVisible="False" />
     <Button Classes="hyperlink" x:Name="link" Content="ABCD" ToolTip.Tip="ABCD" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Bottom" IsVisible="False" />
 
     <Panel.Resources>

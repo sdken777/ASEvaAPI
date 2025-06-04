@@ -7,14 +7,14 @@
     <Border CornerRadius="3" Background="LightYellow">
         <Grid Margin="8" RowDefinitions="Auto,8,*">
             <Grid Grid.Row="0" ColumnDefinitions="Auto,8,Auto,8,Auto,8,Auto,8,Auto,8,Auto,8,Auto,8,Auto">
-                <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-flow-add}" Click="linkAdd_Click" />
-                <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-flow-remove}" Click="linkRemove_Click" />
-                <Button Classes="hyperlink" Grid.Column="4" Content="{DynamicResource basic-flow-insert}" Click="linkInsert_Click" />
-                <Button Classes="hyperlink" Grid.Column="6" Content="{DynamicResource basic-flow-select}" Click="linkSelect_Click" />
-                <Button Classes="hyperlink" Grid.Column="8" Content="{DynamicResource basic-flow-show}" Click="linkShow_Click" />
-                <Button Classes="hyperlink" Grid.Column="10" Content="{DynamicResource basic-flow-hide}" Click="linkHide_Click" />
-                <Button Classes="hyperlink" Grid.Column="12" Content="{DynamicResource basic-flow-bigger}" Click="linkBigger_Click" />
-                <Button Classes="hyperlink" Grid.Column="14" Content="{DynamicResource basic-flow-smaller}" Click="linkSmaller_Click" />
+                <Button Classes="hyperlink" Grid.Column="0" x:Name="linkAdd" Content="{DynamicResource basic-flow-add}" />
+                <Button Classes="hyperlink" Grid.Column="2" x:Name="linkRemove" Content="{DynamicResource basic-flow-remove}" />
+                <Button Classes="hyperlink" Grid.Column="4" x:Name="linkInsert" Content="{DynamicResource basic-flow-insert}" />
+                <Button Classes="hyperlink" Grid.Column="6" x:Name="linkSelect" Content="{DynamicResource basic-flow-select}" />
+                <Button Classes="hyperlink" Grid.Column="8" x:Name="linkShow" Content="{DynamicResource basic-flow-show}" />
+                <Button Classes="hyperlink" Grid.Column="10" x:Name="linkHide" Content="{DynamicResource basic-flow-hide}" />
+                <Button Classes="hyperlink" Grid.Column="12" x:Name="linkBigger" Content="{DynamicResource basic-flow-bigger}" />
+                <Button Classes="hyperlink" Grid.Column="14" x:Name="linkSmaller" Content="{DynamicResource basic-flow-smaller}" />
             </Grid>
             <Border Grid.Row="2" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
                 <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">

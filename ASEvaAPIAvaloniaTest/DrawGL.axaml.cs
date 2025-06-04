@@ -154,6 +154,10 @@ namespace ASEvaAPIAvaloniaTest
                     showInfo();
                 };
             }
+
+            linkPause.Click += linkPause_Click;
+            linkResume.Click += linkResume_Click;
+            linkInfo.Click += linkInfo_Click;
         }
 
         public void OnLoop()

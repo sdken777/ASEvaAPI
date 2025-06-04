@@ -24,6 +24,12 @@ namespace ASEvaAPIAvaloniaTest
                 var pos = label.TranslatePoint(new Point(0, 0), this);
                 labelBound.Margin = new Thickness(pos.Value.X, pos.Value.Y, 0, 0);
             };
+
+            canvas.PointerPressed += canvas_PointerPressed;
+            buttonA.Click += buttonA_Click;
+            buttonB.Click += buttonB_Click;
+            buttonC.Click += buttonC_Click;
+            buttonD.Click += buttonD_Click;
         }
 
         public void OnLoop()

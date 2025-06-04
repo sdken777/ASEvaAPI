@@ -9,10 +9,10 @@
             <TextBox Grid.Column="0" Width="150" AcceptsReturn="True" TextWrapping="Wrap" />
             <Grid Grid.Column="2" Width="180" RowDefinitions="Auto,2,*,2,Auto,2,Auto,2,Auto">
                 <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto">
-                    <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-checklist-check-all}" Click="linkCheckAll_Click" />
-                    <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-checklist-uncheck-all}" Click="linkUncheckAll_Click" />
+                    <Button Classes="hyperlink" Grid.Column="0" x:Name="linkCheckAll" Content="{DynamicResource basic-checklist-check-all}" />
+                    <Button Classes="hyperlink" Grid.Column="2" x:Name="linkUncheckAll" Content="{DynamicResource basic-checklist-uncheck-all}" />
                 </Grid>
-                <ListBox Grid.Row="2" x:Name="checkListBox" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3" ItemsSource="{Binding CheckItems}" PointerReleased="checkListBox_PointerReleased">
+                <ListBox Grid.Row="2" x:Name="checkListBox" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3" ItemsSource="{Binding CheckItems}">
                     <ListBox.Styles>
                         <Style Selector="ListBoxItem">
                             <Setter Property="Padding" Value="8,0,8,0" />
@@ -25,39 +25,39 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
                 <Grid Grid.Row="4" ColumnDefinitions="Auto,*,Auto">
-                    <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-checklist-remove}" Click="linkRemoveCheckRow_Click" />
-                    <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-checklist-set-text}" Click="linkSetCheckText_Click" />
+                    <Button Classes="hyperlink" Grid.Column="0" x:Name="linkRemoveCheckRow" Content="{DynamicResource basic-checklist-remove}" />
+                    <Button Classes="hyperlink" Grid.Column="2" x:Name="linkSetCheckText" Content="{DynamicResource basic-checklist-set-text}" />
                 </Grid>
                 <Grid Grid.Row="6" ColumnDefinitions="Auto,*,Auto">
-                    <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-checklist-get-check}" Click="linkGetCheck_Click" />
-                    <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-checklist-set-check}" Click="linkSetCheck_Click" />
+                    <Button Classes="hyperlink" Grid.Column="0" x:Name="linkGetCheck" Content="{DynamicResource basic-checklist-get-check}" />
+                    <Button Classes="hyperlink" Grid.Column="2" x:Name="linkSetCheck" Content="{DynamicResource basic-checklist-set-check}" />
                 </Grid>
                 <Grid Grid.Row="8" ColumnDefinitions="Auto,*,Auto">
-                    <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-checklist-get-enable}" Click="linkGetEnable_Click" />
-                    <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-checklist-set-enable}" Click="linkSetEnable_Click" />
+                    <Button Classes="hyperlink" Grid.Column="0" x:Name="linkGetEnable" Content="{DynamicResource basic-checklist-get-enable}" />
+                    <Button Classes="hyperlink" Grid.Column="2" x:Name="linkSetEnable" Content="{DynamicResource basic-checklist-set-enable}" />
                 </Grid>
             </Grid>
             <Rectangle Grid.Column="4" Fill="Gray" />
             <Grid Grid.Column="6" RowDefinitions="Auto,2,*,2,Auto,20,Auto">
                 <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto">
-                    <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-grid-add-row}" Click="linkAddTableRow_Click" />
-                    <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource basic-grid-remove-row}" Click="linkRemoveTableRow_Click" />
+                    <Button Classes="hyperlink" Grid.Column="0" x:Name="linkAddTableRow" Content="{DynamicResource basic-grid-add-row}" />
+                    <Button Classes="hyperlink" Grid.Column="2" x:Name="linkRemoveTableRow" Content="{DynamicResource basic-grid-remove-row}" />
                 </Grid>
                 <Border Grid.Row="2" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3" Padding="1">
-                    <DataGrid x:Name="mainTableView" GridLinesVisibility="All" ItemsSource="{Binding MainTableItems}" SelectionChanged="mainTableView_SelectionChanged">
+                    <DataGrid x:Name="mainTableView" GridLinesVisibility="All" ItemsSource="{Binding MainTableItems}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="{DynamicResource basic-grid-index-title}" Width="75" IsReadOnly="True" Binding="{Binding Index}" />
                             <DataGridTemplateColumn Header="{DynamicResource basic-grid-key-title}" Width="*" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding Key}" Foreground="{Binding KeyForeground}" BorderThickness="0" TextWrapping="Wrap" LostFocus="tableKeyCell_LostFocus" />
+                                        <TextBox x:Name="tableKeyCell" Text="{Binding Key}" Foreground="{Binding KeyForeground}" BorderThickness="0" TextWrapping="Wrap" LostFocus="tableKeyCell_LostFocus" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn Header="{DynamicResource basic-grid-value-title}" Width="*" >
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding Value}" Background="{Binding ValueBackground}" BorderThickness="0" TextWrapping="Wrap" LostFocus="tableValueCell_LostFocus" />
+                                        <TextBox x:Name="tableValueCell" Text="{Binding Value}" Background="{Binding ValueBackground}" BorderThickness="0" TextWrapping="Wrap" LostFocus="tableValueCell_LostFocus" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
@@ -65,7 +65,7 @@
                     </DataGrid>
                 </Border>
                 <Grid Grid.Row="4" ColumnDefinitions="Auto,*,Auto">
-                    <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource basic-grid-change-color}" Click="linkChangeTableGridColor_Click" />
+                    <Button Classes="hyperlink" Grid.Column="0" x:Name="linkChangeTableGridColor" Content="{DynamicResource basic-grid-change-color}" />
                     <Label Grid.Column="2" x:Name="labelChangedRow" />
                 </Grid>
                 <Border Grid.Row="6" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3" Padding="1">

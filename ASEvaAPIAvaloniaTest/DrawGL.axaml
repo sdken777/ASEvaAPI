@@ -14,9 +14,9 @@
             <aseva:EtoEmbedder x:Name="etoEmbedder" />
         </Border>
         <Grid Grid.Row="4" ColumnDefinitions="Auto,8,Auto,8,Auto,*,Auto">
-            <Button Classes="hyperlink" Grid.Column="0" Content="{DynamicResource draw-gl-pause-render}" Click="linkPause_Click" />
-            <Button Classes="hyperlink" Grid.Column="2" Content="{DynamicResource draw-gl-resume-render}" Click="linkResume_Click" />
-            <Button Classes="hyperlink" Grid.Column="4" Content="{DynamicResource draw-gl-info}" Click="linkInfo_Click" />
+            <Button Classes="hyperlink" Grid.Column="0" x:Name="linkPause" Content="{DynamicResource draw-gl-pause-render}" />
+            <Button Classes="hyperlink" Grid.Column="2" x:Name="linkResume" Content="{DynamicResource draw-gl-resume-render}" />
+            <Button Classes="hyperlink" Grid.Column="4" x:Name="linkInfo" Content="{DynamicResource draw-gl-info}" />
             <Label Grid.Column="6" x:Name="labelMouseCount" Content="0" />
         </Grid>
     </Grid>
