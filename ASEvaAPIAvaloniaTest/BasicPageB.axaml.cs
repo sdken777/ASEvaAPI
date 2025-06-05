@@ -18,23 +18,22 @@ namespace ASEvaAPIAvaloniaTest
         public BasicPageB()
         {
             InitializeComponent();
-            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
             DataContext = model;
 
-            var texts = Program.Texts;
             var listBoxItems = new List<String>();
-            for (int i = 1; i <= 1000; i++) listBoxItems.Add(texts.Format("basic-list-item", i));
+            for (int i = 1; i <= 1000; i++) listBoxItems.Add(language.Format("basic-list-item", i));
             listBox.ItemsSource = listBoxItems;
 
             var checkListBoxItems = new List<String>();
-            for (int i = 1; i <= 1000; i++) checkListBoxItems.Add(texts.Format("basic-list-item-short", i.ToString()));
+            for (int i = 1; i <= 1000; i++) checkListBoxItems.Add(language.Format("basic-list-item-short", i.ToString()));
             checkListBox.ItemsSource = checkListBoxItems;
 
             for (int i = 1; i <= 99; i++)
             {
                 var parentNode = new Node();
                 parentNode.Key = i.ToString();
-                parentNode.Title = texts.Format("basic-tree-parent", i.ToString("D2"));
+                parentNode.Title = language.Format("basic-tree-parent", i.ToString("D2"));
                 parentNode.Foreground = new SolidColorBrush(Colors.Black);
                 if (i % 2 == 0) parentNode.Background = new SolidColorBrush(Colors.LightGray);
                 if (i > 90) parentNode.IsExpanded = true;
@@ -43,7 +42,7 @@ namespace ASEvaAPIAvaloniaTest
                 {
                     var childNode = new Node();
                     childNode.Key = i + "." + j;
-                    childNode.Title = texts.Format("basic-tree-child", j.ToString("D2"));
+                    childNode.Title = language.Format("basic-tree-child", j.ToString("D2"));
                     if (j % 2 == 0) childNode.Foreground = new SolidColorBrush(Colors.Blue);
                     else childNode.Foreground = new SolidColorBrush(Colors.Black);
                     parentNode.SubNodes.Add(childNode);
@@ -122,7 +121,7 @@ namespace ASEvaAPIAvaloniaTest
             model.SelectedControlItem = item;
 
             var itemIndex = model.ControlItems.IndexOf(item);
-            await App.RunDialog(async (window) => await MessageBox.Show(window, Program.Texts.Format("basic-flow-selected", itemIndex), ""));
+            await App.RunDialog(async (window) => await MessageBox.Show(window, language.Format("basic-flow-selected", itemIndex), ""));
         }
 
         private class Node : INotifyPropertyChanged
@@ -216,5 +215,6 @@ namespace ASEvaAPIAvaloniaTest
         }
 
         private Model model = new Model();
+        private LanguageSwitch language;
     }
 }

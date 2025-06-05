@@ -35,6 +35,7 @@
                 <x:String x:Key="basic-flow-hide">Hide</x:String>
                 <x:String x:Key="basic-flow-bigger">Bigger</x:String>
                 <x:String x:Key="basic-flow-smaller">Smaller</x:String>
+                <x:String x:Key="basic-flow-selected">Selected item: {0}</x:String>
             </ResourceDictionary>
             <ResourceDictionary x:Key="zh">
                 <x:String x:Key="basic-flow-add">添加项</x:String>
@@ -45,6 +46,7 @@
                 <x:String x:Key="basic-flow-hide">隐藏项</x:String>
                 <x:String x:Key="basic-flow-bigger">放大</x:String>
                 <x:String x:Key="basic-flow-smaller">缩小</x:String>
+                <x:String x:Key="basic-flow-selected">已选中项：{0}</x:String>
             </ResourceDictionary>
         </ResourceDictionary>
     </Panel.Resources>

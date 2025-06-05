@@ -13,7 +13,7 @@ namespace ASEvaAPIAvaloniaTest
         public CrossAvaloniaWindow()
         {
             InitializeComponent();
-            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
 
             if (!Program.DesignerMode)
             {
@@ -29,7 +29,7 @@ namespace ASEvaAPIAvaloniaTest
         private async void buttonAvaloniaDialog_Click(object sender, RoutedEventArgs args)
         {
             var avaloniaDialog = new CrossAvaloniaWindow();
-            avaloniaDialog.Title = Program.Texts["menu-avalonia-dialog"];
+            avaloniaDialog.Title = language["menu-avalonia-dialog"];
             await App.RunDialog(avaloniaDialog.ShowDialog, this);
         }
 
@@ -37,5 +37,7 @@ namespace ASEvaAPIAvaloniaTest
         {
             await ASEva.UIEto.App.RunDialog(new CrossEtoPanel());
         }
+
+        private LanguageSwitch language;
     }
 }

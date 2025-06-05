@@ -9,7 +9,7 @@ namespace ASEvaAPIAvaloniaTest
     {
         public EtoDialog()
         {
-            Title = Program.Texts["eto-dialog"];
+            Title = Program.Language == Language.Chinese ? "Eto对话框" : "Eto Dialog";
             Icon = Icon.FromResource("icon.png");
             this.SetResizableMode(1350, 800, 1350, 800);
 

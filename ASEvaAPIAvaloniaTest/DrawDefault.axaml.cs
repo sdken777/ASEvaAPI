@@ -15,7 +15,7 @@ namespace ASEvaAPIAvaloniaTest
         public DrawDefault()
         {
             InitializeComponent();
-            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
 
             Loaded += delegate
             {
@@ -73,5 +73,6 @@ namespace ASEvaAPIAvaloniaTest
         }
 
         private DateTime startTime = DateTime.Now;
+        private LanguageSwitch language;
     }
 }

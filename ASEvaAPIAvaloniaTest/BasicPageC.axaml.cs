@@ -17,14 +17,14 @@ namespace ASEvaAPIAvaloniaTest
         public BasicPageC()
         {
             InitializeComponent();
-            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
             DataContext = model;
 
             for (int i = 0; i < 1000; i++)
             {
                 model.CheckItems.Add(new CheckItem
                 {
-                    Content = Program.Texts.Format("basic-list-item-short", i.ToString()),
+                    Content = language.Format("basic-list-item-short", i.ToString()),
                     IsChecked = i % 2 == 0,
                     IsEnabled = (i / 2) % 2 == 0,
                 });
@@ -34,7 +34,7 @@ namespace ASEvaAPIAvaloniaTest
             {
                 subTableView.Columns.Add(new DataGridTextColumn
                 {
-                    Header = Program.Texts.Format("basic-grid-column", i + 1),
+                    Header = language.Format("basic-grid-column", i + 1),
                     Width = new DataGridLength(75),
                 });
             }
@@ -135,7 +135,7 @@ namespace ASEvaAPIAvaloniaTest
         {
             if (mainTableView.SelectedIndex > 0)
             {
-                model.MainTableItems[0].Key = Program.Texts.Format("basic-grid-edited", mainTableView.SelectedIndex, column);
+                model.MainTableItems[0].Key = language.Format("basic-grid-edited", mainTableView.SelectedIndex, column);
                 model.MainTableItems[0].Value = (sender as TextBox).Text;
             }
         }
@@ -235,5 +235,6 @@ namespace ASEvaAPIAvaloniaTest
 
         private Model model = new Model();
         private int checkListTarget = 0;
+        private LanguageSwitch language;
     }
 }

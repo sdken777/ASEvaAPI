@@ -99,6 +99,11 @@
                 <x:String x:Key="basic-flow-show">Show</x:String>
                 <x:String x:Key="basic-flow-hide">Hide</x:String>
                 <x:String x:Key="basic-flow-select">Select</x:String>
+                <x:String x:Key="basic-list-item">List Option {0}</x:String>
+                <x:String x:Key="basic-list-item-short">Option {0}</x:String>
+                <x:String x:Key="basic-tree-parent">Parent Node {0}</x:String>
+                <x:String x:Key="basic-tree-child">Child Node {0}</x:String>
+                <x:String x:Key="basic-flow-selected">Selected item: {0}</x:String>
             </ResourceDictionary>
             <ResourceDictionary x:Key="zh">
                 <x:String x:Key="basic-tree-select-first">选首项</x:String>
@@ -109,6 +114,11 @@
                 <x:String x:Key="basic-flow-show">显示项</x:String>
                 <x:String x:Key="basic-flow-hide">隐藏项</x:String>
                 <x:String x:Key="basic-flow-select">选中项</x:String>
+                <x:String x:Key="basic-list-item">列表项{0}</x:String>
+                <x:String x:Key="basic-list-item-short">列表项{0}</x:String>
+                <x:String x:Key="basic-tree-parent">父节点{0}</x:String>
+                <x:String x:Key="basic-tree-child">子节点{0}</x:String>
+                <x:String x:Key="basic-flow-selected">已选中项：{0}</x:String>
             </ResourceDictionary>
         </ResourceDictionary>
     </Panel.Resources>

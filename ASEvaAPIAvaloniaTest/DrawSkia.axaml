@@ -9,4 +9,17 @@
     <Border CornerRadius="3" Background="LightYellow">
         <aseva:SkiaView x:Name="skiaView" />
     </Border>
+
+    <Panel.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary x:Key="en">
+                <x:String x:Key="draw-text">Hello World</x:String>
+                <x:String x:Key="draw-skia-anti-alias">Anti-alias Test</x:String>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="zh">
+                <x:String x:Key="draw-text">天气不错</x:String>
+                <x:String x:Key="draw-skia-anti-alias">反锯齿测试</x:String>
+            </ResourceDictionary>
+        </ResourceDictionary>
+    </Panel.Resources>
 </Panel>

@@ -12,7 +12,7 @@ namespace ASEvaAPIAvaloniaTest
         public WebGroup()
         {
             InitializeComponent();
-            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
             
             if (!Program.DesignerMode)
             {
@@ -58,5 +58,6 @@ namespace ASEvaAPIAvaloniaTest
         }
 
         private Eto.Forms.WebView etoWebView;
+        private LanguageSwitch language;
     }
 }

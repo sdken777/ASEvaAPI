@@ -12,4 +12,15 @@
         <Label Grid.Row="2" Grid.Column="0" x:Name="labelRow2" Content="basic-label-row" VerticalAlignment="Center" />
         <NumericUpDown Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" />
     </Grid>
+
+    <Panel.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary x:Key="en">
+                <x:String x:Key="basic-label-row">Row-{0:D}:</x:String>
+            </ResourceDictionary>
+            <ResourceDictionary x:Key="zh">
+                <x:String x:Key="basic-label-row">第{0:D}行：</x:String>
+            </ResourceDictionary>
+        </ResourceDictionary>
+    </Panel.Resources>
 </Panel>

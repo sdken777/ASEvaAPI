@@ -11,11 +11,13 @@ namespace ASEvaAPIAvaloniaTest
         public TestControl()
         {
             InitializeComponent();
+            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
 
-            labelRow1.Content = Program.Texts.Format("basic-label-row", ++flowItemCount);
-            labelRow2.Content = Program.Texts.Format("basic-label-row", ++flowItemCount);
+            labelRow1.Content = language.Format("basic-label-row", ++flowItemCount);
+            labelRow2.Content = language.Format("basic-label-row", ++flowItemCount);
         }
 
         private static int flowItemCount = 0;
+        private LanguageSwitch language;
     }
 }

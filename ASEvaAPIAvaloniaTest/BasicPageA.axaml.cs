@@ -15,7 +15,7 @@ namespace ASEvaAPIAvaloniaTest
         public BasicPageA()
         {
             InitializeComponent();
-            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
             DataContext = new Model();
 
             searchBox.ItemsSource = new string[]{ "Cat", "Camel", "Cow", "Chameleon", "Mouse", "Lion", "Zebra", "大象" }.OrderBy(x => x);
@@ -48,14 +48,14 @@ namespace ASEvaAPIAvaloniaTest
         private void itemMenuAvaloniaWindow_Click(object sender, RoutedEventArgs e)
         {
             var avaloniaWindow = new CrossAvaloniaWindow();
-            avaloniaWindow.Title = Program.Texts["menu-avalonia-window"];
+            avaloniaWindow.Title = language["menu-avalonia-window"];
             avaloniaWindow.Show();
         }
 
         private async void itemMenuAvaloniaDialog_Click(object sender, RoutedEventArgs e)
         {
             var avaloniaDialog = new CrossAvaloniaWindow();
-            avaloniaDialog.Title = Program.Texts["menu-avalonia-dialog"];
+            avaloniaDialog.Title = language["menu-avalonia-dialog"];
             await App.RunDialog(avaloniaDialog);
         }
 
@@ -73,7 +73,7 @@ namespace ASEvaAPIAvaloniaTest
                     var options = new FilePickerSaveOptions
                     {
                         DefaultExtension = ".txt",
-                        FileTypeChoices = [ new FilePickerFileType(Program.Texts["basic-save-file-filter"]) { Patterns = ["*.txt"] } ]
+                        FileTypeChoices = [ new FilePickerFileType(language["basic-save-file-filter"]) { Patterns = ["*.txt"] } ]
                     };
                     var file = await this.GetParentWindow().StorageProvider.SaveFilePickerAsync(options);
                     if (file != null) await App.RunDialog(async (window) => await MessageBox.Show(window, file.Path.LocalPath, ""));
@@ -94,7 +94,7 @@ namespace ASEvaAPIAvaloniaTest
         private void linkSwitch_Click(object sender, RoutedEventArgs e)
         {
             linkEnableDisable.IsEnabled = !linkEnableDisable.IsEnabled;
-            linkEnableDisable.Content = Program.Texts[linkEnableDisable.IsEnabled ? "basic-linkbutton-enabled" : "basic-linkbutton-disabled"];
+            linkEnableDisable.Content = language[linkEnableDisable.IsEnabled ? "basic-linkbutton-enabled" : "basic-linkbutton-disabled"];
         }
 
         private void checkShowPassword_IsCheckedChanged(object sender, RoutedEventArgs e)
@@ -154,5 +154,7 @@ namespace ASEvaAPIAvaloniaTest
 
             private double progress = 0;
         }
+
+        private LanguageSwitch language;
     }
 }

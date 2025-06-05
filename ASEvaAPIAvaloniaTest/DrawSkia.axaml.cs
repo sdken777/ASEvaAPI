@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using ASEva.UIAvalonia;
 using ASEva.Utility;
+using ASEva;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
@@ -17,6 +18,7 @@ namespace ASEvaAPIAvaloniaTest
         public DrawSkia()
         {
             InitializeComponent();
+            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
             image = ResourceLoader.Load("camera.png").ToAvaloniaBitmap().ToCommonImage().ToSKImage();
 
             skiaView.RenderSkia += skiaView_Render;
@@ -41,8 +43,8 @@ namespace ASEvaAPIAvaloniaTest
             c.DrawLine(10, 120, 190, 120, blackPaint);
             c.DrawLine(100, 10, 100, 190, blackPaint);
             c.DrawLine(110, 110, 180, 110, wideLinePaint);
-            c.DrawString(Program.Texts["draw-text"], c.GetDefaultFont(), SKColors.Black, AlignmentX.Right, AlignmentY.Bottom, 100, 120);
-            var textSize = c.MeasureString(Program.Texts["draw-text"], c.GetDefaultFont());
+            c.DrawString(language["draw-text"], c.GetDefaultFont(), SKColors.Black, AlignmentX.Right, AlignmentY.Bottom, 100, 120);
+            var textSize = c.MeasureString(language["draw-text"], c.GetDefaultFont());
             c.DrawRect(100 - textSize.Width, 120 - textSize.Height, textSize.Width, textSize.Height, textBoundPaint);
             c.DrawImage(image, 80, 80);
 
@@ -52,7 +54,7 @@ namespace ASEvaAPIAvaloniaTest
             
             c.DrawLine(10, 210, 190, 215, blackPaint);
             c.DrawLine(10, 235, 190, 240, blackPaint);
-            c.DrawString(Program.Texts["draw-skia-anti-alias"], c.GetDefaultFont(), SKColors.Black, AlignmentX.Center, AlignmentY.Center, 100, 225);
+            c.DrawString(language["draw-skia-anti-alias"], c.GetDefaultFont(), SKColors.Black, AlignmentX.Center, AlignmentY.Center, 100, 225);
 
             foreach (var pt in drawPoints)
             {
@@ -68,5 +70,6 @@ namespace ASEvaAPIAvaloniaTest
         private SKImage image;
         private DateTime startTime = DateTime.Now;
         private List<SKPoint> drawPoints = new List<SKPoint>();
+        private LanguageSwitch language;
     }
 }

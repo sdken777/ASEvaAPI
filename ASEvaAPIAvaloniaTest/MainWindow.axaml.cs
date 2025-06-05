@@ -17,7 +17,7 @@ namespace ASEvaAPIAvaloniaTest
         public MainWindow()
         {
             InitializeComponent();
-            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
             DataContext = new Model();
 
             Closing += MainWindow_Closing;
@@ -57,7 +57,7 @@ namespace ASEvaAPIAvaloniaTest
 
             await App.RunDialog(async (window) => 
             {
-                exitConfirmed = await MessageBox.Show(window, Program.Texts["exit-confirm"], "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == MessageBoxResult.Yes;
+                exitConfirmed = await MessageBox.Show(window, language["exit-confirm"], "", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == MessageBoxResult.Yes;
             });
             if (exitConfirmed) Close();
 
@@ -165,5 +165,6 @@ namespace ASEvaAPIAvaloniaTest
         }
 
         private DispatcherTimer timer = new DispatcherTimer();
+        private LanguageSwitch language;
     }
 }

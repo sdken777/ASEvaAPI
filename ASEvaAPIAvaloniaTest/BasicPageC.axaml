@@ -92,6 +92,9 @@
                 <x:String x:Key="basic-grid-key-title">Key</x:String>
                 <x:String x:Key="basic-grid-value-title">Value</x:String>
                 <x:String x:Key="basic-grid-change-color">Change color</x:String>
+                <x:String x:Key="basic-list-item-short">Option {0}</x:String>
+                <x:String x:Key="basic-grid-column">C{0}</x:String>
+                <x:String x:Key="basic-grid-edited">Edited: ({0}, {1})</x:String>
             </ResourceDictionary>
             <ResourceDictionary x:Key="zh">
                 <x:String x:Key="basic-checklist-check-all">全选</x:String>
@@ -108,6 +111,9 @@
                 <x:String x:Key="basic-grid-key-title">键</x:String>
                 <x:String x:Key="basic-grid-value-title">值</x:String>
                 <x:String x:Key="basic-grid-change-color">改变颜色</x:String>
+                <x:String x:Key="basic-list-item-short">列表项{0}</x:String>
+                <x:String x:Key="basic-grid-column">{0}列</x:String>
+                <x:String x:Key="basic-grid-edited">已编辑: ({0}, {1})</x:String>
             </ResourceDictionary>
         </ResourceDictionary>
     </Panel.Resources>

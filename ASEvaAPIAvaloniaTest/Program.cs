@@ -16,25 +16,17 @@ namespace ASEvaAPIAvaloniaTest
             var startup = new Startup();
             App.Run(startup);
 
-            commonInitialization(startup.Language);
+            Language = startup.Language;
             App.Run(new MainWindow());
         }
 
         public static AppBuilder BuildAvaloniaApp() // Designer entry point
         {
             DesignerMode = true;
-            commonInitialization(Language.English);
             return AppBuilder.Configure<AvaloniaApplication>().UsePlatformDetect().WithInterFont().LogToTrace();
         }
 
-        public static bool DesignerMode { get; private set; }
-        public static Language Language { get; private set; }
-        public static TextResource Texts { get; private set; }
-
-        private static void commonInitialization(Language language)
-        {
-            Language = language;
-            Texts = TextResource.Load("test.xml", Language);
-        }
+        public static bool DesignerMode { get; private set; } = false;
+        public static Language Language { get; private set; } = Language.English;
     }
 }

@@ -11,7 +11,7 @@ namespace ASEvaAPIAvaloniaTest
         public EtoEmbedWindow()
         {
             InitializeComponent();
-            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
 
             var panel = new ASEvaAPIEtoTest.EtoTestPanel(Program.Language, false);
             embedder.EtoControl = panel;
@@ -20,5 +20,7 @@ namespace ASEvaAPIAvaloniaTest
             panel.RequestFullScreen += delegate { this.WindowState = WindowState.FullScreen; };
             Closing += delegate { panel.StopTimer(); };
         }
+
+        private LanguageSwitch language;
     }
 }

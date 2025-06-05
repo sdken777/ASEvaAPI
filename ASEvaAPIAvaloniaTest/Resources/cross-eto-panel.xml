@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<text_resource>
+  <t id="menu-avalonia-dialog">
+    <en>Avalonia dialog</en>
+    <zh>Avalonia对话框</zh>
+  </t>
+  <t id="menu-eto-dialog">
+    <en>Eto dialog</en>
+    <zh>Eto对话框</zh>
+  </t>
+  <t id="eto-show-question-box">
+    <en>Show question box</en>
+    <zh>显示确认框</zh>
+  </t>
+  <t id="eto-show-question-msg">
+    <en>Are you sure?</en>
+    <zh>你确定？</zh>
+  </t>
+  <t id="eto-show-color-picker">
+    <en>Show color picker</en>
+    <zh>显示颜色选择</zh>
+  </t>
+</text_resource> 

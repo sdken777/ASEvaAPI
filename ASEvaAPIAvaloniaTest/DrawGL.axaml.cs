@@ -15,7 +15,7 @@ namespace ASEvaAPIAvaloniaTest
         public DrawGL()
         {
             InitializeComponent();
-            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
 
             if (!Program.DesignerMode)
             {
@@ -187,12 +187,12 @@ namespace ASEvaAPIAvaloniaTest
 
             var info = glView.ContextInfo.Value;
             var rowTexts = new List<String>();
-            rowTexts.Add(Program.Texts.Format("draw-gl-info-version", info.version));
-            rowTexts.Add(Program.Texts.Format("draw-gl-info-vendor", info.vendor));
-            rowTexts.Add(Program.Texts.Format("draw-gl-info-renderer", info.renderer));
-            rowTexts.Add(Program.Texts.Format("draw-gl-info-extensions", String.Join('\n', info.ToExtensionList())));
+            rowTexts.Add(language.Format("draw-gl-info-version", info.version));
+            rowTexts.Add(language.Format("draw-gl-info-vendor", info.vendor));
+            rowTexts.Add(language.Format("draw-gl-info-renderer", info.renderer));
+            rowTexts.Add(language.Format("draw-gl-info-extensions", String.Join('\n', info.ToExtensionList())));
             
-            var dialog = new InfoDialog(Program.Texts["draw-gl-info-title"], String.Join('\n', rowTexts));
+            var dialog = new InfoDialog(language["draw-gl-info-title"], String.Join('\n', rowTexts));
             await ASEva.UIAvalonia.App.RunDialog(dialog);
         }
 
@@ -218,5 +218,6 @@ namespace ASEvaAPIAvaloniaTest
         private int glMouseCount = 0;
         private LoopIntervalStat glLoopIntervalStat = new LoopIntervalStat();
         private DateTime startTime = DateTime.Now;
+        private LanguageSwitch language;
     }
 }

@@ -10,7 +10,9 @@ namespace ASEvaAPIAvaloniaTest
         public BasicPageD()
         {
             InitializeComponent();
-            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
         }
+
+        private LanguageSwitch language;
     }
 }

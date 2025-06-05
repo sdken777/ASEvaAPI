@@ -10,7 +10,7 @@ namespace ASEvaAPIAvaloniaTest
     {
         public CrossEtoPanel()
         {
-            Title = Program.Texts["menu-eto-dialog"];
+            Title = texts["menu-eto-dialog"];
             Icon = Icon.FromResource("icon.png");
             this.SetFixMode(700, 400, true);
 
@@ -18,24 +18,24 @@ namespace ASEvaAPIAvaloniaTest
             var topLayout = mainLayout.AddRowLayout();
             var webView = mainLayout.AddControl(new WebView(), true) as WebView;
 
-            topLayout.AddLinkButton(Program.Texts["menu-avalonia-dialog"]).Click += async delegate
+            topLayout.AddLinkButton(texts["menu-avalonia-dialog"]).Click += async delegate
             {
                 var avaloniaDialog = new CrossAvaloniaWindow();
-                avaloniaDialog.Title = Program.Texts["menu-avalonia-dialog"];
+                avaloniaDialog.Title = texts["menu-avalonia-dialog"];
                 await ASEva.UIAvalonia.App.RunDialog(avaloniaDialog);
             };
 
-            topLayout.AddLinkButton(Program.Texts["menu-eto-dialog"]).Click += async delegate
+            topLayout.AddLinkButton(texts["menu-eto-dialog"]).Click += async delegate
             {
                 await App.RunDialog(new CrossEtoPanel());
             };
 
-            topLayout.AddLinkButton(Program.Texts["eto-show-question-box"]).Click += async delegate
+            topLayout.AddLinkButton(texts["eto-show-question-box"]).Click += async delegate
             {
-                await App.ShowMessageBox(await App.ShowQuestionBox(Program.Texts["eto-show-question-msg"]) ? "TRUE" : "FALSE");
+                await App.ShowMessageBox(await App.ShowQuestionBox(texts["eto-show-question-msg"]) ? "TRUE" : "FALSE");
             };
             
-            topLayout.AddLinkButton(Program.Texts["eto-show-color-picker"]).Click += async delegate
+            topLayout.AddLinkButton(texts["eto-show-color-picker"]).Click += async delegate
             {
                 color = await App.ShowColorDialog(null, color);
             };
@@ -46,6 +46,7 @@ namespace ASEvaAPIAvaloniaTest
             };
         }
 
-        private Eto.Drawing.Color color = new Eto.Drawing.Color();
+        private Color color = new Color();
+        private TextResource texts = TextResource.Load("cross-eto-panel.xml", Program.Language);
     }
 }

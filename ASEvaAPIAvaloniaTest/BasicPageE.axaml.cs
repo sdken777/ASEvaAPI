@@ -16,7 +16,7 @@ namespace ASEvaAPIAvaloniaTest
         public BasicPageE()
         {
             InitializeComponent();
-            new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
 
             linkAdd.Click += linkAdd_Click;
             linkRemove.Click += linkRemove_Click;
@@ -87,7 +87,7 @@ namespace ASEvaAPIAvaloniaTest
             var target = sender as ControlWithBorder;
             var targetIndex = flowLayout.Children.IndexOf(target);
             selectControl(targetIndex);
-            await App.RunDialog(async (window) => await MessageBox.Show(window, Program.Texts.Format("basic-flow-selected", targetIndex), ""));
+            await App.RunDialog(async (window) => await MessageBox.Show(window, language.Format("basic-flow-selected", targetIndex), ""));
         }
 
         private void selectControl(int index)
@@ -121,5 +121,6 @@ namespace ASEvaAPIAvaloniaTest
 
             private bool isSelected = false;
         }
+        private LanguageSwitch language;
     }
 }
