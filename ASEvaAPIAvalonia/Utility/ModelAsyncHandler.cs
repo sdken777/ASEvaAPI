@@ -81,7 +81,7 @@ namespace ASEva.UIAvalonia
             if (propertyInfo == null) return;
 
             var curValue = (T)propertyInfo.GetValue(model);
-            if (value.Equals(curValue)) return;
+            if (EqualityComparer<T>.Default.Equals(value, curValue)) return;
 
             settingProperty = true;
             propertyInfo.SetValue(model, value);
@@ -114,7 +114,7 @@ namespace ASEva.UIAvalonia
                 if (setter != null && !keeper.CanUpdate) return;
 
                 var curValue = (T)propertyInfo.GetValue(model);
-                if (result.Item2.Equals(curValue)) return;
+                if (EqualityComparer<T>.Default.Equals(result.Item2, curValue)) return;
 
                 settingProperty = true;
                 propertyInfo.SetValue(model, result.Item2);
@@ -151,11 +151,11 @@ namespace ASEva.UIAvalonia
 
         /// \~English
         /// <summary>
-        /// (api:app=1.3.1) The time to pause refreshing after an operation, in milliseconds
+        /// (api:avalonia=1.3.1) The time to pause refreshing after an operation, in milliseconds
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=1.3.1) 操作后暂停刷新的时间，单位毫秒
+        /// (api:avalonia=1.3.1) 操作后暂停刷新的时间，单位毫秒
         /// </summary>
         public int KeepTime
         {
@@ -249,7 +249,7 @@ namespace ASEva.UIAvalonia
             if (collection == null) return;
 
             var curValue = collection[elementIndex];
-            if (value.Equals(curValue)) return;
+            if (EqualityComparer<T>.Default.Equals(value, curValue)) return;
 
             settingProperty = true;
             collection[elementIndex] = value;
@@ -282,7 +282,7 @@ namespace ASEva.UIAvalonia
                 if (setter != null && !keeper.CanUpdate) return;
 
                 var curValue = collection[elementIndex];
-                if (result.Item2.Equals(curValue)) return;
+                if (EqualityComparer<T>.Default.Equals(result.Item2, curValue)) return;
 
                 settingProperty = true;
                 collection[elementIndex] = result.Item2;
@@ -292,11 +292,11 @@ namespace ASEva.UIAvalonia
 
         /// \~English
         /// <summary>
-        /// (api:app=1.3.1) The time to pause refreshing after an operation, in milliseconds
+        /// (api:avalonia=1.3.1) The time to pause refreshing after an operation, in milliseconds
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:app=1.3.1) 操作后暂停刷新的时间，单位毫秒
+        /// (api:avalonia=1.3.1) 操作后暂停刷新的时间，单位毫秒
         /// </summary>
         public int KeepTime
         {
@@ -396,7 +396,7 @@ namespace ASEva.UIAvalonia
                 toRemove.Clear();
                 for (int i = 0; i < commonElements.Length; i++)
                 {
-                    if (!collection[i].Equals(commonElements[i])) toRemove.Add(collection[i]);
+                    if (!EqualityComparer<T>.Default.Equals(collection[i], commonElements[i])) toRemove.Add(collection[i]);
                 }
                 foreach (var item in toRemove)
                 {
@@ -411,7 +411,7 @@ namespace ASEva.UIAvalonia
                         collection.Add(elements[i]);
                         collectionModified = true;
                     }
-                    else if (!collection[i].Equals(elements[i]))
+                    else if (!EqualityComparer<T>.Default.Equals(collection[i], elements[i]))
                     {
                         collection.Insert(i, elements[i]);
                         collectionModified = true;
