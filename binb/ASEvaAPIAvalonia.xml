@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.3.3
+            version=1.3.4
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -594,6 +594,18 @@
             <param name="id">指定ID</param>
             <param name="args">格式描述中的参数值</param>
             <returns>输出文本</returns>
+        </member>
+        <member name="M:ASEva.UIAvalonia.LanguageSwitch.SwitchAllTo(System.String)">
+            \~English
+            <summary>
+            (api:avalonia=1.3.4) Switch language (for all valid objects)
+            </summary>
+            <param name="language">Target language</param>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.3.4) 切换语言（针对所有有效对象）
+            <param name="language">目标语言</param>
+            </summary>
         </member>
         <member name="T:ASEva.UIAvalonia.AsyncViewModel">
             \~English

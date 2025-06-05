@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using ASEva.Utility;
 using Avalonia.Controls;
+using Avalonia.Data.Converters;
 
 namespace ASEva.UIAvalonia
 {
@@ -35,6 +37,10 @@ namespace ASEva.UIAvalonia
             {
                 currentLanguageDict = mainResource[initialLanguage ?? "en"] as IResourceDictionary;
                 if (currentLanguageDict != null) mainResource.MergedDictionaries.Add(currentLanguageDict);
+                lock (objs)
+                {
+                    objs.Add(new WeakReference<LanguageSwitch>(this));
+                }
             }
         }
 
@@ -100,7 +106,46 @@ namespace ASEva.UIAvalonia
             return null;
         }
 
+        /// \~English
+        /// <summary>
+        /// (api:avalonia=1.3.4) Switch language (for all valid objects)
+        /// </summary>
+        /// <param name="language">Target language</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.3.4) 切换语言（针对所有有效对象）
+        /// <param name="language">目标语言</param>
+        /// </summary>
+        public static void SwitchAllTo(String language)
+        {
+            GC.Collect();
+
+            List<LanguageSwitch> targets = new();
+            lock (objs)
+            {
+                var validObjs = new List<WeakReference<LanguageSwitch>>();
+                foreach (var reference in objs)
+                {
+                    LanguageSwitch obj = null;
+                    if (reference.TryGetTarget(out obj))
+                    {
+                        validObjs.Add(reference);
+                        targets.Add(obj);
+                    }
+                }
+                objs.Clear();
+                objs.AddRange(validObjs);
+            }
+
+            foreach (var target in targets)
+            {
+                target.SwitchTo(language);
+            }
+        }
+
         private IResourceDictionary mainResource;
         private IResourceDictionary currentLanguageDict;
+
+        private static List<WeakReference<LanguageSwitch>> objs = new();
     }
 }
