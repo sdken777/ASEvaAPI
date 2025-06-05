@@ -22586,44 +22586,44 @@
         <member name="M:ASEva.CommonWorkflow.OnGetAppLanguage">
             \~English
             <summary>
-            [Required] Get application's language
+            [Required] Get application's language (Always refresh while running application)
             </summary>
             <returns>Language</returns>
             \~Chinese
             <summary>
-            [必须实现] 获取语言
+            [必须实现] 获取语言（应用程序运行期间持续刷新）
             </summary>
             <returns>语言</returns>
         </member>
         <member name="M:ASEva.CommonWorkflow.OnGetDefaultGlobalParameters">
             \~English
             <summary>
-            [Optional] Get default global parameters, unavailable for client side software (default is empty)
+            [Optional] Get default global parameters, unavailable for client side software, default is empty (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 获取默认全局参数，客户端软件无效（默认空）
+            [可选实现] 获取默认全局参数，客户端软件无效，默认空（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CommonWorkflow.OnGetWebAPIAvailability">
             \~English
             <summary>
-            [Optional] Get whether to support calling web API. You can still directly call web API in plugins even if this is false (default is true)
+            [Optional] Get whether to support calling web API. You can still directly call web API in plugins even if this is false, default is true (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 获取是否需要支持Web API调用，不影响在插件内部直接使用Web API（默认true）
+            [可选实现] 获取是否需要支持Web API调用，不影响在插件内部直接使用Web API，默认true（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CommonWorkflow.OnGetPreferenceVariables">
             \~English
             <summary>
-            (api:app=3.4.6) [Optional] Called while getting the list of preference variable ID
+            (api:app=3.4.6) [Optional] Called while getting the list of preference variable ID (Only called once during startup)
             </summary>
             <returns>The list of preference variable ID</returns>
             \~Chinese
             <summary>
-            (api:app=3.4.6) [可选实现] 获取用户偏好变量ID列表时被调用
+            (api:app=3.4.6) [可选实现] 获取用户偏好变量ID列表时被调用（仅启动时获取一次）
             </summary>
             <returns>用户偏好变量ID列表</returns>
         </member>
@@ -22898,151 +22898,151 @@
         <member name="M:ASEva.CoreWorkflow.OnGetVideoAvailability">
             \~English
             <summary>
-            [Optional] Get whether to support video (default is true)
+            [Optional] Get whether to support video, default is true (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 获取是否需要支持视频（默认true）
+            [可选实现] 获取是否需要支持视频，默认true（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnGetAudioAvailability">
             \~English
             <summary>
-            [Optional] Get whether to support audio (default is true)
+            [Optional] Get whether to support audio, default is true (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 获取是否需要支持音频（默认true）
+            [可选实现] 获取是否需要支持音频，默认true（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnGetResourceMonitorAvailability">
             \~English
             <summary>
-            [Optional] Get whether to support resource monitoring (default is true)
+            [Optional] Get whether to support resource monitoring, default is true (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 获取是否需要支持资源监控（默认true）
+            [可选实现] 获取是否需要支持资源监控，默认true（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnGetOfflineMapAvailability">
             \~English
             <summary>
-            [Optional] Get whether to support offline map (default is true)
+            [Optional] Get whether to support offline map, default is true (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 获取是否需要支持离线地图（默认true）
+            [可选实现] 获取是否需要支持离线地图，默认true（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckSystemSleepPrevention">
             \~English
             <summary>
-            [Optional] Get whether to prevent system sleeping (default is true)
+            [Optional] Get whether to prevent system sleeping, default is true (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 返回是否阻止系统进入睡眠（默认true）
+            [可选实现] 返回是否阻止系统进入睡眠，默认true（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckMultiInstance">
             \~English
             <summary>
-            [Optional] Get whether to allow multiple application instances running
+            [Optional] Get whether to allow multiple application instances running (Only called once during startup)
             </summary>
             <returns>Whether to allow multiple application instances running</returns>
             \~Chinese
             <summary>
-            [可选实现] 返回是否允许多个实例同时运行
+            [可选实现] 返回是否允许多个实例同时运行（仅启动时获取一次）
             </summary>
             <returns>是否允许多个实例同时运行</returns>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckDisableGPUDecoding">
             \~English
             <summary>
-            [Optional] Get whether to disable GPU decoding
+            [Optional] Get whether to disable GPU decoding (Only called once during startup)
             </summary>
             <returns>Whether to disable GPU decoding</returns>
             \~Chinese
             <summary>
-            [可选实现] 返回是否禁用GPU解码
+            [可选实现] 返回是否禁用GPU解码（仅启动时获取一次）
             </summary>
             <returns>是否禁用GPU解码</returns>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckEnableSpecializedGPUDecoding">
             \~English
             <summary>
-            [Optional] Get whether to enable GPU specialized decoding
+            [Optional] Get whether to enable GPU specialized decoding (Only called once during startup)
             </summary>
             <returns>Whether to enable GPU specialized decoding (always false if GPU decoding is disabled)</returns>
             \~Chinese
             <summary>
-            [可选实现] 返回是否启用GPU专用解码
+            [可选实现] 返回是否启用GPU专用解码（仅启动时获取一次）
             </summary>
             <returns>是否启用GPU专用解码（若已禁用GPU解码则无效）</returns>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckPreferPRCWeb">
             \~English
             <summary>
-            [Optional] Get whether to use PRC web service
+            [Optional] Get whether to use PRC web service (Only called once during startup)
             </summary>
             <returns>Whether to use PRC web service</returns>
             \~Chinese
             <summary>
-            [可选实现] 返回是否使用境内网络服务
+            [可选实现] 返回是否使用境内网络服务（仅启动时获取一次）
             </summary>
             <returns>是否使用境内网络服务</returns>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckRequestAutoRoot">
             \~English
             <summary>
-            [Optional] Get whether to request auto root privilege (Only for Linux)
+            [Optional] Get whether to request auto root privilege, only for Linux (Only called once during startup)
             </summary>
             <returns>Whether to request auto root privilege</returns>
             \~Chinese
             <summary>
-            [可选实现] 返回是否请求自动root权限 (仅针对Linux操作系统)
+            [可选实现] 返回是否请求自动root权限，仅针对Linux操作系统（仅启动时获取一次）
             </summary>
             <returns>是否请求自动root权限</returns>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckAlwaysTransferBusMessage">
             \~English
             <summary>
-            (api:app=3.7.0) [Optional] Get whether the bus message data always transferred from native layer
+            (api:app=3.7.0) [Optional] Get whether the bus message data always transferred from native layer (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.7.0) [可选实现] 返回总线数据是否无条件从原生层传输
+            (api:app=3.7.0) [可选实现] 返回总线数据是否无条件从原生层传输（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckAlwaysTransferSignal">
             \~English
             <summary>
-            (api:app=3.7.0) [Optional] Get whether the signal data always transferred from native layer
+            (api:app=3.7.0) [Optional] Get whether the signal data always transferred from native layer (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.7.0) [可选实现] 返回信号数据是否无条件从原生层传输
+            (api:app=3.7.0) [可选实现] 返回信号数据是否无条件从原生层传输（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckAlwaysTransferPointCloud">
             \~English
             <summary>
-            (api:app=3.7.0) [Optional] Get whether the point cloud data always transferred from native layer
+            (api:app=3.7.0) [Optional] Get whether the point cloud data always transferred from native layer (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.7.0) [可选实现] 返回点云数据是否无条件从原生层传输
+            (api:app=3.7.0) [可选实现] 返回点云数据是否无条件从原生层传输（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckAlwaysTransferProcessorVideo">
             \~English
             <summary>
-            (api:app=3.7.0) [Optional] Get whether the video data for processor always transferred from native layer
+            (api:app=3.7.0) [Optional] Get whether the video data for processor always transferred from native layer (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.7.0) [可选实现] 返回处理用视频数据是否无条件从原生层传输
+            (api:app=3.7.0) [可选实现] 返回处理用视频数据是否无条件从原生层传输（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnOpenDialog(System.Object,ASEva.DialogClassInfo,System.String)">
@@ -23236,21 +23236,21 @@
         <member name="M:ASEva.ClientWorkflow.OnGetAudioPlayerAvailability">
             \~English
             <summary>
-            [Optional] Get whether to support audio player (default is true)
+            [Optional] Get whether to support audio player, default is true (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 获取是否需要支持音频播放（默认true）
+            [可选实现] 获取是否需要支持音频播放，默认true（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.ClientWorkflow.OnCheckPreferPRCWeb">
             \~English
             <summary>
-            [Optional] Get whether to use PRC web service on client side software
+            [Optional] Get whether to use PRC web service on client side software (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 返回是否在客户端软件使用境内网络服务
+            [可选实现] 返回是否在客户端软件使用境内网络服务（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.ClientWorkflow.OnGetConnectionConfig">
