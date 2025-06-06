@@ -56,7 +56,7 @@ namespace ASEva.UIAvalonia
         /// <param name="mainResource">界面元素的主资源对象</param>
         /// <param name="initialLanguage">初始语言</param>
         /// </summary>
-        public LanguageSwitch(IResourceDictionary mainResource, Language initialLanguage = Language.English)
+        public LanguageSwitch(IResourceDictionary mainResource, Language initialLanguage)
         {
             this.mainResource = mainResource;
             if (mainResource != null)
