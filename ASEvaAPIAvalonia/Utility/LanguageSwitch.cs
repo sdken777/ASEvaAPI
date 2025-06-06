@@ -20,7 +20,7 @@ namespace ASEva.UIAvalonia
     {
         /// \~English
         /// <summary>
-        /// For using multilingual text from axaml resources
+        /// Default constructor
         /// </summary>
         /// <param name="mainResource">The main resource of UI element</param>
         /// <param name="initialLanguage">Initial language</param>
@@ -46,6 +46,39 @@ namespace ASEva.UIAvalonia
 
         /// \~English
         /// <summary>
+        /// (api:avalonia=1.3.5) Default constructor
+        /// </summary>
+        /// <param name="mainResource">The main resource of UI element</param>
+        /// <param name="initialLanguage">Initial language</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.3.5) 默认构造函数
+        /// <param name="mainResource">界面元素的主资源对象</param>
+        /// <param name="initialLanguage">初始语言</param>
+        /// </summary>
+        public LanguageSwitch(IResourceDictionary mainResource, Language initialLanguage = Language.English)
+        {
+            this.mainResource = mainResource;
+            if (mainResource != null)
+            {
+                var languageCode = initialLanguage switch
+                {
+                    Language.English => "en",
+                    Language.Chinese => "zh",
+                    _ => "en",
+                };
+
+                currentLanguageDict = mainResource[languageCode] as IResourceDictionary;
+                if (currentLanguageDict != null) mainResource.MergedDictionaries.Add(currentLanguageDict);
+                lock (objs)
+                {
+                    objs.Add(new WeakReference<LanguageSwitch>(this));
+                }
+            }
+        }
+
+        /// \~English
+        /// <summary>
         /// Switch language
         /// </summary>
         /// <param name="language">Target language</param>
@@ -60,6 +93,27 @@ namespace ASEva.UIAvalonia
             if (currentLanguageDict != null) mainResource.MergedDictionaries.Remove(currentLanguageDict);
             currentLanguageDict = mainResource[language ?? "en"] as IResourceDictionary;
             if (currentLanguageDict != null) mainResource.MergedDictionaries.Add(currentLanguageDict);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:avalonia=1.3.5) Switch language
+        /// </summary>
+        /// <param name="language">Target language</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.3.5) 切换语言
+        /// <param name="language">目标语言</param>
+        /// </summary>
+        public void SwitchTo(Language language)
+        {
+            var languageCode = language switch
+            {
+                Language.English => "en",
+                Language.Chinese => "zh",
+                _ => "en",
+            };
+            SwitchTo(languageCode);
         }
 
         /// \~English
@@ -141,6 +195,27 @@ namespace ASEva.UIAvalonia
             {
                 target.SwitchTo(language);
             }
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:avalonia=1.3.5) Switch language (for all valid objects)
+        /// </summary>
+        /// <param name="language">Target language</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.3.5) 切换语言（针对所有有效对象）
+        /// <param name="language">目标语言</param>
+        /// </summary>
+        public static void SwitchAllTo(Language language)
+        {
+            var languageCode = language switch
+            {
+                Language.English => "en",
+                Language.Chinese => "zh",
+                _ => "en",
+            };
+            SwitchAllTo(languageCode);
         }
 
         private IResourceDictionary mainResource;

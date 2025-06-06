@@ -16,7 +16,7 @@ namespace ASEvaAPIAvaloniaTest
         public BasicPageE()
         {
             InitializeComponent();
-            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language);
 
             linkAdd.Click += linkAdd_Click;
             linkRemove.Click += linkRemove_Click;

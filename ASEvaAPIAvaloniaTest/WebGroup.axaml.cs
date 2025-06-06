@@ -12,7 +12,7 @@ namespace ASEvaAPIAvaloniaTest
         public WebGroup()
         {
             InitializeComponent();
-            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language);
             
             if (!Program.DesignerMode)
             {

@@ -12,7 +12,7 @@ namespace ASEvaAPIAvaloniaTest
         public TestDialogWithBorder()
         {
             InitializeComponent();
-            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language);
 
             linkClientSize.Click += linkClientSize_Click;
             linkShowDialogWithBorder.Click += linkShowDialogWithBorder_Click;

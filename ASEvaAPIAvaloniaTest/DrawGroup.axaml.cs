@@ -10,7 +10,7 @@ namespace ASEvaAPIAvaloniaTest
         public DrawGroup()
         {
             InitializeComponent();
-            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language);
         }
 
         public void OnLoop()

@@ -17,7 +17,7 @@ namespace ASEvaAPIAvaloniaTest
         public MainWindow()
         {
             InitializeComponent();
-            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language);
             DataContext = new Model();
 
             Closing += MainWindow_Closing;

@@ -18,7 +18,7 @@ namespace ASEvaAPIAvaloniaTest
         public DrawSkia()
         {
             InitializeComponent();
-            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language);
             image = ResourceLoader.Load("camera.png").ToAvaloniaBitmap().ToCommonImage().ToSKImage();
 
             skiaView.RenderSkia += skiaView_Render;

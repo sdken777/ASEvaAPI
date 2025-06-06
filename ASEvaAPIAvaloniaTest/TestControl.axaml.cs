@@ -11,7 +11,7 @@ namespace ASEvaAPIAvaloniaTest
         public TestControl()
         {
             InitializeComponent();
-            language = new LanguageSwitch(Resources, Program.Language == Language.Chinese ? "zh" : "en");
+            language = new LanguageSwitch(Resources, Program.Language);
 
             labelRow1.Content = language.Format("basic-label-row", ++flowItemCount);
             labelRow2.Content = language.Format("basic-label-row", ++flowItemCount);
