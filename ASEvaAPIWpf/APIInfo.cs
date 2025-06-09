@@ -1,8 +1,8 @@
 ﻿/*! \mainpage
  * \~English This library contains the APIs for .NET Core Wpf. See ASEva.UIWpf for details. \n
  * \~Chinese 此类库为ASEva-API中基于.NET Core Wpf的部分。详见 ASEva.UIWpf \n
- * \~English This document corresponds to API version: 2.2.0
- * \~Chinese 本文档对应API版本：2.2.0
+ * \~English This document corresponds to API version: 2.2.1
+ * \~Chinese 本文档对应API版本：2.2.1
  */
 
 using System;
@@ -12,7 +12,7 @@ using System.Text;
 namespace ASEva.UIWpf
 {
     /// <summary>
-    /// version=2.2.0
+    /// version=2.2.1
     /// </summary>
     public class APIInfo
     {
@@ -28,7 +28,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 2, 0, 2); // Update log / 更新记录: DialogPanel对话框不可最小化
+            return new Version(2, 2, 1, 0); // Update log / 更新记录: 新增LanguageSwitch
         }
 
         /// \~English

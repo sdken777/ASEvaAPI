@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=3.3.1
+            version=3.4.0
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -932,6 +932,20 @@
             <summary>
             (api:eto=3.2.0) 面板转换工具
             </summary>
+        </member>
+        <member name="M:ASEva.UIEto.CrossConverter.EnableAvaloniaEmbedder(System.Func{System.Object})">
+            \~English
+            <summary>
+            (api:eto=3.4.0) Enable converting Avalonia panel to Eto panel (only for winform and wpf)
+            </summary>
+            <param name="appBuilderCreation">The function to create AppBuilder object</param>
+            <returns>Whether initialization is successful</returns>
+            \~Chinese
+            <summary>
+            (api:eto=3.4.0) 启用Avalonia面板转Eto面板功能（仅限winform和wpf）
+            </summary>
+            <param name="appBuilderCreation">创建AppBuilder对象的函数</param>
+            <returns>是否成功</returns>
         </member>
         <member name="M:ASEva.UIEto.CrossConverter.ConvertWindowPanel(System.Object)">
             \~English

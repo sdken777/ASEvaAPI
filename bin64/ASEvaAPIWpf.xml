@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIWpf.APIInfo">
             <summary>
-            version=2.2.0
+            version=2.2.1
             </summary>
         </member>
         <member name="M:ASEva.UIWpf.APIInfo.GetAPIVersion">
@@ -342,6 +342,118 @@
             \~Chinese
             <summary>
             (api:wpf=2.0.0) 图像对象转换
+            </summary>
+        </member>
+        <member name="T:ASEva.UIWpf.LanguageSwitch">
+            \~English
+            <summary>
+            (api:wpf=2.2.1) For using multilingual text from xaml resources
+            </summary>
+            \~Chinese
+            <summary>
+            (api:wpf=2.2.1) 方便使用xaml资源中的多语言文本
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.LanguageSwitch.#ctor(System.Windows.ResourceDictionary,System.String)">
+            \~English
+            <summary>
+            Default constructor
+            </summary>
+            <param name="mainResource">The main resource of UI element</param>
+            <param name="initialLanguage">Initial language</param>
+            \~Chinese
+            <summary>
+            默认构造函数
+            <param name="mainResource">界面元素的主资源对象</param>
+            <param name="initialLanguage">初始语言</param>
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.LanguageSwitch.#ctor(System.Windows.ResourceDictionary,ASEva.Language)">
+            \~English
+            <summary>
+            Default constructor
+            </summary>
+            <param name="mainResource">The main resource of UI element</param>
+            <param name="initialLanguage">Initial language</param>
+            \~Chinese
+            <summary>
+            默认构造函数
+            <param name="mainResource">界面元素的主资源对象</param>
+            <param name="initialLanguage">初始语言</param>
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.LanguageSwitch.SwitchTo(System.String)">
+            \~English
+            <summary>
+            Switch language
+            </summary>
+            <param name="language">Target language</param>
+            \~Chinese
+            <summary>
+            切换语言
+            <param name="language">目标语言</param>
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.LanguageSwitch.SwitchTo(ASEva.Language)">
+            \~English
+            <summary>
+            Switch language
+            </summary>
+            <param name="language">Target language</param>
+            \~Chinese
+            <summary>
+            切换语言
+            <param name="language">目标语言</param>
+            </summary>
+        </member>
+        <member name="P:ASEva.UIWpf.LanguageSwitch.Item(System.String)">
+            \~English
+            <summary>
+            Get the text with the ID
+            </summary>
+            \~Chinese
+            <summary>
+            获取指定ID对应的文本
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.LanguageSwitch.Format(System.String,System.Object[])">
+            \~English
+            <summary>
+            Get the format text with the ID and use it to create the final text
+            </summary>
+            <param name="id">Text ID</param>
+            <param name="args">Arguments for the formats</param>
+            <returns>Output text</returns>
+            \~Chinese
+            <summary>
+            以指定ID对应的文本作为格式描述，输出文本
+            </summary>
+            <param name="id">指定ID</param>
+            <param name="args">格式描述中的参数值</param>
+            <returns>输出文本</returns>
+        </member>
+        <member name="M:ASEva.UIWpf.LanguageSwitch.SwitchAllTo(System.String)">
+            \~English
+            <summary>
+            Switch language (for all valid objects)
+            </summary>
+            <param name="language">Target language</param>
+            \~Chinese
+            <summary>
+            切换语言（针对所有有效对象）
+            <param name="language">目标语言</param>
+            </summary>
+        </member>
+        <member name="M:ASEva.UIWpf.LanguageSwitch.SwitchAllTo(ASEva.Language)">
+            \~English
+            <summary>
+            Switch language (for all valid objects)
+            </summary>
+            <param name="language">Target language</param>
+            \~Chinese
+            <summary>
+            切换语言（针对所有有效对象）
+            <param name="language">目标语言</param>
             </summary>
         </member>
         <member name="T:ASEva.UIWpf.WindowPanel">
