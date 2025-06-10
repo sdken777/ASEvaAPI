@@ -884,4 +884,45 @@ namespace ASEva
         /// </summary>
         public virtual Task DisableErrorPart() { return Task.CompletedTask; }
     }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.9.6) Component configuration with only one enable field
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.9.6) 只含一个是否启用字段的组件配置
+    /// </summary>
+    public class SimpleModuleConfig : ModuleConfig
+    {
+        /// \~English
+        /// <summary>
+        /// Whether to enable the component
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        public bool Enable { get; set; } = false;
+
+        public override string GetConfig()
+        {
+            return Enable ? "enable" : "disable";
+        }
+
+        public override void SetConfig(string config)
+        {
+            Enable = config == "enable";
+        }
+
+        public override Task<(ConfigStatus, string)> GetConfigStatus()
+        {
+            return Task.FromResult<(ConfigStatus, string)>((Enable ? ConfigStatus.Enabled : ConfigStatus.Disabled, null));
+        }
+
+        public override void DisableAll()
+        {
+            Enable = false;
+        }
+    }
 }
