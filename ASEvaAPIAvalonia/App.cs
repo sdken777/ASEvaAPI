@@ -432,7 +432,7 @@ namespace ASEva.UIAvalonia
                 String[] selected = null;
                 await App.RunDialog(async (window) =>
                 {
-                    if (startFolder != null) options.SuggestedStartLocation = await window.StorageProvider.TryGetFolderFromPathAsync(new Uri(startFolder));
+                    if (!String.IsNullOrEmpty(startFolder)) options.SuggestedStartLocation = await window.StorageProvider.TryGetFolderFromPathAsync(new Uri(startFolder));
                     var result = await window.StorageProvider.OpenFilePickerAsync(options);
                     if (result.Count > 0)
                     {
@@ -464,7 +464,7 @@ namespace ASEva.UIAvalonia
                 String selected = null;
                 await App.RunDialog(async (window) =>
                 {
-                    if (startFolder != null) options.SuggestedStartLocation = await window.StorageProvider.TryGetFolderFromPathAsync(new Uri(startFolder));
+                    if (!String.IsNullOrEmpty(startFolder)) options.SuggestedStartLocation = await window.StorageProvider.TryGetFolderFromPathAsync(new Uri(startFolder));
                     var result = await window.StorageProvider.SaveFilePickerAsync(options);
                     if (result != null) selected = result.Path.LocalPath;
                 });
@@ -482,7 +482,7 @@ namespace ASEva.UIAvalonia
                 String selected = null;
                 await App.RunDialog(async (window) =>
                 {
-                    if (startFolder != null) options.SuggestedStartLocation = await window.StorageProvider.TryGetFolderFromPathAsync(new Uri(startFolder));
+                    if (!String.IsNullOrEmpty(startFolder)) options.SuggestedStartLocation = await window.StorageProvider.TryGetFolderFromPathAsync(new Uri(startFolder));
                     var result = await window.StorageProvider.OpenFolderPickerAsync(options);
                     if (result.Count > 0) selected = result[0].Path.LocalPath;
                 });
