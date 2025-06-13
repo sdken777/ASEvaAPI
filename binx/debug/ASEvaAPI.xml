@@ -19,12 +19,12 @@
             <summary>
             (api:app=3.7.0) Add bus channel reference
             </summary>
-            <param name="busChannel">Bus channel, ranges 1~16</param>
+            <param name="busChannel">Bus channel, ranges 1~48</param>
             \~Chinese
             <summary>
             (api:app=3.7.0) 添加总线通道引用
             </summary>
-            <param name="busChannel">总线通道，1~16</param>
+            <param name="busChannel">总线通道，1~48</param>
         </member>
         <member name="M:ASEva.Agency.AddBusProtocolFile(System.String,ASEva.BusProtocolFileID[]@)">
             \~English
@@ -480,6 +480,26 @@
             <param name="dataID">数据ID，不可为null</param>
             <param name="data">数据，不可为null</param>
         </member>
+        <member name="M:ASEva.Agency.GenerateBusMessage(System.String,System.Collections.Generic.Dictionary{System.String,System.Double},System.Double,System.Nullable{System.UInt32})">
+            \~English
+            <summary>
+            (api:app=3.9.3) Generate bus message for transmission by signal values
+            </summary>
+            <param name="messageID">Bus message ID</param>
+            <param name="signalValues">Signal value table. The key is signal name (Signal name list can be queried by Agency.GetSignalNamesOfBusMessage )</param>
+            <param name="defaultValue">The default value for those not in the signal value table</param>
+            <param name="interval">Transmit period, in milliseconds (at least 10). If it is set to null, it is transmitted only once</param>
+            <returns>Bus message for transmission</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.9.3) 按信号值生成用于发送的报文
+            </summary>
+            <param name="messageID">总线报文ID</param>
+            <param name="signalValues">信号值表，键为信号名称，可先通过 Agency.GetSignalNamesOfBusMessage 获取信号名称列表</param>
+            <param name="defaultValue">信号值表未提供的信号使用的默认值</param>
+            <param name="interval">报文发送周期，单位毫秒（至少为10），若设为null则只发送一次</param>
+            <returns>用于发送的报文</returns>
+        </member>
         <member name="M:ASEva.Agency.GetAllChannelGuestSyncKeys">
             \~English
             <summary>
@@ -687,12 +707,12 @@
             <summary>
             Get all bus channels with data
             </summary>
-            <returns>Bus channels with data, value ranges 1~16</returns>
+            <returns>Bus channels with data, value ranges 1~48</returns>
             \~Chinese
             <summary>
             获取所有有效的总线通道
             </summary>
-            <returns>有效的总线通道列表，值为1~16</returns>
+            <returns>有效的总线通道列表，值为1~48</returns>
         </member>
         <member name="M:ASEva.Agency.GetAvailableRawChannels">
             \~English
@@ -747,13 +767,13 @@
             <summary>
             Get time shift configuration for bus raw data channel
             </summary>
-            <param name="busChannel">Bus channel, ranges 1~16</param>
+            <param name="busChannel">Bus channel, ranges 1~48</param>
             <returns>Time shift, in milliseconds</returns>
             \~Chinese
             <summary>
             获取总线数据通道延迟配置
             </summary>
-            <param name="busChannel">总线通道，1~16</param>
+            <param name="busChannel">总线通道，1~48</param>
             <returns>延迟配置，单位毫秒</returns>
         </member>
         <member name="M:ASEva.Agency.GetBusChannelsInfo(ASEva.SessionIdentifier)">
@@ -775,14 +795,14 @@
             <summary>
             Get whether there's data in a bus channel
             </summary>
-            <param name="busChannel">Bus channel, ranges 1~16</param>
+            <param name="busChannel">Bus channel, ranges 1~48</param>
             <param name="toleranceMillisecond">How many milliseconds (realistic time) can be tolerated without data</param>
             <returns>Whether there's data</returns>
             \~Chinese
             <summary>
             获取总线数据通道状态
             </summary>
-            <param name="busChannel">总线通道，1~16</param>
+            <param name="busChannel">总线通道，1~48</param>
             <param name="toleranceMillisecond">无数据的容忍时长</param>
             <returns>是否有数据</returns>
         </member>
@@ -803,14 +823,14 @@
             <summary>
             Get frame rate of messages with the same local ID at the same channel
             </summary>
-            <param name="busChannel">Bus channel, ranges 1~16</param>
+            <param name="busChannel">Bus channel, ranges 1~48</param>
             <param name="localID">Local ID of bus message</param>
             <returns>Frame rate, 0 means invalid</returns>
             \~Chinese
             <summary>
             获取指定通道收到的指定ID报文的帧率
             </summary>
-            <param name="busChannel">总线通道，1~16</param>
+            <param name="busChannel">总线通道，1~48</param>
             <param name="localID">通道内的报文ID</param>
             <returns>每秒帧率，0表示无效</returns>
         </member>
@@ -819,14 +839,14 @@
             <summary>
             Get information of message with the specified local ID at the specified channel
             </summary>
-            <param name="busChannel">Bus channel, ranges 1~16</param>
+            <param name="busChannel">Bus channel, ranges 1~48</param>
             <param name="localID">Local ID of bus message</param>
             <returns>Message information, null if not found</returns>
             \~Chinese
             <summary>
             获取指定通道上指定ID报文信息
             </summary>
-            <param name="busChannel">总线通道，1~16</param>
+            <param name="busChannel">总线通道，1~48</param>
             <param name="localID">通道内的报文ID</param>
             <returns>总线报文信息，无信息则返回null</returns>
         </member>
@@ -849,13 +869,13 @@
             <summary>
             Get payload of bus channel
             </summary>
-            <param name="busChannel">Bus channel, ranges 1~16</param>
+            <param name="busChannel">Bus channel, ranges 1~48</param>
             <returns>Payload in percentages, null if unavailable</returns>
             \~Chinese
             <summary>
             获取指定总线通道的负载百分比
             </summary>
-            <param name="busChannel">总线通道，1~16</param>
+            <param name="busChannel">总线通道，1~48</param>
             <returns>总线通道的负载百分比，若无效则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetBusProtocolFileChannel(System.String)">
@@ -864,13 +884,13 @@
             Get the bound channel of bus protocol
             </summary>
             <param name="protocolName">Bus protocol name (In the case of multiple channels, the channel name is included)</param>
-            <returns>Bus channel (1~16), null if not bound</returns>
+            <returns>Bus channel (1~48), null if not bound</returns>
             \~Chinese
             <summary>
             获取总线协议文件当前配置于哪个通道
             </summary>
             <param name="protocolName">总线协议名称（多通道的情况下包括通道名）</param>
-            <returns>总线通道（1~16），若未配置则返回null</returns>
+            <returns>总线通道（1~48），若未配置则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetBusProtocolFileIDList">
             \~English
@@ -969,7 +989,7 @@
             <summary>
             Get whether the channel is configured as guest synchronized
             </summary>
-            <param name="id">Guest synchronization ID, like bus.1, video.0, xxx.yyy(xxx is native plugin's type ID，yyy is channel name)</param>
+            <param name="id">Guest synchronization ID, like bus.1, video.0, xxx.yyy(xxx is native plugin's type ID, yyy is channel name)</param>
             <returns>Whether the channel is configured as guest synchronized</returns>
             \~Chinese
             <summary>
@@ -3131,12 +3151,12 @@
             <summary>
             (api:app=3.7.0) Remove bus channel reference
             </summary>
-            <param name="busChannel">Bus channel, ranges 1~16</param>
+            <param name="busChannel">Bus channel, ranges 1~48</param>
             \~Chinese
             <summary>
             (api:app=3.7.0) 移除总线通道引用
             </summary>
-            <param name="busChannel">总线通道，1~16</param>
+            <param name="busChannel">总线通道，1~48</param>
         </member>
         <member name="M:ASEva.Agency.RemoveBusProtocolFile(ASEva.BusProtocolFileID)">
             \~English
@@ -3499,13 +3519,13 @@
             <summary>
             Set time shift for bus raw data channel
             </summary>
-            <param name="busChannel">Bus channel, ranges 1~16</param>
+            <param name="busChannel">Bus channel, ranges 1~48</param>
             <param name="delay">Time shift, in milliseconds</param>
             \~Chinese
             <summary>
             设置总线数据通道延迟配置
             </summary>
-            <param name="busChannel">总线通道，1~16</param>
+            <param name="busChannel">总线通道，1~48</param>
             <param name="delay">延迟配置，单位毫秒</param>
         </member>
         <member name="M:ASEva.Agency.SetChannelGuestSyncFlag(System.String,System.Boolean)">
@@ -3513,7 +3533,7 @@
             <summary>
             Set whether the channel is configured as guest synchronized
             </summary>
-            <param name="id">Guest synchronization ID, like bus.1, video.0, xxx.yyy(xxx is native plugin's type ID，yyy is channel name)</param>
+            <param name="id">Guest synchronization ID, like bus.1, video.0, xxx.yyy(xxx is native plugin's type ID, yyy is channel name)</param>
             <param name="guestSync">Whether the channel is configured as guest synchronized</param>
             \~Chinese
             <summary>
@@ -4011,7 +4031,7 @@
             </summary>
             <param name="dataID">Data ID, should not be null or empty</param>
             <param name="bufferLength">Buffer length, ranges 1~1000</param>
-            <param name="timeout">The subscription will be closed if no dequeue for a along time, ranges 10～600 in seconds</param>
+            <param name="timeout">The subscription will be closed if no dequeue for a along time, ranges 10~600 in seconds</param>
             <returns>Data subscriber object, null if failed to initialize</returns>
             \~Chinese
             <summary>
@@ -4155,12 +4175,12 @@
             <summary>
             (api:app=3.4.5) Add bus channel reference
             </summary>
-            <param name="busChannel">Bus channel, ranges 1~16</param>
+            <param name="busChannel">Bus channel, ranges 1~48</param>
             \~Chinese
             <summary>
             (api:app=3.4.5) 添加总线通道引用
             </summary>
-            <param name="busChannel">总线通道，1~16</param>
+            <param name="busChannel">总线通道，1~48</param>
         </member>
         <member name="M:ASEva.AgencyAsync.AddDataLayer(System.String)">
             \~English
@@ -4337,6 +4357,26 @@
             <param name="nativeClassID">原生组件ID</param>
             <param name="dataID">数据ID，不可为null</param>
             <param name="data">数据，不可为null</param>
+        </member>
+        <member name="M:ASEva.AgencyAsync.GenerateBusMessage(System.String,System.Collections.Generic.Dictionary{System.String,System.Double},System.Double,System.Nullable{System.UInt32})">
+            \~English
+            <summary>
+            (api:app=3.9.3) Generate bus message for transmission by signal values
+            </summary>
+            <param name="messageID">Bus message ID</param>
+            <param name="signalValues">Signal value table. The key is signal name (Signal name list can be queried by Agency.GetSignalNamesOfBusMessage )</param>
+            <param name="defaultValue">The default value for those not in the signal value table</param>
+            <param name="interval">Transmit period, in milliseconds (at least 10). If it is set to null, it is transmitted only once</param>
+            <returns>Bus message for transmission</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.9.3) 按信号值生成用于发送的报文
+            </summary>
+            <param name="messageID">总线报文ID</param>
+            <param name="signalValues">信号值表，键为信号名称，可先通过 Agency.GetSignalNamesOfBusMessage 获取信号名称列表</param>
+            <param name="defaultValue">信号值表未提供的信号使用的默认值</param>
+            <param name="interval">报文发送周期，单位毫秒（至少为10），若设为null则只发送一次</param>
+            <returns>用于发送的报文</returns>
         </member>
         <member name="M:ASEva.AgencyAsync.GetAllChannelGuestSyncKeys">
             \~English
@@ -4529,12 +4569,12 @@
             <summary>
             Get all bus channels with data
             </summary>
-            <returns>Bus channels with data, value ranges 1~16</returns>
+            <returns>Bus channels with data, value ranges 1~48</returns>
             \~Chinese
             <summary>
             获取所有有效的总线通道
             </summary>
-            <returns>有效的总线通道列表，值为1~16</returns>
+            <returns>有效的总线通道列表，值为1~48</returns>
         </member>
         <member name="M:ASEva.AgencyAsync.GetAvailableRawChannels">
             \~English
@@ -4589,13 +4629,13 @@
             <summary>
             Get time shift configuration for bus raw data channel
             </summary>
-            <param name="busChannel">Bus channel, ranges 1~16</param>
+            <param name="busChannel">Bus channel, ranges 1~48</param>
             <returns>Time shift, in milliseconds</returns>
             \~Chinese
             <summary>
             获取总线数据通道延迟配置
             </summary>
-            <param name="busChannel">总线通道，1~16</param>
+            <param name="busChannel">总线通道，1~48</param>
             <returns>延迟配置，单位毫秒</returns>
         </member>
         <member name="M:ASEva.AgencyAsync.GetBusChannelsInfo(ASEva.SessionIdentifier)">
@@ -4617,14 +4657,14 @@
             <summary>
             Get whether there's data in a bus channel
             </summary>
-            <param name="busChannel">Bus channel, ranges 1~16</param>
+            <param name="busChannel">Bus channel, ranges 1~48</param>
             <param name="toleranceMillisecond">How many milliseconds (realistic time) can be tolerated without data</param>
             <returns>Whether there's data</returns>
             \~Chinese
             <summary>
             获取总线数据通道状态
             </summary>
-            <param name="busChannel">总线通道，1~16</param>
+            <param name="busChannel">总线通道，1~48</param>
             <param name="toleranceMillisecond">无数据的容忍时长</param>
             <returns>是否有数据</returns>
         </member>
@@ -4645,14 +4685,14 @@
             <summary>
             Get frame rate of messages with the same local ID at the same channel
             </summary>
-            <param name="busChannel">Bus channel, ranges 1~16</param>
+            <param name="busChannel">Bus channel, ranges 1~48</param>
             <param name="localID">Local ID of bus message</param>
             <returns>Frame rate, 0 means invalid</returns>
             \~Chinese
             <summary>
             获取指定通道收到的指定ID报文的帧率
             </summary>
-            <param name="busChannel">总线通道，1~16</param>
+            <param name="busChannel">总线通道，1~48</param>
             <param name="localID">通道内的报文ID</param>
             <returns>每秒帧率，0表示无效</returns>
         </member>
@@ -4661,14 +4701,14 @@
             <summary>
             Get information of message with the specified local ID at the specified channel
             </summary>
-            <param name="busChannel">Bus channel, ranges 1~16</param>
+            <param name="busChannel">Bus channel, ranges 1~48</param>
             <param name="localID">Local ID of bus message</param>
             <returns>Message information, null if not found</returns>
             \~Chinese
             <summary>
             获取指定通道上指定ID报文信息
             </summary>
-            <param name="busChannel">总线通道，1~16</param>
+            <param name="busChannel">总线通道，1~48</param>
             <param name="localID">通道内的报文ID</param>
             <returns>总线报文信息，无信息则返回null</returns>
         </member>
@@ -4691,13 +4731,13 @@
             <summary>
             Get payload of bus channel
             </summary>
-            <param name="busChannel">Bus channel, ranges 1~16</param>
+            <param name="busChannel">Bus channel, ranges 1~48</param>
             <returns>Payload in percentages, null if unavailable</returns>
             \~Chinese
             <summary>
             获取指定总线通道的负载百分比
             </summary>
-            <param name="busChannel">总线通道，1~16</param>
+            <param name="busChannel">总线通道，1~48</param>
             <returns>总线通道的负载百分比，若无效则返回null</returns>
         </member>
         <member name="M:ASEva.AgencyAsync.GetBusProtocolFileChannel(System.String)">
@@ -4706,13 +4746,13 @@
             Get the bound channel of bus protocol
             </summary>
             <param name="protocolName">Bus protocol name (In the case of multiple channels, the channel name is included)</param>
-            <returns>Bus channel (1~16), null if not bound</returns>
+            <returns>Bus channel (1~48), null if not bound</returns>
             \~Chinese
             <summary>
             获取总线协议文件当前配置于哪个通道
             </summary>
             <param name="protocolName">总线协议名称（多通道的情况下包括通道名）</param>
-            <returns>总线通道（1~16），若未配置则返回null</returns>
+            <returns>总线通道（1~48），若未配置则返回null</returns>
         </member>
         <member name="M:ASEva.AgencyAsync.GetBusProtocolFileIDList">
             \~English
@@ -4785,7 +4825,7 @@
             <summary>
             Get whether the channel is configured as guest synchronized
             </summary>
-            <param name="id">Guest synchronization ID, like bus.1, video.0, xxx.yyy(xxx is native plugin's type ID，yyy is channel name)</param>
+            <param name="id">Guest synchronization ID, like bus.1, video.0, xxx.yyy(xxx is native plugin's type ID, yyy is channel name)</param>
             <returns>Whether the channel is configured as guest synchronized</returns>
             \~Chinese
             <summary>
@@ -6367,12 +6407,12 @@
             <summary>
             (api:app=3.4.5) Remove bus channel reference
             </summary>
-            <param name="busChannel">Bus channel, ranges 1~16</param>
+            <param name="busChannel">Bus channel, ranges 1~48</param>
             \~Chinese
             <summary>
             (api:app=3.4.5) 移除总线通道引用
             </summary>
-            <param name="busChannel">总线通道，1~16</param>
+            <param name="busChannel">总线通道，1~48</param>
         </member>
         <member name="M:ASEva.AgencyAsync.RemoveEvent(System.Object)">
             \~English
@@ -6555,13 +6595,13 @@
             <summary>
             Set time shift for bus raw data channel
             </summary>
-            <param name="busChannel">Bus channel, ranges 1~16</param>
+            <param name="busChannel">Bus channel, ranges 1~48</param>
             <param name="delay">Time shift, in milliseconds</param>
             \~Chinese
             <summary>
             设置总线数据通道延迟配置
             </summary>
-            <param name="busChannel">总线通道，1~16</param>
+            <param name="busChannel">总线通道，1~48</param>
             <param name="delay">延迟配置，单位毫秒</param>
         </member>
         <member name="M:ASEva.AgencyAsync.SetChannelGuestSyncFlag(System.String,System.Boolean)">
@@ -6569,7 +6609,7 @@
             <summary>
             Set whether the channel is configured as guest synchronized
             </summary>
-            <param name="id">Guest synchronization ID, like bus.1, video.0, xxx.yyy(xxx is native plugin's type ID，yyy is channel name)</param>
+            <param name="id">Guest synchronization ID, like bus.1, video.0, xxx.yyy(xxx is native plugin's type ID, yyy is channel name)</param>
             <param name="guestSync">Whether the channel is configured as guest synchronized</param>
             \~Chinese
             <summary>
@@ -6983,7 +7023,7 @@
             </summary>
             <param name="dataID">Data ID, should not be null or empty</param>
             <param name="bufferLength">Buffer length, ranges 1~1000</param>
-            <param name="timeout">The subscription will be closed if no dequeue for a along time, ranges 10～600 in seconds</param>
+            <param name="timeout">The subscription will be closed if no dequeue for a along time, ranges 10~600 in seconds</param>
             <returns>Data subscriber object, null if failed to initialize</returns>
             \~Chinese
             <summary>
@@ -8505,7 +8545,7 @@
             </summary>
             <param name="dataID">Data ID, should not be null or empty</param>
             <param name="bufferLength">Buffer length, ranges 1~1000</param>
-            <param name="timeout">The subscription will be closed if no dequeue for a along time, ranges 10～600 in seconds</param>
+            <param name="timeout">The subscription will be closed if no dequeue for a along time, ranges 10~600 in seconds</param>
             <returns>Data subscriber object, null if failed to initialize</returns>
             \~Chinese
             <summary>
@@ -8608,7 +8648,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.7.10
+            version=3.9.6
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -8841,6 +8881,56 @@
             \~Chinese
             <summary>
             驱动名称
+            </summary>
+        </member>
+        <member name="T:ASEva.ChannelNumber">
+            \~English
+            <summary>
+            (api:app=3.9.0) Channel number
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.9.0) 通道数量
+            </summary>
+        </member>
+        <member name="P:ASEva.ChannelNumber.Bus">
+            \~English
+            <summary>
+            Bus data channel number
+            </summary>
+            \~Chinese
+            <summary>
+            总线数据通道数
+            </summary>
+        </member>
+        <member name="P:ASEva.ChannelNumber.Video">
+            \~English
+            <summary>
+            Video data channel number
+            </summary>
+            \~Chinese
+            <summary>
+            视频通道数
+            </summary>
+        </member>
+        <member name="P:ASEva.ChannelNumber.ManualTrigger">
+            \~English
+            <summary>
+            Built-in manual trigger channel number
+            </summary>
+            \~Chinese
+            <summary>
+            内建手动触发器通道数
+            </summary>
+        </member>
+        <member name="P:ASEva.ChannelNumber.PointCloud">
+            \~English
+            <summary>
+            Point cloud channel number
+            </summary>
+            \~Chinese
+            <summary>
+            点云通道数
             </summary>
         </member>
         <member name="T:ASEva.ColorRGBA">
@@ -9659,6 +9749,18 @@
             </summary>
             <returns>文件写入需要的所有数据类型</returns>
         </member>
+        <member name="M:ASEva.ModuleConfig.GetRawToSampleConfigs">
+            \~English
+            <summary>
+            (api:app=3.8.0) [Optional. Only for NativeClass and DeviceClass] Called while getting configs of auto converting raw data to general sample (for raw data output by this component)
+            </summary>
+            <returns>Configs of auto converting raw data to general sample, the key is raw data protocol, the value is config</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.8.0) [可选实现；仅限NativeClass和DeviceClass] 获取原始数据自动转通用样本的配置（针对本组件输出的原始数据）
+            </summary>
+            <returns>原始数据自动转通用样本的配置，键为原始数据协议，值为配置</returns>
+        </member>
         <member name="M:ASEva.ModuleConfig.DisableAll">
             \~English
             <summary>
@@ -9677,6 +9779,26 @@
             \~Chinese
             <summary>
             (api:app=3.1.4) [可选实现] 禁用存在错误的部分功能时被调用。若 ASEva.ModuleConfig.GetConfigStatus 不会返回 ASEva.ConfigStatus.EnabledWithWarning 则不需要实现
+            </summary>
+        </member>
+        <member name="T:ASEva.SimpleModuleConfig">
+            \~English
+            <summary>
+            (api:app=3.9.6) Component configuration with only one enable field
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.9.6) 只含一个是否启用字段的组件配置
+            </summary>
+        </member>
+        <member name="P:ASEva.SimpleModuleConfig.Enable">
+            \~English
+            <summary>
+            Whether to enable the component
+            </summary>
+            \~Chinese
+            <summary>
+            是否启用
             </summary>
         </member>
         <member name="T:ASEva.ConsoleClass">
@@ -12462,14 +12584,12 @@
         <member name="M:ASEva.NativeClass.GetRawToSampleProtocols">
             \~English
             <summary>
-            [Optional] Called while getting the IDs of general raw data channel that the data can be output as general sample directly
+            Deprecated, you should implement ModuleConfig.GetRawToSampleConfigs method
             </summary>
-            <returns>Dictionary. The key is general raw data channel ID, the value is general sample channel ID</returns>
             \~Chinese
             <summary>
-            [可选实现] 获取可直接作为样本输出的原始数据协议列表及对应的样本别名
+            已弃用，应实现ModuleConfig.GetRawToSampleConfigs方法
             </summary>
-            <returns>原始数据协议（键）列表及对应的样本别名（值）</returns>
         </member>
         <member name="T:ASEva.Plugin">
             \~English
@@ -12592,13 +12712,25 @@
         <member name="M:ASEva.Plugin.GetWorkflow">
             \~English
             <summary>
-            (api:app=3.1.0) [Optional] Called while getting workflow object
+            (api:app=3.1.0) Deprecated. Use GetWorkflow(clientSide) instead.
             </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.1.0) 弃用。请使用GetWorkflow(clientSide)替代。
+            </summary>
+        </member>
+        <member name="M:ASEva.Plugin.GetWorkflow(System.Boolean)">
+            \~English
+            <summary>
+            (api:app=3.9.1) [Optional] Called while getting workflow object
+            </summary>  
+            <param name="clientSide">Whether the workflow is client side</param>
             <returns>The workflow object</returns>
             \~Chinese
             <summary>
-            (api:app=3.1.0) [可选实现] 获取插件包含的流程对象时被调用
+            (api:app=3.9.1) [可选实现] 获取插件包含的流程对象时被调用
             </summary>
+            <param name="clientSide">是否为客户端流程</param>
             <returns>流程对象</returns>
         </member>
         <member name="M:ASEva.Plugin.GetGlobalPathKeys">
@@ -12803,6 +12935,18 @@
             </summary>
             <returns>长耗时操作的描述，若无则返回null</returns>
         </member>
+        <member name="M:ASEva.Plugin.OnSoundWave(System.Int16[])">
+            \~English
+            <summary>
+            (api:app=3.7.11) [Optional] Called while getting new sound wave data
+            </summary>
+            <param name="soundWave">The new sound wave data, 44100Hz, 16bit, mono</param>
+            \~Chinese
+            <summary>
+            (api:app=3.7.11) [可选实现] 在获取到新的声波数据时被调用
+            </summary>
+            <param name="soundWave">新的声波数据，44100Hz，16bit，单通道</param>
+        </member>
         <member name="T:ASEva.ProcessorOutputSample">
             \~English
             <summary>
@@ -12996,18 +13140,6 @@
             </summary>
             <param name="config">配置对象，定义数据处理行为</param>
             <returns>数据处理对象</returns>
-        </member>
-        <member name="M:ASEva.ProcessorClass.GetRawToSampleProtocols">
-            \~English
-            <summary>
-            [Optional] Called while getting the IDs of general raw data channel that the data can be output as general sample directly
-            </summary>
-            <returns>Dictionary. The key is general raw data channel ID, the value is general sample channel ID</returns>
-            \~Chinese
-            <summary>
-            [可选实现] 获取可直接作为样本输出的原始数据协议列表及对应的样本别名
-            </summary>
-            <returns>原始数据协议（键）列表及对应的样本别名（值）</returns>
         </member>
         <member name="T:ASEva.TimeOffsetSync">
             \~English
@@ -13808,11 +13940,11 @@
         <member name="P:ASEva.Samples.BusMessageSample.Channel">
             \~English
             <summary>
-            Bus channel, ranges 1~16
+            Bus channel, ranges 1~48
             </summary>
             \~Chinese
             <summary>
-            接收来源通道或发送目标通道（1~16）
+            接收来源通道或发送目标通道（1~48）
             </summary>
         </member>
         <member name="P:ASEva.Samples.BusMessageSample.Length">
@@ -16396,11 +16528,11 @@
         <member name="P:ASEva.BusMessage.Channel">
             \~English
             <summary>
-            Bus channel (1~16), the bus message will be transmitted through the mapped device channel
+            Bus channel (1~48), the bus message will be transmitted through the mapped device channel
             </summary>
             \~Chinese
             <summary>
-            总线设备通道序号（1~16），报文将在对应硬件上发送
+            总线设备通道序号（1~48），报文将在对应硬件上发送
             </summary>
         </member>
         <member name="P:ASEva.BusMessage.ID">
@@ -20319,6 +20451,46 @@
             被订阅数据的引用计数，键为数据ID
             </summary>
         </member>
+        <member name="T:ASEva.RawToSampleConfig">
+            \~English
+            <summary>
+            (api:app=3.8.0) Config of auto converting raw data to general sample
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.8.0) 原始数据自动转通用样本的配置
+            </summary>
+        </member>
+        <member name="P:ASEva.RawToSampleConfig.AliasName">
+            \~English
+            <summary>
+            Alias name of output general sample
+            </summary>
+            \~Chinese
+            <summary>
+            输出的通用样本别名
+            </summary>
+        </member>
+        <member name="P:ASEva.RawToSampleConfig.SampleProtocol">
+            \~English
+            <summary>
+            Output protocol of general sample, null means using raw data protocol
+            </summary>
+            \~Chinese
+            <summary>
+            输出的通用样本协议，若为null则使用原始数据协议
+            </summary>
+        </member>
+        <member name="P:ASEva.RawToSampleConfig.SampleTitle">
+            \~English
+            <summary>
+            Title of output general sample, null means not recorded each element value to data file (GeneralSample.NumberOfSignificants is 0)
+            </summary>
+            \~Chinese
+            <summary>
+            输出的通用样本标题，若为null则不记录各元素值至数据文件（即GeneralSample.NumberOfSignificants为0）
+            </summary>
+        </member>
         <member name="T:ASEva.Utility.ArrayPopulateExtensions">
             \~English
             <summary>
@@ -20337,6 +20509,36 @@
             \~Chinese
             <summary>
             用于初始化对象数组，避免空引用
+            </summary>
+        </member>
+        <member name="T:ASEva.Utility.Assert">
+            \~English
+            <summary>
+            (api:app=3.9.4) Used to ensure that subsequent code is executed under specified conditions 
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.9.4) 用于确保在指定条件下执行后续代码
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.Assert.HostSide">
+            \~English
+            <summary>
+            Throw an exception if not running on the host side
+            </summary>
+            \~Chinese
+            <summary>
+            若非主机端运行则触发异常
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.Assert.ClientSide">
+            \~English
+            <summary>
+            Throw an exception if not running on the client side
+            </summary>
+            \~Chinese
+            <summary>
+            若非客户端运行则触发异常
             </summary>
         </member>
         <member name="T:ASEva.Utility.AttributeParser">
@@ -21192,6 +21394,30 @@
             </summary>
             <param name="src">正交坐标系坐标</param>
             <returns>经纬度坐标</returns>
+        </member>
+        <member name="T:ASEva.Utility.ProcessGetter">
+            \~English
+            <summary>
+            (api:app=3.9.2) Get process by name
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.9.2) 根据进程名获取进程
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.ProcessGetter.Get(System.String)">
+            \~English
+            <summary>
+            Get process by name
+            </summary>
+            <param name="processName">Process name, without .exe suffix</param>
+            <returns>Process object, or null if process does not exist</returns>
+            \~Chinese
+            <summary>
+            根据进程名获取进程
+            </summary>
+            <param name="processName">进程名，不带.exe等后缀</param>
+            <returns>进程对象，如果进程不存在则返回null</returns>
         </member>
         <member name="T:ASEva.Utility.RegexUtil">
             \~English
@@ -22071,6 +22297,46 @@
             (api:app=3.0.0) 二值化信号滤波并提取上升沿
             </summary>
         </member>
+        <member name="T:ASEva.Utility.UpdateKeeper">
+            \~English
+            <summary>
+            (api:app=3.9.5) Asynchronous debouncing for the GUI (pause refreshing the GUI for a period after operations)
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.9.5) 实现界面的异步防抖（在操作后一段时间暂停刷新界面）
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.UpdateKeeper.KeepTime">
+            \~English
+            <summary>
+            The time to pause refreshing after an operation, in milliseconds
+            </summary>
+            \~Chinese
+            <summary>
+            操作后暂停刷新的时间，单位毫秒
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.UpdateKeeper.CanUpdate">
+            \~English
+            <summary>
+            Check if the GUI can currently be refreshed
+            </summary>
+            \~Chinese
+            <summary>
+            获取当前是否可以刷新界面
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.UpdateKeeper.Set">
+            \~English
+            <summary>
+            Notify that an operation has been performed
+            </summary>
+            \~Chinese
+            <summary>
+            通知进行了操作
+            </summary>
+        </member>
         <member name="T:ASEva.Utility.Xml">
             \~English
             <summary>
@@ -22178,14 +22444,24 @@
         <member name="M:ASEva.WindowClass.GetRawToSampleProtocols">
             \~English
             <summary>
-            [Optional] Called while getting the IDs of general raw data channel that the data can be output as general sample directly
+            Deprecated, you should implement GetRawToSampleConfigs method
             </summary>
-            <returns>Dictionary. The key is general raw data channel ID, the value is general sample channel ID</returns>
             \~Chinese
             <summary>
-            [可选实现] 获取可直接作为样本输出的原始数据协议列表及对应的样本别名
+            已弃用，应实现GetRawToSampleConfigs方法
             </summary>
-            <returns>原始数据协议（键）列表及对应的样本别名（值）</returns>
+        </member>
+        <member name="M:ASEva.WindowClass.GetRawToSampleConfigs">
+            \~English
+            <summary>
+            (api:app=3.8.0) [Optional] Called while getting configs of auto converting raw data to general sample (for raw data output by this component)
+            </summary>
+            <returns>Configs of auto converting raw data to general sample, the key is raw data protocol, the value is config</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.8.0) [可选实现] 获取原始数据自动转通用样本的配置（针对本组件输出的原始数据）
+            </summary>
+            <returns>原始数据自动转通用样本的配置，键为原始数据协议，值为配置</returns>
         </member>
         <member name="M:ASEva.WindowClass.Transform(System.String)">
             \~English
@@ -22330,44 +22606,44 @@
         <member name="M:ASEva.CommonWorkflow.OnGetAppLanguage">
             \~English
             <summary>
-            [Required] Get application's language
+            [Required] Get application's language (Always refresh while running application)
             </summary>
             <returns>Language</returns>
             \~Chinese
             <summary>
-            [必须实现] 获取语言
+            [必须实现] 获取语言（应用程序运行期间持续刷新）
             </summary>
             <returns>语言</returns>
         </member>
         <member name="M:ASEva.CommonWorkflow.OnGetDefaultGlobalParameters">
             \~English
             <summary>
-            [Optional] Get default global parameters, unavailable for client side software (default is empty)
+            [Optional] Get default global parameters, unavailable for client side software, default is empty (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 获取默认全局参数，客户端软件无效（默认空）
+            [可选实现] 获取默认全局参数，客户端软件无效，默认空（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CommonWorkflow.OnGetWebAPIAvailability">
             \~English
             <summary>
-            [Optional] Get whether to support calling web API. You can still directly call web API in plugins even if this is false (default is true)
+            [Optional] Get whether to support calling web API. You can still directly call web API in plugins even if this is false, default is true (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 获取是否需要支持Web API调用，不影响在插件内部直接使用Web API（默认true）
+            [可选实现] 获取是否需要支持Web API调用，不影响在插件内部直接使用Web API，默认true（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CommonWorkflow.OnGetPreferenceVariables">
             \~English
             <summary>
-            (api:app=3.4.6) [Optional] Called while getting the list of preference variable ID
+            (api:app=3.4.6) [Optional] Called while getting the list of preference variable ID (Only called once during startup)
             </summary>
             <returns>The list of preference variable ID</returns>
             \~Chinese
             <summary>
-            (api:app=3.4.6) [可选实现] 获取用户偏好变量ID列表时被调用
+            (api:app=3.4.6) [可选实现] 获取用户偏好变量ID列表时被调用（仅启动时获取一次）
             </summary>
             <returns>用户偏好变量ID列表</returns>
         </member>
@@ -22642,151 +22918,151 @@
         <member name="M:ASEva.CoreWorkflow.OnGetVideoAvailability">
             \~English
             <summary>
-            [Optional] Get whether to support video (default is true)
+            [Optional] Get whether to support video, default is true (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 获取是否需要支持视频（默认true）
+            [可选实现] 获取是否需要支持视频，默认true（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnGetAudioAvailability">
             \~English
             <summary>
-            [Optional] Get whether to support audio (default is true)
+            [Optional] Get whether to support audio, default is true (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 获取是否需要支持音频（默认true）
+            [可选实现] 获取是否需要支持音频，默认true（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnGetResourceMonitorAvailability">
             \~English
             <summary>
-            [Optional] Get whether to support resource monitoring (default is true)
+            [Optional] Get whether to support resource monitoring, default is true (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 获取是否需要支持资源监控（默认true）
+            [可选实现] 获取是否需要支持资源监控，默认true（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnGetOfflineMapAvailability">
             \~English
             <summary>
-            [Optional] Get whether to support offline map (default is true)
+            [Optional] Get whether to support offline map, default is true (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 获取是否需要支持离线地图（默认true）
+            [可选实现] 获取是否需要支持离线地图，默认true（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckSystemSleepPrevention">
             \~English
             <summary>
-            [Optional] Get whether to prevent system sleeping (default is true)
+            [Optional] Get whether to prevent system sleeping, default is true (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 返回是否阻止系统进入睡眠（默认true）
+            [可选实现] 返回是否阻止系统进入睡眠，默认true（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckMultiInstance">
             \~English
             <summary>
-            [Optional] Get whether to allow multiple application instances running
+            [Optional] Get whether to allow multiple application instances running (Only called once during startup)
             </summary>
             <returns>Whether to allow multiple application instances running</returns>
             \~Chinese
             <summary>
-            [可选实现] 返回是否允许多个实例同时运行
+            [可选实现] 返回是否允许多个实例同时运行（仅启动时获取一次）
             </summary>
             <returns>是否允许多个实例同时运行</returns>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckDisableGPUDecoding">
             \~English
             <summary>
-            [Optional] Get whether to disable GPU decoding
+            [Optional] Get whether to disable GPU decoding (Only called once during startup)
             </summary>
             <returns>Whether to disable GPU decoding</returns>
             \~Chinese
             <summary>
-            [可选实现] 返回是否禁用GPU解码
+            [可选实现] 返回是否禁用GPU解码（仅启动时获取一次）
             </summary>
             <returns>是否禁用GPU解码</returns>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckEnableSpecializedGPUDecoding">
             \~English
             <summary>
-            [Optional] Get whether to enable GPU specialized decoding
+            [Optional] Get whether to enable GPU specialized decoding (Only called once during startup)
             </summary>
             <returns>Whether to enable GPU specialized decoding (always false if GPU decoding is disabled)</returns>
             \~Chinese
             <summary>
-            [可选实现] 返回是否启用GPU专用解码
+            [可选实现] 返回是否启用GPU专用解码（仅启动时获取一次）
             </summary>
             <returns>是否启用GPU专用解码（若已禁用GPU解码则无效）</returns>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckPreferPRCWeb">
             \~English
             <summary>
-            [Optional] Get whether to use PRC web service
+            [Optional] Get whether to use PRC web service (Only called once during startup)
             </summary>
             <returns>Whether to use PRC web service</returns>
             \~Chinese
             <summary>
-            [可选实现] 返回是否使用境内网络服务
+            [可选实现] 返回是否使用境内网络服务（仅启动时获取一次）
             </summary>
             <returns>是否使用境内网络服务</returns>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckRequestAutoRoot">
             \~English
             <summary>
-            [Optional] Get whether to request auto root privilege (Only for Linux)
+            [Optional] Get whether to request auto root privilege, only for Linux (Only called once during startup)
             </summary>
             <returns>Whether to request auto root privilege</returns>
             \~Chinese
             <summary>
-            [可选实现] 返回是否请求自动root权限 (仅针对Linux操作系统)
+            [可选实现] 返回是否请求自动root权限，仅针对Linux操作系统（仅启动时获取一次）
             </summary>
             <returns>是否请求自动root权限</returns>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckAlwaysTransferBusMessage">
             \~English
             <summary>
-            (api:app=3.7.0) [Optional] Get whether the bus message data always transferred from native layer
+            (api:app=3.7.0) [Optional] Get whether the bus message data always transferred from native layer (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.7.0) [可选实现] 返回总线数据是否无条件从原生层传输
+            (api:app=3.7.0) [可选实现] 返回总线数据是否无条件从原生层传输（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckAlwaysTransferSignal">
             \~English
             <summary>
-            (api:app=3.7.0) [Optional] Get whether the signal data always transferred from native layer
+            (api:app=3.7.0) [Optional] Get whether the signal data always transferred from native layer (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.7.0) [可选实现] 返回信号数据是否无条件从原生层传输
+            (api:app=3.7.0) [可选实现] 返回信号数据是否无条件从原生层传输（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckAlwaysTransferPointCloud">
             \~English
             <summary>
-            (api:app=3.7.0) [Optional] Get whether the point cloud data always transferred from native layer
+            (api:app=3.7.0) [Optional] Get whether the point cloud data always transferred from native layer (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.7.0) [可选实现] 返回点云数据是否无条件从原生层传输
+            (api:app=3.7.0) [可选实现] 返回点云数据是否无条件从原生层传输（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnCheckAlwaysTransferProcessorVideo">
             \~English
             <summary>
-            (api:app=3.7.0) [Optional] Get whether the video data for processor always transferred from native layer
+            (api:app=3.7.0) [Optional] Get whether the video data for processor always transferred from native layer (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            (api:app=3.7.0) [可选实现] 返回处理用视频数据是否无条件从原生层传输
+            (api:app=3.7.0) [可选实现] 返回处理用视频数据是否无条件从原生层传输（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.CoreWorkflow.OnOpenDialog(System.Object,ASEva.DialogClassInfo,System.String)">
@@ -22980,21 +23256,21 @@
         <member name="M:ASEva.ClientWorkflow.OnGetAudioPlayerAvailability">
             \~English
             <summary>
-            [Optional] Get whether to support audio player (default is true)
+            [Optional] Get whether to support audio player, default is true (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 获取是否需要支持音频播放（默认true）
+            [可选实现] 获取是否需要支持音频播放，默认true（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.ClientWorkflow.OnCheckPreferPRCWeb">
             \~English
             <summary>
-            [Optional] Get whether to use PRC web service on client side software
+            [Optional] Get whether to use PRC web service on client side software (Only called once during startup)
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 返回是否在客户端软件使用境内网络服务
+            [可选实现] 返回是否在客户端软件使用境内网络服务（仅启动时获取一次）
             </summary>
         </member>
         <member name="M:ASEva.ClientWorkflow.OnGetConnectionConfig">

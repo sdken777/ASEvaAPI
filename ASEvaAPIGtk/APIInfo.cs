@@ -31,7 +31,7 @@ namespace ASEva.UIGtk
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 3, 7, 2); // Update log / 更新记录: 修正异步程序退出时异常
+            return new Version(3, 3, 7, 3); // Update log / 更新记录: 修正使用英伟达显卡时WebView可能白屏问题
         }
     }
 }

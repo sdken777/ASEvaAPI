@@ -35,6 +35,9 @@ namespace ASEva.UIGtk
                 // Redirection.RedirectMenu();
             }
 
+            // CHECK: 修正使用英伟达显卡时WebView可能白屏问题
+            setenv("WEBKIT_DISABLE_DMABUF_RENDERER", "1");
+
             if (AvaloniaAdaptorGtk.AvaloniaApp) setenv("GDK_BACKEND", "x11");
 
             this.attach = attach;
