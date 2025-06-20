@@ -866,13 +866,43 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// [Optional] Disable all component functions by user
+        /// (api:app=3.10.0) [Optional] Whether the component supports disabling all functions by user, default is true
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// [可选实现] 用户一键禁用功能时被调用
+        /// (api:app=3.10.0) [可选实现] 组件是否支持用户一键禁用功能，默认支持
+        /// </summary>
+        public virtual bool IsDisableModuleSupported() { return true; }
+
+        /// \~English
+        /// <summary>
+        /// [Required if disable supported] Disable all component functions by user
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// [支持一键禁用时必须实现] 用户一键禁用功能时被调用
         /// </summary>
         public virtual void DisableAll() { }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.0) [Optional] Whether the component supports enabling all functions by user, default is false
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) [可选实现] 组件是否支持用户一键启用功能，默认不支持
+        /// </summary>
+        public virtual bool IsEnableModuleSupported() { return false; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.0) [Required if enable supported] Enable all component functions by user
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) [支持一键启用时必须实现] 用户一键启用功能时被调用
+        /// </summary>
+        public virtual void EnableAll() { }
 
         /// \~English
         /// <summary>
@@ -923,6 +953,16 @@ namespace ASEva
         public override void DisableAll()
         {
             Enable = false;
+        }
+
+        public override void EnableAll()
+        {
+            Enable = true;
+        }
+
+        public override bool IsEnableModuleSupported()
+        {
+            return true;
         }
     }
 }

@@ -157,6 +157,11 @@ namespace ASEva
             return null;
         }
 
+        public string GetCoreImplementation()
+        {
+            return null;
+        }
+
         public string GetCurrentDataLayerPath()
         {
             return null;
@@ -606,6 +611,11 @@ namespace ASEva
             return Task.CompletedTask;
         }
 
+        public Task EnableModule(object caller, string classID)
+        {
+            return Task.CompletedTask;
+        }
+
         public Task EnablePlugin(string packID)
         {
             return Task.CompletedTask;
@@ -839,6 +849,11 @@ namespace ASEva
         public Task<(ConfigStatus, ConfigStatus[])> GetConsoleRelatedModulesConfigStatus(string consoleClassID)
         {
             return Task.FromResult<(ConfigStatus, ConfigStatus[])>((ConfigStatus.Disabled, null));
+        }
+        
+        public Task<String> GetCoreImplementation()
+        {
+            return Task.FromResult<String>(null);
         }
 
         public Task<ulong> GetCPUTick()
@@ -1311,6 +1326,16 @@ namespace ASEva
             return Task.FromResult<bool>(false);
         }
 
+        public Task<bool> IsDisableModuleSupported(string classID)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> IsEnableModuleSupported(string classID)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
         public Task<bool> IsFileOutputEnabled()
         {
             return Task.FromResult<bool>(false);
@@ -1347,6 +1372,11 @@ namespace ASEva
         }
 
         public Task<bool> IsSignalValid(string signalID, bool optional)
+        {
+            return Task.FromResult<bool>(false);
+        }
+
+        public Task<bool> IsSwitchSessionAvailable()
         {
             return Task.FromResult<bool>(false);
         }

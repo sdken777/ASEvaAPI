@@ -23,6 +23,7 @@ namespace ASEva
         Task DisableAllPlugins();
         Task DisableModule(object caller, String classID);
         Task DisablePlugin(String packID);
+        Task EnableModule(object caller, String classID);
         Task EnablePlugin(String packID);
         Task EnqueueDataToNative(object caller, String nativeClassID, String dataID, byte[] data);
         Task<BusMessage> GenerateBusMessage(String messageID, Dictionary<String, double> signalValues, double defaultValue, uint? interval);
@@ -70,6 +71,7 @@ namespace ASEva
         Task<ConsoleClassInfo> GetConsoleClassInfo(String consoleClassID);
         Task<Dictionary<string, ConsoleClassInfo>> GetConsoleClassTable();
         Task<(ConfigStatus, ConfigStatus[])> GetConsoleRelatedModulesConfigStatus(String consoleClassID);
+        Task<String> GetCoreImplementation();
         Task<ulong> GetCPUTick();
         Task<ulong> GetCPUTicksPerSecond();
         Task<double> GetCPUTime();
@@ -164,6 +166,8 @@ namespace ASEva
         Task<IntSize?> GetVideoRawSize(int channel, double timeline);
         Task<Samples.SpecialCameraType> GetVideoSpecialType(int channel);
         Task<bool> IsBusMessageBound(string busMessageID);
+        Task<bool> IsDisableModuleSupported(String classID);
+        Task<bool> IsEnableModuleSupported(String classID);
         Task<bool> IsFileOutputEnabled();
         Task<bool> IsInputChannelAvailable(String channelID);
         Task<bool> IsInternetConnected();
@@ -172,6 +176,7 @@ namespace ASEva
         Task<(bool, String)> IsReady();
         Task<bool> IsSampleChannelConflict(string channelID);
         Task<bool> IsSignalValid(String signalID, bool optional);
+        Task<bool> IsSwitchSessionAvailable();
         Task<bool> IsVideoDataAvailable(int channel, uint? tolerance);
         Task<BusSignalValue[]> ParseBusMessage(BusMessageSample busMessage);
         Task PublishData(String dataID, byte[] data);
@@ -453,6 +458,23 @@ namespace ASEva
         public static Task DisablePlugin(String packID)
         {
             return Handler.DisablePlugin(packID);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.0) Enable processor/native/device component component
+        /// </summary>
+        /// <param name="caller">The caller who calls this API, can be object of ASEva.CommonWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
+        /// <param name="classID">Component's class ID</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) 启用数据处理/原生/设备组件
+        /// </summary>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.CommonWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
+        /// <param name="classID">组件的类别ID</param>
+        public static Task EnableModule(object caller, String classID)
+        {
+            return Handler.EnableModule(caller, classID);
         }
 
         /// \~English
@@ -1223,6 +1245,21 @@ namespace ASEva
         public static Task<(ConfigStatus, ConfigStatus[])> GetConsoleRelatedModulesConfigStatus(String consoleClassID)
         {
             return Handler.GetConsoleRelatedModulesConfigStatus(consoleClassID);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.0) Get the ID of the core implementation
+        /// </summary>
+        /// <returns>The ID of the core implementation</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) 获取框架实现的ID
+        /// </summary>
+        /// <returns>框架实现的ID</returns>
+        public static Task<String> GetCoreImplementation()
+        {
+            return Handler.GetCoreImplementation();
         }
 
         /// \~English
@@ -2783,6 +2820,40 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.10.0) Get whether the module is supported for disabling
+        /// </summary>
+        /// <param name="classID">Module's class ID</param>
+        /// <returns>Whether the module is supported for disabling</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) 获取组件是否支持禁用
+        /// </summary>
+        /// <param name="classID">组件的类别ID</param>
+        /// <returns>是否支持禁用</returns>
+        public static Task<bool> IsDisableModuleSupported(String classID)
+        {
+            return Handler.IsDisableModuleSupported(classID);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.0) Get whether the module is supported for enabling
+        /// </summary>
+        /// <param name="classID">Module's class ID</param>
+        /// <returns>Whether the module is supported for enabling</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) 获取组件是否支持启用
+        /// </summary>
+        /// <param name="classID">组件的类别ID</param>
+        /// <returns>是否支持启用</returns>
+        public static Task<bool> IsEnableModuleSupported(String classID)
+        {
+            return Handler.IsEnableModuleSupported(classID);
+        }
+
+        /// \~English
+        /// <summary>
         /// Get whether file writing is enabled for online acquisition and offline processing
         /// </summary>
         /// <returns>Whether file writing is enabled for online acquisition and offline processing</returns>
@@ -2911,6 +2982,21 @@ namespace ASEva
         public static Task<bool> IsSignalValid(String signalID, bool optional)
         {
             return Handler.IsSignalValid(signalID, optional);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.0) Get whether it can be seamlessly switched to the next session preview or recording (only available in online mode)
+        /// </summary>
+        /// <returns>Whether it can be seamlessly switched to the next session</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) 获取是否可以无缝切换下一段session预览或采集（仅限在线模式）
+        /// </summary>
+        /// <returns>是否可以无缝切换下一段session</returns>
+        public static Task<bool> IsSwitchSessionAvailable()
+        {
+            return Handler.IsSwitchSessionAvailable();
         }
 
         /// \~English

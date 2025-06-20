@@ -119,7 +119,7 @@ namespace ASEva
             {
                 return FromDateTime(dateTime);
             }
-            else return new SessionIdentifier(0, 0, 0, 0, 0, 0);
+            else return new SessionIdentifier();
         }
 
         /// \~English
@@ -511,7 +511,7 @@ namespace ASEva
         /// </summary>
         public Sample()
         {
-            timestamp = new Timestamp(new SessionIdentifier(0, 0, 0, 0, 0, 0), 0, TimeOffsetSync.HostArrival, null);
+            timestamp = new Timestamp(new SessionIdentifier(), 0, TimeOffsetSync.HostArrival, null);
             timeline = 0;
         }
 

@@ -4491,6 +4491,16 @@ namespace ASEva
         /// 点云数据
         /// </summary>
         PointCloud = 7,
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.0) Function data
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) 功能数据
+        /// </summary>
+        Function = 8,
     }
 
     /// \~English

@@ -42,6 +42,7 @@ namespace ASEva
         String GetBusProtocolFilePath(BusProtocolFileID fileID);
         BusFileInfo[] GetBusProtocolFilesInfo();
         String GetConfigFilesRoot();
+        String GetCoreImplementation();
         String GetCurrentDataLayerPath();
         String GetCurrentProject();
         String GetDataPath();
@@ -712,6 +713,21 @@ namespace ASEva
         {
             if (Handler.ClientSide && Handler.BundleMode) return null;
             return Handler.GetConfigFilesRoot();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.0) Get the ID of the core implementation
+        /// </summary>
+        /// <returns>The ID of the core implementation</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) 获取框架实现的ID
+        /// </summary>
+        /// <returns>框架实现的ID</returns>
+        public static String GetCoreImplementation()
+        {
+            return Handler.GetCoreImplementation();
         }
 
         /// \~English

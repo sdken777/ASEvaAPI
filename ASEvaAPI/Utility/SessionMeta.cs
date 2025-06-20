@@ -149,6 +149,26 @@ namespace ASEva.Utility
 
         /// \~English
         /// <summary>
+        /// (api:app=3.10.0) Session ID of previous seamless session
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) 无缝衔接的上一个session的ID
+        /// </summary>
+        public SessionIdentifier SeamlessPreviousID { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.0) Session ID of next seamless session
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) 无缝衔接的下一个session的ID
+        /// </summary>
+        public SessionIdentifier SeamlessNextID { get; set; }
+
+        /// \~English
+        /// <summary>
         /// Session's start time of host machine posix time model in local date and time
         /// </summary>
         /// \~Chinese
@@ -381,6 +401,72 @@ namespace ASEva.Utility
 
         /// \~English
         /// <summary>
+        /// (api:app=3.10.0) Create session meta object (not write to file)
+        /// </summary>
+        /// <param name="filePath">File path</param>
+        /// <param name="id">Session ID</param>
+        /// <param name="guid">Session GUID</param>
+        /// <param name="length">Session's duration</param>
+        /// <param name="cpuTimeModel">CPU time model</param>
+        /// <param name="hostPosixModel">Host machine posix time model</param>
+        /// <param name="gnssPosixModel">Satellite posix time model</param>
+        /// <param name="hostSync">Whether host machine is synchronized with time server</param>
+        /// <param name="comment">Session's comment</param>
+        /// <param name="versions">Versions of software that recorded the session</param>
+        /// <param name="props">Session's properties</param>
+        /// <param name="pick">Session's pick ID, "origin" means it's the original data</param>
+        /// <param name="pickProps">Session's properties of picking</param>
+        /// <param name="seamlessPreviousID">Session ID of previous seamless session</param>
+        /// <param name="seamlessNextID">Session ID of next seamless session</param>
+        /// <returns>Created session meta object</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) 创建meta文件对象（仅创建对象，不写入文件）
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        /// <param name="id">Session ID</param>
+        /// <param name="guid">Session GUID</param>
+        /// <param name="length">Session长度</param>
+        /// <param name="cpuTimeModel">CPU时间模型</param>
+        /// <param name="hostPosixModel">主机Posix时间模型</param>
+        /// <param name="gnssPosixModel">卫星Posix时间模型</param>
+        /// <param name="hostSync">主机是否与授时服务器同步</param>
+        /// <param name="comment">Session的注释说明</param>
+        /// <param name="versions">采集Session的软件版本信息</param>
+        /// <param name="props">Session的属性</param>
+        /// <param name="pick">Session的截取ID，origin表示原始数据</param>
+        /// <param name="pickProps">Session的截取属性列表</param>
+        /// <param name="seamlessPreviousID">无缝衔接的上一个session的ID</param>
+        /// <param name="seamlessNextID">无缝衔接的下一个session的ID</param>
+        /// <returns>返回创建的对象</returns>
+        public static SessionMeta Create(String filePath, SessionIdentifier id, String guid, double? length, CPUTimeModel cpuTimeModel, PosixTimeModel hostPosixModel, PosixTimeModel gnssPosixModel, bool hostSync, String comment, Dictionary<String, Version> versions, Dictionary<String, String> props, String pick, Dictionary<String, String> pickProps, SessionIdentifier seamlessPreviousID, SessionIdentifier seamlessNextID)
+        {
+            if (filePath == null || filePath.Length == 0) return null;
+
+            var meta = new SessionMeta();
+            meta.FilePath = filePath;
+            meta.ID = id;
+            meta.GUID = guid;
+            if (meta.GUID == null) meta.GUID = Guid.NewGuid().ToString();
+            meta.Length = length;
+            meta.CPUTimeModel = cpuTimeModel;
+            meta.HostPosixModel = hostPosixModel;
+            meta.GNSSPosixModel = gnssPosixModel;
+            meta.HostSync = hostSync;
+            meta.Comment = comment;
+            meta.Versions = versions;
+            meta.Properties = props;
+            if (meta.Properties == null) meta.Properties = new Dictionary<string, string>();
+            meta.Pick = pick;
+            meta.PickProperties = pickProps;
+            if (meta.PickProperties == null) meta.PickProperties = new Dictionary<string, string>();
+            meta.SeamlessPreviousID = seamlessPreviousID;
+            meta.SeamlessNextID = seamlessNextID;
+            return meta;
+        }
+
+        /// \~English
+        /// <summary>
         /// Load from file
         /// </summary>
         /// <param name="filePath">File path</param>
@@ -592,6 +678,18 @@ namespace ASEva.Utility
                     }
                 }
 
+                var seamLessNodes = root.GetElementsByTagName("seamless");
+                if (seamLessNodes.Count > 0)
+                {
+                    if (seamLessNodes[0].Attributes["previous"] != null) meta.SeamlessPreviousID = SessionIdentifier.FromString(seamLessNodes[0].Attributes["previous"].Value);
+                    if (seamLessNodes[0].Attributes["next"] != null) meta.SeamlessNextID = SessionIdentifier.FromString(seamLessNodes[0].Attributes["next"].Value);
+                }
+                else
+                {
+                    meta.SeamlessPreviousID = new SessionIdentifier();
+                    meta.SeamlessNextID = new SessionIdentifier();
+                }
+
                 meta.FilePath = filePath;
             }
             catch (Exception ex) { Dump.Exception(ex); }
@@ -648,7 +746,7 @@ namespace ASEva.Utility
             }
 
             var pickNode = rootNode.AppendChild(xml.CreateElement("pick")) as XmlElement;
-            cw = new AttributeWriter(xml, pickNode);
+            cw = new AttributeWriter(pickNode);
             cw.WriteString("id", Pick == null ? "origin" : Pick);
 
             if (Comment != null)
@@ -660,7 +758,7 @@ namespace ASEva.Utility
             {
                 foreach (var item in PickProperties)
                 {
-                    cw = new AttributeWriter(xml, pickNode.AppendChild(xml.CreateElement("property")) as XmlElement);
+                    cw = new AttributeWriter(pickNode.AppendChild(xml.CreateElement("property")) as XmlElement);
                     cw.WriteString("key", item.Key);
                     cw.WriteString("value", item.Value);
                 }
@@ -670,7 +768,7 @@ namespace ASEva.Utility
             {
                 foreach (var item in Properties)
                 {
-                    cw = new AttributeWriter(xml, rootNode.AppendChild(xml.CreateElement("property")) as XmlElement);
+                    cw = new AttributeWriter(rootNode.AppendChild(xml.CreateElement("property")) as XmlElement);
                     cw.WriteString("key", item.Key);
                     cw.WriteString("value", item.Value);
                 }
@@ -684,6 +782,14 @@ namespace ASEva.Utility
                     versionNode.Attributes.Append(xml.CreateAttribute("key")).Value = item.Key;
                     versionNode.InnerText = item.Value.ToString();
                 }
+            }
+
+            if (SeamlessPreviousID.IsValid() || SeamlessNextID.IsValid())
+            {
+                var seamlessNode = rootNode.AppendChild(xml.CreateElement("seamless")) as XmlElement;
+                cw = new AttributeWriter(seamlessNode);
+                if (SeamlessPreviousID.IsValid()) cw.WriteString("previous", SeamlessPreviousID.ToString());
+                if (SeamlessNextID.IsValid()) cw.WriteString("next", SeamlessNextID.ToString());
             }
 
             try

@@ -434,6 +434,20 @@
             </summary>
             <param name="packID">插件包ID</param>
         </member>
+        <member name="M:ASEva.Agency.EnableModule(System.Object,System.String)">
+            \~English
+            <summary>
+            (api:app=3.10.0) Enable processor/native/device component component
+            </summary>
+            <param name="caller">The caller who calls this API, can be object of ASEva.CommonWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
+            <param name="classID">Component's class ID</param>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) 启用数据处理/原生/设备组件
+            </summary>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.CommonWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
+            <param name="classID">组件的类别ID</param>
+        </member>
         <member name="M:ASEva.Agency.EnablePlugin(System.String)">
             \~English
             <summary>
@@ -1133,6 +1147,18 @@
             <param name="consoleClassID">控制台组件ID</param>
             <param name="childrenStatus">子配置状态</param>
             <returns>配置状态</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetCoreImplementation">
+            \~English
+            <summary>
+            (api:app=3.10.0) Get the ID of the core implementation
+            </summary>
+            <returns>The ID of the core implementation</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) 获取框架实现的ID
+            </summary>
+            <returns>框架实现的ID</returns>
         </member>
         <member name="M:ASEva.Agency.GetCPUTick">
             \~English
@@ -2710,6 +2736,34 @@
             <param name="busMessageID">总线报文ID</param>
             <returns>是否已绑定</returns>
         </member>
+        <member name="M:ASEva.Agency.IsDisableModuleSupported(System.String)">
+            \~English
+            <summary>
+            (api:app=3.10.0) Get whether the module is supported for disabling
+            </summary>
+            <param name="classID">Module's class ID</param>
+            <returns>Whether the module is supported for disabling</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) 获取组件是否支持禁用
+            </summary>
+            <param name="classID">组件的类别ID</param>
+            <returns>是否支持禁用</returns>
+        </member>
+        <member name="M:ASEva.Agency.IsEnableModuleSupported(System.String)">
+            \~English
+            <summary>
+            (api:app=3.10.0) Get whether the module is supported for enabling
+            </summary>
+            <param name="classID">Module's class ID</param>
+            <returns>Whether the module is supported for enabling</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) 获取组件是否支持启用
+            </summary>
+            <param name="classID">组件的类别ID</param>
+            <returns>是否支持启用</returns>
+        </member>
         <member name="M:ASEva.Agency.IsFileOutputEnabled">
             \~English
             <summary>
@@ -2829,6 +2883,18 @@
             <param name="signalID">信号的全局唯一ID</param>
             <param name="optional">是否为可选配置</param>
             <returns>是否有效</returns>
+        </member>
+        <member name="M:ASEva.Agency.IsSwitchSessionAvailable">
+            \~English
+            <summary>
+            (api:app=3.10.0) Get whether it can be seamlessly switched to the next session preview or recording (only available in online mode)
+            </summary>
+            <returns>Whether it can be seamlessly switched to the next session</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) 获取是否可以无缝切换下一段session预览或采集（仅限在线模式）
+            </summary>
+            <returns>是否可以无缝切换下一段session</returns>
         </member>
         <member name="M:ASEva.Agency.IsVideoDataAvailable(System.Int32,System.Nullable{System.UInt32})">
             \~English
@@ -4328,6 +4394,20 @@
             </summary>
             <param name="packID">插件包ID</param>
         </member>
+        <member name="M:ASEva.AgencyAsync.EnableModule(System.Object,System.String)">
+            \~English
+            <summary>
+            (api:app=3.10.0) Enable processor/native/device component component
+            </summary>
+            <param name="caller">The caller who calls this API, can be object of ASEva.CommonWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
+            <param name="classID">Component's class ID</param>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) 启用数据处理/原生/设备组件
+            </summary>
+            <param name="caller">调用此API的对象，可为以下类型： ASEva.CommonWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
+            <param name="classID">组件的类别ID</param>
+        </member>
         <member name="M:ASEva.AgencyAsync.EnablePlugin(System.String)">
             \~English
             <summary>
@@ -4955,6 +5035,18 @@
             </summary>
             <param name="consoleClassID">控制台组件ID</param>
             <returns>1. 配置状态; 2. 子配置状态</returns>
+        </member>
+        <member name="M:ASEva.AgencyAsync.GetCoreImplementation">
+            \~English
+            <summary>
+            (api:app=3.10.0) Get the ID of the core implementation
+            </summary>
+            <returns>The ID of the core implementation</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) 获取框架实现的ID
+            </summary>
+            <returns>框架实现的ID</returns>
         </member>
         <member name="M:ASEva.AgencyAsync.GetCPUTick">
             \~English
@@ -6230,6 +6322,34 @@
             <param name="busMessageID">总线报文ID</param>
             <returns>是否已绑定</returns>
         </member>
+        <member name="M:ASEva.AgencyAsync.IsDisableModuleSupported(System.String)">
+            \~English
+            <summary>
+            (api:app=3.10.0) Get whether the module is supported for disabling
+            </summary>
+            <param name="classID">Module's class ID</param>
+            <returns>Whether the module is supported for disabling</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) 获取组件是否支持禁用
+            </summary>
+            <param name="classID">组件的类别ID</param>
+            <returns>是否支持禁用</returns>
+        </member>
+        <member name="M:ASEva.AgencyAsync.IsEnableModuleSupported(System.String)">
+            \~English
+            <summary>
+            (api:app=3.10.0) Get whether the module is supported for enabling
+            </summary>
+            <param name="classID">Module's class ID</param>
+            <returns>Whether the module is supported for enabling</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) 获取组件是否支持启用
+            </summary>
+            <param name="classID">组件的类别ID</param>
+            <returns>是否支持启用</returns>
+        </member>
         <member name="M:ASEva.AgencyAsync.IsFileOutputEnabled">
             \~English
             <summary>
@@ -6337,6 +6457,18 @@
             <param name="signalID">信号的全局唯一ID</param>
             <param name="optional">是否为可选配置</param>
             <returns>是否有效</returns>
+        </member>
+        <member name="M:ASEva.AgencyAsync.IsSwitchSessionAvailable">
+            \~English
+            <summary>
+            (api:app=3.10.0) Get whether it can be seamlessly switched to the next session preview or recording (only available in online mode)
+            </summary>
+            <returns>Whether it can be seamlessly switched to the next session</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) 获取是否可以无缝切换下一段session预览或采集（仅限在线模式）
+            </summary>
+            <returns>是否可以无缝切换下一段session</returns>
         </member>
         <member name="M:ASEva.AgencyAsync.IsVideoDataAvailable(System.Int32,System.Nullable{System.UInt32})">
             \~English
@@ -7512,6 +7644,18 @@
             </summary>
             <returns>配置文件根目录路径</returns>
         </member>
+        <member name="M:ASEva.AgencyLocal.GetCoreImplementation">
+            \~English
+            <summary>
+            (api:app=3.10.0) Get the ID of the core implementation
+            </summary>
+            <returns>The ID of the core implementation</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) 获取框架实现的ID
+            </summary>
+            <returns>框架实现的ID</returns>
+        </member>
         <member name="M:ASEva.AgencyLocal.GetCurrentDataLayerPath">
             \~English
             <summary>
@@ -8648,7 +8792,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.9.6
+            version=3.10.0
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -9761,14 +9905,44 @@
             </summary>
             <returns>原始数据自动转通用样本的配置，键为原始数据协议，值为配置</returns>
         </member>
-        <member name="M:ASEva.ModuleConfig.DisableAll">
+        <member name="M:ASEva.ModuleConfig.IsDisableModuleSupported">
             \~English
             <summary>
-            [Optional] Disable all component functions by user
+            (api:app=3.10.0) [Optional] Whether the component supports disabling all functions by user, default is true
             </summary>
             \~Chinese
             <summary>
-            [可选实现] 用户一键禁用功能时被调用
+            (api:app=3.10.0) [可选实现] 组件是否支持用户一键禁用功能，默认支持
+            </summary>
+        </member>
+        <member name="M:ASEva.ModuleConfig.DisableAll">
+            \~English
+            <summary>
+            [Required if disable supported] Disable all component functions by user
+            </summary>
+            \~Chinese
+            <summary>
+            [支持一键禁用时必须实现] 用户一键禁用功能时被调用
+            </summary>
+        </member>
+        <member name="M:ASEva.ModuleConfig.IsEnableModuleSupported">
+            \~English
+            <summary>
+            (api:app=3.10.0) [Optional] Whether the component supports enabling all functions by user, default is false
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) [可选实现] 组件是否支持用户一键启用功能，默认不支持
+            </summary>
+        </member>
+        <member name="M:ASEva.ModuleConfig.EnableAll">
+            \~English
+            <summary>
+            (api:app=3.10.0) [Required if enable supported] Enable all component functions by user
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) [支持一键启用时必须实现] 用户一键启用功能时被调用
             </summary>
         </member>
         <member name="M:ASEva.ModuleConfig.DisableErrorPart">
@@ -20291,6 +20465,16 @@
             点云数据
             </summary>
         </member>
+        <member name="F:ASEva.TransferStreamType.Function">
+            \~English
+            <summary>
+            (api:app=3.10.0) Function data
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) 功能数据
+            </summary>
+        </member>
         <member name="T:ASEva.TransferStatistics">
             \~English
             <summary>
@@ -22027,6 +22211,26 @@
             采集Session的软件版本信息（用于回溯）
             </summary>
         </member>
+        <member name="P:ASEva.Utility.SessionMeta.SeamlessPreviousID">
+            \~English
+            <summary>
+            (api:app=3.10.0) Session ID of previous seamless session
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) 无缝衔接的上一个session的ID
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.SessionMeta.SeamlessNextID">
+            \~English
+            <summary>
+            (api:app=3.10.0) Session ID of next seamless session
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) 无缝衔接的下一个session的ID
+            </summary>
+        </member>
         <member name="P:ASEva.Utility.SessionMeta.StartTimeLocal">
             \~English
             <summary>
@@ -22141,6 +22345,48 @@
             <param name="props">Session的属性</param>
             <param name="pick">Session的截取ID，origin表示原始数据</param>
             <param name="pickProps">Session的截取属性列表</param>
+            <returns>返回创建的对象</returns>
+        </member>
+        <member name="M:ASEva.Utility.SessionMeta.Create(System.String,ASEva.SessionIdentifier,System.String,System.Nullable{System.Double},ASEva.CPUTimeModel,ASEva.PosixTimeModel,ASEva.PosixTimeModel,System.Boolean,System.String,System.Collections.Generic.Dictionary{System.String,System.Version},System.Collections.Generic.Dictionary{System.String,System.String},System.String,System.Collections.Generic.Dictionary{System.String,System.String},ASEva.SessionIdentifier,ASEva.SessionIdentifier)">
+            \~English
+            <summary>
+            (api:app=3.10.0) Create session meta object (not write to file)
+            </summary>
+            <param name="filePath">File path</param>
+            <param name="id">Session ID</param>
+            <param name="guid">Session GUID</param>
+            <param name="length">Session's duration</param>
+            <param name="cpuTimeModel">CPU time model</param>
+            <param name="hostPosixModel">Host machine posix time model</param>
+            <param name="gnssPosixModel">Satellite posix time model</param>
+            <param name="hostSync">Whether host machine is synchronized with time server</param>
+            <param name="comment">Session's comment</param>
+            <param name="versions">Versions of software that recorded the session</param>
+            <param name="props">Session's properties</param>
+            <param name="pick">Session's pick ID, "origin" means it's the original data</param>
+            <param name="pickProps">Session's properties of picking</param>
+            <param name="seamlessPreviousID">Session ID of previous seamless session</param>
+            <param name="seamlessNextID">Session ID of next seamless session</param>
+            <returns>Created session meta object</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.0) 创建meta文件对象（仅创建对象，不写入文件）
+            </summary>
+            <param name="filePath">文件路径</param>
+            <param name="id">Session ID</param>
+            <param name="guid">Session GUID</param>
+            <param name="length">Session长度</param>
+            <param name="cpuTimeModel">CPU时间模型</param>
+            <param name="hostPosixModel">主机Posix时间模型</param>
+            <param name="gnssPosixModel">卫星Posix时间模型</param>
+            <param name="hostSync">主机是否与授时服务器同步</param>
+            <param name="comment">Session的注释说明</param>
+            <param name="versions">采集Session的软件版本信息</param>
+            <param name="props">Session的属性</param>
+            <param name="pick">Session的截取ID，origin表示原始数据</param>
+            <param name="pickProps">Session的截取属性列表</param>
+            <param name="seamlessPreviousID">无缝衔接的上一个session的ID</param>
+            <param name="seamlessNextID">无缝衔接的下一个session的ID</param>
             <returns>返回创建的对象</returns>
         </member>
         <member name="M:ASEva.Utility.SessionMeta.Load(System.String)">

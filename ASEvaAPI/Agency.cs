@@ -538,6 +538,24 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.10.0) Enable processor/native/device component component
+        /// </summary>
+        /// <param name="caller">The caller who calls this API, can be object of ASEva.CommonWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel , String(Controller name), etc.</param>
+        /// <param name="classID">Component's class ID</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) 启用数据处理/原生/设备组件
+        /// </summary>
+        /// <param name="caller">调用此API的对象，可为以下类型： ASEva.CommonWorkflow , ASEva.WindowClass , ASEva.DialogClass , ASEva.ConsoleClass , WindowPanel, ConfigPanel, String(控制者名称)等</param>
+        /// <param name="classID">组件的类别ID</param>
+        public static void EnableModule(object caller, String classID)
+        {
+            if (!AgencyAsync.SyncMode) return;
+            AgencyAsync.EnableModule(caller, classID).Wait();
+        }
+
+        /// \~English
+        /// <summary>
         /// Enable plugin (restart is still needed to activate it)
         /// </summary>
         /// <param name="packID">Plugin pack ID</param>
@@ -1447,6 +1465,21 @@ namespace ASEva
             var result = AgencyAsync.GetConsoleRelatedModulesConfigStatus(consoleClassID).Result;
             childrenStatus = result.Item2;
             return result.Item1;
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.0) Get the ID of the core implementation
+        /// </summary>
+        /// <returns>The ID of the core implementation</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) 获取框架实现的ID
+        /// </summary>
+        /// <returns>框架实现的ID</returns>
+        public static String GetCoreImplementation()
+        {
+            return AgencyLocal.GetCoreImplementation();
         }
 
         /// \~English
@@ -3494,6 +3527,42 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.10.0) Get whether the module is supported for disabling
+        /// </summary>
+        /// <param name="classID">Module's class ID</param>
+        /// <returns>Whether the module is supported for disabling</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) 获取组件是否支持禁用
+        /// </summary>
+        /// <param name="classID">组件的类别ID</param>
+        /// <returns>是否支持禁用</returns>
+        public static bool IsDisableModuleSupported(String classID)
+        {
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.IsDisableModuleSupported(classID).Result;
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.0) Get whether the module is supported for enabling
+        /// </summary>
+        /// <param name="classID">Module's class ID</param>
+        /// <returns>Whether the module is supported for enabling</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) 获取组件是否支持启用
+        /// </summary>
+        /// <param name="classID">组件的类别ID</param>
+        /// <returns>是否支持启用</returns>
+        public static bool IsEnableModuleSupported(String classID)
+        {
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.IsEnableModuleSupported(classID).Result;
+        }
+
+        /// \~English
+        /// <summary>
         /// Get whether file writing is enabled for online acquisition and offline processing
         /// </summary>
         /// <returns>Whether file writing is enabled for online acquisition and offline processing</returns>
@@ -3644,6 +3713,22 @@ namespace ASEva
         {
             if (!AgencyAsync.SyncMode) return false;
             return AgencyAsync.IsSignalValid(signalID, optional).Result;
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.0) Get whether it can be seamlessly switched to the next session preview or recording (only available in online mode)
+        /// </summary>
+        /// <returns>Whether it can be seamlessly switched to the next session</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.0) 获取是否可以无缝切换下一段session预览或采集（仅限在线模式）
+        /// </summary>
+        /// <returns>是否可以无缝切换下一段session</returns>
+        public static bool IsSwitchSessionAvailable()
+        {
+            if (!AgencyAsync.SyncMode) return false;
+            return AgencyAsync.IsSwitchSessionAvailable().Result;
         }
 
         /// \~English
