@@ -34,6 +34,9 @@ namespace ASEva.UIGtk
                 // Redirection.RedirectMenu();
             }
 
+            // CHECK: 修正使用英伟达显卡时WebView可能白屏问题
+            setenv("WEBKIT_DISABLE_DMABUF_RENDERER", "1");
+
             GLib.ExceptionManager.UnhandledException += (args) =>
             {
                 App.TriggerFatalException(args);
@@ -221,7 +224,10 @@ namespace ASEva.UIGtk
 		[DllImport("libgdk-3.so.0", SetLastError = true)]
 		private static extern IntPtr gdk_wayland_monitor_get_type();
 
-		[DllImport("libX11.so.6", SetLastError = true)]
+        [DllImport("libc.so.6")]
+        private static extern void setenv(String key, String val);
+
+        [DllImport("libX11.so.6", SetLastError = true)]
 		private static extern int XInitThreads();
     }
 }
