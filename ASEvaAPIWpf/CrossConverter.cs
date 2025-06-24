@@ -53,6 +53,42 @@ namespace ASEva.UIWpf
 
         /// \~English
         /// <summary>
+        /// (api:wpf=2.3.0) Enable converting Avalonia panel to WPF panel
+        /// </summary>
+        /// <returns>Whether initialization is successful</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:wpf=2.3.0) 启用Avalonia面板转WPF面板功能
+        /// </summary>
+        /// <returns>是否成功</returns>
+        public static bool EnableAvaloniaEmbedder()
+        {
+            if (wpfHostTypeForAvalonia != null) return true;
+
+            var entryFolder = EntryFolder.Path;
+            if (entryFolder == null) return false;
+
+            var dllPath = entryFolder + Path.DirectorySeparatorChar + "HwndHostAvalonia.dll";
+            if (!File.Exists(dllPath)) return false;
+
+            var assembly = Assembly.LoadFrom(dllPath);
+            if (assembly == null) return false;
+
+            var type = assembly.GetType("HwndHostAvalonia.WpfHost");
+            if (type != null)
+            {
+                var initMethod = type.BaseType.GetMethod("InitAvaloniaEnvironment");
+                if (initMethod == null) return false;
+
+                initMethod.Invoke(null, [false]);
+            }
+
+            wpfHostTypeForAvalonia = type;
+            return true;
+        }
+
+        /// \~English
+        /// <summary>
         /// (api:wpf=2.2.0) Enable converting Avalonia panel to WPF panel
         /// </summary>
         /// <param name="appBuilderCreation">The function to create AppBuilder object</param>
@@ -63,9 +99,9 @@ namespace ASEva.UIWpf
         /// </summary>
         /// <param name="appBuilderCreation">创建AppBuilder对象的函数</param>
         /// <returns>是否成功</returns>
-        public static bool EnableAvaloniaEmbedder(Func<object> appBuilderCreation = null)
+        public static bool EnableAvaloniaEmbedder(Func<object> appBuilderCreation)
         {
-            if (wpfHostTypeForAvalonia != null) return true;
+            if (wpfHostTypeForAvalonia != null) return false;
 
             var entryFolder = EntryFolder.Path;
             if (entryFolder == null) return false;

@@ -18,41 +18,34 @@ namespace ASEva.UIEto
     {
         /// \~English
         /// <summary>
-        /// (api:eto=3.4.0) Enable converting Avalonia panel to Eto panel (only for winform and wpf)
+        /// (api:eto=3.5.0) Enable converting Avalonia panel to Eto panel (only for some platforms)
+        /// </summary>
+        /// <returns>Whether initialization is successful</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=3.5.0) 启用Avalonia面板转Eto面板功能（仅限部分平台）
+        /// </summary>
+        /// <returns>是否成功</returns>
+        public static bool EnableAvaloniaEmbedder()
+        {
+            return AvaloniaEmbedder.Enable();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:eto=3.4.0) Enable converting Avalonia panel to Eto panel (only for some platforms)
         /// </summary>
         /// <param name="appBuilderCreation">The function to create AppBuilder object</param>
         /// <returns>Whether initialization is successful</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:eto=3.4.0) 启用Avalonia面板转Eto面板功能（仅限winform和wpf）
+        /// (api:eto=3.4.0) 启用Avalonia面板转Eto面板功能（仅限部分平台）
         /// </summary>
         /// <param name="appBuilderCreation">创建AppBuilder对象的函数</param>
         /// <returns>是否成功</returns>
-        public static bool EnableAvaloniaEmbedder(Func<object> appBuilderCreation = null)
+        public static bool EnableAvaloniaEmbedder(Func<object> appBuilderCreation)
         {
-            if (winformHostTypeForAvalonia != null && wpfHostTypeForAvalonia != null) return true;
-
-            var entryFolder = ASEva.Utility.EntryFolder.Path;
-            if (entryFolder == null) return false;
-
-            var dllPath = entryFolder + Path.DirectorySeparatorChar + "HwndHostAvalonia.dll";
-            if (!File.Exists(dllPath)) return false;
-
-            var assembly = Assembly.LoadFrom(dllPath);
-            if (assembly == null) return false;
-
-            var winformHostType = assembly.GetType("HwndHostAvalonia.WinformHost");
-            var wpfHostType = assembly.GetType("HwndHostAvalonia.WpfHost");
-            if (winformHostType == null || wpfHostType == null) return false;
-
-            var initMethod = winformHostType.BaseType.GetMethod("InitAvaloniaEnvironment");
-            if (initMethod == null) return false;
-
-            initMethod.Invoke(null, [appBuilderCreation]);
-
-            winformHostTypeForAvalonia = winformHostType;
-            wpfHostTypeForAvalonia = wpfHostType;
-            return true;
+            return AvaloniaEmbedder.Enable(appBuilderCreation);
         }
 
         /// \~English
@@ -71,24 +64,8 @@ namespace ASEva.UIEto
         {
             if (anyWindowPanel == null) return null;
             if (anyWindowPanel is WindowPanel) return anyWindowPanel as WindowPanel;
-            if (App.GetRunningUI() == "corewf" && winformHostTypeForAvalonia != null)
-            {
-                var convertMethod = winformHostTypeForAvalonia.GetMethod("ConvertWindowPanel");
-                if (convertMethod != null)
-                {
-                    var winformPanel = convertMethod.Invoke(null, [anyWindowPanel]);
-                    if (winformPanel != null) return App.ConvertWindowPanelToEto(winformPanel);
-                }
-            }
-            if (App.GetRunningUI() == "wpf" && wpfHostTypeForAvalonia != null)
-            {
-                var convertMethod = wpfHostTypeForAvalonia.GetMethod("ConvertWindowPanel");
-                if (convertMethod != null)
-                {
-                    var wpfPanel = convertMethod.Invoke(null, [anyWindowPanel]);
-                    if (wpfPanel != null) return App.ConvertWindowPanelToEto(wpfPanel);
-                }
-            }
+            var convertedFromAvalonia = AvaloniaEmbedder.ConvertWindowPanel(anyWindowPanel);
+            if (convertedFromAvalonia != null) return convertedFromAvalonia;
             return App.ConvertWindowPanelToEto(anyWindowPanel);
         }
 
@@ -108,28 +85,9 @@ namespace ASEva.UIEto
         {
             if (anyConfigPanel == null) return null;
             if (anyConfigPanel is ConfigPanel) return anyConfigPanel as ConfigPanel;
-            if (App.GetRunningUI() == "corewf" && winformHostTypeForAvalonia != null)
-            {
-                var convertMethod = winformHostTypeForAvalonia.GetMethod("ConvertConfigPanel");
-                if (convertMethod != null)
-                {
-                    var winformPanel = convertMethod.Invoke(null, [anyConfigPanel]);
-                    if (winformPanel != null) return App.ConvertConfigPanelToEto(winformPanel);
-                }
-            }
-            if (App.GetRunningUI() == "wpf" && wpfHostTypeForAvalonia != null)
-            {
-                var convertMethod = wpfHostTypeForAvalonia.GetMethod("ConvertConfigPanel");
-                if (convertMethod != null)
-                {
-                    var wpfPanel = convertMethod.Invoke(null, [anyConfigPanel]);
-                    if (wpfPanel != null) return App.ConvertConfigPanelToEto(wpfPanel);
-                }
-            }
+            var convertedFromAvalonia = AvaloniaEmbedder.ConvertConfigPanel(anyConfigPanel);
+            if (convertedFromAvalonia != null) return convertedFromAvalonia;
             return App.ConvertConfigPanelToEto(anyConfigPanel);
         }
-
-        private static Type winformHostTypeForAvalonia = null;
-        private static Type wpfHostTypeForAvalonia = null;
     }
 }

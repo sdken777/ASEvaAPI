@@ -922,6 +922,8 @@ namespace ASEva.UIEto
                 var workPath = EntryFolder.Path;
                 if (dllFileName != null && workPath != null)
                 {
+                    AvaloniaEmbedder.DoEnable(uiCode);
+
                     var dllFilePath = workPath + Path.DirectorySeparatorChar + dllFileName;
                     if (File.Exists(dllFilePath))
                     {

@@ -24,6 +24,20 @@ namespace HwndHostAvalonia
             ASEva.FuncManager.Register("GetAvaloniaAPIThirdPartyNotices", delegate { return APIInfo.GetThirdPartyNotices(); });
         }
 
+        public static void InitAvaloniaEnvironmentSimple(bool useRoundTheme)
+        {
+            if (avaloniaEnvInitialized) return;
+            
+            if (useRoundTheme)
+            {
+                InitAvaloniaEnvironment(() => AppBuilder.Configure<AvaloniaApplicationSimpleRoundTheme>().UsePlatformDetect().WithInterFont());
+            }
+            else
+            {
+                InitAvaloniaEnvironment(() => AppBuilder.Configure<AvaloniaApplicationSimpleTheme>().UsePlatformDetect().WithInterFont());
+            }
+        }
+
         protected static bool avaloniaEnvInitialized = false;
     }
 }

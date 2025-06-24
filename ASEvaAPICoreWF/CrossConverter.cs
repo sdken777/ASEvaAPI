@@ -53,6 +53,42 @@ namespace ASEva.UICoreWF
 
         /// \~English
         /// <summary>
+        /// (api:corewf=3.4.0) Enable converting Avalonia panel to Winform panel
+        /// </summary>
+        /// <returns>Whether initialization is successful</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:corewf=3.4.0) 启用Avalonia面板转Winform面板功能
+        /// </summary>
+        /// <returns>是否成功</returns>
+        public static bool EnableAvaloniaEmbedder()
+        {
+            if (winformHostTypeForAvalonia != null) return true;
+
+            var entryFolder = EntryFolder.Path;
+            if (entryFolder == null) return false;
+
+            var dllPath = entryFolder + Path.DirectorySeparatorChar + "HwndHostAvalonia.dll";
+            if (!File.Exists(dllPath)) return false;
+
+            var assembly = Assembly.LoadFrom(dllPath);
+            if (assembly == null) return false;
+
+            var type = assembly.GetType("HwndHostAvalonia.WinformHost");
+            if (type != null)
+            {
+                var initMethod = type.BaseType.GetMethod("InitAvaloniaEnvironmentSimple");
+                if (initMethod == null) return false;
+
+                initMethod.Invoke(null, [OperatingSystem.IsWindowsVersionAtLeast(11)]);
+            }
+
+            winformHostTypeForAvalonia = type;
+            return true;
+        }
+
+        /// \~English
+        /// <summary>
         /// (api:corewf=3.3.0) Enable converting Avalonia panel to Winform panel
         /// </summary>
         /// <param name="appBuilderCreation">The function to create AppBuilder object</param>
@@ -63,9 +99,9 @@ namespace ASEva.UICoreWF
         /// </summary>
         /// <param name="appBuilderCreation">创建AppBuilder对象的函数</param>
         /// <returns>是否成功</returns>
-        public static bool EnableAvaloniaEmbedder(Func<object> appBuilderCreation = null)
+        public static bool EnableAvaloniaEmbedder(Func<object> appBuilderCreation)
         {
-            if (winformHostTypeForAvalonia != null) return true;
+            if (winformHostTypeForAvalonia != null) return false;
 
             var entryFolder = EntryFolder.Path;
             if (entryFolder == null) return false;
