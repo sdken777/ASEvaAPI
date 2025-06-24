@@ -24,7 +24,7 @@
                     <ListBox Grid.Row="2" x:Name="checkListBox" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
                         <ListBox.Styles>
                             <Style Selector="ListBoxItem">
-                                <Setter Property="Padding" Value="8,0,8,0" />
+                                <Setter Property="Padding" Value="8,1,8,1" />
                             </Style>
                         </ListBox.Styles>
                         <ListBox.ItemTemplate>
@@ -72,7 +72,7 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <Border Margin="4" CornerRadius="3" Background="LightYellow" BorderThickness="2" BorderBrush="{Binding BorderBrush}" IsVisible="{Binding IsVisible}">
-                                        <local:TestControl Height="80" x:Name="testControl" PointerReleased="testControl_PointerReleased" />
+                                        <local:TestControl Height="90" x:Name="testControl" PointerReleased="testControl_PointerReleased" />
                                     </Border>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>

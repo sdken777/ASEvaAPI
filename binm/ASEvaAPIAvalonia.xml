@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.3.5
+            version=1.4.0
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -165,26 +165,6 @@
             \~Chinese
             <summary>
             (api:avalonia=1.1.1) 获取Eto初始化结果，null表示还未进行初始化
-            </summary>
-        </member>
-        <member name="T:ASEva.UIAvalonia.AvaloniaApplication">
-            \~English
-            <summary>
-            (api:avalonia=1.0.0) Default application object
-            </summary>
-            \~Chinese
-            <summary>
-            (api:avalonia=1.0.0) 默认的应用程序对象
-            </summary>
-        </member>
-        <member name="T:ASEva.UIAvalonia.AvaloniaApplicationSimpleTheme">
-            \~English
-            <summary>
-            (api:avalonia=1.1.4) Application object using simple style
-            </summary>
-            \~Chinese
-            <summary>
-            (api:avalonia=1.1.4) 使用简易样式的应用程序对象
             </summary>
         </member>
         <member name="T:ASEva.UIAvalonia.ColorPickerDialog">
@@ -728,6 +708,36 @@
             Wires up the controls and optionally loads XAML markup and attaches dev tools (if Avalonia.Diagnostics package is referenced).
             </summary>
             <param name="loadXaml">Should the XAML be loaded into the component.</param>
+        </member>
+        <member name="T:ASEva.UIAvalonia.AvaloniaApplication">
+            \~English
+            <summary>
+            (api:avalonia=1.0.0) Default application object
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.0.0) 默认的应用程序对象
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.AvaloniaApplicationSimpleRoundTheme">
+            \~English
+            <summary>
+            (api:avalonia=1.4.0) Application object using round corner simple style
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.4.0) 使用圆角简易样式的应用程序对象
+            </summary>
+        </member>
+        <member name="T:ASEva.UIAvalonia.AvaloniaApplicationSimpleTheme">
+            \~English
+            <summary>
+            (api:avalonia=1.1.4) Application object using simple style
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.1.4) 使用简易样式的应用程序对象
+            </summary>
         </member>
         <member name="T:ASEva.UIAvalonia.BackgroundColorSetter">
             \~English

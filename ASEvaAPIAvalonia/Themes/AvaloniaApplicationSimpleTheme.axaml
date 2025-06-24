@@ -7,6 +7,6 @@
         <StyleInclude Source="avares://Avalonia.Controls.ColorPicker/Themes/Simple/Simple.xaml" />
         <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Simple.xaml" />
         <StyleInclude Source="avares://OxyPlot.Avalonia/Themes/Default.axaml"/>
-        <StyleInclude Source="avares://ASEvaAPIAvalonia/ButtonHyperlinkSimpleTheme.axaml"/>
+        <StyleInclude Source="avares://ASEvaAPIAvalonia/Themes/ButtonHyperlinkSimpleTheme.axaml"/>
     </Application.Styles>
 </Application>

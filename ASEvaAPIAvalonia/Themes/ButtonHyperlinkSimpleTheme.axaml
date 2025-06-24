@@ -1,7 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style Selector="Button.hyperlink">
-        <Setter Property="Foreground" Value="{StaticResource ThemeAccentColor}" />
+        <Setter Property="Foreground" Value="#0033ee" />
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Cursor" Value="Hand" />
@@ -10,9 +10,6 @@
             <ControlTemplate>
                 <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" Background="{TemplateBinding Background}" TextDecorations="Underline" VerticalAlignment="Center" Margin="3">
                     <TextBlock.Styles>
-                        <Style Selector="TextBlock:pointerover">
-                            <Setter Property="Foreground" Value="{StaticResource ThemeAccentColor2}"/>
-                        </Style>
                         <Style Selector="TextBlock:disabled">
                             <Setter Property="Foreground" Value="Gray"/>
                         </Style>

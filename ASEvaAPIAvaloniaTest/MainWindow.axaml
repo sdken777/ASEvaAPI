@@ -59,27 +59,11 @@
                 <MenuItem Header="{DynamicResource menu-sub-item-b}" />
             </MenuItem>
             <Separator />
-            <MenuItem Header="{DynamicResource menu-check-a}" x:Name="itemCheckA">
-                <MenuItem.Icon>
-                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding CheckedA}" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="{DynamicResource menu-check-b}" x:Name="itemCheckB">
-                <MenuItem.Icon>
-                    <CheckBox IsHitTestVisible="False" IsChecked="{Binding CheckedB}" />
-                </MenuItem.Icon>
-            </MenuItem>
+            <CheckBox Content="{DynamicResource menu-check-a}" IsChecked="{Binding CheckedA}" />
+            <CheckBox Content="{DynamicResource menu-check-b}" IsChecked="{Binding CheckedB}" />
             <Separator />
-            <MenuItem Header="{DynamicResource menu-radio-a}" x:Name="itemRadioA">
-                <MenuItem.Icon>
-                    <RadioButton IsHitTestVisible="False" IsChecked="{Binding !SelectedB}" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="{DynamicResource menu-radio-b}" x:Name="itemRadioB">
-                <MenuItem.Icon>
-                    <RadioButton IsHitTestVisible="False" IsChecked="{Binding SelectedB}" />
-                </MenuItem.Icon>
-            </MenuItem>
+            <RadioButton Content="{DynamicResource menu-radio-a}" IsChecked="{Binding !SelectedB}" />
+            <RadioButton Content="{DynamicResource menu-radio-b}" IsChecked="{Binding SelectedB}" />
             <Separator />
             <MenuItem Header="{DynamicResource menu-snapshot}" x:Name="itemSnapshot" />
             <Separator />

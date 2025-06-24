@@ -15,7 +15,7 @@
                 <ListBox Grid.Row="2" x:Name="checkListBox" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3" ItemsSource="{Binding CheckItems}">
                     <ListBox.Styles>
                         <Style Selector="ListBoxItem">
-                            <Setter Property="Padding" Value="8,0,8,0" />
+                            <Setter Property="Padding" Value="8,1,8,1" />
                         </Style>
                     </ListBox.Styles>
                     <ListBox.ItemTemplate>

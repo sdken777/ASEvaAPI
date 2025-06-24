@@ -46,8 +46,8 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(ASEvaAPIBundleMode)' != 'true'">
-    <AvaloniaXaml Remove="AvaloniaApplicationBundle.axaml" />
-    <Compile Remove="AvaloniaApplicationBundle.axaml.cs" />
+    <AvaloniaXaml Remove="Themes\AvaloniaApplicationBundle.axaml" />
+    <Compile Remove="Themes\AvaloniaApplicationBundle.axaml.cs" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(ASEvaAPIBundleMode)' == 'true'">
@@ -73,10 +73,12 @@
 
   <ItemGroup Condition="'$(ASEvaAPIBundleMode)' == 'true'">
     <Compile Remove="App.cs" />
-    <AvaloniaXaml Remove="AvaloniaApplication.axaml" />
-    <Compile Remove="AvaloniaApplication.axaml.cs" />
-    <AvaloniaXaml Remove="AvaloniaApplicationSimpleTheme.axaml" />
-    <Compile Remove="AvaloniaApplicationSimpleTheme.axaml.cs" />
+    <AvaloniaXaml Remove="Themes\AvaloniaApplication.axaml" />
+    <Compile Remove="Themes\AvaloniaApplication.axaml.cs" />
+    <AvaloniaXaml Remove="Themes\AvaloniaApplicationSimpleTheme.axaml" />
+    <Compile Remove="Themes\AvaloniaApplicationSimpleTheme.axaml.cs" />
+    <AvaloniaXaml Remove="Themes\AvaloniaApplicationSimpleRoundTheme.axaml" />
+    <Compile Remove="Themes\AvaloniaApplicationSimpleRoundTheme.axaml.cs" />
     <AvaloniaXaml Remove="Cross\*.axaml" />
     <Compile Remove="Cross\*.*" />
     <AvaloniaXaml Remove="Eto\*.axaml" />

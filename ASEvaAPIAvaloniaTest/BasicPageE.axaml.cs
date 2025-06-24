@@ -105,7 +105,7 @@ namespace ASEvaAPIAvaloniaTest
                 BorderThickness = new Thickness(2);
                 BorderBrush = new SolidColorBrush(Colors.LightGray);
                 CornerRadius = new CornerRadius(3);
-                Child = new TestControl{ Width = 250, Height = 80 };
+                Child = new TestControl{ Width = 250, Height = 90 };
             }
 
             public bool IsSelected

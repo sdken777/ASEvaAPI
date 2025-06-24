@@ -23,10 +23,6 @@ namespace ASEvaAPIAvaloniaTest
             Closing += MainWindow_Closing;
             itemFullScreen.Click += itemFullScreen_Click;
             itemExit.Click += itemExit_Click;
-            itemCheckA.Click += itemCheckA_Click;
-            itemCheckB.Click += itemCheckB_Click;
-            itemRadioA.Click += itemRadioA_Click;
-            itemRadioB.Click += itemRadioB_Click;
             itemSnapshot.Click += itemSnapshot_Click;
             itemExceptionMain.Click += itemExceptionMain_Click;
             itemExceptionSub.Click += itemExceptionSub_Click;
@@ -75,30 +71,6 @@ namespace ASEvaAPIAvaloniaTest
         private void itemExit_Click(object sender, RoutedEventArgs e)
         {
             Close();
-        }
-
-        private void itemCheckA_Click(object sender, RoutedEventArgs e)
-        {
-            var model = DataContext as Model;
-            model.CheckedA = !model.CheckedA;
-        }
-
-        private void itemCheckB_Click(object sender, RoutedEventArgs e)
-        {
-            var model = DataContext as Model;
-            model.CheckedB = !model.CheckedB;
-        }
-
-        private void itemRadioA_Click(object sender, RoutedEventArgs e)
-        {
-            var model = DataContext as Model;
-            model.SelectedB = false;
-        }
-
-        private void itemRadioB_Click(object sender, RoutedEventArgs e)
-        {
-            var model = DataContext as Model;
-            model.SelectedB = true;
         }
 
         private async void itemSnapshot_Click(object sender, RoutedEventArgs e)
