@@ -28,7 +28,7 @@ namespace ASEva.UIWpf
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 3, 0, 0); // Update log / 更新记录: 新增无参EnableAvaloniaEmbedder
+            return new Version(2, 3, 0, 1); // Update log / 更新记录: 修正bug
         }
 
         /// \~English

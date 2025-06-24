@@ -77,7 +77,7 @@ namespace ASEva.UIWpf
             var type = assembly.GetType("HwndHostAvalonia.WpfHost");
             if (type != null)
             {
-                var initMethod = type.BaseType.GetMethod("InitAvaloniaEnvironment");
+                var initMethod = type.BaseType.GetMethod("InitAvaloniaEnvironmentSimple");
                 if (initMethod == null) return false;
 
                 initMethod.Invoke(null, [false]);
