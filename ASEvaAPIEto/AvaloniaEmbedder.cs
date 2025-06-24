@@ -16,7 +16,7 @@ namespace ASEva.UIEto
                 switch (uiCode)
                 {
                     case "corewf":
-                        useRoundTheme = OperatingSystem.IsWindowsVersionAtLeast(11);
+                        useRoundTheme = OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22000); // windows 11
                         break;
                     case "wpf":
                         useRoundTheme = false;

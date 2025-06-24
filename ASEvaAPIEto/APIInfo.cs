@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 5, 0, 0); // Update log / 更新记录: 新增无参EnableAvaloniaEmbedder
+            return new Version(3, 5, 0, 1); // Update log / 更新记录: 修正windows11判断
         }
 
         /// \~English

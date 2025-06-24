@@ -80,7 +80,7 @@ namespace ASEva.UICoreWF
                 var initMethod = type.BaseType.GetMethod("InitAvaloniaEnvironmentSimple");
                 if (initMethod == null) return false;
 
-                initMethod.Invoke(null, [OperatingSystem.IsWindowsVersionAtLeast(11)]);
+                initMethod.Invoke(null, [OperatingSystem.IsWindowsVersionAtLeast(10, 0, 22000)/* windows 11 */]);
             }
 
             winformHostTypeForAvalonia = type;

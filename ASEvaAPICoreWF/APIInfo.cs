@@ -28,7 +28,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 4, 0, 0); // Update log / 更新记录: 新增无参EnableAvaloniaEmbedder
+            return new Version(3, 4, 0, 1); // Update log / 更新记录: 修正win11判断
         }
 
         /// \~English
