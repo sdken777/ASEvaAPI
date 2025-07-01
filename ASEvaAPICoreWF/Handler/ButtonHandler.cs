@@ -1,4 +1,4 @@
-using System;
+锘縰sing System;
 using System.Drawing;
 
 namespace ASEva.UICoreWF
@@ -9,7 +9,7 @@ namespace ASEva.UICoreWF
 		{
 			base.Initialize();
 
-			// CHECK: 修正部分情况下按钮背景色不透明问题
+			// CHECK: 淇閮ㄥ垎鎯呭喌涓嬫寜閽儗鏅壊涓嶉�忔槑闂
 			Control.BackColor = Color.Transparent;
 		}
 	}
