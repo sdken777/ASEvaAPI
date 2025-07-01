@@ -28,7 +28,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 4, 0, 1); // Update log / 更新记录: 修正win11判断
+            return new Version(3, 4, 0, 2); // Update log / 更新记录: 修正部分情况下按钮背景色不透明问题
         }
 
         /// \~English
