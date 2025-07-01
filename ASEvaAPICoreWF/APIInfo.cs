@@ -28,7 +28,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 3, 1, 1); // Update log / 更新记录: DialogPanel对话框不可最小化
+            return new Version(3, 3, 1, 2); // Update log / 更新记录: 修正部分情况下按钮背景色不透明问题
         }
 
         /// \~English
