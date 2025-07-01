@@ -172,6 +172,11 @@ namespace ASEva
             return null;
         }
 
+        public BusMessage GenerateBusMessage(string messageID, Dictionary<string, double> signalValues, double defaultValue, uint? interval)
+        {
+            return null;
+        }
+
         public void SendBusMessage(BusMessage msg)
         {
         }
