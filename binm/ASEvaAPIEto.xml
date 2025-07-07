@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIEto.APIInfo">
             <summary>
-            version=3.5.0
+            version=3.5.1
             </summary>
         </member>
         <member name="M:ASEva.UIEto.APIInfo.GetAPIVersion">
@@ -218,6 +218,16 @@
             获取应用程序的工作路径
             </summary>
             <value>工作路径</value>
+        </member>
+        <member name="P:ASEva.UIEto.App.DefaultBackgroundColor">
+            \~English
+            <summary>
+            (api:eto=3.5.1) Default background color
+            </summary>
+            \~Chinese
+            <summary>
+            (api:eto=3.5.1) 默认背景色
+            </summary>
         </member>
         <member name="M:ASEva.UIEto.App.ConvertControlToEto(System.Object)">
             \~English

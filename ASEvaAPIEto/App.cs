@@ -345,6 +345,22 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
+        /// (api:eto=3.5.1) Default background color
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=3.5.1) 默认背景色
+        /// </summary>
+        public static Color DefaultBackgroundColor
+        {
+            get
+            {
+                return GetRunningOS() == "windows" ? SystemColors.Control : SystemColors.ControlBackground;
+            }
+        }
+
+        /// \~English
+        /// <summary>
         /// Convert platform control to Eto control
         /// </summary>
         /// <param name="platformControl">Platform control</param>
