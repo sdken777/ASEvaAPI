@@ -62,6 +62,7 @@ namespace ASEva.UIWpf
             OxyPlotView.Factory = new OxyPlotViewFactoryWpf();
 
             FuncManager.Register("GetUIBackendAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
+            CrossConverter.EnableWinformEmbedder();
 
             uiBackend = null;
             webViewBackend = "webview2";
@@ -104,7 +105,7 @@ namespace ASEva.UIWpf
         {
             if (platformWindowPanel?.GetType().ToString() == "ASEva.UICoreWF.WindowPanel")
             {
-                if (CrossConverter.EnableWinformEmbedder()) platformWindowPanel = CrossConverter.ConvertWindowPanel(platformWindowPanel);
+                platformWindowPanel = CrossConverter.ConvertWindowPanel(platformWindowPanel);
             }
             if (platformWindowPanel is WindowPanel) return new EtoWindowPanel(platformWindowPanel as WindowPanel);
             else return null;
@@ -114,7 +115,7 @@ namespace ASEva.UIWpf
         {
             if (platformConfigPanel?.GetType().ToString() == "ASEva.UICoreWF.ConfigPanel")
             {
-                if (CrossConverter.EnableWinformEmbedder()) platformConfigPanel = CrossConverter.ConvertWindowPanel(platformConfigPanel);
+                platformConfigPanel = CrossConverter.ConvertWindowPanel(platformConfigPanel);
             }
             if (platformConfigPanel is ConfigPanel) return new EtoConfigPanel(platformConfigPanel as ConfigPanel);
             else return null;

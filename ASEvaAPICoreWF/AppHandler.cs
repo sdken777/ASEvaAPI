@@ -84,6 +84,8 @@ namespace ASEva.UICoreWF
             SetToolTipExtensions.Handler = new ToolTipHandler();
 
             FuncManager.Register("GetUIBackendAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
+            CrossConverter.EnableWpfEmbedder();
+
             FuncManager.Register("RegisterLegacyValueGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.SingleValue, getLegacyStyleName(), typeof(ValueGraph)); return null; });
             FuncManager.Register("RegisterLegacyHistLineGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.HistAndLine, getLegacyStyleName(), typeof(HistLineGraph)); return null; });
             FuncManager.Register("RegisterLegacyScatterPointsGraph", delegate { AgencyLocal.RegisterGraphPanelForType(GraphType.ScatterPoints, getLegacyStyleName(), typeof(ScatterPointsGraph)); return null; });
@@ -167,7 +169,7 @@ namespace ASEva.UICoreWF
         {
             if (platformWindowPanel?.GetType().ToString() == "ASEva.UIWpf.WindowPanel")
             {
-                if (CrossConverter.EnableWpfEmbedder()) platformWindowPanel = CrossConverter.ConvertWindowPanel(platformWindowPanel);
+                platformWindowPanel = CrossConverter.ConvertWindowPanel(platformWindowPanel);
             }
             if (platformWindowPanel is WindowPanel) return new EtoWindowPanel(platformWindowPanel as WindowPanel);
             else return null;
@@ -177,7 +179,7 @@ namespace ASEva.UICoreWF
         {
             if (platformConfigPanel?.GetType().ToString() == "ASEva.UIWpf.ConfigPanel")
             {
-                if (CrossConverter.EnableWpfEmbedder()) platformConfigPanel = CrossConverter.ConvertConfigPanel(platformConfigPanel);
+                platformConfigPanel = CrossConverter.ConvertConfigPanel(platformConfigPanel);
             }
             if (platformConfigPanel is ConfigPanel) return new EtoConfigPanel(platformConfigPanel as ConfigPanel);
             else return null;
