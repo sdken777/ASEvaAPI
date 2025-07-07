@@ -355,7 +355,7 @@ namespace ASEva.UIEto
         {
             get
             {
-                return GetRunningOS() == "windows" ? SystemColors.Control : SystemColors.ControlBackground;
+                return GetRunningOS() == "windows" ? SystemColors.Control : SystemColors.WindowBackground;
             }
         }
 
