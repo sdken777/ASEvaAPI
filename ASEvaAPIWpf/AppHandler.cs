@@ -102,12 +102,20 @@ namespace ASEva.UIWpf
 
         public UIEto.WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
         {
+            if (platformWindowPanel?.GetType().ToString() == "ASEva.UICoreWF.WindowPanel")
+            {
+                if (CrossConverter.EnableWinformEmbedder()) platformWindowPanel = CrossConverter.ConvertWindowPanel(platformWindowPanel);
+            }
             if (platformWindowPanel is WindowPanel) return new EtoWindowPanel(platformWindowPanel as WindowPanel);
             else return null;
         }
 
         public UIEto.ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
         {
+            if (platformConfigPanel?.GetType().ToString() == "ASEva.UICoreWF.ConfigPanel")
+            {
+                if (CrossConverter.EnableWinformEmbedder()) platformConfigPanel = CrossConverter.ConvertWindowPanel(platformConfigPanel);
+            }
             if (platformConfigPanel is ConfigPanel) return new EtoConfigPanel(platformConfigPanel as ConfigPanel);
             else return null;
         }
