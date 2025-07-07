@@ -103,7 +103,7 @@ namespace ASEva.UIWpf
 
         public UIEto.WindowPanel ConvertWindowPanelToEto(object platformWindowPanel)
         {
-            if (platformWindowPanel?.GetType().ToString() == "ASEva.UICoreWF.WindowPanel")
+            if (isDerivedFromType(platformWindowPanel, "ASEva.UICoreWF.WindowPanel"))
             {
                 platformWindowPanel = CrossConverter.ConvertWindowPanel(platformWindowPanel);
             }
@@ -113,12 +113,24 @@ namespace ASEva.UIWpf
 
         public UIEto.ConfigPanel ConvertConfigPanelToEto(object platformConfigPanel)
         {
-            if (platformConfigPanel?.GetType().ToString() == "ASEva.UICoreWF.ConfigPanel")
+            if (isDerivedFromType(platformConfigPanel, "ASEva.UICoreWF.ConfigPanel"))
             {
                 platformConfigPanel = CrossConverter.ConvertWindowPanel(platformConfigPanel);
             }
             if (platformConfigPanel is ConfigPanel) return new EtoConfigPanel(platformConfigPanel as ConfigPanel);
             else return null;
+        }
+
+        private bool isDerivedFromType(object panel, String typeName)
+        {
+            if (panel == null) return false;
+            var type = panel.GetType();
+            while (type != null)
+            {
+                if (type.ToString() == typeName) return true;
+                type = type.BaseType;
+            }
+            return false;
         }
 
         public bool RunDialog(DialogPanel panel)

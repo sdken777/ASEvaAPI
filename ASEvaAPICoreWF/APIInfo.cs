@@ -28,7 +28,7 @@ namespace ASEva.UICoreWF
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 4, 1, 0); // Update log / 更新记录: 支持将wpf Window/ConfigPanel转为eto Window/ConfigPanel
+            return new Version(3, 4, 1, 1); // Update log / 更新记录: 修正类型判断
         }
 
         /// \~English
