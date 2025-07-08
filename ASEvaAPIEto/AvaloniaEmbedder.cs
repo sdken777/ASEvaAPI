@@ -21,6 +21,10 @@ namespace ASEva.UIEto
                     case "wpf":
                         useRoundTheme = false;
                         break;
+                    case "gtk":
+                    case "monomac":
+                        useRoundTheme = true;
+                        break;
                 }
 
                 var initMethod = commonType.GetMethod("InitAvaloniaEnvironmentSimple");
@@ -55,7 +59,10 @@ namespace ASEva.UIEto
 
         public static WindowPanel ConvertWindowPanel(object anyWindowPanel)
         {
-            if (App.GetRunningUI() == "corewf" && winformHostType != null)
+            var uiCode = App.GetRunningUI();
+            var isCoreWf = uiCode == "corewf";
+            var isWpf = uiCode == "wpf";
+            if (isCoreWf && winformHostType != null)
             {
                 var convertMethod = winformHostType.GetMethod("ConvertWindowPanel");
                 if (convertMethod != null)
@@ -64,7 +71,7 @@ namespace ASEva.UIEto
                     if (winformPanel != null) return App.ConvertWindowPanelToEto(winformPanel);
                 }
             }
-            if (App.GetRunningUI() == "wpf" && wpfHostType != null)
+            if (isWpf && wpfHostType != null)
             {
                 var convertMethod = wpfHostType.GetMethod("ConvertWindowPanel");
                 if (convertMethod != null)
@@ -73,12 +80,24 @@ namespace ASEva.UIEto
                     if (wpfPanel != null) return App.ConvertWindowPanelToEto(wpfPanel);
                 }
             }
+            if (!isCoreWf && !isWpf && generalHostType != null)
+            {
+                var convertMethod = generalHostType.GetMethod("ConvertWindowPanel");
+                if (convertMethod != null)
+                {
+                    var etoPanel = convertMethod.Invoke(null, [anyWindowPanel]);
+                    if (etoPanel != null) return etoPanel as WindowPanel;
+                }
+            }
             return null;
         }
 
         public static ConfigPanel ConvertConfigPanel(object anyConfigPanel)
         {
-            if (App.GetRunningUI() == "corewf" && winformHostType != null)
+            var uiCode = App.GetRunningUI();
+            var isCoreWf = uiCode == "corewf";
+            var isWpf = uiCode == "wpf";
+            if (isCoreWf && winformHostType != null)
             {
                 var convertMethod = winformHostType.GetMethod("ConvertConfigPanel");
                 if (convertMethod != null)
@@ -87,13 +106,22 @@ namespace ASEva.UIEto
                     if (winformPanel != null) return App.ConvertConfigPanelToEto(winformPanel);
                 }
             }
-            if (App.GetRunningUI() == "wpf" && wpfHostType != null)
+            if (isWpf && wpfHostType != null)
             {
                 var convertMethod = wpfHostType.GetMethod("ConvertConfigPanel");
                 if (convertMethod != null)
                 {
                     var wpfPanel = convertMethod.Invoke(null, [anyConfigPanel]);
                     if (wpfPanel != null) return App.ConvertConfigPanelToEto(wpfPanel);
+                }
+            }
+            if (!isCoreWf && !isWpf && generalHostType != null)
+            {
+                var convertMethod = generalHostType.GetMethod("ConvertConfigPanel");
+                if (convertMethod != null)
+                {
+                    var etoPanel = convertMethod.Invoke(null, [anyConfigPanel]);
+                    if (etoPanel != null) return etoPanel as ConfigPanel;
                 }
             }
             return null;
@@ -110,6 +138,12 @@ namespace ASEva.UIEto
                 case "windows":
                     dllFileName = "HwndHostAvalonia.dll";
                     break;
+                case "linux":
+                case "linuxarm":
+                case "macos":
+                case "macosarm":
+                    dllFileName = "GeneralHostAvalonia.dll";
+                    break;
                 default:
                     return false;
             }
@@ -120,7 +154,7 @@ namespace ASEva.UIEto
             var assembly = Assembly.LoadFrom(dllPath);
             if (assembly == null) return false;
 
-            Type winformHostType = null, wpfHostType = null;
+            Type winformHostType = null, wpfHostType = null, generalHostType = null;
             switch (ASEva.APIInfo.GetRunningOS())
             {
                 case "windows":
@@ -129,12 +163,21 @@ namespace ASEva.UIEto
                     if (winformHostType == null || wpfHostType == null) return false;
                     commonType = winformHostType.BaseType;
                     break;
+                case "linux":
+                case "linuxarm":
+                case "macos":
+                case "macosarm":
+                    generalHostType = assembly.GetType("GeneralHostAvalonia.GeneralHost");
+                    if (generalHostType == null) return false;
+                    commonType = generalHostType;
+                    break;
                 default:
                     return false;
             }
 
             AvaloniaEmbedder.winformHostType = winformHostType;
             AvaloniaEmbedder.wpfHostType = wpfHostType;
+            AvaloniaEmbedder.generalHostType = generalHostType;
 
             return true;
         }
@@ -144,5 +187,6 @@ namespace ASEva.UIEto
         private static Type commonType = null;
         private static Type winformHostType = null;
         private static Type wpfHostType = null;
+        private static Type generalHostType = null;
     }
 }

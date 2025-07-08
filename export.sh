@@ -102,6 +102,7 @@ if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
     fi
     if [ "$EXPORT_AVALONIA" = "y" ]; then
         cp -vf "$CUR_DIR"/binx/ASEvaAPIAvalonia.dll $TARGET_DIR/binx/
+        cp -vf "$CUR_DIR"/binx/GeneralHostAvalonia.dll $TARGET_DIR/binx/
         cp -vf "$CUR_DIR"/binx/libXembedSocket.so $TARGET_DIR/binx/
         cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binx/
         cp -vf "$CUR_DIR"/3party/avalonia-linux/* $TARGET_DIR/binx/
@@ -127,6 +128,7 @@ if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
     fi
     if [ "$EXPORT_AVALONIA" = "y" ]; then
         cp -vf "$CUR_DIR"/binxa/ASEvaAPIAvalonia.dll $TARGET_DIR/binxa/
+        cp -vf "$CUR_DIR"/binxa/GeneralHostAvalonia.dll $TARGET_DIR/binxa/
         cp -vf "$CUR_DIR"/binxa/libXembedSocket.so $TARGET_DIR/binxa/
         cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binxa/
         cp -vf "$CUR_DIR"/3party/avalonia-linux/* $TARGET_DIR/binxa/
@@ -153,6 +155,7 @@ if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
     fi
     if [ "$EXPORT_AVALONIA" = "y" ]; then
         cp -vf "$CUR_DIR"/binm/ASEvaAPIAvalonia.dll $TARGET_DIR/binm/
+        cp -vf "$CUR_DIR"/binm/GeneralHostAvalonia.dll $TARGET_DIR/binm/
         cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binm/
         cp -vf "$CUR_DIR"/3party/avalonia-macos/* $TARGET_DIR/binm/
     fi
@@ -178,6 +181,7 @@ if [ "$EXPORT_GUI_LIBRARY" = "y" ]; then
     fi
     if [ "$EXPORT_AVALONIA" = "y" ]; then
         cp -vf "$CUR_DIR"/binma/ASEvaAPIAvalonia.dll $TARGET_DIR/binma/
+        cp -vf "$CUR_DIR"/binma/GeneralHostAvalonia.dll $TARGET_DIR/binma/
         cp -vf "$CUR_DIR"/3party/avalonia-common/* $TARGET_DIR/binma/
         cp -vf "$CUR_DIR"/3party/avalonia-macos/* $TARGET_DIR/binma/
     fi
@@ -324,6 +328,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         fi
         if [ "$EXPORT_AVALONIA" = "y" ]; then
             ln -svf ../ASEvaAPIAvalonia.dll $TARGET_DIR/binx/debug/ASEvaAPIAvalonia.dll
+            ln -svf ../GeneralHostAvalonia.dll $TARGET_DIR/binx/debug/GeneralHostAvalonia.dll
             ln -svf ../libXembedSocket.so $TARGET_DIR/binx/debug/libXembedSocket.so
             create_debug_links "$CUR_DIR"/3party/avalonia-common $TARGET_DIR/binx
             create_debug_links "$CUR_DIR"/3party/avalonia-linux $TARGET_DIR/binx
@@ -349,6 +354,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         fi
         if [ "$EXPORT_AVALONIA" = "y" ]; then
             ln -svf ../ASEvaAPIAvalonia.dll $TARGET_DIR/binxa/debug/ASEvaAPIAvalonia.dll
+            ln -svf ../GeneralHostAvalonia.dll $TARGET_DIR/binxa/debug/GeneralHostAvalonia.dll
             ln -svf ../libXembedSocket.so $TARGET_DIR/binxa/debug/libXembedSocket.so
             create_debug_links "$CUR_DIR"/3party/avalonia-common $TARGET_DIR/binxa
             create_debug_links "$CUR_DIR"/3party/avalonia-linux $TARGET_DIR/binxa
@@ -375,6 +381,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         fi
         if [ "$EXPORT_AVALONIA" = "y" ]; then
             ln -svf ../ASEvaAPIAvalonia.dll $TARGET_DIR/binm/debug/ASEvaAPIAvalonia.dll
+            ln -svf ../GeneralHostAvalonia.dll $TARGET_DIR/binm/debug/GeneralHostAvalonia.dll
             create_debug_links "$CUR_DIR"/3party/avalonia-common $TARGET_DIR/binm
             create_debug_links "$CUR_DIR"/3party/avalonia-macos $TARGET_DIR/binm
         fi
@@ -400,6 +407,7 @@ if [ "$EXPORT_RUNTIME_DEBUG" = "y" ]; then
         fi
         if [ "$EXPORT_AVALONIA" = "y" ]; then
             ln -svf ../ASEvaAPIAvalonia.dll $TARGET_DIR/binma/debug/ASEvaAPIAvalonia.dll
+            ln -svf ../GeneralHostAvalonia.dll $TARGET_DIR/binma/debug/GeneralHostAvalonia.dll
             create_debug_links "$CUR_DIR"/3party/avalonia-common $TARGET_DIR/binma
             create_debug_links "$CUR_DIR"/3party/avalonia-macos $TARGET_DIR/binma
         fi

@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RootNamespace>GeneralHostAvalonia</RootNamespace>
+    <AssemblyName>GeneralHostAvalonia</AssemblyName>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <Reference Include="ASEvaAPI">
+      <HintPath>..\binx\ASEvaAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="ASEvaAPIAvalonia">
+      <HintPath>..\binx\ASEvaAPIAvalonia.dll</HintPath>
+    </Reference>
+    <Reference Include="ASEvaAPIEto">
+      <HintPath>..\binx\ASEvaAPIEto.dll</HintPath>
+    </Reference>
+    <Reference Include="Eto">
+      <HintPath>..\binx\Eto.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.0.*" />
+    <PackageReference Include="Avalonia.Headless" Version="11.0.*" />
+    <PackageReference Include="Avalonia.Skia" Version="11.0.*" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.*" />
+  </ItemGroup>
+
+</Project>

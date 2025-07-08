@@ -1,0 +1,143 @@
+{
+    "version": "2.0.0",
+    "inputs": [
+        {
+            "id": "helper_platform_bin_name",
+            "type": "command",
+            "command": "shell-command.run",
+            "args": {
+                "cmd": "dotnet",
+                "args": [
+                    "../bin/VSCodeHelper.dll",
+                    "shell_command",
+                    "platform_bin_name_for_appox5_exe"
+                ]
+            }
+        },
+    ],
+    "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+    },
+    "tasks": [
+        {
+            "type": "process",
+            "label": "Build (Debug)",
+            "group": "build",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "../${input:helper_platform_bin_name}/debug/bin"
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Subtask: Build for host (Debug)",
+                "Subtask: Copy built files (Debug)",
+            ],
+        },
+        {
+            "type": "process",
+            "label": "Build (Release)",
+            "group": "build",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "../${input:helper_platform_bin_name}/bin"
+            ],
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Subtask: Build for host (Release)",
+                "Subtask: Copy built files (Release)",
+                "Subtask: Copy to other folders",
+            ],
+        },
+        {
+            "type": "process",
+            "label": "Clean",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "./obj",
+                "./bin"
+            ],
+            "problemMatcher": []
+        },
+
+        // Subtasks:
+
+        {
+            "type": "process",
+            "label": "Subtask: Build for host (Debug)",
+            "hide": true,
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./GeneralHostAvalonia.csproj",
+                "-o",
+                "../${input:helper_platform_bin_name}/debug/bin",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+        },
+        {
+            "type": "process",
+            "label": "Subtask: Build for host (Release)",
+            "hide": true,
+            "command": "dotnet",
+            "args": [
+                "build",
+                "./GeneralHostAvalonia.csproj",
+                "-c",
+                "Release",
+                "-o",
+                "../${input:helper_platform_bin_name}/bin",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+        },
+        {
+            "type": "process",
+            "label": "Subtask: Copy built files (Debug)",
+            "hide": true,
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../${input:helper_platform_bin_name}/debug/bin/GeneralHostAvalonia.dll",
+                "../${input:helper_platform_bin_name}/debug/bin/GeneralHostAvalonia.pdb",
+                "../${input:helper_platform_bin_name}/debug/"
+            ],
+        },
+        {
+            "type": "process",
+            "label": "Subtask: Copy built files (Release)",
+            "hide": true,
+            "command": "cp",
+            "args": [
+                "-vf",
+                "../${input:helper_platform_bin_name}/bin/GeneralHostAvalonia.dll",
+                "../${input:helper_platform_bin_name}/"
+            ],
+        },
+        {
+            "type": "process",
+            "label": "Subtask: Copy to other folders",
+            "hide": true,
+            "command": "dotnet",
+            "args": [
+                "../bin/VSCodeHelper.dll",
+                "copy_outputs",
+                "GeneralHostAvalonia",
+                "binx",
+                "binxa",
+                "binm",
+                "binma",
+            ],
+        },
+    ]
+}
