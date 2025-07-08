@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 6, 0, 0); // Update log / 更新记录: 支持将avalonia面板嵌入eto应用程序（主要针对linux和macos）
+            return new Version(3, 6, 0, 1); // Update log / 更新记录: 修正绘制坐标
         }
 
         /// \~English
