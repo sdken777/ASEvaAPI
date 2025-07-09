@@ -4576,6 +4576,23 @@ namespace ASEva
 
         /// \~English
         /// <summary>
+        /// (api:app=3.10.1) Set audio replay device
+        /// </summary>
+        /// <param name="driverID">Driver ID</param>
+        /// <param name="deviceID">Device ID</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.1) 设置音频回放设备
+        /// </summary>
+        /// <param name="driverID">音频驱动ID</param>
+        /// <param name="deviceID">音频设备ID</param>
+        public static void SetAudioReplayDevice(String driverID, String deviceID)
+        {
+            AgencyLocal.SetAudioReplayDevice(driverID, deviceID);
+        }
+
+        /// \~English
+        /// <summary>
         /// Set audio volume
         /// </summary>
         /// <param name="volume">Audio volume (times)</param>

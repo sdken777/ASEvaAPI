@@ -38,6 +38,8 @@ namespace ASEva
         ApplicationGUI GetAppGUI();
         String GetAppID();
         Language GetAppLanguage();
+        AudioDriverInfo[] GetAudioDrivers();
+        AudioDeviceInfo[] GetAudioReplayDevices(String driverID);
         BufferRange GetBufferRange();
         String GetBusProtocolFilePath(BusProtocolFileID fileID);
         BusFileInfo[] GetBusProtocolFilesInfo();
@@ -109,6 +111,7 @@ namespace ASEva
         Task SelectSignals(SelectSignalHandler handler, List<String> existSignalIDList);
         void SendRawDataWithCPUTick(ulong cpuTick, String channelID, double[] values, byte[] binary);
         void SetAppFunctionHandler(object caller, String nativeClassID, String funcID, AppFunctionHandler handler);
+        void SetAudioReplayDevice(String driverID, String deviceID);
         void SetAudioVolume(double volume);
         void SetCurrentDialogTitle(String title, object icon);
         void SetDataPath(String path);
@@ -648,6 +651,38 @@ namespace ASEva
         public static Language GetAppLanguage()
         {
             return Handler.GetAppLanguage();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.1) Get information of all registered audio drivers
+        /// </summary>
+        /// <returns>Information of all registered audio drivers, null if none registered</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.1) 获取所有已注册的音频驱动信息
+        /// </summary>
+        /// <returns>已注册的音频驱动信息列表，若未注册任何有效驱动则返回null</returns>
+        public static AudioDriverInfo[] GetAudioDrivers()
+        {
+            return Handler.GetAudioDrivers();
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.1) Get information of all audio players related to the specified driver
+        /// </summary>
+        /// <param name="driverID">Driver ID</param>
+        /// <returns>Information of all audio players, null if the driver is not found or there's no players related</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.1) 获取指定驱动下的音频回放设备信息列表
+        /// </summary>
+        /// <param name="driverID">音频驱动ID</param>
+        /// <returns>音频回放设备信息列表，若无该驱动或驱动下无回放设备则返回null</returns>
+        public static AudioDeviceInfo[] GetAudioReplayDevices(String driverID)
+        {
+            return Handler.GetAudioReplayDevices(driverID);
         }
 
         /// \~English
@@ -1515,18 +1550,17 @@ namespace ASEva
         /// Register audio recorders and players related to the specified driver
         /// </summary>
         /// <param name="driver">Driver</param>
-        /// <param name="recorder">Recorders, set to null if there's none</param>
+        /// <param name="recorder">Recorders, set to null if there's none (Unavailable on the client side)</param>
         /// <param name="replayer">Players, set to null if there's none</param>
         /// \~Chinese
         /// <summary>
         /// 注册音频驱动关联的采集和回放接口
         /// </summary>
         /// <param name="driver">驱动信息</param>
-        /// <param name="recorder">采集接口，若无则设置null</param>
+        /// <param name="recorder">采集接口，若无则设置null（运行在客户端时无效）</param>
         /// <param name="replayer">回放接口，若无则设置额null</param>
         public static void RegisterAudioDriver(AudioDriverInfo driver, AudioRecorder recorder, AudioReplayer replayer)
         {
-            if (Handler.ClientSide) return;
             Handler.RegisterAudioDriver(driver, recorder, replayer);
         }
 
@@ -1869,6 +1903,23 @@ namespace ASEva
         {
             if (Handler.ClientSide) return;
             Handler.SetAppFunctionHandler(caller, nativeClassID, funcID, handler);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.1) Set audio replay device
+        /// </summary>
+        /// <param name="driverID">Driver ID</param>
+        /// <param name="deviceID">Device ID</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.1) 设置音频回放设备
+        /// </summary>
+        /// <param name="driverID">音频驱动ID</param>
+        /// <param name="deviceID">音频设备ID</param>
+        public static void SetAudioReplayDevice(String driverID, String deviceID)
+        {
+            Handler.SetAudioReplayDevice(driverID, deviceID);
         }
 
         /// \~English

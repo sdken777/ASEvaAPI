@@ -137,6 +137,16 @@ namespace ASEva
             return Language.Invalid;
         }
 
+        public AudioDriverInfo[] GetAudioDrivers()
+        {
+            return null;
+        }
+
+        public AudioDeviceInfo[] GetAudioReplayDevices(string driverID)
+        {
+            return null;
+        }
+
         public BufferRange GetBufferRange()
         {
             return new BufferRange();
@@ -476,6 +486,10 @@ namespace ASEva
         }
 
         public void SetAppFunctionHandler(object caller, string nativeClassID, string funcID, AppFunctionHandler handler)
+        {
+        }
+
+        public void SetAudioReplayDevice(string driverID, string deviceID)
         {
         }
 
