@@ -938,7 +938,7 @@ namespace ASEva.UIEto
                 var workPath = EntryFolder.Path;
                 if (dllFileName != null && workPath != null)
                 {
-                    if (CrossConverter.EnableAvaloniaEmbedder())
+                    if (!attach && CrossConverter.EnableAvaloniaEmbedder())
                     {
                         AvaloniaEmbedder.DoEnable(uiCode);
                     }

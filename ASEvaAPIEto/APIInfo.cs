@@ -35,7 +35,7 @@ namespace ASEva.UIEto
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 6, 1, 0); // Update log / 更新记录: 在App.Init中调用EnableAvaloniaEmbedder。修正GeneralHostAvalonia同步上下文问题
+            return new Version(3, 6, 1, 1); // Update log / 更新记录: 修正attach判定
         }
 
         /// \~English
