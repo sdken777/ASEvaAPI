@@ -19,11 +19,11 @@ namespace ASEva.UIAvalonia
     {
         /// \~English
         /// <summary>
-        /// (api:avalonia=1.1.3) Enable converting WPF panel to Avalonia panel
+        /// (api:avalonia=1.1.3) Enable converting WPF panel to Avalonia panel (The method will be called automatically when running on Windows)
         /// </summary>
         /// \~Chinese
         /// <summary>
-        /// (api:avalonia=1.1.3) 启用WPF面板转Avalonia面板功能
+        /// (api:avalonia=1.1.3) 启用WPF面板转Avalonia面板功能（当运行在Windows上时，App.Init里面会自动调用）
         /// </summary>
         public static bool EnableWpfEmbedder()
         {

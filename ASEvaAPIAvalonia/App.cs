@@ -61,6 +61,12 @@ namespace ASEva.UIAvalonia
             if (!initAppInvoked)
             {
                 initAppInvoked = true;
+
+                if (ASEva.APIInfo.GetRunningOS() == "windows")
+                {
+                    CrossConverter.EnableWpfEmbedder();
+                }
+
                 if (EtoInitializer.Validate())
                 {
                     appBuilder = appBuilderCreation?.Invoke();

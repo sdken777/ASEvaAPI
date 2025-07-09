@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Avalonia;
 using Avalonia.Headless;
 using ASEva.UIAvalonia;
@@ -13,6 +14,8 @@ namespace GeneralHostAvalonia
 
             avaloniaEnvInitialized = true;
 
+            var originSyncCtx = SynchronizationContext.Current;
+
             var appBuilder = appBuilderCreation == null ? null : appBuilderCreation.Invoke() as AppBuilder;
             if (appBuilder == null) appBuilder = finishAppBuilder(AppBuilder.Configure<AvaloniaApplicationSimpleRoundTheme>());
 
@@ -20,6 +23,8 @@ namespace GeneralHostAvalonia
 
             var initializer = new HeadlessInitializer();
             initializer.Show();
+
+            SynchronizationContext.SetSynchronizationContext(originSyncCtx);
 
             ASEva.FuncManager.Register("GetAvaloniaAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
             ASEva.FuncManager.Register("GetAvaloniaLibVersion", delegate { return APIInfo.GetAvaloniaLibVersion(); });
