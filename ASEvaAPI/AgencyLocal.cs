@@ -1499,18 +1499,17 @@ namespace ASEva
         /// Register audio recorders and players related to the specified driver
         /// </summary>
         /// <param name="driver">Driver</param>
-        /// <param name="recorder">Recorders, set to null if there's none</param>
+        /// <param name="recorder">Recorders, set to null if there's none (Unavailable on the client side)</param>
         /// <param name="replayer">Players, set to null if there's none</param>
         /// \~Chinese
         /// <summary>
         /// 注册音频驱动关联的采集和回放接口
         /// </summary>
         /// <param name="driver">驱动信息</param>
-        /// <param name="recorder">采集接口，若无则设置null</param>
+        /// <param name="recorder">采集接口，若无则设置null（运行在客户端时无效）</param>
         /// <param name="replayer">回放接口，若无则设置额null</param>
         public static void RegisterAudioDriver(AudioDriverInfo driver, AudioRecorder recorder, AudioReplayer replayer)
         {
-            if (Handler.ClientSide) return;
             Handler.RegisterAudioDriver(driver, recorder, replayer);
         }
 

@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 9, 6, 0); // Update log / 更新记录: 新增SimpleModuleConfig
+            return new Version(3, 9, 6, 1); // Update log / 更新记录: 客户端也可调用RegisterAudioDriver
         }
 
         /// \~English
