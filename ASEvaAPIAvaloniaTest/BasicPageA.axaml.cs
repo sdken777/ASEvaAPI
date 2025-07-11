@@ -6,7 +6,6 @@ using ASEva.UIAvalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
-using CustomMessageBox.Avalonia;
 
 namespace ASEvaAPIAvaloniaTest
 {
@@ -37,12 +36,12 @@ namespace ASEvaAPIAvaloniaTest
 
         public void OnLoop()
         {
-            labelActive.Content = this.GetParentWindow().IsActive ? "O" : "X";
+            labelActive.Content = App.IsVisualActive(this) ? "O" : "X";
         }
 
-        private async void itemMenu_Click(object sender, RoutedEventArgs e)
+        private void itemMenu_Click(object sender, RoutedEventArgs e)
         {
-            await App.RunDialog(async (window) => await MessageBox.Show(window, App.WorkPath, ""));
+            App.ShowMessageBox(App.WorkPath);
         }
 
         private void itemMenuAvaloniaWindow_Click(object sender, RoutedEventArgs e)
@@ -75,19 +74,19 @@ namespace ASEvaAPIAvaloniaTest
                         DefaultExtension = ".txt",
                         FileTypeChoices = [ new FilePickerFileType(language["basic-save-file-filter"]) { Patterns = ["*.txt"] } ]
                     };
-                    var file = await this.GetParentWindow().StorageProvider.SaveFilePickerAsync(options);
-                    if (file != null) await App.RunDialog(async (window) => await MessageBox.Show(window, file.Path.LocalPath, ""));
+                    var file = await this.GetStorageProvider().SaveFilePickerAsync(options);
+                    if (file != null) App.ShowMessageBox(file.Path.LocalPath);
                 }
                 else
                 {
-                    var files = await this.GetParentWindow().StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions());
-                    if (files.Count > 0) await App.RunDialog(async (window) => await MessageBox.Show(window, files[0].Path.LocalPath, ""));
+                    var files = await this.GetStorageProvider().OpenFilePickerAsync(new FilePickerOpenOptions());
+                    if (files.Count > 0) App.ShowMessageBox(files[0].Path.LocalPath);
                 }
             }
             else // radioDir
             {
-                var folders = await this.GetParentWindow().StorageProvider.OpenFolderPickerAsync(new FolderPickerOpenOptions());
-                if (folders.Count > 0) await App.RunDialog(async (window) => await MessageBox.Show(window, folders[0].Path.LocalPath, ""));
+                var folders = await this.GetStorageProvider().OpenFolderPickerAsync(new FolderPickerOpenOptions());
+                if (folders.Count > 0) App.ShowMessageBox(folders[0].Path.LocalPath);
             }
         }
 
@@ -138,7 +137,7 @@ namespace ASEvaAPIAvaloniaTest
 
         private void linkClientSize_Click(object sender, RoutedEventArgs e)
         {
-            var size = this.GetParentWindow().ClientSize;
+            var size = TopLevel.GetTopLevel(this).ClientSize;
             linkClientSize.Content = size.Width + "x" + size.Height;
         }
 

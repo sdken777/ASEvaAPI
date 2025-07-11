@@ -75,8 +75,12 @@ namespace ASEvaAPIAvaloniaTest
 
         private async void itemSnapshot_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new ImageDialog(this.Snapshot());
-            await dialog.ShowDialog(this);
+            var snapshot = this.Snapshot();
+            if (snapshot != null)
+            {
+                var dialog = new ImageDialog(snapshot);
+                await App.RunDialog(dialog);
+            }
         }
 
         private void itemExceptionMain_Click(object sender, RoutedEventArgs e)

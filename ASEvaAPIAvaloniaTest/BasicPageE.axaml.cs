@@ -7,7 +7,6 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
-using CustomMessageBox.Avalonia;
 
 namespace ASEvaAPIAvaloniaTest
 {
@@ -82,12 +81,12 @@ namespace ASEvaAPIAvaloniaTest
             }
         }
 
-        private async void control_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private void control_PointerReleased(object sender, PointerReleasedEventArgs e)
         {
             var target = sender as ControlWithBorder;
             var targetIndex = flowLayout.Children.IndexOf(target);
             selectControl(targetIndex);
-            await App.RunDialog(async (window) => await MessageBox.Show(window, language.Format("basic-flow-selected", targetIndex), ""));
+            App.ShowMessageBox(language.Format("basic-flow-selected", targetIndex));
         }
 
         private void selectControl(int index)

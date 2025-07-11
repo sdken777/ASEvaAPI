@@ -24,10 +24,10 @@ namespace ASEvaAPIAvaloniaTest
             linkClientSize.Content = ClientSize.Width + "x" + ClientSize.Height;
         }
 
-        private void linkShowDialogWithBorder_Click(object sender, RoutedEventArgs e)
+        private async void linkShowDialogWithBorder_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new TestDialogWithBorder();
-            dialog.ShowDialog(this);
+            await App.RunDialog(dialog, this);
         }
 
         private void buttonClose_Click(object sender, RoutedEventArgs e)

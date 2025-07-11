@@ -8,7 +8,6 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
-using CustomMessageBox.Avalonia;
 
 namespace ASEvaAPIAvaloniaTest
 {
@@ -54,10 +53,10 @@ namespace ASEvaAPIAvaloniaTest
             mainTableView.SelectionChanged += mainTableView_SelectionChanged;
         }
 
-        private async void checkListBox_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private void checkListBox_PointerReleased(object sender, PointerReleasedEventArgs e)
         {
             var selectedIndex = checkListBox.SelectedIndex;
-            if (selectedIndex >= 0) await App.RunDialog(async (window) => await MessageBox.Show(window, selectedIndex + ": " + model.CheckItems[selectedIndex].IsChecked, ""));
+            if (selectedIndex >= 0) App.ShowMessageBox(selectedIndex + ": " + model.CheckItems[selectedIndex].IsChecked, "");
         }
 
         private void linkCheckAll_Click(object sender, RoutedEventArgs e)
@@ -87,9 +86,9 @@ namespace ASEvaAPIAvaloniaTest
             if (checkListTarget < 99) checkListTarget++;
         }
 
-        private async void linkGetCheck_Click(object sender, RoutedEventArgs e)
+        private void linkGetCheck_Click(object sender, RoutedEventArgs e)
         {
-            await App.RunDialog(async (window) => await MessageBox.Show(window, checkListTarget + ": " + model.CheckItems[checkListTarget].IsChecked, ""));
+            App.ShowMessageBox(checkListTarget + ": " + model.CheckItems[checkListTarget].IsChecked);
         }
 
         private void linkSetCheck_Click(object sender, RoutedEventArgs e)
@@ -98,9 +97,9 @@ namespace ASEvaAPIAvaloniaTest
             if (checkListTarget < 99) checkListTarget++;
         }
 
-        private async void linkGetEnable_Click(object sender, RoutedEventArgs e)
+        private void linkGetEnable_Click(object sender, RoutedEventArgs e)
         {
-            await App.RunDialog(async (window) => await MessageBox.Show(window, checkListTarget + ": " + model.CheckItems[checkListTarget].IsEnabled, ""));
+            App.ShowMessageBox(checkListTarget + ": " + model.CheckItems[checkListTarget].IsEnabled);
         }
 
         private void linkSetEnable_Click(object sender, RoutedEventArgs e)

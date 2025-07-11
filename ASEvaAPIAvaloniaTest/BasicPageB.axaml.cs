@@ -9,7 +9,6 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
-using CustomMessageBox.Avalonia;
 
 namespace ASEvaAPIAvaloniaTest
 {
@@ -61,10 +60,10 @@ namespace ASEvaAPIAvaloniaTest
             linkSelectControl.Click += linkSelectControl_Click;
         }
 
-        private async void treeView_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private void treeView_PointerReleased(object sender, PointerReleasedEventArgs e)
         {
             var node = treeView.SelectedItem as Node;
-            if (node != null) await App.RunDialog(async (window) => await MessageBox.Show(window, (treeView.SelectedItem as Node).Key, ""));
+            if (node != null) App.ShowMessageBox((treeView.SelectedItem as Node).Key);
         }
 
         private void linkSelectFirst_Click(object sender, RoutedEventArgs e)
@@ -115,13 +114,13 @@ namespace ASEvaAPIAvaloniaTest
             if (model.ControlItems.Count > 0) model.SelectedControlItem = model.ControlItems[0];
         }
 
-        private async void testControl_PointerReleased(object sender, PointerReleasedEventArgs e)
+        private void testControl_PointerReleased(object sender, PointerReleasedEventArgs e)
         {
             var item = (sender as TestControl).DataContext as Item;
             model.SelectedControlItem = item;
 
             var itemIndex = model.ControlItems.IndexOf(item);
-            await App.RunDialog(async (window) => await MessageBox.Show(window, language.Format("basic-flow-selected", itemIndex), ""));
+            App.ShowMessageBox(language.Format("basic-flow-selected", itemIndex));
         }
 
         private class Node : INotifyPropertyChanged
