@@ -44,13 +44,13 @@ namespace HwndHostAvalonia
             var task = avaloniaConfigPanel.OnHandleModal();
             while (true)
             {
+                if (task.Status >= TaskStatus.RanToCompletion) break;
+
                 Thread.Sleep(1);
 
                 var frame = new DispatcherFrame();
-                Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background, new DispatcherOperationCallback(ExitFrame), frame);
+                Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Normal, new DispatcherOperationCallback(ExitFrame), frame);
                 Dispatcher.PushFrame(frame);
-
-                if (task.Status >= TaskStatus.RanToCompletion) break;
             }
         }
 

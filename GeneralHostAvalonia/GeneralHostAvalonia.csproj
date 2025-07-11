@@ -2,11 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <RootNamespace>GeneralHostAvalonia</RootNamespace>
     <AssemblyName>GeneralHostAvalonia</AssemblyName>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
 

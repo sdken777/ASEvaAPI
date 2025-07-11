@@ -10,8 +10,7 @@ namespace GeneralHostAvalonia
         {
             avaloniaWindowPanel = windowPanel;
             var avaloniaContainer = new AvaloniaPanelContainer(windowPanel);
-            var skiaView = ASEva.UIEto.SetContentAsControlExtension.SetContentAsControl(this, new ASEva.UIEto.SkiaView(), 0);
-            common = new EtoHostPanelCommon(avaloniaContainer, skiaView);
+            common = new EtoHostPanelCommon(avaloniaContainer, this);
         }
 
         public override void OnInitSize(string config)

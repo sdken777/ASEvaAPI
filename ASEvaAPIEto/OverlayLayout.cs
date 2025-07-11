@@ -96,6 +96,36 @@ namespace ASEva.UIEto
 
         /// \~English
         /// <summary>
+        /// (api:eto=3.6.2) Update control's padding, and then update control's position
+        /// </summary>
+        /// <param name="control">The control</param>
+        /// <param name="topLogicalPadding">Space between top bound and the control, null as not related</param>
+        /// <param name="bottomLogicalPadding">Space between bottom bound and the control, null as not related</param>
+        /// <param name="leftLogicalPadding">Space between left bound and the control, null as not related</param>
+        /// <param name="rightLogicalPadding">Space between right bound and the control, null as not related</param>
+        /// \~Chinese
+        /// <summary>
+        /// (api:eto=3.6.2) 更新控件的间隔，并更新控件的位置
+        /// </summary>
+        /// <param name="control">控件</param>
+        /// <param name="topLogicalPadding">控件与顶部间隔，null表示不关联</param>
+        /// <param name="bottomLogicalPadding">控件与底部间隔，null表示不关联</param>
+        /// <param name="leftLogicalPadding">控件与左侧间隔，null表示不关联</param>
+        /// <param name="rightLogicalPadding">控件与右侧间隔，null表示不关联</param>
+        public void UpdatePadding(Control control, int? topLogicalPadding, int? bottomLogicalPadding, int? leftLogicalPadding, int? rightLogicalPadding)
+        {
+            if (paddingTable.ContainsKey(control))
+            {
+                paddingTable[control].Top = topLogicalPadding;
+                paddingTable[control].Bottom = bottomLogicalPadding;
+                paddingTable[control].Left = leftLogicalPadding;
+                paddingTable[control].Right = rightLogicalPadding;
+                handleControl(control, false);
+            }
+        }
+
+        /// \~English
+        /// <summary>
         /// Update control's position (Generally used after manual modification of the control's size)
         /// </summary>
         /// <param name="control">The control</param>

@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Avalonia.Controls;
+using Avalonia.Platform.Storage;
 
 namespace ASEva.UIAvalonia
 {
@@ -14,6 +15,22 @@ namespace ASEva.UIAvalonia
     /// </summary>
     public static class WindowExtensions
     {
+        /// \~English
+        /// <summary>
+        /// (api:avalonia=1.4.2) Get the storage provider of the specified control
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.4.2) 获取控件的StorageProvider对象
+        /// </summary>
+        public static IStorageProvider GetStorageProvider(this Control control)
+        {
+            if (control == null) return null;
+            var topLevel = TopLevel.GetTopLevel(control);
+            if (topLevel == null) return null;
+            return topLevel.StorageProvider;
+        }
+
         /// \~English
         /// <summary>
         /// Get the parent window of the specified control

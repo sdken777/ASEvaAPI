@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,6 +22,9 @@ namespace HwndHostAvalonia
             elementHost.Dock = DockStyle.Fill;
             elementHost.Child = embedder;
             Controls.Add(elementHost);
+
+            this.embedder = embedder;
+            WinformControlMap.Add(embedder, this);
         }
 
         public override void OnInitSize(string config)
@@ -90,9 +94,11 @@ namespace HwndHostAvalonia
 
         public override void OnRelease()
         {
+            WinformControlMap.Remove(embedder);
             avaloniaWindowPanel.OnRelease();
         }
 
         private ASEva.UIAvalonia.WindowPanel avaloniaWindowPanel;
+        private AvaloniaEmbedder embedder;
     }
 }

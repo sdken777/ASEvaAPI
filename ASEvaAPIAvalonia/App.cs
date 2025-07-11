@@ -174,6 +174,8 @@ namespace ASEva.UIAvalonia
         /// <returns>对话框函数是否已执行</returns>
         public static async Task<bool> RunDialog(Func<Window, Task> action, object owner = null)
         {
+            if (DialogHandler != null) return false;
+
             Window activeWindow = null;
             var t0 = DateTime.Now;
             while ((DateTime.Now - t0).TotalSeconds < 1)
@@ -232,7 +234,16 @@ namespace ASEva.UIAvalonia
         public static async Task<bool> RunDialog(Window window, object owner = null)
         {
             if (window == null) return false;
-            return await RunDialog(async (o) => await window.ShowDialog(o), owner);
+
+            if (DialogHandler != null)
+            {
+                await DialogHandler.RunDialog(window, owner);
+                return true;
+            }
+            else
+            {
+                return await RunDialog(async (o) => await window.ShowDialog(o), owner);
+            }
         }
 
         /// \~English
@@ -245,25 +256,73 @@ namespace ASEva.UIAvalonia
         /// </summary>
         public static async void ShowMessageBox(String message, String caption = "", MessageBoxIcon icon = MessageBoxIcon.None, MessageBoxButtons buttons = MessageBoxButtons.OK)
         {
-            if (appBuilder == null || appBuilder.Instance == null || message == null) return;
+            if (message == null) return;
 
-            var box = new MessageBox(message, caption, icon);
-            if (appLifetime.MainWindow == null)
+            if (DialogHandler != null)
             {
-                var token = new CancellationTokenSource();
-                box.Closed += delegate { token.Cancel(); };
-                box.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-
-                try
+                bool handled = false;
+                if (buttons == MessageBoxButtons.OK)
                 {
-                    var task = box.Show(null, buttons); // Don't await
-                    appBuilder.Instance.Run(token.Token);
+                    if (icon == MessageBoxIcon.Error || icon == MessageBoxIcon.Warning)
+                    {
+                        await DialogHandler.ShowMessageBox(message, caption ?? "", true);
+                        handled = true;
+                    }
+                    else if (icon == MessageBoxIcon.Information || icon == MessageBoxIcon.None)
+                    {
+                        await DialogHandler.ShowMessageBox(message, caption ?? "", false);
+                        handled = true;
+                    }
                 }
-                catch (Exception ex) { Dump.Exception(ex); }
+                if (!handled) throw new InvalidOperationException("Invalid message box parameters for attach mode.");
             }
             else
             {
-                await RunDialog((window) => box.Show(window, buttons));
+                if (appBuilder == null || appBuilder.Instance == null) return;
+
+                var box = new MessageBox(message, caption, icon);
+                if (appLifetime.MainWindow == null)
+                {
+                    var token = new CancellationTokenSource();
+                    box.Closed += delegate { token.Cancel(); };
+                    box.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+                    try
+                    {
+                        var task = box.Show(null, buttons); // Don't await
+                        appBuilder.Instance.Run(token.Token);
+                    }
+                    catch (Exception ex) { Dump.Exception(ex); }
+                }
+                else
+                {
+                    await RunDialog((window) => box.Show(window, buttons));
+                }
+            }
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:avalonia=1.4.2) Check if the specified visual (control, window, etc.) is active
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:avalonia=1.4.2) 检查指定Visual对象（控件、窗口等）是否处于活动状态
+        /// </summary>
+        public static bool IsVisualActive(Visual visual)
+        {
+            if (visual == null) return false;
+            if (DialogHandler != null)
+            {
+                return DialogHandler.IsActive(visual);
+            }
+            else
+            {
+                if (TopLevel.GetTopLevel(visual) is Window parentWindow)
+                {
+                    return parentWindow.IsActive;
+                }
+                else return false;
             }
         }
 
@@ -331,6 +390,8 @@ namespace ASEva.UIAvalonia
                 return EtoInitializer.InitializeResult;
             }
         }
+
+        public static AvaloniaDialogHandler DialogHandler { private get; set; }
 
         private static void triggerFatalException(UnhandledExceptionEventArgs args)
         {
@@ -513,5 +574,12 @@ namespace ASEva.UIAvalonia
         private static DispatcherTimer exceptionTimer = null;
         private static Exception fatalException = null;
         private static List<Window> allWindows = new List<Window>();
+    }
+
+    public interface AvaloniaDialogHandler
+    {
+        Task RunDialog(Window window, object owner);
+        Task ShowMessageBox(String message, String caption, bool isError);
+        bool IsActive(Visual visual);
     }
 }

@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.4.1
+            version=1.4.2
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -415,6 +415,16 @@
             \~Chinese
             <summary>
             (api:avalonia=1.2.3) 方便获取窗口信息的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.WindowExtensions.GetStorageProvider(Avalonia.Controls.Control)">
+            \~English
+            <summary>
+            (api:avalonia=1.4.2) Get the storage provider of the specified control
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.4.2) 获取控件的StorageProvider对象
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.WindowExtensions.GetParentWindow(Avalonia.Controls.Control)">

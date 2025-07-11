@@ -22,6 +22,9 @@ namespace HwndHostAvalonia
             elementHost.Child = embedder;
             Controls.Add(elementHost);
 
+            this.embedder = embedder;
+            WinformControlMap.Add(embedder, this);
+
             avaloniaConfigPanel.CloseRequested += delegate { Close(); };
         }
 
@@ -40,6 +43,7 @@ namespace HwndHostAvalonia
 
         public override void OnRelease()
         {
+            WinformControlMap.Remove(embedder);
             avaloniaConfigPanel.OnRelease();
         }
 
@@ -65,5 +69,6 @@ namespace HwndHostAvalonia
         }
 
         private ASEva.UIAvalonia.ConfigPanel avaloniaConfigPanel;
+        private AvaloniaEmbedder embedder;
     }
 }

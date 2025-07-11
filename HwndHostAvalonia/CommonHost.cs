@@ -19,6 +19,8 @@ namespace HwndHostAvalonia
             var appLifetime = new ClassicDesktopStyleApplicationLifetime();
             appBuilder.SetupWithLifetime(appLifetime);
 
+            App.DialogHandler = new DialogHandler();
+
             ASEva.FuncManager.Register("GetAvaloniaAPIVersion", delegate { return APIInfo.GetAPIVersion(); });
             ASEva.FuncManager.Register("GetAvaloniaLibVersion", delegate { return APIInfo.GetAvaloniaLibVersion(); });
             ASEva.FuncManager.Register("GetAvaloniaAPIThirdPartyNotices", delegate { return APIInfo.GetThirdPartyNotices(); });

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -51,15 +52,27 @@ namespace HwndHostAvalonia
 
             var handle = _root.TryGetPlatformHandle()?.Handle ?? throw new InvalidOperationException("Unable to create EmbeddableControlRoot.");
             if (PresentationSource.FromVisual(this) is HwndSource source) _ = SetParent(handle, source.Handle);
+
+            controlMap[_root] = this;
+
             return new HandleRef(_root, handle);
         }
 
         protected override void DestroyWindowCore(HandleRef hwnd)
         {
+            if (controlMap.ContainsKey(_root)) controlMap.Remove(_root);
             _root?.Dispose();
+        }
+
+        public static HwndHost GetHwndHost(EmbeddableControlRoot root)
+        {
+            if (controlMap.ContainsKey(root)) return controlMap[root];
+            else return null;
         }
 
         [DllImport("user32.dll")]
         private static extern bool SetParent(IntPtr hWnd, IntPtr hWndNewParent);
+
+        private static Dictionary<EmbeddableControlRoot, HwndHost> controlMap = new();
     }
 }
