@@ -3568,6 +3568,20 @@
             </summary>
             <param name="delay">延迟配置，单位毫秒</param>
         </member>
+        <member name="M:ASEva.Agency.SetAudioReplayDevice(System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.10.1) Set audio replay device
+            </summary>
+            <param name="driverID">Driver ID</param>
+            <param name="deviceID">Device ID</param>
+            \~Chinese
+            <summary>
+            (api:app=3.10.1) 设置音频回放设备
+            </summary>
+            <param name="driverID">音频驱动ID</param>
+            <param name="deviceID">音频设备ID</param>
+        </member>
         <member name="M:ASEva.Agency.SetAudioVolume(System.Double)">
             \~English
             <summary>
@@ -7594,6 +7608,32 @@
             </summary>
             <returns>应用程序的显示语言</returns>
         </member>
+        <member name="M:ASEva.AgencyLocal.GetAudioDrivers">
+            \~English
+            <summary>
+            (api:app=3.10.1) Get information of all registered audio drivers
+            </summary>
+            <returns>Information of all registered audio drivers, null if none registered</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.1) 获取所有已注册的音频驱动信息
+            </summary>
+            <returns>已注册的音频驱动信息列表，若未注册任何有效驱动则返回null</returns>
+        </member>
+        <member name="M:ASEva.AgencyLocal.GetAudioReplayDevices(System.String)">
+            \~English
+            <summary>
+            (api:app=3.10.1) Get information of all audio players related to the specified driver
+            </summary>
+            <param name="driverID">Driver ID</param>
+            <returns>Information of all audio players, null if the driver is not found or there's no players related</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.1) 获取指定驱动下的音频回放设备信息列表
+            </summary>
+            <param name="driverID">音频驱动ID</param>
+            <returns>音频回放设备信息列表，若无该驱动或驱动下无回放设备则返回null</returns>
+        </member>
         <member name="M:ASEva.AgencyLocal.GetBufferRange">
             \~English
             <summary>
@@ -8282,14 +8322,14 @@
             Register audio recorders and players related to the specified driver
             </summary>
             <param name="driver">Driver</param>
-            <param name="recorder">Recorders, set to null if there's none</param>
+            <param name="recorder">Recorders, set to null if there's none (Unavailable on the client side)</param>
             <param name="replayer">Players, set to null if there's none</param>
             \~Chinese
             <summary>
             注册音频驱动关联的采集和回放接口
             </summary>
             <param name="driver">驱动信息</param>
-            <param name="recorder">采集接口，若无则设置null</param>
+            <param name="recorder">采集接口，若无则设置null（运行在客户端时无效）</param>
             <param name="replayer">回放接口，若无则设置额null</param>
         </member>
         <member name="M:ASEva.AgencyLocal.RegisterAudioReplayers(ASEva.AudioDriverInfo,ASEva.AudioReplayer)">
@@ -8572,6 +8612,20 @@
             <param name="funcID">函数ID</param>
             <param name="handler">函数接口</param>
         </member>
+        <member name="M:ASEva.AgencyLocal.SetAudioReplayDevice(System.String,System.String)">
+            \~English
+            <summary>
+            (api:app=3.10.1) Set audio replay device
+            </summary>
+            <param name="driverID">Driver ID</param>
+            <param name="deviceID">Device ID</param>
+            \~Chinese
+            <summary>
+            (api:app=3.10.1) 设置音频回放设备
+            </summary>
+            <param name="driverID">音频驱动ID</param>
+            <param name="deviceID">音频设备ID</param>
+        </member>
         <member name="M:ASEva.AgencyLocal.SetAudioVolume(System.Double)">
             \~English
             <summary>
@@ -8792,7 +8846,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.10.0
+            version=3.10.1
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">

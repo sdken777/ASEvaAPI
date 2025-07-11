@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.4.0
+            version=1.4.2
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -133,6 +133,16 @@
             \~Chinese
             <summary>
             (api:avalonia=1.0.2) 显示消息框
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.App.IsVisualActive(Avalonia.Visual)">
+            \~English
+            <summary>
+            (api:avalonia=1.4.2) Check if the specified visual (control, window, etc.) is active
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.4.2) 检查指定Visual对象（控件、窗口等）是否处于活动状态
             </summary>
         </member>
         <member name="P:ASEva.UIAvalonia.App.WorkPath">
@@ -302,11 +312,11 @@
         <member name="M:ASEva.UIAvalonia.CrossConverter.EnableWpfEmbedder">
             \~English
             <summary>
-            (api:avalonia=1.1.3) Enable converting WPF panel to Avalonia panel
+            (api:avalonia=1.1.3) Enable converting WPF panel to Avalonia panel (The method will be called automatically when running on Windows)
             </summary>
             \~Chinese
             <summary>
-            (api:avalonia=1.1.3) 启用WPF面板转Avalonia面板功能
+            (api:avalonia=1.1.3) 启用WPF面板转Avalonia面板功能（当运行在Windows上时，App.Init里面会自动调用）
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.CrossConverter.ConvertWindowPanel(System.Object)">
@@ -601,6 +611,16 @@
             \~Chinese
             <summary>
             (api:avalonia=1.2.3) 方便获取窗口信息的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.UIAvalonia.WindowExtensions.GetStorageProvider(Avalonia.Controls.Control)">
+            \~English
+            <summary>
+            (api:avalonia=1.4.2) Get the storage provider of the specified control
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.4.2) 获取控件的StorageProvider对象
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.WindowExtensions.GetParentWindow(Avalonia.Controls.Control)">
