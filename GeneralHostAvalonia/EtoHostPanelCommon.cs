@@ -1,18 +1,21 @@
 using System;
+using System.Collections.Generic;
 using Avalonia.Headless;
 using Avalonia.Platform;
 using SkiaSharp;
 
 namespace GeneralHostAvalonia
 {
-    class EtoHostPanelCommon(AvaloniaPanelContainer avaloniaContainer, Eto.Forms.Panel etoPanel)
+    class EtoHostPanelCommon(Avalonia.Controls.Window avaloniaWindow, Eto.Forms.Panel etoPanel, bool alreadyShown = false)
     {
         public void Initialize()
         {
-            if (containerShown) return;
+            if (avaloniaWindowShown) return;
 
-            avaloniaContainer.Show();
-            containerShown = true;
+            controlMap[avaloniaWindow] = etoPanel;
+
+            if (!alreadyShown) avaloniaWindow.Show();
+            avaloniaWindowShown = true;
 
             if (isGtk)
             {
@@ -31,7 +34,7 @@ namespace GeneralHostAvalonia
             {
                 var button = convertMouseButton(e.Buttons);
                 var modifiers = convertModifiers(e.Modifiers);
-                avaloniaContainer.MouseDown(new Avalonia.Point(e.Location.X, e.Location.Y), button, modifiers);
+                avaloniaWindow.MouseDown(new Avalonia.Point(e.Location.X, e.Location.Y), button, modifiers);
 
                 if (isGtk)
                 {
@@ -48,20 +51,20 @@ namespace GeneralHostAvalonia
             {
                 var button = convertMouseButton(e.Buttons);
                 var modifiers = convertModifiers(e.Modifiers);
-                avaloniaContainer.MouseUp(new Avalonia.Point(e.Location.X, e.Location.Y), button, modifiers);
+                avaloniaWindow.MouseUp(new Avalonia.Point(e.Location.X, e.Location.Y), button, modifiers);
             };
 
             skiaView.MouseMove += (o, e) =>
             {
                 var modifiers = convertModifiers(e.Modifiers);
-                avaloniaContainer.MouseMove(new Avalonia.Point(e.Location.X, e.Location.Y), modifiers);
+                avaloniaWindow.MouseMove(new Avalonia.Point(e.Location.X, e.Location.Y), modifiers);
             };
 
             skiaView.MouseWheel += (o, e) =>
             {
                 var modifiers = convertModifiers(e.Modifiers);
                 var delta = new Avalonia.Vector(e.Delta.Width, e.Delta.Height);
-                avaloniaContainer.MouseWheel(new Avalonia.Point(e.Location.X, e.Location.Y), delta, modifiers);
+                avaloniaWindow.MouseWheel(new Avalonia.Point(e.Location.X, e.Location.Y), delta, modifiers);
             };
 
             if (isGtk)
@@ -70,19 +73,19 @@ namespace GeneralHostAvalonia
                 {
                     var physicalKey = convertToPhysicalKey(e.Key);
                     var modifiers = convertModifiers(e.Modifiers);
-                    avaloniaContainer.KeyPressQwerty(physicalKey, modifiers);
+                    avaloniaWindow.KeyPressQwerty(physicalKey, modifiers);
                 };
 
                 focusForGtk.KeyUp += (o, e) =>
                 {
                     var physicalKey = convertToPhysicalKey(e.Key);
                     var modifiers = convertModifiers(e.Modifiers);
-                    avaloniaContainer.KeyReleaseQwerty(physicalKey, modifiers);
+                    avaloniaWindow.KeyReleaseQwerty(physicalKey, modifiers);
                 };
 
                 focusForGtk.TextChanging += (o, e) =>
                 {
-                    avaloniaContainer.KeyTextInput(e.Text);
+                    avaloniaWindow.KeyTextInput(e.Text);
                     lastFocusTextForGtk = e.NewText;
                 };
             }
@@ -92,26 +95,32 @@ namespace GeneralHostAvalonia
                 {
                     var physicalKey = convertToPhysicalKey(e.Key);
                     var modifiers = convertModifiers(e.Modifiers);
-                    avaloniaContainer.KeyPressQwerty(physicalKey, modifiers);
+                    avaloniaWindow.KeyPressQwerty(physicalKey, modifiers);
                 };
 
                 focusForMonoMac.KeyUp += (o, e) =>
                 {
                     var physicalKey = convertToPhysicalKey(e.Key);
                     var modifiers = convertModifiers(e.Modifiers);
-                    avaloniaContainer.KeyReleaseQwerty(physicalKey, modifiers);
+                    avaloniaWindow.KeyReleaseQwerty(physicalKey, modifiers);
                 };
 
                 focusForMonoMac.TextInput += (o, e) =>
                 {
-                    avaloniaContainer.KeyTextInput(e.Text);
+                    avaloniaWindow.KeyTextInput(e.Text);
                 };
             }
 
             skiaView.Render += (o, e) =>
             {
-                avaloniaContainer.InvalidateVisual();
-                var bitmap = avaloniaContainer.CaptureRenderedFrame();
+                if (Math.Abs(avaloniaWindow.Width - e.LogicalSize.Width) > 1 || Math.Abs(avaloniaWindow.Height - e.LogicalSize.Height) > 1)
+                {
+                    avaloniaWindow.Width = e.LogicalSize.Width;
+                    avaloniaWindow.Height = e.LogicalSize.Height;
+                }
+
+                avaloniaWindow.InvalidateVisual();
+                var bitmap = avaloniaWindow.CaptureRenderedFrame();
 
                 bool drawn = false;
                 if (bitmap != null)
@@ -138,7 +147,7 @@ namespace GeneralHostAvalonia
                 {
                     if (focusForGtk.Text.StartsWith(lastFocusTextForGtk))
                     {
-                        avaloniaContainer.KeyTextInput(focusForGtk.Text.Substring(lastFocusTextForGtk.Length));
+                        avaloniaWindow.KeyTextInput(focusForGtk.Text.Substring(lastFocusTextForGtk.Length));
                     }
                     lastFocusTextForGtk = focusForGtk.Text = "";
                 }
@@ -153,17 +162,26 @@ namespace GeneralHostAvalonia
             timer.Stop();
         }
 
-        public void CloseContainer()
+        public void CloseAvaloniaWindow()
         {
-            if (containerShown && !containerClosed)
+            if (avaloniaWindowShown && !avaloniaWindowClosed)
             {
                 skiaView.Close();
-                avaloniaContainer.Close();
-                containerClosed = true;
+                avaloniaWindow.Close();
+                avaloniaWindowClosed = true;
+            }
+            if (controlMap.ContainsKey(avaloniaWindow))
+            {
+                controlMap.Remove(avaloniaWindow);
             }
         }
 
-        public bool IsValid => containerShown && !containerClosed;
+        public bool IsValid => avaloniaWindowShown && !avaloniaWindowClosed;
+
+        public static Eto.Forms.Panel GetEtoPanel(Avalonia.Controls.Window avaloniaWindow)
+        {
+            return controlMap.ContainsKey(avaloniaWindow) ? controlMap[avaloniaWindow] : null;
+        }
 
         private Avalonia.Input.MouseButton convertMouseButton(Eto.Forms.MouseButtons buttons)
         {
@@ -282,13 +300,15 @@ namespace GeneralHostAvalonia
         private bool isGtk => ASEva.UIEto.App.GetRunningUI() == "gtk";
         private bool isMonoMac => ASEva.UIEto.App.GetRunningUI() == "monomac";
 
-        private bool containerShown = false;
-        private bool containerClosed = false;
+        private bool avaloniaWindowShown = false;
+        private bool avaloniaWindowClosed = false;
         private Eto.Forms.UITimer timer = new Eto.Forms.UITimer { Interval = 0.015 };
         private ASEva.UIEto.SkiaView skiaView;
         private ASEva.UIEto.OverlayLayout overlayForGtk;
         private Eto.Forms.TextBox focusForGtk;
         private String lastFocusTextForGtk = "";
         private Eto.Forms.Drawable focusForMonoMac;
+
+        private static Dictionary<Avalonia.Controls.Window, Eto.Forms.Panel> controlMap = new();
     }
 }

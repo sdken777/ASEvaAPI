@@ -77,9 +77,7 @@ namespace GeneralHostAvalonia
         {
             if (containerSize.Width > 0 && containerSize.Height > 0)
             {
-                avaloniaWindowPanel.Width = containerSize.Width;
-                avaloniaWindowPanel.Height = containerSize.Height;
-                common.Initialize();
+                common.Initialize(); // 仅首次调用有效
             }
         }
 
@@ -87,7 +85,7 @@ namespace GeneralHostAvalonia
         {
             common.StopTimer();
             avaloniaWindowPanel.OnRelease();
-            common.CloseContainer();
+            common.CloseAvaloniaWindow();
         }
 
         private ASEva.UIAvalonia.WindowPanel avaloniaWindowPanel;

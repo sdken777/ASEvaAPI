@@ -16,10 +16,7 @@ namespace GeneralHostAvalonia
             
             SizeChanged += delegate
             {
-                var containerSize = ASEva.UIEto.SizerExtensions.GetLogicalSize(this);
-                avaloniaConfigPanel.Width = containerSize.Width;
-                avaloniaConfigPanel.Height = containerSize.Height;
-                common.Initialize();
+                common.Initialize(); // 仅首次调用有效
             };
         }
 
@@ -42,7 +39,7 @@ namespace GeneralHostAvalonia
         {
             common.StopTimer();
             avaloniaConfigPanel.OnRelease();
-            common.CloseContainer();
+            common.CloseAvaloniaWindow();
         }
 
         public override void OnUpdateUI()
