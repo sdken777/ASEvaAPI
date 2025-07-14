@@ -1,0 +1,70 @@
+﻿namespace Eto.Test.UnitTests.Forms
+{
+	class DataItem : ITreeGridItem
+	{
+		public string TextValue { get; set; }
+
+		public int Id { get; private set; }
+		public bool Expanded { get; set; }
+
+		public bool Expandable => false;
+
+		public ITreeGridItem Parent { get; set; }
+
+		public DataItem()
+		{
+		}
+
+		public DataItem(int id)
+		{
+			Id = id;
+		}
+
+		public override string ToString() => "Item " + Id;
+	}
+
+	static class GridViewUtils
+	{
+		public const int ItemCount = 100;
+
+		/// <summary>
+		/// Creates a model with 100 items, with index as Id.
+		/// </summary>
+		public static ObservableCollection<DataItem> CreateModel()
+		{
+			var model = new ObservableCollection<DataItem>();
+			for (var i = 0; i < ItemCount; ++i)
+				model.Add(new DataItem(i));
+			return model;
+		}
+
+		public static int SortEvenItemsBeforeOdd(DataItem x, DataItem y)
+		{
+			var a = x.Id;
+			var b = y.Id;
+			return (a % 2 == b % 2) ? a - b : (a % 2 == 0 ? -1 : 1);
+		}
+
+		public static int SortItemsAscending(DataItem x, DataItem y)
+		{
+			var a = x.Id;
+			var b = y.Id;
+			return a - b;
+		}
+
+		public static int SortItemsDescending(DataItem x, DataItem y)
+		{
+			return -SortItemsAscending(x, y);
+		}
+
+		public static bool KeepOddItemsFilter(DataItem o)
+		{
+			return o.Id % 2 == 1; // keep all odd items only.
+		}
+
+		public static bool KeepFirstHalfOfItemsFilter(DataItem o)
+		{
+			return o.Id < ItemCount / 2;
+		}
+	}
+}

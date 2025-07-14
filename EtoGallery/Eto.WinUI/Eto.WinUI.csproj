@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows10.0.22621</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <RootNamespace>Eto.WinUI</RootNamespace>
+    <UseWinUI>true</UseWinUI>
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <WindowsPackageType>None</WindowsPackageType>
+    <PackageId>Eto.Platform.WinUI</PackageId>
+    <DefineConstants>$(DefineConstants);WINUI</DefineConstants>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Using Include="System" />
+    <Using Include="System.IO" />
+    <Using Include="System.Reflection" />
+    <Using Include="System.Threading" />
+    <Using Include="System.Diagnostics" />
+    <Using Include="System.Linq" />
+    <Using Include="System.Collections.Generic" />
+    <Using Include="System.Collections.Specialized" />
+    <Using Include="System.Collections.ObjectModel" />
+    <Using Include="System.Globalization" />
+    <Using Include="Eto" />
+    <Using Include="Eto.Forms" />
+    <Using Include="Eto.Drawing" />
+    <Using Include="Microsoft.UI.Xaml" Alias="mux" />
+    <Using Include="Microsoft.UI.Xaml.Media" Alias="muxm" />
+    <Using Include="Microsoft.UI.Dispatching" Alias="mud" />
+    <Using Include="Microsoft.UI.Xaml.Controls" Alias="muc" />
+    <Using Include="Windows.Foundation" Alias="sw" />
+    <Using Include="Windows.Foundation" Alias="wf" />
+    <Using Include="Windows.UI" Alias="wu" />
+    <Using Include="Microsoft.UI" Alias="mu" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Eto.Forms" Version="2.9.*" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.ColorPicker" Version="8.2.250402" />
+    <PackageReference Include="CommunityToolkit.WinUI.UI.Controls.DataGrid" Version="7.1.2" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.250410001-experimental1" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.3916" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Sizers" Version="8.2.250402" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.2.250402" />
+    <PackageReference Include="CommunityToolkit.WinUI.Helpers" Version="8.2.250402" />
+  </ItemGroup>
+
+</Project>

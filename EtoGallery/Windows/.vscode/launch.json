@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Build",
+            "program": "${workspaceFolder}/bin/Debug/net8.0-windows/Windows",
+            "console": "integratedTerminal",
+            "stopAtEntry": false,
+        },
+    ]
+}

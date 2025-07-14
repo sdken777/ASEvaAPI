@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinUI", "WinUI\WinUI.csproj", "{AB9089EB-7357-4664-8B1E-7371B51C9DA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eto.WinUI", "Eto.WinUI\Eto.WinUI.csproj", "{69FFD559-9170-4637-901B-A634E5506273}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{2AE887BA-6C10-437A-A2B3-CED925A06AF5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AB9089EB-7357-4664-8B1E-7371B51C9DA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB9089EB-7357-4664-8B1E-7371B51C9DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB9089EB-7357-4664-8B1E-7371B51C9DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB9089EB-7357-4664-8B1E-7371B51C9DA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69FFD559-9170-4637-901B-A634E5506273}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69FFD559-9170-4637-901B-A634E5506273}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69FFD559-9170-4637-901B-A634E5506273}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69FFD559-9170-4637-901B-A634E5506273}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AE887BA-6C10-437A-A2B3-CED925A06AF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AE887BA-6C10-437A-A2B3-CED925A06AF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AE887BA-6C10-437A-A2B3-CED925A06AF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AE887BA-6C10-437A-A2B3-CED925A06AF5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

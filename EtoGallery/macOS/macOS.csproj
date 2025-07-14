@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-macos14.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>macOS</RootNamespace>
+    <AssemblyName>macOS</AssemblyName>
+    <RuntimeIdentifiers>osx-arm64</RuntimeIdentifiers>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+    <PackageReference Include="Eto.Platform.macOS" Version="2.9.*" />
+  </ItemGroup>
+
+</Project>
