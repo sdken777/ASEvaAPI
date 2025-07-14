@@ -85,7 +85,7 @@ namespace GeneralHostAvalonia
 
                 focusForGtk.TextChanging += (o, e) =>
                 {
-                    avaloniaWindow.KeyTextInput(e.Text);
+                    keyTextInputForGtk(e.Text);
                     lastFocusTextForGtk = e.NewText;
                 };
             }
@@ -147,7 +147,7 @@ namespace GeneralHostAvalonia
                 {
                     if (focusForGtk.Text.StartsWith(lastFocusTextForGtk))
                     {
-                        avaloniaWindow.KeyTextInput(focusForGtk.Text.Substring(lastFocusTextForGtk.Length));
+                        keyTextInputForGtk(focusForGtk.Text.Substring(lastFocusTextForGtk.Length));
                     }
                     lastFocusTextForGtk = focusForGtk.Text = "";
                 }
@@ -279,6 +279,16 @@ namespace GeneralHostAvalonia
                 result |= Avalonia.Input.RawInputModifiers.Meta;
             
             return result;
+        }
+
+        private void keyTextInputForGtk(String text)
+        {
+            if (String.IsNullOrEmpty(text)) return;
+
+            var etoClipboard = new Eto.Forms.Clipboard();
+            if (etoClipboard.Text != null && etoClipboard.Text == text) return;
+
+            avaloniaWindow.KeyTextInput(text);
         }
 
         private static ASEva.Samples.CommonImage toCommonImage(Avalonia.Media.Imaging.Bitmap bitmap)
