@@ -256,21 +256,21 @@ namespace ASEva
 
         /// \~English
         /// <summary>
-        /// (api:app=3.1.0) [Optional] Called while the application is about to exit (Background threads should be notified to stop here)
+        /// (api:app=3.1.0) [Optional] Called while the application is about to exit
         /// </summary>
-        /// <param name="force">Whether forced to exit</param>
+        /// <param name="force">Whether forced to exit. If true, background threads can be notified to stop here</param>
         /// <returns>Whether it's OK to exit (no use while forced to exit)</returns>
         /// \~Chinese
         /// <summary>
-        /// (api:app=3.1.0) [可选实现] 在应用程序准备关闭时被调用（用于发送停止线程指令等）
+        /// (api:app=3.1.0) [可选实现] 在应用程序准备关闭时被调用
         /// </summary>
-        /// <param name="force">是否为强制关闭</param>
+        /// <param name="force">是否为强制关闭，若为true可发送停止线程指令等</param>
         /// <returns>返回是否可关闭，强制关闭时将不起作用</returns>
         public virtual Task<bool> OnApplicationPrepareStopping(bool force) { return Task.FromResult(true); }
 
         /// \~English
         /// <summary>
-        /// [Optional] Called while the application is exiting (Background threads should stopped here)
+        /// [Optional] Called while the application is exiting (Background threads should be stopped here)
         /// </summary>
         /// \~Chinese
         /// <summary>
