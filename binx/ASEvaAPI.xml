@@ -8846,7 +8846,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.10.1
+            version=3.10.2
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -20810,6 +20810,88 @@
             基于XML元素节点创建
             </summary>
             <param name="element">XML元素节点</param>
+        </member>
+        <member name="T:ASEva.Utility.CheckPointStat">
+            \~English
+            <summary>
+            (api:app=3.10.2) Checkpoint time cost statistics
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.10.2) 检查点耗时统计信息
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.CheckPointStat.TimeCosts">
+            \~English
+            <summary>
+            Time cost of each checkpoint, in seconds
+            </summary>
+            \~Chinese
+            <summary>
+            各检查点耗时，单位秒
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.CheckPointStat.TotalTime">
+            \~English
+            <summary>
+            Total time cost, in seconds
+            </summary>
+            \~Chinese
+            <summary>
+            总耗时，单位秒
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.CheckPointStat.ToString">
+            \~English
+            <summary>
+            Convert to string, which is convenient for recording
+            </summary>
+            <returns>Formatted statistics string</returns>
+            \~Chinese
+            <summary>
+            转换为方便记录的字符串
+            </summary>
+            <returns>格式化的统计信息字符串</returns>
+        </member>
+        <member name="T:ASEva.Utility.CheckPoint">
+            \~English
+            <summary>
+            (api:app=3.10.2) Checkpoint time cost statistics utility class
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.10.2) 检查点耗时统计工具类
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.CheckPoint.AddCheckpoint(System.String,System.String)">
+            \~English
+            <summary>
+            Add a checkpoint
+            </summary>
+            <param name="statName">Statistics name</param>
+            <param name="checkpointName">Checkpoint name</param>
+            \~Chinese
+            <summary>
+            添加一个检查点
+            </summary>
+            <param name="statName">统计名称</param>
+            <param name="checkpointName">检查点名称</param>
+        </member>
+        <member name="M:ASEva.Utility.CheckPoint.ClearCheckpoint(System.String,System.Boolean)">
+            \~English
+            <summary>
+            Clear current checkpoint. If reset is true, output statistics and reset
+            </summary>
+            <param name="statName">Statistics name</param>
+            <param name="reset">Whether to reset statistics</param>
+            <returns>Checkpoint statistics</returns>
+            \~Chinese
+            <summary>
+            清除当前检查点，若reset为true则输出统计信息并重置
+            </summary>
+            <param name="statName">统计名称</param>
+            <param name="reset">是否重置统计</param>
+            <returns>检查点统计信息</returns>
         </member>
         <member name="T:ASEva.Utility.ContentToString">
             \~English
