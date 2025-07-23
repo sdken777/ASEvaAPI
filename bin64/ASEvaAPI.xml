@@ -8648,7 +8648,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.9.6
+            version=3.9.7
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -20909,6 +20909,26 @@
             \~Chinese
             <summary>
             显式指定路径
+            </summary>
+        </member>
+        <member name="T:ASEva.Utility.ExceptionExtensions">
+            \~English
+            <summary>
+            (api:app=3.9.7) Exception object related extensions
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.9.7) 异常对象相关的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.ExceptionExtensions.GetAllStackTrace(System.Exception)">
+            \~English
+            <summary>
+            For object array initialization, avoiding null reference
+            </summary>
+            \~Chinese
+            <summary>
+            用于初始化对象数组，避免空引用
             </summary>
         </member>
         <member name="T:ASEva.Utility.GenerationProcessStatus">
