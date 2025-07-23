@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 10, 2, 0); // Update log / 更新记录: 新增CheckPoint工具类
+            return new Version(3, 10, 2, 1); // Update log / 更新记录: 合并3.9.7
         }
 
         /// \~English

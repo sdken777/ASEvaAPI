@@ -5,6 +5,8 @@ using System.Linq;
 
 namespace ASEva.Utility
 {
+    #pragma warning disable CS1571
+
     /// \~English
     /// <summary>
     /// (api:app=3.10.2) Checkpoint time cost statistics
