@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 9, 7, 0); // Update log / 更新记录: 新增ExceptionExtensions
+            return new Version(3, 9, 7, 1); // Update log / 更新记录: 修正GraphData未释放资源问题
         }
 
         /// \~English
