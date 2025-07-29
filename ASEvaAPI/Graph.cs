@@ -465,13 +465,49 @@ namespace ASEva
         /// <returns>保存是否成功</returns>
         public bool Save(String file)
         {
+            if (file == null) return false;
+
             try
             {
                 var root = Path.GetDirectoryName(file);
                 if (!Directory.Exists(root)) Directory.CreateDirectory(root);
-                if (!Directory.Exists(root)) return false;
+            }
+            catch (Exception ex)
+            {
+                Dump.Exception(ex);
+                return false;
+            }
 
-                var writer = new StreamWriter(file, false, Encoding.UTF8);
+            Stream stream = null;
+            try { stream = File.OpenWrite(file); }
+            catch (Exception ex)
+            {
+                Dump.Exception(ex);
+                return false;
+            }
+
+            return Save(stream);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.3) Save to stream
+        /// </summary>
+        /// <param name="stream">Stream</param>
+        /// <returns>Whether successful</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.3) 保存至数据流
+        /// </summary>
+        /// <param name="stream">数据流</param>
+        /// <returns>保存是否成功</returns>
+        public bool Save(Stream stream)
+        {
+            if (stream == null) return false;
+
+            try
+            {
+                var writer = new StreamWriter(stream, Encoding.UTF8);
 
                 // 第一行：header，ID，标题，数据参数
                 var paramsText = "";
@@ -575,9 +611,38 @@ namespace ASEva
         /// <returns>图表数据对象</returns>
         public static GraphData Load(String file)
         {
+            if (!File.Exists(file)) return null;
+
+            Stream stream = null;
+            try { stream = File.OpenRead(file); }
+            catch (Exception ex)
+            {
+                Dump.Exception(ex); 
+                return null;
+            }
+
+            return Load(stream);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.3) Load graph data from stream
+        /// </summary>
+        /// <param name="stream">Stream</param>
+        /// <returns>Graph data object</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.3) 从数据流读取图表数据
+        /// </summary>
+        /// <param name="stream">数据流</param>
+        /// <returns>图表数据对象</returns>
+        public static GraphData Load(Stream stream)
+        {
+            if (stream == null) return null;
+
             try
             {
-                var reader = new StreamReader(file);
+                var reader = new StreamReader(stream);
 
                 // 第一行：header，ID，标题，数据参数
                 var comps = reader.ReadLine().Split(',');

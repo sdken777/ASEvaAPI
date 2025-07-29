@@ -8846,7 +8846,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.10.2
+            version=3.10.3
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -11171,6 +11171,20 @@
             <param name="file">文件路径</param>
             <returns>保存是否成功</returns>
         </member>
+        <member name="M:ASEva.GraphData.Save(System.IO.Stream)">
+            \~English
+            <summary>
+            (api:app=3.10.3) Save to stream
+            </summary>
+            <param name="stream">Stream</param>
+            <returns>Whether successful</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.3) 保存至数据流
+            </summary>
+            <param name="stream">数据流</param>
+            <returns>保存是否成功</returns>
+        </member>
         <member name="M:ASEva.GraphData.Create(ASEva.GraphDefinition)">
             \~English
             <summary>
@@ -11197,6 +11211,20 @@
             从文件读取图表数据
             </summary>
             <param name="file">文件路径</param>
+            <returns>图表数据对象</returns>
+        </member>
+        <member name="M:ASEva.GraphData.Load(System.IO.Stream)">
+            \~English
+            <summary>
+            (api:app=3.10.3) Load graph data from stream
+            </summary>
+            <param name="stream">Stream</param>
+            <returns>Graph data object</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.3) 从数据流读取图表数据
+            </summary>
+            <param name="stream">数据流</param>
             <returns>图表数据对象</returns>
         </member>
         <member name="M:ASEva.GraphData.CreateGraphDataEncapsulation(ASEva.GraphData)">
@@ -22135,6 +22163,67 @@
             \~Chinese
             <summary>
             (api:app=3.0.0) 场景csv文件读写
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "P:ASEva.Utility.SceneCsv.Title" -->
+        <member name="P:ASEva.Utility.SceneCsv.Segments">
+            \~English
+            <summary>
+            Scene segment list
+            </summary>
+            \~Chinese
+            <summary>
+            场景片段列表
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.SceneCsv.#ctor">
+            \~English
+            <summary>
+            Create scene CSV object
+            </summary>
+            \~Chinese
+            <summary>
+            创建场景csv对象
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.SceneCsv.Load(System.String)">
+            \~English
+            <summary>
+            Load scene CSV object from file
+            </summary>
+            \~Chinese
+            <summary>
+            从文件加载场景csv对象
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.SceneCsv.Load(System.IO.Stream)">
+            \~English
+            <summary>
+            (api:app=3.10.3) Load scene CSV object from stream
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.10.3) 从数据流加载场景csv对象
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.SceneCsv.Save(System.String)">
+            \~English
+            <summary>
+            Save scene CSV object to file
+            </summary>
+            \~Chinese
+            <summary>
+            保存场景csv对象到文件
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.SceneCsv.Save(System.IO.Stream)">
+            \~English
+            <summary>
+            (api:app=3.10.3) Save scene CSV object to stream
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.10.3) 保存场景csv对象到数据流
             </summary>
         </member>
         <member name="T:ASEva.Utility.Serializer">

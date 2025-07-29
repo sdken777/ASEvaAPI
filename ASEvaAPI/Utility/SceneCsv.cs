@@ -15,23 +15,78 @@ namespace ASEva.Utility
     /// </summary>
     public class SceneCsv
     {
+        /// \~English
+        /// <summary>
+        /// Title of scene properties
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 场景属性标题
         public SceneTitle Title { get; set; }
+
+        /// \~English
+        /// <summary>
+        /// Scene segment list
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 场景片段列表
+        /// </summary>
         public List<SceneData> Segments { get; set; }
 
+        /// \~English
+        /// <summary>
+        /// Create scene CSV object
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 创建场景csv对象
+        /// </summary>
         public SceneCsv()
         {
             Title = new SceneTitle();
             Segments = new List<SceneData>();
         }
 
+        /// \~English
+        /// <summary>
+        /// Load scene CSV object from file
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 从文件加载场景csv对象
+        /// </summary>
         public static SceneCsv Load(String file)
         {
+            if (!File.Exists(file)) return null;
+
+            Stream stream = null;
+            try { stream = File.OpenRead(file); }
+            catch (Exception ex)
+            {
+                Dump.Exception(ex);
+                return null;
+            }
+
+            return Load(stream);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.3) Load scene CSV object from stream
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.3) 从数据流加载场景csv对象
+        /// </summary>
+        public static SceneCsv Load(Stream stream)
+        {
+            if (stream == null) return null;
+
             StreamReader reader = null;
             try
             {
-                if (!File.Exists(file)) return null;
-
-                reader = new StreamReader(file);
+                reader = new StreamReader(stream);
                 var firstLine = reader.ReadLine();
                 if (!firstLine.StartsWith("Scene Table,v2"))
                 {
@@ -91,12 +146,56 @@ namespace ASEva.Utility
             }
         }
 
+        /// \~English
+        /// <summary>
+        /// Save scene CSV object to file
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 保存场景csv对象到文件
+        /// </summary>
         public void Save(String file)
         {
+            if (file == null) return;
+
+            try
+            {
+                var root = Path.GetDirectoryName(file);
+                if (!Directory.Exists(root)) Directory.CreateDirectory(root);
+            }
+            catch (Exception ex)
+            {
+                Dump.Exception(ex);
+                return;
+            }
+
+            Stream stream = null;
+            try { stream = File.OpenWrite(file); }
+            catch (Exception ex)
+            {
+                Dump.Exception(ex);
+                return;
+            }
+
+            Save(stream);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.3) Save scene CSV object to stream
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.3) 保存场景csv对象到数据流
+        /// </summary>
+        public void Save(Stream stream)
+        {
+            if (stream == null) return;
+
             StreamWriter writer = null;
             try
             {
-                writer = new StreamWriter(file, false, Encoding.UTF8);
+                writer = new StreamWriter(stream, Encoding.UTF8);
 
                 writer.WriteLine("Scene Table,v2");
 
