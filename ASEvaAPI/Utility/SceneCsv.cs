@@ -22,6 +22,7 @@ namespace ASEva.Utility
         /// \~Chinese
         /// <summary>
         /// 场景属性标题
+        /// </summary>
         public SceneTitle Title { get; set; }
 
         /// \~English

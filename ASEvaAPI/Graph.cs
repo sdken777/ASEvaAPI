@@ -505,9 +505,10 @@ namespace ASEva
         {
             if (stream == null) return false;
 
+            StreamWriter writer = null;
             try
             {
-                var writer = new StreamWriter(stream, Encoding.UTF8);
+                writer = new StreamWriter(stream, Encoding.UTF8);
 
                 // 第一行：header，ID，标题，数据参数
                 var paramsText = "";
@@ -569,7 +570,12 @@ namespace ASEva
 
                 return true;
             }
-            catch (Exception ex) { Dump.Exception(ex); return false; }
+            catch (Exception ex)
+            {
+                Dump.Exception(ex);
+                if (writer != null) writer.Close();
+                return false;
+            }
         }
 
         /// \~English
@@ -640,9 +646,10 @@ namespace ASEva
         {
             if (stream == null) return null;
 
+            StreamReader reader = null;
             try
             {
-                var reader = new StreamReader(stream);
+                reader = new StreamReader(stream);
 
                 // 第一行：header，ID，标题，数据参数
                 var comps = reader.ReadLine().Split(',');
@@ -713,9 +720,16 @@ namespace ASEva
                 rawOutput.Params = paramList;
                 rawOutput.Data = data;
 
-                return CreateGraphDataEncapsulation(rawOutput);
+                var result = CreateGraphDataEncapsulation(rawOutput);
+                reader.Close();
+                return result;
             }
-            catch (Exception ex) { Dump.Exception(ex); return null; }
+            catch (Exception ex)
+            {
+                Dump.Exception(ex);
+                if (reader != null) reader.Close();
+                return null;
+            }
         }
 
         /// \~English

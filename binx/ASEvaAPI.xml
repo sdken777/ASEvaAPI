@@ -22165,7 +22165,16 @@
             (api:app=3.0.0) 场景csv文件读写
             </summary>
         </member>
-        <!-- Badly formed XML comment ignored for member "P:ASEva.Utility.SceneCsv.Title" -->
+        <member name="P:ASEva.Utility.SceneCsv.Title">
+            \~English
+            <summary>
+            Title of scene properties
+            </summary>
+            \~Chinese
+            <summary>
+            场景属性标题
+            </summary>
+        </member>
         <member name="P:ASEva.Utility.SceneCsv.Segments">
             \~English
             <summary>

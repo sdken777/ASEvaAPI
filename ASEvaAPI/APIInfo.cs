@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 10, 3, 0); // Update log / 更新记录: GraphData和SceneCsv支持从Stream读取和写入至Stream
+            return new Version(3, 10, 3, 1); // Update log / 更新记录: 修正GraphData未释放资源问题
         }
 
         /// \~English
