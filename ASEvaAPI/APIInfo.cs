@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(2, 17, 2, 0); // Update log / 更新记录: 新增Agency.GenerateBusMessage
+            return new Version(2, 17, 2, 1); // Update log / 更新记录: 修正GraphData未释放资源问题
         }
 
         /// \~English

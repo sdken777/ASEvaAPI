@@ -464,13 +464,14 @@ namespace ASEva
         /// <returns>保存是否成功</returns>
         public bool Save(String file)
         {
+            StreamWriter writer = null;
             try
             {
                 var root = Path.GetDirectoryName(file);
                 if (!Directory.Exists(root)) Directory.CreateDirectory(root);
                 if (!Directory.Exists(root)) return false;
 
-                var writer = new StreamWriter(file, false, Encoding.UTF8);
+                writer = new StreamWriter(file, false, Encoding.UTF8);
 
                 // 第一行：header，ID，标题，数据参数
                 var paramsText = "";
@@ -532,7 +533,11 @@ namespace ASEva
 
                 return true;
             }
-            catch (Exception) { return false; }
+            catch (Exception)
+            {
+                if (writer != null) writer.Close();
+                return false;
+            }
         }
 
         /// \~English
@@ -574,9 +579,10 @@ namespace ASEva
         /// <returns>图表数据对象</returns>
         public static GraphData Load(String file)
         {
+            StreamReader reader = null;
             try
             {
-                var reader = new StreamReader(file);
+                reader = new StreamReader(file);
 
                 // 第一行：header，ID，标题，数据参数
                 var comps = reader.ReadLine().Split(',');
@@ -647,9 +653,15 @@ namespace ASEva
                 rawOutput.Params = paramList;
                 rawOutput.Data = data;
 
-                return CreateGraphDataEncapsulation(rawOutput);
+                var result = CreateGraphDataEncapsulation(rawOutput);
+                reader.Close();
+                return result;
             }
-            catch (Exception) { return null; }
+            catch (Exception)
+            {
+                if (reader != null) reader.Close();
+                return null;
+            }
         }
 
         private static GraphValidation RowStringToValidation(String rowText)
