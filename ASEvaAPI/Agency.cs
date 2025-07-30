@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using ASEva.Samples;
 using ASEva.Utility;
 
@@ -377,6 +378,40 @@ namespace ASEva
         public static GraphPanel CreateGraphPanelForID(int graphID, String styleName)
         {
             return AgencyLocal.CreateGraphPanelForID(graphID, styleName);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.4) Create Spadas Encrypted File's input stream
+        /// </summary>
+        /// <param name="filePath">File path</param>
+        /// <returns>File input stream, null if failed to create</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.4) 创建Spadas加密文件的输入流
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        /// <returns>文件输入流，若创建失败则返回null</returns>
+        public static Stream CreateSefInputStream(String filePath)
+        {
+            return AgencyLocal.CreateSefInputStream(filePath);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.4) Create Spadas Encrypted File's output stream
+        /// </summary>
+        /// <param name="filePath">File path</param>
+        /// <returns>File output stream, null if failed to create</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.4) 创建Spadas加密文件的输出流
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        /// <returns>文件输出流，若创建失败则返回null</returns>
+        public static Stream CreateSefOutputStream(String filePath)
+        {
+            return AgencyLocal.CreateSefOutputStream(filePath);
         }
 
         /// \~English
@@ -1816,6 +1851,26 @@ namespace ASEva
         {
             if (!AgencyAsync.SyncMode) return null;
             return AgencyAsync.GetEventInfo(eventHandle).Result;
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.4) Get content of event snapshot
+        /// </summary>
+        /// <param name="eventHandle">Event handle</param>
+        /// <param name="contentType">Content type</param>
+        /// <returns>Content of event snapshot, null if failed</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.4) 获取事件快照内容
+        /// </summary>
+        /// <param name="eventHandle">事件对象</param>
+        /// <param name="contentType">内容类型</param>
+        /// <returns>事件快照内容，若失败则返回null</returns>
+        public static byte[] GetEventSnapshotContent(object eventHandle, EventSnapshotContentType contentType)
+        {
+            if (!AgencyAsync.SyncMode) return null;
+            return AgencyAsync.GetEventSnapshotContent(eventHandle, contentType).Result;
         }
 
         /// \~English

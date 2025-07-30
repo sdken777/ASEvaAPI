@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using ASEva.Samples;
 using ASEva.Utility;
@@ -79,6 +80,16 @@ namespace ASEva
         }
 
         public GraphPanel CreateGraphPanelForType(GraphType graphType, string styleName)
+        {
+            return null;
+        }
+
+        public Stream CreateSefInputStream(string filePath)
+        {
+            return null;
+        }
+
+        public Stream CreateSefOutputStream(string filePath)
         {
             return null;
         }
@@ -943,6 +954,11 @@ namespace ASEva
         public Task<EventInfo> GetEventInfo(object eventHandle)
         {
             return Task.FromResult<EventInfo>(null);
+        }
+
+        public Task<byte[]> GetEventSnapshotContent(object eventHandle, EventSnapshotContentType contentType)
+        {
+            return Task.FromResult<byte[]>(null);
         }
 
         public Task<string[]> GetEventTypeNames()

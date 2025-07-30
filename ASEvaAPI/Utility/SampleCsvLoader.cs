@@ -31,23 +31,61 @@ namespace ASEva.Utility
         /// <returns>csv读取器，若文件不存在或创建失败则返回空</returns>
         public static SampleCsvLoader CreateLoader(String file)
         {
+            if (file == null || !File.Exists(file)) return null;
+
+            var fileNameComps = Path.GetFileNameWithoutExtension(file).Split('@');
+            if (fileNameComps.Length == 0) return null;
+
+            var protocol = fileNameComps[0];
+            int? optionalChannel = null;
+            if (fileNameComps.Length >= 2)
+            {
+                int channel;
+                if (!Int32.TryParse(fileNameComps[1], out channel)) return null;
+                optionalChannel = channel;
+            }
+
+            Stream stream = null;
+            try { stream = File.OpenRead(file); }
+            catch (Exception ex)
+            {
+                Dump.Exception(ex);
+                return null;
+            }
+
+            return CreateLoader(stream, protocol, optionalChannel);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.4) Create sample CSV file loader from the specified stream
+        /// </summary>
+        /// <param name="stream">Stream</param>
+        /// <param name="protocol">Sample protocol</param>
+        /// <param name="channel">Sample channel</param>
+        /// <returns>Sample CSV file loader object, null if failed to load</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.4) 根据指定数据流创建样本csv读取器
+        /// </summary>
+        /// <param name="stream">数据流</param>
+        /// <param name="protocol">样本协议</param>
+        /// <param name="channel">样本通道</param>
+        /// <returns>csv读取器，若创建失败则返回空</returns>
+        public static SampleCsvLoader CreateLoader(Stream stream, String protocol, int? channel)
+        {
+            if (stream == null) return null;
+            if (String.IsNullOrEmpty(protocol)) return null;
+            if (channel != null && channel < 0) return null;
+
             StreamReader reader = null;
             try
             {
-                if (!File.Exists(file)) return null;
-
                 var loader = new SampleCsvLoader();
+                loader.protocol = protocol;
+                loader.channel = channel;
 
-                var fileNameComps = Path.GetFileNameWithoutExtension(file).Split('@');
-                loader.protocol = fileNameComps[0];
-                if (fileNameComps.Length >= 2)
-                {
-                    int channel;
-                    if (!Int32.TryParse(fileNameComps[1], out channel)) return null;
-                    loader.channel = channel;
-                }
-
-                reader = new StreamReader(file);
+                reader = new StreamReader(stream);
                 var firstLine = reader.ReadLine();
                 if (firstLine.StartsWith("Sample Table,v2")) // v2
                 {

@@ -37,21 +37,61 @@ namespace ASEva.Utility
         {
             if (File.Exists(file) && !overwrite) return null;
 
+            var fileNameComps = Path.GetFileNameWithoutExtension(file).Split('@');
+            if (fileNameComps.Length == 0) return null;
+
+            var protocol = fileNameComps[0];
+            int? optionalChannel = null;
+            if (fileNameComps.Length >= 2)
+            {
+                int channel;
+                if (!Int32.TryParse(fileNameComps[1], out channel)) return null;
+                optionalChannel = channel;
+            }
+
+            Stream stream = null;
+            try { stream = File.OpenWrite(file); }
+            catch (Exception ex)
+            {
+                Dump.Exception(ex);
+                return null;
+            }
+            
+            return CreateWriter(stream, protocol, optionalChannel, titles);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.4) Create sample CSV writer writing to the specified stream
+        /// </summary>
+        /// <param name="stream">Stream</param>
+        /// <param name="protocol">Sample protocol</param>
+        /// <param name="channel">Sample channel</param>
+        /// <param name="titles">Title of sample's fields</param>
+        /// <returns>Sample CSV writer, null if failed</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.4) 根据指定数据流创建样本csv写入器
+        /// </summary>
+        /// <param name="stream">数据流</param>
+        /// <param name="protocol">样本协议</param>
+        /// <param name="channel">样本通道</param>
+        /// <param name="titles">样本标题</param>
+        /// <returns>csv写入器，若失败则返回空</returns>
+        public static SampleCsvWriter CreateWriter(Stream stream, String protocol, int? channel, List<String> titles)
+        {
+            if (stream == null) return null;
+            if (String.IsNullOrEmpty(protocol)) return null;
+            if (channel != null && channel < 0) return null;
+
             StreamWriter writer = null;
             try
             {
                 var output = new SampleCsvWriter();
+                output.protocol = protocol;
+                output.channel = channel;
 
-                var fileNameComps = Path.GetFileNameWithoutExtension(file).Split('@');
-                output.protocol = fileNameComps[0];
-                if (fileNameComps.Length >= 2)
-                {
-                    int channel;
-                    if (!Int32.TryParse(fileNameComps[1], out channel)) return null;
-                    output.channel = channel;
-                }
-
-                writer = new StreamWriter(file, false, Encoding.UTF8);
+                writer = new StreamWriter(stream, Encoding.UTF8);
 
                 var titleLine = "Session,Sync State,CPU Tick,Host Posix,Guest Posix,Gnss Posix,Time";
                 if (titles != null) titleLine += "," + String.Join(",", titles);

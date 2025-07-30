@@ -4706,4 +4706,65 @@ namespace ASEva
         /// </summary>
         public String SampleTitle { get; set; }
     }
+
+    /// \~English
+    /// <summary>
+    /// (api:app=3.10.4) Content type of event snapshot
+    /// </summary>
+    /// \~Chinese
+    /// <summary>
+    /// (api:app=3.10.4) 事件快照内容类型
+    /// </summary>
+    public enum EventSnapshotContentType
+    {
+        /// \~English
+        /// <summary>
+        /// Signal table
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 信号表
+        /// </summary>
+        TableData = 1,
+
+        /// \~English
+        /// <summary>
+        /// City-level map image
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 城市尺度地图图像
+        /// </summary>
+        LocationCityImage = 2,
+
+        /// \~English
+        /// <summary>
+        /// Road-level map image
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 街道尺度地图图像
+        /// </summary>
+        LocationRoadImage = 3,
+
+        /// \~English
+        /// <summary>
+        /// Video image
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 视频图像
+        /// </summary>
+        VideoImage = 4,
+
+        /// \~English
+        /// <summary>
+        /// Bird view image
+        /// </summary>
+        /// \~Chinese
+        /// <summary>
+        /// 俯瞰图图像
+        /// </summary>
+        BirdViewImage = 5,
+    }
 }

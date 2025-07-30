@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using ASEva.Samples;
 using ASEva.Utility;
@@ -27,6 +28,8 @@ namespace ASEva
         CreatePanelResult CreateConfigPanel(object caller, String dialogClassID, String transformID, out object panel, out DialogClassInfo info);
         GraphPanel CreateGraphPanelForType(GraphType graphType, String styleName);
         GraphPanel CreateGraphPanelForID(int graphID, String styleName);
+        Stream CreateSefInputStream(String filePath);
+        Stream CreateSefOutputStream(String filePath);
         CreatePanelResult CreateWindowPanel(object caller, String windowClassID, String transformID, out object panel, out WindowClassInfo info);
         CommonImage DecodeImage(byte[] imageData);
         bool DeleteToRecycleBin(String path);
@@ -468,6 +471,40 @@ namespace ASEva
         public static GraphPanel CreateGraphPanelForID(int graphID, String styleName)
         {
             return Handler.CreateGraphPanelForID(graphID, styleName);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.4) Create Spadas Encrypted File's input stream
+        /// </summary>
+        /// <param name="filePath">File path</param>
+        /// <returns>File input stream, null if failed to create</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.4) 创建Spadas加密文件的输入流
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        /// <returns>文件输入流，若创建失败则返回null</returns>
+        public static Stream CreateSefInputStream(String filePath)
+        {
+            return Handler.CreateSefInputStream(filePath);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.4) Create Spadas Encrypted File's output stream
+        /// </summary>
+        /// <param name="filePath">File path</param>
+        /// <returns>File output stream, null if failed to create</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.4) 创建Spadas加密文件的输出流
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        /// <returns>文件输出流，若创建失败则返回null</returns>
+        public static Stream CreateSefOutputStream(String filePath)
+        {
+            return Handler.CreateSefOutputStream(filePath);
         }
 
         /// \~English

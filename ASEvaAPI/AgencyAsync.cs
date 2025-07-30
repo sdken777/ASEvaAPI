@@ -87,6 +87,7 @@ namespace ASEva
         Task<(ConfigStatus, ConfigStatus[])> GetDialogRelatedModulesConfigStatus(String dialogClassID, String transformID);
         Task<object[]> GetEventHandles();
         Task<EventInfo> GetEventInfo(object eventHandle);
+        Task<byte[]> GetEventSnapshotContent(object eventHandle, EventSnapshotContentType contentType);
         Task<String[]> GetEventTypeNames();
         Task<SessionIdentifier[]> GetFilteredSessionList();
         Task<double> GetFilteredSessionListTotalLength();
@@ -1495,6 +1496,25 @@ namespace ASEva
         public static Task<EventInfo> GetEventInfo(object eventHandle)
         {
             return Handler.GetEventInfo(eventHandle);
+        }
+
+        /// \~English
+        /// <summary>
+        /// (api:app=3.10.4) Get content of event snapshot
+        /// </summary>
+        /// <param name="eventHandle">Event handle</param>
+        /// <param name="contentType">Content type</param>
+        /// <returns>Content of event snapshot, null if failed</returns>
+        /// \~Chinese
+        /// <summary>
+        /// (api:app=3.10.4) 获取事件快照内容
+        /// </summary>
+        /// <param name="eventHandle">事件对象</param>
+        /// <param name="contentType">内容类型</param>
+        /// <returns>事件快照内容，若失败则返回null</returns>
+        public static Task<byte[]> GetEventSnapshotContent(object eventHandle, EventSnapshotContentType contentType)
+        {
+            return Handler.GetEventSnapshotContent(eventHandle, contentType);
         }
 
         /// \~English
