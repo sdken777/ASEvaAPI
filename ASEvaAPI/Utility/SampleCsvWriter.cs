@@ -123,6 +123,8 @@ namespace ASEva.Utility
                 list.Add(info.GNSSPosix.ToString());
             }
 
+            list.Add(sample.Offset.ToString());
+
             int count = 0;
             foreach (var val in sample.Values)
             {
