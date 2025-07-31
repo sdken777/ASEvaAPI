@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 10, 4, 0); // Update log / 更新记录: 新增AgencyLocal.CreateSefInputStream, AgencyLocal.CreateSefOutputStream, AgencyAsync.GetEventSnapshotContent。SampleCsvLoader/Writer支持以Stream对象初始化
+            return new Version(3, 10, 4, 1); // Update log / 更新记录: 修正SampleCsvWriter
         }
 
         /// \~English
