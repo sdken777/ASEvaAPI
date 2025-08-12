@@ -1,4 +1,5 @@
 using System;
+using ASEva.Utility;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
@@ -68,7 +69,13 @@ namespace ASEva.UIAvalonia
         public SkiaView()
         {
             InitializeComponent();
-            renderingLogic.OnRender += (canvas) => RenderSkia?.Invoke(this, new SkiaRenderEventArgs(canvas));
+            renderingLogic.OnRender += (canvas) =>
+            {
+                var moduleID = ModuleID;
+                if (moduleID != null) DrawBeat.CallbackBegin(this, moduleID);
+                RenderSkia?.Invoke(this, new SkiaRenderEventArgs(canvas));
+                if (moduleID != null) DrawBeat.CallbackEnd(this);
+            };
         }
 
 		/// \~English
@@ -82,7 +89,17 @@ namespace ASEva.UIAvalonia
         public void QueueRender()
         {
             InvalidateVisual();
-        }    
+        }   
+
+		/// \~English
+		/// <summary>
+		/// (api:avalonia=1.4.3) Component ID of owner window or dialog class, for statistics of rendering time
+		/// </summary>
+		/// \~Chinese
+		/// <summary>
+		/// (api:avalonia=1.4.3) 所属窗口组件或对话框组件ID，用于绘图时间记录与反馈
+		/// </summary>
+        public String ModuleID { get; set; } 
 
         public override void Render(DrawingContext context)
         {

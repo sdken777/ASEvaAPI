@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.4.2
+            version=1.4.3
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -525,6 +525,16 @@
             \~Chinese
             <summary>
             提交新的渲染请求
+            </summary>
+        </member>
+        <member name="P:ASEva.UIAvalonia.SkiaView.ModuleID">
+            \~English
+            <summary>
+            (api:avalonia=1.4.3) Component ID of owner window or dialog class, for statistics of rendering time
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.4.3) 所属窗口组件或对话框组件ID，用于绘图时间记录与反馈
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.SkiaView.InitializeComponent(System.Boolean)">
