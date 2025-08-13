@@ -10,7 +10,7 @@
             <Label Grid.Column="0" Content="{DynamicResource draw-gl-loop-interval}" />
             <Label Grid.Column="2" x:Name="labelLoopInterval" />
         </Grid>
-        <Border Grid.Row="2" Background="Black" CornerRadius="3" Padding="1">
+        <Border Grid.Row="2" Background="Black" CornerRadius="{StaticResource GlobalCornerRadius}" Padding="{StaticResource GlobalCornerPadding}">
             <aseva:EtoEmbedder x:Name="etoEmbedder" />
         </Border>
         <Grid Grid.Row="4" ColumnDefinitions="Auto,8,Auto,8,Auto,*,Auto">

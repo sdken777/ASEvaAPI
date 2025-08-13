@@ -11,7 +11,7 @@ namespace ASEvaAPIAvaloniaTest
         [STAThread]
         public static void Main(string[] args) // Test program entry point
         {
-            if (!App.Init()) return;
+            if (!App.Init(() => AppBuilder.Configure<AvaloniaApplication>().UsePlatformDetect().WithInterFont())) return;
 
             var startup = new Startup();
             App.Run(startup);

@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Class="ASEvaAPIAvaloniaTest.BasicPageA"
         mc:Ignorable="d" d:DesignWidth="650" d:DesignHeight="300">
-    <Border CornerRadius="3" Background="LightYellow">
+    <Border CornerRadius="{StaticResource GlobalCornerRadius}" Background="LightYellow">
         <Grid Margin="8" RowDefinitions="Auto,8,Auto,8,Auto,8,Auto,2,Auto,2,Auto,8,Auto">
             <Label Grid.Row="0" Content="{DynamicResource basic-menu-notice}" />
             <Grid Grid.Row="2" ColumnDefinitions="Auto,8,Auto,8,Auto,8,Auto,8,Auto,*,Auto,8,Auto">

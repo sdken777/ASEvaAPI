@@ -7,11 +7,11 @@
         x:Class="ASEvaAPIAvaloniaTest.PlotOxy"
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="400">
     <Grid ColumnDefinitions="Auto,8,*">
-        <Border Grid.Row="0" Background="White" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
-            <TreeView x:Name="treeView" Width="250" ItemsSource="{Binding TreeNodes}">
+        <Border Grid.Row="0" Background="White" BorderThickness="1" BorderBrush="Gray" CornerRadius="{StaticResource GlobalCornerRadius}">
+            <TreeView x:Name="treeView" Width="250" BorderThickness="0" ItemsSource="{Binding TreeNodes}">
                 <TreeView.ItemTemplate>
                     <TreeDataTemplate ItemsSource="{Binding SubNodes}">
-                        <Border HorizontalAlignment="Left" CornerRadius="3" Padding="3">
+                        <Border HorizontalAlignment="Left" CornerRadius="{StaticResource GlobalCornerRadius}" Padding="3">
                             <TextBlock Text="{Binding Title}" />
                         </Border>
                     </TreeDataTemplate>

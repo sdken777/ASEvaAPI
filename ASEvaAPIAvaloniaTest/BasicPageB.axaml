@@ -11,17 +11,17 @@
             <ColumnDefinition Width="4" />
             <ColumnDefinition Width="*" MinWidth="200" />
         </Grid.ColumnDefinitions>
-        <Border Grid.Column="0" CornerRadius="3" Background="PaleGreen">
+        <Border Grid.Column="0" CornerRadius="{StaticResource GlobalCornerRadius}" Background="PaleGreen">
             <Grid Margin="8" ColumnDefinitions="Auto,8,*">
                 <Grid Grid.Column="0" Width="130" RowDefinitions="*,8,*">
-                    <ListBox Grid.Row="0" x:Name="listBox" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
+                    <ListBox Grid.Row="0" x:Name="listBox" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="{StaticResource GlobalCornerRadius}">
                         <ListBox.Styles>
                             <Style Selector="ListBoxItem">
                                 <Setter Property="Padding" Value="8,4,8,4" />
                             </Style>
                         </ListBox.Styles>
                     </ListBox>
-                    <ListBox Grid.Row="2" x:Name="checkListBox" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
+                    <ListBox Grid.Row="2" x:Name="checkListBox" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="{StaticResource GlobalCornerRadius}">
                         <ListBox.Styles>
                             <Style Selector="ListBoxItem">
                                 <Setter Property="Padding" Value="8,1,8,1" />
@@ -35,11 +35,11 @@
                     </ListBox>
                 </Grid>
                 <Grid Grid.Column="2" RowDefinitions="*,2,Auto">
-                    <Border Grid.Row="0" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
-                        <TreeView x:Name="treeView" ItemsSource="{Binding TreeNodes}">
+                    <Border Grid.Row="0" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="{StaticResource GlobalCornerRadius}">
+                        <TreeView x:Name="treeView" BorderThickness="0" ItemsSource="{Binding TreeNodes}">
                             <TreeView.ItemTemplate>
                                 <TreeDataTemplate ItemsSource="{Binding SubNodes}">
-                                    <Border HorizontalAlignment="Left" CornerRadius="3" Padding="3" Background="{Binding Background}">
+                                    <Border HorizontalAlignment="Left" CornerRadius="{StaticResource GlobalCornerRadius}" Padding="3" Background="{Binding Background}">
                                         <TextBlock Text="{Binding Title}" Foreground="{Binding Foreground}" />
                                     </Border>
                                 </TreeDataTemplate>
@@ -59,19 +59,19 @@
             </Grid>
         </Border>
         <GridSplitter Grid.Column="1" ResizeDirection="Columns" />
-        <Border Grid.Column="2" CornerRadius="3" Background="Pink">
+        <Border Grid.Column="2" CornerRadius="{StaticResource GlobalCornerRadius}" Background="Pink">
             <Grid Margin="8" RowDefinitions="Auto,2,*,2,Auto">
                 <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto,*,Auto">
                     <Button Classes="hyperlink" Grid.Column="0" x:Name="linkAddControl" Content="{DynamicResource basic-flow-add}" />
                     <Button Classes="hyperlink" Grid.Column="2" x:Name="linkInsertControl" Content="{DynamicResource basic-flow-insert}" />
                     <Button Classes="hyperlink" Grid.Column="4" x:Name="linkRemoveControl" Content="{DynamicResource basic-flow-remove}" />
                 </Grid>
-                <Border Grid.Row="2" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3">
+                <Border Grid.Row="2" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="{StaticResource GlobalCornerRadius}">
                     <ScrollViewer>
                         <ItemsControl x:Name="flowLayout" ItemsSource="{Binding ControlItems}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <Border Margin="4" CornerRadius="3" Background="LightYellow" BorderThickness="2" BorderBrush="{Binding BorderBrush}" IsVisible="{Binding IsVisible}">
+                                    <Border Margin="4" CornerRadius="{StaticResource GlobalCornerRadius}" Background="LightYellow" BorderThickness="2" BorderBrush="{Binding BorderBrush}" IsVisible="{Binding IsVisible}">
                                         <local:TestControl Height="90" x:Name="testControl" PointerReleased="testControl_PointerReleased" />
                                     </Border>
                                 </DataTemplate>

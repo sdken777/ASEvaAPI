@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Class="ASEvaAPIAvaloniaTest.BasicPageD"
         mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="300">
-    <Border CornerRadius="3" Background="LightYellow">
+    <Border CornerRadius="{StaticResource GlobalCornerRadius}" Background="LightYellow">
         <Grid Margin="8" RowDefinitions="Auto,8,Auto">
             <Grid Grid.Row="0" ColumnDefinitions="1,8,*,8,1">
                 <Rectangle Grid.Column="0" Fill="Gray" />

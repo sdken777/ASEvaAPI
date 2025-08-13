@@ -19,7 +19,7 @@
             <Rectangle Grid.Column="10" Fill="Gray" />
             <Button Grid.Column="12" x:Name="buttonCallScript" Content="{DynamicResource web-call-script}" />
         </Grid>
-        <Border Grid.Row="2" Background="White" BorderThickness="1" BorderBrush="Gray" CornerRadius="3" Padding="1">
+        <Border Grid.Row="2" Background="White" BorderThickness="1" BorderBrush="Gray" CornerRadius="{StaticResource GlobalCornerRadius}" Padding="{StaticResource GlobalCornerPadding}">
             <aseva:EtoEmbedder x:Name="webView" />
         </Border>
     </Grid>

@@ -2,6 +2,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="ASEva.UIAvalonia.AvaloniaApplicationSimpleRoundTheme"
              RequestedThemeVariant="Default">
+    <Application.Resources>
+        <ResourceDictionary>
+            <CornerRadius x:Key="GlobalCornerRadius">2</CornerRadius>
+            <Thickness x:Key="GlobalCornerPadding">1</Thickness>
+        </ResourceDictionary>
+    </Application.Resources>
     <Application.Styles>
         <SimpleTheme />
         <StyleInclude Source="avares://Avalonia.Controls.ColorPicker/Themes/Simple/Simple.xaml" />
@@ -9,37 +15,37 @@
         <StyleInclude Source="avares://OxyPlot.Avalonia/Themes/Default.axaml"/>
         <StyleInclude Source="avares://ASEvaAPIAvalonia/Themes/ButtonHyperlinkSimpleTheme.axaml"/>
         <Style Selector="Button">
-            <Setter Property="CornerRadius" Value="3" />
+            <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}" />
         </Style>
         <Style Selector="TextBox">
-            <Setter Property="CornerRadius" Value="3" />
+            <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}" />
         </Style>
         <Style Selector="AutoCompleteBox">
-            <Setter Property="CornerRadius" Value="3" />
+            <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}" />
         </Style>
         <Style Selector="ComboBox">
-            <Setter Property="CornerRadius" Value="3" />
+            <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}" />
         </Style>
         <Style Selector="CheckBox">
-            <Setter Property="CornerRadius" Value="3" />
+            <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}" />
         </Style>
         <Style Selector="NumericUpDown">
-            <Setter Property="CornerRadius" Value="3" />
+            <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}" />
         </Style>
         <Style Selector="DatePicker">
-            <Setter Property="CornerRadius" Value="3" />
+            <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}" />
         </Style>
         <Style Selector="TimePicker">
-            <Setter Property="CornerRadius" Value="3" />
+            <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}" />
         </Style>
         <Style Selector="CalendarDatePicker">
-            <Setter Property="CornerRadius" Value="3" />
+            <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}" />
         </Style>
         <Style Selector="ColorPicker">
-            <Setter Property="CornerRadius" Value="3" />
+            <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}" />
         </Style>
         <Style Selector="ToolTip">
-            <Setter Property="CornerRadius" Value="3" />
+            <Setter Property="CornerRadius" Value="{StaticResource GlobalCornerRadius}" />
         </Style>
     </Application.Styles>
 </Application>

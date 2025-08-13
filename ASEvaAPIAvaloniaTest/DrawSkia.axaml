@@ -6,7 +6,7 @@
         xmlns:aseva="clr-namespace:ASEva.UIAvalonia;assembly=ASEvaAPIAvalonia"
         x:Class="ASEvaAPIAvaloniaTest.DrawSkia"
         mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="300" Width="200">
-    <Border CornerRadius="3" Background="LightYellow">
+    <Border CornerRadius="{StaticResource GlobalCornerRadius}" Background="LightYellow">
         <aseva:SkiaView x:Name="skiaView" />
     </Border>
 

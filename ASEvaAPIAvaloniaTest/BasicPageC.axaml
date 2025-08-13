@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Class="ASEvaAPIAvaloniaTest.BasicPageC"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="300">
-    <Border CornerRadius="3" Background="LightYellow">
+    <Border CornerRadius="{StaticResource GlobalCornerRadius}" Background="LightYellow">
         <Grid Margin="8" ColumnDefinitions="Auto,8,Auto,8,1,8,*">
             <TextBox Grid.Column="0" Width="150" AcceptsReturn="True" TextWrapping="Wrap" />
             <Grid Grid.Column="2" Width="180" RowDefinitions="Auto,2,*,2,Auto,2,Auto,2,Auto">
@@ -12,7 +12,7 @@
                     <Button Classes="hyperlink" Grid.Column="0" x:Name="linkCheckAll" Content="{DynamicResource basic-checklist-check-all}" />
                     <Button Classes="hyperlink" Grid.Column="2" x:Name="linkUncheckAll" Content="{DynamicResource basic-checklist-uncheck-all}" />
                 </Grid>
-                <ListBox Grid.Row="2" x:Name="checkListBox" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3" ItemsSource="{Binding CheckItems}">
+                <ListBox Grid.Row="2" x:Name="checkListBox" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="{StaticResource GlobalCornerRadius}" ItemsSource="{Binding CheckItems}">
                     <ListBox.Styles>
                         <Style Selector="ListBoxItem">
                             <Setter Property="Padding" Value="8,1,8,1" />
@@ -43,8 +43,8 @@
                     <Button Classes="hyperlink" Grid.Column="0" x:Name="linkAddTableRow" Content="{DynamicResource basic-grid-add-row}" />
                     <Button Classes="hyperlink" Grid.Column="2" x:Name="linkRemoveTableRow" Content="{DynamicResource basic-grid-remove-row}" />
                 </Grid>
-                <Border Grid.Row="2" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3" Padding="1">
-                    <DataGrid x:Name="mainTableView" GridLinesVisibility="All" ItemsSource="{Binding MainTableItems}">
+                <Border Grid.Row="2" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="{StaticResource GlobalCornerRadius}" Padding="{StaticResource GlobalCornerPadding}">
+                    <DataGrid x:Name="mainTableView" GridLinesVisibility="All" BorderThickness="0" ItemsSource="{Binding MainTableItems}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="{DynamicResource basic-grid-index-title}" Width="75" IsReadOnly="True" Binding="{Binding Index}" />
                             <DataGridTemplateColumn Header="{DynamicResource basic-grid-key-title}" Width="*" >
@@ -68,8 +68,8 @@
                     <Button Classes="hyperlink" Grid.Column="0" x:Name="linkChangeTableGridColor" Content="{DynamicResource basic-grid-change-color}" />
                     <Label Grid.Column="2" x:Name="labelChangedRow" />
                 </Grid>
-                <Border Grid.Row="6" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="3" Padding="1">
-                    <DataGrid x:Name="subTableView" Height="80" GridLinesVisibility="All" />
+                <Border Grid.Row="6" Background="WhiteSmoke" BorderThickness="1" BorderBrush="Gray" CornerRadius="{StaticResource GlobalCornerRadius}" Padding="{StaticResource GlobalCornerPadding}">
+                    <DataGrid x:Name="subTableView" Height="80" GridLinesVisibility="All" BorderThickness="0" />
                 </Border>
             </Grid>
         </Grid>

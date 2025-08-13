@@ -5,7 +5,7 @@
         xmlns:local="clr-namespace:ASEvaAPIAvaloniaTest"
         x:Class="ASEvaAPIAvaloniaTest.DrawDefault"
         mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="300" Width="200">
-    <Border CornerRadius="3" Background="LightYellow">
+    <Border CornerRadius="{StaticResource GlobalCornerRadius}" Background="LightYellow">
         <Canvas x:Name="canvas" Background="Transparent">
             <Line StartPoint="10,100" EndPoint="190,100" Stroke="Black" />
             <Line StartPoint="10,120" EndPoint="190,120" Stroke="Black" />
