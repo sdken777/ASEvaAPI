@@ -38,7 +38,7 @@ namespace ASEva
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(3, 10, 4, 1); // Update log / 更新记录: 修正SampleCsvWriter
+            return new Version(3, 10, 4, 2); // Update log / 更新记录: DrawBeat多线程安全
         }
 
         /// \~English

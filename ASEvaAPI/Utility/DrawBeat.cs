@@ -44,24 +44,27 @@ namespace ASEva.Utility
         public static bool CallerBegin(int id)
         {
             if (!enabled) return true;
-            if (!ctxs.ContainsKey(id))
+            lock (ctxs)
             {
-                ctxs[id] = new DrawBeatContext();
-                ctxs[id].Category = "";
-            }
-            if (!ctxs[id].Ongoing && !ctxs[id].InCaller)
-            {
-                var now = DateTime.Now;
-                if (ctxs[id].IdleTimer != null)
+                if (!ctxs.ContainsKey(id))
                 {
-                    if (now < ctxs[id].IdleTimer.Value) ctxs[id].IdleTimer = now;
-                    if ((now - ctxs[id].IdleTimer.Value).TotalMilliseconds < ctxs[id].DrawInterval) return false;
+                    ctxs[id] = new DrawBeatContext();
+                    ctxs[id].Category = "";
                 }
-                ctxs[id].Ongoing = true;
-                ctxs[id].InCaller = true;
-                return true;
+                if (!ctxs[id].Ongoing && !ctxs[id].InCaller)
+                {
+                    var now = DateTime.Now;
+                    if (ctxs[id].IdleTimer != null)
+                    {
+                        if (now < ctxs[id].IdleTimer.Value) ctxs[id].IdleTimer = now;
+                        if ((now - ctxs[id].IdleTimer.Value).TotalMilliseconds < ctxs[id].DrawInterval) return false;
+                    }
+                    ctxs[id].Ongoing = true;
+                    ctxs[id].InCaller = true;
+                    return true;
+                }
+                else return false;
             }
-            else return false;
         }
 
         /// \~English
@@ -96,8 +99,11 @@ namespace ASEva.Utility
         public static void CallerEnd(int id)
         {
             if (!enabled) return;
-            if (!ctxs.ContainsKey(id)) return;
-            ctxs[id].InCaller = false;
+            lock (ctxs)
+            {
+                if (!ctxs.ContainsKey(id)) return;
+                ctxs[id].InCaller = false;
+            }
         }
 
         /// \~English
@@ -131,9 +137,12 @@ namespace ASEva.Utility
         public static void CallbackBegin(int id, String category)
         {
             if (!enabled) return;
-            if (!ctxs.ContainsKey(id)) ctxs[id] = new DrawBeatContext();
-            ctxs[id].Category = category == null ? "" : category;
-            if (ctxs[id].CallbackBeginTime == null) ctxs[id].CallbackBeginTime = DateTime.Now;
+            lock (ctxs)
+            {
+                if (!ctxs.ContainsKey(id)) ctxs[id] = new DrawBeatContext();
+                ctxs[id].Category = category == null ? "" : category;
+                if (ctxs[id].CallbackBeginTime == null) ctxs[id].CallbackBeginTime = DateTime.Now;
+            }
         }
 
         /// \~English
@@ -167,29 +176,32 @@ namespace ASEva.Utility
         public static void CallbackEnd(int id)
         {
             if (!enabled) return;
-            if (!ctxs.ContainsKey(id)) return;
-            if (ctxs[id].CallbackBeginTime != null)
+            lock (ctxs)
             {
-                DateTimeRange range;
-                range.start = 0.0000001 * ctxs[id].CallbackBeginTime.Value.Ticks;
-                range.end = 0.0000001 * DateTime.Now.Ticks;
-
-                ctxs[id].RecentCallbackRanges.Add(range);
-                while (ctxs[id].RecentCallbackRanges.Count > 0 && ctxs[id].RecentCallbackRanges.Last().end - ctxs[id].RecentCallbackRanges[0].start > 3) ctxs[id].RecentCallbackRanges.RemoveAt(0);
-
-                if (!ctxs[id].InCaller)
+                if (!ctxs.ContainsKey(id)) return;
+                if (ctxs[id].CallbackBeginTime != null)
                 {
-                    var category = ctxs[id].Category;
-                    if (!recentOutCallerCallbackRanges.ContainsKey(category)) recentOutCallerCallbackRanges[category] = new List<DateTimeRange>();
+                    DateTimeRange range;
+                    range.start = 0.0000001 * ctxs[id].CallbackBeginTime.Value.Ticks;
+                    range.end = 0.0000001 * DateTime.Now.Ticks;
 
-                    var list = recentOutCallerCallbackRanges[category];
-                    list.Add(range);
-                    while (list.Count > 0 && list.Last().end - list[0].start > 3) list.RemoveAt(0);
+                    ctxs[id].RecentCallbackRanges.Add(range);
+                    while (ctxs[id].RecentCallbackRanges.Count > 0 && ctxs[id].RecentCallbackRanges.Last().end - ctxs[id].RecentCallbackRanges[0].start > 3) ctxs[id].RecentCallbackRanges.RemoveAt(0);
+
+                    if (!ctxs[id].InCaller)
+                    {
+                        var category = ctxs[id].Category;
+                        if (!recentOutCallerCallbackRanges.ContainsKey(category)) recentOutCallerCallbackRanges[category] = new List<DateTimeRange>();
+
+                        var list = recentOutCallerCallbackRanges[category];
+                        list.Add(range);
+                        while (list.Count > 0 && list.Last().end - list[0].start > 3) list.RemoveAt(0);
+                    }
+
+                    ctxs[id].CallbackBeginTime = null;
+                    ctxs[id].IdleTimer = DateTime.Now;
+                    ctxs[id].Ongoing = false;
                 }
-
-                ctxs[id].CallbackBeginTime = null;
-                ctxs[id].IdleTimer = DateTime.Now;
-                ctxs[id].Ongoing = false;
             }
         }
 
@@ -220,34 +232,37 @@ namespace ASEva.Utility
         public static void DownSize()
         {
             if (!enabled) return;
-            
-            double latestTime = 0;
-            foreach (var pair in ctxs)
-            {
-                if (pair.Value.RecentCallbackRanges.Count > 0)
-                {
-                    latestTime = Math.Max(latestTime, pair.Value.RecentCallbackRanges.Last().end);
-                }
-            }
 
-            var emptyKeys = new List<int>();
-            foreach (var pair in ctxs)
+            lock (ctxs)
             {
-                while (true)
+                double latestTime = 0;
+                foreach (var pair in ctxs)
                 {
-                    if (pair.Value.RecentCallbackRanges.Count == 0)
+                    if (pair.Value.RecentCallbackRanges.Count > 0)
                     {
-                        emptyKeys.Add(pair.Key);
-                        break;
+                        latestTime = Math.Max(latestTime, pair.Value.RecentCallbackRanges.Last().end);
                     }
-                    if (latestTime - pair.Value.RecentCallbackRanges[0].start > 3) pair.Value.RecentCallbackRanges.RemoveAt(0);
-                    else break;
                 }
-            }
 
-            foreach (var key in emptyKeys)
-            {
-                ctxs.Remove(key);
+                var emptyKeys = new List<int>();
+                foreach (var pair in ctxs)
+                {
+                    while (true)
+                    {
+                        if (pair.Value.RecentCallbackRanges.Count == 0)
+                        {
+                            emptyKeys.Add(pair.Key);
+                            break;
+                        }
+                        if (latestTime - pair.Value.RecentCallbackRanges[0].start > 3) pair.Value.RecentCallbackRanges.RemoveAt(0);
+                        else break;
+                    }
+                }
+
+                foreach (var key in emptyKeys)
+                {
+                    ctxs.Remove(key);
+                }
             }
         }
 
@@ -263,18 +278,21 @@ namespace ASEva.Utility
         {
             var table = new Dictionary<int, double>();
             if (!enabled) return table;
-            
-            foreach (var pair in ctxs)
+
+            lock (ctxs)
             {
-                if (pair.Value.RecentCallbackRanges.Count == 0) continue;
-                double sum = 0;
-                foreach (var range in pair.Value.RecentCallbackRanges)
+                foreach (var pair in ctxs)
                 {
-                    sum += range.end - range.start;
+                    if (pair.Value.RecentCallbackRanges.Count == 0) continue;
+                    double sum = 0;
+                    foreach (var range in pair.Value.RecentCallbackRanges)
+                    {
+                        sum += range.end - range.start;
+                    }
+                    table[pair.Key] = sum / pair.Value.RecentCallbackRanges.Count;
                 }
-                table[pair.Key] = sum / pair.Value.RecentCallbackRanges.Count;
+                return table;
             }
-            return table;
         }
 
         /// \~English
@@ -290,17 +308,20 @@ namespace ASEva.Utility
             var table = new Dictionary<String, double>();
             if (!enabled) return table;
 
-            foreach (var pair in recentOutCallerCallbackRanges)
+            lock (ctxs)
             {
-                double sum = 0;
-                foreach (var range in pair.Value)
+                foreach (var pair in recentOutCallerCallbackRanges)
                 {
-                    sum += range.end - range.start;
+                    double sum = 0;
+                    foreach (var range in pair.Value)
+                    {
+                        sum += range.end - range.start;
+                    }
+                    pair.Value.Clear();
+                    table[pair.Key] = sum;
                 }
-                pair.Value.Clear();
-                table[pair.Key] = sum;
+                return table;
             }
-            return table;
         }
 
         /// \~English
@@ -314,9 +335,13 @@ namespace ASEva.Utility
         public static void SetDrawIntervals(Dictionary<int, int> intervals)
         {
             if (!enabled) return;
-            foreach (var pair in intervals)
+
+            lock (ctxs)
             {
-                if (ctxs.ContainsKey(pair.Key)) ctxs[pair.Key].DrawInterval = pair.Value;
+                foreach (var pair in intervals)
+                {
+                    if (ctxs.ContainsKey(pair.Key)) ctxs[pair.Key].DrawInterval = pair.Value;
+                }
             }
         }
 
