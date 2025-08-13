@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using ASEva;
 using ASEva.UIAvalonia;
@@ -79,7 +80,10 @@ namespace ASEvaAPIAvaloniaTest
                 }
                 else
                 {
-                    var files = await this.GetStorageProvider().OpenFilePickerAsync(new FilePickerOpenOptions());
+                    var files = await this.GetStorageProvider().OpenFilePickerAsync(new FilePickerOpenOptions()
+                    {
+                        SuggestedStartLocation = await this.GetStorageProvider().TryGetFolderFromPathAsync(new Uri(App.WorkPath))
+                    });
                     if (files.Count > 0) App.ShowMessageBox(files[0].Path.LocalPath);
                 }
             }
