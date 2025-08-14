@@ -308,6 +308,34 @@
             <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
             <returns>可视化面板对象，若创建失败则返回null</returns>
         </member>
+        <member name="M:ASEva.Agency.CreateSefInputStream(System.String)">
+            \~English
+            <summary>
+            (api:app=3.10.4) Create Spadas Encrypted File's input stream
+            </summary>
+            <param name="filePath">File path</param>
+            <returns>File input stream, null if failed to create</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.4) 创建Spadas加密文件的输入流
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>文件输入流，若创建失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.Agency.CreateSefOutputStream(System.String)">
+            \~English
+            <summary>
+            (api:app=3.10.4) Create Spadas Encrypted File's output stream
+            </summary>
+            <param name="filePath">File path</param>
+            <returns>File output stream, null if failed to create</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.4) 创建Spadas加密文件的输出流
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>文件输出流，若创建失败则返回null</returns>
+        </member>
         <member name="M:ASEva.Agency.CreateWindowPanel(System.Object,System.String,System.String,System.Object@,ASEva.WindowClassInfo@)">
             \~English
             <summary>
@@ -1415,6 +1443,22 @@
             </summary>
             <param name="eventHandle">事件对象</param>
             <returns>事件完整信息，null表示事件对象无效或信息不完整</returns>
+        </member>
+        <member name="M:ASEva.Agency.GetEventSnapshotContent(System.Object,ASEva.EventSnapshotContentType)">
+            \~English
+            <summary>
+            (api:app=3.10.4) Get content of event snapshot
+            </summary>
+            <param name="eventHandle">Event handle</param>
+            <param name="contentType">Content type</param>
+            <returns>Content of event snapshot, null if failed</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.4) 获取事件快照内容
+            </summary>
+            <param name="eventHandle">事件对象</param>
+            <param name="contentType">内容类型</param>
+            <returns>事件快照内容，若失败则返回null</returns>
         </member>
         <member name="M:ASEva.Agency.GetEventTypeNames">
             \~English
@@ -5252,6 +5296,22 @@
             <param name="eventHandle">事件对象</param>
             <returns>事件完整信息，null表示事件对象无效或信息不完整</returns>
         </member>
+        <member name="M:ASEva.AgencyAsync.GetEventSnapshotContent(System.Object,ASEva.EventSnapshotContentType)">
+            \~English
+            <summary>
+            (api:app=3.10.4) Get content of event snapshot
+            </summary>
+            <param name="eventHandle">Event handle</param>
+            <param name="contentType">Content type</param>
+            <returns>Content of event snapshot, null if failed</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.4) 获取事件快照内容
+            </summary>
+            <param name="eventHandle">事件对象</param>
+            <param name="contentType">内容类型</param>
+            <returns>事件快照内容，若失败则返回null</returns>
+        </member>
         <member name="M:ASEva.AgencyAsync.GetEventTypeNames">
             \~English
             <summary>
@@ -7460,6 +7520,34 @@
             <param name="styleName">可视化面板样式名，若输入空则使用首个注册样式</param>
             <returns>可视化面板对象，若创建失败则返回null</returns>
         </member>
+        <member name="M:ASEva.AgencyLocal.CreateSefInputStream(System.String)">
+            \~English
+            <summary>
+            (api:app=3.10.4) Create Spadas Encrypted File's input stream
+            </summary>
+            <param name="filePath">File path</param>
+            <returns>File input stream, null if failed to create</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.4) 创建Spadas加密文件的输入流
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>文件输入流，若创建失败则返回null</returns>
+        </member>
+        <member name="M:ASEva.AgencyLocal.CreateSefOutputStream(System.String)">
+            \~English
+            <summary>
+            (api:app=3.10.4) Create Spadas Encrypted File's output stream
+            </summary>
+            <param name="filePath">File path</param>
+            <returns>File output stream, null if failed to create</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.4) 创建Spadas加密文件的输出流
+            </summary>
+            <param name="filePath">文件路径</param>
+            <returns>文件输出流，若创建失败则返回null</returns>
+        </member>
         <member name="M:ASEva.AgencyLocal.CreateWindowPanel(System.Object,System.String,System.String,System.Object@,ASEva.WindowClassInfo@)">
             \~English
             <summary>
@@ -8846,7 +8934,7 @@
         </member>
         <member name="T:ASEva.APIInfo">
             <summary>
-            version=3.10.1
+            version=3.10.4
             </summary>
         </member>
         <member name="M:ASEva.APIInfo.GetAPIVersion">
@@ -11171,6 +11259,20 @@
             <param name="file">文件路径</param>
             <returns>保存是否成功</returns>
         </member>
+        <member name="M:ASEva.GraphData.Save(System.IO.Stream)">
+            \~English
+            <summary>
+            (api:app=3.10.3) Save to stream
+            </summary>
+            <param name="stream">Stream</param>
+            <returns>Whether successful</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.3) 保存至数据流
+            </summary>
+            <param name="stream">数据流</param>
+            <returns>保存是否成功</returns>
+        </member>
         <member name="M:ASEva.GraphData.Create(ASEva.GraphDefinition)">
             \~English
             <summary>
@@ -11197,6 +11299,20 @@
             从文件读取图表数据
             </summary>
             <param name="file">文件路径</param>
+            <returns>图表数据对象</returns>
+        </member>
+        <member name="M:ASEva.GraphData.Load(System.IO.Stream)">
+            \~English
+            <summary>
+            (api:app=3.10.3) Load graph data from stream
+            </summary>
+            <param name="stream">Stream</param>
+            <returns>Graph data object</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.3) 从数据流读取图表数据
+            </summary>
+            <param name="stream">数据流</param>
             <returns>图表数据对象</returns>
         </member>
         <member name="M:ASEva.GraphData.CreateGraphDataEncapsulation(ASEva.GraphData)">
@@ -13070,21 +13186,21 @@
         <member name="M:ASEva.Plugin.OnApplicationPrepareStopping(System.Boolean)">
             \~English
             <summary>
-            (api:app=3.1.0) [Optional] Called while the application is about to exit (Background threads should be notified to stop here)
+            (api:app=3.1.0) [Optional] Called while the application is about to exit
             </summary>
-            <param name="force">Whether forced to exit</param>
+            <param name="force">Whether forced to exit. If true, background threads can be notified to stop here</param>
             <returns>Whether it's OK to exit (no use while forced to exit)</returns>
             \~Chinese
             <summary>
-            (api:app=3.1.0) [可选实现] 在应用程序准备关闭时被调用（用于发送停止线程指令等）
+            (api:app=3.1.0) [可选实现] 在应用程序准备关闭时被调用
             </summary>
-            <param name="force">是否为强制关闭</param>
+            <param name="force">是否为强制关闭，若为true可发送停止线程指令等</param>
             <returns>返回是否可关闭，强制关闭时将不起作用</returns>
         </member>
         <member name="M:ASEva.Plugin.OnApplicationStopping">
             \~English
             <summary>
-            [Optional] Called while the application is exiting (Background threads should stopped here)
+            [Optional] Called while the application is exiting (Background threads should be stopped here)
             </summary>
             \~Chinese
             <summary>
@@ -20729,6 +20845,66 @@
             输出的通用样本标题，若为null则不记录各元素值至数据文件（即GeneralSample.NumberOfSignificants为0）
             </summary>
         </member>
+        <member name="T:ASEva.EventSnapshotContentType">
+            \~English
+            <summary>
+            (api:app=3.10.4) Content type of event snapshot
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.10.4) 事件快照内容类型
+            </summary>
+        </member>
+        <member name="F:ASEva.EventSnapshotContentType.TableData">
+            \~English
+            <summary>
+            Signal table
+            </summary>
+            \~Chinese
+            <summary>
+            信号表
+            </summary>
+        </member>
+        <member name="F:ASEva.EventSnapshotContentType.LocationCityImage">
+            \~English
+            <summary>
+            City-level map image
+            </summary>
+            \~Chinese
+            <summary>
+            城市尺度地图图像
+            </summary>
+        </member>
+        <member name="F:ASEva.EventSnapshotContentType.LocationRoadImage">
+            \~English
+            <summary>
+            Road-level map image
+            </summary>
+            \~Chinese
+            <summary>
+            街道尺度地图图像
+            </summary>
+        </member>
+        <member name="F:ASEva.EventSnapshotContentType.VideoImage">
+            \~English
+            <summary>
+            Video image
+            </summary>
+            \~Chinese
+            <summary>
+            视频图像
+            </summary>
+        </member>
+        <member name="F:ASEva.EventSnapshotContentType.BirdViewImage">
+            \~English
+            <summary>
+            Bird view image
+            </summary>
+            \~Chinese
+            <summary>
+            俯瞰图图像
+            </summary>
+        </member>
         <member name="T:ASEva.Utility.ArrayPopulateExtensions">
             \~English
             <summary>
@@ -20810,6 +20986,88 @@
             基于XML元素节点创建
             </summary>
             <param name="element">XML元素节点</param>
+        </member>
+        <member name="T:ASEva.Utility.CheckPointStat">
+            \~English
+            <summary>
+            (api:app=3.10.2) Checkpoint time cost statistics
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.10.2) 检查点耗时统计信息
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.CheckPointStat.TimeCosts">
+            \~English
+            <summary>
+            Time cost of each checkpoint, in seconds
+            </summary>
+            \~Chinese
+            <summary>
+            各检查点耗时，单位秒
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.CheckPointStat.TotalTime">
+            \~English
+            <summary>
+            Total time cost, in seconds
+            </summary>
+            \~Chinese
+            <summary>
+            总耗时，单位秒
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.CheckPointStat.ToString">
+            \~English
+            <summary>
+            Convert to string, which is convenient for recording
+            </summary>
+            <returns>Formatted statistics string</returns>
+            \~Chinese
+            <summary>
+            转换为方便记录的字符串
+            </summary>
+            <returns>格式化的统计信息字符串</returns>
+        </member>
+        <member name="T:ASEva.Utility.CheckPoint">
+            \~English
+            <summary>
+            (api:app=3.10.2) Checkpoint time cost statistics utility class
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.10.2) 检查点耗时统计工具类
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.CheckPoint.AddCheckpoint(System.String,System.String)">
+            \~English
+            <summary>
+            Add a checkpoint
+            </summary>
+            <param name="statName">Statistics name</param>
+            <param name="checkpointName">Checkpoint name</param>
+            \~Chinese
+            <summary>
+            添加一个检查点
+            </summary>
+            <param name="statName">统计名称</param>
+            <param name="checkpointName">检查点名称</param>
+        </member>
+        <member name="M:ASEva.Utility.CheckPoint.ClearCheckpoint(System.String,System.Boolean)">
+            \~English
+            <summary>
+            Clear current checkpoint. If reset is true, output statistics and reset
+            </summary>
+            <param name="statName">Statistics name</param>
+            <param name="reset">Whether to reset statistics</param>
+            <returns>Checkpoint statistics</returns>
+            \~Chinese
+            <summary>
+            清除当前检查点，若reset为true则输出统计信息并重置
+            </summary>
+            <param name="statName">统计名称</param>
+            <param name="reset">是否重置统计</param>
+            <returns>检查点统计信息</returns>
         </member>
         <member name="T:ASEva.Utility.ContentToString">
             \~English
@@ -21147,6 +21405,26 @@
             \~Chinese
             <summary>
             显式指定路径
+            </summary>
+        </member>
+        <member name="T:ASEva.Utility.ExceptionExtensions">
+            \~English
+            <summary>
+            (api:app=3.9.7) Exception object related extensions
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.9.7) 异常对象相关的扩展
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.ExceptionExtensions.GetAllStackTrace(System.Exception)">
+            \~English
+            <summary>
+            For object array initialization, avoiding null reference
+            </summary>
+            \~Chinese
+            <summary>
+            用于初始化对象数组，避免空引用
             </summary>
         </member>
         <member name="T:ASEva.Utility.GenerationProcessStatus">
@@ -21859,6 +22137,24 @@
             <param name="file">文件路径</param>
             <returns>csv读取器，若文件不存在或创建失败则返回空</returns>
         </member>
+        <member name="M:ASEva.Utility.SampleCsvLoader.CreateLoader(System.IO.Stream,System.String,System.Nullable{System.Int32})">
+            \~English
+            <summary>
+            (api:app=3.10.4) Create sample CSV file loader from the specified stream
+            </summary>
+            <param name="stream">Stream</param>
+            <param name="protocol">Sample protocol</param>
+            <param name="channel">Sample channel</param>
+            <returns>Sample CSV file loader object, null if failed to load</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.4) 根据指定数据流创建样本csv读取器
+            </summary>
+            <param name="stream">数据流</param>
+            <param name="protocol">样本协议</param>
+            <param name="channel">样本通道</param>
+            <returns>csv读取器，若创建失败则返回空</returns>
+        </member>
         <member name="M:ASEva.Utility.SampleCsvLoader.GetSampleTitle">
             \~English
             <summary>
@@ -21934,6 +22230,26 @@
             <param name="overwrite">若文件已存在是否覆盖</param>
             <param name="titles">样本标题</param>
             <returns>csv写入器，若文件创建失败则返回空</returns>
+        </member>
+        <member name="M:ASEva.Utility.SampleCsvWriter.CreateWriter(System.IO.Stream,System.String,System.Nullable{System.Int32},System.Collections.Generic.List{System.String})">
+            \~English
+            <summary>
+            (api:app=3.10.4) Create sample CSV writer writing to the specified stream
+            </summary>
+            <param name="stream">Stream</param>
+            <param name="protocol">Sample protocol</param>
+            <param name="channel">Sample channel</param>
+            <param name="titles">Title of sample's fields</param>
+            <returns>Sample CSV writer, null if failed</returns>
+            \~Chinese
+            <summary>
+            (api:app=3.10.4) 根据指定数据流创建样本csv写入器
+            </summary>
+            <param name="stream">数据流</param>
+            <param name="protocol">样本协议</param>
+            <param name="channel">样本通道</param>
+            <param name="titles">样本标题</param>
+            <returns>csv写入器，若失败则返回空</returns>
         </member>
         <member name="M:ASEva.Utility.SampleCsvWriter.Write(ASEva.GeneralSample)">
             \~English
@@ -22033,6 +22349,76 @@
             \~Chinese
             <summary>
             (api:app=3.0.0) 场景csv文件读写
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.SceneCsv.Title">
+            \~English
+            <summary>
+            Title of scene properties
+            </summary>
+            \~Chinese
+            <summary>
+            场景属性标题
+            </summary>
+        </member>
+        <member name="P:ASEva.Utility.SceneCsv.Segments">
+            \~English
+            <summary>
+            Scene segment list
+            </summary>
+            \~Chinese
+            <summary>
+            场景片段列表
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.SceneCsv.#ctor">
+            \~English
+            <summary>
+            Create scene CSV object
+            </summary>
+            \~Chinese
+            <summary>
+            创建场景csv对象
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.SceneCsv.Load(System.String)">
+            \~English
+            <summary>
+            Load scene CSV object from file
+            </summary>
+            \~Chinese
+            <summary>
+            从文件加载场景csv对象
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.SceneCsv.Load(System.IO.Stream)">
+            \~English
+            <summary>
+            (api:app=3.10.3) Load scene CSV object from stream
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.10.3) 从数据流加载场景csv对象
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.SceneCsv.Save(System.String)">
+            \~English
+            <summary>
+            Save scene CSV object to file
+            </summary>
+            \~Chinese
+            <summary>
+            保存场景csv对象到文件
+            </summary>
+        </member>
+        <member name="M:ASEva.Utility.SceneCsv.Save(System.IO.Stream)">
+            \~English
+            <summary>
+            (api:app=3.10.3) Save scene CSV object to stream
+            </summary>
+            \~Chinese
+            <summary>
+            (api:app=3.10.3) 保存场景csv对象到数据流
             </summary>
         </member>
         <member name="T:ASEva.Utility.Serializer">

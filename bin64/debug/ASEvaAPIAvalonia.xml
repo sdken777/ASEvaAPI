@@ -6,7 +6,7 @@
     <members>
         <member name="T:ASEva.UIAvalonia.APIInfo">
             <summary>
-            version=1.4.2
+            version=1.4.4
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.APIInfo.GetAPIVersion">
@@ -72,13 +72,13 @@
             <summary>
             (api:avalonia=1.0.12) Initialize application with the specified AppBuilder
             </summary>
-            <param name="appBuilderCreation">The function to create AppBuilder object</param>
+            <param name="appBuilderCreation">The function to create AppBuilder object. Just return AppBuilder.Configure()</param>
             <returns>Whether initialization is successful</returns>
             \~Chinese
             <summary>
             (api:avalonia=1.0.12) 使用指定的AppBuilder进行应用程序初始化
             </summary>
-            <param name="appBuilderCreation">创建AppBuilder对象的函数</param>
+            <param name="appBuilderCreation">创建AppBuilder对象的函数，只需返回AppBuilder.Configure()</param>
             <returns>是否成功</returns>
         </member>
         <member name="M:ASEva.UIAvalonia.App.Run(Avalonia.Controls.Window)">
@@ -721,6 +721,16 @@
             \~Chinese
             <summary>
             提交新的渲染请求
+            </summary>
+        </member>
+        <member name="P:ASEva.UIAvalonia.SkiaView.ModuleID">
+            \~English
+            <summary>
+            (api:avalonia=1.4.3) Component ID of owner window or dialog class, for statistics of rendering time
+            </summary>
+            \~Chinese
+            <summary>
+            (api:avalonia=1.4.3) 所属窗口组件或对话框组件ID，用于绘图时间记录与反馈
             </summary>
         </member>
         <member name="M:ASEva.UIAvalonia.SkiaView.InitializeComponent(System.Boolean)">

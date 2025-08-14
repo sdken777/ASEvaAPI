@@ -172,13 +172,13 @@
             <summary>
             (api:wpf=2.2.0) Enable converting Avalonia panel to WPF panel
             </summary>
-            <param name="appBuilderCreation">The function to create AppBuilder object</param>
+            <param name="appBuilderCreation">The function to create AppBuilder object. Just return AppBuilder.Configure()</param>
             <returns>Whether initialization is successful</returns>
             \~Chinese
             <summary>
             (api:wpf=2.2.0) 启用Avalonia面板转WPF面板功能
             </summary>
-            <param name="appBuilderCreation">创建AppBuilder对象的函数</param>
+            <param name="appBuilderCreation">创建AppBuilder对象的函数，只需返回AppBuilder.Configure()</param>
             <returns>是否成功</returns>
         </member>
         <member name="M:ASEva.UIWpf.CrossConverter.ConvertWindowPanel(System.Object)">
@@ -604,36 +604,6 @@
             \~Chinese
             <summary>
             (api:wpf=2.0.0) 动态加载xaml
-            </summary>
-        </member>
-        <member name="T:XamlGeneratedNamespace.GeneratedInternalTypeHelper">
-            <summary>
-            GeneratedInternalTypeHelper
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateInstance(System.Type,System.Globalization.CultureInfo)">
-            <summary>
-            CreateInstance
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.GetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            GetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.SetPropertyValue(System.Reflection.PropertyInfo,System.Object,System.Object,System.Globalization.CultureInfo)">
-            <summary>
-            SetPropertyValue
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.CreateDelegate(System.Type,System.Object,System.String)">
-            <summary>
-            CreateDelegate
-            </summary>
-        </member>
-        <member name="M:XamlGeneratedNamespace.GeneratedInternalTypeHelper.AddEventHandler(System.Reflection.EventInfo,System.Object,System.Delegate)">
-            <summary>
-            AddEventHandler
             </summary>
         </member>
     </members>
