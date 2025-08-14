@@ -13,6 +13,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Platform.Storage;
 using Avalonia.Threading;
 using Avalonia.Media;
+using Avalonia.Dialogs;
 using CustomMessageBox.Avalonia;
 
 namespace ASEva.UIAvalonia
@@ -62,7 +63,8 @@ namespace ASEva.UIAvalonia
             {
                 initAppInvoked = true;
 
-                if (ASEva.APIInfo.GetRunningOS() == "windows")
+                var osCode = ASEva.APIInfo.GetRunningOS();
+                if (osCode == "windows")
                 {
                     CrossConverter.EnableWpfEmbedder();
                 }
@@ -73,6 +75,11 @@ namespace ASEva.UIAvalonia
                     if (appBuilder != null)
                     {
                         appBuilder = appBuilder.UsePlatformDetect().WithInterFont();
+                        
+                        if (osCode == "linux" || osCode == "linuxarm")
+                        {
+                            appBuilder = appBuilder.UseManagedSystemDialogs();
+                        }
 
                         appLifetime = new ClassicDesktopStyleApplicationLifetime();
                         appLifetime.ShutdownMode = ShutdownMode.OnMainWindowClose;
