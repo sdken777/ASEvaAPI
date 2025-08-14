@@ -33,7 +33,7 @@ namespace ASEva.UIAvalonia
         /// <returns>API版本</returns>
         public static Version GetAPIVersion()
         {
-            return new Version(1, 4, 4, 0); // Update log / 更新记录: 新增静态资源GlobalCornerRadius和GlobalCornerPadding
+            return new Version(1, 4, 4, 1); // Update log / 更新记录: 简化appBuilderCreation参数要求
         }
 
         /// \~English

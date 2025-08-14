@@ -91,13 +91,13 @@ namespace ASEva.UICoreWF
         /// <summary>
         /// (api:corewf=3.3.0) Enable converting Avalonia panel to Winform panel
         /// </summary>
-        /// <param name="appBuilderCreation">The function to create AppBuilder object</param>
+        /// <param name="appBuilderCreation">The function to create AppBuilder object. Just return AppBuilder.Configure()</param>
         /// <returns>Whether initialization is successful</returns>
         /// \~Chinese
         /// <summary>
         /// (api:corewf=3.3.0) 启用Avalonia面板转Winform面板功能
         /// </summary>
-        /// <param name="appBuilderCreation">创建AppBuilder对象的函数</param>
+        /// <param name="appBuilderCreation">创建AppBuilder对象的函数，只需返回AppBuilder.Configure()</param>
         /// <returns>是否成功</returns>
         public static bool EnableAvaloniaEmbedder(Func<object> appBuilderCreation)
         {

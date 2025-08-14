@@ -21,7 +21,9 @@ namespace GeneralHostAvalonia
             var originSyncCtx = SynchronizationContext.Current;
 
             var appBuilder = appBuilderCreation == null ? null : appBuilderCreation.Invoke() as AppBuilder;
-            if (appBuilder == null) appBuilder = finishAppBuilder(AppBuilder.Configure<AvaloniaApplicationSimpleRoundTheme>());
+            if (appBuilder == null) appBuilder = AppBuilder.Configure<AvaloniaApplicationSimpleRoundTheme>();
+
+            appBuilder = finishAppBuilder(appBuilder);
 
             appBuilder.SetupWithoutStarting();
 
@@ -62,11 +64,11 @@ namespace GeneralHostAvalonia
             
             if (useRoundTheme)
             {
-                InitAvaloniaEnvironment(() => finishAppBuilder(AppBuilder.Configure<AvaloniaApplicationSimpleRoundTheme>()));
+                InitAvaloniaEnvironment(() => AppBuilder.Configure<AvaloniaApplicationSimpleRoundTheme>());
             }
             else
             {
-                InitAvaloniaEnvironment(() => finishAppBuilder(AppBuilder.Configure<AvaloniaApplicationSimpleTheme>()));
+                InitAvaloniaEnvironment(() => AppBuilder.Configure<AvaloniaApplicationSimpleTheme>());
             }
         }
 

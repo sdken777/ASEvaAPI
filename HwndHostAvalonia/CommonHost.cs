@@ -14,7 +14,9 @@ namespace HwndHostAvalonia
             avaloniaEnvInitialized = true;
 
             var appBuilder = appBuilderCreation == null ? null : appBuilderCreation.Invoke() as AppBuilder;
-            if (appBuilder == null) appBuilder = AppBuilder.Configure<AvaloniaApplicationSimpleTheme>().UsePlatformDetect().WithInterFont();
+            if (appBuilder == null) appBuilder = AppBuilder.Configure<AvaloniaApplicationSimpleTheme>();
+
+            appBuilder = appBuilder.UsePlatformDetect().WithInterFont();
 
             var appLifetime = new ClassicDesktopStyleApplicationLifetime();
             appBuilder.SetupWithLifetime(appLifetime);
@@ -32,11 +34,11 @@ namespace HwndHostAvalonia
             
             if (useRoundTheme)
             {
-                InitAvaloniaEnvironment(() => AppBuilder.Configure<AvaloniaApplicationSimpleRoundTheme>().UsePlatformDetect().WithInterFont());
+                InitAvaloniaEnvironment(() => AppBuilder.Configure<AvaloniaApplicationSimpleRoundTheme>());
             }
             else
             {
-                InitAvaloniaEnvironment(() => AppBuilder.Configure<AvaloniaApplicationSimpleTheme>().UsePlatformDetect().WithInterFont());
+                InitAvaloniaEnvironment(() => AppBuilder.Configure<AvaloniaApplicationSimpleTheme>());
             }
         }
 

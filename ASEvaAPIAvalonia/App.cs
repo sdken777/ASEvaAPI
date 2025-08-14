@@ -41,20 +41,20 @@ namespace ASEva.UIAvalonia
         /// <returns>是否成功</returns>
         public static bool Init()
         {
-            return Init(() => AppBuilder.Configure<AvaloniaApplication>().UsePlatformDetect().WithInterFont());
+            return Init(() => AppBuilder.Configure<AvaloniaApplication>());
         }
 
         /// \~English
         /// <summary>
         /// (api:avalonia=1.0.12) Initialize application with the specified AppBuilder
         /// </summary>
-        /// <param name="appBuilderCreation">The function to create AppBuilder object</param>
+        /// <param name="appBuilderCreation">The function to create AppBuilder object. Just return AppBuilder.Configure()</param>
         /// <returns>Whether initialization is successful</returns>
         /// \~Chinese
         /// <summary>
         /// (api:avalonia=1.0.12) 使用指定的AppBuilder进行应用程序初始化
         /// </summary>
-        /// <param name="appBuilderCreation">创建AppBuilder对象的函数</param>
+        /// <param name="appBuilderCreation">创建AppBuilder对象的函数，只需返回AppBuilder.Configure()</param>
         /// <returns>是否成功</returns>
         public static bool Init(Func<AppBuilder> appBuilderCreation)
         {
@@ -72,6 +72,8 @@ namespace ASEva.UIAvalonia
                     appBuilder = appBuilderCreation?.Invoke();
                     if (appBuilder != null)
                     {
+                        appBuilder = appBuilder.UsePlatformDetect().WithInterFont();
+
                         appLifetime = new ClassicDesktopStyleApplicationLifetime();
                         appLifetime.ShutdownMode = ShutdownMode.OnMainWindowClose;
                         appBuilder.SetupWithLifetime(appLifetime);

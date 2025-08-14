@@ -35,13 +35,13 @@ namespace ASEva.UIEto
         /// <summary>
         /// (api:eto=3.4.0) Enable converting Avalonia panel to Eto panel (The method should be called before App.Init)
         /// </summary>
-        /// <param name="appBuilderCreation">The function to create AppBuilder object</param>
+        /// <param name="appBuilderCreation">The function to create AppBuilder object. Just return AppBuilder.Configure()</param>
         /// <returns>Whether initialization is successful</returns>
         /// \~Chinese
         /// <summary>
         /// (api:eto=3.4.0) 启用Avalonia面板转Eto面板功能（需要在App.Init前调用）
         /// </summary>
-        /// <param name="appBuilderCreation">创建AppBuilder对象的函数</param>
+        /// <param name="appBuilderCreation">创建AppBuilder对象的函数，只需返回AppBuilder.Configure()</param>
         /// <returns>是否成功</returns>
         public static bool EnableAvaloniaEmbedder(Func<object> appBuilderCreation)
         {
